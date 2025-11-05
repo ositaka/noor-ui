@@ -57,19 +57,7 @@ const colorsCode = `<div className="space-y-4">
 </div>`
 
 export default function ProgressPage() {
-  const [progress, setProgress] = React.useState(13)
   const [uploadProgress, setUploadProgress] = React.useState(0)
-
-  // Auto-incrementing progress with continuous animation
-  React.useEffect(() => {
-    const timer = setInterval(() => {
-      setProgress((prev) => {
-        if (prev >= 100) return 13
-        return prev + 1
-      })
-    }, 50)
-    return () => clearInterval(timer)
-  }, [])
 
   // Simulated upload
   const startUpload = () => {
@@ -134,7 +122,7 @@ export default function ProgressPage() {
           <h2 className="text-2xl font-bold tracking-tight mb-6">Preview</h2>
           <ComponentShowcase>
             <ComponentShowcase.Demo>
-              <Progress value={progress} className="w-[60%]" />
+              <Progress value={66} className="w-[60%]" />
             </ComponentShowcase.Demo>
           </ComponentShowcase>
         </section>
@@ -188,12 +176,15 @@ export default function ProgressPage() {
               </div>
             </div>
 
-            {/* Animated */}
+            {/* With Shimmer */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">Animated</h3>
+              <h3 className="text-lg font-semibold mb-4">With Shimmer Effect</h3>
               <Card>
                 <CardContent className="p-6">
-                  <Progress value={progress} className="w-[60%]" />
+                  <p className="text-sm text-muted-foreground mb-4">
+                    The progress bar includes an animated shimmer effect that continuously slides across, giving a &quot;live&quot; feel.
+                  </p>
+                  <Progress value={66} className="w-[60%]" />
                 </CardContent>
               </Card>
             </div>
