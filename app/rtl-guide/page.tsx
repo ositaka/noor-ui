@@ -25,14 +25,14 @@ const logicalMappingCode = `// Logical Property Mapping
 // Margin
 ml-4  →  ms-4  (margin-inline-start)
 mr-4  →  me-4  (margin-inline-end)
-mt-4       →  mt-4  (margin-top - unchanged)
-mb-4      →  mb-4  (margin-bottom - unchanged)
+mt-4  →  mt-4  (margin-top - unchanged)
+mb-4  →  mb-4  (margin-bottom - unchanged)
 
 // Padding
 pl-4  →  ps-4  (padding-inline-start)
 pr-4  →  pe-4  (padding-inline-end)
-pt-4       →  pt-4  (padding-top - unchanged)
-pb-4      →  pb-4  (padding-bottom - unchanged)
+pt-4  →  pt-4  (padding-top - unchanged)
+pb-4  →  pb-4  (padding-bottom - unchanged)
 
 // Border
 border-l  →  border-s  (border-inline-start)
