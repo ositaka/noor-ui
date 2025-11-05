@@ -23,6 +23,10 @@ import {
   MessageSquare,
   Info,
   Loader2,
+  ChevronRight,
+  User,
+  PanelLeft,
+  ChevronsUpDown,
 } from 'lucide-react'
 
 const componentCategories = [
@@ -65,9 +69,19 @@ const componentCategories = [
     name: 'Navigation',
     description: 'Components for site navigation',
     components: [
-      { name: 'Tabs', icon: Menu, href: '/components/tabs', status: 'coming' },
-      { name: 'Breadcrumb', icon: Home, href: '/components/breadcrumb', status: 'coming' },
-      { name: 'Navigation Menu', icon: Menu, href: '/components/navigation-menu', status: 'coming' },
+      { name: 'Tabs', icon: Menu, href: '/components/tabs', status: 'ready' },
+      { name: 'Breadcrumb', icon: Home, href: '/components/breadcrumb', status: 'ready' },
+      { name: 'Pagination', icon: ChevronRight, href: '/components/pagination', status: 'ready' },
+    ],
+  },
+  {
+    name: 'Overlays & Display',
+    description: 'Components for overlays and content display',
+    components: [
+      { name: 'Sheet', icon: PanelLeft, href: '/components/sheet', status: 'ready' },
+      { name: 'Accordion', icon: ChevronsUpDown, href: '/components/accordion', status: 'ready' },
+      { name: 'Popover', icon: MessageSquare, href: '/components/popover', status: 'ready' },
+      { name: 'Avatar', icon: User, href: '/components/avatar', status: 'ready' },
     ],
   },
 ]
