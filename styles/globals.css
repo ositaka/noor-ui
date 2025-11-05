@@ -107,7 +107,7 @@
     --border: 240 10% 15%;
   }
 
-  /* Cozy theme */
+  /* Cozy theme - More spacious and soft */
   .theme-cozy {
     --background: 35 20% 96%;
     --foreground: 25 25% 15%;
@@ -122,7 +122,9 @@
     --accent: 35 60% 85%;
     --accent-foreground: 25 25% 15%;
     --border: 35 20% 85%;
-    --radius: 1rem;
+    --radius: 1.25rem;
+    letter-spacing: 0.015em;
+    line-height: 1.7;
   }
 
   .theme-cozy.dark {
@@ -166,6 +168,19 @@
     --accent: 280 60% 15%;
     --accent-foreground: 280 60% 90%;
     --border: 0 0% 18%;
+  }
+
+  /* Artistic theme uses serif fonts */
+  .theme-artistic {
+    font-family: Georgia, 'Times New Roman', serif;
+  }
+
+  .theme-artistic [dir='rtl'] {
+    font-family: 'Noto Naskh Arabic', Georgia, serif;
+  }
+
+  .theme-artistic [dir='ltr'] {
+    font-family: Georgia, 'Times New Roman', serif;
   }
 
   * {

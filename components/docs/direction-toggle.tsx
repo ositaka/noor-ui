@@ -3,24 +3,14 @@
 import * as React from 'react'
 import { Button } from '@/components/ui/button'
 import { ArrowLeftRight } from 'lucide-react'
-import { setDirection, getDirection, type Direction } from '@/lib/tokens'
-import { setLocale } from '@/lib/i18n'
+import { useDirection } from '@/components/providers/direction-provider'
 
 export function DirectionToggle() {
-  const [currentDirection, setCurrentDirection] = React.useState<Direction>('ltr')
-
-  React.useEffect(() => {
-    setCurrentDirection(getDirection())
-  }, [])
+  const { direction, setDirection } = useDirection()
 
   const handleToggle = () => {
-    const newDirection: Direction = currentDirection === 'ltr' ? 'rtl' : 'ltr'
+    const newDirection = direction === 'ltr' ? 'rtl' : 'ltr'
     setDirection(newDirection)
-    setLocale(newDirection === 'rtl' ? 'ar' : 'en')
-    setCurrentDirection(newDirection)
-
-    // Force a re-render of the entire app
-    window.location.reload()
   }
 
   return (
@@ -28,10 +18,10 @@ export function DirectionToggle() {
       variant="outline"
       size="sm"
       onClick={handleToggle}
-      aria-label={`Switch to ${currentDirection === 'ltr' ? 'Arabic (RTL)' : 'English (LTR)'}`}
+      aria-label={`Switch to ${direction === 'ltr' ? 'Arabic (RTL)' : 'English (LTR)'}`}
     >
       <ArrowLeftRight className="h-4 w-4 me-2" />
-      {currentDirection === 'ltr' ? 'العربية' : 'English'}
+      {direction === 'ltr' ? 'العربية' : 'English'}
     </Button>
   )
 }
