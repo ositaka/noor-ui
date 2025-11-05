@@ -60,10 +60,15 @@ export default function ProgressPage() {
   const [progress, setProgress] = React.useState(13)
   const [uploadProgress, setUploadProgress] = React.useState(0)
 
-  // Auto-incrementing progress
+  // Auto-incrementing progress with continuous animation
   React.useEffect(() => {
-    const timer = setTimeout(() => setProgress(66), 500)
-    return () => clearTimeout(timer)
+    const timer = setInterval(() => {
+      setProgress((prev) => {
+        if (prev >= 100) return 13
+        return prev + 1
+      })
+    }, 50)
+    return () => clearInterval(timer)
   }, [])
 
   // Simulated upload
