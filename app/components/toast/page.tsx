@@ -1,17 +1,52 @@
 'use client'
 
+import * as React from 'react'
+import Link from 'next/link'
 import { Button } from '@/components/ui/button'
+import { Card, CardContent } from '@/components/ui/card'
+import { DirectionToggle } from '@/components/docs/direction-toggle'
+import { ThemeToggle } from '@/components/docs/theme-toggle'
 import { ComponentShowcase } from '@/components/docs/component-showcase'
+import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
+import { CodeBlock } from '@/components/docs/code-block'
 import { useToast } from '@/hooks/use-toast'
 import { Toaster } from '@/components/ui/toaster'
+import { Sparkles } from 'lucide-react'
 
-export default function ToastPage() {
-  const { toast } = useToast()
+const toastProps: PropDefinition[] = [
+  {
+    name: 'title',
+    type: 'ReactNode',
+    default: 'undefined',
+    required: false,
+    description: 'The title of the toast',
+  },
+  {
+    name: 'description',
+    type: 'ReactNode',
+    default: 'undefined',
+    required: false,
+    description: 'The description/message of the toast',
+  },
+  {
+    name: 'variant',
+    type: '"default" | "destructive" | "success"',
+    default: '"default"',
+    required: false,
+    description: 'The visual style of the toast',
+  },
+  {
+    name: 'action',
+    type: 'ToastActionElement',
+    default: 'undefined',
+    required: false,
+    description: 'An action button for the toast',
+  },
+]
 
-  // Example code strings
-  const installCode = `npx shadcn-ui@latest add toast`
+const installCode = `npm install @rtl-design-system/core`
 
-  const setupCode = `// app/layout.tsx
+const setupCode = `// app/layout.tsx
 import { Toaster } from '@/components/ui/toaster'
 
 export default function RootLayout({ children }) {
@@ -25,7 +60,7 @@ export default function RootLayout({ children }) {
   )
 }`
 
-  const basicCode = `import { useToast } from '@/hooks/use-toast'
+const basicUsageCode = `import { useToast } from '@/hooks/use-toast'
 import { Button } from '@/components/ui/button'
 
 function MyComponent() {
@@ -45,339 +80,287 @@ function MyComponent() {
   )
 }`
 
-  const simpleCode = `toast({
+const simpleCode = `toast({
   description: 'Your message has been sent.',
 })`
 
-  const titleCode = `toast({
-  title: 'Uh oh! Something went wrong.',
-  description: 'There was a problem with your request.',
-})`
-
-  const actionCode = `import { ToastAction } from '@/components/ui/toast'
-
-toast({
-  title: 'Uh oh! Something went wrong.',
-  description: 'There was a problem with your request.',
-  action: <ToastAction altText="Try again">Try again</ToastAction>,
-})`
-
-  const destructiveCode = `toast({
+const destructiveCode = `toast({
   variant: 'destructive',
   title: 'Uh oh! Something went wrong.',
   description: 'There was a problem with your request.',
 })`
 
-  const successCode = `toast({
+const successCode = `toast({
   variant: 'success',
   title: 'Success!',
   description: 'Your changes have been saved.',
 })`
 
+export default function ToastPage() {
+  const { toast } = useToast()
+
   return (
-    <div className="space-y-8">
+    <div className="min-h-screen">
       <Toaster />
 
       {/* Header */}
-      <div>
-        <h1 className="text-4xl font-bold mb-2">Toast</h1>
-        <p className="text-lg text-muted-foreground">
-          A succinct message that is displayed temporarily.
-        </p>
-      </div>
-
-      {/* Preview */}
-      <ComponentShowcase
-      >
-        <Button
-          onClick={() => {
-            toast({
-              title: 'Scheduled: Catch up',
-              description: 'Friday, February 10, 2023 at 5:57 PM',
-            })
-          }}
-        >
-          Show Toast
-        </Button>
-      </ComponentShowcase>
-
-      {/* Installation */}
-      <div className="space-y-4">
-        <h2 className="text-2xl font-semibold">Installation</h2>
-        <div className="bg-muted p-4 rounded-lg">
-          <code className="text-sm">{installCode}</code>
+      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <div className="container flex h-16 items-center justify-between">
+          <Link href="/" className="flex items-center gap-2">
+            <Sparkles className="h-6 w-6 text-primary" />
+            <span className="text-xl font-bold">RTL Design</span>
+          </Link>
+          <div className="flex items-center gap-2">
+            <ThemeToggle />
+            <DirectionToggle />
+          </div>
         </div>
-      </div>
+      </header>
 
-      {/* Setup */}
-      <div className="space-y-4">
-        <h2 className="text-2xl font-semibold">Setup</h2>
-        <p className="text-muted-foreground">
-          Add the <code className="text-sm bg-muted px-1 py-0.5 rounded">Toaster</code> component to your root layout:
-        </p>
-        <div className="bg-muted p-4 rounded-lg overflow-x-auto">
-          <pre className="text-sm">
-            <code>{setupCode}</code>
-          </pre>
+      <main id="main-content" className="container py-12">
+        {/* Breadcrumb */}
+        <nav aria-label="Breadcrumb" className="mb-8">
+          <ol className="flex items-center gap-2 text-sm text-muted-foreground">
+            <li>
+              <Link href="/" className="hover:text-foreground transition-colors">
+                Home
+              </Link>
+            </li>
+            <li>/</li>
+            <li>
+              <Link href="/components" className="hover:text-foreground transition-colors">
+                Components
+              </Link>
+            </li>
+            <li>/</li>
+            <li className="text-foreground font-medium">Toast</li>
+          </ol>
+        </nav>
+
+        {/* Page Header */}
+        <div className="max-w-3xl mb-12">
+          <h1 className="text-4xl font-bold tracking-tight mb-4">Toast</h1>
+          <p className="text-xl text-muted-foreground">
+            A succinct message that is displayed temporarily. Perfect for notifications and feedback messages.
+          </p>
         </div>
-      </div>
 
-      {/* Usage */}
-      <div className="space-y-4">
-        <h2 className="text-2xl font-semibold">Usage</h2>
-        <div className="bg-muted p-4 rounded-lg overflow-x-auto">
-          <pre className="text-sm">
-            <code>{basicCode}</code>
-          </pre>
-        </div>
-      </div>
+        {/* Preview */}
+        <section className="mb-16">
+          <h2 className="text-2xl font-bold tracking-tight mb-6">Preview</h2>
+          <ComponentShowcase>
+            <ComponentShowcase.Demo>
+              <Button
+                onClick={() => {
+                  toast({
+                    title: 'Scheduled: Catch up',
+                    description: 'Friday, February 10, 2023 at 5:57 PM',
+                  })
+                }}
+              >
+                Show Toast
+              </Button>
+            </ComponentShowcase.Demo>
+          </ComponentShowcase>
+        </section>
 
-      {/* Examples */}
-      <div className="space-y-6">
-        <h2 className="text-2xl font-semibold">Examples</h2>
+        {/* Installation */}
+        <section className="mb-16">
+          <h2 className="text-2xl font-bold tracking-tight mb-6">Installation</h2>
+          <CodeBlock code={installCode} language="bash" />
+        </section>
 
-        {/* Simple */}
-        <ComponentShowcase
-          title="Simple"
-          description="A simple toast with just a description."
-          code={simpleCode}
-        >
-          <Button
-            onClick={() => {
-              toast({
-                description: 'Your message has been sent.',
-              })
-            }}
-          >
-            Show Simple Toast
-          </Button>
-        </ComponentShowcase>
+        {/* Setup */}
+        <section className="mb-16">
+          <h2 className="text-2xl font-bold tracking-tight mb-6">Setup</h2>
+          <p className="text-muted-foreground mb-4">
+            Add the Toaster component to your root layout:
+          </p>
+          <CodeBlock code={setupCode} language="tsx" />
+        </section>
 
-        {/* With Title */}
-        <ComponentShowcase
-          title="With Title"
-          description="A toast with a title and description."
-          code={titleCode}
-        >
-          <Button
-            onClick={() => {
-              toast({
-                title: 'Uh oh! Something went wrong.',
-                description: 'There was a problem with your request.',
-              })
-            }}
-          >
-            Show Toast
-          </Button>
-        </ComponentShowcase>
+        {/* Usage */}
+        <section className="mb-16">
+          <h2 className="text-2xl font-bold tracking-tight mb-6">Usage</h2>
+          <CodeBlock code={basicUsageCode} language="tsx" />
+        </section>
 
-        {/* With Action */}
-        <ComponentShowcase
-          title="With Action"
-          description="A toast with an action button."
-          code={actionCode}
-        >
-          <Button
-            onClick={() => {
-              toast({
-                title: 'Uh oh! Something went wrong.',
-                description: 'There was a problem with your request.',
-                action: (
+        {/* Examples */}
+        <section className="mb-16">
+          <h2 className="text-2xl font-bold tracking-tight mb-6">Examples</h2>
+
+          <div className="space-y-8">
+            {/* Simple */}
+            <div>
+              <h3 className="text-lg font-semibold mb-4">Simple</h3>
+              <Card>
+                <CardContent className="p-6">
                   <Button
-                    size="sm"
-                    variant="outline"
-                    onClick={() => console.log('Retry clicked')}
+                    onClick={() => {
+                      toast({
+                        description: 'Your message has been sent.',
+                      })
+                    }}
                   >
-                    Try again
+                    Show Simple Toast
                   </Button>
-                ),
-              })
-            }}
-          >
-            Show Toast
-          </Button>
-        </ComponentShowcase>
+                </CardContent>
+              </Card>
+              <div className="mt-4">
+                <CodeBlock code={simpleCode} language="tsx" collapsible />
+              </div>
+            </div>
 
-        {/* Destructive */}
-        <ComponentShowcase
-          title="Destructive"
-          description="A toast for errors and critical messages."
-          code={destructiveCode}
-        >
-          <Button
-            onClick={() => {
-              toast({
-                variant: 'destructive',
-                title: 'Uh oh! Something went wrong.',
-                description: 'There was a problem with your request.',
-              })
-            }}
-          >
-            Show Destructive Toast
-          </Button>
-        </ComponentShowcase>
+            {/* With Title */}
+            <div>
+              <h3 className="text-lg font-semibold mb-4">With Title</h3>
+              <Card>
+                <CardContent className="p-6">
+                  <Button
+                    onClick={() => {
+                      toast({
+                        title: 'Scheduled: Catch up',
+                        description: 'Friday, February 10, 2023 at 5:57 PM',
+                      })
+                    }}
+                  >
+                    Show Toast
+                  </Button>
+                </CardContent>
+              </Card>
+              <div className="mt-4">
+                <CodeBlock code={basicUsageCode} language="tsx" collapsible />
+              </div>
+            </div>
 
-        {/* Success */}
-        <ComponentShowcase
-          title="Success"
-          description="A toast for success messages."
-          code={successCode}
-        >
-          <Button
-            onClick={() => {
-              toast({
-                variant: 'success',
-                title: 'Success!',
-                description: 'Your changes have been saved.',
-              })
-            }}
-          >
-            Show Success Toast
-          </Button>
-        </ComponentShowcase>
-      </div>
+            {/* Destructive */}
+            <div>
+              <h3 className="text-lg font-semibold mb-4">Destructive</h3>
+              <Card>
+                <CardContent className="p-6">
+                  <Button
+                    variant="destructive"
+                    onClick={() => {
+                      toast({
+                        variant: 'destructive',
+                        title: 'Uh oh! Something went wrong.',
+                        description: 'There was a problem with your request.',
+                      })
+                    }}
+                  >
+                    Show Error Toast
+                  </Button>
+                </CardContent>
+              </Card>
+              <div className="mt-4">
+                <CodeBlock code={destructiveCode} language="tsx" collapsible />
+              </div>
+            </div>
 
-      {/* API Reference */}
-      <div className="space-y-4">
-        <h2 className="text-2xl font-semibold">API Reference</h2>
-
-        <div className="space-y-6">
-          {/* toast() function */}
-          <div>
-            <h3 className="text-lg font-semibold mb-3">toast()</h3>
-            <div className="border rounded-lg overflow-hidden">
-              <table className="w-full text-sm">
-                <thead className="bg-muted">
-                  <tr>
-                    <th className="px-4 py-2 text-start font-semibold">Property</th>
-                    <th className="px-4 py-2 text-start font-semibold">Type</th>
-                    <th className="px-4 py-2 text-start font-semibold">Description</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y">
-                  <tr>
-                    <td className="px-4 py-2 font-mono">title</td>
-                    <td className="px-4 py-2 font-mono text-xs">ReactNode</td>
-                    <td className="px-4 py-2">The title of the toast</td>
-                  </tr>
-                  <tr>
-                    <td className="px-4 py-2 font-mono">description</td>
-                    <td className="px-4 py-2 font-mono text-xs">ReactNode</td>
-                    <td className="px-4 py-2">The description/message of the toast</td>
-                  </tr>
-                  <tr>
-                    <td className="px-4 py-2 font-mono">action</td>
-                    <td className="px-4 py-2 font-mono text-xs">ToastActionElement</td>
-                    <td className="px-4 py-2">An action button for the toast</td>
-                  </tr>
-                  <tr>
-                    <td className="px-4 py-2 font-mono">variant</td>
-                    <td className="px-4 py-2 font-mono text-xs">
-                      &quot;default&quot; | &quot;destructive&quot; | &quot;success&quot;
-                    </td>
-                    <td className="px-4 py-2">The visual style of the toast</td>
-                  </tr>
-                </tbody>
-              </table>
+            {/* Success */}
+            <div>
+              <h3 className="text-lg font-semibold mb-4">Success</h3>
+              <Card>
+                <CardContent className="p-6">
+                  <Button
+                    onClick={() => {
+                      toast({
+                        variant: 'success',
+                        title: 'Success!',
+                        description: 'Your changes have been saved.',
+                      })
+                    }}
+                  >
+                    Show Success Toast
+                  </Button>
+                </CardContent>
+              </Card>
+              <div className="mt-4">
+                <CodeBlock code={successCode} language="tsx" collapsible />
+              </div>
             </div>
           </div>
-        </div>
-      </div>
+        </section>
 
-      {/* Accessibility */}
-      <div className="space-y-4">
-        <h2 className="text-2xl font-semibold">Accessibility</h2>
-        <div className="space-y-2 text-muted-foreground">
-          <p>
-            <strong>ARIA Roles:</strong> The Toast component uses <code>role=&quot;status&quot;</code> to
-            announce non-critical messages to screen readers.
-          </p>
-          <p>
-            <strong>Keyboard Navigation:</strong> Close button is keyboard accessible and can be activated with Enter or Space.
-          </p>
-          <p>
-            <strong>Auto-dismiss:</strong> Toasts automatically dismiss after a timeout, but users can dismiss them manually.
-          </p>
-          <p>
-            <strong>Focus Management:</strong> Toasts don&apos;t steal focus from the current element.
-          </p>
-        </div>
-      </div>
+        {/* Props */}
+        <section className="mb-16">
+          <h2 className="text-2xl font-bold tracking-tight mb-6">Props</h2>
+          <PropsTable props={toastProps} />
+        </section>
 
-      {/* RTL Support */}
-      <div className="space-y-4">
-        <h2 className="text-2xl font-semibold">RTL Support</h2>
-        <p className="text-muted-foreground mb-4">
-          The Toast component is fully RTL-compatible using logical properties:
-        </p>
+        {/* Accessibility */}
+        <section className="mb-16">
+          <h2 className="text-2xl font-bold tracking-tight mb-6">Accessibility</h2>
+          <Card>
+            <CardContent className="p-6 space-y-4">
+              <div>
+                <h3 className="font-semibold mb-2">ARIA Roles</h3>
+                <p className="text-muted-foreground">
+                  Uses <code className="px-1.5 py-0.5 rounded bg-muted">role=&quot;status&quot;</code> to announce non-critical messages to screen readers.
+                </p>
+              </div>
+              <div>
+                <h3 className="font-semibold mb-2">Keyboard Navigation</h3>
+                <p className="text-muted-foreground">
+                  Close button is keyboard accessible and can be activated with Enter or Space.
+                </p>
+              </div>
+              <div>
+                <h3 className="font-semibold mb-2">Focus Management</h3>
+                <p className="text-muted-foreground">
+                  Toasts don&apos;t steal focus from the current element.
+                </p>
+              </div>
+            </CardContent>
+          </Card>
+        </section>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {/* LTR */}
-          <div className="space-y-2">
-            <h3 className="font-semibold text-sm">LTR (Left-to-Right)</h3>
-            <div dir="ltr">
-              <Button
-                onClick={() => {
-                  toast({
-                    title: 'Message sent',
-                    description: 'Your message was sent successfully.',
-                  })
-                }}
-              >
-                Show Toast (LTR)
-              </Button>
-            </div>
+        {/* RTL Support */}
+        <section className="mb-16">
+          <h2 className="text-2xl font-bold tracking-tight mb-6">RTL Support</h2>
+          <p className="text-muted-foreground mb-6">
+            The Toast component is fully RTL-compatible. Toasts appear from the correct corner and content flows naturally.
+          </p>
+          <Card>
+            <CardContent className="p-6">
+              <p className="text-sm font-semibold mb-2">Key RTL Features:</p>
+              <ul className="list-disc list-inside text-sm text-muted-foreground space-y-1">
+                <li>Toast appears from the correct corner (bottom-start)</li>
+                <li>Close button positions on the correct side (end)</li>
+                <li>Swipe gestures work in the natural direction</li>
+                <li>Content flows naturally in both directions</li>
+              </ul>
+            </CardContent>
+          </Card>
+        </section>
+
+        {/* Related */}
+        <section className="mb-16">
+          <h2 className="text-2xl font-bold tracking-tight mb-6">Related Components</h2>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <Link href="/components/alert">
+              <Card className="hover:border-primary transition-colors">
+                <CardContent className="p-6">
+                  <h3 className="font-semibold mb-2">Alert</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Important messages
+                  </p>
+                </CardContent>
+              </Card>
+            </Link>
+            <Link href="/components/dialog">
+              <Card className="hover:border-primary transition-colors">
+                <CardContent className="p-6">
+                  <h3 className="font-semibold mb-2">Dialog</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Modal dialogs
+                  </p>
+                </CardContent>
+              </Card>
+            </Link>
           </div>
-
-          {/* RTL */}
-          <div className="space-y-2">
-            <h3 className="font-semibold text-sm">RTL (Right-to-Left)</h3>
-            <div dir="rtl">
-              <Button
-                onClick={() => {
-                  toast({
-                    title: 'تم إرسال الرسالة',
-                    description: 'تم إرسال رسالتك بنجاح.',
-                  })
-                }}
-              >
-                عرض الإشعار (RTL)
-              </Button>
-            </div>
-          </div>
-        </div>
-
-        <div className="bg-muted p-4 rounded-lg mt-4">
-          <p className="text-sm">
-            <strong>Key RTL Features:</strong>
-          </p>
-          <ul className="list-disc list-inside text-sm text-muted-foreground mt-2 space-y-1">
-            <li>Toast appears from the correct corner (bottom-start)</li>
-            <li>Close button positions on the correct side (end)</li>
-            <li>Swipe gestures work in the natural direction</li>
-            <li>Content flows naturally in both directions</li>
-          </ul>
-        </div>
-      </div>
-
-      {/* Related Components */}
-      <div className="space-y-4">
-        <h2 className="text-2xl font-semibold">Related Components</h2>
-        <div className="flex gap-2">
-          <a
-            href="/components/alert"
-            className="px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors"
-          >
-            Alert
-          </a>
-          <a
-            href="/components/dialog"
-            className="px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors"
-          >
-            Dialog
-          </a>
-        </div>
-      </div>
+        </section>
+      </main>
     </div>
   )
 }

@@ -1,6 +1,11 @@
 'use client'
 
+import * as React from 'react'
+import Link from 'next/link'
 import { Button } from '@/components/ui/button'
+import { Card, CardContent } from '@/components/ui/card'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
 import {
   Dialog,
   DialogContent,
@@ -11,16 +16,40 @@ import {
   DialogFooter,
   DialogClose,
 } from '@/components/ui/dialog'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
+import { DirectionToggle } from '@/components/docs/direction-toggle'
+import { ThemeToggle } from '@/components/docs/theme-toggle'
 import { ComponentShowcase } from '@/components/docs/component-showcase'
-import { useState } from 'react'
+import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
+import { CodeBlock } from '@/components/docs/code-block'
+import { Sparkles } from 'lucide-react'
 
-export default function DialogPage() {
-  const [open, setOpen] = useState(false)
+const dialogProps: PropDefinition[] = [
+  {
+    name: 'open',
+    type: 'boolean',
+    default: 'undefined',
+    required: false,
+    description: 'Controlled open state',
+  },
+  {
+    name: 'onOpenChange',
+    type: '(open: boolean) => void',
+    default: 'undefined',
+    required: false,
+    description: 'Callback when open state changes',
+  },
+  {
+    name: 'defaultOpen',
+    type: 'boolean',
+    default: 'false',
+    required: false,
+    description: 'Default open state (uncontrolled)',
+  },
+]
 
-  // Example code strings
-  const basicCode = `import {
+const installCode = `npm install @rtl-design-system/core`
+
+const basicUsageCode = `import {
   Dialog,
   DialogContent,
   DialogDescription,
@@ -38,49 +67,31 @@ import { Button } from '@/components/ui/button'
     <DialogHeader>
       <DialogTitle>Are you absolutely sure?</DialogTitle>
       <DialogDescription>
-        This action cannot be undone. This will permanently delete your
-        account and remove your data from our servers.
+        This action cannot be undone.
       </DialogDescription>
     </DialogHeader>
   </DialogContent>
 </Dialog>`
 
-  const withFormCode = `import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '@/components/ui/dialog'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-
-<Dialog>
+const withFormCode = `<Dialog>
   <DialogTrigger asChild>
     <Button variant="outline">Edit Profile</Button>
   </DialogTrigger>
-  <DialogContent className="sm:max-w-[425px]">
+  <DialogContent>
     <DialogHeader>
       <DialogTitle>Edit profile</DialogTitle>
       <DialogDescription>
-        Make changes to your profile here. Click save when you&apos;re done.
+        Make changes to your profile here.
       </DialogDescription>
     </DialogHeader>
     <div className="grid gap-4 py-4">
-      <div className="grid grid-cols-4 items-center gap-4">
-        <Label htmlFor="name" className="text-end">
-          Name
-        </Label>
-        <Input id="name" value="Pedro Duarte" className="col-span-3" />
+      <div className="grid gap-2">
+        <Label htmlFor="name">Name</Label>
+        <Input id="name" defaultValue="Pedro Duarte" />
       </div>
-      <div className="grid grid-cols-4 items-center gap-4">
-        <Label htmlFor="username" className="text-end">
-          Username
-        </Label>
-        <Input id="username" value="@peduarte" className="col-span-3" />
+      <div className="grid gap-2">
+        <Label htmlFor="username">Username</Label>
+        <Input id="username" defaultValue="@peduarte" />
       </div>
     </div>
     <DialogFooter>
@@ -89,50 +100,7 @@ import { Label } from '@/components/ui/label'
   </DialogContent>
 </Dialog>`
 
-  const controlledCode = `import { useState } from 'react'
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from '@/components/ui/dialog'
-import { Button } from '@/components/ui/button'
-
-function ControlledDialog() {
-  const [open, setOpen] = useState(false)
-
-  return (
-    <>
-      <Button onClick={() => setOpen(true)}>Open Controlled Dialog</Button>
-      <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Controlled Dialog</DialogTitle>
-            <DialogDescription>
-              This dialog's open state is controlled by React state.
-            </DialogDescription>
-          </DialogHeader>
-          <Button onClick={() => setOpen(false)}>Close</Button>
-        </DialogContent>
-      </Dialog>
-    </>
-  )
-}`
-
-  const confirmationCode = `import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-  DialogClose,
-} from '@/components/ui/dialog'
-import { Button } from '@/components/ui/button'
-
-<Dialog>
+const confirmationCode = `<Dialog>
   <DialogTrigger asChild>
     <Button variant="destructive">Delete Account</Button>
   </DialogTrigger>
@@ -140,8 +108,8 @@ import { Button } from '@/components/ui/button'
     <DialogHeader>
       <DialogTitle>Are you absolutely sure?</DialogTitle>
       <DialogDescription>
-        This action cannot be undone. This will permanently delete your
-        account and remove your data from our servers.
+        This action cannot be undone. This will permanently delete
+        your account and remove your data from our servers.
       </DialogDescription>
     </DialogHeader>
     <DialogFooter>
@@ -153,311 +121,274 @@ import { Button } from '@/components/ui/button'
   </DialogContent>
 </Dialog>`
 
+export default function DialogPage() {
+  const [open, setOpen] = React.useState(false)
+
   return (
-    <div className="space-y-8">
+    <div className="min-h-screen">
       {/* Header */}
-      <div>
-        <h1 className="text-4xl font-bold mb-2">Dialog</h1>
-        <p className="text-lg text-muted-foreground">
-          A window overlaid on either the primary window or another dialog window, rendering the content underneath inert.
-        </p>
-      </div>
-
-      {/* Preview */}
-      <ComponentShowcase
-      >
-        <Dialog>
-          <DialogTrigger asChild>
-            <Button>Open Dialog</Button>
-          </DialogTrigger>
-          <DialogContent>
-            <DialogHeader>
-              <DialogTitle>Are you absolutely sure?</DialogTitle>
-              <DialogDescription>
-                This action cannot be undone. This will permanently delete your
-                account and remove your data from our servers.
-              </DialogDescription>
-            </DialogHeader>
-          </DialogContent>
-        </Dialog>
-      </ComponentShowcase>
-
-      {/* Installation */}
-      <div className="space-y-4">
-        <h2 className="text-2xl font-semibold">Installation</h2>
-        <div className="bg-muted p-4 rounded-lg">
-          <code className="text-sm">npx shadcn-ui@latest add dialog</code>
-        </div>
-      </div>
-
-      {/* Usage */}
-      <div className="space-y-4">
-        <h2 className="text-2xl font-semibold">Usage</h2>
-        <div className="bg-muted p-4 rounded-lg overflow-x-auto">
-          <pre className="text-sm">
-            <code>{basicCode}</code>
-          </pre>
-        </div>
-      </div>
-
-      {/* Examples */}
-      <div className="space-y-6">
-        <h2 className="text-2xl font-semibold">Examples</h2>
-
-        {/* Basic */}
-        <ComponentShowcase
-          title="Basic Dialog"
-          description="A simple dialog with a title and description."
-          code={basicCode}
-        >
-          <Dialog>
-            <DialogTrigger asChild>
-              <Button>Open Dialog</Button>
-            </DialogTrigger>
-            <DialogContent>
-              <DialogHeader>
-                <DialogTitle>Are you absolutely sure?</DialogTitle>
-                <DialogDescription>
-                  This action cannot be undone. This will permanently delete your
-                  account and remove your data from our servers.
-                </DialogDescription>
-              </DialogHeader>
-            </DialogContent>
-          </Dialog>
-        </ComponentShowcase>
-
-        {/* With Form */}
-        <ComponentShowcase
-          title="Dialog with Form"
-          description="A dialog containing a form with inputs."
-          code={withFormCode}
-        >
-          <Dialog>
-            <DialogTrigger asChild>
-              <Button variant="outline">Edit Profile</Button>
-            </DialogTrigger>
-            <DialogContent className="sm:max-w-[425px]">
-              <DialogHeader>
-                <DialogTitle>Edit profile</DialogTitle>
-                <DialogDescription>
-                  Make changes to your profile here. Click save when you&apos;re done.
-                </DialogDescription>
-              </DialogHeader>
-              <div className="grid gap-4 py-4">
-                <div className="grid grid-cols-4 items-center gap-4">
-                  <Label htmlFor="name" className="text-end">
-                    Name
-                  </Label>
-                  <Input id="name" defaultValue="Pedro Duarte" className="col-span-3" />
-                </div>
-                <div className="grid grid-cols-4 items-center gap-4">
-                  <Label htmlFor="username" className="text-end">
-                    Username
-                  </Label>
-                  <Input id="username" defaultValue="@peduarte" className="col-span-3" />
-                </div>
-              </div>
-              <DialogFooter>
-                <Button type="submit">Save changes</Button>
-              </DialogFooter>
-            </DialogContent>
-          </Dialog>
-        </ComponentShowcase>
-
-        {/* Controlled */}
-        <ComponentShowcase
-          title="Controlled Dialog"
-          description="Control the dialog's open state with React state."
-          code={controlledCode}
-        >
-          <>
-            <Button onClick={() => setOpen(true)}>Open Controlled Dialog</Button>
-            <Dialog open={open} onOpenChange={setOpen}>
-              <DialogContent>
-                <DialogHeader>
-                  <DialogTitle>Controlled Dialog</DialogTitle>
-                  <DialogDescription>
-                    This dialog&apos;s open state is controlled by React state.
-                  </DialogDescription>
-                </DialogHeader>
-                <Button onClick={() => setOpen(false)}>Close</Button>
-              </DialogContent>
-            </Dialog>
-          </>
-        </ComponentShowcase>
-
-        {/* Confirmation */}
-        <ComponentShowcase
-          title="Confirmation Dialog"
-          description="A dialog for confirming destructive actions."
-          code={confirmationCode}
-        >
-          <Dialog>
-            <DialogTrigger asChild>
-              <Button variant="destructive">Delete Account</Button>
-            </DialogTrigger>
-            <DialogContent>
-              <DialogHeader>
-                <DialogTitle>Are you absolutely sure?</DialogTitle>
-                <DialogDescription>
-                  This action cannot be undone. This will permanently delete your
-                  account and remove your data from our servers.
-                </DialogDescription>
-              </DialogHeader>
-              <DialogFooter>
-                <DialogClose asChild>
-                  <Button variant="outline">Cancel</Button>
-                </DialogClose>
-                <Button variant="destructive">Delete</Button>
-              </DialogFooter>
-            </DialogContent>
-          </Dialog>
-        </ComponentShowcase>
-      </div>
-
-      {/* API Reference */}
-      <div className="space-y-4">
-        <h2 className="text-2xl font-semibold">API Reference</h2>
-
-        <div className="space-y-6">
-          {/* Dialog Props */}
-          <div>
-            <h3 className="text-lg font-semibold mb-3">Dialog</h3>
-            <div className="border rounded-lg overflow-hidden">
-              <table className="w-full text-sm">
-                <thead className="bg-muted">
-                  <tr>
-                    <th className="px-4 py-2 text-start font-semibold">Prop</th>
-                    <th className="px-4 py-2 text-start font-semibold">Type</th>
-                    <th className="px-4 py-2 text-start font-semibold">Default</th>
-                    <th className="px-4 py-2 text-start font-semibold">Description</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y">
-                  <tr>
-                    <td className="px-4 py-2 font-mono">open</td>
-                    <td className="px-4 py-2 font-mono text-xs">boolean</td>
-                    <td className="px-4 py-2 font-mono">-</td>
-                    <td className="px-4 py-2">Controlled open state</td>
-                  </tr>
-                  <tr>
-                    <td className="px-4 py-2 font-mono">onOpenChange</td>
-                    <td className="px-4 py-2 font-mono text-xs">(open: boolean) =&gt; void</td>
-                    <td className="px-4 py-2 font-mono">-</td>
-                    <td className="px-4 py-2">Callback when open state changes</td>
-                  </tr>
-                  <tr>
-                    <td className="px-4 py-2 font-mono">defaultOpen</td>
-                    <td className="px-4 py-2 font-mono text-xs">boolean</td>
-                    <td className="px-4 py-2 font-mono">false</td>
-                    <td className="px-4 py-2">Default open state (uncontrolled)</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <div className="container flex h-16 items-center justify-between">
+          <Link href="/" className="flex items-center gap-2">
+            <Sparkles className="h-6 w-6 text-primary" />
+            <span className="text-xl font-bold">RTL Design</span>
+          </Link>
+          <div className="flex items-center gap-2">
+            <ThemeToggle />
+            <DirectionToggle />
           </div>
         </div>
-      </div>
+      </header>
 
-      {/* Accessibility */}
-      <div className="space-y-4">
-        <h2 className="text-2xl font-semibold">Accessibility</h2>
-        <div className="space-y-2 text-muted-foreground">
-          <p>
-            <strong>ARIA Roles:</strong> Uses <code>role=&quot;dialog&quot;</code> and <code>aria-modal=&quot;true&quot;</code>.
-          </p>
-          <p>
-            <strong>Keyboard Navigation:</strong> Escape closes the dialog. Tab traps focus within the dialog.
-          </p>
-          <p>
-            <strong>Focus Management:</strong> Focus is automatically moved to the dialog when opened and returned to the trigger when closed.
-          </p>
-          <p>
-            <strong>Backdrop Dismiss:</strong> Clicking outside the dialog closes it (can be disabled).
+      <main id="main-content" className="container py-12">
+        {/* Breadcrumb */}
+        <nav aria-label="Breadcrumb" className="mb-8">
+          <ol className="flex items-center gap-2 text-sm text-muted-foreground">
+            <li>
+              <Link href="/" className="hover:text-foreground transition-colors">
+                Home
+              </Link>
+            </li>
+            <li>/</li>
+            <li>
+              <Link href="/components" className="hover:text-foreground transition-colors">
+                Components
+              </Link>
+            </li>
+            <li>/</li>
+            <li className="text-foreground font-medium">Dialog</li>
+          </ol>
+        </nav>
+
+        {/* Page Header */}
+        <div className="max-w-3xl mb-12">
+          <h1 className="text-4xl font-bold tracking-tight mb-4">Dialog</h1>
+          <p className="text-xl text-muted-foreground">
+            A window overlaid on either the primary window or another dialog window. Perfect for confirmations and forms.
           </p>
         </div>
-      </div>
 
-      {/* RTL Support */}
-      <div className="space-y-4">
-        <h2 className="text-2xl font-semibold">RTL Support</h2>
-        <p className="text-muted-foreground mb-4">
-          The Dialog component is fully RTL-compatible using logical properties:
-        </p>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {/* LTR */}
-          <div className="space-y-2">
-            <h3 className="font-semibold text-sm">LTR (Left-to-Right)</h3>
-            <div dir="ltr">
+        {/* Preview */}
+        <section className="mb-16">
+          <h2 className="text-2xl font-bold tracking-tight mb-6">Preview</h2>
+          <ComponentShowcase>
+            <ComponentShowcase.Demo>
               <Dialog>
                 <DialogTrigger asChild>
                   <Button>Open Dialog</Button>
                 </DialogTrigger>
                 <DialogContent>
                   <DialogHeader>
-                    <DialogTitle>Edit Profile</DialogTitle>
+                    <DialogTitle>Are you absolutely sure?</DialogTitle>
                     <DialogDescription>
-                      Make changes to your profile here.
+                      This action cannot be undone. This will permanently delete your
+                      account and remove your data from our servers.
                     </DialogDescription>
                   </DialogHeader>
                 </DialogContent>
               </Dialog>
+            </ComponentShowcase.Demo>
+          </ComponentShowcase>
+        </section>
+
+        {/* Installation */}
+        <section className="mb-16">
+          <h2 className="text-2xl font-bold tracking-tight mb-6">Installation</h2>
+          <CodeBlock code={installCode} language="bash" />
+        </section>
+
+        {/* Usage */}
+        <section className="mb-16">
+          <h2 className="text-2xl font-bold tracking-tight mb-6">Usage</h2>
+          <CodeBlock code={basicUsageCode} language="tsx" />
+        </section>
+
+        {/* Examples */}
+        <section className="mb-16">
+          <h2 className="text-2xl font-bold tracking-tight mb-6">Examples</h2>
+
+          <div className="space-y-8">
+            {/* Basic */}
+            <div>
+              <h3 className="text-lg font-semibold mb-4">Basic Dialog</h3>
+              <Card>
+                <CardContent className="p-6">
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <Button>Open Dialog</Button>
+                    </DialogTrigger>
+                    <DialogContent>
+                      <DialogHeader>
+                        <DialogTitle>Are you absolutely sure?</DialogTitle>
+                        <DialogDescription>
+                          This action cannot be undone.
+                        </DialogDescription>
+                      </DialogHeader>
+                    </DialogContent>
+                  </Dialog>
+                </CardContent>
+              </Card>
+              <div className="mt-4">
+                <CodeBlock code={basicUsageCode} language="tsx" collapsible />
+              </div>
+            </div>
+
+            {/* With Form */}
+            <div>
+              <h3 className="text-lg font-semibold mb-4">Dialog with Form</h3>
+              <Card>
+                <CardContent className="p-6">
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <Button variant="outline">Edit Profile</Button>
+                    </DialogTrigger>
+                    <DialogContent>
+                      <DialogHeader>
+                        <DialogTitle>Edit profile</DialogTitle>
+                        <DialogDescription>
+                          Make changes to your profile here.
+                        </DialogDescription>
+                      </DialogHeader>
+                      <div className="grid gap-4 py-4">
+                        <div className="grid gap-2">
+                          <Label htmlFor="name">Name</Label>
+                          <Input id="name" defaultValue="Pedro Duarte" />
+                        </div>
+                        <div className="grid gap-2">
+                          <Label htmlFor="username">Username</Label>
+                          <Input id="username" defaultValue="@peduarte" />
+                        </div>
+                      </div>
+                      <DialogFooter>
+                        <Button type="submit">Save changes</Button>
+                      </DialogFooter>
+                    </DialogContent>
+                  </Dialog>
+                </CardContent>
+              </Card>
+              <div className="mt-4">
+                <CodeBlock code={withFormCode} language="tsx" collapsible />
+              </div>
+            </div>
+
+            {/* Confirmation */}
+            <div>
+              <h3 className="text-lg font-semibold mb-4">Confirmation Dialog</h3>
+              <Card>
+                <CardContent className="p-6">
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <Button variant="destructive">Delete Account</Button>
+                    </DialogTrigger>
+                    <DialogContent>
+                      <DialogHeader>
+                        <DialogTitle>Are you absolutely sure?</DialogTitle>
+                        <DialogDescription>
+                          This action cannot be undone. This will permanently delete
+                          your account and remove your data from our servers.
+                        </DialogDescription>
+                      </DialogHeader>
+                      <DialogFooter>
+                        <DialogClose asChild>
+                          <Button variant="outline">Cancel</Button>
+                        </DialogClose>
+                        <Button variant="destructive">Delete</Button>
+                      </DialogFooter>
+                    </DialogContent>
+                  </Dialog>
+                </CardContent>
+              </Card>
+              <div className="mt-4">
+                <CodeBlock code={confirmationCode} language="tsx" collapsible />
+              </div>
             </div>
           </div>
+        </section>
 
-          {/* RTL */}
-          <div className="space-y-2">
-            <h3 className="font-semibold text-sm">RTL (Right-to-Left)</h3>
-            <div dir="rtl">
-              <Dialog>
-                <DialogTrigger asChild>
-                  <Button>فتح مربع الحوار</Button>
-                </DialogTrigger>
-                <DialogContent>
-                  <DialogHeader>
-                    <DialogTitle>تحرير الملف الشخصي</DialogTitle>
-                    <DialogDescription>
-                      قم بإجراء تغييرات على ملفك الشخصي هنا.
-                    </DialogDescription>
-                  </DialogHeader>
-                </DialogContent>
-              </Dialog>
-            </div>
-          </div>
-        </div>
+        {/* Props */}
+        <section className="mb-16">
+          <h2 className="text-2xl font-bold tracking-tight mb-6">Props</h2>
+          <PropsTable props={dialogProps} />
+        </section>
 
-        <div className="bg-muted p-4 rounded-lg mt-4">
-          <p className="text-sm">
-            <strong>Key RTL Features:</strong>
+        {/* Accessibility */}
+        <section className="mb-16">
+          <h2 className="text-2xl font-bold tracking-tight mb-6">Accessibility</h2>
+          <Card>
+            <CardContent className="p-6 space-y-4">
+              <div>
+                <h3 className="font-semibold mb-2">ARIA Roles</h3>
+                <p className="text-muted-foreground">
+                  Uses <code className="px-1.5 py-0.5 rounded bg-muted">role=&quot;dialog&quot;</code> and <code className="px-1.5 py-0.5 rounded bg-muted">aria-modal=&quot;true&quot;</code>.
+                </p>
+              </div>
+              <div>
+                <h3 className="font-semibold mb-2">Keyboard Navigation</h3>
+                <ul className="list-disc list-inside text-muted-foreground space-y-1">
+                  <li>
+                    <kbd className="px-1.5 py-0.5 rounded bg-muted">Escape</kbd>: Closes the dialog
+                  </li>
+                  <li>
+                    <kbd className="px-1.5 py-0.5 rounded bg-muted">Tab</kbd>: Traps focus within dialog
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <h3 className="font-semibold mb-2">Focus Management</h3>
+                <p className="text-muted-foreground">
+                  Focus is automatically moved to the dialog when opened and returned to the trigger when closed.
+                </p>
+              </div>
+            </CardContent>
+          </Card>
+        </section>
+
+        {/* RTL Support */}
+        <section className="mb-16">
+          <h2 className="text-2xl font-bold tracking-tight mb-6">RTL Support</h2>
+          <p className="text-muted-foreground mb-6">
+            The Dialog component is fully RTL-compatible using logical properties.
           </p>
-          <ul className="list-disc list-inside text-sm text-muted-foreground mt-2 space-y-1">
-            <li>Close button positions on the correct side (end)</li>
-            <li>Content aligns naturally (text-start)</li>
-            <li>Dialog centered properly in both directions</li>
-            <li>Animations work correctly in RTL</li>
-          </ul>
-        </div>
-      </div>
+          <Card>
+            <CardContent className="p-6">
+              <p className="text-sm font-semibold mb-2">Key RTL Features:</p>
+              <ul className="list-disc list-inside text-sm text-muted-foreground space-y-1">
+                <li>Close button positions on the correct side (end)</li>
+                <li>Content aligns naturally (text-start)</li>
+                <li>Dialog centered properly in both directions</li>
+                <li>Animations work correctly in RTL</li>
+              </ul>
+            </CardContent>
+          </Card>
+        </section>
 
-      {/* Related Components */}
-      <div className="space-y-4">
-        <h2 className="text-2xl font-semibold">Related Components</h2>
-        <div className="flex gap-2">
-          <a
-            href="/components/alert"
-            className="px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors"
-          >
-            Alert
-          </a>
-          <a
-            href="/components/toast"
-            className="px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors"
-          >
-            Toast
-          </a>
-        </div>
-      </div>
+        {/* Related */}
+        <section className="mb-16">
+          <h2 className="text-2xl font-bold tracking-tight mb-6">Related Components</h2>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <Link href="/components/alert">
+              <Card className="hover:border-primary transition-colors">
+                <CardContent className="p-6">
+                  <h3 className="font-semibold mb-2">Alert</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Important messages
+                  </p>
+                </CardContent>
+              </Card>
+            </Link>
+            <Link href="/components/toast">
+              <Card className="hover:border-primary transition-colors">
+                <CardContent className="p-6">
+                  <h3 className="font-semibold mb-2">Toast</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Temporary notifications
+                  </p>
+                </CardContent>
+              </Card>
+            </Link>
+          </div>
+        </section>
+      </main>
     </div>
   )
 }

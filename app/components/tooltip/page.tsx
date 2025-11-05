@@ -1,18 +1,56 @@
 'use client'
 
+import * as React from 'react'
+import Link from 'next/link'
 import { Button } from '@/components/ui/button'
+import { Card, CardContent } from '@/components/ui/card'
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip'
+import { DirectionToggle } from '@/components/docs/direction-toggle'
+import { ThemeToggle } from '@/components/docs/theme-toggle'
 import { ComponentShowcase } from '@/components/docs/component-showcase'
-import { Info, Plus, Settings, Trash2 } from 'lucide-react'
+import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
+import { CodeBlock } from '@/components/docs/code-block'
+import { Sparkles, Info, Plus, Settings, Trash2 } from 'lucide-react'
 
-export default function TooltipPage() {
-  // Example code strings
-  const setupCode = `// app/layout.tsx
+const tooltipProps: PropDefinition[] = [
+  {
+    name: 'side',
+    type: '"top" | "right" | "bottom" | "left"',
+    default: '"top"',
+    required: false,
+    description: 'Which side to display the tooltip',
+  },
+  {
+    name: 'sideOffset',
+    type: 'number',
+    default: '4',
+    required: false,
+    description: 'Distance from the trigger in pixels',
+  },
+  {
+    name: 'align',
+    type: '"start" | "center" | "end"',
+    default: '"center"',
+    required: false,
+    description: 'Alignment relative to the trigger',
+  },
+  {
+    name: 'delayDuration',
+    type: 'number',
+    default: '700',
+    required: false,
+    description: 'Delay in ms before tooltip appears (set on TooltipProvider)',
+  },
+]
+
+const installCode = `npm install @rtl-design-system/core`
+
+const setupCode = `// app/layout.tsx
 import { TooltipProvider } from '@/components/ui/tooltip'
 
 export default function RootLayout({ children }) {
@@ -27,7 +65,7 @@ export default function RootLayout({ children }) {
   )
 }`
 
-  const basicCode = `import {
+const basicUsageCode = `import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
@@ -46,54 +84,27 @@ import { Button } from '@/components/ui/button'
   </Tooltip>
 </TooltipProvider>`
 
-  const sideCode = `import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
-import { Button } from '@/components/ui/button'
+const sidesCode = `<div className="flex gap-4">
+  <Tooltip>
+    <TooltipTrigger asChild>
+      <Button variant="outline">Top</Button>
+    </TooltipTrigger>
+    <TooltipContent side="top">
+      <p>Tooltip on top</p>
+    </TooltipContent>
+  </Tooltip>
 
-<TooltipProvider>
-  <div className="flex gap-4">
-    <Tooltip>
-      <TooltipTrigger asChild>
-        <Button variant="outline">Top</Button>
-      </TooltipTrigger>
-      <TooltipContent side="top">
-        <p>Tooltip on top</p>
-      </TooltipContent>
-    </Tooltip>
+  <Tooltip>
+    <TooltipTrigger asChild>
+      <Button variant="outline">Bottom</Button>
+    </TooltipTrigger>
+    <TooltipContent side="bottom">
+      <p>Tooltip on bottom</p>
+    </TooltipContent>
+  </Tooltip>
+</div>`
 
-    <Tooltip>
-      <TooltipTrigger asChild>
-        <Button variant="outline">Bottom</Button>
-      </TooltipTrigger>
-      <TooltipContent side="bottom">
-        <p>Tooltip on bottom</p>
-      </TooltipContent>
-    </Tooltip>
-
-    <Tooltip>
-      <TooltipTrigger asChild>
-        <Button variant="outline">Left</Button>
-      </TooltipTrigger>
-      <TooltipContent side="left">
-        <p>Tooltip on left</p>
-      </TooltipContent>
-    </Tooltip>
-
-    <Tooltip>
-      <TooltipTrigger asChild>
-        <Button variant="outline">Right</Button>
-      </TooltipTrigger>
-      <TooltipContent side="right">
-        <p>Tooltip on right</p>
-      </TooltipContent>
-    </Tooltip>
-  </div>
-</TooltipProvider>`
-
-  const iconCode = `import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
-import { Button } from '@/components/ui/button'
-import { Info } from 'lucide-react'
-
-<TooltipProvider>
+const iconCode = `<div className="flex gap-2">
   <Tooltip>
     <TooltipTrigger asChild>
       <Button variant="ghost" size="icon">
@@ -104,386 +115,311 @@ import { Info } from 'lucide-react'
       <p>More information</p>
     </TooltipContent>
   </Tooltip>
-</TooltipProvider>`
 
-  const delayCode = `import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
-import { Button } from '@/components/ui/button'
-
-<TooltipProvider delayDuration={100}>
   <Tooltip>
     <TooltipTrigger asChild>
-      <Button variant="outline">Fast tooltip</Button>
+      <Button variant="ghost" size="icon">
+        <Plus className="h-4 w-4" />
+      </Button>
     </TooltipTrigger>
     <TooltipContent>
-      <p>This tooltip appears quickly</p>
+      <p>Add item</p>
     </TooltipContent>
   </Tooltip>
-</TooltipProvider>`
+</div>`
 
+export default function TooltipPage() {
   return (
-    <div className="space-y-8">
+    <div className="min-h-screen">
       {/* Header */}
-      <div>
-        <h1 className="text-4xl font-bold mb-2">Tooltip</h1>
-        <p className="text-lg text-muted-foreground">
-          A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it.
-        </p>
-      </div>
-
-      {/* Preview */}
-      <ComponentShowcase
-      >
-        <TooltipProvider>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button variant="outline">Hover me</Button>
-            </TooltipTrigger>
-            <TooltipContent>
-              <p>Add to library</p>
-            </TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
-      </ComponentShowcase>
-
-      {/* Installation */}
-      <div className="space-y-4">
-        <h2 className="text-2xl font-semibold">Installation</h2>
-        <div className="bg-muted p-4 rounded-lg">
-          <code className="text-sm">npx shadcn-ui@latest add tooltip</code>
-        </div>
-      </div>
-
-      {/* Setup */}
-      <div className="space-y-4">
-        <h2 className="text-2xl font-semibold">Setup</h2>
-        <p className="text-muted-foreground">
-          Wrap your app with <code className="text-sm bg-muted px-1 py-0.5 rounded">TooltipProvider</code> in your root layout:
-        </p>
-        <div className="bg-muted p-4 rounded-lg overflow-x-auto">
-          <pre className="text-sm">
-            <code>{setupCode}</code>
-          </pre>
-        </div>
-      </div>
-
-      {/* Usage */}
-      <div className="space-y-4">
-        <h2 className="text-2xl font-semibold">Usage</h2>
-        <div className="bg-muted p-4 rounded-lg overflow-x-auto">
-          <pre className="text-sm">
-            <code>{basicCode}</code>
-          </pre>
-        </div>
-      </div>
-
-      {/* Examples */}
-      <div className="space-y-6">
-        <h2 className="text-2xl font-semibold">Examples</h2>
-
-        {/* Basic */}
-        <ComponentShowcase
-          title="Basic Tooltip"
-          description="A simple tooltip that appears on hover."
-          code={basicCode}
-        >
-          <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button variant="outline">Hover me</Button>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>Add to library</p>
-              </TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
-        </ComponentShowcase>
-
-        {/* Sides */}
-        <ComponentShowcase
-          title="Different Sides"
-          description="Control which side the tooltip appears on."
-          code={sideCode}
-        >
-          <TooltipProvider>
-            <div className="flex gap-4 flex-wrap">
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Button variant="outline">Top</Button>
-                </TooltipTrigger>
-                <TooltipContent side="top">
-                  <p>Tooltip on top</p>
-                </TooltipContent>
-              </Tooltip>
-
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Button variant="outline">Bottom</Button>
-                </TooltipTrigger>
-                <TooltipContent side="bottom">
-                  <p>Tooltip on bottom</p>
-                </TooltipContent>
-              </Tooltip>
-
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Button variant="outline">Left</Button>
-                </TooltipTrigger>
-                <TooltipContent side="left">
-                  <p>Tooltip on left</p>
-                </TooltipContent>
-              </Tooltip>
-
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Button variant="outline">Right</Button>
-                </TooltipTrigger>
-                <TooltipContent side="right">
-                  <p>Tooltip on right</p>
-                </TooltipContent>
-              </Tooltip>
-            </div>
-          </TooltipProvider>
-        </ComponentShowcase>
-
-        {/* Icon Buttons */}
-        <ComponentShowcase
-          title="With Icon Buttons"
-          description="Tooltips work great with icon-only buttons."
-          code={iconCode}
-        >
-          <TooltipProvider>
-            <div className="flex gap-2">
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Button variant="ghost" size="icon">
-                    <Info className="h-4 w-4" />
-                  </Button>
-                </TooltipTrigger>
-                <TooltipContent>
-                  <p>More information</p>
-                </TooltipContent>
-              </Tooltip>
-
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Button variant="ghost" size="icon">
-                    <Plus className="h-4 w-4" />
-                  </Button>
-                </TooltipTrigger>
-                <TooltipContent>
-                  <p>Add item</p>
-                </TooltipContent>
-              </Tooltip>
-
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Button variant="ghost" size="icon">
-                    <Settings className="h-4 w-4" />
-                  </Button>
-                </TooltipTrigger>
-                <TooltipContent>
-                  <p>Settings</p>
-                </TooltipContent>
-              </Tooltip>
-
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Button variant="ghost" size="icon">
-                    <Trash2 className="h-4 w-4" />
-                  </Button>
-                </TooltipTrigger>
-                <TooltipContent>
-                  <p>Delete</p>
-                </TooltipContent>
-              </Tooltip>
-            </div>
-          </TooltipProvider>
-        </ComponentShowcase>
-
-        {/* Custom Delay */}
-        <ComponentShowcase
-          title="Custom Delay"
-          description="Control how quickly the tooltip appears."
-          code={delayCode}
-        >
-          <TooltipProvider delayDuration={100}>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button variant="outline">Fast tooltip (100ms)</Button>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>This tooltip appears quickly</p>
-              </TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
-        </ComponentShowcase>
-      </div>
-
-      {/* API Reference */}
-      <div className="space-y-4">
-        <h2 className="text-2xl font-semibold">API Reference</h2>
-
-        <div className="space-y-6">
-          {/* TooltipProvider Props */}
-          <div>
-            <h3 className="text-lg font-semibold mb-3">TooltipProvider</h3>
-            <div className="border rounded-lg overflow-hidden">
-              <table className="w-full text-sm">
-                <thead className="bg-muted">
-                  <tr>
-                    <th className="px-4 py-2 text-start font-semibold">Prop</th>
-                    <th className="px-4 py-2 text-start font-semibold">Type</th>
-                    <th className="px-4 py-2 text-start font-semibold">Default</th>
-                    <th className="px-4 py-2 text-start font-semibold">Description</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y">
-                  <tr>
-                    <td className="px-4 py-2 font-mono">delayDuration</td>
-                    <td className="px-4 py-2 font-mono text-xs">number</td>
-                    <td className="px-4 py-2 font-mono">700</td>
-                    <td className="px-4 py-2">Delay in ms before tooltip appears</td>
-                  </tr>
-                  <tr>
-                    <td className="px-4 py-2 font-mono">skipDelayDuration</td>
-                    <td className="px-4 py-2 font-mono text-xs">number</td>
-                    <td className="px-4 py-2 font-mono">300</td>
-                    <td className="px-4 py-2">Skip delay when moving between triggers</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          {/* TooltipContent Props */}
-          <div>
-            <h3 className="text-lg font-semibold mb-3">TooltipContent</h3>
-            <div className="border rounded-lg overflow-hidden">
-              <table className="w-full text-sm">
-                <thead className="bg-muted">
-                  <tr>
-                    <th className="px-4 py-2 text-start font-semibold">Prop</th>
-                    <th className="px-4 py-2 text-start font-semibold">Type</th>
-                    <th className="px-4 py-2 text-start font-semibold">Default</th>
-                    <th className="px-4 py-2 text-start font-semibold">Description</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y">
-                  <tr>
-                    <td className="px-4 py-2 font-mono">side</td>
-                    <td className="px-4 py-2 font-mono text-xs">
-                      &quot;top&quot; | &quot;right&quot; | &quot;bottom&quot; | &quot;left&quot;
-                    </td>
-                    <td className="px-4 py-2 font-mono">&quot;top&quot;</td>
-                    <td className="px-4 py-2">Which side to display the tooltip</td>
-                  </tr>
-                  <tr>
-                    <td className="px-4 py-2 font-mono">sideOffset</td>
-                    <td className="px-4 py-2 font-mono text-xs">number</td>
-                    <td className="px-4 py-2 font-mono">4</td>
-                    <td className="px-4 py-2">Distance from the trigger in pixels</td>
-                  </tr>
-                  <tr>
-                    <td className="px-4 py-2 font-mono">align</td>
-                    <td className="px-4 py-2 font-mono text-xs">
-                      &quot;start&quot; | &quot;center&quot; | &quot;end&quot;
-                    </td>
-                    <td className="px-4 py-2 font-mono">&quot;center&quot;</td>
-                    <td className="px-4 py-2">Alignment relative to the trigger</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <div className="container flex h-16 items-center justify-between">
+          <Link href="/" className="flex items-center gap-2">
+            <Sparkles className="h-6 w-6 text-primary" />
+            <span className="text-xl font-bold">RTL Design</span>
+          </Link>
+          <div className="flex items-center gap-2">
+            <ThemeToggle />
+            <DirectionToggle />
           </div>
         </div>
-      </div>
+      </header>
 
-      {/* Accessibility */}
-      <div className="space-y-4">
-        <h2 className="text-2xl font-semibold">Accessibility</h2>
-        <div className="space-y-2 text-muted-foreground">
-          <p>
-            <strong>Keyboard Navigation:</strong> Tooltip appears on focus and hover.
-          </p>
-          <p>
-            <strong>Screen Readers:</strong> Tooltip content is announced when the trigger receives focus.
-          </p>
-          <p>
-            <strong>ARIA:</strong> Uses <code>aria-describedby</code> to link the trigger to the tooltip content.
-          </p>
-          <p>
-            <strong>Best Practice:</strong> Always use tooltips for supplementary information, not critical content.
+      <main id="main-content" className="container py-12">
+        {/* Breadcrumb */}
+        <nav aria-label="Breadcrumb" className="mb-8">
+          <ol className="flex items-center gap-2 text-sm text-muted-foreground">
+            <li>
+              <Link href="/" className="hover:text-foreground transition-colors">
+                Home
+              </Link>
+            </li>
+            <li>/</li>
+            <li>
+              <Link href="/components" className="hover:text-foreground transition-colors">
+                Components
+              </Link>
+            </li>
+            <li>/</li>
+            <li className="text-foreground font-medium">Tooltip</li>
+          </ol>
+        </nav>
+
+        {/* Page Header */}
+        <div className="max-w-3xl mb-12">
+          <h1 className="text-4xl font-bold tracking-tight mb-4">Tooltip</h1>
+          <p className="text-xl text-muted-foreground">
+            A popup that displays information related to an element when it receives keyboard focus or the mouse hovers over it.
           </p>
         </div>
-      </div>
 
-      {/* RTL Support */}
-      <div className="space-y-4">
-        <h2 className="text-2xl font-semibold">RTL Support</h2>
-        <p className="text-muted-foreground mb-4">
-          The Tooltip component automatically adapts to RTL layouts:
-        </p>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {/* LTR */}
-          <div className="space-y-2">
-            <h3 className="font-semibold text-sm">LTR (Left-to-Right)</h3>
-            <div dir="ltr">
+        {/* Preview */}
+        <section className="mb-16">
+          <h2 className="text-2xl font-bold tracking-tight mb-6">Preview</h2>
+          <ComponentShowcase>
+            <ComponentShowcase.Demo>
               <TooltipProvider>
                 <Tooltip>
                   <TooltipTrigger asChild>
                     <Button variant="outline">Hover me</Button>
                   </TooltipTrigger>
                   <TooltipContent>
-                    <p>This is a tooltip</p>
+                    <p>Add to library</p>
                   </TooltipContent>
                 </Tooltip>
               </TooltipProvider>
-            </div>
-          </div>
+            </ComponentShowcase.Demo>
+          </ComponentShowcase>
+        </section>
 
-          {/* RTL */}
-          <div className="space-y-2">
-            <h3 className="font-semibold text-sm">RTL (Right-to-Left)</h3>
-            <div dir="rtl">
-              <TooltipProvider>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Button variant="outline">مرر فوقي</Button>
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    <p>هذه تلميح</p>
-                  </TooltipContent>
-                </Tooltip>
-              </TooltipProvider>
-            </div>
-          </div>
-        </div>
+        {/* Installation */}
+        <section className="mb-16">
+          <h2 className="text-2xl font-bold tracking-tight mb-6">Installation</h2>
+          <CodeBlock code={installCode} language="bash" />
+        </section>
 
-        <div className="bg-muted p-4 rounded-lg mt-4">
-          <p className="text-sm">
-            <strong>Key RTL Features:</strong>
+        {/* Setup */}
+        <section className="mb-16">
+          <h2 className="text-2xl font-bold tracking-tight mb-6">Setup</h2>
+          <p className="text-muted-foreground mb-4">
+            Wrap your app with TooltipProvider in your root layout:
           </p>
-          <ul className="list-disc list-inside text-sm text-muted-foreground mt-2 space-y-1">
-            <li>Tooltip positioning mirrors automatically (left ↔ right)</li>
-            <li>Text alignment follows the direction</li>
-            <li>Animations work correctly in both directions</li>
-          </ul>
-        </div>
-      </div>
+          <CodeBlock code={setupCode} language="tsx" />
+        </section>
 
-      {/* Related Components */}
-      <div className="space-y-4">
-        <h2 className="text-2xl font-semibold">Related Components</h2>
-        <div className="flex gap-2">
-          <a
-            href="/components/button"
-            className="px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors"
-          >
-            Button
-          </a>
-        </div>
-      </div>
+        {/* Usage */}
+        <section className="mb-16">
+          <h2 className="text-2xl font-bold tracking-tight mb-6">Usage</h2>
+          <CodeBlock code={basicUsageCode} language="tsx" />
+        </section>
+
+        {/* Examples */}
+        <section className="mb-16">
+          <h2 className="text-2xl font-bold tracking-tight mb-6">Examples</h2>
+
+          <div className="space-y-8">
+            {/* Basic */}
+            <div>
+              <h3 className="text-lg font-semibold mb-4">Basic Tooltip</h3>
+              <Card>
+                <CardContent className="p-6">
+                  <TooltipProvider>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <Button variant="outline">Hover me</Button>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>Add to library</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
+                </CardContent>
+              </Card>
+              <div className="mt-4">
+                <CodeBlock code={basicUsageCode} language="tsx" collapsible />
+              </div>
+            </div>
+
+            {/* Different Sides */}
+            <div>
+              <h3 className="text-lg font-semibold mb-4">Different Sides</h3>
+              <Card>
+                <CardContent className="p-6">
+                  <TooltipProvider>
+                    <div className="flex gap-4 flex-wrap">
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <Button variant="outline">Top</Button>
+                        </TooltipTrigger>
+                        <TooltipContent side="top">
+                          <p>Tooltip on top</p>
+                        </TooltipContent>
+                      </Tooltip>
+
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <Button variant="outline">Bottom</Button>
+                        </TooltipTrigger>
+                        <TooltipContent side="bottom">
+                          <p>Tooltip on bottom</p>
+                        </TooltipContent>
+                      </Tooltip>
+
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <Button variant="outline">Left</Button>
+                        </TooltipTrigger>
+                        <TooltipContent side="left">
+                          <p>Tooltip on left</p>
+                        </TooltipContent>
+                      </Tooltip>
+
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <Button variant="outline">Right</Button>
+                        </TooltipTrigger>
+                        <TooltipContent side="right">
+                          <p>Tooltip on right</p>
+                        </TooltipContent>
+                      </Tooltip>
+                    </div>
+                  </TooltipProvider>
+                </CardContent>
+              </Card>
+              <div className="mt-4">
+                <CodeBlock code={sidesCode} language="tsx" collapsible />
+              </div>
+            </div>
+
+            {/* Icon Buttons */}
+            <div>
+              <h3 className="text-lg font-semibold mb-4">With Icon Buttons</h3>
+              <Card>
+                <CardContent className="p-6">
+                  <TooltipProvider>
+                    <div className="flex gap-2">
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <Button variant="ghost" size="icon">
+                            <Info className="h-4 w-4" />
+                          </Button>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <p>More information</p>
+                        </TooltipContent>
+                      </Tooltip>
+
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <Button variant="ghost" size="icon">
+                            <Plus className="h-4 w-4" />
+                          </Button>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <p>Add item</p>
+                        </TooltipContent>
+                      </Tooltip>
+
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <Button variant="ghost" size="icon">
+                            <Settings className="h-4 w-4" />
+                          </Button>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <p>Settings</p>
+                        </TooltipContent>
+                      </Tooltip>
+
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <Button variant="ghost" size="icon">
+                            <Trash2 className="h-4 w-4" />
+                          </Button>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <p>Delete</p>
+                        </TooltipContent>
+                      </Tooltip>
+                    </div>
+                  </TooltipProvider>
+                </CardContent>
+              </Card>
+              <div className="mt-4">
+                <CodeBlock code={iconCode} language="tsx" collapsible />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Props */}
+        <section className="mb-16">
+          <h2 className="text-2xl font-bold tracking-tight mb-6">Props</h2>
+          <PropsTable props={tooltipProps} />
+        </section>
+
+        {/* Accessibility */}
+        <section className="mb-16">
+          <h2 className="text-2xl font-bold tracking-tight mb-6">Accessibility</h2>
+          <Card>
+            <CardContent className="p-6 space-y-4">
+              <div>
+                <h3 className="font-semibold mb-2">Keyboard Navigation</h3>
+                <p className="text-muted-foreground">
+                  Tooltip appears on focus and hover. Use <kbd className="px-1.5 py-0.5 rounded bg-muted">Tab</kbd> to navigate.
+                </p>
+              </div>
+              <div>
+                <h3 className="font-semibold mb-2">Screen Readers</h3>
+                <p className="text-muted-foreground">
+                  Tooltip content is announced when the trigger receives focus using <code className="px-1.5 py-0.5 rounded bg-muted">aria-describedby</code>.
+                </p>
+              </div>
+              <div>
+                <h3 className="font-semibold mb-2">Best Practice</h3>
+                <p className="text-muted-foreground">
+                  Always use tooltips for supplementary information, not critical content.
+                </p>
+              </div>
+            </CardContent>
+          </Card>
+        </section>
+
+        {/* RTL Support */}
+        <section className="mb-16">
+          <h2 className="text-2xl font-bold tracking-tight mb-6">RTL Support</h2>
+          <p className="text-muted-foreground mb-6">
+            The Tooltip component automatically adapts to RTL layouts.
+          </p>
+          <Card>
+            <CardContent className="p-6">
+              <p className="text-sm font-semibold mb-2">Key RTL Features:</p>
+              <ul className="list-disc list-inside text-sm text-muted-foreground space-y-1">
+                <li>Tooltip positioning mirrors automatically (left ↔ right)</li>
+                <li>Text alignment follows the direction</li>
+                <li>Animations work correctly in both directions</li>
+              </ul>
+            </CardContent>
+          </Card>
+        </section>
+
+        {/* Related */}
+        <section className="mb-16">
+          <h2 className="text-2xl font-bold tracking-tight mb-6">Related Components</h2>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <Link href="/components/button">
+              <Card className="hover:border-primary transition-colors">
+                <CardContent className="p-6">
+                  <h3 className="font-semibold mb-2">Button</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Interactive buttons
+                  </p>
+                </CardContent>
+              </Card>
+            </Link>
+          </div>
+        </section>
+      </main>
     </div>
   )
 }
