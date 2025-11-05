@@ -38,10 +38,12 @@ const componentCategories = [
     name: 'Forms',
     description: 'Form elements with validation support',
     components: [
-      { name: 'Checkbox', icon: CheckSquare, href: '/components/checkbox', status: 'coming' },
-      { name: 'Radio Group', icon: CheckSquare, href: '/components/radio-group', status: 'coming' },
-      { name: 'Select', icon: Menu, href: '/components/select', status: 'coming' },
-      { name: 'Switch', icon: CheckSquare, href: '/components/switch', status: 'coming' },
+      { name: 'Checkbox', icon: CheckSquare, href: '/components/checkbox', status: 'ready' },
+      { name: 'Radio Group', icon: CheckSquare, href: '/components/radio-group', status: 'ready' },
+      { name: 'Select', icon: Menu, href: '/components/select', status: 'ready' },
+      { name: 'Switch', icon: CheckSquare, href: '/components/switch', status: 'ready' },
+      { name: 'Slider', icon: CheckSquare, href: '/components/slider', status: 'ready' },
+      { name: 'Textarea', icon: Type, href: '/components/textarea', status: 'ready' },
     ],
   },
   {
