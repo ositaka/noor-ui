@@ -305,6 +305,40 @@ export default function DialogPage() {
           </div>
         </section>
 
+        {/* RTL Support Example */}
+        <section className="mb-16">
+          <h2 className="text-2xl font-bold tracking-tight mb-6">RTL Support Example</h2>
+          <p className="text-muted-foreground mb-6">
+            The Dialog component is fully RTL-compatible. The close button positions correctly and content aligns naturally.
+          </p>
+          <ComponentShowcase.Comparison ltrLabel="LTR (English)" rtlLabel="RTL (العربية)">
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button variant="outline">Open Settings</Button>
+              </DialogTrigger>
+              <DialogContent>
+                <DialogHeader>
+                  <DialogTitle>Account Settings</DialogTitle>
+                  <DialogDescription>
+                    Make changes to your account preferences here.
+                  </DialogDescription>
+                </DialogHeader>
+                <div className="py-4">
+                  <p className="text-sm text-muted-foreground">
+                    Configure your notification preferences and privacy settings.
+                  </p>
+                </div>
+                <DialogFooter>
+                  <DialogClose asChild>
+                    <Button variant="outline">Cancel</Button>
+                  </DialogClose>
+                  <Button>Save Changes</Button>
+                </DialogFooter>
+              </DialogContent>
+            </Dialog>
+          </ComponentShowcase.Comparison>
+        </section>
+
         {/* Props */}
         <section className="mb-16">
           <h2 className="text-2xl font-bold tracking-tight mb-6">Props</h2>

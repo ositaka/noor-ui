@@ -246,6 +246,40 @@ export default function BreadcrumbComponentPage() {
           </div>
         </section>
 
+        {/* RTL Support Example */}
+        <section className="mb-16">
+          <h2 className="text-2xl font-bold tracking-tight mb-6">RTL Support Example</h2>
+          <p className="text-muted-foreground mb-6">
+            The Breadcrumb component automatically adapts to RTL layouts. Layout direction and separators mirror correctly.
+          </p>
+          <ComponentShowcase.Comparison ltrLabel="LTR (English)" rtlLabel="RTL (العربية)">
+            <Breadcrumb>
+              <BreadcrumbList>
+                <BreadcrumbItem>
+                  <BreadcrumbLink href="/" className="flex items-center gap-2">
+                    <Home className="h-4 w-4" />
+                    Home
+                  </BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbSeparator />
+                <BreadcrumbItem>
+                  <BreadcrumbLink href="/products" className="flex items-center gap-2">
+                    <Folder className="h-4 w-4" />
+                    Products
+                  </BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbSeparator />
+                <BreadcrumbItem>
+                  <BreadcrumbPage className="flex items-center gap-2">
+                    <File className="h-4 w-4" />
+                    Details
+                  </BreadcrumbPage>
+                </BreadcrumbItem>
+              </BreadcrumbList>
+            </Breadcrumb>
+          </ComponentShowcase.Comparison>
+        </section>
+
         {/* Props */}
         <section className="mb-16">
           <h2 className="text-2xl font-bold tracking-tight mb-4">Props</h2>

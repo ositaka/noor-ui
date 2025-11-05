@@ -356,6 +356,43 @@ export default function PaginationPage() {
           </div>
         </section>
 
+        {/* RTL Support Example */}
+        <section className="mb-16">
+          <h2 className="text-2xl font-bold tracking-tight mb-6">RTL Support Example</h2>
+          <p className="text-muted-foreground mb-6">
+            The Pagination component automatically adapts to RTL layouts. Previous/Next buttons and chevrons mirror correctly.
+          </p>
+          <ComponentShowcase.Comparison ltrLabel="LTR (English)" rtlLabel="RTL (العربية)">
+            <Pagination>
+              <PaginationContent>
+                <PaginationItem>
+                  <PaginationPrevious href="#" />
+                </PaginationItem>
+                <PaginationItem>
+                  <PaginationLink href="#">1</PaginationLink>
+                </PaginationItem>
+                <PaginationItem>
+                  <PaginationLink href="#" isActive>
+                    2
+                  </PaginationLink>
+                </PaginationItem>
+                <PaginationItem>
+                  <PaginationLink href="#">3</PaginationLink>
+                </PaginationItem>
+                <PaginationItem>
+                  <PaginationEllipsis />
+                </PaginationItem>
+                <PaginationItem>
+                  <PaginationLink href="#">10</PaginationLink>
+                </PaginationItem>
+                <PaginationItem>
+                  <PaginationNext href="#" />
+                </PaginationItem>
+              </PaginationContent>
+            </Pagination>
+          </ComponentShowcase.Comparison>
+        </section>
+
         {/* Props */}
         <section className="mb-16">
           <h2 className="text-2xl font-bold tracking-tight mb-4">Props</h2>

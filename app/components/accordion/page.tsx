@@ -306,6 +306,51 @@ export default function AccordionPage() {
           </div>
         </section>
 
+        {/* RTL Support Example */}
+        <section className="mb-16">
+          <h2 className="text-2xl font-bold tracking-tight mb-6">RTL Support Example</h2>
+          <p className="text-muted-foreground mb-6">
+            The Accordion component automatically adapts to RTL layouts. Chevron icons position correctly and content flows naturally.
+          </p>
+          <ComponentShowcase.Comparison ltrLabel="LTR (English)" rtlLabel="RTL (العربية)">
+            <Accordion type="single" collapsible className="w-full max-w-md">
+              <AccordionItem value="item-1">
+                <AccordionTrigger>
+                  <div className="flex items-center gap-2">
+                    <User className="h-4 w-4" />
+                    <span>Personal Information</span>
+                  </div>
+                </AccordionTrigger>
+                <AccordionContent>
+                  Update your name, email, and profile photo.
+                </AccordionContent>
+              </AccordionItem>
+              <AccordionItem value="item-2">
+                <AccordionTrigger>
+                  <div className="flex items-center gap-2">
+                    <CreditCard className="h-4 w-4" />
+                    <span>Payment Methods</span>
+                  </div>
+                </AccordionTrigger>
+                <AccordionContent>
+                  Manage your credit cards and payment options.
+                </AccordionContent>
+              </AccordionItem>
+              <AccordionItem value="item-3">
+                <AccordionTrigger>
+                  <div className="flex items-center gap-2">
+                    <Calendar className="h-4 w-4" />
+                    <span>Subscription Plan</span>
+                  </div>
+                </AccordionTrigger>
+                <AccordionContent>
+                  View and manage your subscription details.
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
+          </ComponentShowcase.Comparison>
+        </section>
+
         {/* Props */}
         <section className="mb-16">
           <h2 className="text-2xl font-bold tracking-tight mb-4">Props</h2>

@@ -82,41 +82,41 @@ const basicUsageCode = `import { RadioGroup, RadioGroupItem } from '@/components
 import { Label } from '@/components/ui/label'
 
 <RadioGroup defaultValue="option1">
-  <div className="flex items-center gap-2">
+  <div className="flex items-center gap-2 rtl:flex-row-reverse">
     <RadioGroupItem value="option1" id="option1" />
     <Label htmlFor="option1">Option 1</Label>
   </div>
-  <div className="flex items-center gap-2">
+  <div className="flex items-center gap-2 rtl:flex-row-reverse">
     <RadioGroupItem value="option2" id="option2" />
     <Label htmlFor="option2">Option 2</Label>
   </div>
 </RadioGroup>`
 
 const verticalCode = `<RadioGroup defaultValue="comfortable">
-  <div className="flex items-center gap-2">
+  <div className="flex items-center gap-2 rtl:flex-row-reverse">
     <RadioGroupItem value="default" id="default" />
     <Label htmlFor="default">Default</Label>
   </div>
-  <div className="flex items-center gap-2">
+  <div className="flex items-center gap-2 rtl:flex-row-reverse">
     <RadioGroupItem value="comfortable" id="comfortable" />
     <Label htmlFor="comfortable">Comfortable</Label>
   </div>
-  <div className="flex items-center gap-2">
+  <div className="flex items-center gap-2 rtl:flex-row-reverse">
     <RadioGroupItem value="compact" id="compact" />
     <Label htmlFor="compact">Compact</Label>
   </div>
 </RadioGroup>`
 
 const horizontalCode = `<RadioGroup defaultValue="card" className="flex gap-4">
-  <div className="flex items-center gap-2">
+  <div className="flex items-center gap-2 rtl:flex-row-reverse">
     <RadioGroupItem value="card" id="card" />
     <Label htmlFor="card">Card</Label>
   </div>
-  <div className="flex items-center gap-2">
+  <div className="flex items-center gap-2 rtl:flex-row-reverse">
     <RadioGroupItem value="paypal" id="paypal" />
     <Label htmlFor="paypal">PayPal</Label>
   </div>
-  <div className="flex items-center gap-2">
+  <div className="flex items-center gap-2 rtl:flex-row-reverse">
     <RadioGroupItem value="apple" id="apple" />
     <Label htmlFor="apple">Apple Pay</Label>
   </div>
@@ -124,7 +124,7 @@ const horizontalCode = `<RadioGroup defaultValue="card" className="flex gap-4">
 
 const withDescriptionCode = `<RadioGroup defaultValue="starter">
   <div className="space-y-1">
-    <div className="flex items-center gap-2">
+    <div className="flex items-center gap-2 rtl:flex-row-reverse">
       <RadioGroupItem value="starter" id="starter" />
       <Label htmlFor="starter">Starter Plan</Label>
     </div>
@@ -134,7 +134,7 @@ const withDescriptionCode = `<RadioGroup defaultValue="starter">
   </div>
 
   <div className="space-y-1">
-    <div className="flex items-center gap-2">
+    <div className="flex items-center gap-2 rtl:flex-row-reverse">
       <RadioGroupItem value="pro" id="pro" />
       <Label htmlFor="pro">Pro Plan</Label>
     </div>
@@ -144,7 +144,7 @@ const withDescriptionCode = `<RadioGroup defaultValue="starter">
   </div>
 
   <div className="space-y-1">
-    <div className="flex items-center gap-2">
+    <div className="flex items-center gap-2 rtl:flex-row-reverse">
       <RadioGroupItem value="enterprise" id="enterprise" />
       <Label htmlFor="enterprise">Enterprise Plan</Label>
     </div>
@@ -155,15 +155,15 @@ const withDescriptionCode = `<RadioGroup defaultValue="starter">
 </RadioGroup>`
 
 const disabledCode = `<RadioGroup defaultValue="option1">
-  <div className="flex items-center gap-2">
+  <div className="flex items-center gap-2 rtl:flex-row-reverse">
     <RadioGroupItem value="option1" id="r1" />
     <Label htmlFor="r1">Enabled option</Label>
   </div>
-  <div className="flex items-center gap-2">
+  <div className="flex items-center gap-2 rtl:flex-row-reverse">
     <RadioGroupItem value="option2" id="r2" disabled />
     <Label htmlFor="r2">Disabled option</Label>
   </div>
-  <div className="flex items-center gap-2">
+  <div className="flex items-center gap-2 rtl:flex-row-reverse">
     <RadioGroupItem value="option3" id="r3" />
     <Label htmlFor="r3">Another enabled option</Label>
   </div>
@@ -174,15 +174,15 @@ const controlledCode = `const [value, setValue] = React.useState('option1')
 return (
   <div className="space-y-4">
     <RadioGroup value={value} onValueChange={setValue}>
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2 rtl:flex-row-reverse">
         <RadioGroupItem value="option1" id="c1" />
         <Label htmlFor="c1">Option 1</Label>
       </div>
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2 rtl:flex-row-reverse">
         <RadioGroupItem value="option2" id="c2" />
         <Label htmlFor="c2">Option 2</Label>
       </div>
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2 rtl:flex-row-reverse">
         <RadioGroupItem value="option3" id="c3" />
         <Label htmlFor="c3">Option 3</Label>
       </div>
@@ -205,15 +205,15 @@ const formCode = `<form className="space-y-6">
   <div className="space-y-3">
     <Label className="text-base font-semibold">Select your plan</Label>
     <RadioGroup defaultValue="pro" name="plan">
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2 rtl:flex-row-reverse">
         <RadioGroupItem value="free" id="free" />
         <Label htmlFor="free">Free</Label>
       </div>
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2 rtl:flex-row-reverse">
         <RadioGroupItem value="pro" id="pro" />
         <Label htmlFor="pro">Pro</Label>
       </div>
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2 rtl:flex-row-reverse">
         <RadioGroupItem value="enterprise" id="enterprise" />
         <Label htmlFor="enterprise">Enterprise</Label>
       </div>
@@ -222,15 +222,15 @@ const formCode = `<form className="space-y-6">
   <Button type="submit">Continue</Button>
 </form>`
 
-const rtlCode = `// RTL support is automatic!
-// Radio buttons and labels align correctly in RTL
+const rtlCode = `// RTL support with flex-row-reverse!
+// Radio buttons appear on the right in RTL
 
 <RadioGroup defaultValue="option1">
-  <div className="flex items-center gap-2">
+  <div className="flex items-center gap-2 rtl:flex-row-reverse">
     <RadioGroupItem value="option1" id="rtl1" />
     <Label htmlFor="rtl1">الخيار الأول</Label>
   </div>
-  <div className="flex items-center gap-2">
+  <div className="flex items-center gap-2 rtl:flex-row-reverse">
     <RadioGroupItem value="option2" id="rtl2" />
     <Label htmlFor="rtl2">الخيار الثاني</Label>
   </div>
@@ -290,15 +290,15 @@ export default function RadioGroupPage() {
           <ComponentShowcase>
             <ComponentShowcase.Demo>
               <RadioGroup defaultValue="option1">
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 rtl:flex-row-reverse">
                   <RadioGroupItem value="option1" id="preview1" />
                   <Label htmlFor="preview1">Option 1</Label>
                 </div>
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 rtl:flex-row-reverse">
                   <RadioGroupItem value="option2" id="preview2" />
                   <Label htmlFor="preview2">Option 2</Label>
                 </div>
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 rtl:flex-row-reverse">
                   <RadioGroupItem value="option3" id="preview3" />
                   <Label htmlFor="preview3">Option 3</Label>
                 </div>
@@ -330,15 +330,15 @@ export default function RadioGroupPage() {
               <Card>
                 <CardContent className="p-6">
                   <RadioGroup defaultValue="comfortable">
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-2 rtl:flex-row-reverse">
                       <RadioGroupItem value="default" id="default" />
                       <Label htmlFor="default">Default</Label>
                     </div>
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-2 rtl:flex-row-reverse">
                       <RadioGroupItem value="comfortable" id="comfortable" />
                       <Label htmlFor="comfortable">Comfortable</Label>
                     </div>
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-2 rtl:flex-row-reverse">
                       <RadioGroupItem value="compact" id="compact" />
                       <Label htmlFor="compact">Compact</Label>
                     </div>
@@ -356,15 +356,15 @@ export default function RadioGroupPage() {
               <Card>
                 <CardContent className="p-6">
                   <RadioGroup defaultValue="card" className="flex gap-4">
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-2 rtl:flex-row-reverse">
                       <RadioGroupItem value="card" id="card" />
                       <Label htmlFor="card">Card</Label>
                     </div>
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-2 rtl:flex-row-reverse">
                       <RadioGroupItem value="paypal" id="paypal" />
                       <Label htmlFor="paypal">PayPal</Label>
                     </div>
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-2 rtl:flex-row-reverse">
                       <RadioGroupItem value="apple" id="apple" />
                       <Label htmlFor="apple">Apple Pay</Label>
                     </div>
@@ -383,7 +383,7 @@ export default function RadioGroupPage() {
                 <CardContent className="p-6">
                   <RadioGroup defaultValue="starter">
                     <div className="space-y-1">
-                      <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-2 rtl:flex-row-reverse">
                         <RadioGroupItem value="starter" id="starter" />
                         <Label htmlFor="starter">Starter Plan</Label>
                       </div>
@@ -393,7 +393,7 @@ export default function RadioGroupPage() {
                     </div>
 
                     <div className="space-y-1">
-                      <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-2 rtl:flex-row-reverse">
                         <RadioGroupItem value="pro" id="pro" />
                         <Label htmlFor="pro">Pro Plan</Label>
                       </div>
@@ -403,7 +403,7 @@ export default function RadioGroupPage() {
                     </div>
 
                     <div className="space-y-1">
-                      <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-2 rtl:flex-row-reverse">
                         <RadioGroupItem value="enterprise" id="enterprise" />
                         <Label htmlFor="enterprise">Enterprise Plan</Label>
                       </div>
@@ -425,15 +425,15 @@ export default function RadioGroupPage() {
               <Card>
                 <CardContent className="p-6">
                   <RadioGroup defaultValue="option1">
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-2 rtl:flex-row-reverse">
                       <RadioGroupItem value="option1" id="r1" />
                       <Label htmlFor="r1">Enabled option</Label>
                     </div>
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-2 rtl:flex-row-reverse">
                       <RadioGroupItem value="option2" id="r2" disabled />
                       <Label htmlFor="r2">Disabled option</Label>
                     </div>
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-2 rtl:flex-row-reverse">
                       <RadioGroupItem value="option3" id="r3" />
                       <Label htmlFor="r3">Another enabled option</Label>
                     </div>
@@ -452,15 +452,15 @@ export default function RadioGroupPage() {
                 <CardContent className="p-6">
                   <div className="space-y-4">
                     <RadioGroup value={value} onValueChange={setValue}>
-                      <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-2 rtl:flex-row-reverse">
                         <RadioGroupItem value="option1" id="c1" />
                         <Label htmlFor="c1">Option 1</Label>
                       </div>
-                      <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-2 rtl:flex-row-reverse">
                         <RadioGroupItem value="option2" id="c2" />
                         <Label htmlFor="c2">Option 2</Label>
                       </div>
-                      <div className="flex items-center gap-2">
+                      <div className="flex items-center gap-2 rtl:flex-row-reverse">
                         <RadioGroupItem value="option3" id="c3" />
                         <Label htmlFor="c3">Option 3</Label>
                       </div>
@@ -497,15 +497,15 @@ export default function RadioGroupPage() {
                     <div className="space-y-3">
                       <Label className="text-base font-semibold">Select your plan</Label>
                       <RadioGroup defaultValue="pro" name="plan">
-                        <div className="flex items-center gap-2">
+                        <div className="flex items-center gap-2 rtl:flex-row-reverse">
                           <RadioGroupItem value="free" id="free" />
                           <Label htmlFor="free">Free</Label>
                         </div>
-                        <div className="flex items-center gap-2">
+                        <div className="flex items-center gap-2 rtl:flex-row-reverse">
                           <RadioGroupItem value="pro" id="form-pro" />
                           <Label htmlFor="form-pro">Pro</Label>
                         </div>
-                        <div className="flex items-center gap-2">
+                        <div className="flex items-center gap-2 rtl:flex-row-reverse">
                           <RadioGroupItem value="enterprise" id="form-enterprise" />
                           <Label htmlFor="form-enterprise">Enterprise</Label>
                         </div>
@@ -605,11 +605,11 @@ export default function RadioGroupPage() {
                   <div dir="ltr">
                     <div className="p-4 border rounded-lg">
                       <RadioGroup defaultValue="option1">
-                        <div className="flex items-center gap-2">
+                        <div className="flex items-center gap-2 rtl:flex-row-reverse">
                           <RadioGroupItem value="option1" id="ltr-r1" />
                           <Label htmlFor="ltr-r1">Option 1</Label>
                         </div>
-                        <div className="flex items-center gap-2">
+                        <div className="flex items-center gap-2 rtl:flex-row-reverse">
                           <RadioGroupItem value="option2" id="ltr-r2" />
                           <Label htmlFor="ltr-r2">Option 2</Label>
                         </div>
@@ -622,11 +622,11 @@ export default function RadioGroupPage() {
                   <div dir="rtl">
                     <div className="p-4 border rounded-lg">
                       <RadioGroup defaultValue="option1">
-                        <div className="flex items-center gap-2">
+                        <div className="flex items-center gap-2 rtl:flex-row-reverse">
                           <RadioGroupItem value="option1" id="rtl-r1" />
                           <Label htmlFor="rtl-r1">الخيار الأول</Label>
                         </div>
-                        <div className="flex items-center gap-2">
+                        <div className="flex items-center gap-2 rtl:flex-row-reverse">
                           <RadioGroupItem value="option2" id="rtl-r2" />
                           <Label htmlFor="rtl-r2">الخيار الثاني</Label>
                         </div>

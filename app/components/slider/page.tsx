@@ -249,7 +249,7 @@ export default function SliderPage() {
           <h2 className="text-2xl font-bold tracking-tight mb-6">Preview</h2>
           <ComponentShowcase>
             <ComponentShowcase.Demo>
-              <div className="w-full max-w-md">
+              <div className="w-full max-w-lg">
                 <Slider defaultValue={[50]} max={100} step={1} />
               </div>
             </ComponentShowcase.Demo>

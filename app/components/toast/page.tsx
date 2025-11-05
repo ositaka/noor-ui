@@ -279,6 +279,26 @@ export default function ToastPage() {
           </div>
         </section>
 
+        {/* RTL Support Example */}
+        <section className="mb-16">
+          <h2 className="text-2xl font-bold tracking-tight mb-6">RTL Support Example</h2>
+          <p className="text-muted-foreground mb-6">
+            The Toast component automatically adapts to RTL layouts. Toasts appear from the correct corner and content flows naturally.
+          </p>
+          <ComponentShowcase.Comparison ltrLabel="LTR (English)" rtlLabel="RTL (العربية)">
+            <Button
+              onClick={() => {
+                toast({
+                  title: 'Message sent',
+                  description: 'Your message has been delivered successfully.',
+                })
+              }}
+            >
+              Show Notification
+            </Button>
+          </ComponentShowcase.Comparison>
+        </section>
+
         {/* Props */}
         <section className="mb-16">
           <h2 className="text-2xl font-bold tracking-tight mb-6">Props</h2>
