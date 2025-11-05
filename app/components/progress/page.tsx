@@ -122,7 +122,7 @@ export default function ProgressPage() {
           <h2 className="text-2xl font-bold tracking-tight mb-6">Preview</h2>
           <ComponentShowcase>
             <ComponentShowcase.Demo>
-              <Progress value={66} className="w-[60%]" />
+              <Progress value={66} className="w-full max-w-md" />
             </ComponentShowcase.Demo>
           </ComponentShowcase>
         </section>

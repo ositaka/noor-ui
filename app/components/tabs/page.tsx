@@ -263,6 +263,50 @@ export default function TabsPage() {
           </div>
         </section>
 
+        {/* RTL Support Example */}
+        <section className="mb-16">
+          <h2 className="text-2xl font-bold tracking-tight mb-6">RTL Support Example</h2>
+          <p className="text-muted-foreground mb-6">
+            The Tabs component automatically adapts to RTL layouts. Tab order and arrow key navigation follow the reading direction.
+          </p>
+          <ComponentShowcase.Comparison ltrLabel="LTR (English)" rtlLabel="RTL (العربية)">
+            <Tabs defaultValue="overview" className="w-full max-w-md">
+              <TabsList className="grid w-full grid-cols-3">
+                <TabsTrigger value="overview">Overview</TabsTrigger>
+                <TabsTrigger value="analytics">Analytics</TabsTrigger>
+                <TabsTrigger value="reports">Reports</TabsTrigger>
+              </TabsList>
+              <TabsContent value="overview" className="mt-4">
+                <Card>
+                  <CardContent className="p-6">
+                    <p className="text-sm text-muted-foreground">
+                      View your account overview and summary information.
+                    </p>
+                  </CardContent>
+                </Card>
+              </TabsContent>
+              <TabsContent value="analytics" className="mt-4">
+                <Card>
+                  <CardContent className="p-6">
+                    <p className="text-sm text-muted-foreground">
+                      Analyze your usage patterns and trends.
+                    </p>
+                  </CardContent>
+                </Card>
+              </TabsContent>
+              <TabsContent value="reports" className="mt-4">
+                <Card>
+                  <CardContent className="p-6">
+                    <p className="text-sm text-muted-foreground">
+                      Generate and download detailed reports.
+                    </p>
+                  </CardContent>
+                </Card>
+              </TabsContent>
+            </Tabs>
+          </ComponentShowcase.Comparison>
+        </section>
+
         {/* Props */}
         <section className="mb-16">
           <h2 className="text-2xl font-bold tracking-tight mb-4">Props</h2>

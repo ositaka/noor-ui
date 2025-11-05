@@ -242,6 +242,44 @@ export default function AvatarPage() {
           </div>
         </section>
 
+        {/* RTL Support Example */}
+        <section className="mb-16">
+          <h2 className="text-2xl font-bold tracking-tight mb-6">RTL Support Example</h2>
+          <p className="text-muted-foreground mb-6">
+            The Avatar component automatically adapts to RTL layouts. Avatar groups respect reading direction and overlapping order follows text direction.
+          </p>
+          <ComponentShowcase.Comparison ltrLabel="LTR (English)" rtlLabel="RTL (العربية)">
+            <div className="space-y-6">
+              <div className="flex items-center gap-4">
+                <Avatar>
+                  <AvatarImage src="https://github.com/shadcn.png" />
+                  <AvatarFallback>JD</AvatarFallback>
+                </Avatar>
+                <div className="space-y-1">
+                  <p className="text-sm font-medium">John Doe</p>
+                  <p className="text-sm text-muted-foreground">john@example.com</p>
+                </div>
+              </div>
+              <div className="flex -space-x-4">
+                <Avatar className="border-2 border-background">
+                  <AvatarImage src="https://github.com/shadcn.png" />
+                  <AvatarFallback>CN</AvatarFallback>
+                </Avatar>
+                <Avatar className="border-2 border-background">
+                  <AvatarImage src="https://github.com/vercel.png" />
+                  <AvatarFallback>VC</AvatarFallback>
+                </Avatar>
+                <Avatar className="border-2 border-background">
+                  <AvatarFallback>AB</AvatarFallback>
+                </Avatar>
+                <Avatar className="border-2 border-background">
+                  <AvatarFallback>+5</AvatarFallback>
+                </Avatar>
+              </div>
+            </div>
+          </ComponentShowcase.Comparison>
+        </section>
+
         {/* Props */}
         <section className="mb-16">
           <h2 className="text-2xl font-bold tracking-tight mb-4">Props</h2>

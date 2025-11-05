@@ -297,6 +297,42 @@ export default function PopoverPage() {
           </div>
         </section>
 
+        {/* RTL Support Example */}
+        <section className="mb-16">
+          <h2 className="text-2xl font-bold tracking-tight mb-6">RTL Support Example</h2>
+          <p className="text-muted-foreground mb-6">
+            The Popover component automatically adapts to RTL layouts. Positioning mirrors correctly and content flows naturally.
+          </p>
+          <ComponentShowcase.Comparison ltrLabel="LTR (English)" rtlLabel="RTL (العربية)">
+            <Popover>
+              <PopoverTrigger asChild>
+                <Button variant="outline">
+                  <Settings className="me-2 h-4 w-4" />
+                  Quick Settings
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-80">
+                <div className="space-y-4">
+                  <div className="space-y-2">
+                    <h4 className="font-medium leading-none">Display Settings</h4>
+                    <p className="text-sm text-muted-foreground">
+                      Adjust your display preferences.
+                    </p>
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="brightness">Brightness</Label>
+                    <Input id="brightness" defaultValue="75%" />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="contrast">Contrast</Label>
+                    <Input id="contrast" defaultValue="100%" />
+                  </div>
+                </div>
+              </PopoverContent>
+            </Popover>
+          </ComponentShowcase.Comparison>
+        </section>
+
         {/* Props */}
         <section className="mb-16">
           <h2 className="text-2xl font-bold tracking-tight mb-4">Props</h2>

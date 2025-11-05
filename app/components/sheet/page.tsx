@@ -334,6 +334,54 @@ export default function SheetPage() {
           </div>
         </section>
 
+        {/* RTL Support Example */}
+        <section className="mb-16">
+          <h2 className="text-2xl font-bold tracking-tight mb-6">RTL Support Example</h2>
+          <p className="text-muted-foreground mb-6">
+            The Sheet component automatically adapts to RTL layouts. The side properties (start/end) mirror correctly and slide animations flow naturally.
+          </p>
+          <ComponentShowcase.Comparison ltrLabel="LTR (English)" rtlLabel="RTL (العربية)">
+            <div className="flex gap-4">
+              <Sheet>
+                <SheetTrigger asChild>
+                  <Button variant="outline">Open from Start</Button>
+                </SheetTrigger>
+                <SheetContent side="start">
+                  <SheetHeader>
+                    <SheetTitle>Navigation Menu</SheetTitle>
+                    <SheetDescription>
+                      Browse through the menu options.
+                    </SheetDescription>
+                  </SheetHeader>
+                  <div className="py-4">
+                    <p className="text-sm text-muted-foreground">
+                      This sheet slides from the start side.
+                    </p>
+                  </div>
+                </SheetContent>
+              </Sheet>
+              <Sheet>
+                <SheetTrigger asChild>
+                  <Button variant="outline">Open from End</Button>
+                </SheetTrigger>
+                <SheetContent side="end">
+                  <SheetHeader>
+                    <SheetTitle>Settings Panel</SheetTitle>
+                    <SheetDescription>
+                      Configure your preferences.
+                    </SheetDescription>
+                  </SheetHeader>
+                  <div className="py-4">
+                    <p className="text-sm text-muted-foreground">
+                      This sheet slides from the end side.
+                    </p>
+                  </div>
+                </SheetContent>
+              </Sheet>
+            </div>
+          </ComponentShowcase.Comparison>
+        </section>
+
         {/* Props */}
         <section className="mb-16">
           <h2 className="text-2xl font-bold tracking-tight mb-4">Props</h2>

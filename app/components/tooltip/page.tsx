@@ -341,6 +341,40 @@ export default function TooltipPage() {
           </div>
         </section>
 
+        {/* RTL Support Example */}
+        <section className="mb-16">
+          <h2 className="text-2xl font-bold tracking-tight mb-6">RTL Support Example</h2>
+          <p className="text-muted-foreground mb-6">
+            The Tooltip component automatically adapts to RTL layouts. Positioning mirrors correctly and content flows naturally.
+          </p>
+          <ComponentShowcase.Comparison ltrLabel="LTR (English)" rtlLabel="RTL (العربية)">
+            <div className="flex gap-4">
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button variant="outline">
+                    <Info className="me-2 h-4 w-4" />
+                    Help
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Click here for more information</p>
+                </TooltipContent>
+              </Tooltip>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button variant="outline">
+                    <Settings className="me-2 h-4 w-4" />
+                    Settings
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Configure your preferences</p>
+                </TooltipContent>
+              </Tooltip>
+            </div>
+          </ComponentShowcase.Comparison>
+        </section>
+
         {/* Props */}
         <section className="mb-16">
           <h2 className="text-2xl font-bold tracking-tight mb-6">Props</h2>
