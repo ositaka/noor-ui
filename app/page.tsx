@@ -10,6 +10,7 @@ import { Separator } from '@/components/ui/separator'
 import { DirectionToggle } from '@/components/docs/direction-toggle'
 import { ThemeToggle } from '@/components/docs/theme-toggle'
 import { ThemeSwitcher } from '@/components/docs/theme-switcher'
+import { GlobalSearch } from '@/components/docs/global-search'
 import {
   Palette,
   Globe,
@@ -58,6 +59,7 @@ export default function HomePage() {
             </Link>
           </nav>
           <div className="flex items-center gap-2">
+            <GlobalSearch />
             <ThemeToggle />
             <DirectionToggle />
           </div>
