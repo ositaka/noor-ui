@@ -1,0 +1,230 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Import fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 239 84% 67%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 174 72% 56%;
+    --secondary-foreground: 174 100% 10%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 239 84% 67%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 239 84% 67%;
+    --primary-foreground: 222.2 84% 4.9%;
+    --secondary: 174 72% 56%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 239 84% 67%;
+  }
+
+  /* Minimal theme */
+  .theme-minimal {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 10%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 10%;
+    --primary: 239 84% 67%;
+    --primary-foreground: 0 0% 100%;
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 45%;
+    --accent: 0 0% 96%;
+    --accent-foreground: 0 0% 10%;
+    --border: 0 0% 90%;
+    --radius: 0.25rem;
+  }
+
+  .theme-minimal.dark {
+    --background: 0 0% 10%;
+    --foreground: 0 0% 95%;
+    --card: 0 0% 12%;
+    --card-foreground: 0 0% 95%;
+    --muted: 0 0% 20%;
+    --muted-foreground: 0 0% 60%;
+    --accent: 0 0% 20%;
+    --accent-foreground: 0 0% 95%;
+    --border: 0 0% 20%;
+  }
+
+  /* Futuristic theme */
+  .theme-futuristic {
+    --background: 240 10% 8%;
+    --foreground: 0 0% 95%;
+    --card: 240 10% 10%;
+    --card-foreground: 0 0% 95%;
+    --primary: 270 80% 60%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 190 80% 50%;
+    --secondary-foreground: 240 10% 8%;
+    --muted: 240 10% 15%;
+    --muted-foreground: 0 0% 65%;
+    --accent: 270 80% 60%;
+    --accent-foreground: 0 0% 100%;
+    --border: 240 10% 20%;
+    --radius: 0.75rem;
+  }
+
+  .theme-futuristic.dark {
+    --background: 240 10% 5%;
+    --foreground: 0 0% 98%;
+    --card: 240 10% 8%;
+    --muted: 240 10% 12%;
+    --border: 240 10% 15%;
+  }
+
+  /* Cozy theme */
+  .theme-cozy {
+    --background: 35 20% 96%;
+    --foreground: 25 25% 15%;
+    --card: 0 0% 100%;
+    --card-foreground: 25 25% 15%;
+    --primary: 25 85% 55%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 35 60% 60%;
+    --secondary-foreground: 25 25% 15%;
+    --muted: 35 20% 90%;
+    --muted-foreground: 25 10% 40%;
+    --accent: 35 60% 85%;
+    --accent-foreground: 25 25% 15%;
+    --border: 35 20% 85%;
+    --radius: 1rem;
+  }
+
+  .theme-cozy.dark {
+    --background: 25 15% 12%;
+    --foreground: 35 20% 95%;
+    --card: 25 15% 15%;
+    --card-foreground: 35 20% 95%;
+    --muted: 25 10% 20%;
+    --muted-foreground: 35 10% 65%;
+    --accent: 25 20% 20%;
+    --accent-foreground: 35 20% 95%;
+    --border: 25 10% 25%;
+  }
+
+  /* Artistic theme */
+  .theme-artistic {
+    --background: 40 30% 98%;
+    --foreground: 0 0% 10%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 10%;
+    --primary: 280 60% 50%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 45 100% 50%;
+    --secondary-foreground: 0 0% 10%;
+    --muted: 40 20% 94%;
+    --muted-foreground: 0 0% 40%;
+    --accent: 280 60% 95%;
+    --accent-foreground: 280 60% 20%;
+    --border: 0 0% 88%;
+    --radius: 0.125rem;
+  }
+
+  .theme-artistic.dark {
+    --background: 0 0% 8%;
+    --foreground: 40 20% 95%;
+    --card: 0 0% 10%;
+    --card-foreground: 40 20% 95%;
+    --primary: 280 60% 60%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 60%;
+    --accent: 280 60% 15%;
+    --accent-foreground: 280 60% 90%;
+    --border: 0 0% 18%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: 'rlig' 1, 'calt' 1;
+  }
+
+  /* RTL support */
+  [dir='rtl'] {
+    font-family: 'IBM Plex Sans Arabic', sans-serif;
+  }
+
+  [dir='ltr'] {
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  /* Accessibility: Respect motion preferences */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* Focus visible styles */
+  *:focus-visible {
+    @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
+  }
+
+  /* Remove default focus outline */
+  *:focus {
+    @apply outline-none;
+  }
+}
+
+@layer utilities {
+  /* RTL-aware utilities */
+  .start-0 {
+    inset-inline-start: 0;
+  }
+
+  .end-0 {
+    inset-inline-end: 0;
+  }
+
+  /* Text alignment utilities */
+  .text-start {
+    text-align: start;
+  }
+
+  .text-end {
+    text-align: end;
+  }
+}
