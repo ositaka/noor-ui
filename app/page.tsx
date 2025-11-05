@@ -44,6 +44,9 @@ export default function HomePage() {
             <Link href="/" className="text-sm font-medium transition-colors hover:text-primary">
               {t.nav.home}
             </Link>
+            <Link href="/getting-started" className="text-sm font-medium transition-colors hover:text-primary">
+              {t.nav.getStarted}
+            </Link>
             <Link href="/components" className="text-sm font-medium transition-colors hover:text-primary">
               {t.nav.components}
             </Link>
@@ -85,7 +88,7 @@ export default function HomePage() {
                 </Link>
               </Button>
               <Button size="lg" variant="outline" asChild>
-                <Link href="/documentation">
+                <Link href="/getting-started">
                   {t.home.hero.cta.secondary}
                 </Link>
               </Button>
@@ -246,6 +249,7 @@ export default function HomePage() {
             <div>
               <h4 className="font-semibold mb-4">Documentation</h4>
               <ul className="space-y-2 text-sm text-muted-foreground">
+                <li><Link href="/getting-started" className="hover:text-foreground transition-colors">Getting Started</Link></li>
                 <li><Link href="/components" className="hover:text-foreground transition-colors">Components</Link></li>
                 <li><Link href="/tokens" className="hover:text-foreground transition-colors">Design Tokens</Link></li>
                 <li><Link href="/themes" className="hover:text-foreground transition-colors">Themes</Link></li>
