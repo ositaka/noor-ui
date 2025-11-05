@@ -7,7 +7,6 @@ import { Card, CardContent } from '@/components/ui/card'
 import {
   Tooltip,
   TooltipContent,
-  TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip'
 import { DirectionToggle } from '@/components/docs/direction-toggle'
@@ -68,21 +67,19 @@ export default function RootLayout({ children }) {
 const basicUsageCode = `import {
   Tooltip,
   TooltipContent,
-  TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip'
 import { Button } from '@/components/ui/button'
 
-<TooltipProvider>
-  <Tooltip>
-    <TooltipTrigger asChild>
-      <Button variant="outline">Hover me</Button>
-    </TooltipTrigger>
-    <TooltipContent>
-      <p>Add to library</p>
-    </TooltipContent>
-  </Tooltip>
-</TooltipProvider>`
+// TooltipProvider is already set up globally in your layout
+<Tooltip>
+  <TooltipTrigger asChild>
+    <Button variant="outline">Hover me</Button>
+  </TooltipTrigger>
+  <TooltipContent>
+    <p>Add to library</p>
+  </TooltipContent>
+</Tooltip>`
 
 const sidesCode = `<div className="flex gap-4">
   <Tooltip>
@@ -178,16 +175,14 @@ export default function TooltipPage() {
           <h2 className="text-2xl font-bold tracking-tight mb-6">Preview</h2>
           <ComponentShowcase>
             <ComponentShowcase.Demo>
-              <TooltipProvider>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Button variant="outline">Hover me</Button>
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    <p>Add to library</p>
-                  </TooltipContent>
-                </Tooltip>
-              </TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button variant="outline">Hover me</Button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Add to library</p>
+                </TooltipContent>
+              </Tooltip>
             </ComponentShowcase.Demo>
           </ComponentShowcase>
         </section>
@@ -223,7 +218,6 @@ export default function TooltipPage() {
               <h3 className="text-lg font-semibold mb-4">Basic Tooltip</h3>
               <Card>
                 <CardContent className="p-6">
-                  <TooltipProvider>
                     <Tooltip>
                       <TooltipTrigger asChild>
                         <Button variant="outline">Hover me</Button>
@@ -232,7 +226,6 @@ export default function TooltipPage() {
                         <p>Add to library</p>
                       </TooltipContent>
                     </Tooltip>
-                  </TooltipProvider>
                 </CardContent>
               </Card>
               <div className="mt-4">
@@ -245,7 +238,6 @@ export default function TooltipPage() {
               <h3 className="text-lg font-semibold mb-4">Different Sides</h3>
               <Card>
                 <CardContent className="p-6">
-                  <TooltipProvider>
                     <div className="flex gap-4 flex-wrap">
                       <Tooltip>
                         <TooltipTrigger asChild>
@@ -283,7 +275,6 @@ export default function TooltipPage() {
                         </TooltipContent>
                       </Tooltip>
                     </div>
-                  </TooltipProvider>
                 </CardContent>
               </Card>
               <div className="mt-4">
@@ -296,7 +287,6 @@ export default function TooltipPage() {
               <h3 className="text-lg font-semibold mb-4">With Icon Buttons</h3>
               <Card>
                 <CardContent className="p-6">
-                  <TooltipProvider>
                     <div className="flex gap-2">
                       <Tooltip>
                         <TooltipTrigger asChild>
@@ -342,7 +332,6 @@ export default function TooltipPage() {
                         </TooltipContent>
                       </Tooltip>
                     </div>
-                  </TooltipProvider>
                 </CardContent>
               </Card>
               <div className="mt-4">

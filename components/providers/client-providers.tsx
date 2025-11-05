@@ -4,13 +4,18 @@ import * as React from 'react'
 import { DirectionProvider } from './direction-provider'
 import { DesignSystemProvider } from './design-system-provider'
 import { GlobalThemeSwitcher } from '@/components/docs/global-theme-switcher'
+import { Toaster } from '@/components/ui/toaster'
+import { TooltipProvider } from '@/components/ui/tooltip'
 
 export function ClientProviders({ children }: { children: React.ReactNode }) {
   return (
     <DirectionProvider>
       <DesignSystemProvider>
-        {children}
-        <GlobalThemeSwitcher />
+        <TooltipProvider>
+          {children}
+          <GlobalThemeSwitcher />
+          <Toaster />
+        </TooltipProvider>
       </DesignSystemProvider>
     </DirectionProvider>
   )

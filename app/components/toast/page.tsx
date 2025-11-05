@@ -10,7 +10,6 @@ import { ComponentShowcase } from '@/components/docs/component-showcase'
 import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
 import { useToast } from '@/hooks/use-toast'
-import { Toaster } from '@/components/ui/toaster'
 import { Sparkles } from 'lucide-react'
 
 const toastProps: PropDefinition[] = [
@@ -101,8 +100,6 @@ export default function ToastPage() {
 
   return (
     <div className="min-h-screen">
-      <Toaster />
-
       {/* Header */}
       <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container flex h-16 items-center justify-between">
