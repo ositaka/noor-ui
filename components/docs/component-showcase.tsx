@@ -11,6 +11,9 @@ import { copyToClipboard } from '@/lib/utils'
 interface ComponentShowcaseProps {
   children: React.ReactNode
   className?: string
+  title?: string
+  description?: string
+  code?: string
 }
 
 interface ComponentShowcaseDemoProps {
@@ -38,10 +41,70 @@ interface ComponentShowcaseCodeProps {
   title?: string
 }
 
-function ComponentShowcase({ children, className }: ComponentShowcaseProps) {
+function ComponentShowcase({ children, className, title, description, code }: ComponentShowcaseProps) {
+  const [showCode, setShowCode] = React.useState(false)
+  const [copied, setCopied] = React.useState(false)
+
+  const handleCopy = async () => {
+    if (code) {
+      const success = await copyToClipboard(code)
+      if (success) {
+        setCopied(true)
+        setTimeout(() => setCopied(false), 2000)
+      }
+    }
+  }
+
   return (
     <div className={cn('space-y-4', className)}>
-      {children}
+      {(title || description) && (
+        <div className="space-y-2">
+          {title && <h3 className="text-lg font-semibold">{title}</h3>}
+          {description && <p className="text-sm text-muted-foreground">{description}</p>}
+        </div>
+      )}
+      <Card>
+        <CardContent className="p-6">
+          <div className="flex items-center justify-center min-h-[200px]">
+            {children}
+          </div>
+        </CardContent>
+      </Card>
+      {code && (
+        <div className="space-y-2">
+          <div className="flex items-center justify-between">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setShowCode(!showCode)}
+              className="gap-2"
+            >
+              <Code2 className="h-4 w-4" />
+              {showCode ? 'Hide' : 'Show'} Code
+            </Button>
+            {showCode && (
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={handleCopy}
+                className="gap-2"
+              >
+                {copied ? <Check className="h-4 w-4 text-green-600" /> : <Copy className="h-4 w-4" />}
+                {copied ? 'Copied!' : 'Copy'}
+              </Button>
+            )}
+          </div>
+          {showCode && (
+            <Card>
+              <CardContent className="p-4">
+                <pre className="overflow-x-auto">
+                  <code className="text-sm font-mono">{code}</code>
+                </pre>
+              </CardContent>
+            </Card>
+          )}
+        </div>
+      )}
     </div>
   )
 }

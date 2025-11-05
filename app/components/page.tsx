@@ -19,6 +19,10 @@ import {
   Menu,
   Home,
   Sparkles,
+  AlertCircle,
+  MessageSquare,
+  Info,
+  Loader2,
 } from 'lucide-react'
 
 const componentCategories = [
@@ -44,6 +48,17 @@ const componentCategories = [
       { name: 'Switch', icon: CheckSquare, href: '/components/switch', status: 'ready' },
       { name: 'Slider', icon: CheckSquare, href: '/components/slider', status: 'ready' },
       { name: 'Textarea', icon: Type, href: '/components/textarea', status: 'ready' },
+    ],
+  },
+  {
+    name: 'Feedback',
+    description: 'Components for user notifications and feedback',
+    components: [
+      { name: 'Alert', icon: AlertCircle, href: '/components/alert', status: 'ready' },
+      { name: 'Toast', icon: MessageSquare, href: '/components/toast', status: 'ready' },
+      { name: 'Dialog', icon: MessageSquare, href: '/components/dialog', status: 'ready' },
+      { name: 'Tooltip', icon: Info, href: '/components/tooltip', status: 'ready' },
+      { name: 'Progress', icon: Loader2, href: '/components/progress', status: 'ready' },
     ],
   },
   {
