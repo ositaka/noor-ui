@@ -47,31 +47,41 @@ The template includes:
 - ✅ RTL-compliant classes
 - ✅ Usage notes and examples
 
-### 3. Radix UI Direction Handling
+### 3. Direction Context & Radix UI
 
-For Radix UI components (DropdownMenu, ContextMenu, Select, etc.), **ALWAYS** pass the `dir` prop:
+For direction-aware components, use the `useDirection()` hook from our direction provider:
 
 ```tsx
+import { useDirection } from '@/components/providers/direction-provider'
+
 const Component = (props) => {
-  const [dir, setDir] = React.useState<'ltr' | 'rtl'>('ltr')
+  const { direction, locale } = useDirection()
+  // direction: 'ltr' | 'rtl'
+  // locale: 'en' | 'ar'
 
-  React.useEffect(() => {
-    setDir(document.documentElement.dir as 'ltr' | 'rtl' || 'ltr')
-
-    const observer = new MutationObserver(() => {
-      setDir(document.documentElement.dir as 'ltr' | 'rtl' || 'ltr')
-    })
-
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ['dir'],
-    })
-
-    return () => observer.disconnect()
-  }, [])
-
-  return <RadixPrimitive.Root dir={dir} {...props} />
+  return <RadixPrimitive.Root dir={direction} {...props} />
 }
+```
+
+**Benefits:**
+- ✅ Centralized direction management
+- ✅ No MutationObserver setup in each component
+- ✅ Access to both direction and locale
+- ✅ Automatic font switching (Inter for English, IBM Plex Sans Arabic for Arabic)
+
+**Example: Direction-aware Tabs component**
+```tsx
+const TabsRoot = React.forwardRef<...>(({ dir, ...props }, ref) => {
+  const { direction } = useDirection()
+
+  return (
+    <TabsPrimitive.Root
+      ref={ref}
+      dir={dir || direction}  // Allow override, fallback to context
+      {...props}
+    />
+  )
+})
 ```
 
 ---
@@ -93,61 +103,57 @@ Quick overview:
 - [ ] Add TypeScript types
 
 #### 2. Create Documentation Page
-- [ ] Create `/app/components/[name]/page.tsx`
+- [ ] Create `/app/(docs)/components/[name]/page.tsx` in the (docs) route group
 - [ ] **CRITICAL: Add 'use client' directive at the top**
-- [ ] **CRITICAL: Include full page wrapper with header, breadcrumb, main**
+- [ ] **DO NOT** add manual header/footer - the (docs) layout provides these
 - [ ] Include: Preview, Installation, Usage, Examples, Props, Accessibility, RTL Considerations
 - [ ] Add interactive ComponentShowcase with LTR/RTL toggle
 - [ ] Show at least 2-3 real-world examples
 - [ ] Include mobile and desktop examples where relevant
 
-**Required Page Structure:**
+**Required Page Structure (Route Groups Pattern):**
 ```tsx
 'use client'
 
 import * as React from 'react'
 import Link from 'next/link'
-import { DirectionToggle } from '@/components/docs/direction-toggle'
-import { ThemeToggle } from '@/components/docs/theme-toggle'
-import { Sparkles } from 'lucide-react'
+import { ComponentShowcase } from '@/components/docs/component-showcase'
+import { PropsTable } from '@/components/docs/props-table'
+import { CodeBlock } from '@/components/docs/code-block'
+import { YourComponent } from '@/components/ui/your-component'
 
 export default function ComponentPage() {
   return (
     <div className="min-h-screen">
-      {/* Header */}
-      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur">
-        <div className="container flex h-16 items-center justify-between">
-          <Link href="/" className="flex items-center gap-2">
-            <Sparkles className="h-6 w-6 text-primary" />
-            <span className="text-xl font-bold">RTL Design</span>
-          </Link>
-          <div className="flex items-center gap-2">
-            <ThemeToggle />
-            <DirectionToggle />
-          </div>
-        </div>
-      </header>
-
       <main id="main-content" className="container py-12">
-        {/* Breadcrumb */}
-        <nav aria-label="Breadcrumb" className="mb-8">
-          <ol className="flex items-center gap-2 text-sm text-muted-foreground">
-            <li><Link href="/">Home</Link></li>
-            <li>/</li>
-            <li><Link href="/components">Components</Link></li>
-            <li>/</li>
-            <li className="text-foreground font-medium">ComponentName</li>
-          </ol>
-        </nav>
-
-        <div className="space-y-10 pb-16">
-          {/* Your content here */}
+        {/* Page Header */}
+        <div className="max-w-3xl mb-12">
+          <h1 className="text-4xl font-bold tracking-tight mb-4">Component Name</h1>
+          <p className="text-xl text-muted-foreground">
+            Brief description of the component and its purpose.
+          </p>
         </div>
+
+        {/* Component sections */}
+        <ComponentShowcase>
+          <ComponentShowcase.Demo>
+            <YourComponent />
+          </ComponentShowcase.Demo>
+        </ComponentShowcase>
+
+        <PropsTable props={[...]} />
+        <CodeBlock code="..." language="tsx" />
       </main>
     </div>
   )
 }
 ```
+
+**Why this structure?**
+- ✅ Header/footer provided by `app/(docs)/layout.tsx`
+- ✅ Cleaner code - no navigation boilerplate
+- ✅ DRY principle - layout changes propagate automatically
+- ✅ Consistent navigation across all doc pages
 
 #### 3. Update Navigation & Search
 - [ ] **Add to `/app/components/page.tsx`** - Add to appropriate category
@@ -274,22 +280,53 @@ Before committing component work, verify:
 
 ```
 /app
-  /components         # Component documentation pages
-    /[name]/page.tsx  # Individual component docs
-    page.tsx          # Components index (UPDATE THIS!)
-  /documentation      # General documentation
-  /examples           # Real-world examples
-    page.tsx          # Examples index (UPDATE THIS!)
+  layout.tsx                        # Root layout with providers
+  page.tsx                          # Homepage
+
+  /(docs)/                          # Route group for documentation
+    layout.tsx                      # Shared header/footer layout
+    /components/                    # Component documentation (32 pages)
+      page.tsx                      # Components index (UPDATE THIS!)
+      /[name]/page.tsx              # Individual component docs
+    /documentation/                 # Guides (installation, RTL, etc.)
+    /tokens/                        # Design tokens reference
+    /themes/                        # Theme customization
+    /getting-started/               # Getting started guide
+    /rtl-guide/                     # RTL development guide
+    /examples/                      # Examples listing page
+
+  /examples/                        # Standalone examples (no layout)
+    /dashboard/page.tsx             # Dashboard example
+    /ecommerce/page.tsx             # E-commerce example
+    /registration/page.tsx          # Registration form example
+
 /components
-  /ui                 # UI components library
-  /docs               # Documentation components (ShowCase, PropsTable, etc.)
-  /providers          # Context providers
+  /ui/                              # UI components library (32 components)
+  /layout/                          # Layout components
+    site-header.tsx                 # Global navigation
+    site-footer.tsx                 # Global footer
+  /docs/                            # Documentation components
+    component-showcase.tsx          # Live demo with LTR/RTL toggle
+    props-table.tsx                 # API documentation
+    code-block.tsx                  # Syntax highlighting
+    global-search.tsx               # Command palette (Cmd+K)
+  /providers/                       # Context providers
+    direction-provider.tsx          # RTL/LTR and locale context
+    design-system-provider.tsx      # Theme management
+    client-providers.tsx            # Combined providers
+
 /lib
-  tokens.ts           # Design tokens
-  i18n.ts            # Internationalization
-  utils.ts           # Utilities
-  search-data.ts     # Search data (UPDATE THIS!)
+  tokens.ts                         # Design tokens
+  i18n.ts                          # Internationalization
+  utils.ts                         # Utilities
+  search-data.ts                   # Search data (UPDATE THIS!)
 ```
+
+**Key Points:**
+- `(docs)` is a route group - invisible in URLs, provides shared layout
+- Standalone examples live outside (docs) for full-screen experience
+- All doc pages automatically get header/footer from layout
+- SiteHeader includes command palette for quick navigation
 
 ---
 
@@ -298,16 +335,22 @@ Before committing component work, verify:
 ### ❌ DON'T:
 - Use directional classes (`ml-`, `mr-`, `pl-`, `pr-`)
 - Use text alignment classes (`text-left`, `text-right`)
+- Add manual header/footer to doc pages (use route group layout)
+- Set up MutationObserver for direction (use `useDirection()` hook)
 - Forget to update search-data.ts when adding components
 - Forget to update components index page
 - Create components without documentation
 - Skip mobile testing
 - Hardcode colors or spacing
 - Use `position: left` or `position: right` (use `start`/`end`)
+- Create new pages outside the (docs) route group for documentation
 
 ### ✅ DO:
 - Use logical properties (`ms-`, `me-`, `ps-`, `pe-`)
 - Use `text-start` and `text-end`
+- Place documentation pages in the (docs) route group
+- Use `useDirection()` hook for direction-aware components
+- Use CodeBlock component for syntax highlighting
 - Update ALL navigation/search when adding features
 - Test in both LTR and RTL modes
 - Use design tokens via Tailwind
@@ -349,18 +392,27 @@ chore: Update search data with new components
 
 ## 🎯 Current Project State
 
-**Component Count:** 30 production-ready components
-**Documentation Pages:** 30/30 components documented
-**Examples:** 1 (Registration Form) + 3 planned
-**Themes:** 4 (Minimal, Futuristic, Cozy, Artistic)
+**Component Count:** 32 production-ready components ✅
+**Documentation Pages:** 32/32 components documented ✅
+**Examples:** 3 complete (Registration Form, Dashboard, E-commerce) ✅
+**Themes:** 4 (Minimal, Futuristic, Cozy, Artistic) ✅
+**Architecture:** Route groups with shared layouts ✅
 
 ### Component Categories:
 1. **Core** (7): Button, Card, Input, Label, Badge, Separator, Avatar
-2. **Forms** (6): Checkbox, Radio Group, Select, Switch, Slider, Textarea
+2. **Forms** (7): Form, Checkbox, Radio Group, Select, Switch, Slider, Textarea
 3. **Data Display** (2): Table, Command
 4. **Feedback** (5): Alert, Toast, Dialog, Tooltip, Progress
-5. **Navigation** (5): Tabs, Breadcrumb, Pagination, Dropdown Menu, Context Menu
-6. **Overlays & Layout** (4): Sheet, Accordion, Collapsible, Popover
+5. **Navigation** (5): Tabs (direction-aware), Breadcrumb, Pagination, Dropdown Menu, Context Menu
+6. **Overlays & Layout** (5): Sheet, Accordion, Collapsible, Popover, Skeleton
+
+### Recent Improvements (November 2025):
+- ✅ Refactored to use Next.js route groups with shared layouts
+- ✅ Direction-aware Tabs component with Radix UI integration
+- ✅ Bilingual Dashboard and E-commerce examples
+- ✅ CodeBlock component with syntax highlighting
+- ✅ Command palette (Cmd+K) for global navigation
+- ✅ All documentation pages use shared layout (DRY principle)
 
 ---
 
