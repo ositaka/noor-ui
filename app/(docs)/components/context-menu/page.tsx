@@ -377,7 +377,7 @@ export default function ContextMenuPage() {
           <Card className="mt-6">
             <CardContent className="p-6">
               <p className="text-sm text-muted-foreground">
-                This component is built on top of Radix UI's Context Menu primitive. For a complete
+                This component is built on top of Radix UI&apos;s Context Menu primitive. For a complete
                 list of props for each sub-component, refer to the{' '}
                 <a
                   href="https://www.radix-ui.com/docs/primitives/components/context-menu"

@@ -532,7 +532,7 @@ export default function TablePage() {
               <div>
                 <h3 className="font-semibold mb-2">Table Caption</h3>
                 <p className="text-muted-foreground">
-                  Always include a TableCaption to describe the table's purpose for screen reader users.
+                  Always include a TableCaption to describe the table&apos;s purpose for screen reader users.
                   The caption can be visually hidden if needed while remaining accessible.
                 </p>
               </div>
@@ -541,7 +541,7 @@ export default function TablePage() {
                 <h3 className="font-semibold mb-2">Column Headers</h3>
                 <p className="text-muted-foreground">
                   TableHead components render as th elements, which are automatically associated with
-                  their column's cells by assistive technologies.
+                  their column&apos;s cells by assistive technologies.
                 </p>
               </div>
               <Separator />

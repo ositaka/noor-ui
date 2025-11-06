@@ -43,6 +43,7 @@ const STEP_LABELS = {
   address: { en: 'Address', ar: 'العنوان' },
   preferences: { en: 'Preferences', ar: 'التفضيلات' },
   review: { en: 'Review', ar: 'المراجعة' },
+  success: { en: 'Success', ar: 'نجح' },
 }
 
 export default function RegistrationPage() {
@@ -298,6 +299,7 @@ export default function RegistrationPage() {
                 )}
                 {currentStep === 'review' && (
                   <ReviewStep
+                    initialValues={formData}
                     data={formData}
                     onSubmit={handleStepSubmit}
                     onBack={goToPreviousStep}

@@ -276,7 +276,7 @@ export default function HomePage() {
           </div>
           <Separator className="my-8" />
           <div className="text-center text-sm text-muted-foreground">
-            © 2024 RTL Design System. Built with Next.js, TypeScript, and Tailwind CSS.
+            © 2025 RTL Design System. Built with Next.js, TypeScript, and Tailwind CSS.
           </div>
         </div>
       </footer>
