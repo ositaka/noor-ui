@@ -53,8 +53,6 @@ const buttonProps: PropDefinition[] = [
 const installCode = `npm install @rtl-design-system/core`
 
 const basicUsageCode = `import { Button } from '@/components/ui/button'
-import { SiteHeader } from '@/components/layout/site-header'
-import { SiteFooter } from '@/components/layout/site-footer'
 
 <Button variant="primary">
   Click me

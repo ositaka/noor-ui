@@ -7,6 +7,8 @@ import { DirectionToggle } from '@/components/docs/direction-toggle'
 import { ThemeToggle } from '@/components/docs/theme-toggle'
 import { Sparkles, Copy, Check } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { SiteHeader } from '@/components/layout/site-header'
+import { SiteFooter } from '@/components/layout/site-footer'
 import { tokens } from '@/lib/tokens'
 import { copyToClipboard } from '@/lib/utils'
 
@@ -74,22 +76,10 @@ const TypographyExample = ({ size, config }: { size: string; config: readonly [s
 
 export default function TokensPage() {
   return (
-    <div className="min-h-screen">
-      {/* Header */}
-      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container flex h-16 items-center justify-between">
-          <Link href="/" className="flex items-center gap-2">
-            <Sparkles className="h-6 w-6 text-primary" />
-            <span className="text-xl font-bold">RTL Design</span>
-          </Link>
-          <div className="flex items-center gap-2">
-            <ThemeToggle />
-            <DirectionToggle />
-          </div>
-        </div>
-      </header>
+    <div className="min-h-screen flex flex-col">
+      <SiteHeader />
 
-      <main id="main-content" className="container py-12">
+      <main id="main-content" className="flex-1 container py-12">
         {/* Page Header */}
         <div className="max-w-3xl mb-12">
           <h1 className="text-4xl font-bold tracking-tight mb-4">Design Tokens</h1>
@@ -367,6 +357,8 @@ export default function TokensPage() {
           </Card>
         </section>
       </main>
+
+      <SiteFooter />
     </div>
   )
 }

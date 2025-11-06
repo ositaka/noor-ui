@@ -59,8 +59,6 @@ export default function RootLayout({ children }) {
 
 const basicUsageCode = `import { useToast } from '@/hooks/use-toast'
 import { Button } from '@/components/ui/button'
-import { SiteHeader } from '@/components/layout/site-header'
-import { SiteFooter } from '@/components/layout/site-footer'
 
 function MyComponent() {
   const { toast } = useToast()

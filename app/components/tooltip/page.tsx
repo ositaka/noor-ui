@@ -70,8 +70,6 @@ const basicUsageCode = `import {
   TooltipTrigger,
 } from '@/components/ui/tooltip'
 import { Button } from '@/components/ui/button'
-import { SiteHeader } from '@/components/layout/site-header'
-import { SiteFooter } from '@/components/layout/site-footer'
 
 // TooltipProvider is already set up globally in your layout
 <Tooltip>

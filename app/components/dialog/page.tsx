@@ -56,8 +56,6 @@ const basicUsageCode = `import {
   DialogTrigger,
 } from '@/components/ui/dialog'
 import { Button } from '@/components/ui/button'
-import { SiteHeader } from '@/components/layout/site-header'
-import { SiteFooter } from '@/components/layout/site-footer'
 
 <Dialog>
   <DialogTrigger asChild>
