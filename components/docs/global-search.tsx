@@ -2,7 +2,7 @@
 
 import * as React from 'react'
 import { useRouter } from 'next/navigation'
-import { Search, FileText, Component, Palette, Sparkles } from 'lucide-react'
+import { Search, FileText, Component, Palette, Sparkles, Layers } from 'lucide-react'
 import {
   CommandDialog,
   CommandEmpty,
@@ -19,6 +19,7 @@ const categoryIcons = {
   Documentation: FileText,
   Token: Palette,
   Theme: Sparkles,
+  Example: Layers,
 }
 
 export function GlobalSearch() {

@@ -51,7 +51,7 @@ function GlobalThemeSwitcherContent({
       {/* Theme Picker Panel */}
       {isOpen && (
         <div className="fixed bottom-24 end-6 z-50 animate-in slide-in-from-bottom-2">
-          <Card className="w-72 shadow-xl">
+          <Card className="w-fit shadow-xl">
             <CardContent className="p-4">
               <h3 className="font-semibold mb-3 text-sm">Design Theme</h3>
               <div className="grid gap-2">

@@ -4,8 +4,25 @@ import * as React from 'react'
 import * as TabsPrimitive from '@radix-ui/react-tabs'
 
 import { cn } from '@/lib/utils'
+import { useDirection } from '@/components/providers/direction-provider'
 
-const Tabs = TabsPrimitive.Root
+const TabsRoot = React.forwardRef<
+  React.ElementRef<typeof TabsPrimitive.Root>,
+  React.ComponentPropsWithoutRef<typeof TabsPrimitive.Root>
+>(({ dir, ...props }, ref) => {
+  const { direction } = useDirection()
+
+  return (
+    <TabsPrimitive.Root
+      ref={ref}
+      dir={dir || direction}
+      {...props}
+    />
+  )
+})
+TabsRoot.displayName = 'Tabs'
+
+const Tabs = TabsRoot
 
 const TabsList = React.forwardRef<
   React.ElementRef<typeof TabsPrimitive.List>,

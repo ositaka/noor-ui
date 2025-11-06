@@ -105,6 +105,59 @@ const TableCaption = React.forwardRef<
 ))
 TableCaption.displayName = "TableCaption"
 
+// Mobile-friendly responsive table wrapper
+interface ResponsiveTableProps extends React.HTMLAttributes<HTMLDivElement> {
+  headers: string[]
+  children: React.ReactNode
+}
+
+const ResponsiveTable = React.forwardRef<HTMLDivElement, ResponsiveTableProps>(
+  ({ headers, children, className, ...props }, ref) => {
+    return (
+      <div ref={ref} className={cn("", className)} {...props}>
+        {/* Desktop view - normal table */}
+        <div className="hidden md:block">
+          <Table>{children}</Table>
+        </div>
+
+        {/* Mobile view - stacked cards with labels */}
+        <div className="block md:hidden space-y-4">
+          {React.Children.map(children, (child) => {
+            // Extract TableBody children
+            if (React.isValidElement(child) && child.type === TableBody) {
+              return React.Children.map(child.props.children, (row, rowIndex) => {
+                if (React.isValidElement(row) && row.type === TableRow) {
+                  const cells = React.Children.toArray(row.props.children)
+                  return (
+                    <div key={rowIndex} className="border rounded-lg p-4 space-y-3">
+                      {cells.map((cell, cellIndex) => {
+                        if (React.isValidElement(cell) && cell.type === TableCell) {
+                          return (
+                            <div key={cellIndex} className="grid grid-cols-2 gap-2">
+                              <div className="font-medium text-muted-foreground text-sm">
+                                {headers[cellIndex]}
+                              </div>
+                              <div className="text-sm">{cell.props.children}</div>
+                            </div>
+                          )
+                        }
+                        return null
+                      })}
+                    </div>
+                  )
+                }
+                return null
+              })
+            }
+            return null
+          })}
+        </div>
+      </div>
+    )
+  }
+)
+ResponsiveTable.displayName = "ResponsiveTable"
+
 export {
   Table,
   TableHeader,
@@ -114,4 +167,5 @@ export {
   TableRow,
   TableCell,
   TableCaption,
+  ResponsiveTable,
 }

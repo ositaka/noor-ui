@@ -2,7 +2,7 @@ export interface SearchItem {
   title: string
   description: string
   href: string
-  category: 'Component' | 'Documentation' | 'Token' | 'Theme'
+  category: 'Component' | 'Documentation' | 'Token' | 'Theme' | 'Example'
   keywords?: string[]
 }
 
@@ -144,6 +144,13 @@ export const searchData: SearchItem[] = [
     keywords: ['separator', 'divider', 'line', 'hr'],
   },
   {
+    title: 'Form',
+    description: 'Form state management with validation',
+    href: '/components/form',
+    category: 'Component',
+    keywords: ['form', 'validation', 'input', 'submit', 'field', 'error', 'state'],
+  },
+  {
     title: 'Checkbox',
     description: 'Checkbox input component',
     href: '/components/checkbox',
@@ -221,6 +228,13 @@ export const searchData: SearchItem[] = [
     keywords: ['progress', 'loading', 'bar', 'status'],
   },
   {
+    title: 'Skeleton',
+    description: 'Loading placeholder component',
+    href: '/components/skeleton',
+    category: 'Component',
+    keywords: ['skeleton', 'loading', 'placeholder', 'shimmer', 'lazy'],
+  },
+  {
     title: 'Tabs',
     description: 'Tabbed navigation component',
     href: '/components/tabs',
@@ -268,6 +282,71 @@ export const searchData: SearchItem[] = [
     href: '/components/avatar',
     category: 'Component',
     keywords: ['avatar', 'profile', 'image', 'user'],
+  },
+  {
+    title: 'Table',
+    description: 'Data table with mobile-responsive layout',
+    href: '/components/table',
+    category: 'Component',
+    keywords: ['table', 'data', 'grid', 'rows', 'columns', 'mobile'],
+  },
+  {
+    title: 'Command',
+    description: 'Command palette / search interface',
+    href: '/components/command',
+    category: 'Component',
+    keywords: ['command', 'search', 'palette', 'finder'],
+  },
+  {
+    title: 'Dropdown Menu',
+    description: 'Dropdown menu with RTL support',
+    href: '/components/dropdown-menu',
+    category: 'Component',
+    keywords: ['dropdown', 'menu', 'actions', 'options', 'rtl'],
+  },
+  {
+    title: 'Context Menu',
+    description: 'Right-click context menu',
+    href: '/components/context-menu',
+    category: 'Component',
+    keywords: ['context', 'menu', 'right-click', 'actions', 'rtl'],
+  },
+  {
+    title: 'Collapsible',
+    description: 'Collapsible content sections',
+    href: '/components/collapsible',
+    category: 'Component',
+    keywords: ['collapsible', 'collapse', 'expand', 'toggle', 'accordion'],
+  },
+
+  // Examples
+  {
+    title: 'Examples',
+    description: 'Real-world usage examples and demos',
+    href: '/examples',
+    category: 'Example',
+    keywords: ['examples', 'demos', 'templates', 'patterns', 'showcase'],
+  },
+  {
+    title: 'Registration Form',
+    description: 'Multi-step registration form with validation',
+    href: '/examples/registration',
+    category: 'Example',
+    keywords: ['registration', 'form', 'multi-step', 'validation', 'signup', 'bilingual'],
+  },
+  {
+    title: 'Dashboard',
+    description: 'Analytics dashboard with charts and statistics',
+    href: '/examples/dashboard',
+    category: 'Example',
+    keywords: ['dashboard', 'analytics', 'charts', 'stats', 'metrics', 'data', 'visualization'],
+  },
+  {
+    title: 'E-commerce Product Page',
+    description: 'Product page with gallery, reviews, and cart',
+    href: '/examples/ecommerce',
+    category: 'Example',
+    keywords: ['ecommerce', 'product', 'shopping', 'cart', 'reviews', 'store', 'shop'],
   },
 
   // Other Pages
