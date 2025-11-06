@@ -299,7 +299,7 @@ export default function DashboardPage() {
                       {locale === 'ar' ? 'الإيرادات الشهرية لهذا العام' : 'Monthly revenue for this year'}
                     </CardDescription>
                   </div>
-                  <Tabs defaultValue="month" dir="ltr">
+                  <Tabs defaultValue="month">
                     <TabsList>
                       <TabsTrigger value="week">
                         {locale === 'ar' ? 'أسبوع' : 'Week'}

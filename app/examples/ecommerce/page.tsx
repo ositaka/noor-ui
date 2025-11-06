@@ -401,7 +401,7 @@ export default function EcommercePage() {
 
         {/* Product Details Tabs */}
         <div className="mt-12">
-          <Tabs defaultValue="description" dir="ltr">
+          <Tabs defaultValue="description">
             <TabsList className="w-full justify-start">
               <TabsTrigger value="description">
                 {locale === 'ar' ? 'الوصف' : 'Description'}
