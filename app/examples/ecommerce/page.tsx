@@ -20,8 +20,10 @@ import {
   Minus,
   Check,
 } from 'lucide-react'
+import { useDirection } from '@/components/providers/direction-provider'
 
 export default function EcommercePage() {
+  const { locale } = useDirection()
   const [quantity, setQuantity] = React.useState(1)
   const [selectedColor, setSelectedColor] = React.useState('black')
   const [selectedSize, setSelectedSize] = React.useState('M')
@@ -40,6 +42,7 @@ export default function EcommercePage() {
     inStock: true,
     sku: 'SW-S5-BLK-M',
     description: 'ساعة ذكية متطورة مع شاشة AMOLED فائقة الوضوح، مقاومة للماء حتى 50 متر، ومستشعرات صحية متقدمة لمراقبة معدل ضربات القلب والأكسجين في الدم. بطارية تدوم حتى 7 أيام مع الاستخدام العادي.',
+    descriptionEn: 'Advanced smart watch with ultra-clear AMOLED display, water resistant up to 50 meters, and advanced health sensors to monitor heart rate and blood oxygen. Battery lasts up to 7 days with normal usage.',
     features: [
       'شاشة AMOLED مقاس 1.4 بوصة',
       'مقاومة للماء حتى 50 متر',
@@ -47,6 +50,14 @@ export default function EcommercePage() {
       'GPS مدمج',
       'بطارية تدوم 7 أيام',
       'أكثر من 100 وضع رياضي',
+    ],
+    featuresEn: [
+      '1.4 inch AMOLED display',
+      'Water resistant up to 50 meters',
+      'Heart rate sensor',
+      'Built-in GPS',
+      '7-day battery life',
+      'Over 100 sports modes',
     ],
     specs: {
       'حجم الشاشة': '1.4 بوصة',
@@ -56,12 +67,20 @@ export default function EcommercePage() {
       'الاتصال': 'Bluetooth 5.2',
       'التوافق': 'iOS & Android',
     },
+    specsEn: {
+      'Display Size': '1.4 inch',
+      'Resolution': '454 × 454 pixels',
+      'Battery': '420 mAh',
+      'Weight': '45 grams',
+      'Connectivity': 'Bluetooth 5.2',
+      'Compatibility': 'iOS & Android',
+    },
   }
 
   const colors = [
-    { id: 'black', name: 'أسود', hex: '#000000' },
-    { id: 'silver', name: 'فضي', hex: '#C0C0C0' },
-    { id: 'gold', name: 'ذهبي', hex: '#FFD700' },
+    { id: 'black', name: 'أسود', nameEn: 'Black', hex: '#000000' },
+    { id: 'silver', name: 'فضي', nameEn: 'Silver', hex: '#C0C0C0' },
+    { id: 'gold', name: 'ذهبي', nameEn: 'Gold', hex: '#FFD700' },
   ]
 
   const sizes = ['S', 'M', 'L']
@@ -69,23 +88,29 @@ export default function EcommercePage() {
   const reviews = [
     {
       name: 'أحمد محمد',
+      nameEn: 'Ahmed Mohammed',
       rating: 5,
       date: '2025-10-28',
       comment: 'ساعة رائعة جداً، البطارية تدوم فعلاً 7 أيام كما هو معلن. التصميم أنيق والميزات ممتازة.',
+      commentEn: 'Excellent watch, the battery really lasts 7 days as advertised. Elegant design and excellent features.',
       helpful: 24,
     },
     {
       name: 'فاطمة علي',
+      nameEn: 'Fatima Ali',
       rating: 4,
       date: '2025-10-25',
       comment: 'منتج جيد ولكن كنت أتمنى أن تكون الشاشة أكبر قليلاً. بخلاف ذلك، كل شيء ممتاز.',
+      commentEn: 'Good product but I wish the screen was a bit larger. Otherwise, everything is excellent.',
       helpful: 18,
     },
     {
       name: 'محمد الشمري',
+      nameEn: 'Mohammed Al-Shammari',
       rating: 5,
       date: '2025-10-20',
       comment: 'أفضل ساعة ذكية استخدمتها! الدقة في قياس معدل ضربات القلب عالية جداً.',
+      commentEn: 'Best smart watch I\'ve ever used! The accuracy in measuring heart rate is very high.',
       helpful: 31,
     },
   ]
@@ -93,6 +118,7 @@ export default function EcommercePage() {
   const relatedProducts = [
     {
       name: 'سماعات لاسلكية',
+      nameEn: 'Wireless Earbuds',
       price: 599,
       originalPrice: 799,
       rating: 4.5,
@@ -100,18 +126,21 @@ export default function EcommercePage() {
     },
     {
       name: 'شاحن لاسلكي سريع',
+      nameEn: 'Fast Wireless Charger',
       price: 149,
       rating: 4.8,
       image: '⚡',
     },
     {
       name: 'حزام ساعة رياضي',
+      nameEn: 'Sports Watch Band',
       price: 89,
       rating: 4.3,
       image: '⌚',
     },
     {
       name: 'واقي شاشة زجاجي',
+      nameEn: 'Glass Screen Protector',
       price: 49,
       rating: 4.6,
       image: '🛡️',
@@ -130,7 +159,11 @@ export default function EcommercePage() {
   ]
 
   const handleAddToCart = () => {
-    alert(`تمت إضافة ${quantity} من المنتج إلى السلة!`)
+    const message =
+      locale === 'ar'
+        ? `تمت إضافة ${quantity} من المنتج إلى السلة!`
+        : `Added ${quantity} item(s) to cart!`
+    alert(message)
   }
 
   return (
@@ -170,15 +203,19 @@ export default function EcommercePage() {
             {/* Title & Rating */}
             <div>
               <div className="flex items-center gap-2 mb-2">
-                <Badge>جديد</Badge>
-                <Badge variant="secondary">{product.discount}% خصم</Badge>
+                <Badge>{locale === 'ar' ? 'جديد' : 'New'}</Badge>
+                <Badge variant="secondary">
+                  {product.discount}% {locale === 'ar' ? 'خصم' : 'OFF'}
+                </Badge>
                 {product.inStock && (
                   <Badge variant="outline" className="text-green-600">
-                    متوفر
+                    {locale === 'ar' ? 'متوفر' : 'In Stock'}
                   </Badge>
                 )}
               </div>
-              <h1 className="text-3xl font-bold mb-2">{product.name}</h1>
+              <h1 className="text-3xl font-bold mb-2">
+                {locale === 'ar' ? product.name : product.nameEn}
+              </h1>
               <div className="flex items-center gap-4 text-sm">
                 <div className="flex items-center gap-1">
                   <div className="flex">
@@ -196,7 +233,7 @@ export default function EcommercePage() {
                   <span className="font-medium">{product.rating}</span>
                 </div>
                 <span className="text-muted-foreground">
-                  ({product.reviewCount} تقييم)
+                  ({product.reviewCount} {locale === 'ar' ? 'تقييم' : 'reviews'})
                 </span>
                 <span className="text-muted-foreground">SKU: {product.sku}</span>
               </div>
@@ -207,13 +244,16 @@ export default function EcommercePage() {
             {/* Price */}
             <div className="space-y-2">
               <div className="flex items-baseline gap-3">
-                <span className="text-4xl font-bold">{product.price} ر.س</span>
+                <span className="text-4xl font-bold">
+                  {product.price} {locale === 'ar' ? 'ر.س' : 'SAR'}
+                </span>
                 <span className="text-2xl text-muted-foreground line-through">
-                  {product.originalPrice} ر.س
+                  {product.originalPrice} {locale === 'ar' ? 'ر.س' : 'SAR'}
                 </span>
               </div>
               <p className="text-sm text-green-600 font-medium">
-                وفر {product.originalPrice - product.price} ر.س
+                {locale === 'ar' ? 'وفر' : 'Save'} {product.originalPrice - product.price}{' '}
+                {locale === 'ar' ? 'ر.س' : 'SAR'}
               </p>
             </div>
 
@@ -222,7 +262,12 @@ export default function EcommercePage() {
             {/* Color Selection */}
             <div className="space-y-3">
               <label className="text-sm font-medium">
-                اللون: <span className="text-muted-foreground">{colors.find(c => c.id === selectedColor)?.name}</span>
+                {locale === 'ar' ? 'اللون' : 'Color'}:{' '}
+                <span className="text-muted-foreground">
+                  {locale === 'ar'
+                    ? colors.find((c) => c.id === selectedColor)?.name
+                    : colors.find((c) => c.id === selectedColor)?.nameEn}
+                </span>
               </label>
               <div className="flex gap-3">
                 {colors.map((color) => (
@@ -235,7 +280,7 @@ export default function EcommercePage() {
                         : 'border-muted hover:border-muted-foreground'
                     }`}
                     style={{ backgroundColor: color.hex }}
-                    aria-label={color.name}
+                    aria-label={locale === 'ar' ? color.name : color.nameEn}
                   />
                 ))}
               </div>
@@ -244,7 +289,8 @@ export default function EcommercePage() {
             {/* Size Selection */}
             <div className="space-y-3">
               <label className="text-sm font-medium">
-                المقاس: <span className="text-muted-foreground">{selectedSize}</span>
+                {locale === 'ar' ? 'المقاس' : 'Size'}:{' '}
+                <span className="text-muted-foreground">{selectedSize}</span>
               </label>
               <div className="flex gap-2">
                 {sizes.map((size) => (
@@ -268,7 +314,9 @@ export default function EcommercePage() {
             {/* Quantity & Add to Cart */}
             <div className="space-y-4">
               <div className="flex items-center gap-4">
-                <label className="text-sm font-medium">الكمية:</label>
+                <label className="text-sm font-medium">
+                  {locale === 'ar' ? 'الكمية' : 'Quantity'}:
+                </label>
                 <div className="flex items-center border rounded-md">
                   <Button
                     variant="ghost"
@@ -293,10 +341,10 @@ export default function EcommercePage() {
               <div className="flex gap-3">
                 <Button className="flex-1" size="lg" onClick={handleAddToCart}>
                   <ShoppingCart className="h-5 w-5 me-2" />
-                  أضف إلى السلة
+                  {locale === 'ar' ? 'أضف إلى السلة' : 'Add to Cart'}
                 </Button>
                 <Button
-                  variant={isFavorite ? "default" : "outline"}
+                  variant={isFavorite ? 'default' : 'outline'}
                   size="lg"
                   onClick={() => setIsFavorite(!isFavorite)}
                 >
@@ -315,22 +363,34 @@ export default function EcommercePage() {
                   <div className="flex items-center gap-3">
                     <Truck className="h-5 w-5 text-primary" />
                     <div className="text-sm">
-                      <p className="font-medium">شحن مجاني</p>
-                      <p className="text-muted-foreground text-xs">للطلبات فوق 200 ر.س</p>
+                      <p className="font-medium">
+                        {locale === 'ar' ? 'شحن مجاني' : 'Free Shipping'}
+                      </p>
+                      <p className="text-muted-foreground text-xs">
+                        {locale === 'ar' ? 'للطلبات فوق 200 ر.س' : 'Orders over 200 SAR'}
+                      </p>
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
                     <ShieldCheck className="h-5 w-5 text-primary" />
                     <div className="text-sm">
-                      <p className="font-medium">ضمان سنتين</p>
-                      <p className="text-muted-foreground text-xs">ضمان الشركة</p>
+                      <p className="font-medium">
+                        {locale === 'ar' ? 'ضمان سنتين' : '2 Year Warranty'}
+                      </p>
+                      <p className="text-muted-foreground text-xs">
+                        {locale === 'ar' ? 'ضمان الشركة' : 'Manufacturer warranty'}
+                      </p>
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
                     <RotateCcw className="h-5 w-5 text-primary" />
                     <div className="text-sm">
-                      <p className="font-medium">استرجاع مجاني</p>
-                      <p className="text-muted-foreground text-xs">خلال 30 يوم</p>
+                      <p className="font-medium">
+                        {locale === 'ar' ? 'استرجاع مجاني' : 'Free Returns'}
+                      </p>
+                      <p className="text-muted-foreground text-xs">
+                        {locale === 'ar' ? 'خلال 30 يوم' : 'Within 30 days'}
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -343,30 +403,42 @@ export default function EcommercePage() {
         <div className="mt-12">
           <Tabs defaultValue="description" dir="ltr">
             <TabsList className="w-full justify-start">
-              <TabsTrigger value="description">الوصف</TabsTrigger>
-              <TabsTrigger value="specs">المواصفات</TabsTrigger>
-              <TabsTrigger value="reviews">التقييمات ({product.reviewCount})</TabsTrigger>
+              <TabsTrigger value="description">
+                {locale === 'ar' ? 'الوصف' : 'Description'}
+              </TabsTrigger>
+              <TabsTrigger value="specs">
+                {locale === 'ar' ? 'المواصفات' : 'Specifications'}
+              </TabsTrigger>
+              <TabsTrigger value="reviews">
+                {locale === 'ar' ? 'التقييمات' : 'Reviews'} ({product.reviewCount})
+              </TabsTrigger>
             </TabsList>
 
             <TabsContent value="description" className="mt-6">
               <Card>
                 <CardContent className="p-6 space-y-6">
                   <div>
-                    <h3 className="text-xl font-semibold mb-3">وصف المنتج</h3>
+                    <h3 className="text-xl font-semibold mb-3">
+                      {locale === 'ar' ? 'وصف المنتج' : 'Product Description'}
+                    </h3>
                     <p className="text-muted-foreground leading-relaxed">
-                      {product.description}
+                      {locale === 'ar' ? product.description : product.descriptionEn}
                     </p>
                   </div>
                   <Separator />
                   <div>
-                    <h3 className="text-xl font-semibold mb-3">المميزات الرئيسية</h3>
+                    <h3 className="text-xl font-semibold mb-3">
+                      {locale === 'ar' ? 'المميزات الرئيسية' : 'Key Features'}
+                    </h3>
                     <div className="grid gap-3 sm:grid-cols-2">
-                      {product.features.map((feature, index) => (
-                        <div key={index} className="flex items-start gap-2">
-                          <Check className="h-5 w-5 text-primary mt-0.5" />
-                          <span className="text-muted-foreground">{feature}</span>
-                        </div>
-                      ))}
+                      {(locale === 'ar' ? product.features : product.featuresEn).map(
+                        (feature, index) => (
+                          <div key={index} className="flex items-start gap-2">
+                            <Check className="h-5 w-5 text-primary mt-0.5" />
+                            <span className="text-muted-foreground">{feature}</span>
+                          </div>
+                        )
+                      )}
                     </div>
                   </div>
                 </CardContent>
@@ -376,17 +448,21 @@ export default function EcommercePage() {
             <TabsContent value="specs" className="mt-6">
               <Card>
                 <CardContent className="p-6">
-                  <h3 className="text-xl font-semibold mb-4">المواصفات التقنية</h3>
+                  <h3 className="text-xl font-semibold mb-4">
+                    {locale === 'ar' ? 'المواصفات التقنية' : 'Technical Specifications'}
+                  </h3>
                   <div className="space-y-3">
-                    {Object.entries(product.specs).map(([key, value], index) => (
-                      <div
-                        key={index}
-                        className="flex items-center justify-between py-3 border-b last:border-0"
-                      >
-                        <span className="font-medium">{key}</span>
-                        <span className="text-muted-foreground">{value}</span>
-                      </div>
-                    ))}
+                    {Object.entries(locale === 'ar' ? product.specs : product.specsEn).map(
+                      ([key, value], index) => (
+                        <div
+                          key={index}
+                          className="flex items-center justify-between py-3 border-b last:border-0"
+                        >
+                          <span className="font-medium">{key}</span>
+                          <span className="text-muted-foreground">{value}</span>
+                        </div>
+                      )
+                    )}
                   </div>
                 </CardContent>
               </Card>
@@ -412,7 +488,9 @@ export default function EcommercePage() {
                         ))}
                       </div>
                       <p className="text-sm text-muted-foreground">
-                        بناءً على {product.reviewCount} تقييم
+                        {locale === 'ar'
+                          ? `بناءً على ${product.reviewCount} تقييم`
+                          : `Based on ${product.reviewCount} reviews`}
                       </p>
                     </div>
                     <Separator />
@@ -437,12 +515,16 @@ export default function EcommercePage() {
                       <CardContent className="p-6">
                         <div className="flex items-start gap-4">
                           <Avatar>
-                            <AvatarFallback>{review.name[0]}</AvatarFallback>
+                            <AvatarFallback>
+                              {locale === 'ar' ? review.name[0] : review.nameEn[0]}
+                            </AvatarFallback>
                           </Avatar>
                           <div className="flex-1 space-y-2">
                             <div className="flex items-center justify-between">
                               <div>
-                                <p className="font-semibold">{review.name}</p>
+                                <p className="font-semibold">
+                                  {locale === 'ar' ? review.name : review.nameEn}
+                                </p>
                                 <p className="text-sm text-muted-foreground">{review.date}</p>
                               </div>
                               <div className="flex">
@@ -458,9 +540,11 @@ export default function EcommercePage() {
                                 ))}
                               </div>
                             </div>
-                            <p className="text-muted-foreground">{review.comment}</p>
+                            <p className="text-muted-foreground">
+                              {locale === 'ar' ? review.comment : review.commentEn}
+                            </p>
                             <Button variant="ghost" size="sm" className="text-muted-foreground">
-                              مفيد ({review.helpful})
+                              {locale === 'ar' ? `مفيد (${review.helpful})` : `Helpful (${review.helpful})`}
                             </Button>
                           </div>
                         </div>
@@ -475,7 +559,9 @@ export default function EcommercePage() {
 
         {/* Related Products */}
         <div className="mt-12">
-          <h2 className="text-2xl font-bold mb-6">منتجات ذات صلة</h2>
+          <h2 className="text-2xl font-bold mb-6">
+            {locale === 'ar' ? 'منتجات ذات صلة' : 'Related Products'}
+          </h2>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {relatedProducts.map((related, index) => (
               <Card key={index} className="hover:shadow-lg transition-shadow cursor-pointer">
@@ -483,7 +569,9 @@ export default function EcommercePage() {
                   <div className="aspect-square flex items-center justify-center text-6xl bg-muted rounded-lg mb-4">
                     {related.image}
                   </div>
-                  <h3 className="font-semibold mb-2">{related.name}</h3>
+                  <h3 className="font-semibold mb-2">
+                    {locale === 'ar' ? related.name : related.nameEn}
+                  </h3>
                   <div className="flex items-center gap-1 mb-2">
                     {[1, 2, 3, 4, 5].map((star) => (
                       <Star
@@ -495,15 +583,15 @@ export default function EcommercePage() {
                         }`}
                       />
                     ))}
-                    <span className="text-xs text-muted-foreground ms-1">
-                      ({related.rating})
-                    </span>
+                    <span className="text-xs text-muted-foreground ms-1">({related.rating})</span>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-lg font-bold">{related.price} ر.س</span>
+                    <span className="text-lg font-bold">
+                      {related.price} {locale === 'ar' ? 'ر.س' : 'SAR'}
+                    </span>
                     {related.originalPrice && (
                       <span className="text-sm text-muted-foreground line-through">
-                        {related.originalPrice} ر.س
+                        {related.originalPrice} {locale === 'ar' ? 'ر.س' : 'SAR'}
                       </span>
                     )}
                   </div>
