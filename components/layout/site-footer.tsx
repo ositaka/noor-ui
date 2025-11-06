@@ -103,7 +103,7 @@ export function SiteFooter() {
               </li>
               <li>
                 <Link
-                  href="/accessibility"
+                  href="/documentation#accessibility"
                   className="hover:text-foreground transition-colors"
                 >
                   {content.accessibility}

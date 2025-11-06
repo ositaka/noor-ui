@@ -3,9 +3,7 @@
 import * as React from 'react'
 import Link from 'next/link'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { DirectionToggle } from '@/components/docs/direction-toggle'
-import { ThemeToggle } from '@/components/docs/theme-toggle'
-import { Sparkles, Book, Code2, Palette, Globe2, Accessibility } from 'lucide-react'
+import { Book, Code2, Palette, Globe2, Accessibility } from 'lucide-react'
 
 const docSections = [
   {
@@ -52,6 +50,7 @@ const docSections = [
     title: 'Accessibility',
     description: 'Building inclusive and accessible interfaces',
     icon: Accessibility,
+    id: 'accessibility',
     links: [
       { title: 'WCAG Compliance', href: '/documentation/wcag' },
       { title: 'Keyboard Navigation', href: '/documentation/keyboard' },
@@ -63,20 +62,6 @@ const docSections = [
 export default function DocumentationPage() {
   return (
     <div className="min-h-screen">
-      {/* Header */}
-      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container flex h-16 items-center justify-between">
-          <Link href="/" className="flex items-center gap-2">
-            <Sparkles className="h-6 w-6 text-primary" />
-            <span className="text-xl font-bold">RTL Design</span>
-          </Link>
-          <div className="flex items-center gap-2">
-            <ThemeToggle />
-            <DirectionToggle />
-          </div>
-        </div>
-      </header>
-
       <main id="main-content" className="container py-12">
         {/* Page Header */}
         <div className="max-w-3xl mb-12">
@@ -93,7 +78,7 @@ export default function DocumentationPage() {
             const Icon = section.icon
 
             return (
-              <Card key={section.title}>
+              <Card key={section.title} id={(section as any).id}>
                 <CardHeader>
                   <div className="flex items-center gap-4 mb-2">
                     <div className="rounded-lg bg-primary/10 p-3">
