@@ -16,13 +16,9 @@ import {
   DialogFooter,
   DialogClose,
 } from '@/components/ui/dialog'
-import { DirectionToggle } from '@/components/docs/direction-toggle'
-import { ThemeToggle } from '@/components/docs/theme-toggle'
 import { ComponentShowcase } from '@/components/docs/component-showcase'
 import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
-import { Sparkles } from 'lucide-react'
-
 const dialogProps: PropDefinition[] = [
   {
     name: 'open',
@@ -58,6 +54,8 @@ const basicUsageCode = `import {
   DialogTrigger,
 } from '@/components/ui/dialog'
 import { Button } from '@/components/ui/button'
+import { SiteHeader } from '@/components/layout/site-header'
+import { SiteFooter } from '@/components/layout/site-footer'
 
 <Dialog>
   <DialogTrigger asChild>
@@ -125,22 +123,10 @@ export default function DialogPage() {
   const [open, setOpen] = React.useState(false)
 
   return (
-    <div className="min-h-screen">
-      {/* Header */}
-      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container flex h-16 items-center justify-between">
-          <Link href="/" className="flex items-center gap-2">
-            <Sparkles className="h-6 w-6 text-primary" />
-            <span className="text-xl font-bold">RTL Design</span>
-          </Link>
-          <div className="flex items-center gap-2">
-            <ThemeToggle />
-            <DirectionToggle />
-          </div>
-        </div>
-      </header>
+    <div className="min-h-screen flex flex-col">
+      <SiteHeader />
 
-      <main id="main-content" className="container py-12">
+      <main id="main-content" className="flex-1 container py-12">
         {/* Breadcrumb */}
         <nav aria-label="Breadcrumb" className="mb-8">
           <ol className="flex items-center gap-2 text-sm text-muted-foreground">
@@ -423,6 +409,8 @@ export default function DialogPage() {
           </div>
         </section>
       </main>
+
+      <SiteFooter />
     </div>
   )
 }
