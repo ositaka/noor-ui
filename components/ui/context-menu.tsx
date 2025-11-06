@@ -6,7 +6,27 @@ import { Check, ChevronRight, Circle } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
-const ContextMenu = ContextMenuPrimitive.Root
+// Wrap Root to automatically detect and pass direction
+const ContextMenu: React.FC<React.ComponentPropsWithoutRef<typeof ContextMenuPrimitive.Root>> = (props) => {
+  const [dir, setDir] = React.useState<'ltr' | 'rtl'>('ltr')
+
+  React.useEffect(() => {
+    setDir(document.documentElement.dir as 'ltr' | 'rtl' || 'ltr')
+
+    const observer = new MutationObserver(() => {
+      setDir(document.documentElement.dir as 'ltr' | 'rtl' || 'ltr')
+    })
+
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['dir'],
+    })
+
+    return () => observer.disconnect()
+  }, [])
+
+  return <ContextMenuPrimitive.Root dir={dir} {...props} />
+}
 
 const ContextMenuTrigger = ContextMenuPrimitive.Trigger
 

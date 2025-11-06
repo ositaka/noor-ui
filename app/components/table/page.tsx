@@ -13,6 +13,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
+  ResponsiveTable,
 } from '@/components/ui/table'
 import { Card, CardContent } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
@@ -432,6 +433,57 @@ export default function TablePage() {
               </Card>
               <div className="mt-4">
                 <CodeBlock code={interactiveTableCode} language="tsx" collapsible />
+              </div>
+            </div>
+
+            {/* Mobile Responsive Table */}
+            <div>
+              <h3 className="text-lg font-semibold mb-4">Mobile Responsive Table</h3>
+              <Card>
+                <CardContent className="p-6">
+                  <p className="text-sm text-muted-foreground mb-4">
+                    This table adapts to mobile screens by showing a 2-column layout (label + value) instead of horizontal scrolling. Resize your browser to see it in action.
+                  </p>
+                  <ResponsiveTable headers={['Name', 'Email', 'Status', 'Role']}>
+                    <TableBody>
+                      {users.map((user) => (
+                        <TableRow key={user.id}>
+                          <TableCell className="font-medium">{user.name}</TableCell>
+                          <TableCell>{user.email}</TableCell>
+                          <TableCell>
+                            <Badge variant={user.status === 'Active' ? 'default' : 'secondary'}>
+                              {user.status}
+                            </Badge>
+                          </TableCell>
+                          <TableCell>{user.role}</TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </ResponsiveTable>
+                </CardContent>
+              </Card>
+              <div className="mt-4">
+                <CodeBlock
+                  code={`import { ResponsiveTable, TableBody, TableRow, TableCell } from '@/components/ui/table'
+
+<ResponsiveTable headers={['Name', 'Email', 'Status', 'Role']}>
+  <TableBody>
+    {users.map((user) => (
+      <TableRow key={user.id}>
+        <TableCell>{user.name}</TableCell>
+        <TableCell>{user.email}</TableCell>
+        <TableCell><Badge>{user.status}</Badge></TableCell>
+        <TableCell>{user.role}</TableCell>
+      </TableRow>
+    ))}
+  </TableBody>
+</ResponsiveTable>
+
+// On mobile: Shows as stacked cards with labels
+// On desktop: Shows as normal table`}
+                  language="tsx"
+                  collapsible
+                />
               </div>
             </div>
           </div>

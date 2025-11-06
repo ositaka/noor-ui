@@ -40,6 +40,7 @@ const componentCategories = [
       { name: 'Label', icon: Tag, href: '/components/label', status: 'ready' },
       { name: 'Badge', icon: Tag, href: '/components/badge', status: 'ready' },
       { name: 'Separator', icon: Layers, href: '/components/separator', status: 'ready' },
+      { name: 'Avatar', icon: User, href: '/components/avatar', status: 'ready' },
     ],
   },
   {
@@ -55,6 +56,14 @@ const componentCategories = [
     ],
   },
   {
+    name: 'Data Display',
+    description: 'Components for displaying data and information',
+    components: [
+      { name: 'Table', icon: Layers, href: '/components/table', status: 'ready' },
+      { name: 'Command', icon: Menu, href: '/components/command', status: 'ready' },
+    ],
+  },
+  {
     name: 'Feedback',
     description: 'Components for user notifications and feedback',
     components: [
@@ -67,21 +76,23 @@ const componentCategories = [
   },
   {
     name: 'Navigation',
-    description: 'Components for site navigation',
+    description: 'Components for site navigation and menus',
     components: [
       { name: 'Tabs', icon: Menu, href: '/components/tabs', status: 'ready' },
       { name: 'Breadcrumb', icon: Home, href: '/components/breadcrumb', status: 'ready' },
       { name: 'Pagination', icon: ChevronRight, href: '/components/pagination', status: 'ready' },
+      { name: 'Dropdown Menu', icon: Menu, href: '/components/dropdown-menu', status: 'ready' },
+      { name: 'Context Menu', icon: Menu, href: '/components/context-menu', status: 'ready' },
     ],
   },
   {
-    name: 'Overlays & Display',
-    description: 'Components for overlays and content display',
+    name: 'Overlays & Layout',
+    description: 'Components for overlays and content organization',
     components: [
       { name: 'Sheet', icon: PanelLeft, href: '/components/sheet', status: 'ready' },
       { name: 'Accordion', icon: ChevronsUpDown, href: '/components/accordion', status: 'ready' },
+      { name: 'Collapsible', icon: ChevronsUpDown, href: '/components/collapsible', status: 'ready' },
       { name: 'Popover', icon: MessageSquare, href: '/components/popover', status: 'ready' },
-      { name: 'Avatar', icon: User, href: '/components/avatar', status: 'ready' },
     ],
   },
 ]
@@ -108,8 +119,8 @@ export default function ComponentsPage() {
         <div className="max-w-3xl mb-12">
           <h1 className="text-4xl font-bold tracking-tight mb-4">Components</h1>
           <p className="text-xl text-muted-foreground mb-6">
-            Beautifully designed components built with Radix UI and Tailwind CSS.
-            Full RTL support, accessible, and customizable.
+            30 beautifully designed components built with Radix UI and Tailwind CSS.
+            Full RTL support, accessible, and customizable. All components are production-ready.
           </p>
 
           {/* Live Preview */}

@@ -6,7 +6,27 @@ import { Check, ChevronRight, Circle } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
-const DropdownMenu = DropdownMenuPrimitive.Root
+// Wrap Root to automatically detect and pass direction
+const DropdownMenu: React.FC<React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Root>> = (props) => {
+  const [dir, setDir] = React.useState<'ltr' | 'rtl'>('ltr')
+
+  React.useEffect(() => {
+    setDir(document.documentElement.dir as 'ltr' | 'rtl' || 'ltr')
+
+    const observer = new MutationObserver(() => {
+      setDir(document.documentElement.dir as 'ltr' | 'rtl' || 'ltr')
+    })
+
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['dir'],
+    })
+
+    return () => observer.disconnect()
+  }, [])
+
+  return <DropdownMenuPrimitive.Root dir={dir} {...props} />
+}
 
 const DropdownMenuTrigger = DropdownMenuPrimitive.Trigger
 
