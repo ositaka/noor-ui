@@ -6,11 +6,11 @@ import { ComponentName } from '@/components/ui/component-name'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
-import { SiteHeader } from '@/components/layout/site-header'
-import { SiteFooter } from '@/components/layout/site-footer'
 import { ComponentShowcase } from '@/components/docs/component-showcase'
 import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
+
+// NOTE: Do NOT import SiteHeader/SiteFooter - they are provided by app/(docs)/layout.tsx
 
 // Props definition for the main component
 const componentNameProps: PropDefinition[] = [
@@ -63,10 +63,8 @@ const rtlCode = `// ComponentName automatically adapts to RTL layout
 
 export default function ComponentNamePage() {
   return (
-    <div className="min-h-screen flex flex-col">
-      <SiteHeader />
-
-      <main id="main-content" className="flex-1 container py-12">
+    <div className="min-h-screen">
+      <main id="main-content" className="container py-12">
         {/* Breadcrumb */}
         <nav aria-label="Breadcrumb" className="mb-8">
           <ol className="flex items-center gap-2 text-sm text-muted-foreground">
@@ -265,8 +263,6 @@ export default function ComponentNamePage() {
           </div>
         </section>
       </main>
-
-      <SiteFooter />
     </div>
   )
 }
