@@ -17,7 +17,8 @@ This checklist ensures completeness and prevents common oversights. Review the r
 - [ ] Component supports ref forwarding
 
 ### 2. Documentation
-- [ ] Created documentation page in `/app/components/[name]/page.tsx`
+- [ ] Created documentation page in `/app/(docs)/components/[name]/page.tsx`
+- [ ] **DO NOT** manually add header/footer (provided by (docs) layout)
 - [ ] Included all required sections:
   - [ ] Preview with interactive demo
   - [ ] Installation instructions
@@ -48,10 +49,11 @@ This checklist ensures completeness and prevents common oversights. Review the r
 - [ ] No console errors or warnings
 
 ### 5. Radix UI Components (if applicable)
-- [ ] Wrapped Root with direction detection
-- [ ] Added MutationObserver for dir attribute
-- [ ] Passed `dir` prop to Radix primitive
+- [ ] Used `useDirection()` hook from direction provider
+- [ ] Passed `direction` to Radix primitive's `dir` prop
+- [ ] Allowed dir prop override if needed: `dir={dir || direction}`
 - [ ] Tested menu/popover positioning in both directions
+- [ ] **DO NOT** set up manual MutationObserver (use hook instead)
 
 ---
 
@@ -91,9 +93,10 @@ This checklist ensures completeness and prevents common oversights. Review the r
 ## 📄 Adding Documentation Pages
 
 ### 1. Documentation Content
-- [ ] Created page in `/app/documentation/[name]/page.tsx`
+- [ ] Created page in `/app/(docs)/documentation/[name]/page.tsx`
+- [ ] **DO NOT** manually add header/footer (provided by (docs) layout)
 - [ ] Clear, structured content
-- [ ] Code examples with syntax highlighting
+- [ ] Used CodeBlock component for syntax highlighting
 - [ ] Practical examples (not just theory)
 - [ ] Proper use of headings hierarchy
 
