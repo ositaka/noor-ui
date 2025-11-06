@@ -3,10 +3,8 @@
 import * as React from 'react'
 import Link from 'next/link'
 import { Card, CardContent } from '@/components/ui/card'
-import { DirectionToggle } from '@/components/docs/direction-toggle'
-import { ThemeToggle } from '@/components/docs/theme-toggle'
 import { CodeBlock } from '@/components/docs/code-block'
-import { Sparkles, ArrowLeftRight, Info } from 'lucide-react'
+import { ArrowLeftRight, Info } from 'lucide-react'
 
 const bidiTextCode = `// Mixed direction text handling
 <p dir="auto">
@@ -47,19 +45,6 @@ const numberHandlingCode = `// Numbers in RTL text
 
 export default function BidiPage() {
   return (
-    <div className="min-h-screen">
-      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container flex h-16 items-center justify-between">
-          <Link href="/" className="flex items-center gap-2">
-            <Sparkles className="h-6 w-6 text-primary" />
-            <span className="text-xl font-bold">RTL Design</span>
-          </Link>
-          <div className="flex items-center gap-2">
-            <ThemeToggle />
-            <DirectionToggle />
-          </div>
-        </div>
-      </header>
 
       <main id="main-content" className="container py-12">
         <nav aria-label="Breadcrumb" className="mb-8">

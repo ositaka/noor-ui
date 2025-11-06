@@ -8,10 +8,9 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Separator } from '@/components/ui/separator'
 import { Badge } from '@/components/ui/badge'
-import { DirectionToggle } from '@/components/docs/direction-toggle'
-import { ThemeToggle } from '@/components/docs/theme-toggle'
+import { CodeBlock } from '@/components/docs/code-block'
 import { useDesignSystem } from '@/components/providers/design-system-provider'
-import { Sparkles, Check } from 'lucide-react'
+import { Check } from 'lucide-react'
 import { type Theme, themeConfig } from '@/lib/tokens'
 import { cn } from '@/lib/utils'
 
@@ -358,16 +357,18 @@ export default function ThemesPage() {
             <CardContent className="space-y-4">
               <div>
                 <div className="text-sm font-medium mb-2">Via URL Parameter</div>
-                <pre className="bg-muted p-4 rounded-lg overflow-x-auto">
-                  <code className="text-sm">{`// Add to any URL
+                <CodeBlock
+                  code={`// Add to any URL
 ?theme=minimal
 ?theme=futuristic
 ?theme=cozy
 ?theme=artistic
 
 // Example
-https://yoursite.com/components?theme=cozy`}</code>
-                </pre>
+https://yoursite.com/components?theme=cozy`}
+                  language="bash"
+                  showLineNumbers={false}
+                />
               </div>
 
               <div>
@@ -380,8 +381,8 @@ https://yoursite.com/components?theme=cozy`}</code>
 
               <div>
                 <div className="text-sm font-medium mb-2">Programmatically</div>
-                <pre className="bg-muted p-4 rounded-lg overflow-x-auto">
-                  <code className="text-sm">{`import { useDesignSystem } from '@/components/providers/design-system-provider'
+                <CodeBlock
+                  code={`import { useDesignSystem } from '@/components/providers/design-system-provider'
 
 function MyComponent() {
   const { designTheme, setDesignTheme } = useDesignSystem()
@@ -391,8 +392,10 @@ function MyComponent() {
       Use Cozy Theme
     </button>
   )
-}`}</code>
-                </pre>
+}`}
+                  language="tsx"
+                  showLineNumbers={false}
+                />
               </div>
             </CardContent>
           </Card>

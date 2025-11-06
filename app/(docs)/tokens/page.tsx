@@ -3,10 +3,9 @@
 import * as React from 'react'
 import Link from 'next/link'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { DirectionToggle } from '@/components/docs/direction-toggle'
-import { ThemeToggle } from '@/components/docs/theme-toggle'
-import { Sparkles, Copy, Check } from 'lucide-react'
+import { Copy, Check } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { CodeBlock } from '@/components/docs/code-block'
 import { tokens } from '@/lib/tokens'
 import { copyToClipboard } from '@/lib/utils'
 
@@ -314,41 +313,47 @@ export default function TokensPage() {
             <CardContent className="space-y-4">
               <div>
                 <div className="text-sm font-medium mb-2">Colors</div>
-                <pre className="bg-muted p-4 rounded-lg overflow-x-auto">
-                  <code className="text-sm">{`<div className="bg-primary-500 text-primary-50">
+                <CodeBlock
+                  code={`<div className="bg-primary-500 text-primary-50">
   Primary color with shades
 </div>
 
 <div className="text-success-600">
   Success text
-</div>`}</code>
-                </pre>
+</div>`}
+                  language="tsx"
+                  showLineNumbers={false}
+                />
               </div>
 
               <div>
                 <div className="text-sm font-medium mb-2">Spacing</div>
-                <pre className="bg-muted p-4 rounded-lg overflow-x-auto">
-                  <code className="text-sm">{`<div className="p-lg m-xl gap-md">
+                <CodeBlock
+                  code={`<div className="p-lg m-xl gap-md">
   Semantic spacing names
 </div>
 
 <div className="space-y-md">
   Vertical spacing
-</div>`}</code>
-                </pre>
+</div>`}
+                  language="tsx"
+                  showLineNumbers={false}
+                />
               </div>
 
               <div>
                 <div className="text-sm font-medium mb-2">Typography</div>
-                <pre className="bg-muted p-4 rounded-lg overflow-x-auto">
-                  <code className="text-sm">{`<h1 className="text-4xl font-bold">
+                <CodeBlock
+                  code={`<h1 className="text-4xl font-bold">
   Heading with scale
 </h1>
 
 <div className="font-arabic" dir="rtl">
   Arabic text
-</div>`}</code>
-                </pre>
+</div>`}
+                  language="tsx"
+                  showLineNumbers={false}
+                />
               </div>
             </CardContent>
           </Card>

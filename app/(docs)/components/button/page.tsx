@@ -308,32 +308,6 @@ export default function ButtonPage() {
           </Card>
         </section>
 
-        {/* Related Components */}
-        <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Related Components</h2>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            <Link href="/components/link">
-              <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
-                <CardContent className="p-6">
-                  <h3 className="font-semibold">Link</h3>
-                  <p className="text-sm text-muted-foreground mt-1">
-                    Navigate between pages
-                  </p>
-                </CardContent>
-              </Card>
-            </Link>
-            <Link href="/components/icon-button">
-              <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
-                <CardContent className="p-6">
-                  <h3 className="font-semibold">Icon Button</h3>
-                  <p className="text-sm text-muted-foreground mt-1">
-                    Button with only an icon
-                  </p>
-                </CardContent>
-              </Card>
-            </Link>
-          </div>
-        </section>
       </main>
     </div>
   )

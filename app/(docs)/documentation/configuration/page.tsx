@@ -3,10 +3,8 @@
 import * as React from 'react'
 import Link from 'next/link'
 import { Card, CardContent } from '@/components/ui/card'
-import { DirectionToggle } from '@/components/docs/direction-toggle'
-import { ThemeToggle } from '@/components/docs/theme-toggle'
 import { CodeBlock } from '@/components/docs/code-block'
-import { Sparkles, Settings, CheckCircle2, AlertTriangle } from 'lucide-react'
+import { Settings, CheckCircle2, AlertTriangle } from 'lucide-react'
 
 const tailwindConfig = `// tailwind.config.ts
 import type { Config } from "tailwindcss"
@@ -145,19 +143,6 @@ NEXT_PUBLIC_DEFAULT_THEME=light`
 
 export default function ConfigurationPage() {
   return (
-    <div className="min-h-screen">
-      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container flex h-16 items-center justify-between">
-          <Link href="/" className="flex items-center gap-2">
-            <Sparkles className="h-6 w-6 text-primary" />
-            <span className="text-xl font-bold">RTL Design</span>
-          </Link>
-          <div className="flex items-center gap-2">
-            <ThemeToggle />
-            <DirectionToggle />
-          </div>
-        </div>
-      </header>
 
       <main id="main-content" className="container py-12">
         <nav aria-label="Breadcrumb" className="mb-8">

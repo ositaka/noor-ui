@@ -599,14 +599,6 @@ export default function SelectPage() {
                 </CardContent>
               </Card>
             </Link>
-            <Link href="/components/combobox">
-              <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
-                <CardContent className="p-6">
-                  <h3 className="font-semibold">Combobox</h3>
-                  <p className="text-sm text-muted-foreground mt-1">Select with search</p>
-                </CardContent>
-              </Card>
-            </Link>
             <Link href="/components/label">
               <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
                 <CardContent className="p-6">

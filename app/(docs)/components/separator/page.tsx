@@ -561,26 +561,6 @@ export default function SeparatorPage() {
                 </CardContent>
               </Card>
             </Link>
-            <Link href="/components/divider">
-              <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
-                <CardContent className="p-6">
-                  <h3 className="font-semibold">Divider</h3>
-                  <p className="text-sm text-muted-foreground mt-1">
-                    Divider with text content
-                  </p>
-                </CardContent>
-              </Card>
-            </Link>
-            <Link href="/components/spacer">
-              <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
-                <CardContent className="p-6">
-                  <h3 className="font-semibold">Spacer</h3>
-                  <p className="text-sm text-muted-foreground mt-1">
-                    Invisible spacing element
-                  </p>
-                </CardContent>
-              </Card>
-            </Link>
           </div>
         </section>
       </main>
