@@ -87,7 +87,7 @@ export default function BidiPage() {
         <section className="mb-16">
           <h2 className="text-2xl font-bold tracking-tight mb-6">Handling Mixed Text</h2>
           <p className="text-muted-foreground mb-4">
-            Use the <code className="px-1.5 py-0.5 rounded bg-muted text-foreground">dir="auto"</code> attribute for automatic direction detection:
+            Use the <code className="px-1.5 py-0.5 rounded bg-muted text-foreground">dir=&quot;auto&quot;</code> attribute for automatic direction detection:
           </p>
           <CodeBlock code={bidiTextCode} language="tsx" />
 
@@ -98,7 +98,7 @@ export default function BidiPage() {
                 Browser Auto-Detection
               </h3>
               <p className="text-sm text-muted-foreground">
-                Modern browsers automatically detect text direction with <code className="px-1.5 py-0.5 rounded bg-muted text-foreground">dir="auto"</code>, analyzing the first strong directional character.
+                Modern browsers automatically detect text direction with <code className="px-1.5 py-0.5 rounded bg-muted text-foreground">dir=&quot;auto&quot;</code>, analyzing the first strong directional character.
               </p>
             </CardContent>
           </Card>

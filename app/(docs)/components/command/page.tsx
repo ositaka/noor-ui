@@ -104,9 +104,8 @@ export default function CommandPage() {
 
         <section className="mb-16">
           <h2 className="text-2xl font-bold tracking-tight mb-6">Basic Command</h2>
-          <ComponentShowcase
-            code={basicCommandCode}
-            preview={
+          <ComponentShowcase>
+            <ComponentShowcase.Demo>
               <Command className="rounded-lg border shadow-md max-w-md">
                 <CommandInput placeholder="Type a command or search..." />
                 <CommandList>
@@ -138,8 +137,10 @@ export default function CommandPage() {
                   </CommandGroup>
                 </CommandList>
               </Command>
-            }
-          />
+            </ComponentShowcase.Demo>
+          </ComponentShowcase>
+
+          <CodeBlock code={basicCommandCode} language="tsx" />
         </section>
 
         <section className="mb-16">

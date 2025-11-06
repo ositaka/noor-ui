@@ -181,7 +181,7 @@ export default function ConfigurationPage() {
               <ul className="space-y-2 text-sm text-muted-foreground">
                 <li>• Include the design system package path in <code className="px-1.5 py-0.5 rounded bg-muted text-foreground">content</code> array</li>
                 <li>• Add <code className="px-1.5 py-0.5 rounded bg-muted text-foreground">tailwindcss-logical</code> plugin for RTL support</li>
-                <li>• Enable <code className="px-1.5 py-0.5 rounded bg-muted text-foreground">darkMode: ["class"]</code> for theme switching</li>
+                <li>• Enable <code className="px-1.5 py-0.5 rounded bg-muted text-foreground">darkMode: [&quot;class&quot;]</code> for theme switching</li>
               </ul>
             </CardContent>
           </Card>
