@@ -10,7 +10,7 @@ import { Separator } from '@/components/ui/separator'
 import { Badge } from '@/components/ui/badge'
 import { CodeBlock } from '@/components/docs/code-block'
 import { useDesignSystem } from '@/components/providers/design-system-provider'
-import { Check } from 'lucide-react'
+import { Check, Sparkles } from 'lucide-react'
 import { type Theme, themeConfig } from '@/lib/tokens'
 import { cn } from '@/lib/utils'
 
