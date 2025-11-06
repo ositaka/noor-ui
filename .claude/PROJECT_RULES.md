@@ -94,10 +94,60 @@ Quick overview:
 
 #### 2. Create Documentation Page
 - [ ] Create `/app/components/[name]/page.tsx`
+- [ ] **CRITICAL: Add 'use client' directive at the top**
+- [ ] **CRITICAL: Include full page wrapper with header, breadcrumb, main**
 - [ ] Include: Preview, Installation, Usage, Examples, Props, Accessibility, RTL Considerations
 - [ ] Add interactive ComponentShowcase with LTR/RTL toggle
 - [ ] Show at least 2-3 real-world examples
 - [ ] Include mobile and desktop examples where relevant
+
+**Required Page Structure:**
+```tsx
+'use client'
+
+import * as React from 'react'
+import Link from 'next/link'
+import { DirectionToggle } from '@/components/docs/direction-toggle'
+import { ThemeToggle } from '@/components/docs/theme-toggle'
+import { Sparkles } from 'lucide-react'
+
+export default function ComponentPage() {
+  return (
+    <div className="min-h-screen">
+      {/* Header */}
+      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur">
+        <div className="container flex h-16 items-center justify-between">
+          <Link href="/" className="flex items-center gap-2">
+            <Sparkles className="h-6 w-6 text-primary" />
+            <span className="text-xl font-bold">RTL Design</span>
+          </Link>
+          <div className="flex items-center gap-2">
+            <ThemeToggle />
+            <DirectionToggle />
+          </div>
+        </div>
+      </header>
+
+      <main id="main-content" className="container py-12">
+        {/* Breadcrumb */}
+        <nav aria-label="Breadcrumb" className="mb-8">
+          <ol className="flex items-center gap-2 text-sm text-muted-foreground">
+            <li><Link href="/">Home</Link></li>
+            <li>/</li>
+            <li><Link href="/components">Components</Link></li>
+            <li>/</li>
+            <li className="text-foreground font-medium">ComponentName</li>
+          </ol>
+        </nav>
+
+        <div className="space-y-10 pb-16">
+          {/* Your content here */}
+        </div>
+      </main>
+    </div>
+  )
+}
+```
 
 #### 3. Update Navigation & Search
 - [ ] **Add to `/app/components/page.tsx`** - Add to appropriate category
