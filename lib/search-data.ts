@@ -325,6 +325,13 @@ export const searchData: SearchItem[] = [
     category: 'Component',
     keywords: ['prayer', 'times', 'salah', 'islamic', 'gcc', 'muslim', 'adhan', 'mosque', 'fajr', 'dhuhr', 'asr', 'maghrib', 'isha'],
   },
+  {
+    title: 'Hijri Date',
+    description: 'Display Gregorian and Hijri (Islamic calendar) dates together',
+    href: '/components/hijri-date',
+    category: 'Component',
+    keywords: ['hijri', 'islamic', 'calendar', 'date', 'gcc', 'muslim', 'lunar', 'gregorian', 'dual', 'bilingual'],
+  },
 
   // Examples
   {
