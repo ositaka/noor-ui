@@ -1,19 +1,24 @@
 # RTL-First Design System
 
-A comprehensive, modern documentation website for a **bilingual (English/Arabic) design system** with full RTL support.
+A comprehensive, modern design system built specifically for the **GCC market** with full **bilingual (Arabic/English) support** and perfect RTL implementation.
 
 Built for the GCC market with accessibility, performance, and user experience as top priorities.
 
 ## 🌟 Features
 
 - **RTL-First Architecture**: Designed for Arabic from the ground up, with English as an equally-supported alternative
-- **91 Components** (in progress): Complete UI toolkit from basic elements to complex patterns
+- **32 Production-Ready Components**: Complete UI toolkit covering essential patterns from forms to data display
+- **Zero Directional Bugs**: 100% logical properties, no hardcoded LTR assumptions
+- **Direction-Aware Components**: Tabs, navigation, and layouts automatically adapt to text direction
 - **4 Distinct Themes**: Minimal, Futuristic, Cozy, and Artistic - all powered by the same design tokens
 - **Full Accessibility**: WCAG AA compliant with comprehensive keyboard navigation and screen reader support
 - **Token-Based Design**: All design decisions flow from design tokens, enabling easy customization
 - **Modern Stack**: Built with Next.js 14, TypeScript, Tailwind CSS, and Radix UI
-- **Perfect RTL Support**: Logical properties throughout, direction-aware animations and icons
+- **Real Arabic Content**: Authentic GCC-focused content, not lorem ipsum
+- **Bilingual Examples**: Dashboard and E-commerce examples with full Arabic/English support
 - **Light/Dark Mode**: Seamless theme switching with respect for user preferences
+- **Command Palette**: Quick navigation (Cmd+K) across all components and pages
+- **Clean Architecture**: Next.js route groups with shared layouts for maintainability
 - **Motion Sensitivity**: Respects `prefers-reduced-motion` for accessibility
 
 ## 🚀 Quick Start
@@ -56,30 +61,52 @@ npm run lint
 ├── app/                      # Next.js App Router pages
 │   ├── layout.tsx           # Root layout with theme provider
 │   ├── page.tsx             # Homepage
-│   └── components/          # Component documentation pages
-│       ├── page.tsx         # Components overview
-│       └── button/          # Example component page
-│           └── page.tsx
+│   │
+│   ├── (docs)/              # Route group for documentation pages
+│   │   ├── layout.tsx       # Shared header/footer for all docs
+│   │   ├── components/      # Component documentation (32 pages)
+│   │   │   ├── page.tsx     # Components overview
+│   │   │   └── button/      # Example component page
+│   │   │       └── page.tsx
+│   │   ├── documentation/   # Guides and documentation
+│   │   ├── tokens/          # Design tokens reference
+│   │   ├── themes/          # Theme customization
+│   │   ├── getting-started/ # Getting started guide
+│   │   ├── rtl-guide/       # RTL development guide
+│   │   └── examples/        # Examples listing page
+│   │
+│   └── examples/            # Standalone example pages (no header/footer)
+│       ├── dashboard/       # Analytics dashboard example
+│       ├── ecommerce/       # Product page example
+│       └── registration/    # Multi-step form example
 │
 ├── components/
-│   ├── ui/                  # Design system components
+│   ├── ui/                  # Design system components (32 components)
 │   │   ├── button.tsx
 │   │   ├── card.tsx
 │   │   ├── input.tsx
 │   │   ├── label.tsx
 │   │   ├── badge.tsx
+│   │   ├── tabs.tsx        # Direction-aware with Radix UI
 │   │   └── separator.tsx
+│   │
+│   ├── layout/              # Layout components
+│   │   ├── site-header.tsx  # Global navigation header
+│   │   └── site-footer.tsx  # Global footer
 │   │
 │   ├── docs/                # Documentation-specific components
 │   │   ├── component-showcase.tsx  # Live demo with LTR/RTL toggle
 │   │   ├── props-table.tsx         # API documentation table
 │   │   ├── code-block.tsx          # Syntax-highlighted code blocks
+│   │   ├── global-search.tsx       # Command palette (Cmd+K)
 │   │   ├── theme-switcher.tsx      # 4-theme switcher
 │   │   ├── theme-toggle.tsx        # Light/dark mode toggle
 │   │   └── direction-toggle.tsx    # LTR/RTL toggle
 │   │
 │   └── providers/
-│       └── theme-provider.tsx      # Next-themes wrapper
+│       ├── direction-provider.tsx  # RTL/LTR and locale context
+│       ├── design-system-provider.tsx  # Theme management
+│       └── client-providers.tsx    # Combined client providers
 │
 ├── lib/
 │   ├── tokens.ts            # Design token definitions
@@ -92,25 +119,113 @@ npm run lint
 └── public/                   # Static assets
 ```
 
+## 🏗️ Architecture
+
+This design system uses **Next.js 14 App Router** with a **route group architecture** for clean separation of concerns:
+
+### Route Groups
+- **`(docs)`**: Contains all documentation pages with shared layout (header/footer)
+  - Component documentation (32 pages)
+  - Guide pages (installation, configuration, RTL guide, etc.)
+  - Token and theme reference pages
+- **`examples/`**: Standalone demo pages without navigation chrome
+  - Immersive full-screen experiences
+  - Dashboard, E-commerce, Registration form
+
+### Layout System
+- **Root Layout** (`app/layout.tsx`): Provides theme and direction context
+- **Docs Layout** (`app/(docs)/layout.tsx`): Adds header/footer to all doc pages
+- **Benefits**:
+  - DRY principle - header/footer defined once
+  - Easy maintenance - changes propagate automatically
+  - Clean page components - focus on content, not chrome
+
+### Direction Context
+All components access direction through `useDirection()` hook:
+```tsx
+const { direction, locale, setDirection } = useDirection()
+// direction: 'ltr' | 'rtl'
+// locale: 'en' | 'ar'
+```
+
+This enables:
+- Automatic font switching (Inter for English, IBM Plex Sans Arabic for Arabic)
+- Bidirectional component behavior (Tabs, navigation)
+- Conditional rendering based on locale
+
 ## 🎨 Design System
 
-### Core Components (Implemented)
+### All Components (32 Implemented)
 
+**Form Components:**
+- **Form**: State management with validation and bilingual error messages
 - **Button**: 6 variants, 5 sizes, loading states, icon support
-- **Card**: Header, content, footer composition
-- **Input**: Text input with RTL support
+- **Input**: Text input with full RTL support
 - **Label**: Form labels with accessibility
-- **Badge**: Status indicators
-- **Separator**: Visual dividers
+- **Textarea**: Multi-line text input
+- **Checkbox**: Selection control with indeterminate state
+- **Radio Group**: Single selection from options
+- **Select**: Dropdown selection with search
+- **Switch**: Toggle control
+- **Slider**: Range input
+
+**Layout Components:**
+- **Card**: Header, content, footer composition
+- **Separator**: Visual dividers with orientation
+- **Tabs**: Direction-aware tabbed interface with keyboard navigation
+- **Accordion**: Collapsible content sections
+- **Collapsible**: Simple show/hide content
+
+**Navigation Components:**
+- **Breadcrumb**: Hierarchical navigation
+- **Pagination**: Page navigation with RTL support
+- **Command**: Command palette / search interface
+
+**Feedback Components:**
+- **Alert**: Contextual feedback messages
+- **Toast**: Temporary notifications
+- **Progress**: Progress indicators
+- **Skeleton**: Loading placeholder with shimmer animation
+- **Badge**: Status and count indicators
+- **Avatar**: User profile images with fallbacks
+
+**Overlay Components:**
+- **Dialog**: Modal dialogs
+- **Sheet**: Slide-in panels (drawer)
+- **Popover**: Floating content
+- **Tooltip**: Contextual hints
+- **Dropdown Menu**: Action menus
+- **Context Menu**: Right-click menus
+
+**Data Display:**
+- **Table**: Structured data display with RTL text alignment
 
 ### Documentation Components
 
 - **ComponentShowcase**: Live interactive demos with LTR/RTL comparison
 - **PropsTable**: Searchable API documentation tables
-- **CodeBlock**: Syntax-highlighted code with copy functionality
+- **CodeBlock**: Syntax-highlighted code with copy functionality and theme support
+- **GlobalSearch**: Command palette (Cmd+K) for quick navigation across all pages
 - **ThemeSwitcher**: Live theme switching between 4 themes
 - **DirectionToggle**: Switch between LTR and RTL
 - **ThemeToggle**: Light/dark mode switcher
+- **SiteHeader**: Global navigation with bilingual content
+- **SiteFooter**: Global footer with links and bilingual content
+
+### Real-World Examples
+
+Production-ready examples showcasing component composition and real use cases:
+
+- **Multi-Step Registration Form**: 4-step registration with validation, progress indicators, and bilingual error messages
+- **Analytics Dashboard**: Stats cards, revenue charts, transaction tables (with responsive mobile layout), and activity feeds
+- **E-commerce Product Page**: Image gallery, color/size selection, reviews with ratings, and related products grid
+
+All examples feature:
+- Full RTL support with real Arabic content
+- Mobile-responsive layouts
+- GCC market focus (SAR currency, regional data)
+- Professional loading states
+- Accessible keyboard navigation
 
 ## 🌍 Internationalization
 
@@ -305,17 +420,46 @@ Tokens are converted to CSS custom properties in `styles/globals.css` and consum
 
 ## 🚧 Roadmap
 
-- [ ] Complete remaining 85+ components
+### Phase 1: Complete the Foundation ✅
+- [x] Add documentation for all 32 components
+- [x] Add Form component with validation
+- [x] Create real-world demo pages (Dashboard, Forms, E-commerce)
+- [x] Implement proper layout architecture with route groups
+- [x] Add syntax highlighting to all code examples
+- [x] Create global navigation and footer
+- [x] Add command palette for quick navigation
+
+### Phase 2: Enhance Consistency ✅
+- [x] Add comprehensive hook library (useDirection for RTL/LTR context)
+- [x] Make components direction-aware (Tabs component with Radix UI)
+- [x] Bilingual content throughout (Dashboard and E-commerce examples)
+- [x] Create reusable layout components (SiteHeader, SiteFooter)
+
+### Phase 3: GCC-Specific Features
+- [ ] Hijri date picker component
+- [ ] Prayer times display component
+- [ ] Arabic number formatting utilities
+- [ ] RTL-aware data tables with sorting
+- [ ] Calendar component with Hijri support
+
+### Phase 4: Developer Experience
 - [ ] Add Storybook integration
 - [ ] Create component generator CLI
-- [ ] Add more complex examples
-- [ ] Implement search functionality
-- [ ] Add component playground
-- [ ] Create Figma design kit
-- [ ] Add unit tests
+- [ ] Add unit tests for core components
 - [ ] Add E2E tests
+- [ ] Create Figma design kit
 - [ ] Performance optimizations
 - [ ] SEO improvements
+
+### Recent Improvements (November 2025)
+- ✅ Refactored to use Next.js route groups for cleaner architecture
+- ✅ Added shared layout (header/footer) for all documentation pages
+- ✅ Made Tabs component fully direction-aware with Radix UI integration
+- ✅ Added bilingual support to Dashboard and E-commerce examples
+- ✅ Implemented CodeBlock component with proper syntax highlighting
+- ✅ Created global command palette (Cmd+K) for navigation
+- ✅ Fixed all component cross-references and removed broken links
+- ✅ Added comprehensive documentation structure with 11 guide pages
 
 ## 📄 License
 

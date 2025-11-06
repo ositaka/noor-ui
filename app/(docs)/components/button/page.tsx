@@ -5,13 +5,10 @@ import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
-import { DirectionToggle } from '@/components/docs/direction-toggle'
-import { ThemeToggle } from '@/components/docs/theme-toggle'
 import { ComponentShowcase } from '@/components/docs/component-showcase'
 import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
 import { Sparkles, ArrowLeft, Download, Heart, Trash2 } from 'lucide-react'
-
 const buttonProps: PropDefinition[] = [
   {
     name: 'variant',
@@ -98,19 +95,6 @@ const rtlCode = `// RTL support is automatic!
 export default function ButtonPage() {
   return (
     <div className="min-h-screen">
-      {/* Header */}
-      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container flex h-16 items-center justify-between">
-          <Link href="/" className="flex items-center gap-2">
-            <Sparkles className="h-6 w-6 text-primary" />
-            <span className="text-xl font-bold">RTL Design</span>
-          </Link>
-          <div className="flex items-center gap-2">
-            <ThemeToggle />
-            <DirectionToggle />
-          </div>
-        </div>
-      </header>
 
       <main id="main-content" className="container py-12">
         {/* Breadcrumb */}
@@ -324,32 +308,6 @@ export default function ButtonPage() {
           </Card>
         </section>
 
-        {/* Related Components */}
-        <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Related Components</h2>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            <Link href="/components/link">
-              <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
-                <CardContent className="p-6">
-                  <h3 className="font-semibold">Link</h3>
-                  <p className="text-sm text-muted-foreground mt-1">
-                    Navigate between pages
-                  </p>
-                </CardContent>
-              </Card>
-            </Link>
-            <Link href="/components/icon-button">
-              <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
-                <CardContent className="p-6">
-                  <h3 className="font-semibold">Icon Button</h3>
-                  <p className="text-sm text-muted-foreground mt-1">
-                    Button with only an icon
-                  </p>
-                </CardContent>
-              </Card>
-            </Link>
-          </div>
-        </section>
       </main>
     </div>
   )

@@ -7,8 +7,6 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
-import { DirectionToggle } from '@/components/docs/direction-toggle'
-import { ThemeToggle } from '@/components/docs/theme-toggle'
 import {
   MousePointer2,
   Square,
@@ -18,7 +16,14 @@ import {
   CheckSquare,
   Menu,
   Home,
-  Sparkles,
+  AlertCircle,
+  MessageSquare,
+  Info,
+  Loader2,
+  ChevronRight,
+  User,
+  PanelLeft,
+  ChevronsUpDown,
 } from 'lucide-react'
 
 const componentCategories = [
@@ -32,25 +37,61 @@ const componentCategories = [
       { name: 'Label', icon: Tag, href: '/components/label', status: 'ready' },
       { name: 'Badge', icon: Tag, href: '/components/badge', status: 'ready' },
       { name: 'Separator', icon: Layers, href: '/components/separator', status: 'ready' },
+      { name: 'Avatar', icon: User, href: '/components/avatar', status: 'ready' },
     ],
   },
   {
     name: 'Forms',
     description: 'Form elements with validation support',
     components: [
-      { name: 'Checkbox', icon: CheckSquare, href: '/components/checkbox', status: 'coming' },
-      { name: 'Radio Group', icon: CheckSquare, href: '/components/radio-group', status: 'coming' },
-      { name: 'Select', icon: Menu, href: '/components/select', status: 'coming' },
-      { name: 'Switch', icon: CheckSquare, href: '/components/switch', status: 'coming' },
+      { name: 'Form', icon: CheckSquare, href: '/components/form', status: 'ready' },
+      { name: 'Checkbox', icon: CheckSquare, href: '/components/checkbox', status: 'ready' },
+      { name: 'Radio Group', icon: CheckSquare, href: '/components/radio-group', status: 'ready' },
+      { name: 'Select', icon: Menu, href: '/components/select', status: 'ready' },
+      { name: 'Switch', icon: CheckSquare, href: '/components/switch', status: 'ready' },
+      { name: 'Slider', icon: CheckSquare, href: '/components/slider', status: 'ready' },
+      { name: 'Textarea', icon: Type, href: '/components/textarea', status: 'ready' },
+    ],
+  },
+  {
+    name: 'Data Display',
+    description: 'Components for displaying data and information',
+    components: [
+      { name: 'Table', icon: Layers, href: '/components/table', status: 'ready' },
+      { name: 'Command', icon: Menu, href: '/components/command', status: 'ready' },
+    ],
+  },
+  {
+    name: 'Feedback',
+    description: 'Components for user notifications and feedback',
+    components: [
+      { name: 'Alert', icon: AlertCircle, href: '/components/alert', status: 'ready' },
+      { name: 'Toast', icon: MessageSquare, href: '/components/toast', status: 'ready' },
+      { name: 'Dialog', icon: MessageSquare, href: '/components/dialog', status: 'ready' },
+      { name: 'Tooltip', icon: Info, href: '/components/tooltip', status: 'ready' },
+      { name: 'Progress', icon: Loader2, href: '/components/progress', status: 'ready' },
+      { name: 'Skeleton', icon: Loader2, href: '/components/skeleton', status: 'ready' },
     ],
   },
   {
     name: 'Navigation',
-    description: 'Components for site navigation',
+    description: 'Components for site navigation and menus',
     components: [
-      { name: 'Tabs', icon: Menu, href: '/components/tabs', status: 'coming' },
-      { name: 'Breadcrumb', icon: Home, href: '/components/breadcrumb', status: 'coming' },
-      { name: 'Navigation Menu', icon: Menu, href: '/components/navigation-menu', status: 'coming' },
+      { name: 'Tabs', icon: Menu, href: '/components/tabs', status: 'ready' },
+      { name: 'Breadcrumb', icon: Home, href: '/components/breadcrumb', status: 'ready' },
+      { name: 'Pagination', icon: ChevronRight, href: '/components/pagination', status: 'ready' },
+      { name: 'Dropdown Menu', icon: Menu, href: '/components/dropdown-menu', status: 'ready' },
+      { name: 'Context Menu', icon: Menu, href: '/components/context-menu', status: 'ready' },
+    ],
+  },
+  {
+    name: 'Overlays & Layout',
+    description: 'Components for overlays and content organization',
+    components: [
+      { name: 'Sheet', icon: PanelLeft, href: '/components/sheet', status: 'ready' },
+      { name: 'Accordion', icon: ChevronsUpDown, href: '/components/accordion', status: 'ready' },
+      { name: 'Collapsible', icon: ChevronsUpDown, href: '/components/collapsible', status: 'ready' },
+      { name: 'Popover', icon: MessageSquare, href: '/components/popover', status: 'ready' },
     ],
   },
 ]
@@ -58,27 +99,14 @@ const componentCategories = [
 export default function ComponentsPage() {
   return (
     <div className="min-h-screen">
-      {/* Header */}
-      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container flex h-16 items-center justify-between">
-          <Link href="/" className="flex items-center gap-2">
-            <Sparkles className="h-6 w-6 text-primary" />
-            <span className="text-xl font-bold">RTL Design</span>
-          </Link>
-          <div className="flex items-center gap-2">
-            <ThemeToggle />
-            <DirectionToggle />
-          </div>
-        </div>
-      </header>
 
       <main id="main-content" className="container py-12">
         {/* Page Header */}
         <div className="max-w-3xl mb-12">
           <h1 className="text-4xl font-bold tracking-tight mb-4">Components</h1>
           <p className="text-xl text-muted-foreground mb-6">
-            Beautifully designed components built with Radix UI and Tailwind CSS.
-            Full RTL support, accessible, and customizable.
+            32 beautifully designed components built with Radix UI and Tailwind CSS.
+            Full RTL support, accessible, and customizable. All components are production-ready.
           </p>
 
           {/* Live Preview */}

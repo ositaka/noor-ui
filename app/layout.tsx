@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { ThemeProvider } from '@/components/providers/theme-provider'
+import { ClientProviders } from '@/components/providers/client-providers'
 import '@/styles/globals.css'
 
 export const metadata: Metadata = {
@@ -27,13 +28,15 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange={false}
         >
-          <a
-            href="#main-content"
-            className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:start-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-primary focus:text-primary-foreground focus:rounded-md"
-          >
-            Skip to main content
-          </a>
-          {children}
+          <ClientProviders>
+            <a
+              href="#main-content"
+              className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:start-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-primary focus:text-primary-foreground focus:rounded-md"
+            >
+              Skip to main content
+            </a>
+            {children}
+          </ClientProviders>
         </ThemeProvider>
       </body>
     </html>
