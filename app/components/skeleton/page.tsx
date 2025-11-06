@@ -1,17 +1,53 @@
-import { Metadata } from 'next'
+'use client'
+
+import * as React from 'react'
+import Link from 'next/link'
 import { Skeleton } from '@/components/ui/skeleton'
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
 import { Avatar } from '@/components/ui/avatar'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-
-export const metadata: Metadata = {
-  title: 'Skeleton - RTL Design System',
-  description: 'Animated loading placeholder component for better user experience during content loading.',
-}
+import { DirectionToggle } from '@/components/docs/direction-toggle'
+import { ThemeToggle } from '@/components/docs/theme-toggle'
+import { Sparkles } from 'lucide-react'
 
 export default function SkeletonPage() {
   return (
-    <div className="space-y-10 pb-16">
+    <div className="min-h-screen">
+      {/* Header */}
+      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <div className="container flex h-16 items-center justify-between">
+          <Link href="/" className="flex items-center gap-2">
+            <Sparkles className="h-6 w-6 text-primary" />
+            <span className="text-xl font-bold">RTL Design</span>
+          </Link>
+          <div className="flex items-center gap-2">
+            <ThemeToggle />
+            <DirectionToggle />
+          </div>
+        </div>
+      </header>
+
+      <main id="main-content" className="container py-12">
+        {/* Breadcrumb */}
+        <nav aria-label="Breadcrumb" className="mb-8">
+          <ol className="flex items-center gap-2 text-sm text-muted-foreground">
+            <li>
+              <Link href="/" className="hover:text-foreground transition-colors">
+                Home
+              </Link>
+            </li>
+            <li>/</li>
+            <li>
+              <Link href="/components" className="hover:text-foreground transition-colors">
+                Components
+              </Link>
+            </li>
+            <li>/</li>
+            <li className="text-foreground font-medium">Skeleton</li>
+          </ol>
+        </nav>
+
+        <div className="space-y-10 pb-16">
       {/* Header */}
       <div className="space-y-2">
         <h1 className="text-4xl font-bold tracking-tight">Skeleton</h1>
@@ -391,6 +427,8 @@ export default function Loading() {
           </Card>
         </div>
       </section>
+        </div>
+      </main>
     </div>
   )
 }
