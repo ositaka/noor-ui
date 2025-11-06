@@ -318,6 +318,13 @@ export const searchData: SearchItem[] = [
     category: 'Component',
     keywords: ['collapsible', 'collapse', 'expand', 'toggle', 'accordion'],
   },
+  {
+    title: 'Prayer Times',
+    description: 'Beautiful prayer times display for Islamic applications',
+    href: '/components/prayer-times',
+    category: 'Component',
+    keywords: ['prayer', 'times', 'salah', 'islamic', 'gcc', 'muslim', 'adhan', 'mosque', 'fajr', 'dhuhr', 'asr', 'maghrib', 'isha'],
+  },
 
   // Examples
   {
