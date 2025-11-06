@@ -35,7 +35,7 @@ const numberHandlingCode = `// Numbers in RTL text
 
 // Dates in mixed context
 <p dir="auto">
-  التاريخ: 2024-01-15
+  التاريخ: 2025-01-15
 </p>
 
 // Phone numbers
@@ -124,7 +124,7 @@ export default function BidiPage() {
               <h3 className="font-semibold mb-3">BiDi Best Practices</h3>
               <ul className="space-y-2 text-sm text-muted-foreground">
                 <li>• Numbers remain LTR even in RTL text (1234, not 4321)</li>
-                <li>• Dates in ISO format should stay LTR (2024-01-15)</li>
+                <li>• Dates in ISO format should stay LTR (2025-01-15)</li>
                 <li>• Phone numbers should always be LTR with proper alignment</li>
                 <li>• Email addresses and URLs remain LTR</li>
                 <li>• Use Unicode BiDi controls sparingly and only when necessary</li>

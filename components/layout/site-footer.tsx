@@ -25,7 +25,7 @@ export function SiteFooter() {
       github: 'GitHub',
       discord: 'Discord',
       twitter: 'Twitter',
-      copyright: '© 2024 RTL Design System. Built with Next.js, TypeScript, and Tailwind CSS.',
+      copyright: '© 2025 RTL Design System. Built with Next.js, TypeScript, and Tailwind CSS.',
     },
     ar: {
       tagline: 'مصمم لسوق الخليج بكل حب.',
@@ -42,7 +42,7 @@ export function SiteFooter() {
       github: 'GitHub',
       discord: 'Discord',
       twitter: 'Twitter',
-      copyright: '© 2024 نظام تصميم RTL. بُني باستخدام Next.js وTypeScript وTailwind CSS.',
+      copyright: '© 2025 نظام تصميم RTL. بُني باستخدام Next.js وTypeScript وTailwind CSS.',
     },
   }
 
