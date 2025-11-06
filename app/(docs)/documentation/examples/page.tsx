@@ -77,7 +77,7 @@ export default function Dashboard() {
 
 export default function ExamplesPage() {
   return (
-
+    <div className="min-h-screen">
       <main id="main-content" className="container py-12">
         <nav aria-label="Breadcrumb" className="mb-8">
           <ol className="flex items-center gap-2 text-sm text-muted-foreground">
