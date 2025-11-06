@@ -344,7 +344,7 @@ export default function EcommercePage() {
                   {locale === 'ar' ? 'أضف إلى السلة' : 'Add to Cart'}
                 </Button>
                 <Button
-                  variant={isFavorite ? 'default' : 'outline'}
+                  variant={isFavorite ? 'primary' : 'outline'}
                   size="lg"
                   onClick={() => setIsFavorite(!isFavorite)}
                 >

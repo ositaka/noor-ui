@@ -125,9 +125,9 @@ const ResponsiveTable = React.forwardRef<HTMLDivElement, ResponsiveTableProps>(
           {React.Children.map(children, (child) => {
             // Extract TableBody children
             if (React.isValidElement(child) && child.type === TableBody) {
-              return React.Children.map(child.props.children, (row, rowIndex) => {
+              return React.Children.map(child.props.children as React.ReactElement[], (row, rowIndex) => {
                 if (React.isValidElement(row) && row.type === TableRow) {
-                  const cells = React.Children.toArray(row.props.children)
+                  const cells = React.Children.toArray((row as React.ReactElement).props.children)
                   return (
                     <div key={rowIndex} className="border rounded-lg p-4 space-y-3">
                       {cells.map((cell, cellIndex) => {

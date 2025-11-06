@@ -357,7 +357,7 @@ export default function CollapsiblePage() {
           <Card className="mt-6">
             <CardContent className="p-6">
               <p className="text-sm text-muted-foreground">
-                This component is built on top of Radix UI's Collapsible primitive. For additional
+                This component is built on top of Radix UI&apos;s Collapsible primitive. For additional
                 props, refer to the{' '}
                 <a
                   href="https://www.radix-ui.com/docs/primitives/components/collapsible"

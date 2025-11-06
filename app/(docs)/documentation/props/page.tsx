@@ -115,13 +115,13 @@ export default function PropsPage() {
                 <tr className="border-b">
                   <td className="p-3"><code>variant</code></td>
                   <td className="p-3 text-muted-foreground">string</td>
-                  <td className="p-3 text-muted-foreground">'default'</td>
+                  <td className="p-3 text-muted-foreground">&apos;default&apos;</td>
                   <td className="p-3 text-muted-foreground">Visual style variant</td>
                 </tr>
                 <tr className="border-b">
                   <td className="p-3"><code>size</code></td>
                   <td className="p-3 text-muted-foreground">string</td>
-                  <td className="p-3 text-muted-foreground">'default'</td>
+                  <td className="p-3 text-muted-foreground">&apos;default&apos;</td>
                   <td className="p-3 text-muted-foreground">Button size</td>
                 </tr>
                 <tr className="border-b">

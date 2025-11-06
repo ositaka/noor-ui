@@ -253,7 +253,7 @@ export default function SkeletonPage() {
               <div>
                 <h3 className="font-semibold mb-2">Loading States</h3>
                 <p className="text-muted-foreground text-sm">
-                  Add <code className="bg-muted px-1 rounded">aria-busy="true"</code> to container during loading
+                  Add <code className="bg-muted px-1 rounded">aria-busy=&quot;true&quot;</code> to container during loading
                   to inform screen readers that content is being loaded.
                 </p>
               </div>
@@ -261,15 +261,15 @@ export default function SkeletonPage() {
               <div>
                 <h3 className="font-semibold mb-2">Screen Reader Announcements</h3>
                 <p className="text-muted-foreground text-sm">
-                  Use <code className="bg-muted px-1 rounded">aria-live="polite"</code> to announce when content
-                  finishes loading. Provide descriptive labels like <code className="bg-muted px-1 rounded">aria-label="Loading content"</code>.
+                  Use <code className="bg-muted px-1 rounded">aria-live=&quot;polite&quot;</code> to announce when content
+                  finishes loading. Provide descriptive labels like <code className="bg-muted px-1 rounded">aria-label=&quot;Loading content&quot;</code>.
                 </p>
               </div>
               <Separator />
               <div>
                 <h3 className="font-semibold mb-2">Best Practices</h3>
                 <ul className="list-disc list-inside text-muted-foreground space-y-1 text-sm">
-                  <li>Don't rely solely on visual loading indicators</li>
+                  <li>Don&apos;t rely solely on visual loading indicators</li>
                   <li>Provide text alternatives for screen readers</li>
                   <li>Ensure skeleton shapes closely match final content</li>
                 </ul>
