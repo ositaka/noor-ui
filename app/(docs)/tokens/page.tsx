@@ -86,7 +86,7 @@ export default function TokensPage() {
         </div>
 
         {/* Colors */}
-        <section className="mb-16">
+        <section className="mb-16" id="colors">
           <h2 className="text-3xl font-bold tracking-tight mb-6">Colors</h2>
 
           <div className="grid gap-8 lg:grid-cols-2">
@@ -174,7 +174,7 @@ export default function TokensPage() {
         </section>
 
         {/* Spacing */}
-        <section className="mb-16">
+        <section className="mb-16" id="spacings">
           <h2 className="text-3xl font-bold tracking-tight mb-6">Spacing</h2>
           <Card>
             <CardHeader>
@@ -192,7 +192,7 @@ export default function TokensPage() {
         </section>
 
         {/* Typography */}
-        <section className="mb-16">
+        <section className="mb-16" id="typography">
           <h2 className="text-3xl font-bold tracking-tight mb-6">Typography</h2>
 
           <div className="grid gap-6 lg:grid-cols-2">
@@ -249,7 +249,7 @@ export default function TokensPage() {
         </section>
 
         {/* Shadows */}
-        <section className="mb-16">
+        <section className="mb-16" id="shadows">
           <h2 className="text-3xl font-bold tracking-tight mb-6">Shadows</h2>
           <Card>
             <CardHeader>
@@ -276,7 +276,7 @@ export default function TokensPage() {
         </section>
 
         {/* Border Radius */}
-        <section className="mb-16">
+        <section className="mb-16" id="border-radius">
           <h2 className="text-3xl font-bold tracking-tight mb-6">Border Radius</h2>
           <Card>
             <CardHeader>
@@ -301,7 +301,7 @@ export default function TokensPage() {
         </section>
 
         {/* Usage */}
-        <section>
+        <section id="usage-in-code">
           <h2 className="text-3xl font-bold tracking-tight mb-6">Usage in Code</h2>
           <Card>
             <CardHeader>
