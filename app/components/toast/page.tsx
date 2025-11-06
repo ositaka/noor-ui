@@ -8,6 +8,8 @@ import { ComponentShowcase } from '@/components/docs/component-showcase'
 import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
 import { useToast } from '@/hooks/use-toast'
+import { SiteHeader } from '@/components/layout/site-header'
+import { SiteFooter } from '@/components/layout/site-footer'
 const toastProps: PropDefinition[] = [
   {
     name: 'title',

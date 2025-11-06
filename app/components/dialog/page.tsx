@@ -18,6 +18,8 @@ import {
 } from '@/components/ui/dialog'
 import { ComponentShowcase } from '@/components/docs/component-showcase'
 import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
+import { SiteHeader } from '@/components/layout/site-header'
+import { SiteFooter } from '@/components/layout/site-footer'
 import { CodeBlock } from '@/components/docs/code-block'
 const dialogProps: PropDefinition[] = [
   {
