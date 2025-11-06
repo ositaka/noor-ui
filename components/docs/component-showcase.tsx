@@ -63,13 +63,7 @@ function ComponentShowcase({ children, className, title, description, code }: Co
           {description && <p className="text-sm text-muted-foreground">{description}</p>}
         </div>
       )}
-      <Card>
-        <CardContent className="p-6">
-          <div className="flex items-center justify-center min-h-[200px]">
-            {children}
-          </div>
-        </CardContent>
-      </Card>
+      {children}
       {code && (
         <div className="space-y-2">
           <div className="flex items-center justify-between">

@@ -76,7 +76,7 @@ export const PrayerTimes = React.forwardRef<HTMLDivElement, PrayerTimesProps>(
       <Card ref={ref} className={cn('p-8', className)} {...props}>
         <div className={cn(prayerTimesVariants({ variant }))}>
           {/* Header with location and date */}
-          <div className="flex items-start justify-between border-b pb-5 mb-1">
+          <div className="flex items-end justify-between border-b pb-5 mb-1 gap-6">
             <div>
               <h3 className="text-lg font-semibold mb-1">
                 {isRTL ? 'مواقيت الصلاة' : 'Prayer Times'}
@@ -98,7 +98,7 @@ export const PrayerTimes = React.forwardRef<HTMLDivElement, PrayerTimesProps>(
           {/* Next Prayer Countdown */}
           {countdown && nextPrayer && (
             <div className="bg-primary/10 rounded-lg p-5">
-              <div className="flex items-center justify-between">
+              <div className="flex items-center justify-between gap-6">
                 <div className="flex items-center gap-3">
                   <Clock className="h-5 w-5 text-primary" />
                   <span className="text-base font-medium">
@@ -127,7 +127,7 @@ export const PrayerTimes = React.forwardRef<HTMLDivElement, PrayerTimesProps>(
                 <div
                   key={prayer.name}
                   className={cn(
-                    'flex items-center justify-between rounded-lg p-4 transition-colors',
+                    'flex items-center justify-between rounded-lg p-4 transition-colors gap-6',
                     isNext
                       ? 'bg-primary/5 border border-primary/20'
                       : 'hover:bg-muted/50',
