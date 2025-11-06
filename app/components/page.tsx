@@ -47,6 +47,7 @@ const componentCategories = [
     name: 'Forms',
     description: 'Form elements with validation support',
     components: [
+      { name: 'Form', icon: CheckSquare, href: '/components/form', status: 'ready' },
       { name: 'Checkbox', icon: CheckSquare, href: '/components/checkbox', status: 'ready' },
       { name: 'Radio Group', icon: CheckSquare, href: '/components/radio-group', status: 'ready' },
       { name: 'Select', icon: Menu, href: '/components/select', status: 'ready' },
@@ -119,7 +120,7 @@ export default function ComponentsPage() {
         <div className="max-w-3xl mb-12">
           <h1 className="text-4xl font-bold tracking-tight mb-4">Components</h1>
           <p className="text-xl text-muted-foreground mb-6">
-            30 beautifully designed components built with Radix UI and Tailwind CSS.
+            31 beautifully designed components built with Radix UI and Tailwind CSS.
             Full RTL support, accessible, and customizable. All components are production-ready.
           </p>
 

@@ -144,6 +144,13 @@ export const searchData: SearchItem[] = [
     keywords: ['separator', 'divider', 'line', 'hr'],
   },
   {
+    title: 'Form',
+    description: 'Form state management with validation',
+    href: '/components/form',
+    category: 'Component',
+    keywords: ['form', 'validation', 'input', 'submit', 'field', 'error', 'state'],
+  },
+  {
     title: 'Checkbox',
     description: 'Checkbox input component',
     href: '/components/checkbox',
@@ -319,6 +326,20 @@ export const searchData: SearchItem[] = [
     href: '/examples/registration',
     category: 'Example',
     keywords: ['registration', 'form', 'multi-step', 'validation', 'signup', 'bilingual'],
+  },
+  {
+    title: 'Dashboard',
+    description: 'Analytics dashboard with charts and statistics',
+    href: '/examples/dashboard',
+    category: 'Example',
+    keywords: ['dashboard', 'analytics', 'charts', 'stats', 'metrics', 'data', 'visualization'],
+  },
+  {
+    title: 'E-commerce Product Page',
+    description: 'Product page with gallery, reviews, and cart',
+    href: '/examples/ecommerce',
+    category: 'Example',
+    keywords: ['ecommerce', 'product', 'shopping', 'cart', 'reviews', 'store', 'shop'],
   },
 
   // Other Pages
