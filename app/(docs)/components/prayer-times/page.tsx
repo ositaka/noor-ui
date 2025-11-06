@@ -34,7 +34,7 @@ export default function PrayerTimesPage() {
           <h2 className="text-3xl font-bold mb-6">Preview</h2>
           <ComponentShowcase>
             <ComponentShowcase.Demo>
-              <div className="max-w-md mx-auto">
+              <div className="max-w-2xl mx-auto">
                 <PrayerTimes
                   prayers={samplePrayers}
                   nextPrayer="Dhuhr"
@@ -111,7 +111,7 @@ export default function MyApp() {
             </p>
             <ComponentShowcase>
               <ComponentShowcase.Demo>
-                <div className="max-w-md mx-auto">
+                <div className="max-w-2xl mx-auto">
                   <PrayerTimes
                     prayers={samplePrayers}
                     nextPrayer="Asr"
@@ -148,7 +148,7 @@ export default function MyApp() {
             </p>
             <ComponentShowcase>
               <ComponentShowcase.Demo>
-                <div className="max-w-md mx-auto">
+                <div className="max-w-2xl mx-auto">
                   <PrayerTimes
                     prayers={samplePrayers}
                     nextPrayer="Maghrib"
@@ -181,7 +181,7 @@ export default function MyApp() {
             </p>
             <ComponentShowcase>
               <ComponentShowcase.Demo>
-                <div className="max-w-md mx-auto">
+                <div className="max-w-2xl mx-auto">
                   <PrayerTimes
                     prayers={samplePrayers}
                     nextPrayer="Isha"
@@ -220,7 +220,7 @@ export default function MyApp() {
             </p>
             <ComponentShowcase>
               <ComponentShowcase.Demo>
-                <div className="max-w-md mx-auto">
+                <div className="max-w-2xl mx-auto">
                   <PrayerTimes
                     prayers={samplePrayers}
                     location="Doha"

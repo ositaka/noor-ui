@@ -73,10 +73,10 @@ export const PrayerTimes = React.forwardRef<HTMLDivElement, PrayerTimesProps>(
     const isRTL = typeof document !== 'undefined' && document.documentElement.dir === 'rtl'
 
     return (
-      <Card ref={ref} className={cn('p-6', className)} {...props}>
+      <Card ref={ref} className={cn('p-8', className)} {...props}>
         <div className={cn(prayerTimesVariants({ variant }))}>
           {/* Header with location and date */}
-          <div className="flex items-start justify-between border-b pb-4">
+          <div className="flex items-start justify-between border-b pb-5 mb-1">
             <div>
               <h3 className="text-lg font-semibold mb-1">
                 {isRTL ? 'مواقيت الصلاة' : 'Prayer Times'}
@@ -97,19 +97,19 @@ export const PrayerTimes = React.forwardRef<HTMLDivElement, PrayerTimesProps>(
 
           {/* Next Prayer Countdown */}
           {countdown && nextPrayer && (
-            <div className="bg-primary/10 rounded-lg p-4">
+            <div className="bg-primary/10 rounded-lg p-5">
               <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-3">
                   <Clock className="h-5 w-5 text-primary" />
-                  <span className="text-sm font-medium">
+                  <span className="text-base font-medium">
                     {isRTL ? 'الصلاة القادمة' : 'Next Prayer'}
                   </span>
                 </div>
                 <div className="text-end">
-                  <div className="text-sm text-muted-foreground">
+                  <div className="text-sm text-muted-foreground mb-1">
                     {prayers.find((p) => p.name === nextPrayer)?.[isRTL ? 'nameAr' : 'name']}
                   </div>
-                  <div className="text-2xl font-bold text-primary tabular-nums">
+                  <div className="text-3xl font-bold text-primary tabular-nums">
                     {countdown}
                   </div>
                 </div>
@@ -118,7 +118,7 @@ export const PrayerTimes = React.forwardRef<HTMLDivElement, PrayerTimesProps>(
           )}
 
           {/* Prayer Times List */}
-          <div className="space-y-3">
+          <div className="space-y-2.5">
             {prayers.map((prayer) => {
               const isNext = nextPrayer === prayer.name
               const displayName = isRTL ? prayer.nameAr : prayer.name
@@ -127,23 +127,23 @@ export const PrayerTimes = React.forwardRef<HTMLDivElement, PrayerTimesProps>(
                 <div
                   key={prayer.name}
                   className={cn(
-                    'flex items-center justify-between rounded-lg p-3 transition-colors',
+                    'flex items-center justify-between rounded-lg p-4 transition-colors',
                     isNext
                       ? 'bg-primary/5 border border-primary/20'
                       : 'hover:bg-muted/50',
-                    variant === 'detailed' && 'p-4'
+                    variant === 'detailed' && 'p-5'
                   )}
                 >
-                  <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-4">
                     <div
                       className={cn(
-                        'h-2 w-2 rounded-full',
+                        'h-2.5 w-2.5 rounded-full',
                         isNext ? 'bg-primary' : 'bg-muted-foreground/30'
                       )}
                     />
                     <span
                       className={cn(
-                        'font-medium',
+                        'text-base font-medium',
                         isNext && 'text-primary',
                         variant === 'detailed' && 'text-lg'
                       )}
@@ -158,10 +158,10 @@ export const PrayerTimes = React.forwardRef<HTMLDivElement, PrayerTimesProps>(
                   </div>
                   <div
                     className={cn(
-                      'text-end font-semibold tabular-nums',
+                      'text-end text-base font-semibold tabular-nums',
                       isNext && 'text-primary',
                       variant === 'compact' && 'text-sm',
-                      variant === 'detailed' && 'text-lg'
+                      variant === 'detailed' && 'text-xl'
                     )}
                   >
                     {prayer.time}
