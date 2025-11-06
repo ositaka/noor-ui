@@ -332,6 +332,13 @@ export const searchData: SearchItem[] = [
     category: 'Component',
     keywords: ['hijri', 'islamic', 'calendar', 'date', 'gcc', 'muslim', 'lunar', 'gregorian', 'dual', 'bilingual'],
   },
+  {
+    title: 'Arabic Number',
+    description: 'Utilities for Arabic-Indic numerals and SAR currency formatting',
+    href: '/components/arabic-number',
+    category: 'Component',
+    keywords: ['arabic', 'number', 'numerals', 'indic', 'currency', 'sar', 'riyal', 'gcc', 'format', 'percentage', 'money', 'price'],
+  },
 
   // Examples
   {
