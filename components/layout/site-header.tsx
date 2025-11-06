@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { Sparkles } from 'lucide-react'
 import { DirectionToggle } from '@/components/docs/direction-toggle'
 import { ThemeToggle } from '@/components/docs/theme-toggle'
+import { GlobalSearch } from '@/components/docs/global-search'
 import { useDirection } from '@/components/providers/direction-provider'
 
 export function SiteHeader() {
@@ -71,6 +72,7 @@ export function SiteHeader() {
           </Link>
         </nav>
         <div className="flex items-center gap-2">
+          <GlobalSearch />
           <ThemeToggle />
           <DirectionToggle />
         </div>
