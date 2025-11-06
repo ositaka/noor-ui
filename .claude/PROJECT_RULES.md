@@ -5,6 +5,18 @@
 
 ---
 
+## 📋 Quick Links
+
+Before starting any work, review these essential files:
+
+- **[CHECKLIST.md](.claude/CHECKLIST.md)** - Pre-commit verification checklist (USE THIS BEFORE EVERY COMMIT!)
+- **[Component Template](.claude/templates/component.template.tsx)** - Copy-paste ready component structure
+- **[Documentation Template](.claude/templates/component-doc.template.tsx)** - Complete doc page template
+
+These files are your primary references. The checklist will catch 99% of common mistakes.
+
+---
+
 ## 🎯 Core Principles
 
 ### 1. RTL-First Development
@@ -25,46 +37,15 @@ All components **MUST** follow these patterns:
 - ✅ Support RTL out of the box (no special RTL prop needed)
 
 #### Component Template:
-```tsx
-import * as React from 'react'
-import { cva, type VariantProps } from 'class-variance-authority'
-import { cn } from '@/lib/utils'
 
-const componentVariants = cva(
-  'base-classes',
-  {
-    variants: {
-      variant: {
-        default: 'default-styles',
-        // other variants
-      },
-    },
-    defaultVariants: {
-      variant: 'default',
-    },
-  }
-)
+**Use the complete template:** [`.claude/templates/component.template.tsx`](.claude/templates/component.template.tsx)
 
-export interface ComponentProps
-  extends React.HTMLAttributes<HTMLElement>,
-    VariantProps<typeof componentVariants> {
-  // additional props
-}
-
-export const Component = React.forwardRef<HTMLElement, ComponentProps>(
-  ({ className, variant, ...props }, ref) => {
-    return (
-      <element
-        ref={ref}
-        className={cn(componentVariants({ variant, className }))}
-        {...props}
-      />
-    )
-  }
-)
-
-Component.displayName = 'Component'
-```
+The template includes:
+- ✅ Full forwardRef pattern with TypeScript types
+- ✅ CVA variants setup
+- ✅ Composition pattern with sub-components
+- ✅ RTL-compliant classes
+- ✅ Usage notes and examples
 
 ### 3. Radix UI Direction Handling
 
@@ -99,7 +80,11 @@ const Component = (props) => {
 
 ### When Adding a New Component:
 
-**CRITICAL:** Every new component or page **MUST** be made discoverable. Follow this checklist:
+**CRITICAL:** Every new component or page **MUST** be made discoverable.
+
+**👉 USE THE CHECKLIST:** See [CHECKLIST.md](.claude/CHECKLIST.md) for the complete pre-commit verification list.
+
+Quick overview:
 
 #### 1. Create the Component
 - [ ] Add component file in `/components/ui/[name].tsx`
@@ -125,19 +110,22 @@ const Component = (props) => {
 
 ### Documentation Page Template:
 
+**Use the complete template:** [`.claude/templates/component-doc.template.tsx`](.claude/templates/component-doc.template.tsx)
+
 Every component documentation page MUST include:
 
-1. **Header** with sticky navigation (ThemeToggle + DirectionToggle)
-2. **Breadcrumb** navigation
-3. **Page title and description**
-4. **Live Preview** with ComponentShowcase
-5. **Installation** instructions
-6. **Usage** examples with CodeBlock
-7. **Multiple Examples** (at least 2-3 variants)
-8. **Props Documentation** with PropsTable
-9. **Accessibility** section with keyboard navigation
-10. **RTL Considerations** with side-by-side LTR/RTL comparison
-11. **Related Components** section with links
+1. **Metadata** for SEO
+2. **Page title and description**
+3. **Live Preview** with interactive demo
+4. **Installation** instructions (CLI + Manual)
+5. **Usage** examples with code
+6. **Multiple Examples** (minimum 3 variants)
+7. **Props Documentation** with complete table
+8. **Accessibility** section with keyboard navigation
+9. **RTL Considerations** with best practices
+10. **Related Components** section with links
+
+The template includes all sections with proper structure and real Arabic content examples.
 
 ---
 
