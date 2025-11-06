@@ -7,7 +7,7 @@ Built for the GCC market with accessibility, performance, and user experience as
 ## 🌟 Features
 
 - **RTL-First Architecture**: Designed for Arabic from the ground up, with English as an equally-supported alternative
-- **30 Production-Ready Components**: Complete UI toolkit covering essential patterns from forms to data display
+- **32 Production-Ready Components**: Complete UI toolkit covering essential patterns from forms to data display
 - **Zero Directional Bugs**: 100% logical properties, no hardcoded LTR assumptions
 - **4 Distinct Themes**: Minimal, Futuristic, Cozy, and Artistic - all powered by the same design tokens
 - **Full Accessibility**: WCAG AA compliant with comprehensive keyboard navigation and screen reader support
@@ -95,9 +95,10 @@ npm run lint
 
 ## 🎨 Design System
 
-### All Components (30 Implemented)
+### All Components (32 Implemented)
 
 **Form Components:**
+- **Form**: State management with validation and bilingual error messages
 - **Button**: 6 variants, 5 sizes, loading states, icon support
 - **Input**: Text input with full RTL support
 - **Label**: Form labels with accessibility
@@ -124,6 +125,7 @@ npm run lint
 - **Alert**: Contextual feedback messages
 - **Toast**: Temporary notifications
 - **Progress**: Progress indicators
+- **Skeleton**: Loading placeholder with shimmer animation
 - **Badge**: Status and count indicators
 - **Avatar**: User profile images with fallbacks
 
@@ -146,6 +148,21 @@ npm run lint
 - **ThemeSwitcher**: Live theme switching between 4 themes
 - **DirectionToggle**: Switch between LTR and RTL
 - **ThemeToggle**: Light/dark mode switcher
+
+### Real-World Examples
+
+Production-ready examples showcasing component composition and real use cases:
+
+- **Multi-Step Registration Form**: 4-step registration with validation, progress indicators, and bilingual error messages
+- **Analytics Dashboard**: Stats cards, revenue charts, transaction tables (with responsive mobile layout), and activity feeds
+- **E-commerce Product Page**: Image gallery, color/size selection, reviews with ratings, and related products grid
+
+All examples feature:
+- Full RTL support with real Arabic content
+- Mobile-responsive layouts
+- GCC market focus (SAR currency, regional data)
+- Professional loading states
+- Accessible keyboard navigation
 
 ## 🌍 Internationalization
 

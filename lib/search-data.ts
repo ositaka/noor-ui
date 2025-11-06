@@ -228,6 +228,13 @@ export const searchData: SearchItem[] = [
     keywords: ['progress', 'loading', 'bar', 'status'],
   },
   {
+    title: 'Skeleton',
+    description: 'Loading placeholder component',
+    href: '/components/skeleton',
+    category: 'Component',
+    keywords: ['skeleton', 'loading', 'placeholder', 'shimmer', 'lazy'],
+  },
+  {
     title: 'Tabs',
     description: 'Tabbed navigation component',
     href: '/components/tabs',
