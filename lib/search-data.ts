@@ -370,6 +370,20 @@ export const searchData: SearchItem[] = [
     keywords: ['gcc', 'dashboard', 'prayer', 'zakat', 'hijri', 'arabic', 'islamic', 'example', 'showcase', 'demo'],
   },
   {
+    title: 'Islamic Finance Dashboard',
+    description: 'Comprehensive Islamic finance management with Zakat calculator, investment tracking, and transaction history',
+    href: '/examples/islamic-finance-dashboard',
+    category: 'Example',
+    keywords: ['islamic', 'finance', 'zakat', 'investment', 'portfolio', 'transaction', 'hijri', 'prayer', 'halal', 'shariah', 'datatable', 'gcc', 'dashboard'],
+  },
+  {
+    title: 'DataTable Showcase',
+    description: 'Advanced data table with sorting, filtering, pagination, and export functionality',
+    href: '/examples/datatable-showcase',
+    category: 'Example',
+    keywords: ['datatable', 'table', 'sorting', 'filtering', 'pagination', 'export', 'csv', 'search', 'data', 'grid'],
+  },
+  {
     title: 'Examples',
     description: 'Real-world usage examples and demos',
     href: '/examples',

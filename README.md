@@ -226,6 +226,8 @@ This enables:
 Production-ready examples showcasing component composition and real use cases:
 
 - **GCC Community Dashboard**: Complete showcase of all GCC-specific components including Prayer Times, Hijri Date, Zakat Calculator, and Arabic Number formatting in a cohesive community platform
+- **Islamic Finance Dashboard**: Comprehensive Islamic finance management featuring Zakat calculator with export, investment portfolio tracking, Hijri calendar with Islamic events, transaction DataTable, and prayer times integration
+- **DataTable Showcase**: Advanced data table demonstration with 50 sample users, live sorting/filtering, pagination, search, export to CSV, and mobile-responsive cards view
 - **Multi-Step Registration Form**: 4-step registration with validation, progress indicators, and bilingual error messages
 - **Analytics Dashboard**: Stats cards, revenue charts, transaction tables (with responsive mobile layout), and activity feeds
 - **E-commerce Product Page**: Image gallery, color/size selection, reviews with ratings, and related products grid
@@ -464,6 +466,7 @@ Tokens are converted to CSS custom properties in `styles/globals.css` and consum
 - [ ] SEO improvements
 
 ### Recent Improvements (November 2025)
+- ✅ **New Showcase Examples**: Added Islamic Finance Dashboard (comprehensive finance management) and DataTable Showcase (advanced table with 50 sample users, export to CSV)
 - ✅ **Phase 3 Complete & Production Ready!** Calendar component with dual Gregorian/Hijri dates, event markers, range selection - all Phase 3 features now implemented with proper Hijri conversion algorithm
 - ✅ **Bug Fixes**: Fixed hydration error in Hijri Date docs, implemented accurate Hijri conversion (Julian Day Number algorithm), added Hijri month display to Calendar header
 - ✅ **Calendar Component**: Date picker with Hijri support, event indicators, single/range selection, navigation, and disabled dates

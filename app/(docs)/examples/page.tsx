@@ -11,6 +11,8 @@ import {
   ShoppingCart,
   Calendar,
   Sparkles,
+  Table,
+  Landmark,
 } from 'lucide-react'
 
 const examples = [
@@ -22,6 +24,23 @@ const examples = [
     tags: ['GCC', 'Islamic', 'Zakat', 'Prayer', 'RTL'],
     status: 'ready' as const,
     featured: true,
+  },
+  {
+    title: 'Islamic Finance Dashboard',
+    description: 'Comprehensive Islamic finance management with Zakat calculator, investment tracking, Hijri calendar, prayer times, and transaction history.',
+    href: '/examples/islamic-finance-dashboard',
+    icon: Landmark,
+    tags: ['GCC', 'Islamic', 'Finance', 'Zakat', 'DataTable', 'RTL'],
+    status: 'ready' as const,
+    featured: true,
+  },
+  {
+    title: 'DataTable Showcase',
+    description: 'Advanced data table with sorting, filtering, pagination, and export. Demonstrates all DataTable features with 50 sample users.',
+    href: '/examples/datatable-showcase',
+    icon: Table,
+    tags: ['DataTable', 'Sorting', 'Filtering', 'Export', 'RTL'],
+    status: 'ready' as const,
   },
   {
     title: 'Multi-Step Registration Form',
@@ -186,8 +205,8 @@ export default function ExamplesPage() {
                 </h3>
                 <p className="text-sm text-muted-foreground">
                   {isRTL
-                    ? 'تصفح مكتبة المكونات الكاملة لدينا التي تحتوي على 30 مكوناً موثقاً بالكامل مع أمثلة حية وإرشادات إمكانية الوصول.'
-                    : 'Browse our complete component library with 30 fully documented components with live examples and accessibility guidelines.'}
+                    ? 'تصفح مكتبة المكونات الكاملة لدينا التي تحتوي على 38 مكوناً موثقاً بالكامل مع أمثلة حية وإرشادات إمكانية الوصول.'
+                    : 'Browse our complete component library with 38 fully documented components with live examples and accessibility guidelines.'}
                 </p>
                 <Link href="/components">
                   <Badge className="cursor-pointer hover:bg-primary/90">
