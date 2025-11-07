@@ -2,20 +2,14 @@
 
 import * as React from 'react'
 import Link from 'next/link'
-import { Button } from '@/components/ui/button'
 import {
   ContextMenu,
   ContextMenuCheckboxItem,
   ContextMenuContent,
   ContextMenuItem,
   ContextMenuLabel,
-  ContextMenuRadioGroup,
-  ContextMenuRadioItem,
   ContextMenuSeparator,
   ContextMenuShortcut,
-  ContextMenuSub,
-  ContextMenuSubContent,
-  ContextMenuSubTrigger,
   ContextMenuTrigger,
 } from '@/components/ui/context-menu'
 import { Card, CardContent } from '@/components/ui/card'
@@ -24,7 +18,6 @@ import { ComponentShowcase } from '@/components/docs/component-showcase'
 import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
 import {
-  Sparkles,
   Copy,
   Share,
   Download,

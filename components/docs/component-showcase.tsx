@@ -4,7 +4,6 @@ import * as React from 'react'
 import { cn } from '@/lib/utils'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { Separator } from '@/components/ui/separator'
 import { ArrowLeftRight, Moon, Sun, Code2, Copy, Check } from 'lucide-react'
 import { copyToClipboard } from '@/lib/utils'
 
@@ -63,13 +62,7 @@ function ComponentShowcase({ children, className, title, description, code }: Co
           {description && <p className="text-sm text-muted-foreground">{description}</p>}
         </div>
       )}
-      <Card>
-        <CardContent className="p-6">
-          <div className="flex items-center justify-center min-h-[200px]">
-            {children}
-          </div>
-        </CardContent>
-      </Card>
+      {children}
       {code && (
         <div className="space-y-2">
           <div className="flex items-center justify-between">

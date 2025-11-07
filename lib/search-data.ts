@@ -291,6 +291,13 @@ export const searchData: SearchItem[] = [
     keywords: ['table', 'data', 'grid', 'rows', 'columns', 'mobile'],
   },
   {
+    title: 'DataTable',
+    description: 'Advanced data table with sorting, filtering, and pagination',
+    href: '/components/data-table',
+    category: 'Component',
+    keywords: ['datatable', 'table', 'data', 'sorting', 'filter', 'pagination', 'search', 'grid', 'rows', 'columns', 'advanced'],
+  },
+  {
     title: 'Command',
     description: 'Command palette / search interface',
     href: '/components/command',
@@ -318,8 +325,64 @@ export const searchData: SearchItem[] = [
     category: 'Component',
     keywords: ['collapsible', 'collapse', 'expand', 'toggle', 'accordion'],
   },
+  {
+    title: 'Prayer Times',
+    description: 'Beautiful prayer times display for Islamic applications',
+    href: '/components/prayer-times',
+    category: 'Component',
+    keywords: ['prayer', 'times', 'salah', 'islamic', 'gcc', 'muslim', 'adhan', 'mosque', 'fajr', 'dhuhr', 'asr', 'maghrib', 'isha'],
+  },
+  {
+    title: 'Hijri Date',
+    description: 'Display Gregorian and Hijri (Islamic calendar) dates together',
+    href: '/components/hijri-date',
+    category: 'Component',
+    keywords: ['hijri', 'islamic', 'calendar', 'date', 'gcc', 'muslim', 'lunar', 'gregorian', 'dual', 'bilingual'],
+  },
+  {
+    title: 'Arabic Number',
+    description: 'Utilities for Arabic-Indic numerals and SAR currency formatting',
+    href: '/components/arabic-number',
+    category: 'Component',
+    keywords: ['arabic', 'number', 'numerals', 'indic', 'currency', 'sar', 'riyal', 'gcc', 'format', 'percentage', 'money', 'price'],
+  },
+  {
+    title: 'Zakat Calculator',
+    description: 'Calculate Islamic Zakat obligations on wealth and assets',
+    href: '/components/zakat-calculator',
+    category: 'Component',
+    keywords: ['zakat', 'calculator', 'islamic', 'charity', 'wealth', 'nisab', 'gcc', 'muslim', 'finance', 'obligation', 'gold', 'silver', 'calculator'],
+  },
+  {
+    title: 'Calendar',
+    description: 'Date picker with Hijri calendar support, events, and range selection',
+    href: '/components/calendar',
+    category: 'Component',
+    keywords: ['calendar', 'date', 'picker', 'hijri', 'islamic', 'gregorian', 'dual', 'range', 'events', 'gcc', 'month', 'selection'],
+  },
 
   // Examples
+  {
+    title: 'GCC Community Dashboard',
+    description: 'Complete showcase of all GCC components in a real-world dashboard',
+    href: '/examples/gcc-dashboard',
+    category: 'Example',
+    keywords: ['gcc', 'dashboard', 'prayer', 'zakat', 'hijri', 'arabic', 'islamic', 'example', 'showcase', 'demo'],
+  },
+  {
+    title: 'Islamic Finance Dashboard',
+    description: 'Comprehensive Islamic finance management with Zakat calculator, investment tracking, and transaction history',
+    href: '/examples/islamic-finance-dashboard',
+    category: 'Example',
+    keywords: ['islamic', 'finance', 'zakat', 'investment', 'portfolio', 'transaction', 'hijri', 'prayer', 'halal', 'shariah', 'datatable', 'gcc', 'dashboard'],
+  },
+  {
+    title: 'DataTable Showcase',
+    description: 'Advanced data table with sorting, filtering, pagination, and export functionality',
+    href: '/examples/datatable-showcase',
+    category: 'Example',
+    keywords: ['datatable', 'table', 'sorting', 'filtering', 'pagination', 'export', 'csv', 'search', 'data', 'grid'],
+  },
   {
     title: 'Examples',
     description: 'Real-world usage examples and demos',

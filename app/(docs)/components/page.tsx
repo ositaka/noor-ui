@@ -24,6 +24,11 @@ import {
   User,
   PanelLeft,
   ChevronsUpDown,
+  Clock,
+  Hash,
+  Calculator,
+  TableIcon,
+  CalendarIcon,
 } from 'lucide-react'
 
 const componentCategories = [
@@ -58,6 +63,7 @@ const componentCategories = [
     description: 'Components for displaying data and information',
     components: [
       { name: 'Table', icon: Layers, href: '/components/table', status: 'ready' },
+      { name: 'DataTable', icon: TableIcon, href: '/components/data-table', status: 'ready' },
       { name: 'Command', icon: Menu, href: '/components/command', status: 'ready' },
     ],
   },
@@ -94,6 +100,17 @@ const componentCategories = [
       { name: 'Popover', icon: MessageSquare, href: '/components/popover', status: 'ready' },
     ],
   },
+  {
+    name: 'GCC-Specific',
+    description: 'Components tailored for the GCC market and Islamic applications',
+    components: [
+      { name: 'Prayer Times', icon: Clock, href: '/components/prayer-times', status: 'ready' },
+      { name: 'Hijri Date', icon: Clock, href: '/components/hijri-date', status: 'ready' },
+      { name: 'Arabic Number', icon: Hash, href: '/components/arabic-number', status: 'ready' },
+      { name: 'Zakat Calculator', icon: Calculator, href: '/components/zakat-calculator', status: 'ready' },
+      { name: 'Calendar', icon: CalendarIcon, href: '/components/calendar', status: 'ready' },
+    ],
+  },
 ]
 
 export default function ComponentsPage() {
@@ -105,7 +122,7 @@ export default function ComponentsPage() {
         <div className="max-w-3xl mb-12">
           <h1 className="text-4xl font-bold tracking-tight mb-4">Components</h1>
           <p className="text-xl text-muted-foreground mb-6">
-            32 beautifully designed components built with Radix UI and Tailwind CSS.
+            38 beautifully designed components built with Radix UI and Tailwind CSS.
             Full RTL support, accessible, and customizable. All components are production-ready.
           </p>
 

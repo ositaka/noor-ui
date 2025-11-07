@@ -10,7 +10,7 @@ import { Separator } from '@/components/ui/separator'
 import { ComponentShowcase } from '@/components/docs/component-showcase'
 import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
-import { Sparkles, AlertCircle } from 'lucide-react'
+import { AlertCircle } from 'lucide-react'
 
 const labelProps: PropDefinition[] = [
   {

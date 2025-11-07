@@ -8,7 +8,7 @@ import { Separator } from '@/components/ui/separator'
 import { ComponentShowcase } from '@/components/docs/component-showcase'
 import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
-import { Sparkles, User, Settings, Bell } from 'lucide-react'
+import { User, Bell } from 'lucide-react'
 
 const tabsProps: PropDefinition[] = [
   {

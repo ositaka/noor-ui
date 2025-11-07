@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { Card, CardContent } from '@/components/ui/card'
 import { ComponentShowcase } from '@/components/docs/component-showcase'
 import { CodeBlock } from '@/components/docs/code-block'
-import { Sparkles, Search, FileText, Settings, User } from 'lucide-react'
+import { Search, FileText, Settings, User } from 'lucide-react'
 import {
   Command,
   CommandDialog,

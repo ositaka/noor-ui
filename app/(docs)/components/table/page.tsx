@@ -2,7 +2,6 @@
 
 import * as React from 'react'
 import Link from 'next/link'
-import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Checkbox } from '@/components/ui/checkbox'
 import {
@@ -20,7 +19,6 @@ import { Separator } from '@/components/ui/separator'
 import { ComponentShowcase } from '@/components/docs/component-showcase'
 import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
-import { Sparkles, ArrowUpDown } from 'lucide-react'
 
 const tableProps: PropDefinition[] = [
   {

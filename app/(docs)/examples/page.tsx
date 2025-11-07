@@ -9,10 +9,39 @@ import {
   CheckSquare,
   LayoutDashboard,
   ShoppingCart,
-  Calendar
+  Calendar,
+  Sparkles,
+  Table,
+  Landmark,
 } from 'lucide-react'
 
 const examples = [
+  {
+    title: 'GCC Community Dashboard',
+    description: 'Complete GCC dashboard with Prayer Times, Hijri dates, Zakat calculator, and Arabic numbers. Perfect showcase of all GCC components.',
+    href: '/examples/gcc-dashboard',
+    icon: Sparkles,
+    tags: ['GCC', 'Islamic', 'Zakat', 'Prayer', 'RTL'],
+    status: 'ready' as const,
+    featured: true,
+  },
+  {
+    title: 'Islamic Finance Dashboard',
+    description: 'Comprehensive Islamic finance management with Zakat calculator, investment tracking, Hijri calendar, prayer times, and transaction history.',
+    href: '/examples/islamic-finance-dashboard',
+    icon: Landmark,
+    tags: ['GCC', 'Islamic', 'Finance', 'Zakat', 'DataTable', 'RTL'],
+    status: 'ready' as const,
+    featured: true,
+  },
+  {
+    title: 'DataTable Showcase',
+    description: 'Advanced data table with sorting, filtering, pagination, and export. Demonstrates all DataTable features with 50 sample users.',
+    href: '/examples/datatable-showcase',
+    icon: Table,
+    tags: ['DataTable', 'Sorting', 'Filtering', 'Export', 'RTL'],
+    status: 'ready' as const,
+  },
   {
     title: 'Multi-Step Registration Form',
     description: 'A comprehensive 4-step registration form with validation, bilingual error messages, and perfect RTL support.',
@@ -107,7 +136,7 @@ export default function ExamplesPage() {
                 example.status === 'ready'
                   ? 'hover:border-primary/50 cursor-pointer'
                   : 'opacity-60'
-              }`}>
+              } ${(example as any).featured ? 'border-primary/30 bg-primary/5' : ''}`}>
                 <CardHeader>
                   <div className="flex items-start justify-between mb-2">
                     <div className="p-2 bg-primary/10 rounded-lg">
@@ -176,8 +205,8 @@ export default function ExamplesPage() {
                 </h3>
                 <p className="text-sm text-muted-foreground">
                   {isRTL
-                    ? 'تصفح مكتبة المكونات الكاملة لدينا التي تحتوي على 30 مكوناً موثقاً بالكامل مع أمثلة حية وإرشادات إمكانية الوصول.'
-                    : 'Browse our complete component library with 30 fully documented components with live examples and accessibility guidelines.'}
+                    ? 'تصفح مكتبة المكونات الكاملة لدينا التي تحتوي على 38 مكوناً موثقاً بالكامل مع أمثلة حية وإرشادات إمكانية الوصول.'
+                    : 'Browse our complete component library with 38 fully documented components with live examples and accessibility guidelines.'}
                 </p>
                 <Link href="/components">
                   <Badge className="cursor-pointer hover:bg-primary/90">
