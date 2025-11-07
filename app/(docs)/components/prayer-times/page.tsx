@@ -242,6 +242,56 @@ export default function MyApp() {
               />
             </div>
           </div>
+
+          {/* Notification Variant */}
+          <div className="mb-12">
+            <h3 className="text-2xl font-semibold mb-4">Notification Variant</h3>
+            <p className="text-muted-foreground mb-4">
+              Special UI for Adhan notifications with dismiss and play adhan actions. Perfect for
+              alerts when prayer time arrives.
+            </p>
+            <ComponentShowcase>
+              <ComponentShowcase.Demo>
+                <div className="max-w-md mx-auto">
+                  <PrayerTimes
+                    prayers={samplePrayers}
+                    nextPrayer="Maghrib"
+                    variant="notification"
+                    location="Riyadh"
+                    locationAr="الرياض"
+                    showPlayAdhan={true}
+                    onPlayAdhan={() => alert('Playing Adhan...')}
+                    onDismiss={() => alert('Dismissed')}
+                  />
+                </div>
+              </ComponentShowcase.Demo>
+            </ComponentShowcase>
+            <div className="mt-4">
+              <CodeBlock
+                language="tsx"
+                code={`const [showNotification, setShowNotification] = useState(true)
+
+if (!showNotification) return null
+
+return (
+  <PrayerTimes
+    prayers={prayers}
+    nextPrayer="Maghrib"
+    variant="notification"
+    location="Riyadh"
+    locationAr="الرياض"
+    showPlayAdhan={true}
+    onPlayAdhan={() => {
+      // Play adhan audio
+      const audio = new Audio('/adhan.mp3')
+      audio.play()
+    }}
+    onDismiss={() => setShowNotification(false)}
+  />
+)`}
+              />
+            </div>
+          </div>
         </section>
 
         {/* Integration with Calculation Libraries */}
@@ -342,9 +392,27 @@ export function SmartPrayerTimes({ latitude, longitude }: { latitude: number; lo
               },
               {
                 name: 'variant',
-                type: '"default" | "compact" | "detailed"',
+                type: '"default" | "compact" | "detailed" | "notification"',
                 default: '"default"',
-                description: 'Visual variant affecting spacing and text size.',
+                description: 'Visual variant affecting spacing and text size. "notification" shows an Adhan alert UI.',
+              },
+              {
+                name: 'onDismiss',
+                type: '() => void',
+                default: 'undefined',
+                description: 'Callback when notification is dismissed (notification variant only).',
+              },
+              {
+                name: 'showPlayAdhan',
+                type: 'boolean',
+                default: 'false',
+                description: 'Show play adhan button (notification variant only).',
+              },
+              {
+                name: 'onPlayAdhan',
+                type: '() => void',
+                default: 'undefined',
+                description: 'Callback when play adhan is clicked (notification variant only).',
               },
               {
                 name: 'className',

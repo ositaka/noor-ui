@@ -7,8 +7,9 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Separator } from '@/components/ui/separator'
 import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
 import { formatSAR, formatNumber } from '@/lib/arabic-numbers'
-import { AlertCircle, Info } from 'lucide-react'
+import { AlertCircle, Info, Download, Share2, Printer, Copy, Check } from 'lucide-react'
 
 // ============================================================================
 // Types
@@ -89,6 +90,9 @@ export const ZakatCalculator = React.forwardRef<HTMLDivElement, ZakatCalculatorP
       other: defaultValues?.other || 0,
     })
 
+    // Copy state
+    const [copied, setCopied] = React.useState(false)
+
     // Calculate Zakat
     const calculation = React.useMemo(() => {
       // Convert precious metals to SAR
@@ -137,6 +141,149 @@ export const ZakatCalculator = React.forwardRef<HTMLDivElement, ZakatCalculatorP
 
     const formatNum = (amount: number) => {
       return formatNumber(amount, { locale, useArabicNumerals, decimals: 2 })
+    }
+
+    // Generate text summary for export/sharing
+    const generateSummary = () => {
+      const date = new Date().toLocaleDateString(locale === 'ar' ? 'ar-SA' : 'en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      })
+
+      if (isRTL) {
+        return `حساب الزكاة
+التاريخ: ${date}
+
+أصولك:
+━━━━━━━━━━━━━━━━
+• النقد: ${formatCurrency(assets.cash)}
+• الذهب: ${formatNum(assets.gold)} جرام (${formatCurrency(assets.gold * goldPricePerGram)})
+• الفضة: ${formatNum(assets.silver)} جرام (${formatCurrency(assets.silver * silverPricePerGram)})
+• الأصول التجارية: ${formatCurrency(assets.business)}
+• الاستثمارات: ${formatCurrency(assets.investments)}
+• أصول أخرى: ${formatCurrency(assets.other)}
+
+نتيجة الحساب:
+━━━━━━━━━━━━━━━━
+• إجمالي الثروة: ${formatCurrency(calculation.totalWealth)}
+• عتبة النصاب: ${formatCurrency(calculation.nisabThreshold)}
+• الحالة: ${calculation.isZakatApplicable ? 'الزكاة واجبة ✓' : 'أقل من النصاب'}
+
+${calculation.isZakatApplicable ? `• الزكاة المستحقة (٢٫٥٪): ${formatCurrency(calculation.zakatDue)}` : ''}`
+      } else {
+        return `Zakat Calculation
+Date: ${date}
+
+Your Assets:
+━━━━━━━━━━━━━━━━
+• Cash: ${formatCurrency(assets.cash)}
+• Gold: ${formatNum(assets.gold)} grams (${formatCurrency(assets.gold * goldPricePerGram)})
+• Silver: ${formatNum(assets.silver)} grams (${formatCurrency(assets.silver * silverPricePerGram)})
+• Business Assets: ${formatCurrency(assets.business)}
+• Investments: ${formatCurrency(assets.investments)}
+• Other Assets: ${formatCurrency(assets.other)}
+
+Calculation Result:
+━━━━━━━━━━━━━━━━
+• Total Wealth: ${formatCurrency(calculation.totalWealth)}
+• Nisab Threshold: ${formatCurrency(calculation.nisabThreshold)}
+• Status: ${calculation.isZakatApplicable ? 'Zakat Due ✓' : 'Below Nisab'}
+
+${calculation.isZakatApplicable ? `• Zakat Due (2.5%): ${formatCurrency(calculation.zakatDue)}` : ''}`
+      }
+    }
+
+    // Copy to clipboard
+    const handleCopy = async () => {
+      try {
+        await navigator.clipboard.writeText(generateSummary())
+        setCopied(true)
+        setTimeout(() => setCopied(false), 2000)
+      } catch (err) {
+        console.error('Failed to copy:', err)
+      }
+    }
+
+    // Download as text file
+    const handleDownload = () => {
+      const summary = generateSummary()
+      const blob = new Blob([summary], { type: 'text/plain;charset=utf-8' })
+      const url = URL.createObjectURL(blob)
+      const link = document.createElement('a')
+      link.href = url
+      link.download = `zakat-calculation-${new Date().toISOString().split('T')[0]}.txt`
+      document.body.appendChild(link)
+      link.click()
+      document.body.removeChild(link)
+      URL.revokeObjectURL(url)
+    }
+
+    // Download as JSON
+    const handleDownloadJSON = () => {
+      const data = {
+        date: new Date().toISOString(),
+        assets,
+        goldPricePerGram,
+        silverPricePerGram,
+        calculation: {
+          totalWealth: calculation.totalWealth,
+          nisabThreshold: calculation.nisabThreshold,
+          zakatDue: calculation.zakatDue,
+          isZakatApplicable: calculation.isZakatApplicable,
+        },
+      }
+      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' })
+      const url = URL.createObjectURL(blob)
+      const link = document.createElement('a')
+      link.href = url
+      link.download = `zakat-calculation-${new Date().toISOString().split('T')[0]}.json`
+      document.body.appendChild(link)
+      link.click()
+      document.body.removeChild(link)
+      URL.revokeObjectURL(url)
+    }
+
+    // Print
+    const handlePrint = () => {
+      const printWindow = window.open('', '', 'width=800,height=600')
+      if (!printWindow) return
+
+      const summary = generateSummary()
+      printWindow.document.write(`
+        <!DOCTYPE html>
+        <html dir="${isRTL ? 'rtl' : 'ltr'}">
+        <head>
+          <title>${isRTL ? 'حساب الزكاة' : 'Zakat Calculation'}</title>
+          <style>
+            body {
+              font-family: ${isRTL ? 'Arial, sans-serif' : 'Arial, sans-serif'};
+              padding: 40px;
+              max-width: 800px;
+              margin: 0 auto;
+              line-height: 1.6;
+            }
+            pre {
+              white-space: pre-wrap;
+              font-family: inherit;
+              font-size: 14px;
+            }
+            @media print {
+              body { padding: 20px; }
+            }
+          </style>
+        </head>
+        <body>
+          <pre>${summary}</pre>
+        </body>
+        </html>
+      `)
+      printWindow.document.close()
+      printWindow.focus()
+      setTimeout(() => {
+        printWindow.print()
+        printWindow.close()
+      }, 250)
     }
 
     return (
@@ -406,6 +553,61 @@ export const ZakatCalculator = React.forwardRef<HTMLDivElement, ZakatCalculatorP
                 </div>
               </>
             )}
+
+            {/* Export/Share Actions */}
+            <Separator />
+            <div className="space-y-3">
+              <p className="text-sm font-medium text-muted-foreground">
+                {isRTL ? 'تصدير ومشاركة' : 'Export & Share'}
+              </p>
+              <div className="grid grid-cols-2 gap-2">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={handleCopy}
+                  className="w-full"
+                >
+                  {copied ? (
+                    <>
+                      <Check className="h-4 w-4 me-2" />
+                      {isRTL ? 'تم النسخ!' : 'Copied!'}
+                    </>
+                  ) : (
+                    <>
+                      <Copy className="h-4 w-4 me-2" />
+                      {isRTL ? 'نسخ' : 'Copy'}
+                    </>
+                  )}
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={handleDownload}
+                  className="w-full"
+                >
+                  <Download className="h-4 w-4 me-2" />
+                  {isRTL ? 'تحميل نص' : 'Download'}
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={handlePrint}
+                  className="w-full"
+                >
+                  <Printer className="h-4 w-4 me-2" />
+                  {isRTL ? 'طباعة' : 'Print'}
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={handleDownloadJSON}
+                  className="w-full"
+                >
+                  <Share2 className="h-4 w-4 me-2" />
+                  {isRTL ? 'JSON' : 'JSON'}
+                </Button>
+              </div>
+            </div>
           </CardContent>
         </Card>
       </div>

@@ -203,10 +203,10 @@ This enables:
 - **DataTable**: Advanced data table with sorting, filtering, pagination, and loading states
 
 **GCC-Specific Components:**
-- **Prayer Times**: Display Islamic prayer times with countdown timer and next prayer highlighting
+- **Prayer Times**: Display Islamic prayer times with countdown timer, next prayer highlighting, and Adhan notification UI variant
 - **Hijri Date**: Show both Gregorian and Hijri (Islamic calendar) dates with multiple layout variants
 - **Arabic Number**: Comprehensive utilities for Arabic-Indic numerals (٠-٩) and SAR currency formatting
-- **Zakat Calculator**: Calculate Islamic Zakat obligations with Nisab checking and multi-asset support
+- **Zakat Calculator**: Calculate Islamic Zakat obligations with Nisab checking, multi-asset support, and export/sharing features (copy, print, download)
 
 ### Documentation Components
 
@@ -463,6 +463,7 @@ Tokens are converted to CSS custom properties in `styles/globals.css` and consum
 - [ ] SEO improvements
 
 ### Recent Improvements (November 2025)
+- ✅ **Component Enhancements**: Added export/sharing to Zakat Calculator (copy, print, download, JSON) and Adhan notification variant to Prayer Times
 - ✅ **DataTable Component**: Advanced data table with sorting, filtering, pagination, loading states, and mobile-responsive cards view
 - ✅ **Added 4 GCC-Specific Components**: Prayer Times, Hijri Date, Arabic Number utilities, Zakat Calculator
 - ✅ **GCC Community Dashboard**: Complete example showcasing all GCC components in a real-world platform

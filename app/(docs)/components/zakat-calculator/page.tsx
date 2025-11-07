@@ -6,7 +6,8 @@ import { ComponentShowcase } from '@/components/docs/component-showcase'
 import { PropsTable } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
 import { ZakatCalculator } from '@/components/ui/zakat-calculator'
-import { Card } from '@/components/ui/card'
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
+import { Copy, Download, Printer, Share2 } from 'lucide-react'
 
 export default function ZakatCalculatorPage() {
   return (
@@ -413,6 +414,106 @@ export function SmartZakatCalculator() {
   /** Other zakatable assets (SAR) */
   other: number
 }`}
+            />
+          </div>
+        </section>
+
+        {/* Export & Share Features */}
+        <section className="mb-16">
+          <h2 className="text-3xl font-bold mb-6">Export & Share Features</h2>
+          <div className="space-y-4 text-muted-foreground mb-6">
+            <p>
+              The Zakat Calculator includes built-in export and sharing features to help users
+              save and share their calculations. All export options are available in the calculation
+              result card.
+            </p>
+          </div>
+
+          <div className="grid gap-6 sm:grid-cols-2">
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-lg flex items-center gap-2">
+                  <Copy className="h-5 w-5" />
+                  Copy to Clipboard
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground">
+                  Quickly copy the calculation summary as formatted text. Perfect for pasting
+                  into messages, emails, or documents. Shows &quot;Copied!&quot; confirmation.
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-lg flex items-center gap-2">
+                  <Download className="h-5 w-5" />
+                  Download as Text
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground">
+                  Download the calculation as a .txt file with all asset details, total wealth,
+                  and Zakat due amount. File is named with the current date.
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-lg flex items-center gap-2">
+                  <Printer className="h-5 w-5" />
+                  Print Calculation
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground">
+                  Open a print-friendly view of the calculation. Includes all details in a
+                  clean, formatted layout suitable for paper records.
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-lg flex items-center gap-2">
+                  <Share2 className="h-5 w-5" />
+                  Export as JSON
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground">
+                  Download structured data as JSON for developers or data import. Includes
+                  assets, prices, calculation results, and timestamp.
+                </p>
+              </CardContent>
+            </Card>
+          </div>
+
+          <div className="mt-6">
+            <h3 className="text-lg font-semibold mb-3">Example Export Format</h3>
+            <CodeBlock
+              language="text"
+              code={`Zakat Calculation
+Date: November 7, 2025
+
+Your Assets:
+━━━━━━━━━━━━━━━━
+• Cash: 50,000.00 SAR
+• Gold: 100.00 grams (25,000.00 SAR)
+• Silver: 0.00 grams (0.00 SAR)
+• Business Assets: 75,000.00 SAR
+• Investments: 30,000.00 SAR
+• Other Assets: 0.00 SAR
+
+Calculation Result:
+━━━━━━━━━━━━━━━━
+• Total Wealth: 180,000.00 SAR
+• Nisab Threshold: 21,250.00 SAR
+• Status: Zakat Due ✓
+
+• Zakat Due (2.5%): 4,500.00 SAR`}
             />
           </div>
         </section>

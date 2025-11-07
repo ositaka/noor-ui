@@ -3,7 +3,8 @@ import { cva, type VariantProps } from 'class-variance-authority'
 import { cn } from '@/lib/utils'
 import { Card } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { Clock, MapPin } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import { Clock, MapPin, Bell, Volume2, X } from 'lucide-react'
 
 // ============================================================================
 // Types
@@ -34,7 +35,13 @@ export interface PrayerTimesProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Date in Arabic */
   dateAr?: string
   /** Visual variant */
-  variant?: 'default' | 'compact' | 'detailed'
+  variant?: 'default' | 'compact' | 'detailed' | 'notification'
+  /** Callback when notification is dismissed (notification variant only) */
+  onDismiss?: () => void
+  /** Show play adhan button (notification variant only) */
+  showPlayAdhan?: boolean
+  /** Callback when play adhan is clicked (notification variant only) */
+  onPlayAdhan?: () => void
 }
 
 // ============================================================================
@@ -47,6 +54,7 @@ const prayerTimesVariants = cva('w-full', {
       default: 'space-y-4',
       compact: 'space-y-2',
       detailed: 'space-y-6',
+      notification: 'space-y-4',
     },
   },
   defaultVariants: {
@@ -65,6 +73,9 @@ export const PrayerTimes = React.forwardRef<HTMLDivElement, PrayerTimesProps>(
       date,
       dateAr,
       variant = 'default',
+      onDismiss,
+      showPlayAdhan = false,
+      onPlayAdhan,
       className,
       ...props
     },
@@ -72,6 +83,99 @@ export const PrayerTimes = React.forwardRef<HTMLDivElement, PrayerTimesProps>(
   ) => {
     const isRTL = typeof document !== 'undefined' && document.documentElement.dir === 'rtl'
 
+    // Notification variant - special UI for Adhan alerts
+    if (variant === 'notification') {
+      const currentPrayer = prayers.find(p => p.name === nextPrayer || p.nameAr === nextPrayer)
+
+      return (
+        <Card
+          ref={ref}
+          className={cn(
+            'p-6 border-primary/30 bg-gradient-to-br from-primary/10 via-primary/5 to-background shadow-lg',
+            className
+          )}
+          {...props}
+        >
+          <div className="space-y-4">
+            {/* Header with dismiss button */}
+            <div className="flex items-start justify-between gap-4">
+              <div className="flex items-center gap-3">
+                <div className="rounded-full bg-primary/20 p-3">
+                  <Bell className="h-6 w-6 text-primary" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-lg">
+                    {isRTL ? 'حان وقت الصلاة' : 'Prayer Time'}
+                  </h3>
+                  <p className="text-sm text-muted-foreground">
+                    {currentPrayer
+                      ? isRTL
+                        ? currentPrayer.nameAr
+                        : currentPrayer.name
+                      : ''}
+                  </p>
+                </div>
+              </div>
+              {onDismiss && (
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="h-8 w-8 -me-2 -mt-2"
+                  onClick={onDismiss}
+                >
+                  <X className="h-4 w-4" />
+                </Button>
+              )}
+            </div>
+
+            {/* Time and location */}
+            <div className="flex items-center justify-between p-4 rounded-lg bg-background/50 border">
+              <div className="space-y-1">
+                <p className="text-sm text-muted-foreground">
+                  {isRTL ? 'الوقت' : 'Time'}
+                </p>
+                <p className="text-2xl font-bold">
+                  {currentPrayer?.time || '-'}
+                </p>
+              </div>
+              {location && (
+                <div className="flex items-center gap-2 text-muted-foreground">
+                  <MapPin className="h-4 w-4" />
+                  <span className="text-sm">
+                    {isRTL ? locationAr || location : location}
+                  </span>
+                </div>
+              )}
+            </div>
+
+            {/* Actions */}
+            <div className="flex gap-2">
+              {showPlayAdhan && onPlayAdhan && (
+                <Button
+                  variant="default"
+                  className="flex-1"
+                  onClick={onPlayAdhan}
+                >
+                  <Volume2 className="h-4 w-4 me-2" />
+                  {isRTL ? 'تشغيل الأذان' : 'Play Adhan'}
+                </Button>
+              )}
+              {onDismiss && (
+                <Button
+                  variant="outline"
+                  className={showPlayAdhan ? 'flex-1' : 'w-full'}
+                  onClick={onDismiss}
+                >
+                  {isRTL ? 'إغلاق' : 'Dismiss'}
+                </Button>
+              )}
+            </div>
+          </div>
+        </Card>
+      )
+    }
+
+    // Standard variants (default, compact, detailed)
     return (
       <Card ref={ref} className={cn('p-8', className)} {...props}>
         <div className={cn(prayerTimesVariants({ variant }))}>
