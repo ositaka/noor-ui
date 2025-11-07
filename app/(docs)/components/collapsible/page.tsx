@@ -9,7 +9,7 @@ import { Separator } from '@/components/ui/separator'
 import { ComponentShowcase } from '@/components/docs/component-showcase'
 import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
-import { Sparkles, ChevronDown, ChevronRight, ChevronsUpDown } from 'lucide-react'
+import { ChevronDown, ChevronRight, ChevronsUpDown } from 'lucide-react'
 
 const collapsibleProps: PropDefinition[] = [
   {

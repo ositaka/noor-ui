@@ -12,7 +12,7 @@ import {
 import { ComponentShowcase } from '@/components/docs/component-showcase'
 import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
-import { Sparkles, Info, Plus, Settings, Trash2 } from 'lucide-react'
+import { Info, Plus, Settings, Trash2 } from 'lucide-react'
 const tooltipProps: PropDefinition[] = [
   {
     name: 'side',

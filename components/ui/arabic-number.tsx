@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { cva, type VariantProps } from 'class-variance-authority'
 import { cn } from '@/lib/utils'
-import { toArabicNumerals, formatSAR, formatNumber, formatPercentage } from '@/lib/arabic-numbers'
+import { formatSAR, formatNumber, formatPercentage } from '@/lib/arabic-numbers'
 
 // ============================================================================
 // Types

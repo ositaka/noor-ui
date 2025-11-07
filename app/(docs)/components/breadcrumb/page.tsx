@@ -7,7 +7,7 @@ import { Separator } from '@/components/ui/separator'
 import { ComponentShowcase } from '@/components/docs/component-showcase'
 import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
-import { Sparkles, Home, Folder, File } from 'lucide-react'
+import { Home, Folder, File } from 'lucide-react'
 import {
   Breadcrumb,
   BreadcrumbList,
