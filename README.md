@@ -7,7 +7,8 @@ Built for the GCC market with accessibility, performance, and user experience as
 ## 🌟 Features
 
 - **RTL-First Architecture**: Designed for Arabic from the ground up, with English as an equally-supported alternative
-- **32 Production-Ready Components**: Complete UI toolkit covering essential patterns from forms to data display
+- **35 Production-Ready Components**: Complete UI toolkit covering essential patterns from forms to data display
+- **GCC-Specific Components**: Prayer times, Hijri dates, and Arabic number utilities built for the region
 - **Zero Directional Bugs**: 100% logical properties, no hardcoded LTR assumptions
 - **Direction-Aware Components**: Tabs, navigation, and layouts automatically adapt to text direction
 - **4 Distinct Themes**: Minimal, Futuristic, Cozy, and Artistic - all powered by the same design tokens
@@ -155,7 +156,7 @@ This enables:
 
 ## 🎨 Design System
 
-### All Components (32 Implemented)
+### All Components (35 Implemented)
 
 **Form Components:**
 - **Form**: State management with validation and bilingual error messages
@@ -199,6 +200,11 @@ This enables:
 
 **Data Display:**
 - **Table**: Structured data display with RTL text alignment
+
+**GCC-Specific Components:**
+- **Prayer Times**: Display Islamic prayer times with countdown timer and next prayer highlighting
+- **Hijri Date**: Show both Gregorian and Hijri (Islamic calendar) dates with multiple layout variants
+- **Arabic Number**: Comprehensive utilities for Arabic-Indic numerals (٠-٩) and SAR currency formatting
 
 ### Documentation Components
 
@@ -435,10 +441,10 @@ Tokens are converted to CSS custom properties in `styles/globals.css` and consum
 - [x] Bilingual content throughout (Dashboard and E-commerce examples)
 - [x] Create reusable layout components (SiteHeader, SiteFooter)
 
-### Phase 3: GCC-Specific Features
-- [ ] Hijri date picker component
-- [ ] Prayer times display component
-- [ ] Arabic number formatting utilities
+### Phase 3: GCC-Specific Features ✅
+- [x] Hijri date display component with 4 variants
+- [x] Prayer times display component with countdown timer
+- [x] Arabic number formatting utilities (7 utility functions)
 - [ ] RTL-aware data tables with sorting
 - [ ] Calendar component with Hijri support
 
@@ -452,6 +458,10 @@ Tokens are converted to CSS custom properties in `styles/globals.css` and consum
 - [ ] SEO improvements
 
 ### Recent Improvements (November 2025)
+- ✅ **Added 3 GCC-Specific Components**: Prayer Times, Hijri Date, Arabic Number utilities
+- ✅ **Arabic Number Utilities**: 7 formatting functions for Arabic-Indic numerals and SAR currency
+- ✅ **Prayer Times Component**: Display Islamic prayer times with countdown timer
+- ✅ **Hijri Date Component**: Dual calendar display with 4 layout variants
 - ✅ Refactored to use Next.js route groups for cleaner architecture
 - ✅ Added shared layout (header/footer) for all documentation pages
 - ✅ Made Tabs component fully direction-aware with Radix UI integration
