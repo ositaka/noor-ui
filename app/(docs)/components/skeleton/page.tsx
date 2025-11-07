@@ -1,3 +1,11 @@
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Skeleton | RTL Design System',
+  description: 'Loading placeholder component with animated shimmer effect. Multiple shape variants with full RTL layout support.',
+  keywords: ['skeleton', 'loading', 'placeholder', 'shimmer', 'animation', 'rtl', 'react', 'nextjs', 'accessibility'],
+}
+
 'use client'
 
 import * as React from 'react'

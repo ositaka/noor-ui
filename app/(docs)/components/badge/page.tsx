@@ -1,3 +1,11 @@
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Badge | RTL Design System',
+  description: 'Small status indicator component for displaying counts, statuses, and categories. Multiple variants with icons and full RTL support.',
+  keywords: ['badge', 'label', 'status', 'tag', 'indicator', 'rtl', 'react', 'nextjs', 'accessibility'],
+}
+
 'use client'
 
 import * as React from 'react'

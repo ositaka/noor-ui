@@ -1,3 +1,11 @@
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Accordion | RTL Design System',
+  description: 'Vertically stacked interactive headings that reveal associated content sections. Fully accessible with keyboard navigation and RTL support.',
+  keywords: ['accordion', 'collapsible', 'expandable', 'rtl', 'react', 'nextjs', 'accessibility', 'wai-aria'],
+}
+
 'use client'
 
 import * as React from 'react'

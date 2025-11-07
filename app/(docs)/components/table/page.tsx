@@ -1,3 +1,11 @@
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Table | RTL Design System',
+  description: 'Semantic HTML table component with header, body, footer, and caption. Responsive design with RTL text alignment.',
+  keywords: ['table', 'data table', 'grid', 'rows', 'columns', 'rtl', 'react', 'nextjs', 'accessibility'],
+}
+
 'use client'
 
 import * as React from 'react'

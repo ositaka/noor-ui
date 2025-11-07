@@ -1,3 +1,11 @@
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Calendar | RTL Design System',
+  description: 'Interactive date picker calendar component with full keyboard navigation, date range selection, and RTL layout support.',
+  keywords: ['calendar', 'date picker', 'datepicker', 'date selection', 'rtl', 'react', 'nextjs', 'accessibility'],
+}
+
 'use client'
 
 import * as React from 'react'

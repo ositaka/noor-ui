@@ -1,3 +1,11 @@
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Getting Started | RTL Design System',
+  description: 'Quick start guide to set up RTL Design System in your React and Next.js project. Install, configure, and build your first RTL application.',
+  keywords: ['getting started', 'setup', 'installation', 'tutorial', 'guide', 'rtl', 'react', 'nextjs', 'quickstart'],
+}
+
 'use client'
 
 import * as React from 'react'

@@ -1,3 +1,11 @@
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Popover | RTL Design System',
+  description: 'Floating content panel that appears near a trigger element. Automatic positioning with keyboard navigation and RTL support.',
+  keywords: ['popover', 'tooltip', 'floating', 'overlay', 'positioning', 'rtl', 'react', 'nextjs', 'accessibility'],
+}
+
 'use client'
 
 import * as React from 'react'

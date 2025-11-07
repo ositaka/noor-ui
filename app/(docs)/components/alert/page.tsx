@@ -1,3 +1,11 @@
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Alert | RTL Design System',
+  description: 'Alert component for displaying important messages with multiple variants. Supports success, warning, error, and info states with RTL layout.',
+  keywords: ['alert', 'notification', 'message', 'callout', 'rtl', 'react', 'nextjs', 'accessibility'],
+}
+
 'use client'
 
 import * as React from 'react'

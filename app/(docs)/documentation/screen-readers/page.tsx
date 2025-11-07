@@ -1,3 +1,11 @@
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Screen Reader Support | RTL Design System',
+  description: 'Screen reader compatibility guide with ARIA labels, landmarks, announcements, and testing strategies for accessible RTL applications.',
+  keywords: ['screen reader', 'aria', 'accessibility', 'nvda', 'jaws', 'voiceover', 'a11y', 'rtl', 'nextjs'],
+}
+
 'use client'
 
 import * as React from 'react'

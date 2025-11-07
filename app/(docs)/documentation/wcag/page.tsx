@@ -1,3 +1,11 @@
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'WCAG Compliance | RTL Design System',
+  description: 'WCAG 2.1 accessibility compliance guide with AA and AAA standards, color contrast, focus indicators, and testing tools.',
+  keywords: ['wcag', 'accessibility', 'compliance', 'a11y', 'standards', 'contrast', 'aria', 'rtl', 'nextjs'],
+}
+
 'use client'
 
 import * as React from 'react'

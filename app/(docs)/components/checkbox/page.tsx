@@ -1,3 +1,11 @@
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Checkbox | RTL Design System',
+  description: 'Interactive checkbox input with indeterminate state support. Fully accessible with keyboard navigation and RTL layout adaptation.',
+  keywords: ['checkbox', 'input', 'form', 'selection', 'indeterminate', 'rtl', 'react', 'nextjs', 'accessibility'],
+}
+
 'use client'
 
 import * as React from 'react'

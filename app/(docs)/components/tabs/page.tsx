@@ -1,3 +1,11 @@
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Tabs | RTL Design System',
+  description: 'Tabbed interface component for organizing content into multiple panels. Keyboard navigation with RTL layout support.',
+  keywords: ['tabs', 'tabbed interface', 'panels', 'navigation', 'keyboard', 'rtl', 'react', 'nextjs', 'accessibility', 'wai-aria'],
+}
+
 'use client'
 
 import * as React from 'react'

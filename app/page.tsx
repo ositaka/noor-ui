@@ -1,3 +1,11 @@
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'RTL Design System | RTL-First React Components for GCC',
+  description: 'RTL-first design system with 38 accessible components, bilingual support, and 4 beautiful themes for React and Next.js. Built for GCC applications.',
+  keywords: ['rtl', 'design system', 'react', 'nextjs', 'components', 'arabic', 'gcc', 'accessibility', 'bilingual', 'themes'],
+}
+
 'use client'
 
 import * as React from 'react'

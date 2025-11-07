@@ -1,3 +1,11 @@
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Avatar | RTL Design System',
+  description: 'Image element with fallback for representing users or entities. Supports multiple sizes, groups, and automatic RTL layout adaptation.',
+  keywords: ['avatar', 'profile picture', 'user image', 'fallback', 'rtl', 'react', 'nextjs', 'accessibility'],
+}
+
 'use client'
 
 import * as React from 'react'

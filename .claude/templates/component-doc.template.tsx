@@ -1,3 +1,11 @@
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'ComponentName | RTL Design System',
+  description: 'Brief description of what this component does and its primary use cases for search engines and social sharing.',
+  keywords: ['component-name', 'rtl', 'react', 'nextjs', 'ui', 'design-system'],
+}
+
 'use client'
 
 import * as React from 'react'
@@ -271,7 +279,8 @@ export default function ComponentNamePage() {
  * DOCUMENTATION CHECKLIST:
  *
  * ✅ Required page structure:
- *    - 'use client' directive at top
+ *    - Metadata export at the very top for SEO
+ *    - 'use client' directive after metadata export
  *    - Full layout wrapper (header, breadcrumb, main)
  *    - DirectionToggle and ThemeToggle in header
  *
@@ -304,12 +313,13 @@ export default function ComponentNamePage() {
  *    - English text in LTR, Arabic text in RTL
  *
  * STEPS TO USE THIS TEMPLATE:
- * 1. Replace "ComponentName" with actual component name (PascalCase)
- * 2. Replace "component-name" with kebab-case version in imports and links
- * 3. Update componentNameProps with actual props
- * 4. Update all code example strings
- * 5. Add real examples with live demos
- * 6. Add component to /app/components/page.tsx
- * 7. Add component to /lib/search-data.ts
- * 8. Test in both LTR and RTL modes
+ * 1. Update metadata export with proper title, description, and keywords
+ * 2. Replace "ComponentName" with actual component name (PascalCase)
+ * 3. Replace "component-name" with kebab-case version in imports and links
+ * 4. Update componentNameProps with actual props
+ * 5. Update all code example strings
+ * 6. Add real examples with live demos
+ * 7. Add component to /app/components/page.tsx
+ * 8. Add component to /lib/search-data.ts
+ * 9. Test in both LTR and RTL modes
  */

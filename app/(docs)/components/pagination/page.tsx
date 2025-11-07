@@ -1,3 +1,11 @@
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Pagination | RTL Design System',
+  description: 'Navigation component for paginated content with keyboard support. Arrows and direction automatically adapt to RTL layouts.',
+  keywords: ['pagination', 'navigation', 'paging', 'page numbers', 'rtl', 'react', 'nextjs', 'accessibility'],
+}
+
 'use client'
 
 import * as React from 'react'

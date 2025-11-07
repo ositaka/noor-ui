@@ -1,3 +1,11 @@
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Keyboard Navigation | RTL Design System',
+  description: 'Comprehensive keyboard navigation guide with shortcuts, focus management, and accessibility best practices for RTL layouts.',
+  keywords: ['keyboard', 'navigation', 'shortcuts', 'focus', 'accessibility', 'a11y', 'rtl', 'wai-aria', 'nextjs'],
+}
+
 'use client'
 
 import * as React from 'react'

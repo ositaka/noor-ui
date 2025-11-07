@@ -1,3 +1,11 @@
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Form | RTL Design System',
+  description: 'Form component with validation, error handling, and React Hook Form integration. Full RTL support with proper label alignment.',
+  keywords: ['form', 'validation', 'input', 'react hook form', 'error handling', 'rtl', 'react', 'nextjs', 'accessibility'],
+}
+
 'use client'
 
 import * as React from 'react'

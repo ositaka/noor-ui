@@ -1,3 +1,11 @@
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Islamic Finance Dashboard | RTL Design System',
+  description: 'Islamic finance dashboard with Zakat calculator, Sukuk tracking, and Shariah-compliant features. Arabic and English support.',
+  keywords: ['islamic finance', 'zakat', 'sukuk', 'dashboard', 'shariah', 'gcc', 'arabic', 'rtl', 'react', 'nextjs', 'demo'],
+}
+
 'use client'
 
 import * as React from 'react'

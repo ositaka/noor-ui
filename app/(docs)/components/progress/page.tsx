@@ -1,3 +1,11 @@
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Progress | RTL Design System',
+  description: 'Progress indicator component with linear and circular variants. Animated transitions with full RTL layout support.',
+  keywords: ['progress', 'progress bar', 'loading', 'indicator', 'circular', 'rtl', 'react', 'nextjs', 'accessibility'],
+}
+
 'use client'
 
 import * as React from 'react'

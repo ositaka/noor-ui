@@ -1,3 +1,11 @@
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Button | RTL Design System',
+  description: 'Interactive button component with multiple variants, sizes, loading states, and icons. Fully accessible with keyboard navigation and RTL support.',
+  keywords: ['button', 'cta', 'action', 'interactive', 'loading', 'rtl', 'react', 'nextjs', 'accessibility'],
+}
+
 'use client'
 
 import * as React from 'react'

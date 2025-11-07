@@ -1,3 +1,11 @@
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'GCC Dashboard Example | RTL Design System',
+  description: 'GCC-focused dashboard with prayer times, Hijri calendar, and regional features. Bilingual interface with Arabic-Indic numerals.',
+  keywords: ['gcc', 'dashboard', 'prayer times', 'hijri', 'arabic', 'bilingual', 'rtl', 'react', 'nextjs', 'demo'],
+}
+
 'use client'
 
 import * as React from 'react'

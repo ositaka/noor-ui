@@ -1,3 +1,11 @@
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Themes | RTL Design System',
+  description: 'Explore 4 beautiful themes with light and dark modes. Customize colors, create your own theme, and switch between themes dynamically.',
+  keywords: ['themes', 'theme switcher', 'dark mode', 'light mode', 'customization', 'colors', 'rtl', 'nextjs', 'tailwind'],
+}
+
 'use client'
 
 import * as React from 'react'

@@ -1,3 +1,11 @@
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Hijri Date | RTL Design System',
+  description: 'Islamic calendar date component with dual calendar display, Arabic numerals, and bilingual support for GCC applications.',
+  keywords: ['hijri', 'islamic calendar', 'date', 'arabic', 'dual calendar', 'gcc', 'rtl', 'react', 'nextjs'],
+}
+
 'use client'
 
 import * as React from 'react'

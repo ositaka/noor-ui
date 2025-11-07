@@ -1,3 +1,11 @@
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Label | RTL Design System',
+  description: 'Accessible form label component with proper association to inputs. Supports required indicators and RTL text alignment.',
+  keywords: ['label', 'form label', 'accessibility', 'form', 'rtl', 'react', 'nextjs', 'wai-aria'],
+}
+
 'use client'
 
 import * as React from 'react'
