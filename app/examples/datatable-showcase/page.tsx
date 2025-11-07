@@ -55,16 +55,21 @@ const generateUsers = (): User[] => {
   ]
 
   return names.map((name, index) => {
-    const joinDate = new Date(2024, Math.floor(Math.random() * 12), Math.floor(Math.random() * 28) + 1)
-    const lastActive = new Date(2025, 10, Math.floor(Math.random() * 7) + 1)
+    // Use deterministic values based on index to avoid hydration errors
+    const joinMonth = index % 12
+    const joinDay = (index % 27) + 1
+    const joinDate = new Date(2024, joinMonth, joinDay)
+
+    const lastActiveDay = (index % 7) + 1
+    const lastActive = new Date(2025, 10, lastActiveDay)
 
     return {
       id: `user-${index + 1}`,
       name,
       email: name.toLowerCase().replace(/\s+/g, '.').replace(/al-/g, '') + '@company.sa',
-      role: roles[Math.floor(Math.random() * roles.length)],
-      status: index < 5 ? 'Pending' : statuses[Math.floor(Math.random() * 2)], // More active users
-      department: departments[Math.floor(Math.random() * departments.length)],
+      role: roles[index % roles.length],
+      status: index < 5 ? 'Pending' : statuses[index % statuses.length],
+      department: departments[index % departments.length],
       joinDate: joinDate.toLocaleDateString('en-US'),
       lastActive: lastActive.toLocaleDateString('en-US'),
     }
