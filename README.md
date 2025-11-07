@@ -466,6 +466,12 @@ Tokens are converted to CSS custom properties in `styles/globals.css` and consum
 - [ ] SEO improvements
 
 ### Recent Improvements (November 2025)
+
+**Latest Updates:**
+- ✅ **Pagination Controls**: Added interactive Pagination component to DataTable Showcase with Previous/Next buttons, page numbers, ellipsis, and bilingual support
+- ✅ **Bug Fix**: Corrected import path in Islamic Finance Dashboard (useDirection from correct provider location)
+
+**Major Features Completed:**
 - ✅ **New Showcase Examples**: Added Islamic Finance Dashboard (comprehensive finance management) and DataTable Showcase (advanced table with 50 sample users, export to CSV)
 - ✅ **Phase 3 Complete & Production Ready!** Calendar component with dual Gregorian/Hijri dates, event markers, range selection - all Phase 3 features now implemented with proper Hijri conversion algorithm
 - ✅ **Bug Fixes**: Fixed hydration error in Hijri Date docs, implemented accurate Hijri conversion (Julian Day Number algorithm), added Hijri month display to Calendar header
