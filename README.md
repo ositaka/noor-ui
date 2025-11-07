@@ -424,7 +424,6 @@ Tokens are converted to CSS custom properties in `styles/globals.css` and consum
 ### Features
 - `next-themes@^0.2.1`
 - `react-syntax-highlighter@^15.5.0`
-- `framer-motion@^11.0.0`
 
 ### Development
 - `eslint@^8.56.0`

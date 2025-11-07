@@ -506,7 +506,7 @@ export default function IslamicFinanceDashboardPage() {
             ]}
             showPlayAdhan={true}
             onPlayAdhan={() => {
-              console.log('Playing Adhan...')
+              // Handle Adhan playback
             }}
             onDismiss={() => setShowPrayerNotification(false)}
           />

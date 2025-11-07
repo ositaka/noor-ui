@@ -3,9 +3,17 @@
 import * as React from 'react'
 import Link from 'next/link'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Book, Code2, Palette, Globe2, Accessibility } from 'lucide-react'
+import { Book, Code2, Palette, Globe2, Accessibility, type LucideIcon } from 'lucide-react'
 
-const docSections = [
+interface DocumentationSection {
+  title: string
+  description: string
+  icon: LucideIcon
+  links: Array<{ title: string; href: string }>
+  id?: string
+}
+
+const docSections: DocumentationSection[] = [
   {
     title: 'Getting Started',
     description: 'Learn how to set up and use the design system',
@@ -78,7 +86,7 @@ export default function DocumentationPage() {
             const Icon = section.icon
 
             return (
-              <Card key={section.title} id={(section as any).id}>
+              <Card key={section.title} id={section.id}>
                 <CardHeader>
                   <div className="flex items-center gap-4 mb-2">
                     <div className="rounded-lg bg-primary/10 p-3">

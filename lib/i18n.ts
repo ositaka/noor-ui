@@ -341,7 +341,10 @@ export function t(locale: Locale, path: string): string {
   for (const key of keys) {
     value = value?.[key]
     if (value === undefined) {
-      console.warn(`Translation missing for: ${path} (${locale})`)
+      // Development-only warning
+      if (process.env.NODE_ENV === 'development') {
+        console.warn(`Translation missing for: ${path} (${locale})`)
+      }
       return path
     }
   }

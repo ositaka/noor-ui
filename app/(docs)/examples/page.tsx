@@ -13,9 +13,20 @@ import {
   Sparkles,
   Table,
   Landmark,
+  type LucideIcon,
 } from 'lucide-react'
 
-const examples = [
+interface Example {
+  title: string
+  description: string
+  href: string
+  icon: LucideIcon
+  tags: string[]
+  status: 'ready' | 'coming-soon'
+  featured?: boolean
+}
+
+const examples: Example[] = [
   {
     title: 'GCC Community Dashboard',
     description: 'Complete GCC dashboard with Prayer Times, Hijri dates, Zakat calculator, and Arabic numbers. Perfect showcase of all GCC components.',
@@ -136,7 +147,7 @@ export default function ExamplesPage() {
                 example.status === 'ready'
                   ? 'hover:border-primary/50 cursor-pointer'
                   : 'opacity-60'
-              } ${(example as any).featured ? 'border-primary/30 bg-primary/5' : ''}`}>
+              } ${example.featured ? 'border-primary/30 bg-primary/5' : ''}`}>
                 <CardHeader>
                   <div className="flex items-start justify-between mb-2">
                     <div className="p-2 bg-primary/10 rounded-lg">

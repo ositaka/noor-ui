@@ -194,9 +194,6 @@ export default function GCCDashboardPage() {
                       silverPricePerGram={3}
                       locale={locale}
                       useArabicNumerals={isRTL}
-                      onCalculate={(result) => {
-                        console.log('Zakat calculation:', result)
-                      }}
                     />
                   </CardContent>
                 </Card>
