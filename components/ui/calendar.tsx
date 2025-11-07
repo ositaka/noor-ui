@@ -228,6 +228,17 @@ export const Calendar = React.forwardRef<HTMLDivElement, CalendarProps>(
       year: 'numeric',
     })
 
+    // Get Hijri month/year for header
+    const hijriMonthYear = React.useMemo(() => {
+      if (!showHijri) return null
+      const hijriData = getHijriDate(currentMonth)
+      // Extract month and year from hijri string (e.g., "6 Jumada al-Awwal 1447")
+      const parts = hijriData.hijri.split(' ')
+      const month = parts.slice(1, -1).join(' ') // Get month name(s)
+      const year = parts[parts.length - 1] // Get year
+      return `${month} ${year}`
+    }, [showHijri, currentMonth, getHijriDate])
+
     const weekDays = React.useMemo(() => {
       const days = []
       const baseDate = new Date(2024, 0, 7) // Sunday
@@ -264,7 +275,12 @@ export const Calendar = React.forwardRef<HTMLDivElement, CalendarProps>(
             </Button>
           </div>
 
-          <h2 className="text-lg font-semibold">{monthName}</h2>
+          <div className="text-center">
+            <h2 className="text-lg font-semibold">{monthName}</h2>
+            {showHijri && hijriMonthYear && (
+              <p className="text-sm text-muted-foreground">{hijriMonthYear}</p>
+            )}
+          </div>
 
           <Button variant="outline" size="sm" onClick={goToToday}>
             {isRTL ? 'اليوم' : 'Today'}

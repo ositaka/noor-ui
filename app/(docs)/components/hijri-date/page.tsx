@@ -158,7 +158,7 @@ export default function MyApp() {
             <ComponentShowcase>
               <ComponentShowcase.Demo>
                 <div className="flex justify-center">
-                  <p className="text-muted-foreground">
+                  <div className="text-muted-foreground">
                     Published on{' '}
                     <HijriDate
                       gregorianDate="Nov 6, 2025"
@@ -167,14 +167,14 @@ export default function MyApp() {
                       variant="compact"
                       className="text-foreground"
                     />
-                  </p>
+                  </div>
                 </div>
               </ComponentShowcase.Demo>
             </ComponentShowcase>
             <div className="mt-4">
               <CodeBlock
                 language="tsx"
-                code={`<p className="text-muted-foreground">
+                code={`<div className="text-muted-foreground">
   Published on{' '}
   <HijriDate
     gregorianDate="Nov 6, 2025"
@@ -183,7 +183,7 @@ export default function MyApp() {
     variant="compact"
     className="text-foreground"
   />
-</p>`}
+</div>`}
               />
             </div>
           </div>
@@ -241,7 +241,7 @@ export default function MyApp() {
                       variant="badge"
                     />
                   </div>
-                  <p className="text-sm text-muted-foreground">
+                  <div className="text-sm text-muted-foreground">
                     Join us for a special gathering on{' '}
                     <HijriDate
                       gregorianDate="November 6, 2025"
@@ -252,7 +252,7 @@ export default function MyApp() {
                       className="font-medium text-foreground"
                     />
                     . We look forward to seeing you there!
-                  </p>
+                  </div>
                 </div>
               </ComponentShowcase.Demo>
             </ComponentShowcase>
