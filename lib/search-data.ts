@@ -349,6 +349,13 @@ export const searchData: SearchItem[] = [
 
   // Examples
   {
+    title: 'GCC Community Dashboard',
+    description: 'Complete showcase of all GCC components in a real-world dashboard',
+    href: '/examples/gcc-dashboard',
+    category: 'Example',
+    keywords: ['gcc', 'dashboard', 'prayer', 'zakat', 'hijri', 'arabic', 'islamic', 'example', 'showcase', 'demo'],
+  },
+  {
     title: 'Examples',
     description: 'Real-world usage examples and demos',
     href: '/examples',

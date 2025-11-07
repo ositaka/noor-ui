@@ -9,10 +9,20 @@ import {
   CheckSquare,
   LayoutDashboard,
   ShoppingCart,
-  Calendar
+  Calendar,
+  Sparkles,
 } from 'lucide-react'
 
 const examples = [
+  {
+    title: 'GCC Community Dashboard',
+    description: 'Complete GCC dashboard with Prayer Times, Hijri dates, Zakat calculator, and Arabic numbers. Perfect showcase of all GCC components.',
+    href: '/examples/gcc-dashboard',
+    icon: Sparkles,
+    tags: ['GCC', 'Islamic', 'Zakat', 'Prayer', 'RTL'],
+    status: 'ready' as const,
+    featured: true,
+  },
   {
     title: 'Multi-Step Registration Form',
     description: 'A comprehensive 4-step registration form with validation, bilingual error messages, and perfect RTL support.',
@@ -107,7 +117,7 @@ export default function ExamplesPage() {
                 example.status === 'ready'
                   ? 'hover:border-primary/50 cursor-pointer'
                   : 'opacity-60'
-              }`}>
+              } ${(example as any).featured ? 'border-primary/30 bg-primary/5' : ''}`}>
                 <CardHeader>
                   <div className="flex items-start justify-between mb-2">
                     <div className="p-2 bg-primary/10 rounded-lg">
