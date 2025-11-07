@@ -87,13 +87,30 @@ function isRangeEnd(date: Date, range: DateRange | undefined): boolean {
   return range?.to ? isSameDay(date, range.to) : false
 }
 
-// Simple Hijri approximation (for demo - in production use a proper library)
+// Hijri conversion using Julian Day Number algorithm
+// Based on "Calendrical Calculations" by Reingold & Dershowitz
 function getApproximateHijri(date: Date): { hijri: string; hijriDay: string } {
-  // Approximate conversion: Hijri year ≈ (Gregorian year - 579)
-  // This is a simplified demo - use @formkit/hijri or similar for accuracy
-  const gregorianYear = date.getFullYear()
-  const hijriYear = gregorianYear - 579
+  // Convert Gregorian to Julian Day Number
+  const year = date.getFullYear()
+  const month = date.getMonth() + 1
   const day = date.getDate()
+
+  let a = Math.floor((14 - month) / 12)
+  let y = year + 4800 - a
+  let m = month + 12 * a - 3
+
+  let jdn = day + Math.floor((153 * m + 2) / 5) + 365 * y +
+            Math.floor(y / 4) - Math.floor(y / 100) +
+            Math.floor(y / 400) - 32045
+
+  // Convert Julian Day Number to Hijri
+  // Islamic calendar epoch: July 16, 622 CE (Julian Day 1948440)
+  const islamicEpoch = 1948440
+  const islamicDate = jdn - islamicEpoch
+
+  const hijriYear = Math.floor((30 * islamicDate + 10646) / 10631)
+  const hijriMonth = Math.min(12, Math.ceil((islamicDate - 29 - (Math.floor((hijriYear - 1) * 10631 / 30))) / 29.5) + 1)
+  const hijriDay = islamicDate - Math.floor((hijriYear - 1) * 10631 / 30) - Math.floor((hijriMonth - 1) * 29.5) + 1
 
   const months = [
     'Muharram', 'Safar', 'Rabi\' al-Awwal', 'Rabi\' al-Thani',
@@ -101,11 +118,11 @@ function getApproximateHijri(date: Date): { hijri: string; hijriDay: string } {
     'Ramadan', 'Shawwal', 'Dhu al-Qi\'dah', 'Dhu al-Hijjah'
   ]
 
-  const month = months[date.getMonth() % 12]
+  const monthName = months[hijriMonth - 1] || months[0]
 
   return {
-    hijri: `${day} ${month} ${hijriYear}`,
-    hijriDay: String(day)
+    hijri: `${Math.floor(hijriDay)} ${monthName} ${hijriYear}`,
+    hijriDay: String(Math.floor(hijriDay))
   }
 }
 
