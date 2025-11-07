@@ -35,7 +35,7 @@ export interface DateRange {
   to: Date | undefined
 }
 
-export interface CalendarProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface CalendarProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onSelect'> {
   /** Selection mode */
   mode?: SelectionMode
   /** Selected date (single mode) */

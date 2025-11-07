@@ -249,7 +249,15 @@ export default function CalendarPage() {
           <ComponentShowcase>
             <ComponentShowcase.Demo>
               <div className="max-w-md mx-auto">
-                <Calendar mode="single" selected={singleDate} onSelect={setSingleDate} />
+                <Calendar
+                  mode="single"
+                  selected={singleDate}
+                  onSelect={(date) => {
+                    if (date instanceof Date || date === undefined) {
+                      setSingleDate(date)
+                    }
+                  }}
+                />
               </div>
             </ComponentShowcase.Demo>
           </ComponentShowcase>
@@ -307,7 +315,7 @@ export default function CalendarPage() {
               <CardContent className="p-6">
                 <h3 className="font-semibold mb-2">Navigation</h3>
                 <p className="text-sm text-muted-foreground">
-                  Previous/next month and quick "Today" button
+                  Previous/next month and quick &ldquo;Today&rdquo; button
                 </p>
               </CardContent>
             </Card>
@@ -336,7 +344,17 @@ export default function CalendarPage() {
                     Select a start and end date. Click once to set the start, click again to complete the range.
                   </p>
                   <div className="max-w-md mx-auto">
-                    <Calendar mode="range" selectedRange={rangeDate} onSelect={setRangeDate} />
+                    <Calendar
+                      mode="range"
+                      selectedRange={rangeDate}
+                      onSelect={(date) => {
+                        if (date && 'from' in date) {
+                          setRangeDate(date as DateRange)
+                        } else if (date === undefined) {
+                          setRangeDate(undefined)
+                        }
+                      }}
+                    />
                   </div>
                   {rangeDate?.from && (
                     <div className="mt-4 text-sm text-center">
@@ -364,7 +382,11 @@ export default function CalendarPage() {
                     <Calendar
                       mode="single"
                       selected={hijriDate}
-                      onSelect={setHijriDate}
+                      onSelect={(date) => {
+                        if (date instanceof Date || date === undefined) {
+                          setHijriDate(date)
+                        }
+                      }}
                       showHijri={true}
                     />
                   </div>
@@ -387,7 +409,11 @@ export default function CalendarPage() {
                     <Calendar
                       mode="single"
                       selected={eventDate}
-                      onSelect={setEventDate}
+                      onSelect={(date) => {
+                        if (date instanceof Date || date === undefined) {
+                          setEventDate(date)
+                        }
+                      }}
                       events={sampleEvents}
                     />
                   </div>

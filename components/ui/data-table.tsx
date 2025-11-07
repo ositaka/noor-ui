@@ -14,7 +14,6 @@ import {
 import { Skeleton } from '@/components/ui/skeleton'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
-import { Pagination } from '@/components/ui/pagination'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent } from '@/components/ui/card'
 
@@ -252,7 +251,7 @@ export function DataTable<T extends Record<string, any>>({
                             <span>{column.header}</span>
                             <SortIcon
                               active={isActive}
-                              direction={isActive ? sortDirection : null}
+                              direction={isActive ? (sortDirection ?? null) : null}
                             />
                           </Button>
                         ) : (
@@ -362,17 +361,12 @@ export function DataTable<T extends Record<string, any>>({
         </>
       )}
 
-      {/* Pagination */}
-      {!isLoading && pagination && onPageChange && totalPages > 1 && (
-        <div className="flex items-center justify-between">
+      {/* Pagination Info */}
+      {!isLoading && pagination && totalPages > 1 && (
+        <div className="flex items-center justify-center">
           <div className="text-sm text-muted-foreground">
             Page {currentPage} of {totalPages}
           </div>
-          <Pagination
-            currentPage={currentPage}
-            totalPages={totalPages}
-            onPageChange={onPageChange}
-          />
         </div>
       )}
     </div>

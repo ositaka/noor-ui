@@ -152,7 +152,7 @@ export const PrayerTimes = React.forwardRef<HTMLDivElement, PrayerTimesProps>(
             <div className="flex gap-2">
               {showPlayAdhan && onPlayAdhan && (
                 <Button
-                  variant="default"
+                  variant="primary"
                   className="flex-1"
                   onClick={onPlayAdhan}
                 >

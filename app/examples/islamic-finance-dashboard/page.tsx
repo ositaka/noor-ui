@@ -240,7 +240,8 @@ const importantIslamicDates = [
 // ============================================================================
 
 export default function IslamicFinanceDashboardPage() {
-  const { direction, locale, isRTL } = useDirection()
+  const { direction, locale } = useDirection()
+  const isRTL = direction === 'rtl'
   const [allTransactions] = React.useState<Transaction[]>(generateTransactions())
   const [selectedDate, setSelectedDate] = React.useState<Date | undefined>(new Date())
   const [sortBy, setSortBy] = React.useState<string>()
@@ -426,7 +427,7 @@ export default function IslamicFinanceDashboardPage() {
             row.amount > 0 ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'
           )}
         >
-          <ArabicNumber value={Math.abs(row.amount)} currency="SAR" />
+          <ArabicNumber value={Math.abs(row.amount)} format="currency" />
         </div>
       ),
       sortable: true,
@@ -478,7 +479,13 @@ export default function IslamicFinanceDashboardPage() {
           </p>
           <div className="flex items-center gap-2 text-sm text-muted-foreground">
             <CalendarIcon className="h-4 w-4" />
-            <HijriDate variant="compact" />
+            <HijriDate
+              variant="compact"
+              gregorianDate="November 7, 2025"
+              gregorianDateAr="٧ نوفمبر ٢٠٢٥"
+              hijriDate="6 Jumada al-Awwal 1447"
+              hijriDateAr="٦ جمادى الأولى ١٤٤٧"
+            />
           </div>
         </div>
 
@@ -488,9 +495,15 @@ export default function IslamicFinanceDashboardPage() {
             variant="notification"
             location="Riyadh, Saudi Arabia"
             locationAr="الرياض، المملكة العربية السعودية"
-            currentPrayer="Dhuhr"
-            currentPrayerAr="الظهر"
-            time="12:15 PM"
+            nextPrayer="Dhuhr"
+            prayers={[
+              { name: 'Fajr', nameAr: 'الفجر', time: '05:15 AM' },
+              { name: 'Sunrise', nameAr: 'الشروق', time: '06:35 AM' },
+              { name: 'Dhuhr', nameAr: 'الظهر', time: '12:15 PM' },
+              { name: 'Asr', nameAr: 'العصر', time: '03:30 PM' },
+              { name: 'Maghrib', nameAr: 'المغرب', time: '06:05 PM' },
+              { name: 'Isha', nameAr: 'العشاء', time: '07:35 PM' },
+            ]}
             showPlayAdhan={true}
             onPlayAdhan={() => {
               console.log('Playing Adhan...')
@@ -511,7 +524,7 @@ export default function IslamicFinanceDashboardPage() {
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">
-                <ArabicNumber value={totalBalance} currency="SAR" />
+                <ArabicNumber value={totalBalance} format="currency" />
               </div>
               <div className="flex items-center gap-1 text-xs text-green-600 dark:text-green-400">
                 <TrendingUp className="h-3 w-3" />
@@ -530,7 +543,7 @@ export default function IslamicFinanceDashboardPage() {
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">
-                <ArabicNumber value={monthlyIncome} currency="SAR" />
+                <ArabicNumber value={monthlyIncome} format="currency" />
               </div>
               <p className="text-xs text-muted-foreground">
                 {isRTL
@@ -556,13 +569,13 @@ export default function IslamicFinanceDashboardPage() {
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">
-                <ArabicNumber value={totalInvestments} currency="SAR" />
+                <ArabicNumber value={totalInvestments} format="currency" />
               </div>
               <div className="flex items-center gap-1 text-xs text-green-600 dark:text-green-400">
                 <TrendingUp className="h-3 w-3" />
                 <span>
                   {isRTL ? 'عوائد: ' : 'Returns: '}
-                  <ArabicNumber value={investmentReturns} currency="SAR" />
+                  <ArabicNumber value={investmentReturns} format="currency" />
                 </span>
               </div>
             </CardContent>
@@ -578,7 +591,7 @@ export default function IslamicFinanceDashboardPage() {
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">
-                <ArabicNumber value={zakatPaid} currency="SAR" />
+                <ArabicNumber value={zakatPaid} format="currency" />
               </div>
               <p className="text-xs text-muted-foreground">
                 {isRTL ? 'هذا الشهر' : 'This month'}
@@ -618,7 +631,11 @@ export default function IslamicFinanceDashboardPage() {
                   <Calendar
                     mode="single"
                     selected={selectedDate}
-                    onSelect={setSelectedDate}
+                    onSelect={(date) => {
+                      if (date instanceof Date || date === undefined) {
+                        setSelectedDate(date)
+                      }
+                    }}
                     showHijri={true}
                     events={importantIslamicDates}
                     locale={locale}
@@ -640,9 +657,7 @@ export default function IslamicFinanceDashboardPage() {
                       variant="detailed"
                       location="Riyadh, Saudi Arabia"
                       locationAr="الرياض، المملكة العربية السعودية"
-                      currentPrayer="Dhuhr"
-                      currentPrayerAr="الظهر"
-                      time="12:15 PM"
+                      nextPrayer="Dhuhr"
                       prayers={[
                         { name: 'Fajr', nameAr: 'الفجر', time: '05:15 AM' },
                         { name: 'Sunrise', nameAr: 'الشروق', time: '06:35 AM' },
@@ -740,7 +755,7 @@ export default function IslamicFinanceDashboardPage() {
                           {isRTL ? 'المبلغ المستثمر' : 'Invested Amount'}
                         </span>
                         <span className="font-medium">
-                          <ArabicNumber value={investment.amount} currency="SAR" />
+                          <ArabicNumber value={investment.amount} format="currency" />
                         </span>
                       </div>
                       <div className="flex justify-between text-sm">
@@ -758,7 +773,7 @@ export default function IslamicFinanceDashboardPage() {
                         <span className="font-medium text-green-600 dark:text-green-400">
                           <ArabicNumber
                             value={(investment.amount * investment.returns) / 100}
-                            currency="SAR"
+                            format="currency"
                           />
                         </span>
                       </div>
@@ -792,7 +807,7 @@ export default function IslamicFinanceDashboardPage() {
                       {isRTL ? 'إجمالي المستثمر' : 'Total Invested'}
                     </p>
                     <p className="text-2xl font-bold">
-                      <ArabicNumber value={totalInvestments} currency="SAR" />
+                      <ArabicNumber value={totalInvestments} format="currency" />
                     </p>
                   </div>
                   <div className="space-y-2">
@@ -800,7 +815,7 @@ export default function IslamicFinanceDashboardPage() {
                       {isRTL ? 'إجمالي العوائد' : 'Total Returns'}
                     </p>
                     <p className="text-2xl font-bold text-green-600 dark:text-green-400">
-                      <ArabicNumber value={investmentReturns} currency="SAR" />
+                      <ArabicNumber value={investmentReturns} format="currency" />
                     </p>
                   </div>
                   <div className="space-y-2">
@@ -837,19 +852,15 @@ export default function IslamicFinanceDashboardPage() {
               </CardHeader>
               <CardContent>
                 <ZakatCalculator
-                  variant="detailed"
-                  defaultAssets={{
+                  defaultValues={{
                     cash: totalBalance,
                     gold: 0,
                     silver: 0,
                     investments: totalInvestments,
-                    businessAssets: 0,
+                    business: 0,
+                    other: 0,
                   }}
-                  defaultLiabilities={{
-                    debts: 0,
-                    loans: 0,
-                  }}
-                  showExport={true}
+                  locale={locale}
                 />
               </CardContent>
             </Card>
