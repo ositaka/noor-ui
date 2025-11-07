@@ -339,6 +339,13 @@ export const searchData: SearchItem[] = [
     category: 'Component',
     keywords: ['arabic', 'number', 'numerals', 'indic', 'currency', 'sar', 'riyal', 'gcc', 'format', 'percentage', 'money', 'price'],
   },
+  {
+    title: 'Zakat Calculator',
+    description: 'Calculate Islamic Zakat obligations on wealth and assets',
+    href: '/components/zakat-calculator',
+    category: 'Component',
+    keywords: ['zakat', 'calculator', 'islamic', 'charity', 'wealth', 'nisab', 'gcc', 'muslim', 'finance', 'obligation', 'gold', 'silver', 'calculator'],
+  },
 
   // Examples
   {
