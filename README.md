@@ -7,8 +7,8 @@ Built for the GCC market with accessibility, performance, and user experience as
 ## 🌟 Features
 
 - **RTL-First Architecture**: Designed for Arabic from the ground up, with English as an equally-supported alternative
-- **37 Production-Ready Components**: Complete UI toolkit covering essential patterns from forms to data display
-- **GCC-Specific Components**: Prayer times, Hijri dates, Arabic numbers, and Zakat calculator built for the region
+- **38 Production-Ready Components**: Complete UI toolkit covering essential patterns from forms to data display
+- **GCC-Specific Components**: Prayer times, Hijri calendar, Arabic numbers, Zakat calculator, and dual-calendar date picker built for the region
 - **Zero Directional Bugs**: 100% logical properties, no hardcoded LTR assumptions
 - **Direction-Aware Components**: Tabs, navigation, and layouts automatically adapt to text direction
 - **4 Distinct Themes**: Minimal, Futuristic, Cozy, and Artistic - all powered by the same design tokens
@@ -156,7 +156,7 @@ This enables:
 
 ## 🎨 Design System
 
-### All Components (37 Implemented)
+### All Components (38 Implemented)
 
 **Form Components:**
 - **Form**: State management with validation and bilingual error messages
@@ -207,6 +207,7 @@ This enables:
 - **Hijri Date**: Show both Gregorian and Hijri (Islamic calendar) dates with multiple layout variants
 - **Arabic Number**: Comprehensive utilities for Arabic-Indic numerals (٠-٩) and SAR currency formatting
 - **Zakat Calculator**: Calculate Islamic Zakat obligations with Nisab checking, multi-asset support, and export/sharing features (copy, print, download)
+- **Calendar**: Date picker with dual Gregorian/Hijri calendar, event markers, range selection, and full RTL support
 
 ### Documentation Components
 
@@ -444,14 +445,14 @@ Tokens are converted to CSS custom properties in `styles/globals.css` and consum
 - [x] Bilingual content throughout (Dashboard and E-commerce examples)
 - [x] Create reusable layout components (SiteHeader, SiteFooter)
 
-### Phase 3: GCC-Specific Features ✅
+### Phase 3: GCC-Specific Features ✅ COMPLETE
 - [x] Hijri date display component with 4 variants
 - [x] Prayer times display component with countdown timer
 - [x] Arabic number formatting utilities (7 utility functions)
 - [x] Zakat calculator with Nisab checking and multi-asset support
 - [x] GCC Community Dashboard showcasing all GCC components
 - [x] RTL-aware data tables with sorting, filtering, and pagination
-- [ ] Calendar component with Hijri support
+- [x] Calendar component with Hijri support, events, and range selection
 
 ### Phase 4: Developer Experience
 - [ ] Add Storybook integration
@@ -463,9 +464,11 @@ Tokens are converted to CSS custom properties in `styles/globals.css` and consum
 - [ ] SEO improvements
 
 ### Recent Improvements (November 2025)
+- ✅ **Phase 3 Complete!** Calendar component with dual Gregorian/Hijri dates, event markers, range selection - all Phase 3 features now implemented
+- ✅ **Calendar Component**: Date picker with Hijri support, event indicators, single/range selection, navigation, and disabled dates
 - ✅ **Component Enhancements**: Added export/sharing to Zakat Calculator (copy, print, download, JSON) and Adhan notification variant to Prayer Times
 - ✅ **DataTable Component**: Advanced data table with sorting, filtering, pagination, loading states, and mobile-responsive cards view
-- ✅ **Added 4 GCC-Specific Components**: Prayer Times, Hijri Date, Arabic Number utilities, Zakat Calculator
+- ✅ **Added 5 GCC-Specific Components**: Prayer Times, Hijri Date, Arabic Number utilities, Zakat Calculator, Calendar
 - ✅ **GCC Community Dashboard**: Complete example showcasing all GCC components in a real-world platform
 - ✅ **Zakat Calculator**: Calculate Islamic Zakat obligations with Nisab thresholds and 6 asset types
 - ✅ **Arabic Number Utilities**: 7 formatting functions for Arabic-Indic numerals and SAR currency

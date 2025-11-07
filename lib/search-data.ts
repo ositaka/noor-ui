@@ -353,6 +353,13 @@ export const searchData: SearchItem[] = [
     category: 'Component',
     keywords: ['zakat', 'calculator', 'islamic', 'charity', 'wealth', 'nisab', 'gcc', 'muslim', 'finance', 'obligation', 'gold', 'silver', 'calculator'],
   },
+  {
+    title: 'Calendar',
+    description: 'Date picker with Hijri calendar support, events, and range selection',
+    href: '/components/calendar',
+    category: 'Component',
+    keywords: ['calendar', 'date', 'picker', 'hijri', 'islamic', 'gregorian', 'dual', 'range', 'events', 'gcc', 'month', 'selection'],
+  },
 
   // Examples
   {
