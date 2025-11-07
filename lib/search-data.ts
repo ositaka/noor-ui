@@ -291,6 +291,13 @@ export const searchData: SearchItem[] = [
     keywords: ['table', 'data', 'grid', 'rows', 'columns', 'mobile'],
   },
   {
+    title: 'DataTable',
+    description: 'Advanced data table with sorting, filtering, and pagination',
+    href: '/components/data-table',
+    category: 'Component',
+    keywords: ['datatable', 'table', 'data', 'sorting', 'filter', 'pagination', 'search', 'grid', 'rows', 'columns', 'advanced'],
+  },
+  {
     title: 'Command',
     description: 'Command palette / search interface',
     href: '/components/command',

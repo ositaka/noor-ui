@@ -27,6 +27,7 @@ import {
   Clock,
   Hash,
   Calculator,
+  TableIcon,
 } from 'lucide-react'
 
 const componentCategories = [
@@ -61,6 +62,7 @@ const componentCategories = [
     description: 'Components for displaying data and information',
     components: [
       { name: 'Table', icon: Layers, href: '/components/table', status: 'ready' },
+      { name: 'DataTable', icon: TableIcon, href: '/components/data-table', status: 'ready' },
       { name: 'Command', icon: Menu, href: '/components/command', status: 'ready' },
     ],
   },
@@ -118,7 +120,7 @@ export default function ComponentsPage() {
         <div className="max-w-3xl mb-12">
           <h1 className="text-4xl font-bold tracking-tight mb-4">Components</h1>
           <p className="text-xl text-muted-foreground mb-6">
-            36 beautifully designed components built with Radix UI and Tailwind CSS.
+            37 beautifully designed components built with Radix UI and Tailwind CSS.
             Full RTL support, accessible, and customizable. All components are production-ready.
           </p>
 
