@@ -1,11 +1,3 @@
-import { Metadata } from 'next'
-
-export const metadata: Metadata = {
-  title: 'Command | RTL Design System',
-  description: 'Fast command menu and search component with keyboard shortcuts. Features filtering, grouping, and full RTL support.',
-  keywords: ['command', 'command palette', 'search', 'cmdk', 'keyboard shortcuts', 'rtl', 'react', 'nextjs', 'accessibility'],
-}
-
 'use client'
 
 import * as React from 'react'

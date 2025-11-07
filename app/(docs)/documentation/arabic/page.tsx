@@ -1,11 +1,3 @@
-import { Metadata } from 'next'
-
-export const metadata: Metadata = {
-  title: 'Arabic Typography | RTL Design System',
-  description: 'Complete guide to Arabic typography, font selection, text rendering, and bilingual design best practices for GCC applications.',
-  keywords: ['arabic', 'typography', 'fonts', 'text rendering', 'bilingual', 'gcc', 'rtl', 'design', 'nextjs'],
-}
-
 'use client'
 
 import * as React from 'react'

@@ -1,11 +1,3 @@
-import { Metadata } from 'next'
-
-export const metadata: Metadata = {
-  title: 'Breadcrumb | RTL Design System',
-  description: 'Navigation component displaying hierarchical path to current page. Customizable separators with automatic RTL layout adaptation.',
-  keywords: ['breadcrumb', 'navigation', 'hierarchy', 'path', 'rtl', 'react', 'nextjs', 'accessibility', 'wai-aria'],
-}
-
 'use client'
 
 import * as React from 'react'

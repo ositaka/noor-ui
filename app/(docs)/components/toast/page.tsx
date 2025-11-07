@@ -1,11 +1,3 @@
-import { Metadata } from 'next'
-
-export const metadata: Metadata = {
-  title: 'Toast | RTL Design System',
-  description: 'Temporary notification component with auto-dismiss and action buttons. Position adapts automatically to RTL layouts.',
-  keywords: ['toast', 'notification', 'snackbar', 'alert', 'message', 'rtl', 'react', 'nextjs', 'accessibility'],
-}
-
 'use client'
 
 import * as React from 'react'

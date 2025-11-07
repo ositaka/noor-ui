@@ -1,11 +1,3 @@
-import { Metadata } from 'next'
-
-export const metadata: Metadata = {
-  title: 'RTL Guide | RTL Design System',
-  description: 'Comprehensive RTL development guide covering layout patterns, text direction, logical properties, and best practices for bidirectional apps.',
-  keywords: ['rtl guide', 'right-to-left', 'guidelines', 'best practices', 'logical properties', 'bidi', 'arabic', 'nextjs'],
-}
-
 'use client'
 
 import * as React from 'react'

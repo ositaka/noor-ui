@@ -1,11 +1,3 @@
-import { Metadata } from 'next'
-
-export const metadata: Metadata = {
-  title: 'Design Tokens | RTL Design System',
-  description: 'Complete design token reference for colors, typography, spacing, and shadows. Consistent styling across your RTL applications.',
-  keywords: ['design tokens', 'colors', 'typography', 'spacing', 'theme', 'css variables', 'rtl', 'tailwind', 'nextjs'],
-}
-
 'use client'
 
 import * as React from 'react'

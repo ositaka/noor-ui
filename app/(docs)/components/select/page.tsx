@@ -1,11 +1,3 @@
-import { Metadata } from 'next'
-
-export const metadata: Metadata = {
-  title: 'Select | RTL Design System',
-  description: 'Dropdown select component with search, keyboard navigation, and grouping. Automatic positioning in RTL layouts.',
-  keywords: ['select', 'dropdown', 'combobox', 'form', 'search', 'filtering', 'rtl', 'react', 'nextjs', 'accessibility'],
-}
-
 'use client'
 
 import * as React from 'react'

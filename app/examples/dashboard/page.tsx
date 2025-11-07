@@ -1,11 +1,3 @@
-import { Metadata } from 'next'
-
-export const metadata: Metadata = {
-  title: 'Dashboard Example | RTL Design System',
-  description: 'Modern dashboard example with charts, statistics, and data visualization. Demonstrates RTL layout with responsive design.',
-  keywords: ['dashboard', 'example', 'charts', 'analytics', 'data visualization', 'rtl', 'react', 'nextjs', 'demo'],
-}
-
 'use client'
 
 import * as React from 'react'

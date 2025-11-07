@@ -1,11 +1,3 @@
-import { Metadata } from 'next'
-
-export const metadata: Metadata = {
-  title: 'Data Table | RTL Design System',
-  description: 'Advanced data table with sorting, filtering, pagination, and row selection. Fully responsive with RTL layout support.',
-  keywords: ['data table', 'table', 'datagrid', 'sorting', 'filtering', 'pagination', 'rtl', 'react', 'nextjs', 'tanstack'],
-}
-
 'use client'
 
 import * as React from 'react'

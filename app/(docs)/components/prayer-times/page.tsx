@@ -1,11 +1,3 @@
-import { Metadata } from 'next'
-
-export const metadata: Metadata = {
-  title: 'Prayer Times | RTL Design System',
-  description: 'Islamic prayer times component with countdown timer, multiple display variants, and bilingual support for GCC applications.',
-  keywords: ['prayer times', 'islamic', 'salah', 'adhan', 'countdown', 'gcc', 'rtl', 'react', 'nextjs', 'arabic'],
-}
-
 'use client'
 
 import * as React from 'react'

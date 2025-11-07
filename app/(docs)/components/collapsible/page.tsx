@@ -1,11 +1,3 @@
-import { Metadata } from 'next'
-
-export const metadata: Metadata = {
-  title: 'Collapsible | RTL Design System',
-  description: 'Expandable container component that shows and hides content. Animated transitions with keyboard support and RTL compatibility.',
-  keywords: ['collapsible', 'expandable', 'toggle', 'accordion', 'animation', 'rtl', 'react', 'nextjs', 'accessibility'],
-}
-
 'use client'
 
 import * as React from 'react'

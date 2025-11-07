@@ -1,11 +1,3 @@
-import { Metadata } from 'next'
-
-export const metadata: Metadata = {
-  title: 'Input | RTL Design System',
-  description: 'Text input component with multiple types, validation states, and icons. Full RTL support with proper text alignment and direction.',
-  keywords: ['input', 'text field', 'form', 'validation', 'rtl', 'react', 'nextjs', 'accessibility'],
-}
-
 'use client'
 
 import * as React from 'react'

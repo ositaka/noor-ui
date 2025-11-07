@@ -1,11 +1,3 @@
-import { Metadata } from 'next'
-
-export const metadata: Metadata = {
-  title: 'Separator | RTL Design System',
-  description: 'Visual divider for separating content sections. Supports horizontal and vertical orientations with RTL layout compatibility.',
-  keywords: ['separator', 'divider', 'hr', 'horizontal rule', 'rtl', 'react', 'nextjs', 'accessibility'],
-}
-
 'use client'
 
 import * as React from 'react'

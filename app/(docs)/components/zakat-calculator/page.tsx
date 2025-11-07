@@ -1,11 +1,3 @@
-import { Metadata } from 'next'
-
-export const metadata: Metadata = {
-  title: 'Zakat Calculator | RTL Design System',
-  description: 'Islamic Zakat calculator component with multiple asset types, SAR currency formatting, and bilingual support for GCC applications.',
-  keywords: ['zakat', 'islamic', 'calculator', 'charity', 'sar', 'currency', 'gcc', 'rtl', 'react', 'nextjs', 'arabic'],
-}
-
 'use client'
 
 import * as React from 'react'

@@ -1,11 +1,3 @@
-import { Metadata } from 'next'
-
-export const metadata: Metadata = {
-  title: 'Radio Group | RTL Design System',
-  description: 'Radio button group for single selection from multiple options. Keyboard navigation with proper focus management and RTL support.',
-  keywords: ['radio', 'radio button', 'radio group', 'form', 'selection', 'rtl', 'react', 'nextjs', 'accessibility'],
-}
-
 'use client'
 
 import * as React from 'react'

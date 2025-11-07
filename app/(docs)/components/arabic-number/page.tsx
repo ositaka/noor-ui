@@ -1,11 +1,3 @@
-import { Metadata } from 'next'
-
-export const metadata: Metadata = {
-  title: 'Arabic Number | RTL Design System',
-  description: 'Comprehensive Arabic number formatting utilities with Arabic-Indic numerals, SAR currency, percentages, and locale-aware display for GCC apps.',
-  keywords: ['arabic numbers', 'arabic-indic', 'numerals', 'currency', 'sar', 'formatting', 'rtl', 'react', 'gcc'],
-}
-
 'use client'
 
 import * as React from 'react'

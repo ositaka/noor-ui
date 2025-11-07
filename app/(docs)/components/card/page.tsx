@@ -1,11 +1,3 @@
-import { Metadata } from 'next'
-
-export const metadata: Metadata = {
-  title: 'Card | RTL Design System',
-  description: 'Flexible container component for grouping related content. Includes header, content, and footer sections with full RTL support.',
-  keywords: ['card', 'container', 'panel', 'content', 'rtl', 'react', 'nextjs', 'accessibility'],
-}
-
 'use client'
 
 import * as React from 'react'

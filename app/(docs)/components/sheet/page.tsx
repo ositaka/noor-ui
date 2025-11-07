@@ -1,11 +1,3 @@
-import { Metadata } from 'next'
-
-export const metadata: Metadata = {
-  title: 'Sheet | RTL Design System',
-  description: 'Slide-out panel component that appears from screen edges. Includes overlay, focus trap, and automatic RTL positioning.',
-  keywords: ['sheet', 'drawer', 'sidebar', 'slide-out', 'panel', 'rtl', 'react', 'nextjs', 'accessibility'],
-}
-
 'use client'
 
 import * as React from 'react'

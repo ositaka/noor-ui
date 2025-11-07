@@ -1,11 +1,3 @@
-import { Metadata } from 'next'
-
-export const metadata: Metadata = {
-  title: 'Dialog | RTL Design System',
-  description: 'Modal dialog component for important interactions. Includes overlay, focus trap, keyboard navigation, and RTL support.',
-  keywords: ['dialog', 'modal', 'popup', 'overlay', 'focus trap', 'rtl', 'react', 'nextjs', 'accessibility', 'wai-aria'],
-}
-
 'use client'
 
 import * as React from 'react'

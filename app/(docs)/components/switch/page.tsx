@@ -1,11 +1,3 @@
-import { Metadata } from 'next'
-
-export const metadata: Metadata = {
-  title: 'Switch | RTL Design System',
-  description: 'Toggle switch component for binary on/off states. Animated transitions with keyboard support and RTL compatibility.',
-  keywords: ['switch', 'toggle', 'checkbox', 'form', 'binary', 'rtl', 'react', 'nextjs', 'accessibility'],
-}
-
 'use client'
 
 import * as React from 'react'

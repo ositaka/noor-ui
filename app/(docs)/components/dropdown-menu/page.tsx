@@ -1,11 +1,3 @@
-import { Metadata } from 'next'
-
-export const metadata: Metadata = {
-  title: 'Dropdown Menu | RTL Design System',
-  description: 'Dropdown menu component with keyboard navigation, submenus, and checkable items. Automatic positioning in RTL layouts.',
-  keywords: ['dropdown', 'menu', 'popover', 'submenu', 'keyboard navigation', 'rtl', 'react', 'nextjs', 'accessibility'],
-}
-
 'use client'
 
 import * as React from 'react'

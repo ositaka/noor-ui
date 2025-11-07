@@ -1,11 +1,3 @@
-import { Metadata } from 'next'
-
-export const metadata: Metadata = {
-  title: 'Context Menu | RTL Design System',
-  description: 'Right-click context menu component with keyboard navigation and submenus. Automatically positions correctly in RTL layouts.',
-  keywords: ['context menu', 'right-click', 'menu', 'dropdown', 'submenu', 'rtl', 'react', 'nextjs', 'accessibility'],
-}
-
 'use client'
 
 import * as React from 'react'

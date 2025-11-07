@@ -104,8 +104,8 @@ Quick overview:
 
 #### 2. Create Documentation Page
 - [ ] Create `/app/(docs)/components/[name]/page.tsx` in the (docs) route group
-- [ ] **CRITICAL: Export metadata at the top for SEO**
-- [ ] **CRITICAL: Add 'use client' directive after metadata export**
+- [ ] **CRITICAL: Add 'use client' directive at the top**
+- [ ] **DO NOT export metadata** - Client components cannot have metadata exports (Next.js limitation)
 - [ ] **DO NOT** add manual header/footer - the (docs) layout provides these
 - [ ] Include: Preview, Installation, Usage, Examples, Props, Accessibility, RTL Considerations
 - [ ] Add interactive ComponentShowcase with LTR/RTL toggle
@@ -114,14 +114,6 @@ Quick overview:
 
 **Required Page Structure (Route Groups Pattern):**
 ```tsx
-import { Metadata } from 'next'
-
-export const metadata: Metadata = {
-  title: 'Component Name | RTL Design System',
-  description: 'Brief description of the component for SEO and social sharing.',
-  keywords: ['component', 'rtl', 'react', 'nextjs', 'ui'],
-}
-
 'use client'
 
 import * as React from 'react'
@@ -159,7 +151,7 @@ export default function ComponentPage() {
 ```
 
 **Why this structure?**
-- ✅ Metadata export for SEO and social sharing
+- ✅ Client component for interactivity
 - ✅ Header/footer provided by `app/(docs)/layout.tsx`
 - ✅ Cleaner code - no navigation boilerplate
 - ✅ DRY principle - layout changes propagate automatically
@@ -180,14 +172,11 @@ export default function ComponentPage() {
 
 Every component documentation page MUST include:
 
-1. **Metadata Export** for SEO (at the very top, before 'use client')
+1. **'use client' directive** at the very top (required for interactive components)
    ```tsx
-   export const metadata: Metadata = {
-     title: 'Component Name | RTL Design System',
-     description: 'Clear description for search engines (155-160 chars)',
-     keywords: ['component', 'rtl', 'react', 'relevant', 'keywords'],
-   }
+   'use client'
    ```
+   **NOTE:** Client components cannot export metadata in Next.js 14+. For SEO, use layout files or create server component wrappers.
 2. **Page title and description**
 3. **Live Preview** with interactive demo
 4. **Installation** instructions (CLI + Manual)
@@ -357,7 +346,7 @@ Before committing component work, verify:
 - Forget to update search-data.ts when adding components
 - Forget to update components index page
 - Create components without documentation
-- **Forget to export metadata for SEO**
+- **Export metadata from 'use client' components** (Next.js 14+ doesn't allow this)
 - Skip mobile testing
 - Hardcode colors or spacing
 - Use `position: left` or `position: right` (use `start`/`end`)
@@ -367,7 +356,7 @@ Before committing component work, verify:
 - Use logical properties (`ms-`, `me-`, `ps-`, `pe-`)
 - Use `text-start` and `text-end`
 - Place documentation pages in the (docs) route group
-- **Export metadata at the top of every page for SEO**
+- **Start client components with 'use client' only** (no metadata exports)
 - Use `useDirection()` hook for direction-aware components
 - Use CodeBlock component for syntax highlighting
 - Update ALL navigation/search when adding features

@@ -1,11 +1,3 @@
-import { Metadata } from 'next'
-
-export const metadata: Metadata = {
-  title: 'Component Props | RTL Design System',
-  description: 'Complete reference guide for component props, API documentation, type definitions, and usage examples for all components.',
-  keywords: ['props', 'api', 'documentation', 'reference', 'typescript', 'components', 'rtl', 'react', 'nextjs'],
-}
-
 'use client'
 
 import * as React from 'react'

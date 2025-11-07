@@ -1,11 +1,3 @@
-import { Metadata } from 'next'
-
-export const metadata: Metadata = {
-  title: 'Textarea | RTL Design System',
-  description: 'Multi-line text input component with auto-resize and character count. Full RTL support with proper text alignment.',
-  keywords: ['textarea', 'text area', 'input', 'form', 'multiline', 'auto-resize', 'rtl', 'react', 'nextjs', 'accessibility'],
-}
-
 'use client'
 
 import * as React from 'react'

@@ -1,11 +1,3 @@
-import { Metadata } from 'next'
-
-export const metadata: Metadata = {
-  title: 'Bidirectional Text | RTL Design System',
-  description: 'Understanding bidirectional text handling, Unicode bidi algorithm, and mixed content layouts for Arabic and English applications.',
-  keywords: ['bidirectional', 'bidi', 'unicode', 'text direction', 'mixed content', 'rtl', 'ltr', 'arabic', 'nextjs'],
-}
-
 'use client'
 
 import * as React from 'react'

@@ -1,11 +1,3 @@
-import { Metadata } from 'next'
-
-export const metadata: Metadata = {
-  title: 'ComponentName | RTL Design System',
-  description: 'Brief description of what this component does and its primary use cases for search engines and social sharing.',
-  keywords: ['component-name', 'rtl', 'react', 'nextjs', 'ui', 'design-system'],
-}
-
 'use client'
 
 import * as React from 'react'
@@ -279,8 +271,8 @@ export default function ComponentNamePage() {
  * DOCUMENTATION CHECKLIST:
  *
  * ✅ Required page structure:
- *    - Metadata export at the very top for SEO
- *    - 'use client' directive after metadata export
+ *    - 'use client' directive at the very top
+ *    - NO metadata export (client components cannot have metadata in Next.js 14+)
  *    - Full layout wrapper (header, breadcrumb, main)
  *    - DirectionToggle and ThemeToggle in header
  *
@@ -313,8 +305,7 @@ export default function ComponentNamePage() {
  *    - English text in LTR, Arabic text in RTL
  *
  * STEPS TO USE THIS TEMPLATE:
- * 1. Update metadata export with proper title, description, and keywords
- * 2. Replace "ComponentName" with actual component name (PascalCase)
+ * 1. Replace "ComponentName" with actual component name (PascalCase)
  * 3. Replace "component-name" with kebab-case version in imports and links
  * 4. Update componentNameProps with actual props
  * 5. Update all code example strings

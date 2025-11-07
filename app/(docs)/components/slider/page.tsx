@@ -1,11 +1,3 @@
-import { Metadata } from 'next'
-
-export const metadata: Metadata = {
-  title: 'Slider | RTL Design System',
-  description: 'Range slider input with keyboard support and custom styling. Direction automatically adapts to RTL layouts.',
-  keywords: ['slider', 'range', 'input', 'form', 'keyboard navigation', 'rtl', 'react', 'nextjs', 'accessibility'],
-}
-
 'use client'
 
 import * as React from 'react'

@@ -1,11 +1,3 @@
-import { Metadata } from 'next'
-
-export const metadata: Metadata = {
-  title: 'Tooltip | RTL Design System',
-  description: 'Contextual popup displaying additional information on hover or focus. Automatic positioning in RTL layouts.',
-  keywords: ['tooltip', 'popover', 'hint', 'help text', 'hover', 'rtl', 'react', 'nextjs', 'accessibility'],
-}
-
 'use client'
 
 import * as React from 'react'
