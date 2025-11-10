@@ -40,6 +40,7 @@ const componentCategories = [
     components: [
       { name: 'Button', icon: MousePointer2, href: '/components/button', status: 'ready' },
       { name: 'Card', icon: Square, href: '/components/card', status: 'ready' },
+      { name: 'FeatureCard', icon: Square, href: '/components/feature-card', status: 'ready' },
       { name: 'Input', icon: Type, href: '/components/input', status: 'ready' },
       { name: 'Label', icon: Tag, href: '/components/label', status: 'ready' },
       { name: 'Badge', icon: Tag, href: '/components/badge', status: 'ready' },
@@ -139,7 +140,7 @@ export default function ComponentsPage() {
         <div className="max-w-3xl mb-12">
           <h1 className="text-4xl font-bold tracking-tight mb-4">Components</h1>
           <p className="text-xl text-muted-foreground mb-6">
-            40 beautifully designed components built with Radix UI and Tailwind CSS.
+            41 beautifully designed components built with Radix UI and Tailwind CSS.
             Full RTL support, accessible, and customizable. All components are production-ready.
           </p>
 

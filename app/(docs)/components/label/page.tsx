@@ -29,7 +29,7 @@ const labelProps: PropDefinition[] = [
   },
 ]
 
-const installCode = `npm install @rtl-design-system/core`
+const installCode = `npm install @noorui/components`
 
 const basicUsageCode = `import { Label } from '@/components/ui/label'
 import { Input } from '@/components/ui/input'

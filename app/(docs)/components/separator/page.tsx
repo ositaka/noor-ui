@@ -34,7 +34,7 @@ const separatorProps: PropDefinition[] = [
   },
 ]
 
-const installCode = `npm install @rtl-design-system/core`
+const installCode = `npm install @noorui/components`
 
 const basicUsageCode = `import { Separator } from '@/components/ui/separator'
 

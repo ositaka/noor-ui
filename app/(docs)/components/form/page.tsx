@@ -45,7 +45,7 @@ const formProps: PropDefinition[] = [
   },
 ]
 
-const installCode = `npm install @rtl-design-system/core`
+const installCode = `npm install @noorui/components`
 
 const basicUsageCode = `import { Form, FormField, FormItem, FormLabel, FormMessage, validators } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'

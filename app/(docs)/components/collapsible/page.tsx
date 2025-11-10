@@ -42,7 +42,7 @@ const collapsibleProps: PropDefinition[] = [
   },
 ]
 
-const installCode = `npm install @rtl-design-system/core`
+const installCode = `npm install @noorui/components`
 
 const basicUsageCode = `import {
   Collapsible,
@@ -316,7 +316,7 @@ export default function CollapsiblePage() {
                       },
                       {
                         q: 'How do I install it?',
-                        a: 'Simply run npm install @rtl-design-system/core and import the components you need.',
+                        a: 'Simply run npm install @noorui/components and import the components you need.',
                       },
                       {
                         q: 'Is it accessible?',

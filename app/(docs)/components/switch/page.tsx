@@ -55,7 +55,7 @@ const switchProps: PropDefinition[] = [
   },
 ]
 
-const installCode = `npm install @rtl-design-system/core`
+const installCode = `npm install @noorui/components`
 
 const basicUsageCode = `import { Switch } from '@/components/ui/switch'
 import { Label } from '@/components/ui/label'

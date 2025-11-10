@@ -122,7 +122,7 @@ export default function ScreenReadersPage() {
             <h1 className="text-4xl font-bold tracking-tight">Screen Reader Support</h1>
           </div>
           <p className="text-xl text-muted-foreground">
-            Optimizing RTL Design System components for screen reader users. Learn how to make your applications fully accessible to users who rely on assistive technologies.
+            Optimizing Noor UI components for screen reader users. Learn how to make your applications fully accessible to users who rely on assistive technologies.
           </p>
         </div>
 

@@ -101,7 +101,7 @@ export default function WCAGPage() {
             <h1 className="text-4xl font-bold tracking-tight">WCAG Compliance</h1>
           </div>
           <p className="text-xl text-muted-foreground">
-            RTL Design System is built to meet WCAG 2.1 Level AA standards for web accessibility, ensuring your applications are usable by everyone.
+            Noor UI is built to meet WCAG 2.1 Level AA standards for web accessibility, ensuring your applications are usable by everyone.
           </p>
         </div>
 

@@ -1,6 +1,6 @@
 # Performance Optimization Guide
 
-This document outlines the performance optimizations implemented in the RTL Design System and best practices for maintaining optimal performance.
+This document outlines the performance optimizations implemented in Noor UI and best practices for maintaining optimal performance.
 
 ## Implemented Optimizations
 
