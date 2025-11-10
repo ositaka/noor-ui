@@ -3,12 +3,10 @@
 import * as React from 'react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
 import { Separator } from '@/components/ui/separator'
 import { SiteHeader } from '@/components/layout/site-header'
 import { ThemeSwitcher } from '@/components/docs/theme-switcher'
+import { FeatureCard } from '@/components/ui/feature-card'
 import {
   Palette,
   Globe,
@@ -63,32 +61,6 @@ export default function HomePage() {
                 </Link>
               </Button>
             </div>
-
-            {/* Live Demo */}
-            <Card className="mt-12">
-              <CardHeader>
-                <CardTitle>{t.ui.button.tryIt}</CardTitle>
-                <CardDescription>
-                  Interactive components that work perfectly in both directions
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="grid gap-4 md:grid-cols-2">
-                  <div className="space-y-2">
-                    <Label htmlFor="demo-name">{t.ui.form.firstName}</Label>
-                    <Input id="demo-name" placeholder={t.ui.form.placeholder} />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="demo-email">{t.ui.form.email}</Label>
-                    <Input id="demo-email" type="email" placeholder={t.ui.form.placeholder} />
-                  </div>
-                </div>
-                <div className="flex gap-2">
-                  <Button>{t.ui.button.submit}</Button>
-                  <Button variant="outline">{t.ui.button.cancel}</Button>
-                </div>
-              </CardContent>
-            </Card>
           </div>
         </section>
 
@@ -107,22 +79,18 @@ export default function HomePage() {
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {t.home.features.items.map((feature, index) => {
                 const icons = [Zap, Globe, Accessibility, Palette, Code2, Sunrise]
+                const hrefs = ['/components', '/rtl-guide', '/documentation/wcag', '/themes', '/tokens', '/getting-started']
                 const Icon = icons[index]
+                const href = hrefs[index]
 
                 return (
-                  <Card key={index}>
-                    <CardHeader>
-                      <div className="flex items-center gap-4">
-                        <div className="rounded-lg bg-primary/10 p-3">
-                          <Icon className="h-6 w-6 text-primary" />
-                        </div>
-                        <CardTitle>{feature.title}</CardTitle>
-                      </div>
-                    </CardHeader>
-                    <CardContent>
-                      <p className="text-muted-foreground">{feature.description}</p>
-                    </CardContent>
-                  </Card>
+                  <FeatureCard
+                    key={index}
+                    title={feature.title}
+                    description={feature.description}
+                    icon={Icon}
+                    href={href}
+                  />
                 )
               })}
             </div>

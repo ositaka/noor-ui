@@ -11,6 +11,8 @@ export const content = {
     nav: {
       home: 'Home',
       components: 'Components',
+      examples: 'Examples',
+      rtlGuide: 'RTL Guide',
       tokens: 'Design Tokens',
       themes: 'Themes',
       documentation: 'Documentation',
@@ -173,6 +175,8 @@ export const content = {
     nav: {
       home: 'الرئيسية',
       components: 'المكونات',
+      examples: 'الأمثلة',
+      rtlGuide: 'دليل RTL',
       tokens: 'رموز التصميم',
       themes: 'السمات',
       documentation: 'التوثيق',
