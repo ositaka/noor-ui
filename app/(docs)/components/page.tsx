@@ -29,6 +29,8 @@ import {
   Calculator,
   TableIcon,
   CalendarIcon,
+  Inbox,
+  BarChart3,
 } from 'lucide-react'
 
 const componentCategories = [
@@ -64,6 +66,7 @@ const componentCategories = [
     components: [
       { name: 'Table', icon: Layers, href: '/components/table', status: 'ready' },
       { name: 'DataTable', icon: TableIcon, href: '/components/data-table', status: 'ready' },
+      { name: 'Stats Card', icon: BarChart3, href: '/components/stats-card', status: 'ready' },
       { name: 'Command', icon: Menu, href: '/components/command', status: 'ready' },
     ],
   },
@@ -77,6 +80,7 @@ const componentCategories = [
       { name: 'Tooltip', icon: Info, href: '/components/tooltip', status: 'ready' },
       { name: 'Progress', icon: Loader2, href: '/components/progress', status: 'ready' },
       { name: 'Skeleton', icon: Loader2, href: '/components/skeleton', status: 'ready' },
+      { name: 'Empty State', icon: Inbox, href: '/components/empty-state', status: 'ready' },
     ],
   },
   {
@@ -122,7 +126,7 @@ export default function ComponentsPage() {
         <div className="max-w-3xl mb-12">
           <h1 className="text-4xl font-bold tracking-tight mb-4">Components</h1>
           <p className="text-xl text-muted-foreground mb-6">
-            38 beautifully designed components built with Radix UI and Tailwind CSS.
+            40 beautifully designed components built with Radix UI and Tailwind CSS.
             Full RTL support, accessible, and customizable. All components are production-ready.
           </p>
 
