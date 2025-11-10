@@ -99,6 +99,13 @@ export const searchData: SearchItem[] = [
     category: 'Documentation',
     keywords: ['rtl', 'guide', 'tutorial'],
   },
+  {
+    title: 'Roadmap',
+    description: 'Development roadmap and future plans',
+    href: '/roadmap',
+    category: 'Documentation',
+    keywords: ['roadmap', 'plans', 'future', 'phases', 'timeline'],
+  },
 
   // Components
   {
@@ -114,6 +121,13 @@ export const searchData: SearchItem[] = [
     href: '/components/card',
     category: 'Component',
     keywords: ['card', 'container', 'box'],
+  },
+  {
+    title: 'FeatureCard',
+    description: 'Feature showcase card with icon, title, and description',
+    href: '/components/feature-card',
+    category: 'Component',
+    keywords: ['feature', 'card', 'showcase', 'icon', 'landing', 'marketing'],
   },
   {
     title: 'Input',

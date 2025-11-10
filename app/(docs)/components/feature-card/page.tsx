@@ -262,12 +262,12 @@ export default function FeatureCardPage() {
               </ul>
             </div>
             <div>
-              <h3 className="text-foreground font-semibold mb-2">❌ Don't</h3>
+              <h3 className="text-foreground font-semibold mb-2">❌ Don&apos;t</h3>
               <ul className="list-disc list-inside space-y-2 ms-4">
-                <li>Don't use for long-form content (use regular Card instead)</li>
-                <li>Don't mix clickable and non-clickable cards in the same grid</li>
-                <li>Don't use tiny icons or oversized icons</li>
-                <li>Don't make the description too long (breaks visual balance)</li>
+                <li>Don&apos;t use for long-form content (use regular Card instead)</li>
+                <li>Don&apos;t mix clickable and non-clickable cards in the same grid</li>
+                <li>Don&apos;t use tiny icons or oversized icons</li>
+                <li>Don&apos;t make the description too long (breaks visual balance)</li>
               </ul>
             </div>
           </div>
