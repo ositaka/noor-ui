@@ -456,7 +456,7 @@ export default function RoadmapPage() {
             </CardHeader>
             <CardContent>
               <p className="text-lg font-semibold mb-2">
-                "Number of production applications using Noor UI in bilingual contexts"
+                &quot;Number of production applications using Noor UI in bilingual contexts&quot;
               </p>
               <p className="text-muted-foreground">
                 Not vanity metrics like stars or downloads, but <strong>real products solving real problems</strong>.
