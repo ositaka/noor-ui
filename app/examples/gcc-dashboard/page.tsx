@@ -111,6 +111,31 @@ export default function GCCDashboardPage() {
         </div>
       </header>
 
+      {/* Breadcrumb */}
+      <div className="border-b bg-background">
+        <div className="container py-3">
+          <nav aria-label="Breadcrumb">
+            <ol className="flex items-center gap-2 text-sm text-muted-foreground">
+              <li>
+                <Link href="/" className="hover:text-foreground transition-colors">
+                  {isRTL ? 'الرئيسية' : 'Home'}
+                </Link>
+              </li>
+              <li>/</li>
+              <li>
+                <Link href="/examples" className="hover:text-foreground transition-colors">
+                  {isRTL ? 'الأمثلة' : 'Examples'}
+                </Link>
+              </li>
+              <li>/</li>
+              <li className="text-foreground font-medium">
+                {isRTL ? 'مجتمع الخير' : 'GCC Dashboard'}
+              </li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+
       {/* Main Content */}
       <div className="container py-8">
         <div className="grid lg:grid-cols-[1fr_380px] gap-6">

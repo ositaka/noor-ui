@@ -142,8 +142,8 @@ export default function RegistrationPage() {
             </li>
             <li>/</li>
             <li>
-              <Link href="/components" className="hover:text-foreground transition-colors">
-                {isRTL ? 'أمثلة' : 'Examples'}
+              <Link href="/examples" className="hover:text-foreground transition-colors">
+                {isRTL ? 'الأمثلة' : 'Examples'}
               </Link>
             </li>
             <li>/</li>

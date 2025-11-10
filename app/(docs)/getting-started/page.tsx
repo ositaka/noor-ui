@@ -4,6 +4,7 @@ import * as React from 'react'
 import Link from 'next/link'
 import { Card, CardContent } from '@/components/ui/card'
 import { CodeBlock } from '@/components/docs/code-block'
+import { FeatureCard } from '@/components/ui/feature-card'
 import { Sparkles, Package, Settings, Zap, CheckCircle2, ArrowRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 const installationCode = `npm install @noorui/components
@@ -217,47 +218,35 @@ export default function GettingStartedPage() {
         {/* Quick Links */}
         <section className="mb-16">
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            <Card className="hover:border-primary transition-colors">
-              <CardContent className="p-6">
-                <Package className="h-8 w-8 text-primary mb-4" />
-                <h3 className="font-semibold mb-2">Installation</h3>
-                <p className="text-sm text-muted-foreground">
-                  Add the package to your project
-                </p>
-              </CardContent>
-            </Card>
-            <Card className="hover:border-primary transition-colors">
-              <CardContent className="p-6">
-                <Settings className="h-8 w-8 text-primary mb-4" />
-                <h3 className="font-semibold mb-2">Configuration</h3>
-                <p className="text-sm text-muted-foreground">
-                  Set up Tailwind and providers
-                </p>
-              </CardContent>
-            </Card>
-            <Card className="hover:border-primary transition-colors">
-              <CardContent className="p-6">
-                <Zap className="h-8 w-8 text-primary mb-4" />
-                <h3 className="font-semibold mb-2">Quick Start</h3>
-                <p className="text-sm text-muted-foreground">
-                  Build your first component
-                </p>
-              </CardContent>
-            </Card>
-            <Card className="hover:border-primary transition-colors">
-              <CardContent className="p-6">
-                <CheckCircle2 className="h-8 w-8 text-primary mb-4" />
-                <h3 className="font-semibold mb-2">Best Practices</h3>
-                <p className="text-sm text-muted-foreground">
-                  RTL-first development tips
-                </p>
-              </CardContent>
-            </Card>
+            <FeatureCard
+              icon={Package}
+              title="Installation"
+              description="Add the package to your project"
+              href="#installation"
+            />
+            <FeatureCard
+              icon={Settings}
+              title="Configuration"
+              description="Set up Tailwind and providers"
+              href="#configuration"
+            />
+            <FeatureCard
+              icon={Zap}
+              title="Quick Start"
+              description="Build your first component"
+              href="#quick-start"
+            />
+            <FeatureCard
+              icon={CheckCircle2}
+              title="Best Practices"
+              description="RTL-first development tips"
+              href="#rtl-usage"
+            />
           </div>
         </section>
 
         {/* Installation */}
-        <section className="mb-16">
+        <section className="mb-16" id="installation">
           <h2 className="text-2xl font-bold tracking-tight mb-6">Installation</h2>
           <p className="text-muted-foreground mb-4">
             Install the Noor UI package using your preferred package manager:
@@ -278,7 +267,7 @@ export default function GettingStartedPage() {
         </section>
 
         {/* Tailwind Configuration */}
-        <section className="mb-16">
+        <section className="mb-16" id="configuration">
           <h2 className="text-2xl font-bold tracking-tight mb-6">Tailwind Configuration</h2>
           <p className="text-muted-foreground mb-4">
             Configure Tailwind CSS to work with Noor UI. This includes adding the RTL plugin and tailwindcss-logical for bidirectional support.
@@ -354,7 +343,7 @@ export default function GettingStartedPage() {
         </section>
 
         {/* Quick Start */}
-        <section className="mb-16">
+        <section className="mb-16" id="quick-start">
           <h2 className="text-2xl font-bold tracking-tight mb-6">Quick Start</h2>
           <p className="text-muted-foreground mb-4">
             You&apos;re all set! Start using components in your application:
@@ -363,7 +352,7 @@ export default function GettingStartedPage() {
         </section>
 
         {/* RTL Usage */}
-        <section className="mb-16">
+        <section className="mb-16" id="rtl-usage">
           <h2 className="text-2xl font-bold tracking-tight mb-6">Working with RTL</h2>
           <p className="text-muted-foreground mb-4">
             Use the direction hook to programmatically control or respond to direction changes:

@@ -2,6 +2,7 @@
 
 import * as React from 'react'
 import dynamic from 'next/dynamic'
+import Link from 'next/link'
 import type { ColumnDef, SortDirection } from '@/components/ui/data-table'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
@@ -315,6 +316,31 @@ export default function DataTableShowcasePage() {
 
   return (
     <div className="min-h-screen bg-background">
+      {/* Breadcrumb */}
+      <div className="border-b bg-background">
+        <div className="container py-3">
+          <nav aria-label="Breadcrumb">
+            <ol className="flex items-center gap-2 text-sm text-muted-foreground">
+              <li>
+                <Link href="/" className="hover:text-foreground transition-colors">
+                  {isRTL ? 'الرئيسية' : 'Home'}
+                </Link>
+              </li>
+              <li>/</li>
+              <li>
+                <Link href="/examples" className="hover:text-foreground transition-colors">
+                  {isRTL ? 'الأمثلة' : 'Examples'}
+                </Link>
+              </li>
+              <li>/</li>
+              <li className="text-foreground font-medium">
+                {isRTL ? 'عرض جدول البيانات' : 'DataTable'}
+              </li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+
       {/* Header */}
       <div className="border-b">
         <div className="container py-8">

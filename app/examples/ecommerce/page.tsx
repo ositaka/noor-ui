@@ -1,6 +1,7 @@
 'use client'
 
 import * as React from 'react'
+import Link from 'next/link'
 import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
@@ -168,6 +169,31 @@ export default function EcommercePage() {
 
   return (
     <div className="min-h-screen bg-background">
+      {/* Breadcrumb */}
+      <div className="border-b bg-background">
+        <div className="container py-3">
+          <nav aria-label="Breadcrumb">
+            <ol className="flex items-center gap-2 text-sm text-muted-foreground">
+              <li>
+                <Link href="/" className="hover:text-foreground transition-colors">
+                  {locale === 'ar' ? 'الرئيسية' : 'Home'}
+                </Link>
+              </li>
+              <li>/</li>
+              <li>
+                <Link href="/examples" className="hover:text-foreground transition-colors">
+                  {locale === 'ar' ? 'الأمثلة' : 'Examples'}
+                </Link>
+              </li>
+              <li>/</li>
+              <li className="text-foreground font-medium">
+                {locale === 'ar' ? 'صفحة المنتج' : 'E-commerce'}
+              </li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+
       {/* Product Section */}
       <div className="container py-8">
         <div className="grid gap-8 lg:grid-cols-2">

@@ -2,6 +2,7 @@
 
 import * as React from 'react'
 import dynamic from 'next/dynamic'
+import Link from 'next/link'
 import { useDirection } from '@/components/providers/direction-provider'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -492,6 +493,27 @@ export default function IslamicFinanceDashboardPage() {
   return (
     <div className="min-h-screen bg-background" dir={direction}>
       <div className="container mx-auto p-4 md:p-8 space-y-8">
+        {/* Breadcrumb */}
+        <nav aria-label="Breadcrumb">
+          <ol className="flex items-center gap-2 text-sm text-muted-foreground">
+            <li>
+              <Link href="/" className="hover:text-foreground transition-colors">
+                {isRTL ? 'الرئيسية' : 'Home'}
+              </Link>
+            </li>
+            <li>/</li>
+            <li>
+              <Link href="/examples" className="hover:text-foreground transition-colors">
+                {isRTL ? 'الأمثلة' : 'Examples'}
+              </Link>
+            </li>
+            <li>/</li>
+            <li className="text-foreground font-medium">
+              {isRTL ? 'لوحة التمويل الإسلامي' : 'Islamic Finance'}
+            </li>
+          </ol>
+        </nav>
+
         {/* Header */}
         <div className="space-y-2">
           <h1 className="text-4xl font-bold tracking-tight">
