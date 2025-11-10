@@ -1,9 +1,20 @@
 'use client'
 
 import * as React from 'react'
-import { DataTable, type ColumnDef, type SortDirection } from '@/components/ui/data-table'
+import dynamic from 'next/dynamic'
+import type { ColumnDef, SortDirection } from '@/components/ui/data-table'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
+import { LoadingSpinner } from '@/components/ui/loading-spinner'
+
+// Lazy load heavy DataTable component
+const DataTable = dynamic(
+  () => import('@/components/ui/data-table').then(mod => ({ default: mod.DataTable })),
+  {
+    loading: () => <LoadingSpinner size="lg" text="Loading table..." />,
+    ssr: false,
+  }
+)
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
 import {

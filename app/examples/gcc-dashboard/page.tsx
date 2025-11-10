@@ -1,6 +1,7 @@
 'use client'
 
 import * as React from 'react'
+import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import { useDirection } from '@/components/providers/direction-provider'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
@@ -9,8 +10,17 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { PrayerTimes } from '@/components/ui/prayer-times'
 import { HijriDate } from '@/components/ui/hijri-date'
 import { ArabicNumber } from '@/components/ui/arabic-number'
-import { ZakatCalculator } from '@/components/ui/zakat-calculator'
 import { Badge } from '@/components/ui/badge'
+import { LoadingSpinner } from '@/components/ui/loading-spinner'
+
+// Lazy load heavy components that aren't immediately visible
+const ZakatCalculator = dynamic(
+  () => import('@/components/ui/zakat-calculator').then(mod => ({ default: mod.ZakatCalculator })),
+  {
+    loading: () => <LoadingSpinner size="lg" text="Loading calculator..." />,
+    ssr: false,
+  }
+)
 import {
   ArrowUpRight,
   TrendingUp,

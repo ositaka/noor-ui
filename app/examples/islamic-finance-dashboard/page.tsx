@@ -1,17 +1,42 @@
 'use client'
 
 import * as React from 'react'
+import dynamic from 'next/dynamic'
 import { useDirection } from '@/components/providers/direction-provider'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { ZakatCalculator } from '@/components/ui/zakat-calculator'
 import { PrayerTimes } from '@/components/ui/prayer-times'
 import { HijriDate } from '@/components/ui/hijri-date'
 import { ArabicNumber } from '@/components/ui/arabic-number'
-import { DataTable, ColumnDef } from '@/components/ui/data-table'
-import { Calendar } from '@/components/ui/calendar'
+import { LoadingSpinner } from '@/components/ui/loading-spinner'
+import { ColumnDef } from '@/components/ui/data-table'
+
+// Lazy load heavy components for better performance
+const ZakatCalculator = dynamic(
+  () => import('@/components/ui/zakat-calculator').then(mod => ({ default: mod.ZakatCalculator })),
+  {
+    loading: () => <LoadingSpinner size="lg" text="Loading calculator..." />,
+    ssr: false,
+  }
+)
+
+const Calendar = dynamic(
+  () => import('@/components/ui/calendar').then(mod => ({ default: mod.Calendar })),
+  {
+    loading: () => <LoadingSpinner size="md" text="Loading calendar..." />,
+    ssr: false,
+  }
+)
+
+const DataTable = dynamic(
+  () => import('@/components/ui/data-table').then(mod => ({ default: mod.DataTable })),
+  {
+    loading: () => <LoadingSpinner size="lg" text="Loading transactions..." />,
+    ssr: false,
+  }
+)
 import {
   TrendingUp,
   TrendingDown,

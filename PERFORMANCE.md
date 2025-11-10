@@ -24,12 +24,9 @@ import { Suspense } from 'react'
 ```
 
 **Pages with lazy loading:**
-- GCC Dashboard (410 lines) - `GCCDashboardLazy`
-- Islamic Finance Dashboard (872 lines) - `IslamicFinanceDashboardLazy`
-- DataTable Showcase (645 lines) - `DataTableShowcaseLazy`
-- Dashboard - `DashboardLazy`
-- E-commerce - `EcommerceLazy`
-- Registration - `RegistrationLazy`
+- GCC Dashboard (410 lines) - ZakatCalculator component lazy loaded
+- Islamic Finance Dashboard (872 lines) - ZakatCalculator, Calendar, DataTable lazy loaded
+- DataTable Showcase (645 lines) - DataTable component lazy loaded
 
 **Benefits:**
 - Reduces initial JavaScript bundle size
