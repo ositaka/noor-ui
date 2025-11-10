@@ -20,9 +20,9 @@ export const content = {
     // Homepage
     home: {
       hero: {
-        title: 'RTL-First Design System',
+        title: 'Noor UI',
         subtitle: 'Built for the GCC market. Arabic and English, equal citizens.',
-        description: 'A comprehensive, modern design system with full bilingual support. 91 accessible components, 4 beautiful themes, perfect RTL mirroring.',
+        description: 'A comprehensive, modern design system with full bilingual support. 40 accessible components, 4 beautiful themes, perfect RTL mirroring. Bringing light to multilingual interface design.',
         cta: {
           primary: 'Explore Components',
           secondary: 'View Documentation',
@@ -33,7 +33,7 @@ export const content = {
         subtitle: 'Production-ready components for modern web applications',
         items: [
           {
-            title: '91 Components',
+            title: '40 Components',
             description: 'Complete UI toolkit from buttons to complex data tables',
           },
           {
@@ -182,9 +182,9 @@ export const content = {
     // الصفحة الرئيسية
     home: {
       hero: {
-        title: 'نظام تصميم بتوجه عربي أولاً',
+        title: 'نور',
         subtitle: 'مبني لسوق دول الخليج. العربية والإنجليزية، مواطنون متساوون.',
-        description: 'نظام تصميم شامل وحديث مع دعم كامل للغتين. 91 مكوّن قابل للوصول، 4 سمات جميلة، انعكاس مثالي لاتجاه النص.',
+        description: 'نظام تصميم شامل وحديث مع دعم كامل للغتين. 40 مكوّن قابل للوصول، 4 سمات جميلة، انعكاس مثالي لاتجاه النص. نجلب النور لتصميم الواجهات متعددة اللغات.',
         cta: {
           primary: 'استكشف المكونات',
           secondary: 'اطّلع على التوثيق',
@@ -195,7 +195,7 @@ export const content = {
         subtitle: 'مكونات جاهزة للإنتاج لتطبيقات الويب الحديثة',
         items: [
           {
-            title: '91 مكوّن',
+            title: '40 مكوّن',
             description: 'مجموعة أدوات واجهة مستخدم كاملة من الأزرار إلى جداول البيانات المعقدة',
           },
           {

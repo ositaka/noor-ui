@@ -2,8 +2,8 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: {
-    default: 'Components - RTL-First Design System',
-    template: '%s - RTL-First Design System',
+    default: 'Components - Noor UI',
+    template: '%s - Noor UI',
   },
   description:
     'Browse our comprehensive collection of accessible, RTL-first components built with React, TypeScript, and Tailwind CSS. Featuring bilingual support for English and Arabic with proper bidirectional text handling.',
@@ -21,9 +21,11 @@ export const metadata: Metadata = {
     'right-to-left',
     'Islamic design',
     'GCC region',
+    'Noor UI',
+    'MENA',
   ],
   openGraph: {
-    title: 'Components - RTL-First Design System',
+    title: 'Components - Noor UI',
     description:
       'Explore accessible, RTL-first UI components with full bilingual support for modern web applications.',
     type: 'website',
@@ -32,7 +34,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Components - RTL-First Design System',
+    title: 'Components - Noor UI',
     description:
       'Accessible, RTL-first UI components with full bilingual support.',
   },

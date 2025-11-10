@@ -2,8 +2,8 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: {
-    default: 'Examples - RTL-First Design System',
-    template: '%s - RTL-First Design System',
+    default: 'Examples - Noor UI',
+    template: '%s - Noor UI',
   },
   description:
     'Real-world examples and demos showcasing RTL-first components in action. Explore dashboards, forms, data tables, and more with full bilingual support for English and Arabic.',
@@ -18,9 +18,11 @@ export const metadata: Metadata = {
     'bidirectional examples',
     'React examples',
     'design system demos',
+    'Noor UI',
+    'MENA',
   ],
   openGraph: {
-    title: 'Examples - RTL-First Design System',
+    title: 'Examples - Noor UI',
     description:
       'Real-world examples showcasing RTL-first components with full bilingual support.',
     type: 'website',
@@ -29,7 +31,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Examples - RTL-First Design System',
+    title: 'Examples - Noor UI',
     description:
       'Real-world examples of RTL-first components with bilingual support.',
   },

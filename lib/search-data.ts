@@ -10,17 +10,17 @@ export const searchData: SearchItem[] = [
   // Documentation Pages
   {
     title: 'Getting Started',
-    description: 'Installation and setup guide for RTL Design System',
+    description: 'Installation and setup guide for Noor UI',
     href: '/getting-started',
     category: 'Documentation',
-    keywords: ['install', 'setup', 'configuration', 'start'],
+    keywords: ['install', 'setup', 'configuration', 'start', 'noor'],
   },
   {
     title: 'Installation',
-    description: 'Install RTL Design System in your project',
+    description: 'Install Noor UI in your project',
     href: '/documentation/installation',
     category: 'Documentation',
-    keywords: ['npm', 'yarn', 'pnpm', 'install'],
+    keywords: ['npm', 'yarn', 'pnpm', 'install', 'noor'],
   },
   {
     title: 'Quick Start',

@@ -25,9 +25,9 @@ const jetBrainsMono = JetBrains_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'RTL-First Design System',
-  description: 'A comprehensive, modern design system with full bilingual support for Arabic and English',
-  keywords: ['design system', 'RTL', 'Arabic', 'components', 'accessibility', 'React', 'Next.js'],
+  title: 'Noor UI - نور',
+  description: 'A comprehensive, modern design system with full bilingual support for Arabic and English. Bringing light to multilingual interface design.',
+  keywords: ['design system', 'RTL', 'Arabic', 'components', 'accessibility', 'React', 'Next.js', 'Noor UI', 'bilingual', 'MENA'],
 }
 
 export default function RootLayout({

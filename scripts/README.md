@@ -1,6 +1,6 @@
 # Visual Testing Scripts
 
-This directory contains scripts for automated visual testing of the RTL-First Design System components.
+This directory contains scripts for automated visual testing of the Noor UI components.
 
 ## Screenshot Script
 
