@@ -2,7 +2,7 @@
 
 import * as React from 'react'
 import Link from 'next/link'
-import { Sparkles } from 'lucide-react'
+import { Sunrise } from 'lucide-react'
 import { DirectionToggle } from '@/components/docs/direction-toggle'
 import { ThemeToggle } from '@/components/docs/theme-toggle'
 import { GlobalSearch } from '@/components/docs/global-search'
@@ -34,9 +34,9 @@ export function SiteHeader() {
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center justify-between">
         <div className="flex items-center gap-2">
-          <Link href="/" className="flex items-center gap-2">
-            <Sparkles className="h-6 w-6 text-primary" />
-            <span className="text-xl font-bold">RTL Design</span>
+          <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
+            <Sunrise className="h-6 w-6 text-primary" />
+            <span className="text-xl font-bold">Noor UI</span>
           </Link>
         </div>
         <nav className="hidden md:flex items-center gap-6" aria-label="Main navigation">

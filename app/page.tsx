@@ -7,17 +7,15 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Separator } from '@/components/ui/separator'
-import { DirectionToggle } from '@/components/docs/direction-toggle'
-import { ThemeToggle } from '@/components/docs/theme-toggle'
+import { SiteHeader } from '@/components/layout/site-header'
 import { ThemeSwitcher } from '@/components/docs/theme-switcher'
-import { GlobalSearch } from '@/components/docs/global-search'
 import {
   Palette,
   Globe,
   Accessibility,
   Zap,
   Code2,
-  Sparkles,
+  Sunrise,
   ArrowRight,
   CheckCircle2,
 } from 'lucide-react'
@@ -34,37 +32,7 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen">
-      {/* Header */}
-      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container flex h-16 items-center justify-between">
-          <div className="flex items-center gap-2">
-            <Sparkles className="h-6 w-6 text-primary" />
-            <span className="text-xl font-bold">RTL Design</span>
-          </div>
-          <nav className="hidden md:flex items-center gap-6" aria-label="Main navigation">
-            <Link href="/" className="text-sm font-medium transition-colors hover:text-primary">
-              {t.nav.home}
-            </Link>
-            <Link href="/getting-started" className="text-sm font-medium transition-colors hover:text-primary">
-              {t.nav.getStarted}
-            </Link>
-            <Link href="/components" className="text-sm font-medium transition-colors hover:text-primary">
-              {t.nav.components}
-            </Link>
-            <Link href="/tokens" className="text-sm font-medium transition-colors hover:text-primary">
-              {t.nav.tokens}
-            </Link>
-            <Link href="/themes" className="text-sm font-medium transition-colors hover:text-primary">
-              {t.nav.themes}
-            </Link>
-          </nav>
-          <div className="flex items-center gap-2">
-            <GlobalSearch />
-            <ThemeToggle />
-            <DirectionToggle />
-          </div>
-        </div>
-      </header>
+      <SiteHeader />
 
       <main id="main-content">
         {/* Hero Section */}
@@ -138,7 +106,7 @@ export default function HomePage() {
 
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {t.home.features.items.map((feature, index) => {
-                const icons = [Zap, Globe, Accessibility, Palette, Code2, Sparkles]
+                const icons = [Zap, Globe, Accessibility, Palette, Code2, Sunrise]
                 const Icon = icons[index]
 
                 return (
@@ -193,7 +161,7 @@ export default function HomePage() {
                   <div className="space-y-2">
                     <h3 className="text-lg font-semibold">{t.docs.installation}</h3>
                     <pre className="overflow-x-auto rounded-lg bg-muted p-4">
-                      <code className="text-sm">npm install @rtl-design-system/core</code>
+                      <code className="text-sm">npm install @noorui/components</code>
                     </pre>
                   </div>
                 </div>
@@ -208,7 +176,7 @@ export default function HomePage() {
                     <h3 className="text-lg font-semibold">{t.docs.usage}</h3>
                     <pre className="overflow-x-auto rounded-lg bg-muted p-4">
                       <code className="text-sm">
-{`import { Button } from '@rtl-design-system/core'
+{`import { Button } from '@noorui/components'
 
 <Button variant="primary">
   ${t.ui.button.submit}
@@ -241,11 +209,11 @@ export default function HomePage() {
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
             <div>
               <div className="flex items-center gap-2 mb-4">
-                <Sparkles className="h-5 w-5 text-primary" />
-                <span className="font-bold">RTL Design</span>
+                <Sunrise className="h-5 w-5 text-primary" />
+                <span className="font-bold">Noor UI</span>
               </div>
               <p className="text-sm text-muted-foreground">
-                Built for the GCC market with love.
+                Bringing light to multilingual interface design.
               </p>
             </div>
             <div>
@@ -276,7 +244,7 @@ export default function HomePage() {
           </div>
           <Separator className="my-8" />
           <div className="text-center text-sm text-muted-foreground">
-            © 2025 RTL Design System. Built with Next.js, TypeScript, and Tailwind CSS.
+            © 2025 Noor UI. Built with Next.js, TypeScript, and Tailwind CSS.
           </div>
         </div>
       </footer>
