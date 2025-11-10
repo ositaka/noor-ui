@@ -7,7 +7,7 @@ import { Separator } from '@/components/ui/separator'
 import { ComponentShowcase } from '@/components/docs/component-showcase'
 import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
-import { Sparkles, Calendar, CreditCard, User } from 'lucide-react'
+import { Calendar, CreditCard, User } from 'lucide-react'
 import {
   Accordion,
   AccordionContent,
@@ -53,7 +53,7 @@ const accordionProps: PropDefinition[] = [
   },
 ]
 
-const installCode = `npm install @rtl-design-system/core`
+const installCode = `npm install @noorui/components`
 
 const basicUsageCode = `import {
   Accordion,

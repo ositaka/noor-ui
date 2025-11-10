@@ -1,6 +1,7 @@
 {
-  "name": "rtl-first-design-system",
+  "name": "noorui",
   "version": "0.1.0",
+  "description": "Noor UI - Beautiful RTL-first React components for bilingual applications",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -8,12 +9,15 @@
     "start": "next start",
     "lint": "next lint",
     "type-check": "tsc --noEmit",
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "test:coverage": "vitest --coverage",
+    "test:watch": "vitest --watch",
     "screenshot": "node scripts/screenshot.js",
     "screenshot:component": "node scripts/screenshot.js"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.1.2",
-    "@radix-ui/react-alert-dialog": "^1.0.5",
     "@radix-ui/react-avatar": "^1.0.4",
     "@radix-ui/react-checkbox": "^1.0.4",
     "@radix-ui/react-collapsible": "^1.0.3",
@@ -34,29 +38,33 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
     "cmdk": "^1.1.1",
-    "framer-motion": "^11.0.0",
     "lucide-react": "^0.344.0",
     "next": "^14.2.0",
     "next-themes": "^0.2.1",
     "react": "^18.3.0",
     "react-dom": "^18.3.0",
     "react-syntax-highlighter": "^15.5.0",
-    "rehype-pretty-code": "^0.13.0",
     "tailwind-merge": "^2.2.0"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.0",
+    "@testing-library/user-event": "^14.6.1",
     "@types/node": "^20.11.0",
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.0",
     "@types/react-syntax-highlighter": "^15.5.11",
+    "@vitejs/plugin-react": "^5.1.0",
     "autoprefixer": "^10.4.0",
     "eslint": "^8.56.0",
     "eslint-config-next": "^14.2.0",
     "eslint-plugin-jsx-a11y": "^6.8.0",
+    "jsdom": "^27.1.0",
     "playwright": "^1.56.1",
     "postcss": "^8.5.6",
     "tailwindcss": "^3.4.0",
     "tailwindcss-logical": "^3.0.0",
-    "typescript": "^5.3.0"
+    "typescript": "^5.3.0",
+    "vitest": "^4.0.8"
   }
 }

@@ -13,7 +13,6 @@ import {
   composeValidators,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { Textarea } from '@/components/ui/textarea'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
@@ -46,7 +45,7 @@ const formProps: PropDefinition[] = [
   },
 ]
 
-const installCode = `npm install @rtl-design-system/core`
+const installCode = `npm install @noorui/components`
 
 const basicUsageCode = `import { Form, FormField, FormItem, FormLabel, FormMessage, validators } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'

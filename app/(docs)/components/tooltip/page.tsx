@@ -12,7 +12,7 @@ import {
 import { ComponentShowcase } from '@/components/docs/component-showcase'
 import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
-import { Sparkles, Info, Plus, Settings, Trash2 } from 'lucide-react'
+import { Info, Plus, Settings, Trash2 } from 'lucide-react'
 const tooltipProps: PropDefinition[] = [
   {
     name: 'side',
@@ -44,7 +44,7 @@ const tooltipProps: PropDefinition[] = [
   },
 ]
 
-const installCode = `npm install @rtl-design-system/core`
+const installCode = `npm install @noorui/components`
 
 const setupCode = `// app/layout.tsx
 import { TooltipProvider } from '@/components/ui/tooltip'

@@ -9,10 +9,55 @@ import {
   CheckSquare,
   LayoutDashboard,
   ShoppingCart,
-  Calendar
+  Calendar,
+  Sparkles,
+  Table,
+  Landmark,
+  PenTool,
+  Home,
+  Store,
+  FileEdit,
+  TrendingUp,
+  type LucideIcon,
 } from 'lucide-react'
 
-const examples = [
+interface Example {
+  title: string
+  description: string
+  href: string
+  icon: LucideIcon
+  tags: string[]
+  status: 'ready' | 'coming-soon'
+  featured?: boolean
+}
+
+const examples: Example[] = [
+  {
+    title: 'GCC Community Dashboard',
+    description: 'Complete GCC dashboard with Prayer Times, Hijri dates, Zakat calculator, and Arabic numbers. Perfect showcase of all GCC components.',
+    href: '/examples/gcc-dashboard',
+    icon: Sparkles,
+    tags: ['GCC', 'Islamic', 'Zakat', 'Prayer', 'RTL'],
+    status: 'ready' as const,
+    featured: true,
+  },
+  {
+    title: 'Islamic Finance Dashboard',
+    description: 'Comprehensive Islamic finance management with Zakat calculator, investment tracking, Hijri calendar, prayer times, and transaction history.',
+    href: '/examples/islamic-finance-dashboard',
+    icon: Landmark,
+    tags: ['GCC', 'Islamic', 'Finance', 'Zakat', 'DataTable', 'RTL'],
+    status: 'ready' as const,
+    featured: true,
+  },
+  {
+    title: 'DataTable Showcase',
+    description: 'Advanced data table with sorting, filtering, pagination, and export. Demonstrates all DataTable features with 50 sample users.',
+    href: '/examples/datatable-showcase',
+    icon: Table,
+    tags: ['DataTable', 'Sorting', 'Filtering', 'Export', 'RTL'],
+    status: 'ready' as const,
+  },
   {
     title: 'Multi-Step Registration Form',
     description: 'A comprehensive 4-step registration form with validation, bilingual error messages, and perfect RTL support.',
@@ -43,6 +88,55 @@ const examples = [
     href: '/examples/calendar',
     icon: Calendar,
     tags: ['Calendar', 'Hijri', 'GCC', 'RTL'],
+    status: 'coming-soon' as const,
+  },
+  {
+    title: 'Blog Dashboard',
+    description: 'Complete blogging platform with multilingual content management, Supabase backend, and RBAC. Create and manage bilingual posts.',
+    href: '/examples/blog-dashboard',
+    icon: PenTool,
+    tags: ['Blog', 'CMS', 'Supabase', 'Multilingual', 'RBAC', 'RTL'],
+    status: 'coming-soon' as const,
+    featured: true,
+  },
+  {
+    title: 'Real Estate Dashboard',
+    description: 'Property listings platform with bilingual descriptions, image galleries, and advanced search filters for GCC real estate market.',
+    href: '/examples/real-estate',
+    icon: Home,
+    tags: ['Real Estate', 'Listings', 'Search', 'GCC', 'RTL'],
+    status: 'coming-soon' as const,
+  },
+  {
+    title: 'Portfolio Site',
+    description: 'Creative professional portfolio with project showcase, case studies, and contact forms. Perfect for designers and developers.',
+    href: '/examples/portfolio',
+    icon: LayoutDashboard,
+    tags: ['Portfolio', 'Showcase', 'Creative', 'RTL'],
+    status: 'coming-soon' as const,
+  },
+  {
+    title: 'Marketplace',
+    description: 'Multi-vendor marketplace with product listings, seller dashboards, and order management. Full e-commerce solution.',
+    href: '/examples/marketplace',
+    icon: Store,
+    tags: ['Marketplace', 'E-commerce', 'Multi-vendor', 'Orders', 'RTL'],
+    status: 'coming-soon' as const,
+  },
+  {
+    title: 'CMS / Content Management',
+    description: 'Content management system with rich text editor, media library, and workflow management for bilingual content teams.',
+    href: '/examples/cms',
+    icon: FileEdit,
+    tags: ['CMS', 'Content', 'Editor', 'Workflow', 'RTL'],
+    status: 'coming-soon' as const,
+  },
+  {
+    title: 'Analytics Dashboard',
+    description: 'Real-time analytics with charts, metrics, and data visualization. Track user behavior and business KPIs with RTL-ready charts.',
+    href: '/examples/analytics',
+    icon: TrendingUp,
+    tags: ['Analytics', 'Charts', 'Metrics', 'Data', 'RTL'],
     status: 'coming-soon' as const,
   },
 ]
@@ -107,7 +201,7 @@ export default function ExamplesPage() {
                 example.status === 'ready'
                   ? 'hover:border-primary/50 cursor-pointer'
                   : 'opacity-60'
-              }`}>
+              } ${example.featured ? 'border-primary/30 bg-primary/5' : ''}`}>
                 <CardHeader>
                   <div className="flex items-start justify-between mb-2">
                     <div className="p-2 bg-primary/10 rounded-lg">
@@ -176,8 +270,8 @@ export default function ExamplesPage() {
                 </h3>
                 <p className="text-sm text-muted-foreground">
                   {isRTL
-                    ? 'تصفح مكتبة المكونات الكاملة لدينا التي تحتوي على 30 مكوناً موثقاً بالكامل مع أمثلة حية وإرشادات إمكانية الوصول.'
-                    : 'Browse our complete component library with 30 fully documented components with live examples and accessibility guidelines.'}
+                    ? 'تصفح مكتبة المكونات الكاملة لدينا التي تحتوي على 38 مكوناً موثقاً بالكامل مع أمثلة حية وإرشادات إمكانية الوصول.'
+                    : 'Browse our complete component library with 38 fully documented components with live examples and accessibility guidelines.'}
                 </p>
                 <Link href="/components">
                   <Badge className="cursor-pointer hover:bg-primary/90">

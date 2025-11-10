@@ -3,21 +3,17 @@
 import * as React from 'react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
 import { Separator } from '@/components/ui/separator'
-import { DirectionToggle } from '@/components/docs/direction-toggle'
-import { ThemeToggle } from '@/components/docs/theme-toggle'
+import { SiteHeader } from '@/components/layout/site-header'
 import { ThemeSwitcher } from '@/components/docs/theme-switcher'
-import { GlobalSearch } from '@/components/docs/global-search'
+import { FeatureCard } from '@/components/ui/feature-card'
 import {
   Palette,
   Globe,
   Accessibility,
   Zap,
   Code2,
-  Sparkles,
+  Sunrise,
   ArrowRight,
   CheckCircle2,
 } from 'lucide-react'
@@ -34,37 +30,7 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen">
-      {/* Header */}
-      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container flex h-16 items-center justify-between">
-          <div className="flex items-center gap-2">
-            <Sparkles className="h-6 w-6 text-primary" />
-            <span className="text-xl font-bold">RTL Design</span>
-          </div>
-          <nav className="hidden md:flex items-center gap-6" aria-label="Main navigation">
-            <Link href="/" className="text-sm font-medium transition-colors hover:text-primary">
-              {t.nav.home}
-            </Link>
-            <Link href="/getting-started" className="text-sm font-medium transition-colors hover:text-primary">
-              {t.nav.getStarted}
-            </Link>
-            <Link href="/components" className="text-sm font-medium transition-colors hover:text-primary">
-              {t.nav.components}
-            </Link>
-            <Link href="/tokens" className="text-sm font-medium transition-colors hover:text-primary">
-              {t.nav.tokens}
-            </Link>
-            <Link href="/themes" className="text-sm font-medium transition-colors hover:text-primary">
-              {t.nav.themes}
-            </Link>
-          </nav>
-          <div className="flex items-center gap-2">
-            <GlobalSearch />
-            <ThemeToggle />
-            <DirectionToggle />
-          </div>
-        </div>
-      </header>
+      <SiteHeader />
 
       <main id="main-content">
         {/* Hero Section */}
@@ -84,7 +50,7 @@ export default function HomePage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button size="lg" asChild>
-                <Link href="/components">
+                <Link href="/components" className='inline-flex items-center'>
                   {t.home.hero.cta.primary}
                   <ArrowRight className="ms-2 h-4 w-4" />
                 </Link>
@@ -95,32 +61,6 @@ export default function HomePage() {
                 </Link>
               </Button>
             </div>
-
-            {/* Live Demo */}
-            <Card className="mt-12">
-              <CardHeader>
-                <CardTitle>{t.ui.button.tryIt}</CardTitle>
-                <CardDescription>
-                  Interactive components that work perfectly in both directions
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="grid gap-4 md:grid-cols-2">
-                  <div className="space-y-2">
-                    <Label htmlFor="demo-name">{t.ui.form.firstName}</Label>
-                    <Input id="demo-name" placeholder={t.ui.form.placeholder} />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="demo-email">{t.ui.form.email}</Label>
-                    <Input id="demo-email" type="email" placeholder={t.ui.form.placeholder} />
-                  </div>
-                </div>
-                <div className="flex gap-2">
-                  <Button>{t.ui.button.submit}</Button>
-                  <Button variant="outline">{t.ui.button.cancel}</Button>
-                </div>
-              </CardContent>
-            </Card>
           </div>
         </section>
 
@@ -138,23 +78,19 @@ export default function HomePage() {
 
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {t.home.features.items.map((feature, index) => {
-                const icons = [Zap, Globe, Accessibility, Palette, Code2, Sparkles]
+                const icons = [Zap, Globe, Accessibility, Palette, Code2, Sunrise]
+                const hrefs = ['/components', '/rtl-guide', '/documentation/wcag', '/themes', '/tokens', '/getting-started']
                 const Icon = icons[index]
+                const href = hrefs[index]
 
                 return (
-                  <Card key={index}>
-                    <CardHeader>
-                      <div className="flex items-center gap-4">
-                        <div className="rounded-lg bg-primary/10 p-3">
-                          <Icon className="h-6 w-6 text-primary" />
-                        </div>
-                        <CardTitle>{feature.title}</CardTitle>
-                      </div>
-                    </CardHeader>
-                    <CardContent>
-                      <p className="text-muted-foreground">{feature.description}</p>
-                    </CardContent>
-                  </Card>
+                  <FeatureCard
+                    key={index}
+                    title={feature.title}
+                    description={feature.description}
+                    icon={Icon}
+                    href={href}
+                  />
                 )
               })}
             </div>
@@ -193,7 +129,7 @@ export default function HomePage() {
                   <div className="space-y-2">
                     <h3 className="text-lg font-semibold">{t.docs.installation}</h3>
                     <pre className="overflow-x-auto rounded-lg bg-muted p-4">
-                      <code className="text-sm">npm install @rtl-design-system/core</code>
+                      <code className="text-sm">npm install @noorui/components</code>
                     </pre>
                   </div>
                 </div>
@@ -208,7 +144,7 @@ export default function HomePage() {
                     <h3 className="text-lg font-semibold">{t.docs.usage}</h3>
                     <pre className="overflow-x-auto rounded-lg bg-muted p-4">
                       <code className="text-sm">
-{`import { Button } from '@rtl-design-system/core'
+{`import { Button } from '@noorui/components'
 
 <Button variant="primary">
   ${t.ui.button.submit}
@@ -241,11 +177,11 @@ export default function HomePage() {
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
             <div>
               <div className="flex items-center gap-2 mb-4">
-                <Sparkles className="h-5 w-5 text-primary" />
-                <span className="font-bold">RTL Design</span>
+                <Sunrise className="h-5 w-5 text-primary" />
+                <span className="font-bold">Noor UI</span>
               </div>
               <p className="text-sm text-muted-foreground">
-                Built for the GCC market with love.
+                Bringing light to multilingual interface design.
               </p>
             </div>
             <div>
@@ -276,7 +212,7 @@ export default function HomePage() {
           </div>
           <Separator className="my-8" />
           <div className="text-center text-sm text-muted-foreground">
-            © 2025 RTL Design System. Built with Next.js, TypeScript, and Tailwind CSS.
+            © 2025 Noor UI. Built with Next.js, TypeScript, and Tailwind CSS.
           </div>
         </div>
       </footer>

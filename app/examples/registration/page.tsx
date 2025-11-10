@@ -24,7 +24,7 @@ import { Progress } from '@/components/ui/progress'
 import { DirectionToggle } from '@/components/docs/direction-toggle'
 import { ThemeToggle } from '@/components/docs/theme-toggle'
 import {
-  Sparkles,
+  Sunrise,
   User,
   MapPin,
   FileText,
@@ -121,8 +121,8 @@ export default function RegistrationPage() {
       <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container flex h-16 items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
-            <Sparkles className="h-6 w-6 text-primary" />
-            <span className="text-xl font-bold">RTL Design</span>
+            <Sunrise className="h-6 w-6 text-primary" />
+            <span className="text-xl font-bold">Noor UI</span>
           </Link>
           <div className="flex items-center gap-2">
             <ThemeToggle />
@@ -142,8 +142,8 @@ export default function RegistrationPage() {
             </li>
             <li>/</li>
             <li>
-              <Link href="/components" className="hover:text-foreground transition-colors">
-                {isRTL ? 'أمثلة' : 'Examples'}
+              <Link href="/examples" className="hover:text-foreground transition-colors">
+                {isRTL ? 'الأمثلة' : 'Examples'}
               </Link>
             </li>
             <li>/</li>

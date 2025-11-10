@@ -62,7 +62,7 @@ const checkboxProps: PropDefinition[] = [
   },
 ]
 
-const installCode = `npm install @rtl-design-system/core`
+const installCode = `npm install @noorui/components`
 
 const basicUsageCode = `import { Checkbox } from '@/components/ui/checkbox'
 import { Label } from '@/components/ui/label'

@@ -15,8 +15,8 @@ const config: Config = {
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
-    // Include RTL Design System components
-    "./node_modules/@rtl-design-system/core/**/*.{js,ts,jsx,tsx}",
+    // Include Noor UI components
+    "./node_modules/@noorui/components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
@@ -34,10 +34,10 @@ const providersSetup = `// app/providers.tsx
 'use client'
 
 import * as React from 'react'
-import { DirectionProvider } from '@rtl-design-system/core/providers'
+import { DirectionProvider } from '@noorui/components/providers'
 import { ThemeProvider } from 'next-themes'
 import { TooltipProvider } from '@radix-ui/react-tooltip'
-import { Toaster } from '@rtl-design-system/core/components'
+import { Toaster } from '@noorui/components/components'
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
@@ -70,7 +70,7 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: "My RTL-First App",
-  description: "Built with RTL Design System",
+  description: "Built with Noor UI",
 }
 
 export default function RootLayout({
@@ -161,7 +161,7 @@ export default function ConfigurationPage() {
             <h1 className="text-4xl font-bold tracking-tight">Configuration</h1>
           </div>
           <p className="text-xl text-muted-foreground">
-            Complete configuration guide for integrating RTL Design System into your Next.js application.
+            Complete configuration guide for integrating Noor UI into your Next.js application.
           </p>
         </div>
 

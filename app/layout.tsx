@@ -1,12 +1,33 @@
 import type { Metadata } from 'next'
+import { Inter, IBM_Plex_Sans_Arabic, JetBrains_Mono } from 'next/font/google'
 import { ThemeProvider } from '@/components/providers/theme-provider'
 import { ClientProviders } from '@/components/providers/client-providers'
 import '@/styles/globals.css'
 
+// Font configurations with Next.js optimization
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
+  display: 'swap',
+})
+
+const ibmPlexSansArabic = IBM_Plex_Sans_Arabic({
+  weight: ['400', '500', '600', '700'],
+  subsets: ['arabic'],
+  variable: '--font-arabic',
+  display: 'swap',
+})
+
+const jetBrainsMono = JetBrains_Mono({
+  subsets: ['latin'],
+  variable: '--font-mono',
+  display: 'swap',
+})
+
 export const metadata: Metadata = {
-  title: 'RTL-First Design System',
-  description: 'A comprehensive, modern design system with full bilingual support for Arabic and English',
-  keywords: ['design system', 'RTL', 'Arabic', 'components', 'accessibility', 'React', 'Next.js'],
+  title: 'Noor UI - نور',
+  description: 'A comprehensive, modern design system with full bilingual support for Arabic and English. Bringing light to multilingual interface design.',
+  keywords: ['design system', 'RTL', 'Arabic', 'components', 'accessibility', 'React', 'Next.js', 'Noor UI', 'bilingual', 'MENA'],
 }
 
 export default function RootLayout({
@@ -16,12 +37,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" dir="ltr" suppressHydrationWarning>
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
-      </head>
-      <body className="font-sans antialiased">
+      <body className={`${inter.variable} ${ibmPlexSansArabic.variable} ${jetBrainsMono.variable} font-sans antialiased`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="light"

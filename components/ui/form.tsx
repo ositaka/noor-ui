@@ -100,7 +100,10 @@ export const Form = React.forwardRef<HTMLFormElement, FormProps>(
       try {
         await onSubmit(values)
       } catch (error) {
-        console.error('Form submission error:', error)
+        // Error should be handled by the parent component
+        if (process.env.NODE_ENV === 'development') {
+          console.error('Form submission error:', error)
+        }
       } finally {
         setIsSubmitting(false)
       }

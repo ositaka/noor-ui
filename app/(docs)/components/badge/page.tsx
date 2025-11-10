@@ -9,7 +9,7 @@ import { Separator } from '@/components/ui/separator'
 import { ComponentShowcase } from '@/components/docs/component-showcase'
 import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
-import { Sparkles, Check, AlertCircle, Star, Clock, Zap, CheckCircle2, XCircle } from 'lucide-react'
+import { Check, AlertCircle, Star, Clock, Zap, CheckCircle2, XCircle } from 'lucide-react'
 
 const badgeProps: PropDefinition[] = [
   {
@@ -28,7 +28,7 @@ const badgeProps: PropDefinition[] = [
   },
 ]
 
-const installCode = `npm install @rtl-design-system/core`
+const installCode = `npm install @noorui/components`
 
 const basicUsageCode = `import { Badge } from '@/components/ui/badge'
 

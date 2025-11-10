@@ -2,14 +2,12 @@
 
 import * as React from 'react'
 import Link from 'next/link'
-import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
-import { Separator } from '@/components/ui/separator'
 import { ComponentShowcase } from '@/components/docs/component-showcase'
 import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
-import { Sparkles, Terminal, AlertCircle, CheckCircle2, AlertTriangle, Info } from 'lucide-react'
+import { Terminal, AlertCircle, CheckCircle2, AlertTriangle } from 'lucide-react'
 
 const alertProps: PropDefinition[] = [
   {
@@ -21,7 +19,7 @@ const alertProps: PropDefinition[] = [
   },
 ]
 
-const installCode = `npm install @rtl-design-system/core`
+const installCode = `npm install @noorui/components`
 
 const basicUsageCode = `import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Terminal } from 'lucide-react'

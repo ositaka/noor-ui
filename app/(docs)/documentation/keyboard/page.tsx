@@ -87,7 +87,7 @@ export default function KeyboardPage() {
             <h1 className="text-4xl font-bold tracking-tight">Keyboard Navigation</h1>
           </div>
           <p className="text-xl text-muted-foreground">
-            Complete guide to keyboard accessibility in RTL Design System. All components are fully operable via keyboard without requiring a mouse.
+            Complete guide to keyboard accessibility in Noor UI. All components are fully operable via keyboard without requiring a mouse.
           </p>
         </div>
 

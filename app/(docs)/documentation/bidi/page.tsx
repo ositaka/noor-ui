@@ -136,7 +136,7 @@ export default function BidiPage() {
         <section className="mb-16">
           <h2 className="text-2xl font-bold tracking-tight mb-6">Component Support</h2>
           <p className="text-muted-foreground mb-4">
-            All RTL Design System components handle BiDi text automatically:
+            All Noor UI components handle BiDi text automatically:
           </p>
           <Card>
             <CardContent className="p-6">

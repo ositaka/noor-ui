@@ -1,13 +1,16 @@
-# RTL-First Design System
+# Noor UI ✨
 
-A comprehensive, modern design system built specifically for the **GCC market** with full **bilingual (Arabic/English) support** and perfect RTL implementation.
+> نور - "Light" in Arabic
 
-Built for the GCC market with accessibility, performance, and user experience as top priorities.
+A comprehensive, modern design system built specifically for **bilingual applications** with full **Arabic/English support** and perfect RTL implementation.
+
+Bringing light to multilingual interface design with accessibility, performance, and user experience as top priorities.
 
 ## 🌟 Features
 
 - **RTL-First Architecture**: Designed for Arabic from the ground up, with English as an equally-supported alternative
-- **32 Production-Ready Components**: Complete UI toolkit covering essential patterns from forms to data display
+- **38 Production-Ready Components**: Complete UI toolkit covering essential patterns from forms to data display
+- **GCC-Specific Components**: Prayer times, Hijri calendar, Arabic numbers, Zakat calculator, and dual-calendar date picker built for the region
 - **Zero Directional Bugs**: 100% logical properties, no hardcoded LTR assumptions
 - **Direction-Aware Components**: Tabs, navigation, and layouts automatically adapt to text direction
 - **4 Distinct Themes**: Minimal, Futuristic, Cozy, and Artistic - all powered by the same design tokens
@@ -155,7 +158,7 @@ This enables:
 
 ## 🎨 Design System
 
-### All Components (32 Implemented)
+### All Components (38 Implemented)
 
 **Form Components:**
 - **Form**: State management with validation and bilingual error messages
@@ -199,6 +202,14 @@ This enables:
 
 **Data Display:**
 - **Table**: Structured data display with RTL text alignment
+- **DataTable**: Advanced data table with sorting, filtering, pagination, and loading states
+
+**GCC-Specific Components:**
+- **Prayer Times**: Display Islamic prayer times with countdown timer, next prayer highlighting, and Adhan notification UI variant
+- **Hijri Date**: Show both Gregorian and Hijri (Islamic calendar) dates with multiple layout variants
+- **Arabic Number**: Comprehensive utilities for Arabic-Indic numerals (٠-٩) and SAR currency formatting
+- **Zakat Calculator**: Calculate Islamic Zakat obligations with Nisab checking, multi-asset support, and export/sharing features (copy, print, download)
+- **Calendar**: Date picker with dual Gregorian/Hijri calendar, event markers, range selection, and full RTL support
 
 ### Documentation Components
 
@@ -216,6 +227,9 @@ This enables:
 
 Production-ready examples showcasing component composition and real use cases:
 
+- **GCC Community Dashboard**: Complete showcase of all GCC-specific components including Prayer Times, Hijri Date, Zakat Calculator, and Arabic Number formatting in a cohesive community platform
+- **Islamic Finance Dashboard**: Comprehensive Islamic finance management featuring Zakat calculator with export, investment portfolio tracking, Hijri calendar with Islamic events, transaction DataTable, and prayer times integration
+- **DataTable Showcase**: Advanced data table demonstration with 50 sample users, live sorting/filtering, pagination, search, export to CSV, and mobile-responsive cards view
 - **Multi-Step Registration Form**: 4-step registration with validation, progress indicators, and bilingual error messages
 - **Analytics Dashboard**: Stats cards, revenue charts, transaction tables (with responsive mobile layout), and activity feeds
 - **E-commerce Product Page**: Image gallery, color/size selection, reviews with ratings, and related products grid
@@ -412,7 +426,6 @@ Tokens are converted to CSS custom properties in `styles/globals.css` and consum
 ### Features
 - `next-themes@^0.2.1`
 - `react-syntax-highlighter@^15.5.0`
-- `framer-motion@^11.0.0`
 
 ### Development
 - `eslint@^8.56.0`
@@ -435,12 +448,14 @@ Tokens are converted to CSS custom properties in `styles/globals.css` and consum
 - [x] Bilingual content throughout (Dashboard and E-commerce examples)
 - [x] Create reusable layout components (SiteHeader, SiteFooter)
 
-### Phase 3: GCC-Specific Features
-- [ ] Hijri date picker component
-- [ ] Prayer times display component
-- [ ] Arabic number formatting utilities
-- [ ] RTL-aware data tables with sorting
-- [ ] Calendar component with Hijri support
+### Phase 3: GCC-Specific Features ✅ COMPLETE
+- [x] Hijri date display component with 4 variants
+- [x] Prayer times display component with countdown timer
+- [x] Arabic number formatting utilities (7 utility functions)
+- [x] Zakat calculator with Nisab checking and multi-asset support
+- [x] GCC Community Dashboard showcasing all GCC components
+- [x] RTL-aware data tables with sorting, filtering, and pagination
+- [x] Calendar component with Hijri support, events, and range selection
 
 ### Phase 4: Developer Experience
 - [ ] Add Storybook integration
@@ -452,6 +467,27 @@ Tokens are converted to CSS custom properties in `styles/globals.css` and consum
 - [ ] SEO improvements
 
 ### Recent Improvements (November 2025)
+
+**Latest Updates:**
+- ✅ **Hydration Fix**: Resolved React hydration error in DataTable Showcase by replacing Math.random() with deterministic index-based data generation
+- ✅ **Build Fixed**: Resolved all TypeScript errors and build issues - project now compiles successfully
+- ✅ **Component Fixes**: Fixed PrayerTimes, ArabicNumber, HijriDate, Calendar, ZakatCalculator, and DataTable prop types and usage
+- ✅ **Pagination Controls**: Added interactive Pagination component to DataTable Showcase with Previous/Next buttons, page numbers, ellipsis, and bilingual support
+- ✅ **Bug Fix**: Corrected import path in Islamic Finance Dashboard (useDirection from correct provider location)
+
+**Major Features Completed:**
+- ✅ **New Showcase Examples**: Added Islamic Finance Dashboard (comprehensive finance management) and DataTable Showcase (advanced table with 50 sample users, export to CSV)
+- ✅ **Phase 3 Complete & Production Ready!** Calendar component with dual Gregorian/Hijri dates, event markers, range selection - all Phase 3 features now implemented with proper Hijri conversion algorithm
+- ✅ **Bug Fixes**: Fixed hydration error in Hijri Date docs, implemented accurate Hijri conversion (Julian Day Number algorithm), added Hijri month display to Calendar header
+- ✅ **Calendar Component**: Date picker with Hijri support, event indicators, single/range selection, navigation, and disabled dates
+- ✅ **Component Enhancements**: Added export/sharing to Zakat Calculator (copy, print, download, JSON) and Adhan notification variant to Prayer Times
+- ✅ **DataTable Component**: Advanced data table with sorting, filtering, pagination, loading states, and mobile-responsive cards view
+- ✅ **Added 5 GCC-Specific Components**: Prayer Times, Hijri Date, Arabic Number utilities, Zakat Calculator, Calendar
+- ✅ **GCC Community Dashboard**: Complete example showcasing all GCC components in a real-world platform
+- ✅ **Zakat Calculator**: Calculate Islamic Zakat obligations with Nisab thresholds and 6 asset types
+- ✅ **Arabic Number Utilities**: 7 formatting functions for Arabic-Indic numerals and SAR currency
+- ✅ **Prayer Times Component**: Display Islamic prayer times with countdown timer
+- ✅ **Hijri Date Component**: Dual calendar display with 4 layout variants
 - ✅ Refactored to use Next.js route groups for cleaner architecture
 - ✅ Added shared layout (header/footer) for all documentation pages
 - ✅ Made Tabs component fully direction-aware with Radix UI integration

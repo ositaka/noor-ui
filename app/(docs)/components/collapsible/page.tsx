@@ -9,7 +9,7 @@ import { Separator } from '@/components/ui/separator'
 import { ComponentShowcase } from '@/components/docs/component-showcase'
 import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
-import { Sparkles, ChevronDown, ChevronRight, ChevronsUpDown } from 'lucide-react'
+import { ChevronDown, ChevronRight, ChevronsUpDown } from 'lucide-react'
 
 const collapsibleProps: PropDefinition[] = [
   {
@@ -42,7 +42,7 @@ const collapsibleProps: PropDefinition[] = [
   },
 ]
 
-const installCode = `npm install @rtl-design-system/core`
+const installCode = `npm install @noorui/components`
 
 const basicUsageCode = `import {
   Collapsible,
@@ -316,7 +316,7 @@ export default function CollapsiblePage() {
                       },
                       {
                         q: 'How do I install it?',
-                        a: 'Simply run npm install @rtl-design-system/core and import the components you need.',
+                        a: 'Simply run npm install @noorui/components and import the components you need.',
                       },
                       {
                         q: 'Is it accessible?',

@@ -8,7 +8,7 @@ import { Separator } from '@/components/ui/separator'
 import { ComponentShowcase } from '@/components/docs/component-showcase'
 import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
-import { Sparkles, ArrowLeft, Download, Heart, Trash2 } from 'lucide-react'
+import { ArrowLeft, Download, Heart, Trash2 } from 'lucide-react'
 const buttonProps: PropDefinition[] = [
   {
     name: 'variant',
@@ -47,7 +47,7 @@ const buttonProps: PropDefinition[] = [
   },
 ]
 
-const installCode = `npm install @rtl-design-system/core`
+const installCode = `npm install @noorui/components`
 
 const basicUsageCode = `import { Button } from '@/components/ui/button'
 

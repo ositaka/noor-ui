@@ -7,7 +7,7 @@ import { CodeBlock } from '@/components/docs/code-block'
 import { Zap, Rocket, Code2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
-const simpleButtonCode = `import { Button } from '@rtl-design-system/core/components'
+const simpleButtonCode = `import { Button } from '@noorui/components/components'
 
 export default function MyPage() {
   return (
@@ -15,7 +15,7 @@ export default function MyPage() {
   )
 }`
 
-const cardExampleCode = `import { Card, CardContent, CardHeader, CardTitle } from '@rtl-design-system/core/components'
+const cardExampleCode = `import { Card, CardContent, CardHeader, CardTitle } from '@noorui/components/components'
 
 export default function MyPage() {
   return (
@@ -32,9 +32,9 @@ export default function MyPage() {
 
 const formExampleCode = `'use client'
 
-import { Button } from '@rtl-design-system/core/components'
-import { Input } from '@rtl-design-system/core/components'
-import { Label } from '@rtl-design-system/core/components'
+import { Button } from '@noorui/components/components'
+import { Input } from '@noorui/components/components'
+import { Label } from '@noorui/components/components'
 import { useState } from 'react'
 
 export default function LoginForm() {
@@ -59,8 +59,8 @@ export default function LoginForm() {
 
 const directionToggleCode = `'use client'
 
-import { useDirection } from '@rtl-design-system/core/hooks'
-import { Button } from '@rtl-design-system/core/components'
+import { useDirection } from '@noorui/components/hooks'
+import { Button } from '@noorui/components/components'
 
 export default function MyComponent() {
   const { direction, setDirection } = useDirection()
@@ -79,8 +79,8 @@ export default function MyComponent() {
   )
 }`
 
-const fullPageExampleCode = `import { Button } from '@rtl-design-system/core/components'
-import { Card, CardContent, CardHeader, CardTitle } from '@rtl-design-system/core/components'
+const fullPageExampleCode = `import { Button } from '@noorui/components/components'
+import { Card, CardContent, CardHeader, CardTitle } from '@noorui/components/components'
 
 export default function DashboardPage() {
   return (
@@ -157,7 +157,7 @@ export default function QuickStartPage() {
             <h1 className="text-4xl font-bold tracking-tight">Quick Start</h1>
           </div>
           <p className="text-xl text-muted-foreground">
-            Start building with RTL Design System in under 5 minutes. This guide will get you from zero to your first component.
+            Start building with Noor UI in under 5 minutes. This guide will get you from zero to your first component.
           </p>
         </div>
 

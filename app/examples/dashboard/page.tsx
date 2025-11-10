@@ -1,13 +1,13 @@
 'use client'
 
 import * as React from 'react'
-import { Metadata } from 'next'
+import Link from 'next/link'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { Progress } from '@/components/ui/progress'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import {
   Table,
   TableBody,
@@ -20,7 +20,6 @@ import {
 import {
   ArrowUp,
   ArrowDown,
-  TrendingUp,
   DollarSign,
   Users,
   ShoppingCart,
@@ -216,6 +215,31 @@ export default function DashboardPage() {
 
   return (
     <div className="min-h-screen bg-background">
+      {/* Breadcrumb */}
+      <div className="border-b bg-background">
+        <div className="container py-3">
+          <nav aria-label="Breadcrumb">
+            <ol className="flex items-center gap-2 text-sm text-muted-foreground">
+              <li>
+                <Link href="/" className="hover:text-foreground transition-colors">
+                  {locale === 'ar' ? 'الرئيسية' : 'Home'}
+                </Link>
+              </li>
+              <li>/</li>
+              <li>
+                <Link href="/examples" className="hover:text-foreground transition-colors">
+                  {locale === 'ar' ? 'الأمثلة' : 'Examples'}
+                </Link>
+              </li>
+              <li>/</li>
+              <li className="text-foreground font-medium">
+                {locale === 'ar' ? 'لوحة التحكم' : 'Dashboard'}
+              </li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+
       {/* Header */}
       <div className="border-b">
         <div className="container py-6">
