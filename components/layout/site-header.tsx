@@ -98,7 +98,7 @@ export function SiteHeader() {
                 <span className="sr-only">Toggle menu</span>
               </Button>
             </SheetTrigger>
-            <SheetContent side={locale === 'ar' ? 'left' : 'right'}>
+            <SheetContent side="end">
               <SheetHeader>
                 <SheetTitle className="flex items-center gap-2">
                   <Sunrise className="h-5 w-5 text-primary" />
