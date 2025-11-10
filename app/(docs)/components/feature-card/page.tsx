@@ -177,9 +177,7 @@ export default function FeatureCardPage() {
                     />
                   </div>
                 </ComponentShowcase.Demo>
-                <ComponentShowcase.Code>
-                  {basicUsageCode}
-                </ComponentShowcase.Code>
+                <ComponentShowcase.Code code={basicUsageCode} />
               </ComponentShowcase>
             </div>
 
@@ -197,9 +195,7 @@ export default function FeatureCardPage() {
                     />
                   </div>
                 </ComponentShowcase.Demo>
-                <ComponentShowcase.Code>
-                  {clickableCode}
-                </ComponentShowcase.Code>
+                <ComponentShowcase.Code code={clickableCode} />
               </ComponentShowcase>
             </div>
 
@@ -229,9 +225,7 @@ export default function FeatureCardPage() {
                     />
                   </div>
                 </ComponentShowcase.Demo>
-                <ComponentShowcase.Code>
-                  {gridLayoutCode}
-                </ComponentShowcase.Code>
+                <ComponentShowcase.Code code={gridLayoutCode} />
               </ComponentShowcase>
             </div>
           </div>

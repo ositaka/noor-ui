@@ -31,6 +31,15 @@ import {
   CalendarIcon,
   Inbox,
   BarChart3,
+  Upload,
+  FileEdit,
+  Layout,
+  UserCircle,
+  Bell,
+  GitBranch,
+  Palette,
+  Binary,
+  Sidebar,
 } from 'lucide-react'
 
 const componentCategories = [
@@ -116,6 +125,37 @@ const componentCategories = [
       { name: 'Calendar', icon: CalendarIcon, href: '/components/calendar', status: 'ready' },
     ],
   },
+  {
+    name: 'Advanced Forms & Inputs',
+    description: 'Advanced form components for complex input scenarios',
+    components: [
+      { name: 'File Upload', icon: Upload, href: '/components/file-upload', status: 'coming-soon' },
+      { name: 'Rich Text Editor', icon: FileEdit, href: '/components/rich-text-editor', status: 'coming-soon' },
+      { name: 'Date Picker', icon: CalendarIcon, href: '/components/date-picker', status: 'coming-soon' },
+      { name: 'Time Picker', icon: Clock, href: '/components/time-picker', status: 'coming-soon' },
+      { name: 'Color Picker', icon: Palette, href: '/components/color-picker', status: 'coming-soon' },
+      { name: 'Number Input', icon: Binary, href: '/components/number-input', status: 'coming-soon' },
+    ],
+  },
+  {
+    name: 'Layout & Shell',
+    description: 'Application layout and shell components for building dashboards',
+    components: [
+      { name: 'Dashboard Shell', icon: Layout, href: '/components/dashboard-shell', status: 'coming-soon' },
+      { name: 'Sidebar', icon: Sidebar, href: '/components/sidebar', status: 'coming-soon' },
+      { name: 'App Shell', icon: Layout, href: '/components/app-shell', status: 'coming-soon' },
+    ],
+  },
+  {
+    name: 'User Interface',
+    description: 'User-facing interactive components for common UX patterns',
+    components: [
+      { name: 'User Menu', icon: UserCircle, href: '/components/user-menu', status: 'coming-soon' },
+      { name: 'Notification Center', icon: Bell, href: '/components/notification-center', status: 'coming-soon' },
+      { name: 'Stepper', icon: GitBranch, href: '/components/stepper', status: 'coming-soon' },
+      { name: 'Command Bar', icon: Menu, href: '/components/command-bar', status: 'coming-soon' },
+    ],
+  },
 ]
 
 export default function ComponentsPage() {
@@ -140,8 +180,8 @@ export default function ComponentsPage() {
         <div className="max-w-3xl mb-12">
           <h1 className="text-4xl font-bold tracking-tight mb-4">Components</h1>
           <p className="text-xl text-muted-foreground mb-6">
-            41 beautifully designed components built with Radix UI and Tailwind CSS.
-            Full RTL support, accessible, and customizable. All components are production-ready.
+            54 beautifully designed components built with Radix UI and Tailwind CSS.
+            41 production-ready, 13 coming soon. Full RTL support, accessible, and customizable.
           </p>
 
           {/* Live Preview */}
