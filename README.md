@@ -1,8 +1,10 @@
-# RTL-First Design System
+# Noor UI ✨
 
-A comprehensive, modern design system built specifically for the **GCC market** with full **bilingual (Arabic/English) support** and perfect RTL implementation.
+> نور - "Light" in Arabic
 
-Built for the GCC market with accessibility, performance, and user experience as top priorities.
+A comprehensive, modern design system built specifically for **bilingual applications** with full **Arabic/English support** and perfect RTL implementation.
+
+Bringing light to multilingual interface design with accessibility, performance, and user experience as top priorities.
 
 ## 🌟 Features
 

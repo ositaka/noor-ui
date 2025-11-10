@@ -1,6 +1,7 @@
 {
-  "name": "rtl-first-design-system",
+  "name": "noorui",
   "version": "0.1.0",
+  "description": "Noor UI - Beautiful RTL-first React components for bilingual applications",
   "private": true,
   "scripts": {
     "dev": "next dev",
