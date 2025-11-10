@@ -360,8 +360,8 @@ export default function IslamicFinanceDashboardPage() {
     }
   }
 
-  // DataTable columns
-  const columns: ColumnDef<Transaction>[] = [
+  // DataTable columns - memoized to prevent DataTable re-renders
+  const columns = React.useMemo<ColumnDef<Transaction>[]>(() => [
     {
       id: 'id',
       header: 'ID',
@@ -487,7 +487,7 @@ export default function IslamicFinanceDashboardPage() {
       sortable: true,
       width: '100px',
     },
-  ]
+  ], [isRTL, locale])
 
   return (
     <div className="min-h-screen bg-background" dir={direction}>

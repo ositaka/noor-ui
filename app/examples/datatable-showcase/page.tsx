@@ -195,32 +195,38 @@ export default function DataTableShowcasePage() {
     URL.revokeObjectURL(url)
   }
 
-  // Get role color
-  const getRoleVariant = (role: User['role']): 'default' | 'secondary' | 'outline' => {
-    switch (role) {
-      case 'Admin':
-        return 'default'
-      case 'Editor':
-        return 'secondary'
-      default:
-        return 'outline'
-    }
-  }
+  // Get role color - memoized to prevent recreating on every render
+  const getRoleVariant = React.useCallback(
+    (role: User['role']): 'default' | 'secondary' | 'outline' => {
+      switch (role) {
+        case 'Admin':
+          return 'default'
+        case 'Editor':
+          return 'secondary'
+        default:
+          return 'outline'
+      }
+    },
+    []
+  )
 
-  // Get status color
-  const getStatusVariant = (status: User['status']): 'default' | 'secondary' | 'outline' => {
-    switch (status) {
-      case 'Active':
-        return 'default'
-      case 'Pending':
-        return 'secondary'
-      default:
-        return 'outline'
-    }
-  }
+  // Get status color - memoized to prevent recreating on every render
+  const getStatusVariant = React.useCallback(
+    (status: User['status']): 'default' | 'secondary' | 'outline' => {
+      switch (status) {
+        case 'Active':
+          return 'default'
+        case 'Pending':
+          return 'secondary'
+        default:
+          return 'outline'
+      }
+    },
+    []
+  )
 
-  // Column definitions
-  const columns: ColumnDef<User>[] = [
+  // Column definitions - memoized to prevent DataTable re-renders
+  const columns = React.useMemo<ColumnDef<User>[]>(() => [
     {
       id: 'name',
       header: isRTL ? 'الاسم' : 'Name',
@@ -262,7 +268,7 @@ export default function DataTableShowcasePage() {
       sortable: true,
       cell: (row) => <div className="text-sm">{row.joinDate}</div>,
     },
-  ]
+  ], [isRTL, getRoleVariant, getStatusVariant])
 
   // Get paginated data
   const paginatedData = displayUsers.slice(

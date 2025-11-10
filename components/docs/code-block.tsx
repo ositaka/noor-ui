@@ -1,13 +1,32 @@
 'use client'
 
 import * as React from 'react'
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
-import { vscDarkPlus, vs } from 'react-syntax-highlighter/dist/esm/styles/prism'
+import dynamic from 'next/dynamic'
 import { cn, copyToClipboard } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
 import { Copy, Check, ChevronDown, ChevronUp } from 'lucide-react'
 import { useTheme } from 'next-themes'
+import { Skeleton } from '@/components/ui/skeleton'
+
+// Lazy load the heavy syntax highlighter (saves ~200-300KB from initial bundle)
+const SyntaxHighlighter = dynamic(
+  () =>
+    import('react-syntax-highlighter').then((mod) => ({
+      default: mod.Prism,
+    })),
+  {
+    loading: () => <Skeleton className="h-32 w-full rounded-none" />,
+    ssr: false,
+  }
+)
+
+// Lazy load styles
+const loadStyles = () =>
+  import('react-syntax-highlighter/dist/esm/styles/prism').then((mod) => ({
+    vscDarkPlus: mod.vscDarkPlus,
+    vs: mod.vs,
+  }))
 
 interface CodeBlockProps {
   code: string
@@ -32,7 +51,15 @@ export function CodeBlock({
 }: CodeBlockProps) {
   const [copied, setCopied] = React.useState(false)
   const [collapsed, setCollapsed] = React.useState(defaultCollapsed)
+  const [styles, setStyles] = React.useState<any>(null)
   const { theme } = useTheme()
+
+  // Load syntax highlighter styles on mount
+  React.useEffect(() => {
+    if (!collapsed) {
+      loadStyles().then(setStyles)
+    }
+  }, [collapsed])
 
   const handleCopy = async () => {
     const success = await copyToClipboard(code)
@@ -42,7 +69,11 @@ export function CodeBlock({
     }
   }
 
-  const syntaxTheme = theme === 'dark' ? vscDarkPlus : vs
+  const syntaxTheme = styles
+    ? theme === 'dark'
+      ? styles.vscDarkPlus
+      : styles.vs
+    : undefined
 
   return (
     <Card className={cn('overflow-hidden', className)}>
@@ -101,29 +132,33 @@ export function CodeBlock({
       {!collapsed && (
         <CardContent className="p-0">
           <div className="overflow-x-auto">
-            <SyntaxHighlighter
-              language={language}
-              style={syntaxTheme}
-              showLineNumbers={showLineNumbers}
-              wrapLines={highlightLines.length > 0}
-              lineProps={(lineNumber) => {
-                const style: React.CSSProperties = { display: 'block' }
-                if (highlightLines.includes(lineNumber)) {
-                  style.backgroundColor = 'rgba(255, 255, 0, 0.1)'
-                  style.borderLeft = '3px solid #fbbf24'
-                  style.paddingLeft = '0.5rem'
-                }
-                return { style }
-              }}
-              customStyle={{
-                margin: 0,
-                borderRadius: 0,
-                fontSize: '0.875rem',
-                lineHeight: '1.5',
-              }}
-            >
-              {code}
-            </SyntaxHighlighter>
+            {!styles ? (
+              <Skeleton className="h-32 w-full rounded-none" />
+            ) : (
+              <SyntaxHighlighter
+                language={language}
+                style={syntaxTheme}
+                showLineNumbers={showLineNumbers}
+                wrapLines={highlightLines.length > 0}
+                lineProps={(lineNumber) => {
+                  const style: React.CSSProperties = { display: 'block' }
+                  if (highlightLines.includes(lineNumber)) {
+                    style.backgroundColor = 'rgba(255, 255, 0, 0.1)'
+                    style.borderLeft = '3px solid #fbbf24'
+                    style.paddingLeft = '0.5rem'
+                  }
+                  return { style }
+                }}
+                customStyle={{
+                  margin: 0,
+                  borderRadius: 0,
+                  fontSize: '0.875rem',
+                  lineHeight: '1.5',
+                }}
+              >
+                {code}
+              </SyntaxHighlighter>
+            )}
           </div>
         </CardContent>
       )}
