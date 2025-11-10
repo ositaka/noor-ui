@@ -1,7 +1,8 @@
-# RTL-First Design System - Project Rules
+# Noor UI - Project Rules
 
-**Last Updated:** 2025-11-06
+**Last Updated:** 2025-11-10
 **Project Type:** React/Next.js Design System with RTL-First Architecture
+**Project Name:** Noor UI (نور - "Light" in Arabic)
 
 ---
 
@@ -111,6 +112,7 @@ Quick overview:
 - [ ] Add interactive ComponentShowcase with LTR/RTL toggle
 - [ ] Show at least 2-3 real-world examples
 - [ ] Include mobile and desktop examples where relevant
+- [ ] **Add Loading State section** if component has `isLoading` or `loading` prop
 
 **Required Page Structure (Route Groups Pattern):**
 ```tsx
@@ -182,10 +184,14 @@ Every component documentation page MUST include:
 4. **Installation** instructions (CLI + Manual)
 5. **Usage** examples with code
 6. **Multiple Examples** (minimum 3 variants)
-7. **Props Documentation** with complete table
-8. **Accessibility** section with keyboard navigation
-9. **RTL Considerations** with best practices
-10. **Related Components** section with links
+7. **Loading State** section (if component supports `isLoading` or `loading` prop)
+   - Show skeleton/loading state example
+   - Include code example
+   - Demonstrate loading state in ComponentShowcase
+8. **Props Documentation** with complete table
+9. **Accessibility** section with keyboard navigation
+10. **RTL Considerations** with best practices
+11. **Related Components** section with links
 
 The template includes all sections with proper structure and real Arabic content examples.
 

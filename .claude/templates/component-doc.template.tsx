@@ -38,7 +38,7 @@ const componentNameProps: PropDefinition[] = [
 ]
 
 // Code examples as strings for syntax highlighting
-const installCode = `npm install @rtl-design-system/core`
+const installCode = `npm install @noorui/components`
 
 const basicUsageCode = `import { ComponentName } from '@/components/ui/component-name'
 
@@ -140,6 +140,32 @@ export default function ComponentNamePage() {
 
             {/* Add more examples as needed */}
           </div>
+        </section>
+
+        {/* Loading State (ONLY if component supports isLoading or loading prop) */}
+        <section className="mb-16">
+          <h2 className="text-2xl font-bold tracking-tight mb-6">Loading State</h2>
+          <Card>
+            <CardContent className="p-6">
+              <div className="flex flex-wrap gap-4">
+                <ComponentName loading>Loading...</ComponentName>
+                <ComponentName isLoading variant="secondary">
+                  Processing
+                </ComponentName>
+              </div>
+            </CardContent>
+          </Card>
+          <div className="mt-4">
+            <CodeBlock
+              code={`<ComponentName loading>Loading...</ComponentName>
+<ComponentName isLoading>Processing</ComponentName>`}
+              language="tsx"
+              collapsible
+            />
+          </div>
+          <p className="text-sm text-muted-foreground mt-4">
+            The loading state shows a skeleton or spinner while content is being fetched.
+          </p>
         </section>
 
         {/* Props */}
@@ -282,6 +308,7 @@ export default function ComponentNamePage() {
  *    - Installation (with CodeBlock)
  *    - Usage (with CodeBlock)
  *    - Examples (minimum 2-3 with live demos + code)
+ *    - Loading State (ONLY if component has isLoading or loading prop)
  *    - Props (with PropsTable using PropDefinition[])
  *    - Best Practices (with Separator between sections)
  *    - Accessibility (with Separator between sections)
