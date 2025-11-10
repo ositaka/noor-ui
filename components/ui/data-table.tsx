@@ -100,7 +100,7 @@ function SortIcon({
   return <ChevronsUpDown className="h-4 w-4 opacity-50" />
 }
 
-function DataTableComponent<T extends Record<string, any>>({
+export function DataTable<T>({
   data,
   columns,
   isLoading = false,
@@ -372,9 +372,5 @@ function DataTableComponent<T extends Record<string, any>>({
     </div>
   )
 }
-
-// Memoize DataTable to prevent unnecessary re-renders when props don't change
-// This is critical for performance since DataTable does expensive .map() operations
-export const DataTable = React.memo(DataTableComponent) as typeof DataTableComponent
 
 export default DataTable

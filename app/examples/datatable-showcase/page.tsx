@@ -446,7 +446,7 @@ export default function DataTableShowcasePage() {
           <CardContent>
             <DataTable
               data={paginatedData}
-              columns={columns}
+              columns={columns as any}
               isLoading={isLoading}
               sortBy={sortBy}
               sortDirection={sortDirection}

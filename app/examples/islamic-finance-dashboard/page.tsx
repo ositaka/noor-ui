@@ -751,7 +751,7 @@ export default function IslamicFinanceDashboardPage() {
               <CardContent>
                 <DataTable
                   data={filteredTransactions}
-                  columns={columns}
+                  columns={columns as any}
                   searchable={true}
                   searchPlaceholder="Search transactions..."
                   searchPlaceholderAr="بحث في المعاملات..."
