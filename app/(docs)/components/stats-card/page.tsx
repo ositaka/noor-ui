@@ -263,7 +263,7 @@ export function Example() {
               description: isRTL
                 ? 'نسبة الاتجاه (موجبة أو سالبة)'
                 : 'Trend percentage (positive or negative)',
-              optional: true,
+              required: false,
             },
             {
               name: 'trendLabel',
@@ -271,33 +271,33 @@ export function Example() {
               description: isRTL
                 ? 'تسمية الاتجاه (مثل "مقابل الشهر الماضي")'
                 : 'Trend label (e.g., "vs last month")',
-              optional: true,
+              required: false,
             },
             {
               name: 'icon',
               type: 'React.ReactNode',
               description: isRTL ? 'الأيقونة المعروضة' : 'Icon to display',
-              optional: true,
+              required: false,
             },
             {
               name: 'isLoading',
               type: 'boolean',
               description: isRTL ? 'حالة التحميل' : 'Loading state',
               default: 'false',
-              optional: true,
+              required: false,
             },
             {
               name: 'format',
               type: "'number' | 'currency' | 'percentage'",
               description: isRTL ? 'تنسيق القيمة' : 'Value format',
               default: "'number'",
-              optional: true,
+              required: false,
             },
             {
               name: 'className',
               type: 'string',
               description: isRTL ? 'فئات CSS إضافية' : 'Additional CSS classes',
-              optional: true,
+              required: false,
             },
             {
               name: 'valueClassName',
@@ -305,7 +305,7 @@ export function Example() {
               description: isRTL
                 ? 'فئات CSS لعنصر القيمة'
                 : 'CSS classes for value element',
-              optional: true,
+              required: false,
             },
           ]}
         />

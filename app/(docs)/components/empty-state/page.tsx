@@ -200,7 +200,7 @@ export function Example() {
               description: isRTL
                 ? 'الأيقونة المعروضة في الأعلى'
                 : 'Icon to display at the top',
-              optional: true,
+              required: false,
             },
             {
               name: 'title',
@@ -211,7 +211,7 @@ export function Example() {
               name: 'description',
               type: 'string',
               description: isRTL ? 'نص وصفي اختياري' : 'Optional descriptive text',
-              optional: true,
+              required: false,
             },
             {
               name: 'action',
@@ -219,7 +219,7 @@ export function Example() {
               description: isRTL
                 ? 'زر أو أزرار الإجراء'
                 : 'Action button(s) to display',
-              optional: true,
+              required: false,
             },
             {
               name: 'className',
@@ -227,7 +227,7 @@ export function Example() {
               description: isRTL
                 ? 'فئات CSS إضافية'
                 : 'Additional CSS classes',
-              optional: true,
+              required: false,
             },
           ]}
         />
