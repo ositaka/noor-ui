@@ -221,7 +221,7 @@ export default function CMSPage() {
           <DropdownMenuContent align={isRTL ? 'start' : 'end'}>
             <DropdownMenuItem onClick={() => {
               setSelectedPost(row)
-              setActiveView('create')
+              window.location.hash = '#create'
             }}>
               <Edit className="h-4 w-4 me-2" />
               {isRTL ? 'تحرير' : 'Edit'}
@@ -244,49 +244,87 @@ export default function CMSPage() {
     setUploadedFiles(files)
   }
 
+  const navItems = [
+    {
+      title: 'Posts',
+      titleAr: 'المنشورات',
+      href: '#posts',
+      icon: <FileText className="h-5 w-5" />,
+    },
+    {
+      title: 'Create New',
+      titleAr: 'إنشاء جديد',
+      href: '#create',
+      icon: <Plus className="h-5 w-5" />,
+    },
+    {
+      title: 'Analytics',
+      titleAr: 'التحليلات',
+      href: '#analytics',
+      icon: <TrendingUp className="h-5 w-5" />,
+    },
+    {
+      title: 'Settings',
+      titleAr: 'الإعدادات',
+      href: '#settings',
+      icon: <User className="h-5 w-5" />,
+    },
+  ]
+
+  // Handle navigation clicks
+  React.useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash.slice(1)
+      if (hash === 'posts' || !hash) setActiveView('posts')
+      else if (hash === 'create') setActiveView('create')
+      else if (hash === 'analytics') setActiveView('analytics')
+    }
+
+    // Set default hash if none exists
+    if (!window.location.hash) {
+      window.location.hash = '#posts'
+    }
+
+    handleHashChange()
+    window.addEventListener('hashchange', handleHashChange)
+    return () => window.removeEventListener('hashchange', handleHashChange)
+  }, [])
+
   return (
     <div className="min-h-screen bg-background" dir={direction}>
       <DashboardShell
-        title={isRTL ? 'نظام إدارة المحتوى' : 'Content Management System'}
-        description={isRTL ? 'إدارة منشوراتك والمحتوى' : 'Manage your posts and content'}
-        navigation={[
-          { label: isRTL ? 'المنشورات' : 'Posts', href: '#', active: activeView === 'posts' },
-          { label: isRTL ? 'إنشاء جديد' : 'Create New', href: '#', active: activeView === 'create' },
-          { label: isRTL ? 'التحليلات' : 'Analytics', href: '#', active: activeView === 'analytics' },
-          { label: isRTL ? 'الإعدادات' : 'Settings', href: '#' },
-        ]}
-        headerActions={
-          <div className="flex items-center gap-3">
-            <NotificationCenter notifications={mockNotifications} />
-            <UserMenu
-              user={{
-                name: 'Ahmed Hassan',
-                email: 'ahmed@noorui.com',
-                avatar: undefined,
-              }}
-            />
-          </div>
-        }
+        navItems={navItems}
+        user={{
+          name: 'Ahmed Hassan',
+          email: 'ahmed@noorui.com',
+        }}
+        notifications={mockNotifications}
       >
-        {/* Analytics View */}
-        {activeView === 'analytics' && (
+        <div className="p-6 space-y-6">
+          {/* Page Header */}
+          <div className="space-y-2">
+            <h1 className="text-3xl font-bold tracking-tight">
+              {isRTL ? 'نظام إدارة المحتوى' : 'Content Management System'}
+            </h1>
+            <p className="text-muted-foreground">
+              {isRTL ? 'إدارة منشوراتك والمحتوى' : 'Manage your posts and content'}
+            </p>
+          </div>
+
+          {/* Analytics View */}
+          {activeView === 'analytics' && (
           <div className="space-y-6">
-            <div className="flex items-center justify-between">
-              <h2 className="text-2xl font-bold">
-                {isRTL ? 'تحليلات المحتوى' : 'Content Analytics'}
-              </h2>
-              <div className="flex gap-2">
-                <Select defaultValue="30days">
-                  <SelectTrigger className="w-[180px]">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="7days">{isRTL ? 'آخر 7 أيام' : 'Last 7 days'}</SelectItem>
-                    <SelectItem value="30days">{isRTL ? 'آخر 30 يوم' : 'Last 30 days'}</SelectItem>
-                    <SelectItem value="90days">{isRTL ? 'آخر 90 يوم' : 'Last 90 days'}</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
+            <div className="flex items-center justify-end">
+              <Select defaultValue="30days">
+                <SelectTrigger className="w-[180px]">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="7days">{isRTL ? 'آخر 7 أيام' : 'Last 7 days'}</SelectItem>
+                  <SelectItem value="30days">{isRTL ? 'آخر 30 يوم' : 'Last 30 days'}</SelectItem>
+                  <SelectItem value="90days">{isRTL ? 'آخر 90 يوم' : 'Last 90 days'}</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
 
             {/* Stats Grid */}
@@ -365,9 +403,8 @@ export default function CMSPage() {
         {/* Posts List View */}
         {activeView === 'posts' && (
           <div className="space-y-6">
-            <div className="flex items-center justify-between">
-              <h2 className="text-2xl font-bold">{isRTL ? 'جميع المنشورات' : 'All Posts'}</h2>
-              <Button onClick={() => setActiveView('create')}>
+            <div className="flex items-center justify-end">
+              <Button onClick={() => (window.location.hash = '#create')}>
                 <Plus className="h-4 w-4 me-2" />
                 {isRTL ? 'منشور جديد' : 'New Post'}
               </Button>
@@ -442,27 +479,13 @@ export default function CMSPage() {
         {activeView === 'create' && (
           <div className="space-y-6">
             <div className="flex items-center justify-between">
-              <div>
-                <h2 className="text-2xl font-bold">
-                  {selectedPost
-                    ? isRTL
-                      ? 'تحرير المنشور'
-                      : 'Edit Post'
-                    : isRTL
-                    ? 'منشور جديد'
-                    : 'New Post'}
-                </h2>
-                {selectedPost && (
-                  <p className="text-sm text-muted-foreground mt-1">
-                    {isRTL ? `تحرير: ${selectedPost.titleAr}` : `Editing: ${selectedPost.title}`}
-                  </p>
-                )}
-              </div>
-              <div className="flex gap-2">
-                <Button variant="outline" onClick={() => {
-                  setActiveView('posts')
-                  setSelectedPost(null)
-                }}>
+              {selectedPost && (
+                <p className="text-sm text-muted-foreground">
+                  {isRTL ? `تحرير: ${selectedPost.titleAr}` : `Editing: ${selectedPost.title}`}
+                </p>
+              )}
+              <div className="flex gap-2 ms-auto">
+                <Button variant="outline" onClick={() => (window.location.hash = '#posts')}>
                   {isRTL ? 'إلغاء' : 'Cancel'}
                 </Button>
                 <Button variant="outline">
@@ -630,26 +653,6 @@ export default function CMSPage() {
             </Tabs>
           </div>
         )}
-
-        {/* Quick Action Buttons */}
-        <div className="fixed bottom-6 end-6 flex gap-2">
-          <Button
-            size="lg"
-            onClick={() => setActiveView(activeView === 'posts' ? 'create' : 'posts')}
-            className="shadow-lg"
-          >
-            {activeView === 'posts' ? (
-              <>
-                <Plus className="h-5 w-5 me-2" />
-                {isRTL ? 'جديد' : 'New'}
-              </>
-            ) : (
-              <>
-                <FileText className="h-5 w-5 me-2" />
-                {isRTL ? 'المنشورات' : 'Posts'}
-              </>
-            )}
-          </Button>
         </div>
       </DashboardShell>
     </div>
