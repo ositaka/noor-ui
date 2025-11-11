@@ -92,11 +92,11 @@ const examples: Example[] = [
   },
   {
     title: 'Blog Dashboard',
-    description: 'Complete blogging platform with multilingual content management, Supabase backend, and RBAC. Create and manage bilingual posts.',
+    description: 'Complete blogging platform with authentication, rich text editor, and Supabase backend. Production-ready starter you can copy and deploy.',
     href: '/examples/blog-dashboard',
     icon: PenTool,
-    tags: ['Blog', 'CMS', 'Supabase', 'Multilingual', 'RBAC', 'RTL'],
-    status: 'coming-soon' as const,
+    tags: ['Blog', 'Supabase', 'Auth', 'TipTap', 'Starter', 'RTL'],
+    status: 'ready' as const,
     featured: true,
   },
   {

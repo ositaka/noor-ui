@@ -39,15 +39,19 @@ This dashboard demonstrates all Noor UI components in action:
 
 ## Getting Started
 
-### Prerequisites
+You can use this starter in two ways:
 
-- Node.js 18+ installed
-- A Supabase account (free tier works great)
-- Git for version control
+### Option 1: Copy as Standalone Project (Recommended)
 
-### Step 1: Clone and Install
+Copy the entire starter folder to create your own project:
 
 ```bash
+# Copy the starter to your projects directory
+cp -r starters/blog-dashboard ~/my-projects/my-blog
+
+# Navigate to your new project
+cd ~/my-projects/my-blog
+
 # Install dependencies
 npm install
 
@@ -55,7 +59,28 @@ npm install
 cp .env.local.example .env.local
 ```
 
-### Step 2: Set Up Supabase
+### Option 2: Run from Monorepo (For Testing/Development)
+
+If you're working within the Noor UI repository:
+
+```bash
+# From the root of the Noor UI repo
+npm install
+
+# Navigate to the starter
+cd starters/blog-dashboard
+
+# Copy environment template
+cp .env.local.example .env.local
+```
+
+### Prerequisites
+
+- Node.js 18+ installed
+- A Supabase account (free tier works great)
+- Git for version control
+
+### Next Steps: Set Up Supabase
 
 1. **Create a Supabase Project**
    - Go to [https://supabase.com](https://supabase.com)
@@ -89,7 +114,7 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key-here
    - Make it **Public**
    - Click "Create bucket"
 
-### Step 3: Run the Application
+### Finally: Run the Application
 
 ```bash
 npm run dev
