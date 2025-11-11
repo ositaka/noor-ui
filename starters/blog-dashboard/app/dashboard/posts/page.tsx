@@ -2,9 +2,9 @@
 
 import * as React from 'react'
 import { useRouter } from 'next/navigation'
-import { useAuth } from '@/hooks/use-auth'
+import { useAuth } from '@/starters/blog-dashboard/hooks/use-auth'
 import { useDirection } from '@/components/providers/direction-provider'
-import { supabase } from '@/lib/supabase/client'
+import { supabase } from '@/starters/blog-dashboard/lib/supabase/client'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import {

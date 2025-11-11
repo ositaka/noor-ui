@@ -2,7 +2,7 @@
 
 import * as React from 'react'
 import { useRouter } from 'next/navigation'
-import { supabase } from '@/lib/supabase/client'
+import { supabase } from '@/starters/blog-dashboard/lib/supabase/client'
 import type { User } from '@supabase/supabase-js'
 
 interface AuthContextType {

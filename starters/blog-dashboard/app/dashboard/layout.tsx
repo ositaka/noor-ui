@@ -2,7 +2,7 @@
 
 import * as React from 'react'
 import { useRouter } from 'next/navigation'
-import { useAuth } from '@/hooks/use-auth'
+import { useAuth } from '@/starters/blog-dashboard/hooks/use-auth'
 import { useDirection } from '@/components/providers/direction-provider'
 import { DashboardShell } from '@/components/ui/dashboard-shell'
 import { FileText, Plus, Settings, Home } from 'lucide-react'

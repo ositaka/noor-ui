@@ -2,9 +2,9 @@
 
 import * as React from 'react'
 import { useRouter } from 'next/navigation'
-import { useAuth } from '@/hooks/use-auth'
+import { useAuth } from '@/starters/blog-dashboard/hooks/use-auth'
 import { useDirection } from '@/components/providers/direction-provider'
-import { supabase } from '@/lib/supabase/client'
+import { supabase } from '@/starters/blog-dashboard/lib/supabase/client'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -22,7 +22,7 @@ import {
 import { useToast } from '@/hooks/use-toast'
 import { ArrowLeft, Save, Eye, Loader2 } from 'lucide-react'
 
-export default function NewPostPage() {
+export default function EditPostPage({ params }: { params: { id: string } }) {
   const { user } = useAuth()
   const { locale } = useDirection()
   const router = useRouter()
@@ -30,6 +30,7 @@ export default function NewPostPage() {
 
   const [loading, setLoading] = React.useState(false)
   const [uploadingImage, setUploadingImage] = React.useState(false)
+  const [fetchingPost, setFetchingPost] = React.useState(true)
 
   // English fields
   const [title, setTitle] = React.useState('')
@@ -44,16 +45,17 @@ export default function NewPostPage() {
   // Common fields
   const [slug, setSlug] = React.useState('')
   const [featuredImage, setFeaturedImage] = React.useState<string | null>(null)
-  const [status, setStatus] = React.useState<'draft' | 'published'>('draft')
+  const [status, setStatus] = React.useState<'draft' | 'published' | 'archived'>('draft')
 
   const text = {
     en: {
-      title: 'Create New Post',
-      description: 'Write a new blog post in both English and Arabic',
+      title: 'Edit Post',
+      description: 'Update your blog post in both English and Arabic',
       back: 'Back',
-      save: 'Save as Draft',
+      save: 'Save Changes',
       publish: 'Publish',
       saving: 'Saving...',
+      loading: 'Loading post...',
       english: 'English',
       arabic: 'Arabic (العربية)',
       postTitle: 'Title',
@@ -65,18 +67,21 @@ export default function NewPostPage() {
       statusLabel: 'Status',
       draft: 'Draft',
       published: 'Published',
-      successDraft: 'Post saved as draft',
+      archived: 'Archived',
+      successSaved: 'Post updated successfully',
       successPublished: 'Post published successfully',
-      error: 'Failed to create post',
+      error: 'Failed to update post',
       uploadingImage: 'Uploading image...',
+      notFound: 'Post not found',
     },
     ar: {
-      title: 'إنشاء مقالة جديدة',
-      description: 'اكتب مقالة جديدة باللغتين الإنجليزية والعربية',
+      title: 'تعديل المقالة',
+      description: 'قم بتحديث مقالتك باللغتين الإنجليزية والعربية',
       back: 'رجوع',
-      save: 'حفظ كمسودة',
+      save: 'حفظ التغييرات',
       publish: 'نشر',
       saving: 'جاري الحفظ...',
+      loading: 'جاري تحميل المقالة...',
       english: 'الإنجليزية (English)',
       arabic: 'العربية',
       postTitle: 'العنوان',
@@ -88,24 +93,55 @@ export default function NewPostPage() {
       statusLabel: 'الحالة',
       draft: 'مسودة',
       published: 'منشورة',
-      successDraft: 'تم حفظ المقالة كمسودة',
+      archived: 'مؤرشفة',
+      successSaved: 'تم تحديث المقالة بنجاح',
       successPublished: 'تم نشر المقالة بنجاح',
-      error: 'فشل إنشاء المقالة',
+      error: 'فشل تحديث المقالة',
       uploadingImage: 'جاري رفع الصورة...',
+      notFound: 'المقالة غير موجودة',
     },
   }
   const t = text[locale]
 
-  // Auto-generate slug from title
   React.useEffect(() => {
-    if (title && !slug) {
-      const generatedSlug = title
-        .toLowerCase()
-        .replace(/[^a-z0-9]+/g, '-')
-        .replace(/(^-|-$)/g, '')
-      setSlug(generatedSlug)
+    if (user && params.id) {
+      fetchPost()
     }
-  }, [title, slug])
+  }, [user, params.id])
+
+  const fetchPost = async () => {
+    try {
+      setFetchingPost(true)
+      const { data, error } = await supabase
+        .from('posts')
+        .select('*')
+        .eq('id', params.id)
+        .single()
+
+      if (error) throw error
+
+      if (data) {
+        setTitle(data.title)
+        setTitleAr(data.title_ar)
+        setExcerpt(data.excerpt)
+        setExcerptAr(data.excerpt_ar)
+        setContent(data.content)
+        setContentAr(data.content_ar)
+        setSlug(data.slug)
+        setFeaturedImage(data.featured_image)
+        setStatus(data.status)
+      }
+    } catch (error) {
+      console.error('Error fetching post:', error)
+      toast({
+        title: t.notFound,
+        variant: 'destructive',
+      })
+      router.push('/dashboard/posts')
+    } finally {
+      setFetchingPost(false)
+    }
+  }
 
   const handleImageUpload = async (files: File[]) => {
     if (!files.length || !user) return
@@ -163,22 +199,25 @@ export default function NewPostPage() {
         content_ar: contentAr,
         slug,
         featured_image: featuredImage,
-        author_id: user.id,
-        status: publishNow ? 'published' : 'draft',
-        published_at: publishNow ? new Date().toISOString() : null,
+        status: publishNow ? 'published' : status,
+        published_at: publishNow && status !== 'published' ? new Date().toISOString() : undefined,
+        updated_at: new Date().toISOString(),
       }
 
-      const { error } = await supabase.from('posts').insert([postData])
+      const { error } = await supabase
+        .from('posts')
+        .update(postData)
+        .eq('id', params.id)
 
       if (error) throw error
 
       toast({
-        title: publishNow ? t.successPublished : t.successDraft,
+        title: publishNow ? t.successPublished : t.successSaved,
       })
 
       router.push('/dashboard/posts')
     } catch (error: any) {
-      console.error('Error creating post:', error)
+      console.error('Error updating post:', error)
       toast({
         title: t.error,
         description: error.message,
@@ -187,6 +226,17 @@ export default function NewPostPage() {
     } finally {
       setLoading(false)
     }
+  }
+
+  if (fetchingPost) {
+    return (
+      <div className="container py-6 max-w-5xl">
+        <div className="text-center py-12">
+          <Loader2 className="h-12 w-12 animate-spin mx-auto mb-4" />
+          <p className="text-muted-foreground">{t.loading}</p>
+        </div>
+      </div>
+    )
   }
 
   return (
@@ -349,6 +399,7 @@ export default function NewPostPage() {
                 <SelectContent>
                   <SelectItem value="draft">{t.draft}</SelectItem>
                   <SelectItem value="published">{t.published}</SelectItem>
+                  <SelectItem value="archived">{t.archived}</SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -375,23 +426,25 @@ export default function NewPostPage() {
               </>
             )}
           </Button>
-          <Button
-            onClick={() => handleSubmit(true)}
-            disabled={loading}
-            className="flex-1"
-          >
-            {loading ? (
-              <>
-                <Loader2 className="h-4 w-4 me-2 animate-spin" />
-                {t.saving}
-              </>
-            ) : (
-              <>
-                <Eye className="h-4 w-4 me-2" />
-                {t.publish}
-              </>
-            )}
-          </Button>
+          {status !== 'published' && (
+            <Button
+              onClick={() => handleSubmit(true)}
+              disabled={loading}
+              className="flex-1"
+            >
+              {loading ? (
+                <>
+                  <Loader2 className="h-4 w-4 me-2 animate-spin" />
+                  {t.saving}
+                </>
+              ) : (
+                <>
+                  <Eye className="h-4 w-4 me-2" />
+                  {t.publish}
+                </>
+              )}
+            </Button>
+          )}
         </div>
       </div>
     </div>

@@ -144,28 +144,43 @@ Visit `http://localhost:3000`
 
 ### File Structure
 
+This starter lives in `/starters/blog-dashboard/` and uses shared components from `/components/`:
+
 ```
-app/
-├── auth/
-│   ├── login/page.tsx       # Login page
-│   ├── signup/page.tsx      # Signup page
-│   └── layout.tsx           # Auth layout
-├── dashboard/
-│   ├── posts/
-│   │   ├── [id]/page.tsx    # Edit post
-│   │   ├── new/page.tsx     # Create post
-│   │   └── page.tsx         # Posts list
-│   ├── layout.tsx           # Dashboard layout
-│   └── page.tsx             # Dashboard home
-│
-hooks/
-└── use-auth.ts              # Auth context and hooks
-│
-lib/supabase/
-├── client.ts                # Supabase client
-├── database.types.ts        # TypeScript types
-├── schema.sql               # Database schema
-└── README.md                # Setup guide
+starters/blog-dashboard/
+├── app/
+│   ├── auth/
+│   │   ├── login/page.tsx       # Login page
+│   │   ├── signup/page.tsx      # Signup page
+│   │   └── layout.tsx           # Auth layout
+│   ├── dashboard/
+│   │   ├── posts/
+│   │   │   ├── [id]/page.tsx    # Edit post
+│   │   │   ├── new/page.tsx     # Create post
+│   │   │   └── page.tsx         # Posts list
+│   │   ├── layout.tsx           # Dashboard layout
+│   │   └── page.tsx             # Dashboard home
+│   ├── layout.tsx               # Root layout with AuthProvider
+│   └── page.tsx                 # Redirects to dashboard
+├── hooks/
+│   └── use-auth.ts              # Auth context and hooks
+├── lib/
+│   └── supabase/
+│       ├── client.ts            # Supabase client
+│       ├── database.types.ts    # TypeScript types
+│       ├── schema.sql           # Database schema
+│       └── README.md            # Setup guide
+├── .env.local.example           # Environment template
+└── README.md                    # This file
+
+# Shared components from main library
+/components/ui/
+├── dashboard-shell.tsx          # Layout component
+├── rich-text-editor.tsx         # Content editor
+├── file-upload.tsx              # Image uploads
+├── user-menu.tsx                # User dropdown
+├── notification-center.tsx      # Notifications
+└── ...                          # Other UI components
 ```
 
 ### Database Schema

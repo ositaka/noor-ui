@@ -3,7 +3,7 @@
 import * as React from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { useAuth } from '@/hooks/use-auth'
+import { useAuth } from '@/starters/blog-dashboard/hooks/use-auth'
 import { useDirection } from '@/components/providers/direction-provider'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -12,44 +12,36 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Loader2 } from 'lucide-react'
 
-export default function SignUpPage() {
-  const { signUp } = useAuth()
+export default function LoginPage() {
+  const { signIn } = useAuth()
   const { locale } = useDirection()
   const router = useRouter()
 
-  const [fullName, setFullName] = React.useState('')
   const [email, setEmail] = React.useState('')
   const [password, setPassword] = React.useState('')
   const [loading, setLoading] = React.useState(false)
   const [error, setError] = React.useState<string | null>(null)
-  const [success, setSuccess] = React.useState(false)
 
   const text = {
     en: {
-      title: 'Create an account',
-      description: 'Enter your details to get started with Noor UI Blog',
-      fullName: 'Full Name',
+      title: 'Welcome back',
+      description: 'Sign in to your account to continue',
       email: 'Email',
       password: 'Password',
-      signUp: 'Sign Up',
-      signingUp: 'Signing up...',
-      haveAccount: 'Already have an account?',
-      signIn: 'Sign in',
-      success: 'Account created successfully! Check your email to confirm your account.',
-      goToDashboard: 'Go to Dashboard',
+      signIn: 'Sign In',
+      signingIn: 'Signing in...',
+      noAccount: "Don't have an account?",
+      signUp: 'Sign up',
     },
     ar: {
-      title: 'إنشاء حساب',
-      description: 'أدخل بياناتك للبدء مع مدونة نور',
-      fullName: 'الاسم الكامل',
+      title: 'مرحباً بعودتك',
+      description: 'سجّل الدخول إلى حسابك للمتابعة',
       email: 'البريد الإلكتروني',
       password: 'كلمة المرور',
-      signUp: 'إنشاء حساب',
-      signingUp: 'جاري إنشاء الحساب...',
-      haveAccount: 'هل لديك حساب بالفعل؟',
       signIn: 'تسجيل الدخول',
-      success: 'تم إنشاء الحساب بنجاح! تحقق من بريدك الإلكتروني لتأكيد حسابك.',
-      goToDashboard: 'الذهاب إلى لوحة التحكم',
+      signingIn: 'جاري تسجيل الدخول...',
+      noAccount: 'ليس لديك حساب؟',
+      signUp: 'إنشاء حساب',
     },
   }
   const t = text[locale]
@@ -59,40 +51,14 @@ export default function SignUpPage() {
     setLoading(true)
     setError(null)
 
-    const { error: signUpError } = await signUp(email, password, fullName)
+    const { error: signInError } = await signIn(email, password)
 
-    if (signUpError) {
-      setError(signUpError.message)
+    if (signInError) {
+      setError(signInError.message)
       setLoading(false)
     } else {
-      setSuccess(true)
-      setLoading(false)
-      // Redirect to dashboard after 2 seconds
-      setTimeout(() => {
-        router.push('/dashboard')
-      }, 2000)
+      router.push('/dashboard')
     }
-  }
-
-  if (success) {
-    return (
-      <Card>
-        <CardHeader>
-          <CardTitle>{t.title}</CardTitle>
-          <CardDescription>{t.description}</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <Alert>
-            <AlertDescription>{t.success}</AlertDescription>
-          </Alert>
-        </CardContent>
-        <CardFooter>
-          <Button onClick={() => router.push('/dashboard')} className="w-full">
-            {t.goToDashboard}
-          </Button>
-        </CardFooter>
-      </Card>
-    )
   }
 
   return (
@@ -108,18 +74,6 @@ export default function SignUpPage() {
               <AlertDescription>{error}</AlertDescription>
             </Alert>
           )}
-
-          <div className="space-y-2">
-            <Label htmlFor="fullName">{t.fullName}</Label>
-            <Input
-              id="fullName"
-              type="text"
-              value={fullName}
-              onChange={(e) => setFullName(e.target.value)}
-              required
-              disabled={loading}
-            />
-          </div>
 
           <div className="space-y-2">
             <Label htmlFor="email">{t.email}</Label>
@@ -142,7 +96,6 @@ export default function SignUpPage() {
               onChange={(e) => setPassword(e.target.value)}
               required
               disabled={loading}
-              minLength={6}
             />
           </div>
         </CardContent>
@@ -151,16 +104,16 @@ export default function SignUpPage() {
             {loading ? (
               <>
                 <Loader2 className="h-4 w-4 me-2 animate-spin" />
-                {t.signingUp}
+                {t.signingIn}
               </>
             ) : (
-              t.signUp
+              t.signIn
             )}
           </Button>
           <p className="text-sm text-muted-foreground text-center">
-            {t.haveAccount}{' '}
-            <Link href="/auth/login" className="text-primary hover:underline">
-              {t.signIn}
+            {t.noAccount}{' '}
+            <Link href="/auth/signup" className="text-primary hover:underline">
+              {t.signUp}
             </Link>
           </p>
         </CardFooter>
