@@ -68,7 +68,7 @@ npm run lint
 │   │
 │   ├── (docs)/              # Route group for documentation pages
 │   │   ├── layout.tsx       # Shared header/footer for all docs
-│   │   ├── components/      # Component documentation (32 pages)
+│   │   ├── components/      # Component documentation (54 pages)
 │   │   │   ├── page.tsx     # Components overview
 │   │   │   └── button/      # Example component page
 │   │   │       └── page.tsx
@@ -93,7 +93,7 @@ npm run lint
 │   └── README.md           # Starters overview
 │
 ├── components/
-│   ├── ui/                  # Design system components (32 components)
+│   ├── ui/                  # Design system components (50+ components)
 │   │   ├── button.tsx
 │   │   ├── card.tsx
 │   │   ├── input.tsx
@@ -137,7 +137,7 @@ This design system uses **Next.js 14 App Router** with a **route group architect
 
 ### Route Groups
 - **`(docs)`**: Contains all documentation pages with shared layout (header/footer)
-  - Component documentation (32 pages)
+  - Component documentation (54 pages covering 50+ components)
   - Guide pages (installation, configuration, RTL guide, etc.)
   - Token and theme reference pages
 - **`examples/`**: Standalone demo pages without navigation chrome
@@ -272,6 +272,7 @@ Coming soon: E-commerce Starter, SaaS Starter, Landing Page, Analytics Dashboard
 
 Production-ready examples showcasing component composition and real use cases:
 
+- **CMS/Blog Admin Dashboard**: Complete content management system with posts list (DataTable), rich text editor, file upload, analytics dashboard, and hash-based navigation - perfect showcase of advanced form components
 - **GCC Community Dashboard**: Complete showcase of all GCC-specific components including Prayer Times, Hijri Date, Zakat Calculator, and Arabic Number formatting in a cohesive community platform
 - **Islamic Finance Dashboard**: Comprehensive Islamic finance management featuring Zakat calculator with export, investment portfolio tracking, Hijri calendar with Islamic events, transaction DataTable, and prayer times integration
 - **DataTable Showcase**: Advanced data table demonstration with 50 sample users, live sorting/filtering, pagination, search, export to CSV, and mobile-responsive cards view
@@ -514,9 +515,12 @@ Tokens are converted to CSS custom properties in `styles/globals.css` and consum
 ### Recent Improvements (November 2025)
 
 **Latest Updates:**
+- ✅ **New Documentation Pages**: Added comprehensive documentation for 4 new components (Stepper, Number Input, Date Picker, Time Picker) with interactive examples, API references, and real-world use cases
+- ✅ **Production-Ready Forms**: Date Picker (single/range with calendar), Time Picker (12h/24h formats), Number Input (formatting/validation), Stepper (multi-step progress) - all fully documented
+- ✅ **CMS Dashboard Example**: Complete content management system showcase with posts list, rich text editor, file upload, and analytics views
+- ✅ **Advanced Components**: File Upload (drag-and-drop), Rich Text Editor (TipTap), Dashboard Shell (sidebar layout), User Menu, Notification Center - all production-ready
 - ✅ **Public Roadmap**: Created comprehensive [public roadmap page](/roadmap) with 4-phase development plan, success metrics, and timeline visualization
-- ✅ **Coming Soon Items**: Added 13 upcoming components (File Upload, Rich Text Editor, Dashboard Shell, User Menu, Notification Center, etc.) and 6 upcoming examples (Blog Dashboard, Real Estate Dashboard, Portfolio, Marketplace, CMS, Analytics)
-- ✅ **New Components**: Added StatsCard, FeatureCard, and EmptyState components with full documentation
+- ✅ **New Components**: Added StatsCard, FeatureCard, EmptyState, and ListingCard components with full documentation
 - ✅ **Build Fixed (Again)**: Resolved all TypeScript errors including complex DataTable generic type inference issues - project compiles with zero errors
 - ✅ **Hydration Fix**: Resolved React hydration error in DataTable Showcase by replacing Math.random() with deterministic index-based data generation
 - ✅ **Component Fixes**: Fixed PrayerTimes, ArabicNumber, HijriDate, Calendar, ZakatCalculator, and DataTable prop types and usage
