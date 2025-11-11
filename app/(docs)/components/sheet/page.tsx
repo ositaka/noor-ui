@@ -142,7 +142,7 @@ export default function SheetPage() {
 
       <main id="main-content" className="container py-12">
         {/* Breadcrumb */}
-        <nav aria-label="Breadcrumb" className="mb-8">
+        <nav aria-label="Breadcrumb" className="mb-12">
           <ol className="flex items-center gap-2 text-sm text-muted-foreground">
             <li>
               <Link href="/" className="hover:text-foreground transition-colors">
@@ -161,16 +161,16 @@ export default function SheetPage() {
         </nav>
 
         {/* Page Header */}
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold tracking-tight mb-2">Sheet</h1>
-          <p className="text-lg text-muted-foreground">
+        <div className="mb-12">
+          <h1 className="text-4xl font-bold tracking-tight mb-4">Sheet</h1>
+          <p className="text-xl text-muted-foreground max-w-3xl">
             Extends the Dialog component to display content that slides in from the edge of the screen.
           </p>
         </div>
 
         {/* Preview */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-4">Preview</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">Preview</h2>
           <ComponentShowcase>
             <Sheet>
               <SheetTrigger asChild>
@@ -197,13 +197,13 @@ export default function SheetPage() {
 
         {/* Installation */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-4">Installation</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">Installation</h2>
           <CodeBlock code={installCode} language="bash" />
         </section>
 
         {/* Usage */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-4">Usage</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">Usage</h2>
           <CodeBlock code={basicUsageCode} language="tsx" />
         </section>
 

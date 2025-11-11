@@ -14,9 +14,9 @@ export default function ZakatCalculatorPage() {
     <div className="min-h-screen">
       <main id="main-content" className="container py-12">
         {/* Page Header */}
-        <div className="max-w-3xl mb-12">
+        <div className="mb-12">
           <h1 className="text-4xl font-bold tracking-tight mb-4">Zakat Calculator</h1>
-          <p className="text-xl text-muted-foreground">
+          <p className="text-xl text-muted-foreground max-w-3xl">
             A comprehensive calculator for determining Zakat obligations. Supports multiple asset
             types, real-time calculations, Nisab threshold checking, and full bilingual support.
             Perfect for Islamic finance applications and GCC market needs.

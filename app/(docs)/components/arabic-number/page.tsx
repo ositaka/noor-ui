@@ -21,9 +21,9 @@ export default function ArabicNumberPage() {
     <div className="min-h-screen">
       <main id="main-content" className="container py-12">
         {/* Page Header */}
-        <div className="max-w-3xl mb-12">
+        <div className="mb-12">
           <h1 className="text-4xl font-bold tracking-tight mb-4">Arabic Number Utilities</h1>
-          <p className="text-xl text-muted-foreground">
+          <p className="text-xl text-muted-foreground max-w-3xl">
             Comprehensive utilities for formatting numbers in Arabic contexts. Includes
             Arabic-Indic numeral conversion (٠-٩), SAR currency formatting, and locale-aware number
             display. Perfect for GCC applications.
