@@ -222,6 +222,7 @@ export const RichTextEditor = React.forwardRef<HTMLDivElement, RichTextEditorPro
     const { direction } = useDirection()
 
     const editor = useEditor({
+      immediatelyRender: false,
       extensions: [
         StarterKit.configure({
           heading: {
