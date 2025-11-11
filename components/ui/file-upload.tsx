@@ -5,6 +5,7 @@ import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import { Upload, X, File, Image as ImageIcon, FileText, Film, Music } from 'lucide-react'
 import { Card } from '@/components/ui/card'
+import { useDirection } from '@/components/providers/direction-provider'
 
 export interface FileUploadProps {
   onUpload?: (files: File[]) => void
@@ -22,10 +23,12 @@ interface FileWithPreview extends File {
   preview?: string
 }
 
-const formatFileSize = (bytes: number): string => {
-  if (bytes === 0) return '0 Bytes'
+const formatFileSize = (bytes: number, locale: 'en' | 'ar' = 'en'): string => {
+  if (bytes === 0) return locale === 'ar' ? '٠ بايت' : '0 Bytes'
   const k = 1024
-  const sizes = ['Bytes', 'KB', 'MB', 'GB']
+  const sizesEn = ['Bytes', 'KB', 'MB', 'GB']
+  const sizesAr = ['بايت', 'كيلوبايت', 'ميجابايت', 'جيجابايت']
+  const sizes = locale === 'ar' ? sizesAr : sizesEn
   const i = Math.floor(Math.log(bytes) / Math.log(k))
   return Math.round((bytes / Math.pow(k, i)) * 100) / 100 + ' ' + sizes[i]
 }
@@ -54,10 +57,44 @@ export const FileUpload = React.forwardRef<HTMLInputElement, FileUploadProps>(
     },
     ref
   ) => {
+    const { locale } = useDirection()
     const [files, setFiles] = React.useState<FileWithPreview[]>(value as FileWithPreview[])
     const [dragActive, setDragActive] = React.useState(false)
     const [error, setError] = React.useState<string>('')
     const inputRef = React.useRef<HTMLInputElement>(null)
+
+    // Bilingual text content
+    const text = {
+      en: {
+        dropFiles: 'Drop files here',
+        clickToUpload: 'Click to upload or drag and drop',
+        acceptedFormats: 'Accepted formats',
+        anyFileType: 'Any file type',
+        maxSize: 'Max size',
+        maxFiles: 'Max',
+        files: 'files',
+        addMoreFiles: 'Add More Files',
+        fileSizeTooLarge: 'File size must be less than',
+        fileTypeNotAccepted: 'File type not accepted. Accepted types',
+        maxFilesReached: 'Maximum',
+        filesAllowed: 'allowed',
+      },
+      ar: {
+        dropFiles: 'أسقط الملفات هنا',
+        clickToUpload: 'انقر للتحميل أو اسحب وأسقط',
+        acceptedFormats: 'الصيغ المقبولة',
+        anyFileType: 'أي نوع ملف',
+        maxSize: 'الحجم الأقصى',
+        maxFiles: 'بحد أقصى',
+        files: 'ملفات',
+        addMoreFiles: 'إضافة المزيد من الملفات',
+        fileSizeTooLarge: 'يجب أن يكون حجم الملف أقل من',
+        fileTypeNotAccepted: 'نوع الملف غير مقبول. الأنواع المقبولة',
+        maxFilesReached: 'الحد الأقصى',
+        filesAllowed: 'مسموح',
+      },
+    }
+    const t = text[locale]
 
     // Sync with external value
     React.useEffect(() => {
@@ -68,7 +105,7 @@ export const FileUpload = React.forwardRef<HTMLInputElement, FileUploadProps>(
 
     const validateFile = (file: File): string | null => {
       if (maxSize && file.size > maxSize) {
-        return `File size must be less than ${formatFileSize(maxSize)}`
+        return `${t.fileSizeTooLarge} ${formatFileSize(maxSize, locale)}`
       }
 
       if (accept) {
@@ -87,7 +124,7 @@ export const FileUpload = React.forwardRef<HTMLInputElement, FileUploadProps>(
         })
 
         if (!isAccepted) {
-          return `File type not accepted. Accepted types: ${accept}`
+          return `${t.fileTypeNotAccepted}: ${accept}`
         }
       }
 
@@ -103,7 +140,7 @@ export const FileUpload = React.forwardRef<HTMLInputElement, FileUploadProps>(
 
       // Check max files
       if (files.length + fileArray.length > maxFiles) {
-        setError(`Maximum ${maxFiles} file${maxFiles > 1 ? 's' : ''} allowed`)
+        setError(`${t.maxFilesReached} ${maxFiles} ${maxFiles > 1 ? t.files : ''} ${t.filesAllowed}`)
         return
       }
 
@@ -230,12 +267,12 @@ export const FileUpload = React.forwardRef<HTMLInputElement, FileUploadProps>(
           >
             <Upload className={cn('h-10 w-10 mb-4 text-muted-foreground', dragActive && 'text-primary')} />
             <p className="text-sm font-medium mb-1">
-              {dragActive ? 'Drop files here' : 'Click to upload or drag and drop'}
+              {dragActive ? t.dropFiles : t.clickToUpload}
             </p>
             <p className="text-xs text-muted-foreground">
-              {accept ? `Accepted formats: ${accept}` : 'Any file type'}
-              {maxSize && ` • Max size: ${formatFileSize(maxSize)}`}
-              {maxFiles > 1 && ` • Max ${maxFiles} files`}
+              {accept ? `${t.acceptedFormats}: ${accept}` : t.anyFileType}
+              {maxSize && ` • ${t.maxSize}: ${formatFileSize(maxSize, locale)}`}
+              {maxFiles > 1 && ` • ${t.maxFiles} ${maxFiles} ${t.files}`}
             </p>
           </div>
         )}
@@ -265,7 +302,7 @@ export const FileUpload = React.forwardRef<HTMLInputElement, FileUploadProps>(
                   <div className="flex-1 min-w-0">
                     <p className="text-sm font-medium truncate">{file.name}</p>
                     <p className="text-xs text-muted-foreground mt-1">
-                      {formatFileSize(file.size)}
+                      {formatFileSize(file.size, locale)}
                       {file.type && ` • ${file.type}`}
                     </p>
                   </div>
@@ -296,7 +333,7 @@ export const FileUpload = React.forwardRef<HTMLInputElement, FileUploadProps>(
                 className="w-full"
               >
                 <Upload className="h-4 w-4 me-2" />
-                Add More Files
+                {t.addMoreFiles}
               </Button>
             )}
           </div>

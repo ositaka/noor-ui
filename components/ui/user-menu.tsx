@@ -2,6 +2,7 @@
 
 import * as React from 'react'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { useDirection } from '@/components/providers/direction-provider'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -60,7 +61,29 @@ export const UserMenu = React.forwardRef<HTMLButtonElement, UserMenuProps>(
     },
     ref
   ) => {
+    const { locale } = useDirection()
     const initials = user.initials || (user.name ? getInitials(user.name) : 'U')
+
+    // Bilingual text content
+    const text = {
+      en: {
+        profile: 'Profile',
+        settings: 'Settings',
+        billing: 'Billing',
+        team: 'Team',
+        support: 'Support',
+        logout: 'Log out',
+      },
+      ar: {
+        profile: 'الملف الشخصي',
+        settings: 'الإعدادات',
+        billing: 'الفوترة',
+        team: 'الفريق',
+        support: 'الدعم',
+        logout: 'تسجيل الخروج',
+      },
+    }
+    const t = text[locale]
 
     return (
       <DropdownMenu>
@@ -103,35 +126,35 @@ export const UserMenu = React.forwardRef<HTMLButtonElement, UserMenuProps>(
             {onProfileClick && (
               <DropdownMenuItem onClick={onProfileClick}>
                 <User className="h-4 w-4 me-2" />
-                <span>Profile</span>
+                <span>{t.profile}</span>
               </DropdownMenuItem>
             )}
 
             {onSettingsClick && (
               <DropdownMenuItem onClick={onSettingsClick}>
                 <Settings className="h-4 w-4 me-2" />
-                <span>Settings</span>
+                <span>{t.settings}</span>
               </DropdownMenuItem>
             )}
 
             {onBillingClick && (
               <DropdownMenuItem onClick={onBillingClick}>
                 <CreditCard className="h-4 w-4 me-2" />
-                <span>Billing</span>
+                <span>{t.billing}</span>
               </DropdownMenuItem>
             )}
 
             {onTeamClick && (
               <DropdownMenuItem onClick={onTeamClick}>
                 <Users className="h-4 w-4 me-2" />
-                <span>Team</span>
+                <span>{t.team}</span>
               </DropdownMenuItem>
             )}
 
             {onSupportClick && (
               <DropdownMenuItem onClick={onSupportClick}>
                 <HelpCircle className="h-4 w-4 me-2" />
-                <span>Support</span>
+                <span>{t.support}</span>
               </DropdownMenuItem>
             )}
           </DropdownMenuGroup>
@@ -142,7 +165,7 @@ export const UserMenu = React.forwardRef<HTMLButtonElement, UserMenuProps>(
               <DropdownMenuSeparator />
               <DropdownMenuItem onClick={onLogout} className="text-destructive focus:text-destructive">
                 <LogOut className="h-4 w-4 me-2" />
-                <span>Log out</span>
+                <span>{t.logout}</span>
               </DropdownMenuItem>
             </>
           )}
