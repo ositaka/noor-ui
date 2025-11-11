@@ -1,7 +1,6 @@
 'use client'
 
 import * as React from 'react'
-import Link from 'next/link'
 import { TimePicker, TimeRangePicker, type Time, type TimeRange } from '@/components/ui/time-picker'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { ComponentShowcase } from '@/components/docs/component-showcase'
@@ -216,31 +215,12 @@ export default function TimePickerPage() {
   }
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen" dir={direction}>
       <main id="main-content" className="container py-12">
-        {/* Breadcrumb */}
-        <nav aria-label="Breadcrumb" className="mb-8">
-          <ol className="flex items-center gap-2 text-sm text-muted-foreground">
-            <li>
-              <Link href="/" className="hover:text-foreground transition-colors">
-                {isRTL ? 'الرئيسية' : 'Home'}
-              </Link>
-            </li>
-            <li>/</li>
-            <li>
-              <Link href="/components" className="hover:text-foreground transition-colors">
-                {isRTL ? 'المكونات' : 'Components'}
-              </Link>
-            </li>
-            <li>/</li>
-            <li className="text-foreground font-medium">{isRTL ? 'منتقي الوقت' : 'Time Picker'}</li>
-          </ol>
-        </nav>
-
-        {/* Page Header */}
-        <div className="mb-12">
+        {/* Header */}
+        <div className="max-w-3xl mb-12">
           <h1 className="text-4xl font-bold tracking-tight mb-4">{isRTL ? 'منتقي الوقت' : 'Time Picker'}</h1>
-          <p className="text-xl text-muted-foreground max-w-3xl">
+          <p className="text-xl text-muted-foreground">
             {isRTL
               ? 'اختيار الوقت والنطاق بتنسيقات 12 و 24 ساعة'
               : 'Single time and range selection with 12h/24h formats'}
