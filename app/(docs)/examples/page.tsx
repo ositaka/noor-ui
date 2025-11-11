@@ -107,7 +107,8 @@ const examples: Example[] = [
     href: '/examples/marketplace',
     icon: Store,
     tags: ['Marketplace', 'E-commerce', 'Multi-vendor', 'Orders', 'RTL'],
-    status: 'coming-soon' as const,
+    status: 'ready' as const,
+    featured: true,
   },
   {
     title: 'CMS / Content Management',
