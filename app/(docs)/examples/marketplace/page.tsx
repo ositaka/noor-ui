@@ -365,9 +365,11 @@ export default function MarketplacePage() {
             <Button variant="ghost" size="sm">
               <Heart className="h-5 w-5" />
             </Button>
-            <Button variant="outline" size="sm">
-              <ShoppingCart className="h-5 w-5" />
-              <Badge variant="destructive" className="ms-2 -me-2">3</Badge>
+            <Button variant="outline" size="sm" asChild>
+              <Link href="/examples/marketplace/cart">
+                <ShoppingCart className="h-5 w-5" />
+                <Badge variant="destructive" className="ms-2 -me-2">3</Badge>
+              </Link>
             </Button>
             <Button variant="outline" size="sm" asChild>
               <Link href="/examples">{isRTL ? 'الأمثلة' : 'Examples'}</Link>

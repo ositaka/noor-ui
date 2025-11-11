@@ -111,6 +111,15 @@ const examples: Example[] = [
     featured: true,
   },
   {
+    title: 'B2B Marketplace',
+    description: 'Business-to-business marketplace with bulk ordering, volume pricing, RFQ system, and credit terms. Perfect for wholesale operations.',
+    href: '/examples/b2b-marketplace',
+    icon: ShoppingCart,
+    tags: ['B2B', 'Wholesale', 'Bulk Orders', 'RFQ', 'Credit Terms', 'RTL'],
+    status: 'ready' as const,
+    featured: true,
+  },
+  {
     title: 'CMS / Content Management',
     description: 'Full-featured content management system with rich text editor, file uploads, posts management, and bilingual content support.',
     href: '/examples/cms',
