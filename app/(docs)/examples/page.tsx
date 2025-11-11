@@ -98,7 +98,8 @@ const examples: Example[] = [
     href: '/examples/portfolio',
     icon: LayoutDashboard,
     tags: ['Portfolio', 'Showcase', 'Creative', 'RTL'],
-    status: 'coming-soon' as const,
+    status: 'ready' as const,
+    featured: true,
   },
   {
     title: 'Marketplace',
