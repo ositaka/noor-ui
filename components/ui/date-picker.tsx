@@ -110,7 +110,7 @@ export function DatePicker({
         <Calendar
           mode="single"
           selected={date}
-          onSelect={handleSelect}
+          onSelect={(selectedDate) => handleSelect(selectedDate as Date | undefined)}
           disabled={isDateDisabled}
           initialFocus
         />
@@ -224,8 +224,8 @@ export function DateRangePicker({
       <PopoverContent className="w-auto p-0" align={isRTL ? 'end' : 'start'}>
         <Calendar
           mode="range"
-          selected={dateRange}
-          onSelect={handleSelect}
+          selectedRange={dateRange}
+          onSelect={(selection) => handleSelect(selection as DateRange | undefined)}
           disabled={isDateDisabled}
           initialFocus
         />

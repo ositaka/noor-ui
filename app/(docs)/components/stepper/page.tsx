@@ -142,16 +142,17 @@ export default function StepperPage() {
   ]
 
   return (
-    <div className="container mx-auto py-8 space-y-12" dir={direction}>
-      {/* Header */}
-      <div className="space-y-3">
-        <h1 className="text-4xl font-bold">{isRTL ? 'مؤشر الخطوات' : 'Stepper'}</h1>
-        <p className="text-lg text-muted-foreground">
-          {isRTL
-            ? 'مؤشر تقدم متعدد الخطوات للنماذج والأسوات'
-            : 'Multi-step progress indicator for forms and wizards'}
-        </p>
-      </div>
+    <div className="min-h-screen" dir={direction}>
+      <main id="main-content" className="container py-12">
+        {/* Header */}
+        <div className="max-w-3xl mb-12">
+          <h1 className="text-4xl font-bold tracking-tight mb-4">{isRTL ? 'مؤشر الخطوات' : 'Stepper'}</h1>
+          <p className="text-xl text-muted-foreground">
+            {isRTL
+              ? 'مؤشر تقدم متعدد الخطوات للنماذج والأسوات'
+              : 'Multi-step progress indicator for forms and wizards'}
+          </p>
+        </div>
 
       {/* Basic Example */}
       <ComponentShowcase
@@ -323,6 +324,7 @@ export default function StepperPage() {
           <li>{isRTL ? 'ميزات إمكانية الوصول (ARIA)' : 'Accessibility features (ARIA)'}</li>
         </ul>
       </div>
+      </main>
     </div>
   )
 }

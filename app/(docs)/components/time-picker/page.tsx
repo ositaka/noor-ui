@@ -215,16 +215,17 @@ export default function TimePickerPage() {
   }
 
   return (
-    <div className="container mx-auto py-8 space-y-12" dir={direction}>
-      {/* Header */}
-      <div className="space-y-3">
-        <h1 className="text-4xl font-bold">{isRTL ? 'منتقي الوقت' : 'Time Picker'}</h1>
-        <p className="text-lg text-muted-foreground">
-          {isRTL
-            ? 'اختيار الوقت والنطاق بتنسيقات 12 و 24 ساعة'
-            : 'Single time and range selection with 12h/24h formats'}
-        </p>
-      </div>
+    <div className="min-h-screen" dir={direction}>
+      <main id="main-content" className="container py-12">
+        {/* Header */}
+        <div className="max-w-3xl mb-12">
+          <h1 className="text-4xl font-bold tracking-tight mb-4">{isRTL ? 'منتقي الوقت' : 'Time Picker'}</h1>
+          <p className="text-xl text-muted-foreground">
+            {isRTL
+              ? 'اختيار الوقت والنطاق بتنسيقات 12 و 24 ساعة'
+              : 'Single time and range selection with 12h/24h formats'}
+          </p>
+        </div>
 
       {/* Basic Example - 24h */}
       <ComponentShowcase
@@ -487,6 +488,7 @@ export default function TimePickerPage() {
           <li>{isRTL ? 'إمكانية الوصول الكاملة' : 'Full accessibility'}</li>
         </ul>
       </div>
+      </main>
     </div>
   )
 }
