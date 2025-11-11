@@ -169,12 +169,36 @@ export default function CMSPage() {
       header: isRTL ? 'الحالة' : 'Status',
       cell: (row: typeof mockPosts[0]) => {
         const statusConfig = {
-          published: { label: isRTL ? 'منشور' : 'Published', variant: 'default' as const },
-          draft: { label: isRTL ? 'مسودة' : 'Draft', variant: 'secondary' as const },
-          scheduled: { label: isRTL ? 'مجدول' : 'Scheduled', variant: 'outline' as const },
+          published: {
+            label: isRTL ? 'منشور' : 'Published',
+            variant: 'default' as const,
+            className: 'bg-green-500/10 text-green-700 dark:text-green-400 border-green-500/20'
+          },
+          draft: {
+            label: isRTL ? 'مسودة' : 'Draft',
+            variant: 'outline' as const,
+            className: 'bg-yellow-500/10 text-yellow-700 dark:text-yellow-400 border-yellow-500/20'
+          },
+          scheduled: {
+            label: isRTL ? 'مجدول' : 'Scheduled',
+            variant: 'outline' as const,
+            className: 'bg-blue-500/10 text-blue-700 dark:text-blue-400 border-blue-500/20'
+          },
         }
         const config = statusConfig[row.status as keyof typeof statusConfig]
-        return <Badge variant={config.variant}>{config.label}</Badge>
+        return (
+          <Badge variant={config.variant} className={config.className}>
+            <span className="flex items-center gap-1.5">
+              <span className={cn(
+                'h-1.5 w-1.5 rounded-full',
+                row.status === 'published' && 'bg-green-500',
+                row.status === 'draft' && 'bg-yellow-500',
+                row.status === 'scheduled' && 'bg-blue-500'
+              )} />
+              {config.label}
+            </span>
+          </Badge>
+        )
       },
     },
     {
@@ -299,16 +323,32 @@ export default function CMSPage() {
           email: 'ahmed@noorui.com',
         }}
         notifications={mockNotifications}
+        relative={true}
       >
         <div className="p-6 space-y-6">
-          {/* Page Header */}
-          <div className="space-y-2">
-            <h1 className="text-3xl font-bold tracking-tight">
-              {isRTL ? 'نظام إدارة المحتوى' : 'Content Management System'}
-            </h1>
-            <p className="text-muted-foreground">
-              {isRTL ? 'إدارة منشوراتك والمحتوى' : 'Manage your posts and content'}
-            </p>
+          {/* Page Header with Quick Actions */}
+          <div className="flex items-center justify-between">
+            <div className="space-y-1">
+              <h1 className="text-3xl font-bold tracking-tight">
+                {isRTL ? 'نظام إدارة المحتوى' : 'Content Management System'}
+              </h1>
+              <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                <span>{isRTL ? 'إدارة منشوراتك والمحتوى' : 'Manage your posts and content'}</span>
+                <Separator orientation="vertical" className="h-4" />
+                <div className="flex items-center gap-1">
+                  <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                    <span className="text-xs">⌘</span>K
+                  </kbd>
+                  <span>{isRTL ? 'للبحث السريع' : 'Quick search'}</span>
+                </div>
+              </div>
+            </div>
+            {activeView === 'posts' && (
+              <Button onClick={() => (window.location.hash = '#create')} size="lg" className="gap-2">
+                <Plus className="h-5 w-5" />
+                {isRTL ? 'منشور جديد' : 'New Post'}
+              </Button>
+            )}
           </div>
 
           {/* Analytics View */}
@@ -403,32 +443,29 @@ export default function CMSPage() {
         {/* Posts List View */}
         {activeView === 'posts' && (
           <div className="space-y-6">
-            <div className="flex items-center justify-end">
-              <Button onClick={() => (window.location.hash = '#create')}>
-                <Plus className="h-4 w-4 me-2" />
-                {isRTL ? 'منشور جديد' : 'New Post'}
-              </Button>
-            </div>
-
             {/* Filters */}
-            <Card>
+            <Card className="border-2">
               <CardContent className="pt-6">
                 <div className="flex flex-col gap-4 md:flex-row md:items-end">
                   <div className="flex-1">
-                    <Label htmlFor="search">{isRTL ? 'بحث' : 'Search'}</Label>
-                    <div className="relative">
+                    <Label htmlFor="search" className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                      {isRTL ? 'بحث' : 'Search'}
+                    </Label>
+                    <div className="relative mt-2">
                       <Search className="absolute start-3 top-3 h-4 w-4 text-muted-foreground" />
                       <Input
                         id="search"
                         placeholder={isRTL ? 'ابحث في المنشورات...' : 'Search posts...'}
-                        className="ps-9"
+                        className="ps-9 h-11"
                       />
                     </div>
                   </div>
                   <div className="w-full md:w-[180px]">
-                    <Label>{isRTL ? 'الحالة' : 'Status'}</Label>
+                    <Label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                      {isRTL ? 'الحالة' : 'Status'}
+                    </Label>
                     <Select defaultValue="all">
-                      <SelectTrigger>
+                      <SelectTrigger className="mt-2 h-11">
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
@@ -440,9 +477,11 @@ export default function CMSPage() {
                     </Select>
                   </div>
                   <div className="w-full md:w-[180px]">
-                    <Label>{isRTL ? 'الفئة' : 'Category'}</Label>
+                    <Label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                      {isRTL ? 'الفئة' : 'Category'}
+                    </Label>
                     <Select defaultValue="all">
-                      <SelectTrigger>
+                      <SelectTrigger className="mt-2 h-11">
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
