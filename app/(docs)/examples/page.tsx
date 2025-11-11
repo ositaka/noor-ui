@@ -80,7 +80,8 @@ const examples: Example[] = [
     href: '/examples/calendar',
     icon: Calendar,
     tags: ['Calendar', 'Hijri', 'GCC', 'RTL'],
-    status: 'coming-soon' as const,
+    status: 'ready' as const,
+    featured: true,
   },
   {
     title: 'Real Estate Dashboard',
