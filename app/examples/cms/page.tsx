@@ -604,10 +604,10 @@ export default function CMSPage() {
                   </CardHeader>
                   <CardContent>
                     <FileUpload
-                      accept={{ 'image/*': ['.png', '.jpg', '.jpeg', '.webp'] }}
+                      accept="image/*,.png,.jpg,.jpeg,.webp"
                       maxFiles={1}
                       maxSize={5 * 1024 * 1024} // 5MB
-                      onFilesChange={handleFileChange}
+                      onChange={handleFileChange}
                       multiple={false}
                     />
                   </CardContent>
@@ -680,10 +680,10 @@ export default function CMSPage() {
                   </CardHeader>
                   <CardContent>
                     <FileUpload
-                      accept={{ 'image/*': ['.png', '.jpg', '.jpeg', '.webp'] }}
+                      accept="image/*,.png,.jpg,.jpeg,.webp"
                       maxFiles={1}
                       maxSize={5 * 1024 * 1024} // 5MB
-                      onFilesChange={handleFileChange}
+                      onChange={handleFileChange}
                       multiple={false}
                     />
                   </CardContent>
