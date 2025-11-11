@@ -2,7 +2,7 @@
 
 import * as React from 'react'
 import Link from 'next/link'
-import { Sparkles } from 'lucide-react'
+import { Sunrise } from 'lucide-react'
 import { Separator } from '@/components/ui/separator'
 import { useDirection } from '@/components/providers/direction-provider'
 
@@ -25,7 +25,7 @@ export function SiteFooter() {
       github: 'GitHub',
       discord: 'Discord',
       twitter: 'Twitter',
-      copyright: '© 2025 RTL Design System. Built with Next.js, TypeScript, and Tailwind CSS.',
+      copyright: '© 2025 Noor UI. Built with Next.js, TypeScript, and Tailwind CSS.',
     },
     ar: {
       tagline: 'مصمم لسوق الخليج بكل حب.',
@@ -42,7 +42,7 @@ export function SiteFooter() {
       github: 'GitHub',
       discord: 'Discord',
       twitter: 'Twitter',
-      copyright: '© 2025 نظام تصميم RTL. بُني باستخدام Next.js وTypeScript وTailwind CSS.',
+      copyright: '© 2025 Noor UI. بُني باستخدام Next.js وTypeScript وTailwind CSS.',
     },
   }
 
@@ -54,8 +54,8 @@ export function SiteFooter() {
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           <div>
             <div className="flex items-center gap-2 mb-4">
-              <Sparkles className="h-5 w-5 text-primary" />
-              <span className="font-bold">RTL Design</span>
+              <Sunrise className="h-5 w-5 text-primary" />
+              <span className="font-bold">Noor UI</span>
             </div>
             <p className="text-sm text-muted-foreground">{content.tagline}</p>
           </div>

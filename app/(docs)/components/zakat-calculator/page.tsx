@@ -288,8 +288,7 @@ export function SmartZakatCalculator() {
           silver: data.silver.sar_per_gram,
         })
       } catch (error) {
-        console.error('Failed to fetch prices:', error)
-        // Keep using defaults
+        // Keep using defaults - API may not be available
       }
     }
 

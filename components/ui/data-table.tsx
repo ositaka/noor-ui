@@ -100,7 +100,7 @@ function SortIcon({
   return <ChevronsUpDown className="h-4 w-4 opacity-50" />
 }
 
-export function DataTable<T extends Record<string, any>>({
+export function DataTable<T>({
   data,
   columns,
   isLoading = false,

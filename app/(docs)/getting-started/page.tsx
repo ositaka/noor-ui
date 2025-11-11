@@ -4,24 +4,25 @@ import * as React from 'react'
 import Link from 'next/link'
 import { Card, CardContent } from '@/components/ui/card'
 import { CodeBlock } from '@/components/docs/code-block'
+import { FeatureCard } from '@/components/ui/feature-card'
 import { Sparkles, Package, Settings, Zap, CheckCircle2, ArrowRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-const installationCode = `npm install @rtl-design-system/core
+const installationCode = `npm install @noorui/components
 # or
-yarn add @rtl-design-system/core
+yarn add @noorui/components
 # or
-pnpm add @rtl-design-system/core`
+pnpm add @noorui/components`
 
 const tailwindConfigCode = `// tailwind.config.ts
 import type { Config } from "tailwindcss"
-import { rtlPlugin } from "@rtl-design-system/core/plugin"
+import { rtlPlugin } from "@noorui/components/plugin"
 
 const config: Config = {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
-    "./node_modules/@rtl-design-system/core/**/*.{js,ts,jsx,tsx}",
+    "./node_modules/@noorui/components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {},
@@ -38,10 +39,10 @@ const providersCode = `// app/providers.tsx
 'use client'
 
 import * as React from 'react'
-import { DirectionProvider } from '@rtl-design-system/core/providers'
-import { DesignSystemProvider } from '@rtl-design-system/core/providers'
-import { TooltipProvider } from '@rtl-design-system/core/components'
-import { Toaster } from '@rtl-design-system/core/components'
+import { DirectionProvider } from '@noorui/components/providers'
+import { DesignSystemProvider } from '@noorui/components/providers'
+import { TooltipProvider } from '@noorui/components'
+import { Toaster } from '@noorui/components'
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
@@ -65,8 +66,8 @@ import "./globals.css"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "My RTL-First App",
-  description: "Built with RTL Design System",
+  title: "My Noor UI App",
+  description: "Built with Noor UI",
 }
 
 export default function RootLayout({
@@ -147,13 +148,13 @@ const globalsCssCode = `/* app/globals.css */
 }`
 
 const quickStartCode = `// app/page.tsx
-import { Button } from '@rtl-design-system/core/components'
-import { Card, CardContent, CardHeader, CardTitle } from '@rtl-design-system/core/components'
+import { Button } from '@noorui/components'
+import { Card, CardContent, CardHeader, CardTitle } from '@noorui/components'
 
 export default function Home() {
   return (
     <main className="container py-12">
-      <h1 className="text-4xl font-bold mb-8">Welcome to RTL Design System</h1>
+      <h1 className="text-4xl font-bold mb-8">Welcome to Noor UI</h1>
 
       <Card>
         <CardHeader>
@@ -173,7 +174,7 @@ export default function Home() {
 const rtlUsageCode = `// Using RTL direction
 'use client'
 
-import { useDirection } from '@rtl-design-system/core/hooks'
+import { useDirection } from '@noorui/components/hooks'
 
 export function MyComponent() {
   const { direction, setDirection } = useDirection()
@@ -210,57 +211,45 @@ export default function GettingStartedPage() {
         <div className="max-w-3xl mb-12">
           <h1 className="text-4xl font-bold tracking-tight mb-4">Getting Started</h1>
           <p className="text-xl text-muted-foreground">
-            Learn how to install and configure RTL Design System in your Next.js project. Built with RTL-first principles for seamless bidirectional support.
+            Learn how to install and configure Noor UI in your Next.js project. Built with RTL-first principles for seamless bidirectional support.
           </p>
         </div>
 
         {/* Quick Links */}
         <section className="mb-16">
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            <Card className="hover:border-primary transition-colors">
-              <CardContent className="p-6">
-                <Package className="h-8 w-8 text-primary mb-4" />
-                <h3 className="font-semibold mb-2">Installation</h3>
-                <p className="text-sm text-muted-foreground">
-                  Add the package to your project
-                </p>
-              </CardContent>
-            </Card>
-            <Card className="hover:border-primary transition-colors">
-              <CardContent className="p-6">
-                <Settings className="h-8 w-8 text-primary mb-4" />
-                <h3 className="font-semibold mb-2">Configuration</h3>
-                <p className="text-sm text-muted-foreground">
-                  Set up Tailwind and providers
-                </p>
-              </CardContent>
-            </Card>
-            <Card className="hover:border-primary transition-colors">
-              <CardContent className="p-6">
-                <Zap className="h-8 w-8 text-primary mb-4" />
-                <h3 className="font-semibold mb-2">Quick Start</h3>
-                <p className="text-sm text-muted-foreground">
-                  Build your first component
-                </p>
-              </CardContent>
-            </Card>
-            <Card className="hover:border-primary transition-colors">
-              <CardContent className="p-6">
-                <CheckCircle2 className="h-8 w-8 text-primary mb-4" />
-                <h3 className="font-semibold mb-2">Best Practices</h3>
-                <p className="text-sm text-muted-foreground">
-                  RTL-first development tips
-                </p>
-              </CardContent>
-            </Card>
+            <FeatureCard
+              icon={Package}
+              title="Installation"
+              description="Add the package to your project"
+              href="#installation"
+            />
+            <FeatureCard
+              icon={Settings}
+              title="Configuration"
+              description="Set up Tailwind and providers"
+              href="#configuration"
+            />
+            <FeatureCard
+              icon={Zap}
+              title="Quick Start"
+              description="Build your first component"
+              href="#quick-start"
+            />
+            <FeatureCard
+              icon={CheckCircle2}
+              title="Best Practices"
+              description="RTL-first development tips"
+              href="#rtl-usage"
+            />
           </div>
         </section>
 
         {/* Installation */}
-        <section className="mb-16">
+        <section className="mb-16" id="installation">
           <h2 className="text-2xl font-bold tracking-tight mb-6">Installation</h2>
           <p className="text-muted-foreground mb-4">
-            Install the RTL Design System package using your preferred package manager:
+            Install the Noor UI package using your preferred package manager:
           </p>
           <CodeBlock code={installationCode} language="bash" />
 
@@ -278,10 +267,10 @@ export default function GettingStartedPage() {
         </section>
 
         {/* Tailwind Configuration */}
-        <section className="mb-16">
+        <section className="mb-16" id="configuration">
           <h2 className="text-2xl font-bold tracking-tight mb-6">Tailwind Configuration</h2>
           <p className="text-muted-foreground mb-4">
-            Configure Tailwind CSS to work with the RTL Design System. This includes adding the RTL plugin and tailwindcss-logical for bidirectional support.
+            Configure Tailwind CSS to work with Noor UI. This includes adding the RTL plugin and tailwindcss-logical for bidirectional support.
           </p>
           <CodeBlock code={tailwindConfigCode} language="tsx" />
 
@@ -292,7 +281,7 @@ export default function GettingStartedPage() {
                 Important
               </h3>
               <p className="text-sm text-muted-foreground">
-                Make sure to include the RTL Design System package in your content array so Tailwind can detect and compile the component styles.
+                Make sure to include the Noor UI package in your content array so Tailwind can detect and compile the component styles.
               </p>
             </CardContent>
           </Card>
@@ -354,7 +343,7 @@ export default function GettingStartedPage() {
         </section>
 
         {/* Quick Start */}
-        <section className="mb-16">
+        <section className="mb-16" id="quick-start">
           <h2 className="text-2xl font-bold tracking-tight mb-6">Quick Start</h2>
           <p className="text-muted-foreground mb-4">
             You&apos;re all set! Start using components in your application:
@@ -363,7 +352,7 @@ export default function GettingStartedPage() {
         </section>
 
         {/* RTL Usage */}
-        <section className="mb-16">
+        <section className="mb-16" id="rtl-usage">
           <h2 className="text-2xl font-bold tracking-tight mb-6">Working with RTL</h2>
           <p className="text-muted-foreground mb-4">
             Use the direction hook to programmatically control or respond to direction changes:

@@ -37,7 +37,7 @@ const contextMenuProps: PropDefinition[] = [
   },
 ]
 
-const installCode = `npm install @rtl-design-system/core`
+const installCode = `npm install @noorui/components`
 
 const basicUsageCode = `import {
   ContextMenu,

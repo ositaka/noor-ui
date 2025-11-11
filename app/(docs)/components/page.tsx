@@ -29,6 +29,17 @@ import {
   Calculator,
   TableIcon,
   CalendarIcon,
+  Inbox,
+  BarChart3,
+  Upload,
+  FileEdit,
+  Layout,
+  UserCircle,
+  Bell,
+  GitBranch,
+  Palette,
+  Binary,
+  Sidebar,
 } from 'lucide-react'
 
 const componentCategories = [
@@ -38,6 +49,7 @@ const componentCategories = [
     components: [
       { name: 'Button', icon: MousePointer2, href: '/components/button', status: 'ready' },
       { name: 'Card', icon: Square, href: '/components/card', status: 'ready' },
+      { name: 'FeatureCard', icon: Square, href: '/components/feature-card', status: 'ready' },
       { name: 'Input', icon: Type, href: '/components/input', status: 'ready' },
       { name: 'Label', icon: Tag, href: '/components/label', status: 'ready' },
       { name: 'Badge', icon: Tag, href: '/components/badge', status: 'ready' },
@@ -64,6 +76,7 @@ const componentCategories = [
     components: [
       { name: 'Table', icon: Layers, href: '/components/table', status: 'ready' },
       { name: 'DataTable', icon: TableIcon, href: '/components/data-table', status: 'ready' },
+      { name: 'Stats Card', icon: BarChart3, href: '/components/stats-card', status: 'ready' },
       { name: 'Command', icon: Menu, href: '/components/command', status: 'ready' },
     ],
   },
@@ -77,6 +90,7 @@ const componentCategories = [
       { name: 'Tooltip', icon: Info, href: '/components/tooltip', status: 'ready' },
       { name: 'Progress', icon: Loader2, href: '/components/progress', status: 'ready' },
       { name: 'Skeleton', icon: Loader2, href: '/components/skeleton', status: 'ready' },
+      { name: 'Empty State', icon: Inbox, href: '/components/empty-state', status: 'ready' },
     ],
   },
   {
@@ -111,6 +125,37 @@ const componentCategories = [
       { name: 'Calendar', icon: CalendarIcon, href: '/components/calendar', status: 'ready' },
     ],
   },
+  {
+    name: 'Advanced Forms & Inputs',
+    description: 'Advanced form components for complex input scenarios',
+    components: [
+      { name: 'File Upload', icon: Upload, href: '/components/file-upload', status: 'coming-soon' },
+      { name: 'Rich Text Editor', icon: FileEdit, href: '/components/rich-text-editor', status: 'coming-soon' },
+      { name: 'Date Picker', icon: CalendarIcon, href: '/components/date-picker', status: 'coming-soon' },
+      { name: 'Time Picker', icon: Clock, href: '/components/time-picker', status: 'coming-soon' },
+      { name: 'Color Picker', icon: Palette, href: '/components/color-picker', status: 'coming-soon' },
+      { name: 'Number Input', icon: Binary, href: '/components/number-input', status: 'coming-soon' },
+    ],
+  },
+  {
+    name: 'Layout & Shell',
+    description: 'Application layout and shell components for building dashboards',
+    components: [
+      { name: 'Dashboard Shell', icon: Layout, href: '/components/dashboard-shell', status: 'coming-soon' },
+      { name: 'Sidebar', icon: Sidebar, href: '/components/sidebar', status: 'coming-soon' },
+      { name: 'App Shell', icon: Layout, href: '/components/app-shell', status: 'coming-soon' },
+    ],
+  },
+  {
+    name: 'User Interface',
+    description: 'User-facing interactive components for common UX patterns',
+    components: [
+      { name: 'User Menu', icon: UserCircle, href: '/components/user-menu', status: 'coming-soon' },
+      { name: 'Notification Center', icon: Bell, href: '/components/notification-center', status: 'coming-soon' },
+      { name: 'Stepper', icon: GitBranch, href: '/components/stepper', status: 'coming-soon' },
+      { name: 'Command Bar', icon: Menu, href: '/components/command-bar', status: 'coming-soon' },
+    ],
+  },
 ]
 
 export default function ComponentsPage() {
@@ -118,12 +163,25 @@ export default function ComponentsPage() {
     <div className="min-h-screen">
 
       <main id="main-content" className="container py-12">
+        {/* Breadcrumb */}
+        <nav aria-label="Breadcrumb" className="mb-8">
+          <ol className="flex items-center gap-2 text-sm text-muted-foreground">
+            <li>
+              <Link href="/" className="hover:text-foreground transition-colors">
+                Home
+              </Link>
+            </li>
+            <li>/</li>
+            <li className="text-foreground font-medium">Components</li>
+          </ol>
+        </nav>
+
         {/* Page Header */}
         <div className="max-w-3xl mb-12">
           <h1 className="text-4xl font-bold tracking-tight mb-4">Components</h1>
           <p className="text-xl text-muted-foreground mb-6">
-            38 beautifully designed components built with Radix UI and Tailwind CSS.
-            Full RTL support, accessible, and customizable. All components are production-ready.
+            54 beautifully designed components built with Radix UI and Tailwind CSS.
+            41 production-ready, 13 coming soon. Full RTL support, accessible, and customizable.
           </p>
 
           {/* Live Preview */}

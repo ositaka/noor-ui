@@ -9,10 +9,10 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 
-const loginFormCode = `import { Button } from '@rtl-design-system/core/components'
-import { Input } from '@rtl-design-system/core/components'
-import { Label } from '@rtl-design-system/core/components'
-import { Card, CardContent, CardHeader, CardTitle } from '@rtl-design-system/core/components'
+const loginFormCode = `import { Button } from '@noorui/components/components'
+import { Input } from '@noorui/components/components'
+import { Label } from '@noorui/components/components'
+import { Card, CardContent, CardHeader, CardTitle } from '@noorui/components/components'
 
 export default function LoginForm() {
   return (
@@ -37,7 +37,7 @@ export default function LoginForm() {
   )
 }`
 
-const dashboardCode = `import { Card, CardContent, CardHeader, CardTitle } from '@rtl-design-system/core/components'
+const dashboardCode = `import { Card, CardContent, CardHeader, CardTitle } from '@noorui/components/components'
 
 export default function Dashboard() {
   return (
@@ -95,7 +95,7 @@ export default function ExamplesPage() {
             <h1 className="text-4xl font-bold tracking-tight">Examples</h1>
           </div>
           <p className="text-xl text-muted-foreground">
-            Real-world examples and patterns for common UI scenarios using RTL Design System components.
+            Real-world examples and patterns for common UI scenarios using Noor UI components.
           </p>
         </div>
 

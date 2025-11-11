@@ -19,7 +19,7 @@ const skeletonProps: PropDefinition[] = [
   },
 ]
 
-const installCode = `npm install @rtl-design-system/core`
+const installCode = `npm install @noorui/components`
 
 const basicUsageCode = `import { Skeleton } from '@/components/ui/skeleton'
 

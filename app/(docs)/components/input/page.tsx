@@ -57,7 +57,7 @@ const inputProps: PropDefinition[] = [
   },
 ]
 
-const installCode = `npm install @rtl-design-system/core`
+const installCode = `npm install @noorui/components`
 
 const basicUsageCode = `import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'

@@ -1,7 +1,8 @@
-# RTL-First Design System - Project Rules
+# Noor UI - Project Rules
 
-**Last Updated:** 2025-11-06
+**Last Updated:** 2025-11-10
 **Project Type:** React/Next.js Design System with RTL-First Architecture
+**Project Name:** Noor UI (نور - "Light" in Arabic)
 
 ---
 
@@ -90,7 +91,7 @@ const TabsRoot = React.forwardRef<...>(({ dir, ...props }, ref) => {
 
 ### When Adding a New Component:
 
-**CRITICAL:** Every new component or page **MUST** be made discoverable.
+**CRITICAL:** Every new component or page **MUST** be made discoverable and include proper SEO metadata.
 
 **👉 USE THE CHECKLIST:** See [CHECKLIST.md](.claude/CHECKLIST.md) for the complete pre-commit verification list.
 
@@ -105,11 +106,13 @@ Quick overview:
 #### 2. Create Documentation Page
 - [ ] Create `/app/(docs)/components/[name]/page.tsx` in the (docs) route group
 - [ ] **CRITICAL: Add 'use client' directive at the top**
+- [ ] **DO NOT export metadata** - Client components cannot have metadata exports (Next.js limitation)
 - [ ] **DO NOT** add manual header/footer - the (docs) layout provides these
 - [ ] Include: Preview, Installation, Usage, Examples, Props, Accessibility, RTL Considerations
 - [ ] Add interactive ComponentShowcase with LTR/RTL toggle
 - [ ] Show at least 2-3 real-world examples
 - [ ] Include mobile and desktop examples where relevant
+- [ ] **Add Loading State section** if component has `isLoading` or `loading` prop
 
 **Required Page Structure (Route Groups Pattern):**
 ```tsx
@@ -150,6 +153,7 @@ export default function ComponentPage() {
 ```
 
 **Why this structure?**
+- ✅ Client component for interactivity
 - ✅ Header/footer provided by `app/(docs)/layout.tsx`
 - ✅ Cleaner code - no navigation boilerplate
 - ✅ DRY principle - layout changes propagate automatically
@@ -170,16 +174,24 @@ export default function ComponentPage() {
 
 Every component documentation page MUST include:
 
-1. **Metadata** for SEO
+1. **'use client' directive** at the very top (required for interactive components)
+   ```tsx
+   'use client'
+   ```
+   **NOTE:** Client components cannot export metadata in Next.js 14+. For SEO, use layout files or create server component wrappers.
 2. **Page title and description**
 3. **Live Preview** with interactive demo
 4. **Installation** instructions (CLI + Manual)
 5. **Usage** examples with code
 6. **Multiple Examples** (minimum 3 variants)
-7. **Props Documentation** with complete table
-8. **Accessibility** section with keyboard navigation
-9. **RTL Considerations** with best practices
-10. **Related Components** section with links
+7. **Loading State** section (if component supports `isLoading` or `loading` prop)
+   - Show skeleton/loading state example
+   - Include code example
+   - Demonstrate loading state in ComponentShowcase
+8. **Props Documentation** with complete table
+9. **Accessibility** section with keyboard navigation
+10. **RTL Considerations** with best practices
+11. **Related Components** section with links
 
 The template includes all sections with proper structure and real Arabic content examples.
 
@@ -340,6 +352,7 @@ Before committing component work, verify:
 - Forget to update search-data.ts when adding components
 - Forget to update components index page
 - Create components without documentation
+- **Export metadata from 'use client' components** (Next.js 14+ doesn't allow this)
 - Skip mobile testing
 - Hardcode colors or spacing
 - Use `position: left` or `position: right` (use `start`/`end`)
@@ -349,6 +362,7 @@ Before committing component work, verify:
 - Use logical properties (`ms-`, `me-`, `ps-`, `pe-`)
 - Use `text-start` and `text-end`
 - Place documentation pages in the (docs) route group
+- **Start client components with 'use client' only** (no metadata exports)
 - Use `useDirection()` hook for direction-aware components
 - Use CodeBlock component for syntax highlighting
 - Update ALL navigation/search when adding features

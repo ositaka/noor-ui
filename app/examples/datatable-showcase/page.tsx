@@ -1,9 +1,21 @@
 'use client'
 
 import * as React from 'react'
-import { DataTable, type ColumnDef, type SortDirection } from '@/components/ui/data-table'
+import dynamic from 'next/dynamic'
+import Link from 'next/link'
+import type { ColumnDef, SortDirection } from '@/components/ui/data-table'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
+import { LoadingSpinner } from '@/components/ui/loading-spinner'
+
+// Lazy load heavy DataTable component
+const DataTable = dynamic(
+  () => import('@/components/ui/data-table').then(mod => ({ default: mod.DataTable })),
+  {
+    loading: () => <LoadingSpinner size="lg" text="Loading table..." />,
+    ssr: false,
+  }
+)
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
 import {
@@ -184,32 +196,38 @@ export default function DataTableShowcasePage() {
     URL.revokeObjectURL(url)
   }
 
-  // Get role color
-  const getRoleVariant = (role: User['role']): 'default' | 'secondary' | 'outline' => {
-    switch (role) {
-      case 'Admin':
-        return 'default'
-      case 'Editor':
-        return 'secondary'
-      default:
-        return 'outline'
-    }
-  }
+  // Get role color - memoized to prevent recreating on every render
+  const getRoleVariant = React.useCallback(
+    (role: User['role']): 'default' | 'secondary' | 'outline' => {
+      switch (role) {
+        case 'Admin':
+          return 'default'
+        case 'Editor':
+          return 'secondary'
+        default:
+          return 'outline'
+      }
+    },
+    []
+  )
 
-  // Get status color
-  const getStatusVariant = (status: User['status']): 'default' | 'secondary' | 'outline' => {
-    switch (status) {
-      case 'Active':
-        return 'default'
-      case 'Pending':
-        return 'secondary'
-      default:
-        return 'outline'
-    }
-  }
+  // Get status color - memoized to prevent recreating on every render
+  const getStatusVariant = React.useCallback(
+    (status: User['status']): 'default' | 'secondary' | 'outline' => {
+      switch (status) {
+        case 'Active':
+          return 'default'
+        case 'Pending':
+          return 'secondary'
+        default:
+          return 'outline'
+      }
+    },
+    []
+  )
 
-  // Column definitions
-  const columns: ColumnDef<User>[] = [
+  // Column definitions - memoized to prevent DataTable re-renders
+  const columns = React.useMemo<ColumnDef<User>[]>(() => [
     {
       id: 'name',
       header: isRTL ? 'الاسم' : 'Name',
@@ -251,7 +269,7 @@ export default function DataTableShowcasePage() {
       sortable: true,
       cell: (row) => <div className="text-sm">{row.joinDate}</div>,
     },
-  ]
+  ], [isRTL, getRoleVariant, getStatusVariant])
 
   // Get paginated data
   const paginatedData = displayUsers.slice(
@@ -298,6 +316,31 @@ export default function DataTableShowcasePage() {
 
   return (
     <div className="min-h-screen bg-background">
+      {/* Breadcrumb */}
+      <div className="border-b bg-background">
+        <div className="container py-3">
+          <nav aria-label="Breadcrumb">
+            <ol className="flex items-center gap-2 text-sm text-muted-foreground">
+              <li>
+                <Link href="/" className="hover:text-foreground transition-colors">
+                  {isRTL ? 'الرئيسية' : 'Home'}
+                </Link>
+              </li>
+              <li>/</li>
+              <li>
+                <Link href="/examples" className="hover:text-foreground transition-colors">
+                  {isRTL ? 'الأمثلة' : 'Examples'}
+                </Link>
+              </li>
+              <li>/</li>
+              <li className="text-foreground font-medium">
+                {isRTL ? 'عرض جدول البيانات' : 'DataTable'}
+              </li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+
       {/* Header */}
       <div className="border-b">
         <div className="container py-8">
@@ -403,7 +446,7 @@ export default function DataTableShowcasePage() {
           <CardContent>
             <DataTable
               data={paginatedData}
-              columns={columns}
+              columns={columns as any}
               isLoading={isLoading}
               sortBy={sortBy}
               sortDirection={sortDirection}

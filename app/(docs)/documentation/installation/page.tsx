@@ -6,14 +6,14 @@ import { Card, CardContent } from '@/components/ui/card'
 import { CodeBlock } from '@/components/docs/code-block'
 import { Package, Terminal, CheckCircle2, AlertCircle } from 'lucide-react'
 
-const npmInstall = `npm install @rtl-design-system/core`
-const yarnInstall = `yarn add @rtl-design-system/core`
-const pnpmInstall = `pnpm add @rtl-design-system/core`
-const bunInstall = `bun add @rtl-design-system/core`
+const npmInstall = `npm install @noorui/components`
+const yarnInstall = `yarn add @noorui/components`
+const pnpmInstall = `pnpm add @noorui/components`
+const bunInstall = `bun add @noorui/components`
 
 const dependenciesCode = `{
   "dependencies": {
-    "@rtl-design-system/core": "^1.0.0",
+    "@noorui/components": "^1.0.0",
     "next": "^14.0.0",
     "react": "^18.3.0",
     "react-dom": "^18.3.0",
@@ -27,7 +27,7 @@ const dependenciesCode = `{
   }
 }`
 
-const verifyInstallCode = `import { Button } from '@rtl-design-system/core/components'
+const verifyInstallCode = `import { Button } from '@noorui/components/components'
 
 export default function TestPage() {
   return <Button>Test Installation</Button>
@@ -61,7 +61,7 @@ export default function InstallationPage() {
         <div className="max-w-3xl mb-12">
           <h1 className="text-4xl font-bold tracking-tight mb-4">Installation</h1>
           <p className="text-xl text-muted-foreground">
-            Get started with RTL Design System in minutes. Follow these simple steps to add the package to your Next.js project.
+            Get started with Noor UI in minutes. Follow these simple steps to add the package to your Next.js project.
           </p>
         </div>
 
@@ -108,7 +108,7 @@ export default function InstallationPage() {
         <section className="mb-16">
           <h2 className="text-2xl font-bold tracking-tight mb-6">Choose Your Package Manager</h2>
           <p className="text-muted-foreground mb-6">
-            Select your preferred package manager to install RTL Design System:
+            Select your preferred package manager to install Noor UI:
           </p>
 
           <div className="space-y-4">
@@ -210,7 +210,7 @@ export default function InstallationPage() {
                 <CardContent className="p-6">
                   <h3 className="font-semibold mb-2">Quick Start</h3>
                   <p className="text-sm text-muted-foreground">
-                    Jump straight into building your first component with RTL Design System.
+                    Jump straight into building your first component with Noor UI.
                   </p>
                 </CardContent>
               </Card>

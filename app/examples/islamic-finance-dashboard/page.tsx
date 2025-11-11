@@ -1,17 +1,43 @@
 'use client'
 
 import * as React from 'react'
+import dynamic from 'next/dynamic'
+import Link from 'next/link'
 import { useDirection } from '@/components/providers/direction-provider'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { ZakatCalculator } from '@/components/ui/zakat-calculator'
 import { PrayerTimes } from '@/components/ui/prayer-times'
 import { HijriDate } from '@/components/ui/hijri-date'
 import { ArabicNumber } from '@/components/ui/arabic-number'
-import { DataTable, ColumnDef } from '@/components/ui/data-table'
-import { Calendar } from '@/components/ui/calendar'
+import { LoadingSpinner } from '@/components/ui/loading-spinner'
+import { ColumnDef } from '@/components/ui/data-table'
+
+// Lazy load heavy components for better performance
+const ZakatCalculator = dynamic(
+  () => import('@/components/ui/zakat-calculator').then(mod => ({ default: mod.ZakatCalculator })),
+  {
+    loading: () => <LoadingSpinner size="lg" text="Loading calculator..." />,
+    ssr: false,
+  }
+)
+
+const Calendar = dynamic(
+  () => import('@/components/ui/calendar').then(mod => ({ default: mod.Calendar })),
+  {
+    loading: () => <LoadingSpinner size="md" text="Loading calendar..." />,
+    ssr: false,
+  }
+)
+
+const DataTable = dynamic(
+  () => import('@/components/ui/data-table').then(mod => ({ default: mod.DataTable })),
+  {
+    loading: () => <LoadingSpinner size="lg" text="Loading transactions..." />,
+    ssr: false,
+  }
+)
 import {
   TrendingUp,
   TrendingDown,
@@ -335,8 +361,8 @@ export default function IslamicFinanceDashboardPage() {
     }
   }
 
-  // DataTable columns
-  const columns: ColumnDef<Transaction>[] = [
+  // DataTable columns - memoized to prevent DataTable re-renders
+  const columns = React.useMemo<ColumnDef<Transaction>[]>(() => [
     {
       id: 'id',
       header: 'ID',
@@ -462,11 +488,32 @@ export default function IslamicFinanceDashboardPage() {
       sortable: true,
       width: '100px',
     },
-  ]
+  ], [isRTL, locale])
 
   return (
     <div className="min-h-screen bg-background" dir={direction}>
       <div className="container mx-auto p-4 md:p-8 space-y-8">
+        {/* Breadcrumb */}
+        <nav aria-label="Breadcrumb">
+          <ol className="flex items-center gap-2 text-sm text-muted-foreground">
+            <li>
+              <Link href="/" className="hover:text-foreground transition-colors">
+                {isRTL ? 'الرئيسية' : 'Home'}
+              </Link>
+            </li>
+            <li>/</li>
+            <li>
+              <Link href="/examples" className="hover:text-foreground transition-colors">
+                {isRTL ? 'الأمثلة' : 'Examples'}
+              </Link>
+            </li>
+            <li>/</li>
+            <li className="text-foreground font-medium">
+              {isRTL ? 'لوحة التمويل الإسلامي' : 'Islamic Finance'}
+            </li>
+          </ol>
+        </nav>
+
         {/* Header */}
         <div className="space-y-2">
           <h1 className="text-4xl font-bold tracking-tight">
@@ -506,7 +553,7 @@ export default function IslamicFinanceDashboardPage() {
             ]}
             showPlayAdhan={true}
             onPlayAdhan={() => {
-              console.log('Playing Adhan...')
+              // Handle Adhan playback
             }}
             onDismiss={() => setShowPrayerNotification(false)}
           />
@@ -704,7 +751,7 @@ export default function IslamicFinanceDashboardPage() {
               <CardContent>
                 <DataTable
                   data={filteredTransactions}
-                  columns={columns}
+                  columns={columns as any}
                   searchable={true}
                   searchPlaceholder="Search transactions..."
                   searchPlaceholderAr="بحث في المعاملات..."

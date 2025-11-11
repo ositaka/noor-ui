@@ -1,6 +1,7 @@
 'use client'
 
 import * as React from 'react'
+import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import { useDirection } from '@/components/providers/direction-provider'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
@@ -9,8 +10,17 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { PrayerTimes } from '@/components/ui/prayer-times'
 import { HijriDate } from '@/components/ui/hijri-date'
 import { ArabicNumber } from '@/components/ui/arabic-number'
-import { ZakatCalculator } from '@/components/ui/zakat-calculator'
 import { Badge } from '@/components/ui/badge'
+import { LoadingSpinner } from '@/components/ui/loading-spinner'
+
+// Lazy load heavy components that aren't immediately visible
+const ZakatCalculator = dynamic(
+  () => import('@/components/ui/zakat-calculator').then(mod => ({ default: mod.ZakatCalculator })),
+  {
+    loading: () => <LoadingSpinner size="lg" text="Loading calculator..." />,
+    ssr: false,
+  }
+)
 import {
   ArrowUpRight,
   TrendingUp,
@@ -100,6 +110,31 @@ export default function GCCDashboardPage() {
           </div>
         </div>
       </header>
+
+      {/* Breadcrumb */}
+      <div className="border-b bg-background">
+        <div className="container py-3">
+          <nav aria-label="Breadcrumb">
+            <ol className="flex items-center gap-2 text-sm text-muted-foreground">
+              <li>
+                <Link href="/" className="hover:text-foreground transition-colors">
+                  {isRTL ? 'الرئيسية' : 'Home'}
+                </Link>
+              </li>
+              <li>/</li>
+              <li>
+                <Link href="/examples" className="hover:text-foreground transition-colors">
+                  {isRTL ? 'الأمثلة' : 'Examples'}
+                </Link>
+              </li>
+              <li>/</li>
+              <li className="text-foreground font-medium">
+                {isRTL ? 'مجتمع الخير' : 'GCC Dashboard'}
+              </li>
+            </ol>
+          </nav>
+        </div>
+      </div>
 
       {/* Main Content */}
       <div className="container py-8">
@@ -194,9 +229,6 @@ export default function GCCDashboardPage() {
                       silverPricePerGram={3}
                       locale={locale}
                       useArabicNumerals={isRTL}
-                      onCalculate={(result) => {
-                        console.log('Zakat calculation:', result)
-                      }}
                     />
                   </CardContent>
                 </Card>

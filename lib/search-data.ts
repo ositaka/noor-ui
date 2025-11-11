@@ -10,17 +10,17 @@ export const searchData: SearchItem[] = [
   // Documentation Pages
   {
     title: 'Getting Started',
-    description: 'Installation and setup guide for RTL Design System',
+    description: 'Installation and setup guide for Noor UI',
     href: '/getting-started',
     category: 'Documentation',
-    keywords: ['install', 'setup', 'configuration', 'start'],
+    keywords: ['install', 'setup', 'configuration', 'start', 'noor'],
   },
   {
     title: 'Installation',
-    description: 'Install RTL Design System in your project',
+    description: 'Install Noor UI in your project',
     href: '/documentation/installation',
     category: 'Documentation',
-    keywords: ['npm', 'yarn', 'pnpm', 'install'],
+    keywords: ['npm', 'yarn', 'pnpm', 'install', 'noor'],
   },
   {
     title: 'Quick Start',
@@ -99,6 +99,13 @@ export const searchData: SearchItem[] = [
     category: 'Documentation',
     keywords: ['rtl', 'guide', 'tutorial'],
   },
+  {
+    title: 'Roadmap',
+    description: 'Development roadmap and future plans',
+    href: '/roadmap',
+    category: 'Documentation',
+    keywords: ['roadmap', 'plans', 'future', 'phases', 'timeline'],
+  },
 
   // Components
   {
@@ -114,6 +121,13 @@ export const searchData: SearchItem[] = [
     href: '/components/card',
     category: 'Component',
     keywords: ['card', 'container', 'box'],
+  },
+  {
+    title: 'FeatureCard',
+    description: 'Feature showcase card with icon, title, and description',
+    href: '/components/feature-card',
+    category: 'Component',
+    keywords: ['feature', 'card', 'showcase', 'icon', 'landing', 'marketing'],
   },
   {
     title: 'Input',

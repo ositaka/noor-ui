@@ -3,9 +3,17 @@
 import * as React from 'react'
 import Link from 'next/link'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Book, Code2, Palette, Globe2, Accessibility } from 'lucide-react'
+import { Book, Code2, Palette, Globe2, Accessibility, type LucideIcon } from 'lucide-react'
 
-const docSections = [
+interface DocumentationSection {
+  title: string
+  description: string
+  icon: LucideIcon
+  links: Array<{ title: string; href: string }>
+  id?: string
+}
+
+const docSections: DocumentationSection[] = [
   {
     title: 'Getting Started',
     description: 'Learn how to set up and use the design system',
@@ -63,6 +71,19 @@ export default function DocumentationPage() {
   return (
     <div className="min-h-screen">
       <main id="main-content" className="container py-12">
+        {/* Breadcrumb */}
+        <nav aria-label="Breadcrumb" className="mb-8">
+          <ol className="flex items-center gap-2 text-sm text-muted-foreground">
+            <li>
+              <Link href="/" className="hover:text-foreground transition-colors">
+                Home
+              </Link>
+            </li>
+            <li>/</li>
+            <li className="text-foreground font-medium">Documentation</li>
+          </ol>
+        </nav>
+
         {/* Page Header */}
         <div className="max-w-3xl mb-12">
           <h1 className="text-4xl font-bold tracking-tight mb-4">Documentation</h1>
@@ -78,7 +99,7 @@ export default function DocumentationPage() {
             const Icon = section.icon
 
             return (
-              <Card key={section.title} id={(section as any).id}>
+              <Card key={section.title} id={section.id}>
                 <CardHeader>
                   <div className="flex items-center gap-4 mb-2">
                     <div className="rounded-lg bg-primary/10 p-3">
