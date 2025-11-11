@@ -207,6 +207,13 @@ export const searchData: SearchItem[] = [
     keywords: ['textarea', 'text', 'multiline', 'form'],
   },
   {
+    title: 'Rich Text Editor',
+    description: 'WYSIWYG editor with formatting, headings, lists, and full RTL support',
+    href: '/components/rich-text-editor',
+    category: 'Component',
+    keywords: ['editor', 'rich text', 'wysiwyg', 'tiptap', 'formatting', 'bold', 'italic', 'markdown', 'rtl', 'arabic', 'content', 'blog', 'cms'],
+  },
+  {
     title: 'Alert',
     description: 'Alert message component',
     href: '/components/alert',
