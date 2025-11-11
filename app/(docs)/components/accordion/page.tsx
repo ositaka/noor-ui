@@ -148,7 +148,7 @@ export default function AccordionPage() {
 
       <main id="main-content" className="container py-12">
         {/* Breadcrumb */}
-        <nav aria-label="Breadcrumb" className="mb-8">
+        <nav aria-label="Breadcrumb" className="mb-12">
           <ol className="flex items-center gap-2 text-sm text-muted-foreground">
             <li>
               <Link href="/" className="hover:text-foreground transition-colors">
@@ -167,16 +167,16 @@ export default function AccordionPage() {
         </nav>
 
         {/* Page Header */}
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold tracking-tight mb-2">Accordion</h1>
-          <p className="text-lg text-muted-foreground">
+        <div className="mb-12">
+          <h1 className="text-4xl font-bold tracking-tight mb-4">Accordion</h1>
+          <p className="text-xl text-muted-foreground max-w-3xl">
             A vertically stacked set of interactive headings that each reveal an associated section of content.
           </p>
         </div>
 
         {/* Preview */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-4">Preview</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">Preview</h2>
           <ComponentShowcase>
             <Accordion type="single" collapsible className="w-full max-w-md">
               <AccordionItem value="item-1">
