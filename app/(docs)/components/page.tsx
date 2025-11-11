@@ -133,10 +133,10 @@ const componentCategories = [
     components: [
       { name: 'File Upload', icon: Upload, href: '/components/file-upload', status: 'ready' },
       { name: 'Rich Text Editor', icon: FileEdit, href: '/components/rich-text-editor', status: 'ready' },
-      { name: 'Date Picker', icon: CalendarIcon, href: '/components/date-picker', status: 'coming-soon' },
-      { name: 'Time Picker', icon: Clock, href: '/components/time-picker', status: 'coming-soon' },
+      { name: 'Date Picker', icon: CalendarIcon, href: '/components/date-picker', status: 'ready' },
+      { name: 'Time Picker', icon: Clock, href: '/components/time-picker', status: 'ready' },
+      { name: 'Number Input', icon: Binary, href: '/components/number-input', status: 'ready' },
       { name: 'Color Picker', icon: Palette, href: '/components/color-picker', status: 'coming-soon' },
-      { name: 'Number Input', icon: Binary, href: '/components/number-input', status: 'coming-soon' },
     ],
   },
   {
@@ -154,8 +154,7 @@ const componentCategories = [
     components: [
       { name: 'User Menu', icon: UserCircle, href: '/components/user-menu', status: 'ready' },
       { name: 'Notification Center', icon: Bell, href: '/components/notification-center', status: 'ready' },
-      { name: 'Stepper', icon: GitBranch, href: '/components/stepper', status: 'coming-soon' },
-      { name: 'Command Bar', icon: Menu, href: '/components/command-bar', status: 'coming-soon' },
+      { name: 'Stepper', icon: GitBranch, href: '/components/stepper', status: 'ready' },
     ],
   },
 ]
@@ -183,7 +182,7 @@ export default function ComponentsPage() {
           <h1 className="text-4xl font-bold tracking-tight mb-4">Components</h1>
           <p className="text-xl text-muted-foreground mb-6">
             54 beautifully designed components built with Radix UI and Tailwind CSS.
-            46 production-ready, 8 coming soon. Full RTL support, accessible, and customizable.
+            50 production-ready, 4 coming soon. Full RTL support, accessible, and customizable.
           </p>
 
           {/* Live Preview */}
