@@ -221,6 +221,13 @@ export const searchData: SearchItem[] = [
     keywords: ['upload', 'file', 'drag', 'drop', 'image', 'upload', 'validation', 'form', 'attachment', 'preview'],
   },
   {
+    title: 'User Menu',
+    description: 'Dropdown menu with user avatar, profile info, and action items',
+    href: '/components/user-menu',
+    category: 'Component',
+    keywords: ['user', 'menu', 'avatar', 'profile', 'dropdown', 'account', 'logout', 'settings', 'header'],
+  },
+  {
     title: 'Alert',
     description: 'Alert message component',
     href: '/components/alert',
