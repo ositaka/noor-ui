@@ -1,13 +1,12 @@
 'use client'
 
 import * as React from 'react'
-import Link from 'next/link'
 import { ListingCard } from '@/components/ui/listing-card'
-import { Button } from '@/components/ui/button'
-import { Separator } from '@/components/ui/separator'
+import { Card } from '@/components/ui/card'
 import { ComponentShowcase } from '@/components/docs/component-showcase'
 import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
+import { useDirection } from '@/components/providers/direction-provider'
 import {
   Home,
   Heart,
@@ -35,49 +34,43 @@ const listingCardProps: PropDefinition[] = [
     name: 'subtitle',
     type: 'string | React.ReactNode',
     required: false,
-    description: 'Subtitle or location text displayed below title',
+    description: 'Subtitle or location text',
   },
   {
     name: 'description',
     type: 'string',
     required: false,
-    description: 'Short description text (automatically truncated to 2 lines)',
+    description: 'Short description (truncated to 2 lines)',
   },
   {
     name: 'price',
     type: 'string | React.ReactNode',
     required: false,
-    description: 'Price or main value to display in footer',
-  },
-  {
-    name: 'image',
-    type: 'string | React.ReactNode',
-    required: false,
-    description: 'Image URL or custom image component',
+    description: 'Price or main value to display',
   },
   {
     name: 'placeholderIcon',
     type: 'LucideIcon',
     required: false,
-    description: 'Icon to show when no image is provided',
+    description: 'Icon when no image is provided',
   },
   {
     name: 'badges',
     type: 'ListingCardBadge[]',
     required: false,
-    description: 'Array of badges to show on top left of image',
+    description: 'Badges on top left of image',
   },
   {
     name: 'actions',
     type: 'ListingCardAction[]',
     required: false,
-    description: 'Action buttons on top right (favorite, share, etc)',
+    description: 'Action buttons on top right',
   },
   {
     name: 'stats',
     type: 'ListingCardStat[]',
     required: false,
-    description: 'Stats/specs to display (bedrooms, ratings, etc)',
+    description: 'Stats/specs to display',
   },
   {
     name: 'tags',
@@ -90,59 +83,42 @@ const listingCardProps: PropDefinition[] = [
     type: 'number',
     default: '3',
     required: false,
-    description: 'Maximum number of tags to show before "+N more"',
+    description: 'Max tags before "+N more"',
   },
   {
     name: 'typeBadge',
     type: 'string',
     required: false,
-    description: 'Type badge displayed next to title',
+    description: 'Type badge next to title',
   },
   {
     name: 'ctaText',
     type: 'string',
     required: false,
-    description: 'Text for call-to-action button',
-  },
-  {
-    name: 'onCtaClick',
-    type: '() => void',
-    required: false,
-    description: 'Click handler for CTA button',
-  },
-  {
-    name: 'onClick',
-    type: '() => void',
-    required: false,
-    description: 'Click handler for entire card',
+    description: 'Call-to-action button text',
   },
   {
     name: 'featured',
     type: 'boolean',
     default: 'false',
     required: false,
-    description: 'Whether card is featured (highlighted style)',
+    description: 'Featured card styling',
   },
   {
     name: 'imageAspect',
     type: "'square' | 'video' | 'wide'",
     default: "'video'",
     required: false,
-    description: 'Image aspect ratio preset',
-  },
-  {
-    name: 'hoverEffect',
-    type: 'boolean',
-    default: 'true',
-    required: false,
-    description: 'Whether to show shadow on hover',
+    description: 'Image aspect ratio',
   },
 ]
 
-const installCode = `npm install @noorui/components`
+export default function ListingCardPage() {
+  const { direction, locale } = useDirection()
+  const isRTL = direction === 'rtl'
 
-const basicUsageCode = `import { ListingCard } from '@/components/ui/listing-card'
-import { Home, Heart, Share2 } from 'lucide-react'
+  const basicUsage = `import { ListingCard } from '@/components/ui/listing-card'
+import { Home } from 'lucide-react'
 
 <ListingCard
   title="Modern Apartment"
@@ -152,7 +128,7 @@ import { Home, Heart, Share2 } from 'lucide-react'
   placeholderIcon={Home}
 />`
 
-const realEstateCode = `import { ListingCard } from '@/components/ui/listing-card'
+  const realEstateCode = `import { ListingCard } from '@/components/ui/listing-card'
 import { Home, Heart, Share2, Bed, Bath, Square, MapPin } from 'lucide-react'
 
 <ListingCard
@@ -188,8 +164,8 @@ import { Home, Heart, Share2, Bed, Bath, Square, MapPin } from 'lucide-react'
   featured={true}
 />`
 
-const ecommerceCode = `import { ListingCard } from '@/components/ui/listing-card'
-import { Package, ShoppingCart, Heart, Star } from 'lucide-react'
+  const ecommerceCode = `import { ListingCard } from '@/components/ui/listing-card'
+import { Package, Heart, Star } from 'lucide-react'
 
 <ListingCard
   title="Premium Wireless Headphones"
@@ -202,7 +178,7 @@ import { Package, ShoppingCart, Heart, Star } from 'lucide-react'
     { label: '20% Off', variant: 'destructive' },
   ]}
   actions={[
-    { icon: Heart, label: 'Add to wishlist', onClick: () => {} },
+    { icon: Heart, label: 'Wishlist', onClick: () => {} },
   ]}
   stats={[
     { icon: Star, value: '4.8', label: 'Rating' },
@@ -211,14 +187,13 @@ import { Package, ShoppingCart, Heart, Star } from 'lucide-react'
   tags={[
     { label: 'Noise Cancelling' },
     { label: 'Wireless' },
-    { label: 'Fast Charging' },
   ]}
   ctaText="Add to Cart"
   onCtaClick={() => {}}
   imageAspect="square"
 />`
 
-const jobListingCode = `import { ListingCard } from '@/components/ui/listing-card'
+  const jobListingCode = `import { ListingCard } from '@/components/ui/listing-card'
 import { Briefcase, Clock, MapPin, DollarSign } from 'lucide-react'
 
 <ListingCard
@@ -238,219 +213,17 @@ import { Briefcase, Clock, MapPin, DollarSign } from 'lucide-react'
   ]}
   stats={[
     { icon: Clock, value: 'Posted 2 days ago' },
-    { icon: DollarSign, value: 'Competitive' },
   ]}
   tags={[
     { label: 'React' },
     { label: 'TypeScript' },
-    { label: 'Next.js' },
   ]}
   typeBadge="Tech"
   ctaText="Apply Now"
   onCtaClick={() => {}}
 />`
 
-export default function ListingCardPage() {
-  return (
-    <div className="min-h-screen">
-      <main id="main-content" className="container py-12 max-w-6xl">
-        {/* Breadcrumb */}
-        <nav aria-label="Breadcrumb" className="mb-8">
-          <ol className="flex items-center gap-2 text-sm text-muted-foreground">
-            <li>
-              <Link href="/" className="hover:text-foreground transition-colors">
-                Home
-              </Link>
-            </li>
-            <li>/</li>
-            <li>
-              <Link href="/components" className="hover:text-foreground transition-colors">
-                Components
-              </Link>
-            </li>
-            <li>/</li>
-            <li className="text-foreground font-medium">Listing Card</li>
-          </ol>
-        </nav>
-
-        {/* Header */}
-        <div className="mb-12">
-          <h1 className="text-4xl font-bold tracking-tight mb-4">Listing Card</h1>
-          <p className="text-xl text-muted-foreground">
-            A flexible card component for displaying listings, products, properties, jobs, and more.
-            Supports badges, actions, stats, tags, and custom layouts.
-          </p>
-        </div>
-
-        {/* Installation */}
-        <section className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Installation</h2>
-          <CodeBlock code={installCode} language="bash" />
-        </section>
-
-        <Separator className="my-12" />
-
-        {/* Basic Usage */}
-        <section className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Basic Usage</h2>
-          <ComponentShowcase code={basicUsageCode}>
-            <div className="max-w-sm">
-              <ListingCard
-                title="Modern Apartment"
-                subtitle="Downtown Dubai"
-                description="Beautiful 2-bedroom apartment with stunning views"
-                price="1,200,000 AED"
-                placeholderIcon={Home}
-              />
-            </div>
-          </ComponentShowcase>
-        </section>
-
-        <Separator className="my-12" />
-
-        {/* Real Estate Example */}
-        <section className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Real Estate Listing</h2>
-          <p className="text-muted-foreground mb-6">
-            Perfect for property listings with location, stats (bedrooms, bathrooms), amenities, and
-            action buttons.
-          </p>
-          <ComponentShowcase code={realEstateCode}>
-            <div className="max-w-sm">
-              <ListingCard
-                title="Luxury Villa in Dubai Hills"
-                subtitle={
-                  <>
-                    <MapPin className="h-3 w-3 inline me-1" />
-                    Dubai Hills Estate, Dubai
-                  </>
-                }
-                description="Stunning 5-bedroom villa with private pool and garden"
-                price="8,500,000 AED"
-                placeholderIcon={Home}
-                badges={[
-                  { label: 'For Sale', variant: 'default' },
-                  { label: 'Featured', variant: 'destructive' },
-                ]}
-                actions={[
-                  { icon: Heart, label: 'Favorite', onClick: () => {} },
-                  { icon: Share2, label: 'Share', onClick: () => {} },
-                ]}
-                stats={[
-                  { icon: Bed, value: 5, label: 'Bedrooms' },
-                  { icon: Bath, value: 6, label: 'Bathrooms' },
-                  { icon: Square, value: '4,500 sqft', label: 'Area' },
-                ]}
-                tags={[
-                  { label: 'Private Pool' },
-                  { label: 'Garden' },
-                  { label: 'Smart Home' },
-                  { label: 'Parking' },
-                  { label: 'Security' },
-                ]}
-                typeBadge="Villa"
-                featured={true}
-              />
-            </div>
-          </ComponentShowcase>
-        </section>
-
-        <Separator className="my-12" />
-
-        {/* E-commerce Example */}
-        <section className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">E-commerce Product</h2>
-          <p className="text-muted-foreground mb-6">
-            Great for product cards with ratings, sale badges, and add-to-cart functionality.
-          </p>
-          <ComponentShowcase code={ecommerceCode}>
-            <div className="max-w-sm">
-              <ListingCard
-                title="Premium Wireless Headphones"
-                subtitle="Brand Name"
-                description="High-quality wireless headphones with noise cancellation"
-                price="$299.99"
-                placeholderIcon={Package}
-                badges={[
-                  { label: 'Best Seller', variant: 'default' },
-                  { label: '20% Off', variant: 'destructive' },
-                ]}
-                actions={[{ icon: Heart, label: 'Add to wishlist', onClick: () => {} }]}
-                stats={[
-                  { icon: Star, value: '4.8', label: 'Rating' },
-                  { icon: Package, value: '234', label: 'Sold' },
-                ]}
-                tags={[
-                  { label: 'Noise Cancelling' },
-                  { label: 'Wireless' },
-                  { label: 'Fast Charging' },
-                ]}
-                ctaText="Add to Cart"
-                onCtaClick={() => {}}
-                imageAspect="square"
-              />
-            </div>
-          </ComponentShowcase>
-        </section>
-
-        <Separator className="my-12" />
-
-        {/* Job Listing Example */}
-        <section className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Job Listing</h2>
-          <p className="text-muted-foreground mb-6">
-            Ideal for job boards with position details, salary range, and required skills.
-          </p>
-          <ComponentShowcase code={jobListingCode}>
-            <div className="max-w-sm">
-              <ListingCard
-                title="Senior Frontend Developer"
-                subtitle={
-                  <>
-                    <MapPin className="h-3 w-3 inline me-1" />
-                    Dubai, UAE
-                  </>
-                }
-                description="Join our team to build cutting-edge web applications"
-                price="15,000 - 20,000 AED/month"
-                placeholderIcon={Briefcase}
-                badges={[
-                  { label: 'Full Time', variant: 'default' },
-                  { label: 'Remote OK', variant: 'secondary' },
-                ]}
-                stats={[
-                  { icon: Clock, value: 'Posted 2 days ago' },
-                  { icon: DollarSign, value: 'Competitive' },
-                ]}
-                tags={[
-                  { label: 'React' },
-                  { label: 'TypeScript' },
-                  { label: 'Next.js' },
-                ]}
-                typeBadge="Tech"
-                ctaText="Apply Now"
-                onCtaClick={() => {}}
-              />
-            </div>
-          </ComponentShowcase>
-        </section>
-
-        <Separator className="my-12" />
-
-        {/* API Reference */}
-        <section className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">API Reference</h2>
-          <h3 className="text-lg font-semibold mb-4">ListingCard Props</h3>
-          <PropsTable props={listingCardProps} />
-        </section>
-
-        <Separator className="my-12" />
-
-        {/* Type Definitions */}
-        <section className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Type Definitions</h2>
-          <CodeBlock
-            code={`interface ListingCardBadge {
+  const typeDefinitions = `interface ListingCardBadge {
   label: string
   variant?: 'default' | 'secondary' | 'destructive' | 'outline'
   className?: string
@@ -471,71 +244,219 @@ interface ListingCardStat {
 interface ListingCardTag {
   label: string
   variant?: 'default' | 'secondary' | 'outline'
-}`}
-            language="typescript"
+}`
+
+  return (
+    <div className="container mx-auto py-8 space-y-12" dir={direction}>
+      {/* Header */}
+      <div className="space-y-3">
+        <h1 className="text-4xl font-bold">
+          {isRTL ? 'بطاقة القائمة' : 'Listing Card'}
+        </h1>
+        <p className="text-lg text-muted-foreground">
+          {isRTL
+            ? 'مكون بطاقة مرن لعرض القوائم والمنتجات والعقارات والوظائف والمزيد'
+            : 'A flexible card component for displaying listings, products, properties, jobs, and more'}
+        </p>
+      </div>
+
+      {/* Basic Usage */}
+      <ComponentShowcase
+        title={isRTL ? 'الاستخدام الأساسي' : 'Basic Usage'}
+        description={
+          isRTL
+            ? 'بطاقة قائمة بسيطة مع عنوان وعنوان فرعي ووصف وسعر'
+            : 'Simple listing card with title, subtitle, description, and price'
+        }
+      >
+        <div className="max-w-sm mx-auto">
+          <ListingCard
+            title={isRTL ? 'شقة عصرية' : 'Modern Apartment'}
+            subtitle={isRTL ? 'وسط مدينة دبي' : 'Downtown Dubai'}
+            description={
+              isRTL
+                ? 'شقة جميلة من غرفتي نوم مع إطلالات خلابة'
+                : 'Beautiful 2-bedroom apartment with stunning views'
+            }
+            price={isRTL ? '1,200,000 د.إ' : '1,200,000 AED'}
+            placeholderIcon={Home}
           />
-        </section>
+        </div>
+      </ComponentShowcase>
 
-        <Separator className="my-12" />
+      <CodeBlock code={basicUsage} language="tsx" title={isRTL ? 'الكود' : 'Code'} />
 
-        {/* Use Cases */}
-        <section className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Common Use Cases</h2>
-          <div className="grid gap-4 md:grid-cols-2">
-            <div className="border rounded-lg p-4">
-              <h3 className="font-semibold mb-2">🏠 Real Estate</h3>
-              <p className="text-sm text-muted-foreground">
-                Property listings with bedrooms, bathrooms, area, amenities, and contact actions.
-              </p>
-            </div>
-            <div className="border rounded-lg p-4">
-              <h3 className="font-semibold mb-2">🛍️ E-commerce</h3>
-              <p className="text-sm text-muted-foreground">
-                Product cards with ratings, reviews, sale badges, and add-to-cart buttons.
-              </p>
-            </div>
-            <div className="border rounded-lg p-4">
-              <h3 className="font-semibold mb-2">💼 Job Boards</h3>
-              <p className="text-sm text-muted-foreground">
-                Job postings with salary, location, work type, and required skills.
-              </p>
-            </div>
-            <div className="border rounded-lg p-4">
-              <h3 className="font-semibold mb-2">📝 Blog</h3>
-              <p className="text-sm text-muted-foreground">
-                Article previews with author, publish date, read time, and categories.
-              </p>
-            </div>
-            <div className="border rounded-lg p-4">
-              <h3 className="font-semibold mb-2">🏪 Marketplace</h3>
-              <p className="text-sm text-muted-foreground">
-                Item listings with seller info, condition, price, and shipping details.
-              </p>
-            </div>
-            <div className="border rounded-lg p-4">
-              <h3 className="font-semibold mb-2">🎨 Portfolio</h3>
-              <p className="text-sm text-muted-foreground">
-                Project showcases with tech stack, client info, and project details.
-              </p>
-            </div>
-          </div>
-        </section>
+      {/* Real Estate Example */}
+      <ComponentShowcase
+        title={isRTL ? 'قائمة عقارية' : 'Real Estate Listing'}
+        description={
+          isRTL
+            ? 'مثالية للقوائم العقارية مع الموقع والإحصائيات والمرافق'
+            : 'Perfect for property listings with location, stats, and amenities'
+        }
+      >
+        <div className="max-w-sm mx-auto">
+          <ListingCard
+            title={isRTL ? 'فيلا فاخرة في دبي هيلز' : 'Luxury Villa in Dubai Hills'}
+            subtitle={
+              <>
+                <MapPin className="h-3 w-3 inline me-1" />
+                {isRTL ? 'دبي هيلز استيت، دبي' : 'Dubai Hills Estate, Dubai'}
+              </>
+            }
+            description={
+              isRTL
+                ? 'فيلا مذهلة من 5 غرف نوم مع مسبح خاص وحديقة'
+                : 'Stunning 5-bedroom villa with private pool and garden'
+            }
+            price={isRTL ? '8,500,000 د.إ' : '8,500,000 AED'}
+            placeholderIcon={Home}
+            badges={[
+              { label: isRTL ? 'للبيع' : 'For Sale', variant: 'default' },
+              { label: isRTL ? 'مميز' : 'Featured', variant: 'destructive' },
+            ]}
+            actions={[
+              { icon: Heart, label: isRTL ? 'مفضلة' : 'Favorite', onClick: () => {} },
+              { icon: Share2, label: isRTL ? 'مشاركة' : 'Share', onClick: () => {} },
+            ]}
+            stats={[
+              { icon: Bed, value: 5, label: isRTL ? 'غرف النوم' : 'Bedrooms' },
+              { icon: Bath, value: 6, label: isRTL ? 'الحمامات' : 'Bathrooms' },
+              { icon: Square, value: '4,500 sqft', label: isRTL ? 'المساحة' : 'Area' },
+            ]}
+            tags={[
+              { label: isRTL ? 'مسبح خاص' : 'Private Pool' },
+              { label: isRTL ? 'حديقة' : 'Garden' },
+              { label: isRTL ? 'منزل ذكي' : 'Smart Home' },
+              { label: isRTL ? 'موقف سيارات' : 'Parking' },
+              { label: isRTL ? 'أمن' : 'Security' },
+            ]}
+            typeBadge={isRTL ? 'فيلا' : 'Villa'}
+            featured={true}
+          />
+        </div>
+      </ComponentShowcase>
 
-        <Separator className="my-12" />
+      <CodeBlock code={realEstateCode} language="tsx" />
 
-        {/* Accessibility */}
-        <section className="mb-12">
-          <h2 className="text-2xl font-bold mb-4">Accessibility</h2>
-          <ul className="list-disc list-inside space-y-2 text-muted-foreground">
-            <li>All action buttons include proper aria-labels</li>
-            <li>Card is keyboard navigable when onClick is provided</li>
-            <li>Stats include title attributes for screen readers</li>
-            <li>Proper color contrast for all text elements</li>
-            <li>Focus states for interactive elements</li>
-            <li>RTL support for all text and layouts</li>
-          </ul>
-        </section>
-      </main>
+      {/* E-commerce Example */}
+      <ComponentShowcase
+        title={isRTL ? 'منتج تجارة إلكترونية' : 'E-commerce Product'}
+        description={
+          isRTL
+            ? 'رائع لبطاقات المنتجات مع التقييمات وشارات التخفيض'
+            : 'Great for product cards with ratings and sale badges'
+        }
+      >
+        <div className="max-w-sm mx-auto">
+          <ListingCard
+            title={isRTL ? 'سماعات لاسلكية متميزة' : 'Premium Wireless Headphones'}
+            subtitle={isRTL ? 'اسم العلامة التجارية' : 'Brand Name'}
+            description={
+              isRTL
+                ? 'سماعات لاسلكية عالية الجودة مع إلغاء الضوضاء'
+                : 'High-quality wireless headphones with noise cancellation'
+            }
+            price="$299.99"
+            placeholderIcon={Package}
+            badges={[
+              { label: isRTL ? 'الأكثر مبيعاً' : 'Best Seller', variant: 'default' },
+              { label: isRTL ? 'خصم 20%' : '20% Off', variant: 'destructive' },
+            ]}
+            actions={[{ icon: Heart, label: isRTL ? 'مفضلة' : 'Wishlist', onClick: () => {} }]}
+            stats={[
+              { icon: Star, value: '4.8', label: isRTL ? 'التقييم' : 'Rating' },
+              { icon: Package, value: '234', label: isRTL ? 'مباع' : 'Sold' },
+            ]}
+            tags={[
+              { label: isRTL ? 'إلغاء الضوضاء' : 'Noise Cancelling' },
+              { label: isRTL ? 'لاسلكي' : 'Wireless' },
+              { label: isRTL ? 'شحن سريع' : 'Fast Charging' },
+            ]}
+            ctaText={isRTL ? 'أضف إلى السلة' : 'Add to Cart'}
+            onCtaClick={() => {}}
+            imageAspect="square"
+          />
+        </div>
+      </ComponentShowcase>
+
+      <CodeBlock code={ecommerceCode} language="tsx" />
+
+      {/* Job Listing Example */}
+      <ComponentShowcase
+        title={isRTL ? 'قائمة وظائف' : 'Job Listing'}
+        description={
+          isRTL
+            ? 'مثالي للوحات الوظائف مع تفاصيل المنصب ونطاق الراتب'
+            : 'Ideal for job boards with position details and salary range'
+        }
+      >
+        <div className="max-w-sm mx-auto">
+          <ListingCard
+            title={isRTL ? 'مطور واجهة أمامية أول' : 'Senior Frontend Developer'}
+            subtitle={
+              <>
+                <MapPin className="h-3 w-3 inline me-1" />
+                {isRTL ? 'دبي، الإمارات' : 'Dubai, UAE'}
+              </>
+            }
+            description={
+              isRTL
+                ? 'انضم إلى فريقنا لبناء تطبيقات ويب متطورة'
+                : 'Join our team to build cutting-edge web applications'
+            }
+            price={isRTL ? '15,000 - 20,000 د.إ/شهرياً' : '15,000 - 20,000 AED/month'}
+            placeholderIcon={Briefcase}
+            badges={[
+              { label: isRTL ? 'دوام كامل' : 'Full Time', variant: 'default' },
+              { label: isRTL ? 'عن بعد' : 'Remote OK', variant: 'secondary' },
+            ]}
+            stats={[{ icon: Clock, value: isRTL ? 'نُشر قبل يومين' : 'Posted 2 days ago' }]}
+            tags={[
+              { label: 'React' },
+              { label: 'TypeScript' },
+              { label: 'Next.js' },
+            ]}
+            typeBadge={isRTL ? 'تقني' : 'Tech'}
+            ctaText={isRTL ? 'تقدم الآن' : 'Apply Now'}
+            onCtaClick={() => {}}
+          />
+        </div>
+      </ComponentShowcase>
+
+      <CodeBlock code={jobListingCode} language="tsx" />
+
+      {/* Use Cases */}
+      <div className="space-y-4">
+        <h2 className="text-2xl font-bold">{isRTL ? 'حالات الاستخدام' : 'Use Cases'}</h2>
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {[
+            { icon: '🏠', label: isRTL ? 'العقارات' : 'Real Estate' },
+            { icon: '🛍️', label: isRTL ? 'التجارة الإلكترونية' : 'E-commerce' },
+            { icon: '💼', label: isRTL ? 'لوحات الوظائف' : 'Job Boards' },
+            { icon: '📝', label: isRTL ? 'المدونات' : 'Blog' },
+            { icon: '🏪', label: isRTL ? 'السوق' : 'Marketplace' },
+            { icon: '🎨', label: isRTL ? 'المحفظة' : 'Portfolio' },
+          ].map((useCase, idx) => (
+            <Card key={idx} className="p-4">
+              <div className="text-2xl mb-2">{useCase.icon}</div>
+              <p className="font-medium">{useCase.label}</p>
+            </Card>
+          ))}
+        </div>
+      </div>
+
+      {/* Type Definitions */}
+      <div className="space-y-4">
+        <h2 className="text-2xl font-bold">{isRTL ? 'تعريفات الأنواع' : 'Type Definitions'}</h2>
+        <CodeBlock code={typeDefinitions} language="typescript" />
+      </div>
+
+      {/* API Reference */}
+      <div className="space-y-4">
+        <h2 className="text-2xl font-bold">{isRTL ? 'مرجع API' : 'API Reference'}</h2>
+        <PropsTable props={listingCardProps} />
+      </div>
     </div>
   )
 }
