@@ -40,6 +40,7 @@ import {
   Palette,
   Binary,
   Sidebar,
+  LayoutGrid,
 } from 'lucide-react'
 
 const componentCategories = [
@@ -77,6 +78,7 @@ const componentCategories = [
       { name: 'Table', icon: Layers, href: '/components/table', status: 'ready' },
       { name: 'DataTable', icon: TableIcon, href: '/components/data-table', status: 'ready' },
       { name: 'Stats Card', icon: BarChart3, href: '/components/stats-card', status: 'ready' },
+      { name: 'Listing Card', icon: LayoutGrid, href: '/components/listing-card', status: 'ready' },
       { name: 'Command', icon: Menu, href: '/components/command', status: 'ready' },
     ],
   },
@@ -180,8 +182,8 @@ export default function ComponentsPage() {
         <div className="max-w-3xl mb-12">
           <h1 className="text-4xl font-bold tracking-tight mb-4">Components</h1>
           <p className="text-xl text-muted-foreground mb-6">
-            54 beautifully designed components built with Radix UI and Tailwind CSS.
-            46 production-ready, 8 coming soon. Full RTL support, accessible, and customizable.
+            55 beautifully designed components built with Radix UI and Tailwind CSS.
+            47 production-ready, 8 coming soon. Full RTL support, accessible, and customizable.
           </p>
 
           {/* Live Preview */}
