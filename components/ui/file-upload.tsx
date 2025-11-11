@@ -96,10 +96,12 @@ export const FileUpload = React.forwardRef<HTMLInputElement, FileUploadProps>(
     }
     const t = text[locale]
 
-    // Sync with external value
+    // Sync with external value only on mount
     React.useEffect(() => {
-      setFiles(value as FileWithPreview[])
-    }, [value])
+      if (value.length > 0) {
+        setFiles(value as FileWithPreview[])
+      }
+    }, []) // Empty dependency array - only run on mount
 
     React.useImperativeHandle(ref, () => inputRef.current as HTMLInputElement)
 
