@@ -293,20 +293,17 @@ export default function ListingCardPage() {
         {/* Basic Usage */}
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-4">Basic Usage</h2>
-          <ComponentShowcase
-            code={basicUsageCode}
-            preview={
-              <div className="max-w-sm">
-                <ListingCard
-                  title="Modern Apartment"
-                  subtitle="Downtown Dubai"
-                  description="Beautiful 2-bedroom apartment with stunning views"
-                  price="1,200,000 AED"
-                  placeholderIcon={Home}
-                />
-              </div>
-            }
-          />
+          <ComponentShowcase code={basicUsageCode}>
+            <div className="max-w-sm">
+              <ListingCard
+                title="Modern Apartment"
+                subtitle="Downtown Dubai"
+                description="Beautiful 2-bedroom apartment with stunning views"
+                price="1,200,000 AED"
+                placeholderIcon={Home}
+              />
+            </div>
+          </ComponentShowcase>
         </section>
 
         <Separator className="my-12" />
@@ -318,47 +315,44 @@ export default function ListingCardPage() {
             Perfect for property listings with location, stats (bedrooms, bathrooms), amenities, and
             action buttons.
           </p>
-          <ComponentShowcase
-            code={realEstateCode}
-            preview={
-              <div className="max-w-sm">
-                <ListingCard
-                  title="Luxury Villa in Dubai Hills"
-                  subtitle={
-                    <>
-                      <MapPin className="h-3 w-3 inline me-1" />
-                      Dubai Hills Estate, Dubai
-                    </>
-                  }
-                  description="Stunning 5-bedroom villa with private pool and garden"
-                  price="8,500,000 AED"
-                  placeholderIcon={Home}
-                  badges={[
-                    { label: 'For Sale', variant: 'default' },
-                    { label: 'Featured', variant: 'destructive' },
-                  ]}
-                  actions={[
-                    { icon: Heart, label: 'Favorite', onClick: () => {} },
-                    { icon: Share2, label: 'Share', onClick: () => {} },
-                  ]}
-                  stats={[
-                    { icon: Bed, value: 5, label: 'Bedrooms' },
-                    { icon: Bath, value: 6, label: 'Bathrooms' },
-                    { icon: Square, value: '4,500 sqft', label: 'Area' },
-                  ]}
-                  tags={[
-                    { label: 'Private Pool' },
-                    { label: 'Garden' },
-                    { label: 'Smart Home' },
-                    { label: 'Parking' },
-                    { label: 'Security' },
-                  ]}
-                  typeBadge="Villa"
-                  featured={true}
-                />
-              </div>
-            }
-          />
+          <ComponentShowcase code={realEstateCode}>
+            <div className="max-w-sm">
+              <ListingCard
+                title="Luxury Villa in Dubai Hills"
+                subtitle={
+                  <>
+                    <MapPin className="h-3 w-3 inline me-1" />
+                    Dubai Hills Estate, Dubai
+                  </>
+                }
+                description="Stunning 5-bedroom villa with private pool and garden"
+                price="8,500,000 AED"
+                placeholderIcon={Home}
+                badges={[
+                  { label: 'For Sale', variant: 'default' },
+                  { label: 'Featured', variant: 'destructive' },
+                ]}
+                actions={[
+                  { icon: Heart, label: 'Favorite', onClick: () => {} },
+                  { icon: Share2, label: 'Share', onClick: () => {} },
+                ]}
+                stats={[
+                  { icon: Bed, value: 5, label: 'Bedrooms' },
+                  { icon: Bath, value: 6, label: 'Bathrooms' },
+                  { icon: Square, value: '4,500 sqft', label: 'Area' },
+                ]}
+                tags={[
+                  { label: 'Private Pool' },
+                  { label: 'Garden' },
+                  { label: 'Smart Home' },
+                  { label: 'Parking' },
+                  { label: 'Security' },
+                ]}
+                typeBadge="Villa"
+                featured={true}
+              />
+            </div>
+          </ComponentShowcase>
         </section>
 
         <Separator className="my-12" />
@@ -369,37 +363,34 @@ export default function ListingCardPage() {
           <p className="text-muted-foreground mb-6">
             Great for product cards with ratings, sale badges, and add-to-cart functionality.
           </p>
-          <ComponentShowcase
-            code={ecommerceCode}
-            preview={
-              <div className="max-w-sm">
-                <ListingCard
-                  title="Premium Wireless Headphones"
-                  subtitle="Brand Name"
-                  description="High-quality wireless headphones with noise cancellation"
-                  price="$299.99"
-                  placeholderIcon={Package}
-                  badges={[
-                    { label: 'Best Seller', variant: 'default' },
-                    { label: '20% Off', variant: 'destructive' },
-                  ]}
-                  actions={[{ icon: Heart, label: 'Add to wishlist', onClick: () => {} }]}
-                  stats={[
-                    { icon: Star, value: '4.8', label: 'Rating' },
-                    { icon: Package, value: '234', label: 'Sold' },
-                  ]}
-                  tags={[
-                    { label: 'Noise Cancelling' },
-                    { label: 'Wireless' },
-                    { label: 'Fast Charging' },
-                  ]}
-                  ctaText="Add to Cart"
-                  onCtaClick={() => {}}
-                  imageAspect="square"
-                />
-              </div>
-            }
-          />
+          <ComponentShowcase code={ecommerceCode}>
+            <div className="max-w-sm">
+              <ListingCard
+                title="Premium Wireless Headphones"
+                subtitle="Brand Name"
+                description="High-quality wireless headphones with noise cancellation"
+                price="$299.99"
+                placeholderIcon={Package}
+                badges={[
+                  { label: 'Best Seller', variant: 'default' },
+                  { label: '20% Off', variant: 'destructive' },
+                ]}
+                actions={[{ icon: Heart, label: 'Add to wishlist', onClick: () => {} }]}
+                stats={[
+                  { icon: Star, value: '4.8', label: 'Rating' },
+                  { icon: Package, value: '234', label: 'Sold' },
+                ]}
+                tags={[
+                  { label: 'Noise Cancelling' },
+                  { label: 'Wireless' },
+                  { label: 'Fast Charging' },
+                ]}
+                ctaText="Add to Cart"
+                onCtaClick={() => {}}
+                imageAspect="square"
+              />
+            </div>
+          </ComponentShowcase>
         </section>
 
         <Separator className="my-12" />
@@ -410,41 +401,38 @@ export default function ListingCardPage() {
           <p className="text-muted-foreground mb-6">
             Ideal for job boards with position details, salary range, and required skills.
           </p>
-          <ComponentShowcase
-            code={jobListingCode}
-            preview={
-              <div className="max-w-sm">
-                <ListingCard
-                  title="Senior Frontend Developer"
-                  subtitle={
-                    <>
-                      <MapPin className="h-3 w-3 inline me-1" />
-                      Dubai, UAE
-                    </>
-                  }
-                  description="Join our team to build cutting-edge web applications"
-                  price="15,000 - 20,000 AED/month"
-                  placeholderIcon={Briefcase}
-                  badges={[
-                    { label: 'Full Time', variant: 'default' },
-                    { label: 'Remote OK', variant: 'secondary' },
-                  ]}
-                  stats={[
-                    { icon: Clock, value: 'Posted 2 days ago' },
-                    { icon: DollarSign, value: 'Competitive' },
-                  ]}
-                  tags={[
-                    { label: 'React' },
-                    { label: 'TypeScript' },
-                    { label: 'Next.js' },
-                  ]}
-                  typeBadge="Tech"
-                  ctaText="Apply Now"
-                  onCtaClick={() => {}}
-                />
-              </div>
-            }
-          />
+          <ComponentShowcase code={jobListingCode}>
+            <div className="max-w-sm">
+              <ListingCard
+                title="Senior Frontend Developer"
+                subtitle={
+                  <>
+                    <MapPin className="h-3 w-3 inline me-1" />
+                    Dubai, UAE
+                  </>
+                }
+                description="Join our team to build cutting-edge web applications"
+                price="15,000 - 20,000 AED/month"
+                placeholderIcon={Briefcase}
+                badges={[
+                  { label: 'Full Time', variant: 'default' },
+                  { label: 'Remote OK', variant: 'secondary' },
+                ]}
+                stats={[
+                  { icon: Clock, value: 'Posted 2 days ago' },
+                  { icon: DollarSign, value: 'Competitive' },
+                ]}
+                tags={[
+                  { label: 'React' },
+                  { label: 'TypeScript' },
+                  { label: 'Next.js' },
+                ]}
+                typeBadge="Tech"
+                ctaText="Apply Now"
+                onCtaClick={() => {}}
+              />
+            </div>
+          </ComponentShowcase>
         </section>
 
         <Separator className="my-12" />
