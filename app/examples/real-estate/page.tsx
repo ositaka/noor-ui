@@ -8,6 +8,7 @@ import { Badge } from '@/components/ui/badge'
 import { Input } from '@/components/ui/input'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Slider } from '@/components/ui/slider'
+import { ListingCard, type ListingCardBadge, type ListingCardAction, type ListingCardStat, type ListingCardTag } from '@/components/ui/listing-card'
 import {
   Select,
   SelectContent,
@@ -618,116 +619,94 @@ export default function RealEstatePage() {
         ) : (
           <>
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 mb-8">
-              {paginatedProperties.map((property) => (
-                <Link href={`/examples/real-estate/${property.id}`} key={property.id}>
-                  <Card className="overflow-hidden hover:shadow-lg transition-shadow h-full">
-                    {/* Property Image */}
-                    <div className="relative h-48 bg-muted">
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <Home className="h-16 w-16 text-muted-foreground/30" />
-                      </div>
-                      <div className="absolute top-3 start-3 flex gap-2">
-                        <Badge variant={property.status === 'sale' ? 'default' : 'secondary'}>
-                          {getStatusLabel(property.status)}
-                        </Badge>
-                        {property.featured && (
-                          <Badge variant="destructive">{locale === 'ar' ? 'مميز' : 'Featured'}</Badge>
-                        )}
-                        {property.furnished && (
-                          <Badge variant="outline" className="bg-background/90">
-                            {locale === 'ar' ? 'مفروش' : 'Furnished'}
-                          </Badge>
-                        )}
-                      </div>
-                      <div className="absolute top-3 end-3 flex gap-2">
-                        <Button
-                          size="icon"
-                          variant="secondary"
-                          className="h-8 w-8 rounded-full bg-white/90"
-                          onClick={(e) => {
-                            e.preventDefault()
-                            e.stopPropagation()
-                          }}
-                        >
-                          <Heart className="h-4 w-4" />
-                        </Button>
-                        <Button
-                          size="icon"
-                          variant="secondary"
-                          className="h-8 w-8 rounded-full bg-white/90"
-                          onClick={(e) => {
-                            e.preventDefault()
-                            e.stopPropagation()
-                          }}
-                        >
-                          <Share2 className="h-4 w-4" />
-                        </Button>
-                      </div>
-                    </div>
+              {paginatedProperties.map((property) => {
+                // Prepare badges
+                const badges: ListingCardBadge[] = [
+                  {
+                    label: getStatusLabel(property.status),
+                    variant: property.status === 'sale' ? 'default' : 'secondary',
+                  },
+                ]
+                if (property.featured) {
+                  badges.push({
+                    label: locale === 'ar' ? 'مميز' : 'Featured',
+                    variant: 'destructive',
+                  })
+                }
+                if (property.furnished) {
+                  badges.push({
+                    label: locale === 'ar' ? 'مفروش' : 'Furnished',
+                    variant: 'outline',
+                    className: 'bg-background/90',
+                  })
+                }
 
-                    <CardHeader>
-                      <div className="flex items-start justify-between gap-2 mb-2">
-                        <div className="flex-1">
-                          <CardTitle className="text-lg line-clamp-1">
-                            {locale === 'ar' ? property.titleAr : property.title}
-                          </CardTitle>
-                          <div className="flex items-center gap-1 text-sm text-muted-foreground mt-1">
-                            <MapPin className="h-3 w-3" />
-                            <span className="line-clamp-1">
-                              {locale === 'ar' ? property.locationAr : property.location}
-                            </span>
-                          </div>
-                        </div>
-                        <Badge variant="outline">{getPropertyTypeLabel(property.type)}</Badge>
-                      </div>
-                      <CardDescription className="line-clamp-2">
-                        {locale === 'ar' ? property.descriptionAr : property.description}
-                      </CardDescription>
-                    </CardHeader>
+                // Prepare actions
+                const actions: ListingCardAction[] = [
+                  {
+                    icon: Heart,
+                    label: locale === 'ar' ? 'إضافة للمفضلة' : 'Add to favorites',
+                    onClick: () => console.log('Favorite clicked'),
+                  },
+                  {
+                    icon: Share2,
+                    label: locale === 'ar' ? 'مشاركة' : 'Share',
+                    onClick: () => console.log('Share clicked'),
+                  },
+                ]
 
-                    <CardContent>
-                      {/* Property Details */}
-                      <div className="flex items-center gap-4 mb-4 text-sm text-muted-foreground">
-                        <div className="flex items-center gap-1">
-                          <Bed className="h-4 w-4" />
-                          <span>{property.bedrooms}</span>
-                        </div>
-                        <div className="flex items-center gap-1">
-                          <Bath className="h-4 w-4" />
-                          <span>{property.bathrooms}</span>
-                        </div>
-                        <div className="flex items-center gap-1">
-                          <Square className="h-4 w-4" />
-                          <span>
-                            {property.area.toLocaleString()} {locale === 'ar' ? 'قدم²' : 'sqft'}
-                          </span>
-                        </div>
-                      </div>
+                // Prepare stats
+                const stats: ListingCardStat[] = [
+                  {
+                    icon: Bed,
+                    value: property.bedrooms,
+                    label: locale === 'ar' ? 'غرف النوم' : 'Bedrooms',
+                  },
+                  {
+                    icon: Bath,
+                    value: property.bathrooms,
+                    label: locale === 'ar' ? 'الحمامات' : 'Bathrooms',
+                  },
+                  {
+                    icon: Square,
+                    value: `${property.area.toLocaleString()} ${locale === 'ar' ? 'قدم²' : 'sqft'}`,
+                    label: locale === 'ar' ? 'المساحة' : 'Area',
+                  },
+                ]
 
-                      {/* Amenities */}
-                      <div className="flex flex-wrap gap-1 mb-4">
-                        {(locale === 'ar' ? property.amenitiesAr : property.amenities).slice(0, 3).map((amenity, idx) => (
-                          <Badge key={idx} variant="secondary" className="text-xs">
-                            {amenity}
-                          </Badge>
-                        ))}
-                        {property.amenities.length > 3 && (
-                          <Badge variant="secondary" className="text-xs">
-                            +{property.amenities.length - 3}
-                          </Badge>
-                        )}
-                      </div>
+                // Prepare tags
+                const tags: ListingCardTag[] = (locale === 'ar' ? property.amenitiesAr : property.amenities).map(
+                  (amenity) => ({
+                    label: amenity,
+                    variant: 'secondary',
+                  })
+                )
 
-                      {/* Price & CTA */}
-                      <div className="flex items-center justify-between pt-4 border-t">
-                        <div>
-                          <div className="text-2xl font-bold">{formatPrice(property.price, property.status)}</div>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </Link>
-              ))}
+                return (
+                  <Link href={`/examples/real-estate/${property.id}`} key={property.id}>
+                    <ListingCard
+                      title={locale === 'ar' ? property.titleAr : property.title}
+                      subtitle={
+                        <>
+                          <MapPin className="h-3 w-3 inline me-1" />
+                          {locale === 'ar' ? property.locationAr : property.location}
+                        </>
+                      }
+                      description={locale === 'ar' ? property.descriptionAr : property.description}
+                      price={formatPrice(property.price, property.status)}
+                      placeholderIcon={Home}
+                      badges={badges}
+                      actions={actions}
+                      stats={stats}
+                      tags={tags}
+                      maxTags={3}
+                      typeBadge={getPropertyTypeLabel(property.type)}
+                      featured={property.featured}
+                      imageAspect="wide"
+                    />
+                  </Link>
+                )
+              })}
             </div>
 
             {/* Pagination */}
