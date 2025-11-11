@@ -16,6 +16,38 @@ Every component documentation page must include the following sections in this o
 8. **Best Practices** (Alert component with bulleted list - optional)
 9. **Accessibility** (Card with checkmarks)
 
+## Code Block Theme Standard
+
+**IMPORTANT: All code blocks ALWAYS use dark theme regardless of the app's light/dark mode.**
+
+### Why Dark Theme for Code Blocks?
+
+- Better syntax highlighting visibility
+- Reduced eye strain when reading code
+- Industry standard for documentation (GitHub, MDN, etc.)
+- Consistent experience across all themes
+
+### Implementation
+
+The `CodeBlock` component automatically uses the VS Code Dark Plus theme for all code examples. You don't need to do anything special - just use the component as normal:
+
+```tsx
+<CodeBlock code={exampleCode} language="tsx" collapsible />
+```
+
+The dark theme is applied automatically regardless of whether the user has light mode or dark mode enabled for the rest of the app.
+
+## Theme and System Preference
+
+The app respects the user's system preference by default:
+- `defaultTheme` is set to `"system"`
+- `enableSystem` is set to `true`
+- If the user's OS is in dark mode, the app will be dark
+- If the user's OS is in light mode, the app will be light
+- Users can override this preference using the theme toggle
+
+**Code blocks remain dark in both themes.**
+
 ## Page Structure Pattern
 
 **IMPORTANT: DO NOT use Tabs component for examples!** Use the pattern below.

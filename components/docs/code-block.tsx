@@ -6,7 +6,6 @@ import { cn, copyToClipboard } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
 import { Copy, Check, ChevronDown, ChevronUp } from 'lucide-react'
-import { useTheme } from 'next-themes'
 import { Skeleton } from '@/components/ui/skeleton'
 
 // Lazy load the heavy syntax highlighter (saves ~200-300KB from initial bundle)
@@ -21,12 +20,9 @@ const SyntaxHighlighter = dynamic(
   }
 )
 
-// Lazy load styles
+// Lazy load dark theme style (always use dark theme for code blocks)
 const loadStyles = () =>
-  import('react-syntax-highlighter/dist/esm/styles/prism').then((mod) => ({
-    vscDarkPlus: mod.vscDarkPlus,
-    vs: mod.vs,
-  }))
+  import('react-syntax-highlighter/dist/esm/styles/prism').then((mod) => mod.vscDarkPlus)
 
 interface CodeBlockProps {
   code: string
@@ -51,13 +47,12 @@ export function CodeBlock({
 }: CodeBlockProps) {
   const [copied, setCopied] = React.useState(false)
   const [collapsed, setCollapsed] = React.useState(defaultCollapsed)
-  const [styles, setStyles] = React.useState<any>(null)
-  const { theme } = useTheme()
+  const [darkTheme, setDarkTheme] = React.useState<any>(null)
 
-  // Load syntax highlighter styles on mount
+  // Load syntax highlighter dark theme on mount (always use dark theme for code blocks)
   React.useEffect(() => {
     if (!collapsed) {
-      loadStyles().then(setStyles)
+      loadStyles().then(setDarkTheme)
     }
   }, [collapsed])
 
@@ -68,12 +63,6 @@ export function CodeBlock({
       setTimeout(() => setCopied(false), 2000)
     }
   }
-
-  const syntaxTheme = styles
-    ? theme === 'dark'
-      ? styles.vscDarkPlus
-      : styles.vs
-    : undefined
 
   return (
     <Card className={cn('overflow-hidden', className)}>
@@ -132,12 +121,12 @@ export function CodeBlock({
       {!collapsed && (
         <CardContent className="p-0">
           <div className="overflow-x-auto">
-            {!styles ? (
+            {!darkTheme ? (
               <Skeleton className="h-32 w-full rounded-none" />
             ) : (
               <SyntaxHighlighter
                 language={language}
-                style={syntaxTheme}
+                style={darkTheme}
                 showLineNumbers={showLineNumbers}
                 wrapLines={highlightLines.length > 0}
                 lineProps={(lineNumber) => {
