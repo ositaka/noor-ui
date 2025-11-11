@@ -291,12 +291,14 @@ export default function Example() {
               <h3 className="text-lg font-semibold mb-4">Images Only</h3>
               <Card>
                 <CardContent className="p-6">
-                  <div className="w-full max-w-xl">
-                    <FileUpload
-                      accept="image/*"
-                      onChange={setFiles2}
-                      onUpload={(files) => console.log('Uploading images:', files)}
-                    />
+                  <div className="flex justify-center">
+                    <div className="w-full max-w-xl">
+                      <FileUpload
+                        accept="image/*"
+                        onChange={setFiles2}
+                        onUpload={(files) => console.log('Uploading images:', files)}
+                      />
+                    </div>
                   </div>
                 </CardContent>
               </Card>
@@ -310,13 +312,15 @@ export default function Example() {
               <h3 className="text-lg font-semibold mb-4">Multiple Files</h3>
               <Card>
                 <CardContent className="p-6">
-                  <div className="w-full max-w-xl">
-                    <FileUpload
-                      multiple
-                      maxFiles={5}
-                      onChange={setFiles3}
-                      onUpload={(files) => console.log('Uploading files:', files)}
-                    />
+                  <div className="flex justify-center">
+                    <div className="w-full max-w-xl">
+                      <FileUpload
+                        multiple
+                        maxFiles={5}
+                        onChange={setFiles3}
+                        onUpload={(files) => console.log('Uploading files:', files)}
+                      />
+                    </div>
                   </div>
                 </CardContent>
               </Card>
@@ -330,12 +334,14 @@ export default function Example() {
               <h3 className="text-lg font-semibold mb-4">Custom Size Limit</h3>
               <Card>
                 <CardContent className="p-6">
-                  <div className="w-full max-w-xl">
-                    <FileUpload
-                      maxSize={2 * 1024 * 1024}
-                      onChange={() => {}}
-                      onUpload={(files) => console.log('Uploading files:', files)}
-                    />
+                  <div className="flex justify-center">
+                    <div className="w-full max-w-xl">
+                      <FileUpload
+                        maxSize={2 * 1024 * 1024}
+                        onChange={() => {}}
+                        onUpload={(files) => console.log('Uploading files:', files)}
+                      />
+                    </div>
                   </div>
                 </CardContent>
               </Card>

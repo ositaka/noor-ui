@@ -269,17 +269,18 @@ export default function Example() {
               <h3 className="text-lg font-semibold mb-4">With Avatar</h3>
               <Card>
                 <CardContent className="p-6">
-                  <UserMenu
-                    align="center"
-                    user={{
-                      name: 'Sarah Johnson',
-                      email: 'sarah@example.com',
-                      image: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah',
-                    }}
-                    onProfileClick={() => handleAction('Profile')}
-                    onSettingsClick={() => handleAction('Settings')}
-                    onLogout={() => handleAction('Logout')}
-                  />
+                  <div className="flex justify-center">
+                    <UserMenu
+                      user={{
+                        name: 'Sarah Johnson',
+                        email: 'sarah@example.com',
+                        image: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah',
+                      }}
+                      onProfileClick={() => handleAction('Profile')}
+                      onSettingsClick={() => handleAction('Settings')}
+                      onLogout={() => handleAction('Logout')}
+                    />
+                  </div>
                 </CardContent>
               </Card>
               <div className="mt-4">
@@ -292,14 +293,15 @@ export default function Example() {
               <h3 className="text-lg font-semibold mb-4">Minimal</h3>
               <Card>
                 <CardContent className="p-6">
-                  <UserMenu
-                    align="center"
-                    user={{
-                      name: 'John Doe',
-                      email: 'john@example.com',
-                    }}
-                    onLogout={() => handleAction('Logout')}
-                  />
+                  <div className="flex justify-center">
+                    <UserMenu
+                      user={{
+                        name: 'John Doe',
+                        email: 'john@example.com',
+                      }}
+                      onLogout={() => handleAction('Logout')}
+                    />
+                  </div>
                 </CardContent>
               </Card>
               <div className="mt-4">
@@ -312,20 +314,21 @@ export default function Example() {
               <h3 className="text-lg font-semibold mb-4">All Options</h3>
               <Card>
                 <CardContent className="p-6">
-                  <UserMenu
-                    align="center"
-                    user={{
-                      name: 'Fatima Al-Zahra',
-                      email: 'fatima@example.com',
-                      image: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Fatima',
-                    }}
-                    onProfileClick={() => handleAction('Profile')}
-                    onSettingsClick={() => handleAction('Settings')}
-                    onBillingClick={() => handleAction('Billing')}
-                    onTeamClick={() => handleAction('Team')}
-                    onSupportClick={() => handleAction('Support')}
-                    onLogout={() => handleAction('Logout')}
-                  />
+                  <div className="flex justify-center">
+                    <UserMenu
+                      user={{
+                        name: 'Fatima Al-Zahra',
+                        email: 'fatima@example.com',
+                        image: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Fatima',
+                      }}
+                      onProfileClick={() => handleAction('Profile')}
+                      onSettingsClick={() => handleAction('Settings')}
+                      onBillingClick={() => handleAction('Billing')}
+                      onTeamClick={() => handleAction('Team')}
+                      onSupportClick={() => handleAction('Support')}
+                      onLogout={() => handleAction('Logout')}
+                    />
+                  </div>
                 </CardContent>
               </Card>
               <div className="mt-4">
