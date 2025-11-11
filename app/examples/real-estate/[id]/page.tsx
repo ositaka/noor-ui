@@ -2,7 +2,6 @@
 
 import * as React from 'react'
 import Link from 'next/link'
-import { use } from 'react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
@@ -167,16 +166,15 @@ const getAllProperties = (): Property[] => {
   return properties
 }
 
-export default function PropertyDetailPage({ params }: { params: Promise<{ id: string }> }) {
-  const resolvedParams = use(params)
+export default function PropertyDetailPage({ params }: { params: { id: string } }) {
   const { locale } = useDirection()
   const [property, setProperty] = React.useState<Property | null>(null)
 
   React.useEffect(() => {
     const allProperties = getAllProperties()
-    const found = allProperties.find((p) => p.id === resolvedParams.id)
+    const found = allProperties.find((p) => p.id === params.id)
     setProperty(found || null)
-  }, [resolvedParams.id])
+  }, [params.id])
 
   if (!property) {
     return (
