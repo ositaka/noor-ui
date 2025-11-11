@@ -36,6 +36,7 @@
     "@radix-ui/react-tabs": "^1.1.13",
     "@radix-ui/react-toast": "^1.1.5",
     "@radix-ui/react-tooltip": "^1.0.7",
+    "@supabase/supabase-js": "^2.81.0",
     "@tiptap/extension-color": "^3.10.5",
     "@tiptap/extension-placeholder": "^3.10.5",
     "@tiptap/extension-text-align": "^3.10.5",
