@@ -89,7 +89,10 @@ export default function RichTextEditorPage() {
         <section className="mb-16">
           <h2 className="text-2xl font-bold tracking-tight mb-6">Preview</h2>
           <ComponentShowcase
-            code={`import { RichTextEditor } from '@/components/ui/rich-text-editor'
+            code={`'use client'
+
+import * as React from 'react'
+import { RichTextEditor } from '@/components/ui/rich-text-editor'
 
 export default function Example() {
   const [content, setContent] = React.useState('')
@@ -184,7 +187,10 @@ export default function Example() {
             <TabsContent value="with-content" className="space-y-4">
               <p className="text-muted-foreground">Editor with pre-populated content.</p>
               <ComponentShowcase
-                code={`import { RichTextEditor } from '@/components/ui/rich-text-editor'
+                code={`'use client'
+
+import * as React from 'react'
+import { RichTextEditor } from '@/components/ui/rich-text-editor'
 
 export default function Example() {
   const [content, setContent] = React.useState(
@@ -213,7 +219,10 @@ export default function Example() {
             <TabsContent value="arabic" className="space-y-4">
               <p className="text-muted-foreground">Editor with Arabic content and RTL text direction.</p>
               <ComponentShowcase
-                code={`import { RichTextEditor } from '@/components/ui/rich-text-editor'
+                code={`'use client'
+
+import * as React from 'react'
+import { RichTextEditor } from '@/components/ui/rich-text-editor'
 
 export default function Example() {
   const [content, setContent] = React.useState(
@@ -244,7 +253,9 @@ export default function Example() {
             <TabsContent value="read-only" className="space-y-4">
               <p className="text-muted-foreground">Display content in read-only mode without toolbar.</p>
               <ComponentShowcase
-                code={`import { RichTextEditor } from '@/components/ui/rich-text-editor'
+                code={`'use client'
+
+import { RichTextEditor } from '@/components/ui/rich-text-editor'
 
 export default function Example() {
   return (
@@ -268,7 +279,10 @@ export default function Example() {
             <TabsContent value="custom-height" className="space-y-4">
               <p className="text-muted-foreground">Editor with custom minimum height.</p>
               <ComponentShowcase
-                code={`import { RichTextEditor } from '@/components/ui/rich-text-editor'
+                code={`'use client'
+
+import * as React from 'react'
+import { RichTextEditor } from '@/components/ui/rich-text-editor'
 
 export default function Example() {
   const [content, setContent] = React.useState('')

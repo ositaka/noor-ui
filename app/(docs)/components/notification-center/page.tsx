@@ -171,7 +171,10 @@ export default function NotificationCenterPage() {
         <section className="mb-16">
           <h2 className="text-2xl font-bold tracking-tight mb-6">Preview</h2>
           <ComponentShowcase
-            code={`import { NotificationCenter } from '@/components/ui/notification-center'
+            code={`'use client'
+
+import * as React from 'react'
+import { NotificationCenter } from '@/components/ui/notification-center'
 
 export default function Example() {
   const [notifications, setNotifications] = React.useState([
@@ -287,7 +290,10 @@ export default function Example() {
             <TabsContent value="with-avatars" className="space-y-4">
               <p className="text-muted-foreground">Notifications with user avatars.</p>
               <ComponentShowcase
-                code={`import { NotificationCenter } from '@/components/ui/notification-center'
+                code={`'use client'
+
+import * as React from 'react'
+import { NotificationCenter } from '@/components/ui/notification-center'
 
 export default function Example() {
   const notifications = [
@@ -323,7 +329,9 @@ export default function Example() {
             <TabsContent value="empty-state" className="space-y-4">
               <p className="text-muted-foreground">Empty state when no notifications.</p>
               <ComponentShowcase
-                code={`import { NotificationCenter } from '@/components/ui/notification-center'
+                code={`'use client'
+
+import { NotificationCenter } from '@/components/ui/notification-center'
 
 export default function Example() {
   return <NotificationCenter notifications={[]} />

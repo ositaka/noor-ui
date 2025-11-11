@@ -108,7 +108,10 @@ export default function FileUploadPage() {
         <section className="mb-16">
           <h2 className="text-2xl font-bold tracking-tight mb-6">Preview</h2>
           <ComponentShowcase
-            code={`import { FileUpload } from '@/components/ui/file-upload'
+            code={`'use client'
+
+import * as React from 'react'
+import { FileUpload } from '@/components/ui/file-upload'
 
 export default function Example() {
   const [files, setFiles] = React.useState<File[]>([])
@@ -201,7 +204,10 @@ export default function Example() {
             <TabsContent value="images-only" className="space-y-4">
               <p className="text-muted-foreground">Restrict uploads to image files only.</p>
               <ComponentShowcase
-                code={`import { FileUpload } from '@/components/ui/file-upload'
+                code={`'use client'
+
+import * as React from 'react'
+import { FileUpload } from '@/components/ui/file-upload'
 
 export default function Example() {
   const [files, setFiles] = React.useState<File[]>([])
@@ -233,7 +239,10 @@ export default function Example() {
             <TabsContent value="multiple" className="space-y-4">
               <p className="text-muted-foreground">Allow uploading multiple files (up to 5).</p>
               <ComponentShowcase
-                code={`import { FileUpload } from '@/components/ui/file-upload'
+                code={`'use client'
+
+import * as React from 'react'
+import { FileUpload } from '@/components/ui/file-upload'
 
 export default function Example() {
   const [files, setFiles] = React.useState<File[]>([])
@@ -267,7 +276,10 @@ export default function Example() {
             <TabsContent value="custom-size" className="space-y-4">
               <p className="text-muted-foreground">Set a custom maximum file size (2MB).</p>
               <ComponentShowcase
-                code={`import { FileUpload } from '@/components/ui/file-upload'
+                code={`'use client'
+
+import * as React from 'react'
+import { FileUpload } from '@/components/ui/file-upload'
 
 export default function Example() {
   const [files, setFiles] = React.useState<File[]>([])

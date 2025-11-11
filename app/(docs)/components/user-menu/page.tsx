@@ -116,7 +116,9 @@ export default function UserMenuPage() {
         <section className="mb-16">
           <h2 className="text-2xl font-bold tracking-tight mb-6">Preview</h2>
           <ComponentShowcase
-            code={`import { UserMenu } from '@/components/ui/user-menu'
+            code={`'use client'
+
+import { UserMenu } from '@/components/ui/user-menu'
 
 export default function Example() {
   return (
@@ -215,7 +217,9 @@ export default function Example() {
             <TabsContent value="with-avatar" className="space-y-4">
               <p className="text-muted-foreground">User menu with avatar image.</p>
               <ComponentShowcase
-                code={`import { UserMenu } from '@/components/ui/user-menu'
+                code={`'use client'
+
+import { UserMenu } from '@/components/ui/user-menu'
 
 export default function Example() {
   return (
@@ -252,7 +256,9 @@ export default function Example() {
                 Minimal user menu with only logout option.
               </p>
               <ComponentShowcase
-                code={`import { UserMenu } from '@/components/ui/user-menu'
+                code={`'use client'
+
+import { UserMenu } from '@/components/ui/user-menu'
 
 export default function Example() {
   return (
@@ -283,7 +289,9 @@ export default function Example() {
                 User menu with all available menu items.
               </p>
               <ComponentShowcase
-                code={`import { UserMenu } from '@/components/ui/user-menu'
+                code={`'use client'
+
+import { UserMenu } from '@/components/ui/user-menu'
 
 export default function Example() {
   return (
