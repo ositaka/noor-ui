@@ -272,51 +272,51 @@ export default function Example() {
           <h2 className="text-2xl font-bold tracking-tight mb-6">Features</h2>
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             <Card>
-              <CardHeader>
-                <CardTitle className="text-lg">Unread Badge</CardTitle>
-              </CardHeader>
-              <CardContent className="text-sm text-muted-foreground">
-                Badge showing unread count on the bell icon
+              <CardContent className="p-6">
+                <h3 className="font-semibold mb-2">Unread Badge</h3>
+                <p className="text-sm text-muted-foreground">
+                  Badge showing unread count on the bell icon
+                </p>
               </CardContent>
             </Card>
             <Card>
-              <CardHeader>
-                <CardTitle className="text-lg">Relative Time</CardTitle>
-              </CardHeader>
-              <CardContent className="text-sm text-muted-foreground">
-                Smart time display (5m ago, 2h ago, etc.) in both languages
+              <CardContent className="p-6">
+                <h3 className="font-semibold mb-2">Relative Time</h3>
+                <p className="text-sm text-muted-foreground">
+                  Smart time display (5m ago, 2h ago, etc.) in both languages
+                </p>
               </CardContent>
             </Card>
             <Card>
-              <CardHeader>
-                <CardTitle className="text-lg">Icons & Avatars</CardTitle>
-              </CardHeader>
-              <CardContent className="text-sm text-muted-foreground">
-                Support for custom icons or user avatars
+              <CardContent className="p-6">
+                <h3 className="font-semibold mb-2">Icons & Avatars</h3>
+                <p className="text-sm text-muted-foreground">
+                  Support for custom icons or user avatars
+                </p>
               </CardContent>
             </Card>
             <Card>
-              <CardHeader>
-                <CardTitle className="text-lg">Mark as Read</CardTitle>
-              </CardHeader>
-              <CardContent className="text-sm text-muted-foreground">
-                Individual or bulk mark as read functionality
+              <CardContent className="p-6">
+                <h3 className="font-semibold mb-2">Mark as Read</h3>
+                <p className="text-sm text-muted-foreground">
+                  Individual or bulk mark as read functionality
+                </p>
               </CardContent>
             </Card>
             <Card>
-              <CardHeader>
-                <CardTitle className="text-lg">Remove Notifications</CardTitle>
-              </CardHeader>
-              <CardContent className="text-sm text-muted-foreground">
-                Hover to reveal remove button on each notification
+              <CardContent className="p-6">
+                <h3 className="font-semibold mb-2">Remove Notifications</h3>
+                <p className="text-sm text-muted-foreground">
+                  Hover to reveal remove button on each notification
+                </p>
               </CardContent>
             </Card>
             <Card>
-              <CardHeader>
-                <CardTitle className="text-lg">Bilingual</CardTitle>
-              </CardHeader>
-              <CardContent className="text-sm text-muted-foreground">
-                Full Arabic support with proper time formatting
+              <CardContent className="p-6">
+                <h3 className="font-semibold mb-2">Bilingual</h3>
+                <p className="text-sm text-muted-foreground">
+                  Full Arabic support with proper time formatting
+                </p>
               </CardContent>
             </Card>
           </div>
@@ -332,12 +332,14 @@ export default function Example() {
               <h3 className="text-lg font-semibold mb-4">With Avatars</h3>
               <Card>
                 <CardContent className="p-6">
-                  <NotificationCenter
-                    notifications={notifications2}
-                    onMarkAsRead={(id) => handleMarkAsRead(id, setNotifications2)}
-                    onMarkAllAsRead={() => handleMarkAllAsRead(setNotifications2)}
-                    onRemove={(id) => handleRemove(id, setNotifications2)}
-                  />
+                  <div className="flex justify-center">
+                    <NotificationCenter
+                      notifications={notifications2}
+                      onMarkAsRead={(id) => handleMarkAsRead(id, setNotifications2)}
+                      onMarkAllAsRead={() => handleMarkAllAsRead(setNotifications2)}
+                      onRemove={(id) => handleRemove(id, setNotifications2)}
+                    />
+                  </div>
                 </CardContent>
               </Card>
               <div className="mt-4">
@@ -350,7 +352,9 @@ export default function Example() {
               <h3 className="text-lg font-semibold mb-4">Empty State</h3>
               <Card>
                 <CardContent className="p-6">
-                  <NotificationCenter notifications={[]} />
+                  <div className="flex justify-center">
+                    <NotificationCenter notifications={[]} />
+                  </div>
                 </CardContent>
               </Card>
               <div className="mt-4">

@@ -209,51 +209,51 @@ export default function Example() {
           <h2 className="text-2xl font-bold tracking-tight mb-6">Features</h2>
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             <Card>
-              <CardHeader>
-                <CardTitle className="text-lg">Avatar Display</CardTitle>
-              </CardHeader>
-              <CardContent className="text-sm text-muted-foreground">
-                Shows user avatar with automatic fallback to initials
+              <CardContent className="p-6">
+                <h3 className="font-semibold mb-2">Avatar Display</h3>
+                <p className="text-sm text-muted-foreground">
+                  Shows user avatar with automatic fallback to initials
+                </p>
               </CardContent>
             </Card>
             <Card>
-              <CardHeader>
-                <CardTitle className="text-lg">User Info</CardTitle>
-              </CardHeader>
-              <CardContent className="text-sm text-muted-foreground">
-                Displays user name and email in the dropdown
+              <CardContent className="p-6">
+                <h3 className="font-semibold mb-2">User Info</h3>
+                <p className="text-sm text-muted-foreground">
+                  Displays user name and email in the dropdown
+                </p>
               </CardContent>
             </Card>
             <Card>
-              <CardHeader>
-                <CardTitle className="text-lg">Flexible Actions</CardTitle>
-              </CardHeader>
-              <CardContent className="text-sm text-muted-foreground">
-                Customizable menu items with callback handlers
+              <CardContent className="p-6">
+                <h3 className="font-semibold mb-2">Flexible Actions</h3>
+                <p className="text-sm text-muted-foreground">
+                  Customizable menu items with callback handlers
+                </p>
               </CardContent>
             </Card>
             <Card>
-              <CardHeader>
-                <CardTitle className="text-lg">RTL Support</CardTitle>
-              </CardHeader>
-              <CardContent className="text-sm text-muted-foreground">
-                Automatically adapts icons and layout for RTL
+              <CardContent className="p-6">
+                <h3 className="font-semibold mb-2">RTL Support</h3>
+                <p className="text-sm text-muted-foreground">
+                  Automatically adapts icons and layout for RTL
+                </p>
               </CardContent>
             </Card>
             <Card>
-              <CardHeader>
-                <CardTitle className="text-lg">Keyboard Navigation</CardTitle>
-              </CardHeader>
-              <CardContent className="text-sm text-muted-foreground">
-                Full keyboard support with arrow keys
+              <CardContent className="p-6">
+                <h3 className="font-semibold mb-2">Keyboard Navigation</h3>
+                <p className="text-sm text-muted-foreground">
+                  Full keyboard support with arrow keys
+                </p>
               </CardContent>
             </Card>
             <Card>
-              <CardHeader>
-                <CardTitle className="text-lg">Accessible</CardTitle>
-              </CardHeader>
-              <CardContent className="text-sm text-muted-foreground">
-                ARIA labels and screen reader support
+              <CardContent className="p-6">
+                <h3 className="font-semibold mb-2">Accessible</h3>
+                <p className="text-sm text-muted-foreground">
+                  ARIA labels and screen reader support
+                </p>
               </CardContent>
             </Card>
           </div>
@@ -270,6 +270,7 @@ export default function Example() {
               <Card>
                 <CardContent className="p-6">
                   <UserMenu
+                    align="center"
                     user={{
                       name: 'Sarah Johnson',
                       email: 'sarah@example.com',
@@ -292,6 +293,7 @@ export default function Example() {
               <Card>
                 <CardContent className="p-6">
                   <UserMenu
+                    align="center"
                     user={{
                       name: 'John Doe',
                       email: 'john@example.com',
@@ -311,6 +313,7 @@ export default function Example() {
               <Card>
                 <CardContent className="p-6">
                   <UserMenu
+                    align="center"
                     user={{
                       name: 'Fatima Al-Zahra',
                       email: 'fatima@example.com',

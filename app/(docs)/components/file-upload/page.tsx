@@ -231,51 +231,51 @@ export default function Example() {
           <h2 className="text-2xl font-bold tracking-tight mb-6">Features</h2>
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             <Card>
-              <CardHeader>
-                <CardTitle className="text-lg">Drag & Drop</CardTitle>
-              </CardHeader>
-              <CardContent className="text-sm text-muted-foreground">
-                Intuitive drag-and-drop interface with visual feedback
+              <CardContent className="p-6">
+                <h3 className="font-semibold mb-2">Drag & Drop</h3>
+                <p className="text-sm text-muted-foreground">
+                  Intuitive drag-and-drop interface with visual feedback
+                </p>
               </CardContent>
             </Card>
             <Card>
-              <CardHeader>
-                <CardTitle className="text-lg">File Validation</CardTitle>
-              </CardHeader>
-              <CardContent className="text-sm text-muted-foreground">
-                Validate file types and sizes with clear error messages
+              <CardContent className="p-6">
+                <h3 className="font-semibold mb-2">File Validation</h3>
+                <p className="text-sm text-muted-foreground">
+                  Validate file types and sizes with clear error messages
+                </p>
               </CardContent>
             </Card>
             <Card>
-              <CardHeader>
-                <CardTitle className="text-lg">Image Previews</CardTitle>
-              </CardHeader>
-              <CardContent className="text-sm text-muted-foreground">
-                Automatic image thumbnails for visual confirmation
+              <CardContent className="p-6">
+                <h3 className="font-semibold mb-2">Image Previews</h3>
+                <p className="text-sm text-muted-foreground">
+                  Automatic image thumbnails for visual confirmation
+                </p>
               </CardContent>
             </Card>
             <Card>
-              <CardHeader>
-                <CardTitle className="text-lg">Multiple Files</CardTitle>
-              </CardHeader>
-              <CardContent className="text-sm text-muted-foreground">
-                Support for single or multiple file uploads
+              <CardContent className="p-6">
+                <h3 className="font-semibold mb-2">Multiple Files</h3>
+                <p className="text-sm text-muted-foreground">
+                  Support for single or multiple file uploads
+                </p>
               </CardContent>
             </Card>
             <Card>
-              <CardHeader>
-                <CardTitle className="text-lg">File Icons</CardTitle>
-              </CardHeader>
-              <CardContent className="text-sm text-muted-foreground">
-                Contextual icons for different file types
+              <CardContent className="p-6">
+                <h3 className="font-semibold mb-2">File Icons</h3>
+                <p className="text-sm text-muted-foreground">
+                  Contextual icons for different file types
+                </p>
               </CardContent>
             </Card>
             <Card>
-              <CardHeader>
-                <CardTitle className="text-lg">Accessible</CardTitle>
-              </CardHeader>
-              <CardContent className="text-sm text-muted-foreground">
-                Full keyboard navigation and screen reader support
+              <CardContent className="p-6">
+                <h3 className="font-semibold mb-2">Accessible</h3>
+                <p className="text-sm text-muted-foreground">
+                  Full keyboard navigation and screen reader support
+                </p>
               </CardContent>
             </Card>
           </div>
