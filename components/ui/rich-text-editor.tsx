@@ -265,15 +265,34 @@ export const RichTextEditor = React.forwardRef<HTMLDivElement, RichTextEditorPro
         const editorElement = editor.view.dom
         editorElement.setAttribute('dir', direction)
 
-        // Update text alignment to match new direction if not explicitly set
-        const currentAlignment = editor.getAttributes('paragraph').textAlign
+        // Update text alignment for all blocks when direction changes
         const defaultAlignment = direction === 'rtl' ? 'right' : 'left'
         const oppositeAlignment = direction === 'rtl' ? 'left' : 'right'
 
-        // If the current alignment matches the opposite default (indicating it was auto-set),
-        // update it to match the new direction's default
-        if (!currentAlignment || currentAlignment === oppositeAlignment) {
-          editor.chain().setTextAlign(defaultAlignment).run()
+        // Iterate through all nodes in the document
+        const { state } = editor
+        const { tr } = state
+        let updated = false
+
+        state.doc.descendants((node, pos) => {
+          // Only update paragraph and heading nodes
+          if (node.type.name === 'paragraph' || node.type.name === 'heading') {
+            const currentAlignment = node.attrs.textAlign
+
+            // If no alignment is set or it matches the opposite default, update it
+            if (!currentAlignment || currentAlignment === oppositeAlignment) {
+              tr.setNodeMarkup(pos, undefined, {
+                ...node.attrs,
+                textAlign: defaultAlignment,
+              })
+              updated = true
+            }
+          }
+        })
+
+        // Apply the transaction if any updates were made
+        if (updated) {
+          editor.view.dispatch(tr)
         }
       }
     }, [direction, editor])
