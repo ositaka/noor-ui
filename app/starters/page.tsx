@@ -13,7 +13,6 @@ import {
   BarChart3,
   Download,
   Github,
-  ExternalLink,
   Sparkles,
   type LucideIcon,
 } from 'lucide-react'
@@ -23,7 +22,6 @@ interface Starter {
   description: string
   longDescription: string
   href: string
-  demoHref?: string
   icon: LucideIcon
   tags: string[]
   features: string[]
@@ -37,8 +35,7 @@ const starters: Starter[] = [
     title: 'Blog Dashboard',
     description: 'Complete blogging platform with authentication, rich text editor, and Supabase backend.',
     longDescription: 'A full-featured bilingual blog platform with user authentication, post management, image uploads, and rich content editing. Perfect for content creators who need a production-ready CMS.',
-    href: '/starters/blog-dashboard',
-    demoHref: '/dashboard',
+    href: 'https://github.com/ositaka/noor-ui/tree/main/starters/blog-dashboard',
     icon: PenTool,
     tags: ['Full Stack', 'CMS', 'Authentication'],
     features: [
@@ -57,8 +54,7 @@ const starters: Starter[] = [
     title: 'E-commerce Shop',
     description: 'Complete online shop with product catalog, shopping cart, and checkout flow.',
     longDescription: 'A production-ready e-commerce solution with product browsing, cart management, and checkout. Uses localStorage for state - no backend needed! Perfect for learning or quickly launching an online store.',
-    href: '/starters/ecommerce',
-    demoHref: '/shop',
+    href: 'https://github.com/ositaka/noor-ui/tree/main/starters/ecommerce',
     icon: ShoppingCart,
     tags: ['E-commerce', 'Client-Side', 'No Backend'],
     features: [
@@ -312,20 +308,12 @@ export default function StartersPage() {
 
                   {/* Actions */}
                   <div className="flex flex-wrap gap-3 mt-auto">
-                    <Link href={starter.href} className="flex-1">
+                    <Link href={starter.href} target="_blank" rel="noopener noreferrer" className="flex-1">
                       <Button className="w-full">
-                        <FileCode className="h-4 w-4 me-2" />
-                        {isRTL ? 'عرض الكود' : 'View Code'}
+                        <Github className="h-4 w-4 me-2" />
+                        {isRTL ? 'عرض على GitHub' : 'View on GitHub'}
                       </Button>
                     </Link>
-                    {starter.demoHref && (
-                      <Link href={starter.demoHref}>
-                        <Button variant="outline">
-                          <ExternalLink className="h-4 w-4 me-2" />
-                          {isRTL ? 'تجربة مباشرة' : 'Live Demo'}
-                        </Button>
-                      </Link>
-                    )}
                   </div>
                 </CardContent>
               </Card>
