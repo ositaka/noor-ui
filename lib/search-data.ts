@@ -214,6 +214,13 @@ export const searchData: SearchItem[] = [
     keywords: ['editor', 'rich text', 'wysiwyg', 'tiptap', 'formatting', 'bold', 'italic', 'markdown', 'rtl', 'arabic', 'content', 'blog', 'cms'],
   },
   {
+    title: 'File Upload',
+    description: 'Drag-and-drop file upload with validation, previews, and accessibility',
+    href: '/components/file-upload',
+    category: 'Component',
+    keywords: ['upload', 'file', 'drag', 'drop', 'image', 'upload', 'validation', 'form', 'attachment', 'preview'],
+  },
+  {
     title: 'Alert',
     description: 'Alert message component',
     href: '/components/alert',
