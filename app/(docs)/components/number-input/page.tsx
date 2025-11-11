@@ -1,6 +1,7 @@
 'use client'
 
 import * as React from 'react'
+import Link from 'next/link'
 import { NumberInput } from '@/components/ui/number-input'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { ComponentShowcase } from '@/components/docs/component-showcase'
@@ -185,11 +186,31 @@ export default function NumberInputPage() {
   }
 
   return (
-    <div className="container mx-auto py-8 space-y-12" dir={direction}>
-      {/* Header */}
-      <div className="space-y-3">
-        <h1 className="text-4xl font-bold">{isRTL ? 'إدخال الأرقام' : 'Number Input'}</h1>
-        <p className="text-lg text-muted-foreground">
+    <div className="min-h-screen">
+      <main id="main-content" className="container py-12">
+        {/* Breadcrumb */}
+        <nav aria-label="Breadcrumb" className="mb-8">
+          <ol className="flex items-center gap-2 text-sm text-muted-foreground">
+            <li>
+              <Link href="/" className="hover:text-foreground transition-colors">
+                {isRTL ? 'الرئيسية' : 'Home'}
+              </Link>
+            </li>
+            <li>/</li>
+            <li>
+              <Link href="/components" className="hover:text-foreground transition-colors">
+                {isRTL ? 'المكونات' : 'Components'}
+              </Link>
+            </li>
+            <li>/</li>
+            <li className="text-foreground font-medium">{isRTL ? 'إدخال الأرقام' : 'Number Input'}</li>
+          </ol>
+        </nav>
+
+        {/* Page Header */}
+        <div className="mb-12">
+        <h1 className="text-4xl font-bold tracking-tight mb-4">{isRTL ? 'إدخال الأرقام' : 'Number Input'}</h1>
+        <p className="text-xl text-muted-foreground max-w-3xl">
           {isRTL
             ? 'إدخال أرقام منسق مع عناصر التحكم والتحقق'
             : 'Formatted number input with controls and validation'}
@@ -387,6 +408,7 @@ export default function NumberInputPage() {
           <li>{isRTL ? 'إمكانية الوصول الكاملة' : 'Full accessibility'}</li>
         </ul>
       </div>
+      </main>
     </div>
   )
 }
