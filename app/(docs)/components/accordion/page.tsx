@@ -178,26 +178,28 @@ export default function AccordionPage() {
         <section className="mb-16">
           <h2 className="text-2xl font-bold tracking-tight mb-6">Preview</h2>
           <ComponentShowcase>
-            <Accordion type="single" collapsible className="w-full max-w-md">
-              <AccordionItem value="item-1">
-                <AccordionTrigger>Is it accessible?</AccordionTrigger>
-                <AccordionContent>
-                  Yes. It adheres to the WAI-ARIA design pattern.
-                </AccordionContent>
-              </AccordionItem>
-              <AccordionItem value="item-2">
-                <AccordionTrigger>Is it styled?</AccordionTrigger>
-                <AccordionContent>
-                  Yes. It comes with default styles that you can customize.
-                </AccordionContent>
-              </AccordionItem>
-              <AccordionItem value="item-3">
-                <AccordionTrigger>Is it animated?</AccordionTrigger>
-                <AccordionContent>
-                  Yes. It uses CSS animations for smooth transitions.
-                </AccordionContent>
-              </AccordionItem>
-            </Accordion>
+            <ComponentShowcase.Demo>
+              <Accordion type="single" collapsible className="w-full max-w-md">
+                <AccordionItem value="item-1">
+                  <AccordionTrigger>Is it accessible?</AccordionTrigger>
+                  <AccordionContent>
+                    Yes. It adheres to the WAI-ARIA design pattern.
+                  </AccordionContent>
+                </AccordionItem>
+                <AccordionItem value="item-2">
+                  <AccordionTrigger>Is it styled?</AccordionTrigger>
+                  <AccordionContent>
+                    Yes. It comes with default styles that you can customize.
+                  </AccordionContent>
+                </AccordionItem>
+                <AccordionItem value="item-3">
+                  <AccordionTrigger>Is it animated?</AccordionTrigger>
+                  <AccordionContent>
+                    Yes. It uses CSS animations for smooth transitions.
+                  </AccordionContent>
+                </AccordionItem>
+              </Accordion>
+            </ComponentShowcase.Demo>
           </ComponentShowcase>
         </section>
 

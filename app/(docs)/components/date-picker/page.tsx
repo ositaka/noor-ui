@@ -277,149 +277,183 @@ export default function DatePickerPage() {
       </div>
 
       {/* Basic Example */}
-      <ComponentShowcase
-        title={isRTL ? 'الاستخدام الأساسي' : 'Basic Usage'}
-        description={isRTL ? 'منتقي تاريخ بسيط مع التقويم' : 'Simple date picker with calendar'}
-      >
-        <div className="w-full max-w-xs mx-auto space-y-2">
-          <Label>{isRTL ? 'تاريخ الميلاد' : 'Date of Birth'}</Label>
-          <DatePicker
-            date={date1}
-            onDateChange={setDate1}
-            placeholder="Pick a date"
-            placeholderAr="اختر تاريخ"
-          />
-          <p className="text-sm text-muted-foreground">{formatDate(date1)}</p>
-        </div>
-      </ComponentShowcase>
-
-      <CodeBlock code={basicCode} language="tsx" title={isRTL ? 'الكود' : 'Code'} />
+      <section className="mb-16">
+        <h2 className="text-2xl font-bold tracking-tight mb-6">
+          {isRTL ? 'الاستخدام الأساسي' : 'Basic Usage'}
+        </h2>
+        <ComponentShowcase code={basicCode}>
+          <ComponentShowcase.Demo>
+            <div className="w-full max-w-xs mx-auto space-y-2">
+              <Label>{isRTL ? 'تاريخ الميلاد' : 'Date of Birth'}</Label>
+              <DatePicker
+                date={date1}
+                onDateChange={setDate1}
+                placeholder="Pick a date"
+                placeholderAr="اختر تاريخ"
+              />
+              <p className="text-sm text-muted-foreground">{formatDate(date1)}</p>
+            </div>
+          </ComponentShowcase.Demo>
+        </ComponentShowcase>
+      </section>
 
       {/* Date Range */}
-      <ComponentShowcase
-        title={isRTL ? 'نطاق التاريخ' : 'Date Range'}
-        description={isRTL ? 'اختيار نطاق من التواريخ' : 'Select a range of dates'}
-      >
-        <div className="w-full max-w-md mx-auto space-y-2">
-          <Label>{isRTL ? 'فترة الحجز' : 'Booking Period'}</Label>
-          <DateRangePicker
-            dateRange={dateRange1}
-            onDateRangeChange={setDateRange1}
-            placeholder="Pick a date range"
-            placeholderAr="اختر نطاق التاريخ"
-          />
-          <p className="text-sm text-muted-foreground">{formatDateRange(dateRange1)}</p>
-        </div>
-      </ComponentShowcase>
-
-      <CodeBlock code={rangeCode} language="tsx" />
+      <section className="mb-16">
+        <h2 className="text-2xl font-bold tracking-tight mb-6">
+          {isRTL ? 'نطاق التاريخ' : 'Date Range'}
+        </h2>
+        <ComponentShowcase code={rangeCode}>
+          <ComponentShowcase.Demo>
+            <div className="w-full max-w-md mx-auto space-y-2">
+              <Label>{isRTL ? 'فترة الحجز' : 'Booking Period'}</Label>
+              <DateRangePicker
+                dateRange={dateRange1}
+                onDateRangeChange={setDateRange1}
+                placeholder="Pick a date range"
+                placeholderAr="اختر نطاق التاريخ"
+              />
+              <p className="text-sm text-muted-foreground">{formatDateRange(dateRange1)}</p>
+            </div>
+          </ComponentShowcase.Demo>
+        </ComponentShowcase>
+      </section>
 
       {/* With Constraints */}
-      <ComponentShowcase
-        title={isRTL ? 'مع القيود' : 'With Constraints'}
-        description={isRTL ? 'تحديد الحد الأدنى والأقصى للتاريخ' : 'Minimum and maximum date limits'}
-      >
-        <div className="w-full max-w-xs mx-auto space-y-2">
-          <Label>{isRTL ? 'موعد الاجتماع' : 'Appointment Date'}</Label>
-          <DatePicker
-            date={date2}
-            onDateChange={setDate2}
-            minDate={today}
-            maxDate={nextMonth}
-            placeholder="Select within next month"
-            placeholderAr="اختر خلال الشهر القادم"
-          />
-          <p className="text-xs text-muted-foreground">
-            {isRTL
-              ? `متاح من ${formatDate(today)} إلى ${formatDate(nextMonth)}`
-              : `Available from ${formatDate(today)} to ${formatDate(nextMonth)}`}
-          </p>
-        </div>
-      </ComponentShowcase>
-
-      <CodeBlock code={constraintsCode} language="tsx" />
+      <section className="mb-16">
+        <h2 className="text-2xl font-bold tracking-tight mb-6">
+          {isRTL ? 'مع القيود' : 'With Constraints'}
+        </h2>
+        <ComponentShowcase code={constraintsCode}>
+          <ComponentShowcase.Demo>
+            <div className="w-full max-w-xs mx-auto space-y-2">
+              <Label>{isRTL ? 'موعد الاجتماع' : 'Appointment Date'}</Label>
+              <DatePicker
+                date={date2}
+                onDateChange={setDate2}
+                minDate={today}
+                maxDate={nextMonth}
+                placeholder="Select within next month"
+                placeholderAr="اختر خلال الشهر القادم"
+              />
+              <p className="text-xs text-muted-foreground">
+                {isRTL
+                  ? `متاح من ${formatDate(today)} إلى ${formatDate(nextMonth)}`
+                  : `Available from ${formatDate(today)} to ${formatDate(nextMonth)}`}
+              </p>
+            </div>
+          </ComponentShowcase.Demo>
+        </ComponentShowcase>
+      </section>
 
       {/* Disabled Dates */}
-      <ComponentShowcase
-        title={isRTL ? 'تواريخ معطلة' : 'Disabled Dates'}
-        description={isRTL ? 'منع تحديد تواريخ محددة (عطلات نهاية الأسبوع)' : 'Prevent selecting specific dates (weekends)'}
-      >
-        <div className="w-full max-w-xs mx-auto space-y-2">
-          <Label>{isRTL ? 'يوم العمل' : 'Working Day'}</Label>
-          <DatePicker
-            date={date3}
-            onDateChange={setDate3}
-            disabledDates={disabledDates}
-            placeholder="Select a weekday"
-            placeholderAr="اختر يوم عمل"
-          />
-          <p className="text-xs text-muted-foreground">
-            {isRTL ? 'عطلات نهاية الأسبوع معطلة' : 'Weekends are disabled'}
-          </p>
-        </div>
-      </ComponentShowcase>
-
-      <CodeBlock code={disabledCode} language="tsx" />
+      <section className="mb-16">
+        <h2 className="text-2xl font-bold tracking-tight mb-6">
+          {isRTL ? 'تواريخ معطلة' : 'Disabled Dates'}
+        </h2>
+        <ComponentShowcase code={disabledCode}>
+          <ComponentShowcase.Demo>
+            <div className="w-full max-w-xs mx-auto space-y-2">
+              <Label>{isRTL ? 'يوم العمل' : 'Working Day'}</Label>
+              <DatePicker
+                date={date3}
+                onDateChange={setDate3}
+                disabledDates={disabledDates}
+                placeholder="Select a weekday"
+                placeholderAr="اختر يوم عمل"
+              />
+              <p className="text-xs text-muted-foreground">
+                {isRTL ? 'عطلات نهاية الأسبوع معطلة' : 'Weekends are disabled'}
+              </p>
+            </div>
+          </ComponentShowcase.Demo>
+        </ComponentShowcase>
+      </section>
 
       {/* Real-World Example */}
-      <ComponentShowcase
-        title={isRTL ? 'مثال عملي' : 'Real-World Example'}
-        description={isRTL ? 'نموذج حجز فندق' : 'Hotel booking form'}
-      >
-        <Card className="w-full max-w-md mx-auto">
-          <CardHeader>
-            <CardTitle>{isRTL ? 'حجز غرفة فندق' : 'Hotel Room Booking'}</CardTitle>
-            <CardDescription>
-              {isRTL ? 'اختر تواريخ تسجيل الوصول والمغادرة' : 'Select check-in and check-out dates'}
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-6">
-            <div className="space-y-2">
-              <Label>{isRTL ? 'فترة الإقامة' : 'Stay Period'}</Label>
-              <DateRangePicker
-                dateRange={dateRange2}
-                onDateRangeChange={setDateRange2}
-                minDate={today}
-                placeholder="Select dates"
-                placeholderAr="اختر التواريخ"
-              />
-            </div>
+      <section className="mb-16">
+        <h2 className="text-2xl font-bold tracking-tight mb-6">
+          {isRTL ? 'مثال عملي' : 'Real-World Example'}
+        </h2>
+        <ComponentShowcase code={`const [dateRange, setDateRange] = useState<DateRange>()
+const today = new Date()
 
-            {dateRange2?.from && dateRange2?.to && (
-              <>
-                <div className="flex justify-between items-center pt-4 border-t">
-                  <span className="text-sm text-muted-foreground">
-                    {isRTL ? 'عدد الليالي:' : 'Number of nights:'}
-                  </span>
-                  <span className="font-semibold">
-                    {Math.ceil((dateRange2.to.getTime() - dateRange2.from.getTime()) / (1000 * 60 * 60 * 24))}
-                  </span>
+<Card>
+  <CardHeader>
+    <CardTitle>Hotel Room Booking</CardTitle>
+    <CardDescription>Select check-in and check-out dates</CardDescription>
+  </CardHeader>
+  <CardContent className="space-y-6">
+    <DateRangePicker
+      dateRange={dateRange}
+      onDateRangeChange={setDateRange}
+      minDate={today}
+      placeholder="Select dates"
+    />
+    {dateRange?.from && dateRange?.to && (
+      <div className="space-y-2">
+        <div>Nights: {Math.ceil((dateRange.to.getTime() - dateRange.from.getTime()) / (1000 * 60 * 60 * 24))}</div>
+        <div>Total: ${nights * 150}</div>
+      </div>
+    )}
+  </CardContent>
+</Card>`}>
+          <ComponentShowcase.Demo>
+            <Card className="w-full max-w-md mx-auto">
+              <CardHeader>
+                <CardTitle>{isRTL ? 'حجز غرفة فندق' : 'Hotel Room Booking'}</CardTitle>
+                <CardDescription>
+                  {isRTL ? 'اختر تواريخ تسجيل الوصول والمغادرة' : 'Select check-in and check-out dates'}
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                <div className="space-y-2">
+                  <Label>{isRTL ? 'فترة الإقامة' : 'Stay Period'}</Label>
+                  <DateRangePicker
+                    dateRange={dateRange2}
+                    onDateRangeChange={setDateRange2}
+                    minDate={today}
+                    placeholder="Select dates"
+                    placeholderAr="اختر التواريخ"
+                  />
                 </div>
 
-                <div className="flex justify-between items-center">
-                  <span className="text-sm text-muted-foreground">
-                    {isRTL ? 'سعر الليلة:' : 'Price per night:'}
-                  </span>
-                  <span className="font-semibold">
-                    {locale === 'ar' ? '٣٥٠ ر.س' : '$150'}
-                  </span>
-                </div>
+                {dateRange2?.from && dateRange2?.to && (
+                  <>
+                    <div className="flex justify-between items-center pt-4 border-t">
+                      <span className="text-sm text-muted-foreground">
+                        {isRTL ? 'عدد الليالي:' : 'Number of nights:'}
+                      </span>
+                      <span className="font-semibold">
+                        {Math.ceil((dateRange2.to.getTime() - dateRange2.from.getTime()) / (1000 * 60 * 60 * 24))}
+                      </span>
+                    </div>
 
-                <div className="flex justify-between items-center">
-                  <span className="text-lg font-semibold">
-                    {isRTL ? 'الإجمالي:' : 'Total:'}
-                  </span>
-                  <span className="text-2xl font-bold text-primary">
-                    {locale === 'ar'
-                      ? `${(Math.ceil((dateRange2.to.getTime() - dateRange2.from.getTime()) / (1000 * 60 * 60 * 24)) * 350).toLocaleString('ar-SA')} ر.س`
-                      : `$${(Math.ceil((dateRange2.to.getTime() - dateRange2.from.getTime()) / (1000 * 60 * 60 * 24)) * 150).toLocaleString('en-US')}`}
-                  </span>
-                </div>
-              </>
-            )}
-          </CardContent>
-        </Card>
-      </ComponentShowcase>
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm text-muted-foreground">
+                        {isRTL ? 'سعر الليلة:' : 'Price per night:'}
+                      </span>
+                      <span className="font-semibold">
+                        {locale === 'ar' ? '٣٥٠ ر.س' : '$150'}
+                      </span>
+                    </div>
+
+                    <div className="flex justify-between items-center">
+                      <span className="text-lg font-semibold">
+                        {isRTL ? 'الإجمالي:' : 'Total:'}
+                      </span>
+                      <span className="text-2xl font-bold text-primary">
+                        {locale === 'ar'
+                          ? `${(Math.ceil((dateRange2.to.getTime() - dateRange2.from.getTime()) / (1000 * 60 * 60 * 24)) * 350).toLocaleString('ar-SA')} ر.س`
+                          : `$${(Math.ceil((dateRange2.to.getTime() - dateRange2.from.getTime()) / (1000 * 60 * 60 * 24)) * 150).toLocaleString('en-US')}`}
+                      </span>
+                    </div>
+                  </>
+                )}
+              </CardContent>
+            </Card>
+          </ComponentShowcase.Demo>
+        </ComponentShowcase>
+      </section>
 
       {/* Use Cases */}
       <div className="space-y-4">

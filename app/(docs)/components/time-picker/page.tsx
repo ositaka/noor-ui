@@ -248,209 +248,270 @@ export default function TimePickerPage() {
       </div>
 
       {/* Basic Example - 24h */}
-      <ComponentShowcase
-        title={isRTL ? 'الاستخدام الأساسي (24 ساعة)' : 'Basic Usage (24h)'}
-        description={isRTL ? 'منتقي وقت بسيط بتنسيق 24 ساعة' : 'Simple time picker with 24-hour format'}
-      >
-        <div className="w-full max-w-xs mx-auto space-y-2">
-          <Label>{isRTL ? 'وقت البداية' : 'Start Time'}</Label>
-          <TimePicker
-            time={time1}
-            onTimeChange={(t) => t && setTime1(t)}
-            placeholder="Pick a time"
-            placeholderAr="اختر الوقت"
-          />
-          <p className="text-sm text-muted-foreground">{formatTime(time1)}</p>
-        </div>
-      </ComponentShowcase>
-
-      <CodeBlock code={basicCode} language="tsx" title={isRTL ? 'الكود' : 'Code'} />
+      <section className="mb-16">
+        <h2 className="text-2xl font-bold tracking-tight mb-6">
+          {isRTL ? 'الاستخدام الأساسي (24 ساعة)' : 'Basic Usage (24h)'}
+        </h2>
+        <ComponentShowcase code={basicCode}>
+          <ComponentShowcase.Demo>
+            <div className="w-full max-w-xs mx-auto space-y-2">
+              <Label>{isRTL ? 'وقت البداية' : 'Start Time'}</Label>
+              <TimePicker
+                time={time1}
+                onTimeChange={(t) => t && setTime1(t)}
+                placeholder="Pick a time"
+                placeholderAr="اختر الوقت"
+              />
+              <p className="text-sm text-muted-foreground">{formatTime(time1)}</p>
+            </div>
+          </ComponentShowcase.Demo>
+        </ComponentShowcase>
+      </section>
 
       {/* 12-hour Format */}
-      <ComponentShowcase
-        title={isRTL ? 'تنسيق 12 ساعة' : '12-Hour Format'}
-        description={isRTL ? 'منتقي وقت مع AM/PM' : 'Time picker with AM/PM'}
-      >
-        <div className="w-full max-w-xs mx-auto space-y-2">
-          <Label>{isRTL ? 'وقت الموعد' : 'Appointment Time'}</Label>
-          <TimePicker
-            time={time2}
-            onTimeChange={(t) => t && setTime2(t)}
-            format="12h"
-            placeholder="Pick a time"
-            placeholderAr="اختر الوقت"
-          />
-          <p className="text-sm text-muted-foreground">
-            {time2
-              ? `${((time2.hours % 12) || 12).toString().padStart(2, '0')}:${time2.minutes.toString().padStart(2, '0')} ${time2.hours >= 12 ? (locale === 'ar' ? 'م' : 'PM') : locale === 'ar' ? 'ص' : 'AM'}`
-              : isRTL
-              ? 'لم يتم اختيار وقت'
-              : 'No time selected'}
-          </p>
-        </div>
-      </ComponentShowcase>
-
-      <CodeBlock code={format12hCode} language="tsx" />
+      <section className="mb-16">
+        <h2 className="text-2xl font-bold tracking-tight mb-6">
+          {isRTL ? 'تنسيق 12 ساعة' : '12-Hour Format'}
+        </h2>
+        <ComponentShowcase code={format12hCode}>
+          <ComponentShowcase.Demo>
+            <div className="w-full max-w-xs mx-auto space-y-2">
+              <Label>{isRTL ? 'وقت الموعد' : 'Appointment Time'}</Label>
+              <TimePicker
+                time={time2}
+                onTimeChange={(t) => t && setTime2(t)}
+                format="12h"
+                placeholder="Pick a time"
+                placeholderAr="اختر الوقت"
+              />
+              <p className="text-sm text-muted-foreground">
+                {time2
+                  ? `${((time2.hours % 12) || 12).toString().padStart(2, '0')}:${time2.minutes.toString().padStart(2, '0')} ${time2.hours >= 12 ? (locale === 'ar' ? 'م' : 'PM') : locale === 'ar' ? 'ص' : 'AM'}`
+                  : isRTL
+                  ? 'لم يتم اختيار وقت'
+                  : 'No time selected'}
+              </p>
+            </div>
+          </ComponentShowcase.Demo>
+        </ComponentShowcase>
+      </section>
 
       {/* Time Range */}
-      <ComponentShowcase
-        title={isRTL ? 'نطاق الوقت' : 'Time Range'}
-        description={isRTL ? 'اختيار نطاق زمني بوقت بداية ونهاية' : 'Select a time range with start and end'}
-      >
-        <div className="w-full max-w-md mx-auto space-y-2">
-          <Label>{isRTL ? 'ساعات العمل' : 'Working Hours'}</Label>
-          <TimeRangePicker
-            timeRange={timeRange1}
-            onTimeRangeChange={setTimeRange1}
-            placeholder="Pick working hours"
-            placeholderAr="اختر ساعات العمل"
-          />
-          <p className="text-sm text-muted-foreground">
-            {formatTimeRange(timeRange1)} ({calculateDuration(timeRange1)})
-          </p>
-        </div>
-      </ComponentShowcase>
-
-      <CodeBlock code={rangeCode} language="tsx" />
-
-      {/* Minute Step */}
-      <ComponentShowcase
-        title={isRTL ? 'فترات الدقائق' : 'Minute Intervals'}
-        description={isRTL ? 'تحديد فترات الدقائق (15 دقيقة)' : 'Set minute intervals (15 minutes)'}
-      >
-        <div className="w-full max-w-xs mx-auto space-y-2">
-          <Label>{isRTL ? 'الوقت' : 'Time'}</Label>
-          <TimePicker
-            time={time4}
-            onTimeChange={(t) => t && setTime4(t)}
-            minuteStep={15}
-            placeholder="15-minute intervals"
-            placeholderAr="فترات 15 دقيقة"
-          />
-          <p className="text-xs text-muted-foreground">
-            {isRTL ? 'الدقائق تزيد بمقدار 15' : 'Minutes increment by 15'}
-          </p>
-        </div>
-      </ComponentShowcase>
-
-      <CodeBlock code={minuteStepCode} language="tsx" />
-
-      {/* Real-World Example */}
-      <ComponentShowcase
-        title={isRTL ? 'مثال عملي' : 'Real-World Example'}
-        description={isRTL ? 'نموذج حجز موعد' : 'Appointment booking form'}
-      >
-        <Card className="w-full max-w-md mx-auto">
-          <CardHeader>
-            <CardTitle>{isRTL ? 'حجز موعد طبي' : 'Medical Appointment'}</CardTitle>
-            <CardDescription>
-              {isRTL ? 'اختر الوقت المفضل للموعد' : 'Select your preferred appointment time'}
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-6">
-            <div className="space-y-2">
-              <Label>{isRTL ? 'الوقت المفضل' : 'Preferred Time'}</Label>
-              <TimePicker
-                time={time3}
-                onTimeChange={setTime3}
-                format="12h"
-                minuteStep={15}
-                placeholder="Select appointment time"
-                placeholderAr="اختر وقت الموعد"
-              />
-            </div>
-
-            {time3 && (
-              <>
-                <div className="flex justify-between items-center pt-4 border-t">
-                  <span className="text-sm text-muted-foreground">
-                    {isRTL ? 'الوقت المحدد:' : 'Selected Time:'}
-                  </span>
-                  <span className="font-semibold">
-                    {`${((time3.hours % 12) || 12).toString().padStart(2, '0')}:${time3.minutes.toString().padStart(2, '0')} ${time3.hours >= 12 ? (locale === 'ar' ? 'م' : 'PM') : locale === 'ar' ? 'ص' : 'AM'}`}
-                  </span>
-                </div>
-
-                <div className="flex justify-between items-center">
-                  <span className="text-sm text-muted-foreground">
-                    {isRTL ? 'مدة الموعد:' : 'Duration:'}
-                  </span>
-                  <span className="font-semibold">{isRTL ? '30 دقيقة' : '30 minutes'}</span>
-                </div>
-
-                <div className="flex justify-between items-center">
-                  <span className="text-sm text-muted-foreground">
-                    {isRTL ? 'نهاية الموعد:' : 'End Time:'}
-                  </span>
-                  <span className="font-semibold">
-                    {(() => {
-                      const endMinutes = time3.minutes + 30
-                      const endHours = time3.hours + Math.floor(endMinutes / 60)
-                      const finalMinutes = endMinutes % 60
-                      return `${((endHours % 12) || 12).toString().padStart(2, '0')}:${finalMinutes.toString().padStart(2, '0')} ${endHours >= 12 ? (locale === 'ar' ? 'م' : 'PM') : locale === 'ar' ? 'ص' : 'AM'}`
-                    })()}
-                  </span>
-                </div>
-              </>
-            )}
-          </CardContent>
-        </Card>
-      </ComponentShowcase>
-
-      {/* Real-World Example - Schedule */}
-      <ComponentShowcase
-        title={isRTL ? 'مثال جدول العمل' : 'Work Schedule Example'}
-        description={isRTL ? 'تحديد نطاق ساعات العمل' : 'Set working hours range'}
-      >
-        <Card className="w-full max-w-md mx-auto">
-          <CardHeader>
-            <CardTitle>{isRTL ? 'جدول العمل' : 'Work Schedule'}</CardTitle>
-            <CardDescription>
-              {isRTL ? 'حدد ساعات عملك اليومية' : 'Set your daily working hours'}
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-6">
-            <div className="space-y-2">
+      <section className="mb-16">
+        <h2 className="text-2xl font-bold tracking-tight mb-6">
+          {isRTL ? 'نطاق الوقت' : 'Time Range'}
+        </h2>
+        <ComponentShowcase code={rangeCode}>
+          <ComponentShowcase.Demo>
+            <div className="w-full max-w-md mx-auto space-y-2">
               <Label>{isRTL ? 'ساعات العمل' : 'Working Hours'}</Label>
               <TimeRangePicker
-                timeRange={timeRange2}
-                onTimeRangeChange={setTimeRange2}
-                format="12h"
-                placeholder="Set working hours"
-                placeholderAr="حدد ساعات العمل"
+                timeRange={timeRange1}
+                onTimeRangeChange={setTimeRange1}
+                placeholder="Pick working hours"
+                placeholderAr="اختر ساعات العمل"
               />
+              <p className="text-sm text-muted-foreground">
+                {formatTimeRange(timeRange1)} ({calculateDuration(timeRange1)})
+              </p>
             </div>
+          </ComponentShowcase.Demo>
+        </ComponentShowcase>
+      </section>
 
-            {timeRange2?.from && timeRange2?.to && (
-              <>
-                <div className="flex justify-between items-center pt-4 border-t">
-                  <span className="text-sm text-muted-foreground">
-                    {isRTL ? 'إجمالي الساعات:' : 'Total Hours:'}
-                  </span>
-                  <span className="font-semibold text-primary">
-                    {calculateDuration(timeRange2)}
-                  </span>
-                </div>
+      {/* Minute Step */}
+      <section className="mb-16">
+        <h2 className="text-2xl font-bold tracking-tight mb-6">
+          {isRTL ? 'فترات الدقائق' : 'Minute Intervals'}
+        </h2>
+        <ComponentShowcase code={minuteStepCode}>
+          <ComponentShowcase.Demo>
+            <div className="w-full max-w-xs mx-auto space-y-2">
+              <Label>{isRTL ? 'الوقت' : 'Time'}</Label>
+              <TimePicker
+                time={time4}
+                onTimeChange={(t) => t && setTime4(t)}
+                minuteStep={15}
+                placeholder="15-minute intervals"
+                placeholderAr="فترات 15 دقيقة"
+              />
+              <p className="text-xs text-muted-foreground">
+                {isRTL ? 'الدقائق تزيد بمقدار 15' : 'Minutes increment by 15'}
+              </p>
+            </div>
+          </ComponentShowcase.Demo>
+        </ComponentShowcase>
+      </section>
 
+      {/* Real-World Example */}
+      <section className="mb-16">
+        <h2 className="text-2xl font-bold tracking-tight mb-6">
+          {isRTL ? 'مثال عملي' : 'Real-World Example'}
+        </h2>
+        <ComponentShowcase code={`const [time, setTime] = useState<Time>()
+
+<Card>
+  <CardHeader>
+    <CardTitle>Medical Appointment</CardTitle>
+    <CardDescription>Select your preferred appointment time</CardDescription>
+  </CardHeader>
+  <CardContent className="space-y-6">
+    <TimePicker
+      time={time}
+      onTimeChange={setTime}
+      format="12h"
+      minuteStep={15}
+      placeholder="Select appointment time"
+    />
+    {time && (
+      <div className="space-y-2">
+        <div>Selected: {formatTime(time)}</div>
+        <div>Duration: 30 minutes</div>
+        <div>End Time: {calculateEndTime(time, 30)}</div>
+      </div>
+    )}
+  </CardContent>
+</Card>`}>
+          <ComponentShowcase.Demo>
+            <Card className="w-full max-w-md mx-auto">
+              <CardHeader>
+                <CardTitle>{isRTL ? 'حجز موعد طبي' : 'Medical Appointment'}</CardTitle>
+                <CardDescription>
+                  {isRTL ? 'اختر الوقت المفضل للموعد' : 'Select your preferred appointment time'}
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-6">
                 <div className="space-y-2">
-                  <div className="flex justify-between text-sm">
-                    <span className="text-muted-foreground">
-                      {isRTL ? 'وقت البداية:' : 'Start:'}
-                    </span>
-                    <span>{formatTime(timeRange2.from)}</span>
-                  </div>
-                  <div className="flex justify-between text-sm">
-                    <span className="text-muted-foreground">
-                      {isRTL ? 'وقت النهاية:' : 'End:'}
-                    </span>
-                    <span>{formatTime(timeRange2.to)}</span>
-                  </div>
+                  <Label>{isRTL ? 'الوقت المفضل' : 'Preferred Time'}</Label>
+                  <TimePicker
+                    time={time3}
+                    onTimeChange={setTime3}
+                    format="12h"
+                    minuteStep={15}
+                    placeholder="Select appointment time"
+                    placeholderAr="اختر وقت الموعد"
+                  />
                 </div>
-              </>
-            )}
-          </CardContent>
-        </Card>
-      </ComponentShowcase>
+
+                {time3 && (
+                  <>
+                    <div className="flex justify-between items-center pt-4 border-t">
+                      <span className="text-sm text-muted-foreground">
+                        {isRTL ? 'الوقت المحدد:' : 'Selected Time:'}
+                      </span>
+                      <span className="font-semibold">
+                        {`${((time3.hours % 12) || 12).toString().padStart(2, '0')}:${time3.minutes.toString().padStart(2, '0')} ${time3.hours >= 12 ? (locale === 'ar' ? 'م' : 'PM') : locale === 'ar' ? 'ص' : 'AM'}`}
+                      </span>
+                    </div>
+
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm text-muted-foreground">
+                        {isRTL ? 'مدة الموعد:' : 'Duration:'}
+                      </span>
+                      <span className="font-semibold">{isRTL ? '30 دقيقة' : '30 minutes'}</span>
+                    </div>
+
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm text-muted-foreground">
+                        {isRTL ? 'نهاية الموعد:' : 'End Time:'}
+                      </span>
+                      <span className="font-semibold">
+                        {(() => {
+                          const endMinutes = time3.minutes + 30
+                          const endHours = time3.hours + Math.floor(endMinutes / 60)
+                          const finalMinutes = endMinutes % 60
+                          return `${((endHours % 12) || 12).toString().padStart(2, '0')}:${finalMinutes.toString().padStart(2, '0')} ${endHours >= 12 ? (locale === 'ar' ? 'م' : 'PM') : locale === 'ar' ? 'ص' : 'AM'}`
+                        })()}
+                      </span>
+                    </div>
+                  </>
+                )}
+              </CardContent>
+            </Card>
+          </ComponentShowcase.Demo>
+        </ComponentShowcase>
+      </section>
+
+      {/* Real-World Example - Schedule */}
+      <section className="mb-16">
+        <h2 className="text-2xl font-bold tracking-tight mb-6">
+          {isRTL ? 'مثال جدول العمل' : 'Work Schedule Example'}
+        </h2>
+        <ComponentShowcase code={`const [timeRange, setTimeRange] = useState<TimeRange>()
+
+<Card>
+  <CardHeader>
+    <CardTitle>Work Schedule</CardTitle>
+    <CardDescription>Set your daily working hours</CardDescription>
+  </CardHeader>
+  <CardContent className="space-y-6">
+    <TimeRangePicker
+      timeRange={timeRange}
+      onTimeRangeChange={setTimeRange}
+      format="12h"
+      placeholder="Set working hours"
+    />
+    {timeRange?.from && timeRange?.to && (
+      <div className="space-y-2">
+        <div>Total Hours: {calculateDuration(timeRange)}</div>
+        <div>Start: {formatTime(timeRange.from)}</div>
+        <div>End: {formatTime(timeRange.to)}</div>
+      </div>
+    )}
+  </CardContent>
+</Card>`}>
+          <ComponentShowcase.Demo>
+            <Card className="w-full max-w-md mx-auto">
+              <CardHeader>
+                <CardTitle>{isRTL ? 'جدول العمل' : 'Work Schedule'}</CardTitle>
+                <CardDescription>
+                  {isRTL ? 'حدد ساعات عملك اليومية' : 'Set your daily working hours'}
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                <div className="space-y-2">
+                  <Label>{isRTL ? 'ساعات العمل' : 'Working Hours'}</Label>
+                  <TimeRangePicker
+                    timeRange={timeRange2}
+                    onTimeRangeChange={setTimeRange2}
+                    format="12h"
+                    placeholder="Set working hours"
+                    placeholderAr="حدد ساعات العمل"
+                  />
+                </div>
+
+                {timeRange2?.from && timeRange2?.to && (
+                  <>
+                    <div className="flex justify-between items-center pt-4 border-t">
+                      <span className="text-sm text-muted-foreground">
+                        {isRTL ? 'إجمالي الساعات:' : 'Total Hours:'}
+                      </span>
+                      <span className="font-semibold text-primary">
+                        {calculateDuration(timeRange2)}
+                      </span>
+                    </div>
+
+                    <div className="space-y-2">
+                      <div className="flex justify-between text-sm">
+                        <span className="text-muted-foreground">
+                          {isRTL ? 'وقت البداية:' : 'Start:'}
+                        </span>
+                        <span>{formatTime(timeRange2.from)}</span>
+                      </div>
+                      <div className="flex justify-between text-sm">
+                        <span className="text-muted-foreground">
+                          {isRTL ? 'وقت النهاية:' : 'End:'}
+                        </span>
+                        <span>{formatTime(timeRange2.to)}</span>
+                      </div>
+                    </div>
+                  </>
+                )}
+              </CardContent>
+            </Card>
+          </ComponentShowcase.Demo>
+        </ComponentShowcase>
+      </section>
 
       {/* Use Cases */}
       <div className="space-y-4">

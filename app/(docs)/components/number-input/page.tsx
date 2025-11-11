@@ -218,151 +218,193 @@ export default function NumberInputPage() {
       </div>
 
       {/* Basic Example */}
-      <ComponentShowcase
-        title={isRTL ? 'الاستخدام الأساسي' : 'Basic Usage'}
-        description={
-          isRTL
-            ? 'إدخال أرقام مع أزرار الزيادة والنقصان'
-            : 'Number input with increment/decrement buttons'
-        }
-      >
-        <div className="w-full max-w-xs mx-auto space-y-2">
-          <Label>{isRTL ? 'الكمية' : 'Quantity'}</Label>
-          <NumberInput value={value1} onChange={setValue1} min={0} max={100} />
-          <p className="text-sm text-muted-foreground">
-            {isRTL ? 'القيمة الحالية:' : 'Current value:'} {value1}
-          </p>
-        </div>
-      </ComponentShowcase>
+      <section className="mb-16">
+        <h2 className="text-2xl font-bold tracking-tight mb-6">
+          {isRTL ? 'الاستخدام الأساسي' : 'Basic Usage'}
+        </h2>
+        <ComponentShowcase code={basicCode}>
+          <ComponentShowcase.Demo>
+            <div className="w-full max-w-xs mx-auto space-y-2">
+              <Label>{isRTL ? 'الكمية' : 'Quantity'}</Label>
+              <NumberInput value={value1} onChange={setValue1} min={0} max={100} />
+              <p className="text-sm text-muted-foreground">
+                {isRTL ? 'القيمة الحالية:' : 'Current value:'} {value1}
+              </p>
+            </div>
+          </ComponentShowcase.Demo>
+        </ComponentShowcase>
+      </section>
 
-      <CodeBlock code={basicCode} language="tsx" title={isRTL ? 'الكود' : 'Code'} />
+      <section className="mb-16">
+        <h2 className="text-2xl font-bold tracking-tight mb-6">
+          {isRTL ? 'الكود' : 'Code'}
+        </h2>
+        <CodeBlock code={basicCode} language="tsx" />
+      </section>
 
       {/* Without Controls */}
-      <ComponentShowcase
-        title={isRTL ? 'بدون عناصر تحكم' : 'Without Controls'}
-        description={isRTL ? 'إدخال نص بسيط للأرقام' : 'Simple text input for numbers'}
-      >
-        <div className="w-full max-w-xs mx-auto space-y-2">
-          <Label>{isRTL ? 'المبلغ' : 'Amount'}</Label>
-          <NumberInput
-            value={value2}
-            onChange={setValue2}
-            showControls={false}
-            placeholder={isRTL ? 'أدخل المبلغ' : 'Enter amount'}
-          />
-          <p className="text-sm text-muted-foreground">
-            {isRTL ? 'القيمة:' : 'Value:'} {value2 ?? isRTL ? 'غير محدد' : 'undefined'}
-          </p>
-        </div>
-      </ComponentShowcase>
-
-      <CodeBlock code={withoutControlsCode} language="tsx" />
+      <section className="mb-16">
+        <h2 className="text-2xl font-bold tracking-tight mb-6">
+          {isRTL ? 'بدون عناصر تحكم' : 'Without Controls'}
+        </h2>
+        <ComponentShowcase code={withoutControlsCode}>
+          <ComponentShowcase.Demo>
+            <div className="w-full max-w-xs mx-auto space-y-2">
+              <Label>{isRTL ? 'المبلغ' : 'Amount'}</Label>
+              <NumberInput
+                value={value2}
+                onChange={setValue2}
+                showControls={false}
+                placeholder={isRTL ? 'أدخل المبلغ' : 'Enter amount'}
+              />
+              <p className="text-sm text-muted-foreground">
+                {isRTL ? 'القيمة:' : 'Value:'} {value2 ?? isRTL ? 'غير محدد' : 'undefined'}
+              </p>
+            </div>
+          </ComponentShowcase.Demo>
+        </ComponentShowcase>
+      </section>
 
       {/* Decimal Precision */}
-      <ComponentShowcase
-        title={isRTL ? 'الأرقام العشرية' : 'Decimal Precision'}
-        description={isRTL ? 'التحكم في عدد المنازل العشرية' : 'Control decimal places'}
-      >
-        <div className="w-full max-w-xs mx-auto space-y-2">
-          <Label>{isRTL ? 'النسبة المئوية' : 'Percentage'}</Label>
-          <NumberInput value={value3} onChange={setValue3} step={0.1} precision={2} min={0} max={100} />
-          <p className="text-sm text-muted-foreground">
-            {isRTL ? 'القيمة:' : 'Value:'} {value3.toFixed(2)}%
-          </p>
-        </div>
-      </ComponentShowcase>
-
-      <CodeBlock code={decimalCode} language="tsx" />
+      <section className="mb-16">
+        <h2 className="text-2xl font-bold tracking-tight mb-6">
+          {isRTL ? 'الأرقام العشرية' : 'Decimal Precision'}
+        </h2>
+        <ComponentShowcase code={decimalCode}>
+          <ComponentShowcase.Demo>
+            <div className="w-full max-w-xs mx-auto space-y-2">
+              <Label>{isRTL ? 'النسبة المئوية' : 'Percentage'}</Label>
+              <NumberInput value={value3} onChange={setValue3} step={0.1} precision={2} min={0} max={100} />
+              <p className="text-sm text-muted-foreground">
+                {isRTL ? 'القيمة:' : 'Value:'} {value3.toFixed(2)}%
+              </p>
+            </div>
+          </ComponentShowcase.Demo>
+        </ComponentShowcase>
+      </section>
 
       {/* Formatted Display */}
-      <ComponentShowcase
-        title={isRTL ? 'العرض المنسق' : 'Formatted Display'}
-        description={isRTL ? 'فواصل الآلاف والتنسيق المخصص' : 'Thousands separators and custom formatting'}
-      >
-        <div className="w-full max-w-xs mx-auto space-y-2">
-          <Label>{isRTL ? 'المبلغ' : 'Amount'}</Label>
-          <NumberInput
-            value={value4}
-            onChange={setValue4}
-            thousandsSeparator=","
-            precision={2}
-            step={100}
-          />
-          <p className="text-sm text-muted-foreground">
-            {isRTL ? 'القيمة:' : 'Value:'} {value4.toLocaleString(locale === 'ar' ? 'ar-SA' : 'en-US')}
-          </p>
-        </div>
-      </ComponentShowcase>
-
-      <CodeBlock code={formattedCode} language="tsx" />
+      <section className="mb-16">
+        <h2 className="text-2xl font-bold tracking-tight mb-6">
+          {isRTL ? 'العرض المنسق' : 'Formatted Display'}
+        </h2>
+        <ComponentShowcase code={formattedCode}>
+          <ComponentShowcase.Demo>
+            <div className="w-full max-w-xs mx-auto space-y-2">
+              <Label>{isRTL ? 'المبلغ' : 'Amount'}</Label>
+              <NumberInput
+                value={value4}
+                onChange={setValue4}
+                thousandsSeparator=","
+                precision={2}
+                step={100}
+              />
+              <p className="text-sm text-muted-foreground">
+                {isRTL ? 'القيمة:' : 'Value:'} {value4.toLocaleString(locale === 'ar' ? 'ar-SA' : 'en-US')}
+              </p>
+            </div>
+          </ComponentShowcase.Demo>
+        </ComponentShowcase>
+      </section>
 
       {/* Currency Example */}
-      <ComponentShowcase
-        title={isRTL ? 'إدخال العملة' : 'Currency Input'}
-        description={isRTL ? 'تنسيق العملة باستخدام Intl' : 'Currency formatting using Intl'}
-      >
-        <div className="w-full max-w-xs mx-auto space-y-2">
-          <Label>{isRTL ? 'السعر' : 'Price'}</Label>
-          <NumberInput
-            value={price}
-            onChange={setPrice}
-            precision={2}
-            formatDisplay={formatCurrency}
-            min={0}
-            step={0.01}
-          />
-          <p className="text-sm text-muted-foreground">
-            {isRTL ? 'القيمة الخام:' : 'Raw value:'} {price}
-          </p>
-        </div>
-      </ComponentShowcase>
-
-      <CodeBlock code={currencyCode} language="tsx" />
+      <section className="mb-16">
+        <h2 className="text-2xl font-bold tracking-tight mb-6">
+          {isRTL ? 'إدخال العملة' : 'Currency Input'}
+        </h2>
+        <ComponentShowcase code={currencyCode}>
+          <ComponentShowcase.Demo>
+            <div className="w-full max-w-xs mx-auto space-y-2">
+              <Label>{isRTL ? 'السعر' : 'Price'}</Label>
+              <NumberInput
+                value={price}
+                onChange={setPrice}
+                precision={2}
+                formatDisplay={formatCurrency}
+                min={0}
+                step={0.01}
+              />
+              <p className="text-sm text-muted-foreground">
+                {isRTL ? 'القيمة الخام:' : 'Raw value:'} {price}
+              </p>
+            </div>
+          </ComponentShowcase.Demo>
+        </ComponentShowcase>
+      </section>
 
       {/* Real-World Example */}
-      <ComponentShowcase
-        title={isRTL ? 'مثال عملي' : 'Real-World Example'}
-        description={isRTL ? 'نموذج طلب منتج' : 'Product order form'}
-      >
-        <Card className="w-full max-w-md mx-auto">
-          <CardHeader>
-            <CardTitle>{isRTL ? 'طلب منتج' : 'Product Order'}</CardTitle>
-            <CardDescription>
-              {isRTL ? 'اختر الكمية لحساب السعر الإجمالي' : 'Select quantity to calculate total'}
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-6">
-            <div className="space-y-2">
-              <Label>{isRTL ? 'الكمية' : 'Quantity'}</Label>
-              <NumberInput
-                value={quantity}
-                onChange={setQuantity}
-                min={1}
-                max={99}
-                step={1}
-              />
-            </div>
+      <section className="mb-16">
+        <h2 className="text-2xl font-bold tracking-tight mb-6">
+          {isRTL ? 'مثال عملي' : 'Real-World Example'}
+        </h2>
+        <ComponentShowcase code={`const [quantity, setQuantity] = useState(1)
+const formatCurrency = (value: number) =>
+  new Intl.NumberFormat(locale, { style: 'currency', currency: 'USD' }).format(value)
 
-            <div className="flex justify-between items-center pt-4 border-t">
-              <span className="text-sm text-muted-foreground">
-                {isRTL ? 'سعر الوحدة:' : 'Unit Price:'}
-              </span>
-              <span className="font-semibold">
-                {formatCurrency(29.99)}
-              </span>
-            </div>
+<Card>
+  <CardHeader>
+    <CardTitle>Product Order</CardTitle>
+    <CardDescription>Select quantity to calculate total</CardDescription>
+  </CardHeader>
+  <CardContent className="space-y-6">
+    <div className="space-y-2">
+      <Label>Quantity</Label>
+      <NumberInput value={quantity} onChange={setQuantity} min={1} max={99} />
+    </div>
+    <div className="flex justify-between items-center pt-4 border-t">
+      <span className="text-sm text-muted-foreground">Unit Price:</span>
+      <span className="font-semibold">{formatCurrency(29.99)}</span>
+    </div>
+    <div className="flex justify-between items-center">
+      <span className="text-lg font-semibold">Total:</span>
+      <span className="text-2xl font-bold text-primary">
+        {formatCurrency(quantity * 29.99)}
+      </span>
+    </div>
+  </CardContent>
+</Card>`}>
+          <ComponentShowcase.Demo>
+            <Card className="w-full max-w-md mx-auto">
+              <CardHeader>
+                <CardTitle>{isRTL ? 'طلب منتج' : 'Product Order'}</CardTitle>
+                <CardDescription>
+                  {isRTL ? 'اختر الكمية لحساب السعر الإجمالي' : 'Select quantity to calculate total'}
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                <div className="space-y-2">
+                  <Label>{isRTL ? 'الكمية' : 'Quantity'}</Label>
+                  <NumberInput
+                    value={quantity}
+                    onChange={setQuantity}
+                    min={1}
+                    max={99}
+                    step={1}
+                  />
+                </div>
 
-            <div className="flex justify-between items-center">
-              <span className="text-lg font-semibold">
-                {isRTL ? 'الإجمالي:' : 'Total:'}
-              </span>
-              <span className="text-2xl font-bold text-primary">
-                {formatCurrency(quantity * 29.99)}
-              </span>
-            </div>
-          </CardContent>
-        </Card>
-      </ComponentShowcase>
+                <div className="flex justify-between items-center pt-4 border-t">
+                  <span className="text-sm text-muted-foreground">
+                    {isRTL ? 'سعر الوحدة:' : 'Unit Price:'}
+                  </span>
+                  <span className="font-semibold">
+                    {formatCurrency(29.99)}
+                  </span>
+                </div>
+
+                <div className="flex justify-between items-center">
+                  <span className="text-lg font-semibold">
+                    {isRTL ? 'الإجمالي:' : 'Total:'}
+                  </span>
+                  <span className="text-2xl font-bold text-primary">
+                    {formatCurrency(quantity * 29.99)}
+                  </span>
+                </div>
+              </CardContent>
+            </Card>
+          </ComponentShowcase.Demo>
+        </ComponentShowcase>
+      </section>
 
       {/* Use Cases */}
       <div className="space-y-4">

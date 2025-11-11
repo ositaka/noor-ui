@@ -101,166 +101,156 @@ export function Example() {
         </div>
 
       {/* Basic Example */}
-      <ComponentShowcase
-        title={isRTL ? 'الاستخدام الأساسي' : 'Basic Usage'}
-        description={
-          isRTL
-            ? 'بطاقة إحصائيات بسيطة مع تسمية وقيمة وأيقونة'
-            : 'Simple stats card with label, value, and icon'
-        }
-      >
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          <StatsCard
-            label={isRTL ? 'إجمالي المستخدمين' : 'Total Users'}
-            value={1250}
-            icon={<Users />}
-          />
-          <StatsCard
-            label={isRTL ? 'المقالات' : 'Articles'}
-            value={48}
-            icon={<FileText />}
-          />
-          <StatsCard
-            label={isRTL ? 'النشاط' : 'Activity'}
-            value={356}
-            icon={<Activity />}
-          />
-        </div>
-      </ComponentShowcase>
-
-      <CodeBlock code={basicUsage} language="tsx" title={isRTL ? 'الكود' : 'Code'} />
+      <section className="mb-16">
+        <h2 className="text-2xl font-bold tracking-tight mb-6">
+          {isRTL ? 'الاستخدام الأساسي' : 'Basic Usage'}
+        </h2>
+        <ComponentShowcase code={basicUsage}>
+          <ComponentShowcase.Demo>
+            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+              <StatsCard
+                label={isRTL ? 'إجمالي المستخدمين' : 'Total Users'}
+                value={1250}
+                icon={<Users />}
+              />
+              <StatsCard
+                label={isRTL ? 'المقالات' : 'Articles'}
+                value={48}
+                icon={<FileText />}
+              />
+              <StatsCard
+                label={isRTL ? 'النشاط' : 'Activity'}
+                value={356}
+                icon={<Activity />}
+              />
+            </div>
+          </ComponentShowcase.Demo>
+        </ComponentShowcase>
+      </section>
 
       {/* With Positive Trend */}
-      <ComponentShowcase
-        title={isRTL ? 'مع اتجاه إيجابي' : 'With Positive Trend'}
-        description={
-          isRTL
-            ? 'بطاقة إحصائيات مع مؤشر اتجاه إيجابي'
-            : 'Stats card with positive trend indicator'
-        }
-      >
-        <div className="grid gap-4 md:grid-cols-2">
-          <StatsCard
-            label={isRTL ? 'الإيرادات' : 'Revenue'}
-            value={45231}
-            format="currency"
-            trend={12.5}
-            trendLabel={isRTL ? 'مقابل الشهر الماضي' : 'vs last month'}
-            icon={<DollarSign />}
-          />
-          <StatsCard
-            label={isRTL ? 'المستخدمون الجدد' : 'New Users'}
-            value={234}
-            trend={18.2}
-            trendLabel={isRTL ? 'مقابل الأسبوع الماضي' : 'vs last week'}
-            icon={<Users />}
-          />
-        </div>
-      </ComponentShowcase>
-
-      <CodeBlock code={withTrend} language="tsx" />
+      <section className="mb-16">
+        <h2 className="text-2xl font-bold tracking-tight mb-6">
+          {isRTL ? 'مع اتجاه إيجابي' : 'With Positive Trend'}
+        </h2>
+        <ComponentShowcase code={withTrend}>
+          <ComponentShowcase.Demo>
+            <div className="grid gap-4 md:grid-cols-2">
+              <StatsCard
+                label={isRTL ? 'الإيرادات' : 'Revenue'}
+                value={45231}
+                format="currency"
+                trend={12.5}
+                trendLabel={isRTL ? 'مقابل الشهر الماضي' : 'vs last month'}
+                icon={<DollarSign />}
+              />
+              <StatsCard
+                label={isRTL ? 'المستخدمون الجدد' : 'New Users'}
+                value={234}
+                trend={18.2}
+                trendLabel={isRTL ? 'مقابل الأسبوع الماضي' : 'vs last week'}
+                icon={<Users />}
+              />
+            </div>
+          </ComponentShowcase.Demo>
+        </ComponentShowcase>
+      </section>
 
       {/* With Negative Trend */}
-      <ComponentShowcase
-        title={isRTL ? 'مع اتجاه سلبي' : 'With Negative Trend'}
-        description={
-          isRTL
-            ? 'بطاقة إحصائيات مع مؤشر اتجاه سلبي'
-            : 'Stats card with negative trend indicator'
-        }
-      >
-        <div className="grid gap-4 md:grid-cols-2">
-          <StatsCard
-            label={isRTL ? 'الطلبات' : 'Orders'}
-            value={328}
-            trend={-5.2}
-            trendLabel={isRTL ? 'مقابل الأسبوع الماضي' : 'vs last week'}
-            icon={<ShoppingCart />}
-          />
-          <StatsCard
-            label={isRTL ? 'معدل الارتداد' : 'Bounce Rate'}
-            value={42.3}
-            format="percentage"
-            trend={-2.1}
-            trendLabel={isRTL ? 'مقابل الشهر الماضي' : 'vs last month'}
-            icon={<Activity />}
-          />
-        </div>
-      </ComponentShowcase>
-
-      <CodeBlock code={negativeTrend} language="tsx" />
+      <section className="mb-16">
+        <h2 className="text-2xl font-bold tracking-tight mb-6">
+          {isRTL ? 'مع اتجاه سلبي' : 'With Negative Trend'}
+        </h2>
+        <ComponentShowcase code={negativeTrend}>
+          <ComponentShowcase.Demo>
+            <div className="grid gap-4 md:grid-cols-2">
+              <StatsCard
+                label={isRTL ? 'الطلبات' : 'Orders'}
+                value={328}
+                trend={-5.2}
+                trendLabel={isRTL ? 'مقابل الأسبوع الماضي' : 'vs last week'}
+                icon={<ShoppingCart />}
+              />
+              <StatsCard
+                label={isRTL ? 'معدل الارتداد' : 'Bounce Rate'}
+                value={42.3}
+                format="percentage"
+                trend={-2.1}
+                trendLabel={isRTL ? 'مقابل الشهر الماضي' : 'vs last month'}
+                icon={<Activity />}
+              />
+            </div>
+          </ComponentShowcase.Demo>
+        </ComponentShowcase>
+      </section>
 
       {/* Percentage Format */}
-      <ComponentShowcase
-        title={isRTL ? 'تنسيق النسبة المئوية' : 'Percentage Format'}
-        description={
-          isRTL
-            ? 'بطاقة إحصائيات مع قيم النسبة المئوية'
-            : 'Stats card with percentage values'
-        }
-      >
-        <div className="grid gap-4 md:grid-cols-3">
-          <StatsCard
-            label={isRTL ? 'معدل التحويل' : 'Conversion Rate'}
-            value={3.24}
-            format="percentage"
-            trend={0.8}
-            trendLabel={isRTL ? 'مقابل الشهر الماضي' : 'vs last month'}
-            icon={<TrendingUp />}
-          />
-          <StatsCard
-            label={isRTL ? 'معدل النمو' : 'Growth Rate'}
-            value={24.5}
-            format="percentage"
-            trend={5.3}
-            trendLabel={isRTL ? 'مقابل ربع السنة' : 'vs last quarter'}
-            icon={<TrendingUp />}
-          />
-          <StatsCard
-            label={isRTL ? 'نسبة النجاح' : 'Success Rate'}
-            value={98.2}
-            format="percentage"
-            trend={1.2}
-            trendLabel={isRTL ? 'مقابل الأسبوع الماضي' : 'vs last week'}
-            icon={<Activity />}
-          />
-        </div>
-      </ComponentShowcase>
-
-      <CodeBlock code={percentage} language="tsx" />
+      <section className="mb-16">
+        <h2 className="text-2xl font-bold tracking-tight mb-6">
+          {isRTL ? 'تنسيق النسبة المئوية' : 'Percentage Format'}
+        </h2>
+        <ComponentShowcase code={percentage}>
+          <ComponentShowcase.Demo>
+            <div className="grid gap-4 md:grid-cols-3">
+              <StatsCard
+                label={isRTL ? 'معدل التحويل' : 'Conversion Rate'}
+                value={3.24}
+                format="percentage"
+                trend={0.8}
+                trendLabel={isRTL ? 'مقابل الشهر الماضي' : 'vs last month'}
+                icon={<TrendingUp />}
+              />
+              <StatsCard
+                label={isRTL ? 'معدل النمو' : 'Growth Rate'}
+                value={24.5}
+                format="percentage"
+                trend={5.3}
+                trendLabel={isRTL ? 'مقابل ربع السنة' : 'vs last quarter'}
+                icon={<TrendingUp />}
+              />
+              <StatsCard
+                label={isRTL ? 'نسبة النجاح' : 'Success Rate'}
+                value={98.2}
+                format="percentage"
+                trend={1.2}
+                trendLabel={isRTL ? 'مقابل الأسبوع الماضي' : 'vs last week'}
+                icon={<Activity />}
+              />
+            </div>
+          </ComponentShowcase.Demo>
+        </ComponentShowcase>
+      </section>
 
       {/* Loading State */}
-      <ComponentShowcase
-        title={isRTL ? 'حالة التحميل' : 'Loading State'}
-        description={
-          isRTL
-            ? 'بطاقة إحصائيات في حالة التحميل'
-            : 'Stats card in loading state'
-        }
-      >
-        <div className="grid gap-4 md:grid-cols-3">
-          <StatsCard
-            label={isRTL ? 'مشاهدات الصفحة' : 'Page Views'}
-            value={0}
-            isLoading={true}
-            icon={<Activity />}
-          />
-          <StatsCard
-            label={isRTL ? 'الزوار' : 'Visitors'}
-            value={0}
-            isLoading={true}
-            icon={<Users />}
-          />
-          <StatsCard
-            label={isRTL ? 'الإيرادات' : 'Revenue'}
-            value={0}
-            isLoading={true}
-            icon={<DollarSign />}
-          />
-        </div>
-      </ComponentShowcase>
-
-      <CodeBlock code={loading} language="tsx" />
+      <section className="mb-16">
+        <h2 className="text-2xl font-bold tracking-tight mb-6">
+          {isRTL ? 'حالة التحميل' : 'Loading State'}
+        </h2>
+        <ComponentShowcase code={loading}>
+          <ComponentShowcase.Demo>
+            <div className="grid gap-4 md:grid-cols-3">
+              <StatsCard
+                label={isRTL ? 'مشاهدات الصفحة' : 'Page Views'}
+                value={0}
+                isLoading={true}
+                icon={<Activity />}
+              />
+              <StatsCard
+                label={isRTL ? 'الزوار' : 'Visitors'}
+                value={0}
+                isLoading={true}
+                icon={<Users />}
+              />
+              <StatsCard
+                label={isRTL ? 'الإيرادات' : 'Revenue'}
+                value={0}
+                isLoading={true}
+                icon={<DollarSign />}
+              />
+            </div>
+          </ComponentShowcase.Demo>
+        </ComponentShowcase>
+      </section>
 
       {/* Props */}
       <div className="space-y-4">

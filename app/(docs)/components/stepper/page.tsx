@@ -174,36 +174,32 @@ export default function StepperPage() {
         </p>
       </div>
 
-      {/* Basic Example */}
-      <ComponentShowcase
-        title={isRTL ? 'الاستخدام الأساسي' : 'Basic Usage'}
-        description={
-          isRTL
-            ? 'مؤشر خطوات أساسي مع 4 خطوات'
-            : 'Basic stepper with 4 steps'
-        }
-      >
-        <div className="w-full max-w-2xl mx-auto">
-          <Stepper steps={steps} currentStep={currentStep1} onStepClick={setCurrentStep1} />
-          <div className="mt-8 flex justify-between">
-            <Button
-              variant="outline"
-              onClick={() => setCurrentStep1(Math.max(0, currentStep1 - 1))}
-              disabled={currentStep1 === 0}
-            >
-              {isRTL ? 'السابق' : 'Previous'}
-            </Button>
-            <Button
-              onClick={() => setCurrentStep1(Math.min(steps.length - 1, currentStep1 + 1))}
-              disabled={currentStep1 === steps.length - 1}
-            >
-              {isRTL ? 'التالي' : 'Next'}
-            </Button>
-          </div>
-        </div>
-      </ComponentShowcase>
-
-      <CodeBlock code={basicCode} language="tsx" title={isRTL ? 'الكود' : 'Code'} />
+      {/* Preview */}
+      <section className="mb-16">
+        <h2 className="text-2xl font-bold tracking-tight mb-6">{isRTL ? 'معاينة' : 'Preview'}</h2>
+        <ComponentShowcase code={basicCode}>
+          <ComponentShowcase.Demo>
+            <div className="w-full max-w-2xl mx-auto">
+              <Stepper steps={steps} currentStep={currentStep1} onStepClick={setCurrentStep1} />
+              <div className="mt-8 flex justify-between">
+                <Button
+                  variant="outline"
+                  onClick={() => setCurrentStep1(Math.max(0, currentStep1 - 1))}
+                  disabled={currentStep1 === 0}
+                >
+                  {isRTL ? 'السابق' : 'Previous'}
+                </Button>
+                <Button
+                  onClick={() => setCurrentStep1(Math.min(steps.length - 1, currentStep1 + 1))}
+                  disabled={currentStep1 === steps.length - 1}
+                >
+                  {isRTL ? 'التالي' : 'Next'}
+                </Button>
+              </div>
+            </div>
+          </ComponentShowcase.Demo>
+        </ComponentShowcase>
+      </section>
 
       {/* Variants */}
       <div className="space-y-6">
@@ -217,84 +213,94 @@ export default function StepperPage() {
         </div>
 
         {/* Simple Variant */}
-        <ComponentShowcase
-          title={isRTL ? 'الشكل البسيط' : 'Simple Variant'}
-          description={isRTL ? 'شكل مضغوط مثالي للتنقل في الأعلى' : 'Compact style ideal for top navigation'}
-        >
-          <div className="w-full max-w-2xl mx-auto">
-            <Stepper steps={simpleSteps} currentStep={currentStep2} variant="simple" onStepClick={setCurrentStep2} />
-            <div className="mt-8 flex justify-between">
-              <Button
-                variant="outline"
-                onClick={() => setCurrentStep2(Math.max(0, currentStep2 - 1))}
-                disabled={currentStep2 === 0}
-              >
-                {isRTL ? 'السابق' : 'Previous'}
-              </Button>
-              <Button
-                onClick={() => setCurrentStep2(Math.min(simpleSteps.length - 1, currentStep2 + 1))}
-                disabled={currentStep2 === simpleSteps.length - 1}
-              >
-                {isRTL ? 'التالي' : 'Next'}
-              </Button>
-            </div>
+        <div className="space-y-4">
+          <div>
+            <h3 className="text-lg font-semibold mb-2">{isRTL ? 'الشكل البسيط' : 'Simple Variant'}</h3>
+            <p className="text-sm text-muted-foreground">{isRTL ? 'شكل مضغوط مثالي للتنقل في الأعلى' : 'Compact style ideal for top navigation'}</p>
           </div>
-        </ComponentShowcase>
+          <ComponentShowcase code={variantsCode.split('\n\n')[1]}>
+            <ComponentShowcase.Demo>
+              <div className="w-full max-w-2xl mx-auto">
+                <Stepper steps={simpleSteps} currentStep={currentStep2} variant="simple" onStepClick={setCurrentStep2} />
+                <div className="mt-8 flex justify-between">
+                  <Button
+                    variant="outline"
+                    onClick={() => setCurrentStep2(Math.max(0, currentStep2 - 1))}
+                    disabled={currentStep2 === 0}
+                  >
+                    {isRTL ? 'السابق' : 'Previous'}
+                  </Button>
+                  <Button
+                    onClick={() => setCurrentStep2(Math.min(simpleSteps.length - 1, currentStep2 + 1))}
+                    disabled={currentStep2 === simpleSteps.length - 1}
+                  >
+                    {isRTL ? 'التالي' : 'Next'}
+                  </Button>
+                </div>
+              </div>
+            </ComponentShowcase.Demo>
+          </ComponentShowcase>
+        </div>
 
         {/* Circles Variant */}
-        <ComponentShowcase
-          title={isRTL ? 'شكل الدوائر' : 'Circles Variant'}
-          description={isRTL ? 'دوائر كبيرة مع تأثير تكبير' : 'Large circles with scale effect'}
-        >
-          <div className="w-full max-w-2xl mx-auto">
-            <Stepper steps={simpleSteps} currentStep={currentStep3} variant="circles" onStepClick={setCurrentStep3} />
-            <div className="mt-8 flex justify-between">
-              <Button
-                variant="outline"
-                onClick={() => setCurrentStep3(Math.max(0, currentStep3 - 1))}
-                disabled={currentStep3 === 0}
-              >
-                {isRTL ? 'السابق' : 'Previous'}
-              </Button>
-              <Button
-                onClick={() => setCurrentStep3(Math.min(simpleSteps.length - 1, currentStep3 + 1))}
-                disabled={currentStep3 === simpleSteps.length - 1}
-              >
-                {isRTL ? 'التالي' : 'Next'}
-              </Button>
-            </div>
+        <div className="space-y-4">
+          <div>
+            <h3 className="text-lg font-semibold mb-2">{isRTL ? 'شكل الدوائر' : 'Circles Variant'}</h3>
+            <p className="text-sm text-muted-foreground">{isRTL ? 'دوائر كبيرة مع تأثير تكبير' : 'Large circles with scale effect'}</p>
           </div>
-        </ComponentShowcase>
+          <ComponentShowcase code={variantsCode.split('\n\n')[2]}>
+            <ComponentShowcase.Demo>
+              <div className="w-full max-w-2xl mx-auto">
+                <Stepper steps={simpleSteps} currentStep={currentStep3} variant="circles" onStepClick={setCurrentStep3} />
+                <div className="mt-8 flex justify-between">
+                  <Button
+                    variant="outline"
+                    onClick={() => setCurrentStep3(Math.max(0, currentStep3 - 1))}
+                    disabled={currentStep3 === 0}
+                  >
+                    {isRTL ? 'السابق' : 'Previous'}
+                  </Button>
+                  <Button
+                    onClick={() => setCurrentStep3(Math.min(simpleSteps.length - 1, currentStep3 + 1))}
+                    disabled={currentStep3 === simpleSteps.length - 1}
+                  >
+                    {isRTL ? 'التالي' : 'Next'}
+                  </Button>
+                </div>
+              </div>
+            </ComponentShowcase.Demo>
+          </ComponentShowcase>
+        </div>
       </div>
 
       <CodeBlock code={variantsCode} language="tsx" />
 
       {/* Vertical Orientation */}
-      <ComponentShowcase
-        title={isRTL ? 'الاتجاه الرأسي' : 'Vertical Orientation'}
-        description={isRTL ? 'مؤشر خطوات رأسي للتخطيطات الجانبية' : 'Vertical stepper for sidebar layouts'}
-      >
-        <div className="max-w-md mx-auto">
-          <Stepper steps={steps} currentStep={currentStep4} orientation="vertical" onStepClick={setCurrentStep4} />
-          <div className="mt-8 flex justify-between">
-            <Button
-              variant="outline"
-              onClick={() => setCurrentStep4(Math.max(0, currentStep4 - 1))}
-              disabled={currentStep4 === 0}
-            >
-              {isRTL ? 'السابق' : 'Previous'}
-            </Button>
-            <Button
-              onClick={() => setCurrentStep4(Math.min(steps.length - 1, currentStep4 + 1))}
-              disabled={currentStep4 === steps.length - 1}
-            >
-              {isRTL ? 'التالي' : 'Next'}
-            </Button>
-          </div>
-        </div>
-      </ComponentShowcase>
-
-      <CodeBlock code={verticalCode} language="tsx" />
+      <section className="mb-16">
+        <h2 className="text-2xl font-bold tracking-tight mb-6">{isRTL ? 'الاتجاه الرأسي' : 'Vertical Orientation'}</h2>
+        <ComponentShowcase code={verticalCode}>
+          <ComponentShowcase.Demo>
+            <div className="max-w-md mx-auto">
+              <Stepper steps={steps} currentStep={currentStep4} orientation="vertical" onStepClick={setCurrentStep4} />
+              <div className="mt-8 flex justify-between">
+                <Button
+                  variant="outline"
+                  onClick={() => setCurrentStep4(Math.max(0, currentStep4 - 1))}
+                  disabled={currentStep4 === 0}
+                >
+                  {isRTL ? 'السابق' : 'Previous'}
+                </Button>
+                <Button
+                  onClick={() => setCurrentStep4(Math.min(steps.length - 1, currentStep4 + 1))}
+                  disabled={currentStep4 === steps.length - 1}
+                >
+                  {isRTL ? 'التالي' : 'Next'}
+                </Button>
+              </div>
+            </div>
+          </ComponentShowcase.Demo>
+        </ComponentShowcase>
+      </section>
 
       {/* Use Cases */}
       <div className="space-y-4">

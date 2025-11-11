@@ -282,170 +282,162 @@ interface ListingCardTag {
         </div>
 
       {/* Basic Usage */}
-      <ComponentShowcase
-        title={isRTL ? 'الاستخدام الأساسي' : 'Basic Usage'}
-        description={
-          isRTL
-            ? 'بطاقة قائمة بسيطة مع عنوان وعنوان فرعي ووصف وسعر'
-            : 'Simple listing card with title, subtitle, description, and price'
-        }
-      >
-        <div className="max-w-sm mx-auto">
-          <ListingCard
-            title={isRTL ? 'شقة عصرية' : 'Modern Apartment'}
-            subtitle={isRTL ? 'وسط مدينة دبي' : 'Downtown Dubai'}
-            description={
-              isRTL
-                ? 'شقة جميلة من غرفتي نوم مع إطلالات خلابة'
-                : 'Beautiful 2-bedroom apartment with stunning views'
-            }
-            price={isRTL ? '1,200,000 د.إ' : '1,200,000 AED'}
-            placeholderIcon={Home}
-          />
-        </div>
-      </ComponentShowcase>
-
-      <CodeBlock code={basicUsage} language="tsx" title={isRTL ? 'الكود' : 'Code'} />
+      <section className="mb-16">
+        <h2 className="text-2xl font-bold tracking-tight mb-6">
+          {isRTL ? 'الاستخدام الأساسي' : 'Basic Usage'}
+        </h2>
+        <ComponentShowcase code={basicUsage}>
+          <ComponentShowcase.Demo>
+            <div className="max-w-sm mx-auto">
+              <ListingCard
+                title={isRTL ? 'شقة عصرية' : 'Modern Apartment'}
+                subtitle={isRTL ? 'وسط مدينة دبي' : 'Downtown Dubai'}
+                description={
+                  isRTL
+                    ? 'شقة جميلة من غرفتي نوم مع إطلالات خلابة'
+                    : 'Beautiful 2-bedroom apartment with stunning views'
+                }
+                price={isRTL ? '1,200,000 د.إ' : '1,200,000 AED'}
+                placeholderIcon={Home}
+              />
+            </div>
+          </ComponentShowcase.Demo>
+        </ComponentShowcase>
+      </section>
 
       {/* Real Estate Example */}
-      <ComponentShowcase
-        title={isRTL ? 'قائمة عقارية' : 'Real Estate Listing'}
-        description={
-          isRTL
-            ? 'مثالية للقوائم العقارية مع الموقع والإحصائيات والمرافق'
-            : 'Perfect for property listings with location, stats, and amenities'
-        }
-      >
-        <div className="max-w-sm mx-auto">
-          <ListingCard
-            title={isRTL ? 'فيلا فاخرة في دبي هيلز' : 'Luxury Villa in Dubai Hills'}
-            subtitle={
-              <>
-                <MapPin className="h-3 w-3 inline me-1" />
-                {isRTL ? 'دبي هيلز استيت، دبي' : 'Dubai Hills Estate, Dubai'}
-              </>
-            }
-            description={
-              isRTL
-                ? 'فيلا مذهلة من 5 غرف نوم مع مسبح خاص وحديقة'
-                : 'Stunning 5-bedroom villa with private pool and garden'
-            }
-            price={isRTL ? '8,500,000 د.إ' : '8,500,000 AED'}
-            placeholderIcon={Home}
-            badges={[
-              { label: isRTL ? 'للبيع' : 'For Sale', variant: 'default' },
-              { label: isRTL ? 'مميز' : 'Featured', variant: 'destructive' },
-            ]}
-            actions={[
-              { icon: Heart, label: isRTL ? 'مفضلة' : 'Favorite', onClick: () => {} },
-              { icon: Share2, label: isRTL ? 'مشاركة' : 'Share', onClick: () => {} },
-            ]}
-            stats={[
-              { icon: Bed, value: 5, label: isRTL ? 'غرف النوم' : 'Bedrooms' },
-              { icon: Bath, value: 6, label: isRTL ? 'الحمامات' : 'Bathrooms' },
-              { icon: Square, value: '4,500 sqft', label: isRTL ? 'المساحة' : 'Area' },
-            ]}
-            tags={[
-              { label: isRTL ? 'مسبح خاص' : 'Private Pool' },
-              { label: isRTL ? 'حديقة' : 'Garden' },
-              { label: isRTL ? 'منزل ذكي' : 'Smart Home' },
-              { label: isRTL ? 'موقف سيارات' : 'Parking' },
-              { label: isRTL ? 'أمن' : 'Security' },
-            ]}
-            typeBadge={isRTL ? 'فيلا' : 'Villa'}
-            featured={true}
-          />
-        </div>
-      </ComponentShowcase>
-
-      <CodeBlock code={realEstateCode} language="tsx" />
+      <section className="mb-16">
+        <h2 className="text-2xl font-bold tracking-tight mb-6">
+          {isRTL ? 'قائمة عقارية' : 'Real Estate Listing'}
+        </h2>
+        <ComponentShowcase code={realEstateCode}>
+          <ComponentShowcase.Demo>
+            <div className="max-w-sm mx-auto">
+              <ListingCard
+                title={isRTL ? 'فيلا فاخرة في دبي هيلز' : 'Luxury Villa in Dubai Hills'}
+                subtitle={
+                  <>
+                    <MapPin className="h-3 w-3 inline me-1" />
+                    {isRTL ? 'دبي هيلز استيت، دبي' : 'Dubai Hills Estate, Dubai'}
+                  </>
+                }
+                description={
+                  isRTL
+                    ? 'فيلا مذهلة من 5 غرف نوم مع مسبح خاص وحديقة'
+                    : 'Stunning 5-bedroom villa with private pool and garden'
+                }
+                price={isRTL ? '8,500,000 د.إ' : '8,500,000 AED'}
+                placeholderIcon={Home}
+                badges={[
+                  { label: isRTL ? 'للبيع' : 'For Sale', variant: 'default' },
+                  { label: isRTL ? 'مميز' : 'Featured', variant: 'destructive' },
+                ]}
+                actions={[
+                  { icon: Heart, label: isRTL ? 'مفضلة' : 'Favorite', onClick: () => {} },
+                  { icon: Share2, label: isRTL ? 'مشاركة' : 'Share', onClick: () => {} },
+                ]}
+                stats={[
+                  { icon: Bed, value: 5, label: isRTL ? 'غرف النوم' : 'Bedrooms' },
+                  { icon: Bath, value: 6, label: isRTL ? 'الحمامات' : 'Bathrooms' },
+                  { icon: Square, value: '4,500 sqft', label: isRTL ? 'المساحة' : 'Area' },
+                ]}
+                tags={[
+                  { label: isRTL ? 'مسبح خاص' : 'Private Pool' },
+                  { label: isRTL ? 'حديقة' : 'Garden' },
+                  { label: isRTL ? 'منزل ذكي' : 'Smart Home' },
+                  { label: isRTL ? 'موقف سيارات' : 'Parking' },
+                  { label: isRTL ? 'أمن' : 'Security' },
+                ]}
+                typeBadge={isRTL ? 'فيلا' : 'Villa'}
+                featured={true}
+              />
+            </div>
+          </ComponentShowcase.Demo>
+        </ComponentShowcase>
+      </section>
 
       {/* E-commerce Example */}
-      <ComponentShowcase
-        title={isRTL ? 'منتج تجارة إلكترونية' : 'E-commerce Product'}
-        description={
-          isRTL
-            ? 'رائع لبطاقات المنتجات مع التقييمات وشارات التخفيض'
-            : 'Great for product cards with ratings and sale badges'
-        }
-      >
-        <div className="max-w-sm mx-auto">
-          <ListingCard
-            title={isRTL ? 'سماعات لاسلكية متميزة' : 'Premium Wireless Headphones'}
-            subtitle={isRTL ? 'اسم العلامة التجارية' : 'Brand Name'}
-            description={
-              isRTL
-                ? 'سماعات لاسلكية عالية الجودة مع إلغاء الضوضاء'
-                : 'High-quality wireless headphones with noise cancellation'
-            }
-            price="$299.99"
-            placeholderIcon={Package}
-            badges={[
-              { label: isRTL ? 'الأكثر مبيعاً' : 'Best Seller', variant: 'default' },
-              { label: isRTL ? 'خصم 20%' : '20% Off', variant: 'destructive' },
-            ]}
-            actions={[{ icon: Heart, label: isRTL ? 'مفضلة' : 'Wishlist', onClick: () => {} }]}
-            stats={[
-              { icon: Star, value: '4.8', label: isRTL ? 'التقييم' : 'Rating' },
-              { icon: Package, value: '234', label: isRTL ? 'مباع' : 'Sold' },
-            ]}
-            tags={[
-              { label: isRTL ? 'إلغاء الضوضاء' : 'Noise Cancelling' },
-              { label: isRTL ? 'لاسلكي' : 'Wireless' },
-              { label: isRTL ? 'شحن سريع' : 'Fast Charging' },
-            ]}
-            ctaText={isRTL ? 'أضف إلى السلة' : 'Add to Cart'}
-            onCtaClick={() => {}}
-            imageAspect="square"
-          />
-        </div>
-      </ComponentShowcase>
-
-      <CodeBlock code={ecommerceCode} language="tsx" />
+      <section className="mb-16">
+        <h2 className="text-2xl font-bold tracking-tight mb-6">
+          {isRTL ? 'منتج تجارة إلكترونية' : 'E-commerce Product'}
+        </h2>
+        <ComponentShowcase code={ecommerceCode}>
+          <ComponentShowcase.Demo>
+            <div className="max-w-sm mx-auto">
+              <ListingCard
+                title={isRTL ? 'سماعات لاسلكية متميزة' : 'Premium Wireless Headphones'}
+                subtitle={isRTL ? 'اسم العلامة التجارية' : 'Brand Name'}
+                description={
+                  isRTL
+                    ? 'سماعات لاسلكية عالية الجودة مع إلغاء الضوضاء'
+                    : 'High-quality wireless headphones with noise cancellation'
+                }
+                price="$299.99"
+                placeholderIcon={Package}
+                badges={[
+                  { label: isRTL ? 'الأكثر مبيعاً' : 'Best Seller', variant: 'default' },
+                  { label: isRTL ? 'خصم 20%' : '20% Off', variant: 'destructive' },
+                ]}
+                actions={[{ icon: Heart, label: isRTL ? 'مفضلة' : 'Wishlist', onClick: () => {} }]}
+                stats={[
+                  { icon: Star, value: '4.8', label: isRTL ? 'التقييم' : 'Rating' },
+                  { icon: Package, value: '234', label: isRTL ? 'مباع' : 'Sold' },
+                ]}
+                tags={[
+                  { label: isRTL ? 'إلغاء الضوضاء' : 'Noise Cancelling' },
+                  { label: isRTL ? 'لاسلكي' : 'Wireless' },
+                  { label: isRTL ? 'شحن سريع' : 'Fast Charging' },
+                ]}
+                ctaText={isRTL ? 'أضف إلى السلة' : 'Add to Cart'}
+                onCtaClick={() => {}}
+                imageAspect="square"
+              />
+            </div>
+          </ComponentShowcase.Demo>
+        </ComponentShowcase>
+      </section>
 
       {/* Job Listing Example */}
-      <ComponentShowcase
-        title={isRTL ? 'قائمة وظائف' : 'Job Listing'}
-        description={
-          isRTL
-            ? 'مثالي للوحات الوظائف مع تفاصيل المنصب ونطاق الراتب'
-            : 'Ideal for job boards with position details and salary range'
-        }
-      >
-        <div className="max-w-sm mx-auto">
-          <ListingCard
-            title={isRTL ? 'مطور واجهة أمامية أول' : 'Senior Frontend Developer'}
-            subtitle={
-              <>
-                <MapPin className="h-3 w-3 inline me-1" />
-                {isRTL ? 'دبي، الإمارات' : 'Dubai, UAE'}
-              </>
-            }
-            description={
-              isRTL
-                ? 'انضم إلى فريقنا لبناء تطبيقات ويب متطورة'
-                : 'Join our team to build cutting-edge web applications'
-            }
-            price={isRTL ? '15,000 - 20,000 د.إ/شهرياً' : '15,000 - 20,000 AED/month'}
-            placeholderIcon={Briefcase}
-            badges={[
-              { label: isRTL ? 'دوام كامل' : 'Full Time', variant: 'default' },
-              { label: isRTL ? 'عن بعد' : 'Remote OK', variant: 'secondary' },
-            ]}
-            stats={[{ icon: Clock, value: isRTL ? 'نُشر قبل يومين' : 'Posted 2 days ago' }]}
-            tags={[
-              { label: 'React' },
-              { label: 'TypeScript' },
-              { label: 'Next.js' },
-            ]}
-            typeBadge={isRTL ? 'تقني' : 'Tech'}
-            ctaText={isRTL ? 'تقدم الآن' : 'Apply Now'}
-            onCtaClick={() => {}}
-          />
-        </div>
-      </ComponentShowcase>
-
-      <CodeBlock code={jobListingCode} language="tsx" />
+      <section className="mb-16">
+        <h2 className="text-2xl font-bold tracking-tight mb-6">
+          {isRTL ? 'قائمة وظائف' : 'Job Listing'}
+        </h2>
+        <ComponentShowcase code={jobListingCode}>
+          <ComponentShowcase.Demo>
+            <div className="max-w-sm mx-auto">
+              <ListingCard
+                title={isRTL ? 'مطور واجهة أمامية أول' : 'Senior Frontend Developer'}
+                subtitle={
+                  <>
+                    <MapPin className="h-3 w-3 inline me-1" />
+                    {isRTL ? 'دبي، الإمارات' : 'Dubai, UAE'}
+                  </>
+                }
+                description={
+                  isRTL
+                    ? 'انضم إلى فريقنا لبناء تطبيقات ويب متطورة'
+                    : 'Join our team to build cutting-edge web applications'
+                }
+                price={isRTL ? '15,000 - 20,000 د.إ/شهرياً' : '15,000 - 20,000 AED/month'}
+                placeholderIcon={Briefcase}
+                badges={[
+                  { label: isRTL ? 'دوام كامل' : 'Full Time', variant: 'default' },
+                  { label: isRTL ? 'عن بعد' : 'Remote OK', variant: 'secondary' },
+                ]}
+                stats={[{ icon: Clock, value: isRTL ? 'نُشر قبل يومين' : 'Posted 2 days ago' }]}
+                tags={[
+                  { label: 'React' },
+                  { label: 'TypeScript' },
+                  { label: 'Next.js' },
+                ]}
+                typeBadge={isRTL ? 'تقني' : 'Tech'}
+                ctaText={isRTL ? 'تقدم الآن' : 'Apply Now'}
+                onCtaClick={() => {}}
+              />
+            </div>
+          </ComponentShowcase.Demo>
+        </ComponentShowcase>
+      </section>
 
       {/* Use Cases */}
       <div className="space-y-4">
