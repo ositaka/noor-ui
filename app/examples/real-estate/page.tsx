@@ -6,6 +6,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Input } from '@/components/ui/input'
+import { Checkbox } from '@/components/ui/checkbox'
+import { Slider } from '@/components/ui/slider'
 import {
   Select,
   SelectContent,
@@ -13,6 +15,24 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+  DialogFooter,
+} from '@/components/ui/dialog'
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from '@/components/ui/pagination'
 import {
   Home,
   MapPin,
@@ -25,7 +45,8 @@ import {
   Heart,
   Share2,
   Building2,
-  Car,
+  X,
+  SlidersHorizontal,
 } from 'lucide-react'
 import { useDirection } from '@/components/providers/direction-provider'
 
@@ -38,6 +59,8 @@ interface Property {
   price: number
   location: string
   locationAr: string
+  city: string
+  cityAr: string
   bedrooms: number
   bathrooms: number
   area: number
@@ -47,158 +70,221 @@ interface Property {
   imageUrl: string
   amenities: string[]
   amenitiesAr: string[]
+  furnished: boolean
+  parking: number
+  yearBuilt: number
+}
+
+// Generate more realistic mock data
+const generateProperties = (): Property[] => {
+  const locations = [
+    { en: 'Dubai Hills Estate, Dubai', ar: 'دبي هيلز استيت، دبي', city: 'Dubai', cityAr: 'دبي' },
+    { en: 'Downtown Dubai', ar: 'وسط مدينة دبي', city: 'Dubai', cityAr: 'دبي' },
+    { en: 'Arabian Ranches, Dubai', ar: 'المرابع العربية، دبي', city: 'Dubai', cityAr: 'دبي' },
+    { en: 'Dubai Marina', ar: 'دبي مارينا', city: 'Dubai', cityAr: 'دبي' },
+    { en: 'Jumeirah, Dubai', ar: 'جميرا، دبي', city: 'Dubai', cityAr: 'دبي' },
+    { en: 'Business Bay, Dubai', ar: 'الخليج التجاري، دبي', city: 'Dubai', cityAr: 'دبي' },
+    { en: 'Palm Jumeirah, Dubai', ar: 'نخلة جميرا، دبي', city: 'Dubai', cityAr: 'دبي' },
+    { en: 'Jumeirah Village Circle, Dubai', ar: 'قرية جميرا الدائرية، دبي', city: 'Dubai', cityAr: 'دبي' },
+    { en: 'Al Reem Island, Abu Dhabi', ar: 'جزيرة الريم، أبوظبي', city: 'Abu Dhabi', cityAr: 'أبوظبي' },
+    { en: 'Yas Island, Abu Dhabi', ar: 'جزيرة ياس، أبوظبي', city: 'Abu Dhabi', cityAr: 'أبوظبي' },
+    { en: 'Al Majaz, Sharjah', ar: 'المجاز، الشارقة', city: 'Sharjah', cityAr: 'الشارقة' },
+    { en: 'Muwaileh, Sharjah', ar: 'مويلح، الشارقة', city: 'Sharjah', cityAr: 'الشارقة' },
+  ]
+
+  const propertyTypes: Array<{ type: Property['type']; beds: number[]; baths: number[] }> = [
+    { type: 'villa', beds: [3, 4, 5, 6], baths: [3, 4, 5, 6, 7] },
+    { type: 'apartment', beds: [1, 2, 3], baths: [1, 2, 3] },
+    { type: 'townhouse', beds: [3, 4], baths: [3, 4] },
+    { type: 'penthouse', beds: [3, 4], baths: [3, 4, 5] },
+  ]
+
+  const amenitiesList = [
+    { en: ['Private Pool', 'Garden', 'Maid Room', 'Smart Home', 'Parking', 'Gym', 'Security'],
+      ar: ['مسبح خاص', 'حديقة', 'غرفة خادمة', 'منزل ذكي', 'موقف سيارات', 'صالة رياضية', 'أمن'] },
+    { en: ['Gym', 'Pool', 'Concierge', 'Parking', 'Security', 'Balcony'],
+      ar: ['صالة رياضية', 'مسبح', 'خدمة الكونسيرج', 'موقف سيارات', 'أمن', 'شرفة'] },
+    { en: ['Community Pool', 'Park', 'BBQ Area', 'Kids Play Area', 'Parking'],
+      ar: ['مسبح مشترك', 'حديقة', 'منطقة شواء', 'منطقة لعب أطفال', 'موقف سيارات'] },
+    { en: ['Private Terrace', 'Sea View', 'Gym', 'Pool', 'Concierge', 'Parking'],
+      ar: ['شرفة خاصة', 'إطلالة بحرية', 'صالة رياضية', 'مسبح', 'خدمة الكونسيرج', 'موقف سيارات'] },
+  ]
+
+  const properties: Property[] = []
+
+  for (let i = 0; i < 24; i++) {
+    const propType = propertyTypes[i % propertyTypes.length]
+    const location = locations[i % locations.length]
+    const bedrooms = propType.beds[i % propType.beds.length]
+    const bathrooms = propType.baths[i % propType.baths.length]
+    const status: Property['status'] = i % 3 === 0 ? 'rent' : 'sale'
+    const amenities = amenitiesList[i % amenitiesList.length]
+
+    // Calculate price based on type and bedrooms
+    let basePrice = 0
+    if (propType.type === 'villa') {
+      basePrice = status === 'sale' ? 3000000 + (bedrooms * 1000000) : 120000 + (bedrooms * 30000)
+    } else if (propType.type === 'penthouse') {
+      basePrice = status === 'sale' ? 2500000 + (bedrooms * 800000) : 180000 + (bedrooms * 50000)
+    } else if (propType.type === 'townhouse') {
+      basePrice = status === 'sale' ? 2000000 + (bedrooms * 600000) : 90000 + (bedrooms * 20000)
+    } else {
+      basePrice = status === 'sale' ? 800000 + (bedrooms * 400000) : 45000 + (bedrooms * 15000)
+    }
+
+    const price = basePrice + (i * 100000)
+    const area = bedrooms * 800 + (propType.type === 'villa' ? 1000 : 400)
+
+    properties.push({
+      id: `prop-${i + 1}`,
+      title: `${propType.type.charAt(0).toUpperCase() + propType.type.slice(1)} ${bedrooms}BR in ${location.en.split(',')[0]}`,
+      titleAr: `${propType.type === 'villa' ? 'فيلا' : propType.type === 'apartment' ? 'شقة' : propType.type === 'townhouse' ? 'تاون هاوس' : 'بنتهاوس'} ${bedrooms} غرف في ${location.ar.split('،')[0]}`,
+      description: `${propType.type === 'villa' ? 'Stunning' : 'Modern'} ${bedrooms}-bedroom ${propType.type} with ${bathrooms} bathrooms in ${location.en.split(',')[0]}.`,
+      descriptionAr: `${propType.type === 'villa' ? 'مذهلة' : 'عصرية'} ${propType.type === 'villa' ? 'فيلا' : propType.type === 'apartment' ? 'شقة' : propType.type === 'townhouse' ? 'تاون هاوس' : 'بنتهاوس'} من ${bedrooms} غرف نوم و ${bathrooms} حمامات في ${location.ar.split('،')[0]}.`,
+      price,
+      location: location.en,
+      locationAr: location.ar,
+      city: location.city,
+      cityAr: location.cityAr,
+      bedrooms,
+      bathrooms,
+      area,
+      type: propType.type,
+      status,
+      featured: i % 5 === 0,
+      imageUrl: '/placeholder-property.jpg',
+      amenities: amenities.en,
+      amenitiesAr: amenities.ar,
+      furnished: i % 3 === 0,
+      parking: bedrooms > 2 ? 2 : 1,
+      yearBuilt: 2015 + (i % 9),
+    })
+  }
+
+  return properties
 }
 
 export default function RealEstatePage() {
   const { locale } = useDirection()
+
+  // Data
+  const [allProperties] = React.useState<Property[]>(generateProperties())
+  const [filteredProperties, setFilteredProperties] = React.useState<Property[]>(allProperties)
+
+  // Search & Filter state
   const [searchQuery, setSearchQuery] = React.useState('')
-  const [propertyType, setPropertyType] = React.useState('all')
-  const [priceRange, setPriceRange] = React.useState('all')
+  const [selectedCity, setSelectedCity] = React.useState('all')
+  const [selectedType, setSelectedType] = React.useState('all')
+  const [selectedStatus, setSelectedStatus] = React.useState('all')
 
-  // Mock property data
-  const properties: Property[] = [
-    {
-      id: '1',
-      title: 'Luxury Villa in Dubai Hills',
-      titleAr: 'فيلا فاخرة في دبي هيلز',
-      description: 'Stunning 5-bedroom villa with private pool and garden in prestigious Dubai Hills Estate.',
-      descriptionAr: 'فيلا مذهلة من 5 غرف نوم مع مسبح خاص وحديقة في دبي هيلز استيت المرموقة.',
-      price: 8500000,
-      location: 'Dubai Hills Estate, Dubai',
-      locationAr: 'دبي هيلز استيت، دبي',
-      bedrooms: 5,
-      bathrooms: 6,
-      area: 4500,
-      type: 'villa',
-      status: 'sale',
-      featured: true,
-      imageUrl: '/placeholder-property.jpg',
-      amenities: ['Private Pool', 'Garden', 'Maid Room', 'Smart Home', 'Parking'],
-      amenitiesAr: ['مسبح خاص', 'حديقة', 'غرفة خادمة', 'منزل ذكي', 'موقف سيارات'],
-    },
-    {
-      id: '2',
-      title: 'Modern Apartment in Downtown',
-      titleAr: 'شقة عصرية في وسط المدينة',
-      description: 'Contemporary 2-bedroom apartment with stunning Burj Khalifa views.',
-      descriptionAr: 'شقة عصرية من غرفتي نوم مع إطلالات خلابة على برج خليفة.',
-      price: 150000,
-      location: 'Downtown Dubai',
-      locationAr: 'وسط مدينة دبي',
-      bedrooms: 2,
-      bathrooms: 3,
-      area: 1200,
-      type: 'apartment',
-      status: 'rent',
-      featured: true,
-      imageUrl: '/placeholder-property.jpg',
-      amenities: ['Gym', 'Pool', 'Concierge', 'Parking'],
-      amenitiesAr: ['صالة رياضية', 'مسبح', 'خدمة الكونسيرج', 'موقف سيارات'],
-    },
-    {
-      id: '3',
-      title: 'Spacious Townhouse in Arabian Ranches',
-      titleAr: 'تاون هاوس واسع في المرابع العربية',
-      description: '4-bedroom townhouse with community facilities and green spaces.',
-      descriptionAr: 'تاون هاوس من 4 غرف نوم مع مرافق مجتمعية ومساحات خضراء.',
-      price: 3200000,
-      location: 'Arabian Ranches, Dubai',
-      locationAr: 'المرابع العربية، دبي',
-      bedrooms: 4,
-      bathrooms: 4,
-      area: 2800,
-      type: 'townhouse',
-      status: 'sale',
-      featured: false,
-      imageUrl: '/placeholder-property.jpg',
-      amenities: ['Community Pool', 'Park', 'BBQ Area', 'Kids Play Area'],
-      amenitiesAr: ['مسبح مشترك', 'حديقة', 'منطقة شواء', 'منطقة لعب أطفال'],
-    },
-    {
-      id: '4',
-      title: 'Penthouse with Sea View',
-      titleAr: 'بنتهاوس مع إطلالة بحرية',
-      description: 'Exclusive penthouse with panoramic sea views and private terrace.',
-      descriptionAr: 'بنتهاوس حصري مع إطلالات بانورامية على البحر وشرفة خاصة.',
-      price: 250000,
-      location: 'Dubai Marina',
-      locationAr: 'دبي مارينا',
-      bedrooms: 3,
-      bathrooms: 4,
-      area: 2200,
-      type: 'penthouse',
-      status: 'rent',
-      featured: true,
-      imageUrl: '/placeholder-property.jpg',
-      amenities: ['Private Terrace', 'Sea View', 'Gym', 'Pool', 'Concierge'],
-      amenitiesAr: ['شرفة خاصة', 'إطلالة بحرية', 'صالة رياضية', 'مسبح', 'خدمة الكونسيرج'],
-    },
-    {
-      id: '5',
-      title: 'Family Villa in Jumeirah',
-      titleAr: 'فيلا عائلية في جميرا',
-      description: 'Traditional family villa in prime location with modern amenities.',
-      descriptionAr: 'فيلا عائلية تقليدية في موقع متميز مع وسائل راحة عصرية.',
-      price: 6800000,
-      location: 'Jumeirah, Dubai',
-      locationAr: 'جميرا، دبي',
-      bedrooms: 6,
-      bathrooms: 7,
-      area: 5200,
-      type: 'villa',
-      status: 'sale',
-      featured: false,
-      imageUrl: '/placeholder-property.jpg',
-      amenities: ['Private Pool', 'Garden', 'Elevator', 'Driver Room', 'Parking'],
-      amenitiesAr: ['مسبح خاص', 'حديقة', 'مصعد', 'غرفة سائق', 'موقف سيارات'],
-    },
-    {
-      id: '6',
-      title: 'Studio Apartment in Business Bay',
-      titleAr: 'شقة استوديو في الخليج التجاري',
-      description: 'Compact studio ideal for professionals with modern finishes.',
-      descriptionAr: 'استوديو مدمج مثالي للمحترفين مع تشطيبات عصرية.',
-      price: 45000,
-      location: 'Business Bay, Dubai',
-      locationAr: 'الخليج التجاري، دبي',
-      bedrooms: 1,
-      bathrooms: 1,
-      area: 450,
-      type: 'apartment',
-      status: 'rent',
-      featured: false,
-      imageUrl: '/placeholder-property.jpg',
-      amenities: ['Gym', 'Pool', 'Security', 'Parking'],
-      amenitiesAr: ['صالة رياضية', 'مسبح', 'أمن', 'موقف سيارات'],
-    },
-  ]
+  // Advanced filters
+  const [bedroomFilter, setBedroomFilter] = React.useState<string[]>([])
+  const [priceRange, setPriceRange] = React.useState<number[]>([0, 10000000])
+  const [areaRange, setAreaRange] = React.useState<number[]>([0, 10000])
+  const [furnishedOnly, setFurnishedOnly] = React.useState(false)
+  const [featuredOnly, setFeaturedOnly] = React.useState(false)
 
+  // Pagination
+  const [currentPage, setCurrentPage] = React.useState(1)
+  const propertiesPerPage = 9
+  const totalPages = Math.ceil(filteredProperties.length / propertiesPerPage)
+
+  // Dialog state
+  const [filterDialogOpen, setFilterDialogOpen] = React.useState(false)
+
+  // Apply filters
+  React.useEffect(() => {
+    let filtered = [...allProperties]
+
+    // Search
+    if (searchQuery) {
+      const query = searchQuery.toLowerCase()
+      filtered = filtered.filter(
+        (p) =>
+          p.title.toLowerCase().includes(query) ||
+          p.titleAr.includes(query) ||
+          p.location.toLowerCase().includes(query) ||
+          p.locationAr.includes(query) ||
+          p.city.toLowerCase().includes(query)
+      )
+    }
+
+    // City filter
+    if (selectedCity !== 'all') {
+      filtered = filtered.filter((p) => p.city === selectedCity)
+    }
+
+    // Type filter
+    if (selectedType !== 'all') {
+      filtered = filtered.filter((p) => p.type === selectedType)
+    }
+
+    // Status filter
+    if (selectedStatus !== 'all') {
+      filtered = filtered.filter((p) => p.status === selectedStatus)
+    }
+
+    // Bedroom filter
+    if (bedroomFilter.length > 0) {
+      filtered = filtered.filter((p) => bedroomFilter.includes(String(p.bedrooms)))
+    }
+
+    // Price range
+    filtered = filtered.filter((p) => p.price >= priceRange[0] && p.price <= priceRange[1])
+
+    // Area range
+    filtered = filtered.filter((p) => p.area >= areaRange[0] && p.area <= areaRange[1])
+
+    // Furnished filter
+    if (furnishedOnly) {
+      filtered = filtered.filter((p) => p.furnished)
+    }
+
+    // Featured filter
+    if (featuredOnly) {
+      filtered = filtered.filter((p) => p.featured)
+    }
+
+    setFilteredProperties(filtered)
+    setCurrentPage(1) // Reset to first page
+  }, [searchQuery, selectedCity, selectedType, selectedStatus, bedroomFilter, priceRange, areaRange, furnishedOnly, featuredOnly, allProperties])
+
+  // Paginated properties
+  const paginatedProperties = filteredProperties.slice(
+    (currentPage - 1) * propertiesPerPage,
+    currentPage * propertiesPerPage
+  )
+
+  // Stats
   const stats = [
     {
       label: 'إجمالي العقارات',
       labelEn: 'Total Properties',
-      value: '2,543',
+      value: filteredProperties.length.toLocaleString(),
       icon: Building2,
       trend: '+12%',
     },
     {
       label: 'متوسط السعر',
       labelEn: 'Average Price',
-      value: '4.2M AED',
+      value:
+        filteredProperties.length > 0
+          ? `${(filteredProperties.reduce((sum, p) => sum + p.price, 0) / filteredProperties.length / 1000000).toFixed(1)}M`
+          : '0',
       icon: TrendingUp,
       trend: '+8%',
     },
     {
       label: 'عقارات للبيع',
       labelEn: 'For Sale',
-      value: '1,234',
+      value: filteredProperties.filter((p) => p.status === 'sale').length.toLocaleString(),
       icon: Home,
       trend: '+5%',
     },
     {
       label: 'عقارات للإيجار',
       labelEn: 'For Rent',
-      value: '1,309',
+      value: filteredProperties.filter((p) => p.status === 'rent').length.toLocaleString(),
       icon: Home,
       trend: '+15%',
     },
@@ -215,13 +301,7 @@ export default function RealEstatePage() {
   }
 
   const getStatusLabel = (status: string) => {
-    return status === 'sale'
-      ? locale === 'ar'
-        ? 'للبيع'
-        : 'For Sale'
-      : locale === 'ar'
-        ? 'للإيجار'
-        : 'For Rent'
+    return status === 'sale' ? (locale === 'ar' ? 'للبيع' : 'For Sale') : locale === 'ar' ? 'للإيجار' : 'For Rent'
   }
 
   const formatPrice = (price: number, status: string) => {
@@ -229,6 +309,21 @@ export default function RealEstatePage() {
     const suffix = status === 'rent' ? (locale === 'ar' ? '/سنوياً' : '/year') : ''
     return `${formatted} ${locale === 'ar' ? 'د.إ' : 'AED'}${suffix}`
   }
+
+  const clearAdvancedFilters = () => {
+    setBedroomFilter([])
+    setPriceRange([0, 10000000])
+    setAreaRange([0, 10000])
+    setFurnishedOnly(false)
+    setFeaturedOnly(false)
+  }
+
+  const activeFiltersCount =
+    bedroomFilter.length +
+    (furnishedOnly ? 1 : 0) +
+    (featuredOnly ? 1 : 0) +
+    (priceRange[0] > 0 || priceRange[1] < 10000000 ? 1 : 0) +
+    (areaRange[0] > 0 || areaRange[1] < 10000 ? 1 : 0)
 
   return (
     <div className="min-h-screen bg-background">
@@ -265,9 +360,7 @@ export default function RealEstatePage() {
               {locale === 'ar' ? 'لوحة العقارات' : 'Real Estate Dashboard'}
             </h1>
             <p className="text-muted-foreground">
-              {locale === 'ar'
-                ? 'تصفح أفضل العقارات في دبي والإمارات'
-                : 'Browse premium properties in Dubai and UAE'}
+              {locale === 'ar' ? 'تصفح أفضل العقارات في دبي والإمارات' : 'Browse premium properties in Dubai and UAE'}
             </p>
           </div>
         </div>
@@ -279,9 +372,7 @@ export default function RealEstatePage() {
           {stats.map((stat, index) => (
             <Card key={index}>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">
-                  {locale === 'ar' ? stat.label : stat.labelEn}
-                </CardTitle>
+                <CardTitle className="text-sm font-medium">{locale === 'ar' ? stat.label : stat.labelEn}</CardTitle>
                 <stat.icon className="h-4 w-4 text-muted-foreground" />
               </CardHeader>
               <CardContent>
@@ -298,21 +389,30 @@ export default function RealEstatePage() {
         {/* Search & Filters */}
         <Card className="mb-8">
           <CardContent className="p-6">
-            <div className="grid gap-4 md:grid-cols-4">
+            <div className="grid gap-4 md:grid-cols-5">
               <div className="md:col-span-2">
                 <div className="relative">
                   <Search className="absolute start-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                   <Input
-                    placeholder={
-                      locale === 'ar' ? 'ابحث عن موقع أو نوع عقار...' : 'Search location or property type...'
-                    }
+                    placeholder={locale === 'ar' ? 'ابحث عن موقع أو مدينة...' : 'Search location or city...'}
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     className="ps-10"
                   />
                 </div>
               </div>
-              <Select value={propertyType} onValueChange={setPropertyType}>
+              <Select value={selectedCity} onValueChange={setSelectedCity}>
+                <SelectTrigger>
+                  <SelectValue placeholder={locale === 'ar' ? 'المدينة' : 'City'} />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">{locale === 'ar' ? 'جميع المدن' : 'All Cities'}</SelectItem>
+                  <SelectItem value="Dubai">{locale === 'ar' ? 'دبي' : 'Dubai'}</SelectItem>
+                  <SelectItem value="Abu Dhabi">{locale === 'ar' ? 'أبوظبي' : 'Abu Dhabi'}</SelectItem>
+                  <SelectItem value="Sharjah">{locale === 'ar' ? 'الشارقة' : 'Sharjah'}</SelectItem>
+                </SelectContent>
+              </Select>
+              <Select value={selectedType} onValueChange={setSelectedType}>
                 <SelectTrigger>
                   <SelectValue placeholder={locale === 'ar' ? 'نوع العقار' : 'Property Type'} />
                 </SelectTrigger>
@@ -324,131 +424,362 @@ export default function RealEstatePage() {
                   <SelectItem value="penthouse">{locale === 'ar' ? 'بنتهاوس' : 'Penthouse'}</SelectItem>
                 </SelectContent>
               </Select>
-              <Select value={priceRange} onValueChange={setPriceRange}>
+              <Select value={selectedStatus} onValueChange={setSelectedStatus}>
                 <SelectTrigger>
-                  <SelectValue placeholder={locale === 'ar' ? 'نطاق السعر' : 'Price Range'} />
+                  <SelectValue placeholder={locale === 'ar' ? 'الحالة' : 'Status'} />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="all">{locale === 'ar' ? 'جميع الأسعار' : 'All Prices'}</SelectItem>
-                  <SelectItem value="low">{locale === 'ar' ? 'أقل من 1M' : 'Under 1M'}</SelectItem>
-                  <SelectItem value="mid">{locale === 'ar' ? '1M - 5M' : '1M - 5M'}</SelectItem>
-                  <SelectItem value="high">{locale === 'ar' ? 'أكثر من 5M' : 'Over 5M'}</SelectItem>
+                  <SelectItem value="all">{locale === 'ar' ? 'الكل' : 'All'}</SelectItem>
+                  <SelectItem value="sale">{locale === 'ar' ? 'للبيع' : 'For Sale'}</SelectItem>
+                  <SelectItem value="rent">{locale === 'ar' ? 'للإيجار' : 'For Rent'}</SelectItem>
                 </SelectContent>
               </Select>
             </div>
           </CardContent>
         </Card>
 
-        {/* Property Grid */}
-        <div className="mb-6 flex items-center justify-between">
+        {/* Property Grid Header */}
+        <div className="mb-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div>
             <h2 className="text-2xl font-bold tracking-tight">
-              {locale === 'ar' ? 'العقارات المميزة' : 'Featured Properties'}
+              {locale === 'ar' ? 'العقارات المتاحة' : 'Available Properties'}
             </h2>
             <p className="text-sm text-muted-foreground">
-              {locale === 'ar' ? `${properties.length} عقار متاح` : `${properties.length} properties available`}
+              {locale === 'ar'
+                ? `${filteredProperties.length} عقار متاح`
+                : `${filteredProperties.length} properties available`}
             </p>
           </div>
-          <Button variant="outline" size="sm">
-            <Filter className="h-4 w-4 me-2" />
-            {locale === 'ar' ? 'مزيد من الفلاتر' : 'More Filters'}
-          </Button>
-        </div>
-
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {properties.map((property) => (
-            <Card key={property.id} className="overflow-hidden hover:shadow-lg transition-shadow">
-              {/* Property Image */}
-              <div className="relative h-48 bg-muted">
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <Home className="h-16 w-16 text-muted-foreground/30" />
-                </div>
-                <div className="absolute top-3 start-3 flex gap-2">
-                  <Badge variant={property.status === 'sale' ? 'default' : 'secondary'}>
-                    {getStatusLabel(property.status)}
-                  </Badge>
-                  {property.featured && (
-                    <Badge variant="destructive">{locale === 'ar' ? 'مميز' : 'Featured'}</Badge>
-                  )}
-                </div>
-                <div className="absolute top-3 end-3 flex gap-2">
-                  <Button size="icon" variant="secondary" className="h-8 w-8 rounded-full bg-white/90">
-                    <Heart className="h-4 w-4" />
-                  </Button>
-                  <Button size="icon" variant="secondary" className="h-8 w-8 rounded-full bg-white/90">
-                    <Share2 className="h-4 w-4" />
-                  </Button>
-                </div>
-              </div>
-
-              <CardHeader>
-                <div className="flex items-start justify-between gap-2 mb-2">
-                  <div className="flex-1">
-                    <CardTitle className="text-lg line-clamp-1">
-                      {locale === 'ar' ? property.titleAr : property.title}
-                    </CardTitle>
-                    <div className="flex items-center gap-1 text-sm text-muted-foreground mt-1">
-                      <MapPin className="h-3 w-3" />
-                      <span className="line-clamp-1">
-                        {locale === 'ar' ? property.locationAr : property.location}
-                      </span>
-                    </div>
-                  </div>
-                  <Badge variant="outline">{getPropertyTypeLabel(property.type)}</Badge>
-                </div>
-                <CardDescription className="line-clamp-2">
-                  {locale === 'ar' ? property.descriptionAr : property.description}
-                </CardDescription>
-              </CardHeader>
-
-              <CardContent>
-                {/* Property Details */}
-                <div className="flex items-center gap-4 mb-4 text-sm text-muted-foreground">
-                  <div className="flex items-center gap-1">
-                    <Bed className="h-4 w-4" />
-                    <span>{property.bedrooms}</span>
-                  </div>
-                  <div className="flex items-center gap-1">
-                    <Bath className="h-4 w-4" />
-                    <span>{property.bathrooms}</span>
-                  </div>
-                  <div className="flex items-center gap-1">
-                    <Square className="h-4 w-4" />
-                    <span>
-                      {property.area} {locale === 'ar' ? 'قدم²' : 'sqft'}
-                    </span>
-                  </div>
-                </div>
-
-                {/* Amenities */}
-                <div className="flex flex-wrap gap-1 mb-4">
-                  {(locale === 'ar' ? property.amenitiesAr : property.amenities)
-                    .slice(0, 3)
-                    .map((amenity, idx) => (
-                      <Badge key={idx} variant="secondary" className="text-xs">
-                        {amenity}
-                      </Badge>
-                    ))}
-                  {property.amenities.length > 3 && (
-                    <Badge variant="secondary" className="text-xs">
-                      +{property.amenities.length - 3}
+          <div className="flex gap-2">
+            {activeFiltersCount > 0 && (
+              <Button variant="outline" size="sm" onClick={clearAdvancedFilters}>
+                <X className="h-4 w-4 me-2" />
+                {locale === 'ar' ? 'مسح الفلاتر' : 'Clear Filters'} ({activeFiltersCount})
+              </Button>
+            )}
+            <Dialog open={filterDialogOpen} onOpenChange={setFilterDialogOpen}>
+              <DialogTrigger asChild>
+                <Button variant="outline" size="sm">
+                  <SlidersHorizontal className="h-4 w-4 me-2" />
+                  {locale === 'ar' ? 'مزيد من الفلاتر' : 'More Filters'}
+                  {activeFiltersCount > 0 && (
+                    <Badge variant="secondary" className="ms-2">
+                      {activeFiltersCount}
                     </Badge>
                   )}
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="sm:max-w-[600px]">
+                <DialogHeader>
+                  <DialogTitle>{locale === 'ar' ? 'فلاتر متقدمة' : 'Advanced Filters'}</DialogTitle>
+                  <DialogDescription>
+                    {locale === 'ar'
+                      ? 'قم بتخصيص بحثك للعثور على العقار المثالي'
+                      : 'Customize your search to find the perfect property'}
+                  </DialogDescription>
+                </DialogHeader>
+
+                <div className="space-y-6 py-4">
+                  {/* Bedrooms */}
+                  <div className="space-y-3">
+                    <label className="text-sm font-medium">
+                      {locale === 'ar' ? 'عدد غرف النوم' : 'Bedrooms'}
+                    </label>
+                    <div className="flex flex-wrap gap-2">
+                      {['1', '2', '3', '4', '5', '6+'].map((bed) => (
+                        <Button
+                          key={bed}
+                          variant={bedroomFilter.includes(bed) ? 'default' : 'outline'}
+                          size="sm"
+                          onClick={() => {
+                            if (bedroomFilter.includes(bed)) {
+                              setBedroomFilter(bedroomFilter.filter((b) => b !== bed))
+                            } else {
+                              setBedroomFilter([...bedroomFilter, bed])
+                            }
+                          }}
+                        >
+                          {bed}
+                        </Button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Price Range */}
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between">
+                      <label className="text-sm font-medium">
+                        {locale === 'ar' ? 'نطاق السعر (د.إ)' : 'Price Range (AED)'}
+                      </label>
+                      <span className="text-sm text-muted-foreground">
+                        {new Intl.NumberFormat('en-US').format(priceRange[0])} -{' '}
+                        {new Intl.NumberFormat('en-US').format(priceRange[1])}
+                      </span>
+                    </div>
+                    <Slider
+                      value={priceRange}
+                      onValueChange={setPriceRange}
+                      min={0}
+                      max={10000000}
+                      step={100000}
+                      className="w-full"
+                    />
+                  </div>
+
+                  {/* Area Range */}
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between">
+                      <label className="text-sm font-medium">
+                        {locale === 'ar' ? 'المساحة (قدم مربع)' : 'Area (sqft)'}
+                      </label>
+                      <span className="text-sm text-muted-foreground">
+                        {new Intl.NumberFormat('en-US').format(areaRange[0])} -{' '}
+                        {new Intl.NumberFormat('en-US').format(areaRange[1])}
+                      </span>
+                    </div>
+                    <Slider
+                      value={areaRange}
+                      onValueChange={setAreaRange}
+                      min={0}
+                      max={10000}
+                      step={100}
+                      className="w-full"
+                    />
+                  </div>
+
+                  {/* Checkboxes */}
+                  <div className="space-y-3">
+                    <div className="flex items-center space-x-2 space-x-reverse">
+                      <Checkbox
+                        id="furnished"
+                        checked={furnishedOnly}
+                        onCheckedChange={(checked) => setFurnishedOnly(checked as boolean)}
+                      />
+                      <label
+                        htmlFor="furnished"
+                        className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                      >
+                        {locale === 'ar' ? 'مفروش فقط' : 'Furnished Only'}
+                      </label>
+                    </div>
+                    <div className="flex items-center space-x-2 space-x-reverse">
+                      <Checkbox
+                        id="featured"
+                        checked={featuredOnly}
+                        onCheckedChange={(checked) => setFeaturedOnly(checked as boolean)}
+                      />
+                      <label
+                        htmlFor="featured"
+                        className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                      >
+                        {locale === 'ar' ? 'عقارات مميزة فقط' : 'Featured Properties Only'}
+                      </label>
+                    </div>
+                  </div>
                 </div>
 
-                {/* Price & CTA */}
-                <div className="flex items-center justify-between pt-4 border-t">
-                  <div>
-                    <div className="text-2xl font-bold">{formatPrice(property.price, property.status)}</div>
-                  </div>
-                  <Button size="sm">
-                    {locale === 'ar' ? 'عرض التفاصيل' : 'View Details'}
+                <DialogFooter>
+                  <Button variant="outline" onClick={clearAdvancedFilters}>
+                    {locale === 'ar' ? 'إعادة تعيين' : 'Reset'}
                   </Button>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
+                  <Button onClick={() => setFilterDialogOpen(false)}>
+                    {locale === 'ar' ? 'تطبيق الفلاتر' : 'Apply Filters'}
+                  </Button>
+                </DialogFooter>
+              </DialogContent>
+            </Dialog>
+          </div>
         </div>
+
+        {/* Property Grid */}
+        {paginatedProperties.length === 0 ? (
+          <Card className="p-12">
+            <div className="text-center">
+              <Home className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
+              <h3 className="text-lg font-semibold mb-2">
+                {locale === 'ar' ? 'لم يتم العثور على عقارات' : 'No Properties Found'}
+              </h3>
+              <p className="text-muted-foreground mb-4">
+                {locale === 'ar'
+                  ? 'جرب تعديل الفلاتر أو البحث للعثور على المزيد من النتائج'
+                  : 'Try adjusting your filters or search to find more results'}
+              </p>
+              <Button variant="outline" onClick={() => {
+                setSearchQuery('')
+                setSelectedCity('all')
+                setSelectedType('all')
+                setSelectedStatus('all')
+                clearAdvancedFilters()
+              }}>
+                {locale === 'ar' ? 'مسح جميع الفلاتر' : 'Clear All Filters'}
+              </Button>
+            </div>
+          </Card>
+        ) : (
+          <>
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 mb-8">
+              {paginatedProperties.map((property) => (
+                <Link href={`/examples/real-estate/${property.id}`} key={property.id}>
+                  <Card className="overflow-hidden hover:shadow-lg transition-shadow h-full">
+                    {/* Property Image */}
+                    <div className="relative h-48 bg-muted">
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <Home className="h-16 w-16 text-muted-foreground/30" />
+                      </div>
+                      <div className="absolute top-3 start-3 flex gap-2">
+                        <Badge variant={property.status === 'sale' ? 'default' : 'secondary'}>
+                          {getStatusLabel(property.status)}
+                        </Badge>
+                        {property.featured && (
+                          <Badge variant="destructive">{locale === 'ar' ? 'مميز' : 'Featured'}</Badge>
+                        )}
+                        {property.furnished && (
+                          <Badge variant="outline" className="bg-background/90">
+                            {locale === 'ar' ? 'مفروش' : 'Furnished'}
+                          </Badge>
+                        )}
+                      </div>
+                      <div className="absolute top-3 end-3 flex gap-2">
+                        <Button
+                          size="icon"
+                          variant="secondary"
+                          className="h-8 w-8 rounded-full bg-white/90"
+                          onClick={(e) => {
+                            e.preventDefault()
+                            e.stopPropagation()
+                          }}
+                        >
+                          <Heart className="h-4 w-4" />
+                        </Button>
+                        <Button
+                          size="icon"
+                          variant="secondary"
+                          className="h-8 w-8 rounded-full bg-white/90"
+                          onClick={(e) => {
+                            e.preventDefault()
+                            e.stopPropagation()
+                          }}
+                        >
+                          <Share2 className="h-4 w-4" />
+                        </Button>
+                      </div>
+                    </div>
+
+                    <CardHeader>
+                      <div className="flex items-start justify-between gap-2 mb-2">
+                        <div className="flex-1">
+                          <CardTitle className="text-lg line-clamp-1">
+                            {locale === 'ar' ? property.titleAr : property.title}
+                          </CardTitle>
+                          <div className="flex items-center gap-1 text-sm text-muted-foreground mt-1">
+                            <MapPin className="h-3 w-3" />
+                            <span className="line-clamp-1">
+                              {locale === 'ar' ? property.locationAr : property.location}
+                            </span>
+                          </div>
+                        </div>
+                        <Badge variant="outline">{getPropertyTypeLabel(property.type)}</Badge>
+                      </div>
+                      <CardDescription className="line-clamp-2">
+                        {locale === 'ar' ? property.descriptionAr : property.description}
+                      </CardDescription>
+                    </CardHeader>
+
+                    <CardContent>
+                      {/* Property Details */}
+                      <div className="flex items-center gap-4 mb-4 text-sm text-muted-foreground">
+                        <div className="flex items-center gap-1">
+                          <Bed className="h-4 w-4" />
+                          <span>{property.bedrooms}</span>
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <Bath className="h-4 w-4" />
+                          <span>{property.bathrooms}</span>
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <Square className="h-4 w-4" />
+                          <span>
+                            {property.area.toLocaleString()} {locale === 'ar' ? 'قدم²' : 'sqft'}
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Amenities */}
+                      <div className="flex flex-wrap gap-1 mb-4">
+                        {(locale === 'ar' ? property.amenitiesAr : property.amenities).slice(0, 3).map((amenity, idx) => (
+                          <Badge key={idx} variant="secondary" className="text-xs">
+                            {amenity}
+                          </Badge>
+                        ))}
+                        {property.amenities.length > 3 && (
+                          <Badge variant="secondary" className="text-xs">
+                            +{property.amenities.length - 3}
+                          </Badge>
+                        )}
+                      </div>
+
+                      {/* Price & CTA */}
+                      <div className="flex items-center justify-between pt-4 border-t">
+                        <div>
+                          <div className="text-2xl font-bold">{formatPrice(property.price, property.status)}</div>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </Link>
+              ))}
+            </div>
+
+            {/* Pagination */}
+            {totalPages > 1 && (
+              <Pagination>
+                <PaginationContent>
+                  <PaginationItem>
+                    <PaginationPrevious
+                      onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
+                      className={currentPage === 1 ? 'pointer-events-none opacity-50' : 'cursor-pointer'}
+                    />
+                  </PaginationItem>
+
+                  {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => {
+                    // Show first page, last page, current page, and pages around current
+                    if (
+                      page === 1 ||
+                      page === totalPages ||
+                      (page >= currentPage - 1 && page <= currentPage + 1)
+                    ) {
+                      return (
+                        <PaginationItem key={page}>
+                          <PaginationLink
+                            onClick={() => setCurrentPage(page)}
+                            isActive={currentPage === page}
+                            className="cursor-pointer"
+                          >
+                            {page}
+                          </PaginationLink>
+                        </PaginationItem>
+                      )
+                    } else if (page === currentPage - 2 || page === currentPage + 2) {
+                      return (
+                        <PaginationItem key={page}>
+                          <PaginationEllipsis />
+                        </PaginationItem>
+                      )
+                    }
+                    return null
+                  })}
+
+                  <PaginationItem>
+                    <PaginationNext
+                      onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
+                      className={currentPage === totalPages ? 'pointer-events-none opacity-50' : 'cursor-pointer'}
+                    />
+                  </PaginationItem>
+                </PaginationContent>
+              </Pagination>
+            )}
+          </>
+        )}
       </div>
     </div>
   )
