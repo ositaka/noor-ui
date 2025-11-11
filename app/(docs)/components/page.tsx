@@ -141,7 +141,7 @@ const componentCategories = [
     name: 'Layout & Shell',
     description: 'Application layout and shell components for building dashboards',
     components: [
-      { name: 'Dashboard Shell', icon: Layout, href: '/components/dashboard-shell', status: 'coming-soon' },
+      { name: 'Dashboard Shell', icon: Layout, href: '/components/dashboard-shell', status: 'ready' },
       { name: 'Sidebar', icon: Sidebar, href: '/components/sidebar', status: 'coming-soon' },
       { name: 'App Shell', icon: Layout, href: '/components/app-shell', status: 'coming-soon' },
     ],
@@ -181,7 +181,7 @@ export default function ComponentsPage() {
           <h1 className="text-4xl font-bold tracking-tight mb-4">Components</h1>
           <p className="text-xl text-muted-foreground mb-6">
             54 beautifully designed components built with Radix UI and Tailwind CSS.
-            45 production-ready, 9 coming soon. Full RTL support, accessible, and customizable.
+            46 production-ready, 8 coming soon. Full RTL support, accessible, and customizable.
           </p>
 
           {/* Live Preview */}

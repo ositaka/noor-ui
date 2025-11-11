@@ -235,6 +235,13 @@ export const searchData: SearchItem[] = [
     keywords: ['notification', 'bell', 'alert', 'dropdown', 'popover', 'unread', 'badge', 'activity', 'feed', 'updates'],
   },
   {
+    title: 'Dashboard Shell',
+    description: 'Complete dashboard layout with sidebar navigation, header, and RTL support',
+    href: '/components/dashboard-shell',
+    category: 'Component',
+    keywords: ['dashboard', 'layout', 'sidebar', 'navigation', 'header', 'shell', 'admin', 'panel', 'app', 'bilingual', 'responsive', 'mobile'],
+  },
+  {
     title: 'Alert',
     description: 'Alert message component',
     href: '/components/alert',
