@@ -84,11 +84,12 @@ const examples: Example[] = [
   },
   {
     title: 'Real Estate Dashboard',
-    description: 'Property listings platform with bilingual descriptions, image galleries, and advanced search filters for GCC real estate market.',
+    description: 'Property listings platform with bilingual descriptions, search filters, and property cards with mock data.',
     href: '/examples/real-estate',
     icon: Home,
     tags: ['Real Estate', 'Listings', 'Search', 'GCC', 'RTL'],
-    status: 'coming-soon' as const,
+    status: 'ready' as const,
+    featured: true,
   },
   {
     title: 'Portfolio Site',
