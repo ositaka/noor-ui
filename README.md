@@ -9,7 +9,7 @@ Bringing light to multilingual interface design with accessibility, performance,
 ## 🌟 Features
 
 - **RTL-First Architecture**: Designed for Arabic from the ground up, with English as an equally-supported alternative
-- **38 Production-Ready Components**: Complete UI toolkit covering essential patterns from forms to data display
+- **40 Production-Ready Components** (+ 13 Coming Soon): Complete UI toolkit covering essential patterns from forms to data display
 - **GCC-Specific Components**: Prayer times, Hijri calendar, Arabic numbers, Zakat calculator, and dual-calendar date picker built for the region
 - **Zero Directional Bugs**: 100% logical properties, no hardcoded LTR assumptions
 - **Direction-Aware Components**: Tabs, navigation, and layouts automatically adapt to text direction
@@ -158,7 +158,9 @@ This enables:
 
 ## 🎨 Design System
 
-### All Components (38 Implemented)
+### All Components (40 Ready + 13 Coming Soon)
+
+**Current Status:** 40 production-ready components with 13 more in development. See the [public roadmap](/roadmap) for upcoming components and features.
 
 **Form Components:**
 - **Form**: State management with validation and bilingual error messages
@@ -203,6 +205,9 @@ This enables:
 **Data Display:**
 - **Table**: Structured data display with RTL text alignment
 - **DataTable**: Advanced data table with sorting, filtering, pagination, and loading states
+- **StatsCard**: Statistics display with icon, label, value, and optional trend indicator
+- **FeatureCard**: Feature showcase card with icon, title, description for marketing/landing pages
+- **EmptyState**: Empty state placeholder with icon, title, description, and optional action button
 
 **GCC-Specific Components:**
 - **Prayer Times**: Display Islamic prayer times with countdown timer, next prayer highlighting, and Adhan notification UI variant
@@ -469,8 +474,11 @@ Tokens are converted to CSS custom properties in `styles/globals.css` and consum
 ### Recent Improvements (November 2025)
 
 **Latest Updates:**
+- ✅ **Public Roadmap**: Created comprehensive [public roadmap page](/roadmap) with 4-phase development plan, success metrics, and timeline visualization
+- ✅ **Coming Soon Items**: Added 13 upcoming components (File Upload, Rich Text Editor, Dashboard Shell, User Menu, Notification Center, etc.) and 6 upcoming examples (Blog Dashboard, Real Estate Dashboard, Portfolio, Marketplace, CMS, Analytics)
+- ✅ **New Components**: Added StatsCard, FeatureCard, and EmptyState components with full documentation
+- ✅ **Build Fixed (Again)**: Resolved all TypeScript errors including complex DataTable generic type inference issues - project compiles with zero errors
 - ✅ **Hydration Fix**: Resolved React hydration error in DataTable Showcase by replacing Math.random() with deterministic index-based data generation
-- ✅ **Build Fixed**: Resolved all TypeScript errors and build issues - project now compiles successfully
 - ✅ **Component Fixes**: Fixed PrayerTimes, ArabicNumber, HijriDate, Calendar, ZakatCalculator, and DataTable prop types and usage
 - ✅ **Pagination Controls**: Added interactive Pagination component to DataTable Showcase with Previous/Next buttons, page numbers, ellipsis, and bilingual support
 - ✅ **Bug Fix**: Corrected import path in Islamic Finance Dashboard (useDirection from correct provider location)
