@@ -4,6 +4,7 @@ import * as React from 'react'
 import Link from 'next/link'
 import { ComponentShowcase } from '@/components/docs/component-showcase'
 import { PropsTable } from '@/components/docs/props-table'
+import { CodeBlock } from '@/components/docs/code-block'
 import { UserMenu } from '@/components/ui/user-menu'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
@@ -333,7 +334,7 @@ export default function Example() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <ComponentShowcase.Code
+              <CodeBlock
                 code={`import { UserMenu } from '@/components/ui/user-menu'
 import { useAuth } from '@/hooks/use-auth'
 import { useRouter } from 'next/navigation'

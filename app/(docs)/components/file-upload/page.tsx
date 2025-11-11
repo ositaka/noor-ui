@@ -4,6 +4,7 @@ import * as React from 'react'
 import Link from 'next/link'
 import { ComponentShowcase } from '@/components/docs/component-showcase'
 import { PropsTable } from '@/components/docs/props-table'
+import { CodeBlock } from '@/components/docs/code-block'
 import { FileUpload } from '@/components/ui/file-upload'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
@@ -308,7 +309,7 @@ export default function Example() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <ComponentShowcase.Code
+              <CodeBlock
                 code={`async function uploadFiles(files: File[]) {
   const formData = new FormData()
 

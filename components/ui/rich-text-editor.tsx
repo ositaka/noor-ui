@@ -265,10 +265,15 @@ export const RichTextEditor = React.forwardRef<HTMLDivElement, RichTextEditorPro
         const editorElement = editor.view.dom
         editorElement.setAttribute('dir', direction)
 
-        // Update default text alignment
+        // Update text alignment to match new direction if not explicitly set
         const currentAlignment = editor.getAttributes('paragraph').textAlign
-        if (!currentAlignment) {
-          editor.chain().setTextAlign(direction === 'rtl' ? 'right' : 'left').run()
+        const defaultAlignment = direction === 'rtl' ? 'right' : 'left'
+        const oppositeAlignment = direction === 'rtl' ? 'left' : 'right'
+
+        // If the current alignment matches the opposite default (indicating it was auto-set),
+        // update it to match the new direction's default
+        if (!currentAlignment || currentAlignment === oppositeAlignment) {
+          editor.chain().setTextAlign(defaultAlignment).run()
         }
       }
     }, [direction, editor])
