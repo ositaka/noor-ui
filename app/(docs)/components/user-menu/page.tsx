@@ -7,7 +7,6 @@ import { PropsTable } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
 import { UserMenu } from '@/components/ui/user-menu'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Badge } from '@/components/ui/badge'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Info } from 'lucide-react'
@@ -67,6 +66,63 @@ const propDefinitions = [
     description: 'Side where the dropdown menu appears',
   },
 ]
+
+const withAvatarCode = `'use client'
+
+import { UserMenu } from '@/components/ui/user-menu'
+
+export default function Example() {
+  return (
+    <UserMenu
+      user={{
+        name: 'Sarah Johnson',
+        email: 'sarah@example.com',
+        image: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah',
+      }}
+      onProfileClick={() => console.log('Profile')}
+      onSettingsClick={() => console.log('Settings')}
+      onLogout={() => console.log('Logout')}
+    />
+  )
+}`
+
+const minimalCode = `'use client'
+
+import { UserMenu } from '@/components/ui/user-menu'
+
+export default function Example() {
+  return (
+    <UserMenu
+      user={{
+        name: 'John Doe',
+        email: 'john@example.com',
+      }}
+      onLogout={() => console.log('Logout')}
+    />
+  )
+}`
+
+const fullOptionsCode = `'use client'
+
+import { UserMenu } from '@/components/ui/user-menu'
+
+export default function Example() {
+  return (
+    <UserMenu
+      user={{
+        name: 'Fatima Al-Zahra',
+        email: 'fatima@example.com',
+        image: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Fatima',
+      }}
+      onProfileClick={() => console.log('Profile')}
+      onSettingsClick={() => console.log('Settings')}
+      onBillingClick={() => console.log('Billing')}
+      onTeamClick={() => console.log('Team')}
+      onSupportClick={() => console.log('Support')}
+      onLogout={() => console.log('Logout')}
+    />
+  )
+}`
 
 export default function UserMenuPage() {
   const { toast } = useToast()
@@ -207,36 +263,12 @@ export default function Example() {
         <section className="mb-16">
           <h2 className="text-2xl font-bold tracking-tight mb-6">Examples</h2>
 
-          <Tabs defaultValue="with-avatar" className="space-y-6">
-            <TabsList>
-              <TabsTrigger value="with-avatar">With Avatar</TabsTrigger>
-              <TabsTrigger value="minimal">Minimal</TabsTrigger>
-              <TabsTrigger value="full-options">All Options</TabsTrigger>
-            </TabsList>
-
-            <TabsContent value="with-avatar" className="space-y-4">
-              <p className="text-muted-foreground">User menu with avatar image.</p>
-              <ComponentShowcase
-                code={`'use client'
-
-import { UserMenu } from '@/components/ui/user-menu'
-
-export default function Example() {
-  return (
-    <UserMenu
-      user={{
-        name: 'Sarah Johnson',
-        email: 'sarah@example.com',
-        image: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah',
-      }}
-      onProfileClick={() => console.log('Profile')}
-      onSettingsClick={() => console.log('Settings')}
-      onLogout={() => console.log('Logout')}
-    />
-  )
-}`}
-              >
-                <ComponentShowcase.Demo>
+          <div className="space-y-8">
+            {/* With Avatar */}
+            <div>
+              <h3 className="text-lg font-semibold mb-4">With Avatar</h3>
+              <Card>
+                <CardContent className="p-6">
                   <UserMenu
                     user={{
                       name: 'Sarah Johnson',
@@ -247,32 +279,18 @@ export default function Example() {
                     onSettingsClick={() => handleAction('Settings')}
                     onLogout={() => handleAction('Logout')}
                   />
-                </ComponentShowcase.Demo>
-              </ComponentShowcase>
-            </TabsContent>
+                </CardContent>
+              </Card>
+              <div className="mt-4">
+                <CodeBlock code={withAvatarCode} language="tsx" collapsible />
+              </div>
+            </div>
 
-            <TabsContent value="minimal" className="space-y-4">
-              <p className="text-muted-foreground">
-                Minimal user menu with only logout option.
-              </p>
-              <ComponentShowcase
-                code={`'use client'
-
-import { UserMenu } from '@/components/ui/user-menu'
-
-export default function Example() {
-  return (
-    <UserMenu
-      user={{
-        name: 'John Doe',
-        email: 'john@example.com',
-      }}
-      onLogout={() => console.log('Logout')}
-    />
-  )
-}`}
-              >
-                <ComponentShowcase.Demo>
+            {/* Minimal */}
+            <div>
+              <h3 className="text-lg font-semibold mb-4">Minimal</h3>
+              <Card>
+                <CardContent className="p-6">
                   <UserMenu
                     user={{
                       name: 'John Doe',
@@ -280,38 +298,18 @@ export default function Example() {
                     }}
                     onLogout={() => handleAction('Logout')}
                   />
-                </ComponentShowcase.Demo>
-              </ComponentShowcase>
-            </TabsContent>
+                </CardContent>
+              </Card>
+              <div className="mt-4">
+                <CodeBlock code={minimalCode} language="tsx" collapsible />
+              </div>
+            </div>
 
-            <TabsContent value="full-options" className="space-y-4">
-              <p className="text-muted-foreground">
-                User menu with all available menu items.
-              </p>
-              <ComponentShowcase
-                code={`'use client'
-
-import { UserMenu } from '@/components/ui/user-menu'
-
-export default function Example() {
-  return (
-    <UserMenu
-      user={{
-        name: 'Fatima Al-Zahra',
-        email: 'fatima@example.com',
-        image: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Fatima',
-      }}
-      onProfileClick={() => console.log('Profile')}
-      onSettingsClick={() => console.log('Settings')}
-      onBillingClick={() => console.log('Billing')}
-      onTeamClick={() => console.log('Team')}
-      onSupportClick={() => console.log('Support')}
-      onLogout={() => console.log('Logout')}
-    />
-  )
-}`}
-              >
-                <ComponentShowcase.Demo>
+            {/* Full Options */}
+            <div>
+              <h3 className="text-lg font-semibold mb-4">All Options</h3>
+              <Card>
+                <CardContent className="p-6">
                   <UserMenu
                     user={{
                       name: 'Fatima Al-Zahra',
@@ -325,10 +323,13 @@ export default function Example() {
                     onSupportClick={() => handleAction('Support')}
                     onLogout={() => handleAction('Logout')}
                   />
-                </ComponentShowcase.Demo>
-              </ComponentShowcase>
-            </TabsContent>
-          </Tabs>
+                </CardContent>
+              </Card>
+              <div className="mt-4">
+                <CodeBlock code={fullOptionsCode} language="tsx" collapsible />
+              </div>
+            </div>
+          </div>
         </section>
 
         {/* Integration Example */}
@@ -343,7 +344,9 @@ export default function Example() {
             </CardHeader>
             <CardContent>
               <CodeBlock
-                code={`import { UserMenu } from '@/components/ui/user-menu'
+                code={`'use client'
+
+import { UserMenu } from '@/components/ui/user-menu'
 import { useAuth } from '@/hooks/use-auth'
 import { useRouter } from 'next/navigation'
 
@@ -375,6 +378,8 @@ export function Header() {
     </header>
   )
 }`}
+                language="tsx"
+                collapsible
               />
             </CardContent>
           </Card>

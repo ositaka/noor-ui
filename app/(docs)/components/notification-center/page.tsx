@@ -4,9 +4,9 @@ import * as React from 'react'
 import Link from 'next/link'
 import { ComponentShowcase } from '@/components/docs/component-showcase'
 import { PropsTable } from '@/components/docs/props-table'
+import { CodeBlock } from '@/components/docs/code-block'
 import { NotificationCenter, type Notification } from '@/components/ui/notification-center'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Badge } from '@/components/ui/badge'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Info, MessageSquare, UserPlus, Heart, Star } from 'lucide-react'
@@ -65,6 +65,51 @@ const notificationTypeDefinition = `interface Notification {
   read?: boolean
   icon?: React.ReactNode
   avatar?: string       // URL to avatar image
+}`
+
+const withAvatarsCode = `'use client'
+
+import * as React from 'react'
+import { NotificationCenter } from '@/components/ui/notification-center'
+import { Star } from 'lucide-react'
+
+export default function Example() {
+  const [notifications, setNotifications] = React.useState([
+    {
+      id: '1',
+      title: 'You have a new review',
+      description: '"Excellent service!" - 5 stars',
+      time: new Date(Date.now() - 10 * 60000).toISOString(),
+      read: false,
+      icon: <Star className="h-5 w-5" />,
+      avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=John',
+    },
+  ])
+
+  return (
+    <NotificationCenter
+      notifications={notifications}
+      onMarkAsRead={(id) => {
+        setNotifications(prev =>
+          prev.map(n => n.id === id ? { ...n, read: true } : n)
+        )
+      }}
+      onMarkAllAsRead={() => {
+        setNotifications(prev => prev.map(n => ({ ...n, read: true })))
+      }}
+      onRemove={(id) => {
+        setNotifications(prev => prev.filter(n => n.id !== id))
+      }}
+    />
+  )
+}`
+
+const emptyStateCode = `'use client'
+
+import { NotificationCenter } from '@/components/ui/notification-center'
+
+export default function Example() {
+  return <NotificationCenter notifications={[]} />
 }`
 
 export default function NotificationCenterPage() {
@@ -281,68 +326,38 @@ export default function Example() {
         <section className="mb-16">
           <h2 className="text-2xl font-bold tracking-tight mb-6">Examples</h2>
 
-          <Tabs defaultValue="with-avatars" className="space-y-6">
-            <TabsList>
-              <TabsTrigger value="with-avatars">With Avatars</TabsTrigger>
-              <TabsTrigger value="empty-state">Empty State</TabsTrigger>
-            </TabsList>
-
-            <TabsContent value="with-avatars" className="space-y-4">
-              <p className="text-muted-foreground">Notifications with user avatars.</p>
-              <ComponentShowcase
-                code={`'use client'
-
-import * as React from 'react'
-import { NotificationCenter } from '@/components/ui/notification-center'
-
-export default function Example() {
-  const notifications = [
-    {
-      id: '1',
-      title: 'You have a new review',
-      description: '"Excellent service!" - 5 stars',
-      time: new Date().toISOString(),
-      read: false,
-      avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=John',
-    },
-  ]
-
-  return (
-    <NotificationCenter
-      notifications={notifications}
-      onMarkAsRead={(id) => console.log('Mark as read:', id)}
-    />
-  )
-}`}
-              >
-                <ComponentShowcase.Demo>
+          <div className="space-y-8">
+            {/* With Avatars */}
+            <div>
+              <h3 className="text-lg font-semibold mb-4">With Avatars</h3>
+              <Card>
+                <CardContent className="p-6">
                   <NotificationCenter
                     notifications={notifications2}
                     onMarkAsRead={(id) => handleMarkAsRead(id, setNotifications2)}
                     onMarkAllAsRead={() => handleMarkAllAsRead(setNotifications2)}
                     onRemove={(id) => handleRemove(id, setNotifications2)}
                   />
-                </ComponentShowcase.Demo>
-              </ComponentShowcase>
-            </TabsContent>
+                </CardContent>
+              </Card>
+              <div className="mt-4">
+                <CodeBlock code={withAvatarsCode} language="tsx" collapsible />
+              </div>
+            </div>
 
-            <TabsContent value="empty-state" className="space-y-4">
-              <p className="text-muted-foreground">Empty state when no notifications.</p>
-              <ComponentShowcase
-                code={`'use client'
-
-import { NotificationCenter } from '@/components/ui/notification-center'
-
-export default function Example() {
-  return <NotificationCenter notifications={[]} />
-}`}
-              >
-                <ComponentShowcase.Demo>
+            {/* Empty State */}
+            <div>
+              <h3 className="text-lg font-semibold mb-4">Empty State</h3>
+              <Card>
+                <CardContent className="p-6">
                   <NotificationCenter notifications={[]} />
-                </ComponentShowcase.Demo>
-              </ComponentShowcase>
-            </TabsContent>
-          </Tabs>
+                </CardContent>
+              </Card>
+              <div className="mt-4">
+                <CodeBlock code={emptyStateCode} language="tsx" collapsible />
+              </div>
+            </div>
+          </div>
         </section>
 
         {/* Notification Type */}

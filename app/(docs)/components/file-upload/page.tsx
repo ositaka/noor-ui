@@ -7,7 +7,6 @@ import { PropsTable } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
 import { FileUpload } from '@/components/ui/file-upload'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Badge } from '@/components/ui/badge'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Info } from 'lucide-react'
@@ -64,6 +63,98 @@ const propDefinitions = [
     description: 'Controlled value for file list',
   },
 ]
+
+const imagesOnlyCode = `'use client'
+
+import * as React from 'react'
+import { FileUpload } from '@/components/ui/file-upload'
+
+export default function Example() {
+  const [files, setFiles] = React.useState<File[]>([])
+
+  return (
+    <FileUpload
+      accept="image/*"
+      onChange={setFiles}
+      onUpload={(files) => {
+        // Upload to your backend
+        console.log('Uploading images:', files)
+      }}
+    />
+  )
+}`
+
+const multipleFilesCode = `'use client'
+
+import * as React from 'react'
+import { FileUpload } from '@/components/ui/file-upload'
+
+export default function Example() {
+  const [files, setFiles] = React.useState<File[]>([])
+
+  return (
+    <FileUpload
+      multiple
+      maxFiles={5}
+      onChange={setFiles}
+      onUpload={(files) => {
+        // Upload to your backend
+        console.log('Uploading files:', files)
+      }}
+    />
+  )
+}`
+
+const customSizeLimitCode = `'use client'
+
+import * as React from 'react'
+import { FileUpload } from '@/components/ui/file-upload'
+
+export default function Example() {
+  const [files, setFiles] = React.useState<File[]>([])
+
+  return (
+    <FileUpload
+      maxSize={2 * 1024 * 1024} // 2MB
+      onChange={setFiles}
+      onUpload={(files) => {
+        // Upload to your backend
+        console.log('Uploading files:', files)
+      }}
+    />
+  )
+}`
+
+const backendUploadCode = `async function uploadFiles(files: File[]) {
+  const formData = new FormData()
+
+  files.forEach((file, index) => {
+    formData.append(\`file\${index}\`, file)
+  })
+
+  try {
+    const response = await fetch('/api/upload', {
+      method: 'POST',
+      body: formData,
+    })
+
+    if (!response.ok) {
+      throw new Error('Upload failed')
+    }
+
+    const data = await response.json()
+    console.log('Upload successful:', data)
+  } catch (error) {
+    console.error('Upload error:', error)
+  }
+}
+
+// In your component
+<FileUpload
+  onUpload={uploadFiles}
+  accept="image/*"
+  maxSize={5 * 1024 * 1024}
+/>`
 
 export default function FileUploadPage() {
   const [files1, setFiles1] = React.useState<File[]>([])
@@ -194,37 +285,12 @@ export default function Example() {
         <section className="mb-16">
           <h2 className="text-2xl font-bold tracking-tight mb-6">Examples</h2>
 
-          <Tabs defaultValue="images-only" className="space-y-6">
-            <TabsList>
-              <TabsTrigger value="images-only">Images Only</TabsTrigger>
-              <TabsTrigger value="multiple">Multiple Files</TabsTrigger>
-              <TabsTrigger value="custom-size">Custom Size Limit</TabsTrigger>
-            </TabsList>
-
-            <TabsContent value="images-only" className="space-y-4">
-              <p className="text-muted-foreground">Restrict uploads to image files only.</p>
-              <ComponentShowcase
-                code={`'use client'
-
-import * as React from 'react'
-import { FileUpload } from '@/components/ui/file-upload'
-
-export default function Example() {
-  const [files, setFiles] = React.useState<File[]>([])
-
-  return (
-    <FileUpload
-      accept="image/*"
-      onChange={setFiles}
-      onUpload={(files) => {
-        // Upload to your backend
-        console.log('Uploading images:', files)
-      }}
-    />
-  )
-}`}
-              >
-                <ComponentShowcase.Demo>
+          <div className="space-y-8">
+            {/* Images Only */}
+            <div>
+              <h3 className="text-lg font-semibold mb-4">Images Only</h3>
+              <Card>
+                <CardContent className="p-6">
                   <div className="w-full max-w-xl">
                     <FileUpload
                       accept="image/*"
@@ -232,35 +298,18 @@ export default function Example() {
                       onUpload={(files) => console.log('Uploading images:', files)}
                     />
                   </div>
-                </ComponentShowcase.Demo>
-              </ComponentShowcase>
-            </TabsContent>
+                </CardContent>
+              </Card>
+              <div className="mt-4">
+                <CodeBlock code={imagesOnlyCode} language="tsx" collapsible />
+              </div>
+            </div>
 
-            <TabsContent value="multiple" className="space-y-4">
-              <p className="text-muted-foreground">Allow uploading multiple files (up to 5).</p>
-              <ComponentShowcase
-                code={`'use client'
-
-import * as React from 'react'
-import { FileUpload } from '@/components/ui/file-upload'
-
-export default function Example() {
-  const [files, setFiles] = React.useState<File[]>([])
-
-  return (
-    <FileUpload
-      multiple
-      maxFiles={5}
-      onChange={setFiles}
-      onUpload={(files) => {
-        // Upload to your backend
-        console.log('Uploading files:', files)
-      }}
-    />
-  )
-}`}
-              >
-                <ComponentShowcase.Demo>
+            {/* Multiple Files */}
+            <div>
+              <h3 className="text-lg font-semibold mb-4">Multiple Files</h3>
+              <Card>
+                <CardContent className="p-6">
                   <div className="w-full max-w-xl">
                     <FileUpload
                       multiple
@@ -269,34 +318,18 @@ export default function Example() {
                       onUpload={(files) => console.log('Uploading files:', files)}
                     />
                   </div>
-                </ComponentShowcase.Demo>
-              </ComponentShowcase>
-            </TabsContent>
+                </CardContent>
+              </Card>
+              <div className="mt-4">
+                <CodeBlock code={multipleFilesCode} language="tsx" collapsible />
+              </div>
+            </div>
 
-            <TabsContent value="custom-size" className="space-y-4">
-              <p className="text-muted-foreground">Set a custom maximum file size (2MB).</p>
-              <ComponentShowcase
-                code={`'use client'
-
-import * as React from 'react'
-import { FileUpload } from '@/components/ui/file-upload'
-
-export default function Example() {
-  const [files, setFiles] = React.useState<File[]>([])
-
-  return (
-    <FileUpload
-      maxSize={2 * 1024 * 1024} // 2MB
-      onChange={setFiles}
-      onUpload={(files) => {
-        // Upload to your backend
-        console.log('Uploading files:', files)
-      }}
-    />
-  )
-}`}
-              >
-                <ComponentShowcase.Demo>
+            {/* Custom Size Limit */}
+            <div>
+              <h3 className="text-lg font-semibold mb-4">Custom Size Limit</h3>
+              <Card>
+                <CardContent className="p-6">
                   <div className="w-full max-w-xl">
                     <FileUpload
                       maxSize={2 * 1024 * 1024}
@@ -304,10 +337,13 @@ export default function Example() {
                       onUpload={(files) => console.log('Uploading files:', files)}
                     />
                   </div>
-                </ComponentShowcase.Demo>
-              </ComponentShowcase>
-            </TabsContent>
-          </Tabs>
+                </CardContent>
+              </Card>
+              <div className="mt-4">
+                <CodeBlock code={customSizeLimitCode} language="tsx" collapsible />
+              </div>
+            </div>
+          </div>
         </section>
 
         {/* Usage */}
@@ -321,38 +357,7 @@ export default function Example() {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <CodeBlock
-                code={`async function uploadFiles(files: File[]) {
-  const formData = new FormData()
-
-  files.forEach((file, index) => {
-    formData.append(\`file\${index}\`, file)
-  })
-
-  try {
-    const response = await fetch('/api/upload', {
-      method: 'POST',
-      body: formData,
-    })
-
-    if (!response.ok) {
-      throw new Error('Upload failed')
-    }
-
-    const data = await response.json()
-    console.log('Upload successful:', data)
-  } catch (error) {
-    console.error('Upload error:', error)
-  }
-}
-
-// In your component
-<FileUpload
-  onUpload={uploadFiles}
-  accept="image/*"
-  maxSize={5 * 1024 * 1024}
-/>`}
-              />
+              <CodeBlock code={backendUploadCode} />
             </CardContent>
           </Card>
         </section>
