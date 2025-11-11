@@ -9,7 +9,7 @@ Bringing light to multilingual interface design with accessibility, performance,
 ## 🌟 Features
 
 - **RTL-First Architecture**: Designed for Arabic from the ground up, with English as an equally-supported alternative
-- **41 Production-Ready Components** (+ 13 Coming Soon): Complete UI toolkit covering essential patterns from forms to data display
+- **46 Production-Ready Components** (+ 8 Coming Soon): Complete UI toolkit covering essential patterns from forms to data display
 - **GCC-Specific Components**: Prayer times, Hijri calendar, Arabic numbers, Zakat calculator, and dual-calendar date picker built for the region
 - **Zero Directional Bugs**: 100% logical properties, no hardcoded LTR assumptions
 - **Direction-Aware Components**: Tabs, navigation, and layouts automatically adapt to text direction
@@ -167,9 +167,9 @@ This enables:
 
 ## 🎨 Design System
 
-### All Components (41 Ready + 13 Coming Soon)
+### All Components (46 Ready + 8 Coming Soon)
 
-**Current Status:** 41 production-ready components with 13 more in development. See the [public roadmap](/roadmap) for upcoming components and features.
+**Current Status:** 46 production-ready components with 8 more in development. See the [public roadmap](/roadmap) for upcoming components and features.
 
 **Form Components:**
 - **Form**: State management with validation and bilingual error messages
@@ -225,6 +225,17 @@ This enables:
 - **Arabic Number**: Comprehensive utilities for Arabic-Indic numerals (٠-٩) and SAR currency formatting
 - **Zakat Calculator**: Calculate Islamic Zakat obligations with Nisab checking, multi-asset support, and export/sharing features (copy, print, download)
 - **Calendar**: Date picker with dual Gregorian/Hijri calendar, event markers, range selection, and full RTL support
+
+**Advanced Forms & Inputs:**
+- **File Upload**: Drag-and-drop file upload with preview, progress tracking, multiple file support, and file type validation
+- **Rich Text Editor**: Full-featured WYSIWYG editor built with TipTap, supporting text formatting, lists, links, and bilingual content
+
+**Layout & Shell:**
+- **Dashboard Shell**: Pre-built dashboard layout with sidebar navigation, header, and content area
+
+**User Interface:**
+- **User Menu**: User profile dropdown with avatar, account settings, and sign-out options
+- **Notification Center**: Notification panel with unread indicators, categorization, and mark-as-read functionality
 
 ### Documentation Components
 
