@@ -109,11 +109,12 @@ const examples: Example[] = [
   },
   {
     title: 'CMS / Content Management',
-    description: 'Content management system with rich text editor, media library, and workflow management for bilingual content teams.',
+    description: 'Full-featured content management system with rich text editor, file uploads, posts management, and bilingual content support.',
     href: '/examples/cms',
     icon: FileEdit,
-    tags: ['CMS', 'Content', 'Editor', 'Workflow', 'RTL'],
-    status: 'coming-soon' as const,
+    tags: ['CMS', 'Content', 'Editor', 'Dashboard Shell', 'RTL'],
+    status: 'ready' as const,
+    featured: true,
   },
   {
     title: 'Analytics Dashboard',
