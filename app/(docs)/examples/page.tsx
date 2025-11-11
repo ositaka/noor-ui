@@ -68,20 +68,11 @@ const examples: Example[] = [
   },
   {
     title: 'Dashboard',
-    description: 'Data visualization dashboard with RTL charts, statistics cards, and responsive layout.',
+    description: 'Data visualization dashboard with RTL charts, statistics cards, and responsive layout with mock data.',
     href: '/examples/dashboard',
     icon: LayoutDashboard,
     tags: ['Dashboard', 'Charts', 'Data', 'RTL'],
     status: 'ready' as const,
-  },
-  {
-    title: 'E-commerce Shop',
-    description: 'Complete online shop with product catalog, shopping cart, and checkout. Production-ready starter with localStorage - no backend needed!',
-    href: '/examples/ecommerce',
-    icon: ShoppingCart,
-    tags: ['E-commerce', 'Cart', 'Checkout', 'Starter', 'RTL'],
-    status: 'ready' as const,
-    featured: true,
   },
   {
     title: 'Calendar & Date Picker',
@@ -90,15 +81,6 @@ const examples: Example[] = [
     icon: Calendar,
     tags: ['Calendar', 'Hijri', 'GCC', 'RTL'],
     status: 'coming-soon' as const,
-  },
-  {
-    title: 'Blog Dashboard',
-    description: 'Complete blogging platform with authentication, rich text editor, and Supabase backend. Production-ready starter you can copy and deploy.',
-    href: '/examples/blog-dashboard',
-    icon: PenTool,
-    tags: ['Blog', 'Supabase', 'Auth', 'TipTap', 'Starter', 'RTL'],
-    status: 'ready' as const,
-    featured: true,
   },
   {
     title: 'Real Estate Dashboard',
@@ -181,12 +163,12 @@ export default function ExamplesPage() {
         {/* Page Header */}
         <div className="max-w-3xl mb-12">
           <h1 className="text-4xl font-bold tracking-tight mb-4">
-            {isRTL ? 'أمثلة شاملة' : 'Complete Examples'}
+            {isRTL ? 'أمثلة المكونات' : 'Component Examples'}
           </h1>
           <p className="text-xl text-muted-foreground">
             {isRTL
-              ? 'أمثلة واقعية وجاهزة للإنتاج تعرض كيفية استخدام نظام التصميم في تطبيقات حقيقية مع دعم كامل للغة العربية واتجاه النص من اليمين لليسار.'
-              : 'Real-world, production-ready examples showcasing how to use the design system in actual applications with full Arabic and RTL support.'}
+              ? 'أمثلة خفيفة توضح كيفية استخدام المكونات والأنماط مع بيانات تجريبية. مثالية للتعلم السريع ورؤية كيف تبدو الأشياء.'
+              : 'Lightweight examples showing how to use components and patterns with mock data. Perfect for quick learning and seeing how things look.'}
           </p>
         </div>
 
@@ -261,8 +243,28 @@ export default function ExamplesPage() {
           </Card>
         </div>
 
-        {/* Link to Components */}
-        <div className="mt-12 max-w-3xl">
+        {/* Link to Starters */}
+        <div className="mt-12 max-w-3xl space-y-4">
+          <Card className="border-primary/50 bg-primary/5">
+            <CardContent className="p-6">
+              <div className="space-y-4">
+                <h3 className="font-semibold">
+                  {isRTL ? 'هل تبحث عن تطبيقات كاملة؟' : 'Looking for Complete Applications?'}
+                </h3>
+                <p className="text-sm text-muted-foreground">
+                  {isRTL
+                    ? 'تصفح نماذج البدء الجاهزة للإنتاج - تطبيقات كاملة مع مصادقة، قاعدة بيانات، وكل ما تحتاجه للبدء.'
+                    : 'Browse production-ready starters - complete applications with authentication, database, and everything you need to get started.'}
+                </p>
+                <Link href="/starters">
+                  <Badge className="cursor-pointer hover:bg-primary/90">
+                    {isRTL ? 'عرض النماذج الجاهزة →' : 'View Production Starters →'}
+                  </Badge>
+                </Link>
+              </div>
+            </CardContent>
+          </Card>
+
           <Card className="border-primary/50">
             <CardContent className="p-6">
               <div className="space-y-4">
