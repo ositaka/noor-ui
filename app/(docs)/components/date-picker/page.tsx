@@ -244,17 +244,16 @@ export default function DatePickerPage() {
   }
 
   return (
-    <div className="min-h-screen" dir={direction}>
-      <main id="main-content" className="container py-12">
-        {/* Header */}
-        <div className="max-w-3xl mb-12">
-          <h1 className="text-4xl font-bold tracking-tight mb-4">{isRTL ? 'منتقي التاريخ' : 'Date Picker'}</h1>
-          <p className="text-xl text-muted-foreground">
-            {isRTL
-              ? 'اختيار التاريخ والنطاق مع تكامل التقويم'
-              : 'Single date and range selection with calendar integration'}
-          </p>
-        </div>
+    <div className="container mx-auto py-8 space-y-12" dir={direction}>
+      {/* Header */}
+      <div className="space-y-3">
+        <h1 className="text-4xl font-bold">{isRTL ? 'منتقي التاريخ' : 'Date Picker'}</h1>
+        <p className="text-lg text-muted-foreground">
+          {isRTL
+            ? 'اختيار التاريخ والنطاق مع تكامل التقويم'
+            : 'Single date and range selection with calendar integration'}
+        </p>
+      </div>
 
       {/* Basic Example */}
       <ComponentShowcase
@@ -457,7 +456,6 @@ export default function DatePickerPage() {
           <li>{isRTL ? 'تحديد سريع للتواريخ' : 'Quick date selection'}</li>
         </ul>
       </div>
-      </main>
     </div>
   )
 }

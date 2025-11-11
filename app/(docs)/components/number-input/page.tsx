@@ -185,17 +185,16 @@ export default function NumberInputPage() {
   }
 
   return (
-    <div className="min-h-screen" dir={direction}>
-      <main id="main-content" className="container py-12">
-        {/* Header */}
-        <div className="max-w-3xl mb-12">
-          <h1 className="text-4xl font-bold tracking-tight mb-4">{isRTL ? 'إدخال الأرقام' : 'Number Input'}</h1>
-          <p className="text-xl text-muted-foreground">
-            {isRTL
-              ? 'إدخال أرقام منسق مع عناصر التحكم والتحقق'
-              : 'Formatted number input with controls and validation'}
-          </p>
-        </div>
+    <div className="container mx-auto py-8 space-y-12" dir={direction}>
+      {/* Header */}
+      <div className="space-y-3">
+        <h1 className="text-4xl font-bold">{isRTL ? 'إدخال الأرقام' : 'Number Input'}</h1>
+        <p className="text-lg text-muted-foreground">
+          {isRTL
+            ? 'إدخال أرقام منسق مع عناصر التحكم والتحقق'
+            : 'Formatted number input with controls and validation'}
+        </p>
+      </div>
 
       {/* Basic Example */}
       <ComponentShowcase
@@ -388,7 +387,6 @@ export default function NumberInputPage() {
           <li>{isRTL ? 'إمكانية الوصول الكاملة' : 'Full accessibility'}</li>
         </ul>
       </div>
-      </main>
     </div>
   )
 }
