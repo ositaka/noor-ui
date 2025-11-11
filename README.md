@@ -18,6 +18,7 @@ Bringing light to multilingual interface design with accessibility, performance,
 - **Token-Based Design**: All design decisions flow from design tokens, enabling easy customization
 - **Modern Stack**: Built with Next.js 14, TypeScript, Tailwind CSS, and Radix UI
 - **Real Arabic Content**: Authentic GCC-focused content, not lorem ipsum
+- **Production-Ready Starters**: Complete applications (Blog Dashboard) you can copy and deploy immediately
 - **Bilingual Examples**: Dashboard and E-commerce examples with full Arabic/English support
 - **Light/Dark Mode**: Seamless theme switching with respect for user preferences
 - **Command Palette**: Quick navigation (Cmd+K) across all components and pages
@@ -82,6 +83,14 @@ npm run lint
 │       ├── dashboard/       # Analytics dashboard example
 │       ├── ecommerce/       # Product page example
 │       └── registration/    # Multi-step form example
+│
+├── starters/                # 🆕 Production-ready starter applications
+│   ├── blog-dashboard/     # Full-featured blog with Supabase
+│   │   ├── app/            # Auth, dashboard, and post management
+│   │   ├── lib/supabase/   # Database schema and client
+│   │   ├── hooks/          # Auth hooks
+│   │   └── README.md       # Complete setup guide
+│   └── README.md           # Starters overview
 │
 ├── components/
 │   ├── ui/                  # Design system components (32 components)
@@ -227,6 +236,21 @@ This enables:
 - **ThemeToggle**: Light/dark mode switcher
 - **SiteHeader**: Global navigation with bilingual content
 - **SiteFooter**: Global footer with links and bilingual content
+
+### Production-Ready Starters
+
+Complete, deployable applications built with Noor UI components. **[View all starters →](./starters/)**
+
+- **📝 Blog Dashboard**: Full-featured bilingual blog platform with Supabase
+  - User authentication (signup/login)
+  - Rich text editor for blog posts
+  - Image uploads to Supabase Storage
+  - Post management (create, edit, delete, publish/draft)
+  - Search and filtering
+  - Complete bilingual support (EN/AR)
+  - **[Setup Guide →](./starters/blog-dashboard/)**
+
+Coming soon: E-commerce Starter, SaaS Starter, Landing Page, Analytics Dashboard
 
 ### Real-World Examples
 
