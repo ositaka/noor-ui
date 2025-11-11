@@ -1,6 +1,7 @@
 'use client'
 
 import * as React from 'react'
+import Link from 'next/link'
 import { ComponentShowcase } from '@/components/docs/component-showcase'
 import { CodeBlock } from '@/components/docs/code-block'
 import { PropsTable } from '@/components/docs/props-table'
@@ -66,18 +67,38 @@ export function Example() {
 />`
 
   return (
-    <div className="container mx-auto py-8 space-y-12" dir={direction}>
-      {/* Header */}
-      <div className="space-y-3">
-        <h1 className="text-4xl font-bold">
-          {isRTL ? 'بطاقة الإحصائيات' : 'Stats Card'}
-        </h1>
-        <p className="text-lg text-muted-foreground">
-          {isRTL
-            ? 'اعرض مقاييس لوحة المعلومات مع مؤشرات الاتجاه'
-            : 'Display dashboard metrics with trend indicators'}
-        </p>
-      </div>
+    <div className="min-h-screen">
+      <main id="main-content" className="container py-12">
+        {/* Breadcrumb */}
+        <nav aria-label="Breadcrumb" className="mb-8">
+          <ol className="flex items-center gap-2 text-sm text-muted-foreground">
+            <li>
+              <Link href="/" className="hover:text-foreground transition-colors">
+                {isRTL ? 'الرئيسية' : 'Home'}
+              </Link>
+            </li>
+            <li>/</li>
+            <li>
+              <Link href="/components" className="hover:text-foreground transition-colors">
+                {isRTL ? 'المكونات' : 'Components'}
+              </Link>
+            </li>
+            <li>/</li>
+            <li className="text-foreground font-medium">{isRTL ? 'بطاقة الإحصائيات' : 'Stats Card'}</li>
+          </ol>
+        </nav>
+
+        {/* Page Header */}
+        <div className="mb-12">
+          <h1 className="text-4xl font-bold tracking-tight mb-4">
+            {isRTL ? 'بطاقة الإحصائيات' : 'Stats Card'}
+          </h1>
+          <p className="text-xl text-muted-foreground max-w-3xl">
+            {isRTL
+              ? 'اعرض مقاييس لوحة المعلومات مع مؤشرات الاتجاه'
+              : 'Display dashboard metrics with trend indicators'}
+          </p>
+        </div>
 
       {/* Basic Example */}
       <ComponentShowcase
@@ -374,7 +395,7 @@ export function Example() {
             </ul>
           </div>
         </div>
-      </div>
+      </main>
     </div>
   )
 }

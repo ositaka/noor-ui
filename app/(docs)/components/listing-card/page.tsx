@@ -1,6 +1,7 @@
 'use client'
 
 import * as React from 'react'
+import Link from 'next/link'
 import { ListingCard } from '@/components/ui/listing-card'
 import { Card } from '@/components/ui/card'
 import { ComponentShowcase } from '@/components/docs/component-showcase'
@@ -247,18 +248,38 @@ interface ListingCardTag {
 }`
 
   return (
-    <div className="container mx-auto py-8 space-y-12" dir={direction}>
-      {/* Header */}
-      <div className="space-y-3">
-        <h1 className="text-4xl font-bold">
-          {isRTL ? 'بطاقة القائمة' : 'Listing Card'}
-        </h1>
-        <p className="text-lg text-muted-foreground">
-          {isRTL
-            ? 'مكون بطاقة مرن لعرض القوائم والمنتجات والعقارات والوظائف والمزيد'
-            : 'A flexible card component for displaying listings, products, properties, jobs, and more'}
-        </p>
-      </div>
+    <div className="min-h-screen">
+      <main id="main-content" className="container py-12">
+        {/* Breadcrumb */}
+        <nav aria-label="Breadcrumb" className="mb-8">
+          <ol className="flex items-center gap-2 text-sm text-muted-foreground">
+            <li>
+              <Link href="/" className="hover:text-foreground transition-colors">
+                {isRTL ? 'الرئيسية' : 'Home'}
+              </Link>
+            </li>
+            <li>/</li>
+            <li>
+              <Link href="/components" className="hover:text-foreground transition-colors">
+                {isRTL ? 'المكونات' : 'Components'}
+              </Link>
+            </li>
+            <li>/</li>
+            <li className="text-foreground font-medium">{isRTL ? 'بطاقة القائمة' : 'Listing Card'}</li>
+          </ol>
+        </nav>
+
+        {/* Page Header */}
+        <div className="mb-12">
+          <h1 className="text-4xl font-bold tracking-tight mb-4">
+            {isRTL ? 'بطاقة القائمة' : 'Listing Card'}
+          </h1>
+          <p className="text-xl text-muted-foreground max-w-3xl">
+            {isRTL
+              ? 'مكون بطاقة مرن لعرض القوائم والمنتجات والعقارات والوظائف والمزيد'
+              : 'A flexible card component for displaying listings, products, properties, jobs, and more'}
+          </p>
+        </div>
 
       {/* Basic Usage */}
       <ComponentShowcase
@@ -457,6 +478,7 @@ interface ListingCardTag {
         <h2 className="text-2xl font-bold">{isRTL ? 'مرجع API' : 'API Reference'}</h2>
         <PropsTable props={listingCardProps} />
       </div>
+      </main>
     </div>
   )
 }
