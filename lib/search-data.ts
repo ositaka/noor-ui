@@ -228,6 +228,13 @@ export const searchData: SearchItem[] = [
     keywords: ['user', 'menu', 'avatar', 'profile', 'dropdown', 'account', 'logout', 'settings', 'header'],
   },
   {
+    title: 'Notification Center',
+    description: 'Bell icon with notifications dropdown, unread count, and actions',
+    href: '/components/notification-center',
+    category: 'Component',
+    keywords: ['notification', 'bell', 'alert', 'dropdown', 'popover', 'unread', 'badge', 'activity', 'feed', 'updates'],
+  },
+  {
     title: 'Alert',
     description: 'Alert message component',
     href: '/components/alert',

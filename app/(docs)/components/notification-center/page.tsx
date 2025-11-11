@@ -1,0 +1,439 @@
+'use client'
+
+import * as React from 'react'
+import Link from 'next/link'
+import { ComponentShowcase } from '@/components/docs/component-showcase'
+import { PropsTable } from '@/components/docs/props-table'
+import { NotificationCenter, type Notification } from '@/components/ui/notification-center'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { Badge } from '@/components/ui/badge'
+import { Alert, AlertDescription } from '@/components/ui/alert'
+import { Info, MessageSquare, UserPlus, Heart, Star } from 'lucide-react'
+import { useToast } from '@/hooks/use-toast'
+
+const propDefinitions = [
+  {
+    name: 'notifications',
+    type: 'Notification[]',
+    defaultValue: '[]',
+    description: 'Array of notification objects to display',
+  },
+  {
+    name: 'onNotificationClick',
+    type: '(notification: Notification) => void',
+    description: 'Callback when a notification is clicked',
+  },
+  {
+    name: 'onMarkAsRead',
+    type: '(id: string) => void',
+    description: 'Callback when a notification is marked as read',
+  },
+  {
+    name: 'onMarkAllAsRead',
+    type: '() => void',
+    description: 'Callback when "Mark all as read" is clicked',
+  },
+  {
+    name: 'onClearAll',
+    type: '() => void',
+    description: 'Callback when "Clear all" is clicked',
+  },
+  {
+    name: 'onRemove',
+    type: '(id: string) => void',
+    description: 'Callback when a notification is removed',
+  },
+  {
+    name: 'className',
+    type: 'string',
+    description: 'Additional CSS classes for the trigger button',
+  },
+  {
+    name: 'maxHeight',
+    type: 'string',
+    defaultValue: '"400px"',
+    description: 'Maximum height of the notifications list',
+  },
+]
+
+const notificationTypeDefinition = `interface Notification {
+  id: string
+  title: string
+  description?: string
+  time: string          // ISO date string or Date
+  read?: boolean
+  icon?: React.ReactNode
+  avatar?: string       // URL to avatar image
+}`
+
+export default function NotificationCenterPage() {
+  const { toast } = useToast()
+
+  const [notifications1, setNotifications1] = React.useState<Notification[]>([
+    {
+      id: '1',
+      title: 'New comment on your post',
+      description: 'Sarah commented: "Great article! Very helpful."',
+      time: new Date(Date.now() - 5 * 60000).toISOString(),
+      read: false,
+      icon: <MessageSquare className="h-5 w-5" />,
+    },
+    {
+      id: '2',
+      title: 'New follower',
+      description: 'Ahmed started following you',
+      time: new Date(Date.now() - 120 * 60000).toISOString(),
+      read: false,
+      icon: <UserPlus className="h-5 w-5" />,
+    },
+    {
+      id: '3',
+      title: 'Someone liked your post',
+      description: '5 people liked "Getting Started with React"',
+      time: new Date(Date.now() - 1440 * 60000).toISOString(),
+      read: true,
+      icon: <Heart className="h-5 w-5" />,
+    },
+  ])
+
+  const [notifications2, setNotifications2] = React.useState<Notification[]>([
+    {
+      id: '1',
+      title: 'You have a new review',
+      description: '"Excellent service!" - 5 stars',
+      time: new Date(Date.now() - 10 * 60000).toISOString(),
+      read: false,
+      icon: <Star className="h-5 w-5" />,
+      avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=John',
+    },
+  ])
+
+  const handleMarkAsRead = (id: string, setState: React.Dispatch<React.SetStateAction<Notification[]>>) => {
+    setState((prev) =>
+      prev.map((n) => (n.id === id ? { ...n, read: true } : n))
+    )
+  }
+
+  const handleMarkAllAsRead = (setState: React.Dispatch<React.SetStateAction<Notification[]>>) => {
+    setState((prev) => prev.map((n) => ({ ...n, read: true })))
+    toast({
+      title: 'All notifications marked as read',
+    })
+  }
+
+  const handleClearAll = (setState: React.Dispatch<React.SetStateAction<Notification[]>>) => {
+    setState([])
+    toast({
+      title: 'All notifications cleared',
+    })
+  }
+
+  const handleRemove = (id: string, setState: React.Dispatch<React.SetStateAction<Notification[]>>) => {
+    setState((prev) => prev.filter((n) => n.id !== id))
+  }
+
+  return (
+    <div className="min-h-screen">
+      <main id="main-content" className="container py-12">
+        {/* Breadcrumb */}
+        <nav aria-label="Breadcrumb" className="mb-8">
+          <ol className="flex items-center gap-2 text-sm text-muted-foreground">
+            <li>
+              <Link href="/" className="hover:text-foreground transition-colors">
+                Home
+              </Link>
+            </li>
+            <li>/</li>
+            <li>
+              <Link href="/components" className="hover:text-foreground transition-colors">
+                Components
+              </Link>
+            </li>
+            <li>/</li>
+            <li className="text-foreground font-medium">Notification Center</li>
+          </ol>
+        </nav>
+
+        {/* Page Header */}
+        <div className="mb-12">
+          <div className="flex items-center gap-3 mb-4">
+            <h1 className="text-4xl font-bold tracking-tight">Notification Center</h1>
+            <Badge variant="default">New</Badge>
+          </div>
+          <p className="text-xl text-muted-foreground max-w-3xl">
+            A bell icon with dropdown displaying notifications, unread count badge, and actions
+            to manage notifications. Fully bilingual with RTL support.
+          </p>
+        </div>
+
+        {/* Preview */}
+        <section className="mb-16">
+          <h2 className="text-2xl font-bold tracking-tight mb-6">Preview</h2>
+          <ComponentShowcase
+            code={`import { NotificationCenter } from '@/components/ui/notification-center'
+
+export default function Example() {
+  const [notifications, setNotifications] = React.useState([
+    {
+      id: '1',
+      title: 'New comment on your post',
+      description: 'Sarah commented: "Great article!"',
+      time: new Date().toISOString(),
+      read: false,
+    },
+  ])
+
+  return (
+    <NotificationCenter
+      notifications={notifications}
+      onNotificationClick={(notif) => console.log('Clicked:', notif)}
+      onMarkAsRead={(id) => {
+        setNotifications(prev =>
+          prev.map(n => n.id === id ? { ...n, read: true } : n)
+        )
+      }}
+      onMarkAllAsRead={() => {
+        setNotifications(prev => prev.map(n => ({ ...n, read: true })))
+      }}
+      onClearAll={() => setNotifications([])}
+    />
+  )
+}`}
+          >
+            <ComponentShowcase.Demo>
+              <NotificationCenter
+                notifications={notifications1}
+                onNotificationClick={(notif) => {
+                  toast({
+                    title: 'Notification clicked',
+                    description: notif.title,
+                  })
+                }}
+                onMarkAsRead={(id) => handleMarkAsRead(id, setNotifications1)}
+                onMarkAllAsRead={() => handleMarkAllAsRead(setNotifications1)}
+                onClearAll={() => handleClearAll(setNotifications1)}
+                onRemove={(id) => handleRemove(id, setNotifications1)}
+              />
+            </ComponentShowcase.Demo>
+          </ComponentShowcase>
+        </section>
+
+        {/* Features */}
+        <section className="mb-16">
+          <h2 className="text-2xl font-bold tracking-tight mb-6">Features</h2>
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-lg">Unread Badge</CardTitle>
+              </CardHeader>
+              <CardContent className="text-sm text-muted-foreground">
+                Badge showing unread count on the bell icon
+              </CardContent>
+            </Card>
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-lg">Relative Time</CardTitle>
+              </CardHeader>
+              <CardContent className="text-sm text-muted-foreground">
+                Smart time display (5m ago, 2h ago, etc.) in both languages
+              </CardContent>
+            </Card>
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-lg">Icons & Avatars</CardTitle>
+              </CardHeader>
+              <CardContent className="text-sm text-muted-foreground">
+                Support for custom icons or user avatars
+              </CardContent>
+            </Card>
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-lg">Mark as Read</CardTitle>
+              </CardHeader>
+              <CardContent className="text-sm text-muted-foreground">
+                Individual or bulk mark as read functionality
+              </CardContent>
+            </Card>
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-lg">Remove Notifications</CardTitle>
+              </CardHeader>
+              <CardContent className="text-sm text-muted-foreground">
+                Hover to reveal remove button on each notification
+              </CardContent>
+            </Card>
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-lg">Bilingual</CardTitle>
+              </CardHeader>
+              <CardContent className="text-sm text-muted-foreground">
+                Full Arabic support with proper time formatting
+              </CardContent>
+            </Card>
+          </div>
+        </section>
+
+        {/* Examples */}
+        <section className="mb-16">
+          <h2 className="text-2xl font-bold tracking-tight mb-6">Examples</h2>
+
+          <Tabs defaultValue="with-avatars" className="space-y-6">
+            <TabsList>
+              <TabsTrigger value="with-avatars">With Avatars</TabsTrigger>
+              <TabsTrigger value="empty-state">Empty State</TabsTrigger>
+            </TabsList>
+
+            <TabsContent value="with-avatars" className="space-y-4">
+              <p className="text-muted-foreground">Notifications with user avatars.</p>
+              <ComponentShowcase
+                code={`import { NotificationCenter } from '@/components/ui/notification-center'
+
+export default function Example() {
+  const notifications = [
+    {
+      id: '1',
+      title: 'You have a new review',
+      description: '"Excellent service!" - 5 stars',
+      time: new Date().toISOString(),
+      read: false,
+      avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=John',
+    },
+  ]
+
+  return (
+    <NotificationCenter
+      notifications={notifications}
+      onMarkAsRead={(id) => console.log('Mark as read:', id)}
+    />
+  )
+}`}
+              >
+                <ComponentShowcase.Demo>
+                  <NotificationCenter
+                    notifications={notifications2}
+                    onMarkAsRead={(id) => handleMarkAsRead(id, setNotifications2)}
+                    onMarkAllAsRead={() => handleMarkAllAsRead(setNotifications2)}
+                    onRemove={(id) => handleRemove(id, setNotifications2)}
+                  />
+                </ComponentShowcase.Demo>
+              </ComponentShowcase>
+            </TabsContent>
+
+            <TabsContent value="empty-state" className="space-y-4">
+              <p className="text-muted-foreground">Empty state when no notifications.</p>
+              <ComponentShowcase
+                code={`import { NotificationCenter } from '@/components/ui/notification-center'
+
+export default function Example() {
+  return <NotificationCenter notifications={[]} />
+}`}
+              >
+                <ComponentShowcase.Demo>
+                  <NotificationCenter notifications={[]} />
+                </ComponentShowcase.Demo>
+              </ComponentShowcase>
+            </TabsContent>
+          </Tabs>
+        </section>
+
+        {/* Notification Type */}
+        <section className="mb-16">
+          <h2 className="text-2xl font-bold tracking-tight mb-6">Notification Type</h2>
+          <Card>
+            <CardHeader>
+              <CardTitle>Notification Interface</CardTitle>
+              <CardDescription>
+                Structure of a notification object
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <pre className="bg-muted p-4 rounded-md overflow-x-auto">
+                <code className="text-sm">{notificationTypeDefinition}</code>
+              </pre>
+            </CardContent>
+          </Card>
+        </section>
+
+        {/* Props */}
+        <section className="mb-16">
+          <h2 className="text-2xl font-bold tracking-tight mb-6">Props</h2>
+          <PropsTable props={propDefinitions} />
+        </section>
+
+        {/* Best Practices */}
+        <section className="mb-16">
+          <h2 className="text-2xl font-bold tracking-tight mb-6">Best Practices</h2>
+          <Alert>
+            <Info className="h-4 w-4" />
+            <AlertDescription>
+              <ul className="space-y-2 mt-2">
+                <li className="flex items-start gap-2">
+                  <span className="text-primary font-bold">•</span>
+                  <span>
+                    Keep notification descriptions concise - one or two lines maximum
+                  </span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-primary font-bold">•</span>
+                  <span>
+                    Use ISO date strings for time values to ensure proper timezone handling
+                  </span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-primary font-bold">•</span>
+                  <span>
+                    Automatically mark notifications as read when clicked for better UX
+                  </span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-primary font-bold">•</span>
+                  <span>
+                    Limit the number of notifications displayed (e.g., last 50)
+                  </span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-primary font-bold">•</span>
+                  <span>
+                    Consider adding sound/vibration feedback for new notifications
+                  </span>
+                </li>
+              </ul>
+            </AlertDescription>
+          </Alert>
+        </section>
+
+        {/* Accessibility */}
+        <section className="mb-16">
+          <h2 className="text-2xl font-bold tracking-tight mb-6">Accessibility</h2>
+          <Card>
+            <CardContent className="pt-6">
+              <ul className="space-y-3 text-sm text-muted-foreground">
+                <li className="flex items-start gap-2">
+                  <span className="text-primary font-bold">✓</span>
+                  <span>Bell icon button has proper aria-label</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-primary font-bold">✓</span>
+                  <span>Unread count badge is visible to screen readers</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-primary font-bold">✓</span>
+                  <span>Keyboard navigation through notifications</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-primary font-bold">✓</span>
+                  <span>Clear visual distinction between read/unread states</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-primary font-bold">✓</span>
+                  <span>Escape key closes the popover</span>
+                </li>
+              </ul>
+            </CardContent>
+          </Card>
+        </section>
+      </main>
+    </div>
+  )
+}
