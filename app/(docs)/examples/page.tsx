@@ -75,12 +75,13 @@ const examples: Example[] = [
     status: 'ready' as const,
   },
   {
-    title: 'E-commerce Product Page',
-    description: 'Product page with image gallery, reviews, and shopping cart.',
+    title: 'E-commerce Shop',
+    description: 'Complete online shop with product catalog, shopping cart, and checkout. Production-ready starter with localStorage - no backend needed!',
     href: '/examples/ecommerce',
     icon: ShoppingCart,
-    tags: ['E-commerce', 'Product', 'Cart', 'RTL'],
+    tags: ['E-commerce', 'Cart', 'Checkout', 'Starter', 'RTL'],
     status: 'ready' as const,
+    featured: true,
   },
   {
     title: 'Calendar & Date Picker',

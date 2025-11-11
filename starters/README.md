@@ -24,9 +24,28 @@ A full-featured bilingual blog platform with authentication, post management, an
 
 **[View Documentation →](./blog-dashboard/README.md)**
 
+### 🛒 [E-commerce Shop](./ecommerce)
+A complete online shop with product catalog, shopping cart, and checkout flow.
+
+**Features:**
+- 🛍️ Product catalog with search & filters
+- 🛒 Shopping cart (localStorage persistence)
+- 💳 Checkout flow with order confirmation
+- ⭐ Product ratings and reviews
+- 🌍 Complete bilingual support (English/Arabic)
+- 📱 Fully responsive design
+- 🎨 Dark mode support
+
+**Stack:**
+- Next.js 14
+- LocalStorage (no backend needed!)
+- React Context
+- Noor UI Components
+
+**[View Documentation →](./ecommerce/README.md)**
+
 ## Coming Soon
 
-- 🛒 **E-commerce Starter** - Full online store with cart, checkout, and orders
 - 🚀 **SaaS Starter** - Multi-tenant SaaS application with billing
 - 📄 **Landing Page** - Marketing site with forms and analytics
 - 📊 **Analytics Dashboard** - Data visualization and reporting
