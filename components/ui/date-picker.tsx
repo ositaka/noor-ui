@@ -224,7 +224,7 @@ export function DateRangePicker({
       <PopoverContent className="w-auto p-0" align={isRTL ? 'end' : 'start'}>
         <Calendar
           mode="range"
-          selected={dateRange}
+          selectedRange={dateRange}
           onSelect={handleSelect}
           disabled={isDateDisabled}
           initialFocus
