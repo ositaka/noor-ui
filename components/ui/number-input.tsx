@@ -152,7 +152,7 @@ export const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       }
 
       // Validate input characters
-      const validChars = allowDecimal
+      let validChars = allowDecimal
         ? `0-9${allowNegative ? '\\-' : ''}${decimalSeparator !== '.' ? `\\${decimalSeparator}` : '\\.'}`
         : `0-9${allowNegative ? '\\-' : ''}`
 
