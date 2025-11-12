@@ -164,7 +164,11 @@ export default function CalendarExamplePage() {
                 <Calendar
                   mode="single"
                   selected={selectedDate}
-                  onSelect={setSelectedDate}
+                  onSelect={(date) => {
+                    // For single mode, only accept Date type
+                    if (date && !(date instanceof Date)) return
+                    setSelectedDate(date)
+                  }}
                   className="rounded-md border"
                 />
               </div>
@@ -186,7 +190,7 @@ export default function CalendarExamplePage() {
                     gregorianDateAr={formatDate(selectedDate)}
                     hijriDate="10 Jumada I, 1447"
                     hijriDateAr="١٠ جمادى الأولى ١٤٤٧"
-                    variant="card"
+                    variant="default"
                   />
                 </div>
               )}
