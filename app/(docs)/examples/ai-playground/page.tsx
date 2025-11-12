@@ -184,15 +184,15 @@ export default function AdvancedPlaygroundPage() {
   }
 
   const handleNewConversation = () => {
-    const newConv: Conversation = {
+    const newConv = {
       id: Date.now().toString(),
       title: isRTL ? 'محادثة جديدة' : 'New Conversation',
       timestamp: new Date(),
       messageCount: 0,
-      isActive: true,
+      isActive: true as boolean,
     }
     setConversations((prev) =>
-      prev.map((c) => ({ ...c, isActive: false })).concat(newConv)
+      prev.map((c) => ({ ...c, isActive: false as boolean })).concat(newConv)
     )
     setActiveConversationId(newConv.id)
     setMessages([
@@ -303,9 +303,9 @@ export default function AdvancedPlaygroundPage() {
                     showRegenerate={false}
                   />
                   {message.role === 'assistant' && (
-                    <div className={cn('mt-2', message.role === 'user' ? 'text-end' : '')}>
+                    <div className="mt-2">
                       <MessageActions
-                        variant="compact"
+                        compact
                         showCopy
                         showRegenerate
                         showEdit={false}
