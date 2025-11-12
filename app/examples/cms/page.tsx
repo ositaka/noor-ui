@@ -372,32 +372,32 @@ export default function CMSPage() {
             {/* Stats Grid */}
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
               <StatsCard
-                icon={FileText}
+                icon={<FileText className="h-4 w-4" />}
                 label={isRTL ? 'إجمالي المنشورات' : 'Total Posts'}
                 value="24"
-                trend={{ value: 12, direction: 'up' }}
-                description={isRTL ? '+3 هذا الشهر' : '+3 this month'}
+                trend={12}
+                trendLabel={isRTL ? '+3 هذا الشهر' : '+3 this month'}
               />
               <StatsCard
-                icon={Eye}
+                icon={<Eye className="h-4 w-4" />}
                 label={isRTL ? 'إجمالي المشاهدات' : 'Total Views'}
                 value="12.4K"
-                trend={{ value: 8.2, direction: 'up' }}
-                description={isRTL ? '+892 هذا الأسبوع' : '+892 this week'}
+                trend={8.2}
+                trendLabel={isRTL ? '+892 هذا الأسبوع' : '+892 this week'}
               />
               <StatsCard
-                icon={MessageSquare}
+                icon={<MessageSquare className="h-4 w-4" />}
                 label={isRTL ? 'التعليقات' : 'Comments'}
                 value="342"
-                trend={{ value: 5.1, direction: 'up' }}
-                description={isRTL ? '+28 اليوم' : '+28 today'}
+                trend={5.1}
+                trendLabel={isRTL ? '+28 اليوم' : '+28 today'}
               />
               <StatsCard
-                icon={TrendingUp}
+                icon={<TrendingUp className="h-4 w-4" />}
                 label={isRTL ? 'معدل المشاركة' : 'Engagement Rate'}
                 value="68%"
-                trend={{ value: 2.3, direction: 'up' }}
-                description={isRTL ? 'أعلى من المتوسط' : 'Above average'}
+                trend={2.3}
+                trendLabel={isRTL ? 'أعلى من المتوسط' : 'Above average'}
               />
             </div>
 
