@@ -377,7 +377,7 @@ export default function Example() {
                 <CardTitle className="text-lg">Images</CardTitle>
               </CardHeader>
               <CardContent>
-                <code className="text-sm bg-muted px-2 py-1 rounded">accept="image/*"</code>
+                <code className="text-sm bg-muted px-2 py-1 rounded">accept=&quot;image/*&quot;</code>
                 <p className="text-sm text-muted-foreground mt-2">
                   Accepts all image formats (JPEG, PNG, GIF, WebP, etc.)
                 </p>
@@ -388,7 +388,7 @@ export default function Example() {
                 <CardTitle className="text-lg">Documents</CardTitle>
               </CardHeader>
               <CardContent>
-                <code className="text-sm bg-muted px-2 py-1 rounded">accept=".pdf,.doc,.docx"</code>
+                <code className="text-sm bg-muted px-2 py-1 rounded">accept=&quot;.pdf,.doc,.docx&quot;</code>
                 <p className="text-sm text-muted-foreground mt-2">
                   Accepts PDF and Word documents
                 </p>
@@ -399,7 +399,7 @@ export default function Example() {
                 <CardTitle className="text-lg">Videos</CardTitle>
               </CardHeader>
               <CardContent>
-                <code className="text-sm bg-muted px-2 py-1 rounded">accept="video/*"</code>
+                <code className="text-sm bg-muted px-2 py-1 rounded">accept=&quot;video/*&quot;</code>
                 <p className="text-sm text-muted-foreground mt-2">
                   Accepts all video formats (MP4, WebM, AVI, etc.)
                 </p>
@@ -410,7 +410,7 @@ export default function Example() {
                 <CardTitle className="text-lg">Spreadsheets</CardTitle>
               </CardHeader>
               <CardContent>
-                <code className="text-sm bg-muted px-2 py-1 rounded">accept=".xlsx,.xls,.csv"</code>
+                <code className="text-sm bg-muted px-2 py-1 rounded">accept=&quot;.xlsx,.xls,.csv&quot;</code>
                 <p className="text-sm text-muted-foreground mt-2">
                   Accepts Excel and CSV files
                 </p>

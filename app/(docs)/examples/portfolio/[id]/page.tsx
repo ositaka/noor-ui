@@ -344,7 +344,7 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
                     <Star className="h-8 w-8 text-primary shrink-0" />
                     <div>
                       <p className="text-lg italic mb-4">
-                        "{isRTL ? project.testimonial.textAr : project.testimonial.text}"
+                        &quot;{isRTL ? project.testimonial.textAr : project.testimonial.text}&quot;
                       </p>
                       <div>
                         <p className="font-semibold">

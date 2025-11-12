@@ -33,7 +33,7 @@ const chatMessageVariants = cva(
 )
 
 export interface ChatMessageProps
-  extends React.HTMLAttributes<HTMLDivElement>,
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, 'role'>,
     VariantProps<typeof chatMessageVariants> {
   /**
    * The role/sender of the message

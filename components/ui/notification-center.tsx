@@ -162,6 +162,8 @@ export const NotificationCenter = React.forwardRef<HTMLButtonElement, Notificati
                 {notifications.map((notification) => (
                   <div
                     key={notification.id}
+                    role="button"
+                    tabIndex={0}
                     className={cn(
                       'group relative flex gap-3 p-4 transition-colors',
                       'hover:bg-accent cursor-pointer',
@@ -171,6 +173,15 @@ export const NotificationCenter = React.forwardRef<HTMLButtonElement, Notificati
                       onNotificationClick?.(notification)
                       if (!notification.read) {
                         onMarkAsRead?.(notification.id)
+                      }
+                    }}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault()
+                        onNotificationClick?.(notification)
+                        if (!notification.read) {
+                          onMarkAsRead?.(notification.id)
+                        }
                       }
                     }}
                   >

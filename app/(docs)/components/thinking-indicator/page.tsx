@@ -258,8 +258,8 @@ export default function ThinkingIndicatorPage() {
               <div>
                 <h3 className="font-semibold mb-2">Screen Reader</h3>
                 <p className="text-muted-foreground">
-                  The component includes proper ARIA attributes with <code className="bg-muted px-1 rounded">role="status"</code> and{' '}
-                  <code className="bg-muted px-1 rounded">aria-live="polite"</code> to announce loading states
+                  The component includes proper ARIA attributes with <code className="bg-muted px-1 rounded">role=&quot;status&quot;</code> and{' '}
+                  <code className="bg-muted px-1 rounded">aria-live=&quot;polite&quot;</code> to announce loading states
                   to screen readers without interrupting other content.
                 </p>
               </div>
@@ -267,7 +267,7 @@ export default function ThinkingIndicatorPage() {
               <div>
                 <h3 className="font-semibold mb-2">Animation Safety</h3>
                 <p className="text-muted-foreground">
-                  All animations respect the user's motion preferences. Animations are subtle and don't
+                  All animations respect the user&apos;s motion preferences. Animations are subtle and don&apos;t
                   flash rapidly, making them safe for users with motion sensitivity.
                 </p>
               </div>

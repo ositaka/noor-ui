@@ -445,7 +445,7 @@ export default function DocumentQAPage() {
                                     {source.section}
                                   </div>
                                   <p className="text-sm text-muted-foreground italic">
-                                    "{source.excerpt}"
+                                    &quot;{source.excerpt}&quot;
                                   </p>
                                 </div>
                               </div>
