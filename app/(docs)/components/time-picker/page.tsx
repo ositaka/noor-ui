@@ -186,7 +186,7 @@ export default function TimePickerPage() {
   const [time2, setTime2] = React.useState<Time>({ hours: 14, minutes: 0 })
   const [time3, setTime3] = React.useState<Time | undefined>(undefined)
   const [time4, setTime4] = React.useState<Time>({ hours: 9, minutes: 0 })
-  const [timeRange1, setTimeRange1] = React.useState<TimeRange>({
+  const [timeRange1, setTimeRange1] = React.useState<TimeRange | undefined>({
     from: { hours: 9, minutes: 0 },
     to: { hours: 17, minutes: 0 },
   })
