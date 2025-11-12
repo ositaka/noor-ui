@@ -9,8 +9,9 @@ Bringing light to multilingual interface design with accessibility, performance,
 ## 🌟 Features
 
 - **RTL-First Architecture**: Designed for Arabic from the ground up, with English as an equally-supported alternative
-- **50 Production-Ready Components** (+ 4 Coming Soon): Complete UI toolkit covering essential patterns from forms to data display
+- **60 Production-Ready Components**: Complete UI toolkit including AI/LLM Shell components for modern conversational interfaces
 - **GCC-Specific Components**: Prayer times, Hijri calendar, Arabic numbers, Zakat calculator, and dual-calendar date picker built for the region
+- **AI/LLM Shell Components**: Chat interfaces, streaming text, prompt inputs, model selectors, and conversation management - perfect for building AI assistants
 - **Zero Directional Bugs**: 100% logical properties, no hardcoded LTR assumptions
 - **Direction-Aware Components**: Tabs, navigation, and layouts automatically adapt to text direction
 - **4 Distinct Themes**: Minimal, Futuristic, Cozy, and Artistic - all powered by the same design tokens
@@ -167,9 +168,9 @@ This enables:
 
 ## 🎨 Design System
 
-### All Components (50 Ready + 4 Coming Soon)
+### All Components (60 Ready + 10 AI/LLM Components)
 
-**Current Status:** 50 production-ready components with 4 more in development. See the [public roadmap](/roadmap) for upcoming components and features.
+**Current Status:** 60 production-ready components including a complete AI/LLM Shell component set. See the [public roadmap](/roadmap) for upcoming components and features.
 
 **Form Components:**
 - **Form**: State management with validation and bilingual error messages
@@ -241,6 +242,18 @@ This enables:
 - **Notification Center**: Notification panel with unread indicators, categorization, and mark-as-read functionality
 - **Stepper**: Multi-step progress indicator with 3 variants (default, simple, circles), horizontal/vertical orientations, and clickable steps
 
+**AI/LLM Shell Components:** 🆕
+- **ChatMessage**: User/assistant/system message bubbles with avatars, timestamps, markdown rendering, and action buttons (copy, regenerate, edit)
+- **StreamingText**: Typewriter effect animation for simulating real-time AI text generation with configurable speed and cursor
+- **PromptInput**: Enhanced textarea for AI prompts with auto-resize, @ mentions, slash commands, file attachments, and token counter
+- **ThinkingIndicator**: Animated loading states showing AI is processing (dots, pulse, wave, typing variants)
+- **MessageActions**: Action toolbar for messages with copy, regenerate, edit, share, and feedback buttons
+- **ModelSelector**: Dropdown for choosing AI models with specs display (speed, context length, pricing) and recommended badges
+- **ParameterSlider**: Control AI parameters (temperature, max tokens, top-p) with visual presets and bilingual tooltips
+- **TokenCounter**: Real-time token usage display with progress bar, color coding, and estimated cost calculation
+- **ConversationHistory**: Sidebar for managing past conversations with search, grouping by date, and conversation management
+- **CodeBlock (Enhanced)**: Extended code display with run button, explain button, diff view, and line highlighting for AI-generated code
+
 ### Documentation Components
 
 - **ComponentShowcase**: Live interactive demos with LTR/RTL comparison
@@ -272,13 +285,27 @@ Coming soon: E-commerce Starter, SaaS Starter, Landing Page, Analytics Dashboard
 
 Production-ready examples showcasing component composition and real use cases:
 
-- **CMS/Blog Admin Dashboard**: Complete content management system with posts list (DataTable), rich text editor, file upload, analytics dashboard, and hash-based navigation - perfect showcase of advanced form components
-- **GCC Community Dashboard**: Complete showcase of all GCC-specific components including Prayer Times, Hijri Date, Zakat Calculator, and Arabic Number formatting in a cohesive community platform
-- **Islamic Finance Dashboard**: Comprehensive Islamic finance management featuring Zakat calculator with export, investment portfolio tracking, Hijri calendar with Islamic events, transaction DataTable, and prayer times integration
+**AI/LLM Shell Examples:** 🆕
+- **Simple AI Chat**: Clean conversational interface perfect for customer support bots and Q&A assistants with message history and streaming responses
+- **Advanced AI Playground**: Full-featured AI interaction with parameter controls (temperature, max tokens), model selector, system prompts, conversation export, and token counter
+- **Code Assistant**: AI coding helper with syntax highlighting for 20+ languages, code diff view, quick actions (explain, fix, optimize), and file context
+- **Document Q&A**: Upload documents and ask questions with citation references, multi-document support, key information extraction, and bilingual document support
+- **Multi-Agent Chat**: Multiple AI personas (Expert, Teacher, Critic, Creative Writer) with comparison mode, debate mode, and distinct agent personalities
+
+**Business & E-commerce:**
+- **Marketplace**: Multi-vendor marketplace with product listings, vendor dashboards, shopping cart, checkout flow, and order management
+- **B2B Marketplace**: Business marketplace with bulk ordering, volume pricing tiers, RFQ (Request for Quote) system, and credit terms
+- **CMS/Blog Admin Dashboard**: Complete content management system with posts list (DataTable), rich text editor, file upload, analytics dashboard, and hash-based navigation
+- **E-commerce Product Page**: Image gallery, color/size selection, reviews with ratings, and related products grid
+
+**GCC-Specific:**
+- **GCC Community Dashboard**: Complete showcase of all GCC-specific components including Prayer Times, Hijri Date, Zakat Calculator, and Arabic Number formatting
+- **Islamic Finance Dashboard**: Comprehensive Islamic finance management featuring Zakat calculator with export, investment portfolio tracking, Hijri calendar with Islamic events, and prayer times integration
+
+**General:**
 - **DataTable Showcase**: Advanced data table demonstration with 50 sample users, live sorting/filtering, pagination, search, export to CSV, and mobile-responsive cards view
 - **Multi-Step Registration Form**: 4-step registration with validation, progress indicators, and bilingual error messages
 - **Analytics Dashboard**: Stats cards, revenue charts, transaction tables (with responsive mobile layout), and activity feeds
-- **E-commerce Product Page**: Image gallery, color/size selection, reviews with ratings, and related products grid
 
 All examples feature:
 - Full RTL support with real Arabic content
@@ -511,6 +538,24 @@ Tokens are converted to CSS custom properties in `styles/globals.css` and consum
 - [ ] Create Figma design kit
 - [ ] Performance optimizations
 - [ ] SEO improvements
+
+### Phase 5: AI/LLM Shell 🆕 IN PROGRESS
+- [ ] ChatMessage component with user/assistant/system variants
+- [ ] StreamingText component with typewriter animation
+- [ ] PromptInput with @ mentions and slash commands
+- [ ] ThinkingIndicator with 4 animation variants
+- [ ] MessageActions toolbar for messages
+- [ ] ModelSelector with model specs display
+- [ ] ParameterSlider for AI controls (temp, tokens, top-p)
+- [ ] TokenCounter with progress and cost tracking
+- [ ] ConversationHistory sidebar
+- [ ] Enhanced CodeBlock for AI-generated code
+- [ ] Simple AI Chat example
+- [ ] Advanced AI Playground example
+- [ ] Code Assistant example
+- [ ] Document Q&A example
+- [ ] Multi-Agent Chat example
+- [ ] AI Chat Starter with Supabase (optional)
 
 ### Recent Improvements (November 2025)
 
