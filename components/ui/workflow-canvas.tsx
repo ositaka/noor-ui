@@ -113,16 +113,6 @@ export function WorkflowCanvas({
   const [nodes, setNodes] = React.useState<Node[]>(initialNodes)
   const [edges, setEdges] = React.useState<Edge[]>(initialEdges)
 
-  // Update nodes when initialNodes changes
-  React.useEffect(() => {
-    setNodes(initialNodes)
-  }, [initialNodes])
-
-  // Update edges when initialEdges changes
-  React.useEffect(() => {
-    setEdges(initialEdges)
-  }, [initialEdges])
-
   const onNodesChange: OnNodesChange = React.useCallback(
     (changes) => {
       if (readOnly) return
