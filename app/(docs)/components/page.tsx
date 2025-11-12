@@ -46,6 +46,8 @@ import {
   Settings,
   History,
   Sliders,
+  Workflow,
+  Box,
 } from 'lucide-react'
 
 const componentCategories = [
@@ -176,6 +178,14 @@ const componentCategories = [
       { name: 'Conversation History', icon: History, href: '/components/conversation-history', status: 'ready' },
     ],
   },
+  {
+    name: 'Workflow & Automation',
+    description: 'Node-based workflow builders for creating automation pipelines',
+    components: [
+      { name: 'Workflow Canvas', icon: Workflow, href: '/components/workflow-canvas', status: 'ready' },
+      { name: 'Workflow Node', icon: Box, href: '/components/workflow-node', status: 'ready' },
+    ],
+  },
 ]
 
 export default function ComponentsPage() {
@@ -200,8 +210,8 @@ export default function ComponentsPage() {
         <div className="max-w-3xl mb-12">
           <h1 className="text-4xl font-bold tracking-tight mb-4">Components</h1>
           <p className="text-xl text-muted-foreground mb-6">
-            61 beautifully designed components built with Radix UI and Tailwind CSS.
-            58 production-ready, 3 coming soon. Full RTL support, accessible, and customizable.
+            63 beautifully designed components built with Radix UI, Tailwind CSS, and React Flow.
+            60 production-ready, 3 coming soon. Full RTL support, accessible, and customizable.
           </p>
 
           {/* Live Preview */}

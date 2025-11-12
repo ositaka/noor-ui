@@ -23,6 +23,8 @@ import {
   BookOpen,
   Users,
   Bot,
+  GitBranch,
+  Workflow,
   type LucideIcon,
 } from 'lucide-react'
 
@@ -175,6 +177,24 @@ const examples: Example[] = [
     href: '/examples/ai-multi-agent',
     icon: Users,
     tags: ['AI', 'Multi-Agent', 'Collaboration', 'LLM', 'RTL'],
+    status: 'ready' as const,
+    featured: true,
+  },
+  {
+    title: 'Basic Workflow',
+    description: 'Simple workflow builder with drag-and-drop nodes and connections. Perfect starting point for understanding workflow automation.',
+    href: '/examples/workflow-basic',
+    icon: GitBranch,
+    tags: ['Workflow', 'Drag & Drop', 'Automation', 'RTL'],
+    status: 'ready' as const,
+    featured: true,
+  },
+  {
+    title: 'AI Workflow',
+    description: 'AI-powered workflow builder with LLM integration, model selection, token tracking, and cost estimation. Build intelligent automation pipelines.',
+    href: '/examples/ai-workflow',
+    icon: Workflow,
+    tags: ['Workflow', 'AI', 'LLM', 'Automation', 'Tokens', 'RTL'],
     status: 'ready' as const,
     featured: true,
   },
