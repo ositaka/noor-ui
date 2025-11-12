@@ -630,11 +630,11 @@ export default function MarketplacePage() {
 
                     <div className="flex items-baseline gap-2">
                       <span className="text-xl font-bold">
-                        {formatSAR(product.price, locale === 'ar')}
+                        {formatSAR(product.price, { useArabicNumerals: locale === 'ar', locale: locale === 'ar' ? 'ar' : 'en' })}
                       </span>
                       {product.originalPrice && (
                         <span className="text-sm text-muted-foreground line-through">
-                          {formatSAR(product.originalPrice, locale === 'ar')}
+                          {formatSAR(product.originalPrice, { useArabicNumerals: locale === 'ar', locale: locale === 'ar' ? 'ar' : 'en' })}
                         </span>
                       )}
                     </div>
@@ -738,7 +738,7 @@ export default function MarketplacePage() {
 
                     <div className="flex items-baseline gap-2 mb-2">
                       <span className="text-lg font-bold">
-                        {formatSAR(product.price, locale === 'ar')}
+                        {formatSAR(product.price, { useArabicNumerals: locale === 'ar', locale: locale === 'ar' ? 'ar' : 'en' })}
                       </span>
                     </div>
 

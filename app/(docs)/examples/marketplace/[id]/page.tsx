@@ -350,12 +350,12 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
             <div>
               <div className="flex items-baseline gap-3 mb-2">
                 <span className="text-3xl font-bold">
-                  {formatSAR(product.price, locale === 'ar')}
+                  {formatSAR(product.price, { useArabicNumerals: locale === 'ar', locale: locale === 'ar' ? 'ar' : 'en' })}
                 </span>
                 {product.originalPrice && (
                   <>
                     <span className="text-lg text-muted-foreground line-through">
-                      {formatSAR(product.originalPrice, locale === 'ar')}
+                      {formatSAR(product.originalPrice, { useArabicNumerals: locale === 'ar', locale: locale === 'ar' ? 'ar' : 'en' })}
                     </span>
                     <Badge variant="destructive">
                       {Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)}% {isRTL ? 'خصم' : 'OFF'}

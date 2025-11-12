@@ -371,7 +371,7 @@ export default function VendorDashboardPage() {
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">
-                {formatSAR(vendorProfile.totalRevenue, isRTL)}
+                {formatSAR(vendorProfile.totalRevenue, { useArabicNumerals: isRTL, locale: isRTL ? 'ar' : 'en' })}
               </div>
               <p className="text-xs text-muted-foreground">
                 {isRTL ? 'جميع الأوقات' : 'All time'}
@@ -871,7 +871,7 @@ export default function VendorDashboardPage() {
                       <CardContent className="space-y-4">
                         <div className="flex items-center justify-between">
                           <span className="text-2xl font-bold">
-                            {formatSAR(product.price, isRTL)}
+                            {formatSAR(product.price, { useArabicNumerals: isRTL, locale: isRTL ? 'ar' : 'en' })}
                           </span>
                           <Badge variant="secondary">
                             {isRTL ? product.categoryAr : product.category}

@@ -352,10 +352,10 @@ export default function OrdersPage() {
                       </div>
                       <div className="text-end">
                         <p className="font-semibold">
-                          {formatSAR(item.price * item.quantity, isRTL)}
+                          {formatSAR(item.price * item.quantity, { useArabicNumerals: isRTL, locale: isRTL ? 'ar' : 'en' })}
                         </p>
                         <p className="text-sm text-muted-foreground">
-                          {formatSAR(item.price, isRTL)} {isRTL ? 'للقطعة' : 'each'}
+                          {formatSAR(item.price, { useArabicNumerals: isRTL, locale: isRTL ? 'ar' : 'en' })} {isRTL ? 'للقطعة' : 'each'}
                         </p>
                       </div>
                     </div>
@@ -463,23 +463,23 @@ export default function OrdersPage() {
                     <span className="text-muted-foreground">
                       {isRTL ? 'المجموع الفرعي' : 'Subtotal'}
                     </span>
-                    <span>{formatSAR(selectedOrder.total * 0.8, isRTL)}</span>
+                    <span>{formatSAR(selectedOrder.total * 0.8, { useArabicNumerals: isRTL, locale: isRTL ? 'ar' : 'en' })}</span>
                   </div>
                   <div className="flex justify-between text-sm">
                     <span className="text-muted-foreground">
                       {isRTL ? 'ضريبة القيمة المضافة' : 'VAT'}
                     </span>
-                    <span>{formatSAR(selectedOrder.total * 0.15, isRTL)}</span>
+                    <span>{formatSAR(selectedOrder.total * 0.15, { useArabicNumerals: isRTL, locale: isRTL ? 'ar' : 'en' })}</span>
                   </div>
                   <div className="flex justify-between text-sm">
                     <span className="text-muted-foreground">
                       {isRTL ? 'الشحن' : 'Shipping'}
                     </span>
-                    <span>{formatSAR(selectedOrder.total * 0.05, isRTL)}</span>
+                    <span>{formatSAR(selectedOrder.total * 0.05, { useArabicNumerals: isRTL, locale: isRTL ? 'ar' : 'en' })}</span>
                   </div>
                   <div className="border-t pt-3 flex justify-between font-bold">
                     <span>{isRTL ? 'الإجمالي' : 'Total'}</span>
-                    <span>{formatSAR(selectedOrder.total, isRTL)}</span>
+                    <span>{formatSAR(selectedOrder.total, { useArabicNumerals: isRTL, locale: isRTL ? 'ar' : 'en' })}</span>
                   </div>
                 </CardContent>
               </Card>
@@ -635,7 +635,7 @@ export default function OrdersPage() {
                             {isRTL ? 'الإجمالي: ' : 'Total: '}
                           </span>
                           <span className="font-bold text-lg">
-                            {formatSAR(order.total, isRTL)}
+                            {formatSAR(order.total, { useArabicNumerals: isRTL, locale: isRTL ? 'ar' : 'en' })}
                           </span>
                         </div>
                         <Button
@@ -678,7 +678,7 @@ export default function OrdersPage() {
                             {isRTL ? 'الإجمالي: ' : 'Total: '}
                           </span>
                           <span className="font-bold text-lg">
-                            {formatSAR(order.total, isRTL)}
+                            {formatSAR(order.total, { useArabicNumerals: isRTL, locale: isRTL ? 'ar' : 'en' })}
                           </span>
                         </div>
                         <Button
@@ -721,7 +721,7 @@ export default function OrdersPage() {
                             {isRTL ? 'الإجمالي: ' : 'Total: '}
                           </span>
                           <span className="font-bold text-lg">
-                            {formatSAR(order.total, isRTL)}
+                            {formatSAR(order.total, { useArabicNumerals: isRTL, locale: isRTL ? 'ar' : 'en' })}
                           </span>
                         </div>
                         <Button
@@ -764,7 +764,7 @@ export default function OrdersPage() {
                             {isRTL ? 'الإجمالي: ' : 'Total: '}
                           </span>
                           <span className="font-bold text-lg">
-                            {formatSAR(order.total, isRTL)}
+                            {formatSAR(order.total, { useArabicNumerals: isRTL, locale: isRTL ? 'ar' : 'en' })}
                           </span>
                         </div>
                         <Button
@@ -807,7 +807,7 @@ export default function OrdersPage() {
                             {isRTL ? 'الإجمالي: ' : 'Total: '}
                           </span>
                           <span className="font-bold text-lg">
-                            {formatSAR(order.total, isRTL)}
+                            {formatSAR(order.total, { useArabicNumerals: isRTL, locale: isRTL ? 'ar' : 'en' })}
                           </span>
                         </div>
                         <Button

@@ -241,11 +241,11 @@ export default function CartPage() {
                           {/* Price */}
                           <div className="text-end">
                             <div className="text-xl font-bold">
-                              {formatSAR(item.price * item.quantity, isRTL)}
+                              {formatSAR(item.price * item.quantity, { useArabicNumerals: isRTL, locale: isRTL ? 'ar' : 'en' })}
                             </div>
                             {item.quantity > 1 && (
                               <div className="text-sm text-muted-foreground">
-                                {formatSAR(item.price, isRTL)} {isRTL ? 'للقطعة' : 'each'}
+                                {formatSAR(item.price, { useArabicNumerals: isRTL, locale: isRTL ? 'ar' : 'en' })} {isRTL ? 'للقطعة' : 'each'}
                               </div>
                             )}
                           </div>
@@ -297,7 +297,7 @@ export default function CartPage() {
                       {isRTL ? 'المجموع الفرعي' : 'Subtotal'}
                     </span>
                     <span className="font-medium">
-                      {formatSAR(subtotal, isRTL)}
+                      {formatSAR(subtotal, { useArabicNumerals: isRTL, locale: isRTL ? 'ar' : 'en' })}
                     </span>
                   </div>
 
@@ -307,7 +307,7 @@ export default function CartPage() {
                       {isRTL ? 'ضريبة القيمة المضافة (15%)' : 'VAT (15%)'}
                     </span>
                     <span className="font-medium">
-                      {formatSAR(tax, isRTL)}
+                      {formatSAR(tax, { useArabicNumerals: isRTL, locale: isRTL ? 'ar' : 'en' })}
                     </span>
                   </div>
 
@@ -325,7 +325,7 @@ export default function CartPage() {
                           {isRTL ? 'مجاني' : 'FREE'}
                         </Badge>
                       ) : (
-                        formatSAR(shipping, isRTL)
+                        formatSAR(shipping, { useArabicNumerals: isRTL, locale: isRTL ? 'ar' : 'en' })
                       )}
                     </span>
                   </div>
@@ -337,8 +337,8 @@ export default function CartPage() {
                         <Tag className="h-4 w-4 text-primary shrink-0 mt-0.5" />
                         <p className="text-xs text-muted-foreground">
                           {isRTL
-                            ? `أضف ${formatSAR(200 - subtotal, isRTL)} للحصول على شحن مجاني`
-                            : `Add ${formatSAR(200 - subtotal, false)} for free shipping`}
+                            ? `أضف ${formatSAR(200 - subtotal, { useArabicNumerals: isRTL, locale: isRTL ? 'ar' : 'en' })} للحصول على شحن مجاني`
+                            : `Add ${formatSAR(200 - subtotal, { useArabicNumerals: false, locale: 'en' })} for free shipping`}
                         </p>
                       </div>
                     </div>
@@ -349,7 +349,7 @@ export default function CartPage() {
                   {/* Total */}
                   <div className="flex items-center justify-between text-lg font-bold">
                     <span>{isRTL ? 'الإجمالي' : 'Total'}</span>
-                    <span>{formatSAR(total, isRTL)}</span>
+                    <span>{formatSAR(total, { useArabicNumerals: isRTL, locale: isRTL ? 'ar' : 'en' })}</span>
                   </div>
 
                   {/* Checkout Button */}

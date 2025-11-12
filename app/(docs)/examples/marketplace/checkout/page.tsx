@@ -124,7 +124,7 @@ export default function CheckoutPage() {
                           {isRTL ? 'المبلغ الإجمالي' : 'Total Amount'}
                         </span>
                         <span className="font-bold text-lg">
-                          {formatSAR(total, isRTL)}
+                          {formatSAR(total, { useArabicNumerals: isRTL, locale: isRTL ? 'ar' : 'en' })}
                         </span>
                       </div>
                       <Separator />
@@ -602,7 +602,7 @@ export default function CheckoutPage() {
                             </div>
                             <div className="text-end shrink-0">
                               <p className="font-medium">
-                                {formatSAR(item.price * item.quantity, isRTL)}
+                                {formatSAR(item.price * item.quantity, { useArabicNumerals: isRTL, locale: isRTL ? 'ar' : 'en' })}
                               </p>
                             </div>
                           </div>
@@ -655,7 +655,7 @@ export default function CheckoutPage() {
                           {isRTL ? item.nameAr : item.name}
                         </p>
                         <p className="text-xs text-muted-foreground">
-                          <ArabicNumber value={item.quantity} /> × {formatSAR(item.price, isRTL)}
+                          <ArabicNumber value={item.quantity} /> × {formatSAR(item.price, { useArabicNumerals: isRTL, locale: isRTL ? 'ar' : 'en' })}
                         </p>
                       </div>
                     </div>
@@ -670,19 +670,19 @@ export default function CheckoutPage() {
                     <span className="text-muted-foreground">
                       {isRTL ? 'المجموع الفرعي' : 'Subtotal'}
                     </span>
-                    <span>{formatSAR(subtotal, isRTL)}</span>
+                    <span>{formatSAR(subtotal, { useArabicNumerals: isRTL, locale: isRTL ? 'ar' : 'en' })}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">
                       {isRTL ? 'ضريبة القيمة المضافة' : 'VAT'}
                     </span>
-                    <span>{formatSAR(tax, isRTL)}</span>
+                    <span>{formatSAR(tax, { useArabicNumerals: isRTL, locale: isRTL ? 'ar' : 'en' })}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">
                       {isRTL ? 'الشحن' : 'Shipping'}
                     </span>
-                    <span>{formatSAR(shipping, isRTL)}</span>
+                    <span>{formatSAR(shipping, { useArabicNumerals: isRTL, locale: isRTL ? 'ar' : 'en' })}</span>
                   </div>
                 </div>
 
@@ -690,7 +690,7 @@ export default function CheckoutPage() {
 
                 <div className="flex justify-between text-lg font-bold">
                   <span>{isRTL ? 'الإجمالي' : 'Total'}</span>
-                  <span>{formatSAR(total, isRTL)}</span>
+                  <span>{formatSAR(total, { useArabicNumerals: isRTL, locale: isRTL ? 'ar' : 'en' })}</span>
                 </div>
               </CardContent>
             </Card>
