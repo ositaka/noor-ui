@@ -167,7 +167,6 @@ export default function BasicWorkflowPage() {
               <Button
                 onClick={handleRun}
                 disabled={isRunning}
-                variant="default"
               >
                 <Play className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
                 {isRTL ? 'تشغيل' : 'Run'}

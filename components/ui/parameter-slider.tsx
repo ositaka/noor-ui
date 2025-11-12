@@ -174,7 +174,7 @@ const ParameterSlider = React.forwardRef<HTMLDivElement, ParameterSliderProps>(
                   <Tooltip>
                     <TooltipTrigger asChild>
                       <Button
-                        variant={value === preset.value ? 'default' : 'outline'}
+                        variant={value === preset.value ? 'primary' : 'outline'}
                         size="sm"
                         className="h-6 text-xs px-2"
                         onClick={() => handlePresetClick(preset.value)}

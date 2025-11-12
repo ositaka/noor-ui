@@ -201,7 +201,6 @@ const ConversationHistory = React.forwardRef<HTMLDivElement, ConversationHistory
           <div className="flex items-center justify-between">
             <h2 className="text-lg font-semibold">{displayTitle}</h2>
             <Button
-              variant="default"
               size="sm"
               onClick={onCreate}
               className="shrink-0"

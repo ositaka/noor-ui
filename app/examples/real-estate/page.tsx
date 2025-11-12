@@ -490,7 +490,7 @@ export default function RealEstatePage() {
                       {['1', '2', '3', '4', '5', '6+'].map((bed) => (
                         <Button
                           key={bed}
-                          variant={bedroomFilter.includes(bed) ? 'default' : 'outline'}
+                          variant={bedroomFilter.includes(bed) ? 'primary' : 'outline'}
                           size="sm"
                           onClick={() => {
                             if (bedroomFilter.includes(bed)) {
