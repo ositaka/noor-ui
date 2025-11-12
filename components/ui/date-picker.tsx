@@ -82,7 +82,9 @@ export function DatePicker({
     return disabledDates.some((d) => d.toDateString() === checkDate.toDateString())
   }
 
-  const handleSelect = (selectedDate: Date | undefined) => {
+  const handleSelect = (selectedDate: Date | DateRange | undefined) => {
+    // For single mode, we only care about Date type
+    if (selectedDate && !(selectedDate instanceof Date)) return
     if (selectedDate && !isDateDisabled(selectedDate)) {
       onDateChange?.(selectedDate)
       setOpen(false)
@@ -196,7 +198,9 @@ export function DateRangePicker({
     return disabledDates.some((d) => d.toDateString() === checkDate.toDateString())
   }
 
-  const handleSelect = (range: DateRange | undefined) => {
+  const handleSelect = (range: Date | DateRange | undefined) => {
+    // For range mode, we only care about DateRange type
+    if (range && range instanceof Date) return
     onDateRangeChange?.(range)
     // Close when both dates are selected
     if (range?.from && range?.to) {
