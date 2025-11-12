@@ -470,7 +470,7 @@ export default function B2BMarketplacePage() {
                   </div>
                   <div className="flex items-baseline gap-2">
                     <span className="text-2xl font-bold">
-                      {formatSAR(product.priceTiers[0].price, isRTL)}
+                      {formatSAR(product.priceTiers[0].price, { useArabicNumerals: isRTL, locale: isRTL ? 'ar' : 'en' })}
                     </span>
                     <span className="text-sm text-muted-foreground">
                       / {isRTL ? product.unitAr : product.unit}
@@ -504,7 +504,7 @@ export default function B2BMarketplacePage() {
                           {isRTL ? product.unitAr : product.unit}
                         </span>
                         <div className="flex items-center gap-2">
-                          <span className="font-medium">{formatSAR(tier.price, isRTL)}</span>
+                          <span className="font-medium">{formatSAR(tier.price, { useArabicNumerals: isRTL, locale: isRTL ? 'ar' : 'en' })}</span>
                           {tier.discount > 0 && (
                             <Badge variant="secondary" className="text-xs">
                               -<ArabicNumber value={tier.discount} />%

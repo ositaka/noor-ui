@@ -308,7 +308,7 @@ export default function B2BProductDetailPage() {
                             </p>
                           </div>
                         </div>
-                        <span className="font-medium">{formatSAR(option.cost, isRTL)}</span>
+                        <span className="font-medium">{formatSAR(option.cost, { useArabicNumerals: isRTL, locale: isRTL ? 'ar' : 'en' })}</span>
                       </div>
                     ))}
                   </CardContent>
@@ -355,7 +355,7 @@ export default function B2BProductDetailPage() {
                           <p className="text-sm text-muted-foreground">
                             {isRTL ? 'السعر/الوحدة' : 'Price/Unit'}
                           </p>
-                          <p className="font-bold text-lg">{formatSAR(tier.price, isRTL)}</p>
+                          <p className="font-bold text-lg">{formatSAR(tier.price, { useArabicNumerals: isRTL, locale: isRTL ? 'ar' : 'en' })}</p>
                         </div>
                       </div>
                       {tier.discount > 0 && (
@@ -491,7 +491,7 @@ export default function B2BProductDetailPage() {
                       <span className="text-muted-foreground">
                         {isRTL ? 'سعر الوحدة' : 'Unit Price'}
                       </span>
-                      <span className="font-medium">{formatSAR(unitPrice, isRTL)}</span>
+                      <span className="font-medium">{formatSAR(unitPrice, { useArabicNumerals: isRTL, locale: isRTL ? 'ar' : 'en' })}</span>
                     </div>
                     {currentTier.discount > 0 && (
                       <div className="flex items-center justify-between text-sm">
@@ -507,13 +507,13 @@ export default function B2BProductDetailPage() {
                       <span className="font-semibold">
                         {isRTL ? 'المجموع الفرعي' : 'Subtotal'}
                       </span>
-                      <span className="font-bold text-xl">{formatSAR(subtotal, isRTL)}</span>
+                      <span className="font-bold text-xl">{formatSAR(subtotal, { useArabicNumerals: isRTL, locale: isRTL ? 'ar' : 'en' })}</span>
                     </div>
                     {savings > 0 && (
                       <div className="text-center">
                         <Badge className="bg-green-600">
                           {isRTL ? 'توفير ' : 'You save '}
-                          {formatSAR(savings, isRTL)}
+                          {formatSAR(savings, { useArabicNumerals: isRTL, locale: isRTL ? 'ar' : 'en' })}
                         </Badge>
                       </div>
                     )}
