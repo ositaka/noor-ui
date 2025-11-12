@@ -171,35 +171,45 @@ const sampleConversations: Conversation[] = [
   {
     id: '1',
     title: 'Project Planning Discussion',
-    preview: 'Let\\'s discuss the roadmap for Q4...',
+    titleAr: 'مناقشة تخطيط المشروع',
+    preview: "Let's discuss the roadmap for Q4...",
+    previewAr: 'لنناقش خارطة الطريق للربع الرابع...',
     timestamp: new Date(),
     messageCount: 24,
   },
   {
     id: '2',
     title: 'Code Review Feedback',
+    titleAr: 'ملاحظات مراجعة الكود',
     preview: 'The PR looks good, just a few comments...',
+    previewAr: 'طلب السحب يبدو جيداً، بضع ملاحظات فقط...',
     timestamp: new Date(Date.now() - 1000 * 60 * 60 * 2),
     messageCount: 12,
   },
   {
     id: '3',
     title: 'Design System Updates',
+    titleAr: 'تحديثات نظام التصميم',
     preview: 'We should update the color palette...',
+    previewAr: 'يجب تحديث لوحة الألوان...',
     timestamp: new Date(Date.now() - 1000 * 60 * 60 * 24),
     messageCount: 8,
   },
   {
     id: '4',
     title: 'API Documentation',
+    titleAr: 'توثيق واجهة برمجة التطبيقات',
     preview: 'Help me write docs for the new endpoints...',
+    previewAr: 'ساعدني في كتابة الوثائق للنقاط الجديدة...',
     timestamp: new Date(Date.now() - 1000 * 60 * 60 * 24 * 3),
     messageCount: 15,
   },
   {
     id: '5',
     title: 'Bug Investigation',
+    titleAr: 'التحقيق في خلل',
     preview: 'There\\'s an issue with the authentication flow...',
+    previewAr: 'هناك مشكلة في تدفق المصادقة...',
     timestamp: new Date(Date.now() - 1000 * 60 * 60 * 24 * 7),
     messageCount: 32,
   },
@@ -208,12 +218,16 @@ const sampleConversations: Conversation[] = [
 export default function ConversationHistoryPage() {
   const [activeId, setActiveId] = React.useState('1')
   const [conversations, setConversations] = React.useState(sampleConversations)
+  const [direction, setDirection] = React.useState<'ltr' | 'rtl'>('ltr')
+  const isRTL = direction === 'rtl'
 
   const handleCreate = () => {
     const newConv: Conversation = {
       id: String(conversations.length + 1),
       title: 'New Conversation',
+      titleAr: 'محادثة جديدة',
       preview: '',
+      previewAr: '',
       timestamp: new Date(),
       messageCount: 0,
     }
@@ -270,8 +284,13 @@ export default function ConversationHistoryPage() {
         <section className="mb-16">
           <h2 className="text-2xl font-bold tracking-tight mb-6">Preview</h2>
           <ComponentShowcase>
+            <ComponentShowcase.Controls
+              showDirectionToggle
+              showThemeToggle={false}
+              onDirectionChange={setDirection}
+            />
             <ComponentShowcase.Demo>
-              <div className="flex h-[600px] border rounded-lg overflow-hidden">
+              <div className="flex h-[600px] border rounded-lg overflow-hidden" dir={direction}>
                 <ConversationHistory
                   conversations={conversations}
                   activeId={activeId}
@@ -280,14 +299,21 @@ export default function ConversationHistoryPage() {
                   onRename={handleRename}
                   onDelete={handleDelete}
                   onShare={(id) => alert(`Share conversation ${id}`)}
+                  isRTL={isRTL}
+                  title="Conversations"
+                  titleAr="المحادثات"
                 />
                 <div className="flex-1 flex items-center justify-center bg-muted/10">
                   <div className="text-center space-y-2">
                     <p className="text-lg font-medium">
-                      Active Conversation: {conversations.find((c) => c.id === activeId)?.title}
+                      {isRTL ? 'المحادثة النشطة: ' : 'Active Conversation: '}
+                      {isRTL
+                        ? conversations.find((c) => c.id === activeId)?.titleAr
+                        : conversations.find((c) => c.id === activeId)?.title
+                      }
                     </p>
                     <p className="text-sm text-muted-foreground">
-                      Chat interface would go here
+                      {isRTL ? 'واجهة الدردشة ستكون هنا' : 'Chat interface would go here'}
                     </p>
                   </div>
                 </div>

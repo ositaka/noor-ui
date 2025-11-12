@@ -77,6 +77,9 @@ const rtlCode = `<ThinkingIndicator
 />`
 
 export default function ThinkingIndicatorPage() {
+  const [direction, setDirection] = React.useState<'ltr' | 'rtl'>('ltr')
+  const isRTL = direction === 'rtl'
+
   return (
     <div className="min-h-screen">
       <main id="main-content" className="container py-12">
@@ -112,12 +115,37 @@ export default function ThinkingIndicatorPage() {
         <section className="mb-16">
           <h2 className="text-2xl font-bold tracking-tight mb-6">Preview</h2>
           <ComponentShowcase>
+            <ComponentShowcase.Controls
+              showDirectionToggle
+              showThemeToggle={false}
+              onDirectionChange={setDirection}
+            />
             <ComponentShowcase.Demo>
-              <div className="space-y-6 p-6">
-                <ThinkingIndicator variant="dots" message="Thinking" />
-                <ThinkingIndicator variant="pulse" message="Processing" />
-                <ThinkingIndicator variant="wave" message="Analyzing" />
-                <ThinkingIndicator variant="typing" message="AI is responding" />
+              <div className="space-y-6 p-6" dir={direction}>
+                <ThinkingIndicator
+                  variant="dots"
+                  message={isRTL ? "جاري التفكير..." : "Thinking"}
+                  messageAr="جاري التفكير..."
+                  isRTL={isRTL}
+                />
+                <ThinkingIndicator
+                  variant="pulse"
+                  message={isRTL ? "جاري المعالجة..." : "Processing"}
+                  messageAr="جاري المعالجة..."
+                  isRTL={isRTL}
+                />
+                <ThinkingIndicator
+                  variant="wave"
+                  message={isRTL ? "جاري التحليل..." : "Analyzing"}
+                  messageAr="جاري التحليل..."
+                  isRTL={isRTL}
+                />
+                <ThinkingIndicator
+                  variant="typing"
+                  message={isRTL ? "الذكاء الاصطناعي يستجيب..." : "AI is responding"}
+                  messageAr="الذكاء الاصطناعي يستجيب..."
+                  isRTL={isRTL}
+                />
               </div>
             </ComponentShowcase.Demo>
           </ComponentShowcase>
@@ -145,19 +173,22 @@ export default function ThinkingIndicatorPage() {
               <h3 className="text-lg font-semibold mb-4">Animation Variants</h3>
               <Card>
                 <CardContent className="p-6">
-                  <div className="space-y-6">
+                  <div className="space-y-4">
                     <div className="flex items-center gap-4">
                       <ThinkingIndicator variant="dots" />
                       <span className="text-sm text-muted-foreground">Dots (bouncing)</span>
                     </div>
+                    <Separator />
                     <div className="flex items-center gap-4">
                       <ThinkingIndicator variant="pulse" />
                       <span className="text-sm text-muted-foreground">Pulse (fading)</span>
                     </div>
+                    <Separator />
                     <div className="flex items-center gap-4">
                       <ThinkingIndicator variant="wave" />
                       <span className="text-sm text-muted-foreground">Wave (flowing)</span>
                     </div>
+                    <Separator />
                     <div className="flex items-center gap-4">
                       <ThinkingIndicator variant="typing" />
                       <span className="text-sm text-muted-foreground">Typing (bubble)</span>
@@ -177,7 +208,9 @@ export default function ThinkingIndicatorPage() {
                 <CardContent className="p-6">
                   <div className="space-y-4">
                     <ThinkingIndicator variant="typing" message="AI is thinking..." />
+                    <Separator />
                     <ThinkingIndicator variant="dots" message="Processing your request" />
+                    <Separator />
                     <ThinkingIndicator variant="wave" message="Analyzing data" />
                   </div>
                 </CardContent>
@@ -192,9 +225,11 @@ export default function ThinkingIndicatorPage() {
               <h3 className="text-lg font-semibold mb-4">Sizes</h3>
               <Card>
                 <CardContent className="p-6">
-                  <div className="space-y-6">
+                  <div className="space-y-4">
                     <ThinkingIndicator size="sm" message="Small size" />
+                    <Separator />
                     <ThinkingIndicator size="default" message="Default size" />
+                    <Separator />
                     <ThinkingIndicator size="lg" message="Large size" />
                   </div>
                 </CardContent>

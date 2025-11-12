@@ -135,6 +135,9 @@ const rtlCode = `<ChatMessage
 />`
 
 export default function ChatMessagePage() {
+  const [direction, setDirection] = React.useState<'ltr' | 'rtl'>('ltr')
+  const isRTL = direction === 'rtl'
+
   return (
     <div className="min-h-screen">
       <main id="main-content" className="container py-12">
@@ -170,19 +173,26 @@ export default function ChatMessagePage() {
         <section className="mb-16">
           <h2 className="text-2xl font-bold tracking-tight mb-6">Preview</h2>
           <ComponentShowcase>
+            <ComponentShowcase.Controls
+              showDirectionToggle
+              showThemeToggle={false}
+              onDirectionChange={setDirection}
+            />
             <ComponentShowcase.Demo>
-              <div className="space-y-4 max-w-2xl">
+              <div className="space-y-4 max-w-2xl" dir={direction}>
                 <ChatMessage
                   role="user"
-                  content="What's the capital of France?"
-                  timestamp="2:29 PM"
+                  content={isRTL ? "ما هي عاصمة فرنسا؟" : "What's the capital of France?"}
+                  timestamp={isRTL ? "٢:٢٩ م" : "2:29 PM"}
+                  isRTL={isRTL}
                 />
                 <ChatMessage
                   role="assistant"
-                  content="The capital of France is Paris. It's known as the City of Light and is famous for its art, culture, cuisine, and iconic landmarks like the Eiffel Tower."
-                  timestamp="2:30 PM"
+                  content={isRTL ? "مرحباً! كيف يمكنني مساعدتك اليوم؟" : "The capital of France is Paris. It's known as the City of Light and is famous for its art, culture, cuisine, and iconic landmarks like the Eiffel Tower."}
+                  timestamp={isRTL ? "٢:٣٠ م" : "2:30 PM"}
                   showCopy
                   showRegenerate
+                  isRTL={isRTL}
                 />
               </div>
             </ComponentShowcase.Demo>
