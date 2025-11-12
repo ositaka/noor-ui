@@ -276,7 +276,7 @@ export default function NumberInputPage() {
               <Label>{isRTL ? 'النسبة المئوية' : 'Percentage'}</Label>
               <NumberInput value={value3} onChange={setValue3} step={0.1} precision={2} min={0} max={100} />
               <p className="text-sm text-muted-foreground">
-                {isRTL ? 'القيمة:' : 'Value:'} {value3.toFixed(2)}%
+                {isRTL ? 'القيمة:' : 'Value:'} {value3?.toFixed(2) ?? '0.00'}%
               </p>
             </div>
           </ComponentShowcase.Demo>
@@ -300,7 +300,7 @@ export default function NumberInputPage() {
                 step={100}
               />
               <p className="text-sm text-muted-foreground">
-                {isRTL ? 'القيمة:' : 'Value:'} {value4.toLocaleString(locale === 'ar' ? 'ar-SA' : 'en-US')}
+                {isRTL ? 'القيمة:' : 'Value:'} {value4?.toLocaleString(locale === 'ar' ? 'ar-SA' : 'en-US') ?? '0'}
               </p>
             </div>
           </ComponentShowcase.Demo>
@@ -397,7 +397,7 @@ const formatCurrency = (value: number) =>
                     {isRTL ? 'الإجمالي:' : 'Total:'}
                   </span>
                   <span className="text-2xl font-bold text-primary">
-                    {formatCurrency(quantity * 29.99)}
+                    {formatCurrency((quantity ?? 0) * 29.99)}
                   </span>
                 </div>
               </CardContent>
