@@ -175,9 +175,6 @@ const rtlCode = `<MessageActions
 />`
 
 export default function MessageActionsPage() {
-  const [direction, setDirection] = React.useState<'ltr' | 'rtl'>('ltr')
-  const isRTL = direction === 'rtl'
-
   return (
     <div className="min-h-screen">
       <main id="main-content" className="container py-12">
@@ -213,13 +210,8 @@ export default function MessageActionsPage() {
         <section className="mb-16">
           <h2 className="text-2xl font-bold tracking-tight mb-6">Preview</h2>
           <ComponentShowcase>
-            <ComponentShowcase.Controls
-              showDirectionToggle
-              showThemeToggle={false}
-              onDirectionChange={setDirection}
-            />
             <ComponentShowcase.Demo>
-              <div className="space-y-4" dir={direction}>
+              <div className="space-y-4">
                 <MessageActions
                   showCopy
                   showRegenerate
@@ -232,7 +224,6 @@ export default function MessageActionsPage() {
                   onShare={() => console.log('Sharing')}
                   onThumbsUp={() => console.log('Thumbs up')}
                   onThumbsDown={() => console.log('Thumbs down')}
-                  isRTL={isRTL}
                 />
               </div>
             </ComponentShowcase.Demo>

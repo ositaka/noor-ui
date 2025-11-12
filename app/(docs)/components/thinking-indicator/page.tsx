@@ -77,9 +77,6 @@ const rtlCode = `<ThinkingIndicator
 />`
 
 export default function ThinkingIndicatorPage() {
-  const [direction, setDirection] = React.useState<'ltr' | 'rtl'>('ltr')
-  const isRTL = direction === 'rtl'
-
   return (
     <div className="min-h-screen">
       <main id="main-content" className="container py-12">
@@ -115,36 +112,23 @@ export default function ThinkingIndicatorPage() {
         <section className="mb-16">
           <h2 className="text-2xl font-bold tracking-tight mb-6">Preview</h2>
           <ComponentShowcase>
-            <ComponentShowcase.Controls
-              showDirectionToggle
-              showThemeToggle={false}
-              onDirectionChange={setDirection}
-            />
             <ComponentShowcase.Demo>
-              <div className="space-y-6 p-6" dir={direction}>
+              <div className="space-y-6 p-6">
                 <ThinkingIndicator
                   variant="dots"
-                  message={isRTL ? "جاري التفكير..." : "Thinking"}
-                  messageAr="جاري التفكير..."
-                  isRTL={isRTL}
+                  message="Thinking"
                 />
                 <ThinkingIndicator
                   variant="pulse"
-                  message={isRTL ? "جاري المعالجة..." : "Processing"}
-                  messageAr="جاري المعالجة..."
-                  isRTL={isRTL}
+                  message="Processing"
                 />
                 <ThinkingIndicator
                   variant="wave"
-                  message={isRTL ? "جاري التحليل..." : "Analyzing"}
-                  messageAr="جاري التحليل..."
-                  isRTL={isRTL}
+                  message="Analyzing"
                 />
                 <ThinkingIndicator
                   variant="typing"
-                  message={isRTL ? "الذكاء الاصطناعي يستجيب..." : "AI is responding"}
-                  messageAr="الذكاء الاصطناعي يستجيب..."
-                  isRTL={isRTL}
+                  message="AI is responding"
                 />
               </div>
             </ComponentShowcase.Demo>

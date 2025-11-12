@@ -218,8 +218,6 @@ const sampleConversations: Conversation[] = [
 export default function ConversationHistoryPage() {
   const [activeId, setActiveId] = React.useState('1')
   const [conversations, setConversations] = React.useState(sampleConversations)
-  const [direction, setDirection] = React.useState<'ltr' | 'rtl'>('ltr')
-  const isRTL = direction === 'rtl'
 
   const handleCreate = () => {
     const newConv: Conversation = {
@@ -284,13 +282,8 @@ export default function ConversationHistoryPage() {
         <section className="mb-16">
           <h2 className="text-2xl font-bold tracking-tight mb-6">Preview</h2>
           <ComponentShowcase>
-            <ComponentShowcase.Controls
-              showDirectionToggle
-              showThemeToggle={false}
-              onDirectionChange={setDirection}
-            />
             <ComponentShowcase.Demo>
-              <div className="flex h-[600px] border rounded-lg overflow-hidden" dir={direction}>
+              <div className="flex h-[600px] border rounded-lg overflow-hidden">
                 <ConversationHistory
                   conversations={conversations}
                   activeId={activeId}
@@ -299,21 +292,15 @@ export default function ConversationHistoryPage() {
                   onRename={handleRename}
                   onDelete={handleDelete}
                   onShare={(id) => alert(`Share conversation ${id}`)}
-                  isRTL={isRTL}
                   title="Conversations"
-                  titleAr="المحادثات"
                 />
                 <div className="flex-1 flex items-center justify-center bg-muted/10">
                   <div className="text-center space-y-2">
                     <p className="text-lg font-medium">
-                      {isRTL ? 'المحادثة النشطة: ' : 'Active Conversation: '}
-                      {isRTL
-                        ? conversations.find((c) => c.id === activeId)?.titleAr
-                        : conversations.find((c) => c.id === activeId)?.title
-                      }
+                      Active Conversation: {conversations.find((c) => c.id === activeId)?.title}
                     </p>
                     <p className="text-sm text-muted-foreground">
-                      {isRTL ? 'واجهة الدردشة ستكون هنا' : 'Chat interface would go here'}
+                      Chat interface would go here
                     </p>
                   </div>
                 </div>

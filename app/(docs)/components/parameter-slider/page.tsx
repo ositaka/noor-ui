@@ -214,8 +214,6 @@ export default function ParameterSliderPage() {
   const [temperature, setTemperature] = React.useState(0.7)
   const [topP, setTopP] = React.useState(0.9)
   const [maxTokens, setMaxTokens] = React.useState(1024)
-  const [direction, setDirection] = React.useState<'ltr' | 'rtl'>('ltr')
-  const isRTL = direction === 'rtl'
 
   return (
     <div className="min-h-screen">
@@ -252,25 +250,17 @@ export default function ParameterSliderPage() {
         <section className="mb-16">
           <h2 className="text-2xl font-bold tracking-tight mb-6">Preview</h2>
           <ComponentShowcase>
-            <ComponentShowcase.Controls
-              showDirectionToggle
-              showThemeToggle={false}
-              onDirectionChange={setDirection}
-            />
             <ComponentShowcase.Demo>
-              <div className="max-w-md" dir={direction}>
+              <div className="max-w-md">
                 <ParameterSlider
                   label="Temperature"
-                  labelAr="درجة الحرارة"
                   description="Controls randomness in the model's responses. Higher values make output more random."
-                  descriptionAr="يتحكم في العشوائية في ردود النموذج. القيم الأعلى تجعل الناتج أكثر عشوائية."
                   value={temperature}
                   onValueChange={setTemperature}
                   min={0}
                   max={2}
                   step={0.1}
                   presets={temperaturePresets}
-                  isRTL={isRTL}
                 />
               </div>
             </ComponentShowcase.Demo>

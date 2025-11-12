@@ -145,8 +145,6 @@ const rtlCode = `<PromptInput
 export default function PromptInputPage() {
   const [value, setValue] = React.useState('')
   const [isLoading, setIsLoading] = React.useState(false)
-  const [direction, setDirection] = React.useState<'ltr' | 'rtl'>('ltr')
-  const isRTL = direction === 'rtl'
 
   return (
     <div className="min-h-screen">
@@ -183,13 +181,8 @@ export default function PromptInputPage() {
         <section className="mb-16">
           <h2 className="text-2xl font-bold tracking-tight mb-6">Preview</h2>
           <ComponentShowcase>
-            <ComponentShowcase.Controls
-              showDirectionToggle
-              showThemeToggle={false}
-              onDirectionChange={setDirection}
-            />
             <ComponentShowcase.Demo>
-              <div className="max-w-2xl w-full" dir={direction}>
+              <div className="max-w-2xl w-full">
                 <PromptInput
                   value={value}
                   onChange={(e) => setValue(e.target.value)}
@@ -201,9 +194,7 @@ export default function PromptInputPage() {
                   showVoice
                   showCounter
                   maxLength={500}
-                  isRTL={isRTL}
-                  placeholder={isRTL ? undefined : "Type your message... (Shift+Enter for new line)"}
-                  placeholderAr="اكتب رسالتك هنا... (Shift+Enter لسطر جديد)"
+                  placeholder="Type your message... (Shift+Enter for new line)"
                 />
               </div>
             </ComponentShowcase.Demo>

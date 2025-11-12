@@ -129,8 +129,6 @@ const rtlCode = `<ModelSelector
 
 export default function ModelSelectorPage() {
   const [selectedModel, setSelectedModel] = React.useState('gpt-4')
-  const [direction, setDirection] = React.useState<'ltr' | 'rtl'>('ltr')
-  const isRTL = direction === 'rtl'
 
   return (
     <div className="min-h-screen">
@@ -167,21 +165,15 @@ export default function ModelSelectorPage() {
         <section className="mb-16">
           <h2 className="text-2xl font-bold tracking-tight mb-6">Preview</h2>
           <ComponentShowcase>
-            <ComponentShowcase.Controls
-              showDirectionToggle
-              showThemeToggle={false}
-              onDirectionChange={setDirection}
-            />
             <ComponentShowcase.Demo>
-              <div className="max-w-md w-full" dir={direction}>
+              <div className="max-w-md w-full">
                 <ModelSelector
                   models={defaultModels}
                   value={selectedModel}
                   onValueChange={setSelectedModel}
-                  isRTL={isRTL}
                 />
                 <p className="mt-4 text-sm text-muted-foreground">
-                  {isRTL ? 'المحدد:' : 'Selected:'} {selectedModel}
+                  Selected: {selectedModel}
                 </p>
               </div>
             </ComponentShowcase.Demo>

@@ -163,9 +163,6 @@ const rtlCode = `<TokenCounter
 />`
 
 export default function TokenCounterPage() {
-  const [direction, setDirection] = React.useState<'ltr' | 'rtl'>('ltr')
-  const isRTL = direction === 'rtl'
-
   return (
     <div className="min-h-screen">
       <main id="main-content" className="container py-12">
@@ -201,22 +198,15 @@ export default function TokenCounterPage() {
         <section className="mb-16">
           <h2 className="text-2xl font-bold tracking-tight mb-6">Preview</h2>
           <ComponentShowcase>
-            <ComponentShowcase.Controls
-              showDirectionToggle
-              showThemeToggle={false}
-              onDirectionChange={setDirection}
-            />
             <ComponentShowcase.Demo>
-              <div className="max-w-md" dir={direction}>
+              <div className="max-w-md">
                 <TokenCounter
                   inputTokens={1250}
                   outputTokens={850}
                   maxTokens={4096}
                   inputCostPer1K={0.03}
                   outputCostPer1K={0.06}
-                  isRTL={isRTL}
-                  label={isRTL ? undefined : "Token Usage"}
-                  labelAr="استخدام الرموز"
+                  label="Token Usage"
                 />
               </div>
             </ComponentShowcase.Demo>
