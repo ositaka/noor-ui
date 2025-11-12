@@ -113,7 +113,7 @@ const conversations: Conversation[] = [
   {
     id: '1',
     title: 'Project Planning',
-    preview: 'Let\\'s discuss the roadmap...',
+    preview: "Let's discuss the roadmap...",
     timestamp: new Date(),
     messageCount: 15,
   },
@@ -208,7 +208,7 @@ const sampleConversations: Conversation[] = [
     id: '5',
     title: 'Bug Investigation',
     titleAr: 'التحقيق في خلل',
-    preview: 'There\\'s an issue with the authentication flow...',
+    preview: "There's an issue with the authentication flow...",
     previewAr: 'هناك مشكلة في تدفق المصادقة...',
     timestamp: new Date(Date.now() - 1000 * 60 * 60 * 24 * 7),
     messageCount: 32,
