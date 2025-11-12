@@ -513,10 +513,8 @@ export default function CMSPage() {
                   columns={columns}
                   searchable
                   searchPlaceholder={isRTL ? 'بحث...' : 'Search...'}
-                  emptyState={{
-                    title: isRTL ? 'لا توجد منشورات' : 'No posts found',
-                    description: isRTL ? 'ابدأ بإنشاء منشورك الأول' : 'Start by creating your first post',
-                  }}
+                  emptyMessage="No posts found"
+                  emptyMessageAr="لا توجد منشورات"
                 />
               </CardContent>
             </Card>
@@ -676,7 +674,6 @@ export default function CMSPage() {
                         content={editorContent}
                         onChange={setEditorContent}
                         placeholder="اكتب محتوى منشورك بالعربية..."
-                        dir="rtl"
                       />
                     </div>
                   </CardContent>
