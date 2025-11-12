@@ -41,6 +41,13 @@ import {
   Binary,
   Sidebar,
   LayoutGrid,
+  Sparkles,
+  Send,
+  Settings,
+  History,
+  Sliders,
+  Workflow,
+  Box,
 } from 'lucide-react'
 
 const componentCategories = [
@@ -133,10 +140,10 @@ const componentCategories = [
     components: [
       { name: 'File Upload', icon: Upload, href: '/components/file-upload', status: 'ready' },
       { name: 'Rich Text Editor', icon: FileEdit, href: '/components/rich-text-editor', status: 'ready' },
-      { name: 'Date Picker', icon: CalendarIcon, href: '/components/date-picker', status: 'coming-soon' },
-      { name: 'Time Picker', icon: Clock, href: '/components/time-picker', status: 'coming-soon' },
+      { name: 'Date Picker', icon: CalendarIcon, href: '/components/date-picker', status: 'ready' },
+      { name: 'Time Picker', icon: Clock, href: '/components/time-picker', status: 'ready' },
+      { name: 'Number Input', icon: Binary, href: '/components/number-input', status: 'ready' },
       { name: 'Color Picker', icon: Palette, href: '/components/color-picker', status: 'coming-soon' },
-      { name: 'Number Input', icon: Binary, href: '/components/number-input', status: 'coming-soon' },
     ],
   },
   {
@@ -154,8 +161,29 @@ const componentCategories = [
     components: [
       { name: 'User Menu', icon: UserCircle, href: '/components/user-menu', status: 'ready' },
       { name: 'Notification Center', icon: Bell, href: '/components/notification-center', status: 'ready' },
-      { name: 'Stepper', icon: GitBranch, href: '/components/stepper', status: 'coming-soon' },
-      { name: 'Command Bar', icon: Menu, href: '/components/command-bar', status: 'coming-soon' },
+      { name: 'Stepper', icon: GitBranch, href: '/components/stepper', status: 'ready' },
+    ],
+  },
+  {
+    name: 'AI/LLM Shell',
+    description: 'Components for building AI chat interfaces and LLM-powered applications',
+    components: [
+      { name: 'Chat Message', icon: MessageSquare, href: '/components/chat-message', status: 'ready' },
+      { name: 'Prompt Input', icon: Send, href: '/components/prompt-input', status: 'ready' },
+      { name: 'Thinking Indicator', icon: Loader2, href: '/components/thinking-indicator', status: 'ready' },
+      { name: 'Message Actions', icon: Settings, href: '/components/message-actions', status: 'ready' },
+      { name: 'Model Selector', icon: Sparkles, href: '/components/model-selector', status: 'ready' },
+      { name: 'Parameter Slider', icon: Sliders, href: '/components/parameter-slider', status: 'ready' },
+      { name: 'Token Counter', icon: Hash, href: '/components/token-counter', status: 'ready' },
+      { name: 'Conversation History', icon: History, href: '/components/conversation-history', status: 'ready' },
+    ],
+  },
+  {
+    name: 'Workflow & Automation',
+    description: 'Node-based workflow builders for creating automation pipelines',
+    components: [
+      { name: 'Workflow Canvas', icon: Workflow, href: '/components/workflow-canvas', status: 'ready' },
+      { name: 'Workflow Node', icon: Box, href: '/components/workflow-node', status: 'ready' },
     ],
   },
 ]
@@ -182,8 +210,8 @@ export default function ComponentsPage() {
         <div className="max-w-3xl mb-12">
           <h1 className="text-4xl font-bold tracking-tight mb-4">Components</h1>
           <p className="text-xl text-muted-foreground mb-6">
-            55 beautifully designed components built with Radix UI and Tailwind CSS.
-            47 production-ready, 8 coming soon. Full RTL support, accessible, and customizable.
+            63 beautifully designed components built with Radix UI, Tailwind CSS, and React Flow.
+            60 production-ready, 3 coming soon. Full RTL support, accessible, and customizable.
           </p>
 
           {/* Live Preview */}

@@ -419,7 +419,7 @@ export function Header() {
                 <li className="flex items-start gap-2">
                   <span className="text-primary font-bold">•</span>
                   <span>
-                    Always place "Log out" as the last item with visual separation
+                    Always place &quot;Log out&quot; as the last item with visual separation
                   </span>
                 </li>
                 <li className="flex items-start gap-2">

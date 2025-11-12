@@ -142,7 +142,7 @@ export default function RichTextEditorPage() {
     <div className="min-h-screen">
       <main id="main-content" className="container py-12">
         {/* Breadcrumb */}
-        <nav aria-label="Breadcrumb" className="mb-8">
+        <nav aria-label="Breadcrumb" className="mb-12">
           <ol className="flex items-center gap-2 text-sm text-muted-foreground">
             <li>
               <Link href="/" className="hover:text-foreground transition-colors">
@@ -161,12 +161,12 @@ export default function RichTextEditorPage() {
         </nav>
 
         {/* Page Header */}
-        <div className="max-w-3xl mb-12">
+        <div className="mb-12">
           <div className="flex items-center gap-3 mb-4">
             <h1 className="text-4xl font-bold tracking-tight">Rich Text Editor</h1>
             <Badge variant="default">New</Badge>
           </div>
-          <p className="text-xl text-muted-foreground">
+          <p className="text-xl text-muted-foreground max-w-3xl">
             A powerful WYSIWYG editor built with Tiptap. Includes text formatting, headings, lists,
             and full RTL support for Arabic content.
           </p>

@@ -36,7 +36,7 @@ export interface ListingCardProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Subtitle or location text
    */
-  subtitle?: string
+  subtitle?: string | React.ReactNode
   /**
    * Short description
    */

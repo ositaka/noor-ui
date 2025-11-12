@@ -210,7 +210,7 @@ const {
 
       {/* What's Included */}
       <section className="mb-12">
-        <h2 className="text-2xl font-bold mb-6">What's Included</h2>
+        <h2 className="text-2xl font-bold mb-6">What&apos;s Included</h2>
         <Card>
           <CardContent className="p-6">
             <div className="grid gap-6 md:grid-cols-2">

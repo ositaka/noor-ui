@@ -168,6 +168,7 @@ export default function NewPostPage() {
         published_at: publishNow ? new Date().toISOString() : null,
       }
 
+      // @ts-ignore - Supabase type configuration issue
       const { error } = await supabase.from('posts').insert([postData])
 
       if (error) throw error
@@ -285,7 +286,7 @@ export default function NewPostPage() {
 
                 <div className="space-y-2">
                   <Label>{t.postContent}</Label>
-                  <RichTextEditor value={content} onChange={setContent} />
+                  <RichTextEditor content={content} onChange={setContent} />
                 </div>
               </TabsContent>
 
@@ -316,7 +317,7 @@ export default function NewPostPage() {
 
                 <div className="space-y-2">
                   <Label>{t.postContent}</Label>
-                  <RichTextEditor value={contentAr} onChange={setContentAr} />
+                  <RichTextEditor content={contentAr} onChange={setContentAr} />
                 </div>
               </TabsContent>
             </Tabs>

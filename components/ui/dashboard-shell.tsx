@@ -47,6 +47,11 @@ export interface DashboardShellProps {
   logoHref?: string
   sidebarWidth?: string
   className?: string
+  /**
+   * Use relative positioning instead of fixed (useful for embedded examples)
+   * @default false
+   */
+  relative?: boolean
 }
 
 function SidebarNav({ items, onNavClick }: { items: NavItem[]; onNavClick?: () => void }) {
@@ -118,6 +123,7 @@ export function DashboardShell({
   logoHref = '/',
   sidebarWidth = '16rem',
   className,
+  relative = false,
 }: DashboardShellProps) {
   const [sidebarOpen, setSidebarOpen] = React.useState(false)
   const { locale, direction } = useDirection()
@@ -135,10 +141,13 @@ export function DashboardShell({
   const t = text[locale]
 
   return (
-    <div className={cn('min-h-screen bg-background', className)}>
+    <div className={cn('min-h-screen bg-background', relative ? 'flex' : '', className)}>
       {/* Desktop Sidebar */}
       <aside
-        className="fixed inset-y-0 start-0 z-30 hidden border-e bg-card lg:block"
+        className={cn(
+          'inset-y-0 start-0 z-30 hidden border-e bg-card lg:block',
+          relative ? 'relative shrink-0' : 'fixed'
+        )}
         style={{ width: sidebarWidth }}
       >
         <div className="flex h-full flex-col">
@@ -166,7 +175,10 @@ export function DashboardShell({
           <Button
             variant="ghost"
             size="icon"
-            className="fixed top-4 start-4 z-40 lg:hidden"
+            className={cn(
+              'z-40 lg:hidden',
+              relative ? 'absolute top-4 start-4' : 'fixed top-4 start-4'
+            )}
             aria-label={t.menu}
           >
             <Menu className="h-6 w-6" />
@@ -199,11 +211,14 @@ export function DashboardShell({
 
       {/* Main Content */}
       <div
-        className="lg:ps-[var(--sidebar-width)]"
-        style={{ '--sidebar-width': sidebarWidth } as React.CSSProperties}
+        className={cn('flex-1', !relative && 'lg:ps-[var(--sidebar-width)]')}
+        style={{ '--sidebar-width': relative ? '0' : sidebarWidth } as React.CSSProperties}
       >
         {/* Header */}
-        <header className="sticky top-0 z-20 flex h-16 items-center gap-4 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 px-6">
+        <header className={cn(
+          'z-20 flex h-16 items-center gap-4 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 px-6',
+          relative ? 'relative' : 'sticky top-0'
+        )}>
           <div className="flex flex-1 items-center gap-4 lg:gap-6">
             {/* Spacer for mobile menu button */}
             <div className="w-10 lg:hidden" />

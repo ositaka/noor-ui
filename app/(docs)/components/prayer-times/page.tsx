@@ -20,10 +20,29 @@ export default function PrayerTimesPage() {
   return (
     <div className="min-h-screen">
       <main id="main-content" className="container py-12">
+        {/* Breadcrumb */}
+        <nav aria-label="Breadcrumb" className="mb-8">
+          <ol className="flex items-center gap-2 text-sm text-muted-foreground">
+            <li>
+              <Link href="/" className="hover:text-foreground transition-colors">
+                Home
+              </Link>
+            </li>
+            <li>/</li>
+            <li>
+              <Link href="/components" className="hover:text-foreground transition-colors">
+                Components
+              </Link>
+            </li>
+            <li>/</li>
+            <li className="text-foreground font-medium">Prayer Times</li>
+          </ol>
+        </nav>
+
         {/* Page Header */}
-        <div className="max-w-3xl mb-12">
+        <div className="mb-12">
           <h1 className="text-4xl font-bold tracking-tight mb-4">Prayer Times</h1>
-          <p className="text-xl text-muted-foreground">
+          <p className="text-xl text-muted-foreground max-w-3xl">
             A beautiful, RTL-aware component to display Islamic prayer times. Perfect for GCC
             applications with full bilingual support and multiple layout variants.
           </p>

@@ -157,7 +157,7 @@ export default function PaginationPage() {
 
       <main id="main-content" className="container py-12">
         {/* Breadcrumb */}
-        <nav aria-label="Breadcrumb" className="mb-8">
+        <nav aria-label="Breadcrumb" className="mb-12">
           <ol className="flex items-center gap-2 text-sm text-muted-foreground">
             <li>
               <Link href="/" className="hover:text-foreground transition-colors">
@@ -176,38 +176,40 @@ export default function PaginationPage() {
         </nav>
 
         {/* Page Header */}
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold tracking-tight mb-2">Pagination</h1>
-          <p className="text-lg text-muted-foreground">
+        <div className="mb-12">
+          <h1 className="text-4xl font-bold tracking-tight mb-4">Pagination</h1>
+          <p className="text-xl text-muted-foreground max-w-3xl">
             Pagination with page navigation, allowing users to navigate through multiple pages of content.
           </p>
         </div>
 
         {/* Preview */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-4">Preview</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">Preview</h2>
           <ComponentShowcase>
-            <Pagination>
-              <PaginationContent>
-                <PaginationItem>
-                  <PaginationPrevious href="#" />
-                </PaginationItem>
-                <PaginationItem>
-                  <PaginationLink href="#">1</PaginationLink>
-                </PaginationItem>
-                <PaginationItem>
-                  <PaginationLink href="#" isActive>
-                    2
-                  </PaginationLink>
-                </PaginationItem>
-                <PaginationItem>
-                  <PaginationLink href="#">3</PaginationLink>
-                </PaginationItem>
-                <PaginationItem>
-                  <PaginationNext href="#" />
-                </PaginationItem>
-              </PaginationContent>
-            </Pagination>
+            <ComponentShowcase.Demo>
+              <Pagination>
+                <PaginationContent>
+                  <PaginationItem>
+                    <PaginationPrevious href="#" />
+                  </PaginationItem>
+                  <PaginationItem>
+                    <PaginationLink href="#">1</PaginationLink>
+                  </PaginationItem>
+                  <PaginationItem>
+                    <PaginationLink href="#" isActive>
+                      2
+                    </PaginationLink>
+                  </PaginationItem>
+                  <PaginationItem>
+                    <PaginationLink href="#">3</PaginationLink>
+                  </PaginationItem>
+                  <PaginationItem>
+                    <PaginationNext href="#" />
+                  </PaginationItem>
+                </PaginationContent>
+              </Pagination>
+            </ComponentShowcase.Demo>
           </ComponentShowcase>
         </section>
 
@@ -233,39 +235,41 @@ export default function PaginationPage() {
             <div>
               <h3 className="text-lg font-semibold mb-4">With Ellipsis</h3>
               <ComponentShowcase>
-                <Pagination>
-                  <PaginationContent>
-                    <PaginationItem>
-                      <PaginationPrevious href="#" />
-                    </PaginationItem>
-                    <PaginationItem>
-                      <PaginationLink href="#">1</PaginationLink>
-                    </PaginationItem>
-                    <PaginationItem>
-                      <PaginationEllipsis />
-                    </PaginationItem>
-                    <PaginationItem>
-                      <PaginationLink href="#">5</PaginationLink>
-                    </PaginationItem>
-                    <PaginationItem>
-                      <PaginationLink href="#" isActive>
-                        6
-                      </PaginationLink>
-                    </PaginationItem>
-                    <PaginationItem>
-                      <PaginationLink href="#">7</PaginationLink>
-                    </PaginationItem>
-                    <PaginationItem>
-                      <PaginationEllipsis />
-                    </PaginationItem>
-                    <PaginationItem>
-                      <PaginationLink href="#">10</PaginationLink>
-                    </PaginationItem>
-                    <PaginationItem>
-                      <PaginationNext href="#" />
-                    </PaginationItem>
-                  </PaginationContent>
-                </Pagination>
+                <ComponentShowcase.Demo>
+                  <Pagination>
+                    <PaginationContent>
+                      <PaginationItem>
+                        <PaginationPrevious href="#" />
+                      </PaginationItem>
+                      <PaginationItem>
+                        <PaginationLink href="#">1</PaginationLink>
+                      </PaginationItem>
+                      <PaginationItem>
+                        <PaginationEllipsis />
+                      </PaginationItem>
+                      <PaginationItem>
+                        <PaginationLink href="#">5</PaginationLink>
+                      </PaginationItem>
+                      <PaginationItem>
+                        <PaginationLink href="#" isActive>
+                          6
+                        </PaginationLink>
+                      </PaginationItem>
+                      <PaginationItem>
+                        <PaginationLink href="#">7</PaginationLink>
+                      </PaginationItem>
+                      <PaginationItem>
+                        <PaginationEllipsis />
+                      </PaginationItem>
+                      <PaginationItem>
+                        <PaginationLink href="#">10</PaginationLink>
+                      </PaginationItem>
+                      <PaginationItem>
+                        <PaginationNext href="#" />
+                      </PaginationItem>
+                    </PaginationContent>
+                  </Pagination>
+                </ComponentShowcase.Demo>
               </ComponentShowcase>
               <CodeBlock code={withEllipsisCode} language="tsx" />
             </div>
@@ -273,67 +277,69 @@ export default function PaginationPage() {
             <div>
               <h3 className="text-lg font-semibold mb-4">Controlled</h3>
               <ComponentShowcase>
-                <div className="space-y-4">
-                  <p className="text-sm text-muted-foreground">Current page: {currentPage}</p>
-                  <Pagination>
-                    <PaginationContent>
-                      <PaginationItem>
-                        <PaginationPrevious
-                          href="#"
-                          onClick={(e) => {
-                            e.preventDefault()
-                            if (currentPage > 1) setCurrentPage(currentPage - 1)
-                          }}
-                        />
-                      </PaginationItem>
-                      <PaginationItem>
-                        <PaginationLink
-                          href="#"
-                          isActive={currentPage === 1}
-                          onClick={(e) => {
-                            e.preventDefault()
-                            setCurrentPage(1)
-                          }}
-                        >
-                          1
-                        </PaginationLink>
-                      </PaginationItem>
-                      <PaginationItem>
-                        <PaginationLink
-                          href="#"
-                          isActive={currentPage === 2}
-                          onClick={(e) => {
-                            e.preventDefault()
-                            setCurrentPage(2)
-                          }}
-                        >
-                          2
-                        </PaginationLink>
-                      </PaginationItem>
-                      <PaginationItem>
-                        <PaginationLink
-                          href="#"
-                          isActive={currentPage === 3}
-                          onClick={(e) => {
-                            e.preventDefault()
-                            setCurrentPage(3)
-                          }}
-                        >
-                          3
-                        </PaginationLink>
-                      </PaginationItem>
-                      <PaginationItem>
-                        <PaginationNext
-                          href="#"
-                          onClick={(e) => {
-                            e.preventDefault()
-                            if (currentPage < 3) setCurrentPage(currentPage + 1)
-                          }}
-                        />
-                      </PaginationItem>
-                    </PaginationContent>
-                  </Pagination>
-                </div>
+                <ComponentShowcase.Demo>
+                  <div className="space-y-4">
+                    <p className="text-sm text-muted-foreground">Current page: {currentPage}</p>
+                    <Pagination>
+                      <PaginationContent>
+                        <PaginationItem>
+                          <PaginationPrevious
+                            href="#"
+                            onClick={(e) => {
+                              e.preventDefault()
+                              if (currentPage > 1) setCurrentPage(currentPage - 1)
+                            }}
+                          />
+                        </PaginationItem>
+                        <PaginationItem>
+                          <PaginationLink
+                            href="#"
+                            isActive={currentPage === 1}
+                            onClick={(e) => {
+                              e.preventDefault()
+                              setCurrentPage(1)
+                            }}
+                          >
+                            1
+                          </PaginationLink>
+                        </PaginationItem>
+                        <PaginationItem>
+                          <PaginationLink
+                            href="#"
+                            isActive={currentPage === 2}
+                            onClick={(e) => {
+                              e.preventDefault()
+                              setCurrentPage(2)
+                            }}
+                          >
+                            2
+                          </PaginationLink>
+                        </PaginationItem>
+                        <PaginationItem>
+                          <PaginationLink
+                            href="#"
+                            isActive={currentPage === 3}
+                            onClick={(e) => {
+                              e.preventDefault()
+                              setCurrentPage(3)
+                            }}
+                          >
+                            3
+                          </PaginationLink>
+                        </PaginationItem>
+                        <PaginationItem>
+                          <PaginationNext
+                            href="#"
+                            onClick={(e) => {
+                              e.preventDefault()
+                              if (currentPage < 3) setCurrentPage(currentPage + 1)
+                            }}
+                          />
+                        </PaginationItem>
+                      </PaginationContent>
+                    </Pagination>
+                  </div>
+                </ComponentShowcase.Demo>
               </ComponentShowcase>
               <CodeBlock code={controlledCode} language="tsx" />
             </div>
