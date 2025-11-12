@@ -418,7 +418,7 @@ export default function MultiAgentChatPage() {
                       {message.role === 'assistant' && (
                         <div className="ms-14">
                           <MessageActions
-                            variant="compact"
+                            compact
                             showCopy
                             showRegenerate
                             showEdit={false}

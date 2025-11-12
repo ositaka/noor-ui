@@ -457,7 +457,7 @@ export default function DocumentQAPage() {
 
                     {message.role === 'assistant' && (
                       <MessageActions
-                        variant="compact"
+                        compact
                         showCopy
                         showRegenerate
                         showEdit={false}

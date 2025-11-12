@@ -286,7 +286,7 @@ export default function CodeAssistantPage() {
 
                     {message.role === 'assistant' && (
                       <MessageActions
-                        variant="compact"
+                        compact
                         showCopy
                         showRegenerate
                         showEdit={false}
