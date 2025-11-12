@@ -171,12 +171,12 @@ export default function NumberInputPage() {
   const { direction, locale } = useDirection()
   const isRTL = direction === 'rtl'
 
-  const [value1, setValue1] = React.useState(42)
+  const [value1, setValue1] = React.useState<number | undefined>(42)
   const [value2, setValue2] = React.useState<number | undefined>(undefined)
-  const [value3, setValue3] = React.useState(5.5)
-  const [value4, setValue4] = React.useState(1234.56)
-  const [price, setPrice] = React.useState(99.99)
-  const [quantity, setQuantity] = React.useState(1)
+  const [value3, setValue3] = React.useState<number | undefined>(5.5)
+  const [value4, setValue4] = React.useState<number | undefined>(1234.56)
+  const [price, setPrice] = React.useState<number | undefined>(99.99)
+  const [quantity, setQuantity] = React.useState<number | undefined>(1)
 
   const formatCurrency = (value: number): string => {
     return new Intl.NumberFormat(locale === 'ar' ? 'ar-SA' : 'en-US', {
