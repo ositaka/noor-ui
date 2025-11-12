@@ -11,6 +11,7 @@ import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { CodeBlock } from '@/components/docs/code-block'
 import { cn } from '@/lib/utils'
 import { Code2, Sparkles, FileCode, Bug, Lightbulb, Trash2 } from 'lucide-react'
 
@@ -276,20 +277,11 @@ export default function CodeAssistantPage() {
                     />
 
                     {message.codeBlock && (
-                      <Card className="p-4 space-y-3">
-                        <div className="flex items-center justify-between">
-                          <Badge variant="secondary" className="font-mono text-xs">
-                            {message.codeBlock.language}
-                          </Badge>
-                          <Button variant="ghost" size="sm">
-                            <FileCode className={cn('h-4 w-4', isRTL ? 'ms-1' : 'me-1')} />
-                            {isRTL ? 'نسخ' : 'Copy'}
-                          </Button>
-                        </div>
-                        <pre className="bg-muted p-4 rounded-lg overflow-x-auto text-sm">
-                          <code>{message.codeBlock.code}</code>
-                        </pre>
-                      </Card>
+                      <CodeBlock
+                        code={message.codeBlock.code}
+                        language={message.codeBlock.language}
+                        showLineNumbers={true}
+                      />
                     )}
 
                     {message.role === 'assistant' && (

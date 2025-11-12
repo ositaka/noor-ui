@@ -228,10 +228,10 @@ export default function AdvancedPlaygroundPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background flex">
+    <div className="min-h-screen bg-background flex" dir={isRTL ? 'rtl' : 'ltr'}>
       {/* Conversation History Sidebar */}
       {showHistory && (
-        <aside className={cn('hidden lg:block', isRTL ? 'order-3' : 'order-1')}>
+        <aside className="hidden lg:block border-e">
           <ConversationHistory
             conversations={conversations}
             activeId={activeConversationId}
@@ -245,7 +245,7 @@ export default function AdvancedPlaygroundPage() {
       )}
 
       {/* Main Content */}
-      <main className="flex-1 flex flex-col order-2">
+      <main className="flex-1 flex flex-col">
         {/* Header */}
         <div className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
           <div className="container flex h-16 items-center justify-between">
@@ -361,12 +361,7 @@ export default function AdvancedPlaygroundPage() {
 
       {/* Settings Sidebar */}
       {showSettings && (
-        <aside
-          className={cn(
-            'w-80 border-s bg-background p-4 space-y-4 overflow-y-auto hidden md:block',
-            isRTL ? 'order-1' : 'order-3'
-          )}
-        >
+        <aside className="w-80 border-s bg-background p-4 space-y-4 overflow-y-auto hidden md:block">
           <div className="flex items-center justify-between">
             <h2 className="font-semibold text-lg">
               {isRTL ? 'الإعدادات' : 'Settings'}

@@ -41,6 +41,11 @@ import {
   Binary,
   Sidebar,
   LayoutGrid,
+  Sparkles,
+  Send,
+  Settings,
+  History,
+  Sliders,
 } from 'lucide-react'
 
 const componentCategories = [
@@ -157,6 +162,20 @@ const componentCategories = [
       { name: 'Stepper', icon: GitBranch, href: '/components/stepper', status: 'ready' },
     ],
   },
+  {
+    name: 'AI/LLM Shell',
+    description: 'Components for building AI chat interfaces and LLM-powered applications',
+    components: [
+      { name: 'Chat Message', icon: MessageSquare, href: '/components/chat-message', status: 'ready' },
+      { name: 'Prompt Input', icon: Send, href: '/components/prompt-input', status: 'ready' },
+      { name: 'Thinking Indicator', icon: Loader2, href: '/components/thinking-indicator', status: 'ready' },
+      { name: 'Message Actions', icon: Settings, href: '/components/message-actions', status: 'ready' },
+      { name: 'Model Selector', icon: Sparkles, href: '/components/model-selector', status: 'ready' },
+      { name: 'Parameter Slider', icon: Sliders, href: '/components/parameter-slider', status: 'ready' },
+      { name: 'Token Counter', icon: Hash, href: '/components/token-counter', status: 'ready' },
+      { name: 'Conversation History', icon: History, href: '/components/conversation-history', status: 'ready' },
+    ],
+  },
 ]
 
 export default function ComponentsPage() {
@@ -181,8 +200,8 @@ export default function ComponentsPage() {
         <div className="max-w-3xl mb-12">
           <h1 className="text-4xl font-bold tracking-tight mb-4">Components</h1>
           <p className="text-xl text-muted-foreground mb-6">
-            54 beautifully designed components built with Radix UI and Tailwind CSS.
-            50 production-ready, 4 coming soon. Full RTL support, accessible, and customizable.
+            61 beautifully designed components built with Radix UI and Tailwind CSS.
+            58 production-ready, 3 coming soon. Full RTL support, accessible, and customizable.
           </p>
 
           {/* Live Preview */}
