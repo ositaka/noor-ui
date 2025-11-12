@@ -33,7 +33,7 @@ const chatMessageVariants = cva(
 )
 
 export interface ChatMessageProps
-  extends Omit<React.HTMLAttributes<HTMLDivElement>, 'role'>,
+  extends React.HTMLAttributes<HTMLDivElement>,
     VariantProps<typeof chatMessageVariants> {
   /**
    * The role/sender of the message
@@ -93,7 +93,7 @@ const ChatMessage = React.forwardRef<HTMLDivElement, ChatMessageProps>(
       onCopy,
       onRegenerate,
       isRTL = false,
-      ...props
+      ...domProps
     },
     ref
   ) => {
@@ -147,7 +147,7 @@ const ChatMessage = React.forwardRef<HTMLDivElement, ChatMessageProps>(
           role === 'user' && 'flex-row-reverse',
           className
         )}
-        {...props}
+        {...domProps}
       >
         {/* Avatar */}
         <Avatar className={cn('shrink-0', variant === 'compact' ? 'h-8 w-8' : 'h-10 w-10')}>

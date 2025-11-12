@@ -192,11 +192,13 @@ export const NumberInput = React.forwardRef<HTMLInputElement, NumberInputProps>(
       if (controlledValue !== undefined) {
         setDisplayValue(formatNumber(controlledValue))
       }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [controlledValue])
 
     // Initialize display value
     React.useEffect(() => {
       setDisplayValue(formatNumber(value))
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const canIncrement = disabled || (max !== undefined && value !== undefined && value >= max)

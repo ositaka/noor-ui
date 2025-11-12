@@ -101,6 +101,7 @@ export const FileUpload = React.forwardRef<HTMLInputElement, FileUploadProps>(
       if (value.length > 0) {
         setFiles(value as FileWithPreview[])
       }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []) // Empty dependency array - only run on mount
 
     React.useImperativeHandle(ref, () => inputRef.current as HTMLInputElement)
