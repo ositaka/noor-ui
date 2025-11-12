@@ -13,8 +13,14 @@ import { useDirection } from '@/components/providers/direction-provider'
 export interface Notification {
   id: string
   title: string
+  titleAr?: string
   description?: string
-  time: string
+  descriptionAr?: string
+  message?: string
+  messageAr?: string
+  time?: string
+  timestamp?: string
+  type?: 'info' | 'success' | 'warning' | 'error' | 'comment'
   read?: boolean
   icon?: React.ReactNode
   avatar?: string
@@ -220,7 +226,7 @@ export const NotificationCenter = React.forwardRef<HTMLButtonElement, Notificati
                         </p>
                       )}
                       <p className="text-xs text-muted-foreground">
-                        {getRelativeTime(notification.time, locale)}
+                        {getRelativeTime(notification.time || notification.timestamp || '', locale)}
                       </p>
                     </div>
 

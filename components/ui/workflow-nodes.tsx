@@ -1,7 +1,7 @@
 'use client'
 
 import * as React from 'react'
-import { type NodeProps } from '@xyflow/react'
+import { type NodeProps, type Node } from '@xyflow/react'
 import { WorkflowNode, type WorkflowNodeData } from '@/components/ui/workflow-node'
 import {
   Play,
@@ -19,7 +19,7 @@ import {
 } from 'lucide-react'
 
 // Trigger Node - Starting points for workflows
-export function TriggerNode(props: NodeProps<WorkflowNodeData>) {
+export function TriggerNode(props: NodeProps<Node<WorkflowNodeData>>) {
   const data = {
     ...props.data,
     icon: props.data.icon || Play,
@@ -31,7 +31,7 @@ export function TriggerNode(props: NodeProps<WorkflowNodeData>) {
 }
 
 // Webhook Trigger
-export function WebhookTriggerNode(props: NodeProps<WorkflowNodeData>) {
+export function WebhookTriggerNode(props: NodeProps<Node<WorkflowNodeData>>) {
   const data = {
     ...props.data,
     icon: Globe,
@@ -43,7 +43,7 @@ export function WebhookTriggerNode(props: NodeProps<WorkflowNodeData>) {
 }
 
 // Schedule Trigger
-export function ScheduleTriggerNode(props: NodeProps<WorkflowNodeData>) {
+export function ScheduleTriggerNode(props: NodeProps<Node<WorkflowNodeData>>) {
   const data = {
     ...props.data,
     icon: Clock,
@@ -55,7 +55,7 @@ export function ScheduleTriggerNode(props: NodeProps<WorkflowNodeData>) {
 }
 
 // Action Node - Processing steps
-export function ActionNode(props: NodeProps<WorkflowNodeData>) {
+export function ActionNode(props: NodeProps<Node<WorkflowNodeData>>) {
   const data = {
     ...props.data,
     icon: props.data.icon || Zap,
@@ -67,7 +67,7 @@ export function ActionNode(props: NodeProps<WorkflowNodeData>) {
 }
 
 // Code Action
-export function CodeActionNode(props: NodeProps<WorkflowNodeData>) {
+export function CodeActionNode(props: NodeProps<Node<WorkflowNodeData>>) {
   const data = {
     ...props.data,
     icon: Code,
@@ -79,7 +79,7 @@ export function CodeActionNode(props: NodeProps<WorkflowNodeData>) {
 }
 
 // Filter/Condition
-export function FilterNode(props: NodeProps<WorkflowNodeData>) {
+export function FilterNode(props: NodeProps<Node<WorkflowNodeData>>) {
   const data = {
     ...props.data,
     icon: Filter,
@@ -91,7 +91,7 @@ export function FilterNode(props: NodeProps<WorkflowNodeData>) {
 }
 
 // AI Node - AI/LLM operations
-export function AINode(props: NodeProps<WorkflowNodeData>) {
+export function AINode(props: NodeProps<Node<WorkflowNodeData>>) {
   const data = {
     ...props.data,
     icon: props.data.icon || Brain,
@@ -103,7 +103,7 @@ export function AINode(props: NodeProps<WorkflowNodeData>) {
 }
 
 // LLM Call
-export function LLMNode(props: NodeProps<WorkflowNodeData>) {
+export function LLMNode(props: NodeProps<Node<WorkflowNodeData>>) {
   const data = {
     ...props.data,
     icon: Sparkles,
@@ -115,7 +115,7 @@ export function LLMNode(props: NodeProps<WorkflowNodeData>) {
 }
 
 // Embedding
-export function EmbeddingNode(props: NodeProps<WorkflowNodeData>) {
+export function EmbeddingNode(props: NodeProps<Node<WorkflowNodeData>>) {
   const data = {
     ...props.data,
     icon: Database,
@@ -127,7 +127,7 @@ export function EmbeddingNode(props: NodeProps<WorkflowNodeData>) {
 }
 
 // Output Node - End points
-export function OutputNode(props: NodeProps<WorkflowNodeData>) {
+export function OutputNode(props: NodeProps<Node<WorkflowNodeData>>) {
   const data = {
     ...props.data,
     icon: props.data.icon || Send,
@@ -139,7 +139,7 @@ export function OutputNode(props: NodeProps<WorkflowNodeData>) {
 }
 
 // Save Data
-export function SaveNode(props: NodeProps<WorkflowNodeData>) {
+export function SaveNode(props: NodeProps<Node<WorkflowNodeData>>) {
   const data = {
     ...props.data,
     icon: Save,
@@ -151,7 +151,7 @@ export function SaveNode(props: NodeProps<WorkflowNodeData>) {
 }
 
 // Notification
-export function NotifyNode(props: NodeProps<WorkflowNodeData>) {
+export function NotifyNode(props: NodeProps<Node<WorkflowNodeData>>) {
   const data = {
     ...props.data,
     icon: Bell,

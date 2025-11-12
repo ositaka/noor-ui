@@ -43,7 +43,7 @@ const conversationHistoryVariants = cva(
   }
 )
 
-export interface Conversation {
+interface Conversation {
   id: string
   title: string
   titleAr?: string
@@ -55,7 +55,7 @@ export interface Conversation {
 }
 
 export interface ConversationHistoryProps
-  extends React.HTMLAttributes<HTMLDivElement>,
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onSelect'>,
     VariantProps<typeof conversationHistoryVariants> {
   /**
    * List of conversations

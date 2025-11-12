@@ -114,7 +114,6 @@ export function DatePicker({
           selected={date}
           onSelect={handleSelect}
           disabled={isDateDisabled}
-          initialFocus
         />
       </PopoverContent>
     </Popover>
@@ -231,7 +230,6 @@ export function DateRangePicker({
           selectedRange={dateRange}
           onSelect={handleSelect}
           disabled={isDateDisabled}
-          initialFocus
         />
       </PopoverContent>
     </Popover>

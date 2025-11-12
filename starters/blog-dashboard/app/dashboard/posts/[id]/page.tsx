@@ -22,6 +22,20 @@ import {
 import { useToast } from '@/hooks/use-toast'
 import { ArrowLeft, Save, Eye, Loader2 } from 'lucide-react'
 
+interface Post {
+  id: string
+  title: string
+  title_ar: string
+  excerpt: string
+  excerpt_ar: string
+  content: string
+  content_ar: string
+  slug: string
+  featured_image: string | null
+  status: 'draft' | 'published'
+  [key: string]: unknown
+}
+
 export default function EditPostPage({ params }: { params: { id: string } }) {
   const { user } = useAuth()
   const { locale } = useDirection()
@@ -116,7 +130,7 @@ export default function EditPostPage({ params }: { params: { id: string } }) {
         .from('posts')
         .select('*')
         .eq('id', params.id)
-        .single()
+        .single() as { data: Post | null; error: any }
 
       if (error) throw error
 
@@ -206,6 +220,7 @@ export default function EditPostPage({ params }: { params: { id: string } }) {
 
       const { error } = await supabase
         .from('posts')
+        // @ts-ignore - Supabase type configuration issue
         .update(postData)
         .eq('id', params.id)
 
@@ -335,7 +350,7 @@ export default function EditPostPage({ params }: { params: { id: string } }) {
 
                 <div className="space-y-2">
                   <Label>{t.postContent}</Label>
-                  <RichTextEditor value={content} onChange={setContent} />
+                  <RichTextEditor content={content} onChange={setContent} />
                 </div>
               </TabsContent>
 
@@ -366,7 +381,7 @@ export default function EditPostPage({ params }: { params: { id: string } }) {
 
                 <div className="space-y-2">
                   <Label>{t.postContent}</Label>
-                  <RichTextEditor value={contentAr} onChange={setContentAr} />
+                  <RichTextEditor content={contentAr} onChange={setContentAr} />
                 </div>
               </TabsContent>
             </Tabs>
