@@ -142,7 +142,8 @@ export default function CMSPage() {
   // DataTable columns
   const columns = [
     {
-      key: 'title' as const,
+      id: 'title',
+      accessorKey: 'title' as keyof typeof mockPosts[0],
       header: isRTL ? 'العنوان' : 'Title',
       cell: (row: typeof mockPosts[0]) => (
         <div>
@@ -157,7 +158,8 @@ export default function CMSPage() {
       ),
     },
     {
-      key: 'author' as const,
+      id: 'author',
+      accessorKey: 'author' as keyof typeof mockPosts[0],
       header: isRTL ? 'المؤلف' : 'Author',
       cell: (row: typeof mockPosts[0]) => (
         <div className="flex items-center gap-2">
@@ -167,7 +169,8 @@ export default function CMSPage() {
       ),
     },
     {
-      key: 'status' as const,
+      id: 'status',
+      accessorKey: 'status' as keyof typeof mockPosts[0],
       header: isRTL ? 'الحالة' : 'Status',
       cell: (row: typeof mockPosts[0]) => {
         const statusConfig = {
@@ -204,7 +207,8 @@ export default function CMSPage() {
       },
     },
     {
-      key: 'category' as const,
+      id: 'category',
+      accessorKey: 'category' as keyof typeof mockPosts[0],
       header: isRTL ? 'الفئة' : 'Category',
       cell: (row: typeof mockPosts[0]) => (
         <div className="flex items-center gap-1">
@@ -214,7 +218,8 @@ export default function CMSPage() {
       ),
     },
     {
-      key: 'views' as const,
+      id: 'views',
+      accessorKey: 'views' as keyof typeof mockPosts[0],
       header: isRTL ? 'المشاهدات' : 'Views',
       cell: (row: typeof mockPosts[0]) => (
         <div className="flex items-center gap-1">
@@ -224,7 +229,8 @@ export default function CMSPage() {
       ),
     },
     {
-      key: 'comments' as const,
+      id: 'comments',
+      accessorKey: 'comments' as keyof typeof mockPosts[0],
       header: isRTL ? 'التعليقات' : 'Comments',
       cell: (row: typeof mockPosts[0]) => (
         <div className="flex items-center gap-1">
@@ -234,7 +240,8 @@ export default function CMSPage() {
       ),
     },
     {
-      key: 'actions' as const,
+      id: 'actions',
+      accessorKey: 'id' as keyof typeof mockPosts[0],
       header: '',
       cell: (row: typeof mockPosts[0]) => (
         <DropdownMenu>
