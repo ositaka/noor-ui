@@ -14,6 +14,11 @@ Components to create:
 - multi-select / combobox
 – loading / spinner ??? is it really needed? we have already the skeleton component.
 - currency input/formatter, with proper decimal handling
+- Navigation
+    - top navigation bar (responsive)
+    - bottom navigation bar (mobile)
+    - menu / megamenu
+- offline status / no internet connection available
 
 
 Components to enhance:
@@ -38,6 +43,12 @@ Create a 404 page
 
 To consider, but just asking if it's actually needed or if it's just to add more noise to the project:
 - Layout Primitives
-    - stack
+    - stack (horizontal/vertical)
     - grid system
     - container
+
+- BiDi Text Input
+
+
+- Examples:
+    - Settings page: tabbed interface, all form controls, switch toggles, theme selection, language/direction toggle, sabe/reset actions
