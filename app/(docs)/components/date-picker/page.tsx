@@ -395,7 +395,7 @@ const nights = dateRange?.from && dateRange?.to
     {dateRange?.from && dateRange?.to && (
       <div className="space-y-2">
         <div>Nights: {nights}</div>
-        <div>Total: ${nights * 150}</div>
+        <div>Total: \\${nights * 150}</div>
       </div>
     )}
   </CardContent>
