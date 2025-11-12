@@ -32,7 +32,7 @@ export function Stepper({
   allowSkip = false,
   className,
 }: StepperProps) {
-  const isRTL = document.documentElement.dir === 'rtl'
+  const isRTL = typeof document !== 'undefined' && document.documentElement.dir === 'rtl'
 
   const getStepStatus = (index: number): 'complete' | 'current' | 'upcoming' => {
     if (index < currentStep) return 'complete'
