@@ -376,6 +376,9 @@ export default function DatePickerPage() {
         </h2>
         <ComponentShowcase code={`const [dateRange, setDateRange] = useState<DateRange>()
 const today = new Date()
+const nights = dateRange?.from && dateRange?.to
+  ? Math.ceil((dateRange.to.getTime() - dateRange.from.getTime()) / (1000 * 60 * 60 * 24))
+  : 0
 
 <Card>
   <CardHeader>
@@ -391,7 +394,7 @@ const today = new Date()
     />
     {dateRange?.from && dateRange?.to && (
       <div className="space-y-2">
-        <div>Nights: {Math.ceil((dateRange.to.getTime() - dateRange.from.getTime()) / (1000 * 60 * 60 * 24))}</div>
+        <div>Nights: {nights}</div>
         <div>Total: ${nights * 150}</div>
       </div>
     )}
