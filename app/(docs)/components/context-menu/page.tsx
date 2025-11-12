@@ -150,7 +150,7 @@ export default function ContextMenuPage() {
 
       <main id="main-content" className="container py-12">
         {/* Breadcrumb */}
-        <nav aria-label="Breadcrumb" className="mb-8">
+        <nav aria-label="Breadcrumb" className="mb-12">
           <ol className="flex items-center gap-2 text-sm text-muted-foreground">
             <li>
               <Link href="/" className="hover:text-foreground transition-colors">
@@ -169,9 +169,9 @@ export default function ContextMenuPage() {
         </nav>
 
         {/* Page Header */}
-        <div className="max-w-3xl mb-12">
+        <div className="mb-12">
           <h1 className="text-4xl font-bold tracking-tight mb-4">Context Menu</h1>
-          <p className="text-xl text-muted-foreground">
+          <p className="text-xl text-muted-foreground max-w-3xl">
             A menu component that appears on right-click (or long press on touch devices). Perfect
             for contextual actions with full RTL support and keyboard navigation.
           </p>

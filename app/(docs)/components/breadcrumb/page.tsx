@@ -128,18 +128,19 @@ export default function BreadcrumbComponentPage() {
         </nav>
 
         {/* Page Header */}
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold tracking-tight mb-2">Breadcrumb</h1>
-          <p className="text-lg text-muted-foreground">
+        <div className="mb-12">
+          <h1 className="text-4xl font-bold tracking-tight mb-4">Breadcrumb</h1>
+          <p className="text-xl text-muted-foreground max-w-3xl">
             Displays the path to the current resource using a hierarchy of links.
           </p>
         </div>
 
         {/* Preview */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-4">Preview</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">Preview</h2>
           <ComponentShowcase>
-            <Breadcrumb>
+            <ComponentShowcase.Demo>
+              <Breadcrumb>
               <BreadcrumbList>
                 <BreadcrumbItem>
                   <BreadcrumbLink href="/">Home</BreadcrumbLink>
@@ -154,6 +155,7 @@ export default function BreadcrumbComponentPage() {
                 </BreadcrumbItem>
               </BreadcrumbList>
             </Breadcrumb>
+            </ComponentShowcase.Demo>
           </ComponentShowcase>
         </section>
 

@@ -20,10 +20,29 @@ export default function ArabicNumberPage() {
   return (
     <div className="min-h-screen">
       <main id="main-content" className="container py-12">
+        {/* Breadcrumb */}
+        <nav aria-label="Breadcrumb" className="mb-8">
+          <ol className="flex items-center gap-2 text-sm text-muted-foreground">
+            <li>
+              <Link href="/" className="hover:text-foreground transition-colors">
+                Home
+              </Link>
+            </li>
+            <li>/</li>
+            <li>
+              <Link href="/components" className="hover:text-foreground transition-colors">
+                Components
+              </Link>
+            </li>
+            <li>/</li>
+            <li className="text-foreground font-medium">Arabic Number</li>
+          </ol>
+        </nav>
+
         {/* Page Header */}
-        <div className="max-w-3xl mb-12">
+        <div className="mb-12">
           <h1 className="text-4xl font-bold tracking-tight mb-4">Arabic Number Utilities</h1>
-          <p className="text-xl text-muted-foreground">
+          <p className="text-xl text-muted-foreground max-w-3xl">
             Comprehensive utilities for formatting numbers in Arabic contexts. Includes
             Arabic-Indic numeral conversion (٠-٩), SAR currency formatting, and locale-aware number
             display. Perfect for GCC applications.

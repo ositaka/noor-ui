@@ -137,7 +137,7 @@ export default function PopoverPage() {
 
       <main id="main-content" className="container py-12">
         {/* Breadcrumb */}
-        <nav aria-label="Breadcrumb" className="mb-8">
+        <nav aria-label="Breadcrumb" className="mb-12">
           <ol className="flex items-center gap-2 text-sm text-muted-foreground">
             <li>
               <Link href="/" className="hover:text-foreground transition-colors">
@@ -156,30 +156,32 @@ export default function PopoverPage() {
         </nav>
 
         {/* Page Header */}
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold tracking-tight mb-2">Popover</h1>
-          <p className="text-lg text-muted-foreground">
+        <div className="mb-12">
+          <h1 className="text-4xl font-bold tracking-tight mb-4">Popover</h1>
+          <p className="text-xl text-muted-foreground max-w-3xl">
             Displays rich content in a portal, triggered by a button with flexible positioning.
           </p>
         </div>
 
         {/* Preview */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-4">Preview</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">Preview</h2>
           <ComponentShowcase>
-            <Popover>
-              <PopoverTrigger asChild>
-                <Button variant="outline">Open Popover</Button>
-              </PopoverTrigger>
-              <PopoverContent>
-                <div className="space-y-2">
-                  <h4 className="font-medium leading-none">Popover Title</h4>
-                  <p className="text-sm text-muted-foreground">
-                    This is a popover with some example content.
-                  </p>
-                </div>
-              </PopoverContent>
-            </Popover>
+            <ComponentShowcase.Demo>
+              <Popover>
+                <PopoverTrigger asChild>
+                  <Button variant="outline">Open Popover</Button>
+                </PopoverTrigger>
+                <PopoverContent>
+                  <div className="space-y-2">
+                    <h4 className="font-medium leading-none">Popover Title</h4>
+                    <p className="text-sm text-muted-foreground">
+                      This is a popover with some example content.
+                    </p>
+                  </div>
+                </PopoverContent>
+              </Popover>
+            </ComponentShowcase.Demo>
           </ComponentShowcase>
         </section>
 
@@ -205,43 +207,45 @@ export default function PopoverPage() {
             <div>
               <h3 className="text-lg font-semibold mb-4">Positioning</h3>
               <ComponentShowcase>
-                <div className="flex flex-wrap gap-4 justify-center">
-                  <Popover>
-                    <PopoverTrigger asChild>
-                      <Button variant="outline">Top</Button>
-                    </PopoverTrigger>
-                    <PopoverContent side="top">
-                      <p className="text-sm">Content positioned on top</p>
-                    </PopoverContent>
-                  </Popover>
+                <ComponentShowcase.Demo>
+                  <div className="flex flex-wrap gap-4 justify-center">
+                    <Popover>
+                      <PopoverTrigger asChild>
+                        <Button variant="outline">Top</Button>
+                      </PopoverTrigger>
+                      <PopoverContent side="top">
+                        <p className="text-sm">Content positioned on top</p>
+                      </PopoverContent>
+                    </Popover>
 
-                  <Popover>
-                    <PopoverTrigger asChild>
-                      <Button variant="outline">Right</Button>
-                    </PopoverTrigger>
-                    <PopoverContent side="right">
-                      <p className="text-sm">Content positioned on right</p>
-                    </PopoverContent>
-                  </Popover>
+                    <Popover>
+                      <PopoverTrigger asChild>
+                        <Button variant="outline">Right</Button>
+                      </PopoverTrigger>
+                      <PopoverContent side="right">
+                        <p className="text-sm">Content positioned on right</p>
+                      </PopoverContent>
+                    </Popover>
 
-                  <Popover>
-                    <PopoverTrigger asChild>
-                      <Button variant="outline">Bottom</Button>
-                    </PopoverTrigger>
-                    <PopoverContent side="bottom">
-                      <p className="text-sm">Content positioned on bottom</p>
-                    </PopoverContent>
-                  </Popover>
+                    <Popover>
+                      <PopoverTrigger asChild>
+                        <Button variant="outline">Bottom</Button>
+                      </PopoverTrigger>
+                      <PopoverContent side="bottom">
+                        <p className="text-sm">Content positioned on bottom</p>
+                      </PopoverContent>
+                    </Popover>
 
-                  <Popover>
-                    <PopoverTrigger asChild>
-                      <Button variant="outline">Left</Button>
-                    </PopoverTrigger>
-                    <PopoverContent side="left">
-                      <p className="text-sm">Content positioned on left</p>
-                    </PopoverContent>
-                  </Popover>
-                </div>
+                    <Popover>
+                      <PopoverTrigger asChild>
+                        <Button variant="outline">Left</Button>
+                      </PopoverTrigger>
+                      <PopoverContent side="left">
+                        <p className="text-sm">Content positioned on left</p>
+                      </PopoverContent>
+                    </Popover>
+                  </div>
+                </ComponentShowcase.Demo>
               </ComponentShowcase>
               <CodeBlock code={positioningCode} language="tsx" />
             </div>
@@ -249,33 +253,35 @@ export default function PopoverPage() {
             <div>
               <h3 className="text-lg font-semibold mb-4">With Form</h3>
               <ComponentShowcase>
-                <Popover>
-                  <PopoverTrigger asChild>
-                    <Button variant="outline">
-                      <Settings className="me-2 h-4 w-4" />
-                      Settings
-                    </Button>
-                  </PopoverTrigger>
-                  <PopoverContent className="w-80">
-                    <div className="space-y-4">
-                      <div className="space-y-2">
-                        <h4 className="font-medium leading-none">Dimensions</h4>
-                        <p className="text-sm text-muted-foreground">
-                          Set the dimensions for the layer.
-                        </p>
+                <ComponentShowcase.Demo>
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <Button variant="outline">
+                        <Settings className="me-2 h-4 w-4" />
+                        Settings
+                      </Button>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-80">
+                      <div className="space-y-4">
+                        <div className="space-y-2">
+                          <h4 className="font-medium leading-none">Dimensions</h4>
+                          <p className="text-sm text-muted-foreground">
+                            Set the dimensions for the layer.
+                          </p>
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="width">Width</Label>
+                          <Input id="width" defaultValue="100%" />
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="height">Height</Label>
+                          <Input id="height" defaultValue="25px" />
+                        </div>
+                        <Button className="w-full">Save changes</Button>
                       </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="width">Width</Label>
-                        <Input id="width" defaultValue="100%" />
-                      </div>
-                      <div className="space-y-2">
-                        <Label htmlFor="height">Height</Label>
-                        <Input id="height" defaultValue="25px" />
-                      </div>
-                      <Button className="w-full">Save changes</Button>
-                    </div>
-                  </PopoverContent>
-                </Popover>
+                    </PopoverContent>
+                  </Popover>
+                </ComponentShowcase.Demo>
               </ComponentShowcase>
               <CodeBlock code={withFormCode} language="tsx" />
             </div>

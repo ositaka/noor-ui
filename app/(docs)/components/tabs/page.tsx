@@ -108,18 +108,19 @@ export default function TabsPage() {
         </nav>
 
         {/* Page Header */}
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold tracking-tight mb-2">Tabs</h1>
-          <p className="text-lg text-muted-foreground">
+        <div className="mb-12">
+          <h1 className="text-4xl font-bold tracking-tight mb-4">Tabs</h1>
+          <p className="text-xl text-muted-foreground max-w-3xl">
             A set of layered sections of content, displayed one at a time, with keyboard navigation support.
           </p>
         </div>
 
         {/* Preview */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-4">Preview</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">Preview</h2>
           <ComponentShowcase>
-            <Tabs defaultValue="account" className="w-full max-w-md">
+            <ComponentShowcase.Demo>
+              <Tabs defaultValue="account" className="w-full max-w-md">
               <TabsList className="grid w-full grid-cols-3">
                 <TabsTrigger value="account">Account</TabsTrigger>
                 <TabsTrigger value="password">Password</TabsTrigger>
@@ -153,6 +154,7 @@ export default function TabsPage() {
                 </Card>
               </TabsContent>
             </Tabs>
+            </ComponentShowcase.Demo>
           </ComponentShowcase>
         </section>
 

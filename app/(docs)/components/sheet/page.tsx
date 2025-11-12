@@ -142,7 +142,7 @@ export default function SheetPage() {
 
       <main id="main-content" className="container py-12">
         {/* Breadcrumb */}
-        <nav aria-label="Breadcrumb" className="mb-8">
+        <nav aria-label="Breadcrumb" className="mb-12">
           <ol className="flex items-center gap-2 text-sm text-muted-foreground">
             <li>
               <Link href="/" className="hover:text-foreground transition-colors">
@@ -161,35 +161,37 @@ export default function SheetPage() {
         </nav>
 
         {/* Page Header */}
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold tracking-tight mb-2">Sheet</h1>
-          <p className="text-lg text-muted-foreground">
+        <div className="mb-12">
+          <h1 className="text-4xl font-bold tracking-tight mb-4">Sheet</h1>
+          <p className="text-xl text-muted-foreground max-w-3xl">
             Extends the Dialog component to display content that slides in from the edge of the screen.
           </p>
         </div>
 
         {/* Preview */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-4">Preview</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">Preview</h2>
           <ComponentShowcase>
-            <Sheet>
-              <SheetTrigger asChild>
-                <Button variant="outline">Open Sheet</Button>
-              </SheetTrigger>
-              <SheetContent>
-                <SheetHeader>
-                  <SheetTitle>Sheet Title</SheetTitle>
-                  <SheetDescription>
-                    This is a sheet component that slides in from the side.
-                  </SheetDescription>
-                </SheetHeader>
-                <div className="py-4">
-                  <p className="text-sm text-muted-foreground">
-                    Sheet content goes here. You can add forms, lists, or any other content.
-                  </p>
-                </div>
-              </SheetContent>
-            </Sheet>
+            <ComponentShowcase.Demo>
+              <Sheet>
+                <SheetTrigger asChild>
+                  <Button variant="outline">Open Sheet</Button>
+                </SheetTrigger>
+                <SheetContent>
+                  <SheetHeader>
+                    <SheetTitle>Sheet Title</SheetTitle>
+                    <SheetDescription>
+                      This is a sheet component that slides in from the side.
+                    </SheetDescription>
+                  </SheetHeader>
+                  <div className="py-4">
+                    <p className="text-sm text-muted-foreground">
+                      Sheet content goes here. You can add forms, lists, or any other content.
+                    </p>
+                  </div>
+                </SheetContent>
+              </Sheet>
+            </ComponentShowcase.Demo>
           </ComponentShowcase>
         </section>
 
@@ -197,13 +199,13 @@ export default function SheetPage() {
 
         {/* Installation */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-4">Installation</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">Installation</h2>
           <CodeBlock code={installCode} language="bash" />
         </section>
 
         {/* Usage */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-4">Usage</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">Usage</h2>
           <CodeBlock code={basicUsageCode} language="tsx" />
         </section>
 
@@ -215,63 +217,65 @@ export default function SheetPage() {
             <div>
               <h3 className="text-lg font-semibold mb-4">Different Sides</h3>
               <ComponentShowcase>
-                <div className="flex flex-wrap gap-4">
-                  <Sheet>
-                    <SheetTrigger asChild>
-                      <Button variant="outline">Open Start</Button>
-                    </SheetTrigger>
-                    <SheetContent side="start">
-                      <SheetHeader>
-                        <SheetTitle>Start Sheet</SheetTitle>
-                        <SheetDescription>
-                          This sheet slides in from the start (left in LTR, right in RTL).
-                        </SheetDescription>
-                      </SheetHeader>
-                    </SheetContent>
-                  </Sheet>
+                <ComponentShowcase.Demo>
+                  <div className="flex flex-wrap gap-4">
+                    <Sheet>
+                      <SheetTrigger asChild>
+                        <Button variant="outline">Open Start</Button>
+                      </SheetTrigger>
+                      <SheetContent side="start">
+                        <SheetHeader>
+                          <SheetTitle>Start Sheet</SheetTitle>
+                          <SheetDescription>
+                            This sheet slides in from the start (left in LTR, right in RTL).
+                          </SheetDescription>
+                        </SheetHeader>
+                      </SheetContent>
+                    </Sheet>
 
-                  <Sheet>
-                    <SheetTrigger asChild>
-                      <Button variant="outline">Open End</Button>
-                    </SheetTrigger>
-                    <SheetContent side="end">
-                      <SheetHeader>
-                        <SheetTitle>End Sheet</SheetTitle>
-                        <SheetDescription>
-                          This sheet slides in from the end (right in LTR, left in RTL).
-                        </SheetDescription>
-                      </SheetHeader>
-                    </SheetContent>
-                  </Sheet>
+                    <Sheet>
+                      <SheetTrigger asChild>
+                        <Button variant="outline">Open End</Button>
+                      </SheetTrigger>
+                      <SheetContent side="end">
+                        <SheetHeader>
+                          <SheetTitle>End Sheet</SheetTitle>
+                          <SheetDescription>
+                            This sheet slides in from the end (right in LTR, left in RTL).
+                          </SheetDescription>
+                        </SheetHeader>
+                      </SheetContent>
+                    </Sheet>
 
-                  <Sheet>
-                    <SheetTrigger asChild>
-                      <Button variant="outline">Open Top</Button>
-                    </SheetTrigger>
-                    <SheetContent side="top">
-                      <SheetHeader>
-                        <SheetTitle>Top Sheet</SheetTitle>
-                        <SheetDescription>
-                          This sheet slides in from the top.
-                        </SheetDescription>
-                      </SheetHeader>
-                    </SheetContent>
-                  </Sheet>
+                    <Sheet>
+                      <SheetTrigger asChild>
+                        <Button variant="outline">Open Top</Button>
+                      </SheetTrigger>
+                      <SheetContent side="top">
+                        <SheetHeader>
+                          <SheetTitle>Top Sheet</SheetTitle>
+                          <SheetDescription>
+                            This sheet slides in from the top.
+                          </SheetDescription>
+                        </SheetHeader>
+                      </SheetContent>
+                    </Sheet>
 
-                  <Sheet>
-                    <SheetTrigger asChild>
-                      <Button variant="outline">Open Bottom</Button>
-                    </SheetTrigger>
-                    <SheetContent side="bottom">
-                      <SheetHeader>
-                        <SheetTitle>Bottom Sheet</SheetTitle>
-                        <SheetDescription>
-                          This sheet slides in from the bottom.
-                        </SheetDescription>
-                      </SheetHeader>
-                    </SheetContent>
-                  </Sheet>
-                </div>
+                    <Sheet>
+                      <SheetTrigger asChild>
+                        <Button variant="outline">Open Bottom</Button>
+                      </SheetTrigger>
+                      <SheetContent side="bottom">
+                        <SheetHeader>
+                          <SheetTitle>Bottom Sheet</SheetTitle>
+                          <SheetDescription>
+                            This sheet slides in from the bottom.
+                          </SheetDescription>
+                        </SheetHeader>
+                      </SheetContent>
+                    </Sheet>
+                  </div>
+                </ComponentShowcase.Demo>
               </ComponentShowcase>
               <CodeBlock code={sidesCode} language="tsx" />
             </div>
@@ -279,39 +283,41 @@ export default function SheetPage() {
             <div>
               <h3 className="text-lg font-semibold mb-4">With Form</h3>
               <ComponentShowcase>
-                <Sheet>
-                  <SheetTrigger asChild>
-                    <Button variant="outline">Edit Profile</Button>
-                  </SheetTrigger>
-                  <SheetContent>
-                    <SheetHeader>
-                      <SheetTitle>Edit Profile</SheetTitle>
-                      <SheetDescription>
-                        Make changes to your profile here. Click save when you&apos;re done.
-                      </SheetDescription>
-                    </SheetHeader>
-                    <div className="grid gap-4 py-4">
-                      <div className="grid gap-2">
-                        <Label htmlFor="name">Name</Label>
-                        <Input id="name" placeholder="Enter your name" defaultValue="John Doe" />
+                <ComponentShowcase.Demo>
+                  <Sheet>
+                    <SheetTrigger asChild>
+                      <Button variant="outline">Edit Profile</Button>
+                    </SheetTrigger>
+                    <SheetContent>
+                      <SheetHeader>
+                        <SheetTitle>Edit Profile</SheetTitle>
+                        <SheetDescription>
+                          Make changes to your profile here. Click save when you&apos;re done.
+                        </SheetDescription>
+                      </SheetHeader>
+                      <div className="grid gap-4 py-4">
+                        <div className="grid gap-2">
+                          <Label htmlFor="name">Name</Label>
+                          <Input id="name" placeholder="Enter your name" defaultValue="John Doe" />
+                        </div>
+                        <div className="grid gap-2">
+                          <Label htmlFor="email">Email</Label>
+                          <Input
+                            id="email"
+                            type="email"
+                            placeholder="Enter your email"
+                            defaultValue="john@example.com"
+                          />
+                        </div>
                       </div>
-                      <div className="grid gap-2">
-                        <Label htmlFor="email">Email</Label>
-                        <Input
-                          id="email"
-                          type="email"
-                          placeholder="Enter your email"
-                          defaultValue="john@example.com"
-                        />
-                      </div>
-                    </div>
-                    <SheetFooter>
-                      <SheetClose asChild>
-                        <Button type="submit">Save changes</Button>
-                      </SheetClose>
-                    </SheetFooter>
-                  </SheetContent>
-                </Sheet>
+                      <SheetFooter>
+                        <SheetClose asChild>
+                          <Button type="submit">Save changes</Button>
+                        </SheetClose>
+                      </SheetFooter>
+                    </SheetContent>
+                  </Sheet>
+                </ComponentShowcase.Demo>
               </ComponentShowcase>
               <CodeBlock code={withFormCode} language="tsx" />
             </div>

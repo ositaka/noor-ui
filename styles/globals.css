@@ -318,3 +318,23 @@
     text-align: end;
   }
 }
+
+/* AI/LLM Shell Component Animations */
+@keyframes wave {
+  0%, 100% { height: 0.25rem; }
+  50% { height: 0.75rem; }
+}
+
+@keyframes typing {
+  0%, 60%, 100% { opacity: 0.3; }
+  30% { opacity: 1; }
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+.animate-blink {
+  animation: blink 1s step-end infinite;
+}

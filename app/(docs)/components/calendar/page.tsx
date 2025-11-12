@@ -210,7 +210,7 @@ export default function CalendarPage() {
     <div className="min-h-screen">
       <main id="main-content" className="container py-12">
         {/* Breadcrumb */}
-        <nav aria-label="Breadcrumb" className="mb-8">
+        <nav aria-label="Breadcrumb" className="mb-12">
           <ol className="flex items-center gap-2 text-sm text-muted-foreground">
             <li>
               <Link href="/" className="hover:text-foreground transition-colors">
@@ -229,7 +229,7 @@ export default function CalendarPage() {
         </nav>
 
         {/* Page Header */}
-        <div className="max-w-3xl mb-12">
+        <div className="mb-12">
           <div className="flex items-center gap-3 mb-4">
             <h1 className="text-4xl font-bold tracking-tight">Calendar</h1>
             <Badge variant="outline" className="gap-1">
@@ -237,7 +237,7 @@ export default function CalendarPage() {
               GCC
             </Badge>
           </div>
-          <p className="text-xl text-muted-foreground">
+          <p className="text-xl text-muted-foreground max-w-3xl">
             A date picker calendar with Hijri calendar support, event markers, and range selection.
             Perfect for GCC applications requiring dual calendar display.
           </p>

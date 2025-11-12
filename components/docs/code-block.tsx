@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
 import { Copy, Check, ChevronDown, ChevronUp } from 'lucide-react'
 import { Skeleton } from '@/components/ui/skeleton'
+import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism'
 
 // Lazy load the heavy syntax highlighter (saves ~200-300KB from initial bundle)
 const SyntaxHighlighter = dynamic(
@@ -19,10 +20,6 @@ const SyntaxHighlighter = dynamic(
     ssr: false,
   }
 )
-
-// Lazy load dark theme style (always use dark theme for code blocks)
-const loadStyles = () =>
-  import('react-syntax-highlighter/dist/esm/styles/prism').then((mod) => mod.vscDarkPlus)
 
 interface CodeBlockProps {
   code: string
@@ -47,14 +44,6 @@ export function CodeBlock({
 }: CodeBlockProps) {
   const [copied, setCopied] = React.useState(false)
   const [collapsed, setCollapsed] = React.useState(defaultCollapsed)
-  const [darkTheme, setDarkTheme] = React.useState<any>(null)
-
-  // Load syntax highlighter dark theme on mount (always use dark theme for code blocks)
-  React.useEffect(() => {
-    if (!collapsed) {
-      loadStyles().then(setDarkTheme)
-    }
-  }, [collapsed])
 
   const handleCopy = async () => {
     const success = await copyToClipboard(code)
@@ -121,33 +110,29 @@ export function CodeBlock({
       {!collapsed && (
         <CardContent className="p-0">
           <div className="overflow-x-auto">
-            {!darkTheme ? (
-              <Skeleton className="h-32 w-full rounded-none" />
-            ) : (
-              <SyntaxHighlighter
-                language={language}
-                style={darkTheme}
-                showLineNumbers={showLineNumbers}
-                wrapLines={highlightLines.length > 0}
-                lineProps={(lineNumber) => {
-                  const style: React.CSSProperties = { display: 'block' }
-                  if (highlightLines.includes(lineNumber)) {
-                    style.backgroundColor = 'rgba(255, 255, 0, 0.1)'
-                    style.borderLeft = '3px solid #fbbf24'
-                    style.paddingLeft = '0.5rem'
-                  }
-                  return { style }
-                }}
-                customStyle={{
-                  margin: 0,
-                  borderRadius: 0,
-                  fontSize: '0.875rem',
-                  lineHeight: '1.5',
-                }}
-              >
-                {code}
-              </SyntaxHighlighter>
-            )}
+            <SyntaxHighlighter
+              language={language}
+              style={vscDarkPlus}
+              showLineNumbers={showLineNumbers}
+              wrapLines={highlightLines.length > 0}
+              lineProps={(lineNumber) => {
+                const style: React.CSSProperties = { display: 'block' }
+                if (highlightLines.includes(lineNumber)) {
+                  style.backgroundColor = 'rgba(255, 255, 0, 0.1)'
+                  style.borderLeft = '3px solid #fbbf24'
+                  style.paddingLeft = '0.5rem'
+                }
+                return { style }
+              }}
+              customStyle={{
+                margin: 0,
+                borderRadius: 0,
+                fontSize: '0.875rem',
+                lineHeight: '1.5',
+              }}
+            >
+              {code}
+            </SyntaxHighlighter>
           </div>
         </CardContent>
       )}
