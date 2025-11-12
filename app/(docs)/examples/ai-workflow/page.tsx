@@ -4,7 +4,7 @@ import * as React from 'react'
 import Link from 'next/link'
 import { useDirection } from '@/components/providers/direction-provider'
 import { WorkflowCanvas } from '@/components/ui/workflow-canvas'
-import { WorkflowNode } from '@/components/ui/workflow-node'
+import { WorkflowNode, type WorkflowNodeData } from '@/components/ui/workflow-node'
 import { workflowNodeTypes } from '@/components/ui/workflow-nodes'
 import { ModelSelector, defaultModels } from '@/components/ui/model-selector'
 import { TokenCounter } from '@/components/ui/token-counter'
@@ -17,20 +17,22 @@ import { Play, RotateCcw, Settings, Sparkles } from 'lucide-react'
 import type { Node, Edge, NodeProps } from '@xyflow/react'
 
 // Custom LLM Node with Model Selector
-function CustomLLMNode({ data, selected }: NodeProps) {
+function CustomLLMNode({ data, selected, ...rest }: NodeProps<any>) {
   const [selectedModel, setSelectedModel] = React.useState('gpt-4')
+  const nodeData = data as WorkflowNodeData
 
   return (
     <WorkflowNode
+      {...rest}
       data={{
-        ...data,
+        ...nodeData,
         children: (
           <div className="space-y-2">
             <ModelSelector
               models={defaultModels}
               value={selectedModel}
               onValueChange={setSelectedModel}
-              isRTL={data.isRTL}
+              isRTL={nodeData.isRTL}
             />
           </div>
         ),
@@ -161,8 +163,8 @@ export default function AIWorkflowPage() {
 
         // Add tokens during LLM step
         if (tokens) {
-          if (tokens.input) setInputTokens((prev) => prev + tokens.input)
-          if (tokens.output) setOutputTokens((prev) => prev + tokens.output)
+          if (tokens.input) setInputTokens((prev) => prev + tokens.input!)
+          if (tokens.output) setOutputTokens((prev) => prev + tokens.output!)
         }
 
         setTimeout(() => {
@@ -229,7 +231,6 @@ export default function AIWorkflowPage() {
               <Button
                 onClick={handleRun}
                 disabled={isRunning}
-                variant="default"
               >
                 <Play className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
                 {isRTL ? 'تشغيل' : 'Run'}
