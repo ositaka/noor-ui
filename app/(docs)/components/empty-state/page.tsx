@@ -1,7 +1,6 @@
 'use client'
 
 import * as React from 'react'
-import Link from 'next/link'
 import { ComponentShowcase } from '@/components/docs/component-showcase'
 import { CodeBlock } from '@/components/docs/code-block'
 import { PropsTable } from '@/components/docs/props-table'
@@ -68,148 +67,124 @@ export function Example() {
 />`
 
   return (
-    <div className="min-h-screen">
-      <main id="main-content" className="container py-12">
-        {/* Breadcrumb */}
-        <nav aria-label="Breadcrumb" className="mb-8">
-          <ol className="flex items-center gap-2 text-sm text-muted-foreground">
-            <li>
-              <Link href="/" className="hover:text-foreground transition-colors">
-                {isRTL ? 'الرئيسية' : 'Home'}
-              </Link>
-            </li>
-            <li>/</li>
-            <li>
-              <Link href="/components" className="hover:text-foreground transition-colors">
-                {isRTL ? 'المكونات' : 'Components'}
-              </Link>
-            </li>
-            <li>/</li>
-            <li className="text-foreground font-medium">{isRTL ? 'حالة فارغة' : 'Empty State'}</li>
-          </ol>
-        </nav>
-
-        {/* Page Header */}
-        <div className="mb-12">
-          <h1 className="text-4xl font-bold tracking-tight mb-4">
-            {isRTL ? 'حالة فارغة' : 'Empty State'}
-          </h1>
-          <p className="text-xl text-muted-foreground max-w-3xl">
-            {isRTL
-              ? 'اعرض رسائل تعليمية عندما لا يكون هناك محتوى للعرض'
-              : 'Display helpful messages when there is no content to show'}
-          </p>
-        </div>
+    <div className="container mx-auto py-8 space-y-12" dir={direction}>
+      {/* Header */}
+      <div className="space-y-3">
+        <h1 className="text-4xl font-bold">
+          {isRTL ? 'حالة فارغة' : 'Empty State'}
+        </h1>
+        <p className="text-lg text-muted-foreground">
+          {isRTL
+            ? 'اعرض رسائل تعليمية عندما لا يكون هناك محتوى للعرض'
+            : 'Display helpful messages when there is no content to show'}
+        </p>
+      </div>
 
       {/* Basic Example */}
-      <section className="mb-16">
-        <h2 className="text-2xl font-bold tracking-tight mb-6">
-          {isRTL ? 'الاستخدام الأساسي' : 'Basic Usage'}
-        </h2>
-        <ComponentShowcase code={basicUsage}>
-          <ComponentShowcase.Demo>
-            <Card className="p-8">
-              <EmptyState
-                icon={<FileText />}
-                title={isRTL ? 'لم يتم العثور على مقالات' : 'No articles found'}
-                description={
-                  isRTL
-                    ? 'ابدأ بإنشاء مقالتك الأولى'
-                    : 'Get started by creating your first article'
-                }
-                action={
-                  <Button>
-                    <Plus className="me-2 h-4 w-4" />
-                    {isRTL ? 'إنشاء مقالة' : 'Create Article'}
-                  </Button>
-                }
-              />
-            </Card>
-          </ComponentShowcase.Demo>
-        </ComponentShowcase>
-      </section>
+      <ComponentShowcase
+        title={isRTL ? 'الاستخدام الأساسي' : 'Basic Usage'}
+        description={isRTL ? 'حالة فارغة بسيطة مع أيقونة وعنوان ووصف وإجراء' : 'Simple empty state with icon, title, description, and action'}
+      >
+        <Card className="p-8">
+          <EmptyState
+            icon={<FileText />}
+            title={isRTL ? 'لم يتم العثور على مقالات' : 'No articles found'}
+            description={
+              isRTL
+                ? 'ابدأ بإنشاء مقالتك الأولى'
+                : 'Get started by creating your first article'
+            }
+            action={
+              <Button>
+                <Plus className="me-2 h-4 w-4" />
+                {isRTL ? 'إنشاء مقالة' : 'Create Article'}
+              </Button>
+            }
+          />
+        </Card>
+      </ComponentShowcase>
+
+      <CodeBlock
+        code={basicUsage}
+        language="tsx"
+        title={isRTL ? 'الكود' : 'Code'}
+      />
 
       {/* Without Action */}
-      <section className="mb-16">
-        <h2 className="text-2xl font-bold tracking-tight mb-6">
-          {isRTL ? 'بدون إجراء' : 'Without Action'}
-        </h2>
-        <ComponentShowcase code={withoutAction}>
-          <ComponentShowcase.Demo>
-            <Card className="p-8">
-              <EmptyState
-                icon={<Inbox />}
-                title={isRTL ? 'البريد الوارد فارغ' : 'Inbox is empty'}
-                description={
-                  isRTL
-                    ? 'أنت على اطلاع! لا توجد رسائل جديدة.'
-                    : "You're all caught up! No new messages."
-                }
-              />
-            </Card>
-          </ComponentShowcase.Demo>
-        </ComponentShowcase>
-      </section>
+      <ComponentShowcase
+        title={isRTL ? 'بدون إجراء' : 'Without Action'}
+        description={isRTL ? 'حالة فارغة بدون زر إجراء' : 'Empty state without action button'}
+      >
+        <Card className="p-8">
+          <EmptyState
+            icon={<Inbox />}
+            title={isRTL ? 'البريد الوارد فارغ' : 'Inbox is empty'}
+            description={
+              isRTL
+                ? 'أنت على اطلاع! لا توجد رسائل جديدة.'
+                : "You're all caught up! No new messages."
+            }
+          />
+        </Card>
+      </ComponentShowcase>
+
+      <CodeBlock code={withoutAction} language="tsx" />
 
       {/* Search Results */}
-      <section className="mb-16">
-        <h2 className="text-2xl font-bold tracking-tight mb-6">
-          {isRTL ? 'نتائج البحث' : 'Search Results'}
-        </h2>
-        <ComponentShowcase code={searchResults}>
-          <ComponentShowcase.Demo>
-            <Card className="p-8">
-              <EmptyState
-                icon={<Search />}
-                title={isRTL ? 'لم يتم العثور على نتائج' : 'No results found'}
-                description={
-                  isRTL
-                    ? 'حاول تعديل البحث أو الفلتر للعثور على ما تبحث عنه.'
-                    : "Try adjusting your search or filter to find what you're looking for."
-                }
-                action={
-                  <Button variant="outline">
-                    {isRTL ? 'مسح الفلاتر' : 'Clear Filters'}
-                  </Button>
-                }
-              />
-            </Card>
-          </ComponentShowcase.Demo>
-        </ComponentShowcase>
-      </section>
+      <ComponentShowcase
+        title={isRTL ? 'نتائج البحث' : 'Search Results'}
+        description={isRTL ? 'حالة فارغة لنتائج البحث' : 'Empty state for search results'}
+      >
+        <Card className="p-8">
+          <EmptyState
+            icon={<Search />}
+            title={isRTL ? 'لم يتم العثور على نتائج' : 'No results found'}
+            description={
+              isRTL
+                ? 'حاول تعديل البحث أو الفلتر للعثور على ما تبحث عنه.'
+                : "Try adjusting your search or filter to find what you're looking for."
+            }
+            action={
+              <Button variant="outline">
+                {isRTL ? 'مسح الفلاتر' : 'Clear Filters'}
+              </Button>
+            }
+          />
+        </Card>
+      </ComponentShowcase>
+
+      <CodeBlock code={searchResults} language="tsx" />
 
       {/* Multiple Actions */}
-      <section className="mb-16">
-        <h2 className="text-2xl font-bold tracking-tight mb-6">
-          {isRTL ? 'إجراءات متعددة' : 'Multiple Actions'}
-        </h2>
-        <ComponentShowcase code={multipleActions}>
-          <ComponentShowcase.Demo>
-            <Card className="p-8">
-              <EmptyState
-                icon={<Users />}
-                title={isRTL ? 'لا يوجد أعضاء فريق بعد' : 'No team members yet'}
-                description={
-                  isRTL
-                    ? 'ادع فريقك لبدء التعاون'
-                    : 'Invite your team to start collaborating'
-                }
-                action={
-                  <>
-                    <Button>
-                      <Plus className="me-2 h-4 w-4" />
-                      {isRTL ? 'دعوة أعضاء' : 'Invite Members'}
-                    </Button>
-                    <Button variant="outline">
-                      {isRTL ? 'معرفة المزيد' : 'Learn More'}
-                    </Button>
-                  </>
-                }
-              />
-            </Card>
-          </ComponentShowcase.Demo>
-        </ComponentShowcase>
-      </section>
+      <ComponentShowcase
+        title={isRTL ? 'إجراءات متعددة' : 'Multiple Actions'}
+        description={isRTL ? 'حالة فارغة مع عدة أزرار إجراء' : 'Empty state with multiple action buttons'}
+      >
+        <Card className="p-8">
+          <EmptyState
+            icon={<Users />}
+            title={isRTL ? 'لا يوجد أعضاء فريق بعد' : 'No team members yet'}
+            description={
+              isRTL
+                ? 'ادع فريقك لبدء التعاون'
+                : 'Invite your team to start collaborating'
+            }
+            action={
+              <>
+                <Button>
+                  <Plus className="me-2 h-4 w-4" />
+                  {isRTL ? 'دعوة أعضاء' : 'Invite Members'}
+                </Button>
+                <Button variant="outline">
+                  {isRTL ? 'معرفة المزيد' : 'Learn More'}
+                </Button>
+              </>
+            }
+          />
+        </Card>
+      </ComponentShowcase>
+
+      <CodeBlock code={multipleActions} language="tsx" />
 
       {/* Props */}
       <div className="space-y-4">
@@ -316,7 +291,7 @@ export function Example() {
             </ul>
           </div>
         </div>
-      </main>
+      </div>
     </div>
   )
 }
