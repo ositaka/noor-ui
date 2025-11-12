@@ -69,7 +69,7 @@ export const DashboardLazy = dynamic(
 
 // E-commerce
 export const EcommerceLazy = dynamic(
-  () => import('./ecommerce/page').then(mod => ({ default: mod.default })),
+  () => import('@/app/(docs)/examples/ecommerce/page').then(mod => ({ default: mod.default })),
   {
     loading: () => (
       <div className="min-h-screen flex items-center justify-center">
