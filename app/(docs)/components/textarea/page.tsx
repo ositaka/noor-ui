@@ -10,55 +10,58 @@ import { Separator } from '@/components/ui/separator'
 import { ComponentShowcase } from '@/components/docs/component-showcase'
 import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
-const textareaProps: PropDefinition[] = [
+import { useDirection } from '@/components/providers/direction-provider'
+import { content } from '@/lib/i18n'
+
+const getTextareaProps = (t: typeof content.en | typeof content.ar): PropDefinition[] => [
   {
     name: 'placeholder',
     type: 'string',
     default: 'undefined',
     required: false,
-    description: 'Placeholder text shown when textarea is empty',
+    description: t.textareaComponent.props.placeholder,
   },
   {
     name: 'disabled',
     type: 'boolean',
     default: 'false',
     required: false,
-    description: 'Disables the textarea',
+    description: t.textareaComponent.props.disabled,
   },
   {
     name: 'readOnly',
     type: 'boolean',
     default: 'false',
     required: false,
-    description: 'Makes the textarea read-only',
+    description: t.textareaComponent.props.readOnly,
   },
   {
     name: 'required',
     type: 'boolean',
     default: 'false',
     required: false,
-    description: 'Marks the textarea as required',
+    description: t.textareaComponent.props.required,
   },
   {
     name: 'rows',
     type: 'number',
     default: 'undefined',
     required: false,
-    description: 'Number of visible text rows',
+    description: t.textareaComponent.props.rows,
   },
   {
     name: 'maxLength',
     type: 'number',
     default: 'undefined',
     required: false,
-    description: 'Maximum number of characters allowed',
+    description: t.textareaComponent.props.maxLength,
   },
   {
     name: 'className',
     type: 'string',
     default: 'undefined',
     required: false,
-    description: 'Additional CSS classes to apply',
+    description: t.textareaComponent.props.className,
   },
 ]
 
@@ -215,6 +218,10 @@ const rtlCode = `// RTL support is automatic!
 </div>`
 
 export default function TextareaPage() {
+  const { locale } = useDirection()
+  const t = content[locale]
+  const textareaProps = getTextareaProps(t)
+
   const [value, setValue] = React.useState('')
   const [validatedValue, setValidatedValue] = React.useState('')
   const [error, setError] = React.useState('')
@@ -222,7 +229,7 @@ export default function TextareaPage() {
 
   const validate = (text: string) => {
     if (text && text.length < 10) {
-      setError('Message must be at least 10 characters')
+      setError(t.textareaComponent.validation.minCharacters)
     } else {
       setError('')
     }
@@ -247,37 +254,36 @@ export default function TextareaPage() {
           <ol className="flex items-center gap-2 text-sm text-muted-foreground">
             <li>
               <Link href="/" className="hover:text-foreground transition-colors">
-                Home
+                {t.common.home}
               </Link>
             </li>
             <li>/</li>
             <li>
               <Link href="/components" className="hover:text-foreground transition-colors">
-                Components
+                {t.nav.components}
               </Link>
             </li>
             <li>/</li>
-            <li className="text-foreground font-medium">Textarea</li>
+            <li className="text-foreground font-medium">{t.textareaComponent.title}</li>
           </ol>
         </nav>
 
         {/* Page Header */}
         <div className="mb-12">
-          <h1 className="text-4xl font-bold tracking-tight mb-4">Textarea</h1>
+          <h1 className="text-4xl font-bold tracking-tight mb-4">{t.textareaComponent.title}</h1>
           <p className="text-xl text-muted-foreground max-w-3xl">
-            Multi-line text input for longer content. Supports auto-resize, character counting, and
-            full RTL support with proper text alignment.
+            {t.textareaComponent.description}
           </p>
         </div>
 
         {/* Preview */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Preview</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.textareaComponent.preview}</h2>
           <ComponentShowcase>
             <ComponentShowcase.Demo>
               <div className="w-full max-w-md space-y-2">
-                <Label htmlFor="preview">Message</Label>
-                <Textarea id="preview" placeholder="Enter your message" />
+                <Label htmlFor="preview">{t.textareaComponent.labels.message}</Label>
+                <Textarea id="preview" placeholder={t.textareaComponent.placeholders.enterMessage} />
               </div>
             </ComponentShowcase.Demo>
           </ComponentShowcase>
@@ -285,29 +291,29 @@ export default function TextareaPage() {
 
         {/* Installation */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Installation</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.textareaComponent.installation}</h2>
           <CodeBlock code={installCode} language="bash" title="Terminal" />
         </section>
 
         {/* Usage */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Usage</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.textareaComponent.usage}</h2>
           <CodeBlock code={basicUsageCode} language="tsx" title="React" />
         </section>
 
         {/* Examples */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Examples</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.textareaComponent.examples.title}</h2>
 
           <div className="space-y-8">
             {/* With Label */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">With Label</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.textareaComponent.examples.withLabel}</h3>
               <Card>
                 <CardContent className="p-6">
                   <div className="max-w-md space-y-2">
-                    <Label htmlFor="bio">Bio</Label>
-                    <Textarea id="bio" placeholder="Tell us about yourself" />
+                    <Label htmlFor="bio">{t.textareaComponent.labels.bio}</Label>
+                    <Textarea id="bio" placeholder={t.textareaComponent.placeholders.tellAboutYourself} />
                   </div>
                 </CardContent>
               </Card>
@@ -318,24 +324,24 @@ export default function TextareaPage() {
 
             {/* Custom Height */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">Custom Height & Resize</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.textareaComponent.examples.customHeight}</h3>
               <Card>
                 <CardContent className="p-6 space-y-4">
                   <div className="space-y-2">
-                    <Label>Fixed height (3 rows)</Label>
+                    <Label>{t.textareaComponent.values.fixedHeight}</Label>
                     <Textarea rows={3} placeholder="3 rows" />
                   </div>
                   <div className="space-y-2">
-                    <Label>Custom height</Label>
-                    <Textarea className="min-h-[150px]" placeholder="Custom height" />
+                    <Label>{t.textareaComponent.values.customHeight}</Label>
+                    <Textarea className="min-h-[150px]" placeholder={t.textareaComponent.values.customHeight} />
                   </div>
                   <div className="space-y-2">
-                    <Label>Vertically resizable</Label>
-                    <Textarea className="resize-y" placeholder="Vertically resizable" />
+                    <Label>{t.textareaComponent.values.verticallyResizable}</Label>
+                    <Textarea className="resize-y" placeholder={t.textareaComponent.values.verticallyResizable} />
                   </div>
                   <div className="space-y-2">
-                    <Label>Non-resizable</Label>
-                    <Textarea className="resize-none" placeholder="Non-resizable" />
+                    <Label>{t.textareaComponent.values.nonResizable}</Label>
+                    <Textarea className="resize-none" placeholder={t.textareaComponent.values.nonResizable} />
                   </div>
                 </CardContent>
               </Card>
@@ -346,17 +352,17 @@ export default function TextareaPage() {
 
             {/* Character Count */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">With Character Count</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.textareaComponent.examples.characterCount}</h3>
               <Card>
                 <CardContent className="p-6">
                   <div className="max-w-md space-y-2">
-                    <Label htmlFor="description">Description</Label>
+                    <Label htmlFor="description">{t.textareaComponent.labels.description}</Label>
                     <Textarea
                       id="description"
                       value={value}
                       onChange={(e) => setValue(e.target.value)}
                       maxLength={maxLength}
-                      placeholder="Enter description"
+                      placeholder={t.textareaComponent.placeholders.enterDescription}
                     />
                     <p className="text-xs text-muted-foreground text-end">
                       {value.length} / {maxLength}
@@ -371,19 +377,19 @@ export default function TextareaPage() {
 
             {/* Disabled and Read-only */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">Disabled and Read-only</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.textareaComponent.examples.disabled}</h3>
               <Card>
                 <CardContent className="p-6 space-y-4">
                   <div className="space-y-2">
-                    <Label htmlFor="disabled">Disabled</Label>
-                    <Textarea id="disabled" disabled placeholder="Disabled textarea" />
+                    <Label htmlFor="disabled">{t.textareaComponent.labels.disabled}</Label>
+                    <Textarea id="disabled" disabled placeholder={t.textareaComponent.placeholders.disabledTextarea} />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="readonly">Read-only</Label>
+                    <Label htmlFor="readonly">{t.textareaComponent.labels.readonly}</Label>
                     <Textarea
                       id="readonly"
                       readOnly
-                      value="This text cannot be edited."
+                      value={t.textareaComponent.values.readonlyText}
                     />
                   </div>
                 </CardContent>
@@ -395,11 +401,11 @@ export default function TextareaPage() {
 
             {/* With Validation */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">With Validation</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.textareaComponent.examples.validation}</h3>
               <Card>
                 <CardContent className="p-6">
                   <div className="max-w-md space-y-2">
-                    <Label htmlFor="feedback">Feedback</Label>
+                    <Label htmlFor="feedback">{t.textareaComponent.labels.feedback}</Label>
                     <Textarea
                       id="feedback"
                       value={validatedValue}
@@ -408,11 +414,11 @@ export default function TextareaPage() {
                         validate(e.target.value)
                       }}
                       className={error ? 'border-destructive' : ''}
-                      placeholder="Enter your feedback (min 10 characters)"
+                      placeholder={t.textareaComponent.placeholders.enterFeedback}
                     />
                     {error && <p className="text-sm text-destructive">{error}</p>}
                     {validatedValue.length >= 10 && !error && (
-                      <p className="text-sm text-green-600 dark:text-green-500">Looks good!</p>
+                      <p className="text-sm text-green-600 dark:text-green-500">{t.textareaComponent.validation.looksGood}</p>
                     )}
                   </div>
                 </CardContent>
@@ -424,20 +430,20 @@ export default function TextareaPage() {
 
             {/* Auto-expand */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">Auto-expanding</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.textareaComponent.examples.autoExpand}</h3>
               <Card>
                 <CardContent className="p-6">
                   <div className="max-w-md space-y-2">
-                    <Label>Auto-expanding textarea</Label>
+                    <Label>{t.textareaComponent.labels.autoExpanding}</Label>
                     <Textarea
                       ref={textareaRef}
                       onInput={handleInput}
-                      placeholder="Type to expand..."
+                      placeholder={t.textareaComponent.placeholders.typeToExpand}
                       className="resize-none overflow-hidden"
                       rows={1}
                     />
                     <p className="text-xs text-muted-foreground">
-                      Height adjusts automatically as you type
+                      {t.textareaComponent.values.heightAdjusts}
                     </p>
                   </div>
                 </CardContent>
@@ -449,7 +455,7 @@ export default function TextareaPage() {
 
             {/* In Forms */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">In Forms</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.textareaComponent.examples.inForms}</h3>
               <Card>
                 <CardContent className="p-6">
                   <form
@@ -460,7 +466,7 @@ export default function TextareaPage() {
                     }}
                   >
                     <div className="space-y-2">
-                      <Label htmlFor="subject">Subject</Label>
+                      <Label htmlFor="subject">{t.textareaComponent.labels.subject}</Label>
                       <input
                         id="subject"
                         required
@@ -469,12 +475,12 @@ export default function TextareaPage() {
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="message">Message</Label>
+                      <Label htmlFor="message">{t.textareaComponent.labels.message}</Label>
                       <Textarea
                         id="message"
                         required
                         rows={5}
-                        placeholder="Enter your message"
+                        placeholder={t.textareaComponent.placeholders.enterMessage}
                       />
                     </div>
 
@@ -491,12 +497,12 @@ export default function TextareaPage() {
 
         {/* Props */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Props</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.textareaComponent.props.title}</h2>
           <PropsTable props={textareaProps} />
           <Card className="mt-4">
             <CardContent className="p-6">
               <p className="text-sm text-muted-foreground">
-                The Textarea component extends all standard HTML textarea attributes including{' '}
+                {t.textareaComponent.props.note}{' '}
                 <code className="bg-muted px-1 rounded">value</code>,{' '}
                 <code className="bg-muted px-1 rounded">onChange</code>,{' '}
                 <code className="bg-muted px-1 rounded">onBlur</code>, and more.
@@ -507,31 +513,27 @@ export default function TextareaPage() {
 
         {/* Accessibility */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Accessibility</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.textareaComponent.accessibility.title}</h2>
           <Card>
             <CardContent className="p-6 space-y-4">
               <div>
-                <h3 className="font-semibold mb-2">Always Use Labels</h3>
+                <h3 className="font-semibold mb-2">{t.textareaComponent.accessibility.alwaysUseLabels}</h3>
                 <p className="text-muted-foreground">
-                  Always pair textareas with labels using the{' '}
-                  <code className="bg-muted px-1 rounded">htmlFor</code> attribute. This is
-                  essential for screen readers and improves usability.
+                  {t.textareaComponent.accessibility.alwaysUseLabelsDesc}
                 </p>
               </div>
               <Separator />
               <div>
-                <h3 className="font-semibold mb-2">Placeholder Text</h3>
+                <h3 className="font-semibold mb-2">{t.textareaComponent.accessibility.placeholderText}</h3>
                 <p className="text-muted-foreground">
-                  Don&apos;t rely solely on placeholder text for instructions. Use labels and
-                  helper text. Placeholders disappear when typing.
+                  {t.textareaComponent.accessibility.placeholderTextDesc}
                 </p>
               </div>
               <Separator />
               <div>
-                <h3 className="font-semibold mb-2">Error Messages</h3>
+                <h3 className="font-semibold mb-2">{t.textareaComponent.accessibility.errorMessages}</h3>
                 <p className="text-muted-foreground">
-                  Associate error messages with textareas using{' '}
-                  <code className="bg-muted px-1 rounded">aria-describedby</code>:
+                  {t.textareaComponent.accessibility.errorMessagesDesc}
                 </p>
                 <CodeBlock
                   code={`<Textarea
@@ -546,10 +548,9 @@ export default function TextareaPage() {
               </div>
               <Separator />
               <div>
-                <h3 className="font-semibold mb-2">Character Limits</h3>
+                <h3 className="font-semibold mb-2">{t.textareaComponent.accessibility.characterLimits}</h3>
                 <p className="text-muted-foreground">
-                  When using <code className="bg-muted px-1 rounded">maxLength</code>, provide
-                  visual feedback about the character count so users know how much space they have.
+                  {t.textareaComponent.accessibility.characterLimitsDesc}
                 </p>
               </div>
             </CardContent>
@@ -558,30 +559,29 @@ export default function TextareaPage() {
 
         {/* RTL Considerations */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">RTL Considerations</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.textareaComponent.rtl.title}</h2>
           <Card>
             <CardContent className="p-6 space-y-4">
               <p className="text-muted-foreground">
-                Textareas automatically support RTL text direction. Text alignment and scrollbar
-                position adapt based on the text direction.
+                {t.textareaComponent.rtl.description}
               </p>
               <CodeBlock code={rtlCode} language="tsx" />
               <div className="grid gap-4 md:grid-cols-2 mt-6">
                 <div className="space-y-2">
-                  <h4 className="font-semibold text-sm">LTR (English)</h4>
+                  <h4 className="font-semibold text-sm">{t.textareaComponent.rtl.ltr}</h4>
                   <div dir="ltr">
                     <div className="space-y-2">
-                      <Label htmlFor="ltr-textarea">Message</Label>
+                      <Label htmlFor="ltr-textarea">{t.textareaComponent.rtl.messageAr}</Label>
                       <Textarea
                         id="ltr-textarea"
-                        placeholder="Type your message here"
+                        placeholder={t.textareaComponent.placeholders.typeHere}
                         rows={3}
                       />
                     </div>
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <h4 className="font-semibold text-sm">RTL (العربية)</h4>
+                  <h4 className="font-semibold text-sm">{t.textareaComponent.rtl.rtlLabel}</h4>
                   <div dir="rtl">
                     <div className="space-y-2">
                       <Label htmlFor="rtl-textarea">الرسالة</Label>
@@ -596,29 +596,29 @@ export default function TextareaPage() {
 
         {/* Related Components */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Related Components</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.textareaComponent.related.title}</h2>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             <Link href="/components/input">
               <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold">Input</h3>
-                  <p className="text-sm text-muted-foreground mt-1">Single-line text input</p>
+                  <h3 className="font-semibold">{t.textareaComponent.related.input}</h3>
+                  <p className="text-sm text-muted-foreground mt-1">{t.textareaComponent.related.inputDesc}</p>
                 </CardContent>
               </Card>
             </Link>
             <Link href="/components/label">
               <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold">Label</h3>
-                  <p className="text-sm text-muted-foreground mt-1">Labels for form inputs</p>
+                  <h3 className="font-semibold">{t.textareaComponent.related.label}</h3>
+                  <p className="text-sm text-muted-foreground mt-1">{t.textareaComponent.related.labelDesc}</p>
                 </CardContent>
               </Card>
             </Link>
             <Link href="/components/button">
               <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold">Button</h3>
-                  <p className="text-sm text-muted-foreground mt-1">Form submit buttons</p>
+                  <h3 className="font-semibold">{t.textareaComponent.related.button}</h3>
+                  <p className="text-sm text-muted-foreground mt-1">{t.textareaComponent.related.buttonDesc}</p>
                 </CardContent>
               </Card>
             </Link>

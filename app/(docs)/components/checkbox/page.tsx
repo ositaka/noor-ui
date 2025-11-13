@@ -10,55 +10,58 @@ import { Separator } from '@/components/ui/separator'
 import { ComponentShowcase } from '@/components/docs/component-showcase'
 import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
-const checkboxProps: PropDefinition[] = [
+import { useDirection } from '@/components/providers/direction-provider'
+import { content } from '@/lib/i18n'
+
+const getCheckboxProps = (t: typeof content.en | typeof content.ar): PropDefinition[] => [
   {
     name: 'checked',
     type: "boolean | 'indeterminate'",
     default: 'false',
     required: false,
-    description: 'The controlled checked state of the checkbox',
+    description: t.checkboxComponent.props.checked,
   },
   {
     name: 'defaultChecked',
     type: 'boolean',
     default: 'false',
     required: false,
-    description: 'The default checked state (uncontrolled)',
+    description: t.checkboxComponent.props.defaultChecked,
   },
   {
     name: 'onCheckedChange',
     type: '(checked: boolean | "indeterminate") => void',
     default: 'undefined',
     required: false,
-    description: 'Event handler called when the checked state changes',
+    description: t.checkboxComponent.props.onCheckedChange,
   },
   {
     name: 'disabled',
     type: 'boolean',
     default: 'false',
     required: false,
-    description: 'Disables the checkbox',
+    description: t.checkboxComponent.props.disabled,
   },
   {
     name: 'required',
     type: 'boolean',
     default: 'false',
     required: false,
-    description: 'Marks the checkbox as required',
+    description: t.checkboxComponent.props.required,
   },
   {
     name: 'name',
     type: 'string',
     default: 'undefined',
     required: false,
-    description: 'The name of the checkbox for form submission',
+    description: t.checkboxComponent.props.name,
   },
   {
     name: 'value',
     type: 'string',
     default: 'on',
     required: false,
-    description: 'The value of the checkbox for form submission',
+    description: t.checkboxComponent.props.value,
   },
 ]
 
@@ -205,6 +208,10 @@ const rtlCode = `// RTL support is automatic!
 </div>`
 
 export default function CheckboxPage() {
+  const { locale } = useDirection()
+  const t = content[locale]
+  const checkboxProps = getCheckboxProps(t)
+
   const [checked, setChecked] = React.useState(false)
   const [checkedItems, setCheckedItems] = React.useState({
     item1: false,
@@ -225,32 +232,31 @@ export default function CheckboxPage() {
           <ol className="flex items-center gap-2 text-sm text-muted-foreground">
             <li>
               <Link href="/" className="hover:text-foreground transition-colors">
-                Home
+                {t.common.home}
               </Link>
             </li>
             <li>/</li>
             <li>
               <Link href="/components" className="hover:text-foreground transition-colors">
-                Components
+                {t.nav.components}
               </Link>
             </li>
             <li>/</li>
-            <li className="text-foreground font-medium">Checkbox</li>
+            <li className="text-foreground font-medium">{t.checkboxComponent.title}</li>
           </ol>
         </nav>
 
         {/* Page Header */}
         <div className="mb-12">
-          <h1 className="text-4xl font-bold tracking-tight mb-4">Checkbox</h1>
+          <h1 className="text-4xl font-bold tracking-tight mb-4">{t.checkboxComponent.title}</h1>
           <p className="text-xl text-muted-foreground max-w-3xl">
-            Binary choice input for forms. Supports checked, unchecked, and indeterminate states
-            with full keyboard navigation and RTL support.
+            {t.checkboxComponent.description}
           </p>
         </div>
 
         {/* Preview */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Preview</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.checkboxComponent.preview}</h2>
           <ComponentShowcase>
             <ComponentShowcase.Demo>
               <div className="flex items-center gap-2">
@@ -263,24 +269,24 @@ export default function CheckboxPage() {
 
         {/* Installation */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Installation</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.checkboxComponent.installation}</h2>
           <CodeBlock code={installCode} language="bash" title="Terminal" />
         </section>
 
         {/* Usage */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Usage</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.checkboxComponent.usage}</h2>
           <CodeBlock code={basicUsageCode} language="tsx" title="React" />
         </section>
 
         {/* Examples */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Examples</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.checkboxComponent.examples.title}</h2>
 
           <div className="space-y-8">
             {/* With Label */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">With Label</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.checkboxComponent.examples.withLabel}</h3>
               <Card>
                 <CardContent className="p-6 space-y-3">
                   <div className="flex items-center gap-2">
@@ -304,7 +310,7 @@ export default function CheckboxPage() {
 
             {/* Indeterminate State */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">Indeterminate State</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.checkboxComponent.examples.indeterminateState}</h3>
               <Card>
                 <CardContent className="p-6">
                   <div className="space-y-3">
@@ -368,7 +374,7 @@ export default function CheckboxPage() {
 
             {/* Disabled */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">Disabled State</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.checkboxComponent.examples.disabledState}</h3>
               <Card>
                 <CardContent className="p-6 space-y-3">
                   <div className="flex items-center gap-2">
@@ -388,7 +394,7 @@ export default function CheckboxPage() {
 
             {/* Controlled */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">Controlled Component</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.checkboxComponent.examples.controlled}</h3>
               <Card>
                 <CardContent className="p-6">
                   <div className="space-y-4">
@@ -416,7 +422,7 @@ export default function CheckboxPage() {
 
             {/* In Forms */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">In Forms</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.checkboxComponent.examples.inForms}</h3>
               <Card>
                 <CardContent className="p-6">
                   <form
@@ -429,21 +435,21 @@ export default function CheckboxPage() {
                     <div className="space-y-3">
                       <div className="flex items-center gap-2">
                         <Checkbox id="newsletter" name="newsletter" value="yes" />
-                        <Label htmlFor="newsletter">Subscribe to newsletter</Label>
+                        <Label htmlFor="newsletter">{t.checkboxComponent.labels.newsletter}</Label>
                       </div>
                       <div className="flex items-center gap-2">
                         <Checkbox id="updates" name="updates" value="yes" />
-                        <Label htmlFor="updates">Receive product updates</Label>
+                        <Label htmlFor="updates">{t.checkboxComponent.labels.updates}</Label>
                       </div>
                       <div className="flex items-center gap-2">
                         <Checkbox id="form-terms" name="terms" value="yes" required />
                         <Label htmlFor="form-terms">
-                          I agree to the terms and conditions{' '}
-                          <span className="text-destructive">*</span>
+                          {t.checkboxComponent.labels.terms}{' '}
+                          <span className="text-destructive">{t.checkboxComponent.labels.required}</span>
                         </Label>
                       </div>
                     </div>
-                    <Button type="submit">Submit</Button>
+                    <Button type="submit">{t.ui.button.submit}</Button>
                   </form>
                 </CardContent>
               </Card>
@@ -456,52 +462,45 @@ export default function CheckboxPage() {
 
         {/* Props */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Props</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.checkboxComponent.props.title}</h2>
           <PropsTable props={checkboxProps} />
         </section>
 
         {/* Accessibility */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Accessibility</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.checkboxComponent.accessibility.title}</h2>
           <Card>
             <CardContent className="p-6 space-y-4">
               <div>
-                <h3 className="font-semibold mb-2">Keyboard Navigation</h3>
+                <h3 className="font-semibold mb-2">{t.checkboxComponent.accessibility.keyboardNavigation}</h3>
                 <ul className="list-disc list-inside text-muted-foreground space-y-1">
                   <li>
-                    <kbd className="px-1.5 py-0.5 rounded bg-muted">Tab</kbd>: Move focus to/from
-                    checkbox
+                    <kbd className="px-1.5 py-0.5 rounded bg-muted">Tab</kbd>: {t.checkboxComponent.accessibility.keyboardTab}
                   </li>
                   <li>
-                    <kbd className="px-1.5 py-0.5 rounded bg-muted">Space</kbd>: Toggle checkbox
-                    state
+                    <kbd className="px-1.5 py-0.5 rounded bg-muted">Space</kbd>: {t.checkboxComponent.accessibility.keyboardSpace}
                   </li>
                 </ul>
               </div>
               <Separator />
               <div>
-                <h3 className="font-semibold mb-2">Always Use Labels</h3>
+                <h3 className="font-semibold mb-2">{t.checkboxComponent.accessibility.alwaysUseLabels}</h3>
                 <p className="text-muted-foreground">
-                  Always pair checkboxes with labels using the{' '}
-                  <code className="bg-muted px-1 rounded">htmlFor</code> and{' '}
-                  <code className="bg-muted px-1 rounded">id</code> attributes. Clicking the label
-                  toggles the checkbox, improving usability.
+                  {t.checkboxComponent.accessibility.alwaysUseLabelsDesc}
                 </p>
               </div>
               <Separator />
               <div>
-                <h3 className="font-semibold mb-2">Screen Readers</h3>
+                <h3 className="font-semibold mb-2">{t.checkboxComponent.accessibility.screenReaders}</h3>
                 <p className="text-muted-foreground">
-                  The checkbox role is automatically announced. The label provides context about
-                  what the checkbox controls.
+                  {t.checkboxComponent.accessibility.screenReadersDesc}
                 </p>
               </div>
               <Separator />
               <div>
-                <h3 className="font-semibold mb-2">Indeterminate State</h3>
+                <h3 className="font-semibold mb-2">{t.checkboxComponent.accessibility.indeterminateState}</h3>
                 <p className="text-muted-foreground">
-                  The indeterminate state is announced as &quot;mixed&quot; by screen readers,
-                  indicating partial selection.
+                  {t.checkboxComponent.accessibility.indeterminateStateDesc}
                 </p>
               </div>
             </CardContent>
@@ -510,32 +509,31 @@ export default function CheckboxPage() {
 
         {/* RTL Considerations */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">RTL Considerations</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.checkboxComponent.rtl.title}</h2>
           <Card>
             <CardContent className="p-6 space-y-4">
               <p className="text-muted-foreground">
-                Checkboxes automatically support RTL layout. The checkbox and label maintain proper
-                spacing and alignment in both directions.
+                {t.checkboxComponent.rtl.description}
               </p>
               <CodeBlock code={rtlCode} language="tsx" />
               <div className="grid gap-4 md:grid-cols-2 mt-6">
                 <div className="space-y-2">
-                  <h4 className="font-semibold text-sm">LTR (English)</h4>
+                  <h4 className="font-semibold text-sm">{t.checkboxComponent.rtl.ltr}</h4>
                   <div dir="ltr">
                     <div className="space-y-2 p-4 border rounded-lg">
                       <div className="flex items-center gap-2">
                         <Checkbox id="ltr-1" />
-                        <Label htmlFor="ltr-1">Accept terms</Label>
+                        <Label htmlFor="ltr-1">{t.checkboxComponent.rtl.acceptTermsAr}</Label>
                       </div>
                       <div className="flex items-center gap-2">
                         <Checkbox id="ltr-2" />
-                        <Label htmlFor="ltr-2">Subscribe to newsletter</Label>
+                        <Label htmlFor="ltr-2">{t.checkboxComponent.rtl.subscribeAr}</Label>
                       </div>
                     </div>
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <h4 className="font-semibold text-sm">RTL (العربية)</h4>
+                  <h4 className="font-semibold text-sm">{t.checkboxComponent.rtl.rtlLabel}</h4>
                   <div dir="rtl">
                     <div className="space-y-2 p-4 border rounded-lg">
                       <div className="flex items-center gap-2">
@@ -556,29 +554,29 @@ export default function CheckboxPage() {
 
         {/* Related Components */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Related Components</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.checkboxComponent.related.title}</h2>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             <Link href="/components/radio-group">
               <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold">Radio Group</h3>
-                  <p className="text-sm text-muted-foreground mt-1">Mutually exclusive options</p>
+                  <h3 className="font-semibold">{t.checkboxComponent.related.radioGroup}</h3>
+                  <p className="text-sm text-muted-foreground mt-1">{t.checkboxComponent.related.radioGroupDesc}</p>
                 </CardContent>
               </Card>
             </Link>
             <Link href="/components/label">
               <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold">Label</h3>
-                  <p className="text-sm text-muted-foreground mt-1">Labels for form inputs</p>
+                  <h3 className="font-semibold">{t.checkboxComponent.related.label}</h3>
+                  <p className="text-sm text-muted-foreground mt-1">{t.checkboxComponent.related.labelDesc}</p>
                 </CardContent>
               </Card>
             </Link>
             <Link href="/components/switch">
               <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold">Switch</h3>
-                  <p className="text-sm text-muted-foreground mt-1">Toggle switch for settings</p>
+                  <h3 className="font-semibold">{t.checkboxComponent.related.switch}</h3>
+                  <p className="text-sm text-muted-foreground mt-1">{t.checkboxComponent.related.switchDesc}</p>
                 </CardContent>
               </Card>
             </Link>

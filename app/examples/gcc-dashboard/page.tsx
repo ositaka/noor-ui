@@ -4,6 +4,7 @@ import * as React from 'react'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import { useDirection } from '@/components/providers/direction-provider'
+import { content } from '@/lib/i18n'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
@@ -35,6 +36,7 @@ import {
 export default function GCCDashboardPage() {
   const { direction, locale } = useDirection()
   const isRTL = direction === 'rtl'
+  const t = content[locale]
 
   // Sample prayer times data
   const prayerTimes = [
@@ -48,28 +50,28 @@ export default function GCCDashboardPage() {
   // Sample statistics
   const stats = [
     {
-      title: isRTL ? 'إجمالي التبرعات' : 'Total Donations',
+      title: t.gccDashboard.stats.totalDonations,
       value: 2456789,
       format: 'currency' as const,
       change: 0.12,
       icon: Heart,
     },
     {
-      title: isRTL ? 'المستفيدون' : 'Beneficiaries Helped',
+      title: t.gccDashboard.stats.beneficiaries,
       value: 15234,
       format: 'number' as const,
       change: 0.08,
       icon: Users,
     },
     {
-      title: isRTL ? 'معدل الإنجاز' : 'Completion Rate',
+      title: t.gccDashboard.stats.completionRate,
       value: 0.945,
       format: 'percentage' as const,
       change: 0.05,
       icon: TrendingUp,
     },
     {
-      title: isRTL ? 'المشاريع النشطة' : 'Active Projects',
+      title: t.gccDashboard.stats.activeProjects,
       value: 87,
       format: 'number' as const,
       change: 0.15,
@@ -88,7 +90,7 @@ export default function GCCDashboardPage() {
                 <Home className="h-5 w-5 text-primary-foreground" />
               </div>
               <span className="font-bold text-xl hidden sm:inline">
-                {isRTL ? 'مجتمع الخير' : 'Community Platform'}
+                {t.gccDashboard.title}
               </span>
             </Link>
           </div>
@@ -105,7 +107,7 @@ export default function GCCDashboardPage() {
             />
 
             <Button variant="outline" size="sm" asChild>
-              <Link href="/examples">{isRTL ? 'الأمثلة' : 'Examples'}</Link>
+              <Link href="/examples">{t.nav.examples}</Link>
             </Button>
           </div>
         </div>
@@ -118,18 +120,18 @@ export default function GCCDashboardPage() {
             <ol className="flex items-center gap-2 text-sm text-muted-foreground">
               <li>
                 <Link href="/" className="hover:text-foreground transition-colors">
-                  {isRTL ? 'الرئيسية' : 'Home'}
+                  {t.common.home}
                 </Link>
               </li>
               <li>/</li>
               <li>
                 <Link href="/examples" className="hover:text-foreground transition-colors">
-                  {isRTL ? 'الأمثلة' : 'Examples'}
+                  {t.nav.examples}
                 </Link>
               </li>
               <li>/</li>
               <li className="text-foreground font-medium">
-                {isRTL ? 'مجتمع الخير' : 'GCC Dashboard'}
+                {t.gccDashboard.subtitle}
               </li>
             </ol>
           </nav>
@@ -144,12 +146,10 @@ export default function GCCDashboardPage() {
             {/* Welcome Section */}
             <div className="space-y-2">
               <h1 className="text-4xl font-bold tracking-tight">
-                {isRTL ? 'مرحباً بك' : 'Welcome Back'}
+                {t.gccDashboard.welcome}
               </h1>
               <p className="text-muted-foreground text-lg">
-                {isRTL
-                  ? 'نظرة عامة على نشاطات المجتمع والتبرعات الخيرية'
-                  : 'Overview of your community activities and charitable giving'}
+                {t.gccDashboard.description}
               </p>
             </div>
 
@@ -189,7 +189,7 @@ export default function GCCDashboardPage() {
                             className={`text-xs font-medium ${isPositive ? 'text-green-600' : 'text-red-600'}`}
                           />
                           <span className="text-muted-foreground text-xs">
-                            {isRTL ? 'من الشهر الماضي' : 'from last month'}
+                            {t.gccDashboard.fromLastMonth}
                           </span>
                         </div>
                       </div>
@@ -204,11 +204,11 @@ export default function GCCDashboardPage() {
               <TabsList>
                 <TabsTrigger value="zakat">
                   <DollarSign className="h-4 w-4 me-2" />
-                  {isRTL ? 'حاسبة الزكاة' : 'Zakat Calculator'}
+                  {t.gccDashboard.tabs.zakatCalculator}
                 </TabsTrigger>
                 <TabsTrigger value="events">
                   <Calendar className="h-4 w-4 me-2" />
-                  {isRTL ? 'الفعاليات' : 'Events'}
+                  {t.gccDashboard.tabs.events}
                 </TabsTrigger>
               </TabsList>
 
@@ -216,11 +216,9 @@ export default function GCCDashboardPage() {
               <TabsContent value="zakat" className="space-y-4">
                 <Card>
                   <CardHeader>
-                    <CardTitle>{isRTL ? 'احسب زكاتك' : 'Calculate Your Zakat'}</CardTitle>
+                    <CardTitle>{t.gccDashboard.zakat.title}</CardTitle>
                     <CardDescription>
-                      {isRTL
-                        ? 'احسب الزكاة المستحقة على أموالك وأصولك'
-                        : 'Calculate your Zakat obligation on wealth and assets'}
+                      {t.gccDashboard.zakat.description}
                     </CardDescription>
                   </CardHeader>
                   <CardContent>
@@ -241,9 +239,9 @@ export default function GCCDashboardPage() {
                     <CardHeader>
                       <div className="flex items-center justify-between">
                         <CardTitle className="text-lg">
-                          {isRTL ? 'إفطار جماعي' : 'Community Iftar'}
+                          {t.gccDashboard.events.communityIftar}
                         </CardTitle>
-                        <Badge>{isRTL ? 'قريباً' : 'Upcoming'}</Badge>
+                        <Badge>{t.gccDashboard.events.upcoming}</Badge>
                       </div>
                       <CardDescription>
                         <HijriDate
@@ -256,12 +254,10 @@ export default function GCCDashboardPage() {
                     </CardHeader>
                     <CardContent>
                       <p className="text-sm text-muted-foreground mb-4">
-                        {isRTL
-                          ? 'انضم إلينا في إفطار جماعي يجمع أفراد المجتمع'
-                          : 'Join us for a community meal bringing everyone together'}
+                        {t.gccDashboard.events.iftarDescription}
                       </p>
                       <Button size="sm" className="w-full">
-                        {isRTL ? 'سجل الآن' : 'Register Now'}
+                        {t.gccDashboard.events.registerNow}
                       </Button>
                     </CardContent>
                   </Card>
@@ -270,9 +266,9 @@ export default function GCCDashboardPage() {
                     <CardHeader>
                       <div className="flex items-center justify-between">
                         <CardTitle className="text-lg">
-                          {isRTL ? 'محاضرة دينية' : 'Religious Lecture'}
+                          {t.gccDashboard.events.religiousLecture}
                         </CardTitle>
-                        <Badge variant="secondary">{isRTL ? 'أسبوعي' : 'Weekly'}</Badge>
+                        <Badge variant="secondary">{t.gccDashboard.events.weekly}</Badge>
                       </div>
                       <CardDescription>
                         <HijriDate
@@ -285,12 +281,10 @@ export default function GCCDashboardPage() {
                     </CardHeader>
                     <CardContent>
                       <p className="text-sm text-muted-foreground mb-4">
-                        {isRTL
-                          ? 'محاضرة أسبوعية عن القيم الإسلامية'
-                          : 'Weekly lecture on Islamic values and teachings'}
+                        {t.gccDashboard.events.lectureDescription}
                       </p>
                       <Button size="sm" variant="outline" className="w-full">
-                        {isRTL ? 'معرفة المزيد' : 'Learn More'}
+                        {t.gccDashboard.events.learnMore}
                       </Button>
                     </CardContent>
                   </Card>
@@ -301,31 +295,28 @@ export default function GCCDashboardPage() {
             {/* Recent Activity */}
             <Card>
               <CardHeader>
-                <CardTitle>{isRTL ? 'النشاط الأخير' : 'Recent Activity'}</CardTitle>
+                <CardTitle>{t.gccDashboard.activity.title}</CardTitle>
                 <CardDescription>
-                  {isRTL ? 'أحدث التبرعات والمساهمات' : 'Latest donations and contributions'}
+                  {t.gccDashboard.activity.description}
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
                   {[
                     {
-                      nameEn: 'Ahmed Mohammed',
-                      nameAr: 'أحمد محمد',
+                      name: t.gccDashboard.activity.donors.ahmed,
                       amount: 5000,
-                      cause: isRTL ? 'مساعدة الأسر المحتاجة' : 'Family Support Fund',
+                      cause: t.gccDashboard.activity.causes.familySupport,
                     },
                     {
-                      nameEn: 'Fatima Ali',
-                      nameAr: 'فاطمة علي',
+                      name: t.gccDashboard.activity.donors.fatima,
                       amount: 2500,
-                      cause: isRTL ? 'صندوق التعليم' : 'Education Fund',
+                      cause: t.gccDashboard.activity.causes.education,
                     },
                     {
-                      nameEn: 'Omar Hassan',
-                      nameAr: 'عمر حسن',
+                      name: t.gccDashboard.activity.donors.omar,
                       amount: 10000,
-                      cause: isRTL ? 'بناء المسجد' : 'Mosque Construction',
+                      cause: t.gccDashboard.activity.causes.mosqueConstruction,
                     },
                   ].map((activity, index) => (
                     <div
@@ -333,7 +324,7 @@ export default function GCCDashboardPage() {
                       className="flex items-center justify-between p-3 rounded-lg border bg-muted/30"
                     >
                       <div>
-                        <p className="font-medium">{isRTL ? activity.nameAr : activity.nameEn}</p>
+                        <p className="font-medium">{activity.name}</p>
                         <p className="text-sm text-muted-foreground">{activity.cause}</p>
                       </div>
                       <ArabicNumber
@@ -367,21 +358,21 @@ export default function GCCDashboardPage() {
             <Card>
               <CardHeader>
                 <CardTitle className="text-lg">
-                  {isRTL ? 'إجراءات سريعة' : 'Quick Actions'}
+                  {t.gccDashboard.quickActions.title}
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-2">
                 <Button className="w-full" size="sm">
                   <Heart className="me-2 h-4 w-4" />
-                  {isRTL ? 'تبرع الآن' : 'Donate Now'}
+                  {t.gccDashboard.quickActions.donateNow}
                 </Button>
                 <Button className="w-full" variant="outline" size="sm">
                   <Users className="me-2 h-4 w-4" />
-                  {isRTL ? 'انضم لحدث' : 'Join Event'}
+                  {t.gccDashboard.quickActions.joinEvent}
                 </Button>
                 <Button className="w-full" variant="outline" size="sm">
                   <BookOpen className="me-2 h-4 w-4" />
-                  {isRTL ? 'تصفح المشاريع' : 'Browse Projects'}
+                  {t.gccDashboard.quickActions.browseProjects}
                 </Button>
               </CardContent>
             </Card>
@@ -390,14 +381,14 @@ export default function GCCDashboardPage() {
             <Card className="bg-primary/5 border-primary/20">
               <CardHeader>
                 <CardTitle className="text-lg">
-                  {isRTL ? 'تأثيرك هذا الشهر' : 'Your Impact This Month'}
+                  {t.gccDashboard.impact.title}
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="space-y-2">
                   <div className="flex justify-between text-sm">
                     <span className="text-muted-foreground">
-                      {isRTL ? 'المساهمات' : 'Contributions'}
+                      {t.gccDashboard.impact.contributions}
                     </span>
                     <ArabicNumber
                       value={3}
@@ -408,7 +399,7 @@ export default function GCCDashboardPage() {
                   </div>
                   <div className="flex justify-between text-sm">
                     <span className="text-muted-foreground">
-                      {isRTL ? 'إجمالي المبلغ' : 'Total Amount'}
+                      {t.gccDashboard.impact.totalAmount}
                     </span>
                     <ArabicNumber
                       value={17500}
@@ -420,7 +411,7 @@ export default function GCCDashboardPage() {
                   </div>
                   <div className="flex justify-between text-sm">
                     <span className="text-muted-foreground">
-                      {isRTL ? 'الأشخاص المساعدون' : 'People Helped'}
+                      {t.gccDashboard.impact.peopleHelped}
                     </span>
                     <ArabicNumber
                       value={45}
@@ -431,9 +422,7 @@ export default function GCCDashboardPage() {
                   </div>
                 </div>
                 <p className="text-xs text-muted-foreground pt-2 border-t">
-                  {isRTL
-                    ? 'شكراً لك على دعمك المستمر للمجتمع'
-                    : 'Thank you for your continued support to the community'}
+                  {t.gccDashboard.impact.thankYou}
                 </p>
               </CardContent>
             </Card>

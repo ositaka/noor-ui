@@ -10,33 +10,12 @@ import { useDirection } from '@/components/providers/direction-provider'
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
+import { content } from '@/lib/i18n'
 
 export function SiteHeader() {
   const { locale } = useDirection()
   const [open, setOpen] = React.useState(false)
-
-  const navItems = {
-    en: {
-      home: 'Home',
-      getStarted: 'Getting Started',
-      components: 'Components',
-      examples: 'Examples',
-      rtlGuide: 'RTL Guide',
-      tokens: 'Tokens',
-      themes: 'Themes',
-    },
-    ar: {
-      home: 'الرئيسية',
-      getStarted: 'ابدأ الآن',
-      components: 'المكونات',
-      examples: 'الأمثلة',
-      rtlGuide: 'دليل RTL',
-      tokens: 'الرموز',
-      themes: 'السمات',
-    },
-  }
-
-  const nav = navItems[locale]
+  const t = content[locale]
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -52,37 +31,37 @@ export function SiteHeader() {
             href="/"
             className="text-sm font-medium transition-colors hover:text-primary"
           >
-            {nav.home}
+            {t.nav.home}
           </Link>
           <Link
             href="/getting-started"
             className="text-sm font-medium transition-colors hover:text-primary"
           >
-            {nav.getStarted}
+            {t.nav.getStarted}
           </Link>
           <Link
             href="/components"
             className="text-sm font-medium transition-colors hover:text-primary"
           >
-            {nav.components}
+            {t.nav.components}
           </Link>
           <Link
             href="/examples"
             className="text-sm font-medium transition-colors hover:text-primary"
           >
-            {nav.examples}
+            {t.nav.examples}
           </Link>
           <Link
             href="/rtl-guide"
             className="text-sm font-medium transition-colors hover:text-primary"
           >
-            {nav.rtlGuide}
+            {t.nav.rtlGuide}
           </Link>
           <Link
             href="/themes"
             className="text-sm font-medium transition-colors hover:text-primary"
           >
-            {nav.themes}
+            {t.nav.themes}
           </Link>
         </nav>
         <div className="flex items-center gap-2">
@@ -111,7 +90,7 @@ export function SiteHeader() {
                   className="text-sm font-medium transition-colors hover:text-primary py-2"
                   onClick={() => setOpen(false)}
                 >
-                  {nav.home}
+                  {t.nav.home}
                 </Link>
                 <Separator />
                 <Link
@@ -119,35 +98,35 @@ export function SiteHeader() {
                   className="text-sm font-medium transition-colors hover:text-primary py-2"
                   onClick={() => setOpen(false)}
                 >
-                  {nav.getStarted}
+                  {t.nav.getStarted}
                 </Link>
                 <Link
                   href="/components"
                   className="text-sm font-medium transition-colors hover:text-primary py-2"
                   onClick={() => setOpen(false)}
                 >
-                  {nav.components}
+                  {t.nav.components}
                 </Link>
                 <Link
                   href="/examples"
                   className="text-sm font-medium transition-colors hover:text-primary py-2"
                   onClick={() => setOpen(false)}
                 >
-                  {nav.examples}
+                  {t.nav.examples}
                 </Link>
                 <Link
                   href="/rtl-guide"
                   className="text-sm font-medium transition-colors hover:text-primary py-2"
                   onClick={() => setOpen(false)}
                 >
-                  {nav.rtlGuide}
+                  {t.nav.rtlGuide}
                 </Link>
                 <Link
                   href="/themes"
                   className="text-sm font-medium transition-colors hover:text-primary py-2"
                   onClick={() => setOpen(false)}
                 >
-                  {nav.themes}
+                  {t.nav.themes}
                 </Link>
               </nav>
             </SheetContent>

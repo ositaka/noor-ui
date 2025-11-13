@@ -16,14 +16,16 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb'
+import { useDirection } from '@/components/providers/direction-provider'
+import { content } from '@/lib/i18n'
 
-const breadcrumbProps: PropDefinition[] = [
+const getBreadcrumbProps = (t: typeof content.en | typeof content.ar): PropDefinition[] => [
   {
     name: 'separator',
     type: 'React.ReactNode',
     default: '<ChevronRight />',
     required: false,
-    description: 'Custom separator element between breadcrumb items',
+    description: t.breadcrumbComponent.props.separator,
   },
 ]
 
@@ -104,6 +106,10 @@ const withIconsCode = `import { Home, Folder, File } from 'lucide-react'
 </Breadcrumb>`
 
 export default function BreadcrumbComponentPage() {
+  const { locale } = useDirection()
+  const t = content[locale]
+  const breadcrumbProps = getBreadcrumbProps(t)
+
   return (
     <div className="min-h-screen">
 
@@ -113,31 +119,31 @@ export default function BreadcrumbComponentPage() {
           <ol className="flex items-center gap-2 text-sm text-muted-foreground">
             <li>
               <Link href="/" className="hover:text-foreground transition-colors">
-                Home
+                {t.common.home}
               </Link>
             </li>
             <li>/</li>
             <li>
               <Link href="/components" className="hover:text-foreground transition-colors">
-                Components
+                {t.nav.components}
               </Link>
             </li>
             <li>/</li>
-            <li className="text-foreground font-medium">Breadcrumb</li>
+            <li className="text-foreground font-medium">{t.breadcrumbComponent.title}</li>
           </ol>
         </nav>
 
         {/* Page Header */}
         <div className="mb-12">
-          <h1 className="text-4xl font-bold tracking-tight mb-4">Breadcrumb</h1>
+          <h1 className="text-4xl font-bold tracking-tight mb-4">{t.breadcrumbComponent.title}</h1>
           <p className="text-xl text-muted-foreground max-w-3xl">
-            Displays the path to the current resource using a hierarchy of links.
+            {t.breadcrumbComponent.description}
           </p>
         </div>
 
         {/* Preview */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Preview</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.breadcrumbComponent.preview}</h2>
           <ComponentShowcase>
             <ComponentShowcase.Demo>
               <Breadcrumb>
@@ -163,19 +169,19 @@ export default function BreadcrumbComponentPage() {
 
         {/* Installation */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-4">Installation</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-4">{t.breadcrumbComponent.installation}</h2>
           <CodeBlock code={installCode} language="bash" />
         </section>
 
         {/* Usage */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-4">Usage</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-4">{t.breadcrumbComponent.usage}</h2>
           <CodeBlock code={basicUsageCode} language="tsx" />
         </section>
 
         {/* Examples */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Examples</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.breadcrumbComponent.examples.title}</h2>
 
           <div className="space-y-8">
             <div>
@@ -269,13 +275,13 @@ export default function BreadcrumbComponentPage() {
 
         {/* Props */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-4">Props</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-4">{t.breadcrumbComponent.props.title}</h2>
           <PropsTable props={breadcrumbProps} />
         </section>
 
         {/* Accessibility */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-4">Accessibility</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-4">{t.breadcrumbComponent.accessibility.title}</h2>
           <Card>
             <CardContent className="p-6 space-y-4">
               <div>
@@ -299,7 +305,7 @@ export default function BreadcrumbComponentPage() {
 
         {/* RTL Support */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-4">RTL Support</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-4">{t.breadcrumbComponent.rtl.title}</h2>
           <Card>
             <CardContent className="p-6">
               <p className="text-sm text-muted-foreground mb-4">

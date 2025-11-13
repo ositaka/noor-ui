@@ -16,6 +16,8 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from '@/components/ui/pagination'
+import { useDirection } from '@/components/providers/direction-provider'
+import { content } from '@/lib/i18n'
 
 const paginationLinkProps: PropDefinition[] = [
   {
@@ -150,6 +152,8 @@ const handlePageChange = (page: number) => {
 </Pagination>`
 
 export default function PaginationPage() {
+  const { locale } = useDirection()
+  const t = content[locale]
   const [currentPage, setCurrentPage] = React.useState(2)
 
   return (
@@ -161,31 +165,31 @@ export default function PaginationPage() {
           <ol className="flex items-center gap-2 text-sm text-muted-foreground">
             <li>
               <Link href="/" className="hover:text-foreground transition-colors">
-                Home
+                {t.common.home}
               </Link>
             </li>
             <li>/</li>
             <li>
               <Link href="/components" className="hover:text-foreground transition-colors">
-                Components
+                {t.nav.components}
               </Link>
             </li>
             <li>/</li>
-            <li className="text-foreground font-medium">Pagination</li>
+            <li className="text-foreground font-medium">{t.paginationComponent.title}</li>
           </ol>
         </nav>
 
         {/* Page Header */}
         <div className="mb-12">
-          <h1 className="text-4xl font-bold tracking-tight mb-4">Pagination</h1>
+          <h1 className="text-4xl font-bold tracking-tight mb-4">{t.paginationComponent.title}</h1>
           <p className="text-xl text-muted-foreground max-w-3xl">
-            Pagination with page navigation, allowing users to navigate through multiple pages of content.
+            {t.paginationComponent.description}
           </p>
         </div>
 
         {/* Preview */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Preview</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.paginationComponent.preview}</h2>
           <ComponentShowcase>
             <ComponentShowcase.Demo>
               <Pagination>
@@ -229,7 +233,7 @@ export default function PaginationPage() {
 
         {/* Examples */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Examples</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.paginationComponent.examples.title}</h2>
 
           <div className="space-y-8">
             <div>
@@ -385,13 +389,13 @@ export default function PaginationPage() {
 
         {/* Props */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-4">Props</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-4">{t.paginationComponent.props.title}</h2>
           <PropsTable props={paginationLinkProps} />
         </section>
 
         {/* Accessibility */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-4">Accessibility</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-4">{t.paginationComponent.accessibility.title}</h2>
           <Card>
             <CardContent className="p-6 space-y-4">
               <div>
@@ -417,7 +421,7 @@ export default function PaginationPage() {
 
         {/* RTL Support */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-4">RTL Support</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-4">{t.paginationComponent.rtl.title}</h2>
           <Card>
             <CardContent className="p-6">
               <p className="text-sm text-muted-foreground mb-4">

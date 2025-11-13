@@ -7,6 +7,8 @@ import { CodeBlock } from '@/components/docs/code-block'
 import { FeatureCard } from '@/components/ui/feature-card'
 import { Sparkles, Package, Settings, Zap, CheckCircle2, ArrowRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { useDirection } from '@/components/providers/direction-provider'
+import { content } from '@/lib/i18n'
 const installationCode = `npm install @noorui/components
 # or
 yarn add @noorui/components
@@ -190,6 +192,9 @@ export function MyComponent() {
 }`
 
 export default function GettingStartedPage() {
+  const { locale } = useDirection()
+  const t = content[locale]
+
   return (
     <div className="min-h-screen">
 
@@ -199,19 +204,19 @@ export default function GettingStartedPage() {
           <ol className="flex items-center gap-2 text-sm text-muted-foreground">
             <li>
               <Link href="/" className="hover:text-foreground transition-colors">
-                Home
+                {t.common.home}
               </Link>
             </li>
             <li>/</li>
-            <li className="text-foreground font-medium">Getting Started</li>
+            <li className="text-foreground font-medium">{t.gettingStarted.title}</li>
           </ol>
         </nav>
 
         {/* Page Header */}
         <div className="max-w-3xl mb-12">
-          <h1 className="text-4xl font-bold tracking-tight mb-4">Getting Started</h1>
+          <h1 className="text-4xl font-bold tracking-tight mb-4">{t.gettingStarted.title}</h1>
           <p className="text-xl text-muted-foreground">
-            Learn how to install and configure Noor UI in your Next.js project. Built with RTL-first principles for seamless bidirectional support.
+            {t.gettingStarted.description}
           </p>
         </div>
 
@@ -220,26 +225,26 @@ export default function GettingStartedPage() {
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             <FeatureCard
               icon={Package}
-              title="Installation"
-              description="Add the package to your project"
+              title={t.gettingStarted.quickLinks.installation}
+              description={t.gettingStarted.quickLinks.installationDesc}
               href="#installation"
             />
             <FeatureCard
               icon={Settings}
-              title="Configuration"
-              description="Set up Tailwind and providers"
+              title={t.gettingStarted.quickLinks.configuration}
+              description={t.gettingStarted.quickLinks.configurationDesc}
               href="#configuration"
             />
             <FeatureCard
               icon={Zap}
-              title="Quick Start"
-              description="Build your first component"
+              title={t.gettingStarted.quickLinks.quickStart}
+              description={t.gettingStarted.quickLinks.quickStartDesc}
               href="#quick-start"
             />
             <FeatureCard
               icon={CheckCircle2}
-              title="Best Practices"
-              description="RTL-first development tips"
+              title={t.gettingStarted.quickLinks.bestPractices}
+              description={t.gettingStarted.quickLinks.bestPracticesDesc}
               href="#rtl-usage"
             />
           </div>
@@ -247,15 +252,15 @@ export default function GettingStartedPage() {
 
         {/* Installation */}
         <section className="mb-16" id="installation">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Installation</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.gettingStarted.installation}</h2>
           <p className="text-muted-foreground mb-4">
-            Install the Noor UI package using your preferred package manager:
+            {t.gettingStarted.installDesc}
           </p>
           <CodeBlock code={installationCode} language="bash" />
 
           <Card className="mt-6">
             <CardContent className="p-6">
-              <h3 className="font-semibold mb-2">Prerequisites</h3>
+              <h3 className="font-semibold mb-2">{t.gettingStarted.prerequisites}</h3>
               <ul className="list-disc list-inside text-sm text-muted-foreground space-y-1">
                 <li>Next.js 14+ (App Router)</li>
                 <li>React 18+</li>
@@ -268,9 +273,9 @@ export default function GettingStartedPage() {
 
         {/* Tailwind Configuration */}
         <section className="mb-16" id="configuration">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Tailwind Configuration</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.gettingStarted.tailwindConfig}</h2>
           <p className="text-muted-foreground mb-4">
-            Configure Tailwind CSS to work with Noor UI. This includes adding the RTL plugin and tailwindcss-logical for bidirectional support.
+            {t.gettingStarted.tailwindConfigDesc}
           </p>
           <CodeBlock code={tailwindConfigCode} language="tsx" />
 
@@ -278,10 +283,10 @@ export default function GettingStartedPage() {
             <CardContent className="p-6">
               <h3 className="font-semibold mb-2 flex items-center gap-2">
                 <span className="text-yellow-600 dark:text-yellow-400">⚠️</span>
-                Important
+                {t.gettingStarted.important}
               </h3>
               <p className="text-sm text-muted-foreground">
-                Make sure to include the Noor UI package in your content array so Tailwind can detect and compile the component styles.
+                {t.gettingStarted.tailwindImportantNote}
               </p>
             </CardContent>
           </Card>
@@ -289,19 +294,19 @@ export default function GettingStartedPage() {
 
         {/* Provider Setup */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Provider Setup</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.gettingStarted.providerSetup}</h2>
           <p className="text-muted-foreground mb-4">
-            Wrap your application with the required providers. This enables RTL direction switching, theming, tooltips, and toast notifications.
+            {t.gettingStarted.providerSetupDesc}
           </p>
 
           <div className="space-y-4 mb-4">
             <div>
-              <h3 className="text-lg font-semibold mb-2">1. Create Providers Component</h3>
+              <h3 className="text-lg font-semibold mb-2">{t.gettingStarted.createProvidersComponent}</h3>
               <CodeBlock code={providersCode} language="tsx" />
             </div>
 
             <div>
-              <h3 className="text-lg font-semibold mb-2">2. Update Root Layout</h3>
+              <h3 className="text-lg font-semibold mb-2">{t.gettingStarted.updateRootLayout}</h3>
               <CodeBlock code={layoutCode} language="tsx" />
             </div>
           </div>
@@ -309,23 +314,23 @@ export default function GettingStartedPage() {
           <Card className="mt-6">
             <CardContent className="p-6 space-y-4">
               <div>
-                <h3 className="font-semibold mb-2">Provider Responsibilities</h3>
+                <h3 className="font-semibold mb-2">{t.gettingStarted.providerResponsibilities}</h3>
                 <ul className="text-sm text-muted-foreground space-y-2">
                   <li className="flex items-start gap-2">
                     <CheckCircle2 className="h-4 w-4 text-green-600 mt-0.5 shrink-0" />
-                    <span><strong>DirectionProvider:</strong> Manages LTR/RTL direction state globally</span>
+                    <span><strong>DirectionProvider:</strong> {t.gettingStarted.directionProviderDesc}</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckCircle2 className="h-4 w-4 text-green-600 mt-0.5 shrink-0" />
-                    <span><strong>DesignSystemProvider:</strong> Handles theme (light/dark) state</span>
+                    <span><strong>DesignSystemProvider:</strong> {t.gettingStarted.designSystemProviderDesc}</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckCircle2 className="h-4 w-4 text-green-600 mt-0.5 shrink-0" />
-                    <span><strong>TooltipProvider:</strong> Required for all Tooltip components</span>
+                    <span><strong>TooltipProvider:</strong> {t.gettingStarted.tooltipProviderDesc}</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckCircle2 className="h-4 w-4 text-green-600 mt-0.5 shrink-0" />
-                    <span><strong>Toaster:</strong> Required for toast notifications to appear</span>
+                    <span><strong>Toaster:</strong> {t.gettingStarted.toasterDesc}</span>
                   </li>
                 </ul>
               </div>
@@ -335,49 +340,49 @@ export default function GettingStartedPage() {
 
         {/* Global Styles */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Global Styles</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.gettingStarted.globalStyles}</h2>
           <p className="text-muted-foreground mb-4">
-            Add the design system CSS variables to your global stylesheet:
+            {t.gettingStarted.globalStylesDesc}
           </p>
           <CodeBlock code={globalsCssCode} language="css" />
         </section>
 
         {/* Quick Start */}
         <section className="mb-16" id="quick-start">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Quick Start</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.gettingStarted.quickStart}</h2>
           <p className="text-muted-foreground mb-4">
-            You&apos;re all set! Start using components in your application:
+            {t.gettingStarted.quickStartDesc}
           </p>
           <CodeBlock code={quickStartCode} language="tsx" />
         </section>
 
         {/* RTL Usage */}
         <section className="mb-16" id="rtl-usage">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Working with RTL</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.gettingStarted.workingWithRTL}</h2>
           <p className="text-muted-foreground mb-4">
-            Use the direction hook to programmatically control or respond to direction changes:
+            {t.gettingStarted.workingWithRTLDesc}
           </p>
           <CodeBlock code={rtlUsageCode} language="tsx" />
 
           <Card className="mt-6">
             <CardContent className="p-6">
-              <h3 className="font-semibold mb-2">RTL Best Practices</h3>
+              <h3 className="font-semibold mb-2">{t.gettingStarted.rtlBestPractices}</h3>
               <ul className="text-sm text-muted-foreground space-y-2">
                 <li className="flex items-start gap-2">
                   <ArrowRight className="h-4 w-4 text-primary mt-0.5 shrink-0" />
-                  <span>Use logical properties (ms-, me-, ps-, pe-) instead of directional ones (ml-, mr-, pl-, pr-)</span>
+                  <span>{t.gettingStarted.rtlBestPractice1}</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <ArrowRight className="h-4 w-4 text-primary mt-0.5 shrink-0" />
-                  <span>Test all components in both LTR and RTL modes</span>
+                  <span>{t.gettingStarted.rtlBestPractice2}</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <ArrowRight className="h-4 w-4 text-primary mt-0.5 shrink-0" />
-                  <span>Use the direction toggle during development to verify layouts</span>
+                  <span>{t.gettingStarted.rtlBestPractice3}</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <ArrowRight className="h-4 w-4 text-primary mt-0.5 shrink-0" />
-                  <span>Icons and images should mirror appropriately for RTL</span>
+                  <span>{t.gettingStarted.rtlBestPractice4}</span>
                 </li>
               </ul>
             </CardContent>
@@ -386,20 +391,20 @@ export default function GettingStartedPage() {
 
         {/* Next Steps */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Next Steps</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.gettingStarted.nextSteps}</h2>
           <div className="grid gap-4 sm:grid-cols-2">
             <Link href="/components">
               <Card className="hover:border-primary transition-colors h-full">
                 <CardContent className="p-6">
                   <h3 className="font-semibold mb-2 flex items-center gap-2">
                     <Package className="h-5 w-5 text-primary" />
-                    Browse Components
+                    {t.gettingStarted.browseComponents}
                   </h3>
                   <p className="text-sm text-muted-foreground mb-4">
-                    Explore the full library of RTL-ready components with live examples and code snippets.
+                    {t.gettingStarted.browseComponentsDesc}
                   </p>
                   <Button variant="ghost" size="sm" className="gap-2">
-                    View Components
+                    {t.gettingStarted.viewComponents}
                     <ArrowRight className="h-4 w-4" />
                   </Button>
                 </CardContent>
@@ -411,13 +416,13 @@ export default function GettingStartedPage() {
                 <CardContent className="p-6">
                   <h3 className="font-semibold mb-2 flex items-center gap-2">
                     <Sparkles className="h-5 w-5 text-primary" />
-                    RTL Development Guide
+                    {t.gettingStarted.rtlDevGuide}
                   </h3>
                   <p className="text-sm text-muted-foreground mb-4">
-                    Learn RTL-first development principles, patterns, and best practices for building bidirectional interfaces.
+                    {t.gettingStarted.rtlDevGuideDesc}
                   </p>
                   <Button variant="ghost" size="sm" className="gap-2">
-                    Read Guide
+                    {t.gettingStarted.readGuide}
                     <ArrowRight className="h-4 w-4" />
                   </Button>
                 </CardContent>

@@ -4,6 +4,8 @@ import * as React from 'react'
 import Link from 'next/link'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
+import { useDirection } from '@/components/providers/direction-provider'
+import { content } from '@/lib/i18n'
 import {
   FileText,
   CheckSquare,
@@ -209,22 +211,8 @@ const examples: Example[] = [
 ]
 
 export default function ExamplesPage() {
-  const [isRTL, setIsRTL] = React.useState(false)
-
-  React.useEffect(() => {
-    setIsRTL(document.documentElement.dir === 'rtl')
-
-    const observer = new MutationObserver(() => {
-      setIsRTL(document.documentElement.dir === 'rtl')
-    })
-
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ['dir'],
-    })
-
-    return () => observer.disconnect()
-  }, [])
+  const { locale } = useDirection()
+  const t = content[locale]
 
   return (
     <div className="min-h-screen">
@@ -234,12 +222,12 @@ export default function ExamplesPage() {
           <ol className="flex items-center gap-2 text-sm text-muted-foreground">
             <li>
               <Link href="/" className="hover:text-foreground transition-colors">
-                {isRTL ? 'الرئيسية' : 'Home'}
+                {t.common.home}
               </Link>
             </li>
             <li>/</li>
             <li className="text-foreground font-medium">
-              {isRTL ? 'الأمثلة' : 'Examples'}
+              {t.nav.examples}
             </li>
           </ol>
         </nav>
@@ -247,12 +235,10 @@ export default function ExamplesPage() {
         {/* Page Header */}
         <div className="max-w-3xl mb-12">
           <h1 className="text-4xl font-bold tracking-tight mb-4">
-            {isRTL ? 'أمثلة المكونات' : 'Component Examples'}
+            {t.examples.title}
           </h1>
           <p className="text-xl text-muted-foreground">
-            {isRTL
-              ? 'أمثلة خفيفة توضح كيفية استخدام المكونات والأنماط مع بيانات تجريبية. مثالية للتعلم السريع ورؤية كيف تبدو الأشياء.'
-              : 'Lightweight examples showing how to use components and patterns with mock data. Perfect for quick learning and seeing how things look.'}
+            {t.examples.description}
           </p>
         </div>
 
@@ -276,12 +262,12 @@ export default function ExamplesPage() {
                     </div>
                     {example.status === 'coming-soon' && (
                       <Badge variant="outline" className="text-xs">
-                        {isRTL ? 'قريباً' : 'Coming Soon'}
+                        {t.examples.comingSoon}
                       </Badge>
                     )}
                     {example.status === 'ready' && (
                       <Badge className="text-xs">
-                        {isRTL ? 'جاهز' : 'Ready'}
+                        {t.examples.ready}
                       </Badge>
                     )}
                   </div>
@@ -314,12 +300,10 @@ export default function ExamplesPage() {
                 </div>
                 <div className="flex-1 space-y-2">
                   <h3 className="font-semibold">
-                    {isRTL ? 'المزيد من الأمثلة قريباً' : 'More Examples Coming Soon'}
+                    {t.examples.moreSoon}
                   </h3>
                   <p className="text-sm text-muted-foreground">
-                    {isRTL
-                      ? 'نعمل على إضافة المزيد من الأمثلة الواقعية بما في ذلك لوحات المعلومات، متاجر التجارة الإلكترونية، والمزيد. تحقق قريباً للحصول على التحديثات!'
-                      : "We're working on adding more real-world examples including dashboards, e-commerce stores, and more. Check back soon for updates!"}
+                    {t.examples.moreSoonDesc}
                   </p>
                 </div>
               </div>
@@ -333,16 +317,14 @@ export default function ExamplesPage() {
             <CardContent className="p-6">
               <div className="space-y-4">
                 <h3 className="font-semibold">
-                  {isRTL ? 'هل تبحث عن تطبيقات كاملة؟' : 'Looking for Complete Applications?'}
+                  {t.examples.lookingForApps}
                 </h3>
                 <p className="text-sm text-muted-foreground">
-                  {isRTL
-                    ? 'تصفح نماذج البدء الجاهزة للإنتاج - تطبيقات كاملة مع مصادقة، قاعدة بيانات، وكل ما تحتاجه للبدء.'
-                    : 'Browse production-ready starters - complete applications with authentication, database, and everything you need to get started.'}
+                  {t.examples.lookingForAppsDesc}
                 </p>
                 <Link href="/starters">
                   <Badge className="cursor-pointer hover:bg-primary/90">
-                    {isRTL ? 'عرض النماذج الجاهزة →' : 'View Production Starters →'}
+                    {t.examples.viewStarters}
                   </Badge>
                 </Link>
               </div>
@@ -353,16 +335,14 @@ export default function ExamplesPage() {
             <CardContent className="p-6">
               <div className="space-y-4">
                 <h3 className="font-semibold">
-                  {isRTL ? 'هل تبحث عن المكونات الفردية؟' : 'Looking for Individual Components?'}
+                  {t.examples.lookingForComponents}
                 </h3>
                 <p className="text-sm text-muted-foreground">
-                  {isRTL
-                    ? 'تصفح مكتبة المكونات الكاملة لدينا التي تحتوي على 64 مكوناً موثقاً بالكامل مع أمثلة حية وإرشادات إمكانية الوصول.'
-                    : 'Browse our complete component library with 64 fully documented components (including 10 experimental AI/LLM components) with live examples and accessibility guidelines.'}
+                  {t.examples.lookingForComponentsDesc}
                 </p>
                 <Link href="/components">
                   <Badge className="cursor-pointer hover:bg-primary/90">
-                    {isRTL ? 'عرض جميع المكونات →' : 'View All Components →'}
+                    {t.examples.viewAllComponents}
                   </Badge>
                 </Link>
               </div>

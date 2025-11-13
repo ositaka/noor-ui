@@ -12,21 +12,23 @@ import {
   AvatarFallback,
   AvatarImage,
 } from '@/components/ui/avatar'
+import { useDirection } from '@/components/providers/direction-provider'
+import { content } from '@/lib/i18n'
 
-const avatarImageProps: PropDefinition[] = [
+const getAvatarProps = (t: typeof content.en | typeof content.ar): PropDefinition[] => [
   {
     name: 'src',
     type: 'string',
     default: 'undefined',
     required: false,
-    description: 'The source URL of the avatar image',
+    description: t.avatarComponent.props.src,
   },
   {
     name: 'alt',
     type: 'string',
     default: 'undefined',
     required: false,
-    description: 'Alt text for the avatar image',
+    description: t.avatarComponent.props.alt,
   },
 ]
 
@@ -95,6 +97,10 @@ const groupCode = `<div className="flex -space-x-4">
 </div>`
 
 export default function AvatarPage() {
+  const { locale } = useDirection()
+  const t = content[locale]
+  const avatarImageProps = getAvatarProps(t)
+
   return (
     <div className="min-h-screen">
 
@@ -104,31 +110,31 @@ export default function AvatarPage() {
           <ol className="flex items-center gap-2 text-sm text-muted-foreground">
             <li>
               <Link href="/" className="hover:text-foreground transition-colors">
-                Home
+                {t.common.home}
               </Link>
             </li>
             <li>/</li>
             <li>
               <Link href="/components" className="hover:text-foreground transition-colors">
-                Components
+                {t.nav.components}
               </Link>
             </li>
             <li>/</li>
-            <li className="text-foreground font-medium">Avatar</li>
+            <li className="text-foreground font-medium">{t.avatarComponent.title}</li>
           </ol>
         </nav>
 
         {/* Page Header */}
         <div className="mb-12">
-          <h1 className="text-4xl font-bold tracking-tight mb-4">Avatar</h1>
+          <h1 className="text-4xl font-bold tracking-tight mb-4">{t.avatarComponent.title}</h1>
           <p className="text-xl text-muted-foreground max-w-3xl">
-            An image element with a fallback for representing a user or entity.
+            {t.avatarComponent.description}
           </p>
         </div>
 
         {/* Preview */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Preview</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.avatarComponent.preview}</h2>
           <ComponentShowcase>
             <ComponentShowcase.Demo>
               <Avatar>
@@ -143,19 +149,19 @@ export default function AvatarPage() {
 
         {/* Installation */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-4">Installation</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-4">{t.avatarComponent.installation}</h2>
           <CodeBlock code={installCode} language="bash" />
         </section>
 
         {/* Usage */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-4">Usage</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-4">{t.avatarComponent.usage}</h2>
           <CodeBlock code={basicUsageCode} language="tsx" />
         </section>
 
         {/* Examples */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Examples</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.avatarComponent.examples.title}</h2>
 
           <div className="space-y-8">
             <div>
@@ -268,13 +274,13 @@ export default function AvatarPage() {
 
         {/* Props */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-4">Props</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-4">{t.avatarComponent.props.title}</h2>
           <PropsTable props={avatarImageProps} />
         </section>
 
         {/* Accessibility */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-4">Accessibility</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-4">{t.avatarComponent.accessibility.title}</h2>
           <Card>
             <CardContent className="p-6 space-y-4">
               <div>
@@ -299,7 +305,7 @@ export default function AvatarPage() {
 
         {/* RTL Support */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-4">RTL Support</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-4">{t.avatarComponent.rtl.title}</h2>
           <Card>
             <CardContent className="p-6">
               <p className="text-sm text-muted-foreground mb-4">

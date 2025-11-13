@@ -212,19 +212,19 @@ export default function AccordionPage() {
 
         {/* Installation */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-4">{t.accordionComponent.installation}</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-4">'{t.accordionComponent.installation}</h2>
           <CodeBlock code={installCode} language="bash" />
         </section>
 
         {/* Usage */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-4">{t.accordionComponent.usage}</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-4">'{t.accordionComponent.usage}</h2>
           <CodeBlock code={basicUsageCode} language="tsx" />
         </section>
 
         {/* Examples */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.accordionComponent.examples.title}</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">'{t.accordionComponent.examples.title}</h2>
 
           <div className="space-y-8">
             <div>

@@ -8,14 +8,16 @@ import { ComponentShowcase } from '@/components/docs/component-showcase'
 import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
 import { Terminal, AlertCircle, CheckCircle2, AlertTriangle } from 'lucide-react'
+import { useDirection } from '@/components/providers/direction-provider'
+import { content } from '@/lib/i18n'
 
-const alertProps: PropDefinition[] = [
+const getAlertProps = (t: typeof content.en | typeof content.ar): PropDefinition[] => [
   {
     name: 'variant',
     type: '"default" | "destructive" | "success" | "warning"',
     default: '"default"',
     required: false,
-    description: 'The visual style of the alert',
+    description: t.alertComponent.props.variant,
   },
 ]
 
@@ -64,6 +66,10 @@ const withoutIconCode = `<Alert>
 </Alert>`
 
 export default function AlertPage() {
+  const { locale } = useDirection()
+  const t = content[locale]
+  const alertProps = getAlertProps(t)
+
   return (
     <div className="min-h-screen">
 
@@ -73,31 +79,31 @@ export default function AlertPage() {
           <ol className="flex items-center gap-2 text-sm text-muted-foreground">
             <li>
               <Link href="/" className="hover:text-foreground transition-colors">
-                Home
+                {t.common.home}
               </Link>
             </li>
             <li>/</li>
             <li>
               <Link href="/components" className="hover:text-foreground transition-colors">
-                Components
+                {t.nav.components}
               </Link>
             </li>
             <li>/</li>
-            <li className="text-foreground font-medium">Alert</li>
+            <li className="text-foreground font-medium">{t.alertComponent.title}</li>
           </ol>
         </nav>
 
         {/* Page Header */}
         <div className="mb-12">
-          <h1 className="text-4xl font-bold tracking-tight mb-4">Alert</h1>
+          <h1 className="text-4xl font-bold tracking-tight mb-4">{t.alertComponent.title}</h1>
           <p className="text-xl text-muted-foreground max-w-3xl">
-            Displays a callout for user attention. Available in multiple variants to indicate different types of information.
+            {t.alertComponent.description}
           </p>
         </div>
 
         {/* Preview */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Preview</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.alertComponent.preview}</h2>
           <ComponentShowcase>
             <ComponentShowcase.Demo>
               <Alert className="w-full max-w-md">
@@ -113,19 +119,19 @@ export default function AlertPage() {
 
         {/* Installation */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Installation</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.alertComponent.installation}</h2>
           <CodeBlock code={installCode} language="bash" />
         </section>
 
         {/* Usage */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Usage</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.alertComponent.usage}</h2>
           <CodeBlock code={basicUsageCode} language="tsx" />
         </section>
 
         {/* Examples */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Examples</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.alertComponent.examples.title}</h2>
 
           <div className="space-y-8">
             {/* Default */}
@@ -226,13 +232,13 @@ export default function AlertPage() {
 
         {/* Props */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Props</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.alertComponent.props.title}</h2>
           <PropsTable props={alertProps} />
         </section>
 
         {/* Accessibility */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Accessibility</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.alertComponent.accessibility.title}</h2>
           <Card>
             <CardContent className="p-6 space-y-4">
               <div>
@@ -259,7 +265,7 @@ export default function AlertPage() {
 
         {/* RTL Support */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">RTL Support</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.alertComponent.rtl.title}</h2>
           <p className="text-muted-foreground mb-6">
             The Alert component is fully RTL-compatible using logical properties.
           </p>

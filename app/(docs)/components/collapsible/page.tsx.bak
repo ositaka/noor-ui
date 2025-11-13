@@ -157,7 +157,7 @@ export default function CollapsiblePage() {
 
         {/* Preview */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.collapsibleComponent.preview}</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">'{t.collapsibleComponent.preview}</h2>
           <ComponentShowcase>
             <ComponentShowcase.Demo>
               <div className="w-full max-w-md space-y-4">

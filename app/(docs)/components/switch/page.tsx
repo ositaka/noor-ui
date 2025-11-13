@@ -10,48 +10,51 @@ import { Separator } from '@/components/ui/separator'
 import { ComponentShowcase } from '@/components/docs/component-showcase'
 import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
-const switchProps: PropDefinition[] = [
+import { useDirection } from '@/components/providers/direction-provider'
+import { content } from '@/lib/i18n'
+
+const getSwitchProps = (t: typeof content.en | typeof content.ar): PropDefinition[] => [
   {
     name: 'checked',
     type: 'boolean',
     default: 'false',
     required: false,
-    description: 'The controlled checked state of the switch',
+    description: t.switchComponent.props.checked,
   },
   {
     name: 'defaultChecked',
     type: 'boolean',
     default: 'false',
     required: false,
-    description: 'The default checked state (uncontrolled)',
+    description: t.switchComponent.props.defaultChecked,
   },
   {
     name: 'onCheckedChange',
     type: '(checked: boolean) => void',
     default: 'undefined',
     required: false,
-    description: 'Event handler called when the checked state changes',
+    description: t.switchComponent.props.onCheckedChange,
   },
   {
     name: 'disabled',
     type: 'boolean',
     default: 'false',
     required: false,
-    description: 'Disables the switch',
+    description: t.switchComponent.props.disabled,
   },
   {
     name: 'required',
     type: 'boolean',
     default: 'false',
     required: false,
-    description: 'Marks the switch as required',
+    description: t.switchComponent.props.required,
   },
   {
     name: 'name',
     type: 'string',
     default: 'undefined',
     required: false,
-    description: 'The name of the switch for form submission',
+    description: t.switchComponent.props.name,
   },
 ]
 
@@ -174,6 +177,10 @@ const rtlCode = `// RTL support is automatic!
 </div>`
 
 export default function SwitchPage() {
+  const { locale } = useDirection()
+  const t = content[locale]
+  const switchProps = getSwitchProps(t)
+
   const [checked, setChecked] = React.useState(false)
 
   return (
@@ -185,32 +192,31 @@ export default function SwitchPage() {
           <ol className="flex items-center gap-2 text-sm text-muted-foreground">
             <li>
               <Link href="/" className="hover:text-foreground transition-colors">
-                Home
+                {t.common.home}
               </Link>
             </li>
             <li>/</li>
             <li>
               <Link href="/components" className="hover:text-foreground transition-colors">
-                Components
+                {t.nav.components}
               </Link>
             </li>
             <li>/</li>
-            <li className="text-foreground font-medium">Switch</li>
+            <li className="text-foreground font-medium">{t.switchComponent.title}</li>
           </ol>
         </nav>
 
         {/* Page Header */}
         <div className="mb-12">
-          <h1 className="text-4xl font-bold tracking-tight mb-4">Switch</h1>
+          <h1 className="text-4xl font-bold tracking-tight mb-4">{t.switchComponent.title}</h1>
           <p className="text-xl text-muted-foreground max-w-3xl">
-            Toggle switch for on/off states. Perfect for settings and preferences with full keyboard
-            navigation and RTL support.
+            {t.switchComponent.description}
           </p>
         </div>
 
         {/* Preview */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Preview</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.switchComponent.preview}</h2>
           <ComponentShowcase>
             <ComponentShowcase.Demo>
               <div className="flex items-center gap-2">
@@ -223,24 +229,24 @@ export default function SwitchPage() {
 
         {/* Installation */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Installation</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.switchComponent.installation}</h2>
           <CodeBlock code={installCode} language="bash" title="Terminal" />
         </section>
 
         {/* Usage */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Usage</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.switchComponent.usage}</h2>
           <CodeBlock code={basicUsageCode} language="tsx" title="React" />
         </section>
 
         {/* Examples */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Examples</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.switchComponent.examples.title}</h2>
 
           <div className="space-y-8">
             {/* With Label */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">With Label</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.switchComponent.examples.withLabel}</h3>
               <Card>
                 <CardContent className="p-6 space-y-3">
                   <div className="flex items-center gap-2">
@@ -264,7 +270,7 @@ export default function SwitchPage() {
 
             {/* Settings Panel */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">Settings Panel</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.switchComponent.examples.settingsPanel}</h3>
               <Card>
                 <CardContent className="p-6">
                   <div className="space-y-4">
@@ -311,7 +317,7 @@ export default function SwitchPage() {
 
             {/* Disabled State */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">Disabled State</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.switchComponent.examples.disabledState}</h3>
               <Card>
                 <CardContent className="p-6 space-y-3">
                   <div className="flex items-center gap-2">
@@ -335,16 +341,16 @@ export default function SwitchPage() {
 
             {/* Controlled */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">Controlled Component</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.switchComponent.examples.controlled}</h3>
               <Card>
                 <CardContent className="p-6">
                   <div className="space-y-4">
                     <div className="flex items-center gap-2">
                       <Switch id="controlled" checked={checked} onCheckedChange={setChecked} />
-                      <Label htmlFor="controlled">Controlled switch</Label>
+                      <Label htmlFor="controlled">{t.switchComponent.labels.notifications}</Label>
                     </div>
                     <p className="text-sm text-muted-foreground">
-                      Status: {checked ? 'On' : 'Off'}
+                      Status: {checked ? t.switchComponent.status.on : t.switchComponent.status.off}
                     </p>
                     <Button size="sm" onClick={() => setChecked(!checked)}>
                       Toggle
@@ -359,7 +365,7 @@ export default function SwitchPage() {
 
             {/* In Forms */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">In Forms</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.switchComponent.examples.inForms}</h3>
               <Card>
                 <CardContent className="p-6">
                   <form
@@ -401,64 +407,46 @@ export default function SwitchPage() {
 
         {/* Props */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Props</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.switchComponent.props.title}</h2>
           <PropsTable props={switchProps} />
         </section>
 
         {/* Accessibility */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Accessibility</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.switchComponent.accessibility.title}</h2>
           <Card>
             <CardContent className="p-6 space-y-4">
               <div>
-                <h3 className="font-semibold mb-2">Keyboard Navigation</h3>
+                <h3 className="font-semibold mb-2">{t.switchComponent.accessibility.keyboardNavigation}</h3>
                 <ul className="list-disc list-inside text-muted-foreground space-y-1">
                   <li>
-                    <kbd className="px-1.5 py-0.5 rounded bg-muted">Tab</kbd>: Move focus to/from
-                    switch
+                    <kbd className="px-1.5 py-0.5 rounded bg-muted">Tab</kbd>: {t.switchComponent.accessibility.keyboardTab}
                   </li>
                   <li>
-                    <kbd className="px-1.5 py-0.5 rounded bg-muted">Space</kbd>: Toggle switch state
+                    <kbd className="px-1.5 py-0.5 rounded bg-muted">Space</kbd>: {t.switchComponent.accessibility.keyboardSpace}
                   </li>
                 </ul>
               </div>
               <Separator />
               <div>
-                <h3 className="font-semibold mb-2">Always Use Labels</h3>
+                <h3 className="font-semibold mb-2">{t.switchComponent.accessibility.alwaysUseLabels}</h3>
                 <p className="text-muted-foreground">
-                  Always pair switches with labels using the{' '}
-                  <code className="bg-muted px-1 rounded">htmlFor</code> and{' '}
-                  <code className="bg-muted px-1 rounded">id</code> attributes. Clicking the label
-                  toggles the switch.
+                  {t.switchComponent.accessibility.alwaysUseLabelsDesc}
                 </p>
               </div>
               <Separator />
               <div>
-                <h3 className="font-semibold mb-2">Screen Readers</h3>
+                <h3 className="font-semibold mb-2">{t.switchComponent.accessibility.screenReaders}</h3>
                 <p className="text-muted-foreground">
-                  The switch role is automatically announced. Screen readers will say something like
-                  &quot;Airplane Mode, switch, off&quot; or &quot;Airplane Mode, switch, on&quot;.
+                  {t.switchComponent.accessibility.screenReadersDesc}
                 </p>
               </div>
               <Separator />
               <div>
-                <h3 className="font-semibold mb-2">When to Use Switch vs Checkbox</h3>
-                <ul className="space-y-2 text-sm text-muted-foreground">
-                  <li className="flex items-start gap-2">
-                    <span className="text-primary mt-1">•</span>
-                    <span>
-                      <strong>Use Switch:</strong> For settings that take immediate effect (e.g.,
-                      &quot;Enable dark mode&quot;)
-                    </span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-primary mt-1">•</span>
-                    <span>
-                      <strong>Use Checkbox:</strong> For selections that require confirmation (e.g.,
-                      form submissions)
-                    </span>
-                  </li>
-                </ul>
+                <h3 className="font-semibold mb-2">{t.switchComponent.accessibility.visualFeedback}</h3>
+                <p className="text-muted-foreground">
+                  {t.switchComponent.accessibility.visualFeedbackDesc}
+                </p>
               </div>
             </CardContent>
           </Card>
@@ -466,32 +454,31 @@ export default function SwitchPage() {
 
         {/* RTL Considerations */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">RTL Considerations</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.switchComponent.rtl.title}</h2>
           <Card>
             <CardContent className="p-6 space-y-4">
               <p className="text-muted-foreground">
-                Switches automatically support RTL layout. The thumb animation direction is mirrored
-                for right-to-left languages, maintaining the natural flow.
+                {t.switchComponent.rtl.description}
               </p>
               <CodeBlock code={rtlCode} language="tsx" />
               <div className="grid gap-4 md:grid-cols-2 mt-6">
                 <div className="space-y-2">
-                  <h4 className="font-semibold text-sm">LTR (English)</h4>
+                  <h4 className="font-semibold text-sm">{t.switchComponent.rtl.ltr}</h4>
                   <div dir="ltr">
                     <div className="space-y-3 p-4 border rounded-lg">
                       <div className="flex items-center gap-2">
                         <Switch id="ltr-1" />
-                        <Label htmlFor="ltr-1">Notifications</Label>
+                        <Label htmlFor="ltr-1">{t.switchComponent.rtl.notificationsAr}</Label>
                       </div>
                       <div className="flex items-center gap-2">
                         <Switch id="ltr-2" defaultChecked />
-                        <Label htmlFor="ltr-2">Dark Mode</Label>
+                        <Label htmlFor="ltr-2">{t.switchComponent.rtl.darkModeAr}</Label>
                       </div>
                     </div>
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <h4 className="font-semibold text-sm">RTL (العربية)</h4>
+                  <h4 className="font-semibold text-sm">{t.switchComponent.rtl.rtlLabel}</h4>
                   <div dir="rtl">
                     <div className="space-y-3 p-4 border rounded-lg">
                       <div className="flex items-center gap-2">
@@ -512,14 +499,14 @@ export default function SwitchPage() {
 
         {/* Related Components */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Related Components</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.switchComponent.related.title}</h2>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             <Link href="/components/checkbox">
               <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold">Checkbox</h3>
+                  <h3 className="font-semibold">{t.switchComponent.related.checkbox}</h3>
                   <p className="text-sm text-muted-foreground mt-1">
-                    For form selections
+                    {t.switchComponent.related.checkboxDesc}
                   </p>
                 </CardContent>
               </Card>
@@ -527,9 +514,9 @@ export default function SwitchPage() {
             <Link href="/components/radio-group">
               <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold">Radio Group</h3>
+                  <h3 className="font-semibold">{t.switchComponent.related.radioGroup}</h3>
                   <p className="text-sm text-muted-foreground mt-1">
-                    Mutually exclusive options
+                    {t.switchComponent.related.radioGroupDesc}
                   </p>
                 </CardContent>
               </Card>
@@ -537,8 +524,8 @@ export default function SwitchPage() {
             <Link href="/components/label">
               <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold">Label</h3>
-                  <p className="text-sm text-muted-foreground mt-1">Labels for form inputs</p>
+                  <h3 className="font-semibold">{t.switchComponent.related.label}</h3>
+                  <p className="text-sm text-muted-foreground mt-1">{t.switchComponent.related.labelDesc}</p>
                 </CardContent>
               </Card>
             </Link>
