@@ -357,8 +357,8 @@ export default function ExamplesPage() {
                 </h3>
                 <p className="text-sm text-muted-foreground">
                   {isRTL
-                    ? 'تصفح مكتبة المكونات الكاملة لدينا التي تحتوي على 38 مكوناً موثقاً بالكامل مع أمثلة حية وإرشادات إمكانية الوصول.'
-                    : 'Browse our complete component library with 38 fully documented components with live examples and accessibility guidelines.'}
+                    ? 'تصفح مكتبة المكونات الكاملة لدينا التي تحتوي على 64 مكوناً موثقاً بالكامل مع أمثلة حية وإرشادات إمكانية الوصول.'
+                    : 'Browse our complete component library with 64 fully documented components (including 10 experimental AI/LLM components) with live examples and accessibility guidelines.'}
                 </p>
                 <Link href="/components">
                   <Badge className="cursor-pointer hover:bg-primary/90">

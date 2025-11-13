@@ -210,8 +210,8 @@ export default function ComponentsPage() {
         <div className="max-w-3xl mb-12">
           <h1 className="text-4xl font-bold tracking-tight mb-4">Components</h1>
           <p className="text-xl text-muted-foreground mb-6">
-            63 beautifully designed components built with Radix UI, Tailwind CSS, and React Flow.
-            60 production-ready, 3 coming soon. Full RTL support, accessible, and customizable.
+            64 beautifully designed components built with Radix UI, Tailwind CSS, and React Flow.
+            54 production-ready, 10 experimental AI/LLM components. Full RTL support, accessible, and customizable.
           </p>
 
           {/* Live Preview */}

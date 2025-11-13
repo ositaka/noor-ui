@@ -9,9 +9,8 @@ Bringing light to multilingual interface design with accessibility, performance,
 ## 🌟 Features
 
 - **RTL-First Architecture**: Designed for Arabic from the ground up, with English as an equally-supported alternative
-- **60 Production-Ready Components**: Complete UI toolkit including AI/LLM Shell components for modern conversational interfaces
+- **64 Components**: Complete UI toolkit with 54 production-ready components plus 10 experimental AI/LLM components
 - **GCC-Specific Components**: Prayer times, Hijri calendar, Arabic numbers, Zakat calculator, and dual-calendar date picker built for the region
-- **AI/LLM Shell Components**: Chat interfaces, streaming text, prompt inputs, model selectors, and conversation management - perfect for building AI assistants
 - **Zero Directional Bugs**: 100% logical properties, no hardcoded LTR assumptions
 - **Direction-Aware Components**: Tabs, navigation, and layouts automatically adapt to text direction
 - **4 Distinct Themes**: Minimal, Futuristic, Cozy, and Artistic - all powered by the same design tokens
@@ -19,8 +18,8 @@ Bringing light to multilingual interface design with accessibility, performance,
 - **Token-Based Design**: All design decisions flow from design tokens, enabling easy customization
 - **Modern Stack**: Built with Next.js 14, TypeScript, Tailwind CSS, and Radix UI
 - **Real Arabic Content**: Authentic GCC-focused content, not lorem ipsum
-- **Production-Ready Starters**: Complete applications (Blog Dashboard) you can copy and deploy immediately
-- **Bilingual Examples**: Dashboard and E-commerce examples with full Arabic/English support
+- **Production-Ready Starters**: 2 complete applications (Blog Dashboard, E-commerce) you can copy and deploy immediately
+- **17+ Real-World Examples**: Dashboard, forms, data tables, GCC-specific apps, and experimental AI chat interfaces
 - **Light/Dark Mode**: Seamless theme switching with respect for user preferences
 - **Command Palette**: Quick navigation (Cmd+K) across all components and pages
 - **Clean Architecture**: Next.js route groups with shared layouts for maintainability
@@ -168,9 +167,9 @@ This enables:
 
 ## 🎨 Design System
 
-### All Components (60 Ready + 10 AI/LLM Components)
+### All Components (64 Total)
 
-**Current Status:** 60 production-ready components including a complete AI/LLM Shell component set. See the [public roadmap](/roadmap) for upcoming components and features.
+**Current Status:** 64 components fully documented - 54 production-ready and 10 experimental AI/LLM components. See the [public roadmap](/roadmap) for upcoming features.
 
 **Form Components:**
 - **Form**: State management with validation and bilingual error messages
@@ -242,17 +241,19 @@ This enables:
 - **Notification Center**: Notification panel with unread indicators, categorization, and mark-as-read functionality
 - **Stepper**: Multi-step progress indicator with 3 variants (default, simple, circles), horizontal/vertical orientations, and clickable steps
 
-**AI/LLM Shell Components:** 🆕
-- **ChatMessage**: User/assistant/system message bubbles with avatars, timestamps, markdown rendering, and action buttons (copy, regenerate, edit)
-- **StreamingText**: Typewriter effect animation for simulating real-time AI text generation with configurable speed and cursor
-- **PromptInput**: Enhanced textarea for AI prompts with auto-resize, @ mentions, slash commands, file attachments, and token counter
+**AI/LLM Components:** 🧪 **Experimental**
+- **ChatMessage**: User/assistant/system message bubbles with avatars, timestamps, markdown rendering, and action buttons
+- **StreamingText**: Typewriter effect animation for simulating real-time AI text generation with configurable speed
+- **PromptInput**: Enhanced textarea for AI prompts with auto-resize and attachment support
 - **ThinkingIndicator**: Animated loading states showing AI is processing (dots, pulse, wave, typing variants)
 - **MessageActions**: Action toolbar for messages with copy, regenerate, edit, share, and feedback buttons
-- **ModelSelector**: Dropdown for choosing AI models with specs display (speed, context length, pricing) and recommended badges
-- **ParameterSlider**: Control AI parameters (temperature, max tokens, top-p) with visual presets and bilingual tooltips
-- **TokenCounter**: Real-time token usage display with progress bar, color coding, and estimated cost calculation
-- **ConversationHistory**: Sidebar for managing past conversations with search, grouping by date, and conversation management
-- **CodeBlock (Enhanced)**: Extended code display with run button, explain button, diff view, and line highlighting for AI-generated code
+- **ModelSelector**: Dropdown for choosing AI models with specs display and recommended badges
+- **ParameterSlider**: Control AI parameters (temperature, max tokens, top-p) with visual presets
+- **TokenCounter**: Real-time token usage display with progress bar and color coding
+- **ConversationHistory**: Sidebar for managing past conversations with search and date grouping
+- **WorkflowCanvas**: Visual workflow builder with drag-and-drop nodes and connections
+
+> **Note:** AI/LLM components are functional but still in experimental phase. APIs may change as we gather feedback from real-world usage.
 
 ### Documentation Components
 
@@ -279,18 +280,29 @@ Complete, deployable applications built with Noor UI components. **[View all sta
   - Complete bilingual support (EN/AR)
   - **[Setup Guide →](./starters/blog-dashboard/)**
 
-Coming soon: E-commerce Starter, SaaS Starter, Landing Page, Analytics Dashboard
+- **🛍️ E-commerce Starter**: Complete shop with cart and checkout
+  - Product catalog with filtering
+  - Shopping cart with localStorage persistence
+  - Checkout flow
+  - Order management
+  - Bilingual product content
+  - **[Setup Guide →](./starters/ecommerce/)**
+
+Coming soon: SaaS Starter, Landing Page, Analytics Dashboard
 
 ### Real-World Examples
 
 Production-ready examples showcasing component composition and real use cases:
 
-**AI/LLM Shell Examples:** 🆕
-- **Simple AI Chat**: Clean conversational interface perfect for customer support bots and Q&A assistants with message history and streaming responses
-- **Advanced AI Playground**: Full-featured AI interaction with parameter controls (temperature, max tokens), model selector, system prompts, conversation export, and token counter
-- **Code Assistant**: AI coding helper with syntax highlighting for 20+ languages, code diff view, quick actions (explain, fix, optimize), and file context
-- **Document Q&A**: Upload documents and ask questions with citation references, multi-document support, key information extraction, and bilingual document support
-- **Multi-Agent Chat**: Multiple AI personas (Expert, Teacher, Critic, Creative Writer) with comparison mode, debate mode, and distinct agent personalities
+**AI/LLM Examples:** 🧪 **Experimental**
+- **Simple AI Chat**: Clean conversational interface with message history and streaming responses
+- **Advanced AI Playground**: Full-featured AI interaction with parameter controls, model selector, and token counter
+- **AI Code Assistant**: Coding helper with syntax highlighting, code explanation, and improvement suggestions
+- **Document Q&A**: Upload documents and ask questions with citation references and bilingual document support
+- **Multi-Agent Chat**: Multiple AI personas collaborating in conversations with comparison and debate modes
+- **AI Workflow**: Visual workflow builder with LLM integration, token tracking, and cost estimation
+
+> **Note:** AI examples use mock responses for demonstration. These showcase the UI/UX patterns - integrate with your preferred AI provider (OpenAI, Anthropic, etc.) for production use.
 
 **Business & E-commerce:**
 - **Marketplace**: Multi-vendor marketplace with product listings, vendor dashboards, shopping cart, checkout flow, and order management
@@ -504,6 +516,17 @@ Tokens are converted to CSS custom properties in `styles/globals.css` and consum
 - `eslint@^8.56.0`
 - `eslint-plugin-jsx-a11y@^6.8.0`
 
+## 📋 Planning & Strategy
+
+This project follows a deliberate phased approach. See our planning documents for detailed development strategy:
+
+- **[ROADMAP.md](./ROADMAP.md)** - 4-phase development plan with timeline and success metrics
+- **[NPM_PACKAGE_STRATEGY.md](./NPM_PACKAGE_STRATEGY.md)** - Packaging strategy for Phase 3 (after validation)
+- **[COMPONENT_CHECKLIST.md](./COMPONENT_CHECKLIST.md)** - Component tracking and status
+- **[MULTILINGUAL_STRATEGY.md](./MULTILINGUAL_STRATEGY.md)** - i18n patterns and bilingual content management
+
+**Current Phase:** Phase 1 (Foundation & Discovery) - Building real-world demos to validate component patterns before packaging.
+
 ## 🚧 Roadmap
 
 ### Phase 1: Complete the Foundation ✅
@@ -539,23 +562,28 @@ Tokens are converted to CSS custom properties in `styles/globals.css` and consum
 - [ ] Performance optimizations
 - [ ] SEO improvements
 
-### Phase 5: AI/LLM Shell 🆕 IN PROGRESS
-- [ ] ChatMessage component with user/assistant/system variants
-- [ ] StreamingText component with typewriter animation
-- [ ] PromptInput with @ mentions and slash commands
-- [ ] ThinkingIndicator with 4 animation variants
-- [ ] MessageActions toolbar for messages
-- [ ] ModelSelector with model specs display
-- [ ] ParameterSlider for AI controls (temp, tokens, top-p)
-- [ ] TokenCounter with progress and cost tracking
-- [ ] ConversationHistory sidebar
-- [ ] Enhanced CodeBlock for AI-generated code
-- [ ] Simple AI Chat example
-- [ ] Advanced AI Playground example
-- [ ] Code Assistant example
-- [ ] Document Q&A example
-- [ ] Multi-Agent Chat example
-- [ ] AI Chat Starter with Supabase (optional)
+### Phase 5: AI/LLM Shell 🧪 EXPERIMENTAL (Testing Phase)
+- [x] ChatMessage component with user/assistant/system variants
+- [x] StreamingText component with typewriter animation
+- [x] PromptInput with auto-resize and attachment support
+- [x] ThinkingIndicator with 4 animation variants
+- [x] MessageActions toolbar for messages
+- [x] ModelSelector with model specs display
+- [x] ParameterSlider for AI controls (temp, tokens, top-p)
+- [x] TokenCounter with progress and cost tracking
+- [x] ConversationHistory sidebar
+- [x] WorkflowCanvas with drag-and-drop nodes
+- [x] Simple AI Chat example
+- [x] Advanced AI Playground example
+- [x] Code Assistant example
+- [x] Document Q&A example
+- [x] Multi-Agent Chat example
+- [x] AI Workflow example
+- [ ] Real API integrations (OpenAI, Anthropic, etc.)
+- [ ] AI Chat Starter with Supabase backend
+- [ ] Production validation and API refinement
+
+**Status:** Components built and functional with mock data. Currently gathering feedback before marking as production-ready.
 
 ### Recent Improvements (November 2025)
 
