@@ -1,0 +1,128 @@
+/**
+ * AR translations - common
+ * Auto-generated from lib/i18n.ts
+ */
+
+export const common = {
+nav: {
+      home: 'الرئيسية',
+      components: 'المكونات',
+      examples: 'الأمثلة',
+      rtlGuide: 'دليل RTL',
+      tokens: 'رموز التصميم',
+      themes: 'السمات',
+      documentation: 'التوثيق',
+      getStarted: 'ابدأ الآن',
+    },
+
+ui: {
+      button: {
+        submit: 'إرسال',
+        cancel: 'إلغاء',
+        save: 'حفظ',
+        delete: 'حذف',
+        edit: 'تعديل',
+        close: 'إغلاق',
+        confirm: 'تأكيد',
+        back: 'رجوع',
+        next: 'التالي',
+        previous: 'السابق',
+        loading: 'جارٍ التحميل...',
+        copy: 'نسخ',
+        copied: 'تم النسخ!',
+        tryIt: 'جرّبه مباشرة',
+      },
+      form: {
+        firstName: 'الاسم الأول',
+        lastName: 'اسم العائلة',
+        email: 'البريد الإلكتروني',
+        password: 'كلمة المرور',
+        confirmPassword: 'تأكيد كلمة المرور',
+        phone: 'رقم الهاتف',
+        address: 'العنوان',
+        city: 'المدينة',
+        country: 'الدولة',
+        message: 'الرسالة',
+        search: 'بحث',
+        filter: 'تصفية',
+        sort: 'ترتيب',
+        required: 'مطلوب',
+        optional: 'اختياري',
+        placeholder: 'أدخل النص...',
+      },
+      status: {
+        success: 'نجح',
+        error: 'خطأ',
+        warning: 'تحذير',
+        info: 'معلومات',
+        loading: 'جارٍ التحميل',
+        pending: 'قيد الانتظار',
+        completed: 'مكتمل',
+        failed: 'فشل',
+      },
+      accessibility: {
+        menu: 'القائمة',
+        closeMenu: 'إغلاق القائمة',
+        openMenu: 'فتح القائمة',
+        skipToContent: 'الانتقال إلى المحتوى الرئيسي',
+        toggleTheme: 'تبديل السمة',
+        toggleDirection: 'تبديل اتجاه النص',
+        increaseTextSize: 'تكبير حجم النص',
+        decreaseTextSize: 'تصغير حجم النص',
+      },
+    },
+
+common: {
+        home: 'الرئيسية',
+        documentation: 'التوثيق',
+        learnMore: 'اعرف المزيد',
+        nextSteps: 'الخطوات التالية',
+        relatedResources: 'الموارد ذات الصلة',
+        resources: 'الموارد',
+        community: 'المجتمع',
+        tagline: 'نجلب النور لتصميم الواجهات متعددة اللغات.',
+        copyright: '© 2025 نور. مبني باستخدام Next.js و TypeScript و Tailwind CSS.',
+        readyToGo: 'جاهز للاستخدام!',
+        autoRTL: 'سوف تدعم مكوناتك تلقائياً اتجاه النص من اليمين لليسار عند تغيير الاتجاه.',
+      },
+
+  notFound: {
+        title: 'الصفحة غير موجودة',
+        description: 'عذراً، لم نتمكن من العثور على الصفحة التي تبحث عنها. ربما تم نقلها أو أنها غير موجودة.',
+        goHome: 'الصفحة الرئيسية',
+        browseComponents: 'تصفح المكونات',
+        tryLinks: 'أو جرب أحد هذه الروابط المفيدة:',
+        starters: 'النماذج الجاهزة',
+      },
+
+  sitemap: {
+        title: 'خريطة الموقع',
+        description: 'خريطة التنقل الكاملة لجميع الصفحات والمكونات في نور UI. ابحث عن كل شيء من أدلة البدء إلى المكونات الفردية.',
+        breadcrumb: {
+          home: 'الرئيسية',
+          sitemap: 'خريطة الموقع',
+        },
+        sections: {
+          gettingStarted: 'البدء',
+          components: 'المكونات',
+          examples: 'الأمثلة',
+          resources: 'الموارد والتوثيق',
+          themes: 'السمات والتصميم',
+        },
+        componentCategories: {
+          basic: 'المكونات الأساسية',
+          forms: 'مكونات النماذج',
+          data: 'عرض البيانات',
+          overlay: 'النوافذ المنبثقة',
+          advanced: 'المكونات المتقدمة',
+          gcc: 'مكونات دول الخليج',
+          experimental: 'تجريبية (الذكاء الاصطناعي)',
+          misc: 'متنوعة',
+        },
+        counts: {
+          totalComponents: '64 مكون',
+          totalExamples: '6 أمثلة مباشرة',
+          totalPages: 'أكثر من 100 صفحة',
+        },
+      },
+}

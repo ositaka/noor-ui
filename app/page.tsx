@@ -193,16 +193,16 @@ export default function HomePage() {
               <h4 className="font-semibold mb-4">{t.common.resources}</h4>
               <ul className="space-y-2 text-sm text-muted-foreground">
                 <li><Link href="/examples" className="hover:text-foreground transition-colors">{t.nav.examples}</Link></li>
-                <li><Link href="/accessibility" className="hover:text-foreground transition-colors">{t.docs.accessibility}</Link></li>
+                <li><Link href="/documentation/wcag" className="hover:text-foreground transition-colors">{t.docs.accessibility}</Link></li>
                 <li><Link href="/rtl-guide" className="hover:text-foreground transition-colors">{t.nav.rtlGuide}</Link></li>
               </ul>
             </div>
             <div>
               <h4 className="font-semibold mb-4">{t.common.community}</h4>
               <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><Link href="/github" className="hover:text-foreground transition-colors">GitHub</Link></li>
-                <li><Link href="/discord" className="hover:text-foreground transition-colors">Discord</Link></li>
-                <li><Link href="/twitter" className="hover:text-foreground transition-colors">Twitter</Link></li>
+                <li><span className="cursor-default">GitHub</span></li>
+                <li><span className="cursor-default">Discord</span></li>
+                <li><span className="cursor-default">Twitter</span></li>
               </ul>
             </div>
           </div>

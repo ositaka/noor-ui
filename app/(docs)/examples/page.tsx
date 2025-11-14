@@ -30,189 +30,44 @@ import {
   type LucideIcon,
 } from 'lucide-react'
 
+// Icon mapping for example cards
+const iconMap: Record<string, LucideIcon> = {
+  '/examples/gcc-dashboard': Sparkles,
+  '/examples/islamic-finance-dashboard': Landmark,
+  '/examples/datatable-showcase': Table,
+  '/examples/registration': FileText,
+  '/examples/dashboard': LayoutDashboard,
+  '/examples/calendar': Calendar,
+  '/examples/real-estate': Home,
+  '/examples/portfolio': LayoutDashboard,
+  '/examples/marketplace': Store,
+  '/examples/b2b-marketplace': ShoppingCart,
+  '/examples/cms': FileEdit,
+  '/examples/ai-chat-simple': MessageSquare,
+  '/examples/ai-playground': Bot,
+  '/examples/ai-code-assistant': Code2,
+  '/examples/ai-document-qa': BookOpen,
+  '/examples/ai-multi-agent': Users,
+  '/examples/workflow-basic': GitBranch,
+  '/examples/ai-workflow': Workflow,
+  '/examples/analytics': TrendingUp,
+}
+
 interface Example {
   title: string
   description: string
   href: string
-  icon: LucideIcon
   tags: string[]
-  status: 'ready' | 'coming-soon'
+  status: string
   featured?: boolean
 }
-
-const examples: Example[] = [
-  {
-    title: 'GCC Community Dashboard',
-    description: 'Complete GCC dashboard with Prayer Times, Hijri dates, Zakat calculator, and Arabic numbers. Perfect showcase of all GCC components.',
-    href: '/examples/gcc-dashboard',
-    icon: Sparkles,
-    tags: ['GCC', 'Islamic', 'Zakat', 'Prayer', 'RTL'],
-    status: 'ready' as const,
-    featured: true,
-  },
-  {
-    title: 'Islamic Finance Dashboard',
-    description: 'Comprehensive Islamic finance management with Zakat calculator, investment tracking, Hijri calendar, prayer times, and transaction history.',
-    href: '/examples/islamic-finance-dashboard',
-    icon: Landmark,
-    tags: ['GCC', 'Islamic', 'Finance', 'Zakat', 'DataTable', 'RTL'],
-    status: 'ready' as const,
-    featured: true,
-  },
-  {
-    title: 'DataTable Showcase',
-    description: 'Advanced data table with sorting, filtering, pagination, and export. Demonstrates all DataTable features with 50 sample users.',
-    href: '/examples/datatable-showcase',
-    icon: Table,
-    tags: ['DataTable', 'Sorting', 'Filtering', 'Export', 'RTL'],
-    status: 'ready' as const,
-  },
-  {
-    title: 'Multi-Step Registration Form',
-    description: 'A comprehensive 4-step registration form with validation, bilingual error messages, and perfect RTL support.',
-    href: '/examples/registration',
-    icon: FileText,
-    tags: ['Forms', 'Validation', 'Multi-step', 'RTL'],
-    status: 'ready' as const,
-  },
-  {
-    title: 'Dashboard',
-    description: 'Data visualization dashboard with RTL charts, statistics cards, and responsive layout with mock data.',
-    href: '/examples/dashboard',
-    icon: LayoutDashboard,
-    tags: ['Dashboard', 'Charts', 'Data', 'RTL'],
-    status: 'ready' as const,
-  },
-  {
-    title: 'Calendar & Date Picker',
-    description: 'Calendar interface with Hijri calendar support for GCC markets.',
-    href: '/examples/calendar',
-    icon: Calendar,
-    tags: ['Calendar', 'Hijri', 'GCC', 'RTL'],
-    status: 'ready' as const,
-    featured: true,
-  },
-  {
-    title: 'Real Estate Dashboard',
-    description: 'Property listings platform with bilingual descriptions, search filters, and property cards with mock data.',
-    href: '/examples/real-estate',
-    icon: Home,
-    tags: ['Real Estate', 'Listings', 'Search', 'GCC', 'RTL'],
-    status: 'ready' as const,
-    featured: true,
-  },
-  {
-    title: 'Portfolio Site',
-    description: 'Creative professional portfolio with project showcase, case studies, and contact forms. Perfect for designers and developers.',
-    href: '/examples/portfolio',
-    icon: LayoutDashboard,
-    tags: ['Portfolio', 'Showcase', 'Creative', 'RTL'],
-    status: 'ready' as const,
-    featured: true,
-  },
-  {
-    title: 'Marketplace',
-    description: 'Multi-vendor marketplace with product listings, seller dashboards, and order management. Full e-commerce solution.',
-    href: '/examples/marketplace',
-    icon: Store,
-    tags: ['Marketplace', 'E-commerce', 'Multi-vendor', 'Orders', 'RTL'],
-    status: 'ready' as const,
-    featured: true,
-  },
-  {
-    title: 'B2B Marketplace',
-    description: 'Business-to-business marketplace with bulk ordering, volume pricing, RFQ system, and credit terms. Perfect for wholesale operations.',
-    href: '/examples/b2b-marketplace',
-    icon: ShoppingCart,
-    tags: ['B2B', 'Wholesale', 'Bulk Orders', 'RFQ', 'Credit Terms', 'RTL'],
-    status: 'ready' as const,
-    featured: true,
-  },
-  {
-    title: 'CMS / Content Management',
-    description: 'Full-featured content management system with rich text editor, file uploads, posts management, and bilingual content support.',
-    href: '/examples/cms',
-    icon: FileEdit,
-    tags: ['CMS', 'Content', 'Editor', 'Dashboard Shell', 'RTL'],
-    status: 'ready' as const,
-    featured: true,
-  },
-  {
-    title: 'Simple AI Chat',
-    description: 'Clean AI chat interface with streaming responses, message history, and bilingual support. Perfect starting point for chat applications.',
-    href: '/examples/ai-chat-simple',
-    icon: MessageSquare,
-    tags: ['AI', 'Chat', 'Streaming', 'LLM', 'RTL'],
-    status: 'ready' as const,
-    featured: true,
-  },
-  {
-    title: 'Advanced AI Playground',
-    description: 'Full-featured AI playground with model selection, parameter controls, token tracking, conversation history, and settings panel.',
-    href: '/examples/ai-playground',
-    icon: Bot,
-    tags: ['AI', 'LLM', 'Parameters', 'Models', 'Tokens', 'RTL'],
-    status: 'ready' as const,
-    featured: true,
-  },
-  {
-    title: 'AI Code Assistant',
-    description: 'Specialized AI assistant for code with explain, improve, fix, and generate modes. Includes syntax highlighting and code examples.',
-    href: '/examples/ai-code-assistant',
-    icon: Code2,
-    tags: ['AI', 'Code', 'Programming', 'LLM', 'RTL'],
-    status: 'ready' as const,
-    featured: true,
-  },
-  {
-    title: 'Document Q&A',
-    description: 'AI-powered document analysis with question answering, source citations, and document management. Perfect for knowledge bases.',
-    href: '/examples/ai-document-qa',
-    icon: BookOpen,
-    tags: ['AI', 'Documents', 'Q&A', 'Search', 'LLM', 'RTL'],
-    status: 'ready' as const,
-    featured: true,
-  },
-  {
-    title: 'Multi-Agent Chat',
-    description: 'Advanced multi-agent system with specialized AI assistants (Code Expert, Creative Writer, Data Analyst) collaborating in conversations.',
-    href: '/examples/ai-multi-agent',
-    icon: Users,
-    tags: ['AI', 'Multi-Agent', 'Collaboration', 'LLM', 'RTL'],
-    status: 'ready' as const,
-    featured: true,
-  },
-  {
-    title: 'Basic Workflow',
-    description: 'Simple workflow builder with drag-and-drop nodes and connections. Perfect starting point for understanding workflow automation.',
-    href: '/examples/workflow-basic',
-    icon: GitBranch,
-    tags: ['Workflow', 'Drag & Drop', 'Automation', 'RTL'],
-    status: 'ready' as const,
-    featured: true,
-  },
-  {
-    title: 'AI Workflow',
-    description: 'AI-powered workflow builder with LLM integration, model selection, token tracking, and cost estimation. Build intelligent automation pipelines.',
-    href: '/examples/ai-workflow',
-    icon: Workflow,
-    tags: ['Workflow', 'AI', 'LLM', 'Automation', 'Tokens', 'RTL'],
-    status: 'ready' as const,
-    featured: true,
-  },
-  {
-    title: 'Analytics Dashboard',
-    description: 'Real-time analytics with charts, metrics, and data visualization. Track user behavior and business KPIs with RTL-ready charts.',
-    href: '/examples/analytics',
-    icon: TrendingUp,
-    tags: ['Analytics', 'Charts', 'Metrics', 'Data', 'RTL'],
-    status: 'coming-soon' as const,
-  },
-]
 
 export default function ExamplesPage() {
   const { locale } = useDirection()
   const t = content[locale]
+
+  // Get examples from i18n
+  const examples: Example[] = t.exampleCards
 
   return (
     <div className="min-h-screen">
@@ -238,7 +93,7 @@ export default function ExamplesPage() {
             {t.examples.title}
           </h1>
           <p className="text-xl text-muted-foreground">
-            {t.examples.description}
+            {t.examples.subtitle}
           </p>
         </div>
 
@@ -258,7 +113,10 @@ export default function ExamplesPage() {
                 <CardHeader>
                   <div className="flex items-start justify-between mb-2">
                     <div className="p-2 bg-primary/10 rounded-lg">
-                      <example.icon className="h-6 w-6 text-primary" />
+                      {(() => {
+                        const Icon = iconMap[example.href]
+                        return Icon ? <Icon className="h-6 w-6 text-primary" /> : null
+                      })()}
                     </div>
                     {example.status === 'coming-soon' && (
                       <Badge variant="outline" className="text-xs">

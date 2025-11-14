@@ -3,6 +3,7 @@
 import * as React from 'react'
 import Link from 'next/link'
 import { useDirection } from '@/components/providers/direction-provider'
+import { content } from '@/lib/i18n'
 import { ChatMessage } from '@/components/ui/chat-message'
 import { PromptInput } from '@/components/ui/prompt-input'
 import { ThinkingIndicator } from '@/components/ui/thinking-indicator'

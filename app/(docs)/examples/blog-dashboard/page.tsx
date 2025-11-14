@@ -16,6 +16,8 @@ import {
   CheckCircle2,
   ArrowRight
 } from 'lucide-react'
+import { useDirection } from '@/components/providers/direction-provider'
+import { content } from '@/lib/i18n'
 
 export const metadata: Metadata = {
   title: 'Blog Dashboard Starter - Noor UI',
@@ -149,9 +151,9 @@ create policy "Users can manage own posts"
         </p>
         <div className="flex gap-4">
           <Button size="lg" asChild>
-            <Link href="/starters/blog-dashboard">
+            <Link href="/starters">
               <FileText className="h-5 w-5 me-2" />
-              View Documentation
+              View All Starters
               <ExternalLink className="h-4 w-4 ms-2" />
             </Link>
           </Button>
@@ -336,8 +338,8 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key`}
                 </p>
               </div>
               <Button size="lg" asChild>
-                <Link href="/starters/blog-dashboard">
-                  Complete Documentation
+                <Link href="/starters">
+                  View All Starters
                   <ArrowRight className="h-4 w-4 ms-2" />
                 </Link>
               </Button>

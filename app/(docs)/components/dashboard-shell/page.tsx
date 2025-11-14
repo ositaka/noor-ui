@@ -20,6 +20,8 @@ import {
   MessageSquare,
 } from 'lucide-react'
 import { useToast } from '@/hooks/use-toast'
+import { useDirection } from '@/components/providers/direction-provider'
+import { content } from '@/lib/i18n'
 
 const propDefinitions = [
   {

@@ -92,11 +92,11 @@ const inCardCode = `<Card>
 const navigationCode = `<nav className="flex items-center gap-2 p-4">
   <a href="/" className="font-medium hover:text-primary">Home</a>
   <Separator orientation="vertical" className="h-4" />
-  <a href="/about" className="font-medium hover:text-primary">About</a>
+  <a href="/components" className="font-medium hover:text-primary">Components</a>
   <Separator orientation="vertical" className="h-4" />
-  <a href="/services" className="font-medium hover:text-primary">Services</a>
+  <a href="/examples" className="font-medium hover:text-primary">Examples</a>
   <Separator orientation="vertical" className="h-4" />
-  <a href="/contact" className="font-medium hover:text-primary">Contact</a>
+  <a href="/documentation" className="font-medium hover:text-primary">Documentation</a>
 </nav>`
 
 const listCode = `<ul className="space-y-3">

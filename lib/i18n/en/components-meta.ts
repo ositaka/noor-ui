@@ -1,0 +1,65 @@
+/**
+ * EN translations - components-meta
+ * Auto-generated from lib/i18n.ts
+ */
+
+export const components_meta = {
+components: {
+      title: 'Components',
+      description: '64 beautifully designed components built with Radix UI, Tailwind CSS, and React Flow. 54 production-ready, 10 experimental AI/LLM components. Full RTL support, accessible, and customizable.',
+      quickPreview: 'Quick Preview',
+      previewDescription: 'See how components adapt to different directions',
+      categories: {
+        core: 'Core',
+        coreDesc: 'Essential building blocks for your UI',
+        forms: 'Forms',
+        formsDesc: 'Form elements with validation support',
+        dataDisplay: 'Data Display',
+        dataDisplayDesc: 'Components for displaying data and information',
+        feedback: 'Feedback',
+        feedbackDesc: 'Components for user notifications and feedback',
+        navigation: 'Navigation',
+        navigationDesc: 'Components for site navigation and menus',
+        overlays: 'Overlays & Layout',
+        overlaysDesc: 'Components for overlays and content organization',
+        gcc: 'GCC-Specific',
+        gccDesc: 'Components tailored for the GCC market and Islamic applications',
+        advancedForms: 'Advanced Forms & Inputs',
+        advancedFormsDesc: 'Advanced form components for complex input scenarios',
+        layout: 'Layout & Shell',
+        layoutDesc: 'Application layout and shell components for building dashboards',
+        userInterface: 'User Interface',
+        userInterfaceDesc: 'User-facing interactive components for common UX patterns',
+        ai: 'AI/LLM Shell',
+        aiDesc: 'Components for building AI chat interfaces and LLM-powered applications',
+        workflow: 'Workflow & Automation',
+        workflowDesc: 'Node-based workflow builders for creating automation pipelines',
+      },
+      needHelp: 'Need Help?',
+      helpDescription: 'Check out our documentation or join our community',
+      viewDocs: 'View Documentation',
+      browseExamples: 'Browse Examples',
+      ready: 'Ready',
+      comingSoon: 'Coming Soon',
+    },
+
+componentDocs: {
+      preview: 'Preview',
+      installation: 'Installation',
+      usage: 'Usage',
+      examples: 'Examples',
+      props: 'Props',
+      accessibility: 'Accessibility',
+      rtlConsiderations: 'RTL Considerations',
+      keyboardNavigation: 'Keyboard Navigation',
+      screenReader: 'Screen Reader',
+      ariaAttributes: 'ARIA Attributes',
+      variants: 'Variants',
+      sizes: 'Sizes',
+      withIcons: 'With Icons',
+      loadingState: 'Loading State',
+      rtlSupport: 'Buttons automatically support RTL layout. Icons positioned with logical properties (me-* for margin-inline-end, ms-* for margin-inline-start) will flip correctly.',
+      ltr: 'LTR (English)',
+      rtl: 'RTL (العربية)',
+    }
+}

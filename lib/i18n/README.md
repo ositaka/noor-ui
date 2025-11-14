@@ -1,145 +1,100 @@
-# i18n - Scalable Translation System
+# i18n Structure
 
-## 🎯 Structure (Option B Implementation)
+This directory contains all internationalization (i18n) content for the application, organized into a split file structure for better maintainability.
 
-Split by **language + section** for maximum scalability and editability.
+## Structure
 
 ```
 lib/i18n/
-├── index.ts              # Main export (backward compatible)
-├── en/
-│   ├── index.ts          # English merger
-│   ├── common.ts         # Nav, UI, common (2.4 KB, ~800 tokens)
-│   ├── home.ts           # Homepage (1.7 KB, ~600 tokens)
-│   ├── themes.ts         # Themes (2.7 KB, ~900 tokens)
-│   ├── documentation.ts  # Documentation pages (25.6 KB, ~8.5K tokens)
+├── index.ts              # Main entry point - combines all sections
+├── types.ts              # TypeScript type definitions (Locale)
+├── en/                   # English translations
+│   ├── index.ts          # Auto-generated - combines all EN sections
+│   ├── common.ts         # Nav, UI, common elements
+│   ├── home.ts           # Homepage content
+│   ├── documentation.ts  # Documentation pages (11 pages)
+│   ├── themes.ts         # Theme-related content
+│   ├── gcc.ts            # GCC-specific content
+│   ├── examples.ts       # Examples listing
 │   ├── getting-started.ts
-│   ├── gcc.ts
-│   ├── examples.ts
 │   ├── components-meta.ts
-│   ├── components-basic.ts      # Button, Card, Input, etc.
-│   ├── components-forms.ts      # Form, Checkbox, Radio, etc.
-│   ├── components-data.ts       # Table, Pagination, etc.
-│   ├── components-overlay.ts    # Dialog, Popover, etc.
-│   ├── components-advanced.ts   # Calendar, DatePicker, etc.
-│   └── components-misc.ts
-└── ar/
-    ├── index.ts          # Arabic merger
-    ├── common.ts         # (2.5 KB, ~850 tokens)
-    ├── home.ts
-    ├── themes.ts
-    ├── documentation.ts  # ⚠️ Incomplete - missing 12 sections
-    ├── getting-started.ts
-    ├── gcc.ts
-    ├── examples.ts
-    ├── components-meta.ts
-    ├── components-basic.ts
-    ├── components-forms.ts
-    ├── components-data.ts
-    ├── components-overlay.ts
-    ├── components-advanced.ts
-    └── components-misc.ts
+│   ├── components-basic.ts      # Basic components (button, card, input, etc.)
+│   ├── components-forms.ts      # Form components (checkbox, switch, radio, etc.)
+│   ├── components-data.ts       # Data components (table, pagination, tabs, etc.)
+│   ├── components-overlay.ts    # Overlay components (dialog, popover, sheet, etc.)
+│   ├── components-advanced.ts   # Advanced components (calendar, file upload, etc.)
+│   └── components-misc.ts       # Miscellaneous (avatar, alert)
+└── ar/                   # Arabic translations (mirrors en/ structure)
+    └── (same file structure as en/)
 ```
 
-## ✅ Benefits
+## Rules and Guidelines
 
-### 1. **All Files Editable** ✓
-- **Largest file**: `en/documentation.ts` (25.6 KB, ~8.5K tokens)
-- **Well under** the 25K token limit
-- Can edit any file completely in Claude Code
+### 1. **NEVER merge back into a single file**
+   - The split structure is intentional for maintainability
+   - Each file should remain under 600 lines
+   - Old monolithic file is backed up as `lib/i18n.ts.monolithic.backup`
 
-### 2. **Scalable** ✓
-- Add new components? Just edit the relevant components-*.ts file
-- Add new docs? Edit documentation.ts
-- Easy to find what you need
+### 2. **Maintain parallel structure**
+   - English (`en/`) and Arabic (`ar/`) must have identical file structures
+   - Every section in `en/` must have a matching section in `ar/`
+   - Same keys, same nesting structure
 
-### 3. **Backward Compatible** ✓
-- All existing code works without changes
-- `import { content } from '@/lib/i18n'` still works
-- No migration needed
+### 3. **Adding new translations**
+   - Add to BOTH `en/[section].ts` AND `ar/[section].ts`
+   - Keep the same object structure and key names
+   - Update both language index files if needed
 
-### 4. **Easy to Maintain** ✓
-- Clear file organization
-- Related translations grouped together
-- Auto-generated from script (can re-run if needed)
+### 4. **File organization**
+   - `common.ts`: Navigation, UI elements, shared strings
+   - `home.ts`: Homepage-specific content
+   - `documentation.ts`: All documentation pages (RTL guide, WCAG, etc.)
+   - `components-*.ts`: Component documentation grouped by category
+   - `examples.ts`: Example listings and metadata
+   - `themes.ts`, `gcc.ts`, etc.: Feature-specific content
 
-## 📊 File Size Stats
+### 5. **Regenerating from monolithic file**
+   - Use `scripts/split-i18n-smart.js` to regenerate the split structure
+   - Only run when major restructuring is needed
+   - The script extracts sections using brace-matching logic
 
-**English**: 14 files, 3,221 lines total
-**Arabic**: 14 files, 2,905 lines total
+### 6. **Translation quality**
+   - Arabic translations should be meaningful, not just English text in Arabic section
+   - Maintain RTL-appropriate phrasing and sentence structure
+   - Keep technical terms (like "Next.js", "WCAG") in English when appropriate
 
-All files are **well under the 25K token limit**:
-- Smallest: `gcc.ts` (~300 bytes)
-- Largest: `documentation.ts` (~25 KB)
-- Average: ~1,800 bytes per file
+### 7. **Type safety**
+   - The main `index.ts` re-exports everything
+   - Types are inferred from the English structure
+   - No need to duplicate type definitions
 
-## 🚀 Usage
+## Usage
 
-### For Developers
-No changes needed! Import works the same:
+Import from the main entry point:
 
 ```typescript
-import { content } from '@/lib/i18n'
-import { useDirection } from '@/components/providers/direction-provider'
+import { content, type Locale } from '@/lib/i18n'
 
-function MyComponent() {
-  const { locale } = useDirection()
-  const t = content[locale]
-
-  return <h1>{t.home.hero.title}</h1>
-}
+// Access translations
+const { locale } = useDirection()
+const t = content[locale].nav
 ```
 
-### For Translators
-Edit individual files based on what you're translating:
+## Maintenance
 
-- **Adding button labels?** → Edit `en/components-basic.ts` and `ar/components-basic.ts`
-- **Updating homepage?** → Edit `en/home.ts` and `ar/home.ts`
-- **Adding documentation?** → Edit `en/documentation.ts` and `ar/documentation.ts`
+- Each language file is auto-generated from the original structure
+- The `en/index.ts` and `ar/index.ts` files combine their respective sections
+- Main `index.ts` combines both languages into the `content` export
 
-## ⚠️ Missing Arabic Translations
+## File Sizes
 
-The following sections need Arabic translation in `ar/documentation.ts`:
+Total: ~8,400 lines split across 32 files
+- Largest files: ~600 lines (components-advanced)
+- Smallest files: ~15 lines (getting-started)
+- Average: ~250 lines per file
 
-- `documentationPages` (main docs navigation)
-- `installation` guide
-- `quickStart` guide
-- `configuration` guide
-- `bidi` (bidirectional text docs)
-- `arabic` (Arabic typography docs)
-- `keyboard` (keyboard navigation)
-- `screenReaders`
-- `wcag` (accessibility compliance)
-- `designTokens`
-- `accessibilitySection`
-- `main`
-
-## 🔧 Re-generating Files
-
-If you edit the original `i18n.ts.archive`, re-run:
-
-```bash
-node scripts/split-i18n-smart.js
-```
-
-This will regenerate all split files.
-
-## 📝 Adding New Translations
-
-### Option 1: Edit Split Files Directly (Recommended)
-1. Open the relevant file (e.g., `en/home.ts`)
-2. Add your translation
-3. Repeat for other language (e.g., `ar/home.ts`)
-4. Done! Build will pick it up automatically
-
-### Option 2: Add to Archive & Re-split
-1. Edit `lib/i18n.ts.archive`
-2. Run `node scripts/split-i18n-smart.js`
-3. Commit the generated files
-
-## 🎉 Result
-
-**Before**: 1 file, 6,173 lines, 81K tokens ❌ (too large to edit)
-**After**: 28 files, ~6K lines total, max 8.5K tokens per file ✅ (all editable!)
-
-This is now **truly scalable** and ready for growth!
+This structure significantly improves:
+- Code navigation
+- Git merge conflicts reduction
+- Editor performance
+- Maintainability

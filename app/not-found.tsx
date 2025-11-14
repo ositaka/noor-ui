@@ -79,6 +79,10 @@ export default function NotFound() {
               <Link href="/starters" className="text-sm text-primary hover:underline">
                 {t.notFound.starters}
               </Link>
+              <span className="text-muted-foreground">•</span>
+              <Link href="/sitemap" className="text-sm text-primary hover:underline">
+                Sitemap
+              </Link>
             </div>
           </div>
         </CardContent>

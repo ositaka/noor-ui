@@ -123,19 +123,19 @@ export function SiteFooter() {
             <h4 className="font-semibold mb-4">{content.community}</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li>
-                <Link href="/github" className="hover:text-foreground transition-colors">
+                <span className="cursor-default">
                   {content.github}
-                </Link>
+                </span>
               </li>
               <li>
-                <Link href="/discord" className="hover:text-foreground transition-colors">
+                <span className="cursor-default">
                   {content.discord}
-                </Link>
+                </span>
               </li>
               <li>
-                <Link href="/twitter" className="hover:text-foreground transition-colors">
+                <span className="cursor-default">
                   {content.twitter}
-                </Link>
+                </span>
               </li>
             </ul>
           </div>

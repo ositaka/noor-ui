@@ -3,6 +3,7 @@
 import * as React from 'react'
 import Link from 'next/link'
 import { useDirection } from '@/components/providers/direction-provider'
+import { content } from '@/lib/i18n'
 import { WorkflowCanvas } from '@/components/ui/workflow-canvas'
 import { WorkflowNode, type WorkflowNodeData } from '@/components/ui/workflow-node'
 import { workflowNodeTypes } from '@/components/ui/workflow-nodes'
@@ -13,7 +14,7 @@ import { Card } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
 import { cn } from '@/lib/utils'
-import { Play, RotateCcw, Settings, Sparkles } from 'lucide-react'
+import { Play, RotateCcw, Settings, Sparkles, AlertCircle } from 'lucide-react'
 import type { Node, Edge, NodeProps } from '@xyflow/react'
 
 // Custom LLM Node with Model Selector
@@ -217,15 +218,27 @@ export default function AIWorkflowPage() {
         {/* Page Header */}
         <div className="mb-8">
           <div className="flex items-center justify-between mb-4">
-            <div>
-              <h1 className="text-4xl font-bold tracking-tight mb-2">
-                {isRTL ? 'سير عمل الذكاء الاصطناعي' : 'AI Workflow'}
-              </h1>
+            <div className="space-y-3">
+              <div className="flex items-center gap-3">
+                <h1 className="text-4xl font-bold tracking-tight">
+                  {isRTL ? 'سير عمل الذكاء الاصطناعي' : 'AI Workflow'}
+                </h1>
+                <Badge variant="secondary" className="flex items-center gap-1.5">
+                  <AlertCircle className="h-3 w-3" />
+                  {isRTL ? 'قيد التطوير' : 'Work in Progress'}
+                </Badge>
+              </div>
               <p className="text-xl text-muted-foreground max-w-3xl">
                 {isRTL
                   ? 'أداة بناء سير العمل مع تكامل LLM وتتبع الرموز ومحددات النماذج.'
                   : 'Workflow builder with LLM integration, token tracking, and model selectors.'}
               </p>
+              <div className="flex items-start gap-2 p-3 bg-yellow-50 dark:bg-yellow-950/20 border border-yellow-200 dark:border-yellow-800 rounded-lg max-w-3xl">
+                <AlertCircle className="h-4 w-4 text-yellow-600 dark:text-yellow-500 mt-0.5 flex-shrink-0" />
+                <p className="text-sm text-yellow-800 dark:text-yellow-200">
+                  <strong>{isRTL ? 'ملاحظة:' : 'Note:'}</strong> {isRTL ? 'هذا المثال قيد التطوير حاليًا. قد لا تعمل بعض الميزات كما هو متوقع. نحن نعمل بنشاط على التحسينات وسنقوم بتحديث الوثائق بمجرد أن تصبح مستقرة.' : 'This example is currently under development. Some features may not work as expected. We\'re actively working on improvements and will update the documentation once stable.'}
+                </p>
+              </div>
             </div>
             <div className="flex items-center gap-2">
               <Button

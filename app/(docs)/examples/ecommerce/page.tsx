@@ -78,6 +78,8 @@ export default function EcommercePage() {
 import { useCart } from '@/starters/ecommerce/hooks/use-cart'
 import { products } from '@/starters/ecommerce/lib/products'
 import { Button } from '@/components/ui/button'
+import { useDirection } from '@/components/providers/direction-provider'
+import { content } from '@/lib/i18n'
 
 export default function ProductCard({ product }) {
   const { addItem } = useCart()
@@ -122,9 +124,9 @@ const {
         </p>
         <div className="flex gap-4">
           <Button size="lg" asChild>
-            <Link href="/starters/ecommerce">
+            <Link href="/starters">
               <Package className="h-5 w-5 me-2" />
-              View Documentation
+              View All Starters
               <ExternalLink className="h-4 w-4 ms-2" />
             </Link>
           </Button>
@@ -315,8 +317,8 @@ npm run dev
                 </p>
               </div>
               <Button size="lg" asChild>
-                <Link href="/starters/ecommerce">
-                  Complete Documentation
+                <Link href="/starters">
+                  View All Starters
                   <ArrowRight className="h-4 w-4 ms-2" />
                 </Link>
               </Button>

@@ -67,7 +67,7 @@ const customSeparatorCode = `import { Slash } from 'lucide-react'
       <Slash />
     </BreadcrumbSeparator>
     <BreadcrumbItem>
-      <BreadcrumbLink href="/docs">Docs</BreadcrumbLink>
+      <BreadcrumbLink href="/documentation">Documentation</BreadcrumbLink>
     </BreadcrumbItem>
     <BreadcrumbSeparator>
       <Slash />
@@ -90,9 +90,9 @@ const withIconsCode = `import { Home, Folder, File } from 'lucide-react'
     </BreadcrumbItem>
     <BreadcrumbSeparator />
     <BreadcrumbItem>
-      <BreadcrumbLink href="/projects" className="flex items-center gap-2">
+      <BreadcrumbLink href="/examples" className="flex items-center gap-2">
         <Folder className="h-4 w-4" />
-        Projects
+        Examples
       </BreadcrumbLink>
     </BreadcrumbItem>
     <BreadcrumbSeparator />
@@ -194,7 +194,7 @@ export default function BreadcrumbComponentPage() {
                     </BreadcrumbItem>
                     <BreadcrumbSeparator>/</BreadcrumbSeparator>
                     <BreadcrumbItem>
-                      <BreadcrumbLink href="/docs">Docs</BreadcrumbLink>
+                      <BreadcrumbLink href="/documentation">Documentation</BreadcrumbLink>
                     </BreadcrumbItem>
                     <BreadcrumbSeparator>/</BreadcrumbSeparator>
                     <BreadcrumbItem>
@@ -219,9 +219,9 @@ export default function BreadcrumbComponentPage() {
                     </BreadcrumbItem>
                     <BreadcrumbSeparator />
                     <BreadcrumbItem>
-                      <BreadcrumbLink href="/projects" className="flex items-center gap-2">
+                      <BreadcrumbLink href="/examples" className="flex items-center gap-2">
                         <Folder className="h-4 w-4" />
-                        Projects
+                        Examples
                       </BreadcrumbLink>
                     </BreadcrumbItem>
                     <BreadcrumbSeparator />
@@ -256,9 +256,9 @@ export default function BreadcrumbComponentPage() {
                 </BreadcrumbItem>
                 <BreadcrumbSeparator />
                 <BreadcrumbItem>
-                  <BreadcrumbLink href="/products" className="flex items-center gap-2">
+                  <BreadcrumbLink href="/components" className="flex items-center gap-2">
                     <Folder className="h-4 w-4" />
-                    Products
+                    Components
                   </BreadcrumbLink>
                 </BreadcrumbItem>
                 <BreadcrumbSeparator />

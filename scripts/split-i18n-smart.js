@@ -115,8 +115,8 @@ const sectionGroups = {
     'sliderComponent', 'textareaComponent'
   ],
   'components-data': [
-    'tableComponent', 'paginationComponent', 'accordionComponent',
-    'collapsibleComponent', 'tabsComponent', 'breadcrumbComponent'
+    'tableComponent', 'dataTableComponent', 'paginationComponent', 'accordionComponent',
+    'collapsibleComponent', 'tabsComponent', 'breadcrumbComponent', 'commandComponent'
   ],
   'components-overlay': [
     'dialogComponent', 'popoverComponent', 'dropdownMenuComponent',
@@ -128,6 +128,17 @@ const sectionGroups = {
     'progressComponent', 'skeletonComponent'
   ],
   'components-misc': ['avatarComponent', 'alertComponent'],
+  'components-gcc': [
+    'arabicNumberComponent', 'hijriDateComponent', 'prayerTimesComponent',
+    'zakatCalculatorComponent'
+  ],
+  'components-experimental': [
+    'chatMessageComponent', 'modelSelectorComponent', 'thinkingIndicatorComponent',
+    'workflowNodeComponent', 'workflowCanvasComponent', 'conversationHistoryComponent',
+    'dashboardShellComponent', 'parameterSliderComponent', 'tokenCounterComponent',
+    'featureCardComponent', 'promptInputComponent', 'userMenuComponent',
+    'notificationCenterComponent', 'messageActionsComponent'
+  ],
 };
 
 /**

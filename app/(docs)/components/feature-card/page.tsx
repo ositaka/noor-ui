@@ -65,25 +65,27 @@ import { Rocket } from 'lucide-react'
 
 const gridLayoutCode = `import { FeatureCard } from '@/components/ui/feature-card'
 import { Zap, Shield, Package } from 'lucide-react'
+import { useDirection } from '@/components/providers/direction-provider'
+import { content } from '@/lib/i18n'
 
 <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
   <FeatureCard
     icon={Zap}
     title="Lightning Fast"
     description="Optimized for performance"
-    href="/features/performance"
+    href="/components"
   />
   <FeatureCard
     icon={Shield}
     title="Secure by Default"
     description="Built with security in mind"
-    href="/features/security"
+    href="/documentation"
   />
   <FeatureCard
     icon={Package}
     title="Easy to Use"
     description="Simple API, powerful results"
-    href="/features/dx"
+    href="/examples"
   />
 </div>`
 
@@ -94,7 +96,7 @@ const rtlCode = `// RTL support is automatic!
   icon={Sparkles}
   title="ميزة رائعة"
   description="هذه الميزة ستغير حياتك"
-  href="/features"
+  href="/components"
 />
 // In RTL: Layout mirrors automatically`
 
@@ -209,19 +211,19 @@ export default function FeatureCardPage() {
                       icon={Zap}
                       title="Lightning Fast"
                       description="Optimized for performance"
-                      href="/features/performance"
+                      href="/components"
                     />
                     <FeatureCard
                       icon={Shield}
                       title="Secure by Default"
                       description="Built with security in mind"
-                      href="/features/security"
+                      href="/documentation"
                     />
                     <FeatureCard
                       icon={Package}
                       title="Easy to Use"
                       description="Simple API, powerful results"
-                      href="/features/dx"
+                      href="/examples"
                     />
                   </div>
                 </ComponentShowcase.Demo>

@@ -1,0 +1,128 @@
+/**
+ * EN translations - common
+ * Auto-generated from lib/i18n.ts
+ */
+
+export const common = {
+nav: {
+      home: 'Home',
+      components: 'Components',
+      examples: 'Examples',
+      rtlGuide: 'RTL Guide',
+      tokens: 'Design Tokens',
+      themes: 'Themes',
+      documentation: 'Documentation',
+      getStarted: 'Get Started',
+    },
+
+ui: {
+      button: {
+        submit: 'Submit',
+        cancel: 'Cancel',
+        save: 'Save',
+        delete: 'Delete',
+        edit: 'Edit',
+        close: 'Close',
+        confirm: 'Confirm',
+        back: 'Back',
+        next: 'Next',
+        previous: 'Previous',
+        loading: 'Loading...',
+        copy: 'Copy',
+        copied: 'Copied!',
+        tryIt: 'Try it live',
+      },
+      form: {
+        firstName: 'First Name',
+        lastName: 'Last Name',
+        email: 'Email',
+        password: 'Password',
+        confirmPassword: 'Confirm Password',
+        phone: 'Phone Number',
+        address: 'Address',
+        city: 'City',
+        country: 'Country',
+        message: 'Message',
+        search: 'Search',
+        filter: 'Filter',
+        sort: 'Sort',
+        required: 'Required',
+        optional: 'Optional',
+        placeholder: 'Enter text...',
+      },
+      status: {
+        success: 'Success',
+        error: 'Error',
+        warning: 'Warning',
+        info: 'Information',
+        loading: 'Loading',
+        pending: 'Pending',
+        completed: 'Completed',
+        failed: 'Failed',
+      },
+      accessibility: {
+        menu: 'Menu',
+        closeMenu: 'Close menu',
+        openMenu: 'Open menu',
+        skipToContent: 'Skip to main content',
+        toggleTheme: 'Toggle theme',
+        toggleDirection: 'Toggle text direction',
+        increaseTextSize: 'Increase text size',
+        decreaseTextSize: 'Decrease text size',
+      },
+    },
+
+common: {
+        home: 'Home',
+        documentation: 'Documentation',
+        learnMore: 'Learn More',
+        nextSteps: 'Next Steps',
+        relatedResources: 'Related Resources',
+        resources: 'Resources',
+        community: 'Community',
+        tagline: 'Bringing light to multilingual interface design.',
+        copyright: '© 2025 Noor UI. Built with Next.js, TypeScript, and Tailwind CSS.',
+        readyToGo: 'Ready to go!',
+        autoRTL: 'Your components will automatically support RTL when the direction changes.',
+      },
+
+  notFound: {
+        title: 'Page Not Found',
+        description: 'Sorry, we couldn\'t find the page you\'re looking for. It might have been moved or doesn\'t exist.',
+        goHome: 'Go Home',
+        browseComponents: 'Browse Components',
+        tryLinks: 'Or try one of these helpful links:',
+        starters: 'Production Starters',
+      },
+
+  sitemap: {
+        title: 'Sitemap',
+        description: 'Complete navigation map of all pages and components in Noor UI. Find everything from getting started guides to individual components.',
+        breadcrumb: {
+          home: 'Home',
+          sitemap: 'Sitemap',
+        },
+        sections: {
+          gettingStarted: 'Getting Started',
+          components: 'Components',
+          examples: 'Examples',
+          resources: 'Resources & Documentation',
+          themes: 'Themes & Design',
+        },
+        componentCategories: {
+          basic: 'Basic Components',
+          forms: 'Form Components',
+          data: 'Data Display',
+          overlay: 'Overlay & Popups',
+          advanced: 'Advanced Components',
+          gcc: 'GCC-Specific Components',
+          experimental: 'Experimental (AI/LLM)',
+          misc: 'Miscellaneous',
+        },
+        counts: {
+          totalComponents: '64 Components',
+          totalExamples: '6 Live Examples',
+          totalPages: '100+ Pages',
+        },
+      },
+}

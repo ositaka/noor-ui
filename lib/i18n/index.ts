@@ -1,6 +1,16 @@
 /**
- * Internationalization exports
- * Currently using monolithic file, split version needs better extraction script
+ * Internationalization content
+ * Main entry point - imports and combines all language sections
  */
 
-export { content, type Locale } from '../i18n'
+export type { Locale } from './types'
+export { en } from './en'
+export { ar } from './ar'
+
+import { en } from './en'
+import { ar } from './ar'
+
+export const content = {
+  en,
+  ar,
+}

@@ -11,6 +11,8 @@ import { Badge } from '@/components/ui/badge'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Info, MessageSquare, UserPlus, Heart, Star } from 'lucide-react'
 import { useToast } from '@/hooks/use-toast'
+import { useDirection } from '@/components/providers/direction-provider'
+import { content } from '@/lib/i18n'
 
 const propDefinitions = [
   {

@@ -8,6 +8,7 @@ import { EmptyState } from '@/components/ui/empty-state'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { useDirection } from '@/components/providers/direction-provider'
+import { content } from '@/lib/i18n'
 import { FileText, Inbox, Search, Users, Plus } from 'lucide-react'
 
 export default function EmptyStatePage() {

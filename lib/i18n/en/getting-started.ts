@@ -1,0 +1,56 @@
+/**
+ * EN translations - getting-started
+ * Auto-generated from lib/i18n.ts
+ */
+
+export const getting_started = {
+  gettingStarted: {
+    title: 'Getting Started',
+    description: 'Learn how to install and configure Noor UI in your Next.js project. Built with RTL-first principles for seamless bidirectional support.',
+    installation: 'Installation',
+    installDesc: 'Install the Noor UI package using your preferred package manager:',
+    prerequisites: 'Prerequisites',
+    configuration: 'Configuration',
+    tailwindConfig: 'Tailwind Configuration',
+    tailwindConfigDesc: 'Configure Tailwind CSS to work with Noor UI. This includes adding the RTL plugin and tailwindcss-logical for bidirectional support.',
+    important: 'Important',
+    tailwindImportantNote: 'Make sure to include the Noor UI package in your content array so Tailwind can detect and compile the component styles.',
+    providerSetup: 'Provider Setup',
+    providerSetupDesc: 'Wrap your application with the required providers. This enables RTL direction switching, theming, tooltips, and toast notifications.',
+    createProvidersComponent: '1. Create Providers Component',
+    updateRootLayout: '2. Update Root Layout',
+    providerResponsibilities: 'Provider Responsibilities',
+    directionProviderDesc: 'Manages LTR/RTL direction state globally',
+    designSystemProviderDesc: 'Handles theme (light/dark) state',
+    tooltipProviderDesc: 'Required for all Tooltip components',
+    toasterDesc: 'Required for toast notifications to appear',
+    globalStyles: 'Global Styles',
+    globalStylesDesc: 'Add the design system CSS variables to your global stylesheet:',
+    quickStart: 'Quick Start',
+    quickStartDesc: "You're all set! Start using components in your application:",
+    workingWithRTL: 'Working with RTL',
+    workingWithRTLDesc: 'Use the direction hook to programmatically control or respond to direction changes:',
+    rtlBestPractices: 'RTL Best Practices',
+    rtlBestPractice1: 'Use logical properties (ms-, me-, ps-, pe-) instead of directional ones (ml-, mr-, pl-, pr-)',
+    rtlBestPractice2: 'Test all components in both LTR and RTL modes',
+    rtlBestPractice3: 'Use the direction toggle during development to verify layouts',
+    rtlBestPractice4: 'Icons and images should mirror appropriately for RTL',
+    nextSteps: 'Next Steps',
+    browseComponents: 'Browse Components',
+    browseComponentsDesc: 'Explore the full library of RTL-ready components with live examples and code snippets.',
+    viewComponents: 'View Components',
+    rtlDevGuide: 'RTL Development Guide',
+    rtlDevGuideDesc: 'Learn RTL-first development principles, patterns, and best practices for building bidirectional interfaces.',
+    readGuide: 'Read Guide',
+    quickLinks: {
+      installation: 'Installation',
+      installationDesc: 'Add the package to your project',
+      configuration: 'Configuration',
+      configurationDesc: 'Set up Tailwind and providers',
+      quickStart: 'Quick Start',
+      quickStartDesc: 'Build your first component',
+      bestPractices: 'Best Practices',
+      bestPracticesDesc: 'RTL-first development tips',
+    },
+  }
+}

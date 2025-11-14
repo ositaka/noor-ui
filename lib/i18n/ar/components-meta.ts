@@ -1,0 +1,65 @@
+/**
+ * AR translations - components-meta
+ * Auto-generated from lib/i18n.ts
+ */
+
+export const components_meta = {
+components: {
+      title: 'المكونات',
+      description: '64 مكوّن مصمم بشكل جميل باستخدام Radix UI و Tailwind CSS و React Flow. 54 مكوّن جاهز للإنتاج، 10 مكونات تجريبية للذكاء الاصطناعي. دعم كامل لاتجاه النص، قابل للوصول، وقابل للتخصيص.',
+      quickPreview: 'معاينة سريعة',
+      previewDescription: 'شاهد كيف تتكيف المكونات مع الاتجاهات المختلفة',
+      categories: {
+        core: 'الأساسية',
+        coreDesc: 'اللبنات الأساسية لواجهة المستخدم الخاصة بك',
+        forms: 'النماذج',
+        formsDesc: 'عناصر النماذج مع دعم التحقق',
+        dataDisplay: 'عرض البيانات',
+        dataDisplayDesc: 'مكونات لعرض البيانات والمعلومات',
+        feedback: 'الملاحظات',
+        feedbackDesc: 'مكونات لإشعارات المستخدم والملاحظات',
+        navigation: 'التنقل',
+        navigationDesc: 'مكونات للتنقل في الموقع والقوائم',
+        overlays: 'الطبقات والتخطيط',
+        overlaysDesc: 'مكونات للطبقات وتنظيم المحتوى',
+        gcc: 'خاص بدول الخليج',
+        gccDesc: 'مكونات مصممة خصيصاً لسوق دول الخليج والتطبيقات الإسلامية',
+        advancedForms: 'نماذج ومدخلات متقدمة',
+        advancedFormsDesc: 'مكونات نماذج متقدمة لسيناريوهات الإدخال المعقدة',
+        layout: 'التخطيط والإطار',
+        layoutDesc: 'مكونات تخطيط التطبيق والإطار لبناء لوحات المعلومات',
+        userInterface: 'واجهة المستخدم',
+        userInterfaceDesc: 'مكونات تفاعلية للمستخدم لأنماط تجربة المستخدم الشائعة',
+        ai: 'إطار الذكاء الاصطناعي',
+        aiDesc: 'مكونات لبناء واجهات الدردشة بالذكاء الاصطناعي والتطبيقات المدعومة بنماذج اللغة الكبيرة',
+        workflow: 'سير العمل والأتمتة',
+        workflowDesc: 'أدوات إنشاء سير عمل قائمة على العقد لإنشاء خطوط أتمتة',
+      },
+      needHelp: 'هل تحتاج مساعدة؟',
+      helpDescription: 'تحقق من توثيقنا أو انضم إلى مجتمعنا',
+      viewDocs: 'اطّلع على التوثيق',
+      browseExamples: 'تصفح الأمثلة',
+      ready: 'جاهز',
+      comingSoon: 'قريباً',
+    },
+
+componentDocs: {
+      preview: 'معاينة',
+      installation: 'التثبيت',
+      usage: 'الاستخدام',
+      examples: 'أمثلة',
+      props: 'الخصائص',
+      accessibility: 'إمكانية الوصول',
+      rtlConsiderations: 'اعتبارات اتجاه النص',
+      keyboardNavigation: 'التنقل بلوحة المفاتيح',
+      screenReader: 'قارئ الشاشة',
+      ariaAttributes: 'خصائص ARIA',
+      variants: 'الأشكال',
+      sizes: 'الأحجام',
+      withIcons: 'مع الأيقونات',
+      loadingState: 'حالة التحميل',
+      rtlSupport: 'الأزرار تدعم تلقائياً تخطيط اتجاه النص من اليمين لليسار. الأيقونات الموضوعة بالخصائص المنطقية (me-* لهامش نهاية السطر، ms-* لهامش بداية السطر) ستنعكس بشكل صحيح.',
+      ltr: 'من اليسار لليمين (English)',
+      rtl: 'من اليمين لليسار (العربية)',
+    }
+}
