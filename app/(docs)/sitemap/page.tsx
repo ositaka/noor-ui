@@ -46,32 +46,32 @@ export default function SitemapPage() {
   };
 
   const examples = [
-    { slug: 'login', name: 'Login Form' },
-    { slug: 'registration', name: 'Registration Form' },
-    { slug: 'dashboard', name: 'Dashboard' },
-    { slug: 'analytics', name: 'Analytics Dashboard' },
-    { slug: 'workflow-basic', name: 'Workflow Builder' },
-    { slug: 'chat', name: 'Chat Interface' },
-    { slug: 'ecommerce', name: 'E-commerce Product Grid' },
-    { slug: 'portfolio', name: 'Portfolio Gallery' },
-    { slug: 'real-estate', name: 'Real Estate Listings' },
+    { slug: 'registration', nameKey: 'registration' },
+    { slug: 'dashboard', nameKey: 'dashboard' },
+    { slug: 'cms', nameKey: 'cms' },
+    { slug: 'workflow-basic', nameKey: 'workflowBasic' },
+    { slug: 'ecommerce', nameKey: 'ecommerce' },
+    { slug: 'marketplace', nameKey: 'marketplace' },
+    { slug: 'portfolio', nameKey: 'portfolio' },
+    { slug: 'real-estate', nameKey: 'realEstate' },
+    { slug: 'islamic-finance-dashboard', nameKey: 'islamicFinanceDashboard' },
   ];
 
   const resources = [
-    { href: '/getting-started', name: 'Getting Started' },
-    { href: '/documentation', name: 'Documentation' },
-    { href: '/rtl-guide', name: 'RTL Development Guide' },
-    { href: '/roadmap', name: 'Roadmap' },
+    { href: '/getting-started', nameKey: 'gettingStarted' },
+    { href: '/documentation', nameKey: 'documentation' },
+    { href: '/rtl-guide', nameKey: 'rtlGuide' },
+    { href: '/roadmap', nameKey: 'roadmap' },
   ];
 
   const themesAndDesign = [
-    { href: '/themes', name: 'Themes' },
-    { href: '/tokens', name: 'Design Tokens' },
+    { href: '/themes', nameKey: 'themes' },
+    { href: '/tokens', nameKey: 'tokens' },
   ];
 
-  // Helper to format component slug to title
-  const formatComponentName = (slug: string) => {
-    return slug
+  // Helper to get component name with bilingual support
+  const getComponentName = (slug: string) => {
+    return t.componentNames[slug as keyof typeof t.componentNames] || slug
       .split('-')
       .map(word => word.charAt(0).toUpperCase() + word.slice(1))
       .join(' ');
@@ -133,7 +133,7 @@ export default function SitemapPage() {
                 href="/"
                 className="text-primary hover:underline"
               >
-                Home
+                {t.sitemap.links.home}
               </Link>
             </li>
             {resources.map((item) => (
@@ -142,7 +142,7 @@ export default function SitemapPage() {
                   href={item.href}
                   className="text-primary hover:underline"
                 >
-                  {item.name}
+                  {t.sitemap.links[item.nameKey as keyof typeof t.sitemap.links]}
                 </Link>
               </li>
             ))}
@@ -160,7 +160,7 @@ export default function SitemapPage() {
                 href="/examples"
                 className="text-primary hover:underline font-medium"
               >
-                All Examples →
+                {t.sitemap.links.allExamples}
               </Link>
             </li>
             {examples.map((example) => (
@@ -169,7 +169,7 @@ export default function SitemapPage() {
                   href={`/examples/${example.slug}`}
                   className="text-primary hover:underline"
                 >
-                  {example.name}
+                  {t.sitemap.links[example.nameKey as keyof typeof t.sitemap.links]}
                 </Link>
               </li>
             ))}
@@ -188,7 +188,7 @@ export default function SitemapPage() {
                   href={item.href}
                   className="text-primary hover:underline"
                 >
-                  {item.name}
+                  {t.sitemap.links[item.nameKey as keyof typeof t.sitemap.links]}
                 </Link>
               </li>
             ))}
@@ -224,7 +224,7 @@ export default function SitemapPage() {
                 href={`/components/${slug}`}
                 className="text-sm text-primary hover:underline"
               >
-                {formatComponentName(slug)}
+                {getComponentName(slug)}
               </Link>
             ))}
           </div>
@@ -242,7 +242,7 @@ export default function SitemapPage() {
                 href={`/components/${slug}`}
                 className="text-sm text-primary hover:underline"
               >
-                {formatComponentName(slug)}
+                {getComponentName(slug)}
               </Link>
             ))}
           </div>
@@ -260,7 +260,7 @@ export default function SitemapPage() {
                 href={`/components/${slug}`}
                 className="text-sm text-primary hover:underline"
               >
-                {formatComponentName(slug)}
+                {getComponentName(slug)}
               </Link>
             ))}
           </div>
@@ -278,7 +278,7 @@ export default function SitemapPage() {
                 href={`/components/${slug}`}
                 className="text-sm text-primary hover:underline"
               >
-                {formatComponentName(slug)}
+                {getComponentName(slug)}
               </Link>
             ))}
           </div>
@@ -296,7 +296,7 @@ export default function SitemapPage() {
                 href={`/components/${slug}`}
                 className="text-sm text-primary hover:underline"
               >
-                {formatComponentName(slug)}
+                {getComponentName(slug)}
               </Link>
             ))}
           </div>
@@ -314,7 +314,7 @@ export default function SitemapPage() {
                 href={`/components/${slug}`}
                 className="text-sm text-primary hover:underline"
               >
-                {formatComponentName(slug)}
+                {getComponentName(slug)}
               </Link>
             ))}
           </div>
@@ -336,7 +336,7 @@ export default function SitemapPage() {
                 href={`/components/${slug}`}
                 className="text-sm text-primary hover:underline"
               >
-                {formatComponentName(slug)}
+                {getComponentName(slug)}
               </Link>
             ))}
           </div>
@@ -356,13 +356,13 @@ export default function SitemapPage() {
             href="/getting-started"
             className="inline-flex h-10 items-center justify-center rounded-md bg-primary px-8 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90"
           >
-            Get Started
+            {t.sitemap.links.getStartedButton}
           </Link>
           <Link
             href="/components/button"
             className="inline-flex h-10 items-center justify-center rounded-md border border-input bg-background px-8 text-sm font-medium shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground"
           >
-            Browse Components
+            {t.sitemap.links.browseComponents}
           </Link>
         </div>
       </div>

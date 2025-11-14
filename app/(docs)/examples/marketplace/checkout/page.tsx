@@ -377,7 +377,7 @@ export default function CheckoutPage() {
                         ) : (
                           <>
                             Next
-                            <ArrowRight className="h-4 w-4 ms-2" />
+                            <ArrowRight className="h-4 w-4 ms-2 rtl:rotate-180" />
                           </>
                         )}
                       </Button>
@@ -501,7 +501,7 @@ export default function CheckoutPage() {
                       <Button variant="outline" onClick={() => setCurrentTab('shipping')}>
                         {isRTL ? (
                           <>
-                            <ArrowRight className="h-4 w-4 ms-2" />
+                            <ArrowRight className="h-4 w-4 ms-2 rtl:rotate-180" />
                             السابق
                           </>
                         ) : (
@@ -520,7 +520,7 @@ export default function CheckoutPage() {
                         ) : (
                           <>
                             Next
-                            <ArrowRight className="h-4 w-4 ms-2" />
+                            <ArrowRight className="h-4 w-4 ms-2 rtl:rotate-180" />
                           </>
                         )}
                       </Button>
@@ -615,7 +615,7 @@ export default function CheckoutPage() {
                       <Button variant="outline" onClick={() => setCurrentTab('payment')}>
                         {isRTL ? (
                           <>
-                            <ArrowRight className="h-4 w-4 ms-2" />
+                            <ArrowRight className="h-4 w-4 ms-2 rtl:rotate-180" />
                             السابق
                           </>
                         ) : (

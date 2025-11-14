@@ -18,8 +18,13 @@ import { content } from '@/lib/i18n'
 
 const ThemeCardInner = ({ theme }: { theme: Theme }) => {
   const { designTheme, setDesignTheme } = useDesignSystem()
+  const { locale } = useDirection()
   const config = themeConfig[theme]
   const isActive = designTheme === theme
+
+  const name = locale === 'ar' ? config.nameAr : config.name
+  const description = locale === 'ar' ? config.descriptionAr : config.description
+  const features = locale === 'ar' ? config.featuresAr : config.features
 
   return (
     <Card
@@ -32,8 +37,8 @@ const ThemeCardInner = ({ theme }: { theme: Theme }) => {
       <CardHeader>
         <div className="flex items-start justify-between">
           <div>
-            <CardTitle className="text-2xl">{config.name}</CardTitle>
-            <CardDescription className="mt-2">{config.description}</CardDescription>
+            <CardTitle className="text-2xl">{name}</CardTitle>
+            <CardDescription className="mt-2">{description}</CardDescription>
           </div>
           {isActive && (
             <Check className="h-6 w-6 text-primary" />
@@ -44,7 +49,7 @@ const ThemeCardInner = ({ theme }: { theme: Theme }) => {
         <div>
           <div className="text-sm font-medium mb-2">Features</div>
           <ul className="space-y-1">
-            {config.features.map((feature, i) => (
+            {features.map((feature, i) => (
               <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
                 <span className="text-primary mt-0.5">•</span>
                 <span>{feature}</span>
@@ -77,25 +82,31 @@ const ThemeCardInner = ({ theme }: { theme: Theme }) => {
 
 const ThemeCard = ({ theme }: { theme: Theme }) => {
   const [mounted, setMounted] = React.useState(false)
+  const { locale } = useDirection()
 
   React.useEffect(() => {
     setMounted(true)
   }, [])
+
+  const config = themeConfig[theme]
+  const name = locale === 'ar' ? config.nameAr : config.name
+  const description = locale === 'ar' ? config.descriptionAr : config.description
+  const features = locale === 'ar' ? config.featuresAr : config.features
 
   if (!mounted) {
     return (
       <Card className="cursor-pointer transition-all hover:shadow-lg">
         <CardHeader>
           <div>
-            <CardTitle className="text-2xl">{themeConfig[theme].name}</CardTitle>
-            <CardDescription className="mt-2">{themeConfig[theme].description}</CardDescription>
+            <CardTitle className="text-2xl">{name}</CardTitle>
+            <CardDescription className="mt-2">{description}</CardDescription>
           </div>
         </CardHeader>
         <CardContent className="space-y-4">
           <div>
             <div className="text-sm font-medium mb-2">Features</div>
             <ul className="space-y-1">
-              {themeConfig[theme].features.map((feature, i) => (
+              {features.map((feature, i) => (
                 <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
                   <span className="text-primary mt-0.5">•</span>
                   <span>{feature}</span>
@@ -165,34 +176,32 @@ export default function ThemesPage() {
             {/* Minimal */}
             <Card>
               <CardHeader>
-                <CardTitle>Minimal Theme</CardTitle>
-                <CardDescription>Clean, professional, and focused</CardDescription>
+                <CardTitle>{t.themesPage.minimal.name}</CardTitle>
+                <CardDescription>{t.themesPage.minimal.description}</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="grid gap-4 sm:grid-cols-2">
                   <div>
-                    <div className="text-sm font-medium mb-1">Typography</div>
+                    <div className="text-sm font-medium mb-1">{t.themesPage.minimal.typography}</div>
                     <ul className="text-sm text-muted-foreground space-y-1">
-                      <li>• Font: Inter (sans-serif)</li>
-                      <li>• Line-height: 1.6</li>
-                      <li>• Letter-spacing: -0.02em (headings)</li>
-                      <li>• Font-weight: 600 (headings)</li>
+                      {t.themesPage.minimal.typographyDetails.map((detail, i) => (
+                        <li key={i}>• {detail}</li>
+                      ))}
                     </ul>
                   </div>
                   <div>
-                    <div className="text-sm font-medium mb-1">Visual Style</div>
+                    <div className="text-sm font-medium mb-1">{t.themesPage.minimal.visualStyle}</div>
                     <ul className="text-sm text-muted-foreground space-y-1">
-                      <li>• Border-radius: 0.25rem</li>
-                      <li>• Colors: Neutral grays</li>
-                      <li>• Spacing: Balanced</li>
-                      <li>• Borders: Subtle</li>
+                      {t.themesPage.minimal.visualStyleDetails.map((detail, i) => (
+                        <li key={i}>• {detail}</li>
+                      ))}
                     </ul>
                   </div>
                 </div>
                 <div>
-                  <div className="text-sm font-medium mb-2">Best For</div>
+                  <div className="text-sm font-medium mb-2">{t.themesPage.minimal.bestFor}</div>
                   <p className="text-sm text-muted-foreground">
-                    Enterprise applications, dashboards, data-heavy interfaces, professional tools
+                    {t.themesPage.minimal.bestForText}
                   </p>
                 </div>
               </CardContent>
@@ -201,34 +210,32 @@ export default function ThemesPage() {
             {/* Futuristic */}
             <Card>
               <CardHeader>
-                <CardTitle>Futuristic Theme</CardTitle>
-                <CardDescription>Dark, modern, and compact</CardDescription>
+                <CardTitle>{t.themesPage.futuristic.name}</CardTitle>
+                <CardDescription>{t.themesPage.futuristic.description}</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="grid gap-4 sm:grid-cols-2">
                   <div>
-                    <div className="text-sm font-medium mb-1">Typography</div>
+                    <div className="text-sm font-medium mb-1">{t.themesPage.minimal.typography}</div>
                     <ul className="text-sm text-muted-foreground space-y-1">
-                      <li>• Font: Inter (sans-serif)</li>
-                      <li>• Line-height: 1.5 (compact)</li>
-                      <li>• Letter-spacing: -0.025em</li>
-                      <li>• Font-weight: 600 (strong)</li>
+                      {t.themesPage.futuristic.typographyDetails.map((detail, i) => (
+                        <li key={i}>• {detail}</li>
+                      ))}
                     </ul>
                   </div>
                   <div>
-                    <div className="text-sm font-medium mb-1">Visual Style</div>
+                    <div className="text-sm font-medium mb-1">{t.themesPage.minimal.visualStyle}</div>
                     <ul className="text-sm text-muted-foreground space-y-1">
-                      <li>• Border-radius: 0.75rem</li>
-                      <li>• Colors: Purples, cyans</li>
-                      <li>• Spacing: Tighter</li>
-                      <li>• Style: Glassmorphism</li>
+                      {t.themesPage.futuristic.visualStyleDetails.map((detail, i) => (
+                        <li key={i}>• {detail}</li>
+                      ))}
                     </ul>
                   </div>
                 </div>
                 <div>
-                  <div className="text-sm font-medium mb-2">Best For</div>
+                  <div className="text-sm font-medium mb-2">{t.themesPage.minimal.bestFor}</div>
                   <p className="text-sm text-muted-foreground">
-                    Tech products, developer tools, gaming interfaces, dark-mode-first applications
+                    {t.themesPage.futuristic.bestForText}
                   </p>
                 </div>
               </CardContent>
@@ -237,34 +244,32 @@ export default function ThemesPage() {
             {/* Cozy */}
             <Card>
               <CardHeader>
-                <CardTitle>Cozy Theme</CardTitle>
-                <CardDescription>Warm, spacious, and comfortable</CardDescription>
+                <CardTitle>{t.themesPage.cozy.name}</CardTitle>
+                <CardDescription>{t.themesPage.cozy.description}</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="grid gap-4 sm:grid-cols-2">
                   <div>
-                    <div className="text-sm font-medium mb-1">Typography</div>
+                    <div className="text-sm font-medium mb-1">{t.themesPage.minimal.typography}</div>
                     <ul className="text-sm text-muted-foreground space-y-1">
-                      <li>• Font: Inter (sans-serif)</li>
-                      <li>• Line-height: 1.7 (relaxed)</li>
-                      <li>• Letter-spacing: 0.015em</li>
-                      <li>• Headings: 1.5rem margin</li>
+                      {t.themesPage.cozy.typographyDetails.map((detail, i) => (
+                        <li key={i}>• {detail}</li>
+                      ))}
                     </ul>
                   </div>
                   <div>
-                    <div className="text-sm font-medium mb-1">Visual Style</div>
+                    <div className="text-sm font-medium mb-1">{t.themesPage.minimal.visualStyle}</div>
                     <ul className="text-sm text-muted-foreground space-y-1">
-                      <li>• Border-radius: 1.25rem (very rounded)</li>
-                      <li>• Colors: Warm oranges, ambers</li>
-                      <li>• Spacing: Very generous</li>
-                      <li>• Padding: 2rem cards, 0.75rem buttons</li>
+                      {t.themesPage.cozy.visualStyleDetails.map((detail, i) => (
+                        <li key={i}>• {detail}</li>
+                      ))}
                     </ul>
                   </div>
                 </div>
                 <div>
-                  <div className="text-sm font-medium mb-2">Best For</div>
+                  <div className="text-sm font-medium mb-2">{t.themesPage.minimal.bestFor}</div>
                   <p className="text-sm text-muted-foreground">
-                    Personal blogs, community platforms, lifestyle apps, content-focused sites
+                    {t.themesPage.cozy.bestForText}
                   </p>
                 </div>
               </CardContent>
@@ -273,35 +278,32 @@ export default function ThemesPage() {
             {/* Artistic */}
             <Card>
               <CardHeader>
-                <CardTitle>Artistic Theme</CardTitle>
-                <CardDescription>Elegant, typography-focused, serif fonts</CardDescription>
+                <CardTitle>{t.themesPage.artistic.name}</CardTitle>
+                <CardDescription>{t.themesPage.artistic.description}</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="grid gap-4 sm:grid-cols-2">
                   <div>
-                    <div className="text-sm font-medium mb-1">Typography</div>
+                    <div className="text-sm font-medium mb-1">{t.themesPage.minimal.typography}</div>
                     <ul className="text-sm text-muted-foreground space-y-1">
-                      <li>• Font: Georgia (serif)</li>
-                      <li>• Arabic: Noto Naskh Arabic (serif)</li>
-                      <li>• Line-height: 1.8-1.9</li>
-                      <li>• Letter-spacing: 0.01-0.02em</li>
-                      <li>• Font-weight: 400 (elegant)</li>
+                      {t.themesPage.artistic.typographyDetails.map((detail, i) => (
+                        <li key={i}>• {detail}</li>
+                      ))}
                     </ul>
                   </div>
                   <div>
-                    <div className="text-sm font-medium mb-1">Visual Style</div>
+                    <div className="text-sm font-medium mb-1">{t.themesPage.minimal.visualStyle}</div>
                     <ul className="text-sm text-muted-foreground space-y-1">
-                      <li>• Border-radius: 0.125rem (minimal)</li>
-                      <li>• Colors: Violets, golds</li>
-                      <li>• Spacing: Generous paragraphs</li>
-                      <li>• Style: Editorial</li>
+                      {t.themesPage.artistic.visualStyleDetails.map((detail, i) => (
+                        <li key={i}>• {detail}</li>
+                      ))}
                     </ul>
                   </div>
                 </div>
                 <div>
-                  <div className="text-sm font-medium mb-2">Best For</div>
+                  <div className="text-sm font-medium mb-2">{t.themesPage.minimal.bestFor}</div>
                   <p className="text-sm text-muted-foreground">
-                    Poetry, literature, magazines, portfolios, creative writing platforms
+                    {t.themesPage.artistic.bestForText}
                   </p>
                 </div>
               </CardContent>

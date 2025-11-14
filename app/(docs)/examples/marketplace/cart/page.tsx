@@ -270,7 +270,7 @@ export default function CartPage() {
                 <Link href="/examples/marketplace">
                   {isRTL ? (
                     <>
-                      <ArrowRight className="h-4 w-4 ms-2" />
+                      <ArrowRight className="h-4 w-4 ms-2 rtl:rotate-180" />
                       متابعة التسوق
                     </>
                   ) : (
@@ -364,7 +364,7 @@ export default function CartPage() {
                       ) : (
                         <>
                           Proceed to Checkout
-                          <ArrowRight className="h-4 w-4 ms-2" />
+                          <ArrowRight className="h-4 w-4 ms-2 rtl:rotate-180" />
                         </>
                       )}
                     </Link>

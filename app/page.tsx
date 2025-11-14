@@ -3,8 +3,8 @@
 import * as React from 'react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
-import { Separator } from '@/components/ui/separator'
 import { SiteHeader } from '@/components/layout/site-header'
+import { SiteFooter } from '@/components/layout/site-footer'
 import { ThemeSwitcher } from '@/components/docs/theme-switcher'
 import { FeatureCard } from '@/components/ui/feature-card'
 import {
@@ -167,51 +167,7 @@ export default function HomePage() {
         </section>
       </main>
 
-      {/* Footer */}
-      <footer className="border-t py-12">
-        <div className="container">
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-            <div>
-              <div className="flex items-center gap-2 mb-4">
-                <Sunrise className="h-5 w-5 text-primary" />
-                <span className="font-bold">Noor UI</span>
-              </div>
-              <p className="text-sm text-muted-foreground">
-                {t.common.tagline}
-              </p>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-4">{t.nav.documentation}</h4>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><Link href="/getting-started" className="hover:text-foreground transition-colors">{t.nav.getStarted}</Link></li>
-                <li><Link href="/components" className="hover:text-foreground transition-colors">{t.nav.components}</Link></li>
-                <li><Link href="/tokens" className="hover:text-foreground transition-colors">{t.nav.tokens}</Link></li>
-                <li><Link href="/themes" className="hover:text-foreground transition-colors">{t.nav.themes}</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-4">{t.common.resources}</h4>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><Link href="/examples" className="hover:text-foreground transition-colors">{t.nav.examples}</Link></li>
-                <li><Link href="/documentation/wcag" className="hover:text-foreground transition-colors">{t.docs.accessibility}</Link></li>
-                <li><Link href="/rtl-guide" className="hover:text-foreground transition-colors">{t.nav.rtlGuide}</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-4">{t.common.community}</h4>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><span className="cursor-default">GitHub</span></li>
-                <li><span className="cursor-default">Discord</span></li>
-                <li><span className="cursor-default">Twitter</span></li>
-              </ul>
-            </div>
-          </div>
-          <Separator className="my-8" />
-          <div className="text-center text-sm text-muted-foreground">
-            {t.common.copyright}
-          </div>
-        </div>
-      </footer>
+      <SiteFooter />
     </div>
   )
 }

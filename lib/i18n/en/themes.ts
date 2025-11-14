@@ -28,24 +28,73 @@ themesPage: {
         visualStyle: 'Visual Style',
         bestFor: 'Best For',
         bestForText: 'Enterprise applications, dashboards, data-heavy interfaces, professional tools',
+        typographyDetails: [
+          'Font: Inter (sans-serif)',
+          'Line-height: 1.6',
+          'Letter-spacing: -0.02em (headings)',
+          'Font-weight: 600 (headings)',
+        ],
+        visualStyleDetails: [
+          'Border-radius: 0.25rem',
+          'Colors: Neutral grays',
+          'Spacing: Balanced',
+          'Borders: Subtle',
+        ],
       },
 
       futuristic: {
         name: 'Futuristic Theme',
         description: 'Dark, modern, and compact',
         bestForText: 'Tech products, developer tools, gaming interfaces, dark-mode-first applications',
+        typographyDetails: [
+          'Font: Inter (sans-serif)',
+          'Line-height: 1.5 (compact)',
+          'Letter-spacing: -0.025em',
+          'Font-weight: 600 (strong)',
+        ],
+        visualStyleDetails: [
+          'Border-radius: 0.75rem',
+          'Colors: Purples, cyans',
+          'Spacing: Tighter',
+          'Style: Glassmorphism',
+        ],
       },
 
       cozy: {
         name: 'Cozy Theme',
         description: 'Warm, spacious, and comfortable',
         bestForText: 'Personal blogs, community platforms, lifestyle apps, content-focused sites',
+        typographyDetails: [
+          'Font: Inter (sans-serif)',
+          'Line-height: 1.7 (relaxed)',
+          'Letter-spacing: 0.015em',
+          'Headings: 1.5rem margin',
+        ],
+        visualStyleDetails: [
+          'Border-radius: 1.25rem (very rounded)',
+          'Colors: Warm oranges, ambers',
+          'Spacing: Very generous',
+          'Padding: 2rem cards, 0.75rem buttons',
+        ],
       },
 
       artistic: {
         name: 'Artistic Theme',
         description: 'Elegant, typography-focused, serif fonts',
         bestForText: 'Poetry, literature, magazines, portfolios, creative writing platforms',
+        typographyDetails: [
+          'Font: Georgia (serif)',
+          'Arabic: Noto Naskh Arabic (serif)',
+          'Line-height: 1.8-1.9',
+          'Letter-spacing: 0.01-0.02em',
+          'Font-weight: 400 (elegant)',
+        ],
+        visualStyleDetails: [
+          'Border-radius: 0.125rem (minimal)',
+          'Colors: Violets, golds',
+          'Spacing: Generous paragraphs',
+          'Style: Editorial',
+        ],
       },
 
       preview: {

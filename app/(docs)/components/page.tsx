@@ -195,6 +195,12 @@ export default function ComponentsPage() {
   const t = content[locale]
   const categories = componentCategories(t)
 
+  // Helper to get bilingual component name from href
+  const getComponentName = (href: string) => {
+    const slug = href.replace('/components/', '')
+    return t.componentNames[slug as keyof typeof t.componentNames] || href.split('/').pop()?.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ') || ''
+  }
+
   return (
     <div className="min-h-screen">
 
@@ -265,7 +271,7 @@ export default function ComponentsPage() {
                               <div className="rounded-lg bg-primary/10 p-2">
                                 <Icon className="h-5 w-5 text-primary" />
                               </div>
-                              <CardTitle className="text-lg">{component.name}</CardTitle>
+                              <CardTitle className="text-lg">{getComponentName(component.href)}</CardTitle>
                             </div>
                             {component.status === 'ready' ? (
                               <Badge variant="default" className="text-xs">

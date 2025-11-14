@@ -224,19 +224,19 @@ create policy "Users can manage own posts"
                 </h3>
                 <ul className="space-y-2 text-sm">
                   <li className="flex items-start gap-2">
-                    <ArrowRight className="h-4 w-4 text-primary mt-0.5" />
+                    <ArrowRight className="h-4 w-4 text-primary mt-0.5 rtl:rotate-180" />
                     Complete Supabase schema (posts, profiles)
                   </li>
                   <li className="flex items-start gap-2">
-                    <ArrowRight className="h-4 w-4 text-primary mt-0.5" />
+                    <ArrowRight className="h-4 w-4 text-primary mt-0.5 rtl:rotate-180" />
                     Row Level Security policies
                   </li>
                   <li className="flex items-start gap-2">
-                    <ArrowRight className="h-4 w-4 text-primary mt-0.5" />
+                    <ArrowRight className="h-4 w-4 text-primary mt-0.5 rtl:rotate-180" />
                     Storage bucket configuration
                   </li>
                   <li className="flex items-start gap-2">
-                    <ArrowRight className="h-4 w-4 text-primary mt-0.5" />
+                    <ArrowRight className="h-4 w-4 text-primary mt-0.5 rtl:rotate-180" />
                     TypeScript types generation
                   </li>
                 </ul>
@@ -248,23 +248,23 @@ create policy "Users can manage own posts"
                 </h3>
                 <ul className="space-y-2 text-sm">
                   <li className="flex items-start gap-2">
-                    <ArrowRight className="h-4 w-4 text-primary mt-0.5" />
+                    <ArrowRight className="h-4 w-4 text-primary mt-0.5 rtl:rotate-180" />
                     Login & signup pages
                   </li>
                   <li className="flex items-start gap-2">
-                    <ArrowRight className="h-4 w-4 text-primary mt-0.5" />
+                    <ArrowRight className="h-4 w-4 text-primary mt-0.5 rtl:rotate-180" />
                     Dashboard with statistics
                   </li>
                   <li className="flex items-start gap-2">
-                    <ArrowRight className="h-4 w-4 text-primary mt-0.5" />
+                    <ArrowRight className="h-4 w-4 text-primary mt-0.5 rtl:rotate-180" />
                     Posts list with search/filter
                   </li>
                   <li className="flex items-start gap-2">
-                    <ArrowRight className="h-4 w-4 text-primary mt-0.5" />
+                    <ArrowRight className="h-4 w-4 text-primary mt-0.5 rtl:rotate-180" />
                     Create & edit post pages
                   </li>
                   <li className="flex items-start gap-2">
-                    <ArrowRight className="h-4 w-4 text-primary mt-0.5" />
+                    <ArrowRight className="h-4 w-4 text-primary mt-0.5 rtl:rotate-180" />
                     All using Noor UI components
                   </li>
                 </ul>
@@ -340,7 +340,7 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key`}
               <Button size="lg" asChild>
                 <Link href="/starters">
                   View All Starters
-                  <ArrowRight className="h-4 w-4 ms-2" />
+                  <ArrowRight className="h-4 w-4 ms-2 rtl:rotate-180" />
                 </Link>
               </Button>
             </div>

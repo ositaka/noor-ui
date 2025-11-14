@@ -349,19 +349,19 @@ export default function RTLGuidePage() {
               <h3 className="font-semibold mb-2">{t.directionHook.whenToUse}</h3>
               <ul className="text-sm text-muted-foreground space-y-2">
                 <li className="flex items-start gap-2">
-                  <ArrowRight className="h-4 w-4 text-primary mt-0.5 shrink-0" />
+                  <ArrowRight className="h-4 w-4 text-primary mt-0.5 shrink-0 rtl:rotate-180" />
                   <span>{t.directionHook.useCase1}</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <ArrowRight className="h-4 w-4 text-primary mt-0.5 shrink-0" />
+                  <ArrowRight className="h-4 w-4 text-primary mt-0.5 shrink-0 rtl:rotate-180" />
                   <span>{t.directionHook.useCase2}</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <ArrowRight className="h-4 w-4 text-primary mt-0.5 shrink-0" />
+                  <ArrowRight className="h-4 w-4 text-primary mt-0.5 shrink-0 rtl:rotate-180" />
                   <span>{t.directionHook.useCase3}</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <ArrowRight className="h-4 w-4 text-primary mt-0.5 shrink-0" />
+                  <ArrowRight className="h-4 w-4 text-primary mt-0.5 shrink-0 rtl:rotate-180" />
                   <span>{t.directionHook.useCase4}</span>
                 </li>
               </ul>
@@ -434,7 +434,7 @@ export default function RTLGuidePage() {
                   </div>
                   <Button size="sm">
                     {t.liveExample.nextButton}
-                    <ArrowRight className="ms-2 h-4 w-4" />
+                    <ArrowRight className="ms-2 h-4 w-4 rtl:rotate-180" />
                   </Button>
                 </div>
               </CardContent>
@@ -469,22 +469,19 @@ export default function RTLGuidePage() {
 
         {/* Best Practices */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Best Practices</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.bestPractices.title}</h2>
 
           <div className="grid gap-4 sm:grid-cols-2">
             <Card className="border-green-500/50 bg-green-50 dark:bg-green-950/20">
               <CardContent className="p-6">
                 <h3 className="font-semibold mb-2 flex items-center gap-2 text-green-700 dark:text-green-400">
                   <CheckCircle2 className="h-5 w-5" />
-                  Do
+                  {t.bestPractices.do}
                 </h3>
                 <ul className="text-sm space-y-2">
-                  <li>✓ Use logical properties everywhere</li>
-                  <li>✓ Test in both directions regularly</li>
-                  <li>✓ Use the direction toggle during development</li>
-                  <li>✓ Mirror directional icons appropriately</li>
-                  <li>✓ Keep accessibility in mind</li>
-                  <li>✓ Use Flexbox and Grid for layouts</li>
+                  {t.bestPractices.doList.map((item, index) => (
+                    <li key={index}>✓ {item}</li>
+                  ))}
                 </ul>
               </CardContent>
             </Card>
@@ -493,15 +490,12 @@ export default function RTLGuidePage() {
               <CardContent className="p-6">
                 <h3 className="font-semibold mb-2 flex items-center gap-2 text-red-700 dark:text-red-400">
                   <XCircle className="h-5 w-5" />
-                  Don&apos;t
+                  {t.bestPractices.dont}
                 </h3>
                 <ul className="text-sm space-y-2">
-                  <li>✗ Use directional properties (ml-, mr-, left-, right-)</li>
-                  <li>✗ Add conditional logic for direction</li>
-                  <li>✗ Forget to test RTL mode</li>
-                  <li>✗ Mirror all icons (some shouldn&apos;t)</li>
-                  <li>✗ Rely solely on left/right positioning</li>
-                  <li>✗ Use text-left or text-right</li>
+                  {t.bestPractices.dontList.map((item, index) => (
+                    <li key={index}>✗ {item}</li>
+                  ))}
                 </ul>
               </CardContent>
             </Card>
@@ -510,17 +504,17 @@ export default function RTLGuidePage() {
 
         {/* Resources */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Additional Resources</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.resources.title}</h2>
           <div className="grid gap-4 sm:grid-cols-2">
             <Link href="/getting-started">
               <Card className="hover:border-primary transition-colors h-full">
                 <CardContent className="p-6">
                   <h3 className="font-semibold mb-2 flex items-center gap-2">
                     <Book className="h-5 w-5 text-primary" />
-                    Getting Started
+                    {t.resources.gettingStarted}
                   </h3>
                   <p className="text-sm text-muted-foreground">
-                    Installation, configuration, and quick start guide
+                    {t.resources.gettingStartedDesc}
                   </p>
                 </CardContent>
               </Card>
@@ -531,10 +525,10 @@ export default function RTLGuidePage() {
                 <CardContent className="p-6">
                   <h3 className="font-semibold mb-2 flex items-center gap-2">
                     <Sparkles className="h-5 w-5 text-primary" />
-                    Component Library
+                    {t.resources.componentLibrary}
                   </h3>
                   <p className="text-sm text-muted-foreground">
-                    Browse all RTL-ready components with examples
+                    {t.resources.componentLibraryDesc}
                   </p>
                 </CardContent>
               </Card>

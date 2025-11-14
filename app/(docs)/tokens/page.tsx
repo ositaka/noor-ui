@@ -57,13 +57,13 @@ const SpacingBox = ({ name, value }: { name: string; value: string }) => {
   )
 }
 
-const TypographyExample = ({ size, config }: { size: string; config: readonly [string, { readonly lineHeight: string }] }) => {
+const TypographyExample = ({ size, config, sampleText }: { size: string; config: readonly [string, { readonly lineHeight: string }]; sampleText: string }) => {
   return (
     <div className="space-y-1">
       <div className="flex items-baseline gap-3">
         <span className="text-sm font-medium w-20">{size}</span>
         <span style={{ fontSize: config[0], lineHeight: config[1].lineHeight }}>
-          The quick brown fox jumps over the lazy dog
+          {sampleText}
         </span>
       </div>
       <div className="text-xs text-muted-foreground font-mono ps-23">
@@ -258,7 +258,7 @@ export default function TokensPage() {
               </CardHeader>
               <CardContent className="space-y-3">
                 {Object.entries(tokens.typography.fontSize).map(([size, config]) => (
-                  <TypographyExample key={size} size={size} config={config} />
+                  <TypographyExample key={size} size={size} config={config} sampleText={t.typography.fontSizes.exampleText} />
                 ))}
               </CardContent>
             </Card>

@@ -405,7 +405,7 @@ export default function GettingStartedPage() {
                   </p>
                   <Button variant="ghost" size="sm" className="gap-2">
                     {t.gettingStarted.viewComponents}
-                    <ArrowRight className="h-4 w-4" />
+                    <ArrowRight className="h-4 w-4 rtl:rotate-180" />
                   </Button>
                 </CardContent>
               </Card>
@@ -423,7 +423,7 @@ export default function GettingStartedPage() {
                   </p>
                   <Button variant="ghost" size="sm" className="gap-2">
                     {t.gettingStarted.readGuide}
-                    <ArrowRight className="h-4 w-4" />
+                    <ArrowRight className="h-4 w-4 rtl:rotate-180" />
                   </Button>
                 </CardContent>
               </Card>
