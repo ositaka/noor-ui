@@ -8,6 +8,8 @@ import { Separator } from '@/components/ui/separator'
 import { ComponentShowcase } from '@/components/docs/component-showcase'
 import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
+import { useDirection } from '@/components/providers/direction-provider'
+import { content } from '@/lib/i18n'
 
 const skeletonProps: PropDefinition[] = [
   {
@@ -15,7 +17,7 @@ const skeletonProps: PropDefinition[] = [
     type: 'string',
     default: '-',
     required: false,
-    description: 'Additional CSS classes for custom size and shape',
+    description: content['en'].skeletonComponent.props.className,
   },
 ]
 
@@ -24,6 +26,8 @@ const installCode = `npm install @noorui/components`
 const basicUsageCode = `import { Skeleton } from '@/components/ui/skeleton'
 
 export default function Loading() {
+  const { locale } = useDirection()
+  const t = content[locale]
   return <Skeleton className="h-4 w-full" />
 }`
 
@@ -71,6 +75,9 @@ const rtlCode = `// Skeleton components work seamlessly in RTL
 </div>`
 
 export default function SkeletonPage() {
+  const { locale } = useDirection()
+  const t = content[locale]
+  const sk = content[locale].skeletonComponent
   return (
     <div className="min-h-screen">
 
@@ -80,31 +87,31 @@ export default function SkeletonPage() {
           <ol className="flex items-center gap-2 text-sm text-muted-foreground">
             <li>
               <Link href="/" className="hover:text-foreground transition-colors">
-                Home
+                {t.common.home}
               </Link>
             </li>
             <li>/</li>
             <li>
               <Link href="/components" className="hover:text-foreground transition-colors">
-                Components
+                {t.nav.components}
               </Link>
             </li>
             <li>/</li>
-            <li className="text-foreground font-medium">Skeleton</li>
+            <li className="text-foreground font-medium">{sk.title}</li>
           </ol>
         </nav>
 
         {/* Page Header */}
         <div className="mb-12">
-          <h1 className="text-4xl font-bold tracking-tight mb-4">Skeleton</h1>
+          <h1 className="text-4xl font-bold tracking-tight mb-4">{sk.title}</h1>
           <p className="text-xl text-muted-foreground max-w-3xl">
-            Animated loading placeholder component to improve perceived performance while content loads.
+            {sk.description}
           </p>
         </div>
 
         {/* Preview */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Preview</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentDocs.preview}</h2>
           <ComponentShowcase>
             <ComponentShowcase.Demo>
               <div className="flex items-center space-x-4 space-x-reverse">
@@ -120,24 +127,24 @@ export default function SkeletonPage() {
 
         {/* Installation */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Installation</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentDocs.installation}</h2>
           <CodeBlock code={installCode} language="bash" title="Terminal" />
         </section>
 
         {/* Usage */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Usage</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentDocs.usage}</h2>
           <CodeBlock code={basicUsageCode} language="tsx" title="React" />
         </section>
 
         {/* Examples */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Examples</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{sk.examples.title}</h2>
 
           <div className="space-y-8">
             {/* Card Skeleton */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">Card Skeleton</h3>
+              <h3 className="text-lg font-semibold mb-4">{sk.examples.cardSkeleton}</h3>
               <Card>
                 <CardContent className="p-6">
                   <div className="space-y-4">
@@ -156,7 +163,7 @@ export default function SkeletonPage() {
 
             {/* Profile Skeleton */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">Profile Skeleton</h3>
+              <h3 className="text-lg font-semibold mb-4">{sk.examples.profileSkeleton}</h3>
               <Card>
                 <CardContent className="p-6">
                   <div className="flex items-center space-x-4 space-x-reverse">
@@ -175,7 +182,7 @@ export default function SkeletonPage() {
 
             {/* List Skeleton */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">List Skeleton</h3>
+              <h3 className="text-lg font-semibold mb-4">{sk.examples.listSkeleton}</h3>
               <Card>
                 <CardContent className="p-6">
                   <div className="space-y-4">
@@ -200,45 +207,45 @@ export default function SkeletonPage() {
 
         {/* Props */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Props</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentDocs.props}</h2>
           <PropsTable props={skeletonProps} />
           <p className="text-sm text-muted-foreground mt-4">
-            The Skeleton component accepts all standard HTML div attributes.
+            {sk.props.note}
           </p>
         </section>
 
         {/* Best Practices */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Best Practices</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{sk.bestPractices.title}</h2>
           <Card>
             <CardContent className="p-6 space-y-4">
               <div>
-                <h3 className="font-semibold mb-2">When to Use</h3>
+                <h3 className="font-semibold mb-2">{sk.bestPractices.whenToUse}</h3>
                 <ul className="list-disc list-inside text-muted-foreground space-y-1 text-sm">
-                  <li>Loading initial page content</li>
-                  <li>Fetching data from an API</li>
-                  <li>Loading images or media</li>
-                  <li>Processing user actions</li>
+                  <li>{sk.bestPractices.whenToUseItems.initialContent}</li>
+                  <li>{sk.bestPractices.whenToUseItems.fetchingData}</li>
+                  <li>{sk.bestPractices.whenToUseItems.loadingMedia}</li>
+                  <li>{sk.bestPractices.whenToUseItems.processingActions}</li>
                 </ul>
               </div>
               <Separator />
               <div>
-                <h3 className="font-semibold mb-2">Design Tips</h3>
+                <h3 className="font-semibold mb-2">{sk.bestPractices.designTips}</h3>
                 <ul className="list-disc list-inside text-muted-foreground space-y-1 text-sm">
-                  <li>Match skeleton shapes to actual content dimensions</li>
-                  <li>Use multiple skeletons to represent complex layouts</li>
-                  <li>Keep skeleton patterns simple and recognizable</li>
-                  <li>Combine with cards to show content boundaries</li>
+                  <li>{sk.bestPractices.designTipsItems.matchShapes}</li>
+                  <li>{sk.bestPractices.designTipsItems.multipleSkeletons}</li>
+                  <li>{sk.bestPractices.designTipsItems.simplePatterns}</li>
+                  <li>{sk.bestPractices.designTipsItems.combineWithCards}</li>
                 </ul>
               </div>
               <Separator />
               <div>
-                <h3 className="font-semibold mb-2">Common Dimensions</h3>
+                <h3 className="font-semibold mb-2">{sk.bestPractices.commonDimensions}</h3>
                 <ul className="list-disc list-inside text-muted-foreground space-y-1 text-sm">
-                  <li><code className="bg-muted px-1 rounded text-xs">h-4</code> - Text line (16px)</li>
-                  <li><code className="bg-muted px-1 rounded text-xs">h-8</code> - Button/Input (32px)</li>
-                  <li><code className="bg-muted px-1 rounded text-xs">h-12</code> - Avatar (48px)</li>
-                  <li><code className="bg-muted px-1 rounded text-xs">h-48</code> - Image/Card (192px)</li>
+                  <li><code className="bg-muted px-1 rounded text-xs">h-4</code> - {sk.bestPractices.commonDimensionsItems.textLine}</li>
+                  <li><code className="bg-muted px-1 rounded text-xs">h-8</code> - {sk.bestPractices.commonDimensionsItems.buttonInput}</li>
+                  <li><code className="bg-muted px-1 rounded text-xs">h-12</code> - {sk.bestPractices.commonDimensionsItems.avatar}</li>
+                  <li><code className="bg-muted px-1 rounded text-xs">h-48</code> - {sk.bestPractices.commonDimensionsItems.imageCard}</li>
                 </ul>
               </div>
             </CardContent>
@@ -247,31 +254,29 @@ export default function SkeletonPage() {
 
         {/* Accessibility */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Accessibility</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{sk.accessibility.title}</h2>
           <Card>
             <CardContent className="p-6 space-y-4">
               <div>
-                <h3 className="font-semibold mb-2">Loading States</h3>
+                <h3 className="font-semibold mb-2">{sk.accessibility.loadingStates}</h3>
                 <p className="text-muted-foreground text-sm">
-                  Add <code className="bg-muted px-1 rounded">aria-busy=&quot;true&quot;</code> to container during loading
-                  to inform screen readers that content is being loaded.
+                  {sk.accessibility.loadingStatesDesc}
                 </p>
               </div>
               <Separator />
               <div>
-                <h3 className="font-semibold mb-2">Screen Reader Announcements</h3>
+                <h3 className="font-semibold mb-2">{sk.accessibility.screenReaderAnnouncements}</h3>
                 <p className="text-muted-foreground text-sm">
-                  Use <code className="bg-muted px-1 rounded">aria-live=&quot;polite&quot;</code> to announce when content
-                  finishes loading. Provide descriptive labels like <code className="bg-muted px-1 rounded">aria-label=&quot;Loading content&quot;</code>.
+                  {sk.accessibility.screenReaderAnnouncementsDesc}
                 </p>
               </div>
               <Separator />
               <div>
-                <h3 className="font-semibold mb-2">Best Practices</h3>
+                <h3 className="font-semibold mb-2">{sk.accessibility.bestPractices}</h3>
                 <ul className="list-disc list-inside text-muted-foreground space-y-1 text-sm">
-                  <li>Don&apos;t rely solely on visual loading indicators</li>
-                  <li>Provide text alternatives for screen readers</li>
-                  <li>Ensure skeleton shapes closely match final content</li>
+                  <li>{sk.accessibility.bestPracticesItems.notOnlyVisual}</li>
+                  <li>{sk.accessibility.bestPracticesItems.textAlternatives}</li>
+                  <li>{sk.accessibility.bestPracticesItems.matchContent}</li>
                 </ul>
               </div>
             </CardContent>
@@ -280,17 +285,16 @@ export default function SkeletonPage() {
 
         {/* RTL Considerations */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">RTL Considerations</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{sk.rtl.title}</h2>
           <Card>
             <CardContent className="p-6 space-y-4">
               <p className="text-muted-foreground">
-                Skeleton components automatically adapt to RTL layout. Use <code className="bg-muted px-1 rounded">space-x-reverse</code> for
-                horizontal spacing in RTL mode.
+                {sk.rtl.description}
               </p>
               <CodeBlock code={rtlCode} language="tsx" />
               <div className="grid gap-4 md:grid-cols-2 mt-6">
                 <div className="space-y-2">
-                  <h4 className="font-semibold text-sm">LTR (English)</h4>
+                  <h4 className="font-semibold text-sm">{sk.rtl.ltr}</h4>
                   <div dir="ltr">
                     <div className="flex items-center space-x-4 space-x-reverse">
                       <Skeleton className="h-12 w-12 rounded-full" />
@@ -302,7 +306,7 @@ export default function SkeletonPage() {
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <h4 className="font-semibold text-sm">RTL (العربية)</h4>
+                  <h4 className="font-semibold text-sm">{sk.rtl.rtlLabel}</h4>
                   <div dir="rtl">
                     <div className="flex items-center space-x-4 space-x-reverse">
                       <Skeleton className="h-12 w-12 rounded-full" />
@@ -320,14 +324,14 @@ export default function SkeletonPage() {
 
         {/* Related Components */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Related Components</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{sk.related.title}</h2>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             <Link href="/components/card">
               <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold">Card</h3>
+                  <h3 className="font-semibold">{sk.related.card}</h3>
                   <p className="text-sm text-muted-foreground mt-1">
-                    Container for grouping content
+                    {sk.related.cardDesc}
                   </p>
                 </CardContent>
               </Card>
@@ -335,9 +339,9 @@ export default function SkeletonPage() {
             <Link href="/components/progress">
               <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold">Progress</h3>
+                  <h3 className="font-semibold">{sk.related.progress}</h3>
                   <p className="text-sm text-muted-foreground mt-1">
-                    Progress bar for determinate loading
+                    {sk.related.progressDesc}
                   </p>
                 </CardContent>
               </Card>
@@ -345,9 +349,9 @@ export default function SkeletonPage() {
             <Link href="/components/avatar">
               <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold">Avatar</h3>
+                  <h3 className="font-semibold">{sk.related.avatar}</h3>
                   <p className="text-sm text-muted-foreground mt-1">
-                    User avatar component
+                    {sk.related.avatarDesc}
                   </p>
                 </CardContent>
               </Card>

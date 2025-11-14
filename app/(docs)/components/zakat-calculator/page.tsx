@@ -8,8 +8,13 @@ import { CodeBlock } from '@/components/docs/code-block'
 import { ZakatCalculator } from '@/components/ui/zakat-calculator'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 import { Copy, Download, Printer, Share2 } from 'lucide-react'
+import { useDirection } from '@/components/providers/direction-provider'
+import { content } from '@/lib/i18n'
 
 export default function ZakatCalculatorPage() {
+  const { locale } = useDirection()
+  const t = content[locale].zakatCalculatorComponent
+
   return (
     <div className="min-h-screen">
       <main id="main-content" className="container py-12">
@@ -18,33 +23,31 @@ export default function ZakatCalculatorPage() {
           <ol className="flex items-center gap-2 text-sm text-muted-foreground">
             <li>
               <Link href="/" className="hover:text-foreground transition-colors">
-                Home
+                {t.breadcrumb.home}
               </Link>
             </li>
             <li>/</li>
             <li>
               <Link href="/components" className="hover:text-foreground transition-colors">
-                Components
+                {t.breadcrumb.components}
               </Link>
             </li>
             <li>/</li>
-            <li className="text-foreground font-medium">Zakat Calculator</li>
+            <li className="text-foreground font-medium">{t.breadcrumb.zakatCalculator}</li>
           </ol>
         </nav>
 
         {/* Page Header */}
         <div className="mb-12">
-          <h1 className="text-4xl font-bold tracking-tight mb-4">Zakat Calculator</h1>
+          <h1 className="text-4xl font-bold tracking-tight mb-4">{t.title}</h1>
           <p className="text-xl text-muted-foreground max-w-3xl">
-            A comprehensive calculator for determining Zakat obligations. Supports multiple asset
-            types, real-time calculations, Nisab threshold checking, and full bilingual support.
-            Perfect for Islamic finance applications and GCC market needs.
+            {t.description}
           </p>
         </div>
 
         {/* Preview */}
         <section className="mb-16">
-          <h2 className="text-3xl font-bold mb-6">Preview</h2>
+          <h2 className="text-3xl font-bold mb-6">{content[locale].componentDocs.preview}</h2>
           <ComponentShowcase>
             <ComponentShowcase.Demo>
               <div className="max-w-2xl mx-auto">
@@ -67,10 +70,10 @@ export default function ZakatCalculatorPage() {
 
         {/* Installation */}
         <section className="mb-16">
-          <h2 className="text-3xl font-bold mb-6">Installation</h2>
+          <h2 className="text-3xl font-bold mb-6">{content[locale].componentDocs.installation}</h2>
           <div className="space-y-4">
             <p className="text-muted-foreground mb-4">
-              Copy and paste the component code into your project:
+              {t.installation.copyComponent}
             </p>
             <CodeBlock
               language="bash"
@@ -78,15 +81,14 @@ export default function ZakatCalculatorPage() {
 cp components/ui/zakat-calculator.tsx your-project/components/ui/`}
             />
             <p className="text-sm text-muted-foreground mt-4">
-              Dependencies: This component uses Card, Input, Label, Separator, Badge components and
-              Arabic Number utilities.
+              {t.installation.dependencies}
             </p>
           </div>
         </section>
 
         {/* Usage */}
         <section className="mb-16">
-          <h2 className="text-3xl font-bold mb-6">Usage</h2>
+          <h2 className="text-3xl font-bold mb-6">{content[locale].componentDocs.usage}</h2>
           <CodeBlock
             language="tsx"
             code={`import { ZakatCalculator } from '@/components/ui/zakat-calculator'
@@ -108,13 +110,13 @@ export default function MyApp() {
 
         {/* Examples */}
         <section className="mb-16">
-          <h2 className="text-3xl font-bold mb-6">Examples</h2>
+          <h2 className="text-3xl font-bold mb-6">{content[locale].componentDocs.examples}</h2>
 
           {/* With Default Values */}
           <div className="mb-12">
-            <h3 className="text-2xl font-semibold mb-4">With Default Values</h3>
+            <h3 className="text-2xl font-semibold mb-4">{t.examples.withDefaultValues}</h3>
             <p className="text-muted-foreground mb-4">
-              Pre-populate the calculator with initial asset values for user convenience.
+              {t.examples.withDefaultValuesDesc}
             </p>
             <ComponentShowcase>
               <ComponentShowcase.Demo>
@@ -147,9 +149,9 @@ export default function MyApp() {
 
           {/* Arabic Locale */}
           <div className="mb-12">
-            <h3 className="text-2xl font-semibold mb-4">Arabic Locale with Arabic-Indic Numerals</h3>
+            <h3 className="text-2xl font-semibold mb-4">{t.examples.arabicLocale}</h3>
             <p className="text-muted-foreground mb-4">
-              Display the calculator in Arabic with Arabic-Indic numerals for full localization.
+              {t.examples.arabicLocaleDesc}
             </p>
             <ComponentShowcase>
               <ComponentShowcase.Demo>
@@ -186,9 +188,9 @@ export default function MyApp() {
 
           {/* With Calculation Callback */}
           <div className="mb-12">
-            <h3 className="text-2xl font-semibold mb-4">With Calculation Callback</h3>
+            <h3 className="text-2xl font-semibold mb-4">{t.examples.withCallback}</h3>
             <p className="text-muted-foreground mb-4">
-              Receive calculation updates to integrate with your application logic.
+              {t.examples.withCallbackDesc}
             </p>
             <CodeBlock
               language="tsx"
@@ -228,50 +230,44 @@ export default function MyApp() {
 
         {/* Understanding Zakat */}
         <section className="mb-16">
-          <h2 className="text-3xl font-bold mb-6">Understanding Zakat</h2>
+          <h2 className="text-3xl font-bold mb-6">{t.understanding.title}</h2>
           <div className="space-y-6 text-muted-foreground">
             <Card className="p-6 space-y-4">
-              <h3 className="text-lg font-semibold text-foreground">What is Zakat?</h3>
+              <h3 className="text-lg font-semibold text-foreground">{t.understanding.whatIsZakat}</h3>
               <p>
-                Zakat is one of the Five Pillars of Islam and is an obligatory form of charity.
-                It&apos;s a form of wealth purification where Muslims with sufficient means must donate
-                2.5% of their qualifying wealth annually to those in need.
+                {t.understanding.whatIsZakatDesc}
               </p>
 
-              <h3 className="text-lg font-semibold text-foreground">Nisab Threshold</h3>
+              <h3 className="text-lg font-semibold text-foreground">{t.understanding.nisabThreshold}</h3>
               <p>
-                The Nisab is the minimum amount of wealth a Muslim must possess before Zakat becomes
-                obligatory. It&apos;s calculated based on the value of:
+                {t.understanding.nisabThresholdDesc}
               </p>
               <ul className="list-disc list-inside space-y-1 ms-4">
                 <li>
-                  <strong>Gold:</strong> 85 grams (approximately 3 ounces)
+                  <strong>{t.understanding.gold}</strong> {t.understanding.goldDesc}
                 </li>
                 <li>
-                  <strong>Silver:</strong> 595 grams (approximately 21 ounces)
+                  <strong>{t.understanding.silver}</strong> {t.understanding.silverDesc}
                 </li>
               </ul>
               <p className="text-sm">
-                Most scholars recommend using the gold standard as it typically results in a higher
-                Nisab threshold, benefiting those in need.
+                {t.understanding.nisabNote}
               </p>
 
-              <h3 className="text-lg font-semibold text-foreground">Zakatable Assets</h3>
-              <p>Zakat is due on the following types of wealth:</p>
+              <h3 className="text-lg font-semibold text-foreground">{t.understanding.zakatableAssets}</h3>
+              <p>{t.understanding.zakatableAssetsDesc}</p>
               <ul className="list-disc list-inside space-y-1 ms-4">
-                <li>Cash in hand and bank accounts</li>
-                <li>Gold and silver (jewelry, coins, bars)</li>
-                <li>Business assets and inventory</li>
-                <li>Stocks, shares, and investments</li>
-                <li>Money owed to you that you expect to receive</li>
-                <li>Other liquid assets</li>
+                <li>{t.understanding.cashAsset}</li>
+                <li>{t.understanding.goldSilverAsset}</li>
+                <li>{t.understanding.businessAsset}</li>
+                <li>{t.understanding.investmentsAsset}</li>
+                <li>{t.understanding.moneyOwedAsset}</li>
+                <li>{t.understanding.otherAsset}</li>
               </ul>
 
-              <h3 className="text-lg font-semibold text-foreground">Lunar Year Requirement</h3>
+              <h3 className="text-lg font-semibold text-foreground">{t.understanding.lunarYear}</h3>
               <p>
-                For Zakat to be due, your wealth must remain above the Nisab threshold for one
-                complete lunar year (Hawl). This calculator helps you determine your Zakat
-                obligation at the current moment.
+                {t.understanding.lunarYearDesc}
               </p>
             </Card>
           </div>
@@ -279,9 +275,9 @@ export default function MyApp() {
 
         {/* Integration with Price APIs */}
         <section className="mb-16">
-          <h2 className="text-3xl font-bold mb-6">Integration with Price APIs</h2>
+          <h2 className="text-3xl font-bold mb-6">{t.integration.title}</h2>
           <p className="text-muted-foreground mb-6">
-            For real-time gold and silver prices, integrate with commodity price APIs:
+            {t.integration.description}
           </p>
           <CodeBlock
             language="tsx"
@@ -334,56 +330,56 @@ export function SmartZakatCalculator() {
 }`}
           />
           <p className="text-sm text-muted-foreground mt-4">
-            Popular APIs: GoldAPI, Metals-API, or your local financial data provider.
+            {t.integration.popularApis}
           </p>
         </section>
 
         {/* Props */}
         <section className="mb-16">
-          <h2 className="text-3xl font-bold mb-6">Props</h2>
+          <h2 className="text-3xl font-bold mb-6">{content[locale].componentDocs.props}</h2>
           <PropsTable
             props={[
               {
                 name: 'goldPricePerGram',
                 type: 'number',
                 default: '250',
-                description: 'Current gold price per gram in SAR.',
+                description: t.props.goldPricePerGram,
               },
               {
                 name: 'silverPricePerGram',
                 type: 'number',
                 default: '3',
-                description: 'Current silver price per gram in SAR.',
+                description: t.props.silverPricePerGram,
               },
               {
                 name: 'useArabicNumerals',
                 type: 'boolean',
                 default: 'false',
-                description: 'Display numbers using Arabic-Indic numerals (٠-٩).',
+                description: t.props.useArabicNumerals,
               },
               {
                 name: 'locale',
                 type: '"en" | "ar"',
                 default: '"en"',
-                description: 'Language locale for labels and formatting.',
+                description: t.props.locale,
               },
               {
                 name: 'onCalculate',
                 type: '(result: ZakatCalculationResult) => void',
                 default: 'undefined',
-                description: 'Callback fired when calculation updates.',
+                description: t.props.onCalculate,
               },
               {
                 name: 'defaultValues',
                 type: 'Partial<ZakatAssets>',
                 default: 'undefined',
-                description: 'Initial values for asset fields.',
+                description: t.props.defaultValues,
               },
               {
                 name: 'className',
                 type: 'string',
                 default: 'undefined',
-                description: 'Additional CSS classes for the wrapper.',
+                description: t.props.className,
               },
             ]}
           />
@@ -438,12 +434,10 @@ export function SmartZakatCalculator() {
 
         {/* Export & Share Features */}
         <section className="mb-16">
-          <h2 className="text-3xl font-bold mb-6">Export & Share Features</h2>
+          <h2 className="text-3xl font-bold mb-6">{t.exportShare.title}</h2>
           <div className="space-y-4 text-muted-foreground mb-6">
             <p>
-              The Zakat Calculator includes built-in export and sharing features to help users
-              save and share their calculations. All export options are available in the calculation
-              result card.
+              {t.exportShare.description}
             </p>
           </div>
 
@@ -452,13 +446,12 @@ export function SmartZakatCalculator() {
               <CardHeader>
                 <CardTitle className="text-lg flex items-center gap-2">
                   <Copy className="h-5 w-5" />
-                  Copy to Clipboard
+                  {t.exportShare.copyToClipboard}
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-sm text-muted-foreground">
-                  Quickly copy the calculation summary as formatted text. Perfect for pasting
-                  into messages, emails, or documents. Shows &quot;Copied!&quot; confirmation.
+                  {t.exportShare.copyToClipboardDesc}
                 </p>
               </CardContent>
             </Card>
@@ -467,13 +460,12 @@ export function SmartZakatCalculator() {
               <CardHeader>
                 <CardTitle className="text-lg flex items-center gap-2">
                   <Download className="h-5 w-5" />
-                  Download as Text
+                  {t.exportShare.downloadAsText}
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-sm text-muted-foreground">
-                  Download the calculation as a .txt file with all asset details, total wealth,
-                  and Zakat due amount. File is named with the current date.
+                  {t.exportShare.downloadAsTextDesc}
                 </p>
               </CardContent>
             </Card>
@@ -482,13 +474,12 @@ export function SmartZakatCalculator() {
               <CardHeader>
                 <CardTitle className="text-lg flex items-center gap-2">
                   <Printer className="h-5 w-5" />
-                  Print Calculation
+                  {t.exportShare.printCalculation}
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-sm text-muted-foreground">
-                  Open a print-friendly view of the calculation. Includes all details in a
-                  clean, formatted layout suitable for paper records.
+                  {t.exportShare.printCalculationDesc}
                 </p>
               </CardContent>
             </Card>
@@ -497,20 +488,19 @@ export function SmartZakatCalculator() {
               <CardHeader>
                 <CardTitle className="text-lg flex items-center gap-2">
                   <Share2 className="h-5 w-5" />
-                  Export as JSON
+                  {t.exportShare.exportAsJson}
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-sm text-muted-foreground">
-                  Download structured data as JSON for developers or data import. Includes
-                  assets, prices, calculation results, and timestamp.
+                  {t.exportShare.exportAsJsonDesc}
                 </p>
               </CardContent>
             </Card>
           </div>
 
           <div className="mt-6">
-            <h3 className="text-lg font-semibold mb-3">Example Export Format</h3>
+            <h3 className="text-lg font-semibold mb-3">{t.exportShare.exampleExport}</h3>
             <CodeBlock
               language="text"
               code={`Zakat Calculation
@@ -538,30 +528,27 @@ Calculation Result:
 
         {/* Accessibility */}
         <section className="mb-16">
-          <h2 className="text-3xl font-bold mb-6">Accessibility</h2>
+          <h2 className="text-3xl font-bold mb-6">{content[locale].componentDocs.accessibility}</h2>
           <div className="space-y-4 text-muted-foreground">
-            <p>The Zakat Calculator follows accessibility best practices:</p>
+            <p>{t.accessibility.description}</p>
             <ul className="list-disc list-inside space-y-2 ms-4">
               <li>
-                <strong>Semantic HTML:</strong> Proper form labels and input associations.
+                <strong>{t.accessibility.semanticHtml}</strong> {t.accessibility.semanticHtmlDesc}
               </li>
               <li>
-                <strong>Keyboard Navigation:</strong> Full keyboard support for all form fields.
+                <strong>{t.accessibility.keyboardNavigation}</strong> {t.accessibility.keyboardNavigationDesc}
               </li>
               <li>
-                <strong>Screen Reader Support:</strong> Clear labels and ARIA attributes.
+                <strong>{t.accessibility.screenReaderSupport}</strong> {t.accessibility.screenReaderSupportDesc}
               </li>
               <li>
-                <strong>Visual Feedback:</strong> Status badges and color coding for calculation
-                results.
+                <strong>{t.accessibility.visualFeedback}</strong> {t.accessibility.visualFeedbackDesc}
               </li>
               <li>
-                <strong>Clear Instructions:</strong> Nisab information and guidance provided
-                upfront.
+                <strong>{t.accessibility.clearInstructions}</strong> {t.accessibility.clearInstructionsDesc}
               </li>
               <li>
-                <strong>Input Validation:</strong> Number inputs with appropriate min/max/step
-                values.
+                <strong>{t.accessibility.inputValidation}</strong> {t.accessibility.inputValidationDesc}
               </li>
             </ul>
           </div>
@@ -569,29 +556,27 @@ Calculation Result:
 
         {/* RTL Considerations */}
         <section className="mb-16">
-          <h2 className="text-3xl font-bold mb-6">RTL Considerations</h2>
+          <h2 className="text-3xl font-bold mb-6">{content[locale].componentDocs.rtl}</h2>
           <div className="space-y-4 text-muted-foreground">
-            <p>This component is built with RTL-first principles:</p>
+            <p>{t.rtl.description}</p>
             <ul className="list-disc list-inside space-y-2 ms-4">
               <li>
-                <strong>Automatic Layout Adaptation:</strong> All spacing and alignment adapts to
-                RTL direction.
+                <strong>{t.rtl.autoLayout}</strong> {t.rtl.autoLayoutDesc}
               </li>
               <li>
-                <strong>Bilingual Labels:</strong> Complete Arabic translations for all UI text.
+                <strong>{t.rtl.bilingualLabels}</strong> {t.rtl.bilingualLabelsDesc}
               </li>
               <li>
-                <strong>Arabic-Indic Numerals:</strong> Optional display of ٠١٢٣٤٥٦٧٨٩ numerals.
+                <strong>{t.rtl.arabicIndicNumerals}</strong> {t.rtl.arabicIndicNumeralsDesc}
               </li>
               <li>
-                <strong>Currency Symbol Position:</strong> &quot;ر.س&quot; displays correctly in RTL mode.
+                <strong>{t.rtl.currencySymbol}</strong> {t.rtl.currencySymbolDesc}
               </li>
               <li>
-                <strong>Input Alignment:</strong> Currency and unit labels position correctly in
-                both directions.
+                <strong>{t.rtl.inputAlignment}</strong> {t.rtl.inputAlignmentDesc}
               </li>
               <li>
-                <strong>Logical Properties:</strong> Uses ms-*, me-*, ps-*, pe-* for all spacing.
+                <strong>{t.rtl.logicalProperties}</strong> {t.rtl.logicalPropertiesDesc}
               </li>
             </ul>
           </div>
@@ -599,42 +584,42 @@ Calculation Result:
 
         {/* Related Components */}
         <section className="mb-16">
-          <h2 className="text-3xl font-bold mb-6">Related Components</h2>
+          <h2 className="text-3xl font-bold mb-6">{t.relatedComponents.title}</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <Link
               href="/components/arabic-number"
               className="block p-4 border rounded-lg hover:border-primary transition-colors"
             >
-              <h3 className="font-semibold mb-2">Arabic Number</h3>
+              <h3 className="font-semibold mb-2">{t.relatedComponents.arabicNumber}</h3>
               <p className="text-sm text-muted-foreground">
-                Number formatting utilities used by this calculator.
+                {t.relatedComponents.arabicNumberDesc}
               </p>
             </Link>
             <Link
               href="/components/form"
               className="block p-4 border rounded-lg hover:border-primary transition-colors"
             >
-              <h3 className="font-semibold mb-2">Form</h3>
+              <h3 className="font-semibold mb-2">{t.relatedComponents.form}</h3>
               <p className="text-sm text-muted-foreground">
-                Form validation and state management patterns.
+                {t.relatedComponents.formDesc}
               </p>
             </Link>
             <Link
               href="/components/input"
               className="block p-4 border rounded-lg hover:border-primary transition-colors"
             >
-              <h3 className="font-semibold mb-2">Input</h3>
+              <h3 className="font-semibold mb-2">{t.relatedComponents.input}</h3>
               <p className="text-sm text-muted-foreground">
-                Base input component used for asset fields.
+                {t.relatedComponents.inputDesc}
               </p>
             </Link>
             <Link
               href="/components/card"
               className="block p-4 border rounded-lg hover:border-primary transition-colors"
             >
-              <h3 className="font-semibold mb-2">Card</h3>
+              <h3 className="font-semibold mb-2">{t.relatedComponents.card}</h3>
               <p className="text-sm text-muted-foreground">
-                Card components used for layout and grouping.
+                {t.relatedComponents.cardDesc}
               </p>
             </Link>
           </div>

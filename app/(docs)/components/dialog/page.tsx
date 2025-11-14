@@ -19,27 +19,30 @@ import {
 import { ComponentShowcase } from '@/components/docs/component-showcase'
 import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
-const dialogProps: PropDefinition[] = [
+import { useDirection } from '@/components/providers/direction-provider'
+import { content } from '@/lib/i18n'
+
+const getDialogProps = (t: typeof content.en | typeof content.ar): PropDefinition[] => [
   {
     name: 'open',
     type: 'boolean',
     default: 'undefined',
     required: false,
-    description: 'Controlled open state',
+    description: t.dialogComponent.props.open,
   },
   {
     name: 'onOpenChange',
     type: '(open: boolean) => void',
     default: 'undefined',
     required: false,
-    description: 'Callback when open state changes',
+    description: t.dialogComponent.props.onOpenChange,
   },
   {
     name: 'defaultOpen',
     type: 'boolean',
     default: 'false',
     required: false,
-    description: 'Default open state (uncontrolled)',
+    description: t.dialogComponent.props.defaultOpen,
   },
 ]
 
@@ -118,7 +121,9 @@ const confirmationCode = `<Dialog>
 </Dialog>`
 
 export default function DialogPage() {
-  const [open, setOpen] = React.useState(false)
+  const { locale } = useDirection()
+  const t = content[locale]
+  const dialogProps = getDialogProps(t)
 
   return (
     <div className="min-h-screen">
@@ -129,43 +134,42 @@ export default function DialogPage() {
           <ol className="flex items-center gap-2 text-sm text-muted-foreground">
             <li>
               <Link href="/" className="hover:text-foreground transition-colors">
-                Home
+                {t.common.home}
               </Link>
             </li>
             <li>/</li>
             <li>
               <Link href="/components" className="hover:text-foreground transition-colors">
-                Components
+                {t.nav.components}
               </Link>
             </li>
             <li>/</li>
-            <li className="text-foreground font-medium">Dialog</li>
+            <li className="text-foreground font-medium">{t.dialogComponent.title}</li>
           </ol>
         </nav>
 
         {/* Page Header */}
         <div className="mb-12">
-          <h1 className="text-4xl font-bold tracking-tight mb-4">Dialog</h1>
+          <h1 className="text-4xl font-bold tracking-tight mb-4">{t.dialogComponent.title}</h1>
           <p className="text-xl text-muted-foreground max-w-3xl">
-            A window overlaid on either the primary window or another dialog window. Perfect for confirmations and forms.
+            {t.dialogComponent.description}
           </p>
         </div>
 
         {/* Preview */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Preview</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.dialogComponent.preview}</h2>
           <ComponentShowcase>
             <ComponentShowcase.Demo>
               <Dialog>
                 <DialogTrigger asChild>
-                  <Button>Open Dialog</Button>
+                  <Button>{t.dialogComponent.demo.openDialog}</Button>
                 </DialogTrigger>
                 <DialogContent>
                   <DialogHeader>
-                    <DialogTitle>Are you absolutely sure?</DialogTitle>
+                    <DialogTitle>{t.dialogComponent.demo.title}</DialogTitle>
                     <DialogDescription>
-                      This action cannot be undone. This will permanently delete your
-                      account and remove your data from our servers.
+                      {t.dialogComponent.demo.description}
                     </DialogDescription>
                   </DialogHeader>
                 </DialogContent>
@@ -176,35 +180,35 @@ export default function DialogPage() {
 
         {/* Installation */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Installation</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.dialogComponent.installation}</h2>
           <CodeBlock code={installCode} language="bash" />
         </section>
 
         {/* Usage */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Usage</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.dialogComponent.usage}</h2>
           <CodeBlock code={basicUsageCode} language="tsx" />
         </section>
 
         {/* Examples */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Examples</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.dialogComponent.examples.title}</h2>
 
           <div className="space-y-8">
             {/* Basic */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">Basic Dialog</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.dialogComponent.examples.basic}</h3>
               <Card>
                 <CardContent className="p-6">
                   <Dialog>
                     <DialogTrigger asChild>
-                      <Button>Open Dialog</Button>
+                      <Button>{t.dialogComponent.demo.openDialog}</Button>
                     </DialogTrigger>
                     <DialogContent>
                       <DialogHeader>
-                        <DialogTitle>Are you absolutely sure?</DialogTitle>
+                        <DialogTitle>{t.dialogComponent.demo.title}</DialogTitle>
                         <DialogDescription>
-                          This action cannot be undone.
+                          {t.dialogComponent.demo.description}
                         </DialogDescription>
                       </DialogHeader>
                     </DialogContent>
@@ -218,32 +222,32 @@ export default function DialogPage() {
 
             {/* With Form */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">Dialog with Form</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.dialogComponent.examples.withForm}</h3>
               <Card>
                 <CardContent className="p-6">
                   <Dialog>
                     <DialogTrigger asChild>
-                      <Button variant="outline">Edit Profile</Button>
+                      <Button variant="outline">{t.dialogComponent.demo.editProfile}</Button>
                     </DialogTrigger>
                     <DialogContent>
                       <DialogHeader>
-                        <DialogTitle>Edit profile</DialogTitle>
+                        <DialogTitle>{t.dialogComponent.demo.editTitle}</DialogTitle>
                         <DialogDescription>
-                          Make changes to your profile here.
+                          {t.dialogComponent.demo.editDescription}
                         </DialogDescription>
                       </DialogHeader>
                       <div className="grid gap-4 py-4">
                         <div className="grid gap-2">
-                          <Label htmlFor="name">Name</Label>
+                          <Label htmlFor="name">{t.dialogComponent.demo.name}</Label>
                           <Input id="name" defaultValue="Pedro Duarte" />
                         </div>
                         <div className="grid gap-2">
-                          <Label htmlFor="username">Username</Label>
+                          <Label htmlFor="username">{t.dialogComponent.demo.username}</Label>
                           <Input id="username" defaultValue="@peduarte" />
                         </div>
                       </div>
                       <DialogFooter>
-                        <Button type="submit">Save changes</Button>
+                        <Button type="submit">{t.dialogComponent.demo.saveChanges}</Button>
                       </DialogFooter>
                     </DialogContent>
                   </Dialog>
@@ -256,26 +260,25 @@ export default function DialogPage() {
 
             {/* Confirmation */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">Confirmation Dialog</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.dialogComponent.examples.confirmation}</h3>
               <Card>
                 <CardContent className="p-6">
                   <Dialog>
                     <DialogTrigger asChild>
-                      <Button variant="destructive">Delete Account</Button>
+                      <Button variant="destructive">{t.dialogComponent.demo.deleteAccount}</Button>
                     </DialogTrigger>
                     <DialogContent>
                       <DialogHeader>
-                        <DialogTitle>Are you absolutely sure?</DialogTitle>
+                        <DialogTitle>{t.dialogComponent.demo.title}</DialogTitle>
                         <DialogDescription>
-                          This action cannot be undone. This will permanently delete
-                          your account and remove your data from our servers.
+                          {t.dialogComponent.demo.description}
                         </DialogDescription>
                       </DialogHeader>
                       <DialogFooter>
                         <DialogClose asChild>
-                          <Button variant="outline">Cancel</Button>
+                          <Button variant="outline">{t.dialogComponent.demo.cancel}</Button>
                         </DialogClose>
-                        <Button variant="destructive">Delete</Button>
+                        <Button variant="destructive">{t.dialogComponent.demo.delete}</Button>
                       </DialogFooter>
                     </DialogContent>
                   </Dialog>
@@ -290,32 +293,32 @@ export default function DialogPage() {
 
         {/* RTL Support Example */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">RTL Support Example</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.dialogComponent.rtl.example}</h2>
           <p className="text-muted-foreground mb-6">
-            The Dialog component is fully RTL-compatible. The close button positions correctly and content aligns naturally.
+            {t.dialogComponent.rtl.exampleDescription}
           </p>
           <ComponentShowcase.Comparison ltrLabel="LTR (English)" rtlLabel="RTL (العربية)">
             <Dialog>
               <DialogTrigger asChild>
-                <Button variant="outline">Open Settings</Button>
+                <Button variant="outline">{t.dialogComponent.demo.openSettings}</Button>
               </DialogTrigger>
               <DialogContent>
                 <DialogHeader>
-                  <DialogTitle>Account Settings</DialogTitle>
+                  <DialogTitle>{t.dialogComponent.demo.accountSettings}</DialogTitle>
                   <DialogDescription>
-                    Make changes to your account preferences here.
+                    {t.dialogComponent.demo.accountDescription}
                   </DialogDescription>
                 </DialogHeader>
                 <div className="py-4">
                   <p className="text-sm text-muted-foreground">
-                    Configure your notification preferences and privacy settings.
+                    {t.dialogComponent.demo.settingsContent}
                   </p>
                 </div>
                 <DialogFooter>
                   <DialogClose asChild>
-                    <Button variant="outline">Cancel</Button>
+                    <Button variant="outline">{t.dialogComponent.demo.cancel}</Button>
                   </DialogClose>
-                  <Button>Save Changes</Button>
+                  <Button>{t.dialogComponent.demo.saveChanges}</Button>
                 </DialogFooter>
               </DialogContent>
             </Dialog>
@@ -324,36 +327,36 @@ export default function DialogPage() {
 
         {/* Props */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Props</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.dialogComponent.props.title}</h2>
           <PropsTable props={dialogProps} />
         </section>
 
         {/* Accessibility */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Accessibility</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.dialogComponent.accessibility.title}</h2>
           <Card>
             <CardContent className="p-6 space-y-4">
               <div>
-                <h3 className="font-semibold mb-2">ARIA Roles</h3>
+                <h3 className="font-semibold mb-2">{t.dialogComponent.accessibility.ariaRoles}</h3>
                 <p className="text-muted-foreground">
-                  Uses <code className="px-1.5 py-0.5 rounded bg-muted">role=&quot;dialog&quot;</code> and <code className="px-1.5 py-0.5 rounded bg-muted">aria-modal=&quot;true&quot;</code>.
+                  {t.dialogComponent.accessibility.ariaDescription}
                 </p>
               </div>
               <div>
-                <h3 className="font-semibold mb-2">Keyboard Navigation</h3>
+                <h3 className="font-semibold mb-2">{t.dialogComponent.accessibility.keyboard}</h3>
                 <ul className="list-disc list-inside text-muted-foreground space-y-1">
                   <li>
-                    <kbd className="px-1.5 py-0.5 rounded bg-muted">Escape</kbd>: Closes the dialog
+                    <kbd className="px-1.5 py-0.5 rounded bg-muted">Escape</kbd>: {t.dialogComponent.accessibility.escapeKey}
                   </li>
                   <li>
-                    <kbd className="px-1.5 py-0.5 rounded bg-muted">Tab</kbd>: Traps focus within dialog
+                    <kbd className="px-1.5 py-0.5 rounded bg-muted">Tab</kbd>: {t.dialogComponent.accessibility.tabKey}
                   </li>
                 </ul>
               </div>
               <div>
-                <h3 className="font-semibold mb-2">Focus Management</h3>
+                <h3 className="font-semibold mb-2">{t.dialogComponent.accessibility.focusManagement}</h3>
                 <p className="text-muted-foreground">
-                  Focus is automatically moved to the dialog when opened and returned to the trigger when closed.
+                  {t.dialogComponent.accessibility.focusDescription}
                 </p>
               </div>
             </CardContent>
@@ -362,18 +365,18 @@ export default function DialogPage() {
 
         {/* RTL Support */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">RTL Support</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.dialogComponent.rtl.title}</h2>
           <p className="text-muted-foreground mb-6">
-            The Dialog component is fully RTL-compatible using logical properties.
+            {t.dialogComponent.rtl.description}
           </p>
           <Card>
             <CardContent className="p-6">
-              <p className="text-sm font-semibold mb-2">Key RTL Features:</p>
+              <p className="text-sm font-semibold mb-2">{t.dialogComponent.rtl.features}</p>
               <ul className="list-disc list-inside text-sm text-muted-foreground space-y-1">
-                <li>Close button positions on the correct side (end)</li>
-                <li>Content aligns naturally (text-start)</li>
-                <li>Dialog centered properly in both directions</li>
-                <li>Animations work correctly in RTL</li>
+                <li>{t.dialogComponent.rtl.closeButton}</li>
+                <li>{t.dialogComponent.rtl.contentAlign}</li>
+                <li>{t.dialogComponent.rtl.centered}</li>
+                <li>{t.dialogComponent.rtl.animations}</li>
               </ul>
             </CardContent>
           </Card>
@@ -381,14 +384,14 @@ export default function DialogPage() {
 
         {/* Related */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Related Components</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.dialogComponent.related.title}</h2>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             <Link href="/components/alert">
               <Card className="hover:border-primary transition-colors">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold mb-2">Alert</h3>
+                  <h3 className="font-semibold mb-2">{t.dialogComponent.related.alert}</h3>
                   <p className="text-sm text-muted-foreground">
-                    Important messages
+                    {t.dialogComponent.related.alertDesc}
                   </p>
                 </CardContent>
               </Card>
@@ -396,9 +399,9 @@ export default function DialogPage() {
             <Link href="/components/toast">
               <Card className="hover:border-primary transition-colors">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold mb-2">Toast</h3>
+                  <h3 className="font-semibold mb-2">{t.dialogComponent.related.toast}</h3>
                   <p className="text-sm text-muted-foreground">
-                    Temporary notifications
+                    {t.dialogComponent.related.toastDesc}
                   </p>
                 </CardContent>
               </Card>

@@ -20,14 +20,16 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet'
+import { useDirection } from '@/components/providers/direction-provider'
+import { content } from '@/lib/i18n'
 
-const sheetContentProps: PropDefinition[] = [
+const getSheetContentProps = (t: typeof content.en | typeof content.ar): PropDefinition[] => [
   {
     name: 'side',
     type: '"top" | "bottom" | "start" | "end"',
     default: '"end"',
     required: false,
-    description: 'The side from which the sheet slides in',
+    description: t.sheetComponent.props.side,
   },
 ]
 
@@ -137,6 +139,10 @@ const withFormCode = `<Sheet>
 </Sheet>`
 
 export default function SheetPage() {
+  const { locale } = useDirection()
+  const t = content[locale]
+  const sheetContentProps = getSheetContentProps(t)
+
   return (
     <div className="min-h-screen">
 
@@ -146,47 +152,47 @@ export default function SheetPage() {
           <ol className="flex items-center gap-2 text-sm text-muted-foreground">
             <li>
               <Link href="/" className="hover:text-foreground transition-colors">
-                Home
+                {t.common.home}
               </Link>
             </li>
             <li>/</li>
             <li>
               <Link href="/components" className="hover:text-foreground transition-colors">
-                Components
+                {t.nav.components}
               </Link>
             </li>
             <li>/</li>
-            <li className="text-foreground font-medium">Sheet</li>
+            <li className="text-foreground font-medium">{t.sheetComponent.title}</li>
           </ol>
         </nav>
 
         {/* Page Header */}
         <div className="mb-12">
-          <h1 className="text-4xl font-bold tracking-tight mb-4">Sheet</h1>
+          <h1 className="text-4xl font-bold tracking-tight mb-4">{t.sheetComponent.title}</h1>
           <p className="text-xl text-muted-foreground max-w-3xl">
-            Extends the Dialog component to display content that slides in from the edge of the screen.
+            {t.sheetComponent.description}
           </p>
         </div>
 
         {/* Preview */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Preview</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.sheetComponent.preview}</h2>
           <ComponentShowcase>
             <ComponentShowcase.Demo>
               <Sheet>
                 <SheetTrigger asChild>
-                  <Button variant="outline">Open Sheet</Button>
+                  <Button variant="outline">{t.sheetComponent.demo.openSheet}</Button>
                 </SheetTrigger>
                 <SheetContent>
                   <SheetHeader>
-                    <SheetTitle>Sheet Title</SheetTitle>
+                    <SheetTitle>{t.sheetComponent.demo.sheetTitle}</SheetTitle>
                     <SheetDescription>
-                      This is a sheet component that slides in from the side.
+                      {t.sheetComponent.demo.sheetDescription}
                     </SheetDescription>
                   </SheetHeader>
                   <div className="py-4">
                     <p className="text-sm text-muted-foreground">
-                      Sheet content goes here. You can add forms, lists, or any other content.
+                      {t.sheetComponent.demo.sheetContent}
                     </p>
                   </div>
                 </SheetContent>
@@ -199,35 +205,35 @@ export default function SheetPage() {
 
         {/* Installation */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Installation</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.sheetComponent.installation}</h2>
           <CodeBlock code={installCode} language="bash" />
         </section>
 
         {/* Usage */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Usage</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.sheetComponent.usage}</h2>
           <CodeBlock code={basicUsageCode} language="tsx" />
         </section>
 
         {/* Examples */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Examples</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.sheetComponent.examples.title}</h2>
 
           <div className="space-y-8">
             <div>
-              <h3 className="text-lg font-semibold mb-4">Different Sides</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.sheetComponent.examples.differentSides}</h3>
               <ComponentShowcase>
                 <ComponentShowcase.Demo>
                   <div className="flex flex-wrap gap-4">
                     <Sheet>
                       <SheetTrigger asChild>
-                        <Button variant="outline">Open Start</Button>
+                        <Button variant="outline">{t.sheetComponent.demo.openStart}</Button>
                       </SheetTrigger>
                       <SheetContent side="start">
                         <SheetHeader>
-                          <SheetTitle>Start Sheet</SheetTitle>
+                          <SheetTitle>{t.sheetComponent.demo.startSheet}</SheetTitle>
                           <SheetDescription>
-                            This sheet slides in from the start (left in LTR, right in RTL).
+                            {t.sheetComponent.demo.startDescription}
                           </SheetDescription>
                         </SheetHeader>
                       </SheetContent>
@@ -235,13 +241,13 @@ export default function SheetPage() {
 
                     <Sheet>
                       <SheetTrigger asChild>
-                        <Button variant="outline">Open End</Button>
+                        <Button variant="outline">{t.sheetComponent.demo.openEnd}</Button>
                       </SheetTrigger>
                       <SheetContent side="end">
                         <SheetHeader>
-                          <SheetTitle>End Sheet</SheetTitle>
+                          <SheetTitle>{t.sheetComponent.demo.endSheet}</SheetTitle>
                           <SheetDescription>
-                            This sheet slides in from the end (right in LTR, left in RTL).
+                            {t.sheetComponent.demo.endDescription}
                           </SheetDescription>
                         </SheetHeader>
                       </SheetContent>
@@ -249,13 +255,13 @@ export default function SheetPage() {
 
                     <Sheet>
                       <SheetTrigger asChild>
-                        <Button variant="outline">Open Top</Button>
+                        <Button variant="outline">{t.sheetComponent.demo.openTop}</Button>
                       </SheetTrigger>
                       <SheetContent side="top">
                         <SheetHeader>
-                          <SheetTitle>Top Sheet</SheetTitle>
+                          <SheetTitle>{t.sheetComponent.demo.topSheet}</SheetTitle>
                           <SheetDescription>
-                            This sheet slides in from the top.
+                            {t.sheetComponent.demo.topDescription}
                           </SheetDescription>
                         </SheetHeader>
                       </SheetContent>
@@ -263,13 +269,13 @@ export default function SheetPage() {
 
                     <Sheet>
                       <SheetTrigger asChild>
-                        <Button variant="outline">Open Bottom</Button>
+                        <Button variant="outline">{t.sheetComponent.demo.openBottom}</Button>
                       </SheetTrigger>
                       <SheetContent side="bottom">
                         <SheetHeader>
-                          <SheetTitle>Bottom Sheet</SheetTitle>
+                          <SheetTitle>{t.sheetComponent.demo.bottomSheet}</SheetTitle>
                           <SheetDescription>
-                            This sheet slides in from the bottom.
+                            {t.sheetComponent.demo.bottomDescription}
                           </SheetDescription>
                         </SheetHeader>
                       </SheetContent>
@@ -281,38 +287,38 @@ export default function SheetPage() {
             </div>
 
             <div>
-              <h3 className="text-lg font-semibold mb-4">With Form</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.sheetComponent.examples.withForm}</h3>
               <ComponentShowcase>
                 <ComponentShowcase.Demo>
                   <Sheet>
                     <SheetTrigger asChild>
-                      <Button variant="outline">Edit Profile</Button>
+                      <Button variant="outline">{t.sheetComponent.demo.editProfile}</Button>
                     </SheetTrigger>
                     <SheetContent>
                       <SheetHeader>
-                        <SheetTitle>Edit Profile</SheetTitle>
+                        <SheetTitle>{t.sheetComponent.demo.editProfile}</SheetTitle>
                         <SheetDescription>
-                          Make changes to your profile here. Click save when you&apos;re done.
+                          {t.sheetComponent.demo.editDescription}
                         </SheetDescription>
                       </SheetHeader>
                       <div className="grid gap-4 py-4">
                         <div className="grid gap-2">
-                          <Label htmlFor="name">Name</Label>
-                          <Input id="name" placeholder="Enter your name" defaultValue="John Doe" />
+                          <Label htmlFor="name">{t.sheetComponent.demo.name}</Label>
+                          <Input id="name" placeholder={t.sheetComponent.demo.enterName} defaultValue="John Doe" />
                         </div>
                         <div className="grid gap-2">
-                          <Label htmlFor="email">Email</Label>
+                          <Label htmlFor="email">{t.sheetComponent.demo.email}</Label>
                           <Input
                             id="email"
                             type="email"
-                            placeholder="Enter your email"
+                            placeholder={t.sheetComponent.demo.enterEmail}
                             defaultValue="john@example.com"
                           />
                         </div>
                       </div>
                       <SheetFooter>
                         <SheetClose asChild>
-                          <Button type="submit">Save changes</Button>
+                          <Button type="submit">{t.sheetComponent.demo.saveChanges}</Button>
                         </SheetClose>
                       </SheetFooter>
                     </SheetContent>
@@ -326,44 +332,44 @@ export default function SheetPage() {
 
         {/* RTL Support Example */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">RTL Support Example</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.sheetComponent.rtl.example}</h2>
           <p className="text-muted-foreground mb-6">
-            The Sheet component automatically adapts to RTL layouts. The side properties (start/end) mirror correctly and slide animations flow naturally.
+            {t.sheetComponent.rtl.exampleDescription}
           </p>
           <ComponentShowcase.Comparison ltrLabel="LTR (English)" rtlLabel="RTL (العربية)">
             <div className="flex gap-4">
               <Sheet>
                 <SheetTrigger asChild>
-                  <Button variant="outline">Open from Start</Button>
+                  <Button variant="outline">{t.sheetComponent.demo.openFromStart}</Button>
                 </SheetTrigger>
                 <SheetContent side="start">
                   <SheetHeader>
-                    <SheetTitle>Navigation Menu</SheetTitle>
+                    <SheetTitle>{t.sheetComponent.demo.navigationMenu}</SheetTitle>
                     <SheetDescription>
-                      Browse through the menu options.
+                      {t.sheetComponent.demo.navigationDescription}
                     </SheetDescription>
                   </SheetHeader>
                   <div className="py-4">
                     <p className="text-sm text-muted-foreground">
-                      This sheet slides from the start side.
+                      {t.sheetComponent.demo.slidesFromStart}
                     </p>
                   </div>
                 </SheetContent>
               </Sheet>
               <Sheet>
                 <SheetTrigger asChild>
-                  <Button variant="outline">Open from End</Button>
+                  <Button variant="outline">{t.sheetComponent.demo.openFromEnd}</Button>
                 </SheetTrigger>
                 <SheetContent side="end">
                   <SheetHeader>
-                    <SheetTitle>Settings Panel</SheetTitle>
+                    <SheetTitle>{t.sheetComponent.demo.settingsPanel}</SheetTitle>
                     <SheetDescription>
-                      Configure your preferences.
+                      {t.sheetComponent.demo.settingsDescription}
                     </SheetDescription>
                   </SheetHeader>
                   <div className="py-4">
                     <p className="text-sm text-muted-foreground">
-                      This sheet slides from the end side.
+                      {t.sheetComponent.demo.slidesFromEnd}
                     </p>
                   </div>
                 </SheetContent>
@@ -374,30 +380,30 @@ export default function SheetPage() {
 
         {/* Props */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-4">Props</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-4">{t.sheetComponent.props.title}</h2>
           <PropsTable props={sheetContentProps} />
         </section>
 
         {/* Accessibility */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-4">Accessibility</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-4">{t.sheetComponent.accessibility.title}</h2>
           <Card>
             <CardContent className="p-6 space-y-4">
               <div>
-                <h3 className="font-semibold mb-2">Keyboard Navigation</h3>
+                <h3 className="font-semibold mb-2">{t.sheetComponent.accessibility.keyboard}</h3>
                 <ul className="list-disc list-inside text-sm text-muted-foreground space-y-1">
-                  <li><kbd className="px-1.5 py-0.5 rounded bg-muted">Esc</kbd> - Close the sheet</li>
-                  <li><kbd className="px-1.5 py-0.5 rounded bg-muted">Tab</kbd> - Navigate between focusable elements within the sheet</li>
+                  <li><kbd className="px-1.5 py-0.5 rounded bg-muted">Esc</kbd> - {t.sheetComponent.accessibility.escape}</li>
+                  <li><kbd className="px-1.5 py-0.5 rounded bg-muted">Tab</kbd> - {t.sheetComponent.accessibility.tab}</li>
                 </ul>
               </div>
               <div>
-                <h3 className="font-semibold mb-2">ARIA Attributes</h3>
+                <h3 className="font-semibold mb-2">{t.sheetComponent.accessibility.aria}</h3>
                 <ul className="list-disc list-inside text-sm text-muted-foreground space-y-1">
-                  <li>role=&quot;dialog&quot; on the sheet content</li>
-                  <li>aria-describedby links to the description</li>
-                  <li>aria-labelledby links to the title</li>
-                  <li>Focus is trapped within the sheet when open</li>
-                  <li>Focus returns to trigger element when closed</li>
+                  <li>{t.sheetComponent.accessibility.roleDialog}</li>
+                  <li>{t.sheetComponent.accessibility.ariaDescribedby}</li>
+                  <li>{t.sheetComponent.accessibility.ariaLabelledby}</li>
+                  <li>{t.sheetComponent.accessibility.focusTrap}</li>
+                  <li>{t.sheetComponent.accessibility.focusReturn}</li>
                 </ul>
               </div>
             </CardContent>
@@ -406,18 +412,18 @@ export default function SheetPage() {
 
         {/* RTL Support */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-4">RTL Support</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-4">{t.sheetComponent.rtl.title}</h2>
           <Card>
             <CardContent className="p-6">
               <p className="text-sm text-muted-foreground mb-4">
-                The Sheet component is fully RTL-compatible with automatic side adaptation.
+                {t.sheetComponent.rtl.description}
               </p>
               <ul className="list-disc list-inside text-sm text-muted-foreground space-y-1">
-                <li>side=&quot;start&quot; automatically positions on the right in RTL mode</li>
-                <li>side=&quot;end&quot; automatically positions on the left in RTL mode</li>
-                <li>Slide animations follow the correct direction</li>
-                <li>Close button positions correctly</li>
-                <li>Content layout respects text direction</li>
+                <li>{t.sheetComponent.rtl.sideStart}</li>
+                <li>{t.sheetComponent.rtl.sideEnd}</li>
+                <li>{t.sheetComponent.rtl.slideAnimations}</li>
+                <li>{t.sheetComponent.rtl.closeButton}</li>
+                <li>{t.sheetComponent.rtl.contentLayout}</li>
               </ul>
             </CardContent>
           </Card>
@@ -425,14 +431,14 @@ export default function SheetPage() {
 
         {/* Related Components */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-4">Related Components</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-4">{t.sheetComponent.related.title}</h2>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             <Link href="/components/dialog">
               <Card className="hover:border-primary transition-colors">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold mb-2">Dialog</h3>
+                  <h3 className="font-semibold mb-2">{t.sheetComponent.related.dialog}</h3>
                   <p className="text-sm text-muted-foreground">
-                    Modal dialog for focused content
+                    {t.sheetComponent.related.dialogDesc}
                   </p>
                 </CardContent>
               </Card>
@@ -440,9 +446,9 @@ export default function SheetPage() {
             <Link href="/components/popover">
               <Card className="hover:border-primary transition-colors">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold mb-2">Popover</h3>
+                  <h3 className="font-semibold mb-2">{t.sheetComponent.related.popover}</h3>
                   <p className="text-sm text-muted-foreground">
-                    Floating content next to trigger
+                    {t.sheetComponent.related.popoverDesc}
                   </p>
                 </CardContent>
               </Card>

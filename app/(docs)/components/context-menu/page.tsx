@@ -2,6 +2,8 @@
 
 import * as React from 'react'
 import Link from 'next/link'
+import { useDirection } from '@/components/providers/direction-provider'
+import { content } from '@/lib/i18n'
 import {
   ContextMenu,
   ContextMenuCheckboxItem,
@@ -27,13 +29,13 @@ import {
   Archive,
 } from 'lucide-react'
 
-const contextMenuProps: PropDefinition[] = [
+const getContextMenuProps = (t: typeof content.en | typeof content.ar): PropDefinition[] => [
   {
     name: 'onOpenChange',
     type: '(open: boolean) => void',
     default: 'undefined',
     required: false,
-    description: 'Callback when open state changes',
+    description: t.contextMenuComponent.props.onOpenChange,
   },
 ]
 
@@ -142,6 +144,10 @@ const rtlCode = `// RTL support is automatic!
 </ContextMenu>`
 
 export default function ContextMenuPage() {
+  const { locale } = useDirection()
+  const t = content[locale]
+  const contextMenuProps = getContextMenuProps(t)
+
   const [showBookmarks, setShowBookmarks] = React.useState(true)
   const [showReadingList, setShowReadingList] = React.useState(false)
 
@@ -154,64 +160,63 @@ export default function ContextMenuPage() {
           <ol className="flex items-center gap-2 text-sm text-muted-foreground">
             <li>
               <Link href="/" className="hover:text-foreground transition-colors">
-                Home
+                {t.nav.home}
               </Link>
             </li>
             <li>/</li>
             <li>
               <Link href="/components" className="hover:text-foreground transition-colors">
-                Components
+                {t.nav.components}
               </Link>
             </li>
             <li>/</li>
-            <li className="text-foreground font-medium">Context Menu</li>
+            <li className="text-foreground font-medium">{t.contextMenuComponent.title}</li>
           </ol>
         </nav>
 
         {/* Page Header */}
         <div className="mb-12">
-          <h1 className="text-4xl font-bold tracking-tight mb-4">Context Menu</h1>
+          <h1 className="text-4xl font-bold tracking-tight mb-4">{t.contextMenuComponent.title}</h1>
           <p className="text-xl text-muted-foreground max-w-3xl">
-            A menu component that appears on right-click (or long press on touch devices). Perfect
-            for contextual actions with full RTL support and keyboard navigation.
+            {t.contextMenuComponent.description}
           </p>
         </div>
 
         {/* Preview */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Preview</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.contextMenuComponent.preview}</h2>
           <ComponentShowcase>
             <ComponentShowcase.Demo>
               <ContextMenu>
                 <ContextMenuTrigger>
                   <Card className="w-full max-w-md h-32 flex items-center justify-center border-dashed border-2 cursor-context-menu">
-                    <p className="text-muted-foreground">Right click here</p>
+                    <p className="text-muted-foreground">{t.contextMenuComponent.demo.rightClick}</p>
                   </Card>
                 </ContextMenuTrigger>
                 <ContextMenuContent className="w-56">
                   <ContextMenuItem>
                     <Edit className="me-2 h-4 w-4" />
-                    <span>Edit</span>
+                    <span>{t.contextMenuComponent.demo.edit}</span>
                     <ContextMenuShortcut>⌘E</ContextMenuShortcut>
                   </ContextMenuItem>
                   <ContextMenuItem>
                     <Copy className="me-2 h-4 w-4" />
-                    <span>Copy</span>
+                    <span>{t.contextMenuComponent.demo.copy}</span>
                     <ContextMenuShortcut>⌘C</ContextMenuShortcut>
                   </ContextMenuItem>
                   <ContextMenuItem>
                     <Share className="me-2 h-4 w-4" />
-                    <span>Share</span>
+                    <span>{t.contextMenuComponent.demo.share}</span>
                   </ContextMenuItem>
                   <ContextMenuSeparator />
                   <ContextMenuItem>
                     <Download className="me-2 h-4 w-4" />
-                    <span>Download</span>
+                    <span>{t.contextMenuComponent.demo.download}</span>
                   </ContextMenuItem>
                   <ContextMenuSeparator />
                   <ContextMenuItem className="text-destructive">
                     <Trash2 className="me-2 h-4 w-4" />
-                    <span>Delete</span>
+                    <span>{t.contextMenuComponent.demo.delete}</span>
                     <ContextMenuShortcut>⌘D</ContextMenuShortcut>
                   </ContextMenuItem>
                 </ContextMenuContent>
@@ -222,51 +227,51 @@ export default function ContextMenuPage() {
 
         {/* Installation */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Installation</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.contextMenuComponent.installation}</h2>
           <CodeBlock code={installCode} language="bash" title="Terminal" />
         </section>
 
         {/* Usage */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Usage</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.contextMenuComponent.usage}</h2>
           <CodeBlock code={basicUsageCode} language="tsx" title="React" />
         </section>
 
         {/* Examples */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Examples</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.contextMenuComponent.examples.title}</h2>
 
           <div className="space-y-8">
             {/* With Icons */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">With Icons and Shortcuts</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.contextMenuComponent.examples.withIcons}</h3>
               <Card>
                 <CardContent className="p-6 flex items-center justify-center">
                   <ContextMenu>
                     <ContextMenuTrigger>
                       <Card className="w-64 h-32 flex items-center justify-center border-dashed border-2 cursor-context-menu">
-                        <p className="text-muted-foreground">Right click me</p>
+                        <p className="text-muted-foreground">{t.contextMenuComponent.demo.rightClickMe}</p>
                       </Card>
                     </ContextMenuTrigger>
                     <ContextMenuContent className="w-56">
                       <ContextMenuItem>
                         <Edit className="me-2 h-4 w-4" />
-                        <span>Edit</span>
+                        <span>{t.contextMenuComponent.demo.edit}</span>
                         <ContextMenuShortcut>⌘E</ContextMenuShortcut>
                       </ContextMenuItem>
                       <ContextMenuItem>
                         <Copy className="me-2 h-4 w-4" />
-                        <span>Copy</span>
+                        <span>{t.contextMenuComponent.demo.copy}</span>
                         <ContextMenuShortcut>⌘C</ContextMenuShortcut>
                       </ContextMenuItem>
                       <ContextMenuItem>
                         <Share className="me-2 h-4 w-4" />
-                        <span>Share</span>
+                        <span>{t.contextMenuComponent.demo.share}</span>
                       </ContextMenuItem>
                       <ContextMenuSeparator />
                       <ContextMenuItem className="text-destructive">
                         <Trash2 className="me-2 h-4 w-4" />
-                        <span>Delete</span>
+                        <span>{t.contextMenuComponent.demo.delete}</span>
                         <ContextMenuShortcut>⌘D</ContextMenuShortcut>
                       </ContextMenuItem>
                     </ContextMenuContent>
@@ -280,29 +285,29 @@ export default function ContextMenuPage() {
 
             {/* With Checkboxes */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">With Checkboxes</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.contextMenuComponent.examples.withCheckboxes}</h3>
               <Card>
                 <CardContent className="p-6 flex items-center justify-center">
                   <ContextMenu>
                     <ContextMenuTrigger>
                       <Card className="w-64 h-32 flex items-center justify-center border-dashed border-2 cursor-context-menu">
-                        <p className="text-muted-foreground">Right click for options</p>
+                        <p className="text-muted-foreground">{t.contextMenuComponent.demo.rightClickOptions}</p>
                       </Card>
                     </ContextMenuTrigger>
                     <ContextMenuContent className="w-56">
-                      <ContextMenuLabel>View Options</ContextMenuLabel>
+                      <ContextMenuLabel>{t.contextMenuComponent.demo.viewOptions}</ContextMenuLabel>
                       <ContextMenuSeparator />
                       <ContextMenuCheckboxItem
                         checked={showBookmarks}
                         onCheckedChange={setShowBookmarks}
                       >
-                        Show Bookmarks
+                        {t.contextMenuComponent.demo.showBookmarks}
                       </ContextMenuCheckboxItem>
                       <ContextMenuCheckboxItem
                         checked={showReadingList}
                         onCheckedChange={setShowReadingList}
                       >
-                        Show Reading List
+                        {t.contextMenuComponent.demo.showReadingList}
                       </ContextMenuCheckboxItem>
                     </ContextMenuContent>
                   </ContextMenu>
@@ -315,7 +320,7 @@ export default function ContextMenuPage() {
 
             {/* File Explorer Example */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">File Explorer Example</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.contextMenuComponent.examples.fileExplorer}</h3>
               <Card>
                 <CardContent className="p-6">
                   <div className="space-y-2">
@@ -329,24 +334,24 @@ export default function ContextMenuPage() {
                         <ContextMenuContent className="w-56">
                           <ContextMenuItem>
                             <Copy className="me-2 h-4 w-4" />
-                            <span>Copy</span>
+                            <span>{t.contextMenuComponent.demo.copy}</span>
                           </ContextMenuItem>
                           <ContextMenuItem>
                             <Download className="me-2 h-4 w-4" />
-                            <span>Download</span>
+                            <span>{t.contextMenuComponent.demo.download}</span>
                           </ContextMenuItem>
                           <ContextMenuItem>
                             <Star className="me-2 h-4 w-4" />
-                            <span>Add to Favorites</span>
+                            <span>{t.contextMenuComponent.demo.addToFavorites}</span>
                           </ContextMenuItem>
                           <ContextMenuSeparator />
                           <ContextMenuItem>
                             <Archive className="me-2 h-4 w-4" />
-                            <span>Archive</span>
+                            <span>{t.contextMenuComponent.demo.archive}</span>
                           </ContextMenuItem>
                           <ContextMenuItem className="text-destructive">
                             <Trash2 className="me-2 h-4 w-4" />
-                            <span>Delete</span>
+                            <span>{t.contextMenuComponent.demo.delete}</span>
                           </ContextMenuItem>
                         </ContextMenuContent>
                       </ContextMenu>
@@ -360,7 +365,7 @@ export default function ContextMenuPage() {
 
         {/* Props */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Props</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.contextMenuComponent.props.title}</h2>
           <div className="space-y-8">
             <div>
               <h3 className="text-lg font-semibold mb-4">ContextMenu</h3>
@@ -370,15 +375,14 @@ export default function ContextMenuPage() {
           <Card className="mt-6">
             <CardContent className="p-6">
               <p className="text-sm text-muted-foreground">
-                This component is built on top of Radix UI&apos;s Context Menu primitive. For a complete
-                list of props for each sub-component, refer to the{' '}
+                {t.contextMenuComponent.props.radixNote}{' '}
                 <a
                   href="https://www.radix-ui.com/docs/primitives/components/context-menu"
                   className="text-primary hover:underline"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Radix UI documentation
+                  {t.contextMenuComponent.props.radixDocs}
                 </a>
                 .
               </p>
@@ -388,48 +392,46 @@ export default function ContextMenuPage() {
 
         {/* Accessibility */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Accessibility</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.contextMenuComponent.accessibility.title}</h2>
           <Card>
             <CardContent className="p-6 space-y-4">
               <div>
-                <h3 className="font-semibold mb-2">Keyboard Navigation</h3>
+                <h3 className="font-semibold mb-2">{t.contextMenuComponent.accessibility.keyboard}</h3>
                 <ul className="space-y-2 text-muted-foreground text-sm">
                   <li className="flex items-start gap-2">
                     <code className="bg-muted px-1.5 py-0.5 rounded">Space</code>
-                    <span>Opens the menu when trigger is focused</span>
+                    <span>{t.contextMenuComponent.accessibility.space}</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <code className="bg-muted px-1.5 py-0.5 rounded">Enter</code>
-                    <span>Opens the menu and activates the first item</span>
+                    <span>{t.contextMenuComponent.accessibility.enter}</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <code className="bg-muted px-1.5 py-0.5 rounded">↓</code>
-                    <span>Moves focus to next menu item</span>
+                    <span>{t.contextMenuComponent.accessibility.arrowDown}</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <code className="bg-muted px-1.5 py-0.5 rounded">↑</code>
-                    <span>Moves focus to previous menu item</span>
+                    <span>{t.contextMenuComponent.accessibility.arrowUp}</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <code className="bg-muted px-1.5 py-0.5 rounded">Esc</code>
-                    <span>Closes the menu</span>
+                    <span>{t.contextMenuComponent.accessibility.escape}</span>
                   </li>
                 </ul>
               </div>
               <Separator />
               <div>
-                <h3 className="font-semibold mb-2">Touch Devices</h3>
+                <h3 className="font-semibold mb-2">{t.contextMenuComponent.accessibility.touch}</h3>
                 <p className="text-muted-foreground text-sm">
-                  On touch devices, context menus can be triggered with a long press. The component
-                  handles this automatically, providing a consistent experience across devices.
+                  {t.contextMenuComponent.accessibility.touchDescription}
                 </p>
               </div>
               <Separator />
               <div>
-                <h3 className="font-semibold mb-2">ARIA Attributes</h3>
+                <h3 className="font-semibold mb-2">{t.contextMenuComponent.accessibility.aria}</h3>
                 <p className="text-muted-foreground text-sm">
-                  Radix UI automatically manages all ARIA attributes including roles, aria-expanded,
-                  and focus handling for screen reader compatibility.
+                  {t.contextMenuComponent.accessibility.ariaDescription}
                 </p>
               </div>
             </CardContent>
@@ -438,12 +440,11 @@ export default function ContextMenuPage() {
 
         {/* RTL Considerations */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">RTL Considerations</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.contextMenuComponent.rtl.title}</h2>
           <Card>
             <CardContent className="p-6 space-y-4">
               <p className="text-muted-foreground">
-                Context menus automatically support RTL layout. Icons and shortcuts position
-                correctly using logical properties (ms-auto, ps-, pe-).
+                {t.contextMenuComponent.rtl.description}
               </p>
               <CodeBlock code={rtlCode} language="tsx" />
               <div className="grid gap-4 md:grid-cols-2 mt-6">

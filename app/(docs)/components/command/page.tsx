@@ -16,6 +16,8 @@ import {
   CommandList,
   CommandSeparator,
 } from '@/components/ui/command'
+import { useDirection } from '@/components/providers/direction-provider'
+import { content } from '@/lib/i18n'
 
 const basicCommandCode = `import {
   Command,
@@ -74,6 +76,9 @@ export function CommandDialogDemo() {
 }`
 
 export default function CommandPage() {
+  const { locale } = useDirection()
+  const t = content[locale]
+  const cmd = content[locale].commandComponent
   const [open, setOpen] = React.useState(false)
 
   return (
@@ -82,28 +87,28 @@ export default function CommandPage() {
       <main id="main-content" className="container py-12">
         <nav aria-label="Breadcrumb" className="mb-12">
           <ol className="flex items-center gap-2 text-sm text-muted-foreground">
-            <li><Link href="/" className="hover:text-foreground transition-colors">Home</Link></li>
+            <li><Link href="/" className="hover:text-foreground transition-colors">{t.common.home}</Link></li>
             <li>/</li>
-            <li><Link href="/components" className="hover:text-foreground transition-colors">Components</Link></li>
+            <li><Link href="/components" className="hover:text-foreground transition-colors">{t.nav.components}</Link></li>
             <li>/</li>
-            <li className="text-foreground font-medium">Command</li>
+            <li className="text-foreground font-medium">{cmd.breadcrumb}</li>
           </ol>
         </nav>
 
         <div className="mb-12">
-          <h1 className="text-4xl font-bold tracking-tight mb-4">Command</h1>
+          <h1 className="text-4xl font-bold tracking-tight mb-4">{cmd.title}</h1>
           <p className="text-xl text-muted-foreground max-w-3xl">
-            Fast, composable, command menu for React. Perfect for building search interfaces, command palettes, and quick actions.
+            {cmd.description}
           </p>
         </div>
 
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Installation</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentDocs.installation}</h2>
           <CodeBlock code="npm install cmdk" language="bash" />
         </section>
 
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Basic Command</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{cmd.sections.basicCommand}</h2>
           <ComponentShowcase>
             <ComponentShowcase.Demo>
               <Command className="rounded-lg border shadow-md max-w-md">
@@ -144,9 +149,9 @@ export default function CommandPage() {
         </section>
 
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Command Dialog</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{cmd.sections.commandDialog}</h2>
           <p className="text-muted-foreground mb-4">
-            Opens in a dialog with keyboard shortcut support (Cmd/Ctrl + K):
+            {cmd.sections.dialogDescription}
           </p>
           <CodeBlock code={dialogCommandCode} language="tsx" />
 
@@ -156,7 +161,7 @@ export default function CommandPage() {
               className="inline-flex items-center gap-2 rounded-md border border-input bg-background px-4 py-2 text-sm hover:bg-accent hover:text-accent-foreground"
             >
               <Search className="h-4 w-4" />
-              Open Command Menu
+              {cmd.sections.openCommandMenu}
               <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium">
                 <span className="text-xs">⌘</span>K
               </kbd>
@@ -182,25 +187,25 @@ export default function CommandPage() {
         </section>
 
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">RTL Support</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentDocs.rtlConsiderations}</h2>
           <Card>
             <CardContent className="p-6">
               <p className="text-sm text-muted-foreground">
-                The Command component automatically adjusts icon positions, text alignment, and keyboard navigation for RTL layouts. Try toggling the direction to see it in action.
+                {cmd.rtl.description}
               </p>
             </CardContent>
           </Card>
         </section>
 
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Accessibility</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentDocs.accessibility}</h2>
           <Card>
             <CardContent className="p-6 space-y-2 text-sm">
-              <p>• Fully keyboard navigable with arrow keys</p>
-              <p>• Screen reader friendly with proper ARIA labels</p>
-              <p>• Type-ahead search support</p>
-              <p>• Focus management in dialog mode</p>
-              <p>• Escape key closes the dialog</p>
+              <p>• {cmd.accessibility.keyboardNav}</p>
+              <p>• {cmd.accessibility.screenReader}</p>
+              <p>• {cmd.accessibility.typeAhead}</p>
+              <p>• {cmd.accessibility.focusManagement}</p>
+              <p>• {cmd.accessibility.escapeKey}</p>
             </CardContent>
           </Card>
         </section>

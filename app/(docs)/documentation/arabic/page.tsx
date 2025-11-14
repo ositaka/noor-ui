@@ -5,6 +5,8 @@ import Link from 'next/link'
 import { Card, CardContent } from '@/components/ui/card'
 import { CodeBlock } from '@/components/docs/code-block'
 import { Type, Check } from 'lucide-react'
+import { useDirection } from '@/components/providers/direction-provider'
+import { content } from '@/lib/i18n'
 
 const fontSetupCode = `// Import Arabic-supporting font
 import { Cairo, Tajawal } from 'next/font/google'
@@ -47,55 +49,59 @@ const price = 1234.56
 // Output: السعر: ١٬٢٣٤٫٥٦ ريال`
 
 export default function ArabicPage() {
+  const { locale } = useDirection()
+  const t = content[locale].documentationPages.arabic
+  const common = content[locale].documentationPages.common
+
   return (
     <div className="min-h-screen">
       <main id="main-content" className="container py-12">
         <nav aria-label="Breadcrumb" className="mb-8">
           <ol className="flex items-center gap-2 text-sm text-muted-foreground">
-            <li><Link href="/" className="hover:text-foreground transition-colors">Home</Link></li>
+            <li><Link href="/" className="hover:text-foreground transition-colors">{common.home}</Link></li>
             <li>/</li>
-            <li><Link href="/documentation" className="hover:text-foreground transition-colors">Documentation</Link></li>
+            <li><Link href="/documentation" className="hover:text-foreground transition-colors">{common.documentation}</Link></li>
             <li>/</li>
-            <li className="text-foreground font-medium">Arabic Typography</li>
+            <li className="text-foreground font-medium">{t.title}</li>
           </ol>
         </nav>
 
         <div className="max-w-3xl mb-12">
           <div className="flex items-center gap-3 mb-4">
             <Type className="h-10 w-10 text-primary" />
-            <h1 className="text-4xl font-bold tracking-tight">Arabic Typography</h1>
+            <h1 className="text-4xl font-bold tracking-tight">{t.title}</h1>
           </div>
           <p className="text-xl text-muted-foreground">
-            Best practices for beautiful, readable Arabic typography in web applications.
+            {t.subtitle}
           </p>
         </div>
 
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Font Selection</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.fontSelection}</h2>
           <p className="text-muted-foreground mb-4">
-            Choose fonts that support Arabic script with proper glyph rendering:
+            {t.fontDesc}
           </p>
           <CodeBlock code={fontSetupCode} language="tsx" />
 
           <Card className="mt-6">
             <CardContent className="p-6">
-              <h3 className="font-semibold mb-3">Recommended Arabic Fonts</h3>
+              <h3 className="font-semibold mb-3">{t.recommended}</h3>
               <ul className="space-y-2 text-sm">
                 <li className="flex items-center gap-2">
                   <Check className="h-4 w-4 text-green-600" />
-                  <strong>Cairo:</strong> Modern, clean, great for UI
+                  <strong>{t.cairo}</strong> {t.cairoDesc}
                 </li>
                 <li className="flex items-center gap-2">
                   <Check className="h-4 w-4 text-green-600" />
-                  <strong>Tajawal:</strong> Professional, highly readable
+                  <strong>{t.tajawal}</strong> {t.tajawalDesc}
                 </li>
                 <li className="flex items-center gap-2">
                   <Check className="h-4 w-4 text-green-600" />
-                  <strong>Noto Sans Arabic:</strong> Excellent glyph coverage
+                  <strong>{t.noto}</strong> {t.notoDesc}
                 </li>
                 <li className="flex items-center gap-2">
                   <Check className="h-4 w-4 text-green-600" />
-                  <strong>IBM Plex Sans Arabic:</strong> Corporate, professional
+                  <strong>{t.ibm}</strong> {t.ibmDesc}
                 </li>
               </ul>
             </CardContent>
@@ -103,67 +109,67 @@ export default function ArabicPage() {
         </section>
 
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Text Rendering</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.textRendering}</h2>
           <p className="text-muted-foreground mb-4">
-            Proper Arabic text requires attention to spacing and line height:
+            {t.renderingDesc}
           </p>
           <CodeBlock code={arabicTextCode} language="tsx" />
 
           <Card className="mt-6">
             <CardContent className="p-6">
-              <h3 className="font-semibold mb-3">Typography Guidelines</h3>
+              <h3 className="font-semibold mb-3">{t.typographyGuidelines}</h3>
               <ul className="space-y-2 text-sm text-muted-foreground">
-                <li>• Use 1.6-1.8 line-height for better readability</li>
-                <li>• Increase letter-spacing slightly (0.01em - 0.02em)</li>
-                <li>• Minimum font size: 16px for body text</li>
-                <li>• Ensure proper diacritical mark rendering</li>
-                <li>• Test with real Arabic content, not placeholder text</li>
+                <li>• {t.lineHeight}</li>
+                <li>• {t.letterSpacing}</li>
+                <li>• {t.minFontSize}</li>
+                <li>• {t.diacriticals}</li>
+                <li>• {t.testReal}</li>
               </ul>
             </CardContent>
           </Card>
         </section>
 
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Number Formatting</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.numberFormatting}</h2>
           <p className="text-muted-foreground mb-4">
-            Handle both Latin and Eastern Arabic numerals appropriately:
+            {t.numberDesc}
           </p>
           <CodeBlock code={numberFormattingCode} language="tsx" />
 
           <div className="mt-6 p-6 border rounded-lg bg-muted/50">
-            <p className="text-sm text-muted-foreground mb-4">Examples:</p>
+            <p className="text-sm text-muted-foreground mb-4">{t.examples}</p>
             <div className="space-y-2">
-              <p>السعر: {(1234.56).toLocaleString('en')} ريال (Latin numerals)</p>
-              <p>السعر: {(1234.56).toLocaleString('ar-SA')} ريال (Eastern Arabic)</p>
+              <p>السعر: {(1234.56).toLocaleString('en')} ريال ({t.latinNumerals})</p>
+              <p>السعر: {(1234.56).toLocaleString('ar-SA')} ريال ({t.easternArabic})</p>
             </div>
           </div>
         </section>
 
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Common Mistakes</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.commonMistakes}</h2>
           <div className="grid gap-4 sm:grid-cols-2">
             <Card className="border-red-500/50 bg-red-50 dark:bg-red-950/20">
               <CardContent className="p-6">
-                <h3 className="font-semibold mb-2 text-red-600 dark:text-red-400">❌ Avoid</h3>
+                <h3 className="font-semibold mb-2 text-red-600 dark:text-red-400">❌ {t.avoidTitle}</h3>
                 <ul className="text-sm space-y-1">
-                  <li>• Using fonts without Arabic glyphs</li>
-                  <li>• Too tight line-height (&lt; 1.4)</li>
-                  <li>• Mixing Latin and Arabic fonts</li>
-                  <li>• Ignoring diacritical marks</li>
-                  <li>• Copy-pasting from design tools</li>
+                  <li>• {t.noArabicFonts}</li>
+                  <li>• {t.tightLineHeight}</li>
+                  <li>• {t.mixingFonts}</li>
+                  <li>• {t.ignoringDiacriticals}</li>
+                  <li>• {t.copyPasting}</li>
                 </ul>
               </CardContent>
             </Card>
 
             <Card className="border-green-500/50 bg-green-50 dark:bg-green-950/20">
               <CardContent className="p-6">
-                <h3 className="font-semibold mb-2 text-green-600 dark:text-green-400">✓ Do</h3>
+                <h3 className="font-semibold mb-2 text-green-600 dark:text-green-400">✓ {t.doTitle}</h3>
                 <ul className="text-sm space-y-1">
-                  <li>• Test with native speakers</li>
-                  <li>• Use proper Arabic fonts</li>
-                  <li>• Increase line-height for clarity</li>
-                  <li>• Support diacritical marks</li>
-                  <li>• Use real Arabic content in tests</li>
+                  <li>• {t.testNative}</li>
+                  <li>• {t.properFonts}</li>
+                  <li>• {t.increaseLineHeight}</li>
+                  <li>• {t.supportDiacriticals}</li>
+                  <li>• {t.useRealContent}</li>
                 </ul>
               </CardContent>
             </Card>
@@ -171,14 +177,14 @@ export default function ArabicPage() {
         </section>
 
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Learn More</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{common.relatedResources}</h2>
           <div className="grid gap-4 sm:grid-cols-2">
             <Link href="/documentation/rtl">
               <Card className="hover:border-primary transition-colors h-full">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold mb-2">RTL Guidelines</h3>
+                  <h3 className="font-semibold mb-2">{t.rtlGuide}</h3>
                   <p className="text-sm text-muted-foreground">
-                    Complete RTL development guide
+                    {t.rtlGuideDesc}
                   </p>
                 </CardContent>
               </Card>
@@ -187,9 +193,9 @@ export default function ArabicPage() {
             <Link href="/documentation/bidi">
               <Card className="hover:border-primary transition-colors h-full">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold mb-2">Bidirectional Text</h3>
+                  <h3 className="font-semibold mb-2">{t.bidiText}</h3>
                   <p className="text-sm text-muted-foreground">
-                    Handling mixed-direction content
+                    {t.bidiTextDesc}
                   </p>
                 </CardContent>
               </Card>

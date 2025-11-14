@@ -10,72 +10,84 @@ import { Separator } from '@/components/ui/separator'
 import { ComponentShowcase } from '@/components/docs/component-showcase'
 import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
-const radioGroupProps: PropDefinition[] = [
-  {
-    name: 'value',
-    type: 'string',
-    default: 'undefined',
-    required: false,
-    description: 'The controlled value of the selected radio item',
-  },
-  {
-    name: 'defaultValue',
-    type: 'string',
-    default: 'undefined',
-    required: false,
-    description: 'The default selected value (uncontrolled)',
-  },
-  {
-    name: 'onValueChange',
-    type: '(value: string) => void',
-    default: 'undefined',
-    required: false,
-    description: 'Event handler called when the value changes',
-  },
-  {
-    name: 'disabled',
-    type: 'boolean',
-    default: 'false',
-    required: false,
-    description: 'Disables all radio items in the group',
-  },
-  {
-    name: 'name',
-    type: 'string',
-    default: 'undefined',
-    required: false,
-    description: 'The name for form submission',
-  },
-  {
-    name: 'required',
-    type: 'boolean',
-    default: 'false',
-    required: false,
-    description: 'Marks the radio group as required',
-  },
-]
+import { useDirection } from '@/components/providers/direction-provider'
+import { content } from '@/lib/i18n'
 
-const radioGroupItemProps: PropDefinition[] = [
-  {
-    name: 'value',
-    type: 'string',
-    default: 'undefined',
-    required: true,
-    description: 'The value of the radio item',
-  },
-  {
-    name: 'disabled',
-    type: 'boolean',
-    default: 'false',
-    required: false,
-    description: 'Disables this specific radio item',
-  },
-]
+// Helper function to get prop descriptions based on locale
+const getRadioGroupProps = (locale: 'en' | 'ar'): PropDefinition[] => {
+  const rg = content[locale].radioGroupComponent
+  return [
+    {
+      name: 'value',
+      type: 'string',
+      default: 'undefined',
+      required: false,
+      description: rg.props.radioGroup.value,
+    },
+    {
+      name: 'defaultValue',
+      type: 'string',
+      default: 'undefined',
+      required: false,
+      description: rg.props.radioGroup.defaultValue,
+    },
+    {
+      name: 'onValueChange',
+      type: '(value: string) => void',
+      default: 'undefined',
+      required: false,
+      description: rg.props.radioGroup.onValueChange,
+    },
+    {
+      name: 'disabled',
+      type: 'boolean',
+      default: 'false',
+      required: false,
+      description: rg.props.radioGroup.disabled,
+    },
+    {
+      name: 'name',
+      type: 'string',
+      default: 'undefined',
+      required: false,
+      description: rg.props.radioGroup.name,
+    },
+    {
+      name: 'required',
+      type: 'boolean',
+      default: 'false',
+      required: false,
+      description: rg.props.radioGroup.required,
+    },
+  ]
+}
+
+const getRadioGroupItemProps = (locale: 'en' | 'ar'): PropDefinition[] => {
+  const rg = content[locale].radioGroupComponent
+  return [
+    {
+      name: 'value',
+      type: 'string',
+      default: 'undefined',
+      required: true,
+      description: rg.props.radioGroupItem.value,
+    },
+    {
+      name: 'disabled',
+      type: 'boolean',
+      default: 'false',
+      required: false,
+      description: rg.props.radioGroupItem.disabled,
+    },
+  ]
+}
 
 const installCode = `npm install @noorui/components`
 
 const basicUsageCode = `import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { Label } from '@/components/ui/label'
+import { useDirection } from '@/components/providers/direction-provider'
+import { content } from '@/lib/i18n'
 
 <RadioGroup defaultValue="option1">
   <div className="flex items-center gap-2 rtl:flex-row-reverse">
@@ -233,6 +245,9 @@ const rtlCode = `// RTL support with flex-row-reverse!
 </RadioGroup>`
 
 export default function RadioGroupPage() {
+  const { locale } = useDirection()
+  const t = content[locale]
+  const rg = content[locale].radioGroupComponent
   const [value, setValue] = React.useState('option1')
 
   return (
@@ -244,46 +259,45 @@ export default function RadioGroupPage() {
           <ol className="flex items-center gap-2 text-sm text-muted-foreground">
             <li>
               <Link href="/" className="hover:text-foreground transition-colors">
-                Home
+                {t.common.home}
               </Link>
             </li>
             <li>/</li>
             <li>
               <Link href="/components" className="hover:text-foreground transition-colors">
-                Components
+                {t.nav.components}
               </Link>
             </li>
             <li>/</li>
-            <li className="text-foreground font-medium">Radio Group</li>
+            <li className="text-foreground font-medium">{rg.title}</li>
           </ol>
         </nav>
 
         {/* Page Header */}
         <div className="mb-12">
-          <h1 className="text-4xl font-bold tracking-tight mb-4">Radio Group</h1>
+          <h1 className="text-4xl font-bold tracking-tight mb-4">{rg.title}</h1>
           <p className="text-xl text-muted-foreground max-w-3xl">
-            Mutually exclusive selection from a set of options. Only one radio button can be
-            selected at a time with full keyboard navigation and RTL support.
+            {rg.description}
           </p>
         </div>
 
         {/* Preview */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Preview</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentDocs.preview}</h2>
           <ComponentShowcase>
             <ComponentShowcase.Demo>
               <RadioGroup defaultValue="option1">
                 <div className="flex items-center gap-2 rtl:flex-row-reverse">
                   <RadioGroupItem value="option1" id="preview1" />
-                  <Label htmlFor="preview1">Option 1</Label>
+                  <Label htmlFor="preview1">{rg.options.option1}</Label>
                 </div>
                 <div className="flex items-center gap-2 rtl:flex-row-reverse">
                   <RadioGroupItem value="option2" id="preview2" />
-                  <Label htmlFor="preview2">Option 2</Label>
+                  <Label htmlFor="preview2">{rg.options.option2}</Label>
                 </div>
                 <div className="flex items-center gap-2 rtl:flex-row-reverse">
                   <RadioGroupItem value="option3" id="preview3" />
-                  <Label htmlFor="preview3">Option 3</Label>
+                  <Label htmlFor="preview3">{rg.options.option3}</Label>
                 </div>
               </RadioGroup>
             </ComponentShowcase.Demo>
@@ -292,38 +306,38 @@ export default function RadioGroupPage() {
 
         {/* Installation */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Installation</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentDocs.installation}</h2>
           <CodeBlock code={installCode} language="bash" title="Terminal" />
         </section>
 
         {/* Usage */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Usage</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentDocs.usage}</h2>
           <CodeBlock code={basicUsageCode} language="tsx" title="React" />
         </section>
 
         {/* Examples */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Examples</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{rg.examples.title}</h2>
 
           <div className="space-y-8">
             {/* Vertical Layout */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">Vertical Layout (Default)</h3>
+              <h3 className="text-lg font-semibold mb-4">{rg.examples.verticalLayout}</h3>
               <Card>
                 <CardContent className="p-6">
                   <RadioGroup defaultValue="comfortable">
                     <div className="flex items-center gap-2 rtl:flex-row-reverse">
                       <RadioGroupItem value="default" id="default" />
-                      <Label htmlFor="default">Default</Label>
+                      <Label htmlFor="default">{rg.options.default}</Label>
                     </div>
                     <div className="flex items-center gap-2 rtl:flex-row-reverse">
                       <RadioGroupItem value="comfortable" id="comfortable" />
-                      <Label htmlFor="comfortable">Comfortable</Label>
+                      <Label htmlFor="comfortable">{rg.options.comfortable}</Label>
                     </div>
                     <div className="flex items-center gap-2 rtl:flex-row-reverse">
                       <RadioGroupItem value="compact" id="compact" />
-                      <Label htmlFor="compact">Compact</Label>
+                      <Label htmlFor="compact">{rg.options.compact}</Label>
                     </div>
                   </RadioGroup>
                 </CardContent>
@@ -335,21 +349,21 @@ export default function RadioGroupPage() {
 
             {/* Horizontal Layout */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">Horizontal Layout</h3>
+              <h3 className="text-lg font-semibold mb-4">{rg.examples.horizontalLayout}</h3>
               <Card>
                 <CardContent className="p-6">
                   <RadioGroup defaultValue="card" className="flex gap-4">
                     <div className="flex items-center gap-2 rtl:flex-row-reverse">
                       <RadioGroupItem value="card" id="card" />
-                      <Label htmlFor="card">Card</Label>
+                      <Label htmlFor="card">{rg.options.card}</Label>
                     </div>
                     <div className="flex items-center gap-2 rtl:flex-row-reverse">
                       <RadioGroupItem value="paypal" id="paypal" />
-                      <Label htmlFor="paypal">PayPal</Label>
+                      <Label htmlFor="paypal">{rg.options.paypal}</Label>
                     </div>
                     <div className="flex items-center gap-2 rtl:flex-row-reverse">
                       <RadioGroupItem value="apple" id="apple" />
-                      <Label htmlFor="apple">Apple Pay</Label>
+                      <Label htmlFor="apple">{rg.options.applePay}</Label>
                     </div>
                   </RadioGroup>
                 </CardContent>
@@ -361,37 +375,37 @@ export default function RadioGroupPage() {
 
             {/* With Description */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">With Description Text</h3>
+              <h3 className="text-lg font-semibold mb-4">{rg.examples.withDescription}</h3>
               <Card>
                 <CardContent className="p-6">
                   <RadioGroup defaultValue="starter">
                     <div className="space-y-1">
                       <div className="flex items-center gap-2 rtl:flex-row-reverse">
                         <RadioGroupItem value="starter" id="starter" />
-                        <Label htmlFor="starter">Starter Plan</Label>
+                        <Label htmlFor="starter">{rg.plans.starter}</Label>
                       </div>
                       <p className="text-sm text-muted-foreground ps-6">
-                        Perfect for individuals. $9/month.
+                        {rg.plans.starterDesc}
                       </p>
                     </div>
 
                     <div className="space-y-1">
                       <div className="flex items-center gap-2 rtl:flex-row-reverse">
                         <RadioGroupItem value="pro" id="pro" />
-                        <Label htmlFor="pro">Pro Plan</Label>
+                        <Label htmlFor="pro">{rg.plans.pro}</Label>
                       </div>
                       <p className="text-sm text-muted-foreground ps-6">
-                        For small teams. $29/month.
+                        {rg.plans.proDesc}
                       </p>
                     </div>
 
                     <div className="space-y-1">
                       <div className="flex items-center gap-2 rtl:flex-row-reverse">
                         <RadioGroupItem value="enterprise" id="enterprise" />
-                        <Label htmlFor="enterprise">Enterprise Plan</Label>
+                        <Label htmlFor="enterprise">{rg.plans.enterprise}</Label>
                       </div>
                       <p className="text-sm text-muted-foreground ps-6">
-                        Custom solutions. Contact sales.
+                        {rg.plans.enterpriseDesc}
                       </p>
                     </div>
                   </RadioGroup>
@@ -404,21 +418,21 @@ export default function RadioGroupPage() {
 
             {/* Disabled Options */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">Disabled Options</h3>
+              <h3 className="text-lg font-semibold mb-4">{rg.examples.disabledOptions}</h3>
               <Card>
                 <CardContent className="p-6">
                   <RadioGroup defaultValue="option1">
                     <div className="flex items-center gap-2 rtl:flex-row-reverse">
                       <RadioGroupItem value="option1" id="r1" />
-                      <Label htmlFor="r1">Enabled option</Label>
+                      <Label htmlFor="r1">{rg.options.enabled}</Label>
                     </div>
                     <div className="flex items-center gap-2 rtl:flex-row-reverse">
                       <RadioGroupItem value="option2" id="r2" disabled />
-                      <Label htmlFor="r2">Disabled option</Label>
+                      <Label htmlFor="r2">{rg.options.disabled}</Label>
                     </div>
                     <div className="flex items-center gap-2 rtl:flex-row-reverse">
                       <RadioGroupItem value="option3" id="r3" />
-                      <Label htmlFor="r3">Another enabled option</Label>
+                      <Label htmlFor="r3">{rg.options.anotherEnabled}</Label>
                     </div>
                   </RadioGroup>
                 </CardContent>
@@ -430,31 +444,31 @@ export default function RadioGroupPage() {
 
             {/* Controlled */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">Controlled Component</h3>
+              <h3 className="text-lg font-semibold mb-4">{rg.examples.controlled}</h3>
               <Card>
                 <CardContent className="p-6">
                   <div className="space-y-4">
                     <RadioGroup value={value} onValueChange={setValue}>
                       <div className="flex items-center gap-2 rtl:flex-row-reverse">
                         <RadioGroupItem value="option1" id="c1" />
-                        <Label htmlFor="c1">Option 1</Label>
+                        <Label htmlFor="c1">{rg.options.option1}</Label>
                       </div>
                       <div className="flex items-center gap-2 rtl:flex-row-reverse">
                         <RadioGroupItem value="option2" id="c2" />
-                        <Label htmlFor="c2">Option 2</Label>
+                        <Label htmlFor="c2">{rg.options.option2}</Label>
                       </div>
                       <div className="flex items-center gap-2 rtl:flex-row-reverse">
                         <RadioGroupItem value="option3" id="c3" />
-                        <Label htmlFor="c3">Option 3</Label>
+                        <Label htmlFor="c3">{rg.options.option3}</Label>
                       </div>
                     </RadioGroup>
-                    <p className="text-sm text-muted-foreground">Selected: {value}</p>
+                    <p className="text-sm text-muted-foreground">{rg.labels.selected}: {value}</p>
                     <div className="flex gap-2">
                       <Button size="sm" onClick={() => setValue('option1')}>
-                        Select Option 1
+                        {rg.buttons.selectOption1}
                       </Button>
                       <Button size="sm" onClick={() => setValue('option2')}>
-                        Select Option 2
+                        {rg.buttons.selectOption2}
                       </Button>
                     </div>
                   </div>
@@ -467,7 +481,7 @@ export default function RadioGroupPage() {
 
             {/* In Forms */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">In Forms</h3>
+              <h3 className="text-lg font-semibold mb-4">{rg.examples.inForms}</h3>
               <Card>
                 <CardContent className="p-6">
                   <form
@@ -478,23 +492,23 @@ export default function RadioGroupPage() {
                     }}
                   >
                     <div className="space-y-3">
-                      <Label className="text-base font-semibold">Select your plan</Label>
+                      <Label className="text-base font-semibold">{rg.labels.selectYourPlan}</Label>
                       <RadioGroup defaultValue="pro" name="plan">
                         <div className="flex items-center gap-2 rtl:flex-row-reverse">
                           <RadioGroupItem value="free" id="free" />
-                          <Label htmlFor="free">Free</Label>
+                          <Label htmlFor="free">{rg.options.free}</Label>
                         </div>
                         <div className="flex items-center gap-2 rtl:flex-row-reverse">
                           <RadioGroupItem value="pro" id="form-pro" />
-                          <Label htmlFor="form-pro">Pro</Label>
+                          <Label htmlFor="form-pro">{rg.options.pro}</Label>
                         </div>
                         <div className="flex items-center gap-2 rtl:flex-row-reverse">
                           <RadioGroupItem value="enterprise" id="form-enterprise" />
-                          <Label htmlFor="form-enterprise">Enterprise</Label>
+                          <Label htmlFor="form-enterprise">{rg.options.enterprise}</Label>
                         </div>
                       </RadioGroup>
                     </div>
-                    <Button type="submit">Continue</Button>
+                    <Button type="submit">{rg.buttons.continue}</Button>
                   </form>
                 </CardContent>
               </Card>
@@ -507,65 +521,59 @@ export default function RadioGroupPage() {
 
         {/* Props */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Props</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentDocs.props}</h2>
 
           <div className="space-y-8">
             <div>
               <h3 className="text-lg font-semibold mb-4">RadioGroup</h3>
-              <PropsTable props={radioGroupProps} />
+              <PropsTable props={getRadioGroupProps(locale)} />
             </div>
 
             <div>
               <h3 className="text-lg font-semibold mb-4">RadioGroupItem</h3>
-              <PropsTable props={radioGroupItemProps} />
+              <PropsTable props={getRadioGroupItemProps(locale)} />
             </div>
           </div>
         </section>
 
         {/* Accessibility */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Accessibility</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{rg.accessibility.title}</h2>
           <Card>
             <CardContent className="p-6 space-y-4">
               <div>
-                <h3 className="font-semibold mb-2">Keyboard Navigation</h3>
+                <h3 className="font-semibold mb-2">{rg.accessibility.keyboardNavigation}</h3>
                 <ul className="list-disc list-inside text-muted-foreground space-y-1">
                   <li>
-                    <kbd className="px-1.5 py-0.5 rounded bg-muted">Tab</kbd>: Move focus to/from
-                    radio group
+                    <kbd className="px-1.5 py-0.5 rounded bg-muted">Tab</kbd>: {rg.accessibility.keyboardTab}
                   </li>
                   <li>
-                    <kbd className="px-1.5 py-0.5 rounded bg-muted">Arrow Keys</kbd>: Navigate
-                    between radio options
+                    <kbd className="px-1.5 py-0.5 rounded bg-muted">Arrow Keys</kbd>: {rg.accessibility.keyboardArrows}
                   </li>
                   <li>
-                    <kbd className="px-1.5 py-0.5 rounded bg-muted">Space</kbd>: Select focused
-                    radio option
+                    <kbd className="px-1.5 py-0.5 rounded bg-muted">Space</kbd>: {rg.accessibility.keyboardSpace}
                   </li>
                 </ul>
               </div>
               <Separator />
               <div>
-                <h3 className="font-semibold mb-2">Always Use Labels</h3>
+                <h3 className="font-semibold mb-2">{rg.accessibility.alwaysUseLabels}</h3>
                 <p className="text-muted-foreground">
-                  Always pair radio items with labels. Clicking the label selects the radio button,
-                  improving usability.
+                  {rg.accessibility.alwaysUseLabelsDesc}
                 </p>
               </div>
               <Separator />
               <div>
-                <h3 className="font-semibold mb-2">Group Labeling</h3>
+                <h3 className="font-semibold mb-2">{rg.accessibility.groupLabeling}</h3>
                 <p className="text-muted-foreground">
-                  Use a heading or label to describe what the radio group is for. This helps screen
-                  reader users understand the context.
+                  {rg.accessibility.groupLabelingDesc}
                 </p>
               </div>
               <Separator />
               <div>
-                <h3 className="font-semibold mb-2">Screen Readers</h3>
+                <h3 className="font-semibold mb-2">{rg.accessibility.screenReaders}</h3>
                 <p className="text-muted-foreground">
-                  Screen readers announce the radio role, the label, whether it&apos;s selected,
-                  and the group position (e.g., &quot;2 of 3&quot;).
+                  {rg.accessibility.screenReadersDesc}
                 </p>
               </div>
             </CardContent>
@@ -574,44 +582,43 @@ export default function RadioGroupPage() {
 
         {/* RTL Considerations */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">RTL Considerations</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{rg.rtl.title}</h2>
           <Card>
             <CardContent className="p-6 space-y-4">
               <p className="text-muted-foreground">
-                Radio groups automatically support RTL layout. Radio buttons and labels maintain
-                proper spacing and alignment in both directions.
+                {rg.rtl.description}
               </p>
               <CodeBlock code={rtlCode} language="tsx" />
               <div className="grid gap-4 md:grid-cols-2 mt-6">
                 <div className="space-y-2">
-                  <h4 className="font-semibold text-sm">LTR (English)</h4>
+                  <h4 className="font-semibold text-sm">{rg.rtl.ltr}</h4>
                   <div dir="ltr">
                     <div className="p-4 border rounded-lg">
                       <RadioGroup defaultValue="option1">
                         <div className="flex items-center gap-2 rtl:flex-row-reverse">
                           <RadioGroupItem value="option1" id="ltr-r1" />
-                          <Label htmlFor="ltr-r1">Option 1</Label>
+                          <Label htmlFor="ltr-r1">{rg.options.option1}</Label>
                         </div>
                         <div className="flex items-center gap-2 rtl:flex-row-reverse">
                           <RadioGroupItem value="option2" id="ltr-r2" />
-                          <Label htmlFor="ltr-r2">Option 2</Label>
+                          <Label htmlFor="ltr-r2">{rg.options.option2}</Label>
                         </div>
                       </RadioGroup>
                     </div>
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <h4 className="font-semibold text-sm">RTL (العربية)</h4>
+                  <h4 className="font-semibold text-sm">{rg.rtl.rtlLabel}</h4>
                   <div dir="rtl">
                     <div className="p-4 border rounded-lg">
                       <RadioGroup defaultValue="option1">
                         <div className="flex items-center gap-2 rtl:flex-row-reverse">
                           <RadioGroupItem value="option1" id="rtl-r1" />
-                          <Label htmlFor="rtl-r1">الخيار الأول</Label>
+                          <Label htmlFor="rtl-r1">{rg.rtl.option1Ar}</Label>
                         </div>
                         <div className="flex items-center gap-2 rtl:flex-row-reverse">
                           <RadioGroupItem value="option2" id="rtl-r2" />
-                          <Label htmlFor="rtl-r2">الخيار الثاني</Label>
+                          <Label htmlFor="rtl-r2">{rg.rtl.option2Ar}</Label>
                         </div>
                       </RadioGroup>
                     </div>
@@ -624,29 +631,29 @@ export default function RadioGroupPage() {
 
         {/* Related Components */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Related Components</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{rg.related.title}</h2>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             <Link href="/components/checkbox">
               <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold">Checkbox</h3>
-                  <p className="text-sm text-muted-foreground mt-1">Multiple selections</p>
+                  <h3 className="font-semibold">{rg.related.checkbox}</h3>
+                  <p className="text-sm text-muted-foreground mt-1">{rg.related.checkboxDesc}</p>
                 </CardContent>
               </Card>
             </Link>
             <Link href="/components/label">
               <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold">Label</h3>
-                  <p className="text-sm text-muted-foreground mt-1">Labels for form inputs</p>
+                  <h3 className="font-semibold">{rg.related.label}</h3>
+                  <p className="text-sm text-muted-foreground mt-1">{rg.related.labelDesc}</p>
                 </CardContent>
               </Card>
             </Link>
             <Link href="/components/select">
               <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold">Select</h3>
-                  <p className="text-sm text-muted-foreground mt-1">Dropdown selection</p>
+                  <h3 className="font-semibold">{rg.related.select}</h3>
+                  <p className="text-sm text-muted-foreground mt-1">{rg.related.selectDesc}</p>
                 </CardContent>
               </Card>
             </Link>

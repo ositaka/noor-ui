@@ -8,34 +8,37 @@ import { ComponentShowcase } from '@/components/docs/component-showcase'
 import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
 import { useToast } from '@/hooks/use-toast'
-const toastProps: PropDefinition[] = [
+import { useDirection } from '@/components/providers/direction-provider'
+import { content } from '@/lib/i18n'
+
+const getToastProps = (locale: 'en' | 'ar'): PropDefinition[] => [
   {
     name: 'title',
     type: 'ReactNode',
     default: 'undefined',
     required: false,
-    description: 'The title of the toast',
+    description: content[locale].toastComponent.props.title,
   },
   {
     name: 'description',
     type: 'ReactNode',
     default: 'undefined',
     required: false,
-    description: 'The description/message of the toast',
+    description: content[locale].toastComponent.props.description,
   },
   {
     name: 'variant',
     type: '"default" | "destructive" | "success"',
     default: '"default"',
     required: false,
-    description: 'The visual style of the toast',
+    description: content[locale].toastComponent.props.variant,
   },
   {
     name: 'action',
     type: 'ToastActionElement',
     default: 'undefined',
     required: false,
-    description: 'An action button for the toast',
+    description: content[locale].toastComponent.props.action,
   },
 ]
 
@@ -45,6 +48,8 @@ const setupCode = `// app/layout.tsx
 import { Toaster } from '@/components/ui/toaster'
 
 export default function RootLayout({ children }) {
+  const { locale } = useDirection()
+  const t = content[locale]
   return (
     <html>
       <body>
@@ -57,6 +62,8 @@ export default function RootLayout({ children }) {
 
 const basicUsageCode = `import { useToast } from '@/hooks/use-toast'
 import { Button } from '@/components/ui/button'
+import { useDirection } from '@/components/providers/direction-provider'
+import { content } from '@/lib/i18n'
 
 function MyComponent() {
   const { toast } = useToast()
@@ -92,6 +99,9 @@ const successCode = `toast({
 })`
 
 export default function ToastPage() {
+  const { locale } = useDirection()
+  const t = content[locale]
+  const tc = content[locale].toastComponent
   const { toast } = useToast()
 
   return (
@@ -103,42 +113,42 @@ export default function ToastPage() {
           <ol className="flex items-center gap-2 text-sm text-muted-foreground">
             <li>
               <Link href="/" className="hover:text-foreground transition-colors">
-                Home
+                {t.common.home}
               </Link>
             </li>
             <li>/</li>
             <li>
               <Link href="/components" className="hover:text-foreground transition-colors">
-                Components
+                {t.nav.components}
               </Link>
             </li>
             <li>/</li>
-            <li className="text-foreground font-medium">Toast</li>
+            <li className="text-foreground font-medium">{tc.title}</li>
           </ol>
         </nav>
 
         {/* Page Header */}
         <div className="mb-12">
-          <h1 className="text-4xl font-bold tracking-tight mb-4">Toast</h1>
+          <h1 className="text-4xl font-bold tracking-tight mb-4">{tc.title}</h1>
           <p className="text-xl text-muted-foreground max-w-3xl">
-            A succinct message that is displayed temporarily. Perfect for notifications and feedback messages.
+            {tc.description}
           </p>
         </div>
 
         {/* Preview */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Preview</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentDocs.preview}</h2>
           <ComponentShowcase>
             <ComponentShowcase.Demo>
               <Button
                 onClick={() => {
                   toast({
-                    title: 'Scheduled: Catch up',
-                    description: 'Friday, February 10, 2023 at 5:57 PM',
+                    title: tc.messages.scheduled,
+                    description: tc.messages.scheduledDesc,
                   })
                 }}
               >
-                Show Toast
+                {tc.buttons.showToast}
               </Button>
             </ComponentShowcase.Demo>
           </ComponentShowcase>
@@ -146,43 +156,43 @@ export default function ToastPage() {
 
         {/* Installation */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Installation</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentDocs.installation}</h2>
           <CodeBlock code={installCode} language="bash" />
         </section>
 
         {/* Setup */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Setup</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{tc.setup}</h2>
           <p className="text-muted-foreground mb-4">
-            Add the Toaster component to your root layout:
+            {tc.setupDesc}
           </p>
           <CodeBlock code={setupCode} language="tsx" />
         </section>
 
         {/* Usage */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Usage</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentDocs.usage}</h2>
           <CodeBlock code={basicUsageCode} language="tsx" />
         </section>
 
         {/* Examples */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Examples</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentDocs.examples}</h2>
 
           <div className="space-y-8">
             {/* Simple */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">Simple</h3>
+              <h3 className="text-lg font-semibold mb-4">{tc.examples.simple}</h3>
               <Card>
                 <CardContent className="p-6">
                   <Button
                     onClick={() => {
                       toast({
-                        description: 'Your message has been sent.',
+                        description: tc.messages.messageSent,
                       })
                     }}
                   >
-                    Show Simple Toast
+                    {tc.buttons.showSimpleToast}
                   </Button>
                 </CardContent>
               </Card>
@@ -193,18 +203,18 @@ export default function ToastPage() {
 
             {/* With Title */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">With Title</h3>
+              <h3 className="text-lg font-semibold mb-4">{tc.examples.withTitle}</h3>
               <Card>
                 <CardContent className="p-6">
                   <Button
                     onClick={() => {
                       toast({
-                        title: 'Scheduled: Catch up',
-                        description: 'Friday, February 10, 2023 at 5:57 PM',
+                        title: tc.messages.scheduled,
+                        description: tc.messages.scheduledDesc,
                       })
                     }}
                   >
-                    Show Toast
+                    {tc.buttons.showToast}
                   </Button>
                 </CardContent>
               </Card>
@@ -215,7 +225,7 @@ export default function ToastPage() {
 
             {/* Destructive */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">Destructive</h3>
+              <h3 className="text-lg font-semibold mb-4">{tc.examples.destructive}</h3>
               <Card>
                 <CardContent className="p-6">
                   <Button
@@ -223,12 +233,12 @@ export default function ToastPage() {
                     onClick={() => {
                       toast({
                         variant: 'destructive',
-                        title: 'Uh oh! Something went wrong.',
-                        description: 'There was a problem with your request.',
+                        title: tc.messages.errorTitle,
+                        description: tc.messages.errorDesc,
                       })
                     }}
                   >
-                    Show Error Toast
+                    {tc.buttons.showErrorToast}
                   </Button>
                 </CardContent>
               </Card>
@@ -239,19 +249,19 @@ export default function ToastPage() {
 
             {/* Success */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">Success</h3>
+              <h3 className="text-lg font-semibold mb-4">{tc.examples.success}</h3>
               <Card>
                 <CardContent className="p-6">
                   <Button
                     onClick={() => {
                       toast({
                         variant: 'success',
-                        title: 'Success!',
-                        description: 'Your changes have been saved.',
+                        title: tc.messages.successTitle,
+                        description: tc.messages.successDesc,
                       })
                     }}
                   >
-                    Show Success Toast
+                    {tc.buttons.showSuccessToast}
                   </Button>
                 </CardContent>
               </Card>
@@ -264,51 +274,51 @@ export default function ToastPage() {
 
         {/* RTL Support Example */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">RTL Support Example</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{tc.rtl.exampleTitle}</h2>
           <p className="text-muted-foreground mb-6">
-            The Toast component automatically adapts to RTL layouts. Toasts appear from the correct corner and content flows naturally.
+            {tc.rtl.exampleDesc}
           </p>
-          <ComponentShowcase.Comparison ltrLabel="LTR (English)" rtlLabel="RTL (العربية)">
+          <ComponentShowcase.Comparison ltrLabel={tc.rtl.ltr} rtlLabel={tc.rtl.rtlLabel}>
             <Button
               onClick={() => {
                 toast({
-                  title: 'Message sent',
-                  description: 'Your message has been delivered successfully.',
+                  title: tc.messages.messageTitle,
+                  description: tc.messages.messageDesc,
                 })
               }}
             >
-              Show Notification
+              {tc.rtl.showNotification}
             </Button>
           </ComponentShowcase.Comparison>
         </section>
 
         {/* Props */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Props</h2>
-          <PropsTable props={toastProps} />
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentDocs.props}</h2>
+          <PropsTable props={getToastProps(locale)} />
         </section>
 
         {/* Accessibility */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Accessibility</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentDocs.accessibility}</h2>
           <Card>
             <CardContent className="p-6 space-y-4">
               <div>
-                <h3 className="font-semibold mb-2">ARIA Roles</h3>
+                <h3 className="font-semibold mb-2">{tc.accessibility.ariaRoles}</h3>
                 <p className="text-muted-foreground">
-                  Uses <code className="px-1.5 py-0.5 rounded bg-muted">role=&quot;status&quot;</code> to announce non-critical messages to screen readers.
+                  {tc.accessibility.ariaRolesDesc}
                 </p>
               </div>
               <div>
-                <h3 className="font-semibold mb-2">Keyboard Navigation</h3>
+                <h3 className="font-semibold mb-2">{tc.accessibility.keyboardNavigation}</h3>
                 <p className="text-muted-foreground">
-                  Close button is keyboard accessible and can be activated with Enter or Space.
+                  {tc.accessibility.keyboardNavigationDesc}
                 </p>
               </div>
               <div>
-                <h3 className="font-semibold mb-2">Focus Management</h3>
+                <h3 className="font-semibold mb-2">{tc.accessibility.focusManagement}</h3>
                 <p className="text-muted-foreground">
-                  Toasts don&apos;t steal focus from the current element.
+                  {tc.accessibility.focusManagementDesc}
                 </p>
               </div>
             </CardContent>
@@ -317,18 +327,18 @@ export default function ToastPage() {
 
         {/* RTL Support */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">RTL Support</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentDocs.rtlConsiderations}</h2>
           <p className="text-muted-foreground mb-6">
-            The Toast component is fully RTL-compatible. Toasts appear from the correct corner and content flows naturally.
+            {tc.rtl.description}
           </p>
           <Card>
             <CardContent className="p-6">
-              <p className="text-sm font-semibold mb-2">Key RTL Features:</p>
+              <p className="text-sm font-semibold mb-2">{tc.rtl.features.title}</p>
               <ul className="list-disc list-inside text-sm text-muted-foreground space-y-1">
-                <li>Toast appears from the correct corner (bottom-start)</li>
-                <li>Close button positions on the correct side (end)</li>
-                <li>Swipe gestures work in the natural direction</li>
-                <li>Content flows naturally in both directions</li>
+                <li>{tc.rtl.features.cornerPosition}</li>
+                <li>{tc.rtl.features.closeButton}</li>
+                <li>{tc.rtl.features.swipeGestures}</li>
+                <li>{tc.rtl.features.contentFlow}</li>
               </ul>
             </CardContent>
           </Card>
@@ -336,14 +346,14 @@ export default function ToastPage() {
 
         {/* Related */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Related Components</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{tc.related.title}</h2>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             <Link href="/components/alert">
               <Card className="hover:border-primary transition-colors">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold mb-2">Alert</h3>
+                  <h3 className="font-semibold mb-2">{tc.related.alert}</h3>
                   <p className="text-sm text-muted-foreground">
-                    Important messages
+                    {tc.related.alertDesc}
                   </p>
                 </CardContent>
               </Card>
@@ -351,9 +361,9 @@ export default function ToastPage() {
             <Link href="/components/dialog">
               <Card className="hover:border-primary transition-colors">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold mb-2">Dialog</h3>
+                  <h3 className="font-semibold mb-2">{tc.related.dialog}</h3>
                   <p className="text-sm text-muted-foreground">
-                    Modal dialogs
+                    {tc.related.dialogDesc}
                   </p>
                 </CardContent>
               </Card>

@@ -6,10 +6,11 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Home, ArrowLeft, Search } from 'lucide-react'
 import { useDirection } from '@/components/providers/direction-provider'
+import { content } from '@/lib/i18n'
 
 export default function NotFound() {
-  const { direction } = useDirection()
-  const isRTL = direction === 'rtl'
+  const { locale } = useDirection()
+  const t = content[locale]
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-background p-4">
@@ -19,12 +20,10 @@ export default function NotFound() {
           <div className="space-y-2">
             <h1 className="text-9xl font-bold text-primary opacity-20">404</h1>
             <h2 className="text-3xl font-bold tracking-tight">
-              {isRTL ? 'الصفحة غير موجودة' : 'Page Not Found'}
+              {t.notFound.title}
             </h2>
             <p className="text-lg text-muted-foreground max-w-md mx-auto">
-              {isRTL
-                ? 'عذراً، لم نتمكن من العثور على الصفحة التي تبحث عنها. قد تكون الصفحة قد تم نقلها أو حذفها.'
-                : "Sorry, we couldn't find the page you're looking for. The page might have been moved or deleted."}
+              {t.notFound.description}
             </p>
           </div>
 
@@ -45,22 +44,13 @@ export default function NotFound() {
             <Button asChild size="lg">
               <Link href="/" className="inline-flex items-center">
                 <Home className="h-4 w-4 me-2" />
-                {isRTL ? 'العودة للرئيسية' : 'Go to Homepage'}
+                {t.notFound.goHome}
               </Link>
             </Button>
             <Button asChild variant="outline" size="lg">
               <Link href="/components" className="inline-flex items-center">
-                {isRTL ? (
-                  <>
-                    استكشف المكونات
-                    <ArrowLeft className="h-4 w-4 ms-2 rtl:rotate-180" />
-                  </>
-                ) : (
-                  <>
-                    <ArrowLeft className="h-4 w-4 me-2 rtl:rotate-180" />
-                    Browse Components
-                  </>
-                )}
+                <ArrowLeft className="h-4 w-4 me-2 rtl:rotate-180" />
+                {t.notFound.browseComponents}
               </Link>
             </Button>
           </div>
@@ -68,26 +58,26 @@ export default function NotFound() {
           {/* Helpful Links */}
           <div className="pt-8 border-t">
             <p className="text-sm text-muted-foreground mb-4">
-              {isRTL ? 'أو جرّب هذه الروابط المفيدة:' : 'Or try these helpful links:'}
+              {t.notFound.tryLinks}
             </p>
             <div className="flex flex-wrap gap-3 justify-center">
               <Link
                 href="/getting-started"
                 className="text-sm text-primary hover:underline"
               >
-                {isRTL ? 'ابدأ الآن' : 'Getting Started'}
+                {t.nav.getStarted}
               </Link>
               <span className="text-muted-foreground">•</span>
               <Link href="/examples" className="text-sm text-primary hover:underline">
-                {isRTL ? 'الأمثلة' : 'Examples'}
+                {t.nav.examples}
               </Link>
               <span className="text-muted-foreground">•</span>
               <Link href="/documentation" className="text-sm text-primary hover:underline">
-                {isRTL ? 'التوثيق' : 'Documentation'}
+                {t.nav.documentation}
               </Link>
               <span className="text-muted-foreground">•</span>
               <Link href="/starters" className="text-sm text-primary hover:underline">
-                {isRTL ? 'المشاريع الجاهزة' : 'Starters'}
+                {t.notFound.starters}
               </Link>
             </div>
           </div>

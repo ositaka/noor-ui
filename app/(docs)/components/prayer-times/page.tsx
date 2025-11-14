@@ -6,8 +6,13 @@ import { ComponentShowcase } from '@/components/docs/component-showcase'
 import { PropsTable } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
 import { PrayerTimes, type Prayer } from '@/components/ui/prayer-times'
+import { useDirection } from '@/components/providers/direction-provider'
+import { content } from '@/lib/i18n'
 
 export default function PrayerTimesPage() {
+  const { locale } = useDirection()
+  const t = content[locale].prayerTimesComponent
+
   // Sample data for demonstrations
   const samplePrayers: Prayer[] = [
     { name: 'Fajr', nameAr: 'الفجر', time: '04:45' },
@@ -25,32 +30,31 @@ export default function PrayerTimesPage() {
           <ol className="flex items-center gap-2 text-sm text-muted-foreground">
             <li>
               <Link href="/" className="hover:text-foreground transition-colors">
-                Home
+                {t.breadcrumb.home}
               </Link>
             </li>
             <li>/</li>
             <li>
               <Link href="/components" className="hover:text-foreground transition-colors">
-                Components
+                {t.breadcrumb.components}
               </Link>
             </li>
             <li>/</li>
-            <li className="text-foreground font-medium">Prayer Times</li>
+            <li className="text-foreground font-medium">{t.breadcrumb.prayerTimes}</li>
           </ol>
         </nav>
 
         {/* Page Header */}
         <div className="mb-12">
-          <h1 className="text-4xl font-bold tracking-tight mb-4">Prayer Times</h1>
+          <h1 className="text-4xl font-bold tracking-tight mb-4">{t.title}</h1>
           <p className="text-xl text-muted-foreground max-w-3xl">
-            A beautiful, RTL-aware component to display Islamic prayer times. Perfect for GCC
-            applications with full bilingual support and multiple layout variants.
+            {t.description}
           </p>
         </div>
 
         {/* Preview */}
         <section className="mb-16">
-          <h2 className="text-3xl font-bold mb-6">Preview</h2>
+          <h2 className="text-3xl font-bold mb-6">{content[locale].componentDocs.preview}</h2>
           <ComponentShowcase>
             <ComponentShowcase.Demo>
               <div className="max-w-2xl mx-auto">
@@ -70,10 +74,10 @@ export default function PrayerTimesPage() {
 
         {/* Installation */}
         <section className="mb-16">
-          <h2 className="text-3xl font-bold mb-6">Installation</h2>
+          <h2 className="text-3xl font-bold mb-6">{content[locale].componentDocs.installation}</h2>
           <div className="space-y-4">
             <p className="text-muted-foreground mb-4">
-              Copy and paste the component code into your project:
+              {t.installation.copyComponent}
             </p>
             <CodeBlock
               language="bash"
@@ -81,15 +85,14 @@ export default function PrayerTimesPage() {
 cp components/ui/prayer-times.tsx your-project/components/ui/`}
             />
             <p className="text-sm text-muted-foreground mt-4">
-              Dependencies: This component uses Card, Badge, and Lucide icons which should already
-              be installed in your project.
+              {t.installation.dependencies}
             </p>
           </div>
         </section>
 
         {/* Usage */}
         <section className="mb-16">
-          <h2 className="text-3xl font-bold mb-6">Usage</h2>
+          <h2 className="text-3xl font-bold mb-6">{content[locale].componentDocs.usage}</h2>
           <CodeBlock
             language="tsx"
             code={`import { PrayerTimes, type Prayer } from '@/components/ui/prayer-times'
@@ -120,13 +123,13 @@ export default function MyApp() {
 
         {/* Examples */}
         <section className="mb-16">
-          <h2 className="text-3xl font-bold mb-6">Examples</h2>
+          <h2 className="text-3xl font-bold mb-6">{content[locale].componentDocs.examples}</h2>
 
           {/* Default Variant */}
           <div className="mb-12">
-            <h3 className="text-2xl font-semibold mb-4">Default</h3>
+            <h3 className="text-2xl font-semibold mb-4">{t.examples.default}</h3>
             <p className="text-muted-foreground mb-4">
-              The default variant with location, date, and next prayer countdown.
+              {t.examples.defaultDesc}
             </p>
             <ComponentShowcase>
               <ComponentShowcase.Demo>
@@ -161,9 +164,9 @@ export default function MyApp() {
 
           {/* Compact Variant */}
           <div className="mb-12">
-            <h3 className="text-2xl font-semibold mb-4">Compact</h3>
+            <h3 className="text-2xl font-semibold mb-4">{t.examples.compact}</h3>
             <p className="text-muted-foreground mb-4">
-              A more condensed layout perfect for sidebars or widgets.
+              {t.examples.compactDesc}
             </p>
             <ComponentShowcase>
               <ComponentShowcase.Demo>
@@ -194,9 +197,9 @@ export default function MyApp() {
 
           {/* Detailed Variant */}
           <div className="mb-12">
-            <h3 className="text-2xl font-semibold mb-4">Detailed</h3>
+            <h3 className="text-2xl font-semibold mb-4">{t.examples.detailed}</h3>
             <p className="text-muted-foreground mb-4">
-              A more spacious layout with larger text, ideal for prominent displays.
+              {t.examples.detailedDesc}
             </p>
             <ComponentShowcase>
               <ComponentShowcase.Demo>
@@ -233,9 +236,9 @@ export default function MyApp() {
 
           {/* Without Countdown */}
           <div className="mb-12">
-            <h3 className="text-2xl font-semibold mb-4">Without Countdown</h3>
+            <h3 className="text-2xl font-semibold mb-4">{t.examples.withoutCountdown}</h3>
             <p className="text-muted-foreground mb-4">
-              Simple display of prayer times without next prayer countdown.
+              {t.examples.withoutCountdownDesc}
             </p>
             <ComponentShowcase>
               <ComponentShowcase.Demo>
@@ -264,10 +267,9 @@ export default function MyApp() {
 
           {/* Notification Variant */}
           <div className="mb-12">
-            <h3 className="text-2xl font-semibold mb-4">Notification Variant</h3>
+            <h3 className="text-2xl font-semibold mb-4">{t.examples.notificationVariant}</h3>
             <p className="text-muted-foreground mb-4">
-              Special UI for Adhan notifications with dismiss and play adhan actions. Perfect for
-              alerts when prayer time arrives.
+              {t.examples.notificationVariantDesc}
             </p>
             <ComponentShowcase>
               <ComponentShowcase.Demo>
@@ -315,10 +317,9 @@ return (
 
         {/* Integration with Calculation Libraries */}
         <section className="mb-16">
-          <h2 className="text-3xl font-bold mb-6">Integration with Calculation Libraries</h2>
+          <h2 className="text-3xl font-bold mb-6">{t.integration.title}</h2>
           <p className="text-muted-foreground mb-6">
-            This component is UI-only and accepts prayer times as props. You can integrate it with
-            any prayer time calculation library. Here&apos;s an example using the popular{' '}
+            {t.integration.description}{' '}
             <code className="text-sm bg-muted px-2 py-1 rounded">adhan</code> library:
           </p>
           <CodeBlock
@@ -354,96 +355,93 @@ export function SmartPrayerTimes({ latitude, longitude }: { latitude: number; lo
 }`}
           />
           <p className="text-sm text-muted-foreground mt-4">
-            Install the adhan library:{' '}
+            {t.integration.installLibrary}{' '}
             <code className="bg-muted px-2 py-1 rounded">npm install adhan</code>
           </p>
         </section>
 
         {/* Props */}
         <section className="mb-16">
-          <h2 className="text-3xl font-bold mb-6">Props</h2>
+          <h2 className="text-3xl font-bold mb-6">{content[locale].componentDocs.props}</h2>
           <PropsTable
             props={[
               {
                 name: 'prayers',
                 type: 'Prayer[]',
                 required: true,
-                description:
-                  'Array of prayer objects with name, nameAr, and time properties.',
+                description: t.props.prayers,
               },
               {
                 name: 'nextPrayer',
                 type: 'string',
                 default: 'undefined',
-                description:
-                  'Name of the next prayer to highlight. Should match a prayer name in the prayers array.',
+                description: t.props.nextPrayer,
               },
               {
                 name: 'countdown',
                 type: 'string',
                 default: 'undefined',
-                description:
-                  'Countdown timer to next prayer in format "HH:MM:SS" or "MM:SS".',
+                description: t.props.countdown,
               },
               {
                 name: 'location',
                 type: 'string',
                 default: 'undefined',
-                description: 'Location name in English (e.g., "Riyadh").',
+                description: t.props.location,
               },
               {
                 name: 'locationAr',
                 type: 'string',
                 default: 'undefined',
-                description: 'Location name in Arabic (e.g., "الرياض").',
+                description: t.props.locationAr,
               },
               {
                 name: 'date',
                 type: 'string',
                 default: 'undefined',
-                description: 'Date in English (e.g., "November 6, 2025").',
+                description: t.props.date,
               },
               {
                 name: 'dateAr',
                 type: 'string',
                 default: 'undefined',
-                description: 'Date in Arabic (e.g., "٥ جمادى الأولى ١٤٤٧").',
+                description: t.props.dateAr,
               },
               {
                 name: 'variant',
                 type: '"default" | "compact" | "detailed" | "notification"',
                 default: '"default"',
-                description: 'Visual variant affecting spacing and text size. "notification" shows an Adhan alert UI.',
+                description: t.props.variant,
               },
               {
                 name: 'onDismiss',
                 type: '() => void',
                 default: 'undefined',
-                description: 'Callback when notification is dismissed (notification variant only).',
+                description: t.props.onDismiss,
               },
               {
                 name: 'showPlayAdhan',
                 type: 'boolean',
                 default: 'false',
-                description: 'Show play adhan button (notification variant only).',
+                description: t.props.showPlayAdhan,
               },
               {
                 name: 'onPlayAdhan',
                 type: '() => void',
                 default: 'undefined',
-                description: 'Callback when play adhan is clicked (notification variant only).',
+                description: t.props.onPlayAdhan,
               },
               {
                 name: 'className',
                 type: 'string',
                 default: 'undefined',
-                description: 'Additional CSS classes for the wrapper card.',
+                description: t.props.className,
               },
             ]}
           />
 
           <div className="mt-8">
-            <h3 className="text-xl font-semibold mb-4">Prayer Type</h3>
+            <h3 className="text-xl font-semibold mb-4">{t.props.prayerType}</h3>
             <CodeBlock
               language="typescript"
               code={`interface Prayer {
@@ -460,9 +458,9 @@ export function SmartPrayerTimes({ latitude, longitude }: { latitude: number; lo
 
         {/* Accessibility */}
         <section className="mb-16">
-          <h2 className="text-3xl font-bold mb-6">Accessibility</h2>
+          <h2 className="text-3xl font-bold mb-6">{content[locale].componentDocs.accessibility}</h2>
           <div className="space-y-4 text-muted-foreground">
-            <p>The Prayer Times component follows accessibility best practices:</p>
+            <p>{t.accessibility.description}</p>
             <ul className="list-disc list-inside space-y-2 ms-4">
               <li>
                 <strong>Semantic HTML:</strong> Uses proper heading hierarchy and semantic
@@ -489,11 +487,10 @@ export function SmartPrayerTimes({ latitude, longitude }: { latitude: number; lo
 
         {/* RTL Considerations */}
         <section className="mb-16">
-          <h2 className="text-3xl font-bold mb-6">RTL Considerations</h2>
+          <h2 className="text-3xl font-bold mb-6">{content[locale].componentDocs.rtlConsiderations}</h2>
           <div className="space-y-4 text-muted-foreground">
             <p>
-              This component is built with RTL-first principles and automatically adapts to the
-              current text direction:
+              {t.rtl.description}
             </p>
             <ul className="list-disc list-inside space-y-2 ms-4">
               <li>
@@ -521,24 +518,24 @@ export function SmartPrayerTimes({ latitude, longitude }: { latitude: number; lo
 
         {/* Related Components */}
         <section className="mb-16">
-          <h2 className="text-3xl font-bold mb-6">Related Components</h2>
+          <h2 className="text-3xl font-bold mb-6">{t.relatedComponents.title}</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <Link
               href="/components/card"
               className="block p-4 border rounded-lg hover:border-primary transition-colors"
             >
-              <h3 className="font-semibold mb-2">Card</h3>
+              <h3 className="font-semibold mb-2">{t.relatedComponents.card}</h3>
               <p className="text-sm text-muted-foreground">
-                Base component used for the prayer times container.
+                {t.relatedComponents.cardDesc}
               </p>
             </Link>
             <Link
               href="/components/badge"
               className="block p-4 border rounded-lg hover:border-primary transition-colors"
             >
-              <h3 className="font-semibold mb-2">Badge</h3>
+              <h3 className="font-semibold mb-2">{t.relatedComponents.badge}</h3>
               <p className="text-sm text-muted-foreground">
-                Used to highlight the next prayer indicator.
+                {t.relatedComponents.badgeDesc}
               </p>
             </Link>
           </div>

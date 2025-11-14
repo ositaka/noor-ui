@@ -13,6 +13,8 @@ import { useDesignSystem } from '@/components/providers/design-system-provider'
 import { Check, Sparkles } from 'lucide-react'
 import { type Theme, themeConfig } from '@/lib/tokens'
 import { cn } from '@/lib/utils'
+import { useDirection } from '@/components/providers/direction-provider'
+import { content } from '@/lib/i18n'
 
 const ThemeCardInner = ({ theme }: { theme: Theme }) => {
   const { designTheme, setDesignTheme } = useDesignSystem()
@@ -110,6 +112,8 @@ const ThemeCard = ({ theme }: { theme: Theme }) => {
 }
 
 export default function ThemesPage() {
+  const { locale } = useDirection()
+  const t = content[locale]
   const themes: Theme[] = ['minimal', 'futuristic', 'cozy', 'artistic']
 
   return (
@@ -121,34 +125,31 @@ export default function ThemesPage() {
           <ol className="flex items-center gap-2 text-sm text-muted-foreground">
             <li>
               <Link href="/" className="hover:text-foreground transition-colors">
-                Home
+                {t.common.home}
               </Link>
             </li>
             <li>/</li>
-            <li className="text-foreground font-medium">Themes</li>
+            <li className="text-foreground font-medium">{t.themesPage.title}</li>
           </ol>
         </nav>
 
         {/* Page Header */}
         <div className="max-w-3xl mb-12">
-          <h1 className="text-4xl font-bold tracking-tight mb-4">Themes</h1>
+          <h1 className="text-4xl font-bold tracking-tight mb-4">{t.themesPage.title}</h1>
           <p className="text-xl text-muted-foreground mb-6">
-            Four distinct visual themes, all powered by the same design tokens.
-            Each theme has unique typography, spacing, and personality while maintaining
-            accessibility and consistency.
+            {t.themesPage.subtitle}
           </p>
           <div className="flex items-center gap-2 p-4 bg-primary/10 rounded-lg border border-primary/20">
             <Sparkles className="h-5 w-5 text-primary flex-shrink-0" />
             <p className="text-sm">
-              Try the floating theme switcher in the bottom-right corner to see changes
-              instantly across the entire site!
+              {t.themesPage.switcherNotice}
             </p>
           </div>
         </div>
 
         {/* Theme Cards */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Available Themes</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.themesPage.availableThemes}</h2>
           <div className="grid gap-6 lg:grid-cols-2">
             {themes.map((theme) => (
               <ThemeCard key={theme} theme={theme} />
@@ -158,7 +159,7 @@ export default function ThemesPage() {
 
         {/* Theme Details */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Theme Specifications</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.themesPage.themeSpecs}</h2>
 
           <div className="space-y-6">
             {/* Minimal */}
@@ -310,17 +311,17 @@ export default function ThemesPage() {
 
         {/* Live Preview */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Live Preview</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.themesPage.livePreview}</h2>
           <Card>
             <CardHeader>
-              <CardTitle>Sample Content</CardTitle>
+              <CardTitle>{t.themesPage.preview.title}</CardTitle>
               <CardDescription>
-                See how the current theme affects real content
+                {t.themesPage.preview.description}
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
               <div>
-                <h3 className="text-2xl font-bold mb-2">Heading Example</h3>
+                <h3 className="text-2xl font-bold mb-2">{t.themesPage.preview.headingExample}</h3>
                 <p className="text-muted-foreground mb-4">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
                   tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
@@ -336,21 +337,21 @@ export default function ThemesPage() {
 
               <div className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="theme-preview">Input Field</Label>
-                  <Input id="theme-preview" placeholder="Type something..." />
+                  <Label htmlFor="theme-preview">{t.themesPage.preview.inputLabel}</Label>
+                  <Input id="theme-preview" placeholder={t.themesPage.preview.inputPlaceholder} />
                 </div>
 
                 <div className="flex flex-wrap gap-2">
-                  <Button>Primary Action</Button>
-                  <Button variant="secondary">Secondary</Button>
-                  <Button variant="outline">Outline</Button>
-                  <Button variant="ghost">Ghost</Button>
+                  <Button>{t.themesPage.preview.primaryAction}</Button>
+                  <Button variant="secondary">{t.themesPage.preview.secondary}</Button>
+                  <Button variant="outline">{t.themesPage.preview.outline}</Button>
+                  <Button variant="ghost">{t.themesPage.preview.ghost}</Button>
                 </div>
 
                 <div className="flex gap-2">
-                  <Badge>Status</Badge>
-                  <Badge variant="secondary">Label</Badge>
-                  <Badge variant="outline">Tag</Badge>
+                  <Badge>{t.themesPage.preview.status}</Badge>
+                  <Badge variant="secondary">{t.themesPage.preview.label}</Badge>
+                  <Badge variant="outline">{t.themesPage.preview.tag}</Badge>
                 </div>
               </div>
             </CardContent>
@@ -359,17 +360,17 @@ export default function ThemesPage() {
 
         {/* Implementation */}
         <section>
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Implementation</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.themesPage.implementation}</h2>
           <Card>
             <CardHeader>
-              <CardTitle>Using Themes</CardTitle>
+              <CardTitle>{t.themesPage.impl.title}</CardTitle>
               <CardDescription>
-                Themes can be changed via URL, UI, or programmatically
+                {t.themesPage.impl.description}
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div>
-                <div className="text-sm font-medium mb-2">Via URL Parameter</div>
+                <div className="text-sm font-medium mb-2">{t.themesPage.impl.viaUrl}</div>
                 <CodeBlock
                   code={`// Add to any URL
 ?theme=minimal
@@ -385,15 +386,14 @@ https://yoursite.com/components?theme=cozy`}
               </div>
 
               <div>
-                <div className="text-sm font-medium mb-2">Via Theme Switcher</div>
+                <div className="text-sm font-medium mb-2">{t.themesPage.impl.viaSwitcher}</div>
                 <p className="text-sm text-muted-foreground">
-                  Use the floating button in the bottom-right corner (palette icon) to switch
-                  themes. The URL will update automatically and the theme persists across pages.
+                  {t.themesPage.impl.switcherText}
                 </p>
               </div>
 
               <div>
-                <div className="text-sm font-medium mb-2">Programmatically</div>
+                <div className="text-sm font-medium mb-2">{t.themesPage.impl.programmatically}</div>
                 <CodeBlock
                   code={`import { useDesignSystem } from '@/components/providers/design-system-provider'
 

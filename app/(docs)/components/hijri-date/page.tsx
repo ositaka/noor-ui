@@ -6,8 +6,13 @@ import { ComponentShowcase } from '@/components/docs/component-showcase'
 import { PropsTable } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
 import { HijriDate } from '@/components/ui/hijri-date'
+import { useDirection } from '@/components/providers/direction-provider'
+import { content } from '@/lib/i18n'
 
 export default function HijriDatePage() {
+  const { locale } = useDirection()
+  const t = content[locale].hijriDateComponent
+
   return (
     <div className="min-h-screen">
       <main id="main-content" className="container py-12">
@@ -16,33 +21,31 @@ export default function HijriDatePage() {
           <ol className="flex items-center gap-2 text-sm text-muted-foreground">
             <li>
               <Link href="/" className="hover:text-foreground transition-colors">
-                Home
+                {t.breadcrumb.home}
               </Link>
             </li>
             <li>/</li>
             <li>
               <Link href="/components" className="hover:text-foreground transition-colors">
-                Components
+                {t.breadcrumb.components}
               </Link>
             </li>
             <li>/</li>
-            <li className="text-foreground font-medium">Hijri Date</li>
+            <li className="text-foreground font-medium">{t.breadcrumb.hijriDate}</li>
           </ol>
         </nav>
 
         {/* Page Header */}
         <div className="mb-12">
-          <h1 className="text-4xl font-bold tracking-tight mb-4">Hijri Date</h1>
+          <h1 className="text-4xl font-bold tracking-tight mb-4">{t.title}</h1>
           <p className="text-xl text-muted-foreground max-w-3xl">
-            A beautiful component to display both Gregorian and Hijri (Islamic calendar) dates
-            together. Perfect for GCC applications with full bilingual support and multiple layout
-            variants.
+            {t.description}
           </p>
         </div>
 
         {/* Preview */}
         <section className="mb-16">
-          <h2 className="text-3xl font-bold mb-6">Preview</h2>
+          <h2 className="text-3xl font-bold mb-6">{content[locale].componentDocs.preview}</h2>
           <ComponentShowcase>
             <ComponentShowcase.Demo>
               <div className="flex flex-col gap-6 items-center">
@@ -60,10 +63,10 @@ export default function HijriDatePage() {
 
         {/* Installation */}
         <section className="mb-16">
-          <h2 className="text-3xl font-bold mb-6">Installation</h2>
+          <h2 className="text-3xl font-bold mb-6">{content[locale].componentDocs.installation}</h2>
           <div className="space-y-4">
             <p className="text-muted-foreground mb-4">
-              Copy and paste the component code into your project:
+              {t.installation.copyComponent}
             </p>
             <CodeBlock
               language="bash"
@@ -71,15 +74,14 @@ export default function HijriDatePage() {
 cp components/ui/hijri-date.tsx your-project/components/ui/`}
             />
             <p className="text-sm text-muted-foreground mt-4">
-              Dependencies: This component uses Lucide icons which should already be installed in
-              your project.
+              {t.installation.dependencies}
             </p>
           </div>
         </section>
 
         {/* Usage */}
         <section className="mb-16">
-          <h2 className="text-3xl font-bold mb-6">Usage</h2>
+          <h2 className="text-3xl font-bold mb-6">{content[locale].componentDocs.usage}</h2>
           <CodeBlock
             language="tsx"
             code={`import { HijriDate } from '@/components/ui/hijri-date'
@@ -100,13 +102,13 @@ export default function MyApp() {
 
         {/* Examples */}
         <section className="mb-16">
-          <h2 className="text-3xl font-bold mb-6">Examples</h2>
+          <h2 className="text-3xl font-bold mb-6">{content[locale].componentDocs.examples}</h2>
 
           {/* Default Variant */}
           <div className="mb-12">
-            <h3 className="text-2xl font-semibold mb-4">Default</h3>
+            <h3 className="text-2xl font-semibold mb-4">{t.examples.default}</h3>
             <p className="text-muted-foreground mb-4">
-              Card-style layout with labels, perfect for prominent date displays.
+              {t.examples.defaultDesc}
             </p>
             <ComponentShowcase>
               <ComponentShowcase.Demo>
@@ -137,9 +139,9 @@ export default function MyApp() {
 
           {/* Badge Variant */}
           <div className="mb-12">
-            <h3 className="text-2xl font-semibold mb-4">Badge</h3>
+            <h3 className="text-2xl font-semibold mb-4">{t.examples.badge}</h3>
             <p className="text-muted-foreground mb-4">
-              Compact inline badge, great for headers or metadata sections.
+              {t.examples.badgeDesc}
             </p>
             <ComponentShowcase>
               <ComponentShowcase.Demo>
@@ -170,15 +172,15 @@ export default function MyApp() {
 
           {/* Compact Variant */}
           <div className="mb-12">
-            <h3 className="text-2xl font-semibold mb-4">Compact</h3>
+            <h3 className="text-2xl font-semibold mb-4">{t.examples.compact}</h3>
             <p className="text-muted-foreground mb-4">
-              Minimal inline text, perfect for content flows and timestamps.
+              {t.examples.compactDesc}
             </p>
             <ComponentShowcase>
               <ComponentShowcase.Demo>
                 <div className="flex justify-center">
                   <div className="text-muted-foreground">
-                    Published on{' '}
+                    {t.examples.publishedOn}{' '}
                     <HijriDate
                       gregorianDate="Nov 6, 2025"
                       hijriDate="5 Jumada I, 1447"
@@ -209,9 +211,9 @@ export default function MyApp() {
 
           {/* Detailed Variant */}
           <div className="mb-12">
-            <h3 className="text-2xl font-semibold mb-4">Detailed</h3>
+            <h3 className="text-2xl font-semibold mb-4">{t.examples.detailed}</h3>
             <p className="text-muted-foreground mb-4">
-              Large, spacious layout with enhanced typography for feature sections.
+              {t.examples.detailedDesc}
             </p>
             <ComponentShowcase>
               <ComponentShowcase.Demo>
@@ -244,15 +246,15 @@ export default function MyApp() {
 
           {/* In a Card */}
           <div className="mb-12">
-            <h3 className="text-2xl font-semibold mb-4">In Content</h3>
+            <h3 className="text-2xl font-semibold mb-4">{t.examples.inContent}</h3>
             <p className="text-muted-foreground mb-4">
-              Multiple variants used together in a card layout.
+              {t.examples.inContentDesc}
             </p>
             <ComponentShowcase>
               <ComponentShowcase.Demo>
                 <div className="max-w-md mx-auto border rounded-lg p-6 space-y-4">
                   <div className="flex items-center justify-between">
-                    <h3 className="font-semibold">Event Details</h3>
+                    <h3 className="font-semibold">{t.examples.eventDetails}</h3>
                     <HijriDate
                       gregorianDate="Nov 6"
                       hijriDate="5 Jumada I"
@@ -261,7 +263,7 @@ export default function MyApp() {
                     />
                   </div>
                   <div className="text-sm text-muted-foreground">
-                    Join us for a special gathering on{' '}
+                    {t.examples.eventText}{' '}
                     <HijriDate
                       gregorianDate="November 6, 2025"
                       gregorianDateAr="٦ نوفمبر ٢٠٢٥"
@@ -270,7 +272,7 @@ export default function MyApp() {
                       variant="compact"
                       className="font-medium text-foreground"
                     />
-                    . We look forward to seeing you there!
+                    {t.examples.eventTextEnd}
                   </div>
                 </div>
               </ComponentShowcase.Demo>
@@ -280,10 +282,9 @@ export default function MyApp() {
 
         {/* Integration with Date Conversion Libraries */}
         <section className="mb-16">
-          <h2 className="text-3xl font-bold mb-6">Integration with Date Conversion Libraries</h2>
+          <h2 className="text-3xl font-bold mb-6">{t.integration.title}</h2>
           <p className="text-muted-foreground mb-6">
-            This component is UI-only and accepts pre-formatted date strings. You can integrate it
-            with Hijri calendar conversion libraries. Here&apos;s an example using{' '}
+            {t.integration.description}{' '}
             <code className="text-sm bg-muted px-2 py-1 rounded">@formkit/hijri</code>:
           </p>
           <CodeBlock
@@ -342,58 +343,57 @@ function getArabicMonth(month: number): string {
 }`}
           />
           <p className="text-sm text-muted-foreground mt-4">
-            Install the library:{' '}
+            {t.integration.installLibrary}{' '}
             <code className="bg-muted px-2 py-1 rounded">npm install @formkit/hijri</code>
           </p>
         </section>
 
         {/* Props */}
         <section className="mb-16">
-          <h2 className="text-3xl font-bold mb-6">Props</h2>
+          <h2 className="text-3xl font-bold mb-6">{content[locale].componentDocs.props}</h2>
           <PropsTable
             props={[
               {
                 name: 'gregorianDate',
                 type: 'string',
                 required: true,
-                description: 'Gregorian date in English (e.g., "November 6, 2025").',
+                description: t.props.gregorianDate,
               },
               {
                 name: 'gregorianDateAr',
                 type: 'string',
                 default: 'undefined',
-                description:
-                  'Gregorian date in Arabic (optional, displayed in RTL mode if provided).',
+                description: t.props.gregorianDateAr,
               },
               {
                 name: 'hijriDate',
                 type: 'string',
                 required: true,
-                description: 'Hijri date in English (e.g., "5 Jumada al-Awwal 1447").',
+                description: t.props.hijriDate,
               },
               {
                 name: 'hijriDateAr',
                 type: 'string',
                 required: true,
-                description: 'Hijri date in Arabic (e.g., "٥ جمادى الأولى ١٤٤٧").',
+                description: t.props.hijriDateAr,
               },
               {
                 name: 'showIcon',
                 type: 'boolean',
                 default: 'false',
-                description: 'Display a calendar icon with the dates.',
+                description: t.props.showIcon,
               },
               {
                 name: 'variant',
                 type: '"default" | "badge" | "compact" | "detailed"',
                 default: '"default"',
-                description: 'Visual variant controlling layout and styling.',
+                description: t.props.variant,
               },
               {
                 name: 'className',
                 type: 'string',
                 default: 'undefined',
-                description: 'Additional CSS classes for the wrapper element.',
+                description: t.props.className,
               },
             ]}
           />
@@ -401,9 +401,9 @@ function getArabicMonth(month: number): string {
 
         {/* Accessibility */}
         <section className="mb-16">
-          <h2 className="text-3xl font-bold mb-6">Accessibility</h2>
+          <h2 className="text-3xl font-bold mb-6">{content[locale].componentDocs.accessibility}</h2>
           <div className="space-y-4 text-muted-foreground">
-            <p>The Hijri Date component follows accessibility best practices:</p>
+            <p>{t.accessibility.description}</p>
             <ul className="list-disc list-inside space-y-2 ms-4">
               <li>
                 <strong>Semantic HTML:</strong> Uses proper semantic elements for date display.
@@ -429,11 +429,10 @@ function getArabicMonth(month: number): string {
 
         {/* RTL Considerations */}
         <section className="mb-16">
-          <h2 className="text-3xl font-bold mb-6">RTL Considerations</h2>
+          <h2 className="text-3xl font-bold mb-6">{content[locale].componentDocs.rtlConsiderations}</h2>
           <div className="space-y-4 text-muted-foreground">
             <p>
-              This component is built with RTL-first principles and automatically adapts to text
-              direction:
+              {t.rtl.description}
             </p>
             <ul className="list-disc list-inside space-y-2 ms-4">
               <li>
@@ -462,24 +461,24 @@ function getArabicMonth(month: number): string {
 
         {/* Related Components */}
         <section className="mb-16">
-          <h2 className="text-3xl font-bold mb-6">Related Components</h2>
+          <h2 className="text-3xl font-bold mb-6">{t.relatedComponents.title}</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <Link
               href="/components/prayer-times"
               className="block p-4 border rounded-lg hover:border-primary transition-colors"
             >
-              <h3 className="font-semibold mb-2">Prayer Times</h3>
+              <h3 className="font-semibold mb-2">{t.relatedComponents.prayerTimes}</h3>
               <p className="text-sm text-muted-foreground">
-                Display Islamic prayer times with countdown timer.
+                {t.relatedComponents.prayerTimesDesc}
               </p>
             </Link>
             <Link
               href="/components/badge"
               className="block p-4 border rounded-lg hover:border-primary transition-colors"
             >
-              <h3 className="font-semibold mb-2">Badge</h3>
+              <h3 className="font-semibold mb-2">{t.relatedComponents.badge}</h3>
               <p className="text-sm text-muted-foreground">
-                Similar styling to the badge variant of this component.
+                {t.relatedComponents.badgeDesc}
               </p>
             </Link>
           </div>
