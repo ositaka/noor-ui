@@ -47,7 +47,7 @@ const getFormProps = (t: typeof content.en | typeof content.ar): PropDefinition[
   },
 ]
 
-const installCode = `npm install @noorui/components`
+const installCode = `npm install noorui-rtl`
 
 const basicUsageCode = `import { Form, FormField, FormItem, FormLabel, FormMessage, validators } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'

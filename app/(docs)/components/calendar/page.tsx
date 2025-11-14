@@ -93,7 +93,7 @@ const getCalendarProps = (t: typeof content.en | typeof content.ar): PropDefinit
   },
 ]
 
-const installCode = `npm install @noorui/components`
+const installCode = `npm install noorui-rtl`
 
 const basicUsageCode = `import { Calendar } from '@/components/ui/calendar'
 import { useState } from 'react'

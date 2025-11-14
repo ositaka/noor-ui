@@ -55,7 +55,7 @@ const getDropdownMenuProps = (t: typeof content.en | typeof content.ar): PropDef
   },
 ]
 
-const installCode = `npm install @noorui/components`
+const installCode = `npm install noorui-rtl`
 
 const basicUsageCode = `import {
   DropdownMenu,

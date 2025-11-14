@@ -36,7 +36,7 @@ const getSeparatorProps = (t: typeof content.en | typeof content.ar): PropDefini
   },
 ]
 
-const installCode = `npm install @noorui/components`
+const installCode = `npm install noorui-rtl`
 
 const basicUsageCode = `import { Separator } from '@/components/ui/separator'
 

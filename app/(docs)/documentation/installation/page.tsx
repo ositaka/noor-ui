@@ -8,14 +8,14 @@ import { Package, Terminal, CheckCircle2, AlertCircle } from 'lucide-react'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 
-const npmInstall = `npm install @noorui/components`
-const yarnInstall = `yarn add @noorui/components`
-const pnpmInstall = `pnpm add @noorui/components`
-const bunInstall = `bun add @noorui/components`
+const npmInstall = `npm install noorui-rtl`
+const yarnInstall = `yarn add noorui-rtl`
+const pnpmInstall = `pnpm add noorui-rtl`
+const bunInstall = `bun add noorui-rtl`
 
 const dependenciesCode = `{
   "dependencies": {
-    "@noorui/components": "^1.0.0",
+    "noorui-rtl": "^1.0.0",
     "next": "^14.0.0",
     "react": "^18.3.0",
     "react-dom": "^18.3.0",
@@ -29,7 +29,7 @@ const dependenciesCode = `{
   }
 }`
 
-const verifyInstallCode = `import { Button } from '@noorui/components/components'
+const verifyInstallCode = `import { Button } from 'noorui-rtl/components'
 
 export default function TestPage() {
   return <Button>Test Installation</Button>

@@ -47,7 +47,7 @@ const getTooltipProps = (t: typeof content.en | typeof content.ar): PropDefiniti
   },
 ]
 
-const installCode = `npm install @noorui/components`
+const installCode = `npm install noorui-rtl`
 
 const setupCode = `// app/layout.tsx
 import { TooltipProvider } from '@/components/ui/tooltip'

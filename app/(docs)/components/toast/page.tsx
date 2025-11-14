@@ -42,7 +42,7 @@ const getToastProps = (locale: 'en' | 'ar'): PropDefinition[] => [
   },
 ]
 
-const installCode = `npm install @noorui/components`
+const installCode = `npm install noorui-rtl`
 
 const setupCode = `// app/layout.tsx
 import { Toaster } from '@/components/ui/toaster'

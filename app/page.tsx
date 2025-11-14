@@ -125,7 +125,7 @@ export default function HomePage() {
                   <div className="space-y-2">
                     <h3 className="text-lg font-semibold">{t.docs.installation}</h3>
                     <pre className="overflow-x-auto rounded-lg bg-muted p-4">
-                      <code className="text-sm">npm install @noorui/components</code>
+                      <code className="text-sm">npm install noorui-rtl</code>
                     </pre>
                   </div>
                 </div>
@@ -140,7 +140,7 @@ export default function HomePage() {
                     <h3 className="text-lg font-semibold">{t.docs.usage}</h3>
                     <pre className="overflow-x-auto rounded-lg bg-muted p-4">
                       <code className="text-sm">
-{`import { Button } from '@noorui/components'
+{`import { Button } from 'noorui-rtl'
 
 <Button variant="primary">
   ${t.ui.button.submit}

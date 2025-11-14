@@ -44,7 +44,7 @@ const collapsibleProps: PropDefinition[] = [
   },
 ]
 
-const installCode = `npm install @noorui/components`
+const installCode = `npm install noorui-rtl`
 
 const basicUsageCode = `import {
   Collapsible,
@@ -319,7 +319,7 @@ export default function CollapsiblePage() {
                       },
                       {
                         q: 'How do I install it?',
-                        a: 'Simply run npm install @noorui/components and import the components you need.',
+                        a: 'Simply run npm install noorui-rtl and import the components you need.',
                       },
                       {
                         q: 'Is it accessible?',

@@ -9,7 +9,7 @@ import { Button } from '@/components/ui/button'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 
-const simpleButtonCode = `import { Button } from '@noorui/components/components'
+const simpleButtonCode = `import { Button } from 'noorui-rtl/components'
 
 export default function MyPage() {
   return (
@@ -17,7 +17,7 @@ export default function MyPage() {
   )
 }`
 
-const cardExampleCode = `import { Card, CardContent, CardHeader, CardTitle } from '@noorui/components/components'
+const cardExampleCode = `import { Card, CardContent, CardHeader, CardTitle } from 'noorui-rtl/components'
 
 export default function MyPage() {
   return (
@@ -34,9 +34,9 @@ export default function MyPage() {
 
 const formExampleCode = `'use client'
 
-import { Button } from '@noorui/components/components'
-import { Input } from '@noorui/components/components'
-import { Label } from '@noorui/components/components'
+import { Button } from 'noorui-rtl/components'
+import { Input } from 'noorui-rtl/components'
+import { Label } from 'noorui-rtl/components'
 import { useState } from 'react'
 
 export default function LoginForm() {
@@ -61,8 +61,8 @@ export default function LoginForm() {
 
 const directionToggleCode = `'use client'
 
-import { useDirection } from '@noorui/components/hooks'
-import { Button } from '@noorui/components/components'
+import { useDirection } from 'noorui-rtl/hooks'
+import { Button } from 'noorui-rtl/components'
 
 export default function MyComponent() {
   const { direction, setDirection } = useDirection()
@@ -81,8 +81,8 @@ export default function MyComponent() {
   )
 }`
 
-const fullPageExampleCode = `import { Button } from '@noorui/components/components'
-import { Card, CardContent, CardHeader, CardTitle } from '@noorui/components/components'
+const fullPageExampleCode = `import { Button } from 'noorui-rtl/components'
+import { Card, CardContent, CardHeader, CardTitle } from 'noorui-rtl/components'
 
 export default function DashboardPage() {
   return (

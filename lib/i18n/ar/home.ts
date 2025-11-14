@@ -131,7 +131,7 @@ home: {
           status: 'مخطط',
           description: 'تغليف نظام التصميم لسهولة الاستهلاك من قبل الآخرين.',
           task1: 'إعداد هيكل monorepo',
-          task2: 'النشر على NPM باسم @noorui/components',
+          task2: 'النشر على NPM باسم noorui-rtl',
           task3: 'إنشاء أدلة التثبيت والانتقال',
         },
         phase4: {

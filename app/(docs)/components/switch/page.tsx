@@ -58,7 +58,7 @@ const getSwitchProps = (t: typeof content.en | typeof content.ar): PropDefinitio
   },
 ]
 
-const installCode = `npm install @noorui/components`
+const installCode = `npm install noorui-rtl`
 
 const basicUsageCode = `import { Switch } from '@/components/ui/switch'
 import { Label } from '@/components/ui/label'

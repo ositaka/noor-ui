@@ -41,7 +41,7 @@ const featureCardProps: PropDefinition[] = [
   },
 ]
 
-const installCode = `npm install @noorui/components`
+const installCode = `npm install noorui-rtl`
 
 const basicUsageCode = `import { FeatureCard } from '@/components/ui/feature-card'
 import { Sparkles } from 'lucide-react'

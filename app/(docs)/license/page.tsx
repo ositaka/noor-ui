@@ -284,7 +284,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
                 <h3 className="font-semibold">{t.npm}</h3>
                 <p className="text-sm text-muted-foreground">{t.npmDescription}</p>
                 <code className="text-xs text-muted-foreground mt-1 block">
-                  @noorui/components
+                  noorui-rtl
                 </code>
               </div>
             </div>
