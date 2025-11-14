@@ -33,6 +33,8 @@ import {
   ArrowLeft,
   Loader2,
 } from 'lucide-react'
+import { useDirection } from '@/components/providers/direction-provider'
+import { content } from '@/lib/i18n'
 
 type Step = 'personal' | 'address' | 'preferences' | 'review' | 'success'
 
@@ -47,6 +49,8 @@ const STEP_LABELS = {
 }
 
 export default function RegistrationPage() {
+  const { locale } = useDirection()
+  const t = content[locale]
   const [currentStep, setCurrentStep] = React.useState<Step>('personal')
   const [isRTL, setIsRTL] = React.useState(false)
   const [formData, setFormData] = React.useState({

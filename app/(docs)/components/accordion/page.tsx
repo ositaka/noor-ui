@@ -14,6 +14,8 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion'
+import { useDirection } from '@/components/providers/direction-provider'
+import { content } from '@/lib/i18n'
 
 const accordionProps: PropDefinition[] = [
   {
@@ -143,6 +145,9 @@ const withIconsCode = `import { User, CreditCard, Calendar } from 'lucide-react'
 </Accordion>`
 
 export default function AccordionPage() {
+  const { locale } = useDirection()
+  const t = content[locale]
+
   return (
     <div className="min-h-screen">
 
@@ -152,31 +157,31 @@ export default function AccordionPage() {
           <ol className="flex items-center gap-2 text-sm text-muted-foreground">
             <li>
               <Link href="/" className="hover:text-foreground transition-colors">
-                Home
+                {t.common.home}
               </Link>
             </li>
             <li>/</li>
             <li>
               <Link href="/components" className="hover:text-foreground transition-colors">
-                Components
+                {t.nav.components}
               </Link>
             </li>
             <li>/</li>
-            <li className="text-foreground font-medium">Accordion</li>
+            <li className="text-foreground font-medium">{t.accordionComponent.title}</li>
           </ol>
         </nav>
 
         {/* Page Header */}
         <div className="mb-12">
-          <h1 className="text-4xl font-bold tracking-tight mb-4">Accordion</h1>
+          <h1 className="text-4xl font-bold tracking-tight mb-4">{t.accordionComponent.title}</h1>
           <p className="text-xl text-muted-foreground max-w-3xl">
-            A vertically stacked set of interactive headings that each reveal an associated section of content.
+            {t.accordionComponent.description}
           </p>
         </div>
 
         {/* Preview */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Preview</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.accordionComponent.preview}</h2>
           <ComponentShowcase>
             <ComponentShowcase.Demo>
               <Accordion type="single" collapsible className="w-full max-w-md">
@@ -207,19 +212,19 @@ export default function AccordionPage() {
 
         {/* Installation */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-4">Installation</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-4">{t.accordionComponent.installation}</h2>
           <CodeBlock code={installCode} language="bash" />
         </section>
 
         {/* Usage */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-4">Usage</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-4">{t.accordionComponent.usage}</h2>
           <CodeBlock code={basicUsageCode} language="tsx" />
         </section>
 
         {/* Examples */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Examples</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.accordionComponent.examples.title}</h2>
 
           <div className="space-y-8">
             <div>

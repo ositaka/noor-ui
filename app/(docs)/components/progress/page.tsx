@@ -8,20 +8,22 @@ import { Progress } from '@/components/ui/progress'
 import { ComponentShowcase } from '@/components/docs/component-showcase'
 import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
-const progressProps: PropDefinition[] = [
+import { useDirection } from '@/components/providers/direction-provider'
+import { content } from '@/lib/i18n'
+const getProgressProps = (locale: 'en' | 'ar'): PropDefinition[] => [
   {
     name: 'value',
     type: 'number',
     default: '0',
     required: false,
-    description: 'The progress value (0-100)',
+    description: content[locale].progressComponent.props.value,
   },
   {
     name: 'max',
     type: 'number',
     default: '100',
     required: false,
-    description: 'The maximum progress value',
+    description: content[locale].progressComponent.props.max,
   },
 ]
 
@@ -53,6 +55,9 @@ const colorsCode = `<div className="space-y-4">
 </div>`
 
 export default function ProgressPage() {
+  const { locale } = useDirection()
+  const t = content[locale]
+  const pc = content[locale].progressComponent
   const [uploadProgress, setUploadProgress] = React.useState(0)
 
   // Simulated upload
@@ -78,31 +83,31 @@ export default function ProgressPage() {
           <ol className="flex items-center gap-2 text-sm text-muted-foreground">
             <li>
               <Link href="/" className="hover:text-foreground transition-colors">
-                Home
+                {t.common.home}
               </Link>
             </li>
             <li>/</li>
             <li>
               <Link href="/components" className="hover:text-foreground transition-colors">
-                Components
+                {t.nav.components}
               </Link>
             </li>
             <li>/</li>
-            <li className="text-foreground font-medium">Progress</li>
+            <li className="text-foreground font-medium">{pc.title}</li>
           </ol>
         </nav>
 
         {/* Page Header */}
         <div className="mb-12">
-          <h1 className="text-4xl font-bold tracking-tight mb-4">Progress</h1>
+          <h1 className="text-4xl font-bold tracking-tight mb-4">{pc.title}</h1>
           <p className="text-xl text-muted-foreground max-w-3xl">
-            Displays an indicator showing the completion progress of a task. Perfect for uploads, downloads, and loading states.
+            {pc.description}
           </p>
         </div>
 
         {/* Preview */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Preview</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentDocs.preview}</h2>
           <ComponentShowcase>
             <ComponentShowcase.Demo>
               <Progress value={66} className="w-full max-w-md" />
@@ -112,24 +117,24 @@ export default function ProgressPage() {
 
         {/* Installation */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Installation</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentDocs.installation}</h2>
           <CodeBlock code={installCode} language="bash" />
         </section>
 
         {/* Usage */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Usage</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentDocs.usage}</h2>
           <CodeBlock code={basicUsageCode} language="tsx" />
         </section>
 
         {/* Examples */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Examples</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentDocs.examples}</h2>
 
           <div className="space-y-8">
             {/* Basic */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">Basic</h3>
+              <h3 className="text-lg font-semibold mb-4">{pc.examples.basic}</h3>
               <Card>
                 <CardContent className="p-6">
                   <Progress value={33} className="w-[60%]" />
@@ -142,12 +147,12 @@ export default function ProgressPage() {
 
             {/* With Label */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">With Label</h3>
+              <h3 className="text-lg font-semibold mb-4">{pc.examples.withLabel}</h3>
               <Card>
                 <CardContent className="p-6">
                   <div className="space-y-2 w-[60%]">
                     <div className="flex justify-between text-sm">
-                      <span>Progress</span>
+                      <span>{pc.labels.progress}</span>
                       <span>60%</span>
                     </div>
                     <Progress value={60} />
@@ -161,11 +166,11 @@ export default function ProgressPage() {
 
             {/* With Shimmer */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">With Shimmer Effect</h3>
+              <h3 className="text-lg font-semibold mb-4">{pc.examples.withShimmer}</h3>
               <Card>
                 <CardContent className="p-6">
                   <p className="text-sm text-muted-foreground mb-4">
-                    The progress bar includes an animated shimmer effect that continuously slides across, giving a &quot;live&quot; feel.
+                    {pc.examples.shimmerDesc}
                   </p>
                   <Progress value={66} className="w-[60%]" />
                 </CardContent>
@@ -174,24 +179,24 @@ export default function ProgressPage() {
 
             {/* Different Sizes */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">Different Sizes</h3>
+              <h3 className="text-lg font-semibold mb-4">{pc.examples.differentSizes}</h3>
               <Card>
                 <CardContent className="p-6">
                   <div className="space-y-4 w-[60%]">
                     <div className="space-y-1">
-                      <p className="text-xs text-muted-foreground">Extra Small (h-1)</p>
+                      <p className="text-xs text-muted-foreground">{pc.sizes.extraSmall}</p>
                       <Progress value={50} className="h-1" />
                     </div>
                     <div className="space-y-1">
-                      <p className="text-xs text-muted-foreground">Small (h-2, default)</p>
+                      <p className="text-xs text-muted-foreground">{pc.sizes.small}</p>
                       <Progress value={50} className="h-2" />
                     </div>
                     <div className="space-y-1">
-                      <p className="text-xs text-muted-foreground">Medium (h-3)</p>
+                      <p className="text-xs text-muted-foreground">{pc.sizes.medium}</p>
                       <Progress value={50} className="h-3" />
                     </div>
                     <div className="space-y-1">
-                      <p className="text-xs text-muted-foreground">Large (h-4)</p>
+                      <p className="text-xs text-muted-foreground">{pc.sizes.large}</p>
                       <Progress value={50} className="h-4" />
                     </div>
                   </div>
@@ -204,20 +209,20 @@ export default function ProgressPage() {
 
             {/* Different Colors */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">Different Colors</h3>
+              <h3 className="text-lg font-semibold mb-4">{pc.examples.differentColors}</h3>
               <Card>
                 <CardContent className="p-6">
                   <div className="space-y-4 w-[60%]">
                     <div className="space-y-1">
-                      <p className="text-xs text-muted-foreground">Blue</p>
+                      <p className="text-xs text-muted-foreground">{pc.colors.blue}</p>
                       <Progress value={50} className="[&>div]:bg-blue-500" />
                     </div>
                     <div className="space-y-1">
-                      <p className="text-xs text-muted-foreground">Green</p>
+                      <p className="text-xs text-muted-foreground">{pc.colors.green}</p>
                       <Progress value={50} className="[&>div]:bg-green-500" />
                     </div>
                     <div className="space-y-1">
-                      <p className="text-xs text-muted-foreground">Red</p>
+                      <p className="text-xs text-muted-foreground">{pc.colors.red}</p>
                       <Progress value={50} className="[&>div]:bg-red-500" />
                     </div>
                   </div>
@@ -230,20 +235,20 @@ export default function ProgressPage() {
 
             {/* Upload Example */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">Upload Progress</h3>
+              <h3 className="text-lg font-semibold mb-4">{pc.examples.uploadProgress}</h3>
               <Card>
                 <CardContent className="p-6">
                   <div className="space-y-4 w-[60%]">
-                    <Button onClick={startUpload}>Start Upload</Button>
+                    <Button onClick={startUpload}>{pc.buttons.startUpload}</Button>
                     <div className="space-y-2">
                       <div className="flex justify-between text-sm">
-                        <span>Uploading...</span>
+                        <span>{pc.labels.uploading}</span>
                         <span>{uploadProgress}%</span>
                       </div>
                       <Progress value={uploadProgress} />
                       {uploadProgress === 100 && (
                         <p className="text-sm text-green-600 dark:text-green-400">
-                          Upload complete!
+                          {pc.labels.complete}
                         </p>
                       )}
                     </div>
@@ -256,31 +261,31 @@ export default function ProgressPage() {
 
         {/* Props */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Props</h2>
-          <PropsTable props={progressProps} />
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentDocs.props}</h2>
+          <PropsTable props={getProgressProps(locale)} />
         </section>
 
         {/* Accessibility */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Accessibility</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentDocs.accessibility}</h2>
           <Card>
             <CardContent className="p-6 space-y-4">
               <div>
-                <h3 className="font-semibold mb-2">ARIA Roles</h3>
+                <h3 className="font-semibold mb-2">{pc.accessibility.ariaRoles}</h3>
                 <p className="text-muted-foreground">
-                  Uses <code className="px-1.5 py-0.5 rounded bg-muted">role=&quot;progressbar&quot;</code> with <code className="px-1.5 py-0.5 rounded bg-muted">aria-valuenow</code>, <code className="px-1.5 py-0.5 rounded bg-muted">aria-valuemin</code>, and <code className="px-1.5 py-0.5 rounded bg-muted">aria-valuemax</code>.
+                  {pc.accessibility.ariaRolesDesc}
                 </p>
               </div>
               <div>
-                <h3 className="font-semibold mb-2">Screen Readers</h3>
+                <h3 className="font-semibold mb-2">{pc.accessibility.screenReaders}</h3>
                 <p className="text-muted-foreground">
-                  Progress value is automatically announced to screen reader users.
+                  {pc.accessibility.screenReadersDesc}
                 </p>
               </div>
               <div>
-                <h3 className="font-semibold mb-2">Labels</h3>
+                <h3 className="font-semibold mb-2">{pc.accessibility.labels}</h3>
                 <p className="text-muted-foreground">
-                  Use <code className="px-1.5 py-0.5 rounded bg-muted">aria-label</code> or <code className="px-1.5 py-0.5 rounded bg-muted">aria-labelledby</code> to describe what the progress represents.
+                  {pc.accessibility.labelsDesc}
                 </p>
               </div>
             </CardContent>
@@ -289,14 +294,14 @@ export default function ProgressPage() {
 
         {/* RTL Support */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">RTL Support</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentDocs.rtlConsiderations}</h2>
           <p className="text-muted-foreground mb-6">
-            The Progress component is fully RTL-compatible using logical properties.
+            {pc.rtl.description}
           </p>
-          <ComponentShowcase.Comparison ltrLabel="LTR (English)" rtlLabel="RTL (العربية)">
+          <ComponentShowcase.Comparison ltrLabel={pc.rtl.ltr} rtlLabel={pc.rtl.rtlLabel}>
             <div className="space-y-2">
               <div className="flex justify-between text-sm">
-                <span>Loading</span>
+                <span>{pc.labels.loading}</span>
                 <span>75%</span>
               </div>
               <Progress value={75} />
@@ -306,14 +311,14 @@ export default function ProgressPage() {
 
         {/* Related */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Related Components</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{pc.related.title}</h2>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             <Link href="/components/button">
               <Card className="hover:border-primary transition-colors">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold mb-2">Button</h3>
+                  <h3 className="font-semibold mb-2">{pc.related.button}</h3>
                   <p className="text-sm text-muted-foreground">
-                    Interactive buttons
+                    {pc.related.buttonDesc}
                   </p>
                 </CardContent>
               </Card>

@@ -5,6 +5,8 @@ import Link from 'next/link'
 import { Card, CardContent } from '@/components/ui/card'
 import { CodeBlock } from '@/components/docs/code-block'
 import { Package, Terminal, CheckCircle2, AlertCircle } from 'lucide-react'
+import { useDirection } from '@/components/providers/direction-provider'
+import { content } from '@/lib/i18n'
 
 const npmInstall = `npm install @noorui/components`
 const yarnInstall = `yarn add @noorui/components`
@@ -34,6 +36,10 @@ export default function TestPage() {
 }`
 
 export default function InstallationPage() {
+  const { locale } = useDirection()
+  const t = content[locale].documentationPages.installation
+  const common = content[locale].documentationPages.common
+
   return (
     <div className="min-h-screen">
 
@@ -43,60 +49,60 @@ export default function InstallationPage() {
           <ol className="flex items-center gap-2 text-sm text-muted-foreground">
             <li>
               <Link href="/" className="hover:text-foreground transition-colors">
-                Home
+                {common.home}
               </Link>
             </li>
             <li>/</li>
             <li>
               <Link href="/documentation" className="hover:text-foreground transition-colors">
-                Documentation
+                {common.documentation}
               </Link>
             </li>
             <li>/</li>
-            <li className="text-foreground font-medium">Installation</li>
+            <li className="text-foreground font-medium">{t.title}</li>
           </ol>
         </nav>
 
         {/* Page Header */}
         <div className="max-w-3xl mb-12">
-          <h1 className="text-4xl font-bold tracking-tight mb-4">Installation</h1>
+          <h1 className="text-4xl font-bold tracking-tight mb-4">{t.title}</h1>
           <p className="text-xl text-muted-foreground">
-            Get started with Noor UI in minutes. Follow these simple steps to add the package to your Next.js project.
+            {t.subtitle}
           </p>
         </div>
 
         {/* Prerequisites */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Prerequisites</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.prerequisites}</h2>
           <Card>
             <CardContent className="p-6">
               <ul className="space-y-3">
                 <li className="flex items-start gap-3">
                   <CheckCircle2 className="h-5 w-5 text-green-600 mt-0.5 shrink-0" />
                   <div>
-                    <strong className="text-foreground">Next.js 14+</strong>
-                    <p className="text-sm text-muted-foreground">App Router required for full functionality</p>
+                    <strong className="text-foreground">{t.nextjs}</strong>
+                    <p className="text-sm text-muted-foreground">{t.nextjsDesc}</p>
                   </div>
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle2 className="h-5 w-5 text-green-600 mt-0.5 shrink-0" />
                   <div>
-                    <strong className="text-foreground">React 18.3+</strong>
-                    <p className="text-sm text-muted-foreground">For client components and hooks</p>
+                    <strong className="text-foreground">{t.react}</strong>
+                    <p className="text-sm text-muted-foreground">{t.reactDesc}</p>
                   </div>
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle2 className="h-5 w-5 text-green-600 mt-0.5 shrink-0" />
                   <div>
-                    <strong className="text-foreground">Tailwind CSS 3.4+</strong>
-                    <p className="text-sm text-muted-foreground">Required for styling and logical properties</p>
+                    <strong className="text-foreground">{t.tailwind}</strong>
+                    <p className="text-sm text-muted-foreground">{t.tailwindDesc}</p>
                   </div>
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle2 className="h-5 w-5 text-green-600 mt-0.5 shrink-0" />
                   <div>
-                    <strong className="text-foreground">TypeScript 5+</strong>
-                    <p className="text-sm text-muted-foreground">Recommended for type safety</p>
+                    <strong className="text-foreground">{t.typescript}</strong>
+                    <p className="text-sm text-muted-foreground">{t.typescriptDesc}</p>
                   </div>
                 </li>
               </ul>
@@ -106,9 +112,9 @@ export default function InstallationPage() {
 
         {/* Package Manager Installation */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Choose Your Package Manager</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.packageManager}</h2>
           <p className="text-muted-foreground mb-6">
-            Select your preferred package manager to install Noor UI:
+            {t.packageManagerDesc}
           </p>
 
           <div className="space-y-4">
@@ -148,9 +154,9 @@ export default function InstallationPage() {
 
         {/* Dependencies */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Package Dependencies</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.dependencies}</h2>
           <p className="text-muted-foreground mb-4">
-            The design system will automatically install the following peer dependencies:
+            {t.dependenciesDesc}
           </p>
           <CodeBlock code={dependenciesCode} language="json" />
 
@@ -158,10 +164,10 @@ export default function InstallationPage() {
             <CardContent className="p-6">
               <h3 className="font-semibold mb-2 flex items-center gap-2">
                 <AlertCircle className="h-5 w-5 text-blue-600 dark:text-blue-400" />
-                Note
+                {t.note}
               </h3>
               <p className="text-sm text-muted-foreground">
-                The package includes <code className="px-1.5 py-0.5 rounded bg-muted text-foreground">tailwindcss-logical</code> for RTL support. Make sure your project is configured to use logical CSS properties.
+                {t.tailwindNote}
               </p>
             </CardContent>
           </Card>
@@ -169,9 +175,9 @@ export default function InstallationPage() {
 
         {/* Verify Installation */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Verify Installation</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.verifyInstallation}</h2>
           <p className="text-muted-foreground mb-4">
-            Test that the package is installed correctly by importing a component:
+            {t.verifyDesc}
           </p>
           <CodeBlock code={verifyInstallCode} language="tsx" />
 
@@ -180,9 +186,9 @@ export default function InstallationPage() {
               <div className="flex items-start gap-3">
                 <Terminal className="h-5 w-5 text-green-600 mt-0.5 shrink-0" />
                 <div>
-                  <h3 className="font-semibold mb-2">Installation Successful!</h3>
+                  <h3 className="font-semibold mb-2">{t.installationSuccessful}</h3>
                   <p className="text-sm text-muted-foreground">
-                    If there are no import errors, the package is installed correctly. Next, configure Tailwind and set up providers.
+                    {t.successDesc}
                   </p>
                 </div>
               </div>
@@ -192,14 +198,14 @@ export default function InstallationPage() {
 
         {/* Next Steps */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Next Steps</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.nextSteps}</h2>
           <div className="grid gap-4 sm:grid-cols-2">
             <Link href="/documentation/configuration">
               <Card className="hover:border-primary transition-colors h-full">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold mb-2">Configuration</h3>
+                  <h3 className="font-semibold mb-2">{t.configurationLink}</h3>
                   <p className="text-sm text-muted-foreground">
-                    Configure Tailwind CSS and set up the required providers for your application.
+                    {t.configurationDesc}
                   </p>
                 </CardContent>
               </Card>
@@ -208,9 +214,9 @@ export default function InstallationPage() {
             <Link href="/documentation/quick-start">
               <Card className="hover:border-primary transition-colors h-full">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold mb-2">Quick Start</h3>
+                  <h3 className="font-semibold mb-2">{t.quickStartLink}</h3>
                   <p className="text-sm text-muted-foreground">
-                    Jump straight into building your first component with Noor UI.
+                    {t.quickStartDesc}
                   </p>
                 </CardContent>
               </Card>

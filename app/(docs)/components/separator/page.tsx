@@ -9,28 +9,30 @@ import { ComponentShowcase } from '@/components/docs/component-showcase'
 import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
 import { Home, Settings, User, Bell } from 'lucide-react'
+import { useDirection } from '@/components/providers/direction-provider'
+import { content } from '@/lib/i18n'
 
-const separatorProps: PropDefinition[] = [
+const getSeparatorProps = (t: typeof content.en | typeof content.ar): PropDefinition[] => [
   {
     name: 'orientation',
     type: "'horizontal' | 'vertical'",
     default: "'horizontal'",
     required: false,
-    description: 'The orientation of the separator',
+    description: t.separatorComponent.props.orientation,
   },
   {
     name: 'decorative',
     type: 'boolean',
     default: 'true',
     required: false,
-    description: 'Whether the separator is purely decorative (not semantic)',
+    description: t.separatorComponent.props.decorative,
   },
   {
     name: 'className',
     type: 'string',
     default: 'undefined',
     required: false,
-    description: 'Additional CSS classes to apply',
+    description: t.separatorComponent.props.className,
   },
 ]
 
@@ -90,11 +92,11 @@ const inCardCode = `<Card>
 const navigationCode = `<nav className="flex items-center gap-2 p-4">
   <a href="/" className="font-medium hover:text-primary">Home</a>
   <Separator orientation="vertical" className="h-4" />
-  <a href="/about" className="font-medium hover:text-primary">About</a>
+  <a href="/components" className="font-medium hover:text-primary">Components</a>
   <Separator orientation="vertical" className="h-4" />
-  <a href="/services" className="font-medium hover:text-primary">Services</a>
+  <a href="/examples" className="font-medium hover:text-primary">Examples</a>
   <Separator orientation="vertical" className="h-4" />
-  <a href="/contact" className="font-medium hover:text-primary">Contact</a>
+  <a href="/documentation" className="font-medium hover:text-primary">Documentation</a>
 </nav>`
 
 const listCode = `<ul className="space-y-3">
@@ -147,6 +149,10 @@ const rtlCode = `// RTL support is automatic!
 </div>`
 
 export default function SeparatorPage() {
+  const { locale } = useDirection()
+  const t = content[locale]
+  const separatorProps = getSeparatorProps(t)
+
   return (
     <div className="min-h-screen">
 
@@ -156,32 +162,31 @@ export default function SeparatorPage() {
           <ol className="flex items-center gap-2 text-sm text-muted-foreground">
             <li>
               <Link href="/" className="hover:text-foreground transition-colors">
-                Home
+                {t.common.home}
               </Link>
             </li>
             <li>/</li>
             <li>
               <Link href="/components" className="hover:text-foreground transition-colors">
-                Components
+                {t.nav.components}
               </Link>
             </li>
             <li>/</li>
-            <li className="text-foreground font-medium">Separator</li>
+            <li className="text-foreground font-medium">{t.separatorComponent.title}</li>
           </ol>
         </nav>
 
         {/* Page Header */}
         <div className="mb-12">
-          <h1 className="text-4xl font-bold tracking-tight mb-4">Separator</h1>
+          <h1 className="text-4xl font-bold tracking-tight mb-4">{t.separatorComponent.title}</h1>
           <p className="text-xl text-muted-foreground max-w-3xl">
-            Visual divider between content sections. Supports both horizontal and vertical
-            orientations with automatic RTL support.
+            {t.separatorComponent.description}
           </p>
         </div>
 
         {/* Preview */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Preview</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.separatorComponent.preview}</h2>
           <ComponentShowcase>
             <ComponentShowcase.Demo>
               <div className="w-full max-w-md space-y-4">
@@ -199,24 +204,24 @@ export default function SeparatorPage() {
 
         {/* Installation */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Installation</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.separatorComponent.installation}</h2>
           <CodeBlock code={installCode} language="bash" title="Terminal" />
         </section>
 
         {/* Usage */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Usage</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.separatorComponent.usage}</h2>
           <CodeBlock code={basicUsageCode} language="tsx" title="React" />
         </section>
 
         {/* Examples */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Examples</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.separatorComponent.examples.title}</h2>
 
           <div className="space-y-8">
             {/* Horizontal */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">Horizontal (Default)</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.separatorComponent.examples.horizontal}</h3>
               <Card>
                 <CardContent className="p-6">
                   <div className="space-y-4">
@@ -244,7 +249,7 @@ export default function SeparatorPage() {
 
             {/* Vertical */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">Vertical</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.separatorComponent.examples.vertical}</h3>
               <Card>
                 <CardContent className="p-6">
                   <div className="flex items-center gap-4">
@@ -265,7 +270,7 @@ export default function SeparatorPage() {
 
             {/* In Cards */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">In Card Content</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.separatorComponent.examples.inCards}</h3>
               <Card>
                 <CardContent className="p-6">
                   <Card>
@@ -305,7 +310,7 @@ export default function SeparatorPage() {
 
             {/* Navigation */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">In Navigation</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.separatorComponent.examples.inNavigation}</h3>
               <Card>
                 <CardContent className="p-6">
                   <nav className="flex items-center gap-2 p-4 border rounded-lg">
@@ -334,7 +339,7 @@ export default function SeparatorPage() {
 
             {/* In Lists */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">In Lists</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.separatorComponent.examples.inLists}</h3>
               <Card>
                 <CardContent className="p-6">
                   <ul className="space-y-3">
@@ -400,7 +405,7 @@ export default function SeparatorPage() {
 
         {/* Props */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Props</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.separatorComponent.props.title}</h2>
           <PropsTable props={separatorProps} />
           <Card className="mt-4">
             <CardContent className="p-6">
@@ -414,7 +419,7 @@ export default function SeparatorPage() {
 
         {/* Accessibility */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Accessibility</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.separatorComponent.accessibility.title}</h2>
           <Card>
             <CardContent className="p-6 space-y-4">
               <div>
@@ -465,7 +470,7 @@ export default function SeparatorPage() {
 
         {/* RTL Considerations */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">RTL Considerations</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.separatorComponent.rtl.title}</h2>
           <Card>
             <CardContent className="p-6 space-y-4">
               <p className="text-muted-foreground">

@@ -16,28 +16,30 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover'
+import { useDirection } from '@/components/providers/direction-provider'
+import { content } from '@/lib/i18n'
 
-const popoverContentProps: PropDefinition[] = [
+const getPopoverContentProps = (t: typeof content.en | typeof content.ar): PropDefinition[] => [
   {
     name: 'align',
     type: '"start" | "center" | "end"',
     default: '"center"',
     required: false,
-    description: 'The preferred alignment against the trigger',
+    description: t.popoverComponent.props.align,
   },
   {
     name: 'side',
     type: '"top" | "right" | "bottom" | "left"',
     default: '"bottom"',
     required: false,
-    description: 'The preferred side of the trigger to render against',
+    description: t.popoverComponent.props.side,
   },
   {
     name: 'sideOffset',
     type: 'number',
     default: '4',
     required: false,
-    description: 'The distance in pixels from the trigger',
+    description: t.popoverComponent.props.sideOffset,
   },
 ]
 
@@ -132,6 +134,10 @@ const withFormCode = `<Popover>
 </Popover>`
 
 export default function PopoverPage() {
+  const { locale } = useDirection()
+  const t = content[locale]
+  const popoverContentProps = getPopoverContentProps(t)
+
   return (
     <div className="min-h-screen">
 
@@ -141,42 +147,42 @@ export default function PopoverPage() {
           <ol className="flex items-center gap-2 text-sm text-muted-foreground">
             <li>
               <Link href="/" className="hover:text-foreground transition-colors">
-                Home
+                {t.common.home}
               </Link>
             </li>
             <li>/</li>
             <li>
               <Link href="/components" className="hover:text-foreground transition-colors">
-                Components
+                {t.nav.components}
               </Link>
             </li>
             <li>/</li>
-            <li className="text-foreground font-medium">Popover</li>
+            <li className="text-foreground font-medium">{t.popoverComponent.title}</li>
           </ol>
         </nav>
 
         {/* Page Header */}
         <div className="mb-12">
-          <h1 className="text-4xl font-bold tracking-tight mb-4">Popover</h1>
+          <h1 className="text-4xl font-bold tracking-tight mb-4">{t.popoverComponent.title}</h1>
           <p className="text-xl text-muted-foreground max-w-3xl">
-            Displays rich content in a portal, triggered by a button with flexible positioning.
+            {t.popoverComponent.description}
           </p>
         </div>
 
         {/* Preview */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Preview</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.popoverComponent.preview}</h2>
           <ComponentShowcase>
             <ComponentShowcase.Demo>
               <Popover>
                 <PopoverTrigger asChild>
-                  <Button variant="outline">Open Popover</Button>
+                  <Button variant="outline">{t.popoverComponent.demo.openPopover}</Button>
                 </PopoverTrigger>
                 <PopoverContent>
                   <div className="space-y-2">
-                    <h4 className="font-medium leading-none">Popover Title</h4>
+                    <h4 className="font-medium leading-none">{t.popoverComponent.demo.popoverTitle}</h4>
                     <p className="text-sm text-muted-foreground">
-                      This is a popover with some example content.
+                      {t.popoverComponent.demo.popoverContent}
                     </p>
                   </div>
                 </PopoverContent>
@@ -189,59 +195,59 @@ export default function PopoverPage() {
 
         {/* Installation */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-4">Installation</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-4">{t.popoverComponent.installation}</h2>
           <CodeBlock code={installCode} language="bash" />
         </section>
 
         {/* Usage */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-4">Usage</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-4">{t.popoverComponent.usage}</h2>
           <CodeBlock code={basicUsageCode} language="tsx" />
         </section>
 
         {/* Examples */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Examples</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.popoverComponent.examples.title}</h2>
 
           <div className="space-y-8">
             <div>
-              <h3 className="text-lg font-semibold mb-4">Positioning</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.popoverComponent.examples.positioning}</h3>
               <ComponentShowcase>
                 <ComponentShowcase.Demo>
                   <div className="flex flex-wrap gap-4 justify-center">
                     <Popover>
                       <PopoverTrigger asChild>
-                        <Button variant="outline">Top</Button>
+                        <Button variant="outline">{t.popoverComponent.demo.top}</Button>
                       </PopoverTrigger>
                       <PopoverContent side="top">
-                        <p className="text-sm">Content positioned on top</p>
+                        <p className="text-sm">{t.popoverComponent.demo.positionedTop}</p>
                       </PopoverContent>
                     </Popover>
 
                     <Popover>
                       <PopoverTrigger asChild>
-                        <Button variant="outline">Right</Button>
+                        <Button variant="outline">{t.popoverComponent.demo.right}</Button>
                       </PopoverTrigger>
                       <PopoverContent side="right">
-                        <p className="text-sm">Content positioned on right</p>
+                        <p className="text-sm">{t.popoverComponent.demo.positionedRight}</p>
                       </PopoverContent>
                     </Popover>
 
                     <Popover>
                       <PopoverTrigger asChild>
-                        <Button variant="outline">Bottom</Button>
+                        <Button variant="outline">{t.popoverComponent.demo.bottom}</Button>
                       </PopoverTrigger>
                       <PopoverContent side="bottom">
-                        <p className="text-sm">Content positioned on bottom</p>
+                        <p className="text-sm">{t.popoverComponent.demo.positionedBottom}</p>
                       </PopoverContent>
                     </Popover>
 
                     <Popover>
                       <PopoverTrigger asChild>
-                        <Button variant="outline">Left</Button>
+                        <Button variant="outline">{t.popoverComponent.demo.left}</Button>
                       </PopoverTrigger>
                       <PopoverContent side="left">
-                        <p className="text-sm">Content positioned on left</p>
+                        <p className="text-sm">{t.popoverComponent.demo.positionedLeft}</p>
                       </PopoverContent>
                     </Popover>
                   </div>
@@ -251,33 +257,33 @@ export default function PopoverPage() {
             </div>
 
             <div>
-              <h3 className="text-lg font-semibold mb-4">With Form</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.popoverComponent.examples.withForm}</h3>
               <ComponentShowcase>
                 <ComponentShowcase.Demo>
                   <Popover>
                     <PopoverTrigger asChild>
                       <Button variant="outline">
                         <Settings className="me-2 h-4 w-4" />
-                        Settings
+                        {t.popoverComponent.demo.settings}
                       </Button>
                     </PopoverTrigger>
                     <PopoverContent className="w-80">
                       <div className="space-y-4">
                         <div className="space-y-2">
-                          <h4 className="font-medium leading-none">Dimensions</h4>
+                          <h4 className="font-medium leading-none">{t.popoverComponent.demo.dimensions}</h4>
                           <p className="text-sm text-muted-foreground">
-                            Set the dimensions for the layer.
+                            {t.popoverComponent.demo.dimensionsDesc}
                           </p>
                         </div>
                         <div className="space-y-2">
-                          <Label htmlFor="width">Width</Label>
+                          <Label htmlFor="width">{t.popoverComponent.demo.width}</Label>
                           <Input id="width" defaultValue="100%" />
                         </div>
                         <div className="space-y-2">
-                          <Label htmlFor="height">Height</Label>
+                          <Label htmlFor="height">{t.popoverComponent.demo.height}</Label>
                           <Input id="height" defaultValue="25px" />
                         </div>
-                        <Button className="w-full">Save changes</Button>
+                        <Button className="w-full">{t.popoverComponent.demo.saveChanges}</Button>
                       </div>
                     </PopoverContent>
                   </Popover>
@@ -290,32 +296,32 @@ export default function PopoverPage() {
 
         {/* RTL Support Example */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">RTL Support Example</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.popoverComponent.rtl.example}</h2>
           <p className="text-muted-foreground mb-6">
-            The Popover component automatically adapts to RTL layouts. Positioning mirrors correctly and content flows naturally.
+            {t.popoverComponent.rtl.exampleDescription}
           </p>
           <ComponentShowcase.Comparison ltrLabel="LTR (English)" rtlLabel="RTL (العربية)">
             <Popover>
               <PopoverTrigger asChild>
                 <Button variant="outline">
                   <Settings className="me-2 h-4 w-4" />
-                  Quick Settings
+                  {t.popoverComponent.demo.quickSettings}
                 </Button>
               </PopoverTrigger>
               <PopoverContent className="w-80">
                 <div className="space-y-4">
                   <div className="space-y-2">
-                    <h4 className="font-medium leading-none">Display Settings</h4>
+                    <h4 className="font-medium leading-none">{t.popoverComponent.demo.displaySettings}</h4>
                     <p className="text-sm text-muted-foreground">
-                      Adjust your display preferences.
+                      {t.popoverComponent.demo.displayDesc}
                     </p>
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="brightness">Brightness</Label>
+                    <Label htmlFor="brightness">{t.popoverComponent.demo.brightness}</Label>
                     <Input id="brightness" defaultValue="75%" />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="contrast">Contrast</Label>
+                    <Label htmlFor="contrast">{t.popoverComponent.demo.contrast}</Label>
                     <Input id="contrast" defaultValue="100%" />
                   </div>
                 </div>
@@ -326,31 +332,31 @@ export default function PopoverPage() {
 
         {/* Props */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-4">Props</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-4">{t.popoverComponent.props.title}</h2>
           <PropsTable props={popoverContentProps} />
         </section>
 
         {/* Accessibility */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-4">Accessibility</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-4">{t.popoverComponent.accessibility.title}</h2>
           <Card>
             <CardContent className="p-6 space-y-4">
               <div>
-                <h3 className="font-semibold mb-2">Keyboard Navigation</h3>
+                <h3 className="font-semibold mb-2">{t.popoverComponent.accessibility.keyboard}</h3>
                 <ul className="list-disc list-inside text-sm text-muted-foreground space-y-1">
-                  <li><kbd className="px-1.5 py-0.5 rounded bg-muted">Space</kbd> - Open/close the popover</li>
-                  <li><kbd className="px-1.5 py-0.5 rounded bg-muted">Enter</kbd> - Open/close the popover</li>
-                  <li><kbd className="px-1.5 py-0.5 rounded bg-muted">Esc</kbd> - Close the popover</li>
-                  <li><kbd className="px-1.5 py-0.5 rounded bg-muted">Tab</kbd> - Navigate through focusable elements in the popover</li>
+                  <li><kbd className="px-1.5 py-0.5 rounded bg-muted">Space</kbd> - {t.popoverComponent.accessibility.space}</li>
+                  <li><kbd className="px-1.5 py-0.5 rounded bg-muted">Enter</kbd> - {t.popoverComponent.accessibility.enter}</li>
+                  <li><kbd className="px-1.5 py-0.5 rounded bg-muted">Esc</kbd> - {t.popoverComponent.accessibility.escape}</li>
+                  <li><kbd className="px-1.5 py-0.5 rounded bg-muted">Tab</kbd> - {t.popoverComponent.accessibility.tab}</li>
                 </ul>
               </div>
               <div>
-                <h3 className="font-semibold mb-2">ARIA Attributes</h3>
+                <h3 className="font-semibold mb-2">{t.popoverComponent.accessibility.aria}</h3>
                 <ul className="list-disc list-inside text-sm text-muted-foreground space-y-1">
-                  <li>Trigger has aria-expanded indicating open state</li>
-                  <li>Trigger has aria-controls linking to the popover content</li>
-                  <li>Popover content is rendered in a portal for proper stacking</li>
-                  <li>Focus management when opening and closing</li>
+                  <li>{t.popoverComponent.accessibility.ariaExpanded}</li>
+                  <li>{t.popoverComponent.accessibility.ariaControls}</li>
+                  <li>{t.popoverComponent.accessibility.portal}</li>
+                  <li>{t.popoverComponent.accessibility.focusManagement}</li>
                 </ul>
               </div>
             </CardContent>
@@ -359,17 +365,17 @@ export default function PopoverPage() {
 
         {/* RTL Support */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-4">RTL Support</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-4">{t.popoverComponent.rtl.title}</h2>
           <Card>
             <CardContent className="p-6">
               <p className="text-sm text-muted-foreground mb-4">
-                The Popover component is fully RTL-compatible with automatic positioning adaptation.
+                {t.popoverComponent.rtl.description}
               </p>
               <ul className="list-disc list-inside text-sm text-muted-foreground space-y-1">
-                <li>Positioning automatically adapts to text direction</li>
-                <li>Left/right sides mirror in RTL mode</li>
-                <li>Content layout respects text direction</li>
-                <li>Animations flow naturally in both directions</li>
+                <li>{t.popoverComponent.rtl.positioning}</li>
+                <li>{t.popoverComponent.rtl.sides}</li>
+                <li>{t.popoverComponent.rtl.content}</li>
+                <li>{t.popoverComponent.rtl.animations}</li>
               </ul>
             </CardContent>
           </Card>
@@ -377,14 +383,14 @@ export default function PopoverPage() {
 
         {/* Related Components */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-4">Related Components</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-4">{t.popoverComponent.related.title}</h2>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             <Link href="/components/tooltip">
               <Card className="hover:border-primary transition-colors">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold mb-2">Tooltip</h3>
+                  <h3 className="font-semibold mb-2">{t.popoverComponent.related.tooltip}</h3>
                   <p className="text-sm text-muted-foreground">
-                    Display brief helper text
+                    {t.popoverComponent.related.tooltipDesc}
                   </p>
                 </CardContent>
               </Card>
@@ -392,9 +398,9 @@ export default function PopoverPage() {
             <Link href="/components/dialog">
               <Card className="hover:border-primary transition-colors">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold mb-2">Dialog</h3>
+                  <h3 className="font-semibold mb-2">{t.popoverComponent.related.dialog}</h3>
                   <p className="text-sm text-muted-foreground">
-                    Modal dialog for focused content
+                    {t.popoverComponent.related.dialogDesc}
                   </p>
                 </CardContent>
               </Card>
@@ -402,9 +408,9 @@ export default function PopoverPage() {
             <Link href="/components/sheet">
               <Card className="hover:border-primary transition-colors">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold mb-2">Sheet</h3>
+                  <h3 className="font-semibold mb-2">{t.popoverComponent.related.sheet}</h3>
                   <p className="text-sm text-muted-foreground">
-                    Slide-in panel from edge
+                    {t.popoverComponent.related.sheetDesc}
                   </p>
                 </CardContent>
               </Card>

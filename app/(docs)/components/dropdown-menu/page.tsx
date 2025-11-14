@@ -2,6 +2,8 @@
 
 import * as React from 'react'
 import Link from 'next/link'
+import { useDirection } from '@/components/providers/direction-provider'
+import { content } from '@/lib/i18n'
 import { Button } from '@/components/ui/button'
 import {
   DropdownMenu,
@@ -36,20 +38,20 @@ import {
   MoreHorizontal
 } from 'lucide-react'
 
-const dropdownMenuProps: PropDefinition[] = [
+const getDropdownMenuProps = (t: typeof content.en | typeof content.ar): PropDefinition[] => [
   {
     name: 'open',
     type: 'boolean',
     default: 'undefined',
     required: false,
-    description: 'Controlled open state',
+    description: t.dropdownMenuComponent.props.open,
   },
   {
     name: 'onOpenChange',
     type: '(open: boolean) => void',
     default: 'undefined',
     required: false,
-    description: 'Callback when open state changes',
+    description: t.dropdownMenuComponent.props.onOpenChange,
   },
 ]
 
@@ -167,6 +169,10 @@ const rtlCode = `// RTL support is automatic!
 </DropdownMenu>`
 
 export default function DropdownMenuPage() {
+  const { locale } = useDirection()
+  const t = content[locale]
+  const dropdownMenuProps = getDropdownMenuProps(t)
+
   const [showPanel, setShowPanel] = React.useState(true)
   const [showSidebar, setShowSidebar] = React.useState(false)
   const [position, setPosition] = React.useState('bottom')
@@ -180,63 +186,62 @@ export default function DropdownMenuPage() {
           <ol className="flex items-center gap-2 text-sm text-muted-foreground">
             <li>
               <Link href="/" className="hover:text-foreground transition-colors">
-                Home
+                {t.nav.home}
               </Link>
             </li>
             <li>/</li>
             <li>
               <Link href="/components" className="hover:text-foreground transition-colors">
-                Components
+                {t.nav.components}
               </Link>
             </li>
             <li>/</li>
-            <li className="text-foreground font-medium">Dropdown Menu</li>
+            <li className="text-foreground font-medium">{t.dropdownMenuComponent.title}</li>
           </ol>
         </nav>
 
         {/* Page Header */}
         <div className="mb-12">
-          <h1 className="text-4xl font-bold tracking-tight mb-4">Dropdown Menu</h1>
+          <h1 className="text-4xl font-bold tracking-tight mb-4">{t.dropdownMenuComponent.title}</h1>
           <p className="text-xl text-muted-foreground max-w-3xl">
-            A menu component that displays a list of actions or options when triggered. Supports
-            checkboxes, radio groups, sub-menus, and keyboard shortcuts with full RTL support.
+            {t.dropdownMenuComponent.description}
           </p>
         </div>
 
         {/* Preview */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Preview</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.dropdownMenuComponent.preview}</h2>
           <ComponentShowcase>
             <ComponentShowcase.Demo>
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button variant="outline">
                     <User className="me-2 h-4 w-4" />
-                    My Account
+                    {t.dropdownMenuComponent.demo.myAccount}
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="w-56">
-                  <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                  <DropdownMenuLabel>{t.dropdownMenuComponent.demo.myAccount}</DropdownMenuLabel>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem>
                     <User className="me-2 h-4 w-4" />
-                    <span>Profile</span>
+                    <span>{t.dropdownMenuComponent.demo.profile}</span>
                     <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
                   </DropdownMenuItem>
                   <DropdownMenuItem>
                     <CreditCard className="me-2 h-4 w-4" />
-                    <span>Billing</span>
+                    <span>{t.dropdownMenuComponent.demo.billing}</span>
                     <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
                   </DropdownMenuItem>
                   <DropdownMenuItem>
                     <Settings className="me-2 h-4 w-4" />
-                    <span>Settings</span>
+                    <span>{t.dropdownMenuComponent.demo.settings}</span>
                     <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem>
                     <LogOut className="me-2 h-4 w-4" />
-                    <span>Log out</span>
+                    <span>{t.dropdownMenuComponent.demo.logout}</span>
                     <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
                   </DropdownMenuItem>
                 </DropdownMenuContent>
@@ -247,50 +252,50 @@ export default function DropdownMenuPage() {
 
         {/* Installation */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Installation</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.dropdownMenuComponent.installation}</h2>
           <CodeBlock code={installCode} language="bash" title="Terminal" />
         </section>
 
         {/* Usage */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Usage</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.dropdownMenuComponent.usage}</h2>
           <CodeBlock code={basicUsageCode} language="tsx" title="React" />
         </section>
 
         {/* Examples */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Examples</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.dropdownMenuComponent.examples.title}</h2>
 
           <div className="space-y-8">
             {/* With Icons */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">With Icons and Shortcuts</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.dropdownMenuComponent.examples.withIcons}</h3>
               <Card>
                 <CardContent className="p-6 flex items-center justify-center">
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                       <Button variant="outline">
                         <User className="me-2 h-4 w-4" />
-                        Account
+                        {t.dropdownMenuComponent.demo.account}
                       </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent className="w-56">
-                      <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                      <DropdownMenuLabel>{t.dropdownMenuComponent.demo.myAccount}</DropdownMenuLabel>
                       <DropdownMenuSeparator />
                       <DropdownMenuItem>
                         <User className="me-2 h-4 w-4" />
-                        <span>Profile</span>
+                        <span>{t.dropdownMenuComponent.demo.profile}</span>
                         <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
                       </DropdownMenuItem>
                       <DropdownMenuItem>
                         <Settings className="me-2 h-4 w-4" />
-                        <span>Settings</span>
+                        <span>{t.dropdownMenuComponent.demo.settings}</span>
                         <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
                       </DropdownMenuItem>
                       <DropdownMenuSeparator />
                       <DropdownMenuItem>
                         <LogOut className="me-2 h-4 w-4" />
-                        <span>Logout</span>
+                        <span>{t.dropdownMenuComponent.demo.logout}</span>
                       </DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>
@@ -303,27 +308,27 @@ export default function DropdownMenuPage() {
 
             {/* With Checkboxes */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">With Checkboxes</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.dropdownMenuComponent.examples.withCheckboxes}</h3>
               <Card>
                 <CardContent className="p-6 flex items-center justify-center">
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
-                      <Button variant="outline">View Options</Button>
+                      <Button variant="outline">{t.dropdownMenuComponent.demo.viewOptions}</Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent className="w-56">
-                      <DropdownMenuLabel>Toggle View</DropdownMenuLabel>
+                      <DropdownMenuLabel>{t.dropdownMenuComponent.demo.toggleView}</DropdownMenuLabel>
                       <DropdownMenuSeparator />
                       <DropdownMenuCheckboxItem
                         checked={showPanel}
                         onCheckedChange={setShowPanel}
                       >
-                        Show Panel
+                        {t.dropdownMenuComponent.demo.showPanel}
                       </DropdownMenuCheckboxItem>
                       <DropdownMenuCheckboxItem
                         checked={showSidebar}
                         onCheckedChange={setShowSidebar}
                       >
-                        Show Sidebar
+                        {t.dropdownMenuComponent.demo.showSidebar}
                       </DropdownMenuCheckboxItem>
                     </DropdownMenuContent>
                   </DropdownMenu>
@@ -336,22 +341,22 @@ export default function DropdownMenuPage() {
 
             {/* With Radio Group */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">With Radio Group</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.dropdownMenuComponent.examples.withRadio}</h3>
               <Card>
                 <CardContent className="p-6 flex items-center justify-center">
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                       <Button variant="outline">
-                        Position: {position}
+                        {t.dropdownMenuComponent.demo.position}: {position}
                       </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent className="w-56">
-                      <DropdownMenuLabel>Panel Position</DropdownMenuLabel>
+                      <DropdownMenuLabel>{t.dropdownMenuComponent.demo.panelPosition}</DropdownMenuLabel>
                       <DropdownMenuSeparator />
                       <DropdownMenuRadioGroup value={position} onValueChange={setPosition}>
-                        <DropdownMenuRadioItem value="top">Top</DropdownMenuRadioItem>
-                        <DropdownMenuRadioItem value="bottom">Bottom</DropdownMenuRadioItem>
-                        <DropdownMenuRadioItem value="right">Right</DropdownMenuRadioItem>
+                        <DropdownMenuRadioItem value="top">{t.dropdownMenuComponent.demo.top}</DropdownMenuRadioItem>
+                        <DropdownMenuRadioItem value="bottom">{t.dropdownMenuComponent.demo.bottom}</DropdownMenuRadioItem>
+                        <DropdownMenuRadioItem value="right">{t.dropdownMenuComponent.demo.right}</DropdownMenuRadioItem>
                       </DropdownMenuRadioGroup>
                     </DropdownMenuContent>
                   </DropdownMenu>
@@ -364,7 +369,7 @@ export default function DropdownMenuPage() {
 
             {/* Sub Menus */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">With Sub Menus</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.dropdownMenuComponent.examples.subMenus}</h3>
               <Card>
                 <CardContent className="p-6 flex items-center justify-center">
                   <DropdownMenu>
@@ -374,31 +379,31 @@ export default function DropdownMenuPage() {
                       </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent className="w-56">
-                      <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                      <DropdownMenuLabel>{t.dropdownMenuComponent.demo.actions}</DropdownMenuLabel>
                       <DropdownMenuSeparator />
                       <DropdownMenuGroup>
                         <DropdownMenuItem>
                           <User className="me-2 h-4 w-4" />
-                          <span>Profile</span>
+                          <span>{t.dropdownMenuComponent.demo.profile}</span>
                         </DropdownMenuItem>
                         <DropdownMenuSub>
                           <DropdownMenuSubTrigger>
                             <UserPlus className="me-2 h-4 w-4" />
-                            <span>Invite users</span>
+                            <span>{t.dropdownMenuComponent.demo.inviteUsers}</span>
                           </DropdownMenuSubTrigger>
                           <DropdownMenuSubContent>
                             <DropdownMenuItem>
                               <Mail className="me-2 h-4 w-4" />
-                              <span>Email</span>
+                              <span>{t.dropdownMenuComponent.demo.email}</span>
                             </DropdownMenuItem>
                             <DropdownMenuItem>
                               <MessageSquare className="me-2 h-4 w-4" />
-                              <span>Message</span>
+                              <span>{t.dropdownMenuComponent.demo.message}</span>
                             </DropdownMenuItem>
                             <DropdownMenuSeparator />
                             <DropdownMenuItem>
                               <PlusCircle className="me-2 h-4 w-4" />
-                              <span>More...</span>
+                              <span>{t.dropdownMenuComponent.demo.more}</span>
                             </DropdownMenuItem>
                           </DropdownMenuSubContent>
                         </DropdownMenuSub>
@@ -413,7 +418,7 @@ export default function DropdownMenuPage() {
 
         {/* Props */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Props</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.dropdownMenuComponent.props.title}</h2>
           <div className="space-y-8">
             <div>
               <h3 className="text-lg font-semibold mb-4">DropdownMenu</h3>
@@ -423,15 +428,14 @@ export default function DropdownMenuPage() {
           <Card className="mt-6">
             <CardContent className="p-6">
               <p className="text-sm text-muted-foreground">
-                This component is built on top of Radix UI&apos;s Dropdown Menu primitive. For a complete
-                list of props for each sub-component, refer to the{' '}
+                {t.dropdownMenuComponent.props.radixNote}{' '}
                 <a
                   href="https://www.radix-ui.com/docs/primitives/components/dropdown-menu"
                   className="text-primary hover:underline"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Radix UI documentation
+                  {t.dropdownMenuComponent.props.radixDocs}
                 </a>
                 .
               </p>
@@ -441,56 +445,54 @@ export default function DropdownMenuPage() {
 
         {/* Accessibility */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Accessibility</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.dropdownMenuComponent.accessibility.title}</h2>
           <Card>
             <CardContent className="p-6 space-y-4">
               <div>
-                <h3 className="font-semibold mb-2">Keyboard Navigation</h3>
+                <h3 className="font-semibold mb-2">{t.dropdownMenuComponent.accessibility.keyboard}</h3>
                 <ul className="space-y-2 text-muted-foreground text-sm">
                   <li className="flex items-start gap-2">
                     <code className="bg-muted px-1.5 py-0.5 rounded">Space</code>
-                    <span>Opens/closes the menu</span>
+                    <span>{t.dropdownMenuComponent.accessibility.space}</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <code className="bg-muted px-1.5 py-0.5 rounded">Enter</code>
-                    <span>Opens the menu and activates the first item</span>
+                    <span>{t.dropdownMenuComponent.accessibility.enter}</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <code className="bg-muted px-1.5 py-0.5 rounded">↓</code>
-                    <span>Moves focus to next menu item</span>
+                    <span>{t.dropdownMenuComponent.accessibility.arrowDown}</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <code className="bg-muted px-1.5 py-0.5 rounded">↑</code>
-                    <span>Moves focus to previous menu item</span>
+                    <span>{t.dropdownMenuComponent.accessibility.arrowUp}</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <code className="bg-muted px-1.5 py-0.5 rounded">→</code>
-                    <span>Opens sub menu</span>
+                    <span>{t.dropdownMenuComponent.accessibility.arrowRight}</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <code className="bg-muted px-1.5 py-0.5 rounded">←</code>
-                    <span>Closes sub menu</span>
+                    <span>{t.dropdownMenuComponent.accessibility.arrowLeft}</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <code className="bg-muted px-1.5 py-0.5 rounded">Esc</code>
-                    <span>Closes the menu</span>
+                    <span>{t.dropdownMenuComponent.accessibility.escape}</span>
                   </li>
                 </ul>
               </div>
               <Separator />
               <div>
-                <h3 className="font-semibold mb-2">ARIA Attributes</h3>
+                <h3 className="font-semibold mb-2">{t.dropdownMenuComponent.accessibility.aria}</h3>
                 <p className="text-muted-foreground text-sm">
-                  Radix UI automatically handles all ARIA attributes including roles, aria-expanded,
-                  aria-haspopup, and focus management for optimal screen reader support.
+                  {t.dropdownMenuComponent.accessibility.ariaDescription}
                 </p>
               </div>
               <Separator />
               <div>
-                <h3 className="font-semibold mb-2">Focus Management</h3>
+                <h3 className="font-semibold mb-2">{t.dropdownMenuComponent.accessibility.focus}</h3>
                 <p className="text-muted-foreground text-sm">
-                  When the menu opens, focus moves to the first menu item. When closed, focus returns
-                  to the trigger button. This creates a predictable and accessible user experience.
+                  {t.dropdownMenuComponent.accessibility.focusDescription}
                 </p>
               </div>
             </CardContent>
@@ -499,12 +501,11 @@ export default function DropdownMenuPage() {
 
         {/* RTL Considerations */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">RTL Considerations</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.dropdownMenuComponent.rtl.title}</h2>
           <Card>
             <CardContent className="p-6 space-y-4">
               <p className="text-muted-foreground">
-                Dropdown menus automatically support RTL layout. Icons, shortcuts, and sub-menu
-                indicators flip correctly using logical properties (ms-auto, ps-, pe-).
+                {t.dropdownMenuComponent.rtl.description}
               </p>
               <CodeBlock code={rtlCode} language="tsx" />
               <div className="grid gap-4 md:grid-cols-2 mt-6">

@@ -15,8 +15,13 @@ import {
   formatCompactNumber,
 } from '@/lib/arabic-numbers'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { useDirection } from '@/components/providers/direction-provider'
+import { content } from '@/lib/i18n'
 
 export default function ArabicNumberPage() {
+  const { locale } = useDirection()
+  const t = content[locale].arabicNumberComponent
+
   return (
     <div className="min-h-screen">
       <main id="main-content" className="container py-12">
@@ -25,52 +30,50 @@ export default function ArabicNumberPage() {
           <ol className="flex items-center gap-2 text-sm text-muted-foreground">
             <li>
               <Link href="/" className="hover:text-foreground transition-colors">
-                Home
+                {t.breadcrumb.home}
               </Link>
             </li>
             <li>/</li>
             <li>
               <Link href="/components" className="hover:text-foreground transition-colors">
-                Components
+                {t.breadcrumb.components}
               </Link>
             </li>
             <li>/</li>
-            <li className="text-foreground font-medium">Arabic Number</li>
+            <li className="text-foreground font-medium">{t.breadcrumb.arabicNumber}</li>
           </ol>
         </nav>
 
         {/* Page Header */}
         <div className="mb-12">
-          <h1 className="text-4xl font-bold tracking-tight mb-4">Arabic Number Utilities</h1>
+          <h1 className="text-4xl font-bold tracking-tight mb-4">{t.title}</h1>
           <p className="text-xl text-muted-foreground max-w-3xl">
-            Comprehensive utilities for formatting numbers in Arabic contexts. Includes
-            Arabic-Indic numeral conversion (٠-٩), SAR currency formatting, and locale-aware number
-            display. Perfect for GCC applications.
+            {t.description}
           </p>
         </div>
 
         {/* Preview */}
         <section className="mb-16">
-          <h2 className="text-3xl font-bold mb-6">Preview</h2>
+          <h2 className="text-3xl font-bold mb-6">{content[locale].componentDocs.preview}</h2>
           <ComponentShowcase>
             <ComponentShowcase.Demo>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-4xl mx-auto">
                 <Card>
                   <CardHeader>
-                    <CardTitle>Western Numerals</CardTitle>
-                    <CardDescription>Standard format</CardDescription>
+                    <CardTitle>{t.examples.westernNumerals}</CardTitle>
+                    <CardDescription>{t.examples.standardFormat}</CardDescription>
                   </CardHeader>
                   <CardContent className="space-y-3">
                     <div>
-                      <p className="text-sm text-muted-foreground mb-1">Number</p>
+                      <p className="text-sm text-muted-foreground mb-1">{t.examples.number}</p>
                       <ArabicNumber value={1234567.89} decimals={2} className="text-2xl" />
                     </div>
                     <div>
-                      <p className="text-sm text-muted-foreground mb-1">Currency</p>
+                      <p className="text-sm text-muted-foreground mb-1">{t.examples.currency}</p>
                       <ArabicNumber value={9999.99} format="currency" className="text-2xl" />
                     </div>
                     <div>
-                      <p className="text-sm text-muted-foreground mb-1">Percentage</p>
+                      <p className="text-sm text-muted-foreground mb-1">{t.examples.percentage}</p>
                       <ArabicNumber value={0.7545} format="percentage" className="text-2xl" />
                     </div>
                   </CardContent>
@@ -78,12 +81,12 @@ export default function ArabicNumberPage() {
 
                 <Card>
                   <CardHeader>
-                    <CardTitle>Arabic-Indic Numerals</CardTitle>
+                    <CardTitle>{t.examples.arabicIndicNumerals}</CardTitle>
                     <CardDescription>٠١٢٣٤٥٦٧٨٩</CardDescription>
                   </CardHeader>
                   <CardContent className="space-y-3">
                     <div>
-                      <p className="text-sm text-muted-foreground mb-1">Number</p>
+                      <p className="text-sm text-muted-foreground mb-1">{t.examples.number}</p>
                       <ArabicNumber
                         value={1234567.89}
                         decimals={2}
@@ -92,7 +95,7 @@ export default function ArabicNumberPage() {
                       />
                     </div>
                     <div>
-                      <p className="text-sm text-muted-foreground mb-1">Currency</p>
+                      <p className="text-sm text-muted-foreground mb-1">{t.examples.currency}</p>
                       <ArabicNumber
                         value={9999.99}
                         format="currency"
@@ -102,7 +105,7 @@ export default function ArabicNumberPage() {
                       />
                     </div>
                     <div>
-                      <p className="text-sm text-muted-foreground mb-1">Percentage</p>
+                      <p className="text-sm text-muted-foreground mb-1">{t.examples.percentage}</p>
                       <ArabicNumber
                         value={0.7545}
                         format="percentage"
@@ -120,10 +123,10 @@ export default function ArabicNumberPage() {
 
         {/* Installation */}
         <section className="mb-16">
-          <h2 className="text-3xl font-bold mb-6">Installation</h2>
+          <h2 className="text-3xl font-bold mb-6">{content[locale].componentDocs.installation}</h2>
           <div className="space-y-4">
             <p className="text-muted-foreground mb-4">
-              Copy the utility functions and component into your project:
+              {t.installation.copyFiles}
             </p>
             <CodeBlock
               language="bash"
@@ -134,20 +137,20 @@ cp lib/arabic-numbers.ts your-project/lib/
 cp components/ui/arabic-number.tsx your-project/components/ui/`}
             />
             <p className="text-sm text-muted-foreground mt-4">
-              Dependencies: No external dependencies required. Uses built-in Intl.NumberFormat API.
+              {t.installation.dependencies}
             </p>
           </div>
         </section>
 
         {/* Utility Functions */}
         <section className="mb-16">
-          <h2 className="text-3xl font-bold mb-6">Utility Functions</h2>
+          <h2 className="text-3xl font-bold mb-6">{t.sections.utilityFunctions}</h2>
 
           {/* Numeral Conversion */}
           <div className="mb-12">
-            <h3 className="text-2xl font-semibold mb-4">Numeral Conversion</h3>
+            <h3 className="text-2xl font-semibold mb-4">{t.sections.numeralConversion}</h3>
             <p className="text-muted-foreground mb-6">
-              Convert between Western (0-9) and Arabic-Indic (٠-٩) numerals.
+              {t.sections.numeralConversionDesc}
             </p>
 
             <div className="space-y-6">
@@ -206,16 +209,16 @@ toWesternNumerals("١٢٣٫٤٥")   // "123.45"`}
 
           {/* Currency Formatting */}
           <div className="mb-12">
-            <h3 className="text-2xl font-semibold mb-4">Currency Formatting (SAR)</h3>
+            <h3 className="text-2xl font-semibold mb-4">{t.sections.currencyFormatting}</h3>
             <p className="text-muted-foreground mb-6">
-              Format numbers as Saudi Riyal currency with full locale support.
+              {t.sections.currencyFormattingDesc}
             </p>
 
             <ComponentShowcase>
               <ComponentShowcase.Demo>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-4">
-                    <h4 className="font-semibold">English Format</h4>
+                    <h4 className="font-semibold">{t.examples.englishFormat}</h4>
                     <div>
                       <p className="text-sm text-muted-foreground mb-1">1,234.50 SAR</p>
                       <p className="text-2xl font-bold">{formatSAR(1234.5)}</p>
@@ -226,7 +229,7 @@ toWesternNumerals("١٢٣٫٤٥")   // "123.45"`}
                     </div>
                   </div>
                   <div className="space-y-4">
-                    <h4 className="font-semibold">Arabic Format</h4>
+                    <h4 className="font-semibold">{t.examples.arabicFormat}</h4>
                     <div>
                       <p className="text-sm text-muted-foreground mb-1">١٬٢٣٤٫٥٠ ر.س</p>
                       <p className="text-2xl font-bold">
@@ -266,24 +269,24 @@ formatSAR(1234.567, { decimals: 3 })  // "1,234.567 SAR"`}
 
           {/* Number Formatting */}
           <div className="mb-12">
-            <h3 className="text-2xl font-semibold mb-4">Number Formatting</h3>
+            <h3 className="text-2xl font-semibold mb-4">{t.sections.numberFormatting}</h3>
             <p className="text-muted-foreground mb-6">
-              Format numbers with locale-specific separators and decimal points.
+              {t.sections.numberFormattingDesc}
             </p>
 
             <ComponentShowcase>
               <ComponentShowcase.Demo>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
                   <div>
-                    <p className="text-sm text-muted-foreground mb-2">Standard</p>
+                    <p className="text-sm text-muted-foreground mb-2">{t.examples.standard}</p>
                     <p className="text-3xl font-bold">{formatNumber(1234567.89)}</p>
                   </div>
                   <div>
-                    <p className="text-sm text-muted-foreground mb-2">Arabic Locale</p>
+                    <p className="text-sm text-muted-foreground mb-2">{t.examples.arabicLocale}</p>
                     <p className="text-3xl font-bold">{formatNumber(1234567.89, { locale: 'ar' })}</p>
                   </div>
                   <div>
-                    <p className="text-sm text-muted-foreground mb-2">Arabic Numerals</p>
+                    <p className="text-sm text-muted-foreground mb-2">{t.examples.arabicNumerals}</p>
                     <p className="text-3xl font-bold">
                       {formatNumber(1234567.89, { locale: 'ar', useArabicNumerals: true })}
                     </p>
@@ -309,9 +312,9 @@ formatNumber(1000000, { useGrouping: false })  // "1000000"`}
 
           {/* Percentage Formatting */}
           <div className="mb-12">
-            <h3 className="text-2xl font-semibold mb-4">Percentage Formatting</h3>
+            <h3 className="text-2xl font-semibold mb-4">{t.sections.percentageFormatting}</h3>
             <p className="text-muted-foreground mb-6">
-              Format decimal numbers as percentages (0.15 = 15%).
+              {t.sections.percentageFormattingDesc}
             </p>
 
             <ComponentShowcase>
@@ -350,9 +353,9 @@ formatPercentage(0.999, {
 
           {/* Compact Formatting */}
           <div className="mb-12">
-            <h3 className="text-2xl font-semibold mb-4">Compact Number Formatting</h3>
+            <h3 className="text-2xl font-semibold mb-4">{t.sections.compactFormatting}</h3>
             <p className="text-muted-foreground mb-6">
-              Format large numbers in compact form (1K, 1M, 1B).
+              {t.sections.compactFormattingDesc}
             </p>
 
             <ComponentShowcase>
@@ -371,7 +374,7 @@ formatPercentage(0.999, {
                     <p className="text-3xl font-bold">{formatCompactNumber(1234567890)}</p>
                   </div>
                   <div>
-                    <p className="text-sm text-muted-foreground mb-2">Arabic</p>
+                    <p className="text-sm text-muted-foreground mb-2">{t.examples.arabic}</p>
                     <p className="text-3xl font-bold">
                       {formatCompactNumber(1234567, { locale: 'ar', useArabicNumerals: true })}
                     </p>
@@ -397,15 +400,15 @@ formatCompactNumber(1234567, {
 
         {/* Display Component */}
         <section className="mb-16">
-          <h2 className="text-3xl font-bold mb-6">Display Component</h2>
+          <h2 className="text-3xl font-bold mb-6">{t.sections.displayComponent}</h2>
           <p className="text-muted-foreground mb-6">
-            Use the ArabicNumber component for consistent number display in your UI.
+            {t.sections.displayComponentDesc}
           </p>
 
           <div className="space-y-8">
             {/* Inline Usage */}
             <div>
-              <h3 className="text-xl font-semibold mb-4">Inline Usage</h3>
+              <h3 className="text-xl font-semibold mb-4">{t.examples.inlineUsage}</h3>
               <ComponentShowcase>
                 <ComponentShowcase.Demo>
                   <div className="max-w-2xl mx-auto space-y-4">
@@ -452,7 +455,7 @@ formatCompactNumber(1234567, {
 
             {/* Badge Variant */}
             <div>
-              <h3 className="text-xl font-semibold mb-4">Badge Variant</h3>
+              <h3 className="text-xl font-semibold mb-4">{t.examples.badgeVariant}</h3>
               <ComponentShowcase>
                 <ComponentShowcase.Demo>
                   <div className="flex flex-wrap gap-3 justify-center">
@@ -480,50 +483,50 @@ formatCompactNumber(1234567, {
 
         {/* Component Props */}
         <section className="mb-16">
-          <h2 className="text-3xl font-bold mb-6">Component Props</h2>
+          <h2 className="text-3xl font-bold mb-6">{t.sections.componentProps}</h2>
           <PropsTable
             props={[
               {
                 name: 'value',
                 type: 'number',
                 required: true,
-                description: 'The number to display.',
+                description: t.props.value,
               },
               {
                 name: 'format',
                 type: '"number" | "currency" | "percentage"',
                 default: '"number"',
-                description: 'Format type for the number.',
+                description: t.props.format,
               },
               {
                 name: 'useArabicNumerals',
                 type: 'boolean',
                 default: 'false',
-                description: 'Use Arabic-Indic numerals (٠-٩) instead of Western (0-9).',
+                description: t.props.useArabicNumerals,
               },
               {
                 name: 'locale',
                 type: '"en" | "ar"',
                 default: '"en"',
-                description: 'Locale for formatting (affects separators and symbols).',
+                description: t.props.locale,
               },
               {
                 name: 'decimals',
                 type: 'number',
                 default: 'undefined',
-                description: 'Number of decimal places to display.',
+                description: t.props.decimals,
               },
               {
                 name: 'variant',
                 type: '"default" | "inline" | "badge"',
                 default: '"default"',
-                description: 'Visual style variant.',
+                description: t.props.variant,
               },
               {
                 name: 'className',
                 type: 'string',
                 default: 'undefined',
-                description: 'Additional CSS classes.',
+                description: t.props.className,
               },
             ]}
           />
@@ -531,11 +534,11 @@ formatCompactNumber(1234567, {
 
         {/* Use Cases */}
         <section className="mb-16">
-          <h2 className="text-3xl font-bold mb-6">Common Use Cases</h2>
+          <h2 className="text-3xl font-bold mb-6">{t.sections.commonUseCases}</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <Card>
               <CardHeader>
-                <CardTitle>E-commerce Prices</CardTitle>
+                <CardTitle>{t.useCases.ecommercePrices}</CardTitle>
               </CardHeader>
               <CardContent>
                 <CodeBlock
@@ -552,7 +555,7 @@ formatCompactNumber(1234567, {
 
             <Card>
               <CardHeader>
-                <CardTitle>Statistics & Analytics</CardTitle>
+                <CardTitle>{t.useCases.statisticsAnalytics}</CardTitle>
               </CardHeader>
               <CardContent>
                 <CodeBlock
@@ -568,7 +571,7 @@ formatCompactNumber(1234567, {
 
             <Card>
               <CardHeader>
-                <CardTitle>Discount Percentages</CardTitle>
+                <CardTitle>{t.useCases.discountPercentages}</CardTitle>
               </CardHeader>
               <CardContent>
                 <CodeBlock
@@ -585,7 +588,7 @@ formatCompactNumber(1234567, {
 
             <Card>
               <CardHeader>
-                <CardTitle>Compact Numbers</CardTitle>
+                <CardTitle>{t.useCases.compactNumbers}</CardTitle>
               </CardHeader>
               <CardContent>
                 <CodeBlock
@@ -600,24 +603,21 @@ formatCompactNumber(1234567, {
 
         {/* Accessibility */}
         <section className="mb-16">
-          <h2 className="text-3xl font-bold mb-6">Accessibility</h2>
+          <h2 className="text-3xl font-bold mb-6">{content[locale].componentDocs.accessibility}</h2>
           <div className="space-y-4 text-muted-foreground">
-            <p>Arabic Number utilities follow accessibility best practices:</p>
+            <p>{t.accessibility.description}</p>
             <ul className="list-disc list-inside space-y-2 ms-4">
               <li>
-                <strong>Tabular Numerals:</strong> Uses tabular-nums for consistent width and
-                alignment.
+                <strong>{t.accessibility.tabularNumerals}</strong> {t.accessibility.tabularNumeralsDesc}
               </li>
               <li>
-                <strong>Semantic HTML:</strong> Numbers are displayed in appropriate semantic
-                elements.
+                <strong>{t.accessibility.semanticHtml}</strong> {t.accessibility.semanticHtmlDesc}
               </li>
               <li>
-                <strong>High Contrast:</strong> Default styling maintains proper contrast ratios.
+                <strong>{t.accessibility.highContrast}</strong> {t.accessibility.highContrastDesc}
               </li>
               <li>
-                <strong>Screen Readers:</strong> Numbers are read correctly by screen readers in
-                both formats.
+                <strong>{t.accessibility.screenReaders}</strong> {t.accessibility.screenReadersDesc}
               </li>
             </ul>
           </div>
@@ -625,27 +625,24 @@ formatCompactNumber(1234567, {
 
         {/* RTL Considerations */}
         <section className="mb-16">
-          <h2 className="text-3xl font-bold mb-6">RTL Considerations</h2>
+          <h2 className="text-3xl font-bold mb-6">{content[locale].componentDocs.rtlConsiderations}</h2>
           <div className="space-y-4 text-muted-foreground">
-            <p>These utilities are built with RTL support in mind:</p>
+            <p>{t.rtl.description}</p>
             <ul className="list-disc list-inside space-y-2 ms-4">
               <li>
-                <strong>Automatic Locale Detection:</strong> Component auto-detects Arabic locale
-                for proper formatting.
+                <strong>{t.rtl.autoLocale}</strong> {t.rtl.autoLocaleDesc}
               </li>
               <li>
-                <strong>Arabic-Indic Numerals:</strong> Full support for ٠١٢٣٤٥٦٧٨٩ numerals.
+                <strong>{t.rtl.arabicIndicNumerals}</strong> {t.rtl.arabicIndicNumeralsDesc}
               </li>
               <li>
-                <strong>Proper Separators:</strong> Uses locale-appropriate thousands separators
-                and decimal points.
+                <strong>{t.rtl.properSeparators}</strong> {t.rtl.properSeparatorsDesc}
               </li>
               <li>
-                <strong>Currency Symbols:</strong> Shows &quot;ر.س&quot; (Riyal symbol) in Arabic mode.
+                <strong>{t.rtl.currencySymbols}</strong> {t.rtl.currencySymbolsDesc}
               </li>
               <li>
-                <strong>Percentage Format:</strong> Percentage symbol position adapts to locale
-                (٪٧٥ vs 75%).
+                <strong>{t.rtl.percentageFormat}</strong> {t.rtl.percentageFormatDesc}
               </li>
             </ul>
           </div>
@@ -653,24 +650,24 @@ formatCompactNumber(1234567, {
 
         {/* Related Components */}
         <section className="mb-16">
-          <h2 className="text-3xl font-bold mb-6">Related Components</h2>
+          <h2 className="text-3xl font-bold mb-6">{t.relatedComponents.title}</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <Link
               href="/components/hijri-date"
               className="block p-4 border rounded-lg hover:border-primary transition-colors"
             >
-              <h3 className="font-semibold mb-2">Hijri Date</h3>
+              <h3 className="font-semibold mb-2">{t.relatedComponents.hijriDate}</h3>
               <p className="text-sm text-muted-foreground">
-                Display dual calendar dates with Arabic numerals.
+                {t.relatedComponents.hijriDateDesc}
               </p>
             </Link>
             <Link
               href="/components/badge"
               className="block p-4 border rounded-lg hover:border-primary transition-colors"
             >
-              <h3 className="font-semibold mb-2">Badge</h3>
+              <h3 className="font-semibold mb-2">{t.relatedComponents.badge}</h3>
               <p className="text-sm text-muted-foreground">
-                Similar badge styling for numbers and labels.
+                {t.relatedComponents.badgeDesc}
               </p>
             </Link>
           </div>

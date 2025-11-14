@@ -12,16 +12,31 @@ interface DirectionContextType {
 
 const DirectionContext = React.createContext<DirectionContextType | undefined>(undefined)
 
+const STORAGE_KEY = 'noor-ui-locale'
+
 export function DirectionProvider({ children }: { children: React.ReactNode }) {
   const [direction, setDirectionState] = React.useState<Direction>('ltr')
   const [locale, setLocaleState] = React.useState<'en' | 'ar'>('en')
 
   React.useEffect(() => {
-    // Initialize from document
+    // Initialize from localStorage first, then fall back to document
+    const savedLocale = localStorage.getItem(STORAGE_KEY) as 'en' | 'ar' | null
     const htmlDir = document.documentElement.dir as Direction
     const htmlLang = document.documentElement.lang as 'en' | 'ar'
-    setDirectionState(htmlDir || 'ltr')
-    setLocaleState(htmlLang === 'ar' ? 'ar' : 'en')
+
+    const initialLocale = savedLocale || (htmlLang === 'ar' ? 'ar' : 'en')
+    const initialDirection = initialLocale === 'ar' ? 'rtl' : 'ltr'
+
+    setDirectionState(initialDirection)
+    setLocaleState(initialLocale)
+
+    // Apply to document if different
+    if (document.documentElement.dir !== initialDirection) {
+      document.documentElement.dir = initialDirection
+    }
+    if (document.documentElement.lang !== initialLocale) {
+      document.documentElement.lang = initialLocale
+    }
   }, [])
 
   const setDirection = React.useCallback((newDirection: Direction) => {
@@ -30,6 +45,7 @@ export function DirectionProvider({ children }: { children: React.ReactNode }) {
     const newLocale = newDirection === 'rtl' ? 'ar' : 'en'
     setLocaleState(newLocale)
     document.documentElement.lang = newLocale
+    localStorage.setItem(STORAGE_KEY, newLocale)
   }, [])
 
   const setLocale = React.useCallback((newLocale: 'en' | 'ar') => {
@@ -38,6 +54,7 @@ export function DirectionProvider({ children }: { children: React.ReactNode }) {
     setDirectionState(newDirection)
     document.documentElement.dir = newDirection
     document.documentElement.lang = newLocale
+    localStorage.setItem(STORAGE_KEY, newLocale)
   }, [])
 
   return (

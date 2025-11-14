@@ -10,84 +10,86 @@ import { ComponentShowcase } from '@/components/docs/component-showcase'
 import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
 import { Sparkles } from 'lucide-react'
+import { useDirection } from '@/components/providers/direction-provider'
+import { content } from '@/lib/i18n'
 
-const calendarProps: PropDefinition[] = [
+const getCalendarProps = (t: typeof content.en | typeof content.ar): PropDefinition[] => [
   {
     name: 'mode',
     type: "'single' | 'range'",
     default: "'single'",
     required: false,
-    description: 'Selection mode: single date or date range',
+    description: t.calendarComponent.props.mode,
   },
   {
     name: 'selected',
     type: 'Date',
     default: 'undefined',
     required: false,
-    description: 'Selected date (single mode)',
+    description: t.calendarComponent.props.selected,
   },
   {
     name: 'selectedRange',
     type: 'DateRange',
     default: 'undefined',
     required: false,
-    description: 'Selected date range (range mode): { from: Date | undefined, to: Date | undefined }',
+    description: t.calendarComponent.props.selectedRange,
   },
   {
     name: 'onSelect',
     type: '(date: Date | DateRange | undefined) => void',
     default: 'undefined',
     required: false,
-    description: 'Callback when date is selected',
+    description: t.calendarComponent.props.onSelect,
   },
   {
     name: 'showHijri',
     type: 'boolean',
     default: 'false',
     required: false,
-    description: 'Show Hijri dates below Gregorian dates',
+    description: t.calendarComponent.props.showHijri,
   },
   {
     name: 'events',
     type: 'CalendarEvent[]',
     default: '[]',
     required: false,
-    description: 'Array of events to display with color indicators',
+    description: t.calendarComponent.props.events,
   },
   {
     name: 'disabled',
     type: 'Date[] | ((date: Date) => boolean)',
     default: 'undefined',
     required: false,
-    description: 'Disabled dates (array or function)',
+    description: t.calendarComponent.props.disabled,
   },
   {
     name: 'minDate',
     type: 'Date',
     default: 'undefined',
     required: false,
-    description: 'Minimum selectable date',
+    description: t.calendarComponent.props.minDate,
   },
   {
     name: 'maxDate',
     type: 'Date',
     default: 'undefined',
     required: false,
-    description: 'Maximum selectable date',
+    description: t.calendarComponent.props.maxDate,
   },
   {
     name: 'locale',
     type: "'en' | 'ar'",
     default: "'en'",
     required: false,
-    description: 'Display locale for month names and weekdays',
+    description: t.calendarComponent.props.locale,
   },
   {
     name: 'getHijriDate',
     type: '(date: Date) => { hijri: string; hijriDay: string }',
     default: 'undefined',
     required: false,
-    description: 'Custom Hijri date provider function',
+    description: t.calendarComponent.props.getHijriDate,
   },
 ]
 
@@ -183,6 +185,10 @@ const disabledDates = [
 />`
 
 export default function CalendarPage() {
+  const { locale } = useDirection()
+  const t = content[locale]
+  const calendarProps = getCalendarProps(t)
+
   const [singleDate, setSingleDate] = React.useState<Date>()
   const [rangeDate, setRangeDate] = React.useState<DateRange>()
   const [hijriDate, setHijriDate] = React.useState<Date>()
@@ -214,38 +220,37 @@ export default function CalendarPage() {
           <ol className="flex items-center gap-2 text-sm text-muted-foreground">
             <li>
               <Link href="/" className="hover:text-foreground transition-colors">
-                Home
+                {t.common.home}
               </Link>
             </li>
             <li>/</li>
             <li>
               <Link href="/components" className="hover:text-foreground transition-colors">
-                Components
+                {t.nav.components}
               </Link>
             </li>
             <li>/</li>
-            <li className="text-foreground font-medium">Calendar</li>
+            <li className="text-foreground font-medium">{t.calendarComponent.title}</li>
           </ol>
         </nav>
 
         {/* Page Header */}
         <div className="mb-12">
           <div className="flex items-center gap-3 mb-4">
-            <h1 className="text-4xl font-bold tracking-tight">Calendar</h1>
+            <h1 className="text-4xl font-bold tracking-tight">{t.calendarComponent.title}</h1>
             <Badge variant="outline" className="gap-1">
               <Sparkles className="h-3 w-3" />
               GCC
             </Badge>
           </div>
           <p className="text-xl text-muted-foreground max-w-3xl">
-            A date picker calendar with Hijri calendar support, event markers, and range selection.
-            Perfect for GCC applications requiring dual calendar display.
+            {t.calendarComponent.description}
           </p>
         </div>
 
         {/* Preview */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Preview</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.calendarComponent.preview}</h2>
           <ComponentShowcase>
             <ComponentShowcase.Demo>
               <div className="max-w-md mx-auto">
@@ -265,65 +270,65 @@ export default function CalendarPage() {
 
         {/* Installation */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Installation</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.calendarComponent.installation}</h2>
           <CodeBlock code={installCode} language="bash" title="Terminal" />
         </section>
 
         {/* Usage */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Basic Usage</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.calendarComponent.usage}</h2>
           <CodeBlock code={basicUsageCode} language="tsx" title="React" />
         </section>
 
         {/* Features */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Features</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.calendarComponent.features.title}</h2>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             <Card>
               <CardContent className="p-6">
-                <h3 className="font-semibold mb-2">Dual Calendar</h3>
+                <h3 className="font-semibold mb-2">{t.calendarComponent.features.dualCalendar}</h3>
                 <p className="text-sm text-muted-foreground">
-                  Show both Gregorian and Hijri dates simultaneously
+                  {t.calendarComponent.features.dualCalendarDesc}
                 </p>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="p-6">
-                <h3 className="font-semibold mb-2">Range Selection</h3>
+                <h3 className="font-semibold mb-2">{t.calendarComponent.features.rangeSelection}</h3>
                 <p className="text-sm text-muted-foreground">
-                  Select single dates or date ranges with visual feedback
+                  {t.calendarComponent.features.rangeSelectionDesc}
                 </p>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="p-6">
-                <h3 className="font-semibold mb-2">Event Markers</h3>
+                <h3 className="font-semibold mb-2">{t.calendarComponent.features.eventMarkers}</h3>
                 <p className="text-sm text-muted-foreground">
-                  Display events with color-coded indicators
+                  {t.calendarComponent.features.eventMarkersDesc}
                 </p>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="p-6">
-                <h3 className="font-semibold mb-2">Disabled Dates</h3>
+                <h3 className="font-semibold mb-2">{t.calendarComponent.features.disabledDates}</h3>
                 <p className="text-sm text-muted-foreground">
-                  Disable specific dates or date ranges
+                  {t.calendarComponent.features.disabledDatesDesc}
                 </p>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="p-6">
-                <h3 className="font-semibold mb-2">Navigation</h3>
+                <h3 className="font-semibold mb-2">{t.calendarComponent.features.navigation}</h3>
                 <p className="text-sm text-muted-foreground">
-                  Previous/next month and quick &ldquo;Today&rdquo; button
+                  {t.calendarComponent.features.navigationDesc}
                 </p>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="p-6">
-                <h3 className="font-semibold mb-2">Bilingual</h3>
+                <h3 className="font-semibold mb-2">{t.calendarComponent.features.bilingual}</h3>
                 <p className="text-sm text-muted-foreground">
-                  Full English/Arabic support with RTL layout
+                  {t.calendarComponent.features.bilingualDesc}
                 </p>
               </CardContent>
             </Card>
@@ -332,16 +337,16 @@ export default function CalendarPage() {
 
         {/* Examples */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Examples</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.calendarComponent.examples.title}</h2>
 
           <div className="space-y-12">
             {/* Range Selection */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">Date Range Selection</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.calendarComponent.examples.rangeSelection}</h3>
               <Card>
                 <CardContent className="p-6">
                   <p className="text-sm text-muted-foreground mb-4">
-                    Select a start and end date. Click once to set the start, click again to complete the range.
+                    {t.calendarComponent.examples.rangeSelectionDesc}
                   </p>
                   <div className="max-w-md mx-auto">
                     <Calendar
@@ -358,7 +363,7 @@ export default function CalendarPage() {
                   </div>
                   {rangeDate?.from && (
                     <div className="mt-4 text-sm text-center">
-                      <span className="font-medium">Selected: </span>
+                      <span className="font-medium">{t.calendarComponent.examples.selected}: </span>
                       {rangeDate.from.toLocaleDateString()}
                       {rangeDate.to && ` - ${rangeDate.to.toLocaleDateString()}`}
                     </div>
@@ -372,11 +377,11 @@ export default function CalendarPage() {
 
             {/* With Hijri Dates */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">With Hijri Dates</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.calendarComponent.examples.withHijri}</h3>
               <Card>
                 <CardContent className="p-6">
                   <p className="text-sm text-muted-foreground mb-4">
-                    Display Hijri dates alongside Gregorian dates. Perfect for Islamic calendar awareness.
+                    {t.calendarComponent.examples.withHijriDesc}
                   </p>
                   <div className="max-w-md mx-auto">
                     <Calendar
@@ -399,11 +404,11 @@ export default function CalendarPage() {
 
             {/* With Events */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">With Event Markers</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.calendarComponent.examples.withEvents}</h3>
               <Card>
                 <CardContent className="p-6">
                   <p className="text-sm text-muted-foreground mb-4">
-                    Display events with colored indicators. Up to 3 dots shown per day, with a legend below.
+                    {t.calendarComponent.examples.withEventsDesc}
                   </p>
                   <div className="max-w-md mx-auto">
                     <Calendar
@@ -426,11 +431,11 @@ export default function CalendarPage() {
 
             {/* Disabled Dates */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">Disabled Dates</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.calendarComponent.examples.disabledDates}</h3>
               <Card>
                 <CardContent className="p-6">
                   <p className="text-sm text-muted-foreground mb-4">
-                    Disable specific dates or use a function to disable date patterns (e.g., weekends).
+                    {t.calendarComponent.examples.disabledDatesDesc}
                   </p>
                   <div className="max-w-md mx-auto">
                     <Calendar
@@ -486,17 +491,16 @@ export default function CalendarPage() {
 
         {/* Hijri Integration */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Hijri Calendar Integration</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.calendarComponent.hijriIntegration.title}</h2>
           <Card>
             <CardContent className="p-6 space-y-4">
               <p className="text-muted-foreground">
-                The Calendar component includes a simple Hijri date approximation for demonstration.
-                For production use with accurate Hijri dates, integrate a dedicated library:
+                {t.calendarComponent.hijriIntegration.description}
               </p>
 
               <div className="space-y-4">
                 <div>
-                  <h4 className="font-semibold mb-2">Using @formkit/hijri</h4>
+                  <h4 className="font-semibold mb-2">{t.calendarComponent.hijriIntegration.usingFormkit}</h4>
                   <CodeBlock
                     code={`import { toHijri } from '@formkit/hijri'
 import { Calendar } from '@/components/ui/calendar'
@@ -521,7 +525,7 @@ const getAccurateHijri = (date: Date) => {
 
                 <div>
                   <p className="text-sm text-muted-foreground">
-                    Install the library: <code className="bg-muted px-2 py-1 rounded">npm install @formkit/hijri</code>
+                    {t.calendarComponent.hijriIntegration.installLibrary} <code className="bg-muted px-2 py-1 rounded">npm install @formkit/hijri</code>
                   </p>
                 </div>
               </div>
@@ -531,38 +535,34 @@ const getAccurateHijri = (date: Date) => {
 
         {/* Accessibility */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Accessibility</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.calendarComponent.accessibility.title}</h2>
           <Card>
             <CardContent className="p-6 space-y-4">
               <div>
-                <h3 className="font-semibold mb-2">Keyboard Navigation</h3>
+                <h3 className="font-semibold mb-2">{t.calendarComponent.accessibility.keyboardNavigation}</h3>
                 <p className="text-muted-foreground">
-                  Calendar dates are keyboard accessible with Tab navigation. Each date button
-                  can be activated with Enter or Space.
+                  {t.calendarComponent.accessibility.keyboardNavigationDesc}
                 </p>
               </div>
               <Separator />
               <div>
-                <h3 className="font-semibold mb-2">Focus Management</h3>
+                <h3 className="font-semibold mb-2">{t.calendarComponent.accessibility.focusManagement}</h3>
                 <p className="text-muted-foreground">
-                  Clear focus indicators with ring utilities. Today&apos;s date is visually distinguished
-                  with a bold ring.
+                  {t.calendarComponent.accessibility.focusManagementDesc}
                 </p>
               </div>
               <Separator />
               <div>
-                <h3 className="font-semibold mb-2">Screen Readers</h3>
+                <h3 className="font-semibold mb-2">{t.calendarComponent.accessibility.screenReaders}</h3>
                 <p className="text-muted-foreground">
-                  Date values are properly formatted and announced. Disabled dates are marked
-                  as disabled in the accessibility tree.
+                  {t.calendarComponent.accessibility.screenReadersDesc}
                 </p>
               </div>
               <Separator />
               <div>
-                <h3 className="font-semibold mb-2">Visual Feedback</h3>
+                <h3 className="font-semibold mb-2">{t.calendarComponent.accessibility.visualFeedback}</h3>
                 <p className="text-muted-foreground">
-                  Selected dates, ranges, and current day are clearly indicated with color and
-                  typography changes.
+                  {t.calendarComponent.accessibility.visualFeedbackDesc}
                 </p>
               </div>
             </CardContent>
@@ -571,37 +571,34 @@ const getAccurateHijri = (date: Date) => {
 
         {/* RTL Considerations */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">RTL Considerations</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.calendarComponent.rtl.title}</h2>
           <Card>
             <CardContent className="p-6 space-y-4">
               <div>
-                <h3 className="font-semibold mb-2">Automatic Layout Adaptation</h3>
+                <h3 className="font-semibold mb-2">{t.calendarComponent.rtl.automaticLayout}</h3>
                 <p className="text-muted-foreground">
-                  Navigation buttons automatically flip in RTL mode. Left chevron goes to next month
-                  in RTL, previous month in LTR.
+                  {t.calendarComponent.rtl.automaticLayoutDesc}
                 </p>
               </div>
               <Separator />
               <div>
-                <h3 className="font-semibold mb-2">Localized Month Names</h3>
+                <h3 className="font-semibold mb-2">{t.calendarComponent.rtl.localizedMonths}</h3>
                 <p className="text-muted-foreground">
-                  Month and weekday names use the specified locale (ar-SA or en-US) with proper
-                  formatting via toLocaleDateString.
+                  {t.calendarComponent.rtl.localizedMonthsDesc}
                 </p>
               </div>
               <Separator />
               <div>
-                <h3 className="font-semibold mb-2">Hijri Date Display</h3>
+                <h3 className="font-semibold mb-2">{t.calendarComponent.rtl.hijriDisplay}</h3>
                 <p className="text-muted-foreground">
-                  Hijri dates display correctly in both Arabic and English, with proper numeral
-                  formatting based on locale.
+                  {t.calendarComponent.rtl.hijriDisplayDesc}
                 </p>
               </div>
               <Separator />
               <div>
-                <h3 className="font-semibold mb-2">Event Legend</h3>
+                <h3 className="font-semibold mb-2">{t.calendarComponent.rtl.eventLegend}</h3>
                 <p className="text-muted-foreground">
-                  Event listings adapt to text direction with proper spacing and alignment.
+                  {t.calendarComponent.rtl.eventLegendDesc}
                 </p>
               </div>
             </CardContent>
@@ -610,14 +607,14 @@ const getAccurateHijri = (date: Date) => {
 
         {/* Related Components */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Related Components</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.calendarComponent.related.title}</h2>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             <Link href="/components/hijri-date">
               <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold">Hijri Date</h3>
+                  <h3 className="font-semibold">{t.calendarComponent.related.hijriDate}</h3>
                   <p className="text-sm text-muted-foreground mt-1">
-                    Dual calendar date display
+                    {t.calendarComponent.related.hijriDateDesc}
                   </p>
                 </CardContent>
               </Card>
@@ -625,9 +622,9 @@ const getAccurateHijri = (date: Date) => {
             <Link href="/components/button">
               <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold">Button</h3>
+                  <h3 className="font-semibold">{t.calendarComponent.related.button}</h3>
                   <p className="text-sm text-muted-foreground mt-1">
-                    Used for navigation
+                    {t.calendarComponent.related.buttonDesc}
                   </p>
                 </CardContent>
               </Card>
@@ -635,9 +632,9 @@ const getAccurateHijri = (date: Date) => {
             <Link href="/components/badge">
               <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold">Badge</h3>
+                  <h3 className="font-semibold">{t.calendarComponent.related.badge}</h3>
                   <p className="text-sm text-muted-foreground mt-1">
-                    Event indicators
+                    {t.calendarComponent.related.badgeDesc}
                   </p>
                 </CardContent>
               </Card>

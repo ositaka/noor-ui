@@ -7,6 +7,8 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
+import { useDirection } from '@/components/providers/direction-provider'
+import { content } from '@/lib/i18n'
 import {
   MousePointer2,
   Square,
@@ -50,10 +52,10 @@ import {
   Box,
 } from 'lucide-react'
 
-const componentCategories = [
+const componentCategories = (t: typeof content.en | typeof content.ar) => [
   {
-    name: 'Core',
-    description: 'Essential building blocks for your UI',
+    name: t.components.categories.core,
+    description: t.components.categories.coreDesc,
     components: [
       { name: 'Button', icon: MousePointer2, href: '/components/button', status: 'ready' },
       { name: 'Card', icon: Square, href: '/components/card', status: 'ready' },
@@ -66,8 +68,8 @@ const componentCategories = [
     ],
   },
   {
-    name: 'Forms',
-    description: 'Form elements with validation support',
+    name: t.components.categories.forms,
+    description: t.components.categories.formsDesc,
     components: [
       { name: 'Form', icon: CheckSquare, href: '/components/form', status: 'ready' },
       { name: 'Checkbox', icon: CheckSquare, href: '/components/checkbox', status: 'ready' },
@@ -79,8 +81,8 @@ const componentCategories = [
     ],
   },
   {
-    name: 'Data Display',
-    description: 'Components for displaying data and information',
+    name: t.components.categories.dataDisplay,
+    description: t.components.categories.dataDisplayDesc,
     components: [
       { name: 'Table', icon: Layers, href: '/components/table', status: 'ready' },
       { name: 'DataTable', icon: TableIcon, href: '/components/data-table', status: 'ready' },
@@ -90,8 +92,8 @@ const componentCategories = [
     ],
   },
   {
-    name: 'Feedback',
-    description: 'Components for user notifications and feedback',
+    name: t.components.categories.feedback,
+    description: t.components.categories.feedbackDesc,
     components: [
       { name: 'Alert', icon: AlertCircle, href: '/components/alert', status: 'ready' },
       { name: 'Toast', icon: MessageSquare, href: '/components/toast', status: 'ready' },
@@ -103,8 +105,8 @@ const componentCategories = [
     ],
   },
   {
-    name: 'Navigation',
-    description: 'Components for site navigation and menus',
+    name: t.components.categories.navigation,
+    description: t.components.categories.navigationDesc,
     components: [
       { name: 'Tabs', icon: Menu, href: '/components/tabs', status: 'ready' },
       { name: 'Breadcrumb', icon: Home, href: '/components/breadcrumb', status: 'ready' },
@@ -114,8 +116,8 @@ const componentCategories = [
     ],
   },
   {
-    name: 'Overlays & Layout',
-    description: 'Components for overlays and content organization',
+    name: t.components.categories.overlays,
+    description: t.components.categories.overlaysDesc,
     components: [
       { name: 'Sheet', icon: PanelLeft, href: '/components/sheet', status: 'ready' },
       { name: 'Accordion', icon: ChevronsUpDown, href: '/components/accordion', status: 'ready' },
@@ -124,8 +126,8 @@ const componentCategories = [
     ],
   },
   {
-    name: 'GCC-Specific',
-    description: 'Components tailored for the GCC market and Islamic applications',
+    name: t.components.categories.gcc,
+    description: t.components.categories.gccDesc,
     components: [
       { name: 'Prayer Times', icon: Clock, href: '/components/prayer-times', status: 'ready' },
       { name: 'Hijri Date', icon: Clock, href: '/components/hijri-date', status: 'ready' },
@@ -135,8 +137,8 @@ const componentCategories = [
     ],
   },
   {
-    name: 'Advanced Forms & Inputs',
-    description: 'Advanced form components for complex input scenarios',
+    name: t.components.categories.advancedForms,
+    description: t.components.categories.advancedFormsDesc,
     components: [
       { name: 'File Upload', icon: Upload, href: '/components/file-upload', status: 'ready' },
       { name: 'Rich Text Editor', icon: FileEdit, href: '/components/rich-text-editor', status: 'ready' },
@@ -147,8 +149,8 @@ const componentCategories = [
     ],
   },
   {
-    name: 'Layout & Shell',
-    description: 'Application layout and shell components for building dashboards',
+    name: t.components.categories.layout,
+    description: t.components.categories.layoutDesc,
     components: [
       { name: 'Dashboard Shell', icon: Layout, href: '/components/dashboard-shell', status: 'ready' },
       { name: 'Sidebar', icon: Sidebar, href: '/components/sidebar', status: 'coming-soon' },
@@ -156,8 +158,8 @@ const componentCategories = [
     ],
   },
   {
-    name: 'User Interface',
-    description: 'User-facing interactive components for common UX patterns',
+    name: t.components.categories.userInterface,
+    description: t.components.categories.userInterfaceDesc,
     components: [
       { name: 'User Menu', icon: UserCircle, href: '/components/user-menu', status: 'ready' },
       { name: 'Notification Center', icon: Bell, href: '/components/notification-center', status: 'ready' },
@@ -165,8 +167,8 @@ const componentCategories = [
     ],
   },
   {
-    name: 'AI/LLM Shell',
-    description: 'Components for building AI chat interfaces and LLM-powered applications',
+    name: t.components.categories.ai,
+    description: t.components.categories.aiDesc,
     components: [
       { name: 'Chat Message', icon: MessageSquare, href: '/components/chat-message', status: 'ready' },
       { name: 'Prompt Input', icon: Send, href: '/components/prompt-input', status: 'ready' },
@@ -179,8 +181,8 @@ const componentCategories = [
     ],
   },
   {
-    name: 'Workflow & Automation',
-    description: 'Node-based workflow builders for creating automation pipelines',
+    name: t.components.categories.workflow,
+    description: t.components.categories.workflowDesc,
     components: [
       { name: 'Workflow Canvas', icon: Workflow, href: '/components/workflow-canvas', status: 'ready' },
       { name: 'Workflow Node', icon: Box, href: '/components/workflow-node', status: 'ready' },
@@ -189,6 +191,16 @@ const componentCategories = [
 ]
 
 export default function ComponentsPage() {
+  const { locale } = useDirection()
+  const t = content[locale]
+  const categories = componentCategories(t)
+
+  // Helper to get bilingual component name from href
+  const getComponentName = (href: string) => {
+    const slug = href.replace('/components/', '')
+    return t.componentNames[slug as keyof typeof t.componentNames] || href.split('/').pop()?.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ') || ''
+  }
+
   return (
     <div className="min-h-screen">
 
@@ -198,28 +210,27 @@ export default function ComponentsPage() {
           <ol className="flex items-center gap-2 text-sm text-muted-foreground">
             <li>
               <Link href="/" className="hover:text-foreground transition-colors">
-                Home
+                {t.common.home}
               </Link>
             </li>
             <li>/</li>
-            <li className="text-foreground font-medium">Components</li>
+            <li className="text-foreground font-medium">{t.components.title}</li>
           </ol>
         </nav>
 
         {/* Page Header */}
         <div className="max-w-3xl mb-12">
-          <h1 className="text-4xl font-bold tracking-tight mb-4">Components</h1>
+          <h1 className="text-4xl font-bold tracking-tight mb-4">{t.components.title}</h1>
           <p className="text-xl text-muted-foreground mb-6">
-            63 beautifully designed components built with Radix UI, Tailwind CSS, and React Flow.
-            60 production-ready, 3 coming soon. Full RTL support, accessible, and customizable.
+            {t.components.description}
           </p>
 
           {/* Live Preview */}
           <Card>
             <CardHeader>
-              <CardTitle>Quick Preview</CardTitle>
+              <CardTitle>{t.components.quickPreview}</CardTitle>
               <CardDescription>
-                See how components adapt to different directions
+                {t.components.previewDescription}
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
@@ -240,7 +251,7 @@ export default function ComponentsPage() {
 
         {/* Component Categories */}
         <div className="space-y-12">
-          {componentCategories.map((category) => (
+          {categories.map((category) => (
             <section key={category.name}>
               <div className="mb-6">
                 <h2 className="text-2xl font-bold tracking-tight">{category.name}</h2>
@@ -260,15 +271,15 @@ export default function ComponentsPage() {
                               <div className="rounded-lg bg-primary/10 p-2">
                                 <Icon className="h-5 w-5 text-primary" />
                               </div>
-                              <CardTitle className="text-lg">{component.name}</CardTitle>
+                              <CardTitle className="text-lg">{getComponentName(component.href)}</CardTitle>
                             </div>
                             {component.status === 'ready' ? (
                               <Badge variant="default" className="text-xs">
-                                Ready
+                                {t.components.ready}
                               </Badge>
                             ) : (
                               <Badge variant="secondary" className="text-xs">
-                                Coming Soon
+                                {t.components.comingSoon}
                               </Badge>
                             )}
                           </div>
@@ -285,17 +296,17 @@ export default function ComponentsPage() {
         {/* Getting Help */}
         <Card className="mt-12 border-primary/50 bg-primary/5">
           <CardHeader>
-            <CardTitle>Need Help?</CardTitle>
+            <CardTitle>{t.components.needHelp}</CardTitle>
             <CardDescription>
-              Check out our documentation or join our community
+              {t.components.helpDescription}
             </CardDescription>
           </CardHeader>
           <CardContent className="flex gap-2">
             <Button variant="outline" asChild>
-              <Link href="/documentation">View Documentation</Link>
+              <Link href="/documentation">{t.components.viewDocs}</Link>
             </Button>
             <Button variant="outline" asChild>
-              <Link href="/examples">Browse Examples</Link>
+              <Link href="/examples">{t.components.browseExamples}</Link>
             </Button>
           </CardContent>
         </Card>

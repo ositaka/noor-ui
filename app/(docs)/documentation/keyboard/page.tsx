@@ -5,6 +5,8 @@ import Link from 'next/link'
 import { Card, CardContent } from '@/components/ui/card'
 import { CodeBlock } from '@/components/docs/code-block'
 import { Keyboard, Info } from 'lucide-react'
+import { useDirection } from '@/components/providers/direction-provider'
+import { content } from '@/lib/i18n'
 
 const focusManagementCode = `// Auto-focus management in dialogs
 <Dialog>
@@ -68,80 +70,84 @@ const rovingtabindexCode = `// Roving tabindex for radio groups
 // Only one item in the group is in tab order`
 
 export default function KeyboardPage() {
+  const { locale } = useDirection()
+  const t = content[locale].documentationPages.keyboard
+  const common = content[locale].documentationPages.common
+
   return (
     <div className="min-h-screen">
       <main id="main-content" className="container py-12">
         <nav aria-label="Breadcrumb" className="mb-8">
           <ol className="flex items-center gap-2 text-sm text-muted-foreground">
-            <li><Link href="/" className="hover:text-foreground transition-colors">Home</Link></li>
+            <li><Link href="/" className="hover:text-foreground transition-colors">{common.home}</Link></li>
             <li>/</li>
-            <li><Link href="/documentation" className="hover:text-foreground transition-colors">Documentation</Link></li>
+            <li><Link href="/documentation" className="hover:text-foreground transition-colors">{common.documentation}</Link></li>
             <li>/</li>
-            <li className="text-foreground font-medium">Keyboard Navigation</li>
+            <li className="text-foreground font-medium">{t.title}</li>
           </ol>
         </nav>
 
         <div className="max-w-3xl mb-12">
           <div className="flex items-center gap-3 mb-4">
             <Keyboard className="h-10 w-10 text-primary" />
-            <h1 className="text-4xl font-bold tracking-tight">Keyboard Navigation</h1>
+            <h1 className="text-4xl font-bold tracking-tight">{t.title}</h1>
           </div>
           <p className="text-xl text-muted-foreground">
-            Complete guide to keyboard accessibility in Noor UI. All components are fully operable via keyboard without requiring a mouse.
+            {t.subtitle}
           </p>
         </div>
 
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Standard Keyboard Shortcuts</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.standardShortcuts}</h2>
           <Card>
             <CardContent className="p-6">
               <div className="space-y-4">
                 <div className="flex justify-between items-start">
                   <div>
                     <kbd className="px-2 py-1 bg-muted rounded font-mono text-sm">Tab</kbd>
-                    <p className="text-sm text-muted-foreground mt-1">Move focus forward</p>
+                    <p className="text-sm text-muted-foreground mt-1">{t.tab}</p>
                   </div>
-                  <span className="text-sm text-muted-foreground">All components</span>
+                  <span className="text-sm text-muted-foreground">{t.allComponents}</span>
                 </div>
 
                 <div className="flex justify-between items-start">
                   <div>
                     <kbd className="px-2 py-1 bg-muted rounded font-mono text-sm">Shift</kbd> + <kbd className="px-2 py-1 bg-muted rounded font-mono text-sm">Tab</kbd>
-                    <p className="text-sm text-muted-foreground mt-1">Move focus backward</p>
+                    <p className="text-sm text-muted-foreground mt-1">{t.shiftTab}</p>
                   </div>
-                  <span className="text-sm text-muted-foreground">All components</span>
+                  <span className="text-sm text-muted-foreground">{t.allComponents}</span>
                 </div>
 
                 <div className="flex justify-between items-start">
                   <div>
                     <kbd className="px-2 py-1 bg-muted rounded font-mono text-sm">Enter</kbd> / <kbd className="px-2 py-1 bg-muted rounded font-mono text-sm">Space</kbd>
-                    <p className="text-sm text-muted-foreground mt-1">Activate button or control</p>
+                    <p className="text-sm text-muted-foreground mt-1">{t.enterSpace}</p>
                   </div>
-                  <span className="text-sm text-muted-foreground">Buttons, checkboxes</span>
+                  <span className="text-sm text-muted-foreground">{t.buttonsCheckboxes}</span>
                 </div>
 
                 <div className="flex justify-between items-start">
                   <div>
                     <kbd className="px-2 py-1 bg-muted rounded font-mono text-sm">Escape</kbd>
-                    <p className="text-sm text-muted-foreground mt-1">Close dialog or menu</p>
+                    <p className="text-sm text-muted-foreground mt-1">{t.escape}</p>
                   </div>
-                  <span className="text-sm text-muted-foreground">Dialogs, dropdowns</span>
+                  <span className="text-sm text-muted-foreground">{t.dialogsDropdowns}</span>
                 </div>
 
                 <div className="flex justify-between items-start">
                   <div>
                     <kbd className="px-2 py-1 bg-muted rounded font-mono text-sm">Arrow Keys</kbd>
-                    <p className="text-sm text-muted-foreground mt-1">Navigate within component</p>
+                    <p className="text-sm text-muted-foreground mt-1">{t.arrowKeys}</p>
                   </div>
-                  <span className="text-sm text-muted-foreground">Tabs, menus, radio groups</span>
+                  <span className="text-sm text-muted-foreground">{t.tabsMenusRadio}</span>
                 </div>
 
                 <div className="flex justify-between items-start">
                   <div>
                     <kbd className="px-2 py-1 bg-muted rounded font-mono text-sm">Home</kbd> / <kbd className="px-2 py-1 bg-muted rounded font-mono text-sm">End</kbd>
-                    <p className="text-sm text-muted-foreground mt-1">Jump to first/last item</p>
+                    <p className="text-sm text-muted-foreground mt-1">{t.homeEnd}</p>
                   </div>
-                  <span className="text-sm text-muted-foreground">Lists, menus</span>
+                  <span className="text-sm text-muted-foreground">{t.listsMenus}</span>
                 </div>
               </div>
             </CardContent>
@@ -149,9 +155,9 @@ export default function KeyboardPage() {
         </section>
 
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Focus Management</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.focusManagement}</h2>
           <p className="text-muted-foreground mb-4">
-            Proper focus management ensures users can navigate efficiently:
+            {t.focusDesc}
           </p>
           <CodeBlock code={focusManagementCode} language="tsx" />
 
@@ -159,85 +165,85 @@ export default function KeyboardPage() {
             <CardContent className="p-6">
               <h3 className="font-semibold mb-2 flex items-center gap-2">
                 <Info className="h-5 w-5 text-blue-600 dark:text-blue-400" />
-                Focus Trapping
+                {t.focusTrapping}
               </h3>
               <p className="text-sm text-muted-foreground">
-                Dialogs and modals automatically trap focus inside them until closed, preventing keyboard users from accidentally tabbing outside the modal.
+                {t.focusTrappingDesc}
               </p>
             </CardContent>
           </Card>
         </section>
 
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Focus Indicators</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.focusIndicators}</h2>
           <p className="text-muted-foreground mb-4">
-            All interactive elements show clear focus indicators:
+            {t.focusIndicatorsDesc}
           </p>
           <CodeBlock code={focusVisibleCode} language="tsx" />
         </section>
 
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Custom Keyboard Shortcuts</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.customShortcuts}</h2>
           <p className="text-muted-foreground mb-4">
-            Implement custom shortcuts for power users:
+            {t.customDesc}
           </p>
           <CodeBlock code={keyboardShortcutsCode} language="tsx" />
 
           <Card className="mt-6">
             <CardContent className="p-6">
-              <h3 className="font-semibold mb-3">Best Practices</h3>
+              <h3 className="font-semibold mb-3">{t.bestPractices}</h3>
               <ul className="space-y-2 text-sm text-muted-foreground">
-                <li>• Document all keyboard shortcuts in your app</li>
-                <li>• Provide a shortcut help dialog (often Shift + ?)</li>
-                <li>• Use platform conventions (Cmd on Mac, Ctrl on Windows/Linux)</li>
-                <li>• Avoid conflicting with browser shortcuts</li>
-                <li>• Allow users to customize shortcuts if possible</li>
+                <li>• {t.documentShortcuts}</li>
+                <li>• {t.provideHelp}</li>
+                <li>• {t.platformConventions}</li>
+                <li>• {t.avoidConflicts}</li>
+                <li>• {t.allowCustomize}</li>
               </ul>
             </CardContent>
           </Card>
         </section>
 
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Roving Tabindex</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.rovingTabindex}</h2>
           <p className="text-muted-foreground mb-4">
-            Complex components use roving tabindex for efficient navigation:
+            {t.rovingDesc}
           </p>
           <CodeBlock code={rovingtabindexCode} language="tsx" />
         </section>
 
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Component-Specific Shortcuts</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentShortcuts}</h2>
           <div className="space-y-4">
             <Card>
               <CardContent className="p-4">
-                <h3 className="font-semibold mb-2">Dialog</h3>
+                <h3 className="font-semibold mb-2">{t.dialog}</h3>
                 <ul className="text-sm text-muted-foreground space-y-1">
-                  <li>• <kbd className="px-1.5 py-0.5 bg-muted rounded text-xs">Escape</kbd> - Close dialog</li>
-                  <li>• Focus trapped within dialog when open</li>
-                  <li>• Auto-focus first focusable element on open</li>
+                  <li>• <kbd className="px-1.5 py-0.5 bg-muted rounded text-xs">Escape</kbd> - {t.closeDialog}</li>
+                  <li>• {t.focusTrapped}</li>
+                  <li>• {t.autoFocus}</li>
                 </ul>
               </CardContent>
             </Card>
 
             <Card>
               <CardContent className="p-4">
-                <h3 className="font-semibold mb-2">Tabs</h3>
+                <h3 className="font-semibold mb-2">{t.tabs}</h3>
                 <ul className="text-sm text-muted-foreground space-y-1">
-                  <li>• <kbd className="px-1.5 py-0.5 bg-muted rounded text-xs">←</kbd> <kbd className="px-1.5 py-0.5 bg-muted rounded text-xs">→</kbd> - Navigate between tabs</li>
-                  <li>• <kbd className="px-1.5 py-0.5 bg-muted rounded text-xs">Home</kbd> <kbd className="px-1.5 py-0.5 bg-muted rounded text-xs">End</kbd> - Jump to first/last tab</li>
-                  <li>• Automatically activates on arrow key press</li>
+                  <li>• <kbd className="px-1.5 py-0.5 bg-muted rounded text-xs">←</kbd> <kbd className="px-1.5 py-0.5 bg-muted rounded text-xs">→</kbd> - {t.navigateTabs}</li>
+                  <li>• <kbd className="px-1.5 py-0.5 bg-muted rounded text-xs">Home</kbd> <kbd className="px-1.5 py-0.5 bg-muted rounded text-xs">End</kbd> - {t.jumpFirstLast}</li>
+                  <li>• {t.autoActivate}</li>
                 </ul>
               </CardContent>
             </Card>
 
             <Card>
               <CardContent className="p-4">
-                <h3 className="font-semibold mb-2">Select / Dropdown</h3>
+                <h3 className="font-semibold mb-2">{t.selectDropdown}</h3>
                 <ul className="text-sm text-muted-foreground space-y-1">
-                  <li>• <kbd className="px-1.5 py-0.5 bg-muted rounded text-xs">↑</kbd> <kbd className="px-1.5 py-0.5 bg-muted rounded text-xs">↓</kbd> - Navigate options</li>
-                  <li>• <kbd className="px-1.5 py-0.5 bg-muted rounded text-xs">Enter</kbd> - Select option</li>
-                  <li>• <kbd className="px-1.5 py-0.5 bg-muted rounded text-xs">Escape</kbd> - Close without selecting</li>
-                  <li>• Type to search options</li>
+                  <li>• <kbd className="px-1.5 py-0.5 bg-muted rounded text-xs">↑</kbd> <kbd className="px-1.5 py-0.5 bg-muted rounded text-xs">↓</kbd> - {t.navigateOptions}</li>
+                  <li>• <kbd className="px-1.5 py-0.5 bg-muted rounded text-xs">Enter</kbd> - {t.selectOption}</li>
+                  <li>• <kbd className="px-1.5 py-0.5 bg-muted rounded text-xs">Escape</kbd> - {t.closeWithoutSelect}</li>
+                  <li>• {t.typeSearch}</li>
                 </ul>
               </CardContent>
             </Card>
@@ -245,14 +251,14 @@ export default function KeyboardPage() {
         </section>
 
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Learn More</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{common.learnMore}</h2>
           <div className="grid gap-4 sm:grid-cols-2">
             <Link href="/documentation/wcag">
               <Card className="hover:border-primary transition-colors h-full">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold mb-2">WCAG Compliance</h3>
+                  <h3 className="font-semibold mb-2">{t.wcagLink}</h3>
                   <p className="text-sm text-muted-foreground">
-                    Complete accessibility compliance guide
+                    {t.wcagDesc}
                   </p>
                 </CardContent>
               </Card>
@@ -261,9 +267,9 @@ export default function KeyboardPage() {
             <Link href="/documentation/screen-readers">
               <Card className="hover:border-primary transition-colors h-full">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold mb-2">Screen Readers</h3>
+                  <h3 className="font-semibold mb-2">{t.screenReadersLink}</h3>
                   <p className="text-sm text-muted-foreground">
-                    Optimizing for screen reader users
+                    {t.screenReadersDesc}
                   </p>
                 </CardContent>
               </Card>

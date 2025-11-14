@@ -6,6 +6,7 @@ import { CodeBlock } from '@/components/docs/code-block'
 import { PropsTable } from '@/components/docs/props-table'
 import { StatsCard } from '@/components/dashboard/stats-card'
 import { useDirection } from '@/components/providers/direction-provider'
+import { content } from '@/lib/i18n'
 import {
   Users,
   DollarSign,

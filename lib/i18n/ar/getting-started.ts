@@ -1,0 +1,56 @@
+/**
+ * AR translations - getting-started
+ * Auto-generated from lib/i18n.ts
+ */
+
+export const getting_started = {
+  gettingStarted: {
+    title: 'البدء',
+    description: 'تعلم كيفية تثبيت وتكوين نور في مشروع Next.js الخاص بك. مبني بمبادئ اتجاه النص من اليمين لليسار أولاً لدعم ثنائي الاتجاه بسلاسة.',
+    installation: 'التثبيت',
+    installDesc: 'قم بتثبيت حزمة نور باستخدام مدير الحزم المفضل لديك:',
+    prerequisites: 'المتطلبات الأساسية',
+    configuration: 'التكوين',
+    tailwindConfig: 'تكوين Tailwind',
+    tailwindConfigDesc: 'قم بتكوين Tailwind CSS للعمل مع نور. يتضمن ذلك إضافة إضافة RTL و tailwindcss-logical لدعم ثنائي الاتجاه.',
+    important: 'مهم',
+    tailwindImportantNote: 'تأكد من تضمين حزمة نور في مصفوفة المحتوى الخاصة بك حتى يتمكن Tailwind من اكتشاف وتجميع أنماط المكونات.',
+    providerSetup: 'إعداد الموفرين',
+    providerSetupDesc: 'قم بتغليف تطبيقك بالموفرين المطلوبين. هذا يمكّن تبديل اتجاه النص، والسمات، والتلميحات، وإشعارات التوست.',
+    createProvidersComponent: '1. إنشاء مكون الموفرين',
+    updateRootLayout: '2. تحديث التخطيط الجذري',
+    providerResponsibilities: 'مسؤوليات الموفرين',
+    directionProviderDesc: 'يدير حالة اتجاه LTR/RTL عالمياً',
+    designSystemProviderDesc: 'يتعامل مع حالة السمة (فاتح/داكن)',
+    tooltipProviderDesc: 'مطلوب لجميع مكونات التلميحات',
+    toasterDesc: 'مطلوب لظهور إشعارات التوست',
+    globalStyles: 'الأنماط العامة',
+    globalStylesDesc: 'أضف متغيرات CSS لنظام التصميم إلى ورقة الأنماط العامة الخاصة بك:',
+    quickStart: 'بداية سريعة',
+    quickStartDesc: 'كل شيء جاهز! ابدأ باستخدام المكونات في تطبيقك:',
+    workingWithRTL: 'العمل مع اتجاه النص',
+    workingWithRTLDesc: 'استخدم خطاف الاتجاه للتحكم أو الاستجابة برمجياً لتغييرات الاتجاه:',
+    rtlBestPractices: 'أفضل ممارسات اتجاه النص',
+    rtlBestPractice1: 'استخدم الخصائص المنطقية (ms-، me-، ps-، pe-) بدلاً من الخصائص الاتجاهية (ml-، mr-، pl-، pr-)',
+    rtlBestPractice2: 'اختبر جميع المكونات في كلا وضعي LTR و RTL',
+    rtlBestPractice3: 'استخدم مبدل الاتجاه أثناء التطوير للتحقق من التخطيطات',
+    rtlBestPractice4: 'يجب أن تنعكس الأيقونات والصور بشكل مناسب لاتجاه النص',
+    nextSteps: 'الخطوات التالية',
+    browseComponents: 'تصفح المكونات',
+    browseComponentsDesc: 'استكشف المكتبة الكاملة للمكونات الجاهزة لاتجاه النص مع أمثلة حية ومقتطفات التعليمات البرمجية.',
+    viewComponents: 'عرض المكونات',
+    rtlDevGuide: 'دليل تطوير اتجاه النص',
+    rtlDevGuideDesc: 'تعلم مبادئ التطوير مع اتجاه النص أولاً، والأنماط، وأفضل الممارسات لبناء واجهات ثنائية الاتجاه.',
+    readGuide: 'اقرأ الدليل',
+    quickLinks: {
+      installation: 'التثبيت',
+      installationDesc: 'أضف الحزمة إلى مشروعك',
+      configuration: 'التكوين',
+      configurationDesc: 'إعداد Tailwind والموفرين',
+      quickStart: 'بداية سريعة',
+      quickStartDesc: 'قم ببناء مكونك الأول',
+      bestPractices: 'أفضل الممارسات',
+      bestPracticesDesc: 'نصائح التطوير مع اتجاه النص أولاً',
+    },
+  }
+}

@@ -20,28 +20,30 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { ComponentShowcase } from '@/components/docs/component-showcase'
 import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
+import { useDirection } from '@/components/providers/direction-provider'
+import { content } from '@/lib/i18n'
 
-const formProps: PropDefinition[] = [
+const getFormProps = (t: typeof content.en | typeof content.ar): PropDefinition[] => [
   {
     name: 'initialValues',
     type: 'Record<string, any>',
     default: '{}',
     required: false,
-    description: 'Initial form field values',
+    description: t.formComponent.props.initialValues,
   },
   {
     name: 'validators',
     type: 'Record<string, (value: any) => string | undefined>',
     default: '{}',
     required: false,
-    description: 'Field validation functions',
+    description: t.formComponent.props.validators,
   },
   {
     name: 'onSubmit',
     type: '(values: Record<string, any>) => void | Promise<void>',
     default: '-',
     required: true,
-    description: 'Form submission handler',
+    description: t.formComponent.props.onSubmit,
   },
 ]
 
@@ -118,6 +120,10 @@ validators: {
 }`
 
 export default function FormPage() {
+  const { locale } = useDirection()
+  const t = content[locale]
+  const formProps = getFormProps(t)
+
   return (
     <div className="min-h-screen">
 
@@ -127,32 +133,31 @@ export default function FormPage() {
           <ol className="flex items-center gap-2 text-sm text-muted-foreground">
             <li>
               <Link href="/" className="hover:text-foreground transition-colors">
-                Home
+                {t.common.home}
               </Link>
             </li>
             <li>/</li>
             <li>
               <Link href="/components" className="hover:text-foreground transition-colors">
-                Components
+                {t.nav.components}
               </Link>
             </li>
             <li>/</li>
-            <li className="text-foreground font-medium">Form</li>
+            <li className="text-foreground font-medium">{t.formComponent.title}</li>
           </ol>
         </nav>
 
         {/* Page Header */}
         <div className="mb-12">
-          <h1 className="text-4xl font-bold tracking-tight mb-4">Form</h1>
+          <h1 className="text-4xl font-bold tracking-tight mb-4">{t.formComponent.title}</h1>
           <p className="text-xl text-muted-foreground max-w-3xl">
-            Lightweight form state management with validation and bilingual error message support.
-            Built without external dependencies.
+            {t.formComponent.description}
           </p>
         </div>
 
         {/* Preview */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Preview</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.formComponent.preview}</h2>
           <ComponentShowcase>
             <ComponentShowcase.Demo>
               <div className="w-full max-w-md mx-auto">
@@ -211,19 +216,19 @@ export default function FormPage() {
 
         {/* Installation */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Installation</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.formComponent.installation}</h2>
           <CodeBlock code={installCode} language="bash" title="Terminal" />
         </section>
 
         {/* Usage */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Usage</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.formComponent.usage}</h2>
           <CodeBlock code={basicUsageCode} language="tsx" title="React" />
         </section>
 
         {/* Examples */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Examples</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.formComponent.examples.title}</h2>
 
           <div className="space-y-8">
             {/* Validation */}
@@ -385,13 +390,13 @@ export default function FormPage() {
 
         {/* Props */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Props</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.formComponent.props.title}</h2>
           <PropsTable props={formProps} />
         </section>
 
         {/* Accessibility */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Accessibility</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.formComponent.accessibility.title}</h2>
           <Card>
             <CardContent className="p-6 space-y-4">
               <div>
@@ -431,7 +436,7 @@ export default function FormPage() {
 
         {/* RTL Considerations */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">RTL Considerations</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.formComponent.rtl.title}</h2>
           <Card>
             <CardContent className="p-6 space-y-4">
               <p className="text-muted-foreground">
@@ -502,7 +507,7 @@ export default function FormPage() {
 
         {/* Related Components */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Related Components</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.formComponent.related.title}</h2>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             <Link href="/components/input">
               <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">

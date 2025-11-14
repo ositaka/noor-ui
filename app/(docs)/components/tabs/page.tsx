@@ -9,28 +9,30 @@ import { ComponentShowcase } from '@/components/docs/component-showcase'
 import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
 import { User, Bell } from 'lucide-react'
+import { useDirection } from '@/components/providers/direction-provider'
+import { content } from '@/lib/i18n'
 
-const tabsProps: PropDefinition[] = [
+const getTabsProps = (t: typeof content.en | typeof content.ar): PropDefinition[] => [
   {
     name: 'defaultValue',
     type: 'string',
     default: 'undefined',
     required: false,
-    description: 'The value of the tab that should be active when initially rendered',
+    description: t.tabsComponent.props.defaultValue,
   },
   {
     name: 'value',
     type: 'string',
     default: 'undefined',
     required: false,
-    description: 'The controlled value of the active tab',
+    description: t.tabsComponent.props.value,
   },
   {
     name: 'onValueChange',
     type: '(value: string) => void',
     default: 'undefined',
     required: false,
-    description: 'Callback when the active tab changes',
+    description: t.tabsComponent.props.onValueChange,
   },
 ]
 
@@ -82,6 +84,9 @@ const controlledCode = `const [activeTab, setActiveTab] = React.useState('overvi
 </Tabs>`
 
 export default function TabsPage() {
+  const { locale } = useDirection()
+  const t = content[locale]
+  const tabsProps = getTabsProps(t)
   const [activeTab, setActiveTab] = React.useState('account')
 
   return (
@@ -93,31 +98,31 @@ export default function TabsPage() {
           <ol className="flex items-center gap-2 text-sm text-muted-foreground">
             <li>
               <Link href="/" className="hover:text-foreground transition-colors">
-                Home
+                {t.common.home}
               </Link>
             </li>
             <li>/</li>
             <li>
               <Link href="/components" className="hover:text-foreground transition-colors">
-                Components
+                {t.nav.components}
               </Link>
             </li>
             <li>/</li>
-            <li className="text-foreground font-medium">Tabs</li>
+            <li className="text-foreground font-medium">{t.tabsComponent.title}</li>
           </ol>
         </nav>
 
         {/* Page Header */}
         <div className="mb-12">
-          <h1 className="text-4xl font-bold tracking-tight mb-4">Tabs</h1>
+          <h1 className="text-4xl font-bold tracking-tight mb-4">{t.tabsComponent.title}</h1>
           <p className="text-xl text-muted-foreground max-w-3xl">
-            A set of layered sections of content, displayed one at a time, with keyboard navigation support.
+            {t.tabsComponent.description}
           </p>
         </div>
 
         {/* Preview */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Preview</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.tabsComponent.preview}</h2>
           <ComponentShowcase>
             <ComponentShowcase.Demo>
               <Tabs defaultValue="account" className="w-full max-w-md">
@@ -162,19 +167,19 @@ export default function TabsPage() {
 
         {/* Installation */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-4">Installation</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-4">{t.tabsComponent.installation}</h2>
           <CodeBlock code={installCode} language="bash" />
         </section>
 
         {/* Usage */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-4">Usage</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-4">{t.tabsComponent.usage}</h2>
           <CodeBlock code={basicUsageCode} language="tsx" />
         </section>
 
         {/* Examples */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Examples</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.tabsComponent.examples.title}</h2>
 
           <div className="space-y-8">
             <div>
@@ -296,13 +301,13 @@ export default function TabsPage() {
 
         {/* Props */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-4">Props</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-4">{t.tabsComponent.props.title}</h2>
           <PropsTable props={tabsProps} />
         </section>
 
         {/* Accessibility */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-4">Accessibility</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-4">{t.tabsComponent.accessibility.title}</h2>
           <Card>
             <CardContent className="p-6 space-y-4">
               <div>
@@ -330,7 +335,7 @@ export default function TabsPage() {
 
         {/* RTL Support */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-4">RTL Support</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-4">{t.tabsComponent.rtl.title}</h2>
           <Card>
             <CardContent className="p-6">
               <p className="text-sm text-muted-foreground mb-4">

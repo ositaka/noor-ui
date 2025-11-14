@@ -3,6 +3,7 @@
 import * as React from 'react'
 import Link from 'next/link'
 import { useDirection } from '@/components/providers/direction-provider'
+import { content } from '@/lib/i18n'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
@@ -269,7 +270,7 @@ export default function CartPage() {
                 <Link href="/examples/marketplace">
                   {isRTL ? (
                     <>
-                      <ArrowRight className="h-4 w-4 ms-2" />
+                      <ArrowRight className="h-4 w-4 ms-2 rtl:rotate-180" />
                       متابعة التسوق
                     </>
                   ) : (
@@ -363,7 +364,7 @@ export default function CartPage() {
                       ) : (
                         <>
                           Proceed to Checkout
-                          <ArrowRight className="h-4 w-4 ms-2" />
+                          <ArrowRight className="h-4 w-4 ms-2 rtl:rotate-180" />
                         </>
                       )}
                     </Link>

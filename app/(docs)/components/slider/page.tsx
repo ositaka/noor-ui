@@ -11,63 +11,65 @@ import { ComponentShowcase } from '@/components/docs/component-showcase'
 import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
 import { Volume2, VolumeX } from 'lucide-react'
+import { useDirection } from '@/components/providers/direction-provider'
+import { content } from '@/lib/i18n'
 
-const sliderProps: PropDefinition[] = [
+const getSliderProps = (t: typeof content.en | typeof content.ar): PropDefinition[] => [
   {
     name: 'value',
     type: 'number[]',
     default: '[0]',
     required: false,
-    description: 'The controlled value of the slider (array of numbers)',
+    description: t.sliderComponent.props.value,
   },
   {
     name: 'defaultValue',
     type: 'number[]',
     default: '[0]',
     required: false,
-    description: 'The default value (uncontrolled)',
+    description: t.sliderComponent.props.defaultValue,
   },
   {
     name: 'onValueChange',
     type: '(value: number[]) => void',
     default: 'undefined',
     required: false,
-    description: 'Event handler called when the value changes',
+    description: t.sliderComponent.props.onValueChange,
   },
   {
     name: 'min',
     type: 'number',
     default: '0',
     required: false,
-    description: 'The minimum value',
+    description: t.sliderComponent.props.min,
   },
   {
     name: 'max',
     type: 'number',
     default: '100',
     required: false,
-    description: 'The maximum value',
+    description: t.sliderComponent.props.max,
   },
   {
     name: 'step',
     type: 'number',
     default: '1',
     required: false,
-    description: 'The step increment',
+    description: t.sliderComponent.props.step,
   },
   {
     name: 'disabled',
     type: 'boolean',
     default: 'false',
     required: false,
-    description: 'Disables the slider',
+    description: t.sliderComponent.props.disabled,
   },
   {
     name: 'orientation',
     type: "'horizontal' | 'vertical'",
     default: "'horizontal'",
     required: false,
-    description: 'The orientation of the slider',
+    description: t.sliderComponent.props.orientation,
   },
 ]
 
@@ -192,6 +194,10 @@ const rtlCode = `// RTL support is automatic!
 </div>`
 
 export default function SliderPage() {
+  const { locale } = useDirection()
+  const t = content[locale]
+  const sliderProps = getSliderProps(t)
+
   const [value, setValue] = React.useState([50])
   const [volume, setVolume] = React.useState([80])
   const [priceRange, setPriceRange] = React.useState([20, 80])
@@ -206,32 +212,31 @@ export default function SliderPage() {
           <ol className="flex items-center gap-2 text-sm text-muted-foreground">
             <li>
               <Link href="/" className="hover:text-foreground transition-colors">
-                Home
+                {t.common.home}
               </Link>
             </li>
             <li>/</li>
             <li>
               <Link href="/components" className="hover:text-foreground transition-colors">
-                Components
+                {t.nav.components}
               </Link>
             </li>
             <li>/</li>
-            <li className="text-foreground font-medium">Slider</li>
+            <li className="text-foreground font-medium">{t.sliderComponent.title}</li>
           </ol>
         </nav>
 
         {/* Page Header */}
         <div className="mb-12">
-          <h1 className="text-4xl font-bold tracking-tight mb-4">Slider</h1>
+          <h1 className="text-4xl font-bold tracking-tight mb-4">{t.sliderComponent.title}</h1>
           <p className="text-xl text-muted-foreground max-w-3xl">
-            Select a value or range from a continuous or discrete scale. Perfect for volume
-            controls, price ranges, and filters with full RTL support.
+            {t.sliderComponent.description}
           </p>
         </div>
 
         {/* Preview */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Preview</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.sliderComponent.preview}</h2>
           <ComponentShowcase>
             <ComponentShowcase.Demo>
               <div className="w-full max-w-lg">
@@ -243,19 +248,19 @@ export default function SliderPage() {
 
         {/* Installation */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Installation</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.sliderComponent.installation}</h2>
           <CodeBlock code={installCode} language="bash" title="Terminal" />
         </section>
 
         {/* Usage */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Usage</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.sliderComponent.usage}</h2>
           <CodeBlock code={basicUsageCode} language="tsx" title="React" />
         </section>
 
         {/* Examples */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Examples</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.sliderComponent.examples.title}</h2>
 
           <div className="space-y-8">
             {/* With Label */}
@@ -413,7 +418,7 @@ export default function SliderPage() {
 
         {/* Props */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Props</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.sliderComponent.props.title}</h2>
           <PropsTable props={sliderProps} />
           <Card className="mt-4">
             <CardContent className="p-6">
@@ -429,7 +434,7 @@ export default function SliderPage() {
 
         {/* Accessibility */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Accessibility</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.sliderComponent.accessibility.title}</h2>
           <Card>
             <CardContent className="p-6 space-y-4">
               <div>
@@ -492,7 +497,7 @@ export default function SliderPage() {
 
         {/* RTL Considerations */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">RTL Considerations</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.sliderComponent.rtl.title}</h2>
           <Card>
             <CardContent className="p-6 space-y-4">
               <p className="text-muted-foreground">
@@ -530,7 +535,7 @@ export default function SliderPage() {
 
         {/* Related Components */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Related Components</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.sliderComponent.related.title}</h2>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             <Link href="/components/input">
               <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">

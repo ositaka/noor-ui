@@ -11,6 +11,8 @@ import { ComponentShowcase } from '@/components/docs/component-showcase'
 import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
 import { Sparkles } from 'lucide-react'
+import { useDirection } from '@/components/providers/direction-provider'
+import { content } from '@/lib/i18n'
 
 const dataTableProps: PropDefinition[] = [
   {
@@ -422,6 +424,8 @@ const sampleUsers: User[] = [
 ]
 
 export default function DataTablePage() {
+  const { locale } = useDirection()
+  const t = content[locale]
   // Basic example state
   const [basicColumns] = React.useState<ColumnDef<User>[]>([
     { id: 'name', header: 'Name', headerAr: 'الاسم', accessorKey: 'name' },
@@ -541,38 +545,37 @@ export default function DataTablePage() {
           <ol className="flex items-center gap-2 text-sm text-muted-foreground">
             <li>
               <Link href="/" className="hover:text-foreground transition-colors">
-                Home
+                {t.nav.home}
               </Link>
             </li>
             <li>/</li>
             <li>
               <Link href="/components" className="hover:text-foreground transition-colors">
-                Components
+                {t.nav.components}
               </Link>
             </li>
             <li>/</li>
-            <li className="text-foreground font-medium">DataTable</li>
+            <li className="text-foreground font-medium">{t.dataTableComponent.breadcrumb}</li>
           </ol>
         </nav>
 
         {/* Page Header */}
         <div className="mb-12">
           <div className="flex items-center gap-3 mb-4">
-            <h1 className="text-4xl font-bold tracking-tight">DataTable</h1>
+            <h1 className="text-4xl font-bold tracking-tight">{t.dataTableComponent.title}</h1>
             <Badge variant="outline" className="gap-1">
               <Sparkles className="h-3 w-3" />
-              Enhanced
+              {t.dataTableComponent.badge}
             </Badge>
           </div>
           <p className="text-xl text-muted-foreground max-w-3xl">
-            A powerful, feature-rich data table with sorting, filtering, pagination, and mobile responsiveness.
-            Perfect for displaying complex datasets with full RTL support.
+            {t.dataTableComponent.description}
           </p>
         </div>
 
         {/* Preview */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Preview</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentDocs.preview}</h2>
           <ComponentShowcase>
             <ComponentShowcase.Demo>
               <DataTable
@@ -586,65 +589,65 @@ export default function DataTablePage() {
 
         {/* Installation */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Installation</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentDocs.installation}</h2>
           <CodeBlock code={installCode} language="bash" title="Terminal" />
         </section>
 
         {/* Usage */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Basic Usage</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.dataTableComponent.sections.basicUsage}</h2>
           <CodeBlock code={basicUsageCode} language="tsx" title="React" />
         </section>
 
         {/* Features */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Features</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.dataTableComponent.sections.features}</h2>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             <Card>
               <CardContent className="p-6">
-                <h3 className="font-semibold mb-2">Sortable Columns</h3>
+                <h3 className="font-semibold mb-2">{t.dataTableComponent.features.sortableColumns.title}</h3>
                 <p className="text-sm text-muted-foreground">
-                  Click column headers to sort with RTL-aware indicators
+                  {t.dataTableComponent.features.sortableColumns.description}
                 </p>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="p-6">
-                <h3 className="font-semibold mb-2">Search & Filter</h3>
+                <h3 className="font-semibold mb-2">{t.dataTableComponent.features.searchFilter.title}</h3>
                 <p className="text-sm text-muted-foreground">
-                  Built-in search with clear button and custom filtering
+                  {t.dataTableComponent.features.searchFilter.description}
                 </p>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="p-6">
-                <h3 className="font-semibold mb-2">Pagination</h3>
+                <h3 className="font-semibold mb-2">{t.dataTableComponent.features.pagination.title}</h3>
                 <p className="text-sm text-muted-foreground">
-                  Integrated pagination for large datasets
+                  {t.dataTableComponent.features.pagination.description}
                 </p>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="p-6">
-                <h3 className="font-semibold mb-2">Loading States</h3>
+                <h3 className="font-semibold mb-2">{t.dataTableComponent.features.loadingStates.title}</h3>
                 <p className="text-sm text-muted-foreground">
-                  Skeleton loading animation while fetching data
+                  {t.dataTableComponent.features.loadingStates.description}
                 </p>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="p-6">
-                <h3 className="font-semibold mb-2">Mobile Responsive</h3>
+                <h3 className="font-semibold mb-2">{t.dataTableComponent.features.mobileResponsive.title}</h3>
                 <p className="text-sm text-muted-foreground">
-                  Cards or horizontal scroll view on small screens
+                  {t.dataTableComponent.features.mobileResponsive.description}
                 </p>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="p-6">
-                <h3 className="font-semibold mb-2">Custom Cells</h3>
+                <h3 className="font-semibold mb-2">{t.dataTableComponent.features.customCells.title}</h3>
                 <p className="text-sm text-muted-foreground">
-                  Render custom components in any cell
+                  {t.dataTableComponent.features.customCells.description}
                 </p>
               </CardContent>
             </Card>
@@ -653,16 +656,16 @@ export default function DataTablePage() {
 
         {/* Examples */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Examples</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentDocs.examples}</h2>
 
           <div className="space-y-12">
             {/* Sortable */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">Sortable Columns</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.dataTableComponent.examples.sortableColumns}</h3>
               <Card>
                 <CardContent className="p-6">
                   <p className="text-sm text-muted-foreground mb-4">
-                    Click any column header to sort. Click again to reverse, and once more to clear sorting.
+                    {t.dataTableComponent.examples.sortableDescription}
                   </p>
                   <DataTable
                     data={sortedUsers}
@@ -680,7 +683,7 @@ export default function DataTablePage() {
 
             {/* Searchable */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">Searchable Table</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.dataTableComponent.examples.searchableTable}</h3>
               <Card>
                 <CardContent className="p-6">
                   <DataTable
@@ -701,7 +704,7 @@ export default function DataTablePage() {
 
             {/* Paginated */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">Paginated Table</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.dataTableComponent.examples.paginatedTable}</h3>
               <Card>
                 <CardContent className="p-6">
                   <DataTable
@@ -722,7 +725,7 @@ export default function DataTablePage() {
 
             {/* Custom Cells */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">Custom Cell Rendering</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.dataTableComponent.examples.customCellRendering}</h3>
               <Card>
                 <CardContent className="p-6">
                   <DataTable
@@ -738,12 +741,12 @@ export default function DataTablePage() {
 
             {/* Loading State */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">Loading State</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.dataTableComponent.examples.loadingState}</h3>
               <Card>
                 <CardContent className="p-6">
                   <div className="mb-4">
                     <Button onClick={toggleLoading} disabled={isLoading}>
-                      {isLoading ? 'Loading...' : 'Trigger Loading State'}
+                      {isLoading ? t.dataTableComponent.buttons.loading : t.dataTableComponent.buttons.triggerLoadingState}
                     </Button>
                   </div>
                   <DataTable
@@ -775,11 +778,11 @@ useEffect(() => {
 
             {/* Complete Example */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">Complete Example</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.dataTableComponent.examples.completeExample}</h3>
               <Card>
                 <CardContent className="p-6">
                   <p className="text-sm text-muted-foreground mb-4">
-                    All features combined: sorting, searching, pagination, and custom cells.
+                    {t.dataTableComponent.examples.completeDescription}
                   </p>
                   <DataTable
                     data={filteredUsers}
@@ -806,16 +809,16 @@ useEffect(() => {
 
         {/* Props */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Props</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentDocs.props}</h2>
 
           <div className="space-y-8">
             <div>
-              <h3 className="text-lg font-semibold mb-4">DataTable Props</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.dataTableComponent.props.dataTableProps}</h3>
               <PropsTable props={dataTableProps} />
             </div>
 
             <div>
-              <h3 className="text-lg font-semibold mb-4">ColumnDef Props</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.dataTableComponent.props.columnDefProps}</h3>
               <PropsTable props={columnDefProps} />
             </div>
           </div>
@@ -823,37 +826,34 @@ useEffect(() => {
 
         {/* Accessibility */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Accessibility</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentDocs.accessibility}</h2>
           <Card>
             <CardContent className="p-6 space-y-4">
               <div>
-                <h3 className="font-semibold mb-2">Semantic HTML</h3>
+                <h3 className="font-semibold mb-2">{t.dataTableComponent.accessibility.semanticHtml.title}</h3>
                 <p className="text-muted-foreground">
-                  Built on top of the semantic Table component with proper thead, tbody, th, and td elements.
+                  {t.dataTableComponent.accessibility.semanticHtml.description}
                 </p>
               </div>
               <Separator />
               <div>
-                <h3 className="font-semibold mb-2">Keyboard Navigation</h3>
+                <h3 className="font-semibold mb-2">{t.dataTableComponent.accessibility.keyboardNavigation.title}</h3>
                 <p className="text-muted-foreground">
-                  Sortable column headers are buttons that can be activated with Enter or Space keys.
-                  Search input is fully keyboard accessible.
+                  {t.dataTableComponent.accessibility.keyboardNavigation.description}
                 </p>
               </div>
               <Separator />
               <div>
-                <h3 className="font-semibold mb-2">Screen Readers</h3>
+                <h3 className="font-semibold mb-2">{t.dataTableComponent.accessibility.screenReaders.title}</h3>
                 <p className="text-muted-foreground">
-                  Sort indicators provide visual feedback, and the table structure is properly announced
-                  to screen readers with column headers associated to their cells.
+                  {t.dataTableComponent.accessibility.screenReaders.description}
                 </p>
               </div>
               <Separator />
               <div>
-                <h3 className="font-semibold mb-2">Loading States</h3>
+                <h3 className="font-semibold mb-2">{t.dataTableComponent.accessibility.loadingStates.title}</h3>
                 <p className="text-muted-foreground">
-                  Skeleton loading states provide visual feedback while maintaining layout stability.
-                  Interactive elements are disabled during loading.
+                  {t.dataTableComponent.accessibility.loadingStates.description}
                 </p>
               </div>
             </CardContent>
@@ -862,38 +862,34 @@ useEffect(() => {
 
         {/* RTL Considerations */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">RTL Considerations</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.dataTableComponent.sections.rtlConsiderations}</h2>
           <Card>
             <CardContent className="p-6 space-y-4">
               <div>
-                <h3 className="font-semibold mb-2">Automatic RTL Support</h3>
+                <h3 className="font-semibold mb-2">{t.dataTableComponent.rtl.automaticSupport.title}</h3>
                 <p className="text-muted-foreground">
-                  DataTable inherits RTL support from the base Table component. Sort indicators,
-                  search input, and all spacing use logical properties for proper RTL layout.
+                  {t.dataTableComponent.rtl.automaticSupport.description}
                 </p>
               </div>
               <Separator />
               <div>
-                <h3 className="font-semibold mb-2">Sort Indicators</h3>
+                <h3 className="font-semibold mb-2">{t.dataTableComponent.rtl.sortIndicators.title}</h3>
                 <p className="text-muted-foreground">
-                  Chevron icons automatically position correctly in both LTR and RTL contexts.
-                  The sorting button layout adapts to text direction.
+                  {t.dataTableComponent.rtl.sortIndicators.description}
                 </p>
               </div>
               <Separator />
               <div>
-                <h3 className="font-semibold mb-2">Search Input</h3>
+                <h3 className="font-semibold mb-2">{t.dataTableComponent.rtl.searchInput.title}</h3>
                 <p className="text-muted-foreground">
-                  Search icon and clear button position correctly using margin-inline-start (ms-) and
-                  margin-inline-end (me-) utilities, ensuring proper placement in both directions.
+                  {t.dataTableComponent.rtl.searchInput.description}
                 </p>
               </div>
               <Separator />
               <div>
-                <h3 className="font-semibold mb-2">Mobile Cards</h3>
+                <h3 className="font-semibold mb-2">{t.dataTableComponent.rtl.mobileCards.title}</h3>
                 <p className="text-muted-foreground">
-                  On mobile, the cards view uses a grid layout that automatically adapts to RTL,
-                  with labels on the start side and values on the end side.
+                  {t.dataTableComponent.rtl.mobileCards.description}
                 </p>
               </div>
             </CardContent>
@@ -902,14 +898,14 @@ useEffect(() => {
 
         {/* Related Components */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Related Components</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.dataTableComponent.sections.relatedComponents}</h2>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             <Link href="/components/table">
               <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold">Table</h3>
+                  <h3 className="font-semibold">{t.dataTableComponent.related.table.title}</h3>
                   <p className="text-sm text-muted-foreground mt-1">
-                    Base table component
+                    {t.dataTableComponent.related.table.description}
                   </p>
                 </CardContent>
               </Card>
@@ -917,9 +913,9 @@ useEffect(() => {
             <Link href="/components/pagination">
               <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold">Pagination</h3>
+                  <h3 className="font-semibold">{t.dataTableComponent.related.pagination.title}</h3>
                   <p className="text-sm text-muted-foreground mt-1">
-                    Page navigation control
+                    {t.dataTableComponent.related.pagination.description}
                   </p>
                 </CardContent>
               </Card>
@@ -927,9 +923,9 @@ useEffect(() => {
             <Link href="/components/skeleton">
               <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold">Skeleton</h3>
+                  <h3 className="font-semibold">{t.dataTableComponent.related.skeleton.title}</h3>
                   <p className="text-sm text-muted-foreground mt-1">
-                    Loading placeholder
+                    {t.dataTableComponent.related.skeleton.description}
                   </p>
                 </CardContent>
               </Card>
@@ -937,9 +933,9 @@ useEffect(() => {
             <Link href="/components/input">
               <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold">Input</h3>
+                  <h3 className="font-semibold">{t.dataTableComponent.related.input.title}</h3>
                   <p className="text-sm text-muted-foreground mt-1">
-                    Used for search functionality
+                    {t.dataTableComponent.related.input.description}
                   </p>
                 </CardContent>
               </Card>
@@ -947,9 +943,9 @@ useEffect(() => {
             <Link href="/components/badge">
               <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold">Badge</h3>
+                  <h3 className="font-semibold">{t.dataTableComponent.related.badge.title}</h3>
                   <p className="text-sm text-muted-foreground mt-1">
-                    Status indicators
+                    {t.dataTableComponent.related.badge.description}
                   </p>
                 </CardContent>
               </Card>
@@ -957,9 +953,9 @@ useEffect(() => {
             <Link href="/components/button">
               <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold">Button</h3>
+                  <h3 className="font-semibold">{t.dataTableComponent.related.button.title}</h3>
                   <p className="text-sm text-muted-foreground mt-1">
-                    Sort headers and actions
+                    {t.dataTableComponent.related.button.description}
                   </p>
                 </CardContent>
               </Card>

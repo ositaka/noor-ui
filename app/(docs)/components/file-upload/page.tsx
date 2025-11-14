@@ -10,57 +10,59 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Info } from 'lucide-react'
+import { useDirection } from '@/components/providers/direction-provider'
+import { content } from '@/lib/i18n'
 
-const propDefinitions = [
+const getFileUploadProps = (t: typeof content.en | typeof content.ar) => [
   {
     name: 'onUpload',
     type: '(files: File[]) => void',
-    description: 'Callback fired when files are successfully uploaded',
+    description: t.fileUploadComponent.props.onUpload,
   },
   {
     name: 'onChange',
     type: '(files: File[]) => void',
-    description: 'Callback fired when the file list changes',
+    description: t.fileUploadComponent.props.onChange,
   },
   {
     name: 'maxSize',
     type: 'number',
     defaultValue: '5242880 (5MB)',
-    description: 'Maximum file size in bytes',
+    description: t.fileUploadComponent.props.maxSize,
   },
   {
     name: 'maxFiles',
     type: 'number',
     defaultValue: '1',
-    description: 'Maximum number of files allowed',
+    description: t.fileUploadComponent.props.maxFiles,
   },
   {
     name: 'accept',
     type: 'string',
-    description: 'Accepted file types (e.g., "image/*", ".pdf,.doc")',
+    description: t.fileUploadComponent.props.accept,
   },
   {
     name: 'multiple',
     type: 'boolean',
     defaultValue: 'false',
-    description: 'Allow multiple file uploads',
+    description: t.fileUploadComponent.props.multiple,
   },
   {
     name: 'disabled',
     type: 'boolean',
     defaultValue: 'false',
-    description: 'Disable the file upload',
+    description: t.fileUploadComponent.props.disabled,
   },
   {
     name: 'className',
     type: 'string',
-    description: 'Additional CSS classes',
+    description: t.fileUploadComponent.props.className,
   },
   {
     name: 'value',
     type: 'File[]',
     defaultValue: '[]',
-    description: 'Controlled value for file list',
+    description: t.fileUploadComponent.props.value,
   },
 ]
 
@@ -157,6 +159,10 @@ const backendUploadCode = `async function uploadFiles(files: File[]) {
 />`
 
 export default function FileUploadPage() {
+  const { locale } = useDirection()
+  const t = content[locale]
+  const propDefinitions = getFileUploadProps(t)
+
   const [files1, setFiles1] = React.useState<File[]>([])
   const [files2, setFiles2] = React.useState<File[]>([])
   const [files3, setFiles3] = React.useState<File[]>([])
@@ -169,35 +175,34 @@ export default function FileUploadPage() {
           <ol className="flex items-center gap-2 text-sm text-muted-foreground">
             <li>
               <Link href="/" className="hover:text-foreground transition-colors">
-                Home
+                {t.common.home}
               </Link>
             </li>
             <li>/</li>
             <li>
               <Link href="/components" className="hover:text-foreground transition-colors">
-                Components
+                {t.nav.components}
               </Link>
             </li>
             <li>/</li>
-            <li className="text-foreground font-medium">File Upload</li>
+            <li className="text-foreground font-medium">{t.fileUploadComponent.title}</li>
           </ol>
         </nav>
 
         {/* Page Header */}
         <div className="mb-12">
           <div className="flex items-center gap-3 mb-4">
-            <h1 className="text-4xl font-bold tracking-tight">File Upload</h1>
+            <h1 className="text-4xl font-bold tracking-tight">{t.fileUploadComponent.title}</h1>
             <Badge variant="default">New</Badge>
           </div>
           <p className="text-xl text-muted-foreground max-w-3xl">
-            A drag-and-drop file upload component with validation, image previews, and full
-            accessibility support. Perfect for forms and content management.
+            {t.fileUploadComponent.description}
           </p>
         </div>
 
         {/* Preview */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Preview</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.fileUploadComponent.preview}</h2>
           <ComponentShowcase
             code={`'use client'
 
@@ -228,53 +233,53 @@ export default function Example() {
 
         {/* Features */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Features</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.fileUploadComponent.features.title}</h2>
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             <Card>
               <CardContent className="p-6">
-                <h3 className="font-semibold mb-2">Drag & Drop</h3>
+                <h3 className="font-semibold mb-2">{t.fileUploadComponent.features.dragDrop}</h3>
                 <p className="text-sm text-muted-foreground">
-                  Intuitive drag-and-drop interface with visual feedback
+                  {t.fileUploadComponent.features.dragDropDesc}
                 </p>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="p-6">
-                <h3 className="font-semibold mb-2">File Validation</h3>
+                <h3 className="font-semibold mb-2">{t.fileUploadComponent.features.fileValidation}</h3>
                 <p className="text-sm text-muted-foreground">
-                  Validate file types and sizes with clear error messages
+                  {t.fileUploadComponent.features.fileValidationDesc}
                 </p>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="p-6">
-                <h3 className="font-semibold mb-2">Image Previews</h3>
+                <h3 className="font-semibold mb-2">{t.fileUploadComponent.features.imagePreviews}</h3>
                 <p className="text-sm text-muted-foreground">
-                  Automatic image thumbnails for visual confirmation
+                  {t.fileUploadComponent.features.imagePreviewsDesc}
                 </p>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="p-6">
-                <h3 className="font-semibold mb-2">Multiple Files</h3>
+                <h3 className="font-semibold mb-2">{t.fileUploadComponent.features.multipleFiles}</h3>
                 <p className="text-sm text-muted-foreground">
-                  Support for single or multiple file uploads
+                  {t.fileUploadComponent.features.multipleFilesDesc}
                 </p>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="p-6">
-                <h3 className="font-semibold mb-2">File Icons</h3>
+                <h3 className="font-semibold mb-2">{t.fileUploadComponent.features.fileIcons}</h3>
                 <p className="text-sm text-muted-foreground">
-                  Contextual icons for different file types
+                  {t.fileUploadComponent.features.fileIconsDesc}
                 </p>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="p-6">
-                <h3 className="font-semibold mb-2">Accessible</h3>
+                <h3 className="font-semibold mb-2">{t.fileUploadComponent.features.accessible}</h3>
                 <p className="text-sm text-muted-foreground">
-                  Full keyboard navigation and screen reader support
+                  {t.fileUploadComponent.features.accessibleDesc}
                 </p>
               </CardContent>
             </Card>
@@ -283,12 +288,12 @@ export default function Example() {
 
         {/* Examples */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Examples</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.fileUploadComponent.examples.title}</h2>
 
           <div className="space-y-8">
             {/* Images Only */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">Images Only</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.fileUploadComponent.examples.imagesOnly}</h3>
               <Card>
                 <CardContent className="p-6">
                   <div className="flex justify-center">
@@ -309,7 +314,7 @@ export default function Example() {
 
             {/* Multiple Files */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">Multiple Files</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.fileUploadComponent.examples.multipleFiles}</h3>
               <Card>
                 <CardContent className="p-6">
                   <div className="flex justify-center">
@@ -331,7 +336,7 @@ export default function Example() {
 
             {/* Custom Size Limit */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">Custom Size Limit</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.fileUploadComponent.examples.customSizeLimit}</h3>
               <Card>
                 <CardContent className="p-6">
                   <div className="flex justify-center">
@@ -354,12 +359,12 @@ export default function Example() {
 
         {/* Usage */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Usage with Backend</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.fileUploadComponent.usage}</h2>
           <Card>
             <CardHeader>
-              <CardTitle>Uploading Files to Server</CardTitle>
+              <CardTitle>{t.fileUploadComponent.usageBackend.title}</CardTitle>
               <CardDescription>
-                Example of uploading files using FormData
+                {t.fileUploadComponent.usageBackend.description}
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -370,49 +375,49 @@ export default function Example() {
 
         {/* File Type Examples */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Common File Type Patterns</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.fileUploadComponent.fileTypes.title}</h2>
           <div className="grid gap-4 md:grid-cols-2">
             <Card>
               <CardHeader>
-                <CardTitle className="text-lg">Images</CardTitle>
+                <CardTitle className="text-lg">{t.fileUploadComponent.fileTypes.images}</CardTitle>
               </CardHeader>
               <CardContent>
                 <code className="text-sm bg-muted px-2 py-1 rounded">accept=&quot;image/*&quot;</code>
                 <p className="text-sm text-muted-foreground mt-2">
-                  Accepts all image formats (JPEG, PNG, GIF, WebP, etc.)
+                  {t.fileUploadComponent.fileTypes.imagesDesc}
                 </p>
               </CardContent>
             </Card>
             <Card>
               <CardHeader>
-                <CardTitle className="text-lg">Documents</CardTitle>
+                <CardTitle className="text-lg">{t.fileUploadComponent.fileTypes.documents}</CardTitle>
               </CardHeader>
               <CardContent>
                 <code className="text-sm bg-muted px-2 py-1 rounded">accept=&quot;.pdf,.doc,.docx&quot;</code>
                 <p className="text-sm text-muted-foreground mt-2">
-                  Accepts PDF and Word documents
+                  {t.fileUploadComponent.fileTypes.documentsDesc}
                 </p>
               </CardContent>
             </Card>
             <Card>
               <CardHeader>
-                <CardTitle className="text-lg">Videos</CardTitle>
+                <CardTitle className="text-lg">{t.fileUploadComponent.fileTypes.videos}</CardTitle>
               </CardHeader>
               <CardContent>
                 <code className="text-sm bg-muted px-2 py-1 rounded">accept=&quot;video/*&quot;</code>
                 <p className="text-sm text-muted-foreground mt-2">
-                  Accepts all video formats (MP4, WebM, AVI, etc.)
+                  {t.fileUploadComponent.fileTypes.videosDesc}
                 </p>
               </CardContent>
             </Card>
             <Card>
               <CardHeader>
-                <CardTitle className="text-lg">Spreadsheets</CardTitle>
+                <CardTitle className="text-lg">{t.fileUploadComponent.fileTypes.spreadsheets}</CardTitle>
               </CardHeader>
               <CardContent>
                 <code className="text-sm bg-muted px-2 py-1 rounded">accept=&quot;.xlsx,.xls,.csv&quot;</code>
                 <p className="text-sm text-muted-foreground mt-2">
-                  Accepts Excel and CSV files
+                  {t.fileUploadComponent.fileTypes.spreadsheetsDesc}
                 </p>
               </CardContent>
             </Card>
@@ -421,13 +426,13 @@ export default function Example() {
 
         {/* Props */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Props</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentDocs.props}</h2>
           <PropsTable props={propDefinitions} />
         </section>
 
         {/* Best Practices */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Best Practices</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.fileUploadComponent.bestPractices.title}</h2>
           <Alert>
             <Info className="h-4 w-4" />
             <AlertDescription>
@@ -435,31 +440,31 @@ export default function Example() {
                 <li className="flex items-start gap-2">
                   <span className="text-primary font-bold">•</span>
                   <span>
-                    Always validate files on the server-side as well, client-side validation can be bypassed
+                    {t.fileUploadComponent.bestPractices.serverValidation}
                   </span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-primary font-bold">•</span>
                   <span>
-                    Set reasonable file size limits to prevent abuse and improve upload performance
+                    {t.fileUploadComponent.bestPractices.sizeLimit}
                   </span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-primary font-bold">•</span>
                   <span>
-                    Provide clear error messages when validation fails
+                    {t.fileUploadComponent.bestPractices.clearErrors}
                   </span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-primary font-bold">•</span>
                   <span>
-                    Clean up object URLs to prevent memory leaks (automatically handled by this component)
+                    {t.fileUploadComponent.bestPractices.cleanupUrls}
                   </span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-primary font-bold">•</span>
                   <span>
-                    Consider adding upload progress indicators for large files
+                    {t.fileUploadComponent.bestPractices.progressIndicators}
                   </span>
                 </li>
               </ul>
@@ -469,29 +474,29 @@ export default function Example() {
 
         {/* Accessibility */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Accessibility</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.fileUploadComponent.accessibility.title}</h2>
           <Card>
             <CardContent className="pt-6">
               <ul className="space-y-3 text-sm text-muted-foreground">
                 <li className="flex items-start gap-2">
                   <span className="text-primary font-bold">✓</span>
-                  <span>Full keyboard navigation (Tab, Enter, Space)</span>
+                  <span>{t.fileUploadComponent.accessibility.keyboardNavigation}</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-primary font-bold">✓</span>
-                  <span>ARIA labels for screen readers</span>
+                  <span>{t.fileUploadComponent.accessibility.ariaLabels}</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-primary font-bold">✓</span>
-                  <span>Error messages are announced to screen readers</span>
+                  <span>{t.fileUploadComponent.accessibility.errorAnnouncements}</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-primary font-bold">✓</span>
-                  <span>Visual feedback for drag-and-drop state</span>
+                  <span>{t.fileUploadComponent.accessibility.visualFeedback}</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-primary font-bold">✓</span>
-                  <span>Focus management and visible focus indicators</span>
+                  <span>{t.fileUploadComponent.accessibility.focusManagement}</span>
                 </li>
               </ul>
             </CardContent>

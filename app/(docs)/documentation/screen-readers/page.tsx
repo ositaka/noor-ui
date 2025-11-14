@@ -5,6 +5,8 @@ import Link from 'next/link'
 import { Card, CardContent } from '@/components/ui/card'
 import { CodeBlock } from '@/components/docs/code-block'
 import { Volume2, AlertCircle } from 'lucide-react'
+import { useDirection } from '@/components/providers/direction-provider'
+import { content } from '@/lib/i18n'
 
 const ariaLabelsCode = `// Descriptive labels for icon buttons
 <button aria-label="Close dialog">
@@ -103,60 +105,64 @@ const skipLinksCode = `// Skip to main content link
 </main>`
 
 export default function ScreenReadersPage() {
+  const { locale } = useDirection()
+  const t = content[locale].documentationPages.screenReaders
+  const common = content[locale].documentationPages.common
+
   return (
     <div className="min-h-screen">
       <main id="main-content" className="container py-12">
         <nav aria-label="Breadcrumb" className="mb-8">
           <ol className="flex items-center gap-2 text-sm text-muted-foreground">
-            <li><Link href="/" className="hover:text-foreground transition-colors">Home</Link></li>
+            <li><Link href="/" className="hover:text-foreground transition-colors">{common.home}</Link></li>
             <li>/</li>
-            <li><Link href="/documentation" className="hover:text-foreground transition-colors">Documentation</Link></li>
+            <li><Link href="/documentation" className="hover:text-foreground transition-colors">{common.documentation}</Link></li>
             <li>/</li>
-            <li className="text-foreground font-medium">Screen Readers</li>
+            <li className="text-foreground font-medium">{t.title}</li>
           </ol>
         </nav>
 
         <div className="max-w-3xl mb-12">
           <div className="flex items-center gap-3 mb-4">
             <Volume2 className="h-10 w-10 text-primary" />
-            <h1 className="text-4xl font-bold tracking-tight">Screen Reader Support</h1>
+            <h1 className="text-4xl font-bold tracking-tight">{t.title}</h1>
           </div>
           <p className="text-xl text-muted-foreground">
-            Optimizing Noor UI components for screen reader users. Learn how to make your applications fully accessible to users who rely on assistive technologies.
+            {t.subtitle}
           </p>
         </div>
 
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Tested Screen Readers</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.testedScreenReaders}</h2>
           <Card>
             <CardContent className="p-6">
               <ul className="space-y-3">
                 <li className="flex items-start gap-3">
                   <span className="text-green-600 font-bold">✓</span>
                   <div>
-                    <strong>NVDA (Windows)</strong>
-                    <p className="text-sm text-muted-foreground">Free, open-source screen reader</p>
+                    <strong>{t.nvda}</strong>
+                    <p className="text-sm text-muted-foreground">{t.nvdaDesc}</p>
                   </div>
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="text-green-600 font-bold">✓</span>
                   <div>
-                    <strong>JAWS (Windows)</strong>
-                    <p className="text-sm text-muted-foreground">Professional screen reader</p>
+                    <strong>{t.jaws}</strong>
+                    <p className="text-sm text-muted-foreground">{t.jawsDesc}</p>
                   </div>
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="text-green-600 font-bold">✓</span>
                   <div>
-                    <strong>VoiceOver (macOS, iOS)</strong>
-                    <p className="text-sm text-muted-foreground">Built-in Apple screen reader</p>
+                    <strong>{t.voiceover}</strong>
+                    <p className="text-sm text-muted-foreground">{t.voiceoverDesc}</p>
                   </div>
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="text-green-600 font-bold">✓</span>
                   <div>
-                    <strong>TalkBack (Android)</strong>
-                    <p className="text-sm text-muted-foreground">Android accessibility service</p>
+                    <strong>{t.talkback}</strong>
+                    <p className="text-sm text-muted-foreground">{t.talkbackDesc}</p>
                   </div>
                 </li>
               </ul>
@@ -165,37 +171,37 @@ export default function ScreenReadersPage() {
         </section>
 
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">1. Descriptive Labels</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.descriptiveLabels}</h2>
           <p className="text-muted-foreground mb-4">
-            Provide clear, descriptive labels for all interactive elements:
+            {t.labelsDesc}
           </p>
           <CodeBlock code={ariaLabelsCode} language="tsx" />
         </section>
 
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">2. Semantic Landmarks</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.semanticLandmarks}</h2>
           <p className="text-muted-foreground mb-4">
-            Use HTML5 landmarks to help users navigate your page:
+            {t.landmarksDesc}
           </p>
           <CodeBlock code={landmarksCode} language="tsx" />
 
           <Card className="mt-6">
             <CardContent className="p-6">
-              <h3 className="font-semibold mb-3">Landmark Benefits</h3>
+              <h3 className="font-semibold mb-3">{t.landmarkBenefits}</h3>
               <ul className="space-y-2 text-sm text-muted-foreground">
-                <li>• Users can quickly jump between major sections</li>
-                <li>• Screen readers announce landmark regions</li>
-                <li>• Improves navigation efficiency</li>
-                <li>• Provides document structure context</li>
+                <li>• {t.quickJump}</li>
+                <li>• {t.announceRegions}</li>
+                <li>• {t.improveNav}</li>
+                <li>• {t.structureContext}</li>
               </ul>
             </CardContent>
           </Card>
         </section>
 
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">3. Live Regions</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.liveRegions}</h2>
           <p className="text-muted-foreground mb-4">
-            Announce dynamic content changes to screen reader users:
+            {t.liveRegionsDesc}
           </p>
           <CodeBlock code={liveRegionsCode} language="tsx" />
 
@@ -203,71 +209,71 @@ export default function ScreenReadersPage() {
             <CardContent className="p-6">
               <h3 className="font-semibold mb-2 flex items-center gap-2">
                 <AlertCircle className="h-5 w-5 text-blue-600 dark:text-blue-400" />
-                Live Region Politeness
+                {t.politeness}
               </h3>
               <div className="text-sm text-muted-foreground space-y-2">
-                <p><strong>assertive:</strong> Interrupts current announcement (use for errors)</p>
-                <p><strong>polite:</strong> Waits for current announcement to finish (use for status updates)</p>
-                <p><strong>off:</strong> Not announced (default)</p>
+                <p><strong>{t.assertive}</strong> {t.assertiveDesc}</p>
+                <p><strong>{t.polite}</strong> {t.politeDesc}</p>
+                <p><strong>{t.off}</strong> {t.offDesc}</p>
               </div>
             </CardContent>
           </Card>
         </section>
 
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">4. Associated Descriptions</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.associatedDesc}</h2>
           <p className="text-muted-foreground mb-4">
-            Link form fields with their descriptions and error messages:
+            {t.associatedDescDesc}
           </p>
           <CodeBlock code={ariaDescribedByCode} language="tsx" />
         </section>
 
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">5. Skip Links</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.skipLinks}</h2>
           <p className="text-muted-foreground mb-4">
-            Allow keyboard and screen reader users to skip repetitive content:
+            {t.skipLinksDesc}
           </p>
           <CodeBlock code={skipLinksCode} language="tsx" />
         </section>
 
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">RTL Considerations</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.rtlConsiderations}</h2>
           <Card>
             <CardContent className="p-6">
-              <h3 className="font-semibold mb-3">Screen Readers in RTL</h3>
+              <h3 className="font-semibold mb-3">{t.screenReadersRTL}</h3>
               <ul className="space-y-2 text-sm text-muted-foreground">
-                <li>• Arabic screen readers (e.g., NVDA with Arabic voice) read RTL text naturally</li>
-                <li>• Navigation commands work the same way in RTL layouts</li>
-                <li>• Ensure proper <code className="px-1.5 py-0.5 rounded bg-muted text-foreground">lang</code> and <code className="px-1.5 py-0.5 rounded bg-muted text-foreground">dir</code> attributes</li>
-                <li>• Test with native RTL language users when possible</li>
-                <li>• Numbers and English text are announced correctly in Arabic context</li>
+                <li>• {t.arabicSR}</li>
+                <li>• {t.navCommands}</li>
+                <li>• {t.langDir}</li>
+                <li>• {t.testNativeSpeakers}</li>
+                <li>• {t.numbersEnglish}</li>
               </ul>
             </CardContent>
           </Card>
         </section>
 
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Testing Tips</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.testingTips}</h2>
           <div className="grid gap-4 sm:grid-cols-2">
             <Card>
               <CardContent className="p-6">
-                <h3 className="font-semibold mb-2">Testing Checklist</h3>
+                <h3 className="font-semibold mb-2">{t.testingChecklist}</h3>
                 <ul className="text-sm text-muted-foreground space-y-1">
-                  <li>✓ All images have alt text</li>
-                  <li>✓ Form fields have labels</li>
-                  <li>✓ Links are descriptive</li>
-                  <li>✓ Headings are hierarchical</li>
-                  <li>✓ Tables have proper markup</li>
-                  <li>✓ Live regions work correctly</li>
+                  <li>✓ {t.altText}</li>
+                  <li>✓ {t.formLabels}</li>
+                  <li>✓ {t.descriptiveLinks}</li>
+                  <li>✓ {t.hierarchicalHeadings}</li>
+                  <li>✓ {t.properTables}</li>
+                  <li>✓ {t.liveRegionsWork}</li>
                 </ul>
               </CardContent>
             </Card>
 
             <Card>
               <CardContent className="p-6">
-                <h3 className="font-semibold mb-2">Quick Test</h3>
+                <h3 className="font-semibold mb-2">{t.quickTest}</h3>
                 <ul className="text-sm text-muted-foreground space-y-1">
-                  <li>1. Turn on your screen reader</li>
+                  <li>1. {t.turnOnSR}</li>
                   <li>2. Navigate using only keyboard</li>
                   <li>3. Close your eyes and listen</li>
                   <li>4. Can you complete all tasks?</li>
@@ -279,7 +285,7 @@ export default function ScreenReadersPage() {
         </section>
 
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Learn More</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{common.learnMore}</h2>
           <div className="grid gap-4 sm:grid-cols-2">
             <Link href="/documentation/wcag">
               <Card className="hover:border-primary transition-colors h-full">

@@ -4,6 +4,8 @@ import * as React from 'react'
 import Link from 'next/link'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
+import { useDirection } from '@/components/providers/direction-provider'
+import { content } from '@/lib/i18n'
 import {
   FileText,
   CheckSquare,
@@ -28,203 +30,44 @@ import {
   type LucideIcon,
 } from 'lucide-react'
 
+// Icon mapping for example cards
+const iconMap: Record<string, LucideIcon> = {
+  '/examples/gcc-dashboard': Sparkles,
+  '/examples/islamic-finance-dashboard': Landmark,
+  '/examples/datatable-showcase': Table,
+  '/examples/registration': FileText,
+  '/examples/dashboard': LayoutDashboard,
+  '/examples/calendar': Calendar,
+  '/examples/real-estate': Home,
+  '/examples/portfolio': LayoutDashboard,
+  '/examples/marketplace': Store,
+  '/examples/b2b-marketplace': ShoppingCart,
+  '/examples/cms': FileEdit,
+  '/examples/ai-chat-simple': MessageSquare,
+  '/examples/ai-playground': Bot,
+  '/examples/ai-code-assistant': Code2,
+  '/examples/ai-document-qa': BookOpen,
+  '/examples/ai-multi-agent': Users,
+  '/examples/workflow-basic': GitBranch,
+  '/examples/ai-workflow': Workflow,
+  '/examples/analytics': TrendingUp,
+}
+
 interface Example {
   title: string
   description: string
   href: string
-  icon: LucideIcon
   tags: string[]
-  status: 'ready' | 'coming-soon'
+  status: string
   featured?: boolean
 }
 
-const examples: Example[] = [
-  {
-    title: 'GCC Community Dashboard',
-    description: 'Complete GCC dashboard with Prayer Times, Hijri dates, Zakat calculator, and Arabic numbers. Perfect showcase of all GCC components.',
-    href: '/examples/gcc-dashboard',
-    icon: Sparkles,
-    tags: ['GCC', 'Islamic', 'Zakat', 'Prayer', 'RTL'],
-    status: 'ready' as const,
-    featured: true,
-  },
-  {
-    title: 'Islamic Finance Dashboard',
-    description: 'Comprehensive Islamic finance management with Zakat calculator, investment tracking, Hijri calendar, prayer times, and transaction history.',
-    href: '/examples/islamic-finance-dashboard',
-    icon: Landmark,
-    tags: ['GCC', 'Islamic', 'Finance', 'Zakat', 'DataTable', 'RTL'],
-    status: 'ready' as const,
-    featured: true,
-  },
-  {
-    title: 'DataTable Showcase',
-    description: 'Advanced data table with sorting, filtering, pagination, and export. Demonstrates all DataTable features with 50 sample users.',
-    href: '/examples/datatable-showcase',
-    icon: Table,
-    tags: ['DataTable', 'Sorting', 'Filtering', 'Export', 'RTL'],
-    status: 'ready' as const,
-  },
-  {
-    title: 'Multi-Step Registration Form',
-    description: 'A comprehensive 4-step registration form with validation, bilingual error messages, and perfect RTL support.',
-    href: '/examples/registration',
-    icon: FileText,
-    tags: ['Forms', 'Validation', 'Multi-step', 'RTL'],
-    status: 'ready' as const,
-  },
-  {
-    title: 'Dashboard',
-    description: 'Data visualization dashboard with RTL charts, statistics cards, and responsive layout with mock data.',
-    href: '/examples/dashboard',
-    icon: LayoutDashboard,
-    tags: ['Dashboard', 'Charts', 'Data', 'RTL'],
-    status: 'ready' as const,
-  },
-  {
-    title: 'Calendar & Date Picker',
-    description: 'Calendar interface with Hijri calendar support for GCC markets.',
-    href: '/examples/calendar',
-    icon: Calendar,
-    tags: ['Calendar', 'Hijri', 'GCC', 'RTL'],
-    status: 'ready' as const,
-    featured: true,
-  },
-  {
-    title: 'Real Estate Dashboard',
-    description: 'Property listings platform with bilingual descriptions, search filters, and property cards with mock data.',
-    href: '/examples/real-estate',
-    icon: Home,
-    tags: ['Real Estate', 'Listings', 'Search', 'GCC', 'RTL'],
-    status: 'ready' as const,
-    featured: true,
-  },
-  {
-    title: 'Portfolio Site',
-    description: 'Creative professional portfolio with project showcase, case studies, and contact forms. Perfect for designers and developers.',
-    href: '/examples/portfolio',
-    icon: LayoutDashboard,
-    tags: ['Portfolio', 'Showcase', 'Creative', 'RTL'],
-    status: 'ready' as const,
-    featured: true,
-  },
-  {
-    title: 'Marketplace',
-    description: 'Multi-vendor marketplace with product listings, seller dashboards, and order management. Full e-commerce solution.',
-    href: '/examples/marketplace',
-    icon: Store,
-    tags: ['Marketplace', 'E-commerce', 'Multi-vendor', 'Orders', 'RTL'],
-    status: 'ready' as const,
-    featured: true,
-  },
-  {
-    title: 'B2B Marketplace',
-    description: 'Business-to-business marketplace with bulk ordering, volume pricing, RFQ system, and credit terms. Perfect for wholesale operations.',
-    href: '/examples/b2b-marketplace',
-    icon: ShoppingCart,
-    tags: ['B2B', 'Wholesale', 'Bulk Orders', 'RFQ', 'Credit Terms', 'RTL'],
-    status: 'ready' as const,
-    featured: true,
-  },
-  {
-    title: 'CMS / Content Management',
-    description: 'Full-featured content management system with rich text editor, file uploads, posts management, and bilingual content support.',
-    href: '/examples/cms',
-    icon: FileEdit,
-    tags: ['CMS', 'Content', 'Editor', 'Dashboard Shell', 'RTL'],
-    status: 'ready' as const,
-    featured: true,
-  },
-  {
-    title: 'Simple AI Chat',
-    description: 'Clean AI chat interface with streaming responses, message history, and bilingual support. Perfect starting point for chat applications.',
-    href: '/examples/ai-chat-simple',
-    icon: MessageSquare,
-    tags: ['AI', 'Chat', 'Streaming', 'LLM', 'RTL'],
-    status: 'ready' as const,
-    featured: true,
-  },
-  {
-    title: 'Advanced AI Playground',
-    description: 'Full-featured AI playground with model selection, parameter controls, token tracking, conversation history, and settings panel.',
-    href: '/examples/ai-playground',
-    icon: Bot,
-    tags: ['AI', 'LLM', 'Parameters', 'Models', 'Tokens', 'RTL'],
-    status: 'ready' as const,
-    featured: true,
-  },
-  {
-    title: 'AI Code Assistant',
-    description: 'Specialized AI assistant for code with explain, improve, fix, and generate modes. Includes syntax highlighting and code examples.',
-    href: '/examples/ai-code-assistant',
-    icon: Code2,
-    tags: ['AI', 'Code', 'Programming', 'LLM', 'RTL'],
-    status: 'ready' as const,
-    featured: true,
-  },
-  {
-    title: 'Document Q&A',
-    description: 'AI-powered document analysis with question answering, source citations, and document management. Perfect for knowledge bases.',
-    href: '/examples/ai-document-qa',
-    icon: BookOpen,
-    tags: ['AI', 'Documents', 'Q&A', 'Search', 'LLM', 'RTL'],
-    status: 'ready' as const,
-    featured: true,
-  },
-  {
-    title: 'Multi-Agent Chat',
-    description: 'Advanced multi-agent system with specialized AI assistants (Code Expert, Creative Writer, Data Analyst) collaborating in conversations.',
-    href: '/examples/ai-multi-agent',
-    icon: Users,
-    tags: ['AI', 'Multi-Agent', 'Collaboration', 'LLM', 'RTL'],
-    status: 'ready' as const,
-    featured: true,
-  },
-  {
-    title: 'Basic Workflow',
-    description: 'Simple workflow builder with drag-and-drop nodes and connections. Perfect starting point for understanding workflow automation.',
-    href: '/examples/workflow-basic',
-    icon: GitBranch,
-    tags: ['Workflow', 'Drag & Drop', 'Automation', 'RTL'],
-    status: 'ready' as const,
-    featured: true,
-  },
-  {
-    title: 'AI Workflow',
-    description: 'AI-powered workflow builder with LLM integration, model selection, token tracking, and cost estimation. Build intelligent automation pipelines.',
-    href: '/examples/ai-workflow',
-    icon: Workflow,
-    tags: ['Workflow', 'AI', 'LLM', 'Automation', 'Tokens', 'RTL'],
-    status: 'ready' as const,
-    featured: true,
-  },
-  {
-    title: 'Analytics Dashboard',
-    description: 'Real-time analytics with charts, metrics, and data visualization. Track user behavior and business KPIs with RTL-ready charts.',
-    href: '/examples/analytics',
-    icon: TrendingUp,
-    tags: ['Analytics', 'Charts', 'Metrics', 'Data', 'RTL'],
-    status: 'coming-soon' as const,
-  },
-]
-
 export default function ExamplesPage() {
-  const [isRTL, setIsRTL] = React.useState(false)
+  const { locale } = useDirection()
+  const t = content[locale]
 
-  React.useEffect(() => {
-    setIsRTL(document.documentElement.dir === 'rtl')
-
-    const observer = new MutationObserver(() => {
-      setIsRTL(document.documentElement.dir === 'rtl')
-    })
-
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ['dir'],
-    })
-
-    return () => observer.disconnect()
-  }, [])
+  // Get examples from i18n
+  const examples: Example[] = t.exampleCards
 
   return (
     <div className="min-h-screen">
@@ -234,12 +77,12 @@ export default function ExamplesPage() {
           <ol className="flex items-center gap-2 text-sm text-muted-foreground">
             <li>
               <Link href="/" className="hover:text-foreground transition-colors">
-                {isRTL ? 'الرئيسية' : 'Home'}
+                {t.common.home}
               </Link>
             </li>
             <li>/</li>
             <li className="text-foreground font-medium">
-              {isRTL ? 'الأمثلة' : 'Examples'}
+              {t.nav.examples}
             </li>
           </ol>
         </nav>
@@ -247,12 +90,10 @@ export default function ExamplesPage() {
         {/* Page Header */}
         <div className="max-w-3xl mb-12">
           <h1 className="text-4xl font-bold tracking-tight mb-4">
-            {isRTL ? 'أمثلة المكونات' : 'Component Examples'}
+            {t.examples.title}
           </h1>
           <p className="text-xl text-muted-foreground">
-            {isRTL
-              ? 'أمثلة خفيفة توضح كيفية استخدام المكونات والأنماط مع بيانات تجريبية. مثالية للتعلم السريع ورؤية كيف تبدو الأشياء.'
-              : 'Lightweight examples showing how to use components and patterns with mock data. Perfect for quick learning and seeing how things look.'}
+            {t.examples.subtitle}
           </p>
         </div>
 
@@ -272,16 +113,19 @@ export default function ExamplesPage() {
                 <CardHeader>
                   <div className="flex items-start justify-between mb-2">
                     <div className="p-2 bg-primary/10 rounded-lg">
-                      <example.icon className="h-6 w-6 text-primary" />
+                      {(() => {
+                        const Icon = iconMap[example.href]
+                        return Icon ? <Icon className="h-6 w-6 text-primary" /> : null
+                      })()}
                     </div>
                     {example.status === 'coming-soon' && (
                       <Badge variant="outline" className="text-xs">
-                        {isRTL ? 'قريباً' : 'Coming Soon'}
+                        {t.examples.comingSoon}
                       </Badge>
                     )}
                     {example.status === 'ready' && (
                       <Badge className="text-xs">
-                        {isRTL ? 'جاهز' : 'Ready'}
+                        {t.examples.ready}
                       </Badge>
                     )}
                   </div>
@@ -314,12 +158,10 @@ export default function ExamplesPage() {
                 </div>
                 <div className="flex-1 space-y-2">
                   <h3 className="font-semibold">
-                    {isRTL ? 'المزيد من الأمثلة قريباً' : 'More Examples Coming Soon'}
+                    {t.examples.moreSoon}
                   </h3>
                   <p className="text-sm text-muted-foreground">
-                    {isRTL
-                      ? 'نعمل على إضافة المزيد من الأمثلة الواقعية بما في ذلك لوحات المعلومات، متاجر التجارة الإلكترونية، والمزيد. تحقق قريباً للحصول على التحديثات!'
-                      : "We're working on adding more real-world examples including dashboards, e-commerce stores, and more. Check back soon for updates!"}
+                    {t.examples.moreSoonDesc}
                   </p>
                 </div>
               </div>
@@ -333,16 +175,14 @@ export default function ExamplesPage() {
             <CardContent className="p-6">
               <div className="space-y-4">
                 <h3 className="font-semibold">
-                  {isRTL ? 'هل تبحث عن تطبيقات كاملة؟' : 'Looking for Complete Applications?'}
+                  {t.examples.lookingForApps}
                 </h3>
                 <p className="text-sm text-muted-foreground">
-                  {isRTL
-                    ? 'تصفح نماذج البدء الجاهزة للإنتاج - تطبيقات كاملة مع مصادقة، قاعدة بيانات، وكل ما تحتاجه للبدء.'
-                    : 'Browse production-ready starters - complete applications with authentication, database, and everything you need to get started.'}
+                  {t.examples.lookingForAppsDesc}
                 </p>
                 <Link href="/starters">
                   <Badge className="cursor-pointer hover:bg-primary/90">
-                    {isRTL ? 'عرض النماذج الجاهزة →' : 'View Production Starters →'}
+                    {t.examples.viewStarters}
                   </Badge>
                 </Link>
               </div>
@@ -353,16 +193,14 @@ export default function ExamplesPage() {
             <CardContent className="p-6">
               <div className="space-y-4">
                 <h3 className="font-semibold">
-                  {isRTL ? 'هل تبحث عن المكونات الفردية؟' : 'Looking for Individual Components?'}
+                  {t.examples.lookingForComponents}
                 </h3>
                 <p className="text-sm text-muted-foreground">
-                  {isRTL
-                    ? 'تصفح مكتبة المكونات الكاملة لدينا التي تحتوي على 38 مكوناً موثقاً بالكامل مع أمثلة حية وإرشادات إمكانية الوصول.'
-                    : 'Browse our complete component library with 38 fully documented components with live examples and accessibility guidelines.'}
+                  {t.examples.lookingForComponentsDesc}
                 </p>
                 <Link href="/components">
                   <Badge className="cursor-pointer hover:bg-primary/90">
-                    {isRTL ? 'عرض جميع المكونات →' : 'View All Components →'}
+                    {t.examples.viewAllComponents}
                   </Badge>
                 </Link>
               </div>

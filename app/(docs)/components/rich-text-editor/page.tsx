@@ -8,41 +8,43 @@ import { CodeBlock } from '@/components/docs/code-block'
 import { RichTextEditor } from '@/components/ui/rich-text-editor'
 import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
+import { useDirection } from '@/components/providers/direction-provider'
+import { content } from '@/lib/i18n'
 
-const propDefinitions = [
+const getRichTextEditorProps = (t: typeof content.en | typeof content.ar) => [
   {
     name: 'content',
     type: 'string',
     defaultValue: '""',
-    description: 'The HTML content of the editor',
+    description: t.richTextEditorComponent.props.content,
   },
   {
     name: 'onChange',
     type: '(content: string) => void',
-    description: 'Callback fired when the content changes',
+    description: t.richTextEditorComponent.props.onChange,
   },
   {
     name: 'placeholder',
     type: 'string',
     defaultValue: '"Start writing..."',
-    description: 'Placeholder text shown when editor is empty',
+    description: t.richTextEditorComponent.props.placeholder,
   },
   {
     name: 'className',
     type: 'string',
-    description: 'Additional CSS classes',
+    description: t.richTextEditorComponent.props.className,
   },
   {
     name: 'editable',
     type: 'boolean',
     defaultValue: 'true',
-    description: 'Whether the editor is editable',
+    description: t.richTextEditorComponent.props.editable,
   },
   {
     name: 'minHeight',
     type: 'string',
     defaultValue: '"300px"',
-    description: 'Minimum height of the editor',
+    description: t.richTextEditorComponent.props.minHeight,
   },
 ]
 
@@ -134,6 +136,10 @@ export default function Example() {
 }`
 
 export default function RichTextEditorPage() {
+  const { locale } = useDirection()
+  const t = content[locale]
+  const propDefinitions = getRichTextEditorProps(t)
+
   const [content1, setContent1] = React.useState('')
   const [content2, setContent2] = React.useState('<h2>Welcome to Noor UI</h2><p>This is a <strong>rich text editor</strong> with full <em>RTL support</em>.</p>')
   const [content3, setContent3] = React.useState('<h2>مرحباً بك في نور</h2><p>هذا <strong>محرر نصوص غني</strong> مع دعم كامل للغة العربية.</p>')
@@ -146,41 +152,40 @@ export default function RichTextEditorPage() {
           <ol className="flex items-center gap-2 text-sm text-muted-foreground">
             <li>
               <Link href="/" className="hover:text-foreground transition-colors">
-                Home
+                {t.common.home}
               </Link>
             </li>
             <li>/</li>
             <li>
               <Link href="/components" className="hover:text-foreground transition-colors">
-                Components
+                {t.nav.components}
               </Link>
             </li>
             <li>/</li>
-            <li className="text-foreground font-medium">Rich Text Editor</li>
+            <li className="text-foreground font-medium">{t.richTextEditorComponent.title}</li>
           </ol>
         </nav>
 
         {/* Page Header */}
         <div className="mb-12">
           <div className="flex items-center gap-3 mb-4">
-            <h1 className="text-4xl font-bold tracking-tight">Rich Text Editor</h1>
+            <h1 className="text-4xl font-bold tracking-tight">{t.richTextEditorComponent.title}</h1>
             <Badge variant="default">New</Badge>
           </div>
           <p className="text-xl text-muted-foreground max-w-3xl">
-            A powerful WYSIWYG editor built with Tiptap. Includes text formatting, headings, lists,
-            and full RTL support for Arabic content.
+            {t.richTextEditorComponent.description}
           </p>
         </div>
 
         {/* Preview */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Preview</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.richTextEditorComponent.preview}</h2>
           <ComponentShowcase>
             <ComponentShowcase.Demo>
               <RichTextEditor
                 content={content1}
                 onChange={setContent1}
-                placeholder="Start writing your content..."
+                placeholder={t.richTextEditorComponent.placeholders.startWriting}
                 className="w-full max-w-3xl"
               />
             </ComponentShowcase.Demo>
@@ -189,59 +194,59 @@ export default function RichTextEditorPage() {
 
         {/* Usage */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Usage</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.richTextEditorComponent.usage}</h2>
           <CodeBlock code={basicUsageCode} language="tsx" title="React" />
         </section>
 
         {/* Features */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Features</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.richTextEditorComponent.features.title}</h2>
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             <Card>
               <CardContent className="p-6">
-                <h3 className="font-semibold mb-2">Text Formatting</h3>
+                <h3 className="font-semibold mb-2">{t.richTextEditorComponent.features.textFormatting}</h3>
                 <p className="text-sm text-muted-foreground">
-                  Bold, italic, underline with keyboard shortcuts (Ctrl+B, Ctrl+I, Ctrl+U)
+                  {t.richTextEditorComponent.features.textFormattingDesc}
                 </p>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="p-6">
-                <h3 className="font-semibold mb-2">Headings</h3>
+                <h3 className="font-semibold mb-2">{t.richTextEditorComponent.features.headings}</h3>
                 <p className="text-sm text-muted-foreground">
-                  Three heading levels (H1, H2, H3) for content structure
+                  {t.richTextEditorComponent.features.headingsDesc}
                 </p>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="p-6">
-                <h3 className="font-semibold mb-2">Lists</h3>
+                <h3 className="font-semibold mb-2">{t.richTextEditorComponent.features.lists}</h3>
                 <p className="text-sm text-muted-foreground">
-                  Bullet lists and numbered lists with RTL support
+                  {t.richTextEditorComponent.features.listsDesc}
                 </p>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="p-6">
-                <h3 className="font-semibold mb-2">Text Alignment</h3>
+                <h3 className="font-semibold mb-2">{t.richTextEditorComponent.features.textAlignment}</h3>
                 <p className="text-sm text-muted-foreground">
-                  Direction-aware alignment (left, center, right)
+                  {t.richTextEditorComponent.features.textAlignmentDesc}
                 </p>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="p-6">
-                <h3 className="font-semibold mb-2">Blockquotes & Code</h3>
+                <h3 className="font-semibold mb-2">{t.richTextEditorComponent.features.blockquotesCode}</h3>
                 <p className="text-sm text-muted-foreground">
-                  Quote blocks and syntax-highlighted code blocks
+                  {t.richTextEditorComponent.features.blockquotesCodeDesc}
                 </p>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="p-6">
-                <h3 className="font-semibold mb-2">History</h3>
+                <h3 className="font-semibold mb-2">{t.richTextEditorComponent.features.history}</h3>
                 <p className="text-sm text-muted-foreground">
-                  Undo/Redo with keyboard shortcuts (Ctrl+Z, Ctrl+Y)
+                  {t.richTextEditorComponent.features.historyDesc}
                 </p>
               </CardContent>
             </Card>
@@ -250,12 +255,12 @@ export default function RichTextEditorPage() {
 
         {/* Examples */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Examples</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.richTextEditorComponent.examples.title}</h2>
 
           <div className="space-y-8">
             {/* With Initial Content */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">With Initial Content</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.richTextEditorComponent.examples.withContent}</h3>
               <Card>
                 <CardContent className="p-6">
                   <RichTextEditor
@@ -272,13 +277,13 @@ export default function RichTextEditorPage() {
 
             {/* Arabic Content */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">Arabic Content with RTL</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.richTextEditorComponent.examples.arabicContent}</h3>
               <Card>
                 <CardContent className="p-6">
                   <RichTextEditor
                     content={content3}
                     onChange={setContent3}
-                    placeholder="ابدأ الكتابة..."
+                    placeholder={t.richTextEditorComponent.placeholders.startWritingArabic}
                     className="w-full max-w-3xl"
                   />
                 </CardContent>
@@ -290,7 +295,7 @@ export default function RichTextEditorPage() {
 
             {/* Read Only */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">Read Only Mode</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.richTextEditorComponent.examples.readOnly}</h3>
               <Card>
                 <CardContent className="p-6">
                   <RichTextEditor
@@ -307,14 +312,14 @@ export default function RichTextEditorPage() {
 
             {/* Custom Height */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">Custom Height</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.richTextEditorComponent.examples.customHeight}</h3>
               <Card>
                 <CardContent className="p-6">
                   <RichTextEditor
                     content=""
                     onChange={() => {}}
                     minHeight="150px"
-                    placeholder="Compact editor..."
+                    placeholder={t.richTextEditorComponent.placeholders.compact}
                     className="w-full max-w-3xl"
                   />
                 </CardContent>
@@ -328,32 +333,32 @@ export default function RichTextEditorPage() {
 
         {/* Keyboard Shortcuts */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Keyboard Shortcuts</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.richTextEditorComponent.keyboardShortcuts.title}</h2>
           <Card>
             <CardContent className="p-6">
               <div className="grid gap-3 sm:grid-cols-2">
                 <div className="flex justify-between items-center text-sm">
-                  <span className="text-muted-foreground">Bold</span>
+                  <span className="text-muted-foreground">{t.richTextEditorComponent.keyboardShortcuts.bold}</span>
                   <kbd className="px-2 py-1 text-xs font-semibold bg-muted rounded">Ctrl+B</kbd>
                 </div>
                 <div className="flex justify-between items-center text-sm">
-                  <span className="text-muted-foreground">Italic</span>
+                  <span className="text-muted-foreground">{t.richTextEditorComponent.keyboardShortcuts.italic}</span>
                   <kbd className="px-2 py-1 text-xs font-semibold bg-muted rounded">Ctrl+I</kbd>
                 </div>
                 <div className="flex justify-between items-center text-sm">
-                  <span className="text-muted-foreground">Underline</span>
+                  <span className="text-muted-foreground">{t.richTextEditorComponent.keyboardShortcuts.underline}</span>
                   <kbd className="px-2 py-1 text-xs font-semibold bg-muted rounded">Ctrl+U</kbd>
                 </div>
                 <div className="flex justify-between items-center text-sm">
-                  <span className="text-muted-foreground">Undo</span>
+                  <span className="text-muted-foreground">{t.richTextEditorComponent.keyboardShortcuts.undo}</span>
                   <kbd className="px-2 py-1 text-xs font-semibold bg-muted rounded">Ctrl+Z</kbd>
                 </div>
                 <div className="flex justify-between items-center text-sm">
-                  <span className="text-muted-foreground">Redo</span>
+                  <span className="text-muted-foreground">{t.richTextEditorComponent.keyboardShortcuts.redo}</span>
                   <kbd className="px-2 py-1 text-xs font-semibold bg-muted rounded">Ctrl+Y</kbd>
                 </div>
                 <div className="flex justify-between items-center text-sm">
-                  <span className="text-muted-foreground">Code Block</span>
+                  <span className="text-muted-foreground">{t.richTextEditorComponent.keyboardShortcuts.codeBlock}</span>
                   <kbd className="px-2 py-1 text-xs font-semibold bg-muted rounded">Ctrl+Alt+C</kbd>
                 </div>
               </div>
@@ -363,34 +368,34 @@ export default function RichTextEditorPage() {
 
         {/* RTL Support */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">RTL Support</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.richTextEditorComponent.rtlSupport.title}</h2>
           <Card>
             <CardContent className="p-6 space-y-4">
               <div className="space-y-2">
-                <h4 className="font-semibold text-sm">Automatic Direction Detection</h4>
+                <h4 className="font-semibold text-sm">{t.richTextEditorComponent.rtlSupport.automaticDetection}</h4>
                 <p className="text-sm text-muted-foreground">
-                  The editor automatically adapts to the current text direction
+                  {t.richTextEditorComponent.rtlSupport.description}
                 </p>
                 <ul className="space-y-2 text-sm text-muted-foreground">
                   <li className="flex items-start gap-2">
                     <span className="text-primary">•</span>
-                    <span>Text direction automatically follows the global direction setting</span>
+                    <span>{t.richTextEditorComponent.rtlSupport.autoFollows}</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-primary">•</span>
-                    <span>Alignment buttons adapt to RTL (left becomes right, right becomes left)</span>
+                    <span>{t.richTextEditorComponent.rtlSupport.alignmentAdapts}</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-primary">•</span>
-                    <span>Lists and blockquotes are properly indented in RTL mode</span>
+                    <span>{t.richTextEditorComponent.rtlSupport.listsIndented}</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-primary">•</span>
-                    <span>Default text alignment matches the current direction</span>
+                    <span>{t.richTextEditorComponent.rtlSupport.defaultAlignment}</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-primary">•</span>
-                    <span>Placeholder text is positioned correctly for RTL</span>
+                    <span>{t.richTextEditorComponent.rtlSupport.placeholderPositioned}</span>
                   </li>
                 </ul>
               </div>
@@ -400,35 +405,35 @@ export default function RichTextEditorPage() {
 
         {/* Props */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Props</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentDocs.props}</h2>
           <PropsTable props={propDefinitions} />
         </section>
 
         {/* Accessibility */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Accessibility</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.richTextEditorComponent.accessibility.title}</h2>
           <Card>
             <CardContent className="pt-6">
               <ul className="space-y-3 text-sm text-muted-foreground">
                 <li className="flex items-start gap-2">
                   <span className="text-primary font-bold">✓</span>
-                  <span>Full keyboard navigation support</span>
+                  <span>{t.richTextEditorComponent.accessibility.keyboardNavigation}</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-primary font-bold">✓</span>
-                  <span>Toolbar buttons have proper focus management</span>
+                  <span>{t.richTextEditorComponent.accessibility.toolbarFocus}</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-primary font-bold">✓</span>
-                  <span>All buttons include descriptive titles for screen readers</span>
+                  <span>{t.richTextEditorComponent.accessibility.screenReaderTitles}</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-primary font-bold">✓</span>
-                  <span>Keyboard shortcuts follow standard conventions</span>
+                  <span>{t.richTextEditorComponent.accessibility.keyboardShortcuts}</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-primary font-bold">✓</span>
-                  <span>Active states are clearly indicated</span>
+                  <span>{t.richTextEditorComponent.accessibility.activeStates}</span>
                 </li>
               </ul>
             </CardContent>

@@ -5,11 +5,12 @@ import Link from 'next/link'
 import { WorkflowCanvas } from '@/components/ui/workflow-canvas'
 import { WorkflowNode, type WorkflowNodeData } from '@/components/ui/workflow-node'
 import { Card, CardContent } from '@/components/ui/card'
+import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
 import { ComponentShowcase } from '@/components/docs/component-showcase'
 import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
-import { Zap, Cpu, FileOutput } from 'lucide-react'
+import { Zap, Cpu, FileOutput, AlertCircle } from 'lucide-react'
 import { type Node, type Edge } from '@xyflow/react'
 
 const workflowCanvasProps: PropDefinition[] = [
@@ -119,6 +120,8 @@ const installCode = `npm install @noorui/components @xyflow/react`
 
 const basicUsageCode = `import { WorkflowCanvas } from '@/components/ui/workflow-canvas'
 import { WorkflowNode } from '@/components/ui/workflow-node'
+import { useDirection } from '@/components/providers/direction-provider'
+import { content } from '@/lib/i18n'
 
 const nodes = [
   {
@@ -296,10 +299,24 @@ export default function WorkflowCanvasPage() {
 
         {/* Page Header */}
         <div className="mb-12">
-          <h1 className="text-4xl font-bold tracking-tight mb-4">Workflow Canvas</h1>
-          <p className="text-xl text-muted-foreground max-w-3xl">
-            Canvas component for building node-based workflows with drag-and-drop, pan/zoom, minimap, and controls. Perfect for automation builders.
-          </p>
+          <div className="flex items-center gap-3 mb-4">
+            <h1 className="text-4xl font-bold tracking-tight">Workflow Canvas</h1>
+            <Badge variant="secondary" className="flex items-center gap-1.5">
+              <AlertCircle className="h-3 w-3" />
+              Work in Progress
+            </Badge>
+          </div>
+          <div className="space-y-3">
+            <p className="text-xl text-muted-foreground max-w-3xl">
+              Canvas component for building node-based workflows with drag-and-drop, pan/zoom, minimap, and controls. Perfect for automation builders.
+            </p>
+            <div className="flex items-start gap-2 p-3 bg-yellow-50 dark:bg-yellow-950/20 border border-yellow-200 dark:border-yellow-800 rounded-lg max-w-3xl">
+              <AlertCircle className="h-4 w-4 text-yellow-600 dark:text-yellow-500 mt-0.5 flex-shrink-0" />
+              <p className="text-sm text-yellow-800 dark:text-yellow-200">
+                <strong>Note:</strong> This component is currently under development. Some features may not work as expected. We&apos;re actively working on improvements and will update the documentation once stable.
+              </p>
+            </div>
+          </div>
         </div>
 
         {/* Preview */}

@@ -3,6 +3,7 @@
 import * as React from 'react'
 import Link from 'next/link'
 import { useDirection } from '@/components/providers/direction-provider'
+import { content } from '@/lib/i18n'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Calendar } from '@/components/ui/calendar'
@@ -409,15 +410,15 @@ export default function CalendarExamplePage() {
                     </h5>
                     <ul className="space-y-2 text-sm text-muted-foreground">
                       <li className="flex items-start gap-2">
-                        <ArrowRight className="h-4 w-4 text-primary mt-0.5 shrink-0" />
+                        <ArrowRight className="h-4 w-4 text-primary mt-0.5 shrink-0 rtl:rotate-180" />
                         <span>{isRTL ? 'حجوزات المؤتمرات' : 'Conference bookings'}</span>
                       </li>
                       <li className="flex items-start gap-2">
-                        <ArrowRight className="h-4 w-4 text-primary mt-0.5 shrink-0" />
+                        <ArrowRight className="h-4 w-4 text-primary mt-0.5 shrink-0 rtl:rotate-180" />
                         <span>{isRTL ? 'تسجيل الدورات' : 'Course enrollment'}</span>
                       </li>
                       <li className="flex items-start gap-2">
-                        <ArrowRight className="h-4 w-4 text-primary mt-0.5 shrink-0" />
+                        <ArrowRight className="h-4 w-4 text-primary mt-0.5 shrink-0 rtl:rotate-180" />
                         <span>{isRTL ? 'تذاكر الأحداث' : 'Event ticketing'}</span>
                       </li>
                     </ul>
@@ -448,15 +449,15 @@ export default function CalendarExamplePage() {
                     </h5>
                     <ul className="space-y-2 text-sm text-muted-foreground">
                       <li className="flex items-start gap-2">
-                        <ArrowRight className="h-4 w-4 text-primary mt-0.5 shrink-0" />
+                        <ArrowRight className="h-4 w-4 text-primary mt-0.5 shrink-0 rtl:rotate-180" />
                         <span>{isRTL ? 'الضيافة والسياحة' : 'Hospitality & Tourism'}</span>
                       </li>
                       <li className="flex items-start gap-2">
-                        <ArrowRight className="h-4 w-4 text-primary mt-0.5 shrink-0" />
+                        <ArrowRight className="h-4 w-4 text-primary mt-0.5 shrink-0 rtl:rotate-180" />
                         <span>{isRTL ? 'تأجير السيارات' : 'Car rentals'}</span>
                       </li>
                       <li className="flex items-start gap-2">
-                        <ArrowRight className="h-4 w-4 text-primary mt-0.5 shrink-0" />
+                        <ArrowRight className="h-4 w-4 text-primary mt-0.5 shrink-0 rtl:rotate-180" />
                         <span>{isRTL ? 'حجوزات العقارات' : 'Property bookings'}</span>
                       </li>
                     </ul>

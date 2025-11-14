@@ -17,6 +17,7 @@ import { Badge } from '@/components/ui/badge'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Separator } from '@/components/ui/separator'
 import { useDirection } from '@/components/providers/direction-provider'
+import { content } from '@/lib/i18n'
 import {
   FileText,
   Eye,
@@ -133,6 +134,7 @@ const mockNotifications = [
 
 export default function CMSPage() {
   const { direction, locale } = useDirection()
+  const t = content[locale]
   const isRTL = direction === 'rtl'
   const [activeView, setActiveView] = React.useState<'posts' | 'create' | 'analytics'>('posts')
   const [selectedPost, setSelectedPost] = React.useState<typeof mockPosts[0] | null>(null)

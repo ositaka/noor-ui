@@ -25,6 +25,7 @@ import {
   Layers,
 } from 'lucide-react'
 import { useDirection } from '@/components/providers/direction-provider'
+import { content } from '@/lib/i18n'
 
 interface Project {
   id: string

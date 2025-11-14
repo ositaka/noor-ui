@@ -10,21 +10,23 @@ import { ComponentShowcase } from '@/components/docs/component-showcase'
 import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
 import { Check, AlertCircle, Star, Clock, Zap, CheckCircle2, XCircle } from 'lucide-react'
+import { useDirection } from '@/components/providers/direction-provider'
+import { content } from '@/lib/i18n'
 
-const badgeProps: PropDefinition[] = [
+const getBadgeProps = (t: typeof content.en | typeof content.ar): PropDefinition[] => [
   {
     name: 'variant',
     type: "'default' | 'secondary' | 'destructive' | 'outline'",
     default: "'default'",
     required: false,
-    description: 'Visual style variant of the badge',
+    description: t.badgeComponent.props.variant,
   },
   {
     name: 'className',
     type: 'string',
     default: 'undefined',
     required: false,
-    description: 'Additional CSS classes to apply',
+    description: t.badgeComponent.props.className,
   },
 ]
 
@@ -136,6 +138,10 @@ const rtlCode = `// RTL support is automatic!
 </Badge>`
 
 export default function BadgePage() {
+  const { locale } = useDirection()
+  const t = content[locale]
+  const badgeProps = getBadgeProps(t)
+
   return (
     <div className="min-h-screen">
 
@@ -145,32 +151,31 @@ export default function BadgePage() {
           <ol className="flex items-center gap-2 text-sm text-muted-foreground">
             <li>
               <Link href="/" className="hover:text-foreground transition-colors">
-                Home
+                {t.common.home}
               </Link>
             </li>
             <li>/</li>
             <li>
               <Link href="/components" className="hover:text-foreground transition-colors">
-                Components
+                {t.nav.components}
               </Link>
             </li>
             <li>/</li>
-            <li className="text-foreground font-medium">Badge</li>
+            <li className="text-foreground font-medium">{t.badgeComponent.title}</li>
           </ol>
         </nav>
 
         {/* Page Header */}
         <div className="mb-12">
-          <h1 className="text-4xl font-bold tracking-tight mb-4">Badge</h1>
+          <h1 className="text-4xl font-bold tracking-tight mb-4">{t.badgeComponent.title}</h1>
           <p className="text-xl text-muted-foreground max-w-3xl">
-            Small status indicator or label. Perfect for displaying counts, statuses, categories,
-            and notifications with full RTL support.
+            {t.badgeComponent.description}
           </p>
         </div>
 
         {/* Preview */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Preview</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.badgeComponent.preview}</h2>
           <ComponentShowcase>
             <ComponentShowcase.Demo>
               <div className="flex flex-wrap gap-2">
@@ -184,24 +189,24 @@ export default function BadgePage() {
 
         {/* Installation */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Installation</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.badgeComponent.installation}</h2>
           <CodeBlock code={installCode} language="bash" title="Terminal" />
         </section>
 
         {/* Usage */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Usage</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.badgeComponent.usage}</h2>
           <CodeBlock code={basicUsageCode} language="tsx" title="React" />
         </section>
 
         {/* Examples */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Examples</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.badgeComponent.examples.title}</h2>
 
           <div className="space-y-8">
             {/* Variants */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">Variants</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.badgeComponent.examples.variants}</h3>
               <Card>
                 <CardContent className="p-6">
                   <div className="flex flex-wrap gap-2">
@@ -432,13 +437,13 @@ export default function BadgePage() {
 
         {/* Props */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Props</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.badgeComponent.props.title}</h2>
           <PropsTable props={badgeProps} />
           <Card className="mt-4">
             <CardContent className="p-6">
               <p className="text-sm text-muted-foreground">
-                The Badge component extends all standard HTML div attributes including{' '}
-                <code className="bg-muted px-1 rounded">onClick</code> and other event handlers.
+                {t.badgeComponent.props.note}{' '}
+                <code className="bg-muted px-1 rounded">onClick</code> {t.badgeComponent.props.andOtherHandlers}
               </p>
             </CardContent>
           </Card>
@@ -446,45 +451,40 @@ export default function BadgePage() {
 
         {/* Accessibility */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Accessibility</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.badgeComponent.accessibility.title}</h2>
           <Card>
             <CardContent className="p-6 space-y-4">
               <div>
-                <h3 className="font-semibold mb-2">Semantic HTML</h3>
+                <h3 className="font-semibold mb-2">{t.badgeComponent.accessibility.semanticHTML}</h3>
                 <p className="text-muted-foreground">
-                  Badges render as <code className="bg-muted px-1 rounded">div</code> elements and
-                  are purely presentational. They should be used alongside meaningful text.
+                  {t.badgeComponent.accessibility.semanticDesc}
                 </p>
               </div>
               <Separator />
               <div>
-                <h3 className="font-semibold mb-2">Screen Readers</h3>
+                <h3 className="font-semibold mb-2">{t.badgeComponent.accessibility.screenReaders}</h3>
                 <p className="text-muted-foreground">
-                  Badge text is announced by screen readers. Use descriptive text rather than
-                  ambiguous labels like &quot;New&quot; without context.
+                  {t.badgeComponent.accessibility.screenReadersDesc}
                 </p>
               </div>
               <Separator />
               <div>
-                <h3 className="font-semibold mb-2">Color Alone</h3>
+                <h3 className="font-semibold mb-2">{t.badgeComponent.accessibility.colorAlone}</h3>
                 <p className="text-muted-foreground mb-2">
-                  Don&apos;t rely solely on color to convey information. Use text and icons to ensure
-                  the meaning is clear for users with color vision deficiencies.
+                  {t.badgeComponent.accessibility.colorAloneDesc}
                 </p>
                 <div className="flex gap-2">
                   <Badge variant="destructive">❌ Red</Badge>
                   <Badge variant="destructive">
-                    <XCircle className="h-3 w-3 me-1" />✓ Failed
+                    <XCircle className="h-3 w-3 me-1" />✓ {t.badgeComponent.labels.failed}
                   </Badge>
                 </div>
               </div>
               <Separator />
               <div>
-                <h3 className="font-semibold mb-2">Interactive Badges</h3>
+                <h3 className="font-semibold mb-2">{t.badgeComponent.accessibility.interactiveBadges}</h3>
                 <p className="text-muted-foreground">
-                  If a badge is clickable, wrap it in a button or add proper{' '}
-                  <code className="bg-muted px-1 rounded">role</code>,{' '}
-                  <code className="bg-muted px-1 rounded">tabIndex</code>, and keyboard handlers.
+                  {t.badgeComponent.accessibility.interactiveBadgesDesc}
                 </p>
               </div>
             </CardContent>
@@ -493,17 +493,16 @@ export default function BadgePage() {
 
         {/* RTL Considerations */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">RTL Considerations</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.badgeComponent.rtl.title}</h2>
           <Card>
             <CardContent className="p-6 space-y-4">
               <p className="text-muted-foreground">
-                Badges automatically support RTL layout. Icons and text flow correctly in
-                right-to-left languages.
+                {t.badgeComponent.rtl.description}
               </p>
               <CodeBlock code={rtlCode} language="tsx" />
               <div className="grid gap-4 md:grid-cols-2 mt-6">
                 <div className="space-y-2">
-                  <h4 className="font-semibold text-sm">LTR (English)</h4>
+                  <h4 className="font-semibold text-sm">{t.badgeComponent.rtl.ltr}</h4>
                   <div dir="ltr">
                     <div className="flex flex-wrap gap-2">
                       <Badge>
@@ -516,7 +515,7 @@ export default function BadgePage() {
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <h4 className="font-semibold text-sm">RTL (العربية)</h4>
+                  <h4 className="font-semibold text-sm">{t.badgeComponent.rtl.rtlLabel}</h4>
                   <div dir="rtl">
                     <div className="flex flex-wrap gap-2">
                       <Badge>
@@ -535,47 +534,44 @@ export default function BadgePage() {
 
         {/* Use Cases */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Common Use Cases</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.badgeComponent.useCases.title}</h2>
           <Card>
             <CardContent className="p-6">
               <ul className="space-y-3 text-muted-foreground">
                 <li className="flex items-start gap-2">
                   <span className="text-primary mt-1">•</span>
                   <span>
-                    <strong>Status Indicators:</strong> Show active, pending, completed, or error
-                    states
+                    <strong>{t.badgeComponent.useCases.statusIndicators}:</strong> {t.badgeComponent.useCases.statusDesc}
                   </span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-primary mt-1">•</span>
                   <span>
-                    <strong>Categories and Tags:</strong> Label content with categories or keywords
+                    <strong>{t.badgeComponent.useCases.categories}:</strong> {t.badgeComponent.useCases.categoriesDesc}
                   </span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-primary mt-1">•</span>
                   <span>
-                    <strong>Notification Counts:</strong> Display unread message or notification
-                    counts
+                    <strong>{t.badgeComponent.useCases.notificationCounts}:</strong> {t.badgeComponent.useCases.notificationCountsDesc}
                   </span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-primary mt-1">•</span>
                   <span>
-                    <strong>Feature Highlights:</strong> Mark features as &quot;New&quot;, &quot;Beta&quot;, or &quot;Pro&quot;
+                    <strong>{t.badgeComponent.useCases.featureHighlights}:</strong> {t.badgeComponent.useCases.featureHighlightsDesc}
                   </span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-primary mt-1">•</span>
                   <span>
-                    <strong>Version Labels:</strong> Show version numbers or release stages
+                    <strong>{t.badgeComponent.useCases.versionLabels}:</strong> {t.badgeComponent.useCases.versionLabelsDesc}
                   </span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-primary mt-1">•</span>
                   <span>
-                    <strong>Role Indicators:</strong> Display user roles like &quot;Admin&quot;, &quot;Moderator&quot;,
-                    &quot;Member&quot;
+                    <strong>{t.badgeComponent.useCases.roleIndicators}:</strong> {t.badgeComponent.useCases.roleIndicatorsDesc}
                   </span>
                 </li>
               </ul>
@@ -585,14 +581,14 @@ export default function BadgePage() {
 
         {/* Related Components */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Related Components</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.badgeComponent.related.title}</h2>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             <Link href="/components/button">
               <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold">Button</h3>
+                  <h3 className="font-semibold">{t.badgeComponent.related.button}</h3>
                   <p className="text-sm text-muted-foreground mt-1">
-                    Often used with badges
+                    {t.badgeComponent.related.buttonDesc}
                   </p>
                 </CardContent>
               </Card>
@@ -600,9 +596,9 @@ export default function BadgePage() {
             <Link href="/components/card">
               <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold">Card</h3>
+                  <h3 className="font-semibold">{t.badgeComponent.related.card}</h3>
                   <p className="text-sm text-muted-foreground mt-1">
-                    Common container for badges
+                    {t.badgeComponent.related.cardDesc}
                   </p>
                 </CardContent>
               </Card>
@@ -610,9 +606,9 @@ export default function BadgePage() {
             <Link href="/components/alert">
               <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold">Alert</h3>
+                  <h3 className="font-semibold">{t.badgeComponent.related.alert}</h3>
                   <p className="text-sm text-muted-foreground mt-1">
-                    Similar status indicators
+                    {t.badgeComponent.related.alertDesc}
                   </p>
                 </CardContent>
               </Card>

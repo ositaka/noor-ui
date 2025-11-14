@@ -19,74 +19,76 @@ import { Separator } from '@/components/ui/separator'
 import { ComponentShowcase } from '@/components/docs/component-showcase'
 import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
+import { useDirection } from '@/components/providers/direction-provider'
+import { content } from '@/lib/i18n'
 
-const tableProps: PropDefinition[] = [
+const getTableProps = (t: typeof content.en | typeof content.ar): PropDefinition[] => [
   {
     name: 'className',
     type: 'string',
     default: 'undefined',
     required: false,
-    description: 'Additional CSS classes to apply to the table',
+    description: t.tableComponent.props.className,
   },
 ]
 
-const tableHeaderProps: PropDefinition[] = [
+const getTableHeaderProps = (t: typeof content.en | typeof content.ar): PropDefinition[] => [
   {
     name: 'className',
     type: 'string',
     default: 'undefined',
     required: false,
-    description: 'Additional CSS classes to apply to thead',
+    description: t.tableComponent.props.tableHeader,
   },
 ]
 
-const tableBodyProps: PropDefinition[] = [
+const getTableBodyProps = (t: typeof content.en | typeof content.ar): PropDefinition[] => [
   {
     name: 'className',
     type: 'string',
     default: 'undefined',
     required: false,
-    description: 'Additional CSS classes to apply to tbody',
+    description: t.tableComponent.props.tableBody,
   },
 ]
 
-const tableRowProps: PropDefinition[] = [
+const getTableRowProps = (t: typeof content.en | typeof content.ar): PropDefinition[] => [
   {
     name: 'className',
     type: 'string',
     default: 'undefined',
     required: false,
-    description: 'Additional CSS classes to apply to tr',
+    description: t.tableComponent.props.tableRow,
   },
 ]
 
-const tableHeadProps: PropDefinition[] = [
+const getTableHeadProps = (t: typeof content.en | typeof content.ar): PropDefinition[] => [
   {
     name: 'className',
     type: 'string',
     default: 'undefined',
     required: false,
-    description: 'Additional CSS classes to apply to th (uses text-start for RTL support)',
+    description: t.tableComponent.props.tableHead,
   },
 ]
 
-const tableCellProps: PropDefinition[] = [
+const getTableCellProps = (t: typeof content.en | typeof content.ar): PropDefinition[] => [
   {
     name: 'className',
     type: 'string',
     default: 'undefined',
     required: false,
-    description: 'Additional CSS classes to apply to td',
+    description: t.tableComponent.props.tableCell,
   },
 ]
 
-const tableCaptionProps: PropDefinition[] = [
+const getTableCaptionProps = (t: typeof content.en | typeof content.ar): PropDefinition[] => [
   {
     name: 'className',
     type: 'string',
     default: 'undefined',
     required: false,
-    description: 'Additional CSS classes to apply to caption',
+    description: t.tableComponent.props.tableCaption,
   },
 ]
 
@@ -191,6 +193,17 @@ const users = [
 ]
 
 export default function TablePage() {
+  const { locale } = useDirection()
+  const t = content[locale]
+
+  const tableProps = getTableProps(t)
+  const tableHeaderProps = getTableHeaderProps(t)
+  const tableBodyProps = getTableBodyProps(t)
+  const tableRowProps = getTableRowProps(t)
+  const tableHeadProps = getTableHeadProps(t)
+  const tableCellProps = getTableCellProps(t)
+  const tableCaptionProps = getTableCaptionProps(t)
+
   return (
     <div className="min-h-screen">
 
@@ -200,32 +213,31 @@ export default function TablePage() {
           <ol className="flex items-center gap-2 text-sm text-muted-foreground">
             <li>
               <Link href="/" className="hover:text-foreground transition-colors">
-                Home
+                {t.common.home}
               </Link>
             </li>
             <li>/</li>
             <li>
               <Link href="/components" className="hover:text-foreground transition-colors">
-                Components
+                {t.nav.components}
               </Link>
             </li>
             <li>/</li>
-            <li className="text-foreground font-medium">Table</li>
+            <li className="text-foreground font-medium">{t.tableComponent.title}</li>
           </ol>
         </nav>
 
         {/* Page Header */}
         <div className="mb-12">
-          <h1 className="text-4xl font-bold tracking-tight mb-4">Table</h1>
+          <h1 className="text-4xl font-bold tracking-tight mb-4">{t.tableComponent.title}</h1>
           <p className="text-xl text-muted-foreground max-w-3xl">
-            A responsive table component for displaying structured data with full RTL support.
-            Uses semantic HTML with proper text alignment for bidirectional content.
+            {t.tableComponent.description}
           </p>
         </div>
 
         {/* Preview */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Preview</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.tableComponent.preview}</h2>
           <ComponentShowcase>
             <ComponentShowcase.Demo>
               <div className="w-full">
@@ -261,23 +273,23 @@ export default function TablePage() {
 
         {/* Installation */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Installation</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.tableComponent.installation}</h2>
           <CodeBlock code={installCode} language="bash" title="Terminal" />
         </section>
 
         {/* Usage */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Usage</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.tableComponent.usage}</h2>
           <CodeBlock code={basicUsageCode} language="tsx" title="React" />
         </section>
 
         {/* Composition Pattern */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Composition Pattern</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.tableComponent.compositionPattern.title}</h2>
           <Card>
             <CardContent className="p-6 space-y-4">
               <p className="text-muted-foreground">
-                The Table component follows a composition pattern with seven sub-components:
+                {t.tableComponent.compositionPattern.description}
               </p>
               <ul className="space-y-2 text-muted-foreground">
                 <li className="flex items-start gap-2">
@@ -335,7 +347,7 @@ export default function TablePage() {
 
         {/* Examples */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Examples</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.tableComponent.examples.title}</h2>
 
           <div className="space-y-8">
             {/* With Caption */}
@@ -474,7 +486,7 @@ export default function TablePage() {
 
         {/* Props */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Props</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.tableComponent.props.title}</h2>
 
           <div className="space-y-8">
             <div>
@@ -516,7 +528,7 @@ export default function TablePage() {
 
         {/* Accessibility */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Accessibility</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.tableComponent.accessibility.title}</h2>
           <Card>
             <CardContent className="p-6 space-y-4">
               <div>
@@ -556,7 +568,7 @@ export default function TablePage() {
 
         {/* RTL Considerations */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">RTL Considerations</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.tableComponent.rtl.title}</h2>
           <Card>
             <CardContent className="p-6 space-y-4">
               <p className="text-muted-foreground">
@@ -615,7 +627,7 @@ export default function TablePage() {
 
         {/* Related Components */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Related Components</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.tableComponent.related.title}</h2>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             <Link href="/components/checkbox">
               <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">

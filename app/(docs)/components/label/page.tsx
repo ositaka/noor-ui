@@ -11,21 +11,23 @@ import { ComponentShowcase } from '@/components/docs/component-showcase'
 import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
 import { AlertCircle } from 'lucide-react'
+import { useDirection } from '@/components/providers/direction-provider'
+import { content } from '@/lib/i18n'
 
-const labelProps: PropDefinition[] = [
+const getLabelProps = (t: typeof content.en | typeof content.ar): PropDefinition[] => [
   {
     name: 'htmlFor',
     type: 'string',
     default: 'undefined',
     required: false,
-    description: 'The ID of the form element this label is associated with',
+    description: t.labelComponent.props.htmlFor,
   },
   {
     name: 'className',
     type: 'string',
     default: 'undefined',
     required: false,
-    description: 'Additional CSS classes to apply',
+    description: t.labelComponent.props.className,
   },
 ]
 
@@ -106,6 +108,10 @@ const rtlCode = `// RTL support is automatic!
 </div>`
 
 export default function LabelPage() {
+  const { locale } = useDirection()
+  const t = content[locale]
+  const labelProps = getLabelProps(t)
+
   return (
     <div className="min-h-screen">
 
@@ -115,32 +121,31 @@ export default function LabelPage() {
           <ol className="flex items-center gap-2 text-sm text-muted-foreground">
             <li>
               <Link href="/" className="hover:text-foreground transition-colors">
-                Home
+                {t.common.home}
               </Link>
             </li>
             <li>/</li>
             <li>
               <Link href="/components" className="hover:text-foreground transition-colors">
-                Components
+                {t.nav.components}
               </Link>
             </li>
             <li>/</li>
-            <li className="text-foreground font-medium">Label</li>
+            <li className="text-foreground font-medium">{t.labelComponent.title}</li>
           </ol>
         </nav>
 
         {/* Page Header */}
         <div className="mb-12">
-          <h1 className="text-4xl font-bold tracking-tight mb-4">Label</h1>
+          <h1 className="text-4xl font-bold tracking-tight mb-4">{t.labelComponent.title}</h1>
           <p className="text-xl text-muted-foreground max-w-3xl">
-            Accessible label for form inputs. Built on Radix UI with automatic accessibility
-            features and perfect RTL support.
+            {t.labelComponent.description}
           </p>
         </div>
 
         {/* Preview */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Preview</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.labelComponent.preview}</h2>
           <ComponentShowcase>
             <ComponentShowcase.Demo>
               <div className="w-full max-w-sm space-y-2">
@@ -153,19 +158,19 @@ export default function LabelPage() {
 
         {/* Installation */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Installation</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.labelComponent.installation}</h2>
           <CodeBlock code={installCode} language="bash" title="Terminal" />
         </section>
 
         {/* Usage */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Usage</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.labelComponent.usage}</h2>
           <CodeBlock code={basicUsageCode} language="tsx" title="React" />
         </section>
 
         {/* Why Use Label */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Why Use Label?</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.labelComponent.whyUse}</h2>
           <Card>
             <CardContent className="p-6 space-y-4">
               <div className="flex items-start gap-3 p-4 bg-primary/10 rounded-lg border border-primary/20">
@@ -210,7 +215,7 @@ export default function LabelPage() {
 
         {/* Examples */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Examples</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.labelComponent.examples.title}</h2>
 
           <div className="space-y-8">
             {/* With Input */}
@@ -379,7 +384,7 @@ export default function LabelPage() {
 
         {/* Props */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Props</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.labelComponent.props.title}</h2>
           <PropsTable props={labelProps} />
           <Card className="mt-4">
             <CardContent className="p-6">
@@ -393,7 +398,7 @@ export default function LabelPage() {
 
         {/* Accessibility */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Accessibility</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.labelComponent.accessibility.title}</h2>
           <Card>
             <CardContent className="p-6 space-y-4">
               <div>
@@ -446,7 +451,7 @@ export default function LabelPage() {
 
         {/* RTL Considerations */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">RTL Considerations</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.labelComponent.rtl.title}</h2>
           <Card>
             <CardContent className="p-6 space-y-4">
               <p className="text-muted-foreground">

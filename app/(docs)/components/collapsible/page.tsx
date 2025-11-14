@@ -10,6 +10,8 @@ import { ComponentShowcase } from '@/components/docs/component-showcase'
 import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
 import { ChevronDown, ChevronRight, ChevronsUpDown } from 'lucide-react'
+import { useDirection } from '@/components/providers/direction-provider'
+import { content } from '@/lib/i18n'
 
 const collapsibleProps: PropDefinition[] = [
   {
@@ -116,6 +118,8 @@ const rtlCode = `// RTL support is automatic!
 </Collapsible>`
 
 export default function CollapsiblePage() {
+  const { locale } = useDirection()
+  const t = content[locale]
   const [isOpen1, setIsOpen1] = React.useState(false)
   const [isOpen2, setIsOpen2] = React.useState(true)
   const [isOpen3, setIsOpen3] = React.useState(false)
@@ -129,32 +133,31 @@ export default function CollapsiblePage() {
           <ol className="flex items-center gap-2 text-sm text-muted-foreground">
             <li>
               <Link href="/" className="hover:text-foreground transition-colors">
-                Home
+                {t.common.home}
               </Link>
             </li>
             <li>/</li>
             <li>
               <Link href="/components" className="hover:text-foreground transition-colors">
-                Components
+                {t.nav.components}
               </Link>
             </li>
             <li>/</li>
-            <li className="text-foreground font-medium">Collapsible</li>
+            <li className="text-foreground font-medium">{t.collapsibleComponent.title}</li>
           </ol>
         </nav>
 
         {/* Page Header */}
         <div className="mb-12">
-          <h1 className="text-4xl font-bold tracking-tight mb-4">Collapsible</h1>
+          <h1 className="text-4xl font-bold tracking-tight mb-4">{t.collapsibleComponent.title}</h1>
           <p className="text-xl text-muted-foreground max-w-3xl">
-            A component for hiding and showing content. Simple, accessible, and perfect for
-            sidebars, FAQs, or any togglable content with full RTL support.
+            {t.collapsibleComponent.description}
           </p>
         </div>
 
         {/* Preview */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Preview</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.collapsibleComponent.preview}</h2>
           <ComponentShowcase>
             <ComponentShowcase.Demo>
               <div className="w-full max-w-md space-y-4">

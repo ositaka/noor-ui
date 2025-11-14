@@ -29,9 +29,11 @@ import {
   Calendar,
 } from 'lucide-react'
 import { useDirection } from '@/components/providers/direction-provider'
+import { content } from '@/lib/i18n'
 
 export default function DashboardPage() {
   const { locale } = useDirection()
+  const t = content[locale]
 
   // Simulated data
   const stats = [

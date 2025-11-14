@@ -5,6 +5,8 @@ import Link from 'next/link'
 import { Card, CardContent } from '@/components/ui/card'
 import { CodeBlock } from '@/components/docs/code-block'
 import { Shield, CheckCircle2 } from 'lucide-react'
+import { useDirection } from '@/components/providers/direction-provider'
+import { content } from '@/lib/i18n'
 
 const colorContrastCode = `// ✓ WCAG AA compliant contrast ratios
 const colors = {
@@ -22,8 +24,8 @@ const colors = {
 const semanticHtmlCode = `// ✓ Use semantic HTML elements
 <nav aria-label="Main navigation">
   <ul>
-    <li><a href="/home">Home</a></li>
-    <li><a href="/about">About</a></li>
+    <li><a href="/">Home</a></li>
+    <li><a href="/documentation">Documentation</a></li>
   </ul>
 </nav>
 
@@ -82,50 +84,54 @@ const keyboardNavigationCode = `// ✓ Ensure keyboard accessibility
 </Dialog>`
 
 export default function WCAGPage() {
+  const { locale } = useDirection()
+  const t = content[locale].documentationPages.wcag
+  const common = content[locale].documentationPages.common
+
   return (
     <div className="min-h-screen">
       <main id="main-content" className="container py-12">
         <nav aria-label="Breadcrumb" className="mb-8">
           <ol className="flex items-center gap-2 text-sm text-muted-foreground">
-            <li><Link href="/" className="hover:text-foreground transition-colors">Home</Link></li>
+            <li><Link href="/" className="hover:text-foreground transition-colors">{common.home}</Link></li>
             <li>/</li>
-            <li><Link href="/documentation" className="hover:text-foreground transition-colors">Documentation</Link></li>
+            <li><Link href="/documentation" className="hover:text-foreground transition-colors">{common.documentation}</Link></li>
             <li>/</li>
-            <li className="text-foreground font-medium">WCAG Compliance</li>
+            <li className="text-foreground font-medium">{t.title}</li>
           </ol>
         </nav>
 
         <div className="max-w-3xl mb-12">
           <div className="flex items-center gap-3 mb-4">
             <Shield className="h-10 w-10 text-primary" />
-            <h1 className="text-4xl font-bold tracking-tight">WCAG Compliance</h1>
+            <h1 className="text-4xl font-bold tracking-tight">{t.title}</h1>
           </div>
           <p className="text-xl text-muted-foreground">
-            Noor UI is built to meet WCAG 2.1 Level AA standards for web accessibility, ensuring your applications are usable by everyone.
+            {t.subtitle}
           </p>
         </div>
 
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Compliance Level</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.complianceLevel}</h2>
           <Card>
             <CardContent className="p-6">
               <div className="flex items-start gap-3 mb-4">
                 <CheckCircle2 className="h-6 w-6 text-green-600 mt-0.5 shrink-0" />
                 <div>
-                  <h3 className="font-semibold text-lg mb-2">WCAG 2.1 Level AA</h3>
+                  <h3 className="font-semibold text-lg mb-2">{t.levelAA}</h3>
                   <p className="text-muted-foreground">
-                    All components meet or exceed WCAG 2.1 Level AA requirements, with many reaching AAA for specific criteria.
+                    {t.levelAADesc}
                   </p>
                 </div>
               </div>
 
               <div className="mt-6 space-y-2 text-sm">
-                <p className="font-semibold">What this means:</p>
+                <p className="font-semibold">{t.whatMeans}</p>
                 <ul className="space-y-1 text-muted-foreground">
-                  <li>✓ Perceivable: Content is presented in ways users can perceive</li>
-                  <li>✓ Operable: Interface components are operable by all users</li>
-                  <li>✓ Understandable: Information and interface operation are understandable</li>
-                  <li>✓ Robust: Content is robust enough for assistive technologies</li>
+                  <li>✓ {t.perceivable}</li>
+                  <li>✓ {t.operable}</li>
+                  <li>✓ {t.understandable}</li>
+                  <li>✓ {t.robust}</li>
                 </ul>
               </div>
             </CardContent>
@@ -133,26 +139,26 @@ export default function WCAGPage() {
         </section>
 
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">1. Color Contrast</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.colorContrast}</h2>
           <p className="text-muted-foreground mb-4">
-            All color combinations meet WCAG AA contrast requirements (4.5:1 for normal text, 3:1 for large text):
+            {t.contrastDesc}
           </p>
           <CodeBlock code={colorContrastCode} language="tsx" />
 
           <Card className="mt-6">
             <CardContent className="p-6">
-              <h3 className="font-semibold mb-3">Contrast Ratios</h3>
+              <h3 className="font-semibold mb-3">{t.contrastRatios}</h3>
               <div className="space-y-2 text-sm">
                 <div className="flex justify-between">
-                  <span>Normal text (foreground/background):</span>
+                  <span>{t.normalText}</span>
                   <span className="font-mono">19.6:1 ✓ AAA</span>
                 </div>
                 <div className="flex justify-between">
-                  <span>Muted text (muted-foreground/background):</span>
+                  <span>{t.mutedText}</span>
                   <span className="font-mono">7.1:1 ✓ AAA</span>
                 </div>
                 <div className="flex justify-between">
-                  <span>Primary button (primary-foreground/primary):</span>
+                  <span>{t.primaryButton}</span>
                   <span className="font-mono">12.6:1 ✓ AAA</span>
                 </div>
               </div>
@@ -161,68 +167,68 @@ export default function WCAGPage() {
         </section>
 
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">2. Semantic HTML</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.semanticHTML}</h2>
           <p className="text-muted-foreground mb-4">
-            Use proper HTML5 semantic elements for better accessibility:
+            {t.semanticDesc}
           </p>
           <CodeBlock code={semanticHtmlCode} language="tsx" />
         </section>
 
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">3. ARIA Labels & Roles</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.ariaLabels}</h2>
           <p className="text-muted-foreground mb-4">
-            Provide accessible names and descriptions for all interactive elements:
+            {t.ariaDesc}
           </p>
           <CodeBlock code={ariaLabelsCode} language="tsx" />
         </section>
 
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">4. Keyboard Navigation</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.keyboardNavigation}</h2>
           <p className="text-muted-foreground mb-4">
-            All components are fully keyboard accessible:
+            {t.keyboardDesc}
           </p>
           <CodeBlock code={keyboardNavigationCode} language="tsx" />
 
           <Card className="mt-6">
             <CardContent className="p-6">
-              <h3 className="font-semibold mb-3">Keyboard Support</h3>
+              <h3 className="font-semibold mb-3">{t.keyboardSupport}</h3>
               <ul className="space-y-2 text-sm text-muted-foreground">
-                <li>• <kbd className="px-2 py-1 bg-muted rounded">Tab</kbd> - Navigate between focusable elements</li>
-                <li>• <kbd className="px-2 py-1 bg-muted rounded">Shift + Tab</kbd> - Navigate backwards</li>
-                <li>• <kbd className="px-2 py-1 bg-muted rounded">Enter</kbd> / <kbd className="px-2 py-1 bg-muted rounded">Space</kbd> - Activate buttons and controls</li>
-                <li>• <kbd className="px-2 py-1 bg-muted rounded">Escape</kbd> - Close dialogs and menus</li>
-                <li>• <kbd className="px-2 py-1 bg-muted rounded">Arrow keys</kbd> - Navigate within components</li>
+                <li>• <kbd className="px-2 py-1 bg-muted rounded">Tab</kbd> - {t.tabKey}</li>
+                <li>• <kbd className="px-2 py-1 bg-muted rounded">Shift + Tab</kbd> - {t.shiftTabKey}</li>
+                <li>• <kbd className="px-2 py-1 bg-muted rounded">Enter</kbd> / <kbd className="px-2 py-1 bg-muted rounded">Space</kbd> - {t.enterSpaceKey}</li>
+                <li>• <kbd className="px-2 py-1 bg-muted rounded">Escape</kbd> - {t.escapeKey}</li>
+                <li>• <kbd className="px-2 py-1 bg-muted rounded">Arrow keys</kbd> - {t.arrowKeysNav}</li>
               </ul>
             </CardContent>
           </Card>
         </section>
 
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">WCAG Success Criteria</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.successCriteria}</h2>
           <div className="space-y-4">
             <Card>
               <CardContent className="p-6">
-                <h3 className="font-semibold mb-2">Level A (All criteria met)</h3>
+                <h3 className="font-semibold mb-2">{t.levelA}</h3>
                 <p className="text-sm text-muted-foreground">
-                  Basic accessibility features that make content accessible to the widest audience.
+                  {t.levelADesc}
                 </p>
               </CardContent>
             </Card>
 
             <Card>
               <CardContent className="p-6">
-                <h3 className="font-semibold mb-2">Level AA (All criteria met) ✓</h3>
+                <h3 className="font-semibold mb-2">{t.levelAAMet} ✓</h3>
                 <p className="text-sm text-muted-foreground">
-                  Removes major barriers to accessing content. This is the recommended conformance level.
+                  {t.levelAAMetDesc}
                 </p>
               </CardContent>
             </Card>
 
             <Card>
               <CardContent className="p-6">
-                <h3 className="font-semibold mb-2">Level AAA (Partial)</h3>
+                <h3 className="font-semibold mb-2">{t.levelAAA}</h3>
                 <p className="text-sm text-muted-foreground">
-                  Enhanced accessibility. Many criteria met, particularly for color contrast and text alternatives.
+                  {t.levelAAADesc}
                 </p>
               </CardContent>
             </Card>
@@ -230,14 +236,14 @@ export default function WCAGPage() {
         </section>
 
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Learn More</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{common.learnMore}</h2>
           <div className="grid gap-4 sm:grid-cols-2">
             <Link href="/documentation/keyboard">
               <Card className="hover:border-primary transition-colors h-full">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold mb-2">Keyboard Navigation</h3>
+                  <h3 className="font-semibold mb-2">{t.keyboardLink}</h3>
                   <p className="text-sm text-muted-foreground">
-                    Complete keyboard accessibility guide
+                    {t.keyboardLinkDesc}
                   </p>
                 </CardContent>
               </Card>
@@ -246,9 +252,9 @@ export default function WCAGPage() {
             <Link href="/documentation/screen-readers">
               <Card className="hover:border-primary transition-colors h-full">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold mb-2">Screen Readers</h3>
+                  <h3 className="font-semibold mb-2">{t.screenReadersLink}</h3>
                   <p className="text-sm text-muted-foreground">
-                    Optimizing for screen reader users
+                    {t.screenReadersLinkDesc}
                   </p>
                 </CardContent>
               </Card>

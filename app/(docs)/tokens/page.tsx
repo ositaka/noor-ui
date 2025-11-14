@@ -8,6 +8,8 @@ import { Button } from '@/components/ui/button'
 import { CodeBlock } from '@/components/docs/code-block'
 import { tokens } from '@/lib/tokens'
 import { copyToClipboard } from '@/lib/utils'
+import { useDirection } from '@/components/providers/direction-provider'
+import { content } from '@/lib/i18n'
 
 const ColorSwatch = ({ name, value }: { name: string; value: string }) => {
   const [copied, setCopied] = React.useState(false)
@@ -55,13 +57,13 @@ const SpacingBox = ({ name, value }: { name: string; value: string }) => {
   )
 }
 
-const TypographyExample = ({ size, config }: { size: string; config: readonly [string, { readonly lineHeight: string }] }) => {
+const TypographyExample = ({ size, config, sampleText }: { size: string; config: readonly [string, { readonly lineHeight: string }]; sampleText: string }) => {
   return (
     <div className="space-y-1">
       <div className="flex items-baseline gap-3">
         <span className="text-sm font-medium w-20">{size}</span>
         <span style={{ fontSize: config[0], lineHeight: config[1].lineHeight }}>
-          The quick brown fox jumps over the lazy dog
+          {sampleText}
         </span>
       </div>
       <div className="text-xs text-muted-foreground font-mono ps-23">
@@ -72,6 +74,9 @@ const TypographyExample = ({ size, config }: { size: string; config: readonly [s
 }
 
 export default function TokensPage() {
+  const { locale } = useDirection()
+  const t = content[locale].tokens
+
   return (
     <div className="min-h-screen">
 
@@ -81,33 +86,32 @@ export default function TokensPage() {
           <ol className="flex items-center gap-2 text-sm text-muted-foreground">
             <li>
               <Link href="/" className="hover:text-foreground transition-colors">
-                Home
+                {t.breadcrumb.home}
               </Link>
             </li>
             <li>/</li>
-            <li className="text-foreground font-medium">Design Tokens</li>
+            <li className="text-foreground font-medium">{t.breadcrumb.tokens}</li>
           </ol>
         </nav>
 
         {/* Page Header */}
         <div className="max-w-3xl mb-12">
-          <h1 className="text-4xl font-bold tracking-tight mb-4">Design Tokens</h1>
+          <h1 className="text-4xl font-bold tracking-tight mb-4">{t.header.title}</h1>
           <p className="text-xl text-muted-foreground">
-            The foundation of our design system. All visual decisions are defined through
-            tokens, enabling consistent theming and easy customization.
+            {t.header.description}
           </p>
         </div>
 
         {/* Colors */}
         <section className="mb-16" id="colors">
-          <h2 className="text-3xl font-bold tracking-tight mb-6">Colors</h2>
+          <h2 className="text-3xl font-bold tracking-tight mb-6">{t.colors.sectionTitle}</h2>
 
           <div className="grid gap-8 lg:grid-cols-2">
             {/* Primary */}
             <Card>
               <CardHeader>
-                <CardTitle>Primary</CardTitle>
-                <CardDescription>Brand color - Indigo shades</CardDescription>
+                <CardTitle>{t.colors.primary.title}</CardTitle>
+                <CardDescription>{t.colors.primary.description}</CardDescription>
               </CardHeader>
               <CardContent className="space-y-1">
                 {Object.entries(tokens.colors.primary).map(([shade, value]) => (
@@ -119,8 +123,8 @@ export default function TokensPage() {
             {/* Secondary */}
             <Card>
               <CardHeader>
-                <CardTitle>Secondary</CardTitle>
-                <CardDescription>Accent color - Teal shades</CardDescription>
+                <CardTitle>{t.colors.secondary.title}</CardTitle>
+                <CardDescription>{t.colors.secondary.description}</CardDescription>
               </CardHeader>
               <CardContent className="space-y-1">
                 {Object.entries(tokens.colors.secondary).map(([shade, value]) => (
@@ -132,8 +136,8 @@ export default function TokensPage() {
             {/* Neutral */}
             <Card>
               <CardHeader>
-                <CardTitle>Neutral</CardTitle>
-                <CardDescription>Gray scale for backgrounds and text</CardDescription>
+                <CardTitle>{t.colors.neutral.title}</CardTitle>
+                <CardDescription>{t.colors.neutral.description}</CardDescription>
               </CardHeader>
               <CardContent className="space-y-1">
                 {Object.entries(tokens.colors.neutral).map(([shade, value]) => (
@@ -145,12 +149,12 @@ export default function TokensPage() {
             {/* Semantic Colors */}
             <Card>
               <CardHeader>
-                <CardTitle>Semantic Colors</CardTitle>
-                <CardDescription>Status and feedback colors</CardDescription>
+                <CardTitle>{t.colors.semantic.title}</CardTitle>
+                <CardDescription>{t.colors.semantic.description}</CardDescription>
               </CardHeader>
               <CardContent className="space-y-3">
                 <div>
-                  <div className="text-sm font-medium mb-2">Success</div>
+                  <div className="text-sm font-medium mb-2">{t.colors.semantic.success}</div>
                   <div className="grid grid-cols-2 gap-1">
                     {Object.entries(tokens.colors.success).slice(3, 7).map(([shade, value]) => (
                       <ColorSwatch key={shade} name={shade} value={value} />
@@ -158,7 +162,7 @@ export default function TokensPage() {
                   </div>
                 </div>
                 <div>
-                  <div className="text-sm font-medium mb-2">Error</div>
+                  <div className="text-sm font-medium mb-2">{t.colors.semantic.error}</div>
                   <div className="grid grid-cols-2 gap-1">
                     {Object.entries(tokens.colors.error).slice(3, 7).map(([shade, value]) => (
                       <ColorSwatch key={shade} name={shade} value={value} />
@@ -166,7 +170,7 @@ export default function TokensPage() {
                   </div>
                 </div>
                 <div>
-                  <div className="text-sm font-medium mb-2">Warning</div>
+                  <div className="text-sm font-medium mb-2">{t.colors.semantic.warning}</div>
                   <div className="grid grid-cols-2 gap-1">
                     {Object.entries(tokens.colors.warning).slice(3, 7).map(([shade, value]) => (
                       <ColorSwatch key={shade} name={shade} value={value} />
@@ -174,7 +178,7 @@ export default function TokensPage() {
                   </div>
                 </div>
                 <div>
-                  <div className="text-sm font-medium mb-2">Info</div>
+                  <div className="text-sm font-medium mb-2">{t.colors.semantic.info}</div>
                   <div className="grid grid-cols-2 gap-1">
                     {Object.entries(tokens.colors.info).slice(3, 7).map(([shade, value]) => (
                       <ColorSwatch key={shade} name={shade} value={value} />
@@ -188,12 +192,12 @@ export default function TokensPage() {
 
         {/* Spacing */}
         <section className="mb-16" id="spacings">
-          <h2 className="text-3xl font-bold tracking-tight mb-6">Spacing</h2>
+          <h2 className="text-3xl font-bold tracking-tight mb-6">{t.spacing.sectionTitle}</h2>
           <Card>
             <CardHeader>
-              <CardTitle>Spacing Scale</CardTitle>
+              <CardTitle>{t.spacing.title}</CardTitle>
               <CardDescription>
-                Consistent spacing values for margins, padding, and gaps
+                {t.spacing.description}
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
@@ -206,38 +210,38 @@ export default function TokensPage() {
 
         {/* Typography */}
         <section className="mb-16" id="typography">
-          <h2 className="text-3xl font-bold tracking-tight mb-6">Typography</h2>
+          <h2 className="text-3xl font-bold tracking-tight mb-6">{t.typography.sectionTitle}</h2>
 
           <div className="grid gap-6 lg:grid-cols-2">
             {/* Font Families */}
             <Card>
               <CardHeader>
-                <CardTitle>Font Families</CardTitle>
-                <CardDescription>Typefaces used across the system</CardDescription>
+                <CardTitle>{t.typography.fontFamilies.title}</CardTitle>
+                <CardDescription>{t.typography.fontFamilies.description}</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div>
-                  <div className="text-sm font-medium mb-2">Sans (Default)</div>
+                  <div className="text-sm font-medium mb-2">{t.typography.fontFamilies.sansLabel}</div>
                   <div className="text-lg" style={{ fontFamily: tokens.typography.fontFamily.sans.join(', ') }}>
-                    The quick brown fox jumps over the lazy dog
+                    {t.typography.fontFamilies.sampleText}
                   </div>
                   <div className="text-xs text-muted-foreground font-mono mt-1">
                     {tokens.typography.fontFamily.sans.join(', ')}
                   </div>
                 </div>
                 <div>
-                  <div className="text-sm font-medium mb-2">Arabic</div>
+                  <div className="text-sm font-medium mb-2">{t.typography.fontFamilies.arabicLabel}</div>
                   <div className="text-lg" style={{ fontFamily: tokens.typography.fontFamily.arabic.join(', ') }} dir="rtl">
-                    الحمد لله رب العالمين
+                    {t.typography.fontFamilies.arabicSampleText}
                   </div>
                   <div className="text-xs text-muted-foreground font-mono mt-1">
                     {tokens.typography.fontFamily.arabic.join(', ')}
                   </div>
                 </div>
                 <div>
-                  <div className="text-sm font-medium mb-2">Mono</div>
+                  <div className="text-sm font-medium mb-2">{t.typography.fontFamilies.monoLabel}</div>
                   <div className="text-lg" style={{ fontFamily: tokens.typography.fontFamily.mono.join(', ') }}>
-                    const hello = &quot;world&quot;;
+                    {t.typography.fontFamilies.monoSampleText}
                   </div>
                   <div className="text-xs text-muted-foreground font-mono mt-1">
                     {tokens.typography.fontFamily.mono.join(', ')}
@@ -249,12 +253,12 @@ export default function TokensPage() {
             {/* Font Sizes */}
             <Card>
               <CardHeader>
-                <CardTitle>Font Sizes</CardTitle>
-                <CardDescription>Type scale with line heights</CardDescription>
+                <CardTitle>{t.typography.fontSizes.title}</CardTitle>
+                <CardDescription>{t.typography.fontSizes.description}</CardDescription>
               </CardHeader>
               <CardContent className="space-y-3">
                 {Object.entries(tokens.typography.fontSize).map(([size, config]) => (
-                  <TypographyExample key={size} size={size} config={config} />
+                  <TypographyExample key={size} size={size} config={config} sampleText={t.typography.fontSizes.exampleText} />
                 ))}
               </CardContent>
             </Card>
@@ -263,11 +267,11 @@ export default function TokensPage() {
 
         {/* Shadows */}
         <section className="mb-16" id="shadows">
-          <h2 className="text-3xl font-bold tracking-tight mb-6">Shadows</h2>
+          <h2 className="text-3xl font-bold tracking-tight mb-6">{t.shadows.sectionTitle}</h2>
           <Card>
             <CardHeader>
-              <CardTitle>Shadow Scale</CardTitle>
-              <CardDescription>Elevation levels for depth perception</CardDescription>
+              <CardTitle>{t.shadows.title}</CardTitle>
+              <CardDescription>{t.shadows.description}</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -278,7 +282,7 @@ export default function TokensPage() {
                       className="h-24 bg-card rounded-lg flex items-center justify-center"
                       style={{ boxShadow: value }}
                     >
-                      <span className="text-xs text-muted-foreground">Elevation</span>
+                      <span className="text-xs text-muted-foreground">{t.shadows.elevationLabel}</span>
                     </div>
                     <div className="text-xs text-muted-foreground font-mono">{value}</div>
                   </div>
@@ -290,11 +294,11 @@ export default function TokensPage() {
 
         {/* Border Radius */}
         <section className="mb-16" id="border-radius">
-          <h2 className="text-3xl font-bold tracking-tight mb-6">Border Radius</h2>
+          <h2 className="text-3xl font-bold tracking-tight mb-6">{t.radius.sectionTitle}</h2>
           <Card>
             <CardHeader>
-              <CardTitle>Radius Scale</CardTitle>
-              <CardDescription>Corner rounding for components</CardDescription>
+              <CardTitle>{t.radius.title}</CardTitle>
+              <CardDescription>{t.radius.description}</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -315,55 +319,37 @@ export default function TokensPage() {
 
         {/* Usage */}
         <section id="usage-in-code">
-          <h2 className="text-3xl font-bold tracking-tight mb-6">Usage in Code</h2>
+          <h2 className="text-3xl font-bold tracking-tight mb-6">{t.usage.sectionTitle}</h2>
           <Card>
             <CardHeader>
-              <CardTitle>Tailwind CSS Integration</CardTitle>
+              <CardTitle>{t.usage.title}</CardTitle>
               <CardDescription>
-                All tokens are available as Tailwind utilities
+                {t.usage.description}
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div>
-                <div className="text-sm font-medium mb-2">Colors</div>
+                <div className="text-sm font-medium mb-2">{t.usage.colorsLabel}</div>
                 <CodeBlock
-                  code={`<div className="bg-primary-500 text-primary-50">
-  Primary color with shades
-</div>
-
-<div className="text-success-600">
-  Success text
-</div>`}
+                  code={t.usage.colorsCode}
                   language="tsx"
                   showLineNumbers={false}
                 />
               </div>
 
               <div>
-                <div className="text-sm font-medium mb-2">Spacing</div>
+                <div className="text-sm font-medium mb-2">{t.usage.spacingLabel}</div>
                 <CodeBlock
-                  code={`<div className="p-lg m-xl gap-md">
-  Semantic spacing names
-</div>
-
-<div className="space-y-md">
-  Vertical spacing
-</div>`}
+                  code={t.usage.spacingCode}
                   language="tsx"
                   showLineNumbers={false}
                 />
               </div>
 
               <div>
-                <div className="text-sm font-medium mb-2">Typography</div>
+                <div className="text-sm font-medium mb-2">{t.usage.typographyLabel}</div>
                 <CodeBlock
-                  code={`<h1 className="text-4xl font-bold">
-  Heading with scale
-</h1>
-
-<div className="font-arabic" dir="rtl">
-  Arabic text
-</div>`}
+                  code={t.usage.typographyCode}
                   language="tsx"
                   showLineNumbers={false}
                 />

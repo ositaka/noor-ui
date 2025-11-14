@@ -7,6 +7,8 @@ import { CodeBlock } from '@/components/docs/code-block'
 import { ComponentShowcase } from '@/components/docs/component-showcase'
 import { Button } from '@/components/ui/button'
 import { Sparkles, ArrowRight, CheckCircle2, XCircle, Info, Lightbulb, Book } from 'lucide-react'
+import { useDirection } from '@/components/providers/direction-provider'
+import { content } from '@/lib/i18n'
 
 const logicalPropertiesCode = `// ❌ BAD: Directional properties (LTR-biased)
 <div className="ml-4 pr-8 text-left">
@@ -87,7 +89,7 @@ import { Settings, User, Search } from 'lucide-react'
 
 const useDirectionCode = `'use client'
 
-import { useDirection } from '@/hooks/use-direction'
+import { useDirection } from '@/components/providers/direction-provider'
 
 export function MyComponent() {
   const { direction, setDirection, toggleDirection } = useDirection()
@@ -171,6 +173,9 @@ const commonPatternsCode = `// Pattern 1: Responsive Spacing
 </div>`
 
 export default function RTLGuidePage() {
+  const { locale } = useDirection()
+  const t = content[locale].rtlGuidePage
+
   return (
     <div className="min-h-screen">
 
@@ -180,54 +185,54 @@ export default function RTLGuidePage() {
           <ol className="flex items-center gap-2 text-sm text-muted-foreground">
             <li>
               <Link href="/" className="hover:text-foreground transition-colors">
-                Home
+                {t.breadcrumb.home}
               </Link>
             </li>
             <li>/</li>
-            <li className="text-foreground font-medium">RTL Development Guide</li>
+            <li className="text-foreground font-medium">{t.breadcrumb.rtlGuide}</li>
           </ol>
         </nav>
 
         {/* Page Header */}
         <div className="max-w-3xl mb-12">
-          <h1 className="text-4xl font-bold tracking-tight mb-4">RTL Development Guide</h1>
+          <h1 className="text-4xl font-bold tracking-tight mb-4">{t.title}</h1>
           <p className="text-xl text-muted-foreground">
-            Master RTL-first development with logical properties, best practices, and proven patterns for building truly bidirectional interfaces.
+            {t.description}
           </p>
         </div>
 
         {/* Philosophy */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">The RTL-First Philosophy</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.philosophy.title}</h2>
           <Card className="mb-6">
             <CardContent className="p-6 space-y-4">
               <div>
                 <h3 className="font-semibold mb-2 flex items-center gap-2">
                   <Lightbulb className="h-5 w-5 text-primary" />
-                  What is RTL-First?
+                  {t.philosophy.whatIsRtlFirst}
                 </h3>
                 <p className="text-muted-foreground">
-                  RTL-first development means building interfaces that work seamlessly in both left-to-right (LTR) and right-to-left (RTL) directions from the start, without requiring special handling or conditional logic.
+                  {t.philosophy.whatIsRtlFirstDesc}
                 </p>
               </div>
               <div>
-                <h3 className="font-semibold mb-2">Core Principles</h3>
+                <h3 className="font-semibold mb-2">{t.philosophy.corePrinciples}</h3>
                 <ul className="text-sm text-muted-foreground space-y-2">
                   <li className="flex items-start gap-2">
                     <CheckCircle2 className="h-4 w-4 text-green-600 mt-0.5 shrink-0" />
-                    <span><strong>Logical over Directional:</strong> Use logical properties (start/end) instead of directional ones (left/right)</span>
+                    <span>{t.philosophy.principle1}</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckCircle2 className="h-4 w-4 text-green-600 mt-0.5 shrink-0" />
-                    <span><strong>Single Source of Truth:</strong> One codebase works for all directions without conditional logic</span>
+                    <span>{t.philosophy.principle2}</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckCircle2 className="h-4 w-4 text-green-600 mt-0.5 shrink-0" />
-                    <span><strong>Test Both Directions:</strong> Always verify components in both LTR and RTL modes</span>
+                    <span>{t.philosophy.principle3}</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckCircle2 className="h-4 w-4 text-green-600 mt-0.5 shrink-0" />
-                    <span><strong>Accessibility First:</strong> RTL support should maintain full accessibility</span>
+                    <span>{t.philosophy.principle4}</span>
                   </li>
                 </ul>
               </div>
@@ -237,19 +242,19 @@ export default function RTLGuidePage() {
 
         {/* Logical Properties */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Logical Properties</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.logicalProperties.title}</h2>
           <p className="text-muted-foreground mb-6">
-            Logical properties are the foundation of RTL-first development. They refer to the start and end of content flow, rather than physical left and right positions.
+            {t.logicalProperties.description}
           </p>
 
           <div className="space-y-6">
             <div>
-              <h3 className="text-lg font-semibold mb-4">Before and After</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.logicalProperties.beforeAfter}</h3>
               <CodeBlock code={logicalPropertiesCode} language="tsx" />
             </div>
 
             <div>
-              <h3 className="text-lg font-semibold mb-4">Complete Mapping Reference</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.logicalProperties.completeMapping}</h3>
               <CodeBlock code={logicalMappingCode} language="tsx" />
             </div>
           </div>
@@ -258,10 +263,10 @@ export default function RTLGuidePage() {
             <CardContent className="p-6">
               <h3 className="font-semibold mb-2 flex items-center gap-2">
                 <Info className="h-5 w-5 text-blue-600 dark:text-blue-400" />
-                Why Logical Properties?
+                {t.logicalProperties.whyLogicalTitle}
               </h3>
               <p className="text-sm text-muted-foreground">
-                When you use <code className="px-1.5 py-0.5 rounded bg-muted">ms-4</code> (margin-inline-start), it automatically becomes margin-left in LTR and margin-right in RTL. No conditional logic needed!
+                {t.logicalProperties.whyLogicalDesc}
               </p>
             </CardContent>
           </Card>
@@ -269,24 +274,24 @@ export default function RTLGuidePage() {
 
         {/* Common Patterns */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Common Patterns</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.commonPatterns.title}</h2>
           <p className="text-muted-foreground mb-6">
-            Learn the most common layout patterns that work seamlessly in both directions.
+            {t.commonPatterns.description}
           </p>
 
           <div className="space-y-8">
             <div>
-              <h3 className="text-lg font-semibold mb-4">Layout Patterns</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.commonPatterns.layoutPatterns}</h3>
               <CodeBlock code={commonPatternsCode} language="tsx" />
             </div>
 
             <div>
-              <h3 className="text-lg font-semibold mb-4">Flex Layouts</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.commonPatterns.flexLayouts}</h3>
               <CodeBlock code={flexLayoutCode} language="tsx" />
               <Card className="mt-4">
                 <CardContent className="p-6">
                   <p className="text-sm text-muted-foreground">
-                    Flexbox with logical properties works automatically in both directions. Avoid using <code className="px-1.5 py-0.5 rounded bg-muted">flex-row-reverse</code> for RTL - just use logical spacing instead.
+                    {t.commonPatterns.flexDesc}
                   </p>
                 </CardContent>
               </Card>
@@ -296,9 +301,9 @@ export default function RTLGuidePage() {
 
         {/* Icon Handling */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Icon Mirroring</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.iconMirroring.title}</h2>
           <p className="text-muted-foreground mb-6">
-            Some icons should mirror in RTL (directional arrows), while others should not (settings, user icons).
+            {t.iconMirroring.description}
           </p>
 
           <CodeBlock code={iconMirroringCode} language="tsx" />
@@ -308,28 +313,23 @@ export default function RTLGuidePage() {
               <div>
                 <h3 className="font-semibold mb-2 flex items-center gap-2">
                   <CheckCircle2 className="h-5 w-5 text-green-600" />
-                  Should Mirror in RTL
+                  {t.iconMirroring.shouldMirror}
                 </h3>
                 <ul className="text-sm text-muted-foreground space-y-1">
-                  <li>• Arrows (→ ←)</li>
-                  <li>• Chevrons (› ‹)</li>
-                  <li>• Forward/Back navigation</li>
-                  <li>• Undo/Redo</li>
-                  <li>• Directional pointers</li>
+                  {t.iconMirroring.shouldMirrorList.map((item, index) => (
+                    <li key={index}>• {item}</li>
+                  ))}
                 </ul>
               </div>
               <div>
                 <h3 className="font-semibold mb-2 flex items-center gap-2">
                   <XCircle className="h-5 w-5 text-red-600" />
-                  Should NOT Mirror in RTL
+                  {t.iconMirroring.shouldNotMirror}
                 </h3>
                 <ul className="text-sm text-muted-foreground space-y-1">
-                  <li>• Settings/gear icons</li>
-                  <li>• User/profile icons</li>
-                  <li>• Search icons</li>
-                  <li>• Checkmarks</li>
-                  <li>• Media controls (play, pause)</li>
-                  <li>• Close (X) buttons</li>
+                  {t.iconMirroring.shouldNotMirrorList.map((item, index) => (
+                    <li key={index}>• {item}</li>
+                  ))}
                 </ul>
               </div>
             </CardContent>
@@ -338,31 +338,31 @@ export default function RTLGuidePage() {
 
         {/* Using the Direction Hook */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Using the Direction Hook</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.directionHook.title}</h2>
           <p className="text-muted-foreground mb-6">
-            Access and control the current direction programmatically when needed.
+            {t.directionHook.description}
           </p>
           <CodeBlock code={useDirectionCode} language="tsx" />
 
           <Card className="mt-6">
             <CardContent className="p-6">
-              <h3 className="font-semibold mb-2">When to Use</h3>
+              <h3 className="font-semibold mb-2">{t.directionHook.whenToUse}</h3>
               <ul className="text-sm text-muted-foreground space-y-2">
                 <li className="flex items-start gap-2">
-                  <ArrowRight className="h-4 w-4 text-primary mt-0.5 shrink-0" />
-                  <span>Building direction toggles or language selectors</span>
+                  <ArrowRight className="h-4 w-4 text-primary mt-0.5 shrink-0 rtl:rotate-180" />
+                  <span>{t.directionHook.useCase1}</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <ArrowRight className="h-4 w-4 text-primary mt-0.5 shrink-0" />
-                  <span>Conditionally rendering direction-specific content</span>
+                  <ArrowRight className="h-4 w-4 text-primary mt-0.5 shrink-0 rtl:rotate-180" />
+                  <span>{t.directionHook.useCase2}</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <ArrowRight className="h-4 w-4 text-primary mt-0.5 shrink-0" />
-                  <span>Handling complex animations that need direction awareness</span>
+                  <ArrowRight className="h-4 w-4 text-primary mt-0.5 shrink-0 rtl:rotate-180" />
+                  <span>{t.directionHook.useCase3}</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <ArrowRight className="h-4 w-4 text-primary mt-0.5 shrink-0" />
-                  <span>Logging or analytics based on direction</span>
+                  <ArrowRight className="h-4 w-4 text-primary mt-0.5 shrink-0 rtl:rotate-180" />
+                  <span>{t.directionHook.useCase4}</span>
                 </li>
               </ul>
             </CardContent>
@@ -371,41 +371,41 @@ export default function RTLGuidePage() {
 
         {/* Testing */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Testing RTL Support</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.testing.title}</h2>
           <p className="text-muted-foreground mb-6">
-            Always test your components in both directions to ensure proper RTL support.
+            {t.testing.description}
           </p>
 
           <div className="space-y-6">
             <div>
-              <h3 className="text-lg font-semibold mb-4">Visual Testing with Playwright</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.testing.visualTesting}</h3>
               <CodeBlock code={testingCode} language="tsx" />
             </div>
 
             <Card>
               <CardContent className="p-6 space-y-4">
                 <div>
-                  <h3 className="font-semibold mb-2">Manual Testing Checklist</h3>
+                  <h3 className="font-semibold mb-2">{t.testing.manualTestingChecklist}</h3>
                   <ul className="text-sm text-muted-foreground space-y-2">
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="h-4 w-4 text-green-600 mt-0.5 shrink-0" />
-                      <span>Toggle direction and verify all spacing looks correct</span>
+                      <span>{t.testing.checklist1}</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="h-4 w-4 text-green-600 mt-0.5 shrink-0" />
-                      <span>Check that text alignment follows the direction</span>
+                      <span>{t.testing.checklist2}</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="h-4 w-4 text-green-600 mt-0.5 shrink-0" />
-                      <span>Verify icons mirror appropriately (or don&apos;t when they shouldn&apos;t)</span>
+                      <span>{t.testing.checklist3}</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="h-4 w-4 text-green-600 mt-0.5 shrink-0" />
-                      <span>Test keyboard navigation in both directions</span>
+                      <span>{t.testing.checklist4}</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="h-4 w-4 text-green-600 mt-0.5 shrink-0" />
-                      <span>Ensure animations and transitions work correctly</span>
+                      <span>{t.testing.checklist5}</span>
                     </li>
                   </ul>
                 </div>
@@ -416,12 +416,12 @@ export default function RTLGuidePage() {
 
         {/* Live Example */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Live Example</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.liveExample.title}</h2>
           <p className="text-muted-foreground mb-6">
-            Toggle the direction using the button in the header to see how logical properties work in action.
+            {t.liveExample.description}
           </p>
 
-          <ComponentShowcase.Comparison ltrLabel="LTR (English)" rtlLabel="RTL (العربية)">
+          <ComponentShowcase.Comparison ltrLabel={t.liveExample.ltrLabel} rtlLabel={t.liveExample.rtlLabel}>
             <Card className="w-full">
               <CardContent className="p-6">
                 <div className="flex items-center gap-4">
@@ -429,12 +429,12 @@ export default function RTLGuidePage() {
                     A
                   </div>
                   <div className="flex-1">
-                    <h3 className="font-semibold">User Name</h3>
-                    <p className="text-sm text-muted-foreground">This text adapts to direction</p>
+                    <h3 className="font-semibold">{t.liveExample.userName}</h3>
+                    <p className="text-sm text-muted-foreground">{t.liveExample.userDesc}</p>
                   </div>
                   <Button size="sm">
-                    Next
-                    <ArrowRight className="ms-2 h-4 w-4" />
+                    {t.liveExample.nextButton}
+                    <ArrowRight className="ms-2 h-4 w-4 rtl:rotate-180" />
                   </Button>
                 </div>
               </CardContent>
@@ -444,24 +444,24 @@ export default function RTLGuidePage() {
 
         {/* Migration Guide */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Migration Guide</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.migration.title}</h2>
           <p className="text-muted-foreground mb-6">
-            Converting an existing LTR-only application to RTL-first is straightforward with systematic replacement.
+            {t.migration.description}
           </p>
 
           <CodeBlock code={migrationCode} language="tsx" />
 
           <Card className="mt-6">
             <CardContent className="p-6">
-              <h3 className="font-semibold mb-2">Migration Steps</h3>
+              <h3 className="font-semibold mb-2">{t.migration.steps}</h3>
               <ol className="text-sm text-muted-foreground space-y-2 list-decimal list-inside">
-                <li>Search for directional properties (ml-, mr-, pl-, pr-, left-, right-)</li>
-                <li>Replace with logical equivalents (ms-, me-, ps-, pe-, start-, end-)</li>
-                <li>Update text alignment (text-left → text-start, text-right → text-end)</li>
-                <li>Fix absolute positioning (left-0 → start-0, right-0 → end-0)</li>
-                <li>Update border radius classes (rounded-l → rounded-s, etc.)</li>
-                <li>Review flex layouts and remove unnecessary flex-row-reverse</li>
-                <li>Test thoroughly in both LTR and RTL</li>
+                <li>{t.migration.step1}</li>
+                <li>{t.migration.step2}</li>
+                <li>{t.migration.step3}</li>
+                <li>{t.migration.step4}</li>
+                <li>{t.migration.step5}</li>
+                <li>{t.migration.step6}</li>
+                <li>{t.migration.step7}</li>
               </ol>
             </CardContent>
           </Card>
@@ -469,22 +469,19 @@ export default function RTLGuidePage() {
 
         {/* Best Practices */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Best Practices</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.bestPractices.title}</h2>
 
           <div className="grid gap-4 sm:grid-cols-2">
             <Card className="border-green-500/50 bg-green-50 dark:bg-green-950/20">
               <CardContent className="p-6">
                 <h3 className="font-semibold mb-2 flex items-center gap-2 text-green-700 dark:text-green-400">
                   <CheckCircle2 className="h-5 w-5" />
-                  Do
+                  {t.bestPractices.do}
                 </h3>
                 <ul className="text-sm space-y-2">
-                  <li>✓ Use logical properties everywhere</li>
-                  <li>✓ Test in both directions regularly</li>
-                  <li>✓ Use the direction toggle during development</li>
-                  <li>✓ Mirror directional icons appropriately</li>
-                  <li>✓ Keep accessibility in mind</li>
-                  <li>✓ Use Flexbox and Grid for layouts</li>
+                  {t.bestPractices.doList.map((item, index) => (
+                    <li key={index}>✓ {item}</li>
+                  ))}
                 </ul>
               </CardContent>
             </Card>
@@ -493,15 +490,12 @@ export default function RTLGuidePage() {
               <CardContent className="p-6">
                 <h3 className="font-semibold mb-2 flex items-center gap-2 text-red-700 dark:text-red-400">
                   <XCircle className="h-5 w-5" />
-                  Don&apos;t
+                  {t.bestPractices.dont}
                 </h3>
                 <ul className="text-sm space-y-2">
-                  <li>✗ Use directional properties (ml-, mr-, left-, right-)</li>
-                  <li>✗ Add conditional logic for direction</li>
-                  <li>✗ Forget to test RTL mode</li>
-                  <li>✗ Mirror all icons (some shouldn&apos;t)</li>
-                  <li>✗ Rely solely on left/right positioning</li>
-                  <li>✗ Use text-left or text-right</li>
+                  {t.bestPractices.dontList.map((item, index) => (
+                    <li key={index}>✗ {item}</li>
+                  ))}
                 </ul>
               </CardContent>
             </Card>
@@ -510,17 +504,17 @@ export default function RTLGuidePage() {
 
         {/* Resources */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Additional Resources</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.resources.title}</h2>
           <div className="grid gap-4 sm:grid-cols-2">
             <Link href="/getting-started">
               <Card className="hover:border-primary transition-colors h-full">
                 <CardContent className="p-6">
                   <h3 className="font-semibold mb-2 flex items-center gap-2">
                     <Book className="h-5 w-5 text-primary" />
-                    Getting Started
+                    {t.resources.gettingStarted}
                   </h3>
                   <p className="text-sm text-muted-foreground">
-                    Installation, configuration, and quick start guide
+                    {t.resources.gettingStartedDesc}
                   </p>
                 </CardContent>
               </Card>
@@ -531,10 +525,10 @@ export default function RTLGuidePage() {
                 <CardContent className="p-6">
                   <h3 className="font-semibold mb-2 flex items-center gap-2">
                     <Sparkles className="h-5 w-5 text-primary" />
-                    Component Library
+                    {t.resources.componentLibrary}
                   </h3>
                   <p className="text-sm text-muted-foreground">
-                    Browse all RTL-ready components with examples
+                    {t.resources.componentLibraryDesc}
                   </p>
                 </CardContent>
               </Card>

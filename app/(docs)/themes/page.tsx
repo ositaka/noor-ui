@@ -13,11 +13,18 @@ import { useDesignSystem } from '@/components/providers/design-system-provider'
 import { Check, Sparkles } from 'lucide-react'
 import { type Theme, themeConfig } from '@/lib/tokens'
 import { cn } from '@/lib/utils'
+import { useDirection } from '@/components/providers/direction-provider'
+import { content } from '@/lib/i18n'
 
 const ThemeCardInner = ({ theme }: { theme: Theme }) => {
   const { designTheme, setDesignTheme } = useDesignSystem()
+  const { locale } = useDirection()
   const config = themeConfig[theme]
   const isActive = designTheme === theme
+
+  const name = locale === 'ar' ? config.nameAr : config.name
+  const description = locale === 'ar' ? config.descriptionAr : config.description
+  const features = locale === 'ar' ? config.featuresAr : config.features
 
   return (
     <Card
@@ -30,8 +37,8 @@ const ThemeCardInner = ({ theme }: { theme: Theme }) => {
       <CardHeader>
         <div className="flex items-start justify-between">
           <div>
-            <CardTitle className="text-2xl">{config.name}</CardTitle>
-            <CardDescription className="mt-2">{config.description}</CardDescription>
+            <CardTitle className="text-2xl">{name}</CardTitle>
+            <CardDescription className="mt-2">{description}</CardDescription>
           </div>
           {isActive && (
             <Check className="h-6 w-6 text-primary" />
@@ -42,7 +49,7 @@ const ThemeCardInner = ({ theme }: { theme: Theme }) => {
         <div>
           <div className="text-sm font-medium mb-2">Features</div>
           <ul className="space-y-1">
-            {config.features.map((feature, i) => (
+            {features.map((feature, i) => (
               <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
                 <span className="text-primary mt-0.5">•</span>
                 <span>{feature}</span>
@@ -75,25 +82,31 @@ const ThemeCardInner = ({ theme }: { theme: Theme }) => {
 
 const ThemeCard = ({ theme }: { theme: Theme }) => {
   const [mounted, setMounted] = React.useState(false)
+  const { locale } = useDirection()
 
   React.useEffect(() => {
     setMounted(true)
   }, [])
+
+  const config = themeConfig[theme]
+  const name = locale === 'ar' ? config.nameAr : config.name
+  const description = locale === 'ar' ? config.descriptionAr : config.description
+  const features = locale === 'ar' ? config.featuresAr : config.features
 
   if (!mounted) {
     return (
       <Card className="cursor-pointer transition-all hover:shadow-lg">
         <CardHeader>
           <div>
-            <CardTitle className="text-2xl">{themeConfig[theme].name}</CardTitle>
-            <CardDescription className="mt-2">{themeConfig[theme].description}</CardDescription>
+            <CardTitle className="text-2xl">{name}</CardTitle>
+            <CardDescription className="mt-2">{description}</CardDescription>
           </div>
         </CardHeader>
         <CardContent className="space-y-4">
           <div>
             <div className="text-sm font-medium mb-2">Features</div>
             <ul className="space-y-1">
-              {themeConfig[theme].features.map((feature, i) => (
+              {features.map((feature, i) => (
                 <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
                   <span className="text-primary mt-0.5">•</span>
                   <span>{feature}</span>
@@ -110,6 +123,8 @@ const ThemeCard = ({ theme }: { theme: Theme }) => {
 }
 
 export default function ThemesPage() {
+  const { locale } = useDirection()
+  const t = content[locale]
   const themes: Theme[] = ['minimal', 'futuristic', 'cozy', 'artistic']
 
   return (
@@ -121,34 +136,31 @@ export default function ThemesPage() {
           <ol className="flex items-center gap-2 text-sm text-muted-foreground">
             <li>
               <Link href="/" className="hover:text-foreground transition-colors">
-                Home
+                {t.common.home}
               </Link>
             </li>
             <li>/</li>
-            <li className="text-foreground font-medium">Themes</li>
+            <li className="text-foreground font-medium">{t.themesPage.title}</li>
           </ol>
         </nav>
 
         {/* Page Header */}
         <div className="max-w-3xl mb-12">
-          <h1 className="text-4xl font-bold tracking-tight mb-4">Themes</h1>
+          <h1 className="text-4xl font-bold tracking-tight mb-4">{t.themesPage.title}</h1>
           <p className="text-xl text-muted-foreground mb-6">
-            Four distinct visual themes, all powered by the same design tokens.
-            Each theme has unique typography, spacing, and personality while maintaining
-            accessibility and consistency.
+            {t.themesPage.subtitle}
           </p>
           <div className="flex items-center gap-2 p-4 bg-primary/10 rounded-lg border border-primary/20">
             <Sparkles className="h-5 w-5 text-primary flex-shrink-0" />
             <p className="text-sm">
-              Try the floating theme switcher in the bottom-right corner to see changes
-              instantly across the entire site!
+              {t.themesPage.switcherNotice}
             </p>
           </div>
         </div>
 
         {/* Theme Cards */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Available Themes</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.themesPage.availableThemes}</h2>
           <div className="grid gap-6 lg:grid-cols-2">
             {themes.map((theme) => (
               <ThemeCard key={theme} theme={theme} />
@@ -158,40 +170,38 @@ export default function ThemesPage() {
 
         {/* Theme Details */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Theme Specifications</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.themesPage.themeSpecs}</h2>
 
           <div className="space-y-6">
             {/* Minimal */}
             <Card>
               <CardHeader>
-                <CardTitle>Minimal Theme</CardTitle>
-                <CardDescription>Clean, professional, and focused</CardDescription>
+                <CardTitle>{t.themesPage.minimal.name}</CardTitle>
+                <CardDescription>{t.themesPage.minimal.description}</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="grid gap-4 sm:grid-cols-2">
                   <div>
-                    <div className="text-sm font-medium mb-1">Typography</div>
+                    <div className="text-sm font-medium mb-1">{t.themesPage.minimal.typography}</div>
                     <ul className="text-sm text-muted-foreground space-y-1">
-                      <li>• Font: Inter (sans-serif)</li>
-                      <li>• Line-height: 1.6</li>
-                      <li>• Letter-spacing: -0.02em (headings)</li>
-                      <li>• Font-weight: 600 (headings)</li>
+                      {t.themesPage.minimal.typographyDetails.map((detail, i) => (
+                        <li key={i}>• {detail}</li>
+                      ))}
                     </ul>
                   </div>
                   <div>
-                    <div className="text-sm font-medium mb-1">Visual Style</div>
+                    <div className="text-sm font-medium mb-1">{t.themesPage.minimal.visualStyle}</div>
                     <ul className="text-sm text-muted-foreground space-y-1">
-                      <li>• Border-radius: 0.25rem</li>
-                      <li>• Colors: Neutral grays</li>
-                      <li>• Spacing: Balanced</li>
-                      <li>• Borders: Subtle</li>
+                      {t.themesPage.minimal.visualStyleDetails.map((detail, i) => (
+                        <li key={i}>• {detail}</li>
+                      ))}
                     </ul>
                   </div>
                 </div>
                 <div>
-                  <div className="text-sm font-medium mb-2">Best For</div>
+                  <div className="text-sm font-medium mb-2">{t.themesPage.minimal.bestFor}</div>
                   <p className="text-sm text-muted-foreground">
-                    Enterprise applications, dashboards, data-heavy interfaces, professional tools
+                    {t.themesPage.minimal.bestForText}
                   </p>
                 </div>
               </CardContent>
@@ -200,34 +210,32 @@ export default function ThemesPage() {
             {/* Futuristic */}
             <Card>
               <CardHeader>
-                <CardTitle>Futuristic Theme</CardTitle>
-                <CardDescription>Dark, modern, and compact</CardDescription>
+                <CardTitle>{t.themesPage.futuristic.name}</CardTitle>
+                <CardDescription>{t.themesPage.futuristic.description}</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="grid gap-4 sm:grid-cols-2">
                   <div>
-                    <div className="text-sm font-medium mb-1">Typography</div>
+                    <div className="text-sm font-medium mb-1">{t.themesPage.minimal.typography}</div>
                     <ul className="text-sm text-muted-foreground space-y-1">
-                      <li>• Font: Inter (sans-serif)</li>
-                      <li>• Line-height: 1.5 (compact)</li>
-                      <li>• Letter-spacing: -0.025em</li>
-                      <li>• Font-weight: 600 (strong)</li>
+                      {t.themesPage.futuristic.typographyDetails.map((detail, i) => (
+                        <li key={i}>• {detail}</li>
+                      ))}
                     </ul>
                   </div>
                   <div>
-                    <div className="text-sm font-medium mb-1">Visual Style</div>
+                    <div className="text-sm font-medium mb-1">{t.themesPage.minimal.visualStyle}</div>
                     <ul className="text-sm text-muted-foreground space-y-1">
-                      <li>• Border-radius: 0.75rem</li>
-                      <li>• Colors: Purples, cyans</li>
-                      <li>• Spacing: Tighter</li>
-                      <li>• Style: Glassmorphism</li>
+                      {t.themesPage.futuristic.visualStyleDetails.map((detail, i) => (
+                        <li key={i}>• {detail}</li>
+                      ))}
                     </ul>
                   </div>
                 </div>
                 <div>
-                  <div className="text-sm font-medium mb-2">Best For</div>
+                  <div className="text-sm font-medium mb-2">{t.themesPage.minimal.bestFor}</div>
                   <p className="text-sm text-muted-foreground">
-                    Tech products, developer tools, gaming interfaces, dark-mode-first applications
+                    {t.themesPage.futuristic.bestForText}
                   </p>
                 </div>
               </CardContent>
@@ -236,34 +244,32 @@ export default function ThemesPage() {
             {/* Cozy */}
             <Card>
               <CardHeader>
-                <CardTitle>Cozy Theme</CardTitle>
-                <CardDescription>Warm, spacious, and comfortable</CardDescription>
+                <CardTitle>{t.themesPage.cozy.name}</CardTitle>
+                <CardDescription>{t.themesPage.cozy.description}</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="grid gap-4 sm:grid-cols-2">
                   <div>
-                    <div className="text-sm font-medium mb-1">Typography</div>
+                    <div className="text-sm font-medium mb-1">{t.themesPage.minimal.typography}</div>
                     <ul className="text-sm text-muted-foreground space-y-1">
-                      <li>• Font: Inter (sans-serif)</li>
-                      <li>• Line-height: 1.7 (relaxed)</li>
-                      <li>• Letter-spacing: 0.015em</li>
-                      <li>• Headings: 1.5rem margin</li>
+                      {t.themesPage.cozy.typographyDetails.map((detail, i) => (
+                        <li key={i}>• {detail}</li>
+                      ))}
                     </ul>
                   </div>
                   <div>
-                    <div className="text-sm font-medium mb-1">Visual Style</div>
+                    <div className="text-sm font-medium mb-1">{t.themesPage.minimal.visualStyle}</div>
                     <ul className="text-sm text-muted-foreground space-y-1">
-                      <li>• Border-radius: 1.25rem (very rounded)</li>
-                      <li>• Colors: Warm oranges, ambers</li>
-                      <li>• Spacing: Very generous</li>
-                      <li>• Padding: 2rem cards, 0.75rem buttons</li>
+                      {t.themesPage.cozy.visualStyleDetails.map((detail, i) => (
+                        <li key={i}>• {detail}</li>
+                      ))}
                     </ul>
                   </div>
                 </div>
                 <div>
-                  <div className="text-sm font-medium mb-2">Best For</div>
+                  <div className="text-sm font-medium mb-2">{t.themesPage.minimal.bestFor}</div>
                   <p className="text-sm text-muted-foreground">
-                    Personal blogs, community platforms, lifestyle apps, content-focused sites
+                    {t.themesPage.cozy.bestForText}
                   </p>
                 </div>
               </CardContent>
@@ -272,35 +278,32 @@ export default function ThemesPage() {
             {/* Artistic */}
             <Card>
               <CardHeader>
-                <CardTitle>Artistic Theme</CardTitle>
-                <CardDescription>Elegant, typography-focused, serif fonts</CardDescription>
+                <CardTitle>{t.themesPage.artistic.name}</CardTitle>
+                <CardDescription>{t.themesPage.artistic.description}</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="grid gap-4 sm:grid-cols-2">
                   <div>
-                    <div className="text-sm font-medium mb-1">Typography</div>
+                    <div className="text-sm font-medium mb-1">{t.themesPage.minimal.typography}</div>
                     <ul className="text-sm text-muted-foreground space-y-1">
-                      <li>• Font: Georgia (serif)</li>
-                      <li>• Arabic: Noto Naskh Arabic (serif)</li>
-                      <li>• Line-height: 1.8-1.9</li>
-                      <li>• Letter-spacing: 0.01-0.02em</li>
-                      <li>• Font-weight: 400 (elegant)</li>
+                      {t.themesPage.artistic.typographyDetails.map((detail, i) => (
+                        <li key={i}>• {detail}</li>
+                      ))}
                     </ul>
                   </div>
                   <div>
-                    <div className="text-sm font-medium mb-1">Visual Style</div>
+                    <div className="text-sm font-medium mb-1">{t.themesPage.minimal.visualStyle}</div>
                     <ul className="text-sm text-muted-foreground space-y-1">
-                      <li>• Border-radius: 0.125rem (minimal)</li>
-                      <li>• Colors: Violets, golds</li>
-                      <li>• Spacing: Generous paragraphs</li>
-                      <li>• Style: Editorial</li>
+                      {t.themesPage.artistic.visualStyleDetails.map((detail, i) => (
+                        <li key={i}>• {detail}</li>
+                      ))}
                     </ul>
                   </div>
                 </div>
                 <div>
-                  <div className="text-sm font-medium mb-2">Best For</div>
+                  <div className="text-sm font-medium mb-2">{t.themesPage.minimal.bestFor}</div>
                   <p className="text-sm text-muted-foreground">
-                    Poetry, literature, magazines, portfolios, creative writing platforms
+                    {t.themesPage.artistic.bestForText}
                   </p>
                 </div>
               </CardContent>
@@ -310,17 +313,17 @@ export default function ThemesPage() {
 
         {/* Live Preview */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Live Preview</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.themesPage.livePreview}</h2>
           <Card>
             <CardHeader>
-              <CardTitle>Sample Content</CardTitle>
+              <CardTitle>{t.themesPage.preview.title}</CardTitle>
               <CardDescription>
-                See how the current theme affects real content
+                {t.themesPage.preview.description}
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
               <div>
-                <h3 className="text-2xl font-bold mb-2">Heading Example</h3>
+                <h3 className="text-2xl font-bold mb-2">{t.themesPage.preview.headingExample}</h3>
                 <p className="text-muted-foreground mb-4">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
                   tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
@@ -336,21 +339,21 @@ export default function ThemesPage() {
 
               <div className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="theme-preview">Input Field</Label>
-                  <Input id="theme-preview" placeholder="Type something..." />
+                  <Label htmlFor="theme-preview">{t.themesPage.preview.inputLabel}</Label>
+                  <Input id="theme-preview" placeholder={t.themesPage.preview.inputPlaceholder} />
                 </div>
 
                 <div className="flex flex-wrap gap-2">
-                  <Button>Primary Action</Button>
-                  <Button variant="secondary">Secondary</Button>
-                  <Button variant="outline">Outline</Button>
-                  <Button variant="ghost">Ghost</Button>
+                  <Button>{t.themesPage.preview.primaryAction}</Button>
+                  <Button variant="secondary">{t.themesPage.preview.secondary}</Button>
+                  <Button variant="outline">{t.themesPage.preview.outline}</Button>
+                  <Button variant="ghost">{t.themesPage.preview.ghost}</Button>
                 </div>
 
                 <div className="flex gap-2">
-                  <Badge>Status</Badge>
-                  <Badge variant="secondary">Label</Badge>
-                  <Badge variant="outline">Tag</Badge>
+                  <Badge>{t.themesPage.preview.status}</Badge>
+                  <Badge variant="secondary">{t.themesPage.preview.label}</Badge>
+                  <Badge variant="outline">{t.themesPage.preview.tag}</Badge>
                 </div>
               </div>
             </CardContent>
@@ -359,17 +362,17 @@ export default function ThemesPage() {
 
         {/* Implementation */}
         <section>
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Implementation</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.themesPage.implementation}</h2>
           <Card>
             <CardHeader>
-              <CardTitle>Using Themes</CardTitle>
+              <CardTitle>{t.themesPage.impl.title}</CardTitle>
               <CardDescription>
-                Themes can be changed via URL, UI, or programmatically
+                {t.themesPage.impl.description}
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div>
-                <div className="text-sm font-medium mb-2">Via URL Parameter</div>
+                <div className="text-sm font-medium mb-2">{t.themesPage.impl.viaUrl}</div>
                 <CodeBlock
                   code={`// Add to any URL
 ?theme=minimal
@@ -385,15 +388,14 @@ https://yoursite.com/components?theme=cozy`}
               </div>
 
               <div>
-                <div className="text-sm font-medium mb-2">Via Theme Switcher</div>
+                <div className="text-sm font-medium mb-2">{t.themesPage.impl.viaSwitcher}</div>
                 <p className="text-sm text-muted-foreground">
-                  Use the floating button in the bottom-right corner (palette icon) to switch
-                  themes. The URL will update automatically and the theme persists across pages.
+                  {t.themesPage.impl.switcherText}
                 </p>
               </div>
 
               <div>
-                <div className="text-sm font-medium mb-2">Programmatically</div>
+                <div className="text-sm font-medium mb-2">{t.themesPage.impl.programmatically}</div>
                 <CodeBlock
                   code={`import { useDesignSystem } from '@/components/providers/design-system-provider'
 

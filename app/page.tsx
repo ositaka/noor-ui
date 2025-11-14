@@ -3,8 +3,8 @@
 import * as React from 'react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
-import { Separator } from '@/components/ui/separator'
 import { SiteHeader } from '@/components/layout/site-header'
+import { SiteFooter } from '@/components/layout/site-footer'
 import { ThemeSwitcher } from '@/components/docs/theme-switcher'
 import { FeatureCard } from '@/components/ui/feature-card'
 import {
@@ -17,15 +17,11 @@ import {
   ArrowRight,
   CheckCircle2,
 } from 'lucide-react'
-import { getCurrentLocale, content } from '@/lib/i18n'
+import { content } from '@/lib/i18n'
+import { useDirection } from '@/components/providers/direction-provider'
 
 export default function HomePage() {
-  const [locale, setLocale] = React.useState<'en' | 'ar'>('en')
-
-  React.useEffect(() => {
-    setLocale(getCurrentLocale())
-  }, [])
-
+  const { locale } = useDirection()
   const t = content[locale]
 
   return (
@@ -159,9 +155,9 @@ export default function HomePage() {
                     <CheckCircle2 className="h-8 w-8 text-green-600" />
                   </div>
                   <div className="space-y-2">
-                    <h3 className="text-lg font-semibold">Ready to go!</h3>
+                    <h3 className="text-lg font-semibold">{t.common.readyToGo}</h3>
                     <p className="text-muted-foreground">
-                      Your components will automatically support RTL when the direction changes.
+                      {t.common.autoRTL}
                     </p>
                   </div>
                 </div>
@@ -171,51 +167,7 @@ export default function HomePage() {
         </section>
       </main>
 
-      {/* Footer */}
-      <footer className="border-t py-12">
-        <div className="container">
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-            <div>
-              <div className="flex items-center gap-2 mb-4">
-                <Sunrise className="h-5 w-5 text-primary" />
-                <span className="font-bold">Noor UI</span>
-              </div>
-              <p className="text-sm text-muted-foreground">
-                Bringing light to multilingual interface design.
-              </p>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-4">Documentation</h4>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><Link href="/getting-started" className="hover:text-foreground transition-colors">Getting Started</Link></li>
-                <li><Link href="/components" className="hover:text-foreground transition-colors">Components</Link></li>
-                <li><Link href="/tokens" className="hover:text-foreground transition-colors">Design Tokens</Link></li>
-                <li><Link href="/themes" className="hover:text-foreground transition-colors">Themes</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-4">Resources</h4>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><Link href="/examples" className="hover:text-foreground transition-colors">Examples</Link></li>
-                <li><Link href="/accessibility" className="hover:text-foreground transition-colors">Accessibility</Link></li>
-                <li><Link href="/rtl-guide" className="hover:text-foreground transition-colors">RTL Guide</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-4">Community</h4>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li><Link href="/github" className="hover:text-foreground transition-colors">GitHub</Link></li>
-                <li><Link href="/discord" className="hover:text-foreground transition-colors">Discord</Link></li>
-                <li><Link href="/twitter" className="hover:text-foreground transition-colors">Twitter</Link></li>
-              </ul>
-            </div>
-          </div>
-          <Separator className="my-8" />
-          <div className="text-center text-sm text-muted-foreground">
-            © 2025 Noor UI. Built with Next.js, TypeScript, and Tailwind CSS.
-          </div>
-        </div>
-      </footer>
+      <SiteFooter />
     </div>
   )
 }

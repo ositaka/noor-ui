@@ -6,6 +6,8 @@ import { Card, CardContent } from '@/components/ui/card'
 import { CodeBlock } from '@/components/docs/code-block'
 import { Zap, Rocket, Code2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { useDirection } from '@/components/providers/direction-provider'
+import { content } from '@/lib/i18n'
 
 const simpleButtonCode = `import { Button } from '@noorui/components/components'
 
@@ -127,6 +129,10 @@ export default function DashboardPage() {
 }`
 
 export default function QuickStartPage() {
+  const { locale } = useDirection()
+  const t = content[locale].documentationPages.quickStart
+  const common = content[locale].documentationPages.common
+
   return (
     <div className="min-h-screen">
 
@@ -136,17 +142,17 @@ export default function QuickStartPage() {
           <ol className="flex items-center gap-2 text-sm text-muted-foreground">
             <li>
               <Link href="/" className="hover:text-foreground transition-colors">
-                Home
+                {common.home}
               </Link>
             </li>
             <li>/</li>
             <li>
               <Link href="/documentation" className="hover:text-foreground transition-colors">
-                Documentation
+                {common.documentation}
               </Link>
             </li>
             <li>/</li>
-            <li className="text-foreground font-medium">Quick Start</li>
+            <li className="text-foreground font-medium">{t.title}</li>
           </ol>
         </nav>
 
@@ -154,32 +160,32 @@ export default function QuickStartPage() {
         <div className="max-w-3xl mb-12">
           <div className="flex items-center gap-3 mb-4">
             <Zap className="h-10 w-10 text-primary" />
-            <h1 className="text-4xl font-bold tracking-tight">Quick Start</h1>
+            <h1 className="text-4xl font-bold tracking-tight">{t.title}</h1>
           </div>
           <p className="text-xl text-muted-foreground">
-            Start building with Noor UI in under 5 minutes. This guide will get you from zero to your first component.
+            {t.subtitle}
           </p>
         </div>
 
         {/* Your First Button */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Your First Component</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.firstComponent}</h2>
           <p className="text-muted-foreground mb-4">
-            Let&apos;s start with the simplest component - a Button:
+            {t.firstComponentDesc}
           </p>
           <CodeBlock code={simpleButtonCode} language="tsx" />
 
           <div className="mt-6 p-6 border rounded-lg bg-muted/50">
-            <p className="text-sm text-muted-foreground mb-4">Preview:</p>
+            <p className="text-sm text-muted-foreground mb-4">{t.preview}</p>
             <Button>Click me</Button>
           </div>
         </section>
 
         {/* Card Component */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Building a Card</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.buildingCard}</h2>
           <p className="text-muted-foreground mb-4">
-            Cards are perfect for displaying grouped content:
+            {t.cardDesc}
           </p>
           <CodeBlock code={cardExampleCode} language="tsx" />
 
@@ -189,7 +195,7 @@ export default function QuickStartPage() {
                 <div className="flex items-center gap-3">
                   <Rocket className="h-5 w-5 text-green-600" />
                   <p className="text-sm">
-                    This card automatically adjusts padding, borders, and shadows for both LTR and RTL layouts!
+                    {t.cardNote}
                   </p>
                 </div>
               </CardContent>
@@ -199,9 +205,9 @@ export default function QuickStartPage() {
 
         {/* Form Example */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Creating Forms</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.creatingForms}</h2>
           <p className="text-muted-foreground mb-4">
-            Combine multiple components to create interactive forms:
+            {t.formsDesc}
           </p>
           <CodeBlock code={formExampleCode} language="tsx" />
 
@@ -212,7 +218,7 @@ export default function QuickStartPage() {
                 Note
               </h3>
               <p className="text-sm text-muted-foreground">
-                Form components automatically handle RTL text input direction and placeholder alignment.
+                {t.formsNote}
               </p>
             </CardContent>
           </Card>
@@ -220,32 +226,32 @@ export default function QuickStartPage() {
 
         {/* Direction Toggle */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Working with Direction</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.workingWithDirection}</h2>
           <p className="text-muted-foreground mb-4">
-            Add direction switching to your components using the <code className="px-1.5 py-0.5 rounded bg-muted text-foreground">useDirection</code> hook:
+            {t.directionDesc}
           </p>
           <CodeBlock code={directionToggleCode} language="tsx" />
         </section>
 
         {/* Full Page Example */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Complete Page Example</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.completePage}</h2>
           <p className="text-muted-foreground mb-4">
-            Here&apos;s a complete dashboard page using multiple components:
+            {t.completePageDesc}
           </p>
           <CodeBlock code={fullPageExampleCode} language="tsx" />
         </section>
 
         {/* Next Steps */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">What&apos;s Next?</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.whatsNext}</h2>
           <div className="grid gap-4 sm:grid-cols-3">
             <Link href="/components">
               <Card className="hover:border-primary transition-colors h-full">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold mb-2">Explore Components</h3>
+                  <h3 className="font-semibold mb-2">{t.exploreComponents}</h3>
                   <p className="text-sm text-muted-foreground">
-                    Browse the complete component library with live examples.
+                    {t.exploreComponentsDesc}
                   </p>
                 </CardContent>
               </Card>
@@ -254,9 +260,9 @@ export default function QuickStartPage() {
             <Link href="/documentation/rtl">
               <Card className="hover:border-primary transition-colors h-full">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold mb-2">RTL Guidelines</h3>
+                  <h3 className="font-semibold mb-2">{t.rtlGuidelines}</h3>
                   <p className="text-sm text-muted-foreground">
-                    Learn RTL best practices and patterns.
+                    {t.rtlGuidelinesDesc}
                   </p>
                 </CardContent>
               </Card>
@@ -265,9 +271,9 @@ export default function QuickStartPage() {
             <Link href="/tokens">
               <Card className="hover:border-primary transition-colors h-full">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold mb-2">Design Tokens</h3>
+                  <h3 className="font-semibold mb-2">{t.designTokens}</h3>
                   <p className="text-sm text-muted-foreground">
-                    Customize colors, spacing, and typography.
+                    {t.designTokensDesc}
                   </p>
                 </CardContent>
               </Card>

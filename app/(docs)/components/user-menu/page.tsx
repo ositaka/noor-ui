@@ -11,6 +11,8 @@ import { Badge } from '@/components/ui/badge'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Info } from 'lucide-react'
 import { useToast } from '@/hooks/use-toast'
+import { useDirection } from '@/components/providers/direction-provider'
+import { content } from '@/lib/i18n'
 
 const propDefinitions = [
   {
@@ -125,6 +127,8 @@ export default function Example() {
 }`
 
 export default function UserMenuPage() {
+  const { locale } = useDirection()
+  const t = content[locale]
   const { toast } = useToast()
 
   const handleAction = (action: string) => {

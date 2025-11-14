@@ -18,65 +18,68 @@ import { Separator } from '@/components/ui/separator'
 import { ComponentShowcase } from '@/components/docs/component-showcase'
 import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
-const selectProps: PropDefinition[] = [
+import { useDirection } from '@/components/providers/direction-provider'
+import { content } from '@/lib/i18n'
+
+const getSelectProps = (t: typeof content.en | typeof content.ar): PropDefinition[] => [
   {
     name: 'value',
     type: 'string',
     default: 'undefined',
     required: false,
-    description: 'The controlled value of the select',
+    description: t.selectComponent.props.value,
   },
   {
     name: 'defaultValue',
     type: 'string',
     default: 'undefined',
     required: false,
-    description: 'The default selected value (uncontrolled)',
+    description: t.selectComponent.props.defaultValue,
   },
   {
     name: 'onValueChange',
     type: '(value: string) => void',
     default: 'undefined',
     required: false,
-    description: 'Event handler called when the value changes',
+    description: t.selectComponent.props.onValueChange,
   },
   {
     name: 'disabled',
     type: 'boolean',
     default: 'false',
     required: false,
-    description: 'Disables the select',
+    description: t.selectComponent.props.disabled,
   },
   {
     name: 'name',
     type: 'string',
     default: 'undefined',
     required: false,
-    description: 'The name for form submission',
+    description: t.selectComponent.props.name,
   },
   {
     name: 'required',
     type: 'boolean',
     default: 'false',
     required: false,
-    description: 'Marks the select as required',
+    description: t.selectComponent.props.required,
   },
 ]
 
-const selectItemProps: PropDefinition[] = [
+const getSelectItemProps = (t: typeof content.en | typeof content.ar): PropDefinition[] => [
   {
     name: 'value',
     type: 'string',
     default: 'undefined',
     required: true,
-    description: 'The value of the select item',
+    description: t.selectComponent.props.itemValue,
   },
   {
     name: 'disabled',
     type: 'boolean',
     default: 'false',
     required: false,
-    description: 'Disables this specific item',
+    description: t.selectComponent.props.itemDisabled,
   },
 ]
 
@@ -220,6 +223,11 @@ const rtlCode = `// RTL support is automatic!
 </div>`
 
 export default function SelectPage() {
+  const { locale } = useDirection()
+  const t = content[locale]
+  const selectProps = getSelectProps(t)
+  const selectItemProps = getSelectItemProps(t)
+
   const [value, setValue] = React.useState('')
 
   return (
@@ -231,42 +239,41 @@ export default function SelectPage() {
           <ol className="flex items-center gap-2 text-sm text-muted-foreground">
             <li>
               <Link href="/" className="hover:text-foreground transition-colors">
-                Home
+                {t.common.home}
               </Link>
             </li>
             <li>/</li>
             <li>
               <Link href="/components" className="hover:text-foreground transition-colors">
-                Components
+                {t.nav.components}
               </Link>
             </li>
             <li>/</li>
-            <li className="text-foreground font-medium">Select</li>
+            <li className="text-foreground font-medium">{t.selectComponent.title}</li>
           </ol>
         </nav>
 
         {/* Page Header */}
         <div className="mb-12">
-          <h1 className="text-4xl font-bold tracking-tight mb-4">Select</h1>
+          <h1 className="text-4xl font-bold tracking-tight mb-4">{t.selectComponent.title}</h1>
           <p className="text-xl text-muted-foreground max-w-3xl">
-            Dropdown selection from a list of options. Supports grouped options, search, and full
-            keyboard navigation with RTL support.
+            {t.selectComponent.description}
           </p>
         </div>
 
         {/* Preview */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Preview</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentDocs.preview}</h2>
           <ComponentShowcase>
             <ComponentShowcase.Demo>
               <Select>
                 <SelectTrigger className="w-[180px]">
-                  <SelectValue placeholder="Select option" />
+                  <SelectValue placeholder={t.selectComponent.placeholders.selectOption} />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="option1">Option 1</SelectItem>
-                  <SelectItem value="option2">Option 2</SelectItem>
-                  <SelectItem value="option3">Option 3</SelectItem>
+                  <SelectItem value="option1">{t.selectComponent.options.option1}</SelectItem>
+                  <SelectItem value="option2">{t.selectComponent.options.option2}</SelectItem>
+                  <SelectItem value="option3">{t.selectComponent.options.option3}</SelectItem>
                 </SelectContent>
               </Select>
             </ComponentShowcase.Demo>
@@ -275,39 +282,39 @@ export default function SelectPage() {
 
         {/* Installation */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Installation</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentDocs.installation}</h2>
           <CodeBlock code={installCode} language="bash" title="Terminal" />
         </section>
 
         {/* Usage */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Usage</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentDocs.usage}</h2>
           <CodeBlock code={basicUsageCode} language="tsx" title="React" />
         </section>
 
         {/* Examples */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Examples</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentDocs.examples}</h2>
 
           <div className="space-y-8">
             {/* With Label */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">With Label</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.selectComponent.examples.withLabel}</h3>
               <Card>
                 <CardContent className="p-6">
                   <div className="max-w-xs space-y-2">
-                    <Label htmlFor="country">Country</Label>
+                    <Label htmlFor="country">{t.selectComponent.labels.country}</Label>
                     <Select>
                       <SelectTrigger id="country">
-                        <SelectValue placeholder="Select a country" />
+                        <SelectValue placeholder={t.selectComponent.placeholders.selectCountry} />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="us">United States</SelectItem>
-                        <SelectItem value="uk">United Kingdom</SelectItem>
-                        <SelectItem value="ca">Canada</SelectItem>
-                        <SelectItem value="au">Australia</SelectItem>
-                        <SelectItem value="de">Germany</SelectItem>
-                        <SelectItem value="fr">France</SelectItem>
+                        <SelectItem value="us">{t.selectComponent.options.us}</SelectItem>
+                        <SelectItem value="uk">{t.selectComponent.options.uk}</SelectItem>
+                        <SelectItem value="ca">{t.selectComponent.options.ca}</SelectItem>
+                        <SelectItem value="au">{t.selectComponent.options.au}</SelectItem>
+                        <SelectItem value="de">{t.selectComponent.options.de}</SelectItem>
+                        <SelectItem value="fr">{t.selectComponent.options.fr}</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
@@ -320,26 +327,26 @@ export default function SelectPage() {
 
             {/* Grouped Options */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">Grouped Options</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.selectComponent.examples.groupedOptions}</h3>
               <Card>
                 <CardContent className="p-6">
                   <Select>
                     <SelectTrigger className="w-[250px]">
-                      <SelectValue placeholder="Select timezone" />
+                      <SelectValue placeholder={t.selectComponent.placeholders.selectTimezone} />
                     </SelectTrigger>
                     <SelectContent>
                       <SelectGroup>
-                        <SelectLabel>North America</SelectLabel>
-                        <SelectItem value="est">Eastern Standard Time (EST)</SelectItem>
-                        <SelectItem value="cst">Central Standard Time (CST)</SelectItem>
-                        <SelectItem value="mst">Mountain Standard Time (MST)</SelectItem>
-                        <SelectItem value="pst">Pacific Standard Time (PST)</SelectItem>
+                        <SelectLabel>{t.selectComponent.timezones.northAmerica}</SelectLabel>
+                        <SelectItem value="est">{t.selectComponent.timezones.est}</SelectItem>
+                        <SelectItem value="cst">{t.selectComponent.timezones.cst}</SelectItem>
+                        <SelectItem value="mst">{t.selectComponent.timezones.mst}</SelectItem>
+                        <SelectItem value="pst">{t.selectComponent.timezones.pst}</SelectItem>
                       </SelectGroup>
                       <SelectGroup>
-                        <SelectLabel>Europe</SelectLabel>
-                        <SelectItem value="gmt">Greenwich Mean Time (GMT)</SelectItem>
-                        <SelectItem value="cet">Central European Time (CET)</SelectItem>
-                        <SelectItem value="eet">Eastern European Time (EET)</SelectItem>
+                        <SelectLabel>{t.selectComponent.timezones.europe}</SelectLabel>
+                        <SelectItem value="gmt">{t.selectComponent.timezones.gmt}</SelectItem>
+                        <SelectItem value="cet">{t.selectComponent.timezones.cet}</SelectItem>
+                        <SelectItem value="eet">{t.selectComponent.timezones.eet}</SelectItem>
                       </SelectGroup>
                     </SelectContent>
                   </Select>
@@ -352,32 +359,32 @@ export default function SelectPage() {
 
             {/* Disabled */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">Disabled State</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.selectComponent.examples.disabledState}</h3>
               <Card>
                 <CardContent className="p-6 space-y-4">
                   <div className="space-y-2">
-                    <Label>Select with disabled option</Label>
+                    <Label>{t.selectComponent.labels.selectWithDisabled}</Label>
                     <Select>
                       <SelectTrigger className="w-[180px]">
-                        <SelectValue placeholder="Select option" />
+                        <SelectValue placeholder={t.selectComponent.placeholders.selectOption} />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="available">Available option</SelectItem>
+                        <SelectItem value="available">{t.selectComponent.options.available}</SelectItem>
                         <SelectItem value="disabled" disabled>
-                          Disabled option
+                          {t.selectComponent.options.disabled}
                         </SelectItem>
-                        <SelectItem value="another">Another option</SelectItem>
+                        <SelectItem value="another">{t.selectComponent.options.another}</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
                   <div className="space-y-2">
-                    <Label>Disabled select</Label>
+                    <Label>{t.selectComponent.labels.disabledSelect}</Label>
                     <Select disabled>
                       <SelectTrigger className="w-[180px]">
-                        <SelectValue placeholder="Disabled select" />
+                        <SelectValue placeholder={t.selectComponent.placeholders.disabledSelect} />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="option1">Option 1</SelectItem>
+                        <SelectItem value="option1">{t.selectComponent.options.option1}</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
@@ -390,26 +397,26 @@ export default function SelectPage() {
 
             {/* Controlled */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">Controlled Component</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.selectComponent.examples.controlled}</h3>
               <Card>
                 <CardContent className="p-6">
                   <div className="space-y-4">
                     <Select value={value} onValueChange={setValue}>
                       <SelectTrigger className="w-[200px]">
-                        <SelectValue placeholder="Select a fruit" />
+                        <SelectValue placeholder={t.selectComponent.placeholders.selectFruit} />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="apple">Apple</SelectItem>
-                        <SelectItem value="banana">Banana</SelectItem>
-                        <SelectItem value="orange">Orange</SelectItem>
-                        <SelectItem value="grape">Grape</SelectItem>
+                        <SelectItem value="apple">{t.selectComponent.options.apple}</SelectItem>
+                        <SelectItem value="banana">{t.selectComponent.options.banana}</SelectItem>
+                        <SelectItem value="orange">{t.selectComponent.options.orange}</SelectItem>
+                        <SelectItem value="grape">{t.selectComponent.options.grape}</SelectItem>
                       </SelectContent>
                     </Select>
                     <p className="text-sm text-muted-foreground">
-                      Selected: {value || 'None'}
+                      {t.selectComponent.controlled.selected}: {value || t.selectComponent.controlled.none}
                     </p>
                     <Button size="sm" onClick={() => setValue('banana')}>
-                      Select Banana
+                      {t.selectComponent.controlled.selectBanana}
                     </Button>
                   </div>
                 </CardContent>
@@ -421,31 +428,31 @@ export default function SelectPage() {
 
             {/* In Forms */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">In Forms</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.selectComponent.examples.inForms}</h3>
               <Card>
                 <CardContent className="p-6">
                   <form
                     className="max-w-xs space-y-6"
                     onSubmit={(e) => {
                       e.preventDefault()
-                      alert('Form submitted!')
+                      alert(t.selectComponent.form.formSubmitted)
                     }}
                   >
                     <div className="space-y-2">
-                      <Label htmlFor="plan">Select Plan</Label>
+                      <Label htmlFor="plan">{t.selectComponent.labels.selectPlan}</Label>
                       <Select name="plan" required>
                         <SelectTrigger id="plan">
-                          <SelectValue placeholder="Choose a plan" />
+                          <SelectValue placeholder={t.selectComponent.placeholders.choosePlan} />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="free">Free - $0/month</SelectItem>
-                          <SelectItem value="starter">Starter - $9/month</SelectItem>
-                          <SelectItem value="pro">Pro - $29/month</SelectItem>
-                          <SelectItem value="enterprise">Enterprise - Custom</SelectItem>
+                          <SelectItem value="free">{t.selectComponent.plans.free}</SelectItem>
+                          <SelectItem value="starter">{t.selectComponent.plans.starter}</SelectItem>
+                          <SelectItem value="pro">{t.selectComponent.plans.pro}</SelectItem>
+                          <SelectItem value="enterprise">{t.selectComponent.plans.enterprise}</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
-                    <Button type="submit">Continue</Button>
+                    <Button type="submit">{t.selectComponent.form.continue}</Button>
                   </form>
                 </CardContent>
               </Card>
@@ -458,7 +465,7 @@ export default function SelectPage() {
 
         {/* Props */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Props</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentDocs.props}</h2>
 
           <div className="space-y-8">
             <div>
@@ -475,58 +482,52 @@ export default function SelectPage() {
 
         {/* Accessibility */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Accessibility</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentDocs.accessibility}</h2>
           <Card>
             <CardContent className="p-6 space-y-4">
               <div>
-                <h3 className="font-semibold mb-2">Keyboard Navigation</h3>
+                <h3 className="font-semibold mb-2">{t.selectComponent.accessibility.keyboardTitle}</h3>
                 <ul className="list-disc list-inside text-muted-foreground space-y-1">
                   <li>
-                    <kbd className="px-1.5 py-0.5 rounded bg-muted">Tab</kbd>: Move focus to/from
-                    select
+                    <kbd className="px-1.5 py-0.5 rounded bg-muted">Tab</kbd>: {t.selectComponent.accessibility.keyboardTab}
                   </li>
                   <li>
                     <kbd className="px-1.5 py-0.5 rounded bg-muted">Enter</kbd> or{' '}
-                    <kbd className="px-1.5 py-0.5 rounded bg-muted">Space</kbd>: Open dropdown
+                    <kbd className="px-1.5 py-0.5 rounded bg-muted">Space</kbd>: {t.selectComponent.accessibility.keyboardEnter}
                   </li>
                   <li>
-                    <kbd className="px-1.5 py-0.5 rounded bg-muted">Arrow Keys</kbd>: Navigate
-                    options
+                    <kbd className="px-1.5 py-0.5 rounded bg-muted">Arrow Keys</kbd>: {t.selectComponent.accessibility.keyboardArrows}
                   </li>
                   <li>
-                    <kbd className="px-1.5 py-0.5 rounded bg-muted">Enter</kbd>: Select option
+                    <kbd className="px-1.5 py-0.5 rounded bg-muted">Enter</kbd>: {t.selectComponent.accessibility.keyboardEnterSelect}
                   </li>
                   <li>
-                    <kbd className="px-1.5 py-0.5 rounded bg-muted">Esc</kbd>: Close dropdown
+                    <kbd className="px-1.5 py-0.5 rounded bg-muted">Esc</kbd>: {t.selectComponent.accessibility.keyboardEsc}
                   </li>
                   <li>
-                    <kbd className="px-1.5 py-0.5 rounded bg-muted">Type</kbd>: Jump to option
-                    starting with typed character
+                    <kbd className="px-1.5 py-0.5 rounded bg-muted">Type</kbd>: {t.selectComponent.accessibility.keyboardType}
                   </li>
                 </ul>
               </div>
               <Separator />
               <div>
-                <h3 className="font-semibold mb-2">Always Use Labels</h3>
+                <h3 className="font-semibold mb-2">{t.selectComponent.accessibility.alwaysUseLabelsTitle}</h3>
                 <p className="text-muted-foreground">
-                  Always pair selects with labels for screen reader users. Clicking the label
-                  focuses the select trigger.
+                  {t.selectComponent.accessibility.alwaysUseLabelsDesc}
                 </p>
               </div>
               <Separator />
               <div>
-                <h3 className="font-semibold mb-2">Screen Readers</h3>
+                <h3 className="font-semibold mb-2">{t.selectComponent.accessibility.screenReadersTitle}</h3>
                 <p className="text-muted-foreground">
-                  Screen readers announce the combobox role, the label, the selected value, and
-                  instructions for opening the dropdown.
+                  {t.selectComponent.accessibility.screenReadersDesc}
                 </p>
               </div>
               <Separator />
               <div>
-                <h3 className="font-semibold mb-2">Grouped Options</h3>
+                <h3 className="font-semibold mb-2">{t.selectComponent.accessibility.groupedOptionsTitle}</h3>
                 <p className="text-muted-foreground">
-                  Use SelectGroup and SelectLabel to organize options into categories. Group labels
-                  are announced by screen readers.
+                  {t.selectComponent.accessibility.groupedOptionsDesc}
                 </p>
               </div>
             </CardContent>
@@ -535,17 +536,16 @@ export default function SelectPage() {
 
         {/* RTL Considerations */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">RTL Considerations</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentDocs.rtlConsiderations}</h2>
           <Card>
             <CardContent className="p-6 space-y-4">
               <p className="text-muted-foreground">
-                Select dropdowns automatically support RTL layout. The dropdown position, chevron
-                icon, and check indicator all adapt correctly for right-to-left languages.
+                {t.selectComponent.rtl.description}
               </p>
               <CodeBlock code={rtlCode} language="tsx" />
               <div className="grid gap-4 md:grid-cols-2 mt-6">
                 <div className="space-y-2">
-                  <h4 className="font-semibold text-sm">LTR (English)</h4>
+                  <h4 className="font-semibold text-sm">{t.componentDocs.ltr}</h4>
                   <div dir="ltr">
                     <div className="space-y-2 p-4 border rounded-lg">
                       <Label htmlFor="ltr-select">Language</Label>
@@ -563,7 +563,7 @@ export default function SelectPage() {
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <h4 className="font-semibold text-sm">RTL (العربية)</h4>
+                  <h4 className="font-semibold text-sm">{t.componentDocs.rtl}</h4>
                   <div dir="rtl">
                     <div className="space-y-2 p-4 border rounded-lg">
                       <Label htmlFor="rtl-select">اللغة</Label>
@@ -587,14 +587,14 @@ export default function SelectPage() {
 
         {/* Related Components */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Related Components</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.selectComponent.relatedTitle}</h2>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             <Link href="/components/radio-group">
               <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold">Radio Group</h3>
+                  <h3 className="font-semibold">{t.selectComponent.related.radioGroup}</h3>
                   <p className="text-sm text-muted-foreground mt-1">
-                    For fewer, visible options
+                    {t.selectComponent.related.radioGroupDesc}
                   </p>
                 </CardContent>
               </Card>
@@ -602,8 +602,8 @@ export default function SelectPage() {
             <Link href="/components/label">
               <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold">Label</h3>
-                  <p className="text-sm text-muted-foreground mt-1">Labels for form inputs</p>
+                  <h3 className="font-semibold">{t.selectComponent.related.label}</h3>
+                  <p className="text-sm text-muted-foreground mt-1">{t.selectComponent.related.labelDesc}</p>
                 </CardContent>
               </Card>
             </Link>
