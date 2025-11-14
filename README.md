@@ -622,9 +622,74 @@ This project follows a deliberate phased approach. See our planning documents fo
 - ✅ Fixed all component cross-references and removed broken links
 - ✅ Added comprehensive documentation structure with 11 guide pages
 
+## 👨‍💻 Author
+
+**Nuno Marques**
+
+Design systems engineer and developer passionate about creating accessible, multilingual interfaces for the GCC market.
+
+- 🌐 Website: [ositaka.com](https://ositaka.com/)
+- 💼 LinkedIn: [linkedin.com/in/ositaka](https://www.linkedin.com/in/ositaka/)
+- 📝 Blog: [design-code.tips](https://design-code.tips/)
+
+Noor UI was born from real-world experience building bilingual applications for the Middle East market and a commitment to making RTL-first development accessible to all developers.
+
+---
+
+## 📛 Trademark
+
+**"Noor UI" is a trademark of Nuno Marques.**
+
+While the code is MIT licensed and free to use, the name "Noor UI" and associated branding are protected trademarks.
+
+### You are welcome to:
+
+- ✅ Use Noor UI components in your projects (personal or commercial)
+- ✅ Modify the code to fit your specific needs
+- ✅ Study and learn from the implementation
+- ✅ Contribute improvements back to the project
+
+### Please don't:
+
+- ❌ Publish a competing library or fork using the name "Noor UI"
+- ❌ Create confusion about the official source
+- ❌ Remove copyright notices or attribution from the code
+- ❌ Use the Noor UI name or branding in misleading ways
+
+### Derivative Works
+
+If you create a derivative work based on Noor UI, please:
+- Give it a **distinct, different name**
+- Clearly state it was **derived from Noor UI**
+- Maintain the **original copyright notices** in the code
+- Consider linking back to the original project (appreciated!)
+
+Example attribution: `"Based on Noor UI by Nuno Marques (https://github.com/ositaka/noor-ui)"`
+
+**Official Sources:**
+- GitHub: [github.com/ositaka/noor-ui](https://github.com/ositaka/noor-ui)
+- npm: `@noorui/components` (when published)
+- Website: (coming soon)
+
+For questions about trademark use: info@ositaka.com
+
+See the [NOTICE](./NOTICE) file for complete trademark information.
+
+---
+
 ## 📄 License
 
-MIT
+**MIT License**
+
+Copyright (c) 2025 Nuno Marques
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+**Note:** The MIT License covers the code only. The "Noor UI" trademark is protected separately. See the Trademark section above.
 
 ## 🤝 Contributing
 

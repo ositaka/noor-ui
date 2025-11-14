@@ -1,0 +1,89 @@
+Noor UI - RTL-First Design System
+Copyright (c) 2025 Nuno Marques
+https://ositaka.com
+
+================================================================================
+
+TRADEMARK NOTICE
+================================================================================
+
+"Noor UI" is a trademark of Nuno Marques.
+
+The Noor UI name, logo, and associated branding are protected trademarks.
+While the source code is released under the MIT License (see LICENSE file),
+the trademark rights are reserved separately.
+
+================================================================================
+
+PERMITTED USE
+================================================================================
+
+You are welcome and encouraged to:
+  ✓ Use Noor UI components in your projects (personal or commercial)
+  ✓ Modify the code to fit your specific needs
+  ✓ Study the code and learn from the implementation
+  ✓ Contribute improvements back to the project
+  ✓ Share and recommend Noor UI to others
+
+================================================================================
+
+TRADEMARK RESTRICTIONS
+================================================================================
+
+To avoid confusion in the marketplace, please do NOT:
+  ✗ Create a competing library or fork using the name "Noor UI"
+  ✗ Publish packages to npm that include "Noor UI" in the name
+  ✗ Use the Noor UI name or logo in ways that suggest official endorsement
+  ✗ Remove copyright notices or attribution from the source code
+  ✗ Misrepresent the origin or official source of the project
+
+================================================================================
+
+DERIVATIVE WORKS
+================================================================================
+
+If you create a derivative work or fork based on Noor UI:
+  • Please give it a distinct, different name
+  • Clearly state that it is derived from Noor UI
+  • Maintain the original copyright notices in the code
+  • Link back to the original project (appreciated but not required)
+
+Example acceptable attribution:
+"Based on Noor UI by Nuno Marques (https://github.com/ositaka/noor-ui)"
+
+================================================================================
+
+OFFICIAL SOURCES
+================================================================================
+
+The official and canonical sources for Noor UI are:
+
+  • Website:     https://noorui.com (or current official site)
+  • GitHub:      https://github.com/ositaka/noor-ui
+  • npm Package: @noorui/components (when published)
+  • Author:      https://ositaka.com
+
+================================================================================
+
+ATTRIBUTION
+================================================================================
+
+While not legally required by the MIT License, attribution is greatly
+appreciated when using Noor UI in your projects. A link back to the
+original project helps support continued development and helps other
+developers discover the library.
+
+================================================================================
+
+QUESTIONS
+================================================================================
+
+If you have questions about acceptable use of the Noor UI trademark,
+please contact: info@ositaka.com
+
+For code-related issues, bug reports, or feature requests, please use
+the GitHub issue tracker.
+
+================================================================================
+
+This notice was last updated: January 2025

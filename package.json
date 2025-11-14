@@ -2,6 +2,30 @@
   "name": "noorui",
   "version": "0.1.0",
   "description": "Noor UI - Beautiful RTL-first React components for bilingual applications",
+  "author": {
+    "name": "Nuno Marques",
+    "url": "https://ositaka.com",
+    "email": "info@ositaka.com"
+  },
+  "homepage": "https://ositaka.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ositaka/noor-ui"
+  },
+  "keywords": [
+    "react",
+    "components",
+    "ui",
+    "design-system",
+    "rtl",
+    "arabic",
+    "bilingual",
+    "gcc",
+    "nextjs",
+    "tailwindcss",
+    "typescript"
+  ],
+  "license": "MIT",
   "private": true,
   "scripts": {
     "dev": "next dev",

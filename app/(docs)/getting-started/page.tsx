@@ -369,19 +369,19 @@ export default function GettingStartedPage() {
               <h3 className="font-semibold mb-2">{t.gettingStarted.rtlBestPractices}</h3>
               <ul className="text-sm text-muted-foreground space-y-2">
                 <li className="flex items-start gap-2">
-                  <ArrowRight className="h-4 w-4 text-primary mt-0.5 shrink-0" />
+                  <ArrowRight className="h-4 w-4 text-primary mt-0.5 shrink-0 rtl:rotate-180" />
                   <span>{t.gettingStarted.rtlBestPractice1}</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <ArrowRight className="h-4 w-4 text-primary mt-0.5 shrink-0" />
+                  <ArrowRight className="h-4 w-4 text-primary mt-0.5 shrink-0 rtl:rotate-180" />
                   <span>{t.gettingStarted.rtlBestPractice2}</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <ArrowRight className="h-4 w-4 text-primary mt-0.5 shrink-0" />
+                  <ArrowRight className="h-4 w-4 text-primary mt-0.5 shrink-0 rtl:rotate-180" />
                   <span>{t.gettingStarted.rtlBestPractice3}</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <ArrowRight className="h-4 w-4 text-primary mt-0.5 shrink-0" />
+                  <ArrowRight className="h-4 w-4 text-primary mt-0.5 shrink-0 rtl:rotate-180" />
                   <span>{t.gettingStarted.rtlBestPractice4}</span>
                 </li>
               </ul>
