@@ -9,22 +9,22 @@ import { Sparkles, Package, Settings, Zap, CheckCircle2, ArrowRight } from 'luci
 import { Button } from '@/components/ui/button'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
-const installationCode = `npm install @noorui/components
+const installationCode = `npm install noorui-rtl
 # or
-yarn add @noorui/components
+yarn add noorui-rtl
 # or
-pnpm add @noorui/components`
+pnpm add noorui-rtl`
 
 const tailwindConfigCode = `// tailwind.config.ts
 import type { Config } from "tailwindcss"
-import { rtlPlugin } from "@noorui/components/plugin"
+import { rtlPlugin } from "noorui-rtl/plugin"
 
 const config: Config = {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
-    "./node_modules/@noorui/components/**/*.{js,ts,jsx,tsx}",
+    "./node_modules/noorui-rtl/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {},
@@ -41,10 +41,10 @@ const providersCode = `// app/providers.tsx
 'use client'
 
 import * as React from 'react'
-import { DirectionProvider } from '@noorui/components/providers'
-import { DesignSystemProvider } from '@noorui/components/providers'
-import { TooltipProvider } from '@noorui/components'
-import { Toaster } from '@noorui/components'
+import { DirectionProvider } from 'noorui-rtl/providers'
+import { DesignSystemProvider } from 'noorui-rtl/providers'
+import { TooltipProvider } from 'noorui-rtl'
+import { Toaster } from 'noorui-rtl'
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
@@ -150,8 +150,8 @@ const globalsCssCode = `/* app/globals.css */
 }`
 
 const quickStartCode = `// app/page.tsx
-import { Button } from '@noorui/components'
-import { Card, CardContent, CardHeader, CardTitle } from '@noorui/components'
+import { Button } from 'noorui-rtl'
+import { Card, CardContent, CardHeader, CardTitle } from 'noorui-rtl'
 
 export default function Home() {
   return (
@@ -176,7 +176,7 @@ export default function Home() {
 const rtlUsageCode = `// Using RTL direction
 'use client'
 
-import { useDirection } from '@noorui/components/hooks'
+import { useDirection } from 'noorui-rtl/hooks'
 
 export function MyComponent() {
   const { direction, setDirection } = useDirection()

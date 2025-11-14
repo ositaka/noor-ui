@@ -1,0 +1,26 @@
+# Source files (only ship compiled files)
+src
+tsconfig.json
+
+# Development files
+*.tsbuildinfo
+.vscode
+.idea
+
+# Tests
+__tests__
+*.test.ts
+*.test.tsx
+*.spec.ts
+*.spec.tsx
+
+# Documentation that's not needed in package
+docs
+
+# CI/CD
+.github
+.gitlab-ci.yml
+
+# OS files
+.DS_Store
+Thumbs.db

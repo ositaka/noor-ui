@@ -97,7 +97,7 @@ const promptInputProps: PropDefinition[] = [
   },
 ]
 
-const installCode = `npm install @noorui/components`
+const installCode = `npm install noorui-rtl`
 
 const basicUsageCode = `import { PromptInput } from '@/components/ui/prompt-input'
 

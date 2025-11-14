@@ -116,7 +116,7 @@ const workflowCanvasProps: PropDefinition[] = [
   },
 ]
 
-const installCode = `npm install @noorui/components @xyflow/react`
+const installCode = `npm install noorui-rtl @xyflow/react`
 
 const basicUsageCode = `import { WorkflowCanvas } from '@/components/ui/workflow-canvas'
 import { WorkflowNode } from '@/components/ui/workflow-node'

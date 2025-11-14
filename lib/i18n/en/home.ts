@@ -131,7 +131,7 @@ home: {
           status: 'Planned',
           description: 'Package the design system for easy consumption by others.',
           task1: 'Set up monorepo structure',
-          task2: 'Publish to NPM as @noorui/components',
+          task2: 'Publish to NPM as noorui-rtl',
           task3: 'Create installation and migration guides',
         },
         phase4: {

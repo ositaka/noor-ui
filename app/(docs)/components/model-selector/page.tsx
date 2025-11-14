@@ -77,7 +77,7 @@ const aiModelInterface = `interface AIModel {
   icon?: 'zap' | 'brain' | 'sparkles' | 'bot'
 }`
 
-const installCode = `npm install @noorui/components`
+const installCode = `npm install noorui-rtl`
 
 const basicUsageCode = `import { ModelSelector, defaultModels } from '@/components/ui/model-selector'
 

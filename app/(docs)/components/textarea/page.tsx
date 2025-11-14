@@ -65,7 +65,7 @@ const getTextareaProps = (t: typeof content.en | typeof content.ar): PropDefinit
   },
 ]
 
-const installCode = `npm install @noorui/components`
+const installCode = `npm install noorui-rtl`
 
 const basicUsageCode = `import { Textarea } from '@/components/ui/textarea'
 import { Label } from '@/components/ui/label'

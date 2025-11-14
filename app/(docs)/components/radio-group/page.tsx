@@ -82,7 +82,7 @@ const getRadioGroupItemProps = (locale: 'en' | 'ar'): PropDefinition[] => {
   ]
 }
 
-const installCode = `npm install @noorui/components`
+const installCode = `npm install noorui-rtl`
 
 const basicUsageCode = `import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { Label } from '@/components/ui/label'

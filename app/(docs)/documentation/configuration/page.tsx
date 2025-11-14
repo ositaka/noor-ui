@@ -18,7 +18,7 @@ const config: Config = {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     // Include Noor UI components
-    "./node_modules/@noorui/components/**/*.{js,ts,jsx,tsx}",
+    "./node_modules/noorui-rtl/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
@@ -36,10 +36,10 @@ const providersSetup = `// app/providers.tsx
 'use client'
 
 import * as React from 'react'
-import { DirectionProvider } from '@noorui/components/providers'
+import { DirectionProvider } from 'noorui-rtl/providers'
 import { ThemeProvider } from 'next-themes'
 import { TooltipProvider } from '@radix-ui/react-tooltip'
-import { Toaster } from '@noorui/components/components'
+import { Toaster } from 'noorui-rtl/components'
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (

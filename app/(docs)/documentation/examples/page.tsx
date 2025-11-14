@@ -11,10 +11,10 @@ import { Label } from '@/components/ui/label'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 
-const loginFormCode = `import { Button } from '@noorui/components/components'
-import { Input } from '@noorui/components/components'
-import { Label } from '@noorui/components/components'
-import { Card, CardContent, CardHeader, CardTitle } from '@noorui/components/components'
+const loginFormCode = `import { Button } from 'noorui-rtl/components'
+import { Input } from 'noorui-rtl/components'
+import { Label } from 'noorui-rtl/components'
+import { Card, CardContent, CardHeader, CardTitle } from 'noorui-rtl/components'
 
 export default function LoginForm() {
   return (
@@ -39,7 +39,7 @@ export default function LoginForm() {
   )
 }`
 
-const dashboardCode = `import { Card, CardContent, CardHeader, CardTitle } from '@noorui/components/components'
+const dashboardCode = `import { Card, CardContent, CardHeader, CardTitle } from 'noorui-rtl/components'
 
 export default function Dashboard() {
   return (

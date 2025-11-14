@@ -107,7 +107,7 @@ const conversationInterface = `interface Conversation {
   isActive?: boolean
 }`
 
-const installCode = `npm install @noorui/components`
+const installCode = `npm install noorui-rtl`
 
 const basicUsageCode = `import { ConversationHistory, type Conversation } from '@/components/ui/conversation-history'
 

@@ -83,7 +83,7 @@ const getSelectItemProps = (t: typeof content.en | typeof content.ar): PropDefin
   },
 ]
 
-const installCode = `npm install @noorui/components`
+const installCode = `npm install noorui-rtl`
 
 const basicUsageCode = `import {
   Select,
