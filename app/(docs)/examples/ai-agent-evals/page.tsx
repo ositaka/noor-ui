@@ -10,6 +10,14 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Progress } from '@/components/ui/progress'
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet'
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Separator } from '@/components/ui/separator'
@@ -50,6 +58,8 @@ import {
   Play,
   Loader2,
   Check,
+  Download,
+  Pause,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
@@ -81,6 +91,18 @@ export default function AIAgentEvalsPage() {
   const [runningTests, setRunningTests] = React.useState<RunningTest[]>([])
   const [evalProgress, setEvalProgress] = React.useState(0)
   const [completedCount, setCompletedCount] = React.useState(0)
+  const [isPaused, setIsPaused] = React.useState(false)
+  const timeoutsRef = React.useRef<NodeJS.Timeout[]>([])
+  const [isExportDialogOpen, setIsExportDialogOpen] = React.useState(false)
+
+  // Live metrics during evaluation
+  const [liveMetrics, setLiveMetrics] = React.useState({
+    accuracy: 0,
+    avgLatency: 0,
+    avgScore: 0,
+    passRate: 0,
+    shariahCompliance: 100,
+  })
 
   // Get current agent data
   const currentResults = selectedTab === 'ecommerce' ? ecommerceEvalResults : islamicServicesEvalResults
@@ -154,6 +176,26 @@ export default function AIAgentEvalsPage() {
     setSelectedTests([])
   }
 
+  const calculateLiveMetrics = (tests: RunningTest[]) => {
+    const completed = tests.filter(t => t.status === 'complete' || t.status === 'failed')
+    if (completed.length === 0) return
+
+    const totalScore = completed.reduce((acc, t) => acc + (t.score || 0), 0)
+    const passed = completed.filter(t => t.passed).length
+    const avgScore = totalScore / completed.length
+    const passRate = (passed / completed.length) * 100
+
+    setLiveMetrics({
+      accuracy: passRate,
+      avgLatency: 900, // Would be calculated from actual latencies
+      avgScore,
+      passRate,
+      shariahCompliance: selectedAgent === 'islamic' ? 100 : 0,
+    })
+  }
+
+  const estimatedDuration = selectedTests.length * 1.2 // ~1.2 seconds per test
+
   const startRunning = () => {
     const testsToRun = availableTests.filter(t => selectedTests.includes(t.id))
     setRunningTests(testsToRun.map(t => ({
@@ -164,6 +206,18 @@ export default function AIAgentEvalsPage() {
     setCurrentStep(1)
     setEvalProgress(0)
     setCompletedCount(0)
+    setIsPaused(false)
+    setLiveMetrics({
+      accuracy: 0,
+      avgLatency: 0,
+      avgScore: 0,
+      passRate: 0,
+      shariahCompliance: selectedAgent === 'islamic' ? 100 : 0,
+    })
+
+    // Clear any existing timeouts
+    timeoutsRef.current.forEach(clearTimeout)
+    timeoutsRef.current = []
 
     // Mock streaming - run tests one by one
     let currentIndex = 0
@@ -171,50 +225,275 @@ export default function AIAgentEvalsPage() {
       if (currentIndex >= testsToRun.length) {
         // All tests complete
         setEvalProgress(100)
-        setTimeout(() => setCurrentStep(2), 500)
+        const timeout = setTimeout(() => setCurrentStep(2), 500)
+        timeoutsRef.current.push(timeout)
         return
       }
 
       const currentTest = testsToRun[currentIndex]
 
       // Set test as running
-      setRunningTests(prev =>
-        prev.map(t =>
-          t.id === currentTest.id ? { ...t, status: 'running' } : t
+      setRunningTests(prev => {
+        const updated = prev.map(t =>
+          t.id === currentTest.id ? { ...t, status: 'running' as 'running' } : t
         )
-      )
+        return updated
+      })
 
       // Simulate test execution (800ms - 1500ms per test)
       const duration = 800 + Math.random() * 700
-      setTimeout(() => {
+      const timeout1 = setTimeout(() => {
         // Complete the test
-        setRunningTests(prev =>
-          prev.map(t =>
+        setRunningTests(prev => {
+          const updated = prev.map(t =>
             t.id === currentTest.id
               ? {
                   ...t,
-                  status: currentTest.passed ? 'complete' : 'failed',
+                  status: (currentTest.passed ? 'complete' : 'failed') as 'complete' | 'failed',
                   score: currentTest.score,
                   passed: currentTest.passed,
                 }
               : t
           )
-        )
+          // Update live metrics
+          calculateLiveMetrics(updated)
+          return updated
+        })
 
         const completed = currentIndex + 1
         setCompletedCount(completed)
         setEvalProgress(Math.round((completed / testsToRun.length) * 100))
 
         currentIndex++
-        setTimeout(runNextTest, 300) // Small delay between tests
+        const timeout2 = setTimeout(runNextTest, 300) // Small delay between tests
+        timeoutsRef.current.push(timeout2)
       }, duration)
+      timeoutsRef.current.push(timeout1)
     }
 
     // Start the first test after a brief delay
-    setTimeout(runNextTest, 500)
+    const timeout = setTimeout(runNextTest, 500)
+    timeoutsRef.current.push(timeout)
+  }
+
+  const pauseEvaluation = () => {
+    setIsPaused(true)
+    // Clear all pending timeouts
+    timeoutsRef.current.forEach(clearTimeout)
+    timeoutsRef.current = []
+  }
+
+  const cancelEvaluation = () => {
+    pauseEvaluation()
+    closeEvalFlow()
+  }
+
+  const showExportDialog = () => {
+    setIsExportDialogOpen(true)
+  }
+
+  const confirmExport = () => {
+    // Generate OpenTelemetry-compliant trace format
+    const traceId = Array.from({ length: 32 }, () =>
+      Math.floor(Math.random() * 16).toString(16)
+    ).join('')
+
+    const baseTimeNano = Date.now() * 1000000 // Convert to nanoseconds
+
+    // Create OTel trace with spans for each test
+    const otelReport = {
+      resourceSpans: [
+        {
+          resource: {
+            attributes: [
+              {
+                key: 'service.name',
+                value: { stringValue: 'ai-agent-evaluator' }
+              },
+              {
+                key: 'service.version',
+                value: { stringValue: '1.0.0' }
+              },
+              {
+                key: 'agent.type',
+                value: { stringValue: selectedAgent }
+              },
+              {
+                key: 'agent.name',
+                value: {
+                  stringValue: selectedAgent === 'ecommerce'
+                    ? 'E-commerce Support Agent'
+                    : 'Islamic Services Assistant'
+                }
+              },
+            ]
+          },
+          scopeSpans: [
+            {
+              scope: {
+                name: 'eval-framework',
+                version: '1.0.0'
+              },
+              spans: runningTests.map((test, index) => {
+                const spanId = Array.from({ length: 16 }, () =>
+                  Math.floor(Math.random() * 16).toString(16)
+                ).join('')
+
+                const startTime = baseTimeNano + (index * 1200000000) // 1.2s apart
+                const endTime = startTime + 900000000 // 900ms duration
+
+                return {
+                  traceId,
+                  spanId,
+                  name: `eval.test.${test.id}`,
+                  kind: 'SPAN_KIND_INTERNAL',
+                  startTimeUnixNano: startTime.toString(),
+                  endTimeUnixNano: endTime.toString(),
+                  attributes: [
+                    {
+                      key: 'test.id',
+                      value: { stringValue: test.id }
+                    },
+                    {
+                      key: 'test.name',
+                      value: { stringValue: test.testCase }
+                    },
+                    {
+                      key: 'test.status',
+                      value: { stringValue: test.status }
+                    },
+                    {
+                      key: 'test.score',
+                      value: { intValue: test.score || 0 }
+                    },
+                    {
+                      key: 'test.passed',
+                      value: { boolValue: test.passed || false }
+                    },
+                    {
+                      key: 'test.language',
+                      value: {
+                        stringValue: availableTests.find(t => t.id === test.id)?.language || 'en'
+                      }
+                    },
+                  ],
+                  status: {
+                    code: test.passed ? 'STATUS_CODE_OK' : 'STATUS_CODE_ERROR',
+                    message: test.passed ? 'Test passed' : 'Test failed'
+                  }
+                }
+              })
+            }
+          ]
+        }
+      ],
+      // Include metrics in OTel format
+      resourceMetrics: [
+        {
+          resource: {
+            attributes: [
+              {
+                key: 'service.name',
+                value: { stringValue: 'ai-agent-evaluator' }
+              }
+            ]
+          },
+          scopeMetrics: [
+            {
+              scope: {
+                name: 'eval-metrics',
+                version: '1.0.0'
+              },
+              metrics: [
+                {
+                  name: 'eval.accuracy',
+                  description: 'Evaluation accuracy percentage',
+                  unit: 'percent',
+                  gauge: {
+                    dataPoints: [
+                      {
+                        timeUnixNano: baseTimeNano.toString(),
+                        asDouble: liveMetrics.accuracy
+                      }
+                    ]
+                  }
+                },
+                {
+                  name: 'eval.avg_score',
+                  description: 'Average test score',
+                  unit: 'percent',
+                  gauge: {
+                    dataPoints: [
+                      {
+                        timeUnixNano: baseTimeNano.toString(),
+                        asDouble: liveMetrics.avgScore
+                      }
+                    ]
+                  }
+                },
+                {
+                  name: 'eval.pass_rate',
+                  description: 'Test pass rate',
+                  unit: 'percent',
+                  gauge: {
+                    dataPoints: [
+                      {
+                        timeUnixNano: baseTimeNano.toString(),
+                        asDouble: liveMetrics.passRate
+                      }
+                    ]
+                  }
+                },
+                {
+                  name: 'eval.total_tests',
+                  description: 'Total number of tests',
+                  unit: 'count',
+                  gauge: {
+                    dataPoints: [
+                      {
+                        timeUnixNano: baseTimeNano.toString(),
+                        asInt: runningTests.length.toString()
+                      }
+                    ]
+                  }
+                },
+                ...(selectedAgent === 'islamic' ? [{
+                  name: 'eval.shariah_compliance',
+                  description: 'Shariah compliance percentage',
+                  unit: 'percent',
+                  gauge: {
+                    dataPoints: [
+                      {
+                        timeUnixNano: baseTimeNano.toString(),
+                        asDouble: liveMetrics.shariahCompliance
+                      }
+                    ]
+                  }
+                }] : [])
+              ]
+            }
+          ]
+        }
+      ]
+    }
+
+    const blob = new Blob([JSON.stringify(otelReport, null, 2)], { type: 'application/json' })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = `otel-trace-${selectedAgent}-${Date.now()}.json`
+    document.body.appendChild(a)
+    a.click()
+    document.body.removeChild(a)
+    URL.revokeObjectURL(url)
+    setIsExportDialogOpen(false)
   }
 
   const closeEvalFlow = () => {
+    // Clean up timeouts
+    timeoutsRef.current.forEach(clearTimeout)
+    timeoutsRef.current = []
+
     setIsEvalFlowOpen(false)
     setCurrentStep(0)
     setSelectedAgent('ecommerce')
@@ -222,6 +501,7 @@ export default function AIAgentEvalsPage() {
     setRunningTests([])
     setEvalProgress(0)
     setCompletedCount(0)
+    setIsPaused(false)
   }
 
   const viewResults = () => {
@@ -260,36 +540,40 @@ export default function AIAgentEvalsPage() {
         </Button>
       </div>
 
-      {/* Metrics Overview */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+      {/* Metrics Overview - Live updating during evaluation */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8 transition-all duration-300">
         <StatsCard
           label="Accuracy"
-          value={currentMetrics.accuracy}
-          trend={selectedTab === 'islamic' ? 5.7 : 2.4}
+          value={currentStep === 1 && selectedAgent === selectedTab ? liveMetrics.accuracy : currentMetrics.accuracy}
+          trend={currentStep === 1 ? undefined : (selectedTab === 'islamic' ? 5.7 : 2.4)}
           icon={<CheckCircle2 />}
           format="percentage"
+          className={currentStep === 1 && selectedAgent === selectedTab ? 'ring-2 ring-primary ring-offset-2' : ''}
         />
         <StatsCard
           label="Avg Latency"
-          value={`${currentMetrics.avgLatency}ms`}
-          trend={selectedTab === 'islamic' ? -12 : -5}
-          trendLabel="vs last week"
+          value={currentStep === 1 && selectedAgent === selectedTab ? `${liveMetrics.avgLatency}ms` : `${currentMetrics.avgLatency}ms`}
+          trend={currentStep === 1 ? undefined : (selectedTab === 'islamic' ? -12 : -5)}
+          trendLabel={currentStep === 1 ? undefined : "vs last week"}
           icon={<Zap />}
+          className={currentStep === 1 && selectedAgent === selectedTab ? 'ring-2 ring-primary ring-offset-2' : ''}
         />
         {selectedTab === 'islamic' && (
           <StatsCard
             label="Shariah Compliance"
-            value={islamicServicesMetrics.shariahCompliance}
+            value={currentStep === 1 && selectedAgent === 'islamic' ? liveMetrics.shariahCompliance : islamicServicesMetrics.shariahCompliance}
             icon={<Shield />}
             format="percentage"
+            className={currentStep === 1 && selectedAgent === 'islamic' ? 'ring-2 ring-primary ring-offset-2' : ''}
           />
         )}
         {selectedTab === 'ecommerce' && (
           <StatsCard
             label="Pass Rate"
-            value={((currentMetrics.passed / currentMetrics.totalTests) * 100).toFixed(1)}
+            value={currentStep === 1 && selectedAgent === 'ecommerce' ? liveMetrics.passRate : ((currentMetrics.passed / currentMetrics.totalTests) * 100).toFixed(1)}
             icon={<Activity />}
             format="percentage"
+            className={currentStep === 1 && selectedAgent === 'ecommerce' ? 'ring-2 ring-primary ring-offset-2' : ''}
           />
         )}
         <StatsCard
@@ -775,6 +1059,17 @@ export default function AIAgentEvalsPage() {
                   </CardContent>
                 </Card>
 
+                {selectedTests.length > 0 && (
+                  <Card className="bg-muted/50">
+                    <CardContent className="pt-4">
+                      <div className="flex items-center justify-between text-sm">
+                        <span className="text-muted-foreground">Estimated duration:</span>
+                        <span className="font-medium">~{Math.ceil(estimatedDuration)} seconds</span>
+                      </div>
+                    </CardContent>
+                  </Card>
+                )}
+
                 <div className="flex justify-end gap-2">
                   <Button variant="outline" onClick={() => setIsEvalFlowOpen(false)}>
                     Cancel
@@ -813,7 +1108,7 @@ export default function AIAgentEvalsPage() {
                           <div
                             key={test.id}
                             className={cn(
-                              "flex items-center gap-3 p-3 rounded-lg border",
+                              "flex items-center gap-3 p-3 rounded-lg border transition-all duration-300 ease-in-out",
                               test.status === 'complete' && "bg-green-50 border-green-200 dark:bg-green-950/20",
                               test.status === 'failed' && "bg-red-50 border-red-200 dark:bg-red-950/20",
                               test.status === 'running' && "bg-blue-50 border-blue-200 dark:bg-blue-950/20"
@@ -853,6 +1148,13 @@ export default function AIAgentEvalsPage() {
                     </div>
                   </CardContent>
                 </Card>
+
+                <div className="flex justify-end gap-2">
+                  <Button variant="destructive" onClick={cancelEvaluation} disabled={isPaused}>
+                    <XCircle className="w-4 h-4 mr-2" />
+                    Cancel Evaluation
+                  </Button>
+                </div>
               </div>
             )}
 
@@ -922,19 +1224,61 @@ export default function AIAgentEvalsPage() {
                   </CardContent>
                 </Card>
 
-                <div className="flex justify-end gap-2">
-                  <Button variant="outline" onClick={closeEvalFlow}>
-                    Close
+                <div className="flex justify-between gap-2">
+                  <Button variant="outline" onClick={showExportDialog} className="gap-2">
+                    <Download className="w-4 h-4" />
+                    Export Report (JSON)
                   </Button>
-                  <Button onClick={viewResults}>
-                    View Full Results
-                  </Button>
+                  <div className="flex gap-2">
+                    <Button variant="outline" onClick={closeEvalFlow}>
+                      Close
+                    </Button>
+                    <Button onClick={viewResults}>
+                      View Full Results
+                    </Button>
+                  </div>
                 </div>
               </div>
             )}
           </div>
         </SheetContent>
       </Sheet>
+
+      {/* Export Preview Dialog */}
+      <Dialog open={isExportDialogOpen} onOpenChange={setIsExportDialogOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Export OpenTelemetry Trace</DialogTitle>
+            <DialogDescription className="space-y-3 pt-4">
+              <p>
+                This will download an <span className="font-semibold">OpenTelemetry-compliant JSON file</span> containing traces and metrics from your evaluation run.
+              </p>
+
+              <div className="bg-muted p-3 rounded-md text-sm space-y-2">
+                <p className="font-medium text-foreground">What&apos;s included:</p>
+                <ul className="list-disc list-inside space-y-1 text-muted-foreground">
+                  <li><span className="font-medium text-foreground">Traces:</span> Each test as a span with timing, attributes, and status</li>
+                  <li><span className="font-medium text-foreground">Metrics:</span> Accuracy, pass rate, avg score{selectedAgent === 'islamic' && ', Shariah compliance'}</li>
+                  <li><span className="font-medium text-foreground">Metadata:</span> Agent info, service name, timestamps</li>
+                </ul>
+              </div>
+
+              <p className="text-xs">
+                ℹ️ Compatible with Jaeger, Grafana, Honeycomb, and other OpenTelemetry backends.
+              </p>
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setIsExportDialogOpen(false)}>
+              Cancel
+            </Button>
+            <Button onClick={confirmExport}>
+              <Download className="w-4 h-4 mr-2" />
+              Download
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   )
 }
