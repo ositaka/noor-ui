@@ -460,6 +460,13 @@ export const searchData: SearchItem[] = [
     category: 'Example',
     keywords: ['ecommerce', 'product', 'shopping', 'cart', 'reviews', 'store', 'shop'],
   },
+  {
+    title: 'AI Agent Evaluations',
+    description: 'OpenTelemetry-based evaluation dashboard for bilingual AI agents with Shariah compliance tracking',
+    href: '/examples/ai-agent-evals',
+    category: 'Example',
+    keywords: ['ai', 'agent', 'evaluation', 'testing', 'opentelemetry', 'otel', 'metrics', 'performance', 'bilingual', 'gcc', 'islamic', 'shariah', 'compliance', 'llm', 'dashboard', 'monitoring', 'ecommerce'],
+  },
 
   // Other Pages
   {
