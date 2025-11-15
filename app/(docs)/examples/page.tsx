@@ -27,6 +27,7 @@ import {
   Bot,
   GitBranch,
   Workflow,
+  Activity,
   type LucideIcon,
 } from 'lucide-react'
 
@@ -50,6 +51,7 @@ const iconMap: Record<string, LucideIcon> = {
   '/examples/ai-multi-agent': Users,
   '/examples/workflow-basic': GitBranch,
   '/examples/ai-workflow': Workflow,
+  '/examples/ai-agent-evals': Activity,
   '/examples/analytics': TrendingUp,
 }
 

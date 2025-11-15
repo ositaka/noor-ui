@@ -173,6 +173,14 @@ examples: {
       featured: true,
     },
     {
+      title: 'AI Agent Evaluations',
+      description: 'OpenTelemetry-based evaluation dashboard for bilingual AI agents. Includes E-commerce support and Islamic services agents with Shariah compliance tracking.',
+      href: '/examples/ai-agent-evals',
+      tags: ['AI', 'Evaluation', 'Testing', 'OpenTelemetry', 'GCC', 'Shariah', 'RTL'],
+      status: 'ready',
+      featured: true,
+    },
+    {
       title: 'Analytics Dashboard',
       description: 'Real-time analytics with charts, metrics, and data visualization. Track user behavior and business KPIs with RTL-ready charts.',
       href: '/examples/analytics',
