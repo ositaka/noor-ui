@@ -6,13 +6,17 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { type Theme, themeConfig, applyTheme } from '@/lib/tokens'
 import { Check } from 'lucide-react'
+import { useDirection } from '@/components/providers/direction-provider'
+import { content } from '@/lib/i18n'
 
 interface ThemeSwitcherProps {
   className?: string
-  locale?: 'en' | 'ar'
 }
 
-export function ThemeSwitcher({ className, locale = 'en' }: ThemeSwitcherProps) {
+export function ThemeSwitcher({ className }: ThemeSwitcherProps) {
+  const { direction, locale } = useDirection()
+  const t = content[locale]
+  const isRTL = direction === 'rtl'
   const [currentTheme, setCurrentTheme] = React.useState<Theme>('minimal')
 
   React.useEffect(() => {
@@ -49,19 +53,19 @@ export function ThemeSwitcher({ className, locale = 'en' }: ThemeSwitcherProps) 
               <CardHeader>
                 <div className="flex items-start justify-between">
                   <CardTitle className="text-lg">
-                    {locale === 'ar' ? config.nameAr : config.name}
+                    {isRTL ? config.nameAr : config.name}
                   </CardTitle>
                   {isActive && (
                     <Check className="h-5 w-5 text-primary" aria-label="Selected" />
                   )}
                 </div>
                 <CardDescription>
-                  {locale === 'ar' ? config.descriptionAr : config.description}
+                  {isRTL ? config.descriptionAr : config.description}
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <ul className="space-y-1 text-sm text-muted-foreground">
-                  {(locale === 'ar' ? config.featuresAr : config.features).map(
+                  {(isRTL ? config.featuresAr : config.features).map(
                     (feature, i) => (
                       <li key={i} className="flex items-start gap-2">
                         <span className="text-primary mt-1">•</span>
@@ -80,21 +84,29 @@ export function ThemeSwitcher({ className, locale = 'en' }: ThemeSwitcherProps) 
       <Card>
         <CardHeader>
           <CardTitle>
-            {locale === 'ar' ? 'معاينة السمة النشطة' : 'Active Theme Preview'}
+            {t.ui.components.activeThemePreview}
           </CardTitle>
           <CardDescription>
-            {locale === 'ar'
-              ? 'شاهد كيف تبدو المكونات بالسمة المحددة'
-              : 'See how components look with the selected theme'}
+            {t.ui.components.seeHowComponentsLook}
           </CardDescription>
         </CardHeader>
         <CardContent>
           <div className="flex flex-wrap gap-3">
-            <Button variant="primary">Primary</Button>
-            <Button variant="secondary">Secondary</Button>
-            <Button variant="outline">Outline</Button>
-            <Button variant="ghost">Ghost</Button>
-            <Button variant="destructive">Destructive</Button>
+            <Button variant="primary">
+              {t.ui.components.primary}
+            </Button>
+            <Button variant="secondary">
+              {t.ui.components.secondary}
+            </Button>
+            <Button variant="outline">
+              {t.ui.components.outline}
+            </Button>
+            <Button variant="ghost">
+              {t.ui.components.ghost}
+            </Button>
+            <Button variant="destructive">
+              {t.ui.components.destructive}
+            </Button>
           </div>
         </CardContent>
       </Card>
