@@ -9,6 +9,7 @@ import { useDirection } from '@/components/providers/direction-provider'
 import { NumberInput } from '@/components/ui/number-input'
 import { Label } from '@/components/ui/label'
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { content } from '@/lib/i18n'
 
 export interface Time {
   hours: number
@@ -84,6 +85,7 @@ export function TimePicker({
     time && time.hours >= 12 ? 'PM' : 'AM'
   )
   const isRTL = direction === 'rtl'
+  const t = content[locale]
 
   React.useEffect(() => {
     if (time) {
@@ -97,7 +99,7 @@ export function TimePicker({
     ? formatTime(time, format, locale)
     : locale === 'ar' && placeholderAr
     ? placeholderAr
-    : placeholder || (isRTL ? 'اختر الوقت' : 'Pick a time')
+    : placeholder || t.ui.components.pickTime
 
   const handleApply = () => {
     let finalHours = hours
@@ -155,14 +157,14 @@ export function TimePicker({
       <PopoverContent className="w-auto p-4" align={isRTL ? 'end' : 'start'}>
         <div className="space-y-4">
           <div className="text-sm font-medium">
-            {isRTL ? 'اختر الوقت' : 'Select Time'}
+            {t.ui.components.selectTime}
           </div>
 
           {/* Time Inputs */}
           <div className="flex items-center gap-2">
             <div className="flex-1 space-y-2">
               <Label htmlFor="hours" className="text-xs">
-                {isRTL ? 'الساعات' : 'Hours'}
+                {t.ui.components.hours}
               </Label>
               <NumberInput
                 id="hours"
@@ -180,7 +182,7 @@ export function TimePicker({
 
             <div className="flex-1 space-y-2">
               <Label htmlFor="minutes" className="text-xs">
-                {isRTL ? 'الدقائق' : 'Minutes'}
+                {t.ui.components.minutes}
               </Label>
               <NumberInput
                 id="minutes"
@@ -199,8 +201,8 @@ export function TimePicker({
                 <Label className="text-xs">&nbsp;</Label>
                 <Tabs value={period} onValueChange={(val) => setPeriod(val as 'AM' | 'PM')}>
                   <TabsList className="grid w-full grid-cols-2">
-                    <TabsTrigger value="AM">{locale === 'ar' ? 'ص' : 'AM'}</TabsTrigger>
-                    <TabsTrigger value="PM">{locale === 'ar' ? 'م' : 'PM'}</TabsTrigger>
+                    <TabsTrigger value="AM">{t.ui.components.am}</TabsTrigger>
+                    <TabsTrigger value="PM">{t.ui.components.pm}</TabsTrigger>
                   </TabsList>
                 </Tabs>
               </div>
@@ -210,16 +212,16 @@ export function TimePicker({
           {/* Quick Actions */}
           <div className="flex gap-2">
             <Button variant="outline" size="sm" onClick={handleNow} className="flex-1">
-              {isRTL ? 'الآن' : 'Now'}
+              {t.ui.components.now}
             </Button>
             <Button variant="outline" size="sm" onClick={handleClear} className="flex-1">
-              {isRTL ? 'مسح' : 'Clear'}
+              {t.ui.components.clear}
             </Button>
           </div>
 
           {/* Apply Button */}
           <Button onClick={handleApply} className="w-full">
-            {isRTL ? 'تطبيق' : 'Apply'}
+            {t.ui.components.apply}
           </Button>
         </div>
       </PopoverContent>
@@ -274,12 +276,13 @@ export function TimeRangePicker({
   const { locale, direction } = useDirection()
   const [open, setOpen] = React.useState(false)
   const isRTL = direction === 'rtl'
+  const t = content[locale]
 
   const displayText = timeRange?.from
     ? formatTimeRange(timeRange, format, locale)
     : locale === 'ar' && placeholderAr
     ? placeholderAr
-    : placeholder || (isRTL ? 'اختر نطاق الوقت' : 'Pick a time range')
+    : placeholder || t.ui.components.pickTimeRange
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -301,12 +304,12 @@ export function TimeRangePicker({
       <PopoverContent className="w-auto p-4" align={isRTL ? 'end' : 'start'}>
         <div className="space-y-4">
           <div className="text-sm font-medium">
-            {isRTL ? 'اختر نطاق الوقت' : 'Select Time Range'}
+            {t.ui.components.selectTimeRange}
           </div>
 
           {/* From Time */}
           <div className="space-y-2">
-            <Label className="text-xs">{isRTL ? 'من' : 'From'}</Label>
+            <Label className="text-xs">{t.ui.components.from}</Label>
             <TimePicker
               time={timeRange?.from}
               onTimeChange={(time) =>
@@ -320,7 +323,7 @@ export function TimeRangePicker({
 
           {/* To Time */}
           <div className="space-y-2">
-            <Label className="text-xs">{isRTL ? 'إلى' : 'To'}</Label>
+            <Label className="text-xs">{t.ui.components.to}</Label>
             <TimePicker
               time={timeRange?.to}
               onTimeChange={(time) =>

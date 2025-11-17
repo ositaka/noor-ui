@@ -325,12 +325,7 @@ export default function AdvancedPlaygroundPage() {
                   <div className="h-10 w-10 rounded-full bg-muted flex items-center justify-center">
                     <Sparkles className="h-5 w-5 text-muted-foreground" />
                   </div>
-                  <ThinkingIndicator
-                    variant="typing"
-                    message={isRTL ? 'جاري التفكير' : 'Thinking'}
-                    messageAr="جاري التفكير"
-                    isRTL={isRTL}
-                  />
+                  <ThinkingIndicator variant="typing" />
                 </div>
               )}
 

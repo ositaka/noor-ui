@@ -11,6 +11,7 @@ import { Button } from '@/components/ui/button'
 import { formatSAR, formatNumber } from '@/lib/arabic-numbers'
 import { AlertCircle, Info, Download, Share2, Printer, Copy, Check } from 'lucide-react'
 import { useDirection } from '@/components/providers/direction-provider'
+import { content } from '@/lib/i18n'
 
 // ============================================================================
 // Types
@@ -79,8 +80,9 @@ export const ZakatCalculator = React.forwardRef<HTMLDivElement, ZakatCalculatorP
     },
     ref
   ) => {
-    const { direction } = useDirection()
+    const { direction, locale: currentLocale } = useDirection()
     const isRTL = direction === 'rtl'
+    const t = content[currentLocale]
 
     // Asset state
     const [assets, setAssets] = React.useState<ZakatAssets>({
@@ -256,7 +258,7 @@ ${calculation.isZakatApplicable ? `• Zakat Due (2.5%): ${formatCurrency(calcul
         <!DOCTYPE html>
         <html dir="${isRTL ? 'rtl' : 'ltr'}">
         <head>
-          <title>${isRTL ? 'حساب الزكاة' : 'Zakat Calculation'}</title>
+          <title>${t.ui.components.zakatCalculation}</title>
           <style>
             body {
               font-family: ${isRTL ? 'Arial, sans-serif' : 'Arial, sans-serif'};
@@ -296,34 +298,32 @@ ${calculation.isZakatApplicable ? `• Zakat Due (2.5%): ${formatCurrency(calcul
             <div className="flex items-center gap-2">
               <Info className="h-5 w-5 text-primary" />
               <CardTitle className="text-lg">
-                {isRTL ? 'معلومات النصاب' : 'Nisab Information'}
+                {t.ui.components.nisabInformation}
               </CardTitle>
             </div>
           </CardHeader>
           <CardContent className="space-y-2 text-sm">
             <div className="flex justify-between">
               <span className="text-muted-foreground">
-                {isRTL ? 'نصاب الذهب:' : 'Gold Nisab:'}
+                {t.ui.components.goldNisab}
               </span>
               <span className="font-semibold">
-                {formatNum(NISAB_GOLD_GRAMS)} {isRTL ? 'جرام' : 'grams'} (
+                {formatNum(NISAB_GOLD_GRAMS)} {t.ui.components.grams} (
                 {formatCurrency(NISAB_GOLD_GRAMS * goldPricePerGram)})
               </span>
             </div>
             <div className="flex justify-between">
               <span className="text-muted-foreground">
-                {isRTL ? 'نصاب الفضة:' : 'Silver Nisab:'}
+                {t.ui.components.silverNisab}
               </span>
               <span className="font-semibold">
-                {formatNum(NISAB_SILVER_GRAMS)} {isRTL ? 'جرام' : 'grams'} (
+                {formatNum(NISAB_SILVER_GRAMS)} {t.ui.components.grams} (
                 {formatCurrency(NISAB_SILVER_GRAMS * silverPricePerGram)})
               </span>
             </div>
             <Separator className="my-2" />
             <p className="text-xs text-muted-foreground">
-              {isRTL
-                ? 'الزكاة واجبة إذا بلغت الثروة النصاب وحال عليها الحول (سنة قمرية واحدة)'
-                : 'Zakat is due if wealth reaches Nisab and one lunar year has passed'}
+              {t.ui.components.zakatDueInfo}
             </p>
           </CardContent>
         </Card>
@@ -331,18 +331,16 @@ ${calculation.isZakatApplicable ? `• Zakat Due (2.5%): ${formatCurrency(calcul
         {/* Asset Inputs */}
         <Card>
           <CardHeader>
-            <CardTitle>{isRTL ? 'أصولك' : 'Your Assets'}</CardTitle>
+            <CardTitle>{t.ui.components.yourAssets}</CardTitle>
             <CardDescription>
-              {isRTL
-                ? 'أدخل قيمة أصولك لحساب الزكاة المستحقة'
-                : 'Enter your asset values to calculate Zakat due'}
+              {t.ui.components.enterAssetsPrompt}
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
             {/* Cash */}
             <div className="space-y-2">
               <Label htmlFor="cash">
-                {isRTL ? 'النقد (نقدًا وفي البنوك)' : 'Cash (In hand & bank accounts)'}
+                {t.ui.components.cash}
               </Label>
               <div className="relative">
                 <Input
@@ -363,7 +361,7 @@ ${calculation.isZakatApplicable ? `• Zakat Due (2.5%): ${formatCurrency(calcul
 
             {/* Gold */}
             <div className="space-y-2">
-              <Label htmlFor="gold">{isRTL ? 'الذهب' : 'Gold'}</Label>
+              <Label htmlFor="gold">{t.ui.components.gold}</Label>
               <div className="relative">
                 <Input
                   id="gold"
@@ -376,18 +374,18 @@ ${calculation.isZakatApplicable ? `• Zakat Due (2.5%): ${formatCurrency(calcul
                   placeholder={isRTL ? '٠' : '0'}
                 />
                 <span className="absolute end-3 top-1/2 -translate-y-1/2 text-sm text-muted-foreground">
-                  {isRTL ? 'جرام' : 'grams'}
+                  {t.ui.components.grams}
                 </span>
               </div>
               <p className="text-xs text-muted-foreground">
-                {isRTL ? 'السعر الحالي:' : 'Current price:'} {formatCurrency(goldPricePerGram)}/
+                {t.ui.components.currentPrice} {formatCurrency(goldPricePerGram)}/
                 {isRTL ? 'جرام' : 'g'}
               </p>
             </div>
 
             {/* Silver */}
             <div className="space-y-2">
-              <Label htmlFor="silver">{isRTL ? 'الفضة' : 'Silver'}</Label>
+              <Label htmlFor="silver">{t.ui.components.silver}</Label>
               <div className="relative">
                 <Input
                   id="silver"
@@ -400,11 +398,11 @@ ${calculation.isZakatApplicable ? `• Zakat Due (2.5%): ${formatCurrency(calcul
                   placeholder={isRTL ? '٠' : '0'}
                 />
                 <span className="absolute end-3 top-1/2 -translate-y-1/2 text-sm text-muted-foreground">
-                  {isRTL ? 'جرام' : 'grams'}
+                  {t.ui.components.grams}
                 </span>
               </div>
               <p className="text-xs text-muted-foreground">
-                {isRTL ? 'السعر الحالي:' : 'Current price:'} {formatCurrency(silverPricePerGram)}
+                {t.ui.components.currentPrice} {formatCurrency(silverPricePerGram)}
                 /{isRTL ? 'جرام' : 'g'}
               </p>
             </div>
@@ -412,7 +410,7 @@ ${calculation.isZakatApplicable ? `• Zakat Due (2.5%): ${formatCurrency(calcul
             {/* Business Assets */}
             <div className="space-y-2">
               <Label htmlFor="business">
-                {isRTL ? 'الأصول التجارية والمخزون' : 'Business assets & inventory'}
+                {t.ui.components.businessAssets}
               </Label>
               <div className="relative">
                 <Input
@@ -434,7 +432,7 @@ ${calculation.isZakatApplicable ? `• Zakat Due (2.5%): ${formatCurrency(calcul
             {/* Investments */}
             <div className="space-y-2">
               <Label htmlFor="investments">
-                {isRTL ? 'الاستثمارات (أسهم، سندات، إلخ)' : 'Investments (stocks, bonds, etc.)'}
+                {t.ui.components.investments}
               </Label>
               <div className="relative">
                 <Input
@@ -455,7 +453,7 @@ ${calculation.isZakatApplicable ? `• Zakat Due (2.5%): ${formatCurrency(calcul
 
             {/* Other Assets */}
             <div className="space-y-2">
-              <Label htmlFor="other">{isRTL ? 'أصول أخرى' : 'Other assets'}</Label>
+              <Label htmlFor="other">{t.ui.components.otherAssets}</Label>
               <div className="relative">
                 <Input
                   id="other"
@@ -487,19 +485,15 @@ ${calculation.isZakatApplicable ? `• Zakat Due (2.5%): ${formatCurrency(calcul
           <CardHeader>
             <div className="flex items-center justify-between">
               <CardTitle className="text-2xl">
-                {isRTL ? 'نتيجة الحساب' : 'Calculation Result'}
+                {t.ui.components.calculationResult}
               </CardTitle>
               <Badge
                 variant={calculation.isZakatApplicable ? 'default' : 'secondary'}
                 className="text-xs"
               >
                 {calculation.isZakatApplicable
-                  ? isRTL
-                    ? 'الزكاة واجبة'
-                    : 'Zakat Due'
-                  : isRTL
-                    ? 'أقل من النصاب'
-                    : 'Below Nisab'}
+                  ? t.ui.components.zakatDue
+                  : t.ui.components.belowNisab}
               </Badge>
             </div>
           </CardHeader>
@@ -507,7 +501,7 @@ ${calculation.isZakatApplicable ? `• Zakat Due (2.5%): ${formatCurrency(calcul
             {/* Total Wealth */}
             <div className="flex justify-between items-center">
               <span className="text-muted-foreground">
-                {isRTL ? 'إجمالي الثروة:' : 'Total Wealth:'}
+                {t.ui.components.totalWealth}
               </span>
               <span className="text-2xl font-bold">{formatCurrency(calculation.totalWealth)}</span>
             </div>
@@ -517,7 +511,7 @@ ${calculation.isZakatApplicable ? `• Zakat Due (2.5%): ${formatCurrency(calcul
             {/* Nisab Status */}
             <div className="flex justify-between items-center">
               <span className="text-muted-foreground">
-                {isRTL ? 'عتبة النصاب:' : 'Nisab Threshold:'}
+                {t.ui.components.nisabThreshold}
               </span>
               <span className="font-semibold">{formatCurrency(calculation.nisabThreshold)}</span>
             </div>
@@ -526,9 +520,7 @@ ${calculation.isZakatApplicable ? `• Zakat Due (2.5%): ${formatCurrency(calcul
               <div className="flex items-start gap-2 p-3 rounded-lg bg-muted">
                 <AlertCircle className="h-5 w-5 text-muted-foreground mt-0.5 flex-shrink-0" />
                 <p className="text-sm text-muted-foreground">
-                  {isRTL
-                    ? 'ثروتك أقل من النصاب. الزكاة غير واجبة في هذا الوقت.'
-                    : 'Your wealth is below the Nisab threshold. Zakat is not due at this time.'}
+                  {t.ui.components.wealthBelowNisab}
                 </p>
               </div>
             )}
@@ -541,15 +533,13 @@ ${calculation.isZakatApplicable ? `• Zakat Due (2.5%): ${formatCurrency(calcul
                 <div className="p-6 rounded-xl bg-primary/10 border border-primary/20">
                   <div className="text-center space-y-2">
                     <p className="text-sm font-medium text-muted-foreground">
-                      {isRTL ? 'الزكاة المستحقة (٢٫٥٪)' : 'Zakat Due (2.5%)'}
+                      {t.ui.components.zakatDueAmount}
                     </p>
                     <p className="text-4xl font-bold text-primary">
                       {formatCurrency(calculation.zakatDue)}
                     </p>
                     <p className="text-xs text-muted-foreground">
-                      {isRTL
-                        ? 'تأكد من دفع الزكاة خلال السنة القمرية'
-                        : 'Ensure payment within the lunar year'}
+                      {t.ui.components.ensurePayment}
                     </p>
                   </div>
                 </div>
@@ -560,7 +550,7 @@ ${calculation.isZakatApplicable ? `• Zakat Due (2.5%): ${formatCurrency(calcul
             <Separator />
             <div className="space-y-3">
               <p className="text-sm font-medium text-muted-foreground">
-                {isRTL ? 'تصدير ومشاركة' : 'Export & Share'}
+                {t.ui.components.exportAndShare}
               </p>
               <div className="grid grid-cols-2 gap-2">
                 <Button
@@ -572,12 +562,12 @@ ${calculation.isZakatApplicable ? `• Zakat Due (2.5%): ${formatCurrency(calcul
                   {copied ? (
                     <>
                       <Check className="h-4 w-4 me-2" />
-                      {isRTL ? 'تم النسخ!' : 'Copied!'}
+                      {t.ui.components.copied}
                     </>
                   ) : (
                     <>
                       <Copy className="h-4 w-4 me-2" />
-                      {isRTL ? 'نسخ' : 'Copy'}
+                      {t.ui.components.copy}
                     </>
                   )}
                 </Button>
@@ -588,7 +578,7 @@ ${calculation.isZakatApplicable ? `• Zakat Due (2.5%): ${formatCurrency(calcul
                   className="w-full"
                 >
                   <Download className="h-4 w-4 me-2" />
-                  {isRTL ? 'تحميل نص' : 'Download'}
+                  {t.ui.components.downloadText}
                 </Button>
                 <Button
                   variant="outline"
@@ -597,7 +587,7 @@ ${calculation.isZakatApplicable ? `• Zakat Due (2.5%): ${formatCurrency(calcul
                   className="w-full"
                 >
                   <Printer className="h-4 w-4 me-2" />
-                  {isRTL ? 'طباعة' : 'Print'}
+                  {t.ui.components.print}
                 </Button>
                 <Button
                   variant="outline"
@@ -606,7 +596,7 @@ ${calculation.isZakatApplicable ? `• Zakat Due (2.5%): ${formatCurrency(calcul
                   className="w-full"
                 >
                   <Share2 className="h-4 w-4 me-2" />
-                  {isRTL ? 'JSON' : 'JSON'}
+                  JSON
                 </Button>
               </div>
             </div>

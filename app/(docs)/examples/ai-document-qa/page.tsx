@@ -476,12 +476,7 @@ export default function DocumentQAPage() {
                     <div className="h-10 w-10 rounded-full bg-muted flex items-center justify-center">
                       <BookOpen className="h-5 w-5 text-muted-foreground" />
                     </div>
-                    <ThinkingIndicator
-                      variant="typing"
-                      message={isRTL ? 'جاري البحث في المستندات' : 'Searching documents'}
-                      messageAr="جاري البحث في المستندات"
-                      isRTL={isRTL}
-                    />
+                    <ThinkingIndicator variant="typing" />
                   </div>
                 )}
 

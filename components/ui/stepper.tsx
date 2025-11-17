@@ -3,6 +3,8 @@
 import * as React from 'react'
 import { cn } from '@/lib/utils'
 import { Check } from 'lucide-react'
+import { useDirection } from '@/components/providers/direction-provider'
+import { content } from '@/lib/i18n'
 
 export interface Step {
   id: string
@@ -32,7 +34,9 @@ export function Stepper({
   allowSkip = false,
   className,
 }: StepperProps) {
-  const isRTL = typeof document !== 'undefined' && document.documentElement.dir === 'rtl'
+  const { locale, direction } = useDirection()
+  const t = content[locale]
+  const isRTL = direction === 'rtl'
 
   const getStepStatus = (index: number): 'complete' | 'current' | 'upcoming' => {
     if (index < currentStep) return 'complete'
@@ -109,7 +113,7 @@ export function Stepper({
                   {isRTL && step.titleAr ? step.titleAr : step.title}
                   {step.optional && (
                     <span className="ms-2 text-xs font-normal text-muted-foreground">
-                      ({isRTL ? 'اختياري' : 'Optional'})
+                      ({t.ui.components.optional})
                     </span>
                   )}
                 </div>
@@ -293,7 +297,7 @@ export function Stepper({
                   {isRTL && step.titleAr ? step.titleAr : step.title}
                   {step.optional && (
                     <span className="block text-[10px] text-muted-foreground">
-                      ({isRTL ? 'اختياري' : 'Optional'})
+                      ({t.ui.components.optional})
                     </span>
                   )}
                 </span>

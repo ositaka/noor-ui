@@ -1,6 +1,8 @@
 import * as React from 'react'
 import { cva, type VariantProps } from 'class-variance-authority'
 import { cn } from '@/lib/utils'
+import { useDirection } from '@/components/providers/direction-provider'
+import { content } from '@/lib/i18n'
 
 const thinkingIndicatorVariants = cva(
   'inline-flex items-center gap-1',
@@ -29,17 +31,9 @@ export interface ThinkingIndicatorProps
   extends React.HTMLAttributes<HTMLDivElement>,
     VariantProps<typeof thinkingIndicatorVariants> {
   /**
-   * Custom message to display
+   * Custom message to display (overrides default)
    */
   message?: string
-  /**
-   * Message in Arabic
-   */
-  messageAr?: string
-  /**
-   * Whether text direction is RTL
-   */
-  isRTL?: boolean
 }
 
 const ThinkingIndicator = React.forwardRef<HTMLDivElement, ThinkingIndicatorProps>(
@@ -49,14 +43,13 @@ const ThinkingIndicator = React.forwardRef<HTMLDivElement, ThinkingIndicatorProp
       variant = 'dots',
       size,
       message,
-      messageAr,
-      isRTL = false,
       ...props
     },
     ref
   ) => {
-    const defaultMessage = isRTL ? 'جاري التفكير' : 'Thinking'
-    const displayMessage = isRTL ? (messageAr || message || defaultMessage) : (message || defaultMessage)
+    const { locale } = useDirection()
+    const t = content[locale]
+    const displayMessage = message || t.ui.components.thinking
 
     const renderAnimation = () => {
       switch (variant) {
@@ -109,7 +102,7 @@ const ThinkingIndicator = React.forwardRef<HTMLDivElement, ThinkingIndicatorProp
         aria-label={displayMessage}
         {...props}
       >
-        {message || messageAr ? (
+        {message ? (
           <>
             <span>{displayMessage}</span>
             {renderAnimation()}

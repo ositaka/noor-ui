@@ -305,12 +305,7 @@ export default function CodeAssistantPage() {
                     <div className="h-10 w-10 rounded-full bg-muted flex items-center justify-center">
                       <Code2 className="h-5 w-5 text-muted-foreground" />
                     </div>
-                    <ThinkingIndicator
-                      variant="typing"
-                      message={isRTL ? 'جاري تحليل الكود' : 'Analyzing code'}
-                      messageAr="جاري تحليل الكود"
-                      isRTL={isRTL}
-                    />
+                    <ThinkingIndicator variant="typing" />
                   </div>
                 )}
 
