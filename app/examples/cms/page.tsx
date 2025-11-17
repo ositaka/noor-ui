@@ -105,37 +105,37 @@ const mockPosts = [
   },
 ]
 
-const mockNotifications = [
-  {
-    id: '1',
-    title: 'New comment on your post',
-    description: 'Omar commented on "Getting Started with Noor UI"',
-    time: '5 minutes ago',
-    read: false,
-    type: 'comment' as const,
-  },
-  {
-    id: '2',
-    title: 'Post published successfully',
-    description: 'Your post "Building RTL-First Applications" is now live',
-    time: '1 hour ago',
-    read: false,
-    type: 'success' as const,
-  },
-  {
-    id: '3',
-    title: 'Scheduled post reminder',
-    description: '"Component Architecture" will be published in 4 days',
-    time: '2 hours ago',
-    read: true,
-    type: 'info' as const,
-  },
-]
-
 export default function CMSPage() {
   const { direction, locale } = useDirection()
   const t = content[locale]
   const isRTL = direction === 'rtl'
+
+  const mockNotifications = [
+    {
+      id: '1',
+      title: isRTL ? 'تعليق جديد على منشورك' : 'New comment on your post',
+      description: isRTL ? 'علق عمر على "البدء مع نور UI"' : 'Omar commented on "Getting Started with Noor UI"',
+      time: isRTL ? 'منذ 5 دقائق' : '5 minutes ago',
+      read: false,
+      type: 'comment' as const,
+    },
+    {
+      id: '2',
+      title: isRTL ? 'تم نشر المقال بنجاح' : 'Post published successfully',
+      description: isRTL ? 'مقالك "بناء تطبيقات RTL أولاً" متاح الآن' : 'Your post "Building RTL-First Applications" is now live',
+      time: isRTL ? 'منذ ساعة واحدة' : '1 hour ago',
+      read: false,
+      type: 'success' as const,
+    },
+    {
+      id: '3',
+      title: isRTL ? 'تذكير بمنشور مجدول' : 'Scheduled post reminder',
+      description: isRTL ? 'سيتم نشر "بنية المكونات" خلال 4 أيام' : '"Component Architecture" will be published in 4 days',
+      time: isRTL ? 'منذ ساعتين' : '2 hours ago',
+      read: true,
+      type: 'info' as const,
+    },
+  ]
   const [activeView, setActiveView] = React.useState<'posts' | 'create' | 'analytics'>('posts')
   const [selectedPost, setSelectedPost] = React.useState<typeof mockPosts[0] | null>(null)
   const [editorContent, setEditorContent] = React.useState('')

@@ -127,14 +127,15 @@ export default function Example() {
 }`
 
 export default function UserMenuPage() {
-  const { locale } = useDirection()
+  const { direction, locale } = useDirection()
+  const isRTL = direction === 'rtl'
   const t = content[locale]
   const { toast } = useToast()
 
   const handleAction = (action: string) => {
     toast({
-      title: `${action} clicked`,
-      description: `You clicked on ${action}`,
+      title: isRTL ? `تم النقر على ${action}` : `${action} clicked`,
+      description: isRTL ? `لقد نقرت على ${action}` : `You clicked on ${action}`,
     })
   }
 
@@ -197,12 +198,12 @@ export default function Example() {
             <ComponentShowcase.Demo>
               <UserMenu
                 user={{
-                  name: 'Ahmed Al-Rashid',
+                  name: isRTL ? 'أحمد الراشد' : 'Ahmed Al-Rashid',
                   email: 'ahmed@example.com',
                 }}
-                onProfileClick={() => handleAction('Profile')}
-                onSettingsClick={() => handleAction('Settings')}
-                onLogout={() => handleAction('Logout')}
+                onProfileClick={() => handleAction(isRTL ? 'الملف الشخصي' : 'Profile')}
+                onSettingsClick={() => handleAction(isRTL ? 'الإعدادات' : 'Settings')}
+                onLogout={() => handleAction(isRTL ? 'تسجيل الخروج' : 'Logout')}
               />
             </ComponentShowcase.Demo>
           </ComponentShowcase>
@@ -276,13 +277,13 @@ export default function Example() {
                   <div className="flex justify-center">
                     <UserMenu
                       user={{
-                        name: 'Sarah Johnson',
+                        name: isRTL ? 'سارة جونسون' : 'Sarah Johnson',
                         email: 'sarah@example.com',
                         image: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah',
                       }}
-                      onProfileClick={() => handleAction('Profile')}
-                      onSettingsClick={() => handleAction('Settings')}
-                      onLogout={() => handleAction('Logout')}
+                      onProfileClick={() => handleAction(isRTL ? 'الملف الشخصي' : 'Profile')}
+                      onSettingsClick={() => handleAction(isRTL ? 'الإعدادات' : 'Settings')}
+                      onLogout={() => handleAction(isRTL ? 'تسجيل الخروج' : 'Logout')}
                     />
                   </div>
                 </CardContent>
@@ -300,10 +301,10 @@ export default function Example() {
                   <div className="flex justify-center">
                     <UserMenu
                       user={{
-                        name: 'John Doe',
+                        name: isRTL ? 'جون دو' : 'John Doe',
                         email: 'john@example.com',
                       }}
-                      onLogout={() => handleAction('Logout')}
+                      onLogout={() => handleAction(isRTL ? 'تسجيل الخروج' : 'Logout')}
                     />
                   </div>
                 </CardContent>
@@ -321,16 +322,16 @@ export default function Example() {
                   <div className="flex justify-center">
                     <UserMenu
                       user={{
-                        name: 'Fatima Al-Zahra',
+                        name: isRTL ? 'فاطمة الزهراء' : 'Fatima Al-Zahra',
                         email: 'fatima@example.com',
                         image: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Fatima',
                       }}
-                      onProfileClick={() => handleAction('Profile')}
-                      onSettingsClick={() => handleAction('Settings')}
-                      onBillingClick={() => handleAction('Billing')}
-                      onTeamClick={() => handleAction('Team')}
-                      onSupportClick={() => handleAction('Support')}
-                      onLogout={() => handleAction('Logout')}
+                      onProfileClick={() => handleAction(isRTL ? 'الملف الشخصي' : 'Profile')}
+                      onSettingsClick={() => handleAction(isRTL ? 'الإعدادات' : 'Settings')}
+                      onBillingClick={() => handleAction(isRTL ? 'الفواتير' : 'Billing')}
+                      onTeamClick={() => handleAction(isRTL ? 'الفريق' : 'Team')}
+                      onSupportClick={() => handleAction(isRTL ? 'الدعم' : 'Support')}
+                      onLogout={() => handleAction(isRTL ? 'تسجيل الخروج' : 'Logout')}
                     />
                   </div>
                 </CardContent>

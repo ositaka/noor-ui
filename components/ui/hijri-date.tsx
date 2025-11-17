@@ -142,6 +142,7 @@ export const HijriDate = React.forwardRef<HTMLDivElement, HijriDateProps>(
                   'text-xs font-medium text-muted-foreground uppercase tracking-wide',
                   variant === 'detailed' && 'text-sm'
                 )}
+                suppressHydrationWarning
               >
                 {isRTL ? 'ميلادي' : 'Gregorian'}
               </span>
@@ -153,6 +154,7 @@ export const HijriDate = React.forwardRef<HTMLDivElement, HijriDateProps>(
                 variant === 'compact' && 'text-sm',
                 variant === 'detailed' && 'text-lg font-semibold'
               )}
+              suppressHydrationWarning
             >
               {displayGregorian}
             </span>
@@ -173,6 +175,7 @@ export const HijriDate = React.forwardRef<HTMLDivElement, HijriDateProps>(
                   'text-xs font-medium text-muted-foreground uppercase tracking-wide',
                   variant === 'detailed' && 'text-sm'
                 )}
+                suppressHydrationWarning
               >
                 {isRTL ? 'هجري' : 'Hijri'}
               </span>
@@ -184,6 +187,7 @@ export const HijriDate = React.forwardRef<HTMLDivElement, HijriDateProps>(
                 variant === 'compact' && 'text-sm',
                 variant === 'detailed' && 'text-lg font-semibold'
               )}
+              suppressHydrationWarning
             >
               {displayHijri}
             </span>
@@ -200,9 +204,10 @@ export const HijriDate = React.forwardRef<HTMLDivElement, HijriDateProps>(
               variant === 'badge' && 'text-xs',
               variant === 'detailed' && 'text-sm px-3 py-1'
             )}
+            suppressHydrationWarning
           >
             <Sparkles className={cn('h-3 w-3', variant === 'detailed' && 'h-3.5 w-3.5')} />
-            {holidayName}
+            <span suppressHydrationWarning>{holidayName}</span>
           </Badge>
         )}
       </div>

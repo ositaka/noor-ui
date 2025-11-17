@@ -138,6 +138,9 @@ const rtlCode = `<ChatMessage
 />`
 
 export default function ChatMessagePage() {
+  const { direction, locale } = useDirection()
+  const isRTL = direction === 'rtl'
+
   return (
     <div className="min-h-screen">
       <main id="main-content" className="container py-12">
@@ -177,13 +180,13 @@ export default function ChatMessagePage() {
               <div className="space-y-4 max-w-2xl">
                 <ChatMessage
                   role="user"
-                  content="What's the capital of France?"
-                  timestamp="2:29 PM"
+                  content={isRTL ? "ما هي عاصمة فرنسا؟" : "What's the capital of France?"}
+                  timestamp={isRTL ? "٢:٢٩ م" : "2:29 PM"}
                 />
                 <ChatMessage
                   role="assistant"
-                  content="The capital of France is Paris. It's known as the City of Light and is famous for its art, culture, cuisine, and iconic landmarks like the Eiffel Tower."
-                  timestamp="2:30 PM"
+                  content={isRTL ? "عاصمة فرنسا هي باريس. تُعرف بمدينة الأنوار وتشتهر بفنونها وثقافتها ومطبخها ومعالمها الشهيرة مثل برج إيفل." : "The capital of France is Paris. It's known as the City of Light and is famous for its art, culture, cuisine, and iconic landmarks like the Eiffel Tower."}
+                  timestamp={isRTL ? "٢:٣٠ م" : "2:30 PM"}
                   showCopy
                   showRegenerate
                 />
@@ -217,18 +220,18 @@ export default function ChatMessagePage() {
                   <div className="space-y-4 max-w-2xl">
                     <ChatMessage
                       role="user"
-                      content="What's the weather like today?"
-                      timestamp="2:29 PM"
+                      content={isRTL ? "كيف الطقس اليوم؟" : "What's the weather like today?"}
+                      timestamp={isRTL ? "٢:٢٩ م" : "2:29 PM"}
                     />
                     <ChatMessage
                       role="assistant"
-                      content="I don't have access to real-time weather data, but I can help you find weather information!"
-                      timestamp="2:30 PM"
+                      content={isRTL ? "ليس لدي وصول إلى بيانات الطقس في الوقت الفعلي، ولكن يمكنني مساعدتك في العثور على معلومات الطقس!" : "I don't have access to real-time weather data, but I can help you find weather information!"}
+                      timestamp={isRTL ? "٢:٣٠ م" : "2:30 PM"}
                     />
                     <ChatMessage
                       role="system"
-                      content="Chat session started. Messages are end-to-end encrypted."
-                      timestamp="2:25 PM"
+                      content={isRTL ? "بدأت جلسة الدردشة. الرسائل مشفرة من طرف إلى طرف." : "Chat session started. Messages are end-to-end encrypted."}
+                      timestamp={isRTL ? "٢:٢٥ م" : "2:25 PM"}
                     />
                   </div>
                 </CardContent>
@@ -246,8 +249,8 @@ export default function ChatMessagePage() {
                   <div className="space-y-4 max-w-2xl">
                     <ChatMessage
                       role="assistant"
-                      content="Here's the code you requested. Feel free to copy it or ask me to regenerate a different version."
-                      timestamp="2:31 PM"
+                      content={isRTL ? "إليك الكود الذي طلبته. لا تتردد في نسخه أو اطلب مني إنشاء نسخة مختلفة." : "Here's the code you requested. Feel free to copy it or ask me to regenerate a different version."}
+                      timestamp={isRTL ? "٢:٣١ م" : "2:31 PM"}
                       showCopy
                       showRegenerate
                     />
@@ -267,12 +270,12 @@ export default function ChatMessagePage() {
                   <div className="space-y-3 max-w-2xl">
                     <ChatMessage
                       role="user"
-                      content="Quick question"
+                      content={isRTL ? "سؤال سريع" : "Quick question"}
                       variant="compact"
                     />
                     <ChatMessage
                       role="assistant"
-                      content="Quick response"
+                      content={isRTL ? "رد سريع" : "Quick response"}
                       variant="compact"
                     />
                   </div>

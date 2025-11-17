@@ -39,11 +39,12 @@ interface User {
   role: 'Admin' | 'Editor' | 'User' | 'Viewer'
   status: 'Active' | 'Inactive' | 'Pending'
   department: string
+  departmentAr: string
   joinDate: string
   lastActive: string
 }
 
-const generateUsers = (): User[] => {
+const generateUsers = (isRTL: boolean): User[] => {
   const names = [
     'Ahmed Al-Mansour', 'Fatima Hassan', 'Mohammed Youssef', 'Sarah Abdullah',
     'Omar Ibrahim', 'Layla Al-Farsi', 'Khalid Rahman', 'Aisha Al-Zahrani',
@@ -63,8 +64,16 @@ const generateUsers = (): User[] => {
   const roles: User['role'][] = ['Admin', 'Editor', 'User', 'Viewer']
   const statuses: User['status'][] = ['Active', 'Inactive', 'Pending']
   const departments = [
-    'Engineering', 'Marketing', 'Sales', 'HR', 'Finance',
-    'Operations', 'Customer Support', 'Product', 'Design', 'Legal'
+    { en: 'Engineering', ar: 'هندسة' },
+    { en: 'Marketing', ar: 'تسويق' },
+    { en: 'Sales', ar: 'مبيعات' },
+    { en: 'HR', ar: 'موارد بشرية' },
+    { en: 'Finance', ar: 'مالية' },
+    { en: 'Operations', ar: 'عمليات' },
+    { en: 'Customer Support', ar: 'دعم العملاء' },
+    { en: 'Product', ar: 'منتج' },
+    { en: 'Design', ar: 'تصميم' },
+    { en: 'Legal', ar: 'قانوني' }
   ]
 
   return names.map((name, index) => {
@@ -76,13 +85,16 @@ const generateUsers = (): User[] => {
     const lastActiveDay = (index % 7) + 1
     const lastActive = new Date(2025, 10, lastActiveDay)
 
+    const dept = departments[index % departments.length]
+
     return {
       id: `user-${index + 1}`,
       name,
       email: name.toLowerCase().replace(/\s+/g, '.').replace(/al-/g, '') + '@company.sa',
       role: roles[index % roles.length],
       status: index < 5 ? 'Pending' : statuses[index % statuses.length],
-      department: departments[index % departments.length],
+      department: dept.en,
+      departmentAr: dept.ar,
       joinDate: joinDate.toLocaleDateString('en-US'),
       lastActive: lastActive.toLocaleDateString('en-US'),
     }
@@ -93,8 +105,29 @@ export default function DataTableShowcasePage() {
   const { direction, locale } = useDirection()
   const isRTL = direction === 'rtl'
 
+  // Role translations
+  const getRoleText = React.useCallback((role: User['role']) => {
+    const translations = {
+      Admin: isRTL ? 'مسؤول' : 'Admin',
+      Editor: isRTL ? 'محرر' : 'Editor',
+      User: isRTL ? 'مستخدم' : 'User',
+      Viewer: isRTL ? 'مشاهد' : 'Viewer',
+    }
+    return translations[role]
+  }, [isRTL])
+
+  // Status translations
+  const getStatusText = React.useCallback((status: User['status']) => {
+    const translations = {
+      Active: isRTL ? 'نشط' : 'Active',
+      Inactive: isRTL ? 'غير نشط' : 'Inactive',
+      Pending: isRTL ? 'معلق' : 'Pending',
+    }
+    return translations[status]
+  }, [isRTL])
+
   // Data state
-  const [allUsers] = React.useState<User[]>(generateUsers())
+  const [allUsers] = React.useState<User[]>(generateUsers(isRTL))
   const [displayUsers, setDisplayUsers] = React.useState<User[]>(allUsers)
   const [isLoading, setIsLoading] = React.useState(false)
 
@@ -248,20 +281,21 @@ export default function DataTableShowcasePage() {
       header: isRTL ? 'الدور' : 'Role',
       accessorKey: 'role',
       sortable: true,
-      cell: (row) => <Badge variant={getRoleVariant(row.role)}>{row.role}</Badge>,
+      cell: (row) => <Badge variant={getRoleVariant(row.role)}>{getRoleText(row.role)}</Badge>,
     },
     {
       id: 'status',
       header: isRTL ? 'الحالة' : 'Status',
       accessorKey: 'status',
       sortable: true,
-      cell: (row) => <Badge variant={getStatusVariant(row.status)}>{row.status}</Badge>,
+      cell: (row) => <Badge variant={getStatusVariant(row.status)}>{getStatusText(row.status)}</Badge>,
     },
     {
       id: 'department',
       header: isRTL ? 'القسم' : 'Department',
       accessorKey: 'department',
       sortable: true,
+      cell: (row) => <div>{isRTL ? row.departmentAr : row.department}</div>,
     },
     {
       id: 'joinDate',
@@ -270,7 +304,7 @@ export default function DataTableShowcasePage() {
       sortable: true,
       cell: (row) => <div className="text-sm">{row.joinDate}</div>,
     },
-  ], [isRTL, getRoleVariant, getStatusVariant])
+  ], [isRTL, getRoleVariant, getStatusVariant, getRoleText, getStatusText])
 
   // Get paginated data
   const paginatedData = displayUsers.slice(
