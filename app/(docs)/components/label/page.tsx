@@ -10,6 +10,7 @@ import { Separator } from '@/components/ui/separator'
 import { ComponentShowcase } from '@/components/docs/component-showcase'
 import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
+import { BestPractices } from '@/components/docs/best-practices'
 import { AlertCircle } from 'lucide-react'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
@@ -108,7 +109,8 @@ const rtlCode = `// RTL support is automatic!
 </div>`
 
 export default function LabelPage() {
-  const { locale } = useDirection()
+  const { locale, direction } = useDirection()
+  const isRTL = direction === 'rtl'
   const t = content[locale]
   const labelProps = getLabelProps(t)
 
@@ -485,43 +487,20 @@ export default function LabelPage() {
 
         {/* Best Practices */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Best Practices</h2>
-          <Card>
-            <CardContent className="p-6">
-              <ul className="space-y-3 text-muted-foreground">
-                <li className="flex items-start gap-2">
-                  <span className="text-primary mt-1">✓</span>
-                  <span>Always pair inputs with labels using the htmlFor and id attributes</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-primary mt-1">✓</span>
-                  <span>Use clear, descriptive label text that explains what the input is for</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-primary mt-1">✓</span>
-                  <span>
-                    Indicate required fields with an asterisk (*) or &quot;required&quot; text
-                  </span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-primary mt-1">✓</span>
-                  <span>Place labels above inputs for better scannability (except horizontal forms)</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-destructive mt-1">✗</span>
-                  <span>Don&apos;t rely solely on placeholder text for instructions</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-destructive mt-1">✗</span>
-                  <span>Don&apos;t use labels for decorative purposes - they should describe the input</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-destructive mt-1">✗</span>
-                  <span>Don&apos;t hide labels visually unless you provide alternative text for screen readers</span>
-                </li>
-              </ul>
-            </CardContent>
-          </Card>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.bestPractices}</h2>
+          <BestPractices
+            dos={[
+              isRTL ? 'اربط دائماً المدخلات بالتسميات باستخدام htmlFor و id' : 'Always pair inputs with labels using htmlFor and id attributes',
+              isRTL ? 'استخدم نص تسمية واضح وصفي يشرح الغرض من الإدخال' : 'Use clear, descriptive label text that explains what the input is for',
+              isRTL ? 'أشر إلى الحقول المطلوبة بعلامة نجمة (*) أو نص "مطلوب"' : 'Indicate required fields with an asterisk (*) or "required" text',
+              isRTL ? 'ضع التسميات فوق المدخلات لسهولة القراءة (إلا في النماذج الأفقية)' : 'Place labels above inputs for better scannability (except horizontal forms)',
+            ]}
+            donts={[
+              isRTL ? 'لا تعتمد فقط على نص العنصر النائب للتعليمات' : "Don't rely solely on placeholder text for instructions",
+              isRTL ? 'لا تستخدم التسميات لأغراض تزيينية - يجب أن تصف الإدخال' : "Don't use labels for decorative purposes - they should describe the input",
+              isRTL ? 'لا تخفي التسميات بصرياً ما لم تقدم نصاً بديلاً لقارئات الشاشة' : "Don't hide labels visually unless you provide alternative text for screen readers",
+            ]}
+          />
         </section>
 
         {/* Related Components */}

@@ -8,6 +8,7 @@ import { Separator } from '@/components/ui/separator'
 import { ComponentShowcase } from '@/components/docs/component-showcase'
 import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
+import { BestPractices } from '@/components/docs/best-practices'
 import { Home, Settings, User, Bell } from 'lucide-react'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
@@ -149,7 +150,8 @@ const rtlCode = `// RTL support is automatic!
 </div>`
 
 export default function SeparatorPage() {
-  const { locale } = useDirection()
+  const { locale, direction } = useDirection()
+  const isRTL = direction === 'rtl'
   const t = content[locale]
   const separatorProps = getSeparatorProps(t)
 
@@ -507,48 +509,20 @@ export default function SeparatorPage() {
 
         {/* Best Practices */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Best Practices</h2>
-          <Card>
-            <CardContent className="p-6">
-              <ul className="space-y-3 text-muted-foreground">
-                <li className="flex items-start gap-2">
-                  <span className="text-primary mt-1">✓</span>
-                  <span>Use separators to divide related content into logical sections</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-primary mt-1">✓</span>
-                  <span>
-                    Keep decorative={'{'}true{'}'} (default) for most visual dividers
-                  </span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-primary mt-1">✓</span>
-                  <span>Use vertical separators to divide inline navigation or toolbar items</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-primary mt-1">✓</span>
-                  <span>Adjust height/thickness with className for visual hierarchy</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-destructive mt-1">✗</span>
-                  <span>
-                    Don&apos;t overuse separators - they can make content feel cluttered
-                  </span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-destructive mt-1">✗</span>
-                  <span>Don&apos;t use separators where headings or spacing alone would suffice</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-destructive mt-1">✗</span>
-                  <span>
-                    Don&apos;t rely solely on separators to indicate relationships - use proper heading
-                    hierarchy
-                  </span>
-                </li>
-              </ul>
-            </CardContent>
-          </Card>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.bestPractices}</h2>
+          <BestPractices
+            dos={[
+              isRTL ? 'استخدم الفواصل لتقسيم المحتوى ذي الصلة إلى أقسام منطقية' : 'Use separators to divide related content into logical sections',
+              isRTL ? 'احتفظ بـ decorative=true (افتراضي) لمعظم الفواصل المرئية' : 'Keep decorative=true (default) for most visual dividers',
+              isRTL ? 'استخدم الفواصل العمودية لتقسيم عناصر التنقل أو شريط الأدوات' : 'Use vertical separators to divide inline navigation or toolbar items',
+              isRTL ? 'اضبط الارتفاع/السماكة باستخدام className للتسلسل الهرمي المرئي' : 'Adjust height/thickness with className for visual hierarchy',
+            ]}
+            donts={[
+              isRTL ? 'لا تفرط في استخدام الفواصل - يمكن أن تجعل المحتوى يبدو مزدحماً' : "Don't overuse separators - they can make content feel cluttered",
+              isRTL ? 'لا تستخدم الفواصل حيث تكفي العناوين أو المسافات وحدها' : "Don't use separators where headings or spacing alone would suffice",
+              isRTL ? 'لا تعتمد فقط على الفواصل للإشارة إلى العلاقات - استخدم تسلسل العناوين الصحيح' : "Don't rely solely on separators to indicate relationships - use proper heading hierarchy",
+            ]}
+          />
         </section>
 
         {/* Related Components */}

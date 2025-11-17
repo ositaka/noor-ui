@@ -6,6 +6,7 @@ import { FeatureCard } from '@/components/ui/feature-card'
 import { ComponentShowcase } from '@/components/docs/component-showcase'
 import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
+import { BestPractices } from '@/components/docs/best-practices'
 import { Sparkles, Rocket, Zap, Shield, Package, Settings } from 'lucide-react'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
@@ -260,60 +261,21 @@ export default function FeatureCardPage() {
         {/* Best Practices */}
         <section className="mb-16">
           <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.bestPractices}</h2>
-          <div className="grid md:grid-cols-2 gap-6">
-            <div className="p-6 rounded-lg border-2 border-green-500/20 bg-green-500/5">
-              <h3 className="text-foreground font-semibold mb-4 flex items-center gap-2">
-                <span className="text-green-600 dark:text-green-400 text-xl">✓</span>
-                {t.componentPage.bestPractices.do}
-              </h3>
-              <ul className="space-y-3 text-sm text-muted-foreground">
-                <li className="flex items-start gap-2">
-                  <span className="text-green-600 dark:text-green-400 mt-0.5">•</span>
-                  <span>{isRTL ? 'استخدم أيقونات ذات معنى تمثل الميزة' : 'Use meaningful icons that represent the feature'}</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-green-600 dark:text-green-400 mt-0.5">•</span>
-                  <span>{isRTL ? 'اجعل العناوين قصيرة ووصفية (2-5 كلمات)' : 'Keep titles short and descriptive (2-5 words)'}</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-green-600 dark:text-green-400 mt-0.5">•</span>
-                  <span>{isRTL ? 'اجعل الأوصاف موجزة (1-2 جملة)' : 'Keep descriptions concise (1-2 sentences)'}</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-green-600 dark:text-green-400 mt-0.5">•</span>
-                  <span>{isRTL ? 'استخدم في تخطيطات الشبكة لعرض الميزات' : 'Use in grid layouts for feature showcases'}</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-green-600 dark:text-green-400 mt-0.5">•</span>
-                  <span>{isRTL ? 'أضف href عندما يجب أن تنقل البطاقة إلى مكان ما' : 'Add href when the card should navigate somewhere'}</span>
-                </li>
-              </ul>
-            </div>
-            <div className="p-6 rounded-lg border-2 border-red-500/20 bg-red-500/5">
-              <h3 className="text-foreground font-semibold mb-4 flex items-center gap-2">
-                <span className="text-red-600 dark:text-red-400 text-xl">✕</span>
-                {t.componentPage.bestPractices.dont}
-              </h3>
-              <ul className="space-y-3 text-sm text-muted-foreground">
-                <li className="flex items-start gap-2">
-                  <span className="text-red-600 dark:text-red-400 mt-0.5">•</span>
-                  <span>{isRTL ? 'لا تستخدم للمحتوى الطويل (استخدم بطاقة عادية بدلاً من ذلك)' : "Don't use for long-form content (use regular Card instead)"}</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-red-600 dark:text-red-400 mt-0.5">•</span>
-                  <span>{isRTL ? 'لا تخلط البطاقات القابلة للنقر وغير القابلة للنقر في نفس الشبكة' : "Don't mix clickable and non-clickable cards in the same grid"}</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-red-600 dark:text-red-400 mt-0.5">•</span>
-                  <span>{isRTL ? 'لا تستخدم أيقونات صغيرة جداً أو كبيرة جداً' : "Don't use tiny icons or oversized icons"}</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-red-600 dark:text-red-400 mt-0.5">•</span>
-                  <span>{isRTL ? 'لا تجعل الوصف طويلاً جداً (يكسر التوازن البصري)' : "Don't make the description too long (breaks visual balance)"}</span>
-                </li>
-              </ul>
-            </div>
-          </div>
+          <BestPractices
+            dos={[
+              isRTL ? 'استخدم أيقونات ذات معنى تمثل الميزة' : 'Use meaningful icons that represent the feature',
+              isRTL ? 'اجعل العناوين قصيرة ووصفية (2-5 كلمات)' : 'Keep titles short and descriptive (2-5 words)',
+              isRTL ? 'اجعل الأوصاف موجزة (1-2 جملة)' : 'Keep descriptions concise (1-2 sentences)',
+              isRTL ? 'استخدم في تخطيطات الشبكة لعرض الميزات' : 'Use in grid layouts for feature showcases',
+              isRTL ? 'أضف href عندما يجب أن تنقل البطاقة إلى مكان ما' : 'Add href when the card should navigate somewhere',
+            ]}
+            donts={[
+              isRTL ? 'لا تستخدم للمحتوى الطويل (استخدم بطاقة عادية بدلاً من ذلك)' : "Don't use for long-form content (use regular Card instead)",
+              isRTL ? 'لا تخلط البطاقات القابلة للنقر وغير القابلة للنقر في نفس الشبكة' : "Don't mix clickable and non-clickable cards in the same grid",
+              isRTL ? 'لا تستخدم أيقونات صغيرة جداً أو كبيرة جداً' : "Don't use tiny icons or oversized icons",
+              isRTL ? 'لا تجعل الوصف طويلاً جداً (يكسر التوازن البصري)' : "Don't make the description too long (breaks visual balance)",
+            ]}
+          />
         </section>
 
         {/* Related Components */}

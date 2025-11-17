@@ -4,6 +4,7 @@ import * as React from 'react'
 import Link from 'next/link'
 import { Card, CardContent } from '@/components/ui/card'
 import { CodeBlock } from '@/components/docs/code-block'
+import { BestPractices } from '@/components/docs/best-practices'
 import { Type, Check } from 'lucide-react'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
@@ -147,33 +148,22 @@ export default function ArabicPage() {
 
         <section className="mb-16">
           <h2 className="text-2xl font-bold tracking-tight mb-6">{t.commonMistakes}</h2>
-          <div className="grid gap-4 sm:grid-cols-2">
-            <Card className="border-red-500/50 bg-red-50 dark:bg-red-950/20">
-              <CardContent className="p-6">
-                <h3 className="font-semibold mb-2 text-red-600 dark:text-red-400">❌ {t.avoidTitle}</h3>
-                <ul className="text-sm space-y-1">
-                  <li>• {t.noArabicFonts}</li>
-                  <li>• {t.tightLineHeight}</li>
-                  <li>• {t.mixingFonts}</li>
-                  <li>• {t.ignoringDiacriticals}</li>
-                  <li>• {t.copyPasting}</li>
-                </ul>
-              </CardContent>
-            </Card>
-
-            <Card className="border-green-500/50 bg-green-50 dark:bg-green-950/20">
-              <CardContent className="p-6">
-                <h3 className="font-semibold mb-2 text-green-600 dark:text-green-400">✓ {t.doTitle}</h3>
-                <ul className="text-sm space-y-1">
-                  <li>• {t.testNative}</li>
-                  <li>• {t.properFonts}</li>
-                  <li>• {t.increaseLineHeight}</li>
-                  <li>• {t.supportDiacriticals}</li>
-                  <li>• {t.useRealContent}</li>
-                </ul>
-              </CardContent>
-            </Card>
-          </div>
+          <BestPractices
+            dos={[
+              t.testNative,
+              t.properFonts,
+              t.increaseLineHeight,
+              t.supportDiacriticals,
+              t.useRealContent,
+            ]}
+            donts={[
+              t.noArabicFonts,
+              t.tightLineHeight,
+              t.mixingFonts,
+              t.ignoringDiacriticals,
+              t.copyPasting,
+            ]}
+          />
         </section>
 
         <section className="mb-16">

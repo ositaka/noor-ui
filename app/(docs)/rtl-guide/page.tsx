@@ -5,8 +5,9 @@ import Link from 'next/link'
 import { Card, CardContent } from '@/components/ui/card'
 import { CodeBlock } from '@/components/docs/code-block'
 import { ComponentShowcase } from '@/components/docs/component-showcase'
+import { BestPractices } from '@/components/docs/best-practices'
 import { Button } from '@/components/ui/button'
-import { Sparkles, ArrowRight, CheckCircle2, XCircle, Info, Lightbulb, Book } from 'lucide-react'
+import { Sparkles, ArrowRight, Info, Lightbulb, Book, CheckCircle2, XCircle } from 'lucide-react'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 
@@ -173,7 +174,8 @@ const commonPatternsCode = `// Pattern 1: Responsive Spacing
 </div>`
 
 export default function RTLGuidePage() {
-  const { locale } = useDirection()
+  const { locale, direction } = useDirection()
+  const isRTL = direction === 'rtl'
   const t = content[locale].rtlGuidePage
 
   return (
@@ -470,36 +472,7 @@ export default function RTLGuidePage() {
         {/* Best Practices */}
         <section className="mb-16">
           <h2 className="text-2xl font-bold tracking-tight mb-6">{t.bestPractices.title}</h2>
-
-          <div className="grid gap-4 sm:grid-cols-2">
-            <Card className="border-green-500/50 bg-green-50 dark:bg-green-950/20">
-              <CardContent className="p-6">
-                <h3 className="font-semibold mb-2 flex items-center gap-2 text-green-700 dark:text-green-400">
-                  <CheckCircle2 className="h-5 w-5" />
-                  {t.bestPractices.do}
-                </h3>
-                <ul className="text-sm space-y-2">
-                  {t.bestPractices.doList.map((item, index) => (
-                    <li key={index}>✓ {item}</li>
-                  ))}
-                </ul>
-              </CardContent>
-            </Card>
-
-            <Card className="border-red-500/50 bg-red-50 dark:bg-red-950/20">
-              <CardContent className="p-6">
-                <h3 className="font-semibold mb-2 flex items-center gap-2 text-red-700 dark:text-red-400">
-                  <XCircle className="h-5 w-5" />
-                  {t.bestPractices.dont}
-                </h3>
-                <ul className="text-sm space-y-2">
-                  {t.bestPractices.dontList.map((item, index) => (
-                    <li key={index}>✗ {item}</li>
-                  ))}
-                </ul>
-              </CardContent>
-            </Card>
-          </div>
+          <BestPractices dos={t.bestPractices.doList} donts={t.bestPractices.dontList} />
         </section>
 
         {/* Resources */}
