@@ -240,6 +240,8 @@ export default function Dashboard() {
 
 export default function DashboardShellPage() {
   const { toast } = useToast()
+  const { direction, locale } = useDirection()
+  const t = content[locale]
 
   const handleAction = (action: string) => {
     toast({

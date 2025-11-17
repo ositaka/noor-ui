@@ -98,6 +98,7 @@ const typeDefinition = `interface Step {
 export default function StepperPage() {
   const { direction, locale } = useDirection()
   const isRTL = direction === 'rtl'
+  const t = content[locale]
 
   const [currentStep1, setCurrentStep1] = React.useState(0)
   const [currentStep2, setCurrentStep2] = React.useState(1)
@@ -151,13 +152,13 @@ export default function StepperPage() {
           <ol className="flex items-center gap-2 text-sm text-muted-foreground">
             <li>
               <Link href="/" className="hover:text-foreground transition-colors">
-                {isRTL ? 'الرئيسية' : 'Home'}
+                {t.common.home}
               </Link>
             </li>
             <li>/</li>
             <li>
               <Link href="/components" className="hover:text-foreground transition-colors">
-                {isRTL ? 'المكونات' : 'Components'}
+                {t.nav.components}
               </Link>
             </li>
             <li>/</li>
@@ -177,7 +178,7 @@ export default function StepperPage() {
 
       {/* Preview */}
       <section className="mb-16">
-        <h2 className="text-2xl font-bold tracking-tight mb-6">{isRTL ? 'معاينة' : 'Preview'}</h2>
+        <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.preview}</h2>
         <ComponentShowcase code={basicCode}>
           <ComponentShowcase.Demo>
             <div className="w-full max-w-2xl mx-auto">
@@ -205,7 +206,7 @@ export default function StepperPage() {
       {/* Variants */}
       <div className="space-y-6">
         <div>
-          <h2 className="text-2xl font-bold mb-2">{isRTL ? 'الأشكال' : 'Variants'}</h2>
+          <h2 className="text-2xl font-bold mb-2">{t.componentPage.sections.variants}</h2>
           <p className="text-muted-foreground">
             {isRTL
               ? 'ثلاثة أشكال مرئية: افتراضي، بسيط، ودوائر'
@@ -305,7 +306,7 @@ export default function StepperPage() {
 
       {/* Use Cases */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-bold">{isRTL ? 'حالات الاستخدام' : 'Use Cases'}</h2>
+        <h2 className="text-2xl font-bold">{t.componentPage.sections.useCases}</h2>
         <div className="grid gap-4 md:grid-cols-2">
           {[
             { title: isRTL ? 'نماذج التسجيل' : 'Registration Forms', icon: '📝' },
@@ -327,19 +328,19 @@ export default function StepperPage() {
 
       {/* Type Definition */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-bold">{isRTL ? 'تعريف النوع' : 'Type Definition'}</h2>
+        <h2 className="text-2xl font-bold">{t.componentPage.sections.typeDefinitions}</h2>
         <CodeBlock code={typeDefinition} language="typescript" />
       </div>
 
       {/* API Reference */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-bold">{isRTL ? 'مرجع API' : 'API Reference'}</h2>
+        <h2 className="text-2xl font-bold">{t.componentPage.sections.propsApiReference}</h2>
         <PropsTable props={stepperProps} />
       </div>
 
       {/* Features */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-bold">{isRTL ? 'الميزات' : 'Features'}</h2>
+        <h2 className="text-2xl font-bold">{t.componentPage.sections.features}</h2>
         <ul className="list-disc list-inside space-y-2 text-muted-foreground">
           <li>{isRTL ? 'ثلاثة أشكال مرئية (افتراضي، بسيط، دوائر)' : 'Three visual variants (default, simple, circles)'}</li>
           <li>{isRTL ? 'اتجاه أفقي ورأسي' : 'Horizontal and vertical orientations'}</li>

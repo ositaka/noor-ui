@@ -118,6 +118,7 @@ export default function NotificationCenterPage() {
   const { toast } = useToast()
   const { direction, locale } = useDirection()
   const isRTL = direction === 'rtl'
+  const t = content[locale]
 
   const [notifications1, setNotifications1] = React.useState<Notification[]>([
     {

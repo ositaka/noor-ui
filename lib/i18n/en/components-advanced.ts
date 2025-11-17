@@ -120,6 +120,8 @@ datePickerComponent: {
         availableFrom: 'Available from',
         to: 'to',
         weekendsDisabled: 'Weekends are disabled',
+        noDateSelected: 'No date selected',
+        noRangeSelected: 'No range selected',
       },
       useCases: {
         title: 'Use Cases',

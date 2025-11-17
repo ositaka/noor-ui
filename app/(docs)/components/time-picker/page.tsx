@@ -182,6 +182,7 @@ interface TimePickerProps {
 export default function TimePickerPage() {
   const { direction, locale } = useDirection()
   const isRTL = direction === 'rtl'
+  const t = content[locale]
 
   const [time1, setTime1] = React.useState<Time>({ hours: 9, minutes: 30 })
   const [time2, setTime2] = React.useState<Time>({ hours: 14, minutes: 0 })
@@ -224,13 +225,13 @@ export default function TimePickerPage() {
           <ol className="flex items-center gap-2 text-sm text-muted-foreground">
             <li>
               <Link href="/" className="hover:text-foreground transition-colors">
-                {isRTL ? 'الرئيسية' : 'Home'}
+                {t.common.home}
               </Link>
             </li>
             <li>/</li>
             <li>
               <Link href="/components" className="hover:text-foreground transition-colors">
-                {isRTL ? 'المكونات' : 'Components'}
+                {t.nav.components}
               </Link>
             </li>
             <li>/</li>
@@ -516,7 +517,7 @@ export default function TimePickerPage() {
 
       {/* Use Cases */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-bold">{isRTL ? 'حالات الاستخدام' : 'Use Cases'}</h2>
+        <h2 className="text-2xl font-bold">{t.componentPage.sections.useCases}</h2>
         <div className="grid gap-4 md:grid-cols-2">
           {[
             { title: isRTL ? 'حجز المواعيد' : 'Appointment Booking', icon: '📅' },
@@ -538,7 +539,7 @@ export default function TimePickerPage() {
 
       {/* Type Definition */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-bold">{isRTL ? 'تعريف النوع' : 'Type Definition'}</h2>
+        <h2 className="text-2xl font-bold">{t.componentPage.sections.typeDefinitions}</h2>
         <CodeBlock code={typeDefinition} language="typescript" />
       </div>
 
@@ -556,7 +557,7 @@ export default function TimePickerPage() {
 
       {/* Features */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-bold">{isRTL ? 'الميزات' : 'Features'}</h2>
+        <h2 className="text-2xl font-bold">{t.componentPage.sections.features}</h2>
         <ul className="list-disc list-inside space-y-2 text-muted-foreground">
           <li>{isRTL ? 'تنسيقات 12 و 24 ساعة' : '12-hour and 24-hour formats'}</li>
           <li>{isRTL ? 'مبدل AM/PM' : 'AM/PM toggle'}</li>

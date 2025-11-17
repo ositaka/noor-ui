@@ -118,6 +118,7 @@ const listingCardProps: PropDefinition[] = [
 export default function ListingCardPage() {
   const { direction, locale } = useDirection()
   const isRTL = direction === 'rtl'
+  const t = content[locale]
 
   const basicUsage = `import { ListingCard } from '@/components/ui/listing-card'
 import { Home } from 'lucide-react'
@@ -256,13 +257,13 @@ interface ListingCardTag {
           <ol className="flex items-center gap-2 text-sm text-muted-foreground">
             <li>
               <Link href="/" className="hover:text-foreground transition-colors">
-                {isRTL ? 'الرئيسية' : 'Home'}
+                {t.common.home}
               </Link>
             </li>
             <li>/</li>
             <li>
               <Link href="/components" className="hover:text-foreground transition-colors">
-                {isRTL ? 'المكونات' : 'Components'}
+                {t.nav.components}
               </Link>
             </li>
             <li>/</li>
@@ -442,7 +443,7 @@ interface ListingCardTag {
 
       {/* Use Cases */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-bold">{isRTL ? 'حالات الاستخدام' : 'Use Cases'}</h2>
+        <h2 className="text-2xl font-bold">{t.componentPage.sections.useCases}</h2>
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {[
             { icon: '🏠', label: isRTL ? 'العقارات' : 'Real Estate' },
@@ -462,13 +463,13 @@ interface ListingCardTag {
 
       {/* Type Definitions */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-bold">{isRTL ? 'تعريفات الأنواع' : 'Type Definitions'}</h2>
+        <h2 className="text-2xl font-bold">{t.componentPage.sections.typeDefinitions}</h2>
         <CodeBlock code={typeDefinitions} language="typescript" />
       </div>
 
       {/* API Reference */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-bold">{isRTL ? 'مرجع API' : 'API Reference'}</h2>
+        <h2 className="text-2xl font-bold">{t.componentPage.sections.propsApiReference}</h2>
         <PropsTable props={listingCardProps} />
       </div>
       </main>

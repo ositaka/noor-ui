@@ -171,6 +171,7 @@ const currencyCode = `const formatCurrency = (value: number): string => {
 export default function NumberInputPage() {
   const { direction, locale } = useDirection()
   const isRTL = direction === 'rtl'
+  const t = content[locale]
 
   const [value1, setValue1] = React.useState<number | undefined>(42)
   const [value2, setValue2] = React.useState<number | undefined>(undefined)
@@ -194,13 +195,13 @@ export default function NumberInputPage() {
           <ol className="flex items-center gap-2 text-sm text-muted-foreground">
             <li>
               <Link href="/" className="hover:text-foreground transition-colors">
-                {isRTL ? 'الرئيسية' : 'Home'}
+                {t.common.home}
               </Link>
             </li>
             <li>/</li>
             <li>
               <Link href="/components" className="hover:text-foreground transition-colors">
-                {isRTL ? 'المكونات' : 'Components'}
+                {t.nav.components}
               </Link>
             </li>
             <li>/</li>
@@ -409,7 +410,7 @@ const formatCurrency = (value: number) =>
 
       {/* Use Cases */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-bold">{isRTL ? 'حالات الاستخدام' : 'Use Cases'}</h2>
+        <h2 className="text-2xl font-bold">{t.componentPage.sections.useCases}</h2>
         <div className="grid gap-4 md:grid-cols-2">
           {[
             { title: isRTL ? 'نماذج التسعير' : 'Pricing Forms', icon: '💰' },
@@ -431,13 +432,13 @@ const formatCurrency = (value: number) =>
 
       {/* API Reference */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-bold">{isRTL ? 'مرجع API' : 'API Reference'}</h2>
+        <h2 className="text-2xl font-bold">{t.componentPage.sections.propsApiReference}</h2>
         <PropsTable props={numberInputProps} />
       </div>
 
       {/* Features */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-bold">{isRTL ? 'الميزات' : 'Features'}</h2>
+        <h2 className="text-2xl font-bold">{t.componentPage.sections.features}</h2>
         <ul className="list-disc list-inside space-y-2 text-muted-foreground">
           <li>{isRTL ? 'أزرار الزيادة والنقصان' : 'Increment/decrement buttons'}</li>
           <li>{isRTL ? 'دعم لوحة المفاتيح (أسهم لأعلى/لأسفل)' : 'Keyboard support (arrow up/down)'}</li>

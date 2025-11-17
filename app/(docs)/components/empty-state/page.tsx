@@ -15,6 +15,7 @@ import { FileText, Inbox, Search, Users, Plus } from 'lucide-react'
 export default function EmptyStatePage() {
   const { direction, locale } = useDirection()
   const isRTL = direction === 'rtl'
+  const t = content[locale]
 
   const basicUsage = `import { EmptyState } from '@/components/ui/empty-state'
 import { Button } from '@/components/ui/button'

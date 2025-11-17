@@ -20,6 +20,7 @@ import {
 export default function StatsCardPage() {
   const { direction, locale } = useDirection()
   const isRTL = direction === 'rtl'
+  const t = content[locale]
 
   const basicUsage = `import { StatsCard } from '@/components/dashboard/stats-card'
 import { Users } from 'lucide-react'
@@ -245,7 +246,7 @@ export function Example() {
 
       {/* Props */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-bold">{isRTL ? 'الخصائص' : 'Props'}</h2>
+        <h2 className="text-2xl font-bold">{t.componentPage.sections.props}</h2>
 
         <PropsTable
           props={[

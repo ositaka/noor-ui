@@ -120,6 +120,8 @@ datePickerComponent: {
         availableFrom: 'متاح من',
         to: 'إلى',
         weekendsDisabled: 'عطلات نهاية الأسبوع معطلة',
+        noDateSelected: 'لم يتم اختيار تاريخ',
+        noRangeSelected: 'لم يتم اختيار نطاق',
       },
       useCases: {
         title: 'حالات الاستخدام',
