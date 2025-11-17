@@ -489,17 +489,8 @@ export default function LabelPage() {
         <section className="mb-16">
           <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.bestPractices}</h2>
           <BestPractices
-            dos={[
-              isRTL ? 'اربط دائماً المدخلات بالتسميات باستخدام htmlFor و id' : 'Always pair inputs with labels using htmlFor and id attributes',
-              isRTL ? 'استخدم نص تسمية واضح وصفي يشرح الغرض من الإدخال' : 'Use clear, descriptive label text that explains what the input is for',
-              isRTL ? 'أشر إلى الحقول المطلوبة بعلامة نجمة (*) أو نص "مطلوب"' : 'Indicate required fields with an asterisk (*) or "required" text',
-              isRTL ? 'ضع التسميات فوق المدخلات لسهولة القراءة (إلا في النماذج الأفقية)' : 'Place labels above inputs for better scannability (except horizontal forms)',
-            ]}
-            donts={[
-              isRTL ? 'لا تعتمد فقط على نص العنصر النائب للتعليمات' : "Don't rely solely on placeholder text for instructions",
-              isRTL ? 'لا تستخدم التسميات لأغراض تزيينية - يجب أن تصف الإدخال' : "Don't use labels for decorative purposes - they should describe the input",
-              isRTL ? 'لا تخفي التسميات بصرياً ما لم تقدم نصاً بديلاً لقارئات الشاشة' : "Don't hide labels visually unless you provide alternative text for screen readers",
-            ]}
+            dos={t.labelComponent.bestPractices.doList}
+            donts={t.labelComponent.bestPractices.dontList}
           />
         </section>
 

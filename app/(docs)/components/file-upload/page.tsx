@@ -5,11 +5,10 @@ import Link from 'next/link'
 import { ComponentShowcase } from '@/components/docs/component-showcase'
 import { PropsTable } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
+import { BestPractices } from '@/components/docs/best-practices'
 import { FileUpload } from '@/components/ui/file-upload'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { Alert, AlertDescription } from '@/components/ui/alert'
-import { Info } from 'lucide-react'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 
@@ -433,43 +432,10 @@ export default function Example() {
         {/* Best Practices */}
         <section className="mb-16">
           <h2 className="text-2xl font-bold tracking-tight mb-6">{t.fileUploadComponent.bestPractices.title}</h2>
-          <Alert>
-            <Info className="h-4 w-4" />
-            <AlertDescription>
-              <ul className="space-y-2 mt-2">
-                <li className="flex items-start gap-2">
-                  <span className="text-primary font-bold">•</span>
-                  <span>
-                    {t.fileUploadComponent.bestPractices.serverValidation}
-                  </span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-primary font-bold">•</span>
-                  <span>
-                    {t.fileUploadComponent.bestPractices.sizeLimit}
-                  </span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-primary font-bold">•</span>
-                  <span>
-                    {t.fileUploadComponent.bestPractices.clearErrors}
-                  </span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-primary font-bold">•</span>
-                  <span>
-                    {t.fileUploadComponent.bestPractices.cleanupUrls}
-                  </span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-primary font-bold">•</span>
-                  <span>
-                    {t.fileUploadComponent.bestPractices.progressIndicators}
-                  </span>
-                </li>
-              </ul>
-            </AlertDescription>
-          </Alert>
+          <BestPractices
+            dos={t.fileUploadComponent.bestPractices.doList}
+            donts={t.fileUploadComponent.bestPractices.dontList}
+          />
         </section>
 
         {/* Accessibility */}

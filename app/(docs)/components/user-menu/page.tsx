@@ -5,11 +5,10 @@ import Link from 'next/link'
 import { ComponentShowcase } from '@/components/docs/component-showcase'
 import { PropsTable } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
+import { BestPractices } from '@/components/docs/best-practices'
 import { UserMenu } from '@/components/ui/user-menu'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { Alert, AlertDescription } from '@/components/ui/alert'
-import { Info } from 'lucide-react'
 import { useToast } from '@/hooks/use-toast'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
@@ -404,44 +403,11 @@ export function Header() {
 
         {/* Best Practices */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Best Practices</h2>
-          <Alert>
-            <Info className="h-4 w-4" />
-            <AlertDescription>
-              <ul className="space-y-2 mt-2">
-                <li className="flex items-start gap-2">
-                  <span className="text-primary font-bold">•</span>
-                  <span>
-                    Place the user menu in the top-right corner (top-left for RTL) for consistency
-                  </span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-primary font-bold">•</span>
-                  <span>
-                    Keep menu items relevant and frequently used - avoid cluttering with too many options
-                  </span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-primary font-bold">•</span>
-                  <span>
-                    Always place &quot;Log out&quot; as the last item with visual separation
-                  </span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-primary font-bold">•</span>
-                  <span>
-                    Provide user feedback after actions (use toast notifications)
-                  </span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-primary font-bold">•</span>
-                  <span>
-                    Use high-quality avatar images or clear fallback initials
-                  </span>
-                </li>
-              </ul>
-            </AlertDescription>
-          </Alert>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.bestPractices}</h2>
+          <BestPractices
+            dos={t.userMenuComponent.bestPractices.doList}
+            donts={t.userMenuComponent.bestPractices.dontList}
+          />
         </section>
 
         {/* Accessibility */}

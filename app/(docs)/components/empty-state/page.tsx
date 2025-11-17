@@ -4,6 +4,7 @@ import * as React from 'react'
 import { ComponentShowcase } from '@/components/docs/component-showcase'
 import { CodeBlock } from '@/components/docs/code-block'
 import { PropsTable } from '@/components/docs/props-table'
+import { BestPractices } from '@/components/docs/best-practices'
 import { EmptyState } from '@/components/ui/empty-state'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
@@ -263,36 +264,19 @@ export function Example() {
               </li>
             </ul>
           </div>
-
-          <div>
-            <h3 className="font-semibold mb-1">
-              {isRTL ? 'أفضل الممارسات' : 'Best practices'}
-            </h3>
-            <ul className="list-disc ps-5 space-y-1 text-muted-foreground">
-              <li>
-                {isRTL
-                  ? 'استخدم أيقونات ذات صلة تمثل المحتوى المفقود'
-                  : 'Use relevant icons that represent the missing content'}
-              </li>
-              <li>
-                {isRTL
-                  ? 'اجعل العنوان واضحًا وموجزًا'
-                  : 'Keep titles clear and concise'}
-              </li>
-              <li>
-                {isRTL
-                  ? 'قدم إجراءً واضحًا إذا كان بإمكان المستخدم إصلاح الموقف'
-                  : 'Provide a clear action if the user can fix the situation'}
-              </li>
-              <li>
-                {isRTL
-                  ? 'استخدم لهجة ودية ومفيدة'
-                  : 'Use a friendly and helpful tone'}
-              </li>
-            </ul>
-          </div>
         </div>
       </div>
+
+      {/* Best Practices */}
+      <section className="mb-8">
+        <h2 className="text-2xl font-bold tracking-tight mb-6">
+          {isRTL ? 'أفضل الممارسات' : 'Best Practices'}
+        </h2>
+        <BestPractices
+          dos={t.emptyStateComponent.bestPractices.doList}
+          donts={t.emptyStateComponent.bestPractices.dontList}
+        />
+      </section>
     </div>
   )
 }

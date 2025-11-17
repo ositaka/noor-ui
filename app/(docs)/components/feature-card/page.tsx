@@ -262,19 +262,8 @@ export default function FeatureCardPage() {
         <section className="mb-16">
           <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.bestPractices}</h2>
           <BestPractices
-            dos={[
-              isRTL ? 'استخدم أيقونات ذات معنى تمثل الميزة' : 'Use meaningful icons that represent the feature',
-              isRTL ? 'اجعل العناوين قصيرة ووصفية (2-5 كلمات)' : 'Keep titles short and descriptive (2-5 words)',
-              isRTL ? 'اجعل الأوصاف موجزة (1-2 جملة)' : 'Keep descriptions concise (1-2 sentences)',
-              isRTL ? 'استخدم في تخطيطات الشبكة لعرض الميزات' : 'Use in grid layouts for feature showcases',
-              isRTL ? 'أضف href عندما يجب أن تنقل البطاقة إلى مكان ما' : 'Add href when the card should navigate somewhere',
-            ]}
-            donts={[
-              isRTL ? 'لا تستخدم للمحتوى الطويل (استخدم بطاقة عادية بدلاً من ذلك)' : "Don't use for long-form content (use regular Card instead)",
-              isRTL ? 'لا تخلط البطاقات القابلة للنقر وغير القابلة للنقر في نفس الشبكة' : "Don't mix clickable and non-clickable cards in the same grid",
-              isRTL ? 'لا تستخدم أيقونات صغيرة جداً أو كبيرة جداً' : "Don't use tiny icons or oversized icons",
-              isRTL ? 'لا تجعل الوصف طويلاً جداً (يكسر التوازن البصري)' : "Don't make the description too long (breaks visual balance)",
-            ]}
+            dos={t.featureCardComponent.bestPractices.doList}
+            donts={t.featureCardComponent.bestPractices.dontList}
           />
         </section>
 

@@ -4,6 +4,7 @@ import * as React from 'react'
 import { ComponentShowcase } from '@/components/docs/component-showcase'
 import { CodeBlock } from '@/components/docs/code-block'
 import { PropsTable } from '@/components/docs/props-table'
+import { BestPractices } from '@/components/docs/best-practices'
 import { StatsCard } from '@/components/dashboard/stats-card'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
@@ -341,41 +342,19 @@ export function Example() {
               </li>
             </ul>
           </div>
-
-          <div>
-            <h3 className="font-semibold mb-1">
-              {isRTL ? 'أفضل الممارسات' : 'Best practices'}
-            </h3>
-            <ul className="list-disc ps-5 space-y-1 text-muted-foreground">
-              <li>
-                {isRTL
-                  ? 'استخدم أيقونات متسقة عبر لوحة المعلومات'
-                  : 'Use consistent icons across the dashboard'}
-              </li>
-              <li>
-                {isRTL
-                  ? 'قدم سياقًا لمؤشرات الاتجاه (مثل "مقابل الشهر الماضي")'
-                  : 'Provide context for trend indicators (e.g., "vs last month")'}
-              </li>
-              <li>
-                {isRTL
-                  ? 'استخدم الألوان المناسبة للاتجاهات (أخضر للإيجابي، أحمر للسلبي)'
-                  : 'Use appropriate colors for trends (green for positive, red for negative)'}
-              </li>
-              <li>
-                {isRTL
-                  ? 'احتفظ بالتسميات قصيرة ووصفية'
-                  : 'Keep labels short and descriptive'}
-              </li>
-              <li>
-                {isRTL
-                  ? 'اعرض حالة التحميل أثناء جلب البيانات'
-                  : 'Show loading state while fetching data'}
-              </li>
-            </ul>
-          </div>
         </div>
       </div>
+
+      {/* Best Practices */}
+      <section className="mb-8">
+        <h2 className="text-2xl font-bold tracking-tight mb-6">
+          {isRTL ? 'أفضل الممارسات' : 'Best Practices'}
+        </h2>
+        <BestPractices
+          dos={t.statsCardComponent.bestPractices.doList}
+          donts={t.statsCardComponent.bestPractices.dontList}
+        />
+      </section>
     </div>
   )
 }

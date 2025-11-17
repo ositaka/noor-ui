@@ -326,6 +326,20 @@ labelComponent: {
       },
       bestPractices: {
         title: 'Best Practices',
+        doList: [
+          'Always associate labels with form inputs using htmlFor',
+          'Use clear, concise label text',
+          'Place labels above or beside inputs consistently',
+          'Mark required fields visually (e.g., with an asterisk)',
+          'Ensure labels are visible and not replaced by placeholders',
+        ],
+        dontList: [
+          "Don't rely solely on placeholder text instead of labels",
+          "Don't use vague or ambiguous label text",
+          "Don't hide labels visually without providing alternatives",
+          "Don't forget to associate labels with their inputs",
+          "Don't use labels for decorative purposes only",
+        ],
       },
     },
 
@@ -356,6 +370,22 @@ separatorComponent: {
       rtl: {
         title: 'RTL Considerations',
         description: 'Separators work identically in RTL and LTR layouts.',
+      },
+      bestPractices: {
+        doList: [
+          'Use separators to create visual hierarchy',
+          'Use horizontal separators to divide vertical content',
+          'Use vertical separators in horizontal layouts (navigation, toolbars)',
+          'Keep separator styling subtle and consistent',
+          'Use decorative={true} for purely visual separators',
+        ],
+        dontList: [
+          "Don't overuse separators - they can clutter the interface",
+          "Don't use separators when whitespace alone would suffice",
+          "Don't make separators too prominent or distracting",
+          "Don't use different separator styles inconsistently",
+          "Don't forget to set proper orientation for the layout",
+        ],
       },
     },
 

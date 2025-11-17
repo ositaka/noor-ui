@@ -170,6 +170,22 @@ thinkingIndicatorComponent: {
       children: 'Main content area',
       sidebarCollapsed: 'Whether sidebar is collapsed',
     },
+    bestPractices: {
+      doList: [
+        'Keep navigation items organized and intuitive',
+        'Provide visual feedback for the active navigation item',
+        'Make the sidebar collapsible for more screen space',
+        'Ensure consistent spacing and alignment across sections',
+        'Use responsive design for mobile devices',
+      ],
+      dontList: [
+        "Don't overcrowd the sidebar with too many items",
+        "Don't hide important navigation without a way to access it",
+        "Don't forget to test on different screen sizes",
+        "Don't use inconsistent navigation patterns",
+        "Don't neglect keyboard navigation support",
+      ],
+    },
   },
 
   parameterSliderComponent: {
@@ -225,6 +241,22 @@ thinkingIndicatorComponent: {
       href: 'Optional link URL',
       highlighted: 'Whether to highlight the card',
     },
+    bestPractices: {
+      doList: [
+        'Use meaningful icons that represent the feature',
+        'Keep titles short and descriptive (2-5 words)',
+        'Provide clear, benefit-focused descriptions',
+        'Use consistent icon style across all feature cards',
+        'Ensure adequate spacing between cards for visual clarity',
+      ],
+      dontList: [
+        "Don't use for long-form content",
+        "Don't use different icon styles within the same section",
+        "Don't overcrowd the layout with too many features at once",
+        "Don't use vague titles or descriptions",
+        "Don't neglect to provide icons when showcasing features",
+      ],
+    },
   },
 
   promptInputComponent: {
@@ -260,6 +292,22 @@ thinkingIndicatorComponent: {
       onSignOut: 'Callback when sign out is clicked',
       onSettings: 'Callback when settings is clicked',
     },
+    bestPractices: {
+      doList: [
+        'Include user name and email for context',
+        'Use clear icons for menu items',
+        'Group related menu items (e.g., profile, settings, billing)',
+        'Place sign out action at the bottom of the menu',
+        'Include visual separation between action groups',
+      ],
+      dontList: [
+        "Don't hide critical account actions deep in submenus",
+        "Don't use ambiguous labels for menu items",
+        "Don't clutter the menu with too many options",
+        "Don't forget to handle sign out confirmation for safety",
+        "Don't use inconsistent icon styles",
+      ],
+    },
   },
 
   notificationCenterComponent: {
@@ -276,6 +324,22 @@ thinkingIndicatorComponent: {
       onMarkRead: 'Callback when notification is marked read',
       onDelete: 'Callback when notification is deleted',
       groupBy: 'How to group notifications',
+    },
+    bestPractices: {
+      doList: [
+        'Show unread notifications prominently',
+        'Include timestamps for all notifications',
+        'Provide clear actions (mark as read, delete)',
+        'Group notifications by category or date',
+        'Show notification count badge in the UI',
+      ],
+      dontList: [
+        "Don't overwhelm users with too many notifications at once",
+        "Don't remove notifications without user confirmation",
+        "Don't use unclear or generic notification messages",
+        "Don't forget to handle empty states gracefully",
+        "Don't auto-dismiss important notifications too quickly",
+      ],
     },
   },
 

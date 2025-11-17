@@ -5,11 +5,11 @@ import Link from 'next/link'
 import { ComponentShowcase } from '@/components/docs/component-showcase'
 import { PropsTable } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
+import { BestPractices } from '@/components/docs/best-practices'
 import { NotificationCenter, type Notification } from '@/components/ui/notification-center'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { Alert, AlertDescription } from '@/components/ui/alert'
-import { Info, MessageSquare, UserPlus, Heart, Star } from 'lucide-react'
+import { MessageSquare, UserPlus, Heart, Star } from 'lucide-react'
 import { useToast } from '@/hooks/use-toast'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
@@ -394,44 +394,11 @@ export default function Example() {
 
         {/* Best Practices */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Best Practices</h2>
-          <Alert>
-            <Info className="h-4 w-4" />
-            <AlertDescription>
-              <ul className="space-y-2 mt-2">
-                <li className="flex items-start gap-2">
-                  <span className="text-primary font-bold">•</span>
-                  <span>
-                    Keep notification descriptions concise - one or two lines maximum
-                  </span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-primary font-bold">•</span>
-                  <span>
-                    Use ISO date strings for time values to ensure proper timezone handling
-                  </span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-primary font-bold">•</span>
-                  <span>
-                    Automatically mark notifications as read when clicked for better UX
-                  </span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-primary font-bold">•</span>
-                  <span>
-                    Limit the number of notifications displayed (e.g., last 50)
-                  </span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-primary font-bold">•</span>
-                  <span>
-                    Consider adding sound/vibration feedback for new notifications
-                  </span>
-                </li>
-              </ul>
-            </AlertDescription>
-          </Alert>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.bestPractices}</h2>
+          <BestPractices
+            dos={t.notificationCenterComponent.bestPractices.doList}
+            donts={t.notificationCenterComponent.bestPractices.dontList}
+          />
         </section>
 
         {/* Accessibility */}

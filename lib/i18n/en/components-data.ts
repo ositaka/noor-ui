@@ -387,5 +387,75 @@ commandComponent: {
         focusManagement: 'Focus management in dialog mode',
         escapeKey: 'Escape key closes the dialog',
       },
-    }
+    },
+
+emptyStateComponent: {
+      title: 'Empty State',
+      description: 'Display helpful messages when there is no content to show',
+      preview: 'Preview',
+      installation: 'Installation',
+      usage: 'Usage',
+      examples: {
+        title: 'Examples',
+      },
+      props: {
+        icon: 'Icon to display at the top',
+        title: 'Title of the empty state',
+        description: 'Optional descriptive text',
+        action: 'Action button(s) to display',
+        className: 'Additional CSS classes',
+      },
+      bestPractices: {
+        doList: [
+          'Use relevant icons that represent the missing content',
+          'Keep titles clear and concise',
+          'Provide a clear action if the user can fix the situation',
+          'Use a friendly and helpful tone',
+        ],
+        dontList: [
+          "Don't use generic or irrelevant icons",
+          "Don't use long or technical titles",
+          "Don't leave users stuck without a clear action",
+          "Don't use negative tone or blame the user",
+        ],
+      },
+    },
+
+statsCardComponent: {
+      title: 'Stats Card',
+      description: 'Display dashboard metrics with trend indicators',
+      preview: 'Preview',
+      installation: 'Installation',
+      usage: 'Usage',
+      examples: {
+        title: 'Examples',
+      },
+      props: {
+        label: 'Label for the metric',
+        value: 'Value to display',
+        trend: 'Trend percentage (positive or negative)',
+        trendLabel: 'Trend label (e.g., "vs last month")',
+        icon: 'Icon to display',
+        isLoading: 'Loading state',
+        format: 'Value format',
+        className: 'Additional CSS classes',
+        valueClassName: 'CSS classes for value element',
+      },
+      bestPractices: {
+        doList: [
+          'Use consistent icons across the dashboard',
+          'Provide context for trend indicators (e.g., "vs last month")',
+          'Use appropriate colors for trends (green for positive, red for negative)',
+          'Keep labels short and descriptive',
+          'Show loading state while fetching data',
+        ],
+        dontList: [
+          "Don't use different icons for the same type of metrics",
+          "Don't show trends without time context",
+          "Don't use red for positive trends or green for negative",
+          "Don't use long or ambiguous labels",
+          "Don't display stale data without a loading indicator",
+        ],
+      },
+    },
 }

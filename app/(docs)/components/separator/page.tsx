@@ -511,17 +511,8 @@ export default function SeparatorPage() {
         <section className="mb-16">
           <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.bestPractices}</h2>
           <BestPractices
-            dos={[
-              isRTL ? 'استخدم الفواصل لتقسيم المحتوى ذي الصلة إلى أقسام منطقية' : 'Use separators to divide related content into logical sections',
-              isRTL ? 'احتفظ بـ decorative=true (افتراضي) لمعظم الفواصل المرئية' : 'Keep decorative=true (default) for most visual dividers',
-              isRTL ? 'استخدم الفواصل العمودية لتقسيم عناصر التنقل أو شريط الأدوات' : 'Use vertical separators to divide inline navigation or toolbar items',
-              isRTL ? 'اضبط الارتفاع/السماكة باستخدام className للتسلسل الهرمي المرئي' : 'Adjust height/thickness with className for visual hierarchy',
-            ]}
-            donts={[
-              isRTL ? 'لا تفرط في استخدام الفواصل - يمكن أن تجعل المحتوى يبدو مزدحماً' : "Don't overuse separators - they can make content feel cluttered",
-              isRTL ? 'لا تستخدم الفواصل حيث تكفي العناوين أو المسافات وحدها' : "Don't use separators where headings or spacing alone would suffice",
-              isRTL ? 'لا تعتمد فقط على الفواصل للإشارة إلى العلاقات - استخدم تسلسل العناوين الصحيح' : "Don't rely solely on separators to indicate relationships - use proper heading hierarchy",
-            ]}
+            dos={t.separatorComponent.bestPractices.doList}
+            donts={t.separatorComponent.bestPractices.dontList}
           />
         </section>
 
