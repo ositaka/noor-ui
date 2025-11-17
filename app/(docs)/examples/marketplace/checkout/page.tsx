@@ -101,7 +101,7 @@ export default function CheckoutPage() {
                 </div>
                 <div className="space-y-2">
                   <h1 className="text-3xl font-bold">
-                    {isRTL ? 'تم تأكيد طلبك!' : 'Order Confirmed!'}
+                    {t.marketplaceCheckout.orderConfirmed}
                   </h1>
                   <p className="text-muted-foreground text-lg">
                     {isRTL
@@ -115,14 +115,14 @@ export default function CheckoutPage() {
                     <div className="grid gap-4 text-sm">
                       <div className="flex items-center justify-between">
                         <span className="text-muted-foreground">
-                          {isRTL ? 'رقم الطلب' : 'Order Number'}
+                          {t.marketplaceCheckout.orderNumber}
                         </span>
                         <span className="font-mono font-semibold">#ORD-2024-001234</span>
                       </div>
                       <Separator />
                       <div className="flex items-center justify-between">
                         <span className="text-muted-foreground">
-                          {isRTL ? 'المبلغ الإجمالي' : 'Total Amount'}
+                          {t.marketplaceCheckout.totalAmount}
                         </span>
                         <span className="font-bold text-lg">
                           {formatSAR(total, { useArabicNumerals: isRTL, locale: isRTL ? 'ar' : 'en' })}
@@ -131,10 +131,10 @@ export default function CheckoutPage() {
                       <Separator />
                       <div className="flex items-center justify-between">
                         <span className="text-muted-foreground">
-                          {isRTL ? 'الوقت المتوقع للتوصيل' : 'Estimated Delivery'}
+                          {t.marketplaceCheckout.estimatedDelivery}
                         </span>
                         <span className="font-medium">
-                          {isRTL ? '٣-٥ أيام عمل' : '3-5 business days'}
+                          {t.marketplaceCheckout.estimatedDeliveryDays}
                         </span>
                       </div>
                     </div>
@@ -144,12 +144,12 @@ export default function CheckoutPage() {
                 <div className="flex gap-3 pt-4">
                   <Button variant="outline" asChild>
                     <Link href="/examples/marketplace">
-                      {isRTL ? 'متابعة التسوق' : 'Continue Shopping'}
+                      {t.marketplaceCheckout.continueShopping}
                     </Link>
                   </Button>
                   <Button asChild>
                     <Link href="/examples/marketplace/orders">
-                      {isRTL ? 'عرض الطلبات' : 'View Orders'}
+                      {t.marketplaceCheckout.viewOrders}
                     </Link>
                   </Button>
                 </div>
@@ -169,30 +169,30 @@ export default function CheckoutPage() {
           <ol className="flex items-center gap-2 text-sm text-muted-foreground">
             <li>
               <Link href="/" className="hover:text-foreground transition-colors">
-                {isRTL ? 'الرئيسية' : 'Home'}
+                {t.marketplaceCheckout.breadcrumb.home}
               </Link>
             </li>
             <li>/</li>
             <li>
               <Link href="/examples" className="hover:text-foreground transition-colors">
-                {isRTL ? 'الأمثلة' : 'Examples'}
+                {t.marketplaceCheckout.breadcrumb.examples}
               </Link>
             </li>
             <li>/</li>
             <li>
               <Link href="/examples/marketplace" className="hover:text-foreground transition-colors">
-                {isRTL ? 'السوق' : 'Marketplace'}
+                {t.marketplaceCheckout.breadcrumb.marketplace}
               </Link>
             </li>
             <li>/</li>
             <li>
               <Link href="/examples/marketplace/cart" className="hover:text-foreground transition-colors">
-                {isRTL ? 'سلة التسوق' : 'Cart'}
+                {t.marketplaceCheckout.breadcrumb.cart}
               </Link>
             </li>
             <li>/</li>
             <li className="text-foreground font-medium">
-              {isRTL ? 'إتمام الطلب' : 'Checkout'}
+              {t.marketplaceCheckout.pageTitle}
             </li>
           </ol>
         </nav>
@@ -200,7 +200,7 @@ export default function CheckoutPage() {
         {/* Page Header */}
         <div className="mb-8">
           <h1 className="text-4xl font-bold tracking-tight mb-2">
-            {isRTL ? 'إتمام الطلب' : 'Checkout'}
+            {t.marketplaceCheckout.pageTitle}
           </h1>
           <p className="text-muted-foreground">
             {isRTL
@@ -216,15 +216,15 @@ export default function CheckoutPage() {
               <TabsList className="grid w-full grid-cols-3">
                 <TabsTrigger value="shipping">
                   <MapPin className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
-                  {isRTL ? 'الشحن' : 'Shipping'}
+                  {t.marketplaceCheckout.steps.shipping}
                 </TabsTrigger>
                 <TabsTrigger value="payment">
                   <CreditCard className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
-                  {isRTL ? 'الدفع' : 'Payment'}
+                  {t.marketplaceCheckout.steps.payment}
                 </TabsTrigger>
                 <TabsTrigger value="review">
                   <Package className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
-                  {isRTL ? 'المراجعة' : 'Review'}
+                  {t.marketplaceCheckout.steps.review}
                 </TabsTrigger>
               </TabsList>
 
@@ -232,7 +232,7 @@ export default function CheckoutPage() {
               <TabsContent value="shipping" className="mt-6">
                 <Card>
                   <CardHeader>
-                    <CardTitle>{isRTL ? 'عنوان الشحن' : 'Shipping Address'}</CardTitle>
+                    <CardTitle>{t.marketplaceCheckout.shippingAddress}</CardTitle>
                     <CardDescription>
                       {isRTL
                         ? 'أدخل عنوانك الكامل لتوصيل الطلب'
@@ -243,7 +243,7 @@ export default function CheckoutPage() {
                     <div className="grid gap-4 md:grid-cols-2">
                       <div className="space-y-2">
                         <Label htmlFor="fullName">
-                          {isRTL ? 'الاسم الكامل' : 'Full Name'}
+                          {t.marketplaceCheckout.fullName}
                         </Label>
                         <Input
                           id="fullName"
@@ -251,13 +251,13 @@ export default function CheckoutPage() {
                           onChange={(e) =>
                             setShippingForm({ ...shippingForm, fullName: e.target.value })
                           }
-                          placeholder={isRTL ? 'أدخل اسمك الكامل' : 'Enter your full name'}
+                          placeholder={t.marketplaceCheckout.fullNamePlaceholder}
                         />
                       </div>
 
                       <div className="space-y-2">
                         <Label htmlFor="phone">
-                          {isRTL ? 'رقم الهاتف' : 'Phone Number'}
+                          {t.marketplaceCheckout.phoneNumber}
                         </Label>
                         <Input
                           id="phone"
@@ -265,14 +265,14 @@ export default function CheckoutPage() {
                           onChange={(e) =>
                             setShippingForm({ ...shippingForm, phone: e.target.value })
                           }
-                          placeholder={isRTL ? '+٩٦٦ ٥٠ ١٢٣ ٤٥٦٧' : '+966 50 123 4567'}
+                          placeholder={t.marketplaceCheckout.phonePlaceholder}
                         />
                       </div>
                     </div>
 
                     <div className="space-y-2">
                       <Label htmlFor="email">
-                        {isRTL ? 'البريد الإلكتروني' : 'Email'}
+                        {t.marketplaceCheckout.email}
                       </Label>
                       <Input
                         id="email"
@@ -281,13 +281,13 @@ export default function CheckoutPage() {
                         onChange={(e) =>
                           setShippingForm({ ...shippingForm, email: e.target.value })
                         }
-                        placeholder={isRTL ? 'email@example.com' : 'email@example.com'}
+                        placeholder={t.marketplaceCheckout.emailPlaceholder}
                       />
                     </div>
 
                     <div className="space-y-2">
                       <Label htmlFor="address">
-                        {isRTL ? 'العنوان' : 'Address'}
+                        {t.marketplaceCheckout.address}
                       </Label>
                       <Textarea
                         id="address"
@@ -307,7 +307,7 @@ export default function CheckoutPage() {
                     <div className="grid gap-4 md:grid-cols-3">
                       <div className="space-y-2">
                         <Label htmlFor="city">
-                          {isRTL ? 'المدينة' : 'City'}
+                          {t.marketplaceCheckout.city}
                         </Label>
                         <Input
                           id="city"
@@ -315,13 +315,13 @@ export default function CheckoutPage() {
                           onChange={(e) =>
                             setShippingForm({ ...shippingForm, city: e.target.value })
                           }
-                          placeholder={isRTL ? 'الرياض' : 'Riyadh'}
+                          placeholder={t.marketplaceCheckout.cityExample}
                         />
                       </div>
 
                       <div className="space-y-2">
                         <Label htmlFor="district">
-                          {isRTL ? 'الحي' : 'District'}
+                          {t.marketplaceCheckout.district}
                         </Label>
                         <Input
                           id="district"
@@ -329,13 +329,13 @@ export default function CheckoutPage() {
                           onChange={(e) =>
                             setShippingForm({ ...shippingForm, district: e.target.value })
                           }
-                          placeholder={isRTL ? 'العليا' : 'Al Olaya'}
+                          placeholder={t.marketplaceCheckout.districtExample}
                         />
                       </div>
 
                       <div className="space-y-2">
                         <Label htmlFor="postalCode">
-                          {isRTL ? 'الرمز البريدي' : 'Postal Code'}
+                          {t.marketplaceCheckout.postalCode}
                         </Label>
                         <Input
                           id="postalCode"
@@ -343,14 +343,14 @@ export default function CheckoutPage() {
                           onChange={(e) =>
                             setShippingForm({ ...shippingForm, postalCode: e.target.value })
                           }
-                          placeholder={isRTL ? '١٢٣٤٥' : '12345'}
+                          placeholder={t.marketplaceCheckout.postalCodeExample}
                         />
                       </div>
                     </div>
 
                     <div className="space-y-2">
                       <Label htmlFor="notes">
-                        {isRTL ? 'ملاحظات التوصيل (اختياري)' : 'Delivery Notes (Optional)'}
+                        {t.marketplaceCheckout.deliveryNotes}
                       </Label>
                       <Textarea
                         id="notes"
@@ -390,7 +390,7 @@ export default function CheckoutPage() {
               <TabsContent value="payment" className="mt-6">
                 <Card>
                   <CardHeader>
-                    <CardTitle>{isRTL ? 'طريقة الدفع' : 'Payment Method'}</CardTitle>
+                    <CardTitle>{t.marketplaceCheckout.paymentMethod}</CardTitle>
                     <CardDescription>
                       {isRTL
                         ? 'اختر طريقة الدفع المفضلة لديك'
@@ -411,7 +411,7 @@ export default function CheckoutPage() {
                           </div>
                           <div>
                             <div className="font-medium">
-                              {isRTL ? 'بطاقة ائتمان/خصم' : 'Credit/Debit Card'}
+                              {t.marketplaceCheckout.creditDebitCard}
                             </div>
                             <div className="text-sm text-muted-foreground">
                               {isRTL
@@ -434,7 +434,7 @@ export default function CheckoutPage() {
                           </div>
                           <div>
                             <div className="font-medium">
-                              {isRTL ? 'الدفع عند الاستلام' : 'Cash on Delivery'}
+                              {t.marketplaceCheckout.cashOnDelivery}
                             </div>
                             <div className="text-sm text-muted-foreground">
                               {isRTL
@@ -457,7 +457,7 @@ export default function CheckoutPage() {
                           </div>
                           <div>
                             <div className="font-medium">
-                              {isRTL ? 'تحويل بنكي' : 'Bank Transfer'}
+                              {t.marketplaceCheckout.bankTransfer}
                             </div>
                             <div className="text-sm text-muted-foreground">
                               {isRTL
@@ -474,19 +474,19 @@ export default function CheckoutPage() {
                         <CardContent className="p-4 space-y-4">
                           <div className="space-y-2">
                             <Label htmlFor="cardNumber">
-                              {isRTL ? 'رقم البطاقة' : 'Card Number'}
+                              {t.marketplaceCheckout.cardNumber}
                             </Label>
                             <Input
                               id="cardNumber"
-                              placeholder={isRTL ? '١٢٣٤ ٥٦٧٨ ٩٠١٢ ٣٤٥٦' : '1234 5678 9012 3456'}
+                              placeholder={t.marketplaceCheckout.cardNumberExample}
                             />
                           </div>
                           <div className="grid gap-4 md:grid-cols-3">
                             <div className="space-y-2 md:col-span-2">
                               <Label htmlFor="expiry">
-                                {isRTL ? 'تاريخ الانتهاء' : 'Expiry Date'}
+                                {t.marketplaceCheckout.expiryDate}
                               </Label>
-                              <Input id="expiry" placeholder={isRTL ? 'MM/YY' : 'MM/YY'} />
+                              <Input id="expiry" placeholder={t.marketplaceCheckout.expiryDatePlaceholder} />
                             </div>
                             <div className="space-y-2">
                               <Label htmlFor="cvv">CVV</Label>
@@ -533,7 +533,7 @@ export default function CheckoutPage() {
               <TabsContent value="review" className="mt-6">
                 <Card>
                   <CardHeader>
-                    <CardTitle>{isRTL ? 'مراجعة الطلب' : 'Review Order'}</CardTitle>
+                    <CardTitle>{t.marketplaceCheckout.reviewOrder2}</CardTitle>
                     <CardDescription>
                       {isRTL
                         ? 'تحقق من تفاصيل طلبك قبل التأكيد'
@@ -544,7 +544,7 @@ export default function CheckoutPage() {
                     {/* Shipping Details */}
                     <div>
                       <h3 className="font-semibold mb-3">
-                        {isRTL ? 'عنوان الشحن' : 'Shipping Address'}
+                        {t.marketplaceCheckout.shippingAddress}
                       </h3>
                       <Card className="bg-muted">
                         <CardContent className="p-4 space-y-1 text-sm">
@@ -564,17 +564,17 @@ export default function CheckoutPage() {
                     {/* Payment Method */}
                     <div>
                       <h3 className="font-semibold mb-3">
-                        {isRTL ? 'طريقة الدفع' : 'Payment Method'}
+                        {t.marketplaceCheckout.paymentMethod}
                       </h3>
                       <Card className="bg-muted">
                         <CardContent className="p-4">
                           <p className="text-sm">
                             {paymentMethod === 'credit-card' &&
-                              (isRTL ? 'بطاقة ائتمان/خصم' : 'Credit/Debit Card')}
+                              (t.marketplaceCheckout.creditDebitCard)}
                             {paymentMethod === 'cash' &&
-                              (isRTL ? 'الدفع عند الاستلام' : 'Cash on Delivery')}
+                              (t.marketplaceCheckout.cashOnDelivery)}
                             {paymentMethod === 'bank' &&
-                              (isRTL ? 'تحويل بنكي' : 'Bank Transfer')}
+                              (t.marketplaceCheckout.bankTransfer)}
                           </p>
                         </CardContent>
                       </Card>
@@ -583,7 +583,7 @@ export default function CheckoutPage() {
                     {/* Order Items */}
                     <div>
                       <h3 className="font-semibold mb-3">
-                        {isRTL ? 'المنتجات' : 'Order Items'}
+                        {t.marketplaceCheckout.orderItems}
                       </h3>
                       <div className="space-y-3">
                         {items.map((item) => (
@@ -597,7 +597,7 @@ export default function CheckoutPage() {
                                 {isRTL ? item.nameAr : item.name}
                               </p>
                               <p className="text-sm text-muted-foreground">
-                                {isRTL ? 'الكمية: ' : 'Qty: '}
+                                {t.marketplaceCheckout.qty}
                                 <ArabicNumber value={item.quantity} />
                               </p>
                             </div>
@@ -627,7 +627,7 @@ export default function CheckoutPage() {
                       </Button>
                       <Button onClick={handlePlaceOrder} size="lg">
                         <CheckCircle2 className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
-                        {isRTL ? 'تأكيد الطلب' : 'Place Order'}
+                        {t.marketplaceCheckout.placeOrder}
                       </Button>
                     </div>
                   </CardContent>
@@ -640,7 +640,7 @@ export default function CheckoutPage() {
           <div className="lg:col-span-1">
             <Card className="sticky top-4">
               <CardHeader>
-                <CardTitle>{isRTL ? 'ملخص الطلب' : 'Order Summary'}</CardTitle>
+                <CardTitle>{t.marketplaceCheckout.orderSummary}</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 {/* Items */}
@@ -669,19 +669,19 @@ export default function CheckoutPage() {
                 <div className="space-y-2 text-sm">
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">
-                      {isRTL ? 'المجموع الفرعي' : 'Subtotal'}
+                      {t.marketplaceCheckout.subtotal}
                     </span>
                     <span>{formatSAR(subtotal, { useArabicNumerals: isRTL, locale: isRTL ? 'ar' : 'en' })}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">
-                      {isRTL ? 'ضريبة القيمة المضافة' : 'VAT'}
+                      {t.marketplaceCheckout.vat2}
                     </span>
                     <span>{formatSAR(tax, { useArabicNumerals: isRTL, locale: isRTL ? 'ar' : 'en' })}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">
-                      {isRTL ? 'الشحن' : 'Shipping'}
+                      {t.marketplaceCheckout.steps.shipping}
                     </span>
                     <span>{formatSAR(shipping, { useArabicNumerals: isRTL, locale: isRTL ? 'ar' : 'en' })}</span>
                   </div>
@@ -690,7 +690,7 @@ export default function CheckoutPage() {
                 <Separator />
 
                 <div className="flex justify-between text-lg font-bold">
-                  <span>{isRTL ? 'الإجمالي' : 'Total'}</span>
+                  <span>{t.marketplaceCheckout.total}</span>
                   <span>{formatSAR(total, { useArabicNumerals: isRTL, locale: isRTL ? 'ar' : 'en' })}</span>
                 </div>
               </CardContent>

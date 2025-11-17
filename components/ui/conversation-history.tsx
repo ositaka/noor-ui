@@ -21,6 +21,8 @@ import {
   Share2,
   Clock,
 } from 'lucide-react'
+import { useDirection } from '@/components/providers/direction-provider'
+import { content } from '@/lib/i18n'
 
 const conversationHistoryVariants = cva(
   'flex flex-col h-full bg-background',
@@ -124,6 +126,8 @@ const ConversationHistory = React.forwardRef<HTMLDivElement, ConversationHistory
     },
     ref
   ) => {
+    const { locale } = useDirection()
+    const t = content[locale]
     const [searchQuery, setSearchQuery] = React.useState('')
 
     // Filter conversations based on search
@@ -206,7 +210,7 @@ const ConversationHistory = React.forwardRef<HTMLDivElement, ConversationHistory
               className="shrink-0"
             >
               <Plus className={cn('h-4 w-4', isRTL ? 'ms-1' : 'me-1')} />
-              {isRTL ? 'جديد' : 'New'}
+              {t.ui.components.new}
             </Button>
           </div>
 
@@ -221,7 +225,7 @@ const ConversationHistory = React.forwardRef<HTMLDivElement, ConversationHistory
               />
               <Input
                 type="search"
-                placeholder={isRTL ? 'بحث في المحادثات...' : 'Search conversations...'}
+                placeholder={t.ui.components.searchConversations}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className={cn('h-9', isRTL ? 'pe-3 ps-9' : 'ps-9 pe-3')}
@@ -239,12 +243,8 @@ const ConversationHistory = React.forwardRef<HTMLDivElement, ConversationHistory
                 <MessageSquare className="h-12 w-12 text-muted-foreground/50 mb-3" />
                 <p className="text-sm text-muted-foreground">
                   {searchQuery
-                    ? isRTL
-                      ? 'لم يتم العثور على محادثات'
-                      : 'No conversations found'
-                    : isRTL
-                    ? 'لا توجد محادثات بعد'
-                    : 'No conversations yet'}
+                    ? t.ui.components.noConversationsFound
+                    : t.ui.components.noConversationsYet}
                 </p>
                 {!searchQuery && onCreate && (
                   <Button
@@ -254,7 +254,7 @@ const ConversationHistory = React.forwardRef<HTMLDivElement, ConversationHistory
                     className="mt-4"
                   >
                     <Plus className={cn('h-4 w-4', isRTL ? 'ms-1' : 'me-1')} />
-                    {isRTL ? 'ابدأ محادثة' : 'Start a conversation'}
+                    {t.ui.components.startConversation}
                   </Button>
                 )}
               </div>
@@ -322,7 +322,7 @@ const ConversationHistory = React.forwardRef<HTMLDivElement, ConversationHistory
                                     <span>•</span>
                                     <span>
                                       {conversation.messageCount}{' '}
-                                      {isRTL ? 'رسالة' : 'messages'}
+                                      {t.ui.components.messages}
                                     </span>
                                   </>
                                 )}
@@ -347,7 +347,7 @@ const ConversationHistory = React.forwardRef<HTMLDivElement, ConversationHistory
                               >
                                 <MoreVertical className="h-4 w-4" />
                                 <span className="sr-only">
-                                  {isRTL ? 'إجراءات' : 'Actions'}
+                                  {t.ui.components.actions}
                                 </span>
                               </Button>
                             </DropdownMenuTrigger>
@@ -356,22 +356,20 @@ const ConversationHistory = React.forwardRef<HTMLDivElement, ConversationHistory
                                 <DropdownMenuItem
                                   onClick={() => {
                                     const newTitle = prompt(
-                                      isRTL
-                                        ? 'أدخل عنواناً جديداً:'
-                                        : 'Enter new title:',
+                                      t.ui.components.enterNewTitle,
                                       convTitle
                                     )
                                     if (newTitle) onRename(conversation.id, newTitle)
                                   }}
                                 >
                                   <Pencil className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
-                                  {isRTL ? 'إعادة التسمية' : 'Rename'}
+                                  {t.ui.components.rename}
                                 </DropdownMenuItem>
                               )}
                               {onShare && (
                                 <DropdownMenuItem onClick={() => onShare(conversation.id)}>
                                   <Share2 className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
-                                  {isRTL ? 'مشاركة' : 'Share'}
+                                  {t.ui.components.share}
                                 </DropdownMenuItem>
                               )}
                               {(onRename || onShare) && onDelete && <DropdownMenuSeparator />}
@@ -380,9 +378,7 @@ const ConversationHistory = React.forwardRef<HTMLDivElement, ConversationHistory
                                   onClick={() => {
                                     if (
                                       confirm(
-                                        isRTL
-                                          ? 'هل أنت متأكد من حذف هذه المحادثة؟'
-                                          : 'Are you sure you want to delete this conversation?'
+                                        t.ui.components.confirmDeleteConversation
                                       )
                                     ) {
                                       onDelete(conversation.id)
@@ -391,7 +387,7 @@ const ConversationHistory = React.forwardRef<HTMLDivElement, ConversationHistory
                                   className="text-destructive focus:text-destructive"
                                 >
                                   <Trash2 className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
-                                  {isRTL ? 'حذف' : 'Delete'}
+                                  {t.ui.components.delete}
                                 </DropdownMenuItem>
                               )}
                             </DropdownMenuContent>
@@ -410,13 +406,9 @@ const ConversationHistory = React.forwardRef<HTMLDivElement, ConversationHistory
         <div className="border-t p-3">
           <div className="text-xs text-muted-foreground text-center">
             {filteredConversations.length}{' '}
-            {isRTL
-              ? filteredConversations.length === 1
-                ? 'محادثة'
-                : 'محادثات'
-              : filteredConversations.length === 1
-              ? 'conversation'
-              : 'conversations'}
+            {filteredConversations.length === 1
+              ? t.ui.components.conversation
+              : t.ui.components.conversationsPlural}
           </div>
         </div>
       </div>

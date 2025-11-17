@@ -173,6 +173,7 @@ function generateMockOrders(): Order[] {
 export default function OrdersPage() {
   const { locale } = useDirection()
   const isRTL = locale === 'ar'
+  const t = content[locale]
 
   const [orders] = React.useState<Order[]>(generateMockOrders())
   const [searchQuery, setSearchQuery] = React.useState('')
@@ -209,32 +210,17 @@ export default function OrdersPage() {
   }
 
   const getStatusText = (status: Order['status']) => {
-    if (isRTL) {
-      switch (status) {
-        case 'pending':
-          return 'قيد الانتظار'
-        case 'processing':
-          return 'قيد المعالجة'
-        case 'shipped':
-          return 'تم الشحن'
-        case 'delivered':
-          return 'تم التسليم'
-        case 'cancelled':
-          return 'ملغي'
-      }
-    } else {
-      switch (status) {
-        case 'pending':
-          return 'Pending'
-        case 'processing':
-          return 'Processing'
-        case 'shipped':
-          return 'Shipped'
-        case 'delivered':
-          return 'Delivered'
-        case 'cancelled':
-          return 'Cancelled'
-      }
+    switch (status) {
+      case 'pending':
+        return t.marketplaceOrders.status.pending
+      case 'processing':
+        return t.marketplaceOrders.status.processing
+      case 'shipped':
+        return t.marketplaceOrders.status.shipped
+      case 'delivered':
+        return t.marketplaceOrders.status.delivered
+      case 'cancelled':
+        return t.marketplaceOrders.status.cancelled
     }
   }
 
@@ -271,19 +257,19 @@ export default function OrdersPage() {
             <ol className="flex items-center gap-2 text-sm text-muted-foreground">
               <li>
                 <Link href="/" className="hover:text-foreground transition-colors">
-                  {isRTL ? 'الرئيسية' : 'Home'}
+                  {t.marketplaceOrders.breadcrumb.home}
                 </Link>
               </li>
               <li>/</li>
               <li>
                 <Link href="/examples" className="hover:text-foreground transition-colors">
-                  {isRTL ? 'الأمثلة' : 'Examples'}
+                  {t.marketplaceOrders.breadcrumb.examples}
                 </Link>
               </li>
               <li>/</li>
               <li>
                 <Link href="/examples/marketplace" className="hover:text-foreground transition-colors">
-                  {isRTL ? 'السوق' : 'Marketplace'}
+                  {t.marketplaceOrders.breadcrumb.marketplace}
                 </Link>
               </li>
               <li>/</li>
@@ -292,7 +278,7 @@ export default function OrdersPage() {
                   onClick={() => setSelectedOrder(null)}
                   className="hover:text-foreground transition-colors"
                 >
-                  {isRTL ? 'الطلبات' : 'Orders'}
+                  {t.marketplaceOrders.breadcrumb.orders}
                 </button>
               </li>
               <li>/</li>
@@ -302,7 +288,7 @@ export default function OrdersPage() {
 
           <div className="mb-6">
             <Button variant="outline" onClick={() => setSelectedOrder(null)}>
-              {isRTL ? 'العودة إلى الطلبات' : 'Back to Orders'}
+              {t.marketplaceOrders.backToOrders}
             </Button>
           </div>
 
@@ -333,7 +319,7 @@ export default function OrdersPage() {
               {/* Order Items */}
               <Card>
                 <CardHeader>
-                  <CardTitle>{isRTL ? 'المنتجات' : 'Order Items'}</CardTitle>
+                  <CardTitle>{t.marketplaceOrders.orderItems}</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   {selectedOrder.items.map((item) => (
@@ -347,7 +333,7 @@ export default function OrdersPage() {
                           {isRTL ? item.nameAr : item.name}
                         </h4>
                         <p className="text-sm text-muted-foreground">
-                          {isRTL ? 'الكمية: ' : 'Qty: '}
+                          {t.marketplaceOrders.qty}
                           <ArabicNumber value={item.quantity} />
                         </p>
                       </div>
@@ -356,7 +342,7 @@ export default function OrdersPage() {
                           {formatSAR(item.price * item.quantity, { useArabicNumerals: isRTL, locale: isRTL ? 'ar' : 'en' })}
                         </p>
                         <p className="text-sm text-muted-foreground">
-                          {formatSAR(item.price, { useArabicNumerals: isRTL, locale: isRTL ? 'ar' : 'en' })} {isRTL ? 'للقطعة' : 'each'}
+                          {formatSAR(item.price, { useArabicNumerals: isRTL, locale: isRTL ? 'ar' : 'en' })} {t.marketplaceOrders.each}
                         </p>
                       </div>
                     </div>
@@ -368,12 +354,12 @@ export default function OrdersPage() {
               {selectedOrder.trackingNumber && (
                 <Card>
                   <CardHeader>
-                    <CardTitle>{isRTL ? 'معلومات الشحن' : 'Tracking Information'}</CardTitle>
+                    <CardTitle>{t.marketplaceOrders.trackingInfo}</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-4">
                     <div className="flex items-center justify-between">
                       <span className="text-sm text-muted-foreground">
-                        {isRTL ? 'رقم التتبع' : 'Tracking Number'}
+                        {t.marketplaceOrders.trackingNumber}
                       </span>
                       <code className="font-mono text-sm">{selectedOrder.trackingNumber}</code>
                     </div>
@@ -389,10 +375,10 @@ export default function OrdersPage() {
                         </div>
                         <div className="flex-1 pb-4">
                           <p className="font-medium">
-                            {isRTL ? 'تم التسليم' : 'Delivered'}
+                            {t.marketplaceOrders.status.delivered}
                           </p>
                           <p className="text-sm text-muted-foreground">
-                            {isRTL ? '٩ نوفمبر ٢٠٢٤، ٢:٣٠ م' : 'Nov 9, 2024, 2:30 PM'}
+                            {t.marketplaceOrders.deliveredDateTime}
                           </p>
                         </div>
                       </div>
@@ -406,10 +392,10 @@ export default function OrdersPage() {
                         </div>
                         <div className="flex-1 pb-4">
                           <p className="font-medium">
-                            {isRTL ? 'في طريق التوصيل' : 'Out for Delivery'}
+                            {t.marketplaceOrders.outForDelivery}
                           </p>
                           <p className="text-sm text-muted-foreground">
-                            {isRTL ? '٩ نوفمبر ٢٠٢٤، ٩:٠٠ ص' : 'Nov 9, 2024, 9:00 AM'}
+                            {t.marketplaceOrders.outForDeliveryDateTime}
                           </p>
                         </div>
                       </div>
@@ -423,10 +409,10 @@ export default function OrdersPage() {
                         </div>
                         <div className="flex-1 pb-4">
                           <p className="font-medium">
-                            {isRTL ? 'تم الشحن' : 'Shipped'}
+                            {t.marketplaceOrders.status.shipped}
                           </p>
                           <p className="text-sm text-muted-foreground">
-                            {isRTL ? '٨ نوفمبر ٢٠٢٤، ٣:٤٥ م' : 'Nov 8, 2024, 3:45 PM'}
+                            {t.marketplaceOrders.shippedDateTime}
                           </p>
                         </div>
                       </div>
@@ -439,7 +425,7 @@ export default function OrdersPage() {
                         </div>
                         <div className="flex-1">
                           <p className="font-medium">
-                            {isRTL ? 'تم تأكيد الطلب' : 'Order Confirmed'}
+                            {t.marketplaceOrders.orderConfirmed}
                           </p>
                           <p className="text-sm text-muted-foreground">
                             {isRTL ? selectedOrder.dateAr : selectedOrder.date}
@@ -457,29 +443,29 @@ export default function OrdersPage() {
               {/* Total */}
               <Card>
                 <CardHeader>
-                  <CardTitle>{isRTL ? 'ملخص الطلب' : 'Order Summary'}</CardTitle>
+                  <CardTitle>{t.marketplaceOrders.orderSummary}</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-3">
                   <div className="flex justify-between text-sm">
                     <span className="text-muted-foreground">
-                      {isRTL ? 'المجموع الفرعي' : 'Subtotal'}
+                      {t.marketplaceOrders.subtotal}
                     </span>
                     <span>{formatSAR(selectedOrder.total * 0.8, { useArabicNumerals: isRTL, locale: isRTL ? 'ar' : 'en' })}</span>
                   </div>
                   <div className="flex justify-between text-sm">
                     <span className="text-muted-foreground">
-                      {isRTL ? 'ضريبة القيمة المضافة' : 'VAT'}
+                      {t.marketplaceOrders.vat}
                     </span>
                     <span>{formatSAR(selectedOrder.total * 0.15, { useArabicNumerals: isRTL, locale: isRTL ? 'ar' : 'en' })}</span>
                   </div>
                   <div className="flex justify-between text-sm">
                     <span className="text-muted-foreground">
-                      {isRTL ? 'الشحن' : 'Shipping'}
+                      {t.marketplaceOrders.shipping}
                     </span>
                     <span>{formatSAR(selectedOrder.total * 0.05, { useArabicNumerals: isRTL, locale: isRTL ? 'ar' : 'en' })}</span>
                   </div>
                   <div className="border-t pt-3 flex justify-between font-bold">
-                    <span>{isRTL ? 'الإجمالي' : 'Total'}</span>
+                    <span>{t.marketplaceOrders.total}</span>
                     <span>{formatSAR(selectedOrder.total, { useArabicNumerals: isRTL, locale: isRTL ? 'ar' : 'en' })}</span>
                   </div>
                 </CardContent>
@@ -489,7 +475,7 @@ export default function OrdersPage() {
               <Card>
                 <CardHeader>
                   <CardTitle className="text-base">
-                    {isRTL ? 'عنوان الشحن' : 'Shipping Address'}
+                    {t.marketplaceOrders.shippingAddress}
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-1 text-sm">
@@ -505,12 +491,12 @@ export default function OrdersPage() {
                 <CardContent className="p-4 space-y-2">
                   <Button variant="outline" className="w-full">
                     <Download className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
-                    {isRTL ? 'تحميل الفاتورة' : 'Download Invoice'}
+                    {t.marketplaceOrders.downloadInvoice}
                   </Button>
                   {selectedOrder.status === 'delivered' && (
                     <Button variant="outline" className="w-full">
                       <RotateCcw className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
-                      {isRTL ? 'طلب إرجاع' : 'Request Return'}
+                      {t.marketplaceOrders.requestReturn}
                     </Button>
                   )}
                 </CardContent>
@@ -530,24 +516,24 @@ export default function OrdersPage() {
           <ol className="flex items-center gap-2 text-sm text-muted-foreground">
             <li>
               <Link href="/" className="hover:text-foreground transition-colors">
-                {isRTL ? 'الرئيسية' : 'Home'}
+                {t.marketplaceOrders.breadcrumb.home}
               </Link>
             </li>
             <li>/</li>
             <li>
               <Link href="/examples" className="hover:text-foreground transition-colors">
-                {isRTL ? 'الأمثلة' : 'Examples'}
+                {t.marketplaceOrders.breadcrumb.examples}
               </Link>
             </li>
             <li>/</li>
             <li>
               <Link href="/examples/marketplace" className="hover:text-foreground transition-colors">
-                {isRTL ? 'السوق' : 'Marketplace'}
+                {t.marketplaceOrders.breadcrumb.marketplace}
               </Link>
             </li>
             <li>/</li>
             <li className="text-foreground font-medium">
-              {isRTL ? 'طلباتي' : 'My Orders'}
+              {t.marketplaceOrders.breadcrumb.myOrders}
             </li>
           </ol>
         </nav>
@@ -555,7 +541,7 @@ export default function OrdersPage() {
         {/* Page Header */}
         <div className="mb-8">
           <h1 className="text-4xl font-bold tracking-tight mb-2">
-            {isRTL ? 'طلباتي' : 'My Orders'}
+            {t.marketplaceOrders.breadcrumb.myOrders}
           </h1>
           <p className="text-muted-foreground">
             {isRTL
@@ -574,7 +560,7 @@ export default function OrdersPage() {
             <Input
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder={isRTL ? 'ابحث في الطلبات...' : 'Search orders...'}
+              placeholder={t.marketplaceOrders.search}
               className={isRTL ? 'pe-10' : 'ps-10'}
             />
           </div>
@@ -584,19 +570,19 @@ export default function OrdersPage() {
         <Tabs defaultValue="all">
           <TabsList className="grid w-full grid-cols-5 max-w-3xl">
             <TabsTrigger value="all">
-              {isRTL ? 'الكل' : 'All'}
+              {t.marketplaceOrders.tabs.all}
             </TabsTrigger>
             <TabsTrigger value="processing">
-              {isRTL ? 'قيد المعالجة' : 'Processing'}
+              {t.marketplaceOrders.tabs.processing}
             </TabsTrigger>
             <TabsTrigger value="shipped">
-              {isRTL ? 'تم الشحن' : 'Shipped'}
+              {t.marketplaceOrders.status.shipped}
             </TabsTrigger>
             <TabsTrigger value="delivered">
-              {isRTL ? 'تم التسليم' : 'Delivered'}
+              {t.marketplaceOrders.status.delivered}
             </TabsTrigger>
             <TabsTrigger value="cancelled">
-              {isRTL ? 'ملغي' : 'Cancelled'}
+              {t.marketplaceOrders.tabs.cancelled}
             </TabsTrigger>
           </TabsList>
 
@@ -633,7 +619,7 @@ export default function OrdersPage() {
                       <div className="flex items-center justify-between pt-4 border-t">
                         <div className="text-sm">
                           <span className="text-muted-foreground">
-                            {isRTL ? 'الإجمالي: ' : 'Total: '}
+                            {t.marketplaceOrders.total}: 
                           </span>
                           <span className="font-bold text-lg">
                             {formatSAR(order.total, { useArabicNumerals: isRTL, locale: isRTL ? 'ar' : 'en' })}
@@ -644,7 +630,7 @@ export default function OrdersPage() {
                           onClick={() => setSelectedOrder(order)}
                         >
                           <Eye className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
-                          {isRTL ? 'عرض التفاصيل' : 'View Details'}
+                          {t.marketplaceOrders.viewDetails}
                         </Button>
                       </div>
                     </CardContent>
@@ -676,7 +662,7 @@ export default function OrdersPage() {
                       <div className="flex items-center justify-between pt-4 border-t">
                         <div className="text-sm">
                           <span className="text-muted-foreground">
-                            {isRTL ? 'الإجمالي: ' : 'Total: '}
+                            {t.marketplaceOrders.total}: 
                           </span>
                           <span className="font-bold text-lg">
                             {formatSAR(order.total, { useArabicNumerals: isRTL, locale: isRTL ? 'ar' : 'en' })}
@@ -687,7 +673,7 @@ export default function OrdersPage() {
                           onClick={() => setSelectedOrder(order)}
                         >
                           <Eye className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
-                          {isRTL ? 'عرض التفاصيل' : 'View Details'}
+                          {t.marketplaceOrders.viewDetails}
                         </Button>
                       </div>
                     </CardContent>
@@ -719,7 +705,7 @@ export default function OrdersPage() {
                       <div className="flex items-center justify-between pt-4 border-t">
                         <div className="text-sm">
                           <span className="text-muted-foreground">
-                            {isRTL ? 'الإجمالي: ' : 'Total: '}
+                            {t.marketplaceOrders.total}: 
                           </span>
                           <span className="font-bold text-lg">
                             {formatSAR(order.total, { useArabicNumerals: isRTL, locale: isRTL ? 'ar' : 'en' })}
@@ -730,7 +716,7 @@ export default function OrdersPage() {
                           onClick={() => setSelectedOrder(order)}
                         >
                           <Eye className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
-                          {isRTL ? 'عرض التفاصيل' : 'View Details'}
+                          {t.marketplaceOrders.viewDetails}
                         </Button>
                       </div>
                     </CardContent>
@@ -762,7 +748,7 @@ export default function OrdersPage() {
                       <div className="flex items-center justify-between pt-4 border-t">
                         <div className="text-sm">
                           <span className="text-muted-foreground">
-                            {isRTL ? 'الإجمالي: ' : 'Total: '}
+                            {t.marketplaceOrders.total}: 
                           </span>
                           <span className="font-bold text-lg">
                             {formatSAR(order.total, { useArabicNumerals: isRTL, locale: isRTL ? 'ar' : 'en' })}
@@ -773,7 +759,7 @@ export default function OrdersPage() {
                           onClick={() => setSelectedOrder(order)}
                         >
                           <Eye className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
-                          {isRTL ? 'عرض التفاصيل' : 'View Details'}
+                          {t.marketplaceOrders.viewDetails}
                         </Button>
                       </div>
                     </CardContent>
@@ -805,7 +791,7 @@ export default function OrdersPage() {
                       <div className="flex items-center justify-between pt-4 border-t">
                         <div className="text-sm">
                           <span className="text-muted-foreground">
-                            {isRTL ? 'الإجمالي: ' : 'Total: '}
+                            {t.marketplaceOrders.total}: 
                           </span>
                           <span className="font-bold text-lg">
                             {formatSAR(order.total, { useArabicNumerals: isRTL, locale: isRTL ? 'ar' : 'en' })}
@@ -816,7 +802,7 @@ export default function OrdersPage() {
                           onClick={() => setSelectedOrder(order)}
                         >
                           <Eye className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
-                          {isRTL ? 'عرض التفاصيل' : 'View Details'}
+                          {t.marketplaceOrders.viewDetails}
                         </Button>
                       </div>
                     </CardContent>

@@ -50,7 +50,8 @@ const STEP_LABELS = {
 
 export default function RegistrationPage() {
   const { locale } = useDirection()
-  const t = content[locale]
+  const t = content[locale].registrationPage
+  const tCommon = content[locale]
   const [currentStep, setCurrentStep] = React.useState<Step>('personal')
   const [isRTL, setIsRTL] = React.useState(false)
   const [formData, setFormData] = React.useState({
@@ -141,18 +142,18 @@ export default function RegistrationPage() {
           <ol className="flex items-center gap-2 text-sm text-muted-foreground">
             <li>
               <Link href="/" className="hover:text-foreground transition-colors">
-                {isRTL ? 'الرئيسية' : 'Home'}
+                {tCommon.nav.home}
               </Link>
             </li>
             <li>/</li>
             <li>
               <Link href="/examples" className="hover:text-foreground transition-colors">
-                {isRTL ? 'الأمثلة' : 'Examples'}
+                {tCommon.nav.examples}
               </Link>
             </li>
             <li>/</li>
             <li className="text-foreground font-medium">
-              {isRTL ? 'نموذج التسجيل' : 'Registration Form'}
+              {t.breadcrumb.registration}
             </li>
           </ol>
         </nav>

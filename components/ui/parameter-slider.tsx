@@ -11,6 +11,8 @@ import {
   TooltipTrigger,
 } from '@/components/ui/tooltip'
 import { Info } from 'lucide-react'
+import { useDirection } from '@/components/providers/direction-provider'
+import { content } from '@/lib/i18n'
 
 export interface ParameterPreset {
   label: string
@@ -99,6 +101,8 @@ const ParameterSlider = React.forwardRef<HTMLDivElement, ParameterSliderProps>(
     },
     ref
   ) => {
+    const { locale } = useDirection()
+    const t = content[locale]
     const displayLabel = isRTL ? (labelAr || label) : label
     const displayDescription = isRTL ? (descriptionAr || description) : description
 
@@ -128,7 +132,7 @@ const ParameterSlider = React.forwardRef<HTMLDivElement, ParameterSliderProps>(
                     >
                       <Info className="h-3 w-3 text-muted-foreground" />
                       <span className="sr-only">
-                        {isRTL ? 'معلومات' : 'Information'}
+                        {t.ui.components.information}
                       </span>
                     </Button>
                   </TooltipTrigger>
@@ -166,7 +170,7 @@ const ParameterSlider = React.forwardRef<HTMLDivElement, ParameterSliderProps>(
         {presets && presets.length > 0 && (
           <div className="flex items-center gap-2 pt-1">
             <span className="text-xs text-muted-foreground shrink-0">
-              {isRTL ? 'إعدادات مسبقة:' : 'Presets:'}
+              {t.ui.components.presets}
             </span>
             <div className="flex flex-wrap gap-1">
               {presets.map((preset, index) => (

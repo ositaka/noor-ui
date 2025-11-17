@@ -4,6 +4,8 @@ import { cn } from '@/lib/utils'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { Copy, RotateCw, User, Bot, Settings } from 'lucide-react'
+import { useDirection } from '@/components/providers/direction-provider'
+import { content as i18nContent } from '@/lib/i18n'
 
 const chatMessageVariants = cva(
   'group relative flex gap-3 rounded-lg p-4 transition-colors',
@@ -97,6 +99,8 @@ const ChatMessage = React.forwardRef<HTMLDivElement, ChatMessageProps>(
     },
     ref
   ) => {
+    const { locale } = useDirection()
+    const t = i18nContent[locale]
     const [copied, setCopied] = React.useState(false)
 
     const handleCopy = () => {
@@ -118,24 +122,13 @@ const ChatMessage = React.forwardRef<HTMLDivElement, ChatMessageProps>(
     }
 
     const getDefaultName = () => {
-      if (isRTL) {
-        switch (role) {
-          case 'user':
-            return 'أنت'
-          case 'assistant':
-            return 'المساعد'
-          case 'system':
-            return 'النظام'
-        }
-      } else {
-        switch (role) {
-          case 'user':
-            return 'You'
-          case 'assistant':
-            return 'Assistant'
-          case 'system':
-            return 'System'
-        }
+      switch (role) {
+        case 'user':
+          return t.ui.components.you
+        case 'assistant':
+          return t.ui.components.assistant
+        case 'system':
+          return t.ui.components.system
       }
     }
 
@@ -201,13 +194,7 @@ const ChatMessage = React.forwardRef<HTMLDivElement, ChatMessageProps>(
                   className="h-7 text-xs"
                 >
                   <Copy className={cn('h-3 w-3', isRTL ? 'ms-1' : 'me-1')} />
-                  {copied
-                    ? isRTL
-                      ? 'تم النسخ'
-                      : 'Copied'
-                    : isRTL
-                    ? 'نسخ'
-                    : 'Copy'}
+                  {copied ? t.ui.components.copied : t.ui.components.copy}
                 </Button>
               )}
               {showRegenerate && role === 'assistant' && (
@@ -218,7 +205,7 @@ const ChatMessage = React.forwardRef<HTMLDivElement, ChatMessageProps>(
                   className="h-7 text-xs"
                 >
                   <RotateCw className={cn('h-3 w-3', isRTL ? 'ms-1' : 'me-1')} />
-                  {isRTL ? 'إعادة' : 'Regenerate'}
+                  {t.ui.components.regenerate}
                 </Button>
               )}
             </div>
@@ -227,7 +214,7 @@ const ChatMessage = React.forwardRef<HTMLDivElement, ChatMessageProps>(
           {/* Error State */}
           {state === 'error' && (
             <div className="mt-2 text-xs text-destructive">
-              {isRTL ? 'حدث خطأ أثناء إنشاء الرد' : 'An error occurred while generating the response'}
+              {t.ui.components.errorGeneratingResponse}
             </div>
           )}
         </div>

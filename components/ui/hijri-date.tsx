@@ -3,6 +3,8 @@ import { cva, type VariantProps } from 'class-variance-authority'
 import { cn } from '@/lib/utils'
 import { Calendar, Sparkles } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
+import { useDirection } from '@/components/providers/direction-provider'
+import { content } from '@/lib/i18n'
 
 // ============================================================================
 // Islamic Holidays Database
@@ -103,7 +105,9 @@ export const HijriDate = React.forwardRef<HTMLDivElement, HijriDateProps>(
     },
     ref
   ) => {
-    const isRTL = typeof document !== 'undefined' && document.documentElement.dir === 'rtl'
+    const { locale } = useDirection()
+    const t = content[locale]
+    const isRTL = locale === 'ar'
     const displayGregorian = isRTL && gregorianDateAr ? gregorianDateAr : gregorianDate
     const displayHijri = isRTL ? hijriDateAr : hijriDate
 
@@ -144,7 +148,7 @@ export const HijriDate = React.forwardRef<HTMLDivElement, HijriDateProps>(
                 )}
                 suppressHydrationWarning
               >
-                {isRTL ? 'ميلادي' : 'Gregorian'}
+                {t.ui.components.gregorianLabel}
               </span>
             )}
             <span
@@ -177,7 +181,7 @@ export const HijriDate = React.forwardRef<HTMLDivElement, HijriDateProps>(
                 )}
                 suppressHydrationWarning
               >
-                {isRTL ? 'هجري' : 'Hijri'}
+                {t.ui.components.hijriLabel}
               </span>
             )}
             <span

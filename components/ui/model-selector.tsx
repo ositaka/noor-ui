@@ -11,6 +11,8 @@ import {
 } from '@/components/ui/select'
 import { Badge } from '@/components/ui/badge'
 import { Zap, Brain, Sparkles, Bot, Star } from 'lucide-react'
+import { useDirection } from '@/components/providers/direction-provider'
+import { content } from '@/lib/i18n'
 
 export interface AIModel {
   id: string
@@ -76,6 +78,8 @@ const ModelSelector = React.forwardRef<HTMLButtonElement, ModelSelectorProps>(
     },
     ref
   ) => {
+    const { locale } = useDirection()
+    const t = content[locale]
     const getIcon = (iconType?: string) => {
       switch (iconType) {
         case 'zap':
@@ -112,24 +116,13 @@ const ModelSelector = React.forwardRef<HTMLButtonElement, ModelSelectorProps>(
         return model.specs.speedLabel
       }
       // Default labels
-      if (isRTL) {
-        switch (model.specs.speed) {
-          case 'fast':
-            return 'سريع'
-          case 'medium':
-            return 'متوسط'
-          case 'slow':
-            return 'بطيء'
-        }
-      } else {
-        switch (model.specs.speed) {
-          case 'fast':
-            return 'Fast'
-          case 'medium':
-            return 'Medium'
-          case 'slow':
-            return 'Slow'
-        }
+      switch (model.specs.speed) {
+        case 'fast':
+          return t.ui.components.fast
+        case 'medium':
+          return t.ui.components.medium
+        case 'slow':
+          return t.ui.components.slow
       }
     }
 
@@ -140,7 +133,7 @@ const ModelSelector = React.forwardRef<HTMLButtonElement, ModelSelectorProps>(
       return length.toString()
     }
 
-    const defaultPlaceholder = isRTL ? 'اختر نموذج' : 'Select model'
+    const defaultPlaceholder = t.ui.components.selectModel
 
     // Group models by provider
     const groupedModels = models.reduce((acc, model) => {
@@ -175,7 +168,7 @@ const ModelSelector = React.forwardRef<HTMLButtonElement, ModelSelectorProps>(
                         {model.recommended && (
                           <Badge variant="secondary" className="text-xs">
                             <Star className={cn('h-2.5 w-2.5 fill-current', isRTL ? 'ms-1' : 'me-1')} />
-                            {isRTL ? 'مُوصى' : 'Recommended'}
+                            {t.ui.components.recommended}
                           </Badge>
                         )}
                       </div>
@@ -184,7 +177,7 @@ const ModelSelector = React.forwardRef<HTMLButtonElement, ModelSelectorProps>(
                           {getSpeedLabel(model)}
                         </span>
                         <span>•</span>
-                        <span>{formatContextLength(model.specs.contextLength)} {isRTL ? 'رمز' : 'tokens'}</span>
+                        <span>{formatContextLength(model.specs.contextLength)} {t.ui.components.tokens}</span>
                         {model.specs.pricing && (
                           <>
                             <span>•</span>

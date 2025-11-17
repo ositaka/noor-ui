@@ -48,7 +48,8 @@ const defaultFormatTime = (
   let period = ''
 
   if (format === '12h') {
-    period = hours >= 12 ? (locale === 'ar' ? 'م' : 'PM') : locale === 'ar' ? 'ص' : 'AM'
+    const t = content[locale]
+    period = hours >= 12 ? t.ui.components.pm : t.ui.components.am
     hours = hours % 12 || 12
   }
 
@@ -344,7 +345,7 @@ export function TimeRangePicker({
             }}
             className="w-full"
           >
-            {isRTL ? 'مسح' : 'Clear'}
+            {t.ui.components.clear}
           </Button>
         </div>
       </PopoverContent>

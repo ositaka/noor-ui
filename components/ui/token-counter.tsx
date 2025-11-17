@@ -10,6 +10,8 @@ import {
   TooltipTrigger,
 } from '@/components/ui/tooltip'
 import { Info, AlertTriangle } from 'lucide-react'
+import { useDirection } from '@/components/providers/direction-provider'
+import { content } from '@/lib/i18n'
 
 const tokenCounterVariants = cva(
   'rounded-lg border p-4 space-y-3',
@@ -106,6 +108,8 @@ const TokenCounter = React.forwardRef<HTMLDivElement, TokenCounterProps>(
     },
     ref
   ) => {
+    const { locale } = useDirection()
+    const t = content[locale]
     const totalTokens = inputTokens + outputTokens
     const percentage = maxTokens ? (totalTokens / maxTokens) * 100 : 0
 
@@ -139,7 +143,7 @@ const TokenCounter = React.forwardRef<HTMLDivElement, TokenCounterProps>(
       return 'bg-primary'
     }
 
-    const displayLabel = isRTL ? (labelAr || label || 'استخدام الرموز') : (label || 'Token Usage')
+    const displayLabel = isRTL ? (labelAr || label || t.ui.components.tokenUsage) : (label || t.ui.components.tokenUsage)
 
     return (
       <div
@@ -159,14 +163,12 @@ const TokenCounter = React.forwardRef<HTMLDivElement, TokenCounterProps>(
                     className="inline-flex items-center justify-center"
                   >
                     <Info className="h-3 w-3 text-muted-foreground" />
-                    <span className="sr-only">{isRTL ? 'معلومات' : 'Information'}</span>
+                    <span className="sr-only">{t.ui.components.information}</span>
                   </button>
                 </TooltipTrigger>
                 <TooltipContent>
                   <p className="max-w-xs text-xs">
-                    {isRTL
-                      ? 'الرموز هي وحدات النص التي يعالجها النموذج. كلمة واحدة عادة ما تساوي 1-2 رمز.'
-                      : 'Tokens are units of text processed by the model. One word typically equals 1-2 tokens.'}
+                    {t.ui.components.informationTooltip}
                   </p>
                 </TooltipContent>
               </Tooltip>
@@ -176,13 +178,7 @@ const TokenCounter = React.forwardRef<HTMLDivElement, TokenCounterProps>(
           {status !== 'safe' && (
             <Badge variant={status === 'danger' ? 'destructive' : 'secondary'} className="text-xs">
               <AlertTriangle className={cn('h-3 w-3', isRTL ? 'ms-1' : 'me-1')} />
-              {isRTL
-                ? status === 'danger'
-                  ? 'قريب من الحد'
-                  : 'تحذير'
-                : status === 'danger'
-                ? 'Near Limit'
-                : 'Warning'}
+              {status === 'danger' ? t.ui.components.nearLimit : t.ui.components.warning}
             </Badge>
           )}
         </div>
@@ -193,7 +189,7 @@ const TokenCounter = React.forwardRef<HTMLDivElement, TokenCounterProps>(
             <span className="text-2xl font-bold">{formatNumber(totalTokens)}</span>
             {maxTokens && (
               <span className="text-sm text-muted-foreground">
-                {isRTL ? `من ${formatNumber(maxTokens)}` : `of ${formatNumber(maxTokens)}`}
+                {t.ui.components.of} {formatNumber(maxTokens)}
               </span>
             )}
           </div>
@@ -214,13 +210,13 @@ const TokenCounter = React.forwardRef<HTMLDivElement, TokenCounterProps>(
           <div className="grid grid-cols-2 gap-3 text-xs">
             <div className="space-y-1">
               <div className="text-muted-foreground">
-                {isRTL ? 'رموز الإدخال' : 'Input Tokens'}
+                {t.ui.components.inputTokens}
               </div>
               <div className="font-medium">{formatNumber(inputTokens)}</div>
             </div>
             <div className="space-y-1">
               <div className="text-muted-foreground">
-                {isRTL ? 'رموز الإخراج' : 'Output Tokens'}
+                {t.ui.components.outputTokens}
               </div>
               <div className="font-medium">{formatNumber(outputTokens)}</div>
             </div>
@@ -232,7 +228,7 @@ const TokenCounter = React.forwardRef<HTMLDivElement, TokenCounterProps>(
           <div className="border-t pt-3 space-y-2">
             <div className="flex items-center justify-between text-xs">
               <span className="text-muted-foreground">
-                {isRTL ? 'التكلفة المقدرة' : 'Estimated Cost'}
+                {t.ui.components.estimatedCost}
               </span>
               <TooltipProvider>
                 <Tooltip>
@@ -244,11 +240,11 @@ const TokenCounter = React.forwardRef<HTMLDivElement, TokenCounterProps>(
                   <TooltipContent>
                     <div className="space-y-1 text-xs">
                       <div className="flex items-center justify-between gap-4">
-                        <span>{isRTL ? 'الإدخال:' : 'Input:'}</span>
+                        <span>{t.ui.components.input}</span>
                         <span>{formatCurrency(inputCost)}</span>
                       </div>
                       <div className="flex items-center justify-between gap-4">
-                        <span>{isRTL ? 'الإخراج:' : 'Output:'}</span>
+                        <span>{t.ui.components.output}</span>
                         <span>{formatCurrency(outputCost)}</span>
                       </div>
                     </div>
