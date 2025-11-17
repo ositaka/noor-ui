@@ -116,28 +116,30 @@ export default function Example() {
 
 export default function NotificationCenterPage() {
   const { toast } = useToast()
+  const { direction, locale } = useDirection()
+  const isRTL = direction === 'rtl'
 
   const [notifications1, setNotifications1] = React.useState<Notification[]>([
     {
       id: '1',
-      title: 'New comment on your post',
-      description: 'Sarah commented: "Great article! Very helpful."',
+      title: isRTL ? 'تعليق جديد على منشورك' : 'New comment on your post',
+      description: isRTL ? 'علقت سارة: "مقال رائع! مفيد جداً."' : 'Sarah commented: "Great article! Very helpful."',
       time: new Date(Date.now() - 5 * 60000).toISOString(),
       read: false,
       icon: <MessageSquare className="h-5 w-5" />,
     },
     {
       id: '2',
-      title: 'New follower',
-      description: 'Ahmed started following you',
+      title: isRTL ? 'متابع جديد' : 'New follower',
+      description: isRTL ? 'أحمد بدأ متابعتك' : 'Ahmed started following you',
       time: new Date(Date.now() - 120 * 60000).toISOString(),
       read: false,
       icon: <UserPlus className="h-5 w-5" />,
     },
     {
       id: '3',
-      title: 'Someone liked your post',
-      description: '5 people liked "Getting Started with React"',
+      title: isRTL ? 'شخص ما أعجب بمنشورك' : 'Someone liked your post',
+      description: isRTL ? '5 أشخاص أعجبوا بـ "البدء مع React"' : '5 people liked "Getting Started with React"',
       time: new Date(Date.now() - 1440 * 60000).toISOString(),
       read: true,
       icon: <Heart className="h-5 w-5" />,
@@ -147,8 +149,8 @@ export default function NotificationCenterPage() {
   const [notifications2, setNotifications2] = React.useState<Notification[]>([
     {
       id: '1',
-      title: 'You have a new review',
-      description: '"Excellent service!" - 5 stars',
+      title: isRTL ? 'لديك تقييم جديد' : 'You have a new review',
+      description: isRTL ? '"خدمة ممتازة!" - 5 نجوم' : '"Excellent service!" - 5 stars',
       time: new Date(Date.now() - 10 * 60000).toISOString(),
       read: false,
       icon: <Star className="h-5 w-5" />,

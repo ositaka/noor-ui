@@ -5,6 +5,8 @@ import { cn } from '@/lib/utils'
 import { Input } from '@/components/ui/input'
 import { Badge } from '@/components/ui/badge'
 import { Search } from 'lucide-react'
+import { useDirection } from '@/components/providers/direction-provider'
+import { content } from '@/lib/i18n'
 
 export interface PropDefinition {
   name: string
@@ -20,6 +22,8 @@ interface PropsTableProps {
 }
 
 export function PropsTable({ props, className }: PropsTableProps) {
+  const { locale } = useDirection()
+  const t = content[locale]
   const [search, setSearch] = React.useState('')
 
   const filteredProps = React.useMemo(() => {
@@ -41,11 +45,11 @@ export function PropsTable({ props, className }: PropsTableProps) {
         <Search className="absolute start-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
         <Input
           type="search"
-          placeholder="Search props..."
+          placeholder={t.componentPage.propsTable.searchPlaceholder}
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           className="ps-10"
-          aria-label="Search component props"
+          aria-label={t.componentPage.propsTable.searchPlaceholder}
         />
       </div>
 
@@ -54,17 +58,17 @@ export function PropsTable({ props, className }: PropsTableProps) {
         <table className="w-full text-sm">
           <thead>
             <tr className="border-b bg-muted/50">
-              <th className="px-4 py-3 text-start font-medium">Name</th>
-              <th className="px-4 py-3 text-start font-medium">Type</th>
-              <th className="px-4 py-3 text-start font-medium">Default</th>
-              <th className="px-4 py-3 text-start font-medium">Description</th>
+              <th className="px-4 py-3 text-start font-medium">{t.componentPage.propsTable.name}</th>
+              <th className="px-4 py-3 text-start font-medium">{t.componentPage.propsTable.type}</th>
+              <th className="px-4 py-3 text-start font-medium">{t.componentPage.propsTable.default}</th>
+              <th className="px-4 py-3 text-start font-medium">{t.componentPage.propsTable.description}</th>
             </tr>
           </thead>
           <tbody>
             {filteredProps.length === 0 ? (
               <tr>
                 <td colSpan={4} className="px-4 py-8 text-center text-muted-foreground">
-                  No props found matching &ldquo;{search}&rdquo;
+                  {t.componentPage.propsTable.noPropsFound} &ldquo;{search}&rdquo;
                 </td>
               </tr>
             ) : (
@@ -83,7 +87,7 @@ export function PropsTable({ props, className }: PropsTableProps) {
                           variant="destructive"
                           className="text-[10px] px-1.5 py-0"
                         >
-                          Required
+                          {t.ui.form.required}
                         </Badge>
                       )}
                     </div>

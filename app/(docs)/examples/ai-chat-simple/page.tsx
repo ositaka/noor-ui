@@ -256,7 +256,7 @@ export default function SimpleChatPage() {
         <div className="border-t bg-background">
           <div className="container max-w-4xl py-4">
             <PromptInput
-              placeholder={isRTL ? undefined : 'Ask me anything...'}
+              placeholder="Ask me anything..."
               placeholderAr="اسألني أي شيء..."
               isRTL={isRTL}
               onSend={handleSend}
