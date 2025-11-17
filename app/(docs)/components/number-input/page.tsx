@@ -205,32 +205,30 @@ export default function NumberInputPage() {
               </Link>
             </li>
             <li>/</li>
-            <li className="text-foreground font-medium">{isRTL ? 'إدخال الأرقام' : 'Number Input'}</li>
+            <li className="text-foreground font-medium">{t.numberInputComponent.title}</li>
           </ol>
         </nav>
 
         {/* Page Header */}
         <div className="mb-12">
-        <h1 className="text-4xl font-bold tracking-tight mb-4">{isRTL ? 'إدخال الأرقام' : 'Number Input'}</h1>
+        <h1 className="text-4xl font-bold tracking-tight mb-4">{t.numberInputComponent.title}</h1>
         <p className="text-xl text-muted-foreground max-w-3xl">
-          {isRTL
-            ? 'إدخال أرقام منسق مع عناصر التحكم والتحقق'
-            : 'Formatted number input with controls and validation'}
+          {t.numberInputComponent.description}
         </p>
       </div>
 
       {/* Basic Example */}
       <section className="mb-16">
         <h2 className="text-2xl font-bold tracking-tight mb-6">
-          {isRTL ? 'الاستخدام الأساسي' : 'Basic Usage'}
+          {t.numberInputComponent.usage}
         </h2>
         <ComponentShowcase code={basicCode}>
           <ComponentShowcase.Demo>
             <div className="w-full max-w-xs mx-auto space-y-2">
-              <Label>{isRTL ? 'الكمية' : 'Quantity'}</Label>
+              <Label>{t.numberInputComponent.labels.quantity}</Label>
               <NumberInput value={value1} onChange={setValue1} min={0} max={100} />
               <p className="text-sm text-muted-foreground">
-                {isRTL ? 'القيمة الحالية:' : 'Current value:'} {value1}
+                {t.numberInputComponent.descriptions.currentValue}: {value1}
               </p>
             </div>
           </ComponentShowcase.Demo>
@@ -239,7 +237,7 @@ export default function NumberInputPage() {
 
       <section className="mb-16">
         <h2 className="text-2xl font-bold tracking-tight mb-6">
-          {isRTL ? 'الكود' : 'Code'}
+          {t.numberInputComponent.code}
         </h2>
         <CodeBlock code={basicCode} language="tsx" />
       </section>
@@ -247,20 +245,20 @@ export default function NumberInputPage() {
       {/* Without Controls */}
       <section className="mb-16">
         <h2 className="text-2xl font-bold tracking-tight mb-6">
-          {isRTL ? 'بدون عناصر تحكم' : 'Without Controls'}
+          {t.numberInputComponent.examples.withoutControls}
         </h2>
         <ComponentShowcase code={withoutControlsCode}>
           <ComponentShowcase.Demo>
             <div className="w-full max-w-xs mx-auto space-y-2">
-              <Label>{isRTL ? 'المبلغ' : 'Amount'}</Label>
+              <Label>{t.numberInputComponent.labels.amount}</Label>
               <NumberInput
                 value={value2}
                 onChange={setValue2}
                 showControls={false}
-                placeholder={isRTL ? 'أدخل المبلغ' : 'Enter amount'}
+                placeholder={t.numberInputComponent.placeholders.enterAmount}
               />
               <p className="text-sm text-muted-foreground">
-                {isRTL ? 'القيمة:' : 'Value:'} {value2 ?? isRTL ? 'غير محدد' : 'undefined'}
+                {t.numberInputComponent.descriptions.value}: {value2 ?? t.numberInputComponent.descriptions.undefined}
               </p>
             </div>
           </ComponentShowcase.Demo>
@@ -270,15 +268,15 @@ export default function NumberInputPage() {
       {/* Decimal Precision */}
       <section className="mb-16">
         <h2 className="text-2xl font-bold tracking-tight mb-6">
-          {isRTL ? 'الأرقام العشرية' : 'Decimal Precision'}
+          {t.numberInputComponent.examples.decimalPrecision}
         </h2>
         <ComponentShowcase code={decimalCode}>
           <ComponentShowcase.Demo>
             <div className="w-full max-w-xs mx-auto space-y-2">
-              <Label>{isRTL ? 'النسبة المئوية' : 'Percentage'}</Label>
+              <Label>{t.numberInputComponent.labels.percentage}</Label>
               <NumberInput value={value3} onChange={setValue3} step={0.1} precision={2} min={0} max={100} />
               <p className="text-sm text-muted-foreground">
-                {isRTL ? 'القيمة:' : 'Value:'} {value3?.toFixed(2) ?? '0.00'}%
+                {t.numberInputComponent.descriptions.value}: {value3?.toFixed(2) ?? '0.00'}%
               </p>
             </div>
           </ComponentShowcase.Demo>
@@ -288,12 +286,12 @@ export default function NumberInputPage() {
       {/* Formatted Display */}
       <section className="mb-16">
         <h2 className="text-2xl font-bold tracking-tight mb-6">
-          {isRTL ? 'العرض المنسق' : 'Formatted Display'}
+          {t.numberInputComponent.examples.formattedDisplay}
         </h2>
         <ComponentShowcase code={formattedCode}>
           <ComponentShowcase.Demo>
             <div className="w-full max-w-xs mx-auto space-y-2">
-              <Label>{isRTL ? 'المبلغ' : 'Amount'}</Label>
+              <Label>{t.numberInputComponent.labels.amount}</Label>
               <NumberInput
                 value={value4}
                 onChange={setValue4}
@@ -302,7 +300,7 @@ export default function NumberInputPage() {
                 step={100}
               />
               <p className="text-sm text-muted-foreground">
-                {isRTL ? 'القيمة:' : 'Value:'} {value4?.toLocaleString(locale === 'ar' ? 'ar-SA' : 'en-US') ?? '0'}
+                {t.numberInputComponent.descriptions.value}: {value4?.toLocaleString(locale === 'ar' ? 'ar-SA' : 'en-US') ?? '0'}
               </p>
             </div>
           </ComponentShowcase.Demo>
@@ -312,12 +310,12 @@ export default function NumberInputPage() {
       {/* Currency Example */}
       <section className="mb-16">
         <h2 className="text-2xl font-bold tracking-tight mb-6">
-          {isRTL ? 'إدخال العملة' : 'Currency Input'}
+          {t.numberInputComponent.examples.currencyInput}
         </h2>
         <ComponentShowcase code={currencyCode}>
           <ComponentShowcase.Demo>
             <div className="w-full max-w-xs mx-auto space-y-2">
-              <Label>{isRTL ? 'السعر' : 'Price'}</Label>
+              <Label>{t.numberInputComponent.labels.price}</Label>
               <NumberInput
                 value={price}
                 onChange={setPrice}
@@ -327,7 +325,7 @@ export default function NumberInputPage() {
                 step={0.01}
               />
               <p className="text-sm text-muted-foreground">
-                {isRTL ? 'القيمة الخام:' : 'Raw value:'} {price}
+                {t.numberInputComponent.descriptions.rawValue}: {price}
               </p>
             </div>
           </ComponentShowcase.Demo>
@@ -337,7 +335,7 @@ export default function NumberInputPage() {
       {/* Real-World Example */}
       <section className="mb-16">
         <h2 className="text-2xl font-bold tracking-tight mb-6">
-          {isRTL ? 'مثال عملي' : 'Real-World Example'}
+          {t.numberInputComponent.examples.realWorld}
         </h2>
         <ComponentShowcase code={`const [quantity, setQuantity] = useState(1)
 const formatCurrency = (value: number) =>
@@ -368,14 +366,14 @@ const formatCurrency = (value: number) =>
           <ComponentShowcase.Demo>
             <Card className="w-full max-w-md mx-auto">
               <CardHeader>
-                <CardTitle>{isRTL ? 'طلب منتج' : 'Product Order'}</CardTitle>
+                <CardTitle>{t.numberInputComponent.realWorldExample.productOrder}</CardTitle>
                 <CardDescription>
-                  {isRTL ? 'اختر الكمية لحساب السعر الإجمالي' : 'Select quantity to calculate total'}
+                  {t.numberInputComponent.realWorldExample.selectQuantity}
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
                 <div className="space-y-2">
-                  <Label>{isRTL ? 'الكمية' : 'Quantity'}</Label>
+                  <Label>{t.numberInputComponent.labels.quantity}</Label>
                   <NumberInput
                     value={quantity}
                     onChange={setQuantity}
@@ -387,7 +385,7 @@ const formatCurrency = (value: number) =>
 
                 <div className="flex justify-between items-center pt-4 border-t">
                   <span className="text-sm text-muted-foreground">
-                    {isRTL ? 'سعر الوحدة:' : 'Unit Price:'}
+                    {t.numberInputComponent.realWorldExample.unitPrice}:
                   </span>
                   <span className="font-semibold">
                     {formatCurrency(29.99)}
@@ -396,7 +394,7 @@ const formatCurrency = (value: number) =>
 
                 <div className="flex justify-between items-center">
                   <span className="text-lg font-semibold">
-                    {isRTL ? 'الإجمالي:' : 'Total:'}
+                    {t.numberInputComponent.realWorldExample.total}:
                   </span>
                   <span className="text-2xl font-bold text-primary">
                     {formatCurrency((quantity ?? 0) * 29.99)}
@@ -413,10 +411,10 @@ const formatCurrency = (value: number) =>
         <h2 className="text-2xl font-bold">{t.componentPage.sections.useCases}</h2>
         <div className="grid gap-4 md:grid-cols-2">
           {[
-            { title: isRTL ? 'نماذج التسعير' : 'Pricing Forms', icon: '💰' },
-            { title: isRTL ? 'حاسبات الكمية' : 'Quantity Calculators', icon: '🔢' },
-            { title: isRTL ? 'عناصر التحكم في الإعدادات' : 'Settings Controls', icon: '⚙️' },
-            { title: isRTL ? 'إدخال البيانات المالية' : 'Financial Data Entry', icon: '📊' },
+            { title: t.numberInputComponent.useCases.pricingForms, icon: '💰' },
+            { title: t.numberInputComponent.useCases.quantityCalculators, icon: '🔢' },
+            { title: t.numberInputComponent.useCases.settingsControls, icon: '⚙️' },
+            { title: t.numberInputComponent.useCases.financialData, icon: '📊' },
           ].map((useCase, idx) => (
             <Card key={idx}>
               <CardHeader>
@@ -440,16 +438,16 @@ const formatCurrency = (value: number) =>
       <div className="space-y-4">
         <h2 className="text-2xl font-bold">{t.componentPage.sections.features}</h2>
         <ul className="list-disc list-inside space-y-2 text-muted-foreground">
-          <li>{isRTL ? 'أزرار الزيادة والنقصان' : 'Increment/decrement buttons'}</li>
-          <li>{isRTL ? 'دعم لوحة المفاتيح (أسهم لأعلى/لأسفل)' : 'Keyboard support (arrow up/down)'}</li>
-          <li>{isRTL ? 'التحقق من الحد الأدنى/الأقصى' : 'Min/max validation'}</li>
-          <li>{isRTL ? 'دقة الأرقام العشرية' : 'Decimal precision'}</li>
-          <li>{isRTL ? 'فواصل الآلاف القابلة للتخصيص' : 'Customizable thousands separators'}</li>
-          <li>{isRTL ? 'دالات التنسيق والتحليل المخصصة' : 'Custom format and parse functions'}</li>
-          <li>{isRTL ? 'دعم العملات والنسب المئوية' : 'Currency and percentage support'}</li>
-          <li>{isRTL ? 'وضع بدون عناصر تحكم' : 'Controls-free mode'}</li>
-          <li>{isRTL ? 'دعم RTL/LTR' : 'RTL/LTR support'}</li>
-          <li>{isRTL ? 'إمكانية الوصول الكاملة' : 'Full accessibility'}</li>
+          <li>{t.numberInputComponent.features.incrementButtons}</li>
+          <li>{t.numberInputComponent.features.keyboardSupport}</li>
+          <li>{t.numberInputComponent.features.minMaxValidation}</li>
+          <li>{t.numberInputComponent.features.decimalPrecision}</li>
+          <li>{t.numberInputComponent.features.customSeparators}</li>
+          <li>{t.numberInputComponent.features.customFunctions}</li>
+          <li>{t.numberInputComponent.features.currencySupport}</li>
+          <li>{t.numberInputComponent.features.controlsFree}</li>
+          <li>{t.numberInputComponent.features.rtlSupport}</li>
+          <li>{t.numberInputComponent.features.fullAccessibility}</li>
         </ul>
       </div>
       </main>

@@ -201,6 +201,8 @@ timePickerComponent: {
         value: 'القيمة',
         undefined: 'غير محدد',
         minutesIncrement: 'الدقائق تزيد بمقدار 15',
+        noTimeSelected: 'لم يتم اختيار وقت',
+        noRangeSelected: 'لم يتم اختيار نطاق',
       },
       realWorldExample: {
         medicalAppointment: 'حجز موعد طبي',

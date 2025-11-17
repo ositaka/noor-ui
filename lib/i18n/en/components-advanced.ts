@@ -201,6 +201,8 @@ timePickerComponent: {
         value: 'Value',
         undefined: 'undefined',
         minutesIncrement: 'Minutes increment by 15',
+        noTimeSelected: 'No time selected',
+        noRangeSelected: 'No range selected',
       },
       realWorldExample: {
         medicalAppointment: 'Medical Appointment',

@@ -195,14 +195,14 @@ export default function TimePickerPage() {
   const [timeRange2, setTimeRange2] = React.useState<TimeRange | undefined>(undefined)
 
   const formatTime = (time: Time | undefined): string => {
-    if (!time) return isRTL ? 'لم يتم اختيار وقت' : 'No time selected'
+    if (!time) return t.timePickerComponent.descriptions.noTimeSelected
     const hours = time.hours.toString().padStart(2, '0')
     const minutes = time.minutes.toString().padStart(2, '0')
     return `${hours}:${minutes}`
   }
 
   const formatTimeRange = (range: TimeRange | undefined): string => {
-    if (!range?.from) return isRTL ? 'لم يتم اختيار نطاق' : 'No range selected'
+    if (!range?.from) return t.timePickerComponent.descriptions.noRangeSelected
     if (!range.to) return formatTime(range.from)
     return `${formatTime(range.from)} - ${formatTime(range.to)}`
   }
@@ -235,29 +235,27 @@ export default function TimePickerPage() {
               </Link>
             </li>
             <li>/</li>
-            <li className="text-foreground font-medium">{isRTL ? 'منتقي الوقت' : 'Time Picker'}</li>
+            <li className="text-foreground font-medium">{t.timePickerComponent.title}</li>
           </ol>
         </nav>
 
         {/* Page Header */}
         <div className="mb-12">
-        <h1 className="text-4xl font-bold tracking-tight mb-4">{isRTL ? 'منتقي الوقت' : 'Time Picker'}</h1>
+        <h1 className="text-4xl font-bold tracking-tight mb-4">{t.timePickerComponent.title}</h1>
         <p className="text-xl text-muted-foreground max-w-3xl">
-          {isRTL
-            ? 'اختيار الوقت والنطاق بتنسيقات 12 و 24 ساعة'
-            : 'Single time and range selection with 12h/24h formats'}
+          {t.timePickerComponent.description}
         </p>
       </div>
 
       {/* Basic Example - 24h */}
       <section className="mb-16">
         <h2 className="text-2xl font-bold tracking-tight mb-6">
-          {isRTL ? 'الاستخدام الأساسي (24 ساعة)' : 'Basic Usage (24h)'}
+          {t.timePickerComponent.examples.basicUsage24h}
         </h2>
         <ComponentShowcase code={basicCode}>
           <ComponentShowcase.Demo>
             <div className="w-full max-w-xs mx-auto space-y-2">
-              <Label>{isRTL ? 'وقت البداية' : 'Start Time'}</Label>
+              <Label>{t.timePickerComponent.labels.startTime}</Label>
               <TimePicker
                 time={time1}
                 onTimeChange={(t) => t && setTime1(t)}
@@ -273,12 +271,12 @@ export default function TimePickerPage() {
       {/* 12-hour Format */}
       <section className="mb-16">
         <h2 className="text-2xl font-bold tracking-tight mb-6">
-          {isRTL ? 'تنسيق 12 ساعة' : '12-Hour Format'}
+          {t.timePickerComponent.examples.format12h}
         </h2>
         <ComponentShowcase code={format12hCode}>
           <ComponentShowcase.Demo>
             <div className="w-full max-w-xs mx-auto space-y-2">
-              <Label>{isRTL ? 'وقت الموعد' : 'Appointment Time'}</Label>
+              <Label>{t.timePickerComponent.labels.appointmentTime}</Label>
               <TimePicker
                 time={time2}
                 onTimeChange={(t) => t && setTime2(t)}
@@ -301,12 +299,12 @@ export default function TimePickerPage() {
       {/* Time Range */}
       <section className="mb-16">
         <h2 className="text-2xl font-bold tracking-tight mb-6">
-          {isRTL ? 'نطاق الوقت' : 'Time Range'}
+          {t.timePickerComponent.examples.timeRange}
         </h2>
         <ComponentShowcase code={rangeCode}>
           <ComponentShowcase.Demo>
             <div className="w-full max-w-md mx-auto space-y-2">
-              <Label>{isRTL ? 'ساعات العمل' : 'Working Hours'}</Label>
+              <Label>{t.timePickerComponent.labels.workingHours}</Label>
               <TimeRangePicker
                 timeRange={timeRange1}
                 onTimeRangeChange={setTimeRange1}
@@ -324,12 +322,12 @@ export default function TimePickerPage() {
       {/* Minute Step */}
       <section className="mb-16">
         <h2 className="text-2xl font-bold tracking-tight mb-6">
-          {isRTL ? 'فترات الدقائق' : 'Minute Intervals'}
+          {t.timePickerComponent.examples.minuteIntervals}
         </h2>
         <ComponentShowcase code={minuteStepCode}>
           <ComponentShowcase.Demo>
             <div className="w-full max-w-xs mx-auto space-y-2">
-              <Label>{isRTL ? 'الوقت' : 'Time'}</Label>
+              <Label>{t.timePickerComponent.labels.time}</Label>
               <TimePicker
                 time={time4}
                 onTimeChange={(t) => t && setTime4(t)}
@@ -338,7 +336,7 @@ export default function TimePickerPage() {
                 placeholderAr="فترات 15 دقيقة"
               />
               <p className="text-xs text-muted-foreground">
-                {isRTL ? 'الدقائق تزيد بمقدار 15' : 'Minutes increment by 15'}
+                {t.timePickerComponent.descriptions.minutesIncrement}
               </p>
             </div>
           </ComponentShowcase.Demo>
@@ -348,7 +346,7 @@ export default function TimePickerPage() {
       {/* Real-World Example */}
       <section className="mb-16">
         <h2 className="text-2xl font-bold tracking-tight mb-6">
-          {isRTL ? 'مثال عملي' : 'Real-World Example'}
+          {t.timePickerComponent.examples.realWorld}
         </h2>
         <ComponentShowcase code={`const [time, setTime] = useState<Time>()
 
@@ -377,14 +375,14 @@ export default function TimePickerPage() {
           <ComponentShowcase.Demo>
             <Card className="w-full max-w-md mx-auto">
               <CardHeader>
-                <CardTitle>{isRTL ? 'حجز موعد طبي' : 'Medical Appointment'}</CardTitle>
+                <CardTitle>{t.timePickerComponent.realWorldExample.medicalAppointment}</CardTitle>
                 <CardDescription>
-                  {isRTL ? 'اختر الوقت المفضل للموعد' : 'Select your preferred appointment time'}
+                  {t.timePickerComponent.realWorldExample.selectPreferred}
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
                 <div className="space-y-2">
-                  <Label>{isRTL ? 'الوقت المفضل' : 'Preferred Time'}</Label>
+                  <Label>{t.timePickerComponent.labels.preferredTime}</Label>
                   <TimePicker
                     time={time3}
                     onTimeChange={setTime3}
@@ -399,7 +397,7 @@ export default function TimePickerPage() {
                   <>
                     <div className="flex justify-between items-center pt-4 border-t">
                       <span className="text-sm text-muted-foreground">
-                        {isRTL ? 'الوقت المحدد:' : 'Selected Time:'}
+                        {t.timePickerComponent.realWorldExample.selectedTime}:
                       </span>
                       <span className="font-semibold">
                         {`${((time3.hours % 12) || 12).toString().padStart(2, '0')}:${time3.minutes.toString().padStart(2, '0')} ${time3.hours >= 12 ? (locale === 'ar' ? 'م' : 'PM') : locale === 'ar' ? 'ص' : 'AM'}`}
@@ -408,14 +406,14 @@ export default function TimePickerPage() {
 
                     <div className="flex justify-between items-center">
                       <span className="text-sm text-muted-foreground">
-                        {isRTL ? 'مدة الموعد:' : 'Duration:'}
+                        {t.timePickerComponent.realWorldExample.duration}:
                       </span>
-                      <span className="font-semibold">{isRTL ? '30 دقيقة' : '30 minutes'}</span>
+                      <span className="font-semibold">{t.timePickerComponent.realWorldExample.minutes30}</span>
                     </div>
 
                     <div className="flex justify-between items-center">
                       <span className="text-sm text-muted-foreground">
-                        {isRTL ? 'نهاية الموعد:' : 'End Time:'}
+                        {t.timePickerComponent.realWorldExample.endTime}:
                       </span>
                       <span className="font-semibold">
                         {(() => {
@@ -437,7 +435,7 @@ export default function TimePickerPage() {
       {/* Real-World Example - Schedule */}
       <section className="mb-16">
         <h2 className="text-2xl font-bold tracking-tight mb-6">
-          {isRTL ? 'مثال جدول العمل' : 'Work Schedule Example'}
+          {t.timePickerComponent.examples.workSchedule}
         </h2>
         <ComponentShowcase code={`const [timeRange, setTimeRange] = useState<TimeRange>()
 
@@ -465,14 +463,14 @@ export default function TimePickerPage() {
           <ComponentShowcase.Demo>
             <Card className="w-full max-w-md mx-auto">
               <CardHeader>
-                <CardTitle>{isRTL ? 'جدول العمل' : 'Work Schedule'}</CardTitle>
+                <CardTitle>{t.timePickerComponent.realWorldExample.workSchedule}</CardTitle>
                 <CardDescription>
-                  {isRTL ? 'حدد ساعات عملك اليومية' : 'Set your daily working hours'}
+                  {t.timePickerComponent.realWorldExample.setDailyHours}
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
                 <div className="space-y-2">
-                  <Label>{isRTL ? 'ساعات العمل' : 'Working Hours'}</Label>
+                  <Label>{t.timePickerComponent.labels.workingHours}</Label>
                   <TimeRangePicker
                     timeRange={timeRange2}
                     onTimeRangeChange={setTimeRange2}
@@ -486,7 +484,7 @@ export default function TimePickerPage() {
                   <>
                     <div className="flex justify-between items-center pt-4 border-t">
                       <span className="text-sm text-muted-foreground">
-                        {isRTL ? 'إجمالي الساعات:' : 'Total Hours:'}
+                        {t.timePickerComponent.realWorldExample.totalHours}:
                       </span>
                       <span className="font-semibold text-primary">
                         {calculateDuration(timeRange2)}
@@ -496,13 +494,13 @@ export default function TimePickerPage() {
                     <div className="space-y-2">
                       <div className="flex justify-between text-sm">
                         <span className="text-muted-foreground">
-                          {isRTL ? 'وقت البداية:' : 'Start:'}
+                          {t.timePickerComponent.realWorldExample.start}:
                         </span>
                         <span>{formatTime(timeRange2.from)}</span>
                       </div>
                       <div className="flex justify-between text-sm">
                         <span className="text-muted-foreground">
-                          {isRTL ? 'وقت النهاية:' : 'End:'}
+                          {t.timePickerComponent.realWorldExample.end}:
                         </span>
                         <span>{formatTime(timeRange2.to)}</span>
                       </div>
@@ -520,10 +518,10 @@ export default function TimePickerPage() {
         <h2 className="text-2xl font-bold">{t.componentPage.sections.useCases}</h2>
         <div className="grid gap-4 md:grid-cols-2">
           {[
-            { title: isRTL ? 'حجز المواعيد' : 'Appointment Booking', icon: '📅' },
-            { title: isRTL ? 'جداول العمل' : 'Work Schedules', icon: '⏰' },
-            { title: isRTL ? 'مؤقتات الأحداث' : 'Event Timers', icon: '⏱️' },
-            { title: isRTL ? 'مرشحات الوقت' : 'Time Filters', icon: '🔍' },
+            { title: t.timePickerComponent.useCases.appointmentBooking, icon: '📅' },
+            { title: t.timePickerComponent.useCases.workSchedules, icon: '⏰' },
+            { title: t.timePickerComponent.useCases.eventTimers, icon: '⏱️' },
+            { title: t.timePickerComponent.useCases.timeFilters, icon: '🔍' },
           ].map((useCase, idx) => (
             <Card key={idx}>
               <CardHeader>
@@ -559,16 +557,16 @@ export default function TimePickerPage() {
       <div className="space-y-4">
         <h2 className="text-2xl font-bold">{t.componentPage.sections.features}</h2>
         <ul className="list-disc list-inside space-y-2 text-muted-foreground">
-          <li>{isRTL ? 'تنسيقات 12 و 24 ساعة' : '12-hour and 24-hour formats'}</li>
-          <li>{isRTL ? 'مبدل AM/PM' : 'AM/PM toggle'}</li>
-          <li>{isRTL ? 'اختيار نطاق الوقت' : 'Time range selection'}</li>
-          <li>{isRTL ? 'فترات الدقائق القابلة للتخصيص' : 'Customizable minute intervals'}</li>
-          <li>{isRTL ? 'أزرار الإجراءات السريعة (الآن، مسح)' : 'Quick action buttons (Now, Clear)'}</li>
-          <li>{isRTL ? 'عناصر تحكم الأرقام المتكاملة' : 'Integrated number controls'}</li>
-          <li>{isRTL ? 'تنسيق قابل للتخصيص' : 'Customizable formatting'}</li>
-          <li>{isRTL ? 'دعم ثنائي اللغة' : 'Bilingual support'}</li>
-          <li>{isRTL ? 'دعم RTL/LTR' : 'RTL/LTR support'}</li>
-          <li>{isRTL ? 'إمكانية الوصول الكاملة' : 'Full accessibility'}</li>
+          <li>{t.timePickerComponent.features.formats12And24}</li>
+          <li>{t.timePickerComponent.features.amPmToggle}</li>
+          <li>{t.timePickerComponent.features.rangeSelection}</li>
+          <li>{t.timePickerComponent.features.customIntervals}</li>
+          <li>{t.timePickerComponent.features.quickActions}</li>
+          <li>{t.timePickerComponent.features.integratedControls}</li>
+          <li>{t.timePickerComponent.features.customFormatting}</li>
+          <li>{t.timePickerComponent.features.bilingualSupport}</li>
+          <li>{t.timePickerComponent.features.rtlSupport}</li>
+          <li>{t.timePickerComponent.features.fullAccessibility}</li>
         </ul>
       </div>
       </main>
