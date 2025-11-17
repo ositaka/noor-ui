@@ -4,6 +4,7 @@ import * as React from 'react'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
+import { useDirection } from '@/components/providers/direction-provider'
 
 // ============================================================================
 // Types
@@ -148,7 +149,8 @@ export const Calendar = React.forwardRef<HTMLDivElement, CalendarProps>(
     },
     ref
   ) => {
-    const isRTL = locale === 'ar'
+    const { direction } = useDirection()
+    const isRTL = direction === 'rtl'
     const [currentMonth, setCurrentMonth] = React.useState(selected || new Date())
 
     const monthStart = new Date(currentMonth.getFullYear(), currentMonth.getMonth(), 1)

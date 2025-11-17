@@ -44,6 +44,8 @@ ui: {
         country: 'الدولة',
         message: 'الرسالة',
         search: 'بحث',
+        searchPlaceholder: 'ابحث في التوثيق والمكونات والمزيد...',
+        noResults: 'لم يتم العثور على نتائج.',
         filter: 'تصفية',
         sort: 'ترتيب',
         required: 'مطلوب',
@@ -240,6 +242,16 @@ common: {
       imageAltText: 'نص بديل للصور',
     },
   },
+
+  search: {
+        categories: {
+          component: 'مكون',
+          documentation: 'توثيق',
+          token: 'رمز',
+          theme: 'سمة',
+          example: 'مثال',
+        },
+      },
 
   sitemap: {
         title: 'خريطة الموقع',

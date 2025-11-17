@@ -10,6 +10,7 @@ import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { formatSAR, formatNumber } from '@/lib/arabic-numbers'
 import { AlertCircle, Info, Download, Share2, Printer, Copy, Check } from 'lucide-react'
+import { useDirection } from '@/components/providers/direction-provider'
 
 // ============================================================================
 // Types
@@ -78,7 +79,8 @@ export const ZakatCalculator = React.forwardRef<HTMLDivElement, ZakatCalculatorP
     },
     ref
   ) => {
-    const isRTL = locale === 'ar'
+    const { direction } = useDirection()
+    const isRTL = direction === 'rtl'
 
     // Asset state
     const [assets, setAssets] = React.useState<ZakatAssets>({

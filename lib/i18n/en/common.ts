@@ -44,6 +44,8 @@ ui: {
         country: 'Country',
         message: 'Message',
         search: 'Search',
+        searchPlaceholder: 'Search documentation, components, and more...',
+        noResults: 'No results found.',
         filter: 'Filter',
         sort: 'Sort',
         required: 'Required',
@@ -240,6 +242,16 @@ common: {
       imageAltText: 'Image Alt Text',
     },
   },
+
+  search: {
+        categories: {
+          component: 'Component',
+          documentation: 'Documentation',
+          token: 'Token',
+          theme: 'Theme',
+          example: 'Example',
+        },
+      },
 
   sitemap: {
         title: 'Sitemap',

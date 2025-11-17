@@ -48,7 +48,7 @@ export default function HomePage() {
               <Button size="lg" asChild>
                 <Link href="/components" className='inline-flex items-center'>
                   {t.home.hero.cta.primary}
-                  <ArrowRight className="ms-2 h-4 w-4" />
+                  <ArrowRight className="ms-2 h-4 w-4 rtl:rotate-180" />
                 </Link>
               </Button>
               <Button size="lg" variant="outline" asChild>
@@ -104,7 +104,7 @@ export default function HomePage() {
             </p>
           </div>
 
-          <ThemeSwitcher locale={locale} />
+          <ThemeSwitcher />
         </section>
 
         {/* Getting Started */}

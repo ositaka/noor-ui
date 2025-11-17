@@ -3,11 +3,12 @@
 import * as React from 'react'
 import Link from 'next/link'
 import { Card, CardContent } from '@/components/ui/card'
+import { Separator } from '@/components/ui/separator'
 import { CodeBlock } from '@/components/docs/code-block'
 import { ComponentShowcase } from '@/components/docs/component-showcase'
 import { BestPractices } from '@/components/docs/best-practices'
 import { Button } from '@/components/ui/button'
-import { Sparkles, ArrowRight, Info, Lightbulb, Book, CheckCircle2, XCircle } from 'lucide-react'
+import { Sparkles, ArrowRight, Info, Lightbulb, Book, CheckCircle2 } from 'lucide-react'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 
@@ -87,6 +88,31 @@ import { Settings, User, Search } from 'lucide-react'
   <Settings className="me-2" /> {/* Won't mirror */}
   Settings
 </Button>`
+
+const keyboardShortcutsCode = `// ✅ CORRECT: Shortcuts stay at physical end, text flows naturally
+<button className="flex items-center gap-2">
+  <Search className="h-4 w-4" />
+  <span>بحث</span>
+  {/* ms-auto pushes to end, rtl:flex-row-reverse keeps ⌘K order */}
+  <kbd className="ms-auto inline-flex gap-1 rtl:flex-row-reverse">
+    <span>⌘</span>K
+  </kbd>
+</button>
+
+// LTR Result:  [🔍 Search...        ⌘K]
+// RTL Result:  [⌘K        ...بحث 🔍]
+
+// ❌ WRONG: Without rtl:flex-row-reverse, kbd content reverses
+<kbd className="ms-auto inline-flex gap-1">
+  <span>⌘</span>K  {/* Shows as K⌘ in RTL! */}
+</kbd>
+
+// ❌ WRONG: Don't manually reverse the whole structure
+{isRTL ? (
+  <><kbd>⌘K</kbd><span>بحث</span></>
+) : (
+  <><span>Search</span><kbd>⌘K</kbd></>
+)}`
 
 const useDirectionCode = `'use client'
 
@@ -310,29 +336,63 @@ export default function RTLGuidePage() {
 
           <CodeBlock code={iconMirroringCode} language="tsx" />
 
-          <Card className="mt-6">
+          <BestPractices
+            dos={t.iconMirroring.shouldMirrorList}
+            donts={t.iconMirroring.shouldNotMirrorList}
+            className="mt-6"
+          />
+        </section>
+
+        {/* Keyboard Shortcuts */}
+        <section className="mb-16">
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.keyboardShortcuts.title}</h2>
+          <p className="text-muted-foreground mb-6">
+            {t.keyboardShortcuts.description}
+          </p>
+
+          <CodeBlock code={keyboardShortcutsCode} language="tsx" />
+
+          <Card className="mt-6 border-blue-500/50 bg-blue-50 dark:bg-blue-950/20">
             <CardContent className="p-6 space-y-4">
               <div>
                 <h3 className="font-semibold mb-2 flex items-center gap-2">
-                  <CheckCircle2 className="h-5 w-5 text-green-600" />
-                  {t.iconMirroring.shouldMirror}
+                  <Info className="h-5 w-5 text-blue-600 dark:text-blue-400" />
+                  {t.keyboardShortcuts.principle}
                 </h3>
+                <p className="text-sm text-muted-foreground">
+                  {t.keyboardShortcuts.principleDesc}
+                </p>
+              </div>
+
+              <Separator />
+
+              <div>
+                <h3 className="font-semibold mb-2">{t.keyboardShortcuts.examples}</h3>
                 <ul className="text-sm text-muted-foreground space-y-1">
-                  {t.iconMirroring.shouldMirrorList.map((item, index) => (
-                    <li key={index}>• {item}</li>
-                  ))}
+                  <li>• {t.keyboardShortcuts.ltrExample}</li>
+                  <li>• {t.keyboardShortcuts.rtlExample}</li>
                 </ul>
               </div>
+
+              <Separator />
+
+              <div>
+                <h3 className="font-semibold mb-2">{t.keyboardShortcuts.visualNote}</h3>
+                <p className="text-sm text-muted-foreground">
+                  {t.keyboardShortcuts.visualNoteDesc}
+                </p>
+              </div>
+
+              <Separator />
+
               <div>
                 <h3 className="font-semibold mb-2 flex items-center gap-2">
-                  <XCircle className="h-5 w-5 text-red-600" />
-                  {t.iconMirroring.shouldNotMirror}
+                  <Sparkles className="h-5 w-5 text-primary" />
+                  {t.keyboardShortcuts.bestPractice}
                 </h3>
-                <ul className="text-sm text-muted-foreground space-y-1">
-                  {t.iconMirroring.shouldNotMirrorList.map((item, index) => (
-                    <li key={index}>• {item}</li>
-                  ))}
-                </ul>
+                <p className="text-sm text-muted-foreground">
+                  {t.keyboardShortcuts.bestPracticeDesc}
+                </p>
               </div>
             </CardContent>
           </Card>
