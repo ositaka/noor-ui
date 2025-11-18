@@ -127,13 +127,13 @@ export default function MultiAgentChatPage() {
   const t = content[locale]
   const isRTL = locale === 'ar'
 
+  const systemWelcome = t.aiMultiAgent.systemMessages.welcome
+
   const [messages, setMessages] = React.useState<Message[]>([
     {
       id: '1',
       role: 'system',
-      content: isRTL
-        ? 'مرحباً! أنا منسق فريقنا من وكلاء الذكاء الاصطناعي المتخصصين. يمكنك التحدث مع أي وكيل أو السماح لنا بالتعاون في الإجابة. كل وكيل لديه خبرة فريدة!'
-        : "Hello! I'm the coordinator for our team of specialized AI agents. You can talk to any agent or let us collaborate on answers. Each agent has unique expertise!",
+      content: systemWelcome,
       timestamp: new Date().toLocaleTimeString(isRTL ? 'ar-SA' : 'en-US', {
         hour: '2-digit',
         minute: '2-digit',
@@ -235,9 +235,7 @@ export default function MultiAgentChatPage() {
       {
         id: '1',
         role: 'system',
-        content: isRTL
-          ? 'محادثة جديدة بدأت. اختر الوكلاء الذين تريد التحدث معهم!'
-          : 'New conversation started. Choose which agents you want to talk to!',
+        content: t.aiMultiAgent.systemMessages.newConversation,
         timestamp: new Date().toLocaleTimeString(isRTL ? 'ar-SA' : 'en-US', {
           hour: '2-digit',
           minute: '2-digit',
@@ -254,12 +252,10 @@ export default function MultiAgentChatPage() {
         <aside className="w-80 border-e bg-background p-4 space-y-4 overflow-y-auto hidden lg:block">
           <div>
             <h2 className="font-semibold text-lg mb-1">
-              {isRTL ? 'الوكلاء المتاحون' : 'Available Agents'}
+              {t.aiMultiAgent.sidebar.availableAgents}
             </h2>
             <p className="text-sm text-muted-foreground">
-              {isRTL
-                ? 'اختر الوكلاء الذين تريد التحدث معهم'
-                : 'Select which agents to include in the conversation'}
+              {t.aiMultiAgent.sidebar.selectAgentsPrompt}
             </p>
           </div>
 
@@ -289,12 +285,8 @@ export default function MultiAgentChatPage() {
                           className="text-xs shrink-0"
                         >
                           {isActive
-                            ? isRTL
-                              ? 'نشط'
-                              : 'Active'
-                            : isRTL
-                            ? 'غير نشط'
-                            : 'Inactive'}
+                            ? t.aiMultiAgent.sidebar.active
+                            : t.aiMultiAgent.sidebar.inactive}
                         </Badge>
                       </div>
                       <div className="text-xs text-muted-foreground">
@@ -312,13 +304,13 @@ export default function MultiAgentChatPage() {
 
           <Card className="p-4 bg-muted/50">
             <h3 className="font-medium text-sm mb-2">
-              {isRTL ? 'كيفية الاستخدام' : 'How to Use'}
+              {t.aiMultiAgent.sidebar.howToUse}
             </h3>
             <ul className="text-xs text-muted-foreground space-y-1">
-              <li>{isRTL ? '• انقر على الوكيل لتفعيله/إلغاء تفعيله' : '• Click agents to activate/deactivate'}</li>
-              <li>{isRTL ? '• يمكن أن يكون عدة وكلاء نشطين' : '• Multiple agents can be active'}</li>
-              <li>{isRTL ? '• الوكلاء النشطون سيردون على رسائلك' : '• Active agents will respond to your messages'}</li>
-              <li>{isRTL ? '• كل وكيل لديه خبرة فريدة' : '• Each agent has unique expertise'}</li>
+              <li>• {t.aiMultiAgent.sidebar.clickToActivate}</li>
+              <li>• {t.aiMultiAgent.sidebar.multipleAgents}</li>
+              <li>• {t.aiMultiAgent.sidebar.agentsWillRespond}</li>
+              <li>• {t.aiMultiAgent.sidebar.uniqueExpertise}</li>
             </ul>
           </Card>
         </aside>
@@ -334,24 +326,20 @@ export default function MultiAgentChatPage() {
                 </div>
                 <div>
                   <h1 className="font-semibold text-lg">
-                    {isRTL ? 'محادثة متعددة الوكلاء' : 'Multi-Agent Chat'}
+                    {t.aiMultiAgent.header.title}
                   </h1>
                   <p className="text-xs text-muted-foreground">
                     {activeAgents.length}{' '}
-                    {isRTL
-                      ? activeAgents.length === 1
-                        ? 'وكيل نشط'
-                        : 'وكلاء نشطين'
-                      : activeAgents.length === 1
-                      ? 'active agent'
-                      : 'active agents'}
+                    {activeAgents.length === 1
+                      ? t.aiMultiAgent.header.activeAgent
+                      : t.aiMultiAgent.header.activeAgents}
                   </p>
                 </div>
               </div>
               <div className="flex items-center gap-2">
                 <Button variant="outline" size="sm" onClick={handleClearChat}>
                   <Trash2 className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
-                  {isRTL ? 'مسح' : 'Clear'}
+                  {t.aiMultiAgent.actions.clear}
                 </Button>
                 <Button variant="outline" size="sm" asChild>
                   <Link href="/examples">{t.nav.examples}</Link>
@@ -378,7 +366,7 @@ export default function MultiAgentChatPage() {
                   </li>
                   <li>/</li>
                   <li className="text-foreground font-medium">
-                    {isRTL ? 'وكلاء متعددون' : 'Multi-Agent'}
+                    {t.aiMultiAgent.breadcrumb.multiAgent}
                   </li>
                 </ol>
               </nav>
@@ -471,8 +459,8 @@ export default function MultiAgentChatPage() {
           <div className="border-t bg-background">
             <div className="container max-w-4xl py-4">
               <PromptInput
-                placeholder={isRTL ? undefined : 'Ask your question to the active agents...'}
-                placeholderAr="اطرح سؤالك على الوكلاء النشطين..."
+                placeholder={t.aiMultiAgent.input.placeholder}
+                placeholderAr={t.aiMultiAgent.input.placeholder}
                 isRTL={isRTL}
                 onSend={handleSend}
                 isLoading={isThinking}
@@ -480,9 +468,7 @@ export default function MultiAgentChatPage() {
                 showVoice={false}
               />
               <p className="text-xs text-muted-foreground mt-2 text-center">
-                {isRTL
-                  ? 'هذا مثال توضيحي. الوكلاء النشطون سيردون على رسائلك.'
-                  : 'This is a demo. Active agents will respond to your messages.'}
+                {t.aiMultiAgent.demo.message}
               </p>
             </div>
           </div>

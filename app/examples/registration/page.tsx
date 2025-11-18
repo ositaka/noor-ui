@@ -329,6 +329,9 @@ interface StepProps {
 }
 
 function PersonalInfoStep({ initialValues, onSubmit, onBack, isRTL }: StepProps) {
+  const { locale } = useDirection()
+  const t = content[locale].registrationPage
+
   return (
     <Form
       initialValues={initialValues}
@@ -419,6 +422,9 @@ function PersonalInfoStep({ initialValues, onSubmit, onBack, isRTL }: StepProps)
 }
 
 function AddressStep({ initialValues, onSubmit, onBack, isRTL }: StepProps) {
+  const { locale } = useDirection()
+  const t = content[locale].registrationPage
+
   return (
     <Form
       initialValues={initialValues}
@@ -526,6 +532,9 @@ function AddressStep({ initialValues, onSubmit, onBack, isRTL }: StepProps) {
 }
 
 function PreferencesStep({ initialValues, onSubmit, onBack, isRTL }: StepProps) {
+  const { locale } = useDirection()
+  const t = content[locale].registrationPage
+
   return (
     <Form
       initialValues={initialValues}
@@ -641,6 +650,9 @@ function PreferencesStep({ initialValues, onSubmit, onBack, isRTL }: StepProps) 
 }
 
 function ReviewStep({ data, onSubmit, onBack, isRTL }: StepProps & { data: Record<string, any> }) {
+  const { locale } = useDirection()
+  const t = content[locale].registrationPage
+  const tCommon = content[locale]
   const [isSubmitting, setIsSubmitting] = React.useState(false)
 
   const handleSubmit = async (e: React.FormEvent) => {

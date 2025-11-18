@@ -336,9 +336,9 @@ export default function DatePickerPage() {
                 placeholderAr="اختر خلال الشهر القادم"
               />
               <p className="text-xs text-muted-foreground">
-                {isRTL
-                  ? `متاح من ${formatDate(today)} إلى ${formatDate(nextMonth)}`
-                  : `Available from ${formatDate(today)} to ${formatDate(nextMonth)}`}
+                {t.datePickerComponentPage.availableFromTo
+                  .replace('{from}', formatDate(today))
+                  .replace('{to}', formatDate(nextMonth))}
               </p>
             </div>
           </ComponentShowcase.Demo>
@@ -445,9 +445,8 @@ const nights = dateRange?.from && dateRange?.to
                         {t.datePickerComponent.realWorldExample.total}:
                       </span>
                       <span className="text-2xl font-bold text-primary">
-                        {locale === 'ar'
-                          ? `${(Math.ceil((dateRange2.to.getTime() - dateRange2.from.getTime()) / (1000 * 60 * 60 * 24)) * 350).toLocaleString('ar-SA')} ر.س`
-                          : `$${(Math.ceil((dateRange2.to.getTime() - dateRange2.from.getTime()) / (1000 * 60 * 60 * 24)) * 150).toLocaleString('en-US')}`}
+                        {t.datePickerComponent.realWorldExample.totalAmount
+                          .replace('{amount}', (Math.ceil((dateRange2.to.getTime() - dateRange2.from.getTime()) / (1000 * 60 * 60 * 24)) * (locale === 'ar' ? 350 : 150)).toLocaleString(locale === 'ar' ? 'ar-SA' : 'en-US'))}
                       </span>
                     </div>
                   </>
@@ -488,13 +487,13 @@ const nights = dateRange?.from && dateRange?.to
 
       {/* API Reference - DatePicker */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-bold">{isRTL ? 'مرجع API - DatePicker' : 'API Reference - DatePicker'}</h2>
+        <h2 className="text-2xl font-bold">{t.datePickerComponentPage.apiReferenceDatePicker}</h2>
         <PropsTable props={datePickerProps} />
       </div>
 
       {/* API Reference - DateRangePicker */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-bold">{isRTL ? 'مرجع API - DateRangePicker' : 'API Reference - DateRangePicker'}</h2>
+        <h2 className="text-2xl font-bold">{t.datePickerComponentPage.apiReferenceDateRangePicker}</h2>
         <PropsTable props={dateRangePickerProps} />
       </div>
 

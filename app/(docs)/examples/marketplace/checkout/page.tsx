@@ -60,6 +60,7 @@ function generateMockOrderItems(): OrderItem[] {
 export default function CheckoutPage() {
   const { locale } = useDirection()
   const isRTL = locale === 'ar'
+  const t = content[locale]
 
   const [items] = React.useState<OrderItem[]>(generateMockOrderItems())
   const [currentTab, setCurrentTab] = React.useState('shipping')
@@ -104,9 +105,7 @@ export default function CheckoutPage() {
                     {t.marketplaceCheckout.orderConfirmed}
                   </h1>
                   <p className="text-muted-foreground text-lg">
-                    {isRTL
-                      ? 'شكراً لك على طلبك. سنرسل لك تفاصيل الشحن قريباً.'
-                      : 'Thank you for your order. We will send you shipping details soon.'}
+                    {t.marketplaceCheckout.thankYouMessage}
                   </p>
                 </div>
 
@@ -203,9 +202,7 @@ export default function CheckoutPage() {
             {t.marketplaceCheckout.pageTitle}
           </h1>
           <p className="text-muted-foreground">
-            {isRTL
-              ? 'أكمل معلومات الشحن والدفع لإتمام طلبك'
-              : 'Complete your shipping and payment information to place your order'}
+            {t.marketplaceCheckout.pageDescription}
           </p>
         </div>
 
@@ -234,9 +231,7 @@ export default function CheckoutPage() {
                   <CardHeader>
                     <CardTitle>{t.marketplaceCheckout.shippingAddress}</CardTitle>
                     <CardDescription>
-                      {isRTL
-                        ? 'أدخل عنوانك الكامل لتوصيل الطلب'
-                        : 'Enter your full address for order delivery'}
+                      {t.marketplaceCheckout.shippingAddressDescription}
                     </CardDescription>
                   </CardHeader>
                   <CardContent className="space-y-4">
@@ -295,11 +290,7 @@ export default function CheckoutPage() {
                         onChange={(e) =>
                           setShippingForm({ ...shippingForm, address: e.target.value })
                         }
-                        placeholder={
-                          isRTL
-                            ? 'رقم المبنى، اسم الشارع'
-                            : 'Building number, street name'
-                        }
+                        placeholder={t.marketplaceCheckout.addressPlaceholder2}
                         rows={3}
                       />
                     </div>
@@ -358,11 +349,7 @@ export default function CheckoutPage() {
                         onChange={(e) =>
                           setShippingForm({ ...shippingForm, notes: e.target.value })
                         }
-                        placeholder={
-                          isRTL
-                            ? 'أي تعليمات خاصة للتوصيل...'
-                            : 'Any special delivery instructions...'
-                        }
+                        placeholder={t.marketplaceCheckout.deliveryNotesPlaceholder}
                         rows={3}
                       />
                     </div>
@@ -392,9 +379,7 @@ export default function CheckoutPage() {
                   <CardHeader>
                     <CardTitle>{t.marketplaceCheckout.paymentMethod}</CardTitle>
                     <CardDescription>
-                      {isRTL
-                        ? 'اختر طريقة الدفع المفضلة لديك'
-                        : 'Choose your preferred payment method'}
+                      {t.marketplaceCheckout.paymentMethodDescription}
                     </CardDescription>
                   </CardHeader>
                   <CardContent className="space-y-6">
@@ -414,9 +399,7 @@ export default function CheckoutPage() {
                               {t.marketplaceCheckout.creditDebitCard}
                             </div>
                             <div className="text-sm text-muted-foreground">
-                              {isRTL
-                                ? 'فيزا، ماستركارد، مدى'
-                                : 'Visa, Mastercard, Mada'}
+                              {t.marketplaceCheckout.paymentOptions.visaMastercard}
                             </div>
                           </div>
                         </Label>
@@ -437,9 +420,7 @@ export default function CheckoutPage() {
                               {t.marketplaceCheckout.cashOnDelivery}
                             </div>
                             <div className="text-sm text-muted-foreground">
-                              {isRTL
-                                ? 'ادفع نقداً عند استلام طلبك'
-                                : 'Pay cash when you receive your order'}
+                              {t.marketplaceCheckout.paymentOptions.payCash}
                             </div>
                           </div>
                         </Label>
@@ -460,9 +441,7 @@ export default function CheckoutPage() {
                               {t.marketplaceCheckout.bankTransfer}
                             </div>
                             <div className="text-sm text-muted-foreground">
-                              {isRTL
-                                ? 'حوّل المبلغ مباشرة إلى حسابنا البنكي'
-                                : 'Transfer directly to our bank account'}
+                              {t.marketplaceCheckout.paymentOptions.transferBank}
                             </div>
                           </div>
                         </Label>
@@ -535,9 +514,7 @@ export default function CheckoutPage() {
                   <CardHeader>
                     <CardTitle>{t.marketplaceCheckout.reviewOrder2}</CardTitle>
                     <CardDescription>
-                      {isRTL
-                        ? 'تحقق من تفاصيل طلبك قبل التأكيد'
-                        : 'Review your order details before confirming'}
+                      {t.marketplaceCheckout.reviewOrderDescription2}
                     </CardDescription>
                   </CardHeader>
                   <CardContent className="space-y-6">

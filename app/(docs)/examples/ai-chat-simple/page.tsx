@@ -44,13 +44,13 @@ export default function SimpleChatPage() {
   const t = content[locale]
   const isRTL = locale === 'ar'
 
+  const systemWelcome = t.aiChatSimple.systemMessages.welcome
+
   const [messages, setMessages] = React.useState<Message[]>([
     {
       id: '1',
       role: 'system',
-      content: isRTL
-        ? 'مرحباً! أنا مساعد ذكي جاهز للإجابة على أسئلتك. كيف يمكنني مساعدتك اليوم؟'
-        : 'Hello! I\'m an AI assistant ready to answer your questions. How can I help you today?',
+      content: systemWelcome,
       timestamp: new Date().toLocaleTimeString(isRTL ? 'ar-SA' : 'en-US', {
         hour: '2-digit',
         minute: '2-digit',
@@ -96,7 +96,7 @@ export default function SimpleChatPage() {
     const assistantMessage: Message = {
       id: (Date.now() + 1).toString(),
       role: 'assistant',
-      content: `${randomResponse} ${content.length > 50 ? (isRTL ? '\n\nبناءً على رسالتك الطويلة، دعني أقدم لك إجابة شاملة.' : '\n\nBased on your detailed message, let me provide you with a comprehensive answer.') : ''}`,
+      content: `${randomResponse}${content.length > 50 ? `\n\n${t.aiChatSimple.systemMessages.detailedResponse}` : ''}`,
       timestamp: new Date().toLocaleTimeString(isRTL ? 'ar-SA' : 'en-US', {
         hour: '2-digit',
         minute: '2-digit',
@@ -113,9 +113,7 @@ export default function SimpleChatPage() {
       {
         id: '1',
         role: 'system',
-        content: isRTL
-          ? 'محادثة جديدة بدأت. كيف يمكنني مساعدتك؟'
-          : 'New conversation started. How can I help you?',
+        content: t.aiChatSimple.systemMessages.newConversation,
         timestamp: new Date().toLocaleTimeString(isRTL ? 'ar-SA' : 'en-US', {
           hour: '2-digit',
           minute: '2-digit',
@@ -167,17 +165,17 @@ export default function SimpleChatPage() {
               </div>
               <div>
                 <h1 className="font-semibold text-lg">
-                  {isRTL ? 'محادثة بسيطة مع الذكاء الاصطناعي' : 'Simple AI Chat'}
+                  {t.aiChatSimple.header.title}
                 </h1>
                 <p className="text-xs text-muted-foreground">
-                  {isRTL ? 'مساعد ذكي للإجابة على أسئلتك' : 'AI assistant for your questions'}
+                  {t.aiChatSimple.header.subtitle}
                 </p>
               </div>
             </div>
             <div className="flex items-center gap-2">
               <Button variant="outline" size="sm" onClick={handleClearChat}>
                 <Trash2 className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
-                {isRTL ? 'مسح' : 'Clear'}
+                {t.aiChatSimple.actions.clear}
               </Button>
               <Button variant="outline" size="sm" asChild>
                 <Link href="/examples">{t.nav.examples}</Link>
@@ -204,7 +202,7 @@ export default function SimpleChatPage() {
                 </li>
                 <li>/</li>
                 <li className="text-foreground font-medium">
-                  {isRTL ? 'محادثة بسيطة' : 'Simple Chat'}
+                  {t.aiChatSimple.breadcrumb.simpleChat}
                 </li>
               </ol>
             </nav>
@@ -261,9 +259,7 @@ export default function SimpleChatPage() {
               showVoice={false}
             />
             <p className="text-xs text-muted-foreground mt-2 text-center">
-              {isRTL
-                ? 'هذا مثال توضيحي. الردود مولدة تلقائياً ولا تستخدم ذكاء اصطناعي حقيقي.'
-                : 'This is a demo. Responses are generated automatically and do not use real AI.'}
+              {t.aiChatSimple.demo.message}
             </p>
           </div>
         </div>

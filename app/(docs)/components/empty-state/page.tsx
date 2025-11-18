@@ -15,7 +15,18 @@ import { FileText, Inbox, Search, Users, Plus } from 'lucide-react'
 export default function EmptyStatePage() {
   const { direction, locale } = useDirection()
   const isRTL = direction === 'rtl'
-  const t = content[locale]
+  const [mounted, setMounted] = React.useState(false)
+
+  React.useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  if (!mounted) {
+    return <div className="container py-12">Loading...</div>
+  }
+
+  const t = content[locale] || content.en
+  const emptyStateT = (content[locale]?.emptyStateComponent || content.en.emptyStateComponent) as any
 
   const basicUsage = `import { EmptyState } from '@/components/ui/empty-state'
 import { Button } from '@/components/ui/button'
@@ -74,27 +85,27 @@ export function Example() {
       {/* Header */}
       <div className="space-y-3">
         <h1 className="text-4xl font-bold">
-          {t.emptyStateComponent.title}
+          {emptyStateT.title}
         </h1>
         <p className="text-lg text-muted-foreground">
-          {t.emptyStateComponent.description}
+          {emptyStateT.description}
         </p>
       </div>
 
       {/* Basic Example */}
       <ComponentShowcase
-        title={t.emptyStateComponent.sections.basicUsage}
-        description={t.emptyStateComponent.sections.basicUsageDesc}
+        title={emptyStateT.sections.basicUsage}
+        description={emptyStateT.sections.basicUsageDesc}
       >
         <Card className="p-8">
           <EmptyState
             icon={<FileText />}
-            title={t.emptyStateComponent.examples.noArticlesFound}
-            description={t.emptyStateComponent.examples.getStartedCreatingArticle}
+            title={emptyStateT.examples.noArticlesFound}
+            description={emptyStateT.examples.getStartedCreatingArticle}
             action={
               <Button>
                 <Plus className="me-2 h-4 w-4" />
-                {t.emptyStateComponent.examples.createArticle}
+                {emptyStateT.examples.createArticle}
               </Button>
             }
           />
@@ -104,19 +115,19 @@ export function Example() {
       <CodeBlock
         code={basicUsage}
         language="tsx"
-        title={t.emptyStateComponent.sections.code}
+        title={emptyStateT.sections.code}
       />
 
       {/* Without Action */}
       <ComponentShowcase
-        title={t.emptyStateComponent.sections.withoutAction}
-        description={t.emptyStateComponent.sections.withoutActionDesc}
+        title={emptyStateT.sections.withoutAction}
+        description={emptyStateT.sections.withoutActionDesc}
       >
         <Card className="p-8">
           <EmptyState
             icon={<Inbox />}
-            title={t.emptyStateComponent.examples.inboxEmpty}
-            description={t.emptyStateComponent.examples.allCaughtUp}
+            title={emptyStateT.examples.inboxEmpty}
+            description={emptyStateT.examples.allCaughtUp}
           />
         </Card>
       </ComponentShowcase>
@@ -125,17 +136,17 @@ export function Example() {
 
       {/* Search Results */}
       <ComponentShowcase
-        title={t.emptyStateComponent.sections.searchResults}
-        description={t.emptyStateComponent.sections.searchResultsDesc}
+        title={emptyStateT.sections.searchResults}
+        description={emptyStateT.sections.searchResultsDesc}
       >
         <Card className="p-8">
           <EmptyState
             icon={<Search />}
-            title={t.emptyStateComponent.examples.noResultsFound}
-            description={t.emptyStateComponent.examples.tryAdjustingSearch}
+            title={emptyStateT.examples.noResultsFound}
+            description={emptyStateT.examples.tryAdjustingSearch}
             action={
               <Button variant="outline">
-                {t.emptyStateComponent.examples.clearFilters}
+                {emptyStateT.examples.clearFilters}
               </Button>
             }
           />
@@ -146,22 +157,22 @@ export function Example() {
 
       {/* Multiple Actions */}
       <ComponentShowcase
-        title={t.emptyStateComponent.sections.multipleActions}
-        description={t.emptyStateComponent.sections.multipleActionsDesc}
+        title={emptyStateT.sections.multipleActions}
+        description={emptyStateT.sections.multipleActionsDesc}
       >
         <Card className="p-8">
           <EmptyState
             icon={<Users />}
-            title={t.emptyStateComponent.examples.noTeamMembers}
-            description={t.emptyStateComponent.examples.inviteTeamToCollaborate}
+            title={emptyStateT.examples.noTeamMembers}
+            description={emptyStateT.examples.inviteTeamToCollaborate}
             action={
               <>
                 <Button>
                   <Plus className="me-2 h-4 w-4" />
-                  {t.emptyStateComponent.examples.inviteMembers}
+                  {emptyStateT.examples.inviteMembers}
                 </Button>
                 <Button variant="outline">
-                  {t.emptyStateComponent.examples.learnMore}
+                  {emptyStateT.examples.learnMore}
                 </Button>
               </>
             }
@@ -174,7 +185,7 @@ export function Example() {
       {/* Props */}
       <div className="space-y-4">
         <h2 className="text-2xl font-bold">
-          {t.emptyStateComponent.sections.props}
+          {emptyStateT.sections.props}
         </h2>
 
         <PropsTable
@@ -182,30 +193,30 @@ export function Example() {
             {
               name: 'icon',
               type: 'React.ReactNode',
-              description: t.emptyStateComponent.props.iconDisplayedAtTop,
+              description: emptyStateT.props.iconDisplayedAtTop,
               required: false,
             },
             {
               name: 'title',
               type: 'string',
-              description: t.emptyStateComponent.props.titleOfEmptyState,
+              description: emptyStateT.props.titleOfEmptyState,
             },
             {
               name: 'description',
               type: 'string',
-              description: t.emptyStateComponent.props.optionalDescriptiveText,
+              description: emptyStateT.props.optionalDescriptiveText,
               required: false,
             },
             {
               name: 'action',
               type: 'React.ReactNode',
-              description: t.emptyStateComponent.props.actionButtons,
+              description: emptyStateT.props.actionButtons,
               required: false,
             },
             {
               name: 'className',
               type: 'string',
-              description: t.emptyStateComponent.props.additionalCssClasses,
+              description: emptyStateT.props.additionalCssClasses,
               required: false,
             },
           ]}
@@ -215,18 +226,18 @@ export function Example() {
       {/* Usage Guidelines */}
       <div className="space-y-4">
         <h2 className="text-2xl font-bold">
-          {t.emptyStateComponent.sections.usageGuidelines}
+          {emptyStateT.sections.usageGuidelines}
         </h2>
 
         <div className="space-y-3 text-sm">
           <div>
             <h3 className="font-semibold mb-1">
-              {t.emptyStateComponent.sections.whenToUse}
+              {emptyStateT.sections.whenToUse}
             </h3>
             <ul className="list-disc ps-5 space-y-1 text-muted-foreground">
-              <li>{t.emptyStateComponent.usageGuidelines.whenNoContentToDisplay}</li>
-              <li>{t.emptyStateComponent.usageGuidelines.toGuideUsersNextAction}</li>
-              <li>{t.emptyStateComponent.usageGuidelines.toProvideExplanation}</li>
+              <li>{emptyStateT.usageGuidelines.whenNoContentToDisplay}</li>
+              <li>{emptyStateT.usageGuidelines.toGuideUsersNextAction}</li>
+              <li>{emptyStateT.usageGuidelines.toProvideExplanation}</li>
             </ul>
           </div>
         </div>
@@ -235,11 +246,11 @@ export function Example() {
       {/* Best Practices */}
       <section className="mb-8">
         <h2 className="text-2xl font-bold tracking-tight mb-6">
-          {t.emptyStateComponent.sections.bestPractices}
+          {emptyStateT.sections.bestPractices}
         </h2>
         <BestPractices
-          dos={t.emptyStateComponent.bestPractices.doList}
-          donts={t.emptyStateComponent.bestPractices.dontList}
+          dos={emptyStateT.bestPractices.doList}
+          donts={emptyStateT.bestPractices.dontList}
         />
       </section>
     </div>

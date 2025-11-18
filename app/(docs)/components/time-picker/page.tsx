@@ -287,9 +287,7 @@ export default function TimePickerPage() {
               <p className="text-sm text-muted-foreground">
                 {time2
                   ? `${((time2.hours % 12) || 12).toString().padStart(2, '0')}:${time2.minutes.toString().padStart(2, '0')} ${time2.hours >= 12 ? (locale === 'ar' ? 'م' : 'PM') : locale === 'ar' ? 'ص' : 'AM'}`
-                  : isRTL
-                  ? 'لم يتم اختيار وقت'
-                  : 'No time selected'}
+                  : t.timePickerComponentPage.noTimeSelected}
               </p>
             </div>
           </ComponentShowcase.Demo>
@@ -543,13 +541,13 @@ export default function TimePickerPage() {
 
       {/* API Reference - TimePicker */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-bold">{isRTL ? 'مرجع API - TimePicker' : 'API Reference - TimePicker'}</h2>
+        <h2 className="text-2xl font-bold">{t.timePickerComponentPage.apiReferenceTimePicker}</h2>
         <PropsTable props={timePickerProps} />
       </div>
 
       {/* API Reference - TimeRangePicker */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-bold">{isRTL ? 'مرجع API - TimeRangePicker' : 'API Reference - TimeRangePicker'}</h2>
+        <h2 className="text-2xl font-bold">{t.timePickerComponentPage.apiReferenceTimeRangePicker}</h2>
         <PropsTable props={timeRangePickerProps} />
       </div>
 

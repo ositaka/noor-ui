@@ -262,9 +262,7 @@ export default function AdvancedPlaygroundPage() {
                   {t.aiPlaygroundPage.title}
                 </h1>
                 <p className="text-xs text-muted-foreground">
-                  {isRTL
-                    ? `${selectedModel.nameAr || selectedModel.name} • حرارة ${temperature}`
-                    : `${selectedModel.name} • Temp ${temperature}`}
+                  {`${isRTL ? (selectedModel.nameAr || selectedModel.name) : selectedModel.name} • ${t.aiPlaygroundPage.tempLabel} ${temperature}`}
                 </p>
               </div>
             </div>
@@ -333,7 +331,7 @@ export default function AdvancedPlaygroundPage() {
         <div className="border-t bg-background">
           <div className="container max-w-4xl py-4">
             <PromptInput
-              placeholder={isRTL ? undefined : 'Ask anything...'}
+              placeholder="Ask anything..."
               placeholderAr="اسأل عن أي شيء..."
               isRTL={isRTL}
               onSend={handleSend}

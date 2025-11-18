@@ -156,8 +156,9 @@ const inputFields: InputFieldProps[] = [
 ]
 
 export default function AccessibleInputsPage() {
-  const { direction } = useDirection()
+  const { direction, locale } = useDirection()
   const isRTL = direction === 'rtl'
+  const t = content[locale]
 
   const [formData, setFormData] = React.useState<Record<string, string>>({})
   const [validationStatus, setValidationStatus] = React.useState<
@@ -196,22 +197,20 @@ export default function AccessibleInputsPage() {
           href="/examples"
           className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground mb-4"
         >
-          ← {isRTL ? 'العودة إلى الأمثلة' : 'Back to Examples'}
+          ← {t.accessibleInputsPage.backToExamples}
         </Link>
 
         <div className="flex items-center gap-3 mb-4">
           <h1 className="text-4xl font-bold tracking-tight">
-            {isRTL ? 'حقول الإدخال القابلة للوصول' : 'Accessible Input Fields'}
+            {t.accessibleInputsPage.title}
           </h1>
           <Badge variant="secondary" className="text-xs">
-            {isRTL ? '٨ أنواع' : '8 Types'}
+            {t.accessibleInputsPage.typesCount}
           </Badge>
         </div>
 
         <p className="text-xl text-muted-foreground max-w-3xl">
-          {isRTL
-            ? 'مجموعة شاملة من حقول الإدخال مع دعم كامل لإمكانية الوصول، والتحقق من الصحة، ودعم RTL. جميع الحقول تتبع أفضل ممارسات WCAG 2.1 AA.'
-            : 'A comprehensive collection of input fields with full accessibility support, validation, and RTL support. All fields follow WCAG 2.1 AA best practices.'}
+          {t.accessibleInputsPage.description}
         </p>
       </div>
 
@@ -220,42 +219,42 @@ export default function AccessibleInputsPage() {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <CheckCircle2 className="h-5 w-5 text-primary" />
-            {isRTL ? 'ميزات إمكانية الوصول' : 'Accessibility Features'}
+            {t.accessibleInputsPage.accessibilityFeatures}
           </CardTitle>
         </CardHeader>
         <CardContent>
           <ul className="grid sm:grid-cols-2 gap-3 text-sm">
             <li className="flex items-start gap-2">
               <span className="text-primary mt-0.5">✓</span>
-              <span>{isRTL ? 'علامات ARIA مناسبة' : 'Proper ARIA labels'}</span>
+              <span>{t.accessibleInputsPage.features.properAriaLabels}</span>
             </li>
             <li className="flex items-start gap-2">
               <span className="text-primary mt-0.5">✓</span>
-              <span>{isRTL ? 'تنقل كامل بلوحة المفاتيح' : 'Full keyboard navigation'}</span>
+              <span>{t.accessibleInputsPage.features.fullKeyboardNav}</span>
             </li>
             <li className="flex items-start gap-2">
               <span className="text-primary mt-0.5">✓</span>
-              <span>{isRTL ? 'رسائل خطأ وصفية' : 'Descriptive error messages'}</span>
+              <span>{t.accessibleInputsPage.features.descriptiveErrors}</span>
             </li>
             <li className="flex items-start gap-2">
               <span className="text-primary mt-0.5">✓</span>
-              <span>{isRTL ? 'إدارة التركيز البصري' : 'Focus management'}</span>
+              <span>{t.accessibleInputsPage.features.focusManagement}</span>
             </li>
             <li className="flex items-start gap-2">
               <span className="text-primary mt-0.5">✓</span>
-              <span>{isRTL ? 'دعم قارئ الشاشة' : 'Screen reader support'}</span>
+              <span>{t.accessibleInputsPage.features.screenReaderSupport}</span>
             </li>
             <li className="flex items-start gap-2">
               <span className="text-primary mt-0.5">✓</span>
-              <span>{isRTL ? 'أوضاع إدخال مناسبة للجوال' : 'Appropriate input modes for mobile'}</span>
+              <span>{t.accessibleInputsPage.features.appropriateInputModes}</span>
             </li>
             <li className="flex items-start gap-2">
               <span className="text-primary mt-0.5">✓</span>
-              <span>{isRTL ? 'التحقق من الصحة في الوقت الفعلي' : 'Real-time validation'}</span>
+              <span>{t.accessibleInputsPage.features.realTimeValidation}</span>
             </li>
             <li className="flex items-start gap-2">
               <span className="text-primary mt-0.5">✓</span>
-              <span>{isRTL ? 'دعم RTL كامل' : 'Full RTL support'}</span>
+              <span>{t.accessibleInputsPage.features.fullRtlSupport}</span>
             </li>
           </ul>
         </CardContent>
@@ -327,9 +326,7 @@ export default function AccessibleInputsPage() {
                     )}
                   >
                     {status === 'invalid'
-                      ? isRTL
-                        ? 'يرجى إدخال قيمة صحيحة'
-                        : 'Please enter a valid value'
+                      ? t.accessibleInputsPage.validation.pleaseEnterValid
                       : isRTL
                       ? field.helperTextAr
                       : field.helperText}
@@ -340,7 +337,7 @@ export default function AccessibleInputsPage() {
                 {field.example && (
                   <div className="pt-2 border-t">
                     <p className="text-xs text-muted-foreground">
-                      {isRTL ? 'مثال:' : 'Example:'}{' '}
+                      {t.accessibleInputsPage.exampleLabel}{' '}
                       <code className="text-xs bg-muted px-1.5 py-0.5 rounded">
                         {field.example}
                       </code>
@@ -357,11 +354,9 @@ export default function AccessibleInputsPage() {
       <div className="mt-12">
         <Card>
           <CardHeader>
-            <CardTitle>{isRTL ? 'مثال على الكود' : 'Code Example'}</CardTitle>
+            <CardTitle>{t.accessibleInputsPage.codeExample}</CardTitle>
             <CardDescription>
-              {isRTL
-                ? 'مثال على كيفية استخدام حقول الإدخال مع التحقق من الصحة'
-                : 'Example of how to use input fields with validation'}
+              {t.accessibleInputsPage.codeExampleDesc}
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -387,13 +382,13 @@ export default function AccessibleInputsPage() {
       {/* Related Links */}
       <div className="mt-8 flex gap-4">
         <Button asChild variant="outline">
-          <Link href="/components/input">{isRTL ? 'وثائق Input' : 'Input Docs'}</Link>
+          <Link href="/components/input">{t.accessibleInputsPage.docs.inputDocs}</Link>
         </Button>
         <Button asChild variant="outline">
-          <Link href="/components/label">{isRTL ? 'وثائق Label' : 'Label Docs'}</Link>
+          <Link href="/components/label">{t.accessibleInputsPage.docs.labelDocs}</Link>
         </Button>
         <Button asChild variant="outline">
-          <Link href="/components/form">{isRTL ? 'وثائق Form' : 'Form Docs'}</Link>
+          <Link href="/components/form">{t.accessibleInputsPage.docs.formDocs}</Link>
         </Button>
       </div>
     </div>

@@ -331,7 +331,7 @@ export default function CodeAssistantPage() {
               </Tabs>
 
               <PromptInput
-                placeholder={isRTL ? undefined : t.aiCodeAssistantPage.demo.placeholder}
+                placeholder={t.aiCodeAssistantPage.demo.placeholder}
                 placeholderAr={t.aiCodeAssistantPage.demo.placeholder}
                 isRTL={isRTL}
                 onSend={handleSend}

@@ -136,6 +136,7 @@ datePickerComponent: {
         nights: 'عدد الليالي',
         pricePerNight: 'سعر الليلة',
         total: 'الإجمالي',
+        totalAmount: '{amount} ر.س',
       },
       props: {
         date: 'التاريخ المحدد المتحكم به',

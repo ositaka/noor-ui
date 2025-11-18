@@ -247,11 +247,113 @@ When adding any new page or component, **ALWAYS** add an entry:
 
 ## 🌍 Internationalization
 
-### Bilingual Content
+### Centralized Translation System
+
+**Location:** `/lib/i18n/` directory with separate EN and AR files
+
+All user-facing text MUST use the centralized i18n system. **NO hardcoded bilingual ternaries allowed.**
+
+#### ✅ REQUIRED Pattern:
+
+```tsx
+import { useDirection } from '@/components/providers/direction-provider'
+import { content } from '@/lib/i18n'
+
+export default function Component() {
+  const { locale } = useDirection()
+  const t = content[locale]
+
+  return (
+    <div>
+      <h1>{t.section.title}</h1>
+      <p>{t.section.description}</p>
+    </div>
+  )
+}
+```
+
+#### ❌ FORBIDDEN Pattern:
+
+```tsx
+// ❌ NEVER use hardcoded ternaries for text content
+{isRTL ? 'النص العربي' : 'English text'}
+{locale === 'ar' ? 'مرحبا' : 'Hello'}
+```
+
+### Acceptable isRTL Usage
+
+The `isRTL` variable should ONLY be used for:
+
+1. **CSS Classes:**
+   ```tsx
+   className={isRTL ? 'font-arabic' : 'font-latin'}
+   ```
+
+2. **Layout/Alignment Props:**
+   ```tsx
+   <DropdownMenu align={isRTL ? 'start' : 'end'} />
+   <Component dir={isRTL ? 'rtl' : 'ltr'} />
+   ```
+
+3. **Locale Parameters:**
+   ```tsx
+   formatDate(date, isRTL ? 'ar' : 'en')
+   ```
+
+**NEVER** use `isRTL` ternaries for user-facing strings.
+
+### TypeScript Union Type Workaround
+
+When accessing nested translation objects, TypeScript may create overly strict union types. Use explicit type assertion:
+
+```tsx
+const { locale } = useDirection()
+const t = content[locale]
+
+// For deeply nested component translations:
+const componentT = content[locale].componentName as any
+
+// Then use componentT for component-specific strings:
+{componentT.examples.title}
+{componentT.features.description}
+```
+
+### Nested Function Scopes
+
+Each function scope needs its own translation constant:
+
+```tsx
+function ParentComponent() {
+  const { locale } = useDirection()
+  const t = content[locale]
+
+  return <div>{t.parent.title}</div>
+}
+
+function ChildComponent() {
+  // ✅ Define t in this scope too
+  const { locale } = useDirection()
+  const t = content[locale]
+
+  return <div>{t.child.title}</div>
+}
+```
+
+### Adding New Translations
+
+When adding new UI strings:
+
+1. Add the key to **both** `/lib/i18n/en/common.ts` AND `/lib/i18n/ar/common.ts`
+2. Ensure the object structure matches exactly in both files
+3. Use descriptive, hierarchical keys: `section.subsection.key`
+4. Test in both languages to verify translations appear
+
+### Bilingual Content Rules
+
 - All user-facing text should support English and Arabic
-- Use direction detection: `document.documentElement.dir`
 - Provide bilingual examples in documentation
 - Test every component in both LTR and RTL modes
+- Real Arabic content preferred over lorem ipsum
 
 ### Font Switching
 - LTR: Inter (sans-serif)
@@ -347,6 +449,7 @@ Before committing component work, verify:
 ### ❌ DON'T:
 - Use directional classes (`ml-`, `mr-`, `pl-`, `pr-`)
 - Use text alignment classes (`text-left`, `text-right`)
+- **Use hardcoded bilingual ternaries** (`isRTL ? 'Arabic' : 'English'`)
 - Add manual header/footer to doc pages (use route group layout)
 - Set up MutationObserver for direction (use `useDirection()` hook)
 - Forget to update search-data.ts when adding components
@@ -361,6 +464,7 @@ Before committing component work, verify:
 ### ✅ DO:
 - Use logical properties (`ms-`, `me-`, `ps-`, `pe-`)
 - Use `text-start` and `text-end`
+- **Use centralized i18n system** (`const t = content[locale]`)
 - Place documentation pages in the (docs) route group
 - **Start client components with 'use client' only** (no metadata exports)
 - Use `useDirection()` hook for direction-aware components

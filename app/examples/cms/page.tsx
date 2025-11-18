@@ -467,7 +467,7 @@ export default function CMSPage() {
                       <Input
                         id="search"
                         placeholder={t.cmsPage.filters.searchPosts}
-                        className="ps-9 h-11"
+                        className={cn("h-11", isRTL ? "pe-9" : "ps-9")}
                       />
                     </div>
                   </div>
@@ -514,7 +514,7 @@ export default function CMSPage() {
                   data={mockPosts}
                   columns={columns}
                   searchable
-                  searchPlaceholder={isRTL ? 'بحث...' : 'Search...'}
+                  searchPlaceholder={t.ui.form.search}
                   emptyMessage="No posts found"
                   emptyMessageAr="لا توجد منشورات"
                 />

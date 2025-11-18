@@ -225,40 +225,6 @@ thinkingIndicatorComponent: {
     },
   },
 
-  featureCardComponent: {
-    title: 'Feature Card',
-    description: 'Display a feature with icon, title, and description. Perfect for landing pages and feature showcases.',
-    examples: {
-      title: 'Examples',
-      basic: 'Basic Feature',
-      withLink: 'With Link',
-      highlighted: 'Highlighted',
-    },
-    props: {
-      icon: 'Icon component',
-      title: 'Feature title',
-      description: 'Feature description',
-      href: 'Optional link URL',
-      highlighted: 'Whether to highlight the card',
-    },
-    bestPractices: {
-      doList: [
-        'Use meaningful icons that represent the feature',
-        'Keep titles short and descriptive (2-5 words)',
-        'Provide clear, benefit-focused descriptions',
-        'Use consistent icon style across all feature cards',
-        'Ensure adequate spacing between cards for visual clarity',
-      ],
-      dontList: [
-        "Don't use for long-form content",
-        "Don't use different icon styles within the same section",
-        "Don't overcrowd the layout with too many features at once",
-        "Don't use vague titles or descriptions",
-        "Don't neglect to provide icons when showcasing features",
-      ],
-    },
-  },
-
   promptInputComponent: {
     title: 'Prompt Input',
     description: 'Multi-line input for AI prompts with send button, file upload, and keyboard shortcuts. Perfect for chat interfaces.',
@@ -306,39 +272,6 @@ thinkingIndicatorComponent: {
         "Don't clutter the menu with too many options",
         "Don't forget to handle sign out confirmation for safety",
         "Don't use inconsistent icon styles",
-      ],
-    },
-  },
-
-  notificationCenterComponent: {
-    title: 'Notification Center',
-    description: 'Display and manage notifications with filtering, marking as read, and grouping. Fully accessible.',
-    examples: {
-      title: 'Examples',
-      list: 'Notification List',
-      withGroups: 'With Grouping',
-      withFilters: 'With Filters',
-    },
-    props: {
-      notifications: 'Array of notifications',
-      onMarkRead: 'Callback when notification is marked read',
-      onDelete: 'Callback when notification is deleted',
-      groupBy: 'How to group notifications',
-    },
-    bestPractices: {
-      doList: [
-        'Show unread notifications prominently',
-        'Include timestamps for all notifications',
-        'Provide clear actions (mark as read, delete)',
-        'Group notifications by category or date',
-        'Show notification count badge in the UI',
-      ],
-      dontList: [
-        "Don't overwhelm users with too many notifications at once",
-        "Don't remove notifications without user confirmation",
-        "Don't use unclear or generic notification messages",
-        "Don't forget to handle empty states gracefully",
-        "Don't auto-dismiss important notifications too quickly",
       ],
     },
   },

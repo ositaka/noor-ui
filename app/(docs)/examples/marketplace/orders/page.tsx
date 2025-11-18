@@ -544,9 +544,7 @@ export default function OrdersPage() {
             {t.marketplaceOrders.breadcrumb.myOrders}
           </h1>
           <p className="text-muted-foreground">
-            {isRTL
-              ? 'تتبع وإدارة طلباتك'
-              : 'Track and manage your orders'}
+            {t.marketplaceOrders.pageDescription}
           </p>
         </div>
 

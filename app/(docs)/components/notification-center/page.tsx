@@ -118,29 +118,32 @@ export default function NotificationCenterPage() {
   const { toast } = useToast()
   const { direction, locale } = useDirection()
   const isRTL = direction === 'rtl'
-  const t = content[locale]
+  const [mounted, setMounted] = React.useState(false)
+
+  const t = content[locale] || content.en
+  const notificationCenterT = (content[locale]?.notificationCenterComponent || content.en.notificationCenterComponent) as any
 
   const [notifications1, setNotifications1] = React.useState<Notification[]>([
     {
       id: '1',
-      title: isRTL ? 'تعليق جديد على منشورك' : 'New comment on your post',
-      description: isRTL ? 'علقت سارة: "مقال رائع! مفيد جداً."' : 'Sarah commented: "Great article! Very helpful."',
+      title: notificationCenterT.demoNotifications.newComment,
+      description: notificationCenterT.demoNotifications.sarahComment,
       time: new Date(Date.now() - 5 * 60000).toISOString(),
       read: false,
       icon: <MessageSquare className="h-5 w-5" />,
     },
     {
       id: '2',
-      title: isRTL ? 'متابع جديد' : 'New follower',
-      description: isRTL ? 'أحمد بدأ متابعتك' : 'Ahmed started following you',
+      title: notificationCenterT.demoNotifications.newFollower,
+      description: notificationCenterT.demoNotifications.ahmedFollowing,
       time: new Date(Date.now() - 120 * 60000).toISOString(),
       read: false,
       icon: <UserPlus className="h-5 w-5" />,
     },
     {
       id: '3',
-      title: isRTL ? 'شخص ما أعجب بمنشورك' : 'Someone liked your post',
-      description: isRTL ? '5 أشخاص أعجبوا بـ "البدء مع React"' : '5 people liked "Getting Started with React"',
+      title: notificationCenterT.demoNotifications.someoneLiked,
+      description: notificationCenterT.demoNotifications.peopleLikedReact,
       time: new Date(Date.now() - 1440 * 60000).toISOString(),
       read: true,
       icon: <Heart className="h-5 w-5" />,
@@ -150,8 +153,8 @@ export default function NotificationCenterPage() {
   const [notifications2, setNotifications2] = React.useState<Notification[]>([
     {
       id: '1',
-      title: isRTL ? 'لديك تقييم جديد' : 'You have a new review',
-      description: isRTL ? '"خدمة ممتازة!" - 5 نجوم' : '"Excellent service!" - 5 stars',
+      title: notificationCenterT.demoNotifications.newReview,
+      description: notificationCenterT.demoNotifications.excellentService,
       time: new Date(Date.now() - 10 * 60000).toISOString(),
       read: false,
       icon: <Star className="h-5 w-5" />,
@@ -397,8 +400,8 @@ export default function Example() {
         <section className="mb-16">
           <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.bestPractices}</h2>
           <BestPractices
-            dos={t.notificationCenterComponent.bestPractices.doList}
-            donts={t.notificationCenterComponent.bestPractices.dontList}
+            dos={notificationCenterT.bestPractices.doList}
+            donts={notificationCenterT.bestPractices.dontList}
           />
         </section>
 

@@ -586,6 +586,7 @@ common: {
     buttons: {
       next: 'التالي',
       back: 'السابق',
+      previous: 'السابق',
       review: 'المراجعة',
       submit: 'إرسال',
       submitting: 'جارٍ الإرسال...',
@@ -853,6 +854,12 @@ common: {
       noUsersFound: 'لم يتم العثور على مستخدمين',
       previous: 'السابق',
       next: 'التالي',
+      name: 'الاسم',
+      email: 'البريد الإلكتروني',
+      role: 'الدور',
+      status: 'الحالة',
+      department: 'القسم',
+      joinDate: 'تاريخ الانضمام',
     },
     roles: {
       admin: 'مسؤول',
@@ -1014,12 +1021,23 @@ common: {
       cart: 'سلة التسوق',
     },
     pageTitle: 'إتمام الطلب',
+    pageDescription: 'أكمل معلومات الشحن والدفع لإتمام طلبك',
     steps: {
       shipping: 'الشحن',
       payment: 'الدفع',
       review: 'المراجعة',
     },
     shippingAddress: 'عنوان الشحن',
+    shippingAddressDescription: 'أدخل عنوانك الكامل لتوصيل الطلب',
+    addressPlaceholder2: 'رقم المبنى، اسم الشارع',
+    deliveryNotesPlaceholder: 'أي تعليمات خاصة للتوصيل...',
+    paymentOptions: {
+      visaMastercard: 'فيزا، ماستركارد، مدى',
+      payCash: 'ادفع نقداً عند استلام طلبك',
+      transferBank: 'حوّل المبلغ مباشرة إلى حسابنا البنكي',
+    },
+    reviewOrderDescription2: 'تحقق من تفاصيل طلبك قبل التأكيد',
+    thankYouMessage: 'شكراً لك على طلبك. سنرسل لك تفاصيل الشحن قريباً.',
     fullName: 'الاسم الكامل',
     fullNamePlaceholder: 'أدخل اسمك الكامل',
     phoneNumber: 'رقم الهاتف',
@@ -1409,6 +1427,7 @@ common: {
       responseTime: 'وقت الاستجابة: ',
       verifiedSupplier: 'مورد معتمد وموثوق',
       unitsInStock: '+ وحدة متوفرة',
+      unitsAvailable: 'أكثر من {count} وحدة متوفرة',
     },
     orderCalculator: {
       title: 'حاسبة الطلب',
@@ -1515,6 +1534,43 @@ common: {
       title: 'أمثلة ذات صلة',
       basicWorkflow: 'سير عمل بسيط',
       basicWorkflowDesc: 'مثال بسيط على أداة بناء سير العمل',
+      aiPlayground: 'ملعب الذكاء الاصطناعي',
+      aiPlaygroundDesc: 'ملعب متقدم للذكاء الاصطناعي مع عناصر تحكم النموذج',
+    },
+  },
+
+  // Basic Workflow Page
+  workflowBasicPage: {
+    breadcrumb: {
+      basicWorkflow: 'سير عمل بسيط',
+    },
+    title: 'سير عمل بسيط',
+    description: 'مثال بسيط على أداة بناء سير العمل مع إمكانية السحب والإفلات والاتصالات.',
+    workInProgress: 'قيد التطوير',
+    note: 'ملاحظة:',
+    noteText: 'هذا المثال قيد التطوير حاليًا. قد لا تعمل بعض الميزات كما هو متوقع. نحن نعمل بنشاط على التحسينات وسنقوم بتحديث الوثائق بمجرد أن تصبح مستقرة.',
+    run: 'تشغيل',
+    reset: 'إعادة تعيين',
+    badges: {
+      dragAndDrop: 'سحب وإفلات',
+      connections: 'اتصالات',
+      rtlSupport: 'دعم RTL',
+    },
+    howToUse: {
+      title: 'كيفية الاستخدام',
+      drag: 'السحب:',
+      dragDesc: 'اسحب العقد لإعادة ترتيب سير العمل',
+      connect: 'الاتصال:',
+      connectDesc: 'اسحب من نقطة الإخراج إلى نقطة الإدخال لإنشاء اتصالات',
+      runTitle: 'التشغيل:',
+      runDesc: 'انقر على "تشغيل" لمحاكاة تنفيذ سير العمل',
+      zoom: 'التكبير:',
+      zoomDesc: 'استخدم عجلة الماوس أو عناصر التحكم للتكبير/التصغير',
+    },
+    relatedExamples: {
+      title: 'أمثلة ذات صلة',
+      aiWorkflow: 'سير عمل الذكاء الاصطناعي',
+      aiWorkflowDesc: 'أداة بناء سير عمل بالذكاء الاصطناعي مع نماذج LLM',
       aiPlayground: 'ملعب الذكاء الاصطناعي',
       aiPlaygroundDesc: 'ملعب متقدم للذكاء الاصطناعي مع عناصر تحكم النموذج',
     },
@@ -1687,9 +1743,8 @@ common: {
     topRated: 'أفضل تقييم',
     excellentSales: 'مبيعات ممتازة',
   },
-}
 
-  // Accordion Component Page  
+  // Accordion Component Page
   accordionComponent: {
     examples: {
       accountSettings: 'إدارة إعدادات وتفضيلات حسابك.',
@@ -1741,6 +1796,7 @@ common: {
     messages: 'الرسائل:',
     modelLabel: 'النموذج:',
     parametersLabel: 'المعاملات:',
+    tempLabel: 'حرارة',
     demoDisclaimer: 'هذا مثال توضيحي. الردود مولدة تلقائياً.',
     mockResponses: {
       helpExplore: 'أنا هنا للمساعدة! ماذا تريد أن تستكشف اليوم؟',
@@ -1754,8 +1810,13 @@ common: {
 
   // Feature Card Component Page
   featureCardComponent: {
-    description: 'مكون بطاقة متخصص لعرض الميزات مع أيقونة وعنوان ووصف. قابل للنقر اختيارياً مع تأثيرات التمرير. مثالي للصفحات المقصودة وشبكات الميزات.',
+    title: 'بطاقة الميزة',
+    description: 'عرض ميزة مع أيقونة وعنوان ووصف. مثالي لصفحات الهبوط وعروض الميزات.',
     examples: {
+      title: 'أمثلة',
+      basic: 'ميزة أساسية',
+      withLink: 'مع رابط',
+      highlighted: 'مميزة',
       rtlFirstDesign: 'تصميم يدعم الكتابة من اليمين إلى اليسار',
       rtlFirstDesc: 'مبني من الأساس لدعم التخطيطات من اليسار إلى اليمين ومن اليمين إلى اليسار بسلاسة',
       amazingFeature: 'ميزة رائعة',
@@ -1769,6 +1830,13 @@ common: {
       easyToUse: 'سهل الاستخدام',
       easyToUseDesc: 'واجهة برمجية بسيطة، نتائج قوية',
     },
+    props: {
+      icon: 'مكون الأيقونة',
+      title: 'عنوان الميزة',
+      description: 'وصف الميزة',
+      href: 'رابط URL اختياري',
+      highlighted: 'ما إذا كان سيتم تمييز البطاقة',
+    },
     rtlSupport: {
       autoAdapts: 'تتكيف بطاقة الميزة تلقائياً مع تخطيطات RTL. تنعكس الأيقونة ومحاذاة النص بناءً على الاتجاه الحالي.',
     },
@@ -1778,22 +1846,38 @@ common: {
     },
     bestPractices: {
       doList: [
-        'استخدم أيقونات وصفية تمثل الميزة بوضوح',
-        'اجعل العناوين موجزة (2-4 كلمات)',
-        'اكتب أوصاف واضحة تركز على الفائدة',
-        'حافظ على ارتفاعات متسقة للبطاقات في الشبكات',
+        'استخدم أيقونات ذات معنى تمثل الميزة',
+        'اجعل العناوين قصيرة ووصفية (2-5 كلمات)',
+        'قدم أوصافًا واضحة تركز على الفوائد',
+        'استخدم نمط أيقونة متسق عبر جميع بطاقات الميزات',
+        'تأكد من وجود مسافة كافية بين البطاقات للوضوح البصري',
       ],
       dontList: [
-        'لا تستخدم عدداً كبيراً من البطاقات في صفحة واحدة (4-6 هو المثالي)',
-        'لا تخلط البطاقات القابلة للنقر وغير القابلة للنقر في نفس الشبكة',
-        'لا تستخدم أيقونات معقدة جداً أو زخرفية',
-        'لا تكتب أوصاف طويلة (أقل من 15 كلمة)',
+        'لا تستخدم للمحتوى الطويل',
+        'لا تستخدم أنماط أيقونات مختلفة ضمن نفس القسم',
+        'لا تكدس التخطيط بعدد كبير جدًا من الميزات في آن واحد',
+        'لا تستخدم عناوين أو أوصاف غامضة',
+        'لا تهمل توفير الأيقونات عند عرض الميزات',
       ],
     },
   },
 
   // User Menu Component Page
   userMenuComponent: {
+    demoNames: {
+      ahmedAlRashid: 'أحمد الراشد',
+      sarahJohnson: 'سارة جونسون',
+      johnDoe: 'جون دو',
+      fatimaAlZahra: 'فاطمة الزهراء',
+    },
+    actions: {
+      profile: 'الملف الشخصي',
+      settings: 'الإعدادات',
+      logout: 'تسجيل الخروج',
+      billing: 'الفواتير',
+      team: 'الفريق',
+      support: 'الدعم',
+    },
     bestPractices: {
       doList: [
         'اعرض دائماً اسم المستخدم والبريد الإلكتروني في القائمة المنسدلة',
@@ -1812,19 +1896,250 @@ common: {
 
   // Notification Center Component Page
   notificationCenterComponent: {
+    title: 'مركز الإشعارات',
+    description: 'عرض وإدارة الإشعارات مع التصفية ووضع علامة مقروء والتجميع. قابل للوصول بالكامل.',
+    demoNotifications: {
+      newComment: 'تعليق جديد على منشورك',
+      sarahComment: 'علقت سارة: "مقال رائع! مفيد جداً."',
+      newFollower: 'متابع جديد',
+      ahmedFollowing: 'أحمد بدأ متابعتك',
+      someoneLiked: 'شخص ما أعجب بمنشورك',
+      peopleLikedReact: '5 أشخاص أعجبوا بـ "البدء مع React"',
+      newReview: 'لديك تقييم جديد',
+      excellentService: '"خدمة ممتازة!" - 5 نجوم',
+    },
+    examples: {
+      title: 'أمثلة',
+      list: 'قائمة الإشعارات',
+      withGroups: 'مع التجميع',
+      withFilters: 'مع المرشحات',
+    },
+    props: {
+      notifications: 'مصفوفة الإشعارات',
+      onMarkRead: 'استدعاء عند وضع علامة مقروء على الإشعار',
+      onDelete: 'استدعاء عند حذف الإشعار',
+      groupBy: 'كيفية تجميع الإشعارات',
+    },
     bestPractices: {
       doList: [
         'اعرض شارة عدد الإشعارات غير المقروءة على أيقونة الجرس',
         'استخدم تنسيق الوقت النسبي (منذ 5 دقائق، منذ ساعتين)',
         'قم بتجميع الإشعارات حسب التاريخ عند الاقتضاء',
         'وفر إجراءات واضحة لكل نوع من الإشعارات',
+        'اعرض شارة عدد الإشعارات في واجهة المستخدم',
       ],
       dontList: [
         'لا تعرض إشعارات أقدم من 30 يوماً',
         'لا تستخدم رسائل إشعارات عامة',
         'لا تجعل جميع الإشعارات تبدو متشابهة',
         'لا تنسَ التعامل مع الحالة الفارغة بشكل جيد',
+        'لا تغمر المستخدمين بعدد كبير جداً من الإشعارات دفعة واحدة',
       ],
     },
+  },
+
+  // Accessible Inputs Page
+  accessibleInputsPage: {
+    backToExamples: 'العودة إلى الأمثلة',
+    title: 'حقول الإدخال القابلة للوصول',
+    typesCount: '٨ أنواع',
+    description: 'مجموعة شاملة من حقول الإدخال مع دعم كامل لإمكانية الوصول، والتحقق من الصحة، ودعم RTL. جميع الحقول تتبع أفضل ممارسات WCAG 2.1 AA.',
+    accessibilityFeatures: 'ميزات إمكانية الوصول',
+    features: {
+      properAriaLabels: 'علامات ARIA مناسبة',
+      fullKeyboardNav: 'تنقل كامل بلوحة المفاتيح',
+      descriptiveErrors: 'رسائل خطأ وصفية',
+      focusManagement: 'إدارة التركيز البصري',
+      screenReaderSupport: 'دعم قارئ الشاشة',
+      appropriateInputModes: 'أوضاع إدخال مناسبة للجوال',
+      realTimeValidation: 'التحقق من الصحة في الوقت الفعلي',
+      fullRtlSupport: 'دعم RTL كامل',
+    },
+    validation: {
+      pleaseEnterValid: 'يرجى إدخال قيمة صحيحة',
+    },
+    exampleLabel: 'مثال:',
+    codeExample: 'مثال على الكود',
+    codeExampleDesc: 'مثال على كيفية استخدام حقول الإدخال مع التحقق من الصحة',
+    docs: {
+      inputDocs: 'وثائق Input',
+      labelDocs: 'وثائق Label',
+      formDocs: 'وثائق Form',
+    },
+  },
+
+  // Marketplace Cart Page
+  marketplaceCart: {
+    breadcrumb: {
+      marketplace: 'السوق',
+      shoppingCart: 'سلة التسوق',
+    },
+    title: 'سلة التسوق',
+    itemsInCart: 'لديك {count} منتجات في سلة التسوق',
+    emptyState: {
+      title: 'سلة التسوق فارغة',
+      description: 'ابدأ التسوق الآن واكتشف منتجاتنا المميزة',
+      browseProducts: 'تصفح المنتجات',
+    },
+    product: {
+      each: 'للقطعة',
+      maxAvailable: 'الحد الأقصى المتاح',
+    },
+    actions: {
+      continueShopping: 'متابعة التسوق',
+    },
+    summary: {
+      title: 'ملخص الطلب',
+      subtotal: 'المجموع الفرعي',
+      vat: 'ضريبة القيمة المضافة (15%)',
+      shipping: 'الشحن',
+      free: 'مجاني',
+      freeShippingPrompt: 'أضف {amount} للحصول على شحن مجاني',
+      total: 'الإجمالي',
+      proceedToCheckout: 'إتمام الطلب',
+      secureTransaction: 'جميع المعاملات آمنة ومشفرة',
+    },
+  },
+
+  // AI Document Q&A Page
+  aiDocumentQa: {
+    breadcrumb: {
+      documentQa: 'أسئلة المستندات',
+    },
+    sidebar: {
+      documents: 'المستندات',
+      upload: 'رفع',
+      supportedFormats: 'الصيغ المدعومة',
+      pages: 'صفحة',
+    },
+    header: {
+      title: 'أسئلة وأجوبة المستندات',
+      noDocumentSelected: 'لم يتم تحديد مستند',
+    },
+    actions: {
+      clear: 'مسح',
+    },
+    messages: {
+      sources: 'المصادر',
+      page: 'صفحة {page}',
+    },
+    input: {
+      placeholder: 'اسأل سؤالاً عن المستند...',
+      suggestedLabel: 'أسئلة مقترحة:',
+    },
+    demo: {
+      message: 'هذا مثال توضيحي. الإجابات مولدة تلقائياً والمصادر وهمية.',
+    },
+    systemMessages: {
+      welcome: 'مرحباً! أنا مساعد تحليل المستندات. يمكنني الإجابة على أسئلتك حول المستندات المحملة. اسألني عن أي شيء!',
+      newConversation: 'محادثة جديدة بدأت. كيف يمكنني مساعدتك في تحليل المستندات؟',
+    },
+    suggestedQuestions: [
+      'ما هي أفضل ممارسات React Hooks؟',
+      'كيف أستخدم واجهات TypeScript؟',
+      'ما هي سمات ARIA الأساسية؟',
+      'كيف أحسن أداء React؟',
+    ],
+  },
+
+  // AI Multi-Agent Page
+  aiMultiAgent: {
+    breadcrumb: {
+      multiAgent: 'وكلاء متعددون',
+    },
+    sidebar: {
+      availableAgents: 'الوكلاء المتاحون',
+      selectAgentsPrompt: 'اختر الوكلاء الذين تريد التحدث معهم',
+      active: 'نشط',
+      inactive: 'غير نشط',
+      howToUse: 'كيفية الاستخدام',
+      clickToActivate: 'انقر على الوكيل لتفعيله/إلغاء تفعيله',
+      multipleAgents: 'يمكن أن يكون عدة وكلاء نشطين',
+      agentsWillRespond: 'الوكلاء النشطون سيردون على رسائلك',
+      uniqueExpertise: 'كل وكيل لديه خبرة فريدة',
+    },
+    header: {
+      title: 'محادثة متعددة الوكلاء',
+      activeAgent: 'وكيل نشط',
+      activeAgents: 'وكلاء نشطين',
+    },
+    actions: {
+      clear: 'مسح',
+    },
+    input: {
+      placeholder: 'اطرح سؤالك على الوكلاء النشطين...',
+    },
+    demo: {
+      message: 'هذا مثال توضيحي. الوكلاء النشطون سيردون على رسائلك.',
+    },
+    systemMessages: {
+      welcome: 'مرحباً! أنا منسق فريقنا من وكلاء الذكاء الاصطناعي المتخصصين. يمكنك التحدث مع أي وكيل أو السماح لنا بالتعاون في الإجابة. كل وكيل لديه خبرة فريدة!',
+      newConversation: 'محادثة جديدة بدأت. اختر الوكلاء الذين تريد التحدث معهم!',
+    },
+  },
+
+  // AI Chat Simple Page
+  aiChatSimple: {
+    breadcrumb: {
+      simpleChat: 'محادثة بسيطة',
+    },
+    header: {
+      title: 'محادثة بسيطة مع الذكاء الاصطناعي',
+      subtitle: 'مساعد ذكي للإجابة على أسئلتك',
+    },
+    actions: {
+      clear: 'مسح',
+    },
+    demo: {
+      message: 'هذا مثال توضيحي. الردود مولدة تلقائياً ولا تستخدم ذكاء اصطناعي حقيقي.',
+    },
+    systemMessages: {
+      welcome: 'مرحباً! أنا مساعد ذكي جاهز للإجابة على أسئلتك. كيف يمكنني مساعدتك اليوم؟',
+      newConversation: 'محادثة جديدة بدأت. كيف يمكنني مساعدتك؟',
+      detailedResponse: 'بناءً على رسالتك الطويلة، دعني أقدم لك إجابة شاملة.',
+    },
+  },
+
+  // Listing Card Component Page
+  listingCardComponentPage: {
+    prices: {
+      apartment1200k: "1,200,000 د.إ",
+      villa8500k: "8,500,000 د.إ",
+    },
+  },
+
+  // Chat Message Component Page
+  chatMessageComponentPage: {
+    examples: {
+      capitalQuestion: "ما هي عاصمة فرنسا؟",
+      capitalAnswer: "عاصمة فرنسا هي باريس. تُعرف بمدينة الأنوار وتشتهر بفنونها وثقافتها ومطبخها ومعالمها الشهيرة مثل برج إيفل.",
+      weatherQuestion: "كيف الطقس اليوم؟",
+      weatherAnswer: "ليس لدي وصول إلى بيانات الطقس في الوقت الفعلي، ولكن يمكنني مساعدتك في العثور على معلومات الطقس!",
+      sessionStarted: "بدأت جلسة الدردشة. الرسائل مشفرة من طرف إلى طرف.",
+      codeResponse: "إليك الكود الذي طلبته. لا تتردد في نسخه أو اطلب مني إنشاء نسخة مختلفة.",
+      quickQuestion: "سؤال سريع",
+      quickResponse: "رد سريع",
+      noTimeSelected: "لم يتم اختيار وقت",
+    },
+    timestamps: {
+      time229pm: "٢:٢٩ م",
+      time230pm: "٢:٣٠ م",
+      time225pm: "٢:٢٥ م",
+      time231pm: "٢:٣١ م",
+    },
+  },
+
+  // Date Picker Component Page
+  datePickerComponentPage: {
+    availableFromTo: "متاح من {from} إلى {to}",
+    apiReferenceDatePicker: "مرجع API - DatePicker",
+    apiReferenceDateRangePicker: "مرجع API - DateRangePicker",
+  },
+
+  // Time Picker Component Page
+  timePickerComponentPage: {
+    noTimeSelected: "لم يتم اختيار وقت",
+    apiReferenceTimePicker: "مرجع API - TimePicker",
+    apiReferenceTimeRangePicker: "مرجع API - TimeRangePicker",
   },
 }

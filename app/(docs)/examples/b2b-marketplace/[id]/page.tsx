@@ -160,6 +160,7 @@ function generateMockProduct(id: string): ProductDetail {
 export default function B2BProductDetailPage() {
   const { locale } = useDirection()
   const isRTL = locale === 'ar'
+  const t = content[locale]
 
   const product = generateMockProduct('industrial-printer')
   const [selectedImage, setSelectedImage] = React.useState(0)
@@ -199,7 +200,7 @@ export default function B2BProductDetailPage() {
             <li>/</li>
             <li>
               <Link href="/examples/b2b-marketplace" className="hover:text-foreground transition-colors">
-                {isRTL ? 'السوق B2B' : 'B2B Marketplace'}
+                {t.b2bMarketplaceListing.breadcrumb.b2bMarketplace}
               </Link>
             </li>
             <li>/</li>
@@ -241,20 +242,20 @@ export default function B2BProductDetailPage() {
             <Tabs defaultValue="description">
               <TabsList className="grid w-full grid-cols-3">
                 <TabsTrigger value="description">
-                  {isRTL ? 'الوصف' : 'Description'}
+                  {t.b2bMarketplaceDetail.tabs.description}
                 </TabsTrigger>
                 <TabsTrigger value="specifications">
-                  {isRTL ? 'المواصفات' : 'Specifications'}
+                  {t.b2bMarketplaceDetail.tabs.specifications}
                 </TabsTrigger>
                 <TabsTrigger value="shipping">
-                  {isRTL ? 'الشحن' : 'Shipping'}
+                  {t.b2bMarketplaceDetail.tabs.shipping}
                 </TabsTrigger>
               </TabsList>
 
               <TabsContent value="description" className="mt-6">
                 <Card>
                   <CardHeader>
-                    <CardTitle>{isRTL ? 'وصف المنتج' : 'Product Description'}</CardTitle>
+                    <CardTitle>{t.b2bMarketplaceDetail.productDescription.title}</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <p className="text-muted-foreground leading-relaxed">
@@ -267,7 +268,7 @@ export default function B2BProductDetailPage() {
               <TabsContent value="specifications" className="mt-6">
                 <Card>
                   <CardHeader>
-                    <CardTitle>{isRTL ? 'المواصفات الفنية' : 'Technical Specifications'}</CardTitle>
+                    <CardTitle>{t.b2bMarketplaceDetail.technicalSpecifications.title}</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <div className="space-y-3">
@@ -290,7 +291,7 @@ export default function B2BProductDetailPage() {
               <TabsContent value="shipping" className="mt-6">
                 <Card>
                   <CardHeader>
-                    <CardTitle>{isRTL ? 'خيارات الشحن' : 'Shipping Options'}</CardTitle>
+                    <CardTitle>{t.b2bMarketplaceDetail.shippingOptions.title}</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-3">
                     {product.shippingOptions.map((option, index) => (
@@ -322,12 +323,10 @@ export default function B2BProductDetailPage() {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <TrendingDown className="h-5 w-5 text-green-600" />
-                  {isRTL ? 'التسعير حسب الكمية' : 'Volume Pricing'}
+                  {t.b2bMarketplaceDetail.volumePricing.title}
                 </CardTitle>
                 <CardDescription>
-                  {isRTL
-                    ? 'وفّر المزيد عند الشراء بكميات أكبر'
-                    : 'Save more when you buy in larger quantities'}
+                  {t.b2bMarketplaceDetail.volumePricing.description}
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -345,7 +344,7 @@ export default function B2BProductDetailPage() {
                       <div className="flex items-center gap-4">
                         <div className="text-center min-w-[100px]">
                           <p className="text-sm text-muted-foreground">
-                            {isRTL ? 'الكمية' : 'Quantity'}
+                            {t.b2bMarketplaceDetail.volumePricing.quantity}
                           </p>
                           <p className="font-bold">
                             <ArabicNumber value={tier.min} />
@@ -354,14 +353,14 @@ export default function B2BProductDetailPage() {
                         </div>
                         <div className="text-center min-w-[120px]">
                           <p className="text-sm text-muted-foreground">
-                            {isRTL ? 'السعر/الوحدة' : 'Price/Unit'}
+                            {t.b2bMarketplaceDetail.volumePricing.pricePerUnit}
                           </p>
                           <p className="font-bold text-lg">{formatSAR(tier.price, { useArabicNumerals: isRTL, locale: isRTL ? 'ar' : 'en' })}</p>
                         </div>
                       </div>
                       {tier.discount > 0 && (
                         <Badge className="bg-green-600">
-                          {isRTL ? 'خصم ' : 'Save '}
+                          {t.b2bMarketplaceDetail.volumePricing.save}
                           <ArabicNumber value={tier.discount} />%
                         </Badge>
                       )}
@@ -374,7 +373,7 @@ export default function B2BProductDetailPage() {
             {/* Supplier Info */}
             <Card>
               <CardHeader>
-                <CardTitle>{isRTL ? 'معلومات المورد' : 'Supplier Information'}</CardTitle>
+                <CardTitle>{t.b2bMarketplaceDetail.supplierInfo.title}</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="flex items-start justify-between">
@@ -393,11 +392,11 @@ export default function B2BProductDetailPage() {
                         <ArabicNumber value={product.supplier.rating} />
                         <span>
                           (<ArabicNumber value={product.supplier.reviewCount} />{' '}
-                          {isRTL ? 'تقييم' : 'reviews'})
+                          {t.b2bMarketplaceDetail.supplierInfo.reviews})
                         </span>
                       </div>
                       <div>
-                        {isRTL ? 'وقت الاستجابة: ' : 'Response time: '}
+                        {t.b2bMarketplaceDetail.supplierInfo.responseTime}
                         {isRTL ? product.supplier.responseTimeAr : product.supplier.responseTime}
                       </div>
                     </div>
@@ -408,15 +407,13 @@ export default function B2BProductDetailPage() {
                   <div className="flex items-center gap-3">
                     <Shield className="h-5 w-5 text-muted-foreground" />
                     <span className="text-sm">
-                      {isRTL ? 'مورد معتمد وموثوق' : 'Verified & Trusted Supplier'}
+                      {t.b2bMarketplaceDetail.supplierInfo.verifiedSupplier}
                     </span>
                   </div>
                   <div className="flex items-center gap-3">
                     <Package className="h-5 w-5 text-muted-foreground" />
                     <span className="text-sm">
-                      {isRTL
-                        ? `أكثر من ${product.stockQuantity} وحدة متوفرة`
-                        : `${product.stockQuantity}+ units in stock`}
+                      {t.b2bMarketplaceDetail.supplierInfo.unitsAvailable.replace('{count}', product.stockQuantity.toString())}
                     </span>
                   </div>
                   <div className="flex items-center gap-3">
@@ -447,13 +444,13 @@ export default function B2BProductDetailPage() {
                   <div className="flex items-center gap-2">
                     <Calculator className="h-5 w-5 text-primary" />
                     <h3 className="font-semibold">
-                      {isRTL ? 'حاسبة الطلب' : 'Order Calculator'}
+                      {t.b2bMarketplaceDetail.orderCalculator.title}
                     </h3>
                   </div>
 
                   <div className="space-y-2">
                     <Label htmlFor="quantity">
-                      {isRTL ? 'الكمية' : 'Quantity'} ({isRTL ? product.unitAr : product.unit})
+                      {t.b2bMarketplaceDetail.orderCalculator.quantity} ({isRTL ? product.unitAr : product.unit})
                     </Label>
                     <div className="flex items-center gap-2">
                       <Button
@@ -482,7 +479,7 @@ export default function B2BProductDetailPage() {
                       </Button>
                     </div>
                     <p className="text-xs text-muted-foreground">
-                      {isRTL ? 'الحد الأدنى: ' : 'Minimum: '}
+                      {t.b2bMarketplaceDetail.orderCalculator.minimum}
                       <ArabicNumber value={product.moq} /> {isRTL ? product.unitAr : product.unit}
                     </p>
                   </div>
@@ -490,14 +487,14 @@ export default function B2BProductDetailPage() {
                   <div className="bg-muted rounded-lg p-4 space-y-3">
                     <div className="flex items-center justify-between text-sm">
                       <span className="text-muted-foreground">
-                        {isRTL ? 'سعر الوحدة' : 'Unit Price'}
+                        {t.b2bMarketplaceDetail.orderCalculator.unitPrice}
                       </span>
                       <span className="font-medium">{formatSAR(unitPrice, { useArabicNumerals: isRTL, locale: isRTL ? 'ar' : 'en' })}</span>
                     </div>
                     {currentTier.discount > 0 && (
                       <div className="flex items-center justify-between text-sm">
                         <span className="text-muted-foreground">
-                          {isRTL ? 'خصم الكمية' : 'Volume Discount'}
+                          {t.b2bMarketplaceDetail.orderCalculator.volumeDiscount}
                         </span>
                         <Badge variant="secondary">
                           <ArabicNumber value={currentTier.discount} />%
@@ -506,14 +503,14 @@ export default function B2BProductDetailPage() {
                     )}
                     <div className="border-t pt-3 flex items-center justify-between">
                       <span className="font-semibold">
-                        {isRTL ? 'المجموع الفرعي' : 'Subtotal'}
+                        {t.b2bMarketplaceDetail.orderCalculator.subtotal}
                       </span>
                       <span className="font-bold text-xl">{formatSAR(subtotal, { useArabicNumerals: isRTL, locale: isRTL ? 'ar' : 'en' })}</span>
                     </div>
                     {savings > 0 && (
                       <div className="text-center">
                         <Badge className="bg-green-600">
-                          {isRTL ? 'توفير ' : 'You save '}
+                          {t.b2bMarketplaceDetail.orderCalculator.youSave}
                           {formatSAR(savings, { useArabicNumerals: isRTL, locale: isRTL ? 'ar' : 'en' })}
                         </Badge>
                       </div>
@@ -525,7 +522,7 @@ export default function B2BProductDetailPage() {
                 <div className="space-y-2">
                   <div className="flex items-center gap-2">
                     <FileText className="h-5 w-5 text-primary" />
-                    <h3 className="font-semibold">{isRTL ? 'شروط الدفع' : 'Payment Terms'}</h3>
+                    <h3 className="font-semibold">{t.b2bMarketplaceDetail.paymentTerms.title}</h3>
                   </div>
                   <div className="space-y-1">
                     {(isRTL ? product.paymentTermsAr : product.paymentTerms).map((term, index) => (
@@ -541,12 +538,12 @@ export default function B2BProductDetailPage() {
                 <div className="space-y-3">
                   <Button className="w-full" size="lg">
                     <ShoppingCart className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
-                    {isRTL ? 'إضافة للسلة' : 'Add to Cart'}
+                    {t.b2bMarketplaceDetail.actions.addToCart}
                   </Button>
                   <Button variant="outline" className="w-full" asChild>
                     <Link href="/examples/b2b-marketplace/rfq">
                       <MessageSquare className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
-                      {isRTL ? 'طلب عرض سعر' : 'Request Quote'}
+                      {t.b2bMarketplaceDetail.actions.requestQuote}
                     </Link>
                   </Button>
                 </div>

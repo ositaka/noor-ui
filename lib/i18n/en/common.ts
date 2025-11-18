@@ -586,6 +586,7 @@ common: {
     buttons: {
       next: 'Next',
       back: 'Back',
+      previous: 'Previous',
       review: 'Review',
       submit: 'Submit',
       submitting: 'Submitting...',
@@ -1020,12 +1021,23 @@ common: {
       cart: 'Cart',
     },
     pageTitle: 'Checkout',
+    pageDescription: 'Complete your shipping and payment information to place your order',
     steps: {
       shipping: 'Shipping',
       payment: 'Payment',
       review: 'Review',
     },
     shippingAddress: 'Shipping Address',
+    shippingAddressDescription: 'Enter your full address for order delivery',
+    addressPlaceholder2: 'Building number, street name',
+    deliveryNotesPlaceholder: 'Any special delivery instructions...',
+    paymentOptions: {
+      visaMastercard: 'Visa, Mastercard, Mada',
+      payCash: 'Pay cash when you receive your order',
+      transferBank: 'Transfer directly to our bank account',
+    },
+    reviewOrderDescription2: 'Review your order details before confirming',
+    thankYouMessage: 'Thank you for your order. We will send you shipping details soon.',
     fullName: 'Full Name',
     fullNamePlaceholder: 'Enter your full name',
     phoneNumber: 'Phone Number',
@@ -1354,6 +1366,7 @@ common: {
       responseTime: 'Response time: ',
       verifiedSupplier: 'Verified & Trusted Supplier',
       unitsInStock: '+ units in stock',
+      unitsAvailable: '{count}+ units available',
     },
     orderCalculator: {
       title: 'Order Calculator',
@@ -1460,6 +1473,43 @@ common: {
       title: 'Related Examples',
       basicWorkflow: 'Basic Workflow',
       basicWorkflowDesc: 'Simple workflow builder example',
+      aiPlayground: 'AI Playground',
+      aiPlaygroundDesc: 'Advanced AI playground with model controls',
+    },
+  },
+
+  // Basic Workflow Page
+  workflowBasicPage: {
+    breadcrumb: {
+      basicWorkflow: 'Basic Workflow',
+    },
+    title: 'Basic Workflow',
+    description: 'A simple workflow builder example with drag-and-drop and connections.',
+    workInProgress: 'Work in Progress',
+    note: 'Note:',
+    noteText: 'This example is currently under development. Some features may not work as expected. We\'re actively working on improvements and will update the documentation once stable.',
+    run: 'Run',
+    reset: 'Reset',
+    badges: {
+      dragAndDrop: 'Drag & Drop',
+      connections: 'Connections',
+      rtlSupport: 'RTL Support',
+    },
+    howToUse: {
+      title: 'How to Use',
+      drag: 'Drag:',
+      dragDesc: 'Drag nodes to rearrange the workflow',
+      connect: 'Connect:',
+      connectDesc: 'Drag from output handle to input handle to create connections',
+      runTitle: 'Run:',
+      runDesc: 'Click "Run" to simulate workflow execution',
+      zoom: 'Zoom:',
+      zoomDesc: 'Use mouse wheel or controls to zoom in/out',
+    },
+    relatedExamples: {
+      title: 'Related Examples',
+      aiWorkflow: 'AI Workflow',
+      aiWorkflowDesc: 'AI-powered workflow builder with LLM models',
       aiPlayground: 'AI Playground',
       aiPlaygroundDesc: 'Advanced AI playground with model controls',
     },
@@ -1632,7 +1682,6 @@ common: {
     topRated: 'Top Rated',
     excellentSales: 'Excellent Sales',
   },
-}
 
   // Empty State Component Page
   emptyStateComponent: {
@@ -1747,6 +1796,7 @@ common: {
     messages: 'Messages:',
     modelLabel: 'Model:',
     parametersLabel: 'Parameters:',
+    tempLabel: 'Temp',
     demoDisclaimer: 'This is a demo. Responses are generated automatically.',
     mockResponses: {
       helpExplore: "I'm here to help! What would you like to explore today?",
@@ -1760,8 +1810,13 @@ common: {
 
   // Feature Card Component Page
   featureCardComponent: {
-    description: 'A specialized card component for showcasing features with an icon, title, and description. Optionally clickable with hover effects. Perfect for landing pages and feature grids.',
+    title: 'Feature Card',
+    description: 'Display a feature with icon, title, and description. Perfect for landing pages and feature showcases.',
     examples: {
+      title: 'Examples',
+      basic: 'Basic Feature',
+      withLink: 'With Link',
+      highlighted: 'Highlighted',
       rtlFirstDesign: 'RTL-First Design',
       rtlFirstDesc: 'Built from the ground up to support both LTR and RTL layouts seamlessly',
       amazingFeature: 'Amazing Feature',
@@ -1775,6 +1830,13 @@ common: {
       easyToUse: 'Easy to Use',
       easyToUseDesc: 'Simple API, powerful results',
     },
+    props: {
+      icon: 'Icon component',
+      title: 'Feature title',
+      description: 'Feature description',
+      href: 'Optional link URL',
+      highlighted: 'Whether to highlight the card',
+    },
     rtlSupport: {
       autoAdapts: 'FeatureCard automatically adapts to RTL layouts. The icon and text alignment mirror based on the current direction.',
     },
@@ -1784,22 +1846,38 @@ common: {
     },
     bestPractices: {
       doList: [
-        'Use descriptive icons that clearly represent the feature',
-        'Keep titles concise (2-4 words)',
-        'Write clear, benefit-focused descriptions',
-        'Maintain consistent card heights in grids',
+        'Use meaningful icons that represent the feature',
+        'Keep titles short and descriptive (2-5 words)',
+        'Provide clear, benefit-focused descriptions',
+        'Use consistent icon style across all feature cards',
+        'Ensure adequate spacing between cards for visual clarity',
       ],
       dontList: [
-        "Don't use too many cards on one page (4-6 is ideal)",
-        "Don't mix clickable and non-clickable cards in the same grid",
-        "Don't use overly complex or decorative icons",
-        "Don't write lengthy descriptions (keep under 15 words)",
+        "Don't use for long-form content",
+        "Don't use different icon styles within the same section",
+        "Don't overcrowd the layout with too many features at once",
+        "Don't use vague titles or descriptions",
+        "Don't neglect to provide icons when showcasing features",
       ],
     },
   },
 
   // User Menu Component Page
   userMenuComponent: {
+    demoNames: {
+      ahmedAlRashid: 'Ahmed Al-Rashid',
+      sarahJohnson: 'Sarah Johnson',
+      johnDoe: 'John Doe',
+      fatimaAlZahra: 'Fatima Al-Zahra',
+    },
+    actions: {
+      profile: 'Profile',
+      settings: 'Settings',
+      logout: 'Logout',
+      billing: 'Billing',
+      team: 'Team',
+      support: 'Support',
+    },
     bestPractices: {
       doList: [
         'Always display user name and email in the dropdown',
@@ -1818,19 +1896,250 @@ common: {
 
   // Notification Center Component Page
   notificationCenterComponent: {
+    title: 'Notification Center',
+    description: 'Display and manage notifications with filtering, marking as read, and grouping. Fully accessible.',
+    demoNotifications: {
+      newComment: 'New comment on your post',
+      sarahComment: 'Sarah commented: "Great article! Very helpful."',
+      newFollower: 'New follower',
+      ahmedFollowing: 'Ahmed started following you',
+      someoneLiked: 'Someone liked your post',
+      peopleLikedReact: '5 people liked "Getting Started with React"',
+      newReview: 'You have a new review',
+      excellentService: '"Excellent service!" - 5 stars',
+    },
+    examples: {
+      title: 'Examples',
+      list: 'Notification List',
+      withGroups: 'With Grouping',
+      withFilters: 'With Filters',
+    },
+    props: {
+      notifications: 'Array of notifications',
+      onMarkRead: 'Callback when notification is marked read',
+      onDelete: 'Callback when notification is deleted',
+      groupBy: 'How to group notifications',
+    },
     bestPractices: {
       doList: [
         'Show unread count badge on the bell icon',
         'Use relative time formatting (5m ago, 2h ago)',
         'Group notifications by date when appropriate',
         'Provide clear actions for each notification type',
+        'Show notification count badge in the UI',
       ],
       dontList: [
         "Don't show notifications older than 30 days",
         "Don't use generic notification messages",
         "Don't make all notifications look the same",
         "Don't forget to handle empty state gracefully",
+        "Don't overwhelm users with too many notifications at once",
       ],
+    },
+  },
+
+  // Accessible Inputs Page
+  accessibleInputsPage: {
+    backToExamples: 'Back to Examples',
+    title: 'Accessible Input Fields',
+    typesCount: '8 Types',
+    description: 'A comprehensive collection of input fields with full accessibility support, validation, and RTL support. All fields follow WCAG 2.1 AA best practices.',
+    accessibilityFeatures: 'Accessibility Features',
+    features: {
+      properAriaLabels: 'Proper ARIA labels',
+      fullKeyboardNav: 'Full keyboard navigation',
+      descriptiveErrors: 'Descriptive error messages',
+      focusManagement: 'Focus management',
+      screenReaderSupport: 'Screen reader support',
+      appropriateInputModes: 'Appropriate input modes for mobile',
+      realTimeValidation: 'Real-time validation',
+      fullRtlSupport: 'Full RTL support',
+    },
+    validation: {
+      pleaseEnterValid: 'Please enter a valid value',
+    },
+    exampleLabel: 'Example:',
+    codeExample: 'Code Example',
+    codeExampleDesc: 'Example of how to use input fields with validation',
+    docs: {
+      inputDocs: 'Input Docs',
+      labelDocs: 'Label Docs',
+      formDocs: 'Form Docs',
+    },
+  },
+
+  // Marketplace Cart Page
+  marketplaceCart: {
+    breadcrumb: {
+      marketplace: 'Marketplace',
+      shoppingCart: 'Shopping Cart',
+    },
+    title: 'Shopping Cart',
+    itemsInCart: 'You have {count} items in your cart',
+    emptyState: {
+      title: 'Your cart is empty',
+      description: 'Start shopping now and discover our amazing products',
+      browseProducts: 'Browse Products',
+    },
+    product: {
+      each: 'each',
+      maxAvailable: 'Max available',
+    },
+    actions: {
+      continueShopping: 'Continue Shopping',
+    },
+    summary: {
+      title: 'Order Summary',
+      subtotal: 'Subtotal',
+      vat: 'VAT (15%)',
+      shipping: 'Shipping',
+      free: 'FREE',
+      freeShippingPrompt: 'Add {amount} for free shipping',
+      total: 'Total',
+      proceedToCheckout: 'Proceed to Checkout',
+      secureTransaction: 'All transactions are secure and encrypted',
+    },
+  },
+
+  // AI Document Q&A Page
+  aiDocumentQa: {
+    breadcrumb: {
+      documentQa: 'Document Q&A',
+    },
+    sidebar: {
+      documents: 'Documents',
+      upload: 'Upload',
+      supportedFormats: 'Supported Formats',
+      pages: 'pages',
+    },
+    header: {
+      title: 'Document Q&A',
+      noDocumentSelected: 'No document selected',
+    },
+    actions: {
+      clear: 'Clear',
+    },
+    messages: {
+      sources: 'Sources',
+      page: 'Page {page}',
+    },
+    input: {
+      placeholder: 'Ask a question about the document...',
+      suggestedLabel: 'Suggested:',
+    },
+    demo: {
+      message: 'This is a demo. Answers are generated automatically and sources are mock data.',
+    },
+    systemMessages: {
+      welcome: "Hello! I'm your Document Analysis Assistant. I can answer questions about your uploaded documents. Ask me anything!",
+      newConversation: 'New conversation started. How can I help you analyze documents?',
+    },
+    suggestedQuestions: [
+      'What are React Hooks best practices?',
+      'How do I use TypeScript interfaces?',
+      'What are essential ARIA attributes?',
+      'How can I optimize React performance?',
+    ],
+  },
+
+  // AI Multi-Agent Page
+  aiMultiAgent: {
+    breadcrumb: {
+      multiAgent: 'Multi-Agent',
+    },
+    sidebar: {
+      availableAgents: 'Available Agents',
+      selectAgentsPrompt: 'Select which agents to include in the conversation',
+      active: 'Active',
+      inactive: 'Inactive',
+      howToUse: 'How to Use',
+      clickToActivate: 'Click agents to activate/deactivate',
+      multipleAgents: 'Multiple agents can be active',
+      agentsWillRespond: 'Active agents will respond to your messages',
+      uniqueExpertise: 'Each agent has unique expertise',
+    },
+    header: {
+      title: 'Multi-Agent Chat',
+      activeAgent: 'active agent',
+      activeAgents: 'active agents',
+    },
+    actions: {
+      clear: 'Clear',
+    },
+    input: {
+      placeholder: 'Ask your question to the active agents...',
+    },
+    demo: {
+      message: 'This is a demo. Active agents will respond to your messages.',
+    },
+    systemMessages: {
+      welcome: "Hello! I'm the coordinator for our team of specialized AI agents. You can talk to any agent or let us collaborate on answers. Each agent has unique expertise!",
+      newConversation: 'New conversation started. Choose which agents you want to talk to!',
+    },
+  },
+
+  // AI Chat Simple Page
+  aiChatSimple: {
+    breadcrumb: {
+      simpleChat: 'Simple Chat',
+    },
+    header: {
+      title: 'Simple AI Chat',
+      subtitle: 'AI assistant for your questions',
+    },
+    actions: {
+      clear: 'Clear',
+    },
+    demo: {
+      message: 'This is a demo. Responses are generated automatically and do not use real AI.',
+    },
+    systemMessages: {
+      welcome: "Hello! I'm an AI assistant ready to answer your questions. How can I help you today?",
+      newConversation: 'New conversation started. How can I help you?',
+      detailedResponse: 'Based on your detailed message, let me provide you with a comprehensive answer.',
+    },
+  },
+
+  // Time Picker Component Page
+  timePickerComponentPage: {
+    noTimeSelected: "No time selected",
+    apiReferenceTimePicker: "API Reference - TimePicker",
+    apiReferenceTimeRangePicker: "API Reference - TimeRangePicker",
+  },
+
+  // Chat Message Component Page
+  chatMessageComponentPage: {
+    examples: {
+      capitalQuestion: "What's the capital of France?",
+      capitalAnswer: "The capital of France is Paris. It's known as the City of Light and is famous for its art, culture, cuisine, and iconic landmarks like the Eiffel Tower.",
+      weatherQuestion: "What's the weather like today?",
+      weatherAnswer: "I don't have access to real-time weather data, but I can help you find weather information!",
+      sessionStarted: "Chat session started. Messages are end-to-end encrypted.",
+      codeResponse: "Here's the code you requested. Feel free to copy it or ask me to regenerate a different version.",
+      quickQuestion: "Quick question",
+      quickResponse: "Quick response",
+      noTimeSelected: "No time selected",
+    },
+    timestamps: {
+      time229pm: "2:29 PM",
+      time230pm: "2:30 PM",
+      time225pm: "2:25 PM",
+      time231pm: "2:31 PM",
+    },
+  },
+
+  // Date Picker Component Page
+  datePickerComponentPage: {
+    availableFromTo: "Available from {from} to {to}",
+    apiReferenceDatePicker: "API Reference - DatePicker",
+    apiReferenceDateRangePicker: "API Reference - DateRangePicker",
+  },
+
+  // Listing Card Component Page
+  listingCardComponentPage: {
+    prices: {
+      apartment1200k: "1,200,000 AED",
+      villa8500k: "8,500,000 AED",
     },
   },
 }

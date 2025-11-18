@@ -293,7 +293,7 @@ interface ListingCardTag {
                 title={t.listingCardComponent.realEstate.modernApartment}
                 subtitle={t.listingCardComponent.realEstate.downtownDubai}
                 description={t.listingCardComponent.realEstate.apartmentDesc}
-                price={isRTL ? '1,200,000 د.إ' : '1,200,000 AED'}
+                price={t.listingCardComponentPage.prices.apartment1200k}
                 placeholderIcon={Home}
               />
             </div>
@@ -318,7 +318,7 @@ interface ListingCardTag {
                   </>
                 }
                 description={t.listingCardComponent.realEstate.villaDesc}
-                price={isRTL ? '8,500,000 د.إ' : '8,500,000 AED'}
+                price={t.listingCardComponentPage.prices.villa8500k}
                 placeholderIcon={Home}
                 badges={[
                   { label: t.listingCardComponent.realEstate.forSale, variant: 'default' },

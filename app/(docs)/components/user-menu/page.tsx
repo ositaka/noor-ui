@@ -128,8 +128,19 @@ export default function Example() {
 export default function UserMenuPage() {
   const { direction, locale } = useDirection()
   const isRTL = direction === 'rtl'
-  const t = content[locale]
+  const [mounted, setMounted] = React.useState(false)
   const { toast } = useToast()
+
+  React.useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  if (!mounted) {
+    return <div className="container py-12">Loading...</div>
+  }
+
+  const t = content[locale] || content.en
+  const userMenuT = (content[locale]?.userMenuComponent || content.en.userMenuComponent) as any
 
   const handleAction = (action: string) => {
     toast({
@@ -197,12 +208,12 @@ export default function Example() {
             <ComponentShowcase.Demo>
               <UserMenu
                 user={{
-                  name: isRTL ? 'أحمد الراشد' : 'Ahmed Al-Rashid',
+                  name: userMenuT.demoNames.ahmedAlRashid,
                   email: 'ahmed@example.com',
                 }}
-                onProfileClick={() => handleAction(isRTL ? 'الملف الشخصي' : 'Profile')}
-                onSettingsClick={() => handleAction(isRTL ? 'الإعدادات' : 'Settings')}
-                onLogout={() => handleAction(isRTL ? 'تسجيل الخروج' : 'Logout')}
+                onProfileClick={() => handleAction(userMenuT.actions.profile)}
+                onSettingsClick={() => handleAction(userMenuT.actions.settings)}
+                onLogout={() => handleAction(userMenuT.actions.logout)}
               />
             </ComponentShowcase.Demo>
           </ComponentShowcase>
@@ -276,13 +287,13 @@ export default function Example() {
                   <div className="flex justify-center">
                     <UserMenu
                       user={{
-                        name: isRTL ? 'سارة جونسون' : 'Sarah Johnson',
+                        name: userMenuT.demoNames.sarahJohnson,
                         email: 'sarah@example.com',
                         image: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah',
                       }}
-                      onProfileClick={() => handleAction(isRTL ? 'الملف الشخصي' : 'Profile')}
-                      onSettingsClick={() => handleAction(isRTL ? 'الإعدادات' : 'Settings')}
-                      onLogout={() => handleAction(isRTL ? 'تسجيل الخروج' : 'Logout')}
+                      onProfileClick={() => handleAction(userMenuT.actions.profile)}
+                      onSettingsClick={() => handleAction(userMenuT.actions.settings)}
+                      onLogout={() => handleAction(userMenuT.actions.logout)}
                     />
                   </div>
                 </CardContent>
@@ -300,10 +311,10 @@ export default function Example() {
                   <div className="flex justify-center">
                     <UserMenu
                       user={{
-                        name: isRTL ? 'جون دو' : 'John Doe',
+                        name: userMenuT.demoNames.johnDoe,
                         email: 'john@example.com',
                       }}
-                      onLogout={() => handleAction(isRTL ? 'تسجيل الخروج' : 'Logout')}
+                      onLogout={() => handleAction(userMenuT.actions.logout)}
                     />
                   </div>
                 </CardContent>
@@ -321,16 +332,16 @@ export default function Example() {
                   <div className="flex justify-center">
                     <UserMenu
                       user={{
-                        name: isRTL ? 'فاطمة الزهراء' : 'Fatima Al-Zahra',
+                        name: userMenuT.demoNames.fatimaAlZahra,
                         email: 'fatima@example.com',
                         image: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Fatima',
                       }}
-                      onProfileClick={() => handleAction(isRTL ? 'الملف الشخصي' : 'Profile')}
-                      onSettingsClick={() => handleAction(isRTL ? 'الإعدادات' : 'Settings')}
-                      onBillingClick={() => handleAction(isRTL ? 'الفواتير' : 'Billing')}
-                      onTeamClick={() => handleAction(isRTL ? 'الفريق' : 'Team')}
-                      onSupportClick={() => handleAction(isRTL ? 'الدعم' : 'Support')}
-                      onLogout={() => handleAction(isRTL ? 'تسجيل الخروج' : 'Logout')}
+                      onProfileClick={() => handleAction(userMenuT.actions.profile)}
+                      onSettingsClick={() => handleAction(userMenuT.actions.settings)}
+                      onBillingClick={() => handleAction(userMenuT.actions.billing)}
+                      onTeamClick={() => handleAction(userMenuT.actions.team)}
+                      onSupportClick={() => handleAction(userMenuT.actions.support)}
+                      onLogout={() => handleAction(userMenuT.actions.logout)}
                     />
                   </div>
                 </CardContent>
@@ -405,8 +416,8 @@ export function Header() {
         <section className="mb-16">
           <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.bestPractices}</h2>
           <BestPractices
-            dos={t.userMenuComponent.bestPractices.doList}
-            donts={t.userMenuComponent.bestPractices.dontList}
+            dos={userMenuT.bestPractices.doList}
+            donts={userMenuT.bestPractices.dontList}
           />
         </section>
 

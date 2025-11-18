@@ -136,6 +136,7 @@ datePickerComponent: {
         nights: 'Number of nights',
         pricePerNight: 'Price per night',
         total: 'Total',
+        totalAmount: '${amount}',
       },
       props: {
         date: 'Controlled selected date',

@@ -269,6 +269,7 @@ const importantIslamicDates = [
 export default function IslamicFinanceDashboardPage() {
   const { direction, locale } = useDirection()
   const isRTL = direction === 'rtl'
+  const t = content[locale]
   const [allTransactions] = React.useState<Transaction[]>(generateTransactions())
   const [selectedDate, setSelectedDate] = React.useState<Date | undefined>(new Date())
   const [sortBy, setSortBy] = React.useState<string>()
