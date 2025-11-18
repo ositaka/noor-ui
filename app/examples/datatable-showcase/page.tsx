@@ -103,6 +103,7 @@ const generateUsers = (isRTL: boolean): User[] => {
 
 export default function DataTableShowcasePage() {
   const { direction, locale } = useDirection()
+  const t = content[locale]
   const isRTL = direction === 'rtl'
 
   // Role translations
@@ -119,12 +120,12 @@ export default function DataTableShowcasePage() {
   // Status translations
   const getStatusText = React.useCallback((status: User['status']) => {
     const translations = {
-      Active: isRTL ? 'نشط' : 'Active',
-      Inactive: isRTL ? 'غير نشط' : 'Inactive',
+      Active: t.ui.status.active,
+      Inactive: t.ui.status.inactive,
       Pending: isRTL ? 'معلق' : 'Pending',
     }
     return translations[status]
-  }, [isRTL])
+  }, [isRTL, t])
 
   // Data state
   const [allUsers] = React.useState<User[]>(generateUsers(isRTL))
@@ -271,7 +272,7 @@ export default function DataTableShowcasePage() {
     },
     {
       id: 'email',
-      header: isRTL ? 'البريد الإلكتروني' : 'Email',
+      header: t.ui.form.email,
       accessorKey: 'email',
       sortable: true,
       cell: (row) => <div className="text-muted-foreground text-sm">{row.email}</div>,
@@ -304,7 +305,7 @@ export default function DataTableShowcasePage() {
       sortable: true,
       cell: (row) => <div className="text-sm">{row.joinDate}</div>,
     },
-  ], [isRTL, getRoleVariant, getStatusVariant, getRoleText, getStatusText])
+  ], [isRTL, getRoleVariant, getStatusVariant, getRoleText, getStatusText, t])
 
   // Get paginated data
   const paginatedData = displayUsers.slice(
@@ -358,13 +359,13 @@ export default function DataTableShowcasePage() {
             <ol className="flex items-center gap-2 text-sm text-muted-foreground">
               <li>
                 <Link href="/" className="hover:text-foreground transition-colors">
-                  {isRTL ? 'الرئيسية' : 'Home'}
+                  {t.nav.home}
                 </Link>
               </li>
               <li>/</li>
               <li>
                 <Link href="/examples" className="hover:text-foreground transition-colors">
-                  {isRTL ? 'الأمثلة' : 'Examples'}
+                  {t.nav.examples}
                 </Link>
               </li>
               <li>/</li>
@@ -522,7 +523,7 @@ export default function DataTableShowcasePage() {
                             : 'cursor-pointer'
                         }
                       >
-                        {isRTL ? 'السابق' : 'Previous'}
+                        {t.ui.button.previous}
                       </PaginationPrevious>
                     </PaginationItem>
 
@@ -561,7 +562,7 @@ export default function DataTableShowcasePage() {
                             : 'cursor-pointer'
                         }
                       >
-                        {isRTL ? 'التالي' : 'Next'}
+                        {t.ui.button.next}
                       </PaginationNext>
                     </PaginationItem>
                   </PaginationContent>

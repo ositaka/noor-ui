@@ -162,6 +162,7 @@ const qaResponses = {
 
 export default function DocumentQAPage() {
   const { locale } = useDirection()
+  const t = content[locale]
   const isRTL = locale === 'ar'
 
   const [documents, setDocuments] = React.useState<Document[]>(sampleDocuments)
@@ -369,7 +370,7 @@ export default function DocumentQAPage() {
                   {isRTL ? 'مسح' : 'Clear'}
                 </Button>
                 <Button variant="outline" size="sm" asChild>
-                  <Link href="/examples">{isRTL ? 'الأمثلة' : 'Examples'}</Link>
+                  <Link href="/examples">{t.nav.examples}</Link>
                 </Button>
               </div>
             </div>
@@ -382,13 +383,13 @@ export default function DocumentQAPage() {
                 <ol className="flex items-center gap-2 text-sm text-muted-foreground">
                   <li>
                     <Link href="/" className="hover:text-foreground transition-colors">
-                      {isRTL ? 'الرئيسية' : 'Home'}
+                      {t.nav.home}
                     </Link>
                   </li>
                   <li>/</li>
                   <li>
                     <Link href="/examples" className="hover:text-foreground transition-colors">
-                      {isRTL ? 'الأمثلة' : 'Examples'}
+                      {t.nav.examples}
                     </Link>
                   </li>
                   <li>/</li>

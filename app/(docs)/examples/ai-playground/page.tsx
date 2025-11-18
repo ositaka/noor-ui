@@ -59,6 +59,7 @@ const mockResponses = {
 
 export default function AdvancedPlaygroundPage() {
   const { locale } = useDirection()
+  const t = content[locale]
   const isRTL = locale === 'ar'
 
   // Sidebar state
@@ -283,7 +284,7 @@ export default function AdvancedPlaygroundPage() {
                 {isRTL ? 'الإعدادات' : 'Settings'}
               </Button>
               <Button variant="outline" size="sm" asChild>
-                <Link href="/examples">{isRTL ? 'الأمثلة' : 'Examples'}</Link>
+                <Link href="/examples">{t.nav.examples}</Link>
               </Button>
             </div>
           </div>

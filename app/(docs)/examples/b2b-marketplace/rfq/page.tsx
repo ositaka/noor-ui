@@ -34,6 +34,7 @@ interface RFQItem {
 export default function RFQPage() {
   const { locale } = useDirection()
   const isRTL = locale === 'ar'
+  const t = content[locale]
 
   const [submitted, setSubmitted] = React.useState(false)
   const [formData, setFormData] = React.useState({
@@ -93,12 +94,10 @@ export default function RFQPage() {
                 </div>
                 <div className="space-y-2">
                   <h1 className="text-3xl font-bold">
-                    {isRTL ? 'تم إرسال طلب العرض!' : 'Quote Request Submitted!'}
+                    {t.b2bMarketplaceRfq.success.title}
                   </h1>
                   <p className="text-muted-foreground text-lg">
-                    {isRTL
-                      ? 'شكراً لك على طلبك. سيتم التواصل معك خلال 24 ساعة.'
-                      : 'Thank you for your request. We will contact you within 24 hours.'}
+                    {t.b2bMarketplaceRfq.success.message}
                   </p>
                 </div>
 
@@ -107,23 +106,23 @@ export default function RFQPage() {
                     <div className="grid gap-4 text-sm">
                       <div className="flex items-center justify-between">
                         <span className="text-muted-foreground">
-                          {isRTL ? 'رقم الطلب' : 'Request Number'}
+                          {t.b2bMarketplaceRfq.success.requestNumber}
                         </span>
                         <span className="font-mono font-semibold">#RFQ-2024-001234</span>
                       </div>
                       <div className="flex items-center justify-between">
                         <span className="text-muted-foreground">
-                          {isRTL ? 'وقت الاستجابة المتوقع' : 'Expected Response'}
+                          {t.b2bMarketplaceRfq.success.expectedResponse}
                         </span>
                         <span className="font-medium">
-                          {isRTL ? 'خلال ٢٤ ساعة' : 'Within 24 hours'}
+                          {t.b2bMarketplaceRfq.success.within24Hours}
                         </span>
                       </div>
                       <div className="flex items-center justify-between">
                         <span className="text-muted-foreground">
-                          {isRTL ? 'الحالة' : 'Status'}
+                          {t.b2bMarketplaceRfq.success.status}
                         </span>
-                        <Badge>{isRTL ? 'قيد المراجعة' : 'Under Review'}</Badge>
+                        <Badge>{t.b2bMarketplaceRfq.success.underReview}</Badge>
                       </div>
                     </div>
                   </CardContent>
@@ -131,11 +130,11 @@ export default function RFQPage() {
 
                 <div className="flex gap-3 pt-4">
                   <Button variant="outline" onClick={() => setSubmitted(false)}>
-                    {isRTL ? 'طلب آخر' : 'New Request'}
+                    {t.b2bMarketplaceRfq.success.newRequest}
                   </Button>
                   <Button asChild>
                     <Link href="/examples/b2b-marketplace/dashboard">
-                      {isRTL ? 'لوحة التحكم' : 'Dashboard'}
+                      {t.b2bMarketplaceRfq.success.dashboard}
                     </Link>
                   </Button>
                 </div>
@@ -155,24 +154,24 @@ export default function RFQPage() {
           <ol className="flex items-center gap-2 text-sm text-muted-foreground">
             <li>
               <Link href="/" className="hover:text-foreground transition-colors">
-                {isRTL ? 'الرئيسية' : 'Home'}
+                {t.nav.home}
               </Link>
             </li>
             <li>/</li>
             <li>
               <Link href="/examples" className="hover:text-foreground transition-colors">
-                {isRTL ? 'الأمثلة' : 'Examples'}
+                {t.nav.examples}
               </Link>
             </li>
             <li>/</li>
             <li>
               <Link href="/examples/b2b-marketplace" className="hover:text-foreground transition-colors">
-                {isRTL ? 'السوق B2B' : 'B2B Marketplace'}
+                {t.b2bMarketplaceRfq.breadcrumb.b2bMarketplace}
               </Link>
             </li>
             <li>/</li>
             <li className="text-foreground font-medium">
-              {isRTL ? 'طلب عرض سعر' : 'Request for Quote'}
+              {t.b2bMarketplaceRfq.breadcrumb.requestForQuote}
             </li>
           </ol>
         </nav>
@@ -180,12 +179,10 @@ export default function RFQPage() {
         {/* Page Header */}
         <div className="mb-8">
           <h1 className="text-4xl font-bold tracking-tight mb-2">
-            {isRTL ? 'طلب عرض سعر (RFQ)' : 'Request for Quote (RFQ)'}
+            {t.b2bMarketplaceRfq.pageTitle}
           </h1>
           <p className="text-xl text-muted-foreground">
-            {isRTL
-              ? 'احصل على أسعار تنافسية لطلبات الجملة الكبيرة'
-              : 'Get competitive pricing for large bulk orders'}
+            {t.b2bMarketplaceRfq.pageDescription}
           </p>
         </div>
 
@@ -199,12 +196,10 @@ export default function RFQPage() {
                 </div>
                 <div>
                   <h3 className="font-semibold mb-1">
-                    {isRTL ? 'أسعار مخصصة' : 'Custom Pricing'}
+                    {t.b2bMarketplaceRfq.benefits.customPricing}
                   </h3>
                   <p className="text-sm text-muted-foreground">
-                    {isRTL
-                      ? 'احصل على أسعار مخصصة للطلبات الكبيرة'
-                      : 'Get tailored pricing for large orders'}
+                    {t.b2bMarketplaceRfq.benefits.customPricingDesc}
                   </p>
                 </div>
               </div>
@@ -219,12 +214,10 @@ export default function RFQPage() {
                 </div>
                 <div>
                   <h3 className="font-semibold mb-1">
-                    {isRTL ? 'استجابة سريعة' : 'Fast Response'}
+                    {t.b2bMarketplaceRfq.benefits.fastResponse}
                   </h3>
                   <p className="text-sm text-muted-foreground">
-                    {isRTL
-                      ? 'رد خلال 24 ساعة على جميع الطلبات'
-                      : 'Response within 24 hours on all requests'}
+                    {t.b2bMarketplaceRfq.benefits.fastResponseDesc}
                   </p>
                 </div>
               </div>
@@ -239,12 +232,10 @@ export default function RFQPage() {
                 </div>
                 <div>
                   <h3 className="font-semibold mb-1">
-                    {isRTL ? 'شروط مرنة' : 'Flexible Terms'}
+                    {t.b2bMarketplaceRfq.benefits.flexibleTerms}
                   </h3>
                   <p className="text-sm text-muted-foreground">
-                    {isRTL
-                      ? 'شروط دفع وتسليم مرنة'
-                      : 'Flexible payment and delivery terms'}
+                    {t.b2bMarketplaceRfq.benefits.flexibleTermsDesc}
                   </p>
                 </div>
               </div>
@@ -259,18 +250,16 @@ export default function RFQPage() {
               {/* Company Information */}
               <Card>
                 <CardHeader>
-                  <CardTitle>{isRTL ? 'معلومات الشركة' : 'Company Information'}</CardTitle>
+                  <CardTitle>{t.b2bMarketplaceRfq.companyInfo.title}</CardTitle>
                   <CardDescription>
-                    {isRTL
-                      ? 'أدخل معلومات شركتك وبيانات الاتصال'
-                      : 'Enter your company details and contact information'}
+                    {t.b2bMarketplaceRfq.companyInfo.description}
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="grid gap-4 md:grid-cols-2">
                     <div className="space-y-2">
                       <Label htmlFor="companyName">
-                        {isRTL ? 'اسم الشركة' : 'Company Name'}
+                        {t.b2bMarketplaceRfq.companyInfo.companyName}
                       </Label>
                       <Input
                         id="companyName"
@@ -284,7 +273,7 @@ export default function RFQPage() {
 
                     <div className="space-y-2">
                       <Label htmlFor="contactPerson">
-                        {isRTL ? 'اسم جهة الاتصال' : 'Contact Person'}
+                        {t.b2bMarketplaceRfq.companyInfo.contactPerson}
                       </Label>
                       <Input
                         id="contactPerson"
@@ -300,7 +289,7 @@ export default function RFQPage() {
                   <div className="grid gap-4 md:grid-cols-2">
                     <div className="space-y-2">
                       <Label htmlFor="email">
-                        {isRTL ? 'البريد الإلكتروني' : 'Email'}
+                        {t.ui.form.email}
                       </Label>
                       <Input
                         id="email"
@@ -313,7 +302,7 @@ export default function RFQPage() {
 
                     <div className="space-y-2">
                       <Label htmlFor="phone">
-                        {isRTL ? 'رقم الهاتف' : 'Phone Number'}
+                        {t.b2bMarketplaceRfq.companyInfo.phoneNumber}
                       </Label>
                       <Input
                         id="phone"
@@ -326,7 +315,7 @@ export default function RFQPage() {
 
                   <div className="space-y-2">
                     <Label htmlFor="deliveryAddress">
-                      {isRTL ? 'عنوان التسليم' : 'Delivery Address'}
+                      {t.b2bMarketplaceRfq.companyInfo.deliveryAddress}
                     </Label>
                     <Textarea
                       id="deliveryAddress"
@@ -346,16 +335,14 @@ export default function RFQPage() {
                 <CardHeader>
                   <div className="flex items-center justify-between">
                     <div>
-                      <CardTitle>{isRTL ? 'المنتجات المطلوبة' : 'Products Required'}</CardTitle>
+                      <CardTitle>{t.b2bMarketplaceRfq.products.title}</CardTitle>
                       <CardDescription>
-                        {isRTL
-                          ? 'أضف المنتجات التي ترغب في الحصول على عرض سعر لها'
-                          : 'Add products you want to get a quote for'}
+                        {t.b2bMarketplaceRfq.products.description}
                       </CardDescription>
                     </div>
                     <Button type="button" variant="outline" size="sm" onClick={addItem}>
                       <Plus className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
-                      {isRTL ? 'إضافة' : 'Add Item'}
+                      {t.b2bMarketplaceRfq.products.addItem}
                     </Button>
                   </div>
                 </CardHeader>
@@ -365,8 +352,7 @@ export default function RFQPage() {
                       <CardContent className="p-4">
                         <div className="flex items-start justify-between mb-4">
                           <h4 className="font-semibold">
-                            {isRTL ? 'منتج ' : 'Item '}
-                            {index + 1}
+                            {t.b2bMarketplaceRfq.products.item} {index + 1}
                           </h4>
                           {rfqItems.length > 1 && (
                             <Button
@@ -383,7 +369,7 @@ export default function RFQPage() {
                         <div className="space-y-3">
                           <div className="space-y-2">
                             <Label htmlFor={`product-${item.id}`}>
-                              {isRTL ? 'اسم المنتج / الوصف' : 'Product Name / Description'}
+                              {t.b2bMarketplaceRfq.products.productName}
                             </Label>
                             <Input
                               id={`product-${item.id}`}
@@ -398,7 +384,7 @@ export default function RFQPage() {
                           <div className="grid gap-3 md:grid-cols-2">
                             <div className="space-y-2">
                               <Label htmlFor={`quantity-${item.id}`}>
-                                {isRTL ? 'الكمية المطلوبة' : 'Quantity Required'}
+                                {t.b2bMarketplaceRfq.products.quantityRequired}
                               </Label>
                               <Input
                                 id={`quantity-${item.id}`}
@@ -411,7 +397,7 @@ export default function RFQPage() {
 
                             <div className="space-y-2">
                               <Label htmlFor={`price-${item.id}`}>
-                                {isRTL ? 'السعر المستهدف (SAR)' : 'Target Price (SAR)'}
+                                {t.b2bMarketplaceRfq.products.targetPrice}
                               </Label>
                               <Input
                                 id={`price-${item.id}`}
@@ -420,21 +406,21 @@ export default function RFQPage() {
                                 onChange={(e) =>
                                   updateItem(item.id, 'targetPrice', e.target.value)
                                 }
-                                placeholder={isRTL ? 'اختياري' : 'Optional'}
+                                placeholder={t.b2bMarketplaceRfq.products.optional}
                               />
                             </div>
                           </div>
 
                           <div className="space-y-2">
                             <Label htmlFor={`notes-${item.id}`}>
-                              {isRTL ? 'ملاحظات إضافية' : 'Additional Notes'}
+                              {t.b2bMarketplaceRfq.products.additionalNotes}
                             </Label>
                             <Textarea
                               id={`notes-${item.id}`}
                               value={item.notes}
                               onChange={(e) => updateItem(item.id, 'notes', e.target.value)}
                               rows={2}
-                              placeholder={isRTL ? 'المواصفات، المتطلبات الخاصة...' : 'Specifications, special requirements...'}
+                              placeholder={t.b2bMarketplaceRfq.products.specificationsPlaceholder}
                             />
                           </div>
                         </div>
@@ -447,13 +433,13 @@ export default function RFQPage() {
               {/* Additional Requirements */}
               <Card>
                 <CardHeader>
-                  <CardTitle>{isRTL ? 'متطلبات إضافية' : 'Additional Requirements'}</CardTitle>
+                  <CardTitle>{t.b2bMarketplaceRfq.additionalRequirements.title}</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="grid gap-4 md:grid-cols-2">
                     <div className="space-y-2">
                       <Label htmlFor="paymentTerms">
-                        {isRTL ? 'شروط الدفع المفضلة' : 'Preferred Payment Terms'}
+                        {t.b2bMarketplaceRfq.additionalRequirements.preferredPaymentTerms}
                       </Label>
                       <Select
                         value={formData.paymentTerms}
@@ -463,23 +449,21 @@ export default function RFQPage() {
                       >
                         <SelectTrigger>
                           <SelectValue
-                            placeholder={
-                              isRTL ? 'اختر شروط الدفع' : 'Select payment terms'
-                            }
+                            placeholder={t.b2bMarketplaceRfq.additionalRequirements.selectPaymentTerms}
                           />
                         </SelectTrigger>
                         <SelectContent>
                           <SelectItem value="immediate">
-                            {isRTL ? 'دفع فوري' : 'Immediate Payment'}
+                            {t.b2bMarketplaceRfq.additionalRequirements.immediatePayment}
                           </SelectItem>
                           <SelectItem value="net30">
-                            {isRTL ? 'صافي ٣٠ يوم' : 'Net 30 Days'}
+                            {t.b2bMarketplaceRfq.additionalRequirements.net30Days}
                           </SelectItem>
                           <SelectItem value="net60">
-                            {isRTL ? 'صافي ٦٠ يوم' : 'Net 60 Days'}
+                            {t.b2bMarketplaceRfq.additionalRequirements.net60Days}
                           </SelectItem>
                           <SelectItem value="net90">
-                            {isRTL ? 'صافي ٩٠ يوم' : 'Net 90 Days'}
+                            {t.b2bMarketplaceRfq.additionalRequirements.net90Days}
                           </SelectItem>
                         </SelectContent>
                       </Select>
@@ -487,7 +471,7 @@ export default function RFQPage() {
 
                     <div className="space-y-2">
                       <Label htmlFor="deliveryDate">
-                        {isRTL ? 'تاريخ التسليم المطلوب' : 'Required Delivery Date'}
+                        {t.b2bMarketplaceRfq.additionalRequirements.requiredDeliveryDate}
                       </Label>
                       <Input
                         id="deliveryDate"
@@ -502,7 +486,7 @@ export default function RFQPage() {
 
                   <div className="space-y-2">
                     <Label htmlFor="additionalNotes">
-                      {isRTL ? 'ملاحظات إضافية' : 'Additional Notes'}
+                      {t.b2bMarketplaceRfq.additionalRequirements.additionalNotes}
                     </Label>
                     <Textarea
                       id="additionalNotes"
@@ -511,25 +495,19 @@ export default function RFQPage() {
                         setFormData({ ...formData, additionalNotes: e.target.value })
                       }
                       rows={4}
-                      placeholder={
-                        isRTL
-                          ? 'أي متطلبات أو معلومات إضافية...'
-                          : 'Any additional requirements or information...'
-                      }
+                      placeholder={t.b2bMarketplaceRfq.additionalRequirements.additionalNotesPlaceholder}
                     />
                   </div>
 
                   <div className="space-y-2">
-                    <Label>{isRTL ? 'إرفاق ملفات (اختياري)' : 'Attach Files (Optional)'}</Label>
+                    <Label>{t.b2bMarketplaceRfq.additionalRequirements.attachFiles}</Label>
                     <div className="border-2 border-dashed rounded-lg p-8 text-center">
                       <Upload className="h-8 w-8 mx-auto text-muted-foreground mb-2" />
                       <p className="text-sm text-muted-foreground mb-2">
-                        {isRTL
-                          ? 'اسحب وأفلت الملفات هنا أو انقر للتصفح'
-                          : 'Drag and drop files here or click to browse'}
+                        {t.b2bMarketplaceRfq.additionalRequirements.dragDropFiles}
                       </p>
                       <Button type="button" variant="outline" size="sm">
-                        {isRTL ? 'اختر ملفات' : 'Choose Files'}
+                        {t.b2bMarketplaceRfq.additionalRequirements.chooseFiles}
                       </Button>
                     </div>
                   </div>
@@ -541,67 +519,57 @@ export default function RFQPage() {
             <div className="lg:col-span-1">
               <Card className="sticky top-4">
                 <CardHeader>
-                  <CardTitle>{isRTL ? 'ملخص الطلب' : 'Request Summary'}</CardTitle>
+                  <CardTitle>{t.b2bMarketplaceRfq.summary.title}</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="space-y-2">
                     <div className="flex items-center justify-between text-sm">
                       <span className="text-muted-foreground">
-                        {isRTL ? 'عدد المنتجات' : 'Number of Items'}
+                        {t.b2bMarketplaceRfq.summary.numberOfItems}
                       </span>
                       <span className="font-medium">{rfqItems.length}</span>
                     </div>
                     <div className="flex items-center justify-between text-sm">
                       <span className="text-muted-foreground">
-                        {isRTL ? 'وقت الاستجابة' : 'Response Time'}
+                        {t.b2bMarketplaceRfq.summary.responseTime}
                       </span>
                       <span className="font-medium">
-                        {isRTL ? '٢٤ ساعة' : '24 hours'}
+                        {t.b2bMarketplaceRfq.summary.hours24}
                       </span>
                     </div>
                   </div>
 
                   <div className="bg-muted rounded-lg p-4 space-y-2">
                     <h4 className="font-semibold text-sm">
-                      {isRTL ? 'ما يجب توقعه:' : "What to expect:"}
+                      {t.b2bMarketplaceRfq.summary.whatToExpect}
                     </h4>
                     <ul className="space-y-1 text-sm text-muted-foreground">
                       <li className="flex items-start gap-2">
                         <CheckCircle2 className="h-4 w-4 text-green-600 shrink-0 mt-0.5" />
-                        {isRTL
-                          ? 'رد خلال 24 ساعة'
-                          : 'Response within 24 hours'}
+                        {t.b2bMarketplaceRfq.summary.responseWithin24}
                       </li>
                       <li className="flex items-start gap-2">
                         <CheckCircle2 className="h-4 w-4 text-green-600 shrink-0 mt-0.5" />
-                        {isRTL
-                          ? 'أسعار تنافسية مخصصة'
-                          : 'Competitive custom pricing'}
+                        {t.b2bMarketplaceRfq.summary.competitivePricing}
                       </li>
                       <li className="flex items-start gap-2">
                         <CheckCircle2 className="h-4 w-4 text-green-600 shrink-0 mt-0.5" />
-                        {isRTL
-                          ? 'شروط دفع مرنة'
-                          : 'Flexible payment terms'}
+                        {t.b2bMarketplaceRfq.summary.flexiblePayment}
                       </li>
                       <li className="flex items-start gap-2">
                         <CheckCircle2 className="h-4 w-4 text-green-600 shrink-0 mt-0.5" />
-                        {isRTL
-                          ? 'دعم مخصص'
-                          : 'Dedicated support'}
+                        {t.b2bMarketplaceRfq.summary.dedicatedSupport}
                       </li>
                     </ul>
                   </div>
 
                   <Button type="submit" className="w-full" size="lg">
                     <MessageSquare className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
-                    {isRTL ? 'إرسال الطلب' : 'Submit Request'}
+                    {t.b2bMarketplaceRfq.summary.submitRequest}
                   </Button>
 
                   <p className="text-xs text-center text-muted-foreground">
-                    {isRTL
-                      ? 'بإرسال هذا الطلب، فإنك توافق على شروط وأحكام الخدمة'
-                      : 'By submitting this request, you agree to our terms of service'}
+                    {t.b2bMarketplaceRfq.summary.termsAgreement}
                   </p>
                 </CardContent>
               </Card>

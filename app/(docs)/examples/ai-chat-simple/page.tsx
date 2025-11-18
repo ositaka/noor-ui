@@ -41,6 +41,7 @@ const mockResponses = {
 
 export default function SimpleChatPage() {
   const { locale } = useDirection()
+  const t = content[locale]
   const isRTL = locale === 'ar'
 
   const [messages, setMessages] = React.useState<Message[]>([
@@ -179,7 +180,7 @@ export default function SimpleChatPage() {
                 {isRTL ? 'مسح' : 'Clear'}
               </Button>
               <Button variant="outline" size="sm" asChild>
-                <Link href="/examples">{isRTL ? 'الأمثلة' : 'Examples'}</Link>
+                <Link href="/examples">{t.nav.examples}</Link>
               </Button>
             </div>
           </div>
@@ -192,13 +193,13 @@ export default function SimpleChatPage() {
               <ol className="flex items-center gap-2 text-sm text-muted-foreground">
                 <li>
                   <Link href="/" className="hover:text-foreground transition-colors">
-                    {isRTL ? 'الرئيسية' : 'Home'}
+                    {t.nav.home}
                   </Link>
                 </li>
                 <li>/</li>
                 <li>
                   <Link href="/examples" className="hover:text-foreground transition-colors">
-                    {isRTL ? 'الأمثلة' : 'Examples'}
+                    {t.nav.examples}
                   </Link>
                 </li>
                 <li>/</li>

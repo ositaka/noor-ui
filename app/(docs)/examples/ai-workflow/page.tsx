@@ -102,6 +102,7 @@ const initialEdges: Edge[] = [
 
 export default function AIWorkflowPage() {
   const { locale } = useDirection()
+  const t = content[locale]
   const isRTL = locale === 'ar'
 
   const [nodes, setNodes] = React.useState<Node[]>(
@@ -199,18 +200,18 @@ export default function AIWorkflowPage() {
           <ol className="flex items-center gap-2 text-sm text-muted-foreground">
             <li>
               <Link href="/" className="hover:text-foreground transition-colors">
-                {isRTL ? 'الرئيسية' : 'Home'}
+                {t.nav.home}
               </Link>
             </li>
             <li>/</li>
             <li>
               <Link href="/examples" className="hover:text-foreground transition-colors">
-                {isRTL ? 'الأمثلة' : 'Examples'}
+                {t.nav.examples}
               </Link>
             </li>
             <li>/</li>
             <li className="text-foreground font-medium">
-              {isRTL ? 'سير عمل الذكاء الاصطناعي' : 'AI Workflow'}
+              {t.aiWorkflowPage.breadcrumb.aiWorkflow}
             </li>
           </ol>
         </nav>
@@ -221,22 +222,20 @@ export default function AIWorkflowPage() {
             <div className="space-y-3">
               <div className="flex items-center gap-3">
                 <h1 className="text-4xl font-bold tracking-tight">
-                  {isRTL ? 'سير عمل الذكاء الاصطناعي' : 'AI Workflow'}
+                  {t.aiWorkflowPage.title}
                 </h1>
                 <Badge variant="secondary" className="flex items-center gap-1.5">
                   <AlertCircle className="h-3 w-3" />
-                  {isRTL ? 'قيد التطوير' : 'Work in Progress'}
+                  {t.aiWorkflowPage.workInProgress}
                 </Badge>
               </div>
               <p className="text-xl text-muted-foreground max-w-3xl">
-                {isRTL
-                  ? 'أداة بناء سير العمل مع تكامل LLM وتتبع الرموز ومحددات النماذج.'
-                  : 'Workflow builder with LLM integration, token tracking, and model selectors.'}
+                {t.aiWorkflowPage.subtitle}
               </p>
               <div className="flex items-start gap-2 p-3 bg-yellow-50 dark:bg-yellow-950/20 border border-yellow-200 dark:border-yellow-800 rounded-lg max-w-3xl">
                 <AlertCircle className="h-4 w-4 text-yellow-600 dark:text-yellow-500 mt-0.5 flex-shrink-0" />
                 <p className="text-sm text-yellow-800 dark:text-yellow-200">
-                  <strong>{isRTL ? 'ملاحظة:' : 'Note:'}</strong> {isRTL ? 'هذا المثال قيد التطوير حاليًا. قد لا تعمل بعض الميزات كما هو متوقع. نحن نعمل بنشاط على التحسينات وسنقوم بتحديث الوثائق بمجرد أن تصبح مستقرة.' : 'This example is currently under development. Some features may not work as expected. We\'re actively working on improvements and will update the documentation once stable.'}
+                  <strong>{t.aiWorkflowPage.note}</strong> {t.aiWorkflowPage.noteText}
                 </p>
               </div>
             </div>
@@ -246,11 +245,11 @@ export default function AIWorkflowPage() {
                 disabled={isRunning}
               >
                 <Play className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
-                {isRTL ? 'تشغيل' : 'Run'}
+                {t.aiWorkflowPage.run}
               </Button>
               <Button onClick={handleReset} variant="outline">
                 <RotateCcw className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
-                {isRTL ? 'إعادة تعيين' : 'Reset'}
+                {t.aiWorkflowPage.reset}
               </Button>
             </div>
           </div>
@@ -258,13 +257,13 @@ export default function AIWorkflowPage() {
           <div className="flex flex-wrap gap-2">
             <Badge variant="secondary">
               <Sparkles className={cn('h-3 w-3', isRTL ? 'ms-1' : 'me-1')} />
-              {isRTL ? 'نماذج LLM' : 'LLM Models'}
+              {t.aiWorkflowPage.badges.llmModels}
             </Badge>
             <Badge variant="secondary">
-              {isRTL ? 'تتبع الرموز' : 'Token Tracking'}
+              {t.aiWorkflowPage.badges.tokenTracking}
             </Badge>
             <Badge variant="secondary">
-              {isRTL ? 'تكامل الذكاء الاصطناعي' : 'AI Integration'}
+              {t.aiWorkflowPage.badges.aiIntegration}
             </Badge>
           </div>
         </div>
@@ -290,7 +289,7 @@ export default function AIWorkflowPage() {
               <div className="flex items-center gap-2 mb-3">
                 <Settings className="h-4 w-4 text-primary" />
                 <h3 className="font-semibold text-sm">
-                  {isRTL ? 'استخدام الرموز' : 'Token Usage'}
+                  {t.aiWorkflowPage.sidebar.tokenUsage}
                 </h3>
               </div>
               <TokenCounter
@@ -308,29 +307,29 @@ export default function AIWorkflowPage() {
             {/* Workflow Info */}
             <Card className="p-4">
               <h3 className="font-semibold text-sm mb-3">
-                {isRTL ? 'معلومات سير العمل' : 'Workflow Info'}
+                {t.aiWorkflowPage.sidebar.workflowInfo}
               </h3>
               <div className="space-y-2 text-xs">
                 <div className="flex items-center justify-between">
                   <span className="text-muted-foreground">
-                    {isRTL ? 'العقد:' : 'Nodes:'}
+                    {t.aiWorkflowPage.sidebar.nodes}
                   </span>
                   <span className="font-medium">{nodes.length}</span>
                 </div>
                 <Separator />
                 <div className="flex items-center justify-between">
                   <span className="text-muted-foreground">
-                    {isRTL ? 'الاتصالات:' : 'Connections:'}
+                    {t.aiWorkflowPage.sidebar.connections}
                   </span>
                   <span className="font-medium">{edges.length}</span>
                 </div>
                 <Separator />
                 <div className="flex items-center justify-between">
                   <span className="text-muted-foreground">
-                    {isRTL ? 'الحالة:' : 'Status:'}
+                    {t.aiWorkflowPage.sidebar.status}
                   </span>
                   <Badge variant={isRunning ? 'default' : 'secondary'} className="text-xs">
-                    {isRunning ? (isRTL ? 'قيد التشغيل' : 'Running') : (isRTL ? 'جاهز' : 'Ready')}
+                    {isRunning ? t.aiWorkflowPage.sidebar.running : t.aiWorkflowPage.sidebar.ready}
                   </Badge>
                 </div>
               </div>
@@ -339,14 +338,14 @@ export default function AIWorkflowPage() {
             {/* Features */}
             <Card className="p-4">
               <h3 className="font-semibold text-sm mb-3">
-                {isRTL ? 'الميزات' : 'Features'}
+                {t.aiWorkflowPage.sidebar.features}
               </h3>
               <ul className="space-y-2 text-xs text-muted-foreground">
-                <li>✓ {isRTL ? 'اختيار نموذج LLM' : 'LLM model selection'}</li>
-                <li>✓ {isRTL ? 'تتبع الرموز في الوقت الفعلي' : 'Real-time token tracking'}</li>
-                <li>✓ {isRTL ? 'تقدير التكلفة' : 'Cost estimation'}</li>
-                <li>✓ {isRTL ? 'محاكاة التنفيذ' : 'Execution simulation'}</li>
-                <li>✓ {isRTL ? 'دعم RTL كامل' : 'Full RTL support'}</li>
+                <li>✓ {t.aiWorkflowPage.sidebar.llmModelSelection}</li>
+                <li>✓ {t.aiWorkflowPage.sidebar.realTimeTokenTracking}</li>
+                <li>✓ {t.aiWorkflowPage.sidebar.costEstimation}</li>
+                <li>✓ {t.aiWorkflowPage.sidebar.executionSimulation}</li>
+                <li>✓ {t.aiWorkflowPage.sidebar.fullRTLSupport}</li>
               </ul>
             </Card>
           </div>
@@ -355,32 +354,24 @@ export default function AIWorkflowPage() {
         {/* Instructions */}
         <Card className="p-6 mt-8">
           <h2 className="text-lg font-semibold mb-4">
-            {isRTL ? 'كيف يعمل' : 'How It Works'}
+            {t.aiWorkflowPage.howItWorks.title}
           </h2>
           <div className="space-y-3 text-muted-foreground">
             <div>
-              <strong>{isRTL ? '١. مدخلات المستخدم:' : '1. User Input:'}</strong>{' '}
-              {isRTL
-                ? 'يستقبل سير العمل موجه المستخدم عبر webhook'
-                : 'The workflow receives a user prompt via webhook'}
+              <strong>{t.aiWorkflowPage.howItWorks.userInput}</strong>{' '}
+              {t.aiWorkflowPage.howItWorks.userInputDesc}
             </div>
             <div>
-              <strong>{isRTL ? '٢. معالجة LLM:' : '2. LLM Processing:'}</strong>{' '}
-              {isRTL
-                ? 'يتم إرسال الموجه إلى النموذج المحدد (GPT-4، Claude، إلخ)'
-                : 'The prompt is sent to the selected model (GPT-4, Claude, etc.)'}
+              <strong>{t.aiWorkflowPage.howItWorks.llmProcessing}</strong>{' '}
+              {t.aiWorkflowPage.howItWorks.llmProcessingDesc}
             </div>
             <div>
-              <strong>{isRTL ? '٣. المعالجة اللاحقة:' : '3. Post-Processing:'}</strong>{' '}
-              {isRTL
-                ? 'يتم تنسيق الاستجابة والتحقق من صحتها'
-                : 'The response is formatted and validated'}
+              <strong>{t.aiWorkflowPage.howItWorks.postProcessing}</strong>{' '}
+              {t.aiWorkflowPage.howItWorks.postProcessingDesc}
             </div>
             <div>
-              <strong>{isRTL ? '٤. إرسال الاستجابة:' : '4. Send Response:'}</strong>{' '}
-              {isRTL
-                ? 'يتم إرجاع الاستجابة النهائية إلى المستخدم'
-                : 'The final response is returned to the user'}
+              <strong>{t.aiWorkflowPage.howItWorks.sendResponse}</strong>{' '}
+              {t.aiWorkflowPage.howItWorks.sendResponseDesc}
             </div>
           </div>
         </Card>
@@ -388,30 +379,26 @@ export default function AIWorkflowPage() {
         {/* Related Examples */}
         <div className="mt-12">
           <h2 className="text-2xl font-bold tracking-tight mb-6">
-            {isRTL ? 'أمثلة ذات صلة' : 'Related Examples'}
+            {t.aiWorkflowPage.relatedExamples.title}
           </h2>
           <div className="grid gap-4 sm:grid-cols-2">
             <Link href="/examples/workflow-basic">
               <Card className="p-4 hover:border-primary transition-colors">
                 <h3 className="font-semibold mb-2">
-                  {isRTL ? 'سير عمل بسيط' : 'Basic Workflow'}
+                  {t.aiWorkflowPage.relatedExamples.basicWorkflow}
                 </h3>
                 <p className="text-sm text-muted-foreground">
-                  {isRTL
-                    ? 'مثال بسيط على أداة بناء سير العمل'
-                    : 'Simple workflow builder example'}
+                  {t.aiWorkflowPage.relatedExamples.basicWorkflowDesc}
                 </p>
               </Card>
             </Link>
             <Link href="/examples/ai-playground">
               <Card className="p-4 hover:border-primary transition-colors">
                 <h3 className="font-semibold mb-2">
-                  {isRTL ? 'ملعب الذكاء الاصطناعي' : 'AI Playground'}
+                  {t.aiWorkflowPage.relatedExamples.aiPlayground}
                 </h3>
                 <p className="text-sm text-muted-foreground">
-                  {isRTL
-                    ? 'ملعب متقدم للذكاء الاصطناعي مع عناصر تحكم النموذج'
-                    : 'Advanced AI playground with model controls'}
+                  {t.aiWorkflowPage.relatedExamples.aiPlaygroundDesc}
                 </p>
               </Card>
             </Link>

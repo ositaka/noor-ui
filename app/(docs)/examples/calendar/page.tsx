@@ -23,6 +23,7 @@ import {
 
 export default function CalendarExamplePage() {
   const { direction, locale } = useDirection()
+  const t = content[locale]
   const isRTL = direction === 'rtl'
 
   // State for various date selections
@@ -33,32 +34,32 @@ export default function CalendarExamplePage() {
 
   // Format dates for display
   const formatDate = (date: Date | undefined): string => {
-    if (!date) return isRTL ? 'لم يتم التحديد' : 'Not selected'
+    if (!date) return t.calendarPage.labels.notSelected
     return new Intl.DateTimeFormat(locale === 'ar' ? 'ar-SA' : 'en-US', {
       dateStyle: 'long',
     }).format(date)
   }
 
   const formatDateRange = (range: DateRange | undefined): string => {
-    if (!range?.from) return isRTL ? 'لم يتم التحديد' : 'Not selected'
+    if (!range?.from) return t.calendarPage.labels.notSelected
     if (!range.to) return formatDate(range.from)
-    return `${formatDate(range.from)} ${isRTL ? 'إلى' : 'to'} ${formatDate(range.to)}`
+    return `${formatDate(range.from)} ${t.calendarPage.labels.to} ${formatDate(range.to)}`
   }
 
   // Sample events
   const upcomingEvents = [
     {
-      title: isRTL ? 'اجتماع الفريق' : 'Team Meeting',
+      title: t.calendarPage.events.teamMeeting,
       date: new Date(2025, 10, 15),
       type: 'work',
     },
     {
-      title: isRTL ? 'موعد طبي' : 'Doctor Appointment',
+      title: t.calendarPage.events.doctorAppointment,
       date: new Date(2025, 10, 18),
       type: 'personal',
     },
     {
-      title: isRTL ? 'عرض تقديمي' : 'Presentation',
+      title: t.calendarPage.events.presentation,
       date: new Date(2025, 10, 22),
       type: 'work',
     },
@@ -75,7 +76,7 @@ export default function CalendarExamplePage() {
                 <Home className="h-5 w-5 text-primary-foreground" />
               </div>
               <span className="font-bold text-xl hidden sm:inline">
-                {isRTL ? 'نور UI' : 'Noor UI'}
+                {t.ui.components.noorUI}
               </span>
             </Link>
           </div>
@@ -91,7 +92,7 @@ export default function CalendarExamplePage() {
             />
 
             <Button variant="outline" size="sm" asChild>
-              <Link href="/examples">{isRTL ? 'الأمثلة' : 'Examples'}</Link>
+              <Link href="/examples">{t.nav.examples}</Link>
             </Button>
           </div>
         </div>
@@ -104,18 +105,18 @@ export default function CalendarExamplePage() {
             <ol className="flex items-center gap-2 text-sm text-muted-foreground">
               <li>
                 <Link href="/" className="hover:text-foreground transition-colors">
-                  {isRTL ? 'الرئيسية' : 'Home'}
+                  {t.nav.home}
                 </Link>
               </li>
               <li>/</li>
               <li>
                 <Link href="/examples" className="hover:text-foreground transition-colors">
-                  {isRTL ? 'الأمثلة' : 'Examples'}
+                  {t.nav.examples}
                 </Link>
               </li>
               <li>/</li>
               <li className="text-foreground font-medium">
-                {isRTL ? 'التقويم ومنتقي التاريخ' : 'Calendar & Date Picker'}
+                {t.calendarPage.title}
               </li>
             </ol>
           </nav>
@@ -132,19 +133,17 @@ export default function CalendarExamplePage() {
             </div>
             <div>
               <h1 className="text-4xl font-bold tracking-tight">
-                {isRTL ? 'التقويم ومنتقي التاريخ' : 'Calendar & Date Picker'}
+                {t.calendarPage.title}
               </h1>
               <div className="flex items-center gap-2 mt-2">
-                <Badge variant="default">{isRTL ? 'جاهز' : 'Ready'}</Badge>
-                <Badge variant="outline">GCC</Badge>
-                <Badge variant="outline">Hijri</Badge>
+                <Badge variant="default">{t.calendarPage.badges.ready}</Badge>
+                <Badge variant="outline">{t.calendarPage.badges.gcc}</Badge>
+                <Badge variant="outline">{t.calendarPage.badges.hijri}</Badge>
               </div>
             </div>
           </div>
           <p className="text-xl text-muted-foreground max-w-3xl">
-            {isRTL
-              ? 'واجهة تقويم شاملة مع دعم التقويم الهجري لأسواق مجلس التعاون الخليجي. تتضمن اختيار التاريخ الواحد، نطاقات التاريخ، والتكامل مع التواريخ الهجرية.'
-              : 'Comprehensive calendar interface with Hijri calendar support for GCC markets. Includes single date selection, date ranges, and integration with Hijri dates.'}
+            {t.calendarPage.description}
           </p>
         </div>
 
@@ -153,11 +152,9 @@ export default function CalendarExamplePage() {
           {/* Calendar Selection */}
           <Card className="lg:col-span-2">
             <CardHeader>
-              <CardTitle>{isRTL ? 'تحديد التاريخ' : 'Date Selection'}</CardTitle>
+              <CardTitle>{t.calendarPage.sections.dateSelection}</CardTitle>
               <CardDescription>
-                {isRTL
-                  ? 'حدد تاريخاً باستخدام التقويم التفاعلي'
-                  : 'Select a date using the interactive calendar'}
+                {t.calendarPage.sections.dateSelectionDesc}
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -180,7 +177,7 @@ export default function CalendarExamplePage() {
                   <div className="flex items-center justify-between">
                     <div>
                       <p className="text-sm text-muted-foreground mb-1">
-                        {isRTL ? 'التاريخ المحدد (ميلادي)' : 'Selected Date (Gregorian)'}
+                        {t.calendarPage.sections.selectedDateGregorian}
                       </p>
                       <p className="font-medium">{formatDate(selectedDate)}</p>
                     </div>
@@ -201,9 +198,9 @@ export default function CalendarExamplePage() {
           {/* Upcoming Events */}
           <Card>
             <CardHeader>
-              <CardTitle>{isRTL ? 'الأحداث القادمة' : 'Upcoming Events'}</CardTitle>
+              <CardTitle>{t.calendarPage.sections.upcomingEvents}</CardTitle>
               <CardDescription>
-                {isRTL ? 'المواعيد والأحداث المجدولة' : 'Scheduled appointments and events'}
+                {t.calendarPage.sections.scheduledEvents}
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -222,13 +219,7 @@ export default function CalendarExamplePage() {
                         {formatDate(event.date)}
                       </p>
                       <Badge variant="secondary" className="mt-2 text-xs">
-                        {event.type === 'work'
-                          ? isRTL
-                            ? 'عمل'
-                            : 'Work'
-                          : isRTL
-                          ? 'شخصي'
-                          : 'Personal'}
+                        {event.type === 'work' ? t.calendarPage.events.work : t.calendarPage.events.personal}
                       </Badge>
                     </div>
                   </div>
@@ -243,14 +234,14 @@ export default function CalendarExamplePage() {
           {/* Single Date Picker */}
           <Card>
             <CardHeader>
-              <CardTitle>{isRTL ? 'منتقي التاريخ الواحد' : 'Single Date Picker'}</CardTitle>
+              <CardTitle>{t.calendarPage.sections.singleDatePicker}</CardTitle>
               <CardDescription>
-                {isRTL ? 'حدد موعداً أو تاريخاً واحداً' : 'Select an appointment or single date'}
+                {t.calendarPage.sections.singleDatePickerDesc}
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="space-y-2">
-                <Label>{isRTL ? 'موعد طبي' : 'Medical Appointment'}</Label>
+                <Label>{t.calendarPage.labels.medicalAppointment}</Label>
                 <DatePicker
                   date={appointmentDate}
                   onDateChange={setAppointmentDate}
@@ -265,7 +256,7 @@ export default function CalendarExamplePage() {
                     <CheckCircle2 className="h-5 w-5 text-primary mt-0.5" />
                     <div>
                       <p className="font-medium text-sm">
-                        {isRTL ? 'تم تحديد الموعد' : 'Appointment Scheduled'}
+                        {t.calendarPage.labels.appointmentScheduled}
                       </p>
                       <p className="text-sm text-muted-foreground mt-1">
                         {formatDate(appointmentDate)}
@@ -280,14 +271,14 @@ export default function CalendarExamplePage() {
           {/* Date Range Picker */}
           <Card>
             <CardHeader>
-              <CardTitle>{isRTL ? 'منتقي نطاق التاريخ' : 'Date Range Picker'}</CardTitle>
+              <CardTitle>{t.calendarPage.sections.dateRangePicker}</CardTitle>
               <CardDescription>
-                {isRTL ? 'حدد نطاق تاريخ للأحداث أو الإجازات' : 'Select a date range for events or vacations'}
+                {t.calendarPage.sections.dateRangePickerDesc}
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="space-y-2">
-                <Label>{isRTL ? 'فترة الإجازة' : 'Vacation Period'}</Label>
+                <Label>{t.calendarPage.labels.vacationPeriod}</Label>
                 <DateRangePicker
                   dateRange={vacationRange}
                   onDateRangeChange={setVacationRange}
@@ -302,7 +293,7 @@ export default function CalendarExamplePage() {
                     <CheckCircle2 className="h-5 w-5 text-primary mt-0.5" />
                     <div className="flex-1">
                       <p className="font-medium text-sm">
-                        {isRTL ? 'الإجازة المجدولة' : 'Vacation Scheduled'}
+                        {t.calendarPage.labels.vacationScheduled}
                       </p>
                       <p className="text-sm text-muted-foreground mt-1">
                         {formatDateRange(vacationRange)}
@@ -313,7 +304,7 @@ export default function CalendarExamplePage() {
                             (vacationRange.to.getTime() - vacationRange.from.getTime()) /
                               (1000 * 60 * 60 * 24)
                           )}{' '}
-                          {isRTL ? 'أيام' : 'days'}
+                          {t.calendarPage.labels.days}
                         </p>
                       )}
                     </div>
@@ -327,35 +318,31 @@ export default function CalendarExamplePage() {
         {/* Use Cases */}
         <Card>
           <CardHeader>
-            <CardTitle>{isRTL ? 'حالات الاستخدام' : 'Use Cases'}</CardTitle>
+            <CardTitle>{t.calendarPage.sections.useCases}</CardTitle>
             <CardDescription>
-              {isRTL
-                ? 'أمثلة على كيفية استخدام التقويم ومنتقيات التاريخ في التطبيقات الواقعية'
-                : 'Examples of how to use calendar and date pickers in real-world applications'}
+              {t.calendarPage.sections.useCasesDesc}
             </CardDescription>
           </CardHeader>
           <CardContent>
             <Tabs defaultValue="appointments" className="w-full">
               <TabsList className="grid w-full grid-cols-3">
                 <TabsTrigger value="appointments">
-                  {isRTL ? 'المواعيد' : 'Appointments'}
+                  {t.calendarPage.tabs.appointments}
                 </TabsTrigger>
                 <TabsTrigger value="events">
-                  {isRTL ? 'الأحداث' : 'Events'}
+                  {t.calendarPage.tabs.events}
                 </TabsTrigger>
                 <TabsTrigger value="bookings">
-                  {isRTL ? 'الحجوزات' : 'Bookings'}
+                  {t.calendarPage.tabs.bookings}
                 </TabsTrigger>
               </TabsList>
 
               <TabsContent value="appointments" className="space-y-4 mt-6">
                 <div className="grid gap-4 md:grid-cols-2">
                   <div className="space-y-3">
-                    <h4 className="font-semibold">{isRTL ? 'حجز موعد' : 'Book Appointment'}</h4>
+                    <h4 className="font-semibold">{t.calendarPage.appointments.title}</h4>
                     <p className="text-sm text-muted-foreground">
-                      {isRTL
-                        ? 'السماح للمستخدمين بتحديد مواعيد للخدمات الطبية أو الاستشارات'
-                        : 'Allow users to select appointments for medical services or consultations'}
+                      {t.calendarPage.appointments.description}
                     </p>
                     <DatePicker
                       date={appointmentDate}
@@ -367,20 +354,20 @@ export default function CalendarExamplePage() {
 
                   <div className="p-4 bg-muted/50 rounded-lg">
                     <h5 className="font-medium text-sm mb-3">
-                      {isRTL ? 'الميزات' : 'Features'}
+                      {t.calendarPage.appointments.features}
                     </h5>
                     <ul className="space-y-2 text-sm text-muted-foreground">
                       <li className="flex items-start gap-2">
                         <CheckCircle2 className="h-4 w-4 text-primary mt-0.5 shrink-0" />
-                        <span>{isRTL ? 'تحديد تواريخ معطلة' : 'Disabled date selection'}</span>
+                        <span>{t.calendarPage.appointments.disabledDates}</span>
                       </li>
                       <li className="flex items-start gap-2">
                         <CheckCircle2 className="h-4 w-4 text-primary mt-0.5 shrink-0" />
-                        <span>{isRTL ? 'الحد الأدنى/الأقصى للتاريخ' : 'Min/max date constraints'}</span>
+                        <span>{t.calendarPage.appointments.minMaxDates}</span>
                       </li>
                       <li className="flex items-start gap-2">
                         <CheckCircle2 className="h-4 w-4 text-primary mt-0.5 shrink-0" />
-                        <span>{isRTL ? 'تكامل التقويم الهجري' : 'Hijri calendar integration'}</span>
+                        <span>{t.calendarPage.appointments.hijriIntegration}</span>
                       </li>
                     </ul>
                   </div>
@@ -390,11 +377,9 @@ export default function CalendarExamplePage() {
               <TabsContent value="events" className="space-y-4 mt-6">
                 <div className="grid gap-4 md:grid-cols-2">
                   <div className="space-y-3">
-                    <h4 className="font-semibold">{isRTL ? 'نطاق الحدث' : 'Event Range'}</h4>
+                    <h4 className="font-semibold">{t.calendarPage.eventsTab.title}</h4>
                     <p className="text-sm text-muted-foreground">
-                      {isRTL
-                        ? 'حدد فترة للمؤتمرات أو الأحداث أو الدورات'
-                        : 'Select a period for conferences, events, or courses'}
+                      {t.calendarPage.eventsTab.description}
                     </p>
                     <DateRangePicker
                       dateRange={eventDateRange}
@@ -406,20 +391,20 @@ export default function CalendarExamplePage() {
 
                   <div className="p-4 bg-muted/50 rounded-lg">
                     <h5 className="font-medium text-sm mb-3">
-                      {isRTL ? 'حالات الاستخدام' : 'Use Cases'}
+                      {t.calendarPage.eventsTab.useCases}
                     </h5>
                     <ul className="space-y-2 text-sm text-muted-foreground">
                       <li className="flex items-start gap-2">
                         <ArrowRight className="h-4 w-4 text-primary mt-0.5 shrink-0 rtl:rotate-180" />
-                        <span>{isRTL ? 'حجوزات المؤتمرات' : 'Conference bookings'}</span>
+                        <span>{t.calendarPage.eventsTab.conferenceBookings}</span>
                       </li>
                       <li className="flex items-start gap-2">
                         <ArrowRight className="h-4 w-4 text-primary mt-0.5 shrink-0 rtl:rotate-180" />
-                        <span>{isRTL ? 'تسجيل الدورات' : 'Course enrollment'}</span>
+                        <span>{t.calendarPage.eventsTab.courseEnrollment}</span>
                       </li>
                       <li className="flex items-start gap-2">
                         <ArrowRight className="h-4 w-4 text-primary mt-0.5 shrink-0 rtl:rotate-180" />
-                        <span>{isRTL ? 'تذاكر الأحداث' : 'Event ticketing'}</span>
+                        <span>{t.calendarPage.eventsTab.eventTicketing}</span>
                       </li>
                     </ul>
                   </div>
@@ -429,11 +414,9 @@ export default function CalendarExamplePage() {
               <TabsContent value="bookings" className="space-y-4 mt-6">
                 <div className="grid gap-4 md:grid-cols-2">
                   <div className="space-y-3">
-                    <h4 className="font-semibold">{isRTL ? 'حجز الإقامة' : 'Accommodation Booking'}</h4>
+                    <h4 className="font-semibold">{t.calendarPage.bookings.title}</h4>
                     <p className="text-sm text-muted-foreground">
-                      {isRTL
-                        ? 'حدد تواريخ تسجيل الوصول والمغادرة للفنادق والمنتجعات'
-                        : 'Select check-in and check-out dates for hotels and resorts'}
+                      {t.calendarPage.bookings.description}
                     </p>
                     <DateRangePicker
                       dateRange={vacationRange}
@@ -445,20 +428,20 @@ export default function CalendarExamplePage() {
 
                   <div className="p-4 bg-muted/50 rounded-lg">
                     <h5 className="font-medium text-sm mb-3">
-                      {isRTL ? 'الصناعات' : 'Industries'}
+                      {t.calendarPage.bookings.industries}
                     </h5>
                     <ul className="space-y-2 text-sm text-muted-foreground">
                       <li className="flex items-start gap-2">
                         <ArrowRight className="h-4 w-4 text-primary mt-0.5 shrink-0 rtl:rotate-180" />
-                        <span>{isRTL ? 'الضيافة والسياحة' : 'Hospitality & Tourism'}</span>
+                        <span>{t.calendarPage.bookings.hospitality}</span>
                       </li>
                       <li className="flex items-start gap-2">
                         <ArrowRight className="h-4 w-4 text-primary mt-0.5 shrink-0 rtl:rotate-180" />
-                        <span>{isRTL ? 'تأجير السيارات' : 'Car rentals'}</span>
+                        <span>{t.calendarPage.bookings.carRentals}</span>
                       </li>
                       <li className="flex items-start gap-2">
                         <ArrowRight className="h-4 w-4 text-primary mt-0.5 shrink-0 rtl:rotate-180" />
-                        <span>{isRTL ? 'حجوزات العقارات' : 'Property bookings'}</span>
+                        <span>{t.calendarPage.bookings.propertyBookings}</span>
                       </li>
                     </ul>
                   </div>
@@ -471,11 +454,9 @@ export default function CalendarExamplePage() {
         {/* Components Used */}
         <Card className="mt-8">
           <CardHeader>
-            <CardTitle>{isRTL ? 'المكونات المستخدمة' : 'Components Used'}</CardTitle>
+            <CardTitle>{t.calendarPage.sections.componentsUsed}</CardTitle>
             <CardDescription>
-              {isRTL
-                ? 'هذا المثال يستخدم المكونات التالية من مكتبة نور UI'
-                : 'This example uses the following components from the Noor UI library'}
+              {t.calendarPage.sections.componentsUsedDesc}
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -487,7 +468,7 @@ export default function CalendarExamplePage() {
                   </CardHeader>
                   <CardContent>
                     <Badge variant="secondary" className="text-xs">
-                      {isRTL ? 'عرض' : 'View'}
+                      {t.calendarPage.components.view}
                     </Badge>
                   </CardContent>
                 </Card>
@@ -500,7 +481,7 @@ export default function CalendarExamplePage() {
                   </CardHeader>
                   <CardContent>
                     <Badge variant="secondary" className="text-xs">
-                      {isRTL ? 'عرض' : 'View'}
+                      {t.calendarPage.components.view}
                     </Badge>
                   </CardContent>
                 </Card>
@@ -513,7 +494,7 @@ export default function CalendarExamplePage() {
                   </CardHeader>
                   <CardContent>
                     <Badge variant="secondary" className="text-xs">
-                      {isRTL ? 'عرض' : 'View'}
+                      {t.calendarPage.components.view}
                     </Badge>
                   </CardContent>
                 </Card>
@@ -523,11 +504,11 @@ export default function CalendarExamplePage() {
                 <Card className="hover:border-primary/50 cursor-pointer transition-colors bg-primary/5">
                   <CardHeader className="pb-3">
                     <CardTitle className="text-base">
-                      {isRTL ? 'جميع المكونات' : 'All Components'}
+                      {t.calendarPage.components.allComponents}
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <Badge className="text-xs">{isRTL ? 'عرض الكل' : 'View All'}</Badge>
+                    <Badge className="text-xs">{t.calendarPage.components.viewAll}</Badge>
                   </CardContent>
                 </Card>
               </Link>

@@ -105,15 +105,14 @@ const codeResponses = {
 
 export default function CodeAssistantPage() {
   const { locale } = useDirection()
+  const t = content[locale]
   const isRTL = locale === 'ar'
 
   const [messages, setMessages] = React.useState<Message[]>([
     {
       id: '1',
       role: 'system',
-      content: isRTL
-        ? 'مرحباً! أنا مساعد الأكواد الذكي. يمكنني مساعدتك في شرح الأكواد، وإيجاد الأخطاء، وتحسين الأكواد، وتوليد أكواد جديدة. جرب أحد الأمثلة أدناه أو الصق الكود الخاص بك.'
-        : "Hello! I'm your AI Code Assistant. I can help you explain code, find bugs, improve code, and generate new code. Try one of the examples below or paste your own code.",
+      content: t.aiCodeAssistantPage.systemMessages.welcome,
       timestamp: new Date().toLocaleTimeString(isRTL ? 'ar-SA' : 'en-US', {
         hour: '2-digit',
         minute: '2-digit',
@@ -173,17 +172,11 @@ export default function CodeAssistantPage() {
   const handleLoadExample = (language: keyof typeof sampleCode, action: 'explain' | 'improve' | 'fix') => {
     setActiveTab(action)
     const code = sampleCode[language]
-    const actionText = isRTL
-      ? action === 'explain'
-        ? 'اشرح هذا الكود'
-        : action === 'improve'
-        ? 'حسّن هذا الكود'
-        : 'ابحث عن الأخطاء في هذا الكود'
-      : action === 'explain'
-      ? 'Explain this code'
+    const actionText = action === 'explain'
+      ? t.aiCodeAssistantPage.actions.explainCode
       : action === 'improve'
-      ? 'Improve this code'
-      : 'Find bugs in this code'
+      ? t.aiCodeAssistantPage.actions.improveCode
+      : t.aiCodeAssistantPage.actions.findBugs
 
     handleSend(`${actionText}:\n\n\`\`\`${language}\n${code}\n\`\`\``)
   }
@@ -193,9 +186,7 @@ export default function CodeAssistantPage() {
       {
         id: '1',
         role: 'system',
-        content: isRTL
-          ? 'محادثة جديدة بدأت. كيف يمكنني مساعدتك في البرمجة اليوم؟'
-          : 'New conversation started. How can I help you with coding today?',
+        content: t.aiCodeAssistantPage.systemMessages.newConversation,
         timestamp: new Date().toLocaleTimeString(isRTL ? 'ar-SA' : 'en-US', {
           hour: '2-digit',
           minute: '2-digit',
@@ -218,20 +209,20 @@ export default function CodeAssistantPage() {
                 </div>
                 <div>
                   <h1 className="font-semibold text-lg">
-                    {isRTL ? 'مساعد الأكواد الذكي' : 'AI Code Assistant'}
+                    {t.aiCodeAssistantPage.title}
                   </h1>
                   <p className="text-xs text-muted-foreground">
-                    {isRTL ? 'شرح • تحسين • إصلاح • توليد' : 'Explain • Improve • Fix • Generate'}
+                    {t.aiCodeAssistantPage.subtitle}
                   </p>
                 </div>
               </div>
               <div className="flex items-center gap-2">
                 <Button variant="outline" size="sm" onClick={handleClearChat}>
                   <Trash2 className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
-                  {isRTL ? 'مسح' : 'Clear'}
+                  {t.aiCodeAssistantPage.clear}
                 </Button>
                 <Button variant="outline" size="sm" asChild>
-                  <Link href="/examples">{isRTL ? 'الأمثلة' : 'Examples'}</Link>
+                  <Link href="/examples">{t.nav.examples}</Link>
                 </Button>
               </div>
             </div>
@@ -244,18 +235,18 @@ export default function CodeAssistantPage() {
                 <ol className="flex items-center gap-2 text-sm text-muted-foreground">
                   <li>
                     <Link href="/" className="hover:text-foreground transition-colors">
-                      {isRTL ? 'الرئيسية' : 'Home'}
+                      {t.nav.home}
                     </Link>
                   </li>
                   <li>/</li>
                   <li>
                     <Link href="/examples" className="hover:text-foreground transition-colors">
-                      {isRTL ? 'الأمثلة' : 'Examples'}
+                      {t.nav.examples}
                     </Link>
                   </li>
                   <li>/</li>
                   <li className="text-foreground font-medium">
-                    {isRTL ? 'مساعد الأكواد' : 'Code Assistant'}
+                    {t.aiCodeAssistantPage.breadcrumb.codeAssistant}
                   </li>
                 </ol>
               </nav>
@@ -322,26 +313,26 @@ export default function CodeAssistantPage() {
                 <TabsList className="grid w-full grid-cols-4">
                   <TabsTrigger value="explain" className="text-xs">
                     <Sparkles className={cn('h-3 w-3', isRTL ? 'ms-1' : 'me-1')} />
-                    {isRTL ? 'شرح' : 'Explain'}
+                    {t.aiCodeAssistantPage.actions.explain}
                   </TabsTrigger>
                   <TabsTrigger value="improve" className="text-xs">
                     <Lightbulb className={cn('h-3 w-3', isRTL ? 'ms-1' : 'me-1')} />
-                    {isRTL ? 'تحسين' : 'Improve'}
+                    {t.aiCodeAssistantPage.actions.improve}
                   </TabsTrigger>
                   <TabsTrigger value="fix" className="text-xs">
                     <Bug className={cn('h-3 w-3', isRTL ? 'ms-1' : 'me-1')} />
-                    {isRTL ? 'إصلاح' : 'Fix'}
+                    {t.aiCodeAssistantPage.actions.fix}
                   </TabsTrigger>
                   <TabsTrigger value="generate" className="text-xs">
                     <Code2 className={cn('h-3 w-3', isRTL ? 'ms-1' : 'me-1')} />
-                    {isRTL ? 'توليد' : 'Generate'}
+                    {t.aiCodeAssistantPage.actions.generate}
                   </TabsTrigger>
                 </TabsList>
               </Tabs>
 
               <PromptInput
-                placeholder={isRTL ? undefined : 'Paste your code or describe what you need...'}
-                placeholderAr="الصق الكود الخاص بك أو صف ما تحتاجه..."
+                placeholder={isRTL ? undefined : t.aiCodeAssistantPage.demo.placeholder}
+                placeholderAr={t.aiCodeAssistantPage.demo.placeholder}
                 isRTL={isRTL}
                 onSend={handleSend}
                 isLoading={isThinking}
@@ -350,9 +341,7 @@ export default function CodeAssistantPage() {
               />
 
               <p className="text-xs text-muted-foreground text-center">
-                {isRTL
-                  ? 'هذا مثال توضيحي. الردود مولدة تلقائياً.'
-                  : 'This is a demo. Responses are generated automatically.'}
+                {t.aiCodeAssistantPage.demo.message}
               </p>
             </div>
           </div>
@@ -362,12 +351,10 @@ export default function CodeAssistantPage() {
         <aside className="w-80 border-s bg-background p-4 space-y-4 overflow-y-auto hidden lg:block">
           <div>
             <h2 className="font-semibold text-lg mb-3">
-              {isRTL ? 'أمثلة سريعة' : 'Quick Examples'}
+              {t.aiCodeAssistantPage.sidebar.quickExamples}
             </h2>
             <p className="text-sm text-muted-foreground mb-4">
-              {isRTL
-                ? 'انقر على أي مثال لتحميله في المحادثة'
-                : 'Click any example to load it into the chat'}
+              {t.aiCodeAssistantPage.sidebar.clickToLoad}
             </p>
           </div>
 
@@ -376,7 +363,7 @@ export default function CodeAssistantPage() {
               <div className="flex items-center gap-2">
                 <Badge variant="secondary" className="font-mono text-xs">React</Badge>
                 <span className="text-sm font-medium">
-                  {isRTL ? 'جلب المستخدم' : 'User Fetching'}
+                  {t.aiCodeAssistantPage.sidebar.userFetching}
                 </span>
               </div>
               <div className="flex flex-wrap gap-2">
@@ -387,7 +374,7 @@ export default function CodeAssistantPage() {
                   className="text-xs"
                 >
                   <Sparkles className={cn('h-3 w-3', isRTL ? 'ms-1' : 'me-1')} />
-                  {isRTL ? 'شرح' : 'Explain'}
+                  {t.aiCodeAssistantPage.actions.explain}
                 </Button>
                 <Button
                   variant="outline"
@@ -396,7 +383,7 @@ export default function CodeAssistantPage() {
                   className="text-xs"
                 >
                   <Lightbulb className={cn('h-3 w-3', isRTL ? 'ms-1' : 'me-1')} />
-                  {isRTL ? 'تحسين' : 'Improve'}
+                  {t.aiCodeAssistantPage.actions.improve}
                 </Button>
                 <Button
                   variant="outline"
@@ -405,7 +392,7 @@ export default function CodeAssistantPage() {
                   className="text-xs"
                 >
                   <Bug className={cn('h-3 w-3', isRTL ? 'ms-1' : 'me-1')} />
-                  {isRTL ? 'إصلاح' : 'Fix'}
+                  {t.aiCodeAssistantPage.actions.fix}
                 </Button>
               </div>
             </Card>
@@ -414,7 +401,7 @@ export default function CodeAssistantPage() {
               <div className="flex items-center gap-2">
                 <Badge variant="secondary" className="font-mono text-xs">Python</Badge>
                 <span className="text-sm font-medium">
-                  {isRTL ? 'فيبوناتشي' : 'Fibonacci'}
+                  {t.aiCodeAssistantPage.sidebar.fibonacci}
                 </span>
               </div>
               <div className="flex flex-wrap gap-2">
@@ -425,7 +412,7 @@ export default function CodeAssistantPage() {
                   className="text-xs"
                 >
                   <Sparkles className={cn('h-3 w-3', isRTL ? 'ms-1' : 'me-1')} />
-                  {isRTL ? 'شرح' : 'Explain'}
+                  {t.aiCodeAssistantPage.actions.explain}
                 </Button>
                 <Button
                   variant="outline"
@@ -434,7 +421,7 @@ export default function CodeAssistantPage() {
                   className="text-xs"
                 >
                   <Lightbulb className={cn('h-3 w-3', isRTL ? 'ms-1' : 'me-1')} />
-                  {isRTL ? 'تحسين' : 'Improve'}
+                  {t.aiCodeAssistantPage.actions.improve}
                 </Button>
               </div>
             </Card>
@@ -443,7 +430,7 @@ export default function CodeAssistantPage() {
               <div className="flex items-center gap-2">
                 <Badge variant="secondary" className="font-mono text-xs">TypeScript</Badge>
                 <span className="text-sm font-medium">
-                  {isRTL ? 'جلب المنتجات' : 'Product API'}
+                  {t.aiCodeAssistantPage.sidebar.productAPI}
                 </span>
               </div>
               <div className="flex flex-wrap gap-2">
@@ -454,7 +441,7 @@ export default function CodeAssistantPage() {
                   className="text-xs"
                 >
                   <Sparkles className={cn('h-3 w-3', isRTL ? 'ms-1' : 'me-1')} />
-                  {isRTL ? 'شرح' : 'Explain'}
+                  {t.aiCodeAssistantPage.actions.explain}
                 </Button>
                 <Button
                   variant="outline"
@@ -463,7 +450,7 @@ export default function CodeAssistantPage() {
                   className="text-xs"
                 >
                   <Bug className={cn('h-3 w-3', isRTL ? 'ms-1' : 'me-1')} />
-                  {isRTL ? 'إصلاح' : 'Fix'}
+                  {t.aiCodeAssistantPage.actions.fix}
                 </Button>
               </div>
             </Card>
@@ -471,13 +458,13 @@ export default function CodeAssistantPage() {
 
           <Card className="p-4 bg-muted/50">
             <h3 className="font-medium text-sm mb-2">
-              {isRTL ? 'نصائح' : 'Tips'}
+              {t.aiCodeAssistantPage.tips.title}
             </h3>
             <ul className="text-xs text-muted-foreground space-y-1">
-              <li>{isRTL ? '• الصق الكود الخاص بك مباشرة' : '• Paste your code directly'}</li>
-              <li>{isRTL ? '• استخدم علامات الكود ```' : '• Use code blocks with ```'}</li>
-              <li>{isRTL ? '• حدد اللغة للإبراز' : '• Specify language for highlighting'}</li>
-              <li>{isRTL ? '• اسأل أسئلة محددة' : '• Ask specific questions'}</li>
+              <li>• {t.aiCodeAssistantPage.tips.pasteCode}</li>
+              <li>• {t.aiCodeAssistantPage.tips.useCodeBlocks}</li>
+              <li>• {t.aiCodeAssistantPage.tips.specifyLanguage}</li>
+              <li>• {t.aiCodeAssistantPage.tips.askQuestions}</li>
             </ul>
           </Card>
         </aside>

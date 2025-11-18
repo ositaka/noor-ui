@@ -185,6 +185,7 @@ const getVendorProducts = (): Product[] => {
 export default function VendorDetailPage({ params }: { params: { id: string } }) {
   const { direction, locale } = useDirection()
   const isRTL = direction === 'rtl'
+  const t = content[locale]
 
   const vendors = getAllVendors()
   const vendor = vendors.find((v) => v.id === params.id) || vendors[0]
@@ -247,13 +248,13 @@ export default function VendorDetailPage({ params }: { params: { id: string } })
             <ol className="flex items-center gap-2 text-sm text-muted-foreground">
               <li>
                 <Link href="/" className="hover:text-foreground transition-colors">
-                  {isRTL ? 'الرئيسية' : 'Home'}
+                  {t.nav.home}
                 </Link>
               </li>
               <li>/</li>
               <li>
                 <Link href="/examples" className="hover:text-foreground transition-colors">
-                  {isRTL ? 'الأمثلة' : 'Examples'}
+                  {t.nav.examples}
                 </Link>
               </li>
               <li>/</li>

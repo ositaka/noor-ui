@@ -499,18 +499,18 @@ export default function IslamicFinanceDashboardPage() {
           <ol className="flex items-center gap-2 text-sm text-muted-foreground">
             <li>
               <Link href="/" className="hover:text-foreground transition-colors">
-                {isRTL ? 'الرئيسية' : 'Home'}
+                {t.nav.home}
               </Link>
             </li>
             <li>/</li>
             <li>
               <Link href="/examples" className="hover:text-foreground transition-colors">
-                {isRTL ? 'الأمثلة' : 'Examples'}
+                {t.nav.examples}
               </Link>
             </li>
             <li>/</li>
             <li className="text-foreground font-medium">
-              {isRTL ? 'لوحة التمويل الإسلامي' : 'Islamic Finance'}
+              {t.islamicFinancePage.breadcrumb.islamicFinance}
             </li>
           </ol>
         </nav>
@@ -518,12 +518,10 @@ export default function IslamicFinanceDashboardPage() {
         {/* Header */}
         <div className="space-y-2">
           <h1 className="text-4xl font-bold tracking-tight">
-            {isRTL ? 'لوحة التمويل الإسلامي' : 'Islamic Finance Dashboard'}
+            {t.islamicFinancePage.title}
           </h1>
           <p className="text-lg text-muted-foreground">
-            {isRTL
-              ? 'إدارة شاملة للمالية الإسلامية مع دعم كامل لـ RTL'
-              : 'Comprehensive Islamic finance management with full RTL support'}
+            {t.islamicFinancePage.description}
           </p>
           <div className="flex items-center gap-2 text-sm text-muted-foreground">
             <CalendarIcon className="h-4 w-4" />
@@ -566,7 +564,7 @@ export default function IslamicFinanceDashboardPage() {
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">
-                {isRTL ? 'الرصيد الإجمالي' : 'Total Balance'}
+                {t.islamicFinancePage.stats.totalBalance}
               </CardTitle>
               <Wallet className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
@@ -576,7 +574,7 @@ export default function IslamicFinanceDashboardPage() {
               </div>
               <div className="flex items-center gap-1 text-xs text-green-600 dark:text-green-400">
                 <TrendingUp className="h-3 w-3" />
-                <span>{isRTL ? '+12.5% هذا الشهر' : '+12.5% from last month'}</span>
+                <span>{t.islamicFinancePage.stats.percentageChange}</span>
               </div>
             </CardContent>
           </Card>
@@ -585,7 +583,7 @@ export default function IslamicFinanceDashboardPage() {
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">
-                {isRTL ? 'الدخل الشهري' : 'Monthly Income'}
+                {t.islamicFinancePage.stats.monthlyIncome}
               </CardTitle>
               <ArrowUpRight className="h-4 w-4 text-green-600" />
             </CardHeader>
@@ -611,7 +609,7 @@ export default function IslamicFinanceDashboardPage() {
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">
-                {isRTL ? 'الاستثمارات' : 'Investments'}
+                {t.islamicFinancePage.stats.investments}
               </CardTitle>
               <PiggyBank className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
@@ -622,7 +620,7 @@ export default function IslamicFinanceDashboardPage() {
               <div className="flex items-center gap-1 text-xs text-green-600 dark:text-green-400">
                 <TrendingUp className="h-3 w-3" />
                 <span>
-                  {isRTL ? 'عوائد: ' : 'Returns: '}
+                  {t.islamicFinancePage.stats.returns}
                   <ArabicNumber value={investmentReturns} format="currency" />
                 </span>
               </div>
@@ -633,7 +631,7 @@ export default function IslamicFinanceDashboardPage() {
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">
-                {isRTL ? 'الزكاة المدفوعة' : 'Zakat Paid'}
+                {t.islamicFinancePage.stats.zakatPaid}
               </CardTitle>
               <DollarSign className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
@@ -642,7 +640,7 @@ export default function IslamicFinanceDashboardPage() {
                 <ArabicNumber value={zakatPaid} format="currency" />
               </div>
               <p className="text-xs text-muted-foreground">
-                {isRTL ? 'هذا الشهر' : 'This month'}
+                {t.islamicFinancePage.stats.thisMonth}
               </p>
             </CardContent>
           </Card>

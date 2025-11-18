@@ -73,68 +73,58 @@ export function Example() {
       {/* Header */}
       <div className="space-y-3">
         <h1 className="text-4xl font-bold">
-          {isRTL ? 'بطاقة الإحصائيات' : 'Stats Card'}
+          {t.statsCardPage.title}
         </h1>
         <p className="text-lg text-muted-foreground">
-          {isRTL
-            ? 'اعرض مقاييس لوحة المعلومات مع مؤشرات الاتجاه'
-            : 'Display dashboard metrics with trend indicators'}
+          {t.statsCardPage.description}
         </p>
       </div>
 
       {/* Basic Example */}
       <ComponentShowcase
-        title={isRTL ? 'الاستخدام الأساسي' : 'Basic Usage'}
-        description={
-          isRTL
-            ? 'بطاقة إحصائيات بسيطة مع تسمية وقيمة وأيقونة'
-            : 'Simple stats card with label, value, and icon'
-        }
+        title={t.statsCardPage.examples.basicUsage}
+        description={t.statsCardPage.examples.basicUsageDesc}
       >
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           <StatsCard
-            label={isRTL ? 'إجمالي المستخدمين' : 'Total Users'}
+            label={t.statsCardPage.examples.totalUsers}
             value={1250}
             icon={<Users />}
           />
           <StatsCard
-            label={isRTL ? 'المقالات' : 'Articles'}
+            label={t.statsCardPage.examples.articles}
             value={48}
             icon={<FileText />}
           />
           <StatsCard
-            label={isRTL ? 'النشاط' : 'Activity'}
+            label={t.statsCardPage.examples.activity}
             value={356}
             icon={<Activity />}
           />
         </div>
       </ComponentShowcase>
 
-      <CodeBlock code={basicUsage} language="tsx" title={isRTL ? 'الكود' : 'Code'} />
+      <CodeBlock code={basicUsage} language="tsx" title={t.statsCardPage.examples.code} />
 
       {/* With Positive Trend */}
       <ComponentShowcase
-        title={isRTL ? 'مع اتجاه إيجابي' : 'With Positive Trend'}
-        description={
-          isRTL
-            ? 'بطاقة إحصائيات مع مؤشر اتجاه إيجابي'
-            : 'Stats card with positive trend indicator'
-        }
+        title={t.statsCardPage.examples.positiveTrend}
+        description={t.statsCardPage.examples.positiveTrendDesc}
       >
         <div className="grid gap-4 md:grid-cols-2">
           <StatsCard
-            label={isRTL ? 'الإيرادات' : 'Revenue'}
+            label={t.statsCardPage.examples.revenue}
             value={45231}
             format="currency"
             trend={12.5}
-            trendLabel={isRTL ? 'مقابل الشهر الماضي' : 'vs last month'}
+            trendLabel={t.statsCardPage.examples.vsLastMonth}
             icon={<DollarSign />}
           />
           <StatsCard
-            label={isRTL ? 'المستخدمون الجدد' : 'New Users'}
+            label={t.statsCardPage.examples.newUsers}
             value={234}
             trend={18.2}
-            trendLabel={isRTL ? 'مقابل الأسبوع الماضي' : 'vs last week'}
+            trendLabel={t.statsCardPage.examples.vsLastWeek}
             icon={<Users />}
           />
         </div>
@@ -144,27 +134,23 @@ export function Example() {
 
       {/* With Negative Trend */}
       <ComponentShowcase
-        title={isRTL ? 'مع اتجاه سلبي' : 'With Negative Trend'}
-        description={
-          isRTL
-            ? 'بطاقة إحصائيات مع مؤشر اتجاه سلبي'
-            : 'Stats card with negative trend indicator'
-        }
+        title={t.statsCardPage.examples.negativeTrend}
+        description={t.statsCardPage.examples.negativeTrendDesc}
       >
         <div className="grid gap-4 md:grid-cols-2">
           <StatsCard
-            label={isRTL ? 'الطلبات' : 'Orders'}
+            label={t.statsCardPage.examples.orders}
             value={328}
             trend={-5.2}
-            trendLabel={isRTL ? 'مقابل الأسبوع الماضي' : 'vs last week'}
+            trendLabel={t.statsCardPage.examples.vsLastWeek}
             icon={<ShoppingCart />}
           />
           <StatsCard
-            label={isRTL ? 'معدل الارتداد' : 'Bounce Rate'}
+            label={t.statsCardPage.examples.bounceRate}
             value={42.3}
             format="percentage"
             trend={-2.1}
-            trendLabel={isRTL ? 'مقابل الشهر الماضي' : 'vs last month'}
+            trendLabel={t.statsCardPage.examples.vsLastMonth}
             icon={<Activity />}
           />
         </div>
@@ -174,36 +160,32 @@ export function Example() {
 
       {/* Percentage Format */}
       <ComponentShowcase
-        title={isRTL ? 'تنسيق النسبة المئوية' : 'Percentage Format'}
-        description={
-          isRTL
-            ? 'بطاقة إحصائيات مع قيم النسبة المئوية'
-            : 'Stats card with percentage values'
-        }
+        title={t.statsCardPage.examples.percentageFormat}
+        description={t.statsCardPage.examples.percentageFormatDesc}
       >
         <div className="grid gap-4 md:grid-cols-3">
           <StatsCard
-            label={isRTL ? 'معدل التحويل' : 'Conversion Rate'}
+            label={t.statsCardPage.examples.conversionRate}
             value={3.24}
             format="percentage"
             trend={0.8}
-            trendLabel={isRTL ? 'مقابل الشهر الماضي' : 'vs last month'}
+            trendLabel={t.statsCardPage.examples.vsLastMonth}
             icon={<TrendingUp />}
           />
           <StatsCard
-            label={isRTL ? 'معدل النمو' : 'Growth Rate'}
+            label={t.statsCardPage.examples.growthRate}
             value={24.5}
             format="percentage"
             trend={5.3}
-            trendLabel={isRTL ? 'مقابل ربع السنة' : 'vs last quarter'}
+            trendLabel={t.statsCardPage.examples.vsLastQuarter}
             icon={<TrendingUp />}
           />
           <StatsCard
-            label={isRTL ? 'نسبة النجاح' : 'Success Rate'}
+            label={t.statsCardPage.examples.successRate}
             value={98.2}
             format="percentage"
             trend={1.2}
-            trendLabel={isRTL ? 'مقابل الأسبوع الماضي' : 'vs last week'}
+            trendLabel={t.statsCardPage.examples.vsLastWeek}
             icon={<Activity />}
           />
         </div>
@@ -213,28 +195,24 @@ export function Example() {
 
       {/* Loading State */}
       <ComponentShowcase
-        title={isRTL ? 'حالة التحميل' : 'Loading State'}
-        description={
-          isRTL
-            ? 'بطاقة إحصائيات في حالة التحميل'
-            : 'Stats card in loading state'
-        }
+        title={t.statsCardPage.examples.loadingState}
+        description={t.statsCardPage.examples.loadingStateDesc}
       >
         <div className="grid gap-4 md:grid-cols-3">
           <StatsCard
-            label={isRTL ? 'مشاهدات الصفحة' : 'Page Views'}
+            label={t.statsCardPage.examples.pageViews}
             value={0}
             isLoading={true}
             icon={<Activity />}
           />
           <StatsCard
-            label={isRTL ? 'الزوار' : 'Visitors'}
+            label={t.statsCardPage.examples.visitors}
             value={0}
             isLoading={true}
             icon={<Users />}
           />
           <StatsCard
-            label={isRTL ? 'الإيرادات' : 'Revenue'}
+            label={t.statsCardPage.examples.revenue}
             value={0}
             isLoading={true}
             icon={<DollarSign />}
@@ -253,61 +231,55 @@ export function Example() {
             {
               name: 'label',
               type: 'string',
-              description: isRTL ? 'تسمية المقياس' : 'Label for the metric',
+              description: t.statsCardPage.props.label,
             },
             {
               name: 'value',
               type: 'number | string',
-              description: isRTL ? 'القيمة المعروضة' : 'Value to display',
+              description: t.statsCardPage.props.value,
             },
             {
               name: 'trend',
               type: 'number',
-              description: isRTL
-                ? 'نسبة الاتجاه (موجبة أو سالبة)'
-                : 'Trend percentage (positive or negative)',
+              description: t.statsCardPage.props.trend,
               required: false,
             },
             {
               name: 'trendLabel',
               type: 'string',
-              description: isRTL
-                ? 'تسمية الاتجاه (مثل "مقابل الشهر الماضي")'
-                : 'Trend label (e.g., "vs last month")',
+              description: t.statsCardPage.props.trendLabel,
               required: false,
             },
             {
               name: 'icon',
               type: 'React.ReactNode',
-              description: isRTL ? 'الأيقونة المعروضة' : 'Icon to display',
+              description: t.statsCardPage.props.icon,
               required: false,
             },
             {
               name: 'isLoading',
               type: 'boolean',
-              description: isRTL ? 'حالة التحميل' : 'Loading state',
+              description: t.statsCardPage.props.isLoading,
               default: 'false',
               required: false,
             },
             {
               name: 'format',
               type: "'number' | 'currency' | 'percentage'",
-              description: isRTL ? 'تنسيق القيمة' : 'Value format',
+              description: t.statsCardPage.props.format,
               default: "'number'",
               required: false,
             },
             {
               name: 'className',
               type: 'string',
-              description: isRTL ? 'فئات CSS إضافية' : 'Additional CSS classes',
+              description: t.statsCardPage.props.className,
               required: false,
             },
             {
               name: 'valueClassName',
               type: 'string',
-              description: isRTL
-                ? 'فئات CSS لعنصر القيمة'
-                : 'CSS classes for value element',
+              description: t.statsCardPage.props.valueClassName,
               required: false,
             },
           ]}
@@ -317,29 +289,23 @@ export function Example() {
       {/* Usage Guidelines */}
       <div className="space-y-4">
         <h2 className="text-2xl font-bold">
-          {isRTL ? 'إرشادات الاستخدام' : 'Usage Guidelines'}
+          {t.statsCardPage.usageGuidelines.title}
         </h2>
 
         <div className="space-y-3 text-sm">
           <div>
             <h3 className="font-semibold mb-1">
-              {isRTL ? 'متى تستخدم' : 'When to use'}
+              {t.statsCardPage.usageGuidelines.whenToUse}
             </h3>
             <ul className="list-disc ps-5 space-y-1 text-muted-foreground">
               <li>
-                {isRTL
-                  ? 'لعرض المقاييس الرئيسية في لوحات المعلومات'
-                  : 'To display key metrics in dashboards'}
+                {t.statsCardPage.usageGuidelines.displayMetrics}
               </li>
               <li>
-                {isRTL
-                  ? 'لإظهار اتجاهات الأداء بمرور الوقت'
-                  : 'To show performance trends over time'}
+                {t.statsCardPage.usageGuidelines.showTrends}
               </li>
               <li>
-                {isRTL
-                  ? 'لتوفير نظرة عامة سريعة على البيانات المهمة'
-                  : 'To provide a quick overview of important data'}
+                {t.statsCardPage.usageGuidelines.quickOverview}
               </li>
             </ul>
           </div>
@@ -349,7 +315,7 @@ export function Example() {
       {/* Best Practices */}
       <section className="mb-8">
         <h2 className="text-2xl font-bold tracking-tight mb-6">
-          {isRTL ? 'أفضل الممارسات' : 'Best Practices'}
+          {t.componentPage.sections.bestPractices}
         </h2>
         <BestPractices
           dos={t.statsCardComponent.bestPractices.doList}

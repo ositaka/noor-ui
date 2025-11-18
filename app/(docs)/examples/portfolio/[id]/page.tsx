@@ -138,6 +138,7 @@ const getAllProjects = (): Project[] => {
 export default function ProjectDetailPage({ params }: { params: { id: string } }) {
   const { direction, locale } = useDirection()
   const isRTL = direction === 'rtl'
+  const t = content[locale]
 
   const projects = getAllProjects()
   const project = projects.find((p) => p.id === params.id) || projects[0]
@@ -155,7 +156,7 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
                 <Home className="h-5 w-5 text-primary-foreground" />
               </div>
               <span className="font-bold text-xl hidden sm:inline">
-                {isRTL ? 'أحمد الكريم' : 'Ahmed Al-Kareem'}
+                {t.portfolioDetail.header.name}
               </span>
             </Link>
           </div>
@@ -164,7 +165,7 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
             <Button variant="outline" size="sm" asChild>
               <Link href="/examples/portfolio">
                 <ArrowLeft className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
-                {isRTL ? 'العودة للمعرض' : 'Back to Portfolio'}
+                {t.portfolioDetail.header.backToPortfolio}
               </Link>
             </Button>
           </div>
@@ -178,19 +179,19 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
             <ol className="flex items-center gap-2 text-sm text-muted-foreground">
               <li>
                 <Link href="/" className="hover:text-foreground transition-colors">
-                  {isRTL ? 'الرئيسية' : 'Home'}
+                  {t.nav.home}
                 </Link>
               </li>
               <li>/</li>
               <li>
                 <Link href="/examples" className="hover:text-foreground transition-colors">
-                  {isRTL ? 'الأمثلة' : 'Examples'}
+                  {t.nav.examples}
                 </Link>
               </li>
               <li>/</li>
               <li>
                 <Link href="/examples/portfolio" className="hover:text-foreground transition-colors">
-                  {isRTL ? 'المعرض' : 'Portfolio'}
+                  {t.portfolioDetail.breadcrumb.portfolio}
                 </Link>
               </li>
               <li>/</li>
@@ -224,7 +225,7 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
                   <Button variant="ghost" size="sm" asChild>
                     <Link href={project.projectUrl} target="_blank">
                       <Globe className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
-                      {isRTL ? 'زيارة الموقع' : 'Visit Site'}
+                      {t.portfolioDetail.buttons.visitSite}
                     </Link>
                   </Button>
                 )}
@@ -232,7 +233,7 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
                   <Button variant="ghost" size="sm" asChild>
                     <Link href={project.githubUrl} target="_blank">
                       <Github className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
-                      {isRTL ? 'كود المصدر' : 'Source Code'}
+                      {t.portfolioDetail.buttons.sourceCode}
                     </Link>
                   </Button>
                 )}
@@ -252,7 +253,7 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
             <div>
               <h2 className="text-2xl font-bold tracking-tight mb-4 flex items-center gap-2">
                 <Layers className="h-6 w-6" />
-                {isRTL ? 'نظرة عامة' : 'Overview'}
+                {t.portfolioDetail.sections.overview}
               </h2>
               <p className="text-muted-foreground leading-relaxed">
                 {isRTL ? project.fullDescriptionAr : project.fullDescription}
@@ -264,18 +265,18 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
               <TabsList className="grid w-full grid-cols-2">
                 <TabsTrigger value="challenge">
                   <Target className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
-                  {isRTL ? 'التحدي' : 'Challenge'}
+                  {t.portfolioDetail.sections.challenge}
                 </TabsTrigger>
                 <TabsTrigger value="solution">
                   <CheckCircle2 className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
-                  {isRTL ? 'الحل' : 'Solution'}
+                  {t.portfolioDetail.sections.solution}
                 </TabsTrigger>
               </TabsList>
 
               <TabsContent value="challenge" className="space-y-4 mt-6">
                 <Card>
                   <CardHeader>
-                    <CardTitle>{isRTL ? 'التحدي' : 'The Challenge'}</CardTitle>
+                    <CardTitle>{t.portfolioDetail.sections.theChallenge}</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <p className="text-muted-foreground leading-relaxed">
@@ -288,7 +289,7 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
               <TabsContent value="solution" className="space-y-4 mt-6">
                 <Card>
                   <CardHeader>
-                    <CardTitle>{isRTL ? 'الحل' : 'The Solution'}</CardTitle>
+                    <CardTitle>{t.portfolioDetail.sections.theSolution}</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <p className="text-muted-foreground leading-relaxed">
@@ -303,7 +304,7 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
             <div>
               <h2 className="text-2xl font-bold tracking-tight mb-4 flex items-center gap-2">
                 <TrendingUp className="h-6 w-6" />
-                {isRTL ? 'النتائج' : 'Results & Impact'}
+                {t.portfolioDetail.sections.results}
               </h2>
               <Card>
                 <CardContent className="pt-6">
@@ -323,7 +324,7 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
             {project.images && project.images.length > 0 && (
               <div>
                 <h2 className="text-2xl font-bold tracking-tight mb-4">
-                  {isRTL ? 'معرض الصور' : 'Project Gallery'}
+                  {t.portfolioDetail.sections.gallery}
                 </h2>
                 <div className="grid gap-4 md:grid-cols-2">
                   {project.images.map((image, index) => (
@@ -367,12 +368,12 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
             {/* Project Info */}
             <Card>
               <CardHeader>
-                <CardTitle>{isRTL ? 'معلومات المشروع' : 'Project Info'}</CardTitle>
+                <CardTitle>{t.portfolioDetail.sidebar.projectInfo}</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div>
                   <p className="text-sm text-muted-foreground mb-1">
-                    {isRTL ? 'العميل' : 'Client'}
+                    {t.portfolioDetail.sidebar.client}
                   </p>
                   <p className="font-medium">{isRTL ? project.clientAr : project.client}</p>
                   <p className="text-sm text-muted-foreground">
@@ -384,7 +385,7 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
 
                 <div>
                   <p className="text-sm text-muted-foreground mb-1">
-                    {isRTL ? 'المدة' : 'Duration'}
+                    {t.portfolioDetail.sidebar.duration}
                   </p>
                   <p className="font-medium">{isRTL ? project.durationAr : project.duration}</p>
                 </div>
@@ -392,7 +393,7 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
                 <Separator />
 
                 <div>
-                  <p className="text-sm text-muted-foreground mb-1">{isRTL ? 'السنة' : 'Year'}</p>
+                  <p className="text-sm text-muted-foreground mb-1">{t.portfolioDetail.sidebar.year}</p>
                   <p className="font-medium">{project.year}</p>
                 </div>
 
@@ -400,7 +401,7 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
 
                 <div>
                   <p className="text-sm text-muted-foreground mb-2">
-                    {isRTL ? 'التقنيات' : 'Technologies'}
+                    {t.portfolioDetail.sidebar.technologies}
                   </p>
                   <div className="flex flex-wrap gap-2">
                     {(isRTL ? project.technologiesAr : project.technologies).map((tech, index) => (
@@ -417,16 +418,14 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
             <Card className="bg-primary/5 border-primary/20">
               <CardContent className="pt-6">
                 <h3 className="font-semibold mb-2">
-                  {isRTL ? 'هل لديك مشروع مماثل؟' : 'Have a Similar Project?'}
+                  {t.portfolioDetail.sidebar.similarProject}
                 </h3>
                 <p className="text-sm text-muted-foreground mb-4">
-                  {isRTL
-                    ? 'دعنا نتحدث عن كيف يمكنني مساعدتك في تحقيق أهدافك.'
-                    : "Let's talk about how I can help you achieve your goals."}
+                  {t.portfolioDetail.sidebar.similarProjectDesc}
                 </p>
                 <Button className="w-full" asChild>
                   <Link href="/examples/portfolio#contact">
-                    {isRTL ? 'تواصل معي' : 'Get In Touch'}
+                    {t.portfolioDetail.sidebar.getInTouch}
                   </Link>
                 </Button>
               </CardContent>
@@ -439,10 +438,10 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
           <section className="mt-16">
             <div className="mb-8">
               <h2 className="text-3xl font-bold tracking-tight mb-2">
-                {isRTL ? 'مشاريع ذات صلة' : 'Related Projects'}
+                {t.portfolioDetail.related.title}
               </h2>
               <p className="text-muted-foreground">
-                {isRTL ? 'مشاريع أخرى قد تعجبك' : 'Other projects you might like'}
+                {t.portfolioDetail.related.description}
               </p>
             </div>
 
