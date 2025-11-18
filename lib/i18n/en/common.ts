@@ -853,6 +853,12 @@ common: {
       noUsersFound: 'No users found',
       previous: 'Previous',
       next: 'Next',
+      name: 'Name',
+      email: 'Email',
+      role: 'Role',
+      status: 'Status',
+      department: 'Department',
+      joinDate: 'Join Date',
     },
     roles: {
       admin: 'Admin',

@@ -95,9 +95,7 @@ export default function AdvancedPlaygroundPage() {
     {
       id: '1',
       role: 'system',
-      content: isRTL
-        ? 'مرحباً بك في ملعب الذكاء الاصطناعي المتقدم! جرب إعدادات النموذج المختلفة ومعلمات التحكم لتخصيص تجربة المحادثة.'
-        : 'Welcome to the Advanced AI Playground! Try different model settings and control parameters to customize your conversation experience.',
+      content: t.aiPlaygroundPage.welcomeMessage,
       timestamp: new Date().toLocaleTimeString(isRTL ? 'ar-SA' : 'en-US', {
         hour: '2-digit',
         minute: '2-digit',
@@ -162,9 +160,7 @@ export default function AdvancedPlaygroundPage() {
     const randomResponse = responses[Math.floor(Math.random() * responses.length)]
     const responseContent = `${randomResponse}${
       content.length > 100
-        ? isRTL
-          ? '\n\nبناءً على استفسارك التفصيلي، سأقدم لك إجابة شاملة تغطي جميع الجوانب المهمة.'
-          : '\n\nBased on your detailed inquiry, I will provide you with a comprehensive answer covering all important aspects.'
+        ? t.aiPlaygroundPage.mockResponses.detailedInquiry
         : ''
     }`
 
@@ -188,7 +184,7 @@ export default function AdvancedPlaygroundPage() {
   const handleNewConversation = () => {
     const newConv = {
       id: Date.now().toString(),
-      title: isRTL ? 'محادثة جديدة' : 'New Conversation',
+      title: t.aiPlaygroundPage.newConversation,
       timestamp: new Date(),
       messageCount: 0,
       isActive: true as boolean,
@@ -201,9 +197,7 @@ export default function AdvancedPlaygroundPage() {
       {
         id: '1',
         role: 'system',
-        content: isRTL
-          ? 'محادثة جديدة بدأت. كيف يمكنني مساعدتك؟'
-          : 'New conversation started. How can I help you?',
+        content: t.aiPlaygroundPage.newConversationMessage,
         timestamp: new Date().toLocaleTimeString(isRTL ? 'ar-SA' : 'en-US', {
           hour: '2-digit',
           minute: '2-digit',
@@ -265,7 +259,7 @@ export default function AdvancedPlaygroundPage() {
               </div>
               <div>
                 <h1 className="font-semibold text-lg">
-                  {isRTL ? 'ملعب الذكاء الاصطناعي المتقدم' : 'Advanced AI Playground'}
+                  {t.aiPlaygroundPage.title}
                 </h1>
                 <p className="text-xs text-muted-foreground">
                   {isRTL
@@ -281,7 +275,7 @@ export default function AdvancedPlaygroundPage() {
                 onClick={() => setShowSettings(!showSettings)}
               >
                 <Settings className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
-                {isRTL ? 'الإعدادات' : 'Settings'}
+                {t.aiPlaygroundPage.settings}
               </Button>
               <Button variant="outline" size="sm" asChild>
                 <Link href="/examples">{t.nav.examples}</Link>
@@ -348,9 +342,7 @@ export default function AdvancedPlaygroundPage() {
               showVoice={false}
             />
             <p className="text-xs text-muted-foreground mt-2 text-center">
-              {isRTL
-                ? 'هذا مثال توضيحي. الردود مولدة تلقائياً.'
-                : 'This is a demo. Responses are generated automatically.'}
+              {t.aiPlaygroundPage.demoDisclaimer}
             </p>
           </div>
         </div>
@@ -361,7 +353,7 @@ export default function AdvancedPlaygroundPage() {
         <aside className="w-80 border-s bg-background p-4 space-y-4 overflow-y-auto hidden md:block">
           <div className="flex items-center justify-between">
             <h2 className="font-semibold text-lg">
-              {isRTL ? 'الإعدادات' : 'Settings'}
+              {t.aiPlaygroundPage.settings}
             </h2>
             <Button
               variant="ghost"
@@ -375,13 +367,13 @@ export default function AdvancedPlaygroundPage() {
           <Tabs defaultValue="model" className="w-full">
             <TabsList className="w-full">
               <TabsTrigger value="model" className="flex-1">
-                {isRTL ? 'النموذج' : 'Model'}
+                {t.aiPlaygroundPage.model}
               </TabsTrigger>
               <TabsTrigger value="params" className="flex-1">
-                {isRTL ? 'المعاملات' : 'Parameters'}
+                {t.aiPlaygroundPage.parameters}
               </TabsTrigger>
               <TabsTrigger value="usage" className="flex-1">
-                {isRTL ? 'الاستخدام' : 'Usage'}
+                {t.aiPlaygroundPage.usage}
               </TabsTrigger>
             </TabsList>
 
@@ -398,12 +390,12 @@ export default function AdvancedPlaygroundPage() {
 
               <Card className="p-4 space-y-2">
                 <h3 className="font-medium text-sm">
-                  {isRTL ? 'مواصفات النموذج' : 'Model Specifications'}
+                  {t.aiPlaygroundPage.modelSpecs}
                 </h3>
                 <div className="space-y-1 text-xs">
                   <div className="flex items-center justify-between">
                     <span className="text-muted-foreground">
-                      {isRTL ? 'المزود:' : 'Provider:'}
+                      {t.aiPlaygroundPage.provider}
                     </span>
                     <span className="font-medium">
                       {isRTL
@@ -413,7 +405,7 @@ export default function AdvancedPlaygroundPage() {
                   </div>
                   <div className="flex items-center justify-between">
                     <span className="text-muted-foreground">
-                      {isRTL ? 'طول السياق:' : 'Context Length:'}
+                      {t.aiPlaygroundPage.contextLength}
                     </span>
                     <span className="font-medium">
                       {selectedModel.specs.contextLength.toLocaleString(
@@ -424,7 +416,7 @@ export default function AdvancedPlaygroundPage() {
                   {selectedModel.specs.pricing && (
                     <div className="flex items-center justify-between">
                       <span className="text-muted-foreground">
-                        {isRTL ? 'التسعير:' : 'Pricing:'}
+                        {t.aiPlaygroundPage.pricing}
                       </span>
                       <span className="font-medium">{selectedModel.specs.pricing}</span>
                     </div>
@@ -492,24 +484,24 @@ export default function AdvancedPlaygroundPage() {
 
               <Card className="p-4">
                 <h3 className="font-medium text-sm mb-3">
-                  {isRTL ? 'إحصائيات الجلسة' : 'Session Statistics'}
+                  {t.aiPlaygroundPage.sessionStats}
                 </h3>
                 <div className="space-y-2 text-xs">
                   <div className="flex items-center justify-between">
                     <span className="text-muted-foreground">
-                      {isRTL ? 'الرسائل:' : 'Messages:'}
+                      {t.aiPlaygroundPage.messages}
                     </span>
                     <span className="font-medium">{messages.length}</span>
                   </div>
                   <div className="flex items-center justify-between">
                     <span className="text-muted-foreground">
-                      {isRTL ? 'النموذج:' : 'Model:'}
+                      {t.aiPlaygroundPage.modelLabel}
                     </span>
                     <span className="font-medium">{selectedModel.name}</span>
                   </div>
                   <div className="flex items-center justify-between">
                     <span className="text-muted-foreground">
-                      {isRTL ? 'المعاملات:' : 'Parameters:'}
+                      {t.aiPlaygroundPage.parametersLabel}
                     </span>
                     <span className="font-medium">T={temperature}</span>
                   </div>

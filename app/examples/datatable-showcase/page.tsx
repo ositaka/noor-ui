@@ -109,23 +109,23 @@ export default function DataTableShowcasePage() {
   // Role translations
   const getRoleText = React.useCallback((role: User['role']) => {
     const translations = {
-      Admin: isRTL ? 'مسؤول' : 'Admin',
-      Editor: isRTL ? 'محرر' : 'Editor',
-      User: isRTL ? 'مستخدم' : 'User',
-      Viewer: isRTL ? 'مشاهد' : 'Viewer',
+      Admin: t.datatableShowcasePage.roles.admin,
+      Editor: t.datatableShowcasePage.roles.editor,
+      User: t.datatableShowcasePage.roles.user,
+      Viewer: t.datatableShowcasePage.roles.viewer,
     }
     return translations[role]
-  }, [isRTL])
+  }, [t])
 
   // Status translations
   const getStatusText = React.useCallback((status: User['status']) => {
     const translations = {
-      Active: t.ui.status.active,
-      Inactive: t.ui.status.inactive,
-      Pending: isRTL ? 'معلق' : 'Pending',
+      Active: t.datatableShowcasePage.status.active,
+      Inactive: t.datatableShowcasePage.status.inactive,
+      Pending: t.datatableShowcasePage.status.pending,
     }
     return translations[status]
-  }, [isRTL, t])
+  }, [t])
 
   // Data state
   const [allUsers] = React.useState<User[]>(generateUsers(isRTL))
@@ -265,7 +265,7 @@ export default function DataTableShowcasePage() {
   const columns = React.useMemo<ColumnDef<User>[]>(() => [
     {
       id: 'name',
-      header: isRTL ? 'الاسم' : 'Name',
+      header: t.cmsPage.table.title,
       accessorKey: 'name',
       sortable: true,
       cell: (row) => <div className="font-medium">{row.name}</div>,
@@ -279,14 +279,14 @@ export default function DataTableShowcasePage() {
     },
     {
       id: 'role',
-      header: isRTL ? 'الدور' : 'Role',
+      header: t.cmsPage.table.status,
       accessorKey: 'role',
       sortable: true,
       cell: (row) => <Badge variant={getRoleVariant(row.role)}>{getRoleText(row.role)}</Badge>,
     },
     {
       id: 'status',
-      header: isRTL ? 'الحالة' : 'Status',
+      header: t.cmsPage.table.status,
       accessorKey: 'status',
       sortable: true,
       cell: (row) => <Badge variant={getStatusVariant(row.status)}>{getStatusText(row.status)}</Badge>,

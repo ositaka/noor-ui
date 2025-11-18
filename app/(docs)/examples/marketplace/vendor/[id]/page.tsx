@@ -193,22 +193,22 @@ export default function VendorDetailPage({ params }: { params: { id: string } })
 
   const stats = [
     {
-      label: isRTL ? 'المنتجات' : 'Products',
+      label: t.marketplaceVendor.stats.products,
       value: vendor.productsCount,
       icon: Package,
     },
     {
-      label: isRTL ? 'الطلبات المكتملة' : 'Completed Orders',
+      label: t.marketplaceVendor.stats.completedOrders,
       value: vendor.completedOrders,
       icon: CheckCircle2,
     },
     {
-      label: isRTL ? 'معدل الإرجاع' : 'Return Rate',
+      label: t.marketplaceVendor.stats.returnRate,
       value: `${vendor.returnRate}%`,
       icon: TrendingUp,
     },
     {
-      label: isRTL ? 'وقت الاستجابة' : 'Response Time',
+      label: t.marketplaceVendor.stats.responseTime,
       value: isRTL ? vendor.responseTimeAr : vendor.responseTime,
       icon: Clock,
     },
@@ -225,7 +225,7 @@ export default function VendorDetailPage({ params }: { params: { id: string } })
                 <Home className="h-5 w-5 text-primary-foreground" />
               </div>
               <span className="font-bold text-xl hidden sm:inline">
-                {isRTL ? 'سوق الخليج' : 'GCC Marketplace'}
+                {t.marketplace.header.title}
               </span>
             </Link>
           </div>
@@ -234,7 +234,7 @@ export default function VendorDetailPage({ params }: { params: { id: string } })
             <Button variant="outline" size="sm" asChild>
               <Link href="/examples/marketplace">
                 <ArrowLeft className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
-                {isRTL ? 'العودة للسوق' : 'Back to Marketplace'}
+                {t.marketplaceVendor.backToMarketplace}
               </Link>
             </Button>
           </div>
@@ -260,7 +260,7 @@ export default function VendorDetailPage({ params }: { params: { id: string } })
               <li>/</li>
               <li>
                 <Link href="/examples/marketplace" className="hover:text-foreground transition-colors">
-                  {isRTL ? 'السوق' : 'Marketplace'}
+                  {t.marketplaceVendor.breadcrumb.marketplace}
                 </Link>
               </li>
               <li>/</li>
@@ -312,7 +312,7 @@ export default function VendorDetailPage({ params }: { params: { id: string } })
                       <ArabicNumber value={vendor.rating} />
                     </span>
                     <span className="text-sm text-muted-foreground">
-                      (<ArabicNumber value={vendor.reviewCount} /> {isRTL ? 'تقييم' : 'reviews'})
+                      (<ArabicNumber value={vendor.reviewCount} /> {t.marketplaceVendor.reviews})
                     </span>
                   </div>
 
@@ -328,7 +328,7 @@ export default function VendorDetailPage({ params }: { params: { id: string } })
                   <div className="flex items-center gap-2 text-sm text-muted-foreground">
                     <Calendar className="h-4 w-4" />
                     <span>
-                      {isRTL ? 'منذ' : 'Since'} <ArabicNumber value={vendor.joinedYear} />
+                      {t.marketplaceVendor.since} <ArabicNumber value={vendor.joinedYear} />
                     </span>
                   </div>
                 </div>
@@ -371,7 +371,7 @@ export default function VendorDetailPage({ params }: { params: { id: string } })
             {/* About */}
             <Card>
               <CardHeader>
-                <CardTitle>{isRTL ? 'عن المتجر' : 'About Store'}</CardTitle>
+                <CardTitle>{t.marketplaceVendor.aboutStore}</CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground leading-relaxed">
@@ -383,7 +383,7 @@ export default function VendorDetailPage({ params }: { params: { id: string } })
             {/* Products */}
             <div>
               <h2 className="text-2xl font-bold tracking-tight mb-6">
-                {isRTL ? 'منتجات المتجر' : 'Store Products'}
+                {t.marketplaceVendor.storeProducts}
               </h2>
 
               <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -433,20 +433,20 @@ export default function VendorDetailPage({ params }: { params: { id: string } })
             {/* Contact */}
             <Card>
               <CardHeader>
-                <CardTitle>{isRTL ? 'تواصل مع البائع' : 'Contact Vendor'}</CardTitle>
+                <CardTitle>{t.marketplaceVendor.contactVendor}</CardTitle>
               </CardHeader>
               <CardContent className="space-y-3">
                 <Button className="w-full">
                   <MessageCircle className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
-                  {isRTL ? 'إرسال رسالة' : 'Send Message'}
+                  {t.marketplaceVendor.sendMessage}
                 </Button>
                 <Button variant="outline" className="w-full">
                   <Mail className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
-                  {isRTL ? 'بريد إلكتروني' : 'Email'}
+                  {t.marketplaceVendor.email}
                 </Button>
                 <Button variant="outline" className="w-full">
                   <Phone className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
-                  {isRTL ? 'اتصل' : 'Call'}
+                  {t.marketplaceVendor.call}
                 </Button>
               </CardContent>
             </Card>
@@ -454,14 +454,14 @@ export default function VendorDetailPage({ params }: { params: { id: string } })
             {/* Policies */}
             <Card>
               <CardHeader>
-                <CardTitle>{isRTL ? 'سياسات المتجر' : 'Store Policies'}</CardTitle>
+                <CardTitle>{t.marketplaceVendor.storePolicies}</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="flex items-start gap-3">
                   <Truck className="h-5 w-5 text-primary shrink-0 mt-0.5" />
                   <div>
                     <p className="font-medium text-sm">
-                      {isRTL ? 'الشحن' : 'Shipping'}
+                      {t.marketplaceVendor.shipping}
                     </p>
                     <p className="text-xs text-muted-foreground">
                       {isRTL
@@ -477,7 +477,7 @@ export default function VendorDetailPage({ params }: { params: { id: string } })
                   <Package className="h-5 w-5 text-primary shrink-0 mt-0.5" />
                   <div>
                     <p className="font-medium text-sm">
-                      {isRTL ? 'الإرجاع' : 'Returns'}
+                      {t.marketplaceVendor.returns}
                     </p>
                     <p className="text-xs text-muted-foreground">
                       {isRTL
@@ -493,7 +493,7 @@ export default function VendorDetailPage({ params }: { params: { id: string } })
                   <Award className="h-5 w-5 text-primary shrink-0 mt-0.5" />
                   <div>
                     <p className="font-medium text-sm">
-                      {isRTL ? 'الضمان' : 'Warranty'}
+                      {t.marketplaceVendor.warranty}
                     </p>
                     <p className="text-xs text-muted-foreground">
                       {isRTL
@@ -508,20 +508,20 @@ export default function VendorDetailPage({ params }: { params: { id: string } })
             {/* Achievements */}
             <Card className="bg-primary/5 border-primary/20">
               <CardHeader>
-                <CardTitle>{isRTL ? 'الإنجازات' : 'Achievements'}</CardTitle>
+                <CardTitle>{t.marketplaceVendor.achievements}</CardTitle>
               </CardHeader>
               <CardContent className="space-y-3">
                 <div className="flex items-center gap-2">
                   <Award className="h-5 w-5 text-primary" />
-                  <span className="text-sm">{isRTL ? 'بائع موثوق' : 'Verified Seller'}</span>
+                  <span className="text-sm">{t.marketplaceVendor.verifiedSeller}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <CheckCircle2 className="h-5 w-5 text-primary" />
-                  <span className="text-sm">{isRTL ? 'أفضل تقييم' : 'Top Rated'}</span>
+                  <span className="text-sm">{t.marketplaceVendor.topRated}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <TrendingUp className="h-5 w-5 text-primary" />
-                  <span className="text-sm">{isRTL ? 'مبيعات ممتازة' : 'Excellent Sales'}</span>
+                  <span className="text-sm">{t.marketplaceVendor.excellentSales}</span>
                 </div>
               </CardContent>
             </Card>

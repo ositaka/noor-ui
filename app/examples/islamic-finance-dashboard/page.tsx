@@ -650,16 +650,16 @@ export default function IslamicFinanceDashboardPage() {
         <Tabs defaultValue="overview" className="space-y-4">
           <TabsList>
             <TabsTrigger value="overview">
-              {isRTL ? 'نظرة عامة' : 'Overview'}
+              {t.islamicFinancePage.tabs.overview}
             </TabsTrigger>
             <TabsTrigger value="transactions">
-              {isRTL ? 'المعاملات' : 'Transactions'}
+              {t.islamicFinancePage.tabs.transactions}
             </TabsTrigger>
             <TabsTrigger value="investments">
-              {isRTL ? 'الاستثمارات' : 'Investments'}
+              {t.islamicFinancePage.tabs.investments}
             </TabsTrigger>
             <TabsTrigger value="zakat">
-              {isRTL ? 'حاسبة الزكاة' : 'Zakat Calculator'}
+              {t.islamicFinancePage.tabs.zakat}
             </TabsTrigger>
           </TabsList>
 
@@ -670,7 +670,7 @@ export default function IslamicFinanceDashboardPage() {
               <Card className="lg:col-span-2">
                 <CardHeader>
                   <CardTitle>
-                    {isRTL ? 'التقويم الإسلامي' : 'Islamic Calendar'}
+                    {t.islamicFinancePage.calendar.islamicCalendar}
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
@@ -695,7 +695,7 @@ export default function IslamicFinanceDashboardPage() {
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2">
                       <Bell className="h-5 w-5" />
-                      {isRTL ? 'مواقيت الصلاة' : 'Prayer Times'}
+                      {t.islamicFinancePage.prayerTimes.title}
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
@@ -720,18 +720,18 @@ export default function IslamicFinanceDashboardPage() {
                 <Card>
                   <CardHeader>
                     <CardTitle>
-                      {isRTL ? 'إجراءات سريعة' : 'Quick Actions'}
+                      {t.islamicFinancePage.quickActions.title}
                     </CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-2">
                     <Button className="w-full" variant="outline">
-                      {isRTL ? 'إضافة معاملة' : 'Add Transaction'}
+                      {t.islamicFinancePage.quickActions.addTransaction}
                     </Button>
                     <Button className="w-full" variant="outline">
-                      {isRTL ? 'عرض التقارير' : 'View Reports'}
+                      {t.islamicFinancePage.quickActions.viewReports}
                     </Button>
                     <Button className="w-full" variant="outline">
-                      {isRTL ? 'تصدير البيانات' : 'Export Data'}
+                      {t.islamicFinancePage.quickActions.exportData}
                     </Button>
                   </CardContent>
                 </Card>
@@ -744,7 +744,7 @@ export default function IslamicFinanceDashboardPage() {
             <Card>
               <CardHeader>
                 <CardTitle>
-                  {isRTL ? 'سجل المعاملات' : 'Transaction History'}
+                  {t.islamicFinancePage.transactions.title}
                 </CardTitle>
               </CardHeader>
               <CardContent>
@@ -789,7 +789,7 @@ export default function IslamicFinanceDashboardPage() {
                       </div>
                       {investment.shariahCompliant && (
                         <Badge variant="default" className="bg-green-600">
-                          {isRTL ? 'حلال' : 'Halal'}
+                          {t.islamicFinancePage.investments.halal}
                         </Badge>
                       )}
                     </div>
@@ -798,7 +798,7 @@ export default function IslamicFinanceDashboardPage() {
                     <div className="space-y-2">
                       <div className="flex justify-between text-sm">
                         <span className="text-muted-foreground">
-                          {isRTL ? 'المبلغ المستثمر' : 'Invested Amount'}
+                          {t.islamicFinancePage.investments.investedAmount}
                         </span>
                         <span className="font-medium">
                           <ArabicNumber value={investment.amount} format="currency" />
@@ -806,7 +806,7 @@ export default function IslamicFinanceDashboardPage() {
                       </div>
                       <div className="flex justify-between text-sm">
                         <span className="text-muted-foreground">
-                          {isRTL ? 'معدل العائد' : 'Return Rate'}
+                          {t.islamicFinancePage.investments.returnRate}
                         </span>
                         <span className="font-medium text-green-600 dark:text-green-400">
                           <ArabicNumber value={investment.returns} />%
@@ -814,7 +814,7 @@ export default function IslamicFinanceDashboardPage() {
                       </div>
                       <div className="flex justify-between text-sm">
                         <span className="text-muted-foreground">
-                          {isRTL ? 'العائد المتوقع' : 'Expected Returns'}
+                          {t.islamicFinancePage.investments.expectedReturns}
                         </span>
                         <span className="font-medium text-green-600 dark:text-green-400">
                           <ArabicNumber
@@ -827,10 +827,10 @@ export default function IslamicFinanceDashboardPage() {
                     <div className="pt-4 border-t">
                       <div className="flex gap-2">
                         <Button variant="outline" size="sm" className="flex-1">
-                          {isRTL ? 'عرض التفاصيل' : 'View Details'}
+                          {t.islamicFinancePage.investments.viewDetails}
                         </Button>
                         <Button variant="outline" size="sm" className="flex-1">
-                          {isRTL ? 'إدارة' : 'Manage'}
+                          {t.islamicFinancePage.investments.manage}
                         </Button>
                       </div>
                     </div>
@@ -843,14 +843,14 @@ export default function IslamicFinanceDashboardPage() {
             <Card>
               <CardHeader>
                 <CardTitle>
-                  {isRTL ? 'ملخص الاستثمارات' : 'Investment Summary'}
+                  {t.islamicFinancePage.investments.title}
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="grid gap-4 md:grid-cols-3">
                   <div className="space-y-2">
                     <p className="text-sm text-muted-foreground">
-                      {isRTL ? 'إجمالي المستثمر' : 'Total Invested'}
+                      {t.islamicFinancePage.investments.totalInvested}
                     </p>
                     <p className="text-2xl font-bold">
                       <ArabicNumber value={totalInvestments} format="currency" />
@@ -858,7 +858,7 @@ export default function IslamicFinanceDashboardPage() {
                   </div>
                   <div className="space-y-2">
                     <p className="text-sm text-muted-foreground">
-                      {isRTL ? 'إجمالي العوائد' : 'Total Returns'}
+                      {t.islamicFinancePage.investments.totalReturns}
                     </p>
                     <p className="text-2xl font-bold text-green-600 dark:text-green-400">
                       <ArabicNumber value={investmentReturns} format="currency" />
@@ -866,7 +866,7 @@ export default function IslamicFinanceDashboardPage() {
                   </div>
                   <div className="space-y-2">
                     <p className="text-sm text-muted-foreground">
-                      {isRTL ? 'متوسط العائد' : 'Average Return'}
+                      {t.islamicFinancePage.investments.averageReturn}
                     </p>
                     <p className="text-2xl font-bold text-green-600 dark:text-green-400">
                       <ArabicNumber
@@ -888,12 +888,10 @@ export default function IslamicFinanceDashboardPage() {
             <Card>
               <CardHeader>
                 <CardTitle>
-                  {isRTL ? 'حاسبة الزكاة' : 'Zakat Calculator'}
+                  {t.islamicFinancePage.zakatCalculator.title}
                 </CardTitle>
                 <p className="text-sm text-muted-foreground">
-                  {isRTL
-                    ? 'احسب زكاتك السنوية بناءً على أصولك والتزاماتك'
-                    : 'Calculate your annual Zakat based on your assets and liabilities'}
+                  {t.islamicFinancePage.zakatCalculator.description}
                 </p>
               </CardHeader>
               <CardContent>

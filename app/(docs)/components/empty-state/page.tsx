@@ -74,33 +74,27 @@ export function Example() {
       {/* Header */}
       <div className="space-y-3">
         <h1 className="text-4xl font-bold">
-          {isRTL ? 'حالة فارغة' : 'Empty State'}
+          {t.emptyStateComponent.title}
         </h1>
         <p className="text-lg text-muted-foreground">
-          {isRTL
-            ? 'اعرض رسائل تعليمية عندما لا يكون هناك محتوى للعرض'
-            : 'Display helpful messages when there is no content to show'}
+          {t.emptyStateComponent.description}
         </p>
       </div>
 
       {/* Basic Example */}
       <ComponentShowcase
-        title={isRTL ? 'الاستخدام الأساسي' : 'Basic Usage'}
-        description={isRTL ? 'حالة فارغة بسيطة مع أيقونة وعنوان ووصف وإجراء' : 'Simple empty state with icon, title, description, and action'}
+        title={t.emptyStateComponent.sections.basicUsage}
+        description={t.emptyStateComponent.sections.basicUsageDesc}
       >
         <Card className="p-8">
           <EmptyState
             icon={<FileText />}
-            title={isRTL ? 'لم يتم العثور على مقالات' : 'No articles found'}
-            description={
-              isRTL
-                ? 'ابدأ بإنشاء مقالتك الأولى'
-                : 'Get started by creating your first article'
-            }
+            title={t.emptyStateComponent.examples.noArticlesFound}
+            description={t.emptyStateComponent.examples.getStartedCreatingArticle}
             action={
               <Button>
                 <Plus className="me-2 h-4 w-4" />
-                {isRTL ? 'إنشاء مقالة' : 'Create Article'}
+                {t.emptyStateComponent.examples.createArticle}
               </Button>
             }
           />
@@ -110,23 +104,19 @@ export function Example() {
       <CodeBlock
         code={basicUsage}
         language="tsx"
-        title={isRTL ? 'الكود' : 'Code'}
+        title={t.emptyStateComponent.sections.code}
       />
 
       {/* Without Action */}
       <ComponentShowcase
-        title={isRTL ? 'بدون إجراء' : 'Without Action'}
-        description={isRTL ? 'حالة فارغة بدون زر إجراء' : 'Empty state without action button'}
+        title={t.emptyStateComponent.sections.withoutAction}
+        description={t.emptyStateComponent.sections.withoutActionDesc}
       >
         <Card className="p-8">
           <EmptyState
             icon={<Inbox />}
-            title={isRTL ? 'البريد الوارد فارغ' : 'Inbox is empty'}
-            description={
-              isRTL
-                ? 'أنت على اطلاع! لا توجد رسائل جديدة.'
-                : "You're all caught up! No new messages."
-            }
+            title={t.emptyStateComponent.examples.inboxEmpty}
+            description={t.emptyStateComponent.examples.allCaughtUp}
           />
         </Card>
       </ComponentShowcase>
@@ -135,21 +125,17 @@ export function Example() {
 
       {/* Search Results */}
       <ComponentShowcase
-        title={isRTL ? 'نتائج البحث' : 'Search Results'}
-        description={isRTL ? 'حالة فارغة لنتائج البحث' : 'Empty state for search results'}
+        title={t.emptyStateComponent.sections.searchResults}
+        description={t.emptyStateComponent.sections.searchResultsDesc}
       >
         <Card className="p-8">
           <EmptyState
             icon={<Search />}
-            title={isRTL ? 'لم يتم العثور على نتائج' : 'No results found'}
-            description={
-              isRTL
-                ? 'حاول تعديل البحث أو الفلتر للعثور على ما تبحث عنه.'
-                : "Try adjusting your search or filter to find what you're looking for."
-            }
+            title={t.emptyStateComponent.examples.noResultsFound}
+            description={t.emptyStateComponent.examples.tryAdjustingSearch}
             action={
               <Button variant="outline">
-                {isRTL ? 'مسح الفلاتر' : 'Clear Filters'}
+                {t.emptyStateComponent.examples.clearFilters}
               </Button>
             }
           />
@@ -160,26 +146,22 @@ export function Example() {
 
       {/* Multiple Actions */}
       <ComponentShowcase
-        title={isRTL ? 'إجراءات متعددة' : 'Multiple Actions'}
-        description={isRTL ? 'حالة فارغة مع عدة أزرار إجراء' : 'Empty state with multiple action buttons'}
+        title={t.emptyStateComponent.sections.multipleActions}
+        description={t.emptyStateComponent.sections.multipleActionsDesc}
       >
         <Card className="p-8">
           <EmptyState
             icon={<Users />}
-            title={isRTL ? 'لا يوجد أعضاء فريق بعد' : 'No team members yet'}
-            description={
-              isRTL
-                ? 'ادع فريقك لبدء التعاون'
-                : 'Invite your team to start collaborating'
-            }
+            title={t.emptyStateComponent.examples.noTeamMembers}
+            description={t.emptyStateComponent.examples.inviteTeamToCollaborate}
             action={
               <>
                 <Button>
                   <Plus className="me-2 h-4 w-4" />
-                  {isRTL ? 'دعوة أعضاء' : 'Invite Members'}
+                  {t.emptyStateComponent.examples.inviteMembers}
                 </Button>
                 <Button variant="outline">
-                  {isRTL ? 'معرفة المزيد' : 'Learn More'}
+                  {t.emptyStateComponent.examples.learnMore}
                 </Button>
               </>
             }
@@ -192,7 +174,7 @@ export function Example() {
       {/* Props */}
       <div className="space-y-4">
         <h2 className="text-2xl font-bold">
-          {isRTL ? 'الخصائص' : 'Props'}
+          {t.emptyStateComponent.sections.props}
         </h2>
 
         <PropsTable
@@ -200,36 +182,30 @@ export function Example() {
             {
               name: 'icon',
               type: 'React.ReactNode',
-              description: isRTL
-                ? 'الأيقونة المعروضة في الأعلى'
-                : 'Icon to display at the top',
+              description: t.emptyStateComponent.props.iconDisplayedAtTop,
               required: false,
             },
             {
               name: 'title',
               type: 'string',
-              description: isRTL ? 'عنوان الحالة الفارغة' : 'Title of the empty state',
+              description: t.emptyStateComponent.props.titleOfEmptyState,
             },
             {
               name: 'description',
               type: 'string',
-              description: isRTL ? 'نص وصفي اختياري' : 'Optional descriptive text',
+              description: t.emptyStateComponent.props.optionalDescriptiveText,
               required: false,
             },
             {
               name: 'action',
               type: 'React.ReactNode',
-              description: isRTL
-                ? 'زر أو أزرار الإجراء'
-                : 'Action button(s) to display',
+              description: t.emptyStateComponent.props.actionButtons,
               required: false,
             },
             {
               name: 'className',
               type: 'string',
-              description: isRTL
-                ? 'فئات CSS إضافية'
-                : 'Additional CSS classes',
+              description: t.emptyStateComponent.props.additionalCssClasses,
               required: false,
             },
           ]}
@@ -239,30 +215,18 @@ export function Example() {
       {/* Usage Guidelines */}
       <div className="space-y-4">
         <h2 className="text-2xl font-bold">
-          {isRTL ? 'إرشادات الاستخدام' : 'Usage Guidelines'}
+          {t.emptyStateComponent.sections.usageGuidelines}
         </h2>
 
         <div className="space-y-3 text-sm">
           <div>
             <h3 className="font-semibold mb-1">
-              {isRTL ? 'متى تستخدم' : 'When to use'}
+              {t.emptyStateComponent.sections.whenToUse}
             </h3>
             <ul className="list-disc ps-5 space-y-1 text-muted-foreground">
-              <li>
-                {isRTL
-                  ? 'عندما لا يكون هناك محتوى للعرض (قوائم فارغة، نتائج بحث، إلخ)'
-                  : 'When there is no content to display (empty lists, search results, etc.)'}
-              </li>
-              <li>
-                {isRTL
-                  ? 'لتوجيه المستخدمين نحو الإجراء التالي'
-                  : 'To guide users towards the next action'}
-              </li>
-              <li>
-                {isRTL
-                  ? 'لتوفير تفسير لماذا لا يوجد محتوى'
-                  : 'To provide an explanation for why there is no content'}
-              </li>
+              <li>{t.emptyStateComponent.usageGuidelines.whenNoContentToDisplay}</li>
+              <li>{t.emptyStateComponent.usageGuidelines.toGuideUsersNextAction}</li>
+              <li>{t.emptyStateComponent.usageGuidelines.toProvideExplanation}</li>
             </ul>
           </div>
         </div>
@@ -271,7 +235,7 @@ export function Example() {
       {/* Best Practices */}
       <section className="mb-8">
         <h2 className="text-2xl font-bold tracking-tight mb-6">
-          {isRTL ? 'أفضل الممارسات' : 'Best Practices'}
+          {t.emptyStateComponent.sections.bestPractices}
         </h2>
         <BestPractices
           dos={t.emptyStateComponent.bestPractices.doList}

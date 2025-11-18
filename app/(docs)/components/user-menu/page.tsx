@@ -133,8 +133,8 @@ export default function UserMenuPage() {
 
   const handleAction = (action: string) => {
     toast({
-      title: isRTL ? `تم النقر على ${action}` : `${action} clicked`,
-      description: isRTL ? `لقد نقرت على ${action}` : `You clicked on ${action}`,
+      title: `${action}`,
+      description: `${action}`,
     })
   }
 
