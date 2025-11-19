@@ -4,6 +4,7 @@ import * as React from 'react'
 import { ComponentShowcase } from '@/components/docs/component-showcase'
 import { CodeBlock } from '@/components/docs/code-block'
 import { PropsTable } from '@/components/docs/props-table'
+import { BestPractices } from '@/components/docs/best-practices'
 import { EmptyState } from '@/components/ui/empty-state'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
@@ -14,6 +15,18 @@ import { FileText, Inbox, Search, Users, Plus } from 'lucide-react'
 export default function EmptyStatePage() {
   const { direction, locale } = useDirection()
   const isRTL = direction === 'rtl'
+  const [mounted, setMounted] = React.useState(false)
+
+  React.useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  if (!mounted) {
+    return <div className="container py-12">Loading...</div>
+  }
+
+  const t = content[locale] || content.en
+  const emptyStateT = (content[locale]?.emptyStateComponent || content.en.emptyStateComponent) as any
 
   const basicUsage = `import { EmptyState } from '@/components/ui/empty-state'
 import { Button } from '@/components/ui/button'
@@ -72,33 +85,27 @@ export function Example() {
       {/* Header */}
       <div className="space-y-3">
         <h1 className="text-4xl font-bold">
-          {isRTL ? 'حالة فارغة' : 'Empty State'}
+          {emptyStateT.title}
         </h1>
         <p className="text-lg text-muted-foreground">
-          {isRTL
-            ? 'اعرض رسائل تعليمية عندما لا يكون هناك محتوى للعرض'
-            : 'Display helpful messages when there is no content to show'}
+          {emptyStateT.description}
         </p>
       </div>
 
       {/* Basic Example */}
       <ComponentShowcase
-        title={isRTL ? 'الاستخدام الأساسي' : 'Basic Usage'}
-        description={isRTL ? 'حالة فارغة بسيطة مع أيقونة وعنوان ووصف وإجراء' : 'Simple empty state with icon, title, description, and action'}
+        title={emptyStateT.sections.basicUsage}
+        description={emptyStateT.sections.basicUsageDesc}
       >
         <Card className="p-8">
           <EmptyState
             icon={<FileText />}
-            title={isRTL ? 'لم يتم العثور على مقالات' : 'No articles found'}
-            description={
-              isRTL
-                ? 'ابدأ بإنشاء مقالتك الأولى'
-                : 'Get started by creating your first article'
-            }
+            title={emptyStateT.examples.noArticlesFound}
+            description={emptyStateT.examples.getStartedCreatingArticle}
             action={
               <Button>
                 <Plus className="me-2 h-4 w-4" />
-                {isRTL ? 'إنشاء مقالة' : 'Create Article'}
+                {emptyStateT.examples.createArticle}
               </Button>
             }
           />
@@ -108,23 +115,19 @@ export function Example() {
       <CodeBlock
         code={basicUsage}
         language="tsx"
-        title={isRTL ? 'الكود' : 'Code'}
+        title={emptyStateT.sections.code}
       />
 
       {/* Without Action */}
       <ComponentShowcase
-        title={isRTL ? 'بدون إجراء' : 'Without Action'}
-        description={isRTL ? 'حالة فارغة بدون زر إجراء' : 'Empty state without action button'}
+        title={emptyStateT.sections.withoutAction}
+        description={emptyStateT.sections.withoutActionDesc}
       >
         <Card className="p-8">
           <EmptyState
             icon={<Inbox />}
-            title={isRTL ? 'البريد الوارد فارغ' : 'Inbox is empty'}
-            description={
-              isRTL
-                ? 'أنت على اطلاع! لا توجد رسائل جديدة.'
-                : "You're all caught up! No new messages."
-            }
+            title={emptyStateT.examples.inboxEmpty}
+            description={emptyStateT.examples.allCaughtUp}
           />
         </Card>
       </ComponentShowcase>
@@ -133,21 +136,17 @@ export function Example() {
 
       {/* Search Results */}
       <ComponentShowcase
-        title={isRTL ? 'نتائج البحث' : 'Search Results'}
-        description={isRTL ? 'حالة فارغة لنتائج البحث' : 'Empty state for search results'}
+        title={emptyStateT.sections.searchResults}
+        description={emptyStateT.sections.searchResultsDesc}
       >
         <Card className="p-8">
           <EmptyState
             icon={<Search />}
-            title={isRTL ? 'لم يتم العثور على نتائج' : 'No results found'}
-            description={
-              isRTL
-                ? 'حاول تعديل البحث أو الفلتر للعثور على ما تبحث عنه.'
-                : "Try adjusting your search or filter to find what you're looking for."
-            }
+            title={emptyStateT.examples.noResultsFound}
+            description={emptyStateT.examples.tryAdjustingSearch}
             action={
               <Button variant="outline">
-                {isRTL ? 'مسح الفلاتر' : 'Clear Filters'}
+                {emptyStateT.examples.clearFilters}
               </Button>
             }
           />
@@ -158,26 +157,22 @@ export function Example() {
 
       {/* Multiple Actions */}
       <ComponentShowcase
-        title={isRTL ? 'إجراءات متعددة' : 'Multiple Actions'}
-        description={isRTL ? 'حالة فارغة مع عدة أزرار إجراء' : 'Empty state with multiple action buttons'}
+        title={emptyStateT.sections.multipleActions}
+        description={emptyStateT.sections.multipleActionsDesc}
       >
         <Card className="p-8">
           <EmptyState
             icon={<Users />}
-            title={isRTL ? 'لا يوجد أعضاء فريق بعد' : 'No team members yet'}
-            description={
-              isRTL
-                ? 'ادع فريقك لبدء التعاون'
-                : 'Invite your team to start collaborating'
-            }
+            title={emptyStateT.examples.noTeamMembers}
+            description={emptyStateT.examples.inviteTeamToCollaborate}
             action={
               <>
                 <Button>
                   <Plus className="me-2 h-4 w-4" />
-                  {isRTL ? 'دعوة أعضاء' : 'Invite Members'}
+                  {emptyStateT.examples.inviteMembers}
                 </Button>
                 <Button variant="outline">
-                  {isRTL ? 'معرفة المزيد' : 'Learn More'}
+                  {emptyStateT.examples.learnMore}
                 </Button>
               </>
             }
@@ -190,7 +185,7 @@ export function Example() {
       {/* Props */}
       <div className="space-y-4">
         <h2 className="text-2xl font-bold">
-          {isRTL ? 'الخصائص' : 'Props'}
+          {emptyStateT.sections.props}
         </h2>
 
         <PropsTable
@@ -198,36 +193,30 @@ export function Example() {
             {
               name: 'icon',
               type: 'React.ReactNode',
-              description: isRTL
-                ? 'الأيقونة المعروضة في الأعلى'
-                : 'Icon to display at the top',
+              description: emptyStateT.props.iconDisplayedAtTop,
               required: false,
             },
             {
               name: 'title',
               type: 'string',
-              description: isRTL ? 'عنوان الحالة الفارغة' : 'Title of the empty state',
+              description: emptyStateT.props.titleOfEmptyState,
             },
             {
               name: 'description',
               type: 'string',
-              description: isRTL ? 'نص وصفي اختياري' : 'Optional descriptive text',
+              description: emptyStateT.props.optionalDescriptiveText,
               required: false,
             },
             {
               name: 'action',
               type: 'React.ReactNode',
-              description: isRTL
-                ? 'زر أو أزرار الإجراء'
-                : 'Action button(s) to display',
+              description: emptyStateT.props.actionButtons,
               required: false,
             },
             {
               name: 'className',
               type: 'string',
-              description: isRTL
-                ? 'فئات CSS إضافية'
-                : 'Additional CSS classes',
+              description: emptyStateT.props.additionalCssClasses,
               required: false,
             },
           ]}
@@ -237,62 +226,33 @@ export function Example() {
       {/* Usage Guidelines */}
       <div className="space-y-4">
         <h2 className="text-2xl font-bold">
-          {isRTL ? 'إرشادات الاستخدام' : 'Usage Guidelines'}
+          {emptyStateT.sections.usageGuidelines}
         </h2>
 
         <div className="space-y-3 text-sm">
           <div>
             <h3 className="font-semibold mb-1">
-              {isRTL ? 'متى تستخدم' : 'When to use'}
+              {emptyStateT.sections.whenToUse}
             </h3>
             <ul className="list-disc ps-5 space-y-1 text-muted-foreground">
-              <li>
-                {isRTL
-                  ? 'عندما لا يكون هناك محتوى للعرض (قوائم فارغة، نتائج بحث، إلخ)'
-                  : 'When there is no content to display (empty lists, search results, etc.)'}
-              </li>
-              <li>
-                {isRTL
-                  ? 'لتوجيه المستخدمين نحو الإجراء التالي'
-                  : 'To guide users towards the next action'}
-              </li>
-              <li>
-                {isRTL
-                  ? 'لتوفير تفسير لماذا لا يوجد محتوى'
-                  : 'To provide an explanation for why there is no content'}
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="font-semibold mb-1">
-              {isRTL ? 'أفضل الممارسات' : 'Best practices'}
-            </h3>
-            <ul className="list-disc ps-5 space-y-1 text-muted-foreground">
-              <li>
-                {isRTL
-                  ? 'استخدم أيقونات ذات صلة تمثل المحتوى المفقود'
-                  : 'Use relevant icons that represent the missing content'}
-              </li>
-              <li>
-                {isRTL
-                  ? 'اجعل العنوان واضحًا وموجزًا'
-                  : 'Keep titles clear and concise'}
-              </li>
-              <li>
-                {isRTL
-                  ? 'قدم إجراءً واضحًا إذا كان بإمكان المستخدم إصلاح الموقف'
-                  : 'Provide a clear action if the user can fix the situation'}
-              </li>
-              <li>
-                {isRTL
-                  ? 'استخدم لهجة ودية ومفيدة'
-                  : 'Use a friendly and helpful tone'}
-              </li>
+              <li>{emptyStateT.usageGuidelines.whenNoContentToDisplay}</li>
+              <li>{emptyStateT.usageGuidelines.toGuideUsersNextAction}</li>
+              <li>{emptyStateT.usageGuidelines.toProvideExplanation}</li>
             </ul>
           </div>
         </div>
       </div>
+
+      {/* Best Practices */}
+      <section className="mb-8">
+        <h2 className="text-2xl font-bold tracking-tight mb-6">
+          {emptyStateT.sections.bestPractices}
+        </h2>
+        <BestPractices
+          dos={emptyStateT.bestPractices.doList}
+          donts={emptyStateT.bestPractices.dontList}
+        />
+      </section>
     </div>
   )
 }

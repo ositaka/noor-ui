@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { ComponentShowcase } from '@/components/docs/component-showcase'
 import { PropsTable } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
+import { BestPractices } from '@/components/docs/best-practices'
 import { DashboardShell } from '@/components/ui/dashboard-shell'
 import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
@@ -239,6 +240,8 @@ export default function Dashboard() {
 
 export default function DashboardShellPage() {
   const { toast } = useToast()
+  const { direction, locale } = useDirection()
+  const t = content[locale]
 
   const handleAction = (action: string) => {
     toast({
@@ -530,45 +533,11 @@ export default function DashboardShellPage() {
 
         {/* Best Practices */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Best Practices</h2>
-          <Alert>
-            <Info className="h-4 w-4" />
-            <AlertDescription>
-              <ul className="space-y-2 mt-2">
-                <li className="flex items-start gap-2">
-                  <span className="text-primary font-bold">•</span>
-                  <span>
-                    Always provide both <code>title</code> and <code>titleAr</code> for navigation
-                    items to ensure proper bilingual support
-                  </span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-primary font-bold">•</span>
-                  <span>
-                    Use meaningful icons for navigation items to improve visual recognition
-                  </span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-primary font-bold">•</span>
-                  <span>
-                    Keep navigation items to 5-7 top-level items for better usability
-                  </span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-primary font-bold">•</span>
-                  <span>
-                    Use badges sparingly to indicate counts or status updates
-                  </span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-primary font-bold">•</span>
-                  <span>
-                    Implement proper authentication checks before rendering the shell
-                  </span>
-                </li>
-              </ul>
-            </AlertDescription>
-          </Alert>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.bestPractices}</h2>
+          <BestPractices
+            dos={t.dashboardShellComponent.bestPractices.doList}
+            donts={t.dashboardShellComponent.bestPractices.dontList}
+          />
         </section>
 
         {/* Accessibility */}

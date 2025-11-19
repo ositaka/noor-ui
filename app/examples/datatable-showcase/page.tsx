@@ -103,28 +103,29 @@ const generateUsers = (isRTL: boolean): User[] => {
 
 export default function DataTableShowcasePage() {
   const { direction, locale } = useDirection()
+  const t = content[locale]
   const isRTL = direction === 'rtl'
 
   // Role translations
   const getRoleText = React.useCallback((role: User['role']) => {
     const translations = {
-      Admin: isRTL ? 'مسؤول' : 'Admin',
-      Editor: isRTL ? 'محرر' : 'Editor',
-      User: isRTL ? 'مستخدم' : 'User',
-      Viewer: isRTL ? 'مشاهد' : 'Viewer',
+      Admin: t.datatableShowcasePage.roles.admin,
+      Editor: t.datatableShowcasePage.roles.editor,
+      User: t.datatableShowcasePage.roles.user,
+      Viewer: t.datatableShowcasePage.roles.viewer,
     }
     return translations[role]
-  }, [isRTL])
+  }, [t])
 
   // Status translations
   const getStatusText = React.useCallback((status: User['status']) => {
     const translations = {
-      Active: isRTL ? 'نشط' : 'Active',
-      Inactive: isRTL ? 'غير نشط' : 'Inactive',
-      Pending: isRTL ? 'معلق' : 'Pending',
+      Active: t.datatableShowcasePage.status.active,
+      Inactive: t.datatableShowcasePage.status.inactive,
+      Pending: t.datatableShowcasePage.status.pending,
     }
     return translations[status]
-  }, [isRTL])
+  }, [t])
 
   // Data state
   const [allUsers] = React.useState<User[]>(generateUsers(isRTL))
@@ -264,47 +265,47 @@ export default function DataTableShowcasePage() {
   const columns = React.useMemo<ColumnDef<User>[]>(() => [
     {
       id: 'name',
-      header: isRTL ? 'الاسم' : 'Name',
+      header: t.cmsPage.table.title,
       accessorKey: 'name',
       sortable: true,
       cell: (row) => <div className="font-medium">{row.name}</div>,
     },
     {
       id: 'email',
-      header: isRTL ? 'البريد الإلكتروني' : 'Email',
+      header: t.ui.form.email,
       accessorKey: 'email',
       sortable: true,
       cell: (row) => <div className="text-muted-foreground text-sm">{row.email}</div>,
     },
     {
       id: 'role',
-      header: isRTL ? 'الدور' : 'Role',
+      header: t.cmsPage.table.status,
       accessorKey: 'role',
       sortable: true,
       cell: (row) => <Badge variant={getRoleVariant(row.role)}>{getRoleText(row.role)}</Badge>,
     },
     {
       id: 'status',
-      header: isRTL ? 'الحالة' : 'Status',
+      header: t.cmsPage.table.status,
       accessorKey: 'status',
       sortable: true,
       cell: (row) => <Badge variant={getStatusVariant(row.status)}>{getStatusText(row.status)}</Badge>,
     },
     {
       id: 'department',
-      header: isRTL ? 'القسم' : 'Department',
+      header: t.datatableShowcasePage.table.department,
       accessorKey: 'department',
       sortable: true,
       cell: (row) => <div>{isRTL ? row.departmentAr : row.department}</div>,
     },
     {
       id: 'joinDate',
-      header: isRTL ? 'تاريخ الانضمام' : 'Join Date',
+      header: t.datatableShowcasePage.table.joinDate,
       accessorKey: 'joinDate',
       sortable: true,
       cell: (row) => <div className="text-sm">{row.joinDate}</div>,
     },
-  ], [isRTL, getRoleVariant, getStatusVariant, getRoleText, getStatusText])
+  ], [isRTL, getRoleVariant, getStatusVariant, getRoleText, getStatusText, t])
 
   // Get paginated data
   const paginatedData = displayUsers.slice(
@@ -358,18 +359,18 @@ export default function DataTableShowcasePage() {
             <ol className="flex items-center gap-2 text-sm text-muted-foreground">
               <li>
                 <Link href="/" className="hover:text-foreground transition-colors">
-                  {isRTL ? 'الرئيسية' : 'Home'}
+                  {t.nav.home}
                 </Link>
               </li>
               <li>/</li>
               <li>
                 <Link href="/examples" className="hover:text-foreground transition-colors">
-                  {isRTL ? 'الأمثلة' : 'Examples'}
+                  {t.nav.examples}
                 </Link>
               </li>
               <li>/</li>
               <li className="text-foreground font-medium">
-                {isRTL ? 'عرض جدول البيانات' : 'DataTable'}
+                {t.datatableShowcasePage.breadcrumb.datatable}
               </li>
             </ol>
           </nav>
@@ -387,7 +388,7 @@ export default function DataTableShowcasePage() {
                 </div>
                 <div>
                   <h1 className="text-3xl font-bold">
-                    {isRTL ? 'عرض جدول البيانات' : 'DataTable Showcase'}
+                    {t.datatableShowcasePage.title}
                   </h1>
                   <p className="text-muted-foreground">
                     {isRTL
@@ -401,11 +402,11 @@ export default function DataTableShowcasePage() {
             <div className="flex items-center gap-2">
               <Button variant="outline" onClick={handleRefresh} disabled={isLoading}>
                 <RefreshCw className={`h-4 w-4 me-2 ${isLoading ? 'animate-spin' : ''}`} />
-                {isRTL ? 'تحديث' : 'Refresh'}
+                {t.datatableShowcasePage.buttons.refresh}
               </Button>
               <Button onClick={handleExportCSV}>
                 <Download className="h-4 w-4 me-2" />
-                {isRTL ? 'تصدير CSV' : 'Export CSV'}
+                {t.datatableShowcasePage.buttons.exportCSV}
               </Button>
             </div>
           </div>
@@ -419,7 +420,7 @@ export default function DataTableShowcasePage() {
             <CardContent className="p-6">
               <div className="space-y-2">
                 <p className="text-sm text-muted-foreground">
-                  {isRTL ? 'إجمالي المستخدمين' : 'Total Users'}
+                  {t.datatableShowcasePage.stats.totalUsers}
                 </p>
                 <p className="text-3xl font-bold">{allUsers.length}</p>
               </div>
@@ -430,7 +431,7 @@ export default function DataTableShowcasePage() {
             <CardContent className="p-6">
               <div className="space-y-2">
                 <p className="text-sm text-muted-foreground">
-                  {isRTL ? 'المستخدمون النشطون' : 'Active Users'}
+                  {t.datatableShowcasePage.stats.activeUsers}
                 </p>
                 <p className="text-3xl font-bold">
                   {allUsers.filter(u => u.status === 'Active').length}
@@ -443,7 +444,7 @@ export default function DataTableShowcasePage() {
             <CardContent className="p-6">
               <div className="space-y-2">
                 <p className="text-sm text-muted-foreground">
-                  {isRTL ? 'المسؤولون' : 'Admins'}
+                  {t.datatableShowcasePage.stats.admins}
                 </p>
                 <p className="text-3xl font-bold">
                   {allUsers.filter(u => u.role === 'Admin').length}
@@ -456,7 +457,7 @@ export default function DataTableShowcasePage() {
             <CardContent className="p-6">
               <div className="space-y-2">
                 <p className="text-sm text-muted-foreground">
-                  {isRTL ? 'الأقسام' : 'Departments'}
+                  {t.datatableShowcasePage.stats.departments}
                 </p>
                 <p className="text-3xl font-bold">
                   {new Set(allUsers.map(u => u.department)).size}
@@ -471,7 +472,7 @@ export default function DataTableShowcasePage() {
       <div className="container pb-12">
         <Card>
           <CardHeader>
-            <CardTitle>{isRTL ? 'إدارة المستخدمين' : 'User Management'}</CardTitle>
+            <CardTitle>{t.datatableShowcasePage.table.title}</CardTitle>
             <CardDescription>
               {isRTL
                 ? 'جدول بيانات كامل المزايا مع الفرز والبحث والترقيم والتحميل'
@@ -488,7 +489,7 @@ export default function DataTableShowcasePage() {
               onSort={handleSort}
               searchable
               searchPlaceholder={
-                isRTL ? 'البحث عن المستخدمين...' : 'Search users...'
+                t.datatableShowcasePage.table.searchPlaceholder
               }
               searchValue={searchValue}
               onSearchChange={setSearchValue}
@@ -497,7 +498,7 @@ export default function DataTableShowcasePage() {
               totalPages={totalPages}
               pageSize={pageSize}
               onPageChange={setCurrentPage}
-              emptyMessage={isRTL ? 'لم يتم العثور على مستخدمين' : 'No users found'}
+              emptyMessage={t.datatableShowcasePage.table.noUsersFound}
               striped
               hoverable
             />
@@ -522,7 +523,7 @@ export default function DataTableShowcasePage() {
                             : 'cursor-pointer'
                         }
                       >
-                        {isRTL ? 'السابق' : 'Previous'}
+                        {t.ui.button.previous}
                       </PaginationPrevious>
                     </PaginationItem>
 
@@ -561,7 +562,7 @@ export default function DataTableShowcasePage() {
                             : 'cursor-pointer'
                         }
                       >
-                        {isRTL ? 'التالي' : 'Next'}
+                        {t.ui.button.next}
                       </PaginationNext>
                     </PaginationItem>
                   </PaginationContent>
@@ -575,7 +576,7 @@ export default function DataTableShowcasePage() {
         <div className="mt-8 space-y-6">
           <div>
             <h2 className="text-2xl font-bold mb-4">
-              {isRTL ? 'الميزات المعروضة' : 'Features Demonstrated'}
+              {t.datatableShowcasePage.features.title}
             </h2>
             <Separator className="mb-6" />
           </div>
@@ -584,7 +585,7 @@ export default function DataTableShowcasePage() {
             <Card>
               <CardHeader>
                 <CardTitle className="text-base">
-                  {isRTL ? 'الفرز' : 'Sorting'}
+                  {t.datatableShowcasePage.features.sorting}
                 </CardTitle>
               </CardHeader>
               <CardContent>
@@ -599,7 +600,7 @@ export default function DataTableShowcasePage() {
             <Card>
               <CardHeader>
                 <CardTitle className="text-base">
-                  {isRTL ? 'البحث والتصفية' : 'Search & Filtering'}
+                  {t.datatableShowcasePage.features.searchFilter}
                 </CardTitle>
               </CardHeader>
               <CardContent>
@@ -614,7 +615,7 @@ export default function DataTableShowcasePage() {
             <Card>
               <CardHeader>
                 <CardTitle className="text-base">
-                  {isRTL ? 'الترقيم' : 'Pagination'}
+                  {t.datatableShowcasePage.features.pagination}
                 </CardTitle>
               </CardHeader>
               <CardContent>
@@ -629,7 +630,7 @@ export default function DataTableShowcasePage() {
             <Card>
               <CardHeader>
                 <CardTitle className="text-base">
-                  {isRTL ? 'حالات التحميل' : 'Loading States'}
+                  {t.datatableShowcasePage.features.loadingStates}
                 </CardTitle>
               </CardHeader>
               <CardContent>
@@ -644,7 +645,7 @@ export default function DataTableShowcasePage() {
             <Card>
               <CardHeader>
                 <CardTitle className="text-base">
-                  {isRTL ? 'الخلايا المخصصة' : 'Custom Cells'}
+                  {t.datatableShowcasePage.features.customCells}
                 </CardTitle>
               </CardHeader>
               <CardContent>
@@ -659,7 +660,7 @@ export default function DataTableShowcasePage() {
             <Card>
               <CardHeader>
                 <CardTitle className="text-base">
-                  {isRTL ? 'التصدير' : 'Export'}
+                  {t.datatableShowcasePage.features.export}
                 </CardTitle>
               </CardHeader>
               <CardContent>
@@ -674,7 +675,7 @@ export default function DataTableShowcasePage() {
             <Card>
               <CardHeader>
                 <CardTitle className="text-base">
-                  {isRTL ? 'متجاوب مع الجوال' : 'Mobile Responsive'}
+                  {t.datatableShowcasePage.features.mobileResponsive}
                 </CardTitle>
               </CardHeader>
               <CardContent>
@@ -689,7 +690,7 @@ export default function DataTableShowcasePage() {
             <Card>
               <CardHeader>
                 <CardTitle className="text-base">
-                  {isRTL ? 'دعم RTL' : 'RTL Support'}
+                  {t.datatableShowcasePage.features.rtlSupport}
                 </CardTitle>
               </CardHeader>
               <CardContent>
@@ -704,7 +705,7 @@ export default function DataTableShowcasePage() {
             <Card>
               <CardHeader>
                 <CardTitle className="text-base">
-                  {isRTL ? 'إمكانية الوصول' : 'Accessibility'}
+                  {t.datatableShowcasePage.features.accessibility}
                 </CardTitle>
               </CardHeader>
               <CardContent>

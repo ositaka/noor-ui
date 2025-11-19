@@ -11,6 +11,7 @@ import { Separator } from '@/components/ui/separator'
 import { UserMenu } from '@/components/ui/user-menu'
 import { NotificationCenter, type Notification } from '@/components/ui/notification-center'
 import { useDirection } from '@/components/providers/direction-provider'
+import { content } from '@/lib/i18n'
 import { Menu, X } from 'lucide-react'
 
 export interface NavItem {
@@ -127,18 +128,7 @@ export function DashboardShell({
 }: DashboardShellProps) {
   const [sidebarOpen, setSidebarOpen] = React.useState(false)
   const { locale, direction } = useDirection()
-
-  const text = {
-    en: {
-      menu: 'Menu',
-      close: 'Close',
-    },
-    ar: {
-      menu: 'القائمة',
-      close: 'إغلاق',
-    },
-  }
-  const t = text[locale]
+  const t = content[locale]
 
   return (
     <div className={cn('min-h-screen bg-background', relative ? 'flex' : '', className)}>
@@ -156,7 +146,7 @@ export function DashboardShell({
             <Link href={logoHref} className="flex items-center gap-2">
               {logo || (
                 <span className="text-xl font-bold">
-                  {locale === 'ar' ? 'نور' : 'Noor UI'}
+                  {t.ui.components.noorUI}
                 </span>
               )}
             </Link>
@@ -179,7 +169,7 @@ export function DashboardShell({
               'z-40 lg:hidden',
               relative ? 'absolute top-4 start-4' : 'fixed top-4 start-4'
             )}
-            aria-label={t.menu}
+            aria-label={t.ui.components.menu}
           >
             <Menu className="h-6 w-6" />
           </Button>
@@ -195,7 +185,7 @@ export function DashboardShell({
               >
                 {logo || (
                   <span className="text-xl font-bold">
-                    {locale === 'ar' ? 'نور' : 'Noor UI'}
+                    {t.ui.components.noorUI}
                   </span>
                 )}
               </Link>

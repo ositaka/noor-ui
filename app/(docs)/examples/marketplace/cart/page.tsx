@@ -84,6 +84,7 @@ function generateMockCartItems(): CartItem[] {
 export default function CartPage() {
   const { locale } = useDirection()
   const isRTL = locale === 'ar'
+  const t = content[locale]
 
   const [cartItems, setCartItems] = React.useState<CartItem[]>(generateMockCartItems())
 
@@ -114,24 +115,24 @@ export default function CartPage() {
           <ol className="flex items-center gap-2 text-sm text-muted-foreground">
             <li>
               <Link href="/" className="hover:text-foreground transition-colors">
-                {isRTL ? 'الرئيسية' : 'Home'}
+                {t.nav.home}
               </Link>
             </li>
             <li>/</li>
             <li>
               <Link href="/examples" className="hover:text-foreground transition-colors">
-                {isRTL ? 'الأمثلة' : 'Examples'}
+                {t.nav.examples}
               </Link>
             </li>
             <li>/</li>
             <li>
               <Link href="/examples/marketplace" className="hover:text-foreground transition-colors">
-                {isRTL ? 'السوق' : 'Marketplace'}
+                {t.marketplaceCart.breadcrumb.marketplace}
               </Link>
             </li>
             <li>/</li>
             <li className="text-foreground font-medium">
-              {isRTL ? 'سلة التسوق' : 'Shopping Cart'}
+              {t.marketplaceCart.breadcrumb.shoppingCart}
             </li>
           </ol>
         </nav>
@@ -139,12 +140,10 @@ export default function CartPage() {
         {/* Page Header */}
         <div className="mb-8">
           <h1 className="text-4xl font-bold tracking-tight mb-2">
-            {isRTL ? 'سلة التسوق' : 'Shopping Cart'}
+            {t.marketplaceCart.title}
           </h1>
           <p className="text-muted-foreground">
-            {isRTL
-              ? `لديك ${cartItems.length} منتجات في سلة التسوق`
-              : `You have ${cartItems.length} items in your cart`}
+            {t.marketplaceCart.itemsInCart.replace('{count}', cartItems.length.toString())}
           </p>
         </div>
 
@@ -157,18 +156,16 @@ export default function CartPage() {
               </div>
               <div className="space-y-2">
                 <h3 className="text-2xl font-semibold">
-                  {isRTL ? 'سلة التسوق فارغة' : 'Your cart is empty'}
+                  {t.marketplaceCart.emptyState.title}
                 </h3>
                 <p className="text-muted-foreground max-w-sm">
-                  {isRTL
-                    ? 'ابدأ التسوق الآن واكتشف منتجاتنا المميزة'
-                    : 'Start shopping now and discover our amazing products'}
+                  {t.marketplaceCart.emptyState.description}
                 </p>
               </div>
               <Button asChild size="lg">
                 <Link href="/examples/marketplace">
                   <ShoppingBag className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
-                  {isRTL ? 'تصفح المنتجات' : 'Browse Products'}
+                  {t.marketplaceCart.emptyState.browseProducts}
                 </Link>
               </Button>
             </div>
@@ -246,7 +243,7 @@ export default function CartPage() {
                             </div>
                             {item.quantity > 1 && (
                               <div className="text-sm text-muted-foreground">
-                                {formatSAR(item.price, { useArabicNumerals: isRTL, locale: isRTL ? 'ar' : 'en' })} {isRTL ? 'للقطعة' : 'each'}
+                                {formatSAR(item.price, { useArabicNumerals: isRTL, locale: isRTL ? 'ar' : 'en' })} {t.marketplaceCart.product.each}
                               </div>
                             )}
                           </div>
@@ -255,7 +252,7 @@ export default function CartPage() {
                         {item.quantity >= item.maxStock && (
                           <div className="mt-2">
                             <Badge variant="secondary" className="text-xs">
-                              {isRTL ? 'الحد الأقصى المتاح' : 'Max available'}
+                              {t.marketplaceCart.product.maxAvailable}
                             </Badge>
                           </div>
                         )}
@@ -271,12 +268,12 @@ export default function CartPage() {
                   {isRTL ? (
                     <>
                       <ArrowRight className="h-4 w-4 ms-2 rtl:rotate-180" />
-                      متابعة التسوق
+                      {t.marketplaceCart.actions.continueShopping}
                     </>
                   ) : (
                     <>
                       <ArrowLeft className="h-4 w-4 me-2" />
-                      Continue Shopping
+                      {t.marketplaceCart.actions.continueShopping}
                     </>
                   )}
                 </Link>
@@ -288,14 +285,14 @@ export default function CartPage() {
               <Card className="sticky top-4">
                 <CardHeader>
                   <CardTitle>
-                    {isRTL ? 'ملخص الطلب' : 'Order Summary'}
+                    {t.marketplaceCart.summary.title}
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   {/* Subtotal */}
                   <div className="flex items-center justify-between">
                     <span className="text-muted-foreground">
-                      {isRTL ? 'المجموع الفرعي' : 'Subtotal'}
+                      {t.marketplaceCart.summary.subtotal}
                     </span>
                     <span className="font-medium">
                       {formatSAR(subtotal, { useArabicNumerals: isRTL, locale: isRTL ? 'ar' : 'en' })}
@@ -305,7 +302,7 @@ export default function CartPage() {
                   {/* Tax */}
                   <div className="flex items-center justify-between">
                     <span className="text-muted-foreground">
-                      {isRTL ? 'ضريبة القيمة المضافة (15%)' : 'VAT (15%)'}
+                      {t.marketplaceCart.summary.vat}
                     </span>
                     <span className="font-medium">
                       {formatSAR(tax, { useArabicNumerals: isRTL, locale: isRTL ? 'ar' : 'en' })}
@@ -317,13 +314,13 @@ export default function CartPage() {
                     <div className="flex items-center gap-2">
                       <Truck className="h-4 w-4 text-muted-foreground" />
                       <span className="text-muted-foreground">
-                        {isRTL ? 'الشحن' : 'Shipping'}
+                        {t.marketplaceCart.summary.shipping}
                       </span>
                     </div>
                     <span className="font-medium">
                       {shipping === 0 ? (
                         <Badge variant="secondary" className="text-xs">
-                          {isRTL ? 'مجاني' : 'FREE'}
+                          {t.marketplaceCart.summary.free}
                         </Badge>
                       ) : (
                         formatSAR(shipping, { useArabicNumerals: isRTL, locale: isRTL ? 'ar' : 'en' })
@@ -337,9 +334,7 @@ export default function CartPage() {
                       <div className="flex items-start gap-2">
                         <Tag className="h-4 w-4 text-primary shrink-0 mt-0.5" />
                         <p className="text-xs text-muted-foreground">
-                          {isRTL
-                            ? `أضف ${formatSAR(200 - subtotal, { useArabicNumerals: isRTL, locale: isRTL ? 'ar' : 'en' })} للحصول على شحن مجاني`
-                            : `Add ${formatSAR(200 - subtotal, { useArabicNumerals: false, locale: 'en' })} for free shipping`}
+                          {t.marketplaceCart.summary.freeShippingPrompt.replace('{amount}', formatSAR(200 - subtotal, { useArabicNumerals: isRTL, locale: isRTL ? 'ar' : 'en' }))}
                         </p>
                       </div>
                     </div>
@@ -349,7 +344,7 @@ export default function CartPage() {
 
                   {/* Total */}
                   <div className="flex items-center justify-between text-lg font-bold">
-                    <span>{isRTL ? 'الإجمالي' : 'Total'}</span>
+                    <span>{t.marketplaceCart.summary.total}</span>
                     <span>{formatSAR(total, { useArabicNumerals: isRTL, locale: isRTL ? 'ar' : 'en' })}</span>
                   </div>
 
@@ -358,12 +353,12 @@ export default function CartPage() {
                     <Link href="/examples/marketplace/checkout">
                       {isRTL ? (
                         <>
-                          إتمام الطلب
+                          {t.marketplaceCart.summary.proceedToCheckout}
                           <ArrowLeft className="h-4 w-4 ms-2" />
                         </>
                       ) : (
                         <>
-                          Proceed to Checkout
+                          {t.marketplaceCart.summary.proceedToCheckout}
                           <ArrowRight className="h-4 w-4 ms-2 rtl:rotate-180" />
                         </>
                       )}
@@ -373,9 +368,7 @@ export default function CartPage() {
                   {/* Security Notice */}
                   <div className="text-center">
                     <p className="text-xs text-muted-foreground">
-                      {isRTL
-                        ? 'جميع المعاملات آمنة ومشفرة'
-                        : 'All transactions are secure and encrypted'}
+                      {t.marketplaceCart.summary.secureTransaction}
                     </p>
                   </div>
                 </CardContent>

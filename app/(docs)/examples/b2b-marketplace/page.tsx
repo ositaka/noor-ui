@@ -236,6 +236,7 @@ function generateMockProducts(): Product[] {
 export default function B2BMarketplacePage() {
   const { locale } = useDirection()
   const isRTL = locale === 'ar'
+  const t = content[locale]
 
   const [products] = React.useState<Product[]>(generateMockProducts())
   const [searchQuery, setSearchQuery] = React.useState('')
@@ -267,18 +268,18 @@ export default function B2BMarketplacePage() {
           <ol className="flex items-center gap-2 text-sm text-muted-foreground">
             <li>
               <Link href="/" className="hover:text-foreground transition-colors">
-                {isRTL ? 'الرئيسية' : 'Home'}
+                {t.nav.home}
               </Link>
             </li>
             <li>/</li>
             <li>
               <Link href="/examples" className="hover:text-foreground transition-colors">
-                {isRTL ? 'الأمثلة' : 'Examples'}
+                {t.nav.examples}
               </Link>
             </li>
             <li>/</li>
             <li className="text-foreground font-medium">
-              {isRTL ? 'السوق B2B' : 'B2B Marketplace'}
+              {t.b2bMarketplaceListing.breadcrumb.b2bMarketplace}
             </li>
           </ol>
         </nav>
@@ -288,25 +289,23 @@ export default function B2BMarketplacePage() {
           <div className="flex items-start justify-between gap-4 mb-4">
             <div>
               <h1 className="text-4xl font-bold tracking-tight mb-2">
-                {isRTL ? 'السوق B2B' : 'B2B Marketplace'}
+                {t.b2bMarketplaceListing.pageTitle}
               </h1>
               <p className="text-xl text-muted-foreground">
-                {isRTL
-                  ? 'حلول الشراء بالجملة للأعمال التجارية'
-                  : 'Bulk purchasing solutions for businesses'}
+                {t.b2bMarketplaceListing.pageDescription}
               </p>
             </div>
             <div className="flex gap-3">
               <Button variant="outline" asChild>
                 <Link href="/examples/b2b-marketplace/rfq">
                   <MessageSquare className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
-                  {isRTL ? 'طلب عرض سعر' : 'Request Quote'}
+                  {t.b2bMarketplaceListing.buttons.requestQuote}
                 </Link>
               </Button>
               <Button asChild>
                 <Link href="/examples/b2b-marketplace/dashboard">
                   <Building2 className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
-                  {isRTL ? 'لوحة التحكم' : 'Dashboard'}
+                  {t.b2bMarketplaceListing.buttons.dashboard}
                 </Link>
               </Button>
             </div>
@@ -325,7 +324,7 @@ export default function B2BMarketplacePage() {
                       <ArabicNumber value={500} />+
                     </p>
                     <p className="text-xs text-muted-foreground">
-                      {isRTL ? 'المنتجات' : 'Products'}
+                      {t.b2bMarketplaceListing.stats.products}
                     </p>
                   </div>
                 </div>
@@ -343,7 +342,7 @@ export default function B2BMarketplacePage() {
                       <ArabicNumber value={150} />+
                     </p>
                     <p className="text-xs text-muted-foreground">
-                      {isRTL ? 'الموردين' : 'Suppliers'}
+                      {t.b2bMarketplaceListing.stats.suppliers}
                     </p>
                   </div>
                 </div>
@@ -361,7 +360,7 @@ export default function B2BMarketplacePage() {
                       <ArabicNumber value={40} />%
                     </p>
                     <p className="text-xs text-muted-foreground">
-                      {isRTL ? 'خصم الكمية' : 'Bulk Discount'}
+                      {t.b2bMarketplaceListing.stats.bulkDiscount}
                     </p>
                   </div>
                 </div>
@@ -379,7 +378,7 @@ export default function B2BMarketplacePage() {
                       <ArabicNumber value={30} />
                     </p>
                     <p className="text-xs text-muted-foreground">
-                      {isRTL ? 'يوم للدفع' : 'Days Credit'}
+                      {t.b2bMarketplaceListing.stats.daysCredit}
                     </p>
                   </div>
                 </div>
@@ -400,16 +399,16 @@ export default function B2BMarketplacePage() {
             <Input
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder={isRTL ? 'ابحث عن المنتجات...' : 'Search products...'}
+              placeholder={t.b2bMarketplaceListing.filters.searchPlaceholder}
               className={isRTL ? 'pe-10' : 'ps-10'}
             />
           </div>
           <Select value={selectedCategory} onValueChange={setSelectedCategory}>
             <SelectTrigger className="w-full sm:w-[200px]">
-              <SelectValue placeholder={isRTL ? 'جميع الفئات' : 'All Categories'} />
+              <SelectValue placeholder={t.b2bMarketplaceListing.filters.allCategories} />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">{isRTL ? 'جميع الفئات' : 'All Categories'}</SelectItem>
+              <SelectItem value="all">{t.b2bMarketplaceListing.filters.allCategories}</SelectItem>
               {categories.map((category) => (
                 <SelectItem key={category} value={category}>
                   {category}
@@ -429,7 +428,7 @@ export default function B2BMarketplacePage() {
               >
                 <div className="absolute top-3 start-3">
                   <Badge className="bg-red-600">
-                    {isRTL ? 'خصم حتى ' : 'Up to '}
+                    {t.b2bMarketplaceListing.productCard.upTo}
                     <ArabicNumber value={product.priceTiers[product.priceTiers.length - 1].discount} />%
                   </Badge>
                 </div>
@@ -466,7 +465,7 @@ export default function B2BMarketplacePage() {
                 <div>
                   <div className="flex items-baseline gap-2 mb-1">
                     <span className="text-sm text-muted-foreground">
-                      {isRTL ? 'يبدأ من:' : 'Starting at:'}
+                      {t.b2bMarketplaceListing.productCard.startingAt}
                     </span>
                   </div>
                   <div className="flex items-baseline gap-2">
@@ -483,7 +482,7 @@ export default function B2BMarketplacePage() {
                 <div className="bg-muted rounded-lg p-3">
                   <div className="flex items-center justify-between text-sm">
                     <span className="text-muted-foreground">
-                      {isRTL ? 'الحد الأدنى للطلب' : 'Minimum Order'}
+                      {t.b2bMarketplaceListing.productCard.minimumOrder}
                     </span>
                     <span className="font-medium">
                       <ArabicNumber value={product.moq} /> {isRTL ? product.unitAr : product.unit}
@@ -494,7 +493,7 @@ export default function B2BMarketplacePage() {
                 {/* Volume Pricing Preview */}
                 <div className="space-y-1">
                   <p className="text-xs font-medium text-muted-foreground mb-2">
-                    {isRTL ? 'التسعير حسب الكمية:' : 'Volume Pricing:'}
+                    {t.b2bMarketplaceListing.productCard.volumePricing}
                   </p>
                   <div className="space-y-1">
                     {product.priceTiers.slice(0, 3).map((tier, index) => (
@@ -520,7 +519,7 @@ export default function B2BMarketplacePage() {
                 {/* Lead Time */}
                 <div className="flex items-center justify-between text-sm pt-2 border-t">
                   <span className="text-muted-foreground">
-                    {isRTL ? 'مدة التسليم' : 'Lead Time'}
+                    {t.b2bMarketplaceListing.productCard.leadTime}
                   </span>
                   <span className="font-medium">
                     {isRTL ? product.leadTimeAr : product.leadTime}
@@ -531,12 +530,12 @@ export default function B2BMarketplacePage() {
                 <div className="flex gap-2 pt-2">
                   <Button variant="outline" className="flex-1" asChild>
                     <Link href={`/examples/b2b-marketplace/${product.id}`}>
-                      {isRTL ? 'التفاصيل' : 'Details'}
+                      {t.b2bMarketplaceListing.productCard.details}
                     </Link>
                   </Button>
                   <Button className="flex-1">
                     <ShoppingCart className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
-                    {isRTL ? 'طلب' : 'Order'}
+                    {t.b2bMarketplaceListing.productCard.order}
                   </Button>
                 </div>
               </CardContent>
@@ -551,33 +550,29 @@ export default function B2BMarketplacePage() {
               <div className="grid gap-6 md:grid-cols-2">
                 <div>
                   <h3 className="text-2xl font-bold mb-2">
-                    {isRTL ? 'هل تحتاج إلى عرض سعر مخصص؟' : 'Need a Custom Quote?'}
+                    {t.b2bMarketplaceListing.cta.needCustomQuote}
                   </h3>
                   <p className="text-muted-foreground mb-4">
-                    {isRTL
-                      ? 'احصل على أسعار تنافسية لطلبات الجملة الكبيرة وشروط دفع مرنة'
-                      : 'Get competitive pricing for large bulk orders and flexible payment terms'}
+                    {t.b2bMarketplaceListing.cta.needCustomQuoteDesc}
                   </p>
                   <Button asChild size="lg">
                     <Link href="/examples/b2b-marketplace/rfq">
                       <MessageSquare className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
-                      {isRTL ? 'طلب عرض سعر' : 'Request Quote'}
+                      {t.b2bMarketplaceListing.cta.requestQuote}
                     </Link>
                   </Button>
                 </div>
                 <div>
                   <h3 className="text-2xl font-bold mb-2">
-                    {isRTL ? 'حساب تجاري؟' : 'Business Account?'}
+                    {t.b2bMarketplaceListing.cta.businessAccount}
                   </h3>
                   <p className="text-muted-foreground mb-4">
-                    {isRTL
-                      ? 'سجل الآن للحصول على مزايا حصرية وشروط دفع آجلة'
-                      : 'Register now for exclusive benefits and credit terms'}
+                    {t.b2bMarketplaceListing.cta.businessAccountDesc}
                   </p>
                   <Button asChild variant="outline" size="lg">
                     <Link href="/examples/b2b-marketplace/dashboard">
                       <Building2 className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
-                      {isRTL ? 'لوحة التحكم' : 'Dashboard'}
+                      {t.b2bMarketplaceListing.cta.dashboard}
                     </Link>
                   </Button>
                 </div>

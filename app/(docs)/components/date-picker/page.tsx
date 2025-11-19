@@ -203,6 +203,7 @@ interface DatePickerProps {
 export default function DatePickerPage() {
   const { direction, locale } = useDirection()
   const isRTL = direction === 'rtl'
+  const t = content[locale]
 
   const [date1, setDate1] = React.useState<Date | undefined>(new Date())
   const [date2, setDate2] = React.useState<Date | undefined>(undefined)
@@ -231,7 +232,7 @@ export default function DatePickerPage() {
   }, [])
 
   const formatDate = (date: Date | undefined): string => {
-    if (!date) return isRTL ? 'لم يتم اختيار تاريخ' : 'No date selected'
+    if (!date) return t.datePickerComponent.descriptions.noDateSelected
     return new Intl.DateTimeFormat(locale === 'ar' ? 'ar-SA' : 'en-US', {
       year: 'numeric',
       month: 'long',
@@ -240,7 +241,7 @@ export default function DatePickerPage() {
   }
 
   const formatDateRange = (range: DateRange | undefined): string => {
-    if (!range?.from) return isRTL ? 'لم يتم اختيار نطاق' : 'No range selected'
+    if (!range?.from) return t.datePickerComponent.descriptions.noRangeSelected
     if (!range.to) return formatDate(range.from)
     return `${formatDate(range.from)} ${isRTL ? '–' : '-'} ${formatDate(range.to)}`
   }
@@ -253,39 +254,37 @@ export default function DatePickerPage() {
           <ol className="flex items-center gap-2 text-sm text-muted-foreground">
             <li>
               <Link href="/" className="hover:text-foreground transition-colors">
-                {isRTL ? 'الرئيسية' : 'Home'}
+                {t.common.home}
               </Link>
             </li>
             <li>/</li>
             <li>
               <Link href="/components" className="hover:text-foreground transition-colors">
-                {isRTL ? 'المكونات' : 'Components'}
+                {t.nav.components}
               </Link>
             </li>
             <li>/</li>
-            <li className="text-foreground font-medium">{isRTL ? 'منتقي التاريخ' : 'Date Picker'}</li>
+            <li className="text-foreground font-medium">{t.datePickerComponent.title}</li>
           </ol>
         </nav>
 
         {/* Page Header */}
         <div className="mb-12">
-        <h1 className="text-4xl font-bold tracking-tight mb-4">{isRTL ? 'منتقي التاريخ' : 'Date Picker'}</h1>
+        <h1 className="text-4xl font-bold tracking-tight mb-4">{t.datePickerComponent.title}</h1>
         <p className="text-xl text-muted-foreground max-w-3xl">
-          {isRTL
-            ? 'اختيار التاريخ والنطاق مع تكامل التقويم'
-            : 'Single date and range selection with calendar integration'}
+          {t.datePickerComponent.description}
         </p>
       </div>
 
       {/* Basic Example */}
       <section className="mb-16">
         <h2 className="text-2xl font-bold tracking-tight mb-6">
-          {isRTL ? 'الاستخدام الأساسي' : 'Basic Usage'}
+          {t.datePickerComponent.usage}
         </h2>
         <ComponentShowcase code={basicCode}>
           <ComponentShowcase.Demo>
             <div className="w-full max-w-xs mx-auto space-y-2">
-              <Label>{isRTL ? 'تاريخ الميلاد' : 'Date of Birth'}</Label>
+              <Label>{t.datePickerComponent.labels.dateOfBirth}</Label>
               <DatePicker
                 date={date1}
                 onDateChange={setDate1}
@@ -301,12 +300,12 @@ export default function DatePickerPage() {
       {/* Date Range */}
       <section className="mb-16">
         <h2 className="text-2xl font-bold tracking-tight mb-6">
-          {isRTL ? 'نطاق التاريخ' : 'Date Range'}
+          {t.datePickerComponent.examples.dateRange}
         </h2>
         <ComponentShowcase code={rangeCode}>
           <ComponentShowcase.Demo>
             <div className="w-full max-w-md mx-auto space-y-2">
-              <Label>{isRTL ? 'فترة الحجز' : 'Booking Period'}</Label>
+              <Label>{t.datePickerComponent.labels.bookingPeriod}</Label>
               <DateRangePicker
                 dateRange={dateRange1}
                 onDateRangeChange={setDateRange1}
@@ -322,12 +321,12 @@ export default function DatePickerPage() {
       {/* With Constraints */}
       <section className="mb-16">
         <h2 className="text-2xl font-bold tracking-tight mb-6">
-          {isRTL ? 'مع القيود' : 'With Constraints'}
+          {t.datePickerComponent.examples.withConstraints}
         </h2>
         <ComponentShowcase code={constraintsCode}>
           <ComponentShowcase.Demo>
             <div className="w-full max-w-xs mx-auto space-y-2">
-              <Label>{isRTL ? 'موعد الاجتماع' : 'Appointment Date'}</Label>
+              <Label>{t.datePickerComponent.labels.appointmentDate}</Label>
               <DatePicker
                 date={date2}
                 onDateChange={setDate2}
@@ -337,9 +336,9 @@ export default function DatePickerPage() {
                 placeholderAr="اختر خلال الشهر القادم"
               />
               <p className="text-xs text-muted-foreground">
-                {isRTL
-                  ? `متاح من ${formatDate(today)} إلى ${formatDate(nextMonth)}`
-                  : `Available from ${formatDate(today)} to ${formatDate(nextMonth)}`}
+                {t.datePickerComponentPage.availableFromTo
+                  .replace('{from}', formatDate(today))
+                  .replace('{to}', formatDate(nextMonth))}
               </p>
             </div>
           </ComponentShowcase.Demo>
@@ -349,12 +348,12 @@ export default function DatePickerPage() {
       {/* Disabled Dates */}
       <section className="mb-16">
         <h2 className="text-2xl font-bold tracking-tight mb-6">
-          {isRTL ? 'تواريخ معطلة' : 'Disabled Dates'}
+          {t.datePickerComponent.examples.disabledDates}
         </h2>
         <ComponentShowcase code={disabledCode}>
           <ComponentShowcase.Demo>
             <div className="w-full max-w-xs mx-auto space-y-2">
-              <Label>{isRTL ? 'يوم العمل' : 'Working Day'}</Label>
+              <Label>{t.datePickerComponent.labels.workingDay}</Label>
               <DatePicker
                 date={date3}
                 onDateChange={setDate3}
@@ -363,7 +362,7 @@ export default function DatePickerPage() {
                 placeholderAr="اختر يوم عمل"
               />
               <p className="text-xs text-muted-foreground">
-                {isRTL ? 'عطلات نهاية الأسبوع معطلة' : 'Weekends are disabled'}
+                {t.datePickerComponent.descriptions.weekendsDisabled}
               </p>
             </div>
           </ComponentShowcase.Demo>
@@ -373,7 +372,7 @@ export default function DatePickerPage() {
       {/* Real-World Example */}
       <section className="mb-16">
         <h2 className="text-2xl font-bold tracking-tight mb-6">
-          {isRTL ? 'مثال عملي' : 'Real-World Example'}
+          {t.datePickerComponent.examples.realWorld}
         </h2>
         <ComponentShowcase code={`const [dateRange, setDateRange] = useState<DateRange>()
 const today = new Date()
@@ -404,14 +403,14 @@ const nights = dateRange?.from && dateRange?.to
           <ComponentShowcase.Demo>
             <Card className="w-full max-w-md mx-auto">
               <CardHeader>
-                <CardTitle>{isRTL ? 'حجز غرفة فندق' : 'Hotel Room Booking'}</CardTitle>
+                <CardTitle>{t.datePickerComponent.realWorldExample.hotelBooking}</CardTitle>
                 <CardDescription>
-                  {isRTL ? 'اختر تواريخ تسجيل الوصول والمغادرة' : 'Select check-in and check-out dates'}
+                  {t.datePickerComponent.realWorldExample.selectDates}
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
                 <div className="space-y-2">
-                  <Label>{isRTL ? 'فترة الإقامة' : 'Stay Period'}</Label>
+                  <Label>{t.datePickerComponent.labels.stayPeriod}</Label>
                   <DateRangePicker
                     dateRange={dateRange2}
                     onDateRangeChange={setDateRange2}
@@ -425,7 +424,7 @@ const nights = dateRange?.from && dateRange?.to
                   <>
                     <div className="flex justify-between items-center pt-4 border-t">
                       <span className="text-sm text-muted-foreground">
-                        {isRTL ? 'عدد الليالي:' : 'Number of nights:'}
+                        {t.datePickerComponent.realWorldExample.nights}:
                       </span>
                       <span className="font-semibold">
                         {Math.ceil((dateRange2.to.getTime() - dateRange2.from.getTime()) / (1000 * 60 * 60 * 24))}
@@ -434,7 +433,7 @@ const nights = dateRange?.from && dateRange?.to
 
                     <div className="flex justify-between items-center">
                       <span className="text-sm text-muted-foreground">
-                        {isRTL ? 'سعر الليلة:' : 'Price per night:'}
+                        {t.datePickerComponent.realWorldExample.pricePerNight}:
                       </span>
                       <span className="font-semibold">
                         {locale === 'ar' ? '٣٥٠ ر.س' : '$150'}
@@ -443,12 +442,11 @@ const nights = dateRange?.from && dateRange?.to
 
                     <div className="flex justify-between items-center">
                       <span className="text-lg font-semibold">
-                        {isRTL ? 'الإجمالي:' : 'Total:'}
+                        {t.datePickerComponent.realWorldExample.total}:
                       </span>
                       <span className="text-2xl font-bold text-primary">
-                        {locale === 'ar'
-                          ? `${(Math.ceil((dateRange2.to.getTime() - dateRange2.from.getTime()) / (1000 * 60 * 60 * 24)) * 350).toLocaleString('ar-SA')} ر.س`
-                          : `$${(Math.ceil((dateRange2.to.getTime() - dateRange2.from.getTime()) / (1000 * 60 * 60 * 24)) * 150).toLocaleString('en-US')}`}
+                        {t.datePickerComponent.realWorldExample.totalAmount
+                          .replace('{amount}', (Math.ceil((dateRange2.to.getTime() - dateRange2.from.getTime()) / (1000 * 60 * 60 * 24)) * (locale === 'ar' ? 350 : 150)).toLocaleString(locale === 'ar' ? 'ar-SA' : 'en-US'))}
                       </span>
                     </div>
                   </>
@@ -461,13 +459,13 @@ const nights = dateRange?.from && dateRange?.to
 
       {/* Use Cases */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-bold">{isRTL ? 'حالات الاستخدام' : 'Use Cases'}</h2>
+        <h2 className="text-2xl font-bold">{t.componentPage.sections.useCases}</h2>
         <div className="grid gap-4 md:grid-cols-2">
           {[
-            { title: isRTL ? 'نماذج الحجز' : 'Booking Forms', icon: '🏨' },
-            { title: isRTL ? 'المواعيد' : 'Appointments', icon: '📅' },
-            { title: isRTL ? 'مرشحات التاريخ' : 'Date Filters', icon: '🔍' },
-            { title: isRTL ? 'إدخال تاريخ الميلاد' : 'Date of Birth Input', icon: '🎂' },
+            { title: t.datePickerComponent.useCases.bookingForms, icon: '🏨' },
+            { title: t.datePickerComponent.useCases.appointments, icon: '📅' },
+            { title: t.datePickerComponent.useCases.dateFilters, icon: '🔍' },
+            { title: t.datePickerComponent.useCases.dateOfBirth, icon: '🎂' },
           ].map((useCase, idx) => (
             <Card key={idx}>
               <CardHeader>
@@ -483,36 +481,36 @@ const nights = dateRange?.from && dateRange?.to
 
       {/* Type Definition */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-bold">{isRTL ? 'تعريف النوع' : 'Type Definition'}</h2>
+        <h2 className="text-2xl font-bold">{t.componentPage.sections.typeDefinitions}</h2>
         <CodeBlock code={typeDefinition} language="typescript" />
       </div>
 
       {/* API Reference - DatePicker */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-bold">{isRTL ? 'مرجع API - DatePicker' : 'API Reference - DatePicker'}</h2>
+        <h2 className="text-2xl font-bold">{t.datePickerComponentPage.apiReferenceDatePicker}</h2>
         <PropsTable props={datePickerProps} />
       </div>
 
       {/* API Reference - DateRangePicker */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-bold">{isRTL ? 'مرجع API - DateRangePicker' : 'API Reference - DateRangePicker'}</h2>
+        <h2 className="text-2xl font-bold">{t.datePickerComponentPage.apiReferenceDateRangePicker}</h2>
         <PropsTable props={dateRangePickerProps} />
       </div>
 
       {/* Features */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-bold">{isRTL ? 'الميزات' : 'Features'}</h2>
+        <h2 className="text-2xl font-bold">{t.componentPage.sections.features}</h2>
         <ul className="list-disc list-inside space-y-2 text-muted-foreground">
-          <li>{isRTL ? 'تحديد تاريخ واحد ونطاق' : 'Single date and range selection'}</li>
-          <li>{isRTL ? 'تكامل التقويم مع popover' : 'Calendar integration with popover'}</li>
-          <li>{isRTL ? 'قيود الحد الأدنى/الأقصى' : 'Min/max date constraints'}</li>
-          <li>{isRTL ? 'تواريخ معطلة مخصصة' : 'Custom disabled dates'}</li>
-          <li>{isRTL ? 'تنسيق قابل للتخصيص' : 'Customizable formatting'}</li>
-          <li>{isRTL ? 'دعم التقويم الهجري (قريباً)' : 'Hijri calendar support (coming soon)'}</li>
-          <li>{isRTL ? 'دعم ثنائي اللغة' : 'Bilingual support'}</li>
-          <li>{isRTL ? 'دعم RTL/LTR' : 'RTL/LTR support'}</li>
-          <li>{isRTL ? 'إمكانية الوصول الكاملة' : 'Full accessibility'}</li>
-          <li>{isRTL ? 'تحديد سريع للتواريخ' : 'Quick date selection'}</li>
+          <li>{t.datePickerComponent.features.singleAndRange}</li>
+          <li>{t.datePickerComponent.features.calendarIntegration}</li>
+          <li>{t.datePickerComponent.features.minMaxConstraints}</li>
+          <li>{t.datePickerComponent.features.customDisabled}</li>
+          <li>{t.datePickerComponent.features.customFormatting}</li>
+          <li>{t.datePickerComponent.features.hijriSupport}</li>
+          <li>{t.datePickerComponent.features.bilingualSupport}</li>
+          <li>{t.datePickerComponent.features.rtlSupport}</li>
+          <li>{t.datePickerComponent.features.fullAccessibility}</li>
+          <li>{t.datePickerComponent.features.quickSelection}</li>
         </ul>
       </div>
       </main>

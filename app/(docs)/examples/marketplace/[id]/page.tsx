@@ -203,6 +203,7 @@ const getAllProducts = (): Product[] => {
 export default function ProductDetailPage({ params }: { params: { id: string } }) {
   const { direction, locale } = useDirection()
   const isRTL = direction === 'rtl'
+  const t = content[locale]
 
   const products = getAllProducts()
   const product = products.find((p) => p.id === params.id) || products[0]
@@ -230,7 +231,7 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
                 <Home className="h-5 w-5 text-primary-foreground" />
               </div>
               <span className="font-bold text-xl hidden sm:inline">
-                {isRTL ? 'سوق الخليج' : 'GCC Marketplace'}
+                {t.marketplace.header.title}
               </span>
             </Link>
           </div>
@@ -239,7 +240,7 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
             <Button variant="outline" size="sm" asChild>
               <Link href="/examples/marketplace">
                 <ArrowLeft className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
-                {isRTL ? 'العودة للسوق' : 'Back to Marketplace'}
+                {t.marketplaceProduct.backToMarketplace}
               </Link>
             </Button>
           </div>
@@ -253,19 +254,19 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
             <ol className="flex items-center gap-2 text-sm text-muted-foreground">
               <li>
                 <Link href="/" className="hover:text-foreground transition-colors">
-                  {isRTL ? 'الرئيسية' : 'Home'}
+                  {t.nav.home}
                 </Link>
               </li>
               <li>/</li>
               <li>
                 <Link href="/examples" className="hover:text-foreground transition-colors">
-                  {isRTL ? 'الأمثلة' : 'Examples'}
+                  {t.nav.examples}
                 </Link>
               </li>
               <li>/</li>
               <li>
                 <Link href="/examples/marketplace" className="hover:text-foreground transition-colors">
-                  {isRTL ? 'السوق' : 'Marketplace'}
+                  {t.marketplaceProduct.breadcrumb.marketplace}
                 </Link>
               </li>
               <li>/</li>
@@ -312,7 +313,7 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
                 {product.fastShipping && (
                   <Badge variant="secondary" className="flex items-center gap-1">
                     <Truck className="h-3 w-3" />
-                    {isRTL ? 'شحن سريع' : 'Fast Shipping'}
+                    {t.marketplaceProduct.category.fastShipping}
                   </Badge>
                 )}
               </div>
@@ -331,12 +332,12 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
                 <Separator orientation="vertical" className="h-4" />
                 <span className="text-sm text-muted-foreground">
                   <ArabicNumber value={product.reviewCount} />{' '}
-                  {isRTL ? 'تقييم' : 'reviews'}
+                  {t.marketplaceProduct.reviews}
                 </span>
                 <Separator orientation="vertical" className="h-4" />
                 <span className="text-sm text-muted-foreground">
                   <ArabicNumber value={product.stockCount} />{' '}
-                  {isRTL ? 'متوفر' : 'in stock'}
+                  {t.marketplaceProduct.inStock}
                 </span>
               </div>
 
@@ -359,13 +360,13 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
                       {formatSAR(product.originalPrice, { useArabicNumerals: locale === 'ar', locale: locale === 'ar' ? 'ar' : 'en' })}
                     </span>
                     <Badge variant="destructive">
-                      {Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)}% {isRTL ? 'خصم' : 'OFF'}
+                      {Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)}% {t.marketplaceProduct.discount}
                     </Badge>
                   </>
                 )}
               </div>
               <p className="text-sm text-muted-foreground">
-                {isRTL ? 'شامل ضريبة القيمة المضافة' : 'VAT included'}
+                {t.marketplaceProduct.vat}
               </p>
             </div>
 
@@ -435,17 +436,17 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
 
               <Button size="lg" className="w-full">
                 <ShoppingCart className={cn('h-5 w-5', isRTL ? 'ms-2' : 'me-2')} />
-                {isRTL ? 'أضف إلى السلة' : 'Add to Cart'}
+                {t.marketplaceProduct.actions.addToCart}
               </Button>
 
               <div className="grid grid-cols-2 gap-3">
                 <Button variant="outline" size="lg">
                   <Heart className={cn('h-5 w-5', isRTL ? 'ms-2' : 'me-2')} />
-                  {isRTL ? 'مفضلة' : 'Wishlist'}
+                  {t.marketplaceProduct.actions.wishlist}
                 </Button>
                 <Button variant="outline" size="lg">
                   <Share2 className={cn('h-5 w-5', isRTL ? 'ms-2' : 'me-2')} />
-                  {isRTL ? 'مشاركة' : 'Share'}
+                  {t.marketplaceProduct.actions.share}
                 </Button>
               </div>
             </div>
@@ -454,19 +455,19 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
             <div className="grid grid-cols-2 gap-3">
               <div className="flex items-center gap-2 text-sm">
                 <ShieldCheck className="h-5 w-5 text-primary" />
-                <span>{isRTL ? 'ضمان الأصالة' : 'Authenticity Guarantee'}</span>
+                <span>{t.marketplaceProduct.badges.authenticity}</span>
               </div>
               <div className="flex items-center gap-2 text-sm">
                 <Package className="h-5 w-5 text-primary" />
-                <span>{isRTL ? 'إرجاع مجاني' : 'Free Returns'}</span>
+                <span>{t.marketplaceProduct.badges.freeReturns}</span>
               </div>
               <div className="flex items-center gap-2 text-sm">
                 <Truck className="h-5 w-5 text-primary" />
-                <span>{isRTL ? 'شحن مجاني' : 'Free Shipping'}</span>
+                <span>{t.marketplaceProduct.badges.freeShipping}</span>
               </div>
               <div className="flex items-center gap-2 text-sm">
                 <CreditCard className="h-5 w-5 text-primary" />
-                <span>{isRTL ? 'دفع آمن' : 'Secure Payment'}</span>
+                <span>{t.marketplaceProduct.badges.securePayment}</span>
               </div>
             </div>
           </div>
@@ -477,20 +478,20 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
           <Tabs defaultValue="description" className="w-full">
             <TabsList className="grid w-full grid-cols-3">
               <TabsTrigger value="description">
-                {isRTL ? 'الوصف' : 'Description'}
+                {t.marketplaceProduct.tabs.description}
               </TabsTrigger>
               <TabsTrigger value="specifications">
-                {isRTL ? 'المواصفات' : 'Specifications'}
+                {t.marketplaceProduct.tabs.specifications}
               </TabsTrigger>
               <TabsTrigger value="reviews">
-                {isRTL ? 'التقييمات' : 'Reviews'} (<ArabicNumber value={product.reviewCount} />)
+                {t.marketplaceProduct.tabs.reviews} (<ArabicNumber value={product.reviewCount} />)
               </TabsTrigger>
             </TabsList>
 
             <TabsContent value="description" className="mt-6">
               <Card>
                 <CardHeader>
-                  <CardTitle>{isRTL ? 'تفاصيل المنتج' : 'Product Details'}</CardTitle>
+                  <CardTitle>{t.marketplaceProduct.productDetails}</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <p className="text-muted-foreground leading-relaxed">
@@ -499,7 +500,7 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
 
                   <div>
                     <h3 className="font-semibold mb-3">
-                      {isRTL ? 'الميزات الرئيسية' : 'Key Features'}
+                      {t.marketplaceProduct.keyFeatures}
                     </h3>
                     <ul className="space-y-2">
                       {(isRTL ? product.featuresAr : product.features).map((feature, index) => (
@@ -517,7 +518,7 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
             <TabsContent value="specifications" className="mt-6">
               <Card>
                 <CardHeader>
-                  <CardTitle>{isRTL ? 'المواصفات التقنية' : 'Technical Specifications'}</CardTitle>
+                  <CardTitle>{t.marketplaceProduct.technicalSpecifications}</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-3">
@@ -543,7 +544,7 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
               {/* Rating Summary */}
               <Card>
                 <CardHeader>
-                  <CardTitle>{isRTL ? 'ملخص التقييمات' : 'Rating Summary'}</CardTitle>
+                  <CardTitle>{t.marketplaceProduct.ratingSummary}</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="grid gap-6 md:grid-cols-2">
@@ -565,9 +566,9 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
                         ))}
                       </div>
                       <p className="text-sm text-muted-foreground">
-                        {isRTL ? 'بناءً على' : 'Based on'}{' '}
+                        {t.marketplaceProduct.basedOn}{' '}
                         <ArabicNumber value={product.reviewCount} />{' '}
-                        {isRTL ? 'تقييم' : 'reviews'}
+                        {t.marketplaceProduct.reviews}
                       </p>
                     </div>
 
@@ -613,7 +614,7 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
                             </span>
                             {review.verified && (
                               <Badge variant="secondary" className="text-xs">
-                                {isRTL ? 'مشتري موثق' : 'Verified Purchase'}
+                                {t.marketplaceProduct.verifiedPurchase}
                               </Badge>
                             )}
                           </div>

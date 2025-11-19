@@ -120,6 +120,8 @@ datePickerComponent: {
         availableFrom: 'Available from',
         to: 'to',
         weekendsDisabled: 'Weekends are disabled',
+        noDateSelected: 'No date selected',
+        noRangeSelected: 'No range selected',
       },
       useCases: {
         title: 'Use Cases',
@@ -134,6 +136,7 @@ datePickerComponent: {
         nights: 'Number of nights',
         pricePerNight: 'Price per night',
         total: 'Total',
+        totalAmount: '${amount}',
       },
       props: {
         date: 'Controlled selected date',
@@ -199,6 +202,8 @@ timePickerComponent: {
         value: 'Value',
         undefined: 'undefined',
         minutesIncrement: 'Minutes increment by 15',
+        noTimeSelected: 'No time selected',
+        noRangeSelected: 'No range selected',
       },
       realWorldExample: {
         medicalAppointment: 'Medical Appointment',
@@ -303,11 +308,20 @@ fileUploadComponent: {
       },
       bestPractices: {
         title: 'Best Practices',
-        serverValidation: 'Always validate files on the server-side as well, client-side validation can be bypassed',
-        sizeLimit: 'Set reasonable file size limits to prevent abuse and improve upload performance',
-        clearErrors: 'Provide clear error messages when validation fails',
-        cleanupUrls: 'Clean up object URLs to prevent memory leaks (automatically handled by this component)',
-        progressIndicators: 'Consider adding upload progress indicators for large files',
+        doList: [
+          'Always validate files on the server-side as well, client-side validation can be bypassed',
+          'Set reasonable file size limits to prevent abuse and improve upload performance',
+          'Provide clear error messages when validation fails',
+          'Clean up object URLs to prevent memory leaks (automatically handled by this component)',
+          'Consider adding upload progress indicators for large files',
+        ],
+        dontList: [
+          "Don't rely solely on client-side validation",
+          "Don't allow unlimited file sizes",
+          "Don't use generic error messages",
+          "Don't forget to handle upload failures gracefully",
+          "Don't allow all file types without restrictions",
+        ],
       },
       accessibility: {
         title: 'Accessibility',

@@ -170,6 +170,22 @@ thinkingIndicatorComponent: {
       children: 'Main content area',
       sidebarCollapsed: 'Whether sidebar is collapsed',
     },
+    bestPractices: {
+      doList: [
+        'Keep navigation items organized and intuitive',
+        'Provide visual feedback for the active navigation item',
+        'Make the sidebar collapsible for more screen space',
+        'Ensure consistent spacing and alignment across sections',
+        'Use responsive design for mobile devices',
+      ],
+      dontList: [
+        "Don't overcrowd the sidebar with too many items",
+        "Don't hide important navigation without a way to access it",
+        "Don't forget to test on different screen sizes",
+        "Don't use inconsistent navigation patterns",
+        "Don't neglect keyboard navigation support",
+      ],
+    },
   },
 
   parameterSliderComponent: {
@@ -209,24 +225,6 @@ thinkingIndicatorComponent: {
     },
   },
 
-  featureCardComponent: {
-    title: 'Feature Card',
-    description: 'Display a feature with icon, title, and description. Perfect for landing pages and feature showcases.',
-    examples: {
-      title: 'Examples',
-      basic: 'Basic Feature',
-      withLink: 'With Link',
-      highlighted: 'Highlighted',
-    },
-    props: {
-      icon: 'Icon component',
-      title: 'Feature title',
-      description: 'Feature description',
-      href: 'Optional link URL',
-      highlighted: 'Whether to highlight the card',
-    },
-  },
-
   promptInputComponent: {
     title: 'Prompt Input',
     description: 'Multi-line input for AI prompts with send button, file upload, and keyboard shortcuts. Perfect for chat interfaces.',
@@ -260,22 +258,21 @@ thinkingIndicatorComponent: {
       onSignOut: 'Callback when sign out is clicked',
       onSettings: 'Callback when settings is clicked',
     },
-  },
-
-  notificationCenterComponent: {
-    title: 'Notification Center',
-    description: 'Display and manage notifications with filtering, marking as read, and grouping. Fully accessible.',
-    examples: {
-      title: 'Examples',
-      list: 'Notification List',
-      withGroups: 'With Grouping',
-      withFilters: 'With Filters',
-    },
-    props: {
-      notifications: 'Array of notifications',
-      onMarkRead: 'Callback when notification is marked read',
-      onDelete: 'Callback when notification is deleted',
-      groupBy: 'How to group notifications',
+    bestPractices: {
+      doList: [
+        'Include user name and email for context',
+        'Use clear icons for menu items',
+        'Group related menu items (e.g., profile, settings, billing)',
+        'Place sign out action at the bottom of the menu',
+        'Include visual separation between action groups',
+      ],
+      dontList: [
+        "Don't hide critical account actions deep in submenus",
+        "Don't use ambiguous labels for menu items",
+        "Don't clutter the menu with too many options",
+        "Don't forget to handle sign out confirmation for safety",
+        "Don't use inconsistent icon styles",
+      ],
     },
   },
 

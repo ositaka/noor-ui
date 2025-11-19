@@ -5,6 +5,8 @@ import { Card } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Clock, MapPin, Bell, Volume2, X } from 'lucide-react'
+import { useDirection } from '@/components/providers/direction-provider'
+import { content } from '@/lib/i18n'
 
 // ============================================================================
 // Types
@@ -81,7 +83,9 @@ export const PrayerTimes = React.forwardRef<HTMLDivElement, PrayerTimesProps>(
     },
     ref
   ) => {
-    const isRTL = typeof document !== 'undefined' && document.documentElement.dir === 'rtl'
+    const { locale } = useDirection()
+    const t = content[locale]
+    const isRTL = locale === 'ar'
 
     // Notification variant - special UI for Adhan alerts
     if (variant === 'notification') {
@@ -105,7 +109,7 @@ export const PrayerTimes = React.forwardRef<HTMLDivElement, PrayerTimesProps>(
                 </div>
                 <div>
                   <h3 className="font-semibold text-lg">
-                    {isRTL ? 'حان وقت الصلاة' : 'Prayer Time'}
+                    {t.ui.components.prayerTime}
                   </h3>
                   <p className="text-sm text-muted-foreground">
                     {currentPrayer
@@ -132,7 +136,7 @@ export const PrayerTimes = React.forwardRef<HTMLDivElement, PrayerTimesProps>(
             <div className="flex items-center justify-between p-4 rounded-lg bg-background/50 border">
               <div className="space-y-1">
                 <p className="text-sm text-muted-foreground">
-                  {isRTL ? 'الوقت' : 'Time'}
+                  {t.ui.components.time}
                 </p>
                 <p className="text-2xl font-bold">
                   {currentPrayer?.time || '-'}
@@ -157,7 +161,7 @@ export const PrayerTimes = React.forwardRef<HTMLDivElement, PrayerTimesProps>(
                   onClick={onPlayAdhan}
                 >
                   <Volume2 className="h-4 w-4 me-2" />
-                  {isRTL ? 'تشغيل الأذان' : 'Play Adhan'}
+                  {t.ui.components.playAdhan}
                 </Button>
               )}
               {onDismiss && (
@@ -166,7 +170,7 @@ export const PrayerTimes = React.forwardRef<HTMLDivElement, PrayerTimesProps>(
                   className={showPlayAdhan ? 'flex-1' : 'w-full'}
                   onClick={onDismiss}
                 >
-                  {isRTL ? 'إغلاق' : 'Dismiss'}
+                  {t.ui.components.dismiss}
                 </Button>
               )}
             </div>
@@ -183,7 +187,7 @@ export const PrayerTimes = React.forwardRef<HTMLDivElement, PrayerTimesProps>(
           <div className="flex items-end justify-between border-b pb-5 mb-1 gap-6">
             <div>
               <h3 className="text-lg font-semibold mb-1">
-                {isRTL ? 'مواقيت الصلاة' : 'Prayer Times'}
+                {t.ui.components.prayerTimes}
               </h3>
               {(location || locationAr) && (
                 <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
@@ -206,7 +210,7 @@ export const PrayerTimes = React.forwardRef<HTMLDivElement, PrayerTimesProps>(
                 <div className="flex items-center gap-3">
                   <Clock className="h-5 w-5 text-primary" />
                   <span className="text-base font-medium">
-                    {isRTL ? 'الصلاة القادمة' : 'Next Prayer'}
+                    {t.ui.components.nextPrayer}
                   </span>
                 </div>
                 <div className="text-end">
@@ -256,7 +260,7 @@ export const PrayerTimes = React.forwardRef<HTMLDivElement, PrayerTimesProps>(
                     </span>
                     {isNext && (
                       <Badge variant="default" className="ms-2">
-                        {isRTL ? 'الآن' : 'Next'}
+                        {t.ui.components.next}
                       </Badge>
                     )}
                   </div>

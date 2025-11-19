@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button'
 import { Calendar } from '@/components/ui/calendar'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { useDirection } from '@/components/providers/direction-provider'
+import { content } from '@/lib/i18n'
 
 export interface DatePickerProps {
   date?: Date
@@ -67,6 +68,7 @@ export function DatePicker({
   showHijri = false,
 }: DatePickerProps) {
   const { locale, direction } = useDirection()
+  const t = content[locale]
   const [open, setOpen] = React.useState(false)
   const isRTL = direction === 'rtl'
 
@@ -74,7 +76,7 @@ export function DatePicker({
     ? formatDate(date, locale)
     : locale === 'ar' && placeholderAr
     ? placeholderAr
-    : placeholder || (isRTL ? 'اختر تاريخ' : 'Pick a date')
+    : placeholder || t.ui.components.pickDate
 
   const isDateDisabled = (checkDate: Date): boolean => {
     if (minDate && checkDate < minDate) return true
@@ -182,6 +184,7 @@ export function DateRangePicker({
   disabledDates = [],
 }: DateRangePickerProps) {
   const { locale, direction } = useDirection()
+  const t = content[locale]
   const [open, setOpen] = React.useState(false)
   const isRTL = direction === 'rtl'
 
@@ -189,7 +192,7 @@ export function DateRangePicker({
     ? formatDateRange(dateRange, locale)
     : locale === 'ar' && placeholderAr
     ? placeholderAr
-    : placeholder || (isRTL ? 'اختر نطاق التاريخ' : 'Pick a date range')
+    : placeholder || t.ui.components.pickDateRange
 
   const isDateDisabled = (checkDate: Date): boolean => {
     if (minDate && checkDate < minDate) return true

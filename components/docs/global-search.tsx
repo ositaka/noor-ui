@@ -12,7 +12,9 @@ import {
   CommandList,
   CommandSeparator,
 } from '@/components/ui/command'
-import { searchData, type SearchItem } from '@/lib/search-data'
+import { getSearchData, type SearchItem } from '@/lib/search-data-i18n'
+import { useDirection } from '@/components/providers/direction-provider'
+import { content } from '@/lib/i18n'
 
 const categoryIcons = {
   Component: Component,
@@ -24,7 +26,22 @@ const categoryIcons = {
 
 export function GlobalSearch() {
   const router = useRouter()
+  const { locale } = useDirection()
+  const t = content[locale]
   const [open, setOpen] = React.useState(false)
+
+  // Translate category names
+  const translateCategory = (category: string) => {
+    const categoryMap: Record<string, keyof typeof t.search.categories> = {
+      'Component': 'component',
+      'Documentation': 'documentation',
+      'Token': 'token',
+      'Theme': 'theme',
+      'Example': 'example',
+    }
+    const key = categoryMap[category]
+    return key ? t.search.categories[key] : category
+  }
 
   React.useEffect(() => {
     const down = (e: KeyboardEvent) => {
@@ -43,8 +60,9 @@ export function GlobalSearch() {
     callback()
   }, [])
 
-  // Group items by category
+  // Get locale-aware search data and group items by category
   const groupedItems = React.useMemo(() => {
+    const searchData = getSearchData(locale)
     const groups: Record<string, SearchItem[]> = {}
     searchData.forEach((item) => {
       if (!groups[item.category]) {
@@ -53,7 +71,7 @@ export function GlobalSearch() {
       groups[item.category].push(item)
     })
     return groups
-  }, [])
+  }, [locale])
 
   return (
     <>
@@ -62,16 +80,16 @@ export function GlobalSearch() {
         className="inline-flex items-center gap-2 rounded-md border border-input bg-background px-3 py-2 text-sm text-muted-foreground ring-offset-background hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
       >
         <Search className="h-4 w-4" />
-        <span className="hidden sm:inline">Search...</span>
-        <kbd className="pointer-events-none hidden sm:inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium opacity-100">
+        <span className="hidden sm:inline">{t.ui.form.search}...</span>
+        <kbd className="pointer-events-none ms-auto hidden sm:inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium opacity-100 rtl:flex-row-reverse">
           <span className="text-xs">⌘</span>K
         </kbd>
       </button>
 
       <CommandDialog open={open} onOpenChange={setOpen}>
-        <CommandInput placeholder="Search documentation, components, and more..." />
+        <CommandInput placeholder={t.ui.form.searchPlaceholder} />
         <CommandList>
-          <CommandEmpty>No results found.</CommandEmpty>
+          <CommandEmpty>{t.ui.form.noResults}</CommandEmpty>
 
           {Object.entries(groupedItems).map(([category, items], index) => {
             const Icon = categoryIcons[category as keyof typeof categoryIcons]
@@ -79,7 +97,7 @@ export function GlobalSearch() {
             return (
               <React.Fragment key={category}>
                 {index > 0 && <CommandSeparator />}
-                <CommandGroup heading={category}>
+                <CommandGroup heading={translateCategory(category)}>
                   {items.map((item) => (
                     <CommandItem
                       key={item.href}

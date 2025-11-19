@@ -58,5 +58,37 @@ alertComponent: {
         title: 'اعتبارات RTL',
         description: 'تدعم التنبيهات تلقائياً تخطيط RTL مع محاذاة صحيحة للأيقونات والنص.',
       },
-    }
+    },
+
+stepperComponent: {
+      title: 'مؤشر الخطوات',
+      description: 'مؤشر تقدم متعدد الخطوات للنماذج والأسواق',
+      actions: {
+        previous: 'السابق',
+        next: 'التالي',
+      },
+      variants: {
+        simpleVariant: 'الشكل البسيط',
+        simpleDesc: 'شكل مضغوط مثالي للتنقل في الأعلى',
+        circlesVariant: 'شكل الدوائر',
+        circlesDesc: 'دوائر كبيرة مع تأثير تكبير',
+        verticalOrientation: 'الاتجاه الرأسي',
+      },
+      useCases: {
+        registrationForms: 'نماذج التسجيل',
+        checkoutProcess: 'عمليات الدفع',
+        setupWizards: 'معالجات الإعداد',
+        multiStepWorkflows: 'سير العمل متعدد الخطوات',
+      },
+      features: {
+        threeVariants: 'ثلاثة أشكال مرئية (افتراضي، بسيط، دوائر)',
+        orientations: 'اتجاه أفقي ورأسي',
+        clickableSteps: 'خطوات قابلة للنقر مع التحقق',
+        optionalSteps: 'دعم الخطوات الاختيارية',
+        visualStates: 'حالات مرئية (مكتمل، حالي، قادم)',
+        bilingualSupport: 'دعم ثنائي اللغة كامل',
+        rtlSupport: 'دعم RTL/LTR',
+        accessibility: 'ميزات إمكانية الوصول (ARIA)',
+      },
+    },
 }

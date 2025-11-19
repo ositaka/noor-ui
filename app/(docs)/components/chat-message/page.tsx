@@ -140,6 +140,7 @@ const rtlCode = `<ChatMessage
 export default function ChatMessagePage() {
   const { direction, locale } = useDirection()
   const isRTL = direction === 'rtl'
+  const t = content[locale]
 
   return (
     <div className="min-h-screen">
@@ -180,13 +181,13 @@ export default function ChatMessagePage() {
               <div className="space-y-4 max-w-2xl">
                 <ChatMessage
                   role="user"
-                  content={isRTL ? "ما هي عاصمة فرنسا؟" : "What's the capital of France?"}
-                  timestamp={isRTL ? "٢:٢٩ م" : "2:29 PM"}
+                  content={t.chatMessageComponentPage.examples.capitalQuestion}
+                  timestamp={t.chatMessageComponentPage.timestamps.time229pm}
                 />
                 <ChatMessage
                   role="assistant"
-                  content={isRTL ? "عاصمة فرنسا هي باريس. تُعرف بمدينة الأنوار وتشتهر بفنونها وثقافتها ومطبخها ومعالمها الشهيرة مثل برج إيفل." : "The capital of France is Paris. It's known as the City of Light and is famous for its art, culture, cuisine, and iconic landmarks like the Eiffel Tower."}
-                  timestamp={isRTL ? "٢:٣٠ م" : "2:30 PM"}
+                  content={t.chatMessageComponentPage.examples.capitalAnswer}
+                  timestamp={t.chatMessageComponentPage.timestamps.time230pm}
                   showCopy
                   showRegenerate
                 />
@@ -220,18 +221,18 @@ export default function ChatMessagePage() {
                   <div className="space-y-4 max-w-2xl">
                     <ChatMessage
                       role="user"
-                      content={isRTL ? "كيف الطقس اليوم؟" : "What's the weather like today?"}
-                      timestamp={isRTL ? "٢:٢٩ م" : "2:29 PM"}
+                      content={t.chatMessageComponentPage.examples.weatherQuestion}
+                      timestamp={t.chatMessageComponentPage.timestamps.time229pm}
                     />
                     <ChatMessage
                       role="assistant"
-                      content={isRTL ? "ليس لدي وصول إلى بيانات الطقس في الوقت الفعلي، ولكن يمكنني مساعدتك في العثور على معلومات الطقس!" : "I don't have access to real-time weather data, but I can help you find weather information!"}
-                      timestamp={isRTL ? "٢:٣٠ م" : "2:30 PM"}
+                      content={t.chatMessageComponentPage.examples.weatherAnswer}
+                      timestamp={t.chatMessageComponentPage.timestamps.time230pm}
                     />
                     <ChatMessage
                       role="system"
-                      content={isRTL ? "بدأت جلسة الدردشة. الرسائل مشفرة من طرف إلى طرف." : "Chat session started. Messages are end-to-end encrypted."}
-                      timestamp={isRTL ? "٢:٢٥ م" : "2:25 PM"}
+                      content={t.chatMessageComponentPage.examples.sessionStarted}
+                      timestamp={t.chatMessageComponentPage.timestamps.time225pm}
                     />
                   </div>
                 </CardContent>
@@ -249,8 +250,8 @@ export default function ChatMessagePage() {
                   <div className="space-y-4 max-w-2xl">
                     <ChatMessage
                       role="assistant"
-                      content={isRTL ? "إليك الكود الذي طلبته. لا تتردد في نسخه أو اطلب مني إنشاء نسخة مختلفة." : "Here's the code you requested. Feel free to copy it or ask me to regenerate a different version."}
-                      timestamp={isRTL ? "٢:٣١ م" : "2:31 PM"}
+                      content={t.chatMessageComponentPage.examples.codeResponse}
+                      timestamp={t.chatMessageComponentPage.timestamps.time231pm}
                       showCopy
                       showRegenerate
                     />
@@ -270,12 +271,12 @@ export default function ChatMessagePage() {
                   <div className="space-y-3 max-w-2xl">
                     <ChatMessage
                       role="user"
-                      content={isRTL ? "سؤال سريع" : "Quick question"}
+                      content={t.chatMessageComponentPage.examples.quickQuestion}
                       variant="compact"
                     />
                     <ChatMessage
                       role="assistant"
-                      content={isRTL ? "رد سريع" : "Quick response"}
+                      content={t.chatMessageComponentPage.examples.quickResponse}
                       variant="compact"
                     />
                   </div>

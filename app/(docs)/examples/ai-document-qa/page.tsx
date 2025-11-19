@@ -162,16 +162,17 @@ const qaResponses = {
 
 export default function DocumentQAPage() {
   const { locale } = useDirection()
+  const t = content[locale]
   const isRTL = locale === 'ar'
+
+  const systemWelcome = t.aiDocumentQa.systemMessages.welcome
 
   const [documents, setDocuments] = React.useState<Document[]>(sampleDocuments)
   const [messages, setMessages] = React.useState<Message[]>([
     {
       id: '1',
       role: 'system',
-      content: isRTL
-        ? 'مرحباً! أنا مساعد تحليل المستندات. يمكنني الإجابة على أسئلتك حول المستندات المحملة. اسألني عن أي شيء!'
-        : "Hello! I'm your Document Analysis Assistant. I can answer questions about your uploaded documents. Ask me anything!",
+      content: systemWelcome,
       timestamp: new Date().toLocaleTimeString(isRTL ? 'ar-SA' : 'en-US', {
         hour: '2-digit',
         minute: '2-digit',
@@ -235,9 +236,7 @@ export default function DocumentQAPage() {
       {
         id: '1',
         role: 'system',
-        content: isRTL
-          ? 'محادثة جديدة بدأت. كيف يمكنني مساعدتك في تحليل المستندات؟'
-          : 'New conversation started. How can I help you analyze documents?',
+        content: t.aiDocumentQa.systemMessages.newConversation,
         timestamp: new Date().toLocaleTimeString(isRTL ? 'ar-SA' : 'en-US', {
           hour: '2-digit',
           minute: '2-digit',
@@ -246,19 +245,7 @@ export default function DocumentQAPage() {
     ])
   }
 
-  const suggestedQuestions = isRTL
-    ? [
-        'ما هي أفضل ممارسات React Hooks؟',
-        'كيف أستخدم واجهات TypeScript؟',
-        'ما هي سمات ARIA الأساسية؟',
-        'كيف أحسن أداء React؟',
-      ]
-    : [
-        'What are React Hooks best practices?',
-        'How do I use TypeScript interfaces?',
-        'What are essential ARIA attributes?',
-        'How can I optimize React performance?',
-      ]
+  const suggestedQuestions = t.aiDocumentQa.suggestedQuestions
 
   return (
     <div className="min-h-screen bg-background">
@@ -267,11 +254,11 @@ export default function DocumentQAPage() {
         <aside className="w-80 border-e bg-background p-4 space-y-4 overflow-y-auto hidden lg:block">
           <div className="flex items-center justify-between">
             <h2 className="font-semibold text-lg">
-              {isRTL ? 'المستندات' : 'Documents'}
+              {t.aiDocumentQa.sidebar.documents}
             </h2>
             <Button variant="outline" size="sm">
               <Upload className={cn('h-4 w-4', isRTL ? 'ms-1' : 'me-1')} />
-              {isRTL ? 'رفع' : 'Upload'}
+              {t.aiDocumentQa.sidebar.upload}
             </Button>
           </div>
 
@@ -303,7 +290,7 @@ export default function DocumentQAPage() {
                         <span>{doc.size}</span>
                         <span>•</span>
                         <span>
-                          {doc.pages} {isRTL ? 'صفحة' : 'pages'}
+                          {doc.pages} {t.aiDocumentQa.sidebar.pages}
                         </span>
                       </div>
                       <div className="flex flex-wrap gap-1">
@@ -327,7 +314,7 @@ export default function DocumentQAPage() {
 
           <Card className="p-4 bg-muted/50">
             <h3 className="font-medium text-sm mb-2">
-              {isRTL ? 'الصيغ المدعومة' : 'Supported Formats'}
+              {t.aiDocumentQa.sidebar.supportedFormats}
             </h3>
             <div className="flex flex-wrap gap-1">
               {['PDF', 'DOCX', 'TXT', 'MD'].map((format) => (
@@ -350,26 +337,24 @@ export default function DocumentQAPage() {
                 </div>
                 <div>
                   <h1 className="font-semibold text-lg">
-                    {isRTL ? 'أسئلة وأجوبة المستندات' : 'Document Q&A'}
+                    {t.aiDocumentQa.header.title}
                   </h1>
                   <p className="text-xs text-muted-foreground">
                     {documents.find((d) => d.isActive)
                       ? isRTL
                         ? `${documents.find((d) => d.isActive)?.nameAr || documents.find((d) => d.isActive)?.name}`
                         : documents.find((d) => d.isActive)?.name
-                      : isRTL
-                      ? 'لم يتم تحديد مستند'
-                      : 'No document selected'}
+                      : t.aiDocumentQa.header.noDocumentSelected}
                   </p>
                 </div>
               </div>
               <div className="flex items-center gap-2">
                 <Button variant="outline" size="sm" onClick={handleClearChat}>
                   <Trash2 className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
-                  {isRTL ? 'مسح' : 'Clear'}
+                  {t.aiDocumentQa.actions.clear}
                 </Button>
                 <Button variant="outline" size="sm" asChild>
-                  <Link href="/examples">{isRTL ? 'الأمثلة' : 'Examples'}</Link>
+                  <Link href="/examples">{t.nav.examples}</Link>
                 </Button>
               </div>
             </div>
@@ -382,18 +367,18 @@ export default function DocumentQAPage() {
                 <ol className="flex items-center gap-2 text-sm text-muted-foreground">
                   <li>
                     <Link href="/" className="hover:text-foreground transition-colors">
-                      {isRTL ? 'الرئيسية' : 'Home'}
+                      {t.nav.home}
                     </Link>
                   </li>
                   <li>/</li>
                   <li>
                     <Link href="/examples" className="hover:text-foreground transition-colors">
-                      {isRTL ? 'الأمثلة' : 'Examples'}
+                      {t.nav.examples}
                     </Link>
                   </li>
                   <li>/</li>
                   <li className="text-foreground font-medium">
-                    {isRTL ? 'أسئلة المستندات' : 'Document Q&A'}
+                    {t.aiDocumentQa.breadcrumb.documentQa}
                   </li>
                 </ol>
               </nav>
@@ -420,7 +405,7 @@ export default function DocumentQAPage() {
                         <div className="flex items-center gap-2 mb-3">
                           <Search className="h-4 w-4 text-muted-foreground" />
                           <span className="text-sm font-medium">
-                            {isRTL ? 'المصادر' : 'Sources'}
+                            {t.aiDocumentQa.messages.sources}
                           </span>
                         </div>
                         <div className="space-y-3">
@@ -437,7 +422,7 @@ export default function DocumentQAPage() {
                                       <>
                                         <span className="text-muted-foreground">•</span>
                                         <Badge variant="secondary" className="text-xs">
-                                          {isRTL ? `صفحة ${source.page}` : `Page ${source.page}`}
+                                          {t.aiDocumentQa.messages.page.replace('{page}', source.page.toString())}
                                         </Badge>
                                       </>
                                     )}
@@ -476,12 +461,7 @@ export default function DocumentQAPage() {
                     <div className="h-10 w-10 rounded-full bg-muted flex items-center justify-center">
                       <BookOpen className="h-5 w-5 text-muted-foreground" />
                     </div>
-                    <ThinkingIndicator
-                      variant="typing"
-                      message={isRTL ? 'جاري البحث في المستندات' : 'Searching documents'}
-                      messageAr="جاري البحث في المستندات"
-                      isRTL={isRTL}
-                    />
+                    <ThinkingIndicator variant="typing" />
                   </div>
                 )}
 
@@ -497,7 +477,7 @@ export default function DocumentQAPage() {
               {messages.length === 1 && (
                 <div className="flex flex-wrap gap-2">
                   <span className="text-xs text-muted-foreground shrink-0">
-                    {isRTL ? 'أسئلة مقترحة:' : 'Suggested:'}
+                    {t.aiDocumentQa.input.suggestedLabel}
                   </span>
                   {suggestedQuestions.map((question, idx) => (
                     <Button
@@ -514,8 +494,8 @@ export default function DocumentQAPage() {
               )}
 
               <PromptInput
-                placeholder={isRTL ? undefined : 'Ask a question about the document...'}
-                placeholderAr="اسأل سؤالاً عن المستند..."
+                placeholder={t.aiDocumentQa.input.placeholder}
+                placeholderAr={t.aiDocumentQa.input.placeholder}
                 isRTL={isRTL}
                 onSend={handleSend}
                 isLoading={isThinking}
@@ -524,9 +504,7 @@ export default function DocumentQAPage() {
               />
 
               <p className="text-xs text-muted-foreground text-center">
-                {isRTL
-                  ? 'هذا مثال توضيحي. الإجابات مولدة تلقائياً والمصادر وهمية.'
-                  : 'This is a demo. Answers are generated automatically and sources are mock data.'}
+                {t.aiDocumentQa.demo.message}
               </p>
             </div>
           </div>

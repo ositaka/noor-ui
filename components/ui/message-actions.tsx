@@ -11,6 +11,8 @@ import {
   ThumbsDown,
   Check,
 } from 'lucide-react'
+import { useDirection } from '@/components/providers/direction-provider'
+import { content } from '@/lib/i18n'
 
 export interface MessageActionsProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
@@ -98,6 +100,8 @@ const MessageActions = React.forwardRef<HTMLDivElement, MessageActionsProps>(
     },
     ref
   ) => {
+    const { locale } = useDirection()
+    const t = content[locale]
     const [copied, setCopied] = React.useState(false)
     const [feedback, setFeedback] = React.useState<'up' | 'down' | null>(null)
 
@@ -135,7 +139,7 @@ const MessageActions = React.forwardRef<HTMLDivElement, MessageActionsProps>(
             ) : (
               <Copy className={cn('h-3 w-3', !compact && (isRTL ? 'ms-1' : 'me-1'))} />
             )}
-            {!compact && (copied ? (isRTL ? 'تم النسخ' : 'Copied') : (isRTL ? 'نسخ' : 'Copy'))}
+            {!compact && (copied ? t.ui.components.copied : t.ui.components.copy)}
           </Button>
         )}
 
@@ -147,7 +151,7 @@ const MessageActions = React.forwardRef<HTMLDivElement, MessageActionsProps>(
             className={cn('h-7', !compact && 'text-xs')}
           >
             <RotateCw className={cn('h-3 w-3', !compact && (isRTL ? 'ms-1' : 'me-1'))} />
-            {!compact && (isRTL ? 'إعادة' : 'Regenerate')}
+            {!compact && t.ui.components.regenerate}
           </Button>
         )}
 
@@ -159,7 +163,7 @@ const MessageActions = React.forwardRef<HTMLDivElement, MessageActionsProps>(
             className={cn('h-7', !compact && 'text-xs')}
           >
             <Edit className={cn('h-3 w-3', !compact && (isRTL ? 'ms-1' : 'me-1'))} />
-            {!compact && (isRTL ? 'تعديل' : 'Edit')}
+            {!compact && t.ui.components.edit}
           </Button>
         )}
 
@@ -171,7 +175,7 @@ const MessageActions = React.forwardRef<HTMLDivElement, MessageActionsProps>(
             className={cn('h-7', !compact && 'text-xs')}
           >
             <Share2 className={cn('h-3 w-3', !compact && (isRTL ? 'ms-1' : 'me-1'))} />
-            {!compact && (isRTL ? 'مشاركة' : 'Share')}
+            {!compact && t.ui.components.share}
           </Button>
         )}
 
@@ -188,7 +192,7 @@ const MessageActions = React.forwardRef<HTMLDivElement, MessageActionsProps>(
               )}
             >
               <ThumbsUp className="h-3 w-3" />
-              <span className="sr-only">{isRTL ? 'إعجاب' : 'Like'}</span>
+              <span className="sr-only">{t.ui.components.like}</span>
             </Button>
             <Button
               variant="ghost"
@@ -200,7 +204,7 @@ const MessageActions = React.forwardRef<HTMLDivElement, MessageActionsProps>(
               )}
             >
               <ThumbsDown className="h-3 w-3" />
-              <span className="sr-only">{isRTL ? 'عدم إعجاب' : 'Dislike'}</span>
+              <span className="sr-only">{t.ui.components.dislike}</span>
             </Button>
           </>
         )}
@@ -215,7 +219,7 @@ const MessageActions = React.forwardRef<HTMLDivElement, MessageActionsProps>(
               className="h-7 w-7"
             >
               <Flag className="h-3 w-3" />
-              <span className="sr-only">{isRTL ? 'إبلاغ' : 'Report'}</span>
+              <span className="sr-only">{t.ui.components.report}</span>
             </Button>
           </>
         )}

@@ -4,6 +4,8 @@ import * as React from 'react'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
+import { useDirection } from '@/components/providers/direction-provider'
+import { content } from '@/lib/i18n'
 
 // ============================================================================
 // Types
@@ -148,7 +150,9 @@ export const Calendar = React.forwardRef<HTMLDivElement, CalendarProps>(
     },
     ref
   ) => {
-    const isRTL = locale === 'ar'
+    const { direction, locale: currentLocale } = useDirection()
+    const isRTL = direction === 'rtl'
+    const t = content[currentLocale]
     const [currentMonth, setCurrentMonth] = React.useState(selected || new Date())
 
     const monthStart = new Date(currentMonth.getFullYear(), currentMonth.getMonth(), 1)
@@ -282,7 +286,7 @@ export const Calendar = React.forwardRef<HTMLDivElement, CalendarProps>(
           </div>
 
           <Button variant="outline" size="sm" onClick={goToToday}>
-            {isRTL ? 'اليوم' : 'Today'}
+            {t.ui.components.today}
           </Button>
         </div>
 
@@ -366,7 +370,7 @@ export const Calendar = React.forwardRef<HTMLDivElement, CalendarProps>(
         {events.length > 0 && (
           <div className="mt-4 pt-4 border-t">
             <p className="text-sm font-medium mb-2">
-              {isRTL ? 'الأحداث' : 'Events'}
+              {t.ui.components.events}
             </p>
             <div className="space-y-1">
               {events

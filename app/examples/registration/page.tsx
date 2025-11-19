@@ -50,7 +50,8 @@ const STEP_LABELS = {
 
 export default function RegistrationPage() {
   const { locale } = useDirection()
-  const t = content[locale]
+  const t = content[locale].registrationPage
+  const tCommon = content[locale]
   const [currentStep, setCurrentStep] = React.useState<Step>('personal')
   const [isRTL, setIsRTL] = React.useState(false)
   const [formData, setFormData] = React.useState({
@@ -141,18 +142,18 @@ export default function RegistrationPage() {
           <ol className="flex items-center gap-2 text-sm text-muted-foreground">
             <li>
               <Link href="/" className="hover:text-foreground transition-colors">
-                {isRTL ? 'الرئيسية' : 'Home'}
+                {tCommon.nav.home}
               </Link>
             </li>
             <li>/</li>
             <li>
               <Link href="/examples" className="hover:text-foreground transition-colors">
-                {isRTL ? 'الأمثلة' : 'Examples'}
+                {tCommon.nav.examples}
               </Link>
             </li>
             <li>/</li>
             <li className="text-foreground font-medium">
-              {isRTL ? 'نموذج التسجيل' : 'Registration Form'}
+              {t.breadcrumb.registration}
             </li>
           </ol>
         </nav>
@@ -160,7 +161,7 @@ export default function RegistrationPage() {
         {/* Page Header */}
         <div className="max-w-3xl mb-8">
           <h1 className="text-4xl font-bold tracking-tight mb-4">
-            {isRTL ? 'نموذج تسجيل متعدد الخطوات' : 'Multi-Step Registration Form'}
+            {t.title}
           </h1>
           <p className="text-xl text-muted-foreground">
             {isRTL
@@ -174,7 +175,7 @@ export default function RegistrationPage() {
           <div className="space-y-2">
             <div className="flex items-center justify-between text-sm">
               <span className="text-muted-foreground">
-                {isRTL ? 'التقدم' : 'Progress'}
+                {t.progress}
               </span>
               <span className="font-medium">{Math.round(progress)}%</span>
             </div>
@@ -229,7 +230,7 @@ export default function RegistrationPage() {
                 </div>
                 <div className="space-y-2">
                   <h2 className="text-2xl font-bold">
-                    {isRTL ? 'تم التسجيل بنجاح!' : 'Registration Successful!'}
+                    {t.success.title}
                   </h2>
                   <p className="text-muted-foreground">
                     {isRTL
@@ -239,11 +240,11 @@ export default function RegistrationPage() {
                 </div>
                 <div className="flex flex-col sm:flex-row gap-3 justify-center">
                   <Button onClick={() => setCurrentStep('personal')}>
-                    {isRTL ? 'إنشاء حساب آخر' : 'Create Another Account'}
+                    {t.success.createAnother}
                   </Button>
                   <Link href="/">
                     <Button variant="outline">
-                      {isRTL ? 'العودة للرئيسية' : 'Back to Home'}
+                      {t.success.backToHome}
                     </Button>
                   </Link>
                 </div>
@@ -267,11 +268,11 @@ export default function RegistrationPage() {
                           ? 'أدخل معلوماتك الشخصية الأساسية'
                           : 'Enter your basic personal information')}
                       {currentStep === 'address' &&
-                        (isRTL ? 'أدخل عنوانك الكامل' : 'Enter your complete address')}
+                        (t.stepDescriptions.address)}
                       {currentStep === 'preferences' &&
-                        (isRTL ? 'اختر تفضيلاتك' : 'Choose your preferences')}
+                        (t.stepDescriptions.preferences)}
                       {currentStep === 'review' &&
-                        (isRTL ? 'راجع معلوماتك قبل الإرسال' : 'Review your information before submitting')}
+                        (t.stepDescriptions.review)}
                     </CardDescription>
                   </div>
                 </div>
@@ -328,17 +329,20 @@ interface StepProps {
 }
 
 function PersonalInfoStep({ initialValues, onSubmit, onBack, isRTL }: StepProps) {
+  const { locale } = useDirection()
+  const t = content[locale].registrationPage
+
   return (
     <Form
       initialValues={initialValues}
       validators={{
-        firstName: validators.required(isRTL ? 'الاسم الأول مطلوب' : 'First name is required'),
-        lastName: validators.required(isRTL ? 'اسم العائلة مطلوب' : 'Last name is required'),
+        firstName: validators.required(t.validationErrors.firstNameRequired),
+        lastName: validators.required(t.validationErrors.lastNameRequired),
         email: composeValidators(
-          validators.required(isRTL ? 'البريد الإلكتروني مطلوب' : 'Email is required'),
-          validators.email(isRTL ? 'الرجاء إدخال بريد إلكتروني صحيح' : 'Please enter a valid email')
+          validators.required(t.validationErrors.emailRequired),
+          validators.email(t.validationErrors.emailInvalid)
         ),
-        phone: validators.required(isRTL ? 'رقم الهاتف مطلوب' : 'Phone number is required'),
+        phone: validators.required(t.validationErrors.phoneRequired),
       }}
       onSubmit={onSubmit}
     >
@@ -347,11 +351,11 @@ function PersonalInfoStep({ initialValues, onSubmit, onBack, isRTL }: StepProps)
           <FormField name="firstName">
             {({ field, error, touched }) => (
               <FormItem>
-                <FormLabel required>{isRTL ? 'الاسم الأول' : 'First Name'}</FormLabel>
+                <FormLabel required>{t.fields.firstName}</FormLabel>
                 <Input
                   {...field}
                   onChange={(e) => field.onChange(e.target.value)}
-                  placeholder={isRTL ? 'أحمد' : 'Ahmed'}
+                  placeholder={t.placeholders.firstName}
                 />
                 {touched && <FormMessage error={error} />}
               </FormItem>
@@ -361,11 +365,11 @@ function PersonalInfoStep({ initialValues, onSubmit, onBack, isRTL }: StepProps)
           <FormField name="lastName">
             {({ field, error, touched }) => (
               <FormItem>
-                <FormLabel required>{isRTL ? 'اسم العائلة' : 'Last Name'}</FormLabel>
+                <FormLabel required>{t.fields.lastName}</FormLabel>
                 <Input
                   {...field}
                   onChange={(e) => field.onChange(e.target.value)}
-                  placeholder={isRTL ? 'علي' : 'Ali'}
+                  placeholder={t.placeholders.lastName}
                 />
                 {touched && <FormMessage error={error} />}
               </FormItem>
@@ -376,7 +380,7 @@ function PersonalInfoStep({ initialValues, onSubmit, onBack, isRTL }: StepProps)
         <FormField name="email">
           {({ field, error, touched }) => (
             <FormItem>
-              <FormLabel required>{isRTL ? 'البريد الإلكتروني' : 'Email'}</FormLabel>
+              <FormLabel required>{t.fields.email}</FormLabel>
               <Input
                 {...field}
                 onChange={(e) => field.onChange(e.target.value)}
@@ -384,7 +388,7 @@ function PersonalInfoStep({ initialValues, onSubmit, onBack, isRTL }: StepProps)
                 placeholder="ahmed@example.com"
               />
               <FormDescription>
-                {isRTL ? 'لن نشارك بريدك الإلكتروني مع أي شخص آخر' : "We'll never share your email with anyone else"}
+                {t.formDescriptions.emailPrivacy}
               </FormDescription>
               {touched && <FormMessage error={error} />}
             </FormItem>
@@ -394,7 +398,7 @@ function PersonalInfoStep({ initialValues, onSubmit, onBack, isRTL }: StepProps)
         <FormField name="phone">
           {({ field, error, touched }) => (
             <FormItem>
-              <FormLabel required>{isRTL ? 'رقم الهاتف' : 'Phone Number'}</FormLabel>
+              <FormLabel required>{t.fields.phone}</FormLabel>
               <Input
                 {...field}
                 onChange={(e) => field.onChange(e.target.value)}
@@ -408,7 +412,7 @@ function PersonalInfoStep({ initialValues, onSubmit, onBack, isRTL }: StepProps)
 
         <div className="flex justify-end gap-3 pt-4">
           <Button type="submit">
-            {isRTL ? 'التالي' : 'Next'}
+            {t.buttons.next}
             <ArrowRight className="ms-2 h-4 w-4" />
           </Button>
         </div>
@@ -418,13 +422,16 @@ function PersonalInfoStep({ initialValues, onSubmit, onBack, isRTL }: StepProps)
 }
 
 function AddressStep({ initialValues, onSubmit, onBack, isRTL }: StepProps) {
+  const { locale } = useDirection()
+  const t = content[locale].registrationPage
+
   return (
     <Form
       initialValues={initialValues}
       validators={{
-        street: validators.required(isRTL ? 'عنوان الشارع مطلوب' : 'Street address is required'),
-        city: validators.required(isRTL ? 'المدينة مطلوبة' : 'City is required'),
-        country: validators.required(isRTL ? 'الدولة مطلوبة' : 'Country is required'),
+        street: validators.required(t.validationErrors.streetRequired),
+        city: validators.required(t.validationErrors.cityRequired),
+        country: validators.required(t.validationErrors.countryRequired),
       }}
       onSubmit={onSubmit}
     >
@@ -432,11 +439,11 @@ function AddressStep({ initialValues, onSubmit, onBack, isRTL }: StepProps) {
         <FormField name="street">
           {({ field, error, touched }) => (
             <FormItem>
-              <FormLabel required>{isRTL ? 'عنوان الشارع' : 'Street Address'}</FormLabel>
+              <FormLabel required>{t.fields.streetAddress}</FormLabel>
               <Input
                 {...field}
                 onChange={(e) => field.onChange(e.target.value)}
-                placeholder={isRTL ? 'شارع الملك فهد' : 'King Fahd Road'}
+                placeholder={t.placeholders.streetAddress}
               />
               {touched && <FormMessage error={error} />}
             </FormItem>
@@ -447,11 +454,11 @@ function AddressStep({ initialValues, onSubmit, onBack, isRTL }: StepProps) {
           <FormField name="city">
             {({ field, error, touched }) => (
               <FormItem>
-                <FormLabel required>{isRTL ? 'المدينة' : 'City'}</FormLabel>
+                <FormLabel required>{t.fields.city}</FormLabel>
                 <Input
                   {...field}
                   onChange={(e) => field.onChange(e.target.value)}
-                  placeholder={isRTL ? 'الرياض' : 'Riyadh'}
+                  placeholder={t.placeholders.city}
                 />
                 {touched && <FormMessage error={error} />}
               </FormItem>
@@ -461,11 +468,11 @@ function AddressStep({ initialValues, onSubmit, onBack, isRTL }: StepProps) {
           <FormField name="state">
             {({ field }) => (
               <FormItem>
-                <FormLabel>{isRTL ? 'المنطقة' : 'State/Province'}</FormLabel>
+                <FormLabel>{t.fields.stateProvince}</FormLabel>
                 <Input
                   {...field}
                   onChange={(e) => field.onChange(e.target.value)}
-                  placeholder={isRTL ? 'منطقة الرياض' : 'Riyadh Region'}
+                  placeholder={t.placeholders.stateProvince}
                 />
               </FormItem>
             )}
@@ -476,7 +483,7 @@ function AddressStep({ initialValues, onSubmit, onBack, isRTL }: StepProps) {
           <FormField name="zipCode">
             {({ field }) => (
               <FormItem>
-                <FormLabel>{isRTL ? 'الرمز البريدي' : 'Postal Code'}</FormLabel>
+                <FormLabel>{t.fields.postalCode}</FormLabel>
                 <Input
                   {...field}
                   onChange={(e) => field.onChange(e.target.value)}
@@ -489,18 +496,18 @@ function AddressStep({ initialValues, onSubmit, onBack, isRTL }: StepProps) {
           <FormField name="country">
             {({ field, error, touched }) => (
               <FormItem>
-                <FormLabel required>{isRTL ? 'الدولة' : 'Country'}</FormLabel>
+                <FormLabel required>{t.fields.country}</FormLabel>
                 <Select value={field.value} onValueChange={field.onChange}>
                   <SelectTrigger>
-                    <SelectValue placeholder={isRTL ? 'اختر الدولة' : 'Select country'} />
+                    <SelectValue placeholder={t.placeholders.selectCountry} />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="sa">{isRTL ? 'السعودية' : 'Saudi Arabia'}</SelectItem>
-                    <SelectItem value="ae">{isRTL ? 'الإمارات' : 'UAE'}</SelectItem>
-                    <SelectItem value="kw">{isRTL ? 'الكويت' : 'Kuwait'}</SelectItem>
-                    <SelectItem value="qa">{isRTL ? 'قطر' : 'Qatar'}</SelectItem>
-                    <SelectItem value="bh">{isRTL ? 'البحرين' : 'Bahrain'}</SelectItem>
-                    <SelectItem value="om">{isRTL ? 'عُمان' : 'Oman'}</SelectItem>
+                    <SelectItem value="sa">{t.countries.sa}</SelectItem>
+                    <SelectItem value="ae">{t.countries.ae}</SelectItem>
+                    <SelectItem value="kw">{t.countries.kw}</SelectItem>
+                    <SelectItem value="qa">{t.countries.qa}</SelectItem>
+                    <SelectItem value="bh">{t.countries.bh}</SelectItem>
+                    <SelectItem value="om">{t.countries.om}</SelectItem>
                   </SelectContent>
                 </Select>
                 {touched && <FormMessage error={error} />}
@@ -512,10 +519,10 @@ function AddressStep({ initialValues, onSubmit, onBack, isRTL }: StepProps) {
         <div className="flex justify-between gap-3 pt-4">
           <Button type="button" variant="outline" onClick={onBack!}>
             <ArrowLeft className="me-2 h-4 w-4" />
-            {isRTL ? 'السابق' : 'Back'}
+            {t.buttons.previous}
           </Button>
           <Button type="submit">
-            {isRTL ? 'التالي' : 'Next'}
+            {t.buttons.next}
             <ArrowRight className="ms-2 h-4 w-4" />
           </Button>
         </div>
@@ -525,11 +532,14 @@ function AddressStep({ initialValues, onSubmit, onBack, isRTL }: StepProps) {
 }
 
 function PreferencesStep({ initialValues, onSubmit, onBack, isRTL }: StepProps) {
+  const { locale } = useDirection()
+  const t = content[locale].registrationPage
+
   return (
     <Form
       initialValues={initialValues}
       validators={{
-        language: validators.required(isRTL ? 'اللغة مطلوبة' : 'Language is required'),
+        language: validators.required(t.validationErrors.languageRequired),
       }}
       onSubmit={onSubmit}
     >
@@ -537,15 +547,15 @@ function PreferencesStep({ initialValues, onSubmit, onBack, isRTL }: StepProps) 
         <FormField name="language">
           {({ field, error, touched }) => (
             <FormItem>
-              <FormLabel required>{isRTL ? 'اللغة المفضلة' : 'Preferred Language'}</FormLabel>
+              <FormLabel required>{t.fields.language}</FormLabel>
               <Select value={field.value} onValueChange={field.onChange}>
                 <SelectTrigger>
-                  <SelectValue placeholder={isRTL ? 'اختر اللغة' : 'Select language'} />
+                  <SelectValue placeholder={t.placeholders.selectLanguage} />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="ar">{isRTL ? 'العربية' : 'Arabic'}</SelectItem>
-                  <SelectItem value="en">{isRTL ? 'الإنجليزية' : 'English'}</SelectItem>
-                  <SelectItem value="both">{isRTL ? 'كلاهما' : 'Both'}</SelectItem>
+                  <SelectItem value="ar">{t.languages.ar}</SelectItem>
+                  <SelectItem value="en">{t.languages.en}</SelectItem>
+                  <SelectItem value="both">{t.languages.both}</SelectItem>
                 </SelectContent>
               </Select>
               {touched && <FormMessage error={error} />}
@@ -556,15 +566,15 @@ function PreferencesStep({ initialValues, onSubmit, onBack, isRTL }: StepProps) 
         <FormField name="bio">
           {({ field }) => (
             <FormItem>
-              <FormLabel>{isRTL ? 'نبذة عنك' : 'Bio'}</FormLabel>
+              <FormLabel>{t.fields.bio}</FormLabel>
               <Textarea
                 {...field}
                 onChange={(e) => field.onChange(e.target.value)}
-                placeholder={isRTL ? 'أخبرنا عن نفسك...' : 'Tell us about yourself...'}
+                placeholder={t.placeholders.bioPlaceholder}
                 rows={4}
               />
               <FormDescription>
-                {isRTL ? 'اختياري - ما يصل إلى 500 حرف' : 'Optional - up to 500 characters'}
+                {t.formDescriptions.bioOptional}
               </FormDescription>
             </FormItem>
           )}
@@ -586,7 +596,7 @@ function PreferencesStep({ initialValues, onSubmit, onBack, isRTL }: StepProps) 
                     htmlFor="notifications"
                     className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer"
                   >
-                    {isRTL ? 'تلقي إشعارات' : 'Receive notifications'}
+                    {t.checkboxes.notifications}
                   </label>
                   <p className="text-sm text-muted-foreground">
                     {isRTL
@@ -611,7 +621,7 @@ function PreferencesStep({ initialValues, onSubmit, onBack, isRTL }: StepProps) 
                     htmlFor="newsletter"
                     className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer"
                   >
-                    {isRTL ? 'الاشتراك في النشرة الإخبارية' : 'Subscribe to newsletter'}
+                    {t.checkboxes.newsletter}
                   </label>
                   <p className="text-sm text-muted-foreground">
                     {isRTL
@@ -627,10 +637,10 @@ function PreferencesStep({ initialValues, onSubmit, onBack, isRTL }: StepProps) 
         <div className="flex justify-between gap-3 pt-4">
           <Button type="button" variant="outline" onClick={onBack!}>
             <ArrowLeft className="me-2 h-4 w-4" />
-            {isRTL ? 'السابق' : 'Back'}
+            {t.buttons.previous}
           </Button>
           <Button type="submit">
-            {isRTL ? 'المراجعة' : 'Review'}
+            {t.steps.review}
             <ArrowRight className="ms-2 h-4 w-4" />
           </Button>
         </div>
@@ -640,6 +650,9 @@ function PreferencesStep({ initialValues, onSubmit, onBack, isRTL }: StepProps) 
 }
 
 function ReviewStep({ data, onSubmit, onBack, isRTL }: StepProps & { data: Record<string, any> }) {
+  const { locale } = useDirection()
+  const t = content[locale].registrationPage
+  const tCommon = content[locale]
   const [isSubmitting, setIsSubmitting] = React.useState(false)
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -662,12 +675,12 @@ function ReviewStep({ data, onSubmit, onBack, isRTL }: StepProps & { data: Recor
         <div>
           <h3 className="font-semibold mb-3 flex items-center gap-2">
             <User className="h-4 w-4" />
-            {isRTL ? 'المعلومات الشخصية' : 'Personal Information'}
+            {t.steps.personalInfo}
           </h3>
           <div className="divide-y">
-            <InfoRow label={isRTL ? 'الاسم' : 'Name'} value={`${data.firstName} ${data.lastName}`} />
-            <InfoRow label={isRTL ? 'البريد الإلكتروني' : 'Email'} value={data.email} />
-            <InfoRow label={isRTL ? 'الهاتف' : 'Phone'} value={data.phone} />
+            <InfoRow label={t.review.name} value={`${data.firstName} ${data.lastName}`} />
+            <InfoRow label={t.fields.email} value={data.email} />
+            <InfoRow label={t.review.phone} value={data.phone} />
           </div>
         </div>
 
@@ -676,14 +689,14 @@ function ReviewStep({ data, onSubmit, onBack, isRTL }: StepProps & { data: Recor
         <div>
           <h3 className="font-semibold mb-3 flex items-center gap-2">
             <MapPin className="h-4 w-4" />
-            {isRTL ? 'العنوان' : 'Address'}
+            {t.steps.address}
           </h3>
           <div className="divide-y">
-            <InfoRow label={isRTL ? 'الشارع' : 'Street'} value={data.street} />
-            <InfoRow label={isRTL ? 'المدينة' : 'City'} value={data.city} />
-            {data.state && <InfoRow label={isRTL ? 'المنطقة' : 'State'} value={data.state} />}
-            {data.zipCode && <InfoRow label={isRTL ? 'الرمز البريدي' : 'Postal Code'} value={data.zipCode} />}
-            <InfoRow label={isRTL ? 'الدولة' : 'Country'} value={data.country} />
+            <InfoRow label={t.review.street} value={data.street} />
+            <InfoRow label={t.fields.city} value={data.city} />
+            {data.state && <InfoRow label={t.review.state} value={data.state} />}
+            {data.zipCode && <InfoRow label={t.fields.postalCode} value={data.zipCode} />}
+            <InfoRow label={t.fields.country} value={data.country} />
           </div>
         </div>
 
@@ -692,22 +705,22 @@ function ReviewStep({ data, onSubmit, onBack, isRTL }: StepProps & { data: Recor
         <div>
           <h3 className="font-semibold mb-3 flex items-center gap-2">
             <FileText className="h-4 w-4" />
-            {isRTL ? 'التفضيلات' : 'Preferences'}
+            {t.steps.preferences}
           </h3>
           <div className="divide-y">
-            <InfoRow label={isRTL ? 'اللغة' : 'Language'} value={data.language} />
-            {data.bio && <InfoRow label={isRTL ? 'النبذة' : 'Bio'} value={data.bio} />}
+            <InfoRow label={t.review.language} value={data.language} />
+            {data.bio && <InfoRow label={t.review.bio} value={data.bio} />}
             <div className="py-2">
               <div className="flex gap-2">
                 {data.notifications && (
-                  <Badge variant="secondary">{isRTL ? 'الإشعارات مفعلة' : 'Notifications ON'}</Badge>
+                  <Badge variant="secondary">{t.review.notificationsOn}</Badge>
                 )}
                 {data.newsletter && (
-                  <Badge variant="secondary">{isRTL ? 'النشرة الإخبارية مفعلة' : 'Newsletter ON'}</Badge>
+                  <Badge variant="secondary">{t.review.newsletterOn}</Badge>
                 )}
                 {!data.notifications && !data.newsletter && (
                   <span className="text-muted-foreground text-sm">
-                    {isRTL ? 'لا توجد تفضيلات إضافية' : 'No additional preferences'}
+                    {t.review.noAdditional}
                   </span>
                 )}
               </div>
@@ -718,17 +731,17 @@ function ReviewStep({ data, onSubmit, onBack, isRTL }: StepProps & { data: Recor
         <div className="flex justify-between gap-3 pt-4">
           <Button type="button" variant="outline" onClick={onBack!} disabled={isSubmitting}>
             <ArrowLeft className="me-2 h-4 w-4" />
-            {isRTL ? 'السابق' : 'Back'}
+            {t.buttons.previous}
           </Button>
           <Button type="submit" disabled={isSubmitting}>
             {isSubmitting ? (
               <>
                 <Loader2 className="me-2 h-4 w-4 animate-spin" />
-                {isRTL ? 'جارٍ الإرسال...' : 'Submitting...'}
+                {t.buttons.submitting}
               </>
             ) : (
               <>
-                {isRTL ? 'إرسال' : 'Submit'}
+                {t.buttons.submit}
                 <CheckCircle2 className="ms-2 h-4 w-4" />
               </>
             )}

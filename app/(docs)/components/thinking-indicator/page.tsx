@@ -30,20 +30,7 @@ const thinkingIndicatorProps: PropDefinition[] = [
     name: 'message',
     type: 'string',
     required: false,
-    description: 'Custom message to display',
-  },
-  {
-    name: 'messageAr',
-    type: 'string',
-    required: false,
-    description: 'Message in Arabic',
-  },
-  {
-    name: 'isRTL',
-    type: 'boolean',
-    default: 'false',
-    required: false,
-    description: 'Whether text direction is RTL',
+    description: 'Custom message to display (overrides default from i18n)',
   },
 ]
 
@@ -71,12 +58,10 @@ const sizesCode = `<div className="space-y-4">
   <ThinkingIndicator size="lg" message="Large" />
 </div>`
 
-const rtlCode = `<ThinkingIndicator
-  variant="typing"
-  message="AI is thinking..."
-  messageAr="الذكاء الاصطناعي يفكر..."
-  isRTL={true}
-/>`
+const rtlCode = `// RTL is automatically handled by the DirectionProvider
+// The message is translated based on the current locale
+
+<ThinkingIndicator variant="typing" />`
 
 export default function ThinkingIndicatorPage() {
   return (
@@ -283,8 +268,8 @@ export default function ThinkingIndicatorPage() {
           <Card>
             <CardContent className="p-6 space-y-4">
               <p className="text-muted-foreground">
-                The indicator works seamlessly in RTL layouts. When a message is provided, it appears
-                in the correct reading order based on the <code className="bg-muted px-1 rounded">isRTL</code> prop.
+                The indicator works seamlessly in RTL layouts. The message is automatically translated
+                based on the current locale from the DirectionProvider and i18n system.
               </p>
               <CodeBlock code={rtlCode} language="tsx" />
               <div className="grid gap-4 md:grid-cols-2 mt-6">
@@ -302,8 +287,6 @@ export default function ThinkingIndicatorPage() {
                   <div dir="rtl">
                     <ThinkingIndicator
                       variant="typing"
-                      messageAr="الذكاء الاصطناعي يفكر..."
-                      isRTL
                     />
                   </div>
                 </div>

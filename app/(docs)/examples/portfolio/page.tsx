@@ -183,6 +183,7 @@ const generateProjects = (): Project[] => {
 export default function PortfolioPage() {
   const { direction, locale } = useDirection()
   const isRTL = direction === 'rtl'
+  const t = content[locale]
   const [selectedCategory, setSelectedCategory] = React.useState<string>('all')
   const [searchQuery, setSearchQuery] = React.useState('')
 
@@ -202,18 +203,18 @@ export default function PortfolioPage() {
   const featuredProjects = projects.filter((p) => p.featured)
 
   const stats = [
-    { label: isRTL ? 'المشاريع المنجزة' : 'Projects Completed', value: '50+', icon: Briefcase },
-    { label: isRTL ? 'العملاء السعداء' : 'Happy Clients', value: '30+', icon: Users },
-    { label: isRTL ? 'سنوات الخبرة' : 'Years Experience', value: '8+', icon: Calendar },
-    { label: isRTL ? 'الجوائز المكتسبة' : 'Awards Won', value: '12', icon: Award },
+    { label: t.portfolioPage.stats.projectsCompleted, value: '50+', icon: Briefcase },
+    { label: t.portfolioPage.stats.happyClients, value: '30+', icon: Users },
+    { label: t.portfolioPage.stats.yearsExperience, value: '8+', icon: Calendar },
+    { label: t.portfolioPage.stats.awardsWon, value: '12', icon: Award },
   ]
 
   const categories = [
-    { value: 'all', label: isRTL ? 'الكل' : 'All', labelAr: 'الكل' },
-    { value: 'web', label: isRTL ? 'الويب' : 'Web', labelAr: 'الويب' },
-    { value: 'mobile', label: isRTL ? 'الموبايل' : 'Mobile', labelAr: 'الموبايل' },
-    { value: 'design', label: isRTL ? 'التصميم' : 'Design', labelAr: 'التصميم' },
-    { value: 'branding', label: isRTL ? 'العلامة التجارية' : 'Branding', labelAr: 'العلامة التجارية' },
+    { value: 'all', label: t.portfolioPage.filters.all, labelAr: 'الكل' },
+    { value: 'web', label: t.portfolioPage.filters.web, labelAr: 'الويب' },
+    { value: 'mobile', label: t.portfolioPage.filters.mobile, labelAr: 'الموبايل' },
+    { value: 'design', label: t.portfolioPage.filters.design, labelAr: 'التصميم' },
+    { value: 'branding', label: t.portfolioPage.filters.branding, labelAr: 'العلامة التجارية' },
   ]
 
   return (
@@ -227,14 +228,14 @@ export default function PortfolioPage() {
                 <Home className="h-5 w-5 text-primary-foreground" />
               </div>
               <span className="font-bold text-xl hidden sm:inline">
-                {isRTL ? 'أحمد الكريم' : 'Ahmed Al-Kareem'}
+                {t.portfolioPage.header.name}
               </span>
             </Link>
           </div>
 
           <div className="flex items-center gap-4">
             <Button variant="outline" size="sm" asChild>
-              <Link href="/examples">{isRTL ? 'الأمثلة' : 'Examples'}</Link>
+              <Link href="/examples">{t.nav.examples}</Link>
             </Button>
           </div>
         </div>
@@ -247,18 +248,18 @@ export default function PortfolioPage() {
             <ol className="flex items-center gap-2 text-sm text-muted-foreground">
               <li>
                 <Link href="/" className="hover:text-foreground transition-colors">
-                  {isRTL ? 'الرئيسية' : 'Home'}
+                  {t.nav.home}
                 </Link>
               </li>
               <li>/</li>
               <li>
                 <Link href="/examples" className="hover:text-foreground transition-colors">
-                  {isRTL ? 'الأمثلة' : 'Examples'}
+                  {t.nav.examples}
                 </Link>
               </li>
               <li>/</li>
               <li className="text-foreground font-medium">
-                {isRTL ? 'المعرض الشخصي' : 'Portfolio'}
+                {t.portfolioPage.breadcrumb.portfolio}
               </li>
             </ol>
           </nav>
@@ -272,25 +273,23 @@ export default function PortfolioPage() {
           <div className="grid gap-8 lg:grid-cols-2 items-center">
             <div>
               <Badge variant="secondary" className="mb-4">
-                {isRTL ? 'متاح للمشاريع الجديدة' : 'Available for New Projects'}
+                {t.portfolioPage.hero.availableBadge}
               </Badge>
               <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">
-                {isRTL ? 'مصمم و مطور إبداعي' : 'Creative Designer & Developer'}
+                {t.portfolioPage.hero.title}
               </h1>
               <p className="text-xl text-muted-foreground mb-6 max-w-2xl">
-                {isRTL
-                  ? 'متخصص في إنشاء تجارب رقمية جميلة وعملية للويب والموبايل. أحول الأفكار إلى منتجات رقمية مذهلة.'
-                  : 'Specializing in creating beautiful and functional digital experiences for web and mobile. I turn ideas into stunning digital products.'}
+                {t.portfolioPage.hero.description}
               </p>
               <div className="flex flex-wrap items-center gap-4">
                 <Button size="lg" asChild>
                   <Link href="#contact">
-                    {isRTL ? 'تواصل معي' : 'Get In Touch'}
+                    {t.portfolioPage.hero.getInTouch}
                     <ArrowRight className={cn('h-4 w-4', isRTL ? 'me-2' : 'ms-2')} />
                   </Link>
                 </Button>
                 <Button size="lg" variant="outline" asChild>
-                  <Link href="#projects">{isRTL ? 'عرض الأعمال' : 'View Work'}</Link>
+                  <Link href="#projects">{t.portfolioPage.hero.viewWork}</Link>
                 </Button>
               </div>
 
@@ -318,7 +317,7 @@ export default function PortfolioPage() {
                 <div className="text-center">
                   <Palette className="h-24 w-24 mx-auto mb-4 text-primary" />
                   <p className="text-lg font-medium">
-                    {isRTL ? 'التصميم يلتقي بالوظيفة' : 'Design Meets Function'}
+                    {t.portfolioPage.hero.designMeetsFunction}
                   </p>
                 </div>
               </div>
@@ -349,10 +348,10 @@ export default function PortfolioPage() {
         <section className="mb-16">
           <div className="mb-8">
             <h2 className="text-3xl font-bold tracking-tight mb-2">
-              {isRTL ? 'المشاريع المميزة' : 'Featured Projects'}
+              {t.portfolioPage.sections.featuredProjects}
             </h2>
             <p className="text-muted-foreground">
-              {isRTL ? 'أحدث أعمالي والأكثر تأثيراً' : 'My latest and most impactful work'}
+              {t.portfolioPage.sections.featuredProjectsDesc}
             </p>
           </div>
 
@@ -398,10 +397,10 @@ export default function PortfolioPage() {
         <section id="projects" className="mb-16">
           <div className="mb-8">
             <h2 className="text-3xl font-bold tracking-tight mb-2">
-              {isRTL ? 'جميع المشاريع' : 'All Projects'}
+              {t.portfolioPage.sections.allProjects}
             </h2>
             <p className="text-muted-foreground">
-              {isRTL ? 'استكشف محفظتي الكاملة' : 'Explore my complete portfolio'}
+              {t.portfolioPage.sections.allProjectsDesc}
             </p>
           </div>
 
@@ -410,7 +409,7 @@ export default function PortfolioPage() {
             <div className="flex-1">
               <Input
                 type="search"
-                placeholder={isRTL ? 'ابحث في المشاريع...' : 'Search projects...'}
+                placeholder={t.portfolioPage.filters.searchPlaceholder}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full"
@@ -418,7 +417,7 @@ export default function PortfolioPage() {
             </div>
             <Select value={selectedCategory} onValueChange={setSelectedCategory}>
               <SelectTrigger className="w-full sm:w-[200px]">
-                <SelectValue placeholder={isRTL ? 'اختر الفئة' : 'Select category'} />
+                <SelectValue placeholder={t.portfolioPage.filters.selectCategory} />
               </SelectTrigger>
               <SelectContent>
                 {categories.map((cat) => (
@@ -470,7 +469,7 @@ export default function PortfolioPage() {
           {filteredProjects.length === 0 && (
             <div className="text-center py-12">
               <p className="text-muted-foreground">
-                {isRTL ? 'لم يتم العثور على مشاريع' : 'No projects found'}
+                {t.portfolioPage.empty.noProjects}
               </p>
             </div>
           )}
@@ -481,60 +480,58 @@ export default function PortfolioPage() {
           <Card>
             <CardHeader>
               <CardTitle className="text-2xl">
-                {isRTL ? 'هل لديك مشروع؟' : "Have a Project in Mind?"}
+                {t.portfolioPage.contact.title}
               </CardTitle>
               <CardDescription>
-                {isRTL
-                  ? 'أود أن أسمع عن مشروعك. املأ النموذج أدناه وسأتواصل معك قريباً.'
-                  : "I'd love to hear about your project. Fill out the form below and I'll get back to you soon."}
+                {t.portfolioPage.contact.description}
               </CardDescription>
             </CardHeader>
             <CardContent>
               <form className="space-y-6">
                 <div className="grid gap-6 sm:grid-cols-2">
                   <div className="space-y-2">
-                    <Label htmlFor="name">{isRTL ? 'الاسم' : 'Name'}</Label>
-                    <Input id="name" placeholder={isRTL ? 'اسمك' : 'Your name'} />
+                    <Label htmlFor="name">{t.portfolioPage.contact.name}</Label>
+                    <Input id="name" placeholder={t.portfolioPage.contact.namePlaceholder} />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="email">{isRTL ? 'البريد الإلكتروني' : 'Email'}</Label>
+                    <Label htmlFor="email">{t.ui.form.email}</Label>
                     <Input
                       id="email"
                       type="email"
-                      placeholder={isRTL ? 'بريدك الإلكتروني' : 'your@email.com'}
+                      placeholder={t.portfolioPage.contact.emailPlaceholder}
                     />
                   </div>
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="project-type">{isRTL ? 'نوع المشروع' : 'Project Type'}</Label>
+                  <Label htmlFor="project-type">{t.portfolioPage.contact.projectType}</Label>
                   <Select>
                     <SelectTrigger id="project-type">
                       <SelectValue
-                        placeholder={isRTL ? 'اختر نوع المشروع' : 'Select project type'}
+                        placeholder={t.portfolioPage.contact.selectProjectType}
                       />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="web">{isRTL ? 'تطوير الويب' : 'Web Development'}</SelectItem>
-                      <SelectItem value="mobile">{isRTL ? 'تطوير الموبايل' : 'Mobile Development'}</SelectItem>
-                      <SelectItem value="design">{isRTL ? 'تصميم UI/UX' : 'UI/UX Design'}</SelectItem>
-                      <SelectItem value="branding">{isRTL ? 'العلامة التجارية' : 'Branding'}</SelectItem>
+                      <SelectItem value="web">{t.portfolioPage.contact.webDevelopment}</SelectItem>
+                      <SelectItem value="mobile">{t.portfolioPage.contact.mobileDevelopment}</SelectItem>
+                      <SelectItem value="design">{t.portfolioPage.contact.uiuxDesign}</SelectItem>
+                      <SelectItem value="branding">{t.portfolioPage.contact.branding}</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="message">{isRTL ? 'الرسالة' : 'Message'}</Label>
+                  <Label htmlFor="message">{t.portfolioPage.contact.message}</Label>
                   <Textarea
                     id="message"
-                    placeholder={isRTL ? 'أخبرني عن مشروعك...' : 'Tell me about your project...'}
+                    placeholder={t.portfolioPage.contact.messagePlaceholder}
                     rows={6}
                   />
                 </div>
 
                 <Button type="submit" size="lg" className="w-full sm:w-auto">
                   <Mail className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
-                  {isRTL ? 'إرسال الرسالة' : 'Send Message'}
+                  {t.portfolioPage.contact.sendMessage}
                 </Button>
               </form>
             </CardContent>

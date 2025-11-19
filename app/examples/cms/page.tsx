@@ -113,25 +113,25 @@ export default function CMSPage() {
   const mockNotifications = [
     {
       id: '1',
-      title: isRTL ? 'تعليق جديد على منشورك' : 'New comment on your post',
-      description: isRTL ? 'علق عمر على "البدء مع نور UI"' : 'Omar commented on "Getting Started with Noor UI"',
-      time: isRTL ? 'منذ 5 دقائق' : '5 minutes ago',
+      title: t.cmsPage.notifications.newComment,
+      description: t.cmsPage.notifications.commentDetail,
+      time: t.cmsPage.notifications.minutesAgo,
       read: false,
       type: 'comment' as const,
     },
     {
       id: '2',
-      title: isRTL ? 'تم نشر المقال بنجاح' : 'Post published successfully',
-      description: isRTL ? 'مقالك "بناء تطبيقات RTL أولاً" متاح الآن' : 'Your post "Building RTL-First Applications" is now live',
-      time: isRTL ? 'منذ ساعة واحدة' : '1 hour ago',
+      title: t.cmsPage.notifications.postPublished,
+      description: t.cmsPage.notifications.postLive,
+      time: t.cmsPage.notifications.hourAgo,
       read: false,
       type: 'success' as const,
     },
     {
       id: '3',
-      title: isRTL ? 'تذكير بمنشور مجدول' : 'Scheduled post reminder',
-      description: isRTL ? 'سيتم نشر "بنية المكونات" خلال 4 أيام' : '"Component Architecture" will be published in 4 days',
-      time: isRTL ? 'منذ ساعتين' : '2 hours ago',
+      title: t.cmsPage.notifications.scheduledReminder,
+      description: t.cmsPage.notifications.willBePublished,
+      time: t.cmsPage.notifications.hoursAgo,
       read: true,
       type: 'info' as const,
     },
@@ -146,14 +146,14 @@ export default function CMSPage() {
     {
       id: 'title',
       accessorKey: 'title' as keyof typeof mockPosts[0],
-      header: isRTL ? 'العنوان' : 'Title',
+      header: t.cmsPage.table.title,
       cell: (row: typeof mockPosts[0]) => (
         <div>
           <div className="font-medium">{isRTL ? row.titleAr : row.title}</div>
           <div className="flex items-center gap-2 mt-1">
             <Globe className="h-3 w-3 text-muted-foreground" />
             <span className="text-xs text-muted-foreground">
-              {row.language === 'both' ? (isRTL ? 'ثنائي اللغة' : 'Bilingual') : row.language}
+              {row.language === 'both' ? t.cmsPage.table.bilingual : row.language}
             </span>
           </div>
         </div>
@@ -162,7 +162,7 @@ export default function CMSPage() {
     {
       id: 'author',
       accessorKey: 'author' as keyof typeof mockPosts[0],
-      header: isRTL ? 'المؤلف' : 'Author',
+      header: t.cmsPage.table.author,
       cell: (row: typeof mockPosts[0]) => (
         <div className="flex items-center gap-2">
           <User className="h-4 w-4 text-muted-foreground" />
@@ -173,21 +173,21 @@ export default function CMSPage() {
     {
       id: 'status',
       accessorKey: 'status' as keyof typeof mockPosts[0],
-      header: isRTL ? 'الحالة' : 'Status',
+      header: t.cmsPage.table.status,
       cell: (row: typeof mockPosts[0]) => {
         const statusConfig = {
           published: {
-            label: isRTL ? 'منشور' : 'Published',
+            label: t.cmsPage.status.published,
             variant: 'default' as const,
             className: 'bg-green-500/10 text-green-700 dark:text-green-400 border-green-500/20'
           },
           draft: {
-            label: isRTL ? 'مسودة' : 'Draft',
+            label: t.cmsPage.status.draft,
             variant: 'outline' as const,
             className: 'bg-yellow-500/10 text-yellow-700 dark:text-yellow-400 border-yellow-500/20'
           },
           scheduled: {
-            label: isRTL ? 'مجدول' : 'Scheduled',
+            label: t.cmsPage.status.scheduled,
             variant: 'outline' as const,
             className: 'bg-blue-500/10 text-blue-700 dark:text-blue-400 border-blue-500/20'
           },
@@ -211,7 +211,7 @@ export default function CMSPage() {
     {
       id: 'category',
       accessorKey: 'category' as keyof typeof mockPosts[0],
-      header: isRTL ? 'الفئة' : 'Category',
+      header: t.cmsPage.table.category,
       cell: (row: typeof mockPosts[0]) => (
         <div className="flex items-center gap-1">
           <Tag className="h-3 w-3 text-muted-foreground" />
@@ -222,7 +222,7 @@ export default function CMSPage() {
     {
       id: 'views',
       accessorKey: 'views' as keyof typeof mockPosts[0],
-      header: isRTL ? 'المشاهدات' : 'Views',
+      header: t.cmsPage.table.views,
       cell: (row: typeof mockPosts[0]) => (
         <div className="flex items-center gap-1">
           <Eye className="h-4 w-4 text-muted-foreground" />
@@ -233,7 +233,7 @@ export default function CMSPage() {
     {
       id: 'comments',
       accessorKey: 'comments' as keyof typeof mockPosts[0],
-      header: isRTL ? 'التعليقات' : 'Comments',
+      header: t.cmsPage.table.comments,
       cell: (row: typeof mockPosts[0]) => (
         <div className="flex items-center gap-1">
           <MessageSquare className="h-4 w-4 text-muted-foreground" />
@@ -250,7 +250,7 @@ export default function CMSPage() {
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" size="icon">
               <MoreHorizontal className="h-4 w-4" />
-              <span className="sr-only">{isRTL ? 'فتح القائمة' : 'Open menu'}</span>
+              <span className="sr-only">{t.cmsPage.actions.openMenu}</span>
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align={isRTL ? 'start' : 'end'}>
@@ -259,15 +259,15 @@ export default function CMSPage() {
               window.location.hash = '#create'
             }}>
               <Edit className="h-4 w-4 me-2" />
-              {isRTL ? 'تحرير' : 'Edit'}
+              {t.cmsPage.actions.edit}
             </DropdownMenuItem>
             <DropdownMenuItem>
               <Eye className="h-4 w-4 me-2" />
-              {isRTL ? 'معاينة' : 'Preview'}
+              {t.cmsPage.actions.preview}
             </DropdownMenuItem>
             <DropdownMenuItem className="text-destructive">
               <Trash2 className="h-4 w-4 me-2" />
-              {isRTL ? 'حذف' : 'Delete'}
+              {t.cmsPage.actions.delete}
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
@@ -341,23 +341,23 @@ export default function CMSPage() {
           <div className="flex items-center justify-between">
             <div className="space-y-1">
               <h1 className="text-3xl font-bold tracking-tight">
-                {isRTL ? 'نظام إدارة المحتوى' : 'Content Management System'}
+                {t.cmsPage.title}
               </h1>
               <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                <span>{isRTL ? 'إدارة منشوراتك والمحتوى' : 'Manage your posts and content'}</span>
+                <span>{t.cmsPage.description}</span>
                 <Separator orientation="vertical" className="h-4" />
                 <div className="flex items-center gap-1">
                   <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
                     <span className="text-xs">⌘</span>K
                   </kbd>
-                  <span>{isRTL ? 'للبحث السريع' : 'Quick search'}</span>
+                  <span>{t.cmsPage.quickSearch}</span>
                 </div>
               </div>
             </div>
             {activeView === 'posts' && (
               <Button onClick={() => (window.location.hash = '#create')} size="lg" className="gap-2">
                 <Plus className="h-5 w-5" />
-                {isRTL ? 'منشور جديد' : 'New Post'}
+                {t.cmsPage.newPost}
               </Button>
             )}
           </div>
@@ -371,9 +371,9 @@ export default function CMSPage() {
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="7days">{isRTL ? 'آخر 7 أيام' : 'Last 7 days'}</SelectItem>
-                  <SelectItem value="30days">{isRTL ? 'آخر 30 يوم' : 'Last 30 days'}</SelectItem>
-                  <SelectItem value="90days">{isRTL ? 'آخر 90 يوم' : 'Last 90 days'}</SelectItem>
+                  <SelectItem value="7days">{t.cmsPage.analytics.last7Days}</SelectItem>
+                  <SelectItem value="30days">{t.cmsPage.analytics.last30Days}</SelectItem>
+                  <SelectItem value="90days">{t.cmsPage.analytics.last90Days}</SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -382,40 +382,40 @@ export default function CMSPage() {
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
               <StatsCard
                 icon={<FileText className="h-4 w-4" />}
-                label={isRTL ? 'إجمالي المنشورات' : 'Total Posts'}
+                label={t.cmsPage.stats.totalPosts}
                 value="24"
                 trend={12}
-                trendLabel={isRTL ? '+3 هذا الشهر' : '+3 this month'}
+                trendLabel={t.cmsPage.stats.thisMonth}
               />
               <StatsCard
                 icon={<Eye className="h-4 w-4" />}
-                label={isRTL ? 'إجمالي المشاهدات' : 'Total Views'}
+                label={t.cmsPage.stats.totalViews}
                 value="12.4K"
                 trend={8.2}
-                trendLabel={isRTL ? '+892 هذا الأسبوع' : '+892 this week'}
+                trendLabel={t.cmsPage.stats.thisWeek}
               />
               <StatsCard
                 icon={<MessageSquare className="h-4 w-4" />}
-                label={isRTL ? 'التعليقات' : 'Comments'}
+                label={t.cmsPage.stats.comments}
                 value="342"
                 trend={5.1}
-                trendLabel={isRTL ? '+28 اليوم' : '+28 today'}
+                trendLabel={t.cmsPage.stats.today}
               />
               <StatsCard
                 icon={<TrendingUp className="h-4 w-4" />}
-                label={isRTL ? 'معدل المشاركة' : 'Engagement Rate'}
+                label={t.cmsPage.stats.engagementRate}
                 value="68%"
                 trend={2.3}
-                trendLabel={isRTL ? 'أعلى من المتوسط' : 'Above average'}
+                trendLabel={t.cmsPage.stats.aboveAverage}
               />
             </div>
 
             {/* Top Posts */}
             <Card>
               <CardHeader>
-                <CardTitle>{isRTL ? 'أفضل المنشورات' : 'Top Performing Posts'}</CardTitle>
+                <CardTitle>{t.cmsPage.analytics.topPosts}</CardTitle>
                 <CardDescription>
-                  {isRTL ? 'المنشورات الأكثر مشاهدة في آخر 30 يوماً' : 'Most viewed posts in the last 30 days'}
+                  {t.cmsPage.analytics.mostViewed}
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -460,46 +460,46 @@ export default function CMSPage() {
                 <div className="flex flex-col gap-4 md:flex-row md:items-end">
                   <div className="flex-1">
                     <Label htmlFor="search" className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                      {isRTL ? 'بحث' : 'Search'}
+                      {t.cmsPage.filters.search}
                     </Label>
                     <div className="relative mt-2">
                       <Search className="absolute start-3 top-3 h-4 w-4 text-muted-foreground" />
                       <Input
                         id="search"
-                        placeholder={isRTL ? 'ابحث في المنشورات...' : 'Search posts...'}
-                        className="ps-9 h-11"
+                        placeholder={t.cmsPage.filters.searchPosts}
+                        className={cn("h-11", isRTL ? "pe-9" : "ps-9")}
                       />
                     </div>
                   </div>
                   <div className="w-full md:w-[180px]">
                     <Label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                      {isRTL ? 'الحالة' : 'Status'}
+                      {t.cmsPage.filters.status}
                     </Label>
                     <Select defaultValue="all">
                       <SelectTrigger className="mt-2 h-11">
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="all">{isRTL ? 'الكل' : 'All'}</SelectItem>
-                        <SelectItem value="published">{isRTL ? 'منشور' : 'Published'}</SelectItem>
-                        <SelectItem value="draft">{isRTL ? 'مسودة' : 'Draft'}</SelectItem>
-                        <SelectItem value="scheduled">{isRTL ? 'مجدول' : 'Scheduled'}</SelectItem>
+                        <SelectItem value="all">{t.cmsPage.filters.all}</SelectItem>
+                        <SelectItem value="published">{t.cmsPage.status.published}</SelectItem>
+                        <SelectItem value="draft">{t.cmsPage.status.draft}</SelectItem>
+                        <SelectItem value="scheduled">{t.cmsPage.status.scheduled}</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
                   <div className="w-full md:w-[180px]">
                     <Label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                      {isRTL ? 'الفئة' : 'Category'}
+                      {t.cmsPage.filters.category}
                     </Label>
                     <Select defaultValue="all">
                       <SelectTrigger className="mt-2 h-11">
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="all">{isRTL ? 'الكل' : 'All'}</SelectItem>
-                        <SelectItem value="tutorial">{isRTL ? 'دروس' : 'Tutorial'}</SelectItem>
-                        <SelectItem value="guide">{isRTL ? 'أدلة' : 'Guide'}</SelectItem>
-                        <SelectItem value="design">{isRTL ? 'تصميم' : 'Design'}</SelectItem>
+                        <SelectItem value="all">{t.cmsPage.filters.all}</SelectItem>
+                        <SelectItem value="tutorial">{t.cmsPage.categories.tutorial}</SelectItem>
+                        <SelectItem value="guide">{t.cmsPage.categories.guide}</SelectItem>
+                        <SelectItem value="design">{t.cmsPage.categories.design}</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
@@ -514,7 +514,7 @@ export default function CMSPage() {
                   data={mockPosts}
                   columns={columns}
                   searchable
-                  searchPlaceholder={isRTL ? 'بحث...' : 'Search...'}
+                  searchPlaceholder={t.ui.form.search}
                   emptyMessage="No posts found"
                   emptyMessageAr="لا توجد منشورات"
                 />
@@ -529,17 +529,17 @@ export default function CMSPage() {
             <div className="flex items-center justify-between">
               {selectedPost && (
                 <p className="text-sm text-muted-foreground">
-                  {isRTL ? `تحرير: ${selectedPost.titleAr}` : `Editing: ${selectedPost.title}`}
+                  {t.cmsPage.create.editing} {isRTL ? selectedPost.titleAr : selectedPost.title}
                 </p>
               )}
               <div className="flex gap-2 ms-auto">
                 <Button variant="outline" onClick={() => (window.location.hash = '#posts')}>
-                  {isRTL ? 'إلغاء' : 'Cancel'}
+                  {t.ui.button.cancel}
                 </Button>
                 <Button variant="outline">
-                  {isRTL ? 'حفظ كمسودة' : 'Save Draft'}
+                  {t.cmsPage.create.saveDraft}
                 </Button>
-                <Button>{isRTL ? 'نشر' : 'Publish'}</Button>
+                <Button>{t.cmsPage.create.publish}</Button>
               </div>
             </div>
 
@@ -552,7 +552,7 @@ export default function CMSPage() {
               <TabsContent value="en" className="space-y-6 mt-6">
                 <Card>
                   <CardHeader>
-                    <CardTitle>{isRTL ? 'تفاصيل المنشور (English)' : 'Post Details (English)'}</CardTitle>
+                    <CardTitle>{t.cmsPage.create.postDetailsEn}</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-4">
                     <div className="space-y-2">
@@ -626,7 +626,7 @@ export default function CMSPage() {
               <TabsContent value="ar" className="space-y-6 mt-6">
                 <Card>
                   <CardHeader>
-                    <CardTitle>{isRTL ? 'تفاصيل المنشور (العربية)' : 'Post Details (Arabic)'}</CardTitle>
+                    <CardTitle>{t.cmsPage.create.postDetailsAr}</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-4">
                     <div className="space-y-2">

@@ -98,6 +98,7 @@ const typeDefinition = `interface Step {
 export default function StepperPage() {
   const { direction, locale } = useDirection()
   const isRTL = direction === 'rtl'
+  const t = content[locale]
 
   const [currentStep1, setCurrentStep1] = React.useState(0)
   const [currentStep2, setCurrentStep2] = React.useState(1)
@@ -151,33 +152,31 @@ export default function StepperPage() {
           <ol className="flex items-center gap-2 text-sm text-muted-foreground">
             <li>
               <Link href="/" className="hover:text-foreground transition-colors">
-                {isRTL ? 'الرئيسية' : 'Home'}
+                {t.common.home}
               </Link>
             </li>
             <li>/</li>
             <li>
               <Link href="/components" className="hover:text-foreground transition-colors">
-                {isRTL ? 'المكونات' : 'Components'}
+                {t.nav.components}
               </Link>
             </li>
             <li>/</li>
-            <li className="text-foreground font-medium">{isRTL ? 'مؤشر الخطوات' : 'Stepper'}</li>
+            <li className="text-foreground font-medium">{t.stepperComponent.title}</li>
           </ol>
         </nav>
 
         {/* Page Header */}
         <div className="mb-12">
-        <h1 className="text-4xl font-bold tracking-tight mb-4">{isRTL ? 'مؤشر الخطوات' : 'Stepper'}</h1>
+        <h1 className="text-4xl font-bold tracking-tight mb-4">{t.stepperComponent.title}</h1>
         <p className="text-xl text-muted-foreground max-w-3xl">
-          {isRTL
-            ? 'مؤشر تقدم متعدد الخطوات للنماذج والأسوات'
-            : 'Multi-step progress indicator for forms and wizards'}
+          {t.stepperComponent.description}
         </p>
       </div>
 
       {/* Preview */}
       <section className="mb-16">
-        <h2 className="text-2xl font-bold tracking-tight mb-6">{isRTL ? 'معاينة' : 'Preview'}</h2>
+        <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.preview}</h2>
         <ComponentShowcase code={basicCode}>
           <ComponentShowcase.Demo>
             <div className="w-full max-w-2xl mx-auto">
@@ -188,13 +187,13 @@ export default function StepperPage() {
                   onClick={() => setCurrentStep1(Math.max(0, currentStep1 - 1))}
                   disabled={currentStep1 === 0}
                 >
-                  {isRTL ? 'السابق' : 'Previous'}
+                  {t.stepperComponent.actions.previous}
                 </Button>
                 <Button
                   onClick={() => setCurrentStep1(Math.min(steps.length - 1, currentStep1 + 1))}
                   disabled={currentStep1 === steps.length - 1}
                 >
-                  {isRTL ? 'التالي' : 'Next'}
+                  {t.stepperComponent.actions.next}
                 </Button>
               </div>
             </div>
@@ -205,7 +204,7 @@ export default function StepperPage() {
       {/* Variants */}
       <div className="space-y-6">
         <div>
-          <h2 className="text-2xl font-bold mb-2">{isRTL ? 'الأشكال' : 'Variants'}</h2>
+          <h2 className="text-2xl font-bold mb-2">{t.componentPage.sections.variants}</h2>
           <p className="text-muted-foreground">
             {isRTL
               ? 'ثلاثة أشكال مرئية: افتراضي، بسيط، ودوائر'
@@ -216,8 +215,8 @@ export default function StepperPage() {
         {/* Simple Variant */}
         <div className="space-y-4">
           <div>
-            <h3 className="text-lg font-semibold mb-2">{isRTL ? 'الشكل البسيط' : 'Simple Variant'}</h3>
-            <p className="text-sm text-muted-foreground">{isRTL ? 'شكل مضغوط مثالي للتنقل في الأعلى' : 'Compact style ideal for top navigation'}</p>
+            <h3 className="text-lg font-semibold mb-2">{t.stepperComponent.variants.simpleVariant}</h3>
+            <p className="text-sm text-muted-foreground">{t.stepperComponent.variants.simpleDesc}</p>
           </div>
           <ComponentShowcase code={variantsCode.split('\n\n')[1]}>
             <ComponentShowcase.Demo>
@@ -229,13 +228,13 @@ export default function StepperPage() {
                     onClick={() => setCurrentStep2(Math.max(0, currentStep2 - 1))}
                     disabled={currentStep2 === 0}
                   >
-                    {isRTL ? 'السابق' : 'Previous'}
+                    {t.stepperComponent.actions.previous}
                   </Button>
                   <Button
                     onClick={() => setCurrentStep2(Math.min(simpleSteps.length - 1, currentStep2 + 1))}
                     disabled={currentStep2 === simpleSteps.length - 1}
                   >
-                    {isRTL ? 'التالي' : 'Next'}
+                    {t.stepperComponent.actions.next}
                   </Button>
                 </div>
               </div>
@@ -246,8 +245,8 @@ export default function StepperPage() {
         {/* Circles Variant */}
         <div className="space-y-4">
           <div>
-            <h3 className="text-lg font-semibold mb-2">{isRTL ? 'شكل الدوائر' : 'Circles Variant'}</h3>
-            <p className="text-sm text-muted-foreground">{isRTL ? 'دوائر كبيرة مع تأثير تكبير' : 'Large circles with scale effect'}</p>
+            <h3 className="text-lg font-semibold mb-2">{t.stepperComponent.variants.circlesVariant}</h3>
+            <p className="text-sm text-muted-foreground">{t.stepperComponent.variants.circlesDesc}</p>
           </div>
           <ComponentShowcase code={variantsCode.split('\n\n')[2]}>
             <ComponentShowcase.Demo>
@@ -259,13 +258,13 @@ export default function StepperPage() {
                     onClick={() => setCurrentStep3(Math.max(0, currentStep3 - 1))}
                     disabled={currentStep3 === 0}
                   >
-                    {isRTL ? 'السابق' : 'Previous'}
+                    {t.stepperComponent.actions.previous}
                   </Button>
                   <Button
                     onClick={() => setCurrentStep3(Math.min(simpleSteps.length - 1, currentStep3 + 1))}
                     disabled={currentStep3 === simpleSteps.length - 1}
                   >
-                    {isRTL ? 'التالي' : 'Next'}
+                    {t.stepperComponent.actions.next}
                   </Button>
                 </div>
               </div>
@@ -278,7 +277,7 @@ export default function StepperPage() {
 
       {/* Vertical Orientation */}
       <section className="mb-16">
-        <h2 className="text-2xl font-bold tracking-tight mb-6">{isRTL ? 'الاتجاه الرأسي' : 'Vertical Orientation'}</h2>
+        <h2 className="text-2xl font-bold tracking-tight mb-6">{t.stepperComponent.variants.verticalOrientation}</h2>
         <ComponentShowcase code={verticalCode}>
           <ComponentShowcase.Demo>
             <div className="max-w-md mx-auto">
@@ -289,13 +288,13 @@ export default function StepperPage() {
                   onClick={() => setCurrentStep4(Math.max(0, currentStep4 - 1))}
                   disabled={currentStep4 === 0}
                 >
-                  {isRTL ? 'السابق' : 'Previous'}
+                  {t.stepperComponent.actions.previous}
                 </Button>
                 <Button
                   onClick={() => setCurrentStep4(Math.min(steps.length - 1, currentStep4 + 1))}
                   disabled={currentStep4 === steps.length - 1}
                 >
-                  {isRTL ? 'التالي' : 'Next'}
+                  {t.stepperComponent.actions.next}
                 </Button>
               </div>
             </div>
@@ -305,13 +304,13 @@ export default function StepperPage() {
 
       {/* Use Cases */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-bold">{isRTL ? 'حالات الاستخدام' : 'Use Cases'}</h2>
+        <h2 className="text-2xl font-bold">{t.componentPage.sections.useCases}</h2>
         <div className="grid gap-4 md:grid-cols-2">
           {[
-            { title: isRTL ? 'نماذج التسجيل' : 'Registration Forms', icon: '📝' },
-            { title: isRTL ? 'عمليات الدفع' : 'Checkout Process', icon: '🛒' },
-            { title: isRTL ? 'معالجات الإعداد' : 'Setup Wizards', icon: '⚙️' },
-            { title: isRTL ? 'سير العمل متعدد الخطوات' : 'Multi-step Workflows', icon: '🔄' },
+            { title: t.stepperComponent.useCases.registrationForms, icon: '📝' },
+            { title: t.stepperComponent.useCases.checkoutProcess, icon: '🛒' },
+            { title: t.stepperComponent.useCases.setupWizards, icon: '⚙️' },
+            { title: t.stepperComponent.useCases.multiStepWorkflows, icon: '🔄' },
           ].map((useCase, idx) => (
             <Card key={idx}>
               <CardHeader>
@@ -327,28 +326,28 @@ export default function StepperPage() {
 
       {/* Type Definition */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-bold">{isRTL ? 'تعريف النوع' : 'Type Definition'}</h2>
+        <h2 className="text-2xl font-bold">{t.componentPage.sections.typeDefinitions}</h2>
         <CodeBlock code={typeDefinition} language="typescript" />
       </div>
 
       {/* API Reference */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-bold">{isRTL ? 'مرجع API' : 'API Reference'}</h2>
+        <h2 className="text-2xl font-bold">{t.componentPage.sections.propsApiReference}</h2>
         <PropsTable props={stepperProps} />
       </div>
 
       {/* Features */}
       <div className="space-y-4">
-        <h2 className="text-2xl font-bold">{isRTL ? 'الميزات' : 'Features'}</h2>
+        <h2 className="text-2xl font-bold">{t.componentPage.sections.features}</h2>
         <ul className="list-disc list-inside space-y-2 text-muted-foreground">
-          <li>{isRTL ? 'ثلاثة أشكال مرئية (افتراضي، بسيط، دوائر)' : 'Three visual variants (default, simple, circles)'}</li>
-          <li>{isRTL ? 'اتجاه أفقي ورأسي' : 'Horizontal and vertical orientations'}</li>
-          <li>{isRTL ? 'خطوات قابلة للنقر مع التحقق' : 'Clickable steps with validation'}</li>
-          <li>{isRTL ? 'دعم الخطوات الاختيارية' : 'Optional steps support'}</li>
-          <li>{isRTL ? 'حالات مرئية (مكتمل، حالي، قادم)' : 'Visual states (complete, current, upcoming)'}</li>
-          <li>{isRTL ? 'دعم ثنائي اللغة كامل' : 'Full bilingual support'}</li>
-          <li>{isRTL ? 'دعم RTL/LTR' : 'RTL/LTR support'}</li>
-          <li>{isRTL ? 'ميزات إمكانية الوصول (ARIA)' : 'Accessibility features (ARIA)'}</li>
+          <li>{t.stepperComponent.features.threeVariants}</li>
+          <li>{t.stepperComponent.features.orientations}</li>
+          <li>{t.stepperComponent.features.clickableSteps}</li>
+          <li>{t.stepperComponent.features.optionalSteps}</li>
+          <li>{t.stepperComponent.features.visualStates}</li>
+          <li>{t.stepperComponent.features.bilingualSupport}</li>
+          <li>{t.stepperComponent.features.rtlSupport}</li>
+          <li>{t.stepperComponent.features.accessibility}</li>
         </ul>
       </div>
       </main>

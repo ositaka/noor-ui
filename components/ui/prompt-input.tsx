@@ -2,6 +2,8 @@ import * as React from 'react'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import { Send, Paperclip, Mic, Loader2 } from 'lucide-react'
+import { useDirection } from '@/components/providers/direction-provider'
+import { content } from '@/lib/i18n'
 
 export interface PromptInputProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   /**
@@ -71,6 +73,8 @@ const PromptInput = React.forwardRef<HTMLTextAreaElement, PromptInputProps>(
     },
     ref
   ) => {
+    const { locale } = useDirection()
+    const t = content[locale]
     const [internalValue, setInternalValue] = React.useState('')
     const textareaRef = React.useRef<HTMLTextAreaElement>(null)
 
@@ -119,9 +123,7 @@ const PromptInput = React.forwardRef<HTMLTextAreaElement, PromptInputProps>(
       }
     }
 
-    const defaultPlaceholder = isRTL
-      ? 'اكتب رسالتك هنا... (Shift+Enter للسطر الجديد)'
-      : 'Type your message... (Shift+Enter for new line)'
+    const defaultPlaceholder = t.ui.components.typeMessagePlaceholder
 
     return (
       <div className="relative">
@@ -161,7 +163,7 @@ const PromptInput = React.forwardRef<HTMLTextAreaElement, PromptInputProps>(
               disabled={isLoading}
             >
               <Paperclip className="h-4 w-4" />
-              <span className="sr-only">{isRTL ? 'إرفاق ملف' : 'Attach file'}</span>
+              <span className="sr-only">{t.ui.components.attachFile}</span>
             </Button>
           )}
 
@@ -175,7 +177,7 @@ const PromptInput = React.forwardRef<HTMLTextAreaElement, PromptInputProps>(
               disabled={isLoading}
             >
               <Mic className="h-4 w-4" />
-              <span className="sr-only">{isRTL ? 'إدخال صوتي' : 'Voice input'}</span>
+              <span className="sr-only">{t.ui.components.voiceInput}</span>
             </Button>
           )}
 
@@ -191,7 +193,7 @@ const PromptInput = React.forwardRef<HTMLTextAreaElement, PromptInputProps>(
             ) : (
               <Send className="h-4 w-4" />
             )}
-            <span className="sr-only">{isRTL ? 'إرسال' : 'Send'}</span>
+            <span className="sr-only">{t.ui.components.send}</span>
           </Button>
         </div>
 

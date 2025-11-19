@@ -6,6 +6,7 @@ import { FeatureCard } from '@/components/ui/feature-card'
 import { ComponentShowcase } from '@/components/docs/component-showcase'
 import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
+import { BestPractices } from '@/components/docs/best-practices'
 import { Sparkles, Rocket, Zap, Shield, Package, Settings } from 'lucide-react'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
@@ -133,9 +134,7 @@ export default function FeatureCardPage() {
         <div className="mb-12">
           <h1 className="text-4xl font-bold tracking-tight mb-4">{t.componentNames['feature-card']}</h1>
           <p className="text-xl text-muted-foreground max-w-3xl">
-            {isRTL
-              ? 'مكون بطاقة متخصص لعرض الميزات مع أيقونة وعنوان ووصف. قابل للنقر اختيارياً مع تأثيرات التمرير. مثالي للصفحات المقصودة وشبكات الميزات.'
-              : 'A specialized card component for showcasing features with an icon, title, and description. Optionally clickable with hover effects. Perfect for landing pages and feature grids.'}
+            {t.featureCardComponent.description}
           </p>
         </div>
 
@@ -147,8 +146,8 @@ export default function FeatureCardPage() {
               <div className="max-w-sm">
                 <FeatureCard
                   icon={Sparkles}
-                  title={isRTL ? "تصميم يدعم الكتابة من اليمين إلى اليسار" : "RTL-First Design"}
-                  description={isRTL ? "مبني من الأساس لدعم التخطيطات من اليسار إلى اليمين ومن اليمين إلى اليسار بسلاسة" : "Built from the ground up to support both LTR and RTL layouts seamlessly"}
+                  title={t.featureCardComponent.examples.rtlFirstDesign}
+                  description={t.featureCardComponent.examples.rtlFirstDesc}
                   href="/rtl-guide"
                 />
               </div>
@@ -181,8 +180,8 @@ export default function FeatureCardPage() {
                   <div className="max-w-sm">
                     <FeatureCard
                       icon={Sparkles}
-                      title={isRTL ? "ميزة رائعة" : "Amazing Feature"}
-                      description={isRTL ? "هذه بطاقة ثابتة بدون رابط. رائعة للعروض غير التفاعلية." : "This is a static card without a link. Great for non-interactive displays."}
+                      title={t.featureCardComponent.examples.amazingFeature}
+                      description={t.featureCardComponent.examples.amazingFeatureDesc}
                     />
                   </div>
                 </ComponentShowcase.Demo>
@@ -198,8 +197,8 @@ export default function FeatureCardPage() {
                   <div className="max-w-sm">
                     <FeatureCard
                       icon={Rocket}
-                      title={isRTL ? "ابدأ الآن" : "Get Started"}
-                      description={isRTL ? "انقر لتتعلم كيفية البدء في استخدام مكوناتنا" : "Click to learn how to begin using our components"}
+                      title={t.featureCardComponent.examples.getStarted}
+                      description={t.featureCardComponent.examples.getStartedDesc}
                       href="/getting-started"
                     />
                   </div>
@@ -216,20 +215,20 @@ export default function FeatureCardPage() {
                   <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                     <FeatureCard
                       icon={Zap}
-                      title={isRTL ? "سريع كالبرق" : "Lightning Fast"}
-                      description={isRTL ? "محسّن للأداء" : "Optimized for performance"}
+                      title={t.featureCardComponent.examples.lightningFast}
+                      description={t.featureCardComponent.examples.lightningFastDesc}
                       href="/components"
                     />
                     <FeatureCard
                       icon={Shield}
-                      title={isRTL ? "آمن افتراضياً" : "Secure by Default"}
-                      description={isRTL ? "مبني مع وضع الأمان في الاعتبار" : "Built with security in mind"}
+                      title={t.featureCardComponent.examples.secureByDefault}
+                      description={t.featureCardComponent.examples.secureByDefaultDesc}
                       href="/documentation"
                     />
                     <FeatureCard
                       icon={Package}
-                      title={isRTL ? "سهل الاستخدام" : "Easy to Use"}
-                      description={isRTL ? "واجهة برمجية بسيطة، نتائج قوية" : "Simple API, powerful results"}
+                      title={t.featureCardComponent.examples.easyToUse}
+                      description={t.featureCardComponent.examples.easyToUseDesc}
                       href="/examples"
                     />
                   </div>
@@ -244,9 +243,7 @@ export default function FeatureCardPage() {
         <section className="mb-16">
           <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.rtlSupport}</h2>
           <p className="text-muted-foreground mb-6">
-            {isRTL
-              ? 'تتكيف بطاقة الميزة تلقائياً مع تخطيطات RTL. تنعكس الأيقونة ومحاذاة النص بناءً على الاتجاه الحالي.'
-              : 'FeatureCard automatically adapts to RTL layouts. The icon and text alignment mirror based on the current direction.'}
+            {t.featureCardComponent.rtlSupport.autoAdapts}
           </p>
           <CodeBlock code={rtlCode} language="tsx" title="React" />
         </section>
@@ -260,60 +257,10 @@ export default function FeatureCardPage() {
         {/* Best Practices */}
         <section className="mb-16">
           <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.bestPractices}</h2>
-          <div className="grid md:grid-cols-2 gap-6">
-            <div className="p-6 rounded-lg border-2 border-green-500/20 bg-green-500/5">
-              <h3 className="text-foreground font-semibold mb-4 flex items-center gap-2">
-                <span className="text-green-600 dark:text-green-400 text-xl">✓</span>
-                {t.componentPage.bestPractices.do}
-              </h3>
-              <ul className="space-y-3 text-sm text-muted-foreground">
-                <li className="flex items-start gap-2">
-                  <span className="text-green-600 dark:text-green-400 mt-0.5">•</span>
-                  <span>{isRTL ? 'استخدم أيقونات ذات معنى تمثل الميزة' : 'Use meaningful icons that represent the feature'}</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-green-600 dark:text-green-400 mt-0.5">•</span>
-                  <span>{isRTL ? 'اجعل العناوين قصيرة ووصفية (2-5 كلمات)' : 'Keep titles short and descriptive (2-5 words)'}</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-green-600 dark:text-green-400 mt-0.5">•</span>
-                  <span>{isRTL ? 'اجعل الأوصاف موجزة (1-2 جملة)' : 'Keep descriptions concise (1-2 sentences)'}</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-green-600 dark:text-green-400 mt-0.5">•</span>
-                  <span>{isRTL ? 'استخدم في تخطيطات الشبكة لعرض الميزات' : 'Use in grid layouts for feature showcases'}</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-green-600 dark:text-green-400 mt-0.5">•</span>
-                  <span>{isRTL ? 'أضف href عندما يجب أن تنقل البطاقة إلى مكان ما' : 'Add href when the card should navigate somewhere'}</span>
-                </li>
-              </ul>
-            </div>
-            <div className="p-6 rounded-lg border-2 border-red-500/20 bg-red-500/5">
-              <h3 className="text-foreground font-semibold mb-4 flex items-center gap-2">
-                <span className="text-red-600 dark:text-red-400 text-xl">✕</span>
-                {t.componentPage.bestPractices.dont}
-              </h3>
-              <ul className="space-y-3 text-sm text-muted-foreground">
-                <li className="flex items-start gap-2">
-                  <span className="text-red-600 dark:text-red-400 mt-0.5">•</span>
-                  <span>{isRTL ? 'لا تستخدم للمحتوى الطويل (استخدم بطاقة عادية بدلاً من ذلك)' : "Don't use for long-form content (use regular Card instead)"}</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-red-600 dark:text-red-400 mt-0.5">•</span>
-                  <span>{isRTL ? 'لا تخلط البطاقات القابلة للنقر وغير القابلة للنقر في نفس الشبكة' : "Don't mix clickable and non-clickable cards in the same grid"}</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-red-600 dark:text-red-400 mt-0.5">•</span>
-                  <span>{isRTL ? 'لا تستخدم أيقونات صغيرة جداً أو كبيرة جداً' : "Don't use tiny icons or oversized icons"}</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-red-600 dark:text-red-400 mt-0.5">•</span>
-                  <span>{isRTL ? 'لا تجعل الوصف طويلاً جداً (يكسر التوازن البصري)' : "Don't make the description too long (breaks visual balance)"}</span>
-                </li>
-              </ul>
-            </div>
-          </div>
+          <BestPractices
+            dos={t.featureCardComponent.bestPractices.doList}
+            donts={t.featureCardComponent.bestPractices.dontList}
+          />
         </section>
 
         {/* Related Components */}
@@ -323,13 +270,13 @@ export default function FeatureCardPage() {
             <FeatureCard
               icon={Package}
               title={t.componentNames['card']}
-              description={isRTL ? 'مكون البطاقة الأساسي للمحتوى العام' : 'The base card component for general content'}
+              description={t.featureCardComponent.relatedComponents.baseCard}
               href="/components/card"
             />
             <FeatureCard
               icon={Settings}
               title={t.componentNames['stats-card']}
-              description={isRTL ? 'بطاقة متخصصة لعرض الإحصائيات' : 'Specialized card for displaying statistics'}
+              description={t.featureCardComponent.relatedComponents.statsCardDesc}
               href="/components/stats-card"
             />
           </div>

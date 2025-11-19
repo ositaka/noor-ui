@@ -170,6 +170,7 @@ function generateMockVendorProfile(): VendorProfile {
 export default function VendorDashboardPage() {
   const { locale } = useDirection()
   const isRTL = locale === 'ar'
+  const t = content[locale].vendorDashboard
 
   const [products] = React.useState<Product[]>(generateMockProducts())
   const [vendorProfile, setVendorProfile] = React.useState<VendorProfile>(generateMockVendorProfile())
@@ -273,24 +274,13 @@ export default function VendorDashboardPage() {
   }
 
   const getStatusText = (status: Product['status']) => {
-    if (isRTL) {
-      switch (status) {
-        case 'in-stock':
-          return 'متوفر'
-        case 'low-stock':
-          return 'مخزون منخفض'
-        case 'out-of-stock':
-          return 'غير متوفر'
-      }
-    } else {
-      switch (status) {
-        case 'in-stock':
-          return 'In Stock'
-        case 'low-stock':
-          return 'Low Stock'
-        case 'out-of-stock':
-          return 'Out of Stock'
-      }
+    switch (status) {
+      case 'in-stock':
+        return t.products.status.inStock
+      case 'low-stock':
+        return t.products.status.lowStock
+      case 'out-of-stock':
+        return t.products.status.outOfStock
     }
   }
 
@@ -302,24 +292,24 @@ export default function VendorDashboardPage() {
           <ol className="flex items-center gap-2 text-sm text-muted-foreground">
             <li>
               <Link href="/" className="hover:text-foreground transition-colors">
-                {isRTL ? 'الرئيسية' : 'Home'}
+                {t.breadcrumb.home}
               </Link>
             </li>
             <li>/</li>
             <li>
               <Link href="/examples" className="hover:text-foreground transition-colors">
-                {isRTL ? 'الأمثلة' : 'Examples'}
+                {t.breadcrumb.examples}
               </Link>
             </li>
             <li>/</li>
             <li>
               <Link href="/examples/marketplace" className="hover:text-foreground transition-colors">
-                {isRTL ? 'السوق' : 'Marketplace'}
+                {t.breadcrumb.marketplace}
               </Link>
             </li>
             <li>/</li>
             <li className="text-foreground font-medium">
-              {isRTL ? 'لوحة التحكم' : 'Dashboard'}
+              {t.breadcrumb.dashboard}
             </li>
           </ol>
         </nav>
@@ -328,18 +318,16 @@ export default function VendorDashboardPage() {
         <div className="flex items-center justify-between mb-8">
           <div>
             <h1 className="text-4xl font-bold tracking-tight mb-2">
-              {isRTL ? 'لوحة تحكم البائع' : 'Vendor Dashboard'}
+              {t.title}
             </h1>
             <p className="text-muted-foreground">
-              {isRTL
-                ? 'إدارة ملفك الشخصي ومنتجاتك وأعمالك'
-                : 'Manage your profile, products, and business'}
+              {t.description}
             </p>
           </div>
           <Button asChild>
             <Link href="/examples/marketplace">
               <Store className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
-              {isRTL ? 'عرض المتجر' : 'View Store'}
+              {t.viewStore}
             </Link>
           </Button>
         </div>
@@ -349,7 +337,7 @@ export default function VendorDashboardPage() {
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">
-                {isRTL ? 'إجمالي المبيعات' : 'Total Sales'}
+                {t.stats.totalSales}
               </CardTitle>
               <ShoppingCart className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
@@ -358,7 +346,7 @@ export default function VendorDashboardPage() {
                 <ArabicNumber value={vendorProfile.totalSales} />
               </div>
               <p className="text-xs text-muted-foreground">
-                {isRTL ? 'جميع الأوقات' : 'All time'}
+                {t.stats.allTime}
               </p>
             </CardContent>
           </Card>
@@ -366,7 +354,7 @@ export default function VendorDashboardPage() {
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">
-                {isRTL ? 'الإيرادات' : 'Revenue'}
+                {t.stats.revenue}
               </CardTitle>
               <DollarSign className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
@@ -375,7 +363,7 @@ export default function VendorDashboardPage() {
                 {formatSAR(vendorProfile.totalRevenue, { useArabicNumerals: isRTL, locale: isRTL ? 'ar' : 'en' })}
               </div>
               <p className="text-xs text-muted-foreground">
-                {isRTL ? 'جميع الأوقات' : 'All time'}
+                {t.stats.allTime}
               </p>
             </CardContent>
           </Card>
@@ -383,7 +371,7 @@ export default function VendorDashboardPage() {
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">
-                {isRTL ? 'التقييم' : 'Rating'}
+                {t.stats.rating}
               </CardTitle>
               <Star className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
@@ -393,7 +381,7 @@ export default function VendorDashboardPage() {
               </div>
               <p className="text-xs text-muted-foreground">
                 <ArabicNumber value={vendorProfile.reviewCount} />{' '}
-                {isRTL ? 'تقييم' : 'reviews'}
+                {t.stats.reviews}
               </p>
             </CardContent>
           </Card>
@@ -401,7 +389,7 @@ export default function VendorDashboardPage() {
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">
-                {isRTL ? 'المنتجات' : 'Products'}
+                {t.stats.products}
               </CardTitle>
               <Package className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
@@ -410,7 +398,7 @@ export default function VendorDashboardPage() {
                 <ArabicNumber value={products.length} />
               </div>
               <p className="text-xs text-muted-foreground">
-                {isRTL ? 'إجمالي المنتجات' : 'Total products'}
+                {t.stats.totalProducts}
               </p>
             </CardContent>
           </Card>
@@ -421,11 +409,11 @@ export default function VendorDashboardPage() {
           <TabsList className="grid w-full grid-cols-2 max-w-md">
             <TabsTrigger value="profile">
               <User className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
-              {isRTL ? 'الملف الشخصي' : 'Profile'}
+              {t.tabs.profile}
             </TabsTrigger>
             <TabsTrigger value="products">
               <Package className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
-              {isRTL ? 'المنتجات' : 'Products'}
+              {t.tabs.products}
             </TabsTrigger>
           </TabsList>
 
@@ -435,17 +423,15 @@ export default function VendorDashboardPage() {
               <CardHeader>
                 <div className="flex items-center justify-between">
                   <div>
-                    <CardTitle>{isRTL ? 'معلومات المتجر' : 'Store Information'}</CardTitle>
+                    <CardTitle>{t.profile.title}</CardTitle>
                     <CardDescription>
-                      {isRTL
-                        ? 'إدارة معلومات متجرك وتفاصيل الاتصال'
-                        : 'Manage your store information and contact details'}
+                      {t.profile.description}
                     </CardDescription>
                   </div>
                   {!isEditingProfile && (
                     <Button onClick={() => setIsEditingProfile(true)} variant="outline">
                       <Edit className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
-                      {isRTL ? 'تعديل' : 'Edit'}
+                      {t.profile.edit}
                     </Button>
                   )}
                 </div>
@@ -454,7 +440,7 @@ export default function VendorDashboardPage() {
                 {/* Store Images */}
                 <div className="space-y-4">
                   <div>
-                    <Label>{isRTL ? 'صورة الغلاف' : 'Banner Image'}</Label>
+                    <Label>{t.profile.bannerImage}</Label>
                     <div
                       className="mt-2 h-48 rounded-lg bg-cover bg-center relative group"
                       style={{ backgroundImage: `url(${vendorProfile.banner})` }}
@@ -463,7 +449,7 @@ export default function VendorDashboardPage() {
                         <div className="absolute inset-0 bg-black/50 rounded-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
                           <Button variant="secondary" size="sm">
                             <Upload className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
-                            {isRTL ? 'تحميل صورة جديدة' : 'Upload New Image'}
+                            {t.profile.uploadNewImage}
                           </Button>
                         </div>
                       )}
@@ -471,7 +457,7 @@ export default function VendorDashboardPage() {
                   </div>
 
                   <div>
-                    <Label>{isRTL ? 'شعار المتجر' : 'Store Logo'}</Label>
+                    <Label>{t.profile.storeLogo}</Label>
                     <div className="mt-2 flex items-center gap-4">
                       <div
                         className="h-24 w-24 rounded-lg bg-cover bg-center relative group"
@@ -485,9 +471,7 @@ export default function VendorDashboardPage() {
                       </div>
                       {isEditingProfile && (
                         <div className="text-sm text-muted-foreground">
-                          {isRTL
-                            ? 'انقر لتحميل شعار جديد (مستحسن: 200x200 بكسل)'
-                            : 'Click to upload new logo (Recommended: 200x200px)'}
+                          {t.profile.uploadLogoPrompt}
                         </div>
                       )}
                     </div>
@@ -498,7 +482,7 @@ export default function VendorDashboardPage() {
                 <div className="grid gap-4 md:grid-cols-2">
                   <div className="space-y-2">
                     <Label htmlFor="store-name">
-                      {isRTL ? 'اسم المتجر (English)' : 'Store Name (English)'}
+                      {t.profile.storeNameEn}
                     </Label>
                     <Input
                       id="store-name"
@@ -510,7 +494,7 @@ export default function VendorDashboardPage() {
 
                   <div className="space-y-2">
                     <Label htmlFor="store-name-ar">
-                      {isRTL ? 'اسم المتجر (عربي)' : 'Store Name (Arabic)'}
+                      {t.profile.storeNameAr}
                     </Label>
                     <Input
                       id="store-name-ar"
@@ -525,7 +509,7 @@ export default function VendorDashboardPage() {
                 <div className="grid gap-4 md:grid-cols-2">
                   <div className="space-y-2">
                     <Label htmlFor="description">
-                      {isRTL ? 'الوصف (English)' : 'Description (English)'}
+                      {t.profile.descriptionEn}
                     </Label>
                     <Textarea
                       id="description"
@@ -538,7 +522,7 @@ export default function VendorDashboardPage() {
 
                   <div className="space-y-2">
                     <Label htmlFor="description-ar">
-                      {isRTL ? 'الوصف (عربي)' : 'Description (Arabic)'}
+                      {t.profile.descriptionAr}
                     </Label>
                     <Textarea
                       id="description-ar"
@@ -554,7 +538,7 @@ export default function VendorDashboardPage() {
                 <div className="grid gap-4 md:grid-cols-2">
                   <div className="space-y-2">
                     <Label htmlFor="location">
-                      {isRTL ? 'الموقع (English)' : 'Location (English)'}
+                      {t.profile.locationEn}
                     </Label>
                     <div className="relative">
                       <MapPin className={cn(
@@ -573,7 +557,7 @@ export default function VendorDashboardPage() {
 
                   <div className="space-y-2">
                     <Label htmlFor="location-ar">
-                      {isRTL ? 'الموقع (عربي)' : 'Location (Arabic)'}
+                      {t.profile.locationAr}
                     </Label>
                     <div className="relative">
                       <MapPin className="absolute top-3 right-3 h-4 w-4 text-muted-foreground" />
@@ -592,7 +576,7 @@ export default function VendorDashboardPage() {
                 <div className="grid gap-4 md:grid-cols-3">
                   <div className="space-y-2">
                     <Label htmlFor="phone">
-                      {isRTL ? 'رقم الهاتف' : 'Phone Number'}
+                      {t.profile.phoneNumber}
                     </Label>
                     <div className="relative">
                       <Phone className={cn(
@@ -611,7 +595,7 @@ export default function VendorDashboardPage() {
 
                   <div className="space-y-2">
                     <Label htmlFor="email">
-                      {isRTL ? 'البريد الإلكتروني' : 'Email'}
+                      {t.profile.email}
                     </Label>
                     <div className="relative">
                       <Mail className={cn(
@@ -631,7 +615,7 @@ export default function VendorDashboardPage() {
 
                   <div className="space-y-2">
                     <Label htmlFor="website">
-                      {isRTL ? 'الموقع الإلكتروني' : 'Website'}
+                      {t.profile.website}
                     </Label>
                     <div className="relative">
                       <Globe className={cn(
@@ -653,11 +637,11 @@ export default function VendorDashboardPage() {
                   <div className="flex gap-3 justify-end pt-4 border-t">
                     <Button variant="outline" onClick={handleCancelProfile}>
                       <X className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
-                      {isRTL ? 'إلغاء' : 'Cancel'}
+                      {t.profile.cancel}
                     </Button>
                     <Button onClick={handleSaveProfile}>
                       <Save className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
-                      {isRTL ? 'حفظ التغييرات' : 'Save Changes'}
+                      {t.profile.saveChanges}
                     </Button>
                   </div>
                 )}
@@ -674,12 +658,10 @@ export default function VendorDashboardPage() {
                   <div className="flex items-center justify-between">
                     <div>
                       <CardTitle>
-                        {isRTL ? 'تعديل المنتج' : 'Edit Product'}
+                        {t.products.title}
                       </CardTitle>
                       <CardDescription>
-                        {isRTL
-                          ? 'قم بتحديث معلومات منتجك'
-                          : 'Update your product information'}
+                        {t.products.editDescription}
                       </CardDescription>
                     </div>
                     <Button variant="ghost" size="icon" onClick={handleCancelProduct}>
@@ -690,7 +672,7 @@ export default function VendorDashboardPage() {
                 <CardContent className="space-y-6">
                   {/* Product Image */}
                   <div>
-                    <Label>{isRTL ? 'صورة المنتج' : 'Product Image'}</Label>
+                    <Label>{t.products.productImage}</Label>
                     <div className="mt-2 flex items-center gap-4">
                       <div
                         className="h-32 w-32 rounded-lg bg-cover bg-center relative group"
@@ -703,12 +685,10 @@ export default function VendorDashboardPage() {
                       <div className="flex-1">
                         <Button variant="outline" size="sm">
                           <ImageIcon className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
-                          {isRTL ? 'تحميل صورة جديدة' : 'Upload New Image'}
+                          {t.profile.uploadNewImage}
                         </Button>
                         <p className="text-sm text-muted-foreground mt-2">
-                          {isRTL
-                            ? 'مستحسن: 800x800 بكسل، PNG أو JPG'
-                            : 'Recommended: 800x800px, PNG or JPG'}
+                          {t.products.uploadImagePrompt}
                         </p>
                       </div>
                     </div>
@@ -718,7 +698,7 @@ export default function VendorDashboardPage() {
                   <div className="grid gap-4 md:grid-cols-2">
                     <div className="space-y-2">
                       <Label htmlFor="product-name">
-                        {isRTL ? 'اسم المنتج (English)' : 'Product Name (English)'}
+                        {t.products.productNameEn}
                       </Label>
                       <Input
                         id="product-name"
@@ -729,7 +709,7 @@ export default function VendorDashboardPage() {
 
                     <div className="space-y-2">
                       <Label htmlFor="product-name-ar">
-                        {isRTL ? 'اسم المنتج (عربي)' : 'Product Name (Arabic)'}
+                        {t.products.productNameAr}
                       </Label>
                       <Input
                         id="product-name-ar"
@@ -743,7 +723,7 @@ export default function VendorDashboardPage() {
                   <div className="grid gap-4 md:grid-cols-2">
                     <div className="space-y-2">
                       <Label htmlFor="product-description">
-                        {isRTL ? 'الوصف (English)' : 'Description (English)'}
+                        {t.profile.descriptionEn}
                       </Label>
                       <Textarea
                         id="product-description"
@@ -755,7 +735,7 @@ export default function VendorDashboardPage() {
 
                     <div className="space-y-2">
                       <Label htmlFor="product-description-ar">
-                        {isRTL ? 'الوصف (عربي)' : 'Description (Arabic)'}
+                        {t.profile.descriptionAr}
                       </Label>
                       <Textarea
                         id="product-description-ar"
@@ -770,7 +750,7 @@ export default function VendorDashboardPage() {
                   <div className="grid gap-4 md:grid-cols-3">
                     <div className="space-y-2">
                       <Label htmlFor="price">
-                        {isRTL ? 'السعر (SAR)' : 'Price (SAR)'}
+                        {t.products.price}
                       </Label>
                       <Input
                         id="price"
@@ -782,7 +762,7 @@ export default function VendorDashboardPage() {
 
                     <div className="space-y-2">
                       <Label htmlFor="stock">
-                        {isRTL ? 'الكمية المتوفرة' : 'Stock Count'}
+                        {t.products.stockCount}
                       </Label>
                       <Input
                         id="stock"
@@ -794,7 +774,7 @@ export default function VendorDashboardPage() {
 
                     <div className="space-y-2">
                       <Label htmlFor="category">
-                        {isRTL ? 'الفئة' : 'Category'}
+                        {t.products.category}
                       </Label>
                       <Select
                         value={productForm.category}
@@ -805,13 +785,13 @@ export default function VendorDashboardPage() {
                         </SelectTrigger>
                         <SelectContent>
                           <SelectItem value="Electronics">
-                            {isRTL ? 'إلكترونيات' : 'Electronics'}
+                            {t.products.categories.electronics}
                           </SelectItem>
                           <SelectItem value="Accessories">
-                            {isRTL ? 'إكسسوارات' : 'Accessories'}
+                            {t.products.categories.accessories}
                           </SelectItem>
                           <SelectItem value="Gaming">
-                            {isRTL ? 'ألعاب' : 'Gaming'}
+                            {t.products.categories.gaming}
                           </SelectItem>
                         </SelectContent>
                       </Select>
@@ -821,11 +801,11 @@ export default function VendorDashboardPage() {
                   <div className="flex gap-3 justify-end pt-4 border-t">
                     <Button variant="outline" onClick={handleCancelProduct}>
                       <X className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
-                      {isRTL ? 'إلغاء' : 'Cancel'}
+                      {t.profile.cancel}
                     </Button>
                     <Button onClick={handleSaveProduct}>
                       <Save className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
-                      {isRTL ? 'حفظ التغييرات' : 'Save Changes'}
+                      {t.profile.saveChanges}
                     </Button>
                   </div>
                 </CardContent>
@@ -836,17 +816,15 @@ export default function VendorDashboardPage() {
                 <div className="flex items-center justify-between">
                   <div>
                     <h2 className="text-2xl font-bold">
-                      {isRTL ? 'إدارة المنتجات' : 'Product Management'}
+                      {t.products.management}
                     </h2>
                     <p className="text-muted-foreground">
-                      {isRTL
-                        ? 'عرض وتعديل منتجاتك'
-                        : 'View and edit your products'}
+                      {t.products.managementDescription}
                     </p>
                   </div>
                   <Button>
                     <Plus className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
-                    {isRTL ? 'إضافة منتج' : 'Add Product'}
+                    {t.products.addProduct}
                   </Button>
                 </div>
 
@@ -882,7 +860,7 @@ export default function VendorDashboardPage() {
                         <div className="space-y-2 text-sm">
                           <div className="flex items-center justify-between">
                             <span className="text-muted-foreground">
-                              {isRTL ? 'المخزون:' : 'Stock:'}
+                              {t.products.stock}
                             </span>
                             <span className={getStatusColor(product.status)}>
                               <ArabicNumber value={product.stockCount} />{' '}
@@ -892,7 +870,7 @@ export default function VendorDashboardPage() {
 
                           <div className="flex items-center justify-between">
                             <span className="text-muted-foreground">
-                              {isRTL ? 'المبيعات:' : 'Sales:'}
+                              {t.products.sales}
                             </span>
                             <span>
                               <ArabicNumber value={product.sales} />
@@ -901,7 +879,7 @@ export default function VendorDashboardPage() {
 
                           <div className="flex items-center justify-between">
                             <span className="text-muted-foreground">
-                              {isRTL ? 'التقييم:' : 'Rating:'}
+                              {t.stats.rating}:
                             </span>
                             <div className="flex items-center gap-1">
                               <Star className="h-3 w-3 fill-yellow-400 text-yellow-400" />
@@ -921,7 +899,7 @@ export default function VendorDashboardPage() {
                             onClick={() => setEditingProduct(product)}
                           >
                             <Edit className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
-                            {isRTL ? 'تعديل' : 'Edit'}
+                            {t.profile.edit}
                           </Button>
                           <Button
                             variant="outline"
@@ -931,7 +909,7 @@ export default function VendorDashboardPage() {
                           >
                             <Link href={`/examples/marketplace/${product.id}`}>
                               <Eye className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
-                              {isRTL ? 'عرض' : 'View'}
+                              {t.products.view}
                             </Link>
                           </Button>
                         </div>

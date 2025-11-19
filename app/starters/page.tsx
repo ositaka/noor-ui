@@ -128,6 +128,8 @@ const starters: Starter[] = [
 ]
 
 export default function StartersPage() {
+  const { locale } = useDirection()
+  const t = content[locale]
   const [isRTL, setIsRTL] = React.useState(false)
 
   React.useEffect(() => {
@@ -156,12 +158,12 @@ export default function StartersPage() {
           <ol className="flex items-center gap-2 text-sm text-muted-foreground">
             <li>
               <Link href="/" className="hover:text-foreground transition-colors">
-                {isRTL ? 'الرئيسية' : 'Home'}
+                {t.common.home}
               </Link>
             </li>
             <li>/</li>
             <li className="text-foreground font-medium">
-              {isRTL ? 'نماذج البدء' : 'Starters'}
+              {t.startersPage.breadcrumb.starters}
             </li>
           </ol>
         </nav>
@@ -170,26 +172,24 @@ export default function StartersPage() {
         <div className="max-w-3xl mb-12">
           <div className="flex items-center gap-2 mb-4">
             <h1 className="text-4xl font-bold tracking-tight">
-              {isRTL ? 'نماذج البدء الجاهزة' : 'Production-Ready Starters'}
+              {t.startersPage.title}
             </h1>
             <Sparkles className="h-8 w-8 text-primary" />
           </div>
           <p className="text-xl text-muted-foreground mb-6">
-            {isRTL
-              ? 'تطبيقات كاملة جاهزة للإنتاج يمكنك نسخها وتخصيصها ونشرها. كل نموذج يحتوي على مصادقة، قاعدة بيانات، ودعم كامل للغتين.'
-              : 'Complete, production-ready applications you can copy, customize, and deploy. Each starter includes authentication, database setup, and full bilingual support.'}
+            {t.startersPage.description}
           </p>
           <div className="flex flex-wrap gap-4">
             <Link href="#ready-starters">
               <Button>
                 <Download className="h-4 w-4 me-2" />
-                {isRTL ? 'استعراض النماذج الجاهزة' : 'Browse Ready Starters'}
+                {t.startersPage.buttons.browseReady}
               </Button>
             </Link>
             <Link href="https://github.com" target="_blank" rel="noopener noreferrer">
               <Button variant="outline">
                 <Github className="h-4 w-4 me-2" />
-                {isRTL ? 'عرض على GitHub' : 'View on GitHub'}
+                {t.startersPage.buttons.viewGitHub}
               </Button>
             </Link>
           </div>
@@ -203,34 +203,28 @@ export default function StartersPage() {
                 <div>
                   <h3 className="font-semibold mb-2 flex items-center gap-2">
                     <FileCode className="h-5 w-5 text-primary" />
-                    {isRTL ? 'جاهزة للإنتاج' : 'Production Ready'}
+                    {t.startersPage.sections.productionReady}
                   </h3>
                   <p className="text-sm text-muted-foreground">
-                    {isRTL
-                      ? 'كود كامل مع قواعد بيانات، مصادقة، وأفضل الممارسات. جاهزة للنشر.'
-                      : 'Complete code with database, auth, and best practices. Ready to deploy.'}
+                    {t.startersPage.sections.productionReadyDesc}
                   </p>
                 </div>
                 <div>
                   <h3 className="font-semibold mb-2 flex items-center gap-2">
                     <Download className="h-5 w-5 text-primary" />
-                    {isRTL ? 'انسخ وخصص' : 'Copy & Customize'}
+                    {t.startersPage.sections.copyCustomize}
                   </h3>
                   <p className="text-sm text-muted-foreground">
-                    {isRTL
-                      ? 'انسخ المجلد، قم بتخصيصه حسب احتياجاتك، وانشر في دقائق.'
-                      : 'Copy the folder, customize to your needs, and deploy in minutes.'}
+                    {t.startersPage.sections.copyCustomizeDesc}
                   </p>
                 </div>
                 <div>
                   <h3 className="font-semibold mb-2 flex items-center gap-2">
                     <Sparkles className="h-5 w-5 text-primary" />
-                    {isRTL ? 'تعلم الأنماط' : 'Learn Patterns'}
+                    {t.startersPage.sections.learnPatterns}
                   </h3>
                   <p className="text-sm text-muted-foreground">
-                    {isRTL
-                      ? 'شاهد كيفية بناء تطبيقات حقيقية باستخدام أفضل الممارسات.'
-                      : 'See how to build real apps with best practices and patterns.'}
+                    {t.startersPage.sections.learnPatternsDesc}
                   </p>
                 </div>
               </div>
@@ -242,12 +236,10 @@ export default function StartersPage() {
         <div id="ready-starters" className="mb-16">
           <div className="mb-6">
             <h2 className="text-3xl font-bold tracking-tight mb-2">
-              {isRTL ? 'جاهزة الآن' : 'Ready Now'}
+              {t.startersPage.sections.readyNow}
             </h2>
             <p className="text-muted-foreground">
-              {isRTL
-                ? 'نماذج كاملة جاهزة للنسخ والاستخدام'
-                : 'Complete starters ready to copy and use'}
+              {t.startersPage.sections.readyNowDesc}
             </p>
           </div>
 
@@ -263,7 +255,7 @@ export default function StartersPage() {
                       <starter.icon className="h-8 w-8 text-primary" />
                     </div>
                     <Badge className="text-xs">
-                      {isRTL ? 'جاهز' : 'Ready'}
+                      {t.startersPage.badges.ready}
                     </Badge>
                   </div>
                   <CardTitle className="text-2xl mb-2">{starter.title}</CardTitle>
@@ -282,7 +274,7 @@ export default function StartersPage() {
                   {/* Features */}
                   <div className="mb-6">
                     <h4 className="font-semibold text-sm mb-3">
-                      {isRTL ? 'المميزات:' : 'Features:'}
+                      {t.startersPage.sections.features}
                     </h4>
                     <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm text-muted-foreground">
                       {starter.features.map((feature, idx) => (
@@ -297,7 +289,7 @@ export default function StartersPage() {
                   {/* Stack */}
                   <div className="mb-6">
                     <h4 className="font-semibold text-sm mb-2">
-                      {isRTL ? 'التقنيات المستخدمة:' : 'Tech Stack:'}
+                      {t.startersPage.sections.techStack}
                     </h4>
                     <div className="flex flex-wrap gap-2">
                       {starter.stack.map((tech) => (
@@ -313,7 +305,7 @@ export default function StartersPage() {
                     <Link href={starter.href} target="_blank" rel="noopener noreferrer" className="flex-1">
                       <Button className="w-full">
                         <Github className="h-4 w-4 me-2" />
-                        {isRTL ? 'عرض على GitHub' : 'View on GitHub'}
+                        {t.startersPage.buttons.viewGitHub}
                       </Button>
                     </Link>
                   </div>
@@ -328,12 +320,10 @@ export default function StartersPage() {
           <div className="mb-12">
             <div className="mb-6">
               <h2 className="text-3xl font-bold tracking-tight mb-2">
-                {isRTL ? 'قريباً' : 'Coming Soon'}
+                {t.startersPage.sections.comingSoon}
               </h2>
               <p className="text-muted-foreground">
-                {isRTL
-                  ? 'نماذج جديدة قيد التطوير'
-                  : 'New starters currently in development'}
+                {t.startersPage.sections.comingSoonDesc}
               </p>
             </div>
 
@@ -346,7 +336,7 @@ export default function StartersPage() {
                         <starter.icon className="h-6 w-6" />
                       </div>
                       <Badge variant="outline" className="text-xs">
-                        {isRTL ? 'قريباً' : 'Coming Soon'}
+                        {t.startersPage.badges.comingSoon}
                       </Badge>
                     </div>
                     <CardTitle className="text-lg">{starter.title}</CardTitle>
@@ -374,46 +364,42 @@ export default function StartersPage() {
           <Card>
             <CardHeader>
               <CardTitle>
-                {isRTL ? 'كيفية استخدام النماذج' : 'How to Use Starters'}
+                {t.startersPage.sections.howToUse}
               </CardTitle>
               <CardDescription>
-                {isRTL
-                  ? 'دليل سريع للبدء مع أي نموذج'
-                  : 'Quick guide to get started with any starter'}
+                {t.startersPage.sections.howToUseDesc}
               </CardDescription>
             </CardHeader>
             <CardContent>
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
                   <h4 className="font-semibold mb-3">
-                    {isRTL ? 'الطريقة 1: نسخ للمشروع الجديد' : 'Method 1: Copy for New Project'}
+                    {t.startersPage.sections.method1}
                   </h4>
                   <div className="space-y-2 text-sm text-muted-foreground">
-                    <p>1. {isRTL ? 'انسخ مجلد النموذج' : 'Copy the starter folder'}</p>
+                    <p>1. {t.startersPage.howToUse.step1}</p>
                     <code className="block bg-muted p-2 rounded text-xs">
                       cp -r starters/blog-dashboard my-app
                     </code>
-                    <p>2. {isRTL ? 'قم بتثبيت الاعتماديات' : 'Install dependencies'}</p>
+                    <p>2. {t.startersPage.howToUse.step2}</p>
                     <code className="block bg-muted p-2 rounded text-xs">
                       cd my-app && npm install
                     </code>
-                    <p>3. {isRTL ? 'اتبع دليل الإعداد في README' : 'Follow setup guide in README'}</p>
+                    <p>3. {t.startersPage.howToUse.step3}</p>
                   </div>
                 </div>
                 <div>
                   <h4 className="font-semibold mb-3">
-                    {isRTL ? 'الطريقة 2: التشغيل من المستودع' : 'Method 2: Run from Monorepo'}
+                    {t.startersPage.sections.method2}
                   </h4>
                   <div className="space-y-2 text-sm text-muted-foreground">
-                    <p>{isRTL ? 'جميع النماذج تشترك في نفس المكونات' : 'All starters share the same components'}</p>
+                    <p>{t.startersPage.howToUse.allShareComponents}</p>
                     <code className="block bg-muted p-2 rounded text-xs">
                       npm run dev
                     </code>
-                    <p>{isRTL ? 'انتقل إلى مسار النموذج' : 'Navigate to starter route'}</p>
+                    <p>{t.startersPage.howToUse.navigateToRoute}</p>
                     <p className="text-xs">
-                      {isRTL
-                        ? 'مثالي للتطوير والاختبار'
-                        : 'Perfect for development and testing'}
+                      {t.startersPage.howToUse.perfectForTesting}
                     </p>
                   </div>
                 </div>
@@ -428,16 +414,14 @@ export default function StartersPage() {
             <CardContent className="p-6">
               <div className="space-y-4">
                 <h3 className="font-semibold">
-                  {isRTL ? 'هل تبحث عن أمثلة بسيطة؟' : 'Looking for Simple Examples?'}
+                  {t.startersPage.lookingForExamples.title}
                 </h3>
                 <p className="text-sm text-muted-foreground">
-                  {isRTL
-                    ? 'تصفح أمثلة UI الخفيفة التي توضح كيفية استخدام المكونات والأنماط مع بيانات تجريبية - مثالية للتعلم السريع.'
-                    : 'Browse lightweight UI examples that show how to use components and patterns with mock data - perfect for quick learning.'}
+                  {t.startersPage.lookingForExamples.description}
                 </p>
                 <Link href="/examples">
                   <Badge className="cursor-pointer hover:bg-primary/90">
-                    {isRTL ? 'عرض الأمثلة البسيطة →' : 'View Simple Examples →'}
+                    {t.startersPage.lookingForExamples.viewExamples}
                   </Badge>
                 </Link>
               </div>

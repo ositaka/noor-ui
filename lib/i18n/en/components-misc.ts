@@ -58,5 +58,37 @@ alertComponent: {
         title: 'RTL Considerations',
         description: 'Alerts automatically support RTL layout with proper icon and text alignment.',
       },
-    }
+    },
+
+stepperComponent: {
+      title: 'Stepper',
+      description: 'Multi-step progress indicator for forms and wizards',
+      actions: {
+        previous: 'Previous',
+        next: 'Next',
+      },
+      variants: {
+        simpleVariant: 'Simple Variant',
+        simpleDesc: 'Compact style ideal for top navigation',
+        circlesVariant: 'Circles Variant',
+        circlesDesc: 'Large circles with scale effect',
+        verticalOrientation: 'Vertical Orientation',
+      },
+      useCases: {
+        registrationForms: 'Registration Forms',
+        checkoutProcess: 'Checkout Process',
+        setupWizards: 'Setup Wizards',
+        multiStepWorkflows: 'Multi-step Workflows',
+      },
+      features: {
+        threeVariants: 'Three visual variants (default, simple, circles)',
+        orientations: 'Horizontal and vertical orientations',
+        clickableSteps: 'Clickable steps with validation',
+        optionalSteps: 'Optional steps support',
+        visualStates: 'Visual states (complete, current, upcoming)',
+        bilingualSupport: 'Full bilingual support',
+        rtlSupport: 'RTL/LTR support',
+        accessibility: 'Accessibility features (ARIA)',
+      },
+    },
 }

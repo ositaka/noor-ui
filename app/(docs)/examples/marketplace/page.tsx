@@ -309,6 +309,7 @@ const generateProducts = (vendors: Vendor[]): Product[] => {
 export default function MarketplacePage() {
   const { direction, locale } = useDirection()
   const isRTL = direction === 'rtl'
+  const t = content[locale]
 
   const vendors = React.useMemo(() => generateVendors(), [])
   const products = React.useMemo(() => generateProducts(vendors), [vendors])
@@ -332,18 +333,18 @@ export default function MarketplacePage() {
   const featuredProducts = products.filter((p) => p.featured)
 
   const categories = [
-    { value: 'all', label: isRTL ? 'الكل' : 'All Categories' },
-    { value: 'electronics', label: isRTL ? 'إلكترونيات' : 'Electronics' },
-    { value: 'fashion', label: isRTL ? 'أزياء' : 'Fashion' },
-    { value: 'furniture', label: isRTL ? 'أثاث' : 'Furniture' },
-    { value: 'beauty', label: isRTL ? 'جمال' : 'Beauty' },
+    { value: 'all', label: t.marketplace.categories.all },
+    { value: 'electronics', label: t.marketplace.categories.electronics },
+    { value: 'fashion', label: t.marketplace.categories.fashion },
+    { value: 'furniture', label: t.marketplace.categories.furniture },
+    { value: 'beauty', label: t.marketplace.categories.beauty },
   ]
 
   const stats = [
-    { label: isRTL ? 'البائعون النشطون' : 'Active Vendors', value: '200+', icon: Store },
-    { label: isRTL ? 'المنتجات المتاحة' : 'Products Available', value: '50K+', icon: Package },
-    { label: isRTL ? 'العملاء السعداء' : 'Happy Customers', value: '100K+', icon: Users },
-    { label: isRTL ? 'الطلبات الشهرية' : 'Monthly Orders', value: '25K+', icon: TrendingUp },
+    { label: t.marketplace.stats.activeVendors, value: '200+', icon: Store },
+    { label: t.marketplace.stats.productsAvailable, value: '50K+', icon: Package },
+    { label: t.marketplace.stats.happyCustomers, value: '100K+', icon: Users },
+    { label: t.marketplace.stats.monthlyOrders, value: '25K+', icon: TrendingUp },
   ]
 
   return (
@@ -357,7 +358,7 @@ export default function MarketplacePage() {
                 <Home className="h-5 w-5 text-primary-foreground" />
               </div>
               <span className="font-bold text-xl hidden sm:inline">
-                {isRTL ? 'سوق الخليج' : 'GCC Marketplace'}
+                {t.marketplace.header.title}
               </span>
             </Link>
           </div>
@@ -373,7 +374,7 @@ export default function MarketplacePage() {
               </Link>
             </Button>
             <Button variant="outline" size="sm" asChild>
-              <Link href="/examples">{isRTL ? 'الأمثلة' : 'Examples'}</Link>
+              <Link href="/examples">{t.nav.examples}</Link>
             </Button>
           </div>
         </div>
@@ -386,18 +387,18 @@ export default function MarketplacePage() {
             <ol className="flex items-center gap-2 text-sm text-muted-foreground">
               <li>
                 <Link href="/" className="hover:text-foreground transition-colors">
-                  {isRTL ? 'الرئيسية' : 'Home'}
+                  {t.nav.home}
                 </Link>
               </li>
               <li>/</li>
               <li>
                 <Link href="/examples" className="hover:text-foreground transition-colors">
-                  {isRTL ? 'الأمثلة' : 'Examples'}
+                  {t.nav.examples}
                 </Link>
               </li>
               <li>/</li>
               <li className="text-foreground font-medium">
-                {isRTL ? 'السوق الإلكتروني' : 'Marketplace'}
+                {t.marketplace.breadcrumb.marketplace}
               </li>
             </ol>
           </nav>
@@ -414,19 +415,17 @@ export default function MarketplacePage() {
             </div>
             <div>
               <h1 className="text-4xl font-bold tracking-tight">
-                {isRTL ? 'سوق الخليج متعدد البائعين' : 'GCC Multi-Vendor Marketplace'}
+                {t.marketplace.hero.title}
               </h1>
               <div className="flex items-center gap-2 mt-2">
-                <Badge variant="default">{isRTL ? 'جاهز' : 'Ready'}</Badge>
+                <Badge variant="default">{t.marketplace.hero.ready}</Badge>
                 <Badge variant="outline">GCC</Badge>
-                <Badge variant="outline">{isRTL ? 'متعدد البائعين' : 'Multi-Vendor'}</Badge>
+                <Badge variant="outline">{t.marketplace.hero.multiVendor}</Badge>
               </div>
             </div>
           </div>
           <p className="text-xl text-muted-foreground max-w-3xl">
-            {isRTL
-              ? 'منصة سوق إلكتروني شاملة متعددة البائعين مصممة لأسواق دول مجلس التعاون الخليجي. تتميز بدعم ثنائي اللغة، تنسيق العملات، وتكامل مع وسائل الدفع المحلية.'
-              : 'Comprehensive multi-vendor marketplace platform designed for GCC markets. Features bilingual support, currency formatting, and integration with local payment methods.'}
+            {t.marketplace.hero.description}
           </p>
         </div>
 
@@ -453,11 +452,9 @@ export default function MarketplacePage() {
         <section className="mb-12">
           <Card>
             <CardHeader>
-              <CardTitle>{isRTL ? 'لماذا تختار منصتنا؟' : 'Why Choose Our Platform?'}</CardTitle>
+              <CardTitle>{t.marketplace.features.title}</CardTitle>
               <CardDescription>
-                {isRTL
-                  ? 'مصممة خصيصاً لاحتياجات السوق الخليجية'
-                  : 'Built specifically for GCC market needs'}
+                {t.marketplace.features.subtitle}
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -468,12 +465,10 @@ export default function MarketplacePage() {
                   </div>
                   <div>
                     <h3 className="font-semibold mb-1">
-                      {isRTL ? 'بائعون موثوقون' : 'Verified Vendors'}
+                      {t.marketplace.features.verifiedVendors}
                     </h3>
                     <p className="text-sm text-muted-foreground">
-                      {isRTL
-                        ? 'جميع البائعين تم التحقق منهم ومراجعتهم'
-                        : 'All vendors are verified and reviewed'}
+                      {t.marketplace.features.verifiedVendorsDesc}
                     </p>
                   </div>
                 </div>
@@ -484,12 +479,10 @@ export default function MarketplacePage() {
                   </div>
                   <div>
                     <h3 className="font-semibold mb-1">
-                      {isRTL ? 'شحن سريع' : 'Fast Shipping'}
+                      {t.marketplace.features.fastShipping}
                     </h3>
                     <p className="text-sm text-muted-foreground">
-                      {isRTL
-                        ? 'توصيل سريع في جميع أنحاء دول مجلس التعاون'
-                        : 'Quick delivery across GCC countries'}
+                      {t.marketplace.features.fastShippingDesc}
                     </p>
                   </div>
                 </div>
@@ -500,12 +493,10 @@ export default function MarketplacePage() {
                   </div>
                   <div>
                     <h3 className="font-semibold mb-1">
-                      {isRTL ? 'ضمان الجودة' : 'Quality Guarantee'}
+                      {t.marketplace.features.qualityGuarantee}
                     </h3>
                     <p className="text-sm text-muted-foreground">
-                      {isRTL
-                        ? 'منتجات عالية الجودة مع ضمان استرداد الأموال'
-                        : 'High-quality products with money-back guarantee'}
+                      {t.marketplace.features.qualityGuaranteeDesc}
                     </p>
                   </div>
                 </div>
@@ -518,10 +509,10 @@ export default function MarketplacePage() {
         <section className="mb-12">
           <div className="mb-6">
             <h2 className="text-2xl font-bold tracking-tight mb-2">
-              {isRTL ? 'البائعون المميزون' : 'Featured Vendors'}
+              {t.marketplace.vendors.featured}
             </h2>
             <p className="text-muted-foreground">
-              {isRTL ? 'تسوق من أفضل البائعين' : 'Shop from top-rated sellers'}
+              {t.marketplace.vendors.featuredDesc}
             </p>
           </div>
 
@@ -559,7 +550,7 @@ export default function MarketplacePage() {
                         <Package className="h-3 w-3" />
                         <span>
                           <ArabicNumber value={vendor.productsCount} />{' '}
-                          {isRTL ? 'منتج' : 'products'}
+                          {t.marketplace.vendors.products}
                         </span>
                       </div>
                     </div>
@@ -574,10 +565,10 @@ export default function MarketplacePage() {
         <section className="mb-12">
           <div className="mb-6">
             <h2 className="text-2xl font-bold tracking-tight mb-2">
-              {isRTL ? 'المنتجات المميزة' : 'Featured Products'}
+              {t.marketplace.products.featured}
             </h2>
             <p className="text-muted-foreground">
-              {isRTL ? 'أفضل العروض والمنتجات الجديدة' : 'Best deals and new arrivals'}
+              {t.marketplace.products.featuredDesc}
             </p>
           </div>
 
@@ -604,7 +595,7 @@ export default function MarketplacePage() {
                         className="absolute top-2 end-2 flex items-center gap-1"
                       >
                         <Truck className="h-3 w-3" />
-                        {isRTL ? 'شحن سريع' : 'Fast'}
+                        {t.marketplace.products.fast}
                       </Badge>
                     )}
                   </div>
@@ -650,10 +641,10 @@ export default function MarketplacePage() {
         <section className="mb-12">
           <div className="mb-6">
             <h2 className="text-2xl font-bold tracking-tight mb-2">
-              {isRTL ? 'جميع المنتجات' : 'All Products'}
+              {t.marketplace.products.all}
             </h2>
             <p className="text-muted-foreground">
-              {isRTL ? 'تصفح كامل الكتالوج' : 'Browse our complete catalog'}
+              {t.marketplace.products.allDesc}
             </p>
           </div>
 
@@ -662,7 +653,7 @@ export default function MarketplacePage() {
             <div className="flex-1">
               <Input
                 type="search"
-                placeholder={isRTL ? 'ابحث عن المنتجات...' : 'Search products...'}
+                placeholder={t.marketplace.products.searchPlaceholder}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full"
@@ -682,10 +673,10 @@ export default function MarketplacePage() {
             </Select>
             <Select value={selectedVendor} onValueChange={setSelectedVendor}>
               <SelectTrigger className="w-full sm:w-[200px]">
-                <SelectValue placeholder={isRTL ? 'جميع البائعين' : 'All Vendors'} />
+                <SelectValue placeholder={t.marketplace.filters.allVendors} />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="all">{isRTL ? 'جميع البائعين' : 'All Vendors'}</SelectItem>
+                <SelectItem value="all">{t.marketplace.filters.allVendors}</SelectItem>
                 {vendors.map((vendor) => (
                   <SelectItem key={vendor.id} value={vendor.id}>
                     {isRTL ? vendor.nameAr : vendor.name}
@@ -708,7 +699,7 @@ export default function MarketplacePage() {
                     {!product.inStock && (
                       <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
                         <Badge variant="secondary">
-                          {isRTL ? 'نفذت الكمية' : 'Out of Stock'}
+                          {t.marketplace.products.outOfStock}
                         </Badge>
                       </div>
                     )}
@@ -755,7 +746,7 @@ export default function MarketplacePage() {
           {filteredProducts.length === 0 && (
             <div className="text-center py-12">
               <p className="text-muted-foreground">
-                {isRTL ? 'لم يتم العثور على منتجات' : 'No products found'}
+                {t.marketplace.products.noProductsFound}
               </p>
             </div>
           )}

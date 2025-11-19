@@ -147,7 +147,18 @@ const withIconsCode = `import { User, CreditCard, Calendar } from 'lucide-react'
 export default function AccordionPage() {
   const { direction, locale } = useDirection()
   const isRTL = direction === 'rtl'
-  const t = content[locale]
+  const [mounted, setMounted] = React.useState(false)
+
+  React.useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  if (!mounted) {
+    return <div className="container py-12">Loading...</div>
+  }
+
+  const t = content[locale] || content.en
+  const accordionT = (content[locale]?.accordionComponent || content.en.accordionComponent) as any
 
   return (
     <div className="min-h-screen">
@@ -168,21 +179,21 @@ export default function AccordionPage() {
               </Link>
             </li>
             <li>/</li>
-            <li className="text-foreground font-medium">{t.accordionComponent.title}</li>
+            <li className="text-foreground font-medium">{accordionT.title}</li>
           </ol>
         </nav>
 
         {/* Page Header */}
         <div className="mb-12">
-          <h1 className="text-4xl font-bold tracking-tight mb-4">{t.accordionComponent.title}</h1>
+          <h1 className="text-4xl font-bold tracking-tight mb-4">{accordionT.title}</h1>
           <p className="text-xl text-muted-foreground max-w-3xl">
-            {t.accordionComponent.description}
+            {accordionT.description}
           </p>
         </div>
 
         {/* Preview */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.accordionComponent.preview}</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{accordionT.preview}</h2>
           <ComponentShowcase>
             <ComponentShowcase.Demo>
               <Accordion type="single" collapsible className="w-full max-w-md">
@@ -213,19 +224,19 @@ export default function AccordionPage() {
 
         {/* Installation */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-4">{t.accordionComponent.installation}</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-4">{accordionT.installation}</h2>
           <CodeBlock code={installCode} language="bash" />
         </section>
 
         {/* Usage */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-4">{t.accordionComponent.usage}</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-4">{accordionT.usage}</h2>
           <CodeBlock code={basicUsageCode} language="tsx" />
         </section>
 
         {/* Examples */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.accordionComponent.examples.title}</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{accordionT.examples.title}</h2>
 
           <div className="space-y-8">
             <div>
@@ -235,19 +246,19 @@ export default function AccordionPage() {
                   <AccordionItem value="item-1">
                     <AccordionTrigger>{t.componentPage.demoLabels.account}</AccordionTrigger>
                     <AccordionContent>
-                      {isRTL ? 'إدارة إعدادات وتفضيلات حسابك.' : 'Manage your account settings and preferences.'}
+                      {accordionT.examples.accountSettings}
                     </AccordionContent>
                   </AccordionItem>
                   <AccordionItem value="item-2">
                     <AccordionTrigger>{t.componentPage.demoLabels.security}</AccordionTrigger>
                     <AccordionContent>
-                      {isRTL ? 'تحديث كلمة المرور وإعدادات الأمان.' : 'Update your password and security settings.'}
+                      {accordionT.examples.updatePasswordSecurity}
                     </AccordionContent>
                   </AccordionItem>
                   <AccordionItem value="item-3">
                     <AccordionTrigger>{t.componentPage.demoLabels.notifications}</AccordionTrigger>
                     <AccordionContent>
-                      {isRTL ? 'تكوين تفضيلات الإشعارات الخاصة بك.' : 'Configure your notification preferences.'}
+                      {accordionT.examples.configureNotifications}
                     </AccordionContent>
                   </AccordionItem>
                 </Accordion>
@@ -267,7 +278,7 @@ export default function AccordionPage() {
                       </div>
                     </AccordionTrigger>
                     <AccordionContent>
-                      {isRTL ? 'تحديث معلومات ملفك الشخصي وصورتك.' : 'Update your profile information and photo.'}
+                      {accordionT.examples.updateProfileInfo}
                     </AccordionContent>
                   </AccordionItem>
                   <AccordionItem value="item-2">
@@ -278,7 +289,7 @@ export default function AccordionPage() {
                       </div>
                     </AccordionTrigger>
                     <AccordionContent>
-                      {isRTL ? 'إدارة معلومات الفواتير والاشتراكات الخاصة بك.' : 'Manage your billing information and subscriptions.'}
+                      {accordionT.examples.manageBillingSubscriptions}
                     </AccordionContent>
                   </AccordionItem>
                   <AccordionItem value="item-3">
@@ -289,7 +300,7 @@ export default function AccordionPage() {
                       </div>
                     </AccordionTrigger>
                     <AccordionContent>
-                      {isRTL ? 'عرض وإدارة الأحداث المجدولة الخاصة بك.' : 'View and manage your scheduled events.'}
+                      {accordionT.examples.viewManageScheduled}
                     </AccordionContent>
                   </AccordionItem>
                 </Accordion>
@@ -358,21 +369,21 @@ export default function AccordionPage() {
               <div>
                 <h3 className="font-semibold mb-2">{t.componentPage.accessibility.keyboardNavigation}</h3>
                 <ul className="list-disc list-inside text-sm text-muted-foreground space-y-1">
-                  <li><kbd className="px-1.5 py-0.5 rounded bg-muted">Tab</kbd> - {isRTL ? 'نقل التركيز إلى زر الأكورديون التالي' : 'Move focus to the next accordion trigger'}</li>
-                  <li><kbd className="px-1.5 py-0.5 rounded bg-muted">Space</kbd> - {isRTL ? 'تبديل عنصر الأكورديون المركز عليه' : 'Toggle the focused accordion item'}</li>
-                  <li><kbd className="px-1.5 py-0.5 rounded bg-muted">Enter</kbd> - {isRTL ? 'تبديل عنصر الأكورديون المركز عليه' : 'Toggle the focused accordion item'}</li>
-                  <li><kbd className="px-1.5 py-0.5 rounded bg-muted">Home</kbd> - {isRTL ? 'نقل التركيز إلى الزر الأول' : 'Move focus to the first trigger'}</li>
-                  <li><kbd className="px-1.5 py-0.5 rounded bg-muted">End</kbd> - {isRTL ? 'نقل التركيز إلى الزر الأخير' : 'Move focus to the last trigger'}</li>
+                  <li><kbd className="px-1.5 py-0.5 rounded bg-muted">Tab</kbd> - {accordionT.accessibility.moveFocusNextTrigger}</li>
+                  <li><kbd className="px-1.5 py-0.5 rounded bg-muted">Space</kbd> - {accordionT.accessibility.toggleFocusedItem}</li>
+                  <li><kbd className="px-1.5 py-0.5 rounded bg-muted">Enter</kbd> - {accordionT.accessibility.toggleFocusedItem}</li>
+                  <li><kbd className="px-1.5 py-0.5 rounded bg-muted">Home</kbd> - {accordionT.accessibility.moveFocusFirstTrigger}</li>
+                  <li><kbd className="px-1.5 py-0.5 rounded bg-muted">End</kbd> - {accordionT.accessibility.moveFocusLastTrigger}</li>
                 </ul>
               </div>
               <div>
                 <h3 className="font-semibold mb-2">{t.componentPage.accessibility.ariaAttributes}</h3>
                 <ul className="list-disc list-inside text-sm text-muted-foreground space-y-1">
-                  <li>role=&quot;button&quot; {isRTL ? 'على زر الأكورديون' : 'on the accordion trigger'}</li>
-                  <li>aria-expanded {isRTL ? 'يشير إلى ما إذا كان العنصر موسّعاً' : 'indicates whether the item is expanded'}</li>
-                  <li>aria-controls {isRTL ? 'يربط الزر بلوحة المحتوى الخاصة به' : 'links trigger to its content panel'}</li>
-                  <li>role=&quot;region&quot; {isRTL ? 'على لوحة المحتوى' : 'on the content panel'}</li>
-                  <li>aria-labelledby {isRTL ? 'يربط اللوحة بزرها' : 'links panel to its trigger'}</li>
+                  <li>role=&quot;button&quot; {accordionT.accessibility.onAccordionTrigger}</li>
+                  <li>aria-expanded {accordionT.accessibility.indicatesItemExpanded}</li>
+                  <li>aria-controls {accordionT.accessibility.linksTriggerToContent}</li>
+                  <li>role=&quot;region&quot; {accordionT.accessibility.onContentPanel}</li>
+                  <li>aria-labelledby {accordionT.accessibility.linksPanelToTrigger}</li>
                 </ul>
               </div>
             </CardContent>
@@ -385,13 +396,13 @@ export default function AccordionPage() {
           <Card>
             <CardContent className="p-6">
               <p className="text-sm text-muted-foreground mb-4">
-                {isRTL ? 'مكون الأكورديون متوافق تماماً مع RTL مع تكيف تلقائي للتخطيط.' : 'The Accordion component is fully RTL-compatible with automatic layout adaptation.'}
+                {accordionT.rtlSupport.fullyCompatible}
               </p>
               <ul className="list-disc list-inside text-sm text-muted-foreground space-y-1">
-                <li>{isRTL ? 'تحديد موضع أيقونة السهم بشكل صحيح في الجانب النهائي' : 'Chevron icon positions correctly on the end side'}</li>
-                <li>{isRTL ? 'تخطيط المحتوى يحترم اتجاه النص' : 'Content layout respects text direction'}</li>
-                <li>{isRTL ? 'الرسوم المتحركة للتوسيع/الطي تعمل بشكل طبيعي' : 'Expand/collapse animations work naturally'}</li>
-                <li>{isRTL ? 'مؤشرات التركيز تحدد موضعها بشكل صحيح' : 'Focus indicators position correctly'}</li>
+                <li>{accordionT.rtlSupport.chevronPosition}</li>
+                <li>{accordionT.rtlSupport.contentRespects}</li>
+                <li>{accordionT.rtlSupport.animationsWork}</li>
+                <li>{accordionT.rtlSupport.focusIndicators}</li>
               </ul>
             </CardContent>
           </Card>
@@ -406,7 +417,7 @@ export default function AccordionPage() {
                 <CardContent className="p-6">
                   <h3 className="font-semibold mb-2">{t.componentNames['tabs']}</h3>
                   <p className="text-sm text-muted-foreground">
-                    {isRTL ? 'التبديل بين طرق العرض المختلفة' : 'Switch between different views'}
+                    {accordionT.relatedComponents.tabsDesc}
                   </p>
                 </CardContent>
               </Card>
@@ -416,7 +427,7 @@ export default function AccordionPage() {
                 <CardContent className="p-6">
                   <h3 className="font-semibold mb-2">{t.componentNames['collapsible']}</h3>
                   <p className="text-sm text-muted-foreground">
-                    {isRTL ? 'توسيع وطي المحتوى' : 'Expand and collapse content'}
+                    {accordionT.relatedComponents.collapsibleDesc}
                   </p>
                 </CardContent>
               </Card>
