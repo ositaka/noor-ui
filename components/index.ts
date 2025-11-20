@@ -1,6 +1,10 @@
 // Noor UI - Main entry point
 // https://noorui.com
 
+// Providers (Export these first so users can wrap their apps)
+export { DirectionProvider, useDirection } from './providers/direction-provider'
+export { ClientProviders } from './providers/client-providers'
+
 // UI Components
 export { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from './ui/accordion'
 export { Alert, AlertTitle, AlertDescription } from './ui/alert'

@@ -3,10 +3,15 @@ import { defineConfig } from 'tsup'
 export default defineConfig({
   entry: ['components/index.ts'],
   format: ['cjs', 'esm'],
-  dts: false,
-  splitting: false,
+  dts: {
+    compilerOptions: {
+      incremental: false,
+    },
+  },
+  splitting: true,
   sourcemap: true,
   clean: true,
+  treeshake: true,
   external: [
     'react',
     'react-dom',
