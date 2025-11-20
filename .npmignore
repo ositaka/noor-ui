@@ -1,0 +1,41 @@
+# Documentation site files
+app/
+public/
+scripts/
+projects/
+docs/
+
+# Config files for docs site
+next.config.js
+next-env.d.ts
+tsconfig.json
+tailwind.config.ts
+postcss.config.js
+
+# Development
+.next/
+.git/
+.github/
+.vscode/
+node_modules/
+*.log
+.env*
+.DS_Store
+
+# Tests
+__tests__/
+*.test.ts
+*.test.tsx
+*.spec.ts
+*.spec.tsx
+vitest.config.ts
+coverage/
+
+# Build artifacts
+.turbo/
+dist/
+build/
+
+# Misc
+*.tsbuildinfo
+.eslintcache

@@ -1,16 +1,19 @@
 {
-  "name": "noorui",
-  "version": "0.1.0",
+  "name": "noorui-rtl",
+  "version": "0.2.1",
   "description": "Noor UI - Beautiful RTL-first React components for bilingual applications",
   "author": {
     "name": "Nuno Marques",
     "url": "https://ositaka.com",
     "email": "info@ositaka.com"
   },
-  "homepage": "https://ositaka.com",
+  "homepage": "https://noorui.com",
   "repository": {
     "type": "git",
     "url": "https://github.com/ositaka/noor-ui"
+  },
+  "bugs": {
+    "url": "https://github.com/ositaka/noor-ui/issues"
   },
   "keywords": [
     "react",
@@ -23,10 +26,38 @@
     "gcc",
     "nextjs",
     "tailwindcss",
-    "typescript"
+    "typescript",
+    "radix-ui",
+    "shadcn"
   ],
   "license": "MIT",
-  "private": true,
+  "main": "./components/index.ts",
+  "types": "./components/index.ts",
+  "files": [
+    "components/ui",
+    "components/providers",
+    "components/index.ts",
+    "lib/utils.ts",
+    "lib/tokens.ts",
+    "lib/arabic-numbers.ts",
+    "lib/i18n",
+    "hooks",
+    "styles",
+    "README.md",
+    "CHANGELOG.md",
+    "CONTRIBUTING.md",
+    "LICENSE"
+  ],
+  "peerDependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "next": "^14.0.0"
+  },
+  "peerDependenciesMeta": {
+    "next": {
+      "optional": true
+    }
+  },
   "scripts": {
     "dev": "next dev",
     "build": "npm run check:all && next build",
