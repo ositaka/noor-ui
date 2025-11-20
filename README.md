@@ -115,38 +115,68 @@ export default config
 }
 ```
 
-### 3. (Optional) Add theme switching
+### 3. Wrap your app with providers
 
-Wrap your app with `DesignSystemProvider` to enable theme switching between minimal, futuristic, cozy, and artistic themes:
+Add the theme and direction providers to enable all features:
 
 ```tsx
-import { DesignSystemProvider } from 'noorui-rtl'
+import { ThemeProvider } from 'next-themes'
+import { DirectionProvider, DesignSystemProvider } from 'noorui-rtl'
 
 export default function RootLayout({ children }) {
   return (
     <html>
       <body>
-        <DesignSystemProvider defaultTheme="cozy">
-          {children}
-        </DesignSystemProvider>
+        <ThemeProvider attribute="class" enableSystem={true}>
+          <DirectionProvider>
+            <DesignSystemProvider defaultTheme="cozy">
+              {children}
+            </DesignSystemProvider>
+          </DirectionProvider>
+        </ThemeProvider>
       </body>
     </html>
   )
 }
+```
 
-// Use the hook to switch themes
+**What each provider does:**
+- **`ThemeProvider`** (next-themes): Light/Dark mode with system preference support
+- **`DirectionProvider`**: RTL/LTR direction and locale switching (ar/en)
+- **`DesignSystemProvider`**: Design theme variants (minimal/futuristic/cozy/artistic)
+
+**Switching themes programmatically:**
+
+```tsx
 import { useDesignSystem } from 'noorui-rtl'
+import { useTheme } from 'next-themes'
+import { useDirection } from 'noorui-rtl'
 
-function ThemeSwitcher() {
+function Settings() {
   const { designTheme, setDesignTheme } = useDesignSystem()
+  const { theme, setTheme } = useTheme()
+  const { direction, setDirection } = useDirection()
 
   return (
-    <select value={designTheme} onChange={(e) => setDesignTheme(e.target.value)}>
-      <option value="minimal">Minimal</option>
-      <option value="futuristic">Futuristic</option>
-      <option value="cozy">Cozy</option>
-      <option value="artistic">Artistic</option>
-    </select>
+    <div>
+      {/* Design theme */}
+      <select value={designTheme} onChange={(e) => setDesignTheme(e.target.value)}>
+        <option value="minimal">Minimal</option>
+        <option value="futuristic">Futuristic</option>
+        <option value="cozy">Cozy</option>
+        <option value="artistic">Artistic</option>
+      </select>
+
+      {/* Light/Dark mode */}
+      <button onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}>
+        Toggle {theme === 'dark' ? 'Light' : 'Dark'} Mode
+      </button>
+
+      {/* Direction */}
+      <button onClick={() => setDirection(direction === 'rtl' ? 'ltr' : 'rtl')}>
+        Switch to {direction === 'rtl' ? 'LTR' : 'RTL'}
+      </button>
+    </div>
   )
 }
 ```

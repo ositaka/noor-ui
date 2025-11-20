@@ -190,19 +190,24 @@ export default function ThemesPage() {
             </CardHeader>
             <CardContent className="space-y-4">
               <div>
-                <Label className="text-sm font-medium mb-2 block">1. Import the CSS and Provider</Label>
+                <Label className="text-sm font-medium mb-2 block">1. Setup providers (complete example)</Label>
                 <CodeBlock
                   language="tsx"
                   code={`import 'noorui-rtl/dist/styles.css'
-import { DesignSystemProvider } from 'noorui-rtl'
+import { ThemeProvider } from 'next-themes'
+import { DirectionProvider, DesignSystemProvider } from 'noorui-rtl'
 
 export default function RootLayout({ children }) {
   return (
     <html>
       <body>
-        <DesignSystemProvider defaultTheme="cozy">
-          {children}
-        </DesignSystemProvider>
+        <ThemeProvider attribute="class" enableSystem={true}>
+          <DirectionProvider>
+            <DesignSystemProvider defaultTheme="cozy">
+              {children}
+            </DesignSystemProvider>
+          </DirectionProvider>
+        </ThemeProvider>
       </body>
     </html>
   )
@@ -214,24 +219,38 @@ export default function RootLayout({ children }) {
               </div>
 
               <div>
-                <Label className="text-sm font-medium mb-2 block">2. Use the hook to switch themes</Label>
+                <Label className="text-sm font-medium mb-2 block">2. Control all theme layers programmatically</Label>
                 <CodeBlock
                   language="tsx"
                   code={`import { useDesignSystem } from 'noorui-rtl'
+import { useTheme } from 'next-themes'
+import { useDirection } from 'noorui-rtl'
 
-function ThemeSwitcher() {
+function ThemeControls() {
   const { designTheme, setDesignTheme } = useDesignSystem()
+  const { theme, setTheme } = useTheme()
+  const { direction, setDirection } = useDirection()
 
   return (
-    <select
-      value={designTheme}
-      onChange={(e) => setDesignTheme(e.target.value)}
-    >
-      <option value="minimal">Minimal</option>
-      <option value="futuristic">Futuristic</option>
-      <option value="cozy">Cozy</option>
-      <option value="artistic">Artistic</option>
-    </select>
+    <div>
+      {/* Design theme (minimal/futuristic/cozy/artistic) */}
+      <select value={designTheme} onChange={(e) => setDesignTheme(e.target.value)}>
+        <option value="minimal">Minimal</option>
+        <option value="futuristic">Futuristic</option>
+        <option value="cozy">Cozy</option>
+        <option value="artistic">Artistic</option>
+      </select>
+
+      {/* Light/Dark mode */}
+      <button onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}>
+        {theme === 'dark' ? 'Light' : 'Dark'} Mode
+      </button>
+
+      {/* RTL/LTR direction */}
+      <button onClick={() => setDirection(direction === 'rtl' ? 'ltr' : 'rtl')}>
+        {direction === 'rtl' ? 'LTR' : 'RTL'}
+      </button>
+    </div>
   )
 }`}
                 />
