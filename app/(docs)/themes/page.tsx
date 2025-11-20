@@ -178,6 +178,72 @@ export default function ThemesPage() {
           </div>
         </section>
 
+        {/* Using Themes in Your App */}
+        <section className="mb-16">
+          <h2 className="text-2xl font-bold tracking-tight mb-6">Using Themes in Your App</h2>
+          <Card>
+            <CardHeader>
+              <CardTitle>Setup with npm package</CardTitle>
+              <CardDescription>
+                The noorui-rtl package includes DesignSystemProvider for easy theme switching
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div>
+                <Label className="text-sm font-medium mb-2 block">1. Import the CSS and Provider</Label>
+                <CodeBlock
+                  language="tsx"
+                  code={`import 'noorui-rtl/dist/styles.css'
+import { DesignSystemProvider } from 'noorui-rtl'
+
+export default function RootLayout({ children }) {
+  return (
+    <html>
+      <body>
+        <DesignSystemProvider>
+          {children}
+        </DesignSystemProvider>
+      </body>
+    </html>
+  )
+}`}
+                />
+              </div>
+
+              <div>
+                <Label className="text-sm font-medium mb-2 block">2. Use the hook to switch themes</Label>
+                <CodeBlock
+                  language="tsx"
+                  code={`import { useDesignSystem } from 'noorui-rtl'
+
+function ThemeSwitcher() {
+  const { designTheme, setDesignTheme } = useDesignSystem()
+
+  return (
+    <select
+      value={designTheme}
+      onChange={(e) => setDesignTheme(e.target.value)}
+    >
+      <option value="minimal">Minimal</option>
+      <option value="futuristic">Futuristic</option>
+      <option value="cozy">Cozy</option>
+      <option value="artistic">Artistic</option>
+    </select>
+  )
+}`}
+                />
+              </div>
+
+              <div className="flex items-center gap-2 p-4 bg-green-50 dark:bg-green-950/20 rounded-lg border border-green-500/50">
+                <Check className="h-5 w-5 text-green-600 dark:text-green-400 flex-shrink-0" />
+                <p className="text-sm">
+                  All 4 themes with light/dark mode work out of the box! The pre-compiled CSS includes all theme variants.
+                </p>
+              </div>
+            </CardContent>
+          </Card>
+        </section>
+
         {/* Theme Details */}
         <section className="mb-16">
           <h2 className="text-2xl font-bold tracking-tight mb-6">{t.themesPage.themeSpecs}</h2>

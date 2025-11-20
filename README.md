@@ -115,6 +115,42 @@ export default config
 }
 ```
 
+### 3. (Optional) Add theme switching
+
+Wrap your app with `DesignSystemProvider` to enable theme switching between minimal, futuristic, cozy, and artistic themes:
+
+```tsx
+import { DesignSystemProvider } from 'noorui-rtl'
+
+export default function RootLayout({ children }) {
+  return (
+    <html>
+      <body>
+        <DesignSystemProvider>
+          {children}
+        </DesignSystemProvider>
+      </body>
+    </html>
+  )
+}
+
+// Use the hook to switch themes
+import { useDesignSystem } from 'noorui-rtl'
+
+function ThemeSwitcher() {
+  const { designTheme, setDesignTheme } = useDesignSystem()
+
+  return (
+    <select value={designTheme} onChange={(e) => setDesignTheme(e.target.value)}>
+      <option value="minimal">Minimal</option>
+      <option value="futuristic">Futuristic</option>
+      <option value="cozy">Cozy</option>
+      <option value="artistic">Artistic</option>
+    </select>
+  )
+}
+```
+
 ### 4. Start using components
 
 ```tsx
