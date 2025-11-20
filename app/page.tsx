@@ -73,7 +73,7 @@ export default function HomePage() {
                 </div>
                 <div className="flex gap-2">
                   <span className="inline-flex items-center rounded-md bg-primary/10 px-2 py-1 text-xs font-medium text-primary">
-                    v0.2.5
+                    v0.3.0
                   </span>
                   <span className="inline-flex items-center rounded-md bg-green-500/10 px-2 py-1 text-xs font-medium text-green-600 dark:text-green-400">
                     Published
