@@ -11,12 +11,17 @@ interface DesignSystemContextType {
 
 const DesignSystemContext = React.createContext<DesignSystemContextType | undefined>(undefined)
 
-function DesignSystemProviderInner({ children }: { children: React.ReactNode }) {
+interface DesignSystemProviderProps {
+  children: React.ReactNode
+  defaultTheme?: Theme
+}
+
+function DesignSystemProviderInner({ children, defaultTheme = 'minimal' }: DesignSystemProviderProps) {
   const searchParams = useSearchParams()
   const pathname = usePathname()
   const router = useRouter()
 
-  const [designTheme, setDesignThemeState] = React.useState<Theme>('minimal')
+  const [designTheme, setDesignThemeState] = React.useState<Theme>(defaultTheme)
 
   // Initialize from URL param or localStorage
   React.useEffect(() => {
@@ -60,10 +65,10 @@ function DesignSystemProviderInner({ children }: { children: React.ReactNode }) 
   )
 }
 
-export function DesignSystemProvider({ children }: { children: React.ReactNode }) {
+export function DesignSystemProvider({ children, defaultTheme }: DesignSystemProviderProps) {
   return (
     <React.Suspense fallback={children}>
-      <DesignSystemProviderInner>{children}</DesignSystemProviderInner>
+      <DesignSystemProviderInner defaultTheme={defaultTheme}>{children}</DesignSystemProviderInner>
     </React.Suspense>
   )
 }
