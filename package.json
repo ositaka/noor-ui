@@ -31,27 +31,19 @@
     "shadcn"
   ],
   "license": "MIT",
-  "main": "./components/index.ts",
-  "types": "./components/index.ts",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
   "files": [
-    "components/ui",
-    "components/providers",
-    "components/index.ts",
-    "lib/utils.ts",
-    "lib/tokens.ts",
-    "lib/arabic-numbers.ts",
-    "lib/i18n",
-    "hooks",
-    "styles",
+    "dist",
     "README.md",
     "CHANGELOG.md",
     "CONTRIBUTING.md",
     "LICENSE"
   ],
   "peerDependencies": {
+    "next": "^14.0.0",
     "react": "^18.0.0",
-    "react-dom": "^18.0.0",
-    "next": "^14.0.0"
+    "react-dom": "^18.0.0"
   },
   "peerDependenciesMeta": {
     "next": {
@@ -62,6 +54,8 @@
     "dev": "next dev",
     "build": "npm run check:all && next build",
     "build:skip-checks": "next build",
+    "build:package": "tsup",
+    "prepublishOnly": "npm run build:package",
     "start": "next start",
     "lint": "next lint",
     "type-check": "tsc --noEmit",
@@ -108,10 +102,10 @@
     "clsx": "^2.1.0",
     "cmdk": "^1.1.1",
     "lucide-react": "^0.344.0",
-    "next": "^14.2.0",
+    "next": "^14.0.0",
     "next-themes": "^0.2.1",
-    "react": "^18.3.0",
-    "react-dom": "^18.3.0",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
     "react-syntax-highlighter": "^15.5.0",
     "tailwind-merge": "^2.2.0"
   },
@@ -133,6 +127,7 @@
     "postcss": "^8.5.6",
     "tailwindcss": "^3.4.0",
     "tailwindcss-logical": "^3.0.0",
+    "tsup": "^8.5.1",
     "typescript": "^5.3.0",
     "vitest": "^4.0.8"
   }
