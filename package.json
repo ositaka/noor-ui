@@ -36,6 +36,7 @@
   "types": "./dist/index.d.ts",
   "files": [
     "dist",
+    "styles",
     "README.md",
     "CHANGELOG.md",
     "CONTRIBUTING.md",
