@@ -1,17 +1,17 @@
 import * as React from 'react'
 import { cva, type VariantProps } from 'class-variance-authority'
-import { cn } from '@/lib/utils'
-import { Progress } from '@/components/ui/progress'
-import { Badge } from '@/components/ui/badge'
+import { cn } from '../../lib/utils'
+import { Progress } from './progress'
+import { Badge } from './badge'
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from '@/components/ui/tooltip'
+} from './tooltip'
 import { Info, AlertTriangle } from 'lucide-react'
-import { useDirection } from '@/components/providers/direction-provider'
-import { content } from '@/lib/i18n'
+import { useDirection } from '../providers/direction-provider'
+import { content } from '../../lib/i18n'
 
 const tokenCounterVariants = cva(
   'rounded-lg border p-4 space-y-3',

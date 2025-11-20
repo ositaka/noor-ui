@@ -2,9 +2,9 @@
 
 import * as React from 'react'
 import { Handle, Position, type NodeProps, type Node } from '@xyflow/react'
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
-import { cn } from '@/lib/utils'
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from './card'
+import { Badge } from './badge'
+import { cn } from '../../lib/utils'
 import { LucideIcon } from 'lucide-react'
 
 export interface WorkflowNodeData extends Record<string, unknown> {

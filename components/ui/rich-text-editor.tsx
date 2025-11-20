@@ -25,8 +25,8 @@ import {
   AlignCenter,
   AlignRight,
 } from 'lucide-react'
-import { cn } from '@/lib/utils'
-import { useDirection } from '@/components/providers/direction-provider'
+import { cn } from '../../lib/utils'
+import { useDirection } from '../providers/direction-provider'
 
 export interface RichTextEditorProps {
   content?: string

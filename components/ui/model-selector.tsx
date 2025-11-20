@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { cn } from '@/lib/utils'
+import { cn } from '../../lib/utils'
 import {
   Select,
   SelectContent,
@@ -8,11 +8,11 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select'
-import { Badge } from '@/components/ui/badge'
+} from './select'
+import { Badge } from './badge'
 import { Zap, Brain, Sparkles, Bot, Star } from 'lucide-react'
-import { useDirection } from '@/components/providers/direction-provider'
-import { content } from '@/lib/i18n'
+import { useDirection } from '../providers/direction-provider'
+import { content } from '../../lib/i18n'
 
 export interface AIModel {
   id: string

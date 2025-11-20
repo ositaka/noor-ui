@@ -1,7 +1,7 @@
 'use client'
 
 import * as React from 'react'
-import { type Direction } from '@/lib/tokens'
+import { type Direction } from '../../lib/tokens'
 
 interface DirectionContextType {
   direction: Direction

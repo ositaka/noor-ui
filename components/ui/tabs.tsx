@@ -3,8 +3,8 @@
 import * as React from 'react'
 import * as TabsPrimitive from '@radix-ui/react-tabs'
 
-import { cn } from '@/lib/utils'
-import { useDirection } from '@/components/providers/direction-provider'
+import { cn } from '../../lib/utils'
+import { useDirection } from '../providers/direction-provider'
 
 const TabsRoot = React.forwardRef<
   React.ElementRef<typeof TabsPrimitive.Root>,

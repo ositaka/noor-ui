@@ -1,16 +1,16 @@
 import * as React from 'react'
 import { cva, type VariantProps } from 'class-variance-authority'
-import { cn } from '@/lib/utils'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { ScrollArea } from '@/components/ui/scroll-area'
+import { cn } from '../../lib/utils'
+import { Button } from './button'
+import { Input } from './input'
+import { ScrollArea } from './scroll-area'
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu'
+} from './dropdown-menu'
 import {
   Plus,
   Search,
@@ -21,8 +21,8 @@ import {
   Share2,
   Clock,
 } from 'lucide-react'
-import { useDirection } from '@/components/providers/direction-provider'
-import { content } from '@/lib/i18n'
+import { useDirection } from '../providers/direction-provider'
+import { content } from '../../lib/i18n'
 
 const conversationHistoryVariants = cva(
   'flex flex-col h-full bg-background',

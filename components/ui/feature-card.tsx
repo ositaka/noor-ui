@@ -1,7 +1,7 @@
 import * as React from 'react'
 import Link from 'next/link'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { cn } from '@/lib/utils'
+import { Card, CardContent, CardHeader, CardTitle } from './card'
+import { cn } from '../../lib/utils'
 import type { LucideIcon } from 'lucide-react'
 
 export interface FeatureCardProps {

@@ -1,6 +1,6 @@
 import * as React from 'react'
-import { cn } from '@/lib/utils'
-import { Button } from '@/components/ui/button'
+import { cn } from '../../lib/utils'
+import { Button } from './button'
 import {
   Copy,
   RotateCw,
@@ -11,8 +11,8 @@ import {
   ThumbsDown,
   Check,
 } from 'lucide-react'
-import { useDirection } from '@/components/providers/direction-provider'
-import { content } from '@/lib/i18n'
+import { useDirection } from '../providers/direction-provider'
+import { content } from '../../lib/i18n'
 
 export interface MessageActionsProps extends React.HTMLAttributes<HTMLDivElement> {
   /**

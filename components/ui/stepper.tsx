@@ -1,10 +1,10 @@
 'use client'
 
 import * as React from 'react'
-import { cn } from '@/lib/utils'
+import { cn } from '../../lib/utils'
 import { Check } from 'lucide-react'
-import { useDirection } from '@/components/providers/direction-provider'
-import { content } from '@/lib/i18n'
+import { useDirection } from '../providers/direction-provider'
+import { content } from '../../lib/i18n'
 
 export interface Step {
   id: string

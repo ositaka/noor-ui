@@ -2,7 +2,7 @@
 
 import * as React from 'react'
 import { type NodeProps, type Node } from '@xyflow/react'
-import { WorkflowNode, type WorkflowNodeData } from '@/components/ui/workflow-node'
+import { WorkflowNode, type WorkflowNodeData } from './workflow-node'
 import {
   Play,
   Zap,

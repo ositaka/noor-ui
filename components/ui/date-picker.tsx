@@ -2,12 +2,12 @@
 
 import * as React from 'react'
 import { Calendar as CalendarIcon } from 'lucide-react'
-import { cn } from '@/lib/utils'
-import { Button } from '@/components/ui/button'
-import { Calendar } from '@/components/ui/calendar'
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
-import { useDirection } from '@/components/providers/direction-provider'
-import { content } from '@/lib/i18n'
+import { cn } from '../../lib/utils'
+import { Button } from './button'
+import { Calendar } from './calendar'
+import { Popover, PopoverContent, PopoverTrigger } from './popover'
+import { useDirection } from '../providers/direction-provider'
+import { content } from '../../lib/i18n'
 
 export interface DatePickerProps {
   date?: Date

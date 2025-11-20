@@ -1,8 +1,8 @@
 'use client'
 
 import * as React from 'react'
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { useDirection } from '@/components/providers/direction-provider'
+import { Avatar, AvatarFallback, AvatarImage } from './avatar'
+import { useDirection } from '../providers/direction-provider'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,8 +11,8 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu'
-import { cn } from '@/lib/utils'
+} from './dropdown-menu'
+import { cn } from '../../lib/utils'
 import { User, Settings, LogOut, CreditCard, Users, HelpCircle } from 'lucide-react'
 
 export interface UserMenuProps {

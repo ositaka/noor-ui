@@ -1,9 +1,9 @@
 import * as React from 'react'
-import { cn } from '@/lib/utils'
-import { Button } from '@/components/ui/button'
+import { cn } from '../../lib/utils'
+import { Button } from './button'
 import { Send, Paperclip, Mic, Loader2 } from 'lucide-react'
-import { useDirection } from '@/components/providers/direction-provider'
-import { content } from '@/lib/i18n'
+import { useDirection } from '../providers/direction-provider'
+import { content } from '../../lib/i18n'
 
 export interface PromptInputProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   /**

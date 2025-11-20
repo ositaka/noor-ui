@@ -1,9 +1,9 @@
 'use client'
 
 import * as React from 'react'
-import { cn } from '@/lib/utils'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
+import { cn } from '../../lib/utils'
+import { Button } from './button'
+import { Input } from './input'
 import { Minus, Plus } from 'lucide-react'
 
 export interface NumberInputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type' | 'onChange'> {

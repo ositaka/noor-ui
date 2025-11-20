@@ -1,8 +1,8 @@
 import * as React from 'react'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
-import { cn } from '@/lib/utils'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './card'
+import { Badge } from './badge'
+import { Button } from './button'
+import { cn } from '../../lib/utils'
 import { LucideIcon } from 'lucide-react'
 
 export interface ListingCardBadge {

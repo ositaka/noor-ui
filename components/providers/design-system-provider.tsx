@@ -2,7 +2,7 @@
 
 import * as React from 'react'
 import { useSearchParams, usePathname, useRouter } from 'next/navigation'
-import { type Theme } from '@/lib/tokens'
+import { type Theme } from '../../lib/tokens'
 
 interface DesignSystemContextType {
   designTheme: Theme

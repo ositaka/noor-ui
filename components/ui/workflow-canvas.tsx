@@ -19,7 +19,7 @@ import {
   BackgroundVariant,
 } from '@xyflow/react'
 import '@xyflow/react/dist/style.css'
-import { cn } from '@/lib/utils'
+import { cn } from '../../lib/utils'
 
 export interface WorkflowCanvasProps {
   /**

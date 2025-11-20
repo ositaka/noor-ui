@@ -2,7 +2,7 @@
 
 import * as React from 'react'
 import { ChevronRight } from 'lucide-react'
-import { cn } from '@/lib/utils'
+import { cn } from '../../lib/utils'
 
 const Breadcrumb = React.forwardRef<
   HTMLElement,

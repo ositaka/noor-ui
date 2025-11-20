@@ -1,11 +1,11 @@
 'use client'
 
 import * as React from 'react'
-import { cn } from '@/lib/utils'
-import { Button } from '@/components/ui/button'
+import { cn } from '../../lib/utils'
+import { Button } from './button'
 import { Upload, X, File, Image as ImageIcon, FileText, Film, Music } from 'lucide-react'
-import { Card } from '@/components/ui/card'
-import { useDirection } from '@/components/providers/direction-provider'
+import { Card } from './card'
+import { useDirection } from '../providers/direction-provider'
 
 export interface FileUploadProps {
   onUpload?: (files: File[]) => void

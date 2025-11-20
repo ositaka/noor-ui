@@ -1,14 +1,14 @@
 'use client'
 
 import * as React from 'react'
-import { cn } from '@/lib/utils'
-import { Button } from '@/components/ui/button'
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
-import { ScrollArea } from '@/components/ui/scroll-area'
-import { Separator } from '@/components/ui/separator'
-import { Badge } from '@/components/ui/badge'
+import { cn } from '../../lib/utils'
+import { Button } from './button'
+import { Popover, PopoverContent, PopoverTrigger } from './popover'
+import { ScrollArea } from './scroll-area'
+import { Separator } from './separator'
+import { Badge } from './badge'
 import { Bell, Check, Trash2, X } from 'lucide-react'
-import { useDirection } from '@/components/providers/direction-provider'
+import { useDirection } from '../providers/direction-provider'
 
 export interface Notification {
   id: string

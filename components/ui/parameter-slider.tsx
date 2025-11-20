@@ -1,18 +1,18 @@
 import * as React from 'react'
-import { cn } from '@/lib/utils'
-import { Slider } from '@/components/ui/slider'
-import { Label } from '@/components/ui/label'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
+import { cn } from '../../lib/utils'
+import { Slider } from './slider'
+import { Label } from './label'
+import { Button } from './button'
+import { Badge } from './badge'
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from '@/components/ui/tooltip'
+} from './tooltip'
 import { Info } from 'lucide-react'
-import { useDirection } from '@/components/providers/direction-provider'
-import { content } from '@/lib/i18n'
+import { useDirection } from '../providers/direction-provider'
+import { content } from '../../lib/i18n'
 
 export interface ParameterPreset {
   label: string

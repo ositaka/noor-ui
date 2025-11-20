@@ -1,12 +1,12 @@
 import * as React from 'react'
 import { cva, type VariantProps } from 'class-variance-authority'
-import { cn } from '@/lib/utils'
-import { Card } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
+import { cn } from '../../lib/utils'
+import { Card } from './card'
+import { Badge } from './badge'
+import { Button } from './button'
 import { Clock, MapPin, Bell, Volume2, X } from 'lucide-react'
-import { useDirection } from '@/components/providers/direction-provider'
-import { content } from '@/lib/i18n'
+import { useDirection } from '../providers/direction-provider'
+import { content } from '../../lib/i18n'
 
 // ============================================================================
 // Types

@@ -1,8 +1,8 @@
 import * as React from 'react'
 import { cva, type VariantProps } from 'class-variance-authority'
-import { cn } from '@/lib/utils'
-import { useDirection } from '@/components/providers/direction-provider'
-import { content } from '@/lib/i18n'
+import { cn } from '../../lib/utils'
+import { useDirection } from '../providers/direction-provider'
+import { content } from '../../lib/i18n'
 
 const thinkingIndicatorVariants = cva(
   'inline-flex items-center gap-1',

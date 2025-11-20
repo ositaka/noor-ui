@@ -2,14 +2,14 @@
 
 import * as React from 'react'
 import { Clock } from 'lucide-react'
-import { cn } from '@/lib/utils'
-import { Button } from '@/components/ui/button'
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
-import { useDirection } from '@/components/providers/direction-provider'
-import { NumberInput } from '@/components/ui/number-input'
-import { Label } from '@/components/ui/label'
-import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { content } from '@/lib/i18n'
+import { cn } from '../../lib/utils'
+import { Button } from './button'
+import { Popover, PopoverContent, PopoverTrigger } from './popover'
+import { useDirection } from '../providers/direction-provider'
+import { NumberInput } from './number-input'
+import { Label } from './label'
+import { Tabs, TabsList, TabsTrigger } from './tabs'
+import { content } from '../../lib/i18n'
 
 export interface Time {
   hours: number

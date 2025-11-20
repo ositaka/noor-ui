@@ -1,10 +1,10 @@
 import * as React from 'react'
 import { cva, type VariantProps } from 'class-variance-authority'
-import { cn } from '@/lib/utils'
+import { cn } from '../../lib/utils'
 import { Calendar, Sparkles } from 'lucide-react'
-import { Badge } from '@/components/ui/badge'
-import { useDirection } from '@/components/providers/direction-provider'
-import { content } from '@/lib/i18n'
+import { Badge } from './badge'
+import { useDirection } from '../providers/direction-provider'
+import { content } from '../../lib/i18n'
 
 // ============================================================================
 // Islamic Holidays Database

@@ -2,10 +2,10 @@
 
 import * as React from 'react'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
-import { cn } from '@/lib/utils'
-import { Button } from '@/components/ui/button'
-import { useDirection } from '@/components/providers/direction-provider'
-import { content } from '@/lib/i18n'
+import { cn } from '../../lib/utils'
+import { Button } from './button'
+import { useDirection } from '../providers/direction-provider'
+import { content } from '../../lib/i18n'
 
 // ============================================================================
 // Types

@@ -1,11 +1,11 @@
 import * as React from 'react'
 import { cva, type VariantProps } from 'class-variance-authority'
-import { cn } from '@/lib/utils'
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { Button } from '@/components/ui/button'
+import { cn } from '../../lib/utils'
+import { Avatar, AvatarFallback, AvatarImage } from './avatar'
+import { Button } from './button'
 import { Copy, RotateCw, User, Bot, Settings } from 'lucide-react'
-import { useDirection } from '@/components/providers/direction-provider'
-import { content as i18nContent } from '@/lib/i18n'
+import { useDirection } from '../providers/direction-provider'
+import { content as i18nContent } from '../../lib/i18n'
 
 const chatMessageVariants = cva(
   'group relative flex gap-3 rounded-lg p-4 transition-colors',

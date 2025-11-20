@@ -1,17 +1,17 @@
 'use client'
 
 import * as React from 'react'
-import { cn } from '@/lib/utils'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { Separator } from '@/components/ui/separator'
-import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
-import { formatSAR, formatNumber } from '@/lib/arabic-numbers'
+import { cn } from '../../lib/utils'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './card'
+import { Input } from './input'
+import { Label } from './label'
+import { Separator } from './separator'
+import { Badge } from './badge'
+import { Button } from './button'
+import { formatSAR, formatNumber } from '../../lib/arabic-numbers'
 import { AlertCircle, Info, Download, Share2, Printer, Copy, Check } from 'lucide-react'
-import { useDirection } from '@/components/providers/direction-provider'
-import { content } from '@/lib/i18n'
+import { useDirection } from '../providers/direction-provider'
+import { content } from '../../lib/i18n'
 
 // ============================================================================
 // Types

@@ -2,7 +2,7 @@
 
 import * as React from 'react'
 import { ChevronDown, ChevronUp, ChevronsUpDown, Search, X } from 'lucide-react'
-import { cn } from '@/lib/utils'
+import { cn } from '../../lib/utils'
 import {
   Table,
   TableBody,
@@ -10,12 +10,12 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '@/components/ui/table'
-import { Skeleton } from '@/components/ui/skeleton'
-import { Input } from '@/components/ui/input'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { Card, CardContent } from '@/components/ui/card'
+} from './table'
+import { Skeleton } from './skeleton'
+import { Input } from './input'
+import { Button } from './button'
+import { Badge } from './badge'
+import { Card, CardContent } from './card'
 
 export type SortDirection = 'asc' | 'desc' | null
 
