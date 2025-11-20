@@ -29,7 +29,7 @@ const dependenciesCode = `{
   }
 }`
 
-const verifyInstallCode = `import { Button } from 'noorui-rtl/components'
+const verifyInstallCode = `import { Button } from 'noorui-rtl'
 
 export default function TestPage() {
   return <Button>Test Installation</Button>

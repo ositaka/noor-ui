@@ -25,6 +25,7 @@ export function SiteFooter() {
       license: 'License',
       community: 'Community',
       github: 'GitHub',
+      npmPackage: 'npm Package',
       discord: 'Discord',
       twitter: 'Twitter',
       createdBy: 'Created by',
@@ -48,6 +49,7 @@ export function SiteFooter() {
       license: 'الترخيص',
       community: 'المجتمع',
       github: 'GitHub',
+      npmPackage: 'حزمة npm',
       discord: 'Discord',
       twitter: 'Twitter',
       createdBy: 'من تطوير',
@@ -154,6 +156,16 @@ export function SiteFooter() {
                 <span className="cursor-default">
                   {content.github}
                 </span>
+              </li>
+              <li>
+                <a
+                  href="https://www.npmjs.com/package/noorui-rtl"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-foreground transition-colors"
+                >
+                  {content.npmPackage}
+                </a>
               </li>
               <li>
                 <span className="cursor-default">

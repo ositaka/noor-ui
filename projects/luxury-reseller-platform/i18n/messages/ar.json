@@ -1,0 +1,75 @@
+{
+  "common": {
+    "shopNow": "تسوق الآن",
+    "viewAll": "عرض الكل",
+    "addToCart": "أضف إلى السلة",
+    "buyNow": "اشتر الآن",
+    "search": "بحث",
+    "cart": "السلة",
+    "account": "الحساب",
+    "signIn": "تسجيل الدخول",
+    "signOut": "تسجيل الخروج",
+    "loading": "جاري التحميل...",
+    "error": "خطأ",
+    "success": "نجح",
+    "currency": {
+      "AED": "درهم",
+      "USD": "دولار",
+      "IRR": "ريال"
+    }
+  },
+  "navigation": {
+    "home": "الرئيسية",
+    "shop": "المتجر",
+    "categories": "الفئات",
+    "about": "من نحن",
+    "contact": "اتصل بنا",
+    "bag": "حقائب",
+    "watch": "ساعات",
+    "jewelry": "مجوهرات",
+    "accessories": "إكسسوارات"
+  },
+  "home": {
+    "hero": {
+      "title": "الفخامة المعاد تعريفها",
+      "subtitle": "قطع مصممة من أفضل البوتيكات في دبي",
+      "description": "اختبر قمة الأناقة مع مجموعتنا الحصرية"
+    },
+    "featured": {
+      "title": "المجموعة المميزة",
+      "subtitle": "عناصر فاخرة مختارة للمرأة الراقية"
+    },
+    "categories": {
+      "title": "تسوق حسب الفئة",
+      "subtitle": "اكتشف أسلوبك"
+    }
+  },
+  "product": {
+    "details": "التفاصيل",
+    "specifications": "المواصفات",
+    "description": "الوصف",
+    "price": "السعر",
+    "inStock": "متوفر",
+    "outOfStock": "غير متوفر",
+    "preOrder": "طلب مسبق",
+    "sku": "رمز المنتج",
+    "weight": "الوزن",
+    "dimensions": "الأبعاد"
+  },
+  "cart": {
+    "title": "سلة التسوق",
+    "empty": "سلة التسوق فارغة",
+    "subtotal": "المجموع الفرعي",
+    "shipping": "الشحن",
+    "total": "المجموع الكلي",
+    "checkout": "إتمام الطلب",
+    "continueShopping": "متابعة التسوق"
+  },
+  "footer": {
+    "about": "من نحن",
+    "contact": "اتصل",
+    "privacy": "سياسة الخصوصية",
+    "terms": "شروط الخدمة",
+    "copyright": "جميع الحقوق محفوظة"
+  }
+}

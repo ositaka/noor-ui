@@ -10,6 +10,7 @@ import { useDirection } from '@/components/providers/direction-provider'
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
+import { Badge } from '@/components/ui/badge'
 import { content } from '@/lib/i18n'
 
 export function SiteHeader() {
@@ -20,11 +21,21 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center justify-between">
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-3">
           <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
             <Sunrise className="h-6 w-6 text-primary" />
             <span className="text-xl font-bold">Noor UI</span>
           </Link>
+          <a
+            href="https://www.npmjs.com/package/noorui-rtl"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden sm:block"
+          >
+            <Badge variant="secondary" className="text-xs">
+              npm
+            </Badge>
+          </a>
         </div>
         <nav className="hidden lg:flex items-center gap-6" aria-label="Main navigation">
           <Link

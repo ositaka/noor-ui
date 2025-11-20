@@ -60,6 +60,66 @@ export default function HomePage() {
           </div>
         </section>
 
+        {/* Installation Section */}
+        <section className="container py-16">
+          <div className="mx-auto max-w-4xl">
+            <div className="rounded-lg border bg-card p-8 md:p-12">
+              <div className="flex items-start justify-between gap-4 mb-6">
+                <div>
+                  <h2 className="text-2xl font-bold mb-2">Quick Start</h2>
+                  <p className="text-muted-foreground">
+                    Install via npm and start building in minutes
+                  </p>
+                </div>
+                <div className="flex gap-2">
+                  <span className="inline-flex items-center rounded-md bg-primary/10 px-2 py-1 text-xs font-medium text-primary">
+                    v0.2.2
+                  </span>
+                  <span className="inline-flex items-center rounded-md bg-green-500/10 px-2 py-1 text-xs font-medium text-green-600 dark:text-green-400">
+                    Published
+                  </span>
+                </div>
+              </div>
+
+              <div className="space-y-4">
+                <div className="rounded-md bg-muted p-4 font-mono text-sm">
+                  <span className="text-muted-foreground">$ </span>
+                  <span className="text-foreground">npm install noorui-rtl</span>
+                </div>
+
+                <div className="rounded-md bg-muted p-4">
+                  <pre className="font-mono text-sm overflow-x-auto">
+                    <code className="text-foreground">{`import { Button, Card, Input } from 'noorui-rtl'
+
+export default function App() {
+  return (
+    <Card>
+      <Button>Get Started</Button>
+    </Card>
+  )
+}`}</code>
+                  </pre>
+                </div>
+
+                <div className="flex gap-2 pt-2">
+                  <Button variant="outline" size="sm" asChild>
+                    <Link href="/getting-started">
+                      Installation Guide
+                      <ArrowRight className="ms-2 h-3 w-3 rtl:rotate-180" />
+                    </Link>
+                  </Button>
+                  <Button variant="outline" size="sm" asChild>
+                    <a href="https://www.npmjs.com/package/noorui-rtl" target="_blank" rel="noopener noreferrer">
+                      View on npm
+                      <ArrowRight className="ms-2 h-3 w-3 rtl:rotate-180" />
+                    </a>
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Features Section */}
         <section className="border-y bg-muted/30 py-24">
           <div className="container">
