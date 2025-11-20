@@ -189,7 +189,7 @@ export { workflowNodeTypes } from './ui/workflow-nodes'
 export { ZakatCalculator } from './ui/zakat-calculator'
 
 // Utility exports
-export { cn } from '../lib/utils'
+export { cn } from '../lib/utils.js'
 
 // Type exports
 export type { ButtonProps } from './ui/button'
