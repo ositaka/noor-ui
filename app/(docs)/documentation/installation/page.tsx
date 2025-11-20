@@ -29,6 +29,13 @@ const dependenciesCode = `{
   }
 }`
 
+const cssImportCode = `// app/layout.tsx or _app.tsx
+import 'noorui-rtl/dist/styles.css'
+
+export default function RootLayout({ children }) {
+  return children
+}`
+
 const verifyInstallCode = `import { Button } from 'noorui-rtl'
 
 export default function TestPage() {
@@ -150,6 +157,27 @@ export default function InstallationPage() {
               <CodeBlock code={bunInstall} language="bash" />
             </div>
           </div>
+        </section>
+
+        {/* CSS Import */}
+        <section className="mb-16">
+          <h2 className="text-2xl font-bold tracking-tight mb-6">Import Styles</h2>
+          <p className="text-muted-foreground mb-6">
+            Import the pre-compiled CSS file in your root layout. This includes all component styles, CSS variables, theme definitions, and RTL support.
+          </p>
+          <CodeBlock code={cssImportCode} language="tsx" />
+
+          <Card className="mt-6 border-green-500/50 bg-green-50 dark:bg-green-950/20">
+            <CardContent className="p-6">
+              <h3 className="font-semibold mb-2 flex items-center gap-2">
+                <CheckCircle2 className="h-5 w-5 text-green-600 dark:text-green-400" />
+                No Tailwind Setup Required
+              </h3>
+              <p className="text-sm text-muted-foreground">
+                The pre-compiled CSS includes everything you need. No Tailwind configuration or additional setup required!
+              </p>
+            </CardContent>
+          </Card>
         </section>
 
         {/* Dependencies */}

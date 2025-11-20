@@ -1,0 +1,355 @@
+/**
+ * Noor UI - Complete CSS Package
+ * This file includes all styles needed to use noorui-rtl components
+ */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Import fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 239 84% 67%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 174 72% 56%;
+    --secondary-foreground: 174 100% 10%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 239 84% 67%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 239 84% 67%;
+    --primary-foreground: 222.2 84% 4.9%;
+    --secondary: 174 72% 56%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 239 84% 67%;
+  }
+
+  /* Minimal theme */
+  .theme-minimal {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 10%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 10%;
+    --primary: 239 84% 67%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 85%;
+    --secondary-foreground: 0 0% 10%;
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 45%;
+    --accent: 0 0% 96%;
+    --accent-foreground: 0 0% 10%;
+    --border: 0 0% 90%;
+    --input: 0 0% 90%;
+    --radius: 0.25rem;
+  }
+
+  .theme-minimal.dark {
+    --background: 0 0% 10%;
+    --foreground: 0 0% 95%;
+    --card: 0 0% 12%;
+    --card-foreground: 0 0% 95%;
+    --secondary: 0 0% 25%;
+    --secondary-foreground: 0 0% 95%;
+    --muted: 0 0% 20%;
+    --muted-foreground: 0 0% 60%;
+    --accent: 0 0% 20%;
+    --accent-foreground: 0 0% 95%;
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+  }
+
+  /* Futuristic theme */
+  .theme-futuristic {
+    --background: 240 10% 8%;
+    --foreground: 0 0% 95%;
+    --card: 240 10% 10%;
+    --card-foreground: 0 0% 95%;
+    --primary: 270 80% 60%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 190 80% 50%;
+    --secondary-foreground: 240 10% 8%;
+    --muted: 240 10% 15%;
+    --muted-foreground: 0 0% 65%;
+    --accent: 270 80% 60%;
+    --accent-foreground: 0 0% 100%;
+    --border: 240 10% 20%;
+    --radius: 0.75rem;
+  }
+
+  .theme-futuristic.dark {
+    --background: 240 10% 5%;
+    --foreground: 0 0% 98%;
+    --card: 240 10% 8%;
+    --muted: 240 10% 12%;
+    --border: 240 10% 15%;
+  }
+
+  /* Cozy theme - More spacious and soft */
+  .theme-cozy {
+    --background: 35 20% 96%;
+    --foreground: 25 25% 15%;
+    --card: 0 0% 100%;
+    --card-foreground: 25 25% 15%;
+    --primary: 25 85% 55%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 35 60% 60%;
+    --secondary-foreground: 25 25% 15%;
+    --muted: 35 20% 90%;
+    --muted-foreground: 25 10% 40%;
+    --accent: 35 60% 85%;
+    --accent-foreground: 25 25% 15%;
+    --border: 35 20% 85%;
+    --radius: 1.25rem;
+    letter-spacing: 0.015em;
+    line-height: 1.7;
+  }
+
+  .theme-cozy.dark {
+    --background: 25 15% 12%;
+    --foreground: 35 20% 95%;
+    --card: 25 15% 15%;
+    --card-foreground: 35 20% 95%;
+    --secondary: 35 45% 45%;
+    --secondary-foreground: 35 20% 95%;
+    --muted: 25 10% 20%;
+    --muted-foreground: 35 10% 65%;
+    --accent: 25 20% 20%;
+    --accent-foreground: 35 20% 95%;
+    --border: 25 10% 25%;
+  }
+
+  /* Artistic theme */
+  .theme-artistic {
+    --background: 40 30% 98%;
+    --foreground: 0 0% 10%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 10%;
+    --primary: 280 60% 50%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 45 100% 50%;
+    --secondary-foreground: 0 0% 10%;
+    --muted: 40 20% 94%;
+    --muted-foreground: 0 0% 40%;
+    --accent: 280 60% 95%;
+    --accent-foreground: 280 60% 20%;
+    --border: 0 0% 88%;
+    --radius: 0.125rem;
+  }
+
+  .theme-artistic.dark {
+    --background: 0 0% 8%;
+    --foreground: 40 20% 95%;
+    --card: 0 0% 10%;
+    --card-foreground: 40 20% 95%;
+    --primary: 280 60% 60%;
+    --secondary: 45 80% 50%;
+    --secondary-foreground: 0 0% 10%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 60%;
+    --accent: 280 60% 15%;
+    --accent-foreground: 280 60% 90%;
+    --border: 0 0% 18%;
+  }
+
+  /* Artistic theme uses serif fonts */
+  .theme-artistic {
+    font-family: Georgia, 'Times New Roman', serif;
+  }
+
+  .theme-artistic [dir='rtl'] {
+    font-family: 'Noto Naskh Arabic', Georgia, serif;
+  }
+
+  .theme-artistic [dir='ltr'] {
+    font-family: Georgia, 'Times New Roman', serif;
+  }
+
+  /* Theme-specific spacing and typography */
+
+  /* Cozy theme: More spacing everywhere */
+  .theme-cozy * {
+    letter-spacing: inherit;
+  }
+
+  .theme-cozy body {
+    line-height: 1.7;
+  }
+
+  .theme-cozy .container,
+  .theme-cozy [class*='container'] {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+
+  .theme-cozy h1, .theme-cozy h2, .theme-cozy h3, .theme-cozy h4 {
+    margin-bottom: 1.5rem;
+    line-height: 1.4;
+  }
+
+  .theme-cozy p {
+    margin-bottom: 1.25rem;
+  }
+
+  .theme-cozy button, .theme-cozy [role="button"] {
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  .theme-cozy .card, .theme-cozy [class*="card"] {
+    padding: 2rem !important;
+  }
+
+  /* Futuristic theme: Tighter, more compact */
+  .theme-futuristic body {
+    letter-spacing: -0.01em;
+    line-height: 1.5;
+  }
+
+  .theme-futuristic h1, .theme-futuristic h2, .theme-futuristic h3 {
+    letter-spacing: -0.025em;
+    font-weight: 600;
+  }
+
+  /* Artistic theme: Typography focus */
+  .theme-artistic body {
+    line-height: 1.8;
+    letter-spacing: 0.01em;
+  }
+
+  .theme-artistic h1, .theme-artistic h2, .theme-artistic h3 {
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    line-height: 1.3;
+  }
+
+  .theme-artistic p {
+    margin-bottom: 1.5rem;
+    line-height: 1.9;
+  }
+
+  /* Minimal theme: Clean and spacious but controlled */
+  .theme-minimal body {
+    line-height: 1.6;
+  }
+
+  .theme-minimal h1, .theme-minimal h2, .theme-minimal h3 {
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: 'rlig' 1, 'calt' 1;
+  }
+
+  /* RTL support */
+  [dir='rtl'] {
+    font-family: 'IBM Plex Sans Arabic', sans-serif;
+  }
+
+  [dir='ltr'] {
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  /* Accessibility: Respect motion preferences */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* Focus visible styles */
+  *:focus-visible {
+    @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
+  }
+
+  /* Remove default focus outline */
+  *:focus {
+    @apply outline-none;
+  }
+}
+
+@layer utilities {
+  /* RTL-aware utilities */
+  .start-0 {
+    inset-inline-start: 0;
+  }
+
+  .end-0 {
+    inset-inline-end: 0;
+  }
+
+  /* Text alignment utilities */
+  .text-start {
+    text-align: start;
+  }
+
+  .text-end {
+    text-align: end;
+  }
+}
+
+/* AI/LLM Shell Component Animations */
+@keyframes wave {
+  0%, 100% { height: 0.25rem; }
+  50% { height: 0.75rem; }
+}
+
+@keyframes typing {
+  0%, 60%, 100% { opacity: 0.3; }
+  30% { opacity: 1; }
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+.animate-blink {
+  animation: blink 1s step-end infinite;
+}

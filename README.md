@@ -38,7 +38,24 @@ pnpm add noorui-rtl
 npm install noorui-rtl
 ```
 
-### 2. Update your `tailwind.config.ts`
+### 2. Import the CSS
+
+**Option A: Pre-compiled CSS (Recommended - No Tailwind setup needed)**
+
+Import the pre-compiled CSS in your root layout or app entry point:
+
+```tsx
+// app/layout.tsx or _app.tsx
+import 'noorui-rtl/dist/styles.css'
+```
+
+This includes all component styles, CSS variables, theme definitions, and RTL support. **No Tailwind configuration required!**
+
+**Option B: Tailwind Configuration (For custom Tailwind setups)**
+
+If you're already using Tailwind and want to customize the configuration:
+
+1. Update your `tailwind.config.ts`:
 
 ```typescript
 import type { Config } from 'tailwindcss'
@@ -59,7 +76,7 @@ const config: Config = {
 export default config
 ```
 
-### 3. Add CSS variables to `globals.css`
+2. Add CSS variables to `globals.css`:
 
 ```css
 @tailwind base;
