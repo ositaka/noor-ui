@@ -235,15 +235,15 @@ export default function ComponentsPage() {
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="flex flex-wrap gap-2">
-                <Button>Primary Button</Button>
-                <Button variant="secondary">Secondary</Button>
-                <Button variant="outline">Outline</Button>
-                <Badge>New</Badge>
-                <Badge variant="secondary">Beta</Badge>
+                <Button>{t.buttonComponent.primary}</Button>
+                <Button variant="secondary">{t.buttonComponent.secondary}</Button>
+                <Button variant="outline">{t.buttonComponent.outline}</Button>
+                <Badge>{t.badgeComponent.labels.new}</Badge>
+                <Badge variant="secondary">{t.badgeComponent.labels.beta}</Badge>
               </div>
               <Separator />
               <div className="space-y-2">
-                <Input placeholder="Try typing here..." />
+                <Input placeholder={t.formComponent.placeholders.enterName} />
               </div>
             </CardContent>
           </Card>

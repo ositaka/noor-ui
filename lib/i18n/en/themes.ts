@@ -112,6 +112,16 @@ themesPage: {
         tag: 'Tag',
       },
 
+      themePreview: {
+        preview: 'Preview',
+        primary: 'Primary',
+        secondary: 'Secondary',
+        outline: 'Outline',
+        new: 'New',
+        beta: 'Beta',
+        soon: 'Soon',
+      },
+
       impl: {
         title: 'Using Themes',
         description: 'Themes can be changed via URL, UI, or programmatically',

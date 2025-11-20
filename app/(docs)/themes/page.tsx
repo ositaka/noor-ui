@@ -15,10 +15,13 @@ import { type Theme, themeConfig } from '@/lib/tokens'
 import { cn } from '@/lib/utils'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
+import { useTheme } from 'next-themes'
 
 const ThemeCardInner = ({ theme }: { theme: Theme }) => {
   const { designTheme, setDesignTheme } = useDesignSystem()
   const { locale } = useDirection()
+  const { theme: colorMode } = useTheme()
+  const t = content[locale]
   const config = themeConfig[theme]
   const isActive = designTheme === theme
 
@@ -61,17 +64,24 @@ const ThemeCardInner = ({ theme }: { theme: Theme }) => {
         <Separator />
 
         <div className="space-y-2">
-          <div className="text-sm font-medium">Preview</div>
-          <div className="space-y-2">
-            <div className="flex gap-2">
-              <Button size="sm" variant="primary">Primary</Button>
-              <Button size="sm" variant="secondary">Secondary</Button>
-              <Button size="sm" variant="outline">Outline</Button>
-            </div>
-            <div className="flex gap-2">
-              <Badge>New</Badge>
-              <Badge variant="secondary">Beta</Badge>
-              <Badge variant="outline">Soon</Badge>
+          <div className="text-sm font-medium">{t.themesPage.themePreview.preview}</div>
+          {/* Isolated preview container with theme-specific styles */}
+          <div className={cn(
+            'p-3 rounded-[var(--radius)] border bg-card',
+            `theme-${theme}`,
+            colorMode === 'dark' && 'dark'
+          )}>
+            <div className="space-y-2 rounded-[var(--radius)] bg-muted/30 p-2">
+              <div className="flex gap-2">
+                <Button size="sm" variant="primary">{t.themesPage.themePreview.primary}</Button>
+                <Button size="sm" variant="secondary">{t.themesPage.themePreview.secondary}</Button>
+                <Button size="sm" variant="outline">{t.themesPage.themePreview.outline}</Button>
+              </div>
+              <div className="flex gap-2">
+                <Badge>{t.themesPage.themePreview.new}</Badge>
+                <Badge variant="secondary">{t.themesPage.themePreview.beta}</Badge>
+                <Badge variant="outline">{t.themesPage.themePreview.soon}</Badge>
+              </div>
             </div>
           </div>
         </div>
