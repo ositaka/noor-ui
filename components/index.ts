@@ -4,6 +4,7 @@
 // Providers (Export these first so users can wrap their apps)
 export { DirectionProvider, useDirection } from './providers/direction-provider'
 export { ClientProviders } from './providers/client-providers'
+export { DesignSystemProvider, useDesignSystem } from './providers/design-system-provider'
 
 // UI Components
 export { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from './ui/accordion'
