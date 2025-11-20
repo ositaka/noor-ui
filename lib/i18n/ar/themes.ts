@@ -112,6 +112,16 @@ themesPage: {
         tag: 'الوسم',
       },
 
+      themePreview: {
+        preview: 'معاينة',
+        primary: 'أساسي',
+        secondary: 'ثانوي',
+        outline: 'إطار',
+        new: 'جديد',
+        beta: 'تجريبي',
+        soon: 'قريباً',
+      },
+
       impl: {
         title: 'استخدام السمات',
         description: 'يمكن تغيير السمات عبر عنوان URL أو واجهة المستخدم أو برمجياً',

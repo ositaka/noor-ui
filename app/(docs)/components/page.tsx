@@ -243,7 +243,7 @@ export default function ComponentsPage() {
               </div>
               <Separator />
               <div className="space-y-2">
-                <Input placeholder={t.inputComponent.placeholder} />
+                <Input placeholder={t.formComponent.placeholders.enterName} />
               </div>
             </CardContent>
           </Card>

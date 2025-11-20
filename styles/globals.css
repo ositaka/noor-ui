@@ -61,11 +61,14 @@
     --card-foreground: 0 0% 10%;
     --primary: 239 84% 67%;
     --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 85%;
+    --secondary-foreground: 0 0% 10%;
     --muted: 0 0% 96%;
     --muted-foreground: 0 0% 45%;
     --accent: 0 0% 96%;
     --accent-foreground: 0 0% 10%;
     --border: 0 0% 90%;
+    --input: 0 0% 90%;
     --radius: 0.25rem;
   }
 
@@ -74,11 +77,14 @@
     --foreground: 0 0% 95%;
     --card: 0 0% 12%;
     --card-foreground: 0 0% 95%;
+    --secondary: 0 0% 25%;
+    --secondary-foreground: 0 0% 95%;
     --muted: 0 0% 20%;
     --muted-foreground: 0 0% 60%;
     --accent: 0 0% 20%;
     --accent-foreground: 0 0% 95%;
     --border: 0 0% 20%;
+    --input: 0 0% 20%;
   }
 
   /* Futuristic theme */
@@ -132,6 +138,8 @@
     --foreground: 35 20% 95%;
     --card: 25 15% 15%;
     --card-foreground: 35 20% 95%;
+    --secondary: 35 45% 45%;
+    --secondary-foreground: 35 20% 95%;
     --muted: 25 10% 20%;
     --muted-foreground: 35 10% 65%;
     --accent: 25 20% 20%;
@@ -163,6 +171,8 @@
     --card: 0 0% 10%;
     --card-foreground: 40 20% 95%;
     --primary: 280 60% 60%;
+    --secondary: 45 80% 50%;
+    --secondary-foreground: 0 0% 10%;
     --muted: 0 0% 15%;
     --muted-foreground: 0 0% 60%;
     --accent: 280 60% 15%;
