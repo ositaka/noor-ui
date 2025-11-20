@@ -126,7 +126,7 @@ export default function RootLayout({ children }) {
   return (
     <html>
       <body>
-        <DesignSystemProvider>
+        <DesignSystemProvider defaultTheme="cozy">
           {children}
         </DesignSystemProvider>
       </body>
