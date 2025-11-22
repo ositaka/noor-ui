@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { cn } from '../../lib/utils'
 import { Button } from './button'
-import { Sheet, SheetContent, SheetTrigger } from './sheet'
+import { Sheet, SheetContent, SheetTrigger, SheetTitle } from './sheet'
 import { ScrollArea } from './scroll-area'
 import { Separator } from './separator'
 import { UserMenu } from './user-menu'
@@ -174,7 +174,9 @@ export function DashboardShell({
             <Menu className="h-6 w-6" />
           </Button>
         </SheetTrigger>
-        <SheetContent side={direction === 'rtl' ? 'end' : 'start'} className="w-80 p-0">
+        <SheetContent side="start" className="w-80 p-0">
+          {/* Visually hidden title for accessibility */}
+          <SheetTitle className="sr-only">{t.ui.components.menu}</SheetTitle>
           <div className="flex h-full flex-col">
             {/* Logo */}
             <div className="flex h-16 items-center border-b px-6">
