@@ -35,6 +35,8 @@ export interface RichTextEditorProps {
   className?: string
   editable?: boolean
   minHeight?: string
+  /** Override the direction from context. Useful when editing content in a different language than the page. */
+  dir?: 'ltr' | 'rtl'
 }
 
 interface ToolbarButtonProps {
@@ -218,8 +220,10 @@ const Toolbar = ({ editor }: ToolbarProps) => {
 }
 
 export const RichTextEditor = React.forwardRef<HTMLDivElement, RichTextEditorProps>(
-  ({ content = '', onChange, placeholder = 'Start writing...', className, editable = true, minHeight = '300px' }, ref) => {
-    const { direction } = useDirection()
+  ({ content = '', onChange, placeholder = 'Start writing...', className, editable = true, minHeight = '300px', dir: dirProp }, ref) => {
+    const { direction: contextDirection } = useDirection()
+    // Use the dir prop if provided, otherwise fall back to context
+    const direction = dirProp || contextDirection
 
     const editor = useEditor({
       immediatelyRender: false,
@@ -326,7 +330,7 @@ export const RichTextEditor = React.forwardRef<HTMLDivElement, RichTextEditorPro
           className={cn('flex-1 overflow-auto')}
           style={{ minHeight }}
         />
-        <style jsx global>{`
+        <style dangerouslySetInnerHTML={{ __html: `
           .ProseMirror {
             outline: none;
           }
@@ -430,7 +434,7 @@ export const RichTextEditor = React.forwardRef<HTMLDivElement, RichTextEditorPro
             border-inline-start: 3px solid hsl(var(--border));
             border-inline-end: none;
           }
-        `}</style>
+        ` }} />
       </div>
     )
   }

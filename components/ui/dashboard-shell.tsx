@@ -49,6 +49,10 @@ export interface DashboardShellProps {
   sidebarWidth?: string
   className?: string
   /**
+   * Custom actions to display in the header (before notifications and user menu)
+   */
+  headerActions?: React.ReactNode
+  /**
    * Use relative positioning instead of fixed (useful for embedded examples)
    * @default false
    */
@@ -124,6 +128,7 @@ export function DashboardShell({
   logoHref = '/',
   sidebarWidth = '16rem',
   className,
+  headerActions,
   relative = false,
 }: DashboardShellProps) {
   const [sidebarOpen, setSidebarOpen] = React.useState(false)
@@ -218,6 +223,7 @@ export function DashboardShell({
 
           {/* Actions */}
           <div className="flex items-center gap-2">
+            {headerActions}
             {notifications && notifications.length >= 0 && (
               <NotificationCenter
                 notifications={notifications}

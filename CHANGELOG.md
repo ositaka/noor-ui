@@ -5,6 +5,31 @@ All notable changes to Noor UI will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.13] - 2025-11-22
+
+### Fixed
+- **RichTextEditor**: Fixed `jsx` attribute console error in Next.js 16 with Turbopack. Replaced styled-jsx with standard `dangerouslySetInnerHTML` for inline styles.
+
+---
+
+## [0.3.12] - 2025-11-22
+
+### Added
+- **RichTextEditor**: New `dir` prop to override direction from context. Useful when editing content in a different language than the page locale (e.g., editing Arabic content on an English admin page).
+
+---
+
+## [0.3.11] - 2025-11-22
+
+### Added
+- **DashboardShell**: New `headerActions` prop to add custom actions (like theme/language switchers) to the header.
+
+### Fixed
+- **DashboardShell**: Accessibility warning (DialogTitle) in mobile sidebar.
+- **DashboardShell**: Mobile sidebar uses `side="start"` for proper RTL support via CSS logical properties.
+
+---
+
 ## [0.3.8] - 2025-11-22
 
 ### Fixed
