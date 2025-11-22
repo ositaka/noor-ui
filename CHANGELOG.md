@@ -5,6 +5,34 @@ All notable changes to Noor UI will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.8] - 2025-11-22
+
+### Fixed
+- **DashboardShell**: Fixed accessibility warning by adding visually hidden `SheetTitle` to mobile sidebar. This resolves the console warning about `DialogContent requires a DialogTitle`.
+- **DashboardShell**: Fixed mobile sidebar RTL positioning. Changed from `side={direction === 'rtl' ? 'end' : 'start'}` to `side="start"` since CSS logical properties handle RTL automatically. The sidebar now correctly appears on the right side for RTL locales.
+
+---
+
+## [0.3.7] - 2025-11-21
+
+### Added
+- Proper build process for npm package with tsup
+- CSS output with Tailwind compilation
+
+### Changed
+- Updated exports for proper module resolution
+- Added .js extensions for ESM compatibility
+
+---
+
+## [0.3.0] - 2025-11-21
+
+### Added
+- Complete restructuring of package build process
+- Better TypeScript support and type exports
+
+---
+
 ## [0.2.1] - 2025-11-20
 
 ### Changed
