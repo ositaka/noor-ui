@@ -7,10 +7,11 @@ import { useDirection } from '@/components/providers/direction-provider'
 import { useCart } from '@/starters/ecommerce/hooks/use-cart'
 import { getFeaturedProducts, products } from '@/starters/ecommerce/lib/products'
 import { Button } from '@/components/ui/button'
+import { ButtonArrow } from '@/components/ui/button-arrow'
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Input } from '@/components/ui/input'
-import { ShoppingCart, Search, Star, ArrowRight } from 'lucide-react'
+import { ShoppingCart, Search, Star } from 'lucide-react'
 
 export default function HomePage() {
   const { locale } = useDirection()
@@ -110,10 +111,9 @@ export default function HomePage() {
           <div className="flex items-center justify-between mb-8">
             <h2 className="text-3xl font-bold">{t.featured}</h2>
             <Link href="/products">
-              <Button variant="outline">
+              <ButtonArrow variant="outline" direction="forward" icon="arrow">
                 {t.allProducts}
-                <ArrowRight className="h-4 w-4 ms-2" />
-              </Button>
+              </ButtonArrow>
             </Link>
           </div>
 

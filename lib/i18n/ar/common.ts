@@ -236,6 +236,7 @@ common: {
         'badge': 'Badge (الشارة)',
         'breadcrumb': 'Breadcrumb (مسار التنقل)',
         'button': 'Button (الزر)',
+        'button-arrow': 'Button Arrow (زر مع سهم)',
         'card': 'Card (البطاقة)',
         'checkbox': 'Checkbox (خانة الاختيار)',
         'input': 'Input (حقل الإدخال)',
@@ -409,8 +410,8 @@ common: {
           misc: 'متنوعة',
         },
         counts: {
-          totalComponents: '64 مكون',
-          totalExamples: '6 أمثلة مباشرة',
+          totalComponents: '65 مكون',
+          totalExamples: '11 مثال مباشر',
           totalPages: 'أكثر من 100 صفحة',
         },
         links: {
@@ -431,6 +432,9 @@ common: {
           portfolio: 'معرض الأعمال',
           realEstate: 'قوائم العقارات',
           islamicFinanceDashboard: 'لوحة التمويل الإسلامي',
+          blogDashboard: 'لوحة المدونة',
+          calendar: 'التقويم',
+          starters: 'نماذج البدء',
           getStartedButton: 'ابدأ الآن',
           browseComponents: 'تصفح المكونات',
         },

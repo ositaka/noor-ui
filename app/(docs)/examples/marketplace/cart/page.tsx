@@ -6,6 +6,7 @@ import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
+import { ButtonArrow } from '@/components/ui/button-arrow'
 import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
 import { ArabicNumber } from '@/components/ui/arabic-number'
@@ -16,8 +17,6 @@ import {
   Trash2,
   Plus,
   Minus,
-  ArrowRight,
-  ArrowLeft,
   ShoppingBag,
   Tag,
   Truck,
@@ -263,21 +262,11 @@ export default function CartPage() {
               ))}
 
               {/* Continue Shopping */}
-              <Button variant="outline" asChild>
+              <ButtonArrow direction="back" icon="arrow" variant="outline" asChild>
                 <Link href="/examples/marketplace">
-                  {isRTL ? (
-                    <>
-                      <ArrowRight className="h-4 w-4 ms-2 rtl:rotate-180" />
-                      {t.marketplaceCart.actions.continueShopping}
-                    </>
-                  ) : (
-                    <>
-                      <ArrowLeft className="h-4 w-4 me-2" />
-                      {t.marketplaceCart.actions.continueShopping}
-                    </>
-                  )}
+                  {t.marketplaceCart.actions.continueShopping}
                 </Link>
-              </Button>
+              </ButtonArrow>
             </div>
 
             {/* Order Summary */}
@@ -349,21 +338,11 @@ export default function CartPage() {
                   </div>
 
                   {/* Checkout Button */}
-                  <Button asChild className="w-full" size="lg">
+                  <ButtonArrow direction="forward" icon="arrow" asChild className="w-full" size="lg">
                     <Link href="/examples/marketplace/checkout">
-                      {isRTL ? (
-                        <>
-                          {t.marketplaceCart.summary.proceedToCheckout}
-                          <ArrowLeft className="h-4 w-4 ms-2" />
-                        </>
-                      ) : (
-                        <>
-                          {t.marketplaceCart.summary.proceedToCheckout}
-                          <ArrowRight className="h-4 w-4 ms-2 rtl:rotate-180" />
-                        </>
-                      )}
+                      {t.marketplaceCart.summary.proceedToCheckout}
                     </Link>
-                  </Button>
+                  </ButtonArrow>
 
                   {/* Security Notice */}
                   <div className="text-center">

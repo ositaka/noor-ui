@@ -389,7 +389,44 @@ separatorComponent: {
       },
     },
 
-badgeComponent: {
+buttonArrowComponent: {
+      title: 'Button Arrow',
+      description: 'A button with directional arrows that automatically handles RTL/LTR layouts using semantic directions (forward/back) rather than physical directions (left/right).',
+      continue: 'Continue',
+      backToBlog: 'Back to Blog',
+      nextStep: 'Next Step',
+      previousStep: 'Previous Step',
+      learnMore: 'Learn More',
+      goBack: 'Go Back',
+      forward: 'Forward',
+      back: 'Back',
+      props: {
+        direction: 'Arrow direction - "forward" progresses, "back" returns (automatic RTL handling)',
+        icon: 'Icon style - "chevron" or "arrow"',
+        iconPosition: 'Position of the arrow - "start", "end", or "auto" (auto positions based on direction)',
+        iconSize: 'Size of the arrow icon - "sm", "md", or "lg"',
+        hideIcon: 'Hide the arrow icon (useful for conditional rendering)',
+      },
+      examples: {
+        basicUsage: 'Basic Usage',
+        directions: 'Directions',
+        iconStyles: 'Icon Styles',
+        withVariants: 'With Button Variants',
+        iconSizes: 'Icon Sizes',
+      },
+      accessibility: {
+        keyboardDesc: 'Inherits all keyboard navigation from the Button component',
+        screenReaderDesc: 'Arrow icons are decorative (aria-hidden) - button text provides context',
+        rtlDesc: 'Arrow direction automatically mirrors in RTL contexts using CSS transforms',
+      },
+      rtl: {
+        description: 'ButtonArrow uses semantic directions (forward/back) that automatically adapt to RTL layouts. The arrow icons rotate 180° in RTL contexts, ensuring correct visual direction.',
+        semanticDirections: 'Semantic Directions',
+        semanticDesc: 'Use "forward" for progression and "back" for returning. The component handles the visual direction automatically.',
+      },
+    },
+
+    badgeComponent: {
       title: 'Badge',
       description: 'Small status indicator or label. Perfect for displaying counts, statuses, categories, and notifications with full RTL support.',
       preview: 'Preview',

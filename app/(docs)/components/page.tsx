@@ -58,6 +58,7 @@ const componentCategories = (t: typeof content.en | typeof content.ar) => [
     description: t.components.categories.coreDesc,
     components: [
       { name: 'Button', icon: MousePointer2, href: '/components/button', status: 'ready' },
+      { name: 'ButtonArrow', icon: ChevronRight, href: '/components/button-arrow', status: 'ready' },
       { name: 'Card', icon: Square, href: '/components/card', status: 'ready' },
       { name: 'FeatureCard', icon: Square, href: '/components/feature-card', status: 'ready' },
       { name: 'Input', icon: Type, href: '/components/input', status: 'ready' },

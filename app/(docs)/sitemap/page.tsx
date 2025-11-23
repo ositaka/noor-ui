@@ -13,7 +13,7 @@ export default function SitemapPage() {
   // Component lists organized by category
   const componentsByCategory = {
     basic: [
-      'alert', 'avatar', 'badge', 'breadcrumb', 'button', 'card',
+      'alert', 'avatar', 'badge', 'breadcrumb', 'button', 'button-arrow', 'card',
       'checkbox', 'input', 'label', 'select', 'separator', 'slider',
       'switch', 'textarea'
     ],
@@ -49,6 +49,8 @@ export default function SitemapPage() {
     { slug: 'registration', nameKey: 'registration' },
     { slug: 'dashboard', nameKey: 'dashboard' },
     { slug: 'cms', nameKey: 'cms' },
+    { slug: 'blog-dashboard', nameKey: 'blogDashboard' },
+    { slug: 'calendar', nameKey: 'calendar' },
     { slug: 'workflow-basic', nameKey: 'workflowBasic' },
     { slug: 'ecommerce', nameKey: 'ecommerce' },
     { slug: 'marketplace', nameKey: 'marketplace' },
@@ -62,6 +64,7 @@ export default function SitemapPage() {
     { href: '/documentation', nameKey: 'documentation' },
     { href: '/rtl-guide', nameKey: 'rtlGuide' },
     { href: '/roadmap', nameKey: 'roadmap' },
+    { href: '/starters', nameKey: 'starters' },
   ];
 
   const themesAndDesign = [
@@ -204,7 +207,7 @@ export default function SitemapPage() {
           {t.sitemap.sections.components}
         </h2>
         <p className="text-muted-foreground mb-8">
-          All 64 components organized by category. Each component includes live examples,
+          All 65 components organized by category. Each component includes live examples,
           full documentation, accessibility guidelines, and bilingual support.
         </p>
       </div>

@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
+import { ButtonArrow } from '@/components/ui/button-arrow'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { CodeBlock } from '@/components/docs/code-block'
@@ -422,12 +423,11 @@ npm run dev
                   {t.cta.description}
                 </p>
               </div>
-              <Button size="lg" asChild>
+              <ButtonArrow direction="forward" size="lg" asChild>
                 <Link href="/starters">
                   {t.viewAllStarters}
-                  <ArrowRight className="h-4 w-4 ms-2 rtl:rotate-180" />
                 </Link>
-              </Button>
+              </ButtonArrow>
             </div>
           </CardContent>
         </Card>

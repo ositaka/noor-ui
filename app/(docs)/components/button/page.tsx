@@ -3,12 +3,13 @@
 import * as React from 'react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
+import { ButtonArrow } from '@/components/ui/button-arrow'
 import { Card, CardContent } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
 import { ComponentShowcase } from '@/components/docs/component-showcase'
 import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
-import { ArrowLeft, Download, Heart, Trash2 } from 'lucide-react'
+import { Download, Heart, Trash2 } from 'lucide-react'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 const getButtonProps = (t: typeof content.en | typeof content.ar): PropDefinition[] => [
@@ -85,14 +86,20 @@ const loadingCode = `<Button loading>
   Processing...
 </Button>`
 
-const rtlCode = `// RTL support is automatic!
-// Icons will flip direction automatically
+const rtlCode = `// RTL support is automatic with ButtonArrow!
+// Use semantic directions: 'forward' or 'back'
 
-<Button>
-  <ArrowLeft className="me-2 h-4 w-4" />
-  {/* In RTL: Arrow points right, positioned on the end */}
+import { ButtonArrow } from '@/components/ui/button-arrow'
+
+// Back button - arrow automatically flips in RTL
+<ButtonArrow direction="back">
   Back
-</Button>`
+</ButtonArrow>
+
+// Forward button with arrow style
+<ButtonArrow direction="forward" icon="arrow">
+  Continue
+</ButtonArrow>`
 
 export default function ButtonPage() {
   const { locale } = useDirection()
@@ -290,20 +297,24 @@ export default function ButtonPage() {
               <div className="grid gap-4 md:grid-cols-2 mt-6">
                 <div className="space-y-2">
                   <h4 className="font-semibold text-sm">{t.componentDocs.ltr}</h4>
-                  <div dir="ltr">
-                    <Button>
-                      <ArrowLeft className="me-2 h-4 w-4" />
+                  <div dir="ltr" className="flex gap-2">
+                    <ButtonArrow direction="back">
                       Back
-                    </Button>
+                    </ButtonArrow>
+                    <ButtonArrow direction="forward" icon="arrow">
+                      Continue
+                    </ButtonArrow>
                   </div>
                 </div>
                 <div className="space-y-2">
                   <h4 className="font-semibold text-sm">{t.componentDocs.rtl}</h4>
-                  <div dir="rtl">
-                    <Button>
-                      <ArrowLeft className="me-2 h-4 w-4" />
+                  <div dir="rtl" className="flex gap-2">
+                    <ButtonArrow direction="back">
                       {t.buttonComponent.back}
-                    </Button>
+                    </ButtonArrow>
+                    <ButtonArrow direction="forward" icon="arrow">
+                      {t.buttonComponent.continue || 'Continue'}
+                    </ButtonArrow>
                   </div>
                 </div>
               </div>

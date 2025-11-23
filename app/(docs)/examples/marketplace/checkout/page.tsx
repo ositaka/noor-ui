@@ -6,6 +6,7 @@ import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
+import { ButtonArrow } from '@/components/ui/button-arrow'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
@@ -22,8 +23,6 @@ import {
   Truck,
   CheckCircle2,
   Package,
-  ArrowRight,
-  ArrowLeft,
   ShieldCheck,
 } from 'lucide-react'
 
@@ -355,19 +354,9 @@ export default function CheckoutPage() {
                     </div>
 
                     <div className="flex justify-end pt-4">
-                      <Button onClick={() => setCurrentTab('payment')}>
-                        {isRTL ? (
-                          <>
-                            التالي
-                            <ArrowLeft className="h-4 w-4 ms-2" />
-                          </>
-                        ) : (
-                          <>
-                            Next
-                            <ArrowRight className="h-4 w-4 ms-2 rtl:rotate-180" />
-                          </>
-                        )}
-                      </Button>
+                      <ButtonArrow direction="forward" icon="arrow" onClick={() => setCurrentTab('payment')}>
+                        {isRTL ? 'التالي' : 'Next'}
+                      </ButtonArrow>
                     </div>
                   </CardContent>
                 </Card>
@@ -477,32 +466,12 @@ export default function CheckoutPage() {
                     )}
 
                     <div className="flex gap-3 justify-between pt-4">
-                      <Button variant="outline" onClick={() => setCurrentTab('shipping')}>
-                        {isRTL ? (
-                          <>
-                            <ArrowRight className="h-4 w-4 ms-2 rtl:rotate-180" />
-                            السابق
-                          </>
-                        ) : (
-                          <>
-                            <ArrowLeft className="h-4 w-4 me-2" />
-                            Previous
-                          </>
-                        )}
-                      </Button>
-                      <Button onClick={() => setCurrentTab('review')}>
-                        {isRTL ? (
-                          <>
-                            التالي
-                            <ArrowLeft className="h-4 w-4 ms-2" />
-                          </>
-                        ) : (
-                          <>
-                            Next
-                            <ArrowRight className="h-4 w-4 ms-2 rtl:rotate-180" />
-                          </>
-                        )}
-                      </Button>
+                      <ButtonArrow direction="back" icon="arrow" variant="outline" onClick={() => setCurrentTab('shipping')}>
+                        {isRTL ? 'السابق' : 'Previous'}
+                      </ButtonArrow>
+                      <ButtonArrow direction="forward" icon="arrow" onClick={() => setCurrentTab('review')}>
+                        {isRTL ? 'التالي' : 'Next'}
+                      </ButtonArrow>
                     </div>
                   </CardContent>
                 </Card>
@@ -589,19 +558,9 @@ export default function CheckoutPage() {
                     </div>
 
                     <div className="flex gap-3 justify-between pt-4">
-                      <Button variant="outline" onClick={() => setCurrentTab('payment')}>
-                        {isRTL ? (
-                          <>
-                            <ArrowRight className="h-4 w-4 ms-2 rtl:rotate-180" />
-                            السابق
-                          </>
-                        ) : (
-                          <>
-                            <ArrowLeft className="h-4 w-4 me-2" />
-                            Previous
-                          </>
-                        )}
-                      </Button>
+                      <ButtonArrow direction="back" icon="arrow" variant="outline" onClick={() => setCurrentTab('payment')}>
+                        {isRTL ? 'السابق' : 'Previous'}
+                      </ButtonArrow>
                       <Button onClick={handlePlaceOrder} size="lg">
                         <CheckCircle2 className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
                         {t.marketplaceCheckout.placeOrder}

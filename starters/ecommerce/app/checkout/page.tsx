@@ -6,12 +6,12 @@ import { useRouter } from 'next/navigation'
 import { useDirection } from '@/components/providers/direction-provider'
 import { useCart } from '@/starters/ecommerce/hooks/use-cart'
 import { Button } from '@/components/ui/button'
+import { ButtonArrow } from '@/components/ui/button-arrow'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Separator } from '@/components/ui/separator'
 import { RadioGroupItem, RadioGroup } from '@/components/ui/radio-group'
-import { ArrowLeft } from 'lucide-react'
 
 export default function CheckoutPage() {
   const { locale } = useDirection()
@@ -92,9 +92,7 @@ export default function CheckoutPage() {
       <header className="border-b">
         <div className="container flex h-16 items-center">
           <Link href="/cart">
-            <Button variant="ghost" size="icon">
-              <ArrowLeft className="h-5 w-5" />
-            </Button>
+            <ButtonArrow variant="ghost" size="icon" direction="back" icon="arrow" />
           </Link>
           <h1 className="text-xl font-bold ms-4">{t.title}</h1>
         </div>

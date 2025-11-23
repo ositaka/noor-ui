@@ -3,6 +3,7 @@
 import * as React from 'react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
+import { ButtonArrow } from '@/components/ui/button-arrow'
 import {
   Form,
   FormField,
@@ -29,8 +30,6 @@ import {
   MapPin,
   FileText,
   CheckCircle2,
-  ArrowRight,
-  ArrowLeft,
   Loader2,
 } from 'lucide-react'
 import { useDirection } from '@/components/providers/direction-provider'
@@ -411,10 +410,9 @@ function PersonalInfoStep({ initialValues, onSubmit, onBack, isRTL }: StepProps)
         </FormField>
 
         <div className="flex justify-end gap-3 pt-4">
-          <Button type="submit">
+          <ButtonArrow type="submit" direction="forward" icon="arrow">
             {t.buttons.next}
-            <ArrowRight className="ms-2 h-4 w-4" />
-          </Button>
+          </ButtonArrow>
         </div>
       </div>
     </Form>
@@ -517,14 +515,12 @@ function AddressStep({ initialValues, onSubmit, onBack, isRTL }: StepProps) {
         </div>
 
         <div className="flex justify-between gap-3 pt-4">
-          <Button type="button" variant="outline" onClick={onBack!}>
-            <ArrowLeft className="me-2 h-4 w-4" />
+          <ButtonArrow type="button" variant="outline" direction="back" icon="arrow" onClick={onBack!}>
             {t.buttons.previous}
-          </Button>
-          <Button type="submit">
+          </ButtonArrow>
+          <ButtonArrow type="submit" direction="forward" icon="arrow">
             {t.buttons.next}
-            <ArrowRight className="ms-2 h-4 w-4" />
-          </Button>
+          </ButtonArrow>
         </div>
       </div>
     </Form>
@@ -635,14 +631,12 @@ function PreferencesStep({ initialValues, onSubmit, onBack, isRTL }: StepProps) 
         </div>
 
         <div className="flex justify-between gap-3 pt-4">
-          <Button type="button" variant="outline" onClick={onBack!}>
-            <ArrowLeft className="me-2 h-4 w-4" />
+          <ButtonArrow type="button" variant="outline" direction="back" icon="arrow" onClick={onBack!}>
             {t.buttons.previous}
-          </Button>
-          <Button type="submit">
+          </ButtonArrow>
+          <ButtonArrow type="submit" direction="forward" icon="arrow">
             {t.steps.review}
-            <ArrowRight className="ms-2 h-4 w-4" />
-          </Button>
+          </ButtonArrow>
         </div>
       </div>
     </Form>
@@ -729,10 +723,9 @@ function ReviewStep({ data, onSubmit, onBack, isRTL }: StepProps & { data: Recor
         </div>
 
         <div className="flex justify-between gap-3 pt-4">
-          <Button type="button" variant="outline" onClick={onBack!} disabled={isSubmitting}>
-            <ArrowLeft className="me-2 h-4 w-4" />
+          <ButtonArrow type="button" variant="outline" direction="back" icon="arrow" onClick={onBack!} disabled={isSubmitting}>
             {t.buttons.previous}
-          </Button>
+          </ButtonArrow>
           <Button type="submit" disabled={isSubmitting}>
             {isSubmitting ? (
               <>

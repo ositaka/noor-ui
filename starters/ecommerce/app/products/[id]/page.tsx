@@ -7,9 +7,10 @@ import { useDirection } from '@/components/providers/direction-provider'
 import { useCart } from '@/starters/ecommerce/hooks/use-cart'
 import { getProductById } from '@/starters/ecommerce/lib/products'
 import { Button } from '@/components/ui/button'
+import { ButtonArrow } from '@/components/ui/button-arrow'
 import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { ShoppingCart, ArrowLeft, Star, Minus, Plus } from 'lucide-react'
+import { ShoppingCart, Star, Minus, Plus } from 'lucide-react'
 import { useToast } from '@/hooks/use-toast'
 
 export default function ProductDetailPage({ params }: { params: { id: string } }) {
@@ -78,9 +79,7 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
       <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur">
         <div className="container flex h-16 items-center justify-between">
           <Link href="/products">
-            <Button variant="ghost" size="icon">
-              <ArrowLeft className="h-5 w-5" />
-            </Button>
+            <ButtonArrow variant="ghost" size="icon" direction="back" icon="arrow" />
           </Link>
 
           <Link href="/cart">

@@ -4,6 +4,7 @@ import * as React from 'react'
 import Link from 'next/link'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
+import { ButtonArrow } from '@/components/ui/button-arrow'
 import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
@@ -11,7 +12,6 @@ import { ArabicNumber } from '@/components/ui/arabic-number'
 import { formatSAR } from '@/lib/arabic-numbers'
 import {
   Home,
-  ArrowLeft,
   Store,
   Star,
   ShoppingCart,
@@ -237,12 +237,11 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
           </div>
 
           <div className="flex items-center gap-4">
-            <Button variant="outline" size="sm" asChild>
+            <ButtonArrow direction="back" icon="arrow" variant="outline" size="sm" asChild>
               <Link href="/examples/marketplace">
-                <ArrowLeft className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
                 {t.marketplaceProduct.backToMarketplace}
               </Link>
-            </Button>
+            </ButtonArrow>
           </div>
         </div>
       </header>

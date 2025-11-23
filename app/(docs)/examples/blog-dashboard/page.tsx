@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
+import { ButtonArrow } from '@/components/ui/button-arrow'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { CodeBlock } from '@/components/docs/code-block'
@@ -337,12 +338,11 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key`}
                   troubleshooting, and customization guide.
                 </p>
               </div>
-              <Button size="lg" asChild>
+              <ButtonArrow size="lg" direction="forward" icon="arrow" asChild>
                 <Link href="/starters">
                   View All Starters
-                  <ArrowRight className="h-4 w-4 ms-2 rtl:rotate-180" />
                 </Link>
-              </Button>
+              </ButtonArrow>
             </div>
           </CardContent>
         </Card>

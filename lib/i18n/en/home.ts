@@ -8,7 +8,7 @@ home: {
       hero: {
         title: 'Noor UI',
         subtitle: 'Built for the GCC market. Arabic and English, equal citizens.',
-        description: 'A comprehensive, modern design system with full bilingual support. 64 accessible components, 4 beautiful themes, perfect RTL mirroring. Bringing light to multilingual interface design.',
+        description: 'A comprehensive, modern design system with full bilingual support. 65 accessible components, 4 beautiful themes, perfect RTL mirroring. Bringing light to multilingual interface design.',
         cta: {
           primary: 'Explore Components',
           secondary: 'View Documentation',
@@ -19,7 +19,7 @@ home: {
         subtitle: 'Production-ready components for modern web applications',
         items: [
           {
-            title: '64 Components',
+            title: '65 Components',
             description: 'Complete UI toolkit from buttons to complex data tables, plus experimental AI/LLM components',
           },
           {

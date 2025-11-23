@@ -236,6 +236,7 @@ common: {
         'badge': 'Badge',
         'breadcrumb': 'Breadcrumb',
         'button': 'Button',
+        'button-arrow': 'Button Arrow',
         'card': 'Card',
         'checkbox': 'Checkbox',
         'input': 'Input',
@@ -409,8 +410,8 @@ common: {
           misc: 'Miscellaneous',
         },
         counts: {
-          totalComponents: '64 Components',
-          totalExamples: '6 Live Examples',
+          totalComponents: '65 Components',
+          totalExamples: '11 Live Examples',
           totalPages: '100+ Pages',
         },
         links: {
@@ -431,6 +432,9 @@ common: {
           portfolio: 'Portfolio Gallery',
           realEstate: 'Real Estate Listings',
           islamicFinanceDashboard: 'Islamic Finance Dashboard',
+          blogDashboard: 'Blog Dashboard',
+          calendar: 'Calendar',
+          starters: 'Starters',
           getStartedButton: 'Get Started',
           browseComponents: 'Browse Components',
         },

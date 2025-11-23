@@ -7,11 +7,12 @@ import { useDirection } from '@/components/providers/direction-provider'
 import { useCart } from '@/starters/ecommerce/hooks/use-cart'
 import { products, categories, searchProducts, getProductsByCategory } from '@/starters/ecommerce/lib/products'
 import { Button } from '@/components/ui/button'
+import { ButtonArrow } from '@/components/ui/button-arrow'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Input } from '@/components/ui/input'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import { ShoppingCart, Search, Star, ArrowLeft } from 'lucide-react'
+import { ShoppingCart, Search, Star } from 'lucide-react'
 import { useToast } from '@/hooks/use-toast'
 
 export default function ProductsPage() {
@@ -85,9 +86,7 @@ export default function ProductsPage() {
         <div className="container flex h-16 items-center justify-between">
           <div className="flex items-center gap-4">
             <Link href="/">
-              <Button variant="ghost" size="icon">
-                <ArrowLeft className="h-5 w-5" />
-              </Button>
+              <ButtonArrow variant="ghost" size="icon" direction="back" icon="arrow" />
             </Link>
             <h1 className="text-xl font-bold">{t.title}</h1>
           </div>

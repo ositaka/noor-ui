@@ -4,6 +4,7 @@ import * as React from 'react'
 import Link from 'next/link'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
+import { ButtonArrow } from '@/components/ui/button-arrow'
 import { Badge } from '@/components/ui/badge'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
@@ -31,7 +32,6 @@ import {
   Calendar,
   Award,
   Users,
-  ArrowRight,
 } from 'lucide-react'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
@@ -282,12 +282,11 @@ export default function PortfolioPage() {
                 {t.portfolioPage.hero.description}
               </p>
               <div className="flex flex-wrap items-center gap-4">
-                <Button size="lg" asChild>
+                <ButtonArrow direction="forward" icon="arrow" size="lg" asChild>
                   <Link href="#contact">
                     {t.portfolioPage.hero.getInTouch}
-                    <ArrowRight className={cn('h-4 w-4', isRTL ? 'me-2' : 'ms-2')} />
                   </Link>
-                </Button>
+                </ButtonArrow>
                 <Button size="lg" variant="outline" asChild>
                   <Link href="#projects">{t.portfolioPage.hero.viewWork}</Link>
                 </Button>

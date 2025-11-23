@@ -21,6 +21,8 @@ export {
   BreadcrumbSeparator,
 } from './ui/breadcrumb'
 export { Button, buttonVariants } from './ui/button'
+export { ButtonArrow } from './ui/button-arrow'
+export type { ButtonArrowProps } from './ui/button-arrow'
 export { Calendar } from './ui/calendar'
 export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent } from './ui/card'
 export { ChatMessage } from './ui/chat-message'
@@ -124,6 +126,8 @@ export { Progress } from './ui/progress'
 export { PromptInput } from './ui/prompt-input'
 export { RadioGroup, RadioGroupItem } from './ui/radio-group'
 export { RichTextEditor } from './ui/rich-text-editor'
+// MarkdownEditor excluded from package - @mdxeditor/editor lacks type declarations
+// export { MarkdownEditor } from './ui/markdown-editor'
 export { ScrollArea, ScrollBar } from './ui/scroll-area'
 export {
   Select,

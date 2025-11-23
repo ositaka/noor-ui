@@ -1,6 +1,6 @@
 {
   "name": "noorui-rtl",
-  "version": "0.3.13",
+  "version": "0.3.14",
   "description": "Noor UI - Beautiful RTL-first React components for bilingual applications",
   "author": {
     "name": "Nuno Marques",
@@ -100,6 +100,7 @@
     "@tiptap/extension-underline": "^3.10.5",
     "@tiptap/react": "^3.10.5",
     "@tiptap/starter-kit": "^3.10.5",
+    "@mdxeditor/editor": "^3.20.1",
     "@xyflow/react": "^12.9.2",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",

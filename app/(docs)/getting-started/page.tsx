@@ -6,7 +6,7 @@ import { Card, CardContent } from '@/components/ui/card'
 import { CodeBlock } from '@/components/docs/code-block'
 import { FeatureCard } from '@/components/ui/feature-card'
 import { Sparkles, Package, Settings, Zap, CheckCircle2, ArrowRight } from 'lucide-react'
-import { Button } from '@/components/ui/button'
+import { ButtonArrow } from '@/components/ui/button-arrow'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 const installationCode = `npm install noorui-rtl
@@ -403,10 +403,9 @@ export default function GettingStartedPage() {
                   <p className="text-sm text-muted-foreground mb-4">
                     {t.gettingStarted.browseComponentsDesc}
                   </p>
-                  <Button variant="ghost" size="sm" className="gap-2">
+                  <ButtonArrow direction="forward" icon="arrow" variant="ghost" size="sm">
                     {t.gettingStarted.viewComponents}
-                    <ArrowRight className="h-4 w-4 rtl:rotate-180" />
-                  </Button>
+                  </ButtonArrow>
                 </CardContent>
               </Card>
             </Link>
@@ -421,10 +420,9 @@ export default function GettingStartedPage() {
                   <p className="text-sm text-muted-foreground mb-4">
                     {t.gettingStarted.rtlDevGuideDesc}
                   </p>
-                  <Button variant="ghost" size="sm" className="gap-2">
+                  <ButtonArrow direction="forward" icon="arrow" variant="ghost" size="sm">
                     {t.gettingStarted.readGuide}
-                    <ArrowRight className="h-4 w-4 rtl:rotate-180" />
-                  </Button>
+                  </ButtonArrow>
                 </CardContent>
               </Card>
             </Link>

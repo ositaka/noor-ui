@@ -5,6 +5,14 @@ All notable changes to Noor UI will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.14] - 2025-11-23
+
+### Added
+- **ButtonArrow**: New component for buttons with directional arrows. Uses semantic directions (`forward`/`back`) instead of physical (`left`/`right`) for automatic RTL/LTR handling. The arrow icons rotate automatically in RTL contexts using Tailwind's `rtl:rotate-180` class.
+- **MarkdownEditor**: New WYSIWYG markdown editor component powered by MDXEditor. Outputs clean markdown (not HTML), making it ideal for blogs, documentation, and MDX content. Features include syntax highlighting for code blocks, tables, lists, links, blockquotes, and full RTL support.
+
+---
+
 ## [0.3.13] - 2025-11-22
 
 ### Fixed

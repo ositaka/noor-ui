@@ -6,6 +6,7 @@ import { useAuth } from '@/starters/blog-dashboard/hooks/use-auth'
 import { useDirection } from '@/components/providers/direction-provider'
 import { supabase } from '@/starters/blog-dashboard/lib/supabase/client'
 import { Button } from '@/components/ui/button'
+import { ButtonArrow } from '@/components/ui/button-arrow'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
@@ -20,7 +21,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { useToast } from '@/hooks/use-toast'
-import { ArrowLeft, Save, Eye, Loader2 } from 'lucide-react'
+import { Save, Eye, Loader2 } from 'lucide-react'
 
 export default function NewPostPage() {
   const { user } = useAuth()
@@ -195,15 +196,16 @@ export default function NewPostPage() {
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <div>
-          <Button
+          <ButtonArrow
             variant="ghost"
             size="sm"
             onClick={() => router.back()}
             className="mb-4"
+            direction="back"
+            icon="arrow"
           >
-            <ArrowLeft className="h-4 w-4 me-2" />
             {t.back}
-          </Button>
+          </ButtonArrow>
           <h1 className="text-3xl font-bold tracking-tight">{t.title}</h1>
           <p className="text-muted-foreground mt-2">{t.description}</p>
         </div>

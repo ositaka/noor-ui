@@ -128,7 +128,7 @@ export default function DocumentationPage() {
                       >
                         <span className="font-medium">{sectionData[link.titleKey]}</span>
                         <svg
-                          className="h-4 w-4 ms-auto"
+                          className="h-4 w-4 ms-auto rtl:rotate-180"
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"
                           viewBox="0 0 24 24"

@@ -3,8 +3,9 @@
 import * as React from 'react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
+import { ButtonArrow } from '@/components/ui/button-arrow'
 import { Card, CardContent } from '@/components/ui/card'
-import { Home, ArrowLeft, Search } from 'lucide-react'
+import { Home, Search } from 'lucide-react'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 
@@ -47,12 +48,11 @@ export default function NotFound() {
                 {t.notFound.goHome}
               </Link>
             </Button>
-            <Button asChild variant="outline" size="lg">
-              <Link href="/components" className="inline-flex items-center">
-                <ArrowLeft className="h-4 w-4 me-2 rtl:rotate-180" />
+            <ButtonArrow asChild variant="outline" size="lg" direction="back" icon="arrow">
+              <Link href="/components">
                 {t.notFound.browseComponents}
               </Link>
-            </Button>
+            </ButtonArrow>
           </div>
 
           {/* Helpful Links */}

@@ -389,7 +389,44 @@ separatorComponent: {
       },
     },
 
-badgeComponent: {
+buttonArrowComponent: {
+      title: 'زر مع سهم',
+      description: 'زر مع أسهم اتجاهية يتعامل تلقائياً مع تخطيطات RTL/LTR باستخدام اتجاهات دلالية (للأمام/للخلف) بدلاً من الاتجاهات المادية (يسار/يمين).',
+      continue: 'متابعة',
+      backToBlog: 'العودة للمدونة',
+      nextStep: 'الخطوة التالية',
+      previousStep: 'الخطوة السابقة',
+      learnMore: 'اعرف المزيد',
+      goBack: 'رجوع',
+      forward: 'للأمام',
+      back: 'للخلف',
+      props: {
+        direction: 'اتجاه السهم - "forward" للتقدم، "back" للرجوع (معالجة RTL تلقائية)',
+        icon: 'نمط الأيقونة - "chevron" أو "arrow"',
+        iconPosition: 'موضع السهم - "start" أو "end" أو "auto" (auto يحدد الموضع بناءً على الاتجاه)',
+        iconSize: 'حجم أيقونة السهم - "sm" أو "md" أو "lg"',
+        hideIcon: 'إخفاء أيقونة السهم (مفيد للعرض الشرطي)',
+      },
+      examples: {
+        basicUsage: 'الاستخدام الأساسي',
+        directions: 'الاتجاهات',
+        iconStyles: 'أنماط الأيقونات',
+        withVariants: 'مع أشكال الأزرار',
+        iconSizes: 'أحجام الأيقونات',
+      },
+      accessibility: {
+        keyboardDesc: 'يرث جميع التنقل بلوحة المفاتيح من مكون الزر',
+        screenReaderDesc: 'أيقونات الأسهم زخرفية (aria-hidden) - نص الزر يوفر السياق',
+        rtlDesc: 'اتجاه السهم ينعكس تلقائياً في سياقات RTL باستخدام تحويلات CSS',
+      },
+      rtl: {
+        description: 'يستخدم ButtonArrow اتجاهات دلالية (للأمام/للخلف) تتكيف تلقائياً مع تخطيطات RTL. تدور أيقونات الأسهم 180 درجة في سياقات RTL، مما يضمن الاتجاه البصري الصحيح.',
+        semanticDirections: 'الاتجاهات الدلالية',
+        semanticDesc: 'استخدم "forward" للتقدم و "back" للرجوع. يتعامل المكون مع الاتجاه البصري تلقائياً.',
+      },
+    },
+
+    badgeComponent: {
       title: 'الشارة',
       description: 'مؤشر صغير للحالة أو التسمية. مثالي لعرض العدادات، الحالات، الفئات، والإشعارات مع دعم كامل لاتجاه النص من اليمين إلى اليسار.',
       preview: 'المعاينة',

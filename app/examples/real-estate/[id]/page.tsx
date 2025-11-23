@@ -4,6 +4,7 @@ import * as React from 'react'
 import Link from 'next/link'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
+import { ButtonArrow } from '@/components/ui/button-arrow'
 import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
@@ -21,7 +22,6 @@ import {
   MessageCircle,
   CheckCircle2,
   Car,
-  ArrowLeft,
   Building2,
   Ruler,
   DoorOpen,
@@ -190,12 +190,11 @@ export default function PropertyDetailPage({ params }: { params: { id: string } 
               ? 'العقار الذي تبحث عنه غير متاح'
               : 'The property you are looking for is not available'}
           </p>
-          <Link href="/examples/real-estate">
-            <Button>
-              <ArrowLeft className="h-4 w-4 me-2" />
+          <ButtonArrow direction="back" icon="arrow" asChild>
+            <Link href="/examples/real-estate">
               {locale === 'ar' ? 'العودة إلى القائمة' : 'Back to Listings'}
-            </Button>
-          </Link>
+            </Link>
+          </ButtonArrow>
         </div>
       </div>
     )
@@ -288,12 +287,11 @@ export default function PropertyDetailPage({ params }: { params: { id: string } 
       {/* Back Button */}
       <div className="border-b">
         <div className="container py-4">
-          <Link href="/examples/real-estate">
-            <Button variant="ghost" size="sm">
-              <ArrowLeft className="h-4 w-4 me-2" />
+          <ButtonArrow variant="ghost" size="sm" direction="back" icon="arrow" asChild>
+            <Link href="/examples/real-estate">
               {locale === 'ar' ? 'العودة إلى القائمة' : 'Back to Listings'}
-            </Button>
-          </Link>
+            </Link>
+          </ButtonArrow>
         </div>
       </div>
 

@@ -6,9 +6,10 @@ import { useRouter } from 'next/navigation'
 import { useDirection } from '@/components/providers/direction-provider'
 import { useCart } from '@/starters/ecommerce/hooks/use-cart'
 import { Button } from '@/components/ui/button'
+import { ButtonArrow } from '@/components/ui/button-arrow'
 import { Card, CardContent } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
-import { ArrowLeft, Minus, Plus, Trash2, ShoppingBag } from 'lucide-react'
+import { Minus, Plus, Trash2, ShoppingBag } from 'lucide-react'
 
 export default function CartPage() {
   const { locale } = useDirection()
@@ -65,9 +66,7 @@ export default function CartPage() {
       <header className="border-b">
         <div className="container flex h-16 items-center justify-between">
           <Link href="/products">
-            <Button variant="ghost" size="icon">
-              <ArrowLeft className="h-5 w-5" />
-            </Button>
+            <ButtonArrow variant="ghost" size="icon" direction="back" icon="arrow" />
           </Link>
           <h1 className="text-xl font-bold">
             {t.title} ({itemCount} {t.items})

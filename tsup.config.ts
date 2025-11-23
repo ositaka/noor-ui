@@ -42,6 +42,7 @@ export default defineConfig({
     '@tiptap/extension-underline',
     '@tiptap/react',
     '@tiptap/starter-kit',
+    '@mdxeditor/editor',
     '@xyflow/react',
     'class-variance-authority',
     'clsx',

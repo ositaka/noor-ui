@@ -7,7 +7,7 @@ import { Separator } from '@/components/ui/separator'
 import { CodeBlock } from '@/components/docs/code-block'
 import { ComponentShowcase } from '@/components/docs/component-showcase'
 import { BestPractices } from '@/components/docs/best-practices'
-import { Button } from '@/components/ui/button'
+import { ButtonArrow } from '@/components/ui/button-arrow'
 import { Sparkles, ArrowRight, Info, Lightbulb, Book, CheckCircle2 } from 'lucide-react'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
@@ -494,10 +494,9 @@ export default function RTLGuidePage() {
                     <h3 className="font-semibold">{t.liveExample.userName}</h3>
                     <p className="text-sm text-muted-foreground">{t.liveExample.userDesc}</p>
                   </div>
-                  <Button size="sm">
+                  <ButtonArrow direction="forward" size="sm">
                     {t.liveExample.nextButton}
-                    <ArrowRight className="ms-2 h-4 w-4 rtl:rotate-180" />
-                  </Button>
+                  </ButtonArrow>
                 </div>
               </CardContent>
             </Card>
