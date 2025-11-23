@@ -24,6 +24,7 @@ buttonComponent: {
       processing: 'جارٍ المعالجة...',
       loading: 'جارٍ التحميل',
       back: 'رجوع',
+      continue: 'متابعة',
       keyboardTabDesc: 'التركيز على الزر',
       keyboardEnterDesc: 'تنشيط الزر',
       screenReaderDesc: 'يتم الإعلان عن دور الزر تلقائياً. استخدم aria-label للأزرار التي تحتوي على أيقونات فقط.',

@@ -24,6 +24,7 @@ buttonComponent: {
       processing: 'Processing...',
       loading: 'Loading',
       back: 'Back',
+      continue: 'Continue',
       keyboardTabDesc: 'Focus the button',
       keyboardEnterDesc: 'Activate the button',
       screenReaderDesc: 'The button role is automatically announced. Use aria-label for icon-only buttons.',
