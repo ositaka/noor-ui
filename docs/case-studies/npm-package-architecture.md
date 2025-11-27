@@ -1,3 +1,6 @@
+<!-- CASE STUDY DOCUMENT - DO NOT DELETE -->
+<!-- This is source material for blog posts and educational content -->
+
 # 📦 NPM Package Strategy & Implementation Guide
 
 ## ⚠️ IMPORTANT: When to Use This Guide

@@ -1,3 +1,6 @@
+<!-- CASE STUDY DOCUMENT - DO NOT DELETE -->
+<!-- This is source material for blog posts and educational content -->
+
 # Eval UI Design - Component Composition Plan
 
 ## 📋 Overview

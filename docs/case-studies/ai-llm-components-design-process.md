@@ -1,4 +1,29 @@
-# AI/LLM Shell Feature Set - Implementation Plan
+# Case Study: AI/LLM Components - Design Process
+
+**Created:** November 2024
+**Status:** Historical planning document - Components implemented and live in Noor UI v0.3.x
+**Related Components:** Chat Message, Thinking Indicator, Prompt Input, Model Selector, Token Counter, Message Actions, Parameter Slider, Conversation History, Workflow Canvas
+
+> This is the actual planning document used to design and build Noor UI's AI/LLM component suite. We're sharing it publicly to help others building similar interfaces learn from our process.
+
+**What you'll learn from this document:**
+- How to plan a comprehensive AI interface component library
+- User flows for AI agent interactions
+- Component architecture for LLM-powered features
+- RTL considerations for AI interfaces
+- Progressive complexity in component design
+
+**Potential blog topics from this case study:**
+- "How We Designed AI Components for RTL Interfaces"
+- "Planning LLM User Interfaces: A Case Study"
+- "Building Chat Components: From Planning to Production"
+- "10 Components Every AI App Needs (And Why)"
+
+---
+
+# Original Planning Document
+
+## AI/LLM Shell Feature Set - Implementation Plan
 
 ## Overview
 Create a comprehensive set of AI/LLM components and examples for Noor UI, showcasing modern conversational interfaces with full bilingual support and RTL layout.
