@@ -67,8 +67,8 @@ const getTextareaProps = (t: typeof content.en | typeof content.ar): PropDefinit
 
 const installCode = `npm install noorui-rtl`
 
-const basicUsageCode = `import { Textarea } from '@/components/ui/textarea'
-import { Label } from '@/components/ui/label'
+const basicUsageCode = `import { Textarea } from 'noorui-rtl'
+import { Label } from 'noorui-rtl'
 
 <div className="space-y-2">
   <Label htmlFor="message">Message</Label>

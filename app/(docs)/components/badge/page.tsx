@@ -32,7 +32,7 @@ const getBadgeProps = (t: typeof content.en | typeof content.ar): PropDefinition
 
 const installCode = `npm install noorui-rtl`
 
-const basicUsageCode = `import { Badge } from '@/components/ui/badge'
+const basicUsageCode = `import { Badge } from 'noorui-rtl'
 
 <Badge>New</Badge>`
 

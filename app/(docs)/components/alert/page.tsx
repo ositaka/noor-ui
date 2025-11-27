@@ -23,7 +23,7 @@ const getAlertProps = (t: typeof content.en | typeof content.ar): PropDefinition
 
 const installCode = `npm install noorui-rtl`
 
-const basicUsageCode = `import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
+const basicUsageCode = `import { Alert, AlertDescription, AlertTitle } from 'noorui-rtl'
 import { Terminal } from 'lucide-react'
 
 <Alert>

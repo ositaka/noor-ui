@@ -218,7 +218,7 @@ const columnDefProps: PropDefinition[] = [
 
 const installCode = `npm install noorui-rtl`
 
-const basicUsageCode = `import { DataTable, type ColumnDef } from '@/components/ui/data-table'
+const basicUsageCode = `import { DataTable, type ColumnDef } from 'noorui-rtl'
 
 interface User {
   id: string

@@ -61,8 +61,8 @@ const getInputProps = (t: typeof content.en | typeof content.ar): PropDefinition
 
 const installCode = `npm install noorui-rtl`
 
-const basicUsageCode = `import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
+const basicUsageCode = `import { Input } from 'noorui-rtl'
+import { Label } from 'noorui-rtl'
 
 <div className="space-y-2">
   <Label htmlFor="email">Email</Label>
@@ -90,8 +90,8 @@ const typesCode = `// Text input
 // Search input
 <Input type="search" placeholder="Search..." />`
 
-const withLabelCode = `import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
+const withLabelCode = `import { Input } from 'noorui-rtl'
+import { Label } from 'noorui-rtl'
 
 <div className="space-y-2">
   <Label htmlFor="username">Username</Label>

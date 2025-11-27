@@ -120,7 +120,7 @@ export default function ListingCardPage() {
   const isRTL = direction === 'rtl'
   const t = content[locale]
 
-  const basicUsage = `import { ListingCard } from '@/components/ui/listing-card'
+  const basicUsage = `import { ListingCard } from 'noorui-rtl'
 import { Home } from 'lucide-react'
 
 <ListingCard
@@ -131,7 +131,7 @@ import { Home } from 'lucide-react'
   placeholderIcon={Home}
 />`
 
-  const realEstateCode = `import { ListingCard } from '@/components/ui/listing-card'
+  const realEstateCode = `import { ListingCard } from 'noorui-rtl'
 import { Home, Heart, Share2, Bed, Bath, Square, MapPin } from 'lucide-react'
 
 <ListingCard
@@ -167,7 +167,7 @@ import { Home, Heart, Share2, Bed, Bath, Square, MapPin } from 'lucide-react'
   featured={true}
 />`
 
-  const ecommerceCode = `import { ListingCard } from '@/components/ui/listing-card'
+  const ecommerceCode = `import { ListingCard } from 'noorui-rtl'
 import { Package, Heart, Star } from 'lucide-react'
 
 <ListingCard
@@ -196,7 +196,7 @@ import { Package, Heart, Star } from 'lucide-react'
   imageAspect="square"
 />`
 
-  const jobListingCode = `import { ListingCard } from '@/components/ui/listing-card'
+  const jobListingCode = `import { ListingCard } from 'noorui-rtl'
 import { Briefcase, Clock, MapPin, DollarSign } from 'lucide-react'
 
 <ListingCard

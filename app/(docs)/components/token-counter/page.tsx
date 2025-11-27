@@ -103,7 +103,7 @@ const tokenCounterProps: PropDefinition[] = [
 
 const installCode = `npm install noorui-rtl`
 
-const basicUsageCode = `import { TokenCounter } from '@/components/ui/token-counter'
+const basicUsageCode = `import { TokenCounter } from 'noorui-rtl'
 
 <TokenCounter
   inputTokens={1250}

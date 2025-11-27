@@ -109,7 +109,7 @@ const conversationInterface = `interface Conversation {
 
 const installCode = `npm install noorui-rtl`
 
-const basicUsageCode = `import { ConversationHistory, type Conversation } from '@/components/ui/conversation-history'
+const basicUsageCode = `import { ConversationHistory, type Conversation } from 'noorui-rtl'
 
 const conversations: Conversation[] = [
   {

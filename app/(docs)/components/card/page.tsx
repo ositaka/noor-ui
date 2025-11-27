@@ -76,7 +76,7 @@ const getCardFooterProps = (t: typeof content.en | typeof content.ar): PropDefin
 
 const installCode = `npm install noorui-rtl`
 
-const basicUsageCode = `import { Card, CardContent } from '@/components/ui/card'
+const basicUsageCode = `import { Card, CardContent } from 'noorui-rtl'
 
 <Card>
   <CardContent className="p-6">
@@ -91,7 +91,7 @@ const fullCardCode = `import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card'
+} from 'noorui-rtl'
 
 <Card>
   <CardHeader>

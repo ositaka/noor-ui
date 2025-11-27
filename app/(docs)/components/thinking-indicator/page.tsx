@@ -36,7 +36,7 @@ const thinkingIndicatorProps: PropDefinition[] = [
 
 const installCode = `npm install noorui-rtl`
 
-const basicUsageCode = `import { ThinkingIndicator } from '@/components/ui/thinking-indicator'
+const basicUsageCode = `import { ThinkingIndicator } from 'noorui-rtl'
 
 <ThinkingIndicator variant="dots" />`
 

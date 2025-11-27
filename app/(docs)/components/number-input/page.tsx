@@ -118,7 +118,7 @@ const numberInputProps: PropDefinition[] = [
   },
 ]
 
-const basicCode = `import { NumberInput } from '@/components/ui/number-input'
+const basicCode = `import { NumberInput } from 'noorui-rtl'
 
 const [value, setValue] = useState(0)
 

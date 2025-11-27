@@ -46,7 +46,7 @@ const featureCardProps: PropDefinition[] = [
 
 const installCode = `npm install noorui-rtl`
 
-const basicUsageCode = `import { FeatureCard } from '@/components/ui/feature-card'
+const basicUsageCode = `import { FeatureCard } from 'noorui-rtl'
 import { Sparkles } from 'lucide-react'
 
 <FeatureCard
@@ -55,7 +55,7 @@ import { Sparkles } from 'lucide-react'
   description="This feature will change your life"
 />`
 
-const clickableCode = `import { FeatureCard } from '@/components/ui/feature-card'
+const clickableCode = `import { FeatureCard } from 'noorui-rtl'
 import { Rocket } from 'lucide-react'
 
 // Card becomes clickable when href is provided
@@ -66,7 +66,7 @@ import { Rocket } from 'lucide-react'
   href="/getting-started"
 />`
 
-const gridLayoutCode = `import { FeatureCard } from '@/components/ui/feature-card'
+const gridLayoutCode = `import { FeatureCard } from 'noorui-rtl'
 import { Zap, Shield, Package } from 'lucide-react'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'

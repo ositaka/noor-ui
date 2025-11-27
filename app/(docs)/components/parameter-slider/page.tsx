@@ -114,7 +114,7 @@ const presetInterface = `interface ParameterPreset {
 
 const installCode = `npm install noorui-rtl`
 
-const basicUsageCode = `import { ParameterSlider } from '@/components/ui/parameter-slider'
+const basicUsageCode = `import { ParameterSlider } from 'noorui-rtl'
 
 const [temperature, setTemperature] = React.useState(0.7)
 
@@ -128,7 +128,7 @@ const [temperature, setTemperature] = React.useState(0.7)
   step={0.1}
 />`
 
-const withPresetsCode = `import { ParameterSlider, temperaturePresets } from '@/components/ui/parameter-slider'
+const withPresetsCode = `import { ParameterSlider, temperaturePresets } from 'noorui-rtl'
 
 const [temperature, setTemperature] = React.useState(0.7)
 

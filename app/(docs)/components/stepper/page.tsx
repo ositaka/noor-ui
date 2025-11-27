@@ -53,7 +53,7 @@ const stepperProps: PropDefinition[] = [
   },
 ]
 
-const basicCode = `import { Stepper } from '@/components/ui/stepper'
+const basicCode = `import { Stepper } from 'noorui-rtl'
 
 const steps = [
   { id: '1', title: 'Account', titleAr: 'الحساب' },

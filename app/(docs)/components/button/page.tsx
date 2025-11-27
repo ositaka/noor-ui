@@ -52,7 +52,7 @@ const getButtonProps = (t: typeof content.en | typeof content.ar): PropDefinitio
 
 const installCode = `npm install noorui-rtl`
 
-const basicUsageCode = `import { Button } from '@/components/ui/button'
+const basicUsageCode = `import { Button } from 'noorui-rtl'
 
 <Button variant="primary">
   Click me
@@ -89,7 +89,7 @@ const loadingCode = `<Button loading>
 const rtlCode = `// RTL support is automatic with ButtonArrow!
 // Use semantic directions: 'forward' or 'back'
 
-import { ButtonArrow } from '@/components/ui/button-arrow'
+import { ButtonArrow } from 'noorui-rtl'
 
 // Back button - arrow automatically flips in RTL
 <ButtonArrow direction="back">

@@ -94,7 +94,7 @@ const chatMessageProps: PropDefinition[] = [
 
 const installCode = `npm install noorui-rtl`
 
-const basicUsageCode = `import { ChatMessage } from '@/components/ui/chat-message'
+const basicUsageCode = `import { ChatMessage } from 'noorui-rtl'
 
 <ChatMessage
   role="assistant"

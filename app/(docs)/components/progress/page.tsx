@@ -29,7 +29,7 @@ const getProgressProps = (locale: 'en' | 'ar'): PropDefinition[] => [
 
 const installCode = `npm install noorui-rtl`
 
-const basicUsageCode = `import { Progress } from '@/components/ui/progress'
+const basicUsageCode = `import { Progress } from 'noorui-rtl'
 
 <Progress value={33} />`
 

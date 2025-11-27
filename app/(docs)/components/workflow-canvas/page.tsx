@@ -118,8 +118,8 @@ const workflowCanvasProps: PropDefinition[] = [
 
 const installCode = `npm install noorui-rtl @xyflow/react`
 
-const basicUsageCode = `import { WorkflowCanvas } from '@/components/ui/workflow-canvas'
-import { WorkflowNode } from '@/components/ui/workflow-node'
+const basicUsageCode = `import { WorkflowCanvas } from 'noorui-rtl'
+import { WorkflowNode } from 'noorui-rtl'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 

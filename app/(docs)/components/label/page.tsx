@@ -34,8 +34,8 @@ const getLabelProps = (t: typeof content.en | typeof content.ar): PropDefinition
 
 const installCode = `npm install noorui-rtl`
 
-const basicUsageCode = `import { Label } from '@/components/ui/label'
-import { Input } from '@/components/ui/input'
+const basicUsageCode = `import { Label } from 'noorui-rtl'
+import { Input } from 'noorui-rtl'
 
 <div className="space-y-2">
   <Label htmlFor="email">Email Address</Label>

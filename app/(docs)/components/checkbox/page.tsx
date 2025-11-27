@@ -67,8 +67,8 @@ const getCheckboxProps = (t: typeof content.en | typeof content.ar): PropDefinit
 
 const installCode = `npm install noorui-rtl`
 
-const basicUsageCode = `import { Checkbox } from '@/components/ui/checkbox'
-import { Label } from '@/components/ui/label'
+const basicUsageCode = `import { Checkbox } from 'noorui-rtl'
+import { Label } from 'noorui-rtl'
 
 <div className="flex items-center gap-2">
   <Checkbox id="terms" />

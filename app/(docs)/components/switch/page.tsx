@@ -60,8 +60,8 @@ const getSwitchProps = (t: typeof content.en | typeof content.ar): PropDefinitio
 
 const installCode = `npm install noorui-rtl`
 
-const basicUsageCode = `import { Switch } from '@/components/ui/switch'
-import { Label } from '@/components/ui/label'
+const basicUsageCode = `import { Switch } from 'noorui-rtl'
+import { Label } from 'noorui-rtl'
 
 <div className="flex items-center gap-2">
   <Switch id="airplane-mode" />

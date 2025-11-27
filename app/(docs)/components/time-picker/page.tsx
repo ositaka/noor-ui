@@ -119,7 +119,7 @@ const timeRangePickerProps: PropDefinition[] = [
   },
 ]
 
-const basicCode = `import { TimePicker, type Time } from '@/components/ui/time-picker'
+const basicCode = `import { TimePicker, type Time } from 'noorui-rtl'
 
 const [time, setTime] = useState<Time>({ hours: 9, minutes: 0 })
 
@@ -137,7 +137,7 @@ const format12hCode = `<TimePicker
   placeholder="Pick a time"
 />`
 
-const rangeCode = `import { TimeRangePicker, type TimeRange } from '@/components/ui/time-picker'
+const rangeCode = `import { TimeRangePicker, type TimeRange } from 'noorui-rtl'
 
 const [timeRange, setTimeRange] = useState<TimeRange>({
   from: { hours: 9, minutes: 0 },

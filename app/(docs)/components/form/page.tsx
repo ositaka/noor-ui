@@ -49,9 +49,9 @@ const getFormProps = (t: typeof content.en | typeof content.ar): PropDefinition[
 
 const installCode = `npm install noorui-rtl`
 
-const basicUsageCode = `import { Form, FormField, FormItem, FormLabel, FormMessage, validators } from '@/components/ui/form'
-import { Input } from '@/components/ui/input'
-import { Button } from '@/components/ui/button'
+const basicUsageCode = `import { Form, FormField, FormItem, FormLabel, FormMessage, validators } from 'noorui-rtl'
+import { Input } from 'noorui-rtl'
+import { Button } from 'noorui-rtl'
 
 export default function MyForm() {
   return (
@@ -80,7 +80,7 @@ export default function MyForm() {
   )
 }`
 
-const validationCode = `import { validators, composeValidators } from '@/components/ui/form'
+const validationCode = `import { validators, composeValidators } from 'noorui-rtl'
 
 const formValidators = {
   email: composeValidators(

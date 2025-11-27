@@ -95,7 +95,7 @@ const getCalendarProps = (t: typeof content.en | typeof content.ar): PropDefinit
 
 const installCode = `npm install noorui-rtl`
 
-const basicUsageCode = `import { Calendar } from '@/components/ui/calendar'
+const basicUsageCode = `import { Calendar } from 'noorui-rtl'
 import { useState } from 'react'
 
 export function DatePicker() {
@@ -110,7 +110,7 @@ export function DatePicker() {
   )
 }`
 
-const rangeCode = `import { Calendar, type DateRange } from '@/components/ui/calendar'
+const rangeCode = `import { Calendar, type DateRange } from 'noorui-rtl'
 import { useState } from 'react'
 
 export function DateRangePicker() {
@@ -503,7 +503,7 @@ export default function CalendarPage() {
                   <h4 className="font-semibold mb-2">{t.calendarComponent.hijriIntegration.usingFormkit}</h4>
                   <CodeBlock
                     code={`import { toHijri } from '@formkit/hijri'
-import { Calendar } from '@/components/ui/calendar'
+import { Calendar } from 'noorui-rtl'
 
 const getAccurateHijri = (date: Date) => {
   const hijri = toHijri(date)

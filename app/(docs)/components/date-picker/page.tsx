@@ -136,7 +136,7 @@ const dateRangePickerProps: PropDefinition[] = [
   },
 ]
 
-const basicCode = `import { DatePicker } from '@/components/ui/date-picker'
+const basicCode = `import { DatePicker } from 'noorui-rtl'
 
 const [date, setDate] = useState<Date | undefined>(new Date())
 
@@ -147,7 +147,7 @@ const [date, setDate] = useState<Date | undefined>(new Date())
   placeholderAr="اختر تاريخ"
 />`
 
-const rangeCode = `import { DateRangePicker, type DateRange } from '@/components/ui/date-picker'
+const rangeCode = `import { DateRangePicker, type DateRange } from 'noorui-rtl'
 
 const [dateRange, setDateRange] = useState<DateRange | undefined>({
   from: new Date(),

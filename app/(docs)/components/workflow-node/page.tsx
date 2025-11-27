@@ -79,8 +79,8 @@ const workflowNodeProps: PropDefinition[] = [
 
 const installCode = `npm install noorui-rtl @xyflow/react lucide-react`
 
-const basicUsageCode = `import { WorkflowNode } from '@/components/ui/workflow-node'
-import { WorkflowCanvas } from '@/components/ui/workflow-canvas'
+const basicUsageCode = `import { WorkflowNode } from 'noorui-rtl'
+import { WorkflowCanvas } from 'noorui-rtl'
 import { Zap } from 'lucide-react'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'

@@ -114,7 +114,7 @@ const messageActionsProps: PropDefinition[] = [
 
 const installCode = `npm install noorui-rtl`
 
-const basicUsageCode = `import { MessageActions } from '@/components/ui/message-actions'
+const basicUsageCode = `import { MessageActions } from 'noorui-rtl'
 
 <MessageActions
   showCopy

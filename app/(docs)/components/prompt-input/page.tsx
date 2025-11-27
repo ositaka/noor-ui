@@ -99,7 +99,7 @@ const promptInputProps: PropDefinition[] = [
 
 const installCode = `npm install noorui-rtl`
 
-const basicUsageCode = `import { PromptInput } from '@/components/ui/prompt-input'
+const basicUsageCode = `import { PromptInput } from 'noorui-rtl'
 
 <PromptInput
   onSend={(value) => console.log('Sent:', value)}

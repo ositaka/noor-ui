@@ -23,7 +23,7 @@ const skeletonProps: PropDefinition[] = [
 
 const installCode = `npm install noorui-rtl`
 
-const basicUsageCode = `import { Skeleton } from '@/components/ui/skeleton'
+const basicUsageCode = `import { Skeleton } from 'noorui-rtl'
 
 export default function Loading() {
   const { locale } = useDirection()

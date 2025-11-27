@@ -79,7 +79,7 @@ const aiModelInterface = `interface AIModel {
 
 const installCode = `npm install noorui-rtl`
 
-const basicUsageCode = `import { ModelSelector, defaultModels } from '@/components/ui/model-selector'
+const basicUsageCode = `import { ModelSelector, defaultModels } from 'noorui-rtl'
 
 <ModelSelector
   models={defaultModels}
