@@ -5,6 +5,30 @@ All notable changes to Noor UI will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.0] - 2025-11-28
+
+### Added
+
+#### New Components (8 Components)
+- **ReactionPicker**: LinkedIn/Discord-style emoji reaction picker for social features. Supports compact mode (merged display) and expanded mode (separate reactions). Includes tooltip breakdowns, active state tracking, and full RTL support. Perfect for comments, posts, messages, and reviews.
+- **UserBadge**: Role and status badge component with 5 variants (author, moderator, verified, admin, custom). Includes icon support and clean noorui styling. Useful for profiles, comments, leaderboards, and chat systems.
+- **ContentRenderer**: Markdown/HTML content renderer with automatic RTL/LTR detection via `dir="auto"`. Features code highlighting, XSS protection, proper prose styling, and logical CSS properties for bidirectional content. Essential for user-generated content, comments, and documentation.
+- **Kbd**: Keyboard shortcut display component with platform-aware symbols (⌘ on Mac, Ctrl on Windows). Supports key combinations, 3 variants (default, outline, ghost), 3 sizes, and RTL support. Perfect for search modals, toolbars, menus, and documentation.
+- **Callout**: Enhanced alert/notification component with 5 types (info, warning, error, success, note). Features custom icons, title support, and RTL-aware layout. Ideal for documentation, tips, warnings, and important messages.
+- **Blockquote**: Styled quote component with 3 variants (default, accent, subtle). Supports author attribution, source citations, and clickable cite URLs. Clean typography with proper spacing.
+- **PullQuote**: Large emphasized quote for highlighting key text. Supports 3 alignments (left, center, right). Uses elegant serif typography with decorative quotation marks.
+- **StatsCard**: Dashboard statistics display card with icon, label, value, and optional trend indicator. Clean card-based design for analytics dashboards.
+
+#### New Hooks
+- **useRelativeTime**: Hook for formatting dates as relative time strings ("2 hours ago", "منذ ساعتين"). Features auto-updates, customizable intervals, and full localization for 4 locales (en, ar, fr, ur). Handles all time ranges from seconds to years.
+
+### Changed
+- Updated component count from 65 to 73+ components
+- Expanded package exports with new UI components and hooks
+- Enhanced social and content-focused capabilities
+
+---
+
 ## [0.3.14] - 2025-11-23
 
 ### Added
