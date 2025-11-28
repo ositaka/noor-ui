@@ -12,6 +12,8 @@ export { Alert, AlertTitle, AlertDescription } from './ui/alert'
 export { ArabicNumber } from './ui/arabic-number'
 export { Avatar, AvatarImage, AvatarFallback } from './ui/avatar'
 export { Badge, badgeVariants } from './ui/badge'
+export { Blockquote, PullQuote } from './ui/blockquote'
+export type { BlockquoteProps, PullQuoteProps } from './ui/blockquote'
 export {
   Breadcrumb,
   BreadcrumbList,
@@ -24,6 +26,8 @@ export { Button, buttonVariants } from './ui/button'
 export { ButtonArrow } from './ui/button-arrow'
 export type { ButtonArrowProps } from './ui/button-arrow'
 export { Calendar } from './ui/calendar'
+export { Callout, InfoCallout, WarningCallout, ErrorCallout, SuccessCallout } from './ui/callout'
+export type { CalloutProps, CalloutType } from './ui/callout'
 export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent } from './ui/card'
 export { ChatMessage } from './ui/chat-message'
 export { Checkbox } from './ui/checkbox'
@@ -39,6 +43,8 @@ export {
   CommandShortcut,
   CommandSeparator,
 } from './ui/command'
+export { ContentRenderer } from './ui/content-renderer'
+export type { ContentRendererProps } from './ui/content-renderer'
 export {
   ContextMenu,
   ContextMenuTrigger,
@@ -103,6 +109,8 @@ export {
 export type { FormProps } from './ui/form'
 export { HijriDate } from './ui/hijri-date'
 export { Input } from './ui/input'
+export { Kbd } from './ui/kbd'
+export type { KbdProps } from './ui/kbd'
 export { Label } from './ui/label'
 export { ListingCard } from './ui/listing-card'
 export { LoadingSpinner } from './ui/loading-spinner'
@@ -125,6 +133,8 @@ export { PrayerTimes } from './ui/prayer-times'
 export { Progress } from './ui/progress'
 export { PromptInput } from './ui/prompt-input'
 export { RadioGroup, RadioGroupItem } from './ui/radio-group'
+export { ReactionPicker } from './ui/reaction-picker'
+export type { Reaction, ReactionPickerProps } from './ui/reaction-picker'
 export { RichTextEditor } from './ui/rich-text-editor'
 // MarkdownEditor excluded from package - @mdxeditor/editor lacks type declarations
 // export { MarkdownEditor } from './ui/markdown-editor'
@@ -156,6 +166,8 @@ export {
 } from './ui/sheet'
 export { Skeleton } from './ui/skeleton'
 export { Slider } from './ui/slider'
+export { StatsCard } from './ui/stats-card'
+export type { StatsCardProps } from './ui/stats-card'
 export { Stepper } from './ui/stepper'
 export type { Step, StepperProps } from './ui/stepper'
 export { StreamingText } from './ui/streaming-text'
@@ -191,11 +203,16 @@ export {
   TooltipContent,
   TooltipProvider,
 } from './ui/tooltip'
+export { UserBadge } from './ui/user-badge'
+export type { UserBadgeProps, UserBadgeVariant } from './ui/user-badge'
 export { UserMenu } from './ui/user-menu'
 export { WorkflowCanvas } from './ui/workflow-canvas'
 export { WorkflowNode } from './ui/workflow-node'
 export { workflowNodeTypes } from './ui/workflow-nodes'
 export { ZakatCalculator } from './ui/zakat-calculator'
+
+// Hooks
+export { useRelativeTime } from '../lib/hooks/use-relative-time'
 
 // Utility exports
 export { cn } from '../lib/utils.js'
