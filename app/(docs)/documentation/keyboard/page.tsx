@@ -104,7 +104,7 @@ export default function KeyboardPage() {
               <div className="space-y-4">
                 <div className="flex justify-between items-start">
                   <div>
-                    <kbd className="px-2 py-1 bg-muted rounded font-mono text-sm">Tab</kbd>
+                    <kbd dir="ltr" className="px-2 py-1 bg-muted rounded font-mono text-sm">Tab</kbd>
                     <p className="text-sm text-muted-foreground mt-1">{t.tab}</p>
                   </div>
                   <span className="text-sm text-muted-foreground">{t.allComponents}</span>
@@ -112,7 +112,7 @@ export default function KeyboardPage() {
 
                 <div className="flex justify-between items-start">
                   <div>
-                    <kbd className="px-2 py-1 bg-muted rounded font-mono text-sm">Shift</kbd> + <kbd className="px-2 py-1 bg-muted rounded font-mono text-sm">Tab</kbd>
+                    <kbd dir="ltr" className="px-2 py-1 bg-muted rounded font-mono text-sm">Shift</kbd> + <kbd dir="ltr" className="px-2 py-1 bg-muted rounded font-mono text-sm">Tab</kbd>
                     <p className="text-sm text-muted-foreground mt-1">{t.shiftTab}</p>
                   </div>
                   <span className="text-sm text-muted-foreground">{t.allComponents}</span>
@@ -120,7 +120,7 @@ export default function KeyboardPage() {
 
                 <div className="flex justify-between items-start">
                   <div>
-                    <kbd className="px-2 py-1 bg-muted rounded font-mono text-sm">Enter</kbd> / <kbd className="px-2 py-1 bg-muted rounded font-mono text-sm">Space</kbd>
+                    <kbd dir="ltr" className="px-2 py-1 bg-muted rounded font-mono text-sm">Enter</kbd> / <kbd dir="ltr" className="px-2 py-1 bg-muted rounded font-mono text-sm">Space</kbd>
                     <p className="text-sm text-muted-foreground mt-1">{t.enterSpace}</p>
                   </div>
                   <span className="text-sm text-muted-foreground">{t.buttonsCheckboxes}</span>
@@ -128,7 +128,7 @@ export default function KeyboardPage() {
 
                 <div className="flex justify-between items-start">
                   <div>
-                    <kbd className="px-2 py-1 bg-muted rounded font-mono text-sm">Escape</kbd>
+                    <kbd dir="ltr" className="px-2 py-1 bg-muted rounded font-mono text-sm">Escape</kbd>
                     <p className="text-sm text-muted-foreground mt-1">{t.escape}</p>
                   </div>
                   <span className="text-sm text-muted-foreground">{t.dialogsDropdowns}</span>
@@ -136,7 +136,7 @@ export default function KeyboardPage() {
 
                 <div className="flex justify-between items-start">
                   <div>
-                    <kbd className="px-2 py-1 bg-muted rounded font-mono text-sm">Arrow Keys</kbd>
+                    <kbd dir="ltr" className="px-2 py-1 bg-muted rounded font-mono text-sm">Arrow Keys</kbd>
                     <p className="text-sm text-muted-foreground mt-1">{t.arrowKeys}</p>
                   </div>
                   <span className="text-sm text-muted-foreground">{t.tabsMenusRadio}</span>
@@ -144,7 +144,7 @@ export default function KeyboardPage() {
 
                 <div className="flex justify-between items-start">
                   <div>
-                    <kbd className="px-2 py-1 bg-muted rounded font-mono text-sm">Home</kbd> / <kbd className="px-2 py-1 bg-muted rounded font-mono text-sm">End</kbd>
+                    <kbd dir="ltr" className="px-2 py-1 bg-muted rounded font-mono text-sm">Home</kbd> / <kbd dir="ltr" className="px-2 py-1 bg-muted rounded font-mono text-sm">End</kbd>
                     <p className="text-sm text-muted-foreground mt-1">{t.homeEnd}</p>
                   </div>
                   <span className="text-sm text-muted-foreground">{t.listsMenus}</span>
@@ -218,7 +218,7 @@ export default function KeyboardPage() {
               <CardContent className="p-4">
                 <h3 className="font-semibold mb-2">{t.dialog}</h3>
                 <ul className="text-sm text-muted-foreground space-y-1">
-                  <li>• <kbd className="px-1.5 py-0.5 bg-muted rounded text-xs">Escape</kbd> - {t.closeDialog}</li>
+                  <li>• <kbd dir="ltr" className="px-1.5 py-0.5 bg-muted rounded text-xs">Escape</kbd> - {t.closeDialog}</li>
                   <li>• {t.focusTrapped}</li>
                   <li>• {t.autoFocus}</li>
                 </ul>
@@ -229,8 +229,8 @@ export default function KeyboardPage() {
               <CardContent className="p-4">
                 <h3 className="font-semibold mb-2">{t.tabs}</h3>
                 <ul className="text-sm text-muted-foreground space-y-1">
-                  <li>• <kbd className="px-1.5 py-0.5 bg-muted rounded text-xs">←</kbd> <kbd className="px-1.5 py-0.5 bg-muted rounded text-xs">→</kbd> - {t.navigateTabs}</li>
-                  <li>• <kbd className="px-1.5 py-0.5 bg-muted rounded text-xs">Home</kbd> <kbd className="px-1.5 py-0.5 bg-muted rounded text-xs">End</kbd> - {t.jumpFirstLast}</li>
+                  <li>• <kbd dir="ltr" className="px-1.5 py-0.5 bg-muted rounded text-xs">←</kbd> <kbd dir="ltr" className="px-1.5 py-0.5 bg-muted rounded text-xs">→</kbd> - {t.navigateTabs}</li>
+                  <li>• <kbd dir="ltr" className="px-1.5 py-0.5 bg-muted rounded text-xs">Home</kbd> <kbd dir="ltr" className="px-1.5 py-0.5 bg-muted rounded text-xs">End</kbd> - {t.jumpFirstLast}</li>
                   <li>• {t.autoActivate}</li>
                 </ul>
               </CardContent>
@@ -240,9 +240,9 @@ export default function KeyboardPage() {
               <CardContent className="p-4">
                 <h3 className="font-semibold mb-2">{t.selectDropdown}</h3>
                 <ul className="text-sm text-muted-foreground space-y-1">
-                  <li>• <kbd className="px-1.5 py-0.5 bg-muted rounded text-xs">↑</kbd> <kbd className="px-1.5 py-0.5 bg-muted rounded text-xs">↓</kbd> - {t.navigateOptions}</li>
-                  <li>• <kbd className="px-1.5 py-0.5 bg-muted rounded text-xs">Enter</kbd> - {t.selectOption}</li>
-                  <li>• <kbd className="px-1.5 py-0.5 bg-muted rounded text-xs">Escape</kbd> - {t.closeWithoutSelect}</li>
+                  <li>• <kbd dir="ltr" className="px-1.5 py-0.5 bg-muted rounded text-xs">↑</kbd> <kbd dir="ltr" className="px-1.5 py-0.5 bg-muted rounded text-xs">↓</kbd> - {t.navigateOptions}</li>
+                  <li>• <kbd dir="ltr" className="px-1.5 py-0.5 bg-muted rounded text-xs">Enter</kbd> - {t.selectOption}</li>
+                  <li>• <kbd dir="ltr" className="px-1.5 py-0.5 bg-muted rounded text-xs">Escape</kbd> - {t.closeWithoutSelect}</li>
                   <li>• {t.typeSearch}</li>
                 </ul>
               </CardContent>

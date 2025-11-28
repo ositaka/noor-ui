@@ -410,7 +410,7 @@ common: {
           misc: 'متنوعة',
         },
         counts: {
-          totalComponents: '65 مكون',
+          totalComponents: 'أكثر من 73 مكون',
           totalExamples: '11 مثال مباشر',
           totalPages: 'أكثر من 100 صفحة',
         },

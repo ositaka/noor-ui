@@ -427,19 +427,18 @@ statsCardComponent: {
       preview: 'Preview',
       installation: 'Installation',
       usage: 'Usage',
+      liveDemo: 'Live Demo',
       examples: {
         title: 'Examples',
       },
       props: {
-        label: 'Label for the metric',
-        value: 'Value to display',
-        trend: 'Trend percentage (positive or negative)',
-        trendLabel: 'Trend label (e.g., "vs last month")',
-        icon: 'Icon to display',
-        isLoading: 'Loading state',
-        format: 'Value format',
-        className: 'Additional CSS classes',
-        valueClassName: 'CSS classes for value element',
+        title: 'Props',
+        icon: 'Icon React node to display in the header',
+        label: 'Label text for the metric',
+        value: 'Value to display (string or number)',
+        trend: 'Optional trend percentage (positive or negative number)',
+        trendLabel: 'Optional trend label (e.g., "vs last month")',
+        className: 'Additional CSS classes to apply',
       },
       bestPractices: {
         doList: [

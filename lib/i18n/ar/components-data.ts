@@ -427,19 +427,18 @@ statsCardComponent: {
       preview: 'معاينة',
       installation: 'التثبيت',
       usage: 'الاستخدام',
+      liveDemo: 'عرض مباشر',
       examples: {
         title: 'أمثلة',
       },
       props: {
-        label: 'تسمية المقياس',
-        value: 'القيمة المعروضة',
-        trend: 'نسبة الاتجاه (موجبة أو سالبة)',
-        trendLabel: 'تسمية الاتجاه (مثل "مقابل الشهر الماضي")',
-        icon: 'الأيقونة المعروضة',
-        isLoading: 'حالة التحميل',
-        format: 'تنسيق القيمة',
-        className: 'فئات CSS إضافية',
-        valueClassName: 'فئات CSS لعنصر القيمة',
+        title: 'الخصائص',
+        icon: 'عقدة React للأيقونة المعروضة في الرأس',
+        label: 'نص التسمية للمقياس',
+        value: 'القيمة المراد عرضها (نص أو رقم)',
+        trend: 'نسبة الاتجاه الاختيارية (رقم موجب أو سالب)',
+        trendLabel: 'تسمية الاتجاه الاختيارية (مثل "مقابل الشهر الماضي")',
+        className: 'فئات CSS إضافية للتطبيق',
       },
       bestPractices: {
         doList: [

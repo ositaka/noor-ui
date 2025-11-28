@@ -410,7 +410,7 @@ common: {
           misc: 'Miscellaneous',
         },
         counts: {
-          totalComponents: '65 Components',
+          totalComponents: '73+ Components',
           totalExamples: '11 Live Examples',
           totalPages: '100+ Pages',
         },

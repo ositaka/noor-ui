@@ -8,7 +8,7 @@ home: {
       hero: {
         title: 'Noor UI',
         subtitle: 'Built for the GCC market. Arabic and English, equal citizens.',
-        description: 'A comprehensive, modern design system with full bilingual support. 65 accessible components, 4 beautiful themes, perfect RTL mirroring. Bringing light to multilingual interface design.',
+        description: 'A comprehensive, modern design system with full bilingual support. 73+ accessible components, 4 beautiful themes, perfect RTL mirroring. Bringing light to multilingual interface design.',
         cta: {
           primary: 'Explore Components',
           secondary: 'View Documentation',
@@ -19,7 +19,7 @@ home: {
         subtitle: 'Production-ready components for modern web applications',
         items: [
           {
-            title: '65 Components',
+            title: '73+ Components',
             description: 'Complete UI toolkit from buttons to complex data tables, plus experimental AI/LLM components',
           },
           {
@@ -75,7 +75,7 @@ home: {
         description: 'Package published to NPM! Building community and preparing for public launch.',
         stats: {
           components: 'Components',
-          componentsCount: '65+',
+          componentsCount: '73+',
           componentsDesc: 'Production-ready',
           examples: 'Examples',
           examplesCount: '10+',
@@ -86,8 +86,8 @@ home: {
         },
         recentWins: {
           title: 'Recent Wins',
-          performance: 'NPM package published (noorui-rtl v0.3.14)',
-          skeletons: '65+ production-ready components with full documentation',
+          performance: 'NPM package published (noorui-rtl v0.4.0)',
+          skeletons: '73+ production-ready components with full documentation',
           components: '10+ complete demo projects (Blog, Marketplace, AI workflows)',
           rebranding: 'Full RTL/LTR support with logical properties + WCAG AA accessibility',
         },

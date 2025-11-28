@@ -193,11 +193,11 @@ export default function WCAGPage() {
             <CardContent className="p-6">
               <h3 className="font-semibold mb-3">{t.keyboardSupport}</h3>
               <ul className="space-y-2 text-sm text-muted-foreground">
-                <li>• <kbd className="px-2 py-1 bg-muted rounded">Tab</kbd> - {t.tabKey}</li>
-                <li>• <kbd className="px-2 py-1 bg-muted rounded">Shift + Tab</kbd> - {t.shiftTabKey}</li>
-                <li>• <kbd className="px-2 py-1 bg-muted rounded">Enter</kbd> / <kbd className="px-2 py-1 bg-muted rounded">Space</kbd> - {t.enterSpaceKey}</li>
-                <li>• <kbd className="px-2 py-1 bg-muted rounded">Escape</kbd> - {t.escapeKey}</li>
-                <li>• <kbd className="px-2 py-1 bg-muted rounded">Arrow keys</kbd> - {t.arrowKeysNav}</li>
+                <li>• <kbd dir="ltr" className="px-2 py-1 bg-muted rounded">Tab</kbd> - {t.tabKey}</li>
+                <li>• <kbd dir="ltr" className="px-2 py-1 bg-muted rounded">Shift + Tab</kbd> - {t.shiftTabKey}</li>
+                <li>• <kbd dir="ltr" className="px-2 py-1 bg-muted rounded">Enter</kbd> / <kbd dir="ltr" className="px-2 py-1 bg-muted rounded">Space</kbd> - {t.enterSpaceKey}</li>
+                <li>• <kbd dir="ltr" className="px-2 py-1 bg-muted rounded">Escape</kbd> - {t.escapeKey}</li>
+                <li>• <kbd dir="ltr" className="px-2 py-1 bg-muted rounded">Arrow keys</kbd> - {t.arrowKeysNav}</li>
               </ul>
             </CardContent>
           </Card>

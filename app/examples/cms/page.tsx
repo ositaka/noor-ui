@@ -347,7 +347,7 @@ export default function CMSPage() {
                 <span>{t.cmsPage.description}</span>
                 <Separator orientation="vertical" className="h-4" />
                 <div className="flex items-center gap-1">
-                  <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
+                  <kbd dir="ltr" className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100 rtl:flex-row-reverse">
                     <span className="text-xs">⌘</span>K
                   </kbd>
                   <span>{t.cmsPage.quickSearch}</span>

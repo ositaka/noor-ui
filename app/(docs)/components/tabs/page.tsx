@@ -313,10 +313,10 @@ export default function TabsPage() {
               <div>
                 <h3 className="font-semibold mb-2">Keyboard Navigation</h3>
                 <ul className="list-disc list-inside text-sm text-muted-foreground space-y-1">
-                  <li><kbd className="px-1.5 py-0.5 rounded bg-muted">Tab</kbd> - Move focus to the active tab</li>
-                  <li><kbd className="px-1.5 py-0.5 rounded bg-muted">Arrow Keys</kbd> - Navigate between tabs</li>
-                  <li><kbd className="px-1.5 py-0.5 rounded bg-muted">Home</kbd> - Move to first tab</li>
-                  <li><kbd className="px-1.5 py-0.5 rounded bg-muted">End</kbd> - Move to last tab</li>
+                  <li><kbd dir="ltr" className="px-1.5 py-0.5 rounded bg-muted">Tab</kbd> - Move focus to the active tab</li>
+                  <li><kbd dir="ltr" className="px-1.5 py-0.5 rounded bg-muted">Arrow Keys</kbd> - Navigate between tabs</li>
+                  <li><kbd dir="ltr" className="px-1.5 py-0.5 rounded bg-muted">Home</kbd> - Move to first tab</li>
+                  <li><kbd dir="ltr" className="px-1.5 py-0.5 rounded bg-muted">End</kbd> - Move to last tab</li>
                 </ul>
               </div>
               <div>

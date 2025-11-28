@@ -50,6 +50,12 @@ import {
   Sliders,
   Workflow,
   Box,
+  Quote,
+  ThumbsUp,
+  Command,
+  FileText,
+  Lightbulb,
+  Shield,
 } from 'lucide-react'
 
 const componentCategories = (t: typeof content.en | typeof content.ar) => [
@@ -90,6 +96,10 @@ const componentCategories = (t: typeof content.en | typeof content.ar) => [
       { name: 'Stats Card', icon: BarChart3, href: '/components/stats-card', status: 'ready' },
       { name: 'Listing Card', icon: LayoutGrid, href: '/components/listing-card', status: 'ready' },
       { name: 'Command', icon: Menu, href: '/components/command', status: 'ready' },
+      { name: 'User Badge', icon: Shield, href: '/components/user-badge', status: 'ready' },
+      { name: 'Content Renderer', icon: FileText, href: '/components/content-renderer', status: 'ready' },
+      { name: 'Blockquote', icon: Quote, href: '/components/blockquote', status: 'ready' },
+      { name: 'Pull Quote', icon: Quote, href: '/components/pull-quote', status: 'ready' },
     ],
   },
   {
@@ -97,6 +107,7 @@ const componentCategories = (t: typeof content.en | typeof content.ar) => [
     description: t.components.categories.feedbackDesc,
     components: [
       { name: 'Alert', icon: AlertCircle, href: '/components/alert', status: 'ready' },
+      { name: 'Callout', icon: Lightbulb, href: '/components/callout', status: 'ready' },
       { name: 'Toast', icon: MessageSquare, href: '/components/toast', status: 'ready' },
       { name: 'Dialog', icon: MessageSquare, href: '/components/dialog', status: 'ready' },
       { name: 'Tooltip', icon: Info, href: '/components/tooltip', status: 'ready' },
@@ -165,6 +176,8 @@ const componentCategories = (t: typeof content.en | typeof content.ar) => [
       { name: 'User Menu', icon: UserCircle, href: '/components/user-menu', status: 'ready' },
       { name: 'Notification Center', icon: Bell, href: '/components/notification-center', status: 'ready' },
       { name: 'Stepper', icon: GitBranch, href: '/components/stepper', status: 'ready' },
+      { name: 'Reaction Picker', icon: ThumbsUp, href: '/components/reaction-picker', status: 'ready' },
+      { name: 'Kbd', icon: Command, href: '/components/kbd', status: 'ready' },
     ],
   },
   {

@@ -1,327 +1,179 @@
 'use client'
 
 import * as React from 'react'
-import { ComponentShowcase } from '@/components/docs/component-showcase'
-import { CodeBlock } from '@/components/docs/code-block'
-import { PropsTable } from '@/components/docs/props-table'
+import Link from 'next/link'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Badge } from '@/components/ui/badge'
+import { Separator } from '@/components/ui/separator'
+import { StatsCard } from '@/components/ui/stats-card'
+import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { BestPractices } from '@/components/docs/best-practices'
-import { StatsCard } from '@/components/dashboard/stats-card'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
-import {
-  Users,
-  DollarSign,
-  ShoppingCart,
-  TrendingUp,
-  FileText,
-  Activity,
-} from 'lucide-react'
+import { Users, TrendingUp, DollarSign, ShoppingCart } from 'lucide-react'
+
+const getStatsCardProps = (t: typeof content.en | typeof content.ar): PropDefinition[] => [
+  {
+    name: 'icon',
+    type: 'React.ReactNode',
+    default: 'undefined',
+    required: true,
+    description: t.statsCardComponent.props.icon,
+  },
+  {
+    name: 'label',
+    type: 'string',
+    default: 'undefined',
+    required: true,
+    description: t.statsCardComponent.props.label,
+  },
+  {
+    name: 'value',
+    type: 'string | number',
+    default: 'undefined',
+    required: true,
+    description: t.statsCardComponent.props.value,
+  },
+  {
+    name: 'trend',
+    type: 'number',
+    default: 'undefined',
+    required: false,
+    description: t.statsCardComponent.props.trend,
+  },
+  {
+    name: 'trendLabel',
+    type: 'string',
+    default: 'undefined',
+    required: false,
+    description: t.statsCardComponent.props.trendLabel,
+  },
+  {
+    name: 'className',
+    type: 'string',
+    default: 'undefined',
+    required: false,
+    description: t.statsCardComponent.props.className,
+  },
+]
 
 export default function StatsCardPage() {
-  const { direction, locale } = useDirection()
-  const isRTL = direction === 'rtl'
+  const { locale } = useDirection()
   const t = content[locale]
+  const statsCardProps = getStatsCardProps(t)
 
-  const basicUsage = `import { StatsCard } from '@/components/dashboard/stats-card'
+  return (
+    <div className="min-h-screen">
+      <main id="main-content" className="container py-12">
+        <nav aria-label="Breadcrumb" className="mb-8">
+          <ol className="flex items-center gap-2 text-sm text-muted-foreground">
+            <li><Link href="/" className="hover:text-foreground transition-colors">{t.common.home}</Link></li>
+            <li>/</li>
+            <li><Link href="/components" className="hover:text-foreground transition-colors">Components</Link></li>
+            <li>/</li>
+            <li className="text-foreground font-medium">StatsCard</li>
+          </ol>
+        </nav>
+
+        <div className="max-w-3xl mb-12">
+          <div className="flex items-center gap-3 mb-4">
+            <h1 className="text-4xl font-bold tracking-tight">{t.statsCardComponent.title}</h1>
+            <Badge>v0.4.0</Badge>
+          </div>
+          <p className="text-xl text-muted-foreground mb-6">
+            {t.statsCardComponent.description}
+          </p>
+        </div>
+
+        <section className="mb-12">
+          <h2 className="text-2xl font-bold mb-6">{t.statsCardComponent.liveDemo}</h2>
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+            <StatsCard
+              icon={<Users className="h-4 w-4" />}
+              label="Total Users"
+              value="2,543"
+              trend={12}
+              trendLabel="from last month"
+            />
+            <StatsCard
+              icon={<TrendingUp className="h-4 w-4" />}
+              label="Revenue"
+              value="$45,231"
+              trend={8}
+              trendLabel="from last month"
+            />
+            <StatsCard
+              icon={<DollarSign className="h-4 w-4" />}
+              label="Sales"
+              value="$12,234"
+              trend={-3}
+              trendLabel="from last month"
+            />
+            <StatsCard
+              icon={<ShoppingCart className="h-4 w-4" />}
+              label="Active Orders"
+              value="573"
+            />
+          </div>
+        </section>
+
+        <Separator className="my-12" />
+
+        <section className="mb-12">
+          <h2 className="text-2xl font-bold mb-6">{t.statsCardComponent.installation}</h2>
+          <Card>
+            <CardContent className="pt-6">
+              <div className="bg-muted p-4 rounded-lg overflow-x-auto">
+                <pre className="text-sm"><code>npm install noorui-rtl</code></pre>
+              </div>
+            </CardContent>
+          </Card>
+        </section>
+
+        <section className="mb-12">
+          <h2 className="text-2xl font-bold mb-6">{t.statsCardComponent.usage}</h2>
+          <Card>
+            <CardContent className="pt-6">
+              <div className="bg-muted p-4 rounded-lg overflow-x-auto">
+                <pre className="text-sm">
+                  <code>{`import { StatsCard } from 'noorui-rtl'
 import { Users } from 'lucide-react'
 
-export function Example() {
-  return (
-    <StatsCard
-      label="Total Users"
-      value={1250}
-      icon={<Users />}
-    />
-  )
-}`
+<StatsCard
+  icon={<Users className="h-4 w-4" />}
+  label="Total Users"
+  value="2,543"
+  trend={12}
+  trendLabel="from last month"
+/>
 
-  const withTrend = `<StatsCard
-  label="Revenue"
-  value={45231}
-  format="currency"
-  trend={12.5}
-  trendLabel="vs last month"
-  icon={<DollarSign />}
-/>`
+// Without trend
+<StatsCard
+  icon={<Icon />}
+  label="Metric Name"
+  value="1,234"
+/>`}</code>
+                </pre>
+              </div>
+            </CardContent>
+          </Card>
+        </section>
 
-  const negativeTrend = `<StatsCard
-  label="Orders"
-  value={328}
-  trend={-5.2}
-  trendLabel="vs last week"
-  icon={<ShoppingCart />}
-/>`
+        <Separator className="my-12" />
 
-  const percentage = `<StatsCard
-  label="Conversion Rate"
-  value={3.24}
-  format="percentage"
-  trend={0.8}
-  trendLabel="vs last month"
-  icon={<TrendingUp />}
-/>`
+        <section className="mb-12">
+          <h2 className="text-2xl font-bold mb-6">{t.statsCardComponent.props.title}</h2>
+          <PropsTable props={statsCardProps} />
+        </section>
 
-  const loading = `<StatsCard
-  label="Page Views"
-  value={0}
-  isLoading={true}
-  icon={<Activity />}
-/>`
-
-  return (
-    <div className="container mx-auto py-8 space-y-12" dir={direction}>
-      {/* Header */}
-      <div className="space-y-3">
-        <h1 className="text-4xl font-bold">
-          {t.statsCardPage.title}
-        </h1>
-        <p className="text-lg text-muted-foreground">
-          {t.statsCardPage.description}
-        </p>
-      </div>
-
-      {/* Basic Example */}
-      <ComponentShowcase
-        title={t.statsCardPage.examples.basicUsage}
-        description={t.statsCardPage.examples.basicUsageDesc}
-      >
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          <StatsCard
-            label={t.statsCardPage.examples.totalUsers}
-            value={1250}
-            icon={<Users />}
+        <section className="mb-12">
+          <h2 className="text-2xl font-bold mb-6">{t.componentPage.sections.bestPractices}</h2>
+          <BestPractices
+            dos={t.statsCardComponent.bestPractices.doList}
+            donts={t.statsCardComponent.bestPractices.dontList}
           />
-          <StatsCard
-            label={t.statsCardPage.examples.articles}
-            value={48}
-            icon={<FileText />}
-          />
-          <StatsCard
-            label={t.statsCardPage.examples.activity}
-            value={356}
-            icon={<Activity />}
-          />
-        </div>
-      </ComponentShowcase>
-
-      <CodeBlock code={basicUsage} language="tsx" title={t.statsCardPage.examples.code} />
-
-      {/* With Positive Trend */}
-      <ComponentShowcase
-        title={t.statsCardPage.examples.positiveTrend}
-        description={t.statsCardPage.examples.positiveTrendDesc}
-      >
-        <div className="grid gap-4 md:grid-cols-2">
-          <StatsCard
-            label={t.statsCardPage.examples.revenue}
-            value={45231}
-            format="currency"
-            trend={12.5}
-            trendLabel={t.statsCardPage.examples.vsLastMonth}
-            icon={<DollarSign />}
-          />
-          <StatsCard
-            label={t.statsCardPage.examples.newUsers}
-            value={234}
-            trend={18.2}
-            trendLabel={t.statsCardPage.examples.vsLastWeek}
-            icon={<Users />}
-          />
-        </div>
-      </ComponentShowcase>
-
-      <CodeBlock code={withTrend} language="tsx" />
-
-      {/* With Negative Trend */}
-      <ComponentShowcase
-        title={t.statsCardPage.examples.negativeTrend}
-        description={t.statsCardPage.examples.negativeTrendDesc}
-      >
-        <div className="grid gap-4 md:grid-cols-2">
-          <StatsCard
-            label={t.statsCardPage.examples.orders}
-            value={328}
-            trend={-5.2}
-            trendLabel={t.statsCardPage.examples.vsLastWeek}
-            icon={<ShoppingCart />}
-          />
-          <StatsCard
-            label={t.statsCardPage.examples.bounceRate}
-            value={42.3}
-            format="percentage"
-            trend={-2.1}
-            trendLabel={t.statsCardPage.examples.vsLastMonth}
-            icon={<Activity />}
-          />
-        </div>
-      </ComponentShowcase>
-
-      <CodeBlock code={negativeTrend} language="tsx" />
-
-      {/* Percentage Format */}
-      <ComponentShowcase
-        title={t.statsCardPage.examples.percentageFormat}
-        description={t.statsCardPage.examples.percentageFormatDesc}
-      >
-        <div className="grid gap-4 md:grid-cols-3">
-          <StatsCard
-            label={t.statsCardPage.examples.conversionRate}
-            value={3.24}
-            format="percentage"
-            trend={0.8}
-            trendLabel={t.statsCardPage.examples.vsLastMonth}
-            icon={<TrendingUp />}
-          />
-          <StatsCard
-            label={t.statsCardPage.examples.growthRate}
-            value={24.5}
-            format="percentage"
-            trend={5.3}
-            trendLabel={t.statsCardPage.examples.vsLastQuarter}
-            icon={<TrendingUp />}
-          />
-          <StatsCard
-            label={t.statsCardPage.examples.successRate}
-            value={98.2}
-            format="percentage"
-            trend={1.2}
-            trendLabel={t.statsCardPage.examples.vsLastWeek}
-            icon={<Activity />}
-          />
-        </div>
-      </ComponentShowcase>
-
-      <CodeBlock code={percentage} language="tsx" />
-
-      {/* Loading State */}
-      <ComponentShowcase
-        title={t.statsCardPage.examples.loadingState}
-        description={t.statsCardPage.examples.loadingStateDesc}
-      >
-        <div className="grid gap-4 md:grid-cols-3">
-          <StatsCard
-            label={t.statsCardPage.examples.pageViews}
-            value={0}
-            isLoading={true}
-            icon={<Activity />}
-          />
-          <StatsCard
-            label={t.statsCardPage.examples.visitors}
-            value={0}
-            isLoading={true}
-            icon={<Users />}
-          />
-          <StatsCard
-            label={t.statsCardPage.examples.revenue}
-            value={0}
-            isLoading={true}
-            icon={<DollarSign />}
-          />
-        </div>
-      </ComponentShowcase>
-
-      <CodeBlock code={loading} language="tsx" />
-
-      {/* Props */}
-      <div className="space-y-4">
-        <h2 className="text-2xl font-bold">{t.componentPage.sections.props}</h2>
-
-        <PropsTable
-          props={[
-            {
-              name: 'label',
-              type: 'string',
-              description: t.statsCardPage.props.label,
-            },
-            {
-              name: 'value',
-              type: 'number | string',
-              description: t.statsCardPage.props.value,
-            },
-            {
-              name: 'trend',
-              type: 'number',
-              description: t.statsCardPage.props.trend,
-              required: false,
-            },
-            {
-              name: 'trendLabel',
-              type: 'string',
-              description: t.statsCardPage.props.trendLabel,
-              required: false,
-            },
-            {
-              name: 'icon',
-              type: 'React.ReactNode',
-              description: t.statsCardPage.props.icon,
-              required: false,
-            },
-            {
-              name: 'isLoading',
-              type: 'boolean',
-              description: t.statsCardPage.props.isLoading,
-              default: 'false',
-              required: false,
-            },
-            {
-              name: 'format',
-              type: "'number' | 'currency' | 'percentage'",
-              description: t.statsCardPage.props.format,
-              default: "'number'",
-              required: false,
-            },
-            {
-              name: 'className',
-              type: 'string',
-              description: t.statsCardPage.props.className,
-              required: false,
-            },
-            {
-              name: 'valueClassName',
-              type: 'string',
-              description: t.statsCardPage.props.valueClassName,
-              required: false,
-            },
-          ]}
-        />
-      </div>
-
-      {/* Usage Guidelines */}
-      <div className="space-y-4">
-        <h2 className="text-2xl font-bold">
-          {t.statsCardPage.usageGuidelines.title}
-        </h2>
-
-        <div className="space-y-3 text-sm">
-          <div>
-            <h3 className="font-semibold mb-1">
-              {t.statsCardPage.usageGuidelines.whenToUse}
-            </h3>
-            <ul className="list-disc ps-5 space-y-1 text-muted-foreground">
-              <li>
-                {t.statsCardPage.usageGuidelines.displayMetrics}
-              </li>
-              <li>
-                {t.statsCardPage.usageGuidelines.showTrends}
-              </li>
-              <li>
-                {t.statsCardPage.usageGuidelines.quickOverview}
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      {/* Best Practices */}
-      <section className="mb-8">
-        <h2 className="text-2xl font-bold tracking-tight mb-6">
-          {t.componentPage.sections.bestPractices}
-        </h2>
-        <BestPractices
-          dos={t.statsCardComponent.bestPractices.doList}
-          donts={t.statsCardComponent.bestPractices.dontList}
-        />
-      </section>
+        </section>
+      </main>
     </div>
   )
 }
