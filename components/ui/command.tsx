@@ -128,6 +128,7 @@ CommandItem.displayName = CommandPrimitive.Item.displayName
 
 const CommandShortcut = ({
   className,
+  children,
   ...props
 }: React.HTMLAttributes<HTMLSpanElement>) => {
   return (
@@ -137,7 +138,9 @@ const CommandShortcut = ({
         className
       )}
       {...props}
-    />
+    >
+      <span dir="ltr">{children}</span>
+    </span>
   )
 }
 CommandShortcut.displayName = "CommandShortcut"
