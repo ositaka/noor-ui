@@ -5,6 +5,37 @@ All notable changes to Noor UI will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.1] - 2025-11-29
+
+### Added
+- **Calendar**: New `showIslamicHolidays` prop for automatic Islamic holiday highlighting. When enabled with `showHijri={true}`, displays event dots on 10 major Islamic holidays including:
+  - Islamic New Year (Muharram 1)
+  - Day of Ashura (Muharram 10)
+  - Prophet's Birthday (Rabi' al-Awwal 12)
+  - Isra and Mi'raj (Rajab 27)
+  - Laylat al-Bara'ah (Sha'ban 15)
+  - Start of Ramadan (Ramadan 1)
+  - Laylat al-Qadr (Ramadan 27)
+  - Eid al-Fitr (Shawwal 1)
+  - Day of Arafah (Dhu al-Hijjah 9)
+  - Eid al-Adha (Dhu al-Hijjah 10)
+- **HijriDate**: Exported `ISLAMIC_HOLIDAYS` array and `getIslamicHoliday()` function for external use
+- **Documentation**: Added "Islamic Holidays" feature card and interactive example to Calendar component page
+- **Documentation**: Created book-content workspace with 3 complete RTL lessons (Keyboard Shortcuts, Positioning vs Direction, Transform Animations)
+
+### Fixed
+- **ContextMenuShortcut**: Fixed keyboard shortcuts reversing in RTL mode (e.g., "K⌘" instead of "⌘K"). Implemented nested span structure where outer span handles positioning with logical properties and inner span uses `dir="ltr"` for text direction
+- **DropdownMenuShortcut**: Fixed keyboard shortcuts reversing in RTL mode with same nested span pattern
+- **CommandShortcut**: Fixed keyboard shortcuts reversing in RTL mode with same nested span pattern
+- **Switch**: Fixed toggle thumb sliding in wrong direction in RTL mode. Added RTL transform variants (`rtl:-translate-x-4`) for proper animation direction
+
+### Changed
+- Updated Calendar component documentation with new Islamic holidays feature
+- Updated roadmap page with completed RTL fixes and Islamic holidays enhancement
+- Enhanced RTL guide page with "Lessons Learned" section featuring 3 documented patterns
+
+---
+
 ## [0.4.0] - 2025-11-28
 
 ### Added
