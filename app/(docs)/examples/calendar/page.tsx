@@ -147,6 +147,38 @@ export default function CalendarExamplePage() {
           </p>
         </div>
 
+        {/* Hijri Calendar with Islamic Holidays */}
+        <Card className="mb-8">
+          <CardHeader>
+            <div className="flex items-center justify-between">
+              <div>
+                <CardTitle>Hijri Calendar with Islamic Holidays</CardTitle>
+                <CardDescription>
+                  Calendar displaying both Gregorian and Hijri dates with automatic Islamic holiday highlighting
+                </CardDescription>
+              </div>
+              <Badge variant="default">
+                New Feature
+              </Badge>
+            </div>
+          </CardHeader>
+          <CardContent>
+            <div className="flex justify-center">
+              <Calendar
+                mode="single"
+                selected={selectedDate}
+                onSelect={(date) => {
+                  if (date && !(date instanceof Date)) return
+                  setSelectedDate(date)
+                }}
+                showHijri={true}
+                showIslamicHolidays={true}
+                className="rounded-md border"
+              />
+            </div>
+          </CardContent>
+        </Card>
+
         {/* Main Calendar Grid */}
         <div className="grid gap-8 lg:grid-cols-3 mb-8">
           {/* Calendar Selection */}

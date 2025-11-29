@@ -275,40 +275,79 @@ Phase 4: Month 5+    ░░░░░░░░░░░░░░░░░░░�
 
 ## 🔧 Technical Debt & Quality Improvements
 
-### High Priority: Keyboard Shortcut Consistency Audit
+### ✅ COMPLETED: Keyboard Shortcut Consistency Audit
 
 **Issue:** Multiple shortcut components across the codebase don't use the Kbd component and lack proper RTL protection.
 
 **Impact:** Keyboard shortcuts in menus may display incorrectly in RTL mode (e.g., "K+⌘" instead of "⌘+K").
 
-**Components Requiring Updates:**
-1. ❌ **ContextMenuShortcut** (`components/ui/context-menu.tsx:188`)
-   - Currently: Plain `<span>` without `dir="ltr"`
-   - Should use: Kbd component or add `dir="ltr"`
+**Components Updated:**
+1. ✅ **ContextMenuShortcut** (`components/ui/context-menu.tsx:188`)
+   - Fixed with nested span structure: outer for positioning, inner with `dir="ltr"`
 
-2. ❌ **DropdownMenuShortcut** (`components/ui/dropdown-menu.tsx:191`)
-   - Currently: Plain `<span>` without `dir="ltr"`
-   - Should use: Kbd component or add `dir="ltr"`
+2. ✅ **DropdownMenuShortcut** (`components/ui/dropdown-menu.tsx:191`)
+   - Fixed with nested span structure: outer for positioning, inner with `dir="ltr"`
 
-3. ❌ **CommandShortcut** (`components/ui/command.tsx:129`)
-   - Currently: Plain `<span>` without `dir="ltr"`
-   - Should use: Kbd component or add `dir="ltr"`
+3. ✅ **CommandShortcut** (`components/ui/command.tsx:129`)
+   - Fixed with nested span structure: outer for positioning, inner with `dir="ltr"`
 
-**Action Items:**
-- [ ] Audit all keyboard shortcut displays across the codebase
-- [ ] Update shortcut components to either:
-  - Option A: Use the Kbd component internally
-  - Option B: Add `dir="ltr"` to prevent RTL reversal
-- [ ] Ensure consistent visual styling across all shortcuts
-- [ ] Test in both LTR and RTL modes
-- [ ] Update component documentation pages if needed
-- [ ] Publish as part of v0.4.1 or v0.5.0
+4. ✅ **Switch component** (`components/ui/switch.tsx:17-23`)
+   - Added RTL transform variants for thumb sliding animation
 
-**Reference:**
-- ✅ **Kbd component** (`components/ui/kbd.tsx:104`) already has proper `dir="ltr"` protection
-- ✅ **Kbd component page** properly demonstrates correct usage
-- ❌ **Context Menu demo** shows the issue (shortcuts reverse in RTL)
+**Completed Actions:**
+- ✅ Audited all keyboard shortcut displays across the codebase
+- ✅ Updated shortcut components with nested span pattern
+- ✅ Ensured consistent visual styling across all shortcuts
+- ✅ Tested in both LTR and RTL modes
+- ✅ Added "Lessons Learned" section to RTL guide page
+- ✅ Created book-content workspace with 3 fully documented lessons
+- ✅ All TypeScript compilation successful
 
-**Priority:** High (UX consistency issue)
-**Estimated Effort:** 2-3 hours
-**Target Version:** v0.4.1
+**Documentation Created:**
+- ✅ Lesson 011: Keyboard Shortcuts Reverse in RTL
+- ✅ Lesson 012: Positioning ≠ Text Direction
+- ✅ Lesson 016: Transform Animations Need RTL Variants
+
+**Completed:** 2025-11-29
+**Version:** v0.4.1 (ready)
+
+---
+
+### ✅ COMPLETED: Hijri Calendar Islamic Holidays Enhancement
+
+**Feature:** Automatic Islamic holiday highlighting in Calendar component.
+
+**Components Updated:**
+1. ✅ **hijri-date.tsx** - Exported ISLAMIC_HOLIDAYS array and getIslamicHoliday function
+2. ✅ **calendar.tsx** - Added showIslamicHolidays prop and automatic holiday event generation
+3. ✅ **calendar component page** - Added Islamic Holidays feature card and example
+4. ✅ **calendar example page** - Added dedicated demo section with "New Feature" badge
+
+**Islamic Holidays Included (10 total):**
+- Muharram 1: Islamic New Year
+- Muharram 10: Day of Ashura
+- Rabi' al-Awwal 12: Prophet's Birthday
+- Rajab 27: Isra and Mi'raj
+- Sha'ban 15: Laylat al-Bara'ah
+- Ramadan 1: Start of Ramadan
+- Ramadan 27: Laylat al-Qadr
+- Shawwal 1: Eid al-Fitr
+- Dhu al-Hijjah 9: Day of Arafah
+- Dhu al-Hijjah 10: Eid al-Adha
+
+**How It Works:**
+- Automatically converts Gregorian dates to Hijri
+- Matches against Islamic holidays database
+- Displays colored event dots on holiday dates
+- Shows holiday names in legend (English/Arabic based on locale)
+
+**Completed Actions:**
+- ✅ Exported holiday data from hijri-date component
+- ✅ Integrated into Calendar component with new prop
+- ✅ Added documentation and examples
+- ✅ Tested in both LTR and RTL modes
+- ✅ Full i18n support (English/Arabic holiday names)
+- ✅ Uses theme colors (no hard-coded values)
+
+**Completed:** 2025-11-29
+**Version:** v0.4.1 (ready)

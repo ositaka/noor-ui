@@ -40,3 +40,7 @@ next-env.d.ts
 *.backup
 *.old
 *.archive
+
+# book content (keep private until ready to publish)
+/book-content/
+book-content/

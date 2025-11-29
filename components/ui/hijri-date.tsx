@@ -10,7 +10,7 @@ import { content } from '../../lib/i18n'
 // Islamic Holidays Database
 // ============================================================================
 
-interface IslamicHoliday {
+export interface IslamicHoliday {
   day: number
   month: string
   nameEn: string
@@ -18,7 +18,7 @@ interface IslamicHoliday {
   description?: string
 }
 
-const ISLAMIC_HOLIDAYS: IslamicHoliday[] = [
+export const ISLAMIC_HOLIDAYS: IslamicHoliday[] = [
   { day: 1, month: 'muharram', nameEn: 'Islamic New Year', nameAr: 'رأس السنة الهجرية' },
   { day: 10, month: 'muharram', nameEn: 'Day of Ashura', nameAr: 'يوم عاشوراء' },
   { day: 12, month: 'rabi al-awwal', nameEn: "Prophet's Birthday", nameAr: 'المولد النبوي' },
@@ -31,7 +31,7 @@ const ISLAMIC_HOLIDAYS: IslamicHoliday[] = [
   { day: 10, month: 'dhul hijjah', nameEn: 'Eid al-Adha', nameAr: 'عيد الأضحى' },
 ]
 
-function getIslamicHoliday(hijriDate: string): IslamicHoliday | null {
+export function getIslamicHoliday(hijriDate: string): IslamicHoliday | null {
   // Parse format: "5 Jumada al-Awwal 1447" or "٥ جمادى الأولى ١٤٤٧"
   const parts = hijriDate.toLowerCase().split(/\s+/)
   if (parts.length < 2) return null

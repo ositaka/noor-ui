@@ -50,6 +50,13 @@ const getCalendarProps = (t: typeof content.en | typeof content.ar): PropDefinit
     description: t.calendarComponent.props.showHijri,
   },
   {
+    name: 'showIslamicHolidays',
+    type: 'boolean',
+    default: 'false',
+    required: false,
+    description: 'Automatically highlight Islamic holidays (requires showHijri to be true). Displays dots on holiday dates with names in the legend.',
+  },
+  {
     name: 'events',
     type: 'CalendarEvent[]',
     default: '[]',
@@ -133,6 +140,27 @@ const hijriCode = `<Calendar
   locale="ar"
 />`
 
+const islamicHolidaysCode = `<Calendar
+  mode="single"
+  selected={date}
+  onSelect={setDate}
+  showHijri={true}
+  showIslamicHolidays={true}
+  locale="ar"
+/>
+
+// Automatically highlights 10 major Islamic holidays:
+// - Islamic New Year (Muharram 1)
+// - Day of Ashura (Muharram 10)
+// - Prophet's Birthday (Rabi' al-Awwal 12)
+// - Isra and Mi'raj (Rajab 27)
+// - Laylat al-Bara'ah (Sha'ban 15)
+// - Start of Ramadan (Ramadan 1)
+// - Laylat al-Qadr (Ramadan 27)
+// - Eid al-Fitr (Shawwal 1)
+// - Day of Arafah (Dhu al-Hijjah 9)
+// - Eid al-Adha (Dhu al-Hijjah 10)`
+
 const eventsCode = `const events = [
   {
     date: new Date(2025, 10, 15),
@@ -193,6 +221,7 @@ export default function CalendarPage() {
   const [rangeDate, setRangeDate] = React.useState<DateRange>()
   const [hijriDate, setHijriDate] = React.useState<Date>()
   const [eventDate, setEventDate] = React.useState<Date>()
+  const [islamicHolidayDate, setIslamicHolidayDate] = React.useState<Date>()
 
   const sampleEvents = [
     {
@@ -289,6 +318,17 @@ export default function CalendarPage() {
                 <h3 className="font-semibold mb-2">{t.calendarComponent.features.dualCalendar}</h3>
                 <p className="text-sm text-muted-foreground">
                   {t.calendarComponent.features.dualCalendarDesc}
+                </p>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardContent className="p-6">
+                <div className="flex items-center gap-2 mb-2">
+                  <h3 className="font-semibold">Islamic Holidays</h3>
+                  <Badge variant="default" className="text-xs">New</Badge>
+                </div>
+                <p className="text-sm text-muted-foreground">
+                  Automatic highlighting of 10 major Islamic holidays including Ramadan, Eid al-Fitr, Eid al-Adha, and more
                 </p>
               </CardContent>
             </Card>
@@ -399,6 +439,37 @@ export default function CalendarPage() {
               </Card>
               <div className="mt-4">
                 <CodeBlock code={hijriCode} language="tsx" collapsible />
+              </div>
+            </div>
+
+            {/* With Islamic Holidays */}
+            <div>
+              <div className="flex items-center gap-2 mb-4">
+                <h3 className="text-lg font-semibold">Islamic Holidays Highlighting</h3>
+                <Badge variant="default">New</Badge>
+              </div>
+              <Card>
+                <CardContent className="p-6">
+                  <p className="text-sm text-muted-foreground mb-4">
+                    Automatically highlights 10 major Islamic holidays with event dots and displays holiday names in both English and Arabic. Perfect for GCC region applications.
+                  </p>
+                  <div className="max-w-md mx-auto">
+                    <Calendar
+                      mode="single"
+                      selected={islamicHolidayDate}
+                      onSelect={(date) => {
+                        if (date instanceof Date || date === undefined) {
+                          setIslamicHolidayDate(date)
+                        }
+                      }}
+                      showHijri={true}
+                      showIslamicHolidays={true}
+                    />
+                  </div>
+                </CardContent>
+              </Card>
+              <div className="mt-4">
+                <CodeBlock code={islamicHolidaysCode} language="tsx" collapsible />
               </div>
             </div>
 

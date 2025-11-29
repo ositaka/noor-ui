@@ -6,6 +6,7 @@ import { cn } from '../../lib/utils'
 import { Button } from './button'
 import { useDirection } from '../providers/direction-provider'
 import { content } from '../../lib/i18n'
+import { ISLAMIC_HOLIDAYS, getIslamicHoliday } from './hijri-date'
 
 // ============================================================================
 // Types
@@ -47,6 +48,8 @@ export interface CalendarProps extends Omit<React.HTMLAttributes<HTMLDivElement>
   onSelect?: (date: Date | DateRange | undefined) => void
   /** Show Hijri dates */
   showHijri?: boolean
+  /** Show Islamic holidays (requires showHijri) */
+  showIslamicHolidays?: boolean
   /** Calendar events to display */
   events?: CalendarEvent[]
   /** Disabled dates */
@@ -139,6 +142,7 @@ export const Calendar = React.forwardRef<HTMLDivElement, CalendarProps>(
       selectedRange,
       onSelect,
       showHijri = false,
+      showIslamicHolidays = false,
       events = [],
       disabled,
       minDate,
@@ -175,6 +179,34 @@ export const Calendar = React.forwardRef<HTMLDivElement, CalendarProps>(
       current.setDate(current.getDate() + 1)
     }
 
+    // Generate Islamic holiday events
+    const islamicHolidayEvents = React.useMemo<CalendarEvent[]>(() => {
+      if (!showIslamicHolidays || !showHijri) return []
+
+      const holidayEvents: CalendarEvent[] = []
+
+      // Check each day in the calendar for holidays
+      days.forEach(dayData => {
+        if (dayData.hijri) {
+          const holiday = getIslamicHoliday(dayData.hijri)
+          if (holiday) {
+            holidayEvents.push({
+              date: dayData.gregorian,
+              title: currentLocale === 'ar' ? holiday.nameAr : holiday.nameEn,
+              variant: 'primary',
+            })
+          }
+        }
+      })
+
+      return holidayEvents
+    }, [showIslamicHolidays, showHijri, days, currentLocale])
+
+    // Merge user events with Islamic holiday events
+    const allEvents = React.useMemo(() => {
+      return [...events, ...islamicHolidayEvents]
+    }, [events, islamicHolidayEvents])
+
     // Check if date is disabled
     const isDateDisabled = (date: Date): boolean => {
       if (minDate && date < minDate) return true
@@ -188,7 +220,7 @@ export const Calendar = React.forwardRef<HTMLDivElement, CalendarProps>(
 
     // Get events for a date
     const getEventsForDate = (date: Date): CalendarEvent[] => {
-      return events.filter(event => isSameDay(event.date, date))
+      return allEvents.filter(event => isSameDay(event.date, date))
     }
 
     // Handle date selection
@@ -367,13 +399,13 @@ export const Calendar = React.forwardRef<HTMLDivElement, CalendarProps>(
         </div>
 
         {/* Legend */}
-        {events.length > 0 && (
+        {allEvents.length > 0 && (
           <div className="mt-4 pt-4 border-t">
             <p className="text-sm font-medium mb-2">
               {t.ui.components.events}
             </p>
             <div className="space-y-1">
-              {events
+              {allEvents
                 .filter(event => {
                   const eventDate = event.date
                   return (
