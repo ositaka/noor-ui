@@ -1,7 +1,7 @@
 'use client'
 
 import * as React from 'react'
-import { ChevronDown, ChevronUp, ChevronsUpDown, Search, X } from 'lucide-react'
+import { ChevronDown, ChevronUp, ChevronsUpDown, ChevronLeft, ChevronRight, Search, X } from 'lucide-react'
 import { cn } from '../../lib/utils'
 import {
   Table,
@@ -39,6 +39,12 @@ export interface DataTableProps<T> {
   sortBy?: string
   sortDirection?: SortDirection
   onSort?: (columnId: string) => void
+  /** Enable internal sorting (auto-manages sort state) */
+  enableSorting?: boolean
+  /** Default column to sort by */
+  defaultSortBy?: string
+  /** Default sort direction */
+  defaultSortDirection?: SortDirection
   // Filtering
   searchable?: boolean
   searchPlaceholder?: string
@@ -54,6 +60,8 @@ export interface DataTableProps<T> {
   onPageChange?: (page: number) => void
   // Mobile
   mobileView?: 'table' | 'cards'
+  /** Show sort buttons on mobile cards */
+  mobileSorting?: boolean
   // Empty state
   emptyMessage?: string
   emptyMessageAr?: string
@@ -104,9 +112,12 @@ export function DataTable<T>({
   data,
   columns,
   isLoading = false,
-  sortBy,
-  sortDirection,
-  onSort,
+  sortBy: externalSortBy,
+  sortDirection: externalSortDirection,
+  onSort: externalOnSort,
+  enableSorting = false,
+  defaultSortBy,
+  defaultSortDirection = 'asc',
   searchable = false,
   searchPlaceholder = 'Search...',
   searchPlaceholderAr = 'بحث...',
@@ -118,6 +129,7 @@ export function DataTable<T>({
   pageSize = 10,
   onPageChange,
   mobileView = 'cards',
+  mobileSorting = true,
   emptyMessage = 'No results found',
   emptyMessageAr = 'لم يتم العثور على نتائج',
   className,
@@ -126,6 +138,12 @@ export function DataTable<T>({
   compact = false,
 }: DataTableProps<T>) {
   const [internalSearchValue, setInternalSearchValue] = React.useState(searchValue)
+  const [internalSortBy, setInternalSortBy] = React.useState<string | undefined>(defaultSortBy)
+  const [internalSortDirection, setInternalSortDirection] = React.useState<SortDirection>(defaultSortDirection)
+
+  // Use external sort state if provided, otherwise use internal
+  const sortBy = enableSorting ? internalSortBy : externalSortBy
+  const sortDirection = enableSorting ? internalSortDirection : externalSortDirection
 
   React.useEffect(() => {
     setInternalSearchValue(searchValue)
@@ -141,7 +159,71 @@ export function DataTable<T>({
     onSearchChange?.('')
   }
 
-  const displayData = data.slice(0, pagination ? pageSize : data.length)
+  const handleSort = (columnId: string) => {
+    if (enableSorting) {
+      // Internal sorting logic
+      if (internalSortBy === columnId) {
+        // Cycle through: asc -> desc -> null -> asc
+        if (internalSortDirection === 'asc') {
+          setInternalSortDirection('desc')
+        } else if (internalSortDirection === 'desc') {
+          setInternalSortDirection(null)
+          setInternalSortBy(undefined)
+        }
+      } else {
+        setInternalSortBy(columnId)
+        setInternalSortDirection('asc')
+      }
+    } else if (externalOnSort) {
+      // External sorting callback
+      externalOnSort(columnId)
+    }
+  }
+
+  // Apply sorting to data
+  const sortedData = React.useMemo(() => {
+    if (!sortBy || !sortDirection) return data
+
+    const column = columns.find(col => col.id === sortBy)
+    if (!column) return data
+
+    return [...data].sort((a, b) => {
+      const aValue = a[column.accessorKey]
+      const bValue = b[column.accessorKey]
+
+      // Handle null/undefined
+      if (aValue == null && bValue == null) return 0
+      if (aValue == null) return 1
+      if (bValue == null) return -1
+
+      // String comparison
+      if (typeof aValue === 'string' && typeof bValue === 'string') {
+        const comparison = aValue.localeCompare(bValue)
+        return sortDirection === 'asc' ? comparison : -comparison
+      }
+
+      // Number comparison
+      if (typeof aValue === 'number' && typeof bValue === 'number') {
+        return sortDirection === 'asc' ? aValue - bValue : bValue - aValue
+      }
+
+      // Date comparison
+      if (aValue instanceof Date && bValue instanceof Date) {
+        return sortDirection === 'asc'
+          ? aValue.getTime() - bValue.getTime()
+          : bValue.getTime() - aValue.getTime()
+      }
+
+      // Fallback to string comparison
+      return sortDirection === 'asc'
+        ? String(aValue).localeCompare(String(bValue))
+        : String(bValue).localeCompare(String(aValue))
+    })
+  }, [data, sortBy, sortDirection, columns])
+
+  // Note: Pagination is controlled by parent component via currentPage/onPageChange
+  // Parent should slice data appropriately before passing to DataTable
+  const displayData = sortedData
 
   // Empty state
   if (!isLoading && data.length === 0) {
@@ -162,7 +244,7 @@ export function DataTable<T>({
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="absolute top-1/2 -translate-y-1/2 me-1 h-7 w-7"
+                  className="absolute top-1/2 -translate-y-1/2 end-1 h-7 w-7"
                   onClick={handleClearSearch}
                 >
                   <X className="h-4 w-4" />
@@ -206,7 +288,7 @@ export function DataTable<T>({
               <Button
                 variant="ghost"
                 size="icon"
-                className="absolute top-1/2 -translate-y-1/2 me-1 h-7 w-7"
+                className="absolute top-1/2 -translate-y-1/2 end-1 h-7 w-7"
                 onClick={handleClearSearch}
                 disabled={isLoading}
               >
@@ -228,7 +310,7 @@ export function DataTable<T>({
               <TableHeader>
                 <TableRow>
                   {columns.map((column) => {
-                    const isSortable = column.sortable && onSort
+                    const isSortable = column.sortable && (enableSorting || externalOnSort)
                     const isActive = sortBy === column.id
                     const align = column.align || 'start'
 
@@ -246,7 +328,7 @@ export function DataTable<T>({
                             variant="ghost"
                             size="sm"
                             className="-ms-3 h-8 hover:bg-muted/50"
-                            onClick={() => onSort(column.id)}
+                            onClick={() => handleSort(column.id)}
                           >
                             <span>{column.header}</span>
                             <SortIcon
@@ -298,6 +380,32 @@ export function DataTable<T>({
           {/* Mobile Cards View */}
           {mobileView === 'cards' && (
             <div className="block md:hidden space-y-4">
+              {/* Mobile Sort Controls */}
+              {mobileSorting && columns.some(col => col.sortable) && (
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {columns
+                    .filter(col => col.sortable)
+                    .map((column) => {
+                      const isActive = sortBy === column.id
+                      return (
+                        <Button
+                          key={column.id}
+                          variant={isActive ? 'primary' : 'outline'}
+                          size="sm"
+                          onClick={() => handleSort(column.id)}
+                          className="gap-1.5"
+                        >
+                          <span>{column.header}</span>
+                          <SortIcon
+                            active={isActive}
+                            direction={isActive ? (sortDirection ?? null) : null}
+                          />
+                        </Button>
+                      )
+                    })}
+                </div>
+              )}
+
               {displayData.map((row, rowIndex) => (
                 <Card key={rowIndex}>
                   <CardContent className="p-4 space-y-3">
@@ -330,11 +438,31 @@ export function DataTable<T>({
                 <Table>
                   <TableHeader>
                     <TableRow>
-                      {columns.map((column) => (
-                        <TableHead key={column.id} className="whitespace-nowrap">
-                          {column.header}
-                        </TableHead>
-                      ))}
+                      {columns.map((column) => {
+                        const isSortable = column.sortable && (enableSorting || externalOnSort)
+                        const isActive = sortBy === column.id
+
+                        return (
+                          <TableHead key={column.id} className="whitespace-nowrap">
+                            {isSortable ? (
+                              <Button
+                                variant="ghost"
+                                size="sm"
+                                className="-ms-2 h-8 hover:bg-muted/50"
+                                onClick={() => handleSort(column.id)}
+                              >
+                                <span>{column.header}</span>
+                                <SortIcon
+                                  active={isActive}
+                                  direction={isActive ? (sortDirection ?? null) : null}
+                                />
+                              </Button>
+                            ) : (
+                              column.header
+                            )}
+                          </TableHead>
+                        )
+                      })}
                     </TableRow>
                   </TableHeader>
                   <TableBody>
@@ -361,12 +489,34 @@ export function DataTable<T>({
         </>
       )}
 
-      {/* Pagination Info */}
+      {/* Pagination */}
       {!isLoading && pagination && totalPages > 1 && (
-        <div className="flex items-center justify-center">
+        <div className="flex items-center justify-between gap-4">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => onPageChange?.(currentPage - 1)}
+            disabled={currentPage === 1}
+            className="gap-1"
+          >
+            <ChevronLeft className="h-4 w-4 rtl:rotate-180" />
+            <span>Previous</span>
+          </Button>
+
           <div className="text-sm text-muted-foreground">
             Page {currentPage} of {totalPages}
           </div>
+
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => onPageChange?.(currentPage + 1)}
+            disabled={currentPage === totalPages}
+            className="gap-1"
+          >
+            <span>Next</span>
+            <ChevronRight className="h-4 w-4 rtl:rotate-180" />
+          </Button>
         </div>
       )}
     </div>

@@ -55,7 +55,28 @@ const dataTableProps: PropDefinition[] = [
     type: '(columnId: string) => void',
     default: 'undefined',
     required: false,
-    description: 'Callback when column header is clicked for sorting',
+    description: 'Callback when column header is clicked for sorting (external mode)',
+  },
+  {
+    name: 'enableSorting',
+    type: 'boolean',
+    default: 'false',
+    required: false,
+    description: 'Enable internal sorting (auto-manages sort state). Use this for simple tables that don\'t need external state management',
+  },
+  {
+    name: 'defaultSortBy',
+    type: 'string',
+    default: 'undefined',
+    required: false,
+    description: 'Default column to sort by (requires enableSorting)',
+  },
+  {
+    name: 'defaultSortDirection',
+    type: "'asc' | 'desc' | null",
+    default: "'asc'",
+    required: false,
+    description: 'Default sort direction (requires enableSorting)',
   },
   {
     name: 'searchable',
@@ -126,6 +147,13 @@ const dataTableProps: PropDefinition[] = [
     default: "'cards'",
     required: false,
     description: 'Mobile view type: stacked cards or horizontal scroll table',
+  },
+  {
+    name: 'mobileSorting',
+    type: 'boolean',
+    default: 'true',
+    required: false,
+    description: 'Show sort buttons on mobile card view (only applies to cards mode)',
   },
   {
     name: 'emptyMessage',
@@ -251,6 +279,36 @@ const users: User[] = [
 ]
 
 <DataTable data={users} columns={columns} />`
+
+const internalSortingCode = `// Simple sorting - no state management needed!
+const columns: ColumnDef<User>[] = [
+  {
+    id: 'name',
+    header: 'Name',
+    accessorKey: 'name',
+    sortable: true, // Enable sorting for this column
+  },
+  {
+    id: 'email',
+    header: 'Email',
+    accessorKey: 'email',
+    sortable: true,
+  },
+  {
+    id: 'role',
+    header: 'Role',
+    accessorKey: 'role',
+    sortable: true,
+  },
+]
+
+<DataTable
+  data={users}
+  columns={columns}
+  enableSorting // Automatically manages sort state
+  defaultSortBy="name" // Optional: start sorted by name
+  defaultSortDirection="asc" // Optional: default direction
+/>`
 
 const sortableCode = `const [sortBy, setSortBy] = useState<string | undefined>()
 const [sortDirection, setSortDirection] = useState<'asc' | 'desc' | null>(null)
@@ -491,6 +549,29 @@ export default function DataTablePage() {
   const pageSize = 3
   const totalPages = Math.ceil(sampleUsers.length / pageSize)
 
+  // Get paginated data
+  const paginatedData = React.useMemo(() => {
+    const startIndex = (currentPage - 1) * pageSize
+    const endIndex = startIndex + pageSize
+    return sampleUsers.slice(startIndex, endIndex)
+  }, [currentPage, pageSize])
+
+  // Complete example pagination state (separate from basic pagination)
+  const [completePage, setCompletePage] = React.useState(1)
+  const completePageSize = 3
+
+  // Reset pagination when search changes
+  React.useEffect(() => {
+    setCompletePage(1)
+  }, [searchValue])
+
+  // Get paginated filtered data for complete example
+  const paginatedFilteredData = React.useMemo(() => {
+    const startIndex = (completePage - 1) * completePageSize
+    const endIndex = startIndex + completePageSize
+    return filteredUsers.slice(startIndex, endIndex)
+  }, [filteredUsers, completePage, completePageSize])
+
   // Custom cells example
   const customColumns: ColumnDef<User>[] = [
     {
@@ -659,9 +740,37 @@ export default function DataTablePage() {
           <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentDocs.examples}</h2>
 
           <div className="space-y-12">
-            {/* Sortable */}
+            {/* Internal Sorting (Simple) */}
+            <div>
+              <h3 className="text-lg font-semibold mb-4">
+                Simple Sorting
+                <Badge variant="outline" className="ms-2 text-xs">New</Badge>
+              </h3>
+              <p className="text-sm text-muted-foreground mb-4">
+                Use <code className="px-1.5 py-0.5 bg-muted rounded text-xs">enableSorting</code> for automatic sorting without managing state yourself. Perfect for simple tables.
+              </p>
+              <Card>
+                <CardContent className="p-6">
+                  <DataTable
+                    data={sampleUsers}
+                    columns={sortableColumns}
+                    enableSorting
+                    defaultSortBy="name"
+                    defaultSortDirection="asc"
+                  />
+                </CardContent>
+              </Card>
+              <div className="mt-4">
+                <CodeBlock code={internalSortingCode} language="tsx" collapsible />
+              </div>
+            </div>
+
+            {/* Sortable (External State) */}
             <div>
               <h3 className="text-lg font-semibold mb-4">{t.dataTableComponent.examples.sortableColumns}</h3>
+              <p className="text-sm text-muted-foreground mb-4">
+                For advanced use cases where you need to control the sort state externally (e.g., URL sync, API integration).
+              </p>
               <Card>
                 <CardContent className="p-6">
                   <p className="text-sm text-muted-foreground mb-4">
@@ -708,7 +817,7 @@ export default function DataTablePage() {
               <Card>
                 <CardContent className="p-6">
                   <DataTable
-                    data={sampleUsers}
+                    data={paginatedData}
                     columns={basicColumns}
                     pagination
                     currentPage={currentPage}
@@ -785,7 +894,7 @@ useEffect(() => {
                     {t.dataTableComponent.examples.completeDescription}
                   </p>
                   <DataTable
-                    data={filteredUsers}
+                    data={paginatedFilteredData}
                     columns={sortableColumns}
                     searchable
                     searchPlaceholder="Search users..."
@@ -795,10 +904,10 @@ useEffect(() => {
                     sortDirection={sortDirection}
                     onSort={handleSort}
                     pagination
-                    currentPage={currentPage}
-                    totalPages={Math.ceil(filteredUsers.length / pageSize)}
-                    pageSize={pageSize}
-                    onPageChange={setCurrentPage}
+                    currentPage={completePage}
+                    totalPages={Math.ceil(filteredUsers.length / completePageSize)}
+                    pageSize={completePageSize}
+                    onPageChange={setCompletePage}
                     striped
                   />
                 </CardContent>
