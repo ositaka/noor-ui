@@ -5,6 +5,31 @@ All notable changes to Noor UI will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.2] - 2025-11-29
+
+### Added
+- **DataTable**: New `enableSorting` prop for automatic internal sort state management. No need to manage `sortBy` and `sortDirection` state yourself - perfect for simple tables
+- **DataTable**: New `defaultSortBy` and `defaultSortDirection` props to set initial sort state when using `enableSorting`
+- **DataTable**: New `mobileSorting` prop (default: true) to show/hide sort buttons on mobile card view
+- **DataTable**: Full sorting support for mobile card view with dedicated sort buttons above cards
+- **DataTable**: Pagination controls with Previous/Next buttons. Previously only showed "Page X of Y" text without navigation buttons
+- **DataTable**: Automatic sorting logic handles strings (with `localeCompare`), numbers, dates, and null values
+- **Documentation**: Added "Simple Sorting" example showing the new `enableSorting` feature with code samples
+
+### Fixed
+- **DataTable**: Fixed search clear button (X icon) positioning in RTL mode. Changed from `me-1` to `end-1` for proper logical positioning
+- **DataTable**: Fixed pagination chevron icons in RTL mode with `rtl:rotate-180` class so arrows point in correct reading direction
+- **DataTable**: Fixed pagination not working correctly. Component now follows controlled pattern - parent slices data, DataTable displays it. Removed internal data slicing that was preventing page changes from updating content
+- **DataTable Documentation**: Fixed "Complete Example" not paginating correctly by adding separate pagination state and properly slicing filtered data
+- **RangeSlider Documentation**: Fixed incorrect locale check (`locale === 'ar'`) to use direction check (`direction === 'rtl'`). This ensures the component works with ALL RTL languages (Hebrew, Urdu, Farsi, etc.), not just Arabic
+
+### Changed
+- **DataTable**: Sorting state now cycles through: asc → desc → null (clears sort) instead of just toggling between asc/desc
+- **DataTable**: Mobile table view now includes sort buttons in headers (previously desktop-only)
+- **DataTable**: Documentation restructured to show simple internal sorting example before advanced external state management
+
+---
+
 ## [0.4.1] - 2025-11-29
 
 ### Added

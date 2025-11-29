@@ -8,7 +8,7 @@ home: {
       hero: {
         title: 'Noor UI',
         subtitle: 'Built for the GCC market. Arabic and English, equal citizens.',
-        description: 'A comprehensive, modern design system with full bilingual support. 73+ accessible components, 4 beautiful themes, perfect RTL mirroring. Bringing light to multilingual interface design.',
+        description: 'A comprehensive, modern design system with full bilingual support. 74+ accessible components, 4 beautiful themes, perfect RTL mirroring. Bringing light to multilingual interface design.',
         cta: {
           primary: 'Explore Components',
           secondary: 'View Documentation',
@@ -19,7 +19,7 @@ home: {
         subtitle: 'Production-ready components for modern web applications',
         items: [
           {
-            title: '73+ Components',
+            title: '74+ Components',
             description: 'Complete UI toolkit from buttons to complex data tables, plus experimental AI/LLM components',
           },
           {
@@ -75,7 +75,7 @@ home: {
         description: 'Package published to NPM! Building community and preparing for public launch.',
         stats: {
           components: 'Components',
-          componentsCount: '73+',
+          componentsCount: '74+',
           componentsDesc: 'Production-ready',
           examples: 'Examples',
           examplesCount: '10+',
@@ -87,7 +87,7 @@ home: {
         recentWins: {
           title: 'Recent Wins',
           performance: 'NPM package published (noorui-rtl v0.4.0)',
-          skeletons: '73+ production-ready components with full documentation',
+          skeletons: '74+ production-ready components with full documentation',
           components: '10+ complete demo projects (Blog, Marketplace, AI workflows)',
           rebranding: 'Full RTL/LTR support with logical properties + WCAG AA accessibility',
         },
@@ -350,6 +350,12 @@ home: {
         lesson3Solution: 'The Pattern',
         lesson3SolutionDesc: 'Add RTL-specific transform classes: translate-x-4 for LTR becomes -translate-x-4 for RTL.',
         lesson3Impact: 'This makes animations feel natural in both directions.',
+        lesson4Title: 'Lesson 4: Direction Check, Not Locale Check',
+        lesson4Problem: 'The Mistake',
+        lesson4ProblemDesc: 'Checking locale === \'ar\' to determine RTL only works for Arabic. This breaks support for Hebrew, Urdu, Farsi, and other RTL languages.',
+        lesson4Solution: 'The Correct Pattern',
+        lesson4SolutionDesc: 'Always check direction === \'rtl\' instead of locale === \'ar\'. The direction property works for ALL RTL languages, making your components truly international.',
+        lesson4Impact: 'This ensures your components work for ALL RTL languages (Arabic, Hebrew, Urdu, Farsi, etc.), not just Arabic.',
         updatedDate: 'Last Updated: 2025-11-29',
         contributionNote: 'Found a new RTL pattern? Please contribute to help the community!',
       },

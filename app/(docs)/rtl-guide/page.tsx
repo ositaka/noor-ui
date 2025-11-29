@@ -244,6 +244,29 @@ const lessonsLearnedCode3 = `// ❌ WRONG: Switch slides right in both LTR and R
   )}
 />`
 
+const lessonsLearnedCode4 = `// ❌ WRONG: Only works for Arabic
+const { locale } = useDirection()
+if (locale === 'ar') {
+  return \`\${max} - \${min}\`  // Breaks for Hebrew, Urdu, Farsi!
+}
+
+// ✅ CORRECT: Works for ALL RTL languages
+const { direction } = useDirection()
+if (direction === 'rtl') {
+  return \`\${max} - \${min}\`  // Works for Arabic, Hebrew, Urdu, Farsi, etc.
+}
+
+// Real-world example: Formatting range values
+const formatRange = (min: number, max: number) => {
+  const { direction } = useDirection()
+
+  // RTL: show max first (high value on right), then min
+  // LTR: show min first (low value on left), then max
+  return direction === 'rtl'
+    ? \`\${max} - \${min}\`
+    : \`\${min} - \${max}\`
+}`
+
 export default function RTLGuidePage() {
   const { locale, direction } = useDirection()
   const isRTL = direction === 'rtl'
@@ -652,7 +675,7 @@ export default function RTLGuidePage() {
           </div>
 
           {/* Lesson 3: Transform Animations */}
-          <div className="mb-8">
+          <div className="mb-12">
             <Card>
               <CardContent className="p-6 space-y-6">
                 <div>
@@ -675,6 +698,37 @@ export default function RTLGuidePage() {
 
                     <div className="pt-4 border-t">
                       <p className="text-sm font-medium text-primary">{t.lessonsLearned.lesson3Impact}</p>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Lesson 4: Direction Check vs Locale Check */}
+          <div className="mb-8">
+            <Card>
+              <CardContent className="p-6 space-y-6">
+                <div>
+                  <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
+                    <span className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-primary text-sm font-bold">4</span>
+                    {t.lessonsLearned.lesson4Title}
+                  </h3>
+
+                  <div className="space-y-4">
+                    <div>
+                      <h4 className="font-semibold text-sm mb-2 text-destructive">{t.lessonsLearned.lesson4Problem}</h4>
+                      <p className="text-sm text-muted-foreground">{t.lessonsLearned.lesson4ProblemDesc}</p>
+                    </div>
+
+                    <div>
+                      <h4 className="font-semibold text-sm mb-2 text-green-600 dark:text-green-500">{t.lessonsLearned.lesson4Solution}</h4>
+                      <p className="text-sm text-muted-foreground mb-4">{t.lessonsLearned.lesson4SolutionDesc}</p>
+                      <CodeBlock code={lessonsLearnedCode4} language="tsx" />
+                    </div>
+
+                    <div className="pt-4 border-t">
+                      <p className="text-sm font-medium text-primary">{t.lessonsLearned.lesson4Impact}</p>
                     </div>
                   </div>
                 </div>

@@ -6,7 +6,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // Component pages
   const components = [
     'button', 'card', 'input', 'textarea', 'select', 'checkbox', 'radio', 'switch',
-    'slider', 'tabs', 'accordion', 'dialog', 'popover', 'tooltip', 'dropdown-menu',
+    'slider', 'range-slider', 'tabs', 'accordion', 'dialog', 'popover', 'tooltip', 'dropdown-menu',
     'context-menu', 'badge', 'avatar', 'separator', 'progress', 'toast', 'alert',
     'form', 'calendar', 'command', 'collapsible', 'label', 'data-table',
     'prayer-times', 'hijri-date', 'arabic-number', 'zakat-calculator'
