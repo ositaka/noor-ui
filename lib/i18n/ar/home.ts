@@ -86,10 +86,10 @@ home: {
         },
         recentWins: {
           title: 'الإنجازات الأخيرة',
-          performance: 'تم نشر حزمة NPM (noorui-rtl v0.4.0)',
-          skeletons: 'أكثر من 73 مكون جاهز للإنتاج مع توثيق كامل',
+          performance: 'تم نشر حزمة NPM (noorui-rtl v0.4.2)',
+          skeletons: 'أكثر من 74 مكون جاهز للإنتاج مع توثيق كامل',
           components: 'أكثر من 10 مشاريع عرض كاملة (مدونة، سوق، سير عمل AI)',
-          rebranding: 'دعم كامل لـ RTL/LTR مع الخصائص المنطقية + إمكانية الوصول WCAG AA',
+          rebranding: 'دعم كامل لجميع اللغات RTL (العربية، العبرية، الأردية، الفارسية) + إمكانية الوصول WCAG AA',
         },
       },
       phasedApproach: {

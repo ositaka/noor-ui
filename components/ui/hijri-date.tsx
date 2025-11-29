@@ -105,9 +105,9 @@ export const HijriDate = React.forwardRef<HTMLDivElement, HijriDateProps>(
     },
     ref
   ) => {
-    const { locale } = useDirection()
+    const { locale, direction } = useDirection()
     const t = content[locale]
-    const isRTL = locale === 'ar'
+    const isRTL = direction === 'rtl'
     const displayGregorian = isRTL && gregorianDateAr ? gregorianDateAr : gregorianDate
     const displayHijri = isRTL ? hijriDateAr : hijriDate
 

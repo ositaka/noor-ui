@@ -83,9 +83,9 @@ export const PrayerTimes = React.forwardRef<HTMLDivElement, PrayerTimesProps>(
     },
     ref
   ) => {
-    const { locale } = useDirection()
+    const { locale, direction } = useDirection()
     const t = content[locale]
-    const isRTL = locale === 'ar'
+    const isRTL = direction === 'rtl'
 
     // Notification variant - special UI for Adhan alerts
     if (variant === 'notification') {

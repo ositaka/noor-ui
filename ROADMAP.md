@@ -90,13 +90,14 @@ Build the **go-to design system for bilingual (LTR/RTL) web applications**, star
 - ✅ Version and release strategy established
 - ✅ Automated pre-publish checks (translations, links, types)
 
-**Current Version:** v0.4.0 (2025-11-28)
+**Current Version:** v0.4.2 (2025-11-29)
 
 **Latest Updates:**
-- ✅ Added 9 new components (ReactionPicker, UserBadge, ContentRenderer, Kbd, Callout, Blockquote, PullQuote, StatsCard, RangeSlider)
-- ✅ Added useRelativeTime hook for multilingual relative timestamps
-- ✅ Expanded component count from 65 to 74+ components
-- ✅ Enhanced social and content-focused capabilities
+- ✅ Added RangeSlider component with dual-handle functionality
+- ✅ Fixed RTL support in PrayerTimes and HijriDate components (now work with ALL RTL languages)
+- ✅ Resolved RTL range label formatting (simple min-max format works universally)
+- ✅ Applied "direction check, not locale check" pattern across components
+- ✅ 74+ components with complete RTL/LTR support
 
 **Deliverables:**
 - ✅ Published NPM package with proper exports
@@ -164,7 +165,7 @@ Build the **go-to design system for bilingual (LTR/RTL) web applications**, star
 
 ## 🚧 Current Status: Phase 3+ COMPLETE! 🎉
 
-**Package Published:** [noorui-rtl v0.3.14 on npm](https://www.npmjs.com/package/noorui-rtl)
+**Package Published:** [noorui-rtl v0.4.2 on npm](https://www.npmjs.com/package/noorui-rtl)
 
 **Next Actions:**
 1. 🎯 Public launch and marketing campaign
@@ -177,14 +178,15 @@ Build the **go-to design system for bilingual (LTR/RTL) web applications**, star
 - None currently - ready for public launch! 🚀
 
 **Recent Wins:**
-- ✅ **NPM package published** (noorui-rtl v0.3.14)
-- ✅ **65+ production-ready components**
+- ✅ **NPM package published** (noorui-rtl v0.4.2)
+- ✅ **74+ production-ready components**
 - ✅ **Complete documentation site** (noorui.com)
 - ✅ **Multiple demo examples** (blog, marketplace, AI workflows)
-- ✅ **Full RTL/LTR support** with logical properties
+- ✅ **Full RTL/LTR support** with logical properties - works with ALL RTL languages (Arabic, Hebrew, Urdu, Farsi)
 - ✅ **TypeScript + Accessibility** (WCAG AA compliant)
 - ✅ **GCC-specific components** (Prayer Times, Hijri Calendar, Zakat Calculator)
-- ✅ **Import patterns updated** across all documentation
+- ✅ **RangeSlider component** with proper RTL label formatting
+- ✅ **RTL fixes audited** across all components
 
 ---
 
@@ -239,8 +241,8 @@ Phase 4: Month 5+    ░░░░░░░░░░░░░░░░░░░�
 
 ---
 
-*Last Updated: 2025-11-28*
-*Next Review: 2025-12-05*
+*Last Updated: 2025-11-29*
+*Next Review: 2025-12-06*
 
 ---
 
@@ -408,3 +410,25 @@ Phase 4: Month 5+    ░░░░░░░░░░░░░░░░░░░�
 
 **Status:** Resolved
 **Completed:** 2025-11-29
+
+---
+
+### ✅ COMPLETED: Direction Check Audit (Prayer Times & Hijri Date)
+
+**Issue:** Two components were checking `locale === 'ar'` instead of `direction === 'rtl'`, limiting RTL support to Arabic only.
+
+**Impact:** Components wouldn't work properly for Hebrew, Urdu, Farsi, or other RTL languages.
+
+**Components Fixed:**
+1. ✅ **PrayerTimes** (`components/ui/prayer-times.tsx:88`)
+   - Changed `locale === 'ar'` to `direction === 'rtl'`
+
+2. ✅ **HijriDate** (`components/ui/hijri-date.tsx:110`)
+   - Changed `locale === 'ar'` to `direction === 'rtl'`
+
+**Pattern Applied:** Always use `direction === 'rtl'` for layout/directionality decisions, not `locale === 'ar'`
+
+**Note:** Other `locale === 'ar'` checks in the codebase are legitimate (for Intl.DateTimeFormat, Arabic numerals, etc.)
+
+**Completed:** 2025-11-29
+**Version:** v0.4.2

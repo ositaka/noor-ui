@@ -21,7 +21,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **DataTable**: Fixed pagination chevron icons in RTL mode with `rtl:rotate-180` class so arrows point in correct reading direction
 - **DataTable**: Fixed pagination not working correctly. Component now follows controlled pattern - parent slices data, DataTable displays it. Removed internal data slicing that was preventing page changes from updating content
 - **DataTable Documentation**: Fixed "Complete Example" not paginating correctly by adding separate pagination state and properly slicing filtered data
-- **RangeSlider Documentation**: Fixed incorrect locale check (`locale === 'ar'`) to use direction check (`direction === 'rtl'`). This ensures the component works with ALL RTL languages (Hebrew, Urdu, Farsi, etc.), not just Arabic
+- **PrayerTimes**: Fixed incorrect locale check (`locale === 'ar'`) to use direction check (`direction === 'rtl'`). Component now works with ALL RTL languages (Hebrew, Urdu, Farsi, etc.), not just Arabic
+- **HijriDate**: Fixed incorrect locale check (`locale === 'ar'`) to use direction check (`direction === 'rtl'`). Component now works with ALL RTL languages (Hebrew, Urdu, Farsi, etc.), not just Arabic
+- **RangeSlider**: Resolved RTL label formatting - simplified to use universal min-max format ("100 - 500") that works naturally across all languages. Numbers and ranges are international conventions that don't need language-specific formatting
 
 ### Changed
 - **DataTable**: Sorting state now cycles through: asc → desc → null (clears sort) instead of just toggling between asc/desc
