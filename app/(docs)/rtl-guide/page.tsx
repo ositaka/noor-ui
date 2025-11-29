@@ -199,6 +199,51 @@ const commonPatternsCode = `// Pattern 1: Responsive Spacing
   </div>
 </div>`
 
+const lessonsLearnedCode1 = `// ❌ WRONG: Shortcut reverses to K⌘ in RTL
+<span dir="ltr" className="ms-auto">⌘K</span>
+
+// ✅ CORRECT: Nested structure
+<span className="ms-auto">
+  <span dir="ltr">⌘K</span>
+</span>
+
+// Real-world example from Noor UI
+const ContextMenuShortcut = ({ children, ...props }) => {
+  return (
+    <span className="ms-auto text-xs" {...props}>
+      <span dir="ltr">{children}</span>
+    </span>
+  )
+}`
+
+const lessonsLearnedCode2 = `// Problem: dir="ltr" breaks logical properties
+<span dir="ltr" className="ms-auto">
+  Content  {/* ms-auto doesn't work as expected */}
+</span>
+
+// Solution: Separate positioning from text direction
+<span className="ms-auto">        {/* Handles position */}
+  <span dir="ltr">Content</span>  {/* Handles text flow */}
+</span>`
+
+const lessonsLearnedCode3 = `// ❌ WRONG: Switch slides right in both LTR and RTL
+<SwitchThumb className="translate-x-4" />
+
+// ✅ CORRECT: Add RTL variant
+<SwitchThumb className={cn(
+  "translate-x-4",
+  "rtl:-translate-x-4"  // Negative transform in RTL
+)} />
+
+// Full example
+<SwitchPrimitives.Thumb
+  className={cn(
+    'transition-transform',
+    'data-[state=checked]:translate-x-4',
+    'rtl:data-[state=checked]:-translate-x-4'
+  )}
+/>`
+
 export default function RTLGuidePage() {
   const { locale, direction } = useDirection()
   const isRTL = direction === 'rtl'
@@ -532,6 +577,123 @@ export default function RTLGuidePage() {
         <section className="mb-16">
           <h2 className="text-2xl font-bold tracking-tight mb-6">{t.bestPractices.title}</h2>
           <BestPractices dos={t.bestPractices.doList} donts={t.bestPractices.dontList} />
+        </section>
+
+        {/* Lessons Learned */}
+        <section className="mb-16">
+          <h2 className="text-2xl font-bold tracking-tight mb-6 flex items-center gap-2">
+            <Lightbulb className="h-6 w-6 text-primary" />
+            {t.lessonsLearned.title}
+          </h2>
+          <p className="text-muted-foreground mb-8">
+            {t.lessonsLearned.description}
+          </p>
+
+          {/* Lesson 1: Keyboard Shortcuts */}
+          <div className="mb-12">
+            <Card>
+              <CardContent className="p-6 space-y-6">
+                <div>
+                  <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
+                    <span className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-primary text-sm font-bold">1</span>
+                    {t.lessonsLearned.lesson1Title}
+                  </h3>
+
+                  <div className="space-y-4">
+                    <div>
+                      <h4 className="font-semibold text-sm mb-2 text-destructive">{t.lessonsLearned.lesson1Problem}</h4>
+                      <p className="text-sm text-muted-foreground">{t.lessonsLearned.lesson1ProblemDesc}</p>
+                    </div>
+
+                    <div>
+                      <h4 className="font-semibold text-sm mb-2 text-green-600 dark:text-green-500">{t.lessonsLearned.lesson1Solution}</h4>
+                      <p className="text-sm text-muted-foreground mb-4">{t.lessonsLearned.lesson1SolutionDesc}</p>
+                      <CodeBlock code={lessonsLearnedCode1} language="tsx" />
+                    </div>
+
+                    <div className="pt-4 border-t">
+                      <p className="text-sm font-medium text-primary">{t.lessonsLearned.lesson1Impact}</p>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Lesson 2: Positioning vs Text Direction */}
+          <div className="mb-12">
+            <Card>
+              <CardContent className="p-6 space-y-6">
+                <div>
+                  <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
+                    <span className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-primary text-sm font-bold">2</span>
+                    {t.lessonsLearned.lesson2Title}
+                  </h3>
+
+                  <div className="space-y-4">
+                    <div>
+                      <h4 className="font-semibold text-sm mb-2 text-destructive">{t.lessonsLearned.lesson2Problem}</h4>
+                      <p className="text-sm text-muted-foreground">{t.lessonsLearned.lesson2ProblemDesc}</p>
+                    </div>
+
+                    <div>
+                      <h4 className="font-semibold text-sm mb-2 text-green-600 dark:text-green-500">{t.lessonsLearned.lesson2Solution}</h4>
+                      <p className="text-sm text-muted-foreground mb-4">{t.lessonsLearned.lesson2SolutionDesc}</p>
+                      <CodeBlock code={lessonsLearnedCode2} language="tsx" />
+                    </div>
+
+                    <div className="pt-4 border-t">
+                      <p className="text-sm font-medium text-primary">{t.lessonsLearned.lesson2Impact}</p>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Lesson 3: Transform Animations */}
+          <div className="mb-8">
+            <Card>
+              <CardContent className="p-6 space-y-6">
+                <div>
+                  <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
+                    <span className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-primary text-sm font-bold">3</span>
+                    {t.lessonsLearned.lesson3Title}
+                  </h3>
+
+                  <div className="space-y-4">
+                    <div>
+                      <h4 className="font-semibold text-sm mb-2 text-destructive">{t.lessonsLearned.lesson3Problem}</h4>
+                      <p className="text-sm text-muted-foreground">{t.lessonsLearned.lesson3ProblemDesc}</p>
+                    </div>
+
+                    <div>
+                      <h4 className="font-semibold text-sm mb-2 text-green-600 dark:text-green-500">{t.lessonsLearned.lesson3Solution}</h4>
+                      <p className="text-sm text-muted-foreground mb-4">{t.lessonsLearned.lesson3SolutionDesc}</p>
+                      <CodeBlock code={lessonsLearnedCode3} language="tsx" />
+                    </div>
+
+                    <div className="pt-4 border-t">
+                      <p className="text-sm font-medium text-primary">{t.lessonsLearned.lesson3Impact}</p>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Footer */}
+          <Card className="bg-muted/50">
+            <CardContent className="p-6">
+              <div className="flex items-start gap-3">
+                <Info className="h-5 w-5 text-primary mt-0.5 shrink-0" />
+                <div>
+                  <p className="text-sm font-medium mb-1">{t.lessonsLearned.updatedDate}</p>
+                  <p className="text-sm text-muted-foreground">{t.lessonsLearned.contributionNote}</p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
         </section>
 
         {/* Resources */}
