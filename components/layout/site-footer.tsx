@@ -153,9 +153,14 @@ export function SiteFooter() {
             <h4 className="font-semibold mb-4">{content.community}</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li>
-                <span className="cursor-default">
+                <a
+                  href="http://github.com/ositaka/noor-ui/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-foreground transition-colors"
+                >
                   {content.github}
-                </span>
+                </a>
               </li>
               <li>
                 <a
@@ -168,14 +173,14 @@ export function SiteFooter() {
                 </a>
               </li>
               <li>
-                <span className="cursor-default">
+                <a
+                  href="https://discord.gg/gvrqU2WG"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-foreground transition-colors"
+                >
                   {content.discord}
-                </span>
-              </li>
-              <li>
-                <span className="cursor-default">
-                  {content.twitter}
-                </span>
+                </a>
               </li>
             </ul>
           </div>
