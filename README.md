@@ -318,6 +318,7 @@ Built with:
 
 ## 💬 Support
 
+- 💬 Discord: [Join our community](https://discord.gg/gvrqU2WG)
 - 📧 Email: info@ositaka.com
 - 🐛 Issues: [GitHub Issues](https://github.com/ositaka/noor-ui/issues)
 - 💬 Discussions: [GitHub Discussions](https://github.com/ositaka/noor-ui/discussions)

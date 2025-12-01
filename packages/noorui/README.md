@@ -92,6 +92,7 @@ MIT © [Nuno Marques](https://ositaka.com)
 
 - 🌐 [Website](https://noorui.com)
 - 📚 [Documentation](https://noorui.com/documentation)
+- 💬 [Discord Community](https://discord.gg/gvrqU2WG)
 - 🐛 [Issues](https://github.com/ositaka/noor-ui/issues)
 - 💬 [Discussions](https://github.com/ositaka/noor-ui/discussions)
 

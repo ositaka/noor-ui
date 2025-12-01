@@ -300,6 +300,7 @@ hooks/
 
 ## Questions?
 
+- 💬 Discord: [Join our community](https://discord.gg/gvrqU2WG)
 - 💬 Open an issue for questions
 - 📧 Email: info@ositaka.com
 - 🐛 Report bugs via GitHub issues

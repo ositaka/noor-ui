@@ -64,7 +64,7 @@ Build the **go-to design system for bilingual (LTR/RTL) web applications**, star
 #### Week 7-8: Community Building
 - ✅ GitHub repository with comprehensive README
 - ✅ Documentation includes contribution guidelines
-- ⏳ Create Discord server (next priority)
+- ✅ Discord server created and configured (https://discord.gg/gvrqU2WG)
 - ⏳ Write blog posts about RTL challenges/solutions (next priority)
 - ⏳ Share on social media (ready to launch!)
 
@@ -72,7 +72,7 @@ Build the **go-to design system for bilingual (LTR/RTL) web applications**, star
 - ✅ 5+ complete demo projects
 - ✅ Refined component library (74+ components)
 - ✅ Interactive documentation site
-- ⏳ Active community (launching soon)
+- ✅ Active community channels established (Discord server live!)
 
 ---
 
@@ -262,7 +262,7 @@ Phase 4: Month 5+    ░░░░░░░░░░░░░░░░░░░�
    - Document migration from shadcn/ui
 
 3. **Community Building**
-   - Set up Discord server
+   - ✅ Set up Discord server (https://discord.gg/gvrqU2WG)
    - Enable GitHub Discussions
    - Create contribution guidelines
    - Plan first community call
