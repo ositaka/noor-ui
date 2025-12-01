@@ -25,6 +25,7 @@ export function SiteFooter() {
       license: 'License',
       community: 'Community',
       github: 'GitHub',
+      discussions: 'Discussions',
       npmPackage: 'npm Package',
       discord: 'Discord',
       twitter: 'Twitter',
@@ -49,6 +50,7 @@ export function SiteFooter() {
       license: 'الترخيص',
       community: 'المجتمع',
       github: 'GitHub',
+      discussions: 'النقاشات',
       npmPackage: 'حزمة npm',
       discord: 'Discord',
       twitter: 'Twitter',
@@ -160,6 +162,16 @@ export function SiteFooter() {
                   className="hover:text-foreground transition-colors"
                 >
                   {content.github}
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://github.com/ositaka/noor-ui/discussions"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-foreground transition-colors"
+                >
+                  {content.discussions}
                 </a>
               </li>
               <li>

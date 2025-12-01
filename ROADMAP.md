@@ -263,7 +263,7 @@ Phase 4: Month 5+    ░░░░░░░░░░░░░░░░░░░�
 
 3. **Community Building**
    - ✅ Set up Discord server (https://discord.gg/gvrqU2WG)
-   - Enable GitHub Discussions
+   - ✅ Enable GitHub Discussions (https://github.com/ositaka/noor-ui/discussions)
    - Create contribution guidelines
    - Plan first community call
 
