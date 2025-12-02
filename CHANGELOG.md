@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - **Website**: Added "Starters" link to main navigation (both desktop and mobile)
 - **Website**: Added i18n translations for "Starters" menu item (English: "Starters", Arabic: "نماذج البداية")
+- **Website**: Added /starters page to sitemap.ts for SEO (priority: 0.8, weekly updates)
 - **Documentation**: Updated /starters page with Kitab Blog Starter information
 - **Documentation**: Added Kitab live demo link (kitab.noorui.com) and GitHub repository
 - **Documentation**: Updated README.md to include Starters page in documentation links
