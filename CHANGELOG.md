@@ -21,6 +21,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Website**: Improved visibility of /starters page through navigation integration
 - **Starters Page**: Replaced placeholder "Blog Dashboard" with production-ready "Kitab - Blog Starter"
 - **Starters Page**: Updated GitHub button to link to https://github.com/topics/noor-ui for broader project discovery
+- **Roadmap**: Updated current status to "READY FOR PUBLIC LAUNCH" with technical pre-launch checklist completed
+- **Roadmap**: Added Kitab to recent wins and next actions focused on marketing launch
 
 ## [0.4.2] - 2025-11-29
 
