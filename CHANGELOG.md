@@ -5,6 +5,22 @@ All notable changes to Noor UI will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Added
+- **Website**: Added "Starters" link to main navigation (both desktop and mobile)
+- **Website**: Added i18n translations for "Starters" menu item (English: "Starters", Arabic: "نماذج البداية")
+- **Documentation**: Updated /starters page with Kitab Blog Starter information
+- **Documentation**: Added Kitab live demo link (kitab.noorui.com) and GitHub repository
+- **Documentation**: Updated README.md to include Starters page in documentation links
+- **Documentation**: Updated ROADMAP.md to highlight Kitab as completed deliverable
+- **Documentation**: Updated starters/README.md with full Kitab feature list
+
+### Changed
+- **Website**: Improved visibility of /starters page through navigation integration
+- **Starters Page**: Replaced placeholder "Blog Dashboard" with production-ready "Kitab - Blog Starter"
+- **Starters Page**: Updated GitHub button to link to https://github.com/topics/noor-ui for broader project discovery
+
 ## [0.4.2] - 2025-11-29
 
 ### Added

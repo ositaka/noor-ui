@@ -8,6 +8,7 @@ nav: {
       home: 'الرئيسية',
       components: 'المكونات',
       examples: 'الأمثلة',
+      starters: 'نماذج البداية',
       rtlGuide: 'دليل RTL',
       tokens: 'رموز التصميم',
       themes: 'السمات',

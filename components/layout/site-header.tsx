@@ -63,6 +63,12 @@ export function SiteHeader() {
             {t.nav.examples}
           </Link>
           <Link
+            href="/starters"
+            className="text-sm font-medium transition-colors hover:text-primary"
+          >
+            {t.nav.starters}
+          </Link>
+          <Link
             href="/rtl-guide"
             className="text-sm font-medium transition-colors hover:text-primary"
           >
@@ -124,6 +130,13 @@ export function SiteHeader() {
                   onClick={() => setOpen(false)}
                 >
                   {t.nav.examples}
+                </Link>
+                <Link
+                  href="/starters"
+                  className="text-sm font-medium transition-colors hover:text-primary py-2"
+                  onClick={() => setOpen(false)}
+                >
+                  {t.nav.starters}
                 </Link>
                 <Link
                   href="/rtl-guide"

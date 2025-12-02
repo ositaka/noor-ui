@@ -298,6 +298,7 @@ Full documentation, examples, and guides available at **[noorui.com](https://noo
 - [Components](https://noorui.com/components)
 - [RTL Guide](https://noorui.com/rtl-guide)
 - [Examples](https://noorui.com/examples)
+- [Starters](https://noorui.com/starters)
 - [Design Tokens](https://noorui.com/tokens)
 
 ## 🤝 Contributing

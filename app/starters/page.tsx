@@ -34,21 +34,21 @@ interface Starter {
 
 const starters: Starter[] = [
   {
-    title: 'Blog Dashboard',
-    description: 'Complete blogging platform with authentication, rich text editor, and Supabase backend.',
-    longDescription: 'A full-featured bilingual blog platform with user authentication, post management, image uploads, and rich content editing. Perfect for content creators who need a production-ready CMS.',
-    href: 'https://github.com/ositaka/noor-ui/tree/main/starters/blog-dashboard',
+    title: 'Kitab - Blog Starter',
+    description: 'Production-ready multilingual blog with 4 languages, MDX support, and Arabic typography.',
+    longDescription: 'A complete multilingual blog starter with English, Arabic, French, and Urdu support. Features MDX content, Supabase CMS, rich components (callouts, pull quotes, code blocks), and perfect RTL/LTR layouts. Live demo available!',
+    href: 'https://github.com/ositaka/kitab--noorui-blog-starter',
     icon: PenTool,
-    tags: ['Full Stack', 'CMS', 'Authentication'],
+    tags: ['Multilingual', '4 Languages', 'MDX', 'RTL'],
     features: [
-      'User authentication with Supabase',
-      'Rich text editor (TipTap)',
-      'Image upload and management',
-      'Complete bilingual support',
-      'Row-level security',
-      'Dark mode support',
+      '4 languages: EN, AR, FR, UR',
+      'MDX with custom components',
+      'Supabase CMS backend',
+      'Arabic typography (Noto Naskh)',
+      'Syntax highlighting & TOC',
+      'Live demo: kitab.noorui.com',
     ],
-    stack: ['Next.js 14', 'Supabase', 'TipTap', 'TypeScript'],
+    stack: ['Next.js 16', 'Supabase', 'MDX', 'TypeScript'],
     status: 'ready' as const,
     featured: true,
   },
@@ -186,7 +186,7 @@ export default function StartersPage() {
                 {t.startersPage.buttons.browseReady}
               </Button>
             </Link>
-            <Link href="https://github.com" target="_blank" rel="noopener noreferrer">
+            <Link href="https://github.com/topics/noor-ui" target="_blank" rel="noopener noreferrer">
               <Button variant="outline">
                 <Github className="h-4 w-4 me-2" />
                 {t.startersPage.buttons.viewGitHub}

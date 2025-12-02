@@ -4,25 +4,30 @@ Complete, production-ready applications built with Noor UI components. These sta
 
 ## Available Starters
 
-### 📝 [Blog Dashboard](./blog-dashboard)
-A full-featured bilingual blog platform with authentication, post management, and rich content editing.
+### 📝 [Kitab - Blog Starter](https://github.com/ositaka/kitab--noorui-blog-starter)
+A production-ready multilingual blog with 4 languages, MDX support, and Arabic typography.
+
+**Live Demo:** [kitab.noorui.com](https://kitab.noorui.com)
 
 **Features:**
-- 🔐 User authentication with Supabase
-- ✍️ Rich text editor for blog posts
-- 🖼️ Image upload and management
-- 🌍 Complete bilingual support (English/Arabic)
-- 📱 Fully responsive design
-- 🎨 Dark mode support
-- 🔒 Row-level security
+- 🌍 4 languages: English, Arabic, French, Urdu
+- 📝 MDX with custom components (callouts, pull quotes, code blocks)
+- 🗄️ Supabase CMS backend
+- ✍️ Arabic typography (Noto Naskh)
+- 🔍 Full-text search with PostgreSQL
+- 💬 Comment system with reactions
+- 📊 Admin dashboard with Google OAuth
+- 🎨 Syntax highlighting & Table of Contents
+- 📱 Fully responsive RTL/LTR layouts
 
 **Stack:**
-- Next.js 14
+- Next.js 16
 - Supabase (Auth + Database + Storage)
-- TipTap Editor
+- MDX with rehype/remark plugins
 - Noor UI Components
+- TypeScript
 
-**[View Documentation →](./blog-dashboard/README.md)**
+**[View on GitHub →](https://github.com/ositaka/kitab--noorui-blog-starter)** | **[Live Demo →](https://kitab.noorui.com)**
 
 ### 🛒 [E-commerce Shop](./ecommerce)
 A complete online shop with product catalog, shopping cart, and checkout flow.
