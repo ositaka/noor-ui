@@ -3,6 +3,8 @@
 [![npm version](https://img.shields.io/npm/v/noorui-rtl.svg)](https://www.npmjs.com/package/noorui-rtl)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
+![Noor UI - Beautiful RTL-first React components for bilingual applications](https://raw.githubusercontent.com/ositaka/noor-ui/main/public/noorui--og-image--bilingual.png)
+
 Beautiful RTL-first React components for bilingual applications. Built with Radix UI, Tailwind CSS, and full Arabic/English support.
 
 ## Features

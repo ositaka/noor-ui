@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Website**: Added "Starters" link to main navigation (both desktop and mobile)
 - **Website**: Added i18n translations for "Starters" menu item (English: "Starters", Arabic: "نماذج البداية")
 - **Website**: Added /starters page to sitemap.ts for SEO (priority: 0.8, weekly updates)
+- **SEO**: Added 3 OG images (bilingual, Arabic, English) at 1200×630px for social sharing
+- **SEO**: Updated root layout metadata with comprehensive OpenGraph and Twitter Card metadata
+- **Documentation**: Added OG image to main README.md for visual impact on GitHub
+- **Documentation**: Added OG image to npm package README (packages/noorui/README.md)
 - **Documentation**: Updated /starters page with Kitab Blog Starter information
 - **Documentation**: Added Kitab live demo link (kitab.noorui.com) and GitHub repository
 - **Documentation**: Updated README.md to include Starters page in documentation links
