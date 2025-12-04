@@ -4,22 +4,30 @@ import { cva, type VariantProps } from 'class-variance-authority'
 import { X } from 'lucide-react'
 
 import { cn } from '../../lib/utils'
+import { useDirection } from '../providers/direction-provider'
 
 const ToastProvider = ToastPrimitives.Provider
 
 const ToastViewport = React.forwardRef<
   React.ElementRef<typeof ToastPrimitives.Viewport>,
   React.ComponentPropsWithoutRef<typeof ToastPrimitives.Viewport>
->(({ className, ...props }, ref) => (
-  <ToastPrimitives.Viewport
-    ref={ref}
-    className={cn(
-      'fixed top-0 z-[100] flex max-h-screen w-full flex-col-reverse p-4 sm:bottom-0 sm:end-0 sm:top-auto sm:flex-col md:max-w-[420px]',
-      className
-    )}
-    {...props}
-  />
-))
+>(({ className, ...props }, ref) => {
+  const { direction } = useDirection()
+  const isRTL = direction === 'rtl'
+
+  return (
+    <ToastPrimitives.Viewport
+      ref={ref}
+      className={cn(
+        'fixed top-0 z-[100] flex max-h-screen w-full flex-col-reverse p-4 sm:flex-col md:max-w-[420px]',
+        // LTR: bottom-right, RTL: top-left
+        isRTL ? 'sm:top-0 sm:start-0' : 'sm:bottom-0 sm:end-0 sm:top-auto',
+        className
+      )}
+      {...props}
+    />
+  )
+})
 ToastViewport.displayName = ToastPrimitives.Viewport.displayName
 
 const toastVariants = cva(

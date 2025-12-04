@@ -406,22 +406,19 @@ function getArabicMonth(month: number): string {
             <p>{t.accessibility.description}</p>
             <ul className="list-disc list-inside space-y-2 ms-4">
               <li>
-                <strong>Semantic HTML:</strong> Uses proper semantic elements for date display.
+                <strong>{t.accessibility.semanticHtml}</strong> {t.accessibility.semanticHtmlDesc}
               </li>
               <li>
-                <strong>Clear Labels:</strong> Date type labels (&quot;Gregorian&quot;, &quot;Hijri&quot;) provide context.
+                <strong>{t.accessibility.clearLabels}</strong> {t.accessibility.clearLabelsDesc}
               </li>
               <li>
-                <strong>Visual Hierarchy:</strong> Consistent styling helps distinguish between date
-                types.
+                <strong>{t.accessibility.visualHierarchy}</strong> {t.accessibility.visualHierarchyDesc}
               </li>
               <li>
-                <strong>Separator:</strong> Visual bullet separator in inline variants is marked
-                with aria-hidden.
+                <strong>{t.accessibility.separator}</strong> {t.accessibility.separatorDesc}
               </li>
               <li>
-                <strong>Readable Typography:</strong> Font sizes and weights optimized for
-                readability.
+                <strong>{t.accessibility.readableTypography}</strong> {t.accessibility.readableTypographyDesc}
               </li>
             </ul>
           </div>
@@ -436,24 +433,19 @@ function getArabicMonth(month: number): string {
             </p>
             <ul className="list-disc list-inside space-y-2 ms-4">
               <li>
-                <strong>Automatic Language Detection:</strong> Displays Arabic dates (gregorianDateAr,
-                hijriDateAr) in RTL mode.
+                <strong>{t.rtl.autoLanguage}</strong> {t.rtl.autoLanguageDesc}
               </li>
               <li>
-                <strong>Logical Properties:</strong> Uses margin-inline-start (ms-*) and gap for
-                proper spacing.
+                <strong>{t.rtl.logicalProperties}</strong> {t.rtl.logicalPropertiesDesc}
               </li>
               <li>
-                <strong>Flexible Layout:</strong> All variants adapt seamlessly to both LTR and RTL
-                directions.
+                <strong>{t.rtl.flexibleLayout}</strong> {t.rtl.flexibleLayoutDesc}
               </li>
               <li>
-                <strong>Icon Positioning:</strong> Calendar icon positions correctly in both
-                directions.
+                <strong>{t.rtl.iconPositioning}</strong> {t.rtl.iconPositioningDesc}
               </li>
               <li>
-                <strong>Text Alignment:</strong> Date labels and values align naturally based on
-                direction.
+                <strong>{t.rtl.textAlignment}</strong> {t.rtl.textAlignmentDesc}
               </li>
             </ul>
           </div>

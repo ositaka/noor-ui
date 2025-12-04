@@ -324,11 +324,11 @@ export default function CalendarPage() {
             <Card>
               <CardContent className="p-6">
                 <div className="flex items-center gap-2 mb-2">
-                  <h3 className="font-semibold">Islamic Holidays</h3>
+                  <h3 className="font-semibold">{t.calendarComponent.features.islamicHolidays}</h3>
                   <Badge variant="default" className="text-xs">New</Badge>
                 </div>
                 <p className="text-sm text-muted-foreground">
-                  Automatic highlighting of 10 major Islamic holidays including Ramadan, Eid al-Fitr, Eid al-Adha, and more
+                  {t.calendarComponent.features.islamicHolidaysDesc}
                 </p>
               </CardContent>
             </Card>
@@ -445,13 +445,13 @@ export default function CalendarPage() {
             {/* With Islamic Holidays */}
             <div>
               <div className="flex items-center gap-2 mb-4">
-                <h3 className="text-lg font-semibold">Islamic Holidays Highlighting</h3>
+                <h3 className="text-lg font-semibold">{t.calendarComponent.examples.islamicHolidaysHighlighting}</h3>
                 <Badge variant="default">New</Badge>
               </div>
               <Card>
                 <CardContent className="p-6">
                   <p className="text-sm text-muted-foreground mb-4">
-                    Automatically highlights 10 major Islamic holidays with event dots and displays holiday names in both English and Arabic. Perfect for GCC region applications.
+                    {t.calendarComponent.examples.islamicHolidaysHighlightingDesc}
                   </p>
                   <div className="max-w-md mx-auto">
                     <Calendar

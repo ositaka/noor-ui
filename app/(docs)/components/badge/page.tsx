@@ -179,9 +179,9 @@ export default function BadgePage() {
           <ComponentShowcase>
             <ComponentShowcase.Demo>
               <div className="flex flex-wrap gap-2">
-                <Badge>New</Badge>
-                <Badge variant="secondary">Beta</Badge>
-                <Badge variant="outline">Soon</Badge>
+                <Badge>{t.badgeComponent.labels.new}</Badge>
+                <Badge variant="secondary">{t.badgeComponent.labels.beta}</Badge>
+                <Badge variant="outline">{t.badgeComponent.labels.soon}</Badge>
               </div>
             </ComponentShowcase.Demo>
           </ComponentShowcase>
@@ -210,10 +210,10 @@ export default function BadgePage() {
               <Card>
                 <CardContent className="p-6">
                   <div className="flex flex-wrap gap-2">
-                    <Badge variant="default">Default</Badge>
-                    <Badge variant="secondary">Secondary</Badge>
-                    <Badge variant="destructive">Destructive</Badge>
-                    <Badge variant="outline">Outline</Badge>
+                    <Badge variant="default">{t.badgeComponent.labels.default}</Badge>
+                    <Badge variant="secondary">{t.badgeComponent.labels.secondary}</Badge>
+                    <Badge variant="destructive">{t.badgeComponent.labels.destructive}</Badge>
+                    <Badge variant="outline">{t.badgeComponent.labels.outline}</Badge>
                   </div>
                 </CardContent>
               </Card>
@@ -230,19 +230,19 @@ export default function BadgePage() {
                   <div className="flex flex-wrap gap-2">
                     <Badge>
                       <Check className="h-3 w-3 me-1" />
-                      Verified
+                      {t.badgeComponent.labels.verified}
                     </Badge>
                     <Badge variant="secondary">
                       <Star className="h-3 w-3 me-1" />
-                      Featured
+                      {t.badgeComponent.labels.featured}
                     </Badge>
                     <Badge variant="destructive">
                       <AlertCircle className="h-3 w-3 me-1" />
-                      Error
+                      {t.badgeComponent.labels.error}
                     </Badge>
                     <Badge variant="outline">
                       <Zap className="h-3 w-3 me-1" />
-                      Fast
+                      {t.badgeComponent.labels.fast}
                     </Badge>
                   </div>
                 </CardContent>
@@ -260,19 +260,19 @@ export default function BadgePage() {
                   <div className="flex flex-wrap gap-2">
                     <Badge variant="default">
                       <CheckCircle2 className="h-3 w-3 me-1" />
-                      Active
+                      {t.badgeComponent.labels.active}
                     </Badge>
                     <Badge variant="secondary">
                       <Clock className="h-3 w-3 me-1" />
-                      Pending
+                      {t.badgeComponent.labels.pending}
                     </Badge>
                     <Badge variant="destructive">
                       <XCircle className="h-3 w-3 me-1" />
-                      Failed
+                      {t.badgeComponent.labels.failed}
                     </Badge>
                     <Badge variant="outline">
                       <AlertCircle className="h-3 w-3 me-1" />
-                      Info
+                      {t.badgeComponent.labels.info}
                     </Badge>
                   </div>
                 </CardContent>
@@ -291,11 +291,11 @@ export default function BadgePage() {
                     <Card>
                       <CardHeader>
                         <div className="flex items-center justify-between">
-                          <CardTitle>Premium Feature</CardTitle>
-                          <Badge>Pro</Badge>
+                          <CardTitle>{t.badgeComponent.features.premiumFeature}</CardTitle>
+                          <Badge>{t.badgeComponent.labels.pro}</Badge>
                         </div>
                         <CardDescription>
-                          This feature is available on the Pro plan
+                          {t.badgeComponent.features.premiumDescription}
                         </CardDescription>
                       </CardHeader>
                     </Card>
@@ -303,20 +303,20 @@ export default function BadgePage() {
                     <Card>
                       <CardHeader>
                         <div className="flex items-center justify-between">
-                          <CardTitle>Beta Testing</CardTitle>
-                          <Badge variant="secondary">Beta</Badge>
+                          <CardTitle>{t.badgeComponent.features.betaTesting}</CardTitle>
+                          <Badge variant="secondary">{t.badgeComponent.labels.beta}</Badge>
                         </div>
-                        <CardDescription>Currently in beta testing phase</CardDescription>
+                        <CardDescription>{t.badgeComponent.features.betaDescription}</CardDescription>
                       </CardHeader>
                     </Card>
 
                     <Card>
                       <CardHeader>
                         <div className="flex items-center justify-between">
-                          <CardTitle>Deprecated API</CardTitle>
-                          <Badge variant="destructive">Deprecated</Badge>
+                          <CardTitle>{t.badgeComponent.features.deprecatedAPI}</CardTitle>
+                          <Badge variant="destructive">{t.badgeComponent.labels.deprecated}</Badge>
                         </div>
-                        <CardDescription>This API will be removed soon</CardDescription>
+                        <CardDescription>{t.badgeComponent.features.deprecatedDescription}</CardDescription>
                       </CardHeader>
                     </Card>
                   </div>
@@ -334,20 +334,20 @@ export default function BadgePage() {
                 <CardContent className="p-6">
                   <ul className="space-y-2">
                     <li className="flex items-center justify-between p-3 rounded-lg border">
-                      <span>Dark Mode Support</span>
-                      <Badge variant="default">Included</Badge>
+                      <span>{t.badgeComponent.features.darkModeSupport}</span>
+                      <Badge variant="default">{t.badgeComponent.labels.included}</Badge>
                     </li>
                     <li className="flex items-center justify-between p-3 rounded-lg border">
-                      <span>Advanced Analytics</span>
-                      <Badge variant="secondary">Coming Soon</Badge>
+                      <span>{t.badgeComponent.features.advancedAnalytics}</span>
+                      <Badge variant="secondary">{t.badgeComponent.labels.comingSoon}</Badge>
                     </li>
                     <li className="flex items-center justify-between p-3 rounded-lg border">
-                      <span>Legacy API</span>
-                      <Badge variant="destructive">Deprecated</Badge>
+                      <span>{t.badgeComponent.features.legacyAPI}</span>
+                      <Badge variant="destructive">{t.badgeComponent.labels.deprecated}</Badge>
                     </li>
                     <li className="flex items-center justify-between p-3 rounded-lg border">
-                      <span>Documentation</span>
-                      <Badge variant="outline">In Progress</Badge>
+                      <span>{t.badgeComponent.features.documentation}</span>
+                      <Badge variant="outline">{t.badgeComponent.labels.inProgress}</Badge>
                     </li>
                   </ul>
                 </CardContent>
@@ -364,17 +364,17 @@ export default function BadgePage() {
                 <CardContent className="p-6">
                   <div className="flex flex-wrap gap-4">
                     <Button variant="outline" className="relative">
-                      Notifications
+                      {t.badgeComponent.labels.notifications}
                       <Badge className="absolute -top-2 -end-2 px-2">3</Badge>
                     </Button>
 
                     <Button variant="outline" className="relative">
-                      Messages
+                      {t.badgeComponent.labels.messages}
                       <Badge className="absolute -top-2 -end-2 px-2">12</Badge>
                     </Button>
 
                     <Button variant="outline" className="relative">
-                      Cart
+                      {t.badgeComponent.labels.cart}
                       <Badge variant="secondary" className="absolute -top-2 -end-2 px-2">
                         5
                       </Badge>
@@ -393,9 +393,9 @@ export default function BadgePage() {
               <Card>
                 <CardContent className="p-6">
                   <div className="flex flex-wrap items-center gap-2">
-                    <Badge className="text-[10px] px-1.5 py-0">Tiny</Badge>
-                    <Badge>Normal</Badge>
-                    <Badge className="text-sm px-3 py-1">Large</Badge>
+                    <Badge className="text-[10px] px-1.5 py-0">{t.badgeComponent.labels.tiny}</Badge>
+                    <Badge>{t.badgeComponent.labels.normal}</Badge>
+                    <Badge className="text-sm px-3 py-1">{t.badgeComponent.labels.large}</Badge>
                   </div>
                 </CardContent>
               </Card>
@@ -411,19 +411,19 @@ export default function BadgePage() {
                 <CardContent className="p-6">
                   <div className="flex flex-wrap gap-2">
                     <Badge className="bg-green-500 hover:bg-green-600 border-transparent text-white">
-                      Success
+                      {t.badgeComponent.labels.success}
                     </Badge>
                     <Badge className="bg-yellow-500 hover:bg-yellow-600 border-transparent text-white">
-                      Warning
+                      {t.badgeComponent.labels.warning}
                     </Badge>
                     <Badge className="bg-blue-500 hover:bg-blue-600 border-transparent text-white">
-                      Info
+                      {t.badgeComponent.labels.info}
                     </Badge>
                     <Badge className="bg-purple-500 hover:bg-purple-600 border-transparent text-white">
-                      Custom
+                      {t.badgeComponent.labels.custom}
                     </Badge>
                     <Badge className="bg-pink-500 hover:bg-pink-600 border-transparent text-white">
-                      Special
+                      {t.badgeComponent.labels.special}
                     </Badge>
                   </div>
                 </CardContent>

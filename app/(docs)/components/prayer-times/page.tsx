@@ -463,23 +463,19 @@ export function SmartPrayerTimes({ latitude, longitude }: { latitude: number; lo
             <p>{t.accessibility.description}</p>
             <ul className="list-disc list-inside space-y-2 ms-4">
               <li>
-                <strong>Semantic HTML:</strong> Uses proper heading hierarchy and semantic
-                elements.
+                <strong>{t.accessibility.semanticHtml}</strong> {t.accessibility.semanticHtmlDesc}
               </li>
               <li>
-                <strong>Visual Indicators:</strong> Color dots and borders provide visual cues for
-                the next prayer.
+                <strong>{t.accessibility.visualIndicators}</strong> {t.accessibility.visualIndicatorsDesc}
               </li>
               <li>
-                <strong>High Contrast:</strong> Text and icons maintain proper contrast ratios for
-                readability.
+                <strong>{t.accessibility.highContrast}</strong> {t.accessibility.highContrastDesc}
               </li>
               <li>
-                <strong>Tabular Numbers:</strong> Uses tabular-nums for consistent time alignment.
+                <strong>{t.accessibility.tabularNumbers}</strong> {t.accessibility.tabularNumbersDesc}
               </li>
               <li>
-                <strong>Responsive Design:</strong> Adapts to different screen sizes while
-                maintaining readability.
+                <strong>{t.accessibility.responsiveDesign}</strong> {t.accessibility.responsiveDesignDesc}
               </li>
             </ul>
           </div>
@@ -494,23 +490,19 @@ export function SmartPrayerTimes({ latitude, longitude }: { latitude: number; lo
             </p>
             <ul className="list-disc list-inside space-y-2 ms-4">
               <li>
-                <strong>Automatic Language Detection:</strong> Displays Arabic names (nameAr) in
-                RTL mode and English names in LTR mode.
+                <strong>{t.rtl.autoLanguage}</strong> {t.rtl.autoLanguageDesc}
               </li>
               <li>
-                <strong>Logical Properties:</strong> Uses margin-inline-start (ms-*) and
-                margin-inline-end (me-*) for proper spacing in both directions.
+                <strong>{t.rtl.logicalProperties}</strong> {t.rtl.logicalPropertiesDesc}
               </li>
               <li>
-                <strong>Text Alignment:</strong> Uses text-start and text-end instead of left/right
-                alignment.
+                <strong>{t.rtl.textAlignment}</strong> {t.rtl.textAlignmentDesc}
               </li>
               <li>
-                <strong>Icon Positioning:</strong> Icons automatically position correctly in both
-                LTR and RTL layouts.
+                <strong>{t.rtl.iconPositioning}</strong> {t.rtl.iconPositioningDesc}
               </li>
               <li>
-                <strong>Badge Labels:</strong> &quot;Next&quot; badge shows &quot;الآن&quot; (Now) in Arabic mode.
+                <strong>{t.rtl.badgeLabels}</strong> {t.rtl.badgeLabelsDesc}
               </li>
             </ul>
           </div>

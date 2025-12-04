@@ -60,6 +60,17 @@ import {
 
 const componentCategories = (t: typeof content.en | typeof content.ar) => [
   {
+    name: t.components.categories.gcc,
+    description: t.components.categories.gccDesc,
+    components: [
+      { name: 'Prayer Times', icon: Clock, href: '/components/prayer-times', status: 'ready' },
+      { name: 'Hijri Date', icon: Clock, href: '/components/hijri-date', status: 'ready' },
+      { name: 'Arabic Number', icon: Hash, href: '/components/arabic-number', status: 'ready' },
+      { name: 'Zakat Calculator', icon: Calculator, href: '/components/zakat-calculator', status: 'ready' },
+      { name: 'Calendar', icon: CalendarIcon, href: '/components/calendar', status: 'ready' },
+    ],
+  },
+  {
     name: t.components.categories.core,
     description: t.components.categories.coreDesc,
     components: [
@@ -136,17 +147,6 @@ const componentCategories = (t: typeof content.en | typeof content.ar) => [
       { name: 'Accordion', icon: ChevronsUpDown, href: '/components/accordion', status: 'ready' },
       { name: 'Collapsible', icon: ChevronsUpDown, href: '/components/collapsible', status: 'ready' },
       { name: 'Popover', icon: MessageSquare, href: '/components/popover', status: 'ready' },
-    ],
-  },
-  {
-    name: t.components.categories.gcc,
-    description: t.components.categories.gccDesc,
-    components: [
-      { name: 'Prayer Times', icon: Clock, href: '/components/prayer-times', status: 'ready' },
-      { name: 'Hijri Date', icon: Clock, href: '/components/hijri-date', status: 'ready' },
-      { name: 'Arabic Number', icon: Hash, href: '/components/arabic-number', status: 'ready' },
-      { name: 'Zakat Calculator', icon: Calculator, href: '/components/zakat-calculator', status: 'ready' },
-      { name: 'Calendar', icon: CalendarIcon, href: '/components/calendar', status: 'ready' },
     ],
   },
   {
@@ -284,7 +284,7 @@ export default function ComponentsPage() {
                           <div className="flex items-center justify-between">
                             <div className="flex items-center gap-3">
                               <div className="rounded-lg bg-primary/10 p-2">
-                                <Icon className="h-5 w-5 text-primary" />
+                                <Icon className="h-5 w-5 text-primary rtl:rotate-180" />
                               </div>
                               <CardTitle className="text-lg">{getComponentName(component.href)}</CardTitle>
                             </div>
