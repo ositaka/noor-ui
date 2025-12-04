@@ -47,6 +47,7 @@ componentDocs: {
       preview: 'Preview',
       installation: 'Installation',
       usage: 'Usage',
+      basicUsage: 'Basic Usage',
       examples: 'Examples',
       props: 'Props',
       accessibility: 'Accessibility',
@@ -61,5 +62,6 @@ componentDocs: {
       rtlSupport: 'Buttons automatically support RTL layout. Icons positioned with logical properties (me-* for margin-inline-end, ms-* for margin-inline-start) will flip correctly.',
       ltr: 'LTR (English)',
       rtl: 'RTL (العربية)',
+      new: 'New',
     }
 }

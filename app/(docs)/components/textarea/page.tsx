@@ -484,7 +484,7 @@ export default function TextareaPage() {
                       />
                     </div>
 
-                    <Button type="submit">Send Message</Button>
+                    <Button type="submit">{t.textareaComponent.buttons.sendMessage}</Button>
                   </form>
                 </CardContent>
               </Card>

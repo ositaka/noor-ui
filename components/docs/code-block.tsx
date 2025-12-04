@@ -8,6 +8,8 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card'
 import { Copy, Check, ChevronDown, ChevronUp } from 'lucide-react'
 import { Skeleton } from '@/components/ui/skeleton'
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism'
+import { useDirection } from '@/components/providers/direction-provider'
+import { content } from '@/lib/i18n'
 
 // Lazy load the heavy syntax highlighter (saves ~200-300KB from initial bundle)
 const SyntaxHighlighter = dynamic(
@@ -42,6 +44,8 @@ export function CodeBlock({
   collapsible = false,
   defaultCollapsed = false,
 }: CodeBlockProps) {
+  const { locale } = useDirection()
+  const t = content[locale]
   const [copied, setCopied] = React.useState(false)
   const [collapsed, setCollapsed] = React.useState(defaultCollapsed)
 
@@ -95,12 +99,12 @@ export function CodeBlock({
               {copied ? (
                 <>
                   <Check className="h-4 w-4 text-green-600 me-1" />
-                  <span className="text-xs">Copied!</span>
+                  <span className="text-xs">{t.ui.button.copied}</span>
                 </>
               ) : (
                 <>
                   <Copy className="h-4 w-4 me-1" />
-                  <span className="text-xs">Copy</span>
+                  <span className="text-xs">{t.ui.button.copy}</span>
                 </>
               )}
             </Button>

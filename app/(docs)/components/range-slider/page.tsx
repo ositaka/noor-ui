@@ -179,7 +179,7 @@ export default function RangeSliderPage() {
               </Link>
             </li>
             <li>/</li>
-            <li className="text-foreground font-medium">Range Slider</li>
+            <li className="text-foreground font-medium">{c.title}</li>
           </ol>
         </nav>
 
@@ -189,7 +189,7 @@ export default function RangeSliderPage() {
             <h1 className="text-4xl font-bold tracking-tight">{c.title}</h1>
             <Badge variant="outline" className="gap-1">
               <Sparkles className="h-3 w-3" />
-              New
+              {t.componentDocs.new}
             </Badge>
           </div>
           <p className="text-xl text-muted-foreground max-w-3xl">
@@ -227,7 +227,7 @@ export default function RangeSliderPage() {
 
         {/* Usage */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Basic Usage</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentDocs.basicUsage}</h2>
           <CodeBlock code={basicUsageCode} language="tsx" title="React" />
         </section>
 

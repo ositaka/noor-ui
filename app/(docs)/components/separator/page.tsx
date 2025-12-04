@@ -193,11 +193,11 @@ export default function SeparatorPage() {
             <ComponentShowcase.Demo>
               <div className="w-full max-w-md space-y-4">
                 <div>
-                  <p className="text-sm">Content above separator</p>
+                  <p className="text-sm">{t.separatorComponent.examples.contentAbove || 'Content above separator'}</p>
                 </div>
                 <Separator />
                 <div>
-                  <p className="text-sm">Content below separator</p>
+                  <p className="text-sm">{t.separatorComponent.examples.contentBelow || 'Content below separator'}</p>
                 </div>
               </div>
             </ComponentShowcase.Demo>
@@ -228,18 +228,18 @@ export default function SeparatorPage() {
                 <CardContent className="p-6">
                   <div className="space-y-4">
                     <div>
-                      <h3 className="font-semibold">Section One</h3>
-                      <p className="text-sm text-muted-foreground">First section content</p>
+                      <h3 className="font-semibold">{t.separatorComponent.examples.sectionOne}</h3>
+                      <p className="text-sm text-muted-foreground">{t.separatorComponent.examples.firstContent}</p>
                     </div>
                     <Separator />
                     <div>
-                      <h3 className="font-semibold">Section Two</h3>
-                      <p className="text-sm text-muted-foreground">Second section content</p>
+                      <h3 className="font-semibold">{t.separatorComponent.examples.sectionTwo}</h3>
+                      <p className="text-sm text-muted-foreground">{t.separatorComponent.examples.secondContent}</p>
                     </div>
                     <Separator />
                     <div>
-                      <h3 className="font-semibold">Section Three</h3>
-                      <p className="text-sm text-muted-foreground">Third section content</p>
+                      <h3 className="font-semibold">{t.separatorComponent.examples.sectionThree}</h3>
+                      <p className="text-sm text-muted-foreground">{t.separatorComponent.examples.thirdContent}</p>
                     </div>
                   </div>
                 </CardContent>
@@ -255,13 +255,13 @@ export default function SeparatorPage() {
               <Card>
                 <CardContent className="p-6">
                   <div className="flex items-center gap-4">
-                    <Button variant="outline">Home</Button>
+                    <Button variant="outline">{t.separatorComponent.examples.home}</Button>
                     <Separator orientation="vertical" className="h-6" />
-                    <Button variant="outline">About</Button>
+                    <Button variant="outline">{t.separatorComponent.examples.about}</Button>
                     <Separator orientation="vertical" className="h-6" />
-                    <Button variant="outline">Services</Button>
+                    <Button variant="outline">{t.separatorComponent.examples.services}</Button>
                     <Separator orientation="vertical" className="h-6" />
-                    <Button variant="outline">Contact</Button>
+                    <Button variant="outline">{t.separatorComponent.examples.contact}</Button>
                   </div>
                 </CardContent>
               </Card>
@@ -277,28 +277,28 @@ export default function SeparatorPage() {
                 <CardContent className="p-6">
                   <Card>
                     <CardHeader>
-                      <CardTitle>User Profile</CardTitle>
-                      <CardDescription>Manage your profile settings</CardDescription>
+                      <CardTitle>{t.separatorComponent.examples.userProfile}</CardTitle>
+                      <CardDescription>{t.separatorComponent.examples.manageProfile}</CardDescription>
                     </CardHeader>
                     <CardContent className="space-y-4">
                       <div>
-                        <h4 className="font-semibold mb-2">Personal Information</h4>
+                        <h4 className="font-semibold mb-2">{t.separatorComponent.examples.personalInfo}</h4>
                         <p className="text-sm text-muted-foreground">
-                          Update your personal details
+                          {t.separatorComponent.examples.personalInfoDesc}
                         </p>
                       </div>
                       <Separator />
                       <div>
-                        <h4 className="font-semibold mb-2">Account Settings</h4>
+                        <h4 className="font-semibold mb-2">{t.separatorComponent.examples.accountSettings}</h4>
                         <p className="text-sm text-muted-foreground">
-                          Manage your account preferences
+                          {t.separatorComponent.examples.accountSettingsDesc}
                         </p>
                       </div>
                       <Separator />
                       <div>
-                        <h4 className="font-semibold mb-2">Privacy & Security</h4>
+                        <h4 className="font-semibold mb-2">{t.separatorComponent.examples.privacySecurity}</h4>
                         <p className="text-sm text-muted-foreground">
-                          Control your privacy settings
+                          {t.separatorComponent.examples.privacySecurityDesc}
                         </p>
                       </div>
                     </CardContent>
@@ -317,19 +317,19 @@ export default function SeparatorPage() {
                 <CardContent className="p-6">
                   <nav className="flex items-center gap-2 p-4 border rounded-lg">
                     <a href="#home" className="font-medium hover:text-primary">
-                      Home
+                      {t.separatorComponent.examples.home}
                     </a>
                     <Separator orientation="vertical" className="h-4" />
                     <a href="#about" className="font-medium hover:text-primary">
-                      About
+                      {t.separatorComponent.examples.about}
                     </a>
                     <Separator orientation="vertical" className="h-4" />
                     <a href="#services" className="font-medium hover:text-primary">
-                      Services
+                      {t.separatorComponent.examples.services}
                     </a>
                     <Separator orientation="vertical" className="h-4" />
                     <a href="#contact" className="font-medium hover:text-primary">
-                      Contact
+                      {t.separatorComponent.examples.contact}
                     </a>
                   </nav>
                 </CardContent>
@@ -347,22 +347,22 @@ export default function SeparatorPage() {
                   <ul className="space-y-3">
                     <li className="flex items-center gap-3">
                       <Home className="h-4 w-4" />
-                      <span>Dashboard</span>
+                      <span>{t.separatorComponent.examples.dashboard}</span>
                     </li>
                     <Separator />
                     <li className="flex items-center gap-3">
                       <Settings className="h-4 w-4" />
-                      <span>Settings</span>
+                      <span>{t.separatorComponent.examples.settings}</span>
                     </li>
                     <Separator />
                     <li className="flex items-center gap-3">
                       <User className="h-4 w-4" />
-                      <span>Profile</span>
+                      <span>{t.separatorComponent.examples.profile}</span>
                     </li>
                     <Separator />
                     <li className="flex items-center gap-3">
                       <Bell className="h-4 w-4" />
-                      <span>Notifications</span>
+                      <span>{t.separatorComponent.examples.notifications}</span>
                     </li>
                   </ul>
                 </CardContent>
@@ -374,26 +374,26 @@ export default function SeparatorPage() {
 
             {/* Custom Styling */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">Custom Styling</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.separatorComponent.examples.customStyling}</h3>
               <Card>
                 <CardContent className="p-6 space-y-6">
                   <div className="space-y-2">
-                    <p className="text-sm font-medium">Thicker Separator</p>
+                    <p className="text-sm font-medium">{t.separatorComponent.examples.thickerSeparator}</p>
                     <Separator className="h-1" />
                   </div>
 
                   <div className="space-y-2">
-                    <p className="text-sm font-medium">Primary Color</p>
+                    <p className="text-sm font-medium">{t.separatorComponent.examples.primaryColor}</p>
                     <Separator className="bg-primary" />
                   </div>
 
                   <div className="space-y-2">
-                    <p className="text-sm font-medium">Dashed Style</p>
+                    <p className="text-sm font-medium">{t.separatorComponent.examples.dashedStyle}</p>
                     <Separator className="border-t border-dashed bg-transparent" />
                   </div>
 
                   <div className="space-y-2">
-                    <p className="text-sm font-medium">Gradient Style</p>
+                    <p className="text-sm font-medium">{t.separatorComponent.examples.gradientStyle}</p>
                     <Separator className="bg-gradient-to-r from-transparent via-border to-transparent" />
                   </div>
                 </CardContent>
@@ -412,8 +412,7 @@ export default function SeparatorPage() {
           <Card className="mt-4">
             <CardContent className="p-6">
               <p className="text-sm text-muted-foreground">
-                The Separator component extends Radix UI&apos;s Separator primitive and accepts all
-                standard HTML attributes.
+                {t.separatorComponent.props.extendsRadix}
               </p>
             </CardContent>
           </Card>
@@ -425,45 +424,38 @@ export default function SeparatorPage() {
           <Card>
             <CardContent className="p-6 space-y-4">
               <div>
-                <h3 className="font-semibold mb-2">Decorative vs Semantic</h3>
+                <h3 className="font-semibold mb-2">{t.separatorComponent.accessibility.decorativeVsSemantic}</h3>
                 <p className="text-muted-foreground mb-2">
-                  The <code className="bg-muted px-1 rounded">decorative</code> prop determines how
-                  the separator is announced to screen readers:
+                  {t.separatorComponent.accessibility.decorativeVsSemanticDesc}
                 </p>
                 <CodeBlock code={semanticCode} language="tsx" />
                 <ul className="mt-2 space-y-2 text-sm text-muted-foreground">
                   <li className="flex items-start gap-2">
                     <span className="text-primary mt-1">•</span>
                     <span>
-                      <strong>decorative={'{'}true{'}'} (default):</strong> Not announced by screen
-                      readers, purely visual
+                      <strong>{t.separatorComponent.accessibility.decorativeTrue}</strong> {t.separatorComponent.accessibility.decorativeTrueDesc}
                     </span>
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-primary mt-1">•</span>
                     <span>
-                      <strong>decorative={'{'}false{'}'}:</strong> Announced as a separator with
-                      semantic meaning
+                      <strong>{t.separatorComponent.accessibility.decorativeFalse}</strong> {t.separatorComponent.accessibility.decorativeFalseDesc}
                     </span>
                   </li>
                 </ul>
               </div>
               <Separator />
               <div>
-                <h3 className="font-semibold mb-2">When to Use Semantic Separators</h3>
+                <h3 className="font-semibold mb-2">{t.separatorComponent.accessibility.whenToUseSemantic}</h3>
                 <p className="text-muted-foreground">
-                  Use <code className="bg-muted px-1 rounded">decorative={'{'}false{'}'}</code>{' '}
-                  when the separator has semantic importance, such as dividing major sections of
-                  content. Use the default decorative mode for purely visual spacing.
+                  {t.separatorComponent.accessibility.whenToUseSemanticDesc}
                 </p>
               </div>
               <Separator />
               <div>
-                <h3 className="font-semibold mb-2">ARIA Role</h3>
+                <h3 className="font-semibold mb-2">{t.separatorComponent.accessibility.ariaRole}</h3>
                 <p className="text-muted-foreground">
-                  When not decorative, the component automatically applies{' '}
-                  <code className="bg-muted px-1 rounded">role=&quot;separator&quot;</code> and appropriate
-                  ARIA attributes based on orientation.
+                  {t.separatorComponent.accessibility.ariaRoleDesc}
                 </p>
               </div>
             </CardContent>
@@ -476,29 +468,27 @@ export default function SeparatorPage() {
           <Card>
             <CardContent className="p-6 space-y-4">
               <p className="text-muted-foreground">
-                Separators work identically in both LTR and RTL layouts. Horizontal separators span
-                the full width, and vertical separators maintain their height regardless of text
-                direction.
+                {t.separatorComponent.rtl.description}
               </p>
               <CodeBlock code={rtlCode} language="tsx" />
               <div className="grid gap-4 md:grid-cols-2 mt-6">
                 <div className="space-y-2">
-                  <h4 className="font-semibold text-sm">LTR (English)</h4>
-                  <div dir="ltr">
+                  <h4 className="font-semibold text-sm">{t.separatorComponent.rtl.ltr}</h4>
+                  <div dir="ltr" lang="en">
                     <div className="space-y-4 p-4 border rounded-lg">
-                      <div>First section</div>
+                      <div>{content.en.separatorComponent.rtl.firstSection}</div>
                       <Separator />
-                      <div>Second section</div>
+                      <div>{content.en.separatorComponent.rtl.secondSection}</div>
                     </div>
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <h4 className="font-semibold text-sm">RTL (العربية)</h4>
-                  <div dir="rtl">
+                  <h4 className="font-semibold text-sm">{t.separatorComponent.rtl.rtlLabel}</h4>
+                  <div dir="rtl" lang="ar">
                     <div className="space-y-4 p-4 border rounded-lg">
-                      <div>القسم الأول</div>
+                      <div>{content.ar.separatorComponent.rtl.firstSection}</div>
                       <Separator />
-                      <div>القسم الثاني</div>
+                      <div>{content.ar.separatorComponent.rtl.secondSection}</div>
                     </div>
                   </div>
                 </div>
@@ -518,14 +508,14 @@ export default function SeparatorPage() {
 
         {/* Related Components */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Related Components</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.separatorComponent.related.title}</h2>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             <Link href="/components/card">
               <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold">Card</h3>
+                  <h3 className="font-semibold">{t.separatorComponent.related.card}</h3>
                   <p className="text-sm text-muted-foreground mt-1">
-                    Common container with separators
+                    {t.separatorComponent.related.cardDesc}
                   </p>
                 </CardContent>
               </Card>

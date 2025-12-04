@@ -165,15 +165,15 @@ export default function AvatarPage() {
 
           <div className="space-y-8">
             <div>
-              <h3 className="text-lg font-semibold mb-4">With Fallback</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.avatarComponent.examples.withFallback}</h3>
               <ComponentShowcase>
                 <div className="flex gap-4">
                   <Avatar>
-                    <AvatarImage src="https://github.com/shadcn.png" alt="Loaded" />
+                    <AvatarImage src="https://github.com/shadcn.png" alt={t.avatarComponent.examples.loaded} />
                     <AvatarFallback>CN</AvatarFallback>
                   </Avatar>
                   <Avatar>
-                    <AvatarImage src="/invalid-url.png" alt="Failed" />
+                    <AvatarImage src="/invalid-url.png" alt={t.avatarComponent.examples.failed} />
                     <AvatarFallback>JD</AvatarFallback>
                   </Avatar>
                   <Avatar>
@@ -185,7 +185,7 @@ export default function AvatarPage() {
             </div>
 
             <div>
-              <h3 className="text-lg font-semibold mb-4">Different Sizes</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.avatarComponent.examples.differentSizes}</h3>
               <ComponentShowcase>
                 <div className="flex items-center gap-4">
                   <Avatar className="h-8 w-8">
@@ -210,7 +210,7 @@ export default function AvatarPage() {
             </div>
 
             <div>
-              <h3 className="text-lg font-semibold mb-4">Avatar Group</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.avatarComponent.examples.avatarGroup}</h3>
               <ComponentShowcase>
                 <div className="flex -space-x-4">
                   <Avatar className="border-2 border-background">
@@ -236,9 +236,9 @@ export default function AvatarPage() {
 
         {/* RTL Support Example */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">RTL Support Example</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.avatarComponent.labels.rtlSupportExample}</h2>
           <p className="text-muted-foreground mb-6">
-            The Avatar component automatically adapts to RTL layouts. Avatar groups respect reading direction and overlapping order follows text direction.
+            {t.avatarComponent.labels.rtlDescription}
           </p>
           <ComponentShowcase.Comparison ltrLabel="LTR (English)" rtlLabel="RTL (العربية)">
             <div className="space-y-6">
@@ -248,8 +248,8 @@ export default function AvatarPage() {
                   <AvatarFallback>JD</AvatarFallback>
                 </Avatar>
                 <div className="space-y-1">
-                  <p className="text-sm font-medium">John Doe</p>
-                  <p className="text-sm text-muted-foreground">john@example.com</p>
+                  <p className="text-sm font-medium">{t.avatarComponent.labels.johnDoe}</p>
+                  <p className="text-sm text-muted-foreground">{t.avatarComponent.labels.emailExample}</p>
                 </div>
               </div>
               <div className="flex -space-x-4">
@@ -284,19 +284,19 @@ export default function AvatarPage() {
           <Card>
             <CardContent className="p-6 space-y-4">
               <div>
-                <h3 className="font-semibold mb-2">Image Alt Text</h3>
+                <h3 className="font-semibold mb-2">{t.avatarComponent.accessibility.imageAltText}</h3>
                 <ul className="list-disc list-inside text-sm text-muted-foreground space-y-1">
-                  <li>Always provide descriptive alt text for avatar images</li>
-                  <li>Use user names or entity identifiers in alt text</li>
-                  <li>Fallback content is automatically accessible</li>
+                  {t.avatarComponent.accessibility.imageAltTextItems.map((item, index) => (
+                    <li key={index}>{item}</li>
+                  ))}
                 </ul>
               </div>
               <div>
-                <h3 className="font-semibold mb-2">ARIA Attributes</h3>
+                <h3 className="font-semibold mb-2">{t.avatarComponent.accessibility.ariaAttributes}</h3>
                 <ul className="list-disc list-inside text-sm text-muted-foreground space-y-1">
-                  <li>Image has alt attribute for screen readers</li>
-                  <li>Fallback is rendered as text content</li>
-                  <li>Avatar is treated as decorative in most contexts</li>
+                  {t.avatarComponent.accessibility.ariaAttributesItems.map((item, index) => (
+                    <li key={index}>{item}</li>
+                  ))}
                 </ul>
               </div>
             </CardContent>
@@ -309,13 +309,12 @@ export default function AvatarPage() {
           <Card>
             <CardContent className="p-6">
               <p className="text-sm text-muted-foreground mb-4">
-                The Avatar component is fully RTL-compatible with proper layout handling.
+                {t.avatarComponent.rtl.rtlDescription}
               </p>
               <ul className="list-disc list-inside text-sm text-muted-foreground space-y-1">
-                <li>Avatar groups respect reading direction</li>
-                <li>Overlapping order follows text direction in groups</li>
-                <li>Fallback text displays correctly in all directions</li>
-                <li>Image positioning remains centered</li>
+                {t.avatarComponent.rtl.rtlItems.map((item, index) => (
+                  <li key={index}>{item}</li>
+                ))}
               </ul>
             </CardContent>
           </Card>
@@ -323,14 +322,14 @@ export default function AvatarPage() {
 
         {/* Related Components */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-4">Related Components</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-4">{t.avatarComponent.related.title}</h2>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             <Link href="/components/badge">
               <Card className="hover:border-primary transition-colors">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold mb-2">Badge</h3>
+                  <h3 className="font-semibold mb-2">{t.avatarComponent.related.badge}</h3>
                   <p className="text-sm text-muted-foreground">
-                    Display status indicators
+                    {t.avatarComponent.related.badgeDesc}
                   </p>
                 </CardContent>
               </Card>
@@ -338,9 +337,9 @@ export default function AvatarPage() {
             <Link href="/components/card">
               <Card className="hover:border-primary transition-colors">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold mb-2">Card</h3>
+                  <h3 className="font-semibold mb-2">{t.avatarComponent.related.card}</h3>
                   <p className="text-sm text-muted-foreground">
-                    Container for user profiles
+                    {t.avatarComponent.related.cardDesc}
                   </p>
                 </CardContent>
               </Card>

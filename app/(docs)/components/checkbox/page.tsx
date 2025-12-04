@@ -407,10 +407,10 @@ export default function CheckboxPage() {
                       <Label htmlFor="controlled">Controlled checkbox</Label>
                     </div>
                     <p className="text-sm text-muted-foreground">
-                      Status: {checked ? 'Checked' : 'Unchecked'}
+                      Status: {checked ? t.checkboxComponent.status.checked : t.checkboxComponent.status.unchecked}
                     </p>
                     <Button size="sm" onClick={() => setChecked(!checked)}>
-                      Toggle
+                      {t.checkboxComponent.status.toggle}
                     </Button>
                   </div>
                 </CardContent>

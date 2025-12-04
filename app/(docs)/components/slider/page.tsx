@@ -265,12 +265,12 @@ export default function SliderPage() {
           <div className="space-y-8">
             {/* With Label */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">With Label and Value Display</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.sliderComponent.examples.withLabel}</h3>
               <Card>
                 <CardContent className="p-6">
                   <div className="max-w-md space-y-2">
                     <div className="flex items-center justify-between">
-                      <Label htmlFor="volume">Volume</Label>
+                      <Label htmlFor="volume">{t.sliderComponent.labels.volume}</Label>
                       <span className="text-sm text-muted-foreground">50%</span>
                     </div>
                     <Slider id="volume" defaultValue={[50]} max={100} step={1} />
@@ -284,15 +284,15 @@ export default function SliderPage() {
 
             {/* Different Ranges */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">Different Ranges</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.sliderComponent.examples.differentRanges}</h3>
               <Card>
                 <CardContent className="p-6 space-y-4">
                   <div className="space-y-2">
                     <div className="flex items-center justify-between">
-                      <Label>Temperature: {value[0]}°C</Label>
+                      <Label>{t.sliderComponent.labels.temperature}: {value[0]}°C</Label>
                     </div>
                     <Slider value={value} onValueChange={setValue} min={-10} max={40} step={1} />
-                    <p className="text-xs text-muted-foreground">Range: -10°C to 40°C</p>
+                    <p className="text-xs text-muted-foreground">{t.sliderComponent.descriptions.rangeInfo}</p>
                   </div>
                 </CardContent>
               </Card>
@@ -303,26 +303,26 @@ export default function SliderPage() {
 
             {/* Step Sizes */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">Different Step Sizes</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.sliderComponent.examples.differentStepSizes}</h3>
               <Card>
                 <CardContent className="p-6 space-y-6">
                   <div className="space-y-2">
-                    <Label>Fine control (step: 1)</Label>
+                    <Label>{t.sliderComponent.labels.fineControl}</Label>
                     <Slider defaultValue={[50]} max={100} step={1} />
                   </div>
 
                   <div className="space-y-2">
-                    <Label>Medium control (step: 5)</Label>
+                    <Label>{t.sliderComponent.labels.mediumControl}</Label>
                     <Slider defaultValue={[50]} max={100} step={5} />
                   </div>
 
                   <div className="space-y-2">
-                    <Label>Coarse control (step: 10)</Label>
+                    <Label>{t.sliderComponent.labels.coarseControl}</Label>
                     <Slider defaultValue={[50]} max={100} step={10} />
                   </div>
 
                   <div className="space-y-2">
-                    <Label>Quarters (step: 25)</Label>
+                    <Label>{t.sliderComponent.labels.quarters}</Label>
                     <Slider defaultValue={[50]} max={100} step={25} />
                   </div>
                 </CardContent>
@@ -334,16 +334,16 @@ export default function SliderPage() {
 
             {/* Disabled State */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">Disabled State</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.sliderComponent.examples.disabledState}</h3>
               <Card>
                 <CardContent className="p-6 space-y-4">
                   <div className="space-y-2">
-                    <Label>Enabled slider</Label>
+                    <Label>{t.sliderComponent.labels.enabled}</Label>
                     <Slider defaultValue={[50]} max={100} step={1} />
                   </div>
 
                   <div className="space-y-2">
-                    <Label>Disabled slider</Label>
+                    <Label>{t.sliderComponent.labels.disabled}</Label>
                     <Slider defaultValue={[75]} max={100} step={1} disabled />
                   </div>
                 </CardContent>
@@ -355,7 +355,7 @@ export default function SliderPage() {
 
             {/* Volume Control */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">Volume Control</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.sliderComponent.examples.volumeControl}</h3>
               <Card>
                 <CardContent className="p-6">
                   <div className="max-w-md space-y-4">
@@ -392,19 +392,19 @@ export default function SliderPage() {
 
             {/* Range Slider */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">Range Slider (Two Thumbs)</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.sliderComponent.examples.rangeTwoThumbs}</h3>
               <Card>
                 <CardContent className="p-6">
                   <div className="max-w-md space-y-4">
                     <div className="flex items-center justify-between">
-                      <Label>Price Range</Label>
+                      <Label>{t.sliderComponent.labels.priceRange}</Label>
                       <span className="text-sm text-muted-foreground">
                         ${priceRange[0]} - ${priceRange[1]}
                       </span>
                     </div>
                     <Slider value={priceRange} onValueChange={setPriceRange} max={100} step={1} />
                     <p className="text-xs text-muted-foreground">
-                      Drag either handle to adjust the range
+                      {t.sliderComponent.descriptions.dragToAdjust}
                     </p>
                   </div>
                 </CardContent>
@@ -423,10 +423,9 @@ export default function SliderPage() {
           <Card className="mt-4">
             <CardContent className="p-6">
               <p className="text-sm text-muted-foreground">
-                Note: The <code className="bg-muted px-1 rounded">value</code> prop is always an
-                array. Use <code className="bg-muted px-1 rounded">[value]</code> for single thumb
-                sliders and <code className="bg-muted px-1 rounded">[min, max]</code> for range
-                sliders.
+                {t.sliderComponent.descriptions.noteValue} <code className="bg-muted px-1 rounded">{t.sliderComponent.descriptions.valueCode}</code> {t.sliderComponent.descriptions.propAlwaysArray}{' '}
+                <code className="bg-muted px-1 rounded">{t.sliderComponent.descriptions.valueArray}</code> {t.sliderComponent.descriptions.forSingle}{' '}
+                <code className="bg-muted px-1 rounded">{t.sliderComponent.descriptions.minMaxArray}</code> {t.sliderComponent.descriptions.forRange}
               </p>
             </CardContent>
           </Card>
@@ -438,57 +437,50 @@ export default function SliderPage() {
           <Card>
             <CardContent className="p-6 space-y-4">
               <div>
-                <h3 className="font-semibold mb-2">Keyboard Navigation</h3>
+                <h3 className="font-semibold mb-2">{t.sliderComponent.accessibility.keyboardNavigation}</h3>
                 <ul className="list-disc list-inside text-muted-foreground space-y-1">
                   <li>
-                    <kbd className="px-1.5 py-0.5 rounded bg-muted">Tab</kbd>: Move focus to/from
-                    slider
+                    <kbd className="px-1.5 py-0.5 rounded bg-muted">Tab</kbd>: {t.sliderComponent.accessibility.keyboardTab}
                   </li>
                   <li>
-                    <kbd className="px-1.5 py-0.5 rounded bg-muted">Arrow Right/Up</kbd>: Increase
-                    value
+                    <kbd className="px-1.5 py-0.5 rounded bg-muted">Arrow Right/Up</kbd>: {t.sliderComponent.accessibility.keyboardArrowRightUp}
                   </li>
                   <li>
-                    <kbd className="px-1.5 py-0.5 rounded bg-muted">Arrow Left/Down</kbd>: Decrease
-                    value
+                    <kbd className="px-1.5 py-0.5 rounded bg-muted">Arrow Left/Down</kbd>: {t.sliderComponent.accessibility.keyboardArrowLeftDown}
                   </li>
                   <li>
-                    <kbd className="px-1.5 py-0.5 rounded bg-muted">Home</kbd>: Jump to minimum
+                    <kbd className="px-1.5 py-0.5 rounded bg-muted">Home</kbd>: {t.sliderComponent.accessibility.keyboardHome}
                   </li>
                   <li>
-                    <kbd className="px-1.5 py-0.5 rounded bg-muted">End</kbd>: Jump to maximum
+                    <kbd className="px-1.5 py-0.5 rounded bg-muted">End</kbd>: {t.sliderComponent.accessibility.keyboardEnd}
                   </li>
                   <li>
-                    <kbd className="px-1.5 py-0.5 rounded bg-muted">Page Up/Down</kbd>: Increase/decrease by larger step
+                    <kbd className="px-1.5 py-0.5 rounded bg-muted">Page Up/Down</kbd>: {t.sliderComponent.accessibility.keyboardPageUpDown}
                   </li>
                 </ul>
               </div>
               <Separator />
               <div>
-                <h3 className="font-semibold mb-2">Labels and ARIA</h3>
+                <h3 className="font-semibold mb-2">{t.sliderComponent.accessibility.labelsAndAria}</h3>
                 <p className="text-muted-foreground">
-                  Always provide a label using the{' '}
-                  <code className="bg-muted px-1 rounded">htmlFor</code> and{' '}
-                  <code className="bg-muted px-1 rounded">id</code> attributes, or use{' '}
-                  <code className="bg-muted px-1 rounded">aria-label</code> for sliders without
-                  visible labels.
+                  {t.sliderComponent.accessibility.labelsAndAriaDesc}{' '}
+                  <code className="bg-muted px-1 rounded">{t.sliderComponent.accessibility.htmlForAttr}</code> {t.sliderComponent.accessibility.andText}{' '}
+                  <code className="bg-muted px-1 rounded">{t.sliderComponent.accessibility.idAttr}</code> {t.sliderComponent.accessibility.attributesOr}{' '}
+                  <code className="bg-muted px-1 rounded">{t.sliderComponent.accessibility.ariaLabelAttr}</code> {t.sliderComponent.accessibility.forSlidersWithout}
                 </p>
               </div>
               <Separator />
               <div>
-                <h3 className="font-semibold mb-2">Screen Readers</h3>
+                <h3 className="font-semibold mb-2">{t.sliderComponent.accessibility.screenReaders}</h3>
                 <p className="text-muted-foreground">
-                  Screen readers announce the slider role, current value, min, max, and
-                  orientation. For example: &quot;Volume, slider, 50, minimum 0, maximum
-                  100&quot;.
+                  {t.sliderComponent.accessibility.screenReadersDesc}
                 </p>
               </div>
               <Separator />
               <div>
-                <h3 className="font-semibold mb-2">Value Display</h3>
+                <h3 className="font-semibold mb-2">{t.sliderComponent.accessibility.valueDisplay}</h3>
                 <p className="text-muted-foreground">
-                  Always display the current value visually, as it&apos;s announced by screen
-                  readers but may not be obvious to sighted users.
+                  {t.sliderComponent.accessibility.valueDisplayDesc}
                 </p>
               </div>
             </CardContent>
@@ -501,29 +493,28 @@ export default function SliderPage() {
           <Card>
             <CardContent className="p-6 space-y-4">
               <p className="text-muted-foreground">
-                Sliders automatically support RTL layout. In RTL mode, the slider direction is
-                mirrored - minimum starts on the right and maximum on the left.
+                {t.sliderComponent.rtl.description}
               </p>
               <CodeBlock code={rtlCode} language="tsx" />
               <div className="grid gap-4 md:grid-cols-2 mt-6">
                 <div className="space-y-2">
-                  <h4 className="font-semibold text-sm">LTR (English)</h4>
-                  <div dir="ltr">
+                  <h4 className="font-semibold text-sm">{t.sliderComponent.rtl.ltr}</h4>
+                  <div dir="ltr" lang="en">
                     <div className="space-y-2 p-4 border rounded-lg">
-                      <Label>Volume</Label>
+                      <Label>{content.en.sliderComponent.labels.volume}</Label>
                       <Slider defaultValue={[50]} max={100} step={1} />
-                      <p className="text-xs text-muted-foreground">Min (left) → Max (right)</p>
+                      <p className="text-xs text-muted-foreground">{content.en.sliderComponent.rtl.minLeftMaxRight}</p>
                     </div>
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <h4 className="font-semibold text-sm">RTL (العربية)</h4>
-                  <div dir="rtl">
+                  <h4 className="font-semibold text-sm">{t.sliderComponent.rtl.rtlLabel}</h4>
+                  <div dir="rtl" lang="ar">
                     <div className="space-y-2 p-4 border rounded-lg">
-                      <Label>مستوى الصوت</Label>
+                      <Label>{content.ar.sliderComponent.labels.volume}</Label>
                       <Slider defaultValue={[50]} max={100} step={1} />
                       <p className="text-xs text-muted-foreground">
-                        الحد الأدنى (يمين) ← الحد الأقصى (يسار)
+                        {content.ar.sliderComponent.rtl.minRightMaxLeft}
                       </p>
                     </div>
                   </div>
@@ -540,9 +531,9 @@ export default function SliderPage() {
             <Link href="/components/input">
               <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold">Input</h3>
+                  <h3 className="font-semibold">{t.sliderComponent.related.input}</h3>
                   <p className="text-sm text-muted-foreground mt-1">
-                    For numeric input with text
+                    {t.sliderComponent.related.inputDesc}
                   </p>
                 </CardContent>
               </Card>
@@ -550,16 +541,16 @@ export default function SliderPage() {
             <Link href="/components/progress">
               <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold">Progress</h3>
-                  <p className="text-sm text-muted-foreground mt-1">Display progress value</p>
+                  <h3 className="font-semibold">{t.sliderComponent.related.progress}</h3>
+                  <p className="text-sm text-muted-foreground mt-1">{t.sliderComponent.related.progressDesc}</p>
                 </CardContent>
               </Card>
             </Link>
             <Link href="/components/label">
               <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold">Label</h3>
-                  <p className="text-sm text-muted-foreground mt-1">Labels for form inputs</p>
+                  <h3 className="font-semibold">{t.sliderComponent.related.label}</h3>
+                  <p className="text-sm text-muted-foreground mt-1">{t.sliderComponent.related.labelDesc}</p>
                 </CardContent>
               </Card>
             </Link>

@@ -12,10 +12,21 @@ avatarComponent: {
       usage: 'Usage',
       examples: {
         title: 'Examples',
+        withFallback: 'With Fallback',
+        differentSizes: 'Different Sizes',
+        avatarGroup: 'Avatar Group',
         withImage: 'With Image',
         withInitials: 'With Initials Fallback',
         sizes: 'Sizes',
         shapes: 'Shapes',
+        loaded: 'Loaded',
+        failed: 'Failed',
+      },
+      labels: {
+        rtlSupportExample: 'RTL Support Example',
+        rtlDescription: 'The Avatar component automatically adapts to RTL layouts. Avatar groups respect reading direction and overlapping order follows text direction.',
+        johnDoe: 'John Doe',
+        emailExample: 'john@example.com',
       },
       props: {
         title: 'Props',
@@ -26,10 +37,36 @@ avatarComponent: {
       },
       accessibility: {
         title: 'Accessibility',
+        imageAltText: 'Image Alt Text',
+        imageAltTextItems: [
+          'Always provide descriptive alt text for avatar images',
+          'Use user names or entity identifiers in alt text',
+          'Fallback content is automatically accessible',
+        ],
+        ariaAttributes: 'ARIA Attributes',
+        ariaAttributesItems: [
+          'Image has alt attribute for screen readers',
+          'Fallback is rendered as text content',
+          'Avatar is treated as decorative in most contexts',
+        ],
       },
       rtl: {
         title: 'RTL Considerations',
         description: 'Avatar initials automatically adapt to RTL text direction.',
+        rtlDescription: 'The Avatar component is fully RTL-compatible with proper layout handling.',
+        rtlItems: [
+          'Avatar groups respect reading direction',
+          'Overlapping order follows text direction in groups',
+          'Fallback text displays correctly in all directions',
+          'Image positioning remains centered',
+        ],
+      },
+      related: {
+        title: 'Related Components',
+        badge: 'Badge',
+        badgeDesc: 'Display status indicators',
+        card: 'Card',
+        cardDesc: 'Container for user profiles',
       },
     },
 

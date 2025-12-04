@@ -224,7 +224,7 @@ export default function BadgePage() {
 
             {/* With Icons */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">With Icons</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.badgeComponent.examples.withIcons}</h3>
               <Card>
                 <CardContent className="p-6">
                   <div className="flex flex-wrap gap-2">
@@ -254,7 +254,7 @@ export default function BadgePage() {
 
             {/* Status Indicators */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">Status Indicators</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.badgeComponent.examples.statusIndicators}</h3>
               <Card>
                 <CardContent className="p-6">
                   <div className="flex flex-wrap gap-2">
@@ -284,7 +284,7 @@ export default function BadgePage() {
 
             {/* In Cards */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">In Card Headers</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.badgeComponent.examples.inCardHeaders}</h3>
               <Card>
                 <CardContent className="p-6">
                   <div className="space-y-4">
@@ -329,7 +329,7 @@ export default function BadgePage() {
 
             {/* In Lists */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">In Lists</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.badgeComponent.examples.inLists}</h3>
               <Card>
                 <CardContent className="p-6">
                   <ul className="space-y-2">
@@ -359,7 +359,7 @@ export default function BadgePage() {
 
             {/* Notification Count */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">Notification Count</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.badgeComponent.examples.notificationCount}</h3>
               <Card>
                 <CardContent className="p-6">
                   <div className="flex flex-wrap gap-4">
@@ -389,7 +389,7 @@ export default function BadgePage() {
 
             {/* Custom Sizes */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">Custom Sizes</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.badgeComponent.examples.customSizes}</h3>
               <Card>
                 <CardContent className="p-6">
                   <div className="flex flex-wrap items-center gap-2">
@@ -406,7 +406,7 @@ export default function BadgePage() {
 
             {/* Custom Colors */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">Custom Colors</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.badgeComponent.examples.customColors}</h3>
               <Card>
                 <CardContent className="p-6">
                   <div className="flex flex-wrap gap-2">
@@ -503,27 +503,27 @@ export default function BadgePage() {
               <div className="grid gap-4 md:grid-cols-2 mt-6">
                 <div className="space-y-2">
                   <h4 className="font-semibold text-sm">{t.badgeComponent.rtl.ltr}</h4>
-                  <div dir="ltr">
+                  <div dir="ltr" lang="en">
                     <div className="flex flex-wrap gap-2">
                       <Badge>
                         <Check className="h-3 w-3 me-1" />
-                        New
+                        {content.en.badgeComponent.labels.new}
                       </Badge>
-                      <Badge variant="secondary">Beta</Badge>
-                      <Badge variant="outline">Coming Soon</Badge>
+                      <Badge variant="secondary">{content.en.badgeComponent.labels.beta}</Badge>
+                      <Badge variant="outline">{content.en.badgeComponent.labels.comingSoon}</Badge>
                     </div>
                   </div>
                 </div>
                 <div className="space-y-2">
                   <h4 className="font-semibold text-sm">{t.badgeComponent.rtl.rtlLabel}</h4>
-                  <div dir="rtl">
+                  <div dir="rtl" lang="ar">
                     <div className="flex flex-wrap gap-2">
                       <Badge>
                         <Check className="h-3 w-3 me-1" />
-                        جديد
+                        {content.ar.badgeComponent.labels.new}
                       </Badge>
-                      <Badge variant="secondary">تجريبي</Badge>
-                      <Badge variant="outline">قريباً</Badge>
+                      <Badge variant="secondary">{content.ar.badgeComponent.labels.beta}</Badge>
+                      <Badge variant="outline">{content.ar.badgeComponent.labels.comingSoon}</Badge>
                     </div>
                   </div>
                 </div>

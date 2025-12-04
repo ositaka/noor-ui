@@ -221,7 +221,7 @@ export default function SwitchPage() {
             <ComponentShowcase.Demo>
               <div className="flex items-center gap-2">
                 <Switch id="preview" />
-                <Label htmlFor="preview">Airplane Mode</Label>
+                <Label htmlFor="preview">{t.switchComponent.labels.airplane}</Label>
               </div>
             </ComponentShowcase.Demo>
           </ComponentShowcase>
@@ -251,15 +251,15 @@ export default function SwitchPage() {
                 <CardContent className="p-6 space-y-3">
                   <div className="flex items-center gap-2">
                     <Switch id="notifications" />
-                    <Label htmlFor="notifications">Enable notifications</Label>
+                    <Label htmlFor="notifications">{t.switchComponent.labels.notifications}</Label>
                   </div>
                   <div className="flex items-center gap-2">
                     <Switch id="dark-mode" defaultChecked />
-                    <Label htmlFor="dark-mode">Dark mode</Label>
+                    <Label htmlFor="dark-mode">{t.switchComponent.labels.darkMode}</Label>
                   </div>
                   <div className="flex items-center gap-2">
                     <Switch id="auto-play" />
-                    <Label htmlFor="auto-play">Auto-play videos</Label>
+                    <Label htmlFor="auto-play">{t.switchComponent.labels.autoPlay}</Label>
                   </div>
                 </CardContent>
               </Card>
@@ -276,9 +276,9 @@ export default function SwitchPage() {
                   <div className="space-y-4">
                     <div className="flex items-center justify-between">
                       <div className="space-y-0.5">
-                        <Label htmlFor="marketing">Marketing emails</Label>
+                        <Label htmlFor="marketing">{t.switchComponent.labels.marketing}</Label>
                         <p className="text-sm text-muted-foreground">
-                          Receive emails about new products and features
+                          {t.switchComponent.descriptions.marketingDesc}
                         </p>
                       </div>
                       <Switch id="marketing" />
@@ -288,9 +288,9 @@ export default function SwitchPage() {
 
                     <div className="flex items-center justify-between">
                       <div className="space-y-0.5">
-                        <Label htmlFor="security">Security emails</Label>
+                        <Label htmlFor="security">{t.switchComponent.sections.security}</Label>
                         <p className="text-sm text-muted-foreground">
-                          Receive emails about your account security
+                          {t.switchComponent.descriptions.securityDesc}
                         </p>
                       </div>
                       <Switch id="security" defaultChecked />
@@ -300,9 +300,9 @@ export default function SwitchPage() {
 
                     <div className="flex items-center justify-between">
                       <div className="space-y-0.5">
-                        <Label htmlFor="updates">Product updates</Label>
+                        <Label htmlFor="updates">{t.switchComponent.sections.updates}</Label>
                         <p className="text-sm text-muted-foreground">
-                          Receive emails about product updates and announcements
+                          {t.switchComponent.descriptions.updatesDesc}
                         </p>
                       </div>
                       <Switch id="updates" />
@@ -322,15 +322,15 @@ export default function SwitchPage() {
                 <CardContent className="p-6 space-y-3">
                   <div className="flex items-center gap-2">
                     <Switch id="enabled" defaultChecked />
-                    <Label htmlFor="enabled">Enabled switch</Label>
+                    <Label htmlFor="enabled">{t.switchComponent.labels.enabled}</Label>
                   </div>
                   <div className="flex items-center gap-2">
                     <Switch id="disabled" disabled />
-                    <Label htmlFor="disabled">Disabled switch (off)</Label>
+                    <Label htmlFor="disabled">{t.switchComponent.labels.disabledSwitchOff}</Label>
                   </div>
                   <div className="flex items-center gap-2">
                     <Switch id="disabled-on" disabled defaultChecked />
-                    <Label htmlFor="disabled-on">Disabled switch (on)</Label>
+                    <Label htmlFor="disabled-on">{t.switchComponent.labels.disabledSwitchOn}</Label>
                   </div>
                 </CardContent>
               </Card>
@@ -376,25 +376,25 @@ export default function SwitchPage() {
                     }}
                   >
                     <div className="space-y-4">
-                      <h3 className="text-base font-semibold">Privacy Settings</h3>
+                      <h3 className="text-base font-semibold">{t.switchComponent.sections.privacySettings}</h3>
 
                       <div className="flex items-center gap-2">
                         <Switch id="profile-public" name="profilePublic" />
-                        <Label htmlFor="profile-public">Make profile public</Label>
+                        <Label htmlFor="profile-public">{t.switchComponent.labels.makeProfilePublic}</Label>
                       </div>
 
                       <div className="flex items-center gap-2">
                         <Switch id="show-email" name="showEmail" />
-                        <Label htmlFor="show-email">Show email address</Label>
+                        <Label htmlFor="show-email">{t.switchComponent.labels.showEmail}</Label>
                       </div>
 
                       <div className="flex items-center gap-2">
                         <Switch id="allow-messages" name="allowMessages" defaultChecked />
-                        <Label htmlFor="allow-messages">Allow direct messages</Label>
+                        <Label htmlFor="allow-messages">{t.switchComponent.labels.allowMessages}</Label>
                       </div>
                     </div>
 
-                    <Button type="submit">Save Settings</Button>
+                    <Button type="submit">{t.switchComponent.buttons.saveSettings}</Button>
                   </form>
                 </CardContent>
               </Card>
@@ -461,38 +461,6 @@ export default function SwitchPage() {
                 {t.switchComponent.rtl.description}
               </p>
               <CodeBlock code={rtlCode} language="tsx" />
-              <div className="grid gap-4 md:grid-cols-2 mt-6">
-                <div className="space-y-2">
-                  <h4 className="font-semibold text-sm">{t.switchComponent.rtl.ltr}</h4>
-                  <div dir="ltr">
-                    <div className="space-y-3 p-4 border rounded-lg">
-                      <div className="flex items-center gap-2">
-                        <Switch id="ltr-1" />
-                        <Label htmlFor="ltr-1">{t.switchComponent.rtl.notificationsAr}</Label>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <Switch id="ltr-2" defaultChecked />
-                        <Label htmlFor="ltr-2">{t.switchComponent.rtl.darkModeAr}</Label>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="space-y-2">
-                  <h4 className="font-semibold text-sm">{t.switchComponent.rtl.rtlLabel}</h4>
-                  <div dir="rtl">
-                    <div className="space-y-3 p-4 border rounded-lg">
-                      <div className="flex items-center gap-2">
-                        <Switch id="rtl-1" />
-                        <Label htmlFor="rtl-1">الإشعارات</Label>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <Switch id="rtl-2" defaultChecked />
-                        <Label htmlFor="rtl-2">الوضع الداكن</Label>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
             </CardContent>
           </Card>
         </section>

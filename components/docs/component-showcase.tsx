@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { ArrowLeftRight, Moon, Sun, Code2, Copy, Check } from 'lucide-react'
 import { copyToClipboard } from '@/lib/utils'
+import { CodeBlock } from './code-block'
 
 interface ComponentShowcaseProps {
   children: React.ReactNode
@@ -205,43 +206,7 @@ function ComponentShowcaseCode({
   language = 'tsx',
   title,
 }: ComponentShowcaseCodeProps) {
-  const [copied, setCopied] = React.useState(false)
-
-  const handleCopy = async () => {
-    const success = await copyToClipboard(code)
-    if (success) {
-      setCopied(true)
-      setTimeout(() => setCopied(false), 2000)
-    }
-  }
-
-  return (
-    <Card>
-      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-        <div className="flex items-center gap-2">
-          <Code2 className="h-4 w-4 text-muted-foreground" />
-          {title && <CardTitle className="text-sm font-medium">{title}</CardTitle>}
-        </div>
-        <Button
-          variant="ghost"
-          size="sm"
-          onClick={handleCopy}
-          aria-label="Copy code"
-        >
-          {copied ? (
-            <Check className="h-4 w-4 text-green-600" />
-          ) : (
-            <Copy className="h-4 w-4" />
-          )}
-        </Button>
-      </CardHeader>
-      <CardContent>
-        <pre className="overflow-x-auto rounded-md bg-muted p-4">
-          <code className="text-sm font-mono">{code}</code>
-        </pre>
-      </CardContent>
-    </Card>
-  )
+  return <CodeBlock code={code} language={language} title={title} />
 }
 
 ComponentShowcase.Demo = ComponentShowcaseDemo

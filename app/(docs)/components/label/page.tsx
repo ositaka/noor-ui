@@ -151,8 +151,8 @@ export default function LabelPage() {
           <ComponentShowcase>
             <ComponentShowcase.Demo>
               <div className="w-full max-w-sm space-y-2">
-                <Label htmlFor="preview-input">Email Address</Label>
-                <Input id="preview-input" type="email" placeholder="name@example.com" />
+                <Label htmlFor="preview-input">{t.labelComponent.emailAddress}</Label>
+                <Input id="preview-input" type="email" placeholder={t.labelComponent.placeholder} />
               </div>
             </ComponentShowcase.Demo>
           </ComponentShowcase>
@@ -178,34 +178,30 @@ export default function LabelPage() {
               <div className="flex items-start gap-3 p-4 bg-primary/10 rounded-lg border border-primary/20">
                 <AlertCircle className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
                 <div className="space-y-2">
-                  <p className="font-semibold">Labels are critical for accessibility</p>
+                  <p className="font-semibold">{t.labelComponent.accessibility.critical}</p>
                   <ul className="space-y-2 text-sm text-muted-foreground">
                     <li className="flex items-start gap-2">
                       <span className="text-primary mt-1">•</span>
                       <span>
-                        <strong>Screen Readers:</strong> Labels are announced by screen readers,
-                        telling users what each field is for
+                        <strong>{t.labelComponent.accessibility.screenReaders}</strong> {t.labelComponent.accessibility.screenReadersDesc}
                       </span>
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="text-primary mt-1">•</span>
                       <span>
-                        <strong>Click Target:</strong> Clicking a label focuses its associated
-                        input, improving usability on mobile
+                        <strong>{t.labelComponent.accessibility.clickTarget}</strong> {t.labelComponent.accessibility.clickTargetDesc}
                       </span>
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="text-primary mt-1">•</span>
                       <span>
-                        <strong>Form Validation:</strong> Browsers use labels to provide better
-                        validation messages
+                        <strong>{t.labelComponent.accessibility.formValidation}</strong> {t.labelComponent.accessibility.formValidationDesc}
                       </span>
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="text-primary mt-1">•</span>
                       <span>
-                        <strong>WCAG Compliance:</strong> WCAG 2.1 requires all form inputs to have
-                        associated labels
+                        <strong>{t.labelComponent.accessibility.wcagCompliance}</strong> {t.labelComponent.accessibility.wcagComplianceDesc}
                       </span>
                     </li>
                   </ul>
@@ -222,12 +218,12 @@ export default function LabelPage() {
           <div className="space-y-8">
             {/* With Input */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">With Input</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.labelComponent.examples.withInput}</h3>
               <Card>
                 <CardContent className="p-6">
                   <div className="max-w-sm space-y-2">
-                    <Label htmlFor="username">Username</Label>
-                    <Input id="username" placeholder="Enter your username" />
+                    <Label htmlFor="username">{t.labelComponent.fields.username}</Label>
+                    <Input id="username" placeholder={t.labelComponent.fields.usernamePlaceholder} />
                   </div>
                 </CardContent>
               </Card>
@@ -238,12 +234,12 @@ export default function LabelPage() {
 
             {/* Required Field */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">Required Field</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.labelComponent.examples.requiredField}</h3>
               <Card>
                 <CardContent className="p-6">
                   <div className="max-w-sm space-y-2">
                     <Label htmlFor="required-email">
-                      Email Address <span className="text-destructive">*</span>
+                      {t.labelComponent.emailAddress} <span className="text-destructive">*</span>
                     </Label>
                     <Input id="required-email" type="email" required />
                   </div>
@@ -256,14 +252,14 @@ export default function LabelPage() {
 
             {/* With Helper Text */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">With Helper Text</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.labelComponent.examples.withHelperText}</h3>
               <Card>
                 <CardContent className="p-6">
                   <div className="max-w-sm space-y-2">
-                    <Label htmlFor="password-helper">Password</Label>
+                    <Label htmlFor="password-helper">{t.labelComponent.fields.password}</Label>
                     <Input id="password-helper" type="password" />
                     <p className="text-sm text-muted-foreground">
-                      Must be at least 8 characters long
+                      {t.labelComponent.fields.passwordHelper}
                     </p>
                   </div>
                 </CardContent>
@@ -275,14 +271,14 @@ export default function LabelPage() {
 
             {/* Disabled State */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">Disabled State</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.labelComponent.examples.disabledState}</h3>
               <Card>
                 <CardContent className="p-6">
                   <div className="max-w-sm space-y-2">
-                    <Label htmlFor="disabled-input">Disabled Field</Label>
-                    <Input id="disabled-input" disabled placeholder="Can't edit this" />
+                    <Label htmlFor="disabled-input">{t.labelComponent.fields.disabledField}</Label>
+                    <Input id="disabled-input" disabled placeholder={t.labelComponent.fields.disabledPlaceholder} />
                     <p className="text-sm text-muted-foreground">
-                      Notice how the label automatically becomes muted when the input is disabled
+                      {t.labelComponent.fields.disabledNote}
                     </p>
                   </div>
                 </CardContent>
@@ -294,19 +290,19 @@ export default function LabelPage() {
 
             {/* Horizontal Layout */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">Horizontal Layout</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.labelComponent.examples.horizontalLayout}</h3>
               <Card>
                 <CardContent className="p-6">
                   <div className="space-y-4">
                     <div className="flex items-center gap-4">
                       <Label htmlFor="inline-first" className="w-32 text-end">
-                        First Name
+                        {t.labelComponent.fields.firstName}
                       </Label>
                       <Input id="inline-first" className="flex-1" />
                     </div>
                     <div className="flex items-center gap-4">
                       <Label htmlFor="inline-last" className="w-32 text-end">
-                        Last Name
+                        {t.labelComponent.fields.lastName}
                       </Label>
                       <Input id="inline-last" className="flex-1" />
                     </div>
@@ -320,7 +316,7 @@ export default function LabelPage() {
 
             {/* Form Group */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">Complete Form</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.labelComponent.examples.completeForm}</h3>
               <Card>
                 <CardContent className="p-6">
                   <form
@@ -331,22 +327,22 @@ export default function LabelPage() {
                     }}
                   >
                     <div className="space-y-2">
-                      <Label htmlFor="first-name">First Name</Label>
+                      <Label htmlFor="first-name">{t.labelComponent.fields.firstName}</Label>
                       <Input id="first-name" required />
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="last-name">Last Name</Label>
+                      <Label htmlFor="last-name">{t.labelComponent.fields.lastName}</Label>
                       <Input id="last-name" required />
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="form-email">Email</Label>
+                      <Label htmlFor="form-email">{t.labelComponent.fields.email}</Label>
                       <Input id="form-email" type="email" required />
                     </div>
 
                     <Button type="submit" className="w-full">
-                      Submit
+                      {t.labelComponent.fields.submit}
                     </Button>
                   </form>
                 </CardContent>
@@ -358,19 +354,19 @@ export default function LabelPage() {
 
             {/* Custom Styling */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">Custom Styling</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.labelComponent.examples.customStyling}</h3>
               <Card>
                 <CardContent className="p-6">
                   <div className="max-w-sm space-y-4">
                     <div className="space-y-2">
                       <Label htmlFor="styled-1" className="text-lg font-bold text-primary">
-                        Custom Styled Label
+                        {t.labelComponent.fields.customStyledLabel}
                       </Label>
                       <Input id="styled-1" />
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="styled-2" className="text-xs uppercase tracking-wider">
-                        Small Uppercase Label
+                        {t.labelComponent.fields.smallUppercaseLabel}
                       </Label>
                       <Input id="styled-2" />
                     </div>
@@ -391,8 +387,7 @@ export default function LabelPage() {
           <Card className="mt-4">
             <CardContent className="p-6">
               <p className="text-sm text-muted-foreground">
-                The Label component extends Radix UI&apos;s Label primitive and accepts all standard HTML
-                label attributes.
+                {t.labelComponent.props.extendsRadix}
               </p>
             </CardContent>
           </Card>
@@ -404,10 +399,10 @@ export default function LabelPage() {
           <Card>
             <CardContent className="p-6 space-y-4">
               <div>
-                <h3 className="font-semibold mb-2">Always Link Labels to Inputs</h3>
+                <h3 className="font-semibold mb-2">{t.labelComponent.accessibility.alwaysLink}</h3>
                 <p className="text-muted-foreground mb-2">
-                  Use the <code className="bg-muted px-1 rounded">htmlFor</code> prop with the
-                  input&apos;s <code className="bg-muted px-1 rounded">id</code>:
+                  {t.labelComponent.accessibility.alwaysLinkDesc} <code className="bg-muted px-1 rounded">{t.labelComponent.accessibility.htmlForProp}</code> {t.labelComponent.accessibility.propWithInput}{' '}
+                  <code className="bg-muted px-1 rounded">{t.labelComponent.accessibility.idProp}</code>:
                 </p>
                 <CodeBlock
                   code={`<Label htmlFor="email">Email</Label>
@@ -417,13 +412,13 @@ export default function LabelPage() {
               </div>
               <Separator />
               <div>
-                <h3 className="font-semibold mb-2">Don&apos;t Use Placeholder Instead of Label</h3>
+                <h3 className="font-semibold mb-2">{t.labelComponent.accessibility.dontUsePlaceholder}</h3>
                 <p className="text-muted-foreground">
-                  ❌ Bad: Using only placeholder text (not accessible)
+                  {t.labelComponent.accessibility.badExample}
                 </p>
                 <CodeBlock code={`<Input placeholder="Email Address" />`} language="tsx" />
                 <p className="text-muted-foreground mt-2">
-                  ✓ Good: Using label with placeholder
+                  {t.labelComponent.accessibility.goodExample}
                 </p>
                 <CodeBlock
                   code={`<Label htmlFor="email">Email Address</Label>
@@ -433,18 +428,17 @@ export default function LabelPage() {
               </div>
               <Separator />
               <div>
-                <h3 className="font-semibold mb-2">Automatic Disabled Styling</h3>
+                <h3 className="font-semibold mb-2">{t.labelComponent.accessibility.automaticDisabled}</h3>
                 <p className="text-muted-foreground">
-                  Labels automatically style themselves when their associated input is disabled using
-                  the <code className="bg-muted px-1 rounded">peer-disabled:</code> utility classes.
+                  {t.labelComponent.accessibility.automaticDisabledDesc}{' '}
+                  <code className="bg-muted px-1 rounded">{t.labelComponent.accessibility.peerDisabled}</code> {t.labelComponent.accessibility.utilityClasses}
                 </p>
               </div>
               <Separator />
               <div>
-                <h3 className="font-semibold mb-2">Keyboard Navigation</h3>
+                <h3 className="font-semibold mb-2">{t.labelComponent.accessibility.keyboardNav}</h3>
                 <p className="text-muted-foreground">
-                  Clicking a label focuses its associated input, improving keyboard workflow and
-                  mobile usability.
+                  {t.labelComponent.accessibility.keyboardNavDesc}
                 </p>
               </div>
             </CardContent>
@@ -457,26 +451,25 @@ export default function LabelPage() {
           <Card>
             <CardContent className="p-6 space-y-4">
               <p className="text-muted-foreground">
-                Labels automatically support RTL layout. Text alignment adapts based on the text
-                direction.
+                {t.labelComponent.rtl.description}
               </p>
               <CodeBlock code={rtlCode} language="tsx" />
               <div className="grid gap-4 md:grid-cols-2 mt-6">
                 <div className="space-y-2">
-                  <h4 className="font-semibold text-sm">LTR (English)</h4>
+                  <h4 className="font-semibold text-sm">{t.labelComponent.rtl.ltr}</h4>
                   <div dir="ltr">
                     <div className="space-y-2">
-                      <Label htmlFor="ltr-name">Full Name</Label>
-                      <Input id="ltr-name" placeholder="John Doe" />
+                      <Label htmlFor="ltr-name">{t.labelComponent.rtl.fullNameEn}</Label>
+                      <Input id="ltr-name" placeholder={t.labelComponent.rtl.placeholderEn} />
                     </div>
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <h4 className="font-semibold text-sm">RTL (العربية)</h4>
+                  <h4 className="font-semibold text-sm">{t.labelComponent.rtl.rtlLabel}</h4>
                   <div dir="rtl">
                     <div className="space-y-2">
-                      <Label htmlFor="rtl-name">الاسم الكامل</Label>
-                      <Input id="rtl-name" placeholder="أدخل اسمك الكامل" />
+                      <Label htmlFor="rtl-name">{t.labelComponent.rtl.fullNameAr}</Label>
+                      <Input id="rtl-name" placeholder={t.labelComponent.rtl.placeholderAr} />
                     </div>
                   </div>
                 </div>
@@ -496,29 +489,29 @@ export default function LabelPage() {
 
         {/* Related Components */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Related Components</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.labelComponent.related.title}</h2>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             <Link href="/components/input">
               <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold">Input</h3>
-                  <p className="text-sm text-muted-foreground mt-1">Text input fields</p>
+                  <h3 className="font-semibold">{t.labelComponent.related.input}</h3>
+                  <p className="text-sm text-muted-foreground mt-1">{t.labelComponent.related.inputDesc}</p>
                 </CardContent>
               </Card>
             </Link>
             <Link href="/components/checkbox">
               <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold">Checkbox</h3>
-                  <p className="text-sm text-muted-foreground mt-1">Checkbox with label</p>
+                  <h3 className="font-semibold">{t.labelComponent.related.checkbox}</h3>
+                  <p className="text-sm text-muted-foreground mt-1">{t.labelComponent.related.checkboxDesc}</p>
                 </CardContent>
               </Card>
             </Link>
             <Link href="/components/radio-group">
               <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold">Radio Group</h3>
-                  <p className="text-sm text-muted-foreground mt-1">Radio options with labels</p>
+                  <h3 className="font-semibold">{t.labelComponent.related.radioGroup}</h3>
+                  <p className="text-sm text-muted-foreground mt-1">{t.labelComponent.related.radioGroupDesc}</p>
                 </CardContent>
               </Card>
             </Link>

@@ -233,7 +233,7 @@ export default function FormPage() {
           <div className="space-y-8">
             {/* Validation */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">With Validation</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.formComponent.examples.withValidation}</h3>
               <Card>
                 <CardContent className="p-6">
                   <div className="w-full max-w-md mx-auto">
@@ -251,9 +251,9 @@ export default function FormPage() {
                       <FormField name="name">
                         {({ field, error, touched }) => (
                           <FormItem>
-                            <FormLabel required>Name</FormLabel>
+                            <FormLabel required>{t.formComponent.fields.name}</FormLabel>
                             <Input
-                              placeholder="Enter your name"
+                              placeholder={t.formComponent.placeholders.enterName}
                               value={field.value}
                               onChange={(e) => field.onChange(e.target.value)}
                               onBlur={field.onBlur}
@@ -266,7 +266,7 @@ export default function FormPage() {
                       <FormField name="email">
                         {({ field, error, touched }) => (
                           <FormItem>
-                            <FormLabel required>Email</FormLabel>
+                            <FormLabel required>{t.formComponent.fields.email}</FormLabel>
                             <Input
                               type="email"
                               placeholder="your@email.com"
@@ -280,7 +280,7 @@ export default function FormPage() {
                       </FormField>
 
                       <Button type="submit" className="w-full">
-                        Submit
+                        {t.formComponent.labels.submit}
                       </Button>
                     </Form>
                   </div>
@@ -293,7 +293,7 @@ export default function FormPage() {
 
             {/* With Select */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">With Select</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.formComponent.examples.withSelect}</h3>
               <Card>
                 <CardContent className="p-6">
                   <div className="w-full max-w-md mx-auto">
@@ -307,10 +307,10 @@ export default function FormPage() {
                       <FormField name="country">
                         {({ field, error, touched }) => (
                           <FormItem>
-                            <FormLabel required>Country</FormLabel>
+                            <FormLabel required>{t.formComponent.fields.country}</FormLabel>
                             <Select value={field.value} onValueChange={field.onChange}>
                               <SelectTrigger onBlur={field.onBlur}>
-                                <SelectValue placeholder="Select country" />
+                                <SelectValue placeholder={t.formComponent.placeholders.selectCountry} />
                               </SelectTrigger>
                               <SelectContent>
                                 <SelectItem value="sa">Saudi Arabia</SelectItem>
@@ -327,7 +327,7 @@ export default function FormPage() {
                       </FormField>
 
                       <Button type="submit" className="w-full">
-                        Save
+                        {t.formComponent.labels.save}
                       </Button>
                     </Form>
                   </div>
@@ -342,45 +342,45 @@ export default function FormPage() {
 
         {/* Built-in Validators */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Built-in Validators</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.formComponent.builtInValidators.title}</h2>
           <Card>
             <CardContent className="p-6">
               <div className="space-y-4">
                 <div className="grid gap-4 text-sm">
                   <div className="grid grid-cols-3 gap-4 font-semibold border-b pb-2">
-                    <div>Validator</div>
-                    <div>Usage</div>
-                    <div>Description</div>
+                    <div>{t.formComponent.builtInValidators.validator}</div>
+                    <div>{t.formComponent.builtInValidators.usage}</div>
+                    <div>{t.formComponent.builtInValidators.description}</div>
                   </div>
                   <div className="grid grid-cols-3 gap-4">
                     <code className="text-xs">required</code>
                     <code className="text-xs">validators.required(&apos;Message&apos;)</code>
-                    <div>Field must not be empty</div>
+                    <div>{t.formComponent.builtInValidators.required}</div>
                   </div>
                   <div className="grid grid-cols-3 gap-4">
                     <code className="text-xs">email</code>
                     <code className="text-xs">validators.email(&apos;Message&apos;)</code>
-                    <div>Must be valid email format</div>
+                    <div>{t.formComponent.builtInValidators.emailValid}</div>
                   </div>
                   <div className="grid grid-cols-3 gap-4">
                     <code className="text-xs">minLength</code>
                     <code className="text-xs">validators.minLength(8, &apos;Message&apos;)</code>
-                    <div>Minimum character length</div>
+                    <div>{t.formComponent.builtInValidators.minLength}</div>
                   </div>
                   <div className="grid grid-cols-3 gap-4">
                     <code className="text-xs">maxLength</code>
                     <code className="text-xs">validators.maxLength(100, &apos;Message&apos;)</code>
-                    <div>Maximum character length</div>
+                    <div>{t.formComponent.builtInValidators.maxLength}</div>
                   </div>
                   <div className="grid grid-cols-3 gap-4">
                     <code className="text-xs">pattern</code>
                     <code className="text-xs">validators.pattern(/regex/, &apos;Message&apos;)</code>
-                    <div>Custom regex validation</div>
+                    <div>{t.formComponent.builtInValidators.pattern}</div>
                   </div>
                   <div className="grid grid-cols-3 gap-4">
                     <code className="text-xs">composeValidators</code>
                     <code className="text-xs">composeValidators(v1, v2)</code>
-                    <div>Combine multiple validators</div>
+                    <div>{t.formComponent.builtInValidators.compose}</div>
                   </div>
                 </div>
               </div>
@@ -400,34 +400,32 @@ export default function FormPage() {
           <Card>
             <CardContent className="p-6 space-y-4">
               <div>
-                <h3 className="font-semibold mb-2">Form Labels</h3>
+                <h3 className="font-semibold mb-2">{t.formComponent.accessibility.formLabels}</h3>
                 <p className="text-muted-foreground text-sm">
-                  All form fields must have associated labels. Use the <code className="bg-muted px-1 rounded">FormLabel</code> component
-                  for proper accessibility.
+                  {t.formComponent.accessibility.formLabelsDesc}
                 </p>
               </div>
               <Separator />
               <div>
-                <h3 className="font-semibold mb-2">Error Messages</h3>
+                <h3 className="font-semibold mb-2">{t.formComponent.accessibility.errorMessages}</h3>
                 <p className="text-muted-foreground text-sm">
-                  Error messages are announced to screen readers via <code className="bg-muted px-1 rounded">FormMessage</code>.
-                  Validation happens on blur and submit events.
+                  {t.formComponent.accessibility.errorMessagesDesc}
                 </p>
               </div>
               <Separator />
               <div>
-                <h3 className="font-semibold mb-2">Keyboard Navigation</h3>
+                <h3 className="font-semibold mb-2">{t.formComponent.accessibility.keyboardNavigation}</h3>
                 <ul className="list-disc list-inside text-muted-foreground space-y-1 text-sm">
-                  <li><kbd className="px-1.5 py-0.5 rounded bg-muted">Tab</kbd>: Navigate between form fields</li>
-                  <li><kbd className="px-1.5 py-0.5 rounded bg-muted">Enter</kbd>: Submit form</li>
-                  <li><kbd className="px-1.5 py-0.5 rounded bg-muted">Escape</kbd>: Blur current field</li>
+                  <li><kbd className="px-1.5 py-0.5 rounded bg-muted">Tab</kbd>: {t.formComponent.accessibility.keyboardTab}</li>
+                  <li><kbd className="px-1.5 py-0.5 rounded bg-muted">Enter</kbd>: {t.formComponent.accessibility.keyboardEnter}</li>
+                  <li><kbd className="px-1.5 py-0.5 rounded bg-muted">Escape</kbd>: {t.formComponent.accessibility.keyboardEscape}</li>
                 </ul>
               </div>
               <Separator />
               <div>
-                <h3 className="font-semibold mb-2">Required Fields</h3>
+                <h3 className="font-semibold mb-2">{t.formComponent.accessibility.requiredFields}</h3>
                 <p className="text-muted-foreground text-sm">
-                  Required fields are marked with an asterisk (*) and properly indicated to screen readers.
+                  {t.formComponent.accessibility.requiredFieldsDesc}
                 </p>
               </div>
             </CardContent>
@@ -440,12 +438,12 @@ export default function FormPage() {
           <Card>
             <CardContent className="p-6 space-y-4">
               <p className="text-muted-foreground">
-                Form components are fully RTL-compatible with bilingual validation message support.
+                {t.formComponent.rtl.description}
               </p>
               <CodeBlock code={rtlCode} language="tsx" />
               <div className="grid gap-4 md:grid-cols-2 mt-6">
                 <div className="space-y-2">
-                  <h4 className="font-semibold text-sm">LTR (English)</h4>
+                  <h4 className="font-semibold text-sm">{t.formComponent.rtl.ltr}</h4>
                   <div dir="ltr">
                     <Form
                       initialValues={{ email: '' }}
@@ -473,7 +471,7 @@ export default function FormPage() {
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <h4 className="font-semibold text-sm">RTL (العربية)</h4>
+                  <h4 className="font-semibold text-sm">{t.formComponent.rtl.rtlLabel}</h4>
                   <div dir="rtl">
                     <Form
                       initialValues={{ email: '' }}
