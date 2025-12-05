@@ -175,7 +175,7 @@ export default function FormPage() {
                   <FormField name="email">
                     {({ field, error, touched }) => (
                       <FormItem>
-                        <FormLabel required>Email</FormLabel>
+                        <FormLabel required>{t.formComponent.fields.email}</FormLabel>
                         <Input
                           type="email"
                           placeholder="your@email.com"
@@ -191,7 +191,7 @@ export default function FormPage() {
                   <FormField name="password">
                     {({ field, error, touched }) => (
                       <FormItem>
-                        <FormLabel required>Password</FormLabel>
+                        <FormLabel required>{t.formComponent.fields.password}</FormLabel>
                         <Input
                           type="password"
                           placeholder="••••••••"
@@ -200,13 +200,13 @@ export default function FormPage() {
                           onBlur={field.onBlur}
                         />
                         {touched && <FormMessage error={error} />}
-                        <FormDescription>At least 6 characters</FormDescription>
+                        <FormDescription>{t.formComponent.labels.atLeast6Chars}</FormDescription>
                       </FormItem>
                     )}
                   </FormField>
 
                   <Button type="submit" className="w-full">
-                    Sign In
+                    {t.formComponent.labels.signIn}
                   </Button>
                 </Form>
               </div>
@@ -510,9 +510,9 @@ export default function FormPage() {
             <Link href="/components/input">
               <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold">Input</h3>
+                  <h3 className="font-semibold">{t.formComponent.related.input}</h3>
                   <p className="text-sm text-muted-foreground mt-1">
-                    Text input field component
+                    {t.formComponent.related.inputDesc}
                   </p>
                 </CardContent>
               </Card>
@@ -520,9 +520,9 @@ export default function FormPage() {
             <Link href="/components/textarea">
               <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold">Textarea</h3>
+                  <h3 className="font-semibold">{t.formComponent.related.textarea}</h3>
                   <p className="text-sm text-muted-foreground mt-1">
-                    Multi-line text input
+                    {t.formComponent.related.textareaDesc}
                   </p>
                 </CardContent>
               </Card>
@@ -530,9 +530,9 @@ export default function FormPage() {
             <Link href="/components/select">
               <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold">Select</h3>
+                  <h3 className="font-semibold">{t.formComponent.related.select}</h3>
                   <p className="text-sm text-muted-foreground mt-1">
-                    Dropdown selection component
+                    {t.formComponent.related.selectDesc}
                   </p>
                 </CardContent>
               </Card>
@@ -540,9 +540,9 @@ export default function FormPage() {
             <Link href="/components/checkbox">
               <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold">Checkbox</h3>
+                  <h3 className="font-semibold">{t.formComponent.related.checkbox}</h3>
                   <p className="text-sm text-muted-foreground mt-1">
-                    Checkbox input component
+                    {t.formComponent.related.checkboxDesc}
                   </p>
                 </CardContent>
               </Card>
@@ -550,9 +550,9 @@ export default function FormPage() {
             <Link href="/components/button">
               <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold">Button</h3>
+                  <h3 className="font-semibold">{t.formComponent.related.button}</h3>
                   <p className="text-sm text-muted-foreground mt-1">
-                    Interactive button component
+                    {t.formComponent.related.buttonDesc}
                   </p>
                 </CardContent>
               </Card>
@@ -560,9 +560,9 @@ export default function FormPage() {
             <Link href="/examples/registration">
               <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold">Registration Example</h3>
+                  <h3 className="font-semibold">{t.formComponent.related.registrationExample}</h3>
                   <p className="text-sm text-muted-foreground mt-1">
-                    Multi-step form with Form component
+                    {t.formComponent.related.registrationExampleDesc}
                   </p>
                 </CardContent>
               </Card>

@@ -534,57 +534,6 @@ export default function SelectPage() {
           </Card>
         </section>
 
-        {/* RTL Considerations */}
-        <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentDocs.rtlConsiderations}</h2>
-          <Card>
-            <CardContent className="p-6 space-y-4">
-              <p className="text-muted-foreground">
-                {t.selectComponent.rtl.description}
-              </p>
-              <CodeBlock code={rtlCode} language="tsx" />
-              <div className="grid gap-4 md:grid-cols-2 mt-6">
-                <div className="space-y-2">
-                  <h4 className="font-semibold text-sm">{t.componentDocs.ltr}</h4>
-                  <div dir="ltr">
-                    <div className="space-y-2 p-4 border rounded-lg">
-                      <Label htmlFor="ltr-select">Language</Label>
-                      <Select>
-                        <SelectTrigger id="ltr-select">
-                          <SelectValue placeholder="Select language" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="en">English</SelectItem>
-                          <SelectItem value="ar">Arabic</SelectItem>
-                          <SelectItem value="fr">French</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                  </div>
-                </div>
-                <div className="space-y-2">
-                  <h4 className="font-semibold text-sm">{t.componentDocs.rtl}</h4>
-                  <div dir="rtl">
-                    <div className="space-y-2 p-4 border rounded-lg">
-                      <Label htmlFor="rtl-select">اللغة</Label>
-                      <Select>
-                        <SelectTrigger id="rtl-select">
-                          <SelectValue placeholder="اختر اللغة" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="ar">العربية</SelectItem>
-                          <SelectItem value="en">English</SelectItem>
-                          <SelectItem value="fr">Français</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </section>
-
         {/* Related Components */}
         <section className="mb-16">
           <h2 className="text-2xl font-bold tracking-tight mb-6">{t.selectComponent.relatedTitle}</h2>

@@ -181,7 +181,9 @@ export default function AvatarPage() {
                   </Avatar>
                 </div>
               </ComponentShowcase>
-              <CodeBlock code={fallbackCode} language="tsx" />
+              <div className="mt-4">
+                <CodeBlock code={fallbackCode} language="tsx" />
+              </div>
             </div>
 
             <div>
@@ -206,7 +208,9 @@ export default function AvatarPage() {
                   </Avatar>
                 </div>
               </ComponentShowcase>
-              <CodeBlock code={sizesCode} language="tsx" />
+              <div className="mt-4">
+                <CodeBlock code={sizesCode} language="tsx" />
+              </div>
             </div>
 
             <div>
@@ -229,7 +233,9 @@ export default function AvatarPage() {
                   </Avatar>
                 </div>
               </ComponentShowcase>
-              <CodeBlock code={groupCode} language="tsx" />
+              <div className="mt-4">
+                <CodeBlock code={groupCode} language="tsx" />
+              </div>
             </div>
           </div>
         </section>

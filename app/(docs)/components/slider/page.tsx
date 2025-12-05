@@ -487,43 +487,6 @@ export default function SliderPage() {
           </Card>
         </section>
 
-        {/* RTL Considerations */}
-        <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.sliderComponent.rtl.title}</h2>
-          <Card>
-            <CardContent className="p-6 space-y-4">
-              <p className="text-muted-foreground">
-                {t.sliderComponent.rtl.description}
-              </p>
-              <CodeBlock code={rtlCode} language="tsx" />
-              <div className="grid gap-4 md:grid-cols-2 mt-6">
-                <div className="space-y-2">
-                  <h4 className="font-semibold text-sm">{t.sliderComponent.rtl.ltr}</h4>
-                  <div dir="ltr" lang="en">
-                    <div className="space-y-2 p-4 border rounded-lg">
-                      <Label>{content.en.sliderComponent.labels.volume}</Label>
-                      <Slider defaultValue={[50]} max={100} step={1} />
-                      <p className="text-xs text-muted-foreground">{content.en.sliderComponent.rtl.minLeftMaxRight}</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="space-y-2">
-                  <h4 className="font-semibold text-sm">{t.sliderComponent.rtl.rtlLabel}</h4>
-                  <div dir="rtl" lang="ar">
-                    <div className="space-y-2 p-4 border rounded-lg">
-                      <Label>{content.ar.sliderComponent.labels.volume}</Label>
-                      <Slider defaultValue={[50]} max={100} step={1} />
-                      <p className="text-xs text-muted-foreground">
-                        {content.ar.sliderComponent.rtl.minRightMaxLeft}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </section>
-
         {/* Related Components */}
         <section className="mb-16">
           <h2 className="text-2xl font-bold tracking-tight mb-6">{t.sliderComponent.related.title}</h2>

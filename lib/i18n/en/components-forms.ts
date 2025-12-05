@@ -101,15 +101,17 @@ formComponent: {
       related: {
         title: 'Related Components',
         input: 'Input',
-        inputDesc: 'Text input fields',
+        inputDesc: 'Text input field component',
         textarea: 'Textarea',
         textareaDesc: 'Multi-line text input',
         select: 'Select',
-        selectDesc: 'Dropdown selection',
+        selectDesc: 'Dropdown selection component',
         checkbox: 'Checkbox',
-        checkboxDesc: 'Multiple choice selection',
+        checkboxDesc: 'Checkbox input component',
         button: 'Button',
-        buttonDesc: 'Form submission buttons',
+        buttonDesc: 'Interactive button component',
+        registrationExample: 'Registration Example',
+        registrationExampleDesc: 'Multi-step form with Form component',
       },
     },
 
@@ -147,6 +149,7 @@ checkboxComponent: {
         required: '*',
       },
       status: {
+        status: 'Status',
         checked: 'Checked',
         unchecked: 'Unchecked',
         toggle: 'Toggle',
@@ -338,6 +341,9 @@ radioGroupComponent: {
         continue: 'Continue',
       },
       props: {
+        title: 'Props',
+        radioGroupTitle: 'RadioGroup',
+        radioGroupItemTitle: 'RadioGroupItem',
         radioGroup: {
           value: 'The controlled value of the selected radio item',
           defaultValue: 'The default selected value (uncontrolled)',

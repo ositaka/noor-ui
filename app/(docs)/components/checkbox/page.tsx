@@ -261,7 +261,7 @@ export default function CheckboxPage() {
             <ComponentShowcase.Demo>
               <div className="flex items-center gap-2">
                 <Checkbox id="preview" />
-                <Label htmlFor="preview">Accept terms and conditions</Label>
+                <Label htmlFor="preview">{t.checkboxComponent.labels.acceptTerms}</Label>
               </div>
             </ComponentShowcase.Demo>
           </ComponentShowcase>
@@ -291,15 +291,15 @@ export default function CheckboxPage() {
                 <CardContent className="p-6 space-y-3">
                   <div className="flex items-center gap-2">
                     <Checkbox id="marketing" />
-                    <Label htmlFor="marketing">Send me marketing emails</Label>
+                    <Label htmlFor="marketing">{t.checkboxComponent.labels.sendMarketing}</Label>
                   </div>
                   <div className="flex items-center gap-2">
                     <Checkbox id="analytics" />
-                    <Label htmlFor="analytics">Share analytics data</Label>
+                    <Label htmlFor="analytics">{t.checkboxComponent.labels.shareAnalytics}</Label>
                   </div>
                   <div className="flex items-center gap-2">
                     <Checkbox id="social" />
-                    <Label htmlFor="social">Allow social media integration</Label>
+                    <Label htmlFor="social">{t.checkboxComponent.labels.allowSocial}</Label>
                   </div>
                 </CardContent>
               </Card>
@@ -328,7 +328,7 @@ export default function CheckboxPage() {
                         }}
                       />
                       <Label htmlFor="all" className="font-semibold">
-                        Select All
+                        {t.checkboxComponent.labels.selectAll}
                       </Label>
                     </div>
                     <Separator />
@@ -341,7 +341,7 @@ export default function CheckboxPage() {
                             setCheckedItems({ ...checkedItems, item1: checked === true })
                           }
                         />
-                        <Label htmlFor="item1">Item 1</Label>
+                        <Label htmlFor="item1">{t.checkboxComponent.labels.item1}</Label>
                       </div>
                       <div className="flex items-center gap-2">
                         <Checkbox
@@ -351,7 +351,7 @@ export default function CheckboxPage() {
                             setCheckedItems({ ...checkedItems, item2: checked === true })
                           }
                         />
-                        <Label htmlFor="item2">Item 2</Label>
+                        <Label htmlFor="item2">{t.checkboxComponent.labels.item2}</Label>
                       </div>
                       <div className="flex items-center gap-2">
                         <Checkbox
@@ -361,7 +361,7 @@ export default function CheckboxPage() {
                             setCheckedItems({ ...checkedItems, item3: checked === true })
                           }
                         />
-                        <Label htmlFor="item3">Item 3</Label>
+                        <Label htmlFor="item3">{t.checkboxComponent.labels.item3}</Label>
                       </div>
                     </div>
                   </div>
@@ -379,11 +379,11 @@ export default function CheckboxPage() {
                 <CardContent className="p-6 space-y-3">
                   <div className="flex items-center gap-2">
                     <Checkbox id="disabled" disabled />
-                    <Label htmlFor="disabled">Disabled checkbox</Label>
+                    <Label htmlFor="disabled">{t.checkboxComponent.labels.disabled}</Label>
                   </div>
                   <div className="flex items-center gap-2">
                     <Checkbox id="disabled-checked" disabled checked />
-                    <Label htmlFor="disabled-checked">Disabled and checked</Label>
+                    <Label htmlFor="disabled-checked">{t.checkboxComponent.labels.disabledChecked}</Label>
                   </div>
                 </CardContent>
               </Card>
@@ -404,10 +404,10 @@ export default function CheckboxPage() {
                         checked={checked}
                         onCheckedChange={(value) => setChecked(value === true)}
                       />
-                      <Label htmlFor="controlled">Controlled checkbox</Label>
+                      <Label htmlFor="controlled">{t.checkboxComponent.labels.controlled}</Label>
                     </div>
                     <p className="text-sm text-muted-foreground">
-                      Status: {checked ? t.checkboxComponent.status.checked : t.checkboxComponent.status.unchecked}
+                      {t.checkboxComponent.status.status}: {checked ? t.checkboxComponent.status.checked : t.checkboxComponent.status.unchecked}
                     </p>
                     <Button size="sm" onClick={() => setChecked(!checked)}>
                       {t.checkboxComponent.status.toggle}
