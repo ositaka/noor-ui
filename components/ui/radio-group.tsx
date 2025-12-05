@@ -6,10 +6,31 @@ import { cn } from '../../lib/utils'
 const RadioGroup = React.forwardRef<
   React.ElementRef<typeof RadioGroupPrimitive.Root>,
   React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Root>
->(({ className, ...props }, ref) => {
+>(({ className, dir, ...props }, ref) => {
+  // Track document direction reactively
+  const [documentDir, setDocumentDir] = React.useState<'ltr' | 'rtl'>('ltr')
+
+  React.useEffect(() => {
+    // Set initial direction
+    setDocumentDir(document.documentElement.dir as 'ltr' | 'rtl' || 'ltr')
+
+    // Watch for changes
+    const observer = new MutationObserver(() => {
+      setDocumentDir(document.documentElement.dir as 'ltr' | 'rtl' || 'ltr')
+    })
+
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['dir']
+    })
+
+    return () => observer.disconnect()
+  }, [])
+
   return (
     <RadioGroupPrimitive.Root
       className={cn('grid gap-2', className)}
+      dir={dir || documentDir}
       {...props}
       ref={ref}
     />

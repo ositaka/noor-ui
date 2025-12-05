@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import * as DropdownMenuPrimitive from "@radix-ui/react-dropdown-menu"
-import { Check, ChevronRight, Circle } from "lucide-react"
+import { Check, ChevronRight, ChevronLeft, Circle } from "lucide-react"
 
 import { cn } from "../../lib/utils"
 
@@ -43,20 +43,42 @@ const DropdownMenuSubTrigger = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.SubTrigger> & {
     inset?: boolean
   }
->(({ className, inset, children, ...props }, ref) => (
-  <DropdownMenuPrimitive.SubTrigger
-    ref={ref}
-    className={cn(
-      "flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none focus:bg-accent data-[state=open]:bg-accent",
-      inset && "ps-8",
-      className
-    )}
-    {...props}
-  >
-    {children}
-    <ChevronRight className="ms-auto h-4 w-4" />
-  </DropdownMenuPrimitive.SubTrigger>
-))
+>(({ className, inset, children, ...props }, ref) => {
+  const [isRTL, setIsRTL] = React.useState(false)
+
+  React.useEffect(() => {
+    const checkDir = () => {
+      setIsRTL(document.documentElement.dir === 'rtl')
+    }
+
+    checkDir()
+
+    const observer = new MutationObserver(checkDir)
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['dir'],
+    })
+
+    return () => observer.disconnect()
+  }, [])
+
+  const ChevronIcon = isRTL ? ChevronLeft : ChevronRight
+
+  return (
+    <DropdownMenuPrimitive.SubTrigger
+      ref={ref}
+      className={cn(
+        "flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none focus:bg-accent data-[state=open]:bg-accent",
+        inset && "ps-8",
+        className
+      )}
+      {...props}
+    >
+      {children}
+      <ChevronIcon className="ms-auto h-4 w-4" />
+    </DropdownMenuPrimitive.SubTrigger>
+  )
+})
 DropdownMenuSubTrigger.displayName =
   DropdownMenuPrimitive.SubTrigger.displayName
 

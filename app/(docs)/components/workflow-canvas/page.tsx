@@ -12,6 +12,8 @@ import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
 import { Zap, Cpu, FileOutput, AlertCircle } from 'lucide-react'
 import { type Node, type Edge } from '@xyflow/react'
+import { useDirection } from '@/components/providers/direction-provider'
+import { content } from '@/lib/i18n'
 
 const getWorkflowCanvasProps = (componentT: any): PropDefinition[] => [
   {
@@ -470,7 +472,7 @@ export default function WorkflowCanvasPage() {
 
         {/* RTL Considerations */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.rtl}</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.rtlSupport}</h2>
           <Card>
             <CardContent className="p-6 space-y-4">
               <p className="text-muted-foreground">

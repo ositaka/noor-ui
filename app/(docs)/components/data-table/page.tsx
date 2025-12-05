@@ -437,7 +437,7 @@ const customCellCode = `const columns: ColumnDef<User>[] = [
   },
 ]`
 
-  const sampleUsers: User[] = [
+  const sampleUsers = React.useMemo<User[]>(() => [
     {
       id: '1',
       name: t.tableComponent.demoContent.sampleData.ahmed,
@@ -478,7 +478,7 @@ const customCellCode = `const columns: ColumnDef<User>[] = [
       role: t.tableComponent.demoContent.roles.user,
       joinDate: '2024-04-05'
     },
-  ]
+  ], [t])
   // Basic example state
   const basicColumns: ColumnDef<User>[] = React.useMemo(() => [
     { id: 'name', header: t.tableComponent.demoContent.headers.name, accessorKey: 'name' },
@@ -524,7 +524,7 @@ const customCellCode = `const columns: ColumnDef<User>[] = [
         return bValue.localeCompare(aValue)
       }
     })
-  }, [sortBy, sortDirection])
+  }, [sortBy, sortDirection, sampleUsers])
 
   // Searchable example state
   const [searchValue, setSearchValue] = React.useState('')
@@ -537,7 +537,7 @@ const customCellCode = `const columns: ColumnDef<User>[] = [
       user.email.toLowerCase().includes(searchValue.toLowerCase()) ||
       user.role.toLowerCase().includes(searchValue.toLowerCase())
     )
-  }, [searchValue])
+  }, [searchValue, sampleUsers])
 
   // Paginated example state
   const [currentPage, setCurrentPage] = React.useState(1)
@@ -549,7 +549,7 @@ const customCellCode = `const columns: ColumnDef<User>[] = [
     const startIndex = (currentPage - 1) * pageSize
     const endIndex = startIndex + pageSize
     return sampleUsers.slice(startIndex, endIndex)
-  }, [currentPage, pageSize])
+  }, [currentPage, pageSize, sampleUsers])
 
   // Complete example pagination state (separate from basic pagination)
   const [completePage, setCompletePage] = React.useState(1)

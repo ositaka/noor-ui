@@ -1,6 +1,7 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import * as React from 'react'
+import { useState, useEffect, useCallback } from 'react'
 
 interface UseRelativeTimeOptions {
   updateInterval?: number // Milliseconds, default: 60000 (1 minute)
@@ -93,13 +94,16 @@ export function useRelativeTime(
   const { updateInterval = 60000, format = 'long' } = options
 
   // Parse date
-  const targetDate = typeof date === 'string' ? new Date(date) : date
+  const targetDate = React.useMemo(() =>
+    typeof date === 'string' ? new Date(date) : date,
+    [date]
+  )
 
   // Get locale translations
   const t = translations[locale as Locale] || translations.en
 
   // Calculate relative time
-  const getRelativeTime = (): string => {
+  const getRelativeTime = useCallback((): string => {
     const now = new Date()
     const diffInSeconds = Math.floor((now.getTime() - targetDate.getTime()) / 1000)
 
@@ -147,7 +151,7 @@ export function useRelativeTime(
     const diffInYears = Math.floor(diffInMonths / 12)
     if (diffInYears === 1) return t.yearAgo
     return t.yearsAgo(diffInYears)
-  }
+  }, [targetDate, t])
 
   // State for relative time string
   const [relativeTime, setRelativeTime] = useState(getRelativeTime())
@@ -164,7 +168,7 @@ export function useRelativeTime(
 
     // Cleanup
     return () => clearInterval(interval)
-  }, [date, locale, updateInterval])
+  }, [getRelativeTime, updateInterval])
 
   return relativeTime
 }

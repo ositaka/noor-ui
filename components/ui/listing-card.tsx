@@ -155,6 +155,7 @@ const ListingCard = React.forwardRef<HTMLDivElement, ListingCardProps>(
         <div className={cn('relative bg-muted', aspectRatioClasses[imageAspect])}>
           {/* Image or Placeholder */}
           {typeof image === 'string' ? (
+            // eslint-disable-next-line @next/next/no-img-element
             <img src={image} alt={title} className="w-full h-full object-cover" />
           ) : image ? (
             image

@@ -194,6 +194,7 @@ export const NotificationCenter = React.forwardRef<HTMLButtonElement, Notificati
                     {/* Icon/Avatar */}
                     <div className="shrink-0">
                       {notification.avatar ? (
+                        // eslint-disable-next-line @next/next/no-img-element
                         <img
                           src={notification.avatar}
                           alt=""

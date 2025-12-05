@@ -17,7 +17,7 @@ const getProps = (componentT: any): PropDefinition[] => [
   {
     name: 'notifications',
     type: 'Notification[]',
-    defaultValue: '[]',
+    default: '[]',
     description: componentT.props.notifications,
   },
   {
@@ -53,7 +53,7 @@ const getProps = (componentT: any): PropDefinition[] => [
   {
     name: 'maxHeight',
     type: 'string',
-    defaultValue: '"400px"',
+    default: '"400px"',
     description: componentT.props.maxHeight,
   },
 ]

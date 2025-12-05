@@ -289,6 +289,7 @@ export const FileUpload = React.forwardRef<HTMLInputElement, FileUploadProps>(
                   {/* Preview or Icon */}
                   <div className="shrink-0">
                     {file.preview ? (
+                      // eslint-disable-next-line @next/next/no-img-element
                       <img
                         src={file.preview}
                         alt={file.name}

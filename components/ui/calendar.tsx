@@ -159,25 +159,28 @@ export const Calendar = React.forwardRef<HTMLDivElement, CalendarProps>(
     const t = content[currentLocale]
     const [currentMonth, setCurrentMonth] = React.useState(selected || new Date())
 
-    const monthStart = new Date(currentMonth.getFullYear(), currentMonth.getMonth(), 1)
-    const monthEnd = new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 0)
-    const startDate = new Date(monthStart)
-    startDate.setDate(startDate.getDate() - startDate.getDay())
-    const endDate = new Date(monthEnd)
-    endDate.setDate(endDate.getDate() + (6 - monthEnd.getDay()))
-
     // Generate calendar days
-    const days: CalendarDate[] = []
-    const current = new Date(startDate)
-    while (current <= endDate) {
-      const hijriData = showHijri ? getHijriDate(current) : undefined
-      days.push({
-        gregorian: new Date(current),
-        hijri: hijriData?.hijri,
-        hijriDay: hijriData?.hijriDay,
-      })
-      current.setDate(current.getDate() + 1)
-    }
+    const days = React.useMemo<CalendarDate[]>(() => {
+      const monthStart = new Date(currentMonth.getFullYear(), currentMonth.getMonth(), 1)
+      const monthEnd = new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 0)
+      const startDate = new Date(monthStart)
+      startDate.setDate(startDate.getDate() - startDate.getDay())
+      const endDate = new Date(monthEnd)
+      endDate.setDate(endDate.getDate() + (6 - monthEnd.getDay()))
+
+      const daysArray: CalendarDate[] = []
+      const current = new Date(startDate)
+      while (current <= endDate) {
+        const hijriData = showHijri ? getHijriDate(current) : undefined
+        daysArray.push({
+          gregorian: new Date(current),
+          hijri: hijriData?.hijri,
+          hijriDay: hijriData?.hijriDay,
+        })
+        current.setDate(current.getDate() + 1)
+      }
+      return daysArray
+    }, [currentMonth, showHijri, getHijriDate])
 
     // Generate Islamic holiday events
     const islamicHolidayEvents = React.useMemo<CalendarEvent[]>(() => {

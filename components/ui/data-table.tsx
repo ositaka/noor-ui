@@ -58,6 +58,10 @@ export interface DataTableProps<T> {
   totalPages?: number
   pageSize?: number
   onPageChange?: (page: number) => void
+  // Pagination i18n
+  nextLabel?: string
+  previousLabel?: string
+  pageLabel?: string // e.g., "Page {current} of {total}"
   // Mobile
   mobileView?: 'table' | 'cards'
   /** Show sort buttons on mobile cards */
@@ -128,6 +132,9 @@ export function DataTable<T>({
   totalPages = 1,
   pageSize = 10,
   onPageChange,
+  nextLabel = 'Next',
+  previousLabel = 'Previous',
+  pageLabel,
   mobileView = 'cards',
   mobileSorting = true,
   emptyMessage = 'No results found',
@@ -500,11 +507,11 @@ export function DataTable<T>({
             className="gap-1"
           >
             <ChevronLeft className="h-4 w-4 rtl:rotate-180" />
-            <span>Previous</span>
+            <span>{previousLabel}</span>
           </Button>
 
           <div className="text-sm text-muted-foreground">
-            Page {currentPage} of {totalPages}
+            {pageLabel || `Page ${currentPage} of ${totalPages}`}
           </div>
 
           <Button
@@ -514,7 +521,7 @@ export function DataTable<T>({
             disabled={currentPage === totalPages}
             className="gap-1"
           >
-            <span>Next</span>
+            <span>{nextLabel}</span>
             <ChevronRight className="h-4 w-4 rtl:rotate-180" />
           </Button>
         </div>

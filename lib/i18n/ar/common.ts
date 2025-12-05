@@ -354,6 +354,12 @@ common: {
       destructive: 'إتلافي',
       success: 'نجاح',
       warning: 'تحذير',
+      fullFeatured: 'كامل الميزات',
+      compactMode: 'الوضع المضغوط',
+      withPresets: 'مع الإعدادات المسبقة',
+      customPresets: 'إعدادات مخصصة',
+      withoutPresets: 'بدون إعدادات مسبقة',
+      inContext: 'في السياق',
     },
     rtlDemo: {
       ltr: 'من اليسار إلى اليمين (LTR)',

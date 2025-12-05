@@ -198,7 +198,7 @@ export default function ThinkingIndicatorPage() {
 
             {/* Sizes */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">{t.componentPage.sections.sizes || 'Sizes'}</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.componentPage.examples.sizes}</h3>
               <Card>
                 <CardContent className="p-6">
                   <div className="space-y-4">
@@ -217,7 +217,7 @@ export default function ThinkingIndicatorPage() {
 
             {/* In Chat Context */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">{t.componentPage.sections.inContext || 'In Chat Context'}</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.componentPage.examples.inContext}</h3>
               <Card>
                 <CardContent className="p-6">
                   <div className="max-w-2xl space-y-4">
@@ -266,7 +266,7 @@ export default function ThinkingIndicatorPage() {
 
         {/* RTL Considerations */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.rtl}</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.rtlSupport}</h2>
           <Card>
             <CardContent className="p-6 space-y-4">
               <p className="text-muted-foreground">

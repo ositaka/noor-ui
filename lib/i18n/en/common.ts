@@ -354,6 +354,12 @@ common: {
       destructive: 'Destructive',
       success: 'Success',
       warning: 'Warning',
+      fullFeatured: 'Full Featured',
+      compactMode: 'Compact Mode',
+      withPresets: 'With Presets',
+      customPresets: 'Custom Presets',
+      withoutPresets: 'Without Presets',
+      inContext: 'In Context',
     },
     rtlDemo: {
       ltr: 'Left-to-Right (LTR)',

@@ -1,6 +1,6 @@
 {
   "name": "noorui-rtl",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "description": "Noor UI - Beautiful RTL-first React components for bilingual applications",
   "author": {
     "name": "Nuno Marques",
@@ -10,7 +10,7 @@
   "homepage": "https://noorui.com",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ositaka/noor-ui"
+    "url": "git+https://github.com/ositaka/noor-ui.git"
   },
   "bugs": {
     "url": "https://github.com/ositaka/noor-ui/issues"

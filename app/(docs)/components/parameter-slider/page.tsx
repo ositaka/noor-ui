@@ -418,7 +418,7 @@ export default function ParameterSliderPage() {
 
         {/* ParameterPreset Interface */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.interface || 'ParameterPreset Interface'}</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.typeDefinitions}</h2>
           <CodeBlock code={presetInterface} language="typescript" title="TypeScript" />
         </section>
 
@@ -459,7 +459,7 @@ export default function ParameterSliderPage() {
 
         {/* RTL Considerations */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.rtl}</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.rtlSupport}</h2>
           <Card>
             <CardContent className="p-6 space-y-4">
               <p className="text-muted-foreground">
