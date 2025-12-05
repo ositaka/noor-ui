@@ -19,20 +19,20 @@ import {
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 
-const paginationLinkProps: PropDefinition[] = [
+const getPaginationLinkProps = (t: typeof content.en | typeof content.ar): PropDefinition[] => [
   {
     name: 'isActive',
     type: 'boolean',
     default: 'false',
     required: false,
-    description: 'Whether this page is the currently active page',
+    description: t.paginationComponent.propDescriptions.isActive,
   },
   {
     name: 'size',
     type: '"default" | "sm" | "lg" | "icon"',
     default: '"icon"',
     required: false,
-    description: 'The size variant of the pagination link',
+    description: t.paginationComponent.propDescriptions.size,
   },
 ]
 
@@ -154,6 +154,7 @@ const handlePageChange = (page: number) => {
 export default function PaginationPage() {
   const { locale } = useDirection()
   const t = content[locale]
+  const paginationLinkProps = getPaginationLinkProps(t)
   const [currentPage, setCurrentPage] = React.useState(2)
 
   return (
@@ -195,7 +196,7 @@ export default function PaginationPage() {
               <Pagination>
                 <PaginationContent>
                   <PaginationItem>
-                    <PaginationPrevious href="#" />
+                    <PaginationPrevious href="#">{t.paginationComponent.demo.previous}</PaginationPrevious>
                   </PaginationItem>
                   <PaginationItem>
                     <PaginationLink href="#">1</PaginationLink>
@@ -209,7 +210,7 @@ export default function PaginationPage() {
                     <PaginationLink href="#">3</PaginationLink>
                   </PaginationItem>
                   <PaginationItem>
-                    <PaginationNext href="#" />
+                    <PaginationNext href="#">{t.paginationComponent.demo.next}</PaginationNext>
                   </PaginationItem>
                 </PaginationContent>
               </Pagination>
@@ -237,13 +238,13 @@ export default function PaginationPage() {
 
           <div className="space-y-8">
             <div>
-              <h3 className="text-lg font-semibold mb-4">With Ellipsis</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.paginationComponent.examples.withEllipsis}</h3>
               <ComponentShowcase>
                 <ComponentShowcase.Demo>
                   <Pagination>
                     <PaginationContent>
                       <PaginationItem>
-                        <PaginationPrevious href="#" />
+                        <PaginationPrevious href="#">{t.paginationComponent.demo.previous}</PaginationPrevious>
                       </PaginationItem>
                       <PaginationItem>
                         <PaginationLink href="#">1</PaginationLink>
@@ -269,7 +270,7 @@ export default function PaginationPage() {
                         <PaginationLink href="#">10</PaginationLink>
                       </PaginationItem>
                       <PaginationItem>
-                        <PaginationNext href="#" />
+                        <PaginationNext href="#">{t.paginationComponent.demo.next}</PaginationNext>
                       </PaginationItem>
                     </PaginationContent>
                   </Pagination>
@@ -283,7 +284,7 @@ export default function PaginationPage() {
               <ComponentShowcase>
                 <ComponentShowcase.Demo>
                   <div className="space-y-4">
-                    <p className="text-sm text-muted-foreground">Current page: {currentPage}</p>
+                    <p className="text-sm text-muted-foreground">{t.paginationComponent.demo.currentPage} {currentPage}</p>
                     <Pagination>
                       <PaginationContent>
                         <PaginationItem>
@@ -293,7 +294,7 @@ export default function PaginationPage() {
                               e.preventDefault()
                               if (currentPage > 1) setCurrentPage(currentPage - 1)
                             }}
-                          />
+                          >{t.paginationComponent.demo.previous}</PaginationPrevious>
                         </PaginationItem>
                         <PaginationItem>
                           <PaginationLink
@@ -338,7 +339,7 @@ export default function PaginationPage() {
                               e.preventDefault()
                               if (currentPage < 3) setCurrentPage(currentPage + 1)
                             }}
-                          />
+                          >{t.paginationComponent.demo.next}</PaginationNext>
                         </PaginationItem>
                       </PaginationContent>
                     </Pagination>
@@ -352,15 +353,15 @@ export default function PaginationPage() {
 
         {/* RTL Support Example */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">RTL Support Example</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.paginationComponent.examples.rtlExample}</h2>
           <p className="text-muted-foreground mb-6">
-            The Pagination component automatically adapts to RTL layouts. Previous/Next buttons and chevrons mirror correctly.
+            {t.paginationComponent.rtlExampleDesc}
           </p>
           <ComponentShowcase.Comparison ltrLabel="LTR (English)" rtlLabel="RTL (العربية)">
             <Pagination>
               <PaginationContent>
                 <PaginationItem>
-                  <PaginationPrevious href="#" />
+                  <PaginationPrevious href="#">{t.paginationComponent.demo.previous}</PaginationPrevious>
                 </PaginationItem>
                 <PaginationItem>
                   <PaginationLink href="#">1</PaginationLink>
@@ -380,7 +381,7 @@ export default function PaginationPage() {
                   <PaginationLink href="#">10</PaginationLink>
                 </PaginationItem>
                 <PaginationItem>
-                  <PaginationNext href="#" />
+                  <PaginationNext href="#">{t.paginationComponent.demo.next}</PaginationNext>
                 </PaginationItem>
               </PaginationContent>
             </Pagination>
@@ -399,20 +400,20 @@ export default function PaginationPage() {
           <Card>
             <CardContent className="p-6 space-y-4">
               <div>
-                <h3 className="font-semibold mb-2">Keyboard Navigation</h3>
+                <h3 className="font-semibold mb-2">{t.paginationComponent.accessibilityDetails.keyboard}</h3>
                 <ul className="list-disc list-inside text-sm text-muted-foreground space-y-1">
-                  <li><kbd className="px-1.5 py-0.5 rounded bg-muted">Tab</kbd> - Move focus between pagination links</li>
-                  <li><kbd className="px-1.5 py-0.5 rounded bg-muted">Enter</kbd> - Activate the focused page link</li>
-                  <li><kbd className="px-1.5 py-0.5 rounded bg-muted">Space</kbd> - Activate the focused page link</li>
+                  <li><kbd className="px-1.5 py-0.5 rounded bg-muted">Tab</kbd> - {t.paginationComponent.accessibilityDetails.tab}</li>
+                  <li><kbd className="px-1.5 py-0.5 rounded bg-muted">Enter</kbd> - {t.paginationComponent.accessibilityDetails.enter}</li>
+                  <li><kbd className="px-1.5 py-0.5 rounded bg-muted">Space</kbd> - {t.paginationComponent.accessibilityDetails.space}</li>
                 </ul>
               </div>
               <div>
-                <h3 className="font-semibold mb-2">ARIA Attributes</h3>
+                <h3 className="font-semibold mb-2">{t.paginationComponent.accessibilityDetails.ariaAttributes}</h3>
                 <ul className="list-disc list-inside text-sm text-muted-foreground space-y-1">
-                  <li>role=&quot;navigation&quot; with aria-label=&quot;pagination&quot;</li>
-                  <li>aria-current=&quot;page&quot; on the active page link</li>
-                  <li>aria-label on Previous and Next buttons for screen readers</li>
-                  <li>aria-hidden on ellipsis with descriptive sr-only text</li>
+                  <li>{t.paginationComponent.accessibilityDetails.roleNavigation}</li>
+                  <li>{t.paginationComponent.accessibilityDetails.ariaCurrent}</li>
+                  <li>{t.paginationComponent.accessibilityDetails.ariaLabel}</li>
+                  <li>{t.paginationComponent.accessibilityDetails.ariaHidden}</li>
                 </ul>
               </div>
             </CardContent>
@@ -425,13 +426,13 @@ export default function PaginationPage() {
           <Card>
             <CardContent className="p-6">
               <p className="text-sm text-muted-foreground mb-4">
-                The Pagination component is fully RTL-compatible with automatic icon mirroring and layout adaptation.
+                {t.paginationComponent.rtl.description}
               </p>
               <ul className="list-disc list-inside text-sm text-muted-foreground space-y-1">
-                <li>Previous/Next buttons swap positions in RTL mode</li>
-                <li>Chevron icons mirror automatically</li>
-                <li>Page number ordering follows reading direction</li>
-                <li>Focus indicators position correctly</li>
+                <li>{t.paginationComponent.rtlDetails.prevNextSwap}</li>
+                <li>{t.paginationComponent.rtlDetails.chevronMirror}</li>
+                <li>{t.paginationComponent.rtlDetails.pageNumberOrder}</li>
+                <li>{t.paginationComponent.rtlDetails.focusIndicators}</li>
               </ul>
             </CardContent>
           </Card>
@@ -439,14 +440,14 @@ export default function PaginationPage() {
 
         {/* Related Components */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-4">Related Components</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-4">{t.paginationComponent.related.title}</h2>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             <Link href="/components/breadcrumb">
               <Card className="hover:border-primary transition-colors">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold mb-2">Breadcrumb</h3>
+                  <h3 className="font-semibold mb-2">{t.paginationComponent.related.breadcrumb}</h3>
                   <p className="text-sm text-muted-foreground">
-                    Display navigation hierarchy
+                    {t.paginationComponent.related.breadcrumbDesc}
                   </p>
                 </CardContent>
               </Card>
@@ -454,9 +455,9 @@ export default function PaginationPage() {
             <Link href="/components/button">
               <Card className="hover:border-primary transition-colors">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold mb-2">Button</h3>
+                  <h3 className="font-semibold mb-2">{t.paginationComponent.related.button}</h3>
                   <p className="text-sm text-muted-foreground">
-                    Trigger actions and navigation
+                    {t.paginationComponent.related.buttonDesc}
                   </p>
                 </CardContent>
               </Card>

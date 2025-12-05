@@ -95,6 +95,38 @@ alertComponent: {
         title: 'اعتبارات RTL',
         description: 'تدعم التنبيهات تلقائياً تخطيط RTL مع محاذاة صحيحة للأيقونات والنص.',
       },
+      demo: {
+        headsUp: 'انتبه!',
+        headsUpDesc: 'يمكنك إضافة المكونات إلى تطبيقك باستخدام سطر الأوامر.',
+        error: 'خطأ',
+        errorDesc: 'انتهت صلاحية جلستك. يرجى تسجيل الدخول مرة أخرى.',
+        success: 'نجاح',
+        successDesc: 'تم حفظ تغييراتك بنجاح.',
+        warning: 'تحذير',
+        warningDesc: 'ستنتهي صلاحية فترتك التجريبية المجانية خلال ٣ أيام.',
+        updateAvailable: 'تحديث متاح',
+        updateDesc: 'نسخة جديدة من التطبيق متاحة.',
+        systemUpdate: 'تحديث النظام',
+        systemUpdateDesc: 'تحديث نظام جديد متاح.',
+      },
+      related: {
+        title: 'المكونات ذات الصلة',
+        toast: 'إشعار',
+        toastDesc: 'إشعارات مؤقتة',
+        dialog: 'مربع حوار',
+        dialogDesc: 'مربعات حوار منبثقة',
+      },
+      accessibilityDetails: {
+        ariaRoles: 'أدوار ARIA',
+        ariaRolesDesc: 'يستخدم مكون التنبيه role="alert" للإعلان عن الرسائل المهمة لقارئات الشاشة.',
+        semanticHtml: 'HTML الدلالي',
+        semanticHtmlDesc: 'يستخدم عناصر العناوين الدلالية للحفاظ على بنية المستند الصحيحة.',
+        colorIndependence: 'استقلالية اللون',
+        colorIndependenceDesc: 'توفر الأيقونات والنصوص تكرارًا للمعلومات دون الاعتماد على اللون فقط.',
+      },
+      rtlDetails: {
+        description: 'مكون التنبيه متوافق تمامًا مع RTL باستخدام الخصائص المنطقية.',
+      },
     },
 
 stepperComponent: {

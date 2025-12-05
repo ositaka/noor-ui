@@ -149,15 +149,15 @@ export default function BreadcrumbComponentPage() {
               <Breadcrumb>
               <BreadcrumbList>
                 <BreadcrumbItem>
-                  <BreadcrumbLink href="/">Home</BreadcrumbLink>
+                  <BreadcrumbLink href="/">{t.breadcrumbComponent.demo.home}</BreadcrumbLink>
                 </BreadcrumbItem>
                 <BreadcrumbSeparator />
                 <BreadcrumbItem>
-                  <BreadcrumbLink href="/components">Components</BreadcrumbLink>
+                  <BreadcrumbLink href="/components">{t.breadcrumbComponent.demo.components}</BreadcrumbLink>
                 </BreadcrumbItem>
                 <BreadcrumbSeparator />
                 <BreadcrumbItem>
-                  <BreadcrumbPage>Breadcrumb</BreadcrumbPage>
+                  <BreadcrumbPage>{t.breadcrumbComponent.demo.breadcrumb}</BreadcrumbPage>
                 </BreadcrumbItem>
               </BreadcrumbList>
             </Breadcrumb>
@@ -190,15 +190,15 @@ export default function BreadcrumbComponentPage() {
                 <Breadcrumb>
                   <BreadcrumbList>
                     <BreadcrumbItem>
-                      <BreadcrumbLink href="/">Home</BreadcrumbLink>
+                      <BreadcrumbLink href="/">{t.breadcrumbComponent.demo.home}</BreadcrumbLink>
                     </BreadcrumbItem>
                     <BreadcrumbSeparator>/</BreadcrumbSeparator>
                     <BreadcrumbItem>
-                      <BreadcrumbLink href="/documentation">Documentation</BreadcrumbLink>
+                      <BreadcrumbLink href="/documentation">{t.breadcrumbComponent.demo.documentation}</BreadcrumbLink>
                     </BreadcrumbItem>
                     <BreadcrumbSeparator>/</BreadcrumbSeparator>
                     <BreadcrumbItem>
-                      <BreadcrumbPage>Breadcrumb</BreadcrumbPage>
+                      <BreadcrumbPage>{t.breadcrumbComponent.demo.breadcrumb}</BreadcrumbPage>
                     </BreadcrumbItem>
                   </BreadcrumbList>
                 </Breadcrumb>
@@ -214,21 +214,21 @@ export default function BreadcrumbComponentPage() {
                     <BreadcrumbItem>
                       <BreadcrumbLink href="/" className="flex items-center gap-2">
                         <Home className="h-4 w-4" />
-                        Home
+                        {t.breadcrumbComponent.demo.home}
                       </BreadcrumbLink>
                     </BreadcrumbItem>
                     <BreadcrumbSeparator />
                     <BreadcrumbItem>
                       <BreadcrumbLink href="/examples" className="flex items-center gap-2">
                         <Folder className="h-4 w-4" />
-                        Examples
+                        {t.breadcrumbComponent.demo.examples}
                       </BreadcrumbLink>
                     </BreadcrumbItem>
                     <BreadcrumbSeparator />
                     <BreadcrumbItem>
                       <BreadcrumbPage className="flex items-center gap-2">
                         <File className="h-4 w-4" />
-                        Document
+                        {t.breadcrumbComponent.demo.document}
                       </BreadcrumbPage>
                     </BreadcrumbItem>
                   </BreadcrumbList>
@@ -243,7 +243,7 @@ export default function BreadcrumbComponentPage() {
         <section className="mb-16">
           <h2 className="text-2xl font-bold tracking-tight mb-6">RTL Support Example</h2>
           <p className="text-muted-foreground mb-6">
-            The Breadcrumb component automatically adapts to RTL layouts. Layout direction and separators mirror correctly.
+            {t.breadcrumbComponent.rtlExampleDesc}
           </p>
           <ComponentShowcase.Comparison ltrLabel="LTR (English)" rtlLabel="RTL (العربية)">
             <Breadcrumb>
@@ -251,21 +251,21 @@ export default function BreadcrumbComponentPage() {
                 <BreadcrumbItem>
                   <BreadcrumbLink href="/" className="flex items-center gap-2">
                     <Home className="h-4 w-4" />
-                    Home
+                    {t.breadcrumbComponent.demo.home}
                   </BreadcrumbLink>
                 </BreadcrumbItem>
                 <BreadcrumbSeparator />
                 <BreadcrumbItem>
                   <BreadcrumbLink href="/components" className="flex items-center gap-2">
                     <Folder className="h-4 w-4" />
-                    Components
+                    {t.breadcrumbComponent.demo.components}
                   </BreadcrumbLink>
                 </BreadcrumbItem>
                 <BreadcrumbSeparator />
                 <BreadcrumbItem>
                   <BreadcrumbPage className="flex items-center gap-2">
                     <File className="h-4 w-4" />
-                    Details
+                    {t.breadcrumbComponent.demo.details}
                   </BreadcrumbPage>
                 </BreadcrumbItem>
               </BreadcrumbList>
@@ -285,18 +285,18 @@ export default function BreadcrumbComponentPage() {
           <Card>
             <CardContent className="p-6 space-y-4">
               <div>
-                <h3 className="font-semibold mb-2">Keyboard Navigation</h3>
+                <h3 className="font-semibold mb-2">{t.breadcrumbComponent.accessibilityDetails.keyboard}</h3>
                 <ul className="list-disc list-inside text-sm text-muted-foreground space-y-1">
-                  <li><kbd className="px-1.5 py-0.5 rounded bg-muted">Tab</kbd> - Move focus between breadcrumb links</li>
-                  <li><kbd className="px-1.5 py-0.5 rounded bg-muted">Enter</kbd> - Activate the focused link</li>
+                  <li><kbd className="px-1.5 py-0.5 rounded bg-muted">Tab</kbd> - {t.breadcrumbComponent.accessibilityDetails.tab}</li>
+                  <li><kbd className="px-1.5 py-0.5 rounded bg-muted">Enter</kbd> - {t.breadcrumbComponent.accessibilityDetails.enter}</li>
                 </ul>
               </div>
               <div>
-                <h3 className="font-semibold mb-2">ARIA Attributes</h3>
+                <h3 className="font-semibold mb-2">{t.breadcrumbComponent.accessibilityDetails.ariaAttributes}</h3>
                 <ul className="list-disc list-inside text-sm text-muted-foreground space-y-1">
-                  <li>aria-label=&quot;Breadcrumb&quot; on the navigation element</li>
-                  <li>aria-current=&quot;page&quot; on the current page item</li>
-                  <li>aria-hidden=&quot;true&quot; on separator elements</li>
+                  <li>{t.breadcrumbComponent.accessibilityDetails.ariaLabel}</li>
+                  <li>{t.breadcrumbComponent.accessibilityDetails.ariaCurrent}</li>
+                  <li>{t.breadcrumbComponent.accessibilityDetails.ariaHidden}</li>
                 </ul>
               </div>
             </CardContent>
@@ -309,13 +309,13 @@ export default function BreadcrumbComponentPage() {
           <Card>
             <CardContent className="p-6">
               <p className="text-sm text-muted-foreground mb-4">
-                The Breadcrumb component is fully RTL-compatible with automatic layout adaptation.
+                {t.breadcrumbComponent.rtl.description}
               </p>
               <ul className="list-disc list-inside text-sm text-muted-foreground space-y-1">
-                <li>Layout direction follows text direction automatically</li>
-                <li>Separator icons mirror appropriately in RTL mode</li>
-                <li>Link order reverses naturally in RTL layouts</li>
-                <li>Focus indicators position correctly</li>
+                <li>{t.breadcrumbComponent.rtlDetails.layoutDirection}</li>
+                <li>{t.breadcrumbComponent.rtlDetails.separatorMirror}</li>
+                <li>{t.breadcrumbComponent.rtlDetails.linkOrder}</li>
+                <li>{t.breadcrumbComponent.rtlDetails.focusIndicators}</li>
               </ul>
             </CardContent>
           </Card>
@@ -323,14 +323,14 @@ export default function BreadcrumbComponentPage() {
 
         {/* Related Components */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-4">Related Components</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-4">{t.breadcrumbComponent.related.title}</h2>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             <Link href="/components/pagination">
               <Card className="hover:border-primary transition-colors">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold mb-2">Pagination</h3>
+                  <h3 className="font-semibold mb-2">{t.breadcrumbComponent.related.pagination}</h3>
                   <p className="text-sm text-muted-foreground">
-                    Navigate between pages of content
+                    {t.breadcrumbComponent.related.paginationDesc}
                   </p>
                 </CardContent>
               </Card>
@@ -338,9 +338,9 @@ export default function BreadcrumbComponentPage() {
             <Link href="/components/tabs">
               <Card className="hover:border-primary transition-colors">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold mb-2">Tabs</h3>
+                  <h3 className="font-semibold mb-2">{t.breadcrumbComponent.related.tabs}</h3>
                   <p className="text-sm text-muted-foreground">
-                    Switch between different views
+                    {t.breadcrumbComponent.related.tabsDesc}
                   </p>
                 </CardContent>
               </Card>

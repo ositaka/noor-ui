@@ -272,26 +272,6 @@ export default function ToastPage() {
           </div>
         </section>
 
-        {/* RTL Support Example */}
-        <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">{tc.rtl.exampleTitle}</h2>
-          <p className="text-muted-foreground mb-6">
-            {tc.rtl.exampleDesc}
-          </p>
-          <ComponentShowcase.Comparison ltrLabel={tc.rtl.ltr} rtlLabel={tc.rtl.rtlLabel}>
-            <Button
-              onClick={() => {
-                toast({
-                  title: tc.messages.messageTitle,
-                  description: tc.messages.messageDesc,
-                })
-              }}
-            >
-              {tc.rtl.showNotification}
-            </Button>
-          </ComponentShowcase.Comparison>
-        </section>
-
         {/* Props */}
         <section className="mb-16">
           <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentDocs.props}</h2>

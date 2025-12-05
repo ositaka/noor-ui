@@ -127,15 +127,15 @@ export default function TabsPage() {
             <ComponentShowcase.Demo>
               <Tabs defaultValue="account" className="w-full max-w-md">
               <TabsList className="grid w-full grid-cols-3">
-                <TabsTrigger value="account">Account</TabsTrigger>
-                <TabsTrigger value="password">Password</TabsTrigger>
-                <TabsTrigger value="settings">Settings</TabsTrigger>
+                <TabsTrigger value="account">{t.tabsComponent.demo.account}</TabsTrigger>
+                <TabsTrigger value="password">{t.tabsComponent.demo.password}</TabsTrigger>
+                <TabsTrigger value="settings">{t.tabsComponent.demo.settings}</TabsTrigger>
               </TabsList>
               <TabsContent value="account" className="mt-4">
                 <Card>
                   <CardContent className="p-6">
                     <p className="text-sm text-muted-foreground">
-                      Make changes to your account here. Click save when you&apos;re done.
+                      {t.tabsComponent.demo.accountDesc}
                     </p>
                   </CardContent>
                 </Card>
@@ -144,7 +144,7 @@ export default function TabsPage() {
                 <Card>
                   <CardContent className="p-6">
                     <p className="text-sm text-muted-foreground">
-                      Change your password here. After saving, you&apos;ll be logged out.
+                      {t.tabsComponent.demo.passwordDesc}
                     </p>
                   </CardContent>
                 </Card>
@@ -153,7 +153,7 @@ export default function TabsPage() {
                 <Card>
                   <CardContent className="p-6">
                     <p className="text-sm text-muted-foreground">
-                      Manage your account settings and preferences.
+                      {t.tabsComponent.demo.settingsDesc}
                     </p>
                   </CardContent>
                 </Card>
@@ -183,30 +183,30 @@ export default function TabsPage() {
 
           <div className="space-y-8">
             <div>
-              <h3 className="text-lg font-semibold mb-4">With Icons</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.tabsComponent.examples.withIcons}</h3>
               <ComponentShowcase>
                 <Tabs defaultValue="profile" className="w-full max-w-md">
                   <TabsList className="grid w-full grid-cols-2">
                     <TabsTrigger value="profile" className="gap-2">
                       <User className="h-4 w-4" />
-                      Profile
+                      {t.tabsComponent.demo.profile}
                     </TabsTrigger>
                     <TabsTrigger value="notifications" className="gap-2">
                       <Bell className="h-4 w-4" />
-                      Notifications
+                      {t.tabsComponent.demo.notifications}
                     </TabsTrigger>
                   </TabsList>
                   <TabsContent value="profile" className="mt-4">
                     <Card>
                       <CardContent className="p-6">
-                        <p className="text-sm text-muted-foreground">Your profile information</p>
+                        <p className="text-sm text-muted-foreground">{t.tabsComponent.demo.profileDesc}</p>
                       </CardContent>
                     </Card>
                   </TabsContent>
                   <TabsContent value="notifications" className="mt-4">
                     <Card>
                       <CardContent className="p-6">
-                        <p className="text-sm text-muted-foreground">Your notifications settings</p>
+                        <p className="text-sm text-muted-foreground">{t.tabsComponent.demo.notificationsDesc}</p>
                       </CardContent>
                     </Card>
                   </TabsContent>
@@ -219,31 +219,31 @@ export default function TabsPage() {
               <h3 className="text-lg font-semibold mb-4">Controlled</h3>
               <ComponentShowcase>
                 <div className="space-y-4 w-full max-w-md">
-                  <p className="text-sm text-muted-foreground">Active tab: {activeTab}</p>
+                  <p className="text-sm text-muted-foreground">{t.tabsComponent.demo.activeTab} {activeTab}</p>
                   <Tabs value={activeTab} onValueChange={setActiveTab}>
                     <TabsList className="grid w-full grid-cols-3">
-                      <TabsTrigger value="account">Account</TabsTrigger>
-                      <TabsTrigger value="password">Password</TabsTrigger>
-                      <TabsTrigger value="settings">Settings</TabsTrigger>
+                      <TabsTrigger value="account">{t.tabsComponent.demo.account}</TabsTrigger>
+                      <TabsTrigger value="password">{t.tabsComponent.demo.password}</TabsTrigger>
+                      <TabsTrigger value="settings">{t.tabsComponent.demo.settings}</TabsTrigger>
                     </TabsList>
                     <TabsContent value="account" className="mt-4">
                       <Card>
                         <CardContent className="p-6">
-                          <p className="text-sm text-muted-foreground">Account tab content</p>
+                          <p className="text-sm text-muted-foreground">{t.tabsComponent.demo.accountTabContent}</p>
                         </CardContent>
                       </Card>
                     </TabsContent>
                     <TabsContent value="password" className="mt-4">
                       <Card>
                         <CardContent className="p-6">
-                          <p className="text-sm text-muted-foreground">Password tab content</p>
+                          <p className="text-sm text-muted-foreground">{t.tabsComponent.demo.passwordTabContent}</p>
                         </CardContent>
                       </Card>
                     </TabsContent>
                     <TabsContent value="settings" className="mt-4">
                       <Card>
                         <CardContent className="p-6">
-                          <p className="text-sm text-muted-foreground">Settings tab content</p>
+                          <p className="text-sm text-muted-foreground">{t.tabsComponent.demo.settingsTabContent}</p>
                         </CardContent>
                       </Card>
                     </TabsContent>
@@ -259,20 +259,20 @@ export default function TabsPage() {
         <section className="mb-16">
           <h2 className="text-2xl font-bold tracking-tight mb-6">RTL Support Example</h2>
           <p className="text-muted-foreground mb-6">
-            The Tabs component automatically adapts to RTL layouts. Tab order and arrow key navigation follow the reading direction.
+            {t.tabsComponent.rtlExampleDesc}
           </p>
           <ComponentShowcase.Comparison ltrLabel="LTR (English)" rtlLabel="RTL (العربية)">
             <Tabs defaultValue="overview" className="w-full max-w-md">
               <TabsList className="grid w-full grid-cols-3">
-                <TabsTrigger value="overview">Overview</TabsTrigger>
-                <TabsTrigger value="analytics">Analytics</TabsTrigger>
-                <TabsTrigger value="reports">Reports</TabsTrigger>
+                <TabsTrigger value="overview">{t.tabsComponent.demo.overview}</TabsTrigger>
+                <TabsTrigger value="analytics">{t.tabsComponent.demo.analytics}</TabsTrigger>
+                <TabsTrigger value="reports">{t.tabsComponent.demo.reports}</TabsTrigger>
               </TabsList>
               <TabsContent value="overview" className="mt-4">
                 <Card>
                   <CardContent className="p-6">
                     <p className="text-sm text-muted-foreground">
-                      View your account overview and summary information.
+                      {t.tabsComponent.demo.overviewDesc}
                     </p>
                   </CardContent>
                 </Card>
@@ -281,7 +281,7 @@ export default function TabsPage() {
                 <Card>
                   <CardContent className="p-6">
                     <p className="text-sm text-muted-foreground">
-                      Analyze your usage patterns and trends.
+                      {t.tabsComponent.demo.analyticsDesc}
                     </p>
                   </CardContent>
                 </Card>
@@ -290,7 +290,7 @@ export default function TabsPage() {
                 <Card>
                   <CardContent className="p-6">
                     <p className="text-sm text-muted-foreground">
-                      Generate and download detailed reports.
+                      {t.tabsComponent.demo.reportsDesc}
                     </p>
                   </CardContent>
                 </Card>
@@ -311,22 +311,22 @@ export default function TabsPage() {
           <Card>
             <CardContent className="p-6 space-y-4">
               <div>
-                <h3 className="font-semibold mb-2">Keyboard Navigation</h3>
+                <h3 className="font-semibold mb-2">{t.tabsComponent.accessibilityDetails.keyboard}</h3>
                 <ul className="list-disc list-inside text-sm text-muted-foreground space-y-1">
-                  <li><kbd dir="ltr" className="px-1.5 py-0.5 rounded bg-muted">Tab</kbd> - Move focus to the active tab</li>
-                  <li><kbd dir="ltr" className="px-1.5 py-0.5 rounded bg-muted">Arrow Keys</kbd> - Navigate between tabs</li>
-                  <li><kbd dir="ltr" className="px-1.5 py-0.5 rounded bg-muted">Home</kbd> - Move to first tab</li>
-                  <li><kbd dir="ltr" className="px-1.5 py-0.5 rounded bg-muted">End</kbd> - Move to last tab</li>
+                  <li><kbd dir="ltr" className="px-1.5 py-0.5 rounded bg-muted">Tab</kbd> - {t.tabsComponent.accessibilityDetails.tab}</li>
+                  <li><kbd dir="ltr" className="px-1.5 py-0.5 rounded bg-muted">Arrow Keys</kbd> - {t.tabsComponent.accessibilityDetails.arrowKeys}</li>
+                  <li><kbd dir="ltr" className="px-1.5 py-0.5 rounded bg-muted">Home</kbd> - {t.tabsComponent.accessibilityDetails.home}</li>
+                  <li><kbd dir="ltr" className="px-1.5 py-0.5 rounded bg-muted">End</kbd> - {t.tabsComponent.accessibilityDetails.end}</li>
                 </ul>
               </div>
               <div>
-                <h3 className="font-semibold mb-2">ARIA Attributes</h3>
+                <h3 className="font-semibold mb-2">{t.tabsComponent.accessibilityDetails.ariaAttributes}</h3>
                 <ul className="list-disc list-inside text-sm text-muted-foreground space-y-1">
-                  <li>role=&quot;tablist&quot; on the tabs list container</li>
-                  <li>role=&quot;tab&quot; on each tab trigger</li>
-                  <li>role=&quot;tabpanel&quot; on each tab content panel</li>
-                  <li>aria-selected indicates the active tab</li>
-                  <li>aria-controls links tab to its panel</li>
+                  <li>{t.tabsComponent.accessibilityDetails.roleTablist}</li>
+                  <li>{t.tabsComponent.accessibilityDetails.roleTab}</li>
+                  <li>{t.tabsComponent.accessibilityDetails.roleTabpanel}</li>
+                  <li>{t.tabsComponent.accessibilityDetails.ariaSelected}</li>
+                  <li>{t.tabsComponent.accessibilityDetails.ariaControls}</li>
                 </ul>
               </div>
             </CardContent>
@@ -339,13 +339,13 @@ export default function TabsPage() {
           <Card>
             <CardContent className="p-6">
               <p className="text-sm text-muted-foreground mb-4">
-                The Tabs component is fully RTL-compatible. Arrow key navigation automatically adapts to the current text direction.
+                {t.tabsComponent.rtl.description}
               </p>
               <ul className="list-disc list-inside text-sm text-muted-foreground space-y-1">
-                <li>Tab list layout respects text direction</li>
-                <li>Arrow key navigation follows reading direction</li>
-                <li>Focus indicators position correctly</li>
-                <li>Icons in tabs mirror appropriately if needed</li>
+                <li>{t.tabsComponent.rtlDetails.tabListLayout}</li>
+                <li>{t.tabsComponent.rtlDetails.arrowKeyNav}</li>
+                <li>{t.tabsComponent.rtlDetails.focusIndicators}</li>
+                <li>{t.tabsComponent.rtlDetails.iconsMirror}</li>
               </ul>
             </CardContent>
           </Card>
@@ -353,14 +353,14 @@ export default function TabsPage() {
 
         {/* Related Components */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-4">Related Components</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-4">{t.tabsComponent.related.title}</h2>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             <Link href="/components/accordion">
               <Card className="hover:border-primary transition-colors">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold mb-2">Accordion</h3>
+                  <h3 className="font-semibold mb-2">{t.tabsComponent.related.accordion}</h3>
                   <p className="text-sm text-muted-foreground">
-                    Vertically stacked collapsible sections
+                    {t.tabsComponent.related.accordionDesc}
                   </p>
                 </CardContent>
               </Card>
@@ -368,9 +368,9 @@ export default function TabsPage() {
             <Link href="/components/card">
               <Card className="hover:border-primary transition-colors">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold mb-2">Card</h3>
+                  <h3 className="font-semibold mb-2">{t.tabsComponent.related.card}</h3>
                   <p className="text-sm text-muted-foreground">
-                    Container for tab content
+                    {t.tabsComponent.related.cardDesc}
                   </p>
                 </CardContent>
               </Card>

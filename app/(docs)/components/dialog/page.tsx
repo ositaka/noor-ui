@@ -86,11 +86,11 @@ const withFormCode = `<Dialog>
     <div className="grid gap-4 py-4">
       <div className="grid gap-2">
         <Label htmlFor="name">Name</Label>
-        <Input id="name" defaultValue="Pedro Duarte" />
+        <Input id="name" defaultValue="Nuno Marques" />
       </div>
       <div className="grid gap-2">
         <Label htmlFor="username">Username</Label>
-        <Input id="username" defaultValue="@peduarte" />
+        <Input id="username" defaultValue="@ositaka" />
       </div>
     </div>
     <DialogFooter>
@@ -239,11 +239,11 @@ export default function DialogPage() {
                       <div className="grid gap-4 py-4">
                         <div className="grid gap-2">
                           <Label htmlFor="name">{t.dialogComponent.demo.name}</Label>
-                          <Input id="name" defaultValue="Pedro Duarte" />
+                          <Input id="name" defaultValue="Nuno Marques" />
                         </div>
                         <div className="grid gap-2">
                           <Label htmlFor="username">{t.dialogComponent.demo.username}</Label>
-                          <Input id="username" defaultValue="@peduarte" />
+                          <Input id="username" defaultValue="@ositaka" />
                         </div>
                       </div>
                       <DialogFooter>

@@ -108,9 +108,9 @@ export default function AlertPage() {
             <ComponentShowcase.Demo>
               <Alert className="w-full max-w-md">
                 <Terminal className="h-4 w-4" />
-                <AlertTitle>Heads up!</AlertTitle>
+                <AlertTitle>{t.alertComponent.demo.headsUp}</AlertTitle>
                 <AlertDescription>
-                  You can add components to your app using the cli.
+                  {t.alertComponent.demo.headsUpDesc}
                 </AlertDescription>
               </Alert>
             </ComponentShowcase.Demo>
@@ -141,9 +141,9 @@ export default function AlertPage() {
                 <CardContent className="p-6">
                   <Alert>
                     <Terminal className="h-4 w-4" />
-                    <AlertTitle>Heads up!</AlertTitle>
+                    <AlertTitle>{t.alertComponent.demo.headsUp}</AlertTitle>
                     <AlertDescription>
-                      You can add components to your app using the cli.
+                      {t.alertComponent.demo.headsUpDesc}
                     </AlertDescription>
                   </Alert>
                 </CardContent>
@@ -160,9 +160,9 @@ export default function AlertPage() {
                 <CardContent className="p-6">
                   <Alert variant="destructive">
                     <AlertCircle className="h-4 w-4" />
-                    <AlertTitle>Error</AlertTitle>
+                    <AlertTitle>{t.alertComponent.demo.error}</AlertTitle>
                     <AlertDescription>
-                      Your session has expired. Please log in again.
+                      {t.alertComponent.demo.errorDesc}
                     </AlertDescription>
                   </Alert>
                 </CardContent>
@@ -179,9 +179,9 @@ export default function AlertPage() {
                 <CardContent className="p-6">
                   <Alert variant="success">
                     <CheckCircle2 className="h-4 w-4" />
-                    <AlertTitle>Success</AlertTitle>
+                    <AlertTitle>{t.alertComponent.demo.success}</AlertTitle>
                     <AlertDescription>
-                      Your changes have been saved successfully.
+                      {t.alertComponent.demo.successDesc}
                     </AlertDescription>
                   </Alert>
                 </CardContent>
@@ -198,9 +198,9 @@ export default function AlertPage() {
                 <CardContent className="p-6">
                   <Alert variant="warning">
                     <AlertTriangle className="h-4 w-4" />
-                    <AlertTitle>Warning</AlertTitle>
+                    <AlertTitle>{t.alertComponent.demo.warning}</AlertTitle>
                     <AlertDescription>
-                      Your free trial will expire in 3 days.
+                      {t.alertComponent.demo.warningDesc}
                     </AlertDescription>
                   </Alert>
                 </CardContent>
@@ -216,9 +216,9 @@ export default function AlertPage() {
               <Card>
                 <CardContent className="p-6">
                   <Alert>
-                    <AlertTitle>Update Available</AlertTitle>
+                    <AlertTitle>{t.alertComponent.demo.updateAvailable}</AlertTitle>
                     <AlertDescription>
-                      A new version of the application is available.
+                      {t.alertComponent.demo.updateDesc}
                     </AlertDescription>
                   </Alert>
                 </CardContent>
@@ -242,21 +242,21 @@ export default function AlertPage() {
           <Card>
             <CardContent className="p-6 space-y-4">
               <div>
-                <h3 className="font-semibold mb-2">ARIA Roles</h3>
+                <h3 className="font-semibold mb-2">{t.alertComponent.accessibilityDetails.ariaRoles}</h3>
                 <p className="text-muted-foreground">
-                  The Alert component uses <code className="px-1.5 py-0.5 rounded bg-muted">role=&quot;alert&quot;</code> to announce important messages to screen readers.
+                  {t.alertComponent.accessibilityDetails.ariaRolesDesc}
                 </p>
               </div>
               <div>
-                <h3 className="font-semibold mb-2">Semantic HTML</h3>
+                <h3 className="font-semibold mb-2">{t.alertComponent.accessibilityDetails.semanticHtml}</h3>
                 <p className="text-muted-foreground">
-                  Uses semantic heading elements for titles to maintain proper document structure.
+                  {t.alertComponent.accessibilityDetails.semanticHtmlDesc}
                 </p>
               </div>
               <div>
-                <h3 className="font-semibold mb-2">Color Independence</h3>
+                <h3 className="font-semibold mb-2">{t.alertComponent.accessibilityDetails.colorIndependence}</h3>
                 <p className="text-muted-foreground">
-                  Icons and text provide information redundancy, not relying solely on color.
+                  {t.alertComponent.accessibilityDetails.colorIndependenceDesc}
                 </p>
               </div>
             </CardContent>
@@ -267,14 +267,14 @@ export default function AlertPage() {
         <section className="mb-16">
           <h2 className="text-2xl font-bold tracking-tight mb-6">{t.alertComponent.rtl.title}</h2>
           <p className="text-muted-foreground mb-6">
-            The Alert component is fully RTL-compatible using logical properties.
+            {t.alertComponent.rtlDetails.description}
           </p>
           <ComponentShowcase.Comparison ltrLabel="LTR (English)" rtlLabel="RTL (العربية)">
             <Alert>
               <Terminal className="h-4 w-4" />
-              <AlertTitle>System Update</AlertTitle>
+              <AlertTitle>{t.alertComponent.demo.systemUpdate}</AlertTitle>
               <AlertDescription>
-                A new system update is available.
+                {t.alertComponent.demo.systemUpdateDesc}
               </AlertDescription>
             </Alert>
           </ComponentShowcase.Comparison>
@@ -282,14 +282,14 @@ export default function AlertPage() {
 
         {/* Related */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Related Components</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.alertComponent.related.title}</h2>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             <Link href="/components/toast">
               <Card className="hover:border-primary transition-colors">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold mb-2">Toast</h3>
+                  <h3 className="font-semibold mb-2">{t.alertComponent.related.toast}</h3>
                   <p className="text-sm text-muted-foreground">
-                    Temporary notifications
+                    {t.alertComponent.related.toastDesc}
                   </p>
                 </CardContent>
               </Card>
@@ -297,9 +297,9 @@ export default function AlertPage() {
             <Link href="/components/dialog">
               <Card className="hover:border-primary transition-colors">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold mb-2">Dialog</h3>
+                  <h3 className="font-semibold mb-2">{t.alertComponent.related.dialog}</h3>
                   <p className="text-sm text-muted-foreground">
-                    Modal dialogs
+                    {t.alertComponent.related.dialogDesc}
                   </p>
                 </CardContent>
               </Card>

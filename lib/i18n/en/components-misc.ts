@@ -95,6 +95,38 @@ alertComponent: {
         title: 'RTL Considerations',
         description: 'Alerts automatically support RTL layout with proper icon and text alignment.',
       },
+      demo: {
+        headsUp: 'Heads up!',
+        headsUpDesc: 'You can add components to your app using the cli.',
+        error: 'Error',
+        errorDesc: 'Your session has expired. Please log in again.',
+        success: 'Success',
+        successDesc: 'Your changes have been saved successfully.',
+        warning: 'Warning',
+        warningDesc: 'Your free trial will expire in 3 days.',
+        updateAvailable: 'Update Available',
+        updateDesc: 'A new version of the application is available.',
+        systemUpdate: 'System Update',
+        systemUpdateDesc: 'A new system update is available.',
+      },
+      related: {
+        title: 'Related Components',
+        toast: 'Toast',
+        toastDesc: 'Temporary notifications',
+        dialog: 'Dialog',
+        dialogDesc: 'Modal dialogs',
+      },
+      accessibilityDetails: {
+        ariaRoles: 'ARIA Roles',
+        ariaRolesDesc: 'The Alert component uses role="alert" to announce important messages to screen readers.',
+        semanticHtml: 'Semantic HTML',
+        semanticHtmlDesc: 'Uses semantic heading elements for titles to maintain proper document structure.',
+        colorIndependence: 'Color Independence',
+        colorIndependenceDesc: 'Icons and text provide information redundancy, not relying solely on color.',
+      },
+      rtlDetails: {
+        description: 'The Alert component is fully RTL-compatible using logical properties.',
+      },
     },
 
 stepperComponent: {
