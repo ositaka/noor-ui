@@ -8,8 +8,27 @@ import { Separator } from '@/components/ui/separator'
 import { Blockquote, PullQuote } from '@/components/ui/blockquote'
 import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { BestPractices } from '@/components/docs/best-practices'
+import { CodeBlock } from '@/components/docs/code-block'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
+
+const installCode = `npm install noorui-rtl`
+
+const usageCode = `import { Blockquote } from 'noorui-rtl'
+
+<Blockquote author="Author Name" source="Book Title">
+  Quote text goes here.
+</Blockquote>
+
+// With citation URL
+<Blockquote
+  author="Author Name"
+  source="Article Title"
+  cite="https://example.com"
+  variant="accent"
+>
+  Quote with clickable source.
+</Blockquote>`
 
 const getBlockquoteProps = (t: typeof content.en | typeof content.ar): PropDefinition[] => [
   {
@@ -119,40 +138,12 @@ export default function BlockquotePage() {
 
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-6">{t.blockquoteComponent.installation}</h2>
-          <Card>
-            <CardContent className="pt-6">
-              <div className="bg-muted p-4 rounded-lg overflow-x-auto">
-                <pre className="text-sm"><code>npm install noorui-rtl</code></pre>
-              </div>
-            </CardContent>
-          </Card>
+          <CodeBlock code={installCode} language="bash" title="Terminal" />
         </section>
 
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-6">{t.blockquoteComponent.usage}</h2>
-          <Card>
-            <CardContent className="pt-6">
-              <div className="bg-muted p-4 rounded-lg overflow-x-auto">
-                <pre className="text-sm">
-                  <code>{`import { Blockquote } from 'noorui-rtl'
-
-<Blockquote author="Author Name" source="Book Title">
-  Quote text goes here.
-</Blockquote>
-
-// With citation URL
-<Blockquote
-  author="Author Name"
-  source="Article Title"
-  cite="https://example.com"
-  variant="accent"
->
-  Quote with clickable source.
-</Blockquote>`}</code>
-                </pre>
-              </div>
-            </CardContent>
-          </Card>
+          <CodeBlock code={usageCode} language="tsx" title="React" />
         </section>
 
         <Separator className="my-12" />

@@ -7,8 +7,22 @@ import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
 import { UserBadge } from '@/components/ui/user-badge'
 import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
+import { CodeBlock } from '@/components/docs/code-block'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
+
+const installCode = `npm install noorui-rtl`
+
+const usageCode = `import { UserBadge } from 'noorui-rtl'
+
+// Built-in variants
+<UserBadge variant="author" />
+<UserBadge variant="moderator" />
+<UserBadge variant="verified" />
+<UserBadge variant="admin" />
+
+// Custom badge
+<UserBadge variant="custom" label="VIP" icon={<Crown />} />`
 
 const getUserBadgeProps = (t: typeof content.en | typeof content.ar): PropDefinition[] => [
   {
@@ -101,36 +115,13 @@ export default function UserBadgePage() {
         {/* Installation */}
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-6">{t.userBadgeComponent.installation}</h2>
-          <Card>
-            <CardContent className="pt-6">
-              <div className="bg-muted p-4 rounded-lg overflow-x-auto">
-                <pre className="text-sm"><code>npm install noorui-rtl</code></pre>
-              </div>
-            </CardContent>
-          </Card>
+          <CodeBlock code={installCode} language="bash" title="Terminal" />
         </section>
 
         {/* Usage */}
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-6">{t.userBadgeComponent.usage}</h2>
-          <Card>
-            <CardContent className="pt-6">
-              <div className="bg-muted p-4 rounded-lg overflow-x-auto">
-                <pre className="text-sm">
-                  <code>{`import { UserBadge } from 'noorui-rtl'
-
-// Built-in variants
-<UserBadge variant="author" />
-<UserBadge variant="moderator" />
-<UserBadge variant="verified" />
-<UserBadge variant="admin" />
-
-// Custom badge
-<UserBadge variant="custom" label="VIP" icon={<Crown />} />`}</code>
-                </pre>
-              </div>
-            </CardContent>
-          </Card>
+          <CodeBlock code={usageCode} language="tsx" title="React" />
         </section>
 
         <Separator className="my-12" />

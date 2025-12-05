@@ -112,32 +112,32 @@ export default function CommandPage() {
           <ComponentShowcase>
             <ComponentShowcase.Demo>
               <Command className="rounded-lg border shadow-md max-w-md">
-                <CommandInput placeholder="Type a command or search..." />
+                <CommandInput placeholder={cmd.demo.placeholder} />
                 <CommandList>
                   <CommandEmpty>No results found.</CommandEmpty>
-                  <CommandGroup heading="Suggestions">
+                  <CommandGroup heading={cmd.demo.groupHeadings.suggestions}>
                     <CommandItem>
                       <FileText className="me-2 h-4 w-4" />
-                      <span>Calendar</span>
+                      <span>{cmd.demo.suggestions.calendar}</span>
                     </CommandItem>
                     <CommandItem>
                       <Search className="me-2 h-4 w-4" />
-                      <span>Search Emoji</span>
+                      <span>{cmd.demo.suggestions.searchEmoji}</span>
                     </CommandItem>
                     <CommandItem>
                       <Settings className="me-2 h-4 w-4" />
-                      <span>Calculator</span>
+                      <span>{cmd.demo.suggestions.calculator}</span>
                     </CommandItem>
                   </CommandGroup>
                   <CommandSeparator />
-                  <CommandGroup heading="Settings">
+                  <CommandGroup heading={cmd.demo.groupHeadings.settings}>
                     <CommandItem>
                       <User className="me-2 h-4 w-4" />
-                      <span>Profile</span>
+                      <span>{cmd.demo.settings.profile}</span>
                     </CommandItem>
                     <CommandItem>
                       <Settings className="me-2 h-4 w-4" />
-                      <span>Settings</span>
+                      <span>{cmd.demo.settings.settings}</span>
                     </CommandItem>
                   </CommandGroup>
                 </CommandList>
@@ -168,17 +168,17 @@ export default function CommandPage() {
             </button>
 
             <CommandDialog open={open} onOpenChange={setOpen}>
-              <CommandInput placeholder="Type a command or search..." />
+              <CommandInput placeholder={cmd.demo.placeholder} />
               <CommandList>
                 <CommandEmpty>No results found.</CommandEmpty>
-                <CommandGroup heading="Actions">
+                <CommandGroup heading={cmd.demo.groupHeadings.actions}>
                   <CommandItem>
                     <FileText className="me-2 h-4 w-4" />
-                    New File
+                    {cmd.demo.actions.newFile}
                   </CommandItem>
                   <CommandItem>
                     <Search className="me-2 h-4 w-4" />
-                    Search Files
+                    {cmd.demo.actions.searchFiles}
                   </CommandItem>
                 </CommandGroup>
               </CommandList>

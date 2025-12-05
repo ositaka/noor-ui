@@ -254,6 +254,15 @@ stepperComponent: {
     liveDemo: 'Live Demo',
     renderedContent: 'Rendered Content',
     renderedContentDesc: 'Content with automatic direction detection',
+    demo: {
+      sampleContent: `<h3>Sample Content</h3>
+<p>This is <strong>bold</strong> and <em>italic</em> text.</p>
+<ul>
+  <li>List item 1</li>
+  <li>List item 2</li>
+</ul>
+<pre><code>const example = "code block";</code></pre>`,
+    },
     props: {
       title: 'Props',
       content: 'The content to render',

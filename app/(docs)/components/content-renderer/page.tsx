@@ -7,8 +7,27 @@ import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
 import { ContentRenderer } from '@/components/ui/content-renderer'
 import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
+import { CodeBlock } from '@/components/docs/code-block'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
+
+const installCode = `npm install noorui-rtl`
+
+const usageCode = `import { ContentRenderer } from 'noorui-rtl'
+
+// Render HTML content
+<ContentRenderer
+  content={htmlContent}
+  format="html"
+  dir="auto"
+/>
+
+// Render plain text
+<ContentRenderer
+  content={textContent}
+  format="text"
+  dir="rtl"
+/>`
 
 const getContentRendererProps = (t: typeof content.en | typeof content.ar): PropDefinition[] => [
   {
@@ -60,14 +79,6 @@ export default function ContentRendererPage() {
   const t = content[locale]
   const contentRendererProps = getContentRendererProps(t)
 
-  const sampleMarkdown = `<h3>Sample Content</h3>
-<p>This is <strong>bold</strong> and <em>italic</em> text.</p>
-<ul>
-  <li>List item 1</li>
-  <li>List item 2</li>
-</ul>
-<pre><code>const example = "code block";</code></pre>`
-
   return (
     <div className="min-h-screen">
       <main id="main-content" className="container py-12">
@@ -99,7 +110,7 @@ export default function ContentRendererPage() {
               <CardDescription>{t.contentRendererComponent.renderedContentDesc}</CardDescription>
             </CardHeader>
             <CardContent>
-              <ContentRenderer content={sampleMarkdown} format="html" dir="auto" />
+              <ContentRenderer content={t.contentRendererComponent.demo.sampleContent} format="html" dir="auto" />
             </CardContent>
           </Card>
         </section>
@@ -108,40 +119,12 @@ export default function ContentRendererPage() {
 
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-6">{t.contentRendererComponent.installation}</h2>
-          <Card>
-            <CardContent className="pt-6">
-              <div className="bg-muted p-4 rounded-lg overflow-x-auto">
-                <pre className="text-sm"><code>npm install noorui-rtl</code></pre>
-              </div>
-            </CardContent>
-          </Card>
+          <CodeBlock code={installCode} language="bash" title="Terminal" />
         </section>
 
         <section>
           <h2 className="text-2xl font-bold mb-6">{t.contentRendererComponent.usage}</h2>
-          <Card>
-            <CardContent className="pt-6">
-              <div className="bg-muted p-4 rounded-lg overflow-x-auto">
-                <pre className="text-sm">
-                  <code>{`import { ContentRenderer } from 'noorui-rtl'
-
-// Render HTML content
-<ContentRenderer
-  content={htmlContent}
-  format="html"
-  dir="auto"
-/>
-
-// Render plain text
-<ContentRenderer
-  content={textContent}
-  format="text"
-  dir="rtl"
-/>`}</code>
-                </pre>
-              </div>
-            </CardContent>
-          </Card>
+          <CodeBlock code={usageCode} language="tsx" title="React" />
         </section>
 
         <Separator className="my-12" />

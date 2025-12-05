@@ -8,9 +8,30 @@ import { Separator } from '@/components/ui/separator'
 import { StatsCard } from '@/components/ui/stats-card'
 import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { BestPractices } from '@/components/docs/best-practices'
+import { CodeBlock } from '@/components/docs/code-block'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 import { Users, TrendingUp, DollarSign, ShoppingCart } from 'lucide-react'
+
+const installCode = `npm install noorui-rtl`
+
+const usageCode = `import { StatsCard } from 'noorui-rtl'
+import { Users } from 'lucide-react'
+
+<StatsCard
+  icon={<Users className="h-4 w-4" />}
+  label="Total Users"
+  value="2,543"
+  trend={12}
+  trendLabel="from last month"
+/>
+
+// Without trend
+<StatsCard
+  icon={<Icon />}
+  label="Metric Name"
+  value="1,234"
+/>`
 
 const getStatsCardProps = (t: typeof content.en | typeof content.ar): PropDefinition[] => [
   {
@@ -90,28 +111,28 @@ export default function StatsCardPage() {
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
             <StatsCard
               icon={<Users className="h-4 w-4" />}
-              label="Total Users"
+              label={t.statsCardComponent.demoData.totalUsers}
               value="2,543"
               trend={12}
-              trendLabel="from last month"
+              trendLabel={t.statsCardComponent.demoData.fromLastMonth}
             />
             <StatsCard
               icon={<TrendingUp className="h-4 w-4" />}
-              label="Revenue"
+              label={t.statsCardComponent.demoData.revenue}
               value="$45,231"
               trend={8}
-              trendLabel="from last month"
+              trendLabel={t.statsCardComponent.demoData.fromLastMonth}
             />
             <StatsCard
               icon={<DollarSign className="h-4 w-4" />}
-              label="Sales"
+              label={t.statsCardComponent.demoData.sales}
               value="$12,234"
               trend={-3}
-              trendLabel="from last month"
+              trendLabel={t.statsCardComponent.demoData.fromLastMonth}
             />
             <StatsCard
               icon={<ShoppingCart className="h-4 w-4" />}
-              label="Active Orders"
+              label={t.statsCardComponent.demoData.activeOrders}
               value="573"
             />
           </div>
@@ -121,42 +142,12 @@ export default function StatsCardPage() {
 
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-6">{t.statsCardComponent.installation}</h2>
-          <Card>
-            <CardContent className="pt-6">
-              <div className="bg-muted p-4 rounded-lg overflow-x-auto">
-                <pre className="text-sm"><code>npm install noorui-rtl</code></pre>
-              </div>
-            </CardContent>
-          </Card>
+          <CodeBlock code={installCode} language="bash" title="Terminal" />
         </section>
 
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-6">{t.statsCardComponent.usage}</h2>
-          <Card>
-            <CardContent className="pt-6">
-              <div className="bg-muted p-4 rounded-lg overflow-x-auto">
-                <pre className="text-sm">
-                  <code>{`import { StatsCard } from 'noorui-rtl'
-import { Users } from 'lucide-react'
-
-<StatsCard
-  icon={<Users className="h-4 w-4" />}
-  label="Total Users"
-  value="2,543"
-  trend={12}
-  trendLabel="from last month"
-/>
-
-// Without trend
-<StatsCard
-  icon={<Icon />}
-  label="Metric Name"
-  value="1,234"
-/>`}</code>
-                </pre>
-              </div>
-            </CardContent>
-          </Card>
+          <CodeBlock code={usageCode} language="tsx" title="React" />
         </section>
 
         <Separator className="my-12" />

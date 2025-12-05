@@ -254,6 +254,14 @@ stepperComponent: {
     liveDemo: 'عرض مباشر',
     renderedContent: 'المحتوى المعروض',
     renderedContentDesc: 'محتوى مع اكتشاف تلقائي للاتجاه',
+    demo: {
+      sampleContent: `<h3>محتوى عينة</h3>
+<p>هذا نص <strong>غامق</strong> و <em>مائل</em>.</p>
+<ul>
+  <li>عنصر القائمة 1</li>
+  <li>عنصر القائمة 2</li>
+</ul>`,
+    },
     props: {
       title: 'الخصائص',
       content: 'المحتوى المراد عرضه',

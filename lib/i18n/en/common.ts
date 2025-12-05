@@ -23,6 +23,7 @@ ui: {
         save: 'Save',
         delete: 'Delete',
         edit: 'Edit',
+        view: 'View',
         close: 'Close',
         confirm: 'Confirm',
         back: 'Back',
@@ -723,6 +724,7 @@ common: {
       bilingual: 'Bilingual',
     },
     actions: {
+      view: 'View',
       edit: 'Edit',
       preview: 'Preview',
       delete: 'Delete',

@@ -25,93 +25,93 @@ import {
   Package,
 } from 'lucide-react'
 
-const listingCardProps: PropDefinition[] = [
+const getListingCardProps = (t: typeof content.en | typeof content.ar): PropDefinition[] => [
   {
     name: 'title',
     type: 'string',
     required: true,
-    description: 'Main title of the listing',
+    description: t.listingCardComponent.props.title,
   },
   {
     name: 'subtitle',
     type: 'string | React.ReactNode',
     required: false,
-    description: 'Subtitle or location text',
+    description: t.listingCardComponent.props.subtitle,
   },
   {
     name: 'description',
     type: 'string',
     required: false,
-    description: 'Short description (truncated to 2 lines)',
+    description: t.listingCardComponent.props.description,
   },
   {
     name: 'price',
     type: 'string | React.ReactNode',
     required: false,
-    description: 'Price or main value to display',
+    description: t.listingCardComponent.props.price,
   },
   {
     name: 'placeholderIcon',
     type: 'LucideIcon',
     required: false,
-    description: 'Icon when no image is provided',
+    description: t.listingCardComponent.props.placeholderIcon,
   },
   {
     name: 'badges',
     type: 'ListingCardBadge[]',
     required: false,
-    description: 'Badges on top left of image',
+    description: t.listingCardComponent.props.badges,
   },
   {
     name: 'actions',
     type: 'ListingCardAction[]',
     required: false,
-    description: 'Action buttons on top right',
+    description: t.listingCardComponent.props.actions,
   },
   {
     name: 'stats',
     type: 'ListingCardStat[]',
     required: false,
-    description: 'Stats/specs to display',
+    description: t.listingCardComponent.props.stats,
   },
   {
     name: 'tags',
     type: 'ListingCardTag[]',
     required: false,
-    description: 'Tags/amenities to display',
+    description: t.listingCardComponent.props.tags,
   },
   {
     name: 'maxTags',
     type: 'number',
     default: '3',
     required: false,
-    description: 'Max tags before "+N more"',
+    description: t.listingCardComponent.props.maxTags,
   },
   {
     name: 'typeBadge',
     type: 'string',
     required: false,
-    description: 'Type badge next to title',
+    description: t.listingCardComponent.props.typeBadge,
   },
   {
     name: 'ctaText',
     type: 'string',
     required: false,
-    description: 'Call-to-action button text',
+    description: t.listingCardComponent.props.ctaText,
   },
   {
     name: 'featured',
     type: 'boolean',
     default: 'false',
     required: false,
-    description: 'Featured card styling',
+    description: t.listingCardComponent.props.featured,
   },
   {
     name: 'imageAspect',
     type: "'square' | 'video' | 'wide'",
     default: "'video'",
     required: false,
-    description: 'Image aspect ratio',
+    description: t.listingCardComponent.props.imageAspect,
   },
 ]
 
@@ -119,6 +119,7 @@ export default function ListingCardPage() {
   const { direction, locale } = useDirection()
   const isRTL = direction === 'rtl'
   const t = content[locale]
+  const listingCardProps = getListingCardProps(t)
 
   const basicUsage = `import { ListingCard } from 'noorui-rtl'
 import { Home } from 'lucide-react'
@@ -424,8 +425,8 @@ interface ListingCardTag {
       </section>
 
       {/* Use Cases */}
-      <div className="space-y-4">
-        <h2 className="text-2xl font-bold">{t.componentPage.sections.useCases}</h2>
+      <section className="mb-16">
+        <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.useCases}</h2>
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {[
             { icon: '🏠', label: t.listingCardComponent.useCases.realEstate },
@@ -441,19 +442,19 @@ interface ListingCardTag {
             </Card>
           ))}
         </div>
-      </div>
+      </section>
 
       {/* Type Definitions */}
-      <div className="space-y-4">
-        <h2 className="text-2xl font-bold">{t.componentPage.sections.typeDefinitions}</h2>
+      <section className="mb-16">
+        <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.typeDefinitions}</h2>
         <CodeBlock code={typeDefinitions} language="typescript" />
-      </div>
+      </section>
 
       {/* API Reference */}
-      <div className="space-y-4">
-        <h2 className="text-2xl font-bold">{t.componentPage.sections.propsApiReference}</h2>
+      <section className="mb-16">
+        <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.propsApiReference}</h2>
         <PropsTable props={listingCardProps} />
-      </div>
+      </section>
       </main>
     </div>
   )

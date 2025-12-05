@@ -185,16 +185,16 @@ const rtlCode = `// RTL support is automatic!
   </TableBody>
 </Table>`
 
-const users = [
-  { id: '1', name: 'Ahmed Ali', email: 'ahmed@example.com', status: 'Active', role: 'Admin' },
-  { id: '2', name: 'Fatima Hassan', email: 'fatima@example.com', status: 'Active', role: 'User' },
-  { id: '3', name: 'Mohammed Youssef', email: 'mohammed@example.com', status: 'Inactive', role: 'User' },
-  { id: '4', name: 'Sarah Abdullah', email: 'sarah@example.com', status: 'Active', role: 'Editor' },
-]
-
 export default function TablePage() {
   const { locale } = useDirection()
   const t = content[locale]
+
+  const users = [
+    { id: '1', name: t.tableComponent.demoContent.sampleData.ahmed, email: t.tableComponent.demoContent.emails.ahmed, status: t.tableComponent.demoContent.statuses.active, role: t.tableComponent.demoContent.roles.admin },
+    { id: '2', name: t.tableComponent.demoContent.sampleData.fatima, email: t.tableComponent.demoContent.emails.fatima, status: t.tableComponent.demoContent.statuses.active, role: t.tableComponent.demoContent.roles.user },
+    { id: '3', name: t.tableComponent.demoContent.sampleData.mohammed, email: t.tableComponent.demoContent.emails.mohammed, status: t.tableComponent.demoContent.statuses.inactive, role: t.tableComponent.demoContent.roles.user },
+    { id: '4', name: t.tableComponent.demoContent.sampleData.sarah, email: t.tableComponent.demoContent.emails.sarah, status: t.tableComponent.demoContent.statuses.active, role: t.tableComponent.demoContent.roles.editor },
+  ]
 
   const tableProps = getTableProps(t)
   const tableHeaderProps = getTableHeaderProps(t)
@@ -242,13 +242,13 @@ export default function TablePage() {
             <ComponentShowcase.Demo>
               <div className="w-full">
                 <Table>
-                  <TableCaption>A list of recent users</TableCaption>
+                  <TableCaption>{t.tableComponent.demoContent.caption}</TableCaption>
                   <TableHeader>
                     <TableRow>
-                      <TableHead>Name</TableHead>
-                      <TableHead>Email</TableHead>
-                      <TableHead>Status</TableHead>
-                      <TableHead>Role</TableHead>
+                      <TableHead>{t.tableComponent.demoContent.headers.name}</TableHead>
+                      <TableHead>{t.tableComponent.demoContent.headers.email}</TableHead>
+                      <TableHead>{t.tableComponent.demoContent.headers.status}</TableHead>
+                      <TableHead>{t.tableComponent.demoContent.headers.role}</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
@@ -257,7 +257,7 @@ export default function TablePage() {
                         <TableCell className="font-medium">{user.name}</TableCell>
                         <TableCell>{user.email}</TableCell>
                         <TableCell>
-                          <Badge variant={user.status === 'Active' ? 'default' : 'secondary'}>
+                          <Badge variant={user.status === t.tableComponent.demoContent.statuses.active ? 'default' : 'secondary'}>
                             {user.status}
                           </Badge>
                         </TableCell>
@@ -294,49 +294,49 @@ export default function TablePage() {
               <ul className="space-y-2 text-muted-foreground">
                 <li className="flex items-start gap-2">
                   <span className="text-primary mt-1">•</span>
-                  <span>
+                  <span className="flex items-center gap-2">
                     <code className="bg-muted px-1 rounded">Table</code> - Main wrapper with overflow handling
                   </span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-primary mt-1">•</span>
-                  <span>
+                  <span className="flex items-center gap-2">
                     <code className="bg-muted px-1 rounded">TableHeader</code> - thead element for column headers
                   </span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-primary mt-1">•</span>
-                  <span>
+                  <span className="flex items-center gap-2">
                     <code className="bg-muted px-1 rounded">TableBody</code> - tbody element for data rows
                   </span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-primary mt-1">•</span>
-                  <span>
+                  <span className="flex items-center gap-2">
                     <code className="bg-muted px-1 rounded">TableFooter</code> - tfoot element for summary rows
                   </span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-primary mt-1">•</span>
-                  <span>
+                  <span className="flex items-center gap-2">
                     <code className="bg-muted px-1 rounded">TableRow</code> - tr element with hover effects
                   </span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-primary mt-1">•</span>
-                  <span>
+                  <span className="flex items-center gap-2">
                     <code className="bg-muted px-1 rounded">TableHead</code> - th element with text-start for RTL
                   </span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-primary mt-1">•</span>
-                  <span>
+                  <span className="flex items-center gap-2">
                     <code className="bg-muted px-1 rounded">TableCell</code> - td element for data cells
                   </span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-primary mt-1">•</span>
-                  <span>
+                  <span className="flex items-center gap-2">
                     <code className="bg-muted px-1 rounded">TableCaption</code> - caption element for table description
                   </span>
                 </li>
@@ -352,37 +352,37 @@ export default function TablePage() {
           <div className="space-y-8">
             {/* With Caption */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">Table with Caption</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.tableComponent.examples.withCaption}</h3>
               <Card>
                 <CardContent className="p-6">
                   <Table>
-                    <TableCaption>A list of your recent transactions</TableCaption>
+                    <TableCaption>{t.tableComponent.demoContent.captionTransactions}</TableCaption>
                     <TableHeader>
                       <TableRow>
-                        <TableHead>Invoice</TableHead>
-                        <TableHead>Status</TableHead>
-                        <TableHead>Method</TableHead>
-                        <TableHead>Amount</TableHead>
+                        <TableHead>{t.tableComponent.demoContent.headers.invoice}</TableHead>
+                        <TableHead>{t.tableComponent.demoContent.headers.status}</TableHead>
+                        <TableHead>{t.tableComponent.demoContent.headers.method}</TableHead>
+                        <TableHead>{t.tableComponent.demoContent.headers.amount}</TableHead>
                       </TableRow>
                     </TableHeader>
                     <TableBody>
                       <TableRow>
-                        <TableCell>INV-001</TableCell>
-                        <TableCell><Badge>Paid</Badge></TableCell>
-                        <TableCell>Credit Card</TableCell>
-                        <TableCell>$250.00</TableCell>
+                        <TableCell>{t.tableComponent.demoContent.invoices.inv001}</TableCell>
+                        <TableCell><Badge>{t.tableComponent.demoContent.statuses.paid}</Badge></TableCell>
+                        <TableCell>{t.tableComponent.demoContent.paymentMethods.creditCard}</TableCell>
+                        <TableCell>{t.tableComponent.demoContent.amounts.amount250}</TableCell>
                       </TableRow>
                       <TableRow>
-                        <TableCell>INV-002</TableCell>
-                        <TableCell><Badge variant="secondary">Pending</Badge></TableCell>
-                        <TableCell>PayPal</TableCell>
-                        <TableCell>$150.00</TableCell>
+                        <TableCell>{t.tableComponent.demoContent.invoices.inv002}</TableCell>
+                        <TableCell><Badge variant="secondary">{t.tableComponent.demoContent.statuses.pending}</Badge></TableCell>
+                        <TableCell>{t.tableComponent.demoContent.paymentMethods.paypal}</TableCell>
+                        <TableCell>{t.tableComponent.demoContent.amounts.amount150}</TableCell>
                       </TableRow>
                       <TableRow>
-                        <TableCell>INV-003</TableCell>
-                        <TableCell><Badge>Paid</Badge></TableCell>
-                        <TableCell>Bank Transfer</TableCell>
-                        <TableCell>$350.00</TableCell>
+                        <TableCell>{t.tableComponent.demoContent.invoices.inv003}</TableCell>
+                        <TableCell><Badge>{t.tableComponent.demoContent.statuses.paid}</Badge></TableCell>
+                        <TableCell>{t.tableComponent.demoContent.paymentMethods.bankTransfer}</TableCell>
+                        <TableCell>{t.tableComponent.demoContent.amounts.amount350}</TableCell>
                       </TableRow>
                     </TableBody>
                   </Table>
@@ -532,34 +532,30 @@ export default function TablePage() {
           <Card>
             <CardContent className="p-6 space-y-4">
               <div>
-                <h3 className="font-semibold mb-2">Semantic HTML</h3>
+                <h3 className="font-semibold mb-2">{t.tableComponent.accessibility.semanticHTML}</h3>
                 <p className="text-muted-foreground">
-                  Uses proper semantic table elements (table, thead, tbody, tfoot, th, td) for
-                  screen reader compatibility and accessibility.
+                  {t.tableComponent.accessibility.semanticHTMLDesc}
                 </p>
               </div>
               <Separator />
               <div>
-                <h3 className="font-semibold mb-2">Table Caption</h3>
+                <h3 className="font-semibold mb-2">{t.tableComponent.accessibility.tableCaption}</h3>
                 <p className="text-muted-foreground">
-                  Always include a TableCaption to describe the table&apos;s purpose for screen reader users.
-                  The caption can be visually hidden if needed while remaining accessible.
+                  {t.tableComponent.accessibility.tableCaptionDesc}
                 </p>
               </div>
               <Separator />
               <div>
-                <h3 className="font-semibold mb-2">Column Headers</h3>
+                <h3 className="font-semibold mb-2">{t.tableComponent.accessibility.columnHeaders}</h3>
                 <p className="text-muted-foreground">
-                  TableHead components render as th elements, which are automatically associated with
-                  their column&apos;s cells by assistive technologies.
+                  {t.tableComponent.accessibility.columnHeadersDesc}
                 </p>
               </div>
               <Separator />
               <div>
-                <h3 className="font-semibold mb-2">Keyboard Navigation</h3>
+                <h3 className="font-semibold mb-2">{t.tableComponent.accessibility.keyboardNavigation}</h3>
                 <p className="text-muted-foreground">
-                  For interactive tables, ensure all interactive elements (buttons, checkboxes) are
-                  keyboard accessible with proper tab order and focus indicators.
+                  {t.tableComponent.accessibility.keyboardNavigationDesc}
                 </p>
               </div>
             </CardContent>
@@ -572,49 +568,47 @@ export default function TablePage() {
           <Card>
             <CardContent className="p-6 space-y-4">
               <p className="text-muted-foreground">
-                Tables automatically support RTL layout with proper text alignment. The TableHead
-                component uses <code className="bg-muted px-1 rounded">text-start</code> to ensure
-                headers align correctly in both LTR and RTL contexts.
+                {t.tableComponent.rtl.description}
               </p>
               <CodeBlock code={rtlCode} language="tsx" />
               <div className="grid gap-4 md:grid-cols-2 mt-6">
                 <div className="space-y-2">
-                  <h4 className="font-semibold text-sm">LTR (English)</h4>
+                  <h4 className="font-semibold text-sm">{t.tableComponent.rtl.ltr}</h4>
                   <div dir="ltr">
                     <Table>
                       <TableHeader>
                         <TableRow>
-                          <TableHead>Name</TableHead>
-                          <TableHead>Status</TableHead>
-                          <TableHead>Email</TableHead>
+                          <TableHead>{content.en.tableComponent.demoContent.headers.name}</TableHead>
+                          <TableHead>{content.en.tableComponent.demoContent.headers.status}</TableHead>
+                          <TableHead>{content.en.tableComponent.demoContent.headers.email}</TableHead>
                         </TableRow>
                       </TableHeader>
                       <TableBody>
                         <TableRow>
-                          <TableCell>Ahmed Ali</TableCell>
-                          <TableCell><Badge variant="outline">Active</Badge></TableCell>
-                          <TableCell>ahmed@example.com</TableCell>
+                          <TableCell>{content.en.tableComponent.demoContent.sampleData.ahmed}</TableCell>
+                          <TableCell><Badge variant="outline">{content.en.tableComponent.demoContent.statuses.active}</Badge></TableCell>
+                          <TableCell>{content.en.tableComponent.demoContent.emails.ahmed}</TableCell>
                         </TableRow>
                       </TableBody>
                     </Table>
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <h4 className="font-semibold text-sm">RTL (العربية)</h4>
+                  <h4 className="font-semibold text-sm">{t.tableComponent.rtl.rtlLabel}</h4>
                   <div dir="rtl">
                     <Table>
                       <TableHeader>
                         <TableRow>
-                          <TableHead>الاسم</TableHead>
-                          <TableHead>الحالة</TableHead>
-                          <TableHead>البريد</TableHead>
+                          <TableHead>{content.ar.tableComponent.demoContent.headers.name}</TableHead>
+                          <TableHead>{content.ar.tableComponent.demoContent.headers.status}</TableHead>
+                          <TableHead>{content.ar.tableComponent.demoContent.headers.email}</TableHead>
                         </TableRow>
                       </TableHeader>
                       <TableBody>
                         <TableRow>
-                          <TableCell>أحمد علي</TableCell>
-                          <TableCell><Badge variant="outline">نشط</Badge></TableCell>
-                          <TableCell>ahmed@example.com</TableCell>
+                          <TableCell>{content.ar.tableComponent.demoContent.sampleData.ahmed}</TableCell>
+                          <TableCell><Badge variant="outline">{content.ar.tableComponent.demoContent.statuses.active}</Badge></TableCell>
+                          <TableCell>{content.ar.tableComponent.demoContent.emails.ahmed}</TableCell>
                         </TableRow>
                       </TableBody>
                     </Table>
@@ -632,9 +626,9 @@ export default function TablePage() {
             <Link href="/components/checkbox">
               <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold">Checkbox</h3>
+                  <h3 className="font-semibold">{t.tableComponent.related.checkbox}</h3>
                   <p className="text-sm text-muted-foreground mt-1">
-                    Row selection in tables
+                    {t.tableComponent.related.checkboxDesc}
                   </p>
                 </CardContent>
               </Card>
@@ -642,9 +636,9 @@ export default function TablePage() {
             <Link href="/components/badge">
               <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold">Badge</h3>
+                  <h3 className="font-semibold">{t.tableComponent.related.badge}</h3>
                   <p className="text-sm text-muted-foreground mt-1">
-                    Status indicators in cells
+                    {t.tableComponent.related.badgeDesc}
                   </p>
                 </CardContent>
               </Card>
@@ -652,9 +646,9 @@ export default function TablePage() {
             <Link href="/components/pagination">
               <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold">Pagination</h3>
+                  <h3 className="font-semibold">{t.tableComponent.related.pagination}</h3>
                   <p className="text-sm text-muted-foreground mt-1">
-                    Navigate large datasets
+                    {t.tableComponent.related.paginationDesc}
                   </p>
                 </CardContent>
               </Card>

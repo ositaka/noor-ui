@@ -23,6 +23,7 @@ ui: {
         save: 'حفظ',
         delete: 'حذف',
         edit: 'تعديل',
+        view: 'عرض',
         close: 'إغلاق',
         confirm: 'تأكيد',
         back: 'رجوع',
@@ -723,6 +724,7 @@ common: {
       bilingual: 'ثنائي اللغة',
     },
     actions: {
+      view: 'عرض',
       edit: 'تحرير',
       preview: 'معاينة',
       delete: 'حذف',
