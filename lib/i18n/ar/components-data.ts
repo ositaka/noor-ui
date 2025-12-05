@@ -185,9 +185,56 @@ dataTableComponent: {
       messages: {
         noUsersFound: 'لم يتم العثور على مستخدمين مطابقين لبحثك',
       },
+      pagination: {
+        next: 'التالي',
+        previous: 'السابق',
+        pageOfTotal: (current: number, total: number) => {
+          const toArabicNumerals = (num: number) =>
+            num.toString().replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[parseInt(d)])
+          return `صفحة ${toArabicNumerals(current)} من ${toArabicNumerals(total)}`
+        },
+      },
       props: {
         dataTableProps: 'خصائص DataTable',
         columnDefProps: 'خصائص ColumnDef',
+      },
+      propDescriptions: {
+        dataTable: {
+          data: 'مصفوفة البيانات المراد عرضها في الجدول',
+          columns: 'تعريفات الأعمدة بما في ذلك الرؤوس والمحددات ومعالجات الخلايا',
+          isLoading: 'إظهار حالة التحميل الهيكلي',
+          sortBy: 'معرف العمود المفروز حالياً',
+          sortDirection: 'اتجاه الفرز الحالي',
+          onSort: 'دالة رد الاتصال عند النقر على رأس العمود للفرز (الوضع الخارجي)',
+          enableSorting: 'تفعيل الفرز الداخلي (يدير حالة الفرز تلقائياً). استخدم هذا للجداول البسيطة التي لا تحتاج إلى إدارة حالة خارجية',
+          defaultSortBy: 'العمود الافتراضي للفرز (يتطلب enableSorting)',
+          defaultSortDirection: 'اتجاه الفرز الافتراضي (يتطلب enableSorting)',
+          searchable: 'تفعيل حقل البحث أعلى الجدول',
+          searchPlaceholder: 'نص العنصر النائب لحقل البحث (بالإنجليزية)',
+          searchValue: 'قيمة البحث المتحكم بها',
+          onSearchChange: 'دالة رد الاتصال عند تغيير قيمة البحث',
+          pagination: 'تفعيل عناصر التحكم في الترقيم',
+          currentPage: 'رقم الصفحة الحالية',
+          totalPages: 'العدد الإجمالي للصفحات',
+          pageSize: 'عدد الصفوف لكل صفحة',
+          onPageChange: 'دالة رد الاتصال عند تغيير الصفحة',
+          mobileView: 'نوع العرض على الأجهزة المحمولة: بطاقات مكدسة أو جدول قابل للتمرير الأفقي',
+          mobileSorting: 'إظهار أزرار الفرز في عرض البطاقات على الأجهزة المحمولة (ينطبق فقط على وضع البطاقات)',
+          emptyMessage: 'الرسالة المراد إظهارها عند عدم وجود بيانات',
+          striped: 'ألوان خلفية متناوبة للصفوف',
+          hoverable: 'إظهار تأثير التمرير على الصفوف',
+          compact: 'تقليل المساحة للحصول على تخطيط أكثر كثافة',
+        },
+        columnDef: {
+          id: 'معرف العمود الفريد',
+          header: 'نص رأس العمود (بالإنجليزية)',
+          headerAr: 'نص رأس العمود (بالعربية)',
+          accessorKey: 'المفتاح في كائن البيانات للوصول إلى هذا العمود',
+          cell: 'دالة عرض الخلية المخصصة',
+          sortable: 'تفعيل الفرز لهذا العمود',
+          align: 'محاذاة النص في الخلايا',
+          width: 'عرض العمود (قيمة CSS)',
+        },
       },
       accessibility: {
         semanticHtml: {

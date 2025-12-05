@@ -14,174 +14,188 @@ import { Sparkles } from 'lucide-react'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 
-const dataTableProps: PropDefinition[] = [
+interface User {
+  id: string
+  name: string
+  email: string
+  status: string
+  role: string
+  joinDate: string
+}
+
+// Move prop definitions inside component to access translations
+export default function DataTablePage() {
+  const { locale } = useDirection()
+  const t = content[locale]
+
+  const dataTableProps: PropDefinition[] = [
   {
     name: 'data',
     type: 'T[]',
     default: '-',
     required: true,
-    description: 'Array of data to display in the table',
+    description: t.dataTableComponent.propDescriptions.dataTable.data,
   },
   {
     name: 'columns',
     type: 'ColumnDef<T>[]',
     default: '-',
     required: true,
-    description: 'Column definitions including headers, accessors, and cell renderers',
+    description: t.dataTableComponent.propDescriptions.dataTable.columns,
   },
   {
     name: 'isLoading',
     type: 'boolean',
     default: 'false',
     required: false,
-    description: 'Show skeleton loading state',
+    description: t.dataTableComponent.propDescriptions.dataTable.isLoading,
   },
   {
     name: 'sortBy',
     type: 'string',
     default: 'undefined',
     required: false,
-    description: 'Currently sorted column ID',
+    description: t.dataTableComponent.propDescriptions.dataTable.sortBy,
   },
   {
     name: 'sortDirection',
     type: "'asc' | 'desc' | null",
     default: 'null',
     required: false,
-    description: 'Current sort direction',
+    description: t.dataTableComponent.propDescriptions.dataTable.sortDirection,
   },
   {
     name: 'onSort',
     type: '(columnId: string) => void',
     default: 'undefined',
     required: false,
-    description: 'Callback when column header is clicked for sorting (external mode)',
+    description: t.dataTableComponent.propDescriptions.dataTable.onSort,
   },
   {
     name: 'enableSorting',
     type: 'boolean',
     default: 'false',
     required: false,
-    description: 'Enable internal sorting (auto-manages sort state). Use this for simple tables that don\'t need external state management',
+    description: t.dataTableComponent.propDescriptions.dataTable.enableSorting,
   },
   {
     name: 'defaultSortBy',
     type: 'string',
     default: 'undefined',
     required: false,
-    description: 'Default column to sort by (requires enableSorting)',
+    description: t.dataTableComponent.propDescriptions.dataTable.defaultSortBy,
   },
   {
     name: 'defaultSortDirection',
     type: "'asc' | 'desc' | null",
     default: "'asc'",
     required: false,
-    description: 'Default sort direction (requires enableSorting)',
+    description: t.dataTableComponent.propDescriptions.dataTable.defaultSortDirection,
   },
   {
     name: 'searchable',
     type: 'boolean',
     default: 'false',
     required: false,
-    description: 'Enable search input above table',
+    description: t.dataTableComponent.propDescriptions.dataTable.searchable,
   },
   {
     name: 'searchPlaceholder',
     type: 'string',
     default: "'Search...'",
     required: false,
-    description: 'Placeholder text for search input (English)',
+    description: t.dataTableComponent.propDescriptions.dataTable.searchPlaceholder,
   },
   {
     name: 'searchValue',
     type: 'string',
     default: "''",
     required: false,
-    description: 'Controlled search value',
+    description: t.dataTableComponent.propDescriptions.dataTable.searchValue,
   },
   {
     name: 'onSearchChange',
     type: '(value: string) => void',
     default: 'undefined',
     required: false,
-    description: 'Callback when search value changes',
+    description: t.dataTableComponent.propDescriptions.dataTable.onSearchChange,
   },
   {
     name: 'pagination',
     type: 'boolean',
     default: 'false',
     required: false,
-    description: 'Enable pagination controls',
+    description: t.dataTableComponent.propDescriptions.dataTable.pagination,
   },
   {
     name: 'currentPage',
     type: 'number',
     default: '1',
     required: false,
-    description: 'Current page number',
+    description: t.dataTableComponent.propDescriptions.dataTable.currentPage,
   },
   {
     name: 'totalPages',
     type: 'number',
     default: '1',
     required: false,
-    description: 'Total number of pages',
+    description: t.dataTableComponent.propDescriptions.dataTable.totalPages,
   },
   {
     name: 'pageSize',
     type: 'number',
     default: '10',
     required: false,
-    description: 'Number of rows per page',
+    description: t.dataTableComponent.propDescriptions.dataTable.pageSize,
   },
   {
     name: 'onPageChange',
     type: '(page: number) => void',
     default: 'undefined',
     required: false,
-    description: 'Callback when page changes',
+    description: t.dataTableComponent.propDescriptions.dataTable.onPageChange,
   },
   {
     name: 'mobileView',
     type: "'table' | 'cards'",
     default: "'cards'",
     required: false,
-    description: 'Mobile view type: stacked cards or horizontal scroll table',
+    description: t.dataTableComponent.propDescriptions.dataTable.mobileView,
   },
   {
     name: 'mobileSorting',
     type: 'boolean',
     default: 'true',
     required: false,
-    description: 'Show sort buttons on mobile card view (only applies to cards mode)',
+    description: t.dataTableComponent.propDescriptions.dataTable.mobileSorting,
   },
   {
     name: 'emptyMessage',
     type: 'string',
     default: "'No results found'",
     required: false,
-    description: 'Message to show when no data',
+    description: t.dataTableComponent.propDescriptions.dataTable.emptyMessage,
   },
   {
     name: 'striped',
     type: 'boolean',
     default: 'false',
     required: false,
-    description: 'Alternate row background colors',
+    description: t.dataTableComponent.propDescriptions.dataTable.striped,
   },
   {
     name: 'hoverable',
     type: 'boolean',
     default: 'true',
     required: false,
-    description: 'Show hover effect on rows',
+    description: t.dataTableComponent.propDescriptions.dataTable.hoverable,
   },
   {
     name: 'compact',
     type: 'boolean',
     default: 'false',
     required: false,
-    description: 'Reduced padding for denser layout',
+    description: t.dataTableComponent.propDescriptions.dataTable.compact,
   },
 ]
 
@@ -191,56 +205,56 @@ const columnDefProps: PropDefinition[] = [
     type: 'string',
     default: '-',
     required: true,
-    description: 'Unique column identifier',
+    description: t.dataTableComponent.propDescriptions.columnDef.id,
   },
   {
     name: 'header',
     type: 'string',
     default: '-',
     required: true,
-    description: 'Column header text (English)',
+    description: t.dataTableComponent.propDescriptions.columnDef.header,
   },
   {
     name: 'headerAr',
     type: 'string',
     default: 'undefined',
     required: false,
-    description: 'Column header text (Arabic)',
+    description: t.dataTableComponent.propDescriptions.columnDef.headerAr,
   },
   {
     name: 'accessorKey',
     type: 'keyof T',
     default: '-',
     required: true,
-    description: 'Key in data object to access for this column',
+    description: t.dataTableComponent.propDescriptions.columnDef.accessorKey,
   },
   {
     name: 'cell',
     type: '(row: T) => React.ReactNode',
     default: 'undefined',
     required: false,
-    description: 'Custom cell renderer function',
+    description: t.dataTableComponent.propDescriptions.columnDef.cell,
   },
   {
     name: 'sortable',
     type: 'boolean',
     default: 'false',
     required: false,
-    description: 'Enable sorting for this column',
+    description: t.dataTableComponent.propDescriptions.columnDef.sortable,
   },
   {
     name: 'align',
     type: "'start' | 'center' | 'end'",
     default: "'start'",
     required: false,
-    description: 'Text alignment in cells',
+    description: t.dataTableComponent.propDescriptions.columnDef.align,
   },
   {
     name: 'width',
     type: 'string',
     default: 'undefined',
     required: false,
-    description: 'Column width (CSS value)',
+    description: t.dataTableComponent.propDescriptions.columnDef.width,
   },
 ]
 
@@ -423,84 +437,65 @@ const customCellCode = `const columns: ColumnDef<User>[] = [
   },
 ]`
 
-interface User {
-  id: string
-  name: string
-  email: string
-  status: string
-  role: string
-  joinDate: string
-  nameAr?: string
-}
-
-const sampleUsers: User[] = [
-  {
-    id: '1',
-    name: 'Ahmed Ali',
-    nameAr: 'أحمد علي',
-    email: 'ahmed@example.com',
-    status: 'Active',
-    role: 'Admin',
-    joinDate: '2024-01-15'
-  },
-  {
-    id: '2',
-    name: 'Fatima Hassan',
-    nameAr: 'فاطمة حسن',
-    email: 'fatima@example.com',
-    status: 'Active',
-    role: 'Editor',
-    joinDate: '2024-02-20'
-  },
-  {
-    id: '3',
-    name: 'Mohammed Youssef',
-    nameAr: 'محمد يوسف',
-    email: 'mohammed@example.com',
-    status: 'Inactive',
-    role: 'User',
-    joinDate: '2024-03-10'
-  },
-  {
-    id: '4',
-    name: 'Sarah Abdullah',
-    nameAr: 'سارة عبدالله',
-    email: 'sarah@example.com',
-    status: 'Active',
-    role: 'Editor',
-    joinDate: '2024-03-25'
-  },
-  {
-    id: '5',
-    name: 'Omar Ibrahim',
-    nameAr: 'عمر إبراهيم',
-    email: 'omar@example.com',
-    status: 'Active',
-    role: 'User',
-    joinDate: '2024-04-05'
-  },
-]
-
-export default function DataTablePage() {
-  const { locale } = useDirection()
-  const t = content[locale]
+  const sampleUsers: User[] = [
+    {
+      id: '1',
+      name: t.tableComponent.demoContent.sampleData.ahmed,
+      email: t.tableComponent.demoContent.emails.ahmed,
+      status: t.tableComponent.demoContent.statuses.active,
+      role: t.tableComponent.demoContent.roles.admin,
+      joinDate: '2024-01-15'
+    },
+    {
+      id: '2',
+      name: t.tableComponent.demoContent.sampleData.fatima,
+      email: t.tableComponent.demoContent.emails.fatima,
+      status: t.tableComponent.demoContent.statuses.active,
+      role: t.tableComponent.demoContent.roles.editor,
+      joinDate: '2024-02-20'
+    },
+    {
+      id: '3',
+      name: t.tableComponent.demoContent.sampleData.mohammed,
+      email: t.tableComponent.demoContent.emails.mohammed,
+      status: t.tableComponent.demoContent.statuses.inactive,
+      role: t.tableComponent.demoContent.roles.user,
+      joinDate: '2024-03-10'
+    },
+    {
+      id: '4',
+      name: t.tableComponent.demoContent.sampleData.sarah,
+      email: t.tableComponent.demoContent.emails.sarah,
+      status: t.tableComponent.demoContent.statuses.active,
+      role: t.tableComponent.demoContent.roles.editor,
+      joinDate: '2024-03-25'
+    },
+    {
+      id: '5',
+      name: t.tableComponent.demoContent.sampleData.omar,
+      email: t.tableComponent.demoContent.emails.omar,
+      status: t.tableComponent.demoContent.statuses.active,
+      role: t.tableComponent.demoContent.roles.user,
+      joinDate: '2024-04-05'
+    },
+  ]
   // Basic example state
-  const [basicColumns] = React.useState<ColumnDef<User>[]>([
-    { id: 'name', header: 'Name', headerAr: 'الاسم', accessorKey: 'name' },
-    { id: 'email', header: 'Email', headerAr: 'البريد', accessorKey: 'email' },
-    { id: 'role', header: 'Role', headerAr: 'الدور', accessorKey: 'role' },
-  ])
+  const basicColumns: ColumnDef<User>[] = React.useMemo(() => [
+    { id: 'name', header: t.tableComponent.demoContent.headers.name, accessorKey: 'name' },
+    { id: 'email', header: t.tableComponent.demoContent.headers.email, accessorKey: 'email' },
+    { id: 'role', header: t.tableComponent.demoContent.headers.role, accessorKey: 'role' },
+  ], [t])
 
   // Sortable example state
   const [sortBy, setSortBy] = React.useState<string>()
   const [sortDirection, setSortDirection] = React.useState<SortDirection>(null)
 
-  const sortableColumns: ColumnDef<User>[] = [
-    { id: 'name', header: 'Name', accessorKey: 'name', sortable: true },
-    { id: 'email', header: 'Email', accessorKey: 'email', sortable: true },
-    { id: 'role', header: 'Role', accessorKey: 'role', sortable: true },
-    { id: 'joinDate', header: 'Join Date', accessorKey: 'joinDate', sortable: true },
-  ]
+  const sortableColumns: ColumnDef<User>[] = React.useMemo(() => [
+    { id: 'name', header: t.tableComponent.demoContent.headers.name, accessorKey: 'name', sortable: true },
+    { id: 'email', header: t.tableComponent.demoContent.headers.email, accessorKey: 'email', sortable: true },
+    { id: 'role', header: t.tableComponent.demoContent.headers.role, accessorKey: 'role', sortable: true },
+    { id: 'joinDate', header: t.tableComponent.demoContent.headers.joinDate, accessorKey: 'joinDate', sortable: true },
+  ], [t])
 
   const handleSort = (columnId: string) => {
     if (sortBy === columnId) {
@@ -573,42 +568,42 @@ export default function DataTablePage() {
   }, [filteredUsers, completePage, completePageSize])
 
   // Custom cells example
-  const customColumns: ColumnDef<User>[] = [
+  const customColumns = React.useMemo<ColumnDef<User>[]>(() => [
     {
       id: 'name',
-      header: 'Name',
+      header: t.tableComponent.demoContent.headers.name,
       accessorKey: 'name',
       cell: (row) => <div className="font-medium">{row.name}</div>,
     },
     {
       id: 'email',
-      header: 'Email',
+      header: t.tableComponent.demoContent.headers.email,
       accessorKey: 'email',
       cell: (row) => <div className="text-muted-foreground">{row.email}</div>,
     },
     {
       id: 'status',
-      header: 'Status',
+      header: t.tableComponent.demoContent.headers.status,
       accessorKey: 'status',
       cell: (row) => (
-        <Badge variant={row.status === 'Active' ? 'default' : 'secondary'}>
+        <Badge variant={row.status === t.tableComponent.demoContent.statuses.active ? 'default' : 'secondary'}>
           {row.status}
         </Badge>
       ),
     },
     {
       id: 'actions',
-      header: 'Actions',
+      header: t.tableComponent.demoContent.headers.actions,
       accessorKey: 'id',
       align: 'end',
       cell: (row) => (
         <div className="flex gap-2 justify-end">
-          <Button size="sm" variant="outline">View</Button>
-          <Button size="sm" variant="ghost">Edit</Button>
+          <Button size="sm" variant="outline">{t.ui.button.view}</Button>
+          <Button size="sm" variant="ghost">{t.ui.button.edit}</Button>
         </div>
       ),
     },
-  ]
+  ], [t])
 
   // Loading state
   const [isLoading, setIsLoading] = React.useState(false)
@@ -799,10 +794,10 @@ export default function DataTablePage() {
                     data={filteredUsers}
                     columns={basicColumns}
                     searchable
-                    searchPlaceholder="Search by name, email, or role..."
+                    searchPlaceholder={t.dataTableComponent.placeholders.searchByNameEmailRole}
                     searchValue={searchValue}
                     onSearchChange={setSearchValue}
-                    emptyMessage="No users found matching your search"
+                    emptyMessage={t.dataTableComponent.messages.noUsersFound}
                   />
                 </CardContent>
               </Card>
@@ -824,6 +819,9 @@ export default function DataTablePage() {
                     totalPages={totalPages}
                     pageSize={pageSize}
                     onPageChange={setCurrentPage}
+                    nextLabel={t.dataTableComponent.pagination.next}
+                    previousLabel={t.dataTableComponent.pagination.previous}
+                    pageLabel={t.dataTableComponent.pagination.pageOfTotal(currentPage, totalPages)}
                   />
                 </CardContent>
               </Card>
@@ -897,7 +895,7 @@ useEffect(() => {
                     data={paginatedFilteredData}
                     columns={sortableColumns}
                     searchable
-                    searchPlaceholder="Search users..."
+                    searchPlaceholder={t.dataTableComponent.placeholders.searchUsers}
                     searchValue={searchValue}
                     onSearchChange={setSearchValue}
                     sortBy={sortBy}
@@ -908,6 +906,9 @@ useEffect(() => {
                     totalPages={Math.ceil(filteredUsers.length / completePageSize)}
                     pageSize={completePageSize}
                     onPageChange={setCompletePage}
+                    nextLabel={t.dataTableComponent.pagination.next}
+                    previousLabel={t.dataTableComponent.pagination.previous}
+                    pageLabel={t.dataTableComponent.pagination.pageOfTotal(completePage, Math.ceil(filteredUsers.length / completePageSize))}
                     striped
                   />
                 </CardContent>
