@@ -9,6 +9,7 @@ import { Kbd } from '@/components/ui/kbd'
 import { Button } from '@/components/ui/button'
 import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { BestPractices } from '@/components/docs/best-practices'
+import { CodeBlock } from '@/components/docs/code-block'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 
@@ -111,22 +112,12 @@ export default function KbdPage() {
 
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-6">{t.kbdComponent.installation}</h2>
-          <Card>
-            <CardContent className="pt-6">
-              <div className="bg-muted p-4 rounded-lg overflow-x-auto">
-                <pre className="text-sm"><code>npm install noorui-rtl</code></pre>
-              </div>
-            </CardContent>
-          </Card>
+          <CodeBlock code="npm install noorui-rtl" language="bash" />
         </section>
 
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-6">{t.kbdComponent.usage}</h2>
-          <Card>
-            <CardContent className="pt-6">
-              <div className="bg-muted p-4 rounded-lg overflow-x-auto">
-                <pre className="text-sm">
-                  <code>{`import { Kbd } from 'noorui-rtl'
+          <CodeBlock code={`import { Kbd } from 'noorui-rtl'
 
 // Platform-aware (⌘ on Mac, Ctrl on Windows)
 <Kbd keys={['mod', 'k']} />
@@ -138,11 +129,7 @@ export default function KbdPage() {
 // In buttons
 <Button>
   Submit <Kbd keys={['mod', 'enter']} size="sm" />
-</Button>`}</code>
-                </pre>
-              </div>
-            </CardContent>
-          </Card>
+</Button>`} language="tsx" />
         </section>
 
         <Separator className="my-12" />

@@ -311,35 +311,34 @@ export default function DashboardShellPage() {
           <ol className="flex items-center gap-2 text-sm text-muted-foreground">
             <li>
               <Link href="/" className="hover:text-foreground transition-colors">
-                Home
+                {t.common.home}
               </Link>
             </li>
             <li>/</li>
             <li>
               <Link href="/components" className="hover:text-foreground transition-colors">
-                Components
+                {t.nav.components}
               </Link>
             </li>
             <li>/</li>
-            <li className="text-foreground font-medium">Dashboard Shell</li>
+            <li className="text-foreground font-medium">{t.dashboardShellComponent.title}</li>
           </ol>
         </nav>
 
         {/* Page Header */}
         <div className="mb-12">
           <div className="flex items-center gap-3 mb-4">
-            <h1 className="text-4xl font-bold tracking-tight">Dashboard Shell</h1>
-            <Badge variant="default">New</Badge>
+            <h1 className="text-4xl font-bold tracking-tight">{t.dashboardShellComponent.title}</h1>
+            <Badge variant="default">{t.dashboardShellComponent.badge}</Badge>
           </div>
           <p className="text-xl text-muted-foreground max-w-3xl">
-            A complete dashboard layout with sidebar navigation, header with user menu and
-            notifications, and full RTL support. Perfect for admin panels and web applications.
+            {t.dashboardShellComponent.description}
           </p>
         </div>
 
         {/* Preview */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Preview</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.dashboardShellComponent.sections.preview}</h2>
           <Card>
             <CardContent className="p-0">
               <div className="h-[600px] overflow-hidden rounded-lg border">
@@ -370,13 +369,13 @@ export default function DashboardShellPage() {
 
         {/* Usage */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Usage</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.dashboardShellComponent.sections.usage}</h2>
           <CodeBlock code={basicUsageCode} language="tsx" title="React" />
         </section>
 
         {/* Features */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Features</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.dashboardShellComponent.sections.features}</h2>
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             <Card>
               <CardContent className="p-6">
@@ -431,12 +430,12 @@ export default function DashboardShellPage() {
 
         {/* Examples */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Examples</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.dashboardShellComponent.examples.title}</h2>
 
           <div className="space-y-8">
             {/* With Notifications */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">With Notifications</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.dashboardShellComponent.examples.withNotifications}</h3>
               <Card>
                 <CardContent className="p-0">
                   <div className="h-[500px] overflow-hidden rounded-lg border">
@@ -467,7 +466,7 @@ export default function DashboardShellPage() {
 
             {/* Full Featured */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">Full Featured</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.dashboardShellComponent.examples.fullFeatured}</h3>
               <Card>
                 <CardContent className="p-0">
                   <div className="h-[500px] overflow-hidden rounded-lg border">
@@ -506,7 +505,7 @@ export default function DashboardShellPage() {
 
         {/* NavItem Type */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">NavItem Type</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.dashboardShellComponent.sections.navItemType}</h2>
           <Card>
             <CardContent className="p-6">
               <CodeBlock
@@ -527,7 +526,7 @@ export default function DashboardShellPage() {
 
         {/* Props */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Props</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.dashboardShellComponent.sections.props}</h2>
           <PropsTable props={propDefinitions} />
         </section>
 
@@ -542,7 +541,7 @@ export default function DashboardShellPage() {
 
         {/* Accessibility */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Accessibility</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.dashboardShellComponent.sections.accessibility}</h2>
           <Card>
             <CardContent className="pt-6">
               <ul className="space-y-3 text-sm text-muted-foreground">

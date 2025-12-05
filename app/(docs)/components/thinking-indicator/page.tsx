@@ -11,26 +11,26 @@ import { CodeBlock } from '@/components/docs/code-block'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 
-const thinkingIndicatorProps: PropDefinition[] = [
+const getThinkingIndicatorProps = (componentT: any): PropDefinition[] => [
   {
     name: 'variant',
     type: "'dots' | 'pulse' | 'wave' | 'typing'",
     default: "'dots'",
     required: false,
-    description: 'Visual style variant of the animation',
+    description: componentT.props.variant,
   },
   {
     name: 'size',
     type: "'sm' | 'default' | 'lg'",
     default: "'default'",
     required: false,
-    description: 'Size of the indicator',
+    description: componentT.props.size,
   },
   {
     name: 'message',
     type: 'string',
     required: false,
-    description: 'Custom message to display (overrides default from i18n)',
+    description: componentT.props.message,
   },
 ]
 
@@ -64,6 +64,12 @@ const rtlCode = `// RTL is automatically handled by the DirectionProvider
 <ThinkingIndicator variant="typing" />`
 
 export default function ThinkingIndicatorPage() {
+  const { direction, locale } = useDirection()
+  const t = content[locale] || content.en
+  const thinkingIndicatorT = (content[locale]?.thinkingIndicatorComponent || content.en.thinkingIndicatorComponent) as any
+
+  const thinkingIndicatorProps = getThinkingIndicatorProps(thinkingIndicatorT)
+
   return (
     <div className="min-h-screen">
       <main id="main-content" className="container py-12">
@@ -72,50 +78,49 @@ export default function ThinkingIndicatorPage() {
           <ol className="flex items-center gap-2 text-sm text-muted-foreground">
             <li>
               <Link href="/" className="hover:text-foreground transition-colors">
-                Home
+                {t.common.home}
               </Link>
             </li>
             <li>/</li>
             <li>
               <Link href="/components" className="hover:text-foreground transition-colors">
-                Components
+                {t.nav.components}
               </Link>
             </li>
             <li>/</li>
-            <li className="text-foreground font-medium">Thinking Indicator</li>
+            <li className="text-foreground font-medium">{thinkingIndicatorT.title}</li>
           </ol>
         </nav>
 
         {/* Page Header */}
         <div className="mb-12">
-          <h1 className="text-4xl font-bold tracking-tight mb-4">Thinking Indicator</h1>
+          <h1 className="text-4xl font-bold tracking-tight mb-4">{thinkingIndicatorT.title}</h1>
           <p className="text-xl text-muted-foreground max-w-3xl">
-            Loading indicator for AI responses with multiple variants (typing, pulse, dots).
-            Perfect for showing loading states in chat interfaces with smooth animations.
+            {thinkingIndicatorT.description}
           </p>
         </div>
 
         {/* Preview */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Preview</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{thinkingIndicatorT.preview}</h2>
           <ComponentShowcase>
             <ComponentShowcase.Demo>
               <div className="space-y-6 p-6">
                 <ThinkingIndicator
                   variant="dots"
-                  message="Thinking"
+                  message={thinkingIndicatorT.labels.thinking}
                 />
                 <ThinkingIndicator
                   variant="pulse"
-                  message="Processing"
+                  message={thinkingIndicatorT.labels.processing}
                 />
                 <ThinkingIndicator
                   variant="wave"
-                  message="Analyzing"
+                  message={thinkingIndicatorT.labels.analyzing}
                 />
                 <ThinkingIndicator
                   variant="typing"
-                  message="AI is responding"
+                  message={thinkingIndicatorT.labels.thinking}
                 />
               </div>
             </ComponentShowcase.Demo>
@@ -124,24 +129,24 @@ export default function ThinkingIndicatorPage() {
 
         {/* Installation */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Installation</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{thinkingIndicatorT.installation}</h2>
           <CodeBlock code={installCode} language="bash" title="Terminal" />
         </section>
 
         {/* Usage */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Usage</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{thinkingIndicatorT.usage}</h2>
           <CodeBlock code={basicUsageCode} language="tsx" title="React" />
         </section>
 
         {/* Examples */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Examples</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{thinkingIndicatorT.examples.title}</h2>
 
           <div className="space-y-8">
             {/* Variants */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">Animation Variants</h3>
+              <h3 className="text-lg font-semibold mb-4">{thinkingIndicatorT.examples.dotsVariant}</h3>
               <Card>
                 <CardContent className="p-6">
                   <div className="space-y-4">
@@ -174,15 +179,15 @@ export default function ThinkingIndicatorPage() {
 
             {/* With Message */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">With Custom Message</h3>
+              <h3 className="text-lg font-semibold mb-4">{thinkingIndicatorT.examples.withCustomText}</h3>
               <Card>
                 <CardContent className="p-6">
                   <div className="space-y-4">
-                    <ThinkingIndicator variant="typing" message="AI is thinking..." />
+                    <ThinkingIndicator variant="typing" message={thinkingIndicatorT.labels.thinking} />
                     <Separator />
-                    <ThinkingIndicator variant="dots" message="Processing your request" />
+                    <ThinkingIndicator variant="dots" message={thinkingIndicatorT.labels.processing} />
                     <Separator />
-                    <ThinkingIndicator variant="wave" message="Analyzing data" />
+                    <ThinkingIndicator variant="wave" message={thinkingIndicatorT.labels.analyzing} />
                   </div>
                 </CardContent>
               </Card>
@@ -193,7 +198,7 @@ export default function ThinkingIndicatorPage() {
 
             {/* Sizes */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">Sizes</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.componentPage.sections.sizes || 'Sizes'}</h3>
               <Card>
                 <CardContent className="p-6">
                   <div className="space-y-4">
@@ -212,7 +217,7 @@ export default function ThinkingIndicatorPage() {
 
             {/* In Chat Context */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">In Chat Context</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.componentPage.sections.inContext || 'In Chat Context'}</h3>
               <Card>
                 <CardContent className="p-6">
                   <div className="max-w-2xl space-y-4">
@@ -233,29 +238,26 @@ export default function ThinkingIndicatorPage() {
 
         {/* Props */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Props</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.props}</h2>
           <PropsTable props={thinkingIndicatorProps} />
         </section>
 
         {/* Accessibility */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Accessibility</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.accessibility}</h2>
           <Card>
             <CardContent className="p-6 space-y-4">
               <div>
-                <h3 className="font-semibold mb-2">Screen Reader</h3>
+                <h3 className="font-semibold mb-2">{thinkingIndicatorT.accessibility.ariaLive}</h3>
                 <p className="text-muted-foreground">
-                  The component includes proper ARIA attributes with <code className="bg-muted px-1 rounded">role=&quot;status&quot;</code> and{' '}
-                  <code className="bg-muted px-1 rounded">aria-live=&quot;polite&quot;</code> to announce loading states
-                  to screen readers without interrupting other content.
+                  {thinkingIndicatorT.accessibility.ariaLiveDesc}
                 </p>
               </div>
               <Separator />
               <div>
-                <h3 className="font-semibold mb-2">Animation Safety</h3>
+                <h3 className="font-semibold mb-2">{thinkingIndicatorT.accessibility.visualAnimation}</h3>
                 <p className="text-muted-foreground">
-                  All animations respect the user&apos;s motion preferences. Animations are subtle and don&apos;t
-                  flash rapidly, making them safe for users with motion sensitivity.
+                  {thinkingIndicatorT.accessibility.visualAnimationDesc}
                 </p>
               </div>
             </CardContent>
@@ -264,26 +266,25 @@ export default function ThinkingIndicatorPage() {
 
         {/* RTL Considerations */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">RTL Considerations</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.rtl}</h2>
           <Card>
             <CardContent className="p-6 space-y-4">
               <p className="text-muted-foreground">
-                The indicator works seamlessly in RTL layouts. The message is automatically translated
-                based on the current locale from the DirectionProvider and i18n system.
+                {thinkingIndicatorT.rtl.description}
               </p>
               <CodeBlock code={rtlCode} language="tsx" />
               <div className="grid gap-4 md:grid-cols-2 mt-6">
                 <div className="space-y-2">
-                  <h4 className="font-semibold text-sm">LTR (English)</h4>
+                  <h4 className="font-semibold text-sm">{t.componentPage.rtlDemo.ltr}</h4>
                   <div dir="ltr">
                     <ThinkingIndicator
                       variant="typing"
-                      message="AI is thinking..."
+                      message={thinkingIndicatorT.labels.thinking}
                     />
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <h4 className="font-semibold text-sm">RTL (العربية)</h4>
+                  <h4 className="font-semibold text-sm">{t.componentPage.rtlDemo.rtl}</h4>
                   <div dir="rtl">
                     <ThinkingIndicator
                       variant="typing"
@@ -297,35 +298,25 @@ export default function ThinkingIndicatorPage() {
 
         {/* Related */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Related Components</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{thinkingIndicatorT.related.title}</h2>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             <Card>
               <CardContent className="p-4">
                 <Link href="/components/chat-message" className="font-medium hover:underline">
-                  Chat Message
+                  {content[locale]?.chatMessageComponent?.title || content.en.chatMessageComponent.title}
                 </Link>
                 <p className="text-sm text-muted-foreground mt-1">
-                  Display chat messages from users and AI
+                  {thinkingIndicatorT.related.chatMessage}
                 </p>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="p-4">
                 <Link href="/components/prompt-input" className="font-medium hover:underline">
-                  Prompt Input
+                  {content[locale]?.promptInputComponent?.title || content.en.promptInputComponent.title}
                 </Link>
                 <p className="text-sm text-muted-foreground mt-1">
-                  Input component for sending messages
-                </p>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardContent className="p-4">
-                <Link href="/components/message-actions" className="font-medium hover:underline">
-                  Message Actions
-                </Link>
-                <p className="text-sm text-muted-foreground mt-1">
-                  Action buttons for chat messages
+                  {thinkingIndicatorT.related.promptInput}
                 </p>
               </CardContent>
             </Card>

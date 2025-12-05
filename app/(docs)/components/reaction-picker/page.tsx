@@ -9,6 +9,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { ReactionPicker, Reaction } from '@/components/ui/reaction-picker'
 import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { BestPractices } from '@/components/docs/best-practices'
+import { CodeBlock } from '@/components/docs/code-block'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 
@@ -211,25 +212,13 @@ export default function ReactionPickerPage() {
         {/* Installation */}
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-6">{t.reactionPickerComponent.installation}</h2>
-          <Card>
-            <CardContent className="pt-6">
-              <div className="bg-muted p-4 rounded-lg overflow-x-auto">
-                <pre className="text-sm">
-                  <code>npm install noorui-rtl</code>
-                </pre>
-              </div>
-            </CardContent>
-          </Card>
+          <CodeBlock code="npm install noorui-rtl" language="bash" />
         </section>
 
         {/* Usage */}
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-6">{t.reactionPickerComponent.usage}</h2>
-          <Card>
-            <CardContent className="pt-6">
-              <div className="bg-muted p-4 rounded-lg overflow-x-auto">
-                <pre className="text-sm">
-                  <code>{`import { ReactionPicker, Reaction } from 'noorui-rtl'
+          <CodeBlock code={`import { ReactionPicker, Reaction } from 'noorui-rtl'
 
 function CommentReactions() {
   const [reactions, setReactions] = useState<Reaction[]>([
@@ -259,11 +248,7 @@ function CommentReactions() {
       onReact={handleReact}
     />
   )
-}`}</code>
-                </pre>
-              </div>
-            </CardContent>
-          </Card>
+}`} language="tsx" />
         </section>
 
         <Separator className="my-12" />

@@ -355,6 +355,10 @@ common: {
       success: 'نجاح',
       warning: 'تحذير',
     },
+    rtlDemo: {
+      ltr: 'من اليسار إلى اليمين (LTR)',
+      rtl: 'من اليمين إلى اليسار (RTL)',
+    },
     demoLabels: {
       account: 'الحساب',
       profile: 'الملف الشخصي',

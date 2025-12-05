@@ -308,6 +308,8 @@ paginationComponent: {
         withText: 'With Page Info',
         controlled: 'Controlled',
         customSize: 'Custom Size',
+        withEllipsis: 'With Ellipsis',
+        rtlExample: 'RTL Support Example',
       },
       props: {
         title: 'Props',
@@ -327,10 +329,6 @@ paginationComponent: {
         previous: 'Previous',
         next: 'Next',
         currentPage: 'Current page:',
-      },
-      examples: {
-        withEllipsis: 'With Ellipsis',
-        rtlExample: 'RTL Support Example',
       },
       propDescriptions: {
         isActive: 'Whether this page is the currently active page',
@@ -363,47 +361,24 @@ paginationComponent: {
       },
     },
 
-accordionComponent: {
-      title: 'Accordion',
-      description: 'Expandable content sections. Built on Radix UI with smooth animations and perfect RTL support.',
-      preview: 'Preview',
-      installation: 'Installation',
-      usage: 'Usage',
-      examples: {
-        title: 'Examples',
-        single: 'Single',
-        multiple: 'Multiple',
-        withIcons: 'With Icons',
-        styled: 'Styled',
-      },
-      props: {
-        title: 'Props',
-        type: 'Single or multiple items can be open',
-        collapsible: 'Whether items can be collapsed',
-        defaultValue: 'Default open item(s)',
-        value: 'Controlled open item(s)',
-      },
-      accessibility: {
-        title: 'Accessibility',
-      },
-      rtl: {
-        title: 'RTL Considerations',
-        description: 'Accordion chevrons and content automatically adapt to RTL layout.',
-      },
-    },
-
 collapsibleComponent: {
       title: 'Collapsible',
       description: 'Show and hide content with smooth animations. Built on Radix UI with full RTL support.',
       preview: 'Preview',
       installation: 'Installation',
       usage: 'Usage',
+      sections: {
+        compositionPattern: 'Composition Pattern',
+      },
       examples: {
         title: 'Examples',
         basic: 'Basic',
         controlled: 'Controlled',
+        controlledWithIcon: 'Controlled with Animated Icon',
         withTrigger: 'Custom Trigger',
         animated: 'Animated',
+        sidebarStyle: 'Sidebar Style',
+        faqStyle: 'FAQ Style',
       },
       props: {
         title: 'Props',
@@ -414,10 +389,16 @@ collapsibleComponent: {
       },
       accessibility: {
         title: 'Accessibility',
+        keyboardNavigation: 'Keyboard Navigation',
+        ariaAttributes: 'ARIA Attributes',
+        visualIndicators: 'Visual Indicators',
       },
       rtl: {
         title: 'RTL Considerations',
         description: 'Collapsible content and animations work perfectly in RTL layouts.',
+      },
+      related: {
+        title: 'Related Components',
       },
     },
 

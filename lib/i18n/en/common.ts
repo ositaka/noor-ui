@@ -355,6 +355,10 @@ common: {
       success: 'Success',
       warning: 'Warning',
     },
+    rtlDemo: {
+      ltr: 'Left-to-Right (LTR)',
+      rtl: 'Right-to-Left (RTL)',
+    },
     demoLabels: {
       account: 'Account',
       profile: 'Profile',

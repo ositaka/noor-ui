@@ -252,7 +252,7 @@ export default function TimePickerPage() {
         <h2 className="text-2xl font-bold tracking-tight mb-6">
           {t.timePickerComponent.examples.basicUsage24h}
         </h2>
-        <ComponentShowcase code={basicCode}>
+        <ComponentShowcase>
           <ComponentShowcase.Demo>
             <div className="w-full max-w-xs mx-auto space-y-2">
               <Label>{t.timePickerComponent.labels.startTime}</Label>
@@ -266,6 +266,9 @@ export default function TimePickerPage() {
             </div>
           </ComponentShowcase.Demo>
         </ComponentShowcase>
+        <div className="mt-6">
+          <CodeBlock code={basicCode} language="tsx" />
+        </div>
       </section>
 
       {/* 12-hour Format */}
@@ -273,7 +276,7 @@ export default function TimePickerPage() {
         <h2 className="text-2xl font-bold tracking-tight mb-6">
           {t.timePickerComponent.examples.format12h}
         </h2>
-        <ComponentShowcase code={format12hCode}>
+        <ComponentShowcase>
           <ComponentShowcase.Demo>
             <div className="w-full max-w-xs mx-auto space-y-2">
               <Label>{t.timePickerComponent.labels.appointmentTime}</Label>
@@ -292,6 +295,9 @@ export default function TimePickerPage() {
             </div>
           </ComponentShowcase.Demo>
         </ComponentShowcase>
+        <div className="mt-6">
+          <CodeBlock code={format12hCode} language="tsx" />
+        </div>
       </section>
 
       {/* Time Range */}
@@ -299,7 +305,7 @@ export default function TimePickerPage() {
         <h2 className="text-2xl font-bold tracking-tight mb-6">
           {t.timePickerComponent.examples.timeRange}
         </h2>
-        <ComponentShowcase code={rangeCode}>
+        <ComponentShowcase>
           <ComponentShowcase.Demo>
             <div className="w-full max-w-md mx-auto space-y-2">
               <Label>{t.timePickerComponent.labels.workingHours}</Label>
@@ -315,6 +321,9 @@ export default function TimePickerPage() {
             </div>
           </ComponentShowcase.Demo>
         </ComponentShowcase>
+        <div className="mt-6">
+          <CodeBlock code={rangeCode} language="tsx" />
+        </div>
       </section>
 
       {/* Minute Step */}
@@ -322,7 +331,7 @@ export default function TimePickerPage() {
         <h2 className="text-2xl font-bold tracking-tight mb-6">
           {t.timePickerComponent.examples.minuteIntervals}
         </h2>
-        <ComponentShowcase code={minuteStepCode}>
+        <ComponentShowcase>
           <ComponentShowcase.Demo>
             <div className="w-full max-w-xs mx-auto space-y-2">
               <Label>{t.timePickerComponent.labels.time}</Label>
@@ -339,6 +348,9 @@ export default function TimePickerPage() {
             </div>
           </ComponentShowcase.Demo>
         </ComponentShowcase>
+        <div className="mt-6">
+          <CodeBlock code={minuteStepCode} language="tsx" />
+        </div>
       </section>
 
       {/* Real-World Example */}
@@ -346,30 +358,7 @@ export default function TimePickerPage() {
         <h2 className="text-2xl font-bold tracking-tight mb-6">
           {t.timePickerComponent.examples.realWorld}
         </h2>
-        <ComponentShowcase code={`const [time, setTime] = useState<Time>()
-
-<Card>
-  <CardHeader>
-    <CardTitle>Medical Appointment</CardTitle>
-    <CardDescription>Select your preferred appointment time</CardDescription>
-  </CardHeader>
-  <CardContent className="space-y-6">
-    <TimePicker
-      time={time}
-      onTimeChange={setTime}
-      format="12h"
-      minuteStep={15}
-      placeholder="Select appointment time"
-    />
-    {time && (
-      <div className="space-y-2">
-        <div>Selected: {formatTime(time)}</div>
-        <div>Duration: 30 minutes</div>
-        <div>End Time: {calculateEndTime(time, 30)}</div>
-      </div>
-    )}
-  </CardContent>
-</Card>`}>
+        <ComponentShowcase>
           <ComponentShowcase.Demo>
             <Card className="w-full max-w-md mx-auto">
               <CardHeader>
@@ -428,6 +417,32 @@ export default function TimePickerPage() {
             </Card>
           </ComponentShowcase.Demo>
         </ComponentShowcase>
+        <div className="mt-6">
+          <CodeBlock code={`const [time, setTime] = useState<Time>()
+
+<Card>
+  <CardHeader>
+    <CardTitle>Medical Appointment</CardTitle>
+    <CardDescription>Select your preferred appointment time</CardDescription>
+  </CardHeader>
+  <CardContent className="space-y-6">
+    <TimePicker
+      time={time}
+      onTimeChange={setTime}
+      format="12h"
+      minuteStep={15}
+      placeholder="Select appointment time"
+    />
+    {time && (
+      <div className="space-y-2">
+        <div>Selected: {formatTime(time)}</div>
+        <div>Duration: 30 minutes</div>
+        <div>End Time: {calculateEndTime(time, 30)}</div>
+      </div>
+    )}
+  </CardContent>
+</Card>`} language="tsx" />
+        </div>
       </section>
 
       {/* Real-World Example - Schedule */}
@@ -435,29 +450,7 @@ export default function TimePickerPage() {
         <h2 className="text-2xl font-bold tracking-tight mb-6">
           {t.timePickerComponent.examples.workSchedule}
         </h2>
-        <ComponentShowcase code={`const [timeRange, setTimeRange] = useState<TimeRange>()
-
-<Card>
-  <CardHeader>
-    <CardTitle>Work Schedule</CardTitle>
-    <CardDescription>Set your daily working hours</CardDescription>
-  </CardHeader>
-  <CardContent className="space-y-6">
-    <TimeRangePicker
-      timeRange={timeRange}
-      onTimeRangeChange={setTimeRange}
-      format="12h"
-      placeholder="Set working hours"
-    />
-    {timeRange?.from && timeRange?.to && (
-      <div className="space-y-2">
-        <div>Total Hours: {calculateDuration(timeRange)}</div>
-        <div>Start: {formatTime(timeRange.from)}</div>
-        <div>End: {formatTime(timeRange.to)}</div>
-      </div>
-    )}
-  </CardContent>
-</Card>`}>
+        <ComponentShowcase>
           <ComponentShowcase.Demo>
             <Card className="w-full max-w-md mx-auto">
               <CardHeader>
@@ -509,6 +502,31 @@ export default function TimePickerPage() {
             </Card>
           </ComponentShowcase.Demo>
         </ComponentShowcase>
+        <div className="mt-6">
+          <CodeBlock code={`const [timeRange, setTimeRange] = useState<TimeRange>()
+
+<Card>
+  <CardHeader>
+    <CardTitle>Work Schedule</CardTitle>
+    <CardDescription>Set your daily working hours</CardDescription>
+  </CardHeader>
+  <CardContent className="space-y-6">
+    <TimeRangePicker
+      timeRange={timeRange}
+      onTimeRangeChange={setTimeRange}
+      format="12h"
+      placeholder="Set working hours"
+    />
+    {timeRange?.from && timeRange?.to && (
+      <div className="space-y-2">
+        <div>Total Hours: {calculateDuration(timeRange)}</div>
+        <div>Start: {formatTime(timeRange.from)}</div>
+        <div>End: {formatTime(timeRange.to)}</div>
+      </div>
+    )}
+  </CardContent>
+</Card>`} language="tsx" />
+        </div>
       </section>
 
       {/* Use Cases */}

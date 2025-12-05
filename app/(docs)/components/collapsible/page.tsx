@@ -102,21 +102,6 @@ const sidebarCode = `const [isOpen, setIsOpen] = useState(true)
   </Collapsible>
 </div>`
 
-const rtlCode = `// RTL support is automatic!
-// Chevron icons automatically flip in RTL mode
-
-<Collapsible>
-  <CollapsibleTrigger asChild>
-    <Button variant="outline" className="w-full justify-between">
-      <span>التفاصيل</span>
-      <ChevronDown className="h-4 w-4 ms-2" />
-    </Button>
-  </CollapsibleTrigger>
-  <CollapsibleContent className="mt-2 p-4 border rounded">
-    <p>هذا المحتوى يمكن طيه وعرضه</p>
-  </CollapsibleContent>
-</Collapsible>`
-
 export default function CollapsiblePage() {
   const { locale } = useDirection()
   const t = content[locale]
@@ -186,19 +171,19 @@ export default function CollapsiblePage() {
 
         {/* Installation */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Installation</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.collapsibleComponent.installation}</h2>
           <CodeBlock code={installCode} language="bash" title="Terminal" />
         </section>
 
         {/* Usage */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Usage</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.collapsibleComponent.usage}</h2>
           <CodeBlock code={basicUsageCode} language="tsx" title="React" />
         </section>
 
         {/* Composition Pattern */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Composition Pattern</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.collapsibleComponent.sections.compositionPattern}</h2>
           <Card>
             <CardContent className="p-6 space-y-4">
               <p className="text-muted-foreground">
@@ -233,12 +218,12 @@ export default function CollapsiblePage() {
 
         {/* Examples */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Examples</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.collapsibleComponent.examples.title}</h2>
 
           <div className="space-y-8">
             {/* Controlled with Icon */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">Controlled with Animated Icon</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.collapsibleComponent.examples.controlledWithIcon}</h3>
               <Card>
                 <CardContent className="p-6">
                   <div className="max-w-md">
@@ -270,7 +255,7 @@ export default function CollapsiblePage() {
 
             {/* Sidebar Style */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">Sidebar Style</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.collapsibleComponent.examples.sidebarStyle}</h3>
               <Card>
                 <CardContent className="p-6">
                   <div className="max-w-md">
@@ -308,7 +293,7 @@ export default function CollapsiblePage() {
 
             {/* FAQ Style */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">FAQ Style</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.collapsibleComponent.examples.faqStyle}</h3>
               <Card>
                 <CardContent className="p-6">
                   <div className="max-w-2xl space-y-2">
@@ -350,10 +335,10 @@ export default function CollapsiblePage() {
 
         {/* Props */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Props</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.collapsibleComponent.props.title}</h2>
           <div className="space-y-8">
             <div>
-              <h3 className="text-lg font-semibold mb-4">Collapsible</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.collapsibleComponent.title}</h3>
               <PropsTable props={collapsibleProps} />
             </div>
           </div>
@@ -378,11 +363,11 @@ export default function CollapsiblePage() {
 
         {/* Accessibility */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Accessibility</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.collapsibleComponent.accessibility.title}</h2>
           <Card>
             <CardContent className="p-6 space-y-4">
               <div>
-                <h3 className="font-semibold mb-2">Keyboard Navigation</h3>
+                <h3 className="font-semibold mb-2">{t.collapsibleComponent.accessibility.keyboardNavigation}</h3>
                 <ul className="space-y-2 text-muted-foreground text-sm">
                   <li className="flex items-start gap-2">
                     <code className="bg-muted px-1.5 py-0.5 rounded">Space</code>
@@ -396,7 +381,7 @@ export default function CollapsiblePage() {
               </div>
               <Separator />
               <div>
-                <h3 className="font-semibold mb-2">ARIA Attributes</h3>
+                <h3 className="font-semibold mb-2">{t.collapsibleComponent.accessibility.ariaAttributes}</h3>
                 <p className="text-muted-foreground text-sm">
                   The component automatically manages aria-expanded and aria-controls for screen
                   reader users. The trigger button communicates whether the content is currently
@@ -405,7 +390,7 @@ export default function CollapsiblePage() {
               </div>
               <Separator />
               <div>
-                <h3 className="font-semibold mb-2">Visual Indicators</h3>
+                <h3 className="font-semibold mb-2">{t.collapsibleComponent.accessibility.visualIndicators}</h3>
                 <p className="text-muted-foreground text-sm">
                   Always include a visual indicator (like a chevron icon) that shows the current
                   state. Animate the indicator to provide feedback when the state changes.
@@ -415,57 +400,9 @@ export default function CollapsiblePage() {
           </Card>
         </section>
 
-        {/* RTL Considerations */}
-        <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">RTL Considerations</h2>
-          <Card>
-            <CardContent className="p-6 space-y-4">
-              <p className="text-muted-foreground">
-                Collapsible components automatically support RTL layout. Icons position correctly
-                using logical properties and rotate appropriately.
-              </p>
-              <CodeBlock code={rtlCode} language="tsx" />
-              <div className="grid gap-4 md:grid-cols-2 mt-6">
-                <div className="space-y-2">
-                  <h4 className="font-semibold text-sm">LTR (English)</h4>
-                  <div dir="ltr">
-                    <Collapsible>
-                      <CollapsibleTrigger asChild>
-                        <Button variant="outline" className="w-full justify-between">
-                          <span>Show Details</span>
-                          <ChevronDown className="h-4 w-4" />
-                        </Button>
-                      </CollapsibleTrigger>
-                      <CollapsibleContent className="mt-2 p-4 border rounded text-sm">
-                        This content can be collapsed
-                      </CollapsibleContent>
-                    </Collapsible>
-                  </div>
-                </div>
-                <div className="space-y-2">
-                  <h4 className="font-semibold text-sm">RTL (العربية)</h4>
-                  <div dir="rtl">
-                    <Collapsible>
-                      <CollapsibleTrigger asChild>
-                        <Button variant="outline" className="w-full justify-between">
-                          <span>إظهار التفاصيل</span>
-                          <ChevronDown className="h-4 w-4" />
-                        </Button>
-                      </CollapsibleTrigger>
-                      <CollapsibleContent className="mt-2 p-4 border rounded text-sm">
-                        يمكن طي هذا المحتوى
-                      </CollapsibleContent>
-                    </Collapsible>
-                  </div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </section>
-
         {/* Related Components */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Related Components</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.collapsibleComponent.related.title}</h2>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             <Link href="/components/accordion">
               <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">

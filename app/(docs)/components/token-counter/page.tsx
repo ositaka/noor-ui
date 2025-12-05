@@ -11,93 +11,93 @@ import { CodeBlock } from '@/components/docs/code-block'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 
-const tokenCounterProps: PropDefinition[] = [
+const getTokenCounterProps = (componentT: any): PropDefinition[] => [
   {
     name: 'inputTokens',
     type: 'number',
     required: true,
-    description: 'Number of input tokens used',
+    description: componentT.props.inputTokens,
   },
   {
     name: 'outputTokens',
     type: 'number',
     required: true,
-    description: 'Number of output tokens used',
+    description: componentT.props.outputTokens,
   },
   {
     name: 'maxTokens',
     type: 'number',
     default: '4096',
     required: false,
-    description: 'Maximum token limit for the model',
+    description: componentT.props.maxTokens,
   },
   {
     name: 'inputCostPer1K',
     type: 'number',
     default: '0.03',
     required: false,
-    description: 'Cost per 1K input tokens (USD)',
+    description: componentT.props.inputCostPer1K,
   },
   {
     name: 'outputCostPer1K',
     type: 'number',
     default: '0.06',
     required: false,
-    description: 'Cost per 1K output tokens (USD)',
+    description: componentT.props.outputCostPer1K,
   },
   {
     name: 'showCost',
     type: 'boolean',
     default: 'true',
     required: false,
-    description: 'Show cost estimation',
+    description: componentT.props.showCost,
   },
   {
     name: 'showBreakdown',
     type: 'boolean',
     default: 'true',
     required: false,
-    description: 'Show token breakdown',
+    description: componentT.props.showBreakdown,
   },
   {
     name: 'variant',
     type: "'default' | 'compact'",
     default: "'default'",
     required: false,
-    description: 'Visual style variant',
+    description: componentT.props.variant,
   },
   {
     name: 'warningThreshold',
     type: 'number',
     default: '70',
     required: false,
-    description: 'Warning threshold (percentage)',
+    description: componentT.props.warningThreshold,
   },
   {
     name: 'dangerThreshold',
     type: 'number',
     default: '90',
     required: false,
-    description: 'Danger threshold (percentage)',
+    description: componentT.props.dangerThreshold,
   },
   {
     name: 'isRTL',
     type: 'boolean',
     default: 'false',
     required: false,
-    description: 'Whether text direction is RTL',
+    description: componentT.props.isRTL,
   },
   {
     name: 'label',
     type: 'string',
     required: false,
-    description: 'Label for the counter',
+    description: componentT.props.label,
   },
   {
     name: 'labelAr',
     type: 'string',
     required: false,
-    description: 'Label in Arabic',
+    description: componentT.props.labelAr,
   },
 ]
 
@@ -165,6 +165,12 @@ const rtlCode = `<TokenCounter
 />`
 
 export default function TokenCounterPage() {
+  const { direction, locale } = useDirection()
+  const t = content[locale] || content.en
+  const tokenCounterT = (content[locale]?.tokenCounterComponent || content.en.tokenCounterComponent) as any
+
+  const tokenCounterProps = getTokenCounterProps(tokenCounterT)
+
   return (
     <div className="min-h-screen">
       <main id="main-content" className="container py-12">
@@ -173,23 +179,23 @@ export default function TokenCounterPage() {
           <ol className="flex items-center gap-2 text-sm text-muted-foreground">
             <li>
               <Link href="/" className="hover:text-foreground transition-colors">
-                Home
+                {t.common.home}
               </Link>
             </li>
             <li>/</li>
             <li>
               <Link href="/components" className="hover:text-foreground transition-colors">
-                Components
+                {t.nav.components}
               </Link>
             </li>
             <li>/</li>
-            <li className="text-foreground font-medium">Token Counter</li>
+            <li className="text-foreground font-medium">{ tokenCounterT.title}</li>
           </ol>
         </nav>
 
         {/* Page Header */}
         <div className="mb-12">
-          <h1 className="text-4xl font-bold tracking-tight mb-4">Token Counter</h1>
+          <h1 className="text-4xl font-bold tracking-tight mb-4">{tokenCounterT.title}</h1>
           <p className="text-xl text-muted-foreground max-w-3xl">
             Display and track token usage with cost estimation for AI model interactions.
             Features progress bar, breakdown by input/output, and visual warnings when approaching limits.
@@ -217,19 +223,19 @@ export default function TokenCounterPage() {
 
         {/* Installation */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Installation</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{tokenCounterT.installation}</h2>
           <CodeBlock code={installCode} language="bash" title="Terminal" />
         </section>
 
         {/* Usage */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Usage</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{tokenCounterT.usage}</h2>
           <CodeBlock code={basicUsageCode} language="tsx" title="React" />
         </section>
 
         {/* Examples */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Examples</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{tokenCounterT.examples.title}</h2>
 
           <div className="space-y-8">
             {/* With Cost Estimation */}
@@ -390,13 +396,13 @@ export default function TokenCounterPage() {
 
         {/* Props */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Props</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.props}</h2>
           <PropsTable props={tokenCounterProps} />
         </section>
 
         {/* Accessibility */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Accessibility</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.accessibility}</h2>
           <Card>
             <CardContent className="p-6 space-y-4">
               <div>
@@ -429,7 +435,7 @@ export default function TokenCounterPage() {
 
         {/* RTL Considerations */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">RTL Considerations</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.rtl}</h2>
           <Card>
             <CardContent className="p-6 space-y-4">
               <p className="text-muted-foreground">
@@ -467,7 +473,7 @@ export default function TokenCounterPage() {
 
         {/* Related */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Related Components</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{tokenCounterT.related.title}</h2>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             <Card>
               <CardContent className="p-4">

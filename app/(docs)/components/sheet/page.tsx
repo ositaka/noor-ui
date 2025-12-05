@@ -330,54 +330,6 @@ export default function SheetPage() {
           </div>
         </section>
 
-        {/* RTL Support Example */}
-        <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.sheetComponent.rtl.example}</h2>
-          <p className="text-muted-foreground mb-6">
-            {t.sheetComponent.rtl.exampleDescription}
-          </p>
-          <ComponentShowcase.Comparison ltrLabel="LTR (English)" rtlLabel="RTL (العربية)">
-            <div className="flex gap-4">
-              <Sheet>
-                <SheetTrigger asChild>
-                  <Button variant="outline">{t.sheetComponent.demo.openFromStart}</Button>
-                </SheetTrigger>
-                <SheetContent side="start">
-                  <SheetHeader>
-                    <SheetTitle>{t.sheetComponent.demo.navigationMenu}</SheetTitle>
-                    <SheetDescription>
-                      {t.sheetComponent.demo.navigationDescription}
-                    </SheetDescription>
-                  </SheetHeader>
-                  <div className="py-4">
-                    <p className="text-sm text-muted-foreground">
-                      {t.sheetComponent.demo.slidesFromStart}
-                    </p>
-                  </div>
-                </SheetContent>
-              </Sheet>
-              <Sheet>
-                <SheetTrigger asChild>
-                  <Button variant="outline">{t.sheetComponent.demo.openFromEnd}</Button>
-                </SheetTrigger>
-                <SheetContent side="end">
-                  <SheetHeader>
-                    <SheetTitle>{t.sheetComponent.demo.settingsPanel}</SheetTitle>
-                    <SheetDescription>
-                      {t.sheetComponent.demo.settingsDescription}
-                    </SheetDescription>
-                  </SheetHeader>
-                  <div className="py-4">
-                    <p className="text-sm text-muted-foreground">
-                      {t.sheetComponent.demo.slidesFromEnd}
-                    </p>
-                  </div>
-                </SheetContent>
-              </Sheet>
-            </div>
-          </ComponentShowcase.Comparison>
-        </section>
-
         {/* Props */}
         <section className="mb-16">
           <h2 className="text-2xl font-bold tracking-tight mb-4">{t.sheetComponent.props.title}</h2>

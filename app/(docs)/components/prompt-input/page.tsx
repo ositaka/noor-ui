@@ -11,89 +11,89 @@ import { CodeBlock } from '@/components/docs/code-block'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 
-const promptInputProps: PropDefinition[] = [
+const getPromptInputProps = (componentT: any): PropDefinition[] => [
   {
     name: 'onSend',
     type: '(value: string) => void',
     required: false,
-    description: 'Callback when send button is clicked or Enter is pressed',
+    description: componentT.props.onSend,
   },
   {
     name: 'isLoading',
     type: 'boolean',
     default: 'false',
     required: false,
-    description: 'Whether the input is in loading state',
+    description: componentT.props.isLoading,
   },
   {
     name: 'showAttachment',
     type: 'boolean',
     default: 'false',
     required: false,
-    description: 'Show file attachment button',
+    description: componentT.props.showAttachment,
   },
   {
     name: 'showVoice',
     type: 'boolean',
     default: 'false',
     required: false,
-    description: 'Show voice input button',
+    description: componentT.props.showVoice,
   },
   {
     name: 'showCounter',
     type: 'boolean',
     default: 'false',
     required: false,
-    description: 'Show character/token counter',
+    description: componentT.props.showCounter,
   },
   {
     name: 'maxLength',
     type: 'number',
     required: false,
-    description: 'Maximum characters allowed',
+    description: componentT.props.maxLength,
   },
   {
     name: 'onAttachment',
     type: '() => void',
     required: false,
-    description: 'Callback when attachment button is clicked',
+    description: componentT.props.onAttachment,
   },
   {
     name: 'onVoice',
     type: '() => void',
     required: false,
-    description: 'Callback when voice button is clicked',
+    description: componentT.props.onVoice,
   },
   {
     name: 'isRTL',
     type: 'boolean',
     default: 'false',
     required: false,
-    description: 'Whether text direction is RTL',
+    description: componentT.props.isRTL,
   },
   {
     name: 'placeholder',
     type: 'string',
     required: false,
-    description: 'Placeholder text',
+    description: componentT.props.placeholder,
   },
   {
     name: 'placeholderAr',
     type: 'string',
     required: false,
-    description: 'Placeholder text in Arabic',
+    description: componentT.props.placeholderAr,
   },
   {
     name: 'value',
     type: 'string',
     required: false,
-    description: 'Controlled value',
+    description: componentT.props.value,
   },
   {
     name: 'onChange',
     type: '(e: React.ChangeEvent<HTMLTextAreaElement>) => void',
     required: false,
-    description: 'Change handler for controlled component',
+    description: componentT.props.onChange,
   },
 ]
 
@@ -147,6 +147,11 @@ const rtlCode = `<PromptInput
 export default function PromptInputPage() {
   const [value, setValue] = React.useState('')
   const [isLoading, setIsLoading] = React.useState(false)
+  const { direction, locale } = useDirection()
+  const t = content[locale] || content.en
+  const promptInputT = (content[locale]?.promptInputComponent || content.en.promptInputComponent) as any
+
+  const promptInputProps = getPromptInputProps(promptInputT)
 
   return (
     <div className="min-h-screen">
@@ -156,32 +161,31 @@ export default function PromptInputPage() {
           <ol className="flex items-center gap-2 text-sm text-muted-foreground">
             <li>
               <Link href="/" className="hover:text-foreground transition-colors">
-                Home
+                {t.common.home}
               </Link>
             </li>
             <li>/</li>
             <li>
               <Link href="/components" className="hover:text-foreground transition-colors">
-                Components
+                {t.nav.components}
               </Link>
             </li>
             <li>/</li>
-            <li className="text-foreground font-medium">Prompt Input</li>
+            <li className="text-foreground font-medium">{promptInputT.title}</li>
           </ol>
         </nav>
 
         {/* Page Header */}
         <div className="mb-12">
-          <h1 className="text-4xl font-bold tracking-tight mb-4">Prompt Input</h1>
+          <h1 className="text-4xl font-bold tracking-tight mb-4">{promptInputT.title}</h1>
           <p className="text-xl text-muted-foreground max-w-3xl">
-            Input component for sending chat messages with support for attachments, voice input, and auto-resize.
-            Features smart textarea that grows with content and keyboard shortcuts for better UX.
+            {promptInputT.description}
           </p>
         </div>
 
         {/* Preview */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Preview</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{promptInputT.preview}</h2>
           <ComponentShowcase>
             <ComponentShowcase.Demo>
               <div className="max-w-2xl w-full">
@@ -205,24 +209,24 @@ export default function PromptInputPage() {
 
         {/* Installation */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Installation</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{promptInputT.installation}</h2>
           <CodeBlock code={installCode} language="bash" title="Terminal" />
         </section>
 
         {/* Usage */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Usage</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{promptInputT.usage}</h2>
           <CodeBlock code={basicUsageCode} language="tsx" title="React" />
         </section>
 
         {/* Examples */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Examples</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{promptInputT.examples.title}</h2>
 
           <div className="space-y-8">
             {/* With Features */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">With Attachments and Voice</h3>
+              <h3 className="text-lg font-semibold mb-4">{promptInputT.examples.withAttachmentsVoice}</h3>
               <Card>
                 <CardContent className="p-6">
                   <div className="max-w-2xl">
@@ -245,7 +249,7 @@ export default function PromptInputPage() {
 
             {/* Loading State */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">Loading State</h3>
+              <h3 className="text-lg font-semibold mb-4">{promptInputT.examples.loadingState}</h3>
               <Card>
                 <CardContent className="p-6">
                   <div className="max-w-2xl space-y-4">
@@ -269,7 +273,7 @@ export default function PromptInputPage() {
 
             {/* Controlled Component */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">Controlled Component</h3>
+              <h3 className="text-lg font-semibold mb-4">{promptInputT.examples.controlledComponent}</h3>
               <Card>
                 <CardContent className="p-6">
                   <div className="max-w-2xl space-y-4">
@@ -296,13 +300,13 @@ export default function PromptInputPage() {
 
         {/* Props */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Props</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.props}</h2>
           <PropsTable props={promptInputProps} />
         </section>
 
         {/* Accessibility */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Accessibility</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.accessibility}</h2>
           <Card>
             <CardContent className="p-6 space-y-4">
               <div>
@@ -335,7 +339,7 @@ export default function PromptInputPage() {
 
         {/* RTL Considerations */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">RTL Considerations</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.rtl}</h2>
           <Card>
             <CardContent className="p-6 space-y-4">
               <p className="text-muted-foreground">
@@ -370,7 +374,7 @@ export default function PromptInputPage() {
 
         {/* Related */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Related Components</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.relatedComponents}</h2>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             <Card>
               <CardContent className="p-4">

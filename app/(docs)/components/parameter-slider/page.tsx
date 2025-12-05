@@ -11,96 +11,96 @@ import { CodeBlock } from '@/components/docs/code-block'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 
-const parameterSliderProps: PropDefinition[] = [
+const getParameterSliderProps = (componentT: any): PropDefinition[] => [
   {
     name: 'label',
     type: 'string',
     required: true,
-    description: 'Parameter label',
+    description: componentT.props.label,
   },
   {
     name: 'labelAr',
     type: 'string',
     required: false,
-    description: 'Parameter label in Arabic',
+    description: componentT.props.labelAr,
   },
   {
     name: 'description',
     type: 'string',
     required: false,
-    description: 'Parameter description/tooltip',
+    description: componentT.props.description,
   },
   {
     name: 'descriptionAr',
     type: 'string',
     required: false,
-    description: 'Parameter description in Arabic',
+    description: componentT.props.descriptionAr,
   },
   {
     name: 'value',
     type: 'number',
     required: true,
-    description: 'Current value',
+    description: componentT.props.value,
   },
   {
     name: 'onValueChange',
     type: '(value: number) => void',
     required: true,
-    description: 'Callback when value changes',
+    description: componentT.props.onValueChange,
   },
   {
     name: 'min',
     type: 'number',
     default: '0',
     required: false,
-    description: 'Minimum value',
+    description: componentT.props.min,
   },
   {
     name: 'max',
     type: 'number',
     default: '1',
     required: false,
-    description: 'Maximum value',
+    description: componentT.props.max,
   },
   {
     name: 'step',
     type: 'number',
     default: '0.1',
     required: false,
-    description: 'Step size',
+    description: componentT.props.step,
   },
   {
     name: 'decimals',
     type: 'number',
     default: '1',
     required: false,
-    description: 'Number of decimal places to display',
+    description: componentT.props.decimals,
   },
   {
     name: 'presets',
     type: 'ParameterPreset[]',
     required: false,
-    description: 'Preset values',
+    description: componentT.props.presets,
   },
   {
     name: 'showValue',
     type: 'boolean',
     default: 'true',
     required: false,
-    description: 'Show value display',
+    description: componentT.props.showValue,
   },
   {
     name: 'isRTL',
     type: 'boolean',
     default: 'false',
     required: false,
-    description: 'Whether text direction is RTL',
+    description: componentT.props.isRTL,
   },
   {
     name: 'className',
     type: 'string',
     required: false,
-    description: 'Additional CSS classes',
+    description: componentT.props.className,
   },
 ]
 
@@ -213,9 +213,15 @@ const rtlCode = `<ParameterSlider
 />`
 
 export default function ParameterSliderPage() {
+  const { direction, locale } = useDirection()
+  const t = content[locale] || content.en
+  const parameterSliderT = (content[locale]?.parameterSliderComponent || content.en.parameterSliderComponent) as any
+
   const [temperature, setTemperature] = React.useState(0.7)
   const [topP, setTopP] = React.useState(0.9)
   const [maxTokens, setMaxTokens] = React.useState(1024)
+
+  const parameterSliderProps = getParameterSliderProps(parameterSliderT)
 
   return (
     <div className="min-h-screen">
@@ -225,32 +231,31 @@ export default function ParameterSliderPage() {
           <ol className="flex items-center gap-2 text-sm text-muted-foreground">
             <li>
               <Link href="/" className="hover:text-foreground transition-colors">
-                Home
+                {t.common.home}
               </Link>
             </li>
             <li>/</li>
             <li>
               <Link href="/components" className="hover:text-foreground transition-colors">
-                Components
+                {t.nav.components}
               </Link>
             </li>
             <li>/</li>
-            <li className="text-foreground font-medium">Parameter Slider</li>
+            <li className="text-foreground font-medium">{parameterSliderT.title}</li>
           </ol>
         </nav>
 
         {/* Page Header */}
         <div className="mb-12">
-          <h1 className="text-4xl font-bold tracking-tight mb-4">Parameter Slider</h1>
+          <h1 className="text-4xl font-bold tracking-tight mb-4">{parameterSliderT.title}</h1>
           <p className="text-xl text-muted-foreground max-w-3xl">
-            Slider for adjusting AI model parameters (temperature, max tokens, top-p) with presets.
-            Features tooltips, value display, and quick preset buttons for common configurations.
+            {parameterSliderT.description}
           </p>
         </div>
 
         {/* Preview */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Preview</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{parameterSliderT.preview}</h2>
           <ComponentShowcase>
             <ComponentShowcase.Demo>
               <div className="max-w-md">
@@ -271,24 +276,24 @@ export default function ParameterSliderPage() {
 
         {/* Installation */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Installation</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{parameterSliderT.installation}</h2>
           <CodeBlock code={installCode} language="bash" title="Terminal" />
         </section>
 
         {/* Usage */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Usage</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{parameterSliderT.usage}</h2>
           <CodeBlock code={basicUsageCode} language="tsx" title="React" />
         </section>
 
         {/* Examples */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Examples</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{parameterSliderT.examples.title}</h2>
 
           <div className="space-y-8">
             {/* With Presets */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">With Presets</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.componentPage.examples.withPresets || 'With Presets'}</h3>
               <Card>
                 <CardContent className="p-6">
                   <div className="max-w-md">
@@ -312,7 +317,7 @@ export default function ParameterSliderPage() {
 
             {/* Custom Presets */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">Custom Presets</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.componentPage.examples.customPresets || 'Custom Presets'}</h3>
               <Card>
                 <CardContent className="p-6">
                   <div className="max-w-md">
@@ -341,7 +346,7 @@ export default function ParameterSliderPage() {
 
             {/* Multiple Parameters */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">Multiple Parameters</h3>
+              <h3 className="text-lg font-semibold mb-4">{parameterSliderT.examples.maxTokens || 'Multiple Parameters'}</h3>
               <Card>
                 <CardContent className="p-6">
                   <div className="max-w-md space-y-6">
@@ -391,7 +396,7 @@ export default function ParameterSliderPage() {
 
             {/* Without Presets */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">Without Presets</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.componentPage.examples.withoutPresets || 'Without Presets'}</h3>
               <Card>
                 <CardContent className="p-6">
                   <div className="max-w-md">
@@ -413,44 +418,39 @@ export default function ParameterSliderPage() {
 
         {/* ParameterPreset Interface */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">ParameterPreset Interface</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.interface || 'ParameterPreset Interface'}</h2>
           <CodeBlock code={presetInterface} language="typescript" title="TypeScript" />
         </section>
 
         {/* Props */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Props</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.props}</h2>
           <PropsTable props={parameterSliderProps} />
         </section>
 
         {/* Accessibility */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Accessibility</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.accessibility}</h2>
           <Card>
             <CardContent className="p-6 space-y-4">
               <div>
-                <h3 className="font-semibold mb-2">Screen Reader</h3>
+                <h3 className="font-semibold mb-2">{parameterSliderT.accessibility.sliderControl}</h3>
                 <p className="text-muted-foreground">
-                  The slider includes proper labels and ARIA attributes. Tooltips provide additional
-                  context for parameters and presets. Current value is announced when changed.
+                  {parameterSliderT.accessibility.sliderControlDesc}
                 </p>
               </div>
               <Separator />
               <div>
-                <h3 className="font-semibold mb-2">Keyboard Navigation</h3>
-                <ul className="list-disc list-inside text-muted-foreground space-y-1">
-                  <li><kbd className="px-1.5 py-0.5 rounded bg-muted">Tab</kbd>: Navigate to slider or preset buttons</li>
-                  <li><kbd className="px-1.5 py-0.5 rounded bg-muted">←</kbd> / <kbd className="px-1.5 py-0.5 rounded bg-muted">→</kbd>: Adjust value (on slider)</li>
-                  <li><kbd className="px-1.5 py-0.5 rounded bg-muted">Enter</kbd>: Select preset (on button)</li>
-                  <li><kbd className="px-1.5 py-0.5 rounded bg-muted">Home</kbd> / <kbd className="px-1.5 py-0.5 rounded bg-muted">End</kbd>: Jump to min/max</li>
-                </ul>
+                <h3 className="font-semibold mb-2">{parameterSliderT.accessibility.valueDisplay}</h3>
+                <p className="text-muted-foreground">
+                  {parameterSliderT.accessibility.valueDisplayDesc}
+                </p>
               </div>
               <Separator />
               <div>
-                <h3 className="font-semibold mb-2">Visual Feedback</h3>
+                <h3 className="font-semibold mb-2">{parameterSliderT.accessibility.descriptions}</h3>
                 <p className="text-muted-foreground">
-                  Current value is displayed in a badge. Active preset is highlighted. Range labels
-                  show min/max values for context.
+                  {parameterSliderT.accessibility.descriptionsDesc}
                 </p>
               </div>
             </CardContent>
@@ -459,17 +459,16 @@ export default function ParameterSliderPage() {
 
         {/* RTL Considerations */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">RTL Considerations</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.rtl}</h2>
           <Card>
             <CardContent className="p-6 space-y-4">
               <p className="text-muted-foreground">
-                The slider works seamlessly in RTL layouts. Labels, tooltips, and presets all support
-                Arabic translations via the <code className="bg-muted px-1 rounded">*Ar</code> props.
+                {parameterSliderT.rtl.description}
               </p>
               <CodeBlock code={rtlCode} language="tsx" />
               <div className="grid gap-4 md:grid-cols-2 mt-6">
                 <div className="space-y-2">
-                  <h4 className="font-semibold text-sm">LTR (English)</h4>
+                  <h4 className="font-semibold text-sm">{t.componentPage.rtlDemo.ltr}</h4>
                   <div dir="ltr">
                     <ParameterSlider
                       label="Temperature"
@@ -483,7 +482,7 @@ export default function ParameterSliderPage() {
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <h4 className="font-semibold text-sm">RTL (العربية)</h4>
+                  <h4 className="font-semibold text-sm">{t.componentPage.rtlDemo.rtl}</h4>
                   <div dir="rtl">
                     <ParameterSlider
                       label="Temperature"
@@ -506,7 +505,7 @@ export default function ParameterSliderPage() {
 
         {/* Related */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Related Components</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{parameterSliderT.related.title}</h2>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             <Card>
               <CardContent className="p-4">

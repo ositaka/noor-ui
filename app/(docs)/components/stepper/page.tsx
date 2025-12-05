@@ -11,45 +11,45 @@ import { CodeBlock } from '@/components/docs/code-block'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 
-const stepperProps: PropDefinition[] = [
+const getStepperProps = (componentT: any): PropDefinition[] => [
   {
     name: 'steps',
     type: 'Step[]',
     required: true,
-    description: 'Array of step objects with id, title, titleAr, description, optional fields',
+    description: componentT.props.steps,
   },
   {
     name: 'currentStep',
     type: 'number',
     required: true,
-    description: 'Index of the current step (0-based)',
+    description: componentT.props.currentStep,
   },
   {
     name: 'onStepClick',
     type: '(step: number) => void',
     required: false,
-    description: 'Callback when a step is clicked',
+    description: componentT.props.onStepClick,
   },
   {
     name: 'orientation',
     type: "'horizontal' | 'vertical'",
     default: "'horizontal'",
     required: false,
-    description: 'Layout orientation of the stepper',
+    description: componentT.props.orientation,
   },
   {
     name: 'variant',
     type: "'default' | 'simple' | 'circles'",
     default: "'default'",
     required: false,
-    description: 'Visual style variant',
+    description: componentT.props.variant,
   },
   {
     name: 'allowSkip',
     type: 'boolean',
     default: 'false',
     required: false,
-    description: 'Allow clicking on future steps',
+    description: componentT.props.allowSkip,
   },
 ]
 
@@ -99,6 +99,9 @@ export default function StepperPage() {
   const { direction, locale } = useDirection()
   const isRTL = direction === 'rtl'
   const t = content[locale]
+  const componentT = t.stepperComponent
+
+  const stepperProps = getStepperProps(componentT)
 
   const [currentStep1, setCurrentStep1] = React.useState(0)
   const [currentStep2, setCurrentStep2] = React.useState(1)

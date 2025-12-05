@@ -11,88 +11,88 @@ import { CodeBlock } from '@/components/docs/code-block'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 
-const conversationHistoryProps: PropDefinition[] = [
+const getConversationHistoryProps = (componentT: any): PropDefinition[] => [
   {
     name: 'conversations',
     type: 'Conversation[]',
     required: true,
-    description: 'List of conversations',
+    description: componentT.props.conversations,
   },
   {
     name: 'activeId',
     type: 'string',
     required: false,
-    description: 'Currently active conversation ID',
+    description: componentT.props.activeId,
   },
   {
     name: 'onSelect',
     type: '(id: string) => void',
     required: false,
-    description: 'Callback when conversation is selected',
+    description: componentT.props.onSelect,
   },
   {
     name: 'onCreate',
     type: '() => void',
     required: false,
-    description: 'Callback when new conversation is created',
+    description: componentT.props.onCreate,
   },
   {
     name: 'onRename',
     type: '(id: string, newTitle: string) => void',
     required: false,
-    description: 'Callback when conversation is renamed',
+    description: componentT.props.onRename,
   },
   {
     name: 'onDelete',
     type: '(id: string) => void',
     required: false,
-    description: 'Callback when conversation is deleted',
+    description: componentT.props.onDelete,
   },
   {
     name: 'onShare',
     type: '(id: string) => void',
     required: false,
-    description: 'Callback when conversation is shared',
+    description: componentT.props.onShare,
   },
   {
     name: 'showSearch',
     type: 'boolean',
     default: 'true',
     required: false,
-    description: 'Show search input',
+    description: componentT.props.showSearch,
   },
   {
     name: 'variant',
     type: "'default' | 'floating'",
     default: "'default'",
     required: false,
-    description: 'Visual style variant',
+    description: componentT.props.variant,
   },
   {
     name: 'size',
     type: "'sm' | 'default' | 'lg'",
     default: "'default'",
     required: false,
-    description: 'Width size of the sidebar',
+    description: componentT.props.size,
   },
   {
     name: 'isRTL',
     type: 'boolean',
     default: 'false',
     required: false,
-    description: 'Whether text direction is RTL',
+    description: componentT.props.isRTL,
   },
   {
     name: 'title',
     type: 'string',
     required: false,
-    description: 'Header title',
+    description: componentT.props.title,
   },
   {
     name: 'titleAr',
     type: 'string',
     required: false,
-    description: 'Header title in Arabic',
+    description: componentT.props.titleAr,
   },
 ]
 
@@ -218,8 +218,14 @@ const sampleConversations: Conversation[] = [
 ]
 
 export default function ConversationHistoryPage() {
+  const { direction, locale } = useDirection()
+  const t = content[locale] || content.en
+  const conversationHistoryT = (content[locale]?.conversationHistoryComponent || content.en.conversationHistoryComponent) as any
+
   const [activeId, setActiveId] = React.useState('1')
   const [conversations, setConversations] = React.useState(sampleConversations)
+
+  const conversationHistoryProps = getConversationHistoryProps(conversationHistoryT)
 
   const handleCreate = () => {
     const newConv: Conversation = {
@@ -256,33 +262,31 @@ export default function ConversationHistoryPage() {
           <ol className="flex items-center gap-2 text-sm text-muted-foreground">
             <li>
               <Link href="/" className="hover:text-foreground transition-colors">
-                Home
+                {t.common.home}
               </Link>
             </li>
             <li>/</li>
             <li>
               <Link href="/components" className="hover:text-foreground transition-colors">
-                Components
+                {t.nav.components}
               </Link>
             </li>
             <li>/</li>
-            <li className="text-foreground font-medium">Conversation History</li>
+            <li className="text-foreground font-medium">{conversationHistoryT.title}</li>
           </ol>
         </nav>
 
         {/* Page Header */}
         <div className="mb-12">
-          <h1 className="text-4xl font-bold tracking-tight mb-4">Conversation History</h1>
+          <h1 className="text-4xl font-bold tracking-tight mb-4">{conversationHistoryT.title}</h1>
           <p className="text-xl text-muted-foreground max-w-3xl">
-            Sidebar component for managing multiple conversation threads with search and delete.
-            Organizes conversations by time period (today, yesterday, last 7 days, etc.) with
-            full CRUD operations support.
+            {conversationHistoryT.description}
           </p>
         </div>
 
         {/* Preview */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Preview</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{conversationHistoryT.preview}</h2>
           <ComponentShowcase>
             <ComponentShowcase.Demo>
               <div className="flex h-[600px] border rounded-lg overflow-hidden">
@@ -313,19 +317,19 @@ export default function ConversationHistoryPage() {
 
         {/* Installation */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Installation</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{conversationHistoryT.installation}</h2>
           <CodeBlock code={installCode} language="bash" title="Terminal" />
         </section>
 
         {/* Usage */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Usage</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{conversationHistoryT.usage}</h2>
           <CodeBlock code={basicUsageCode} language="tsx" title="React" />
         </section>
 
         {/* Examples */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Examples</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{conversationHistoryT.examples.title}</h2>
 
           <div className="space-y-8">
             {/* Full Featured */}
@@ -471,13 +475,13 @@ export default function ConversationHistoryPage() {
 
         {/* Props */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Props</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.props}</h2>
           <PropsTable props={conversationHistoryProps} />
         </section>
 
         {/* Accessibility */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Accessibility</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.accessibility}</h2>
           <Card>
             <CardContent className="p-6 space-y-4">
               <div>
@@ -511,7 +515,7 @@ export default function ConversationHistoryPage() {
 
         {/* RTL Considerations */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">RTL Considerations</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.rtl}</h2>
           <Card>
             <CardContent className="p-6 space-y-4">
               <p className="text-muted-foreground">
@@ -521,7 +525,7 @@ export default function ConversationHistoryPage() {
               <CodeBlock code={rtlCode} language="tsx" />
               <div className="grid gap-4 md:grid-cols-2 mt-6">
                 <div className="space-y-2">
-                  <h4 className="font-semibold text-sm">LTR (English)</h4>
+                  <h4 className="font-semibold text-sm">{t.componentPage.rtlDemo.ltr}</h4>
                   <div dir="ltr" className="h-[300px] border rounded-lg overflow-hidden">
                     <ConversationHistory
                       conversations={conversations.slice(0, 3)}
@@ -531,7 +535,7 @@ export default function ConversationHistoryPage() {
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <h4 className="font-semibold text-sm">RTL (العربية)</h4>
+                  <h4 className="font-semibold text-sm">{t.componentPage.rtlDemo.rtl}</h4>
                   <div dir="rtl" className="h-[300px] border rounded-lg overflow-hidden">
                     <ConversationHistory
                       conversations={conversations.slice(0, 3)}
@@ -549,7 +553,7 @@ export default function ConversationHistoryPage() {
 
         {/* Related */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Related Components</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{conversationHistoryT.related.title}</h2>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             <Card>
               <CardContent className="p-4">

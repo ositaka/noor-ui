@@ -11,104 +11,104 @@ import { CodeBlock } from '@/components/docs/code-block'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 
-const messageActionsProps: PropDefinition[] = [
+const getMessageActionsProps = (componentT: any): PropDefinition[] => [
   {
     name: 'showCopy',
     type: 'boolean',
     default: 'true',
     required: false,
-    description: 'Show copy button',
+    description: componentT.props.showCopy,
   },
   {
     name: 'showRegenerate',
     type: 'boolean',
     default: 'false',
     required: false,
-    description: 'Show regenerate button',
+    description: componentT.props.showRegenerate,
   },
   {
     name: 'showEdit',
     type: 'boolean',
     default: 'false',
     required: false,
-    description: 'Show edit button',
+    description: componentT.props.showEdit,
   },
   {
     name: 'showShare',
     type: 'boolean',
     default: 'false',
     required: false,
-    description: 'Show share button',
+    description: componentT.props.showShare,
   },
   {
     name: 'showFlag',
     type: 'boolean',
     default: 'false',
     required: false,
-    description: 'Show flag/report button',
+    description: componentT.props.showFlag,
   },
   {
     name: 'showFeedback',
     type: 'boolean',
     default: 'false',
     required: false,
-    description: 'Show feedback buttons (thumbs up/down)',
+    description: componentT.props.showFeedback,
   },
   {
     name: 'onCopy',
     type: '() => void',
     required: false,
-    description: 'Callback when copy is clicked',
+    description: componentT.props.onCopy,
   },
   {
     name: 'onRegenerate',
     type: '() => void',
     required: false,
-    description: 'Callback when regenerate is clicked',
+    description: componentT.props.onRegenerate,
   },
   {
     name: 'onEdit',
     type: '() => void',
     required: false,
-    description: 'Callback when edit is clicked',
+    description: componentT.props.onEdit,
   },
   {
     name: 'onShare',
     type: '() => void',
     required: false,
-    description: 'Callback when share is clicked',
+    description: componentT.props.onShare,
   },
   {
     name: 'onFlag',
     type: '() => void',
     required: false,
-    description: 'Callback when flag is clicked',
+    description: componentT.props.onFlag,
   },
   {
     name: 'onThumbsUp',
     type: '() => void',
     required: false,
-    description: 'Callback when thumbs up is clicked',
+    description: componentT.props.onThumbsUp,
   },
   {
     name: 'onThumbsDown',
     type: '() => void',
     required: false,
-    description: 'Callback when thumbs down is clicked',
+    description: componentT.props.onThumbsDown,
   },
   {
     name: 'isRTL',
     type: 'boolean',
     default: 'false',
     required: false,
-    description: 'Whether text direction is RTL',
+    description: componentT.props.isRTL,
   },
   {
     name: 'compact',
     type: 'boolean',
     default: 'false',
     required: false,
-    description: 'Compact mode (icon only)',
+    description: componentT.props.compact,
   },
 ]
 
@@ -177,6 +177,12 @@ const rtlCode = `<MessageActions
 />`
 
 export default function MessageActionsPage() {
+  const { direction, locale } = useDirection()
+  const t = content[locale] || content.en
+  const messageActionsT = (content[locale]?.messageActionsComponent || content.en.messageActionsComponent) as any
+
+  const messageActionsProps = getMessageActionsProps(messageActionsT)
+
   return (
     <div className="min-h-screen">
       <main id="main-content" className="container py-12">
@@ -185,32 +191,31 @@ export default function MessageActionsPage() {
           <ol className="flex items-center gap-2 text-sm text-muted-foreground">
             <li>
               <Link href="/" className="hover:text-foreground transition-colors">
-                Home
+                {t.common.home}
               </Link>
             </li>
             <li>/</li>
             <li>
               <Link href="/components" className="hover:text-foreground transition-colors">
-                Components
+                {t.nav.components}
               </Link>
             </li>
             <li>/</li>
-            <li className="text-foreground font-medium">Message Actions</li>
+            <li className="text-foreground font-medium">{messageActionsT.title}</li>
           </ol>
         </nav>
 
         {/* Page Header */}
         <div className="mb-12">
-          <h1 className="text-4xl font-bold tracking-tight mb-4">Message Actions</h1>
+          <h1 className="text-4xl font-bold tracking-tight mb-4">{messageActionsT.title}</h1>
           <p className="text-xl text-muted-foreground max-w-3xl">
-            Action buttons for chat messages (copy, regenerate, edit, share, feedback).
-            Provides a consistent interface for common message operations in chat applications.
+            {messageActionsT.description}
           </p>
         </div>
 
         {/* Preview */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Preview</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{messageActionsT.preview}</h2>
           <ComponentShowcase>
             <ComponentShowcase.Demo>
               <div className="space-y-4">
@@ -234,24 +239,24 @@ export default function MessageActionsPage() {
 
         {/* Installation */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Installation</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{messageActionsT.installation}</h2>
           <CodeBlock code={installCode} language="bash" title="Terminal" />
         </section>
 
         {/* Usage */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Usage</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{messageActionsT.usage}</h2>
           <CodeBlock code={basicUsageCode} language="tsx" title="React" />
         </section>
 
         {/* Examples */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Examples</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{messageActionsT.examples.title}</h2>
 
           <div className="space-y-8">
             {/* Full Featured */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">Full Featured</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.componentPage.examples.fullFeatured || 'Full Featured'}</h3>
               <Card>
                 <CardContent className="p-6">
                   <MessageActions
@@ -278,7 +283,7 @@ export default function MessageActionsPage() {
 
             {/* For Assistant Messages */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">For Assistant Messages</h3>
+              <h3 className="text-lg font-semibold mb-4">{messageActionsT.examples.assistantMessageActions}</h3>
               <Card>
                 <CardContent className="p-6">
                   <div className="space-y-3">
@@ -304,7 +309,7 @@ export default function MessageActionsPage() {
 
             {/* For User Messages */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">For User Messages</h3>
+              <h3 className="text-lg font-semibold mb-4">{messageActionsT.examples.userMessageActions}</h3>
               <Card>
                 <CardContent className="p-6">
                   <div className="space-y-3">
@@ -327,7 +332,7 @@ export default function MessageActionsPage() {
 
             {/* Compact Mode */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">Compact Mode (Icon Only)</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.componentPage.examples.compactMode || 'Compact Mode'}</h3>
               <Card>
                 <CardContent className="p-6">
                   <div className="space-y-3">
@@ -355,36 +360,33 @@ export default function MessageActionsPage() {
 
         {/* Props */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Props</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.props}</h2>
           <PropsTable props={messageActionsProps} />
         </section>
 
         {/* Accessibility */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Accessibility</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.accessibility}</h2>
           <Card>
             <CardContent className="p-6 space-y-4">
               <div>
-                <h3 className="font-semibold mb-2">Screen Reader</h3>
+                <h3 className="font-semibold mb-2">{messageActionsT.accessibility.tooltips}</h3>
                 <p className="text-muted-foreground">
-                  All buttons include screen reader labels via <code className="bg-muted px-1 rounded">sr-only</code> spans,
-                  ensuring icon-only buttons are accessible. Feedback state changes are announced appropriately.
+                  {messageActionsT.accessibility.tooltipsDesc}
                 </p>
               </div>
               <Separator />
               <div>
-                <h3 className="font-semibold mb-2">Keyboard Navigation</h3>
-                <ul className="list-disc list-inside text-muted-foreground space-y-1">
-                  <li><kbd className="px-1.5 py-0.5 rounded bg-muted">Tab</kbd>: Navigate between action buttons</li>
-                  <li><kbd className="px-1.5 py-0.5 rounded bg-muted">Enter</kbd> or <kbd className="px-1.5 py-0.5 rounded bg-muted">Space</kbd>: Activate button</li>
-                </ul>
+                <h3 className="font-semibold mb-2">{messageActionsT.accessibility.keyboardNav}</h3>
+                <p className="text-muted-foreground">
+                  {messageActionsT.accessibility.keyboardNavDesc}
+                </p>
               </div>
               <Separator />
               <div>
-                <h3 className="font-semibold mb-2">Visual Feedback</h3>
+                <h3 className="font-semibold mb-2">{messageActionsT.accessibility.ariaLabels}</h3>
                 <p className="text-muted-foreground">
-                  Copy button shows a checkmark when clicked. Feedback buttons change color when selected,
-                  providing clear visual feedback for user actions.
+                  {messageActionsT.accessibility.ariaLabelsDesc}
                 </p>
               </div>
             </CardContent>
@@ -393,17 +395,16 @@ export default function MessageActionsPage() {
 
         {/* RTL Considerations */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">RTL Considerations</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.rtl}</h2>
           <Card>
             <CardContent className="p-6 space-y-4">
               <p className="text-muted-foreground">
-                The action buttons work seamlessly in RTL layouts. Button labels appear in the correct
-                language and icon spacing adapts automatically.
+                {messageActionsT.rtl.description}
               </p>
               <CodeBlock code={rtlCode} language="tsx" />
               <div className="grid gap-4 md:grid-cols-2 mt-6">
                 <div className="space-y-2">
-                  <h4 className="font-semibold text-sm">LTR (English)</h4>
+                  <h4 className="font-semibold text-sm">{t.componentPage.rtlDemo.ltr}</h4>
                   <div dir="ltr">
                     <MessageActions
                       showCopy
@@ -416,7 +417,7 @@ export default function MessageActionsPage() {
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <h4 className="font-semibold text-sm">RTL (العربية)</h4>
+                  <h4 className="font-semibold text-sm">{t.componentPage.rtlDemo.rtl}</h4>
                   <div dir="rtl">
                     <MessageActions
                       showCopy
@@ -436,35 +437,25 @@ export default function MessageActionsPage() {
 
         {/* Related */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Related Components</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{messageActionsT.related.title}</h2>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             <Card>
               <CardContent className="p-4">
                 <Link href="/components/chat-message" className="font-medium hover:underline">
-                  Chat Message
+                  {content[locale]?.chatMessageComponent?.title || content.en.chatMessageComponent.title}
                 </Link>
                 <p className="text-sm text-muted-foreground mt-1">
-                  Display chat messages with actions
+                  {messageActionsT.related.chatMessage}
                 </p>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="p-4">
                 <Link href="/components/prompt-input" className="font-medium hover:underline">
-                  Prompt Input
+                  {content[locale]?.promptInputComponent?.title || content.en.promptInputComponent.title}
                 </Link>
                 <p className="text-sm text-muted-foreground mt-1">
-                  Input component for sending messages
-                </p>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardContent className="p-4">
-                <Link href="/components/thinking-indicator" className="font-medium hover:underline">
-                  Thinking Indicator
-                </Link>
-                <p className="text-sm text-muted-foreground mt-1">
-                  Loading state for AI responses
+                  {messageActionsT.related.promptInput}
                 </p>
               </CardContent>
             </Card>

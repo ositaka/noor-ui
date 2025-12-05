@@ -13,106 +13,106 @@ import { CodeBlock } from '@/components/docs/code-block'
 import { Zap, Cpu, FileOutput, AlertCircle } from 'lucide-react'
 import { type Node, type Edge } from '@xyflow/react'
 
-const workflowCanvasProps: PropDefinition[] = [
+const getWorkflowCanvasProps = (componentT: any): PropDefinition[] => [
   {
     name: 'initialNodes',
     type: 'Node[]',
     default: '[]',
     required: false,
-    description: 'Initial nodes for the workflow',
+    description: componentT.props.initialNodes,
   },
   {
     name: 'initialEdges',
     type: 'Edge[]',
     default: '[]',
     required: false,
-    description: 'Initial edges/connections between nodes',
+    description: componentT.props.initialEdges,
   },
   {
     name: 'nodeTypes',
     type: 'Record<string, React.ComponentType<any>>',
     required: false,
-    description: 'Custom node type components',
+    description: componentT.props.nodeTypes,
   },
   {
     name: 'onNodesChange',
     type: 'OnNodesChange',
     required: false,
-    description: 'Callback when nodes change (move, select, delete)',
+    description: componentT.props.onNodesChange,
   },
   {
     name: 'onEdgesChange',
     type: 'OnEdgesChange',
     required: false,
-    description: 'Callback when edges change',
+    description: componentT.props.onEdgesChange,
   },
   {
     name: 'onConnect',
     type: 'OnConnect',
     required: false,
-    description: 'Callback when nodes are connected',
+    description: componentT.props.onConnect,
   },
   {
     name: 'readOnly',
     type: 'boolean',
     default: 'false',
     required: false,
-    description: 'Whether the canvas is read-only (no editing)',
+    description: componentT.props.readOnly,
   },
   {
     name: 'showMiniMap',
     type: 'boolean',
     default: 'true',
     required: false,
-    description: 'Show the minimap navigation',
+    description: componentT.props.showMiniMap,
   },
   {
     name: 'showControls',
     type: 'boolean',
     default: 'true',
     required: false,
-    description: 'Show zoom and fit view controls',
+    description: componentT.props.showControls,
   },
   {
     name: 'showBackground',
     type: 'boolean',
     default: 'true',
     required: false,
-    description: 'Show background pattern',
+    description: componentT.props.showBackground,
   },
   {
     name: 'backgroundVariant',
     type: "'dots' | 'lines' | 'cross'",
     default: "'dots'",
     required: false,
-    description: 'Background pattern variant',
+    description: componentT.props.backgroundVariant,
   },
   {
     name: 'isRTL',
     type: 'boolean',
     default: 'false',
     required: false,
-    description: 'Whether text direction is RTL',
+    description: componentT.props.isRTL,
   },
   {
     name: 'className',
     type: 'string',
     required: false,
-    description: 'Additional CSS classes',
+    description: componentT.props.className,
   },
   {
     name: 'fitViewOptions',
     type: 'FitViewOptions',
     default: '{ padding: 0.2 }',
     required: false,
-    description: 'Options for fitting the view',
+    description: componentT.props.fitViewOptions,
   },
   {
     name: 'defaultEdgeOptions',
     type: 'DefaultEdgeOptions',
     default: "{ animated: false, type: 'smoothstep' }",
     required: false,
-    description: 'Default options for edges',
+    description: componentT.props.defaultEdgeOptions,
   },
 ]
 
@@ -275,6 +275,12 @@ const nodeTypes = {
 }
 
 export default function WorkflowCanvasPage() {
+  const { direction, locale } = useDirection()
+  const t = content[locale] || content.en
+  const workflowCanvasT = (content[locale]?.workflowCanvasComponent || content.en.workflowCanvasComponent) as any
+
+  const workflowCanvasProps = getWorkflowCanvasProps(workflowCanvasT)
+
   return (
     <div className="min-h-screen">
       <main id="main-content" className="container py-12">
@@ -283,17 +289,17 @@ export default function WorkflowCanvasPage() {
           <ol className="flex items-center gap-2 text-sm text-muted-foreground">
             <li>
               <Link href="/" className="hover:text-foreground transition-colors">
-                Home
+                {t.common.home}
               </Link>
             </li>
             <li>/</li>
             <li>
               <Link href="/components" className="hover:text-foreground transition-colors">
-                Components
+                {t.nav.components}
               </Link>
             </li>
             <li>/</li>
-            <li className="text-foreground font-medium">Workflow Canvas</li>
+            <li className="text-foreground font-medium">{workflowCanvasT.title}</li>
           </ol>
         </nav>
 
@@ -308,8 +314,8 @@ export default function WorkflowCanvasPage() {
           </div>
           <div className="space-y-3">
             <p className="text-xl text-muted-foreground max-w-3xl">
-              Canvas component for building node-based workflows with drag-and-drop, pan/zoom, minimap, and controls. Perfect for automation builders.
-            </p>
+            {workflowCanvasT.description}
+          </p>
             <div className="flex items-start gap-2 p-3 bg-yellow-50 dark:bg-yellow-950/20 border border-yellow-200 dark:border-yellow-800 rounded-lg max-w-3xl">
               <AlertCircle className="h-4 w-4 text-yellow-600 dark:text-yellow-500 mt-0.5 flex-shrink-0" />
               <p className="text-sm text-yellow-800 dark:text-yellow-200">
@@ -321,7 +327,7 @@ export default function WorkflowCanvasPage() {
 
         {/* Preview */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Preview</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{workflowCanvasT.preview}</h2>
           <ComponentShowcase>
             <ComponentShowcase.Demo>
               <div style={{ height: '400px', width: '100%' }}>
@@ -337,19 +343,19 @@ export default function WorkflowCanvasPage() {
 
         {/* Installation */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Installation</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{workflowCanvasT.installation}</h2>
           <CodeBlock code={installCode} language="bash" title="Terminal" />
         </section>
 
         {/* Usage */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Usage</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{workflowCanvasT.usage}</h2>
           <CodeBlock code={basicUsageCode} language="tsx" title="React" />
         </section>
 
         {/* Examples */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Examples</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{workflowCanvasT.examples.title}</h2>
 
           <div className="space-y-8">
             {/* Simple Workflow */}
@@ -422,13 +428,13 @@ export default function WorkflowCanvasPage() {
 
         {/* Props */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Props</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.props}</h2>
           <PropsTable props={workflowCanvasProps} />
         </section>
 
         {/* Accessibility */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Accessibility</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.accessibility}</h2>
           <Card>
             <CardContent className="p-6 space-y-4">
               <div>
@@ -464,7 +470,7 @@ export default function WorkflowCanvasPage() {
 
         {/* RTL Considerations */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">RTL Considerations</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.rtl}</h2>
           <Card>
             <CardContent className="p-6 space-y-4">
               <p className="text-muted-foreground">
@@ -474,7 +480,7 @@ export default function WorkflowCanvasPage() {
               <CodeBlock code={rtlCode} language="tsx" />
               <div className="grid gap-4 md:grid-cols-2 mt-6">
                 <div className="space-y-2">
-                  <h4 className="font-semibold text-sm">LTR (English)</h4>
+                  <h4 className="font-semibold text-sm">{t.componentPage.rtlDemo.ltr}</h4>
                   <div dir="ltr" style={{ height: '300px' }}>
                     <WorkflowCanvas
                       initialNodes={[
@@ -499,7 +505,7 @@ export default function WorkflowCanvasPage() {
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <h4 className="font-semibold text-sm">RTL (العربية)</h4>
+                  <h4 className="font-semibold text-sm">{t.componentPage.rtlDemo.rtl}</h4>
                   <div dir="rtl" style={{ height: '300px' }}>
                     <WorkflowCanvas
                       initialNodes={[
@@ -531,7 +537,7 @@ export default function WorkflowCanvasPage() {
 
         {/* Related Components */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Related Components</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{workflowCanvasT.related.title}</h2>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             <Card>
               <CardContent className="p-4">

@@ -312,6 +312,8 @@ paginationComponent: {
         withText: 'مع معلومات الصفحة',
         controlled: 'متحكم به',
         customSize: 'حجم مخصص',
+        withEllipsis: 'مع علامة الحذف',
+        rtlExample: 'مثال دعم RTL',
       },
       props: {
         title: 'الخصائص',
@@ -331,10 +333,6 @@ paginationComponent: {
         previous: 'السابق',
         next: 'التالي',
         currentPage: 'الصفحة الحالية:',
-      },
-      examples: {
-        withEllipsis: 'مع علامة الحذف',
-        rtlExample: 'مثال دعم RTL',
       },
       propDescriptions: {
         isActive: 'ما إذا كانت هذه الصفحة هي الصفحة النشطة حاليًا',
@@ -367,47 +365,24 @@ paginationComponent: {
       },
     },
 
-accordionComponent: {
-      title: 'الأكورديون',
-      description: 'أقسام محتوى قابلة للتوسيع. مبني على Radix UI مع رسوم متحركة سلسة ودعم مثالي لـ RTL.',
-      preview: 'معاينة',
-      installation: 'التثبيت',
-      usage: 'الاستخدام',
-      examples: {
-        title: 'أمثلة',
-        single: 'فردي',
-        multiple: 'متعدد',
-        withIcons: 'مع أيقونات',
-        styled: 'منسق',
-      },
-      props: {
-        title: 'الخصائص',
-        type: 'يمكن فتح عنصر واحد أو متعدد',
-        collapsible: 'ما إذا كان يمكن طي العناصر',
-        defaultValue: 'العنصر (العناصر) المفتوح افتراضياً',
-        value: 'العنصر (العناصر) المفتوح المتحكم به',
-      },
-      accessibility: {
-        title: 'إمكانية الوصول',
-      },
-      rtl: {
-        title: 'اعتبارات RTL',
-        description: 'أسهم الأكورديون والمحتوى تتكيف تلقائياً مع تخطيط RTL.',
-      },
-    },
-
 collapsibleComponent: {
       title: 'القابل للطي',
       description: 'إظهار وإخفاء المحتوى مع رسوم متحركة سلسة. مبني على Radix UI مع دعم كامل لـ RTL.',
       preview: 'معاينة',
       installation: 'التثبيت',
       usage: 'الاستخدام',
+      sections: {
+        compositionPattern: 'نمط التركيب',
+      },
       examples: {
         title: 'أمثلة',
         basic: 'أساسي',
         controlled: 'متحكم به',
+        controlledWithIcon: 'متحكم به مع أيقونة متحركة',
         withTrigger: 'مشغل مخصص',
         animated: 'متحرك',
+        sidebarStyle: 'نمط الشريط الجانبي',
+        faqStyle: 'نمط الأسئلة الشائعة',
       },
       props: {
         title: 'الخصائص',
@@ -418,10 +393,16 @@ collapsibleComponent: {
       },
       accessibility: {
         title: 'إمكانية الوصول',
+        keyboardNavigation: 'التنقل بلوحة المفاتيح',
+        ariaAttributes: 'سمات ARIA',
+        visualIndicators: 'مؤشرات بصرية',
       },
       rtl: {
         title: 'اعتبارات RTL',
         description: 'محتوى ورسوم متحركة القابل للطي تعمل بشكل مثالي في تخطيطات RTL.',
+      },
+      related: {
+        title: 'المكونات ذات الصلة',
       },
     },
 

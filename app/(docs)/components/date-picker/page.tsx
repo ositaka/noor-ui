@@ -281,7 +281,7 @@ export default function DatePickerPage() {
         <h2 className="text-2xl font-bold tracking-tight mb-6">
           {t.datePickerComponent.usage}
         </h2>
-        <ComponentShowcase code={basicCode}>
+        <ComponentShowcase>
           <ComponentShowcase.Demo>
             <div className="w-full max-w-xs mx-auto space-y-2">
               <Label>{t.datePickerComponent.labels.dateOfBirth}</Label>
@@ -295,6 +295,9 @@ export default function DatePickerPage() {
             </div>
           </ComponentShowcase.Demo>
         </ComponentShowcase>
+        <div className="mt-6">
+          <CodeBlock code={basicCode} language="tsx" />
+        </div>
       </section>
 
       {/* Date Range */}
@@ -302,7 +305,7 @@ export default function DatePickerPage() {
         <h2 className="text-2xl font-bold tracking-tight mb-6">
           {t.datePickerComponent.examples.dateRange}
         </h2>
-        <ComponentShowcase code={rangeCode}>
+        <ComponentShowcase>
           <ComponentShowcase.Demo>
             <div className="w-full max-w-md mx-auto space-y-2">
               <Label>{t.datePickerComponent.labels.bookingPeriod}</Label>
@@ -316,6 +319,9 @@ export default function DatePickerPage() {
             </div>
           </ComponentShowcase.Demo>
         </ComponentShowcase>
+        <div className="mt-6">
+          <CodeBlock code={rangeCode} language="tsx" />
+        </div>
       </section>
 
       {/* With Constraints */}
@@ -323,7 +329,7 @@ export default function DatePickerPage() {
         <h2 className="text-2xl font-bold tracking-tight mb-6">
           {t.datePickerComponent.examples.withConstraints}
         </h2>
-        <ComponentShowcase code={constraintsCode}>
+        <ComponentShowcase>
           <ComponentShowcase.Demo>
             <div className="w-full max-w-xs mx-auto space-y-2">
               <Label>{t.datePickerComponent.labels.appointmentDate}</Label>
@@ -343,6 +349,9 @@ export default function DatePickerPage() {
             </div>
           </ComponentShowcase.Demo>
         </ComponentShowcase>
+        <div className="mt-6">
+          <CodeBlock code={constraintsCode} language="tsx" />
+        </div>
       </section>
 
       {/* Disabled Dates */}
@@ -350,7 +359,7 @@ export default function DatePickerPage() {
         <h2 className="text-2xl font-bold tracking-tight mb-6">
           {t.datePickerComponent.examples.disabledDates}
         </h2>
-        <ComponentShowcase code={disabledCode}>
+        <ComponentShowcase>
           <ComponentShowcase.Demo>
             <div className="w-full max-w-xs mx-auto space-y-2">
               <Label>{t.datePickerComponent.labels.workingDay}</Label>
@@ -367,6 +376,9 @@ export default function DatePickerPage() {
             </div>
           </ComponentShowcase.Demo>
         </ComponentShowcase>
+        <div className="mt-6">
+          <CodeBlock code={disabledCode} language="tsx" />
+        </div>
       </section>
 
       {/* Real-World Example */}
@@ -374,32 +386,7 @@ export default function DatePickerPage() {
         <h2 className="text-2xl font-bold tracking-tight mb-6">
           {t.datePickerComponent.examples.realWorld}
         </h2>
-        <ComponentShowcase code={`const [dateRange, setDateRange] = useState<DateRange>()
-const today = new Date()
-const nights = dateRange?.from && dateRange?.to
-  ? Math.ceil((dateRange.to.getTime() - dateRange.from.getTime()) / (1000 * 60 * 60 * 24))
-  : 0
-
-<Card>
-  <CardHeader>
-    <CardTitle>Hotel Room Booking</CardTitle>
-    <CardDescription>Select check-in and check-out dates</CardDescription>
-  </CardHeader>
-  <CardContent className="space-y-6">
-    <DateRangePicker
-      dateRange={dateRange}
-      onDateRangeChange={setDateRange}
-      minDate={today}
-      placeholder="Select dates"
-    />
-    {dateRange?.from && dateRange?.to && (
-      <div className="space-y-2">
-        <div>Nights: {nights}</div>
-        <div>Total: \${nights * 150}</div>
-      </div>
-    )}
-  </CardContent>
-</Card>`}>
+        <ComponentShowcase>
           <ComponentShowcase.Demo>
             <Card className="w-full max-w-md mx-auto">
               <CardHeader>
@@ -455,6 +442,34 @@ const nights = dateRange?.from && dateRange?.to
             </Card>
           </ComponentShowcase.Demo>
         </ComponentShowcase>
+        <div className="mt-6">
+          <CodeBlock code={`const [dateRange, setDateRange] = useState<DateRange>()
+const today = new Date()
+const nights = dateRange?.from && dateRange?.to
+  ? Math.ceil((dateRange.to.getTime() - dateRange.from.getTime()) / (1000 * 60 * 60 * 24))
+  : 0
+
+<Card>
+  <CardHeader>
+    <CardTitle>Hotel Room Booking</CardTitle>
+    <CardDescription>Select check-in and check-out dates</CardDescription>
+  </CardHeader>
+  <CardContent className="space-y-6">
+    <DateRangePicker
+      dateRange={dateRange}
+      onDateRangeChange={setDateRange}
+      minDate={today}
+      placeholder="Select dates"
+    />
+    {dateRange?.from && dateRange?.to && (
+      <div className="space-y-2">
+        <div>Nights: {nights}</div>
+        <div>Total: \${nights * 150}</div>
+      </div>
+    )}
+  </CardContent>
+</Card>`} language="tsx" />
+        </div>
       </section>
 
       {/* Use Cases */}

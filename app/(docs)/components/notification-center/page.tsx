@@ -1,61 +1,60 @@
 'use client'
 
-import * as React from 'react'
-import Link from 'next/link'
-import { ComponentShowcase } from '@/components/docs/component-showcase'
-import { PropsTable } from '@/components/docs/props-table'
-import { CodeBlock } from '@/components/docs/code-block'
 import { BestPractices } from '@/components/docs/best-practices'
-import { NotificationCenter, type Notification } from '@/components/ui/notification-center'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
-import { MessageSquare, UserPlus, Heart, Star } from 'lucide-react'
-import { useToast } from '@/hooks/use-toast'
+import { CodeBlock } from '@/components/docs/code-block'
+import { ComponentShowcase } from '@/components/docs/component-showcase'
+import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { useDirection } from '@/components/providers/direction-provider'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { NotificationCenter, type Notification } from '@/components/ui/notification-center'
+import { useToast } from '@/hooks/use-toast'
 import { content } from '@/lib/i18n'
+import { Heart, MessageSquare, Star, UserPlus } from 'lucide-react'
+import Link from 'next/link'
+import * as React from 'react'
 
-const propDefinitions = [
+const getProps = (componentT: any): PropDefinition[] => [
   {
     name: 'notifications',
     type: 'Notification[]',
     defaultValue: '[]',
-    description: 'Array of notification objects to display',
+    description: componentT.props.notifications,
   },
   {
     name: 'onNotificationClick',
     type: '(notification: Notification) => void',
-    description: 'Callback when a notification is clicked',
+    description: componentT.props.onNotificationClick,
   },
   {
     name: 'onMarkAsRead',
     type: '(id: string) => void',
-    description: 'Callback when a notification is marked as read',
+    description: componentT.props.onMarkAsRead,
   },
   {
     name: 'onMarkAllAsRead',
     type: '() => void',
-    description: 'Callback when "Mark all as read" is clicked',
+    description: componentT.props.onMarkAllAsRead,
   },
   {
     name: 'onClearAll',
     type: '() => void',
-    description: 'Callback when "Clear all" is clicked',
+    description: componentT.props.onClearAll,
   },
   {
     name: 'onRemove',
     type: '(id: string) => void',
-    description: 'Callback when a notification is removed',
+    description: componentT.props.onRemove,
   },
   {
     name: 'className',
     type: 'string',
-    description: 'Additional CSS classes for the trigger button',
+    description: componentT.props.className,
   },
   {
     name: 'maxHeight',
     type: 'string',
     defaultValue: '"400px"',
-    description: 'Maximum height of the notifications list',
+    description: componentT.props.maxHeight,
   },
 ]
 
@@ -122,6 +121,7 @@ export default function NotificationCenterPage() {
 
   const t = content[locale] || content.en
   const notificationCenterT = (content[locale]?.notificationCenterComponent || content.en.notificationCenterComponent) as any
+  const propDefinitions = getProps(notificationCenterT)
 
   const [notifications1, setNotifications1] = React.useState<Notification[]>([
     {
@@ -194,35 +194,33 @@ export default function NotificationCenterPage() {
           <ol className="flex items-center gap-2 text-sm text-muted-foreground">
             <li>
               <Link href="/" className="hover:text-foreground transition-colors">
-                Home
+                {t.common.home}
               </Link>
             </li>
             <li>/</li>
             <li>
               <Link href="/components" className="hover:text-foreground transition-colors">
-                Components
+                {t.nav.components}
               </Link>
             </li>
             <li>/</li>
-            <li className="text-foreground font-medium">Notification Center</li>
+            <li className="text-foreground font-medium">{notificationCenterT.title}</li>
           </ol>
         </nav>
 
         {/* Page Header */}
         <div className="mb-12">
           <div className="flex items-center gap-3 mb-4">
-            <h1 className="text-4xl font-bold tracking-tight">Notification Center</h1>
-            <Badge variant="default">New</Badge>
+            <h1 className="text-4xl font-bold tracking-tight">{notificationCenterT.title}</h1>
           </div>
           <p className="text-xl text-muted-foreground max-w-3xl">
-            A bell icon with dropdown displaying notifications, unread count badge, and actions
-            to manage notifications. Fully bilingual with RTL support.
+            {notificationCenterT.description}
           </p>
         </div>
 
         {/* Preview */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Preview</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{notificationCenterT.preview}</h2>
           <ComponentShowcase
             code={`'use client'
 
@@ -277,53 +275,53 @@ export default function Example() {
 
         {/* Features */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Features</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.features}</h2>
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             <Card>
               <CardContent className="p-6">
-                <h3 className="font-semibold mb-2">Unread Badge</h3>
+                <h3 className="font-semibold mb-2">{notificationCenterT.features.unreadBadge}</h3>
                 <p className="text-sm text-muted-foreground">
-                  Badge showing unread count on the bell icon
+                  {notificationCenterT.features.unreadBadgeDesc}
                 </p>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="p-6">
-                <h3 className="font-semibold mb-2">Relative Time</h3>
+                <h3 className="font-semibold mb-2">{notificationCenterT.features.relativeTime}</h3>
                 <p className="text-sm text-muted-foreground">
-                  Smart time display (5m ago, 2h ago, etc.) in both languages
+                  {notificationCenterT.features.relativeTimeDesc}
                 </p>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="p-6">
-                <h3 className="font-semibold mb-2">Icons & Avatars</h3>
+                <h3 className="font-semibold mb-2">{notificationCenterT.features.iconsAvatars}</h3>
                 <p className="text-sm text-muted-foreground">
-                  Support for custom icons or user avatars
+                  {notificationCenterT.features.iconsAvatarsDesc}
                 </p>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="p-6">
-                <h3 className="font-semibold mb-2">Mark as Read</h3>
+                <h3 className="font-semibold mb-2">{notificationCenterT.features.markAsRead}</h3>
                 <p className="text-sm text-muted-foreground">
-                  Individual or bulk mark as read functionality
+                  {notificationCenterT.features.markAsReadDesc}
                 </p>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="p-6">
-                <h3 className="font-semibold mb-2">Remove Notifications</h3>
+                <h3 className="font-semibold mb-2">{notificationCenterT.features.removeNotifications}</h3>
                 <p className="text-sm text-muted-foreground">
-                  Hover to reveal remove button on each notification
+                  {notificationCenterT.features.removeNotificationsDesc}
                 </p>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="p-6">
-                <h3 className="font-semibold mb-2">Bilingual</h3>
+                <h3 className="font-semibold mb-2">{notificationCenterT.features.bilingual}</h3>
                 <p className="text-sm text-muted-foreground">
-                  Full Arabic support with proper time formatting
+                  {notificationCenterT.features.bilingualDesc}
                 </p>
               </CardContent>
             </Card>
@@ -332,12 +330,12 @@ export default function Example() {
 
         {/* Examples */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Examples</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{notificationCenterT.examples.title}</h2>
 
           <div className="space-y-8">
             {/* With Avatars */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">With Avatars</h3>
+              <h3 className="text-lg font-semibold mb-4">{notificationCenterT.examples.withAvatars}</h3>
               <Card>
                 <CardContent className="p-6">
                   <div className="flex justify-center">
@@ -357,7 +355,7 @@ export default function Example() {
 
             {/* Empty State */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">Empty State</h3>
+              <h3 className="text-lg font-semibold mb-4">{notificationCenterT.examples.emptyState}</h3>
               <Card>
                 <CardContent className="p-6">
                   <div className="flex justify-center">
@@ -374,25 +372,16 @@ export default function Example() {
 
         {/* Notification Type */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Notification Type</h2>
-          <Card>
-            <CardHeader>
-              <CardTitle>Notification Interface</CardTitle>
-              <CardDescription>
-                Structure of a notification object
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <pre className="bg-muted p-4 rounded-md overflow-x-auto">
-                <code className="text-sm">{notificationTypeDefinition}</code>
-              </pre>
-            </CardContent>
-          </Card>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{notificationCenterT.notificationType.title}</h2>
+          <p className="text-muted-foreground mb-4">
+            {notificationCenterT.notificationType.interfaceDesc}
+          </p>
+          <CodeBlock code={notificationTypeDefinition} language="typescript" />
         </section>
 
         {/* Props */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Props</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.props}</h2>
           <PropsTable props={propDefinitions} />
         </section>
 
@@ -407,29 +396,29 @@ export default function Example() {
 
         {/* Accessibility */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Accessibility</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.accessibility}</h2>
           <Card>
             <CardContent className="pt-6">
               <ul className="space-y-3 text-sm text-muted-foreground">
                 <li className="flex items-start gap-2">
                   <span className="text-primary font-bold">✓</span>
-                  <span>Bell icon button has proper aria-label</span>
+                  <span>{notificationCenterT.accessibility.bellIconLabel}</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-primary font-bold">✓</span>
-                  <span>Unread count badge is visible to screen readers</span>
+                  <span>{notificationCenterT.accessibility.unreadCountVisible}</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-primary font-bold">✓</span>
-                  <span>Keyboard navigation through notifications</span>
+                  <span>{notificationCenterT.accessibility.keyboardNavigation}</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-primary font-bold">✓</span>
-                  <span>Clear visual distinction between read/unread states</span>
+                  <span>{notificationCenterT.accessibility.visualDistinction}</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-primary font-bold">✓</span>
-                  <span>Escape key closes the popover</span>
+                  <span>{notificationCenterT.accessibility.escapeCloses}</span>
                 </li>
               </ul>
             </CardContent>

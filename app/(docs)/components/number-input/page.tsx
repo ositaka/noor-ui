@@ -222,7 +222,7 @@ export default function NumberInputPage() {
         <h2 className="text-2xl font-bold tracking-tight mb-6">
           {t.numberInputComponent.usage}
         </h2>
-        <ComponentShowcase code={basicCode}>
+        <ComponentShowcase>
           <ComponentShowcase.Demo>
             <div className="w-full max-w-xs mx-auto space-y-2">
               <Label>{t.numberInputComponent.labels.quantity}</Label>
@@ -233,6 +233,9 @@ export default function NumberInputPage() {
             </div>
           </ComponentShowcase.Demo>
         </ComponentShowcase>
+        <div className="mt-6">
+          <CodeBlock code={basicCode} language="tsx" />
+        </div>
       </section>
 
       <section className="mb-16">
@@ -247,7 +250,7 @@ export default function NumberInputPage() {
         <h2 className="text-2xl font-bold tracking-tight mb-6">
           {t.numberInputComponent.examples.withoutControls}
         </h2>
-        <ComponentShowcase code={withoutControlsCode}>
+        <ComponentShowcase>
           <ComponentShowcase.Demo>
             <div className="w-full max-w-xs mx-auto space-y-2">
               <Label>{t.numberInputComponent.labels.amount}</Label>
@@ -263,6 +266,9 @@ export default function NumberInputPage() {
             </div>
           </ComponentShowcase.Demo>
         </ComponentShowcase>
+        <div className="mt-6">
+          <CodeBlock code={withoutControlsCode} language="tsx" />
+        </div>
       </section>
 
       {/* Decimal Precision */}
@@ -270,7 +276,7 @@ export default function NumberInputPage() {
         <h2 className="text-2xl font-bold tracking-tight mb-6">
           {t.numberInputComponent.examples.decimalPrecision}
         </h2>
-        <ComponentShowcase code={decimalCode}>
+        <ComponentShowcase>
           <ComponentShowcase.Demo>
             <div className="w-full max-w-xs mx-auto space-y-2">
               <Label>{t.numberInputComponent.labels.percentage}</Label>
@@ -281,6 +287,9 @@ export default function NumberInputPage() {
             </div>
           </ComponentShowcase.Demo>
         </ComponentShowcase>
+        <div className="mt-6">
+          <CodeBlock code={decimalCode} language="tsx" />
+        </div>
       </section>
 
       {/* Formatted Display */}
@@ -288,7 +297,7 @@ export default function NumberInputPage() {
         <h2 className="text-2xl font-bold tracking-tight mb-6">
           {t.numberInputComponent.examples.formattedDisplay}
         </h2>
-        <ComponentShowcase code={formattedCode}>
+        <ComponentShowcase>
           <ComponentShowcase.Demo>
             <div className="w-full max-w-xs mx-auto space-y-2">
               <Label>{t.numberInputComponent.labels.amount}</Label>
@@ -305,6 +314,9 @@ export default function NumberInputPage() {
             </div>
           </ComponentShowcase.Demo>
         </ComponentShowcase>
+        <div className="mt-6">
+          <CodeBlock code={formattedCode} language="tsx" />
+        </div>
       </section>
 
       {/* Currency Example */}
@@ -312,7 +324,7 @@ export default function NumberInputPage() {
         <h2 className="text-2xl font-bold tracking-tight mb-6">
           {t.numberInputComponent.examples.currencyInput}
         </h2>
-        <ComponentShowcase code={currencyCode}>
+        <ComponentShowcase>
           <ComponentShowcase.Demo>
             <div className="w-full max-w-xs mx-auto space-y-2">
               <Label>{t.numberInputComponent.labels.price}</Label>
@@ -330,6 +342,9 @@ export default function NumberInputPage() {
             </div>
           </ComponentShowcase.Demo>
         </ComponentShowcase>
+        <div className="mt-6">
+          <CodeBlock code={currencyCode} language="tsx" />
+        </div>
       </section>
 
       {/* Real-World Example */}
@@ -337,32 +352,7 @@ export default function NumberInputPage() {
         <h2 className="text-2xl font-bold tracking-tight mb-6">
           {t.numberInputComponent.examples.realWorld}
         </h2>
-        <ComponentShowcase code={`const [quantity, setQuantity] = useState(1)
-const formatCurrency = (value: number) =>
-  new Intl.NumberFormat(locale, { style: 'currency', currency: 'USD' }).format(value)
-
-<Card>
-  <CardHeader>
-    <CardTitle>Product Order</CardTitle>
-    <CardDescription>Select quantity to calculate total</CardDescription>
-  </CardHeader>
-  <CardContent className="space-y-6">
-    <div className="space-y-2">
-      <Label>Quantity</Label>
-      <NumberInput value={quantity} onChange={setQuantity} min={1} max={99} />
-    </div>
-    <div className="flex justify-between items-center pt-4 border-t">
-      <span className="text-sm text-muted-foreground">Unit Price:</span>
-      <span className="font-semibold">{formatCurrency(29.99)}</span>
-    </div>
-    <div className="flex justify-between items-center">
-      <span className="text-lg font-semibold">Total:</span>
-      <span className="text-2xl font-bold text-primary">
-        {formatCurrency(quantity * 29.99)}
-      </span>
-    </div>
-  </CardContent>
-</Card>`}>
+        <ComponentShowcase>
           <ComponentShowcase.Demo>
             <Card className="w-full max-w-md mx-auto">
               <CardHeader>
@@ -404,6 +394,34 @@ const formatCurrency = (value: number) =>
             </Card>
           </ComponentShowcase.Demo>
         </ComponentShowcase>
+        <div className="mt-6">
+          <CodeBlock code={`const [quantity, setQuantity] = useState(1)
+const formatCurrency = (value: number) =>
+  new Intl.NumberFormat(locale, { style: 'currency', currency: 'USD' }).format(value)
+
+<Card>
+  <CardHeader>
+    <CardTitle>Product Order</CardTitle>
+    <CardDescription>Select quantity to calculate total</CardDescription>
+  </CardHeader>
+  <CardContent className="space-y-6">
+    <div className="space-y-2">
+      <Label>Quantity</Label>
+      <NumberInput value={quantity} onChange={setQuantity} min={1} max={99} />
+    </div>
+    <div className="flex justify-between items-center pt-4 border-t">
+      <span className="text-sm text-muted-foreground">Unit Price:</span>
+      <span className="font-semibold">{formatCurrency(29.99)}</span>
+    </div>
+    <div className="flex justify-between items-center">
+      <span className="text-lg font-semibold">Total:</span>
+      <span className="text-2xl font-bold text-primary">
+        {formatCurrency(quantity * 29.99)}
+      </span>
+    </div>
+  </CardContent>
+</Card>`} language="tsx" />
+        </div>
       </section>
 
       {/* Use Cases */}

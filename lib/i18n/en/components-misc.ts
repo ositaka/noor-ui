@@ -159,6 +159,14 @@ stepperComponent: {
         rtlSupport: 'RTL/LTR support',
         accessibility: 'Accessibility features (ARIA)',
       },
+      props: {
+        steps: 'Array of step objects with id, title, titleAr, description, optional fields',
+        currentStep: 'Index of the current step (0-based)',
+        onStepClick: 'Callback when a step is clicked',
+        orientation: 'Layout orientation of the stepper',
+        variant: 'Visual style variant',
+        allowSkip: 'Allow clicking on future steps',
+      },
     },
 
   reactionPickerComponent: {

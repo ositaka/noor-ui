@@ -294,42 +294,6 @@ export default function PopoverPage() {
           </div>
         </section>
 
-        {/* RTL Support Example */}
-        <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.popoverComponent.rtl.example}</h2>
-          <p className="text-muted-foreground mb-6">
-            {t.popoverComponent.rtl.exampleDescription}
-          </p>
-          <ComponentShowcase.Comparison ltrLabel="LTR (English)" rtlLabel="RTL (العربية)">
-            <Popover>
-              <PopoverTrigger asChild>
-                <Button variant="outline">
-                  <Settings className="me-2 h-4 w-4" />
-                  {t.popoverComponent.demo.quickSettings}
-                </Button>
-              </PopoverTrigger>
-              <PopoverContent className="w-80">
-                <div className="space-y-4">
-                  <div className="space-y-2">
-                    <h4 className="font-medium leading-none">{t.popoverComponent.demo.displaySettings}</h4>
-                    <p className="text-sm text-muted-foreground">
-                      {t.popoverComponent.demo.displayDesc}
-                    </p>
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="brightness">{t.popoverComponent.demo.brightness}</Label>
-                    <Input id="brightness" defaultValue="75%" />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="contrast">{t.popoverComponent.demo.contrast}</Label>
-                    <Input id="contrast" defaultValue="100%" />
-                  </div>
-                </div>
-              </PopoverContent>
-            </Popover>
-          </ComponentShowcase.Comparison>
-        </section>
-
         {/* Props */}
         <section className="mb-16">
           <h2 className="text-2xl font-bold tracking-tight mb-4">{t.popoverComponent.props.title}</h2>

@@ -159,6 +159,14 @@ stepperComponent: {
         rtlSupport: 'دعم RTL/LTR',
         accessibility: 'ميزات إمكانية الوصول (ARIA)',
       },
+      props: {
+        steps: 'مصفوفة كائنات الخطوة مع id و title و titleAr و description وحقول اختيارية',
+        currentStep: 'فهرس الخطوة الحالية (يبدأ من 0)',
+        onStepClick: 'استدعاء عند النقر على خطوة',
+        orientation: 'اتجاه تخطيط مؤشر الخطوات',
+        variant: 'شكل النمط البصري',
+        allowSkip: 'السماح بالنقر على الخطوات المستقبلية',
+      },
     },
 
   reactionPickerComponent: {

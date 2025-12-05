@@ -13,67 +13,67 @@ import { CodeBlock } from '@/components/docs/code-block'
 import { Zap, Cpu, FileOutput, Mail, AlertCircle } from 'lucide-react'
 import { type Node, type Edge } from '@xyflow/react'
 
-const workflowNodeProps: PropDefinition[] = [
+const getWorkflowNodeProps = (componentT: any): PropDefinition[] => [
   {
     name: 'label',
     type: 'string',
     required: true,
-    description: 'Node label/title',
+    description: componentT.props.label,
   },
   {
     name: 'labelAr',
     type: 'string',
     required: false,
-    description: 'Node label in Arabic (for RTL)',
+    description: componentT.props.labelAr,
   },
   {
     name: 'description',
     type: 'string',
     required: false,
-    description: 'Node description text',
+    description: componentT.props.description,
   },
   {
     name: 'descriptionAr',
     type: 'string',
     required: false,
-    description: 'Node description in Arabic (for RTL)',
+    description: componentT.props.descriptionAr,
   },
   {
     name: 'type',
     type: 'string',
     required: false,
-    description: 'Node type/category (shown as badge)',
+    description: componentT.props.type,
   },
   {
     name: 'typeAr',
     type: 'string',
     required: false,
-    description: 'Node type in Arabic (for RTL)',
+    description: componentT.props.typeAr,
   },
   {
     name: 'icon',
     type: 'LucideIcon',
     required: false,
-    description: 'Icon component to display',
+    description: componentT.props.icon,
   },
   {
     name: 'status',
     type: "'active' | 'inactive' | 'error' | 'success'",
     required: false,
-    description: 'Badge status indicator color',
+    description: componentT.props.status,
   },
   {
     name: 'isRTL',
     type: 'boolean',
     default: 'false',
     required: false,
-    description: 'Whether text direction is RTL',
+    description: componentT.props.isRTL,
   },
   {
     name: 'children',
     type: 'React.ReactNode',
     required: false,
-    description: 'Custom content to render inside the node',
+    description: componentT.props.children,
   },
 ]
 
@@ -346,6 +346,12 @@ const childrenNode: Node[] = [
 ]
 
 export default function WorkflowNodePage() {
+  const { direction, locale } = useDirection()
+  const t = content[locale] || content.en
+  const workflowNodeT = (content[locale]?.workflowNodeComponent || content.en.workflowNodeComponent) as any
+
+  const workflowNodeProps = getWorkflowNodeProps(workflowNodeT)
+
   return (
     <div className="min-h-screen">
       <main id="main-content" className="container py-12">
@@ -354,17 +360,17 @@ export default function WorkflowNodePage() {
           <ol className="flex items-center gap-2 text-sm text-muted-foreground">
             <li>
               <Link href="/" className="hover:text-foreground transition-colors">
-                Home
+                {t.common.home}
               </Link>
             </li>
             <li>/</li>
             <li>
               <Link href="/components" className="hover:text-foreground transition-colors">
-                Components
+                {t.nav.components}
               </Link>
             </li>
             <li>/</li>
-            <li className="text-foreground font-medium">Workflow Node</li>
+            <li className="text-foreground font-medium">{workflowNodeT.title}</li>
           </ol>
         </nav>
 
@@ -379,8 +385,8 @@ export default function WorkflowNodePage() {
           </div>
           <div className="space-y-3">
             <p className="text-xl text-muted-foreground max-w-3xl">
-              Base node component for workflows with handles, status indicators, icons, and badges. Automatically adjusts handle positions for RTL.
-            </p>
+            {workflowNodeT.description}
+          </p>
             <div className="flex items-start gap-2 p-3 bg-yellow-50 dark:bg-yellow-950/20 border border-yellow-200 dark:border-yellow-800 rounded-lg max-w-3xl">
               <AlertCircle className="h-4 w-4 text-yellow-600 dark:text-yellow-500 mt-0.5 flex-shrink-0" />
               <p className="text-sm text-yellow-800 dark:text-yellow-200">
@@ -392,7 +398,7 @@ export default function WorkflowNodePage() {
 
         {/* Preview */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Preview</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{workflowNodeT.preview}</h2>
           <ComponentShowcase>
             <ComponentShowcase.Demo>
               <div style={{ height: '300px', width: '100%' }}>
@@ -410,19 +416,19 @@ export default function WorkflowNodePage() {
 
         {/* Installation */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Installation</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{workflowNodeT.installation}</h2>
           <CodeBlock code={installCode} language="bash" title="Terminal" />
         </section>
 
         {/* Usage */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Usage</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{workflowNodeT.usage}</h2>
           <CodeBlock code={basicUsageCode} language="tsx" title="React" />
         </section>
 
         {/* Examples */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Examples</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{workflowNodeT.examples.title}</h2>
 
           <div className="space-y-8">
             {/* Different Types */}
@@ -489,7 +495,7 @@ export default function WorkflowNodePage() {
 
         {/* Props */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Props</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.props}</h2>
           <div className="mb-4 p-4 bg-muted rounded-lg">
             <p className="text-sm text-muted-foreground">
               <strong>Note:</strong> These props are passed via the <code className="bg-background px-1 rounded">data</code> property of each node object in the WorkflowCanvas.
@@ -500,7 +506,7 @@ export default function WorkflowNodePage() {
 
         {/* Accessibility */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Accessibility</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.accessibility}</h2>
           <Card>
             <CardContent className="p-6 space-y-4">
               <div>
@@ -534,7 +540,7 @@ export default function WorkflowNodePage() {
 
         {/* RTL Considerations */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">RTL Considerations</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.rtl}</h2>
           <Card>
             <CardContent className="p-6 space-y-4">
               <p className="text-muted-foreground">
@@ -544,7 +550,7 @@ export default function WorkflowNodePage() {
               <CodeBlock code={rtlCode} language="tsx" />
               <div className="grid gap-4 md:grid-cols-2 mt-6">
                 <div className="space-y-2">
-                  <h4 className="font-semibold text-sm">LTR (English)</h4>
+                  <h4 className="font-semibold text-sm">{t.componentPage.rtlDemo.ltr}</h4>
                   <div dir="ltr" style={{ height: '250px' }}>
                     <WorkflowCanvas
                       initialNodes={[
@@ -580,7 +586,7 @@ export default function WorkflowNodePage() {
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <h4 className="font-semibold text-sm">RTL (العربية)</h4>
+                  <h4 className="font-semibold text-sm">{t.componentPage.rtlDemo.rtl}</h4>
                   <div dir="rtl" style={{ height: '250px' }}>
                     <WorkflowCanvas
                       initialNodes={[
@@ -631,7 +637,7 @@ export default function WorkflowNodePage() {
 
         {/* Related Components */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Related Components</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{workflowNodeT.related.title}</h2>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             <Card>
               <CardContent className="p-4">

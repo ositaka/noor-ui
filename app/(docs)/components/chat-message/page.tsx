@@ -12,83 +12,83 @@ import { CodeBlock } from '@/components/docs/code-block'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 
-const chatMessageProps: PropDefinition[] = [
+const getChatMessageProps = (componentT: any): PropDefinition[] => [
   {
     name: 'role',
     type: "'user' | 'assistant' | 'system'",
     required: true,
-    description: 'The role/sender of the message',
+    description: componentT.props.role,
   },
   {
     name: 'content',
     type: 'string',
     required: true,
-    description: 'The message content (supports markdown)',
+    description: componentT.props.content,
   },
   {
     name: 'variant',
     type: "'default' | 'compact'",
     default: "'default'",
     required: false,
-    description: 'Visual style variant',
+    description: componentT.props.variant,
   },
   {
     name: 'state',
     type: "'complete' | 'streaming' | 'error'",
     default: "'complete'",
     required: false,
-    description: 'Message state for animations and styling',
+    description: componentT.props.state,
   },
   {
     name: 'timestamp',
     type: 'string',
     required: false,
-    description: 'Optional timestamp to display',
+    description: componentT.props.timestamp,
   },
   {
     name: 'avatar',
     type: 'string',
     required: false,
-    description: 'Optional avatar URL',
+    description: componentT.props.avatar,
   },
   {
     name: 'name',
     type: 'string',
     required: false,
-    description: 'Optional name/label for the sender',
+    description: componentT.props.name,
   },
   {
     name: 'showCopy',
     type: 'boolean',
     default: 'true',
     required: false,
-    description: 'Show copy button',
+    description: componentT.props.showCopy,
   },
   {
     name: 'showRegenerate',
     type: 'boolean',
     default: 'false',
     required: false,
-    description: 'Show regenerate button (assistant only)',
+    description: componentT.props.showRegenerate,
   },
   {
     name: 'onCopy',
     type: '() => void',
     required: false,
-    description: 'Callback when copy is clicked',
+    description: componentT.props.onCopy,
   },
   {
     name: 'onRegenerate',
     type: '() => void',
     required: false,
-    description: 'Callback when regenerate is clicked',
+    description: componentT.props.onRegenerate,
   },
   {
     name: 'isRTL',
     type: 'boolean',
     default: 'false',
     required: false,
-    description: 'Whether text direction is RTL',
+    description: componentT.props.isRTL,
   },
 ]
 
@@ -140,7 +140,10 @@ const rtlCode = `<ChatMessage
 export default function ChatMessagePage() {
   const { direction, locale } = useDirection()
   const isRTL = direction === 'rtl'
-  const t = content[locale]
+  const t = content[locale] || content.en
+  const chatMessageT = (content[locale]?.chatMessageComponent || content.en.chatMessageComponent) as any
+
+  const chatMessageProps = getChatMessageProps(chatMessageT)
 
   return (
     <div className="min-h-screen">
@@ -150,32 +153,31 @@ export default function ChatMessagePage() {
           <ol className="flex items-center gap-2 text-sm text-muted-foreground">
             <li>
               <Link href="/" className="hover:text-foreground transition-colors">
-                Home
+                {t.common.home}
               </Link>
             </li>
             <li>/</li>
             <li>
               <Link href="/components" className="hover:text-foreground transition-colors">
-                Components
+                {t.nav.components}
               </Link>
             </li>
             <li>/</li>
-            <li className="text-foreground font-medium">Chat Message</li>
+            <li className="text-foreground font-medium">{chatMessageT.title}</li>
           </ol>
         </nav>
 
         {/* Page Header */}
         <div className="mb-12">
-          <h1 className="text-4xl font-bold tracking-tight mb-4">Chat Message</h1>
+          <h1 className="text-4xl font-bold tracking-tight mb-4">{chatMessageT.title}</h1>
           <p className="text-xl text-muted-foreground max-w-3xl">
-            Display chat messages from users, AI assistants, or system notifications.
-            Perfect for building chat interfaces with full RTL support and customizable actions.
+            {chatMessageT.description}
           </p>
         </div>
 
         {/* Preview */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Preview</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{chatMessageT.preview}</h2>
           <ComponentShowcase>
             <ComponentShowcase.Demo>
               <div className="space-y-4 max-w-2xl">
@@ -198,24 +200,24 @@ export default function ChatMessagePage() {
 
         {/* Installation */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Installation</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{chatMessageT.installation}</h2>
           <CodeBlock code={installCode} language="bash" title="Terminal" />
         </section>
 
         {/* Usage */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Usage</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{chatMessageT.usage}</h2>
           <CodeBlock code={basicUsageCode} language="tsx" title="React" />
         </section>
 
         {/* Examples */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Examples</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{chatMessageT.examples.title}</h2>
 
           <div className="space-y-8">
             {/* Message Roles */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">Message Roles</h3>
+              <h3 className="text-lg font-semibold mb-4">{chatMessageT.examples.messageRoles}</h3>
               <Card>
                 <CardContent className="p-6">
                   <div className="space-y-4 max-w-2xl">
@@ -244,7 +246,7 @@ export default function ChatMessagePage() {
 
             {/* With Actions */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">With Actions</h3>
+              <h3 className="text-lg font-semibold mb-4">{chatMessageT.examples.withActions}</h3>
               <Card>
                 <CardContent className="p-6">
                   <div className="space-y-4 max-w-2xl">
@@ -265,7 +267,7 @@ export default function ChatMessagePage() {
 
             {/* Compact Variant */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">Compact Variant</h3>
+              <h3 className="text-lg font-semibold mb-4">{chatMessageT.examples.compactVariant}</h3>
               <Card>
                 <CardContent className="p-6">
                   <div className="space-y-3 max-w-2xl">
@@ -291,28 +293,27 @@ export default function ChatMessagePage() {
 
         {/* Props */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Props</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.props}</h2>
           <PropsTable props={chatMessageProps} />
         </section>
 
         {/* Accessibility */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Accessibility</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.accessibility}</h2>
           <Card>
             <CardContent className="p-6 space-y-4">
               <div>
-                <h3 className="font-semibold mb-2">Screen Reader</h3>
+                <h3 className="font-semibold mb-2">{t.componentPage.accessibility.screenReader}</h3>
                 <p className="text-muted-foreground">
-                  The component uses semantic HTML with proper ARIA attributes. The role, timestamp,
-                  and content are all announced correctly.
+                  {chatMessageT.accessibility.screenReaderDesc}
                 </p>
               </div>
               <Separator />
               <div>
-                <h3 className="font-semibold mb-2">Keyboard Navigation</h3>
+                <h3 className="font-semibold mb-2">{t.componentPage.accessibility.keyboardNavigation}</h3>
                 <ul className="list-disc list-inside text-muted-foreground space-y-1">
-                  <li><kbd className="px-1.5 py-0.5 rounded bg-muted">Tab</kbd>: Navigate through action buttons</li>
-                  <li><kbd className="px-1.5 py-0.5 rounded bg-muted">Enter</kbd>: Activate buttons (Copy, Regenerate)</li>
+                  <li><kbd className="px-1.5 py-0.5 rounded bg-muted">Tab</kbd>: {chatMessageT.accessibility.tabKey}</li>
+                  <li><kbd className="px-1.5 py-0.5 rounded bg-muted">Enter</kbd>: {chatMessageT.accessibility.enterKey}</li>
                 </ul>
               </div>
             </CardContent>
@@ -321,12 +322,11 @@ export default function ChatMessagePage() {
 
         {/* RTL Considerations */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">RTL Considerations</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.rtl}</h2>
           <Card>
             <CardContent className="p-6 space-y-4">
               <p className="text-muted-foreground">
-                Chat messages automatically adapt to RTL layout. User messages align to the end (right in RTL),
-                and assistant messages to the start (left in RTL). Set <code className="bg-muted px-1 rounded">isRTL</code> prop for RTL-specific text.
+                {chatMessageT.rtl.description}
               </p>
               <CodeBlock code={rtlCode} language="tsx" />
               <div className="grid gap-4 md:grid-cols-2 mt-6">
@@ -358,7 +358,7 @@ export default function ChatMessagePage() {
 
         {/* Related */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Related Components</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.relatedComponents}</h2>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             <Card>
               <CardContent className="p-4">
