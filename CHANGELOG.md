@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.4.3] - 2025-12-05
+
+### Fixed
+- **Code Quality**: Resolved all React Hooks exhaustive-deps warnings (zero warnings achieved)
+  - **DataTable**: Wrapped `sampleUsers` in `useMemo` and added to dependency arrays in sorting, filtering, and pagination hooks
+  - **useRelativeTime Hook**: Wrapped `targetDate` in `useMemo` and `getRelativeTime` in `useCallback` with proper dependencies
+  - **Calendar**: Wrapped calendar days generation in `useMemo` with complete dependencies including `getHijriDate`
+- **Translations**: Fixed missing i18n keys across 11+ experimental component pages
+  - Added `rtlDemo` object with `ltr` and `rtl` keys to common.ts (EN/AR)
+  - Added missing example keys: `fullFeatured`, `compactMode`, `withPresets`, `customPresets`, `withoutPresets`, `inContext`
+  - Fixed incorrect key references: `rtl` → `rtlSupport`, `interface` → `typeDefinitions`, `sizes` → `examples.sizes`, `inContext` → `examples.inContext`
+- **NotificationCenter**: Fixed PropDefinition type error by changing `defaultValue` to `default` property
+- **WorkflowCanvas & WorkflowNode**: Fixed missing imports for `useDirection` and `content` from i18n
+- **ThinkingIndicator**: Fixed incorrect translation key references in examples section
+- **ParameterSlider**: Fixed non-existent translation key reference
+
 ### Added
 - **Website**: Added "Starters" link to main navigation (both desktop and mobile)
 - **Website**: Added i18n translations for "Starters" menu item (English: "Starters", Arabic: "نماذج البداية")
@@ -20,6 +36,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Documentation**: Updated README.md to include Starters page in documentation links
 - **Documentation**: Updated ROADMAP.md to highlight Kitab as completed deliverable
 - **Documentation**: Updated starters/README.md with full Kitab feature list
+- **Code Standards**: Added ESLint disable comments for intentional img usage (component library design decision)
+  - NotificationCenter: Avatar display using dynamic user-provided URLs
+  - ListingCard: Product image display
+  - FileUpload: Image preview using blob URLs from FileReader
 
 ### Changed
 - **Website**: Improved visibility of /starters page through navigation integration
@@ -27,6 +47,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Starters Page**: Updated GitHub button to link to https://github.com/topics/noor-ui for broader project discovery
 - **Roadmap**: Updated current status to "READY FOR PUBLIC LAUNCH" with technical pre-launch checklist completed
 - **Roadmap**: Added Kitab to recent wins and next actions focused on marketing launch
+- **Website**: Updated all version references from v0.4.2 to v0.4.3
+  - Homepage (app/page.tsx)
+  - English home translations (lib/i18n/en/home.ts)
+  - Arabic home translations (lib/i18n/ar/home.ts)
+  - Launch plan documentation (LAUNCH_PLAN.md - 7 references)
+  - Roadmap documentation (ROADMAP.md - 4 references)
+- **Build Process**: Achieved zero build warnings and zero compilation errors
+- **Code Quality**: Improved React performance patterns with proper memoization and callback usage
+
+### Notes
+This release focuses on code quality improvements and documentation completeness. All 74+ components maintain full RTL/LTR support with zero build warnings. The codebase is now optimized for production use with proper React performance patterns.
 
 ## [0.4.2] - 2025-11-29
 
