@@ -292,23 +292,6 @@ export default function ProgressPage() {
           </Card>
         </section>
 
-        {/* RTL Support */}
-        <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentDocs.rtlConsiderations}</h2>
-          <p className="text-muted-foreground mb-6">
-            {pc.rtl.description}
-          </p>
-          <ComponentShowcase.Comparison ltrLabel={pc.rtl.ltr} rtlLabel={pc.rtl.rtlLabel}>
-            <div className="space-y-2">
-              <div className="flex justify-between text-sm">
-                <span>{pc.labels.loading}</span>
-                <span>75%</span>
-              </div>
-              <Progress value={75} />
-            </div>
-          </ComponentShowcase.Comparison>
-        </section>
-
         {/* Related */}
         <section className="mb-16">
           <h2 className="text-2xl font-bold tracking-tight mb-6">{pc.related.title}</h2>

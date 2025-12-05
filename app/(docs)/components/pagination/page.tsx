@@ -222,13 +222,13 @@ export default function PaginationPage() {
 
         {/* Installation */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-4">Installation</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-4">{t.paginationComponent.installation}</h2>
           <CodeBlock code={installCode} language="bash" />
         </section>
 
         {/* Usage */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-4">Usage</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-4">{t.paginationComponent.usage}</h2>
           <CodeBlock code={basicUsageCode} language="tsx" />
         </section>
 
@@ -280,7 +280,7 @@ export default function PaginationPage() {
             </div>
 
             <div>
-              <h3 className="text-lg font-semibold mb-4">Controlled</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.paginationComponent.examples.controlled}</h3>
               <ComponentShowcase>
                 <ComponentShowcase.Demo>
                   <div className="space-y-4">
@@ -349,43 +349,6 @@ export default function PaginationPage() {
               <CodeBlock code={controlledCode} language="tsx" />
             </div>
           </div>
-        </section>
-
-        {/* RTL Support Example */}
-        <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.paginationComponent.examples.rtlExample}</h2>
-          <p className="text-muted-foreground mb-6">
-            {t.paginationComponent.rtlExampleDesc}
-          </p>
-          <ComponentShowcase.Comparison ltrLabel="LTR (English)" rtlLabel="RTL (العربية)">
-            <Pagination>
-              <PaginationContent>
-                <PaginationItem>
-                  <PaginationPrevious href="#">{t.paginationComponent.demo.previous}</PaginationPrevious>
-                </PaginationItem>
-                <PaginationItem>
-                  <PaginationLink href="#">1</PaginationLink>
-                </PaginationItem>
-                <PaginationItem>
-                  <PaginationLink href="#" isActive>
-                    2
-                  </PaginationLink>
-                </PaginationItem>
-                <PaginationItem>
-                  <PaginationLink href="#">3</PaginationLink>
-                </PaginationItem>
-                <PaginationItem>
-                  <PaginationEllipsis />
-                </PaginationItem>
-                <PaginationItem>
-                  <PaginationLink href="#">10</PaginationLink>
-                </PaginationItem>
-                <PaginationItem>
-                  <PaginationNext href="#">{t.paginationComponent.demo.next}</PaginationNext>
-                </PaginationItem>
-              </PaginationContent>
-            </Pagination>
-          </ComponentShowcase.Comparison>
         </section>
 
         {/* Props */}

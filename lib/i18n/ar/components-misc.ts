@@ -26,7 +26,7 @@ avatarComponent: {
         rtlSupportExample: 'مثال على دعم RTL',
         rtlDescription: 'يتكيف مكون الصورة الرمزية تلقائياً مع تخطيطات RTL. تحترم مجموعات الصور الرمزية اتجاه القراءة ويتبع ترتيب التداخل اتجاه النص.',
         johnDoe: 'جون دو',
-        emailExample: 'john@example.com',
+        emailExample: 'ositaka@example.com',
       },
       props: {
         title: 'الخصائص',

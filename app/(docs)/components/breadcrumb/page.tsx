@@ -185,7 +185,7 @@ export default function BreadcrumbComponentPage() {
 
           <div className="space-y-8">
             <div>
-              <h3 className="text-lg font-semibold mb-4">Custom Separator</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.breadcrumbComponent.examples.customSeparator}</h3>
               <ComponentShowcase>
                 <Breadcrumb>
                   <BreadcrumbList>
@@ -203,11 +203,13 @@ export default function BreadcrumbComponentPage() {
                   </BreadcrumbList>
                 </Breadcrumb>
               </ComponentShowcase>
-              <CodeBlock code={customSeparatorCode} language="tsx" />
+              <div className="mt-6">
+                <CodeBlock code={customSeparatorCode} language="tsx" />
+              </div>
             </div>
 
             <div>
-              <h3 className="text-lg font-semibold mb-4">With Icons</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.breadcrumbComponent.examples.withIcons}</h3>
               <ComponentShowcase>
                 <Breadcrumb>
                   <BreadcrumbList>
@@ -234,43 +236,11 @@ export default function BreadcrumbComponentPage() {
                   </BreadcrumbList>
                 </Breadcrumb>
               </ComponentShowcase>
-              <CodeBlock code={withIconsCode} language="tsx" />
+              <div className="mt-6">
+                <CodeBlock code={withIconsCode} language="tsx" />
+              </div>
             </div>
           </div>
-        </section>
-
-        {/* RTL Support Example */}
-        <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">RTL Support Example</h2>
-          <p className="text-muted-foreground mb-6">
-            {t.breadcrumbComponent.rtlExampleDesc}
-          </p>
-          <ComponentShowcase.Comparison ltrLabel="LTR (English)" rtlLabel="RTL (العربية)">
-            <Breadcrumb>
-              <BreadcrumbList>
-                <BreadcrumbItem>
-                  <BreadcrumbLink href="/" className="flex items-center gap-2">
-                    <Home className="h-4 w-4" />
-                    {t.breadcrumbComponent.demo.home}
-                  </BreadcrumbLink>
-                </BreadcrumbItem>
-                <BreadcrumbSeparator />
-                <BreadcrumbItem>
-                  <BreadcrumbLink href="/components" className="flex items-center gap-2">
-                    <Folder className="h-4 w-4" />
-                    {t.breadcrumbComponent.demo.components}
-                  </BreadcrumbLink>
-                </BreadcrumbItem>
-                <BreadcrumbSeparator />
-                <BreadcrumbItem>
-                  <BreadcrumbPage className="flex items-center gap-2">
-                    <File className="h-4 w-4" />
-                    {t.breadcrumbComponent.demo.details}
-                  </BreadcrumbPage>
-                </BreadcrumbItem>
-              </BreadcrumbList>
-            </Breadcrumb>
-          </ComponentShowcase.Comparison>
         </section>
 
         {/* Props */}

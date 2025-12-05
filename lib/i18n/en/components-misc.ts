@@ -25,8 +25,8 @@ avatarComponent: {
       labels: {
         rtlSupportExample: 'RTL Support Example',
         rtlDescription: 'The Avatar component automatically adapts to RTL layouts. Avatar groups respect reading direction and overlapping order follows text direction.',
-        johnDoe: 'John Doe',
-        emailExample: 'john@example.com',
+        johnDoe: 'Nuno Marques',
+        emailExample: 'ositaka@example.com',
       },
       props: {
         title: 'Props',

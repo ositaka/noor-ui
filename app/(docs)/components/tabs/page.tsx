@@ -212,11 +212,13 @@ export default function TabsPage() {
                   </TabsContent>
                 </Tabs>
               </ComponentShowcase>
-              <CodeBlock code={withIconsCode} language="tsx" />
+              <div className="mt-6">
+                <CodeBlock code={withIconsCode} language="tsx" />
+              </div>
             </div>
 
             <div>
-              <h3 className="text-lg font-semibold mb-4">Controlled</h3>
+              <h3 className="text-lg font-semibold mb-4">{t.tabsComponent.examples.controlled}</h3>
               <ComponentShowcase>
                 <div className="space-y-4 w-full max-w-md">
                   <p className="text-sm text-muted-foreground">{t.tabsComponent.demo.activeTab} {activeTab}</p>
@@ -250,53 +252,11 @@ export default function TabsPage() {
                   </Tabs>
                 </div>
               </ComponentShowcase>
-              <CodeBlock code={controlledCode} language="tsx" />
+              <div className="mt-6">
+                <CodeBlock code={controlledCode} language="tsx" />
+              </div>
             </div>
           </div>
-        </section>
-
-        {/* RTL Support Example */}
-        <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">RTL Support Example</h2>
-          <p className="text-muted-foreground mb-6">
-            {t.tabsComponent.rtlExampleDesc}
-          </p>
-          <ComponentShowcase.Comparison ltrLabel="LTR (English)" rtlLabel="RTL (العربية)">
-            <Tabs defaultValue="overview" className="w-full max-w-md">
-              <TabsList className="grid w-full grid-cols-3">
-                <TabsTrigger value="overview">{t.tabsComponent.demo.overview}</TabsTrigger>
-                <TabsTrigger value="analytics">{t.tabsComponent.demo.analytics}</TabsTrigger>
-                <TabsTrigger value="reports">{t.tabsComponent.demo.reports}</TabsTrigger>
-              </TabsList>
-              <TabsContent value="overview" className="mt-4">
-                <Card>
-                  <CardContent className="p-6">
-                    <p className="text-sm text-muted-foreground">
-                      {t.tabsComponent.demo.overviewDesc}
-                    </p>
-                  </CardContent>
-                </Card>
-              </TabsContent>
-              <TabsContent value="analytics" className="mt-4">
-                <Card>
-                  <CardContent className="p-6">
-                    <p className="text-sm text-muted-foreground">
-                      {t.tabsComponent.demo.analyticsDesc}
-                    </p>
-                  </CardContent>
-                </Card>
-              </TabsContent>
-              <TabsContent value="reports" className="mt-4">
-                <Card>
-                  <CardContent className="p-6">
-                    <p className="text-sm text-muted-foreground">
-                      {t.tabsComponent.demo.reportsDesc}
-                    </p>
-                  </CardContent>
-                </Card>
-              </TabsContent>
-            </Tabs>
-          </ComponentShowcase.Comparison>
         </section>
 
         {/* Props */}

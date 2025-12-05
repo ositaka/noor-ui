@@ -207,13 +207,13 @@ export default function SeparatorPage() {
         {/* Installation */}
         <section className="mb-16">
           <h2 className="text-2xl font-bold tracking-tight mb-6">{t.separatorComponent.installation}</h2>
-          <CodeBlock code={installCode} language="bash" title="Terminal" />
+          <CodeBlock code={installCode} language="bash" />
         </section>
 
         {/* Usage */}
         <section className="mb-16">
           <h2 className="text-2xl font-bold tracking-tight mb-6">{t.separatorComponent.usage}</h2>
-          <CodeBlock code={basicUsageCode} language="tsx" title="React" />
+          <CodeBlock code={basicUsageCode} language="tsx" />
         </section>
 
         {/* Examples */}
@@ -244,7 +244,7 @@ export default function SeparatorPage() {
                   </div>
                 </CardContent>
               </Card>
-              <div className="mt-4">
+              <div className="mt-6">
                 <CodeBlock code={horizontalCode} language="tsx" collapsible />
               </div>
             </div>
@@ -265,7 +265,7 @@ export default function SeparatorPage() {
                   </div>
                 </CardContent>
               </Card>
-              <div className="mt-4">
+              <div className="mt-6">
                 <CodeBlock code={verticalCode} language="tsx" collapsible />
               </div>
             </div>
@@ -305,7 +305,7 @@ export default function SeparatorPage() {
                   </Card>
                 </CardContent>
               </Card>
-              <div className="mt-4">
+              <div className="mt-6">
                 <CodeBlock code={inCardCode} language="tsx" collapsible />
               </div>
             </div>
@@ -334,7 +334,7 @@ export default function SeparatorPage() {
                   </nav>
                 </CardContent>
               </Card>
-              <div className="mt-4">
+              <div className="mt-6">
                 <CodeBlock code={navigationCode} language="tsx" collapsible />
               </div>
             </div>
@@ -367,7 +367,7 @@ export default function SeparatorPage() {
                   </ul>
                 </CardContent>
               </Card>
-              <div className="mt-4">
+              <div className="mt-6">
                 <CodeBlock code={listCode} language="tsx" collapsible />
               </div>
             </div>
@@ -398,7 +398,7 @@ export default function SeparatorPage() {
                   </div>
                 </CardContent>
               </Card>
-              <div className="mt-4">
+              <div className="mt-6">
                 <CodeBlock code={customStyleCode} language="tsx" collapsible />
               </div>
             </div>

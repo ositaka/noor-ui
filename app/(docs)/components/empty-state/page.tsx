@@ -14,19 +14,8 @@ import { FileText, Inbox, Search, Users, Plus } from 'lucide-react'
 
 export default function EmptyStatePage() {
   const { direction, locale } = useDirection()
-  const isRTL = direction === 'rtl'
-  const [mounted, setMounted] = React.useState(false)
-
-  React.useEffect(() => {
-    setMounted(true)
-  }, [])
-
-  if (!mounted) {
-    return <div className="container py-12">Loading...</div>
-  }
-
-  const t = content[locale] || content.en
-  const emptyStateT = (content[locale]?.emptyStateComponent || content.en.emptyStateComponent) as any
+  const t = content[locale]
+  const emptyStateT = t.emptyStateComponent
 
   const basicUsage = `import { EmptyState } from '@/components/ui/empty-state'
 import { Button } from '@/components/ui/button'

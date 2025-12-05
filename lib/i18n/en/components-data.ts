@@ -431,6 +431,7 @@ tabsComponent: {
         title: 'Examples',
         basic: 'Basic',
         withIcons: 'With Icons',
+        controlled: 'Controlled',
         vertical: 'Vertical',
         disabled: 'Disabled Tab',
       },
@@ -509,6 +510,7 @@ breadcrumbComponent: {
       examples: {
         title: 'Examples',
         basic: 'Basic',
+        customSeparator: 'Custom Separator',
         withIcons: 'With Icons',
         withDropdown: 'With Dropdown',
         collapsed: 'Collapsed',
@@ -599,38 +601,6 @@ commandComponent: {
         typeAhead: 'Type-ahead search support',
         focusManagement: 'Focus management in dialog mode',
         escapeKey: 'Escape key closes the dialog',
-      },
-    },
-
-emptyStateComponent: {
-      title: 'Empty State',
-      description: 'Display helpful messages when there is no content to show',
-      preview: 'Preview',
-      installation: 'Installation',
-      usage: 'Usage',
-      examples: {
-        title: 'Examples',
-      },
-      props: {
-        icon: 'Icon to display at the top',
-        title: 'Title of the empty state',
-        description: 'Optional descriptive text',
-        action: 'Action button(s) to display',
-        className: 'Additional CSS classes',
-      },
-      bestPractices: {
-        doList: [
-          'Use relevant icons that represent the missing content',
-          'Keep titles clear and concise',
-          'Provide a clear action if the user can fix the situation',
-          'Use a friendly and helpful tone',
-        ],
-        dontList: [
-          "Don't use generic or irrelevant icons",
-          "Don't use long or technical titles",
-          "Don't leave users stuck without a clear action",
-          "Don't use negative tone or blame the user",
-        ],
       },
     },
 

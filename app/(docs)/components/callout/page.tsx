@@ -8,6 +8,7 @@ import { Separator } from '@/components/ui/separator'
 import { Callout } from '@/components/ui/callout'
 import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { BestPractices } from '@/components/docs/best-practices'
+import { CodeBlock } from '@/components/docs/code-block'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 
@@ -99,22 +100,13 @@ export default function CalloutPage() {
 
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-6">{t.calloutComponent.installation}</h2>
-          <Card>
-            <CardContent className="pt-6">
-              <div className="bg-muted p-4 rounded-lg overflow-x-auto">
-                <pre className="text-sm"><code>npm install noorui-rtl</code></pre>
-              </div>
-            </CardContent>
-          </Card>
+          <CodeBlock code="npm install noorui-rtl" language="bash" />
         </section>
 
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-6">{t.calloutComponent.usage}</h2>
-          <Card>
-            <CardContent className="pt-6">
-              <div className="bg-muted p-4 rounded-lg overflow-x-auto">
-                <pre className="text-sm">
-                  <code>{`import { Callout } from 'noorui-rtl'
+          <CodeBlock
+            code={`import { Callout } from 'noorui-rtl'
 
 // With title
 <Callout type="info" title="Did you know?">
@@ -129,11 +121,9 @@ export default function CalloutPage() {
 // Custom icon
 <Callout type="success" icon={CustomIcon} title="Custom">
   Using a custom icon.
-</Callout>`}</code>
-                </pre>
-              </div>
-            </CardContent>
-          </Card>
+</Callout>`}
+            language="tsx"
+          />
         </section>
 
         <Separator className="my-12" />

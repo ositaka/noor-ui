@@ -8,6 +8,7 @@ import { SiteHeader } from '@/components/layout/site-header'
 import { SiteFooter } from '@/components/layout/site-footer'
 import { ThemeSwitcher } from '@/components/docs/theme-switcher'
 import { FeatureCard } from '@/components/ui/feature-card'
+import { CodeBlock } from '@/components/docs/code-block'
 import {
   Palette,
   Globe,
@@ -81,14 +82,10 @@ export default function HomePage() {
               </div>
 
               <div className="space-y-4">
-                <div className="rounded-md bg-muted p-4 font-mono text-sm">
-                  <span className="text-muted-foreground">$ </span>
-                  <span className="text-foreground">npm install noorui-rtl</span>
-                </div>
+                <CodeBlock code="npm install noorui-rtl" language="bash" />
 
-                <div className="rounded-md bg-muted p-4">
-                  <pre className="font-mono text-sm overflow-x-auto">
-                    <code className="text-foreground">{`import { Button, Card, Input } from 'noorui-rtl'
+                <CodeBlock
+                  code={`import { Button, Card, Input } from 'noorui-rtl'
 
 export default function App() {
   return (
@@ -96,9 +93,9 @@ export default function App() {
       <Button>Get Started</Button>
     </Card>
   )
-}`}</code>
-                  </pre>
-                </div>
+}`}
+                  language="tsx"
+                />
 
                 <div className="flex gap-2 pt-2">
                   <ButtonArrow variant="outline" size="sm" direction="forward" iconSize="sm" asChild>
@@ -181,9 +178,7 @@ export default function App() {
                   </div>
                   <div className="space-y-2">
                     <h3 className="text-lg font-semibold">{t.docs.installation}</h3>
-                    <pre className="overflow-x-auto rounded-lg bg-muted p-4">
-                      <code className="text-sm">npm install noorui-rtl</code>
-                    </pre>
+                    <CodeBlock code="npm install noorui-rtl" language="bash" />
                   </div>
                 </div>
 
@@ -195,15 +190,14 @@ export default function App() {
                   </div>
                   <div className="space-y-2">
                     <h3 className="text-lg font-semibold">{t.docs.usage}</h3>
-                    <pre className="overflow-x-auto rounded-lg bg-muted p-4">
-                      <code className="text-sm">
-{`import { Button } from 'noorui-rtl'
+                    <CodeBlock
+                      code={`import { Button } from 'noorui-rtl'
 
 <Button variant="primary">
   ${t.ui.button.submit}
 </Button>`}
-                      </code>
-                    </pre>
+                      language="tsx"
+                    />
                   </div>
                 </div>
 

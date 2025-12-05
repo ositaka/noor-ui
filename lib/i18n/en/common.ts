@@ -1874,7 +1874,7 @@ common: {
     demoNames: {
       ahmedAlRashid: 'Ahmed Al-Rashid',
       sarahJohnson: 'Sarah Johnson',
-      johnDoe: 'John Doe',
+      johnDoe: 'Nuno Marques',
       fatimaAlZahra: 'Fatima Al-Zahra',
     },
     actions: {

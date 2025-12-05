@@ -118,30 +118,6 @@ const [showReadingList, setShowReadingList] = useState(false)
   </ContextMenuContent>
 </ContextMenu>`
 
-const rtlCode = `// RTL support is automatic!
-// Context menus flip correctly in RTL mode
-
-<ContextMenu>
-  <ContextMenuTrigger>
-    <Card className="p-8 text-center">
-      انقر بزر الماوس الأيمن
-    </Card>
-  </ContextMenuTrigger>
-  <ContextMenuContent className="w-56">
-    <ContextMenuItem>
-      <Edit className="me-2 h-4 w-4" />
-      <span>تعديل</span>
-    </ContextMenuItem>
-    <ContextMenuItem>
-      <Copy className="me-2 h-4 w-4" />
-      <span>نسخ</span>
-    </ContextMenuItem>
-    <ContextMenuItem>
-      <Trash2 className="me-2 h-4 w-4" />
-      <span>حذف</span>
-    </ContextMenuItem>
-  </ContextMenuContent>
-</ContextMenu>`
 
 export default function ContextMenuPage() {
   const { locale } = useDirection()
@@ -438,75 +414,16 @@ export default function ContextMenuPage() {
           </Card>
         </section>
 
-        {/* RTL Considerations */}
-        <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.contextMenuComponent.rtl.title}</h2>
-          <Card>
-            <CardContent className="p-6 space-y-4">
-              <p className="text-muted-foreground">
-                {t.contextMenuComponent.rtl.description}
-              </p>
-              <CodeBlock code={rtlCode} language="tsx" />
-              <div className="grid gap-4 md:grid-cols-2 mt-6">
-                <div className="space-y-2">
-                  <h4 className="font-semibold text-sm">LTR (English)</h4>
-                  <div dir="ltr" className="flex justify-center">
-                    <ContextMenu>
-                      <ContextMenuTrigger>
-                        <Card className="w-48 h-24 flex items-center justify-center border-dashed border-2 cursor-context-menu">
-                          <p className="text-sm text-muted-foreground">Right click</p>
-                        </Card>
-                      </ContextMenuTrigger>
-                      <ContextMenuContent className="w-48">
-                        <ContextMenuItem>
-                          <Edit className="me-2 h-4 w-4" />
-                          <span>Edit</span>
-                        </ContextMenuItem>
-                        <ContextMenuItem>
-                          <Copy className="me-2 h-4 w-4" />
-                          <span>Copy</span>
-                        </ContextMenuItem>
-                      </ContextMenuContent>
-                    </ContextMenu>
-                  </div>
-                </div>
-                <div className="space-y-2">
-                  <h4 className="font-semibold text-sm">RTL (العربية)</h4>
-                  <div dir="rtl" className="flex justify-center">
-                    <ContextMenu>
-                      <ContextMenuTrigger>
-                        <Card className="w-48 h-24 flex items-center justify-center border-dashed border-2 cursor-context-menu">
-                          <p className="text-sm text-muted-foreground">انقر بزر الماوس الأيمن</p>
-                        </Card>
-                      </ContextMenuTrigger>
-                      <ContextMenuContent className="w-48">
-                        <ContextMenuItem>
-                          <Edit className="me-2 h-4 w-4" />
-                          <span>تعديل</span>
-                        </ContextMenuItem>
-                        <ContextMenuItem>
-                          <Copy className="me-2 h-4 w-4" />
-                          <span>نسخ</span>
-                        </ContextMenuItem>
-                      </ContextMenuContent>
-                    </ContextMenu>
-                  </div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </section>
-
         {/* Related Components */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Related Components</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.contextMenuComponent.related.title}</h2>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             <Link href="/components/dropdown-menu">
               <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold">Dropdown Menu</h3>
+                  <h3 className="font-semibold">{t.contextMenuComponent.related.dropdownMenu}</h3>
                   <p className="text-sm text-muted-foreground mt-1">
-                    Similar component, click-triggered
+                    {t.contextMenuComponent.related.dropdownMenuDesc}
                   </p>
                 </CardContent>
               </Card>
@@ -514,9 +431,9 @@ export default function ContextMenuPage() {
             <Link href="/components/popover">
               <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold">Popover</h3>
+                  <h3 className="font-semibold">{t.contextMenuComponent.related.popover}</h3>
                   <p className="text-sm text-muted-foreground mt-1">
-                    For richer contextual content
+                    {t.contextMenuComponent.related.popoverDesc}
                   </p>
                 </CardContent>
               </Card>
@@ -524,9 +441,9 @@ export default function ContextMenuPage() {
             <Link href="/components/dialog">
               <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold">Dialog</h3>
+                  <h3 className="font-semibold">{t.contextMenuComponent.related.dialog}</h3>
                   <p className="text-sm text-muted-foreground mt-1">
-                    Modal dialogs for confirmations
+                    {t.contextMenuComponent.related.dialogDesc}
                   </p>
                 </CardContent>
               </Card>

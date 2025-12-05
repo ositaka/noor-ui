@@ -304,7 +304,7 @@ export default function SheetPage() {
                       <div className="grid gap-4 py-4">
                         <div className="grid gap-2">
                           <Label htmlFor="name">{t.sheetComponent.demo.name}</Label>
-                          <Input id="name" placeholder={t.sheetComponent.demo.enterName} defaultValue="John Doe" />
+                          <Input id="name" placeholder={t.sheetComponent.demo.enterName} defaultValue="Nuno Marques" />
                         </div>
                         <div className="grid gap-2">
                           <Label htmlFor="email">{t.sheetComponent.demo.email}</Label>
@@ -312,7 +312,7 @@ export default function SheetPage() {
                             id="email"
                             type="email"
                             placeholder={t.sheetComponent.demo.enterEmail}
-                            defaultValue="john@example.com"
+                            defaultValue="ositaka@example.com"
                           />
                         </div>
                       </div>

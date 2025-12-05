@@ -95,8 +95,8 @@ export default function Example() {
   return (
     <UserMenu
       user={{
-        name: 'John Doe',
-        email: 'john@example.com',
+        name: 'Nuno Marques',
+        email: 'ositaka@example.com',
       }}
       onLogout={() => console.log('Logout')}
     />
@@ -312,7 +312,7 @@ export default function Example() {
                     <UserMenu
                       user={{
                         name: userMenuT.demoNames.johnDoe,
-                        email: 'john@example.com',
+                        email: 'ositaka@example.com',
                       }}
                       onLogout={() => handleAction(userMenuT.actions.logout)}
                     />

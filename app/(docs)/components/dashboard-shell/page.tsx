@@ -145,7 +145,7 @@ export default function Dashboard() {
   return (
     <DashboardShell
       navItems={[/* ... */]}
-      user={{ name: 'John Doe', email: 'john@example.com' }}
+      user={{ name: 'Nuno Marques', email: 'ositaka@example.com' }}
       notifications={notifications}
       onMarkAsRead={(id) => {
         setNotifications(prev =>

@@ -499,75 +499,16 @@ export default function DropdownMenuPage() {
           </Card>
         </section>
 
-        {/* RTL Considerations */}
-        <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.dropdownMenuComponent.rtl.title}</h2>
-          <Card>
-            <CardContent className="p-6 space-y-4">
-              <p className="text-muted-foreground">
-                {t.dropdownMenuComponent.rtl.description}
-              </p>
-              <CodeBlock code={rtlCode} language="tsx" />
-              <div className="grid gap-4 md:grid-cols-2 mt-6">
-                <div className="space-y-2">
-                  <h4 className="font-semibold text-sm">LTR (English)</h4>
-                  <div dir="ltr" className="flex justify-center">
-                    <DropdownMenu>
-                      <DropdownMenuTrigger asChild>
-                        <Button variant="outline">Account</Button>
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent className="w-56">
-                        <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                        <DropdownMenuSeparator />
-                        <DropdownMenuItem>
-                          <User className="me-2 h-4 w-4" />
-                          <span>Profile</span>
-                        </DropdownMenuItem>
-                        <DropdownMenuItem>
-                          <Settings className="me-2 h-4 w-4" />
-                          <span>Settings</span>
-                        </DropdownMenuItem>
-                      </DropdownMenuContent>
-                    </DropdownMenu>
-                  </div>
-                </div>
-                <div className="space-y-2">
-                  <h4 className="font-semibold text-sm">RTL (العربية)</h4>
-                  <div dir="rtl" className="flex justify-center">
-                    <DropdownMenu>
-                      <DropdownMenuTrigger asChild>
-                        <Button variant="outline">الحساب</Button>
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent className="w-56">
-                        <DropdownMenuLabel>حسابي</DropdownMenuLabel>
-                        <DropdownMenuSeparator />
-                        <DropdownMenuItem>
-                          <User className="me-2 h-4 w-4" />
-                          <span>الملف الشخصي</span>
-                        </DropdownMenuItem>
-                        <DropdownMenuItem>
-                          <Settings className="me-2 h-4 w-4" />
-                          <span>الإعدادات</span>
-                        </DropdownMenuItem>
-                      </DropdownMenuContent>
-                    </DropdownMenu>
-                  </div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </section>
-
         {/* Related Components */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Related Components</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.dropdownMenuComponent.related.title}</h2>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             <Link href="/components/button">
               <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold">Button</h3>
+                  <h3 className="font-semibold">{t.dropdownMenuComponent.related.button}</h3>
                   <p className="text-sm text-muted-foreground mt-1">
-                    Common trigger for dropdown menus
+                    {t.dropdownMenuComponent.related.buttonDesc}
                   </p>
                 </CardContent>
               </Card>
@@ -575,9 +516,9 @@ export default function DropdownMenuPage() {
             <Link href="/components/popover">
               <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold">Popover</h3>
+                  <h3 className="font-semibold">{t.dropdownMenuComponent.related.popover}</h3>
                   <p className="text-sm text-muted-foreground mt-1">
-                    Alternative for richer content
+                    {t.dropdownMenuComponent.related.popoverDesc}
                   </p>
                 </CardContent>
               </Card>
@@ -585,9 +526,9 @@ export default function DropdownMenuPage() {
             <Link href="/components/checkbox">
               <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold">Checkbox</h3>
+                  <h3 className="font-semibold">{t.dropdownMenuComponent.related.checkbox}</h3>
                   <p className="text-sm text-muted-foreground mt-1">
-                    Used in checkbox menu items
+                    {t.dropdownMenuComponent.related.checkboxDesc}
                   </p>
                 </CardContent>
               </Card>

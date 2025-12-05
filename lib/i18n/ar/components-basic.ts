@@ -377,7 +377,7 @@ labelComponent: {
         rtlLabel: 'RTL (العربية)',
         fullNameAr: 'الاسم الكامل',
         fullNameEn: 'Full Name',
-        placeholderEn: 'John Doe',
+        placeholderEn: 'Nuno Marques',
         placeholderAr: 'أدخل اسمك الكامل',
       },
       bestPractices: {
