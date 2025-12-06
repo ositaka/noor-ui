@@ -197,14 +197,13 @@ export default function TokenCounterPage() {
         <div className="mb-12">
           <h1 className="text-4xl font-bold tracking-tight mb-4">{tokenCounterT.title}</h1>
           <p className="text-xl text-muted-foreground max-w-3xl">
-            Display and track token usage with cost estimation for AI model interactions.
-            Features progress bar, breakdown by input/output, and visual warnings when approaching limits.
+            {tokenCounterT.description}
           </p>
         </div>
 
         {/* Preview */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Preview</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{tokenCounterT.preview}</h2>
           <ComponentShowcase>
             <ComponentShowcase.Demo>
               <div className="max-w-md">
@@ -406,27 +405,23 @@ export default function TokenCounterPage() {
           <Card>
             <CardContent className="p-6 space-y-4">
               <div>
-                <h3 className="font-semibold mb-2">Screen Reader</h3>
+                <h3 className="font-semibold mb-2">{tokenCounterT.accessibility.screenReader}</h3>
                 <p className="text-muted-foreground">
-                  The component includes descriptive labels and tooltips. Token counts and costs
-                  are formatted with proper number formatting for screen readers.
+                  {tokenCounterT.accessibility.screenReaderDesc}
                 </p>
               </div>
               <Separator />
               <div>
-                <h3 className="font-semibold mb-2">Visual Indicators</h3>
+                <h3 className="font-semibold mb-2">{tokenCounterT.accessibility.visualIndicators}</h3>
                 <p className="text-muted-foreground">
-                  Multiple visual cues indicate status: progress bar color, warning badge, and
-                  border color changes. This ensures warnings are visible even without relying
-                  solely on color.
+                  {tokenCounterT.accessibility.visualIndicatorsDesc}
                 </p>
               </div>
               <Separator />
               <div>
-                <h3 className="font-semibold mb-2">Tooltips</h3>
+                <h3 className="font-semibold mb-2">{tokenCounterT.accessibility.tooltips}</h3>
                 <p className="text-muted-foreground">
-                  Info icon provides context about tokens. Cost tooltip breaks down input/output
-                  costs separately for transparency.
+                  {tokenCounterT.accessibility.tooltipsDesc}
                 </p>
               </div>
             </CardContent>

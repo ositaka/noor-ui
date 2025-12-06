@@ -546,7 +546,7 @@ thinkingIndicatorComponent: {
 
   tokenCounterComponent: {
     title: 'Token Counter',
-    description: 'Real-time token counter with cost estimates and limit warnings. Essential for managing AI API usage and costs. Shows token count, pricing, and visual warnings when approaching limits.',
+    description: 'Display and track token usage with cost estimation for AI model interactions. Features progress bar, breakdown by input/output, and visual warnings when approaching limits.',
     preview: 'Preview',
     installation: 'Installation',
     usage: 'Usage',
@@ -580,12 +580,12 @@ thinkingIndicatorComponent: {
     },
     accessibility: {
       title: 'Accessibility',
-      liveRegion: 'Live Region',
-      liveRegionDesc: 'Token count updates are announced to screen readers using aria-live regions.',
-      warningAnnouncements: 'Warning Announcements',
-      warningAnnouncementsDesc: 'Limit warnings are prominently announced with appropriate ARIA attributes.',
+      screenReader: 'Screen Reader',
+      screenReaderDesc: 'The component includes descriptive labels and tooltips. Token counts and costs are formatted with proper number formatting for screen readers.',
       visualIndicators: 'Visual Indicators',
-      visualIndicatorsDesc: 'Color-coded indicators (yellow for warning, red for exceeded) provide clear visual feedback.',
+      visualIndicatorsDesc: 'Multiple visual cues indicate status: progress bar color, warning badge, and border color changes. This ensures warnings are visible even without relying solely on color.',
+      tooltips: 'Tooltips',
+      tooltipsDesc: 'Info icon provides context about tokens. Cost tooltip breaks down input/output costs separately for transparency.',
     },
     rtl: {
       title: 'RTL Considerations',

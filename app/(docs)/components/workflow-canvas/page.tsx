@@ -554,7 +554,7 @@ export default function WorkflowCanvasPage() {
             <Card>
               <CardContent className="p-4">
                 <Link href="/components/card" className="font-medium hover:underline">
-                  {t.componentNav?.['card'] || 'Card'}
+                  {t.componentNames?.['card'] || 'Card'}
                 </Link>
                 <p className="text-sm text-muted-foreground mt-1">
                   {workflowCanvasT.related.card}
@@ -564,7 +564,7 @@ export default function WorkflowCanvasPage() {
             <Card>
               <CardContent className="p-4">
                 <Link href="/components/badge" className="font-medium hover:underline">
-                  {t.componentNav?.['badge'] || 'Badge'}
+                  {t.componentNames?.['badge'] || 'Badge'}
                 </Link>
                 <p className="text-sm text-muted-foreground mt-1">
                   {workflowCanvasT.related.badge}
