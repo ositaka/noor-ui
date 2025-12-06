@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { AlertCircle, Home, RefreshCcw, Sparkles } from 'lucide-react'
+import { content } from '@/lib/i18n'
 
 export default function ExamplesError({
   error,
@@ -13,6 +14,19 @@ export default function ExamplesError({
   error: Error & { digest?: string }
   reset: () => void
 }) {
+  // Get locale from localStorage or document dir attribute since error boundaries
+  // might not have access to context providers
+  const [locale, setLocale] = React.useState<'en' | 'ar'>('en')
+
+  React.useEffect(() => {
+    const storedLocale = localStorage.getItem('locale') as 'en' | 'ar' | null
+    const docDir = document.documentElement.getAttribute('dir')
+    const detectedLocale = storedLocale || (docDir === 'rtl' ? 'ar' : 'en')
+    setLocale(detectedLocale)
+  }, [])
+
+  const t = content[locale]
+
   React.useEffect(() => {
     // Log error to error reporting service
     if (process.env.NODE_ENV === 'development') {
@@ -28,10 +42,10 @@ export default function ExamplesError({
             <div className="rounded-full bg-destructive/10 p-2">
               <AlertCircle className="h-6 w-6 text-destructive" />
             </div>
-            <CardTitle className="text-2xl">Example Failed to Load</CardTitle>
+            <CardTitle className="text-2xl">{t.examplesErrorPage.title}</CardTitle>
           </div>
           <CardDescription>
-            This example encountered an error. Please try refreshing or view other examples.
+            {t.examplesErrorPage.description}
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
@@ -45,19 +59,19 @@ export default function ExamplesError({
           <div className="flex flex-wrap gap-2">
             <Button onClick={reset} className="flex-1">
               <RefreshCcw className="me-2 h-4 w-4" />
-              Try Again
+              {t.examplesErrorPage.tryAgain}
             </Button>
             <Button variant="outline" asChild className="flex-1">
               <Link href="/examples">
                 <Sparkles className="me-2 h-4 w-4" />
-                All Examples
+                {t.examplesErrorPage.allExamples}
               </Link>
             </Button>
           </div>
           <Button variant="ghost" asChild className="w-full">
             <Link href="/">
               <Home className="me-2 h-4 w-4" />
-              Go Home
+              {t.examplesErrorPage.goHome}
             </Link>
           </Button>
         </CardContent>

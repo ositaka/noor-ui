@@ -43,7 +43,7 @@ export default function NotFound() {
           {/* Action Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button asChild size="lg">
-              <Link href="/" className="inline-flex items-center">
+              <Link href="/">
                 <Home className="h-4 w-4 me-2" />
                 {t.notFound.goHome}
               </Link>
