@@ -123,7 +123,7 @@ export const NotificationCenter = React.forwardRef<HTMLButtonElement, Notificati
           </Button>
         </PopoverTrigger>
 
-        <PopoverContent className="w-80 p-0" align="end">
+        <PopoverContent className="w-96 p-0" align="end">
           {/* Header */}
           <div className="flex items-center justify-between border-b px-4 py-3">
             <h3 className="font-semibold text-sm">{t.notifications}</h3>

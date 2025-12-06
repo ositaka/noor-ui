@@ -3,6 +3,7 @@ import { ChevronLeft, ChevronRight, ArrowLeft, ArrowRight } from 'lucide-react'
 import { cn } from '../../lib/utils'
 import { Button, buttonVariants, type ButtonProps } from './button'
 import { cva, type VariantProps } from 'class-variance-authority'
+import { Slot } from '@radix-ui/react-slot'
 
 /**
  * Arrow direction semantics:
@@ -73,6 +74,7 @@ const ButtonArrow = React.forwardRef<HTMLButtonElement, ButtonArrowProps>(
       iconPosition = 'auto',
       iconSize = 'md',
       hideIcon = false,
+      asChild = false,
       ...props
     },
     ref
@@ -104,16 +106,52 @@ const ButtonArrow = React.forwardRef<HTMLButtonElement, ButtonArrowProps>(
       <IconComponent className={iconClasses} aria-hidden="true" />
     )
 
+    const buttonClasses = cn(
+      'gap-2',
+      // Add padding adjustment based on icon position
+      resolvedPosition === 'start' && 'ps-3',
+      resolvedPosition === 'end' && 'pe-3',
+      className
+    )
+
+    // When using asChild, we clone the child (Link) and add icons to it
+    // We pass asChild=true to Button so it uses Slot to merge props with the Link
+    if (asChild) {
+      const child = React.Children.only(children) as React.ReactElement
+
+      // Build children for the cloned Link
+      const childContent = []
+      if (resolvedPosition === 'start' && ArrowIcon) {
+        childContent.push(React.cloneElement(ArrowIcon, { key: 'arrow-start' }))
+      }
+      if (React.isValidElement(child.props.children)) {
+        childContent.push(React.cloneElement(child.props.children, { key: 'content' }))
+      } else {
+        childContent.push(child.props.children)
+      }
+      if (resolvedPosition === 'end' && ArrowIcon) {
+        childContent.push(React.cloneElement(ArrowIcon, { key: 'arrow-end' }))
+      }
+
+      // Clone the child with new children
+      const newChild = React.cloneElement(child, child.props, ...childContent)
+
+      return (
+        <Button
+          ref={ref}
+          className={buttonClasses}
+          asChild
+          {...props}
+        >
+          {newChild}
+        </Button>
+      )
+    }
+
     return (
       <Button
         ref={ref}
-        className={cn(
-          'gap-2',
-          // Add padding adjustment based on icon position
-          resolvedPosition === 'start' && 'ps-3',
-          resolvedPosition === 'end' && 'pe-3',
-          className
-        )}
+        className={buttonClasses}
         {...props}
       >
         {resolvedPosition === 'start' && ArrowIcon}

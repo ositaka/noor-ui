@@ -145,12 +145,46 @@ const ModelSelector = React.forwardRef<HTMLButtonElement, ModelSelectorProps>(
       return acc
     }, {} as Record<string, AIModel[]>)
 
+    const selectedModel = models.find((m) => m.id === value)
+
     return (
       <Select value={value} onValueChange={onValueChange}>
-        <SelectTrigger ref={ref} className={cn('w-full', className)}>
-          <SelectValue
-            placeholder={isRTL ? (placeholderAr || placeholder || defaultPlaceholder) : (placeholder || defaultPlaceholder)}
-          />
+        <SelectTrigger ref={ref} className={cn('w-full h-auto', className)}>
+          {selectedModel ? (
+            <div className="flex items-center gap-3 py-1 w-full">
+              <div className="shrink-0">{getIcon(selectedModel.icon)}</div>
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-2">
+                  <span className="font-medium">
+                    {isRTL ? (selectedModel.nameAr || selectedModel.name) : selectedModel.name}
+                  </span>
+                  {selectedModel.recommended && (
+                    <Badge variant="secondary" className="text-xs">
+                      <Star className={cn('h-2.5 w-2.5 fill-current', isRTL ? 'ms-1' : 'me-1')} />
+                      {t.ui.components.recommended}
+                    </Badge>
+                  )}
+                </div>
+                <div className="flex items-center gap-2 text-xs text-muted-foreground mt-0.5">
+                  <span className={getSpeedColor(selectedModel.specs.speed)}>
+                    {getSpeedLabel(selectedModel)}
+                  </span>
+                  <span>•</span>
+                  <span>{formatContextLength(selectedModel.specs.contextLength)} {t.ui.components.tokens}</span>
+                  {selectedModel.specs.pricing && (
+                    <>
+                      <span>•</span>
+                      <span>{isRTL ? (selectedModel.specs.pricingAr || selectedModel.specs.pricing) : selectedModel.specs.pricing}</span>
+                    </>
+                  )}
+                </div>
+              </div>
+            </div>
+          ) : (
+            <SelectValue
+              placeholder={isRTL ? (placeholderAr || placeholder || defaultPlaceholder) : (placeholder || defaultPlaceholder)}
+            />
+          )}
         </SelectTrigger>
         <SelectContent>
           {Object.entries(groupedModels).map(([provider, providerModels]) => (

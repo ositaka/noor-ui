@@ -55,7 +55,7 @@ const ThinkingIndicator = React.forwardRef<HTMLDivElement, ThinkingIndicatorProp
       switch (variant) {
         case 'dots':
           return (
-            <div className="flex items-center gap-1">
+            <div className="flex items-center gap-2">
               <div className="h-2 w-2 rounded-full bg-current animate-bounce [animation-delay:-0.3s]" />
               <div className="h-2 w-2 rounded-full bg-current animate-bounce [animation-delay:-0.15s]" />
               <div className="h-2 w-2 rounded-full bg-current animate-bounce" />
@@ -104,7 +104,7 @@ const ThinkingIndicator = React.forwardRef<HTMLDivElement, ThinkingIndicatorProp
       >
         {message ? (
           <>
-            <span>{displayMessage}</span>
+            <span className='me-1'>{displayMessage}</span>
             {renderAnimation()}
           </>
         ) : (
