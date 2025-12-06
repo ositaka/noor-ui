@@ -91,13 +91,11 @@ Build the **go-to design system for bilingual (LTR/RTL) web applications**, star
 - ✅ Version and release strategy established
 - ✅ Automated pre-publish checks (translations, links, types)
 
-**Current Version:** v0.4.3 (2025-12-05)
+**Current Version:** v0.4.4 (2025-12-06)
 
 **Latest Updates:**
-- ✅ Added RangeSlider component with dual-handle functionality
-- ✅ Fixed RTL support in PrayerTimes and HijriDate components (now work with ALL RTL languages)
-- ✅ Resolved RTL range label formatting (simple min-max format works universally)
-- ✅ Applied "direction check, not locale check" pattern across components
+- ✅ Standardized documentation section spacing across all component pages (number-input, date-picker, time-picker)
+- ✅ Improved visual hierarchy in component documentation
 - ✅ 74+ components with complete RTL/LTR support
 
 **Deliverables:**
@@ -166,7 +164,7 @@ Build the **go-to design system for bilingual (LTR/RTL) web applications**, star
 
 ## 🚧 Current Status: READY FOR PUBLIC LAUNCH! 🚀
 
-**Package Published:** [noorui-rtl v0.4.3 on npm](https://www.npmjs.com/package/noorui-rtl)
+**Package Published:** [noorui-rtl v0.4.4 on npm](https://www.npmjs.com/package/noorui-rtl)
 
 **Technical Pre-Launch:** ✅ **COMPLETE** (2025-12-02)
 - ✅ Repository public on GitHub
@@ -190,7 +188,7 @@ Build the **go-to design system for bilingual (LTR/RTL) web applications**, star
 - None! All technical AND marketing assets complete ✅
 
 **Recent Wins (Dec 5, 2025):**
-- ✅ **NPM package published** (noorui-rtl v0.4.3)
+- ✅ **NPM package published** (noorui-rtl v0.4.4)
 - ✅ **74+ production-ready components**
 - ✅ **Complete documentation site** (noorui.com)
 - ✅ **Kitab Blog Starter** live at kitab.noorui.com - production example with 4 languages
@@ -450,4 +448,4 @@ Phase 4: Month 5+    ░░░░░░░░░░░░░░░░░░░�
 **Note:** Other `locale === 'ar'` checks in the codebase are legitimate (for Intl.DateTimeFormat, Arabic numerals, etc.)
 
 **Completed:** 2025-11-29
-**Version:** v0.4.3
+**Version:** v0.4.4

@@ -7,6 +7,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### To Be Fixed
+- **Popover Component**: RTL positioning issues in portal-rendered components
+  - NotificationCenter popup appears on wrong side in RTL mode
+  - TimePicker & TimeRangePicker popups appear on wrong side in RTL mode
+  - Need to add automatic direction detection (similar to DropdownMenu pattern)
+
+## [0.4.4] - 2025-12-06
+
+### Fixed
+- **Documentation Pages**: Fixed inconsistent section title spacing across component pages
+  - **number-input**: Fixed Use Cases, API Reference, and Features sections
+  - **date-picker**: Fixed Use Cases, Type Definition, API Reference (2x), and Features sections
+  - **time-picker**: Fixed Use Cases, Type Definition, API Reference (2x), and Features sections
+  - All sections now use standard pattern: `<section className="mb-16">` with `<h2 className="text-2xl font-bold tracking-tight mb-6">`
+
+### Changed
+- **Component Documentation**: Standardized section spacing for consistent visual hierarchy
+
+### Notes
+This release focuses on improving documentation consistency and visual hierarchy across all component pages.
+
 ## [0.4.3] - 2025-12-05
 
 ### Fixed
