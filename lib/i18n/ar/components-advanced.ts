@@ -617,7 +617,7 @@ notificationCenterComponent: {
         title: 'إمكانية الوصول',
         bellIconLabel: 'زر أيقونة الجرس له aria-label مناسب',
         unreadCountVisible: 'شارة عدد غير المقروءة مرئية لقارئات الشاشة',
-        keyboardNav: 'التنقل بلوحة المفاتيح عبر الإشعارات',
+        keyboardNavigation: 'التنقل بلوحة المفاتيح عبر الإشعارات',
         visualDistinction: 'تمييز بصري واضح بين حالات المقروء/غير المقروء',
         escapeCloses: 'مفتاح Escape يغلق النافذة المنبثقة',
       },

@@ -73,7 +73,7 @@ export const NotificationCenter = React.forwardRef<HTMLButtonElement, Notificati
     },
     ref
   ) => {
-    const { locale } = useDirection()
+    const { locale, direction } = useDirection()
     const [open, setOpen] = React.useState(false)
 
     // Bilingual text content
@@ -123,7 +123,7 @@ export const NotificationCenter = React.forwardRef<HTMLButtonElement, Notificati
           </Button>
         </PopoverTrigger>
 
-        <PopoverContent className="w-96 p-0" align="end">
+        <PopoverContent className="w-96 p-0" align={direction === 'rtl' ? 'start' : 'end'}>
           {/* Header */}
           <div className="flex items-center justify-between border-b px-4 py-3">
             <h3 className="font-semibold text-sm">{t.notifications}</h3>
@@ -163,7 +163,7 @@ export const NotificationCenter = React.forwardRef<HTMLButtonElement, Notificati
               <p className="text-xs text-muted-foreground mt-1">{t.noNotificationsDesc}</p>
             </div>
           ) : (
-            <ScrollArea style={{ maxHeight }}>
+            <ScrollArea style={{ maxHeight }} dir={direction}>
               <div className="divide-y">
                 {notifications.map((notification) => (
                   <div
@@ -215,15 +215,15 @@ export const NotificationCenter = React.forwardRef<HTMLButtonElement, Notificati
                     <div className="flex-1 min-w-0 space-y-1">
                       <div className="flex items-start justify-between gap-2">
                         <p className="text-sm font-medium leading-tight">
-                          {notification.title}
+                          {locale === 'ar' ? (notification.titleAr || notification.title) : notification.title}
                         </p>
                         {!notification.read && (
                           <div className="h-2 w-2 rounded-full bg-primary shrink-0 mt-1" />
                         )}
                       </div>
-                      {notification.description && (
+                      {(notification.description || notification.descriptionAr) && (
                         <p className="text-xs text-muted-foreground line-clamp-2">
-                          {notification.description}
+                          {locale === 'ar' ? (notification.descriptionAr || notification.description) : notification.description}
                         </p>
                       )}
                       <p className="text-xs text-muted-foreground">

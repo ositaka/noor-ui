@@ -311,7 +311,7 @@ export default function WorkflowCanvasPage() {
             <h1 className="text-4xl font-bold tracking-tight">Workflow Canvas</h1>
             <Badge variant="secondary" className="flex items-center gap-1.5">
               <AlertCircle className="h-3 w-3" />
-              Work in Progress
+              {t.componentPage.workInProgress}
             </Badge>
           </div>
           <div className="space-y-3">
@@ -321,7 +321,7 @@ export default function WorkflowCanvasPage() {
             <div className="flex items-start gap-2 p-3 bg-yellow-50 dark:bg-yellow-950/20 border border-yellow-200 dark:border-yellow-800 rounded-lg max-w-3xl">
               <AlertCircle className="h-4 w-4 text-yellow-600 dark:text-yellow-500 mt-0.5 flex-shrink-0" />
               <p className="text-sm text-yellow-800 dark:text-yellow-200">
-                <strong>Note:</strong> This component is currently under development. Some features may not work as expected. We&apos;re actively working on improvements and will update the documentation once stable.
+                <strong>{t.componentPage.wipNote}</strong> {t.componentPage.wipNoteText}
               </p>
             </div>
           </div>
@@ -544,30 +544,30 @@ export default function WorkflowCanvasPage() {
             <Card>
               <CardContent className="p-4">
                 <Link href="/components/workflow-node" className="font-medium hover:underline">
-                  Workflow Node
+                  {content[locale]?.workflowNodeComponent?.title || content.en.workflowNodeComponent.title}
                 </Link>
                 <p className="text-sm text-muted-foreground mt-1">
-                  Base node component for workflows
+                  {workflowCanvasT.related.workflowNode}
                 </p>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="p-4">
                 <Link href="/components/card" className="font-medium hover:underline">
-                  Card
+                  {t.componentNav?.['card'] || 'Card'}
                 </Link>
                 <p className="text-sm text-muted-foreground mt-1">
-                  Container component used in nodes
+                  {workflowCanvasT.related.card}
                 </p>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="p-4">
                 <Link href="/components/badge" className="font-medium hover:underline">
-                  Badge
+                  {t.componentNav?.['badge'] || 'Badge'}
                 </Link>
                 <p className="text-sm text-muted-foreground mt-1">
-                  Status and label indicators
+                  {workflowCanvasT.related.badge}
                 </p>
               </CardContent>
             </Card>

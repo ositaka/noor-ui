@@ -126,7 +126,7 @@ const ConversationHistory = React.forwardRef<HTMLDivElement, ConversationHistory
     },
     ref
   ) => {
-    const { locale } = useDirection()
+    const { locale, direction } = useDirection()
     const t = content[locale]
     const [searchQuery, setSearchQuery] = React.useState('')
 
@@ -236,7 +236,7 @@ const ConversationHistory = React.forwardRef<HTMLDivElement, ConversationHistory
         </div>
 
         {/* Conversation List */}
-        <ScrollArea className="flex-1">
+        <ScrollArea className="flex-1" dir={direction}>
           <div className="p-2 space-y-6">
             {conversationGroups.length === 0 ? (
               <div className="flex flex-col items-center justify-center py-12 px-4 text-center">

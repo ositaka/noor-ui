@@ -11,110 +11,110 @@ import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 import { Label } from '@/components/ui/label'
 
-const numberInputProps: PropDefinition[] = [
+const getNumberInputProps = (componentT: any): PropDefinition[] => [
   {
     name: 'value',
     type: 'number',
     required: false,
-    description: 'Controlled value',
+    description: componentT.props.value,
   },
   {
     name: 'defaultValue',
     type: 'number',
     required: false,
-    description: 'Default uncontrolled value',
+    description: componentT.props.defaultValue,
   },
   {
     name: 'onChange',
     type: '(value: number | undefined) => void',
     required: false,
-    description: 'Callback when value changes',
+    description: componentT.props.onChange,
   },
   {
     name: 'onValueChange',
     type: '(value: number | undefined) => void',
     required: false,
-    description: 'Alternative callback for value changes',
+    description: componentT.props.onValueChange,
   },
   {
     name: 'min',
     type: 'number',
     required: false,
-    description: 'Minimum allowed value',
+    description: componentT.props.min,
   },
   {
     name: 'max',
     type: 'number',
     required: false,
-    description: 'Maximum allowed value',
+    description: componentT.props.max,
   },
   {
     name: 'step',
     type: 'number',
     default: '1',
     required: false,
-    description: 'Increment/decrement step size',
+    description: componentT.props.step,
   },
   {
     name: 'precision',
     type: 'number',
     default: '0',
     required: false,
-    description: 'Number of decimal places',
+    description: componentT.props.precision,
   },
   {
     name: 'showControls',
     type: 'boolean',
     default: 'true',
     required: false,
-    description: 'Show increment/decrement buttons',
+    description: componentT.props.showControls,
   },
   {
     name: 'formatDisplay',
     type: '(value: number) => string',
     required: false,
-    description: 'Custom display formatter',
+    description: componentT.props.formatDisplay,
   },
   {
     name: 'parseValue',
     type: '(value: string) => number | undefined',
     required: false,
-    description: 'Custom value parser',
+    description: componentT.props.parseValue,
   },
   {
     name: 'allowNegative',
     type: 'boolean',
     default: 'true',
     required: false,
-    description: 'Allow negative values',
+    description: componentT.props.allowNegative,
   },
   {
     name: 'allowDecimal',
     type: 'boolean',
     default: 'true',
     required: false,
-    description: 'Allow decimal values',
+    description: componentT.props.allowDecimal,
   },
   {
     name: 'thousandsSeparator',
     type: 'string | boolean',
     default: 'false',
     required: false,
-    description: 'Thousands separator character or enable default',
+    description: componentT.props.thousandsSeparator,
   },
   {
     name: 'decimalSeparator',
     type: 'string',
     default: '"."',
     required: false,
-    description: 'Decimal separator character',
+    description: componentT.props.decimalSeparator,
   },
   {
     name: 'disabled',
     type: 'boolean',
     default: 'false',
     required: false,
-    description: 'Disable the input',
+    description: componentT.props.disabled,
   },
 ]
 
@@ -172,6 +172,7 @@ export default function NumberInputPage() {
   const { direction, locale } = useDirection()
   const isRTL = direction === 'rtl'
   const t = content[locale]
+  const numberInputT = t.numberInputComponent as any
 
   const [value1, setValue1] = React.useState<number | undefined>(42)
   const [value2, setValue2] = React.useState<number | undefined>(undefined)
@@ -425,8 +426,8 @@ const formatCurrency = (value: number) =>
       </section>
 
       {/* Use Cases */}
-      <div className="space-y-4">
-        <h2 className="text-2xl font-bold">{t.componentPage.sections.useCases}</h2>
+      <section className="mb-16">
+        <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.useCases}</h2>
         <div className="grid gap-4 md:grid-cols-2">
           {[
             { title: t.numberInputComponent.useCases.pricingForms, icon: '💰' },
@@ -444,17 +445,17 @@ const formatCurrency = (value: number) =>
             </Card>
           ))}
         </div>
-      </div>
+      </section>
 
       {/* API Reference */}
-      <div className="space-y-4">
-        <h2 className="text-2xl font-bold">{t.componentPage.sections.propsApiReference}</h2>
-        <PropsTable props={numberInputProps} />
-      </div>
+      <section className="mb-16">
+        <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.propsApiReference}</h2>
+        <PropsTable props={getNumberInputProps(numberInputT)} />
+      </section>
 
       {/* Features */}
-      <div className="space-y-4">
-        <h2 className="text-2xl font-bold">{t.componentPage.sections.features}</h2>
+      <section className="mb-16">
+        <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.features}</h2>
         <ul className="list-disc list-inside space-y-2 text-muted-foreground">
           <li>{t.numberInputComponent.features.incrementButtons}</li>
           <li>{t.numberInputComponent.features.keyboardSupport}</li>
@@ -467,7 +468,7 @@ const formatCurrency = (value: number) =>
           <li>{t.numberInputComponent.features.rtlSupport}</li>
           <li>{t.numberInputComponent.features.fullAccessibility}</li>
         </ul>
-      </div>
+      </section>
       </main>
     </div>
   )

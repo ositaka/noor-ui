@@ -260,8 +260,10 @@ export default function ParameterSliderPage() {
             <ComponentShowcase.Demo>
               <div className="max-w-md">
                 <ParameterSlider
-                  label="Temperature"
-                  description="Controls randomness in the model's responses. Higher values make output more random."
+                  label={content.en.parameterSliderComponent.parameters.temperature.label}
+                  labelAr={content.ar.parameterSliderComponent.parameters.temperature.label}
+                  description={content.en.parameterSliderComponent.parameters.temperature.description}
+                  descriptionAr={content.ar.parameterSliderComponent.parameters.temperature.description}
                   value={temperature}
                   onValueChange={setTemperature}
                   min={0}
@@ -298,8 +300,10 @@ export default function ParameterSliderPage() {
                 <CardContent className="p-6">
                   <div className="max-w-md">
                     <ParameterSlider
-                      label="Temperature"
-                      description="Controls randomness in the model's responses. Higher values make output more random."
+                      label={content.en.parameterSliderComponent.parameters.temperature.label}
+                      labelAr={content.ar.parameterSliderComponent.parameters.temperature.label}
+                      description={content.en.parameterSliderComponent.parameters.temperature.description}
+                      descriptionAr={content.ar.parameterSliderComponent.parameters.temperature.description}
                       value={temperature}
                       onValueChange={setTemperature}
                       min={0}
@@ -322,8 +326,10 @@ export default function ParameterSliderPage() {
                 <CardContent className="p-6">
                   <div className="max-w-md">
                     <ParameterSlider
-                      label="Max Tokens"
-                      description="Maximum length of response in tokens"
+                      label={content.en.parameterSliderComponent.parameters.maxTokens.label}
+                      labelAr={content.ar.parameterSliderComponent.parameters.maxTokens.label}
+                      description={content.en.parameterSliderComponent.parameters.maxTokens.description}
+                      descriptionAr={content.ar.parameterSliderComponent.parameters.maxTokens.description}
                       value={maxTokens}
                       onValueChange={setMaxTokens}
                       min={1}
@@ -351,8 +357,10 @@ export default function ParameterSliderPage() {
                 <CardContent className="p-6">
                   <div className="max-w-md space-y-6">
                     <ParameterSlider
-                      label="Temperature"
-                      description="Controls randomness. Higher = more creative, lower = more focused."
+                      label={content.en.parameterSliderComponent.parameters.temperature.label}
+                      labelAr={content.ar.parameterSliderComponent.parameters.temperature.label}
+                      description={content.en.parameterSliderComponent.parameters.temperature.description}
+                      descriptionAr={content.ar.parameterSliderComponent.parameters.temperature.description}
                       value={temperature}
                       onValueChange={setTemperature}
                       min={0}
@@ -362,8 +370,10 @@ export default function ParameterSliderPage() {
                     />
 
                     <ParameterSlider
-                      label="Top P"
-                      description="Controls diversity via nucleus sampling. Lower = more focused."
+                      label={content.en.parameterSliderComponent.parameters.topP.label}
+                      labelAr={content.ar.parameterSliderComponent.parameters.topP.label}
+                      description={content.en.parameterSliderComponent.parameters.topP.description}
+                      descriptionAr={content.ar.parameterSliderComponent.parameters.topP.description}
                       value={topP}
                       onValueChange={setTopP}
                       min={0}
@@ -372,8 +382,10 @@ export default function ParameterSliderPage() {
                     />
 
                     <ParameterSlider
-                      label="Max Tokens"
-                      description="Maximum length of response in tokens."
+                      label={content.en.parameterSliderComponent.parameters.maxTokens.label}
+                      labelAr={content.ar.parameterSliderComponent.parameters.maxTokens.label}
+                      description={content.en.parameterSliderComponent.parameters.maxTokens.description}
+                      descriptionAr={content.ar.parameterSliderComponent.parameters.maxTokens.description}
                       value={maxTokens}
                       onValueChange={setMaxTokens}
                       min={1}
@@ -401,8 +413,10 @@ export default function ParameterSliderPage() {
                 <CardContent className="p-6">
                   <div className="max-w-md">
                     <ParameterSlider
-                      label="Frequency Penalty"
-                      description="Penalizes repeated tokens"
+                      label={content.en.parameterSliderComponent.parameters.frequencyPenalty.label}
+                      labelAr={content.ar.parameterSliderComponent.parameters.frequencyPenalty.label}
+                      description={content.en.parameterSliderComponent.parameters.frequencyPenalty.description}
+                      descriptionAr={content.ar.parameterSliderComponent.parameters.frequencyPenalty.description}
                       value={0}
                       onValueChange={() => {}}
                       min={-2}
@@ -457,52 +471,6 @@ export default function ParameterSliderPage() {
           </Card>
         </section>
 
-        {/* RTL Considerations */}
-        <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.rtlSupport}</h2>
-          <Card>
-            <CardContent className="p-6 space-y-4">
-              <p className="text-muted-foreground">
-                {parameterSliderT.rtl.description}
-              </p>
-              <CodeBlock code={rtlCode} language="tsx" />
-              <div className="grid gap-4 md:grid-cols-2 mt-6">
-                <div className="space-y-2">
-                  <h4 className="font-semibold text-sm">{t.componentPage.rtlDemo.ltr}</h4>
-                  <div dir="ltr">
-                    <ParameterSlider
-                      label="Temperature"
-                      description="Controls randomness"
-                      value={0.7}
-                      onValueChange={() => {}}
-                      min={0}
-                      max={2}
-                      step={0.1}
-                    />
-                  </div>
-                </div>
-                <div className="space-y-2">
-                  <h4 className="font-semibold text-sm">{t.componentPage.rtlDemo.rtl}</h4>
-                  <div dir="rtl">
-                    <ParameterSlider
-                      label="Temperature"
-                      labelAr="درجة الحرارة"
-                      description="Controls randomness"
-                      descriptionAr="يتحكم في العشوائية"
-                      value={0.7}
-                      onValueChange={() => {}}
-                      min={0}
-                      max={2}
-                      step={0.1}
-                      isRTL
-                    />
-                  </div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </section>
-
         {/* Related */}
         <section className="mb-16">
           <h2 className="text-2xl font-bold tracking-tight mb-6">{parameterSliderT.related.title}</h2>
@@ -510,30 +478,30 @@ export default function ParameterSliderPage() {
             <Card>
               <CardContent className="p-4">
                 <Link href="/components/model-selector" className="font-medium hover:underline">
-                  Model Selector
+                  {content[locale]?.modelSelectorComponent?.title || content.en.modelSelectorComponent.title}
                 </Link>
                 <p className="text-sm text-muted-foreground mt-1">
-                  Choose AI models
+                  {parameterSliderT.related.modelSelector}
                 </p>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="p-4">
                 <Link href="/components/token-counter" className="font-medium hover:underline">
-                  Token Counter
+                  {content[locale]?.tokenCounterComponent?.title || content.en.tokenCounterComponent.title}
                 </Link>
                 <p className="text-sm text-muted-foreground mt-1">
-                  Track token usage
+                  {parameterSliderT.related.tokenCounter}
                 </p>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="p-4">
                 <Link href="/components/chat-message" className="font-medium hover:underline">
-                  Chat Message
+                  {content[locale]?.chatMessageComponent?.title || content.en.chatMessageComponent.title}
                 </Link>
                 <p className="text-sm text-muted-foreground mt-1">
-                  Display chat messages
+                  {parameterSliderT.related.chatMessage}
                 </p>
               </CardContent>
             </Card>

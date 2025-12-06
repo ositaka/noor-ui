@@ -13,60 +13,6 @@ import { useToast } from '@/hooks/use-toast'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 
-const propDefinitions = [
-  {
-    name: 'user',
-    type: '{ name?: string; email?: string; image?: string; initials?: string }',
-    description: 'User information to display',
-  },
-  {
-    name: 'onProfileClick',
-    type: '() => void',
-    description: 'Callback when Profile menu item is clicked',
-  },
-  {
-    name: 'onSettingsClick',
-    type: '() => void',
-    description: 'Callback when Settings menu item is clicked',
-  },
-  {
-    name: 'onBillingClick',
-    type: '() => void',
-    description: 'Callback when Billing menu item is clicked',
-  },
-  {
-    name: 'onTeamClick',
-    type: '() => void',
-    description: 'Callback when Team menu item is clicked',
-  },
-  {
-    name: 'onSupportClick',
-    type: '() => void',
-    description: 'Callback when Support menu item is clicked',
-  },
-  {
-    name: 'onLogout',
-    type: '() => void',
-    description: 'Callback when Log out menu item is clicked',
-  },
-  {
-    name: 'className',
-    type: 'string',
-    description: 'Additional CSS classes for the trigger button',
-  },
-  {
-    name: 'align',
-    type: "'start' | 'center' | 'end'",
-    defaultValue: "'end'",
-    description: 'Alignment of the dropdown menu',
-  },
-  {
-    name: 'side',
-    type: "'top' | 'right' | 'bottom' | 'left'",
-    defaultValue: "'bottom'",
-    description: 'Side where the dropdown menu appears',
-  },
-]
 
 const withAvatarCode = `'use client'
 
@@ -128,19 +74,65 @@ export default function Example() {
 export default function UserMenuPage() {
   const { direction, locale } = useDirection()
   const isRTL = direction === 'rtl'
-  const [mounted, setMounted] = React.useState(false)
   const { toast } = useToast()
 
-  React.useEffect(() => {
-    setMounted(true)
-  }, [])
-
-  if (!mounted) {
-    return <div className="container py-12">Loading...</div>
-  }
-
   const t = content[locale] || content.en
-  const userMenuT = (content[locale]?.userMenuComponent || content.en.userMenuComponent) as any
+  const userMenuT = t.userMenuComponent as any
+
+  const propDefinitions = [
+    {
+      name: 'user',
+      type: '{ name?: string; email?: string; image?: string; initials?: string }',
+      description: userMenuT.props.user,
+    },
+    {
+      name: 'onProfileClick',
+      type: '() => void',
+      description: userMenuT.props.onProfileClick,
+    },
+    {
+      name: 'onSettingsClick',
+      type: '() => void',
+      description: userMenuT.props.onSettingsClick,
+    },
+    {
+      name: 'onBillingClick',
+      type: '() => void',
+      description: userMenuT.props.onBillingClick,
+    },
+    {
+      name: 'onTeamClick',
+      type: '() => void',
+      description: userMenuT.props.onTeamClick,
+    },
+    {
+      name: 'onSupportClick',
+      type: '() => void',
+      description: userMenuT.props.onSupportClick,
+    },
+    {
+      name: 'onLogout',
+      type: '() => void',
+      description: userMenuT.props.onLogout,
+    },
+    {
+      name: 'className',
+      type: 'string',
+      description: userMenuT.props.className,
+    },
+    {
+      name: 'align',
+      type: "'start' | 'center' | 'end'",
+      defaultValue: "'end'",
+      description: userMenuT.props.align,
+    },
+    {
+      name: 'side',
+      type: "'top' | 'right' | 'bottom' | 'left'",
+      defaultValue: "'bottom'",
+      description: userMenuT.props.side,
+    },
+  ]
 
   const handleAction = (action: string) => {
     toast({
@@ -157,35 +149,34 @@ export default function UserMenuPage() {
           <ol className="flex items-center gap-2 text-sm text-muted-foreground">
             <li>
               <Link href="/" className="hover:text-foreground transition-colors">
-                Home
+                {userMenuT.breadcrumb.home}
               </Link>
             </li>
             <li>/</li>
             <li>
               <Link href="/components" className="hover:text-foreground transition-colors">
-                Components
+                {userMenuT.breadcrumb.components}
               </Link>
             </li>
             <li>/</li>
-            <li className="text-foreground font-medium">User Menu</li>
+            <li className="text-foreground font-medium">{userMenuT.breadcrumb.userMenu}</li>
           </ol>
         </nav>
 
         {/* Page Header */}
         <div className="mb-12">
           <div className="flex items-center gap-3 mb-4">
-            <h1 className="text-4xl font-bold tracking-tight">User Menu</h1>
-            <Badge variant="default">New</Badge>
+            <h1 className="text-4xl font-bold tracking-tight">{userMenuT.title}</h1>
+            <Badge variant="default">{userMenuT.badge}</Badge>
           </div>
           <p className="text-xl text-muted-foreground max-w-3xl">
-            A dropdown menu triggered by a user avatar, displaying profile information and action
-            items. Perfect for application headers and navigation bars.
+            {userMenuT.description}
           </p>
         </div>
 
         {/* Preview */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Preview</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{userMenuT.sections.preview}</h2>
           <ComponentShowcase
             code={`'use client'
 
@@ -221,53 +212,53 @@ export default function Example() {
 
         {/* Features */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Features</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{userMenuT.sections.features}</h2>
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             <Card>
               <CardContent className="p-6">
-                <h3 className="font-semibold mb-2">Avatar Display</h3>
+                <h3 className="font-semibold mb-2">{userMenuT.features.avatarDisplay}</h3>
                 <p className="text-sm text-muted-foreground">
-                  Shows user avatar with automatic fallback to initials
+                  {userMenuT.features.avatarDisplayDesc}
                 </p>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="p-6">
-                <h3 className="font-semibold mb-2">User Info</h3>
+                <h3 className="font-semibold mb-2">{userMenuT.features.userInfo}</h3>
                 <p className="text-sm text-muted-foreground">
-                  Displays user name and email in the dropdown
+                  {userMenuT.features.userInfoDesc}
                 </p>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="p-6">
-                <h3 className="font-semibold mb-2">Flexible Actions</h3>
+                <h3 className="font-semibold mb-2">{userMenuT.features.flexibleActions}</h3>
                 <p className="text-sm text-muted-foreground">
-                  Customizable menu items with callback handlers
+                  {userMenuT.features.flexibleActionsDesc}
                 </p>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="p-6">
-                <h3 className="font-semibold mb-2">RTL Support</h3>
+                <h3 className="font-semibold mb-2">{userMenuT.features.rtlSupport}</h3>
                 <p className="text-sm text-muted-foreground">
-                  Automatically adapts icons and layout for RTL
+                  {userMenuT.features.rtlSupportDesc}
                 </p>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="p-6">
-                <h3 className="font-semibold mb-2">Keyboard Navigation</h3>
+                <h3 className="font-semibold mb-2">{userMenuT.features.keyboardNavigation}</h3>
                 <p className="text-sm text-muted-foreground">
-                  Full keyboard support with arrow keys
+                  {userMenuT.features.keyboardNavigationDesc}
                 </p>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="p-6">
-                <h3 className="font-semibold mb-2">Accessible</h3>
+                <h3 className="font-semibold mb-2">{userMenuT.features.accessible}</h3>
                 <p className="text-sm text-muted-foreground">
-                  ARIA labels and screen reader support
+                  {userMenuT.features.accessibleDesc}
                 </p>
               </CardContent>
             </Card>
@@ -276,12 +267,12 @@ export default function Example() {
 
         {/* Examples */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Examples</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{userMenuT.examples.title}</h2>
 
           <div className="space-y-8">
             {/* With Avatar */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">With Avatar</h3>
+              <h3 className="text-lg font-semibold mb-4">{userMenuT.examples.withAvatar}</h3>
               <Card>
                 <CardContent className="p-6">
                   <div className="flex justify-center">
@@ -305,7 +296,7 @@ export default function Example() {
 
             {/* Minimal */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">Minimal</h3>
+              <h3 className="text-lg font-semibold mb-4">{userMenuT.examples.minimal}</h3>
               <Card>
                 <CardContent className="p-6">
                   <div className="flex justify-center">
@@ -326,7 +317,7 @@ export default function Example() {
 
             {/* Full Options */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">All Options</h3>
+              <h3 className="text-lg font-semibold mb-4">{userMenuT.examples.allOptions}</h3>
               <Card>
                 <CardContent className="p-6">
                   <div className="flex justify-center">
@@ -355,12 +346,12 @@ export default function Example() {
 
         {/* Integration Example */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Integration Example</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{userMenuT.sections.integration}</h2>
           <Card>
             <CardHeader>
-              <CardTitle>Using with Authentication</CardTitle>
+              <CardTitle>{userMenuT.integration.title}</CardTitle>
               <CardDescription>
-                Example integration with authentication system
+                {userMenuT.integration.description}
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -408,7 +399,7 @@ export function Header() {
 
         {/* Props */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Props</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{userMenuT.sections.props}</h2>
           <PropsTable props={propDefinitions} />
         </section>
 
@@ -423,29 +414,29 @@ export function Header() {
 
         {/* Accessibility */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Accessibility</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{userMenuT.sections.accessibility}</h2>
           <Card>
             <CardContent className="pt-6">
               <ul className="space-y-3 text-sm text-muted-foreground">
                 <li className="flex items-start gap-2">
                   <span className="text-primary font-bold">✓</span>
-                  <span>Keyboard navigation with Tab, Enter, and Arrow keys</span>
+                  <span>{userMenuT.accessibility.keyboardNav}</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-primary font-bold">✓</span>
-                  <span>ARIA labels for screen readers</span>
+                  <span>{userMenuT.accessibility.ariaLabels}</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-primary font-bold">✓</span>
-                  <span>Focus management within the dropdown</span>
+                  <span>{userMenuT.accessibility.focusManagement}</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-primary font-bold">✓</span>
-                  <span>Escape key closes the dropdown</span>
+                  <span>{userMenuT.accessibility.escapeKey}</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-primary font-bold">✓</span>
-                  <span>Visual focus indicators for all interactive elements</span>
+                  <span>{userMenuT.accessibility.visualFocus}</span>
                 </li>
               </ul>
             </CardContent>

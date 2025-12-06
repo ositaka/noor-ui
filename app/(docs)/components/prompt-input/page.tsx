@@ -4,10 +4,12 @@ import * as React from 'react'
 import Link from 'next/link'
 import { PromptInput } from '@/components/ui/prompt-input'
 import { Card, CardContent } from '@/components/ui/card'
+import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
 import { ComponentShowcase } from '@/components/docs/component-showcase'
 import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
+import { AlertCircle } from 'lucide-react'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 
@@ -177,10 +179,24 @@ export default function PromptInputPage() {
 
         {/* Page Header */}
         <div className="mb-12">
-          <h1 className="text-4xl font-bold tracking-tight mb-4">{promptInputT.title}</h1>
-          <p className="text-xl text-muted-foreground max-w-3xl">
-            {promptInputT.description}
-          </p>
+          <div className="flex items-center gap-3 mb-4">
+            <h1 className="text-4xl font-bold tracking-tight">{promptInputT.title}</h1>
+            <Badge variant="secondary" className="flex items-center gap-1.5">
+              <AlertCircle className="h-3 w-3" />
+              {t.componentPage.workInProgress}
+            </Badge>
+          </div>
+          <div className="space-y-3">
+            <p className="text-xl text-muted-foreground max-w-3xl">
+              {promptInputT.description}
+            </p>
+            <div className="flex items-start gap-2 p-3 bg-yellow-50 dark:bg-yellow-950/20 border border-yellow-200 dark:border-yellow-800 rounded-lg max-w-3xl">
+              <AlertCircle className="h-4 w-4 text-yellow-600 dark:text-yellow-500 mt-0.5 flex-shrink-0" />
+              <p className="text-sm text-yellow-800 dark:text-yellow-200">
+                <strong>{t.componentPage.wipNote}</strong> {t.componentPage.wipNoteText}
+              </p>
+            </div>
+          </div>
         </div>
 
         {/* Preview */}
@@ -310,27 +326,25 @@ export default function PromptInputPage() {
           <Card>
             <CardContent className="p-6 space-y-4">
               <div>
-                <h3 className="font-semibold mb-2">Screen Reader</h3>
+                <h3 className="font-semibold mb-2">{promptInputT.accessibility.screenReader}</h3>
                 <p className="text-muted-foreground">
-                  All action buttons include screen reader labels. The textarea has proper
-                  ARIA attributes and placeholder text that guides users.
+                  {promptInputT.accessibility.screenReaderDesc}
                 </p>
               </div>
               <Separator />
               <div>
-                <h3 className="font-semibold mb-2">Keyboard Navigation</h3>
+                <h3 className="font-semibold mb-2">{promptInputT.accessibility.keyboardNav}</h3>
                 <ul className="list-disc list-inside text-muted-foreground space-y-1">
-                  <li><kbd className="px-1.5 py-0.5 rounded bg-muted">Enter</kbd>: Send message</li>
-                  <li><kbd className="px-1.5 py-0.5 rounded bg-muted">Shift+Enter</kbd>: New line</li>
-                  <li><kbd className="px-1.5 py-0.5 rounded bg-muted">Tab</kbd>: Navigate to action buttons</li>
+                  <li><kbd className="px-1.5 py-0.5 rounded bg-muted">Enter</kbd>: {promptInputT.accessibility.enterKey}</li>
+                  <li><kbd className="px-1.5 py-0.5 rounded bg-muted">Shift+Enter</kbd>: {promptInputT.accessibility.shiftEnterKey}</li>
+                  <li><kbd className="px-1.5 py-0.5 rounded bg-muted">Tab</kbd>: {promptInputT.accessibility.tabKey}</li>
                 </ul>
               </div>
               <Separator />
               <div>
-                <h3 className="font-semibold mb-2">Auto-resize</h3>
+                <h3 className="font-semibold mb-2">{promptInputT.accessibility.autoResize}</h3>
                 <p className="text-muted-foreground">
-                  The textarea automatically expands as content grows, up to 200px maximum height,
-                  ensuring content remains visible without manual resizing.
+                  {promptInputT.accessibility.autoResizeDesc}
                 </p>
               </div>
             </CardContent>
@@ -343,13 +357,12 @@ export default function PromptInputPage() {
           <Card>
             <CardContent className="p-6 space-y-4">
               <p className="text-muted-foreground">
-                The input automatically adapts to RTL layout. Action buttons move to the left side,
-                and text direction changes. Set <code className="bg-muted px-1 rounded">isRTL</code> prop for RTL languages.
+                {promptInputT.rtl.description}
               </p>
               <CodeBlock code={rtlCode} language="tsx" />
               <div className="grid gap-4 md:grid-cols-2 mt-6">
                 <div className="space-y-2">
-                  <h4 className="font-semibold text-sm">LTR (English)</h4>
+                  <h4 className="font-semibold text-sm">{promptInputT.rtl.ltr}</h4>
                   <div dir="ltr">
                     <PromptInput
                       onSend={(value) => console.log('Sent:', value)}
@@ -358,7 +371,7 @@ export default function PromptInputPage() {
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <h4 className="font-semibold text-sm">RTL (العربية)</h4>
+                  <h4 className="font-semibold text-sm">{promptInputT.rtl.rtl}</h4>
                   <div dir="rtl">
                     <PromptInput
                       onSend={(value) => console.log('Sent:', value)}
@@ -374,35 +387,35 @@ export default function PromptInputPage() {
 
         {/* Related */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.relatedComponents}</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{promptInputT.related.title}</h2>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             <Card>
               <CardContent className="p-4">
                 <Link href="/components/chat-message" className="font-medium hover:underline">
-                  Chat Message
+                  {t.chatMessageComponent?.title || 'Chat Message'}
                 </Link>
                 <p className="text-sm text-muted-foreground mt-1">
-                  Display chat messages from users and AI
+                  {promptInputT.related.chatMessage}
                 </p>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="p-4">
                 <Link href="/components/thinking-indicator" className="font-medium hover:underline">
-                  Thinking Indicator
+                  {t.thinkingIndicatorComponent?.title || 'Thinking Indicator'}
                 </Link>
                 <p className="text-sm text-muted-foreground mt-1">
-                  Loading state for AI responses
+                  {promptInputT.related.thinkingIndicator}
                 </p>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="p-4">
                 <Link href="/components/message-actions" className="font-medium hover:underline">
-                  Message Actions
+                  {t.messageActionsComponent?.title || 'Message Actions'}
                 </Link>
                 <p className="text-sm text-muted-foreground mt-1">
-                  Action buttons for chat messages
+                  {promptInputT.related.messageActions}
                 </p>
               </CardContent>
             </Card>

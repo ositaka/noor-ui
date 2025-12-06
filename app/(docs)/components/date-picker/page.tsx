@@ -11,128 +11,128 @@ import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 import { Label } from '@/components/ui/label'
 
-const datePickerProps: PropDefinition[] = [
+const getDatePickerProps = (componentT: any): PropDefinition[] => [
   {
     name: 'date',
     type: 'Date',
     required: false,
-    description: 'Controlled selected date',
+    description: componentT.props.date,
   },
   {
     name: 'onDateChange',
     type: '(date: Date | undefined) => void',
     required: false,
-    description: 'Callback when date changes',
+    description: componentT.props.onDateChange,
   },
   {
     name: 'placeholder',
     type: 'string',
     required: false,
-    description: 'Placeholder text in English',
+    description: componentT.props.placeholder,
   },
   {
     name: 'placeholderAr',
     type: 'string',
     required: false,
-    description: 'Placeholder text in Arabic',
+    description: componentT.props.placeholderAr,
   },
   {
     name: 'disabled',
     type: 'boolean',
     default: 'false',
     required: false,
-    description: 'Disable the picker',
+    description: componentT.props.disabled,
   },
   {
     name: 'formatDate',
     type: '(date: Date | undefined, locale: "en" | "ar") => string',
     required: false,
-    description: 'Custom date formatter',
+    description: componentT.props.formatDate,
   },
   {
     name: 'minDate',
     type: 'Date',
     required: false,
-    description: 'Minimum selectable date',
+    description: componentT.props.minDate,
   },
   {
     name: 'maxDate',
     type: 'Date',
     required: false,
-    description: 'Maximum selectable date',
+    description: componentT.props.maxDate,
   },
   {
     name: 'disabledDates',
     type: 'Date[]',
     default: '[]',
     required: false,
-    description: 'Array of dates to disable',
+    description: componentT.props.disabledDates,
   },
   {
     name: 'showHijri',
     type: 'boolean',
     default: 'false',
     required: false,
-    description: 'Show Hijri date alongside Gregorian',
+    description: componentT.props.showHijri,
   },
 ]
 
-const dateRangePickerProps: PropDefinition[] = [
+const getDateRangePickerProps = (componentT: any): PropDefinition[] => [
   {
     name: 'dateRange',
     type: 'DateRange',
     required: false,
-    description: 'Controlled date range ({ from: Date, to: Date })',
+    description: componentT.props.dateRange,
   },
   {
     name: 'onDateRangeChange',
     type: '(range: DateRange | undefined) => void',
     required: false,
-    description: 'Callback when range changes',
+    description: componentT.props.onDateRangeChange,
   },
   {
     name: 'placeholder',
     type: 'string',
     required: false,
-    description: 'Placeholder text in English',
+    description: componentT.props.placeholder,
   },
   {
     name: 'placeholderAr',
     type: 'string',
     required: false,
-    description: 'Placeholder text in Arabic',
+    description: componentT.props.placeholderAr,
   },
   {
     name: 'disabled',
     type: 'boolean',
     default: 'false',
     required: false,
-    description: 'Disable the picker',
+    description: componentT.props.disabled,
   },
   {
     name: 'formatDateRange',
     type: '(range: DateRange | undefined, locale: "en" | "ar") => string',
     required: false,
-    description: 'Custom range formatter',
+    description: componentT.props.formatDateRange,
   },
   {
     name: 'minDate',
     type: 'Date',
     required: false,
-    description: 'Minimum selectable date',
+    description: componentT.props.minDate,
   },
   {
     name: 'maxDate',
     type: 'Date',
     required: false,
-    description: 'Maximum selectable date',
+    description: componentT.props.maxDate,
   },
   {
     name: 'disabledDates',
     type: 'Date[]',
     default: '[]',
     required: false,
-    description: 'Array of dates to disable',
+    description: componentT.props.disabledDates,
   },
 ]
 
@@ -204,6 +204,7 @@ export default function DatePickerPage() {
   const { direction, locale } = useDirection()
   const isRTL = direction === 'rtl'
   const t = content[locale]
+  const datePickerT = t.datePickerComponent as any
 
   const [date1, setDate1] = React.useState<Date | undefined>(new Date())
   const [date2, setDate2] = React.useState<Date | undefined>(undefined)
@@ -473,8 +474,8 @@ const nights = dateRange?.from && dateRange?.to
       </section>
 
       {/* Use Cases */}
-      <div className="space-y-4">
-        <h2 className="text-2xl font-bold">{t.componentPage.sections.useCases}</h2>
+      <section className="mb-16">
+        <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.useCases}</h2>
         <div className="grid gap-4 md:grid-cols-2">
           {[
             { title: t.datePickerComponent.useCases.bookingForms, icon: '🏨' },
@@ -492,29 +493,29 @@ const nights = dateRange?.from && dateRange?.to
             </Card>
           ))}
         </div>
-      </div>
+      </section>
 
       {/* Type Definition */}
-      <div className="space-y-4">
-        <h2 className="text-2xl font-bold">{t.componentPage.sections.typeDefinitions}</h2>
+      <section className="mb-16">
+        <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.typeDefinitions}</h2>
         <CodeBlock code={typeDefinition} language="typescript" />
-      </div>
+      </section>
 
       {/* API Reference - DatePicker */}
-      <div className="space-y-4">
-        <h2 className="text-2xl font-bold">{t.datePickerComponentPage.apiReferenceDatePicker}</h2>
-        <PropsTable props={datePickerProps} />
-      </div>
+      <section className="mb-16">
+        <h2 className="text-2xl font-bold tracking-tight mb-6">{t.datePickerComponentPage.apiReferenceDatePicker}</h2>
+        <PropsTable props={getDatePickerProps(datePickerT)} />
+      </section>
 
       {/* API Reference - DateRangePicker */}
-      <div className="space-y-4">
-        <h2 className="text-2xl font-bold">{t.datePickerComponentPage.apiReferenceDateRangePicker}</h2>
-        <PropsTable props={dateRangePickerProps} />
-      </div>
+      <section className="mb-16">
+        <h2 className="text-2xl font-bold tracking-tight mb-6">{t.datePickerComponentPage.apiReferenceDateRangePicker}</h2>
+        <PropsTable props={getDateRangePickerProps(datePickerT)} />
+      </section>
 
       {/* Features */}
-      <div className="space-y-4">
-        <h2 className="text-2xl font-bold">{t.componentPage.sections.features}</h2>
+      <section className="mb-16">
+        <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.features}</h2>
         <ul className="list-disc list-inside space-y-2 text-muted-foreground">
           <li>{t.datePickerComponent.features.singleAndRange}</li>
           <li>{t.datePickerComponent.features.calendarIntegration}</li>
@@ -527,7 +528,7 @@ const nights = dateRange?.from && dateRange?.to
           <li>{t.datePickerComponent.features.fullAccessibility}</li>
           <li>{t.datePickerComponent.features.quickSelection}</li>
         </ul>
-      </div>
+      </section>
       </main>
     </div>
   )

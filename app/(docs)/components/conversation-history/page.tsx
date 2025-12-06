@@ -4,10 +4,12 @@ import * as React from 'react'
 import Link from 'next/link'
 import { ConversationHistory, type Conversation } from '@/components/ui/conversation-history'
 import { Card, CardContent } from '@/components/ui/card'
+import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
 import { ComponentShowcase } from '@/components/docs/component-showcase'
 import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
+import { AlertCircle } from 'lucide-react'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 
@@ -278,10 +280,24 @@ export default function ConversationHistoryPage() {
 
         {/* Page Header */}
         <div className="mb-12">
-          <h1 className="text-4xl font-bold tracking-tight mb-4">{conversationHistoryT.title}</h1>
-          <p className="text-xl text-muted-foreground max-w-3xl">
-            {conversationHistoryT.description}
-          </p>
+          <div className="flex items-center gap-3 mb-4">
+            <h1 className="text-4xl font-bold tracking-tight">{conversationHistoryT.title}</h1>
+            <Badge variant="secondary" className="flex items-center gap-1.5">
+              <AlertCircle className="h-3 w-3" />
+              {t.componentPage.workInProgress}
+            </Badge>
+          </div>
+          <div className="space-y-3">
+            <p className="text-xl text-muted-foreground max-w-3xl">
+              {conversationHistoryT.description}
+            </p>
+            <div className="flex items-start gap-2 p-3 bg-yellow-50 dark:bg-yellow-950/20 border border-yellow-200 dark:border-yellow-800 rounded-lg max-w-3xl">
+              <AlertCircle className="h-4 w-4 text-yellow-600 dark:text-yellow-500 mt-0.5 flex-shrink-0" />
+              <p className="text-sm text-yellow-800 dark:text-yellow-200">
+                <strong>{t.componentPage.wipNote}</strong> {t.componentPage.wipNoteText}
+              </p>
+            </div>
+          </div>
         </div>
 
         {/* Preview */}
@@ -289,7 +305,7 @@ export default function ConversationHistoryPage() {
           <h2 className="text-2xl font-bold tracking-tight mb-6">{conversationHistoryT.preview}</h2>
           <ComponentShowcase>
             <ComponentShowcase.Demo>
-              <div className="flex h-[600px] border rounded-lg overflow-hidden">
+              <div className="flex w-full h-[600px] border rounded-lg overflow-hidden">
                 <ConversationHistory
                   conversations={conversations}
                   activeId={activeId}
@@ -303,10 +319,10 @@ export default function ConversationHistoryPage() {
                 <div className="flex-1 flex items-center justify-center bg-muted/10">
                   <div className="text-center space-y-2">
                     <p className="text-lg font-medium">
-                      Active Conversation: {conversations.find((c) => c.id === activeId)?.title}
+                      {conversationHistoryT.demo.activeConversation} {conversations.find((c) => c.id === activeId)?.title}
                     </p>
                     <p className="text-sm text-muted-foreground">
-                      Chat interface would go here
+                      {conversationHistoryT.demo.chatPlaceholder}
                     </p>
                   </div>
                 </div>
@@ -426,7 +442,7 @@ export default function ConversationHistoryPage() {
                     <p className="text-sm text-muted-foreground">
                       Use floating variant for overlays or modals:
                     </p>
-                    <div className="h-[400px] bg-muted/10 rounded-lg p-4 relative">
+                    <div className="h-[500px] bg-muted/10 rounded-lg p-4 relative">
                       <div className="absolute top-4 left-4">
                         <ConversationHistory
                           conversations={conversations.slice(0, 3)}
@@ -442,27 +458,6 @@ export default function ConversationHistoryPage() {
               <div className="mt-4">
                 <CodeBlock code={floatingCode} language="tsx" collapsible />
               </div>
-            </div>
-
-            {/* With Search */}
-            <div>
-              <h3 className="text-lg font-semibold mb-4">With Search</h3>
-              <Card>
-                <CardContent className="p-6">
-                  <div className="space-y-3">
-                    <p className="text-sm text-muted-foreground">
-                      Search filters conversations by title and preview text:
-                    </p>
-                    <div className="h-[400px] border rounded-lg overflow-hidden">
-                      <ConversationHistory
-                        conversations={conversations}
-                        activeId={activeId}
-                        showSearch
-                      />
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
             </div>
           </div>
         </section>
@@ -558,30 +553,30 @@ export default function ConversationHistoryPage() {
             <Card>
               <CardContent className="p-4">
                 <Link href="/components/chat-message" className="font-medium hover:underline">
-                  Chat Message
+                  {content[locale]?.chatMessageComponent?.title || content.en.chatMessageComponent.title}
                 </Link>
                 <p className="text-sm text-muted-foreground mt-1">
-                  Display messages within conversations
+                  {conversationHistoryT.related.chatMessage}
                 </p>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="p-4">
                 <Link href="/components/prompt-input" className="font-medium hover:underline">
-                  Prompt Input
+                  {content[locale]?.promptInputComponent?.title || content.en.promptInputComponent.title}
                 </Link>
                 <p className="text-sm text-muted-foreground mt-1">
-                  Input for sending messages in conversations
+                  {conversationHistoryT.related.promptInput}
                 </p>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="p-4">
                 <Link href="/components/model-selector" className="font-medium hover:underline">
-                  Model Selector
+                  {content[locale]?.modelSelectorComponent?.title || content.en.modelSelectorComponent.title}
                 </Link>
                 <p className="text-sm text-muted-foreground mt-1">
-                  Select AI model per conversation
+                  {conversationHistoryT.related.modelSelector}
                 </p>
               </CardContent>
             </Card>

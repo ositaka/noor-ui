@@ -11,111 +11,111 @@ import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 import { Label } from '@/components/ui/label'
 
-const timePickerProps: PropDefinition[] = [
+const getTimePickerProps = (componentT: any): PropDefinition[] => [
   {
     name: 'time',
     type: 'Time',
     required: false,
-    description: 'Controlled time value ({ hours: number, minutes: number })',
+    description: componentT.props.time,
   },
   {
     name: 'onTimeChange',
     type: '(time: Time | undefined) => void',
     required: false,
-    description: 'Callback when time changes',
+    description: componentT.props.onTimeChange,
   },
   {
     name: 'placeholder',
     type: 'string',
     required: false,
-    description: 'Placeholder text in English',
+    description: componentT.props.placeholder,
   },
   {
     name: 'placeholderAr',
     type: 'string',
     required: false,
-    description: 'Placeholder text in Arabic',
+    description: componentT.props.placeholderAr,
   },
   {
     name: 'disabled',
     type: 'boolean',
     default: 'false',
     required: false,
-    description: 'Disable the picker',
+    description: componentT.props.disabled,
   },
   {
     name: 'format',
     type: "'12h' | '24h'",
     default: "'24h'",
     required: false,
-    description: '12-hour or 24-hour time format',
+    description: componentT.props.format,
   },
   {
     name: 'minuteStep',
     type: 'number',
     default: '1',
     required: false,
-    description: 'Minutes increment step',
+    description: componentT.props.minuteStep,
   },
   {
     name: 'formatTime',
     type: '(time: Time | undefined, format: "12h" | "24h", locale: "en" | "ar") => string',
     required: false,
-    description: 'Custom time formatter',
+    description: componentT.props.formatTime,
   },
 ]
 
-const timeRangePickerProps: PropDefinition[] = [
+const getTimeRangePickerProps = (componentT: any): PropDefinition[] => [
   {
     name: 'timeRange',
     type: 'TimeRange',
     required: false,
-    description: 'Controlled time range ({ from: Time, to: Time })',
+    description: componentT.props.timeRange,
   },
   {
     name: 'onTimeRangeChange',
     type: '(range: TimeRange | undefined) => void',
     required: false,
-    description: 'Callback when range changes',
+    description: componentT.props.onTimeRangeChange,
   },
   {
     name: 'placeholder',
     type: 'string',
     required: false,
-    description: 'Placeholder text in English',
+    description: componentT.props.placeholder,
   },
   {
     name: 'placeholderAr',
     type: 'string',
     required: false,
-    description: 'Placeholder text in Arabic',
+    description: componentT.props.placeholderAr,
   },
   {
     name: 'disabled',
     type: 'boolean',
     default: 'false',
     required: false,
-    description: 'Disable the picker',
+    description: componentT.props.disabled,
   },
   {
     name: 'format',
     type: "'12h' | '24h'",
     default: "'24h'",
     required: false,
-    description: '12-hour or 24-hour time format',
+    description: componentT.props.format,
   },
   {
     name: 'minuteStep',
     type: 'number',
     default: '1',
     required: false,
-    description: 'Minutes increment step',
+    description: componentT.props.minuteStep,
   },
   {
     name: 'formatTimeRange',
     type: '(range: TimeRange | undefined, format: "12h" | "24h", locale: "en" | "ar") => string',
     required: false,
-    description: 'Custom range formatter',
+    description: componentT.props.formatTimeRange,
   },
 ]
 
@@ -183,6 +183,7 @@ export default function TimePickerPage() {
   const { direction, locale } = useDirection()
   const isRTL = direction === 'rtl'
   const t = content[locale]
+  const timePickerT = t.timePickerComponent as any
 
   const [time1, setTime1] = React.useState<Time>({ hours: 9, minutes: 30 })
   const [time2, setTime2] = React.useState<Time>({ hours: 14, minutes: 0 })
@@ -530,8 +531,8 @@ export default function TimePickerPage() {
       </section>
 
       {/* Use Cases */}
-      <div className="space-y-4">
-        <h2 className="text-2xl font-bold">{t.componentPage.sections.useCases}</h2>
+      <section className="mb-16">
+        <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.useCases}</h2>
         <div className="grid gap-4 md:grid-cols-2">
           {[
             { title: t.timePickerComponent.useCases.appointmentBooking, icon: '📅' },
@@ -549,29 +550,29 @@ export default function TimePickerPage() {
             </Card>
           ))}
         </div>
-      </div>
+      </section>
 
       {/* Type Definition */}
-      <div className="space-y-4">
-        <h2 className="text-2xl font-bold">{t.componentPage.sections.typeDefinitions}</h2>
+      <section className="mb-16">
+        <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.typeDefinitions}</h2>
         <CodeBlock code={typeDefinition} language="typescript" />
-      </div>
+      </section>
 
       {/* API Reference - TimePicker */}
-      <div className="space-y-4">
-        <h2 className="text-2xl font-bold">{t.timePickerComponentPage.apiReferenceTimePicker}</h2>
-        <PropsTable props={timePickerProps} />
-      </div>
+      <section className="mb-16">
+        <h2 className="text-2xl font-bold tracking-tight mb-6">{t.timePickerComponentPage.apiReferenceTimePicker}</h2>
+        <PropsTable props={getTimePickerProps(timePickerT)} />
+      </section>
 
       {/* API Reference - TimeRangePicker */}
-      <div className="space-y-4">
-        <h2 className="text-2xl font-bold">{t.timePickerComponentPage.apiReferenceTimeRangePicker}</h2>
-        <PropsTable props={timeRangePickerProps} />
-      </div>
+      <section className="mb-16">
+        <h2 className="text-2xl font-bold tracking-tight mb-6">{t.timePickerComponentPage.apiReferenceTimeRangePicker}</h2>
+        <PropsTable props={getTimeRangePickerProps(timePickerT)} />
+      </section>
 
       {/* Features */}
-      <div className="space-y-4">
-        <h2 className="text-2xl font-bold">{t.componentPage.sections.features}</h2>
+      <section className="mb-16">
+        <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.features}</h2>
         <ul className="list-disc list-inside space-y-2 text-muted-foreground">
           <li>{t.timePickerComponent.features.formats12And24}</li>
           <li>{t.timePickerComponent.features.amPmToggle}</li>
@@ -584,7 +585,7 @@ export default function TimePickerPage() {
           <li>{t.timePickerComponent.features.rtlSupport}</li>
           <li>{t.timePickerComponent.features.fullAccessibility}</li>
         </ul>
-      </div>
+      </section>
       </main>
     </div>
   )

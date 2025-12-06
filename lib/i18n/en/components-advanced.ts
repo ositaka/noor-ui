@@ -409,7 +409,7 @@ notificationCenterComponent: {
         title: 'Accessibility',
         bellIconLabel: 'Bell icon button has proper aria-label',
         unreadCountVisible: 'Unread count badge is visible to screen readers',
-        keyboardNav: 'Keyboard navigation through notifications',
+        keyboardNavigation: 'Keyboard navigation through notifications',
         visualDistinction: 'Clear visual distinction between read/unread states',
         escapeCloses: 'Escape key closes the popover',
       },

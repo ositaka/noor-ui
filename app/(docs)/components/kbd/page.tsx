@@ -7,6 +7,7 @@ import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
 import { Kbd } from '@/components/ui/kbd'
 import { Button } from '@/components/ui/button'
+import { ComponentShowcase } from '@/components/docs/component-showcase'
 import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { BestPractices } from '@/components/docs/best-practices'
 import { CodeBlock } from '@/components/docs/code-block'
@@ -74,38 +75,44 @@ export default function KbdPage() {
 
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-6">{t.kbdComponent.liveDemo}</h2>
-          <Card>
-            <CardHeader>
-              <CardTitle>{t.kbdComponent.keyboardShortcuts}</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-6">
-              <div className="space-y-3">
-                <div className="flex items-center justify-between">
-                  <span className="text-sm">{t.kbdComponent.search}</span>
-                  <Kbd keys={['mod', 'k']} />
-                </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-sm">{t.kbdComponent.submit}</span>
-                  <Kbd keys={['mod', 'enter']} />
-                </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-sm">{t.kbdComponent.close}</span>
-                  <Kbd keys={['esc']} />
-                </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-sm">{t.kbdComponent.previous}</span>
-                  <Kbd keys={['shift', 'k']} />
-                </div>
+          <ComponentShowcase>
+            <ComponentShowcase.Demo>
+              <div className="w-full max-w-64 mx-auto">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>{t.kbdComponent.keyboardShortcuts}</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-6">
+                    <div className="space-y-3">
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm">{t.kbdComponent.search}</span>
+                        <Kbd keys={['mod', 'k']} />
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm">{t.kbdComponent.submit}</span>
+                        <Kbd keys={['mod', 'enter']} />
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm">{t.kbdComponent.close}</span>
+                        <Kbd keys={['esc']} />
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm">{t.kbdComponent.previous}</span>
+                        <Kbd keys={['shift', 'k']} />
+                      </div>
+                    </div>
+                    <Separator />
+                    <div className="space-y-3">
+                      <p className="text-sm font-medium">{t.kbdComponent.inButtons}</p>
+                      <Button variant="secondary">
+                        {t.kbdComponent.search} <Kbd keys={['mod', 'k']} size="sm" className="ms-2" />
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
               </div>
-              <Separator />
-              <div className="space-y-3">
-                <p className="text-sm font-medium">{t.kbdComponent.inButtons}</p>
-                <Button variant="secondary">
-                  {t.kbdComponent.search} <Kbd keys={['mod', 'k']} size="sm" className="ms-2" />
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
+            </ComponentShowcase.Demo>
+          </ComponentShowcase>
         </section>
 
         <Separator className="my-12" />

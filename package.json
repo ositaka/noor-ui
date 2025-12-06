@@ -73,6 +73,7 @@
     "screenshot:component": "node scripts/screenshot.js"
   },
   "dependencies": {
+    "@mdxeditor/editor": "^3.20.1",
     "@radix-ui/react-accordion": "^1.1.2",
     "@radix-ui/react-avatar": "^1.0.4",
     "@radix-ui/react-checkbox": "^1.0.4",
@@ -88,6 +89,7 @@
     "@radix-ui/react-select": "^2.0.0",
     "@radix-ui/react-separator": "^1.0.3",
     "@radix-ui/react-slider": "^1.1.2",
+    "@radix-ui/react-slot": "^1.2.4",
     "@radix-ui/react-switch": "^1.0.3",
     "@radix-ui/react-tabs": "^1.1.13",
     "@radix-ui/react-toast": "^1.1.5",
@@ -100,7 +102,6 @@
     "@tiptap/extension-underline": "^3.10.5",
     "@tiptap/react": "^3.10.5",
     "@tiptap/starter-kit": "^3.10.5",
-    "@mdxeditor/editor": "^3.20.1",
     "@xyflow/react": "^12.9.2",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",

@@ -5,7 +5,6 @@ import Link from 'next/link'
 import { Stepper } from '@/components/ui/stepper'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { ComponentShowcase } from '@/components/docs/component-showcase'
 import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
 import { useDirection } from '@/components/providers/direction-provider'
@@ -180,8 +179,8 @@ export default function StepperPage() {
       {/* Preview */}
       <section className="mb-16">
         <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.preview}</h2>
-        <ComponentShowcase code={basicCode}>
-          <ComponentShowcase.Demo>
+        <Card>
+          <CardContent className="p-6">
             <div className="w-full max-w-2xl mx-auto">
               <Stepper steps={steps} currentStep={currentStep1} onStepClick={setCurrentStep1} />
               <div className="mt-8 flex justify-between">
@@ -200,29 +199,28 @@ export default function StepperPage() {
                 </Button>
               </div>
             </div>
-          </ComponentShowcase.Demo>
-        </ComponentShowcase>
+          </CardContent>
+        </Card>
+        <div className="mt-4">
+          <CodeBlock code={basicCode} language="tsx" collapsible />
+        </div>
       </section>
 
       {/* Variants */}
-      <div className="space-y-6">
-        <div>
-          <h2 className="text-2xl font-bold mb-2">{t.componentPage.sections.variants}</h2>
-          <p className="text-muted-foreground">
-            {isRTL
-              ? 'ثلاثة أشكال مرئية: افتراضي، بسيط، ودوائر'
-              : 'Three visual styles: default, simple, and circles'}
-          </p>
-        </div>
+      <section className="mb-16">
+        <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.variants}</h2>
+        <p className="text-muted-foreground mb-8">
+          {isRTL
+            ? 'ثلاثة أشكال مرئية: افتراضي، بسيط، ودوائر'
+            : 'Three visual styles: default, simple, and circles'}
+        </p>
 
         {/* Simple Variant */}
-        <div className="space-y-4">
-          <div>
-            <h3 className="text-lg font-semibold mb-2">{t.stepperComponent.variants.simpleVariant}</h3>
-            <p className="text-sm text-muted-foreground">{t.stepperComponent.variants.simpleDesc}</p>
-          </div>
-          <ComponentShowcase code={variantsCode.split('\n\n')[1]}>
-            <ComponentShowcase.Demo>
+        <div className="mb-8">
+          <h3 className="text-lg font-semibold mb-2">{t.stepperComponent.variants.simpleVariant}</h3>
+          <p className="text-sm text-muted-foreground mb-4">{t.stepperComponent.variants.simpleDesc}</p>
+          <Card>
+            <CardContent className="p-6">
               <div className="w-full max-w-2xl mx-auto">
                 <Stepper steps={simpleSteps} currentStep={currentStep2} variant="simple" onStepClick={setCurrentStep2} />
                 <div className="mt-8 flex justify-between">
@@ -241,18 +239,19 @@ export default function StepperPage() {
                   </Button>
                 </div>
               </div>
-            </ComponentShowcase.Demo>
-          </ComponentShowcase>
+            </CardContent>
+          </Card>
+          <div className="mt-4">
+            <CodeBlock code={variantsCode.split('\n\n')[1]} language="tsx" collapsible />
+          </div>
         </div>
 
         {/* Circles Variant */}
-        <div className="space-y-4">
-          <div>
-            <h3 className="text-lg font-semibold mb-2">{t.stepperComponent.variants.circlesVariant}</h3>
-            <p className="text-sm text-muted-foreground">{t.stepperComponent.variants.circlesDesc}</p>
-          </div>
-          <ComponentShowcase code={variantsCode.split('\n\n')[2]}>
-            <ComponentShowcase.Demo>
+        <div>
+          <h3 className="text-lg font-semibold mb-2">{t.stepperComponent.variants.circlesVariant}</h3>
+          <p className="text-sm text-muted-foreground mb-4">{t.stepperComponent.variants.circlesDesc}</p>
+          <Card>
+            <CardContent className="p-6">
               <div className="w-full max-w-2xl mx-auto">
                 <Stepper steps={simpleSteps} currentStep={currentStep3} variant="circles" onStepClick={setCurrentStep3} />
                 <div className="mt-8 flex justify-between">
@@ -271,18 +270,19 @@ export default function StepperPage() {
                   </Button>
                 </div>
               </div>
-            </ComponentShowcase.Demo>
-          </ComponentShowcase>
+            </CardContent>
+          </Card>
+          <div className="mt-4">
+            <CodeBlock code={variantsCode.split('\n\n')[2]} language="tsx" collapsible />
+          </div>
         </div>
-      </div>
-
-      <CodeBlock code={variantsCode} language="tsx" />
+      </section>
 
       {/* Vertical Orientation */}
       <section className="mb-16">
         <h2 className="text-2xl font-bold tracking-tight mb-6">{t.stepperComponent.variants.verticalOrientation}</h2>
-        <ComponentShowcase code={verticalCode}>
-          <ComponentShowcase.Demo>
+        <Card>
+          <CardContent className="p-6">
             <div className="max-w-md mx-auto">
               <Stepper steps={steps} currentStep={currentStep4} orientation="vertical" onStepClick={setCurrentStep4} />
               <div className="mt-8 flex justify-between">
@@ -301,13 +301,16 @@ export default function StepperPage() {
                 </Button>
               </div>
             </div>
-          </ComponentShowcase.Demo>
-        </ComponentShowcase>
+          </CardContent>
+        </Card>
+        <div className="mt-4">
+          <CodeBlock code={verticalCode} language="tsx" collapsible />
+        </div>
       </section>
 
       {/* Use Cases */}
-      <div className="space-y-4">
-        <h2 className="text-2xl font-bold">{t.componentPage.sections.useCases}</h2>
+      <section className="mb-16">
+        <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.useCases}</h2>
         <div className="grid gap-4 md:grid-cols-2">
           {[
             { title: t.stepperComponent.useCases.registrationForms, icon: '📝' },
@@ -325,23 +328,23 @@ export default function StepperPage() {
             </Card>
           ))}
         </div>
-      </div>
+      </section>
 
       {/* Type Definition */}
-      <div className="space-y-4">
-        <h2 className="text-2xl font-bold">{t.componentPage.sections.typeDefinitions}</h2>
+      <section className="mb-16">
+        <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.typeDefinitions}</h2>
         <CodeBlock code={typeDefinition} language="typescript" />
-      </div>
+      </section>
 
       {/* API Reference */}
-      <div className="space-y-4">
-        <h2 className="text-2xl font-bold">{t.componentPage.sections.propsApiReference}</h2>
+      <section className="mb-16">
+        <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.propsApiReference}</h2>
         <PropsTable props={stepperProps} />
-      </div>
+      </section>
 
       {/* Features */}
-      <div className="space-y-4">
-        <h2 className="text-2xl font-bold">{t.componentPage.sections.features}</h2>
+      <section className="mb-16">
+        <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.features}</h2>
         <ul className="list-disc list-inside space-y-2 text-muted-foreground">
           <li>{t.stepperComponent.features.threeVariants}</li>
           <li>{t.stepperComponent.features.orientations}</li>
@@ -352,7 +355,7 @@ export default function StepperPage() {
           <li>{t.stepperComponent.features.rtlSupport}</li>
           <li>{t.stepperComponent.features.accessibility}</li>
         </ul>
-      </div>
+      </section>
       </main>
     </div>
   )

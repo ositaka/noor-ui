@@ -230,6 +230,29 @@ common: {
         starters: 'النماذج الجاهزة',
       },
 
+  errorPage: {
+        title: 'حدث خطأ ما',
+        description: 'حدث خطأ غير متوقع. يرجى المحاولة مرة أخرى أو العودة إلى الصفحة الرئيسية.',
+        tryAgain: 'حاول مرة أخرى',
+        goHome: 'الصفحة الرئيسية',
+      },
+
+  docsErrorPage: {
+        title: 'خطأ في الصفحة',
+        description: 'حدثت مشكلة أثناء تحميل صفحة التوثيق هذه. قد تكون هذه مشكلة مؤقتة.',
+        tryAgain: 'حاول مرة أخرى',
+        documentationHome: 'الصفحة الرئيسية للتوثيق',
+        home: 'الرئيسية',
+      },
+
+  examplesErrorPage: {
+        title: 'فشل تحميل المثال',
+        description: 'واجه هذا المثال خطأً. يرجى تحديث الصفحة أو عرض أمثلة أخرى.',
+        tryAgain: 'حاول مرة أخرى',
+        allExamples: 'جميع الأمثلة',
+        goHome: 'الصفحة الرئيسية',
+      },
+
   componentNames: {
         // Basic Components - المكونات الأساسية
         'accordion': 'Accordion (الأكورديون)',
@@ -308,6 +331,9 @@ common: {
       },
 
   componentPage: {
+    workInProgress: 'قيد التطوير',
+    wipNote: 'ملاحظة:',
+    wipNoteText: 'هذا المكون قيد التطوير حاليًا. قد لا تعمل بعض الميزات كما هو متوقع. نحن نعمل بنشاط على التحسينات وسنقوم بتحديث الوثائق بمجرد أن تصبح مستقرة.',
     sections: {
       preview: 'معاينة',
       installation: 'التثبيت',
@@ -1763,6 +1789,19 @@ common: {
 
   // Accordion Component Page
   accordionComponent: {
+    title: 'الأكورديون',
+    description: 'مجموعة مكدسة عمودياً من العناوين التفاعلية التي تكشف كل منها عن قسم من المحتوى.',
+    preview: 'معاينة',
+    installation: 'التثبيت',
+    usage: 'الاستخدام',
+    faq: {
+      isAccessibleQ: 'هل يمكن الوصول إليه؟',
+      isAccessibleA: 'نعم. يلتزم بنمط تصميم WAI-ARIA.',
+      isStyledQ: 'هل له أنماط؟',
+      isStyledA: 'نعم. يأتي مع أنماط افتراضية يمكنك تخصيصها.',
+      isAnimatedQ: 'هل هو متحرك؟',
+      isAnimatedA: 'نعم. يستخدم حركات CSS للانتقالات السلسة.',
+    },
     examples: {
       accountSettings: 'إدارة إعدادات وتفضيلات حسابك.',
       updatePasswordSecurity: 'تحديث كلمة المرور وإعدادات الأمان.',

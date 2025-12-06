@@ -644,30 +644,30 @@ export default function WorkflowNodePage() {
             <Card>
               <CardContent className="p-4">
                 <Link href="/components/workflow-canvas" className="font-medium hover:underline">
-                  Workflow Canvas
+                  {content[locale]?.workflowCanvasComponent?.title || content.en.workflowCanvasComponent.title}
                 </Link>
                 <p className="text-sm text-muted-foreground mt-1">
-                  Canvas container for workflow nodes
+                  {workflowNodeT.related.workflowCanvas}
                 </p>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="p-4">
                 <Link href="/components/card" className="font-medium hover:underline">
-                  Card
+                  {t.componentNav?.['card'] || 'Card'}
                 </Link>
                 <p className="text-sm text-muted-foreground mt-1">
-                  Base container component
+                  {workflowNodeT.related.card}
                 </p>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="p-4">
                 <Link href="/components/badge" className="font-medium hover:underline">
-                  Badge
+                  {t.componentNav?.['badge'] || 'Badge'}
                 </Link>
                 <p className="text-sm text-muted-foreground mt-1">
-                  Status and type indicators
+                  {workflowNodeT.related.badge}
                 </p>
               </CardContent>
             </Card>

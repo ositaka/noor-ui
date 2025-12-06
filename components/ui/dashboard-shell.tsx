@@ -158,7 +158,7 @@ export function DashboardShell({
           </div>
 
           {/* Navigation */}
-          <ScrollArea className="flex-1 px-3 py-4">
+          <ScrollArea className="flex-1 px-3 py-4" dir={direction}>
             <SidebarNav items={navItems} />
           </ScrollArea>
         </div>
@@ -199,7 +199,7 @@ export function DashboardShell({
             </div>
 
             {/* Navigation */}
-            <ScrollArea className="flex-1 px-3 py-4">
+            <ScrollArea className="flex-1 px-3 py-4" dir={direction}>
               <SidebarNav items={navItems} onNavClick={() => setSidebarOpen(false)} />
             </ScrollArea>
           </div>

@@ -24,60 +24,66 @@ import { useToast } from '@/hooks/use-toast'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 
-const propDefinitions = [
+const getDashboardShellProps = (componentT: any) => [
   {
     name: 'children',
     type: 'React.ReactNode',
-    description: 'Content to display in the main area',
+    description: componentT.props.children,
   },
   {
     name: 'navItems',
     type: 'NavItem[]',
     defaultValue: '[]',
-    description: 'Navigation menu items with bilingual titles',
+    description: componentT.props.navItems,
   },
   {
     name: 'user',
     type: '{ name?: string; email?: string; image?: string; initials?: string }',
-    description: 'User information for the user menu',
+    description: componentT.props.user,
   },
   {
     name: 'notifications',
     type: 'Notification[]',
     defaultValue: '[]',
-    description: 'Notifications for the notification center',
+    description: componentT.props.notifications,
   },
   {
     name: 'logo',
     type: 'React.ReactNode',
-    description: 'Custom logo component',
+    description: componentT.props.logo,
   },
   {
     name: 'logoHref',
     type: 'string',
     defaultValue: '"/"',
-    description: 'URL for the logo link',
+    description: componentT.props.logoHref,
   },
   {
     name: 'sidebarWidth',
     type: 'string',
     defaultValue: '"16rem"',
-    description: 'Width of the sidebar',
+    description: componentT.props.sidebarWidth,
   },
   {
     name: 'onProfileClick',
     type: '() => void',
-    description: 'Callback when profile is clicked',
+    description: componentT.props.onProfileClick,
   },
   {
     name: 'onSettingsClick',
     type: '() => void',
-    description: 'Callback when settings is clicked',
+    description: componentT.props.onSettingsClick,
   },
   {
     name: 'onLogout',
     type: '() => void',
-    description: 'Callback when logout is clicked',
+    description: componentT.props.onLogout,
+  },
+  {
+    name: 'relative',
+    type: 'boolean',
+    defaultValue: 'false',
+    description: componentT.props.relative,
   },
 ]
 
@@ -242,11 +248,12 @@ export default function DashboardShellPage() {
   const { toast } = useToast()
   const { direction, locale } = useDirection()
   const t = content[locale]
+  const dashboardShellT = t.dashboardShellComponent as any
 
   const handleAction = (action: string) => {
     toast({
-      title: `${action} clicked`,
-      description: `You clicked on ${action}`,
+      title: `${action} ${dashboardShellT.demo.actionClicked}`,
+      description: `${dashboardShellT.demo.youClickedOn} ${action}`,
     })
   }
 
@@ -343,6 +350,7 @@ export default function DashboardShellPage() {
             <CardContent className="p-0">
               <div className="h-[600px] overflow-hidden rounded-lg border">
                 <DashboardShell
+                  relative
                   navItems={navItems}
                   user={{
                     name: 'Ahmed Al-Rashid',
@@ -356,9 +364,9 @@ export default function DashboardShellPage() {
                   onMarkAsRead={(id) => handleAction('Mark as read')}
                 >
                   <div className="container py-6">
-                    <h2 className="text-2xl font-bold mb-4">Dashboard Content</h2>
+                    <h2 className="text-2xl font-bold mb-4">{dashboardShellT.demo.dashboardContent}</h2>
                     <p className="text-muted-foreground">
-                      This is the main content area. Add your dashboard content here.
+                      {dashboardShellT.demo.mainContentDescription}
                     </p>
                   </div>
                 </DashboardShell>
@@ -379,49 +387,49 @@ export default function DashboardShellPage() {
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             <Card>
               <CardContent className="p-6">
-                <h3 className="font-semibold mb-2">Responsive Sidebar</h3>
+                <h3 className="font-semibold mb-2">{dashboardShellT.features.responsiveSidebar}</h3>
                 <p className="text-sm text-muted-foreground">
-                  Desktop sidebar and mobile sheet with smooth animations
+                  {dashboardShellT.features.responsiveSidebarDesc}
                 </p>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="p-6">
-                <h3 className="font-semibold mb-2">Bilingual Navigation</h3>
+                <h3 className="font-semibold mb-2">{dashboardShellT.features.bilingualNavigation}</h3>
                 <p className="text-sm text-muted-foreground">
-                  Support for English and Arabic navigation labels
+                  {dashboardShellT.features.bilingualNavigationDesc}
                 </p>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="p-6">
-                <h3 className="font-semibold mb-2">User Menu Integration</h3>
+                <h3 className="font-semibold mb-2">{dashboardShellT.features.userMenuIntegration}</h3>
                 <p className="text-sm text-muted-foreground">
-                  Built-in user menu with profile and logout actions
+                  {dashboardShellT.features.userMenuIntegrationDesc}
                 </p>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="p-6">
-                <h3 className="font-semibold mb-2">Notification Center</h3>
+                <h3 className="font-semibold mb-2">{dashboardShellT.features.notificationCenter}</h3>
                 <p className="text-sm text-muted-foreground">
-                  Integrated notification system with unread badges
+                  {dashboardShellT.features.notificationCenterDesc}
                 </p>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="p-6">
-                <h3 className="font-semibold mb-2">RTL Support</h3>
+                <h3 className="font-semibold mb-2">{dashboardShellT.features.rtlSupport}</h3>
                 <p className="text-sm text-muted-foreground">
-                  Automatic layout flip for right-to-left languages
+                  {dashboardShellT.features.rtlSupportDesc}
                 </p>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="p-6">
-                <h3 className="font-semibold mb-2">Sticky Header</h3>
+                <h3 className="font-semibold mb-2">{dashboardShellT.features.stickyHeader}</h3>
                 <p className="text-sm text-muted-foreground">
-                  Fixed header with backdrop blur for modern look
+                  {dashboardShellT.features.stickyHeaderDesc}
                 </p>
               </CardContent>
             </Card>
@@ -440,6 +448,7 @@ export default function DashboardShellPage() {
                 <CardContent className="p-0">
                   <div className="h-[500px] overflow-hidden rounded-lg border">
                     <DashboardShell
+                      relative
                       navItems={navItems.slice(0, 3)}
                       user={{
                         name: 'Sarah Johnson',
@@ -453,7 +462,7 @@ export default function DashboardShellPage() {
                       onClearAll={() => handleAction('Clear all')}
                     >
                       <div className="container py-6">
-                        <h2 className="text-2xl font-bold">Dashboard with Notifications</h2>
+                        <h2 className="text-2xl font-bold">{dashboardShellT.examples.dashboardWithNotifications}</h2>
                       </div>
                     </DashboardShell>
                   </div>
@@ -471,6 +480,7 @@ export default function DashboardShellPage() {
                 <CardContent className="p-0">
                   <div className="h-[500px] overflow-hidden rounded-lg border">
                     <DashboardShell
+                      relative
                       navItems={navItems}
                       user={{
                         name: 'Fatima Al-Zahra',
@@ -487,9 +497,9 @@ export default function DashboardShellPage() {
                       onClearAll={() => handleAction('Clear all')}
                     >
                       <div className="container py-6">
-                        <h2 className="text-2xl font-bold mb-4">Full Featured Dashboard</h2>
+                        <h2 className="text-2xl font-bold mb-4">{dashboardShellT.examples.fullFeaturedDashboard}</h2>
                         <p className="text-muted-foreground">
-                          Complete dashboard with all features enabled
+                          {dashboardShellT.examples.fullFeaturedDescription}
                         </p>
                       </div>
                     </DashboardShell>
@@ -527,7 +537,7 @@ export default function DashboardShellPage() {
         {/* Props */}
         <section className="mb-16">
           <h2 className="text-2xl font-bold tracking-tight mb-6">{t.dashboardShellComponent.sections.props}</h2>
-          <PropsTable props={propDefinitions} />
+          <PropsTable props={getDashboardShellProps(dashboardShellT)} />
         </section>
 
         {/* Best Practices */}
@@ -547,23 +557,23 @@ export default function DashboardShellPage() {
               <ul className="space-y-3 text-sm text-muted-foreground">
                 <li className="flex items-start gap-2">
                   <span className="text-primary font-bold">✓</span>
-                  <span>Keyboard navigation with Tab and Enter keys</span>
+                  <span>{dashboardShellT.accessibility.keyboardNav}</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-primary font-bold">✓</span>
-                  <span>ARIA current=&quot;page&quot; on active navigation items</span>
+                  <span>{dashboardShellT.accessibility.ariaCurrent}</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-primary font-bold">✓</span>
-                  <span>Proper semantic HTML with nav, main, and header elements</span>
+                  <span>{dashboardShellT.accessibility.semanticHTML}</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-primary font-bold">✓</span>
-                  <span>Focus management in mobile sheet</span>
+                  <span>{dashboardShellT.accessibility.focusManagement}</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-primary font-bold">✓</span>
-                  <span>Screen reader friendly labels for all interactive elements</span>
+                  <span>{dashboardShellT.accessibility.screenReaderLabels}</span>
                 </li>
               </ul>
             </CardContent>

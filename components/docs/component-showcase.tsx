@@ -89,13 +89,7 @@ function ComponentShowcase({ children, className, title, description, code }: Co
             )}
           </div>
           {showCode && (
-            <Card>
-              <CardContent className="p-4">
-                <pre className="overflow-x-auto">
-                  <code className="text-sm font-mono">{code}</code>
-                </pre>
-              </CardContent>
-            </Card>
+            <CodeBlock code={code} language="tsx" />
           )}
         </div>
       )}

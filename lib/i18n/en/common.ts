@@ -230,6 +230,29 @@ common: {
         starters: 'Production Starters',
       },
 
+  errorPage: {
+        title: 'Something went wrong',
+        description: 'An unexpected error occurred. Please try again or return to the home page.',
+        tryAgain: 'Try Again',
+        goHome: 'Go Home',
+      },
+
+  docsErrorPage: {
+        title: 'Page Error',
+        description: 'There was a problem loading this documentation page. This might be a temporary issue.',
+        tryAgain: 'Try Again',
+        documentationHome: 'Documentation Home',
+        home: 'Home',
+      },
+
+  examplesErrorPage: {
+        title: 'Example Failed to Load',
+        description: 'This example encountered an error. Please try refreshing or view other examples.',
+        tryAgain: 'Try Again',
+        allExamples: 'All Examples',
+        goHome: 'Go Home',
+      },
+
   componentNames: {
         // Basic Components
         'accordion': 'Accordion',
@@ -308,6 +331,9 @@ common: {
       },
 
   componentPage: {
+    workInProgress: 'Work in Progress',
+    wipNote: 'Note:',
+    wipNoteText: 'This component is currently under development. Some features may not work as expected. We\'re actively working on improvements and will update the documentation once stable.',
     sections: {
       preview: 'Preview',
       installation: 'Installation',
@@ -1761,8 +1787,21 @@ common: {
     },
   },
 
-  // Accordion Component Page  
+  // Accordion Component Page
   accordionComponent: {
+    title: 'Accordion',
+    description: 'Vertically stacked set of interactive headings that each reveal a section of content.',
+    preview: 'Preview',
+    installation: 'Installation',
+    usage: 'Usage',
+    faq: {
+      isAccessibleQ: 'Is it accessible?',
+      isAccessibleA: 'Yes. It adheres to the WAI-ARIA design pattern.',
+      isStyledQ: 'Is it styled?',
+      isStyledA: 'Yes. It comes with default styles that you can customize.',
+      isAnimatedQ: 'Is it animated?',
+      isAnimatedA: 'Yes. It uses CSS animations for smooth transitions.',
+    },
     examples: {
       accountSettings: 'Manage your account settings and preferences.',
       updatePasswordSecurity: 'Update your password and security settings.',

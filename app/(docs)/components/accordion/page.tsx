@@ -198,21 +198,21 @@ export default function AccordionPage() {
             <ComponentShowcase.Demo>
               <Accordion type="single" collapsible className="w-full max-w-md">
                 <AccordionItem value="item-1">
-                  <AccordionTrigger>Is it accessible?</AccordionTrigger>
+                  <AccordionTrigger>{accordionT.faq.isAccessibleQ}</AccordionTrigger>
                   <AccordionContent>
-                    Yes. It adheres to the WAI-ARIA design pattern.
+                    {accordionT.faq.isAccessibleA}
                   </AccordionContent>
                 </AccordionItem>
                 <AccordionItem value="item-2">
-                  <AccordionTrigger>Is it styled?</AccordionTrigger>
+                  <AccordionTrigger>{accordionT.faq.isStyledQ}</AccordionTrigger>
                   <AccordionContent>
-                    Yes. It comes with default styles that you can customize.
+                    {accordionT.faq.isStyledA}
                   </AccordionContent>
                 </AccordionItem>
                 <AccordionItem value="item-3">
-                  <AccordionTrigger>Is it animated?</AccordionTrigger>
+                  <AccordionTrigger>{accordionT.faq.isAnimatedQ}</AccordionTrigger>
                   <AccordionContent>
-                    Yes. It uses CSS animations for smooth transitions.
+                    {accordionT.faq.isAnimatedA}
                   </AccordionContent>
                 </AccordionItem>
               </Accordion>

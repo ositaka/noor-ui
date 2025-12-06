@@ -13,34 +13,34 @@ import { ChevronDown, ChevronRight, ChevronsUpDown } from 'lucide-react'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 
-const collapsibleProps: PropDefinition[] = [
+const getCollapsibleProps = (componentT: any): PropDefinition[] => [
   {
     name: 'open',
     type: 'boolean',
     default: 'undefined',
     required: false,
-    description: 'Controlled open state',
+    description: componentT.props.open,
   },
   {
     name: 'defaultOpen',
     type: 'boolean',
     default: 'false',
     required: false,
-    description: 'Default open state (uncontrolled)',
+    description: componentT.props.defaultOpen,
   },
   {
     name: 'onOpenChange',
     type: '(open: boolean) => void',
     default: 'undefined',
     required: false,
-    description: 'Callback when open state changes',
+    description: componentT.props.onOpenChange,
   },
   {
     name: 'disabled',
     type: 'boolean',
     default: 'false',
     required: false,
-    description: 'Whether the collapsible is disabled',
+    description: componentT.props.disabled,
   },
 ]
 
@@ -105,6 +105,7 @@ const sidebarCode = `const [isOpen, setIsOpen] = useState(true)
 export default function CollapsiblePage() {
   const { locale } = useDirection()
   const t = content[locale]
+  const collapsibleT = t.collapsibleComponent as any
   const [isOpen1, setIsOpen1] = React.useState(false)
   const [isOpen2, setIsOpen2] = React.useState(true)
   const [isOpen3, setIsOpen3] = React.useState(false)
@@ -149,7 +150,7 @@ export default function CollapsiblePage() {
                 <Collapsible open={isOpen1} onOpenChange={setIsOpen1}>
                   <CollapsibleTrigger asChild>
                     <Button variant="outline" className="w-full justify-between">
-                      <span>Can I use this in my project?</span>
+                      <span>{collapsibleT.examples.previewQuestion}</span>
                       <ChevronDown
                         className={`h-4 w-4 transition-transform ${
                           isOpen1 ? 'rotate-180' : ''
@@ -159,8 +160,7 @@ export default function CollapsiblePage() {
                   </CollapsibleTrigger>
                   <CollapsibleContent className="mt-2 p-4 border rounded">
                     <p className="text-sm text-muted-foreground">
-                      Yes! This component is free and open source. You can use it in any project,
-                      commercial or personal.
+                      {collapsibleT.examples.previewAnswer}
                     </p>
                   </CollapsibleContent>
                 </Collapsible>
@@ -187,28 +187,25 @@ export default function CollapsiblePage() {
           <Card>
             <CardContent className="p-6 space-y-4">
               <p className="text-muted-foreground">
-                The Collapsible component follows a composition pattern with three sub-components:
+                {collapsibleT.composition.intro}
               </p>
               <ul className="space-y-2 text-muted-foreground">
                 <li className="flex items-start gap-2">
                   <span className="text-primary mt-1">•</span>
                   <span>
-                    <code className="bg-muted px-1 rounded">Collapsible</code> - Root component
-                    managing state
+                    <code className="bg-muted px-1 rounded">Collapsible</code> - {collapsibleT.composition.collapsible}
                   </span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-primary mt-1">•</span>
                   <span>
-                    <code className="bg-muted px-1 rounded">CollapsibleTrigger</code> - Button to
-                    toggle open/closed
+                    <code className="bg-muted px-1 rounded">CollapsibleTrigger</code> - {collapsibleT.composition.trigger}
                   </span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-primary mt-1">•</span>
                   <span>
-                    <code className="bg-muted px-1 rounded">CollapsibleContent</code> - Content that
-                    collapses/expands
+                    <code className="bg-muted px-1 rounded">CollapsibleContent</code> - {collapsibleT.composition.content}
                   </span>
                 </li>
               </ul>
@@ -230,7 +227,7 @@ export default function CollapsiblePage() {
                     <Collapsible open={isOpen2} onOpenChange={setIsOpen2}>
                       <CollapsibleTrigger asChild>
                         <Button variant="outline" className="w-full justify-between">
-                          <span>{isOpen2 ? 'Hide' : 'Show'} Details</span>
+                          <span>{isOpen2 ? collapsibleT.examples.hide : collapsibleT.examples.show} {collapsibleT.examples.details}</span>
                           <ChevronDown
                             className={`h-4 w-4 transition-transform duration-200 ${
                               isOpen2 ? 'rotate-180' : ''
@@ -240,8 +237,7 @@ export default function CollapsiblePage() {
                       </CollapsibleTrigger>
                       <CollapsibleContent className="mt-2 p-4 border rounded">
                         <p className="text-sm text-muted-foreground">
-                          This collapsible is controlled, meaning you manage the open state. The
-                          chevron rotates smoothly when toggled.
+                          {collapsibleT.examples.controlledDescription}
                         </p>
                       </CollapsibleContent>
                     </Collapsible>
@@ -262,23 +258,23 @@ export default function CollapsiblePage() {
                     <div className="border rounded-lg p-4">
                       <Collapsible open={isOpen3} onOpenChange={setIsOpen3}>
                         <div className="flex items-center justify-between">
-                          <h4 className="text-sm font-semibold">Starred Repositories</h4>
+                          <h4 className="text-sm font-semibold">{collapsibleT.examples.starredRepositories}</h4>
                           <CollapsibleTrigger asChild>
                             <Button variant="ghost" size="sm">
                               <ChevronsUpDown className="h-4 w-4" />
-                              <span className="sr-only">Toggle</span>
+                              <span className="sr-only">{collapsibleT.examples.toggle}</span>
                             </Button>
                           </CollapsibleTrigger>
                         </div>
                         <CollapsibleContent className="mt-2 space-y-2">
                           <div className="rounded-md border px-4 py-2 text-sm">
-                            rtl-design-system
+                            {collapsibleT.examples.repo1}
                           </div>
                           <div className="rounded-md border px-4 py-2 text-sm">
-                            react-components
+                            {collapsibleT.examples.repo2}
                           </div>
                           <div className="rounded-md border px-4 py-2 text-sm">
-                            typescript-utils
+                            {collapsibleT.examples.repo3}
                           </div>
                         </CollapsibleContent>
                       </Collapsible>
@@ -299,16 +295,16 @@ export default function CollapsiblePage() {
                   <div className="max-w-2xl space-y-2">
                     {[
                       {
-                        q: 'What is this design system?',
-                        a: 'An RTL-first design system built for the GCC market with full bilingual support.',
+                        q: collapsibleT.examples.faq1Q,
+                        a: collapsibleT.examples.faq1A,
                       },
                       {
-                        q: 'How do I install it?',
-                        a: 'Simply run npm install noorui-rtl and import the components you need.',
+                        q: collapsibleT.examples.faq2Q,
+                        a: collapsibleT.examples.faq2A,
                       },
                       {
-                        q: 'Is it accessible?',
-                        a: 'Yes! All components are WCAG AA compliant with full keyboard navigation.',
+                        q: collapsibleT.examples.faq3Q,
+                        a: collapsibleT.examples.faq3A,
                       },
                     ].map((item, index) => (
                       <Collapsible key={index}>
@@ -339,21 +335,20 @@ export default function CollapsiblePage() {
           <div className="space-y-8">
             <div>
               <h3 className="text-lg font-semibold mb-4">{t.collapsibleComponent.title}</h3>
-              <PropsTable props={collapsibleProps} />
+              <PropsTable props={getCollapsibleProps(collapsibleT)} />
             </div>
           </div>
           <Card className="mt-6">
             <CardContent className="p-6">
               <p className="text-sm text-muted-foreground">
-                This component is built on top of Radix UI&apos;s Collapsible primitive. For additional
-                props, refer to the{' '}
+                {collapsibleT.props.radixNote}{' '}
                 <a
                   href="https://www.radix-ui.com/docs/primitives/components/collapsible"
                   className="text-primary hover:underline"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Radix UI documentation
+                  {collapsibleT.props.radixLink}
                 </a>
                 .
               </p>
@@ -371,11 +366,11 @@ export default function CollapsiblePage() {
                 <ul className="space-y-2 text-muted-foreground text-sm">
                   <li className="flex items-start gap-2">
                     <code className="bg-muted px-1.5 py-0.5 rounded">Space</code>
-                    <span>Toggles the collapsible when trigger is focused</span>
+                    <span>{collapsibleT.accessibility.toggleWhenFocused}</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <code className="bg-muted px-1.5 py-0.5 rounded">Enter</code>
-                    <span>Toggles the collapsible when trigger is focused</span>
+                    <span>{collapsibleT.accessibility.toggleWhenFocused}</span>
                   </li>
                 </ul>
               </div>
@@ -383,17 +378,14 @@ export default function CollapsiblePage() {
               <div>
                 <h3 className="font-semibold mb-2">{t.collapsibleComponent.accessibility.ariaAttributes}</h3>
                 <p className="text-muted-foreground text-sm">
-                  The component automatically manages aria-expanded and aria-controls for screen
-                  reader users. The trigger button communicates whether the content is currently
-                  expanded or collapsed.
+                  {collapsibleT.accessibility.ariaDescription}
                 </p>
               </div>
               <Separator />
               <div>
                 <h3 className="font-semibold mb-2">{t.collapsibleComponent.accessibility.visualIndicators}</h3>
                 <p className="text-muted-foreground text-sm">
-                  Always include a visual indicator (like a chevron icon) that shows the current
-                  state. Animate the indicator to provide feedback when the state changes.
+                  {collapsibleT.accessibility.visualDescription}
                 </p>
               </div>
             </CardContent>
@@ -407,9 +399,9 @@ export default function CollapsiblePage() {
             <Link href="/components/accordion">
               <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold">Accordion</h3>
+                  <h3 className="font-semibold">{t.componentNames?.accordion || 'Accordion'}</h3>
                   <p className="text-sm text-muted-foreground mt-1">
-                    Multiple collapsibles with single-open behavior
+                    {collapsibleT.related.accordion}
                   </p>
                 </CardContent>
               </Card>
@@ -417,9 +409,9 @@ export default function CollapsiblePage() {
             <Link href="/components/tabs">
               <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold">Tabs</h3>
+                  <h3 className="font-semibold">{t.componentNames?.tabs || 'Tabs'}</h3>
                   <p className="text-sm text-muted-foreground mt-1">
-                    Organize content in tabbed sections
+                    {collapsibleT.related.tabs}
                   </p>
                 </CardContent>
               </Card>
@@ -427,9 +419,9 @@ export default function CollapsiblePage() {
             <Link href="/components/dialog">
               <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold">Dialog</h3>
+                  <h3 className="font-semibold">{t.componentNames?.dialog || 'Dialog'}</h3>
                   <p className="text-sm text-muted-foreground mt-1">
-                    Modal dialogs for focused content
+                    {collapsibleT.related.dialog}
                   </p>
                 </CardContent>
               </Card>

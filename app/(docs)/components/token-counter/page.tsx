@@ -433,44 +433,6 @@ export default function TokenCounterPage() {
           </Card>
         </section>
 
-        {/* RTL Considerations */}
-        <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.rtlSupport}</h2>
-          <Card>
-            <CardContent className="p-6 space-y-4">
-              <p className="text-muted-foreground">
-                The counter works seamlessly in RTL layouts. All text, numbers, and badges
-                adapt to RTL direction. Use Arabic number formatting automatically.
-              </p>
-              <CodeBlock code={rtlCode} language="tsx" />
-              <div className="grid gap-4 md:grid-cols-2 mt-6">
-                <div className="space-y-2">
-                  <h4 className="font-semibold text-sm">LTR (English)</h4>
-                  <div dir="ltr">
-                    <TokenCounter
-                      inputTokens={1250}
-                      outputTokens={850}
-                      maxTokens={4096}
-                    />
-                  </div>
-                </div>
-                <div className="space-y-2">
-                  <h4 className="font-semibold text-sm">RTL (العربية)</h4>
-                  <div dir="rtl">
-                    <TokenCounter
-                      inputTokens={1250}
-                      outputTokens={850}
-                      maxTokens={4096}
-                      isRTL
-                      labelAr="استخدام الرموز"
-                    />
-                  </div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </section>
-
         {/* Related */}
         <section className="mb-16">
           <h2 className="text-2xl font-bold tracking-tight mb-6">{tokenCounterT.related.title}</h2>
@@ -478,30 +440,30 @@ export default function TokenCounterPage() {
             <Card>
               <CardContent className="p-4">
                 <Link href="/components/model-selector" className="font-medium hover:underline">
-                  Model Selector
+                  {content[locale]?.modelSelectorComponent?.title || content.en.modelSelectorComponent.title}
                 </Link>
                 <p className="text-sm text-muted-foreground mt-1">
-                  Choose AI models with different token limits
+                  {tokenCounterT.related.modelSelector}
                 </p>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="p-4">
                 <Link href="/components/parameter-slider" className="font-medium hover:underline">
-                  Parameter Slider
+                  {content[locale]?.parameterSliderComponent?.title || content.en.parameterSliderComponent.title}
                 </Link>
                 <p className="text-sm text-muted-foreground mt-1">
-                  Adjust max tokens parameter
+                  {tokenCounterT.related.parameterSlider}
                 </p>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="p-4">
                 <Link href="/components/chat-message" className="font-medium hover:underline">
-                  Chat Message
+                  {content[locale]?.chatMessageComponent?.title || content.en.chatMessageComponent.title}
                 </Link>
                 <p className="text-sm text-muted-foreground mt-1">
-                  Display messages that consume tokens
+                  {tokenCounterT.related.chatMessage}
                 </p>
               </CardContent>
             </Card>

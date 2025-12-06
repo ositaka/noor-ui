@@ -358,35 +358,35 @@ export default function ChatMessagePage() {
 
         {/* Related */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.relatedComponents}</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{chatMessageT.related.title}</h2>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             <Card>
               <CardContent className="p-4">
                 <Link href="/components/prompt-input" className="font-medium hover:underline">
-                  Prompt Input
+                  {t.promptInputComponent?.title || 'Prompt Input'}
                 </Link>
                 <p className="text-sm text-muted-foreground mt-1">
-                  Input component for sending chat messages
+                  {chatMessageT.related.promptInput}
                 </p>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="p-4">
                 <Link href="/components/message-actions" className="font-medium hover:underline">
-                  Message Actions
+                  {t.messageActionsComponent?.title || 'Message Actions'}
                 </Link>
                 <p className="text-sm text-muted-foreground mt-1">
-                  Action buttons for chat messages
+                  {chatMessageT.related.messageActions}
                 </p>
               </CardContent>
             </Card>
             <Card>
               <CardContent className="p-4">
                 <Link href="/components/thinking-indicator" className="font-medium hover:underline">
-                  Thinking Indicator
+                  {t.thinkingIndicatorComponent?.title || 'Thinking Indicator'}
                 </Link>
                 <p className="text-sm text-muted-foreground mt-1">
-                  Loading state for AI responses
+                  {chatMessageT.related.thinkingIndicator}
                 </p>
               </CardContent>
             </Card>

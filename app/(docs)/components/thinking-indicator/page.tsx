@@ -110,14 +110,17 @@ export default function ThinkingIndicatorPage() {
                   variant="dots"
                   message={thinkingIndicatorT.labels.thinking}
                 />
+                <Separator />
                 <ThinkingIndicator
                   variant="pulse"
                   message={thinkingIndicatorT.labels.processing}
                 />
+                <Separator />
                 <ThinkingIndicator
                   variant="wave"
                   message={thinkingIndicatorT.labels.analyzing}
                 />
+                <Separator />
                 <ThinkingIndicator
                   variant="typing"
                   message={thinkingIndicatorT.labels.thinking}
