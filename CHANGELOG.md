@@ -13,6 +13,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - TimePicker & TimeRangePicker popups appear on wrong side in RTL mode
   - Need to add automatic direction detection (similar to DropdownMenu pattern)
 
+## [0.4.5] - 2025-12-07
+
+### Changed
+- **Cozy Theme**: Removed opinionated spacing and padding rules for more flexibility
+  - Removed forced `margin-bottom: 1.5rem` from headings (h1, h2, h3, h4)
+  - Removed forced `padding: 2rem !important` from all card components
+  - Removed forced button padding (`padding: .75rem 1.5rem`)
+  - Theme now respects component-level spacing defaults
+  - Updated both `globals.css` and `package.css` for consistency
+
+### Notes
+This release makes the Cozy theme less opinionated and more flexible, allowing developers to use standard component spacing without theme overrides.
+
+---
+
 ## [0.4.4] - 2025-12-06
 
 ### Fixed

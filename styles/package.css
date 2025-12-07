@@ -216,23 +216,11 @@
   }
 
   .theme-cozy h1, .theme-cozy h2, .theme-cozy h3, .theme-cozy h4 {
-    margin-bottom: 1.5rem;
     line-height: 1.4;
   }
 
   .theme-cozy p {
     margin-bottom: 1.25rem;
-  }
-
-  .theme-cozy button, .theme-cozy [role="button"] {
-    padding-top: 0.75rem;
-    padding-bottom: 0.75rem;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-  }
-
-  .theme-cozy .card, .theme-cozy [class*="card"] {
-    padding: 2rem !important;
   }
 
   /* Futuristic theme: Tighter, more compact */

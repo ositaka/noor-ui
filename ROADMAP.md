@@ -91,11 +91,11 @@ Build the **go-to design system for bilingual (LTR/RTL) web applications**, star
 - ✅ Version and release strategy established
 - ✅ Automated pre-publish checks (translations, links, types)
 
-**Current Version:** v0.4.4 (2025-12-06)
+**Current Version:** v0.4.5 (2025-12-07)
 
 **Latest Updates:**
-- ✅ Standardized documentation section spacing across all component pages (number-input, date-picker, time-picker)
-- ✅ Improved visual hierarchy in component documentation
+- ✅ Cozy theme refinements - removed opinionated spacing/padding rules
+- ✅ Theme now respects component-level defaults for better flexibility
 - ✅ 74+ components with complete RTL/LTR support
 
 **Deliverables:**
@@ -164,7 +164,7 @@ Build the **go-to design system for bilingual (LTR/RTL) web applications**, star
 
 ## 🚧 Current Status: READY FOR PUBLIC LAUNCH! 🚀
 
-**Package Published:** [noorui-rtl v0.4.4 on npm](https://www.npmjs.com/package/noorui-rtl)
+**Package Published:** [noorui-rtl v0.4.5 on npm](https://www.npmjs.com/package/noorui-rtl)
 
 **Technical Pre-Launch:** ✅ **COMPLETE** (2025-12-02)
 - ✅ Repository public on GitHub
@@ -187,8 +187,8 @@ Build the **go-to design system for bilingual (LTR/RTL) web applications**, star
 **Blockers:**
 - None! All technical AND marketing assets complete ✅
 
-**Recent Wins (Dec 5, 2025):**
-- ✅ **NPM package published** (noorui-rtl v0.4.4)
+**Recent Wins (Dec 7, 2025):**
+- ✅ **NPM package published** (noorui-rtl v0.4.5)
 - ✅ **74+ production-ready components**
 - ✅ **Complete documentation site** (noorui.com)
 - ✅ **Kitab Blog Starter** live at kitab.noorui.com - production example with 4 languages
@@ -258,8 +258,8 @@ Phase 4: Month 5+    ░░░░░░░░░░░░░░░░░░░�
 
 ---
 
-*Last Updated: 2025-12-06*
-*Next Review: 2025-12-13*
+*Last Updated: 2025-12-07*
+*Next Review: 2025-12-14*
 
 ---
 
