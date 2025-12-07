@@ -258,8 +258,8 @@ Phase 4: Month 5+    ░░░░░░░░░░░░░░░░░░░�
 
 ---
 
-*Last Updated: 2025-11-29*
-*Next Review: 2025-12-06*
+*Last Updated: 2025-12-06*
+*Next Review: 2025-12-13*
 
 ---
 
@@ -449,3 +449,99 @@ Phase 4: Month 5+    ░░░░░░░░░░░░░░░░░░░�
 
 **Completed:** 2025-11-29
 **Version:** v0.4.4
+
+---
+
+### 🔄 PENDING: Toast System Enhancement
+
+**Problem:** Currently, noorui-rtl only exports toast primitives (Toast, ToastProvider, ToastTitle, etc.) from Radix UI, requiring users to build their own state management, toaster component, and imperative toast API.
+
+**Proposed Solution:** Add a complete toast notification system similar to shadcn/ui, Chakra UI, or Mantine.
+
+**What to add:**
+1. **`useToast()` hook** - Returns `toast()` function and `toasts` array with built-in state management
+2. **`Toaster` component** - Drop-in component that renders toasts without manual wiring
+3. **Imperative API** - Simple function call: `toast({ title, description, variant })`
+4. **Auto-dismiss** - Configurable timeout with default 5s
+5. **Toast variants** - Support for `default`, `destructive`, `success` variants
+6. **Lifecycle management** - Handle open/close states, animations, and cleanup
+
+**Expected API:**
+```typescript
+import { Toaster, useToast } from 'noorui-rtl'
+
+// In layout
+<Toaster />
+
+// In any component
+const { toast } = useToast()
+toast({
+  title: "Success!",
+  description: "Changes saved",
+  variant: "success"
+})
+```
+
+**Benefits:**
+- Eliminates boilerplate for 90% of use cases
+- Maintains primitive exports for advanced customization
+- Improves DX and reduces time-to-productivity
+- Aligns with industry standard UI libraries
+
+**Priority:** Medium-High (common pattern users expect from a UI library)
+
+**Status:** Pending
+**Target:** v0.5.0
+
+---
+
+### 🔄 PENDING: Button & ButtonArrow Size Variants
+
+**Problem:** The size variants for Button and ButtonArrow components are defined but not fully functional or properly showcased in documentation.
+
+**Current State:**
+- Size variants exist in component definitions
+- Not all sizes may be properly tested/working
+- Documentation pages don't showcase all size options clearly
+
+**What to fix:**
+1. **Button component** - Ensure all size variants work correctly:
+   - `sm` (small)
+   - `default`
+   - `lg` (large)
+   - `icon` (square icon button)
+   - Any other defined sizes
+
+2. **ButtonArrow component** - Ensure size variants work correctly:
+   - Should match Button sizes
+   - Arrow icon should scale appropriately with button size
+
+3. **Documentation updates:**
+   - Add comprehensive "Sizes" section to Button component page
+   - Add comprehensive "Sizes" section to ButtonArrow component page
+   - Show visual examples of all size variants
+   - Include code examples for each size
+   - Demonstrate RTL behavior at different sizes
+
+**Expected Result:**
+```typescript
+// All sizes should work
+<Button size="sm">Small</Button>
+<Button size="default">Default</Button>
+<Button size="lg">Large</Button>
+<Button size="icon"><Icon /></Button>
+
+<ButtonArrow size="sm" direction="forward">Small</ButtonArrow>
+<ButtonArrow size="lg" direction="forward">Large</ButtonArrow>
+```
+
+**Benefits:**
+- Complete component API implementation
+- Better documentation for users
+- Consistent sizing across button components
+- Improved visual hierarchy in UIs
+
+**Priority:** Medium (improves component completeness)
+
+**Status:** Pending
+**Target:** v0.4.5 or v0.5.0
