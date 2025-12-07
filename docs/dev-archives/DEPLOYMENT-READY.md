@@ -192,7 +192,7 @@ Route (app)                              Size     First Load JS
 - Branch: `review-before-create-npm-package`
 - Node version: Compatible with Next.js 14
 - Build time: ~2-3 minutes for full production build
-- All 64 components documented and translated
+- All 74+ components documented and translated
 - All 6 example pages functional in both languages
 - All 4 themes working correctly
 - Full RTL support verified

@@ -14,7 +14,7 @@ Beautiful RTL-first React components for bilingual applications. Built with Radi
 ## ✨ Features
 
 - 🌍 **RTL-First**: Perfect Arabic/Persian support with logical properties
-- 🎨 **65 Components**: Complete UI toolkit for modern applications
+- 🎨 **74+ Components**: Complete UI toolkit for modern applications
 - ♿ **Accessible**: WCAG AA compliant with full keyboard navigation
 - 🎯 **TypeScript**: Full type safety and IntelliSense support
 - 🎭 **Themeable**: Light/dark mode with customizable design tokens

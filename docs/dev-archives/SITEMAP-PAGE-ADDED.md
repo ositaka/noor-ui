@@ -197,7 +197,7 @@ Users can access the sitemap via:
 ## Why This Matters
 
 As Noor UI has grown to:
-- **64 components** (including 10 experimental AI/LLM components)
+- **74+ components** (including 10 experimental AI/LLM components)
 - **9 example pages**
 - **112 total pages**
 

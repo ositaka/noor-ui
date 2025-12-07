@@ -231,7 +231,7 @@ This release focuses on code quality improvements and documentation completeness
 - Updated homepage URL to noorui.com
 
 ### Added
-- Complete barrel export with all 64 components
+- Complete barrel export with all 74+ components
 - CHANGELOG.md, CONTRIBUTING.md documentation
 - Improved package files configuration
 
@@ -268,7 +268,7 @@ Major update to Noor UI with significant component additions and improvements.
 
 **Features**
 - Complete RTL support with logical properties
-- 64 production-ready and experimental components
+- 74+ production-ready and experimental components
 - Full TypeScript support with type definitions
 - Radix UI primitives for accessibility
 - Tailwind CSS with design tokens
@@ -277,7 +277,7 @@ Major update to Noor UI with significant component additions and improvements.
 - WCAG AA compliant
 
 ### Changed
-- Updated package structure to include all 64 components
+- Updated package structure to include all 74+ components
 - Improved TypeScript types and exports
 - Enhanced documentation
 

@@ -167,9 +167,9 @@ This enables:
 
 ## 🎨 Design System
 
-### All Components (64 Total)
+### All Components (74+ Total)
 
-**Current Status:** 64 components fully documented - 54 production-ready and 10 experimental AI/LLM components. See the [public roadmap](/roadmap) for upcoming features.
+**Current Status:** 74+ components fully documented - 64 production-ready and 10 experimental AI/LLM components. See the [public roadmap](/roadmap) for upcoming features.
 
 **Form Components:**
 - **Form**: State management with validation and bilingual error messages

@@ -305,7 +305,7 @@ export default function Home() {
               </TabsContent>
               <TabsContent value="tab3" className="space-y-2 pt-4">
                 <p className="text-sm text-muted-foreground">
-                  The package includes 64 components: 54 production-ready
+                  The package includes 74+ components: 54 production-ready
                   and 10 experimental AI/LLM components.
                 </p>
               </TabsContent>
