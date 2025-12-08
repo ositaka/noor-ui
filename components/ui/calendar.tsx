@@ -296,6 +296,7 @@ export const Calendar = React.forwardRef<HTMLDivElement, CalendarProps>(
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-2">
             <Button
+              type="button"
               variant="outline"
               size="icon"
               onClick={isRTL ? goToNextMonth : goToPreviousMonth}
@@ -304,6 +305,7 @@ export const Calendar = React.forwardRef<HTMLDivElement, CalendarProps>(
               <ChevronLeft className="h-4 w-4" />
             </Button>
             <Button
+              type="button"
               variant="outline"
               size="icon"
               onClick={isRTL ? goToPreviousMonth : goToNextMonth}
@@ -320,7 +322,7 @@ export const Calendar = React.forwardRef<HTMLDivElement, CalendarProps>(
             )}
           </div>
 
-          <Button variant="outline" size="sm" onClick={goToToday}>
+          <Button type="button" variant="outline" size="sm" onClick={goToToday}>
             {t.ui.components.today}
           </Button>
         </div>
@@ -354,6 +356,7 @@ export const Calendar = React.forwardRef<HTMLDivElement, CalendarProps>(
 
               return (
                 <button
+                  type="button"
                   key={index}
                   onClick={() => handleDateClick(gregorian)}
                   disabled={isDisabled}

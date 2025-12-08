@@ -13,6 +13,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - TimePicker & TimeRangePicker popups appear on wrong side in RTL mode
   - Need to add automatic direction detection (similar to DropdownMenu pattern)
 
+## [0.4.6] - 2025-12-08
+
+### Fixed
+- **Calendar Component**: Fixed form submission issue when used inside forms
+  - Added `type="button"` to all navigation buttons (previous month, next month, today)
+  - Added `type="button"` to all date selection buttons
+  - Prevents unintended form submissions when selecting dates or navigating months
+  - Resolves issue where clicking calendar buttons would trigger parent form submit handlers
+
+### Notes
+This is a critical bugfix for forms containing Calendar components in range or single selection mode. Previously, clicking any button within the Calendar would trigger form submission, causing premature validation and unexpected behavior.
+
+---
+
 ## [0.4.5] - 2025-12-07
 
 ### Changed
