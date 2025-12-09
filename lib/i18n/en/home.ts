@@ -86,7 +86,7 @@ home: {
         },
         recentWins: {
           title: 'Recent Wins',
-          performance: 'NPM package published (noorui-rtl v0.4.5)',
+          performance: 'NPM package published (noorui-rtl v0.4.6)',
           skeletons: '74+ production-ready components with full documentation',
           components: '10+ complete demo projects (Blog, Marketplace, AI workflows)',
           rebranding: 'Full RTL/LTR support for ALL RTL languages (Arabic, Hebrew, Urdu, Farsi) + WCAG AA accessibility',

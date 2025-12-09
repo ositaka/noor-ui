@@ -91,11 +91,11 @@ Build the **go-to design system for bilingual (LTR/RTL) web applications**, star
 - ✅ Version and release strategy established
 - ✅ Automated pre-publish checks (translations, links, types)
 
-**Current Version:** v0.4.5 (2025-12-07)
+**Current Version:** v0.4.6 (2025-12-08)
 
 **Latest Updates:**
-- ✅ Cozy theme refinements - removed opinionated spacing/padding rules
-- ✅ Theme now respects component-level defaults for better flexibility
+- ✅ Fixed Calendar component form submission issue - added `type="button"` to all buttons
+- ✅ Calendar now works correctly inside forms without triggering premature submission
 - ✅ 74+ components with complete RTL/LTR support
 
 **Deliverables:**
@@ -164,7 +164,7 @@ Build the **go-to design system for bilingual (LTR/RTL) web applications**, star
 
 ## 🚧 Current Status: READY FOR PUBLIC LAUNCH! 🚀
 
-**Package Published:** [noorui-rtl v0.4.5 on npm](https://www.npmjs.com/package/noorui-rtl)
+**Package Published:** [noorui-rtl v0.4.6 on npm](https://www.npmjs.com/package/noorui-rtl)
 
 **Technical Pre-Launch:** ✅ **COMPLETE** (2025-12-02)
 - ✅ Repository public on GitHub
@@ -187,8 +187,8 @@ Build the **go-to design system for bilingual (LTR/RTL) web applications**, star
 **Blockers:**
 - None! All technical AND marketing assets complete ✅
 
-**Recent Wins (Dec 7, 2025):**
-- ✅ **NPM package published** (noorui-rtl v0.4.5)
+**Recent Wins (Dec 8, 2025):**
+- ✅ **NPM package updated** (noorui-rtl v0.4.6 - Calendar form fix)
 - ✅ **74+ production-ready components**
 - ✅ **Complete documentation site** (noorui.com)
 - ✅ **Kitab Blog Starter** live at kitab.noorui.com - production example with 4 languages
@@ -544,4 +544,4 @@ toast({
 **Priority:** Medium (improves component completeness)
 
 **Status:** Pending
-**Target:** v0.4.5 or v0.5.0
+**Target:** v0.5.0
