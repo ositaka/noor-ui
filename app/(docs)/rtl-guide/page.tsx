@@ -41,8 +41,12 @@ border-l  →  border-s  (border-inline-start)
 border-r  →  border-e  (border-inline-end)
 
 // Positioning
-left-0    →  start-0
-right-0   →  end-0
+left-0    →  start-0   (inset-inline-start)
+right-0   →  end-0     (inset-inline-end)
+top-0     →  top-0     (inset-block-start - unchanged)
+bottom-0  →  bottom-0  (inset-block-end - unchanged)
+
+// Thanks to Mazin Musleh for this addition.
 
 // Rounding
 rounded-l  →  rounded-s

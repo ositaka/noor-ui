@@ -187,7 +187,8 @@ Build the **go-to design system for bilingual (LTR/RTL) web applications**, star
 **Blockers:**
 - None! All technical AND marketing assets complete ✅
 
-**Recent Wins (Dec 8, 2025):**
+**Recent Wins (Dec 21, 2025):**
+- ✅ **RTL Guide Enhanced** - Added positioning logical properties documentation (inset-inline-start/end, inset-block-start/end) with CSS and Tailwind equivalents (contributed by Mazin Musleh)
 - ✅ **NPM package updated** (noorui-rtl v0.4.6 - Calendar form fix)
 - ✅ **74+ production-ready components**
 - ✅ **Complete documentation site** (noorui.com)
@@ -258,8 +259,8 @@ Phase 4: Month 5+    ░░░░░░░░░░░░░░░░░░░�
 
 ---
 
-*Last Updated: 2025-12-07*
-*Next Review: 2025-12-14*
+*Last Updated: 2025-12-21*
+*Next Review: 2025-12-28*
 
 ---
 
