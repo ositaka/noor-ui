@@ -24,17 +24,21 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-// Default - from component page preview (line 140-143)
+// Default - Interactive playground with controls
 export const Default: Story = {
-  render: () => (
-    <Avatar>
-      <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
-      <AvatarFallback>CN</AvatarFallback>
-    </Avatar>
-  ),
-  parameters: {
-    controls: { disable: true },
+  args: {
+    children: (
+      <>
+        <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+        <AvatarFallback>CN</AvatarFallback>
+      </>
+    ),
   },
+  globals: {
+    direction: 'ltr',
+    locale: 'en',
+  },
+  render: (args) => <Avatar {...args} />,
 };
 
 // With Fallback - from component page lines 170-182

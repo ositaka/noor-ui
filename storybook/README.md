@@ -106,7 +106,7 @@ storybook/
 
 ## 🧩 Component Coverage
 
-### Current Status: 6/74 Components (8%)
+### Current Status: 13/74 Components (18%)
 
 #### ✅ Completed Stories
 - **Button** - All variants, sizes, states, RTL support, icons, loading (17 stories)
@@ -115,9 +115,16 @@ storybook/
 - **Badge** - All variants, sizes, with icons, status, notification, RTL, custom colors (10 stories)
 - **Avatar** - Image, fallback, sizes, groups, with profile, RTL examples (9 stories)
 - **Label** - With input, required, helper text, disabled, horizontal, forms, RTL (11 stories)
+- **Textarea** - All height options, character count, validation, auto-expand, forms, RTL (11 stories)
+- **Separator** - Horizontal, vertical, in cards, navigation, lists, custom styling, RTL (10 stories)
+- **Alert** - All variants (default, destructive, success, warning), with/without icons, RTL (11 stories)
+- **Tooltip** - All positions (top, bottom, left, right), with icon buttons, text buttons, RTL (8 stories)
+- **Kbd** - Single keys, combinations, all variants/sizes, in buttons, shortcuts panel, RTL (9 stories)
+- **Blockquote** - All variants (default, accent, subtle), with/without attribution, with citation, RTL (10 stories)
+- **Callout** - All 5 types (info, warning, error, success, note), with/without title, custom icon, RTL (13 stories)
 
 #### 🚧 In Progress
-Working on remaining **68 components** across all categories.
+Working on remaining **61 components** across all categories.
 
 **Story Philosophy**: Each component includes 8-15 focused stories combining meaningful use cases, comprehensive showcase stories, and interactive Controls for variant exploration.
 
@@ -292,8 +299,8 @@ See **[STORYBOOK_ROADMAP.md](./STORYBOOK_ROADMAP.md)** for:
 ✅ Light/dark mode functional
 ✅ Custom toolbar controls active
 ✅ Accessibility testing enabled
-✅ 6 comprehensive component stories
-✅ 75+ individual story variants
+✅ 13 comprehensive component stories
+✅ 147+ individual story variants
 ✅ Story guidelines documented (4 critical rules)
 ✅ Streamlined story approach (8-15 stories per component)
 

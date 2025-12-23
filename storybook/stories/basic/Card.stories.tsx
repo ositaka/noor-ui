@@ -23,22 +23,26 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-// Basic Card
+// Default - Interactive playground with controls
 export const Default: Story = {
-  render: () => (
-    <Card className="w-[350px]">
-      <CardHeader>
-        <CardTitle>Card Title</CardTitle>
-        <CardDescription>Card description goes here</CardDescription>
-      </CardHeader>
-      <CardContent>
-        <p>Card content area. Add any content here.</p>
-      </CardContent>
-    </Card>
-  ),
-  parameters: {
-    controls: { disable: true },
+  args: {
+    children: (
+      <>
+        <CardHeader>
+          <CardTitle>Card Title</CardTitle>
+          <CardDescription>Card description goes here</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <p>Card content area. Add any content here.</p>
+        </CardContent>
+      </>
+    ),
   },
+  globals: {
+    direction: 'ltr',
+    locale: 'en',
+  },
+  render: (args) => <Card {...args} className="w-[350px]" />,
 };
 
 // With Footer

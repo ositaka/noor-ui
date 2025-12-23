@@ -22,21 +22,22 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-// Default - from component page preview (lines 153-156)
+// Default - Interactive playground with controls
 export const Default: Story = {
-  render: () => (
-    <div className="w-full max-w-sm space-y-2">
-      <Label htmlFor="preview-input">Email Address</Label>
-      <Input id="preview-input" type="email" placeholder="name@example.com" />
-    </div>
-  ),
+  args: {
+    children: 'Email Address',
+    htmlFor: 'preview-input',
+  },
   globals: {
     direction: 'ltr',
     locale: 'en',
   },
-  parameters: {
-    controls: { disable: true },
-  },
+  render: (args) => (
+    <div className="w-full max-w-sm space-y-2">
+      <Label {...args} />
+      <Input id="preview-input" type="email" placeholder="name@example.com" />
+    </div>
+  ),
 };
 
 // With Input - from component page lines 224-227

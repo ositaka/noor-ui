@@ -12,7 +12,7 @@
 - **Phase 2**: Provider Integration → ✅ **COMPLETED**
 - **Phase 3**: Custom Toolbar Addons → ✅ **COMPLETED**
 - **Phase 4**: Essential Addons → ✅ **COMPLETED**
-- **Phase 5**: Component Stories → 🔄 **In Progress (6/74 components)**
+- **Phase 5**: Component Stories → 🔄 **In Progress (13/74 components)**
 - **Phase 6**: Package Validation → ⏸️ Not Started
 - **Phase 7**: Deployment → ⏸️ Not Started
 
@@ -117,7 +117,7 @@ vite@7.3.0
 
 ### Story Coverage Status
 
-#### Basic Components (7/20 completed) 🔄
+#### Basic Components (13/20 completed) 🔄
 - [x] **Button** - ✅ All variants, sizes, states, RTL, with icons, loading state
 - [x] **Input** - ✅ All types, states, with labels, with icons, RTL, form examples
 - [x] **Card** - ✅ All layouts, with footer, notification, stats, product, article, RTL
@@ -125,12 +125,12 @@ vite@7.3.0
 - [x] **Avatar** - ✅ Image, fallback, sizes, groups, with profile, RTL examples
 - [x] **Label** - ✅ With input, required, helper text, disabled, horizontal, forms, RTL
 - [x] **Textarea** - ✅ All height options, character count, validation, auto-expand, forms, RTL
-- [ ] Separator - Horizontal, vertical
-- [ ] Alert - Variants, with icon
-- [ ] Tooltip - Positions, RTL
-- [ ] Kbd - Keyboard shortcuts
-- [ ] Blockquote - With citation
-- [ ] Callout - Info, warning, error
+- [x] **Separator** - ✅ Horizontal, vertical, in cards, navigation, lists, custom styling, RTL
+- [x] **Alert** - ✅ All variants (default, destructive, success, warning), with/without icons, RTL
+- [x] **Tooltip** - ✅ All positions (top, bottom, left, right), with icon buttons, text buttons, RTL
+- [x] **Kbd** - ✅ Single keys, combinations, all variants/sizes, in buttons, shortcuts panel, RTL
+- [x] **Blockquote** - ✅ All variants (default, accent, subtle), with/without attribution, with citation, RTL
+- [x] **Callout** - ✅ All 5 types (info, warning, error, success, note), with/without title, custom icon, RTL
 
 #### Form Components (12 components)
 - [ ] Checkbox - Single, group, indeterminate
@@ -387,14 +387,14 @@ Before marking a component story as "complete":
 ✅ **4 Theme Variants** - Minimal, Futuristic, Cozy, Artistic (all working)
 ✅ **Light/Dark Mode** - Complete theme support across all variants
 ✅ **Bilingual Ready** - English/Arabic locale switching
-✅ **7 Component Stories** - Button, Input, Card, Badge, Avatar, Label, Textarea (comprehensive examples)
+✅ **13 Component Stories** - Button, Input, Card, Badge, Avatar, Label, Textarea, Separator, Alert, Tooltip, Kbd, Blockquote, Callout (comprehensive examples)
 ✅ **Story Guidelines** - 4 critical rules documented for maintainability
 ✅ **Streamlined Approach** - 8-15 stories per component philosophy
 ✅ **Accessibility Testing** - Built-in a11y addon active on all stories
 ✅ **Auto Documentation** - Props tables and MDX support configured
 
 ### 🎯 Current Focus
-- Writing stories for remaining 67 components
+- Writing stories for remaining 61 components
 - Following 8-15 stories per component guideline
 - Creating meaningful use cases + showcase stories
 - Documenting RTL-specific behaviors
@@ -403,8 +403,8 @@ Before marking a component story as "complete":
 
 ### 📍 Quick Stats
 - **Storybook Version**: 10.1.10
-- **Components Ready**: 7/74 (9%)
-- **Stories Written**: 86+ individual stories
+- **Components Ready**: 13/74 (18%)
+- **Stories Written**: 147+ individual stories
 - **Toolbar Controls**: 4 (Direction, Theme, Mode, Locale)
 - **Framework**: Next.js 14 + Vite
 - **Status**: Running at http://localhost:6006
