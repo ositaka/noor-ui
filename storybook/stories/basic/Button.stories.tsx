@@ -214,6 +214,9 @@ export const AllVariants: Story = {
       <Button variant="link">Link</Button>
     </div>
   ),
+  parameters: {
+    controls: { disable: true },
+  },
 };
 
 // All sizes showcase
@@ -229,4 +232,7 @@ export const AllSizes: Story = {
       </Button>
     </div>
   ),
+  parameters: {
+    controls: { disable: true },
+  },
 };

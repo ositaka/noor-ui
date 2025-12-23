@@ -99,6 +99,9 @@ export const WithIconInside: Story = {
       <Input placeholder="Search..." className="ps-9" />
     </div>
   ),
+  parameters: {
+    controls: { disable: true },
+  },
 };
 
 // Form Examples
@@ -121,6 +124,9 @@ export const LoginForm: Story = {
       </div>
     </div>
   ),
+  parameters: {
+    controls: { disable: true },
+  },
 };
 
 // RTL Examples
@@ -153,6 +159,7 @@ export const RTLWithLabel: Story = {
     locale: 'ar',
   },
   parameters: {
+    controls: { disable: true },
     docs: {
       description: {
         story: 'Input with Arabic label showing proper RTL layout. Automatically switches to RTL mode.',
@@ -173,6 +180,7 @@ export const RTLSearchWithIcon: Story = {
     locale: 'ar',
   },
   parameters: {
+    controls: { disable: true },
     docs: {
       description: {
         story: 'Search input with icon properly positioned in RTL mode using logical properties (start/end).',
@@ -208,4 +216,7 @@ export const RegistrationForm: Story = {
       </div>
     </div>
   ),
+  parameters: {
+    controls: { disable: true },
+  },
 };

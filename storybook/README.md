@@ -66,16 +66,18 @@ Storybook includes 4 custom toolbar controls:
 
 ### Component Stories
 
-Each component includes:
-- ✅ Default examples
-- ✅ All variants and sizes
-- ✅ Different states (disabled, loading, error)
+Each component includes 8-15 focused stories:
+- ✅ Default examples (with interactive Controls)
+- ✅ Meaningful use case examples (1-3 stories)
+- ✅ "All Variants" showcase stories
+- ✅ "All Sizes" and other comprehensive displays
 - ✅ RTL-specific examples
 - ✅ Arabic text demonstrations
 - ✅ Real-world usage patterns
-- ✅ Interactive controls
+- ✅ Interactive controls for variant exploration
 - ✅ Accessibility checks
 - ✅ Auto-generated documentation
+- ✅ Examples from component documentation pages
 
 ---
 
@@ -104,15 +106,20 @@ storybook/
 
 ## 🧩 Component Coverage
 
-### Current Status: 3/74 Components (4%)
+### Current Status: 6/74 Components (8%)
 
 #### ✅ Completed Stories
-- **Button** - All variants, sizes, states, RTL support, icons, loading
-- **Input** - All types, with labels, icons, forms, RTL examples
-- **Card** - All layouts, notification, stats, product, article cards
+- **Button** - All variants, sizes, states, RTL support, icons, loading (17 stories)
+- **Input** - All types, with labels, icons, forms, RTL examples (13 stories)
+- **Card** - All layouts, notification, stats, product, article cards (9 stories)
+- **Badge** - All variants, sizes, with icons, status, notification, RTL, custom colors (10 stories)
+- **Avatar** - Image, fallback, sizes, groups, with profile, RTL examples (9 stories)
+- **Label** - With input, required, helper text, disabled, horizontal, forms, RTL (11 stories)
 
 #### 🚧 In Progress
-Working on remaining **71 components** across all categories.
+Working on remaining **68 components** across all categories.
+
+**Story Philosophy**: Each component includes 8-15 focused stories combining meaningful use cases, comprehensive showcase stories, and interactive Controls for variant exploration.
 
 See **[STORYBOOK_ROADMAP.md](./STORYBOOK_ROADMAP.md)** for detailed progress tracking.
 
@@ -254,11 +261,16 @@ netlify deploy --dir=storybook-static --prod
 
 We welcome contributions! To add new stories:
 
-1. Follow the story template in the "Development Workflow" section
-2. Ensure RTL examples are included
-3. Add Arabic text examples where applicable
-4. Test accessibility with the a11y addon
-5. Submit a PR with your stories
+1. **Read [STORY_GUIDELINES.md](./STORY_GUIDELINES.md)** - 4 critical rules documented
+2. Follow the story template in the "Development Workflow" section
+3. **Use examples from `/app/(docs)/components/[name]/page.tsx`**
+4. **Aim for 8-15 stories per component** (not 30+)
+5. Include meaningful use cases + "All..." showcase stories
+6. Ensure RTL examples are included with `globals: { direction: 'rtl', locale: 'ar' }`
+7. Add Arabic text examples where applicable
+8. Never use directional icons (arrows, chevrons)
+9. Test accessibility with the a11y addon
+10. Submit a PR with your stories
 
 ---
 
@@ -280,8 +292,10 @@ See **[STORYBOOK_ROADMAP.md](./STORYBOOK_ROADMAP.md)** for:
 ✅ Light/dark mode functional
 ✅ Custom toolbar controls active
 ✅ Accessibility testing enabled
-✅ 3 comprehensive component stories
-✅ 45+ individual story variants
+✅ 6 comprehensive component stories
+✅ 75+ individual story variants
+✅ Story guidelines documented (4 critical rules)
+✅ Streamlined story approach (8-15 stories per component)
 
 ---
 

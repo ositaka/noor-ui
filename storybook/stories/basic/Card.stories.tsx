@@ -36,6 +36,9 @@ export const Default: Story = {
       </CardContent>
     </Card>
   ),
+  parameters: {
+    controls: { disable: true },
+  },
 };
 
 // With Footer
@@ -55,6 +58,9 @@ export const WithFooter: Story = {
       </CardFooter>
     </Card>
   ),
+  parameters: {
+    controls: { disable: true },
+  },
 };
 
 // Notification Card
@@ -83,6 +89,9 @@ export const NotificationCard: Story = {
       </CardFooter>
     </Card>
   ),
+  parameters: {
+    controls: { disable: true },
+  },
 };
 
 // Stats Card
@@ -101,6 +110,9 @@ export const StatsCard: Story = {
       </CardContent>
     </Card>
   ),
+  parameters: {
+    controls: { disable: true },
+  },
 };
 
 // Product Card
@@ -130,6 +142,9 @@ export const ProductCard: Story = {
       </CardFooter>
     </Card>
   ),
+  parameters: {
+    controls: { disable: true },
+  },
 };
 
 // Article Card
@@ -166,6 +181,9 @@ export const ArticleCard: Story = {
       </CardFooter>
     </Card>
   ),
+  parameters: {
+    controls: { disable: true },
+  },
 };
 
 // RTL Card
@@ -190,6 +208,7 @@ export const RTLCard: Story = {
     locale: 'ar',
   },
   parameters: {
+    controls: { disable: true },
     docs: {
       description: {
         story: 'Card with Arabic content demonstrating RTL support. Automatically switches to RTL mode.',
@@ -230,6 +249,7 @@ export const RTLProductCard: Story = {
     locale: 'ar',
   },
   parameters: {
+    controls: { disable: true },
     docs: {
       description: {
         story: 'Product card with Arabic text showing proper RTL layout. Automatically switches to RTL mode.',
@@ -275,4 +295,7 @@ export const CardGrid: Story = {
       </Card>
     </div>
   ),
+  parameters: {
+    controls: { disable: true },
+  },
 };

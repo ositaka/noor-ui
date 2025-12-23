@@ -109,24 +109,16 @@ const preview: Preview = {
       const mode = context.globals.mode || 'light';
       const locale = context.globals.locale || 'en';
 
-      // Update document attributes and theme
+      // Update document theme and mode (but NOT direction - that's story-specific)
       React.useEffect(() => {
-        document.documentElement.setAttribute('dir', direction);
         document.documentElement.setAttribute('lang', locale);
         document.documentElement.classList.toggle('dark', mode === 'dark');
         applyThemeToDocument(theme);
-      }, [direction, locale, mode, theme]);
+      }, [locale, mode, theme]);
 
       return (
         <ThemeProvider attribute="class" defaultTheme={mode} forcedTheme={mode} enableSystem={false}>
-          <div
-            style={{
-              minHeight: '100vh',
-              padding: '2rem',
-              backgroundColor: 'var(--background)',
-              color: 'var(--foreground)',
-            }}
-          >
+          <div dir={direction} style={{ minHeight: '100%' }}>
             <Story />
           </div>
         </ThemeProvider>

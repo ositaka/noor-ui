@@ -12,7 +12,7 @@
 - **Phase 2**: Provider Integration → ✅ **COMPLETED**
 - **Phase 3**: Custom Toolbar Addons → ✅ **COMPLETED**
 - **Phase 4**: Essential Addons → ✅ **COMPLETED**
-- **Phase 5**: Component Stories → 🔄 **In Progress (3/74 components)**
+- **Phase 5**: Component Stories → 🔄 **In Progress (6/74 components)**
 - **Phase 6**: Package Validation → ⏸️ Not Started
 - **Phase 7**: Deployment → ⏸️ Not Started
 
@@ -117,14 +117,14 @@ vite@7.3.0
 
 ### Story Coverage Status
 
-#### Basic Components (3/20 completed) 🔄
+#### Basic Components (7/20 completed) 🔄
 - [x] **Button** - ✅ All variants, sizes, states, RTL, with icons, loading state
 - [x] **Input** - ✅ All types, states, with labels, with icons, RTL, form examples
 - [x] **Card** - ✅ All layouts, with footer, notification, stats, product, article, RTL
-- [ ] Textarea - Sizes, RTL text direction
-- [ ] Label - With form elements
-- [ ] Badge - Variants, sizes
-- [ ] Avatar - Image, fallback, sizes
+- [x] **Badge** - ✅ All variants, sizes, with icons, status, notification, RTL, custom colors
+- [x] **Avatar** - ✅ Image, fallback, sizes, groups, with profile, RTL examples
+- [x] **Label** - ✅ With input, required, helper text, disabled, horizontal, forms, RTL
+- [x] **Textarea** - ✅ All height options, character count, validation, auto-expand, forms, RTL
 - [ ] Separator - Horizontal, vertical
 - [ ] Alert - Variants, with icon
 - [ ] Tooltip - Positions, RTL
@@ -198,17 +198,18 @@ vite@7.3.0
 - [ ] Workflow Canvas - Visual editor
 
 ### Story Template
-Each story should include:
-- ✅ Default example
-- ✅ All variants
-- ✅ Different sizes
-- ✅ Disabled state
-- ✅ Error state (if applicable)
-- ✅ RTL example
-- ✅ Arabic text example (if text component)
-- ✅ Interactive controls
+Each component should include 8-15 stories:
+- ✅ Default example (with Controls for variants)
+- ✅ 1-2 meaningful use case examples (WithIcon, StatusIndicator, etc.)
+- ✅ 1 RTL example (with Controls for variants)
+- ✅ "All Variants" showcase story
+- ✅ "All Sizes" showcase story (if applicable)
+- ✅ Additional "All..." stories for comprehensive display
+- ✅ Real-world usage patterns (NotificationCount, FormExample, etc.)
+- ✅ Interactive controls on individual stories
 - ✅ Accessibility notes
 - ✅ Code snippets
+- ✅ Examples from `/app/(docs)/components/[name]/page.tsx`
 
 ---
 
@@ -298,7 +299,9 @@ Each story should include:
 ## 📋 Quality Checklist
 
 Before marking a component story as "complete":
-- [ ] All variants demonstrated
+- [ ] All variants demonstrated (via showcase stories + Controls)
+- [ ] **8-15 stories total** (not 30+)
+- [ ] **Includes "All..." showcase stories** for comprehensive view
 - [ ] RTL behavior shown
 - [ ] Arabic text example included
 - [ ] Interactive controls work
@@ -307,6 +310,7 @@ Before marking a component story as "complete":
 - [ ] Dark mode: Works in all themes
 - [ ] Documentation: Props documented
 - [ ] Code: Copy-paste ready examples
+- [ ] Examples copied from `/app/(docs)/components/[name]/page.tsx`
 
 ---
 
@@ -352,6 +356,15 @@ Before marking a component story as "complete":
   - Use dedicated ButtonArrow component for navigation
 - ✅ **Auto-Switch Toolbar**: RTL stories must include `globals: { direction: 'rtl', locale: 'ar' }`
   - This makes Direction and Locale toolbars update automatically
+- ✅ **Use Existing Documentation**: All stories must use examples from `/app/(docs)/components/[name]/page.tsx`
+  - DO NOT invent new examples
+  - Copy exact text, data, and Arabic translations
+  - Ensures RTL-tested, validated content
+- ✅ **Focus on Meaningful Stories**: Don't create 30+ stories for every variant permutation
+  - Aim for 8-15 stories per component
+  - Use "All..." showcase stories for comprehensive variant display
+  - Let users explore variants via Controls panel
+  - Keeps sidebar clean and maintainable at scale
 
 ### Open Questions
 - Should we auto-generate stories from TypeScript types?
@@ -360,9 +373,10 @@ Before marking a component story as "complete":
 
 ---
 
-**Last Updated**: 2025-12-22 15:30 UTC
+**Last Updated**: 2025-12-22 16:00 UTC
 **Maintained By**: Development Team
 **Status**: 🚀 Active Development - Foundation Complete!
+**Latest Change**: Added Rule #4 - Focus on Meaningful Stories (8-15 stories per component)
 
 ---
 
@@ -373,20 +387,26 @@ Before marking a component story as "complete":
 ✅ **4 Theme Variants** - Minimal, Futuristic, Cozy, Artistic (all working)
 ✅ **Light/Dark Mode** - Complete theme support across all variants
 ✅ **Bilingual Ready** - English/Arabic locale switching
-✅ **3 Component Stories** - Button, Input, Card (comprehensive examples)
+✅ **7 Component Stories** - Button, Input, Card, Badge, Avatar, Label, Textarea (comprehensive examples)
+✅ **Story Guidelines** - 4 critical rules documented for maintainability
+✅ **Streamlined Approach** - 8-15 stories per component philosophy
 ✅ **Accessibility Testing** - Built-in a11y addon active on all stories
 ✅ **Auto Documentation** - Props tables and MDX support configured
 
 ### 🎯 Current Focus
-- Writing stories for remaining 71 components
-- Creating comprehensive examples for each variant
+- Writing stories for remaining 67 components
+- Following 8-15 stories per component guideline
+- Creating meaningful use cases + showcase stories
 - Documenting RTL-specific behaviors
 - Building GCC-specific component showcases
+- Using examples from `/app/(docs)/components/` pages
 
 ### 📍 Quick Stats
 - **Storybook Version**: 10.1.10
-- **Components Ready**: 3/74 (4%)
-- **Stories Written**: 45+ individual stories
+- **Components Ready**: 7/74 (9%)
+- **Stories Written**: 86+ individual stories
 - **Toolbar Controls**: 4 (Direction, Theme, Mode, Locale)
 - **Framework**: Next.js 14 + Vite
 - **Status**: Running at http://localhost:6006
+- **Story Guidelines**: 4 critical rules documented
+- **Target per Component**: 8-15 stories (focused + showcase)
