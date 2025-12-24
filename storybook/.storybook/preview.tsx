@@ -1,6 +1,7 @@
 import type { Preview } from '@storybook/nextjs-vite';
 import React from 'react';
 import { ThemeProvider } from 'next-themes';
+import { DirectionProvider } from '../../components/providers/direction-provider';
 import '../../styles/globals.css';
 
 // Apply theme to document
@@ -109,19 +110,22 @@ const preview: Preview = {
       const mode = context.globals.mode || 'light';
       const locale = context.globals.locale || 'en';
 
-      // Update document theme and mode (but NOT direction - that's story-specific)
+      // Update document attributes (direction, theme, mode, locale)
       React.useEffect(() => {
+        document.documentElement.setAttribute('dir', direction);
         document.documentElement.setAttribute('lang', locale);
         document.documentElement.classList.toggle('dark', mode === 'dark');
         applyThemeToDocument(theme);
-      }, [locale, mode, theme]);
+      }, [direction, locale, mode, theme]);
 
       return (
-        <ThemeProvider attribute="class" defaultTheme={mode} forcedTheme={mode} enableSystem={false}>
-          <div dir={direction} style={{ minHeight: '100%' }}>
-            <Story />
-          </div>
-        </ThemeProvider>
+        <DirectionProvider>
+          <ThemeProvider attribute="class" defaultTheme={mode} forcedTheme={mode} enableSystem={false}>
+            <div dir={direction} style={{ minHeight: '100%' }}>
+              <Story />
+            </div>
+          </ThemeProvider>
+        </DirectionProvider>
       );
     },
   ],

@@ -106,7 +106,7 @@ storybook/
 
 ## 🧩 Component Coverage
 
-### Current Status: 13/74 Components (18%)
+### Current Status: 17/74 Components (23%)
 
 #### ✅ Completed Stories
 - **Button** - All variants, sizes, states, RTL support, icons, loading (17 stories)
@@ -122,9 +122,13 @@ storybook/
 - **Kbd** - Single keys, combinations, all variants/sizes, in buttons, shortcuts panel, RTL (9 stories)
 - **Blockquote** - All variants (default, accent, subtle), with/without attribution, with citation, RTL (10 stories)
 - **Callout** - All 5 types (info, warning, error, success, note), with/without title, custom icon, RTL (13 stories)
+- **Checkbox** - Single, group, indeterminate, disabled, controlled, in forms, RTL (10 stories)
+- **Radio Group** - Vertical, horizontal, with description, disabled, controlled, in forms, RTL (11 stories)
+- **Select** - With label, grouped options, disabled, controlled, in forms, RTL (11 stories)
+- **Switch** - With label, settings panel, disabled, controlled, in forms, RTL (11 stories)
 
 #### 🚧 In Progress
-Working on remaining **61 components** across all categories.
+Working on remaining **58 components** across all categories.
 
 **Story Philosophy**: Each component includes 8-15 focused stories combining meaningful use cases, comprehensive showcase stories, and interactive Controls for variant exploration.
 
@@ -299,8 +303,8 @@ See **[STORYBOOK_ROADMAP.md](./STORYBOOK_ROADMAP.md)** for:
 ✅ Light/dark mode functional
 ✅ Custom toolbar controls active
 ✅ Accessibility testing enabled
-✅ 13 comprehensive component stories
-✅ 147+ individual story variants
+✅ 17 comprehensive component stories
+✅ 189+ individual story variants
 ✅ Story guidelines documented (4 critical rules)
 ✅ Streamlined story approach (8-15 stories per component)
 
