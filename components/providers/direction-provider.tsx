@@ -37,6 +37,25 @@ export function DirectionProvider({ children }: { children: React.ReactNode }) {
     if (document.documentElement.lang !== initialLocale) {
       document.documentElement.lang = initialLocale
     }
+
+    // Only observe external changes in Storybook environment (iframe check)
+    if (typeof window !== 'undefined' && window.parent !== window) {
+      const observer = new MutationObserver(() => {
+        const newDir = (document.documentElement.dir as Direction) || 'ltr'
+        const newLang = (document.documentElement.lang as 'en' | 'ar') || 'en'
+
+        // Use functional setState to avoid closure issues
+        setDirectionState(prevDir => prevDir !== newDir ? newDir : prevDir)
+        setLocaleState(prevLang => prevLang !== newLang ? newLang : prevLang)
+      })
+
+      observer.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ['dir', 'lang']
+      })
+
+      return () => observer.disconnect()
+    }
   }, [])
 
   const setDirection = React.useCallback((newDirection: Direction) => {

@@ -2,35 +2,18 @@ import * as React from 'react'
 import * as RadioGroupPrimitive from '@radix-ui/react-radio-group'
 import { Circle } from 'lucide-react'
 import { cn } from '../../lib/utils'
+import { useDirection } from '../providers/direction-provider'
 
 const RadioGroup = React.forwardRef<
   React.ElementRef<typeof RadioGroupPrimitive.Root>,
   React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Root>
 >(({ className, dir, ...props }, ref) => {
-  // Track document direction reactively
-  const [documentDir, setDocumentDir] = React.useState<'ltr' | 'rtl'>('ltr')
-
-  React.useEffect(() => {
-    // Set initial direction
-    setDocumentDir(document.documentElement.dir as 'ltr' | 'rtl' || 'ltr')
-
-    // Watch for changes
-    const observer = new MutationObserver(() => {
-      setDocumentDir(document.documentElement.dir as 'ltr' | 'rtl' || 'ltr')
-    })
-
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ['dir']
-    })
-
-    return () => observer.disconnect()
-  }, [])
+  const { direction } = useDirection()
 
   return (
     <RadioGroupPrimitive.Root
       className={cn('grid gap-2', className)}
-      dir={dir || documentDir}
+      dir={dir || direction}
       {...props}
       ref={ref}
     />

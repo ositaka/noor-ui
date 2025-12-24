@@ -6,10 +6,20 @@ import { Check, ChevronDown, ChevronUp } from 'lucide-react'
 import { cn } from '../../lib/utils'
 import { useDirection } from '../providers/direction-provider'
 
-const Select = ((props: any) => {
+const Select = React.forwardRef<
+  React.ElementRef<typeof SelectPrimitive.Root>,
+  React.ComponentPropsWithoutRef<typeof SelectPrimitive.Root>
+>(({ dir, ...props }, ref) => {
   const { direction } = useDirection()
-  return <SelectPrimitive.Root dir={direction} {...props} />
-}) as typeof SelectPrimitive.Root
+
+  return (
+    <SelectPrimitive.Root
+      dir={dir || direction}
+      {...props}
+      ref={ref}
+    />
+  )
+})
 Select.displayName = 'Select'
 
 const SelectGroup = SelectPrimitive.Group
