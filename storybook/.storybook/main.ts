@@ -33,7 +33,21 @@ const config: StorybookConfig = {
           '@/styles': resolve(__dirname, '../../styles'),
         },
       },
+      // Skip TypeScript checking for faster builds
+      esbuild: {
+        ...config.esbuild,
+        tsconfigRaw: {
+          compilerOptions: {
+            jsx: 'react-jsx',
+          },
+        },
+      },
     };
+  },
+
+  typescript: {
+    check: false,
+    reactDocgen: 'react-docgen-typescript',
   },
 
   core: {
