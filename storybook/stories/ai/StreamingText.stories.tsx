@@ -15,7 +15,7 @@ const meta = {
   title: 'AI/Streaming Text',
   component: StreamingText,
   parameters: {
-    layout: 'centered',
+    layout: 'centered'
   },
   tags: ['autodocs'],
   argTypes: {
@@ -25,8 +25,8 @@ const meta = {
     isStreaming: { control: 'boolean' },
     autoStart: { control: 'boolean' },
     onComplete: { control: false },
-    className: { control: 'text' },
-  },
+    className: { control: 'text' }
+  }
 } satisfies Meta<typeof StreamingText>;
 
 export default meta;
@@ -39,12 +39,12 @@ export const Default: Story = {
     speed: 30,
     showCursor: true,
     isStreaming: true,
-    autoStart: true,
+    autoStart: true
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
-  },
+    locale: 'en'
+  }
 };
 
 // Fast Speed
@@ -65,14 +65,11 @@ export const FastSpeed: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };
 
 // Slow Speed
@@ -93,14 +90,11 @@ export const SlowSpeed: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };
 
 // Without Cursor
@@ -122,14 +116,11 @@ export const WithoutCursor: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };
 
 // Long Text
@@ -150,14 +141,11 @@ export const LongText: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };
 
 // Chat Message Simulation
@@ -201,14 +189,11 @@ export const ChatMessageSimulation: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };
 
 // With Completion Callback
@@ -241,14 +226,11 @@ export const WithCompletionCallback: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };
 
 // Not Streaming (Instant)
@@ -269,14 +251,11 @@ export const NotStreaming: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };
 
 // RTL
@@ -297,12 +276,9 @@ export const RTL: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };

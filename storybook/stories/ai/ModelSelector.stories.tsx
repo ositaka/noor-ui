@@ -17,7 +17,7 @@ const meta = {
   title: 'AI/Model Selector',
   component: ModelSelector,
   parameters: {
-    layout: 'centered',
+    layout: 'centered'
   },
   tags: ['autodocs'],
   argTypes: {
@@ -27,8 +27,8 @@ const meta = {
     isRTL: { control: 'boolean' },
     placeholder: { control: 'text' },
     placeholderAr: { control: 'text' },
-    className: { control: false },
-  },
+    className: { control: false }
+  }
 } satisfies Meta<typeof ModelSelector>;
 
 export default meta;
@@ -38,11 +38,11 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     models: defaultModels,
-    value: 'gpt-4',
+    value: 'gpt-4'
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   render: (args) => {
     const [value, setValue] = useState(args.value || 'gpt-4');
@@ -58,10 +58,10 @@ export const Default: Story = {
   parameters: {
     docs: {
       story: {
-        inline: false,
-      },
-    },
-  },
+        inline: false
+      }
+    }
+  }
 };
 
 // With Default Models - from component page lines 214-219
@@ -87,17 +87,17 @@ export const WithDefaultModels: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Model selector with default AI models.',
-      },
-    },
-  },
+        story: 'Model selector with default AI models.'
+      }
+    }
+  }
 };
 
 // Model Specs Display - from component page lines 245-251
@@ -131,17 +131,17 @@ export const ModelSpecsDisplay: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Model selector showing detailed specifications for each model.',
-      },
-    },
-  },
+        story: 'Model selector showing detailed specifications for each model.'
+      }
+    }
+  }
 };
 
 // Custom Models - from component page lines 266-296
@@ -163,10 +163,10 @@ export const CustomModels: Story = {
                 specs: {
                   speed: 'fast' as const,
                   contextLength: 16000,
-                  pricing: '$0.001/1K tokens',
+                  pricing: '$0.001/1K tokens'
                 },
                 recommended: true,
-                icon: 'zap' as const,
+                icon: 'zap' as const
               },
               {
                 id: 'custom-model-2',
@@ -176,9 +176,9 @@ export const CustomModels: Story = {
                 specs: {
                   speed: 'medium' as const,
                   contextLength: 100000,
-                  pricing: '$0.01/1K tokens',
+                  pricing: '$0.01/1K tokens'
                 },
-                icon: 'brain' as const,
+                icon: 'brain' as const
               },
             ]}
             value="custom-model-1"
@@ -190,17 +190,17 @@ export const CustomModels: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Model selector with custom model definitions.',
-      },
-    },
-  },
+        story: 'Model selector with custom model definitions.'
+      }
+    }
+  }
 };
 
 // Controlled Component - from component page lines 311-322
@@ -229,17 +229,17 @@ export const ControlledComponent: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Controlled model selector with state tracking.',
-      },
-    },
-  },
+        story: 'Controlled model selector with state tracking.'
+      }
+    }
+  }
 };
 
 // All Providers
@@ -267,17 +267,17 @@ export const AllProviders: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Showcase of models grouped by provider.',
-      },
-    },
-  },
+        story: 'Showcase of models grouped by provider.'
+      }
+    }
+  }
 };
 
 // Speed Variants
@@ -310,17 +310,17 @@ export const SpeedVariants: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Models grouped by speed category.',
-      },
-    },
-  },
+        story: 'Models grouped by speed category.'
+      }
+    }
+  }
 };
 
 // RTL Default
@@ -343,17 +343,17 @@ export const RTLDefault: Story = {
   },
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Model selector in RTL with Arabic text.',
-      },
-    },
-  },
+        story: 'Model selector in RTL with Arabic text.'
+      }
+    }
+  }
 };
 
 // RTL With Selection
@@ -378,17 +378,17 @@ export const RTLWithSelection: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Model selector in RTL with a model selected.',
-      },
-    },
-  },
+        story: 'Model selector in RTL with a model selected.'
+      }
+    }
+  }
 };
 
 // RTL Custom Models
@@ -416,10 +416,10 @@ export const RTLCustomModels: Story = {
                   speedLabelAr: 'سريع',
                   contextLength: 16000,
                   pricing: '$0.001/1K',
-                  pricingAr: '٠٫٠٠١$ / ١٠٠٠ رمز',
+                  pricingAr: '٠٫٠٠١$ / ١٠٠٠ رمز'
                 },
                 recommended: true,
-                icon: 'zap' as const,
+                icon: 'zap' as const
               },
               {
                 id: 'custom-ar-2',
@@ -435,9 +435,9 @@ export const RTLCustomModels: Story = {
                   speedLabelAr: 'متوسط',
                   contextLength: 100000,
                   pricing: '$0.01/1K',
-                  pricingAr: '٠٫٠١$ / ١٠٠٠ رمز',
+                  pricingAr: '٠٫٠١$ / ١٠٠٠ رمز'
                 },
-                icon: 'brain' as const,
+                icon: 'brain' as const
               },
             ]}
             value="custom-ar-1"
@@ -450,15 +450,15 @@ export const RTLCustomModels: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Custom models with full Arabic translations in RTL.',
-      },
-    },
-  },
+        story: 'Custom models with full Arabic translations in RTL.'
+      }
+    }
+  }
 };

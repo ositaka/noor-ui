@@ -7,7 +7,7 @@ import {
   DialogTitle,
   DialogTrigger,
   DialogFooter,
-  DialogClose,
+  DialogClose
 } from '../../../components/ui/dialog';
 import { Button } from '../../../components/ui/button';
 import { Input } from '../../../components/ui/input';
@@ -28,20 +28,20 @@ const meta = {
   title: 'Overlay/Dialog',
   component: Dialog,
   parameters: {
-    layout: 'centered',
+    layout: 'centered'
   },
   tags: ['autodocs'],
   argTypes: {
     open: {
-      control: { type: 'boolean' },
+      control: { type: 'boolean' }
     },
     defaultOpen: {
-      control: { type: 'boolean' },
+      control: { type: 'boolean' }
     },
     onOpenChange: {
-      control: false,
-    },
-  },
+      control: false
+    }
+  }
 } satisfies Meta<typeof Dialog>;
 
 export default meta;
@@ -50,11 +50,11 @@ type Story = StoryObj<typeof meta>;
 // Default - Interactive playground with controls
 export const Default: Story = {
   args: {
-    defaultOpen: false,
+    defaultOpen: false
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   render: (args) => (
     <Dialog {...args}>
@@ -72,10 +72,10 @@ export const Default: Story = {
   parameters: {
     docs: {
       story: {
-        inline: false,
-      },
-    },
-  },
+        inline: false
+      }
+    }
+  }
 };
 
 // Basic Dialog - from component page lines 164-176
@@ -95,17 +95,17 @@ export const BasicDialog: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Simple dialog with title and description. No actions.',
-      },
-    },
-  },
+        story: 'Simple dialog with title and description. No actions.'
+      }
+    }
+  }
 };
 
 // With Form - from component page lines 228-253
@@ -138,17 +138,17 @@ export const WithForm: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Dialog with form inputs for editing profile information.',
-      },
-    },
-  },
+        story: 'Dialog with form inputs for editing profile information.'
+      }
+    }
+  }
 };
 
 // Confirmation Dialog - from component page lines 267-284
@@ -177,17 +177,17 @@ export const ConfirmationDialog: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Destructive confirmation dialog with Cancel and Delete buttons.',
-      },
-    },
-  },
+        story: 'Destructive confirmation dialog with Cancel and Delete buttons.'
+      }
+    }
+  }
 };
 
 // Settings Dialog - from component page lines 301-324
@@ -218,17 +218,17 @@ export const SettingsDialog: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Settings dialog with content and save/cancel actions.',
-      },
-    },
-  },
+        story: 'Settings dialog with content and save/cancel actions.'
+      }
+    }
+  }
 };
 
 // Controlled Dialog
@@ -261,17 +261,17 @@ export const ControlledDialog: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Dialog with controlled open state using React state.',
-      },
-    },
-  },
+        story: 'Dialog with controlled open state using React state.'
+      }
+    }
+  }
 };
 
 // Multiple Dialogs
@@ -316,17 +316,17 @@ export const MultipleDialogs: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Multiple independent dialog instances on the same page.',
-      },
-    },
-  },
+        story: 'Multiple independent dialog instances on the same page.'
+      }
+    }
+  }
 };
 
 // RTL Basic
@@ -346,17 +346,17 @@ export const RTLBasic: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Basic dialog in RTL with Arabic text. Close button positions on the left (end).',
-      },
-    },
-  },
+        story: 'Basic dialog in RTL with Arabic text. Close button positions on the left (end).'
+      }
+    }
+  }
 };
 
 // RTL With Form
@@ -389,17 +389,17 @@ export const RTLWithForm: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Dialog with form in RTL. Form layout and buttons align correctly.',
-      },
-    },
-  },
+        story: 'Dialog with form in RTL. Form layout and buttons align correctly.'
+      }
+    }
+  }
 };
 
 // RTL Confirmation
@@ -428,17 +428,17 @@ export const RTLConfirmation: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Confirmation dialog in RTL with Cancel and Delete buttons.',
-      },
-    },
-  },
+        story: 'Confirmation dialog in RTL with Cancel and Delete buttons.'
+      }
+    }
+  }
 };
 
 // RTL Settings
@@ -469,15 +469,15 @@ export const RTLSettings: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Settings dialog in RTL with Arabic text and proper button alignment.',
-      },
-    },
-  },
+        story: 'Settings dialog in RTL with Arabic text and proper button alignment.'
+      }
+    }
+  }
 };

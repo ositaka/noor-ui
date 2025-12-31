@@ -16,7 +16,7 @@ const meta = {
   title: 'AI/Workflow Node',
   component: WorkflowNode,
   parameters: {
-    layout: 'centered',
+    layout: 'centered'
   },
   tags: ['autodocs'],
   argTypes: {
@@ -29,11 +29,11 @@ const meta = {
     icon: { control: false },
     status: {
       control: { type: 'select' },
-      options: ['active', 'inactive', 'error', 'success'],
+      options: ['active', 'inactive', 'error', 'success']
     },
     isRTL: { control: 'boolean' },
-    children: { control: false },
-  },
+    children: { control: false }
+  }
 } satisfies Meta<typeof WorkflowNode>;
 
 export default meta;
@@ -47,14 +47,14 @@ export const Default: Story = {
         label: 'Email Trigger',
         description: 'When email received',
         type: 'trigger',
-        icon: Zap,
+        icon: Zap
       }}
     />
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
-  },
+    locale: 'en'
+  }
 };
 
 // Trigger Type - from code lines 118-123
@@ -67,7 +67,7 @@ export const TriggerType: Story = {
             label: 'Email Trigger',
             description: 'When email received',
             type: 'trigger',
-            icon: Zap,
+            icon: Zap
           }}
         />
       </CardContent>
@@ -75,14 +75,11 @@ export const TriggerType: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };
 
 // AI Type - from code lines 127-134
@@ -95,7 +92,7 @@ export const AIType: Story = {
             label: 'AI Analysis',
             description: 'Analyze email content',
             type: 'AI',
-            icon: Cpu,
+            icon: Cpu
           }}
         />
       </CardContent>
@@ -103,14 +100,11 @@ export const AIType: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };
 
 // Action Type - from code lines 138-145
@@ -123,7 +117,7 @@ export const ActionType: Story = {
             label: 'Send Output',
             description: 'Forward to Slack',
             type: 'action',
-            icon: FileOutput,
+            icon: FileOutput
           }}
         />
       </CardContent>
@@ -131,14 +125,11 @@ export const ActionType: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };
 
 // Active Status - from code lines 153-160
@@ -151,7 +142,7 @@ export const ActiveStatus: Story = {
             label: 'Active Task',
             description: 'Currently running',
             status: 'active',
-            icon: Zap,
+            icon: Zap
           }}
         />
       </CardContent>
@@ -159,14 +150,11 @@ export const ActiveStatus: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };
 
 // Success Status - from code lines 164-171
@@ -179,7 +167,7 @@ export const SuccessStatus: Story = {
             label: 'Completed Task',
             description: 'Finished successfully',
             status: 'success',
-            icon: Cpu,
+            icon: Cpu
           }}
         />
       </CardContent>
@@ -187,14 +175,11 @@ export const SuccessStatus: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };
 
 // Error Status - from code lines 175-182
@@ -207,7 +192,7 @@ export const ErrorStatus: Story = {
             label: 'Failed Task',
             description: 'Error occurred',
             status: 'error',
-            icon: AlertCircle,
+            icon: AlertCircle
           }}
         />
       </CardContent>
@@ -215,14 +200,11 @@ export const ErrorStatus: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };
 
 // RTL
@@ -239,7 +221,7 @@ export const RTL: Story = {
             type: 'trigger',
             typeAr: 'مشغل',
             icon: Zap,
-            isRTL: true,
+            isRTL: true
           }}
         />
       </CardContent>
@@ -247,12 +229,9 @@ export const RTL: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };

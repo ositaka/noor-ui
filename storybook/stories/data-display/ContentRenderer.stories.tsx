@@ -15,23 +15,23 @@ const meta = {
   title: 'Data Display/Content Renderer',
   component: ContentRenderer,
   parameters: {
-    layout: 'centered',
+    layout: 'centered'
   },
   tags: ['autodocs'],
   argTypes: {
     content: { control: 'text' },
     format: {
       control: { type: 'select' },
-      options: ['markdown', 'html', 'text'],
+      options: ['markdown', 'html', 'text']
     },
     dir: {
       control: { type: 'select' },
-      options: ['auto', 'ltr', 'rtl'],
+      options: ['auto', 'ltr', 'rtl']
     },
     enableCodeHighlight: { control: 'boolean' },
     enableGFM: { control: 'boolean' },
-    className: { control: 'text' },
-  },
+    className: { control: 'text' }
+  }
 } satisfies Meta<typeof ContentRenderer>;
 
 export default meta;
@@ -48,12 +48,12 @@ export const Default: Story = {
 </ul>
 <pre><code>const example = "code block";</code></pre>`,
     format: 'html',
-    dir: 'auto',
+    dir: 'auto'
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
-  },
+    locale: 'en'
+  }
 };
 
 // HTML Format - from page lines 112-115
@@ -81,14 +81,11 @@ export const HTMLFormat: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };
 
 // Markdown Format
@@ -123,14 +120,11 @@ console.log(example);
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };
 
 // Plain Text Format
@@ -155,14 +149,11 @@ No HTML or Markdown parsing is applied.`}
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };
 
 // With Code Highlighting
@@ -206,14 +197,11 @@ And a CSS example:
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };
 
 // GitHub Flavored Markdown
@@ -251,14 +239,11 @@ export const GitHubFlavoredMarkdown: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };
 
 // Long Content
@@ -312,14 +297,11 @@ This section wraps up the article with final thoughts and recommendations.`}
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };
 
 // LTR Explicit
@@ -349,14 +331,11 @@ The text flows from left to right.`}
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };
 
 // RTL Content - from AR i18n
@@ -383,14 +362,11 @@ export const RTLContent: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };
 
 // RTL Markdown
@@ -424,12 +400,9 @@ export const RTLMarkdown: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };

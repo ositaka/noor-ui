@@ -7,7 +7,7 @@ import {
   FormMessage,
   FormDescription,
   validators,
-  composeValidators,
+  composeValidators
 } from '../../../components/ui/form';
 import { Input } from '../../../components/ui/input';
 import { Button } from '../../../components/ui/button';
@@ -27,14 +27,14 @@ const meta = {
   title: 'Forms/Form',
   component: Form,
   parameters: {
-    layout: 'centered',
+    layout: 'centered'
   },
   tags: ['autodocs'],
   argTypes: {
     onSubmit: {
-      control: false,
-    },
-  },
+      control: false
+    }
+  }
 } satisfies Meta<typeof Form>;
 
 export default meta;
@@ -43,18 +43,18 @@ type Story = StoryObj<typeof meta>;
 // Default - Interactive playground with controls (hidden from stories list to avoid ID conflicts)
 export const Default: Story = {
   args: {
-    initialValues: { email: '' },
+    initialValues: { email: '' }
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   render: (args) => (
     <div className="w-full max-w-md">
       <Form
         {...args}
         validators={{
-          email: validators.required('Email is required'),
+          email: validators.required('Email is required')
         }}
         onSubmit={(values) => alert(JSON.stringify(values, null, 2))}
       >
@@ -82,10 +82,10 @@ export const Default: Story = {
   parameters: {
     docs: {
       story: {
-        inline: false,
-      },
-    },
-  },
+        inline: false
+      }
+    }
+  }
 };
 
 // Basic Form - from component page lines 164-211
@@ -96,7 +96,7 @@ export const BasicForm: Story = {
         initialValues={{ email: '', password: '' }}
         validators={{
           email: validators.required('Email is required'),
-          password: validators.minLength(6, 'Password must be at least 6 characters'),
+          password: validators.minLength(6, 'Password must be at least 6 characters')
         }}
         onSubmit={async (values) => {
           await new Promise((resolve) => setTimeout(resolve, 1000));
@@ -144,17 +144,17 @@ export const BasicForm: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Basic login form with email and password validation.',
-      },
-    },
-  },
+        story: 'Basic login form with email and password validation.'
+      }
+    }
+  }
 };
 
 // With Validation - from component page lines 239-286
@@ -168,7 +168,7 @@ export const WithValidation: Story = {
           email: composeValidators(
             validators.required('Email is required'),
             validators.email('Please enter a valid email address')
-          ),
+          )
         }}
         onSubmit={(values) => alert(JSON.stringify(values, null, 2))}
       >
@@ -211,17 +211,17 @@ export const WithValidation: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Form with composed validators. Email field uses both required and email validation.',
-      },
-    },
-  },
+        story: 'Form with composed validators. Email field uses both required and email validation.'
+      }
+    }
+  }
 };
 
 // With Select - from component page lines 300-332
@@ -231,7 +231,7 @@ export const WithSelect: Story = {
       <Form
         initialValues={{ country: '' }}
         validators={{
-          country: validators.required('Country is required'),
+          country: validators.required('Country is required')
         }}
         onSubmit={(values) => alert(`Selected: ${values.country}`)}
       >
@@ -265,17 +265,17 @@ export const WithSelect: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Form with Select component integration. Shows how to handle dropdown validation.',
-      },
-    },
-  },
+        story: 'Form with Select component integration. Shows how to handle dropdown validation.'
+      }
+    }
+  }
 };
 
 // Disabled State
@@ -311,17 +311,17 @@ export const DisabledState: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Form with disabled inputs and submit button.',
-      },
-    },
-  },
+        story: 'Form with disabled inputs and submit button.'
+      }
+    }
+  }
 };
 
 // RTL Example - from component page lines 476-498
@@ -331,7 +331,7 @@ export const RTLExample: Story = {
       <Form
         initialValues={{ email: '' }}
         validators={{
-          email: validators.required('البريد الإلكتروني مطلوب'),
+          email: validators.required('البريد الإلكتروني مطلوب')
         }}
         onSubmit={() => {}}
       >
@@ -355,17 +355,17 @@ export const RTLExample: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Form with Arabic labels and validation messages in RTL mode.',
-      },
-    },
-  },
+        story: 'Form with Arabic labels and validation messages in RTL mode.'
+      }
+    }
+  }
 };
 
 // RTL Basic Form
@@ -376,7 +376,7 @@ export const RTLBasicForm: Story = {
         initialValues={{ email: '', password: '' }}
         validators={{
           email: validators.required('البريد الإلكتروني مطلوب'),
-          password: validators.minLength(6, 'يجب أن تكون كلمة المرور 6 أحرف على الأقل'),
+          password: validators.minLength(6, 'يجب أن تكون كلمة المرور 6 أحرف على الأقل')
         }}
         onSubmit={async (values) => {
           await new Promise((resolve) => setTimeout(resolve, 1000));
@@ -424,17 +424,17 @@ export const RTLBasicForm: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Complete login form in Arabic with RTL support.',
-      },
-    },
-  },
+        story: 'Complete login form in Arabic with RTL support.'
+      }
+    }
+  }
 };
 
 // RTL With Validation
@@ -448,7 +448,7 @@ export const RTLWithValidation: Story = {
           email: composeValidators(
             validators.required('البريد الإلكتروني مطلوب'),
             validators.email('يرجى إدخال بريد إلكتروني صالح')
-          ),
+          )
         }}
         onSubmit={(values) => alert(JSON.stringify(values, null, 2))}
       >
@@ -491,17 +491,17 @@ export const RTLWithValidation: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Form with composed validators in Arabic, demonstrating RTL validation messages.',
-      },
-    },
-  },
+        story: 'Form with composed validators in Arabic, demonstrating RTL validation messages.'
+      }
+    }
+  }
 };
 
 // RTL With Select
@@ -511,7 +511,7 @@ export const RTLWithSelect: Story = {
       <Form
         initialValues={{ country: '' }}
         validators={{
-          country: validators.required('البلد مطلوب'),
+          country: validators.required('البلد مطلوب')
         }}
         onSubmit={(values) => alert(`المحدد: ${values.country}`)}
       >
@@ -545,15 +545,15 @@ export const RTLWithSelect: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Form with Select component in Arabic, showing proper RTL alignment.',
-      },
-    },
-  },
+        story: 'Form with Select component in Arabic, showing proper RTL alignment.'
+      }
+    }
+  }
 };

@@ -18,14 +18,14 @@ const meta = {
   title: 'Forms/Slider',
   component: Slider,
   parameters: {
-    layout: 'centered',
+    layout: 'centered'
   },
   tags: ['autodocs'],
   argTypes: {
     onValueChange: {
-      control: false,
-    },
-  },
+      control: false
+    }
+  }
 } satisfies Meta<typeof Slider>;
 
 export default meta;
@@ -36,11 +36,11 @@ export const Default: Story = {
   args: {
     defaultValue: [50],
     max: 100,
-    step: 1,
+    step: 1
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   render: (args) => (
     <div className="w-[300px]">
@@ -50,10 +50,10 @@ export const Default: Story = {
   parameters: {
     docs: {
       story: {
-        inline: false,
-      },
-    },
-  },
+        inline: false
+      }
+    }
+  }
 };
 
 // With Label - from component page lines 268-283
@@ -69,12 +69,11 @@ export const WithLabel: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-    docs: { disable: true },
-  },
+    controls: { disable: true }
+  }
 };
 
 // Different Ranges - from component page lines 286-302
@@ -94,17 +93,17 @@ export const DifferentRanges: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Slider with custom min and max values. Shows temperature from -10°C to 40°C.',
-      },
-    },
-  },
+        story: 'Slider with custom min and max values. Shows temperature from -10°C to 40°C.'
+      }
+    }
+  }
 };
 
 // Different Step Sizes - from component page lines 304-333
@@ -134,17 +133,17 @@ export const DifferentSteps: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Sliders with different step sizes. Step determines the increment for value changes.',
-      },
-    },
-  },
+        story: 'Sliders with different step sizes. Step determines the increment for value changes.'
+      }
+    }
+  }
 };
 
 // Disabled State - from component page lines 335-354
@@ -164,12 +163,11 @@ export const DisabledState: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-    docs: { disable: true },
-  },
+    controls: { disable: true }
+  }
 };
 
 // Volume Control - from component page lines 356-391
@@ -208,17 +206,17 @@ export const VolumeControl: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Interactive volume control with mute button and value display.',
-      },
-    },
-  },
+        story: 'Interactive volume control with mute button and value display.'
+      }
+    }
+  }
 };
 
 // Price Range - from component page lines 393-416
@@ -243,17 +241,17 @@ export const PriceRange: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Range slider with two thumbs for selecting a price range.',
-      },
-    },
-  },
+        story: 'Range slider with two thumbs for selecting a price range.'
+      }
+    }
+  }
 };
 
 // RTL Example
@@ -266,17 +264,17 @@ export const RTLExample: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Slider with Arabic label demonstrating RTL support. The slider direction automatically mirrors for RTL.',
-      },
-    },
-  },
+        story: 'Slider with Arabic label demonstrating RTL support. The slider direction automatically mirrors for RTL.'
+      }
+    }
+  }
 };
 
 // RTL With Label and Value
@@ -292,12 +290,11 @@ export const RTLWithLabel: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
-    controls: { disable: true },
-    docs: { disable: true },
-  },
+    controls: { disable: true }
+  }
 };
 
 // RTL Different Ranges
@@ -317,12 +314,11 @@ export const RTLDifferentRanges: Story = {
   },
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
-    controls: { disable: true },
-    docs: { disable: true },
-  },
+    controls: { disable: true }
+  }
 };
 
 // RTL Different Steps
@@ -347,12 +343,11 @@ export const RTLDifferentSteps: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
-    controls: { disable: true },
-    docs: { disable: true },
-  },
+    controls: { disable: true }
+  }
 };
 
 // RTL Volume Control
@@ -391,17 +386,17 @@ export const RTLVolumeControl: Story = {
   },
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Volume control in RTL mode with proper text alignment.',
-      },
-    },
-  },
+        story: 'Volume control in RTL mode with proper text alignment.'
+      }
+    }
+  }
 };
 
 // RTL Price Range
@@ -426,15 +421,15 @@ export const RTLPriceRange: Story = {
   },
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Range slider with two thumbs in RTL mode, demonstrating proper handle positioning.',
-      },
-    },
-  },
+        story: 'Range slider with two thumbs in RTL mode, demonstrating proper handle positioning.'
+      }
+    }
+  }
 };

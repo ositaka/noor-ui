@@ -20,20 +20,20 @@ const meta = {
   title: 'Overlay/Popover',
   component: Popover,
   parameters: {
-    layout: 'centered',
+    layout: 'centered'
   },
   tags: ['autodocs'],
   argTypes: {
     open: {
-      control: { type: 'boolean' },
+      control: { type: 'boolean' }
     },
     defaultOpen: {
-      control: { type: 'boolean' },
+      control: { type: 'boolean' }
     },
     onOpenChange: {
-      control: false,
-    },
-  },
+      control: false
+    }
+  }
 } satisfies Meta<typeof Popover>;
 
 export default meta;
@@ -42,11 +42,11 @@ type Story = StoryObj<typeof meta>;
 // Default - Interactive playground with controls
 export const Default: Story = {
   args: {
-    defaultOpen: false,
+    defaultOpen: false
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   render: (args) => (
     <Popover {...args}>
@@ -66,10 +66,10 @@ export const Default: Story = {
   parameters: {
     docs: {
       story: {
-        inline: false,
-      },
-    },
-  },
+        inline: false
+      }
+    }
+  }
 };
 
 // Basic Usage - from component page lines 177-189
@@ -91,17 +91,17 @@ export const BasicUsage: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Basic popover with title and description. Click the button to open.',
-      },
-    },
-  },
+        story: 'Basic popover with title and description. Click the button to open.'
+      }
+    }
+  }
 };
 
 // Position Top - from component page lines 218-225
@@ -118,17 +118,17 @@ export const PositionTop: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Popover positioned above the trigger button.',
-      },
-    },
-  },
+        story: 'Popover positioned above the trigger button.'
+      }
+    }
+  }
 };
 
 // Position Right - from component page lines 227-234
@@ -145,17 +145,17 @@ export const PositionRight: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Popover positioned to the right of the trigger button.',
-      },
-    },
-  },
+        story: 'Popover positioned to the right of the trigger button.'
+      }
+    }
+  }
 };
 
 // Position Bottom - from component page lines 236-243
@@ -172,17 +172,17 @@ export const PositionBottom: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Popover positioned below the trigger button (default).',
-      },
-    },
-  },
+        story: 'Popover positioned below the trigger button (default).'
+      }
+    }
+  }
 };
 
 // Position Left - from component page lines 245-252
@@ -199,17 +199,17 @@ export const PositionLeft: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Popover positioned to the left of the trigger button.',
-      },
-    },
-  },
+        story: 'Popover positioned to the left of the trigger button.'
+      }
+    }
+  }
 };
 
 // All Positions - from component page lines 217-253
@@ -255,17 +255,17 @@ export const AllPositions: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'All four positioning options: top, right, bottom, and left.',
-      },
-    },
-  },
+        story: 'All four positioning options: top, right, bottom, and left.'
+      }
+    }
+  }
 };
 
 // With Form - from component page lines 263-289
@@ -301,17 +301,17 @@ export const WithForm: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Popover with form inputs for settings. Shows width 320px and form controls.',
-      },
-    },
-  },
+        story: 'Popover with form inputs for settings. Shows width 320px and form controls.'
+      }
+    }
+  }
 };
 
 // RTL Basic
@@ -333,17 +333,17 @@ export const RTLBasic: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Basic popover in RTL with Arabic text. Content flows right-to-left.',
-      },
-    },
-  },
+        story: 'Basic popover in RTL with Arabic text. Content flows right-to-left.'
+      }
+    }
+  }
 };
 
 // RTL All Positions
@@ -389,17 +389,17 @@ export const RTLAllPositions: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'All four positioning options in RTL: top, right, bottom, left with automatic mirroring.',
-      },
-    },
-  },
+        story: 'All four positioning options in RTL: top, right, bottom, left with automatic mirroring.'
+      }
+    }
+  }
 };
 
 // RTL With Form
@@ -435,15 +435,15 @@ export const RTLWithForm: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Popover with form in RTL. All content and inputs flow right-to-left correctly.',
-      },
-    },
-  },
+        story: 'Popover with form in RTL. All content and inputs flow right-to-left correctly.'
+      }
+    }
+  }
 };

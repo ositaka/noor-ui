@@ -17,33 +17,33 @@ const meta = {
   title: 'Forms/Calendar',
   component: Calendar,
   parameters: {
-    layout: 'centered',
+    layout: 'centered'
   },
   tags: ['autodocs'],
   argTypes: {
     onSelect: {
-      control: false,
+      control: false
     },
     mode: {
       control: { type: 'select' },
-      options: ['single', 'range'],
+      options: ['single', 'range']
     },
     showHijri: {
-      control: { type: 'boolean' },
+      control: { type: 'boolean' }
     },
     showIslamicHolidays: {
-      control: { type: 'boolean' },
+      control: { type: 'boolean' }
     },
     disabled: {
-      control: false,
+      control: false
     },
     events: {
-      control: false,
+      control: false
     },
     getHijriDate: {
-      control: false,
-    },
-  },
+      control: false
+    }
+  }
 } satisfies Meta<typeof Calendar>;
 
 export default meta;
@@ -54,11 +54,11 @@ export const Default: Story = {
   args: {
     mode: 'single',
     showHijri: false,
-    showIslamicHolidays: false,
+    showIslamicHolidays: false
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   render: (args) => {
     const [selected, setSelected] = React.useState<Date>();
@@ -80,10 +80,10 @@ export const Default: Story = {
   parameters: {
     docs: {
       story: {
-        inline: false,
-      },
-    },
-  },
+        inline: false
+      }
+    }
+  }
 };
 
 // Basic Calendar - from component page lines 286-294
@@ -107,17 +107,17 @@ export const BasicCalendar: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Basic single date selection calendar with month navigation and "Today" button.',
-      },
-    },
-  },
+        story: 'Basic single date selection calendar with month navigation and "Today" button.'
+      }
+    }
+  }
 };
 
 // Range Selection - from component page lines 392-410
@@ -157,17 +157,17 @@ export const RangeSelection: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Date range selection with visual feedback. Click to set start date, click again to set end date.',
-      },
-    },
-  },
+        story: 'Date range selection with visual feedback. Click to set start date, click again to set end date.'
+      }
+    }
+  }
 };
 
 // With Hijri Dates - from component page lines 427-437
@@ -199,17 +199,17 @@ export const WithHijri: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Dual calendar display showing both Gregorian and Hijri dates simultaneously.',
-      },
-    },
-  },
+        story: 'Dual calendar display showing both Gregorian and Hijri dates simultaneously.'
+      }
+    }
+  }
 };
 
 // With Islamic Holidays - from component page lines 457-468
@@ -242,17 +242,17 @@ export const WithIslamicHolidays: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'NEW: Automatic highlighting of 10 major Islamic holidays including Ramadan, Eid al-Fitr, and Eid al-Adha.',
-      },
-    },
-  },
+        story: 'NEW: Automatic highlighting of 10 major Islamic holidays including Ramadan, Eid al-Fitr, and Eid al-Adha.'
+      }
+    }
+  }
 };
 
 // With Events - from component page lines 485-495
@@ -264,17 +264,17 @@ export const WithEvents: Story = {
       {
         date: new Date(2025, 10, 15),
         title: 'Team Meeting',
-        variant: 'primary' as const,
+        variant: 'primary' as const
       },
       {
         date: new Date(2025, 10, 20),
         title: 'Project Deadline',
-        variant: 'destructive' as const,
+        variant: 'destructive' as const
       },
       {
         date: new Date(2025, 10, 25),
         title: 'Eid Celebration',
-        variant: 'secondary' as const,
+        variant: 'secondary' as const
       },
     ];
 
@@ -302,17 +302,17 @@ export const WithEvents: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Calendar with custom event markers showing color-coded indicators and event legend.',
-      },
-    },
-  },
+        story: 'Calendar with custom event markers showing color-coded indicators and event legend.'
+      }
+    }
+  }
 };
 
 // Disabled Weekends - from component page lines 512-519
@@ -337,17 +337,17 @@ export const DisabledWeekends: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Calendar with weekends disabled using a function. Weekends cannot be selected.',
-      },
-    },
-  },
+        story: 'Calendar with weekends disabled using a function. Weekends cannot be selected.'
+      }
+    }
+  }
 };
 
 // RTL Example - Basic
@@ -372,17 +372,17 @@ export const RTLExample: Story = {
   },
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Basic calendar with Arabic locale showing localized month names and RTL navigation.',
-      },
-    },
-  },
+        story: 'Basic calendar with Arabic locale showing localized month names and RTL navigation.'
+      }
+    }
+  }
 };
 
 // RTL With Hijri
@@ -415,17 +415,17 @@ export const RTLWithHijri: Story = {
   },
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Dual calendar in Arabic with Hijri dates displayed alongside Gregorian dates.',
-      },
-    },
-  },
+        story: 'Dual calendar in Arabic with Hijri dates displayed alongside Gregorian dates.'
+      }
+    }
+  }
 };
 
 // RTL With Islamic Holidays
@@ -459,17 +459,17 @@ export const RTLWithIslamicHolidays: Story = {
   },
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Islamic holidays with Arabic names including Ramadan, Eid al-Fitr, Eid al-Adha, and more.',
-      },
-    },
-  },
+        story: 'Islamic holidays with Arabic names including Ramadan, Eid al-Fitr, Eid al-Adha, and more.'
+      }
+    }
+  }
 };
 
 // RTL Range Selection
@@ -510,15 +510,15 @@ export const RTLRangeSelection: Story = {
   },
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Date range selection in RTL mode with Arabic date formatting.',
-      },
-    },
-  },
+        story: 'Date range selection in RTL mode with Arabic date formatting.'
+      }
+    }
+  }
 };

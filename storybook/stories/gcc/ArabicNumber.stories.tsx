@@ -16,23 +16,23 @@ const meta = {
   title: 'GCC/Arabic Number',
   component: ArabicNumber,
   parameters: {
-    layout: 'centered',
+    layout: 'centered'
   },
   tags: ['autodocs'],
   argTypes: {
     value: { control: 'number' },
     format: {
       control: { type: 'select' },
-      options: ['number', 'currency', 'percentage', 'compact'],
+      options: ['number', 'currency', 'percentage', 'compact']
     },
     decimals: { control: 'number' },
     locale: {
       control: { type: 'select' },
-      options: ['en', 'ar'],
+      options: ['en', 'ar']
     },
     useArabicNumerals: { control: 'boolean' },
-    className: { control: false },
-  },
+    className: { control: false }
+  }
 } satisfies Meta<typeof ArabicNumber>;
 
 export default meta;
@@ -42,19 +42,19 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     value: 1234567.89,
-    decimals: 2,
+    decimals: 2
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     docs: {
       story: {
-        inline: false,
-      },
-    },
-  },
+        inline: false
+      }
+    }
+  }
 };
 
 // Western Numerals - from component page lines 60-80
@@ -83,17 +83,17 @@ export const WesternNumerals: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Numbers formatted with Western numerals (0-9).',
-      },
-    },
-  },
+        story: 'Numbers formatted with Western numerals (0-9).'
+      }
+    }
+  }
 };
 
 // Arabic Indic Numerals - from component page lines 82-118
@@ -139,17 +139,17 @@ export const ArabicIndicNumerals: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Numbers formatted with Arabic-Indic numerals (٠-٩).',
-      },
-    },
-  },
+        story: 'Numbers formatted with Arabic-Indic numerals (٠-٩).'
+      }
+    }
+  }
 };
 
 // Currency Format
@@ -174,17 +174,17 @@ export const CurrencyFormat: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Currency formatting in both Western and Arabic numerals.',
-      },
-    },
-  },
+        story: 'Currency formatting in both Western and Arabic numerals.'
+      }
+    }
+  }
 };
 
 // Percentage Format
@@ -209,17 +209,17 @@ export const PercentageFormat: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Percentage formatting with Western and Arabic numerals.',
-      },
-    },
-  },
+        story: 'Percentage formatting with Western and Arabic numerals.'
+      }
+    }
+  }
 };
 
 // Compact Format
@@ -244,17 +244,17 @@ export const CompactFormat: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Compact notation for large numbers (1.2M, 3.4K, etc.).',
-      },
-    },
-  },
+        story: 'Compact notation for large numbers (1.2M, 3.4K, etc.).'
+      }
+    }
+  }
 };
 
 // All Formats
@@ -281,17 +281,17 @@ export const AllFormats: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Showcase of all number formatting options.',
-      },
-    },
-  },
+        story: 'Showcase of all number formatting options.'
+      }
+    }
+  }
 };
 
 // RTL Arabic Numerals
@@ -337,17 +337,17 @@ export const RTLArabicNumerals: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Arabic-Indic numerals in RTL layout with Arabic locale.',
-      },
-    },
-  },
+        story: 'Arabic-Indic numerals in RTL layout with Arabic locale.'
+      }
+    }
+  }
 };
 
 // RTL All Formats
@@ -374,15 +374,15 @@ export const RTLAllFormats: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'All formats in RTL with Arabic-Indic numerals.',
-      },
-    },
-  },
+        story: 'All formats in RTL with Arabic-Indic numerals.'
+      }
+    }
+  }
 };

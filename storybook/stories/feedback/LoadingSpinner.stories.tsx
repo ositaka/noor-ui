@@ -13,17 +13,17 @@ const meta = {
   title: 'Feedback/Loading Spinner',
   component: LoadingSpinner,
   parameters: {
-    layout: 'centered',
+    layout: 'centered'
   },
   tags: ['autodocs'],
   argTypes: {
     size: {
       control: { type: 'select' },
-      options: ['sm', 'md', 'lg'],
+      options: ['sm', 'md', 'lg']
     },
     text: { control: 'text' },
-    className: { control: 'text' },
-  },
+    className: { control: 'text' }
+  }
 } satisfies Meta<typeof LoadingSpinner>;
 
 export default meta;
@@ -32,12 +32,12 @@ type Story = StoryObj<typeof meta>;
 // Default
 export const Default: Story = {
   args: {
-    size: 'md',
+    size: 'md'
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
-  },
+    locale: 'en'
+  }
 };
 
 // Small Size
@@ -55,14 +55,11 @@ export const SmallSize: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };
 
 // Medium Size
@@ -80,14 +77,11 @@ export const MediumSize: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };
 
 // Large Size
@@ -105,14 +99,11 @@ export const LargeSize: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };
 
 // With Text
@@ -126,14 +117,11 @@ export const WithText: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };
 
 // All Sizes Showcase
@@ -162,14 +150,11 @@ export const AllSizes: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };
 
 // In Content
@@ -187,14 +172,11 @@ export const InContent: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };
 
 // Full Page Loading
@@ -206,14 +188,11 @@ export const FullPageLoading: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };
 
 // RTL
@@ -231,12 +210,9 @@ export const RTL: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };

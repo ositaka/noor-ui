@@ -14,9 +14,9 @@ const meta = {
   title: 'Basic/Label',
   component: Label,
   parameters: {
-    layout: 'centered',
+    layout: 'centered'
   },
-  tags: ['autodocs'],
+  tags: ['autodocs']
 } satisfies Meta<typeof Label>;
 
 export default meta;
@@ -26,18 +26,18 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     children: 'Email Address',
-    htmlFor: 'preview-input',
+    htmlFor: 'preview-input'
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   render: (args) => (
     <div className="w-full max-w-sm space-y-2">
       <Label {...args} />
       <Input id="preview-input" type="email" placeholder="name@example.com" />
     </div>
-  ),
+  )
 };
 
 // With Input - from component page lines 224-227
@@ -50,11 +50,11 @@ export const WithInput: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-  },
+    controls: { disable: true }
+  }
 };
 
 // Required Field - from component page lines 240-245
@@ -69,11 +69,11 @@ export const RequiredField: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-  },
+    controls: { disable: true }
+  }
 };
 
 // With Helper Text - from component page lines 258-263
@@ -89,11 +89,11 @@ export const WithHelperText: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-  },
+    controls: { disable: true }
+  }
 };
 
 // Disabled State - from component page lines 277-283
@@ -109,11 +109,11 @@ export const DisabledState: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-  },
+    controls: { disable: true }
+  }
 };
 
 // Horizontal Layout - from component page lines 296-309
@@ -136,11 +136,11 @@ export const HorizontalLayout: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-  },
+    controls: { disable: true }
+  }
 };
 
 // Complete Form - from component page lines 322-346
@@ -175,11 +175,11 @@ export const CompleteForm: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-  },
+    controls: { disable: true }
+  }
 };
 
 // Custom Styling - from component page lines 360-373
@@ -202,11 +202,11 @@ export const CustomStyling: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-  },
+    controls: { disable: true }
+  }
 };
 
 // RTL Example - from component page lines 460-465 and 470-475
@@ -219,16 +219,16 @@ export const RTLExample: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       description: {
-        story: 'Label with Arabic text demonstrating RTL support. Automatically switches to RTL mode.',
-      },
-    },
-  },
+        story: 'Label with Arabic text demonstrating RTL support. Automatically switches to RTL mode.'
+      }
+    }
+  }
 };
 
 // RTL With Helper Text
@@ -244,16 +244,16 @@ export const RTLWithHelperText: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       description: {
-        story: 'Password field with Arabic label and helper text in RTL mode.',
-      },
-    },
-  },
+        story: 'Password field with Arabic label and helper text in RTL mode.'
+      }
+    }
+  }
 };
 
 // RTL Form
@@ -288,14 +288,14 @@ export const RTLForm: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       description: {
-        story: 'Complete form with Arabic labels in RTL mode.',
-      },
-    },
-  },
+        story: 'Complete form with Arabic labels in RTL mode.'
+      }
+    }
+  }
 };

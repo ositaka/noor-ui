@@ -5,7 +5,7 @@ import {
   CardDescription,
   CardFooter,
   CardHeader,
-  CardTitle,
+  CardTitle
 } from '../../../components/ui/card';
 import { Button } from '../../../components/ui/button';
 import { Badge } from '../../../components/ui/badge';
@@ -15,9 +15,9 @@ const meta = {
   title: 'Basic/Card',
   component: Card,
   parameters: {
-    layout: 'centered',
+    layout: 'centered'
   },
-  tags: ['autodocs'],
+  tags: ['autodocs']
 } satisfies Meta<typeof Card>;
 
 export default meta;
@@ -36,13 +36,13 @@ export const Default: Story = {
           <p>Card content area. Add any content here.</p>
         </CardContent>
       </>
-    ),
+    )
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
-  render: (args) => <Card {...args} className="w-[350px]" />,
+  render: (args) => <Card {...args} className="w-[350px]" />
 };
 
 // With Footer
@@ -63,8 +63,8 @@ export const WithFooter: Story = {
     </Card>
   ),
   parameters: {
-    controls: { disable: true },
-  },
+    controls: { disable: true }
+  }
 };
 
 // Notification Card
@@ -94,8 +94,8 @@ export const NotificationCard: Story = {
     </Card>
   ),
   parameters: {
-    controls: { disable: true },
-  },
+    controls: { disable: true }
+  }
 };
 
 // Stats Card
@@ -115,8 +115,8 @@ export const StatsCard: Story = {
     </Card>
   ),
   parameters: {
-    controls: { disable: true },
-  },
+    controls: { disable: true }
+  }
 };
 
 // Product Card
@@ -147,8 +147,8 @@ export const ProductCard: Story = {
     </Card>
   ),
   parameters: {
-    controls: { disable: true },
-  },
+    controls: { disable: true }
+  }
 };
 
 // Article Card
@@ -186,8 +186,8 @@ export const ArticleCard: Story = {
     </Card>
   ),
   parameters: {
-    controls: { disable: true },
-  },
+    controls: { disable: true }
+  }
 };
 
 // RTL Card
@@ -209,16 +209,16 @@ export const RTLCard: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       description: {
-        story: 'Card with Arabic content demonstrating RTL support. Automatically switches to RTL mode.',
-      },
-    },
-  },
+        story: 'Card with Arabic content demonstrating RTL support. Automatically switches to RTL mode.'
+      }
+    }
+  }
 };
 
 // RTL Product Card
@@ -250,16 +250,16 @@ export const RTLProductCard: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       description: {
-        story: 'Product card with Arabic text showing proper RTL layout. Automatically switches to RTL mode.',
-      },
-    },
-  },
+        story: 'Product card with Arabic text showing proper RTL layout. Automatically switches to RTL mode.'
+      }
+    }
+  }
 };
 
 // Multiple Cards
@@ -300,6 +300,6 @@ export const CardGrid: Story = {
     </div>
   ),
   parameters: {
-    controls: { disable: true },
-  },
+    controls: { disable: true }
+  }
 };

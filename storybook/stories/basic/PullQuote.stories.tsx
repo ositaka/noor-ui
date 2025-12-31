@@ -15,16 +15,16 @@ const meta = {
   title: 'Basic/Pull Quote',
   component: PullQuote,
   parameters: {
-    layout: 'centered',
+    layout: 'centered'
   },
   tags: ['autodocs'],
   argTypes: {
     align: {
       control: { type: 'select' },
-      options: ['left', 'center', 'right'],
+      options: ['left', 'center', 'right']
     },
-    children: { control: 'text' },
-  },
+    children: { control: 'text' }
+  }
 } satisfies Meta<typeof PullQuote>;
 
 export default meta;
@@ -34,12 +34,12 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     align: 'center',
-    children: 'The pen is mightier than the sword.',
+    children: 'The pen is mightier than the sword.'
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
-  },
+    locale: 'en'
+  }
 };
 
 // Center Aligned
@@ -58,14 +58,11 @@ export const CenterAligned: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };
 
 // Left Aligned
@@ -84,14 +81,11 @@ export const LeftAligned: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };
 
 // Right Aligned
@@ -110,14 +104,11 @@ export const RightAligned: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };
 
 // All Alignments
@@ -131,14 +122,11 @@ export const AllAlignments: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };
 
 // RTL
@@ -155,12 +143,9 @@ export const RTL: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };

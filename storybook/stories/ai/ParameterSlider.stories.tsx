@@ -17,7 +17,7 @@ const meta = {
   title: 'AI/Parameter Slider',
   component: ParameterSlider,
   parameters: {
-    layout: 'centered',
+    layout: 'centered'
   },
   tags: ['autodocs'],
   argTypes: {
@@ -34,8 +34,8 @@ const meta = {
     presets: { control: false },
     showValue: { control: 'boolean' },
     isRTL: { control: 'boolean' },
-    className: { control: false },
-  },
+    className: { control: false }
+  }
 } satisfies Meta<typeof ParameterSlider>;
 
 export default meta;
@@ -49,11 +49,11 @@ export const Default: Story = {
     min: 0,
     max: 2,
     step: 0.1,
-    value: 0.7,
+    value: 0.7
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   render: (args) => {
     const [value, setValue] = useState(args.value);
@@ -66,10 +66,10 @@ export const Default: Story = {
   parameters: {
     docs: {
       story: {
-        inline: false,
-      },
-    },
-  },
+        inline: false
+      }
+    }
+  }
 };
 
 // With Presets - from component page lines 302-314
@@ -97,17 +97,17 @@ export const WithPresets: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Temperature slider with Precise, Balanced, and Creative presets.',
-      },
-    },
-  },
+        story: 'Temperature slider with Precise, Balanced, and Creative presets.'
+      }
+    }
+  }
 };
 
 // Custom Presets - from component page lines 328-344
@@ -140,17 +140,17 @@ export const CustomPresets: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Max tokens slider with custom Short/Medium/Long presets.',
-      },
-    },
-  },
+        story: 'Max tokens slider with custom Short/Medium/Long presets.'
+      }
+    }
+  }
 };
 
 // Multiple Parameters - from component page lines 359-401
@@ -206,17 +206,17 @@ export const MultipleParameters: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Multiple AI parameters configured together.',
-      },
-    },
-  },
+        story: 'Multiple AI parameters configured together.'
+      }
+    }
+  }
 };
 
 // Without Presets - from component page lines 415-426
@@ -240,17 +240,17 @@ export const WithoutPresets: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Slider without preset buttons.',
-      },
-    },
-  },
+        story: 'Slider without preset buttons.'
+      }
+    }
+  }
 };
 
 // All Preset States
@@ -280,17 +280,17 @@ export const AllPresetStates: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Showcase of all temperature preset states.',
-      },
-    },
-  },
+        story: 'Showcase of all temperature preset states.'
+      }
+    }
+  }
 };
 
 // Without Value Display
@@ -318,17 +318,17 @@ export const WithoutValueDisplay: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Slider with value badge hidden.',
-      },
-    },
-  },
+        story: 'Slider with value badge hidden.'
+      }
+    }
+  }
 };
 
 // RTL Temperature
@@ -355,17 +355,17 @@ export const RTLTemperature: Story = {
   },
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Temperature slider in RTL with Arabic text and presets.',
-      },
-    },
-  },
+        story: 'Temperature slider in RTL with Arabic text and presets.'
+      }
+    }
+  }
 };
 
 // RTL Multiple Parameters
@@ -430,17 +430,17 @@ export const RTLMultipleParameters: Story = {
   },
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Multiple parameters in RTL with full Arabic translations.',
-      },
-    },
-  },
+        story: 'Multiple parameters in RTL with full Arabic translations.'
+      }
+    }
+  }
 };
 
 // RTL With Custom Presets
@@ -494,15 +494,15 @@ export const RTLWithCustomPresets: Story = {
   },
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Custom presets with full Arabic translations in RTL.',
-      },
-    },
-  },
+        story: 'Custom presets with full Arabic translations in RTL.'
+      }
+    }
+  }
 };

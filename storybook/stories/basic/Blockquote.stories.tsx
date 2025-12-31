@@ -14,9 +14,9 @@ const meta = {
   title: 'Basic/Blockquote',
   component: Blockquote,
   parameters: {
-    layout: 'centered',
+    layout: 'centered'
   },
-  tags: ['autodocs'],
+  tags: ['autodocs']
 } satisfies Meta<typeof Blockquote>;
 
 export default meta;
@@ -28,17 +28,17 @@ export const Default: Story = {
     children: 'The important thing is not to stop questioning. Curiosity has its own reason for existing.',
     author: 'Albert Einstein',
     source: 'On Science',
-    variant: 'default',
+    variant: 'default'
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   render: (args) => (
     <div className="w-full max-w-2xl">
       <Blockquote {...args} />
     </div>
-  ),
+  )
 };
 
 // Accent Variant - from component page lines 118-121
@@ -52,11 +52,11 @@ export const AccentVariant: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-  },
+    controls: { disable: true }
+  }
 };
 
 // Subtle Variant - from component page lines 129-132
@@ -70,11 +70,11 @@ export const SubtleVariant: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-  },
+    controls: { disable: true }
+  }
 };
 
 // Without Attribution
@@ -88,11 +88,11 @@ export const WithoutAttribution: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-  },
+    controls: { disable: true }
+  }
 };
 
 // With Citation Link
@@ -111,16 +111,16 @@ export const WithCitationLink: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       description: {
-        story: 'Blockquote with clickable citation link. The source becomes a clickable link when cite prop is provided.',
-      },
-    },
-  },
+        story: 'Blockquote with clickable citation link. The source becomes a clickable link when cite prop is provided.'
+      }
+    }
+  }
 };
 
 // All Variants - showcase all blockquote types at once
@@ -142,11 +142,11 @@ export const AllVariants: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-  },
+    controls: { disable: true }
+  }
 };
 
 // RTL Example (Default) - with Arabic quote
@@ -160,16 +160,16 @@ export const RTLExample: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       description: {
-        story: 'Blockquote with Arabic text demonstrating RTL support. Border aligns to the start (right in RTL). Automatically switches to RTL mode.',
-      },
-    },
-  },
+        story: 'Blockquote with Arabic text demonstrating RTL support. Border aligns to the start (right in RTL). Automatically switches to RTL mode.'
+      }
+    }
+  }
 };
 
 // RTL Accent
@@ -183,16 +183,16 @@ export const RTLAccent: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       description: {
-        story: 'Accent variant with Arabic text in RTL mode. Quote icon aligns correctly to the end (left in RTL).',
-      },
-    },
-  },
+        story: 'Accent variant with Arabic text in RTL mode. Quote icon aligns correctly to the end (left in RTL).'
+      }
+    }
+  }
 };
 
 // RTL Subtle
@@ -206,16 +206,16 @@ export const RTLSubtle: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       description: {
-        story: 'Subtle variant with Arabic text in RTL mode.',
-      },
-    },
-  },
+        story: 'Subtle variant with Arabic text in RTL mode.'
+      }
+    }
+  }
 };
 
 // RTL All Variants
@@ -237,14 +237,14 @@ export const RTLAllVariants: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       description: {
-        story: 'All blockquote variants with Arabic text demonstrating complete RTL support.',
-      },
-    },
-  },
+        story: 'All blockquote variants with Arabic text demonstrating complete RTL support.'
+      }
+    }
+  }
 };

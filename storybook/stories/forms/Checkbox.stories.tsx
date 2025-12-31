@@ -18,14 +18,14 @@ const meta = {
   title: 'Forms/Checkbox',
   component: Checkbox,
   parameters: {
-    layout: 'centered',
+    layout: 'centered'
   },
   tags: ['autodocs'],
   argTypes: {
     onCheckedChange: {
-      control: false,
-    },
-  },
+      control: false
+    }
+  }
 } satisfies Meta<typeof Checkbox>;
 
 export default meta;
@@ -34,11 +34,11 @@ type Story = StoryObj<typeof meta>;
 // Default - Interactive playground with controls (hidden from stories list to avoid ID conflicts)
 export const Default: Story = {
   args: {
-    id: 'default',
+    id: 'default'
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   render: (args) => (
     <div className="flex items-center gap-2">
@@ -49,10 +49,10 @@ export const Default: Story = {
   parameters: {
     docs: {
       story: {
-        inline: false,
-      },
-    },
-  },
+        inline: false
+      }
+    }
+  }
 };
 
 // With Label - from component page lines 292-303
@@ -75,11 +75,11 @@ export const WithLabel: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-  },
+    controls: { disable: true }
+  }
 };
 
 // Indeterminate State - from component page lines 316-368
@@ -88,7 +88,7 @@ export const IndeterminateState: Story = {
     const [checkedItems, setCheckedItems] = React.useState({
       item1: false,
       item2: false,
-      item3: false,
+      item3: false
     });
 
     const allChecked = Object.values(checkedItems).every(Boolean);
@@ -106,7 +106,7 @@ export const IndeterminateState: Story = {
               setCheckedItems({
                 item1: newValue,
                 item2: newValue,
-                item3: newValue,
+                item3: newValue
               });
             }}
           />
@@ -152,16 +152,16 @@ export const IndeterminateState: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       description: {
-        story: 'Demonstrates the indeterminate state (mixed) used for "Select All" functionality. When some but not all items are checked, the parent checkbox shows an indeterminate state.',
-      },
-    },
-  },
+        story: 'Demonstrates the indeterminate state (mixed) used for "Select All" functionality. When some but not all items are checked, the parent checkbox shows an indeterminate state.'
+      }
+    }
+  }
 };
 
 // Disabled - from component page lines 380-387
@@ -180,11 +180,11 @@ export const Disabled: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-  },
+    controls: { disable: true }
+  }
 };
 
 // Controlled - from component page lines 400-415
@@ -213,16 +213,16 @@ export const Controlled: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       description: {
-        story: 'Controlled checkbox with external state management. The checkbox state can be toggled programmatically via a button.',
-      },
-    },
-  },
+        story: 'Controlled checkbox with external state management. The checkbox state can be toggled programmatically via a button.'
+      }
+    }
+  }
 };
 
 // In Form - from component page lines 436-451
@@ -257,16 +257,16 @@ export const InForm: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       description: {
-        story: 'Checkboxes in a form with name and value attributes for form submission. The last checkbox is required.',
-      },
-    },
-  },
+        story: 'Checkboxes in a form with name and value attributes for form submission. The last checkbox is required.'
+      }
+    }
+  }
 };
 
 // RTL Example
@@ -285,16 +285,16 @@ export const RTLExample: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       description: {
-        story: 'Checkboxes with Arabic labels demonstrating RTL support. Checkbox and label maintain proper spacing and alignment. Automatically switches to RTL mode.',
-      },
-    },
-  },
+        story: 'Checkboxes with Arabic labels demonstrating RTL support. Checkbox and label maintain proper spacing and alignment. Automatically switches to RTL mode.'
+      }
+    }
+  }
 };
 
 // RTL Indeterminate
@@ -303,7 +303,7 @@ export const RTLIndeterminate: Story = {
     const [checkedItems, setCheckedItems] = React.useState({
       item1: false,
       item2: false,
-      item3: false,
+      item3: false
     });
 
     const allChecked = Object.values(checkedItems).every(Boolean);
@@ -321,7 +321,7 @@ export const RTLIndeterminate: Story = {
               setCheckedItems({
                 item1: newValue,
                 item2: newValue,
-                item3: newValue,
+                item3: newValue
               });
             }}
           />
@@ -367,16 +367,16 @@ export const RTLIndeterminate: Story = {
   },
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       description: {
-        story: 'Indeterminate state with Arabic text in RTL mode. The "Select All" functionality works perfectly in RTL.',
-      },
-    },
-  },
+        story: 'Indeterminate state with Arabic text in RTL mode. The "Select All" functionality works perfectly in RTL.'
+      }
+    }
+  }
 };
 
 // RTL Disabled
@@ -395,16 +395,16 @@ export const RTLDisabled: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       description: {
-        story: 'Disabled checkboxes with Arabic labels in RTL mode.',
-      },
-    },
-  },
+        story: 'Disabled checkboxes with Arabic labels in RTL mode.'
+      }
+    }
+  }
 };
 
 // RTL In Form
@@ -439,14 +439,14 @@ export const RTLInForm: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       description: {
-        story: 'Complete form with checkboxes in Arabic, demonstrating RTL support in form contexts.',
-      },
-    },
-  },
+        story: 'Complete form with checkboxes in Arabic, demonstrating RTL support in form contexts.'
+      }
+    }
+  }
 };

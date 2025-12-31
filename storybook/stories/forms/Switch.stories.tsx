@@ -18,14 +18,14 @@ const meta = {
   title: 'Forms/Switch',
   component: Switch,
   parameters: {
-    layout: 'centered',
+    layout: 'centered'
   },
   tags: ['autodocs'],
   argTypes: {
     onCheckedChange: {
-      control: false,
-    },
-  },
+      control: false
+    }
+  }
 } satisfies Meta<typeof Switch>;
 
 export default meta;
@@ -34,11 +34,11 @@ type Story = StoryObj<typeof meta>;
 // Default - Interactive playground with controls (hidden from stories list to avoid ID conflicts)
 export const Default: Story = {
   args: {
-    id: 'default',
+    id: 'default'
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   render: (args) => (
     <div className="flex items-center gap-2">
@@ -49,10 +49,10 @@ export const Default: Story = {
   parameters: {
     docs: {
       story: {
-        inline: false,
-      },
-    },
-  },
+        inline: false
+      }
+    }
+  }
 };
 
 // With Label - from component page lines 250-269
@@ -75,12 +75,11 @@ export const WithLabel: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-    docs: { disable: true },
-  },
+    controls: { disable: true }
+  }
 };
 
 // Settings Panel - from component page lines 271-316
@@ -124,17 +123,17 @@ export const SettingsPanel: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Switch used in a settings panel with descriptions. Perfect for preference screens.',
-      },
-    },
-  },
+        story: 'Switch used in a settings panel with descriptions. Perfect for preference screens.'
+      }
+    }
+  }
 };
 
 // Disabled State - from component page lines 318-340
@@ -157,12 +156,11 @@ export const DisabledState: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-    docs: { disable: true },
-  },
+    controls: { disable: true }
+  }
 };
 
 // Controlled - from component page lines 342-364
@@ -191,17 +189,17 @@ export const Controlled: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Controlled switch with external state management. The state can be toggled programmatically.',
-      },
-    },
-  },
+        story: 'Controlled switch with external state management. The state can be toggled programmatically.'
+      }
+    }
+  }
 };
 
 // In Form - from component page lines 366-404
@@ -238,17 +236,17 @@ export const InForm: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Switch in a form with the name attribute for form submission.',
-      },
-    },
-  },
+        story: 'Switch in a form with the name attribute for form submission.'
+      }
+    }
+  }
 };
 
 // RTL Example
@@ -271,17 +269,17 @@ export const RTLExample: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Switch with Arabic labels demonstrating RTL support. The switch thumb animation automatically adapts for RTL direction.',
-      },
-    },
-  },
+        story: 'Switch with Arabic labels demonstrating RTL support. The switch thumb animation automatically adapts for RTL direction.'
+      }
+    }
+  }
 };
 
 // RTL Settings Panel
@@ -325,17 +323,17 @@ export const RTLSettingsPanel: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Settings panel with Arabic text in RTL mode. The justify-between layout naturally adapts to RTL.',
-      },
-    },
-  },
+        story: 'Settings panel with Arabic text in RTL mode. The justify-between layout naturally adapts to RTL.'
+      }
+    }
+  }
 };
 
 // RTL Disabled
@@ -358,17 +356,17 @@ export const RTLDisabled: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Disabled switches with Arabic text in RTL mode.',
-      },
-    },
-  },
+        story: 'Disabled switches with Arabic text in RTL mode.'
+      }
+    }
+  }
 };
 
 // RTL Controlled
@@ -397,17 +395,17 @@ export const RTLControlled: Story = {
   },
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Controlled switch with Arabic text demonstrating programmatic state management in RTL.',
-      },
-    },
-  },
+        story: 'Controlled switch with Arabic text demonstrating programmatic state management in RTL.'
+      }
+    }
+  }
 };
 
 // RTL In Form
@@ -444,15 +442,15 @@ export const RTLInForm: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Complete form with switches in Arabic, demonstrating RTL support in form contexts.',
-      },
-    },
-  },
+        story: 'Complete form with switches in Arabic, demonstrating RTL support in form contexts.'
+      }
+    }
+  }
 };

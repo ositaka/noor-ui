@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import {
   Avatar,
   AvatarFallback,
-  AvatarImage,
+  AvatarImage
 } from '../../../components/ui/avatar';
 
 /**
@@ -16,9 +16,9 @@ const meta = {
   title: 'Basic/Avatar',
   component: Avatar,
   parameters: {
-    layout: 'centered',
+    layout: 'centered'
   },
-  tags: ['autodocs'],
+  tags: ['autodocs']
 } satisfies Meta<typeof Avatar>;
 
 export default meta;
@@ -32,13 +32,13 @@ export const Default: Story = {
         <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
         <AvatarFallback>CN</AvatarFallback>
       </>
-    ),
+    )
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
-  render: (args) => <Avatar {...args} />,
+  render: (args) => <Avatar {...args} />
 };
 
 // With Fallback - from component page lines 170-182
@@ -59,8 +59,8 @@ export const WithFallback: Story = {
     </div>
   ),
   parameters: {
-    controls: { disable: true },
-  },
+    controls: { disable: true }
+  }
 };
 
 // All Sizes - from component page lines 192-209
@@ -86,8 +86,8 @@ export const AllSizes: Story = {
     </div>
   ),
   parameters: {
-    controls: { disable: true },
-  },
+    controls: { disable: true }
+  }
 };
 
 // Avatar Group - from component page lines 219-234
@@ -111,8 +111,8 @@ export const AvatarGroup: Story = {
     </div>
   ),
   parameters: {
-    controls: { disable: true },
-  },
+    controls: { disable: true }
+  }
 };
 
 // With Profile - from component page RTL example lines 251-260
@@ -130,8 +130,8 @@ export const WithProfile: Story = {
     </div>
   ),
   parameters: {
-    controls: { disable: true },
-  },
+    controls: { disable: true }
+  }
 };
 
 // RTL With Profile - from component page lines 251-260 with Arabic text
@@ -150,16 +150,16 @@ export const RTLWithProfile: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       description: {
-        story: 'Avatar with profile text demonstrating RTL support. Automatically switches to RTL mode.',
-      },
-    },
-  },
+        story: 'Avatar with profile text demonstrating RTL support. Automatically switches to RTL mode.'
+      }
+    }
+  }
 };
 
 // RTL Avatar Group - from component page lines 261-276
@@ -184,16 +184,16 @@ export const RTLAvatarGroup: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       description: {
-        story: 'Avatar group with proper RTL overlapping. Automatically switches to RTL mode.',
-      },
-    },
-  },
+        story: 'Avatar group with proper RTL overlapping. Automatically switches to RTL mode.'
+      }
+    }
+  }
 };
 
 // Fallback Only
@@ -215,8 +215,8 @@ export const FallbackOnly: Story = {
     </div>
   ),
   parameters: {
-    controls: { disable: true },
-  },
+    controls: { disable: true }
+  }
 };
 
 // Custom Sizes
@@ -250,6 +250,6 @@ export const CustomSizes: Story = {
     </div>
   ),
   parameters: {
-    controls: { disable: true },
-  },
+    controls: { disable: true }
+  }
 };

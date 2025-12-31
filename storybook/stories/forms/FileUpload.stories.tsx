@@ -17,32 +17,32 @@ const meta = {
   title: 'Forms/File Upload',
   component: FileUpload,
   parameters: {
-    layout: 'centered',
+    layout: 'centered'
   },
   tags: ['autodocs'],
   argTypes: {
     onUpload: {
-      control: false,
+      control: false
     },
     onChange: {
-      control: false,
+      control: false
     },
     maxSize: {
-      control: { type: 'number' },
+      control: { type: 'number' }
     },
     maxFiles: {
-      control: { type: 'number' },
+      control: { type: 'number' }
     },
     accept: {
-      control: { type: 'text' },
+      control: { type: 'text' }
     },
     multiple: {
-      control: { type: 'boolean' },
+      control: { type: 'boolean' }
     },
     disabled: {
-      control: { type: 'boolean' },
-    },
-  },
+      control: { type: 'boolean' }
+    }
+  }
 } satisfies Meta<typeof FileUpload>;
 
 export default meta;
@@ -53,11 +53,11 @@ export const Default: Story = {
   args: {
     multiple: false,
     maxSize: 5 * 1024 * 1024, // 5MB
-    maxFiles: 1,
+    maxFiles: 1
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   render: (args) => {
     const [files, setFiles] = React.useState<File[]>([]);
@@ -80,10 +80,10 @@ export const Default: Story = {
   parameters: {
     docs: {
       story: {
-        inline: false,
-      },
-    },
-  },
+        inline: false
+      }
+    }
+  }
 };
 
 // Basic File Upload - from component page lines 224-228
@@ -102,17 +102,17 @@ export const BasicFileUpload: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Basic file upload with drag-and-drop support and default settings (5MB max, single file).',
-      },
-    },
-  },
+        story: 'Basic file upload with drag-and-drop support and default settings (5MB max, single file).'
+      }
+    }
+  }
 };
 
 // Images Only - from component page lines 300-304
@@ -134,17 +134,17 @@ export const ImagesOnly: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'File upload that only accepts image files (JPEG, PNG, GIF, WebP, etc.) with automatic image previews.',
-      },
-    },
-  },
+        story: 'File upload that only accepts image files (JPEG, PNG, GIF, WebP, etc.) with automatic image previews.'
+      }
+    }
+  }
 };
 
 // Multiple Files - from component page lines 321-326
@@ -167,17 +167,17 @@ export const MultipleFiles: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'File upload that allows multiple files (up to 5) with "Add More Files" button.',
-      },
-    },
-  },
+        story: 'File upload that allows multiple files (up to 5) with "Add More Files" button.'
+      }
+    }
+  }
 };
 
 // Custom Size Limit - from component page lines 343-347
@@ -195,17 +195,17 @@ export const CustomSizeLimit: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'File upload with custom size limit of 2MB (instead of default 5MB).',
-      },
-    },
-  },
+        story: 'File upload with custom size limit of 2MB (instead of default 5MB).'
+      }
+    }
+  }
 };
 
 // Documents Only
@@ -231,17 +231,17 @@ export const DocumentsOnly: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'File upload restricted to PDF and Word documents only.',
-      },
-    },
-  },
+        story: 'File upload restricted to PDF and Word documents only.'
+      }
+    }
+  }
 };
 
 // Disabled State
@@ -258,17 +258,17 @@ export const DisabledState: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'File upload in disabled state.',
-      },
-    },
-  },
+        story: 'File upload in disabled state.'
+      }
+    }
+  }
 };
 
 // RTL Example - Basic (component has built-in bilingual support)
@@ -287,17 +287,17 @@ export const RTLExample: Story = {
   },
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Basic file upload with Arabic text in RTL mode. Component automatically displays bilingual text based on locale.',
-      },
-    },
-  },
+        story: 'Basic file upload with Arabic text in RTL mode. Component automatically displays bilingual text based on locale.'
+      }
+    }
+  }
 };
 
 // RTL Images Only
@@ -319,17 +319,17 @@ export const RTLImagesOnly: Story = {
   },
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Image-only file upload with Arabic interface in RTL mode.',
-      },
-    },
-  },
+        story: 'Image-only file upload with Arabic interface in RTL mode.'
+      }
+    }
+  }
 };
 
 // RTL Multiple Files
@@ -352,17 +352,17 @@ export const RTLMultipleFiles: Story = {
   },
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Multiple file upload with Arabic interface showing "إضافة المزيد من الملفات" button in RTL.',
-      },
-    },
-  },
+        story: 'Multiple file upload with Arabic interface showing "إضافة المزيد من الملفات" button in RTL.'
+      }
+    }
+  }
 };
 
 // RTL Documents Upload
@@ -388,15 +388,15 @@ export const RTLDocumentsUpload: Story = {
   },
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Document upload with Arabic labels and RTL layout for PDF and Word files.',
-      },
-    },
-  },
+        story: 'Document upload with Arabic labels and RTL layout for PDF and Word files.'
+      }
+    }
+  }
 };

@@ -15,7 +15,7 @@ const meta = {
   title: 'Basic/User Menu',
   component: UserMenu,
   parameters: {
-    layout: 'centered',
+    layout: 'centered'
   },
   tags: ['autodocs'],
   argTypes: {
@@ -29,13 +29,13 @@ const meta = {
     className: { control: 'text' },
     align: {
       control: { type: 'select' },
-      options: ['start', 'center', 'end'],
+      options: ['start', 'center', 'end']
     },
     side: {
       control: { type: 'select' },
-      options: ['top', 'right', 'bottom', 'left'],
-    },
-  },
+      options: ['top', 'right', 'bottom', 'left']
+    }
+  }
 } satisfies Meta<typeof UserMenu>;
 
 export default meta;
@@ -47,7 +47,7 @@ export const Default: Story = {
     <UserMenu
       user={{
         name: 'Ahmed Al-Rashid',
-        email: 'ahmed@example.com',
+        email: 'ahmed@example.com'
       }}
       onProfileClick={() => console.log('Profile')}
       onSettingsClick={() => console.log('Settings')}
@@ -56,8 +56,8 @@ export const Default: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
-  },
+    locale: 'en'
+  }
 };
 
 // With Avatar - from page lines 279-288
@@ -70,7 +70,7 @@ export const WithAvatar: Story = {
             user={{
               name: 'Sarah Johnson',
               email: 'sarah@example.com',
-              image: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah',
+              image: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah'
             }}
             onProfileClick={() => console.log('Profile')}
             onSettingsClick={() => console.log('Settings')}
@@ -82,14 +82,11 @@ export const WithAvatar: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };
 
 // Minimal - from page lines 303-309
@@ -101,7 +98,7 @@ export const Minimal: Story = {
           <UserMenu
             user={{
               name: 'Nuno Marques',
-              email: 'ositaka@example.com',
+              email: 'ositaka@example.com'
             }}
             onLogout={() => console.log('Logout')}
           />
@@ -111,14 +108,11 @@ export const Minimal: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };
 
 // All Options - from page lines 324-336
@@ -131,7 +125,7 @@ export const AllOptions: Story = {
             user={{
               name: 'Fatima Al-Zahra',
               email: 'fatima@example.com',
-              image: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Fatima',
+              image: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Fatima'
             }}
             onProfileClick={() => console.log('Profile')}
             onSettingsClick={() => console.log('Settings')}
@@ -146,14 +140,11 @@ export const AllOptions: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };
 
 // With Initials
@@ -166,7 +157,7 @@ export const WithInitials: Story = {
             user={{
               name: 'John Doe',
               email: 'john@example.com',
-              initials: 'JD',
+              initials: 'JD'
             }}
             onProfileClick={() => console.log('Profile')}
             onSettingsClick={() => console.log('Settings')}
@@ -178,14 +169,11 @@ export const WithInitials: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };
 
 // Without Image (Auto Initials)
@@ -197,7 +185,7 @@ export const WithoutImage: Story = {
           <UserMenu
             user={{
               name: 'Alice Smith',
-              email: 'alice@example.com',
+              email: 'alice@example.com'
             }}
             onProfileClick={() => console.log('Profile')}
             onSettingsClick={() => console.log('Settings')}
@@ -209,17 +197,17 @@ export const WithoutImage: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Automatically generates initials from the name when no image is provided.',
-      },
-    },
-  },
+        story: 'Automatically generates initials from the name when no image is provided.'
+      }
+    }
+  }
 };
 
 // In Header Layout - inspired by lines 374-391
@@ -233,7 +221,7 @@ export const InHeaderLayout: Story = {
             user={{
               name: 'Ahmed Al-Rashid',
               email: 'ahmed@example.com',
-              image: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Ahmed',
+              image: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Ahmed'
             }}
             onProfileClick={() => console.log('Profile')}
             onSettingsClick={() => console.log('Settings')}
@@ -248,7 +236,7 @@ export const InHeaderLayout: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     layout: 'fullscreen',
@@ -256,10 +244,10 @@ export const InHeaderLayout: Story = {
     docs: {
       disable: true,
       description: {
-        story: 'User menu integrated into a header layout.',
-      },
-    },
-  },
+        story: 'User menu integrated into a header layout.'
+      }
+    }
+  }
 };
 
 // Only Profile and Logout
@@ -272,7 +260,7 @@ export const ProfileAndLogout: Story = {
             user={{
               name: 'Emily Chen',
               email: 'emily@example.com',
-              image: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Emily',
+              image: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Emily'
             }}
             onProfileClick={() => console.log('Profile')}
             onLogout={() => console.log('Logout')}
@@ -283,17 +271,17 @@ export const ProfileAndLogout: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Simplified menu with only profile and logout options.',
-      },
-    },
-  },
+        story: 'Simplified menu with only profile and logout options.'
+      }
+    }
+  }
 };
 
 // RTL
@@ -306,7 +294,7 @@ export const RTL: Story = {
             user={{
               name: 'فاطمة الزهراء',
               email: 'fatima@example.com',
-              image: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Fatima',
+              image: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Fatima'
             }}
             onProfileClick={() => console.log('الملف الشخصي')}
             onSettingsClick={() => console.log('الإعدادات')}
@@ -321,12 +309,9 @@ export const RTL: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };

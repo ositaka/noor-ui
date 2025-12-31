@@ -14,16 +14,16 @@ const meta = {
   title: 'Basic/Badge',
   component: Badge,
   parameters: {
-    layout: 'centered',
+    layout: 'centered'
   },
   tags: ['autodocs'],
   argTypes: {
     variant: {
       control: 'select',
       options: ['default', 'secondary', 'destructive', 'outline'],
-      description: 'Badge style variant',
-    },
-  },
+      description: 'Badge style variant'
+    }
+  }
 } satisfies Meta<typeof Badge>;
 
 export default meta;
@@ -33,8 +33,8 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     children: 'New',
-    variant: 'default',
-  },
+    variant: 'default'
+  }
 };
 
 // With Icon - users can change variant via controls
@@ -45,15 +45,15 @@ export const WithIcon: Story = {
         <Check className="h-3 w-3 me-1" />
         Verified
       </>
-    ),
+    )
   },
   parameters: {
     docs: {
       description: {
-        story: 'Badge with icon. Use the Controls panel to try different variants.',
-      },
-    },
-  },
+        story: 'Badge with icon. Use the Controls panel to try different variants.'
+      }
+    }
+  }
 };
 
 // Status Indicator - users can change variant via controls
@@ -65,15 +65,15 @@ export const StatusIndicator: Story = {
         <CheckCircle2 className="h-3 w-3 me-1" />
         Active
       </>
-    ),
+    )
   },
   parameters: {
     docs: {
       description: {
-        story: 'Status indicator with icon. Use Controls to try different statuses and variants.',
-      },
-    },
-  },
+        story: 'Status indicator with icon. Use Controls to try different statuses and variants.'
+      }
+    }
+  }
 };
 
 // Notification Count (from component page line 366-382)
@@ -97,8 +97,8 @@ export const NotificationCount: Story = {
     </div>
   ),
   parameters: {
-    controls: { disable: true },
-  },
+    controls: { disable: true }
+  }
 };
 
 // RTL Example - users can change variant via controls
@@ -109,19 +109,19 @@ export const RTLExample: Story = {
         <Check className="h-3 w-3 me-1" />
         جديد
       </>
-    ),
+    )
   },
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     docs: {
       description: {
-        story: 'Badge with Arabic text. Icon automatically positions correctly in RTL. Use Controls to try different variants.',
-      },
-    },
-  },
+        story: 'Badge with Arabic text. Icon automatically positions correctly in RTL. Use Controls to try different variants.'
+      }
+    }
+  }
 };
 
 // All Variants Showcase
@@ -135,8 +135,8 @@ export const AllVariants: Story = {
     </div>
   ),
   parameters: {
-    controls: { disable: true },
-  },
+    controls: { disable: true }
+  }
 };
 
 // All With Icons
@@ -162,8 +162,8 @@ export const AllWithIcons: Story = {
     </div>
   ),
   parameters: {
-    controls: { disable: true },
-  },
+    controls: { disable: true }
+  }
 };
 
 // All Status Indicators
@@ -189,8 +189,8 @@ export const AllStatusIndicators: Story = {
     </div>
   ),
   parameters: {
-    controls: { disable: true },
-  },
+    controls: { disable: true }
+  }
 };
 
 // All Sizes
@@ -203,8 +203,8 @@ export const AllSizes: Story = {
     </div>
   ),
   parameters: {
-    controls: { disable: true },
-  },
+    controls: { disable: true }
+  }
 };
 
 // All Custom Colors
@@ -229,6 +229,6 @@ export const AllCustomColors: Story = {
     </div>
   ),
   parameters: {
-    controls: { disable: true },
-  },
+    controls: { disable: true }
+  }
 };

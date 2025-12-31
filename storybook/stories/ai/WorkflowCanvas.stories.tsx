@@ -13,14 +13,14 @@ import { Zap, Cpu, FileOutput, Mail, Database } from 'lucide-react';
  */
 
 const nodeTypes = {
-  workflowNode: WorkflowNode,
+  workflowNode: WorkflowNode
 };
 
 const meta = {
   title: 'AI/Workflow Canvas',
   component: WorkflowCanvas,
   parameters: {
-    layout: 'fullscreen',
+    layout: 'fullscreen'
   },
   tags: ['autodocs'],
   argTypes: {
@@ -36,11 +36,11 @@ const meta = {
     showBackground: { control: 'boolean' },
     backgroundVariant: {
       control: { type: 'select' },
-      options: ['dots', 'lines', 'cross'],
+      options: ['dots', 'lines', 'cross']
     },
     isRTL: { control: 'boolean' },
-    className: { control: 'text' },
-  },
+    className: { control: 'text' }
+  }
 } satisfies Meta<typeof WorkflowCanvas>;
 
 export default meta;
@@ -54,7 +54,7 @@ export const Default: Story = {
         id: '1',
         type: 'workflowNode',
         position: { x: 100, y: 100 },
-        data: { label: 'Start', icon: Zap },
+        data: { label: 'Start', icon: Zap }
       },
     ];
 
@@ -66,8 +66,8 @@ export const Default: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
-  },
+    locale: 'en'
+  }
 };
 
 // Simple Workflow - from code lines 146-173
@@ -78,19 +78,19 @@ export const SimpleWorkflow: Story = {
         id: '1',
         type: 'workflowNode',
         position: { x: 50, y: 100 },
-        data: { label: 'Email Received', description: 'Trigger', type: 'trigger', icon: Mail },
+        data: { label: 'Email Received', description: 'Trigger', type: 'trigger', icon: Mail }
       },
       {
         id: '2',
         type: 'workflowNode',
         position: { x: 350, y: 100 },
-        data: { label: 'AI Analysis', description: 'Process', type: 'AI', icon: Cpu },
+        data: { label: 'AI Analysis', description: 'Process', type: 'AI', icon: Cpu }
       },
       {
         id: '3',
         type: 'workflowNode',
         position: { x: 650, y: 100 },
-        data: { label: 'Send to Slack', description: 'Action', type: 'action', icon: FileOutput },
+        data: { label: 'Send to Slack', description: 'Action', type: 'action', icon: FileOutput }
       },
     ];
 
@@ -107,14 +107,11 @@ export const SimpleWorkflow: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };
 
 // Complex Workflow
@@ -125,25 +122,25 @@ export const ComplexWorkflow: Story = {
         id: '1',
         type: 'workflowNode',
         position: { x: 50, y: 50 },
-        data: { label: 'Start', icon: Zap },
+        data: { label: 'Start', icon: Zap }
       },
       {
         id: '2',
         type: 'workflowNode',
         position: { x: 350, y: 50 },
-        data: { label: 'Process Data', icon: Cpu },
+        data: { label: 'Process Data', icon: Cpu }
       },
       {
         id: '3',
         type: 'workflowNode',
         position: { x: 650, y: 50 },
-        data: { label: 'Save to DB', icon: Database },
+        data: { label: 'Save to DB', icon: Database }
       },
       {
         id: '4',
         type: 'workflowNode',
         position: { x: 350, y: 250 },
-        data: { label: 'Send Email', icon: Mail },
+        data: { label: 'Send Email', icon: Mail }
       },
     ];
 
@@ -161,14 +158,11 @@ export const ComplexWorkflow: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };
 
 // Without Minimap
@@ -179,13 +173,13 @@ export const WithoutMinimap: Story = {
         id: '1',
         type: 'workflowNode',
         position: { x: 100, y: 100 },
-        data: { label: 'Start', icon: Zap },
+        data: { label: 'Start', icon: Zap }
       },
       {
         id: '2',
         type: 'workflowNode',
         position: { x: 400, y: 100 },
-        data: { label: 'Process', icon: Cpu },
+        data: { label: 'Process', icon: Cpu }
       },
     ];
 
@@ -204,14 +198,11 @@ export const WithoutMinimap: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };
 
 // Read Only
@@ -222,13 +213,13 @@ export const ReadOnly: Story = {
         id: '1',
         type: 'workflowNode',
         position: { x: 100, y: 100 },
-        data: { label: 'Email Trigger', icon: Mail },
+        data: { label: 'Email Trigger', icon: Mail }
       },
       {
         id: '2',
         type: 'workflowNode',
         position: { x: 400, y: 100 },
-        data: { label: 'AI Analysis', icon: Cpu },
+        data: { label: 'AI Analysis', icon: Cpu }
       },
     ];
 
@@ -247,14 +238,11 @@ export const ReadOnly: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };
 
 // Lines Background
@@ -265,13 +253,13 @@ export const LinesBackground: Story = {
         id: '1',
         type: 'workflowNode',
         position: { x: 100, y: 100 },
-        data: { label: 'Start', icon: Zap },
+        data: { label: 'Start', icon: Zap }
       },
       {
         id: '2',
         type: 'workflowNode',
         position: { x: 400, y: 100 },
-        data: { label: 'Process', icon: Cpu },
+        data: { label: 'Process', icon: Cpu }
       },
     ];
 
@@ -290,14 +278,11 @@ export const LinesBackground: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };
 
 // Empty Canvas
@@ -309,17 +294,17 @@ export const EmptyCanvas: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Empty workflow canvas ready for adding nodes.',
-      },
-    },
-  },
+        story: 'Empty workflow canvas ready for adding nodes.'
+      }
+    }
+  }
 };
 
 // RTL
@@ -336,8 +321,8 @@ export const RTL: Story = {
           description: 'Trigger',
           descriptionAr: 'مشغل',
           icon: Mail,
-          isRTL: true,
-        },
+          isRTL: true
+        }
       },
       {
         id: '2',
@@ -349,8 +334,8 @@ export const RTL: Story = {
           description: 'Process',
           descriptionAr: 'معالجة',
           icon: Cpu,
-          isRTL: true,
-        },
+          isRTL: true
+        }
       },
     ];
 
@@ -369,12 +354,9 @@ export const RTL: Story = {
   },
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };

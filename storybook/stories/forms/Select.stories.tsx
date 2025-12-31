@@ -6,7 +6,7 @@ import {
   SelectItem,
   SelectLabel,
   SelectTrigger,
-  SelectValue,
+  SelectValue
 } from '../../../components/ui/select';
 import { Label } from '../../../components/ui/label';
 import { Button } from '../../../components/ui/button';
@@ -25,14 +25,14 @@ const meta = {
   title: 'Forms/Select',
   component: Select,
   parameters: {
-    layout: 'centered',
+    layout: 'centered'
   },
   tags: ['autodocs'],
   argTypes: {
     onValueChange: {
-      control: false,
-    },
-  },
+      control: false
+    }
+  }
 } satisfies Meta<typeof Select>;
 
 export default meta;
@@ -41,11 +41,11 @@ type Story = StoryObj<typeof meta>;
 // Default - Interactive playground with controls (hidden from stories list to avoid ID conflicts)
 export const Default: Story = {
   args: {
-    defaultValue: 'option1',
+    defaultValue: 'option1'
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   render: (args) => (
     <Select {...args}>
@@ -62,10 +62,10 @@ export const Default: Story = {
   parameters: {
     docs: {
       story: {
-        inline: false,
-      },
-    },
-  },
+        inline: false
+      }
+    }
+  }
 };
 
 // With Label - from component page lines 305-320
@@ -90,12 +90,11 @@ export const WithLabel: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-    docs: { disable: true },
-  },
+    controls: { disable: true }
+  }
 };
 
 // Grouped Options - from component page lines 333-352
@@ -124,17 +123,17 @@ export const GroupedOptions: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Select with grouped options using SelectGroup and SelectLabel. Perfect for organizing many options into categories.',
-      },
-    },
-  },
+        story: 'Select with grouped options using SelectGroup and SelectLabel. Perfect for organizing many options into categories.'
+      }
+    }
+  }
 };
 
 // Disabled State - from component page lines 365-390
@@ -171,12 +170,11 @@ export const DisabledState: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-    docs: { disable: true },
-  },
+    controls: { disable: true }
+  }
 };
 
 // Controlled - from component page lines 404-421
@@ -208,17 +206,17 @@ export const Controlled: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Controlled select with external state management. The selection can be changed programmatically via a button.',
-      },
-    },
-  },
+        story: 'Controlled select with external state management. The selection can be changed programmatically via a button.'
+      }
+    }
+  }
 };
 
 // In Form - from component page lines 434-456
@@ -250,17 +248,17 @@ export const InForm: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Select in a form with the name attribute for form submission.',
-      },
-    },
-  },
+        story: 'Select in a form with the name attribute for form submission.'
+      }
+    }
+  }
 };
 
 // RTL Example
@@ -282,17 +280,17 @@ export const RTLExample: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Select with Arabic labels demonstrating RTL support. Dropdown position, chevron icon, and check indicator adapt correctly. Automatically switches to RTL mode.',
-      },
-    },
-  },
+        story: 'Select with Arabic labels demonstrating RTL support. Dropdown position, chevron icon, and check indicator adapt correctly. Automatically switches to RTL mode.'
+      }
+    }
+  }
 };
 
 // RTL Grouped Options
@@ -321,17 +319,17 @@ export const RTLGroupedOptions: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Grouped options with Arabic text in RTL mode. SelectGroup and SelectLabel work perfectly in RTL.',
-      },
-    },
-  },
+        story: 'Grouped options with Arabic text in RTL mode. SelectGroup and SelectLabel work perfectly in RTL.'
+      }
+    }
+  }
 };
 
 // RTL Disabled
@@ -368,17 +366,17 @@ export const RTLDisabled: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Disabled select and disabled options with Arabic text in RTL mode.',
-      },
-    },
-  },
+        story: 'Disabled select and disabled options with Arabic text in RTL mode.'
+      }
+    }
+  }
 };
 
 // RTL Controlled
@@ -410,17 +408,17 @@ export const RTLControlled: Story = {
   },
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Controlled select with Arabic text demonstrating programmatic state management in RTL.',
-      },
-    },
-  },
+        story: 'Controlled select with Arabic text demonstrating programmatic state management in RTL.'
+      }
+    }
+  }
 };
 
 // RTL In Form
@@ -452,15 +450,15 @@ export const RTLInForm: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Complete form with select in Arabic, demonstrating RTL support in form contexts.',
-      },
-    },
-  },
+        story: 'Complete form with select in Arabic, demonstrating RTL support in form contexts.'
+      }
+    }
+  }
 };

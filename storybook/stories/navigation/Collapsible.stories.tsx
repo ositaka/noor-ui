@@ -19,23 +19,23 @@ const meta = {
   title: 'Navigation/Collapsible',
   component: Collapsible,
   parameters: {
-    layout: 'centered',
+    layout: 'centered'
   },
   tags: ['autodocs'],
   argTypes: {
     open: {
-      control: { type: 'boolean' },
+      control: { type: 'boolean' }
     },
     defaultOpen: {
-      control: { type: 'boolean' },
+      control: { type: 'boolean' }
     },
     disabled: {
-      control: { type: 'boolean' },
+      control: { type: 'boolean' }
     },
     onOpenChange: {
-      control: false,
-    },
-  },
+      control: false
+    }
+  }
 } satisfies Meta<typeof Collapsible>;
 
 export default meta;
@@ -44,11 +44,11 @@ type Story = StoryObj<typeof meta>;
 // Default - Interactive playground with controls (hidden from stories list to avoid ID conflicts)
 export const Default: Story = {
   args: {
-    defaultOpen: false,
+    defaultOpen: false
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   render: (args) => {
     const [isOpen, setIsOpen] = React.useState(args.defaultOpen || false);
@@ -76,10 +76,10 @@ export const Default: Story = {
   parameters: {
     docs: {
       story: {
-        inline: false,
-      },
-    },
-  },
+        inline: false
+      }
+    }
+  }
 };
 
 // Basic FAQ - from component page lines 150-167
@@ -109,17 +109,17 @@ export const BasicFAQ: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Basic FAQ-style collapsible with a question/answer pattern. Chevron rotates when expanded.',
-      },
-    },
-  },
+        story: 'Basic FAQ-style collapsible with a question/answer pattern. Chevron rotates when expanded.'
+      }
+    }
+  }
 };
 
 // Controlled with Icon - from component page lines 227-243
@@ -155,17 +155,17 @@ export const ControlledWithIcon: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Controlled collapsible with animated chevron icon. Button text changes based on state.',
-      },
-    },
-  },
+        story: 'Controlled collapsible with animated chevron icon. Button text changes based on state.'
+      }
+    }
+  }
 };
 
 // Sidebar Style - from component page lines 258-281
@@ -202,17 +202,17 @@ export const SidebarStyle: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Sidebar-style collapsible with a list of items. Uses ChevronsUpDown icon for toggle button.',
-      },
-    },
-  },
+        story: 'Sidebar-style collapsible with a list of items. Uses ChevronsUpDown icon for toggle button.'
+      }
+    }
+  }
 };
 
 // FAQ Style - from component page lines 295-324
@@ -223,15 +223,15 @@ export const FAQStyle: Story = {
         {[
           {
             q: 'What is this design system?',
-            a: 'An RTL-first design system built for the GCC market with full bilingual support.',
+            a: 'An RTL-first design system built for the GCC market with full bilingual support.'
           },
           {
             q: 'How do I install it?',
-            a: 'Simply run npm install noorui-rtl and import the components you need.',
+            a: 'Simply run npm install noorui-rtl and import the components you need.'
           },
           {
             q: 'Is it accessible?',
-            a: 'Yes! All components are WCAG AA compliant with full keyboard navigation.',
+            a: 'Yes! All components are WCAG AA compliant with full keyboard navigation.'
           },
         ].map((item, index) => (
           <Collapsible key={index}>
@@ -254,17 +254,17 @@ export const FAQStyle: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'FAQ-style layout with multiple collapsibles. ChevronRight rotates 90° when opened.',
-      },
-    },
-  },
+        story: 'FAQ-style layout with multiple collapsibles. ChevronRight rotates 90° when opened.'
+      }
+    }
+  }
 };
 
 // Simple Uncontrolled
@@ -285,17 +285,17 @@ export const SimpleUncontrolled: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Uncontrolled collapsible with internal state management. Simplest implementation.',
-      },
-    },
-  },
+        story: 'Uncontrolled collapsible with internal state management. Simplest implementation.'
+      }
+    }
+  }
 };
 
 // RTL Example - Basic FAQ
@@ -325,17 +325,17 @@ export const RTLExample: Story = {
   },
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Basic FAQ collapsible with Arabic text in RTL mode. Animations work perfectly in both directions.',
-      },
-    },
-  },
+        story: 'Basic FAQ collapsible with Arabic text in RTL mode. Animations work perfectly in both directions.'
+      }
+    }
+  }
 };
 
 // RTL Controlled with Icon
@@ -371,17 +371,17 @@ export const RTLControlledWithIcon: Story = {
   },
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Controlled collapsible in RTL with Arabic text. Button text changes dynamically.',
-      },
-    },
-  },
+        story: 'Controlled collapsible in RTL with Arabic text. Button text changes dynamically.'
+      }
+    }
+  }
 };
 
 // RTL Sidebar Style
@@ -418,17 +418,17 @@ export const RTLSidebarStyle: Story = {
   },
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Sidebar-style collapsible in RTL with Arabic content. Layout flows right-to-left.',
-      },
-    },
-  },
+        story: 'Sidebar-style collapsible in RTL with Arabic content. Layout flows right-to-left.'
+      }
+    }
+  }
 };
 
 // RTL FAQ Style
@@ -439,15 +439,15 @@ export const RTLFAQStyle: Story = {
         {[
           {
             q: 'ما هو نظام التصميم هذا؟',
-            a: 'نظام تصميم RTL أولاً مبني لسوق دول مجلس التعاون الخليجي مع دعم ثنائي اللغة بالكامل.',
+            a: 'نظام تصميم RTL أولاً مبني لسوق دول مجلس التعاون الخليجي مع دعم ثنائي اللغة بالكامل.'
           },
           {
             q: 'كيف أقوم بتثبيته؟',
-            a: 'ببساطة قم بتشغيل npm install noorui-rtl واستورد المكونات التي تحتاجها.',
+            a: 'ببساطة قم بتشغيل npm install noorui-rtl واستورد المكونات التي تحتاجها.'
           },
           {
             q: 'هل يمكن الوصول إليه؟',
-            a: 'نعم! جميع المكونات متوافقة مع WCAG AA مع التنقل الكامل بلوحة المفاتيح.',
+            a: 'نعم! جميع المكونات متوافقة مع WCAG AA مع التنقل الكامل بلوحة المفاتيح.'
           },
         ].map((item, index) => (
           <Collapsible key={index}>
@@ -470,15 +470,15 @@ export const RTLFAQStyle: Story = {
   },
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'FAQ-style collapsibles in RTL with Arabic questions and answers. Multiple items.',
-      },
-    },
-  },
+        story: 'FAQ-style collapsibles in RTL with Arabic questions and answers. Multiple items.'
+      }
+    }
+  }
 };

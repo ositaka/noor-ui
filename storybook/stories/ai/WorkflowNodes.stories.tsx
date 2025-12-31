@@ -11,7 +11,7 @@ import {
   EmbeddingNode,
   OutputNode,
   SaveNode,
-  NotifyNode,
+  NotifyNode
 } from '../../../components/ui/workflow-nodes';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../../components/ui/card';
 
@@ -28,9 +28,9 @@ const meta = {
   title: 'AI/Workflow Nodes',
   component: TriggerNode,
   parameters: {
-    layout: 'centered',
+    layout: 'centered'
   },
-  tags: ['autodocs'],
+  tags: ['autodocs']
 } satisfies Meta<typeof TriggerNode>;
 
 export default meta;
@@ -71,8 +71,8 @@ export const TriggerNodes: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
-  },
+    locale: 'en'
+  }
 };
 
 // All Action Nodes
@@ -110,14 +110,11 @@ export const ActionNodes: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };
 
 // All AI Nodes
@@ -155,14 +152,11 @@ export const AINodes: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };
 
 // All Output Nodes
@@ -200,14 +194,11 @@ export const OutputNodes: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };
 
 // All Node Types
@@ -258,14 +249,11 @@ export const AllNodeTypes: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };
 
 // With Status Indicators
@@ -310,14 +298,11 @@ export const WithStatus: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };
 
 // Workflow Example
@@ -369,14 +354,11 @@ export const WorkflowExample: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };
 
 // RTL
@@ -396,7 +378,7 @@ export const RTL: Story = {
               labelAr: 'مشغل ويب هوك',
               description: 'HTTP endpoint',
               descriptionAr: 'نقطة نهاية HTTP',
-              isRTL: true,
+              isRTL: true
             }}
             type="webhook"
           />
@@ -409,7 +391,7 @@ export const RTL: Story = {
               labelAr: 'استدعاء نموذج لغوي',
               description: 'GPT-4',
               descriptionAr: 'GPT-4',
-              isRTL: true,
+              isRTL: true
             }}
             type="llm"
           />
@@ -422,7 +404,7 @@ export const RTL: Story = {
               labelAr: 'حفظ البيانات',
               description: 'Database',
               descriptionAr: 'قاعدة البيانات',
-              isRTL: true,
+              isRTL: true
             }}
             type="save"
           />
@@ -432,12 +414,9 @@ export const RTL: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };

@@ -17,7 +17,7 @@ const meta = {
   title: 'AI/Prompt Input',
   component: PromptInput,
   parameters: {
-    layout: 'centered',
+    layout: 'centered'
   },
   tags: ['autodocs'],
   argTypes: {
@@ -33,8 +33,8 @@ const meta = {
     placeholder: { control: 'text' },
     placeholderAr: { control: 'text' },
     value: { control: 'text' },
-    onChange: { control: false },
-  },
+    onChange: { control: false }
+  }
 } satisfies Meta<typeof PromptInput>;
 
 export default meta;
@@ -43,11 +43,11 @@ type Story = StoryObj<typeof meta>;
 // Default - Interactive playground
 export const Default: Story = {
   args: {
-    placeholder: 'Type your message... (Shift+Enter for new line)',
+    placeholder: 'Type your message... (Shift+Enter for new line)'
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   render: (args) => {
     const [value, setValue] = useState('');
@@ -68,10 +68,10 @@ export const Default: Story = {
   parameters: {
     docs: {
       story: {
-        inline: false,
-      },
-    },
-  },
+        inline: false
+      }
+    }
+  }
 };
 
 // With Features - from component page lines 249-258
@@ -95,17 +95,17 @@ export const WithFeatures: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Prompt input with attachment, voice, and character counter.',
-      },
-    },
-  },
+        story: 'Prompt input with attachment, voice, and character counter.'
+      }
+    }
+  }
 };
 
 // Loading State - from component page lines 272-278
@@ -133,17 +133,17 @@ export const LoadingState: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Prompt input with loading state while sending.',
-      },
-    },
-  },
+        story: 'Prompt input with loading state while sending.'
+      }
+    }
+  }
 };
 
 // Controlled Component - from component page lines 296-303
@@ -172,17 +172,17 @@ export const ControlledComponent: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Controlled prompt input with external state.',
-      },
-    },
-  },
+        story: 'Controlled prompt input with external state.'
+      }
+    }
+  }
 };
 
 // Basic Input
@@ -201,17 +201,17 @@ export const BasicInput: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Minimal prompt input without extra features.',
-      },
-    },
-  },
+        story: 'Minimal prompt input without extra features.'
+      }
+    }
+  }
 };
 
 // With Counter
@@ -243,17 +243,17 @@ export const WithCounter: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Prompt input with character counter and max length.',
-      },
-    },
-  },
+        story: 'Prompt input with character counter and max length.'
+      }
+    }
+  }
 };
 
 // With Attachment
@@ -277,17 +277,17 @@ export const WithAttachment: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Prompt input with attachment button.',
-      },
-    },
-  },
+        story: 'Prompt input with attachment button.'
+      }
+    }
+  }
 };
 
 // RTL Default - from component page lines 376-381
@@ -303,17 +303,17 @@ export const RTLDefault: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Prompt input in RTL with Arabic placeholder.',
-      },
-    },
-  },
+        story: 'Prompt input in RTL with Arabic placeholder.'
+      }
+    }
+  }
 };
 
 // RTL With Features
@@ -339,17 +339,17 @@ export const RTLWithFeatures: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Prompt input in RTL with all features enabled.',
-      },
-    },
-  },
+        story: 'Prompt input in RTL with all features enabled.'
+      }
+    }
+  }
 };
 
 // RTL Controlled
@@ -380,15 +380,15 @@ export const RTLControlled: Story = {
   },
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Controlled prompt input in RTL with state display.',
-      },
-    },
-  },
+        story: 'Controlled prompt input in RTL with state display.'
+      }
+    }
+  }
 };

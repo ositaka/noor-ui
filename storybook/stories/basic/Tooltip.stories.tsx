@@ -23,9 +23,9 @@ const meta = {
     ),
   ],
   parameters: {
-    layout: 'centered',
+    layout: 'centered'
   },
-  tags: ['autodocs'],
+  tags: ['autodocs']
 } satisfies Meta<typeof Tooltip>;
 
 export default meta;
@@ -43,13 +43,13 @@ export const Default: Story = {
           <p>Add to library</p>
         </TooltipContent>
       </>
-    ),
+    )
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
-  render: (args) => <Tooltip {...args} />,
+  render: (args) => <Tooltip {...args} />
 };
 
 // All Sides - from component page lines 232-268
@@ -95,11 +95,11 @@ export const AllSides: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-  },
+    controls: { disable: true }
+  }
 };
 
 // With Icon Buttons - from component page lines 281-325
@@ -153,11 +153,11 @@ export const WithIconButtons: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-  },
+    controls: { disable: true }
+  }
 };
 
 // With Text Buttons - from component page lines 342-365
@@ -190,11 +190,11 @@ export const WithTextButtons: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-  },
+    controls: { disable: true }
+  }
 };
 
 // RTL Example
@@ -211,16 +211,16 @@ export const RTLExample: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       description: {
-        story: 'Tooltip with Arabic text demonstrating RTL support. Automatically switches to RTL mode.',
-      },
-    },
-  },
+        story: 'Tooltip with Arabic text demonstrating RTL support. Automatically switches to RTL mode.'
+      }
+    }
+  }
 };
 
 // RTL All Sides
@@ -266,16 +266,16 @@ export const RTLAllSides: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       description: {
-        story: 'Tooltips on all sides with Arabic text in RTL mode. Position correctly mirrors for RTL.',
-      },
-    },
-  },
+        story: 'Tooltips on all sides with Arabic text in RTL mode. Position correctly mirrors for RTL.'
+      }
+    }
+  }
 };
 
 // RTL With Icon Buttons
@@ -329,16 +329,16 @@ export const RTLWithIconButtons: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       description: {
-        story: 'Icon buttons with Arabic tooltips in RTL mode.',
-      },
-    },
-  },
+        story: 'Icon buttons with Arabic tooltips in RTL mode.'
+      }
+    }
+  }
 };
 
 // RTL With Text Buttons
@@ -371,14 +371,14 @@ export const RTLWithTextButtons: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       description: {
-        story: 'Text buttons with Arabic tooltips demonstrating complete RTL support.',
-      },
-    },
-  },
+        story: 'Text buttons with Arabic tooltips demonstrating complete RTL support.'
+      }
+    }
+  }
 };

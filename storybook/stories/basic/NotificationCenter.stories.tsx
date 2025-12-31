@@ -17,7 +17,7 @@ const meta = {
   title: 'Basic/Notification Center',
   component: NotificationCenter,
   parameters: {
-    layout: 'centered',
+    layout: 'centered'
   },
   tags: ['autodocs'],
   argTypes: {
@@ -28,8 +28,8 @@ const meta = {
     onClearAll: { control: false },
     onRemove: { control: false },
     className: { control: 'text' },
-    maxHeight: { control: 'text' },
-  },
+    maxHeight: { control: 'text' }
+  }
 } satisfies Meta<typeof NotificationCenter>;
 
 export default meta;
@@ -45,7 +45,7 @@ export const Default: Story = {
         description: 'Sarah commented: "Great article!"',
         time: new Date(Date.now() - 5 * 60000).toISOString(),
         read: false,
-        icon: <MessageSquare className="h-5 w-5" />,
+        icon: <MessageSquare className="h-5 w-5" />
       },
       {
         id: '2',
@@ -53,7 +53,7 @@ export const Default: Story = {
         description: 'Ahmed is now following you',
         time: new Date(Date.now() - 120 * 60000).toISOString(),
         read: false,
-        icon: <UserPlus className="h-5 w-5" />,
+        icon: <UserPlus className="h-5 w-5" />
       },
       {
         id: '3',
@@ -61,7 +61,7 @@ export const Default: Story = {
         description: '3 people liked "Getting Started with React"',
         time: new Date(Date.now() - 1440 * 60000).toISOString(),
         read: true,
-        icon: <Heart className="h-5 w-5" />,
+        icon: <Heart className="h-5 w-5" />
       },
     ]);
 
@@ -86,8 +86,8 @@ export const Default: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
-  },
+    locale: 'en'
+  }
 };
 
 // Basic Usage - from page lines 126-157
@@ -100,7 +100,7 @@ export const BasicUsage: Story = {
         description: 'Sarah commented: "Great article!"',
         time: new Date(Date.now() - 5 * 60000).toISOString(),
         read: false,
-        icon: <MessageSquare className="h-5 w-5" />,
+        icon: <MessageSquare className="h-5 w-5" />
       },
       {
         id: '2',
@@ -108,7 +108,7 @@ export const BasicUsage: Story = {
         description: 'Ahmed is now following you',
         time: new Date(Date.now() - 120 * 60000).toISOString(),
         read: false,
-        icon: <UserPlus className="h-5 w-5" />,
+        icon: <UserPlus className="h-5 w-5" />
       },
       {
         id: '3',
@@ -116,7 +116,7 @@ export const BasicUsage: Story = {
         description: '3 people liked "Getting Started with React"',
         time: new Date(Date.now() - 1440 * 60000).toISOString(),
         read: true,
-        icon: <Heart className="h-5 w-5" />,
+        icon: <Heart className="h-5 w-5" />
       },
     ]);
 
@@ -146,14 +146,11 @@ export const BasicUsage: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };
 
 // With Avatars - from page lines 159-171, 350-358
@@ -167,7 +164,7 @@ export const WithAvatars: Story = {
         time: new Date(Date.now() - 10 * 60000).toISOString(),
         read: false,
         icon: <Star className="h-5 w-5" />,
-        avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=John',
+        avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=John'
       },
     ]);
 
@@ -196,14 +193,11 @@ export const WithAvatars: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };
 
 // Empty State - from page lines 365-377
@@ -219,14 +213,11 @@ export const EmptyState: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };
 
 // Many Notifications
@@ -239,7 +230,7 @@ export const ManyNotifications: Story = {
         description: 'You have a new message from Sarah',
         time: new Date(Date.now() - 2 * 60000).toISOString(),
         read: false,
-        icon: <MessageSquare className="h-5 w-5" />,
+        icon: <MessageSquare className="h-5 w-5" />
       },
       {
         id: '2',
@@ -247,7 +238,7 @@ export const ManyNotifications: Story = {
         description: 'Ahmed started following you',
         time: new Date(Date.now() - 30 * 60000).toISOString(),
         read: false,
-        icon: <UserPlus className="h-5 w-5" />,
+        icon: <UserPlus className="h-5 w-5" />
       },
       {
         id: '3',
@@ -255,7 +246,7 @@ export const ManyNotifications: Story = {
         description: 'New features are available',
         time: new Date(Date.now() - 60 * 60000).toISOString(),
         read: false,
-        icon: <Bell className="h-5 w-5" />,
+        icon: <Bell className="h-5 w-5" />
       },
       {
         id: '4',
@@ -263,7 +254,7 @@ export const ManyNotifications: Story = {
         description: '5 people liked your post',
         time: new Date(Date.now() - 180 * 60000).toISOString(),
         read: true,
-        icon: <Heart className="h-5 w-5" />,
+        icon: <Heart className="h-5 w-5" />
       },
       {
         id: '5',
@@ -271,7 +262,7 @@ export const ManyNotifications: Story = {
         description: 'You received a 5-star review',
         time: new Date(Date.now() - 360 * 60000).toISOString(),
         read: true,
-        icon: <Star className="h-5 w-5" />,
+        icon: <Star className="h-5 w-5" />
       },
       {
         id: '6',
@@ -279,7 +270,7 @@ export const ManyNotifications: Story = {
         description: 'Someone replied to your comment',
         time: new Date(Date.now() - 720 * 60000).toISOString(),
         read: true,
-        icon: <MessageSquare className="h-5 w-5" />,
+        icon: <MessageSquare className="h-5 w-5" />
       },
     ]);
 
@@ -310,14 +301,11 @@ export const ManyNotifications: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };
 
 // All Unread
@@ -330,7 +318,7 @@ export const AllUnread: Story = {
         description: 'Sarah commented on your post',
         time: new Date(Date.now() - 5 * 60000).toISOString(),
         read: false,
-        icon: <MessageSquare className="h-5 w-5" />,
+        icon: <MessageSquare className="h-5 w-5" />
       },
       {
         id: '2',
@@ -338,7 +326,7 @@ export const AllUnread: Story = {
         description: 'Ahmed is following you',
         time: new Date(Date.now() - 15 * 60000).toISOString(),
         read: false,
-        icon: <UserPlus className="h-5 w-5" />,
+        icon: <UserPlus className="h-5 w-5" />
       },
       {
         id: '3',
@@ -346,7 +334,7 @@ export const AllUnread: Story = {
         description: 'Important update available',
         time: new Date(Date.now() - 30 * 60000).toISOString(),
         read: false,
-        icon: <AlertCircle className="h-5 w-5" />,
+        icon: <AlertCircle className="h-5 w-5" />
       },
     ]);
 
@@ -375,14 +363,11 @@ export const AllUnread: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };
 
 // All Read
@@ -395,7 +380,7 @@ export const AllRead: Story = {
         description: 'Sarah commented on your post',
         time: new Date(Date.now() - 1440 * 60000).toISOString(),
         read: true,
-        icon: <MessageSquare className="h-5 w-5" />,
+        icon: <MessageSquare className="h-5 w-5" />
       },
       {
         id: '2',
@@ -403,7 +388,7 @@ export const AllRead: Story = {
         description: 'Ahmed is following you',
         time: new Date(Date.now() - 2880 * 60000).toISOString(),
         read: true,
-        icon: <UserPlus className="h-5 w-5" />,
+        icon: <UserPlus className="h-5 w-5" />
       },
       {
         id: '3',
@@ -411,7 +396,7 @@ export const AllRead: Story = {
         description: 'Someone liked your post',
         time: new Date(Date.now() - 4320 * 60000).toISOString(),
         read: true,
-        icon: <Heart className="h-5 w-5" />,
+        icon: <Heart className="h-5 w-5" />
       },
     ]);
 
@@ -435,14 +420,11 @@ export const AllRead: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };
 
 // With Mixed Avatars and Icons
@@ -456,7 +438,7 @@ export const MixedAvatarsAndIcons: Story = {
         time: new Date(Date.now() - 10 * 60000).toISOString(),
         read: false,
         icon: <Star className="h-5 w-5" />,
-        avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=John',
+        avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=John'
       },
       {
         id: '2',
@@ -464,7 +446,7 @@ export const MixedAvatarsAndIcons: Story = {
         description: 'Your account was updated',
         time: new Date(Date.now() - 60 * 60000).toISOString(),
         read: false,
-        icon: <Bell className="h-5 w-5" />,
+        icon: <Bell className="h-5 w-5" />
       },
       {
         id: '3',
@@ -473,7 +455,7 @@ export const MixedAvatarsAndIcons: Story = {
         time: new Date(Date.now() - 120 * 60000).toISOString(),
         read: true,
         icon: <UserPlus className="h-5 w-5" />,
-        avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah',
+        avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah'
       },
     ]);
 
@@ -502,14 +484,11 @@ export const MixedAvatarsAndIcons: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };
 
 // RTL
@@ -524,7 +503,7 @@ export const RTL: Story = {
         descriptionAr: 'سارة علقت: "مقال رائع!"',
         time: new Date(Date.now() - 5 * 60000).toISOString(),
         read: false,
-        icon: <MessageSquare className="h-5 w-5" />,
+        icon: <MessageSquare className="h-5 w-5" />
       },
       {
         id: '2',
@@ -534,7 +513,7 @@ export const RTL: Story = {
         descriptionAr: 'أحمد يتابعك الآن',
         time: new Date(Date.now() - 120 * 60000).toISOString(),
         read: false,
-        icon: <UserPlus className="h-5 w-5" />,
+        icon: <UserPlus className="h-5 w-5" />
       },
       {
         id: '3',
@@ -544,7 +523,7 @@ export const RTL: Story = {
         descriptionAr: '3 أشخاص أعجبهم "البدء مع React"',
         time: new Date(Date.now() - 1440 * 60000).toISOString(),
         read: true,
-        icon: <Heart className="h-5 w-5" />,
+        icon: <Heart className="h-5 w-5" />
       },
     ]);
 
@@ -575,12 +554,9 @@ export const RTL: Story = {
   },
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };

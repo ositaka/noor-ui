@@ -13,7 +13,7 @@ import {
   DropdownMenuGroup,
   DropdownMenuSub,
   DropdownMenuSubContent,
-  DropdownMenuSubTrigger,
+  DropdownMenuSubTrigger
 } from '../../../components/ui/dropdown-menu';
 import { Button } from '../../../components/ui/button';
 import {
@@ -25,7 +25,7 @@ import {
   Mail,
   MessageSquare,
   PlusCircle,
-  MoreHorizontal,
+  MoreHorizontal
 } from 'lucide-react';
 import * as React from 'react';
 
@@ -43,20 +43,20 @@ const meta = {
   title: 'Overlay/Dropdown Menu',
   component: DropdownMenu,
   parameters: {
-    layout: 'centered',
+    layout: 'centered'
   },
   tags: ['autodocs'],
   argTypes: {
     open: {
-      control: { type: 'boolean' },
+      control: { type: 'boolean' }
     },
     defaultOpen: {
-      control: { type: 'boolean' },
+      control: { type: 'boolean' }
     },
     onOpenChange: {
-      control: false,
-    },
-  },
+      control: false
+    }
+  }
 } satisfies Meta<typeof DropdownMenu>;
 
 export default meta;
@@ -65,11 +65,11 @@ type Story = StoryObj<typeof meta>;
 // Default - Interactive playground with controls
 export const Default: Story = {
   args: {
-    defaultOpen: false,
+    defaultOpen: false
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   render: (args) => (
     <DropdownMenu {...args}>
@@ -109,10 +109,10 @@ export const Default: Story = {
   parameters: {
     docs: {
       story: {
-        inline: false,
-      },
-    },
-  },
+        inline: false
+      }
+    }
+  }
 };
 
 // Basic Usage - from component page lines 216-248
@@ -154,17 +154,17 @@ export const BasicUsage: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Dropdown menu with icons and keyboard shortcuts. Classic account menu pattern.',
-      },
-    },
-  },
+        story: 'Dropdown menu with icons and keyboard shortcuts. Classic account menu pattern.'
+      }
+    }
+  }
 };
 
 // With Icons - from component page lines 275-301
@@ -200,17 +200,17 @@ export const WithIcons: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Menu with icons on the left and keyboard shortcuts on the right.',
-      },
-    },
-  },
+        story: 'Menu with icons on the left and keyboard shortcuts on the right.'
+      }
+    }
+  }
 };
 
 // With Checkboxes - from component page lines 314-334
@@ -239,17 +239,17 @@ export const WithCheckboxes: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Dropdown menu with checkbox items for toggling view options.',
-      },
-    },
-  },
+        story: 'Dropdown menu with checkbox items for toggling view options.'
+      }
+    }
+  }
 };
 
 // With Radio Group - from component page lines 347-362
@@ -276,17 +276,17 @@ export const WithRadioGroup: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Dropdown menu with radio group for selecting a single option.',
-      },
-    },
-  },
+        story: 'Dropdown menu with radio group for selecting a single option.'
+      }
+    }
+  }
 };
 
 // With Sub Menus - from component page lines 375-412
@@ -333,17 +333,17 @@ export const WithSubMenus: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Dropdown menu with nested sub-menus for complex action hierarchies.',
-      },
-    },
-  },
+        story: 'Dropdown menu with nested sub-menus for complex action hierarchies.'
+      }
+    }
+  }
 };
 
 // All Variants
@@ -406,17 +406,17 @@ export const AllVariants: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'All dropdown menu variants: with icons, checkboxes, and radio groups.',
-      },
-    },
-  },
+        story: 'All dropdown menu variants: with icons, checkboxes, and radio groups.'
+      }
+    }
+  }
 };
 
 // RTL Basic
@@ -458,17 +458,17 @@ export const RTLBasic: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Dropdown menu in RTL with Arabic text. Icons and shortcuts position correctly.',
-      },
-    },
-  },
+        story: 'Dropdown menu in RTL with Arabic text. Icons and shortcuts position correctly.'
+      }
+    }
+  }
 };
 
 // RTL With Checkboxes
@@ -497,17 +497,17 @@ export const RTLWithCheckboxes: Story = {
   },
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Dropdown menu with checkboxes in RTL. Checkmarks position on the right (start).',
-      },
-    },
-  },
+        story: 'Dropdown menu with checkboxes in RTL. Checkmarks position on the right (start).'
+      }
+    }
+  }
 };
 
 // RTL With Radio Group
@@ -534,17 +534,17 @@ export const RTLWithRadioGroup: Story = {
   },
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Dropdown menu with radio group in RTL. Radio indicators position correctly.',
-      },
-    },
-  },
+        story: 'Dropdown menu with radio group in RTL. Radio indicators position correctly.'
+      }
+    }
+  }
 };
 
 // RTL With Sub Menus
@@ -591,15 +591,15 @@ export const RTLWithSubMenus: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Dropdown menu with sub-menus in RTL. Chevron icons flip to point left.',
-      },
-    },
-  },
+        story: 'Dropdown menu with sub-menus in RTL. Chevron icons flip to point left.'
+      }
+    }
+  }
 };

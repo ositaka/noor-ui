@@ -18,50 +18,50 @@ const meta = {
   title: 'Forms/Number Input',
   component: NumberInput,
   parameters: {
-    layout: 'centered',
+    layout: 'centered'
   },
   tags: ['autodocs'],
   argTypes: {
     onChange: {
-      control: false,
+      control: false
     },
     onValueChange: {
-      control: false,
+      control: false
     },
     formatDisplay: {
-      control: false,
+      control: false
     },
     parseValue: {
-      control: false,
+      control: false
     },
     value: {
-      control: { type: 'number' },
+      control: { type: 'number' }
     },
     min: {
-      control: { type: 'number' },
+      control: { type: 'number' }
     },
     max: {
-      control: { type: 'number' },
+      control: { type: 'number' }
     },
     step: {
-      control: { type: 'number' },
+      control: { type: 'number' }
     },
     precision: {
-      control: { type: 'number' },
+      control: { type: 'number' }
     },
     showControls: {
-      control: { type: 'boolean' },
+      control: { type: 'boolean' }
     },
     allowNegative: {
-      control: { type: 'boolean' },
+      control: { type: 'boolean' }
     },
     allowDecimal: {
-      control: { type: 'boolean' },
+      control: { type: 'boolean' }
     },
     disabled: {
-      control: { type: 'boolean' },
-    },
-  },
+      control: { type: 'boolean' }
+    }
+  }
 } satisfies Meta<typeof NumberInput>;
 
 export default meta;
@@ -73,11 +73,11 @@ export const Default: Story = {
     min: 0,
     max: 100,
     step: 1,
-    showControls: true,
+    showControls: true
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   render: (args) => {
     const [value, setValue] = React.useState<number | undefined>(42);
@@ -93,10 +93,10 @@ export const Default: Story = {
   parameters: {
     docs: {
       story: {
-        inline: false,
-      },
-    },
-  },
+        inline: false
+      }
+    }
+  }
 };
 
 // Basic Number Input - from component page lines 228-234
@@ -114,17 +114,17 @@ export const BasicNumberInput: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Basic number input with min/max validation and increment/decrement controls.',
-      },
-    },
-  },
+        story: 'Basic number input with min/max validation and increment/decrement controls.'
+      }
+    }
+  }
 };
 
 // Without Controls - from component page lines 256-266
@@ -149,17 +149,17 @@ export const WithoutControls: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Number input without increment/decrement controls, just a plain input field.',
-      },
-    },
-  },
+        story: 'Number input without increment/decrement controls, just a plain input field.'
+      }
+    }
+  }
 };
 
 // Decimal Precision - from component page lines 283-287
@@ -179,17 +179,17 @@ export const DecimalPrecision: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Number input with decimal precision control, perfect for percentages and fractional values.',
-      },
-    },
-  },
+        story: 'Number input with decimal precision control, perfect for percentages and fractional values.'
+      }
+    }
+  }
 };
 
 // Formatted Display - from component page lines 305-314
@@ -215,17 +215,17 @@ export const FormattedDisplay: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Number input with thousands separator for better readability of large numbers.',
-      },
-    },
-  },
+        story: 'Number input with thousands separator for better readability of large numbers.'
+      }
+    }
+  }
 };
 
 // Currency Input - from component page lines 332-342
@@ -236,7 +236,7 @@ export const CurrencyInput: Story = {
     const formatCurrency = (value: number): string => {
       return new Intl.NumberFormat('en-US', {
         style: 'currency',
-        currency: 'USD',
+        currency: 'USD'
       }).format(value);
     };
 
@@ -257,17 +257,17 @@ export const CurrencyInput: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Number input with custom currency formatting using Intl.NumberFormat.',
-      },
-    },
-  },
+        story: 'Number input with custom currency formatting using Intl.NumberFormat.'
+      }
+    }
+  }
 };
 
 // Product Order - from component page lines 358-395
@@ -278,7 +278,7 @@ export const ProductOrder: Story = {
     const formatCurrency = (value: number): string => {
       return new Intl.NumberFormat('en-US', {
         style: 'currency',
-        currency: 'USD',
+        currency: 'USD'
       }).format(value);
     };
 
@@ -311,17 +311,17 @@ export const ProductOrder: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Real-world e-commerce example with quantity selection and automatic price calculation.',
-      },
-    },
-  },
+        story: 'Real-world e-commerce example with quantity selection and automatic price calculation.'
+      }
+    }
+  }
 };
 
 // Disabled State
@@ -335,17 +335,17 @@ export const DisabledState: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Number input in disabled state.',
-      },
-    },
-  },
+        story: 'Number input in disabled state.'
+      }
+    }
+  }
 };
 
 // RTL Example - Basic
@@ -363,17 +363,17 @@ export const RTLExample: Story = {
   },
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Basic number input with Arabic labels in RTL mode.',
-      },
-    },
-  },
+        story: 'Basic number input with Arabic labels in RTL mode.'
+      }
+    }
+  }
 };
 
 // RTL Currency Input
@@ -384,7 +384,7 @@ export const RTLCurrencyInput: Story = {
     const formatCurrency = (value: number): string => {
       return new Intl.NumberFormat('ar-SA', {
         style: 'currency',
-        currency: 'SAR',
+        currency: 'SAR'
       }).format(value);
     };
 
@@ -405,17 +405,17 @@ export const RTLCurrencyInput: Story = {
   },
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Currency input with Arabic formatting (SAR) in RTL mode.',
-      },
-    },
-  },
+        story: 'Currency input with Arabic formatting (SAR) in RTL mode.'
+      }
+    }
+  }
 };
 
 // RTL Product Order
@@ -426,7 +426,7 @@ export const RTLProductOrder: Story = {
     const formatCurrency = (value: number): string => {
       return new Intl.NumberFormat('ar-SA', {
         style: 'currency',
-        currency: 'SAR',
+        currency: 'SAR'
       }).format(value);
     };
 
@@ -459,15 +459,15 @@ export const RTLProductOrder: Story = {
   },
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Complete product order example in Arabic with RTL layout and SAR currency.',
-      },
-    },
-  },
+        story: 'Complete product order example in Arabic with RTL layout and SAR currency.'
+      }
+    }
+  }
 };

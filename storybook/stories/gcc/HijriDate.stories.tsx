@@ -15,7 +15,7 @@ const meta = {
   title: 'GCC/Hijri Date',
   component: HijriDate,
   parameters: {
-    layout: 'centered',
+    layout: 'centered'
   },
   tags: ['autodocs'],
   argTypes: {
@@ -25,11 +25,11 @@ const meta = {
     hijriDateAr: { control: 'text' },
     variant: {
       control: { type: 'select' },
-      options: ['default', 'badge', 'compact', 'detailed'],
+      options: ['default', 'badge', 'compact', 'detailed']
     },
     showIcon: { control: 'boolean' },
-    className: { control: false },
-  },
+    className: { control: false }
+  }
 } satisfies Meta<typeof HijriDate>;
 
 export default meta;
@@ -42,19 +42,19 @@ export const Default: Story = {
     gregorianDateAr: '٦ نوفمبر ٢٠٢٥',
     hijriDate: '5 Jumada al-Awwal 1447',
     hijriDateAr: '٥ جمادى الأولى ١٤٤٧',
-    showIcon: true,
+    showIcon: true
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     docs: {
       story: {
-        inline: false,
-      },
-    },
-  },
+        inline: false
+      }
+    }
+  }
 };
 
 // Default Variant - from component page lines 116-122
@@ -70,17 +70,17 @@ export const DefaultVariant: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Default Hijri date display with icon.',
-      },
-    },
-  },
+        story: 'Default Hijri date display with icon.'
+      }
+    }
+  }
 };
 
 // Badge Variant - from component page lines 149-155
@@ -96,17 +96,17 @@ export const BadgeVariant: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Badge variant for compact display.',
-      },
-    },
-  },
+        story: 'Badge variant for compact display.'
+      }
+    }
+  }
 };
 
 // Compact Variant - from component page lines 184-190
@@ -125,17 +125,17 @@ export const CompactVariant: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Compact variant for inline text.',
-      },
-    },
-  },
+        story: 'Compact variant for inline text.'
+      }
+    }
+  }
 };
 
 // Detailed Variant - from component page lines 221-228
@@ -152,17 +152,17 @@ export const DetailedVariant: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Detailed variant with enhanced visuals.',
-      },
-    },
-  },
+        story: 'Detailed variant with enhanced visuals.'
+      }
+    }
+  }
 };
 
 // Without Icon
@@ -178,17 +178,17 @@ export const WithoutIcon: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Hijri date without calendar icon.',
-      },
-    },
-  },
+        story: 'Hijri date without calendar icon.'
+      }
+    }
+  }
 };
 
 // All Variants
@@ -238,17 +238,17 @@ export const AllVariants: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Showcase of all Hijri date variants.',
-      },
-    },
-  },
+        story: 'Showcase of all Hijri date variants.'
+      }
+    }
+  }
 };
 
 // RTL Default
@@ -264,17 +264,17 @@ export const RTLDefault: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Hijri date in RTL with Arabic text.',
-      },
-    },
-  },
+        story: 'Hijri date in RTL with Arabic text.'
+      }
+    }
+  }
 };
 
 // RTL Badge
@@ -290,17 +290,17 @@ export const RTLBadge: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Badge variant in RTL layout.',
-      },
-    },
-  },
+        story: 'Badge variant in RTL layout.'
+      }
+    }
+  }
 };
 
 // RTL Compact
@@ -319,17 +319,17 @@ export const RTLCompact: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Compact variant in RTL with Arabic inline text.',
-      },
-    },
-  },
+        story: 'Compact variant in RTL with Arabic inline text.'
+      }
+    }
+  }
 };
 
 // RTL Detailed
@@ -346,15 +346,15 @@ export const RTLDetailed: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Detailed variant in RTL with full Arabic dates.',
-      },
-    },
-  },
+        story: 'Detailed variant in RTL with full Arabic dates.'
+      }
+    }
+  }
 };

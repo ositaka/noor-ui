@@ -19,47 +19,47 @@ const meta = {
   title: 'Data Display/DataTable',
   component: DataTable,
   parameters: {
-    layout: 'padded',
+    layout: 'padded'
   },
   tags: ['autodocs'],
   argTypes: {
     data: {
-      control: false,
+      control: false
     },
     columns: {
-      control: false,
+      control: false
     },
     isLoading: {
-      control: { type: 'boolean' },
+      control: { type: 'boolean' }
     },
     sortBy: {
-      control: false,
+      control: false
     },
     sortDirection: {
-      control: false,
+      control: false
     },
     onSort: {
-      control: false,
+      control: false
     },
     enableSorting: {
-      control: { type: 'boolean' },
+      control: { type: 'boolean' }
     },
     searchable: {
-      control: { type: 'boolean' },
+      control: { type: 'boolean' }
     },
     pagination: {
-      control: { type: 'boolean' },
+      control: { type: 'boolean' }
     },
     striped: {
-      control: { type: 'boolean' },
+      control: { type: 'boolean' }
     },
     hoverable: {
-      control: { type: 'boolean' },
+      control: { type: 'boolean' }
     },
     compact: {
-      control: { type: 'boolean' },
-    },
-  },
+      control: { type: 'boolean' }
+    }
+  }
 } satisfies Meta<typeof DataTable>;
 
 export default meta;
@@ -113,11 +113,11 @@ export const Default: Story = {
   args: {
     data: usersEN,
     columns: basicColumns,
-    hoverable: true,
+    hoverable: true
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   render: (args) => (
     <div className="w-full">
@@ -127,10 +127,10 @@ export const Default: Story = {
   parameters: {
     docs: {
       story: {
-        inline: false,
-      },
-    },
-  },
+        inline: false
+      }
+    }
+  }
 };
 
 // Basic DataTable - from component page lines 656-663
@@ -146,17 +146,17 @@ export const BasicDataTable: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Basic data table with three columns showing user information.',
-      },
-    },
-  },
+        story: 'Basic data table with three columns showing user information.'
+      }
+    }
+  }
 };
 
 // Internal Sorting (Simple) - from component page lines 739-761
@@ -179,17 +179,17 @@ export const InternalSorting: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Simple sorting with enableSorting prop. The component manages sort state internally.',
-      },
-    },
-  },
+        story: 'Simple sorting with enableSorting prop. The component manages sort state internally.'
+      }
+    }
+  }
 };
 
 // External Sorting - from component page lines 764-786
@@ -246,17 +246,17 @@ export const ExternalSorting: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'External state management for advanced use cases (e.g., URL sync, API integration).',
-      },
-    },
-  },
+        story: 'External state management for advanced use cases (e.g., URL sync, API integration).'
+      }
+    }
+  }
 };
 
 // Searchable Table - from component page lines 789-807
@@ -292,17 +292,17 @@ export const SearchableTable: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Data table with built-in search functionality and clear button.',
-      },
-    },
-  },
+        story: 'Data table with built-in search functionality and clear button.'
+      }
+    }
+  }
 };
 
 // Paginated Table - from component page lines 810-831
@@ -339,17 +339,17 @@ export const PaginatedTable: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Data table with integrated pagination controls.',
-      },
-    },
-  },
+        story: 'Data table with integrated pagination controls.'
+      }
+    }
+  }
 };
 
 // Custom Cells - from component page lines 834-847
@@ -360,13 +360,13 @@ export const CustomCells: Story = {
         id: 'name',
         header: 'Name',
         accessorKey: 'name',
-        cell: (row) => <div className="font-medium">{row.name}</div>,
+        cell: (row) => <div className="font-medium">{row.name}</div>
       },
       {
         id: 'email',
         header: 'Email',
         accessorKey: 'email',
-        cell: (row) => <div className="text-muted-foreground">{row.email}</div>,
+        cell: (row) => <div className="text-muted-foreground">{row.email}</div>
       },
       {
         id: 'status',
@@ -376,7 +376,7 @@ export const CustomCells: Story = {
           <Badge variant={row.status === 'Active' ? 'default' : 'secondary'}>
             {row.status}
           </Badge>
-        ),
+        )
       },
       {
         id: 'actions',
@@ -388,7 +388,7 @@ export const CustomCells: Story = {
             <Button size="sm" variant="outline">View</Button>
             <Button size="sm" variant="ghost">Edit</Button>
           </div>
-        ),
+        )
       },
     ];
 
@@ -405,17 +405,17 @@ export const CustomCells: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Custom cell rendering with badges, styled text, and action buttons.',
-      },
-    },
-  },
+        story: 'Custom cell rendering with badges, styled text, and action buttons.'
+      }
+    }
+  }
 };
 
 // Loading State - from component page lines 850-884
@@ -447,17 +447,17 @@ export const LoadingState: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Data table with skeleton loading animation while fetching data.',
-      },
-    },
-  },
+        story: 'Data table with skeleton loading animation while fetching data.'
+      }
+    }
+  }
 };
 
 // Complete Example - from component page lines 887-916
@@ -535,17 +535,17 @@ export const CompleteExample: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Complete example with all features: sorting, searching, pagination, and striped rows.',
-      },
-    },
-  },
+        story: 'Complete example with all features: sorting, searching, pagination, and striped rows.'
+      }
+    }
+  }
 };
 
 // RTL Example - Basic
@@ -569,17 +569,17 @@ export const RTLExample: Story = {
   },
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Basic data table in RTL mode with Arabic text. Text alignment uses text-start for proper display.',
-      },
-    },
-  },
+        story: 'Basic data table in RTL mode with Arabic text. Text alignment uses text-start for proper display.'
+      }
+    }
+  }
 };
 
 // RTL Searchable
@@ -621,17 +621,17 @@ export const RTLSearchable: Story = {
   },
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Searchable data table in RTL with Arabic placeholders. Search icon and clear button adapt to RTL.',
-      },
-    },
-  },
+        story: 'Searchable data table in RTL with Arabic placeholders. Search icon and clear button adapt to RTL.'
+      }
+    }
+  }
 };
 
 // RTL Complete Example
@@ -699,15 +699,15 @@ export const RTLCompleteExample: Story = {
   },
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Complete example in RTL with all features. Sort indicators, pagination arrows, and search all work correctly.',
-      },
-    },
-  },
+        story: 'Complete example in RTL with all features. Sort indicators, pagination arrows, and search all work correctly.'
+      }
+    }
+  }
 };

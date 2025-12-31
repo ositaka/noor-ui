@@ -18,29 +18,29 @@ const meta = {
   title: 'Data Display/StatsCard',
   component: StatsCard,
   parameters: {
-    layout: 'centered',
+    layout: 'centered'
   },
   tags: ['autodocs'],
   argTypes: {
     icon: {
-      control: false,
+      control: false
     },
     label: {
-      control: { type: 'text' },
+      control: { type: 'text' }
     },
     value: {
-      control: { type: 'text' },
+      control: { type: 'text' }
     },
     trend: {
-      control: { type: 'number' },
+      control: { type: 'number' }
     },
     trendLabel: {
-      control: { type: 'text' },
+      control: { type: 'text' }
     },
     className: {
-      control: { type: 'text' },
-    },
-  },
+      control: { type: 'text' }
+    }
+  }
 } satisfies Meta<typeof StatsCard>;
 
 export default meta;
@@ -53,11 +53,11 @@ export const Default: Story = {
     label: 'Total Users',
     value: '2,543',
     trend: 12,
-    trendLabel: 'from last month',
+    trendLabel: 'from last month'
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   render: (args) => (
     <div className="w-80">
@@ -67,10 +67,10 @@ export const Default: Story = {
   parameters: {
     docs: {
       story: {
-        inline: false,
-      },
-    },
-  },
+        inline: false
+      }
+    }
+  }
 };
 
 // Dashboard Grid - from component page lines 111-139
@@ -107,17 +107,17 @@ export const DashboardGrid: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Dashboard grid showing 4 stats cards with different metrics. Includes positive, negative, and no trend indicators.',
-      },
-    },
-  },
+        story: 'Dashboard grid showing 4 stats cards with different metrics. Includes positive, negative, and no trend indicators.'
+      }
+    }
+  }
 };
 
 // Positive Trend
@@ -135,17 +135,17 @@ export const PositiveTrend: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Stats card with positive trend (+8%). Trend is displayed in green.',
-      },
-    },
-  },
+        story: 'Stats card with positive trend (+8%). Trend is displayed in green.'
+      }
+    }
+  }
 };
 
 // Negative Trend
@@ -163,17 +163,17 @@ export const NegativeTrend: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Stats card with negative trend (-3%). Trend is displayed in red.',
-      },
-    },
-  },
+        story: 'Stats card with negative trend (-3%). Trend is displayed in red.'
+      }
+    }
+  }
 };
 
 // Without Trend
@@ -189,17 +189,17 @@ export const WithoutTrend: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Stats card without trend indicator. Simple metric display.',
-      },
-    },
-  },
+        story: 'Stats card without trend indicator. Simple metric display.'
+      }
+    }
+  }
 };
 
 // All Metrics
@@ -250,17 +250,17 @@ export const AllMetrics: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Comprehensive dashboard showing various metrics with different icons and trends.',
-      },
-    },
-  },
+        story: 'Comprehensive dashboard showing various metrics with different icons and trends.'
+      }
+    }
+  }
 };
 
 // In Card Container
@@ -295,17 +295,17 @@ export const InCardContainer: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Stats cards grouped inside a card container with a title.',
-      },
-    },
-  },
+        story: 'Stats cards grouped inside a card container with a title.'
+      }
+    }
+  }
 };
 
 // RTL Example - Dashboard Grid
@@ -342,17 +342,17 @@ export const RTLExample: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Dashboard grid in RTL mode with Arabic labels. Layout flows right-to-left.',
-      },
-    },
-  },
+        story: 'Dashboard grid in RTL mode with Arabic labels. Layout flows right-to-left.'
+      }
+    }
+  }
 };
 
 // RTL Positive Trend
@@ -370,17 +370,17 @@ export const RTLPositiveTrend: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Stats card with positive trend in RTL. Trend indicator works correctly in Arabic.',
-      },
-    },
-  },
+        story: 'Stats card with positive trend in RTL. Trend indicator works correctly in Arabic.'
+      }
+    }
+  }
 };
 
 // RTL Negative Trend
@@ -398,17 +398,17 @@ export const RTLNegativeTrend: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Stats card with negative trend in RTL. Red color for negative values works in both directions.',
-      },
-    },
-  },
+        story: 'Stats card with negative trend in RTL. Red color for negative values works in both directions.'
+      }
+    }
+  }
 };
 
 // RTL In Card Container
@@ -443,15 +443,15 @@ export const RTLInCardContainer: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Stats cards in RTL inside a card container. All content flows right-to-left.',
-      },
-    },
-  },
+        story: 'Stats cards in RTL inside a card container. All content flows right-to-left.'
+      }
+    }
+  }
 };

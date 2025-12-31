@@ -15,7 +15,7 @@ const meta = {
   title: 'GCC/Zakat Calculator',
   component: ZakatCalculator,
   parameters: {
-    layout: 'centered',
+    layout: 'centered'
   },
   tags: ['autodocs'],
   argTypes: {
@@ -23,8 +23,8 @@ const meta = {
     silverPricePerGram: { control: 'number' },
     defaultValues: { control: false },
     onCalculate: { control: false },
-    className: { control: false },
-  },
+    className: { control: false }
+  }
 } satisfies Meta<typeof ZakatCalculator>;
 
 export default meta;
@@ -34,11 +34,11 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     goldPricePerGram: 250,
-    silverPricePerGram: 3,
+    silverPricePerGram: 3
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   render: (args) => (
     <div className="max-w-2xl w-full">
@@ -48,10 +48,10 @@ export const Default: Story = {
   parameters: {
     docs: {
       story: {
-        inline: false,
-      },
-    },
-  },
+        inline: false
+      }
+    }
+  }
 };
 
 // With Default Values - from component page lines 124-131
@@ -63,24 +63,24 @@ export const WithDefaultValues: Story = {
         silverPricePerGram={3}
         defaultValues={{
           cash: 75000,
-          gold: 150,
+          gold: 150
         }}
       />
     </div>
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Zakat calculator with pre-filled values.',
-      },
-    },
-  },
+        story: 'Zakat calculator with pre-filled values.'
+      }
+    }
+  }
 };
 
 // Complete Example - from component page lines 54-65
@@ -96,24 +96,24 @@ export const CompleteExample: Story = {
           silver: 0,
           business: 20000,
           investments: 30000,
-          other: 0,
+          other: 0
         }}
       />
     </div>
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Full calculator with all asset categories filled.',
-      },
-    },
-  },
+        story: 'Full calculator with all asset categories filled.'
+      }
+    }
+  }
 };
 
 // Empty Calculator
@@ -125,17 +125,17 @@ export const EmptyCalculator: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Empty calculator ready for user input.',
-      },
-    },
-  },
+        story: 'Empty calculator ready for user input.'
+      }
+    }
+  }
 };
 
 // RTL Default
@@ -147,17 +147,17 @@ export const RTLDefault: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Zakat calculator in RTL with Arabic labels.',
-      },
-    },
-  },
+        story: 'Zakat calculator in RTL with Arabic labels.'
+      }
+    }
+  }
 };
 
 // RTL With Values
@@ -170,24 +170,24 @@ export const RTLWithValues: Story = {
         defaultValues={{
           cash: 75000,
           gold: 150,
-          business: 20000,
+          business: 20000
         }}
       />
     </div>
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Calculator in RTL with pre-filled values and Arabic numerals.',
-      },
-    },
-  },
+        story: 'Calculator in RTL with pre-filled values and Arabic numerals.'
+      }
+    }
+  }
 };
 
 // RTL Complete
@@ -203,22 +203,22 @@ export const RTLComplete: Story = {
           silver: 0,
           business: 20000,
           investments: 30000,
-          other: 0,
+          other: 0
         }}
       />
     </div>
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Complete calculator in RTL with all assets.',
-      },
-    },
-  },
+        story: 'Complete calculator in RTL with all assets.'
+      }
+    }
+  }
 };

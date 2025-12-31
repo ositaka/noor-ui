@@ -17,14 +17,14 @@ const meta = {
   title: 'Forms/Time Picker',
   component: TimePicker,
   parameters: {
-    layout: 'centered',
+    layout: 'centered'
   },
   tags: ['autodocs'],
   argTypes: {
     onTimeChange: {
-      control: false,
-    },
-  },
+      control: false
+    }
+  }
 } satisfies Meta<typeof TimePicker>;
 
 export default meta;
@@ -35,11 +35,11 @@ export const Default: Story = {
   args: {
     placeholder: 'Pick a time',
     placeholderAr: 'اختر الوقت',
-    format: '24h',
+    format: '24h'
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   render: (args) => {
     const [time, setTime] = React.useState<Time>({ hours: 9, minutes: 30 });
@@ -62,10 +62,10 @@ export const Default: Story = {
   parameters: {
     docs: {
       story: {
-        inline: false,
-      },
-    },
-  },
+        inline: false
+      }
+    }
+  }
 };
 
 // Basic 24h Format - from component page lines 258-266
@@ -95,17 +95,17 @@ export const Basic24hFormat: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Basic time picker with 24-hour format.',
-      },
-    },
-  },
+        story: 'Basic time picker with 24-hour format.'
+      }
+    }
+  }
 };
 
 // 12h Format - from component page lines 282-295
@@ -137,17 +137,17 @@ export const Format12h: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Time picker with 12-hour format and AM/PM toggle.',
-      },
-    },
-  },
+        story: 'Time picker with 12-hour format and AM/PM toggle.'
+      }
+    }
+  }
 };
 
 // Time Range - from component page lines 310-321
@@ -155,7 +155,7 @@ export const TimeRange: Story = {
   render: () => {
     const [timeRange, setTimeRange] = React.useState<TimeRange | undefined>({
       from: { hours: 9, minutes: 0 },
-      to: { hours: 17, minutes: 0 },
+      to: { hours: 17, minutes: 0 }
     });
 
     const formatTime = (time: Time | undefined): string => {
@@ -198,17 +198,17 @@ export const TimeRange: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Time range picker for selecting start and end times with duration calculation.',
-      },
-    },
-  },
+        story: 'Time range picker for selecting start and end times with duration calculation.'
+      }
+    }
+  }
 };
 
 // Minute Step - from component page lines 338-348
@@ -241,17 +241,17 @@ export const MinuteIntervals: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Time picker with 15-minute step intervals.',
-      },
-    },
-  },
+        story: 'Time picker with 15-minute step intervals.'
+      }
+    }
+  }
 };
 
 // Real World - Medical Appointment - from component page lines 364-416
@@ -332,17 +332,17 @@ export const MedicalAppointment: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Medical appointment booking with 12h format and automatic end time calculation.',
-      },
-    },
-  },
+        story: 'Medical appointment booking with 12h format and automatic end time calculation.'
+      }
+    }
+  }
 };
 
 // Work Schedule - from component page lines 456-501
@@ -416,17 +416,17 @@ export const WorkSchedule: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Work schedule example with time range and total hours calculation.',
-      },
-    },
-  },
+        story: 'Work schedule example with time range and total hours calculation.'
+      }
+    }
+  }
 };
 
 // Disabled State
@@ -455,17 +455,17 @@ export const DisabledState: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Disabled time picker state.',
-      },
-    },
-  },
+        story: 'Disabled time picker state.'
+      }
+    }
+  }
 };
 
 // RTL Example
@@ -495,17 +495,17 @@ export const RTLExample: Story = {
   },
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Time picker with Arabic labels in RTL mode.',
-      },
-    },
-  },
+        story: 'Time picker with Arabic labels in RTL mode.'
+      }
+    }
+  }
 };
 
 // RTL 12h Format
@@ -537,17 +537,17 @@ export const RTL12hFormat: Story = {
   },
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Time picker with 12-hour format in Arabic, showing proper RTL AM/PM (ص/م) formatting.',
-      },
-    },
-  },
+        story: 'Time picker with 12-hour format in Arabic, showing proper RTL AM/PM (ص/م) formatting.'
+      }
+    }
+  }
 };
 
 // RTL Medical Appointment
@@ -628,15 +628,15 @@ export const RTLMedicalAppointment: Story = {
   },
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Complete medical appointment example in Arabic with RTL support and proper time formatting.',
-      },
-    },
-  },
+        story: 'Complete medical appointment example in Arabic with RTL support and proper time formatting.'
+      }
+    }
+  }
 };

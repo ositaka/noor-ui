@@ -16,32 +16,32 @@ const meta = {
   title: 'Basic/Button Arrow',
   component: ButtonArrow,
   parameters: {
-    layout: 'centered',
+    layout: 'centered'
   },
   tags: ['autodocs'],
   argTypes: {
     direction: {
       control: { type: 'select' },
-      options: ['forward', 'back'],
+      options: ['forward', 'back']
     },
     icon: {
       control: { type: 'select' },
-      options: ['chevron', 'arrow'],
+      options: ['chevron', 'arrow']
     },
     iconPosition: {
       control: { type: 'select' },
-      options: ['start', 'end', 'auto'],
+      options: ['start', 'end', 'auto']
     },
     iconSize: {
       control: { type: 'select' },
-      options: ['sm', 'md', 'lg'],
+      options: ['sm', 'md', 'lg']
     },
     hideIcon: { control: 'boolean' },
     variant: {
       control: { type: 'select' },
-      options: ['primary', 'secondary', 'outline', 'ghost'],
-    },
-  },
+      options: ['primary', 'secondary', 'outline', 'ghost']
+    }
+  }
 } satisfies Meta<typeof ButtonArrow>;
 
 export default meta;
@@ -51,19 +51,19 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     direction: 'forward',
-    children: 'Continue',
+    children: 'Continue'
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     docs: {
       story: {
-        inline: false,
-      },
-    },
-  },
+        inline: false
+      }
+    }
+  }
 };
 
 // Directions - from component page lines 166-168
@@ -80,17 +80,17 @@ export const Directions: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Forward and back directional buttons.',
-      },
-    },
-  },
+        story: 'Forward and back directional buttons.'
+      }
+    }
+  }
 };
 
 // Icon Styles - from component page lines 182-186
@@ -109,17 +109,17 @@ export const IconStyles: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Chevron and arrow icon styles.',
-      },
-    },
-  },
+        story: 'Chevron and arrow icon styles.'
+      }
+    }
+  }
 };
 
 // With Variants
@@ -138,17 +138,17 @@ export const WithVariants: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'ButtonArrow with all button variants.',
-      },
-    },
-  },
+        story: 'ButtonArrow with all button variants.'
+      }
+    }
+  }
 };
 
 // Forward Only
@@ -161,17 +161,17 @@ export const ForwardOnly: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Forward direction buttons only.',
-      },
-    },
-  },
+        story: 'Forward direction buttons only.'
+      }
+    }
+  }
 };
 
 // Back Only
@@ -184,17 +184,17 @@ export const BackOnly: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Back direction buttons only.',
-      },
-    },
-  },
+        story: 'Back direction buttons only.'
+      }
+    }
+  }
 };
 
 // RTL Forward
@@ -207,17 +207,17 @@ export const RTLForward: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Forward buttons in RTL - arrows auto-flip.',
-      },
-    },
-  },
+        story: 'Forward buttons in RTL - arrows auto-flip.'
+      }
+    }
+  }
 };
 
 // RTL Back
@@ -230,15 +230,15 @@ export const RTLBack: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Back buttons in RTL - arrows auto-flip.',
-      },
-    },
-  },
+        story: 'Back buttons in RTL - arrows auto-flip.'
+      }
+    }
+  }
 };

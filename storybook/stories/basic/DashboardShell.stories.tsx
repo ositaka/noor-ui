@@ -8,7 +8,7 @@ import {
   Users,
   BarChart3,
   MessageSquare,
-  Bell,
+  Bell
 } from 'lucide-react';
 
 /**
@@ -24,7 +24,7 @@ const meta = {
   title: 'Basic/Dashboard Shell',
   component: DashboardShell,
   parameters: {
-    layout: 'fullscreen',
+    layout: 'fullscreen'
   },
   tags: ['autodocs'],
   argTypes: {
@@ -37,8 +37,8 @@ const meta = {
     onProfileClick: { control: false },
     onSettingsClick: { control: false },
     onLogout: { control: false },
-    relative: { control: 'boolean' },
-  },
+    relative: { control: 'boolean' }
+  }
 } satisfies Meta<typeof DashboardShell>;
 
 export default meta;
@@ -47,7 +47,7 @@ type Story = StoryObj<typeof meta>;
 // Default
 export const Default: Story = {
   args: {
-    relative: true,
+    relative: true
   },
   render: (args) => {
     const navItems = [
@@ -55,20 +55,20 @@ export const Default: Story = {
         title: 'Dashboard',
         titleAr: 'لوحة التحكم',
         href: '#',
-        icon: <Home className="h-5 w-5" />,
+        icon: <Home className="h-5 w-5" />
       },
       {
         title: 'Posts',
         titleAr: 'المقالات',
         href: '#',
         icon: <FileText className="h-5 w-5" />,
-        badge: 5,
+        badge: 5
       },
       {
         title: 'Settings',
         titleAr: 'الإعدادات',
         href: '#',
-        icon: <Settings className="h-5 w-5" />,
+        icon: <Settings className="h-5 w-5" />
       },
     ];
 
@@ -79,7 +79,7 @@ export const Default: Story = {
           navItems={navItems}
           user={{
             name: 'Ahmed Al-Rashid',
-            email: 'ahmed@example.com',
+            email: 'ahmed@example.com'
           }}
           onLogout={() => console.log('Logout')}
         >
@@ -95,8 +95,8 @@ export const Default: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
-  },
+    locale: 'en'
+  }
 };
 
 // Basic Usage - from page lines 260-292
@@ -107,32 +107,32 @@ export const BasicUsage: Story = {
         title: 'Dashboard',
         titleAr: 'لوحة التحكم',
         href: '#',
-        icon: <Home className="h-5 w-5" />,
+        icon: <Home className="h-5 w-5" />
       },
       {
         title: 'Posts',
         titleAr: 'المقالات',
         href: '#',
         icon: <FileText className="h-5 w-5" />,
-        badge: 5,
+        badge: 5
       },
       {
         title: 'Team',
         titleAr: 'الفريق',
         href: '#',
-        icon: <Users className="h-5 w-5" />,
+        icon: <Users className="h-5 w-5" />
       },
       {
         title: 'Analytics',
         titleAr: 'التحليلات',
         href: '#',
-        icon: <BarChart3 className="h-5 w-5" />,
+        icon: <BarChart3 className="h-5 w-5" />
       },
       {
         title: 'Settings',
         titleAr: 'الإعدادات',
         href: '#',
-        icon: <Settings className="h-5 w-5" />,
+        icon: <Settings className="h-5 w-5" />
       },
     ];
 
@@ -143,7 +143,7 @@ export const BasicUsage: Story = {
           navItems={navItems}
           user={{
             name: 'Ahmed Al-Rashid',
-            email: 'ahmed@example.com',
+            email: 'ahmed@example.com'
           }}
           onLogout={() => console.log('Logout')}
         >
@@ -159,14 +159,11 @@ export const BasicUsage: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };
 
 // With Notifications - from page lines 444-474
@@ -177,19 +174,19 @@ export const WithNotifications: Story = {
         title: 'Dashboard',
         titleAr: 'لوحة التحكم',
         href: '#',
-        icon: <Home className="h-5 w-5" />,
+        icon: <Home className="h-5 w-5" />
       },
       {
         title: 'Posts',
         titleAr: 'المقالات',
         href: '#',
-        icon: <FileText className="h-5 w-5" />,
+        icon: <FileText className="h-5 w-5" />
       },
       {
         title: 'Team',
         titleAr: 'الفريق',
         href: '#',
-        icon: <Users className="h-5 w-5" />,
+        icon: <Users className="h-5 w-5" />
       },
     ];
 
@@ -200,7 +197,7 @@ export const WithNotifications: Story = {
         description: 'Sarah commented on your post',
         time: new Date(Date.now() - 1000 * 60 * 5).toISOString(),
         read: false,
-        icon: <MessageSquare className="h-5 w-5" />,
+        icon: <MessageSquare className="h-5 w-5" />
       },
       {
         id: '2',
@@ -208,7 +205,7 @@ export const WithNotifications: Story = {
         description: 'Your post "Getting Started" is now live',
         time: new Date(Date.now() - 1000 * 60 * 30).toISOString(),
         read: true,
-        icon: <Bell className="h-5 w-5" />,
+        icon: <Bell className="h-5 w-5" />
       },
     ];
 
@@ -220,7 +217,7 @@ export const WithNotifications: Story = {
           user={{
             name: 'Sarah Johnson',
             email: 'sarah@example.com',
-            image: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah',
+            image: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah'
           }}
           notifications={notifications}
           onProfileClick={() => console.log('Profile clicked')}
@@ -237,14 +234,11 @@ export const WithNotifications: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };
 
 // Full Featured - from page lines 477-513
@@ -255,32 +249,32 @@ export const FullFeatured: Story = {
         title: 'Dashboard',
         titleAr: 'لوحة التحكم',
         href: '#',
-        icon: <Home className="h-5 w-5" />,
+        icon: <Home className="h-5 w-5" />
       },
       {
         title: 'Posts',
         titleAr: 'المقالات',
         href: '#',
         icon: <FileText className="h-5 w-5" />,
-        badge: 5,
+        badge: 5
       },
       {
         title: 'Team',
         titleAr: 'الفريق',
         href: '#',
-        icon: <Users className="h-5 w-5" />,
+        icon: <Users className="h-5 w-5" />
       },
       {
         title: 'Analytics',
         titleAr: 'التحليلات',
         href: '#',
-        icon: <BarChart3 className="h-5 w-5" />,
+        icon: <BarChart3 className="h-5 w-5" />
       },
       {
         title: 'Settings',
         titleAr: 'الإعدادات',
         href: '#',
-        icon: <Settings className="h-5 w-5" />,
+        icon: <Settings className="h-5 w-5" />
       },
     ];
 
@@ -291,7 +285,7 @@ export const FullFeatured: Story = {
         description: 'Sarah commented on your post',
         time: new Date(Date.now() - 1000 * 60 * 5).toISOString(),
         read: false,
-        icon: <MessageSquare className="h-5 w-5" />,
+        icon: <MessageSquare className="h-5 w-5" />
       },
       {
         id: '2',
@@ -299,7 +293,7 @@ export const FullFeatured: Story = {
         description: 'Your post "Getting Started" is now live',
         time: new Date(Date.now() - 1000 * 60 * 30).toISOString(),
         read: true,
-        icon: <Bell className="h-5 w-5" />,
+        icon: <Bell className="h-5 w-5" />
       },
     ];
 
@@ -311,7 +305,7 @@ export const FullFeatured: Story = {
           user={{
             name: 'Fatima Al-Zahra',
             email: 'fatima@example.com',
-            image: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Fatima',
+            image: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Fatima'
           }}
           notifications={notifications}
           onProfileClick={() => console.log('Profile')}
@@ -334,14 +328,11 @@ export const FullFeatured: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };
 
 // With Badges
@@ -352,27 +343,27 @@ export const WithBadges: Story = {
         title: 'Dashboard',
         titleAr: 'لوحة التحكم',
         href: '#',
-        icon: <Home className="h-5 w-5" />,
+        icon: <Home className="h-5 w-5" />
       },
       {
         title: 'Posts',
         titleAr: 'المقالات',
         href: '#',
         icon: <FileText className="h-5 w-5" />,
-        badge: 12,
+        badge: 12
       },
       {
         title: 'Team',
         titleAr: 'الفريق',
         href: '#',
         icon: <Users className="h-5 w-5" />,
-        badge: 3,
+        badge: 3
       },
       {
         title: 'Settings',
         titleAr: 'الإعدادات',
         href: '#',
-        icon: <Settings className="h-5 w-5" />,
+        icon: <Settings className="h-5 w-5" />
       },
     ];
 
@@ -383,7 +374,7 @@ export const WithBadges: Story = {
           navItems={navItems}
           user={{
             name: 'Nuno Marques',
-            email: 'nuno@example.com',
+            email: 'nuno@example.com'
           }}
           onLogout={() => console.log('Logout')}
         >
@@ -399,14 +390,11 @@ export const WithBadges: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };
 
 // With User Avatar
@@ -417,19 +405,19 @@ export const WithUserAvatar: Story = {
         title: 'Dashboard',
         titleAr: 'لوحة التحكم',
         href: '#',
-        icon: <Home className="h-5 w-5" />,
+        icon: <Home className="h-5 w-5" />
       },
       {
         title: 'Posts',
         titleAr: 'المقالات',
         href: '#',
-        icon: <FileText className="h-5 w-5" />,
+        icon: <FileText className="h-5 w-5" />
       },
       {
         title: 'Settings',
         titleAr: 'الإعدادات',
         href: '#',
-        icon: <Settings className="h-5 w-5" />,
+        icon: <Settings className="h-5 w-5" />
       },
     ];
 
@@ -441,7 +429,7 @@ export const WithUserAvatar: Story = {
           user={{
             name: 'Fatima Al-Zahra',
             email: 'fatima@example.com',
-            image: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Fatima',
+            image: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Fatima'
           }}
           onProfileClick={() => console.log('Profile')}
           onSettingsClick={() => console.log('Settings')}
@@ -459,14 +447,11 @@ export const WithUserAvatar: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };
 
 // Without Notifications
@@ -477,25 +462,25 @@ export const WithoutNotifications: Story = {
         title: 'Dashboard',
         titleAr: 'لوحة التحكم',
         href: '#',
-        icon: <Home className="h-5 w-5" />,
+        icon: <Home className="h-5 w-5" />
       },
       {
         title: 'Posts',
         titleAr: 'المقالات',
         href: '#',
-        icon: <FileText className="h-5 w-5" />,
+        icon: <FileText className="h-5 w-5" />
       },
       {
         title: 'Analytics',
         titleAr: 'التحليلات',
         href: '#',
-        icon: <BarChart3 className="h-5 w-5" />,
+        icon: <BarChart3 className="h-5 w-5" />
       },
       {
         title: 'Settings',
         titleAr: 'الإعدادات',
         href: '#',
-        icon: <Settings className="h-5 w-5" />,
+        icon: <Settings className="h-5 w-5" />
       },
     ];
 
@@ -506,7 +491,7 @@ export const WithoutNotifications: Story = {
           navItems={navItems}
           user={{
             name: 'Ahmed Al-Rashid',
-            email: 'ahmed@example.com',
+            email: 'ahmed@example.com'
           }}
           onLogout={() => console.log('Logout')}
         >
@@ -522,14 +507,11 @@ export const WithoutNotifications: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };
 
 // Minimal Navigation
@@ -540,13 +522,13 @@ export const MinimalNavigation: Story = {
         title: 'Dashboard',
         titleAr: 'لوحة التحكم',
         href: '#',
-        icon: <Home className="h-5 w-5" />,
+        icon: <Home className="h-5 w-5" />
       },
       {
         title: 'Settings',
         titleAr: 'الإعدادات',
         href: '#',
-        icon: <Settings className="h-5 w-5" />,
+        icon: <Settings className="h-5 w-5" />
       },
     ];
 
@@ -557,7 +539,7 @@ export const MinimalNavigation: Story = {
           navItems={navItems}
           user={{
             name: 'User',
-            email: 'user@example.com',
+            email: 'user@example.com'
           }}
           onLogout={() => console.log('Logout')}
         >
@@ -573,14 +555,11 @@ export const MinimalNavigation: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };
 
 // RTL
@@ -591,32 +570,32 @@ export const RTL: Story = {
         title: 'Dashboard',
         titleAr: 'لوحة التحكم',
         href: '#',
-        icon: <Home className="h-5 w-5" />,
+        icon: <Home className="h-5 w-5" />
       },
       {
         title: 'Posts',
         titleAr: 'المقالات',
         href: '#',
         icon: <FileText className="h-5 w-5" />,
-        badge: 5,
+        badge: 5
       },
       {
         title: 'Team',
         titleAr: 'الفريق',
         href: '#',
-        icon: <Users className="h-5 w-5" />,
+        icon: <Users className="h-5 w-5" />
       },
       {
         title: 'Analytics',
         titleAr: 'التحليلات',
         href: '#',
-        icon: <BarChart3 className="h-5 w-5" />,
+        icon: <BarChart3 className="h-5 w-5" />
       },
       {
         title: 'Settings',
         titleAr: 'الإعدادات',
         href: '#',
-        icon: <Settings className="h-5 w-5" />,
+        icon: <Settings className="h-5 w-5" />
       },
     ];
 
@@ -627,7 +606,7 @@ export const RTL: Story = {
         description: 'سارة علقت على منشورك',
         time: new Date(Date.now() - 1000 * 60 * 5).toISOString(),
         read: false,
-        icon: <MessageSquare className="h-5 w-5" />,
+        icon: <MessageSquare className="h-5 w-5" />
       },
       {
         id: '2',
@@ -635,7 +614,7 @@ export const RTL: Story = {
         description: 'منشورك "البداية" متاح الآن',
         time: new Date(Date.now() - 1000 * 60 * 30).toISOString(),
         read: true,
-        icon: <Bell className="h-5 w-5" />,
+        icon: <Bell className="h-5 w-5" />
       },
     ];
 
@@ -647,7 +626,7 @@ export const RTL: Story = {
           user={{
             name: 'فاطمة الزهراء',
             email: 'fatima@example.com',
-            image: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Fatima',
+            image: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Fatima'
           }}
           notifications={notifications}
           onProfileClick={() => console.log('الملف الشخصي')}
@@ -669,12 +648,9 @@ export const RTL: Story = {
   },
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };

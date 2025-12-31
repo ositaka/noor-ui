@@ -7,7 +7,7 @@ import {
   SheetTitle,
   SheetTrigger,
   SheetFooter,
-  SheetClose,
+  SheetClose
 } from '../../../components/ui/sheet';
 import { Button } from '../../../components/ui/button';
 import { Input } from '../../../components/ui/input';
@@ -28,20 +28,20 @@ const meta = {
   title: 'Overlay/Sheet',
   component: Sheet,
   parameters: {
-    layout: 'centered',
+    layout: 'centered'
   },
   tags: ['autodocs'],
   argTypes: {
     open: {
-      control: { type: 'boolean' },
+      control: { type: 'boolean' }
     },
     defaultOpen: {
-      control: { type: 'boolean' },
+      control: { type: 'boolean' }
     },
     onOpenChange: {
-      control: false,
-    },
-  },
+      control: false
+    }
+  }
 } satisfies Meta<typeof Sheet>;
 
 export default meta;
@@ -50,11 +50,11 @@ type Story = StoryObj<typeof meta>;
 // Default - Interactive playground with controls
 export const Default: Story = {
   args: {
-    defaultOpen: false,
+    defaultOpen: false
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   render: (args) => (
     <Sheet {...args}>
@@ -79,10 +79,10 @@ export const Default: Story = {
   parameters: {
     docs: {
       story: {
-        inline: false,
-      },
-    },
-  },
+        inline: false
+      }
+    }
+  }
 };
 
 // From End (Default) - from component page lines 182-199
@@ -107,17 +107,17 @@ export const FromEnd: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Sheet sliding from the end (right in LTR, left in RTL). This is the default side.',
-      },
-    },
-  },
+        story: 'Sheet sliding from the end (right in LTR, left in RTL). This is the default side.'
+      }
+    }
+  }
 };
 
 // From Start - from component page lines 228-240
@@ -142,17 +142,17 @@ export const FromStart: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Sheet sliding from the start (left in LTR, right in RTL).',
-      },
-    },
-  },
+        story: 'Sheet sliding from the start (left in LTR, right in RTL).'
+      }
+    }
+  }
 };
 
 // From Top - from component page lines 256-268
@@ -175,17 +175,17 @@ export const FromTop: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Sheet sliding from the top of the screen.',
-      },
-    },
-  },
+        story: 'Sheet sliding from the top of the screen.'
+      }
+    }
+  }
 };
 
 // From Bottom - from component page lines 270-283
@@ -208,17 +208,17 @@ export const FromBottom: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Sheet sliding from the bottom of the screen.',
-      },
-    },
-  },
+        story: 'Sheet sliding from the bottom of the screen.'
+      }
+    }
+  }
 };
 
 // All Sides
@@ -276,17 +276,17 @@ export const AllSides: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'All four sides demonstrated: start, end, top, and bottom.',
-      },
-    },
-  },
+        story: 'All four sides demonstrated: start, end, top, and bottom.'
+      }
+    }
+  }
 };
 
 // With Form - from component page lines 293-325
@@ -328,17 +328,17 @@ export const WithForm: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Sheet with form inputs for editing profile information.',
-      },
-    },
-  },
+        story: 'Sheet with form inputs for editing profile information.'
+      }
+    }
+  }
 };
 
 // Navigation Menu
@@ -374,17 +374,17 @@ export const NavigationMenu: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Sheet used as a navigation menu sliding from the start.',
-      },
-    },
-  },
+        story: 'Sheet used as a navigation menu sliding from the start.'
+      }
+    }
+  }
 };
 
 // RTL From End
@@ -407,17 +407,17 @@ export const RTLFromEnd: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Sheet in RTL sliding from end (left in RTL). Demonstrates automatic positioning.',
-      },
-    },
-  },
+        story: 'Sheet in RTL sliding from end (left in RTL). Demonstrates automatic positioning.'
+      }
+    }
+  }
 };
 
 // RTL From Start
@@ -440,17 +440,17 @@ export const RTLFromStart: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Sheet in RTL sliding from start (right in RTL). Demonstrates automatic positioning.',
-      },
-    },
-  },
+        story: 'Sheet in RTL sliding from start (right in RTL). Demonstrates automatic positioning.'
+      }
+    }
+  }
 };
 
 // RTL With Form
@@ -492,17 +492,17 @@ export const RTLWithForm: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Sheet with form in RTL. All content flows right-to-left correctly.',
-      },
-    },
-  },
+        story: 'Sheet with form in RTL. All content flows right-to-left correctly.'
+      }
+    }
+  }
 };
 
 // RTL All Sides
@@ -560,15 +560,15 @@ export const RTLAllSides: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'All four sides in RTL: start, end, top, bottom with proper positioning.',
-      },
-    },
-  },
+        story: 'All four sides in RTL: start, end, top, bottom with proper positioning.'
+      }
+    }
+  }
 };

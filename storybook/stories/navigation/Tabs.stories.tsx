@@ -18,20 +18,20 @@ const meta = {
   title: 'Navigation/Tabs',
   component: Tabs,
   parameters: {
-    layout: 'centered',
+    layout: 'centered'
   },
   tags: ['autodocs'],
   argTypes: {
     defaultValue: {
-      control: { type: 'text' },
+      control: { type: 'text' }
     },
     value: {
-      control: { type: 'text' },
+      control: { type: 'text' }
     },
     onValueChange: {
-      control: false,
-    },
-  },
+      control: false
+    }
+  }
 } satisfies Meta<typeof Tabs>;
 
 export default meta;
@@ -40,11 +40,11 @@ type Story = StoryObj<typeof meta>;
 // Default - Interactive playground with controls (hidden from stories list to avoid ID conflicts)
 export const Default: Story = {
   args: {
-    defaultValue: 'account',
+    defaultValue: 'account'
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   render: (args) => (
     <Tabs {...args} className="w-full max-w-md">
@@ -85,10 +85,10 @@ export const Default: Story = {
   parameters: {
     docs: {
       story: {
-        inline: false,
-      },
-    },
-  },
+        inline: false
+      }
+    }
+  }
 };
 
 // Basic Tabs - from component page lines 128-161
@@ -131,17 +131,17 @@ export const BasicTabs: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Basic tabs with three sections: Account, Password, and Settings.',
-      },
-    },
-  },
+        story: 'Basic tabs with three sections: Account, Password, and Settings.'
+      }
+    }
+  }
 };
 
 // With Icons - from component page lines 188-213
@@ -176,17 +176,17 @@ export const WithIcons: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Tabs with icons for visual clarity. Icons are placed before the text.',
-      },
-    },
-  },
+        story: 'Tabs with icons for visual clarity. Icons are placed before the text.'
+      }
+    }
+  }
 };
 
 // Controlled - from component page lines 223-252
@@ -230,17 +230,17 @@ export const Controlled: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Controlled tabs with external state management. Shows active tab value above.',
-      },
-    },
-  },
+        story: 'Controlled tabs with external state management. Shows active tab value above.'
+      }
+    }
+  }
 };
 
 // Two Tabs
@@ -273,17 +273,17 @@ export const TwoTabs: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Tabs with two options, using grid-cols-2 for equal width.',
-      },
-    },
-  },
+        story: 'Tabs with two options, using grid-cols-2 for equal width.'
+      }
+    }
+  }
 };
 
 // RTL Example - Basic
@@ -326,17 +326,17 @@ export const RTLExample: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Tabs with Arabic labels in RTL mode. Tab order and layout adapt automatically.',
-      },
-    },
-  },
+        story: 'Tabs with Arabic labels in RTL mode. Tab order and layout adapt automatically.'
+      }
+    }
+  }
 };
 
 // RTL With Icons
@@ -371,17 +371,17 @@ export const RTLWithIcons: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Tabs with icons in RTL mode. Icons and text flow correctly right-to-left.',
-      },
-    },
-  },
+        story: 'Tabs with icons in RTL mode. Icons and text flow correctly right-to-left.'
+      }
+    }
+  }
 };
 
 // RTL Controlled
@@ -425,15 +425,15 @@ export const RTLControlled: Story = {
   },
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Controlled tabs in RTL with Arabic text. State management works the same in both directions.',
-      },
-    },
-  },
+        story: 'Controlled tabs in RTL with Arabic text. State management works the same in both directions.'
+      }
+    }
+  }
 };

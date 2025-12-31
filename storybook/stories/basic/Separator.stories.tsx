@@ -15,9 +15,9 @@ const meta = {
   title: 'Basic/Separator',
   component: Separator,
   parameters: {
-    layout: 'centered',
+    layout: 'centered'
   },
-  tags: ['autodocs'],
+  tags: ['autodocs']
 } satisfies Meta<typeof Separator>;
 
 export default meta;
@@ -27,11 +27,11 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     orientation: 'horizontal',
-    decorative: true,
+    decorative: true
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   render: (args) => (
     <div className="w-full max-w-md space-y-4">
@@ -43,7 +43,7 @@ export const Default: Story = {
         <p className="text-sm">Content below separator</p>
       </div>
     </div>
-  ),
+  )
 };
 
 // Horizontal Sections - from component page lines 229-244
@@ -68,11 +68,11 @@ export const HorizontalSections: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-  },
+    controls: { disable: true }
+  }
 };
 
 // Vertical in Buttons - from component page lines 257-265
@@ -90,11 +90,11 @@ export const VerticalInButtons: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-  },
+    controls: { disable: true }
+  }
 };
 
 // In Card - from component page lines 278-304
@@ -125,11 +125,11 @@ export const InCard: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-  },
+    controls: { disable: true }
+  }
 };
 
 // In Navigation - from component page lines 318-334
@@ -155,11 +155,11 @@ export const InNavigation: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-  },
+    controls: { disable: true }
+  }
 };
 
 // In List - from component page lines 347-367
@@ -189,11 +189,11 @@ export const InList: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-  },
+    controls: { disable: true }
+  }
 };
 
 // Custom Styling - from component page lines 379-399
@@ -223,11 +223,11 @@ export const CustomStyling: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-  },
+    controls: { disable: true }
+  }
 };
 
 // RTL Example - from component page lines 477-482
@@ -241,16 +241,16 @@ export const RTLExample: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       description: {
-        story: 'Separator with Arabic text demonstrating RTL support. Automatically switches to RTL mode.',
-      },
-    },
-  },
+        story: 'Separator with Arabic text demonstrating RTL support. Automatically switches to RTL mode.'
+      }
+    }
+  }
 };
 
 // RTL In Card
@@ -281,16 +281,16 @@ export const RTLInCard: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       description: {
-        story: 'Card with Arabic content and separators in RTL mode.',
-      },
-    },
-  },
+        story: 'Card with Arabic content and separators in RTL mode.'
+      }
+    }
+  }
 };
 
 // RTL Navigation
@@ -316,14 +316,14 @@ export const RTLNavigation: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       description: {
-        story: 'Navigation with vertical separators in RTL mode.',
-      },
-    },
-  },
+        story: 'Navigation with vertical separators in RTL mode.'
+      }
+    }
+  }
 };

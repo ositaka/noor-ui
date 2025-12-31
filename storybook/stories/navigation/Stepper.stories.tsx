@@ -19,31 +19,31 @@ const meta = {
   title: 'Navigation/Stepper',
   component: Stepper,
   parameters: {
-    layout: 'centered',
+    layout: 'centered'
   },
   tags: ['autodocs'],
   argTypes: {
     steps: {
-      control: false,
+      control: false
     },
     currentStep: {
-      control: { type: 'number', min: 0, max: 4 },
+      control: { type: 'number', min: 0, max: 4 }
     },
     onStepClick: {
-      control: false,
+      control: false
     },
     orientation: {
       control: { type: 'select' },
-      options: ['horizontal', 'vertical'],
+      options: ['horizontal', 'vertical']
     },
     variant: {
       control: { type: 'select' },
-      options: ['default', 'simple', 'circles'],
+      options: ['default', 'simple', 'circles']
     },
     allowSkip: {
-      control: { type: 'boolean' },
-    },
-  },
+      control: { type: 'boolean' }
+    }
+  }
 } satisfies Meta<typeof Stepper>;
 
 export default meta;
@@ -56,14 +56,14 @@ const stepsData: Step[] = [
     title: 'Account Information',
     titleAr: 'معلومات الحساب',
     description: 'Enter your basic details',
-    descriptionAr: 'أدخل التفاصيل الأساسية',
+    descriptionAr: 'أدخل التفاصيل الأساسية'
   },
   {
     id: '2',
     title: 'Personal Details',
     titleAr: 'التفاصيل الشخصية',
     description: 'Tell us more about yourself',
-    descriptionAr: 'أخبرنا المزيد عن نفسك',
+    descriptionAr: 'أخبرنا المزيد عن نفسك'
   },
   {
     id: '3',
@@ -71,21 +71,21 @@ const stepsData: Step[] = [
     titleAr: 'التفضيلات',
     description: 'Customize your experience',
     descriptionAr: 'خصص تجربتك',
-    optional: true,
+    optional: true
   },
   {
     id: '4',
     title: 'Review',
     titleAr: 'المراجعة',
     description: 'Confirm your information',
-    descriptionAr: 'أكد معلوماتك',
+    descriptionAr: 'أكد معلوماتك'
   },
   {
     id: '5',
     title: 'Complete',
     titleAr: 'مكتمل',
     description: 'You\'re all set!',
-    descriptionAr: 'كل شيء جاهز!',
+    descriptionAr: 'كل شيء جاهز!'
   },
 ];
 
@@ -96,11 +96,11 @@ export const Default: Story = {
     currentStep: 1,
     orientation: 'horizontal',
     variant: 'default',
-    allowSkip: false,
+    allowSkip: false
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   render: (args) => (
     <div className="w-full max-w-4xl">
@@ -110,10 +110,10 @@ export const Default: Story = {
   parameters: {
     docs: {
       story: {
-        inline: false,
-      },
-    },
-  },
+        inline: false
+      }
+    }
+  }
 };
 
 // Basic Stepper - from component page lines 184-206
@@ -148,17 +148,17 @@ export const BasicStepper: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Basic stepper with navigation buttons. Click steps to navigate or use Previous/Next buttons.',
-      },
-    },
-  },
+        story: 'Basic stepper with navigation buttons. Click steps to navigate or use Previous/Next buttons.'
+      }
+    }
+  }
 };
 
 // Simple Variant - from component page lines 219-245
@@ -194,17 +194,17 @@ export const SimpleVariant: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Simple variant with compact style ideal for top navigation. Perfect for limited vertical space.',
-      },
-    },
-  },
+        story: 'Simple variant with compact style ideal for top navigation. Perfect for limited vertical space.'
+      }
+    }
+  }
 };
 
 // Circles Variant - from component page lines 248-274
@@ -240,17 +240,17 @@ export const CirclesVariant: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Circles variant with large circles and scale effect. More visual emphasis on each step.',
-      },
-    },
-  },
+        story: 'Circles variant with large circles and scale effect. More visual emphasis on each step.'
+      }
+    }
+  }
 };
 
 // Vertical Orientation - from component page lines 282-309
@@ -286,17 +286,17 @@ export const VerticalOrientation: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Vertical orientation for sidebar navigation. Great for multi-step forms with sidebar layout.',
-      },
-    },
-  },
+        story: 'Vertical orientation for sidebar navigation. Great for multi-step forms with sidebar layout.'
+      }
+    }
+  }
 };
 
 // With Allow Skip
@@ -335,17 +335,17 @@ export const WithAllowSkip: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Stepper with allowSkip enabled. Users can click any step to navigate freely.',
-      },
-    },
-  },
+        story: 'Stepper with allowSkip enabled. Users can click any step to navigate freely.'
+      }
+    }
+  }
 };
 
 // In Card
@@ -383,17 +383,17 @@ export const InCard: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Stepper placed inside a card component with title and navigation.',
-      },
-    },
-  },
+        story: 'Stepper placed inside a card component with title and navigation.'
+      }
+    }
+  }
 };
 
 // RTL Example - Basic
@@ -428,17 +428,17 @@ export const RTLExample: Story = {
   },
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Basic stepper in RTL mode with Arabic titles and descriptions. Connectors flow right-to-left.',
-      },
-    },
-  },
+        story: 'Basic stepper in RTL mode with Arabic titles and descriptions. Connectors flow right-to-left.'
+      }
+    }
+  }
 };
 
 // RTL Simple Variant
@@ -474,17 +474,17 @@ export const RTLSimpleVariant: Story = {
   },
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Simple variant in RTL mode. Compact style with Arabic text flowing right-to-left.',
-      },
-    },
-  },
+        story: 'Simple variant in RTL mode. Compact style with Arabic text flowing right-to-left.'
+      }
+    }
+  }
 };
 
 // RTL Circles Variant
@@ -520,17 +520,17 @@ export const RTLCirclesVariant: Story = {
   },
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Circles variant in RTL mode. Large circles with Arabic labels flowing naturally.',
-      },
-    },
-  },
+        story: 'Circles variant in RTL mode. Large circles with Arabic labels flowing naturally.'
+      }
+    }
+  }
 };
 
 // RTL Vertical Orientation
@@ -566,15 +566,15 @@ export const RTLVerticalOrientation: Story = {
   },
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Vertical orientation in RTL mode. Text aligns correctly for right-to-left reading.',
-      },
-    },
-  },
+        story: 'Vertical orientation in RTL mode. Text aligns correctly for right-to-left reading.'
+      }
+    }
+  }
 };

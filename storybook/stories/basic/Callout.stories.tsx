@@ -15,15 +15,15 @@ const meta = {
   title: 'Basic/Callout',
   component: Callout,
   parameters: {
-    layout: 'centered',
+    layout: 'centered'
   },
   tags: ['autodocs'],
   argTypes: {
     icon: {
       control: false,
-      description: 'Custom icon component (LucideIcon) - not controllable via UI',
-    },
-  },
+      description: 'Custom icon component (LucideIcon) - not controllable via UI'
+    }
+  }
 } satisfies Meta<typeof Callout>;
 
 export default meta;
@@ -34,17 +34,17 @@ export const Default: Story = {
   args: {
     type: 'info',
     title: 'Information',
-    children: 'This is an informational callout with helpful details.',
+    children: 'This is an informational callout with helpful details.'
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   render: (args) => (
     <div className="w-full max-w-2xl">
       <Callout {...args} />
     </div>
-  ),
+  )
 };
 
 // Info - from component page lines 77-79
@@ -58,11 +58,11 @@ export const Info: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-  },
+    controls: { disable: true }
+  }
 };
 
 // Warning - from component page lines 81-83
@@ -76,11 +76,11 @@ export const Warning: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-  },
+    controls: { disable: true }
+  }
 };
 
 // Error - from component page lines 85-87
@@ -94,11 +94,11 @@ export const Error: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-  },
+    controls: { disable: true }
+  }
 };
 
 // Success - from component page lines 89-91
@@ -112,11 +112,11 @@ export const Success: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-  },
+    controls: { disable: true }
+  }
 };
 
 // Note - from component page lines 93-95
@@ -130,11 +130,11 @@ export const Note: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-  },
+    controls: { disable: true }
+  }
 };
 
 // With Custom Icon
@@ -148,16 +148,16 @@ export const WithCustomIcon: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       description: {
-        story: 'Callout with a custom icon. You can pass any Lucide icon via the icon prop.',
-      },
-    },
-  },
+        story: 'Callout with a custom icon. You can pass any Lucide icon via the icon prop.'
+      }
+    }
+  }
 };
 
 // All Types - showcase all callout types at once
@@ -187,11 +187,11 @@ export const AllTypes: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-  },
+    controls: { disable: true }
+  }
 };
 
 // RTL Info
@@ -205,16 +205,16 @@ export const RTLInfo: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       description: {
-        story: 'Info callout with Arabic text demonstrating RTL support. Border aligns to the start (right in RTL). Automatically switches to RTL mode.',
-      },
-    },
-  },
+        story: 'Info callout with Arabic text demonstrating RTL support. Border aligns to the start (right in RTL). Automatically switches to RTL mode.'
+      }
+    }
+  }
 };
 
 // RTL Warning
@@ -228,16 +228,16 @@ export const RTLWarning: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       description: {
-        story: 'Warning callout with Arabic text in RTL mode.',
-      },
-    },
-  },
+        story: 'Warning callout with Arabic text in RTL mode.'
+      }
+    }
+  }
 };
 
 // RTL Error
@@ -251,16 +251,16 @@ export const RTLError: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       description: {
-        story: 'Error callout with Arabic text in RTL mode.',
-      },
-    },
-  },
+        story: 'Error callout with Arabic text in RTL mode.'
+      }
+    }
+  }
 };
 
 // RTL Success
@@ -274,16 +274,16 @@ export const RTLSuccess: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       description: {
-        story: 'Success callout with Arabic text in RTL mode.',
-      },
-    },
-  },
+        story: 'Success callout with Arabic text in RTL mode.'
+      }
+    }
+  }
 };
 
 // RTL Note
@@ -297,16 +297,16 @@ export const RTLNote: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       description: {
-        story: 'Note callout without title in RTL mode.',
-      },
-    },
-  },
+        story: 'Note callout without title in RTL mode.'
+      }
+    }
+  }
 };
 
 // RTL All Types
@@ -336,14 +336,14 @@ export const RTLAllTypes: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       description: {
-        story: 'All callout types with Arabic text demonstrating complete RTL support.',
-      },
-    },
-  },
+        story: 'All callout types with Arabic text demonstrating complete RTL support.'
+      }
+    }
+  }
 };

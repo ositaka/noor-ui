@@ -17,9 +17,9 @@ const meta = {
   title: 'Basic/Kbd',
   component: Kbd,
   parameters: {
-    layout: 'centered',
+    layout: 'centered'
   },
-  tags: ['autodocs'],
+  tags: ['autodocs']
 } satisfies Meta<typeof Kbd>;
 
 export default meta;
@@ -30,12 +30,12 @@ export const Default: Story = {
   args: {
     keys: ['mod', 'k'],
     variant: 'default',
-    size: 'md',
+    size: 'md'
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
-  },
+    locale: 'en'
+  }
 };
 
 // Single Keys
@@ -51,11 +51,11 @@ export const SingleKeys: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-  },
+    controls: { disable: true }
+  }
 };
 
 // Key Combinations - from component page lines 89-101
@@ -71,11 +71,11 @@ export const KeyCombinations: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-  },
+    controls: { disable: true }
+  }
 };
 
 // All Variants
@@ -98,11 +98,11 @@ export const AllVariants: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-  },
+    controls: { disable: true }
+  }
 };
 
 // All Sizes
@@ -125,11 +125,11 @@ export const AllSizes: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-  },
+    controls: { disable: true }
+  }
 };
 
 // Keyboard Shortcuts Panel - from component page lines 80-113
@@ -172,11 +172,11 @@ export const KeyboardShortcutsPanel: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-  },
+    controls: { disable: true }
+  }
 };
 
 // In Buttons
@@ -196,11 +196,11 @@ export const InButtons: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-  },
+    controls: { disable: true }
+  }
 };
 
 // Arrow Keys
@@ -215,11 +215,11 @@ export const ArrowKeys: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-  },
+    controls: { disable: true }
+  }
 };
 
 // RTL Example (Arabic labels, but keys remain LTR)
@@ -262,16 +262,16 @@ export const RTLExample: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       description: {
-        story: 'Keyboard shortcuts panel with Arabic labels in RTL mode. Note that Kbd component always renders LTR (keyboard shortcuts don\'t change direction).',
-      },
-    },
-  },
+        story: 'Keyboard shortcuts panel with Arabic labels in RTL mode. Note that Kbd component always renders LTR (keyboard shortcuts don\'t change direction).'
+      }
+    }
+  }
 };
 
 // RTL In Buttons
@@ -291,14 +291,14 @@ export const RTLInButtons: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       description: {
-        story: 'Buttons with Arabic text and keyboard shortcuts in RTL mode.',
-      },
-    },
-  },
+        story: 'Buttons with Arabic text and keyboard shortcuts in RTL mode.'
+      }
+    }
+  }
 };

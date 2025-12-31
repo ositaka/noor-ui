@@ -15,7 +15,7 @@ const meta = {
   title: 'GCC/Prayer Times',
   component: PrayerTimes,
   parameters: {
-    layout: 'centered',
+    layout: 'centered'
   },
   tags: ['autodocs'],
   argTypes: {
@@ -28,12 +28,12 @@ const meta = {
     dateAr: { control: 'text' },
     variant: {
       control: { type: 'select' },
-      options: ['default', 'compact', 'detailed', 'notification'],
+      options: ['default', 'compact', 'detailed', 'notification']
     },
     onDismiss: { control: false },
     onPlayAdhan: { control: false },
-    showPlayAdhan: { control: 'boolean' },
-  },
+    showPlayAdhan: { control: 'boolean' }
+  }
 } satisfies Meta<typeof PrayerTimes>;
 
 export default meta;
@@ -57,11 +57,11 @@ export const Default: Story = {
     location: 'Riyadh',
     locationAr: 'الرياض',
     date: 'November 6, 2025',
-    dateAr: '٥ جمادى الأولى ١٤٤٧',
+    dateAr: '٥ جمادى الأولى ١٤٤٧'
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   render: (args) => (
     <div className="max-w-2xl w-full">
@@ -71,10 +71,10 @@ export const Default: Story = {
   parameters: {
     docs: {
       story: {
-        inline: false,
-      },
-    },
-  },
+        inline: false
+      }
+    }
+  }
 };
 
 // Default Variant - from component page lines 137-145
@@ -94,17 +94,17 @@ export const DefaultVariant: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Default prayer times display with next prayer and countdown.',
-      },
-    },
-  },
+        story: 'Default prayer times display with next prayer and countdown.'
+      }
+    }
+  }
 };
 
 // Compact Variant - from component page lines 174-180
@@ -122,17 +122,17 @@ export const CompactVariant: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Compact variant with minimal spacing for sidebars.',
-      },
-    },
-  },
+        story: 'Compact variant with minimal spacing for sidebars.'
+      }
+    }
+  }
 };
 
 // Detailed Variant - from component page lines 207-216
@@ -153,17 +153,17 @@ export const DetailedVariant: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Detailed variant with extra spacing and enhanced visuals.',
-      },
-    },
-  },
+        story: 'Detailed variant with extra spacing and enhanced visuals.'
+      }
+    }
+  }
 };
 
 // Without Countdown - from component page lines 246-251
@@ -180,17 +180,17 @@ export const WithoutCountdown: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Prayer times without countdown or next prayer highlight.',
-      },
-    },
-  },
+        story: 'Prayer times without countdown or next prayer highlight.'
+      }
+    }
+  }
 };
 
 // Notification Variant - from component page lines 277-286
@@ -211,17 +211,17 @@ export const NotificationVariant: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Notification variant for prayer time alerts with adhan controls.',
-      },
-    },
-  },
+        story: 'Notification variant for prayer time alerts with adhan controls.'
+      }
+    }
+  }
 };
 
 // All Variants
@@ -265,17 +265,17 @@ export const AllVariants: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Showcase of all prayer times variants.',
-      },
-    },
-  },
+        story: 'Showcase of all prayer times variants.'
+      }
+    }
+  }
 };
 
 // RTL Default
@@ -295,17 +295,17 @@ export const RTLDefault: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Prayer times in RTL with Arabic text and proper alignment.',
-      },
-    },
-  },
+        story: 'Prayer times in RTL with Arabic text and proper alignment.'
+      }
+    }
+  }
 };
 
 // RTL Compact
@@ -323,17 +323,17 @@ export const RTLCompact: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Compact variant in RTL layout.',
-      },
-    },
-  },
+        story: 'Compact variant in RTL layout.'
+      }
+    }
+  }
 };
 
 // RTL Detailed
@@ -354,17 +354,17 @@ export const RTLDetailed: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Detailed variant in RTL with full Arabic support.',
-      },
-    },
-  },
+        story: 'Detailed variant in RTL with full Arabic support.'
+      }
+    }
+  }
 };
 
 // RTL Notification
@@ -385,15 +385,15 @@ export const RTLNotification: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Notification variant in RTL for adhan alerts.',
-      },
-    },
-  },
+        story: 'Notification variant in RTL for adhan alerts.'
+      }
+    }
+  }
 };

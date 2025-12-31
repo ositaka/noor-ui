@@ -6,29 +6,29 @@ const meta = {
   title: 'Basic/Button',
   component: Button,
   parameters: {
-    layout: 'centered',
+    layout: 'centered'
   },
   tags: ['autodocs'],
   argTypes: {
     variant: {
       control: 'select',
       options: ['primary', 'secondary', 'destructive', 'outline', 'ghost', 'link'],
-      description: 'Button style variant',
+      description: 'Button style variant'
     },
     size: {
       control: 'select',
       options: ['sm', 'md', 'lg', 'xl', 'icon'],
-      description: 'Button size',
+      description: 'Button size'
     },
     loading: {
       control: 'boolean',
-      description: 'Show loading spinner',
+      description: 'Show loading spinner'
     },
     disabled: {
       control: 'boolean',
-      description: 'Disable button',
-    },
-  },
+      description: 'Disable button'
+    }
+  }
 } satisfies Meta<typeof Button>;
 
 export default meta;
@@ -39,88 +39,88 @@ export const Default: Story = {
   args: {
     children: 'Button',
     variant: 'primary',
-    size: 'md',
-  },
+    size: 'md'
+  }
 };
 
 // Variants
 export const Primary: Story = {
   args: {
     children: 'Primary Button',
-    variant: 'primary',
-  },
+    variant: 'primary'
+  }
 };
 
 export const Secondary: Story = {
   args: {
     children: 'Secondary Button',
-    variant: 'secondary',
-  },
+    variant: 'secondary'
+  }
 };
 
 export const Destructive: Story = {
   args: {
     children: 'Delete',
-    variant: 'destructive',
-  },
+    variant: 'destructive'
+  }
 };
 
 export const Outline: Story = {
   args: {
     children: 'Outline Button',
-    variant: 'outline',
-  },
+    variant: 'outline'
+  }
 };
 
 export const Ghost: Story = {
   args: {
     children: 'Ghost Button',
-    variant: 'ghost',
-  },
+    variant: 'ghost'
+  }
 };
 
 export const Link: Story = {
   args: {
     children: 'Link Button',
-    variant: 'link',
-  },
+    variant: 'link'
+  }
 };
 
 // Sizes
 export const Small: Story = {
   args: {
     children: 'Small',
-    size: 'sm',
-  },
+    size: 'sm'
+  }
 };
 
 export const Medium: Story = {
   args: {
     children: 'Medium',
-    size: 'md',
-  },
+    size: 'md'
+  }
 };
 
 export const Large: Story = {
   args: {
     children: 'Large',
-    size: 'lg',
-  },
+    size: 'lg'
+  }
 };
 
 export const ExtraLarge: Story = {
   args: {
     children: 'Extra Large',
-    size: 'xl',
-  },
+    size: 'xl'
+  }
 };
 
 // Icon button
 export const Icon: Story = {
   args: {
     size: 'icon',
-    children: <Heart className="h-4 w-4" />,
-  },
+    children: <Heart className="h-4 w-4" />
+  }
 };
 
 // With icons
@@ -131,8 +131,8 @@ export const WithIcon: Story = {
         <Download className="h-4 w-4" />
         Download
       </>
-    ),
-  },
+    )
+  }
 };
 
 export const WithIconRight: Story = {
@@ -142,42 +142,42 @@ export const WithIconRight: Story = {
         Save Changes
         <Save className="h-4 w-4" />
       </>
-    ),
-  },
+    )
+  }
 };
 
 // States
 export const Loading: Story = {
   args: {
     children: 'Processing...',
-    loading: true,
-  },
+    loading: true
+  }
 };
 
 export const Disabled: Story = {
   args: {
     children: 'Disabled',
-    disabled: true,
-  },
+    disabled: true
+  }
 };
 
 // RTL Examples
 export const RTLPrimary: Story = {
   args: {
     children: 'زر أساسي',
-    variant: 'primary',
+    variant: 'primary'
   },
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     docs: {
       description: {
-        story: 'Button with Arabic text demonstrating RTL support. Automatically switches to RTL mode.',
-      },
-    },
-  },
+        story: 'Button with Arabic text demonstrating RTL support. Automatically switches to RTL mode.'
+      }
+    }
+  }
 };
 
 export const RTLWithIcon: Story = {
@@ -187,19 +187,19 @@ export const RTLWithIcon: Story = {
         <Plus className="h-4 w-4" />
         إضافة عنصر جديد
       </>
-    ),
+    )
   },
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     docs: {
       description: {
-        story: 'Button with Arabic text and icon showing proper RTL layout. Icon automatically positions correctly.',
-      },
-    },
-  },
+        story: 'Button with Arabic text and icon showing proper RTL layout. Icon automatically positions correctly.'
+      }
+    }
+  }
 };
 
 // All variants showcase
@@ -215,8 +215,8 @@ export const AllVariants: Story = {
     </div>
   ),
   parameters: {
-    controls: { disable: true },
-  },
+    controls: { disable: true }
+  }
 };
 
 // All sizes showcase
@@ -233,6 +233,6 @@ export const AllSizes: Story = {
     </div>
   ),
   parameters: {
-    controls: { disable: true },
-  },
+    controls: { disable: true }
+  }
 };

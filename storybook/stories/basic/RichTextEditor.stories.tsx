@@ -16,7 +16,7 @@ const meta = {
   title: 'Basic/Rich Text Editor',
   component: RichTextEditor,
   parameters: {
-    layout: 'centered',
+    layout: 'centered'
   },
   tags: ['autodocs'],
   argTypes: {
@@ -25,8 +25,8 @@ const meta = {
     placeholder: { control: 'text' },
     className: { control: 'text' },
     editable: { control: 'boolean' },
-    minHeight: { control: 'text' },
-  },
+    minHeight: { control: 'text' }
+  }
 } satisfies Meta<typeof RichTextEditor>;
 
 export default meta;
@@ -49,8 +49,8 @@ export const Default: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
-  },
+    locale: 'en'
+  }
 };
 
 // With Content - from page lines 143-144, code 74-77
@@ -73,14 +73,11 @@ export const WithContent: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };
 
 // Arabic Content - from page lines 145, code 93-95
@@ -104,14 +101,11 @@ export const ArabicContent: Story = {
   },
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };
 
 // Read Only - from code lines 113-117
@@ -128,14 +122,11 @@ export const ReadOnly: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };
 
 // Custom Height - from code lines 125-135
@@ -158,14 +149,11 @@ export const CustomHeight: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };
 
 // Empty State
@@ -187,17 +175,17 @@ export const EmptyState: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Editor with empty content showing placeholder text.',
-      },
-    },
-  },
+        story: 'Editor with empty content showing placeholder text.'
+      }
+    }
+  }
 };
 
 // With Lists and Formatting
@@ -224,14 +212,11 @@ export const WithListsAndFormatting: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };
 
 // RTL Full Example
@@ -259,12 +244,9 @@ export const RTLFullExample: Story = {
   },
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };

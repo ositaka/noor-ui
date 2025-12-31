@@ -13,9 +13,9 @@ const meta = {
   title: 'Basic/Alert',
   component: Alert,
   parameters: {
-    layout: 'centered',
+    layout: 'centered'
   },
-  tags: ['autodocs'],
+  tags: ['autodocs']
 } satisfies Meta<typeof Alert>;
 
 export default meta;
@@ -33,15 +33,15 @@ export const Default: Story = {
           You can add components to your app using the cli.
         </AlertDescription>
       </>
-    ),
+    )
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   render: (args) => (
     <Alert {...args} className="w-full max-w-md" />
-  ),
+  )
 };
 
 // Destructive - from component page lines 161-167
@@ -57,11 +57,11 @@ export const Destructive: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-  },
+    controls: { disable: true }
+  }
 };
 
 // Success - from component page lines 180-186
@@ -77,11 +77,11 @@ export const Success: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-  },
+    controls: { disable: true }
+  }
 };
 
 // Warning - from component page lines 199-205
@@ -97,11 +97,11 @@ export const Warning: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-  },
+    controls: { disable: true }
+  }
 };
 
 // Without Icon - from component page lines 218-223
@@ -116,11 +116,11 @@ export const WithoutIcon: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-  },
+    controls: { disable: true }
+  }
 };
 
 // All Variants - showcase all alert types at once
@@ -162,11 +162,11 @@ export const AllVariants: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-  },
+    controls: { disable: true }
+  }
 };
 
 // RTL Example - from component page lines 273-279
@@ -182,16 +182,16 @@ export const RTLExample: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       description: {
-        story: 'Alert with Arabic text demonstrating RTL support. Icon aligns correctly to the start. Automatically switches to RTL mode.',
-      },
-    },
-  },
+        story: 'Alert with Arabic text demonstrating RTL support. Icon aligns correctly to the start. Automatically switches to RTL mode.'
+      }
+    }
+  }
 };
 
 // RTL Destructive
@@ -207,16 +207,16 @@ export const RTLDestructive: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       description: {
-        story: 'Destructive alert with Arabic text in RTL mode.',
-      },
-    },
-  },
+        story: 'Destructive alert with Arabic text in RTL mode.'
+      }
+    }
+  }
 };
 
 // RTL Success
@@ -232,16 +232,16 @@ export const RTLSuccess: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       description: {
-        story: 'Success alert with Arabic text in RTL mode.',
-      },
-    },
-  },
+        story: 'Success alert with Arabic text in RTL mode.'
+      }
+    }
+  }
 };
 
 // RTL Warning
@@ -257,16 +257,16 @@ export const RTLWarning: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       description: {
-        story: 'Warning alert with Arabic text in RTL mode.',
-      },
-    },
-  },
+        story: 'Warning alert with Arabic text in RTL mode.'
+      }
+    }
+  }
 };
 
 // RTL All Variants
@@ -308,14 +308,14 @@ export const RTLAllVariants: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       description: {
-        story: 'All alert variants with Arabic text demonstrating complete RTL support.',
-      },
-    },
-  },
+        story: 'All alert variants with Arabic text demonstrating complete RTL support.'
+      }
+    }
+  }
 };

@@ -16,21 +16,21 @@ const meta = {
   title: 'Data Display/Reaction Picker',
   component: ReactionPicker,
   parameters: {
-    layout: 'centered',
+    layout: 'centered'
   },
   tags: ['autodocs'],
   argTypes: {
     reactions: { control: false },
     variant: {
       control: { type: 'select' },
-      options: ['compact', 'expanded'],
+      options: ['compact', 'expanded']
     },
     availableReactions: { control: false },
     maxVisible: { control: 'number' },
     onReact: { control: false },
     ariaLabel: { control: 'text' },
-    className: { control: 'text' },
-  },
+    className: { control: 'text' }
+  }
 } satisfies Meta<typeof ReactionPicker>;
 
 export default meta;
@@ -71,8 +71,8 @@ export const Default: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
-  },
+    locale: 'en'
+  }
 };
 
 // Compact Mode - from page lines 165-186
@@ -123,14 +123,11 @@ export const CompactMode: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };
 
 // Expanded Mode - from page lines 188-206
@@ -181,14 +178,11 @@ export const ExpandedMode: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };
 
 // With Many Reactions
@@ -233,14 +227,11 @@ export const WithManyReactions: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };
 
 // No Reactions Yet
@@ -268,14 +259,11 @@ export const NoReactions: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };
 
 // Single Reaction
@@ -316,14 +304,11 @@ export const SingleReaction: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };
 
 // User Has Reacted
@@ -365,17 +350,17 @@ export const UserHasReacted: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Shows highlighted state when user has reacted (👍 in this example).',
-      },
-    },
-  },
+        story: 'Shows highlighted state when user has reacted (👍 in this example).'
+      }
+    }
+  }
 };
 
 // RTL
@@ -423,12 +408,9 @@ export const RTL: Story = {
   },
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };

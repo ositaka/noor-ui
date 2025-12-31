@@ -17,12 +17,12 @@ const meta = {
   title: 'Navigation/Pagination',
   component: Pagination,
   parameters: {
-    layout: 'centered',
+    layout: 'centered'
   },
   tags: ['autodocs'],
   argTypes: {
     // No specific props to control - component is structural
-  },
+  }
 } satisfies Meta<typeof Pagination>;
 
 export default meta;
@@ -32,7 +32,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   render: () => (
     <Pagination>
@@ -60,10 +60,10 @@ export const Default: Story = {
   parameters: {
     docs: {
       story: {
-        inline: false,
-      },
-    },
-  },
+        inline: false
+      }
+    }
+  }
 };
 
 // Basic Pagination - from component page lines 196-216
@@ -93,17 +93,17 @@ export const BasicPagination: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Basic pagination with Previous/Next buttons and page numbers. Page 2 is currently active.',
-      },
-    },
-  },
+        story: 'Basic pagination with Previous/Next buttons and page numbers. Page 2 is currently active.'
+      }
+    }
+  }
 };
 
 // With Ellipsis - from component page lines 244-276
@@ -145,17 +145,17 @@ export const WithEllipsis: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Pagination with ellipsis (...) for indicating hidden pages. Shows pages 1, 5-7, and 10 out of 10 total.',
-      },
-    },
-  },
+        story: 'Pagination with ellipsis (...) for indicating hidden pages. Shows pages 1, 5-7, and 10 out of 10 total.'
+      }
+    }
+  }
 };
 
 // Controlled - from component page lines 286-346
@@ -233,17 +233,17 @@ export const Controlled: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Controlled pagination with state management. Current page is displayed above and updates on click.',
-      },
-    },
-  },
+        story: 'Controlled pagination with state management. Current page is displayed above and updates on click.'
+      }
+    }
+  }
 };
 
 // Few Pages
@@ -279,17 +279,17 @@ export const FewPages: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Pagination with 5 pages shown. No ellipsis needed for smaller page counts.',
-      },
-    },
-  },
+        story: 'Pagination with 5 pages shown. No ellipsis needed for smaller page counts.'
+      }
+    }
+  }
 };
 
 // In Card
@@ -326,17 +326,17 @@ export const InCard: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Pagination placed inside a card component.',
-      },
-    },
-  },
+        story: 'Pagination placed inside a card component.'
+      }
+    }
+  }
 };
 
 // RTL Example - Basic
@@ -366,17 +366,17 @@ export const RTLExample: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Basic pagination with Arabic text in RTL mode. Chevrons automatically flip direction.',
-      },
-    },
-  },
+        story: 'Basic pagination with Arabic text in RTL mode. Chevrons automatically flip direction.'
+      }
+    }
+  }
 };
 
 // RTL With Ellipsis
@@ -418,17 +418,17 @@ export const RTLWithEllipsis: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Pagination with ellipsis in RTL mode. Layout flows naturally right-to-left.',
-      },
-    },
-  },
+        story: 'Pagination with ellipsis in RTL mode. Layout flows naturally right-to-left.'
+      }
+    }
+  }
 };
 
 // RTL Controlled
@@ -506,17 +506,17 @@ export const RTLControlled: Story = {
   },
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Controlled pagination in RTL with Arabic text. State management works the same in both directions.',
-      },
-    },
-  },
+        story: 'Controlled pagination in RTL with Arabic text. State management works the same in both directions.'
+      }
+    }
+  }
 };
 
 // RTL Few Pages
@@ -552,15 +552,15 @@ export const RTLFewPages: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Pagination with 5 pages in RTL mode. Page numbers and navigation flow right-to-left.',
-      },
-    },
-  },
+        story: 'Pagination with 5 pages in RTL mode. Page numbers and navigation flow right-to-left.'
+      }
+    }
+  }
 };

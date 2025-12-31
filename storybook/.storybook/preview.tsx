@@ -45,6 +45,30 @@ const preview: Preview = {
         ],
       },
     },
+    // Enable docs for all stories
+    docs: {
+      codePanel: true, // Enable Code panel in Canvas view
+      source: {
+        type: 'dynamic',
+      },
+    },
+    // Default to Docs view and configure sidebar
+    viewMode: 'docs',
+    options: {
+      storySort: {
+        method: 'alphabetical',
+        order: [
+          'Basic',
+          'Forms',
+          'Navigation & Layout',
+          'Data Display',
+          'Overlay',
+          'Feedback',
+          'GCC-Specific',
+          'AI',
+        ],
+      },
+    },
   },
 
   globalTypes: {

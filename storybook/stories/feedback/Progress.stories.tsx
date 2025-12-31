@@ -17,21 +17,21 @@ const meta = {
   title: 'Feedback/Progress',
   component: Progress,
   parameters: {
-    layout: 'centered',
+    layout: 'centered'
   },
   tags: ['autodocs'],
   argTypes: {
     value: {
       control: { type: 'range', min: 0, max: 100, step: 1 },
-      description: 'The progress value (0-100)',
+      description: 'The progress value (0-100)'
     },
     max: {
       control: { type: 'number' },
-      description: 'The maximum progress value',
+      description: 'The maximum progress value'
     },
     className: { control: false },
-    indicatorClassName: { control: false },
-  },
+    indicatorClassName: { control: false }
+  }
 } satisfies Meta<typeof Progress>;
 
 export default meta;
@@ -40,20 +40,20 @@ type Story = StoryObj<typeof meta>;
 // Default - Interactive playground with controls
 export const Default: Story = {
   args: {
-    value: 66,
+    value: 66
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   render: (args) => <Progress {...args} className="w-full max-w-md" />,
   parameters: {
     docs: {
       story: {
-        inline: false,
-      },
-    },
-  },
+        inline: false
+      }
+    }
+  }
 };
 
 // Basic - from component page line 140
@@ -61,17 +61,17 @@ export const Basic: Story = {
   render: () => <Progress value={33} className="w-[60%]" />,
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Basic progress bar showing 33% completion.',
-      },
-    },
-  },
+        story: 'Basic progress bar showing 33% completion.'
+      }
+    }
+  }
 };
 
 // With Label - from component page lines 153-159
@@ -87,17 +87,17 @@ export const WithLabel: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Progress bar with label and percentage display.',
-      },
-    },
-  },
+        story: 'Progress bar with label and percentage display.'
+      }
+    }
+  }
 };
 
 // With Shimmer - from component page line 175
@@ -113,17 +113,17 @@ export const WithShimmer: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Progress bar with animated shimmer effect for a live feel.',
-      },
-    },
-  },
+        story: 'Progress bar with animated shimmer effect for a live feel.'
+      }
+    }
+  }
 };
 
 // Different Sizes - from component page lines 185-201
@@ -150,17 +150,17 @@ export const DifferentSizes: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Progress bars in different sizes from extra small to large.',
-      },
-    },
-  },
+        story: 'Progress bars in different sizes from extra small to large.'
+      }
+    }
+  }
 };
 
 // Different Colors - from component page lines 215-227
@@ -183,17 +183,17 @@ export const DifferentColors: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Progress bars with custom colors (blue, green, red).',
-      },
-    },
-  },
+        story: 'Progress bars with custom colors (blue, green, red).'
+      }
+    }
+  }
 };
 
 // Upload Progress - from component page lines 241-254
@@ -232,17 +232,17 @@ export const UploadProgress: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Simulated upload progress with start button and completion message.',
-      },
-    },
-  },
+        story: 'Simulated upload progress with start button and completion message.'
+      }
+    }
+  }
 };
 
 // All Sizes
@@ -269,17 +269,17 @@ export const AllSizes: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Showcase of all available progress bar sizes.',
-      },
-    },
-  },
+        story: 'Showcase of all available progress bar sizes.'
+      }
+    }
+  }
 };
 
 // RTL Basic
@@ -287,17 +287,17 @@ export const RTLBasic: Story = {
   render: () => <Progress value={33} className="w-[60%]" />,
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Progress bar in RTL mode. The fill animates from right to left.',
-      },
-    },
-  },
+        story: 'Progress bar in RTL mode. The fill animates from right to left.'
+      }
+    }
+  }
 };
 
 // RTL With Label
@@ -313,17 +313,17 @@ export const RTLWithLabel: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Progress bar with Arabic label and percentage in RTL layout.',
-      },
-    },
-  },
+        story: 'Progress bar with Arabic label and percentage in RTL layout.'
+      }
+    }
+  }
 };
 
 // RTL Upload Progress
@@ -362,15 +362,15 @@ export const RTLUploadProgress: Story = {
   },
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Upload progress simulation with Arabic text in RTL layout.',
-      },
-    },
-  },
+        story: 'Upload progress simulation with Arabic text in RTL layout.'
+      }
+    }
+  }
 };

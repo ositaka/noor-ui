@@ -21,7 +21,7 @@ const sampleConversations: Conversation[] = [
     preview: "Let's discuss the roadmap for Q4...",
     previewAr: 'لنناقش خارطة الطريق للربع الرابع...',
     timestamp: new Date(),
-    messageCount: 24,
+    messageCount: 24
   },
   {
     id: '2',
@@ -30,7 +30,7 @@ const sampleConversations: Conversation[] = [
     preview: 'The PR looks good, just a few comments...',
     previewAr: 'طلب السحب يبدو جيداً، بضع ملاحظات فقط...',
     timestamp: new Date(Date.now() - 1000 * 60 * 60 * 2),
-    messageCount: 12,
+    messageCount: 12
   },
   {
     id: '3',
@@ -39,7 +39,7 @@ const sampleConversations: Conversation[] = [
     preview: 'We should update the color palette...',
     previewAr: 'يجب تحديث لوحة الألوان...',
     timestamp: new Date(Date.now() - 1000 * 60 * 60 * 24),
-    messageCount: 8,
+    messageCount: 8
   },
   {
     id: '4',
@@ -48,7 +48,7 @@ const sampleConversations: Conversation[] = [
     preview: 'Help me write docs for the new endpoints...',
     previewAr: 'ساعدني في كتابة الوثائق للنقاط الجديدة...',
     timestamp: new Date(Date.now() - 1000 * 60 * 60 * 24 * 3),
-    messageCount: 15,
+    messageCount: 15
   },
   {
     id: '5',
@@ -57,7 +57,7 @@ const sampleConversations: Conversation[] = [
     preview: "There's an issue with the authentication flow...",
     previewAr: 'هناك مشكلة في تدفق المصادقة...',
     timestamp: new Date(Date.now() - 1000 * 60 * 60 * 24 * 7),
-    messageCount: 32,
+    messageCount: 32
   },
 ];
 
@@ -65,7 +65,7 @@ const meta = {
   title: 'AI/Conversation History',
   component: ConversationHistory,
   parameters: {
-    layout: 'fullscreen',
+    layout: 'fullscreen'
   },
   tags: ['autodocs'],
   argTypes: {
@@ -79,16 +79,16 @@ const meta = {
     showSearch: { control: 'boolean' },
     variant: {
       control: { type: 'select' },
-      options: ['default', 'floating'],
+      options: ['default', 'floating']
     },
     size: {
       control: { type: 'select' },
-      options: ['sm', 'default', 'lg'],
+      options: ['sm', 'default', 'lg']
     },
     isRTL: { control: 'boolean' },
     title: { control: 'text' },
-    titleAr: { control: 'text' },
-  },
+    titleAr: { control: 'text' }
+  }
 } satisfies Meta<typeof ConversationHistory>;
 
 export default meta;
@@ -106,7 +106,7 @@ export const Default: Story = {
         title: 'New Conversation',
         preview: '',
         timestamp: new Date(),
-        messageCount: 0,
+        messageCount: 0
       };
       setConversations([newConv, ...conversations]);
       setActiveId(newConv.id);
@@ -152,8 +152,8 @@ export const Default: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
-  },
+    locale: 'en'
+  }
 };
 
 // Full Featured - from page lines 358-368
@@ -168,7 +168,7 @@ export const FullFeatured: Story = {
         title: 'New Conversation',
         preview: '',
         timestamp: new Date(),
-        messageCount: 0,
+        messageCount: 0
       };
       setConversations([newConv, ...conversations]);
       setActiveId(newConv.id);
@@ -211,14 +211,11 @@ export const FullFeatured: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };
 
 // Small Size - from page lines 411-416
@@ -239,14 +236,11 @@ export const SmallSize: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };
 
 // Large Size - from page lines 419-426
@@ -267,14 +261,11 @@ export const LargeSize: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };
 
 // Floating Variant - from page lines 447-452
@@ -297,17 +288,17 @@ export const FloatingVariant: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Floating variant for overlays or modals.',
-      },
-    },
-  },
+        story: 'Floating variant for overlays or modals.'
+      }
+    }
+  }
 };
 
 // With Search
@@ -335,17 +326,17 @@ export const WithSearch: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Conversation history with search enabled.',
-      },
-    },
-  },
+        story: 'Conversation history with search enabled.'
+      }
+    }
+  }
 };
 
 // Few Conversations
@@ -372,17 +363,17 @@ export const FewConversations: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Conversation history with fewer items.',
-      },
-    },
-  },
+        story: 'Conversation history with fewer items.'
+      }
+    }
+  }
 };
 
 // Empty State
@@ -403,17 +394,17 @@ export const EmptyState: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Empty state when no conversations exist.',
-      },
-    },
-  },
+        story: 'Empty state when no conversations exist.'
+      }
+    }
+  }
 };
 
 // RTL
@@ -430,7 +421,7 @@ export const RTL: Story = {
         preview: '',
         previewAr: '',
         timestamp: new Date(),
-        messageCount: 0,
+        messageCount: 0
       };
       setConversations([newConv, ...conversations]);
       setActiveId(newConv.id);
@@ -475,12 +466,9 @@ export const RTL: Story = {
   },
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };

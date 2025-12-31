@@ -16,7 +16,7 @@ const meta = {
   title: 'AI/Token Counter',
   component: TokenCounter,
   parameters: {
-    layout: 'centered',
+    layout: 'centered'
   },
   tags: ['autodocs'],
   argTypes: {
@@ -29,14 +29,14 @@ const meta = {
     showBreakdown: { control: 'boolean' },
     variant: {
       control: { type: 'select' },
-      options: ['default', 'compact'],
+      options: ['default', 'compact']
     },
     warningThreshold: { control: 'number' },
     dangerThreshold: { control: 'number' },
     isRTL: { control: 'boolean' },
     label: { control: 'text' },
-    labelAr: { control: 'text' },
-  },
+    labelAr: { control: 'text' }
+  }
 } satisfies Meta<typeof TokenCounter>;
 
 export default meta;
@@ -50,11 +50,11 @@ export const Default: Story = {
     maxTokens: 4096,
     inputCostPer1K: 0.03,
     outputCostPer1K: 0.06,
-    label: 'Token Usage',
+    label: 'Token Usage'
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   render: (args) => (
     <div className="max-w-md w-full">
@@ -64,10 +64,10 @@ export const Default: Story = {
   parameters: {
     docs: {
       story: {
-        inline: false,
-      },
-    },
-  },
+        inline: false
+      }
+    }
+  }
 };
 
 // With Cost Estimation - from component page lines 246-253
@@ -90,17 +90,17 @@ export const WithCostEstimation: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Token counter with cost calculation based on pricing per 1K tokens.',
-      },
-    },
-  },
+        story: 'Token counter with cost calculation based on pricing per 1K tokens.'
+      }
+    }
+  }
 };
 
 // Warning States - from component page lines 270-291
@@ -139,17 +139,17 @@ export const WarningStates: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Token counter with different warning states based on usage percentage.',
-      },
-    },
-  },
+        story: 'Token counter with different warning states based on usage percentage.'
+      }
+    }
+  }
 };
 
 // Different Models - from component page lines 308-327
@@ -186,17 +186,17 @@ export const DifferentModels: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Token counter comparing different AI models with different pricing.',
-      },
-    },
-  },
+        story: 'Token counter comparing different AI models with different pricing.'
+      }
+    }
+  }
 };
 
 // Compact Variant - from component page lines 339-344
@@ -217,17 +217,17 @@ export const CompactVariant: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Compact variant for space-constrained layouts.',
-      },
-    },
-  },
+        story: 'Compact variant for space-constrained layouts.'
+      }
+    }
+  }
 };
 
 // Custom Thresholds - from component page lines 362-368
@@ -252,17 +252,17 @@ export const CustomThresholds: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Token counter with custom warning and danger thresholds.',
-      },
-    },
-  },
+        story: 'Token counter with custom warning and danger thresholds.'
+      }
+    }
+  }
 };
 
 // Without Cost - from component page lines 383-389
@@ -283,17 +283,17 @@ export const WithoutCost: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Token counter without cost display.',
-      },
-    },
-  },
+        story: 'Token counter without cost display.'
+      }
+    }
+  }
 };
 
 // Safe State
@@ -319,17 +319,17 @@ export const SafeState: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Token counter in safe state with low usage.',
-      },
-    },
-  },
+        story: 'Token counter in safe state with low usage.'
+      }
+    }
+  }
 };
 
 // RTL With Cost
@@ -349,17 +349,17 @@ export const RTLWithCost: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Token counter in RTL with Arabic label and cost display.',
-      },
-    },
-  },
+        story: 'Token counter in RTL with Arabic label and cost display.'
+      }
+    }
+  }
 };
 
 // RTL Warning States
@@ -404,15 +404,15 @@ export const RTLWarningStates: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'All warning states in RTL with Arabic labels.',
-      },
-    },
-  },
+        story: 'All warning states in RTL with Arabic labels.'
+      }
+    }
+  }
 };

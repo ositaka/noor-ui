@@ -16,12 +16,12 @@ const meta = {
   title: 'Feedback/Skeleton',
   component: Skeleton,
   parameters: {
-    layout: 'centered',
+    layout: 'centered'
   },
   tags: ['autodocs'],
   argTypes: {
-    className: { control: false },
-  },
+    className: { control: false }
+  }
 } satisfies Meta<typeof Skeleton>;
 
 export default meta;
@@ -31,7 +31,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   render: () => (
     <div className="flex items-center space-x-4 space-x-reverse">
@@ -45,10 +45,10 @@ export const Default: Story = {
   parameters: {
     docs: {
       story: {
-        inline: false,
-      },
-    },
-  },
+        inline: false
+      }
+    }
+  }
 };
 
 // Card Skeleton - from component page lines 150-156
@@ -68,17 +68,17 @@ export const CardSkeleton: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Card skeleton with image placeholder and text lines.',
-      },
-    },
-  },
+        story: 'Card skeleton with image placeholder and text lines.'
+      }
+    }
+  }
 };
 
 // Profile Skeleton - from component page lines 169-175
@@ -98,17 +98,17 @@ export const ProfileSkeleton: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Profile skeleton with avatar and two text lines.',
-      },
-    },
-  },
+        story: 'Profile skeleton with avatar and two text lines.'
+      }
+    }
+  }
 };
 
 // List Skeleton - from component page lines 188-197
@@ -132,17 +132,17 @@ export const ListSkeleton: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'List skeleton with three items, each with icon and text.',
-      },
-    },
-  },
+        story: 'List skeleton with three items, each with icon and text.'
+      }
+    }
+  }
 };
 
 // Text Lines
@@ -157,17 +157,17 @@ export const TextLines: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Multiple text line skeletons with varying widths.',
-      },
-    },
-  },
+        story: 'Multiple text line skeletons with varying widths.'
+      }
+    }
+  }
 };
 
 // Avatar Sizes
@@ -182,17 +182,17 @@ export const AvatarSizes: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Avatar skeletons in different sizes.',
-      },
-    },
-  },
+        story: 'Avatar skeletons in different sizes.'
+      }
+    }
+  }
 };
 
 // Button Skeleton
@@ -206,17 +206,17 @@ export const ButtonSkeleton: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Button-shaped skeletons in different widths.',
-      },
-    },
-  },
+        story: 'Button-shaped skeletons in different widths.'
+      }
+    }
+  }
 };
 
 // All Patterns
@@ -246,17 +246,17 @@ export const AllPatterns: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Showcase of common skeleton patterns.',
-      },
-    },
-  },
+        story: 'Showcase of common skeleton patterns.'
+      }
+    }
+  }
 };
 
 // RTL Card Skeleton
@@ -276,17 +276,17 @@ export const RTLCardSkeleton: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Card skeleton in RTL mode.',
-      },
-    },
-  },
+        story: 'Card skeleton in RTL mode.'
+      }
+    }
+  }
 };
 
 // RTL Profile Skeleton
@@ -306,17 +306,17 @@ export const RTLProfileSkeleton: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Profile skeleton in RTL with space-x-reverse for proper spacing.',
-      },
-    },
-  },
+        story: 'Profile skeleton in RTL with space-x-reverse for proper spacing.'
+      }
+    }
+  }
 };
 
 // RTL List Skeleton
@@ -340,15 +340,15 @@ export const RTLListSkeleton: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'List skeleton in RTL layout with reversed spacing.',
-      },
-    },
-  },
+        story: 'List skeleton in RTL layout with reversed spacing.'
+      }
+    }
+  }
 };

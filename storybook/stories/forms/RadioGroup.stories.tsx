@@ -17,14 +17,14 @@ const meta = {
   title: 'Forms/RadioGroup',
   component: RadioGroup,
   parameters: {
-    layout: 'centered',
+    layout: 'centered'
   },
   tags: ['autodocs'],
   argTypes: {
     onValueChange: {
-      control: false,
-    },
-  },
+      control: false
+    }
+  }
 } satisfies Meta<typeof RadioGroup>;
 
 export default meta;
@@ -33,11 +33,11 @@ type Story = StoryObj<typeof meta>;
 // Default - Interactive playground with controls (hidden from stories list to avoid ID conflicts)
 export const Default: Story = {
   args: {
-    defaultValue: 'option1',
+    defaultValue: 'option1'
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   render: (args) => (
     <RadioGroup {...args}>
@@ -58,10 +58,10 @@ export const Default: Story = {
   parameters: {
     docs: {
       story: {
-        inline: false,
-      },
-    },
-  },
+        inline: false
+      }
+    }
+  }
 };
 
 // Vertical Layout - from component page lines 329-342
@@ -84,12 +84,11 @@ export const VerticalLayout: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-    docs: { disable: true },
-  },
+    controls: { disable: true }
+  }
 };
 
 // Horizontal Layout - from component page lines 355-368
@@ -112,12 +111,11 @@ export const HorizontalLayout: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-    docs: { disable: true },
-  },
+    controls: { disable: true }
+  }
 };
 
 // With Description - from component page lines 381-411
@@ -157,17 +155,17 @@ export const WithDescription: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Radio group with descriptive text under each option. Useful for plans, pricing tiers, or options that need additional context.',
-      },
-    },
-  },
+        story: 'Radio group with descriptive text under each option. Useful for plans, pricing tiers, or options that need additional context.'
+      }
+    }
+  }
 };
 
 // Disabled Options - from component page lines 424-437
@@ -190,12 +188,11 @@ export const DisabledOptions: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-    docs: { disable: true },
-  },
+    controls: { disable: true }
+  }
 };
 
 // Controlled - from component page lines 451-474
@@ -233,17 +230,17 @@ export const Controlled: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Controlled radio group with external state management. The selection can be changed programmatically via buttons.',
-      },
-    },
-  },
+        story: 'Controlled radio group with external state management. The selection can be changed programmatically via buttons.'
+      }
+    }
+  }
 };
 
 // In Form - from component page lines 494-510
@@ -278,17 +275,17 @@ export const InForm: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Radio group in a form with the name attribute for form submission.',
-      },
-    },
-  },
+        story: 'Radio group in a form with the name attribute for form submission.'
+      }
+    }
+  }
 };
 
 // RTL Example
@@ -311,17 +308,17 @@ export const RTLExample: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Radio group with Arabic labels demonstrating RTL support. Radio buttons and labels maintain proper spacing and alignment. Automatically switches to RTL mode.',
-      },
-    },
-  },
+        story: 'Radio group with Arabic labels demonstrating RTL support. Radio buttons and labels maintain proper spacing and alignment. Automatically switches to RTL mode.'
+      }
+    }
+  }
 };
 
 // RTL With Description
@@ -361,17 +358,17 @@ export const RTLWithDescription: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Plan selection with descriptions in Arabic. Uses logical properties (ps-6) which automatically adapt for RTL.',
-      },
-    },
-  },
+        story: 'Plan selection with descriptions in Arabic. Uses logical properties (ps-6) which automatically adapt for RTL.'
+      }
+    }
+  }
 };
 
 // RTL Horizontal
@@ -394,17 +391,17 @@ export const RTLHorizontal: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Horizontal radio group layout in RTL mode. The flex layout naturally adapts to RTL.',
-      },
-    },
-  },
+        story: 'Horizontal radio group layout in RTL mode. The flex layout naturally adapts to RTL.'
+      }
+    }
+  }
 };
 
 // RTL In Form
@@ -439,15 +436,15 @@ export const RTLInForm: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Complete form with radio group in Arabic, demonstrating RTL support in form contexts.',
-      },
-    },
-  },
+        story: 'Complete form with radio group in Arabic, demonstrating RTL support in form contexts.'
+      }
+    }
+  }
 };

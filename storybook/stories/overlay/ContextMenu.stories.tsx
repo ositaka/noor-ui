@@ -7,7 +7,7 @@ import {
   ContextMenuSeparator,
   ContextMenuTrigger,
   ContextMenuCheckboxItem,
-  ContextMenuShortcut,
+  ContextMenuShortcut
 } from '../../../components/ui/context-menu';
 import { Card } from '../../../components/ui/card';
 import {
@@ -17,7 +17,7 @@ import {
   Trash2,
   Edit,
   Star,
-  Archive,
+  Archive
 } from 'lucide-react';
 import * as React from 'react';
 
@@ -35,14 +35,14 @@ const meta = {
   title: 'Overlay/Context Menu',
   component: ContextMenu,
   parameters: {
-    layout: 'centered',
+    layout: 'centered'
   },
   tags: ['autodocs'],
   argTypes: {
     onOpenChange: {
-      control: false,
-    },
-  },
+      control: false
+    }
+  }
 } satisfies Meta<typeof ContextMenu>;
 
 export default meta;
@@ -52,7 +52,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   render: () => (
     <ContextMenu>
@@ -93,10 +93,10 @@ export const Default: Story = {
   parameters: {
     docs: {
       story: {
-        inline: false,
-      },
-    },
-  },
+        inline: false
+      }
+    }
+  }
 };
 
 // Basic Usage - from component page lines 166-199
@@ -139,17 +139,17 @@ export const BasicUsage: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Context menu with icons and keyboard shortcuts. Right-click to open.',
-      },
-    },
-  },
+        story: 'Context menu with icons and keyboard shortcuts. Right-click to open.'
+      }
+    }
+  }
 };
 
 // With Icons - from component page lines 226-254
@@ -187,17 +187,17 @@ export const WithIcons: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Context menu with icons on the left and keyboard shortcuts on the right.',
-      },
-    },
-  },
+        story: 'Context menu with icons on the left and keyboard shortcuts on the right.'
+      }
+    }
+  }
 };
 
 // With Checkboxes - from component page lines 267-289
@@ -228,17 +228,17 @@ export const WithCheckboxes: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Context menu with checkbox items for toggling view options.',
-      },
-    },
-  },
+        story: 'Context menu with checkbox items for toggling view options.'
+      }
+    }
+  }
 };
 
 // File Explorer - from component page lines 303-334
@@ -283,17 +283,17 @@ export const FileExplorer: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'File explorer pattern with context menus for each file.',
-      },
-    },
-  },
+        story: 'File explorer pattern with context menus for each file.'
+      }
+    }
+  }
 };
 
 // All Variants
@@ -342,17 +342,17 @@ export const AllVariants: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'All context menu variants: with icons and with checkboxes.',
-      },
-    },
-  },
+        story: 'All context menu variants: with icons and with checkboxes.'
+      }
+    }
+  }
 };
 
 // RTL Basic
@@ -395,17 +395,17 @@ export const RTLBasic: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Context menu in RTL with Arabic text. Icons and shortcuts position correctly.',
-      },
-    },
-  },
+        story: 'Context menu in RTL with Arabic text. Icons and shortcuts position correctly.'
+      }
+    }
+  }
 };
 
 // RTL With Icons
@@ -443,17 +443,17 @@ export const RTLWithIcons: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Context menu with icons in RTL. Layout mirrors correctly.',
-      },
-    },
-  },
+        story: 'Context menu with icons in RTL. Layout mirrors correctly.'
+      }
+    }
+  }
 };
 
 // RTL With Checkboxes
@@ -484,17 +484,17 @@ export const RTLWithCheckboxes: Story = {
   },
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Context menu with checkboxes in RTL. Checkmarks position on the right (start).',
-      },
-    },
-  },
+        story: 'Context menu with checkboxes in RTL. Checkmarks position on the right (start).'
+      }
+    }
+  }
 };
 
 // RTL File Explorer
@@ -539,15 +539,15 @@ export const RTLFileExplorer: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'File explorer pattern in RTL with Arabic filenames and menu items.',
-      },
-    },
-  },
+        story: 'File explorer pattern in RTL with Arabic filenames and menu items.'
+      }
+    }
+  }
 };

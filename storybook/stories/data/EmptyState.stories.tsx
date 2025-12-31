@@ -12,7 +12,7 @@ import {
   FolderOpen,
   Database,
   MessageSquare,
-  Image,
+  Image
 } from 'lucide-react';
 import * as React from 'react';
 
@@ -30,26 +30,26 @@ const meta = {
   title: 'Data Display/EmptyState',
   component: EmptyState,
   parameters: {
-    layout: 'centered',
+    layout: 'centered'
   },
   tags: ['autodocs'],
   argTypes: {
     icon: {
-      control: false,
+      control: false
     },
     title: {
-      control: { type: 'text' },
+      control: { type: 'text' }
     },
     description: {
-      control: { type: 'text' },
+      control: { type: 'text' }
     },
     action: {
-      control: false,
+      control: false
     },
     className: {
-      control: { type: 'text' },
-    },
-  },
+      control: { type: 'text' }
+    }
+  }
 } satisfies Meta<typeof EmptyState>;
 
 export default meta;
@@ -66,11 +66,11 @@ export const Default: Story = {
         <Plus className="me-2 h-4 w-4" />
         Create Article
       </Button>
-    ),
+    )
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   render: (args) => (
     <Card className="p-8 w-[500px]">
@@ -80,10 +80,10 @@ export const Default: Story = {
   parameters: {
     docs: {
       story: {
-        inline: false,
-      },
-    },
-  },
+        inline: false
+      }
+    }
+  }
 };
 
 // Basic Usage - from component page lines 90-101
@@ -105,17 +105,17 @@ export const BasicUsage: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Simple empty state with icon, title, description, and action button.',
-      },
-    },
-  },
+        story: 'Simple empty state with icon, title, description, and action button.'
+      }
+    }
+  }
 };
 
 // Without Action - from component page lines 116-121
@@ -131,17 +131,17 @@ export const WithoutAction: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Empty state without action button. Used when no action is needed.',
-      },
-    },
-  },
+        story: 'Empty state without action button. Used when no action is needed.'
+      }
+    }
+  }
 };
 
 // Search Results - from component page lines 132-141
@@ -158,17 +158,17 @@ export const SearchResults: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Empty state for search results with clear filters action.',
-      },
-    },
-  },
+        story: 'Empty state for search results with clear filters action.'
+      }
+    }
+  }
 };
 
 // Multiple Actions - from component page lines 153-168
@@ -193,17 +193,17 @@ export const MultipleActions: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Empty state with multiple action buttons.',
-      },
-    },
-  },
+        story: 'Empty state with multiple action buttons.'
+      }
+    }
+  }
 };
 
 // All Use Cases
@@ -258,17 +258,17 @@ export const AllUseCases: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Different use cases: empty cart, no files, no data, no comments, no images.',
-      },
-    },
-  },
+        story: 'Different use cases: empty cart, no files, no data, no comments, no images.'
+      }
+    }
+  }
 };
 
 // Minimal Layout
@@ -280,17 +280,17 @@ export const MinimalLayout: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Minimal empty state with just title and description, no icon or action.',
-      },
-    },
-  },
+        story: 'Minimal empty state with just title and description, no icon or action.'
+      }
+    }
+  }
 };
 
 // RTL Basic
@@ -312,17 +312,17 @@ export const RTLBasic: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Empty state in RTL with Arabic text. Layout flows right-to-left.',
-      },
-    },
-  },
+        story: 'Empty state in RTL with Arabic text. Layout flows right-to-left.'
+      }
+    }
+  }
 };
 
 // RTL Without Action
@@ -338,17 +338,17 @@ export const RTLWithoutAction: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Empty inbox state in RTL without action button.',
-      },
-    },
-  },
+        story: 'Empty inbox state in RTL without action button.'
+      }
+    }
+  }
 };
 
 // RTL Search Results
@@ -365,17 +365,17 @@ export const RTLSearchResults: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Search results empty state in RTL with clear filters button.',
-      },
-    },
-  },
+        story: 'Search results empty state in RTL with clear filters button.'
+      }
+    }
+  }
 };
 
 // RTL Multiple Actions
@@ -400,15 +400,15 @@ export const RTLMultipleActions: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Empty state in RTL with multiple action buttons in Arabic.',
-      },
-    },
-  },
+        story: 'Empty state in RTL with multiple action buttons in Arabic.'
+      }
+    }
+  }
 };

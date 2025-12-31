@@ -15,9 +15,9 @@ const meta = {
   title: 'Basic/Textarea',
   component: Textarea,
   parameters: {
-    layout: 'centered',
+    layout: 'centered'
   },
-  tags: ['autodocs'],
+  tags: ['autodocs']
 } satisfies Meta<typeof Textarea>;
 
 export default meta;
@@ -27,18 +27,18 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     placeholder: 'Enter your message',
-    id: 'preview',
+    id: 'preview'
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   render: (args) => (
     <div className="w-full max-w-md space-y-2">
       <Label htmlFor="preview">Message</Label>
       <Textarea {...args} />
     </div>
-  ),
+  )
 };
 
 // With Label - from component page lines 314-317
@@ -51,11 +51,11 @@ export const WithLabel: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-  },
+    controls: { disable: true }
+  }
 };
 
 // All Height Options - from component page lines 330-345
@@ -82,11 +82,11 @@ export const AllHeightOptions: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-  },
+    controls: { disable: true }
+  }
 };
 
 // Character Count - from component page lines 358-370
@@ -113,11 +113,11 @@ export const CharacterCount: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-  },
+    controls: { disable: true }
+  }
 };
 
 // Disabled and Readonly - from component page lines 382-394
@@ -140,11 +140,11 @@ export const DisabledAndReadonly: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-  },
+    controls: { disable: true }
+  }
 };
 
 // With Validation - from component page lines 407-422
@@ -185,11 +185,11 @@ export const WithValidation: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-  },
+    controls: { disable: true }
+  }
 };
 
 // Auto Expand - from component page lines 437-447
@@ -223,11 +223,11 @@ export const AutoExpand: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-  },
+    controls: { disable: true }
+  }
 };
 
 // In Form - from component page lines 461-487
@@ -264,11 +264,11 @@ export const InForm: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-  },
+    controls: { disable: true }
+  }
 };
 
 // RTL Example - from component page lines 571-591
@@ -281,16 +281,16 @@ export const RTLExample: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       description: {
-        story: 'Textarea with Arabic text demonstrating RTL support. Automatically switches to RTL mode.',
-      },
-    },
-  },
+        story: 'Textarea with Arabic text demonstrating RTL support. Automatically switches to RTL mode.'
+      }
+    }
+  }
 };
 
 // RTL With Validation
@@ -329,16 +329,16 @@ export const RTLWithValidation: Story = {
   },
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       description: {
-        story: 'Arabic textarea with validation demonstrating RTL support and error messages.',
-      },
-    },
-  },
+        story: 'Arabic textarea with validation demonstrating RTL support and error messages.'
+      }
+    }
+  }
 };
 
 // RTL Form
@@ -375,14 +375,14 @@ export const RTLForm: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       description: {
-        story: 'Complete form with Arabic labels and textarea in RTL mode.',
-      },
-    },
-  },
+        story: 'Complete form with Arabic labels and textarea in RTL mode.'
+      }
+    }
+  }
 };

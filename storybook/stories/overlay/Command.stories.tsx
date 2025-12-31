@@ -8,7 +8,7 @@ import {
   CommandItem,
   CommandList,
   CommandSeparator,
-  CommandShortcut,
+  CommandShortcut
 } from '../../../components/ui/command';
 import { Button } from '../../../components/ui/button';
 import { Search, FileText, Settings, User, Calendar, Calculator } from 'lucide-react';
@@ -28,9 +28,9 @@ const meta = {
   title: 'Overlay/Command',
   component: Command,
   parameters: {
-    layout: 'centered',
+    layout: 'centered'
   },
-  tags: ['autodocs'],
+  tags: ['autodocs']
 } satisfies Meta<typeof Command>;
 
 export default meta;
@@ -40,7 +40,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   render: () => (
     <Command className="rounded-lg border shadow-md max-w-md w-full">
@@ -78,10 +78,10 @@ export const Default: Story = {
   parameters: {
     docs: {
       story: {
-        inline: false,
-      },
-    },
-  },
+        inline: false
+      }
+    }
+  }
 };
 
 // Basic Command - from component page lines 114-144
@@ -121,17 +121,17 @@ export const BasicCommand: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Basic command menu with search, groups, and icons. Type to search.',
-      },
-    },
-  },
+        story: 'Basic command menu with search, groups, and icons. Type to search.'
+      }
+    }
+  }
 };
 
 // With Shortcuts
@@ -163,17 +163,17 @@ export const WithShortcuts: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Command menu with keyboard shortcuts displayed on the right.',
-      },
-    },
-  },
+        story: 'Command menu with keyboard shortcuts displayed on the right.'
+      }
+    }
+  }
 };
 
 // Command Dialog - from component page lines 170-185
@@ -224,17 +224,17 @@ export const CommandDialogExample: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Command menu in dialog mode. Opens with ⌘K (Cmd+K or Ctrl+K).',
-      },
-    },
-  },
+        story: 'Command menu in dialog mode. Opens with ⌘K (Cmd+K or Ctrl+K).'
+      }
+    }
+  }
 };
 
 // Multiple Groups
@@ -281,17 +281,17 @@ export const MultipleGroups: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Command menu with multiple groups separated by dividers.',
-      },
-    },
-  },
+        story: 'Command menu with multiple groups separated by dividers.'
+      }
+    }
+  }
 };
 
 // RTL Basic
@@ -331,17 +331,17 @@ export const RTLBasic: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Command menu in RTL with Arabic text. Layout and search icon position correctly.',
-      },
-    },
-  },
+        story: 'Command menu in RTL with Arabic text. Layout and search icon position correctly.'
+      }
+    }
+  }
 };
 
 // RTL With Shortcuts
@@ -373,17 +373,17 @@ export const RTLWithShortcuts: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Command menu with shortcuts in RTL. Shortcuts position on the left (end).',
-      },
-    },
-  },
+        story: 'Command menu with shortcuts in RTL. Shortcuts position on the left (end).'
+      }
+    }
+  }
 };
 
 // RTL Command Dialog
@@ -434,17 +434,17 @@ export const RTLCommandDialog: Story = {
   },
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Command dialog in RTL. Opens with ⌘K, content flows right-to-left.',
-      },
-    },
-  },
+        story: 'Command dialog in RTL. Opens with ⌘K, content flows right-to-left.'
+      }
+    }
+  }
 };
 
 // RTL Multiple Groups
@@ -491,15 +491,15 @@ export const RTLMultipleGroups: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Command menu with multiple groups in RTL. All content aligns properly.',
-      },
-    },
-  },
+        story: 'Command menu with multiple groups in RTL. All content aligns properly.'
+      }
+    }
+  }
 };

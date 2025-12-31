@@ -18,26 +18,26 @@ const meta = {
   title: 'Data Display/FeatureCard',
   component: FeatureCard,
   parameters: {
-    layout: 'centered',
+    layout: 'centered'
   },
   tags: ['autodocs'],
   argTypes: {
     icon: {
-      control: false,
+      control: false
     },
     title: {
-      control: { type: 'text' },
+      control: { type: 'text' }
     },
     description: {
-      control: { type: 'text' },
+      control: { type: 'text' }
     },
     href: {
-      control: { type: 'text' },
+      control: { type: 'text' }
     },
     className: {
-      control: { type: 'text' },
-    },
-  },
+      control: { type: 'text' }
+    }
+  }
 } satisfies Meta<typeof FeatureCard>;
 
 export default meta;
@@ -49,11 +49,11 @@ export const Default: Story = {
     icon: Sparkles,
     title: 'RTL-First Design',
     description: 'Built from the ground up to support both LTR and RTL layouts seamlessly',
-    href: '/rtl-guide',
+    href: '/rtl-guide'
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   render: (args) => (
     <div className="max-w-sm">
@@ -63,10 +63,10 @@ export const Default: Story = {
   parameters: {
     docs: {
       story: {
-        inline: false,
-      },
-    },
-  },
+        inline: false
+      }
+    }
+  }
 };
 
 // Static Card - from component page lines 181-186
@@ -82,17 +82,17 @@ export const StaticCard: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Static feature card without href. Non-interactive display.',
-      },
-    },
-  },
+        story: 'Static feature card without href. Non-interactive display.'
+      }
+    }
+  }
 };
 
 // Clickable Card - from component page lines 198-203
@@ -109,17 +109,17 @@ export const ClickableCard: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Clickable feature card with href. Shows hover effect.',
-      },
-    },
-  },
+        story: 'Clickable feature card with href. Shows hover effect.'
+      }
+    }
+  }
 };
 
 // Grid Layout - from component page lines 215-234
@@ -148,17 +148,17 @@ export const GridLayout: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Grid layout with 3 feature cards. All cards are clickable.',
-      },
-    },
-  },
+        story: 'Grid layout with 3 feature cards. All cards are clickable.'
+      }
+    }
+  }
 };
 
 // All Icons - showcase different icons
@@ -220,17 +220,17 @@ export const AllIcons: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Showcase of different icons and use cases. Mix of static and clickable cards.',
-      },
-    },
-  },
+        story: 'Showcase of different icons and use cases. Mix of static and clickable cards.'
+      }
+    }
+  }
 };
 
 // In Card Container
@@ -264,17 +264,17 @@ export const InCardContainer: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Feature cards grouped inside a card container with a title.',
-      },
-    },
-  },
+        story: 'Feature cards grouped inside a card container with a title.'
+      }
+    }
+  }
 };
 
 // RTL Example - Basic
@@ -291,17 +291,17 @@ export const RTLExample: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Feature card in RTL mode with Arabic text. Layout flows right-to-left.',
-      },
-    },
-  },
+        story: 'Feature card in RTL mode with Arabic text. Layout flows right-to-left.'
+      }
+    }
+  }
 };
 
 // RTL Static Card
@@ -317,17 +317,17 @@ export const RTLStaticCard: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Static feature card in RTL without href. Non-interactive display in Arabic.',
-      },
-    },
-  },
+        story: 'Static feature card in RTL without href. Non-interactive display in Arabic.'
+      }
+    }
+  }
 };
 
 // RTL Clickable Card
@@ -344,17 +344,17 @@ export const RTLClickableCard: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Clickable feature card in RTL with hover effect in Arabic.',
-      },
-    },
-  },
+        story: 'Clickable feature card in RTL with hover effect in Arabic.'
+      }
+    }
+  }
 };
 
 // RTL Grid Layout
@@ -383,17 +383,17 @@ export const RTLGridLayout: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Grid layout in RTL mode with Arabic text. All cards are clickable.',
-      },
-    },
-  },
+        story: 'Grid layout in RTL mode with Arabic text. All cards are clickable.'
+      }
+    }
+  }
 };
 
 // RTL In Card Container
@@ -427,15 +427,15 @@ export const RTLInCardContainer: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Feature cards in RTL inside a card container. All content flows right-to-left.',
-      },
-    },
-  },
+        story: 'Feature cards in RTL inside a card container. All content flows right-to-left.'
+      }
+    }
+  }
 };

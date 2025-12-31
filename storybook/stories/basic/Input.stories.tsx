@@ -7,24 +7,24 @@ const meta = {
   title: 'Basic/Input',
   component: Input,
   parameters: {
-    layout: 'centered',
+    layout: 'centered'
   },
   tags: ['autodocs'],
   argTypes: {
     type: {
       control: 'select',
       options: ['text', 'email', 'password', 'number', 'tel', 'url', 'search'],
-      description: 'Input type',
+      description: 'Input type'
     },
     placeholder: {
       control: 'text',
-      description: 'Placeholder text',
+      description: 'Placeholder text'
     },
     disabled: {
       control: 'boolean',
-      description: 'Disable input',
-    },
-  },
+      description: 'Disable input'
+    }
+  }
 } satisfies Meta<typeof Input>;
 
 export default meta;
@@ -33,37 +33,37 @@ type Story = StoryObj<typeof meta>;
 // Default story
 export const Default: Story = {
   args: {
-    placeholder: 'Enter text...',
-  },
+    placeholder: 'Enter text...'
+  }
 };
 
 // Types
 export const Email: Story = {
   args: {
     type: 'email',
-    placeholder: 'Email address',
-  },
+    placeholder: 'Email address'
+  }
 };
 
 export const Password: Story = {
   args: {
     type: 'password',
-    placeholder: 'Password',
-  },
+    placeholder: 'Password'
+  }
 };
 
 export const Number: Story = {
   args: {
     type: 'number',
-    placeholder: '0',
-  },
+    placeholder: '0'
+  }
 };
 
 export const SearchInput: Story = {
   args: {
     type: 'search',
-    placeholder: 'Search...',
-  },
+    placeholder: 'Search...'
+  }
 };
 
 // States
@@ -71,14 +71,14 @@ export const Disabled: Story = {
   args: {
     placeholder: 'Disabled input',
     disabled: true,
-    value: 'Cannot edit this',
-  },
+    value: 'Cannot edit this'
+  }
 };
 
 export const WithValue: Story = {
   args: {
-    value: 'Filled input',
-  },
+    value: 'Filled input'
+  }
 };
 
 // With Label
@@ -88,7 +88,7 @@ export const WithLabel: Story = {
       <Label htmlFor="email">Email</Label>
       <Input type="email" id="email" placeholder="Email" {...args} />
     </div>
-  ),
+  )
 };
 
 // With Icon
@@ -100,8 +100,8 @@ export const WithIconInside: Story = {
     </div>
   ),
   parameters: {
-    controls: { disable: true },
-  },
+    controls: { disable: true }
+  }
 };
 
 // Form Examples
@@ -125,26 +125,26 @@ export const LoginForm: Story = {
     </div>
   ),
   parameters: {
-    controls: { disable: true },
-  },
+    controls: { disable: true }
+  }
 };
 
 // RTL Examples
 export const RTLPlaceholder: Story = {
   args: {
-    placeholder: 'أدخل النص هنا...',
+    placeholder: 'أدخل النص هنا...'
   },
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     docs: {
       description: {
-        story: 'Input with Arabic placeholder demonstrating RTL support. Automatically switches to RTL mode.',
-      },
-    },
-  },
+        story: 'Input with Arabic placeholder demonstrating RTL support. Automatically switches to RTL mode.'
+      }
+    }
+  }
 };
 
 export const RTLWithLabel: Story = {
@@ -156,16 +156,16 @@ export const RTLWithLabel: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       description: {
-        story: 'Input with Arabic label showing proper RTL layout. Automatically switches to RTL mode.',
-      },
-    },
-  },
+        story: 'Input with Arabic label showing proper RTL layout. Automatically switches to RTL mode.'
+      }
+    }
+  }
 };
 
 export const RTLSearchWithIcon: Story = {
@@ -177,16 +177,16 @@ export const RTLSearchWithIcon: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       description: {
-        story: 'Search input with icon properly positioned in RTL mode using logical properties (start/end).',
-      },
-    },
-  },
+        story: 'Search input with icon properly positioned in RTL mode using logical properties (start/end).'
+      }
+    }
+  }
 };
 
 // Complete Registration Form
@@ -217,6 +217,6 @@ export const RegistrationForm: Story = {
     </div>
   ),
   parameters: {
-    controls: { disable: true },
-  },
+    controls: { disable: true }
+  }
 };

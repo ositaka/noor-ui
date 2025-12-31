@@ -17,20 +17,20 @@ const meta = {
   title: 'AI/Thinking Indicator',
   component: ThinkingIndicator,
   parameters: {
-    layout: 'centered',
+    layout: 'centered'
   },
   tags: ['autodocs'],
   argTypes: {
     variant: {
       control: { type: 'select' },
-      options: ['dots', 'pulse', 'wave', 'typing'],
+      options: ['dots', 'pulse', 'wave', 'typing']
     },
     size: {
       control: { type: 'select' },
-      options: ['sm', 'default', 'lg'],
+      options: ['sm', 'default', 'lg']
     },
-    message: { control: 'text' },
-  },
+    message: { control: 'text' }
+  }
 } satisfies Meta<typeof ThinkingIndicator>;
 
 export default meta;
@@ -40,19 +40,19 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     variant: 'dots',
-    message: 'Thinking...',
+    message: 'Thinking...'
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     docs: {
       story: {
-        inline: false,
-      },
-    },
-  },
+        inline: false
+      }
+    }
+  }
 };
 
 // All Variants - from component page lines 156-175
@@ -86,17 +86,17 @@ export const AllVariants: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Showcase of all 4 animation variants.',
-      },
-    },
-  },
+        story: 'Showcase of all 4 animation variants.'
+      }
+    }
+  }
 };
 
 // With Messages - from component page lines 189-193
@@ -116,17 +116,17 @@ export const WithMessages: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Indicators with custom messages.',
-      },
-    },
-  },
+        story: 'Indicators with custom messages.'
+      }
+    }
+  }
 };
 
 // Size Variants - from component page lines 208-212
@@ -146,17 +146,17 @@ export const SizeVariants: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Indicators in different sizes.',
-      },
-    },
-  },
+        story: 'Indicators in different sizes.'
+      }
+    }
+  }
 };
 
 // In Chat Context - from component page lines 227-234
@@ -179,17 +179,17 @@ export const InChatContext: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Indicator in chat message context with avatar.',
-      },
-    },
-  },
+        story: 'Indicator in chat message context with avatar.'
+      }
+    }
+  }
 };
 
 // Dots Only
@@ -208,17 +208,17 @@ export const DotsOnly: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Just the dots variant.',
-      },
-    },
-  },
+        story: 'Just the dots variant.'
+      }
+    }
+  }
 };
 
 // Pulse Only
@@ -237,17 +237,17 @@ export const PulseOnly: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Just the pulse variant.',
-      },
-    },
-  },
+        story: 'Just the pulse variant.'
+      }
+    }
+  }
 };
 
 // Wave Only
@@ -266,17 +266,17 @@ export const WaveOnly: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Just the wave variant.',
-      },
-    },
-  },
+        story: 'Just the wave variant.'
+      }
+    }
+  }
 };
 
 // Typing Only
@@ -295,17 +295,17 @@ export const TypingOnly: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Just the typing variant.',
-      },
-    },
-  },
+        story: 'Just the typing variant.'
+      }
+    }
+  }
 };
 
 // RTL With Messages
@@ -327,15 +327,15 @@ export const RTLWithMessages: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Indicators with Arabic messages in RTL.',
-      },
-    },
-  },
+        story: 'Indicators with Arabic messages in RTL.'
+      }
+    }
+  }
 };

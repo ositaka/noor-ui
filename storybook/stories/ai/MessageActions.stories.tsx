@@ -16,7 +16,7 @@ const meta = {
   title: 'AI/Message Actions',
   component: MessageActions,
   parameters: {
-    layout: 'centered',
+    layout: 'centered'
   },
   tags: ['autodocs'],
   argTypes: {
@@ -34,8 +34,8 @@ const meta = {
     onThumbsUp: { control: false },
     onThumbsDown: { control: false },
     isRTL: { control: 'boolean' },
-    compact: { control: 'boolean' },
-  },
+    compact: { control: 'boolean' }
+  }
 } satisfies Meta<typeof MessageActions>;
 
 export default meta;
@@ -50,11 +50,11 @@ export const Default: Story = {
     showShare: false,
     showFeedback: false,
     showFlag: false,
-    compact: false,
+    compact: false
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   render: (args) => (
     <MessageActions
@@ -71,10 +71,10 @@ export const Default: Story = {
   parameters: {
     docs: {
       story: {
-        inline: false,
-      },
-    },
-  },
+        inline: false
+      }
+    }
+  }
 };
 
 // Full Featured - from component page lines 262-276
@@ -102,17 +102,17 @@ export const FullFeatured: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Message actions with all features enabled.',
-      },
-    },
-  },
+        story: 'Message actions with all features enabled.'
+      }
+    }
+  }
 };
 
 // For Assistant Messages - from component page lines 293-301
@@ -139,17 +139,17 @@ export const ForAssistantMessages: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Message actions for AI assistant messages with copy, regenerate, and feedback.',
-      },
-    },
-  },
+        story: 'Message actions for AI assistant messages with copy, regenerate, and feedback.'
+      }
+    }
+  }
 };
 
 // For User Messages - from component page lines 319-324
@@ -173,17 +173,17 @@ export const ForUserMessages: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Message actions for user messages with copy and edit.',
-      },
-    },
-  },
+        story: 'Message actions for user messages with copy and edit.'
+      }
+    }
+  }
 };
 
 // Compact Mode - from component page lines 342-350
@@ -210,17 +210,17 @@ export const CompactMode: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Compact variant for dense layouts.',
-      },
-    },
-  },
+        story: 'Compact variant for dense layouts.'
+      }
+    }
+  }
 };
 
 // Copy Only
@@ -242,17 +242,17 @@ export const CopyOnly: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Just the copy action.',
-      },
-    },
-  },
+        story: 'Just the copy action.'
+      }
+    }
+  }
 };
 
 // With Feedback Only
@@ -275,17 +275,17 @@ export const WithFeedbackOnly: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Just thumbs up/down feedback actions.',
-      },
-    },
-  },
+        story: 'Just thumbs up/down feedback actions.'
+      }
+    }
+  }
 };
 
 // With Share and Flag
@@ -311,17 +311,17 @@ export const WithShareAndFlag: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Message actions with share and flag options.',
-      },
-    },
-  },
+        story: 'Message actions with share and flag options.'
+      }
+    }
+  }
 };
 
 // RTL Default - from component page lines 422-430
@@ -341,17 +341,17 @@ export const RTLDefault: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Message actions in RTL layout.',
-      },
-    },
-  },
+        story: 'Message actions in RTL layout.'
+      }
+    }
+  }
 };
 
 // RTL With All Features
@@ -380,15 +380,15 @@ export const RTLWithAllFeatures: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'All message actions in RTL with Arabic alerts.',
-      },
-    },
-  },
+        story: 'All message actions in RTL with Arabic alerts.'
+      }
+    }
+  }
 };

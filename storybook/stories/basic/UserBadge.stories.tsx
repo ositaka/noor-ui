@@ -15,18 +15,18 @@ const meta = {
   title: 'Basic/User Badge',
   component: UserBadge,
   parameters: {
-    layout: 'centered',
+    layout: 'centered'
   },
   tags: ['autodocs'],
   argTypes: {
     variant: {
       control: { type: 'select' },
-      options: ['author', 'moderator', 'verified', 'admin', 'custom'],
+      options: ['author', 'moderator', 'verified', 'admin', 'custom']
     },
     label: { control: 'text' },
     icon: { control: false },
-    className: { control: false },
-  },
+    className: { control: false }
+  }
 } satisfies Meta<typeof UserBadge>;
 
 export default meta;
@@ -35,12 +35,12 @@ type Story = StoryObj<typeof meta>;
 // Default
 export const Default: Story = {
   args: {
-    variant: 'author',
+    variant: 'author'
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
-  },
+    locale: 'en'
+  }
 };
 
 // All Variants - from page lines 97-102
@@ -64,14 +64,11 @@ export const AllVariants: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };
 
 // Author
@@ -79,14 +76,11 @@ export const Author: Story = {
   render: () => <UserBadge variant="author" />,
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };
 
 // Moderator
@@ -94,14 +88,11 @@ export const Moderator: Story = {
   render: () => <UserBadge variant="moderator" />,
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };
 
 // Verified
@@ -109,14 +100,11 @@ export const Verified: Story = {
   render: () => <UserBadge variant="verified" />,
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };
 
 // Admin
@@ -124,13 +112,11 @@ export const Admin: Story = {
   render: () => <UserBadge variant="admin" />,
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true },
-  },
+    controls: { disable: true }
+  }
 };
 
 // Custom
@@ -144,14 +130,11 @@ export const Custom: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };
 
 // RTL
@@ -166,12 +149,9 @@ export const RTL: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };

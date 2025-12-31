@@ -20,14 +20,14 @@ const meta = {
   title: 'Data Display/Table',
   component: Table,
   parameters: {
-    layout: 'padded',
+    layout: 'padded'
   },
   tags: ['autodocs'],
   argTypes: {
     className: {
-      control: { type: 'text' },
-    },
-  },
+      control: { type: 'text' }
+    }
+  }
 } satisfies Meta<typeof Table>;
 
 export default meta;
@@ -52,11 +52,11 @@ const usersAR = [
 // Default - Interactive playground with controls (hidden from stories list to avoid ID conflicts)
 export const Default: Story = {
   args: {
-    className: '',
+    className: ''
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   render: (args) => (
     <Table {...args}>
@@ -88,10 +88,10 @@ export const Default: Story = {
   parameters: {
     docs: {
       story: {
-        inline: false,
-      },
-    },
-  },
+        inline: false
+      }
+    }
+  }
 };
 
 // Basic Table - from component page lines 242-271
@@ -127,17 +127,17 @@ export const BasicTable: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Basic table with caption showing user data. Uses semantic HTML elements for accessibility.',
-      },
-    },
-  },
+        story: 'Basic table with caption showing user data. Uses semantic HTML elements for accessibility.'
+      }
+    }
+  }
 };
 
 // With Caption - from component page lines 355-394
@@ -181,17 +181,17 @@ export const WithCaption: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Table with caption showing transaction data inside a card. Caption describes the table content.',
-      },
-    },
-  },
+        story: 'Table with caption showing transaction data inside a card. Caption describes the table content.'
+      }
+    }
+  }
 };
 
 // Interactive Table with Checkboxes - from component page lines 397-432
@@ -234,17 +234,17 @@ export const InteractiveTable: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Interactive table with checkboxes for row selection. Includes header checkbox for select all.',
-      },
-    },
-  },
+        story: 'Interactive table with checkboxes for row selection. Includes header checkbox for select all.'
+      }
+    }
+  }
 };
 
 // Mobile Responsive Table - from component page lines 435-483
@@ -276,17 +276,17 @@ export const MobileResponsiveTable: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Responsive table that adapts to mobile screens. On desktop shows normal table, on mobile shows stacked cards.',
-      },
-    },
-  },
+        story: 'Responsive table that adapts to mobile screens. On desktop shows normal table, on mobile shows stacked cards.'
+      }
+    }
+  }
 };
 
 // Striped Rows
@@ -319,17 +319,17 @@ export const StripedRows: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Table with alternating row colors (striped) for better readability of large datasets.',
-      },
-    },
-  },
+        story: 'Table with alternating row colors (striped) for better readability of large datasets.'
+      }
+    }
+  }
 };
 
 // Compact Table
@@ -363,17 +363,17 @@ export const CompactTable: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Compact table with reduced padding for displaying data in limited space.',
-      },
-    },
-  },
+        story: 'Compact table with reduced padding for displaying data in limited space.'
+      }
+    }
+  }
 };
 
 // RTL Example - Basic Table
@@ -409,17 +409,17 @@ export const RTLExample: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Basic table in RTL mode with Arabic text. Text alignment uses text-start for proper RTL display.',
-      },
-    },
-  },
+        story: 'Basic table in RTL mode with Arabic text. Text alignment uses text-start for proper RTL display.'
+      }
+    }
+  }
 };
 
 // RTL With Caption
@@ -463,17 +463,17 @@ export const RTLWithCaption: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Transaction table in RTL with Arabic text. All content flows naturally right-to-left.',
-      },
-    },
-  },
+        story: 'Transaction table in RTL with Arabic text. All content flows naturally right-to-left.'
+      }
+    }
+  }
 };
 
 // RTL Interactive Table
@@ -516,17 +516,17 @@ export const RTLInteractiveTable: Story = {
   },
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Interactive table with checkboxes in RTL mode. Checkbox positioning adapts to RTL layout.',
-      },
-    },
-  },
+        story: 'Interactive table with checkboxes in RTL mode. Checkbox positioning adapts to RTL layout.'
+      }
+    }
+  }
 };
 
 // RTL Striped Rows
@@ -559,15 +559,15 @@ export const RTLStripedRows: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Striped table in RTL mode with Arabic text. Alternating row colors work perfectly in both directions.',
-      },
-    },
-  },
+        story: 'Striped table in RTL mode with Arabic text. Alternating row colors work perfectly in both directions.'
+      }
+    }
+  }
 };

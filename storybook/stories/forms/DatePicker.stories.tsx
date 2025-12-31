@@ -17,14 +17,14 @@ const meta = {
   title: 'Forms/Date Picker',
   component: DatePicker,
   parameters: {
-    layout: 'centered',
+    layout: 'centered'
   },
   tags: ['autodocs'],
   argTypes: {
     onDateChange: {
-      control: false,
-    },
-  },
+      control: false
+    }
+  }
 } satisfies Meta<typeof DatePicker>;
 
 export default meta;
@@ -34,11 +34,11 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     placeholder: 'Pick a date',
-    placeholderAr: 'اختر تاريخ',
+    placeholderAr: 'اختر تاريخ'
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   render: (args) => {
     const [date, setDate] = React.useState<Date | undefined>(new Date());
@@ -50,7 +50,7 @@ export const Default: Story = {
           {date ? new Intl.DateTimeFormat('en-US', {
             year: 'numeric',
             month: 'long',
-            day: 'numeric',
+            day: 'numeric'
           }).format(date) : 'No date selected'}
         </p>
       </div>
@@ -59,10 +59,10 @@ export const Default: Story = {
   parameters: {
     docs: {
       story: {
-        inline: false,
-      },
-    },
-  },
+        inline: false
+      }
+    }
+  }
 };
 
 // Basic Date Picker - from component page lines 287-296
@@ -75,7 +75,7 @@ export const BasicDatePicker: Story = {
       return new Intl.DateTimeFormat('en-US', {
         year: 'numeric',
         month: 'long',
-        day: 'numeric',
+        day: 'numeric'
       }).format(date);
     };
 
@@ -94,17 +94,17 @@ export const BasicDatePicker: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Basic date picker with label and formatted date display.',
-      },
-    },
-  },
+        story: 'Basic date picker with label and formatted date display.'
+      }
+    }
+  }
 };
 
 // Date Range Picker - from component page lines 310-320
@@ -112,7 +112,7 @@ export const DateRangePicker_: Story = {
   render: () => {
     const [dateRange, setDateRange] = React.useState<DateRange | undefined>({
       from: new Date(),
-      to: new Date(new Date().setDate(new Date().getDate() + 7)),
+      to: new Date(new Date().setDate(new Date().getDate() + 7))
     });
 
     const formatDateRange = (range: DateRange | undefined): string => {
@@ -120,7 +120,7 @@ export const DateRangePicker_: Story = {
       const formatter = new Intl.DateTimeFormat('en-US', {
         month: 'short',
         day: 'numeric',
-        year: 'numeric',
+        year: 'numeric'
       });
       if (!range.to) return formatter.format(range.from);
       return `${formatter.format(range.from)} - ${formatter.format(range.to)}`;
@@ -141,17 +141,17 @@ export const DateRangePicker_: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Date range picker for selecting start and end dates.',
-      },
-    },
-  },
+        story: 'Date range picker for selecting start and end dates.'
+      }
+    }
+  }
 };
 
 // With Constraints - from component page lines 335-349
@@ -166,7 +166,7 @@ export const WithConstraints: Story = {
       return new Intl.DateTimeFormat('en-US', {
         year: 'numeric',
         month: 'long',
-        day: 'numeric',
+        day: 'numeric'
       }).format(date);
     };
 
@@ -189,17 +189,17 @@ export const WithConstraints: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Date picker with min and max date constraints. Only dates within the next month are selectable.',
-      },
-    },
-  },
+        story: 'Date picker with min and max date constraints. Only dates within the next month are selectable.'
+      }
+    }
+  }
 };
 
 // Disabled Dates - from component page lines 365-377
@@ -239,17 +239,17 @@ export const DisabledDates: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Date picker with specific dates disabled. Weekends are not selectable in this example.',
-      },
-    },
-  },
+        story: 'Date picker with specific dates disabled. Weekends are not selectable in this example.'
+      }
+    }
+  }
 };
 
 // Real World Example - from component page lines 391-442
@@ -314,17 +314,17 @@ export const RealWorldExample: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Hotel booking example with date range selection and price calculation.',
-      },
-    },
-  },
+        story: 'Hotel booking example with date range selection and price calculation.'
+      }
+    }
+  }
 };
 
 // Disabled State
@@ -353,17 +353,17 @@ export const DisabledState: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Disabled date picker state.',
-      },
-    },
-  },
+        story: 'Disabled date picker state.'
+      }
+    }
+  }
 };
 
 // RTL Example
@@ -376,7 +376,7 @@ export const RTLExample: Story = {
       return new Intl.DateTimeFormat('ar-SA', {
         year: 'numeric',
         month: 'long',
-        day: 'numeric',
+        day: 'numeric'
       }).format(date);
     };
 
@@ -395,17 +395,17 @@ export const RTLExample: Story = {
   },
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Date picker with Arabic labels in RTL mode.',
-      },
-    },
-  },
+        story: 'Date picker with Arabic labels in RTL mode.'
+      }
+    }
+  }
 };
 
 // RTL Date Range Picker
@@ -413,7 +413,7 @@ export const RTLDateRangePicker: Story = {
   render: () => {
     const [dateRange, setDateRange] = React.useState<DateRange | undefined>({
       from: new Date(),
-      to: new Date(new Date().setDate(new Date().getDate() + 7)),
+      to: new Date(new Date().setDate(new Date().getDate() + 7))
     });
 
     const formatDateRange = (range: DateRange | undefined): string => {
@@ -421,7 +421,7 @@ export const RTLDateRangePicker: Story = {
       const formatter = new Intl.DateTimeFormat('ar-SA', {
         month: 'short',
         day: 'numeric',
-        year: 'numeric',
+        year: 'numeric'
       });
       if (!range.to) return formatter.format(range.from);
       return `${formatter.format(range.from)} – ${formatter.format(range.to)}`;
@@ -442,17 +442,17 @@ export const RTLDateRangePicker: Story = {
   },
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Date range picker in Arabic with RTL support.',
-      },
-    },
-  },
+        story: 'Date range picker in Arabic with RTL support.'
+      }
+    }
+  }
 };
 
 // RTL With Constraints
@@ -467,7 +467,7 @@ export const RTLWithConstraints: Story = {
       return new Intl.DateTimeFormat('ar-SA', {
         year: 'numeric',
         month: 'long',
-        day: 'numeric',
+        day: 'numeric'
       }).format(date);
     };
 
@@ -490,17 +490,17 @@ export const RTLWithConstraints: Story = {
   },
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Date picker with constraints in Arabic, showing proper RTL date formatting.',
-      },
-    },
-  },
+        story: 'Date picker with constraints in Arabic, showing proper RTL date formatting.'
+      }
+    }
+  }
 };
 
 // RTL Real World Example
@@ -565,15 +565,15 @@ export const RTLRealWorldExample: Story = {
   },
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Complete hotel booking example in Arabic with RTL support and proper number formatting.',
-      },
-    },
-  },
+        story: 'Complete hotel booking example in Arabic with RTL support and proper number formatting.'
+      }
+    }
+  }
 };

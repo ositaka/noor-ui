@@ -13,7 +13,7 @@ import {
   DollarSign,
   Briefcase,
   Clock,
-  Package,
+  Package
 } from 'lucide-react';
 import * as React from 'react';
 
@@ -31,69 +31,69 @@ const meta = {
   title: 'Data Display/ListingCard',
   component: ListingCard,
   parameters: {
-    layout: 'centered',
+    layout: 'centered'
   },
   tags: ['autodocs'],
   argTypes: {
     title: {
-      control: { type: 'text' },
+      control: { type: 'text' }
     },
     subtitle: {
-      control: false,
+      control: false
     },
     description: {
-      control: { type: 'text' },
+      control: { type: 'text' }
     },
     price: {
-      control: false,
+      control: false
     },
     image: {
-      control: false,
+      control: false
     },
     placeholderIcon: {
-      control: false,
+      control: false
     },
     badges: {
-      control: false,
+      control: false
     },
     actions: {
-      control: false,
+      control: false
     },
     stats: {
-      control: false,
+      control: false
     },
     tags: {
-      control: false,
+      control: false
     },
     maxTags: {
-      control: { type: 'number' },
+      control: { type: 'number' }
     },
     typeBadge: {
-      control: { type: 'text' },
+      control: { type: 'text' }
     },
     ctaText: {
-      control: { type: 'text' },
+      control: { type: 'text' }
     },
     onCtaClick: {
-      control: false,
+      control: false
     },
     onClick: {
-      control: false,
+      control: false
     },
     featured: {
-      control: { type: 'boolean' },
+      control: { type: 'boolean' }
     },
     imageAspect: {
       control: { type: 'select' },
-      options: ['square', 'video', 'wide'],
+      options: ['square', 'video', 'wide']
     },
     hoverEffect: {
-      control: { type: 'boolean' },
+      control: { type: 'boolean' }
     },
     className: {
-      control: { type: 'text' },
-    },
-  },
+      control: { type: 'text' }
+    }
+  }
 } satisfies Meta<typeof ListingCard>;
 
 export default meta;
@@ -109,11 +109,11 @@ export const Default: Story = {
     placeholderIcon: Home,
     imageAspect: 'video',
     featured: false,
-    hoverEffect: true,
+    hoverEffect: true
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   render: (args) => (
     <div className="max-w-sm">
@@ -123,10 +123,10 @@ export const Default: Story = {
   parameters: {
     docs: {
       story: {
-        inline: false,
-      },
-    },
-  },
+        inline: false
+      }
+    }
+  }
 };
 
 // Basic Listing - from component page lines 293-300
@@ -144,17 +144,17 @@ export const BasicListing: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Basic listing with just title, subtitle, description, and price.',
-      },
-    },
-  },
+        story: 'Basic listing with just title, subtitle, description, and price.'
+      }
+    }
+  }
 };
 
 // Real Estate Listing - from component page lines 313-347
@@ -199,17 +199,17 @@ export const RealEstateListing: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Full real estate listing with badges, actions, stats, tags, and featured styling.',
-      },
-    },
-  },
+        story: 'Full real estate listing with badges, actions, stats, tags, and featured styling.'
+      }
+    }
+  }
 };
 
 // E-commerce Listing - from component page lines 360-384
@@ -244,17 +244,17 @@ export const EcommerceListing: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'E-commerce product with rating, sold count, and Add to Cart CTA.',
-      },
-    },
-  },
+        story: 'E-commerce product with rating, sold count, and Add to Cart CTA.'
+      }
+    }
+  }
 };
 
 // Job Listing - from component page lines 397-421
@@ -286,17 +286,17 @@ export const JobListing: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Job listing with employment type, location, tech stack, and Apply Now CTA.',
-      },
-    },
-  },
+        story: 'Job listing with employment type, location, tech stack, and Apply Now CTA.'
+      }
+    }
+  }
 };
 
 // With All Features
@@ -344,17 +344,17 @@ export const WithAllFeatures: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Showcasing all features: badges, actions, stats, tags (with truncation), type badge, CTA, and featured styling.',
-      },
-    },
-  },
+        story: 'Showcasing all features: badges, actions, stats, tags (with truncation), type badge, CTA, and featured styling.'
+      }
+    }
+  }
 };
 
 // Grid Layout
@@ -406,17 +406,17 @@ export const GridLayout: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Grid layout with multiple property listings.',
-      },
-    },
-  },
+        story: 'Grid layout with multiple property listings.'
+      }
+    }
+  }
 };
 
 // RTL Real Estate
@@ -461,17 +461,17 @@ export const RTLRealEstate: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Real estate listing in RTL with Arabic text. Layout flows right-to-left.',
-      },
-    },
-  },
+        story: 'Real estate listing in RTL with Arabic text. Layout flows right-to-left.'
+      }
+    }
+  }
 };
 
 // RTL E-commerce
@@ -502,17 +502,17 @@ export const RTLEcommerce: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'E-commerce product in RTL with Arabic text and Add to Cart button.',
-      },
-    },
-  },
+        story: 'E-commerce product in RTL with Arabic text and Add to Cart button.'
+      }
+    }
+  }
 };
 
 // RTL Job Listing
@@ -544,17 +544,17 @@ export const RTLJobListing: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Job listing in RTL with Arabic text and Apply Now button.',
-      },
-    },
-  },
+        story: 'Job listing in RTL with Arabic text and Apply Now button.'
+      }
+    }
+  }
 };
 
 // RTL Grid Layout
@@ -606,15 +606,15 @@ export const RTLGridLayout: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Grid layout in RTL with Arabic property listings.',
-      },
-    },
-  },
+        story: 'Grid layout in RTL with Arabic property listings.'
+      }
+    }
+  }
 };

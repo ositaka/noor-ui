@@ -18,12 +18,12 @@ const meta = {
   title: 'Navigation/Breadcrumb',
   component: Breadcrumb,
   parameters: {
-    layout: 'centered',
+    layout: 'centered'
   },
   tags: ['autodocs'],
   argTypes: {
     // No specific props to control - component is structural
-  },
+  }
 } satisfies Meta<typeof Breadcrumb>;
 
 export default meta;
@@ -33,7 +33,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   render: () => (
     <Breadcrumb>
@@ -55,10 +55,10 @@ export const Default: Story = {
   parameters: {
     docs: {
       story: {
-        inline: false,
-      },
-    },
-  },
+        inline: false
+      }
+    }
+  }
 };
 
 // Basic Breadcrumb - from component page lines 149-163
@@ -82,17 +82,17 @@ export const BasicBreadcrumb: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Basic breadcrumb showing navigation path with default chevron separators.',
-      },
-    },
-  },
+        story: 'Basic breadcrumb showing navigation path with default chevron separators.'
+      }
+    }
+  }
 };
 
 // Custom Separator - from component page lines 190-204
@@ -116,17 +116,17 @@ export const CustomSeparator: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Breadcrumb with custom "/" separator instead of default chevron.',
-      },
-    },
-  },
+        story: 'Breadcrumb with custom "/" separator instead of default chevron.'
+      }
+    }
+  }
 };
 
 // With Icons - from component page lines 214-237
@@ -159,17 +159,17 @@ export const WithIcons: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Breadcrumb with icons for visual clarity. Icons help identify different navigation levels.',
-      },
-    },
-  },
+        story: 'Breadcrumb with icons for visual clarity. Icons help identify different navigation levels.'
+      }
+    }
+  }
 };
 
 // Longer Path
@@ -201,17 +201,17 @@ export const LongerPath: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Breadcrumb with a longer navigation path showing multiple levels.',
-      },
-    },
-  },
+        story: 'Breadcrumb with a longer navigation path showing multiple levels.'
+      }
+    }
+  }
 };
 
 // In Card
@@ -243,17 +243,17 @@ export const InCard: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Breadcrumb placed inside a card component with a title.',
-      },
-    },
-  },
+        story: 'Breadcrumb placed inside a card component with a title.'
+      }
+    }
+  }
 };
 
 // RTL Example - Basic
@@ -277,17 +277,17 @@ export const RTLExample: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Basic breadcrumb with Arabic text in RTL mode. Chevron separators automatically flip direction.',
-      },
-    },
-  },
+        story: 'Basic breadcrumb with Arabic text in RTL mode. Chevron separators automatically flip direction.'
+      }
+    }
+  }
 };
 
 // RTL Custom Separator
@@ -311,17 +311,17 @@ export const RTLCustomSeparator: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Breadcrumb with custom "/" separator in RTL mode.',
-      },
-    },
-  },
+        story: 'Breadcrumb with custom "/" separator in RTL mode.'
+      }
+    }
+  }
 };
 
 // RTL With Icons
@@ -354,17 +354,17 @@ export const RTLWithIcons: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Breadcrumb with icons in RTL mode. Icons and text flow correctly right-to-left.',
-      },
-    },
-  },
+        story: 'Breadcrumb with icons in RTL mode. Icons and text flow correctly right-to-left.'
+      }
+    }
+  }
 };
 
 // RTL Longer Path
@@ -396,15 +396,15 @@ export const RTLLongerPath: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Longer breadcrumb path in RTL mode with Arabic text. Link order flows naturally right-to-left.',
-      },
-    },
-  },
+        story: 'Longer breadcrumb path in RTL mode with Arabic text. Link order flows naturally right-to-left.'
+      }
+    }
+  }
 };

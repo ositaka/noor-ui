@@ -18,27 +18,27 @@ const meta = {
   title: 'Navigation/Accordion',
   component: Accordion,
   parameters: {
-    layout: 'centered',
+    layout: 'centered'
   },
   tags: ['autodocs'],
   argTypes: {
     type: {
       control: { type: 'select' },
-      options: ['single', 'multiple'],
+      options: ['single', 'multiple']
     },
     collapsible: {
-      control: { type: 'boolean' },
+      control: { type: 'boolean' }
     },
     defaultValue: {
-      control: false,
+      control: false
     },
     value: {
-      control: false,
+      control: false
     },
     onValueChange: {
-      control: false,
-    },
-  },
+      control: false
+    }
+  }
 } satisfies Meta<typeof Accordion>;
 
 export default meta;
@@ -48,11 +48,11 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     type: 'single',
-    collapsible: true,
+    collapsible: true
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   render: (args) => (
     <Accordion {...args} className="w-full max-w-md">
@@ -79,10 +79,10 @@ export const Default: Story = {
   parameters: {
     docs: {
       story: {
-        inline: false,
-      },
-    },
-  },
+        inline: false
+      }
+    }
+  }
 };
 
 // Basic FAQ - from component page lines 199-218
@@ -111,17 +111,17 @@ export const BasicFAQ: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Basic FAQ accordion with single item open at a time. Click to expand, click again to collapse.',
-      },
-    },
-  },
+        story: 'Basic FAQ accordion with single item open at a time. Click to expand, click again to collapse.'
+      }
+    }
+  }
 };
 
 // Multiple Items Open - from component page lines 245-264
@@ -150,17 +150,17 @@ export const MultipleOpen: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Multiple items can be open simultaneously. Account and Security are open by default.',
-      },
-    },
-  },
+        story: 'Multiple items can be open simultaneously. Account and Security are open by default.'
+      }
+    }
+  }
 };
 
 // With Icons - from component page lines 272-307
@@ -204,17 +204,17 @@ export const WithIcons: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Accordion with icons for visual clarity. Icons are placed before the text.',
-      },
-    },
-  },
+        story: 'Accordion with icons for visual clarity. Icons are placed before the text.'
+      }
+    }
+  }
 };
 
 // Controlled State
@@ -250,17 +250,17 @@ export const Controlled: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Controlled accordion with external state management. Shows active item value above.',
-      },
-    },
-  },
+        story: 'Controlled accordion with external state management. Shows active item value above.'
+      }
+    }
+  }
 };
 
 // In Card
@@ -294,17 +294,17 @@ export const InCard: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Accordion placed inside a card component with a title.',
-      },
-    },
-  },
+        story: 'Accordion placed inside a card component with a title.'
+      }
+    }
+  }
 };
 
 // RTL Example - Basic FAQ
@@ -333,17 +333,17 @@ export const RTLExample: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Basic FAQ accordion with Arabic text in RTL mode. Chevron positions correctly on the start side.',
-      },
-    },
-  },
+        story: 'Basic FAQ accordion with Arabic text in RTL mode. Chevron positions correctly on the start side.'
+      }
+    }
+  }
 };
 
 // RTL Multiple Open
@@ -372,17 +372,17 @@ export const RTLMultipleOpen: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Multiple items open in RTL mode with Arabic labels. Layout adapts automatically.',
-      },
-    },
-  },
+        story: 'Multiple items open in RTL mode with Arabic labels. Layout adapts automatically.'
+      }
+    }
+  }
 };
 
 // RTL With Icons
@@ -426,17 +426,17 @@ export const RTLWithIcons: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Accordion with icons in RTL mode. Icons and text flow correctly right-to-left.',
-      },
-    },
-  },
+        story: 'Accordion with icons in RTL mode. Icons and text flow correctly right-to-left.'
+      }
+    }
+  }
 };
 
 // RTL Controlled
@@ -472,15 +472,15 @@ export const RTLControlled: Story = {
   },
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Controlled accordion in RTL with Arabic text. State management works the same in both directions.',
-      },
-    },
-  },
+        story: 'Controlled accordion in RTL with Arabic text. State management works the same in both directions.'
+      }
+    }
+  }
 };

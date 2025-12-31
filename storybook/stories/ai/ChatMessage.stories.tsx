@@ -15,22 +15,22 @@ const meta = {
   title: 'AI/Chat Message',
   component: ChatMessage,
   parameters: {
-    layout: 'centered',
+    layout: 'centered'
   },
   tags: ['autodocs'],
   argTypes: {
     role: {
       control: { type: 'select' },
-      options: ['user', 'assistant', 'system'],
+      options: ['user', 'assistant', 'system']
     },
     content: { control: 'text' },
     variant: {
       control: { type: 'select' },
-      options: ['default', 'compact'],
+      options: ['default', 'compact']
     },
     state: {
       control: { type: 'select' },
-      options: ['complete', 'streaming', 'error'],
+      options: ['complete', 'streaming', 'error']
     },
     timestamp: { control: 'text' },
     avatar: { control: 'text' },
@@ -39,8 +39,8 @@ const meta = {
     showRegenerate: { control: 'boolean' },
     isRTL: { control: 'boolean' },
     onCopy: { control: false },
-    onRegenerate: { control: false },
-  },
+    onRegenerate: { control: false }
+  }
 } satisfies Meta<typeof ChatMessage>;
 
 export default meta;
@@ -51,11 +51,11 @@ export const Default: Story = {
   args: {
     role: 'assistant',
     content: 'Hello! How can I help you today?',
-    timestamp: '2:30 PM',
+    timestamp: '2:30 PM'
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   render: (args) => (
     <div className="w-full max-w-2xl">
@@ -65,10 +65,10 @@ export const Default: Story = {
   parameters: {
     docs: {
       story: {
-        inline: false,
-      },
-    },
-  },
+        inline: false
+      }
+    }
+  }
 };
 
 // Assistant Message - from code lines 97-103
@@ -84,17 +84,17 @@ export const AssistantMessage: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Assistant message with timestamp.',
-      },
-    },
-  },
+        story: 'Assistant message with timestamp.'
+      }
+    }
+  }
 };
 
 // User Message - from code lines 105-109
@@ -110,17 +110,17 @@ export const UserMessage: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'User message with timestamp.',
-      },
-    },
-  },
+        story: 'User message with timestamp.'
+      }
+    }
+  }
 };
 
 // System Message - from code lines 111-115
@@ -136,17 +136,17 @@ export const SystemMessage: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'System message for notifications.',
-      },
-    },
-  },
+        story: 'System message for notifications.'
+      }
+    }
+  }
 };
 
 // With Actions - from code lines 117-125
@@ -166,17 +166,17 @@ export const WithActions: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Assistant message with copy and regenerate actions.',
-      },
-    },
-  },
+        story: 'Assistant message with copy and regenerate actions.'
+      }
+    }
+  }
 };
 
 // Compact Variant - from code lines 127-131
@@ -192,17 +192,17 @@ export const CompactVariant: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Compact variant for dense layouts.',
-      },
-    },
-  },
+        story: 'Compact variant for dense layouts.'
+      }
+    }
+  }
 };
 
 // Conversation
@@ -236,17 +236,17 @@ export const Conversation: Story = {
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Complete conversation with alternating messages.',
-      },
-    },
-  },
+        story: 'Complete conversation with alternating messages.'
+      }
+    }
+  }
 };
 
 // RTL Assistant - from code lines 133-138
@@ -263,17 +263,17 @@ export const RTLAssistant: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Assistant message in RTL with Arabic text.',
-      },
-    },
-  },
+        story: 'Assistant message in RTL with Arabic text.'
+      }
+    }
+  }
 };
 
 // RTL User
@@ -290,17 +290,17 @@ export const RTLUser: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'User message in RTL with Arabic text.',
-      },
-    },
-  },
+        story: 'User message in RTL with Arabic text.'
+      }
+    }
+  }
 };
 
 // RTL Conversation
@@ -338,15 +338,15 @@ export const RTLConversation: Story = {
   ),
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
     controls: { disable: true },
     docs: {
       disable: true,
       description: {
-        story: 'Complete Arabic conversation in RTL.',
-      },
-    },
-  },
+        story: 'Complete Arabic conversation in RTL.'
+      }
+    }
+  }
 };

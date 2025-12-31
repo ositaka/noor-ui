@@ -16,7 +16,7 @@ const meta = {
   title: 'Basic/Markdown Editor',
   component: MarkdownEditor,
   parameters: {
-    layout: 'centered',
+    layout: 'centered'
   },
   tags: ['autodocs'],
   argTypes: {
@@ -28,9 +28,9 @@ const meta = {
     minHeight: { control: 'text' },
     dir: {
       control: { type: 'select' },
-      options: ['ltr', 'rtl'],
-    },
-  },
+      options: ['ltr', 'rtl']
+    }
+  }
 } satisfies Meta<typeof MarkdownEditor>;
 
 export default meta;
@@ -53,8 +53,8 @@ export const Default: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
-  },
+    locale: 'en'
+  }
 };
 
 // With Content
@@ -90,14 +90,11 @@ Try editing this content!`);
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };
 
 // With Code Blocks
@@ -129,14 +126,11 @@ Inline code: \`const x = 42\``);
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };
 
 // With Table
@@ -165,14 +159,11 @@ Use the toolbar to insert and edit tables.`);
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };
 
 // Read Only
@@ -197,14 +188,11 @@ This content **cannot be edited**.
   ),
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };
 
 // Custom Height
@@ -231,14 +219,11 @@ export const CustomHeight: Story = {
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };
 
 // Blog Post Example
@@ -284,14 +269,11 @@ Thanks for reading!`);
   },
   globals: {
     direction: 'ltr',
-    locale: 'en',
+    locale: 'en'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };
 
 // RTL
@@ -327,12 +309,9 @@ export const RTL: Story = {
   },
   globals: {
     direction: 'rtl',
-    locale: 'ar',
+    locale: 'ar'
   },
   parameters: {
-    controls: { disable: true },
-    docs: {
-      disable: true,
-    },
-  },
+    controls: { disable: true }
+  }
 };
