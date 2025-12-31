@@ -47,3 +47,7 @@ book-content/
 
 *storybook.log
 storybook-static
+
+# Webstorm
+/.idea/
+**/.idea/
