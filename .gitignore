@@ -44,3 +44,10 @@ next-env.d.ts
 # book content (keep private until ready to publish)
 /book-content/
 book-content/
+
+*storybook.log
+storybook-static
+
+# Webstorm
+/.idea/
+**/.idea/
