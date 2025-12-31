@@ -8,7 +8,7 @@
 
 ## 🎯 Overview
 
-This Storybook showcases all **74 components** from the Noor UI library with full support for:
+This Storybook showcases **73 components** from the Noor UI library (38 completed) with full support for:
 - ✅ **RTL/LTR** direction switching
 - ✅ **4 Theme Variants** (Minimal, Futuristic, Cozy, Artistic)
 - ✅ **Light/Dark Mode** across all themes
@@ -106,7 +106,13 @@ storybook/
 
 ## 🧩 Component Coverage
 
-### Current Status: 17/74 Components (23%)
+### Current Status: 45/73 Components (62%)
+
+**🎉 Forms Category Complete!** All 11 form components now have comprehensive stories.
+**🔥 Navigation & Layout 75% Complete!** 6/8 navigation components completed.
+**🚀 Data Display 75% Complete!** 6/8 data display components completed.
+**✨ Overlay Category 100% Complete!** All 6/6 overlay components completed! 🎊
+**⚡ Feedback Category 60% Complete!** 3/5 feedback components completed.
 
 #### ✅ Completed Stories
 - **Button** - All variants, sizes, states, RTL support, icons, loading (17 stories)
@@ -126,9 +132,41 @@ storybook/
 - **Radio Group** - Vertical, horizontal, with description, disabled, controlled, in forms, RTL (11 stories)
 - **Select** - With label, grouped options, disabled, controlled, in forms, RTL (11 stories)
 - **Switch** - With label, settings panel, disabled, controlled, in forms, RTL (11 stories)
+- **Slider** - With label, different ranges, steps, disabled, volume control, price range, RTL (13 stories)
+- **Form** - Basic, with validation, with select, disabled, controlled, RTL (9 stories)
+- **Date Picker** - Single date, date range, with constraints, disabled dates, real-world example, RTL (11 stories)
+- **Time Picker** - 12/24h format, time ranges, minute intervals, medical appointment, work schedule, RTL (11 stories)
+- **Number Input** - Min/max, decimal precision, currency formatting, product order, RTL (11 stories)
+- **File Upload** - Drag-and-drop, single/multiple files, image previews, size validation, documents, RTL (11 stories)
+- **Calendar** - Single/range selection, Hijri calendar, Islamic holidays, event markers, disabled dates, RTL (11 stories)
+- **Tabs** - Basic, with icons, controlled, two tabs, RTL examples (8 stories)
+- **Accordion** - Single, multiple, with icons, controlled, in card, RTL examples (9 stories)
+- **Breadcrumb** - Basic, custom separator, with icons, longer path, in card, RTL examples (10 stories)
+- **Pagination** - Basic, with ellipsis, controlled, few pages, in card, RTL examples (10 stories)
+- **Collapsible** - Basic FAQ, controlled with icon, sidebar style, FAQ style, uncontrolled, RTL examples (10 stories)
+- **Stepper** - Basic, simple variant, circles variant, vertical orientation, allow skip, in card, RTL examples (11 stories)
+- **Table** - Basic, with caption, interactive with checkboxes, mobile responsive, striped rows, compact, RTL examples (11 stories)
+- **Data Table** - Basic, internal sorting, external sorting, searchable, paginated, custom cells, loading state, complete example, RTL examples (11 stories)
+- **Stats Card** - Dashboard grid, positive trend, negative trend, without trend, all metrics, in card container, RTL examples (11 stories)
+- **Feature Card** - Static card, clickable card, grid layout, all icons, in card container, RTL examples (11 stories)
+- **Listing Card** - Basic, real estate, e-commerce, job listing, with all features, grid layout, RTL examples (11 stories)
+- **Empty State** - Basic usage, without action, search results, multiple actions, all use cases, minimal layout, RTL examples (11 stories)
+- **Dialog** - Basic, with form, confirmation, settings, controlled, multiple dialogs, RTL examples (11 stories)
+- **Sheet** - From end, from start, from top, from bottom, all sides, with form, navigation menu, RTL examples (11 stories)
+- **Popover** - Basic usage, position top/right/bottom/left, all positions, with form, RTL examples (11 stories)
+- **Dropdown Menu** - Basic usage, with icons, with checkboxes, with radio group, with sub-menus, all variants, RTL examples (11 stories)
+- **Context Menu** - Basic usage, with icons, with checkboxes, file explorer pattern, all variants, RTL examples (10 stories)
+- **Command** - Basic command, with shortcuts, command dialog, multiple groups, RTL examples (10 stories)
+- **Toast** - Simple, with title, destructive, success, all variants, RTL examples (10 stories)
+- **Progress** - Basic, with label, with shimmer, different sizes, different colors, upload progress, all sizes, RTL examples (11 stories)
+- **Skeleton** - Card skeleton, profile skeleton, list skeleton, text lines, avatar sizes, button skeleton, all patterns, RTL examples (11 stories)
 
 #### 🚧 In Progress
-Working on remaining **58 components** across all categories.
+Working on remaining **28 components** across all categories.
+
+**✅ Completed Categories:**
+- **Forms** - 11/11 components (100%)
+- **Overlay** - 6/6 components (100%)
 
 **Story Philosophy**: Each component includes 8-15 focused stories combining meaningful use cases, comprehensive showcase stories, and interactive Controls for variant exploration.
 
@@ -303,8 +341,13 @@ See **[STORYBOOK_ROADMAP.md](./STORYBOOK_ROADMAP.md)** for:
 ✅ Light/dark mode functional
 ✅ Custom toolbar controls active
 ✅ Accessibility testing enabled
-✅ 17 comprehensive component stories
-✅ 189+ individual story variants
+✅ 45 comprehensive component stories (62%)
+✅ 486+ individual story variants
+✅ Forms category 100% complete (11/11)
+✅ Navigation & Layout 75% complete (6/8)
+✅ Data Display 75% complete (6/8)
+✅ Overlay category 100% complete (6/6) 🎊
+✅ Feedback category 60% complete (3/5)
 ✅ Story guidelines documented (4 critical rules)
 ✅ Streamlined story approach (8-15 stories per component)
 

@@ -2,6 +2,7 @@ import type { Preview } from '@storybook/nextjs-vite';
 import React from 'react';
 import { ThemeProvider } from 'next-themes';
 import { DirectionProvider } from '../../components/providers/direction-provider';
+import { Toaster } from '../../components/ui/toaster';
 import '../../styles/globals.css';
 
 // Apply theme to document
@@ -123,6 +124,7 @@ const preview: Preview = {
           <ThemeProvider attribute="class" defaultTheme={mode} forcedTheme={mode} enableSystem={false}>
             <div dir={direction} style={{ minHeight: '100%' }}>
               <Story />
+              <Toaster />
             </div>
           </ThemeProvider>
         </DirectionProvider>
