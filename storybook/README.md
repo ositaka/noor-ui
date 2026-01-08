@@ -26,7 +26,7 @@ This Storybook showcases **73 components** from the Noor UI library (38 complete
 npm run storybook
 ```
 
-Visit **http://localhost:6006** or (storybook.noorui.com)[https://storybook.noorui.com/] to view the component library.
+Visit **http://localhost:6006** or https://storybook.noorui.com to view the component library.
 
 ### Build Static Storybook
 
