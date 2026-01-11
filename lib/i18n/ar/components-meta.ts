@@ -6,7 +6,7 @@
 export const components_meta = {
 components: {
       title: 'المكونات',
-      description: '64 مكوّن مصمم بشكل جميل باستخدام Radix UI و Tailwind CSS و React Flow. 54 مكوّن جاهز للإنتاج، 10 مكونات تجريبية للذكاء الاصطناعي. دعم كامل لاتجاه النص، قابل للوصول، وقابل للتخصيص.',
+      description: '74 مكوّن مصمم بشكل جميل باستخدام Radix UI و Tailwind CSS و React Flow. دعم كامل لاتجاه النص، قابل للوصول، وقابل للتخصيص.',
       quickPreview: 'معاينة سريعة',
       previewDescription: 'شاهد كيف تتكيف المكونات مع الاتجاهات المختلفة',
       categories: {

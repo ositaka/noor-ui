@@ -240,36 +240,13 @@ export default function ComponentsPage() {
             {t.components.description}
           </p>
 
-          <div className="mb-6">
+          <div>
             <Button asChild>
               <a href="https://storybook.noorui.com" target="_blank" rel="noopener noreferrer">
                 {t.storybook.exploreStorybook} ↗
               </a>
             </Button>
           </div>
-
-          {/* Live Preview */}
-          <Card>
-            <CardHeader>
-              <CardTitle>{t.components.quickPreview}</CardTitle>
-              <CardDescription>
-                {t.components.previewDescription}
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="flex flex-wrap gap-2">
-                <Button>{t.buttonComponent.primary}</Button>
-                <Button variant="secondary">{t.buttonComponent.secondary}</Button>
-                <Button variant="outline">{t.buttonComponent.outline}</Button>
-                <Badge>{t.badgeComponent.labels.new}</Badge>
-                <Badge variant="secondary">{t.badgeComponent.labels.beta}</Badge>
-              </div>
-              <Separator />
-              <div className="space-y-2">
-                <Input placeholder={t.formComponent.placeholders.enterName} />
-              </div>
-            </CardContent>
-          </Card>
         </div>
 
         {/* Component Categories */}

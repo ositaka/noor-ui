@@ -205,7 +205,7 @@ export default function App() {
 
 ## 📚 Components
 
-### Core UI (54 components)
+### Core UI (69 components)
 
 **Forms**: Button, Input, Label, Textarea, Checkbox, Radio, Select, Switch, Slider, Form
 
