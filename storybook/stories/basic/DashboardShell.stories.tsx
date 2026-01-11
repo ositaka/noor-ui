@@ -26,7 +26,7 @@ const meta = {
   parameters: {
     layout: 'fullscreen'
   },
-  tags: ['autodocs'],
+  tags: ['!autodocs'],
   argTypes: {
     navItems: { control: false },
     user: { control: false },

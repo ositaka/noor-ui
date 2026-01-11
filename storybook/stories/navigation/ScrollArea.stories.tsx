@@ -17,7 +17,7 @@ const meta = {
   parameters: {
     layout: 'centered'
   },
-  tags: ['autodocs'],
+  tags: ['!autodocs'],
   argTypes: {
     className: { control: 'text' },
     children: { control: false }
@@ -30,7 +30,7 @@ type Story = StoryObj<typeof meta>;
 // Default - Vertical Scroll
 export const Default: Story = {
   render: () => (
-    <ScrollArea className="h-[200px] w-[300px] rounded-md border p-4">
+    <ScrollArea className="h-80 w-48 rounded-md border p-4">
       <div className="space-y-4">
         {Array.from({ length: 20 }).map((_, i) => (
           <div key={i}>
@@ -56,7 +56,7 @@ export const VerticalScroll: Story = {
         <CardDescription>Scroll through a long list of items</CardDescription>
       </CardHeader>
       <CardContent>
-        <ScrollArea className="h-[300px] w-full rounded-md border p-4">
+        <ScrollArea className="h-80 w-full rounded-md border p-4">
           <div className="space-y-4">
             {Array.from({ length: 30 }).map((_, i) => (
               <div key={i}>
@@ -84,13 +84,13 @@ export const VerticalScroll: Story = {
 // Horizontal Scroll
 export const HorizontalScroll: Story = {
   render: () => (
-    <Card>
+    <Card className='max-w-xl'>
       <CardHeader>
         <CardTitle>Horizontal Scrolling</CardTitle>
         <CardDescription>Scroll horizontally through wide content</CardDescription>
       </CardHeader>
       <CardContent>
-        <ScrollArea className="w-full whitespace-nowrap rounded-md border">
+        <ScrollArea className="w-xl whitespace-nowrap rounded-md border">
           <div className="flex w-max space-x-4 p-4">
             {Array.from({ length: 20 }).map((_, i) => (
               <div
@@ -127,9 +127,9 @@ export const BothScrollbars: Story = {
         <CardDescription>Content scrollable in both directions</CardDescription>
       </CardHeader>
       <CardContent>
-        <ScrollArea className="h-[300px] w-full rounded-md border">
+        <ScrollArea className="h-80 w-80 rounded-md border">
           <div className="p-4">
-            <div className="w-[800px] space-y-4">
+            <div className="space-y-4">
               {Array.from({ length: 20 }).map((_, i) => (
                 <div key={i}>
                   <p className="text-sm">
@@ -159,7 +159,7 @@ export const CompactList: Story = {
   render: () => (
     <Card>
       <CardContent className="p-6">
-        <ScrollArea className="h-[150px] w-[250px] rounded-md border">
+        <ScrollArea className="h-48 w-32 rounded-md border">
           <div className="p-4">
             <h4 className="mb-4 text-sm font-medium leading-none">Tags</h4>
             {Array.from({ length: 15 }).map((_, i) => (
@@ -184,7 +184,7 @@ export const CompactList: Story = {
 // Sidebar Content
 export const SidebarContent: Story = {
   render: () => (
-    <div className="w-[280px] border rounded-lg">
+    <div className="w-80 border rounded-lg">
       <div className="p-4 border-b">
         <h3 className="text-lg font-semibold">Navigation</h3>
       </div>
@@ -241,7 +241,7 @@ export const CodeViewer: Story = {
         <CardDescription>Scrollable code block</CardDescription>
       </CardHeader>
       <CardContent>
-        <ScrollArea className="h-[200px] w-full rounded-md border bg-muted/50">
+        <ScrollArea className="h-80 w-full rounded-md border bg-muted/50">
           <div className="p-4 font-mono text-sm">
             <pre>{`function fibonacci(n) {
   if (n <= 1) return n;

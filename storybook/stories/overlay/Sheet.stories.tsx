@@ -30,7 +30,7 @@ const meta = {
   parameters: {
     layout: 'centered'
   },
-  tags: ['autodocs'],
+  tags: ['!autodocs'],
   argTypes: {
     open: {
       control: { type: 'boolean' }
@@ -112,7 +112,6 @@ export const FromEnd: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Sheet sliding from the end (right in LTR, left in RTL). This is the default side.'
       }
@@ -147,7 +146,6 @@ export const FromStart: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Sheet sliding from the start (left in LTR, right in RTL).'
       }
@@ -180,7 +178,6 @@ export const FromTop: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Sheet sliding from the top of the screen.'
       }
@@ -213,7 +210,6 @@ export const FromBottom: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Sheet sliding from the bottom of the screen.'
       }
@@ -281,7 +277,6 @@ export const AllSides: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'All four sides demonstrated: start, end, top, and bottom.'
       }
@@ -333,7 +328,6 @@ export const WithForm: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Sheet with form inputs for editing profile information.'
       }
@@ -379,7 +373,6 @@ export const NavigationMenu: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Sheet used as a navigation menu sliding from the start.'
       }
@@ -412,7 +405,6 @@ export const RTLFromEnd: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Sheet in RTL sliding from end (left in RTL). Demonstrates automatic positioning.'
       }
@@ -445,7 +437,6 @@ export const RTLFromStart: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Sheet in RTL sliding from start (right in RTL). Demonstrates automatic positioning.'
       }
@@ -497,7 +488,6 @@ export const RTLWithForm: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Sheet with form in RTL. All content flows right-to-left correctly.'
       }
@@ -565,7 +555,6 @@ export const RTLAllSides: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'All four sides in RTL: start, end, top, bottom with proper positioning.'
       }

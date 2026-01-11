@@ -18,7 +18,7 @@ const meta = {
   parameters: {
     layout: 'centered'
   },
-  tags: ['autodocs'],
+  tags: ['!autodocs'],
   argTypes: {
     value: { control: 'number' },
     format: {
@@ -88,7 +88,6 @@ export const WesternNumerals: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Numbers formatted with Western numerals (0-9).'
       }
@@ -144,7 +143,6 @@ export const ArabicIndicNumerals: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Numbers formatted with Arabic-Indic numerals (٠-٩).'
       }
@@ -179,7 +177,6 @@ export const CurrencyFormat: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Currency formatting in both Western and Arabic numerals.'
       }
@@ -214,7 +211,6 @@ export const PercentageFormat: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Percentage formatting with Western and Arabic numerals.'
       }
@@ -249,7 +245,6 @@ export const CompactFormat: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Compact notation for large numbers (1.2M, 3.4K, etc.).'
       }
@@ -286,7 +281,6 @@ export const AllFormats: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Showcase of all number formatting options.'
       }
@@ -342,7 +336,6 @@ export const RTLArabicNumerals: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Arabic-Indic numerals in RTL layout with Arabic locale.'
       }
@@ -379,7 +372,6 @@ export const RTLAllFormats: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'All formats in RTL with Arabic-Indic numerals.'
       }

@@ -18,7 +18,7 @@ const meta = {
   parameters: {
     layout: 'centered'
   },
-  tags: ['autodocs'],
+  tags: ['!autodocs'],
   argTypes: {
     inputTokens: { control: 'number' },
     outputTokens: { control: 'number' },
@@ -95,7 +95,6 @@ export const WithCostEstimation: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Token counter with cost calculation based on pricing per 1K tokens.'
       }
@@ -144,7 +143,6 @@ export const WarningStates: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Token counter with different warning states based on usage percentage.'
       }
@@ -191,7 +189,6 @@ export const DifferentModels: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Token counter comparing different AI models with different pricing.'
       }
@@ -222,7 +219,6 @@ export const CompactVariant: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Compact variant for space-constrained layouts.'
       }
@@ -257,7 +253,6 @@ export const CustomThresholds: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Token counter with custom warning and danger thresholds.'
       }
@@ -288,7 +283,6 @@ export const WithoutCost: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Token counter without cost display.'
       }
@@ -324,7 +318,6 @@ export const SafeState: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Token counter in safe state with low usage.'
       }
@@ -354,7 +347,6 @@ export const RTLWithCost: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Token counter in RTL with Arabic label and cost display.'
       }
@@ -409,7 +401,6 @@ export const RTLWarningStates: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'All warning states in RTL with Arabic labels.'
       }

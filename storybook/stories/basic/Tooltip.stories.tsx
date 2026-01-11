@@ -25,7 +25,7 @@ const meta = {
   parameters: {
     layout: 'centered'
   },
-  tags: ['autodocs']
+  tags: ['!autodocs']
 } satisfies Meta<typeof Tooltip>;
 
 export default meta;

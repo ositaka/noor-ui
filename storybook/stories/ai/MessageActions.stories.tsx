@@ -18,7 +18,7 @@ const meta = {
   parameters: {
     layout: 'centered'
   },
-  tags: ['autodocs'],
+  tags: ['!autodocs'],
   argTypes: {
     showCopy: { control: 'boolean' },
     showRegenerate: { control: 'boolean' },
@@ -107,7 +107,6 @@ export const FullFeatured: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Message actions with all features enabled.'
       }
@@ -144,7 +143,6 @@ export const ForAssistantMessages: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Message actions for AI assistant messages with copy, regenerate, and feedback.'
       }
@@ -178,7 +176,6 @@ export const ForUserMessages: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Message actions for user messages with copy and edit.'
       }
@@ -215,7 +212,6 @@ export const CompactMode: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Compact variant for dense layouts.'
       }
@@ -247,7 +243,6 @@ export const CopyOnly: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Just the copy action.'
       }
@@ -280,7 +275,6 @@ export const WithFeedbackOnly: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Just thumbs up/down feedback actions.'
       }
@@ -316,7 +310,6 @@ export const WithShareAndFlag: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Message actions with share and flag options.'
       }
@@ -346,7 +339,6 @@ export const RTLDefault: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Message actions in RTL layout.'
       }
@@ -385,7 +377,6 @@ export const RTLWithAllFeatures: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'All message actions in RTL with Arabic alerts.'
       }

@@ -20,7 +20,7 @@ const meta = {
   parameters: {
     layout: 'centered'
   },
-  tags: ['autodocs'],
+  tags: ['!autodocs'],
   argTypes: {
     icon: {
       control: false
@@ -87,7 +87,6 @@ export const StaticCard: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Static feature card without href. Non-interactive display.'
       }
@@ -114,7 +113,6 @@ export const ClickableCard: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Clickable feature card with href. Shows hover effect.'
       }
@@ -153,7 +151,6 @@ export const GridLayout: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Grid layout with 3 feature cards. All cards are clickable.'
       }
@@ -225,7 +222,6 @@ export const AllIcons: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Showcase of different icons and use cases. Mix of static and clickable cards.'
       }
@@ -269,7 +265,6 @@ export const InCardContainer: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Feature cards grouped inside a card container with a title.'
       }
@@ -296,7 +291,6 @@ export const RTLExample: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Feature card in RTL mode with Arabic text. Layout flows right-to-left.'
       }
@@ -322,7 +316,6 @@ export const RTLStaticCard: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Static feature card in RTL without href. Non-interactive display in Arabic.'
       }
@@ -349,7 +342,6 @@ export const RTLClickableCard: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Clickable feature card in RTL with hover effect in Arabic.'
       }
@@ -388,7 +380,6 @@ export const RTLGridLayout: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Grid layout in RTL mode with Arabic text. All cards are clickable.'
       }
@@ -432,7 +423,6 @@ export const RTLInCardContainer: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Feature cards in RTL inside a card container. All content flows right-to-left.'
       }

@@ -27,7 +27,7 @@ const meta = {
   parameters: {
     layout: 'centered'
   },
-  tags: ['autodocs'],
+  tags: ['!autodocs'],
   argTypes: {
     onValueChange: {
       control: false
@@ -128,7 +128,6 @@ export const GroupedOptions: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Select with grouped options using SelectGroup and SelectLabel. Perfect for organizing many options into categories.'
       }
@@ -211,7 +210,6 @@ export const Controlled: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Controlled select with external state management. The selection can be changed programmatically via a button.'
       }
@@ -253,7 +251,6 @@ export const InForm: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Select in a form with the name attribute for form submission.'
       }
@@ -285,7 +282,6 @@ export const RTLExample: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Select with Arabic labels demonstrating RTL support. Dropdown position, chevron icon, and check indicator adapt correctly. Automatically switches to RTL mode.'
       }
@@ -324,7 +320,6 @@ export const RTLGroupedOptions: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Grouped options with Arabic text in RTL mode. SelectGroup and SelectLabel work perfectly in RTL.'
       }
@@ -371,7 +366,6 @@ export const RTLDisabled: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Disabled select and disabled options with Arabic text in RTL mode.'
       }
@@ -413,7 +407,6 @@ export const RTLControlled: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Controlled select with Arabic text demonstrating programmatic state management in RTL.'
       }
@@ -455,7 +448,6 @@ export const RTLInForm: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Complete form with select in Arabic, demonstrating RTL support in form contexts.'
       }

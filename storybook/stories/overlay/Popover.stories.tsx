@@ -22,7 +22,7 @@ const meta = {
   parameters: {
     layout: 'centered'
   },
-  tags: ['autodocs'],
+  tags: ['!autodocs'],
   argTypes: {
     open: {
       control: { type: 'boolean' }
@@ -96,7 +96,6 @@ export const BasicUsage: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Basic popover with title and description. Click the button to open.'
       }
@@ -123,7 +122,6 @@ export const PositionTop: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Popover positioned above the trigger button.'
       }
@@ -150,7 +148,6 @@ export const PositionRight: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Popover positioned to the right of the trigger button.'
       }
@@ -177,7 +174,6 @@ export const PositionBottom: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Popover positioned below the trigger button (default).'
       }
@@ -204,7 +200,6 @@ export const PositionLeft: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Popover positioned to the left of the trigger button.'
       }
@@ -260,7 +255,6 @@ export const AllPositions: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'All four positioning options: top, right, bottom, and left.'
       }
@@ -306,7 +300,6 @@ export const WithForm: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Popover with form inputs for settings. Shows width 320px and form controls.'
       }
@@ -338,7 +331,6 @@ export const RTLBasic: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Basic popover in RTL with Arabic text. Content flows right-to-left.'
       }
@@ -394,7 +386,6 @@ export const RTLAllPositions: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'All four positioning options in RTL: top, right, bottom, left with automatic mirroring.'
       }
@@ -440,7 +431,6 @@ export const RTLWithForm: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Popover with form in RTL. All content and inputs flow right-to-left correctly.'
       }

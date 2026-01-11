@@ -19,7 +19,7 @@ const meta = {
   parameters: {
     layout: 'centered'
   },
-  tags: ['autodocs'],
+  tags: ['!autodocs'],
   argTypes: {
     onUpload: {
       control: false
@@ -107,7 +107,6 @@ export const BasicFileUpload: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Basic file upload with drag-and-drop support and default settings (5MB max, single file).'
       }
@@ -139,7 +138,6 @@ export const ImagesOnly: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'File upload that only accepts image files (JPEG, PNG, GIF, WebP, etc.) with automatic image previews.'
       }
@@ -172,7 +170,6 @@ export const MultipleFiles: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'File upload that allows multiple files (up to 5) with "Add More Files" button.'
       }
@@ -200,7 +197,6 @@ export const CustomSizeLimit: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'File upload with custom size limit of 2MB (instead of default 5MB).'
       }
@@ -236,7 +232,6 @@ export const DocumentsOnly: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'File upload restricted to PDF and Word documents only.'
       }
@@ -263,7 +258,6 @@ export const DisabledState: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'File upload in disabled state.'
       }
@@ -292,7 +286,6 @@ export const RTLExample: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Basic file upload with Arabic text in RTL mode. Component automatically displays bilingual text based on locale.'
       }
@@ -324,7 +317,6 @@ export const RTLImagesOnly: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Image-only file upload with Arabic interface in RTL mode.'
       }
@@ -357,7 +349,6 @@ export const RTLMultipleFiles: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Multiple file upload with Arabic interface showing "إضافة المزيد من الملفات" button in RTL.'
       }
@@ -393,7 +384,6 @@ export const RTLDocumentsUpload: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Document upload with Arabic labels and RTL layout for PDF and Word files.'
       }

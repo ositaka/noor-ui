@@ -21,7 +21,7 @@ const meta = {
   parameters: {
     layout: 'centered'
   },
-  tags: ['autodocs'],
+  tags: ['!autodocs'],
   argTypes: {
     steps: {
       control: false
@@ -153,7 +153,6 @@ export const BasicStepper: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Basic stepper with navigation buttons. Click steps to navigate or use Previous/Next buttons.'
       }
@@ -199,7 +198,6 @@ export const SimpleVariant: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Simple variant with compact style ideal for top navigation. Perfect for limited vertical space.'
       }
@@ -245,7 +243,6 @@ export const CirclesVariant: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Circles variant with large circles and scale effect. More visual emphasis on each step.'
       }
@@ -291,7 +288,6 @@ export const VerticalOrientation: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Vertical orientation for sidebar navigation. Great for multi-step forms with sidebar layout.'
       }
@@ -340,7 +336,6 @@ export const WithAllowSkip: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Stepper with allowSkip enabled. Users can click any step to navigate freely.'
       }
@@ -388,7 +383,6 @@ export const InCard: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Stepper placed inside a card component with title and navigation.'
       }
@@ -433,7 +427,6 @@ export const RTLExample: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Basic stepper in RTL mode with Arabic titles and descriptions. Connectors flow right-to-left.'
       }
@@ -479,7 +472,6 @@ export const RTLSimpleVariant: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Simple variant in RTL mode. Compact style with Arabic text flowing right-to-left.'
       }
@@ -525,7 +517,6 @@ export const RTLCirclesVariant: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Circles variant in RTL mode. Large circles with Arabic labels flowing naturally.'
       }
@@ -571,7 +562,6 @@ export const RTLVerticalOrientation: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Vertical orientation in RTL mode. Text aligns correctly for right-to-left reading.'
       }

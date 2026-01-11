@@ -32,7 +32,7 @@ const meta = {
   parameters: {
     layout: 'centered'
   },
-  tags: ['autodocs'],
+  tags: ['!autodocs'],
   argTypes: {
     icon: {
       control: false
@@ -110,7 +110,6 @@ export const BasicUsage: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Simple empty state with icon, title, description, and action button.'
       }
@@ -136,7 +135,6 @@ export const WithoutAction: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Empty state without action button. Used when no action is needed.'
       }
@@ -163,7 +161,6 @@ export const SearchResults: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Empty state for search results with clear filters action.'
       }
@@ -198,7 +195,6 @@ export const MultipleActions: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Empty state with multiple action buttons.'
       }
@@ -263,7 +259,6 @@ export const AllUseCases: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Different use cases: empty cart, no files, no data, no comments, no images.'
       }
@@ -285,7 +280,6 @@ export const MinimalLayout: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Minimal empty state with just title and description, no icon or action.'
       }
@@ -317,7 +311,6 @@ export const RTLBasic: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Empty state in RTL with Arabic text. Layout flows right-to-left.'
       }
@@ -343,7 +336,6 @@ export const RTLWithoutAction: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Empty inbox state in RTL without action button.'
       }
@@ -370,7 +362,6 @@ export const RTLSearchResults: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Search results empty state in RTL with clear filters button.'
       }
@@ -405,7 +396,6 @@ export const RTLMultipleActions: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Empty state in RTL with multiple action buttons in Arabic.'
       }

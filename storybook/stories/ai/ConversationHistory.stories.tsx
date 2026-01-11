@@ -67,7 +67,7 @@ const meta = {
   parameters: {
     layout: 'fullscreen'
   },
-  tags: ['autodocs'],
+  tags: ['!autodocs'],
   argTypes: {
     conversations: { control: false },
     activeId: { control: 'text' },
@@ -293,7 +293,6 @@ export const FloatingVariant: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Floating variant for overlays or modals.'
       }
@@ -331,7 +330,6 @@ export const WithSearch: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Conversation history with search enabled.'
       }
@@ -368,7 +366,6 @@ export const FewConversations: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Conversation history with fewer items.'
       }
@@ -399,7 +396,6 @@ export const EmptyState: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Empty state when no conversations exist.'
       }

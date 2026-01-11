@@ -19,7 +19,7 @@ const meta = {
   parameters: {
     layout: 'centered'
   },
-  tags: ['autodocs'],
+  tags: ['!autodocs'],
   argTypes: {
     models: { control: false },
     value: { control: 'text' },
@@ -92,7 +92,6 @@ export const WithDefaultModels: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Model selector with default AI models.'
       }
@@ -136,7 +135,6 @@ export const ModelSpecsDisplay: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Model selector showing detailed specifications for each model.'
       }
@@ -195,7 +193,6 @@ export const CustomModels: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Model selector with custom model definitions.'
       }
@@ -234,7 +231,6 @@ export const ControlledComponent: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Controlled model selector with state tracking.'
       }
@@ -272,7 +268,6 @@ export const AllProviders: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Showcase of models grouped by provider.'
       }
@@ -315,7 +310,6 @@ export const SpeedVariants: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Models grouped by speed category.'
       }
@@ -348,7 +342,6 @@ export const RTLDefault: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Model selector in RTL with Arabic text.'
       }
@@ -383,7 +376,6 @@ export const RTLWithSelection: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Model selector in RTL with a model selected.'
       }
@@ -455,7 +447,6 @@ export const RTLCustomModels: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Custom models with full Arabic translations in RTL.'
       }

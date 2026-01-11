@@ -19,7 +19,7 @@ const meta = {
   parameters: {
     layout: 'centered'
   },
-  tags: ['autodocs'],
+  tags: ['!autodocs'],
   argTypes: {
     onSelect: {
       control: false
@@ -112,7 +112,6 @@ export const BasicCalendar: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Basic single date selection calendar with month navigation and "Today" button.'
       }
@@ -162,7 +161,6 @@ export const RangeSelection: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Date range selection with visual feedback. Click to set start date, click again to set end date.'
       }
@@ -204,7 +202,6 @@ export const WithHijri: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Dual calendar display showing both Gregorian and Hijri dates simultaneously.'
       }
@@ -247,7 +244,6 @@ export const WithIslamicHolidays: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'NEW: Automatic highlighting of 10 major Islamic holidays including Ramadan, Eid al-Fitr, and Eid al-Adha.'
       }
@@ -307,7 +303,6 @@ export const WithEvents: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Calendar with custom event markers showing color-coded indicators and event legend.'
       }
@@ -342,7 +337,6 @@ export const DisabledWeekends: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Calendar with weekends disabled using a function. Weekends cannot be selected.'
       }
@@ -377,7 +371,6 @@ export const RTLExample: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Basic calendar with Arabic locale showing localized month names and RTL navigation.'
       }
@@ -420,7 +413,6 @@ export const RTLWithHijri: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Dual calendar in Arabic with Hijri dates displayed alongside Gregorian dates.'
       }
@@ -464,7 +456,6 @@ export const RTLWithIslamicHolidays: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Islamic holidays with Arabic names including Ramadan, Eid al-Fitr, Eid al-Adha, and more.'
       }
@@ -515,7 +506,6 @@ export const RTLRangeSelection: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Date range selection in RTL mode with Arabic date formatting.'
       }

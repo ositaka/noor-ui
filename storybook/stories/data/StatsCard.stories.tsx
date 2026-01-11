@@ -20,7 +20,7 @@ const meta = {
   parameters: {
     layout: 'centered'
   },
-  tags: ['autodocs'],
+  tags: ['!autodocs'],
   argTypes: {
     icon: {
       control: false
@@ -112,7 +112,6 @@ export const DashboardGrid: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Dashboard grid showing 4 stats cards with different metrics. Includes positive, negative, and no trend indicators.'
       }
@@ -140,7 +139,6 @@ export const PositiveTrend: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Stats card with positive trend (+8%). Trend is displayed in green.'
       }
@@ -168,7 +166,6 @@ export const NegativeTrend: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Stats card with negative trend (-3%). Trend is displayed in red.'
       }
@@ -194,7 +191,6 @@ export const WithoutTrend: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Stats card without trend indicator. Simple metric display.'
       }
@@ -255,7 +251,6 @@ export const AllMetrics: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Comprehensive dashboard showing various metrics with different icons and trends.'
       }
@@ -300,7 +295,6 @@ export const InCardContainer: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Stats cards grouped inside a card container with a title.'
       }
@@ -347,7 +341,6 @@ export const RTLExample: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Dashboard grid in RTL mode with Arabic labels. Layout flows right-to-left.'
       }
@@ -375,7 +368,6 @@ export const RTLPositiveTrend: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Stats card with positive trend in RTL. Trend indicator works correctly in Arabic.'
       }
@@ -403,7 +395,6 @@ export const RTLNegativeTrend: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Stats card with negative trend in RTL. Red color for negative values works in both directions.'
       }
@@ -448,7 +439,6 @@ export const RTLInCardContainer: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Stats cards in RTL inside a card container. All content flows right-to-left.'
       }

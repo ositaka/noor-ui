@@ -30,7 +30,7 @@ const meta = {
   parameters: {
     layout: 'centered'
   },
-  tags: ['autodocs'],
+  tags: ['!autodocs'],
   argTypes: {
     open: {
       control: { type: 'boolean' }
@@ -100,7 +100,6 @@ export const BasicDialog: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Simple dialog with title and description. No actions.'
       }
@@ -143,7 +142,6 @@ export const WithForm: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Dialog with form inputs for editing profile information.'
       }
@@ -182,7 +180,6 @@ export const ConfirmationDialog: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Destructive confirmation dialog with Cancel and Delete buttons.'
       }
@@ -223,7 +220,6 @@ export const SettingsDialog: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Settings dialog with content and save/cancel actions.'
       }
@@ -266,7 +262,6 @@ export const ControlledDialog: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Dialog with controlled open state using React state.'
       }
@@ -321,7 +316,6 @@ export const MultipleDialogs: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Multiple independent dialog instances on the same page.'
       }
@@ -351,7 +345,6 @@ export const RTLBasic: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Basic dialog in RTL with Arabic text. Close button positions on the left (end).'
       }
@@ -394,7 +387,6 @@ export const RTLWithForm: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Dialog with form in RTL. Form layout and buttons align correctly.'
       }
@@ -433,7 +425,6 @@ export const RTLConfirmation: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Confirmation dialog in RTL with Cancel and Delete buttons.'
       }
@@ -474,7 +465,6 @@ export const RTLSettings: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Settings dialog in RTL with Arabic text and proper button alignment.'
       }

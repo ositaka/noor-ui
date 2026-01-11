@@ -17,7 +17,7 @@ const meta = {
   parameters: {
     layout: 'centered'
   },
-  tags: ['autodocs'],
+  tags: ['!autodocs'],
   argTypes: {
     user: { control: false },
     onProfileClick: { control: false },
@@ -202,7 +202,6 @@ export const WithoutImage: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Automatically generates initials from the name when no image is provided.'
       }
@@ -242,7 +241,6 @@ export const InHeaderLayout: Story = {
     layout: 'fullscreen',
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'User menu integrated into a header layout.'
       }
@@ -276,7 +274,6 @@ export const ProfileAndLogout: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Simplified menu with only profile and logout options.'
       }

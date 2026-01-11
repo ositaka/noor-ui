@@ -22,7 +22,7 @@ const meta = {
   parameters: {
     layout: 'fullscreen'
   },
-  tags: ['autodocs'],
+  tags: ['!autodocs'],
   argTypes: {
     initialNodes: { control: false },
     initialEdges: { control: false },
@@ -299,7 +299,6 @@ export const EmptyCanvas: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Empty workflow canvas ready for adding nodes.'
       }

@@ -20,7 +20,7 @@ const meta = {
   parameters: {
     layout: 'centered'
   },
-  tags: ['autodocs'],
+  tags: ['!autodocs'],
   argTypes: {
     onChange: {
       control: false
@@ -119,7 +119,6 @@ export const BasicNumberInput: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Basic number input with min/max validation and increment/decrement controls.'
       }
@@ -154,7 +153,6 @@ export const WithoutControls: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Number input without increment/decrement controls, just a plain input field.'
       }
@@ -184,7 +182,6 @@ export const DecimalPrecision: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Number input with decimal precision control, perfect for percentages and fractional values.'
       }
@@ -220,7 +217,6 @@ export const FormattedDisplay: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Number input with thousands separator for better readability of large numbers.'
       }
@@ -262,7 +258,6 @@ export const CurrencyInput: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Number input with custom currency formatting using Intl.NumberFormat.'
       }
@@ -316,7 +311,6 @@ export const ProductOrder: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Real-world e-commerce example with quantity selection and automatic price calculation.'
       }
@@ -340,7 +334,6 @@ export const DisabledState: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Number input in disabled state.'
       }
@@ -368,7 +361,6 @@ export const RTLExample: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Basic number input with Arabic labels in RTL mode.'
       }
@@ -410,7 +402,6 @@ export const RTLCurrencyInput: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Currency input with Arabic formatting (SAR) in RTL mode.'
       }
@@ -464,7 +455,6 @@ export const RTLProductOrder: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Complete product order example in Arabic with RTL layout and SAR currency.'
       }

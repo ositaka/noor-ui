@@ -15,7 +15,7 @@ const meta = {
   parameters: {
     layout: 'centered'
   },
-  tags: ['autodocs']
+  tags: ['!autodocs']
 } satisfies Meta<typeof Alert>;
 
 export default meta;
@@ -41,7 +41,7 @@ export const Default: Story = {
   },
   render: (args) => (
     <Alert {...args} className="w-full max-w-md" />
-  )
+  ),
 };
 
 // Destructive - from component page lines 161-167

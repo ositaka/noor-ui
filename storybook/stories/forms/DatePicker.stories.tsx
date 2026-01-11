@@ -19,7 +19,7 @@ const meta = {
   parameters: {
     layout: 'centered'
   },
-  tags: ['autodocs'],
+  tags: ['!autodocs'],
   argTypes: {
     onDateChange: {
       control: false
@@ -44,7 +44,7 @@ export const Default: Story = {
     const [date, setDate] = React.useState<Date | undefined>(new Date());
     return (
       <div className="w-full max-w-xs space-y-2">
-        <Label>Date of Birth</Label>
+        <Label className='me-4'>Date of Birth</Label>
         <DatePicker {...args} date={date} onDateChange={setDate} />
         <p className="text-sm text-muted-foreground">
           {date ? new Intl.DateTimeFormat('en-US', {
@@ -81,7 +81,7 @@ export const BasicDatePicker: Story = {
 
     return (
       <div className="w-full max-w-xs mx-auto space-y-2">
-        <Label>Date of Birth</Label>
+        <Label className='me-4'>Date of Birth</Label>
         <DatePicker
           date={date}
           onDateChange={setDate}
@@ -99,7 +99,6 @@ export const BasicDatePicker: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Basic date picker with label and formatted date display.'
       }
@@ -128,7 +127,7 @@ export const DateRangePicker_: Story = {
 
     return (
       <div className="w-full max-w-md mx-auto space-y-2">
-        <Label>Booking Period</Label>
+        <Label className='me-4'>Booking Period</Label>
         <DateRangePicker
           dateRange={dateRange}
           onDateRangeChange={setDateRange}
@@ -146,7 +145,6 @@ export const DateRangePicker_: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Date range picker for selecting start and end dates.'
       }
@@ -172,7 +170,7 @@ export const WithConstraints: Story = {
 
     return (
       <div className="w-full max-w-xs mx-auto space-y-2">
-        <Label>Appointment Date</Label>
+        <Label className='me-4'>Appointment Date</Label>
         <DatePicker
           date={date}
           onDateChange={setDate}
@@ -194,7 +192,6 @@ export const WithConstraints: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Date picker with min and max date constraints. Only dates within the next month are selectable.'
       }
@@ -223,7 +220,7 @@ export const DisabledDates: Story = {
 
     return (
       <div className="w-full max-w-xs mx-auto space-y-2">
-        <Label>Working Day</Label>
+        <Label className='me-4'>Working Day</Label>
         <DatePicker
           date={date}
           onDateChange={setDate}
@@ -244,7 +241,6 @@ export const DisabledDates: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Date picker with specific dates disabled. Weekends are not selectable in this example.'
       }
@@ -268,7 +264,7 @@ export const RealWorldExample: Story = {
         </CardHeader>
         <CardContent className="space-y-6">
           <div className="space-y-2">
-            <Label>Stay Period</Label>
+            <Label className='me-4'>Stay Period</Label>
             <DateRangePicker
               dateRange={dateRange}
               onDateRangeChange={setDateRange}
@@ -319,7 +315,6 @@ export const RealWorldExample: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Hotel booking example with date range selection and price calculation.'
       }
@@ -332,7 +327,7 @@ export const DisabledState: Story = {
   render: () => (
     <div className="w-full max-w-xs mx-auto space-y-4">
       <div className="space-y-2">
-        <Label>Enabled Date Picker</Label>
+        <Label className='me-4'>Enabled Date Picker</Label>
         <DatePicker
           date={new Date()}
           placeholder="Pick a date"
@@ -341,7 +336,7 @@ export const DisabledState: Story = {
       </div>
 
       <div className="space-y-2">
-        <Label>Disabled Date Picker</Label>
+        <Label className='me-4'>Disabled Date Picker</Label>
         <DatePicker
           date={new Date()}
           placeholder="Pick a date"
@@ -358,7 +353,6 @@ export const DisabledState: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Disabled date picker state.'
       }
@@ -382,7 +376,7 @@ export const RTLExample: Story = {
 
     return (
       <div className="w-full max-w-xs mx-auto space-y-2">
-        <Label>تاريخ الميلاد</Label>
+        <Label className='me-4'>تاريخ الميلاد</Label>
         <DatePicker
           date={date}
           onDateChange={setDate}
@@ -400,7 +394,6 @@ export const RTLExample: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Date picker with Arabic labels in RTL mode.'
       }
@@ -429,7 +422,7 @@ export const RTLDateRangePicker: Story = {
 
     return (
       <div className="w-full max-w-md mx-auto space-y-2">
-        <Label>فترة الحجز</Label>
+        <Label className='me-4'>فترة الحجز</Label>
         <DateRangePicker
           dateRange={dateRange}
           onDateRangeChange={setDateRange}
@@ -447,7 +440,6 @@ export const RTLDateRangePicker: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Date range picker in Arabic with RTL support.'
       }
@@ -473,7 +465,7 @@ export const RTLWithConstraints: Story = {
 
     return (
       <div className="w-full max-w-xs mx-auto space-y-2">
-        <Label>موعد الاجتماع</Label>
+        <Label className='me-4'>موعد الاجتماع</Label>
         <DatePicker
           date={date}
           onDateChange={setDate}
@@ -495,7 +487,6 @@ export const RTLWithConstraints: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Date picker with constraints in Arabic, showing proper RTL date formatting.'
       }
@@ -519,7 +510,7 @@ export const RTLRealWorldExample: Story = {
         </CardHeader>
         <CardContent className="space-y-6">
           <div className="space-y-2">
-            <Label>فترة الإقامة</Label>
+            <Label className='me-4'>فترة الإقامة</Label>
             <DateRangePicker
               dateRange={dateRange}
               onDateRangeChange={setDateRange}
@@ -570,7 +561,6 @@ export const RTLRealWorldExample: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Complete hotel booking example in Arabic with RTL support and proper number formatting.'
       }

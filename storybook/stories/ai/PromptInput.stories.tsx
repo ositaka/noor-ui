@@ -19,7 +19,7 @@ const meta = {
   parameters: {
     layout: 'centered'
   },
-  tags: ['autodocs'],
+  tags: ['!autodocs'],
   argTypes: {
     onSend: { control: false },
     isLoading: { control: 'boolean' },
@@ -100,8 +100,7 @@ export const WithFeatures: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
-      description: {
+            description: {
         story: 'Prompt input with attachment, voice, and character counter.'
       }
     }
@@ -138,8 +137,7 @@ export const LoadingState: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
-      description: {
+            description: {
         story: 'Prompt input with loading state while sending.'
       }
     }
@@ -177,8 +175,7 @@ export const ControlledComponent: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
-      description: {
+            description: {
         story: 'Controlled prompt input with external state.'
       }
     }
@@ -206,7 +203,6 @@ export const BasicInput: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Minimal prompt input without extra features.'
       }
@@ -248,7 +244,6 @@ export const WithCounter: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Prompt input with character counter and max length.'
       }
@@ -282,7 +277,6 @@ export const WithAttachment: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Prompt input with attachment button.'
       }
@@ -308,7 +302,6 @@ export const RTLDefault: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Prompt input in RTL with Arabic placeholder.'
       }
@@ -344,7 +337,6 @@ export const RTLWithFeatures: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Prompt input in RTL with all features enabled.'
       }
@@ -385,7 +377,6 @@ export const RTLControlled: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Controlled prompt input in RTL with state display.'
       }

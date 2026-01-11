@@ -19,7 +19,7 @@ const meta = {
   parameters: {
     layout: 'centered'
   },
-  tags: ['autodocs'],
+  tags: ['!autodocs'],
   argTypes: {
     label: { control: 'text' },
     labelAr: { control: 'text' },
@@ -102,7 +102,6 @@ export const WithPresets: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Temperature slider with Precise, Balanced, and Creative presets.'
       }
@@ -145,7 +144,6 @@ export const CustomPresets: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Max tokens slider with custom Short/Medium/Long presets.'
       }
@@ -211,7 +209,6 @@ export const MultipleParameters: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Multiple AI parameters configured together.'
       }
@@ -245,7 +242,6 @@ export const WithoutPresets: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Slider without preset buttons.'
       }
@@ -285,7 +281,6 @@ export const AllPresetStates: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Showcase of all temperature preset states.'
       }
@@ -323,7 +318,6 @@ export const WithoutValueDisplay: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Slider with value badge hidden.'
       }
@@ -360,7 +354,6 @@ export const RTLTemperature: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Temperature slider in RTL with Arabic text and presets.'
       }
@@ -435,7 +428,6 @@ export const RTLMultipleParameters: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Multiple parameters in RTL with full Arabic translations.'
       }
@@ -499,7 +491,6 @@ export const RTLWithCustomPresets: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Custom presets with full Arabic translations in RTL.'
       }

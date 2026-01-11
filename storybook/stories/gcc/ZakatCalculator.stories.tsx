@@ -17,7 +17,7 @@ const meta = {
   parameters: {
     layout: 'centered'
   },
-  tags: ['autodocs'],
+  tags: ['!autodocs'],
   argTypes: {
     goldPricePerGram: { control: 'number' },
     silverPricePerGram: { control: 'number' },
@@ -75,7 +75,6 @@ export const WithDefaultValues: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Zakat calculator with pre-filled values.'
       }
@@ -108,7 +107,6 @@ export const CompleteExample: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Full calculator with all asset categories filled.'
       }
@@ -130,7 +128,6 @@ export const EmptyCalculator: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Empty calculator ready for user input.'
       }
@@ -152,7 +149,6 @@ export const RTLDefault: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Zakat calculator in RTL with Arabic labels.'
       }
@@ -182,7 +178,6 @@ export const RTLWithValues: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Calculator in RTL with pre-filled values and Arabic numerals.'
       }
@@ -215,7 +210,6 @@ export const RTLComplete: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Complete calculator in RTL with all assets.'
       }

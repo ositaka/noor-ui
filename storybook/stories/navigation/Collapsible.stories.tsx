@@ -21,7 +21,7 @@ const meta = {
   parameters: {
     layout: 'centered'
   },
-  tags: ['autodocs'],
+  tags: ['!autodocs'],
   argTypes: {
     open: {
       control: { type: 'boolean' }
@@ -114,7 +114,6 @@ export const BasicFAQ: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Basic FAQ-style collapsible with a question/answer pattern. Chevron rotates when expanded.'
       }
@@ -160,7 +159,6 @@ export const ControlledWithIcon: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Controlled collapsible with animated chevron icon. Button text changes based on state.'
       }
@@ -207,7 +205,6 @@ export const SidebarStyle: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Sidebar-style collapsible with a list of items. Uses ChevronsUpDown icon for toggle button.'
       }
@@ -259,7 +256,6 @@ export const FAQStyle: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'FAQ-style layout with multiple collapsibles. ChevronRight rotates 90° when opened.'
       }
@@ -290,7 +286,6 @@ export const SimpleUncontrolled: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Uncontrolled collapsible with internal state management. Simplest implementation.'
       }
@@ -330,7 +325,6 @@ export const RTLExample: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Basic FAQ collapsible with Arabic text in RTL mode. Animations work perfectly in both directions.'
       }
@@ -376,7 +370,6 @@ export const RTLControlledWithIcon: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Controlled collapsible in RTL with Arabic text. Button text changes dynamically.'
       }
@@ -423,7 +416,6 @@ export const RTLSidebarStyle: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Sidebar-style collapsible in RTL with Arabic content. Layout flows right-to-left.'
       }
@@ -475,7 +467,6 @@ export const RTLFAQStyle: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'FAQ-style collapsibles in RTL with Arabic questions and answers. Multiple items.'
       }
