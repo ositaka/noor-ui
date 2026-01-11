@@ -9,11 +9,30 @@ nav: {
       components: 'Components',
       examples: 'Examples',
       starters: 'Starters',
+      storybook: 'Storybook',
       rtlGuide: 'RTL Guide',
       tokens: 'Design Tokens',
       themes: 'Themes',
       documentation: 'Documentation',
       getStarted: 'Get Started',
+    },
+
+    storybook: {
+      title: 'Storybook',
+      viewInStorybook: 'View in Storybook',
+      exploreStorybook: 'Explore Storybook',
+      tryStorybook: 'Try Storybook',
+      openStorybook: 'Open Storybook',
+      interactivePlayground: 'Interactive Component Playground',
+      description: 'Explore 749 interactive stories across 74 components. Switch between RTL/LTR, try different themes, and test accessibility—all in your browser.',
+      shortDescription: 'Interactive component showcase with 749 stories',
+      features: {
+        interactive: 'Live component playground',
+        rtl: 'RTL/LTR switching',
+        themes: '4 theme variants',
+        accessibility: 'Full accessibility testing',
+        examples: 'Arabic/English examples',
+      },
     },
 
 ui: {
@@ -456,6 +475,7 @@ common: {
           home: 'Home',
           gettingStarted: 'Getting Started',
           documentation: 'Documentation',
+          storybook: 'Storybook',
           rtlGuide: 'RTL Development Guide',
           roadmap: 'Roadmap',
           themes: 'Themes',

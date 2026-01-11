@@ -50,7 +50,7 @@ This creates a `.tgz` file that you can install in a test project:
 
 ```bash
 # In your test project
-npm install /path/to/noorui-rtl-0.1.2.tgz
+npm install /path/to/noorui-rtl-0.4.7.tgz
 ```
 
 ### 3. Publish to npm
@@ -106,8 +106,8 @@ noorui-rtl/
 3. **Update documentation**: Update the main project README if needed
 4. **Tag the release**: Create a git tag for the version
    ```bash
-   git tag -a v0.1.2 -m "Release version 0.1.2"
-   git push origin v0.1.2
+   git tag -a v0.4.7 -m "Release version 0.4.7"
+   git push origin v0.4.7
    ```
 
 ## Common Issues
@@ -142,5 +142,7 @@ Consider setting up:
 
 ## Support
 
+- Documentation: https://noorui.com
+- Storybook: https://storybook.noorui.com
 - npm documentation: https://docs.npmjs.com/
 - Issues: https://github.com/ositaka/noor-ui/issues

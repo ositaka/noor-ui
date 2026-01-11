@@ -52,9 +52,14 @@ export default function HomePage() {
                 </Link>
               </ButtonArrow>
               <Button size="lg" variant="outline" asChild>
-                <Link href="/getting-started">
+                <Link href="/documentation">
                   {t.home.hero.cta.secondary}
                 </Link>
+              </Button>
+              <Button size="lg" variant="ghost" asChild>
+                <a href="https://storybook.noorui.com" target="_blank" rel="noopener noreferrer">
+                  {t.storybook.tryStorybook} ↗
+                </a>
               </Button>
             </div>
           </div>
@@ -97,7 +102,7 @@ export default function App() {
                   language="tsx"
                 />
 
-                <div className="flex gap-2 pt-2">
+                <div className="flex flex-wrap gap-2 pt-2">
                   <ButtonArrow variant="outline" size="sm" direction="forward" iconSize="sm" asChild>
                     <Link href="/getting-started">
                       Installation Guide
@@ -106,6 +111,11 @@ export default function App() {
                   <ButtonArrow variant="outline" size="sm" direction="forward" iconSize="sm" asChild>
                     <a href="https://www.npmjs.com/package/noorui-rtl" target="_blank" rel="noopener noreferrer">
                       View on npm
+                    </a>
+                  </ButtonArrow>
+                  <ButtonArrow variant="outline" size="sm" direction="forward" iconSize="sm" asChild>
+                    <a href="https://storybook.noorui.com" target="_blank" rel="noopener noreferrer">
+                      {t.storybook.viewInStorybook}
                     </a>
                   </ButtonArrow>
                 </div>
@@ -147,8 +157,55 @@ export default function App() {
           </div>
         </section>
 
-        {/* Theme Showcase */}
+        {/* Storybook Showcase */}
         <section className="container py-24">
+          <div className="container">
+            <div className="mx-auto max-w-3xl text-center">
+              <h2 className="text-3xl font-bold tracking-tight sm:text-4xl mb-4">
+                {t.storybook.interactivePlayground}
+              </h2>
+              <p className="text-lg text-muted-foreground mb-8">
+                {t.storybook.description}
+              </p>
+
+              <div className="flex flex-wrap justify-center gap-4 mb-8 text-sm text-muted-foreground">
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="h-4 w-4 text-green-600" />
+                  <span>{t.storybook.features.interactive}</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="h-4 w-4 text-green-600" />
+                  <span>{t.storybook.features.rtl}</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="h-4 w-4 text-green-600" />
+                  <span>{t.storybook.features.themes}</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="h-4 w-4 text-green-600" />
+                  <span>{t.storybook.features.accessibility}</span>
+                </div>
+              </div>
+
+              <div className="flex justify-center gap-4">
+                <ButtonArrow size="lg" direction="forward" asChild>
+                  <a href="https://storybook.noorui.com" target="_blank" rel="noopener noreferrer">
+                    {t.storybook.openStorybook}
+                  </a>
+                </ButtonArrow>
+              </div>
+
+              {/* Placeholder for future animated GIF/screenshot */}
+              <div className="mt-12 rounded-lg border bg-background p-8 text-center text-sm text-muted-foreground">
+                <p>💡 Animated Storybook demo coming soon</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Theme Showcase */}
+        <section className="border-y bg-muted/30 py-24">
+          <div className="container">
           <div className="mx-auto max-w-2xl text-center mb-16">
             <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
               {t.themes.title}
@@ -158,62 +215,7 @@ export default function App() {
             </p>
           </div>
 
-          <ThemeSwitcher />
-        </section>
-
-        {/* Getting Started */}
-        <section className="border-y bg-muted/30 py-24">
-          <div className="container">
-            <div className="mx-auto max-w-2xl">
-              <h2 className="text-3xl font-bold tracking-tight sm:text-4xl mb-8">
-                {t.nav.getStarted}
-              </h2>
-
-              <div className="space-y-6">
-                <div className="flex gap-4">
-                  <div className="flex-shrink-0">
-                    <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-primary-foreground font-bold">
-                      1
-                    </div>
-                  </div>
-                  <div className="space-y-2">
-                    <h3 className="text-lg font-semibold">{t.docs.installation}</h3>
-                    <CodeBlock code="npm install noorui-rtl" language="bash" />
-                  </div>
-                </div>
-
-                <div className="flex gap-4">
-                  <div className="flex-shrink-0">
-                    <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-primary-foreground font-bold">
-                      2
-                    </div>
-                  </div>
-                  <div className="space-y-2">
-                    <h3 className="text-lg font-semibold">{t.docs.usage}</h3>
-                    <CodeBlock
-                      code={`import { Button } from 'noorui-rtl'
-
-<Button variant="primary">
-  ${t.ui.button.submit}
-</Button>`}
-                      language="tsx"
-                    />
-                  </div>
-                </div>
-
-                <div className="flex gap-4">
-                  <div className="flex-shrink-0">
-                    <CheckCircle2 className="h-8 w-8 text-green-600" />
-                  </div>
-                  <div className="space-y-2">
-                    <h3 className="text-lg font-semibold">{t.common.readyToGo}</h3>
-                    <p className="text-muted-foreground">
-                      {t.common.autoRTL}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <ThemeSwitcher />
           </div>
         </section>
       </main>

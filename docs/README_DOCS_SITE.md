@@ -9,7 +9,7 @@ Bringing light to multilingual interface design with accessibility, performance,
 ## 🌟 Features
 
 - **RTL-First Architecture**: Designed for Arabic from the ground up, with English as an equally-supported alternative
-- **64 Components**: Complete UI toolkit with 54 production-ready components plus 10 experimental AI/LLM components
+- **74 Components**: Complete UI toolkit with comprehensive coverage of common patterns
 - **GCC-Specific Components**: Prayer times, Hijri calendar, Arabic numbers, Zakat calculator, and dual-calendar date picker built for the region
 - **Zero Directional Bugs**: 100% logical properties, no hardcoded LTR assumptions
 - **Direction-Aware Components**: Tabs, navigation, and layouts automatically adapt to text direction
@@ -68,7 +68,7 @@ npm run lint
 │   │
 │   ├── (docs)/              # Route group for documentation pages
 │   │   ├── layout.tsx       # Shared header/footer for all docs
-│   │   ├── components/      # Component documentation (54 pages)
+│   │   ├── components/      # Component documentation (74 pages)
 │   │   │   ├── page.tsx     # Components overview
 │   │   │   └── button/      # Example component page
 │   │   │       └── page.tsx
@@ -137,7 +137,7 @@ This design system uses **Next.js 14 App Router** with a **route group architect
 
 ### Route Groups
 - **`(docs)`**: Contains all documentation pages with shared layout (header/footer)
-  - Component documentation (54 pages covering 50+ components)
+  - Component documentation (74 pages covering 74+ components)
   - Guide pages (installation, configuration, RTL guide, etc.)
   - Token and theme reference pages
 - **`examples/`**: Standalone demo pages without navigation chrome
@@ -169,7 +169,7 @@ This enables:
 
 ### All Components (74+ Total)
 
-**Current Status:** 74+ components fully documented - 64 production-ready and 10 experimental AI/LLM components. See the [public roadmap](/roadmap) for upcoming features.
+**Current Status:** 74+ components fully documented. See the [public roadmap](/roadmap) for upcoming features.
 
 **Form Components:**
 - **Form**: State management with validation and bilingual error messages
