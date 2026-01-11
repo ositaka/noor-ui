@@ -30,7 +30,7 @@ const meta = {
   parameters: {
     layout: 'centered'
   },
-  tags: ['autodocs']
+  tags: ['!autodocs']
 } satisfies Meta<typeof Command>;
 
 export default meta;

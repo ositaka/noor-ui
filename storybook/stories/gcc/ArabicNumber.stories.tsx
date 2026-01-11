@@ -18,7 +18,7 @@ const meta = {
   parameters: {
     layout: 'centered'
   },
-  tags: ['autodocs'],
+  tags: ['!autodocs'],
   argTypes: {
     value: { control: 'number' },
     format: {

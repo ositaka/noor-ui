@@ -21,7 +21,7 @@ const meta = {
   parameters: {
     layout: 'centered'
   },
-  tags: ['autodocs'],
+  tags: ['!autodocs'],
   argTypes: {
     steps: {
       control: false

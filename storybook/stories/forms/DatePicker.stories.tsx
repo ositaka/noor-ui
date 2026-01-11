@@ -19,7 +19,7 @@ const meta = {
   parameters: {
     layout: 'centered'
   },
-  tags: ['autodocs'],
+  tags: ['!autodocs'],
   argTypes: {
     onDateChange: {
       control: false
@@ -44,7 +44,7 @@ export const Default: Story = {
     const [date, setDate] = React.useState<Date | undefined>(new Date());
     return (
       <div className="w-full max-w-xs space-y-2">
-        <Label>Date of Birth</Label>
+        <Label className='me-4'>Date of Birth</Label>
         <DatePicker {...args} date={date} onDateChange={setDate} />
         <p className="text-sm text-muted-foreground">
           {date ? new Intl.DateTimeFormat('en-US', {
@@ -81,7 +81,7 @@ export const BasicDatePicker: Story = {
 
     return (
       <div className="w-full max-w-xs mx-auto space-y-2">
-        <Label>Date of Birth</Label>
+        <Label className='me-4'>Date of Birth</Label>
         <DatePicker
           date={date}
           onDateChange={setDate}
@@ -128,7 +128,7 @@ export const DateRangePicker_: Story = {
 
     return (
       <div className="w-full max-w-md mx-auto space-y-2">
-        <Label>Booking Period</Label>
+        <Label className='me-4'>Booking Period</Label>
         <DateRangePicker
           dateRange={dateRange}
           onDateRangeChange={setDateRange}
@@ -172,7 +172,7 @@ export const WithConstraints: Story = {
 
     return (
       <div className="w-full max-w-xs mx-auto space-y-2">
-        <Label>Appointment Date</Label>
+        <Label className='me-4'>Appointment Date</Label>
         <DatePicker
           date={date}
           onDateChange={setDate}
@@ -223,7 +223,7 @@ export const DisabledDates: Story = {
 
     return (
       <div className="w-full max-w-xs mx-auto space-y-2">
-        <Label>Working Day</Label>
+        <Label className='me-4'>Working Day</Label>
         <DatePicker
           date={date}
           onDateChange={setDate}
@@ -268,7 +268,7 @@ export const RealWorldExample: Story = {
         </CardHeader>
         <CardContent className="space-y-6">
           <div className="space-y-2">
-            <Label>Stay Period</Label>
+            <Label className='me-4'>Stay Period</Label>
             <DateRangePicker
               dateRange={dateRange}
               onDateRangeChange={setDateRange}
@@ -332,7 +332,7 @@ export const DisabledState: Story = {
   render: () => (
     <div className="w-full max-w-xs mx-auto space-y-4">
       <div className="space-y-2">
-        <Label>Enabled Date Picker</Label>
+        <Label className='me-4'>Enabled Date Picker</Label>
         <DatePicker
           date={new Date()}
           placeholder="Pick a date"
@@ -341,7 +341,7 @@ export const DisabledState: Story = {
       </div>
 
       <div className="space-y-2">
-        <Label>Disabled Date Picker</Label>
+        <Label className='me-4'>Disabled Date Picker</Label>
         <DatePicker
           date={new Date()}
           placeholder="Pick a date"
@@ -382,7 +382,7 @@ export const RTLExample: Story = {
 
     return (
       <div className="w-full max-w-xs mx-auto space-y-2">
-        <Label>تاريخ الميلاد</Label>
+        <Label className='me-4'>تاريخ الميلاد</Label>
         <DatePicker
           date={date}
           onDateChange={setDate}
@@ -429,7 +429,7 @@ export const RTLDateRangePicker: Story = {
 
     return (
       <div className="w-full max-w-md mx-auto space-y-2">
-        <Label>فترة الحجز</Label>
+        <Label className='me-4'>فترة الحجز</Label>
         <DateRangePicker
           dateRange={dateRange}
           onDateRangeChange={setDateRange}
@@ -473,7 +473,7 @@ export const RTLWithConstraints: Story = {
 
     return (
       <div className="w-full max-w-xs mx-auto space-y-2">
-        <Label>موعد الاجتماع</Label>
+        <Label className='me-4'>موعد الاجتماع</Label>
         <DatePicker
           date={date}
           onDateChange={setDate}
@@ -519,7 +519,7 @@ export const RTLRealWorldExample: Story = {
         </CardHeader>
         <CardContent className="space-y-6">
           <div className="space-y-2">
-            <Label>فترة الإقامة</Label>
+            <Label className='me-4'>فترة الإقامة</Label>
             <DateRangePicker
               dateRange={dateRange}
               onDateRangeChange={setDateRange}

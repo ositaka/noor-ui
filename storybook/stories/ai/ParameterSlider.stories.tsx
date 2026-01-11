@@ -19,7 +19,7 @@ const meta = {
   parameters: {
     layout: 'centered'
   },
-  tags: ['autodocs'],
+  tags: ['!autodocs'],
   argTypes: {
     label: { control: 'text' },
     labelAr: { control: 'text' },

@@ -17,7 +17,7 @@ const meta = {
   parameters: {
     layout: 'centered'
   },
-  tags: ['autodocs'],
+  tags: ['!autodocs'],
   argTypes: {
     text: { control: 'text' },
     speed: { control: { type: 'number', min: 10, max: 200, step: 10 } },

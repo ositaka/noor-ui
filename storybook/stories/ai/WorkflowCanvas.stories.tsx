@@ -22,7 +22,7 @@ const meta = {
   parameters: {
     layout: 'fullscreen'
   },
-  tags: ['autodocs'],
+  tags: ['!autodocs'],
   argTypes: {
     initialNodes: { control: false },
     initialEdges: { control: false },

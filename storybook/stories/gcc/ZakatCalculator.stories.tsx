@@ -17,7 +17,7 @@ const meta = {
   parameters: {
     layout: 'centered'
   },
-  tags: ['autodocs'],
+  tags: ['!autodocs'],
   argTypes: {
     goldPricePerGram: { control: 'number' },
     silverPricePerGram: { control: 'number' },

@@ -22,7 +22,7 @@ const meta = {
   parameters: {
     layout: 'padded'
   },
-  tags: ['autodocs'],
+  tags: ['!autodocs'],
   argTypes: {
     className: {
       control: { type: 'text' }

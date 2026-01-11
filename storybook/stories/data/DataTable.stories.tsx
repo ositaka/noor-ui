@@ -21,7 +21,7 @@ const meta = {
   parameters: {
     layout: 'padded'
   },
-  tags: ['autodocs'],
+  tags: ['!autodocs'],
   argTypes: {
     data: {
       control: false

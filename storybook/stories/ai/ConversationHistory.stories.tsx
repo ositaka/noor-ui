@@ -67,7 +67,7 @@ const meta = {
   parameters: {
     layout: 'fullscreen'
   },
-  tags: ['autodocs'],
+  tags: ['!autodocs'],
   argTypes: {
     conversations: { control: false },
     activeId: { control: 'text' },

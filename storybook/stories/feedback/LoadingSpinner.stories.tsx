@@ -15,7 +15,7 @@ const meta = {
   parameters: {
     layout: 'centered'
   },
-  tags: ['autodocs'],
+  tags: ['!autodocs'],
   argTypes: {
     size: {
       control: { type: 'select' },
@@ -182,7 +182,7 @@ export const InContent: Story = {
 // Full Page Loading
 export const FullPageLoading: Story = {
   render: () => (
-    <div className="flex min-h-[400px] items-center justify-center border rounded-lg bg-muted/20">
+    <div className="flex items-center justify-center">
       <LoadingSpinner size="lg" text="Loading application..." />
     </div>
   ),

@@ -293,7 +293,7 @@ export const Calendar = React.forwardRef<HTMLDivElement, CalendarProps>(
     return (
       <div ref={ref} className={cn('w-full p-4', className)} {...props}>
         {/* Header */}
-        <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center justify-between mb-4 gap-4">
           <div className="flex items-center gap-2">
             <Button
               type="button"
