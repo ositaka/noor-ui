@@ -99,7 +99,6 @@ export const BasicDatePicker: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Basic date picker with label and formatted date display.'
       }
@@ -146,7 +145,6 @@ export const DateRangePicker_: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Date range picker for selecting start and end dates.'
       }
@@ -194,7 +192,6 @@ export const WithConstraints: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Date picker with min and max date constraints. Only dates within the next month are selectable.'
       }
@@ -244,7 +241,6 @@ export const DisabledDates: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Date picker with specific dates disabled. Weekends are not selectable in this example.'
       }
@@ -319,7 +315,6 @@ export const RealWorldExample: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Hotel booking example with date range selection and price calculation.'
       }
@@ -358,7 +353,6 @@ export const DisabledState: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Disabled date picker state.'
       }
@@ -400,7 +394,6 @@ export const RTLExample: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Date picker with Arabic labels in RTL mode.'
       }
@@ -447,7 +440,6 @@ export const RTLDateRangePicker: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Date range picker in Arabic with RTL support.'
       }
@@ -495,7 +487,6 @@ export const RTLWithConstraints: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Date picker with constraints in Arabic, showing proper RTL date formatting.'
       }
@@ -570,7 +561,6 @@ export const RTLRealWorldExample: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Complete hotel booking example in Arabic with RTL support and proper number formatting.'
       }

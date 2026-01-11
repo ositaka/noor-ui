@@ -136,7 +136,6 @@ export const BasicTabs: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Basic tabs with three sections: Account, Password, and Settings.'
       }
@@ -181,7 +180,6 @@ export const WithIcons: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Tabs with icons for visual clarity. Icons are placed before the text.'
       }
@@ -235,7 +233,6 @@ export const Controlled: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Controlled tabs with external state management. Shows active tab value above.'
       }
@@ -278,7 +275,6 @@ export const TwoTabs: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Tabs with two options, using grid-cols-2 for equal width.'
       }
@@ -331,7 +327,6 @@ export const RTLExample: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Tabs with Arabic labels in RTL mode. Tab order and layout adapt automatically.'
       }
@@ -376,7 +371,6 @@ export const RTLWithIcons: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Tabs with icons in RTL mode. Icons and text flow correctly right-to-left.'
       }
@@ -430,7 +424,6 @@ export const RTLControlled: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Controlled tabs in RTL with Arabic text. State management works the same in both directions.'
       }

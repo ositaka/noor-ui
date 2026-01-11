@@ -355,7 +355,6 @@ export const UserHasReacted: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Shows highlighted state when user has reacted (👍 in this example).'
       }

@@ -116,7 +116,6 @@ export const BasicFAQ: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Basic FAQ accordion with single item open at a time. Click to expand, click again to collapse.'
       }
@@ -155,7 +154,6 @@ export const MultipleOpen: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Multiple items can be open simultaneously. Account and Security are open by default.'
       }
@@ -209,7 +207,6 @@ export const WithIcons: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Accordion with icons for visual clarity. Icons are placed before the text.'
       }
@@ -255,7 +252,6 @@ export const Controlled: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Controlled accordion with external state management. Shows active item value above.'
       }
@@ -299,7 +295,6 @@ export const InCard: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Accordion placed inside a card component with a title.'
       }
@@ -338,7 +333,6 @@ export const RTLExample: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Basic FAQ accordion with Arabic text in RTL mode. Chevron positions correctly on the start side.'
       }
@@ -377,7 +371,6 @@ export const RTLMultipleOpen: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Multiple items open in RTL mode with Arabic labels. Layout adapts automatically.'
       }
@@ -431,7 +424,6 @@ export const RTLWithIcons: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Accordion with icons in RTL mode. Icons and text flow correctly right-to-left.'
       }
@@ -477,7 +469,6 @@ export const RTLControlled: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Controlled accordion in RTL with Arabic text. State management works the same in both directions.'
       }

@@ -159,7 +159,6 @@ export const BasicUsage: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Dropdown menu with icons and keyboard shortcuts. Classic account menu pattern.'
       }
@@ -205,7 +204,6 @@ export const WithIcons: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Menu with icons on the left and keyboard shortcuts on the right.'
       }
@@ -244,7 +242,6 @@ export const WithCheckboxes: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Dropdown menu with checkbox items for toggling view options.'
       }
@@ -281,7 +278,6 @@ export const WithRadioGroup: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Dropdown menu with radio group for selecting a single option.'
       }
@@ -338,7 +334,6 @@ export const WithSubMenus: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Dropdown menu with nested sub-menus for complex action hierarchies.'
       }
@@ -411,7 +406,6 @@ export const AllVariants: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'All dropdown menu variants: with icons, checkboxes, and radio groups.'
       }
@@ -463,7 +457,6 @@ export const RTLBasic: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Dropdown menu in RTL with Arabic text. Icons and shortcuts position correctly.'
       }
@@ -502,7 +495,6 @@ export const RTLWithCheckboxes: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Dropdown menu with checkboxes in RTL. Checkmarks position on the right (start).'
       }
@@ -539,7 +531,6 @@ export const RTLWithRadioGroup: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Dropdown menu with radio group in RTL. Radio indicators position correctly.'
       }
@@ -596,7 +587,6 @@ export const RTLWithSubMenus: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Dropdown menu with sub-menus in RTL. Chevron icons flip to point left.'
       }

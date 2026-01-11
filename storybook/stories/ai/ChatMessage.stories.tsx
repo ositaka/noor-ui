@@ -89,7 +89,6 @@ export const AssistantMessage: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Assistant message with timestamp.'
       }
@@ -115,7 +114,6 @@ export const UserMessage: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'User message with timestamp.'
       }
@@ -141,7 +139,6 @@ export const SystemMessage: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'System message for notifications.'
       }
@@ -171,7 +168,6 @@ export const WithActions: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Assistant message with copy and regenerate actions.'
       }
@@ -197,7 +193,6 @@ export const CompactVariant: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Compact variant for dense layouts.'
       }
@@ -241,7 +236,6 @@ export const Conversation: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Complete conversation with alternating messages.'
       }
@@ -268,7 +262,6 @@ export const RTLAssistant: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Assistant message in RTL with Arabic text.'
       }
@@ -295,7 +288,6 @@ export const RTLUser: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'User message in RTL with Arabic text.'
       }
@@ -343,7 +335,6 @@ export const RTLConversation: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Complete Arabic conversation in RTL.'
       }

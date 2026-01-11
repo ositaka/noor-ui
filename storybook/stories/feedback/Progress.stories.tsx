@@ -66,7 +66,6 @@ export const Basic: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Basic progress bar showing 33% completion.'
       }
@@ -92,7 +91,6 @@ export const WithLabel: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Progress bar with label and percentage display.'
       }
@@ -118,7 +116,6 @@ export const WithShimmer: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Progress bar with animated shimmer effect for a live feel.'
       }
@@ -155,7 +152,6 @@ export const DifferentSizes: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Progress bars in different sizes from extra small to large.'
       }
@@ -188,7 +184,6 @@ export const DifferentColors: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Progress bars with custom colors (blue, green, red).'
       }
@@ -237,7 +232,6 @@ export const UploadProgress: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Simulated upload progress with start button and completion message.'
       }
@@ -274,7 +268,6 @@ export const AllSizes: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Showcase of all available progress bar sizes.'
       }
@@ -292,7 +285,6 @@ export const RTLBasic: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Progress bar in RTL mode. The fill animates from right to left.'
       }
@@ -318,7 +310,6 @@ export const RTLWithLabel: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Progress bar with Arabic label and percentage in RTL layout.'
       }
@@ -367,7 +358,6 @@ export const RTLUploadProgress: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Upload progress simulation with Arabic text in RTL layout.'
       }

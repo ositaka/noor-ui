@@ -144,7 +144,6 @@ export const BasicUsage: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Context menu with icons and keyboard shortcuts. Right-click to open.'
       }
@@ -192,7 +191,6 @@ export const WithIcons: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Context menu with icons on the left and keyboard shortcuts on the right.'
       }
@@ -233,7 +231,6 @@ export const WithCheckboxes: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Context menu with checkbox items for toggling view options.'
       }
@@ -288,7 +285,6 @@ export const FileExplorer: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'File explorer pattern with context menus for each file.'
       }
@@ -347,7 +343,6 @@ export const AllVariants: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'All context menu variants: with icons and with checkboxes.'
       }
@@ -400,7 +395,6 @@ export const RTLBasic: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Context menu in RTL with Arabic text. Icons and shortcuts position correctly.'
       }
@@ -448,7 +442,6 @@ export const RTLWithIcons: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Context menu with icons in RTL. Layout mirrors correctly.'
       }
@@ -489,7 +482,6 @@ export const RTLWithCheckboxes: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Context menu with checkboxes in RTL. Checkmarks position on the right (start).'
       }
@@ -544,7 +536,6 @@ export const RTLFileExplorer: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'File explorer pattern in RTL with Arabic filenames and menu items.'
       }

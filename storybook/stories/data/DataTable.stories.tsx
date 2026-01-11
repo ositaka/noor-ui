@@ -151,7 +151,6 @@ export const BasicDataTable: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Basic data table with three columns showing user information.'
       }
@@ -184,7 +183,6 @@ export const InternalSorting: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Simple sorting with enableSorting prop. The component manages sort state internally.'
       }
@@ -251,7 +249,6 @@ export const ExternalSorting: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'External state management for advanced use cases (e.g., URL sync, API integration).'
       }
@@ -297,7 +294,6 @@ export const SearchableTable: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Data table with built-in search functionality and clear button.'
       }
@@ -344,7 +340,6 @@ export const PaginatedTable: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Data table with integrated pagination controls.'
       }
@@ -410,7 +405,6 @@ export const CustomCells: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Custom cell rendering with badges, styled text, and action buttons.'
       }
@@ -452,7 +446,6 @@ export const LoadingState: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Data table with skeleton loading animation while fetching data.'
       }
@@ -540,7 +533,6 @@ export const CompleteExample: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Complete example with all features: sorting, searching, pagination, and striped rows.'
       }
@@ -574,7 +566,6 @@ export const RTLExample: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Basic data table in RTL mode with Arabic text. Text alignment uses text-start for proper display.'
       }
@@ -626,7 +617,6 @@ export const RTLSearchable: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Searchable data table in RTL with Arabic placeholders. Search icon and clear button adapt to RTL.'
       }
@@ -704,7 +694,6 @@ export const RTLCompleteExample: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Complete example in RTL with all features. Sort indicators, pagination arrows, and search all work correctly.'
       }

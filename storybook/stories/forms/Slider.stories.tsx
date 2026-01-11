@@ -98,7 +98,6 @@ export const DifferentRanges: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Slider with custom min and max values. Shows temperature from -10°C to 40°C.'
       }
@@ -138,7 +137,6 @@ export const DifferentSteps: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Sliders with different step sizes. Step determines the increment for value changes.'
       }
@@ -211,7 +209,6 @@ export const VolumeControl: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Interactive volume control with mute button and value display.'
       }
@@ -246,7 +243,6 @@ export const PriceRange: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Range slider with two thumbs for selecting a price range.'
       }
@@ -269,7 +265,6 @@ export const RTLExample: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Slider with Arabic label demonstrating RTL support. The slider direction automatically mirrors for RTL.'
       }
@@ -391,7 +386,6 @@ export const RTLVolumeControl: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Volume control in RTL mode with proper text alignment.'
       }
@@ -426,7 +420,6 @@ export const RTLPriceRange: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Range slider with two thumbs in RTL mode, demonstrating proper handle positioning.'
       }

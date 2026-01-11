@@ -75,7 +75,7 @@ export const Directions: Story = {
           <ButtonArrow direction="forward">Next Step</ButtonArrow>
           <ButtonArrow direction="back">Previous Step</ButtonArrow>
         </div>
-      </CardContent>
+    </CardContent>
     </Card>
   ),
   globals: {
@@ -85,7 +85,6 @@ export const Directions: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Forward and back directional buttons.'
       }
@@ -114,7 +113,6 @@ export const IconStyles: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Chevron and arrow icon styles.'
       }
@@ -143,7 +141,6 @@ export const WithVariants: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'ButtonArrow with all button variants.'
       }
@@ -166,7 +163,6 @@ export const ForwardOnly: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Forward direction buttons only.'
       }
@@ -189,7 +185,6 @@ export const BackOnly: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Back direction buttons only.'
       }
@@ -212,7 +207,6 @@ export const RTLForward: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Forward buttons in RTL - arrows auto-flip.'
       }
@@ -235,7 +229,6 @@ export const RTLBack: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Back buttons in RTL - arrows auto-flip.'
       }

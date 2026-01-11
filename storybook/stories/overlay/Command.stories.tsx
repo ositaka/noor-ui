@@ -126,7 +126,6 @@ export const BasicCommand: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Basic command menu with search, groups, and icons. Type to search.'
       }
@@ -168,7 +167,6 @@ export const WithShortcuts: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Command menu with keyboard shortcuts displayed on the right.'
       }
@@ -229,7 +227,6 @@ export const CommandDialogExample: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Command menu in dialog mode. Opens with ⌘K (Cmd+K or Ctrl+K).'
       }
@@ -286,7 +283,6 @@ export const MultipleGroups: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Command menu with multiple groups separated by dividers.'
       }
@@ -336,7 +332,6 @@ export const RTLBasic: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Command menu in RTL with Arabic text. Layout and search icon position correctly.'
       }
@@ -378,7 +373,6 @@ export const RTLWithShortcuts: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Command menu with shortcuts in RTL. Shortcuts position on the left (end).'
       }
@@ -439,7 +433,6 @@ export const RTLCommandDialog: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Command dialog in RTL. Opens with ⌘K, content flows right-to-left.'
       }
@@ -496,7 +489,6 @@ export const RTLMultipleGroups: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Command menu with multiple groups in RTL. All content aligns properly.'
       }

@@ -98,7 +98,6 @@ export const BasicPagination: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Basic pagination with Previous/Next buttons and page numbers. Page 2 is currently active.'
       }
@@ -150,7 +149,6 @@ export const WithEllipsis: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Pagination with ellipsis (...) for indicating hidden pages. Shows pages 1, 5-7, and 10 out of 10 total.'
       }
@@ -238,7 +236,6 @@ export const Controlled: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Controlled pagination with state management. Current page is displayed above and updates on click.'
       }
@@ -284,7 +281,6 @@ export const FewPages: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Pagination with 5 pages shown. No ellipsis needed for smaller page counts.'
       }
@@ -331,7 +327,6 @@ export const InCard: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Pagination placed inside a card component.'
       }
@@ -371,7 +366,6 @@ export const RTLExample: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Basic pagination with Arabic text in RTL mode. Chevrons automatically flip direction.'
       }
@@ -423,7 +417,6 @@ export const RTLWithEllipsis: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Pagination with ellipsis in RTL mode. Layout flows naturally right-to-left.'
       }
@@ -511,7 +504,6 @@ export const RTLControlled: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Controlled pagination in RTL with Arabic text. State management works the same in both directions.'
       }
@@ -557,7 +549,6 @@ export const RTLFewPages: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Pagination with 5 pages in RTL mode. Page numbers and navigation flow right-to-left.'
       }
