@@ -75,7 +75,6 @@ export const DefaultVariant: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Default Hijri date display with icon.'
       }
@@ -101,7 +100,6 @@ export const BadgeVariant: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Badge variant for compact display.'
       }
@@ -130,7 +128,6 @@ export const CompactVariant: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Compact variant for inline text.'
       }
@@ -157,7 +154,6 @@ export const DetailedVariant: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Detailed variant with enhanced visuals.'
       }
@@ -183,7 +179,6 @@ export const WithoutIcon: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Hijri date without calendar icon.'
       }
@@ -243,7 +238,6 @@ export const AllVariants: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Showcase of all Hijri date variants.'
       }
@@ -269,7 +263,6 @@ export const RTLDefault: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Hijri date in RTL with Arabic text.'
       }
@@ -295,7 +288,6 @@ export const RTLBadge: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Badge variant in RTL layout.'
       }
@@ -324,7 +316,6 @@ export const RTLCompact: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Compact variant in RTL with Arabic inline text.'
       }
@@ -351,7 +342,6 @@ export const RTLDetailed: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Detailed variant in RTL with full Arabic dates.'
       }

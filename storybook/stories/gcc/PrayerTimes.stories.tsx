@@ -99,7 +99,6 @@ export const DefaultVariant: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Default prayer times display with next prayer and countdown.'
       }
@@ -127,7 +126,6 @@ export const CompactVariant: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Compact variant with minimal spacing for sidebars.'
       }
@@ -158,7 +156,6 @@ export const DetailedVariant: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Detailed variant with extra spacing and enhanced visuals.'
       }
@@ -185,7 +182,6 @@ export const WithoutCountdown: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Prayer times without countdown or next prayer highlight.'
       }
@@ -216,7 +212,6 @@ export const NotificationVariant: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Notification variant for prayer time alerts with adhan controls.'
       }
@@ -270,7 +265,6 @@ export const AllVariants: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Showcase of all prayer times variants.'
       }
@@ -300,7 +294,6 @@ export const RTLDefault: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Prayer times in RTL with Arabic text and proper alignment.'
       }
@@ -328,7 +321,6 @@ export const RTLCompact: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Compact variant in RTL layout.'
       }
@@ -359,7 +351,6 @@ export const RTLDetailed: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Detailed variant in RTL with full Arabic support.'
       }
@@ -390,7 +381,6 @@ export const RTLNotification: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Notification variant in RTL for adhan alerts.'
       }

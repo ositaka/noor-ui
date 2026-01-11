@@ -128,7 +128,6 @@ export const SettingsPanel: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Switch used in a settings panel with descriptions. Perfect for preference screens.'
       }
@@ -194,7 +193,6 @@ export const Controlled: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Controlled switch with external state management. The state can be toggled programmatically.'
       }
@@ -241,7 +239,6 @@ export const InForm: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Switch in a form with the name attribute for form submission.'
       }
@@ -274,7 +271,6 @@ export const RTLExample: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Switch with Arabic labels demonstrating RTL support. The switch thumb animation automatically adapts for RTL direction.'
       }
@@ -328,7 +324,6 @@ export const RTLSettingsPanel: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Settings panel with Arabic text in RTL mode. The justify-between layout naturally adapts to RTL.'
       }
@@ -361,7 +356,6 @@ export const RTLDisabled: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Disabled switches with Arabic text in RTL mode.'
       }
@@ -400,7 +394,6 @@ export const RTLControlled: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Controlled switch with Arabic text demonstrating programmatic state management in RTL.'
       }
@@ -447,7 +440,6 @@ export const RTLInForm: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Complete form with switches in Arabic, demonstrating RTL support in form contexts.'
       }

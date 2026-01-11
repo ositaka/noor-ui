@@ -149,7 +149,6 @@ export const BasicListing: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Basic listing with just title, subtitle, description, and price.'
       }
@@ -204,7 +203,6 @@ export const RealEstateListing: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Full real estate listing with badges, actions, stats, tags, and featured styling.'
       }
@@ -249,7 +247,6 @@ export const EcommerceListing: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'E-commerce product with rating, sold count, and Add to Cart CTA.'
       }
@@ -291,7 +288,6 @@ export const JobListing: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Job listing with employment type, location, tech stack, and Apply Now CTA.'
       }
@@ -349,7 +345,6 @@ export const WithAllFeatures: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Showcasing all features: badges, actions, stats, tags (with truncation), type badge, CTA, and featured styling.'
       }
@@ -411,7 +406,6 @@ export const GridLayout: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Grid layout with multiple property listings.'
       }
@@ -466,7 +460,6 @@ export const RTLRealEstate: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Real estate listing in RTL with Arabic text. Layout flows right-to-left.'
       }
@@ -507,7 +500,6 @@ export const RTLEcommerce: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'E-commerce product in RTL with Arabic text and Add to Cart button.'
       }
@@ -549,7 +541,6 @@ export const RTLJobListing: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Job listing in RTL with Arabic text and Apply Now button.'
       }
@@ -611,7 +602,6 @@ export const RTLGridLayout: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Grid layout in RTL with Arabic property listings.'
       }

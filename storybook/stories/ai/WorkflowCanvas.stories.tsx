@@ -299,7 +299,6 @@ export const EmptyCanvas: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Empty workflow canvas ready for adding nodes.'
       }

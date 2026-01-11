@@ -160,7 +160,6 @@ export const WithDescription: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Radio group with descriptive text under each option. Useful for plans, pricing tiers, or options that need additional context.'
       }
@@ -235,7 +234,6 @@ export const Controlled: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Controlled radio group with external state management. The selection can be changed programmatically via buttons.'
       }
@@ -280,7 +278,6 @@ export const InForm: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Radio group in a form with the name attribute for form submission.'
       }
@@ -313,7 +310,6 @@ export const RTLExample: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Radio group with Arabic labels demonstrating RTL support. Radio buttons and labels maintain proper spacing and alignment. Automatically switches to RTL mode.'
       }
@@ -363,7 +359,6 @@ export const RTLWithDescription: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Plan selection with descriptions in Arabic. Uses logical properties (ps-6) which automatically adapt for RTL.'
       }
@@ -396,7 +391,6 @@ export const RTLHorizontal: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Horizontal radio group layout in RTL mode. The flex layout naturally adapts to RTL.'
       }
@@ -441,7 +435,6 @@ export const RTLInForm: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Complete form with radio group in Arabic, demonstrating RTL support in form contexts.'
       }

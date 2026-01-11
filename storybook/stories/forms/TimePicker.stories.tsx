@@ -100,7 +100,6 @@ export const Basic24hFormat: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Basic time picker with 24-hour format.'
       }
@@ -142,7 +141,6 @@ export const Format12h: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Time picker with 12-hour format and AM/PM toggle.'
       }
@@ -203,7 +201,6 @@ export const TimeRange: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Time range picker for selecting start and end times with duration calculation.'
       }
@@ -246,7 +243,6 @@ export const MinuteIntervals: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Time picker with 15-minute step intervals.'
       }
@@ -337,7 +333,6 @@ export const MedicalAppointment: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Medical appointment booking with 12h format and automatic end time calculation.'
       }
@@ -421,7 +416,6 @@ export const WorkSchedule: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Work schedule example with time range and total hours calculation.'
       }
@@ -460,7 +454,6 @@ export const DisabledState: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Disabled time picker state.'
       }
@@ -500,7 +493,6 @@ export const RTLExample: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Time picker with Arabic labels in RTL mode.'
       }
@@ -542,7 +534,6 @@ export const RTL12hFormat: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Time picker with 12-hour format in Arabic, showing proper RTL AM/PM (ص/م) formatting.'
       }
@@ -633,7 +624,6 @@ export const RTLMedicalAppointment: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Complete medical appointment example in Arabic with RTL support and proper time formatting.'
       }

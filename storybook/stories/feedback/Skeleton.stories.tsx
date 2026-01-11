@@ -73,7 +73,6 @@ export const CardSkeleton: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Card skeleton with image placeholder and text lines.'
       }
@@ -103,7 +102,6 @@ export const ProfileSkeleton: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Profile skeleton with avatar and two text lines.'
       }
@@ -137,7 +135,6 @@ export const ListSkeleton: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'List skeleton with three items, each with icon and text.'
       }
@@ -162,7 +159,6 @@ export const TextLines: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Multiple text line skeletons with varying widths.'
       }
@@ -187,7 +183,6 @@ export const AvatarSizes: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Avatar skeletons in different sizes.'
       }
@@ -211,7 +206,6 @@ export const ButtonSkeleton: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Button-shaped skeletons in different widths.'
       }
@@ -251,7 +245,6 @@ export const AllPatterns: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Showcase of common skeleton patterns.'
       }
@@ -281,7 +274,6 @@ export const RTLCardSkeleton: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Card skeleton in RTL mode.'
       }
@@ -311,7 +303,6 @@ export const RTLProfileSkeleton: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Profile skeleton in RTL with space-x-reverse for proper spacing.'
       }
@@ -345,7 +336,6 @@ export const RTLListSkeleton: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'List skeleton in RTL layout with reversed spacing.'
       }

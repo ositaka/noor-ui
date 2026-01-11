@@ -180,7 +180,6 @@ export const EmptyState: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Editor with empty content showing placeholder text.'
       }

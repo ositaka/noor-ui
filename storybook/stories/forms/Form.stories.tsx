@@ -149,7 +149,6 @@ export const BasicForm: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Basic login form with email and password validation.'
       }
@@ -216,7 +215,6 @@ export const WithValidation: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Form with composed validators. Email field uses both required and email validation.'
       }
@@ -270,7 +268,6 @@ export const WithSelect: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Form with Select component integration. Shows how to handle dropdown validation.'
       }
@@ -316,7 +313,6 @@ export const DisabledState: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Form with disabled inputs and submit button.'
       }
@@ -360,7 +356,6 @@ export const RTLExample: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Form with Arabic labels and validation messages in RTL mode.'
       }
@@ -429,7 +424,6 @@ export const RTLBasicForm: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Complete login form in Arabic with RTL support.'
       }
@@ -496,7 +490,6 @@ export const RTLWithValidation: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Form with composed validators in Arabic, demonstrating RTL validation messages.'
       }
@@ -550,7 +543,6 @@ export const RTLWithSelect: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Form with Select component in Arabic, showing proper RTL alignment.'
       }

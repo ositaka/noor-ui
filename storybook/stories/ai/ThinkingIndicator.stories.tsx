@@ -91,7 +91,6 @@ export const AllVariants: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Showcase of all 4 animation variants.'
       }
@@ -121,7 +120,6 @@ export const WithMessages: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Indicators with custom messages.'
       }
@@ -151,7 +149,6 @@ export const SizeVariants: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Indicators in different sizes.'
       }
@@ -184,7 +181,6 @@ export const InChatContext: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Indicator in chat message context with avatar.'
       }
@@ -213,7 +209,6 @@ export const DotsOnly: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Just the dots variant.'
       }
@@ -242,7 +237,6 @@ export const PulseOnly: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Just the pulse variant.'
       }
@@ -271,7 +265,6 @@ export const WaveOnly: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Just the wave variant.'
       }
@@ -300,7 +293,6 @@ export const TypingOnly: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Just the typing variant.'
       }
@@ -332,7 +324,6 @@ export const RTLWithMessages: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Indicators with Arabic messages in RTL.'
       }

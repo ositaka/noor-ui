@@ -89,7 +89,6 @@ export const Simple: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Simple toast with only a description message.'
       }
@@ -121,7 +120,6 @@ export const WithTitle: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Toast with both title and description.'
       }
@@ -155,7 +153,6 @@ export const Destructive: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Destructive variant for error messages.'
       }
@@ -188,7 +185,6 @@ export const Success: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Success variant for positive feedback.'
       }
@@ -247,7 +243,6 @@ export const AllVariants: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Showcase of all toast variants: default, destructive, and success.'
       }
@@ -278,7 +273,6 @@ export const RTLSimple: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Simple toast in RTL with Arabic text.'
       }
@@ -310,7 +304,6 @@ export const RTLWithTitle: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Toast with title and description in RTL.'
       }
@@ -344,7 +337,6 @@ export const RTLDestructive: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Destructive toast in RTL with Arabic error message.'
       }
@@ -377,7 +369,6 @@ export const RTLSuccess: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Success toast in RTL with Arabic success message.'
       }

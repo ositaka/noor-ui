@@ -132,7 +132,6 @@ export const BasicTable: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Basic table with caption showing user data. Uses semantic HTML elements for accessibility.'
       }
@@ -186,7 +185,6 @@ export const WithCaption: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Table with caption showing transaction data inside a card. Caption describes the table content.'
       }
@@ -239,7 +237,6 @@ export const InteractiveTable: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Interactive table with checkboxes for row selection. Includes header checkbox for select all.'
       }
@@ -281,7 +278,6 @@ export const MobileResponsiveTable: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Responsive table that adapts to mobile screens. On desktop shows normal table, on mobile shows stacked cards.'
       }
@@ -324,7 +320,6 @@ export const StripedRows: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Table with alternating row colors (striped) for better readability of large datasets.'
       }
@@ -368,7 +363,6 @@ export const CompactTable: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Compact table with reduced padding for displaying data in limited space.'
       }
@@ -414,7 +408,6 @@ export const RTLExample: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Basic table in RTL mode with Arabic text. Text alignment uses text-start for proper RTL display.'
       }
@@ -468,7 +461,6 @@ export const RTLWithCaption: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Transaction table in RTL with Arabic text. All content flows naturally right-to-left.'
       }
@@ -521,7 +513,6 @@ export const RTLInteractiveTable: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Interactive table with checkboxes in RTL mode. Checkbox positioning adapts to RTL layout.'
       }
@@ -564,7 +555,6 @@ export const RTLStripedRows: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Striped table in RTL mode with Arabic text. Alternating row colors work perfectly in both directions.'
       }

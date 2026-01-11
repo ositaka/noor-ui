@@ -87,7 +87,6 @@ export const BasicBreadcrumb: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Basic breadcrumb showing navigation path with default chevron separators.'
       }
@@ -121,7 +120,6 @@ export const CustomSeparator: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Breadcrumb with custom "/" separator instead of default chevron.'
       }
@@ -164,7 +162,6 @@ export const WithIcons: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Breadcrumb with icons for visual clarity. Icons help identify different navigation levels.'
       }
@@ -206,7 +203,6 @@ export const LongerPath: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Breadcrumb with a longer navigation path showing multiple levels.'
       }
@@ -248,7 +244,6 @@ export const InCard: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Breadcrumb placed inside a card component with a title.'
       }
@@ -282,7 +277,6 @@ export const RTLExample: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Basic breadcrumb with Arabic text in RTL mode. Chevron separators automatically flip direction.'
       }
@@ -316,7 +310,6 @@ export const RTLCustomSeparator: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Breadcrumb with custom "/" separator in RTL mode.'
       }
@@ -359,7 +352,6 @@ export const RTLWithIcons: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Breadcrumb with icons in RTL mode. Icons and text flow correctly right-to-left.'
       }
@@ -401,7 +393,6 @@ export const RTLLongerPath: Story = {
   parameters: {
     controls: { disable: true },
     docs: {
-      disable: true,
       description: {
         story: 'Longer breadcrumb path in RTL mode with Arabic text. Link order flows naturally right-to-left.'
       }
