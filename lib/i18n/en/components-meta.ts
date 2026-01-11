@@ -6,7 +6,7 @@
 export const components_meta = {
 components: {
       title: 'Components',
-      description: '64 beautifully designed components built with Radix UI, Tailwind CSS, and React Flow. 54 production-ready, 10 experimental AI/LLM components. Full RTL support, accessible, and customizable.',
+      description: '74 beautifully designed components built with Radix UI, Tailwind CSS, and React Flow. Full RTL support, accessible, and customizable.',
       quickPreview: 'Quick Preview',
       previewDescription: 'See how components adapt to different directions',
       categories: {

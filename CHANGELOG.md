@@ -272,7 +272,7 @@ This release focuses on code quality improvements and documentation completeness
 
 Major update to Noor UI with significant component additions and improvements.
 
-**Core Components (54)**
+**Core Components (69)**
 - Form components: Form, Button, Input, Label, Textarea, Checkbox, Radio Group, Select, Switch, Slider
 - Layout components: Card, Separator, Tabs, Accordion, Collapsible
 - Navigation: Breadcrumb, Pagination, Command

@@ -49,6 +49,7 @@ documentationPages: {
           title: 'المكونات',
           description: 'تصفح جميع مكونات واجهة المستخدم المتاحة',
           library: 'مكتبة المكونات',
+          storybook: 'ستوريبوك ↗',
           props: 'توثيق الخصائص',
           examples: 'الأمثلة',
         },

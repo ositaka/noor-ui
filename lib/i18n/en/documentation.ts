@@ -49,6 +49,7 @@ documentationPages: {
           title: 'Components',
           description: 'Browse all available UI components',
           library: 'Component Library',
+          storybook: 'Storybook ↗',
           props: 'Props Documentation',
           examples: 'Examples',
         },

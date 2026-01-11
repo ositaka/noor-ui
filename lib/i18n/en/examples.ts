@@ -26,7 +26,7 @@ examples: {
         lookingForAppsDesc: 'Browse production-ready starters - complete applications with authentication, database, and everything you need to get started.',
         viewStarters: 'View Production Starters →',
         lookingForComponents: 'Looking for Individual Components?',
-        lookingForComponentsDesc: 'Browse our complete component library with 64 fully documented components (including 10 experimental AI/LLM components) with live examples and accessibility guidelines.',
+        lookingForComponentsDesc: 'Browse our complete component library with 74 fully documented components with live examples and accessibility guidelines.',
         viewAllComponents: 'View All Components →',
       },
 

@@ -78,6 +78,8 @@ npm run dev
 - `npm run dev` - Start development server (documentation site)
 - `npm run build` - Build for production (includes checks)
 - `npm run build:skip-checks` - Build without running checks
+- `npm run storybook` - Start Storybook for interactive component development
+- `npm run storybook:build` - Build static Storybook
 - `npm run lint` - Run ESLint
 - `npm run type-check` - Run TypeScript type checking
 - `npm run check:translations` - Verify translation completeness

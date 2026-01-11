@@ -187,7 +187,9 @@ Build the **go-to design system for bilingual (LTR/RTL) web applications**, star
 **Blockers:**
 - None! All technical AND marketing assets complete ✅
 
-**Recent Wins (Dec 21, 2025):**
+**Recent Wins (Jan 11, 2026):**
+- ✅ **Storybook deployed** - 749 interactive stories across 74 components at storybook.noorui.com
+- ✅ **Documentation updated** - README and CONTRIBUTING.md now reference Storybook
 - ✅ **RTL Guide Enhanced** - Added positioning logical properties documentation (inset-inline-start/end, inset-block-start/end) with CSS and Tailwind equivalents (contributed by Mazin Musleh)
 - ✅ **NPM package updated** (noorui-rtl v0.4.6 - Calendar form fix)
 - ✅ **74+ production-ready components**
@@ -276,6 +278,7 @@ Phase 4: Month 5+    ░░░░░░░░░░░░░░░░░░░�
 2. **Content Creation**
    - Record "Quick Start in 5 minutes" video
    - Create component showcase GIFs/videos
+   - 💡 **Nice to have:** Create animated GIF showcasing Storybook features (RTL switch, theme change, component interactions) for homepage showcase section
    - Write blog posts about RTL challenges solved
    - Document migration from shadcn/ui
 
