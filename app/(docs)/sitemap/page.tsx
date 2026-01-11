@@ -62,6 +62,7 @@ export default function SitemapPage() {
   const resources = [
     { href: '/getting-started', nameKey: 'gettingStarted' },
     { href: '/documentation', nameKey: 'documentation' },
+    { href: 'https://storybook.noorui.com', nameKey: 'storybook', external: true },
     { href: '/rtl-guide', nameKey: 'rtlGuide' },
     { href: '/roadmap', nameKey: 'roadmap' },
     { href: '/starters', nameKey: 'starters' },
@@ -141,12 +142,23 @@ export default function SitemapPage() {
             </li>
             {resources.map((item) => (
               <li key={item.href}>
-                <Link
-                  href={item.href}
-                  className="text-primary hover:underline"
-                >
-                  {t.sitemap.links[item.nameKey as keyof typeof t.sitemap.links]}
-                </Link>
+                {item.external ? (
+                  <a
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-primary hover:underline"
+                  >
+                    {t.sitemap.links[item.nameKey as keyof typeof t.sitemap.links]} ↗
+                  </a>
+                ) : (
+                  <Link
+                    href={item.href}
+                    className="text-primary hover:underline"
+                  >
+                    {t.sitemap.links[item.nameKey as keyof typeof t.sitemap.links]}
+                  </Link>
+                )}
               </li>
             ))}
           </ul>

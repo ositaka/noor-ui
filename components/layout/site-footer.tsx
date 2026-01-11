@@ -19,6 +19,7 @@ export function SiteFooter() {
       themes: 'Themes',
       resources: 'Resources',
       examples: 'Examples',
+      storybook: 'Storybook',
       accessibility: 'Accessibility',
       rtlGuide: 'RTL Guide',
       sitemap: 'Sitemap',
@@ -44,6 +45,7 @@ export function SiteFooter() {
       themes: 'السمات',
       resources: 'الموارد',
       examples: 'الأمثلة',
+      storybook: 'ستوريبوك',
       accessibility: 'إمكانية الوصول',
       rtlGuide: 'دليل RTL',
       sitemap: 'خريطة الموقع',
@@ -116,6 +118,16 @@ export function SiteFooter() {
                 >
                   {content.examples}
                 </Link>
+              </li>
+              <li>
+                <a
+                  href="https://storybook.noorui.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-foreground transition-colors"
+                >
+                  {content.storybook}
+                </a>
               </li>
               <li>
                 <Link

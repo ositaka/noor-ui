@@ -4,12 +4,13 @@
 
 [![npm version](https://badge.fury.io/js/noorui-rtl.svg)](https://www.npmjs.com/package/noorui-rtl)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![Storybook](https://img.shields.io/badge/Storybook-Interactive-FF4785?logo=storybook&logoColor=white)](https://storybook.noorui.com)
 
 ![Noor UI - Beautiful RTL-first React components for bilingual applications](https://raw.githubusercontent.com/ositaka/noor-ui/main/public/noorui--og-image--bilingual.png)
 
 Beautiful RTL-first React components for bilingual applications. Built with Radix UI, Tailwind CSS, and full Arabic/English support.
 
-**[Documentation](https://noorui.com)** · **[Examples](https://noorui.com/examples)** · **[npm](https://www.npmjs.com/package/noorui-rtl)**
+**[Documentation](https://noorui.com)** · **[Storybook](https://storybook.noorui.com)** · **[Examples](https://noorui.com/examples)** · **[npm](https://www.npmjs.com/package/noorui-rtl)**
 
 ## ✨ Features
 
@@ -298,6 +299,7 @@ Full documentation, examples, and guides available at **[noorui.com](https://noo
 
 - [Getting Started](https://noorui.com/getting-started)
 - [Components](https://noorui.com/components)
+- [Storybook](https://storybook.noorui.com) - **Interactive component playground with 749 stories**
 - [RTL Guide](https://noorui.com/rtl-guide)
 - [Examples](https://noorui.com/examples)
 - [Starters](https://noorui.com/starters)

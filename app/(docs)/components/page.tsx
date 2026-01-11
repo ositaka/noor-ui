@@ -240,6 +240,14 @@ export default function ComponentsPage() {
             {t.components.description}
           </p>
 
+          <div className="mb-6">
+            <Button asChild>
+              <a href="https://storybook.noorui.com" target="_blank" rel="noopener noreferrer">
+                {t.storybook.exploreStorybook} ↗
+              </a>
+            </Button>
+          </div>
+
           {/* Live Preview */}
           <Card>
             <CardHeader>

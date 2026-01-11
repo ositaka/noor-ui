@@ -36,6 +36,7 @@ export default function DocumentationPage() {
       descriptionKey: 'components',
       links: [
         { titleKey: 'library', href: '/components' },
+        { titleKey: 'storybook', href: 'https://storybook.noorui.com' },
         { titleKey: 'props', href: '/documentation/props' },
         { titleKey: 'examples', href: '/documentation/examples' },
       ],

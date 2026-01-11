@@ -2,6 +2,7 @@
 
 [![npm version](https://img.shields.io/npm/v/noorui-rtl.svg)](https://www.npmjs.com/package/noorui-rtl)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![Storybook](https://img.shields.io/badge/Storybook-Interactive-FF4785?logo=storybook&logoColor=white)](https://storybook.noorui.com)
 
 ![Noor UI - Beautiful RTL-first React components for bilingual applications](https://raw.githubusercontent.com/ositaka/noor-ui/main/public/noorui--og-image--bilingual.png)
 
@@ -40,7 +41,9 @@ function App() {
 
 ## Documentation
 
-For full documentation, visit [noorui.com](https://noorui.com)
+- **[Documentation](https://noorui.com)** - Full documentation and guides
+- **[Storybook](https://storybook.noorui.com)** - Interactive component playground with 749 stories
+- **[Examples](https://noorui.com/examples)** - Real-world usage examples
 
 ## Components
 
@@ -94,6 +97,7 @@ MIT © [Nuno Marques](https://ositaka.com)
 
 - 🌐 [Website](https://noorui.com)
 - 📚 [Documentation](https://noorui.com/documentation)
+- 📖 [Storybook](https://storybook.noorui.com) - Interactive component showcase
 - 💬 [Discord Community](https://discord.gg/gvrqU2WG)
 - 🐛 [Issues](https://github.com/ositaka/noor-ui/issues)
 - 💬 [Discussions](https://github.com/ositaka/noor-ui/discussions)

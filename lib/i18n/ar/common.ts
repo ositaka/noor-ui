@@ -9,11 +9,30 @@ nav: {
       components: 'المكونات',
       examples: 'الأمثلة',
       starters: 'نماذج البداية',
+      storybook: 'ستوريبوك',
       rtlGuide: 'دليل RTL',
       tokens: 'رموز التصميم',
       themes: 'السمات',
       documentation: 'التوثيق',
       getStarted: 'ابدأ الآن',
+    },
+
+    storybook: {
+      title: 'ستوريبوك',
+      viewInStorybook: 'عرض في ستوريبوك',
+      exploreStorybook: 'استكشف ستوريبوك',
+      tryStorybook: 'جرّب ستوريبوك',
+      openStorybook: 'افتح ستوريبوك',
+      interactivePlayground: 'ساحة مكونات تفاعلية',
+      description: 'استكشف 749 قصة تفاعلية عبر 74 مكونًا. قم بالتبديل بين RTL/LTR، وجرّب سمات مختلفة، واختبر إمكانية الوصول—كل ذلك في متصفحك.',
+      shortDescription: 'عرض تفاعلي للمكونات مع 749 قصة',
+      features: {
+        interactive: 'ساحة مكونات حية',
+        rtl: 'التبديل بين RTL/LTR',
+        themes: '4 أنواع من السمات',
+        accessibility: 'اختبار كامل لإمكانية الوصول',
+        examples: 'أمثلة بالعربية والإنجليزية',
+      },
     },
 
 ui: {
@@ -456,6 +475,7 @@ common: {
           home: 'الرئيسية',
           gettingStarted: 'البدء',
           documentation: 'التوثيق',
+          storybook: 'ستوريبوك',
           rtlGuide: 'دليل تطوير RTL',
           roadmap: 'خارطة الطريق',
           themes: 'السمات',
