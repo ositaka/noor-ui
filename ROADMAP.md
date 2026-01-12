@@ -91,11 +91,12 @@ Build the **go-to design system for bilingual (LTR/RTL) web applications**, star
 - ✅ Version and release strategy established
 - ✅ Automated pre-publish checks (translations, links, types)
 
-**Current Version:** v0.4.6 (2025-12-08)
+**Current Version:** v0.5.0 (2026-01-12)
 
 **Latest Updates:**
-- ✅ Fixed Calendar component form submission issue - added `type="button"` to all buttons
-- ✅ Calendar now works correctly inside forms without triggering premature submission
+- ✅ Added 'external' direction to ButtonArrow component for external links
+- ✅ Diagonal arrow icon (↗) with automatic RTL mirroring (↖)
+- ✅ Storybook integration on noorui.com website
 - ✅ 74+ components with complete RTL/LTR support
 
 **Deliverables:**

@@ -13,6 +13,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - TimePicker & TimeRangePicker popups appear on wrong side in RTL mode
   - Need to add automatic direction detection (similar to DropdownMenu pattern)
 
+## [0.5.0] - 2026-01-12
+
+### Added
+- **ButtonArrow Component**: Added 'external' direction variant for external links
+  - New diagonal arrow icon (↗) using ArrowUpRight from lucide-react
+  - Automatic horizontal mirroring in RTL mode (↗ becomes ↖)
+  - Proper RTL support using `scale-x-[-1]` transform
+  - Works seamlessly with all button variants (primary, secondary, outline, ghost, link)
+  - Updated documentation and Storybook with external link examples
+
+### Notes
+This release enhances the ButtonArrow component to support external links with semantic directional arrows that automatically mirror in RTL layouts. The 'external' direction complements the existing 'forward' and 'back' directions.
+
+---
+
 ## [0.4.6] - 2025-12-08
 
 ### Fixed
