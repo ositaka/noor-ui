@@ -54,7 +54,7 @@ export const Default: Story = {
     const [isOpen, setIsOpen] = React.useState(args.defaultOpen || false);
 
     return (
-      <div className="w-full max-w-md">
+      <div className="w-96 max-w-md">
         <Collapsible {...args} open={isOpen} onOpenChange={setIsOpen}>
           <CollapsibleTrigger asChild>
             <Button variant="outline" className="w-full justify-between">
@@ -88,7 +88,7 @@ export const BasicFAQ: Story = {
     const [isOpen, setIsOpen] = React.useState(false);
 
     return (
-      <div className="w-full max-w-md space-y-4">
+      <div className="w-96 max-w-md space-y-4">
         <Collapsible open={isOpen} onOpenChange={setIsOpen}>
           <CollapsibleTrigger asChild>
             <Button variant="outline" className="w-full justify-between">
@@ -216,7 +216,7 @@ export const SidebarStyle: Story = {
 export const FAQStyle: Story = {
   render: () => {
     return (
-      <div className="w-full max-w-2xl space-y-2">
+      <div className="w-96 max-w-2xl space-y-2">
         {[
           {
             q: 'What is this design system?',
@@ -266,7 +266,7 @@ export const FAQStyle: Story = {
 // Simple Uncontrolled
 export const SimpleUncontrolled: Story = {
   render: () => (
-    <div className="w-full max-w-md">
+    <div className="w-96 max-w-md">
       <Collapsible>
         <CollapsibleTrigger asChild>
           <Button variant="outline">Toggle Details</Button>
@@ -299,7 +299,7 @@ export const RTLExample: Story = {
     const [isOpen, setIsOpen] = React.useState(false);
 
     return (
-      <div className="w-full max-w-md space-y-4">
+      <div className="w-96 max-w-md space-y-4">
         <Collapsible open={isOpen} onOpenChange={setIsOpen}>
           <CollapsibleTrigger asChild>
             <Button variant="outline" className="w-full justify-between">
@@ -427,7 +427,7 @@ export const RTLSidebarStyle: Story = {
 export const RTLFAQStyle: Story = {
   render: () => {
     return (
-      <div className="w-full max-w-2xl space-y-2">
+      <div className="w-96 max-w-2xl space-y-2">
         {[
           {
             q: 'ما هو نظام التصميم هذا؟',

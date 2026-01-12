@@ -47,7 +47,7 @@ export const Default: Story = {
     const [value, setValue] = useState<[number, number]>([25, 75]);
 
     return (
-      <div className="w-full max-w-md">
+      <div className="w-80 max-w-md">
         <RangeSlider
           defaultValue={[25, 75]}
           value={value}
@@ -70,7 +70,7 @@ export const PriceRange: Story = {
     return (
       <Card>
         <CardContent className="p-6">
-          <div className="w-full max-w-md">
+          <div className="w-80 max-w-md">
             <RangeSlider
               min={0}
               max={1000}
@@ -103,7 +103,7 @@ export const AgeRange: Story = {
     return (
       <Card>
         <CardContent className="p-6">
-          <div className="w-full max-w-md space-y-2">
+          <div className="w-80 max-w-md space-y-2">
             <Label>Age Range: {ageRange[0]} - {ageRange[1]} years</Label>
             <RangeSlider
               min={18}
@@ -135,7 +135,7 @@ export const PercentageRange: Story = {
     return (
       <Card>
         <CardContent className="p-6">
-          <div className="w-full max-w-md">
+          <div className="w-80 max-w-md">
             <RangeSlider
               min={0}
               max={100}
@@ -167,7 +167,7 @@ export const WithLabels: Story = {
     return (
       <Card>
         <CardContent className="p-6">
-          <div className="w-full max-w-md">
+          <div className="w-80 max-w-md">
             <RangeSlider
               min={0}
               max={100}
@@ -198,7 +198,7 @@ export const WithoutLabels: Story = {
     return (
       <Card>
         <CardContent className="p-6">
-          <div className="w-full max-w-md space-y-2">
+          <div className="w-80 max-w-md space-y-2">
             <Label>Range: {value[0]} - {value[1]}</Label>
             <RangeSlider
               min={0}
@@ -228,7 +228,7 @@ export const CustomStep: Story = {
     return (
       <Card>
         <CardContent className="p-6">
-          <div className="w-full max-w-md space-y-2">
+          <div className="w-80 max-w-md space-y-2">
             <Label>Budget Range: ${value[0]} - ${value[1]}</Label>
             <RangeSlider
               min={0}
@@ -258,7 +258,7 @@ export const Disabled: Story = {
   render: () => (
     <Card>
       <CardContent className="p-6">
-        <div className="w-full max-w-md space-y-2">
+        <div className="w-80 max-w-md space-y-2">
           <Label>Disabled Range Slider</Label>
           <RangeSlider
             min={0}
@@ -288,7 +288,7 @@ export const TemperatureRange: Story = {
     return (
       <Card>
         <CardContent className="p-6">
-          <div className="w-full max-w-md space-y-2">
+          <div className="w-80 max-w-md space-y-2">
             <Label>Temperature Range: {tempRange[0]}°C - {tempRange[1]}°C</Label>
             <RangeSlider
               min={10}
@@ -322,7 +322,7 @@ export const RTL: Story = {
     return (
       <Card>
         <CardContent className="p-6">
-          <div className="w-full max-w-md space-y-2">
+          <div className="w-80 max-w-md space-y-2">
             <Label>نطاق السعر: {priceRange[0]}$ - {priceRange[1]}$</Label>
             <RangeSlider
               min={0}

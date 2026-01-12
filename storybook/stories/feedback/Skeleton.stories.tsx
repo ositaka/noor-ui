@@ -34,7 +34,7 @@ export const Default: Story = {
     locale: 'en'
   },
   render: () => (
-    <div className="flex items-center space-x-4 space-x-reverse">
+    <div className="flex items-center gap-4 space-x-reverse">
       <Skeleton className="h-12 w-12 rounded-full" />
       <div className="space-y-2 flex-1">
         <Skeleton className="h-4 w-full max-w-sm" />
@@ -57,7 +57,7 @@ export const CardSkeleton: Story = {
     <Card>
       <CardContent className="p-6">
         <div className="space-y-4">
-          <Skeleton className="h-48 w-full" />
+          <Skeleton className="h-48 w-80" />
           <div className="space-y-2">
             <Skeleton className="h-4 w-3/4" />
             <Skeleton className="h-4 w-1/2" />
@@ -85,7 +85,7 @@ export const ProfileSkeleton: Story = {
   render: () => (
     <Card>
       <CardContent className="p-6">
-        <div className="flex items-center space-x-4 space-x-reverse">
+        <div className="flex items-center gap-4 space-x-reverse">
           <Skeleton className="h-12 w-12 rounded-full" />
           <div className="space-y-2 flex-1">
             <Skeleton className="h-4 w-32" />
@@ -116,10 +116,10 @@ export const ListSkeleton: Story = {
       <CardContent className="p-6">
         <div className="space-y-4">
           {[1, 2, 3].map((i) => (
-            <div key={i} className="flex items-center space-x-4 space-x-reverse">
+            <div key={i} className="flex items-center gap-4 space-x-reverse">
               <Skeleton className="h-10 w-10 rounded" />
               <div className="space-y-2 flex-1">
-                <Skeleton className="h-4 w-full" />
+                <Skeleton className="h-4 w-80" />
                 <Skeleton className="h-3 w-2/3" />
               </div>
             </div>
@@ -145,7 +145,7 @@ export const ListSkeleton: Story = {
 // Text Lines
 export const TextLines: Story = {
   render: () => (
-    <div className="space-y-2 w-full max-w-md">
+    <div className="space-y-2 w-80 max-w-md">
       <Skeleton className="h-4 w-full" />
       <Skeleton className="h-4 w-full" />
       <Skeleton className="h-4 w-3/4" />
@@ -216,7 +216,7 @@ export const ButtonSkeleton: Story = {
 // All Patterns
 export const AllPatterns: Story = {
   render: () => (
-    <div className="space-y-6 w-full max-w-md">
+    <div className="space-y-6 w-80 max-w-md">
       <div>
         <h4 className="text-sm font-medium mb-2">Text Lines</h4>
         <div className="space-y-2">
@@ -258,7 +258,7 @@ export const RTLCardSkeleton: Story = {
     <Card>
       <CardContent className="p-6">
         <div className="space-y-4">
-          <Skeleton className="h-48 w-full" />
+          <Skeleton className="h-48 w-80" />
           <div className="space-y-2">
             <Skeleton className="h-4 w-3/4" />
             <Skeleton className="h-4 w-1/2" />
@@ -286,7 +286,7 @@ export const RTLProfileSkeleton: Story = {
   render: () => (
     <Card>
       <CardContent className="p-6">
-        <div className="flex items-center space-x-4 space-x-reverse">
+        <div className="flex items-center gap-4 space-x-reverse">
           <Skeleton className="h-12 w-12 rounded-full" />
           <div className="space-y-2 flex-1">
             <Skeleton className="h-4 w-32" />
@@ -315,9 +315,9 @@ export const RTLListSkeleton: Story = {
   render: () => (
     <Card>
       <CardContent className="p-6">
-        <div className="space-y-4">
+        <div className="space-y-4 w-80">
           {[1, 2, 3].map((i) => (
-            <div key={i} className="flex items-center space-x-4 space-x-reverse">
+            <div key={i} className="flex items-center gap-4 space-x-reverse">
               <Skeleton className="h-10 w-10 rounded" />
               <div className="space-y-2 flex-1">
                 <Skeleton className="h-4 w-full" />

@@ -185,6 +185,46 @@ export const ForwardOnly: Story = {
   }
 };
 
+// External Links
+export const ExternalLinks: Story = {
+  render: () => (
+      <Card>
+        <CardContent className="p-6">
+          <div className="flex flex-wrap gap-3">
+            <ButtonArrow direction="external" asChild>
+              <a href="https://storybook.noorui.com" target="_blank" rel="noopener noreferrer">
+                View Storybook
+              </a>
+            </ButtonArrow>
+            <ButtonArrow variant="outline" direction="external" asChild>
+              <a href="https://github.com/ositaka/noor-ui" target="_blank" rel="noopener noreferrer">
+                GitHub
+              </a>
+            </ButtonArrow>
+            <ButtonArrow variant="link" direction="external" className="h-auto p-0" asChild>
+              <a href="https://noorui.com" target="_blank" rel="noopener noreferrer">
+                Documentation
+              </a>
+            </ButtonArrow>
+          </div>
+        </CardContent>
+      </Card>
+  ),
+  globals: {
+    direction: 'ltr',
+    locale: 'en'
+  },
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      description: {
+        story: 'External link buttons with diagonal arrows that auto-mirror in RTL.'
+      }
+    }
+  }
+};
+
+
 // Back Only
 export const BackOnly: Story = {
   render: () => (
@@ -202,84 +242,6 @@ export const BackOnly: Story = {
     docs: {
       description: {
         story: 'Back direction buttons only.'
-      }
-    }
-  }
-};
-
-// External Links
-export const ExternalLinks: Story = {
-  render: () => (
-    <Card>
-      <CardContent className="p-6">
-        <div className="flex flex-wrap gap-3">
-          <ButtonArrow direction="external" asChild>
-            <a href="https://storybook.noorui.com" target="_blank" rel="noopener noreferrer">
-              View Storybook
-            </a>
-          </ButtonArrow>
-          <ButtonArrow variant="outline" direction="external" asChild>
-            <a href="https://github.com/ositaka/noor-ui" target="_blank" rel="noopener noreferrer">
-              GitHub
-            </a>
-          </ButtonArrow>
-          <ButtonArrow variant="link" direction="external" className="h-auto p-0" asChild>
-            <a href="https://noorui.com" target="_blank" rel="noopener noreferrer">
-              Documentation
-            </a>
-          </ButtonArrow>
-        </div>
-      </CardContent>
-    </Card>
-  ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'External link buttons with diagonal arrows that auto-mirror in RTL.'
-      }
-    }
-  }
-};
-
-// RTL External Links
-export const RTLExternalLinks: Story = {
-  render: () => (
-    <Card>
-      <CardContent className="p-6">
-        <div className="flex flex-wrap gap-3">
-          <ButtonArrow direction="external" asChild>
-            <a href="https://storybook.noorui.com" target="_blank" rel="noopener noreferrer">
-              عرض ستوريبوك
-            </a>
-          </ButtonArrow>
-          <ButtonArrow variant="outline" direction="external" asChild>
-            <a href="https://github.com/ositaka/noor-ui" target="_blank" rel="noopener noreferrer">
-              جِت هَب
-            </a>
-          </ButtonArrow>
-          <ButtonArrow variant="link" direction="external" className="h-auto p-0" asChild>
-            <a href="https://noorui.com" target="_blank" rel="noopener noreferrer">
-              التوثيق
-            </a>
-          </ButtonArrow>
-        </div>
-      </CardContent>
-    </Card>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'External links in RTL - diagonal arrows auto-mirror (↗ becomes ↖).'
       }
     }
   }
@@ -324,6 +286,45 @@ export const RTLBack: Story = {
     docs: {
       description: {
         story: 'Back buttons in RTL - arrows auto-flip.'
+      }
+    }
+  }
+};
+
+// RTL External Links
+export const RTLExternalLinks: Story = {
+  render: () => (
+      <Card>
+        <CardContent className="p-6">
+          <div className="flex flex-wrap gap-3">
+            <ButtonArrow direction="external" asChild>
+              <a href="https://storybook.noorui.com" target="_blank" rel="noopener noreferrer">
+                عرض ستوريبوك
+              </a>
+            </ButtonArrow>
+            <ButtonArrow variant="outline" direction="external" asChild>
+              <a href="https://github.com/ositaka/noor-ui" target="_blank" rel="noopener noreferrer">
+                جِت هَب
+              </a>
+            </ButtonArrow>
+            <ButtonArrow variant="link" direction="external" className="h-auto p-0" asChild>
+              <a href="https://noorui.com" target="_blank" rel="noopener noreferrer">
+                التوثيق
+              </a>
+            </ButtonArrow>
+          </div>
+        </CardContent>
+      </Card>
+  ),
+  globals: {
+    direction: 'rtl',
+    locale: 'ar'
+  },
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      description: {
+        story: 'External links in RTL - diagonal arrows auto-mirror (↗ becomes ↖).'
       }
     }
   }

@@ -3,13 +3,16 @@
 import * as React from 'react'
 import Link from 'next/link'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Copy, Check } from 'lucide-react'
+import { Copy, Check, Info } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { CodeBlock } from '@/components/docs/code-block'
 import { tokens } from '@/lib/tokens'
 import { copyToClipboard } from '@/lib/utils'
 import { useDirection } from '@/components/providers/direction-provider'
+import { useThemeTokens } from '@/hooks/use-theme-tokens'
+import { useDesignSystem } from '@/components/providers/design-system-provider'
 import { content } from '@/lib/i18n'
+import { Alert, AlertDescription } from '@/components/ui/alert'
 
 const ColorSwatch = ({ name, value }: { name: string; value: string }) => {
   const [copied, setCopied] = React.useState(false)
@@ -62,7 +65,7 @@ const TypographyExample = ({ size, config, sampleText }: { size: string; config:
     <div className="space-y-1">
       <div className="flex items-baseline gap-3">
         <span className="text-sm font-medium w-20">{size}</span>
-        <span style={{ fontSize: config[0], lineHeight: config[1].lineHeight }}>
+        <span className='line-clamp-1' style={{ fontSize: config[0], lineHeight: config[1].lineHeight }}>
           {sampleText}
         </span>
       </div>
@@ -73,9 +76,64 @@ const TypographyExample = ({ size, config, sampleText }: { size: string; config:
   )
 }
 
+// Helper function to get CSS variable value in HSL format
+function getCSSVarHSL(name: string): string {
+  if (typeof window === 'undefined') return '0 0% 0%'
+  const style = getComputedStyle(document.documentElement)
+  return style.getPropertyValue(name).trim() || '0 0% 0%'
+}
+
+// Generate CSS code for current theme
+function generateThemeCSS(themeName: string, isDark: boolean): string {
+  const className = isDark ? `.theme-${themeName}.dark` : `.theme-${themeName}`
+
+  return `/* ${themeName.charAt(0).toUpperCase() + themeName.slice(1)} theme${isDark ? ' - Dark mode' : ''} */
+${className} {
+  --background: ${getCSSVarHSL('--background')};
+  --foreground: ${getCSSVarHSL('--foreground')};
+  --card: ${getCSSVarHSL('--card')};
+  --card-foreground: ${getCSSVarHSL('--card-foreground')};
+  --popover: ${getCSSVarHSL('--popover')};
+  --popover-foreground: ${getCSSVarHSL('--popover-foreground')};
+  --primary: ${getCSSVarHSL('--primary')};
+  --primary-foreground: ${getCSSVarHSL('--primary-foreground')};
+  --secondary: ${getCSSVarHSL('--secondary')};
+  --secondary-foreground: ${getCSSVarHSL('--secondary-foreground')};
+  --muted: ${getCSSVarHSL('--muted')};
+  --muted-foreground: ${getCSSVarHSL('--muted-foreground')};
+  --accent: ${getCSSVarHSL('--accent')};
+  --accent-foreground: ${getCSSVarHSL('--accent-foreground')};
+  --destructive: ${getCSSVarHSL('--destructive')};
+  --destructive-foreground: ${getCSSVarHSL('--destructive-foreground')};
+  --border: ${getCSSVarHSL('--border')};
+  --input: ${getCSSVarHSL('--input')};
+  --ring: ${getCSSVarHSL('--ring')};
+  --radius: ${typeof window !== 'undefined' ? getComputedStyle(document.documentElement).getPropertyValue('--radius').trim() : '0.5rem'};
+}`
+}
+
 export default function TokensPage() {
   const { locale } = useDirection()
   const t = content[locale].tokens
+  const liveTokens = useThemeTokens()
+  const { designTheme } = useDesignSystem()
+  const [isDarkMode, setIsDarkMode] = React.useState(false)
+
+  React.useEffect(() => {
+    // Check if dark mode is active
+    const checkDarkMode = () => {
+      setIsDarkMode(document.documentElement.classList.contains('dark'))
+    }
+
+    checkDarkMode()
+
+    const observer = new MutationObserver(checkDarkMode)
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] })
+
+    return () => observer.disconnect()
+  }, [])
+
+  const themeCSS = React.useMemo(() => generateThemeCSS(designTheme, isDarkMode), [designTheme, isDarkMode])
 
   return (
     <div className="min-h-screen">
@@ -100,6 +158,12 @@ export default function TokensPage() {
           <p className="text-xl text-muted-foreground">
             {t.header.description}
           </p>
+          <Alert className="mt-6">
+            <Info className="h-4 w-4" />
+            <AlertDescription>
+              These values reflect the currently selected theme and update in real-time when you switch themes or toggle dark mode.
+            </AlertDescription>
+          </Alert>
         </div>
 
         {/* Colors */}
@@ -107,84 +171,81 @@ export default function TokensPage() {
           <h2 className="text-3xl font-bold tracking-tight mb-6">{t.colors.sectionTitle}</h2>
 
           <div className="grid gap-8 lg:grid-cols-2">
-            {/* Primary */}
+            {/* Brand Colors */}
             <Card>
               <CardHeader>
-                <CardTitle>{t.colors.primary.title}</CardTitle>
-                <CardDescription>{t.colors.primary.description}</CardDescription>
+                <CardTitle>Brand Colors</CardTitle>
+                <CardDescription>Primary and secondary brand colors</CardDescription>
               </CardHeader>
               <CardContent className="space-y-1">
-                {Object.entries(tokens.colors.primary).map(([shade, value]) => (
-                  <ColorSwatch key={shade} name={shade} value={value} />
-                ))}
+                <ColorSwatch name="primary" value={liveTokens.colors.primary} />
+                <ColorSwatch name="primary-foreground" value={liveTokens.colors.primaryForeground} />
+                <ColorSwatch name="secondary" value={liveTokens.colors.secondary} />
+                <ColorSwatch name="secondary-foreground" value={liveTokens.colors.secondaryForeground} />
               </CardContent>
             </Card>
 
-            {/* Secondary */}
+            {/* UI Colors */}
             <Card>
               <CardHeader>
-                <CardTitle>{t.colors.secondary.title}</CardTitle>
-                <CardDescription>{t.colors.secondary.description}</CardDescription>
+                <CardTitle>UI Colors</CardTitle>
+                <CardDescription>Interface background and text colors</CardDescription>
               </CardHeader>
               <CardContent className="space-y-1">
-                {Object.entries(tokens.colors.secondary).map(([shade, value]) => (
-                  <ColorSwatch key={shade} name={shade} value={value} />
-                ))}
+                <ColorSwatch name="background" value={liveTokens.colors.background} />
+                <ColorSwatch name="foreground" value={liveTokens.colors.foreground} />
+                <ColorSwatch name="card" value={liveTokens.colors.card} />
+                <ColorSwatch name="card-foreground" value={liveTokens.colors.cardForeground} />
+                <ColorSwatch name="popover" value={liveTokens.colors.popover} />
+                <ColorSwatch name="popover-foreground" value={liveTokens.colors.popoverForeground} />
               </CardContent>
             </Card>
 
-            {/* Neutral */}
+            {/* Accent Colors */}
             <Card>
               <CardHeader>
-                <CardTitle>{t.colors.neutral.title}</CardTitle>
-                <CardDescription>{t.colors.neutral.description}</CardDescription>
+                <CardTitle>Accent Colors</CardTitle>
+                <CardDescription>Muted and accent colors for subtle UI elements</CardDescription>
               </CardHeader>
               <CardContent className="space-y-1">
-                {Object.entries(tokens.colors.neutral).map(([shade, value]) => (
-                  <ColorSwatch key={shade} name={shade} value={value} />
-                ))}
+                <ColorSwatch name="muted" value={liveTokens.colors.muted} />
+                <ColorSwatch name="muted-foreground" value={liveTokens.colors.mutedForeground} />
+                <ColorSwatch name="accent" value={liveTokens.colors.accent} />
+                <ColorSwatch name="accent-foreground" value={liveTokens.colors.accentForeground} />
               </CardContent>
             </Card>
 
-            {/* Semantic Colors */}
+            {/* State Colors */}
             <Card>
               <CardHeader>
-                <CardTitle>{t.colors.semantic.title}</CardTitle>
-                <CardDescription>{t.colors.semantic.description}</CardDescription>
+                <CardTitle>State & Border Colors</CardTitle>
+                <CardDescription>Destructive state, borders, and focus rings</CardDescription>
               </CardHeader>
-              <CardContent className="space-y-3">
-                <div>
-                  <div className="text-sm font-medium mb-2">{t.colors.semantic.success}</div>
-                  <div className="grid grid-cols-2 gap-1">
-                    {Object.entries(tokens.colors.success).slice(3, 7).map(([shade, value]) => (
-                      <ColorSwatch key={shade} name={shade} value={value} />
-                    ))}
-                  </div>
-                </div>
-                <div>
-                  <div className="text-sm font-medium mb-2">{t.colors.semantic.error}</div>
-                  <div className="grid grid-cols-2 gap-1">
-                    {Object.entries(tokens.colors.error).slice(3, 7).map(([shade, value]) => (
-                      <ColorSwatch key={shade} name={shade} value={value} />
-                    ))}
-                  </div>
-                </div>
-                <div>
-                  <div className="text-sm font-medium mb-2">{t.colors.semantic.warning}</div>
-                  <div className="grid grid-cols-2 gap-1">
-                    {Object.entries(tokens.colors.warning).slice(3, 7).map(([shade, value]) => (
-                      <ColorSwatch key={shade} name={shade} value={value} />
-                    ))}
-                  </div>
-                </div>
-                <div>
-                  <div className="text-sm font-medium mb-2">{t.colors.semantic.info}</div>
-                  <div className="grid grid-cols-2 gap-1">
-                    {Object.entries(tokens.colors.info).slice(3, 7).map(([shade, value]) => (
-                      <ColorSwatch key={shade} name={shade} value={value} />
-                    ))}
-                  </div>
-                </div>
+              <CardContent className="space-y-1">
+                <ColorSwatch name="destructive" value={liveTokens.colors.destructive} />
+                <ColorSwatch name="destructive-foreground" value={liveTokens.colors.destructiveForeground} />
+                <ColorSwatch name="border" value={liveTokens.colors.border} />
+                <ColorSwatch name="input" value={liveTokens.colors.input} />
+                <ColorSwatch name="ring" value={liveTokens.colors.ring} />
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* CSS Setup */}
+          <div className="mt-8">
+            <Card>
+              <CardHeader>
+                <CardTitle>CSS Setup</CardTitle>
+                <CardDescription>
+                  Copy and paste this CSS into your <code className="text-xs">globals.css</code> file to use this theme
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <CodeBlock
+                  code={themeCSS}
+                  language="css"
+                  showLineNumbers={false}
+                />
               </CardContent>
             </Card>
           </div>
@@ -212,7 +273,7 @@ export default function TokensPage() {
         <section className="mb-16" id="typography">
           <h2 className="text-3xl font-bold tracking-tight mb-6">{t.typography.sectionTitle}</h2>
 
-          <div className="grid gap-6 lg:grid-cols-2">
+          <div className="grid gap-6">
             {/* Font Families */}
             <Card>
               <CardHeader>
@@ -295,6 +356,28 @@ export default function TokensPage() {
         {/* Border Radius */}
         <section className="mb-16" id="border-radius">
           <h2 className="text-3xl font-bold tracking-tight mb-6">{t.radius.sectionTitle}</h2>
+
+          {/* Current Theme Radius */}
+          <Card className="mb-6">
+            <CardHeader>
+              <CardTitle>Current Theme Radius</CardTitle>
+              <CardDescription>
+                The border radius for the currently selected theme
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-2">
+                <div className="text-sm font-medium">--radius</div>
+                <div
+                  className="h-32 w-full bg-primary/20 border-2 border-primary"
+                  style={{ borderRadius: liveTokens.radius }}
+                />
+                <div className="text-xs text-muted-foreground font-mono">{liveTokens.radius}</div>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Base Radius Scale */}
           <Card>
             <CardHeader>
               <CardTitle>{t.radius.title}</CardTitle>

@@ -361,7 +361,7 @@ export const RTLDetailed: Story = {
 // RTL Notification
 export const RTLNotification: Story = {
   render: () => (
-    <div className="max-w-md w-full">
+    <div className="max-w-md w-80">
       <PrayerTimes
         prayers={samplePrayers}
         nextPrayer="المغرب"

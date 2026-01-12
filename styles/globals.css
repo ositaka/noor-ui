@@ -104,6 +104,7 @@
     --border: 240 10% 20%;
     --input: 240 10% 20%;
     --radius: 0.75rem;
+    --ring: 270 80% 60%;
   }
 
   .theme-futuristic.dark {
@@ -130,6 +131,7 @@
     --accent-foreground: 25 25% 15%;
     --border: 35 20% 85%;
     --radius: 1.25rem;
+    --ring: 25 85% 55%;
     letter-spacing: 0.015em;
     line-height: 1.7;
   }
@@ -165,6 +167,7 @@
     --accent-foreground: 280 60% 20%;
     --border: 0 0% 88%;
     --radius: 0.125rem;
+    --ring: 280 60% 50%;
   }
 
   .theme-artistic.dark {

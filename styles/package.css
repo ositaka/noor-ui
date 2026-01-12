@@ -14,7 +14,7 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
+    --background: 220 13% 99%;
     --foreground: 222.2 84% 4.9%;
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
@@ -60,7 +60,7 @@
 
   /* Minimal theme */
   .theme-minimal {
-    --background: 0 0% 100%;
+    --background: 220 13% 99%;
     --foreground: 0 0% 10%;
     --card: 0 0% 100%;
     --card-foreground: 0 0% 10%;
@@ -107,6 +107,7 @@
     --accent: 270 80% 60%;
     --accent-foreground: 0 0% 100%;
     --border: 240 10% 20%;
+    --input: 240 10% 20%;
     --radius: 0.75rem;
   }
 
@@ -149,6 +150,7 @@
     --muted-foreground: 35 10% 65%;
     --accent: 25 20% 20%;
     --accent-foreground: 35 20% 95%;
+    --input: 25 10% 25%;
     --border: 25 10% 25%;
   }
 
@@ -182,6 +184,7 @@
     --muted-foreground: 0 0% 60%;
     --accent: 280 60% 15%;
     --accent-foreground: 280 60% 90%;
+    --input: 0 0% 18%;
     --border: 0 0% 18%;
   }
 

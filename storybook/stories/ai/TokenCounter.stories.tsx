@@ -107,7 +107,7 @@ export const WarningStates: Story = {
   render: () => (
     <Card>
       <CardContent className="p-6">
-        <div className="space-y-4">
+        <div className="space-y-12 w-80">
           <div>
             <p className="text-sm text-muted-foreground mb-2">Safe (&lt; 70%)</p>
             <TokenCounter
@@ -155,7 +155,7 @@ export const DifferentModels: Story = {
   render: () => (
     <Card>
       <CardContent className="p-6">
-        <div className="space-y-4">
+        <div className="space-y-12 w-80">
           <div>
             <p className="text-sm font-medium mb-2">GPT-4 (expensive)</p>
             <TokenCounter
@@ -264,7 +264,7 @@ export const CustomThresholds: Story = {
 export const WithoutCost: Story = {
   render: () => (
     <Card>
-      <CardContent className="p-6">
+      <CardContent className="p-6 w-80">
         <div className="max-w-md">
           <TokenCounter
             inputTokens={1250}
@@ -328,7 +328,7 @@ export const SafeState: Story = {
 // RTL With Cost
 export const RTLWithCost: Story = {
   render: () => (
-    <div className="max-w-md w-full">
+    <div className="max-w-md w-80">
       <TokenCounter
         inputTokens={1250}
         outputTokens={850}
@@ -359,7 +359,7 @@ export const RTLWarningStates: Story = {
   render: () => (
     <Card>
       <CardContent className="p-6">
-        <div className="space-y-4">
+        <div className="space-y-12 w-80">
           <div>
             <p className="text-sm text-muted-foreground mb-2">آمن (&lt; ٧٠٪)</p>
             <TokenCounter

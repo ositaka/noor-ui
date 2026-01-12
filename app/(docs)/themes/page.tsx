@@ -446,6 +446,7 @@ function ThemeControls() {
                   <Button variant="secondary">{t.themesPage.preview.secondary}</Button>
                   <Button variant="outline">{t.themesPage.preview.outline}</Button>
                   <Button variant="ghost">{t.themesPage.preview.ghost}</Button>
+                  <Button variant="destructive">Destructive</Button>
                 </div>
 
                 <div className="flex gap-2">

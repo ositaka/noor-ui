@@ -91,12 +91,14 @@ Build the **go-to design system for bilingual (LTR/RTL) web applications**, star
 - ✅ Version and release strategy established
 - ✅ Automated pre-publish checks (translations, links, types)
 
-**Current Version:** v0.5.0 (2026-01-12)
+**Current Version:** v0.5.1 (2026-01-12)
 
 **Latest Updates:**
-- ✅ Added 'external' direction to ButtonArrow component for external links
-- ✅ Diagonal arrow icon (↗) with automatic RTL mirroring (↖)
-- ✅ Storybook integration on noorui.com website
+- ✅ Enhanced CSS custom properties for all themes
+- ✅ Improved color consistency across light and dark modes
+- ✅ Added live theme visualization to Design Tokens page
+- ✅ New useThemeTokens hook for real-time CSS variable display
+- ✅ Added CSS Setup section showing exact theme code
 - ✅ 74+ components with complete RTL/LTR support
 
 **Deliverables:**
@@ -496,7 +498,7 @@ toast({
 **Priority:** Medium-High (common pattern users expect from a UI library)
 
 **Status:** Pending
-**Target:** v0.5.0
+**Target:** v0.6.0
 
 ---
 
@@ -549,4 +551,4 @@ toast({
 **Priority:** Medium (improves component completeness)
 
 **Status:** Pending
-**Target:** v0.5.0
+**Target:** v0.6.0

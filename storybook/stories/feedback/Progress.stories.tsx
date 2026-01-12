@@ -46,7 +46,7 @@ export const Default: Story = {
     direction: 'ltr',
     locale: 'en'
   },
-  render: (args) => <Progress {...args} className="w-full max-w-md" />,
+  render: (args) => <Progress {...args} className="w-80 max-w-md" />,
   parameters: {
     docs: {
       story: {
@@ -58,7 +58,7 @@ export const Default: Story = {
 
 // Basic - from component page line 140
 export const Basic: Story = {
-  render: () => <Progress value={33} className="w-[60%]" />,
+  render: () => <Progress value={33} className="w-80" />,
   globals: {
     direction: 'ltr',
     locale: 'en'
@@ -76,7 +76,7 @@ export const Basic: Story = {
 // With Label - from component page lines 153-159
 export const WithLabel: Story = {
   render: () => (
-    <div className="space-y-2 w-[60%]">
+    <div className="space-y-2 w-80">
       <div className="flex justify-between text-sm">
         <span>Progress</span>
         <span>60%</span>
@@ -101,7 +101,7 @@ export const WithLabel: Story = {
 // With Shimmer - from component page line 175
 export const WithShimmer: Story = {
   render: () => (
-    <div className="w-[60%]">
+    <div className="w-80">
       <p className="text-sm text-muted-foreground mb-4">
         The progress bar includes an animated shimmer effect that continuously slides across,
         giving a "live" feel.
@@ -126,7 +126,7 @@ export const WithShimmer: Story = {
 // Different Sizes - from component page lines 185-201
 export const DifferentSizes: Story = {
   render: () => (
-    <div className="space-y-4 w-[60%]">
+    <div className="space-y-4 w-80">
       <div className="space-y-1">
         <p className="text-xs text-muted-foreground">Extra Small (h-1)</p>
         <Progress value={50} className="h-1" />
@@ -162,7 +162,7 @@ export const DifferentSizes: Story = {
 // Different Colors - from component page lines 215-227
 export const DifferentColors: Story = {
   render: () => (
-    <div className="space-y-4 w-[60%]">
+    <div className="space-y-4 w-80">
       <div className="space-y-1">
         <p className="text-xs text-muted-foreground">Blue</p>
         <Progress value={50} className="[&>div]:bg-blue-500" />
@@ -210,7 +210,7 @@ export const UploadProgress: Story = {
     };
 
     return (
-      <div className="space-y-4 w-[60%]">
+      <div className="space-y-4 w-80">
         <Button onClick={startUpload}>Start Upload</Button>
         <div className="space-y-2">
           <div className="flex justify-between text-sm">
@@ -242,7 +242,7 @@ export const UploadProgress: Story = {
 // All Sizes
 export const AllSizes: Story = {
   render: () => (
-    <div className="space-y-6 w-full max-w-md">
+    <div className="space-y-6 w-80 max-w-md">
       <div>
         <h4 className="text-sm font-medium mb-2">h-1</h4>
         <Progress value={25} className="h-1" />
@@ -277,7 +277,7 @@ export const AllSizes: Story = {
 
 // RTL Basic
 export const RTLBasic: Story = {
-  render: () => <Progress value={33} className="w-[60%]" />,
+  render: () => <Progress value={33} className="w-80" />,
   globals: {
     direction: 'rtl',
     locale: 'ar'
@@ -295,7 +295,7 @@ export const RTLBasic: Story = {
 // RTL With Label
 export const RTLWithLabel: Story = {
   render: () => (
-    <div className="space-y-2 w-[60%]">
+    <div className="space-y-2 w-80">
       <div className="flex justify-between text-sm">
         <span>التقدم</span>
         <span>60%</span>
@@ -336,7 +336,7 @@ export const RTLUploadProgress: Story = {
     };
 
     return (
-      <div className="space-y-4 w-[60%]">
+      <div className="space-y-4 w-80">
         <Button onClick={startUpload}>بدء التحميل</Button>
         <div className="space-y-2">
           <div className="flex justify-between text-sm">
