@@ -14,7 +14,7 @@ import { content } from '@/lib/i18n'
 const getButtonArrowProps = (t: typeof content.en | typeof content.ar): PropDefinition[] => [
   {
     name: 'direction',
-    type: "'forward' | 'back'",
+    type: "'forward' | 'back' | 'external'",
     default: "'forward'",
     required: false,
     description: t.buttonArrowComponent.props.direction,
@@ -67,7 +67,14 @@ const directionsCode = `// Forward: progresses the user flow
 <ButtonArrow direction="forward">Next Step</ButtonArrow>
 
 // Back: returns to previous state
-<ButtonArrow direction="back">Previous Step</ButtonArrow>`
+<ButtonArrow direction="back">Previous Step</ButtonArrow>
+
+// External: for external links (diagonal arrow)
+<ButtonArrow direction="external" asChild>
+  <a href="https://example.com" target="_blank" rel="noopener noreferrer">
+    External Link
+  </a>
+</ButtonArrow>`
 
 const iconStylesCode = `// Chevron style (default)
 <ButtonArrow direction="forward" icon="chevron">
@@ -77,12 +84,26 @@ const iconStylesCode = `// Chevron style (default)
 // Arrow style
 <ButtonArrow direction="forward" icon="arrow">
   Learn More
+</ButtonArrow>
+
+// External uses diagonal arrow (different icon type)
+<ButtonArrow direction="external" asChild>
+  <a href="https://example.com" target="_blank" rel="noopener noreferrer">
+    External Link
+  </a>
 </ButtonArrow>`
 
 const variantsCode = `<ButtonArrow variant="primary" direction="forward">Primary</ButtonArrow>
 <ButtonArrow variant="secondary" direction="back">Secondary</ButtonArrow>
 <ButtonArrow variant="outline" direction="forward">Outline</ButtonArrow>
-<ButtonArrow variant="ghost" direction="back">Ghost</ButtonArrow>`
+<ButtonArrow variant="ghost" direction="back">Ghost</ButtonArrow>
+
+// Link variant (text link style with external direction)
+<ButtonArrow variant="link" direction="external" className="h-auto p-0" asChild>
+  <a href="https://example.com" target="_blank" rel="noopener noreferrer">
+    Link Style
+  </a>
+</ButtonArrow>`
 
 const rtlCode = `// Works automatically in RTL contexts!
 // In LTR: "Back" arrow points left
@@ -135,6 +156,11 @@ export default function ButtonArrowPage() {
               <div className="flex flex-wrap gap-4">
                 <ButtonArrow direction="forward">{t.buttonArrowComponent.continue}</ButtonArrow>
                 <ButtonArrow direction="back">{t.buttonArrowComponent.backToBlog}</ButtonArrow>
+                <ButtonArrow direction="external" asChild>
+                  <a href="https://storybook.noorui.com" target="_blank" rel="noopener noreferrer">
+                    {t.storybook.viewInStorybook}
+                  </a>
+                </ButtonArrow>
               </div>
             </ComponentShowcase.Demo>
           </ComponentShowcase>
@@ -165,6 +191,11 @@ export default function ButtonArrowPage() {
                   <div className="flex flex-wrap gap-3">
                     <ButtonArrow direction="forward">{t.buttonArrowComponent.nextStep}</ButtonArrow>
                     <ButtonArrow direction="back">{t.buttonArrowComponent.previousStep}</ButtonArrow>
+                    <ButtonArrow direction="external" asChild>
+                      <a href="https://example.com" target="_blank" rel="noopener noreferrer">
+                        External Link
+                      </a>
+                    </ButtonArrow>
                   </div>
                 </CardContent>
               </Card>
@@ -183,6 +214,11 @@ export default function ButtonArrowPage() {
                     <ButtonArrow direction="forward" icon="arrow">{t.buttonArrowComponent.learnMore}</ButtonArrow>
                     <ButtonArrow direction="back" icon="chevron">{t.buttonArrowComponent.goBack}</ButtonArrow>
                     <ButtonArrow direction="back" icon="arrow">{t.buttonArrowComponent.goBack}</ButtonArrow>
+                    <ButtonArrow direction="external" asChild>
+                      <a href="https://example.com" target="_blank" rel="noopener noreferrer">
+                        External Link
+                      </a>
+                    </ButtonArrow>
                   </div>
                 </CardContent>
               </Card>
@@ -201,6 +237,11 @@ export default function ButtonArrowPage() {
                     <ButtonArrow variant="secondary" direction="back">{t.buttonComponent.secondary}</ButtonArrow>
                     <ButtonArrow variant="outline" direction="forward">{t.buttonComponent.outline}</ButtonArrow>
                     <ButtonArrow variant="ghost" direction="back">{t.buttonComponent.ghost}</ButtonArrow>
+                    <ButtonArrow variant="link" direction="external" className="h-auto p-0" asChild>
+                      <a href="https://example.com" target="_blank" rel="noopener noreferrer">
+                        Link Style
+                      </a>
+                    </ButtonArrow>
                   </div>
                 </CardContent>
               </Card>

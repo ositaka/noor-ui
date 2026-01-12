@@ -56,11 +56,11 @@ export default function HomePage() {
                   {t.home.hero.cta.secondary}
                 </Link>
               </Button>
-              <Button size="lg" variant="ghost" asChild>
+              <ButtonArrow size="lg" variant="ghost" direction="external" asChild>
                 <a href="https://storybook.noorui.com" target="_blank" rel="noopener noreferrer">
-                  {t.storybook.tryStorybook} ↗
+                  {t.storybook.tryStorybook}
                 </a>
-              </Button>
+              </ButtonArrow>
             </div>
           </div>
         </section>

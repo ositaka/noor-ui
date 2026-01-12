@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { ChevronLeft, ChevronRight, ArrowLeft, ArrowRight } from 'lucide-react'
+import { ChevronLeft, ChevronRight, ArrowLeft, ArrowRight, ArrowUpRight } from 'lucide-react'
 import { cn } from '../../lib/utils'
 import { Button, buttonVariants, type ButtonProps } from './button'
 import { cva, type VariantProps } from 'class-variance-authority'
@@ -9,8 +9,9 @@ import { Slot } from '@radix-ui/react-slot'
  * Arrow direction semantics:
  * - 'forward': Arrow points in the direction of progression (right in LTR, left in RTL)
  * - 'back': Arrow points in the opposite direction (left in LTR, right in RTL)
+ * - 'external': Diagonal arrow for external links (↗ in LTR, ↖ in RTL)
  */
-type ArrowDirection = 'forward' | 'back'
+type ArrowDirection = 'forward' | 'back' | 'external'
 
 /**
  * Arrow icon style:
@@ -58,6 +59,13 @@ const iconSizeClasses = {
  *   Back to Blog
  * </ButtonArrow>
  *
+ * // External link button (diagonal arrow, ↗ in LTR, ↖ in RTL)
+ * <ButtonArrow direction="external" asChild>
+ *   <a href="https://example.com" target="_blank" rel="noopener noreferrer">
+ *     View Documentation
+ *   </a>
+ * </ButtonArrow>
+ *
  * // With arrow style
  * <ButtonArrow direction="forward" icon="arrow">
  *   Next Step
@@ -80,15 +88,19 @@ const ButtonArrow = React.forwardRef<HTMLButtonElement, ButtonArrowProps>(
     ref
   ) => {
     // Determine icon position based on direction if set to 'auto'
-    // Forward: icon at end, Back: icon at start
+    // Forward: icon at end, Back: icon at start, External: icon at end
     const resolvedPosition = iconPosition === 'auto'
-      ? (direction === 'forward' ? 'end' : 'start')
+      ? (direction === 'back' ? 'start' : 'end')
       : iconPosition
 
     // Select the appropriate icon based on direction and style
     // For 'forward': right chevron/arrow that rotates in RTL
     // For 'back': left chevron/arrow that rotates in RTL
+    // For 'external': diagonal up-right arrow that mirrors in RTL
     const IconComponent = React.useMemo(() => {
+      if (direction === 'external') {
+        return ArrowUpRight
+      }
       if (icon === 'chevron') {
         return direction === 'forward' ? ChevronRight : ChevronLeft
       }
@@ -97,7 +109,8 @@ const ButtonArrow = React.forwardRef<HTMLButtonElement, ButtonArrowProps>(
 
     const iconClasses = cn(
       iconSizeClasses[iconSize],
-      'rtl:rotate-180',
+      // External links need horizontal mirroring (scale-x), not rotation
+      direction === 'external' ? 'rtl:scale-x-[-1]' : 'rtl:rotate-180',
       'shrink-0',
       'transition-transform duration-200'
     )
