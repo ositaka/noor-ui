@@ -7,7 +7,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { type Theme, themeConfig } from '@/lib/tokens'
 import { Check } from 'lucide-react'
 import { useDirection } from '@/components/providers/direction-provider'
-import { useDesignSystem } from '@/components/providers/design-system-provider'
 import { content } from '@/lib/i18n'
 
 interface ThemeSwitcherProps {
@@ -16,11 +15,57 @@ interface ThemeSwitcherProps {
 
 export function ThemeSwitcher({ className }: ThemeSwitcherProps) {
   const { direction, locale } = useDirection()
-  const { designTheme, setDesignTheme } = useDesignSystem()
   const t = content[locale]
   const isRTL = direction === 'rtl'
+  const [mounted, setMounted] = React.useState(false)
+  const [designTheme, setDesignThemeState] = React.useState<Theme>('minimal')
 
   const themes: Theme[] = ['minimal', 'futuristic', 'cozy', 'artistic']
+
+  React.useEffect(() => {
+    setMounted(true)
+    // Get theme from DOM after mounting
+    const theme = document.documentElement.className.match(/theme-(\w+)/)?.[1] as Theme || 'minimal'
+    setDesignThemeState(theme)
+
+    // Watch for theme changes
+    const observer = new MutationObserver(() => {
+      const newTheme = document.documentElement.className.match(/theme-(\w+)/)?.[1] as Theme || 'minimal'
+      setDesignThemeState(newTheme)
+    })
+
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] })
+
+    return () => observer.disconnect()
+  }, [])
+
+  const setDesignTheme = React.useCallback((theme: Theme) => {
+    if (!mounted) return
+
+    // Manually update the DOM
+    const root = document.documentElement
+    root.classList.remove('theme-minimal', 'theme-futuristic', 'theme-cozy', 'theme-artistic')
+    root.classList.add(`theme-${theme}`)
+
+    // Update URL
+    const params = new URLSearchParams(window.location.search)
+    params.set('theme', theme)
+    const newUrl = `${window.location.pathname}?${params.toString()}`
+    window.history.pushState({}, '', newUrl)
+
+    // Store in localStorage
+    try {
+      localStorage.setItem('design-theme', theme)
+    } catch (e) {
+      // Ignore
+    }
+
+    setDesignThemeState(theme)
+  }, [mounted])
+
+  if (!mounted) {
+    return null
+  }
 
   return (
     <div className={cn('space-y-4', className)}>

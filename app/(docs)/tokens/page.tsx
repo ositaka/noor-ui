@@ -6,11 +6,10 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Copy, Check, Info } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { CodeBlock } from '@/components/docs/code-block'
-import { tokens } from '@/lib/tokens'
+import { tokens, type Theme } from '@/lib/tokens'
 import { copyToClipboard } from '@/lib/utils'
 import { useDirection } from '@/components/providers/direction-provider'
 import { useThemeTokens } from '@/hooks/use-theme-tokens'
-import { useDesignSystem } from '@/components/providers/design-system-provider'
 import { content } from '@/lib/i18n'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 
@@ -116,10 +115,17 @@ export default function TokensPage() {
   const { locale } = useDirection()
   const t = content[locale].tokens
   const liveTokens = useThemeTokens()
-  const { designTheme } = useDesignSystem()
+  const [designTheme, setDesignTheme] = React.useState<Theme>('minimal')
   const [isDarkMode, setIsDarkMode] = React.useState(false)
+  const [mounted, setMounted] = React.useState(false)
 
   React.useEffect(() => {
+    setMounted(true)
+
+    // Get theme from DOM
+    const theme = document.documentElement.className.match(/theme-(\w+)/)?.[1] as Theme || 'minimal'
+    setDesignTheme(theme)
+
     // Check if dark mode is active
     const checkDarkMode = () => {
       setIsDarkMode(document.documentElement.classList.contains('dark'))
@@ -127,13 +133,19 @@ export default function TokensPage() {
 
     checkDarkMode()
 
-    const observer = new MutationObserver(checkDarkMode)
+    const observer = new MutationObserver(() => {
+      // Update both theme and dark mode
+      const newTheme = document.documentElement.className.match(/theme-(\w+)/)?.[1] as Theme || 'minimal'
+      setDesignTheme(newTheme)
+      checkDarkMode()
+    })
+
     observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] })
 
     return () => observer.disconnect()
   }, [])
 
-  const themeCSS = React.useMemo(() => generateThemeCSS(designTheme, isDarkMode), [designTheme, isDarkMode])
+  const themeCSS = React.useMemo(() => mounted ? generateThemeCSS(designTheme, isDarkMode) : '', [designTheme, isDarkMode, mounted])
 
   return (
     <div className="min-h-screen">
