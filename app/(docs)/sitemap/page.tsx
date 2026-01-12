@@ -5,6 +5,7 @@ import { content } from '@/lib/i18n';
 import { useDirection } from '@/components/providers/direction-provider';
 import { Separator } from '@/components/ui/separator';
 import { Card } from '@/components/ui/card';
+import { ButtonArrow } from '@/components/ui/button-arrow';
 
 export default function SitemapPage() {
   const { locale } = useDirection();
@@ -143,14 +144,15 @@ export default function SitemapPage() {
             {resources.map((item) => (
               <li key={item.href}>
                 {item.external ? (
-                  <a
-                    href={item.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-primary hover:underline"
-                  >
-                    {t.sitemap.links[item.nameKey as keyof typeof t.sitemap.links]} ↗
-                  </a>
+                  <ButtonArrow variant="link" direction="external" className="h-auto p-0" asChild>
+                    <a
+                      href={item.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {t.sitemap.links[item.nameKey as keyof typeof t.sitemap.links]}
+                    </a>
+                  </ButtonArrow>
                 ) : (
                   <Link
                     href={item.href}

@@ -22,7 +22,7 @@ const meta = {
   argTypes: {
     direction: {
       control: { type: 'select' },
-      options: ['forward', 'back']
+      options: ['forward', 'back', 'external']
     },
     icon: {
       control: { type: 'select' },
@@ -74,6 +74,11 @@ export const Directions: Story = {
         <div className="flex flex-wrap gap-3">
           <ButtonArrow direction="forward">Next Step</ButtonArrow>
           <ButtonArrow direction="back">Previous Step</ButtonArrow>
+          <ButtonArrow direction="external" asChild>
+            <a href="https://storybook.noorui.com" target="_blank" rel="noopener noreferrer">
+              View in Storybook
+            </a>
+          </ButtonArrow>
         </div>
     </CardContent>
     </Card>
@@ -86,13 +91,13 @@ export const Directions: Story = {
     controls: { disable: true },
     docs: {
       description: {
-        story: 'Forward and back directional buttons.'
+        story: 'Forward, back, and external directional buttons.'
       }
     }
   }
 };
 
-// Icon Styles - from component page lines 182-186
+// Icon Styles - from component page lines 207-228
 export const IconStyles: Story = {
   render: () => (
     <Card>
@@ -102,6 +107,11 @@ export const IconStyles: Story = {
           <ButtonArrow direction="forward" icon="arrow">Learn More</ButtonArrow>
           <ButtonArrow direction="back" icon="chevron">Go Back</ButtonArrow>
           <ButtonArrow direction="back" icon="arrow">Go Back</ButtonArrow>
+          <ButtonArrow direction="external" asChild>
+            <a href="https://example.com" target="_blank" rel="noopener noreferrer">
+              External Link
+            </a>
+          </ButtonArrow>
         </div>
       </CardContent>
     </Card>
@@ -114,13 +124,13 @@ export const IconStyles: Story = {
     controls: { disable: true },
     docs: {
       description: {
-        story: 'Chevron and arrow icon styles.'
+        story: 'Chevron, arrow, and external diagonal arrow icon styles.'
       }
     }
   }
 };
 
-// With Variants
+// With Variants - from component page lines 230-251
 export const WithVariants: Story = {
   render: () => (
     <Card>
@@ -130,6 +140,11 @@ export const WithVariants: Story = {
           <ButtonArrow variant="secondary" direction="back">Secondary</ButtonArrow>
           <ButtonArrow variant="outline" direction="forward">Outline</ButtonArrow>
           <ButtonArrow variant="ghost" direction="back">Ghost</ButtonArrow>
+          <ButtonArrow variant="link" direction="external" className="h-auto p-0" asChild>
+            <a href="https://example.com" target="_blank" rel="noopener noreferrer">
+              Link Style
+            </a>
+          </ButtonArrow>
         </div>
       </CardContent>
     </Card>
@@ -142,7 +157,7 @@ export const WithVariants: Story = {
     controls: { disable: true },
     docs: {
       description: {
-        story: 'ButtonArrow with all button variants.'
+        story: 'ButtonArrow with all button variants including link variant.'
       }
     }
   }
@@ -187,6 +202,84 @@ export const BackOnly: Story = {
     docs: {
       description: {
         story: 'Back direction buttons only.'
+      }
+    }
+  }
+};
+
+// External Links
+export const ExternalLinks: Story = {
+  render: () => (
+    <Card>
+      <CardContent className="p-6">
+        <div className="flex flex-wrap gap-3">
+          <ButtonArrow direction="external" asChild>
+            <a href="https://storybook.noorui.com" target="_blank" rel="noopener noreferrer">
+              View Storybook
+            </a>
+          </ButtonArrow>
+          <ButtonArrow variant="outline" direction="external" asChild>
+            <a href="https://github.com/ositaka/noor-ui" target="_blank" rel="noopener noreferrer">
+              GitHub
+            </a>
+          </ButtonArrow>
+          <ButtonArrow variant="link" direction="external" className="h-auto p-0" asChild>
+            <a href="https://noorui.com" target="_blank" rel="noopener noreferrer">
+              Documentation
+            </a>
+          </ButtonArrow>
+        </div>
+      </CardContent>
+    </Card>
+  ),
+  globals: {
+    direction: 'ltr',
+    locale: 'en'
+  },
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      description: {
+        story: 'External link buttons with diagonal arrows that auto-mirror in RTL.'
+      }
+    }
+  }
+};
+
+// RTL External Links
+export const RTLExternalLinks: Story = {
+  render: () => (
+    <Card>
+      <CardContent className="p-6">
+        <div className="flex flex-wrap gap-3">
+          <ButtonArrow direction="external" asChild>
+            <a href="https://storybook.noorui.com" target="_blank" rel="noopener noreferrer">
+              عرض ستوريبوك
+            </a>
+          </ButtonArrow>
+          <ButtonArrow variant="outline" direction="external" asChild>
+            <a href="https://github.com/ositaka/noor-ui" target="_blank" rel="noopener noreferrer">
+              جِت هَب
+            </a>
+          </ButtonArrow>
+          <ButtonArrow variant="link" direction="external" className="h-auto p-0" asChild>
+            <a href="https://noorui.com" target="_blank" rel="noopener noreferrer">
+              التوثيق
+            </a>
+          </ButtonArrow>
+        </div>
+      </CardContent>
+    </Card>
+  ),
+  globals: {
+    direction: 'rtl',
+    locale: 'ar'
+  },
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      description: {
+        story: 'External links in RTL - diagonal arrows auto-mirror (↗ becomes ↖).'
       }
     }
   }

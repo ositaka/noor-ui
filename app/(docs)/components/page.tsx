@@ -4,6 +4,7 @@ import * as React from 'react'
 import Link from 'next/link'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
+import { ButtonArrow } from '@/components/ui/button-arrow'
 import { Input } from '@/components/ui/input'
 import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
@@ -241,11 +242,11 @@ export default function ComponentsPage() {
           </p>
 
           <div>
-            <Button asChild>
+            <ButtonArrow direction="external" asChild>
               <a href="https://storybook.noorui.com" target="_blank" rel="noopener noreferrer">
-                {t.storybook.exploreStorybook} ↗
+                {t.storybook.exploreStorybook}
               </a>
-            </Button>
+            </ButtonArrow>
           </div>
         </div>
 

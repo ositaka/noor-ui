@@ -6,6 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Button } from '@/components/ui/button'
+import { ButtonArrow } from '@/components/ui/button-arrow'
 import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
 import {
@@ -193,12 +194,16 @@ export default function AccessibleInputsPage() {
     <div className="container max-w-6xl py-10">
       {/* Header */}
       <div className="mb-8">
-        <Link
-          href="/examples"
-          className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground mb-4"
+        <ButtonArrow
+          variant="link"
+          direction="back"
+          className="h-auto p-0 text-sm text-muted-foreground hover:text-foreground mb-4"
+          asChild
         >
-          ← {t.accessibleInputsPage.backToExamples}
-        </Link>
+          <Link href="/examples">
+            {t.accessibleInputsPage.backToExamples}
+          </Link>
+        </ButtonArrow>
 
         <div className="flex items-center gap-3 mb-4">
           <h1 className="text-4xl font-bold tracking-tight">
