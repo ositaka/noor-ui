@@ -13,6 +13,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - TimePicker & TimeRangePicker popups appear on wrong side in RTL mode
   - Need to add automatic direction detection (similar to DropdownMenu pattern)
 
+## [0.5.1] - 2026-01-12
+
+### Improved
+- **Theme System**: Enhanced CSS custom properties for all themes
+  - Improved color consistency across light and dark modes
+  - Refined semantic color tokens (background, foreground, card, muted, accent)
+  - Better border and input colors for improved visual hierarchy
+  - More accurate HSL values for smoother theme transitions
+
+- **Design Tokens Page**: Added live theme visualization
+  - New hook (`useThemeTokens`) to read and display live CSS custom properties
+  - Real-time color swatches that update when switching themes or toggling dark mode
+  - Added "CSS Setup" section showing the exact CSS code for the current theme
+  - Removed static base color scales to reduce noise and focus on semantic tokens
+  - Users can now copy the exact CSS needed to implement any theme
+
+### Notes
+This release improves the theme system's visual consistency and makes it easier for developers to understand and implement themes. The Design Tokens page now serves as a live reference for the current theme's CSS variables.
+
+---
+
 ## [0.5.0] - 2026-01-12
 
 ### Added

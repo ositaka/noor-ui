@@ -29,6 +29,7 @@ import {
   Calendar,
 } from 'lucide-react'
 import { useDirection } from '@/components/providers/direction-provider'
+import { DirectionToggle } from '@/components/docs/direction-toggle'
 import { content } from '@/lib/i18n'
 
 export default function DashboardPage() {
@@ -221,23 +222,26 @@ export default function DashboardPage() {
       <div className="border-b bg-background">
         <div className="container py-3">
           <nav aria-label="Breadcrumb">
-            <ol className="flex items-center gap-2 text-sm text-muted-foreground">
-              <li>
-                <Link href="/" className="hover:text-foreground transition-colors">
-                  {locale === 'ar' ? 'الرئيسية' : 'Home'}
-                </Link>
-              </li>
-              <li>/</li>
-              <li>
-                <Link href="/examples" className="hover:text-foreground transition-colors">
-                  {locale === 'ar' ? 'الأمثلة' : 'Examples'}
-                </Link>
-              </li>
-              <li>/</li>
-              <li className="text-foreground font-medium">
-                {locale === 'ar' ? 'لوحة التحكم' : 'Dashboard'}
-              </li>
-            </ol>
+            <div className="flex items-center justify-between gap-4">
+              <ol className="flex items-center gap-2 text-sm text-muted-foreground">
+                <li>
+                  <Link href="/" className="hover:text-foreground transition-colors">
+                    {locale === 'ar' ? 'الرئيسية' : 'Home'}
+                  </Link>
+                </li>
+                <li>/</li>
+                <li>
+                  <Link href="/examples" className="hover:text-foreground transition-colors">
+                    {locale === 'ar' ? 'الأمثلة' : 'Examples'}
+                  </Link>
+                </li>
+                <li>/</li>
+                <li className="text-foreground font-medium">
+                  {locale === 'ar' ? 'لوحة التحكم' : 'Dashboard'}
+                </li>
+              </ol>
+              <DirectionToggle />
+            </div>
           </nav>
         </div>
       </div>

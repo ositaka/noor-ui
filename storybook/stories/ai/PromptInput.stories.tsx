@@ -52,7 +52,7 @@ export const Default: Story = {
   render: (args) => {
     const [value, setValue] = useState('');
     return (
-      <div className="max-w-2xl w-full">
+      <div className="max-w-2xl w-96">
         <PromptInput
           {...args}
           value={value}
@@ -79,7 +79,7 @@ export const WithFeatures: Story = {
   render: () => (
     <Card>
       <CardContent className="p-6">
-        <div className="max-w-2xl">
+        <div className="max-w-2xl w-96">
           <PromptInput
             onSend={(value) => console.log('Sent:', value)}
             showAttachment
@@ -151,7 +151,7 @@ export const ControlledComponent: Story = {
     return (
       <Card>
         <CardContent className="p-6">
-          <div className="max-w-2xl space-y-4">
+          <div className="max-w-2xl w-96 space-y-4">
             <PromptInput
               value={value}
               onChange={(e) => setValue(e.target.value)}
@@ -187,7 +187,7 @@ export const BasicInput: Story = {
   render: () => (
     <Card>
       <CardContent className="p-6">
-        <div className="max-w-2xl">
+        <div className="max-w-2xl w-96">
           <PromptInput
             onSend={(value) => console.log('Sent:', value)}
             placeholder="Type your message..."
@@ -217,7 +217,7 @@ export const WithCounter: Story = {
     return (
       <Card>
         <CardContent className="p-6">
-          <div className="max-w-2xl space-y-3">
+          <div className="max-w-2xl space-y-3 w-96">
             <PromptInput
               value={value}
               onChange={(e) => setValue(e.target.value)}
@@ -287,7 +287,7 @@ export const WithAttachment: Story = {
 // RTL Default - from component page lines 376-381
 export const RTLDefault: Story = {
   render: () => (
-    <div className="max-w-2xl w-full">
+    <div className="max-w-2xl w-96">
       <PromptInput
         onSend={(value) => console.log('Sent:', value)}
         isRTL
@@ -314,7 +314,7 @@ export const RTLWithFeatures: Story = {
   render: () => (
     <Card>
       <CardContent className="p-6">
-        <div className="max-w-2xl">
+        <div className="max-w-2xl w-96">
           <PromptInput
             onSend={(value) => console.log('Sent:', value)}
             showAttachment

@@ -57,7 +57,7 @@ export const Default: Story = {
   render: () => (
     <ContextMenu>
       <ContextMenuTrigger>
-        <Card className="w-full max-w-md h-32 flex items-center justify-center border-dashed border-2 cursor-context-menu">
+        <Card className="w-full max-w-md h-32 px-4 flex items-center justify-center border-dashed border-2 cursor-context-menu">
           <p className="text-muted-foreground">Right click here</p>
         </Card>
       </ContextMenuTrigger>
@@ -104,7 +104,7 @@ export const BasicUsage: Story = {
   render: () => (
     <ContextMenu>
       <ContextMenuTrigger>
-        <Card className="w-full max-w-md h-32 flex items-center justify-center border-dashed border-2 cursor-context-menu">
+        <Card className="w-full max-w-md h-32 px-4 flex items-center justify-center border-dashed border-2 cursor-context-menu">
           <p className="text-muted-foreground">Right click here</p>
         </Card>
       </ContextMenuTrigger>
@@ -355,7 +355,7 @@ export const RTLBasic: Story = {
   render: () => (
     <ContextMenu>
       <ContextMenuTrigger>
-        <Card className="w-full max-w-md h-32 flex items-center justify-center border-dashed border-2 cursor-context-menu">
+        <Card className="w-full max-w-md h-32 px-4 flex items-center justify-center border-dashed border-2 cursor-context-menu">
           <p className="text-muted-foreground">انقر بزر الماوس الأيمن هنا</p>
         </Card>
       </ContextMenuTrigger>

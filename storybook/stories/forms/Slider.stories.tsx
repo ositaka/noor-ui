@@ -43,7 +43,7 @@ export const Default: Story = {
     locale: 'en'
   },
   render: (args) => (
-    <div className="w-[300px]">
+    <div className="w-80">
       <Slider {...args} />
     </div>
   ),
@@ -59,7 +59,7 @@ export const Default: Story = {
 // With Label - from component page lines 268-283
 export const WithLabel: Story = {
   render: () => (
-    <div className="w-[300px] space-y-2">
+    <div className="w-80 space-y-2">
       <div className="flex items-center justify-between">
         <Label htmlFor="volume">Volume</Label>
         <span className="text-sm text-muted-foreground">50%</span>
@@ -82,7 +82,7 @@ export const DifferentRanges: Story = {
     const [value, setValue] = React.useState([50]);
 
     return (
-      <div className="w-[300px] space-y-2">
+      <div className="w-80 space-y-2">
         <div className="flex items-center justify-between">
           <Label>Temperature: {value[0]}°C</Label>
         </div>
@@ -108,7 +108,7 @@ export const DifferentRanges: Story = {
 // Different Step Sizes - from component page lines 304-333
 export const DifferentSteps: Story = {
   render: () => (
-    <div className="w-[300px] space-y-6">
+    <div className="w-80 space-y-6">
       <div className="space-y-2">
         <Label>Fine control (step: 1)</Label>
         <Slider defaultValue={[50]} max={100} step={1} />
@@ -147,7 +147,7 @@ export const DifferentSteps: Story = {
 // Disabled State - from component page lines 335-354
 export const DisabledState: Story = {
   render: () => (
-    <div className="w-[300px] space-y-4">
+    <div className="w-80 space-y-4">
       <div className="space-y-2">
         <Label>Enabled slider</Label>
         <Slider defaultValue={[50]} max={100} step={1} />
@@ -175,7 +175,7 @@ export const VolumeControl: Story = {
     const isMuted = volume[0] === 0;
 
     return (
-      <div className="w-[350px] space-y-4">
+      <div className="w-80 space-y-4">
         <div className="flex items-center gap-4">
           <Button
             variant="ghost"
@@ -222,7 +222,7 @@ export const PriceRange: Story = {
     const [priceRange, setPriceRange] = React.useState([20, 80]);
 
     return (
-      <div className="w-[300px] space-y-4">
+      <div className="w-80 space-y-4">
         <div className="flex items-center justify-between">
           <Label>Price Range</Label>
           <span className="text-sm text-muted-foreground">
@@ -253,7 +253,7 @@ export const PriceRange: Story = {
 // RTL Example
 export const RTLExample: Story = {
   render: () => (
-    <div className="w-[300px] space-y-2">
+    <div className="w-80 space-y-2">
       <Label htmlFor="rtl-volume">مستوى الصوت</Label>
       <Slider id="rtl-volume" defaultValue={[50]} max={100} step={1} />
     </div>
@@ -275,7 +275,7 @@ export const RTLExample: Story = {
 // RTL With Label and Value
 export const RTLWithLabel: Story = {
   render: () => (
-    <div className="w-[300px] space-y-2">
+    <div className="w-80 space-y-2">
       <div className="flex items-center justify-between">
         <Label htmlFor="volume-rtl">مستوى الصوت</Label>
         <span className="text-sm text-muted-foreground">50%</span>
@@ -298,7 +298,7 @@ export const RTLDifferentRanges: Story = {
     const [value, setValue] = React.useState([50]);
 
     return (
-      <div className="w-[300px] space-y-2">
+      <div className="w-80 space-y-2">
         <div className="flex items-center justify-between">
           <Label>درجة الحرارة: {value[0]}°C</Label>
         </div>
@@ -319,7 +319,7 @@ export const RTLDifferentRanges: Story = {
 // RTL Different Steps
 export const RTLDifferentSteps: Story = {
   render: () => (
-    <div className="w-[300px] space-y-6">
+    <div className="w-80 space-y-6">
       <div className="space-y-2">
         <Label>تحكم دقيق (الخطوة: 1)</Label>
         <Slider defaultValue={[50]} max={100} step={1} />
@@ -352,7 +352,7 @@ export const RTLVolumeControl: Story = {
     const isMuted = volume[0] === 0;
 
     return (
-      <div className="w-[350px] space-y-4">
+      <div className="w-80 space-y-4">
         <div className="flex items-center gap-4">
           <Button
             variant="ghost"
@@ -399,7 +399,7 @@ export const RTLPriceRange: Story = {
     const [priceRange, setPriceRange] = React.useState([20, 80]);
 
     return (
-      <div className="w-[300px] space-y-4">
+      <div className="w-80 space-y-4">
         <div className="flex items-center justify-between">
           <Label>نطاق السعر</Label>
           <span className="text-sm text-muted-foreground">

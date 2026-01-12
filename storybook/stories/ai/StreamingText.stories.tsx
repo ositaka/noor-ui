@@ -50,7 +50,7 @@ export const Default: Story = {
 // Fast Speed
 export const FastSpeed: Story = {
   render: () => (
-    <Card>
+    <Card className="w-96">
       <CardHeader>
         <CardTitle>Fast Streaming</CardTitle>
         <CardDescription>Text streams at 10ms per character</CardDescription>
@@ -75,7 +75,7 @@ export const FastSpeed: Story = {
 // Slow Speed
 export const SlowSpeed: Story = {
   render: () => (
-    <Card>
+    <Card className="w-96">
       <CardHeader>
         <CardTitle>Slow Streaming</CardTitle>
         <CardDescription>Text streams at 100ms per character</CardDescription>
@@ -100,7 +100,7 @@ export const SlowSpeed: Story = {
 // Without Cursor
 export const WithoutCursor: Story = {
   render: () => (
-    <Card>
+      <Card className="w-96">
       <CardHeader>
         <CardTitle>No Cursor</CardTitle>
         <CardDescription>Streaming text without blinking cursor</CardDescription>
@@ -154,7 +154,7 @@ export const ChatMessageSimulation: Story = {
     const [showResponse, setShowResponse] = useState(false);
 
     return (
-      <Card>
+      <Card className="w-96">
         <CardHeader>
           <CardTitle>Chat Simulation</CardTitle>
           <CardDescription>Simulated AI chat response</CardDescription>
@@ -202,7 +202,7 @@ export const WithCompletionCallback: Story = {
     const [completed, setCompleted] = useState(false);
 
     return (
-      <Card>
+      <Card className="w-96">
         <CardHeader>
           <CardTitle>Completion Callback</CardTitle>
           <CardDescription>Triggers action when streaming completes</CardDescription>
@@ -261,7 +261,7 @@ export const NotStreaming: Story = {
 // RTL
 export const RTL: Story = {
   render: () => (
-    <Card>
+    <Card className="w-96">
       <CardHeader>
         <CardTitle>نص متدفق</CardTitle>
         <CardDescription>نص عربي مع تأثير الكتابة المباشرة</CardDescription>

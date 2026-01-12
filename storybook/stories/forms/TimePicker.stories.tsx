@@ -53,7 +53,7 @@ export const Default: Story = {
 
     return (
       <div className="w-full max-w-xs space-y-2">
-        <Label>Start Time</Label>
+        <Label className='me-4'>Start Time</Label>
         <TimePicker {...args} time={time} onTimeChange={(t) => t && setTime(t)} />
         <p className="text-sm text-muted-foreground">{formatTime(time)}</p>
       </div>
@@ -82,7 +82,7 @@ export const Basic24hFormat: Story = {
 
     return (
       <div className="w-full max-w-xs mx-auto space-y-2">
-        <Label>Start Time</Label>
+        <Label className='me-4'>Start Time</Label>
         <TimePicker
           time={time}
           onTimeChange={(t) => t && setTime(t)}
@@ -122,7 +122,7 @@ export const Format12h: Story = {
 
     return (
       <div className="w-full max-w-xs mx-auto space-y-2">
-        <Label>Appointment Time</Label>
+        <Label className='me-4'>Appointment Time</Label>
         <TimePicker
           time={time}
           onTimeChange={(t) => t && setTime(t)}
@@ -181,7 +181,7 @@ export const TimeRange: Story = {
 
     return (
       <div className="w-full max-w-md mx-auto space-y-2">
-        <Label>Working Hours</Label>
+        <Label className='me-4'>Working Hours</Label>
         <TimeRangePicker
           timeRange={timeRange}
           onTimeRangeChange={setTimeRange}
@@ -222,7 +222,7 @@ export const MinuteIntervals: Story = {
 
     return (
       <div className="w-full max-w-xs mx-auto space-y-2">
-        <Label>Time</Label>
+        <Label className='me-4'>Time</Label>
         <TimePicker
           time={time}
           onTimeChange={(t) => t && setTime(t)}
@@ -283,7 +283,7 @@ export const MedicalAppointment: Story = {
         </CardHeader>
         <CardContent className="space-y-6">
           <div className="space-y-2">
-            <Label>Preferred Time</Label>
+            <Label className='me-4'>Preferred Time</Label>
             <TimePicker
               time={time}
               onTimeChange={setTime}
@@ -372,7 +372,7 @@ export const WorkSchedule: Story = {
         </CardHeader>
         <CardContent className="space-y-6">
           <div className="space-y-2">
-            <Label>Working Hours</Label>
+            <Label className='me-4'>Working Hours</Label>
             <TimeRangePicker
               timeRange={timeRange}
               onTimeRangeChange={setTimeRange}
@@ -428,7 +428,7 @@ export const DisabledState: Story = {
   render: () => (
     <div className="w-full max-w-xs mx-auto space-y-4">
       <div className="space-y-2">
-        <Label>Enabled Time Picker</Label>
+        <Label className='me-4'>Enabled Time Picker</Label>
         <TimePicker
           time={{ hours: 9, minutes: 30 }}
           placeholder="Pick a time"
@@ -437,7 +437,7 @@ export const DisabledState: Story = {
       </div>
 
       <div className="space-y-2">
-        <Label>Disabled Time Picker</Label>
+        <Label className='me-4'>Disabled Time Picker</Label>
         <TimePicker
           time={{ hours: 9, minutes: 30 }}
           placeholder="Pick a time"
@@ -475,7 +475,7 @@ export const RTLExample: Story = {
 
     return (
       <div className="w-full max-w-xs mx-auto space-y-2">
-        <Label>وقت البدء</Label>
+        <Label className='me-4'>وقت البدء</Label>
         <TimePicker
           time={time}
           onTimeChange={(t) => t && setTime(t)}
@@ -515,7 +515,7 @@ export const RTL12hFormat: Story = {
 
     return (
       <div className="w-full max-w-xs mx-auto space-y-2">
-        <Label>وقت الموعد</Label>
+        <Label className='me-4'>وقت الموعد</Label>
         <TimePicker
           time={time}
           onTimeChange={(t) => t && setTime(t)}
@@ -574,7 +574,7 @@ export const RTLMedicalAppointment: Story = {
         </CardHeader>
         <CardContent className="space-y-6">
           <div className="space-y-2">
-            <Label>الوقت المفضل</Label>
+            <Label className='me-4'>الوقت المفضل</Label>
             <TimePicker
               time={time}
               onTimeChange={setTime}

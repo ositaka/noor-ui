@@ -1723,7 +1723,7 @@ common: {
     since: 'Since',
     stats: {
       products: 'Products',
-      completedOrders: 'Completed Orders',
+      completedOrders: 'Orders',
       returnRate: 'Return Rate',
       responseTime: 'Response Time',
     },

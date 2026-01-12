@@ -103,7 +103,7 @@ export const Default: Story = {
     locale: 'en'
   },
   render: (args) => (
-    <div className="w-full max-w-4xl">
+    <div className="w-full max-w-4xl" style={{ minWidth: '800px'}}>
       <Stepper {...args} />
     </div>
   ),
@@ -122,7 +122,7 @@ export const BasicStepper: Story = {
     const [currentStep, setCurrentStep] = React.useState(1);
 
     return (
-      <div className="w-full max-w-4xl space-y-8">
+      <div className="w-full max-w-4xl space-y-8" style={{ minWidth: '800px'}}>
         <Stepper
           steps={stepsData}
           currentStep={currentStep}
@@ -166,7 +166,7 @@ export const SimpleVariant: Story = {
     const [currentStep, setCurrentStep] = React.useState(1);
 
     return (
-      <div className="w-full max-w-4xl space-y-8">
+      <div className="w-full max-w-4xl space-y-8" style={{ minWidth: '900px'}}>
         <Stepper
           steps={stepsData}
           currentStep={currentStep}
@@ -211,7 +211,7 @@ export const CirclesVariant: Story = {
     const [currentStep, setCurrentStep] = React.useState(1);
 
     return (
-      <div className="w-full max-w-4xl space-y-8">
+      <div className="w-full max-w-4xl space-y-8" style={{ minWidth: '800px'}}>
         <Stepper
           steps={stepsData}
           currentStep={currentStep}
@@ -301,7 +301,7 @@ export const WithAllowSkip: Story = {
     const [currentStep, setCurrentStep] = React.useState(0);
 
     return (
-      <div className="w-full max-w-4xl space-y-8">
+      <div className="w-full max-w-4xl space-y-8" style={{ minWidth: '800px'}}>
         <Stepper
           steps={stepsData}
           currentStep={currentStep}
@@ -349,7 +349,7 @@ export const InCard: Story = {
     const [currentStep, setCurrentStep] = React.useState(2);
 
     return (
-      <Card className="w-full max-w-4xl">
+      <Card className="w-full max-w-4xl" style={{ minWidth: '800px'}}>
         <CardContent className="p-6">
           <h3 className="text-lg font-semibold mb-6">Registration Progress</h3>
           <Stepper
@@ -396,7 +396,7 @@ export const RTLExample: Story = {
     const [currentStep, setCurrentStep] = React.useState(1);
 
     return (
-      <div className="w-full max-w-4xl space-y-8">
+      <div className="w-full max-w-4xl space-y-8" style={{ minWidth: '680px'}}>
         <Stepper
           steps={stepsData}
           currentStep={currentStep}
@@ -440,7 +440,7 @@ export const RTLSimpleVariant: Story = {
     const [currentStep, setCurrentStep] = React.useState(1);
 
     return (
-      <div className="w-full max-w-4xl space-y-8">
+      <div className="w-full max-w-4xl space-y-8" style={{ minWidth: '800px'}}>
         <Stepper
           steps={stepsData}
           currentStep={currentStep}
@@ -485,7 +485,7 @@ export const RTLCirclesVariant: Story = {
     const [currentStep, setCurrentStep] = React.useState(1);
 
     return (
-      <div className="w-full max-w-4xl space-y-8">
+      <div className="w-full max-w-4xl space-y-8" style={{ minWidth: '800px'}}>
         <Stepper
           steps={stepsData}
           currentStep={currentStep}

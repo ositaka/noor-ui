@@ -47,7 +47,7 @@ export const Default: Story = {
     locale: 'en'
   },
   render: (args) => (
-    <Tabs {...args} className="w-full max-w-md">
+    <Tabs {...args} className="w-96 max-w-md">
       <TabsList className="grid w-full grid-cols-3">
         <TabsTrigger value="account">Account</TabsTrigger>
         <TabsTrigger value="password">Password</TabsTrigger>
@@ -94,7 +94,7 @@ export const Default: Story = {
 // Basic Tabs - from component page lines 128-161
 export const BasicTabs: Story = {
   render: () => (
-    <Tabs defaultValue="account" className="w-full max-w-md">
+    <Tabs defaultValue="account" className="w-96 max-w-md">
       <TabsList className="grid w-full grid-cols-3">
         <TabsTrigger value="account">Account</TabsTrigger>
         <TabsTrigger value="password">Password</TabsTrigger>
@@ -146,7 +146,7 @@ export const BasicTabs: Story = {
 // With Icons - from component page lines 188-213
 export const WithIcons: Story = {
   render: () => (
-    <Tabs defaultValue="profile" className="w-full max-w-md">
+    <Tabs defaultValue="profile" className="w-96 max-w-md">
       <TabsList className="grid w-full grid-cols-2">
         <TabsTrigger value="profile" className="gap-2">
           <User className="h-4 w-4" />
@@ -193,7 +193,7 @@ export const Controlled: Story = {
     const [activeTab, setActiveTab] = React.useState('account');
 
     return (
-      <div className="space-y-4 w-full max-w-md">
+      <div className="space-y-4 w-96 max-w-md">
         <p className="text-sm text-muted-foreground">Active tab: {activeTab}</p>
         <Tabs value={activeTab} onValueChange={setActiveTab}>
           <TabsList className="grid w-full grid-cols-3">
@@ -243,7 +243,7 @@ export const Controlled: Story = {
 // Two Tabs
 export const TwoTabs: Story = {
   render: () => (
-    <Tabs defaultValue="overview" className="w-full max-w-md">
+    <Tabs defaultValue="overview" className="w-96 max-w-md">
       <TabsList className="grid w-full grid-cols-2">
         <TabsTrigger value="overview">Overview</TabsTrigger>
         <TabsTrigger value="analytics">Analytics</TabsTrigger>
@@ -285,7 +285,7 @@ export const TwoTabs: Story = {
 // RTL Example - Basic
 export const RTLExample: Story = {
   render: () => (
-    <Tabs defaultValue="account" className="w-full max-w-md">
+    <Tabs defaultValue="account" className="w-96 max-w-md">
       <TabsList className="grid w-full grid-cols-3">
         <TabsTrigger value="account">الحساب</TabsTrigger>
         <TabsTrigger value="password">كلمة المرور</TabsTrigger>
@@ -337,7 +337,7 @@ export const RTLExample: Story = {
 // RTL With Icons
 export const RTLWithIcons: Story = {
   render: () => (
-    <Tabs defaultValue="profile" className="w-full max-w-md">
+    <Tabs defaultValue="profile" className="w-96 max-w-md">
       <TabsList className="grid w-full grid-cols-2">
         <TabsTrigger value="profile" className="gap-2">
           <User className="h-4 w-4" />
@@ -384,7 +384,7 @@ export const RTLControlled: Story = {
     const [activeTab, setActiveTab] = React.useState('account');
 
     return (
-      <div className="space-y-4 w-full max-w-md">
+      <div className="space-y-4 w-96 max-w-md">
         <p className="text-sm text-muted-foreground">علامة التبويب النشطة: {activeTab}</p>
         <Tabs value={activeTab} onValueChange={setActiveTab}>
           <TabsList className="grid w-full grid-cols-3">

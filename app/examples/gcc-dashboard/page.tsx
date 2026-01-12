@@ -4,6 +4,7 @@ import * as React from 'react'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import { useDirection } from '@/components/providers/direction-provider'
+import { DirectionToggle } from '@/components/docs/direction-toggle'
 import { content } from '@/lib/i18n'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -117,23 +118,26 @@ export default function GCCDashboardPage() {
       <div className="border-b bg-background">
         <div className="container py-3">
           <nav aria-label="Breadcrumb">
-            <ol className="flex items-center gap-2 text-sm text-muted-foreground">
-              <li>
-                <Link href="/" className="hover:text-foreground transition-colors">
-                  {t.common.home}
-                </Link>
-              </li>
-              <li>/</li>
-              <li>
-                <Link href="/examples" className="hover:text-foreground transition-colors">
-                  {t.nav.examples}
-                </Link>
-              </li>
-              <li>/</li>
-              <li className="text-foreground font-medium">
-                {t.gccDashboard.subtitle}
-              </li>
-            </ol>
+            <div className="flex items-center justify-between gap-4">
+              <ol className="flex items-center gap-2 text-sm text-muted-foreground">
+                <li>
+                  <Link href="/" className="hover:text-foreground transition-colors">
+                    {t.common.home}
+                  </Link>
+                </li>
+                <li>/</li>
+                <li>
+                  <Link href="/examples" className="hover:text-foreground transition-colors">
+                    {t.nav.examples}
+                  </Link>
+                </li>
+                <li>/</li>
+                <li className="text-foreground font-medium">
+                  {t.gccDashboard.subtitle}
+                </li>
+              </ol>
+              <DirectionToggle />
+            </div>
           </nav>
         </div>
       </div>

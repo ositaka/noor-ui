@@ -246,7 +246,7 @@ export const Conversation: Story = {
 // RTL Assistant - from code lines 133-138
 export const RTLAssistant: Story = {
   render: () => (
-    <div className="w-full max-w-2xl">
+    <div className="w-96 max-w-2xl">
       <ChatMessage
         role="assistant"
         content="مرحباً! كيف يمكنني مساعدتك اليوم؟"
@@ -272,7 +272,7 @@ export const RTLAssistant: Story = {
 // RTL User
 export const RTLUser: Story = {
   render: () => (
-    <div className="w-full max-w-2xl">
+    <div className="w-96 max-w-2xl">
       <ChatMessage
         role="user"
         content="ما هو الطقس اليوم؟"

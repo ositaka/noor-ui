@@ -55,7 +55,7 @@ export const Default: Story = {
     locale: 'en'
   },
   render: (args) => (
-    <Accordion {...args} className="w-full max-w-md">
+    <Accordion {...args} className="w-96 max-w-md">
       <AccordionItem value="item-1">
         <AccordionTrigger>Is it accessible?</AccordionTrigger>
         <AccordionContent>
@@ -88,7 +88,7 @@ export const Default: Story = {
 // Basic FAQ - from component page lines 199-218
 export const BasicFAQ: Story = {
   render: () => (
-    <Accordion type="single" collapsible className="w-full max-w-md">
+    <Accordion type="single" collapsible className="w-96 max-w-md">
       <AccordionItem value="item-1">
         <AccordionTrigger>Is it accessible?</AccordionTrigger>
         <AccordionContent>
@@ -126,7 +126,7 @@ export const BasicFAQ: Story = {
 // Multiple Items Open - from component page lines 245-264
 export const MultipleOpen: Story = {
   render: () => (
-    <Accordion type="multiple" defaultValue={['item-1', 'item-2']} className="w-full max-w-md">
+    <Accordion type="multiple" defaultValue={['item-1', 'item-2']} className="w-96 max-w-md">
       <AccordionItem value="item-1">
         <AccordionTrigger>Account</AccordionTrigger>
         <AccordionContent>
@@ -164,7 +164,7 @@ export const MultipleOpen: Story = {
 // With Icons - from component page lines 272-307
 export const WithIcons: Story = {
   render: () => (
-    <Accordion type="single" collapsible className="w-full max-w-md">
+    <Accordion type="single" collapsible className="w-96 max-w-md">
       <AccordionItem value="item-1">
         <AccordionTrigger>
           <div className="flex items-center gap-2">
@@ -220,7 +220,7 @@ export const Controlled: Story = {
     const [value, setValue] = React.useState<string>('item-1');
 
     return (
-      <div className="space-y-4 w-full max-w-md">
+      <div className="space-y-4 w-96 max-w-md">
         <p className="text-sm text-muted-foreground">Active item: {value || 'none'}</p>
         <Accordion type="single" value={value} onValueChange={setValue}>
           <AccordionItem value="item-1">
@@ -262,7 +262,7 @@ export const Controlled: Story = {
 // In Card
 export const InCard: Story = {
   render: () => (
-    <Card className="w-full max-w-md">
+    <Card className="w-96 max-w-md">
       <CardContent className="p-6">
         <h3 className="font-semibold mb-4">Frequently Asked Questions</h3>
         <Accordion type="single" collapsible>
@@ -305,7 +305,7 @@ export const InCard: Story = {
 // RTL Example - Basic FAQ
 export const RTLExample: Story = {
   render: () => (
-    <Accordion type="single" collapsible className="w-full max-w-md">
+    <Accordion type="single" collapsible className="w-96 max-w-md">
       <AccordionItem value="item-1">
         <AccordionTrigger>هل يمكن الوصول إليه؟</AccordionTrigger>
         <AccordionContent>
@@ -343,7 +343,7 @@ export const RTLExample: Story = {
 // RTL Multiple Open
 export const RTLMultipleOpen: Story = {
   render: () => (
-    <Accordion type="multiple" defaultValue={['item-1', 'item-2']} className="w-full max-w-md">
+    <Accordion type="multiple" defaultValue={['item-1', 'item-2']} className="w-96 max-w-md">
       <AccordionItem value="item-1">
         <AccordionTrigger>الحساب</AccordionTrigger>
         <AccordionContent>
@@ -381,7 +381,7 @@ export const RTLMultipleOpen: Story = {
 // RTL With Icons
 export const RTLWithIcons: Story = {
   render: () => (
-    <Accordion type="single" collapsible className="w-full max-w-md">
+    <Accordion type="single" collapsible className="w-96 max-w-md">
       <AccordionItem value="item-1">
         <AccordionTrigger>
           <div className="flex items-center gap-2">
@@ -437,7 +437,7 @@ export const RTLControlled: Story = {
     const [value, setValue] = React.useState<string>('item-1');
 
     return (
-      <div className="space-y-4 w-full max-w-md">
+      <div className="space-y-4 w-96 max-w-md">
         <p className="text-sm text-muted-foreground">العنصر النشط: {value || 'لا شيء'}</p>
         <Accordion type="single" value={value} onValueChange={setValue}>
           <AccordionItem value="item-1">
