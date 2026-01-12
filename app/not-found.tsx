@@ -32,11 +32,6 @@ export default function NotFound() {
           <div className="flex justify-center">
             <div className="relative">
               <Search className="h-32 w-32 text-muted-foreground/20" />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="h-16 w-16 rounded-full bg-muted flex items-center justify-center">
-                  <span className="text-4xl">🔍</span>
-                </div>
-              </div>
             </div>
           </div>
 

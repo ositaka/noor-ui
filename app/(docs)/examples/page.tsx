@@ -111,7 +111,7 @@ export default function ExamplesPage() {
                 example.status === 'ready'
                   ? 'hover:border-primary/50 cursor-pointer'
                   : 'opacity-60'
-              } ${example.featured ? 'border-primary/30 bg-primary/5' : ''}`}>
+              }`}>
                 <CardHeader>
                   <div className="flex items-start justify-between mb-2">
                     <div className="p-2 bg-primary/10 rounded-lg">

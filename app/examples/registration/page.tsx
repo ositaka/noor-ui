@@ -138,23 +138,26 @@ export default function RegistrationPage() {
       <main className="container py-12">
         {/* Breadcrumb */}
         <nav aria-label="Breadcrumb" className="mb-8">
-          <ol className="flex items-center gap-2 text-sm text-muted-foreground">
-            <li>
-              <Link href="/" className="hover:text-foreground transition-colors">
-                {tCommon.nav.home}
-              </Link>
-            </li>
-            <li>/</li>
-            <li>
-              <Link href="/examples" className="hover:text-foreground transition-colors">
-                {tCommon.nav.examples}
-              </Link>
-            </li>
-            <li>/</li>
-            <li className="text-foreground font-medium">
-              {t.breadcrumb.registration}
-            </li>
-          </ol>
+          <div className="flex items-center justify-between gap-4">
+            <ol className="flex items-center gap-2 text-sm text-muted-foreground">
+              <li>
+                <Link href="/" className="hover:text-foreground transition-colors">
+                  {tCommon.nav.home}
+                </Link>
+              </li>
+              <li>/</li>
+              <li>
+                <Link href="/examples" className="hover:text-foreground transition-colors">
+                  {tCommon.nav.examples}
+                </Link>
+              </li>
+              <li>/</li>
+              <li className="text-foreground font-medium">
+                {t.breadcrumb.registration}
+              </li>
+            </ol>
+            <DirectionToggle />
+          </div>
         </nav>
 
         {/* Page Header */}

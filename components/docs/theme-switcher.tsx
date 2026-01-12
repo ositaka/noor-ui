@@ -4,9 +4,10 @@ import * as React from 'react'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { type Theme, themeConfig, applyTheme } from '@/lib/tokens'
+import { type Theme, themeConfig } from '@/lib/tokens'
 import { Check } from 'lucide-react'
 import { useDirection } from '@/components/providers/direction-provider'
+import { useDesignSystem } from '@/components/providers/design-system-provider'
 import { content } from '@/lib/i18n'
 
 interface ThemeSwitcherProps {
@@ -15,13 +16,9 @@ interface ThemeSwitcherProps {
 
 export function ThemeSwitcher({ className }: ThemeSwitcherProps) {
   const { direction, locale } = useDirection()
+  const { designTheme, setDesignTheme } = useDesignSystem()
   const t = content[locale]
   const isRTL = direction === 'rtl'
-  const [currentTheme, setCurrentTheme] = React.useState<Theme>('minimal')
-
-  React.useEffect(() => {
-    applyTheme(currentTheme)
-  }, [currentTheme])
 
   const themes: Theme[] = ['minimal', 'futuristic', 'cozy', 'artistic']
 
@@ -30,7 +27,7 @@ export function ThemeSwitcher({ className }: ThemeSwitcherProps) {
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {themes.map((theme) => {
           const config = themeConfig[theme]
-          const isActive = currentTheme === theme
+          const isActive = designTheme === theme
 
           return (
             <Card
@@ -39,14 +36,14 @@ export function ThemeSwitcher({ className }: ThemeSwitcherProps) {
                 'cursor-pointer transition-all hover:shadow-lg',
                 isActive && 'ring-2 ring-primary ring-offset-2'
               )}
-              onClick={() => setCurrentTheme(theme)}
+              onClick={() => setDesignTheme(theme)}
               role="button"
               tabIndex={0}
               aria-pressed={isActive}
               onKeyDown={(e) => {
                 if (e.key === 'Enter' || e.key === ' ') {
                   e.preventDefault()
-                  setCurrentTheme(theme)
+                  setDesignTheme(theme)
                 }
               }}
             >
