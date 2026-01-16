@@ -29,6 +29,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Removed static base color scales to reduce noise and focus on semantic tokens
   - Users can now copy the exact CSS needed to implement any theme
 
+### Fixed
+- **Build System**: Resolved SSR/static generation errors
+  - Fixed `ThemeSwitcher` component to avoid context provider issues during build
+  - Fixed `/tokens` page to work without design system context during static generation
+  - Both components now read theme directly from DOM instead of React context
+  - Ensures clean builds for deployment without runtime context dependencies
+
 ### Notes
 This release improves the theme system's visual consistency and makes it easier for developers to understand and implement themes. The Design Tokens page now serves as a live reference for the current theme's CSS variables.
 

@@ -4,7 +4,8 @@ import * as React from 'react'
 import Link from 'next/link'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
+import { Badge, badgeVariants } from '@/components/ui/badge'
+import { cn } from '@/lib/utils'
 import { Input } from '@/components/ui/input'
 import { ArabicNumber } from '@/components/ui/arabic-number'
 import { formatSAR } from '@/lib/arabic-numbers'
@@ -371,7 +372,7 @@ export default function MarketplacePage() {
             <Button variant="outline" size="sm" asChild>
               <Link href="/examples/marketplace/cart">
                 <ShoppingCart className="h-5 w-5" />
-                <Badge variant="destructive" className="ms-2 -me-2">3</Badge>
+                <span className={cn(badgeVariants({ variant: 'destructive' }), 'ms-2 -me-2')}>3</span>
               </Link>
             </Button>
             <Button variant="outline" size="sm" asChild>
