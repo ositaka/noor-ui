@@ -1,0 +1,307 @@
+{
+  "componentId": "forms-switch",
+  "iteration": 1,
+  "timestamp": "2026-01-18T13:06:56.181Z",
+  "outputDir": ".claude/screenshots/captured/forms-switch/iter-1",
+  "config": {
+    "modes": [
+      "light",
+      "dark"
+    ],
+    "themes": [
+      "minimal"
+    ],
+    "allThemes": false
+  },
+  "stories": {
+    "ltr": [
+      "Default",
+      "With Label",
+      "Settings Panel",
+      "Disabled State",
+      "Controlled",
+      "In Form"
+    ],
+    "rtl": [
+      "RTL Example",
+      "RTL Settings Panel",
+      "RTL Disabled",
+      "RTL Controlled",
+      "RTL In Form"
+    ]
+  },
+  "results": [
+    {
+      "storyName": "Default",
+      "direction": "ltr",
+      "mode": "light",
+      "theme": "minimal",
+      "path": ".claude/screenshots/captured/forms-switch/iter-1/ltr-light/Default.png",
+      "success": true
+    },
+    {
+      "storyName": "Default",
+      "direction": "ltr",
+      "mode": "light",
+      "theme": "futuristic",
+      "path": ".claude/screenshots/captured/forms-switch/iter-1/ltr-light/Default.futuristic.png",
+      "success": true
+    },
+    {
+      "storyName": "Default",
+      "direction": "ltr",
+      "mode": "light",
+      "theme": "cozy",
+      "path": ".claude/screenshots/captured/forms-switch/iter-1/ltr-light/Default.cozy.png",
+      "success": true
+    },
+    {
+      "storyName": "Default",
+      "direction": "ltr",
+      "mode": "light",
+      "theme": "artistic",
+      "path": ".claude/screenshots/captured/forms-switch/iter-1/ltr-light/Default.artistic.png",
+      "success": true
+    },
+    {
+      "storyName": "Default",
+      "direction": "ltr",
+      "mode": "dark",
+      "theme": "minimal",
+      "path": ".claude/screenshots/captured/forms-switch/iter-1/ltr-dark/Default.png",
+      "success": true
+    },
+    {
+      "storyName": "Default",
+      "direction": "ltr",
+      "mode": "dark",
+      "theme": "futuristic",
+      "path": ".claude/screenshots/captured/forms-switch/iter-1/ltr-dark/Default.futuristic.png",
+      "success": true
+    },
+    {
+      "storyName": "Default",
+      "direction": "ltr",
+      "mode": "dark",
+      "theme": "cozy",
+      "path": ".claude/screenshots/captured/forms-switch/iter-1/ltr-dark/Default.cozy.png",
+      "success": true
+    },
+    {
+      "storyName": "Default",
+      "direction": "ltr",
+      "mode": "dark",
+      "theme": "artistic",
+      "path": ".claude/screenshots/captured/forms-switch/iter-1/ltr-dark/Default.artistic.png",
+      "success": true
+    },
+    {
+      "storyName": "With Label",
+      "direction": "ltr",
+      "mode": "light",
+      "theme": "minimal",
+      "path": ".claude/screenshots/captured/forms-switch/iter-1/ltr-light/With Label.png",
+      "success": true
+    },
+    {
+      "storyName": "With Label",
+      "direction": "ltr",
+      "mode": "dark",
+      "theme": "minimal",
+      "path": ".claude/screenshots/captured/forms-switch/iter-1/ltr-dark/With Label.png",
+      "success": true
+    },
+    {
+      "storyName": "Settings Panel",
+      "direction": "ltr",
+      "mode": "light",
+      "theme": "minimal",
+      "path": ".claude/screenshots/captured/forms-switch/iter-1/ltr-light/Settings Panel.png",
+      "success": true
+    },
+    {
+      "storyName": "Settings Panel",
+      "direction": "ltr",
+      "mode": "dark",
+      "theme": "minimal",
+      "path": ".claude/screenshots/captured/forms-switch/iter-1/ltr-dark/Settings Panel.png",
+      "success": true
+    },
+    {
+      "storyName": "Disabled State",
+      "direction": "ltr",
+      "mode": "light",
+      "theme": "minimal",
+      "path": ".claude/screenshots/captured/forms-switch/iter-1/ltr-light/Disabled State.png",
+      "success": true
+    },
+    {
+      "storyName": "Disabled State",
+      "direction": "ltr",
+      "mode": "dark",
+      "theme": "minimal",
+      "path": ".claude/screenshots/captured/forms-switch/iter-1/ltr-dark/Disabled State.png",
+      "success": true
+    },
+    {
+      "storyName": "Controlled",
+      "direction": "ltr",
+      "mode": "light",
+      "theme": "minimal",
+      "path": ".claude/screenshots/captured/forms-switch/iter-1/ltr-light/Controlled.png",
+      "success": true
+    },
+    {
+      "storyName": "Controlled",
+      "direction": "ltr",
+      "mode": "dark",
+      "theme": "minimal",
+      "path": ".claude/screenshots/captured/forms-switch/iter-1/ltr-dark/Controlled.png",
+      "success": true
+    },
+    {
+      "storyName": "In Form",
+      "direction": "ltr",
+      "mode": "light",
+      "theme": "minimal",
+      "path": ".claude/screenshots/captured/forms-switch/iter-1/ltr-light/In Form.png",
+      "success": true
+    },
+    {
+      "storyName": "In Form",
+      "direction": "ltr",
+      "mode": "dark",
+      "theme": "minimal",
+      "path": ".claude/screenshots/captured/forms-switch/iter-1/ltr-dark/In Form.png",
+      "success": true
+    },
+    {
+      "storyName": "RTL Example",
+      "direction": "rtl",
+      "mode": "light",
+      "theme": "minimal",
+      "path": ".claude/screenshots/captured/forms-switch/iter-1/rtl-light/RTL Example.png",
+      "success": true
+    },
+    {
+      "storyName": "RTL Example",
+      "direction": "rtl",
+      "mode": "light",
+      "theme": "futuristic",
+      "path": ".claude/screenshots/captured/forms-switch/iter-1/rtl-light/RTL Example.futuristic.png",
+      "success": true
+    },
+    {
+      "storyName": "RTL Example",
+      "direction": "rtl",
+      "mode": "light",
+      "theme": "cozy",
+      "path": ".claude/screenshots/captured/forms-switch/iter-1/rtl-light/RTL Example.cozy.png",
+      "success": true
+    },
+    {
+      "storyName": "RTL Example",
+      "direction": "rtl",
+      "mode": "light",
+      "theme": "artistic",
+      "path": ".claude/screenshots/captured/forms-switch/iter-1/rtl-light/RTL Example.artistic.png",
+      "success": true
+    },
+    {
+      "storyName": "RTL Example",
+      "direction": "rtl",
+      "mode": "dark",
+      "theme": "minimal",
+      "path": ".claude/screenshots/captured/forms-switch/iter-1/rtl-dark/RTL Example.png",
+      "success": true
+    },
+    {
+      "storyName": "RTL Example",
+      "direction": "rtl",
+      "mode": "dark",
+      "theme": "futuristic",
+      "path": ".claude/screenshots/captured/forms-switch/iter-1/rtl-dark/RTL Example.futuristic.png",
+      "success": true
+    },
+    {
+      "storyName": "RTL Example",
+      "direction": "rtl",
+      "mode": "dark",
+      "theme": "cozy",
+      "path": ".claude/screenshots/captured/forms-switch/iter-1/rtl-dark/RTL Example.cozy.png",
+      "success": true
+    },
+    {
+      "storyName": "RTL Example",
+      "direction": "rtl",
+      "mode": "dark",
+      "theme": "artistic",
+      "path": ".claude/screenshots/captured/forms-switch/iter-1/rtl-dark/RTL Example.artistic.png",
+      "success": true
+    },
+    {
+      "storyName": "RTL Settings Panel",
+      "direction": "rtl",
+      "mode": "light",
+      "theme": "minimal",
+      "path": ".claude/screenshots/captured/forms-switch/iter-1/rtl-light/RTL Settings Panel.png",
+      "success": true
+    },
+    {
+      "storyName": "RTL Settings Panel",
+      "direction": "rtl",
+      "mode": "dark",
+      "theme": "minimal",
+      "path": ".claude/screenshots/captured/forms-switch/iter-1/rtl-dark/RTL Settings Panel.png",
+      "success": true
+    },
+    {
+      "storyName": "RTL Disabled",
+      "direction": "rtl",
+      "mode": "light",
+      "theme": "minimal",
+      "path": ".claude/screenshots/captured/forms-switch/iter-1/rtl-light/RTL Disabled.png",
+      "success": true
+    },
+    {
+      "storyName": "RTL Disabled",
+      "direction": "rtl",
+      "mode": "dark",
+      "theme": "minimal",
+      "path": ".claude/screenshots/captured/forms-switch/iter-1/rtl-dark/RTL Disabled.png",
+      "success": true
+    },
+    {
+      "storyName": "RTL Controlled",
+      "direction": "rtl",
+      "mode": "light",
+      "theme": "minimal",
+      "path": ".claude/screenshots/captured/forms-switch/iter-1/rtl-light/RTL Controlled.png",
+      "success": true
+    },
+    {
+      "storyName": "RTL Controlled",
+      "direction": "rtl",
+      "mode": "dark",
+      "theme": "minimal",
+      "path": ".claude/screenshots/captured/forms-switch/iter-1/rtl-dark/RTL Controlled.png",
+      "success": true
+    },
+    {
+      "storyName": "RTL In Form",
+      "direction": "rtl",
+      "mode": "light",
+      "theme": "minimal",
+      "path": ".claude/screenshots/captured/forms-switch/iter-1/rtl-light/RTL In Form.png",
+      "success": true
+    },
+    {
+      "storyName": "RTL In Form",
+      "direction": "rtl",
+      "mode": "dark",
+      "theme": "minimal",
+      "path": ".claude/screenshots/captured/forms-switch/iter-1/rtl-dark/RTL In Form.png",
+      "success": true
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "visual-qa": {
+    "maxIterations": 3,
+    "screenshotDir": ".claude/screenshots/captured",
+    "storybookUrl": "http://localhost:6006",
+    "variants": {
+      "directions": ["ltr", "rtl"],
+      "modes": ["light", "dark"],
+      "themes": ["minimal"]
+    }
+  }
+}

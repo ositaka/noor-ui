@@ -48,6 +48,14 @@ home: {
         title: 'شاهده عملياً',
         subtitle: 'مكونات تفاعلية تعمل بشكل مثالي في كلا الاتجاهين',
       },
+      quickStart: {
+        title: 'البدء السريع',
+        description: 'قم بالتثبيت عبر npm وابدأ البناء في دقائق',
+        status: 'منشور',
+        installationGuide: 'دليل التثبيت',
+        viewOnNpm: 'عرض على npm',
+        comingSoon: 'عرض Storybook متحرك قريباً',
+      },
     },
 
   roadmapPage: {

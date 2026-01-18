@@ -71,9 +71,9 @@ export default function HomePage() {
             <div className="rounded-lg border bg-card p-8 md:p-12">
               <div className="flex items-start justify-between gap-4 mb-6">
                 <div>
-                  <h2 className="text-2xl font-bold mb-2">Quick Start</h2>
+                  <h2 className="text-2xl font-bold mb-2">{t.home.quickStart.title}</h2>
                   <p className="text-muted-foreground">
-                    Install via npm and start building in minutes
+                    {t.home.quickStart.description}
                   </p>
                 </div>
                 <div className="flex gap-2">
@@ -81,7 +81,7 @@ export default function HomePage() {
                     v0.5.1
                   </span>
                   <span className="inline-flex items-center rounded-md bg-green-500/10 px-2 py-1 text-xs font-medium text-green-600 dark:text-green-400">
-                    Published
+                    {t.home.quickStart.status}
                   </span>
                 </div>
               </div>
@@ -105,12 +105,12 @@ export default function App() {
                 <div className="flex flex-wrap gap-2 pt-2">
                   <ButtonArrow variant="outline" size="sm" direction="forward" iconSize="sm" asChild>
                     <Link href="/getting-started">
-                      Installation Guide
+                      {t.home.quickStart.installationGuide}
                     </Link>
                   </ButtonArrow>
                   <ButtonArrow variant="outline" size="sm" direction="forward" iconSize="sm" asChild>
                     <a href="https://www.npmjs.com/package/noorui-rtl" target="_blank" rel="noopener noreferrer">
-                      View on npm
+                      {t.home.quickStart.viewOnNpm}
                     </a>
                   </ButtonArrow>
                   <ButtonArrow variant="outline" size="sm" direction="forward" iconSize="sm" asChild>
@@ -197,7 +197,7 @@ export default function App() {
 
               {/* Placeholder for future animated GIF/screenshot */}
               <div className="mt-12 rounded-lg border bg-background p-8 text-center text-sm text-muted-foreground">
-                <p>💡 Animated Storybook demo coming soon</p>
+                <p>💡 {t.home.quickStart.comingSoon}</p>
               </div>
             </div>
           </div>
