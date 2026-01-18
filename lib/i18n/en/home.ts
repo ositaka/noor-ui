@@ -48,6 +48,14 @@ home: {
         title: 'See It In Action',
         subtitle: 'Interactive components that work perfectly in both directions',
       },
+      quickStart: {
+        title: 'Quick Start',
+        description: 'Install via npm and start building in minutes',
+        status: 'Published',
+        installationGuide: 'Installation Guide',
+        viewOnNpm: 'View on npm',
+        comingSoon: 'Animated Storybook demo coming soon',
+      },
     },
 
   roadmapPage: {
