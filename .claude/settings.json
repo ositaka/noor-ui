@@ -1,0 +1,38 @@
+{
+  "agents": {
+    "component-creator": {
+      "description": "Creates new Noor UI components following established patterns (Radix + CVA + Tailwind + RTL-first)",
+      "instructions": ".claude/prompts/component-creator.md"
+    },
+    "unit-test": {
+      "description": "Generates portable unit tests using @storybook/test for play functions",
+      "instructions": ".claude/prompts/unit-test.md"
+    },
+    "story-generator": {
+      "description": "Creates comprehensive Storybook stories with all variants (LTR/RTL, light/dark, states)",
+      "instructions": ".claude/prompts/story-generator.md"
+    },
+    "screenshot-capture": {
+      "description": "Captures screenshots of all story variants using Playwright",
+      "instructions": ".claude/prompts/screenshot-capture.md"
+    },
+    "visual-analysis": {
+      "description": "Analyzes screenshots for visual issues (RTL, spacing, overflow, contrast)",
+      "instructions": ".claude/prompts/visual-analysis.md"
+    },
+    "visual-qa-loop": {
+      "description": "Full self-correcting loop: create -> test -> capture -> analyze -> fix -> repeat",
+      "instructions": ".claude/prompts/visual-qa-loop.md"
+    }
+  },
+  "visual-qa": {
+    "maxIterations": 3,
+    "screenshotDir": ".claude/screenshots/captured",
+    "storybookUrl": "http://localhost:6006",
+    "variants": {
+      "directions": ["ltr", "rtl"],
+      "modes": ["light", "dark"],
+      "themes": ["minimal"]
+    }
+  }
+}
