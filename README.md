@@ -309,6 +309,16 @@ Full documentation, examples, and guides available at **[noorui.com](https://noo
 
 Contributions are welcome! Please read our [Contributing Guide](https://github.com/ositaka/noor-ui/blob/main/CONTRIBUTING.md).
 
+## 🤖 AI-Assisted Development
+
+This project includes Claude Code agents for automated:
+- **Component creation** with RTL-first patterns
+- **Storybook story generation** with all variants (LTR/RTL, light/dark, states)
+- **Visual QA** via screenshot analysis
+- **i18n validation** for translation quality and missing keys
+
+See `.claude/GETTING-STARTED.md` to use them.
+
 ## 📄 License
 
 MIT License - see [LICENSE](https://github.com/ositaka/noor-ui/blob/main/LICENSE)
