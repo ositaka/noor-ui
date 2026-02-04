@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { expect, within } from 'storybook/test';
 import { LoadingSpinner } from '../../../components/ui/loading-spinner';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../../components/ui/card';
 
@@ -37,6 +38,25 @@ export const Default: Story = {
   globals: {
     direction: 'ltr',
     locale: 'en'
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders correctly', async () => {
+      const spinner = canvas.getByRole('status');
+      await expect(spinner).toBeInTheDocument();
+      await expect(spinner).toBeVisible();
+    });
+
+    await step('Has correct accessibility attributes', async () => {
+      const spinner = canvas.getByRole('status');
+      await expect(spinner).toHaveAttribute('aria-live', 'polite');
+      await expect(spinner).toHaveAttribute('aria-label', 'Loading...');
+    });
+
+    await step('Has screen reader text', async () => {
+      await expect(canvas.getByText('Loading...', { selector: '.sr-only' })).toBeInTheDocument();
+    });
   }
 };
 
@@ -59,6 +79,21 @@ export const SmallSize: Story = {
   },
   parameters: {
     controls: { disable: true }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders small size spinner', async () => {
+      const spinner = canvas.getByRole('status');
+      await expect(spinner).toBeInTheDocument();
+      await expect(spinner).toBeVisible();
+    });
+
+    await step('Has accessibility attributes', async () => {
+      const spinner = canvas.getByRole('status');
+      await expect(spinner).toHaveAttribute('role', 'status');
+      await expect(spinner).toHaveAttribute('aria-live', 'polite');
+    });
   }
 };
 
@@ -81,6 +116,21 @@ export const MediumSize: Story = {
   },
   parameters: {
     controls: { disable: true }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders medium size spinner', async () => {
+      const spinner = canvas.getByRole('status');
+      await expect(spinner).toBeInTheDocument();
+      await expect(spinner).toBeVisible();
+    });
+
+    await step('Has accessibility attributes', async () => {
+      const spinner = canvas.getByRole('status');
+      await expect(spinner).toHaveAttribute('role', 'status');
+      await expect(spinner).toHaveAttribute('aria-live', 'polite');
+    });
   }
 };
 
@@ -103,6 +153,21 @@ export const LargeSize: Story = {
   },
   parameters: {
     controls: { disable: true }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders large size spinner', async () => {
+      const spinner = canvas.getByRole('status');
+      await expect(spinner).toBeInTheDocument();
+      await expect(spinner).toBeVisible();
+    });
+
+    await step('Has accessibility attributes', async () => {
+      const spinner = canvas.getByRole('status');
+      await expect(spinner).toHaveAttribute('role', 'status');
+      await expect(spinner).toHaveAttribute('aria-live', 'polite');
+    });
   }
 };
 
@@ -121,6 +186,29 @@ export const WithText: Story = {
   },
   parameters: {
     controls: { disable: true }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders spinner with text', async () => {
+      const spinner = canvas.getByRole('status');
+      await expect(spinner).toBeInTheDocument();
+      await expect(spinner).toBeVisible();
+    });
+
+    await step('Displays visible text label', async () => {
+      await expect(canvas.getByText('Loading content...', { selector: 'p' })).toBeInTheDocument();
+      await expect(canvas.getByText('Loading content...', { selector: 'p' })).toBeVisible();
+    });
+
+    await step('Has correct aria-label', async () => {
+      const spinner = canvas.getByRole('status');
+      await expect(spinner).toHaveAttribute('aria-label', 'Loading content...');
+    });
+
+    await step('Has screen reader text', async () => {
+      await expect(canvas.getByText('Loading content...', { selector: '.sr-only' })).toBeInTheDocument();
+    });
   }
 };
 
@@ -176,6 +264,25 @@ export const InContent: Story = {
   },
   parameters: {
     controls: { disable: true }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders spinner in content context', async () => {
+      const spinner = canvas.getByRole('status');
+      await expect(spinner).toBeInTheDocument();
+      await expect(spinner).toBeVisible();
+    });
+
+    await step('Displays custom loading text', async () => {
+      await expect(canvas.getByText('Fetching data...', { selector: 'p' })).toBeInTheDocument();
+    });
+
+    await step('Has correct accessibility attributes', async () => {
+      const spinner = canvas.getByRole('status');
+      await expect(spinner).toHaveAttribute('aria-label', 'Fetching data...');
+      await expect(spinner).toHaveAttribute('aria-live', 'polite');
+    });
   }
 };
 
@@ -192,6 +299,25 @@ export const FullPageLoading: Story = {
   },
   parameters: {
     controls: { disable: true }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders full page loading spinner', async () => {
+      const spinner = canvas.getByRole('status');
+      await expect(spinner).toBeInTheDocument();
+      await expect(spinner).toBeVisible();
+    });
+
+    await step('Displays application loading text', async () => {
+      await expect(canvas.getByText('Loading application...', { selector: 'p' })).toBeInTheDocument();
+    });
+
+    await step('Has correct accessibility attributes', async () => {
+      const spinner = canvas.getByRole('status');
+      await expect(spinner).toHaveAttribute('aria-label', 'Loading application...');
+      await expect(spinner).toHaveAttribute('aria-live', 'polite');
+    });
   }
 };
 
@@ -214,5 +340,24 @@ export const RTL: Story = {
   },
   parameters: {
     controls: { disable: true }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders in RTL context', async () => {
+      const spinner = canvas.getByRole('status');
+      await expect(spinner).toBeInTheDocument();
+      await expect(spinner).toBeVisible();
+    });
+
+    await step('Displays Arabic text', async () => {
+      await expect(canvas.getByText('جاري تحميل البيانات...', { selector: 'p' })).toBeInTheDocument();
+    });
+
+    await step('Has correct accessibility in RTL', async () => {
+      const spinner = canvas.getByRole('status');
+      await expect(spinner).toHaveAttribute('aria-label', 'جاري تحميل البيانات...');
+      await expect(spinner).toHaveAttribute('aria-live', 'polite');
+    });
   }
 };
