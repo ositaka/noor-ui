@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { fn } from 'storybook/test';
 import { UserMenu } from '../../../components/ui/user-menu';
 import { Card, CardContent } from '../../../components/ui/card';
 
@@ -43,17 +44,15 @@ type Story = StoryObj<typeof meta>;
 
 // Default - from page lines 199-210
 export const Default: Story = {
-  render: () => (
-    <UserMenu
-      user={{
-        name: 'Ahmed Al-Rashid',
-        email: 'ahmed@example.com'
-      }}
-      onProfileClick={() => console.log('Profile')}
-      onSettingsClick={() => console.log('Settings')}
-      onLogout={() => console.log('Logout')}
-    />
-  ),
+  args: {
+    user: {
+      name: 'Ahmed Al-Rashid',
+      email: 'ahmed@example.com'
+    },
+    onProfileClick: fn(),
+    onSettingsClick: fn(),
+    onLogout: fn()
+  },
   globals: {
     direction: 'ltr',
     locale: 'en'
@@ -62,24 +61,25 @@ export const Default: Story = {
 
 // With Avatar - from page lines 279-288
 export const WithAvatar: Story = {
-  render: () => (
+  render: (args) => (
     <Card>
       <CardContent className="p-6">
         <div className="flex justify-center">
-          <UserMenu
-            user={{
-              name: 'Sarah Johnson',
-              email: 'sarah@example.com',
-              image: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah'
-            }}
-            onProfileClick={() => console.log('Profile')}
-            onSettingsClick={() => console.log('Settings')}
-            onLogout={() => console.log('Logout')}
-          />
+          <UserMenu {...args} />
         </div>
       </CardContent>
     </Card>
   ),
+  args: {
+    user: {
+      name: 'Sarah Johnson',
+      email: 'sarah@example.com',
+      image: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah'
+    },
+    onProfileClick: fn(),
+    onSettingsClick: fn(),
+    onLogout: fn()
+  },
   globals: {
     direction: 'ltr',
     locale: 'en'
@@ -91,21 +91,22 @@ export const WithAvatar: Story = {
 
 // Minimal - from page lines 303-309
 export const Minimal: Story = {
-  render: () => (
+  render: (args) => (
     <Card>
       <CardContent className="p-6">
         <div className="flex justify-center">
-          <UserMenu
-            user={{
-              name: 'Nuno Marques',
-              email: 'ositaka@example.com'
-            }}
-            onLogout={() => console.log('Logout')}
-          />
+          <UserMenu {...args} />
         </div>
       </CardContent>
     </Card>
   ),
+  args: {
+    user: {
+      name: 'Nuno Marques',
+      email: 'ositaka@example.com'
+    },
+    onLogout: fn()
+  },
   globals: {
     direction: 'ltr',
     locale: 'en'
@@ -149,24 +150,25 @@ export const AllOptions: Story = {
 
 // With Initials
 export const WithInitials: Story = {
-  render: () => (
+  render: (args) => (
     <Card>
       <CardContent className="p-6">
         <div className="flex justify-center">
-          <UserMenu
-            user={{
-              name: 'John Doe',
-              email: 'john@example.com',
-              initials: 'JD'
-            }}
-            onProfileClick={() => console.log('Profile')}
-            onSettingsClick={() => console.log('Settings')}
-            onLogout={() => console.log('Logout')}
-          />
+          <UserMenu {...args} />
         </div>
       </CardContent>
     </Card>
   ),
+  args: {
+    user: {
+      name: 'John Doe',
+      email: 'john@example.com',
+      initials: 'JD'
+    },
+    onProfileClick: fn(),
+    onSettingsClick: fn(),
+    onLogout: fn()
+  },
   globals: {
     direction: 'ltr',
     locale: 'en'
@@ -178,23 +180,24 @@ export const WithInitials: Story = {
 
 // Without Image (Auto Initials)
 export const WithoutImage: Story = {
-  render: () => (
+  render: (args) => (
     <Card>
       <CardContent className="p-6">
         <div className="flex justify-center">
-          <UserMenu
-            user={{
-              name: 'Alice Smith',
-              email: 'alice@example.com'
-            }}
-            onProfileClick={() => console.log('Profile')}
-            onSettingsClick={() => console.log('Settings')}
-            onLogout={() => console.log('Logout')}
-          />
+          <UserMenu {...args} />
         </div>
       </CardContent>
     </Card>
   ),
+  args: {
+    user: {
+      name: 'Alice Smith',
+      email: 'alice@example.com'
+    },
+    onProfileClick: fn(),
+    onSettingsClick: fn(),
+    onLogout: fn()
+  },
   globals: {
     direction: 'ltr',
     locale: 'en'
@@ -211,21 +214,12 @@ export const WithoutImage: Story = {
 
 // In Header Layout - inspired by lines 374-391
 export const InHeaderLayout: Story = {
-  render: () => (
+  render: (args) => (
     <div className="w-full border rounded-lg">
       <header className="border-b">
         <div className="container flex h-16 items-center justify-between px-4">
           <h1 className="text-lg font-bold">My App</h1>
-          <UserMenu
-            user={{
-              name: 'Ahmed Al-Rashid',
-              email: 'ahmed@example.com',
-              image: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Ahmed'
-            }}
-            onProfileClick={() => console.log('Profile')}
-            onSettingsClick={() => console.log('Settings')}
-            onLogout={() => console.log('Logout')}
-          />
+          <UserMenu {...args} />
         </div>
       </header>
       <div className="p-6">
@@ -233,6 +227,16 @@ export const InHeaderLayout: Story = {
       </div>
     </div>
   ),
+  args: {
+    user: {
+      name: 'Ahmed Al-Rashid',
+      email: 'ahmed@example.com',
+      image: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Ahmed'
+    },
+    onProfileClick: fn(),
+    onSettingsClick: fn(),
+    onLogout: fn()
+  },
   globals: {
     direction: 'ltr',
     locale: 'en'
@@ -250,23 +254,24 @@ export const InHeaderLayout: Story = {
 
 // Only Profile and Logout
 export const ProfileAndLogout: Story = {
-  render: () => (
+  render: (args) => (
     <Card>
       <CardContent className="p-6">
         <div className="flex justify-center">
-          <UserMenu
-            user={{
-              name: 'Emily Chen',
-              email: 'emily@example.com',
-              image: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Emily'
-            }}
-            onProfileClick={() => console.log('Profile')}
-            onLogout={() => console.log('Logout')}
-          />
+          <UserMenu {...args} />
         </div>
       </CardContent>
     </Card>
   ),
+  args: {
+    user: {
+      name: 'Emily Chen',
+      email: 'emily@example.com',
+      image: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Emily'
+    },
+    onProfileClick: fn(),
+    onLogout: fn()
+  },
   globals: {
     direction: 'ltr',
     locale: 'en'
@@ -283,27 +288,28 @@ export const ProfileAndLogout: Story = {
 
 // RTL
 export const RTL: Story = {
-  render: () => (
+  render: (args) => (
     <Card>
       <CardContent className="p-6">
         <div className="flex justify-center">
-          <UserMenu
-            user={{
-              name: 'فاطمة الزهراء',
-              email: 'fatima@example.com',
-              image: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Fatima'
-            }}
-            onProfileClick={() => console.log('الملف الشخصي')}
-            onSettingsClick={() => console.log('الإعدادات')}
-            onBillingClick={() => console.log('الفواتير')}
-            onTeamClick={() => console.log('الفريق')}
-            onSupportClick={() => console.log('الدعم')}
-            onLogout={() => console.log('تسجيل الخروج')}
-          />
+          <UserMenu {...args} />
         </div>
       </CardContent>
     </Card>
   ),
+  args: {
+    user: {
+      name: 'فاطمة الزهراء',
+      email: 'fatima@example.com',
+      image: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Fatima'
+    },
+    onProfileClick: fn(),
+    onSettingsClick: fn(),
+    onBillingClick: fn(),
+    onTeamClick: fn(),
+    onSupportClick: fn(),
+    onLogout: fn()
+  },
   globals: {
     direction: 'rtl',
     locale: 'ar'

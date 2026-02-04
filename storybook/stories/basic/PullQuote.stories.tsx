@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { expect, within } from 'storybook/test';
 import { PullQuote } from '../../../components/ui/blockquote';
 import { Card, CardContent, CardHeader, CardTitle } from '../../../components/ui/card';
 
@@ -39,6 +40,28 @@ export const Default: Story = {
   globals: {
     direction: 'ltr',
     locale: 'en'
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders correctly with proper structure', async () => {
+      const aside = canvas.getByRole('complementary');
+      await expect(aside).toBeInTheDocument();
+      await expect(aside).toBeVisible();
+    });
+
+    await step('Contains blockquote with correct content', async () => {
+      const blockquote = canvas.getByText(/The pen is mightier than the sword/i);
+      await expect(blockquote).toBeInTheDocument();
+      await expect(blockquote).toBeVisible();
+    });
+
+    await step('Has proper semantic structure', async () => {
+      const aside = canvas.getByRole('complementary');
+      const blockquote = aside.querySelector('blockquote');
+      await expect(blockquote).toBeInTheDocument();
+    });
+
   }
 };
 
@@ -62,6 +85,20 @@ export const CenterAligned: Story = {
   },
   parameters: {
     controls: { disable: true }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders center-aligned pull quote', async () => {
+      const pullQuote = canvas.getByRole('complementary');
+      await expect(pullQuote).toBeInTheDocument();
+    });
+
+    await step('Contains quote content', async () => {
+      const content = canvas.getByText(/The pen is mightier than the sword/i);
+      await expect(content).toBeInTheDocument();
+      await expect(content).toBeVisible();
+    });
   }
 };
 
@@ -85,6 +122,20 @@ export const LeftAligned: Story = {
   },
   parameters: {
     controls: { disable: true }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders left-aligned pull quote', async () => {
+      const pullQuote = canvas.getByRole('complementary');
+      await expect(pullQuote).toBeInTheDocument();
+    });
+
+    await step('Contains quote content', async () => {
+      const content = canvas.getByText(/Knowledge is power/i);
+      await expect(content).toBeInTheDocument();
+      await expect(content).toBeVisible();
+    });
   }
 };
 
@@ -108,6 +159,20 @@ export const RightAligned: Story = {
   },
   parameters: {
     controls: { disable: true }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders right-aligned pull quote', async () => {
+      const pullQuote = canvas.getByRole('complementary');
+      await expect(pullQuote).toBeInTheDocument();
+    });
+
+    await step('Contains quote content', async () => {
+      const content = canvas.getByText(/Actions speak louder than words/i);
+      await expect(content).toBeInTheDocument();
+      await expect(content).toBeVisible();
+    });
   }
 };
 
@@ -147,5 +212,22 @@ export const RTL: Story = {
   },
   parameters: {
     controls: { disable: true }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders in RTL context', async () => {
+      const pullQuotes = canvas.getAllByRole('complementary');
+      await expect(pullQuotes).toHaveLength(2);
+      await expect(pullQuotes[0]).toBeInTheDocument();
+      await expect(pullQuotes[1]).toBeInTheDocument();
+    });
+
+    await step('Contains Arabic content', async () => {
+      const firstQuote = canvas.getByText(/القلم أقوى من السيف/);
+      const secondQuote = canvas.getByText(/المعرفة قوة/);
+      await expect(firstQuote).toBeInTheDocument();
+      await expect(secondQuote).toBeInTheDocument();
+    });
   }
 };

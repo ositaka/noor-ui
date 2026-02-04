@@ -54,10 +54,7 @@ await step('Keyboard accessible', async () => {
 
 ### What NOT to Test
 - **Showcase stories** (AllVariants, AllSizes, AllColors) - visual documentation only
-- **Variant stories** (Destructive, Success, Warning) - if Default works, variants work
-- **Duplicate RTL stories** - one RTL test per component is enough
 - **CSS class names** - don't test `toHaveClass('bg-primary')`, that's implementation detail
-- **Every single story** - only test stories with unique behavior
 
 ### Style Testing (Minimal)
 Only test styles when they indicate important state:
@@ -155,12 +152,6 @@ export const AllVariants: Story = {
   render: () => (/* ... */),
   // No play function needed
 }
-
-// ❌ Destructive: NO play function - same behavior as Default
-export const Destructive: Story = {
-  args: { variant: 'destructive' },
-  // No play function needed - if Default works, this works
-}
 ```
 
 ## Test Categories (For Default Story)
@@ -216,13 +207,12 @@ Added play functions to: /storybook/stories/{category}/{Component}.stories.tsx
 
 Stories tested:
 - Default: Render, interactions, keyboard navigation
-- RTLExample: RTL rendering and interactions
-- Controlled: State management (unique behavior)
+- Destructive: Basic render and interaction
+- RTLExample: RTL rendering and interaction
+- Controlled: State management
 
 Stories skipped (no tests needed):
-- AllVariants: Visual showcase
-- Destructive: Same behavior as Default
-- RTLDestructive: Redundant RTL coverage
+- AllVariants: Visual showcase (starts with "All")
 
 Run tests:
 - Storybook: npm run storybook (Interactions panel)

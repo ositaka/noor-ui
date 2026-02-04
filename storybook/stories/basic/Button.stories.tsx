@@ -622,27 +622,6 @@ export const AllVariants: Story = {
   ),
   parameters: {
     controls: { disable: true }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('All variant buttons render', async () => {
-      await expect(canvas.getByRole('button', { name: /primary/i })).toBeInTheDocument();
-      await expect(canvas.getByRole('button', { name: /secondary/i })).toBeInTheDocument();
-      await expect(canvas.getByRole('button', { name: /destructive/i })).toBeInTheDocument();
-      await expect(canvas.getByRole('button', { name: /outline/i })).toBeInTheDocument();
-      await expect(canvas.getByRole('button', { name: /ghost/i })).toBeInTheDocument();
-      await expect(canvas.getByRole('button', { name: /link/i })).toBeInTheDocument();
-    });
-
-    await step('All buttons are visible', async () => {
-      const buttons = canvas.getAllByRole('button');
-      await expect(buttons).toHaveLength(6);
-
-      for (const button of buttons) {
-        await expect(button).toBeVisible();
-      }
-    });
   }
 };
 
@@ -661,30 +640,5 @@ export const AllSizes: Story = {
   ),
   parameters: {
     controls: { disable: true }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('All size buttons render', async () => {
-      await expect(canvas.getByRole('button', { name: 'Small' })).toBeInTheDocument();
-      await expect(canvas.getByRole('button', { name: 'Medium' })).toBeInTheDocument();
-      await expect(canvas.getByRole('button', { name: 'Large' })).toBeInTheDocument();
-      await expect(canvas.getByRole('button', { name: 'Extra Large' })).toBeInTheDocument();
-      await expect(canvas.getByRole('button', { name: 'Icon button' })).toBeInTheDocument();
-    });
-
-    await step('All buttons have correct size classes', async () => {
-      const smallBtn = canvas.getByRole('button', { name: 'Small' });
-      const mediumBtn = canvas.getByRole('button', { name: 'Medium' });
-      const largeBtn = canvas.getByRole('button', { name: 'Large' });
-      const xlBtn = canvas.getByRole('button', { name: 'Extra Large' });
-      const iconBtn = canvas.getByRole('button', { name: 'Icon button' });
-
-      await expect(smallBtn).toHaveClass('h-8');
-      await expect(mediumBtn).toHaveClass('h-9');
-      await expect(largeBtn).toHaveClass('h-10');
-      await expect(xlBtn).toHaveClass('h-11');
-      await expect(iconBtn).toHaveClass('h-9', 'w-9');
-    });
   }
 };

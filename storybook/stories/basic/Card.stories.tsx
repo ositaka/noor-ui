@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { expect, userEvent, within } from 'storybook/test';
 import {
   Card,
   CardContent,
@@ -42,7 +43,20 @@ export const Default: Story = {
     direction: 'ltr',
     locale: 'en'
   },
-  render: (args) => <Card {...args} className="w-[350px]" />
+  render: (args) => <Card {...args} className="w-[350px]" />,
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders card structure', async () => {
+      await expect(canvas.getByRole('heading', { name: 'Card Title' })).toBeInTheDocument();
+      await expect(canvas.getByRole('heading', { name: 'Card Title' })).toBeVisible();
+    });
+
+    await step('Displays card content', async () => {
+      await expect(canvas.getByText('Card description goes here')).toBeInTheDocument();
+      await expect(canvas.getByText('Card content area. Add any content here.')).toBeInTheDocument();
+    });
+  }
 };
 
 // With Footer
@@ -64,6 +78,20 @@ export const WithFooter: Story = {
   ),
   parameters: {
     controls: { disable: true }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders card with footer', async () => {
+      await expect(canvas.getByRole('heading', { name: 'Confirm Action' })).toBeInTheDocument();
+      await expect(canvas.getByText('Are you sure you want to proceed?')).toBeInTheDocument();
+      await expect(canvas.getByText('This action cannot be undone.')).toBeInTheDocument();
+    });
+
+    await step('Displays footer buttons', async () => {
+      await expect(canvas.getByRole('button', { name: 'Cancel' })).toBeInTheDocument();
+      await expect(canvas.getByRole('button', { name: 'Confirm' })).toBeInTheDocument();
+    });
   }
 };
 
@@ -95,6 +123,20 @@ export const NotificationCard: Story = {
   ),
   parameters: {
     controls: { disable: true }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders notification content', async () => {
+      await expect(canvas.getByRole('heading', { name: 'New Notification' })).toBeInTheDocument();
+      await expect(canvas.getByText('2 minutes ago')).toBeInTheDocument();
+      await expect(canvas.getByText(/You have a new message from the support team/i)).toBeInTheDocument();
+    });
+
+    await step('Displays badge and button', async () => {
+      await expect(canvas.getByText('New')).toBeInTheDocument();
+      await expect(canvas.getByRole('button', { name: 'View Message' })).toBeInTheDocument();
+    });
   }
 };
 
@@ -116,6 +158,15 @@ export const StatsCard: Story = {
   ),
   parameters: {
     controls: { disable: true }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders stats content', async () => {
+      await expect(canvas.getByText('Total Revenue')).toBeInTheDocument();
+      await expect(canvas.getByRole('heading', { name: '$45,231' })).toBeInTheDocument();
+      await expect(canvas.getByText('+20.1% from last month')).toBeInTheDocument();
+    });
   }
 };
 
@@ -148,6 +199,21 @@ export const ProductCard: Story = {
   ),
   parameters: {
     controls: { disable: true }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders product content', async () => {
+      await expect(canvas.getByRole('heading', { name: 'Premium Product' })).toBeInTheDocument();
+      await expect(canvas.getByText('High quality item')).toBeInTheDocument();
+      await expect(canvas.getByText('$99')).toBeInTheDocument();
+      await expect(canvas.getByText(/Lorem ipsum dolor sit amet/i)).toBeInTheDocument();
+    });
+
+    await step('Displays product actions', async () => {
+      await expect(canvas.getByRole('button', { name: 'Add to Cart' })).toBeInTheDocument();
+      await expect(canvas.getAllByRole('button')).toHaveLength(2);
+    });
   }
 };
 
@@ -187,6 +253,22 @@ export const ArticleCard: Story = {
   ),
   parameters: {
     controls: { disable: true }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders article content', async () => {
+      await expect(canvas.getByText('Technology')).toBeInTheDocument();
+      await expect(canvas.getByRole('heading', { name: 'The Future of Web Development' })).toBeInTheDocument();
+      await expect(canvas.getByText(/By John Doe • 5 min read/i)).toBeInTheDocument();
+      await expect(canvas.getByText(/Explore the latest trends and technologies/i)).toBeInTheDocument();
+    });
+
+    await step('Displays article actions', async () => {
+      await expect(canvas.getByRole('button', { name: /245/i })).toBeInTheDocument();
+      await expect(canvas.getByRole('button', { name: /Share/i })).toBeInTheDocument();
+      await expect(canvas.getByRole('button', { name: 'Read More' })).toBeInTheDocument();
+    });
   }
 };
 
@@ -218,6 +300,19 @@ export const RTLCard: Story = {
         story: 'Card with Arabic content demonstrating RTL support. Automatically switches to RTL mode.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders in RTL context', async () => {
+      await expect(canvas.getByRole('heading', { name: 'عنوان البطاقة' })).toBeInTheDocument();
+      await expect(canvas.getByText('وصف البطاقة يظهر هنا')).toBeInTheDocument();
+    });
+
+    await step('RTL buttons work', async () => {
+      await expect(canvas.getByRole('button', { name: 'إلغاء' })).toBeInTheDocument();
+      await expect(canvas.getByRole('button', { name: 'تأكيد' })).toBeInTheDocument();
+    });
   }
 };
 
@@ -259,6 +354,19 @@ export const RTLProductCard: Story = {
         story: 'Product card with Arabic text showing proper RTL layout. Automatically switches to RTL mode.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders RTL product card', async () => {
+      await expect(canvas.getByRole('heading', { name: 'منتج فاخر' })).toBeInTheDocument();
+      await expect(canvas.getByText('عنصر عالي الجودة')).toBeInTheDocument();
+      await expect(canvas.getByText('٩٩ ريال')).toBeInTheDocument();
+    });
+
+    await step('RTL product actions work', async () => {
+      await expect(canvas.getByRole('button', { name: 'أضف للسلة' })).toBeInTheDocument();
+    });
   }
 };
 
@@ -301,5 +409,21 @@ export const CardGrid: Story = {
   ),
   parameters: {
     controls: { disable: true }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders multiple cards', async () => {
+      await expect(canvas.getByRole('heading', { name: '12,543' })).toBeInTheDocument();
+      await expect(canvas.getByRole('heading', { name: '$89,232' })).toBeInTheDocument();
+      await expect(canvas.getByText('4.8')).toBeInTheDocument();
+    });
+
+    await step('All card content displays', async () => {
+      await expect(canvas.getByText('Total Users')).toBeInTheDocument();
+      await expect(canvas.getByText('Revenue')).toBeInTheDocument();
+      await expect(canvas.getByText('Rating')).toBeInTheDocument();
+      await expect(canvas.getByText('From 1,234 reviews')).toBeInTheDocument();
+    });
   }
 };

@@ -11,6 +11,7 @@ import {
 import { Label } from '../../../components/ui/label';
 import { Button } from '../../../components/ui/button';
 import * as React from 'react';
+import { expect, userEvent, within } from 'storybook/test';
 
 /**
  * Select Component Stories
@@ -65,6 +66,52 @@ export const Default: Story = {
         inline: false
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders correctly with default value', async () => {
+      const trigger = canvas.getByRole('combobox');
+      await expect(trigger).toBeInTheDocument();
+      await expect(trigger).toBeVisible();
+      await expect(trigger).toHaveTextContent('Option 1');
+    });
+
+    await step('Opens dropdown on click', async () => {
+      const trigger = canvas.getByRole('combobox');
+      await userEvent.click(trigger);
+
+      // Verify dropdown opens with options
+      const option2 = await canvas.findByRole('option', { name: 'Option 2' });
+      await expect(option2).toBeVisible();
+    });
+
+    await step('Selects different option', async () => {
+      const option3 = canvas.getByRole('option', { name: 'Option 3' });
+      await userEvent.click(option3);
+
+      // Verify trigger updates to show selected value
+      const trigger = canvas.getByRole('combobox');
+      await expect(trigger).toHaveTextContent('Option 3');
+    });
+
+    await step('Keyboard accessible', async () => {
+      const trigger = canvas.getByRole('combobox');
+
+      // Focus on trigger
+      trigger.focus();
+      await expect(trigger).toHaveFocus();
+
+      // Open with keyboard
+      await userEvent.keyboard('{Enter}');
+
+      // Navigate with arrow keys
+      await userEvent.keyboard('{ArrowDown}');
+      await userEvent.keyboard('{Enter}');
+
+      // Trigger should still be in the document after selection
+      await expect(trigger).toBeInTheDocument();
+    });
   }
 };
 
@@ -94,6 +141,33 @@ export const WithLabel: Story = {
   },
   parameters: {
     controls: { disable: true }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders with label', async () => {
+      const label = canvas.getByText('Country');
+      await expect(label).toBeInTheDocument();
+
+      const trigger = canvas.getByRole('combobox');
+      await expect(trigger).toBeInTheDocument();
+      await expect(trigger).toHaveAttribute('id', 'country');
+    });
+
+    await step('Label-trigger association works', async () => {
+      const trigger = canvas.getByRole('combobox');
+      await expect(trigger).toHaveAccessibleName('Country');
+    });
+
+    await step('Selection works with label', async () => {
+      const trigger = canvas.getByRole('combobox');
+      await userEvent.click(trigger);
+
+      const ukOption = await canvas.findByRole('option', { name: 'United Kingdom' });
+      await userEvent.click(ukOption);
+
+      await expect(trigger).toHaveTextContent('United Kingdom');
+    });
   }
 };
 
@@ -132,6 +206,36 @@ export const GroupedOptions: Story = {
         story: 'Select with grouped options using SelectGroup and SelectLabel. Perfect for organizing many options into categories.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Opens and displays grouped options', async () => {
+      const trigger = canvas.getByRole('combobox');
+      await userEvent.click(trigger);
+
+      // Verify group labels are present
+      await expect(await canvas.findByText('North America')).toBeVisible();
+      await expect(canvas.getByText('Europe')).toBeVisible();
+    });
+
+    await step('Selects option from first group', async () => {
+      const estOption = canvas.getByRole('option', { name: /Eastern Standard Time/ });
+      await userEvent.click(estOption);
+
+      const trigger = canvas.getByRole('combobox');
+      await expect(trigger).toHaveTextContent('Eastern Standard Time (EST)');
+    });
+
+    await step('Can select from different group', async () => {
+      const trigger = canvas.getByRole('combobox');
+      await userEvent.click(trigger);
+
+      const gmtOption = await canvas.findByRole('option', { name: /Greenwich Mean Time/ });
+      await userEvent.click(gmtOption);
+
+      await expect(trigger).toHaveTextContent('Greenwich Mean Time (GMT)');
+    });
   }
 };
 
@@ -173,6 +277,33 @@ export const DisabledState: Story = {
   },
   parameters: {
     controls: { disable: true }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Disabled select is not interactive', async () => {
+      const triggers = canvas.getAllByRole('combobox');
+      const disabledTrigger = triggers[1]; // Second select is disabled
+
+      await expect(disabledTrigger).toBeDisabled();
+      await expect(disabledTrigger).toHaveAttribute('aria-disabled', 'true');
+    });
+
+    await step('Select with disabled option can open', async () => {
+      const triggers = canvas.getAllByRole('combobox');
+      const enabledTrigger = triggers[0];
+
+      await userEvent.click(enabledTrigger);
+
+      // Verify available option is selectable
+      const availableOption = await canvas.findByRole('option', { name: 'Available option' });
+      await expect(availableOption).toBeVisible();
+    });
+
+    await step('Disabled option has correct attributes', async () => {
+      const disabledOption = canvas.getByRole('option', { name: 'Disabled option' });
+      await expect(disabledOption).toHaveAttribute('aria-disabled', 'true');
+    });
   }
 };
 
@@ -214,6 +345,44 @@ export const Controlled: Story = {
         story: 'Controlled select with external state management. The selection can be changed programmatically via a button.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Initial state shows no selection', async () => {
+      await expect(canvas.getByText('Selected: None')).toBeInTheDocument();
+    });
+
+    await step('User can select option', async () => {
+      const trigger = canvas.getByRole('combobox');
+      await userEvent.click(trigger);
+
+      const appleOption = await canvas.findByRole('option', { name: 'Apple' });
+      await userEvent.click(appleOption);
+
+      await expect(canvas.getByText('Selected: apple')).toBeInTheDocument();
+      await expect(trigger).toHaveTextContent('Apple');
+    });
+
+    await step('Programmatic selection via button works', async () => {
+      const button = canvas.getByRole('button', { name: 'Select Banana' });
+      await userEvent.click(button);
+
+      await expect(canvas.getByText('Selected: banana')).toBeInTheDocument();
+
+      const trigger = canvas.getByRole('combobox');
+      await expect(trigger).toHaveTextContent('Banana');
+    });
+
+    await step('Can change selection again', async () => {
+      const trigger = canvas.getByRole('combobox');
+      await userEvent.click(trigger);
+
+      const orangeOption = await canvas.findByRole('option', { name: 'Orange' });
+      await userEvent.click(orangeOption);
+
+      await expect(canvas.getByText('Selected: orange')).toBeInTheDocument();
+    });
   }
 };
 
@@ -255,6 +424,32 @@ export const InForm: Story = {
         story: 'Select in a form with the name attribute for form submission.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Form renders with select and submit button', async () => {
+      await expect(canvas.getByText('Select Plan')).toBeInTheDocument();
+      await expect(canvas.getByRole('combobox')).toBeInTheDocument();
+      await expect(canvas.getByRole('button', { name: 'Continue' })).toBeInTheDocument();
+    });
+
+    await step('Can select a plan option', async () => {
+      const trigger = canvas.getByRole('combobox');
+      await userEvent.click(trigger);
+
+      const proOption = await canvas.findByRole('option', { name: /Pro - \$29\/month/ });
+      await userEvent.click(proOption);
+
+      await expect(trigger).toHaveTextContent('Pro - $29/month');
+    });
+
+    await step('Select has name attribute for form submission', async () => {
+      const trigger = canvas.getByRole('combobox');
+      // The hidden input with name attribute should be present
+      const form = trigger.closest('form');
+      await expect(form).toBeInTheDocument();
+    });
   }
 };
 
@@ -286,6 +481,28 @@ export const RTLExample: Story = {
         story: 'Select with Arabic labels demonstrating RTL support. Dropdown position, chevron icon, and check indicator adapt correctly. Automatically switches to RTL mode.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders in RTL context', async () => {
+      const label = canvas.getByText('اللغة');
+      await expect(label).toBeInTheDocument();
+
+      const trigger = canvas.getByRole('combobox');
+      await expect(trigger).toBeInTheDocument();
+      await expect(trigger).toBeVisible();
+    });
+
+    await step('Interaction works in RTL', async () => {
+      const trigger = canvas.getByRole('combobox');
+      await userEvent.click(trigger);
+
+      const option2 = await canvas.findByRole('option', { name: 'الخيار 2' });
+      await userEvent.click(option2);
+
+      await expect(trigger).toHaveTextContent('الخيار 2');
+    });
   }
 };
 

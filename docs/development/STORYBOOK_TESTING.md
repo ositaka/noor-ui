@@ -7,10 +7,10 @@ Noor UI uses Storybook play functions for portable unit tests that run in:
 2. **CLI** - Headless testing via `npm run test-storybook`
 3. **Vitest** - Traditional test runner integration
 
-## Import Pattern (Storybook 10)
+## Import Pattern (Storybook 8.5+)
 
 ```tsx
-// Storybook 10 uses 'storybook/test' NOT '@storybook/test'
+// Storybook 8.5+ uses 'storybook/test' NOT '@storybook/test'
 import { expect, fn, userEvent, within } from 'storybook/test'
 ```
 
@@ -54,7 +54,7 @@ export const InteractionTest: Story = {
 ```tsx
 await expect(canvas.getByRole('button')).toBeInTheDocument()
 await expect(canvas.getByText('Submit')).toBeVisible()
-await expect(button).toHaveClass('bg-primary')
+// Don't test CSS class names — that's implementation detail
 ```
 
 ### 2. Interaction Tests
@@ -93,8 +93,6 @@ await userEvent.click(disabledButton)  // Error: pointer-events: none
 
 // CORRECT - verify disabled state without clicking
 await expect(button).toBeDisabled()
-await expect(button).toHaveClass('disabled:pointer-events-none')
-await expect(args.onClick).not.toHaveBeenCalled()
 ```
 
 ## Running Tests
@@ -153,7 +151,8 @@ Use the unit-test agent to create tests for the Input component
 The agent will:
 1. Read the component implementation
 2. Read existing stories
-3. Add play functions covering variants, interactions, RTL, and keyboard navigation
+3. Add play functions to **every story EXCEPT `All*` stories** (AllVariants, AllSizes, etc.)
+4. Test depth varies: Default = thorough, variants/RTL = basic, keyboard = full
 
 ## WCAG 2.2 AA Accessibility Testing
 

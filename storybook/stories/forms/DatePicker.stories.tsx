@@ -3,6 +3,7 @@ import { DatePicker, DateRangePicker, type DateRange } from '../../../components
 import { Label } from '../../../components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../../components/ui/card';
 import * as React from 'react';
+import { expect, fn, userEvent, within } from 'storybook/test';
 
 /**
  * Date Picker Component Stories
@@ -34,7 +35,8 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     placeholder: 'Pick a date',
-    placeholderAr: 'اختر تاريخ'
+    placeholderAr: 'اختر تاريخ',
+    onDateChange: fn()
   },
   globals: {
     direction: 'ltr',
@@ -55,6 +57,31 @@ export const Default: Story = {
         </p>
       </div>
     );
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders correctly', async () => {
+      const button = canvas.getByRole('button', { name: /pick a date|january|february|march|april|may|june|july|august|september|october|november|december/i });
+      await expect(button).toBeInTheDocument();
+      await expect(button).toBeVisible();
+      await expect(canvas.getByText('Date of Birth')).toBeInTheDocument();
+    });
+
+    await step('Opens calendar on click', async () => {
+      const button = canvas.getByRole('button', { name: /pick a date|january|february|march|april|may|june|july|august|september|october|november|december/i });
+      await userEvent.click(button);
+      // Calendar popover should open (grid role for calendar)
+      await expect(canvas.getByRole('grid')).toBeInTheDocument();
+    });
+
+    await step('Keyboard accessible', async () => {
+      const button = canvas.getByRole('button', { name: /pick a date|january|february|march|april|may|june|july|august|september|october|november|december/i });
+      button.focus();
+      await expect(button).toHaveFocus();
+      await userEvent.keyboard('{Enter}');
+      await expect(canvas.getByRole('grid')).toBeInTheDocument();
+    });
   },
   parameters: {
     docs: {
@@ -91,6 +118,20 @@ export const BasicDatePicker: Story = {
         <p className="text-sm text-muted-foreground">{formatDate(date)}</p>
       </div>
     );
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders basic date picker', async () => {
+      const button = canvas.getByRole('button');
+      await expect(button).toBeInTheDocument();
+      await expect(canvas.getByText('Date of Birth')).toBeInTheDocument();
+    });
+
+    await step('Displays formatted date', async () => {
+      const dateText = canvas.getByText(/january|february|march|april|may|june|july|august|september|october|november|december/i);
+      await expect(dateText).toBeInTheDocument();
+    });
   },
   globals: {
     direction: 'ltr',
@@ -138,6 +179,26 @@ export const DateRangePicker_: Story = {
       </div>
     );
   },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders date range picker', async () => {
+      const button = canvas.getByRole('button');
+      await expect(button).toBeInTheDocument();
+      await expect(canvas.getByText('Booking Period')).toBeInTheDocument();
+    });
+
+    await step('Displays formatted date range', async () => {
+      const rangeText = canvas.getByText(/-/);
+      await expect(rangeText).toBeInTheDocument();
+    });
+
+    await step('Opens calendar on click', async () => {
+      const button = canvas.getByRole('button');
+      await userEvent.click(button);
+      await expect(canvas.getByRole('grid')).toBeInTheDocument();
+    });
+  },
   globals: {
     direction: 'ltr',
     locale: 'en'
@@ -184,6 +245,21 @@ export const WithConstraints: Story = {
         </p>
       </div>
     );
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders with constraints', async () => {
+      const button = canvas.getByRole('button', { name: /select within next month/i });
+      await expect(button).toBeInTheDocument();
+      await expect(canvas.getByText(/available from/i)).toBeInTheDocument();
+    });
+
+    await step('Opens calendar with constraints', async () => {
+      const button = canvas.getByRole('button', { name: /select within next month/i });
+      await userEvent.click(button);
+      await expect(canvas.getByRole('grid')).toBeInTheDocument();
+    });
   },
   globals: {
     direction: 'ltr',
@@ -233,6 +309,21 @@ export const DisabledDates: Story = {
         </p>
       </div>
     );
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders with disabled dates', async () => {
+      const button = canvas.getByRole('button');
+      await expect(button).toBeInTheDocument();
+      await expect(canvas.getByText('Weekends are disabled')).toBeInTheDocument();
+    });
+
+    await step('Opens calendar with disabled dates', async () => {
+      const button = canvas.getByRole('button');
+      await userEvent.click(button);
+      await expect(canvas.getByRole('grid')).toBeInTheDocument();
+    });
   },
   globals: {
     direction: 'ltr',
@@ -308,6 +399,22 @@ export const RealWorldExample: Story = {
       </Card>
     );
   },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders hotel booking card', async () => {
+      await expect(canvas.getByText('Hotel Room Booking')).toBeInTheDocument();
+      await expect(canvas.getByText('Select check-in and check-out dates')).toBeInTheDocument();
+      await expect(canvas.getByText('Stay Period')).toBeInTheDocument();
+    });
+
+    await step('Date range picker is functional', async () => {
+      const button = canvas.getByRole('button', { name: /select dates/i });
+      await expect(button).toBeInTheDocument();
+      await userEvent.click(button);
+      await expect(canvas.getByRole('grid')).toBeInTheDocument();
+    });
+  },
   globals: {
     direction: 'ltr',
     locale: 'en'
@@ -346,6 +453,28 @@ export const DisabledState: Story = {
       </div>
     </div>
   ),
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders both enabled and disabled states', async () => {
+      const buttons = canvas.getAllByRole('button');
+      await expect(buttons).toHaveLength(2);
+      await expect(canvas.getByText('Enabled Date Picker')).toBeInTheDocument();
+      await expect(canvas.getByText('Disabled Date Picker')).toBeInTheDocument();
+    });
+
+    await step('Disabled date picker is disabled', async () => {
+      const buttons = canvas.getAllByRole('button');
+      const disabledButton = buttons[1];
+      await expect(disabledButton).toBeDisabled();
+    });
+
+    await step('Enabled date picker is not disabled', async () => {
+      const buttons = canvas.getAllByRole('button');
+      const enabledButton = buttons[0];
+      await expect(enabledButton).not.toBeDisabled();
+    });
+  },
   globals: {
     direction: 'ltr',
     locale: 'en'
@@ -386,6 +515,21 @@ export const RTLExample: Story = {
         <p className="text-sm text-muted-foreground">{formatDate(date)}</p>
       </div>
     );
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders in RTL context', async () => {
+      const button = canvas.getByRole('button');
+      await expect(button).toBeInTheDocument();
+      await expect(canvas.getByText('تاريخ الميلاد')).toBeInTheDocument();
+    });
+
+    await step('Interaction works in RTL', async () => {
+      const button = canvas.getByRole('button');
+      await userEvent.click(button);
+      await expect(canvas.getByRole('grid')).toBeInTheDocument();
+    });
   },
   globals: {
     direction: 'rtl',

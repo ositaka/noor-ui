@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { expect, within } from 'storybook/test';
 import {
   Avatar,
   AvatarFallback,
@@ -38,7 +39,22 @@ export const Default: Story = {
     direction: 'ltr',
     locale: 'en'
   },
-  render: (args) => <Avatar {...args} />
+  render: (args) => <Avatar {...args} />,
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders avatar with image', async () => {
+      const img = canvas.getByRole('img', { name: '@shadcn' });
+      await expect(img).toBeInTheDocument();
+      await expect(img).toBeVisible();
+    });
+
+    await step('Has proper accessibility attributes', async () => {
+      const img = canvas.getByRole('img', { name: '@shadcn' });
+      await expect(img).toHaveAttribute('alt', '@shadcn');
+      await expect(img).toHaveAttribute('src', 'https://github.com/shadcn.png');
+    });
+  }
 };
 
 // With Fallback - from component page lines 170-182
@@ -60,6 +76,28 @@ export const WithFallback: Story = {
   ),
   parameters: {
     controls: { disable: true }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Loaded image renders correctly', async () => {
+      const loadedImg = canvas.getByRole('img', { name: 'Loaded' });
+      await expect(loadedImg).toBeInTheDocument();
+      await expect(loadedImg).toBeVisible();
+    });
+
+    await step('Failed image shows fallback initials', async () => {
+      // Wait for fallback to appear after image fails to load
+      const fallback = await canvas.findByText('JD');
+      await expect(fallback).toBeInTheDocument();
+      await expect(fallback).toBeVisible();
+    });
+
+    await step('Fallback-only avatar renders', async () => {
+      const fallbackOnly = canvas.getByText('AB');
+      await expect(fallbackOnly).toBeInTheDocument();
+      await expect(fallbackOnly).toBeVisible();
+    });
   }
 };
 
@@ -112,6 +150,21 @@ export const AvatarGroup: Story = {
   ),
   parameters: {
     controls: { disable: true }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('All avatars in group render', async () => {
+      const fallbackAB = canvas.getByText('AB');
+      await expect(fallbackAB).toBeInTheDocument();
+      await expect(fallbackAB).toBeVisible();
+    });
+
+    await step('Overflow counter displays correctly', async () => {
+      const overflowCounter = canvas.getByText('+3');
+      await expect(overflowCounter).toBeInTheDocument();
+      await expect(overflowCounter).toBeVisible();
+    });
   }
 };
 
@@ -131,6 +184,26 @@ export const WithProfile: Story = {
   ),
   parameters: {
     controls: { disable: true }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Avatar renders with profile info', async () => {
+      const name = canvas.getByText('John Doe');
+      await expect(name).toBeInTheDocument();
+      await expect(name).toBeVisible();
+    });
+
+    await step('Profile email displays', async () => {
+      const email = canvas.getByText('ositaka@example.com');
+      await expect(email).toBeInTheDocument();
+      await expect(email).toBeVisible();
+    });
+
+    await step('Avatar image renders', async () => {
+      const img = canvasElement.querySelector('img');
+      await expect(img).toBeInTheDocument();
+    });
   }
 };
 
@@ -159,6 +232,20 @@ export const RTLWithProfile: Story = {
         story: 'Avatar with profile text demonstrating RTL support. Automatically switches to RTL mode.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders in RTL context', async () => {
+      const name = canvas.getByText('جون دو');
+      await expect(name).toBeInTheDocument();
+      await expect(name).toBeVisible();
+    });
+
+    await step('RTL profile has avatar', async () => {
+      const img = canvasElement.querySelector('img');
+      await expect(img).toBeInTheDocument();
+    });
   }
 };
 
@@ -193,6 +280,20 @@ export const RTLAvatarGroup: Story = {
         story: 'Avatar group with proper RTL overlapping. Automatically switches to RTL mode.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders RTL avatar group', async () => {
+      const counter = canvas.getByText('+5');
+      await expect(counter).toBeInTheDocument();
+      await expect(counter).toBeVisible();
+    });
+
+    await step('All avatars present in RTL', async () => {
+      const fallback = canvas.getByText('AB');
+      await expect(fallback).toBeInTheDocument();
+    });
   }
 };
 
@@ -216,6 +317,23 @@ export const FallbackOnly: Story = {
   ),
   parameters: {
     controls: { disable: true }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('All fallback avatars render', async () => {
+      await expect(canvas.getByText('CN')).toBeInTheDocument();
+      await expect(canvas.getByText('JD')).toBeInTheDocument();
+      await expect(canvas.getByText('AB')).toBeInTheDocument();
+      await expect(canvas.getByText('+2')).toBeInTheDocument();
+    });
+
+    await step('Fallback initials are visible', async () => {
+      await expect(canvas.getByText('CN')).toBeVisible();
+      await expect(canvas.getByText('JD')).toBeVisible();
+      await expect(canvas.getByText('AB')).toBeVisible();
+      await expect(canvas.getByText('+2')).toBeVisible();
+    });
   }
 };
 
@@ -251,5 +369,16 @@ export const CustomSizes: Story = {
   ),
   parameters: {
     controls: { disable: true }
+  },
+  play: async ({ canvasElement, step }) => {
+    await step('All custom size avatars render', async () => {
+      const avatars = canvasElement.querySelectorAll('span[class*="rounded-full"]');
+      await expect(avatars.length).toBeGreaterThanOrEqual(6);
+    });
+
+    await step('Avatar images load', async () => {
+      const images = canvasElement.querySelectorAll('img');
+      await expect(images.length).toBeGreaterThanOrEqual(1);
+    });
   }
 };

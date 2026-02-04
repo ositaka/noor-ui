@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { expect, within } from 'storybook/test';
 import { Alert, AlertDescription, AlertTitle } from '../../../components/ui/alert';
 import { Terminal, AlertCircle, CheckCircle2, AlertTriangle } from 'lucide-react';
 
@@ -42,6 +43,26 @@ export const Default: Story = {
   render: (args) => (
     <Alert {...args} className="w-full max-w-md" />
   ),
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders with correct ARIA role', async () => {
+      const alert = canvas.getByRole('alert');
+      await expect(alert).toBeInTheDocument();
+      await expect(alert).toBeVisible();
+    });
+
+    await step('Displays title and description', async () => {
+      await expect(canvas.getByText('Heads up!')).toBeInTheDocument();
+      await expect(canvas.getByText('You can add components to your app using the cli.')).toBeInTheDocument();
+    });
+
+    await step('Contains icon element', async () => {
+      const alert = canvas.getByRole('alert');
+      const svg = alert.querySelector('svg');
+      await expect(svg).toBeInTheDocument();
+    });
+  }
 };
 
 // Destructive - from component page lines 161-167
@@ -61,6 +82,20 @@ export const Destructive: Story = {
   },
   parameters: {
     controls: { disable: true }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders destructive variant', async () => {
+      const alert = canvas.getByRole('alert');
+      await expect(alert).toBeInTheDocument();
+      await expect(alert).toBeVisible();
+    });
+
+    await step('Displays error content', async () => {
+      await expect(canvas.getByText('Error')).toBeInTheDocument();
+      await expect(canvas.getByText('Your session has expired. Please log in again.')).toBeInTheDocument();
+    });
   }
 };
 
@@ -81,6 +116,20 @@ export const Success: Story = {
   },
   parameters: {
     controls: { disable: true }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders success variant', async () => {
+      const alert = canvas.getByRole('alert');
+      await expect(alert).toBeInTheDocument();
+      await expect(alert).toBeVisible();
+    });
+
+    await step('Displays success content', async () => {
+      await expect(canvas.getByText('Success')).toBeInTheDocument();
+      await expect(canvas.getByText('Your changes have been saved successfully.')).toBeInTheDocument();
+    });
   }
 };
 
@@ -101,6 +150,20 @@ export const Warning: Story = {
   },
   parameters: {
     controls: { disable: true }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders warning variant', async () => {
+      const alert = canvas.getByRole('alert');
+      await expect(alert).toBeInTheDocument();
+      await expect(alert).toBeVisible();
+    });
+
+    await step('Displays warning content', async () => {
+      await expect(canvas.getByText('Warning')).toBeInTheDocument();
+      await expect(canvas.getByText('Your free trial will expire in 3 days.')).toBeInTheDocument();
+    });
   }
 };
 
@@ -120,6 +183,26 @@ export const WithoutIcon: Story = {
   },
   parameters: {
     controls: { disable: true }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders without icon', async () => {
+      const alert = canvas.getByRole('alert');
+      await expect(alert).toBeInTheDocument();
+      await expect(alert).toBeVisible();
+    });
+
+    await step('Displays content without icon', async () => {
+      await expect(canvas.getByText('Update Available')).toBeInTheDocument();
+      await expect(canvas.getByText('A new version of the application is available.')).toBeInTheDocument();
+    });
+
+    await step('Verifies no icon present', async () => {
+      const alert = canvas.getByRole('alert');
+      const svg = alert.querySelector('svg');
+      await expect(svg).not.toBeInTheDocument();
+    });
   }
 };
 
@@ -191,6 +274,20 @@ export const RTLExample: Story = {
         story: 'Alert with Arabic text demonstrating RTL support. Icon aligns correctly to the start. Automatically switches to RTL mode.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders in RTL context', async () => {
+      const alert = canvas.getByRole('alert');
+      await expect(alert).toBeInTheDocument();
+      await expect(alert).toBeVisible();
+    });
+
+    await step('Displays Arabic content', async () => {
+      await expect(canvas.getByText('تحديث النظام')).toBeInTheDocument();
+      await expect(canvas.getByText('تحديث نظام جديد متاح.')).toBeInTheDocument();
+    });
   }
 };
 

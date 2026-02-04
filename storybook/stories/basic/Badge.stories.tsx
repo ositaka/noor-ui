@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { expect, within } from 'storybook/test';
 import { Badge } from '../../../components/ui/badge';
 import { Button } from '../../../components/ui/button';
 import { Check, AlertCircle, Star, Clock, Zap, CheckCircle2, XCircle } from 'lucide-react';
@@ -34,6 +35,15 @@ export const Default: Story = {
   args: {
     children: 'New',
     variant: 'default'
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders correctly', async () => {
+      const badge = canvas.getByText('New');
+      await expect(badge).toBeInTheDocument();
+      await expect(badge).toBeVisible();
+    });
   }
 };
 
@@ -53,6 +63,15 @@ export const WithIcon: Story = {
         story: 'Badge with icon. Use the Controls panel to try different variants.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders with icon and text', async () => {
+      const badge = canvas.getByText('Verified');
+      await expect(badge).toBeInTheDocument();
+      await expect(badge).toBeVisible();
+    });
   }
 };
 
@@ -73,6 +92,15 @@ export const StatusIndicator: Story = {
         story: 'Status indicator with icon. Use Controls to try different statuses and variants.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders status indicator', async () => {
+      const badge = canvas.getByText('Active');
+      await expect(badge).toBeInTheDocument();
+      await expect(badge).toBeVisible();
+    });
   }
 };
 
@@ -98,6 +126,18 @@ export const NotificationCount: Story = {
   ),
   parameters: {
     controls: { disable: true }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders notification badges on buttons', async () => {
+      await expect(canvas.getByText('Notifications')).toBeInTheDocument();
+      await expect(canvas.getByText('3')).toBeInTheDocument();
+      await expect(canvas.getByText('Messages')).toBeInTheDocument();
+      await expect(canvas.getByText('12')).toBeInTheDocument();
+      await expect(canvas.getByText('Cart')).toBeInTheDocument();
+      await expect(canvas.getByText('5')).toBeInTheDocument();
+    });
   }
 };
 
@@ -121,6 +161,15 @@ export const RTLExample: Story = {
         story: 'Badge with Arabic text. Icon automatically positions correctly in RTL. Use Controls to try different variants.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders in RTL context', async () => {
+      const badge = canvas.getByText('جديد');
+      await expect(badge).toBeInTheDocument();
+      await expect(badge).toBeVisible();
+    });
   }
 };
 
