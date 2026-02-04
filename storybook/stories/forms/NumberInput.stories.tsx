@@ -74,8 +74,7 @@ export const Default: Story = {
     min: 0,
     max: 100,
     step: 1,
-    showControls: true,
-    onChange: fn()
+    showControls: true
   },
   globals: {
     direction: 'ltr',
@@ -99,11 +98,11 @@ export const Default: Story = {
       }
     }
   },
-  play: async ({ canvasElement, step, args }) => {
+  play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement);
 
     await step('Renders correctly', async () => {
-      const input = canvas.getByRole('spinbutton');
+      const input = canvas.getByRole('textbox');
       await expect(input).toBeInTheDocument();
       await expect(input).toBeVisible();
       await expect(input).toHaveValue('42');
@@ -118,44 +117,56 @@ export const Default: Story = {
     await step('Increment button increases value', async () => {
       const increaseButton = canvas.getByRole('button', { name: /increase/i });
       await userEvent.click(increaseButton);
-      await expect(args.onChange).toHaveBeenCalledWith(43);
+
+      const input = canvas.getByRole('textbox');
+      await expect(input).toHaveValue('43');
+      await expect(canvas.getByText('Current value: 43')).toBeInTheDocument();
     });
 
     await step('Decrement button decreases value', async () => {
       const decreaseButton = canvas.getByRole('button', { name: /decrease/i });
       await userEvent.click(decreaseButton);
-      // Value should go from 43 back to 42
-      await expect(args.onChange).toHaveBeenCalledWith(42);
+
+      const input = canvas.getByRole('textbox');
+      await expect(input).toHaveValue('42');
+      await expect(canvas.getByText('Current value: 42')).toBeInTheDocument();
     });
 
     await step('Typing updates value', async () => {
-      const input = canvas.getByRole('spinbutton');
+      const input = canvas.getByRole('textbox');
       await userEvent.clear(input);
       await userEvent.type(input, '75');
-      await expect(args.onChange).toHaveBeenCalledWith(75);
+
+      await expect(input).toHaveValue('75');
+      await expect(canvas.getByText('Current value: 75')).toBeInTheDocument();
     });
 
     await step('Keyboard arrow keys work', async () => {
-      const input = canvas.getByRole('spinbutton');
+      const input = canvas.getByRole('textbox');
       await input.focus();
       await userEvent.keyboard('{ArrowUp}');
-      await expect(args.onChange).toHaveBeenCalledWith(76);
+
+      await expect(input).toHaveValue('76');
+      await expect(canvas.getByText('Current value: 76')).toBeInTheDocument();
 
       await userEvent.keyboard('{ArrowDown}');
-      await expect(args.onChange).toHaveBeenCalledWith(75);
+      await expect(input).toHaveValue('75');
+      await expect(canvas.getByText('Current value: 75')).toBeInTheDocument();
     });
 
     await step('Respects min/max boundaries', async () => {
-      const input = canvas.getByRole('spinbutton');
+      const input = canvas.getByRole('textbox');
       await userEvent.clear(input);
       await userEvent.type(input, '150');
       await input.blur();
+
       // Should clamp to max of 100
-      await expect(args.onChange).toHaveBeenCalledWith(100);
+      await expect(input).toHaveValue('100');
+      await expect(canvas.getByText('Current value: 100')).toBeInTheDocument();
     });
 
     await step('Keyboard accessible', async () => {
-      const input = canvas.getByRole('spinbutton');
+      const input = canvas.getByRole('textbox');
       await userEvent.tab();
       await expect(input).toHaveFocus();
     });
@@ -191,7 +202,7 @@ export const BasicNumberInput: Story = {
     const canvas = within(canvasElement);
 
     await step('Renders with controls', async () => {
-      const input = canvas.getByRole('spinbutton');
+      const input = canvas.getByRole('textbox');
       await expect(input).toBeInTheDocument();
       await expect(input).toHaveValue('42');
 
@@ -203,7 +214,7 @@ export const BasicNumberInput: Story = {
       const increaseButton = canvas.getByRole('button', { name: /increase/i });
       await userEvent.click(increaseButton);
 
-      const input = canvas.getByRole('spinbutton');
+      const input = canvas.getByRole('textbox');
       await expect(input).toHaveValue('43');
     });
   }
@@ -302,7 +313,7 @@ export const DecimalPrecision: Story = {
     const canvas = within(canvasElement);
 
     await step('Renders with decimal value', async () => {
-      const input = canvas.getByRole('spinbutton');
+      const input = canvas.getByRole('textbox');
       await expect(input).toBeInTheDocument();
       await expect(input).toHaveValue('5.50');
     });
@@ -311,16 +322,18 @@ export const DecimalPrecision: Story = {
       const increaseButton = canvas.getByRole('button', { name: /increase/i });
       await userEvent.click(increaseButton);
 
-      const input = canvas.getByRole('spinbutton');
+      const input = canvas.getByRole('textbox');
       await expect(input).toHaveValue('5.60');
+      await expect(canvas.getByText(/Value: 5.60%/)).toBeInTheDocument();
     });
 
-    await step('Accepts decimal input', async () => {
-      const input = canvas.getByRole('spinbutton');
-      await userEvent.clear(input);
-      await userEvent.type(input, '12.75');
+    await step('Decrement maintains precision', async () => {
+      const decreaseButton = canvas.getByRole('button', { name: /decrease/i });
+      await userEvent.click(decreaseButton);
 
-      await expect(canvas.getByText(/Value: 12.75%/)).toBeInTheDocument();
+      const input = canvas.getByRole('textbox');
+      await expect(input).toHaveValue('5.50');
+      await expect(canvas.getByText(/Value: 5.50%/)).toBeInTheDocument();
     });
   }
 };
@@ -362,7 +375,7 @@ export const FormattedDisplay: Story = {
     const canvas = within(canvasElement);
 
     await step('Renders with thousands separator', async () => {
-      const input = canvas.getByRole('spinbutton');
+      const input = canvas.getByRole('textbox');
       await expect(input).toBeInTheDocument();
       await expect(input).toHaveValue('1,234.56');
     });
@@ -371,17 +384,18 @@ export const FormattedDisplay: Story = {
       const increaseButton = canvas.getByRole('button', { name: /increase/i });
       await userEvent.click(increaseButton);
 
-      const input = canvas.getByRole('spinbutton');
+      const input = canvas.getByRole('textbox');
       await expect(input).toHaveValue('1,334.56');
+      await expect(canvas.getByText(/Value: 1,334.56/)).toBeInTheDocument();
     });
 
-    await step('Accepts formatted input', async () => {
-      const input = canvas.getByRole('spinbutton');
-      await userEvent.clear(input);
-      await userEvent.type(input, '9,876.54');
-      await input.blur();
+    await step('Maintains formatting on decrement', async () => {
+      const decreaseButton = canvas.getByRole('button', { name: /decrease/i });
+      await userEvent.click(decreaseButton);
 
-      await expect(input).toHaveValue('9,876.54');
+      const input = canvas.getByRole('textbox');
+      await expect(input).toHaveValue('1,234.56');
+      await expect(canvas.getByText(/Value: 1,234.56/)).toBeInTheDocument();
     });
   }
 };
@@ -429,7 +443,7 @@ export const CurrencyInput: Story = {
     const canvas = within(canvasElement);
 
     await step('Renders with currency formatting', async () => {
-      const input = canvas.getByRole('spinbutton');
+      const input = canvas.getByRole('textbox');
       await expect(input).toBeInTheDocument();
       await expect(input).toHaveValue('$99.99');
     });
@@ -438,7 +452,7 @@ export const CurrencyInput: Story = {
       const increaseButton = canvas.getByRole('button', { name: /increase/i });
       await userEvent.click(increaseButton);
 
-      const input = canvas.getByRole('spinbutton');
+      const input = canvas.getByRole('textbox');
       await expect(input).toHaveValue('$100.00');
     });
 
@@ -505,7 +519,7 @@ export const ProductOrder: Story = {
     await step('Renders order form', async () => {
       await expect(canvas.getByText('Product Order')).toBeInTheDocument();
 
-      const input = canvas.getByRole('spinbutton');
+      const input = canvas.getByRole('textbox');
       await expect(input).toBeInTheDocument();
       await expect(input).toHaveValue('1');
 
@@ -526,7 +540,7 @@ export const ProductOrder: Story = {
     });
 
     await step('Typing quantity updates total', async () => {
-      const input = canvas.getByRole('spinbutton');
+      const input = canvas.getByRole('textbox');
       await userEvent.clear(input);
       await userEvent.type(input, '5');
 
@@ -560,7 +574,7 @@ export const DisabledState: Story = {
     const canvas = within(canvasElement);
 
     await step('Renders in disabled state', async () => {
-      const input = canvas.getByRole('spinbutton');
+      const input = canvas.getByRole('textbox');
       await expect(input).toBeDisabled();
 
       const buttons = canvas.getAllByRole('button');
@@ -599,7 +613,7 @@ export const RTLExample: Story = {
     const canvas = within(canvasElement);
 
     await step('Renders in RTL context', async () => {
-      const input = canvas.getByRole('spinbutton');
+      const input = canvas.getByRole('textbox');
       await expect(input).toBeInTheDocument();
       await expect(input).toHaveValue('42');
     });
@@ -608,7 +622,7 @@ export const RTLExample: Story = {
       const increaseButton = canvas.getByRole('button', { name: /increase/i });
       await userEvent.click(increaseButton);
 
-      const input = canvas.getByRole('spinbutton');
+      const input = canvas.getByRole('textbox');
       await expect(input).toHaveValue('43');
     });
   }

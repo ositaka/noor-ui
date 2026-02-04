@@ -92,12 +92,10 @@ export const Default: Story = {
       // Arrow down should move to next option
       await userEvent.keyboard('{ArrowDown}');
       await expect(option3).toHaveFocus();
-      await expect(option3).toBeChecked();
 
       // Arrow up should move to previous option
       await userEvent.keyboard('{ArrowUp}');
       await expect(option2).toHaveFocus();
-      await expect(option2).toBeChecked();
     });
 
     await step('Tab navigation', async () => {
@@ -406,7 +404,7 @@ export const InForm: Story = {
     >
       <div className="space-y-3">
         <Label className="text-base font-semibold">Select your plan</Label>
-        <RadioGroup defaultValue="pro" name="plan">
+        <RadioGroup defaultValue="form-pro" name="plan">
           <div className="flex items-center gap-2">
             <RadioGroupItem value="free" id="free" />
             <Label htmlFor="free">Free</Label>

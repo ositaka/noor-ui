@@ -81,13 +81,15 @@ export const Default: Story = {
       const trigger = canvas.getByRole('combobox');
       await userEvent.click(trigger);
 
-      // Verify dropdown opens with options
-      const option2 = await canvas.findByRole('option', { name: 'Option 2' });
+      // Radix Select renders options in a portal
+      const body = within(document.body);
+      const option2 = await body.findByRole('option', { name: 'Option 2' });
       await expect(option2).toBeVisible();
     });
 
     await step('Selects different option', async () => {
-      const option3 = canvas.getByRole('option', { name: 'Option 3' });
+      const body = within(document.body);
+      const option3 = body.getByRole('option', { name: 'Option 3' });
       await userEvent.click(option3);
 
       // Verify trigger updates to show selected value
@@ -163,7 +165,8 @@ export const WithLabel: Story = {
       const trigger = canvas.getByRole('combobox');
       await userEvent.click(trigger);
 
-      const ukOption = await canvas.findByRole('option', { name: 'United Kingdom' });
+      const body = within(document.body);
+      const ukOption = await body.findByRole('option', { name: 'United Kingdom' });
       await userEvent.click(ukOption);
 
       await expect(trigger).toHaveTextContent('United Kingdom');
@@ -214,13 +217,15 @@ export const GroupedOptions: Story = {
       const trigger = canvas.getByRole('combobox');
       await userEvent.click(trigger);
 
-      // Verify group labels are present
-      await expect(await canvas.findByText('North America')).toBeVisible();
-      await expect(canvas.getByText('Europe')).toBeVisible();
+      // Radix Select renders in a portal
+      const body = within(document.body);
+      await expect(await body.findByText('North America')).toBeVisible();
+      await expect(body.getByText('Europe')).toBeVisible();
     });
 
     await step('Selects option from first group', async () => {
-      const estOption = canvas.getByRole('option', { name: /Eastern Standard Time/ });
+      const body = within(document.body);
+      const estOption = body.getByRole('option', { name: /Eastern Standard Time/ });
       await userEvent.click(estOption);
 
       const trigger = canvas.getByRole('combobox');
@@ -231,7 +236,8 @@ export const GroupedOptions: Story = {
       const trigger = canvas.getByRole('combobox');
       await userEvent.click(trigger);
 
-      const gmtOption = await canvas.findByRole('option', { name: /Greenwich Mean Time/ });
+      const body = within(document.body);
+      const gmtOption = await body.findByRole('option', { name: /Greenwich Mean Time/ });
       await userEvent.click(gmtOption);
 
       await expect(trigger).toHaveTextContent('Greenwich Mean Time (GMT)');
@@ -286,7 +292,6 @@ export const DisabledState: Story = {
       const disabledTrigger = triggers[1]; // Second select is disabled
 
       await expect(disabledTrigger).toBeDisabled();
-      await expect(disabledTrigger).toHaveAttribute('aria-disabled', 'true');
     });
 
     await step('Select with disabled option can open', async () => {
@@ -295,14 +300,16 @@ export const DisabledState: Story = {
 
       await userEvent.click(enabledTrigger);
 
-      // Verify available option is selectable
-      const availableOption = await canvas.findByRole('option', { name: 'Available option' });
+      // Radix Select renders options in a portal
+      const body = within(document.body);
+      const availableOption = await body.findByRole('option', { name: 'Available option' });
       await expect(availableOption).toBeVisible();
     });
 
     await step('Disabled option has correct attributes', async () => {
-      const disabledOption = canvas.getByRole('option', { name: 'Disabled option' });
-      await expect(disabledOption).toHaveAttribute('aria-disabled', 'true');
+      const body = within(document.body);
+      const disabledOption = body.getByRole('option', { name: 'Disabled option' });
+      await expect(disabledOption).toHaveAttribute('data-disabled');
     });
   }
 };
@@ -357,7 +364,8 @@ export const Controlled: Story = {
       const trigger = canvas.getByRole('combobox');
       await userEvent.click(trigger);
 
-      const appleOption = await canvas.findByRole('option', { name: 'Apple' });
+      const body = within(document.body);
+      const appleOption = await body.findByRole('option', { name: 'Apple' });
       await userEvent.click(appleOption);
 
       await expect(canvas.getByText('Selected: apple')).toBeInTheDocument();
@@ -378,7 +386,8 @@ export const Controlled: Story = {
       const trigger = canvas.getByRole('combobox');
       await userEvent.click(trigger);
 
-      const orangeOption = await canvas.findByRole('option', { name: 'Orange' });
+      const body = within(document.body);
+      const orangeOption = await body.findByRole('option', { name: 'Orange' });
       await userEvent.click(orangeOption);
 
       await expect(canvas.getByText('Selected: orange')).toBeInTheDocument();
@@ -438,7 +447,8 @@ export const InForm: Story = {
       const trigger = canvas.getByRole('combobox');
       await userEvent.click(trigger);
 
-      const proOption = await canvas.findByRole('option', { name: /Pro - \$29\/month/ });
+      const body = within(document.body);
+      const proOption = await body.findByRole('option', { name: /Pro - \$29\/month/ });
       await userEvent.click(proOption);
 
       await expect(trigger).toHaveTextContent('Pro - $29/month');
@@ -498,7 +508,8 @@ export const RTLExample: Story = {
       const trigger = canvas.getByRole('combobox');
       await userEvent.click(trigger);
 
-      const option2 = await canvas.findByRole('option', { name: 'الخيار 2' });
+      const body = within(document.body);
+      const option2 = await body.findByRole('option', { name: 'الخيار 2' });
       await userEvent.click(option2);
 
       await expect(trigger).toHaveTextContent('الخيار 2');

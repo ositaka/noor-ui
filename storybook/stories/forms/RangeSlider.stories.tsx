@@ -412,15 +412,9 @@ export const Disabled: Story = {
       const sliders = canvas.getAllByRole('slider');
       await expect(sliders).toHaveLength(2);
 
-      // Verify disabled state
-      await expect(sliders[0]).toBeDisabled();
-      await expect(sliders[1]).toBeDisabled();
-    });
-
-    await step('Has correct aria attributes', async () => {
-      const sliders = canvas.getAllByRole('slider');
-      await expect(sliders[0]).toHaveAttribute('aria-disabled', 'true');
-      await expect(sliders[1]).toHaveAttribute('aria-disabled', 'true');
+      // Radix Slider uses data-disabled attribute, not native disabled
+      await expect(sliders[0]).toHaveAttribute('data-disabled');
+      await expect(sliders[1]).toHaveAttribute('data-disabled');
     });
   }
 };

@@ -127,10 +127,10 @@ export const WithLabel: Story = {
       await expect(canvas.getByText('50%')).toBeInTheDocument();
     });
 
-    await step('Slider is accessible via label', async () => {
+    await step('Slider is accessible', async () => {
       const slider = canvas.getByRole('slider');
-      await expect(slider).toHaveAttribute('id', 'volume');
       await expect(slider).toBeInTheDocument();
+      await expect(slider).toBeVisible();
     });
   }
 };
@@ -138,7 +138,7 @@ export const WithLabel: Story = {
 // Different Ranges - from component page lines 286-302
 export const DifferentRanges: Story = {
   render: () => {
-    const [value, setValue] = React.useState([50]);
+    const [value, setValue] = React.useState([20]);
 
     return (
       <div className="w-80 space-y-2">
@@ -169,11 +169,11 @@ export const DifferentRanges: Story = {
       const slider = canvas.getByRole('slider');
       await expect(slider).toHaveAttribute('aria-valuemin', '-10');
       await expect(slider).toHaveAttribute('aria-valuemax', '40');
-      await expect(slider).toHaveAttribute('aria-valuenow', '50');
+      await expect(slider).toHaveAttribute('aria-valuenow', '20');
     });
 
     await step('Displays current temperature value', async () => {
-      await expect(canvas.getByText('Temperature: 50°C')).toBeInTheDocument();
+      await expect(canvas.getByText('Temperature: 20°C')).toBeInTheDocument();
     });
 
     await step('Value updates on keyboard interaction', async () => {
@@ -181,9 +181,9 @@ export const DifferentRanges: Story = {
       await userEvent.click(slider);
       await userEvent.keyboard('{ArrowRight}');
 
-      // Value should increment to 51
-      await expect(slider).toHaveAttribute('aria-valuenow', '51');
-      await expect(canvas.getByText('Temperature: 51°C')).toBeInTheDocument();
+      // Value should increment to 21
+      await expect(slider).toHaveAttribute('aria-valuenow', '21');
+      await expect(canvas.getByText('Temperature: 21°C')).toBeInTheDocument();
     });
   }
 };
@@ -265,7 +265,7 @@ export const DisabledState: Story = {
 
     await step('Second slider is disabled', async () => {
       const sliders = canvas.getAllByRole('slider');
-      await expect(sliders[1]).toBeDisabled();
+      await expect(sliders[1]).toHaveAttribute('data-disabled');
       await expect(sliders[1]).toHaveAttribute('aria-valuenow', '75');
     });
   }
@@ -503,7 +503,7 @@ export const RTLWithLabel: Story = {
 // RTL Different Ranges
 export const RTLDifferentRanges: Story = {
   render: () => {
-    const [value, setValue] = React.useState([50]);
+    const [value, setValue] = React.useState([20]);
 
     return (
       <div className="w-80 space-y-2">

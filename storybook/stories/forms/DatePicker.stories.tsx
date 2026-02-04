@@ -71,8 +71,12 @@ export const Default: Story = {
     await step('Opens calendar on click', async () => {
       const button = canvas.getByRole('button', { name: /pick a date|january|february|march|april|may|june|july|august|september|october|november|december/i });
       await userEvent.click(button);
-      // Calendar popover should open (grid role for calendar)
-      await expect(canvas.getByRole('grid')).toBeInTheDocument();
+      // Calendar renders in a portal, query from document.body
+      const body = within(document.body);
+      // Calendar has a "Today" button when opened
+      await expect(body.getByRole('button', { name: /today/i })).toBeInTheDocument();
+      // Close the calendar for the next test
+      await userEvent.keyboard('{Escape}');
     });
 
     await step('Keyboard accessible', async () => {
@@ -80,7 +84,9 @@ export const Default: Story = {
       button.focus();
       await expect(button).toHaveFocus();
       await userEvent.keyboard('{Enter}');
-      await expect(canvas.getByRole('grid')).toBeInTheDocument();
+      const body = within(document.body);
+      // Calendar has a "Today" button when opened
+      await expect(body.getByRole('button', { name: /today/i })).toBeInTheDocument();
     });
   },
   parameters: {
@@ -129,8 +135,9 @@ export const BasicDatePicker: Story = {
     });
 
     await step('Displays formatted date', async () => {
-      const dateText = canvas.getByText(/january|february|march|april|may|june|july|august|september|october|november|december/i);
-      await expect(dateText).toBeInTheDocument();
+      // Both button and <p> show the date, so use getAllByText
+      const dateTexts = canvas.getAllByText(/january|february|march|april|may|june|july|august|september|october|november|december/i);
+      await expect(dateTexts.length).toBeGreaterThan(0);
     });
   },
   globals: {
@@ -189,14 +196,19 @@ export const DateRangePicker_: Story = {
     });
 
     await step('Displays formatted date range', async () => {
-      const rangeText = canvas.getByText(/-/);
-      await expect(rangeText).toBeInTheDocument();
+      // Multiple elements may contain "-", use getAllByText
+      const rangeTexts = canvas.getAllByText(/-/);
+      await expect(rangeTexts.length).toBeGreaterThan(0);
     });
 
     await step('Opens calendar on click', async () => {
       const button = canvas.getByRole('button');
       await userEvent.click(button);
-      await expect(canvas.getByRole('grid')).toBeInTheDocument();
+      // Calendar renders in a portal - verify it opened by checking for "Today" button
+      const body = within(document.body);
+      await expect(body.getByRole('button', { name: /today/i })).toBeInTheDocument();
+      // Close the calendar
+      await userEvent.keyboard('{Escape}');
     });
   },
   globals: {
@@ -258,7 +270,11 @@ export const WithConstraints: Story = {
     await step('Opens calendar with constraints', async () => {
       const button = canvas.getByRole('button', { name: /select within next month/i });
       await userEvent.click(button);
-      await expect(canvas.getByRole('grid')).toBeInTheDocument();
+      const body = within(document.body);
+      // Verify calendar opened by checking for "Today" button
+      await expect(body.getByRole('button', { name: /today/i })).toBeInTheDocument();
+      // Close the calendar
+      await userEvent.keyboard('{Escape}');
     });
   },
   globals: {
@@ -322,7 +338,11 @@ export const DisabledDates: Story = {
     await step('Opens calendar with disabled dates', async () => {
       const button = canvas.getByRole('button');
       await userEvent.click(button);
-      await expect(canvas.getByRole('grid')).toBeInTheDocument();
+      const body = within(document.body);
+      // Verify calendar opened by checking for "Today" button
+      await expect(body.getByRole('button', { name: /today/i })).toBeInTheDocument();
+      // Close the calendar
+      await userEvent.keyboard('{Escape}');
     });
   },
   globals: {
@@ -412,7 +432,11 @@ export const RealWorldExample: Story = {
       const button = canvas.getByRole('button', { name: /select dates/i });
       await expect(button).toBeInTheDocument();
       await userEvent.click(button);
-      await expect(canvas.getByRole('grid')).toBeInTheDocument();
+      const body = within(document.body);
+      // Verify calendar opened by checking for "Today" button
+      await expect(body.getByRole('button', { name: /today/i })).toBeInTheDocument();
+      // Close the calendar
+      await userEvent.keyboard('{Escape}');
     });
   },
   globals: {
@@ -528,7 +552,12 @@ export const RTLExample: Story = {
     await step('Interaction works in RTL', async () => {
       const button = canvas.getByRole('button');
       await userEvent.click(button);
-      await expect(canvas.getByRole('grid')).toBeInTheDocument();
+      const body = within(document.body);
+      // In Arabic locale, the "Today" button will have Arabic text
+      // Calendar component uses t.ui.components.today which is "اليوم" in Arabic
+      await expect(body.getByRole('button', { name: /today|اليوم/i })).toBeInTheDocument();
+      // Close the calendar
+      await userEvent.keyboard('{Escape}');
     });
   },
   globals: {
