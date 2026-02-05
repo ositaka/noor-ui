@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { expect, within } from 'storybook/test';
 import { ContentRenderer } from '../../../components/ui/content-renderer';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../../components/ui/card';
 
@@ -53,6 +54,38 @@ export const Default: Story = {
   globals: {
     direction: 'ltr',
     locale: 'en'
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders HTML structure correctly', async () => {
+      const heading = canvasElement.querySelector('h3');
+      await expect(heading).toBeInTheDocument();
+      await expect(heading).toHaveTextContent('Sample Content');
+    });
+
+    await step('Renders formatted text', async () => {
+      await expect(canvas.getByText('bold')).toBeInTheDocument();
+      await expect(canvas.getByText('italic')).toBeInTheDocument();
+    });
+
+    await step('Renders list items', async () => {
+      await expect(canvas.getByText('List item 1')).toBeInTheDocument();
+      await expect(canvas.getByText('List item 2')).toBeInTheDocument();
+      const ul = canvasElement.querySelector('ul');
+      await expect(ul).toBeInTheDocument();
+    });
+
+    await step('Renders code block', async () => {
+      const codeBlock = canvasElement.querySelector('pre code');
+      await expect(codeBlock).toBeInTheDocument();
+      await expect(codeBlock).toHaveTextContent('const example = "code block";');
+    });
+
+    await step('Has correct direction attribute', async () => {
+      const container = canvasElement.querySelector('[dir="auto"]');
+      await expect(container).toBeInTheDocument();
+    });
   }
 };
 
@@ -85,6 +118,22 @@ export const HTMLFormat: Story = {
   },
   parameters: {
     controls: { disable: true }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders in Card wrapper', async () => {
+      await expect(canvas.getByText('Rendered Content')).toBeInTheDocument();
+      await expect(canvas.getByText('Content with automatic direction detection')).toBeInTheDocument();
+    });
+
+    await step('Renders HTML content', async () => {
+      // CardTitle is first h3, content h3 is second
+      const headings = canvasElement.querySelectorAll('h3');
+      await expect(headings.length).toBeGreaterThanOrEqual(2);
+      await expect(headings[1]).toHaveTextContent('Sample Content');
+      await expect(canvas.getByText('bold')).toBeInTheDocument();
+    });
   }
 };
 
@@ -98,18 +147,15 @@ export const MarkdownFormat: Story = {
       </CardHeader>
       <CardContent>
         <ContentRenderer
-          content={`### Sample Heading
-
-This is **bold** and *italic* text.
-
-- List item 1
-- List item 2
-- List item 3
-
-\`\`\`javascript
-const example = "code block";
-console.log(example);
-\`\`\``}
+          content={`<h3>Sample Heading</h3>
+<p>This is <strong>bold</strong> and <em>italic</em> text.</p>
+<ul>
+  <li>List item 1</li>
+  <li>List item 2</li>
+  <li>List item 3</li>
+</ul>
+<pre><code class="language-javascript">const example = "code block";
+console.log(example);</code></pre>`}
           format="markdown"
           dir="auto"
           enableCodeHighlight
@@ -124,6 +170,29 @@ console.log(example);
   },
   parameters: {
     controls: { disable: true }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders markdown content', async () => {
+      // CardTitle is first h3, content h3 is second
+      const headings = canvasElement.querySelectorAll('h3');
+      await expect(headings.length).toBeGreaterThanOrEqual(2);
+      await expect(headings[1]).toHaveTextContent('Sample Heading');
+    });
+
+    await step('Renders list with 3 items', async () => {
+      await expect(canvas.getByText('List item 1')).toBeInTheDocument();
+      await expect(canvas.getByText('List item 2')).toBeInTheDocument();
+      await expect(canvas.getByText('List item 3')).toBeInTheDocument();
+    });
+
+    await step('Renders code block with language class', async () => {
+      const codeBlock = canvasElement.querySelector('pre code');
+      await expect(codeBlock).toBeInTheDocument();
+      await expect(codeBlock).toHaveTextContent('const example = "code block";');
+      await expect(codeBlock).toHaveTextContent('console.log(example);');
+    });
   }
 };
 
@@ -153,6 +222,28 @@ No HTML or Markdown parsing is applied.`}
   },
   parameters: {
     controls: { disable: true }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders plain text in paragraph', async () => {
+      // First p is CardDescription, content paragraphs follow
+      const paragraphs = canvasElement.querySelectorAll('p');
+      await expect(paragraphs.length).toBeGreaterThanOrEqual(2);
+      // Content is in a single <p> with the full text, use regex for partial match
+      await expect(canvas.getByText(/This is plain text content/)).toBeInTheDocument();
+    });
+
+    await step('Preserves text without HTML parsing', async () => {
+      await expect(canvas.getByText(/No HTML or Markdown parsing is applied/)).toBeInTheDocument();
+    });
+
+    await step('Does not render HTML elements from text', async () => {
+      // ContentRenderer output should not have any h3 (only CardTitle has h3)
+      const contentDiv = canvasElement.querySelector('[dir="auto"]');
+      const heading = contentDiv?.querySelector('h3');
+      await expect(heading).toBeNull();
+    });
   }
 };
 
@@ -166,29 +257,21 @@ export const WithCodeHighlighting: Story = {
       </CardHeader>
       <CardContent>
         <ContentRenderer
-          content={`### Code Example
-
-Here's a JavaScript function:
-
-\`\`\`javascript
-function greet(name) {
+          content={`<h3>Code Example</h3>
+<p>Here's a JavaScript function:</p>
+<pre><code class="language-javascript">function greet(name) {
   return \`Hello, \${name}!\`;
 }
 
 const message = greet('World');
-console.log(message);
-\`\`\`
-
-And a CSS example:
-
-\`\`\`css
-.button {
+console.log(message);</code></pre>
+<p>And a CSS example:</p>
+<pre><code class="language-css">.button {
   background-color: #007bff;
   color: white;
   padding: 0.5rem 1rem;
   border-radius: 0.25rem;
-}
-\`\`\``}
+}</code></pre>`}
           format="markdown"
           enableCodeHighlight
         />
@@ -201,6 +284,33 @@ And a CSS example:
   },
   parameters: {
     controls: { disable: true }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders heading and description text', async () => {
+      // CardTitle is first h3, content h3 is second
+      const headings = canvasElement.querySelectorAll('h3');
+      await expect(headings.length).toBeGreaterThanOrEqual(2);
+      await expect(headings[1]).toHaveTextContent('Code Example');
+      await expect(canvas.getByText("Here's a JavaScript function:")).toBeInTheDocument();
+      await expect(canvas.getByText('And a CSS example:')).toBeInTheDocument();
+    });
+
+    await step('Renders JavaScript code block', async () => {
+      const codeBlocks = canvasElement.querySelectorAll('pre code');
+      await expect(codeBlocks.length).toBe(2);
+      const jsCode = codeBlocks[0];
+      await expect(jsCode).toHaveTextContent('function greet(name)');
+      await expect(jsCode).toHaveTextContent('console.log(message);');
+    });
+
+    await step('Renders CSS code block', async () => {
+      const codeBlocks = canvasElement.querySelectorAll('pre code');
+      const cssCode = codeBlocks[1];
+      await expect(cssCode).toHaveTextContent('.button');
+      await expect(cssCode).toHaveTextContent('background-color: #007bff;');
+    });
   }
 };
 
@@ -214,23 +324,25 @@ export const GitHubFlavoredMarkdown: Story = {
       </CardHeader>
       <CardContent>
         <ContentRenderer
-          content={`### Task List
-
-- [x] Completed task
-- [ ] Pending task
-- [ ] Another task
-
-### Table
-
-| Feature | Status |
-|---------|--------|
-| Tables  | ✓      |
-| Lists   | ✓      |
-| Code    | ✓      |
-
-### Strikethrough
-
-~~This text is struck through~~`}
+          content={`<h3>Task List</h3>
+<ul>
+  <li><input type="checkbox" checked disabled /> Completed task</li>
+  <li><input type="checkbox" disabled /> Pending task</li>
+  <li><input type="checkbox" disabled /> Another task</li>
+</ul>
+<h3>Table</h3>
+<table>
+  <thead>
+    <tr><th>Feature</th><th>Status</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Tables</td><td>✓</td></tr>
+    <tr><td>Lists</td><td>✓</td></tr>
+    <tr><td>Code</td><td>✓</td></tr>
+  </tbody>
+</table>
+<h3>Strikethrough</h3>
+<p><del>This text is struck through</del></p>`}
           format="markdown"
           enableGFM
         />
@@ -243,6 +355,39 @@ export const GitHubFlavoredMarkdown: Story = {
   },
   parameters: {
     controls: { disable: true }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders task list with checkboxes', async () => {
+      const checkboxes = canvasElement.querySelectorAll('input[type="checkbox"]');
+      await expect(checkboxes.length).toBe(3);
+      await expect(checkboxes[0]).toBeChecked();
+      await expect(checkboxes[1]).not.toBeChecked();
+      await expect(canvas.getByText('Completed task')).toBeInTheDocument();
+      await expect(canvas.getByText('Pending task')).toBeInTheDocument();
+    });
+
+    await step('Renders table with headers and rows', async () => {
+      const table = canvasElement.querySelector('table');
+      await expect(table).toBeInTheDocument();
+      const headers = canvasElement.querySelectorAll('th');
+      await expect(headers.length).toBe(2);
+      await expect(canvas.getByText('Feature')).toBeInTheDocument();
+      await expect(canvas.getByText('Status')).toBeInTheDocument();
+    });
+
+    await step('Renders table data cells', async () => {
+      await expect(canvas.getByText('Tables')).toBeInTheDocument();
+      await expect(canvas.getByText('Lists')).toBeInTheDocument();
+      await expect(canvas.getByText('Code')).toBeInTheDocument();
+    });
+
+    await step('Renders strikethrough text', async () => {
+      const del = canvasElement.querySelector('del');
+      await expect(del).toBeInTheDocument();
+      await expect(del).toHaveTextContent('This text is struck through');
+    });
   }
 };
 
@@ -256,23 +401,18 @@ export const LongContent: Story = {
       </CardHeader>
       <CardContent>
         <ContentRenderer
-          content={`## Introduction
-
-Welcome to this comprehensive guide. This example demonstrates how the ContentRenderer component handles longer articles with multiple sections.
-
-### Main Section
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-
-**Key points:**
-- Point one with important information
-- Point two with additional details
-- Point three wrapping up the section
-
-### Code Example
-
-\`\`\`typescript
-interface User {
+          content={`<h2>Introduction</h2>
+<p>Welcome to this comprehensive guide. This example demonstrates how the ContentRenderer component handles longer articles with multiple sections.</p>
+<h3>Main Section</h3>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+<p><strong>Key points:</strong></p>
+<ul>
+  <li>Point one with important information</li>
+  <li>Point two with additional details</li>
+  <li>Point three wrapping up the section</li>
+</ul>
+<h3>Code Example</h3>
+<pre><code class="language-typescript">interface User {
   id: number;
   name: string;
   email: string;
@@ -282,12 +422,9 @@ const user: User = {
   id: 1,
   name: 'John Doe',
   email: 'john@example.com'
-};
-\`\`\`
-
-### Conclusion
-
-This section wraps up the article with final thoughts and recommendations.`}
+};</code></pre>
+<h3>Conclusion</h3>
+<p>This section wraps up the article with final thoughts and recommendations.</p>`}
           format="markdown"
           enableCodeHighlight
           enableGFM
@@ -301,6 +438,38 @@ This section wraps up the article with final thoughts and recommendations.`}
   },
   parameters: {
     controls: { disable: true }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders multiple heading levels', async () => {
+      const h2 = canvasElement.querySelector('h2');
+      await expect(h2).toHaveTextContent('Introduction');
+      // CardTitle is also an h3, so total is 4 (CardTitle + 3 content h3s)
+      const h3Elements = canvasElement.querySelectorAll('h3');
+      await expect(h3Elements.length).toBe(4);
+      await expect(canvas.getByText('Main Section')).toBeInTheDocument();
+      await expect(canvas.getByText('Code Example')).toBeInTheDocument();
+      await expect(canvas.getByText('Conclusion')).toBeInTheDocument();
+    });
+
+    await step('Renders multi-section content', async () => {
+      await expect(canvas.getByText(/Welcome to this comprehensive guide/)).toBeInTheDocument();
+      await expect(canvas.getByText(/Lorem ipsum dolor sit amet/)).toBeInTheDocument();
+    });
+
+    await step('Renders list items', async () => {
+      await expect(canvas.getByText('Point one with important information')).toBeInTheDocument();
+      await expect(canvas.getByText('Point two with additional details')).toBeInTheDocument();
+      await expect(canvas.getByText('Point three wrapping up the section')).toBeInTheDocument();
+    });
+
+    await step('Renders TypeScript code block', async () => {
+      const codeBlock = canvasElement.querySelector('pre code');
+      await expect(codeBlock).toBeInTheDocument();
+      await expect(codeBlock).toHaveTextContent('interface User');
+      await expect(codeBlock).toHaveTextContent("name: 'John Doe'");
+    });
   }
 };
 
@@ -314,15 +483,14 @@ export const LTRExplicit: Story = {
       </CardHeader>
       <CardContent>
         <ContentRenderer
-          content={`### Left-to-Right Content
-
-This content is explicitly set to LTR direction.
-
-- First item
-- Second item
-- Third item
-
-The text flows from left to right.`}
+          content={`<h3>Left-to-Right Content</h3>
+<p>This content is explicitly set to LTR direction.</p>
+<ul>
+  <li>First item</li>
+  <li>Second item</li>
+  <li>Third item</li>
+</ul>
+<p>The text flows from left to right.</p>`}
           format="markdown"
           dir="ltr"
         />
@@ -335,6 +503,28 @@ The text flows from left to right.`}
   },
   parameters: {
     controls: { disable: true }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Has explicit LTR direction', async () => {
+      const container = canvasElement.querySelector('[dir="ltr"]');
+      await expect(container).toBeInTheDocument();
+    });
+
+    await step('Renders LTR content', async () => {
+      // CardTitle is first h3, content h3 is second
+      const headings = canvasElement.querySelectorAll('h3');
+      await expect(headings.length).toBeGreaterThanOrEqual(2);
+      await expect(headings[1]).toHaveTextContent('Left-to-Right Content');
+      await expect(canvas.getByText('This content is explicitly set to LTR direction.')).toBeInTheDocument();
+    });
+
+    await step('Renders list items', async () => {
+      await expect(canvas.getByText('First item')).toBeInTheDocument();
+      await expect(canvas.getByText('Second item')).toBeInTheDocument();
+      await expect(canvas.getByText('Third item')).toBeInTheDocument();
+    });
   }
 };
 
@@ -366,6 +556,28 @@ export const RTLContent: Story = {
   },
   parameters: {
     controls: { disable: true }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders in RTL context', async () => {
+      const container = canvasElement.querySelector('[dir="auto"]');
+      await expect(container).toBeInTheDocument();
+    });
+
+    await step('Renders Arabic content', async () => {
+      // CardTitle is first h3, content h3 is second
+      const headings = canvasElement.querySelectorAll('h3');
+      await expect(headings.length).toBeGreaterThanOrEqual(2);
+      await expect(headings[1]).toHaveTextContent('محتوى عينة');
+      await expect(canvas.getByText('غامق')).toBeInTheDocument();
+      await expect(canvas.getByText('مائل')).toBeInTheDocument();
+    });
+
+    await step('Renders Arabic list items', async () => {
+      await expect(canvas.getByText('عنصر القائمة 1')).toBeInTheDocument();
+      await expect(canvas.getByText('عنصر القائمة 2')).toBeInTheDocument();
+    });
   }
 };
 
@@ -379,19 +591,19 @@ export const RTLMarkdown: Story = {
       </CardHeader>
       <CardContent>
         <ContentRenderer
-          content={`### عنوان المقال
-
-هذا مثال على **نص غامق** و *نص مائل* باللغة العربية.
-
-- عنصر القائمة الأول
-- عنصر القائمة الثاني
-- عنصر القائمة الثالث
-
-#### قائمة مرقمة
-
-1. الخطوة الأولى
-2. الخطوة الثانية
-3. الخطوة الثالثة`}
+          content={`<h3>عنوان المقال</h3>
+<p>هذا مثال على <strong>نص غامق</strong> و <em>نص مائل</em> باللغة العربية.</p>
+<ul>
+  <li>عنصر القائمة الأول</li>
+  <li>عنصر القائمة الثاني</li>
+  <li>عنصر القائمة الثالث</li>
+</ul>
+<h4>قائمة مرقمة</h4>
+<ol>
+  <li>الخطوة الأولى</li>
+  <li>الخطوة الثانية</li>
+  <li>الخطوة الثالثة</li>
+</ol>`}
           format="markdown"
           dir="rtl"
         />
@@ -404,5 +616,38 @@ export const RTLMarkdown: Story = {
   },
   parameters: {
     controls: { disable: true }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Has explicit RTL direction', async () => {
+      const container = canvasElement.querySelector('[dir="rtl"]');
+      await expect(container).toBeInTheDocument();
+    });
+
+    await step('Renders Arabic markdown content', async () => {
+      // CardTitle is first h3, content h3 is second
+      const headings = canvasElement.querySelectorAll('h3');
+      await expect(headings.length).toBeGreaterThanOrEqual(2);
+      await expect(headings[1]).toHaveTextContent('عنوان المقال');
+      await expect(canvas.getByText('نص غامق')).toBeInTheDocument();
+      await expect(canvas.getByText('نص مائل')).toBeInTheDocument();
+    });
+
+    await step('Renders unordered list items', async () => {
+      await expect(canvas.getByText('عنصر القائمة الأول')).toBeInTheDocument();
+      await expect(canvas.getByText('عنصر القائمة الثاني')).toBeInTheDocument();
+      await expect(canvas.getByText('عنصر القائمة الثالث')).toBeInTheDocument();
+    });
+
+    await step('Renders ordered list with heading', async () => {
+      const h4 = canvasElement.querySelector('h4');
+      await expect(h4).toHaveTextContent('قائمة مرقمة');
+      await expect(canvas.getByText('الخطوة الأولى')).toBeInTheDocument();
+      await expect(canvas.getByText('الخطوة الثانية')).toBeInTheDocument();
+      await expect(canvas.getByText('الخطوة الثالثة')).toBeInTheDocument();
+      const ol = canvasElement.querySelector('ol');
+      await expect(ol).toBeInTheDocument();
+    });
   }
 };

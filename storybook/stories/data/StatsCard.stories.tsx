@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { expect, within } from 'storybook/test';
 import { StatsCard } from '../../../components/ui/stats-card';
 import { Card, CardContent } from '../../../components/ui/card';
 import { Users, TrendingUp, DollarSign, ShoppingCart, Activity, CreditCard, Download, Package } from 'lucide-react';
@@ -70,6 +71,26 @@ export const Default: Story = {
         inline: false
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders stats card correctly', async () => {
+      await expect(canvas.getByText('Total Users')).toBeInTheDocument();
+      await expect(canvas.getByText('Total Users')).toBeVisible();
+      await expect(canvas.getByText('2,543')).toBeInTheDocument();
+      await expect(canvas.getByText('2,543')).toBeVisible();
+    });
+
+    await step('Displays positive trend indicator', async () => {
+      await expect(canvas.getByText('+12%')).toBeInTheDocument();
+      await expect(canvas.getByText('from last month')).toBeInTheDocument();
+    });
+
+    await step('Contains icon element', async () => {
+      const svg = canvasElement.querySelector('svg');
+      await expect(svg).toBeInTheDocument();
+    });
   }
 };
 
@@ -116,6 +137,32 @@ export const DashboardGrid: Story = {
         story: 'Dashboard grid showing 4 stats cards with different metrics. Includes positive, negative, and no trend indicators.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders all four stat cards', async () => {
+      await expect(canvas.getByText('Total Users')).toBeInTheDocument();
+      await expect(canvas.getByText('Revenue')).toBeInTheDocument();
+      await expect(canvas.getByText('Sales')).toBeInTheDocument();
+      await expect(canvas.getByText('Active Orders')).toBeInTheDocument();
+    });
+
+    await step('Displays all values correctly', async () => {
+      await expect(canvas.getByText('2,543')).toBeInTheDocument();
+      await expect(canvas.getByText('$45,231')).toBeInTheDocument();
+      await expect(canvas.getByText('$12,234')).toBeInTheDocument();
+      await expect(canvas.getByText('573')).toBeInTheDocument();
+    });
+
+    await step('Shows positive trends correctly', async () => {
+      await expect(canvas.getByText('+12%')).toBeInTheDocument();
+      await expect(canvas.getByText('+8%')).toBeInTheDocument();
+    });
+
+    await step('Shows negative trend correctly', async () => {
+      await expect(canvas.getByText('-3%')).toBeInTheDocument();
+    });
   }
 };
 
@@ -143,6 +190,19 @@ export const PositiveTrend: Story = {
         story: 'Stats card with positive trend (+8%). Trend is displayed in green.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders positive trend card', async () => {
+      await expect(canvas.getByText('Revenue')).toBeInTheDocument();
+      await expect(canvas.getByText('$45,231')).toBeInTheDocument();
+    });
+
+    await step('Displays positive trend with plus sign', async () => {
+      await expect(canvas.getByText('+8%')).toBeInTheDocument();
+      await expect(canvas.getByText('from last month')).toBeInTheDocument();
+    });
   }
 };
 
@@ -170,6 +230,19 @@ export const NegativeTrend: Story = {
         story: 'Stats card with negative trend (-3%). Trend is displayed in red.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders negative trend card', async () => {
+      await expect(canvas.getByText('Sales')).toBeInTheDocument();
+      await expect(canvas.getByText('$12,234')).toBeInTheDocument();
+    });
+
+    await step('Displays negative trend with minus sign', async () => {
+      await expect(canvas.getByText('-3%')).toBeInTheDocument();
+      await expect(canvas.getByText('from last month')).toBeInTheDocument();
+    });
   }
 };
 
@@ -195,6 +268,19 @@ export const WithoutTrend: Story = {
         story: 'Stats card without trend indicator. Simple metric display.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders card without trend', async () => {
+      await expect(canvas.getByText('Active Orders')).toBeInTheDocument();
+      await expect(canvas.getByText('573')).toBeInTheDocument();
+    });
+
+    await step('Verifies no trend indicator present', async () => {
+      const text = canvasElement.textContent || '';
+      await expect(text).not.toContain('%');
+    });
   }
 };
 
@@ -299,6 +385,27 @@ export const InCardContainer: Story = {
         story: 'Stats cards grouped inside a card container with a title.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders container with heading', async () => {
+      await expect(canvas.getByText('Dashboard Overview')).toBeInTheDocument();
+    });
+
+    await step('Renders all stats cards in container', async () => {
+      await expect(canvas.getByText('Total Users')).toBeInTheDocument();
+      await expect(canvas.getByText('Revenue')).toBeInTheDocument();
+      await expect(canvas.getByText('Active Orders')).toBeInTheDocument();
+    });
+
+    await step('Displays values and trends', async () => {
+      await expect(canvas.getByText('2,543')).toBeInTheDocument();
+      await expect(canvas.getByText('$45,231')).toBeInTheDocument();
+      await expect(canvas.getByText('573')).toBeInTheDocument();
+      await expect(canvas.getByText('+12%')).toBeInTheDocument();
+      await expect(canvas.getByText('+8%')).toBeInTheDocument();
+    });
   }
 };
 
@@ -345,6 +452,21 @@ export const RTLExample: Story = {
         story: 'Dashboard grid in RTL mode with Arabic labels. Layout flows right-to-left.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders in RTL context', async () => {
+      await expect(canvas.getByText('إجمالي المستخدمين')).toBeInTheDocument();
+      await expect(canvas.getByText('الإيرادات')).toBeInTheDocument();
+      await expect(canvas.getByText('المبيعات')).toBeInTheDocument();
+      await expect(canvas.getByText('الطلبات النشطة')).toBeInTheDocument();
+    });
+
+    await step('Displays Arabic trend labels', async () => {
+      const trendLabels = canvas.getAllByText('مقابل الشهر الماضي');
+      await expect(trendLabels.length).toBe(3);
+    });
   }
 };
 
@@ -372,6 +494,19 @@ export const RTLPositiveTrend: Story = {
         story: 'Stats card with positive trend in RTL. Trend indicator works correctly in Arabic.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders RTL positive trend card', async () => {
+      await expect(canvas.getByText('الإيرادات')).toBeInTheDocument();
+      await expect(canvas.getByText('$45,231')).toBeInTheDocument();
+    });
+
+    await step('Displays positive trend in RTL', async () => {
+      await expect(canvas.getByText('+8%')).toBeInTheDocument();
+      await expect(canvas.getByText('مقابل الشهر الماضي')).toBeInTheDocument();
+    });
   }
 };
 
@@ -399,6 +534,19 @@ export const RTLNegativeTrend: Story = {
         story: 'Stats card with negative trend in RTL. Red color for negative values works in both directions.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders RTL negative trend card', async () => {
+      await expect(canvas.getByText('المبيعات')).toBeInTheDocument();
+      await expect(canvas.getByText('$12,234')).toBeInTheDocument();
+    });
+
+    await step('Displays negative trend in RTL', async () => {
+      await expect(canvas.getByText('-3%')).toBeInTheDocument();
+      await expect(canvas.getByText('مقابل الشهر الماضي')).toBeInTheDocument();
+    });
   }
 };
 
@@ -443,5 +591,26 @@ export const RTLInCardContainer: Story = {
         story: 'Stats cards in RTL inside a card container. All content flows right-to-left.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders RTL container with Arabic heading', async () => {
+      await expect(canvas.getByText('نظرة عامة على لوحة المعلومات')).toBeInTheDocument();
+    });
+
+    await step('Renders all RTL stats cards in container', async () => {
+      await expect(canvas.getByText('إجمالي المستخدمين')).toBeInTheDocument();
+      await expect(canvas.getByText('الإيرادات')).toBeInTheDocument();
+      await expect(canvas.getByText('الطلبات النشطة')).toBeInTheDocument();
+    });
+
+    await step('Displays Arabic values and trends', async () => {
+      await expect(canvas.getByText('2,543')).toBeInTheDocument();
+      await expect(canvas.getByText('$45,231')).toBeInTheDocument();
+      await expect(canvas.getByText('573')).toBeInTheDocument();
+      await expect(canvas.getByText('+12%')).toBeInTheDocument();
+      await expect(canvas.getByText('+8%')).toBeInTheDocument();
+    });
   }
 };
