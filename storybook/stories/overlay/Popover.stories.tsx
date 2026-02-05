@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { expect, fn, userEvent, within } from 'storybook/test';
 import { Popover, PopoverContent, PopoverTrigger } from '../../../components/ui/popover';
 import { Button } from '../../../components/ui/button';
 import { Input } from '../../../components/ui/input';
@@ -69,6 +70,49 @@ export const Default: Story = {
         inline: false
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+    const body = within(document.body);
+
+    await step('Renders trigger button', async () => {
+      const trigger = canvas.getByRole('button', { name: /open popover/i });
+      await expect(trigger).toBeInTheDocument();
+      await expect(trigger).toBeVisible();
+    });
+
+    await step('Opens popover on click', async () => {
+      const trigger = canvas.getByRole('button', { name: /open popover/i });
+      await userEvent.click(trigger);
+
+      // Wait for popover content to appear in portal
+      const popoverTitle = await body.findByText('Popover Title');
+      await expect(popoverTitle).toBeVisible();
+      await expect(body.getByText('This is a popover with some example content.')).toBeVisible();
+    });
+
+    await step('Closes popover when clicking outside', async () => {
+      // Click outside the popover
+      await userEvent.click(canvasElement);
+
+      // Popover content should not be visible
+      await expect(body.queryByText('Popover Title')).not.toBeInTheDocument();
+    });
+
+    await step('Keyboard accessible', async () => {
+      // Focus and activate with keyboard
+      await userEvent.tab();
+      const trigger = canvas.getByRole('button', { name: /open popover/i });
+      await expect(trigger).toHaveFocus();
+
+      await userEvent.keyboard('{Enter}');
+      const popoverTitle = await body.findByText('Popover Title');
+      await expect(popoverTitle).toBeVisible();
+
+      // Close with Escape key
+      await userEvent.keyboard('{Escape}');
+      await expect(body.queryByText('Popover Title')).not.toBeInTheDocument();
+    });
   }
 };
 
@@ -100,6 +144,19 @@ export const BasicUsage: Story = {
         story: 'Basic popover with title and description. Click the button to open.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+    const body = within(document.body);
+
+    await step('Renders and opens on interaction', async () => {
+      const trigger = canvas.getByRole('button', { name: /open popover/i });
+      await expect(trigger).toBeInTheDocument();
+
+      await userEvent.click(trigger);
+      const popoverTitle = await body.findByText('Popover Title');
+      await expect(popoverTitle).toBeVisible();
+    });
   }
 };
 
@@ -126,6 +183,18 @@ export const PositionTop: Story = {
         story: 'Popover positioned above the trigger button.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+    const body = within(document.body);
+
+    await step('Opens with top positioning', async () => {
+      const trigger = canvas.getByRole('button', { name: /top/i });
+      await userEvent.click(trigger);
+
+      const content = await body.findByText('Content positioned on top');
+      await expect(content).toBeVisible();
+    });
   }
 };
 
@@ -152,6 +221,18 @@ export const PositionRight: Story = {
         story: 'Popover positioned to the right of the trigger button.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+    const body = within(document.body);
+
+    await step('Opens with right positioning', async () => {
+      const trigger = canvas.getByRole('button', { name: /right/i });
+      await userEvent.click(trigger);
+
+      const content = await body.findByText('Content positioned on right');
+      await expect(content).toBeVisible();
+    });
   }
 };
 
@@ -178,6 +259,18 @@ export const PositionBottom: Story = {
         story: 'Popover positioned below the trigger button (default).'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+    const body = within(document.body);
+
+    await step('Opens with bottom positioning', async () => {
+      const trigger = canvas.getByRole('button', { name: /bottom/i });
+      await userEvent.click(trigger);
+
+      const content = await body.findByText('Content positioned on bottom');
+      await expect(content).toBeVisible();
+    });
   }
 };
 
@@ -204,6 +297,18 @@ export const PositionLeft: Story = {
         story: 'Popover positioned to the left of the trigger button.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+    const body = within(document.body);
+
+    await step('Opens with left positioning', async () => {
+      const trigger = canvas.getByRole('button', { name: /left/i });
+      await userEvent.click(trigger);
+
+      const content = await body.findByText('Content positioned on left');
+      await expect(content).toBeVisible();
+    });
   }
 };
 
@@ -304,6 +409,39 @@ export const WithForm: Story = {
         story: 'Popover with form inputs for settings. Shows width 320px and form controls.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+    const body = within(document.body);
+
+    await step('Opens popover with form', async () => {
+      const trigger = canvas.getByRole('button', { name: /settings/i });
+      await userEvent.click(trigger);
+
+      await expect(body.getByText('Dimensions')).toBeVisible();
+      await expect(body.getByText('Set the dimensions for the layer.')).toBeVisible();
+    });
+
+    await step('Form inputs are accessible and functional', async () => {
+      const widthInput = body.getByLabelText(/width/i);
+      const heightInput = body.getByLabelText(/height/i);
+
+      await expect(widthInput).toBeVisible();
+      await expect(widthInput).toHaveValue('100%');
+      await expect(heightInput).toBeVisible();
+      await expect(heightInput).toHaveValue('25px');
+
+      // Test form interaction
+      await userEvent.clear(widthInput);
+      await userEvent.type(widthInput, '200px');
+      await expect(widthInput).toHaveValue('200px');
+    });
+
+    await step('Save button is present', async () => {
+      const saveButton = body.getByRole('button', { name: /save changes/i });
+      await expect(saveButton).toBeVisible();
+      await expect(saveButton).toBeEnabled();
+    });
   }
 };
 
@@ -335,6 +473,25 @@ export const RTLBasic: Story = {
         story: 'Basic popover in RTL with Arabic text. Content flows right-to-left.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+    const body = within(document.body);
+
+    await step('Renders in RTL context', async () => {
+      const trigger = canvas.getByRole('button', { name: /فتح النافذة المنبثقة/i });
+      await expect(trigger).toBeInTheDocument();
+      await expect(trigger).toBeVisible();
+    });
+
+    await step('Interaction works in RTL', async () => {
+      const trigger = canvas.getByRole('button', { name: /فتح النافذة المنبثقة/i });
+      await userEvent.click(trigger);
+
+      const title = await body.findByText('عنوان النافذة المنبثقة');
+      await expect(title).toBeVisible();
+      await expect(body.getByText('هذه نافذة منبثقة مع بعض المحتوى التوضيحي.')).toBeVisible();
+    });
   }
 };
 
