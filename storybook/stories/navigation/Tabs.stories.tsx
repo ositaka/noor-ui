@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { expect, userEvent, within } from 'storybook/test';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../../components/ui/tabs';
 import { Card, CardContent } from '../../../components/ui/card';
 import { User, Bell } from 'lucide-react';
@@ -88,6 +89,76 @@ export const Default: Story = {
         inline: false
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders with default tab selected', async () => {
+      const accountTab = canvas.getByRole('tab', { name: /account/i });
+      const passwordTab = canvas.getByRole('tab', { name: /password/i });
+      const settingsTab = canvas.getByRole('tab', { name: /settings/i });
+
+      await expect(accountTab).toBeInTheDocument();
+      await expect(passwordTab).toBeInTheDocument();
+      await expect(settingsTab).toBeInTheDocument();
+
+      // Verify default tab is selected
+      await expect(accountTab).toHaveAttribute('data-state', 'active');
+      await expect(passwordTab).toHaveAttribute('data-state', 'inactive');
+
+      // Verify account content is visible
+      await expect(canvas.getByText(/make changes to your account here/i)).toBeVisible();
+    });
+
+    await step('Switches tabs on click', async () => {
+      const passwordTab = canvas.getByRole('tab', { name: /password/i });
+
+      await userEvent.click(passwordTab);
+
+      // Verify tab state changed
+      await expect(passwordTab).toHaveAttribute('data-state', 'active');
+      await expect(canvas.getByRole('tab', { name: /account/i })).toHaveAttribute('data-state', 'inactive');
+
+      // Verify content changed
+      await expect(canvas.getByText(/change your password here/i)).toBeVisible();
+    });
+
+    await step('Switches tabs on third tab click', async () => {
+      const settingsTab = canvas.getByRole('tab', { name: /settings/i });
+
+      await userEvent.click(settingsTab);
+
+      await expect(settingsTab).toHaveAttribute('data-state', 'active');
+      await expect(canvas.getByText(/manage your account settings/i)).toBeVisible();
+    });
+
+    await step('Keyboard navigation with arrow keys', async () => {
+      const accountTab = canvas.getByRole('tab', { name: /account/i });
+
+      // Focus first tab
+      accountTab.focus();
+      await expect(accountTab).toHaveFocus();
+
+      // Navigate right with arrow key
+      await userEvent.keyboard('{ArrowRight}');
+      await expect(canvas.getByRole('tab', { name: /password/i })).toHaveFocus();
+
+      // Navigate right again
+      await userEvent.keyboard('{ArrowRight}');
+      await expect(canvas.getByRole('tab', { name: /settings/i })).toHaveFocus();
+
+      // Navigate left
+      await userEvent.keyboard('{ArrowLeft}');
+      await expect(canvas.getByRole('tab', { name: /password/i })).toHaveFocus();
+    });
+
+    await step('Accessible with proper ARIA attributes', async () => {
+      const tablist = canvas.getByRole('tablist');
+      const accountTab = canvas.getByRole('tab', { name: /account/i });
+
+      await expect(tablist).toBeInTheDocument();
+      await expect(accountTab).toHaveAttribute('aria-selected');
+    });
   }
 };
 
@@ -140,6 +211,23 @@ export const BasicTabs: Story = {
         story: 'Basic tabs with three sections: Account, Password, and Settings.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders all three tabs', async () => {
+      await expect(canvas.getByRole('tab', { name: /account/i })).toBeVisible();
+      await expect(canvas.getByRole('tab', { name: /password/i })).toBeVisible();
+      await expect(canvas.getByRole('tab', { name: /settings/i })).toBeVisible();
+    });
+
+    await step('Switches between tabs', async () => {
+      await userEvent.click(canvas.getByRole('tab', { name: /password/i }));
+      await expect(canvas.getByText(/change your password here/i)).toBeVisible();
+
+      await userEvent.click(canvas.getByRole('tab', { name: /settings/i }));
+      await expect(canvas.getByText(/manage your account settings/i)).toBeVisible();
+    });
   }
 };
 
@@ -184,6 +272,29 @@ export const WithIcons: Story = {
         story: 'Tabs with icons for visual clarity. Icons are placed before the text.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders tabs with icons', async () => {
+      const profileTab = canvas.getByRole('tab', { name: /profile/i });
+      const notificationsTab = canvas.getByRole('tab', { name: /notifications/i });
+
+      await expect(profileTab).toBeVisible();
+      await expect(notificationsTab).toBeVisible();
+
+      // Verify default tab is active
+      await expect(profileTab).toHaveAttribute('data-state', 'active');
+    });
+
+    await step('Switches between icon tabs', async () => {
+      const notificationsTab = canvas.getByRole('tab', { name: /notifications/i });
+
+      await userEvent.click(notificationsTab);
+
+      await expect(notificationsTab).toHaveAttribute('data-state', 'active');
+      await expect(canvas.getByText(/your notifications settings/i)).toBeVisible();
+    });
   }
 };
 
@@ -237,6 +348,29 @@ export const Controlled: Story = {
         story: 'Controlled tabs with external state management. Shows active tab value above.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Shows initial state value', async () => {
+      await expect(canvas.getByText('Active tab: account')).toBeVisible();
+      await expect(canvas.getByRole('tab', { name: /account/i })).toHaveAttribute('data-state', 'active');
+    });
+
+    await step('Updates state when tab is clicked', async () => {
+      await userEvent.click(canvas.getByRole('tab', { name: /password/i }));
+
+      await expect(canvas.getByText('Active tab: password')).toBeVisible();
+      await expect(canvas.getByRole('tab', { name: /password/i })).toHaveAttribute('data-state', 'active');
+      await expect(canvas.getByText(/password tab content/i)).toBeVisible();
+    });
+
+    await step('Updates state for third tab', async () => {
+      await userEvent.click(canvas.getByRole('tab', { name: /settings/i }));
+
+      await expect(canvas.getByText('Active tab: settings')).toBeVisible();
+      await expect(canvas.getByRole('tab', { name: /settings/i })).toHaveAttribute('data-state', 'active');
+    });
   }
 };
 
@@ -279,6 +413,22 @@ export const TwoTabs: Story = {
         story: 'Tabs with two options, using grid-cols-2 for equal width.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders two-tab layout', async () => {
+      await expect(canvas.getByRole('tab', { name: /overview/i })).toBeVisible();
+      await expect(canvas.getByRole('tab', { name: /analytics/i })).toBeVisible();
+      await expect(canvas.getByRole('tab', { name: /overview/i })).toHaveAttribute('data-state', 'active');
+    });
+
+    await step('Switches between two tabs', async () => {
+      await userEvent.click(canvas.getByRole('tab', { name: /analytics/i }));
+
+      await expect(canvas.getByText(/analyze your usage patterns/i)).toBeVisible();
+      await expect(canvas.getByRole('tab', { name: /analytics/i })).toHaveAttribute('data-state', 'active');
+    });
   }
 };
 
@@ -331,6 +481,22 @@ export const RTLExample: Story = {
         story: 'Tabs with Arabic labels in RTL mode. Tab order and layout adapt automatically.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders in RTL context with Arabic text', async () => {
+      await expect(canvas.getByRole('tab', { name: /الحساب/i })).toBeVisible();
+      await expect(canvas.getByRole('tab', { name: /كلمة المرور/i })).toBeVisible();
+      await expect(canvas.getByRole('tab', { name: /الإعدادات/i })).toBeVisible();
+    });
+
+    await step('Tab switching works in RTL', async () => {
+      await userEvent.click(canvas.getByRole('tab', { name: /كلمة المرور/i }));
+
+      await expect(canvas.getByRole('tab', { name: /كلمة المرور/i })).toHaveAttribute('data-state', 'active');
+      await expect(canvas.getByText(/قم بتغيير كلمة المرور هنا/i)).toBeVisible();
+    });
   }
 };
 
