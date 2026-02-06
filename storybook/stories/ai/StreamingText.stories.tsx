@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { expect, userEvent, within } from 'storybook/test';
 import { StreamingText } from '../../../components/ui/streaming-text';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../../components/ui/card';
 import { useState } from 'react';
@@ -44,6 +45,35 @@ export const Default: Story = {
   globals: {
     direction: 'ltr',
     locale: 'en'
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders streaming text container', async () => {
+      // The outer span contains the streaming text
+      const textElement = canvasElement.querySelector('span');
+      await expect(textElement).toBeInTheDocument();
+    });
+
+    await step('Shows cursor while streaming', async () => {
+      // Wait briefly for streaming to start
+      await new Promise((resolve) => setTimeout(resolve, 100));
+
+      // Cursor element has animate-blink class
+      const cursor = canvasElement.querySelector('span.animate-blink');
+      await expect(cursor).toBeInTheDocument();
+    });
+
+    await step('Text content streams progressively', async () => {
+      // Wait for some characters to appear
+      await new Promise((resolve) => setTimeout(resolve, 200));
+
+      const textElement = canvasElement.querySelector('span');
+      const currentText = textElement?.textContent || '';
+
+      // Should have some text but not necessarily all yet (streaming in progress)
+      await expect(currentText.length).toBeGreaterThan(0);
+    });
   }
 };
 
@@ -69,6 +99,25 @@ export const FastSpeed: Story = {
   },
   parameters: {
     controls: { disable: true }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders card with fast streaming text', async () => {
+      await expect(canvas.getByText('Fast Streaming')).toBeInTheDocument();
+      await expect(canvas.getByText('Text streams at 10ms per character')).toBeInTheDocument();
+    });
+
+    await step('Text streams quickly and completes', async () => {
+      // Fast speed (10ms) - wait long enough for completion
+      // 61 characters * 10ms = 610ms, add buffer
+      await new Promise((resolve) => setTimeout(resolve, 800));
+
+      // Use findByText to wait for the text content to appear
+      const textMatch = await canvas.findByText(/This text appears very quickly/i, {}, { timeout: 2000 });
+      await expect(textMatch).toBeInTheDocument();
+      await expect(textMatch).toBeVisible();
+    });
   }
 };
 
@@ -94,6 +143,27 @@ export const SlowSpeed: Story = {
   },
   parameters: {
     controls: { disable: true }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders card with slow streaming text', async () => {
+      await expect(canvas.getByText('Slow Streaming')).toBeInTheDocument();
+    });
+
+    await step('Text streams slowly with partial content visible', async () => {
+      // Wait for a few characters to appear
+      await new Promise((resolve) => setTimeout(resolve, 500));
+
+      // Find the streaming text by looking for partial content
+      const textMatch = await canvas.findByText(/This text/i, {}, { timeout: 1000 });
+      const streamingText = textMatch.closest('span');
+      const currentText = streamingText?.textContent || '';
+
+      // Should have started but not completed
+      await expect(currentText.length).toBeGreaterThan(0);
+      await expect(currentText.length).toBeLessThan(57); // Full text is 57 chars
+    });
   }
 };
 
@@ -120,6 +190,31 @@ export const WithoutCursor: Story = {
   },
   parameters: {
     controls: { disable: true }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders card with streaming text', async () => {
+      await expect(canvas.getByText('No Cursor')).toBeInTheDocument();
+    });
+
+    await step('Cursor is not visible when showCursor is false', async () => {
+      // Wait for streaming to start
+      await new Promise((resolve) => setTimeout(resolve, 200));
+
+      // Cursor element should NOT be present
+      const cursor = canvasElement.querySelector('span.animate-blink');
+      await expect(cursor).not.toBeInTheDocument();
+    });
+
+    await step('Text still streams without cursor', async () => {
+      // Find text by content instead of CSS classes
+      const textMatch = await canvas.findByText(/This text streams/i, {}, { timeout: 1000 });
+      await expect(textMatch).toBeInTheDocument();
+
+      const currentText = textMatch.textContent || '';
+      await expect(currentText.length).toBeGreaterThan(0);
+    });
   }
 };
 
@@ -145,6 +240,25 @@ export const LongText: Story = {
   },
   parameters: {
     controls: { disable: true }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders card with long text content', async () => {
+      await expect(canvas.getByText('Long Content')).toBeInTheDocument();
+    });
+
+    await step('Long text streams progressively', async () => {
+      // Wait for streaming to progress
+      await new Promise((resolve) => setTimeout(resolve, 500));
+
+      // Find text by content
+      const textMatch = await canvas.findByText(/Artificial intelligence/i, {}, { timeout: 1000 });
+      await expect(textMatch).toBeInTheDocument();
+
+      const currentText = textMatch.textContent || '';
+      await expect(currentText.length).toBeGreaterThan(0);
+    });
   }
 };
 
@@ -193,6 +307,37 @@ export const ChatMessageSimulation: Story = {
   },
   parameters: {
     controls: { disable: true }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders chat simulation interface', async () => {
+      await expect(canvas.getByText('Chat Simulation')).toBeInTheDocument();
+      await expect(canvas.getByText('You')).toBeInTheDocument();
+      await expect(canvas.getByText('What is React?')).toBeInTheDocument();
+      await expect(canvas.getByText('AI Assistant')).toBeInTheDocument();
+    });
+
+    await step('Shows generate button initially', async () => {
+      const button = canvas.getByRole('button', { name: 'Generate Response' });
+      await expect(button).toBeInTheDocument();
+      await expect(button).toBeVisible();
+    });
+
+    await step('Clicking button triggers streaming response', async () => {
+      const button = canvas.getByRole('button', { name: 'Generate Response' });
+      await userEvent.click(button);
+
+      // Button should be gone
+      await expect(canvas.queryByRole('button', { name: 'Generate Response' })).not.toBeInTheDocument();
+
+      // Wait for streaming text to appear
+      const streamingText = await canvas.findByText(/React is a popular/i, {}, { timeout: 1000 });
+      await expect(streamingText).toBeInTheDocument();
+
+      const currentText = streamingText.textContent || '';
+      await expect(currentText.length).toBeGreaterThan(0);
+    });
   }
 };
 
@@ -230,6 +375,26 @@ export const WithCompletionCallback: Story = {
   },
   parameters: {
     controls: { disable: true }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders card with callback text', async () => {
+      await expect(canvas.getByText('Completion Callback')).toBeInTheDocument();
+    });
+
+    await step('Completion message not visible initially', async () => {
+      await expect(canvas.queryByText('✓ Streaming completed!')).not.toBeInTheDocument();
+    });
+
+    await step('Completion callback triggers after streaming finishes', async () => {
+      // Text is 66 chars * 30ms = 1980ms, add buffer
+      await new Promise((resolve) => setTimeout(resolve, 2500));
+
+      // Completion message should now be visible
+      await expect(canvas.getByText('✓ Streaming completed!')).toBeInTheDocument();
+      await expect(canvas.getByText('✓ Streaming completed!')).toBeVisible();
+    });
   }
 };
 
@@ -255,6 +420,27 @@ export const NotStreaming: Story = {
   },
   parameters: {
     controls: { disable: true }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders card with instant display', async () => {
+      await expect(canvas.getByText('Instant Display')).toBeInTheDocument();
+    });
+
+    await step('Full text appears immediately without streaming', async () => {
+      // Full text should be present immediately
+      const fullText = 'This text appears instantly without streaming effect.';
+      const streamingText = canvas.getByText(fullText);
+      await expect(streamingText).toBeInTheDocument();
+      await expect(streamingText.textContent).toBe(fullText);
+    });
+
+    await step('No cursor shown when isStreaming is false', async () => {
+      // Cursor element should NOT be present
+      const cursor = canvasElement.querySelector('span.animate-blink');
+      await expect(cursor).not.toBeInTheDocument();
+    });
   }
 };
 
@@ -280,5 +466,31 @@ export const RTL: Story = {
   },
   parameters: {
     controls: { disable: true }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders in RTL context', async () => {
+      await expect(canvas.getByText('نص متدفق')).toBeInTheDocument();
+      await expect(canvas.getByText('نص عربي مع تأثير الكتابة المباشرة')).toBeInTheDocument();
+    });
+
+    await step('Arabic text streams correctly in RTL', async () => {
+      // Wait for streaming to start
+      await new Promise((resolve) => setTimeout(resolve, 300));
+
+      // Find Arabic text by searching for the beginning
+      const streamingText = await canvas.findByText(/الذكاء/, {}, { timeout: 1000 });
+      await expect(streamingText).toBeInTheDocument();
+
+      const currentText = streamingText?.textContent || '';
+      await expect(currentText.length).toBeGreaterThan(0);
+    });
+
+    await step('Cursor displays correctly in RTL layout', async () => {
+      // Cursor element has animate-blink class
+      const cursor = canvasElement.querySelector('span.animate-blink');
+      await expect(cursor).toBeInTheDocument();
+    });
   }
 };

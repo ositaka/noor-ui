@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Stepper, type Step } from '../../../components/ui/stepper';
 import { Button } from '../../../components/ui/button';
 import { Card, CardContent } from '../../../components/ui/card';
+import { expect, userEvent, within, fn } from 'storybook/test';
 import * as React from 'react';
 
 /**
@@ -96,7 +97,8 @@ export const Default: Story = {
     currentStep: 1,
     orientation: 'horizontal',
     variant: 'default',
-    allowSkip: false
+    allowSkip: false,
+    onStepClick: fn()
   },
   globals: {
     direction: 'ltr',
@@ -113,6 +115,58 @@ export const Default: Story = {
         inline: false
       }
     }
+  },
+  play: async ({ canvasElement, step, args }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders correctly', async () => {
+      const stepper = canvas.getByRole('navigation', { name: /progress/i });
+      await expect(stepper).toBeInTheDocument();
+      await expect(stepper).toBeVisible();
+    });
+
+    await step('Displays all steps with correct content', async () => {
+      const steps = canvas.getAllByRole('button');
+      await expect(steps).toHaveLength(5);
+
+      // Check current step (index 1 = step 2)
+      await expect(steps[1]).toHaveAttribute('aria-current', 'step');
+      await expect(canvas.getByText('Personal Details')).toBeVisible();
+      // Note: Description is not rendered in default horizontal variant
+    });
+
+    await step('Shows completed step with check mark', async () => {
+      const firstStep = canvas.getAllByRole('button')[0];
+      // First step (index 0) should be complete since currentStep is 1
+      const checkIcon = firstStep.querySelector('svg');
+      await expect(checkIcon).toBeInTheDocument();
+    });
+
+    await step('Shows optional label correctly', async () => {
+      await expect(canvas.getByText(/optional/i)).toBeInTheDocument();
+    });
+
+    await step('Handles click on completed step', async () => {
+      const firstStep = canvas.getAllByRole('button')[0];
+      await userEvent.click(firstStep);
+      await expect(args.onStepClick).toHaveBeenCalledWith(0);
+    });
+
+    await step('Does not allow clicking future steps', async () => {
+      const futureStep = canvas.getAllByRole('button')[3]; // Step 4 (index 3)
+      await userEvent.click(futureStep);
+      // Should not be called since allowSkip is false and it's a future step
+      await expect(args.onStepClick).toHaveBeenCalledTimes(1); // Still 1 from previous test
+    });
+
+    await step('Keyboard navigation works', async () => {
+      const firstStep = canvas.getAllByRole('button')[0];
+      firstStep.focus();
+      await expect(firstStep).toHaveFocus();
+
+      await userEvent.keyboard('{Enter}');
+      await expect(args.onStepClick).toHaveBeenCalledWith(0);
+    });
   }
 };
 
@@ -157,6 +211,50 @@ export const BasicStepper: Story = {
         story: 'Basic stepper with navigation buttons. Click steps to navigate or use Previous/Next buttons.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders with navigation buttons', async () => {
+      const previousButton = canvas.getByRole('button', { name: /previous/i });
+      const nextButton = canvas.getByRole('button', { name: /next/i });
+      await expect(previousButton).toBeInTheDocument();
+      await expect(nextButton).toBeInTheDocument();
+    });
+
+    await step('Next button advances step', async () => {
+      const nextButton = canvas.getByRole('button', { name: /next/i });
+      const stepButtons = canvas.getAllByRole('button').filter(btn => !btn.textContent?.match(/previous|next/i));
+
+      await userEvent.click(nextButton);
+
+      // After clicking Next, currentStep should be 2 (index 2)
+      await expect(stepButtons[2]).toHaveAttribute('aria-current', 'step');
+    });
+
+    await step('Previous button goes back', async () => {
+      const previousButton = canvas.getByRole('button', { name: /previous/i });
+      const stepButtons = canvas.getAllByRole('button').filter(btn => !btn.textContent?.match(/previous|next/i));
+
+      await userEvent.click(previousButton);
+
+      // Should be back to step 1 (index 1)
+      await expect(stepButtons[1]).toHaveAttribute('aria-current', 'step');
+    });
+
+    await step('Can click on completed step to navigate', async () => {
+      const stepButtons = canvas.getAllByRole('button').filter(btn => !btn.textContent?.match(/previous|next/i));
+      const firstStep = stepButtons[0];
+
+      await userEvent.click(firstStep);
+
+      await expect(firstStep).toHaveAttribute('aria-current', 'step');
+    });
+
+    await step('Previous button disabled at first step', async () => {
+      const previousButton = canvas.getByRole('button', { name: /previous/i });
+      await expect(previousButton).toBeDisabled();
+    });
   }
 };
 
@@ -202,6 +300,29 @@ export const SimpleVariant: Story = {
         story: 'Simple variant with compact style ideal for top navigation. Perfect for limited vertical space.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders simple variant correctly', async () => {
+      const stepButtons = canvas.getAllByRole('button').filter(btn => !btn.textContent?.match(/previous|next/i));
+      await expect(stepButtons).toHaveLength(5);
+    });
+
+    await step('Simple variant navigation works', async () => {
+      const nextButton = canvas.getByRole('button', { name: /next/i });
+      await userEvent.click(nextButton);
+
+      const stepButtons = canvas.getAllByRole('button').filter(btn => !btn.textContent?.match(/previous|next/i));
+      await expect(stepButtons[2]).toHaveAttribute('aria-current', 'step');
+    });
+
+    await step('Clicking step in simple variant works', async () => {
+      const stepButtons = canvas.getAllByRole('button').filter(btn => !btn.textContent?.match(/previous|next/i));
+      await userEvent.click(stepButtons[0]);
+
+      await expect(stepButtons[0]).toHaveAttribute('aria-current', 'step');
+    });
   }
 };
 
@@ -247,6 +368,29 @@ export const CirclesVariant: Story = {
         story: 'Circles variant with large circles and scale effect. More visual emphasis on each step.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders circles variant correctly', async () => {
+      const stepButtons = canvas.getAllByRole('button').filter(btn => !btn.textContent?.match(/previous|next/i));
+      await expect(stepButtons).toHaveLength(5);
+    });
+
+    await step('Circles variant navigation works', async () => {
+      const nextButton = canvas.getByRole('button', { name: /next/i });
+      await userEvent.click(nextButton);
+
+      const stepButtons = canvas.getAllByRole('button').filter(btn => !btn.textContent?.match(/previous|next/i));
+      await expect(stepButtons[2]).toHaveAttribute('aria-current', 'step');
+    });
+
+    await step('Clicking step in circles variant works', async () => {
+      const stepButtons = canvas.getAllByRole('button').filter(btn => !btn.textContent?.match(/previous|next/i));
+      await userEvent.click(stepButtons[1]);
+
+      await expect(stepButtons[1]).toHaveAttribute('aria-current', 'step');
+    });
   }
 };
 
@@ -292,6 +436,30 @@ export const VerticalOrientation: Story = {
         story: 'Vertical orientation for sidebar navigation. Great for multi-step forms with sidebar layout.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders vertical orientation correctly', async () => {
+      const stepButtons = canvas.getAllByRole('button').filter(btn => !btn.textContent?.match(/previous|next/i));
+      await expect(stepButtons).toHaveLength(5);
+      await expect(canvas.getByText('Personal Details')).toBeVisible();
+    });
+
+    await step('Vertical orientation navigation works', async () => {
+      const nextButton = canvas.getByRole('button', { name: /next/i });
+      await userEvent.click(nextButton);
+
+      const stepButtons = canvas.getAllByRole('button').filter(btn => !btn.textContent?.match(/previous|next/i));
+      await expect(stepButtons[2]).toHaveAttribute('aria-current', 'step');
+    });
+
+    await step('Clicking step in vertical orientation works', async () => {
+      const stepButtons = canvas.getAllByRole('button').filter(btn => !btn.textContent?.match(/previous|next/i));
+      await userEvent.click(stepButtons[0]);
+
+      await expect(stepButtons[0]).toHaveAttribute('aria-current', 'step');
+    });
   }
 };
 
@@ -340,6 +508,41 @@ export const WithAllowSkip: Story = {
         story: 'Stepper with allowSkip enabled. Users can click any step to navigate freely.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders with allowSkip enabled', async () => {
+      const stepButtons = canvas.getAllByRole('button').filter(btn => !btn.textContent?.match(/previous|next/i));
+      await expect(stepButtons).toHaveLength(5);
+    });
+
+    await step('Can skip to future steps', async () => {
+      const stepButtons = canvas.getAllByRole('button').filter(btn => !btn.textContent?.match(/previous|next/i));
+      const futureStep = stepButtons[3]; // Step 4
+
+      await userEvent.click(futureStep);
+
+      await expect(futureStep).toHaveAttribute('aria-current', 'step');
+    });
+
+    await step('Can skip back to any previous step', async () => {
+      const stepButtons = canvas.getAllByRole('button').filter(btn => !btn.textContent?.match(/previous|next/i));
+      const firstStep = stepButtons[0];
+
+      await userEvent.click(firstStep);
+
+      await expect(firstStep).toHaveAttribute('aria-current', 'step');
+    });
+
+    await step('Can jump to last step directly', async () => {
+      const stepButtons = canvas.getAllByRole('button').filter(btn => !btn.textContent?.match(/previous|next/i));
+      const lastStep = stepButtons[4];
+
+      await userEvent.click(lastStep);
+
+      await expect(lastStep).toHaveAttribute('aria-current', 'step');
+    });
   }
 };
 
@@ -387,6 +590,31 @@ export const InCard: Story = {
         story: 'Stepper placed inside a card component with title and navigation.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders inside card with title', async () => {
+      await expect(canvas.getByText('Registration Progress')).toBeVisible();
+      const stepper = canvas.getByRole('navigation', { name: /progress/i });
+      await expect(stepper).toBeInTheDocument();
+    });
+
+    await step('Stepper functionality works in card context', async () => {
+      const nextButton = canvas.getByRole('button', { name: /next/i });
+      await userEvent.click(nextButton);
+
+      const stepButtons = canvas.getAllByRole('button').filter(btn => !btn.textContent?.match(/previous|next/i));
+      await expect(stepButtons[3]).toHaveAttribute('aria-current', 'step');
+    });
+
+    await step('Navigation in card works correctly', async () => {
+      const previousButton = canvas.getByRole('button', { name: /previous/i });
+      await userEvent.click(previousButton);
+
+      const stepButtons = canvas.getAllByRole('button').filter(btn => !btn.textContent?.match(/previous|next/i));
+      await expect(stepButtons[2]).toHaveAttribute('aria-current', 'step');
+    });
   }
 };
 
@@ -431,6 +659,30 @@ export const RTLExample: Story = {
         story: 'Basic stepper in RTL mode with Arabic titles and descriptions. Connectors flow right-to-left.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders in RTL context with Arabic text', async () => {
+      const stepper = canvas.getByRole('navigation', { name: /progress/i });
+      await expect(stepper).toBeInTheDocument();
+      await expect(canvas.getByText('التفاصيل الشخصية')).toBeVisible(); // Arabic for "Personal Details"
+    });
+
+    await step('RTL navigation works correctly', async () => {
+      const nextButton = canvas.getByRole('button', { name: /التالي/i });
+      await userEvent.click(nextButton);
+
+      const stepButtons = canvas.getAllByRole('button').filter(btn => !btn.textContent?.match(/السابق|التالي/));
+      await expect(stepButtons[2]).toHaveAttribute('aria-current', 'step');
+    });
+
+    await step('Clicking steps works in RTL', async () => {
+      const stepButtons = canvas.getAllByRole('button').filter(btn => !btn.textContent?.match(/السابق|التالي/));
+      await userEvent.click(stepButtons[0]);
+
+      await expect(stepButtons[0]).toHaveAttribute('aria-current', 'step');
+    });
   }
 };
 

@@ -3,6 +3,7 @@ import { NotificationCenter, type Notification } from '../../../components/ui/no
 import { Card, CardContent } from '../../../components/ui/card';
 import { MessageSquare, UserPlus, Heart, Star, Bell, AlertCircle } from 'lucide-react';
 import { useState } from 'react';
+import { fn } from 'storybook/test';
 
 /**
  * Notification Center Component Stories
@@ -37,7 +38,14 @@ type Story = StoryObj<typeof meta>;
 
 // Default
 export const Default: Story = {
-  render: () => {
+  args: {
+    onNotificationClick: fn(),
+    onMarkAsRead: fn(),
+    onMarkAllAsRead: fn(),
+    onClearAll: fn(),
+    onRemove: fn(),
+  },
+  render: (args) => {
     const [notifications, setNotifications] = useState<Notification[]>([
       {
         id: '1',
@@ -68,18 +76,26 @@ export const Default: Story = {
     return (
       <NotificationCenter
         notifications={notifications}
-        onNotificationClick={(notif) => console.log('Clicked:', notif)}
+        onNotificationClick={(notif) => {
+          args.onNotificationClick?.(notif);
+        }}
         onMarkAsRead={(id) => {
           setNotifications(prev =>
             prev.map(n => n.id === id ? { ...n, read: true } : n)
           );
+          args.onMarkAsRead?.(id);
         }}
         onMarkAllAsRead={() => {
           setNotifications(prev => prev.map(n => ({ ...n, read: true })));
+          args.onMarkAllAsRead?.();
         }}
-        onClearAll={() => setNotifications([])}
+        onClearAll={() => {
+          setNotifications([]);
+          args.onClearAll?.();
+        }}
         onRemove={(id) => {
           setNotifications(prev => prev.filter(n => n.id !== id));
+          args.onRemove?.(id);
         }}
       />
     );
@@ -92,7 +108,13 @@ export const Default: Story = {
 
 // Basic Usage - from page lines 126-157
 export const BasicUsage: Story = {
-  render: () => {
+  args: {
+    onMarkAsRead: fn(),
+    onMarkAllAsRead: fn(),
+    onClearAll: fn(),
+    onRemove: fn(),
+  },
+  render: (args) => {
     const [notifications, setNotifications] = useState<Notification[]>([
       {
         id: '1',
@@ -130,13 +152,19 @@ export const BasicUsage: Story = {
                 setNotifications(prev =>
                   prev.map(n => n.id === id ? { ...n, read: true } : n)
                 );
+                args.onMarkAsRead?.(id);
               }}
               onMarkAllAsRead={() => {
                 setNotifications(prev => prev.map(n => ({ ...n, read: true })));
+                args.onMarkAllAsRead?.();
               }}
-              onClearAll={() => setNotifications([])}
+              onClearAll={() => {
+                setNotifications([]);
+                args.onClearAll?.();
+              }}
               onRemove={(id) => {
                 setNotifications(prev => prev.filter(n => n.id !== id));
+                args.onRemove?.(id);
               }}
             />
           </div>
@@ -155,7 +183,12 @@ export const BasicUsage: Story = {
 
 // With Avatars - from page lines 159-171, 350-358
 export const WithAvatars: Story = {
-  render: () => {
+  args: {
+    onMarkAsRead: fn(),
+    onMarkAllAsRead: fn(),
+    onRemove: fn(),
+  },
+  render: (args) => {
     const [notifications, setNotifications] = useState<Notification[]>([
       {
         id: '1',
@@ -178,12 +211,15 @@ export const WithAvatars: Story = {
                 setNotifications(prev =>
                   prev.map(n => n.id === id ? { ...n, read: true } : n)
                 );
+                args.onMarkAsRead?.(id);
               }}
               onMarkAllAsRead={() => {
                 setNotifications(prev => prev.map(n => ({ ...n, read: true })));
+                args.onMarkAllAsRead?.();
               }}
               onRemove={(id) => {
                 setNotifications(prev => prev.filter(n => n.id !== id));
+                args.onRemove?.(id);
               }}
             />
           </div>
@@ -222,7 +258,13 @@ export const EmptyState: Story = {
 
 // Many Notifications
 export const ManyNotifications: Story = {
-  render: () => {
+  args: {
+    onMarkAsRead: fn(),
+    onMarkAllAsRead: fn(),
+    onClearAll: fn(),
+    onRemove: fn(),
+  },
+  render: (args) => {
     const [notifications, setNotifications] = useState<Notification[]>([
       {
         id: '1',
@@ -284,13 +326,19 @@ export const ManyNotifications: Story = {
                 setNotifications(prev =>
                   prev.map(n => n.id === id ? { ...n, read: true } : n)
                 );
+                args.onMarkAsRead?.(id);
               }}
               onMarkAllAsRead={() => {
                 setNotifications(prev => prev.map(n => ({ ...n, read: true })));
+                args.onMarkAllAsRead?.();
               }}
-              onClearAll={() => setNotifications([])}
+              onClearAll={() => {
+                setNotifications([]);
+                args.onClearAll?.();
+              }}
               onRemove={(id) => {
                 setNotifications(prev => prev.filter(n => n.id !== id));
+                args.onRemove?.(id);
               }}
               maxHeight="500px"
             />
@@ -429,7 +477,12 @@ export const AllRead: Story = {
 
 // With Mixed Avatars and Icons
 export const MixedAvatarsAndIcons: Story = {
-  render: () => {
+  args: {
+    onMarkAsRead: fn(),
+    onMarkAllAsRead: fn(),
+    onRemove: fn(),
+  },
+  render: (args) => {
     const [notifications, setNotifications] = useState<Notification[]>([
       {
         id: '1',
@@ -469,12 +522,15 @@ export const MixedAvatarsAndIcons: Story = {
                 setNotifications(prev =>
                   prev.map(n => n.id === id ? { ...n, read: true } : n)
                 );
+                args.onMarkAsRead?.(id);
               }}
               onMarkAllAsRead={() => {
                 setNotifications(prev => prev.map(n => ({ ...n, read: true })));
+                args.onMarkAllAsRead?.();
               }}
               onRemove={(id) => {
                 setNotifications(prev => prev.filter(n => n.id !== id));
+                args.onRemove?.(id);
               }}
             />
           </div>
@@ -493,7 +549,14 @@ export const MixedAvatarsAndIcons: Story = {
 
 // RTL
 export const RTL: Story = {
-  render: () => {
+  args: {
+    onNotificationClick: fn(),
+    onMarkAsRead: fn(),
+    onMarkAllAsRead: fn(),
+    onClearAll: fn(),
+    onRemove: fn(),
+  },
+  render: (args) => {
     const [notifications, setNotifications] = useState<Notification[]>([
       {
         id: '1',
@@ -533,18 +596,26 @@ export const RTL: Story = {
           <div className="flex justify-center">
             <NotificationCenter
               notifications={notifications}
-              onNotificationClick={(notif) => console.log('تم النقر:', notif)}
+              onNotificationClick={(notif) => {
+                args.onNotificationClick?.(notif);
+              }}
               onMarkAsRead={(id) => {
                 setNotifications(prev =>
                   prev.map(n => n.id === id ? { ...n, read: true } : n)
                 );
+                args.onMarkAsRead?.(id);
               }}
               onMarkAllAsRead={() => {
                 setNotifications(prev => prev.map(n => ({ ...n, read: true })));
+                args.onMarkAllAsRead?.();
               }}
-              onClearAll={() => setNotifications([])}
+              onClearAll={() => {
+                setNotifications([]);
+                args.onClearAll?.();
+              }}
               onRemove={(id) => {
                 setNotifications(prev => prev.filter(n => n.id !== id));
+                args.onRemove?.(id);
               }}
             />
           </div>

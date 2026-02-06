@@ -4,6 +4,7 @@ import { Label } from '../../../components/ui/label';
 import { Button } from '../../../components/ui/button';
 import { Separator } from '../../../components/ui/separator';
 import * as React from 'react';
+import { expect, fn, userEvent, within } from 'storybook/test';
 
 /**
  * Checkbox Component Stories
@@ -34,7 +35,8 @@ type Story = StoryObj<typeof meta>;
 // Default - Interactive playground with controls (hidden from stories list to avoid ID conflicts)
 export const Default: Story = {
   args: {
-    id: 'default'
+    id: 'default',
+    onCheckedChange: fn()
   },
   globals: {
     direction: 'ltr',
@@ -52,6 +54,50 @@ export const Default: Story = {
         inline: false
       }
     }
+  },
+  play: async ({ canvasElement, step, args }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders correctly with label', async () => {
+      const checkbox = canvas.getByRole('checkbox');
+      await expect(checkbox).toBeInTheDocument();
+      await expect(checkbox).toBeVisible();
+      await expect(checkbox).not.toBeChecked();
+      await expect(canvas.getByText('Accept terms and conditions')).toBeInTheDocument();
+    });
+
+    await step('Handles click interaction', async () => {
+      const checkbox = canvas.getByRole('checkbox');
+      await userEvent.click(checkbox);
+      await expect(checkbox).toBeChecked();
+      await expect(args.onCheckedChange).toHaveBeenCalledTimes(1);
+      await expect(args.onCheckedChange).toHaveBeenCalledWith(true);
+    });
+
+    await step('Can be unchecked', async () => {
+      const checkbox = canvas.getByRole('checkbox');
+      await userEvent.click(checkbox);
+      await expect(checkbox).not.toBeChecked();
+      await expect(args.onCheckedChange).toHaveBeenCalledTimes(2);
+      await expect(args.onCheckedChange).toHaveBeenCalledWith(false);
+    });
+
+    await step('Keyboard accessible', async () => {
+      const checkbox = canvas.getByRole('checkbox');
+      checkbox.focus();
+      await expect(checkbox).toHaveFocus();
+      await userEvent.keyboard(' ');
+      await expect(checkbox).toBeChecked();
+      await expect(args.onCheckedChange).toHaveBeenCalledTimes(3);
+    });
+
+    await step('Label click toggles checkbox', async () => {
+      const checkbox = canvas.getByRole('checkbox');
+      const label = canvas.getByText('Accept terms and conditions');
+      await userEvent.click(label);
+      await expect(checkbox).not.toBeChecked();
+      await expect(args.onCheckedChange).toHaveBeenCalledTimes(4);
+    });
   }
 };
 
@@ -79,6 +125,30 @@ export const WithLabel: Story = {
   },
   parameters: {
     controls: { disable: true }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('All checkboxes render with labels', async () => {
+      const checkboxes = canvas.getAllByRole('checkbox');
+      await expect(checkboxes).toHaveLength(3);
+      await expect(canvas.getByText('Send me marketing emails')).toBeInTheDocument();
+      await expect(canvas.getByText('Share analytics data')).toBeInTheDocument();
+      await expect(canvas.getByText('Allow social media integration')).toBeInTheDocument();
+    });
+
+    await step('Each checkbox can be toggled independently', async () => {
+      const marketingCheckbox = canvas.getByLabelText('Send me marketing emails');
+      const analyticsCheckbox = canvas.getByLabelText('Share analytics data');
+
+      await userEvent.click(marketingCheckbox);
+      await expect(marketingCheckbox).toBeChecked();
+      await expect(analyticsCheckbox).not.toBeChecked();
+
+      await userEvent.click(analyticsCheckbox);
+      await expect(marketingCheckbox).toBeChecked();
+      await expect(analyticsCheckbox).toBeChecked();
+    });
   }
 };
 
@@ -161,6 +231,59 @@ export const IndeterminateState: Story = {
         story: 'Demonstrates the indeterminate state (mixed) used for "Select All" functionality. When some but not all items are checked, the parent checkbox shows an indeterminate state.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Initial state - all unchecked', async () => {
+      const selectAll = canvas.getByLabelText('Select All');
+      const item1 = canvas.getByLabelText('Item 1');
+      const item2 = canvas.getByLabelText('Item 2');
+      const item3 = canvas.getByLabelText('Item 3');
+
+      await expect(selectAll).not.toBeChecked();
+      await expect(item1).not.toBeChecked();
+      await expect(item2).not.toBeChecked();
+      await expect(item3).not.toBeChecked();
+      await expect(selectAll).toHaveAttribute('data-state', 'unchecked');
+    });
+
+    await step('Checking one item shows indeterminate state', async () => {
+      const selectAll = canvas.getByLabelText('Select All');
+      const item1 = canvas.getByLabelText('Item 1');
+
+      await userEvent.click(item1);
+      await expect(item1).toBeChecked();
+      await expect(selectAll).toHaveAttribute('data-state', 'indeterminate');
+    });
+
+    await step('Checking all items removes indeterminate state', async () => {
+      const selectAll = canvas.getByLabelText('Select All');
+      const item2 = canvas.getByLabelText('Item 2');
+      const item3 = canvas.getByLabelText('Item 3');
+
+      await userEvent.click(item2);
+      await userEvent.click(item3);
+      await expect(selectAll).toBeChecked();
+      await expect(selectAll).toHaveAttribute('data-state', 'checked');
+    });
+
+    await step('Select All checkbox toggles all items', async () => {
+      const selectAll = canvas.getByLabelText('Select All');
+      const item1 = canvas.getByLabelText('Item 1');
+      const item2 = canvas.getByLabelText('Item 2');
+      const item3 = canvas.getByLabelText('Item 3');
+
+      await userEvent.click(selectAll);
+      await expect(item1).not.toBeChecked();
+      await expect(item2).not.toBeChecked();
+      await expect(item3).not.toBeChecked();
+
+      await userEvent.click(selectAll);
+      await expect(item1).toBeChecked();
+      await expect(item2).toBeChecked();
+      await expect(item3).toBeChecked();
+    });
   }
 };
 
@@ -184,6 +307,19 @@ export const Disabled: Story = {
   },
   parameters: {
     controls: { disable: true }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Disabled checkboxes are in correct state', async () => {
+      const disabledCheckbox = canvas.getByLabelText('Disabled checkbox');
+      const disabledChecked = canvas.getByLabelText('Disabled and checked');
+
+      await expect(disabledCheckbox).toBeDisabled();
+      await expect(disabledCheckbox).not.toBeChecked();
+      await expect(disabledChecked).toBeDisabled();
+      await expect(disabledChecked).toBeChecked();
+    });
   }
 };
 
@@ -222,6 +358,35 @@ export const Controlled: Story = {
         story: 'Controlled checkbox with external state management. The checkbox state can be toggled programmatically via a button.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Initial state shows unchecked', async () => {
+      const checkbox = canvas.getByLabelText('Controlled checkbox');
+      await expect(checkbox).not.toBeChecked();
+      await expect(canvas.getByText('Status: Unchecked')).toBeInTheDocument();
+    });
+
+    await step('Direct checkbox click updates state', async () => {
+      const checkbox = canvas.getByLabelText('Controlled checkbox');
+      await userEvent.click(checkbox);
+      await expect(checkbox).toBeChecked();
+      await expect(canvas.getByText('Status: Checked')).toBeInTheDocument();
+    });
+
+    await step('Button toggles checkbox programmatically', async () => {
+      const checkbox = canvas.getByLabelText('Controlled checkbox');
+      const toggleButton = canvas.getByRole('button', { name: 'Toggle' });
+
+      await userEvent.click(toggleButton);
+      await expect(checkbox).not.toBeChecked();
+      await expect(canvas.getByText('Status: Unchecked')).toBeInTheDocument();
+
+      await userEvent.click(toggleButton);
+      await expect(checkbox).toBeChecked();
+      await expect(canvas.getByText('Status: Checked')).toBeInTheDocument();
+    });
   }
 };
 
@@ -266,6 +431,44 @@ export const InForm: Story = {
         story: 'Checkboxes in a form with name and value attributes for form submission. The last checkbox is required.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Form renders with all checkboxes', async () => {
+      const newsletter = canvas.getByLabelText('Subscribe to newsletter');
+      const updates = canvas.getByLabelText('Receive product updates');
+      const terms = canvas.getByLabelText(/I agree to the terms and conditions/);
+
+      await expect(newsletter).toBeInTheDocument();
+      await expect(updates).toBeInTheDocument();
+      await expect(terms).toBeInTheDocument();
+      await expect(terms).toBeRequired();
+    });
+
+    await step('Checkboxes can be checked in form context', async () => {
+      const newsletter = canvas.getByLabelText('Subscribe to newsletter');
+      const terms = canvas.getByLabelText(/I agree to the terms and conditions/);
+
+      await userEvent.click(newsletter);
+      await expect(newsletter).toBeChecked();
+
+      await userEvent.click(terms);
+      await expect(terms).toBeChecked();
+    });
+
+    await step('Form has proper attributes for submission', async () => {
+      // Radix Checkbox stores name/value on hidden inputs, not on the button element
+      const form = canvasElement.querySelector('form')!;
+      const newsletterInput = form.querySelector('input[name="newsletter"]');
+      const updatesInput = form.querySelector('input[name="updates"]');
+      const termsInput = form.querySelector('input[name="terms"]');
+
+      await expect(newsletterInput).toBeInTheDocument();
+      await expect(newsletterInput).toHaveAttribute('value', 'yes');
+      await expect(updatesInput).toBeInTheDocument();
+      await expect(termsInput).toBeInTheDocument();
+    });
   }
 };
 
@@ -294,6 +497,22 @@ export const RTLExample: Story = {
         story: 'Checkboxes with Arabic labels demonstrating RTL support. Checkbox and label maintain proper spacing and alignment. Automatically switches to RTL mode.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders in RTL context', async () => {
+      const checkboxes = canvas.getAllByRole('checkbox');
+      await expect(checkboxes).toHaveLength(2);
+      await expect(canvas.getByText('أوافق على الشروط والأحكام')).toBeInTheDocument();
+      await expect(canvas.getByText('الاشتراك في النشرة الإخبارية')).toBeInTheDocument();
+    });
+
+    await step('Interaction works in RTL', async () => {
+      const termsCheckbox = canvas.getByLabelText('أوافق على الشروط والأحكام');
+      await userEvent.click(termsCheckbox);
+      await expect(termsCheckbox).toBeChecked();
+    });
   }
 };
 

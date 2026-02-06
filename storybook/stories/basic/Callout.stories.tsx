@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { expect, within } from 'storybook/test';
 import { Callout } from '../../../components/ui/callout';
 import { Lightbulb } from 'lucide-react';
 
@@ -44,7 +45,32 @@ export const Default: Story = {
     <div className="w-full max-w-2xl">
       <Callout {...args} />
     </div>
-  )
+  ),
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders with correct ARIA role', async () => {
+      const callout = canvas.getByRole('note');
+      await expect(callout).toBeInTheDocument();
+      await expect(callout).toBeVisible();
+    });
+
+    await step('Displays title correctly', async () => {
+      await expect(canvas.getByText('Information')).toBeInTheDocument();
+      await expect(canvas.getByText('Information')).toBeVisible();
+    });
+
+    await step('Displays content correctly', async () => {
+      await expect(canvas.getByText(/This is an informational callout with helpful details/i)).toBeInTheDocument();
+      await expect(canvas.getByText(/This is an informational callout with helpful details/i)).toBeVisible();
+    });
+
+    await step('Contains icon', async () => {
+      const callout = canvas.getByRole('note');
+      const icon = callout.querySelector('svg');
+      await expect(icon).toBeInTheDocument();
+    });
+  }
 };
 
 // Info - from component page lines 77-79
@@ -62,6 +88,15 @@ export const Info: Story = {
   },
   parameters: {
     controls: { disable: true }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders info callout with content', async () => {
+      await expect(canvas.getByRole('note')).toBeInTheDocument();
+      await expect(canvas.getByText('Information')).toBeInTheDocument();
+      await expect(canvas.getByText(/This is an informational callout/i)).toBeInTheDocument();
+    });
   }
 };
 
@@ -80,6 +115,15 @@ export const Warning: Story = {
   },
   parameters: {
     controls: { disable: true }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders warning callout with content', async () => {
+      await expect(canvas.getByRole('note')).toBeInTheDocument();
+      await expect(canvas.getByText('Warning')).toBeInTheDocument();
+      await expect(canvas.getByText(/Be careful! This action may have consequences/i)).toBeInTheDocument();
+    });
   }
 };
 
@@ -98,6 +142,15 @@ export const Error: Story = {
   },
   parameters: {
     controls: { disable: true }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders error callout with content', async () => {
+      await expect(canvas.getByRole('note')).toBeInTheDocument();
+      await expect(canvas.getByText('Error')).toBeInTheDocument();
+      await expect(canvas.getByText(/Something went wrong. Please try again/i)).toBeInTheDocument();
+    });
   }
 };
 
@@ -116,6 +169,15 @@ export const Success: Story = {
   },
   parameters: {
     controls: { disable: true }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders success callout with content', async () => {
+      await expect(canvas.getByRole('note')).toBeInTheDocument();
+      await expect(canvas.getByText('Success')).toBeInTheDocument();
+      await expect(canvas.getByText(/Your changes have been saved successfully/i)).toBeInTheDocument();
+    });
   }
 };
 
@@ -134,6 +196,14 @@ export const Note: Story = {
   },
   parameters: {
     controls: { disable: true }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders note callout without title', async () => {
+      await expect(canvas.getByRole('note')).toBeInTheDocument();
+      await expect(canvas.getByText(/Quick note without a title/i)).toBeInTheDocument();
+    });
   }
 };
 
@@ -157,6 +227,21 @@ export const WithCustomIcon: Story = {
         story: 'Callout with a custom icon. You can pass any Lucide icon via the icon prop.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders callout with custom icon', async () => {
+      await expect(canvas.getByRole('note')).toBeInTheDocument();
+      await expect(canvas.getByText('Pro Tip')).toBeInTheDocument();
+      await expect(canvas.getByText(/Use keyboard shortcuts to speed up your workflow/i)).toBeInTheDocument();
+    });
+
+    await step('Custom icon is present', async () => {
+      const callout = canvas.getByRole('note');
+      const icon = callout.querySelector('svg');
+      await expect(icon).toBeInTheDocument();
+    });
   }
 };
 
@@ -214,6 +299,18 @@ export const RTLInfo: Story = {
         story: 'Info callout with Arabic text demonstrating RTL support. Border aligns to the start (right in RTL). Automatically switches to RTL mode.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders in RTL context', async () => {
+      await expect(canvas.getByRole('note')).toBeInTheDocument();
+      await expect(canvas.getByText('معلومات')).toBeInTheDocument();
+    });
+
+    await step('RTL content displays correctly', async () => {
+      await expect(canvas.getByText(/هذا صندوق تنبيه معلوماتي/i)).toBeInTheDocument();
+    });
   }
 };
 

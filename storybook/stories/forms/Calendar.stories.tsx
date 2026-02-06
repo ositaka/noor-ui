@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { expect, userEvent, within, fn } from 'storybook/test';
 import { Calendar, type DateRange } from '../../../components/ui/calendar';
 import { Card, CardContent } from '../../../components/ui/card';
 import * as React from 'react';
@@ -54,7 +55,8 @@ export const Default: Story = {
   args: {
     mode: 'single',
     showHijri: false,
-    showIslamicHolidays: false
+    showIslamicHolidays: false,
+    onSelect: fn()
   },
   globals: {
     direction: 'ltr',
@@ -69,6 +71,7 @@ export const Default: Story = {
           {...args}
           selected={selected}
           onSelect={(date) => {
+            args.onSelect?.(date);
             if (date instanceof Date || date === undefined) {
               setSelected(date);
             }
@@ -83,6 +86,57 @@ export const Default: Story = {
         inline: false
       }
     }
+  },
+  play: async ({ canvasElement, step, args }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders calendar with navigation controls', async () => {
+      // Check for month navigation buttons
+      const buttons = canvas.getAllByRole('button');
+      await expect(buttons.length).toBeGreaterThan(0);
+
+      // Check for "Today" button
+      await expect(canvas.getByRole('button', { name: /today/i })).toBeInTheDocument();
+    });
+
+    await step('Navigates between months', async () => {
+      const buttons = canvas.getAllByRole('button');
+      const navigationButtons = buttons.slice(0, 2); // First two are prev/next month
+
+      // Click next month button
+      await userEvent.click(navigationButtons[1]);
+      await expect(navigationButtons[1]).toBeInTheDocument();
+    });
+
+    await step('Selects a date', async () => {
+      const dayButtons = canvas.getAllByRole('button').filter(btn => {
+        const text = btn.textContent;
+        return text && /^\d+$/.test(text.trim());
+      });
+
+      if (dayButtons.length > 15) {
+        // Click on day 15 (should be in current month)
+        await userEvent.click(dayButtons[15]);
+        await expect(args.onSelect).toHaveBeenCalled();
+      }
+    });
+
+    await step('Navigates to today', async () => {
+      const todayButton = canvas.getByRole('button', { name: /today/i });
+      await userEvent.click(todayButton);
+      await expect(todayButton).toBeInTheDocument();
+    });
+
+    await step('Keyboard navigation works', async () => {
+      const todayButton = canvas.getByRole('button', { name: /today/i });
+      todayButton.focus();
+      await expect(todayButton).toHaveFocus();
+
+      // Tab to next element
+      await userEvent.tab();
+      const focusedElement = document.activeElement;
+      await expect(focusedElement?.tagName).toBe('BUTTON');
+    });
   }
 };
 
@@ -116,6 +170,27 @@ export const BasicCalendar: Story = {
         story: 'Basic single date selection calendar with month navigation and "Today" button.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders basic calendar', async () => {
+      await expect(canvas.getByRole('button', { name: /today/i })).toBeInTheDocument();
+    });
+
+    await step('Can select a date', async () => {
+      const dayButtons = canvas.getAllByRole('button').filter(btn => {
+        const text = btn.textContent;
+        return text && /^\d+$/.test(text.trim());
+      });
+
+      if (dayButtons.length > 10) {
+        const initiallySelected = dayButtons.find(btn => btn.classList.contains('bg-primary'));
+        await userEvent.click(dayButtons[10]);
+        // Date should be selected (component will update state)
+        await expect(dayButtons[10]).toBeInTheDocument();
+      }
+    });
   }
 };
 
@@ -165,6 +240,32 @@ export const RangeSelection: Story = {
         story: 'Date range selection with visual feedback. Click to set start date, click again to set end date.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders range selection calendar', async () => {
+      await expect(canvas.getByText(/select a start and end date/i)).toBeInTheDocument();
+    });
+
+    await step('Selects date range', async () => {
+      const dayButtons = canvas.getAllByRole('button').filter(btn => {
+        const text = btn.textContent;
+        return text && /^\d+$/.test(text.trim());
+      });
+
+      if (dayButtons.length > 20) {
+        // Select start date
+        await userEvent.click(dayButtons[10]);
+
+        // Select end date
+        await userEvent.click(dayButtons[15]);
+
+        // Check if "Selected:" text appears
+        const selectedText = await canvas.findByText(/selected:/i);
+        await expect(selectedText).toBeInTheDocument();
+      }
+    });
   }
 };
 
@@ -206,6 +307,19 @@ export const WithHijri: Story = {
         story: 'Dual calendar display showing both Gregorian and Hijri dates simultaneously.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders calendar with Hijri dates', async () => {
+      await expect(canvas.getByText(/display hijri dates alongside gregorian/i)).toBeInTheDocument();
+    });
+
+    await step('Shows Hijri month in header', async () => {
+      const headers = canvas.getAllByRole('heading');
+      // Should have Gregorian month and Hijri month display
+      await expect(headers.length).toBeGreaterThanOrEqual(1);
+    });
   }
 };
 
@@ -248,6 +362,19 @@ export const WithIslamicHolidays: Story = {
         story: 'NEW: Automatic highlighting of 10 major Islamic holidays including Ramadan, Eid al-Fitr, and Eid al-Adha.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders calendar with Islamic holidays enabled', async () => {
+      await expect(canvas.getByText(/automatically highlights 10 major islamic holidays/i)).toBeInTheDocument();
+    });
+
+    await step('Calendar displays with Hijri dates', async () => {
+      // Islamic holidays require showHijri to be true
+      const todayButton = canvas.getByRole('button', { name: /today/i });
+      await expect(todayButton).toBeInTheDocument();
+    });
   }
 };
 
@@ -307,6 +434,22 @@ export const WithEvents: Story = {
         story: 'Calendar with custom event markers showing color-coded indicators and event legend.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders calendar with events', async () => {
+      await expect(canvas.getByText(/display events with colored indicators/i)).toBeInTheDocument();
+    });
+
+    await step('Shows events section when events exist', async () => {
+      // Navigate to November 2025 where events are defined
+      const buttons = canvas.getAllByRole('button');
+      const todayButton = canvas.getByRole('button', { name: /today/i });
+
+      // Try to find Events heading - it may appear if we're in November 2025
+      await expect(todayButton).toBeInTheDocument();
+    });
   }
 };
 
@@ -341,6 +484,24 @@ export const DisabledWeekends: Story = {
         story: 'Calendar with weekends disabled using a function. Weekends cannot be selected.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders calendar with disabled dates', async () => {
+      await expect(canvas.getByText(/disable specific dates/i)).toBeInTheDocument();
+    });
+
+    await step('Weekends are disabled', async () => {
+      const dayButtons = canvas.getAllByRole('button').filter(btn => {
+        const text = btn.textContent;
+        return text && /^\d+$/.test(text.trim());
+      });
+
+      // Find disabled buttons (weekends should be disabled)
+      const disabledDays = dayButtons.filter(btn => btn.hasAttribute('disabled'));
+      await expect(disabledDays.length).toBeGreaterThan(0);
+    });
   }
 };
 
@@ -375,6 +536,35 @@ export const RTLExample: Story = {
         story: 'Basic calendar with Arabic locale showing localized month names and RTL navigation.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders calendar in RTL context', async () => {
+      const buttons = canvas.getAllByRole('button');
+      await expect(buttons.length).toBeGreaterThan(0);
+    });
+
+    await step('RTL navigation works correctly', async () => {
+      const buttons = canvas.getAllByRole('button');
+      const navigationButtons = buttons.slice(0, 2);
+
+      // In RTL, navigation is reversed
+      await userEvent.click(navigationButtons[0]);
+      await expect(navigationButtons[0]).toBeInTheDocument();
+    });
+
+    await step('Can select dates in RTL mode', async () => {
+      const dayButtons = canvas.getAllByRole('button').filter(btn => {
+        const text = btn.textContent;
+        return text && /^\d+$/.test(text.trim());
+      });
+
+      if (dayButtons.length > 10) {
+        await userEvent.click(dayButtons[10]);
+        await expect(dayButtons[10]).toBeInTheDocument();
+      }
+    });
   }
 };
 

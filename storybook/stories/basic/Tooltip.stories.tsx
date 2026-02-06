@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { expect, userEvent, within } from 'storybook/test';
 import { Tooltip, TooltipContent, TooltipTrigger, TooltipProvider } from '../../../components/ui/tooltip';
 import { Button } from '../../../components/ui/button';
 import { Info, Plus, Settings, Trash2 } from 'lucide-react';
@@ -49,7 +50,49 @@ export const Default: Story = {
     direction: 'ltr',
     locale: 'en'
   },
-  render: (args) => <Tooltip {...args} />
+  render: (args) => <Tooltip {...args} />,
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders trigger button correctly', async () => {
+      const trigger = canvas.getByRole('button', { name: /hover me/i });
+      await expect(trigger).toBeInTheDocument();
+      await expect(trigger).toBeVisible();
+    });
+
+    await step('Shows tooltip on hover', async () => {
+      const trigger = canvas.getByRole('button', { name: /hover me/i });
+      await userEvent.hover(trigger);
+
+      // Wait for tooltip to appear
+      const tooltip = await canvas.findByRole('tooltip');
+      await expect(tooltip).toBeInTheDocument();
+      await expect(tooltip).toBeVisible();
+    });
+
+    await step('Displays correct tooltip content', async () => {
+      const tooltip = canvas.getByRole('tooltip');
+      await expect(tooltip).toHaveTextContent('Add to library');
+    });
+
+    await step('Hides tooltip on unhover', async () => {
+      const trigger = canvas.getByRole('button', { name: /hover me/i });
+      await userEvent.unhover(trigger);
+
+      // Tooltip should disappear
+      await expect(canvas.queryByRole('tooltip')).not.toBeInTheDocument();
+    });
+
+    await step('Keyboard accessible', async () => {
+      await userEvent.tab();
+      const trigger = canvas.getByRole('button', { name: /hover me/i });
+      await expect(trigger).toHaveFocus();
+
+      // Tooltip should appear when focused
+      const tooltip = await canvas.findByRole('tooltip');
+      await expect(tooltip).toBeVisible();
+    });
+  }
 };
 
 // All Sides - from component page lines 232-268
@@ -108,7 +151,7 @@ export const WithIconButtons: Story = {
     <div className="flex gap-2">
       <Tooltip>
         <TooltipTrigger asChild>
-          <Button variant="ghost" size="icon">
+          <Button variant="ghost" size="icon" aria-label="More information">
             <Info className="h-4 w-4" />
           </Button>
         </TooltipTrigger>
@@ -119,7 +162,7 @@ export const WithIconButtons: Story = {
 
       <Tooltip>
         <TooltipTrigger asChild>
-          <Button variant="ghost" size="icon">
+          <Button variant="ghost" size="icon" aria-label="Add item">
             <Plus className="h-4 w-4" />
           </Button>
         </TooltipTrigger>
@@ -130,7 +173,7 @@ export const WithIconButtons: Story = {
 
       <Tooltip>
         <TooltipTrigger asChild>
-          <Button variant="ghost" size="icon">
+          <Button variant="ghost" size="icon" aria-label="Settings">
             <Settings className="h-4 w-4" />
           </Button>
         </TooltipTrigger>
@@ -141,7 +184,7 @@ export const WithIconButtons: Story = {
 
       <Tooltip>
         <TooltipTrigger asChild>
-          <Button variant="ghost" size="icon">
+          <Button variant="ghost" size="icon" aria-label="Delete">
             <Trash2 className="h-4 w-4" />
           </Button>
         </TooltipTrigger>
@@ -157,6 +200,26 @@ export const WithIconButtons: Story = {
   },
   parameters: {
     controls: { disable: true }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders icon buttons', async () => {
+      const buttons = canvas.getAllByRole('button');
+      await expect(buttons).toHaveLength(4);
+      buttons.forEach(button => {
+        expect(button).toBeVisible();
+      });
+    });
+
+    await step('Shows tooltip on icon button hover', async () => {
+      const buttons = canvas.getAllByRole('button');
+      await userEvent.hover(buttons[0]);
+
+      const tooltip = await canvas.findByRole('tooltip');
+      await expect(tooltip).toBeVisible();
+      await expect(tooltip).toHaveTextContent('More information');
+    });
   }
 };
 
@@ -194,6 +257,25 @@ export const WithTextButtons: Story = {
   },
   parameters: {
     controls: { disable: true }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders text buttons with icons', async () => {
+      const helpButton = canvas.getByRole('button', { name: /help/i });
+      const settingsButton = canvas.getByRole('button', { name: /settings/i });
+      await expect(helpButton).toBeVisible();
+      await expect(settingsButton).toBeVisible();
+    });
+
+    await step('Shows tooltip on text button hover', async () => {
+      const helpButton = canvas.getByRole('button', { name: /help/i });
+      await userEvent.hover(helpButton);
+
+      const tooltip = await canvas.findByRole('tooltip');
+      await expect(tooltip).toBeVisible();
+      await expect(tooltip).toHaveTextContent('Click for more information');
+    });
   }
 };
 
@@ -220,6 +302,24 @@ export const RTLExample: Story = {
         story: 'Tooltip with Arabic text demonstrating RTL support. Automatically switches to RTL mode.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders in RTL context', async () => {
+      const trigger = canvas.getByRole('button', { name: /حوم علي/i });
+      await expect(trigger).toBeInTheDocument();
+      await expect(trigger).toBeVisible();
+    });
+
+    await step('Tooltip works in RTL', async () => {
+      const trigger = canvas.getByRole('button', { name: /حوم علي/i });
+      await userEvent.hover(trigger);
+
+      const tooltip = await canvas.findByRole('tooltip');
+      await expect(tooltip).toBeVisible();
+      await expect(tooltip).toHaveTextContent('أضف إلى المكتبة');
+    });
   }
 };
 
@@ -284,7 +384,7 @@ export const RTLWithIconButtons: Story = {
     <div className="flex gap-2">
       <Tooltip>
         <TooltipTrigger asChild>
-          <Button variant="ghost" size="icon">
+          <Button variant="ghost" size="icon" aria-label="مزيد من المعلومات">
             <Info className="h-4 w-4" />
           </Button>
         </TooltipTrigger>
@@ -295,7 +395,7 @@ export const RTLWithIconButtons: Story = {
 
       <Tooltip>
         <TooltipTrigger asChild>
-          <Button variant="ghost" size="icon">
+          <Button variant="ghost" size="icon" aria-label="إضافة عنصر">
             <Plus className="h-4 w-4" />
           </Button>
         </TooltipTrigger>
@@ -306,7 +406,7 @@ export const RTLWithIconButtons: Story = {
 
       <Tooltip>
         <TooltipTrigger asChild>
-          <Button variant="ghost" size="icon">
+          <Button variant="ghost" size="icon" aria-label="إعدادات">
             <Settings className="h-4 w-4" />
           </Button>
         </TooltipTrigger>
@@ -317,7 +417,7 @@ export const RTLWithIconButtons: Story = {
 
       <Tooltip>
         <TooltipTrigger asChild>
-          <Button variant="ghost" size="icon">
+          <Button variant="ghost" size="icon" aria-label="حذف">
             <Trash2 className="h-4 w-4" />
           </Button>
         </TooltipTrigger>
@@ -338,6 +438,23 @@ export const RTLWithIconButtons: Story = {
         story: 'Icon buttons with Arabic tooltips in RTL mode.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders RTL icon buttons', async () => {
+      const buttons = canvas.getAllByRole('button');
+      await expect(buttons).toHaveLength(4);
+    });
+
+    await step('Arabic tooltip appears on hover', async () => {
+      const buttons = canvas.getAllByRole('button');
+      await userEvent.hover(buttons[0]);
+
+      const tooltip = await canvas.findByRole('tooltip');
+      await expect(tooltip).toBeVisible();
+      await expect(tooltip).toHaveTextContent('مزيد من المعلومات');
+    });
   }
 };
 
@@ -380,5 +497,24 @@ export const RTLWithTextButtons: Story = {
         story: 'Text buttons with Arabic tooltips demonstrating complete RTL support.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders RTL text buttons', async () => {
+      const helpButton = canvas.getByRole('button', { name: /مساعدة/i });
+      const settingsButton = canvas.getByRole('button', { name: /إعدادات/i });
+      await expect(helpButton).toBeVisible();
+      await expect(settingsButton).toBeVisible();
+    });
+
+    await step('Arabic tooltip appears on text button hover', async () => {
+      const helpButton = canvas.getByRole('button', { name: /مساعدة/i });
+      await userEvent.hover(helpButton);
+
+      const tooltip = await canvas.findByRole('tooltip');
+      await expect(tooltip).toBeVisible();
+      await expect(tooltip).toHaveTextContent('انقر هنا للمزيد من المعلومات');
+    });
   }
 };

@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { expect, within } from 'storybook/test';
 import { EmptyState } from '../../../components/ui/empty-state';
 import { Button } from '../../../components/ui/button';
 import { Card } from '../../../components/ui/card';
@@ -83,6 +84,32 @@ export const Default: Story = {
         inline: false
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders with correct ARIA attributes', async () => {
+      const emptyState = canvas.getByRole('status');
+      await expect(emptyState).toBeInTheDocument();
+      await expect(emptyState).toBeVisible();
+      await expect(emptyState).toHaveAttribute('aria-live', 'polite');
+    });
+
+    await step('Displays title and description', async () => {
+      await expect(canvas.getByText('No articles found')).toBeInTheDocument();
+      await expect(canvas.getByText('Get started by creating your first article')).toBeInTheDocument();
+    });
+
+    await step('Contains icon element', async () => {
+      const svg = canvasElement.querySelector('svg');
+      await expect(svg).toBeInTheDocument();
+    });
+
+    await step('Displays action button', async () => {
+      const button = canvas.getByRole('button', { name: /create article/i });
+      await expect(button).toBeInTheDocument();
+      await expect(button).toBeVisible();
+    });
   }
 };
 
@@ -114,6 +141,23 @@ export const BasicUsage: Story = {
         story: 'Simple empty state with icon, title, description, and action button.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders empty state correctly', async () => {
+      const emptyState = canvas.getByRole('status');
+      await expect(emptyState).toBeInTheDocument();
+      await expect(emptyState).toBeVisible();
+    });
+
+    await step('Displays all content elements', async () => {
+      await expect(canvas.getByText('No articles found')).toBeInTheDocument();
+      await expect(canvas.getByText('Get started by creating your first article')).toBeInTheDocument();
+      await expect(canvas.getByRole('button', { name: /create article/i })).toBeInTheDocument();
+      const svg = canvasElement.querySelector('svg');
+      await expect(svg).toBeInTheDocument();
+    });
   }
 };
 
@@ -139,6 +183,28 @@ export const WithoutAction: Story = {
         story: 'Empty state without action button. Used when no action is needed.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders empty state correctly', async () => {
+      const emptyState = canvas.getByRole('status');
+      await expect(emptyState).toBeInTheDocument();
+      await expect(emptyState).toBeVisible();
+    });
+
+    await step('Displays title and description', async () => {
+      await expect(canvas.getByText('Inbox is empty')).toBeInTheDocument();
+      await expect(canvas.getByText("You're all caught up! No new messages.")).toBeInTheDocument();
+    });
+
+    await step('Contains icon but no action button', async () => {
+      const svg = canvasElement.querySelector('svg');
+      await expect(svg).toBeInTheDocument();
+
+      const buttons = canvas.queryAllByRole('button');
+      await expect(buttons).toHaveLength(0);
+    });
   }
 };
 
@@ -165,6 +231,26 @@ export const SearchResults: Story = {
         story: 'Empty state for search results with clear filters action.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders search results empty state', async () => {
+      const emptyState = canvas.getByRole('status');
+      await expect(emptyState).toBeInTheDocument();
+      await expect(emptyState).toBeVisible();
+    });
+
+    await step('Displays search-specific content', async () => {
+      await expect(canvas.getByText('No results found')).toBeInTheDocument();
+      await expect(canvas.getByText("Try adjusting your search or filter to find what you're looking for.")).toBeInTheDocument();
+    });
+
+    await step('Displays outline button', async () => {
+      const button = canvas.getByRole('button', { name: /clear filters/i });
+      await expect(button).toBeInTheDocument();
+      await expect(button).toBeVisible();
+    });
   }
 };
 
@@ -199,6 +285,27 @@ export const MultipleActions: Story = {
         story: 'Empty state with multiple action buttons.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders empty state correctly', async () => {
+      const emptyState = canvas.getByRole('status');
+      await expect(emptyState).toBeInTheDocument();
+      await expect(emptyState).toBeVisible();
+    });
+
+    await step('Displays team-specific content', async () => {
+      await expect(canvas.getByText('No team members yet')).toBeInTheDocument();
+      await expect(canvas.getByText('Invite your team to start collaborating')).toBeInTheDocument();
+    });
+
+    await step('Displays multiple action buttons', async () => {
+      const buttons = canvas.getAllByRole('button');
+      await expect(buttons).toHaveLength(2);
+      await expect(canvas.getByRole('button', { name: /invite members/i })).toBeInTheDocument();
+      await expect(canvas.getByRole('button', { name: /learn more/i })).toBeInTheDocument();
+    });
   }
 };
 
@@ -284,6 +391,28 @@ export const MinimalLayout: Story = {
         story: 'Minimal empty state with just title and description, no icon or action.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders minimal empty state', async () => {
+      const emptyState = canvas.getByRole('status');
+      await expect(emptyState).toBeInTheDocument();
+      await expect(emptyState).toBeVisible();
+    });
+
+    await step('Displays only title and description', async () => {
+      await expect(canvas.getByText('No items')).toBeInTheDocument();
+      await expect(canvas.getByText('Your list is currently empty')).toBeInTheDocument();
+    });
+
+    await step('Verifies no icon or action button', async () => {
+      const svg = canvasElement.querySelector('svg');
+      await expect(svg).not.toBeInTheDocument();
+
+      const buttons = canvas.queryAllByRole('button');
+      await expect(buttons).toHaveLength(0);
+    });
   }
 };
 
@@ -315,6 +444,21 @@ export const RTLBasic: Story = {
         story: 'Empty state in RTL with Arabic text. Layout flows right-to-left.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders in RTL context', async () => {
+      const emptyState = canvas.getByRole('status');
+      await expect(emptyState).toBeInTheDocument();
+      await expect(emptyState).toBeVisible();
+    });
+
+    await step('Displays Arabic content', async () => {
+      await expect(canvas.getByText('لم يتم العثور على مقالات')).toBeInTheDocument();
+      await expect(canvas.getByText('ابدأ بإنشاء مقالتك الأولى')).toBeInTheDocument();
+      await expect(canvas.getByRole('button', { name: /إنشاء مقالة/i })).toBeInTheDocument();
+    });
   }
 };
 
@@ -340,6 +484,23 @@ export const RTLWithoutAction: Story = {
         story: 'Empty inbox state in RTL without action button.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders in RTL context', async () => {
+      const emptyState = canvas.getByRole('status');
+      await expect(emptyState).toBeInTheDocument();
+      await expect(emptyState).toBeVisible();
+    });
+
+    await step('Displays Arabic content without action', async () => {
+      await expect(canvas.getByText('البريد الوارد فارغ')).toBeInTheDocument();
+      await expect(canvas.getByText('أنت على اطلاع! لا توجد رسائل جديدة.')).toBeInTheDocument();
+
+      const buttons = canvas.queryAllByRole('button');
+      await expect(buttons).toHaveLength(0);
+    });
   }
 };
 
@@ -366,6 +527,21 @@ export const RTLSearchResults: Story = {
         story: 'Search results empty state in RTL with clear filters button.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders in RTL context', async () => {
+      const emptyState = canvas.getByRole('status');
+      await expect(emptyState).toBeInTheDocument();
+      await expect(emptyState).toBeVisible();
+    });
+
+    await step('Displays Arabic search content', async () => {
+      await expect(canvas.getByText('لم يتم العثور على نتائج')).toBeInTheDocument();
+      await expect(canvas.getByText('حاول تعديل البحث أو الفلتر للعثور على ما تبحث عنه.')).toBeInTheDocument();
+      await expect(canvas.getByRole('button', { name: /مسح الفلاتر/i })).toBeInTheDocument();
+    });
   }
 };
 
@@ -400,5 +576,24 @@ export const RTLMultipleActions: Story = {
         story: 'Empty state in RTL with multiple action buttons in Arabic.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders in RTL context', async () => {
+      const emptyState = canvas.getByRole('status');
+      await expect(emptyState).toBeInTheDocument();
+      await expect(emptyState).toBeVisible();
+    });
+
+    await step('Displays Arabic content with multiple actions', async () => {
+      await expect(canvas.getByText('لا يوجد أعضاء فريق بعد')).toBeInTheDocument();
+      await expect(canvas.getByText('ادع فريقك لبدء التعاون')).toBeInTheDocument();
+
+      const buttons = canvas.getAllByRole('button');
+      await expect(buttons).toHaveLength(2);
+      await expect(canvas.getByRole('button', { name: /دعوة أعضاء/i })).toBeInTheDocument();
+      await expect(canvas.getByRole('button', { name: /معرفة المزيد/i })).toBeInTheDocument();
+    });
   }
 };

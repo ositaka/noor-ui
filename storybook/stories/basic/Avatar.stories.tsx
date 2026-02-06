@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { expect, within } from 'storybook/test';
 import {
   Avatar,
   AvatarFallback,
@@ -38,7 +39,29 @@ export const Default: Story = {
     direction: 'ltr',
     locale: 'en'
   },
-  render: (args) => <Avatar {...args} />
+  render: (args) => <Avatar {...args} />,
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders avatar component', async () => {
+      // Avatar component renders, check for either image or fallback
+      const avatar = canvasElement.querySelector('span');
+      await expect(avatar).toBeInTheDocument();
+    });
+
+    await step('Has proper accessibility attributes when image loads', async () => {
+      // Try to find the image - it may load asynchronously or show fallback
+      const img = canvasElement.querySelector('img');
+      if (img) {
+        await expect(img).toHaveAttribute('alt', '@shadcn');
+        await expect(img).toHaveAttribute('src', 'https://github.com/shadcn.png');
+      } else {
+        // If image didn't load, fallback should be present
+        const fallback = canvas.queryByText('CN');
+        await expect(fallback || img).toBeTruthy();
+      }
+    });
+  }
 };
 
 // With Fallback - from component page lines 170-182
@@ -60,6 +83,33 @@ export const WithFallback: Story = {
   ),
   parameters: {
     controls: { disable: true }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('All three avatars render', async () => {
+      // Check that we have all the fallback text that should appear
+      const fallbackCN = canvas.queryByText('CN');
+      const fallbackJD = await canvas.findByText('JD');
+      const fallbackAB = canvas.getByText('AB');
+
+      // At least the failing image and fallback-only should show fallbacks
+      await expect(fallbackJD).toBeInTheDocument();
+      await expect(fallbackAB).toBeInTheDocument();
+    });
+
+    await step('Failed image shows fallback initials', async () => {
+      // Wait for fallback to appear after image fails to load
+      const fallback = await canvas.findByText('JD');
+      await expect(fallback).toBeInTheDocument();
+      await expect(fallback).toBeVisible();
+    });
+
+    await step('Fallback-only avatar renders', async () => {
+      const fallbackOnly = canvas.getByText('AB');
+      await expect(fallbackOnly).toBeInTheDocument();
+      await expect(fallbackOnly).toBeVisible();
+    });
   }
 };
 
@@ -112,6 +162,21 @@ export const AvatarGroup: Story = {
   ),
   parameters: {
     controls: { disable: true }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('All avatars in group render', async () => {
+      const fallbackAB = canvas.getByText('AB');
+      await expect(fallbackAB).toBeInTheDocument();
+      await expect(fallbackAB).toBeVisible();
+    });
+
+    await step('Overflow counter displays correctly', async () => {
+      const overflowCounter = canvas.getByText('+3');
+      await expect(overflowCounter).toBeInTheDocument();
+      await expect(overflowCounter).toBeVisible();
+    });
   }
 };
 
@@ -131,6 +196,28 @@ export const WithProfile: Story = {
   ),
   parameters: {
     controls: { disable: true }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Avatar renders with profile info', async () => {
+      const name = canvas.getByText('John Doe');
+      await expect(name).toBeInTheDocument();
+      await expect(name).toBeVisible();
+    });
+
+    await step('Profile email displays', async () => {
+      const email = canvas.getByText('ositaka@example.com');
+      await expect(email).toBeInTheDocument();
+      await expect(email).toBeVisible();
+    });
+
+    await step('Avatar component renders', async () => {
+      // Check for avatar - either image loads or fallback shows
+      const img = canvasElement.querySelector('img');
+      const fallback = canvas.queryByText('JD');
+      await expect(img || fallback).toBeTruthy();
+    });
   }
 };
 
@@ -159,6 +246,22 @@ export const RTLWithProfile: Story = {
         story: 'Avatar with profile text demonstrating RTL support. Automatically switches to RTL mode.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders in RTL context', async () => {
+      const name = canvas.getByText('جون دو');
+      await expect(name).toBeInTheDocument();
+      await expect(name).toBeVisible();
+    });
+
+    await step('RTL profile has avatar', async () => {
+      // Check for avatar - either image loads or fallback shows
+      const img = canvasElement.querySelector('img');
+      const fallback = canvas.queryByText('جد');
+      await expect(img || fallback).toBeTruthy();
+    });
   }
 };
 
@@ -193,6 +296,20 @@ export const RTLAvatarGroup: Story = {
         story: 'Avatar group with proper RTL overlapping. Automatically switches to RTL mode.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders RTL avatar group', async () => {
+      const counter = canvas.getByText('+5');
+      await expect(counter).toBeInTheDocument();
+      await expect(counter).toBeVisible();
+    });
+
+    await step('All avatars present in RTL', async () => {
+      const fallback = canvas.getByText('AB');
+      await expect(fallback).toBeInTheDocument();
+    });
   }
 };
 
@@ -216,6 +333,23 @@ export const FallbackOnly: Story = {
   ),
   parameters: {
     controls: { disable: true }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('All fallback avatars render', async () => {
+      await expect(canvas.getByText('CN')).toBeInTheDocument();
+      await expect(canvas.getByText('JD')).toBeInTheDocument();
+      await expect(canvas.getByText('AB')).toBeInTheDocument();
+      await expect(canvas.getByText('+2')).toBeInTheDocument();
+    });
+
+    await step('Fallback initials are visible', async () => {
+      await expect(canvas.getByText('CN')).toBeVisible();
+      await expect(canvas.getByText('JD')).toBeVisible();
+      await expect(canvas.getByText('AB')).toBeVisible();
+      await expect(canvas.getByText('+2')).toBeVisible();
+    });
   }
 };
 
@@ -251,5 +385,27 @@ export const CustomSizes: Story = {
   ),
   parameters: {
     controls: { disable: true }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('All custom size avatars render with content', async () => {
+      // Check that at least some of the fallback text is visible
+      // These will show either when images fail to load or are still loading
+      const xsFallback = canvas.queryByText('XS');
+      const smFallback = canvas.queryByText('SM');
+      const mdFallback = canvas.queryByText('MD');
+      const lgFallback = canvas.queryByText('LG');
+      const xlFallback = canvas.queryByText('XL');
+      const xxlFallback = canvas.queryByText('2XL');
+
+      // At least one fallback should be present
+      const hasFallbacks = xsFallback || smFallback || mdFallback || lgFallback || xlFallback || xxlFallback;
+
+      // Or images may have loaded instead
+      const images = canvasElement.querySelectorAll('img');
+
+      await expect(hasFallbacks || images.length > 0).toBeTruthy();
+    });
   }
 };

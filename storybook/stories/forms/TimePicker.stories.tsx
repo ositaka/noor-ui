@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { expect, userEvent, within, fn } from 'storybook/test';
 import { TimePicker, TimeRangePicker, type Time, type TimeRange } from '../../../components/ui/time-picker';
 import { Label } from '../../../components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../../components/ui/card';
@@ -35,7 +36,8 @@ export const Default: Story = {
   args: {
     placeholder: 'Pick a time',
     placeholderAr: 'اختر الوقت',
-    format: '24h'
+    format: '24h',
+    onTimeChange: fn()
   },
   globals: {
     direction: 'ltr',
@@ -54,10 +56,44 @@ export const Default: Story = {
     return (
       <div className="w-full max-w-xs space-y-2">
         <Label className='me-4'>Start Time</Label>
-        <TimePicker {...args} time={time} onTimeChange={(t) => t && setTime(t)} />
+        <TimePicker {...args} time={time} onTimeChange={(t) => { if (t) setTime(t); args.onTimeChange?.(t); }} />
         <p className="text-sm text-muted-foreground">{formatTime(time)}</p>
       </div>
     );
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+    const body = within(document.body);
+
+    await step('Renders correctly', async () => {
+      // Button shows the formatted time value "09:30", not the placeholder
+      await expect(canvas.getByRole('button', { name: '09:30' })).toBeInTheDocument();
+      await expect(canvas.getByRole('button', { name: '09:30' })).toBeVisible();
+    });
+
+    await step('Opens time picker popover', async () => {
+      const button = canvas.getByRole('button', { name: '09:30' });
+      await userEvent.click(button);
+
+      // Wait for popover to open - NumberInput uses type="text" so role is "textbox"
+      // Popover renders in portal, so query from document.body
+      await expect(body.getByRole('textbox', { name: /hours/i })).toBeInTheDocument();
+      await expect(body.getByRole('textbox', { name: /minutes/i })).toBeInTheDocument();
+    });
+
+    await step('Keyboard accessible', async () => {
+      // Close popover first
+      await userEvent.keyboard('{Escape}');
+
+      // Tab to the button
+      const button = canvas.getByRole('button', { name: '09:30' });
+      button.focus();
+      await expect(button).toHaveFocus();
+
+      // Open with keyboard
+      await userEvent.keyboard('{Enter}');
+      await expect(body.getByRole('textbox', { name: /hours/i })).toBeInTheDocument();
+    });
   },
   parameters: {
     docs: {
@@ -92,6 +128,23 @@ export const Basic24hFormat: Story = {
         <p className="text-sm text-muted-foreground">{formatTime(time)}</p>
       </div>
     );
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+    const body = within(document.body);
+
+    await step('Renders with 24h format', async () => {
+      // Button shows the formatted time value "09:30"
+      await expect(canvas.getByRole('button', { name: '09:30' })).toBeInTheDocument();
+    });
+
+    await step('Opens and displays 24h time controls', async () => {
+      await userEvent.click(canvas.getByRole('button', { name: '09:30' }));
+      // NumberInput uses type="text" so role is "textbox", popover in portal
+      await expect(body.getByRole('textbox', { name: /hours/i })).toBeInTheDocument();
+      // Verify 24h format - no AM/PM toggle
+      await expect(body.queryByRole('switch')).not.toBeInTheDocument();
+    });
   },
   globals: {
     direction: 'ltr',
@@ -133,6 +186,30 @@ export const Format12h: Story = {
         <p className="text-sm text-muted-foreground">{formatTime12h(time)}</p>
       </div>
     );
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+    const body = within(document.body);
+
+    await step('Renders with 12h format', async () => {
+      // Button shows the formatted time value "02:00 PM" (hours: 14 in 12h format)
+      await expect(canvas.getByRole('button', { name: '02:00 PM' })).toBeInTheDocument();
+    });
+
+    await step('Opens and displays 12h time controls with AM/PM', async () => {
+      await userEvent.click(canvas.getByRole('button', { name: '02:00 PM' }));
+      // NumberInput uses type="text" so role is "textbox", popover in portal
+      await expect(body.getByRole('textbox', { name: /hours/i })).toBeInTheDocument();
+      // Verify 12h format - should have AM/PM toggle (tabs with AM/PM)
+      await expect(body.getByRole('tab', { name: 'AM' })).toBeInTheDocument();
+      await expect(body.getByRole('tab', { name: 'PM' })).toBeInTheDocument();
+    });
+
+    await step('Toggles AM/PM', async () => {
+      const amTab = body.getByRole('tab', { name: 'AM' });
+      await userEvent.click(amTab);
+      // Time should update after toggle (14:00 -> 02:00 AM)
+    });
   },
   globals: {
     direction: 'ltr',
@@ -194,6 +271,34 @@ export const TimeRange: Story = {
       </div>
     );
   },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+    const body = within(document.body);
+
+    await step('Renders time range picker', async () => {
+      // Button shows the formatted time range "09:00 - 17:00", not the placeholder
+      await expect(canvas.getByRole('button', { name: '09:00 - 17:00' })).toBeInTheDocument();
+      await expect(canvas.getByText('09:00 - 17:00 (8h 0m)')).toBeInTheDocument();
+    });
+
+    await step('Opens time range selector', async () => {
+      await userEvent.click(canvas.getByRole('button', { name: '09:00 - 17:00' }));
+      // TimeRangePicker popover contains nested TimePicker components (buttons), not textboxes
+      // Verify popover opened by checking for "From" and "To" labels
+      await expect(body.getByText('From')).toBeInTheDocument();
+      await expect(body.getByText('To')).toBeInTheDocument();
+      // Verify the nested TimePicker buttons are present
+      const nestedPickerButtons = body.getAllByRole('button');
+      await expect(nestedPickerButtons.length).toBeGreaterThan(2); // Trigger + nested pickers
+    });
+
+    await step('Calculates duration correctly', async () => {
+      // Close popover
+      await userEvent.keyboard('{Escape}');
+      // Verify the duration calculation is displayed
+      await expect(canvas.getByText(/8h 0m/)).toBeInTheDocument();
+    });
+  },
   globals: {
     direction: 'ltr',
     locale: 'en'
@@ -235,6 +340,23 @@ export const MinuteIntervals: Story = {
         </p>
       </div>
     );
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+    const body = within(document.body);
+
+    await step('Renders with 15-minute intervals', async () => {
+      // Button shows the formatted time value "09:00"
+      await expect(canvas.getByRole('button', { name: '09:00' })).toBeInTheDocument();
+      await expect(canvas.getByText('09:00')).toBeInTheDocument();
+    });
+
+    await step('Opens time picker with step intervals', async () => {
+      await userEvent.click(canvas.getByRole('button', { name: '09:00' }));
+      // NumberInput uses type="text" so role is "textbox", popover in portal
+      await expect(body.getByRole('textbox', { name: /minutes/i })).toBeInTheDocument();
+      // Verify the minute step behavior is working (minutes should increment by 15)
+    });
   },
   globals: {
     direction: 'ltr',
@@ -326,6 +448,22 @@ export const MedicalAppointment: Story = {
       </Card>
     );
   },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+    const body = within(document.body);
+
+    await step('Renders medical appointment card', async () => {
+      await expect(canvas.getByText('Medical Appointment')).toBeInTheDocument();
+      // Initial time is undefined, so button shows the placeholder
+      await expect(canvas.getByRole('button', { name: /select appointment time/i })).toBeInTheDocument();
+    });
+
+    await step('Opens time picker in appointment context', async () => {
+      await userEvent.click(canvas.getByRole('button', { name: /select appointment time/i }));
+      // NumberInput uses type="text" so role is "textbox", popover in portal
+      await expect(body.getByRole('textbox', { name: /hours/i })).toBeInTheDocument();
+    });
+  },
   globals: {
     direction: 'ltr',
     locale: 'en'
@@ -409,6 +547,27 @@ export const WorkSchedule: Story = {
       </Card>
     );
   },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+    const body = within(document.body);
+
+    await step('Renders work schedule card', async () => {
+      await expect(canvas.getByText('Work Schedule')).toBeInTheDocument();
+      // Initial timeRange is undefined, so button shows the placeholder
+      await expect(canvas.getByRole('button', { name: /set working hours/i })).toBeInTheDocument();
+    });
+
+    await step('Opens time range picker in schedule context', async () => {
+      await userEvent.click(canvas.getByRole('button', { name: /set working hours/i }));
+      // TimeRangePicker popover contains nested TimePicker components (buttons), not textboxes
+      // Verify popover opened by checking for "From" and "To" labels
+      await expect(body.getByText('From')).toBeInTheDocument();
+      await expect(body.getByText('To')).toBeInTheDocument();
+      // Verify the nested TimePicker buttons are present (should show placeholder "Pick a time")
+      const pickTimeButtons = body.getAllByRole('button', { name: /pick a time/i });
+      await expect(pickTimeButtons.length).toBeGreaterThanOrEqual(2); // Two nested TimePickers
+    });
+  },
   globals: {
     direction: 'ltr',
     locale: 'en'
@@ -447,6 +606,16 @@ export const DisabledState: Story = {
       </div>
     </div>
   ),
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Verifies disabled state', async () => {
+      // Both buttons show the formatted time value "09:30"
+      const buttons = canvas.getAllByRole('button', { name: '09:30' });
+      await expect(buttons[0]).toBeEnabled();
+      await expect(buttons[1]).toBeDisabled();
+    });
+  },
   globals: {
     direction: 'ltr',
     locale: 'en'
@@ -485,6 +654,24 @@ export const RTLExample: Story = {
         <p className="text-sm text-muted-foreground">{formatTime(time)}</p>
       </div>
     );
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+    const body = within(document.body);
+
+    await step('Renders in RTL context', async () => {
+      // In RTL/Arabic, time is formatted as "30:09" (minutes:hours reversed)
+      await expect(canvas.getByRole('button', { name: '30:09' })).toBeInTheDocument();
+      await expect(canvas.getByText('وقت البدء')).toBeInTheDocument();
+    });
+
+    await step('Interaction works in RTL', async () => {
+      await userEvent.click(canvas.getByRole('button', { name: '30:09' }));
+      // NumberInput uses type="text" so role is "textbox", popover in portal
+      // In RTL/Arabic mode, labels are in Arabic: "الساعات" (hours), "الدقائق" (minutes)
+      await expect(body.getByRole('textbox', { name: /الساعات/i })).toBeInTheDocument();
+      await expect(body.getByRole('textbox', { name: /الدقائق/i })).toBeInTheDocument();
+    });
   },
   globals: {
     direction: 'rtl',

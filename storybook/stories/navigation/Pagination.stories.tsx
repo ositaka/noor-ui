@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { expect, userEvent, within } from 'storybook/test';
 import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from '../../../components/ui/pagination';
 import { Card, CardContent } from '../../../components/ui/card';
 import * as React from 'react';
@@ -63,6 +64,71 @@ export const Default: Story = {
         inline: false
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders correctly with navigation elements', async () => {
+      const nav = canvas.getByRole('navigation', { name: 'pagination' });
+      await expect(nav).toBeInTheDocument();
+      await expect(nav).toBeVisible();
+    });
+
+    await step('Displays Previous and Next buttons', async () => {
+      const prevButton = canvas.getByRole('link', { name: /previous/i });
+      const nextButton = canvas.getByRole('link', { name: /next/i });
+
+      await expect(prevButton).toBeInTheDocument();
+      await expect(nextButton).toBeInTheDocument();
+      await expect(prevButton).toBeVisible();
+      await expect(nextButton).toBeVisible();
+    });
+
+    await step('Displays page number links', async () => {
+      const page1 = canvas.getByRole('link', { name: '1' });
+      const page2 = canvas.getByRole('link', { name: '2' });
+      const page3 = canvas.getByRole('link', { name: '3' });
+
+      await expect(page1).toBeInTheDocument();
+      await expect(page2).toBeInTheDocument();
+      await expect(page3).toBeInTheDocument();
+    });
+
+    await step('Indicates active page with aria-current', async () => {
+      const activePage = canvas.getByRole('link', { name: '2' });
+      await expect(activePage).toHaveAttribute('aria-current', 'page');
+    });
+
+    await step('Keyboard navigation works', async () => {
+      // Tab to first interactive element
+      await userEvent.tab();
+      const prevButton = canvas.getByRole('link', { name: /previous/i });
+      await expect(prevButton).toHaveFocus();
+
+      // Tab through page numbers
+      await userEvent.tab();
+      const page1 = canvas.getByRole('link', { name: '1' });
+      await expect(page1).toHaveFocus();
+
+      // Continue tabbing
+      await userEvent.tab();
+      const page2 = canvas.getByRole('link', { name: '2' });
+      await expect(page2).toHaveFocus();
+
+      await userEvent.tab();
+      const page3 = canvas.getByRole('link', { name: '3' });
+      await expect(page3).toHaveFocus();
+
+      await userEvent.tab();
+      const nextButton = canvas.getByRole('link', { name: /next/i });
+      await expect(nextButton).toHaveFocus();
+    });
+
+    await step('Links are clickable', async () => {
+      const page1 = canvas.getByRole('link', { name: '1' });
+      await userEvent.click(page1);
+      // Link navigates (no assertion needed, just verify clickable)
+    });
   }
 };
 
@@ -153,6 +219,32 @@ export const WithEllipsis: Story = {
         story: 'Pagination with ellipsis (...) for indicating hidden pages. Shows pages 1, 5-7, and 10 out of 10 total.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders pagination with ellipsis', async () => {
+      const nav = canvas.getByRole('navigation', { name: 'pagination' });
+      await expect(nav).toBeInTheDocument();
+    });
+
+    await step('Displays ellipsis elements', async () => {
+      const ellipsisElements = canvas.getAllByText('More pages');
+      await expect(ellipsisElements).toHaveLength(2);
+    });
+
+    await step('Displays selected page numbers', async () => {
+      await expect(canvas.getByRole('link', { name: '1' })).toBeInTheDocument();
+      await expect(canvas.getByRole('link', { name: '5' })).toBeInTheDocument();
+      await expect(canvas.getByRole('link', { name: '6' })).toBeInTheDocument();
+      await expect(canvas.getByRole('link', { name: '7' })).toBeInTheDocument();
+      await expect(canvas.getByRole('link', { name: '10' })).toBeInTheDocument();
+    });
+
+    await step('Active page is indicated', async () => {
+      const activePage = canvas.getByRole('link', { name: '6' });
+      await expect(activePage).toHaveAttribute('aria-current', 'page');
+    });
   }
 };
 
@@ -240,6 +332,47 @@ export const Controlled: Story = {
         story: 'Controlled pagination with state management. Current page is displayed above and updates on click.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Initial state shows page 2 as active', async () => {
+      await expect(canvas.getByText('Current page: 2')).toBeInTheDocument();
+      const page2 = canvas.getByRole('link', { name: '2' });
+      await expect(page2).toHaveAttribute('aria-current', 'page');
+    });
+
+    await step('Clicking page 1 updates state', async () => {
+      const page1 = canvas.getByRole('link', { name: '1' });
+      await userEvent.click(page1);
+      await expect(canvas.getByText('Current page: 1')).toBeInTheDocument();
+      await expect(page1).toHaveAttribute('aria-current', 'page');
+    });
+
+    await step('Next button increments page', async () => {
+      const nextButton = canvas.getByRole('link', { name: /next/i });
+      await userEvent.click(nextButton);
+      await expect(canvas.getByText('Current page: 2')).toBeInTheDocument();
+
+      await userEvent.click(nextButton);
+      await expect(canvas.getByText('Current page: 3')).toBeInTheDocument();
+    });
+
+    await step('Previous button decrements page', async () => {
+      const prevButton = canvas.getByRole('link', { name: /previous/i });
+      await userEvent.click(prevButton);
+      await expect(canvas.getByText('Current page: 2')).toBeInTheDocument();
+
+      await userEvent.click(prevButton);
+      await expect(canvas.getByText('Current page: 1')).toBeInTheDocument();
+    });
+
+    await step('Clicking page 3 updates state', async () => {
+      const page3 = canvas.getByRole('link', { name: '3' });
+      await userEvent.click(page3);
+      await expect(canvas.getByText('Current page: 3')).toBeInTheDocument();
+      await expect(page3).toHaveAttribute('aria-current', 'page');
+    });
   }
 };
 
@@ -331,6 +464,21 @@ export const InCard: Story = {
         story: 'Pagination placed inside a card component.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders pagination inside card', async () => {
+      await expect(canvas.getByText('Navigate Content')).toBeInTheDocument();
+      const nav = canvas.getByRole('navigation', { name: 'pagination' });
+      await expect(nav).toBeInTheDocument();
+    });
+
+    await step('Pagination is functional within card', async () => {
+      const page1 = canvas.getByRole('link', { name: '1' });
+      await userEvent.click(page1);
+      await expect(page1).toBeVisible();
+    });
   }
 };
 
@@ -370,6 +518,25 @@ export const RTLExample: Story = {
         story: 'Basic pagination with Arabic text in RTL mode. Chevrons automatically flip direction.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders in RTL context', async () => {
+      const nav = canvas.getByRole('navigation', { name: 'pagination' });
+      await expect(nav).toBeInTheDocument();
+    });
+
+    await step('Displays Arabic text correctly', async () => {
+      await expect(canvas.getByText('السابق')).toBeInTheDocument();
+      await expect(canvas.getByText('التالي')).toBeInTheDocument();
+    });
+
+    await step('Navigation works in RTL', async () => {
+      const page1 = canvas.getByRole('link', { name: '1' });
+      await userEvent.click(page1);
+      await expect(page1).toBeVisible();
+    });
   }
 };
 

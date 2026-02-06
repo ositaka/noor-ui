@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { expect, fn, userEvent, within } from 'storybook/test';
 import { NumberInput } from '../../../components/ui/number-input';
 import { Label } from '../../../components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../../components/ui/card';
@@ -96,6 +97,79 @@ export const Default: Story = {
         inline: false
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders correctly', async () => {
+      const input = canvas.getByRole('textbox');
+      await expect(input).toBeInTheDocument();
+      await expect(input).toBeVisible();
+      await expect(input).toHaveValue('42');
+
+      // Verify increment/decrement buttons
+      const buttons = canvas.getAllByRole('button');
+      await expect(buttons).toHaveLength(2);
+      await expect(buttons[0]).toHaveAccessibleName('Decrease');
+      await expect(buttons[1]).toHaveAccessibleName('Increase');
+    });
+
+    await step('Increment button increases value', async () => {
+      const increaseButton = canvas.getByRole('button', { name: /increase/i });
+      await userEvent.click(increaseButton);
+
+      const input = canvas.getByRole('textbox');
+      await expect(input).toHaveValue('43');
+      await expect(canvas.getByText('Current value: 43')).toBeInTheDocument();
+    });
+
+    await step('Decrement button decreases value', async () => {
+      const decreaseButton = canvas.getByRole('button', { name: /decrease/i });
+      await userEvent.click(decreaseButton);
+
+      const input = canvas.getByRole('textbox');
+      await expect(input).toHaveValue('42');
+      await expect(canvas.getByText('Current value: 42')).toBeInTheDocument();
+    });
+
+    await step('Typing updates value', async () => {
+      const input = canvas.getByRole('textbox');
+      await userEvent.clear(input);
+      await userEvent.type(input, '75');
+
+      await expect(input).toHaveValue('75');
+      await expect(canvas.getByText('Current value: 75')).toBeInTheDocument();
+    });
+
+    await step('Keyboard arrow keys work', async () => {
+      const input = canvas.getByRole('textbox');
+      await input.focus();
+      await userEvent.keyboard('{ArrowUp}');
+
+      await expect(input).toHaveValue('76');
+      await expect(canvas.getByText('Current value: 76')).toBeInTheDocument();
+
+      await userEvent.keyboard('{ArrowDown}');
+      await expect(input).toHaveValue('75');
+      await expect(canvas.getByText('Current value: 75')).toBeInTheDocument();
+    });
+
+    await step('Respects min/max boundaries', async () => {
+      const input = canvas.getByRole('textbox');
+      await userEvent.clear(input);
+      await userEvent.type(input, '150');
+      await input.blur();
+
+      // Should clamp to max of 100
+      await expect(input).toHaveValue('100');
+      await expect(canvas.getByText('Current value: 100')).toBeInTheDocument();
+    });
+
+    await step('Keyboard accessible', async () => {
+      const input = canvas.getByRole('textbox');
+      await userEvent.tab();
+      await expect(input).toHaveFocus();
+    });
   }
 };
 
@@ -123,6 +197,26 @@ export const BasicNumberInput: Story = {
         story: 'Basic number input with min/max validation and increment/decrement controls.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders with controls', async () => {
+      const input = canvas.getByRole('textbox');
+      await expect(input).toBeInTheDocument();
+      await expect(input).toHaveValue('42');
+
+      const buttons = canvas.getAllByRole('button');
+      await expect(buttons).toHaveLength(2);
+    });
+
+    await step('Increment works', async () => {
+      const increaseButton = canvas.getByRole('button', { name: /increase/i });
+      await userEvent.click(increaseButton);
+
+      const input = canvas.getByRole('textbox');
+      await expect(input).toHaveValue('43');
+    });
   }
 };
 
@@ -157,6 +251,34 @@ export const WithoutControls: Story = {
         story: 'Number input without increment/decrement controls, just a plain input field.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders without control buttons', async () => {
+      const input = canvas.getByPlaceholderText('Enter amount');
+      await expect(input).toBeInTheDocument();
+
+      // Should not have increment/decrement buttons
+      const buttons = canvas.queryAllByRole('button');
+      await expect(buttons).toHaveLength(0);
+    });
+
+    await step('Typing updates value', async () => {
+      const input = canvas.getByPlaceholderText('Enter amount');
+      await userEvent.type(input, '123');
+
+      // Check that the text displays the value
+      await expect(canvas.getByText(/Value: 123/)).toBeInTheDocument();
+    });
+
+    await step('Arrow keys still work', async () => {
+      const input = canvas.getByPlaceholderText('Enter amount');
+      await input.focus();
+      await userEvent.keyboard('{ArrowUp}');
+
+      await expect(canvas.getByText(/Value: 124/)).toBeInTheDocument();
+    });
   }
 };
 
@@ -186,6 +308,33 @@ export const DecimalPrecision: Story = {
         story: 'Number input with decimal precision control, perfect for percentages and fractional values.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders with decimal value', async () => {
+      const input = canvas.getByRole('textbox');
+      await expect(input).toBeInTheDocument();
+      await expect(input).toHaveValue('5.50');
+    });
+
+    await step('Increment by decimal step', async () => {
+      const increaseButton = canvas.getByRole('button', { name: /increase/i });
+      await userEvent.click(increaseButton);
+
+      const input = canvas.getByRole('textbox');
+      await expect(input).toHaveValue('5.60');
+      await expect(canvas.getByText(/Value: 5.60%/)).toBeInTheDocument();
+    });
+
+    await step('Decrement maintains precision', async () => {
+      const decreaseButton = canvas.getByRole('button', { name: /decrease/i });
+      await userEvent.click(decreaseButton);
+
+      const input = canvas.getByRole('textbox');
+      await expect(input).toHaveValue('5.50');
+      await expect(canvas.getByText(/Value: 5.50%/)).toBeInTheDocument();
+    });
   }
 };
 
@@ -221,6 +370,33 @@ export const FormattedDisplay: Story = {
         story: 'Number input with thousands separator for better readability of large numbers.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders with thousands separator', async () => {
+      const input = canvas.getByRole('textbox');
+      await expect(input).toBeInTheDocument();
+      await expect(input).toHaveValue('1,234.56');
+    });
+
+    await step('Maintains formatting on increment', async () => {
+      const increaseButton = canvas.getByRole('button', { name: /increase/i });
+      await userEvent.click(increaseButton);
+
+      const input = canvas.getByRole('textbox');
+      await expect(input).toHaveValue('1,334.56');
+      await expect(canvas.getByText(/Value: 1,334.56/)).toBeInTheDocument();
+    });
+
+    await step('Maintains formatting on decrement', async () => {
+      const decreaseButton = canvas.getByRole('button', { name: /decrease/i });
+      await userEvent.click(decreaseButton);
+
+      const input = canvas.getByRole('textbox');
+      await expect(input).toHaveValue('1,234.56');
+      await expect(canvas.getByText(/Value: 1,234.56/)).toBeInTheDocument();
+    });
   }
 };
 
@@ -262,6 +438,27 @@ export const CurrencyInput: Story = {
         story: 'Number input with custom currency formatting using Intl.NumberFormat.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders with currency formatting', async () => {
+      const input = canvas.getByRole('textbox');
+      await expect(input).toBeInTheDocument();
+      await expect(input).toHaveValue('$99.99');
+    });
+
+    await step('Increment maintains currency format', async () => {
+      const increaseButton = canvas.getByRole('button', { name: /increase/i });
+      await userEvent.click(increaseButton);
+
+      const input = canvas.getByRole('textbox');
+      await expect(input).toHaveValue('$100.00');
+    });
+
+    await step('Raw value displayed correctly', async () => {
+      await expect(canvas.getByText(/Raw value: 100/)).toBeInTheDocument();
+    });
   }
 };
 
@@ -315,6 +512,40 @@ export const ProductOrder: Story = {
         story: 'Real-world e-commerce example with quantity selection and automatic price calculation.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders order form', async () => {
+      await expect(canvas.getByText('Product Order')).toBeInTheDocument();
+
+      const input = canvas.getByRole('textbox');
+      await expect(input).toBeInTheDocument();
+      await expect(input).toHaveValue('1');
+
+      await expect(canvas.getByText('Unit Price:')).toBeInTheDocument();
+      await expect(canvas.getByText('Total:')).toBeInTheDocument();
+    });
+
+    await step('Calculates total on quantity change', async () => {
+      const increaseButton = canvas.getByRole('button', { name: /increase/i });
+
+      // Increase quantity to 2
+      await userEvent.click(increaseButton);
+      await expect(canvas.getByText('$59.98')).toBeInTheDocument();
+
+      // Increase quantity to 3
+      await userEvent.click(increaseButton);
+      await expect(canvas.getByText('$89.97')).toBeInTheDocument();
+    });
+
+    await step('Typing quantity updates total', async () => {
+      const input = canvas.getByRole('textbox');
+      await userEvent.clear(input);
+      await userEvent.type(input, '5');
+
+      await expect(canvas.getByText('$149.95')).toBeInTheDocument();
+    });
   }
 };
 
@@ -338,6 +569,18 @@ export const DisabledState: Story = {
         story: 'Number input in disabled state.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders in disabled state', async () => {
+      const input = canvas.getByRole('textbox');
+      await expect(input).toBeDisabled();
+
+      const buttons = canvas.getAllByRole('button');
+      await expect(buttons[0]).toBeDisabled();
+      await expect(buttons[1]).toBeDisabled();
+    });
   }
 };
 
@@ -365,6 +608,23 @@ export const RTLExample: Story = {
         story: 'Basic number input with Arabic labels in RTL mode.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders in RTL context', async () => {
+      const input = canvas.getByRole('textbox');
+      await expect(input).toBeInTheDocument();
+      await expect(input).toHaveValue('42');
+    });
+
+    await step('Interaction works in RTL', async () => {
+      const increaseButton = canvas.getByRole('button', { name: /increase/i });
+      await userEvent.click(increaseButton);
+
+      const input = canvas.getByRole('textbox');
+      await expect(input).toHaveValue('43');
+    });
   }
 };
 

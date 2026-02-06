@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { expect, fn, userEvent, within } from 'storybook/test';
 import { RadioGroup, RadioGroupItem } from '../../../components/ui/radio-group';
 import { Label } from '../../../components/ui/label';
 import { Button } from '../../../components/ui/button';
@@ -33,7 +34,8 @@ type Story = StoryObj<typeof meta>;
 // Default - Interactive playground with controls (hidden from stories list to avoid ID conflicts)
 export const Default: Story = {
   args: {
-    defaultValue: 'option1'
+    defaultValue: 'option1',
+    onValueChange: fn()
   },
   globals: {
     direction: 'ltr',
@@ -55,6 +57,64 @@ export const Default: Story = {
       </div>
     </RadioGroup>
   ),
+  play: async ({ canvasElement, step, args }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders correctly with default selection', async () => {
+      const option1 = canvas.getByRole('radio', { name: /option 1/i });
+      const option2 = canvas.getByRole('radio', { name: /option 2/i });
+      const option3 = canvas.getByRole('radio', { name: /option 3/i });
+
+      await expect(option1).toBeInTheDocument();
+      await expect(option2).toBeInTheDocument();
+      await expect(option3).toBeInTheDocument();
+      await expect(option1).toBeChecked();
+      await expect(option2).not.toBeChecked();
+      await expect(option3).not.toBeChecked();
+    });
+
+    await step('Handles click interaction', async () => {
+      const option2 = canvas.getByRole('radio', { name: /option 2/i });
+      await userEvent.click(option2);
+      await expect(option2).toBeChecked();
+      await expect(args.onValueChange).toHaveBeenCalledWith('option2');
+    });
+
+    await step('Keyboard navigation with arrow keys', async () => {
+      const option1 = canvas.getByRole('radio', { name: /option 1/i });
+      const option2 = canvas.getByRole('radio', { name: /option 2/i });
+      const option3 = canvas.getByRole('radio', { name: /option 3/i });
+
+      // Focus the group
+      option2.focus();
+      await expect(option2).toHaveFocus();
+
+      // Arrow down should move to next option
+      await userEvent.keyboard('{ArrowDown}');
+      await expect(option3).toHaveFocus();
+
+      // Arrow up should move to previous option
+      await userEvent.keyboard('{ArrowUp}');
+      await expect(option2).toHaveFocus();
+    });
+
+    await step('Tab navigation', async () => {
+      // Tab should focus the checked radio button
+      const radioGroup = canvas.getByRole('radiogroup');
+      await expect(radioGroup).toBeInTheDocument();
+    });
+
+    await step('Mutually exclusive selection', async () => {
+      const option1 = canvas.getByRole('radio', { name: /option 1/i });
+      const option2 = canvas.getByRole('radio', { name: /option 2/i });
+      const option3 = canvas.getByRole('radio', { name: /option 3/i });
+
+      await userEvent.click(option1);
+      await expect(option1).toBeChecked();
+      await expect(option2).not.toBeChecked();
+      await expect(option3).not.toBeChecked();
+    });
+  },
   parameters: {
     docs: {
       story: {
@@ -82,6 +142,21 @@ export const VerticalLayout: Story = {
       </div>
     </RadioGroup>
   ),
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders with vertical layout', async () => {
+      await expect(canvas.getByRole('radio', { name: /default/i })).toBeInTheDocument();
+      await expect(canvas.getByRole('radio', { name: /comfortable/i })).toBeChecked();
+      await expect(canvas.getByRole('radio', { name: /compact/i })).toBeInTheDocument();
+    });
+
+    await step('Interaction works in vertical layout', async () => {
+      const compactOption = canvas.getByRole('radio', { name: /compact/i });
+      await userEvent.click(compactOption);
+      await expect(compactOption).toBeChecked();
+    });
+  },
   globals: {
     direction: 'ltr',
     locale: 'en'
@@ -109,6 +184,21 @@ export const HorizontalLayout: Story = {
       </div>
     </RadioGroup>
   ),
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders with horizontal layout', async () => {
+      await expect(canvas.getByRole('radio', { name: /card/i })).toBeChecked();
+      await expect(canvas.getByRole('radio', { name: /paypal/i })).toBeInTheDocument();
+      await expect(canvas.getByRole('radio', { name: /apple pay/i })).toBeInTheDocument();
+    });
+
+    await step('Interaction works in horizontal layout', async () => {
+      const paypalOption = canvas.getByRole('radio', { name: /paypal/i });
+      await userEvent.click(paypalOption);
+      await expect(paypalOption).toBeChecked();
+    });
+  },
   globals: {
     direction: 'ltr',
     locale: 'en'
@@ -153,6 +243,22 @@ export const WithDescription: Story = {
       </div>
     </RadioGroup>
   ),
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders with descriptions', async () => {
+      await expect(canvas.getByRole('radio', { name: /starter plan/i })).toBeChecked();
+      await expect(canvas.getByText(/perfect for individuals/i)).toBeInTheDocument();
+      await expect(canvas.getByText(/for small teams/i)).toBeInTheDocument();
+      await expect(canvas.getByText(/custom solutions/i)).toBeInTheDocument();
+    });
+
+    await step('Selection works with description pattern', async () => {
+      const proPlan = canvas.getByRole('radio', { name: /pro plan/i });
+      await userEvent.click(proPlan);
+      await expect(proPlan).toBeChecked();
+    });
+  },
   globals: {
     direction: 'ltr',
     locale: 'en'
@@ -185,6 +291,22 @@ export const DisabledOptions: Story = {
       </div>
     </RadioGroup>
   ),
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders with disabled option', async () => {
+      const disabledOption = canvas.getByRole('radio', { name: /disabled option/i });
+      await expect(disabledOption).toBeDisabled();
+      await expect(canvas.getByRole('radio', { name: /^enabled option/i })).not.toBeDisabled();
+      await expect(canvas.getByRole('radio', { name: /another enabled option/i })).not.toBeDisabled();
+    });
+
+    await step('Enabled options still work', async () => {
+      const anotherOption = canvas.getByRole('radio', { name: /another enabled option/i });
+      await userEvent.click(anotherOption);
+      await expect(anotherOption).toBeChecked();
+    });
+  },
   globals: {
     direction: 'ltr',
     locale: 'en'
@@ -227,6 +349,35 @@ export const Controlled: Story = {
       </div>
     );
   },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders with controlled state', async () => {
+      await expect(canvas.getByRole('radio', { name: /option 1/i })).toBeChecked();
+      await expect(canvas.getByText(/selected: option1/i)).toBeInTheDocument();
+    });
+
+    await step('Updates via direct interaction', async () => {
+      const option2 = canvas.getByRole('radio', { name: /option 2/i });
+      await userEvent.click(option2);
+      await expect(option2).toBeChecked();
+      await expect(canvas.getByText(/selected: option2/i)).toBeInTheDocument();
+    });
+
+    await step('Updates via programmatic control', async () => {
+      const button1 = canvas.getByRole('button', { name: /select option 1/i });
+      await userEvent.click(button1);
+      await expect(canvas.getByRole('radio', { name: /option 1/i })).toBeChecked();
+      await expect(canvas.getByText(/selected: option1/i)).toBeInTheDocument();
+    });
+
+    await step('Programmatic control works for multiple options', async () => {
+      const button2 = canvas.getByRole('button', { name: /select option 2/i });
+      await userEvent.click(button2);
+      await expect(canvas.getByRole('radio', { name: /option 2/i })).toBeChecked();
+      await expect(canvas.getByText(/selected: option2/i)).toBeInTheDocument();
+    });
+  },
   globals: {
     direction: 'ltr',
     locale: 'en'
@@ -253,7 +404,7 @@ export const InForm: Story = {
     >
       <div className="space-y-3">
         <Label className="text-base font-semibold">Select your plan</Label>
-        <RadioGroup defaultValue="pro" name="plan">
+        <RadioGroup defaultValue="form-pro" name="plan">
           <div className="flex items-center gap-2">
             <RadioGroupItem value="free" id="free" />
             <Label htmlFor="free">Free</Label>
@@ -271,6 +422,26 @@ export const InForm: Story = {
       <Button type="submit">Continue</Button>
     </form>
   ),
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders in form context', async () => {
+      await expect(canvas.getByText(/select your plan/i)).toBeInTheDocument();
+      await expect(canvas.getByRole('radio', { name: /pro/i })).toBeChecked();
+      await expect(canvas.getByRole('button', { name: /continue/i })).toBeInTheDocument();
+    });
+
+    await step('Form interaction works', async () => {
+      const freeOption = canvas.getByRole('radio', { name: /free/i });
+      await userEvent.click(freeOption);
+      await expect(freeOption).toBeChecked();
+    });
+
+    await step('Submit button is accessible', async () => {
+      const submitButton = canvas.getByRole('button', { name: /continue/i });
+      await expect(submitButton).toHaveAttribute('type', 'submit');
+    });
+  },
   globals: {
     direction: 'ltr',
     locale: 'en'
@@ -303,6 +474,21 @@ export const RTLExample: Story = {
       </div>
     </RadioGroup>
   ),
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders in RTL context', async () => {
+      const radios = canvas.getAllByRole('radio');
+      await expect(radios).toHaveLength(3);
+      await expect(radios[0]).toBeChecked();
+    });
+
+    await step('Interaction works in RTL', async () => {
+      const radios = canvas.getAllByRole('radio');
+      await userEvent.click(radios[1]);
+      await expect(radios[1]).toBeChecked();
+    });
+  },
   globals: {
     direction: 'rtl',
     locale: 'ar'

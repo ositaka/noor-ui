@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { expect, within } from 'storybook/test';
 import { Badge } from '../../../components/ui/badge';
 import { Button } from '../../../components/ui/button';
 import { Check, AlertCircle, Star, Clock, Zap, CheckCircle2, XCircle } from 'lucide-react';
@@ -34,6 +35,15 @@ export const Default: Story = {
   args: {
     children: 'New',
     variant: 'default'
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders correctly', async () => {
+      const badge = canvas.getByText('New');
+      await expect(badge).toBeInTheDocument();
+      await expect(badge).toBeVisible();
+    });
   }
 };
 
@@ -53,6 +63,15 @@ export const WithIcon: Story = {
         story: 'Badge with icon. Use the Controls panel to try different variants.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders with icon and text', async () => {
+      const badge = canvas.getByText('Verified');
+      await expect(badge).toBeInTheDocument();
+      await expect(badge).toBeVisible();
+    });
   }
 };
 
@@ -60,6 +79,7 @@ export const WithIcon: Story = {
 export const StatusIndicator: Story = {
   args: {
     variant: 'default',
+    role: 'status',
     children: (
       <>
         <CheckCircle2 className="h-3 w-3 me-1" />
@@ -70,9 +90,23 @@ export const StatusIndicator: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Status indicator with icon. Use Controls to try different statuses and variants.'
+        story: 'Status indicator with icon and role="status" for screen reader announcements. Use Controls to try different statuses and variants.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders status indicator', async () => {
+      const badge = canvas.getByText('Active');
+      await expect(badge).toBeInTheDocument();
+      await expect(badge).toBeVisible();
+    });
+
+    await step('Has role="status" for accessibility', async () => {
+      const badge = canvas.getByText('Active');
+      await expect(badge).toHaveAttribute('role', 'status');
+    });
   }
 };
 
@@ -98,6 +132,18 @@ export const NotificationCount: Story = {
   ),
   parameters: {
     controls: { disable: true }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders notification badges on buttons', async () => {
+      await expect(canvas.getByText('Notifications')).toBeInTheDocument();
+      await expect(canvas.getByText('3')).toBeInTheDocument();
+      await expect(canvas.getByText('Messages')).toBeInTheDocument();
+      await expect(canvas.getByText('12')).toBeInTheDocument();
+      await expect(canvas.getByText('Cart')).toBeInTheDocument();
+      await expect(canvas.getByText('5')).toBeInTheDocument();
+    });
   }
 };
 
@@ -121,6 +167,15 @@ export const RTLExample: Story = {
         story: 'Badge with Arabic text. Icon automatically positions correctly in RTL. Use Controls to try different variants.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders in RTL context', async () => {
+      const badge = canvas.getByText('جديد');
+      await expect(badge).toBeInTheDocument();
+      await expect(badge).toBeVisible();
+    });
   }
 };
 
@@ -170,26 +225,31 @@ export const AllWithIcons: Story = {
 export const AllStatusIndicators: Story = {
   render: () => (
     <div className="flex flex-wrap gap-2">
-      <Badge variant="default">
+      <Badge variant="default" role="status">
         <CheckCircle2 className="h-3 w-3 me-1" />
         Active
       </Badge>
-      <Badge variant="secondary">
+      <Badge variant="secondary" role="status">
         <Clock className="h-3 w-3 me-1" />
         Pending
       </Badge>
-      <Badge variant="destructive">
+      <Badge variant="destructive" role="status">
         <XCircle className="h-3 w-3 me-1" />
         Failed
       </Badge>
-      <Badge variant="outline">
+      <Badge variant="outline" role="status">
         <AlertCircle className="h-3 w-3 me-1" />
         Info
       </Badge>
     </div>
   ),
   parameters: {
-    controls: { disable: true }
+    controls: { disable: true },
+    docs: {
+      description: {
+        story: 'Status indicators with role="status" for accessibility. Screen readers will announce status changes.'
+      }
+    }
   }
 };
 

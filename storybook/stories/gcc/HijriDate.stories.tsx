@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { within, expect } from 'storybook/test';
 import { HijriDate } from '../../../components/ui/hijri-date';
 
 /**
@@ -54,6 +55,37 @@ export const Default: Story = {
         inline: false
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders Hijri date component', async () => {
+      const container = canvasElement.querySelector('div');
+      await expect(container).toBeInTheDocument();
+    });
+
+    await step('Displays Gregorian date', async () => {
+      await expect(canvas.getByText('November 6, 2025')).toBeInTheDocument();
+      await expect(canvas.getByText('November 6, 2025')).toBeVisible();
+    });
+
+    await step('Displays Gregorian label', async () => {
+      await expect(canvas.getByText('Gregorian')).toBeInTheDocument();
+    });
+
+    await step('Displays Hijri date', async () => {
+      await expect(canvas.getByText('5 Jumada al-Awwal 1447')).toBeInTheDocument();
+      await expect(canvas.getByText('5 Jumada al-Awwal 1447')).toBeVisible();
+    });
+
+    await step('Displays Hijri label', async () => {
+      await expect(canvas.getByText('Hijri')).toBeInTheDocument();
+    });
+
+    await step('Shows calendar icon', async () => {
+      const icon = canvasElement.querySelector('svg');
+      await expect(icon).toBeInTheDocument();
+    });
   }
 };
 
@@ -79,6 +111,24 @@ export const DefaultVariant: Story = {
         story: 'Default Hijri date display with icon.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders default variant', async () => {
+      await expect(canvas.getByText('November 6, 2025')).toBeInTheDocument();
+      await expect(canvas.getByText('5 Jumada al-Awwal 1447')).toBeInTheDocument();
+    });
+
+    await step('Shows labels for default variant', async () => {
+      await expect(canvas.getByText('Gregorian')).toBeInTheDocument();
+      await expect(canvas.getByText('Hijri')).toBeInTheDocument();
+    });
+
+    await step('Shows calendar icon', async () => {
+      const icon = canvasElement.querySelector('svg');
+      await expect(icon).toBeInTheDocument();
+    });
   }
 };
 
@@ -104,6 +154,28 @@ export const BadgeVariant: Story = {
         story: 'Badge variant for compact display.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders badge variant', async () => {
+      await expect(canvas.getByText('Nov 6, 2025')).toBeInTheDocument();
+      await expect(canvas.getByText('5 Jumada I, 1447')).toBeInTheDocument();
+    });
+
+    await step('Does not show labels in badge variant', async () => {
+      expect(canvas.queryByText('Gregorian')).not.toBeInTheDocument();
+      expect(canvas.queryByText('Hijri')).not.toBeInTheDocument();
+    });
+
+    await step('Shows separator bullet', async () => {
+      await expect(canvas.getByText('•')).toBeInTheDocument();
+    });
+
+    await step('Shows calendar icon', async () => {
+      const icon = canvasElement.querySelector('svg');
+      await expect(icon).toBeInTheDocument();
+    });
   }
 };
 
@@ -132,6 +204,29 @@ export const CompactVariant: Story = {
         story: 'Compact variant for inline text.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders compact variant inline with text', async () => {
+      await expect(canvas.getByText('Published on')).toBeInTheDocument();
+      await expect(canvas.getByText('Nov 6, 2025')).toBeInTheDocument();
+      await expect(canvas.getByText('5 Jumada I, 1447')).toBeInTheDocument();
+    });
+
+    await step('Does not show labels in compact variant', async () => {
+      expect(canvas.queryByText('Gregorian')).not.toBeInTheDocument();
+      expect(canvas.queryByText('Hijri')).not.toBeInTheDocument();
+    });
+
+    await step('Shows separator bullet', async () => {
+      await expect(canvas.getByText('•')).toBeInTheDocument();
+    });
+
+    await step('Does not show icon in compact variant', async () => {
+      const icons = canvasElement.querySelectorAll('svg');
+      expect(icons.length).toBe(0);
+    });
   }
 };
 
@@ -158,6 +253,24 @@ export const DetailedVariant: Story = {
         story: 'Detailed variant with enhanced visuals.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders detailed variant', async () => {
+      await expect(canvas.getByText('November 6, 2025')).toBeInTheDocument();
+      await expect(canvas.getByText('5 Jumada al-Awwal 1447')).toBeInTheDocument();
+    });
+
+    await step('Shows labels for detailed variant', async () => {
+      await expect(canvas.getByText('Gregorian')).toBeInTheDocument();
+      await expect(canvas.getByText('Hijri')).toBeInTheDocument();
+    });
+
+    await step('Shows calendar icon', async () => {
+      const icon = canvasElement.querySelector('svg');
+      await expect(icon).toBeInTheDocument();
+    });
   }
 };
 
@@ -183,6 +296,19 @@ export const WithoutIcon: Story = {
         story: 'Hijri date without calendar icon.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders without icon', async () => {
+      await expect(canvas.getByText('November 6, 2025')).toBeInTheDocument();
+      await expect(canvas.getByText('5 Jumada al-Awwal 1447')).toBeInTheDocument();
+    });
+
+    await step('Does not show calendar icon', async () => {
+      const icons = canvasElement.querySelectorAll('svg');
+      expect(icons.length).toBe(0);
+    });
   }
 };
 
@@ -267,6 +393,19 @@ export const RTLDefault: Story = {
         story: 'Hijri date in RTL with Arabic text.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders in RTL context', async () => {
+      await expect(canvas.getByText('٦ نوفمبر ٢٠٢٥')).toBeInTheDocument();
+      await expect(canvas.getByText('٥ جمادى الأولى ١٤٤٧')).toBeInTheDocument();
+    });
+
+    await step('Shows Arabic labels', async () => {
+      await expect(canvas.getByText('ميلادي')).toBeInTheDocument();
+      await expect(canvas.getByText('هجري')).toBeInTheDocument();
+    });
   }
 };
 
@@ -292,6 +431,14 @@ export const RTLBadge: Story = {
         story: 'Badge variant in RTL layout.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders badge variant in RTL', async () => {
+      await expect(canvas.getByText('٥ جمادى الأولى ١٤٤٧')).toBeInTheDocument();
+      await expect(canvas.getByText('•')).toBeInTheDocument();
+    });
   }
 };
 
@@ -320,6 +467,14 @@ export const RTLCompact: Story = {
         story: 'Compact variant in RTL with Arabic inline text.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders compact variant in RTL with inline text', async () => {
+      await expect(canvas.getByText('نُشر في')).toBeInTheDocument();
+      await expect(canvas.getByText('٥ جمادى الأولى ١٤٤٧')).toBeInTheDocument();
+    });
   }
 };
 
@@ -346,5 +501,13 @@ export const RTLDetailed: Story = {
         story: 'Detailed variant in RTL with full Arabic dates.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders detailed variant in RTL', async () => {
+      await expect(canvas.getByText('٦ نوفمبر ٢٠٢٥')).toBeInTheDocument();
+      await expect(canvas.getByText('٥ جمادى الأولى ١٤٤٧')).toBeInTheDocument();
+    });
   }
 };

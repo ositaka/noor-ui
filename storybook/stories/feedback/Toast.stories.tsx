@@ -3,6 +3,7 @@ import { Toast } from '../../../components/ui/toast';
 import { useToast } from '../../../hooks/use-toast';
 import { Button } from '../../../components/ui/button';
 import * as React from 'react';
+import { expect, userEvent, within, fn } from 'storybook/test';
 
 /**
  * Toast Component Stories
@@ -63,6 +64,56 @@ export const Default: Story = {
         inline: false
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders trigger button correctly', async () => {
+      const button = canvas.getByRole('button', { name: /show toast/i });
+      await expect(button).toBeInTheDocument();
+      await expect(button).toBeVisible();
+    });
+
+    await step('Shows toast on button click', async () => {
+      const button = canvas.getByRole('button', { name: /show toast/i });
+      await userEvent.click(button);
+
+      // Wait for toast to appear
+      await new Promise(resolve => setTimeout(resolve, 100));
+
+      // Toast renders in a portal (document.body), not in canvasElement
+      const bodyCanvas = within(document.body);
+      const toast = bodyCanvas.getByText('Scheduled: Catch up');
+      await expect(toast).toBeInTheDocument();
+
+      const description = bodyCanvas.getByText('Friday, February 10, 2023 at 5:57 PM');
+      await expect(description).toBeInTheDocument();
+    });
+
+    await step('Toast has close button', async () => {
+      // Toast renders in a portal, so we need to query document.body
+      // The close button has no accessible name (just an X icon), so we find it by attribute
+      const closeButton = document.querySelector('[toast-close]');
+      await expect(closeButton).toBeInTheDocument();
+    });
+
+    await step('Keyboard accessible', async () => {
+      // Focus the show toast button directly (more reliable than tab with portal elements)
+      const button = canvas.getByRole('button', { name: /show toast/i });
+      button.focus();
+      await expect(button).toHaveFocus();
+
+      // Activate with Enter key
+      await userEvent.keyboard('{Enter}');
+
+      // Wait for toast to appear
+      await new Promise(resolve => setTimeout(resolve, 100));
+
+      // Toast renders in a portal (document.body)
+      const bodyCanvas = within(document.body);
+      const toast = bodyCanvas.getByText('Scheduled: Catch up');
+      await expect(toast).toBeInTheDocument();
+    });
   }
 };
 
@@ -93,6 +144,27 @@ export const Simple: Story = {
         story: 'Simple toast with only a description message.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders trigger button', async () => {
+      const button = canvas.getByRole('button', { name: /show simple toast/i });
+      await expect(button).toBeInTheDocument();
+    });
+
+    await step('Shows toast with description only', async () => {
+      const button = canvas.getByRole('button', { name: /show simple toast/i });
+      await userEvent.click(button);
+
+      // Wait for toast to appear
+      await new Promise(resolve => setTimeout(resolve, 100));
+
+      // Toast renders in a portal (document.body)
+      const bodyCanvas = within(document.body);
+      const description = bodyCanvas.getByText('Your message has been sent.');
+      await expect(description).toBeInTheDocument();
+    });
   }
 };
 
@@ -124,6 +196,30 @@ export const WithTitle: Story = {
         story: 'Toast with both title and description.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders trigger button', async () => {
+      const button = canvas.getByRole('button', { name: /show toast/i });
+      await expect(button).toBeInTheDocument();
+    });
+
+    await step('Shows toast with title and description', async () => {
+      const button = canvas.getByRole('button', { name: /show toast/i });
+      await userEvent.click(button);
+
+      // Wait for toast to appear
+      await new Promise(resolve => setTimeout(resolve, 100));
+
+      // Toast renders in a portal (document.body)
+      const bodyCanvas = within(document.body);
+      const title = bodyCanvas.getByText('Scheduled: Catch up');
+      await expect(title).toBeInTheDocument();
+
+      const description = bodyCanvas.getByText('Friday, February 10, 2023 at 5:57 PM');
+      await expect(description).toBeInTheDocument();
+    });
   }
 };
 
@@ -277,6 +373,27 @@ export const RTLSimple: Story = {
         story: 'Simple toast in RTL with Arabic text.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders in RTL context', async () => {
+      const button = canvas.getByRole('button', { name: /عرض توست بسيط/i });
+      await expect(button).toBeInTheDocument();
+    });
+
+    await step('Shows RTL toast with Arabic text', async () => {
+      const button = canvas.getByRole('button', { name: /عرض توست بسيط/i });
+      await userEvent.click(button);
+
+      // Wait for toast to appear
+      await new Promise(resolve => setTimeout(resolve, 100));
+
+      // Toast renders in a portal (document.body)
+      const bodyCanvas = within(document.body);
+      const description = bodyCanvas.getByText('تم إرسال رسالتك.');
+      await expect(description).toBeInTheDocument();
+    });
   }
 };
 

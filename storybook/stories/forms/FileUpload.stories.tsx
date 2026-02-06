@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { FileUpload } from '../../../components/ui/file-upload';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../../components/ui/card';
 import * as React from 'react';
+import { expect, fn, userEvent, within } from 'storybook/test';
 
 /**
  * File Upload Component Stories
@@ -53,7 +54,9 @@ export const Default: Story = {
   args: {
     multiple: false,
     maxSize: 5 * 1024 * 1024, // 5MB
-    maxFiles: 1
+    maxFiles: 1,
+    onChange: fn(),
+    onUpload: fn()
   },
   globals: {
     direction: 'ltr',
@@ -66,8 +69,11 @@ export const Default: Story = {
       <div className="w-full max-w-xl">
         <FileUpload
           {...args}
-          onChange={setFiles}
-          onUpload={(files) => console.log('Uploaded:', files)}
+          onChange={(newFiles) => {
+            setFiles(newFiles);
+            args.onChange?.(newFiles);
+          }}
+          onUpload={args.onUpload}
         />
         {files.length > 0 && (
           <p className="text-sm text-muted-foreground mt-4">
@@ -83,6 +89,32 @@ export const Default: Story = {
         inline: false
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders correctly', async () => {
+      const uploadArea = canvas.getByRole('button', { name: 'Upload files' });
+      await expect(uploadArea).toBeInTheDocument();
+      await expect(uploadArea).toBeVisible();
+    });
+
+    await step('Shows upload instructions', async () => {
+      await expect(canvas.getByText(/Click to upload or drag and drop/i)).toBeInTheDocument();
+      await expect(canvas.getByText(/Any file type/i)).toBeInTheDocument();
+      await expect(canvas.getByText(/Max size: 5 MB/i)).toBeInTheDocument();
+    });
+
+    await step('Keyboard accessible', async () => {
+      const uploadArea = canvas.getByRole('button', { name: 'Upload files' });
+      uploadArea.focus();
+      await expect(uploadArea).toHaveFocus();
+
+      // Hidden file input has aria-label
+      const fileInput = canvas.getByLabelText('File upload');
+      await expect(fileInput).toBeInTheDocument();
+      await expect(fileInput).toHaveAttribute('type', 'file');
+    });
   }
 };
 
@@ -111,6 +143,19 @@ export const BasicFileUpload: Story = {
         story: 'Basic file upload with drag-and-drop support and default settings (5MB max, single file).'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders with default settings', async () => {
+      const uploadArea = canvas.getByRole('button', { name: 'Upload files' });
+      await expect(uploadArea).toBeInTheDocument();
+      await expect(uploadArea).toBeEnabled();
+    });
+
+    await step('Shows any file type accepted', async () => {
+      await expect(canvas.getByText(/Any file type/i)).toBeInTheDocument();
+    });
   }
 };
 
@@ -142,6 +187,23 @@ export const ImagesOnly: Story = {
         story: 'File upload that only accepts image files (JPEG, PNG, GIF, WebP, etc.) with automatic image previews.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders image upload area', async () => {
+      const uploadArea = canvas.getByRole('button', { name: 'Upload files' });
+      await expect(uploadArea).toBeInTheDocument();
+    });
+
+    await step('Shows image format restriction', async () => {
+      await expect(canvas.getByText(/Accepted formats: image\/\*/i)).toBeInTheDocument();
+    });
+
+    await step('File input has correct accept attribute', async () => {
+      const fileInput = canvas.getByLabelText('File upload');
+      await expect(fileInput).toHaveAttribute('accept', 'image/*');
+    });
   }
 };
 
@@ -174,6 +236,23 @@ export const MultipleFiles: Story = {
         story: 'File upload that allows multiple files (up to 5) with "Add More Files" button.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders multiple file upload', async () => {
+      const uploadArea = canvas.getByRole('button', { name: 'Upload files' });
+      await expect(uploadArea).toBeInTheDocument();
+    });
+
+    await step('Shows max files limit', async () => {
+      await expect(canvas.getByText(/Max 5 files/i)).toBeInTheDocument();
+    });
+
+    await step('File input allows multiple files', async () => {
+      const fileInput = canvas.getByLabelText('File upload');
+      await expect(fileInput).toHaveAttribute('multiple');
+    });
   }
 };
 
@@ -201,6 +280,18 @@ export const CustomSizeLimit: Story = {
         story: 'File upload with custom size limit of 2MB (instead of default 5MB).'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders with custom size limit', async () => {
+      const uploadArea = canvas.getByRole('button', { name: 'Upload files' });
+      await expect(uploadArea).toBeInTheDocument();
+    });
+
+    await step('Shows 2MB size limit', async () => {
+      await expect(canvas.getByText(/Max size: 2 MB/i)).toBeInTheDocument();
+    });
   }
 };
 
@@ -236,6 +327,23 @@ export const DocumentsOnly: Story = {
         story: 'File upload restricted to PDF and Word documents only.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders document upload area', async () => {
+      const uploadArea = canvas.getByRole('button', { name: 'Upload files' });
+      await expect(uploadArea).toBeInTheDocument();
+    });
+
+    await step('Shows document format restriction', async () => {
+      await expect(canvas.getByText(/Accepted formats: .pdf,.doc,.docx/i)).toBeInTheDocument();
+    });
+
+    await step('File input has correct accept attribute', async () => {
+      const fileInput = canvas.getByLabelText('File upload');
+      await expect(fileInput).toHaveAttribute('accept', '.pdf,.doc,.docx');
+    });
   }
 };
 
@@ -262,6 +370,20 @@ export const DisabledState: Story = {
         story: 'File upload in disabled state.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders in disabled state', async () => {
+      const uploadArea = canvas.getByRole('button', { name: 'Upload files' });
+      await expect(uploadArea).toBeInTheDocument();
+      await expect(uploadArea).toHaveAttribute('aria-disabled', 'true');
+    });
+
+    await step('File input is disabled', async () => {
+      const fileInput = canvas.getByLabelText('File upload');
+      await expect(fileInput).toBeDisabled();
+    });
   }
 };
 
@@ -290,6 +412,25 @@ export const RTLExample: Story = {
         story: 'Basic file upload with Arabic text in RTL mode. Component automatically displays bilingual text based on locale.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders in RTL context', async () => {
+      const uploadArea = canvas.getByRole('button', { name: 'Upload files' });
+      await expect(uploadArea).toBeInTheDocument();
+    });
+
+    await step('Shows Arabic text', async () => {
+      await expect(canvas.getByText(/انقر للتحميل أو اسحب وأسقط/)).toBeInTheDocument();
+      await expect(canvas.getByText(/أي نوع ملف/)).toBeInTheDocument();
+    });
+
+    await step('Interaction works in RTL', async () => {
+      const uploadArea = canvas.getByRole('button', { name: 'Upload files' });
+      uploadArea.focus();
+      await expect(uploadArea).toHaveFocus();
+    });
   }
 };
 

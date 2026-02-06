@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { fn } from 'storybook/test';
 import { DashboardShell } from '../../../components/ui/dashboard-shell';
 import { Card, CardContent } from '../../../components/ui/card';
 import {
@@ -47,7 +48,10 @@ type Story = StoryObj<typeof meta>;
 // Default
 export const Default: Story = {
   args: {
-    relative: true
+    relative: true,
+    onLogout: fn(),
+    onProfileClick: fn(),
+    onSettingsClick: fn()
   },
   render: (args) => {
     const navItems = [
@@ -81,7 +85,6 @@ export const Default: Story = {
             name: 'Ahmed Al-Rashid',
             email: 'ahmed@example.com'
           }}
-          onLogout={() => console.log('Logout')}
         >
           <div className="container py-6">
             <h1 className="text-2xl font-bold mb-4">Dashboard Content</h1>
@@ -169,6 +172,25 @@ export const BasicUsage: Story = {
 // With Notifications - from page lines 444-474
 export const WithNotifications: Story = {
   render: () => {
+    const notifications = [
+      {
+        id: '1',
+        title: 'New comment',
+        description: 'Sarah commented on your post',
+        time: new Date(Date.now() - 1000 * 60 * 5).toISOString(),
+        read: false,
+        icon: <MessageSquare className="h-5 w-5" />
+      },
+      {
+        id: '2',
+        title: 'Post published',
+        description: 'Your post "Getting Started" is now live',
+        time: new Date(Date.now() - 1000 * 60 * 30).toISOString(),
+        read: true,
+        icon: <Bell className="h-5 w-5" />
+      },
+    ];
+
     const navItems = [
       {
         title: 'Dashboard',
@@ -187,25 +209,6 @@ export const WithNotifications: Story = {
         titleAr: 'الفريق',
         href: '#',
         icon: <Users className="h-5 w-5" />
-      },
-    ];
-
-    const notifications = [
-      {
-        id: '1',
-        title: 'New comment',
-        description: 'Sarah commented on your post',
-        time: new Date(Date.now() - 1000 * 60 * 5).toISOString(),
-        read: false,
-        icon: <MessageSquare className="h-5 w-5" />
-      },
-      {
-        id: '2',
-        title: 'Post published',
-        description: 'Your post "Getting Started" is now live',
-        time: new Date(Date.now() - 1000 * 60 * 30).toISOString(),
-        read: true,
-        icon: <Bell className="h-5 w-5" />
       },
     ];
 

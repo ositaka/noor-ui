@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { expect, fn, userEvent, within } from 'storybook/test';
 import {
   ContextMenu,
   ContextMenuContent,
@@ -54,35 +55,38 @@ export const Default: Story = {
     direction: 'ltr',
     locale: 'en'
   },
-  render: () => (
-    <ContextMenu>
+  args: {
+    onOpenChange: fn()
+  },
+  render: (args) => (
+    <ContextMenu onOpenChange={args.onOpenChange}>
       <ContextMenuTrigger>
         <Card className="w-full max-w-md h-32 px-4 flex items-center justify-center border-dashed border-2 cursor-context-menu">
           <p className="text-muted-foreground">Right click here</p>
         </Card>
       </ContextMenuTrigger>
       <ContextMenuContent className="w-56">
-        <ContextMenuItem>
+        <ContextMenuItem onSelect={fn()}>
           <Edit className="me-2 h-4 w-4" />
           <span>Edit</span>
           <ContextMenuShortcut>⌘E</ContextMenuShortcut>
         </ContextMenuItem>
-        <ContextMenuItem>
+        <ContextMenuItem onSelect={fn()}>
           <Copy className="me-2 h-4 w-4" />
           <span>Copy</span>
           <ContextMenuShortcut>⌘C</ContextMenuShortcut>
         </ContextMenuItem>
-        <ContextMenuItem>
+        <ContextMenuItem onSelect={fn()}>
           <Share className="me-2 h-4 w-4" />
           <span>Share</span>
         </ContextMenuItem>
         <ContextMenuSeparator />
-        <ContextMenuItem>
+        <ContextMenuItem onSelect={fn()}>
           <Download className="me-2 h-4 w-4" />
           <span>Download</span>
         </ContextMenuItem>
         <ContextMenuSeparator />
-        <ContextMenuItem className="text-destructive">
+        <ContextMenuItem className="text-destructive" onSelect={fn()}>
           <Trash2 className="me-2 h-4 w-4" />
           <span>Delete</span>
           <ContextMenuShortcut>⌘D</ContextMenuShortcut>
@@ -90,6 +94,44 @@ export const Default: Story = {
       </ContextMenuContent>
     </ContextMenu>
   ),
+  play: async ({ canvasElement, step, args }) => {
+    const canvas = within(canvasElement);
+    const body = within(document.body);
+
+    await step('Renders trigger correctly', async () => {
+      const trigger = canvas.getByText('Right click here');
+      await expect(trigger).toBeInTheDocument();
+      await expect(trigger).toBeVisible();
+    });
+
+    await step('Opens context menu on right-click', async () => {
+      const trigger = canvas.getByText('Right click here');
+      await userEvent.pointer({ keys: '[MouseRight>]', target: trigger });
+
+      // Wait for menu to appear - context menu renders in portal at document.body
+      const editItem = await body.findByText('Edit');
+      await expect(editItem).toBeInTheDocument();
+      await expect(editItem).toBeVisible();
+      await expect(args.onOpenChange).toHaveBeenCalledWith(true);
+    });
+
+    await step('Menu items are keyboard navigable', async () => {
+      // Navigate with arrow keys
+      await userEvent.keyboard('{ArrowDown}');
+
+      // Verify menu is still open after navigation by checking item visibility
+      const copyItem = body.getByText('Copy').closest('[role="menuitem"]');
+      await expect(copyItem).toBeVisible();
+    });
+
+    await step('Menu items can be selected', async () => {
+      const copyItem = body.getByText('Copy').closest('[role="menuitem"]');
+      await userEvent.keyboard('{Enter}');
+
+      // Menu should close after selection
+      await expect(copyItem).not.toBeInTheDocument();
+    });
+  },
   parameters: {
     docs: {
       story: {
@@ -137,6 +179,28 @@ export const BasicUsage: Story = {
       </ContextMenuContent>
     </ContextMenu>
   ),
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+    const body = within(document.body);
+
+    await step('Renders trigger', async () => {
+      const trigger = canvas.getByText('Right click here');
+      await expect(trigger).toBeInTheDocument();
+    });
+
+    await step('Opens on right-click', async () => {
+      const trigger = canvas.getByText('Right click here');
+      await userEvent.pointer({ keys: '[MouseRight>]', target: trigger });
+
+      // Context menu renders in portal at document.body
+      const editItem = await body.findByRole('menuitem', { name: /edit/i });
+      await expect(editItem).toBeInTheDocument();
+
+      // Verify shortcuts are present
+      const shortcut = body.getByText('⌘E');
+      await expect(shortcut).toBeInTheDocument();
+    });
+  },
   globals: {
     direction: 'ltr',
     locale: 'en'
@@ -224,6 +288,41 @@ export const WithCheckboxes: Story = {
       </ContextMenu>
     );
   },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+    const body = within(document.body);
+
+    await step('Opens context menu', async () => {
+      const trigger = canvas.getByText('Right click for options');
+      await userEvent.pointer({ keys: '[MouseRight>]', target: trigger });
+
+      // Context menu renders in portal at document.body
+      const label = await body.findByText('View Options');
+      await expect(label).toBeInTheDocument();
+    });
+
+    await step('Shows checkbox items with correct initial states', async () => {
+      const bookmarksItem = body.getByRole('menuitemcheckbox', { name: /Show Bookmarks/i });
+      const readingListItem = body.getByRole('menuitemcheckbox', { name: /Show Reading List/i });
+
+      await expect(bookmarksItem).toBeInTheDocument();
+      await expect(bookmarksItem).toHaveAttribute('data-state', 'checked');
+      await expect(readingListItem).toBeInTheDocument();
+      await expect(readingListItem).toHaveAttribute('data-state', 'unchecked');
+    });
+
+    await step('Toggles checkbox state on click', async () => {
+      const readingListItem = body.getByRole('menuitemcheckbox', { name: /Show Reading List/i });
+      await userEvent.click(readingListItem);
+
+      // Need to reopen menu to see state change
+      const trigger = canvas.getByText('Right click for options');
+      await userEvent.pointer({ keys: '[MouseRight>]', target: trigger });
+
+      const updatedItem = await body.findByRole('menuitemcheckbox', { name: /Show Reading List/i });
+      await expect(updatedItem).toHaveAttribute('data-state', 'checked');
+    });
+  },
   globals: {
     direction: 'ltr',
     locale: 'en'
@@ -278,6 +377,34 @@ export const FileExplorer: Story = {
       </div>
     </div>
   ),
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+    const body = within(document.body);
+
+    await step('Renders multiple file items', async () => {
+      const docFile = canvas.getByText('Document.pdf');
+      const imgFile = canvas.getByText('Image.png');
+      const vidFile = canvas.getByText('Video.mp4');
+
+      await expect(docFile).toBeInTheDocument();
+      await expect(imgFile).toBeInTheDocument();
+      await expect(vidFile).toBeInTheDocument();
+    });
+
+    await step('Each file has its own context menu', async () => {
+      const imgFile = canvas.getByText('Image.png');
+      await userEvent.pointer({ keys: '[MouseRight>]', target: imgFile });
+
+      // Context menu renders in portal at document.body
+      const copyItem = await body.findByText('Copy');
+      const downloadItem = body.getByText('Download');
+      const favoritesItem = body.getByText('Add to Favorites');
+
+      await expect(copyItem).toBeInTheDocument();
+      await expect(downloadItem).toBeInTheDocument();
+      await expect(favoritesItem).toBeInTheDocument();
+    });
+  },
   globals: {
     direction: 'ltr',
     locale: 'en'
@@ -388,6 +515,28 @@ export const RTLBasic: Story = {
       </ContextMenuContent>
     </ContextMenu>
   ),
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+    const body = within(document.body);
+
+    await step('Renders in RTL context', async () => {
+      const trigger = canvas.getByText('انقر بزر الماوس الأيمن هنا');
+      await expect(trigger).toBeInTheDocument();
+    });
+
+    await step('Opens and displays RTL content correctly', async () => {
+      const trigger = canvas.getByText('انقر بزر الماوس الأيمن هنا');
+      await userEvent.pointer({ keys: '[MouseRight>]', target: trigger });
+
+      // Context menu renders in portal at document.body
+      const editItem = await body.findByText('تعديل');
+      await expect(editItem).toBeInTheDocument();
+
+      // Verify shortcuts still render LTR
+      const shortcut = body.getByText('⌘E');
+      await expect(shortcut).toBeInTheDocument();
+    });
+  },
   globals: {
     direction: 'rtl',
     locale: 'ar'
