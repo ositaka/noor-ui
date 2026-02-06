@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { cva, type VariantProps } from 'class-variance-authority'
 import { cn } from '../../lib/utils'
-import { formatSAR, formatNumber, formatPercentage } from '../../lib/arabic-numbers'
+import { formatSAR, formatNumber, formatPercentage, formatCompactNumber } from '../../lib/arabic-numbers'
 
 // ============================================================================
 // Types
@@ -13,7 +13,7 @@ export interface ArabicNumberProps
   /** The number to display */
   value: number
   /** Format type */
-  format?: 'number' | 'currency' | 'percentage'
+  format?: 'number' | 'currency' | 'percentage' | 'compact'
   /** Use Arabic-Indic numerals */
   useArabicNumerals?: boolean
   /** Locale for formatting */
@@ -76,6 +76,11 @@ export const ArabicNumber = React.forwardRef<HTMLSpanElement, ArabicNumberProps>
             useArabicNumerals: shouldUseArabicNumerals,
             locale,
             decimals: decimals ?? 1,
+          })
+        case 'compact':
+          return formatCompactNumber(value, {
+            useArabicNumerals: shouldUseArabicNumerals,
+            locale,
           })
         case 'number':
         default:

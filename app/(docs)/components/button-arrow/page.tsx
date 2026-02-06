@@ -302,17 +302,65 @@ export default function ButtonArrowPage() {
         <section className="mb-16">
           <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentDocs.rtlConsiderations}</h2>
           <Card>
-            <CardContent className="p-6 space-y-4">
+            <CardContent className="p-6 space-y-6">
               <p className="text-muted-foreground">
                 {t.buttonArrowComponent.rtl.description}
               </p>
+
+              {/* When to use ButtonArrow */}
+              <div>
+                <h4 className="font-semibold mb-2">{t.buttonArrowComponent.rtl.whenToUse}</h4>
+                <p className="text-muted-foreground mb-4">
+                  {t.buttonArrowComponent.rtl.whenToUseDesc}
+                </p>
+                <ul className="list-disc list-inside text-muted-foreground space-y-1">
+                  <li>{t.buttonArrowComponent.rtl.useCase1}</li>
+                  <li>{t.buttonArrowComponent.rtl.useCase2}</li>
+                  <li>{t.buttonArrowComponent.rtl.useCase3}</li>
+                  <li>{t.buttonArrowComponent.rtl.useCase4}</li>
+                </ul>
+              </div>
+
+              <Separator />
+
+              {/* Semantic Directions */}
               <div>
                 <h4 className="font-semibold mb-2">{t.buttonArrowComponent.rtl.semanticDirections}</h4>
                 <p className="text-muted-foreground mb-4">
                   {t.buttonArrowComponent.rtl.semanticDesc}
                 </p>
+                <div className="overflow-x-auto">
+                  <table className="w-full text-sm">
+                    <thead>
+                      <tr className="border-b">
+                        <th className="text-start py-2 pe-4 font-semibold">{t.buttonArrowComponent.rtl.tableDirection}</th>
+                        <th className="text-start py-2 pe-4 font-semibold">{t.buttonArrowComponent.rtl.tableLtrArrow}</th>
+                        <th className="text-start py-2 font-semibold">{t.buttonArrowComponent.rtl.tableRtlArrow}</th>
+                      </tr>
+                    </thead>
+                    <tbody className="text-muted-foreground">
+                      <tr className="border-b">
+                        <td className="py-2 pe-4"><code className="bg-muted px-1 rounded">forward</code></td>
+                        <td className="py-2 pe-4">{`→ (${t.buttonArrowComponent.rtl.arrowRight})`}</td>
+                        <td className="py-2">{`← (${t.buttonArrowComponent.rtl.arrowLeft})`}</td>
+                      </tr>
+                      <tr className="border-b">
+                        <td className="py-2 pe-4"><code className="bg-muted px-1 rounded">back</code></td>
+                        <td className="py-2 pe-4">{`← (${t.buttonArrowComponent.rtl.arrowLeft})`}</td>
+                        <td className="py-2">{`→ (${t.buttonArrowComponent.rtl.arrowRight})`}</td>
+                      </tr>
+                      <tr>
+                        <td className="py-2 pe-4"><code className="bg-muted px-1 rounded">external</code></td>
+                        <td className="py-2 pe-4">{`↗ (${t.buttonArrowComponent.rtl.arrowTopRight})`}</td>
+                        <td className="py-2">{`↖ (${t.buttonArrowComponent.rtl.arrowTopLeft})`}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
               </div>
+
               <CodeBlock code={rtlCode} language="tsx" />
+
               <div className="grid gap-4 md:grid-cols-2 mt-6">
                 <div className="space-y-2">
                   <h4 className="font-semibold text-sm">{t.componentDocs.ltr}</h4>
@@ -329,6 +377,16 @@ export default function ButtonArrowPage() {
                   </div>
                 </div>
               </div>
+
+              <Separator />
+
+              {/* Link to full RTL guide */}
+              <p className="text-sm text-muted-foreground">
+                {t.buttonArrowComponent.rtl.rtlGuidePrefix}{' '}
+                <Link href="/documentation/rtl" className="text-primary hover:underline">
+                  {t.buttonArrowComponent.rtl.rtlGuideLink}
+                </Link>.
+              </p>
             </CardContent>
           </Card>
         </section>
