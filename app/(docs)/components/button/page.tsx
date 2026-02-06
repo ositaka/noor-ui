@@ -289,11 +289,51 @@ export default function ButtonPage() {
         <section className="mb-16">
           <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentDocs.rtlConsiderations}</h2>
           <Card>
-            <CardContent className="p-6 space-y-4">
-              <p className="text-muted-foreground">
-                {t.componentDocs.rtlSupport}
-              </p>
-              <CodeBlock code={rtlCode} language="tsx" />
+            <CardContent className="p-6 space-y-6">
+              <div>
+                <h3 className="font-semibold mb-2">{t.buttonComponent.rtl.iconMirroring}</h3>
+                <p className="text-muted-foreground mb-4">
+                  {t.buttonComponent.rtl.iconMirroringDesc}
+                </p>
+                <div className="overflow-x-auto">
+                  <table className="w-full text-sm">
+                    <thead>
+                      <tr className="border-b">
+                        <th className="text-start py-2 pe-4 font-semibold">{t.buttonComponent.rtl.tableScenario}</th>
+                        <th className="text-start py-2 font-semibold">{t.buttonComponent.rtl.tableSolution}</th>
+                      </tr>
+                    </thead>
+                    <tbody className="text-muted-foreground">
+                      <tr className="border-b">
+                        <td className="py-2 pe-4">{t.buttonComponent.rtl.scenarioDirectional}</td>
+                        <td className="py-2">
+                          <code className="bg-muted px-1 rounded">ButtonArrow</code> {t.buttonComponent.rtl.solutionDirectional}
+                        </td>
+                      </tr>
+                      <tr className="border-b">
+                        <td className="py-2 pe-4">{t.buttonComponent.rtl.scenarioNonDirectional}</td>
+                        <td className="py-2">
+                          <code className="bg-muted px-1 rounded">Button</code> {t.buttonComponent.rtl.solutionNonDirectional}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="py-2 pe-4">{t.buttonComponent.rtl.scenarioEdgeCases}</td>
+                        <td className="py-2">
+                          <code className="bg-muted px-1 rounded">rtl:rotate-180</code> {t.buttonComponent.rtl.solutionEdgeCases}
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <Separator />
+              <div>
+                <h3 className="font-semibold mb-2">{t.buttonComponent.rtl.example}</h3>
+                <p className="text-muted-foreground mb-4">
+                  {t.componentDocs.rtlSupport}
+                </p>
+                <CodeBlock code={rtlCode} language="tsx" />
+              </div>
               <div className="grid gap-4 md:grid-cols-2 mt-6">
                 <div className="space-y-2">
                   <h4 className="font-semibold text-sm">{t.componentDocs.ltr}</h4>

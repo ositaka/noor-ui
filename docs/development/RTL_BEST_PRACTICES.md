@@ -171,7 +171,18 @@ Apply RTL-specific transforms using Tailwind's `rtl:` variant:
 Directional icons (arrows, chevrons) point the wrong way in RTL mode.
 
 **The Solution:**
-Use `rtl:rotate-180` to flip horizontal directional icons:
+For buttons with directional icons, use the `ButtonArrow` component which handles RTL automatically:
+
+```tsx
+import { ButtonArrow } from 'noorui-rtl'
+
+// Uses semantic directions - RTL mirroring is automatic!
+<ButtonArrow direction="forward">Continue</ButtonArrow>
+<ButtonArrow direction="back">Go Back</ButtonArrow>
+<ButtonArrow direction="external">Open Link</ButtonArrow>
+```
+
+For standalone icons, use `rtl:rotate-180` to flip horizontal directional icons:
 
 ```tsx
 // Chevrons in breadcrumbs
@@ -181,6 +192,20 @@ Use `rtl:rotate-180` to flip horizontal directional icons:
 <ChevronLeft className="h-4 w-4 rtl:rotate-180" />
 <ChevronRight className="h-4 w-4 rtl:rotate-180" />
 ```
+
+**Icon Mirroring Quick Reference:**
+
+| Should Mirror (Directional) | Should NOT Mirror (Symmetric) |
+|-----------------------------|-------------------------------|
+| Arrows (←, →, ↗)            | Plus (+), Minus (-)           |
+| Chevrons (‹, ›)             | Check (✓), X (✗)              |
+| Progress indicators         | Heart, Star, Settings         |
+| Reply/Forward icons         | Search, Home, User            |
+
+**How to Apply Mirroring:**
+- **Directional buttons**: Use `ButtonArrow` component (handles RTL automatically)
+- **Non-directional icons**: No special handling needed
+- **Edge cases**: Apply `rtl:rotate-180` (rotation) or `rtl:scale-x-[-1]` (flip) classes directly
 
 **When to Apply:**
 - Breadcrumb separators (›, /, →)

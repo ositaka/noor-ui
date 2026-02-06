@@ -173,6 +173,8 @@ const ChatMessage = React.forwardRef<HTMLDivElement, ChatMessageProps>(
               'prose prose-sm dark:prose-invert max-w-none',
               role === 'user' && 'text-start'
             )}
+            aria-live={state === 'streaming' ? 'polite' : undefined}
+            aria-atomic={state === 'streaming' ? 'true' : undefined}
           >
             {/* For now, render as plain text. In production, use react-markdown */}
             <p className="whitespace-pre-wrap break-words m-0">{content}</p>
