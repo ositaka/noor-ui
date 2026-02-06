@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { within, expect, userEvent, fn } from 'storybook/test';
 import { ChatMessage } from '../../../components/ui/chat-message';
 
 /**
@@ -68,6 +69,28 @@ export const Default: Story = {
         inline: false
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders assistant message correctly', async () => {
+      await expect(canvas.getByText('Hello! How can I help you today?')).toBeInTheDocument();
+      await expect(canvas.getByText('2:30 PM')).toBeInTheDocument();
+    });
+
+    await step('Shows avatar with assistant icon', async () => {
+      // Avatar uses img role when AvatarImage is present, or fallback content
+      const message = canvasElement.querySelector('div[class*="group"]');
+      await expect(message).toBeInTheDocument();
+      // Check for Bot icon in fallback
+      const svg = canvasElement.querySelector('svg');
+      await expect(svg).toBeInTheDocument();
+    });
+
+    await step('Message content is visible', async () => {
+      const content = canvas.getByText('Hello! How can I help you today?');
+      await expect(content).toBeVisible();
+    });
   }
 };
 
@@ -93,6 +116,14 @@ export const AssistantMessage: Story = {
         story: 'Assistant message with timestamp.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders assistant message', async () => {
+      await expect(canvas.getByText('Hello! How can I help you today?')).toBeInTheDocument();
+      await expect(canvas.getByText('2:30 PM')).toBeInTheDocument();
+    });
   }
 };
 
@@ -118,6 +149,14 @@ export const UserMessage: Story = {
         story: 'User message with timestamp.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders user message', async () => {
+      await expect(canvas.getByText(/weather like today/)).toBeInTheDocument();
+      await expect(canvas.getByText('2:29 PM')).toBeInTheDocument();
+    });
   }
 };
 
@@ -143,12 +182,20 @@ export const SystemMessage: Story = {
         story: 'System message for notifications.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders system message', async () => {
+      await expect(canvas.getByText(/Chat session started/)).toBeInTheDocument();
+      await expect(canvas.getByText('2:25 PM')).toBeInTheDocument();
+    });
   }
 };
 
 // With Actions - from code lines 117-125
 export const WithActions: Story = {
-  render: () => (
+  render: (args) => (
     <div className="w-full max-w-2xl">
       <ChatMessage
         role="assistant"
@@ -156,11 +203,15 @@ export const WithActions: Story = {
         timestamp="2:31 PM"
         showCopy={true}
         showRegenerate={true}
-        onCopy={() => console.log('Copied!')}
-        onRegenerate={() => console.log('Regenerating...')}
+        onCopy={args.onCopy}
+        onRegenerate={args.onRegenerate}
       />
     </div>
   ),
+  args: {
+    onCopy: fn(),
+    onRegenerate: fn()
+  },
   globals: {
     direction: 'ltr',
     locale: 'en'
@@ -197,6 +248,18 @@ export const CompactVariant: Story = {
         story: 'Compact variant for dense layouts.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders compact variant', async () => {
+      await expect(canvas.getByText('Quick response')).toBeInTheDocument();
+    });
+
+    await step('Compact message is visible', async () => {
+      const content = canvas.getByText('Quick response');
+      await expect(content).toBeVisible();
+    });
   }
 };
 
@@ -266,6 +329,19 @@ export const RTLAssistant: Story = {
         story: 'Assistant message in RTL with Arabic text.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders in RTL context', async () => {
+      await expect(canvas.getByText(/مرحباً/)).toBeInTheDocument();
+      await expect(canvas.getByText(/٢:٣٠ م/)).toBeInTheDocument();
+    });
+
+    await step('Arabic content is visible', async () => {
+      const content = canvas.getByText(/مرحباً/);
+      await expect(content).toBeVisible();
+    });
   }
 };
 
@@ -292,6 +368,14 @@ export const RTLUser: Story = {
         story: 'User message in RTL with Arabic text.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders user message in RTL', async () => {
+      await expect(canvas.getByText(/ما هو الطقس/)).toBeInTheDocument();
+      await expect(canvas.getByText(/٢:٢٩ م/)).toBeInTheDocument();
+    });
   }
 };
 

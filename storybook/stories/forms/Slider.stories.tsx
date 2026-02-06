@@ -284,6 +284,7 @@ export const VolumeControl: Story = {
             variant="ghost"
             size="icon"
             onClick={() => setVolume(isMuted ? [80] : [0])}
+            aria-label={isMuted ? "Unmute" : "Mute"}
           >
             {isMuted ? (
               <VolumeX className="h-4 w-4" />
@@ -297,6 +298,7 @@ export const VolumeControl: Story = {
             max={100}
             step={1}
             className="flex-1"
+            aria-label="Volume"
           />
           <span className="text-sm text-muted-foreground w-12 text-end">
             {volume[0]}%
@@ -566,6 +568,7 @@ export const RTLVolumeControl: Story = {
             variant="ghost"
             size="icon"
             onClick={() => setVolume(isMuted ? [80] : [0])}
+            aria-label={isMuted ? "إلغاء الكتم" : "كتم الصوت"}
           >
             {isMuted ? (
               <VolumeX className="h-4 w-4" />
@@ -579,6 +582,7 @@ export const RTLVolumeControl: Story = {
             max={100}
             step={1}
             className="flex-1"
+            aria-label="مستوى الصوت"
           />
           <span className="text-sm text-muted-foreground w-12 text-start">
             {volume[0]}%

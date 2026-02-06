@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { within, expect, userEvent } from 'storybook/test';
 import { ParameterSlider, temperaturePresets } from '../../../components/ui/parameter-slider';
 import { Card, CardContent } from '../../../components/ui/card';
 import { useState } from 'react';
@@ -69,6 +70,74 @@ export const Default: Story = {
         inline: false
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders all elements correctly', async () => {
+      // Label
+      await expect(canvas.getByText('Temperature')).toBeInTheDocument();
+
+      // Info tooltip button
+      const infoButton = canvas.getByRole('button', { name: /information/i });
+      await expect(infoButton).toBeInTheDocument();
+
+      // Value badge showing 0.7
+      await expect(canvas.getByText('0.7')).toBeInTheDocument();
+
+      // Slider
+      const slider = canvas.getByRole('slider');
+      await expect(slider).toBeInTheDocument();
+      await expect(slider).toHaveAttribute('aria-valuenow', '0.7');
+      await expect(slider).toHaveAttribute('aria-valuemin', '0');
+      await expect(slider).toHaveAttribute('aria-valuemax', '2');
+
+      // Range labels
+      await expect(canvas.getByText('0.0')).toBeInTheDocument();
+      await expect(canvas.getByText('2.0')).toBeInTheDocument();
+    });
+
+    await step('Info tooltip displays description', async () => {
+      const infoButton = canvas.getByRole('button', { name: /information/i });
+
+      // Hover to show tooltip
+      await userEvent.hover(infoButton);
+
+      // Tooltip content appears in document.body
+      const body = within(document.body);
+      const tooltip = await body.findByRole('tooltip');
+      await expect(tooltip).toHaveTextContent('Controls randomness in responses');
+
+      // Unhover to hide tooltip
+      await userEvent.unhover(infoButton);
+    });
+
+    await step('Slider responds to keyboard interaction', async () => {
+      const slider = canvas.getByRole('slider');
+
+      slider.focus();
+      await expect(slider).toHaveFocus();
+
+      // Press ArrowRight to increase by step (0.1)
+      await userEvent.keyboard('{ArrowRight}');
+      await expect(slider).toHaveAttribute('aria-valuenow', '0.8');
+      await expect(canvas.getByText('0.8')).toBeInTheDocument();
+
+      // Press ArrowLeft to decrease by step (0.1)
+      await userEvent.keyboard('{ArrowLeft}');
+      await expect(slider).toHaveAttribute('aria-valuenow', '0.7');
+      await expect(canvas.getByText('0.7')).toBeInTheDocument();
+
+      // Press Home to go to minimum
+      await userEvent.keyboard('{Home}');
+      await expect(slider).toHaveAttribute('aria-valuenow', '0');
+      // Value 0.0 appears in both badge and min label, check aria-valuenow instead
+
+      // Press End to go to maximum
+      await userEvent.keyboard('{End}');
+      await expect(slider).toHaveAttribute('aria-valuenow', '2');
+      // Value 2.0 appears in both badge and max label, check aria-valuenow instead
+    });
   }
 };
 
@@ -246,6 +315,35 @@ export const WithoutPresets: Story = {
         story: 'Slider without preset buttons.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders without preset section', async () => {
+      await expect(canvas.getByText('Frequency Penalty')).toBeInTheDocument();
+
+      // Slider should be present
+      const slider = canvas.getByRole('slider');
+      await expect(slider).toBeInTheDocument();
+      await expect(slider).toHaveAttribute('aria-valuenow', '0');
+
+      // Verify no "Presets:" label or preset buttons
+      expect(canvas.queryByText('Presets:')).not.toBeInTheDocument();
+
+      // Check all buttons - should only be the info button
+      const buttons = canvas.getAllByRole('button');
+      await expect(buttons).toHaveLength(1); // Only info button
+      await expect(buttons[0]).toHaveAccessibleName(/information/i);
+    });
+
+    await step('Displays negative values correctly', async () => {
+      // Range includes negative values
+      await expect(canvas.getByText('-2.0')).toBeInTheDocument();
+      await expect(canvas.getByText('2.0')).toBeInTheDocument();
+
+      // Value display shows 0.0
+      await expect(canvas.getByText('0.0')).toBeInTheDocument();
+    });
   }
 };
 
@@ -322,6 +420,39 @@ export const WithoutValueDisplay: Story = {
         story: 'Slider with value badge hidden.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders without value badge', async () => {
+      await expect(canvas.getByText('Temperature')).toBeInTheDocument();
+
+      // Slider should be present
+      const slider = canvas.getByRole('slider');
+      await expect(slider).toBeInTheDocument();
+      await expect(slider).toHaveAttribute('aria-valuenow', '0.7');
+
+      // Value badge (0.7) should NOT be visible
+      expect(canvas.queryByText('0.7')).not.toBeInTheDocument();
+
+      // Range labels should still be present
+      await expect(canvas.getByText('0.0')).toBeInTheDocument();
+      await expect(canvas.getByText('2.0')).toBeInTheDocument();
+    });
+
+    await step('Slider interaction still works', async () => {
+      const slider = canvas.getByRole('slider');
+
+      slider.focus();
+      await expect(slider).toHaveFocus();
+
+      // Press ArrowRight to increase value
+      await userEvent.keyboard('{ArrowRight}');
+      await expect(slider).toHaveAttribute('aria-valuenow', '0.8');
+
+      // Value badge should still not appear
+      expect(canvas.queryByText('0.8')).not.toBeInTheDocument();
+    });
   }
 };
 

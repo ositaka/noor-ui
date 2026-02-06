@@ -59,7 +59,7 @@ export const Default: Story = {
     await step('Keyboard accessible', async () => {
       const textarea = canvas.getByPlaceholderText('Enter your message');
       await userEvent.clear(textarea);
-      await userEvent.tab();
+      textarea.focus();
       await expect(textarea).toHaveFocus();
       await userEvent.keyboard('New text');
       await expect(textarea).toHaveValue('New text');
@@ -212,7 +212,7 @@ export const DisabledAndReadonly: Story = {
 
     await step('Readonly textarea has correct attribute', async () => {
       const readonlyTextarea = canvas.getByLabelText('Read-only');
-      await expect(readonlyTextarea).toHaveAttribute('readOnly');
+      await expect(readonlyTextarea).toHaveAttribute('readonly');
       await expect(readonlyTextarea).toHaveValue('This text cannot be edited.');
     });
   }

@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { expect, fn, userEvent, within } from 'storybook/test';
 import { PrayerTimes, type Prayer } from '../../../components/ui/prayer-times';
 
 /**
@@ -130,6 +131,24 @@ export const CompactVariant: Story = {
         story: 'Compact variant with minimal spacing for sidebars.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders compact variant', async () => {
+      await expect(canvas.getByText('Prayer Times')).toBeInTheDocument();
+      await expect(canvas.getByText('Mecca')).toBeInTheDocument();
+    });
+
+    await step('Shows all prayer times in compact layout', async () => {
+      await expect(canvas.getByText('Fajr')).toBeInTheDocument();
+      await expect(canvas.getByText('Maghrib')).toBeInTheDocument();
+      await expect(canvas.getByText('04:45')).toBeInTheDocument();
+    });
+
+    await step('Highlights Maghrib as next prayer', async () => {
+      await expect(canvas.getByText('Next')).toBeInTheDocument();
+    });
   }
 };
 
@@ -186,23 +205,39 @@ export const WithoutCountdown: Story = {
         story: 'Prayer times without countdown or next prayer highlight.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders without countdown section', async () => {
+      await expect(canvas.getByText('Prayer Times')).toBeInTheDocument();
+      await expect(canvas.getByText('Doha')).toBeInTheDocument();
+      await expect(canvas.queryByText('Next Prayer')).not.toBeInTheDocument();
+    });
+
+    await step('Shows all prayer times without highlight', async () => {
+      await expect(canvas.getByText('Fajr')).toBeInTheDocument();
+      await expect(canvas.getByText('Isha')).toBeInTheDocument();
+      await expect(canvas.queryByText('Next')).not.toBeInTheDocument();
+    });
   }
 };
 
 // Notification Variant - from component page lines 277-286
 export const NotificationVariant: Story = {
-  render: () => (
+  args: {
+    prayers: samplePrayers,
+    nextPrayer: 'Maghrib',
+    variant: 'notification',
+    location: 'Riyadh',
+    locationAr: 'الرياض',
+    showPlayAdhan: true,
+    onPlayAdhan: fn(),
+    onDismiss: fn()
+  },
+  render: (args) => (
     <div className="max-w-md w-full">
-      <PrayerTimes
-        prayers={samplePrayers}
-        nextPrayer="Maghrib"
-        variant="notification"
-        location="Riyadh"
-        locationAr="الرياض"
-        showPlayAdhan={true}
-        onPlayAdhan={() => alert('Playing Adhan...')}
-        onDismiss={() => alert('Dismissed')}
-      />
+      <PrayerTimes {...args} />
     </div>
   ),
   globals: {
@@ -216,6 +251,39 @@ export const NotificationVariant: Story = {
         story: 'Notification variant for prayer time alerts with adhan controls.'
       }
     }
+  },
+  play: async ({ canvasElement, step, args }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders notification variant with prayer time alert', async () => {
+      await expect(canvas.getByText('Prayer Time')).toBeInTheDocument();
+      await expect(canvas.getByText('Maghrib')).toBeInTheDocument();
+      await expect(canvas.getByText('18:05')).toBeInTheDocument();
+      await expect(canvas.getByText('Riyadh')).toBeInTheDocument();
+    });
+
+    await step('Shows action buttons', async () => {
+      await expect(canvas.getByRole('button', { name: /play adhan/i })).toBeInTheDocument();
+      await expect(canvas.getByRole('button', { name: /dismiss/i })).toBeInTheDocument();
+    });
+
+    await step('Handles play adhan click', async () => {
+      const playButton = canvas.getByRole('button', { name: /play adhan/i });
+      await userEvent.click(playButton);
+      await expect(args.onPlayAdhan).toHaveBeenCalledTimes(1);
+    });
+
+    await step('Handles dismiss click', async () => {
+      const dismissButton = canvas.getByRole('button', { name: /dismiss/i });
+      await userEvent.click(dismissButton);
+      await expect(args.onDismiss).toHaveBeenCalledTimes(1);
+    });
+
+    await step('Has close icon button', async () => {
+      const buttons = canvas.getAllByRole('button');
+      // Close button is one of the buttons (icon only)
+      await expect(buttons.length).toBeGreaterThanOrEqual(3);
+    });
   }
 };
 
@@ -298,6 +366,28 @@ export const RTLDefault: Story = {
         story: 'Prayer times in RTL with Arabic text and proper alignment.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders in RTL context with Arabic text', async () => {
+      await expect(canvas.getByText('مواقيت الصلاة')).toBeInTheDocument();
+      await expect(canvas.getByText('الرياض')).toBeInTheDocument();
+      await expect(canvas.getByText('٥ جمادى الأولى ١٤٤٧')).toBeInTheDocument();
+    });
+
+    await step('Shows Arabic prayer names', async () => {
+      await expect(canvas.getByText('الفجر')).toBeInTheDocument();
+      await expect(canvas.getByText('الظهر')).toBeInTheDocument();
+      await expect(canvas.getByText('العصر')).toBeInTheDocument();
+      await expect(canvas.getByText('المغرب')).toBeInTheDocument();
+      await expect(canvas.getByText('العشاء')).toBeInTheDocument();
+    });
+
+    await step('Shows next prayer countdown in RTL', async () => {
+      await expect(canvas.getByText('الصلاة القادمة')).toBeInTheDocument();
+      await expect(canvas.getByText('2:30:15')).toBeInTheDocument();
+    });
   }
 };
 
@@ -360,18 +450,19 @@ export const RTLDetailed: Story = {
 
 // RTL Notification
 export const RTLNotification: Story = {
-  render: () => (
+  args: {
+    prayers: samplePrayers,
+    nextPrayer: 'المغرب',
+    variant: 'notification',
+    location: 'Riyadh',
+    locationAr: 'الرياض',
+    showPlayAdhan: true,
+    onPlayAdhan: fn(),
+    onDismiss: fn()
+  },
+  render: (args) => (
     <div className="max-w-md w-80">
-      <PrayerTimes
-        prayers={samplePrayers}
-        nextPrayer="المغرب"
-        variant="notification"
-        location="Riyadh"
-        locationAr="الرياض"
-        showPlayAdhan={true}
-        onPlayAdhan={() => alert('تشغيل الأذان...')}
-        onDismiss={() => alert('تم الإغلاق')}
-      />
+      <PrayerTimes {...args} />
     </div>
   ),
   globals: {
@@ -385,5 +476,25 @@ export const RTLNotification: Story = {
         story: 'Notification variant in RTL for adhan alerts.'
       }
     }
+  },
+  play: async ({ canvasElement, step, args }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders notification in RTL with Arabic text', async () => {
+      await expect(canvas.getByText('حان وقت الصلاة')).toBeInTheDocument();
+      await expect(canvas.getByText('المغرب')).toBeInTheDocument();
+      await expect(canvas.getByText('الرياض')).toBeInTheDocument();
+    });
+
+    await step('Shows Arabic action buttons', async () => {
+      await expect(canvas.getByRole('button', { name: /تشغيل الأذان/i })).toBeInTheDocument();
+      await expect(canvas.getByRole('button', { name: /إغلاق/i })).toBeInTheDocument();
+    });
+
+    await step('Handles interactions in RTL', async () => {
+      const playButton = canvas.getByRole('button', { name: /تشغيل الأذان/i });
+      await userEvent.click(playButton);
+      await expect(args.onPlayAdhan).toHaveBeenCalledTimes(1);
+    });
   }
 };

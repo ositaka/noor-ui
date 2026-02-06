@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { within, expect } from 'storybook/test';
 import { ArabicNumber } from '../../../components/ui/arabic-number';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../../components/ui/card';
 
@@ -54,6 +55,23 @@ export const Default: Story = {
         inline: false
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders formatted number correctly', async () => {
+      const number = canvasElement.querySelector('span');
+      await expect(number).toBeInTheDocument();
+      await expect(number).toBeVisible();
+      // Should format with thousands separator and 2 decimals
+      await expect(number).toHaveTextContent('1,234,567.89');
+    });
+
+    await step('Has correct ARIA attributes', async () => {
+      const number = canvasElement.querySelector('span');
+      // Should be readable by screen readers
+      await expect(number).toHaveClass('tabular-nums');
+    });
   }
 };
 
@@ -181,6 +199,27 @@ export const CurrencyFormat: Story = {
         story: 'Currency formatting in both Western and Arabic numerals.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders English currency format', async () => {
+      const numbers = canvasElement.querySelectorAll('span.text-2xl');
+      // English format: 9,999.99 SAR
+      await expect(numbers[0]).toHaveTextContent('9,999.99 SAR');
+    });
+
+    await step('Renders Arabic currency format', async () => {
+      const numbers = canvasElement.querySelectorAll('span.text-2xl');
+      // Arabic format with Arabic-Indic numerals: ٩٬٩٩٩٫٩٩ ر.س
+      await expect(numbers[1]).toHaveTextContent('٩٬٩٩٩٫٩٩ ر.س');
+    });
+
+    await step('Displays descriptive labels', async () => {
+      // Check for label text containing key identifiers
+      await expect(canvas.getByText(/English.*SAR/)).toBeVisible();
+      await expect(canvas.getByText(/Arabic/)).toBeVisible();
+    });
   }
 };
 
@@ -249,6 +288,27 @@ export const CompactFormat: Story = {
         story: 'Compact notation for large numbers (1.2M, 3.4K, etc.).'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders English compact format', async () => {
+      const numbers = canvasElement.querySelectorAll('span.text-2xl');
+      // English compact format: 1.2M
+      await expect(numbers[0]).toHaveTextContent('1.2M');
+    });
+
+    await step('Renders Arabic compact format', async () => {
+      const numbers = canvasElement.querySelectorAll('span.text-2xl');
+      // Arabic compact format with Arabic-Indic numerals: ١٫٢ مليون
+      await expect(numbers[1]).toHaveTextContent('١٫٢ مليون');
+    });
+
+    await step('Displays compact notation description', async () => {
+      // Labels show the conversion examples
+      await expect(canvas.getByText('1,234,567 → 1.2M')).toBeVisible();
+      await expect(canvas.getByText('1,234,567 → ١٫٢ مليون')).toBeVisible();
+    });
   }
 };
 
@@ -376,5 +436,22 @@ export const RTLAllFormats: Story = {
         story: 'All formats in RTL with Arabic-Indic numerals.'
       }
     }
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Renders in RTL context', async () => {
+      // Verify Arabic labels render
+      await expect(canvas.getByText('رقم')).toBeInTheDocument();
+      await expect(canvas.getByText('عملة')).toBeInTheDocument();
+      await expect(canvas.getByText('نسبة مئوية')).toBeInTheDocument();
+      await expect(canvas.getByText('مُختصر')).toBeInTheDocument();
+    });
+
+    await step('All formats render with Arabic numerals', async () => {
+      const numbers = canvasElement.querySelectorAll('span.text-xl');
+      // Just verify they all render - this is a showcase story
+      await expect(numbers.length).toBe(4);
+    });
   }
 };

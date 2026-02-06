@@ -191,7 +191,7 @@ export const ProductCard: Story = {
       </CardContent>
       <CardFooter className="gap-2">
         <Button className="flex-1">Add to Cart</Button>
-        <Button variant="outline" size="icon">
+        <Button variant="outline" size="icon" aria-label="Add to favorites">
           <Heart className="h-4 w-4" />
         </Button>
       </CardFooter>
@@ -337,7 +337,7 @@ export const RTLProductCard: Story = {
       </CardContent>
       <CardFooter className="gap-2">
         <Button className="flex-1">أضف للسلة</Button>
-        <Button variant="outline" size="icon">
+        <Button variant="outline" size="icon" aria-label="أضف إلى المفضلة">
           <Heart className="h-4 w-4" />
         </Button>
       </CardFooter>

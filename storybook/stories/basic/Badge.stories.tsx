@@ -79,6 +79,7 @@ export const WithIcon: Story = {
 export const StatusIndicator: Story = {
   args: {
     variant: 'default',
+    role: 'status',
     children: (
       <>
         <CheckCircle2 className="h-3 w-3 me-1" />
@@ -89,7 +90,7 @@ export const StatusIndicator: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Status indicator with icon. Use Controls to try different statuses and variants.'
+        story: 'Status indicator with icon and role="status" for screen reader announcements. Use Controls to try different statuses and variants.'
       }
     }
   },
@@ -100,6 +101,11 @@ export const StatusIndicator: Story = {
       const badge = canvas.getByText('Active');
       await expect(badge).toBeInTheDocument();
       await expect(badge).toBeVisible();
+    });
+
+    await step('Has role="status" for accessibility', async () => {
+      const badge = canvas.getByText('Active');
+      await expect(badge).toHaveAttribute('role', 'status');
     });
   }
 };
@@ -219,26 +225,31 @@ export const AllWithIcons: Story = {
 export const AllStatusIndicators: Story = {
   render: () => (
     <div className="flex flex-wrap gap-2">
-      <Badge variant="default">
+      <Badge variant="default" role="status">
         <CheckCircle2 className="h-3 w-3 me-1" />
         Active
       </Badge>
-      <Badge variant="secondary">
+      <Badge variant="secondary" role="status">
         <Clock className="h-3 w-3 me-1" />
         Pending
       </Badge>
-      <Badge variant="destructive">
+      <Badge variant="destructive" role="status">
         <XCircle className="h-3 w-3 me-1" />
         Failed
       </Badge>
-      <Badge variant="outline">
+      <Badge variant="outline" role="status">
         <AlertCircle className="h-3 w-3 me-1" />
         Info
       </Badge>
     </div>
   ),
   parameters: {
-    controls: { disable: true }
+    controls: { disable: true },
+    docs: {
+      description: {
+        story: 'Status indicators with role="status" for accessibility. Screen readers will announce status changes.'
+      }
+    }
   }
 };
 

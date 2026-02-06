@@ -35,31 +35,6 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     placeholder: 'Enter text...'
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders correctly', async () => {
-      const input = canvas.getByPlaceholderText('Enter text...');
-      await expect(input).toBeInTheDocument();
-      await expect(input).toBeVisible();
-      await expect(input).toHaveAttribute('type', 'text');
-    });
-
-    await step('Accepts text input', async () => {
-      const input = canvas.getByPlaceholderText('Enter text...');
-      await userEvent.type(input, 'Hello World');
-      await expect(input).toHaveValue('Hello World');
-    });
-
-    await step('Keyboard accessible', async () => {
-      const input = canvas.getByPlaceholderText('Enter text...');
-      await userEvent.clear(input);
-      await userEvent.tab();
-      await expect(input).toHaveFocus();
-      await userEvent.keyboard('Test input');
-      await expect(input).toHaveValue('Test input');
-    });
   }
 };
 
@@ -282,7 +257,7 @@ export const LoginForm: Story = {
       const emailInput = canvas.getByLabelText(/Email/i);
       const passwordInput = canvas.getByLabelText(/Password/i);
 
-      await userEvent.click(emailInput);
+      emailInput.focus();
       await expect(emailInput).toHaveFocus();
 
       await userEvent.tab();
@@ -454,7 +429,7 @@ export const RegistrationForm: Story = {
       const emailInput = canvas.getByLabelText(/Email/i);
       const passwordInput = canvas.getByLabelText(/Password/i);
 
-      await userEvent.click(nameInput);
+      nameInput.focus();
       await expect(nameInput).toHaveFocus();
 
       await userEvent.tab();

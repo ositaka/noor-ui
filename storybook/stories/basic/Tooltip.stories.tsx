@@ -151,7 +151,7 @@ export const WithIconButtons: Story = {
     <div className="flex gap-2">
       <Tooltip>
         <TooltipTrigger asChild>
-          <Button variant="ghost" size="icon">
+          <Button variant="ghost" size="icon" aria-label="More information">
             <Info className="h-4 w-4" />
           </Button>
         </TooltipTrigger>
@@ -162,7 +162,7 @@ export const WithIconButtons: Story = {
 
       <Tooltip>
         <TooltipTrigger asChild>
-          <Button variant="ghost" size="icon">
+          <Button variant="ghost" size="icon" aria-label="Add item">
             <Plus className="h-4 w-4" />
           </Button>
         </TooltipTrigger>
@@ -173,7 +173,7 @@ export const WithIconButtons: Story = {
 
       <Tooltip>
         <TooltipTrigger asChild>
-          <Button variant="ghost" size="icon">
+          <Button variant="ghost" size="icon" aria-label="Settings">
             <Settings className="h-4 w-4" />
           </Button>
         </TooltipTrigger>
@@ -184,7 +184,7 @@ export const WithIconButtons: Story = {
 
       <Tooltip>
         <TooltipTrigger asChild>
-          <Button variant="ghost" size="icon">
+          <Button variant="ghost" size="icon" aria-label="Delete">
             <Trash2 className="h-4 w-4" />
           </Button>
         </TooltipTrigger>
@@ -384,7 +384,7 @@ export const RTLWithIconButtons: Story = {
     <div className="flex gap-2">
       <Tooltip>
         <TooltipTrigger asChild>
-          <Button variant="ghost" size="icon">
+          <Button variant="ghost" size="icon" aria-label="مزيد من المعلومات">
             <Info className="h-4 w-4" />
           </Button>
         </TooltipTrigger>
@@ -395,7 +395,7 @@ export const RTLWithIconButtons: Story = {
 
       <Tooltip>
         <TooltipTrigger asChild>
-          <Button variant="ghost" size="icon">
+          <Button variant="ghost" size="icon" aria-label="إضافة عنصر">
             <Plus className="h-4 w-4" />
           </Button>
         </TooltipTrigger>
@@ -406,7 +406,7 @@ export const RTLWithIconButtons: Story = {
 
       <Tooltip>
         <TooltipTrigger asChild>
-          <Button variant="ghost" size="icon">
+          <Button variant="ghost" size="icon" aria-label="إعدادات">
             <Settings className="h-4 w-4" />
           </Button>
         </TooltipTrigger>
@@ -417,7 +417,7 @@ export const RTLWithIconButtons: Story = {
 
       <Tooltip>
         <TooltipTrigger asChild>
-          <Button variant="ghost" size="icon">
+          <Button variant="ghost" size="icon" aria-label="حذف">
             <Trash2 className="h-4 w-4" />
           </Button>
         </TooltipTrigger>
