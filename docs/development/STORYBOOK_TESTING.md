@@ -105,15 +105,47 @@ npm run storybook
 # Click "Interactions" tab at bottom
 ```
 
+<<<<<<< Updated upstream
 ### Via CLI (Headless)
 ```bash
 # Requires Storybook running in another terminal
+=======
+### Via CLI (Vitest + Playwright)
+
+Tests are configured to run via Vitest with browser-based Playwright execution:
+
+```bash
+# Run all Storybook play-function tests
+npx vitest run --project=storybook
+
+# Run specific story file
+npx vitest run --project=storybook storybook/stories/ai/ChatMessage.stories.tsx
+
+# Run with verbose output to see failures
+npx vitest run --project=storybook --reporter=verbose
+
+# Run in watch mode (interactive)
+npx vitest --project=storybook
+```
+
+### Configuration
+
+The Vitest configuration in `vitest.config.ts` includes a `storybook` project that uses:
+- `@storybook/addon-vitest/vitest-plugin` for story discovery
+- Playwright browser provider (`chromium`, headless)
+- Custom setup file at `storybook/.storybook/vitest.setup.ts`
+
+### Legacy Test Runner
+```bash
+# Alternative: Requires Storybook running in another terminal
+>>>>>>> Stashed changes
 npm run storybook &
 npm run test-storybook
 ```
 
 ## Component Test Coverage
 
+<<<<<<< Updated upstream
 | Component | Unit Tests | RTL Tests | Keyboard Tests | Status |
 |-----------|------------|-----------|----------------|--------|
 | Button | ✅ | ✅ | ✅ | Complete |
@@ -139,6 +171,68 @@ npm run test-storybook
 | Textarea | ❌ | ❌ | ❌ | Pending |
 | Toast | ❌ | ❌ | ❌ | Pending |
 | Tooltip | ❌ | ❌ | ❌ | Pending |
+=======
+### Basic Components
+
+| Component | Unit Tests | RTL Tests | Status |
+|-----------|------------|-----------|--------|
+| Button | ✅ | ✅ | Complete |
+| ButtonArrow | ✅ | ✅ | Complete |
+| Alert | ✅ | ✅ | Complete |
+| Avatar | ✅ | ✅ | Complete |
+| Badge | ✅ | ✅ | Complete |
+| Blockquote | ✅ | ✅ | Complete |
+| Callout | ✅ | ✅ | Complete |
+| Card | ✅ | ✅ | Complete |
+| Checkbox | ✅ | ✅ | Complete |
+| Dialog | ✅ | ✅ | Complete |
+| Dropdown Menu | ✅ | ✅ | Complete |
+| Input | ✅ | ✅ | Complete |
+| Label | ✅ | ✅ | Complete |
+| Progress | ✅ | ✅ | Complete |
+| Radio Group | ✅ | ✅ | Complete |
+| Select | ✅ | ✅ | Complete |
+| Slider | ✅ | ✅ | Complete |
+| Switch | ✅ | ✅ | Complete |
+| Tabs | ✅ | ✅ | Complete |
+| Textarea | ✅ | ✅ | Complete |
+| Toast | ✅ | ✅ | Complete |
+| Tooltip | ✅ | ✅ | Complete |
+| Popover | ✅ | ✅ | Complete |
+| Sheet | ✅ | ✅ | Complete |
+
+### AI Components
+
+| Component | Unit Tests | RTL Tests | Status |
+|-----------|------------|-----------|--------|
+| ChatMessage | ✅ | ✅ | Complete |
+| ConversationHistory | ✅ | ✅ | Complete |
+| MessageActions | ✅ | ✅ | Complete |
+| ModelSelector | ✅ | ✅ | Complete |
+| ParameterSlider | ✅ | ✅ | Complete |
+| PromptInput | ✅ | ✅ | Complete |
+| StreamingText | ✅ | ✅ | Complete |
+| ThinkingIndicator | ✅ | ✅ | Complete |
+| TokenCounter | ✅ | ✅ | Complete |
+| WorkflowCanvas | ⏭️ | ⏭️ | Skipped (ReactFlow) |
+| WorkflowNode | ⏭️ | ⏭️ | Skipped (ReactFlow) |
+| WorkflowNodes | ⏭️ | ⏭️ | Skipped (ReactFlow) |
+
+### GCC Components
+
+| Component | Unit Tests | RTL Tests | Status |
+|-----------|------------|-----------|--------|
+| ArabicNumber | ✅ | ✅ | Complete |
+| HijriDate | ✅ | ✅ | Complete |
+| PrayerTimes | ✅ | ✅ | Complete |
+| ZakatCalculator | ✅ | ✅ | Complete |
+
+### Skipped Components
+
+Some components are tagged with `!test` and skipped from Vitest:
+
+- **WorkflowCanvas/Node/Nodes** - Require ReactFlow's zustand provider context which isn't available outside ReactFlow wrapper
+>>>>>>> Stashed changes
 
 ## Using the unit-test Agent
 
@@ -166,4 +260,8 @@ Or check via Storybook's Accessibility tab (uses axe-core).
 
 ---
 
+<<<<<<< Updated upstream
 *Last updated: January 2026*
+=======
+*Last updated: February 2026*
+>>>>>>> Stashed changes

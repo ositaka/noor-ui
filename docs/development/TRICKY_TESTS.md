@@ -34,6 +34,15 @@ Components in `storybook/stories/basic/` where automated play-function tests wer
 - **Specific issues**: `getByText(/new comment on your post/i)` fails because the text spans multiple elements; `closest('[role="button"]')` returns null; `queryByText(/\d+/)` for badge matching is too broad; hover-to-reveal remove button timing issues.
 - **To fix**: Use `*ByText` on smaller, unique text fragments or use `querySelector` targeting component-specific data attributes.
 
+<<<<<<< Updated upstream
+=======
+### WorkflowCanvas, WorkflowNode, WorkflowNodes
+- **Root cause**: These components require ReactFlow's internal zustand provider context, which isn't available when components are rendered in isolation.
+- **Specific issues**: Components throw `Error: Zustand provider is missing` or similar context errors when rendered outside a ReactFlow wrapper; the ReactFlow store is not accessible in the test environment.
+- **Resolution**: Stories are tagged with `tags: ['!test']` to skip Vitest execution. Visual testing can still be done through Storybook UI where ReactFlow is properly initialized.
+- **To fix**: Would require mocking ReactFlow's zustand store, which is complex and fragile. Recommend keeping these as visual-only tests.
+
+>>>>>>> Stashed changes
 ## General Patterns
 
 These failures share common themes:
