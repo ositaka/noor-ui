@@ -75,39 +75,51 @@ const TypographyExample = ({ size, config, sampleText }: { size: string; config:
   )
 }
 
-// Helper function to get CSS variable value in HSL format
-function getCSSVarHSL(name: string): string {
-  if (typeof window === 'undefined') return '0 0% 0%'
+// Helper function to get CSS variable value (computed color)
+function getCSSVarValue(name: string): string {
+  if (typeof window === 'undefined') return 'hsl(0 0% 0%)'
   const style = getComputedStyle(document.documentElement)
-  return style.getPropertyValue(name).trim() || '0 0% 0%'
+  return style.getPropertyValue(name).trim() || 'hsl(0 0% 0%)'
 }
 
 // Generate CSS code for current theme
 function generateThemeCSS(themeName: string, isDark: boolean): string {
   const className = isDark ? `.theme-${themeName}.dark` : `.theme-${themeName}`
+  const radius = typeof window !== 'undefined' ? getComputedStyle(document.documentElement).getPropertyValue('--radius').trim() : '0.5rem'
 
   return `/* ${themeName.charAt(0).toUpperCase() + themeName.slice(1)} theme${isDark ? ' - Dark mode' : ''} */
 ${className} {
-  --background: ${getCSSVarHSL('--background')};
-  --foreground: ${getCSSVarHSL('--foreground')};
-  --card: ${getCSSVarHSL('--card')};
-  --card-foreground: ${getCSSVarHSL('--card-foreground')};
-  --popover: ${getCSSVarHSL('--popover')};
-  --popover-foreground: ${getCSSVarHSL('--popover-foreground')};
-  --primary: ${getCSSVarHSL('--primary')};
-  --primary-foreground: ${getCSSVarHSL('--primary-foreground')};
-  --secondary: ${getCSSVarHSL('--secondary')};
-  --secondary-foreground: ${getCSSVarHSL('--secondary-foreground')};
-  --muted: ${getCSSVarHSL('--muted')};
-  --muted-foreground: ${getCSSVarHSL('--muted-foreground')};
-  --accent: ${getCSSVarHSL('--accent')};
-  --accent-foreground: ${getCSSVarHSL('--accent-foreground')};
-  --destructive: ${getCSSVarHSL('--destructive')};
-  --destructive-foreground: ${getCSSVarHSL('--destructive-foreground')};
-  --border: ${getCSSVarHSL('--border')};
-  --input: ${getCSSVarHSL('--input')};
-  --ring: ${getCSSVarHSL('--ring')};
-  --radius: ${typeof window !== 'undefined' ? getComputedStyle(document.documentElement).getPropertyValue('--radius').trim() : '0.5rem'};
+  --color-background: ${getCSSVarValue('--color-background')};
+  --color-foreground: ${getCSSVarValue('--color-foreground')};
+  --color-card: ${getCSSVarValue('--color-card')};
+  --color-card-foreground: ${getCSSVarValue('--color-card-foreground')};
+  --color-popover: ${getCSSVarValue('--color-popover')};
+  --color-popover-foreground: ${getCSSVarValue('--color-popover-foreground')};
+  --color-primary: ${getCSSVarValue('--color-primary')};
+  --color-primary-foreground: ${getCSSVarValue('--color-primary-foreground')};
+  --color-secondary: ${getCSSVarValue('--color-secondary')};
+  --color-secondary-foreground: ${getCSSVarValue('--color-secondary-foreground')};
+  --color-muted: ${getCSSVarValue('--color-muted')};
+  --color-muted-foreground: ${getCSSVarValue('--color-muted-foreground')};
+  --color-accent: ${getCSSVarValue('--color-accent')};
+  --color-accent-foreground: ${getCSSVarValue('--color-accent-foreground')};
+  --color-destructive: ${getCSSVarValue('--color-destructive')};
+  --color-destructive-foreground: ${getCSSVarValue('--color-destructive-foreground')};
+  --color-border: ${getCSSVarValue('--color-border')};
+  --color-input: ${getCSSVarValue('--color-input')};
+  --color-ring: ${getCSSVarValue('--color-ring')};
+  --radius: ${radius};
+  --radius-lg: ${radius};
+  --radius-md: calc(${radius} - 2px);
+  --radius-sm: calc(${radius} - 4px);
+
+  /* Semantic status colors */
+  --color-success: ${getCSSVarValue('--color-success')};
+  --color-success-foreground: ${getCSSVarValue('--color-success-foreground')};
+  --color-warning: ${getCSSVarValue('--color-warning')};
+  --color-warning-foreground: ${getCSSVarValue('--color-warning-foreground')};
+  --color-info: ${getCSSVarValue('--color-info')};
+  --color-info-foreground: ${getCSSVarValue('--color-info-foreground')};
 }`
 }
 
@@ -173,7 +185,7 @@ export default function TokensPage() {
           <Alert className="mt-6">
             <Info className="h-4 w-4" />
             <AlertDescription>
-              These values reflect the currently selected theme and update in real-time when you switch themes or toggle dark mode.
+              {t.header.alertText}
             </AlertDescription>
           </Alert>
         </div>
@@ -186,8 +198,8 @@ export default function TokensPage() {
             {/* Brand Colors */}
             <Card>
               <CardHeader>
-                <CardTitle>Brand Colors</CardTitle>
-                <CardDescription>Primary and secondary brand colors</CardDescription>
+                <CardTitle>{t.colors.brand.title}</CardTitle>
+                <CardDescription>{t.colors.brand.description}</CardDescription>
               </CardHeader>
               <CardContent className="space-y-1">
                 <ColorSwatch name="primary" value={liveTokens.colors.primary} />
@@ -200,8 +212,8 @@ export default function TokensPage() {
             {/* UI Colors */}
             <Card>
               <CardHeader>
-                <CardTitle>UI Colors</CardTitle>
-                <CardDescription>Interface background and text colors</CardDescription>
+                <CardTitle>{t.colors.ui.title}</CardTitle>
+                <CardDescription>{t.colors.ui.description}</CardDescription>
               </CardHeader>
               <CardContent className="space-y-1">
                 <ColorSwatch name="background" value={liveTokens.colors.background} />
@@ -216,8 +228,8 @@ export default function TokensPage() {
             {/* Accent Colors */}
             <Card>
               <CardHeader>
-                <CardTitle>Accent Colors</CardTitle>
-                <CardDescription>Muted and accent colors for subtle UI elements</CardDescription>
+                <CardTitle>{t.colors.accent.title}</CardTitle>
+                <CardDescription>{t.colors.accent.description}</CardDescription>
               </CardHeader>
               <CardContent className="space-y-1">
                 <ColorSwatch name="muted" value={liveTokens.colors.muted} />
@@ -227,11 +239,27 @@ export default function TokensPage() {
               </CardContent>
             </Card>
 
-            {/* State Colors */}
+            {/* Semantic Status Colors */}
             <Card>
               <CardHeader>
-                <CardTitle>State & Border Colors</CardTitle>
-                <CardDescription>Destructive state, borders, and focus rings</CardDescription>
+                <CardTitle>{t.colors.semanticStatus.title}</CardTitle>
+                <CardDescription>{t.colors.semanticStatus.description}</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-1">
+                <ColorSwatch name="success" value={liveTokens.colors.success} />
+                <ColorSwatch name="success-foreground" value={liveTokens.colors.successForeground} />
+                <ColorSwatch name="warning" value={liveTokens.colors.warning} />
+                <ColorSwatch name="warning-foreground" value={liveTokens.colors.warningForeground} />
+                <ColorSwatch name="info" value={liveTokens.colors.info} />
+                <ColorSwatch name="info-foreground" value={liveTokens.colors.infoForeground} />
+              </CardContent>
+            </Card>
+
+            {/* State & Border Colors */}
+            <Card>
+              <CardHeader>
+                <CardTitle>{t.colors.stateBorder.title}</CardTitle>
+                <CardDescription>{t.colors.stateBorder.description}</CardDescription>
               </CardHeader>
               <CardContent className="space-y-1">
                 <ColorSwatch name="destructive" value={liveTokens.colors.destructive} />
@@ -247,9 +275,9 @@ export default function TokensPage() {
           <div className="mt-8">
             <Card>
               <CardHeader>
-                <CardTitle>CSS Setup</CardTitle>
+                <CardTitle>{t.colors.cssSetup.title}</CardTitle>
                 <CardDescription>
-                  Copy and paste this CSS into your <code className="text-xs">globals.css</code> file to use this theme
+                  {t.colors.cssSetup.description} <code className="text-xs">{t.colors.cssSetup.descriptionFile}</code> {t.colors.cssSetup.descriptionSuffix}
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -372,9 +400,9 @@ export default function TokensPage() {
           {/* Current Theme Radius */}
           <Card className="mb-6">
             <CardHeader>
-              <CardTitle>Current Theme Radius</CardTitle>
+              <CardTitle>{t.radius.currentTheme.title}</CardTitle>
               <CardDescription>
-                The border radius for the currently selected theme
+                {t.radius.currentTheme.description}
               </CardDescription>
             </CardHeader>
             <CardContent>

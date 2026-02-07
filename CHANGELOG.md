@@ -13,6 +13,64 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - TimePicker & TimeRangePicker popups appear on wrong side in RTL mode
   - Need to add automatic direction detection (similar to DropdownMenu pattern)
 
+## [0.6.2] - 2026-02-07
+
+### Added
+- **Custom Themes**: Theme system is now extensible — consumers can create custom themes by defining CSS classes that override design token variables
+  - New `BuiltInTheme` type exported for referencing the 4 built-in themes
+  - `Theme` type widened to accept any string while preserving autocomplete for built-in names
+  - `DesignSystemProvider` now accepts any theme name (no longer restricted to hardcoded list)
+  - Dynamic `theme-*` class removal replaces hardcoded class list for forward compatibility
+- **Documentation**: New "Custom Themes" section in README with step-by-step guide, CSS example, and variables reference
+- **Documentation**: New "Creating Custom Themes" section on website Themes page with i18n support (EN + AR)
+  - Step-by-step cards with CSS and provider code examples
+  - Collapsible CSS variables reference table (required vs optional)
+  - Link to Design Tokens page for live variable values
+
+### Changed
+- **Types**: `themeConfig` now typed as `Record<BuiltInTheme, ...>` instead of `Record<Theme, ...>` for type safety with custom themes
+- **Theme Switcher Components**: Updated to use `BuiltInTheme` type and dynamic class removal
+
+---
+
+## [0.6.1] - 2026-02-07
+
+### Fixed
+- **README**: Updated `@theme` block to include semantic status tokens (`success`, `warning`, `info`), font families, and correct `:root` color values
+- **README**: Fixed version claim from "Next.js 15, React 19" to "React 18+, Next.js 14+, Tailwind CSS 4.1+" to match actual peer dependencies
+- **MIGRATION_GUIDE**: Removed stale reference to copying `tailwind.config.ts` (deleted in v0.6.0)
+- **CHANGELOG**: Added missing v0.6.0 entry documenting the Tailwind v4 migration
+
+---
+
+## [0.6.0] - 2026-02-07
+
+### Breaking Changes
+- **Tailwind CSS v4.1+ required**: Migrated from Tailwind v3 to v4.1 CSS-first configuration
+  - Removed `tailwind.config.ts` — all design tokens now live in `@theme` blocks in CSS
+  - Consumers using Option B (custom Tailwind setup) must update to Tailwind v4.1+ and use `@tailwindcss/postcss`
+  - PostCSS config must use `@tailwindcss/postcss` instead of the old `tailwindcss` plugin
+  - Option A (pre-compiled CSS via `import 'noorui-rtl/dist/styles.css'`) continues to work without changes
+
+### Added
+- **Semantic status tokens**: `success`, `warning`, `info` (+ foreground variants) for consistent feedback colors across Alert, Callout, Toast, and Stats components
+- **`tailwindcss` peer dependency**: Declared `tailwindcss: ">=4.1.0"` (optional) so package managers can warn about incompatible versions
+- **Font family tokens**: `--font-sans`, `--font-arabic`, `--font-mono` registered in `@theme` for Tailwind utility generation
+- **Shadow and animation tokens**: Full shadow scale (`sm` through `2xl`) and component animations registered in `@theme`
+
+### Changed
+- **CSS architecture**: Replaced `@layer base` with `@theme` blocks for design token registration
+- **Dark mode**: Now uses `@custom-variant dark (&:where(.dark, .dark *))` instead of Tailwind v3 `darkMode: 'class'`
+- **PostCSS**: Switched from `tailwindcss` + `autoprefixer` to `@tailwindcss/postcss` only
+
+### Removed
+- **`tailwind.config.ts`**: Deleted — all configuration is now CSS-first via `@theme` and `@custom-variant`
+
+### Notes
+This is a breaking change for consumers using Option B (custom Tailwind setup). Consumers using Option A (pre-compiled CSS) are unaffected. See the updated README for the new CSS-first setup instructions.
+
+---
+
 ## [0.5.1] - 2026-01-12
 
 ### Improved

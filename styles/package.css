@@ -3,320 +3,459 @@
  * This file includes all styles needed to use noorui-rtl components
  */
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
 /* Import fonts */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap');
 
-@layer base {
-  :root {
-    --background: 220 13% 99%;
-    --foreground: 222.2 84% 4.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-    --primary: 239 84% 67%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 174 72% 56%;
-    --secondary-foreground: 174 100% 10%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 239 84% 67%;
-    --radius: 0.5rem;
+/* Dark mode: class-based toggle */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* Colors — semantic tokens via CSS vars */
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+
+  /* Semantic status colors */
+  --color-success: hsl(var(--success));
+  --color-success-foreground: hsl(var(--success-foreground));
+  --color-warning: hsl(var(--warning));
+  --color-warning-foreground: hsl(var(--warning-foreground));
+  --color-info: hsl(var(--info));
+  --color-info-foreground: hsl(var(--info-foreground));
+
+  /* Border radius */
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+
+  /* Font families */
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-arabic: 'IBM Plex Sans Arabic', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+  --shadow-inner: inset 0 2px 4px 0 rgb(0 0 0 / 0.05);
+  --shadow-none: 0 0 #0000;
+
+  /* Animations */
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+  --animate-slide-in-from-top: slide-in-from-top 0.3s ease-out;
+  --animate-slide-in-from-bottom: slide-in-from-bottom 0.3s ease-out;
+  --animate-slide-in-from-left: slide-in-from-left 0.3s ease-out;
+  --animate-slide-in-from-right: slide-in-from-right 0.3s ease-out;
+  --animate-shimmer: shimmer 2s infinite;
+
+  @keyframes accordion-down {
+    from { height: 0; }
+    to { height: var(--radix-accordion-content-height); }
   }
-
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 239 84% 67%;
-    --primary-foreground: 222.2 84% 4.9%;
-    --secondary: 174 72% 56%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 239 84% 67%;
+  @keyframes accordion-up {
+    from { height: var(--radix-accordion-content-height); }
+    to { height: 0; }
   }
-
-  /* Minimal theme */
-  .theme-minimal {
-    --background: 220 13% 99%;
-    --foreground: 0 0% 10%;
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 10%;
-    --primary: 239 84% 67%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 0 0% 85%;
-    --secondary-foreground: 0 0% 10%;
-    --muted: 0 0% 96%;
-    --muted-foreground: 0 0% 45%;
-    --accent: 0 0% 96%;
-    --accent-foreground: 0 0% 10%;
-    --border: 0 0% 90%;
-    --input: 0 0% 90%;
-    --radius: 0.25rem;
+  @keyframes slide-in-from-top {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(0); }
   }
-
-  .theme-minimal.dark {
-    --background: 0 0% 10%;
-    --foreground: 0 0% 95%;
-    --card: 0 0% 12%;
-    --card-foreground: 0 0% 95%;
-    --secondary: 0 0% 25%;
-    --secondary-foreground: 0 0% 95%;
-    --muted: 0 0% 20%;
-    --muted-foreground: 0 0% 60%;
-    --accent: 0 0% 20%;
-    --accent-foreground: 0 0% 95%;
-    --border: 0 0% 20%;
-    --input: 0 0% 20%;
+  @keyframes slide-in-from-bottom {
+    0% { transform: translateY(100%); }
+    100% { transform: translateY(0); }
   }
-
-  /* Futuristic theme */
-  .theme-futuristic {
-    --background: 240 10% 8%;
-    --foreground: 0 0% 95%;
-    --card: 240 10% 10%;
-    --card-foreground: 0 0% 95%;
-    --primary: 270 80% 60%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 190 80% 50%;
-    --secondary-foreground: 240 10% 8%;
-    --muted: 240 10% 15%;
-    --muted-foreground: 0 0% 65%;
-    --accent: 270 80% 60%;
-    --accent-foreground: 0 0% 100%;
-    --border: 240 10% 20%;
-    --input: 240 10% 20%;
-    --radius: 0.75rem;
+  @keyframes slide-in-from-left {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(0); }
   }
-
-  .theme-futuristic.dark {
-    --background: 240 10% 5%;
-    --foreground: 0 0% 98%;
-    --card: 240 10% 8%;
-    --muted: 240 10% 12%;
-    --border: 240 10% 15%;
+  @keyframes slide-in-from-right {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(0); }
   }
-
-  /* Cozy theme - More spacious and soft */
-  .theme-cozy {
-    --background: 35 20% 96%;
-    --foreground: 25 25% 15%;
-    --card: 0 0% 100%;
-    --card-foreground: 25 25% 15%;
-    --primary: 25 85% 55%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 35 60% 60%;
-    --secondary-foreground: 25 25% 15%;
-    --muted: 35 20% 90%;
-    --muted-foreground: 25 10% 40%;
-    --accent: 35 60% 85%;
-    --accent-foreground: 25 25% 15%;
-    --border: 35 20% 85%;
-    --radius: 1.25rem;
-    letter-spacing: 0.015em;
-    line-height: 1.7;
-  }
-
-  .theme-cozy.dark {
-    --background: 25 15% 12%;
-    --foreground: 35 20% 95%;
-    --card: 25 15% 15%;
-    --card-foreground: 35 20% 95%;
-    --secondary: 35 45% 45%;
-    --secondary-foreground: 35 20% 95%;
-    --muted: 25 10% 20%;
-    --muted-foreground: 35 10% 65%;
-    --accent: 25 20% 20%;
-    --accent-foreground: 35 20% 95%;
-    --input: 25 10% 25%;
-    --border: 25 10% 25%;
-  }
-
-  /* Artistic theme */
-  .theme-artistic {
-    --background: 40 30% 98%;
-    --foreground: 0 0% 10%;
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 10%;
-    --primary: 280 60% 50%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 45 100% 50%;
-    --secondary-foreground: 0 0% 10%;
-    --muted: 40 20% 94%;
-    --muted-foreground: 0 0% 40%;
-    --accent: 280 60% 95%;
-    --accent-foreground: 280 60% 20%;
-    --border: 0 0% 88%;
-    --radius: 0.125rem;
-  }
-
-  .theme-artistic.dark {
-    --background: 0 0% 8%;
-    --foreground: 40 20% 95%;
-    --card: 0 0% 10%;
-    --card-foreground: 40 20% 95%;
-    --primary: 280 60% 60%;
-    --secondary: 45 80% 50%;
-    --secondary-foreground: 0 0% 10%;
-    --muted: 0 0% 15%;
-    --muted-foreground: 0 0% 60%;
-    --accent: 280 60% 15%;
-    --accent-foreground: 280 60% 90%;
-    --input: 0 0% 18%;
-    --border: 0 0% 18%;
-  }
-
-  /* Artistic theme uses serif fonts */
-  .theme-artistic {
-    font-family: Georgia, 'Times New Roman', serif;
-  }
-
-  .theme-artistic [dir='rtl'] {
-    font-family: 'Noto Naskh Arabic', Georgia, serif;
-  }
-
-  .theme-artistic [dir='ltr'] {
-    font-family: Georgia, 'Times New Roman', serif;
-  }
-
-  /* Theme-specific spacing and typography */
-
-  /* Cozy theme: More spacing everywhere */
-  .theme-cozy * {
-    letter-spacing: inherit;
-  }
-
-  .theme-cozy body {
-    line-height: 1.7;
-  }
-
-  .theme-cozy .container,
-  .theme-cozy [class*='container'] {
-    padding-top: 3rem;
-    padding-bottom: 3rem;
-  }
-
-  .theme-cozy h1, .theme-cozy h2, .theme-cozy h3, .theme-cozy h4 {
-    line-height: 1.4;
-  }
-
-  /* Futuristic theme: Tighter, more compact */
-  .theme-futuristic body {
-    letter-spacing: -0.01em;
-    line-height: 1.5;
-  }
-
-  .theme-futuristic h1, .theme-futuristic h2, .theme-futuristic h3 {
-    letter-spacing: -0.025em;
-    font-weight: 600;
-  }
-
-  /* Artistic theme: Typography focus */
-  .theme-artistic body {
-    line-height: 1.8;
-    letter-spacing: 0.01em;
-  }
-
-  .theme-artistic h1, .theme-artistic h2, .theme-artistic h3 {
-    font-weight: 400;
-    letter-spacing: 0.02em;
-    line-height: 1.3;
-  }
-
-  /* Minimal theme: Clean and spacious but controlled */
-  .theme-minimal body {
-    line-height: 1.6;
-  }
-
-  .theme-minimal h1, .theme-minimal h2, .theme-minimal h3 {
-    font-weight: 600;
-    letter-spacing: -0.02em;
-  }
-
-  * {
-    @apply border-border;
-  }
-
-  body {
-    @apply bg-background text-foreground;
-    font-feature-settings: 'rlig' 1, 'calt' 1;
-  }
-
-  /* RTL support */
-  [dir='rtl'] {
-    font-family: 'IBM Plex Sans Arabic', sans-serif;
-  }
-
-  [dir='ltr'] {
-    font-family: 'Inter', system-ui, sans-serif;
-  }
-
-  /* Accessibility: Respect motion preferences */
-  @media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
-      scroll-behavior: auto !important;
-    }
-  }
-
-  /* Focus visible styles */
-  *:focus-visible {
-    @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
-  }
-
-  /* Remove default focus outline */
-  *:focus {
-    @apply outline-none;
+  @keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
   }
 }
 
-@layer utilities {
-  /* RTL-aware utilities */
-  .start-0 {
-    inset-inline-start: 0;
-  }
+/* ─── Container Override (replaces v3 container config) ───────────────────── */
 
-  .end-0 {
-    inset-inline-end: 0;
+@utility container {
+  margin-inline: auto;
+  padding-inline: 1rem;
+  @media (width >= 640px) {
+    padding-inline: 2rem;
   }
-
-  /* Text alignment utilities */
-  .text-start {
-    text-align: start;
+  @media (width >= 1024px) {
+    padding-inline: 4rem;
   }
-
-  .text-end {
-    text-align: end;
+  @media (width >= 1280px) {
+    padding-inline: 5rem;
+  }
+  @media (width >= 1400px) {
+    max-width: 1400px;
+    padding-inline: 6rem;
   }
 }
 
-/* AI/LLM Shell Component Animations */
+/* ─── Theme CSS Variables ─────────────────────────────────────────────────── */
+
+:root {
+  /* Core palette */
+  --background: 220 13% 99%;
+  --foreground: 222.2 84% 4.9%;
+  --card: 0 0% 100%;
+  --card-foreground: 222.2 84% 4.9%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 222.2 84% 4.9%;
+  --primary: 239 84% 67%;
+  --primary-foreground: 210 40% 98%;
+  --secondary: 174 72% 56%;
+  --secondary-foreground: 174 100% 10%;
+  --muted: 210 40% 96.1%;
+  --muted-foreground: 215.4 16.3% 46.9%;
+  --accent: 210 40% 96.1%;
+  --accent-foreground: 222.2 47.4% 11.2%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 214.3 31.8% 91.4%;
+  --input: 214.3 31.8% 91.4%;
+  --ring: 239 84% 67%;
+  --radius: 0.5rem;
+
+  /* Semantic status colors */
+  --success: 142 76% 36%;
+  --success-foreground: 143 64% 24%;
+  --warning: 38 92% 50%;
+  --warning-foreground: 32 81% 29%;
+  --info: 217 91% 60%;
+  --info-foreground: 224 76% 48%;
+
+  /* Typography */
+  --body-line-height: 1.6;
+  --body-letter-spacing: 0;
+  --heading-line-height: 1.3;
+  --heading-letter-spacing: -0.01em;
+  --heading-font-weight: 700;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-heading: 'Inter', system-ui, sans-serif;
+  --font-rtl: 'IBM Plex Sans Arabic', sans-serif;
+}
+
+.dark {
+  --background: 222.2 84% 4.9%;
+  --foreground: 210 40% 98%;
+  --card: 222.2 84% 4.9%;
+  --card-foreground: 210 40% 98%;
+  --popover: 222.2 84% 4.9%;
+  --popover-foreground: 210 40% 98%;
+  --primary: 239 84% 67%;
+  --primary-foreground: 222.2 84% 4.9%;
+  --secondary: 174 72% 56%;
+  --secondary-foreground: 210 40% 98%;
+  --muted: 217.2 32.6% 17.5%;
+  --muted-foreground: 215 20.2% 65.1%;
+  --accent: 217.2 32.6% 17.5%;
+  --accent-foreground: 210 40% 98%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 217.2 32.6% 17.5%;
+  --input: 217.2 32.6% 17.5%;
+  --ring: 239 84% 67%;
+
+  /* Semantic status colors — dark */
+  --success: 142 70% 45%;
+  --success-foreground: 142 76% 73%;
+  --warning: 45 93% 47%;
+  --warning-foreground: 45 93% 72%;
+  --info: 217 91% 65%;
+  --info-foreground: 213 94% 73%;
+}
+
+/* ─── Minimal Theme ───────────────────────────────────────────────────────── */
+
+.theme-minimal {
+  --color-background: hsl(220 13% 99%);
+  --color-foreground: hsl(0 0% 10%);
+  --color-card: hsl(0 0% 100%);
+  --color-card-foreground: hsl(0 0% 10%);
+  --color-primary: hsl(239 84% 67%);
+  --color-primary-foreground: hsl(0 0% 100%);
+  --color-secondary: hsl(0 0% 85%);
+  --color-secondary-foreground: hsl(0 0% 10%);
+  --color-muted: hsl(0 0% 96%);
+  --color-muted-foreground: hsl(0 0% 45%);
+  --color-accent: hsl(0 0% 96%);
+  --color-accent-foreground: hsl(0 0% 10%);
+  --color-border: hsl(0 0% 90%);
+  --color-input: hsl(0 0% 90%);
+  --radius: 0.25rem;
+  --radius-lg: 0.25rem;
+  --radius-md: calc(0.25rem - 2px);
+  --radius-sm: calc(0.25rem - 4px);
+
+  /* Typography */
+  --heading-font-weight: 600;
+  --heading-letter-spacing: -0.02em;
+}
+
+.theme-minimal.dark {
+  --color-background: hsl(0 0% 10%);
+  --color-foreground: hsl(0 0% 95%);
+  --color-card: hsl(0 0% 12%);
+  --color-card-foreground: hsl(0 0% 95%);
+  --color-secondary: hsl(0 0% 25%);
+  --color-secondary-foreground: hsl(0 0% 95%);
+  --color-muted: hsl(0 0% 20%);
+  --color-muted-foreground: hsl(0 0% 60%);
+  --color-accent: hsl(0 0% 20%);
+  --color-accent-foreground: hsl(0 0% 95%);
+  --color-border: hsl(0 0% 20%);
+  --color-input: hsl(0 0% 20%);
+}
+
+/* ─── Futuristic Theme ────────────────────────────────────────────────────── */
+
+.theme-futuristic {
+  --color-background: hsl(240 10% 8%);
+  --color-foreground: hsl(0 0% 95%);
+  --color-card: hsl(240 10% 10%);
+  --color-card-foreground: hsl(0 0% 95%);
+  --color-primary: hsl(270 80% 60%);
+  --color-primary-foreground: hsl(0 0% 100%);
+  --color-secondary: hsl(190 80% 50%);
+  --color-secondary-foreground: hsl(240 10% 8%);
+  --color-muted: hsl(240 10% 15%);
+  --color-muted-foreground: hsl(0 0% 65%);
+  --color-accent: hsl(270 80% 60%);
+  --color-accent-foreground: hsl(0 0% 100%);
+  --color-border: hsl(240 10% 20%);
+  --color-input: hsl(240 10% 20%);
+  --radius: 0.75rem;
+  --radius-lg: 0.75rem;
+  --radius-md: calc(0.75rem - 2px);
+  --radius-sm: calc(0.75rem - 4px);
+  --color-ring: hsl(270 80% 60%);
+
+  /* Semantic status colors */
+  --color-success: hsl(160 84% 39%);
+  --color-warning: hsl(43 96% 56%);
+  --color-info: hsl(199 89% 48%);
+
+  /* Typography */
+  --body-line-height: 1.5;
+  --body-letter-spacing: -0.01em;
+  --heading-letter-spacing: -0.025em;
+  --heading-font-weight: 600;
+}
+
+.theme-futuristic.dark {
+  --color-background: hsl(240 10% 5%);
+  --color-foreground: hsl(0 0% 98%);
+  --color-card: hsl(240 10% 8%);
+  --color-muted: hsl(240 10% 12%);
+  --color-border: hsl(240 10% 15%);
+
+  --color-success: hsl(160 84% 50%);
+  --color-info: hsl(199 89% 58%);
+}
+
+/* ─── Cozy Theme ──────────────────────────────────────────────────────────── */
+
+.theme-cozy {
+  --color-background: hsl(35 20% 96%);
+  --color-foreground: hsl(25 25% 15%);
+  --color-card: hsl(0 0% 100%);
+  --color-card-foreground: hsl(25 25% 15%);
+  --color-primary: hsl(25 85% 55%);
+  --color-primary-foreground: hsl(0 0% 100%);
+  --color-secondary: hsl(35 60% 60%);
+  --color-secondary-foreground: hsl(25 25% 15%);
+  --color-muted: hsl(35 20% 90%);
+  --color-muted-foreground: hsl(25 10% 40%);
+  --color-accent: hsl(35 60% 85%);
+  --color-accent-foreground: hsl(25 25% 15%);
+  --color-border: hsl(35 20% 85%);
+  --radius: 1.25rem;
+  --radius-lg: 1.25rem;
+  --radius-md: calc(1.25rem - 2px);
+  --radius-sm: calc(1.25rem - 4px);
+  --color-ring: hsl(25 85% 55%);
+
+  /* Semantic status colors */
+  --color-success: hsl(152 69% 31%);
+  --color-warning: hsl(27 96% 61%);
+  --color-info: hsl(201 65% 53%);
+
+  /* Typography */
+  --body-line-height: 1.7;
+  --body-letter-spacing: 0.015em;
+  --heading-line-height: 1.4;
+  --heading-letter-spacing: 0;
+  --heading-font-weight: 700;
+}
+
+.theme-cozy.dark {
+  --color-background: hsl(25 15% 12%);
+  --color-foreground: hsl(35 20% 95%);
+  --color-card: hsl(25 15% 15%);
+  --color-card-foreground: hsl(35 20% 95%);
+  --color-secondary: hsl(35 45% 45%);
+  --color-secondary-foreground: hsl(35 20% 95%);
+  --color-muted: hsl(25 10% 20%);
+  --color-muted-foreground: hsl(35 10% 65%);
+  --color-accent: hsl(25 20% 20%);
+  --color-accent-foreground: hsl(35 20% 95%);
+  --color-input: hsl(25 10% 25%);
+  --color-border: hsl(25 10% 25%);
+
+  --color-success: hsl(152 69% 50%);
+  --color-warning: hsl(27 96% 65%);
+  --color-info: hsl(201 65% 60%);
+}
+
+/* ─── Artistic Theme ──────────────────────────────────────────────────────── */
+
+.theme-artistic {
+  --color-background: hsl(40 30% 98%);
+  --color-foreground: hsl(0 0% 10%);
+  --color-card: hsl(0 0% 100%);
+  --color-card-foreground: hsl(0 0% 10%);
+  --color-primary: hsl(280 60% 50%);
+  --color-primary-foreground: hsl(0 0% 100%);
+  --color-secondary: hsl(45 100% 50%);
+  --color-secondary-foreground: hsl(0 0% 10%);
+  --color-muted: hsl(40 20% 94%);
+  --color-muted-foreground: hsl(0 0% 40%);
+  --color-accent: hsl(280 60% 95%);
+  --color-accent-foreground: hsl(280 60% 20%);
+  --color-border: hsl(0 0% 88%);
+  --radius: 0.125rem;
+  --radius-lg: 0.125rem;
+  --radius-md: calc(0.125rem - 2px);
+  --radius-sm: calc(0.125rem - 4px);
+  --color-ring: hsl(280 60% 50%);
+
+  /* Semantic status colors */
+  --color-success: hsl(158 64% 32%);
+  --color-warning: hsl(40 80% 50%);
+  --color-info: hsl(250 50% 60%);
+
+  /* Typography */
+  --body-line-height: 1.8;
+  --body-letter-spacing: 0.01em;
+  --heading-line-height: 1.3;
+  --heading-letter-spacing: 0.02em;
+  --heading-font-weight: 400;
+  --font-body: Georgia, 'Times New Roman', serif;
+  --font-heading: Georgia, 'Times New Roman', serif;
+  --font-rtl: 'Noto Naskh Arabic', Georgia, serif;
+}
+
+.theme-artistic.dark {
+  --color-background: hsl(0 0% 8%);
+  --color-foreground: hsl(40 20% 95%);
+  --color-card: hsl(0 0% 10%);
+  --color-card-foreground: hsl(40 20% 95%);
+  --color-primary: hsl(280 60% 60%);
+  --color-secondary: hsl(45 80% 50%);
+  --color-secondary-foreground: hsl(0 0% 10%);
+  --color-muted: hsl(0 0% 15%);
+  --color-muted-foreground: hsl(0 0% 60%);
+  --color-accent: hsl(280 60% 15%);
+  --color-accent-foreground: hsl(280 60% 90%);
+  --color-input: hsl(0 0% 18%);
+  --color-border: hsl(0 0% 18%);
+
+  --color-success: hsl(158 64% 50%);
+  --color-warning: hsl(40 80% 60%);
+  --color-info: hsl(250 50% 70%);
+}
+
+/* ─── Typography: Direction-Aware ─────────────────────────────────────────── */
+
+[dir='ltr'] {
+  font-family: var(--font-body);
+  letter-spacing: var(--body-letter-spacing);
+}
+
+[dir='rtl'] {
+  font-family: var(--font-rtl);
+  letter-spacing: normal;
+}
+
+body {
+  line-height: var(--body-line-height);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  line-height: var(--heading-line-height);
+  font-weight: var(--heading-font-weight);
+}
+
+[dir='ltr'] :is(h1, h2, h3, h4, h5, h6) {
+  letter-spacing: var(--heading-letter-spacing);
+}
+
+/* ─── Base Styles ─────────────────────────────────────────────────────────── */
+
+* {
+  @apply border-border;
+}
+
+body {
+  @apply bg-background text-foreground;
+  font-feature-settings: 'rlig' 1, 'calt' 1;
+}
+
+/* Accessibility: Respect motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Focus visible styles */
+*:focus-visible {
+  @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
+}
+
+/* Remove default focus outline */
+*:focus {
+  @apply outline-none;
+}
+
+/* ─── Standalone Keyframes ────────────────────────────────────────────────── */
+
 @keyframes wave {
   0%, 100% { height: 0.25rem; }
   50% { height: 0.75rem; }

@@ -98,11 +98,11 @@ const ModelSelector = React.forwardRef<HTMLButtonElement, ModelSelectorProps>(
     const getSpeedColor = (speed: string) => {
       switch (speed) {
         case 'fast':
-          return 'text-green-600 dark:text-green-500'
+          return 'text-success'
         case 'medium':
-          return 'text-yellow-600 dark:text-yellow-500'
+          return 'text-warning'
         case 'slow':
-          return 'text-orange-600 dark:text-orange-500'
+          return 'text-warning'
         default:
           return 'text-muted-foreground'
       }

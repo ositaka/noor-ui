@@ -97,16 +97,21 @@ themesPage: {
         ],
       },
 
+      features: 'الميزات',
+
       preview: {
         title: 'محتوى عينة',
         description: 'شاهد كيف تؤثر السمة الحالية على المحتوى الحقيقي',
         headingExample: 'مثال على العنوان',
+        sampleParagraph1: 'هذه فقرة نموذجية لعرض كيف يبدو النص مع السمة الحالية. لاحظ كيف تُنشئ الطباعة وارتفاع السطر والتباعد تجربة قراءة فريدة تتوافق مع شخصية السمة.',
+        sampleParagraph2: 'فقرة ثانية توضح كيف يتدفق المحتوى مع إعدادات السمة المختارة. كل سمة تجلب طابعها الخاص من خلال رموز تصميم مضبوطة بعناية.',
         inputLabel: 'حقل الإدخال',
         inputPlaceholder: 'اكتب شيئاً...',
         primaryAction: 'الإجراء الأساسي',
         secondary: 'ثانوي',
         outline: 'إطار',
         ghost: 'شبح',
+        destructive: 'تدميري',
         status: 'الحالة',
         label: 'التسمية',
         tag: 'الوسم',
@@ -130,6 +135,44 @@ themesPage: {
         switcherText: 'استخدم الزر العائم في الزاوية السفلية اليمنى (أيقونة اللوحة) لتبديل السمات. سيتم تحديث عنوان URL تلقائياً وستستمر السمة عبر الصفحات.',
         programmatically: 'برمجياً',
       },
+
+      usingThemes: {
+        title: 'استخدام السمات في تطبيقك',
+        setupTitle: 'الإعداد مع حزمة npm',
+        setupDescription: 'تتضمن حزمة noorui-rtl مزود DesignSystemProvider لتبديل السمات بسهولة',
+        step1Label: '1. إعداد المزودات (مثال كامل)',
+        step2Label: '2. التحكم في جميع طبقات السمة برمجياً',
+        successCallout: 'جميع السمات الأربع مع الوضع الفاتح/الداكن تعمل فوراً! يتضمن ملف CSS المُجمَّع مسبقاً جميع متغيرات السمات.',
+      },
+
+      customThemes: {
+        title: 'إنشاء سمات مخصصة',
+        description: 'أنشئ سمتك الخاصة من خلال تعريف فئة CSS تتجاوز متغيرات رموز التصميم.',
+        step1Title: 'الخطوة 1: تعريف CSS للسمة',
+        step1Description: 'أضف فئة سمة جديدة إلى ملف globals.css. تجاوز متغيرات الألوان لكل من الوضع الفاتح والداكن.',
+        step2Title: 'الخطوة 2: استخدام السمة',
+        step2Description: 'مرر اسم سمتك المخصصة إلى DesignSystemProvider.',
+        variablesTitle: 'مرجع متغيرات CSS',
+        variablesDescription: 'هذه هي المتغيرات التي يمكنك تجاوزها في سمتك المخصصة.',
+        required: 'مطلوب',
+        optional: 'اختياري',
+        tip: 'نصيحة: قم بزيارة صفحة رموز التصميم لرؤية القيم الحية لجميع المتغيرات للسمة الحالية — رائعة كنقطة بداية.',
+        variableHeader: 'المتغير',
+        descriptionHeader: 'الوصف',
+        descBackground: 'خلفية الصفحة والنص',
+        descPrimary: 'لون العلامة التجارية/التمييز',
+        descSecondary: 'لون التمييز الثانوي',
+        descMuted: 'خلفيات خافتة ونص مكتوم',
+        descAccent: 'حالات التمرير/التفعيل',
+        descCard: 'أسطح البطاقات',
+        descPopover: 'أسطح القوائم المنبثقة',
+        descBorder: 'الحدود، حقول الإدخال، حلقات التركيز',
+        descDestructive: 'الإجراءات التدميرية',
+        descRadius: 'نصف قطر الحدود الأساسي',
+        descSuccess: 'لون حالة النجاح',
+        descWarning: 'لون حالة التحذير',
+        descInfo: 'لون حالة المعلومات',
+      },
     },
 
   tokens: {
@@ -141,6 +184,7 @@ themesPage: {
       header: {
         title: 'رموز التصميم',
         description: 'أساس نظام التصميم لدينا. جميع القرارات البصرية محددة من خلال الرموز، مما يتيح سمات متسقة وسهولة التخصيص.',
+        alertText: 'تعكس هذه القيم السمة المحددة حاليًا وتتحدّث في الوقت الفعلي عند تبديل السمات أو تفعيل الوضع الداكن.',
       },
 
       // قسم الألوان
@@ -165,6 +209,32 @@ themesPage: {
           error: 'الخطأ',
           warning: 'التحذير',
           info: 'المعلومات',
+        },
+        brand: {
+          title: 'ألوان العلامة التجارية',
+          description: 'الألوان الأساسية والثانوية للعلامة التجارية',
+        },
+        ui: {
+          title: 'ألوان الواجهة',
+          description: 'ألوان خلفية ونصوص واجهة المستخدم',
+        },
+        accent: {
+          title: 'ألوان التمييز',
+          description: 'ألوان خافتة ومميزة لعناصر الواجهة الدقيقة',
+        },
+        semanticStatus: {
+          title: 'ألوان الحالة الدلالية',
+          description: 'ألوان التغذية الراجعة للنجاح والتحذير والمعلومات',
+        },
+        stateBorder: {
+          title: 'ألوان الحالة والحدود',
+          description: 'حالة التدمير والحدود وحلقات التركيز',
+        },
+        cssSetup: {
+          title: 'إعداد CSS',
+          description: 'انسخ والصق هذا الكود في ملف',
+          descriptionFile: 'globals.css',
+          descriptionSuffix: 'لاستخدام هذه السمة',
         },
       },
 
@@ -208,6 +278,10 @@ themesPage: {
         sectionTitle: 'نصف قطر الحدود',
         title: 'مقياس نصف القطر',
         description: 'تدوير الزوايا للمكونات',
+        currentTheme: {
+          title: 'نصف قطر السمة الحالية',
+          description: 'نصف قطر الحدود للسمة المحددة حاليًا',
+        },
       },
 
       // قسم الاستخدام
@@ -216,19 +290,19 @@ themesPage: {
         title: 'تكامل Tailwind CSS',
         description: 'جميع الرموز متاحة كأدوات Tailwind',
         colorsLabel: 'الألوان',
-        colorsCode: `<div className="bg-primary-500 text-primary-50">
-  اللون الأساسي مع الدرجات
+        colorsCode: `<div className="bg-primary text-primary-foreground">
+  اللون الأساسي
 </div>
 
-<div className="text-success-600">
+<div className="text-success">
   نص النجاح
 </div>`,
         spacingLabel: 'التباعد',
-        spacingCode: `<div className="p-lg m-xl gap-md">
-  أسماء التباعد الدلالية
+        spacingCode: `<div className="p-6 m-8 gap-4">
+  مقياس التباعد القياسي
 </div>
 
-<div className="space-y-md">
+<div className="space-y-4">
   التباعد العمودي
 </div>`,
         typographyLabel: 'الطباعة',

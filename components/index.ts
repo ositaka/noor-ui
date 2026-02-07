@@ -219,6 +219,7 @@ export { useRelativeTime } from '../lib/hooks/use-relative-time'
 export { cn } from '../lib/utils.js'
 
 // Type exports
+export type { BuiltInTheme, Theme } from '../lib/tokens'
 export type { ButtonProps } from './ui/button'
 export type { InputProps } from './ui/input'
 export type { BadgeProps } from './ui/badge'

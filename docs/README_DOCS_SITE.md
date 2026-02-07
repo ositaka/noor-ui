@@ -484,11 +484,11 @@ Tokens are converted to CSS custom properties in `styles/globals.css` and consum
 
 ## 🔧 Configuration Files
 
-- **tailwind.config.ts**: Tailwind configuration with design tokens
+- **styles/globals.css**: Tailwind v4 CSS-first config with `@theme {}` design tokens
 - **tsconfig.json**: TypeScript configuration (strict mode)
 - **.eslintrc.json**: ESLint with jsx-a11y rules
 - **next.config.js**: Next.js configuration
-- **postcss.config.js**: PostCSS with Tailwind and Autoprefixer
+- **postcss.config.js**: PostCSS with `@tailwindcss/postcss`
 
 ## 📦 Dependencies
 
@@ -498,8 +498,8 @@ Tokens are converted to CSS custom properties in `styles/globals.css` and consum
 - `typescript@^5.3.0`
 
 ### Styling
-- `tailwindcss@^3.4.0`
-- `tailwindcss-logical@^3.0.0` (Critical for RTL)
+- `tailwindcss@^4.1.0`
+- `@tailwindcss/postcss@^4.1.0`
 - `class-variance-authority@^0.7.0`
 - `clsx@^2.1.0`
 - `tailwind-merge@^2.2.0`

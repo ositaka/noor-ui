@@ -23,7 +23,7 @@ const tokenCounterVariants = cva(
       },
       status: {
         safe: 'border-border',
-        warning: 'border-yellow-500/50 bg-yellow-500/5',
+        warning: 'border-warning/50 bg-warning/5',
         danger: 'border-destructive/50 bg-destructive/5',
       },
     },
@@ -139,7 +139,7 @@ const TokenCounter = React.forwardRef<HTMLDivElement, TokenCounterProps>(
     // Get progress color
     const getProgressColor = () => {
       if (status === 'danger') return 'bg-destructive'
-      if (status === 'warning') return 'bg-yellow-500'
+      if (status === 'warning') return 'bg-warning'
       return 'bg-primary'
     }
 

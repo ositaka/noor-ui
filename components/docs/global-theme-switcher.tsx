@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Palette, X } from 'lucide-react'
 import { useDesignSystem } from '@/components/providers/design-system-provider'
-import { type Theme, themeConfig } from '@/lib/tokens'
+import { type BuiltInTheme, themeConfig } from '@/lib/tokens'
 import { cn } from '@/lib/utils'
 
 export function GlobalThemeSwitcher() {
@@ -32,7 +32,7 @@ function GlobalThemeSwitcherContent({
   setIsOpen: (open: boolean) => void
 }) {
   const { designTheme, setDesignTheme } = useDesignSystem()
-  const themes: Theme[] = ['minimal', 'futuristic', 'cozy', 'artistic']
+  const themes: BuiltInTheme[] = ['minimal', 'futuristic', 'cozy', 'artistic']
 
   return (
     <>

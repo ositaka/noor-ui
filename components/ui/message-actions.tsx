@@ -188,7 +188,7 @@ const MessageActions = React.forwardRef<HTMLDivElement, MessageActionsProps>(
               onClick={handleThumbsUp}
               className={cn(
                 'h-7 w-7',
-                feedback === 'up' && 'text-green-600 dark:text-green-500'
+                feedback === 'up' && 'text-success'
               )}
             >
               <ThumbsUp className="h-3 w-3" />
@@ -200,7 +200,7 @@ const MessageActions = React.forwardRef<HTMLDivElement, MessageActionsProps>(
               onClick={handleThumbsDown}
               className={cn(
                 'h-7 w-7',
-                feedback === 'down' && 'text-red-600 dark:text-red-500'
+                feedback === 'down' && 'text-destructive'
               )}
             >
               <ThumbsDown className="h-3 w-3" />

@@ -235,12 +235,14 @@ Build these with full RTL support:
 
 ## RTL Implementation Requirements
 
-### Tailwind Config
+> **Note:** This section reflects the original v3 architecture. The project has since migrated to Tailwind CSS v4.1 with a CSS-first approach. `tailwindcss-logical` is no longer needed (logical properties are built-in to v4). See `styles/globals.css` for the current configuration.
+
+### Tailwind Config (Historical — v3)
 ````javascript
-// tailwind.config.js
+// tailwind.config.js (no longer used — replaced by CSS-first config in globals.css)
 module.exports = {
   plugins: [
-    require('tailwindcss-logical'),  // CRITICAL for RTL
+    require('tailwindcss-logical'),  // No longer needed in Tailwind v4
   ],
   theme: {
     extend: {
@@ -538,7 +540,7 @@ module.exports = {
     },
   },
   plugins: [
-    require('tailwindcss-logical'),  // CRITICAL
+    require('tailwindcss-logical'),  // No longer needed in Tailwind v4 (built-in)
   ],
 };
 ````

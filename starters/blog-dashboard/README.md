@@ -327,18 +327,16 @@ ALTER TABLE posts ADD COLUMN category text;
 
 ### Changing Theme Colors
 
-Edit `tailwind.config.ts` to customize colors:
+Override CSS variables in your `globals.css` — no `tailwind.config.ts` needed:
 
-```typescript
-theme: {
-  extend: {
-    colors: {
-      primary: {
-        DEFAULT: "hsl(var(--primary))",
-        // ...
-      }
-    }
-  }
+```css
+/* Override CSS variables for custom colors */
+:root {
+  --primary: 210 80% 50%;
+  --primary-foreground: 0 0% 100%;
+  --success: 142 76% 36%;
+  --warning: 38 92% 50%;
+  --radius: 0.75rem;
 }
 ```
 

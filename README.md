@@ -20,7 +20,7 @@ Beautiful RTL-first React components for bilingual applications. Built with Radi
 - 🎯 **TypeScript**: Full type safety and IntelliSense support
 - 🎭 **Themeable**: Light/dark mode with customizable design tokens
 - 🕌 **GCC-Specific**: Prayer times, Hijri calendar, Arabic numbers, Zakat calculator
-- ⚡ **Modern Stack**: Next.js 15, React 19, Tailwind CSS, Radix UI
+- ⚡ **Modern Stack**: React 18+, Next.js 14+, Tailwind CSS 4.1+, Radix UI
 - 📦 **Tree-shakeable**: Only bundle what you use
 
 ## 📦 Installation
@@ -54,67 +54,109 @@ import 'noorui-rtl/dist/styles.css'
 
 This includes all component styles, CSS variables, theme definitions, and RTL support. **No Tailwind configuration required!**
 
-**Option B: Tailwind Configuration (For custom Tailwind setups)**
+**Option B: Tailwind v4 CSS-first Configuration (For custom Tailwind setups)**
 
 If you're already using Tailwind and want to customize the configuration:
 
-1. Update your `tailwind.config.ts`:
-
-```typescript
-import type { Config } from 'tailwindcss'
-
-const config: Config = {
-  content: [
-    './app/**/*.{js,ts,jsx,tsx,mdx}',
-    './components/**/*.{js,ts,jsx,tsx,mdx}',
-    // Add noorui-rtl components
-    './node_modules/noorui-rtl/**/*.{js,ts,jsx,tsx}',
-  ],
-  theme: {
-    extend: {},
-  },
-  plugins: [],
-}
-
-export default config
-```
-
-2. Add CSS variables to `globals.css`:
+1. Set up `globals.css` with CSS-first Tailwind v4 config:
 
 ```css
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-@layer base {
-  :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-    --radius: 0.5rem;
-  }
+/* Dark mode: class-based toggle */
+@custom-variant dark (&:where(.dark, .dark *));
 
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-    /* ... rest of dark mode variables */
-  }
+@theme {
+  /* Colors — semantic tokens via CSS vars */
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+
+  /* Semantic status colors */
+  --color-success: hsl(var(--success));
+  --color-success-foreground: hsl(var(--success-foreground));
+  --color-warning: hsl(var(--warning));
+  --color-warning-foreground: hsl(var(--warning-foreground));
+  --color-info: hsl(var(--info));
+  --color-info-foreground: hsl(var(--info-foreground));
+
+  /* Border radius */
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+
+  /* Font families */
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-arabic: 'IBM Plex Sans Arabic', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+```
+
+2. Add CSS variables for light/dark themes:
+
+```css
+:root {
+  /* Core palette */
+  --background: 220 13% 99%;
+  --foreground: 222.2 84% 4.9%;
+  --card: 0 0% 100%;
+  --card-foreground: 222.2 84% 4.9%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 222.2 84% 4.9%;
+  --primary: 239 84% 67%;
+  --primary-foreground: 210 40% 98%;
+  --secondary: 174 72% 56%;
+  --secondary-foreground: 174 100% 10%;
+  --muted: 210 40% 96.1%;
+  --muted-foreground: 215.4 16.3% 46.9%;
+  --accent: 210 40% 96.1%;
+  --accent-foreground: 222.2 47.4% 11.2%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 214.3 31.8% 91.4%;
+  --input: 214.3 31.8% 91.4%;
+  --ring: 239 84% 67%;
+  --radius: 0.5rem;
+
+  /* Semantic status colors */
+  --success: 142 76% 36%;
+  --success-foreground: 143 64% 24%;
+  --warning: 38 92% 50%;
+  --warning-foreground: 32 81% 29%;
+  --info: 217 91% 60%;
+  --info-foreground: 224 76% 48%;
+}
+
+.dark {
+  --background: 222.2 84% 4.9%;
+  --foreground: 210 40% 98%;
+  /* ... rest of dark mode variables */
+}
+```
+
+3. Set up `postcss.config.js`:
+
+```js
+module.exports = {
+  plugins: {
+    '@tailwindcss/postcss': {},
+  },
 }
 ```
 
@@ -266,6 +308,85 @@ export default function App() {
 ```
 
 Components automatically adapt to text direction using logical properties.
+
+## 🎨 Custom Themes
+
+The theme system is powered by CSS custom properties. You can create your own themes by defining a CSS class that overrides these variables.
+
+### 1. Define your theme CSS
+
+Add a `.theme-yourname` class to your `globals.css` with light and dark mode variants:
+
+```css
+/* Light mode */
+.theme-ocean {
+  --color-background: hsl(200 20% 98%);
+  --color-foreground: hsl(210 40% 10%);
+  --color-primary: hsl(200 80% 50%);
+  --color-primary-foreground: hsl(0 0% 100%);
+  --color-secondary: hsl(180 60% 45%);
+  --color-secondary-foreground: hsl(180 100% 10%);
+  --color-muted: hsl(200 20% 94%);
+  --color-muted-foreground: hsl(200 10% 40%);
+  --color-accent: hsl(200 20% 94%);
+  --color-accent-foreground: hsl(210 40% 10%);
+  --color-card: hsl(0 0% 100%);
+  --color-card-foreground: hsl(210 40% 10%);
+  --color-popover: hsl(0 0% 100%);
+  --color-popover-foreground: hsl(210 40% 10%);
+  --color-border: hsl(200 20% 88%);
+  --color-input: hsl(200 20% 88%);
+  --color-ring: hsl(200 80% 50%);
+  --color-destructive: hsl(0 84% 60%);
+  --color-destructive-foreground: hsl(0 0% 100%);
+  --radius: 0.75rem;
+}
+
+/* Dark mode */
+.dark .theme-ocean,
+.theme-ocean.dark {
+  --color-background: hsl(210 40% 8%);
+  --color-foreground: hsl(200 20% 95%);
+  --color-primary: hsl(200 80% 60%);
+  --color-primary-foreground: hsl(210 40% 8%);
+  --color-card: hsl(210 35% 12%);
+  --color-card-foreground: hsl(200 20% 95%);
+  --color-border: hsl(210 30% 20%);
+  --color-input: hsl(210 30% 20%);
+}
+```
+
+See `styles/globals.css` in the package for all 4 built-in themes as a reference.
+
+### 2. Use your theme
+
+Pass your custom theme name to the `DesignSystemProvider`:
+
+```tsx
+<DesignSystemProvider defaultTheme="ocean">
+  {children}
+</DesignSystemProvider>
+```
+
+The provider accepts any string as a theme name and applies the corresponding `.theme-{name}` CSS class to `<html>`.
+
+### CSS Variables Reference
+
+| Variable | Description |
+|----------|-------------|
+| `--color-background` / `--color-foreground` | Page background and text |
+| `--color-primary` / `--color-primary-foreground` | Brand/accent color and its contrast |
+| `--color-secondary` / `--color-secondary-foreground` | Secondary accent |
+| `--color-muted` / `--color-muted-foreground` | Muted backgrounds and subdued text |
+| `--color-accent` / `--color-accent-foreground` | Hover/active states |
+| `--color-card` / `--color-card-foreground` | Card surfaces |
+| `--color-popover` / `--color-popover-foreground` | Popover/dropdown surfaces |
+| `--color-border` / `--color-input` / `--color-ring` | Borders, inputs, focus rings |
+| `--color-destructive` / `--color-destructive-foreground` | Destructive actions |
+| `--color-success` / `--color-warning` / `--color-info` | Semantic status colors (optional) |
+| `--radius` | Base border radius |
+
+Color values use `hsl()` format (e.g., `hsl(200 80% 50%)`). The `--color-*` prefix matches Tailwind v4's theme variable naming, so utilities like `bg-primary` resolve correctly even on nested theme elements.
 
 ## 🔧 Usage with Providers
 

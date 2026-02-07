@@ -33,7 +33,7 @@ export function StatsCard({
         <div className="text-2xl font-bold">{value}</div>
         {trend !== undefined && trendLabel && (
           <p className="text-xs text-muted-foreground">
-            <span className={trend >= 0 ? 'text-green-600' : 'text-red-600'}>
+            <span className={trend >= 0 ? 'text-success' : 'text-destructive'}>
               {trend >= 0 ? '+' : ''}{trend}%
             </span>{' '}
             {trendLabel}
