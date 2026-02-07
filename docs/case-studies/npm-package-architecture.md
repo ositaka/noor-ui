@@ -365,17 +365,12 @@ function App() {
 
 ## Setup
 
-1. Install Tailwind CSS in your project
-2. Add to your `tailwind.config.js`:
+1. Install Tailwind CSS v4 in your project
+2. Import the package styles in your `globals.css`:
 
-```js
-module.exports = {
-  content: [
-    './node_modules/@[name]/components/**/*.{js,ts,jsx,tsx}',
-    './src/**/*.{js,ts,jsx,tsx}',
-  ],
-  // ... rest of config
-}
+```css
+@import "tailwindcss";
+@import "@[name]/components/dist/styles.css";
 ```
 
 3. Wrap your app with providers:

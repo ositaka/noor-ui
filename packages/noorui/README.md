@@ -86,7 +86,7 @@ function App() {
 ## Requirements
 
 - React 18+
-- Tailwind CSS 3.4+
+- Tailwind CSS 4.1+
 - Node.js 18+
 
 ## License

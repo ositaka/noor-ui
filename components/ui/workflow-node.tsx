@@ -51,10 +51,10 @@ export interface WorkflowNodeData extends Record<string, unknown> {
 }
 
 const statusColors = {
-  active: 'bg-blue-500',
-  inactive: 'bg-gray-400',
-  error: 'bg-red-500',
-  success: 'bg-green-500',
+  active: 'bg-info',
+  inactive: 'bg-muted',
+  error: 'bg-destructive',
+  success: 'bg-success',
 }
 
 export function WorkflowNode({ data, selected }: NodeProps<Node<WorkflowNodeData>>) {
@@ -71,8 +71,8 @@ export function WorkflowNode({ data, selected }: NodeProps<Node<WorkflowNodeData
       className={cn(
         'min-w-[240px] transition-all',
         selected && 'ring-2 ring-primary ring-offset-2',
-        data.status === 'error' && 'border-red-500',
-        data.status === 'success' && 'border-green-500'
+        data.status === 'error' && 'border-destructive',
+        data.status === 'success' && 'border-success'
       )}
     >
       {/* Input Handle */}

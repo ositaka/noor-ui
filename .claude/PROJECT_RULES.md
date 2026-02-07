@@ -1,6 +1,6 @@
 # Noor UI - Project Rules
 
-**Last Updated:** 2025-11-10
+**Last Updated:** 2026-02-07
 **Project Type:** React/Next.js Design System with RTL-First Architecture
 **Project Name:** Noor UI (نور - "Light" in Arabic)
 
@@ -529,13 +529,12 @@ chore: Update search data with new components
 9. **User Interface** (2): UserMenu, NotificationCenter
 10. **AI/LLM (Experimental)** (10): ChatMessage, StreamingText, PromptInput, ThinkingIndicator, MessageActions, ModelSelector, ParameterSlider, TokenCounter, ConversationHistory, WorkflowCanvas
 
-### Recent Improvements (November 2025):
-- ✅ Refactored to use Next.js route groups with shared layouts
-- ✅ Direction-aware Tabs component with Radix UI integration
-- ✅ Bilingual Dashboard and E-commerce examples
-- ✅ CodeBlock component with syntax highlighting
-- ✅ Command palette (Cmd+K) for global navigation
-- ✅ All documentation pages use shared layout (DRY principle)
+### Recent Improvements (February 2026):
+- ✅ Tailwind CSS v3 → v4.1 migration (CSS-first configuration with `@theme` blocks)
+- ✅ Custom themes system with extensible DesignSystemProvider
+- ✅ `--color-*` variable refactoring for proper theme scoping
+- ✅ ~50 hardcoded English strings replaced with i18n translations (EN/AR)
+- ✅ Published noorui-rtl v0.7.1 to npm
 
 ---
 

@@ -26,14 +26,14 @@ function DesignSystemProviderInner({ children, defaultTheme = 'minimal' }: Desig
   // Initialize from URL param or localStorage
   React.useEffect(() => {
     const themeParam = searchParams.get('theme') as Theme
-    if (themeParam && ['minimal', 'futuristic', 'cozy', 'artistic'].includes(themeParam)) {
+    if (themeParam) {
       setDesignThemeState(themeParam)
       applyThemeToDocument(themeParam)
     } else {
       // Try to load from localStorage
       try {
         const stored = localStorage.getItem('design-theme') as Theme
-        if (stored && ['minimal', 'futuristic', 'cozy', 'artistic'].includes(stored)) {
+        if (stored) {
           setDesignThemeState(stored)
           applyThemeToDocument(stored)
         }
@@ -77,7 +77,9 @@ function applyThemeToDocument(theme: Theme) {
   if (typeof document === 'undefined') return
 
   const root = document.documentElement
-  root.classList.remove('theme-minimal', 'theme-futuristic', 'theme-cozy', 'theme-artistic')
+  root.classList.forEach(cls => {
+    if (cls.startsWith('theme-')) root.classList.remove(cls)
+  })
   root.classList.add(`theme-${theme}`)
 
   // Store in localStorage for persistence

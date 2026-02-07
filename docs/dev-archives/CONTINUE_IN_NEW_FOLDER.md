@@ -21,8 +21,7 @@
 
 Claude Code will then:
 - ✅ Read the TEST_NOORUI_SETUP.md file
-- ✅ Update tailwind.config.ts
-- ✅ Update app/globals.css with CSS variables
+- ✅ Update app/globals.css with Tailwind v4 CSS-first config and theme variables
 - ✅ Create the demo page in app/page.tsx
 - ✅ Help you run and test it
 

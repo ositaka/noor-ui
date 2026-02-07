@@ -97,16 +97,21 @@ themesPage: {
         ],
       },
 
+      features: 'Features',
+
       preview: {
         title: 'Sample Content',
         description: 'See how the current theme affects real content',
         headingExample: 'Heading Example',
+        sampleParagraph1: 'This is a sample paragraph to demonstrate how text looks with the current theme. Notice how the typography, line height, and spacing create a unique reading experience that matches the theme\'s personality.',
+        sampleParagraph2: 'A second paragraph shows how content flows with the chosen theme settings. Each theme brings its own character through carefully tuned design tokens.',
         inputLabel: 'Input Field',
         inputPlaceholder: 'Type something...',
         primaryAction: 'Primary Action',
         secondary: 'Secondary',
         outline: 'Outline',
         ghost: 'Ghost',
+        destructive: 'Destructive',
         status: 'Status',
         label: 'Label',
         tag: 'Tag',
@@ -130,6 +135,44 @@ themesPage: {
         switcherText: 'Use the floating button in the bottom-right corner (palette icon) to switch themes. The URL will update automatically and the theme persists across pages.',
         programmatically: 'Programmatically',
       },
+
+      usingThemes: {
+        title: 'Using Themes in Your App',
+        setupTitle: 'Setup with npm package',
+        setupDescription: 'The noorui-rtl package includes DesignSystemProvider for easy theme switching',
+        step1Label: '1. Setup providers (complete example)',
+        step2Label: '2. Control all theme layers programmatically',
+        successCallout: 'All 4 themes with light/dark mode work out of the box! The pre-compiled CSS includes all theme variants.',
+      },
+
+      customThemes: {
+        title: 'Creating Custom Themes',
+        description: 'Create your own theme by defining a CSS class that overrides the design token variables.',
+        step1Title: 'Step 1: Define Your Theme CSS',
+        step1Description: 'Add a new theme class to your globals.css. Override the color variables for both light and dark modes.',
+        step2Title: 'Step 2: Use Your Theme',
+        step2Description: 'Pass your custom theme name to the DesignSystemProvider.',
+        variablesTitle: 'CSS Variables Reference',
+        variablesDescription: 'These are the variables you can override in your custom theme.',
+        required: 'Required',
+        optional: 'Optional',
+        tip: 'Tip: Visit the Design Tokens page to see the live values of all variables for the current theme — great for using as a starting point.',
+        variableHeader: 'Variable',
+        descriptionHeader: 'Description',
+        descBackground: 'Page background and text',
+        descPrimary: 'Brand/accent color',
+        descSecondary: 'Secondary accent',
+        descMuted: 'Muted backgrounds and subdued text',
+        descAccent: 'Hover/active states',
+        descCard: 'Card surfaces',
+        descPopover: 'Popover/dropdown surfaces',
+        descBorder: 'Borders, inputs, focus rings',
+        descDestructive: 'Destructive actions',
+        descRadius: 'Base border radius',
+        descSuccess: 'Success status color',
+        descWarning: 'Warning status color',
+        descInfo: 'Info status color',
+      },
     },
 
   tokens: {
@@ -141,6 +184,7 @@ themesPage: {
       header: {
         title: 'Design Tokens',
         description: 'The foundation of our design system. All visual decisions are defined through tokens, enabling consistent theming and easy customization.',
+        alertText: 'These values reflect the currently selected theme and update in real-time when you switch themes or toggle dark mode.',
       },
 
       // Colors Section
@@ -165,6 +209,32 @@ themesPage: {
           error: 'Error',
           warning: 'Warning',
           info: 'Info',
+        },
+        brand: {
+          title: 'Brand Colors',
+          description: 'Primary and secondary brand colors',
+        },
+        ui: {
+          title: 'UI Colors',
+          description: 'Interface background and text colors',
+        },
+        accent: {
+          title: 'Accent Colors',
+          description: 'Muted and accent colors for subtle UI elements',
+        },
+        semanticStatus: {
+          title: 'Semantic Status Colors',
+          description: 'Success, warning, and info feedback colors',
+        },
+        stateBorder: {
+          title: 'State & Border Colors',
+          description: 'Destructive state, borders, and focus rings',
+        },
+        cssSetup: {
+          title: 'CSS Setup',
+          description: 'Copy and paste this CSS into your',
+          descriptionFile: 'globals.css',
+          descriptionSuffix: 'file to use this theme',
         },
       },
 
@@ -208,6 +278,10 @@ themesPage: {
         sectionTitle: 'Border Radius',
         title: 'Radius Scale',
         description: 'Corner rounding for components',
+        currentTheme: {
+          title: 'Current Theme Radius',
+          description: 'The border radius for the currently selected theme',
+        },
       },
 
       // Usage Section
@@ -216,19 +290,19 @@ themesPage: {
         title: 'Tailwind CSS Integration',
         description: 'All tokens are available as Tailwind utilities',
         colorsLabel: 'Colors',
-        colorsCode: `<div className="bg-primary-500 text-primary-50">
-  Primary color with shades
+        colorsCode: `<div className="bg-primary text-primary-foreground">
+  Primary color
 </div>
 
-<div className="text-success-600">
+<div className="text-success">
   Success text
 </div>`,
         spacingLabel: 'Spacing',
-        spacingCode: `<div className="p-lg m-xl gap-md">
-  Semantic spacing names
+        spacingCode: `<div className="p-6 m-8 gap-4">
+  Standard spacing scale
 </div>
 
-<div className="space-y-md">
+<div className="space-y-4">
   Vertical spacing
 </div>`,
         typographyLabel: 'Typography',

@@ -118,7 +118,7 @@ export { Component, componentVariants }
 
 **CRITICAL**: All components must work correctly in RTL mode.
 
-1. **Use logical properties** (Tailwind CSS with tailwindcss-logical plugin):
+1. **Use logical properties** (built into Tailwind CSS v4 — no plugin needed):
    - `ms-*` instead of `ml-*` (margin-inline-start)
    - `me-*` instead of `mr-*` (margin-inline-end)
    - `ps-*` instead of `pl-*` (padding-inline-start)

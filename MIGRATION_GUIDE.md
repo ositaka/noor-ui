@@ -61,8 +61,8 @@ cp -r ~/Desktop/claude-code-bidirectional/projects/luxury-reseller-platform/publ
 
 # Copy config files
 cp ~/Desktop/claude-code-bidirectional/projects/luxury-reseller-platform/next.config.js ./
-cp ~/Desktop/claude-code-bidirectional/projects/luxury-reseller-platform/tailwind.config.ts ./
 cp ~/Desktop/claude-code-bidirectional/projects/luxury-reseller-platform/tsconfig.json ./
+# Note: tailwind.config.ts is no longer needed — Tailwind v4 uses CSS-first config
 ```
 
 ## Step 4: Update Imports
@@ -120,29 +120,51 @@ import { Input } from '@/components/ui/input'
 import { Button, Card, CardContent, CardHeader, Input } from 'noorui-rtl'
 ```
 
-## Step 5: Update Tailwind Config
+## Step 5: Update to Tailwind CSS v4 (CSS-First)
 
-Your `tailwind.config.ts` should point to the noorui-rtl package:
+Tailwind v4 uses a CSS-first approach — no `tailwind.config.ts` needed. Set up your `globals.css`:
 
-```typescript
-import type { Config } from 'tailwindcss'
+```css
+@import "tailwindcss";
 
-const config: Config = {
-  content: [
-    './app/**/*.{js,ts,jsx,tsx,mdx}',
-    './components/**/*.{js,ts,jsx,tsx,mdx}',
-    // Add noorui-rtl components
-    './node_modules/noorui-rtl/**/*.{js,ts,jsx,tsx}',
-  ],
-  theme: {
-    extend: {
-      // Your custom theme
-    },
-  },
-  plugins: [],
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  /* ... all design tokens ... */
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
 }
 
-export default config
+:root {
+  --background: 220 13% 99%;
+  --foreground: 222.2 84% 4.9%;
+  --primary: 239 84% 67%;
+  --success: 142 76% 36%;
+  --warning: 38 92% 50%;
+  --info: 217 91% 60%;
+  /* ... see styles/globals.css for full list */
+}
+
+.dark {
+  --background: 222.2 84% 4.9%;
+  --foreground: 210 40% 98%;
+  /* ... */
+}
+```
+
+And update `postcss.config.js`:
+
+```js
+module.exports = {
+  plugins: {
+    '@tailwindcss/postcss': {},
+  },
+}
 ```
 
 ## Step 6: Setup next-intl
@@ -315,8 +337,9 @@ npm run dev
 
 ### Style issues
 If styles don't load:
-- Check `tailwind.config.ts` includes `node_modules/noorui-rtl/**/*`
-- Make sure `styles/globals.css` imports Tailwind CSS
+- Make sure `globals.css` starts with `@import "tailwindcss"`
+- Check that `postcss.config.js` uses `@tailwindcss/postcss`
+- Ensure CSS variables (`:root { ... }`) are defined in your CSS
 
 ### TypeScript errors
 If you see TypeScript errors:

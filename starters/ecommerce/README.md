@@ -318,8 +318,8 @@ Extend this starter with:
 - Check Next.js image domains in `next.config.js`
 
 ### Styles not applying
-- Ensure Tailwind CSS is configured correctly
-- Check `tailwind.config.ts` includes all paths
+- Ensure `globals.css` starts with `@import "tailwindcss"` and includes a `@theme {}` block
+- Check that `postcss.config.js` uses `@tailwindcss/postcss`
 
 ## Demo Data
 

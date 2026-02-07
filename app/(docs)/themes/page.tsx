@@ -10,14 +10,15 @@ import { Separator } from '@/components/ui/separator'
 import { Badge } from '@/components/ui/badge'
 import { CodeBlock } from '@/components/docs/code-block'
 import { useDesignSystem } from '@/components/providers/design-system-provider'
-import { Check, Sparkles } from 'lucide-react'
-import { type Theme, themeConfig } from '@/lib/tokens'
+import { Check, Sparkles, ChevronDown, Lightbulb } from 'lucide-react'
+import { Collapsible, CollapsibleTrigger, CollapsibleContent } from '@/components/ui/collapsible'
+import { type BuiltInTheme, themeConfig } from '@/lib/tokens'
 import { cn } from '@/lib/utils'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 import { useTheme } from 'next-themes'
 
-const ThemeCardInner = ({ theme }: { theme: Theme }) => {
+const ThemeCardInner = ({ theme }: { theme: BuiltInTheme }) => {
   const { designTheme, setDesignTheme } = useDesignSystem()
   const { locale } = useDirection()
   const { theme: colorMode } = useTheme()
@@ -50,7 +51,7 @@ const ThemeCardInner = ({ theme }: { theme: Theme }) => {
       </CardHeader>
       <CardContent className="space-y-4">
         <div>
-          <div className="text-sm font-medium mb-2">Features</div>
+          <div className="text-sm font-medium mb-2">{t.themesPage.features}</div>
           <ul className="space-y-1">
             {features.map((feature, i) => (
               <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
@@ -90,9 +91,10 @@ const ThemeCardInner = ({ theme }: { theme: Theme }) => {
   )
 }
 
-const ThemeCard = ({ theme }: { theme: Theme }) => {
+const ThemeCard = ({ theme }: { theme: BuiltInTheme }) => {
   const [mounted, setMounted] = React.useState(false)
   const { locale } = useDirection()
+  const t = content[locale]
 
   React.useEffect(() => {
     setMounted(true)
@@ -114,7 +116,7 @@ const ThemeCard = ({ theme }: { theme: Theme }) => {
         </CardHeader>
         <CardContent className="space-y-4">
           <div>
-            <div className="text-sm font-medium mb-2">Features</div>
+            <div className="text-sm font-medium mb-2">{t.themesPage.features}</div>
             <ul className="space-y-1">
               {features.map((feature, i) => (
                 <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
@@ -135,7 +137,7 @@ const ThemeCard = ({ theme }: { theme: Theme }) => {
 export default function ThemesPage() {
   const { locale } = useDirection()
   const t = content[locale]
-  const themes: Theme[] = ['minimal', 'futuristic', 'cozy', 'artistic']
+  const themes: BuiltInTheme[] = ['minimal', 'futuristic', 'cozy', 'artistic']
 
   return (
     <div className="min-h-screen">
@@ -180,17 +182,17 @@ export default function ThemesPage() {
 
         {/* Using Themes in Your App */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Using Themes in Your App</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.themesPage.usingThemes.title}</h2>
           <Card>
             <CardHeader>
-              <CardTitle>Setup with npm package</CardTitle>
+              <CardTitle>{t.themesPage.usingThemes.setupTitle}</CardTitle>
               <CardDescription>
-                The noorui-rtl package includes DesignSystemProvider for easy theme switching
+                {t.themesPage.usingThemes.setupDescription}
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div>
-                <Label className="text-sm font-medium mb-2 block">1. Setup providers (complete example)</Label>
+                <Label className="text-sm font-medium mb-2 block">{t.themesPage.usingThemes.step1Label}</Label>
                 <CodeBlock
                   language="tsx"
                   code={`import 'noorui-rtl/dist/styles.css'
@@ -219,7 +221,7 @@ export default function RootLayout({ children }) {
               </div>
 
               <div>
-                <Label className="text-sm font-medium mb-2 block">2. Control all theme layers programmatically</Label>
+                <Label className="text-sm font-medium mb-2 block">{t.themesPage.usingThemes.step2Label}</Label>
                 <CodeBlock
                   language="tsx"
                   code={`import { useDesignSystem } from 'noorui-rtl'
@@ -259,7 +261,7 @@ function ThemeControls() {
               <div className="flex items-center gap-2 p-4 bg-green-50 dark:bg-green-950/20 rounded-lg border border-green-500/50">
                 <Check className="h-5 w-5 text-green-600 dark:text-green-400 flex-shrink-0" />
                 <p className="text-sm">
-                  All 4 themes with light/dark mode work out of the box! The pre-compiled CSS includes all theme variants.
+                  {t.themesPage.usingThemes.successCallout}
                 </p>
               </div>
             </CardContent>
@@ -423,13 +425,10 @@ function ThemeControls() {
               <div>
                 <h3 className="text-2xl font-bold mb-2">{t.themesPage.preview.headingExample}</h3>
                 <p className="text-muted-foreground mb-4">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
-                  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                  quis nostrud exercitation ullamco laboris.
+                  {t.themesPage.preview.sampleParagraph1}
                 </p>
                 <p className="text-muted-foreground">
-                  Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
-                  eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.
+                  {t.themesPage.preview.sampleParagraph2}
                 </p>
               </div>
 
@@ -446,7 +445,7 @@ function ThemeControls() {
                   <Button variant="secondary">{t.themesPage.preview.secondary}</Button>
                   <Button variant="outline">{t.themesPage.preview.outline}</Button>
                   <Button variant="ghost">{t.themesPage.preview.ghost}</Button>
-                  <Button variant="destructive">Destructive</Button>
+                  <Button variant="destructive">{t.themesPage.preview.destructive}</Button>
                 </div>
 
                 <div className="flex gap-2">
@@ -460,7 +459,7 @@ function ThemeControls() {
         </section>
 
         {/* Implementation */}
-        <section>
+        <section className="mb-16">
           <h2 className="text-2xl font-bold tracking-tight mb-6">{t.themesPage.implementation}</h2>
           <Card>
             <CardHeader>
@@ -513,6 +512,163 @@ function MyComponent() {
               </div>
             </CardContent>
           </Card>
+        </section>
+
+        {/* Custom Themes */}
+        <section className="mb-16">
+          <h2 className="text-2xl font-bold tracking-tight mb-4">{t.themesPage.customThemes.title}</h2>
+          <p className="text-muted-foreground mb-6">{t.themesPage.customThemes.description}</p>
+
+          <div className="space-y-6">
+            {/* Step 1 */}
+            <Card>
+              <CardHeader>
+                <CardTitle>{t.themesPage.customThemes.step1Title}</CardTitle>
+                <CardDescription>{t.themesPage.customThemes.step1Description}</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <CodeBlock
+                  language="css"
+                  code={`/* Light mode */
+.theme-ocean {
+  --color-background: hsl(200 20% 98%);
+  --color-foreground: hsl(210 40% 10%);
+  --color-primary: hsl(200 80% 50%);
+  --color-primary-foreground: hsl(0 0% 100%);
+  --color-secondary: hsl(180 60% 45%);
+  --color-secondary-foreground: hsl(180 100% 10%);
+  --color-muted: hsl(200 20% 94%);
+  --color-muted-foreground: hsl(200 10% 40%);
+  --color-accent: hsl(200 20% 94%);
+  --color-accent-foreground: hsl(210 40% 10%);
+  --color-card: hsl(0 0% 100%);
+  --color-card-foreground: hsl(210 40% 10%);
+  --color-popover: hsl(0 0% 100%);
+  --color-popover-foreground: hsl(210 40% 10%);
+  --color-border: hsl(200 20% 88%);
+  --color-input: hsl(200 20% 88%);
+  --color-ring: hsl(200 80% 50%);
+  --color-destructive: hsl(0 84% 60%);
+  --color-destructive-foreground: hsl(0 0% 100%);
+  --radius: 0.75rem;
+}
+
+/* Dark mode */
+.dark .theme-ocean,
+.theme-ocean.dark {
+  --color-background: hsl(210 40% 8%);
+  --color-foreground: hsl(200 20% 95%);
+  --color-primary: hsl(200 80% 60%);
+  --color-primary-foreground: hsl(210 40% 8%);
+  --color-card: hsl(210 35% 12%);
+  --color-card-foreground: hsl(200 20% 95%);
+  --color-border: hsl(210 30% 20%);
+  --color-input: hsl(210 30% 20%);
+}`}
+                  showLineNumbers={false}
+                />
+              </CardContent>
+            </Card>
+
+            {/* Step 2 */}
+            <Card>
+              <CardHeader>
+                <CardTitle>{t.themesPage.customThemes.step2Title}</CardTitle>
+                <CardDescription>{t.themesPage.customThemes.step2Description}</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <CodeBlock
+                  language="tsx"
+                  code={`import { DesignSystemProvider } from 'noorui-rtl'
+
+<DesignSystemProvider defaultTheme="ocean">
+  {children}
+</DesignSystemProvider>`}
+                  showLineNumbers={false}
+                />
+              </CardContent>
+            </Card>
+
+            {/* CSS Variables Reference */}
+            <Collapsible>
+              <Card>
+                <CollapsibleTrigger asChild>
+                  <CardHeader className="cursor-pointer hover:bg-muted/50 transition-colors">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <CardTitle>{t.themesPage.customThemes.variablesTitle}</CardTitle>
+                        <CardDescription>{t.themesPage.customThemes.variablesDescription}</CardDescription>
+                      </div>
+                      <ChevronDown className="h-5 w-5 text-muted-foreground transition-transform" />
+                    </div>
+                  </CardHeader>
+                </CollapsibleTrigger>
+                <CollapsibleContent>
+                  <CardContent>
+                    <div className="space-y-4">
+                      <div>
+                        <h4 className="text-sm font-semibold mb-2">{t.themesPage.customThemes.required}</h4>
+                        <div className="overflow-x-auto">
+                          <table className="w-full text-sm">
+                            <thead>
+                              <tr className="border-b">
+                                <th className="text-start py-2 pe-4 font-medium">{t.themesPage.customThemes.variableHeader}</th>
+                                <th className="text-start py-2 font-medium">{t.themesPage.customThemes.descriptionHeader}</th>
+                              </tr>
+                            </thead>
+                            <tbody className="divide-y">
+                              <tr><td className="py-2 pe-4 font-mono text-xs"><code>--color-background</code> / <code>--color-foreground</code></td><td className="py-2 text-muted-foreground">{t.themesPage.customThemes.descBackground}</td></tr>
+                              <tr><td className="py-2 pe-4 font-mono text-xs"><code>--color-primary</code> / <code>--color-primary-foreground</code></td><td className="py-2 text-muted-foreground">{t.themesPage.customThemes.descPrimary}</td></tr>
+                              <tr><td className="py-2 pe-4 font-mono text-xs"><code>--color-secondary</code> / <code>--color-secondary-foreground</code></td><td className="py-2 text-muted-foreground">{t.themesPage.customThemes.descSecondary}</td></tr>
+                              <tr><td className="py-2 pe-4 font-mono text-xs"><code>--color-muted</code> / <code>--color-muted-foreground</code></td><td className="py-2 text-muted-foreground">{t.themesPage.customThemes.descMuted}</td></tr>
+                              <tr><td className="py-2 pe-4 font-mono text-xs"><code>--color-accent</code> / <code>--color-accent-foreground</code></td><td className="py-2 text-muted-foreground">{t.themesPage.customThemes.descAccent}</td></tr>
+                              <tr><td className="py-2 pe-4 font-mono text-xs"><code>--color-card</code> / <code>--color-card-foreground</code></td><td className="py-2 text-muted-foreground">{t.themesPage.customThemes.descCard}</td></tr>
+                              <tr><td className="py-2 pe-4 font-mono text-xs"><code>--color-popover</code> / <code>--color-popover-foreground</code></td><td className="py-2 text-muted-foreground">{t.themesPage.customThemes.descPopover}</td></tr>
+                              <tr><td className="py-2 pe-4 font-mono text-xs"><code>--color-border</code> / <code>--color-input</code> / <code>--color-ring</code></td><td className="py-2 text-muted-foreground">{t.themesPage.customThemes.descBorder}</td></tr>
+                              <tr><td className="py-2 pe-4 font-mono text-xs"><code>--color-destructive</code> / <code>--color-destructive-foreground</code></td><td className="py-2 text-muted-foreground">{t.themesPage.customThemes.descDestructive}</td></tr>
+                              <tr><td className="py-2 pe-4 font-mono text-xs"><code>--radius</code></td><td className="py-2 text-muted-foreground">{t.themesPage.customThemes.descRadius}</td></tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+
+                      <Separator />
+
+                      <div>
+                        <h4 className="text-sm font-semibold mb-2">{t.themesPage.customThemes.optional}</h4>
+                        <div className="overflow-x-auto">
+                          <table className="w-full text-sm">
+                            <thead>
+                              <tr className="border-b">
+                                <th className="text-start py-2 pe-4 font-medium">{t.themesPage.customThemes.variableHeader}</th>
+                                <th className="text-start py-2 font-medium">{t.themesPage.customThemes.descriptionHeader}</th>
+                              </tr>
+                            </thead>
+                            <tbody className="divide-y">
+                              <tr><td className="py-2 pe-4 font-mono text-xs"><code>--color-success</code> / <code>--color-success-foreground</code></td><td className="py-2 text-muted-foreground">{t.themesPage.customThemes.descSuccess}</td></tr>
+                              <tr><td className="py-2 pe-4 font-mono text-xs"><code>--color-warning</code> / <code>--color-warning-foreground</code></td><td className="py-2 text-muted-foreground">{t.themesPage.customThemes.descWarning}</td></tr>
+                              <tr><td className="py-2 pe-4 font-mono text-xs"><code>--color-info</code> / <code>--color-info-foreground</code></td><td className="py-2 text-muted-foreground">{t.themesPage.customThemes.descInfo}</td></tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </CollapsibleContent>
+              </Card>
+            </Collapsible>
+
+            {/* Tip */}
+            <div className="flex items-start gap-3 p-4 bg-primary/5 rounded-lg border border-primary/10">
+              <Lightbulb className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
+              <p className="text-sm text-muted-foreground">
+                {t.themesPage.customThemes.tip}{' '}
+                <Link href="/tokens" className="text-primary hover:underline">
+                  {t.tokens.header.title} →
+                </Link>
+              </p>
+            </div>
+          </div>
         </section>
       </main>
     </div>

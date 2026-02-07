@@ -181,13 +181,14 @@ export const tokens = {
   },
 } as const
 
-export type Theme = 'minimal' | 'futuristic' | 'cozy' | 'artistic'
+export type BuiltInTheme = 'minimal' | 'futuristic' | 'cozy' | 'artistic'
+export type Theme = BuiltInTheme | (string & {})
 export type Direction = 'ltr' | 'rtl'
 
 /**
  * Theme-specific configurations
  */
-export const themeConfig: Record<Theme, {
+export const themeConfig: Record<BuiltInTheme, {
   name: string
   nameAr: string
   description: string
@@ -278,7 +279,9 @@ export const themeConfig: Record<Theme, {
  * Apply theme tokens to CSS custom properties
  */
 export function applyTheme(theme: Theme, root: HTMLElement = document.documentElement) {
-  root.classList.remove('theme-minimal', 'theme-futuristic', 'theme-cozy', 'theme-artistic')
+  root.classList.forEach(cls => {
+    if (cls.startsWith('theme-')) root.classList.remove(cls)
+  })
   root.classList.add(`theme-${theme}`)
 }
 

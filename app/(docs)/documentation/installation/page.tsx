@@ -18,13 +18,14 @@ const dependenciesCode = `{
     "noorui-rtl": "^1.0.0",
     "next": "^14.0.0",
     "react": "^18.3.0",
-    "react-dom": "^18.3.0",
-    "tailwindcss": "^3.4.0",
-    "tailwindcss-logical": "^0.9.0"
+    "react-dom": "^18.3.0"
   },
   "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.0",
     "@types/node": "^20.0.0",
     "@types/react": "^18.3.0",
+    "postcss": "^8.5.0",
+    "tailwindcss": "^4.1.0",
     "typescript": "^5.0.0"
   }
 }`
@@ -161,9 +162,9 @@ export default function InstallationPage() {
 
         {/* CSS Import */}
         <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">Import Styles</h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.importStyles}</h2>
           <p className="text-muted-foreground mb-6">
-            Import the pre-compiled CSS file in your root layout. This includes all component styles, CSS variables, theme definitions, and RTL support.
+            {t.importStylesDesc}
           </p>
           <CodeBlock code={cssImportCode} language="tsx" />
 
@@ -171,10 +172,10 @@ export default function InstallationPage() {
             <CardContent className="p-6">
               <h3 className="font-semibold mb-2 flex items-center gap-2">
                 <CheckCircle2 className="h-5 w-5 text-green-600 dark:text-green-400" />
-                No Tailwind Setup Required
+                {t.noTailwindSetup}
               </h3>
               <p className="text-sm text-muted-foreground">
-                The pre-compiled CSS includes everything you need. No Tailwind configuration or additional setup required!
+                {t.noTailwindSetupDesc}
               </p>
             </CardContent>
           </Card>
