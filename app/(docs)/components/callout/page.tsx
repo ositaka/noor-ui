@@ -29,7 +29,7 @@ const getCalloutProps = (t: typeof content.en | typeof content.ar): PropDefiniti
   },
   {
     name: 'icon',
-    type: 'LucideIcon',
+    type: 'IconComponent',
     default: 'undefined',
     required: false,
     description: t.calloutComponent.props.icon,

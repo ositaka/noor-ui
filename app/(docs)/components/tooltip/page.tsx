@@ -12,7 +12,7 @@ import {
 import { ComponentShowcase } from '@/components/docs/component-showcase'
 import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
-import { Info, Plus, Settings, Trash2 } from 'lucide-react'
+import { Info, Plus, Gear, Trash } from '@phosphor-icons/react'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 
@@ -304,7 +304,7 @@ export default function TooltipPage() {
                       <Tooltip>
                         <TooltipTrigger asChild>
                           <Button variant="ghost" size="icon">
-                            <Settings className="h-4 w-4" />
+                            <Gear className="h-4 w-4" />
                           </Button>
                         </TooltipTrigger>
                         <TooltipContent>
@@ -315,7 +315,7 @@ export default function TooltipPage() {
                       <Tooltip>
                         <TooltipTrigger asChild>
                           <Button variant="ghost" size="icon">
-                            <Trash2 className="h-4 w-4" />
+                            <Trash className="h-4 w-4" />
                           </Button>
                         </TooltipTrigger>
                         <TooltipContent>
@@ -354,7 +354,7 @@ export default function TooltipPage() {
               <Tooltip>
                 <TooltipTrigger asChild>
                   <Button variant="outline">
-                    <Settings className="me-2 h-4 w-4" />
+                    <Gear className="me-2 h-4 w-4" />
                     {t.tooltipComponent.buttons.settings}
                   </Button>
                 </TooltipTrigger>

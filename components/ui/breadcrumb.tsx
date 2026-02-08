@@ -1,7 +1,7 @@
 'use client'
 
 import * as React from 'react'
-import { ChevronRight } from 'lucide-react'
+import { CaretRight } from '@phosphor-icons/react'
 import { cn } from '../../lib/utils'
 
 const Breadcrumb = React.forwardRef<
@@ -85,7 +85,7 @@ const BreadcrumbSeparator = ({
     className={cn('[&>svg]:size-3.5', className)}
     {...props}
   >
-    {children ?? <ChevronRight className="rtl:rotate-180" />}
+    {children ?? <CaretRight className="rtl:rotate-180" />}
   </li>
 )
 BreadcrumbSeparator.displayName = 'BreadcrumbSeparator'

@@ -9,22 +9,22 @@ import Underline from '@tiptap/extension-underline'
 import { TextStyle } from '@tiptap/extension-text-style'
 import { Color } from '@tiptap/extension-color'
 import {
-  Bold,
-  Italic,
-  Underline as UnderlineIcon,
+  TextB,
+  TextItalic,
+  TextUnderline as UnderlineIcon,
   List,
-  ListOrdered,
-  Heading1,
-  Heading2,
-  Heading3,
-  Quote,
+  ListNumbers,
+  TextH,
+  TextHTwo,
+  TextHThree,
+  Quotes,
   Code,
-  Undo,
-  Redo,
-  AlignLeft,
-  AlignCenter,
-  AlignRight,
-} from 'lucide-react'
+  ArrowUUpLeft,
+  ArrowUUpRight,
+  TextAlignLeft,
+  TextAlignCenter,
+  TextAlignRight,
+} from '@phosphor-icons/react'
 import { cn } from '../../lib/utils'
 import { useDirection } from '../providers/direction-provider'
 
@@ -92,7 +92,7 @@ const Toolbar = ({ editor }: ToolbarProps) => {
           disabled={!editor.can().chain().focus().toggleBold().run()}
           title="Bold (Ctrl+B)"
         >
-          <Bold className="h-4 w-4" />
+          <TextB className="h-4 w-4" />
         </ToolbarButton>
         <ToolbarButton
           onClick={() => editor.chain().focus().toggleItalic().run()}
@@ -100,7 +100,7 @@ const Toolbar = ({ editor }: ToolbarProps) => {
           disabled={!editor.can().chain().focus().toggleItalic().run()}
           title="Italic (Ctrl+I)"
         >
-          <Italic className="h-4 w-4" />
+          <TextItalic className="h-4 w-4" />
         </ToolbarButton>
         <ToolbarButton
           onClick={() => editor.chain().focus().toggleUnderline().run()}
@@ -119,21 +119,21 @@ const Toolbar = ({ editor }: ToolbarProps) => {
           isActive={editor.isActive('heading', { level: 1 })}
           title="Heading 1"
         >
-          <Heading1 className="h-4 w-4" />
+          <TextH className="h-4 w-4" />
         </ToolbarButton>
         <ToolbarButton
           onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
           isActive={editor.isActive('heading', { level: 2 })}
           title="Heading 2"
         >
-          <Heading2 className="h-4 w-4" />
+          <TextHTwo className="h-4 w-4" />
         </ToolbarButton>
         <ToolbarButton
           onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}
           isActive={editor.isActive('heading', { level: 3 })}
           title="Heading 3"
         >
-          <Heading3 className="h-4 w-4" />
+          <TextHThree className="h-4 w-4" />
         </ToolbarButton>
       </div>
 
@@ -151,7 +151,7 @@ const Toolbar = ({ editor }: ToolbarProps) => {
           isActive={editor.isActive('orderedList')}
           title="Numbered List"
         >
-          <ListOrdered className="h-4 w-4" />
+          <ListNumbers className="h-4 w-4" />
         </ToolbarButton>
       </div>
 
@@ -162,21 +162,21 @@ const Toolbar = ({ editor }: ToolbarProps) => {
           isActive={editor.isActive({ textAlign: direction === 'rtl' ? 'right' : 'left' })}
           title={direction === 'rtl' ? 'Align Right' : 'Align Left'}
         >
-          {direction === 'rtl' ? <AlignRight className="h-4 w-4" /> : <AlignLeft className="h-4 w-4" />}
+          {direction === 'rtl' ? <TextAlignRight className="h-4 w-4" /> : <TextAlignLeft className="h-4 w-4" />}
         </ToolbarButton>
         <ToolbarButton
           onClick={() => editor.chain().focus().setTextAlign('center').run()}
           isActive={editor.isActive({ textAlign: 'center' })}
           title="Align Center"
         >
-          <AlignCenter className="h-4 w-4" />
+          <TextAlignCenter className="h-4 w-4" />
         </ToolbarButton>
         <ToolbarButton
           onClick={() => editor.chain().focus().setTextAlign(direction === 'rtl' ? 'left' : 'right').run()}
           isActive={editor.isActive({ textAlign: direction === 'rtl' ? 'left' : 'right' })}
           title={direction === 'rtl' ? 'Align Left' : 'Align Right'}
         >
-          {direction === 'rtl' ? <AlignLeft className="h-4 w-4" /> : <AlignRight className="h-4 w-4" />}
+          {direction === 'rtl' ? <TextAlignLeft className="h-4 w-4" /> : <TextAlignRight className="h-4 w-4" />}
         </ToolbarButton>
       </div>
 
@@ -187,7 +187,7 @@ const Toolbar = ({ editor }: ToolbarProps) => {
           isActive={editor.isActive('blockquote')}
           title="Quote"
         >
-          <Quote className="h-4 w-4" />
+          <Quotes className="h-4 w-4" />
         </ToolbarButton>
         <ToolbarButton
           onClick={() => editor.chain().focus().toggleCodeBlock().run()}
@@ -205,14 +205,14 @@ const Toolbar = ({ editor }: ToolbarProps) => {
           disabled={!editor.can().chain().focus().undo().run()}
           title="Undo (Ctrl+Z)"
         >
-          <Undo className="h-4 w-4" />
+          <ArrowUUpLeft className="h-4 w-4" />
         </ToolbarButton>
         <ToolbarButton
           onClick={() => editor.chain().focus().redo().run()}
           disabled={!editor.can().chain().focus().redo().run()}
           title="Redo (Ctrl+Y)"
         >
-          <Redo className="h-4 w-4" />
+          <ArrowUUpRight className="h-4 w-4" />
         </ToolbarButton>
       </div>
     </div>

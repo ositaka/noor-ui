@@ -3,7 +3,7 @@ import { cva, type VariantProps } from 'class-variance-authority'
 import { cn } from '../../lib/utils'
 import { Avatar, AvatarFallback, AvatarImage } from './avatar'
 import { Button } from './button'
-import { Copy, RotateCw, User, Bot, Settings } from 'lucide-react'
+import { Copy, ArrowClockwise, User, Robot, Gear } from '@phosphor-icons/react'
 import { useDirection } from '../providers/direction-provider'
 import { content as i18nContent } from '../../lib/i18n'
 
@@ -115,9 +115,9 @@ const ChatMessage = React.forwardRef<HTMLDivElement, ChatMessageProps>(
         case 'user':
           return <User className="h-4 w-4" />
         case 'assistant':
-          return <Bot className="h-4 w-4" />
+          return <Robot className="h-4 w-4" />
         case 'system':
-          return <Settings className="h-4 w-4" />
+          return <Gear className="h-4 w-4" />
       }
     }
 
@@ -206,7 +206,7 @@ const ChatMessage = React.forwardRef<HTMLDivElement, ChatMessageProps>(
                   onClick={onRegenerate}
                   className="h-7 text-xs"
                 >
-                  <RotateCw className={cn('h-3 w-3', isRTL ? 'ms-1' : 'me-1')} />
+                  <ArrowClockwise className={cn('h-3 w-3', isRTL ? 'ms-1' : 'me-1')} />
                   {t.ui.components.regenerate}
                 </Button>
               )}

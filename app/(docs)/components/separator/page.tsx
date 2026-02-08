@@ -9,7 +9,7 @@ import { ComponentShowcase } from '@/components/docs/component-showcase'
 import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
 import { BestPractices } from '@/components/docs/best-practices'
-import { Home, Settings, User, Bell } from 'lucide-react'
+import { House, Gear, User, Bell } from '@phosphor-icons/react'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 
@@ -102,12 +102,12 @@ const navigationCode = `<nav className="flex items-center gap-2 p-4">
 
 const listCode = `<ul className="space-y-3">
   <li className="flex items-center gap-3">
-    <Home className="h-4 w-4" />
+    <House className="h-4 w-4" />
     <span>Dashboard</span>
   </li>
   <Separator />
   <li className="flex items-center gap-3">
-    <Settings className="h-4 w-4" />
+    <Gear className="h-4 w-4" />
     <span>Settings</span>
   </li>
   <Separator />
@@ -346,12 +346,12 @@ export default function SeparatorPage() {
                 <CardContent className="p-6">
                   <ul className="space-y-3">
                     <li className="flex items-center gap-3">
-                      <Home className="h-4 w-4" />
+                      <House className="h-4 w-4" />
                       <span>{t.separatorComponent.examples.dashboard}</span>
                     </li>
                     <Separator />
                     <li className="flex items-center gap-3">
-                      <Settings className="h-4 w-4" />
+                      <Gear className="h-4 w-4" />
                       <span>{t.separatorComponent.examples.settings}</span>
                     </li>
                     <Separator />

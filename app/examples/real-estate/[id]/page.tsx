@@ -9,23 +9,23 @@ import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import {
-  Home,
+  House,
   MapPin,
   Bed,
-  Bath,
+  Bathtub,
   Square,
   Calendar,
   Heart,
-  Share2,
+  ShareNetwork,
   Phone,
-  Mail,
-  MessageCircle,
-  CheckCircle2,
+  EnvelopeSimple,
+  ChatCircle,
+  CheckCircle,
   Car,
-  Building2,
+  Buildings,
   Ruler,
-  DoorOpen,
-} from 'lucide-react'
+  Door,
+} from '@phosphor-icons/react'
 import { useDirection } from '@/components/providers/direction-provider'
 import { DirectionToggle } from '@/components/docs/direction-toggle'
 import { content } from '@/lib/i18n'
@@ -182,7 +182,7 @@ export default function PropertyDetailPage({ params }: { params: { id: string } 
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center">
-          <Home className="h-16 w-16 mx-auto text-muted-foreground mb-4" />
+          <House className="h-16 w-16 mx-auto text-muted-foreground mb-4" />
           <h2 className="text-2xl font-bold mb-2">
             {locale === 'ar' ? 'العقار غير موجود' : 'Property Not Found'}
           </h2>
@@ -228,7 +228,7 @@ export default function PropertyDetailPage({ params }: { params: { id: string } 
       value: property.bedrooms,
     },
     {
-      icon: Bath,
+      icon: Bathtub,
       label: locale === 'ar' ? 'الحمامات' : 'Bathrooms',
       value: property.bathrooms,
     },
@@ -243,7 +243,7 @@ export default function PropertyDetailPage({ params }: { params: { id: string } 
       value: property.parking,
     },
     {
-      icon: Building2,
+      icon: Buildings,
       label: locale === 'ar' ? 'الطوابق' : 'Floors',
       value: property.floors,
     },
@@ -307,7 +307,7 @@ export default function PropertyDetailPage({ params }: { params: { id: string } 
             <Card className="overflow-hidden">
               <div className="relative h-[400px] bg-muted">
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <Home className="h-32 w-32 text-muted-foreground/30" />
+                  <House className="h-32 w-32 text-muted-foreground/30" />
                 </div>
                 <div className="absolute top-4 start-4 flex gap-2">
                   <Badge variant={property.status === 'sale' ? 'default' : 'secondary'} className="text-sm">
@@ -329,7 +329,7 @@ export default function PropertyDetailPage({ params }: { params: { id: string } 
                     <Heart className="h-5 w-5" />
                   </Button>
                   <Button size="icon" variant="secondary" className="rounded-full bg-white/90">
-                    <Share2 className="h-5 w-5" />
+                    <ShareNetwork className="h-5 w-5" />
                   </Button>
                 </div>
               </div>
@@ -406,7 +406,7 @@ export default function PropertyDetailPage({ params }: { params: { id: string } 
                       <div className="grid grid-cols-2 gap-3">
                         {(locale === 'ar' ? property.amenitiesAr : property.amenities).map((amenity, idx) => (
                           <div key={idx} className="flex items-center gap-2">
-                            <CheckCircle2 className="h-4 w-4 text-green-500" />
+                            <CheckCircle className="h-4 w-4 text-green-500" />
                             <span className="text-sm">{amenity}</span>
                           </div>
                         ))}
@@ -456,11 +456,11 @@ export default function PropertyDetailPage({ params }: { params: { id: string } 
                   {locale === 'ar' ? 'اتصل الآن' : 'Call Now'}
                 </Button>
                 <Button variant="outline" className="w-full" size="lg">
-                  <MessageCircle className="h-4 w-4 me-2" />
+                  <ChatCircle className="h-4 w-4 me-2" />
                   {locale === 'ar' ? 'واتساب' : 'WhatsApp'}
                 </Button>
                 <Button variant="outline" className="w-full" size="lg">
-                  <Mail className="h-4 w-4 me-2" />
+                  <EnvelopeSimple className="h-4 w-4 me-2" />
                   {locale === 'ar' ? 'إرسال بريد' : 'Email'}
                 </Button>
               </CardContent>

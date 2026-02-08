@@ -1,7 +1,7 @@
 'use client'
 
 import * as React from 'react'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { CaretLeft, CaretRight } from '@phosphor-icons/react'
 import { cn } from '../../lib/utils'
 import { Button } from './button'
 import { useDirection } from '../providers/direction-provider'
@@ -302,7 +302,7 @@ export const Calendar = React.forwardRef<HTMLDivElement, CalendarProps>(
               onClick={isRTL ? goToNextMonth : goToPreviousMonth}
               className="h-8 w-8"
             >
-              <ChevronLeft className="h-4 w-4" />
+              <CaretLeft className="h-4 w-4" />
             </Button>
             <Button
               type="button"
@@ -311,7 +311,7 @@ export const Calendar = React.forwardRef<HTMLDivElement, CalendarProps>(
               onClick={isRTL ? goToPreviousMonth : goToNextMonth}
               className="h-8 w-8"
             >
-              <ChevronRight className="h-4 w-4" />
+              <CaretRight className="h-4 w-4" />
             </Button>
           </div>
 

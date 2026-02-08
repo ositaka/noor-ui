@@ -6,16 +6,16 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import {
-  PenTool,
+  PenNib,
   ShoppingCart,
   Rocket,
   FileCode,
-  BarChart3,
+  ChartBar,
   Download,
-  Github,
-  Sparkles,
-  type LucideIcon,
-} from 'lucide-react'
+  GithubLogo,
+  Sparkle,
+  type Icon as PhosphorIcon,
+} from '@phosphor-icons/react'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 
@@ -24,7 +24,7 @@ interface Starter {
   description: string
   longDescription: string
   href: string
-  icon: LucideIcon
+  icon: PhosphorIcon
   tags: string[]
   features: string[]
   stack: string[]
@@ -38,7 +38,7 @@ const starters: Starter[] = [
     description: 'Production-ready multilingual blog with 4 languages, MDX support, and Arabic typography.',
     longDescription: 'A complete multilingual blog starter with English, Arabic, French, and Urdu support. Features MDX content, Supabase CMS, rich components (callouts, pull quotes, code blocks), and perfect RTL/LTR layouts. Live demo available!',
     href: 'https://github.com/ositaka/kitab--noorui-blog-starter',
-    icon: PenTool,
+    icon: PenNib,
     tags: ['Multilingual', '4 Languages', 'MDX', 'RTL'],
     features: [
       '4 languages: EN, AR, FR, UR',
@@ -112,7 +112,7 @@ const starters: Starter[] = [
     description: 'Data visualization and reporting platform with real-time metrics and charts.',
     longDescription: 'A comprehensive analytics platform with interactive charts, custom reports, data export, and real-time updates. Perfect for building internal tools or client dashboards.',
     href: '/starters/analytics',
-    icon: BarChart3,
+    icon: ChartBar,
     tags: ['Data Viz', 'Charts', 'Real-time'],
     features: [
       'Interactive charts and graphs',
@@ -174,7 +174,7 @@ export default function StartersPage() {
             <h1 className="text-4xl font-bold tracking-tight">
               {t.startersPage.title}
             </h1>
-            <Sparkles className="h-8 w-8 text-primary" />
+            <Sparkle className="h-8 w-8 text-primary" />
           </div>
           <p className="text-xl text-muted-foreground mb-6">
             {t.startersPage.description}
@@ -188,7 +188,7 @@ export default function StartersPage() {
             </Link>
             <Link href="https://github.com/topics/noor-ui" target="_blank" rel="noopener noreferrer">
               <Button variant="outline">
-                <Github className="h-4 w-4 me-2" />
+                <GithubLogo className="h-4 w-4 me-2" />
                 {t.startersPage.buttons.viewGitHub}
               </Button>
             </Link>
@@ -220,7 +220,7 @@ export default function StartersPage() {
                 </div>
                 <div>
                   <h3 className="font-semibold mb-2 flex items-center gap-2">
-                    <Sparkles className="h-5 w-5 text-primary" />
+                    <Sparkle className="h-5 w-5 text-primary" />
                     {t.startersPage.sections.learnPatterns}
                   </h3>
                   <p className="text-sm text-muted-foreground">
@@ -304,7 +304,7 @@ export default function StartersPage() {
                   <div className="flex flex-wrap gap-3 mt-auto">
                     <Link href={starter.href} target="_blank" rel="noopener noreferrer" className="flex-1">
                       <Button className="w-full">
-                        <Github className="h-4 w-4 me-2" />
+                        <GithubLogo className="h-4 w-4 me-2" />
                         {t.startersPage.buttons.viewGitHub}
                       </Button>
                     </Link>

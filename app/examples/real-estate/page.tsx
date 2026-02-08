@@ -35,20 +35,20 @@ import {
   PaginationPrevious,
 } from '@/components/ui/pagination'
 import {
-  Home,
+  House,
   MapPin,
   Bed,
-  Bath,
+  Bathtub,
   Square,
-  TrendingUp,
-  Search,
-  Filter,
+  TrendUp,
+  MagnifyingGlass,
+  Funnel,
   Heart,
-  Share2,
-  Building2,
+  ShareNetwork,
+  Buildings,
   X,
-  SlidersHorizontal,
-} from 'lucide-react'
+  Sliders,
+} from '@phosphor-icons/react'
 import { useDirection } from '@/components/providers/direction-provider'
 import { DirectionToggle } from '@/components/docs/direction-toggle'
 import { content } from '@/lib/i18n'
@@ -264,7 +264,7 @@ export default function RealEstatePage() {
       label: 'إجمالي العقارات',
       labelEn: 'Total Properties',
       value: filteredProperties.length.toLocaleString(),
-      icon: Building2,
+      icon: Buildings,
       trend: '+12%',
     },
     {
@@ -274,21 +274,21 @@ export default function RealEstatePage() {
         filteredProperties.length > 0
           ? `${(filteredProperties.reduce((sum, p) => sum + p.price, 0) / filteredProperties.length / 1000000).toFixed(1)}M`
           : '0',
-      icon: TrendingUp,
+      icon: TrendUp,
       trend: '+8%',
     },
     {
       label: 'عقارات للبيع',
       labelEn: 'For Sale',
       value: filteredProperties.filter((p) => p.status === 'sale').length.toLocaleString(),
-      icon: Home,
+      icon: House,
       trend: '+5%',
     },
     {
       label: 'عقارات للإيجار',
       labelEn: 'For Rent',
       value: filteredProperties.filter((p) => p.status === 'rent').length.toLocaleString(),
-      icon: Home,
+      icon: House,
       trend: '+15%',
     },
   ]
@@ -398,7 +398,7 @@ export default function RealEstatePage() {
             <div className="grid gap-4 md:grid-cols-5">
               <div className="md:col-span-2">
                 <div className="relative">
-                  <Search className="absolute start-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                  <MagnifyingGlass className="absolute start-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                   <Input
                     placeholder={locale === 'ar' ? 'ابحث عن موقع أو مدينة...' : 'Search location or city...'}
                     value={searchQuery}
@@ -466,7 +466,7 @@ export default function RealEstatePage() {
             <Dialog open={filterDialogOpen} onOpenChange={setFilterDialogOpen}>
               <DialogTrigger asChild>
                 <Button variant="outline" size="sm">
-                  <SlidersHorizontal className="h-4 w-4 me-2" />
+                  <Sliders className="h-4 w-4 me-2" />
                   {locale === 'ar' ? 'مزيد من الفلاتر' : 'More Filters'}
                   {activeFiltersCount > 0 && (
                     <Badge variant="secondary" className="ms-2">
@@ -601,7 +601,7 @@ export default function RealEstatePage() {
         {paginatedProperties.length === 0 ? (
           <Card className="p-12">
             <div className="text-center">
-              <Home className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
+              <House className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
               <h3 className="text-lg font-semibold mb-2">
                 {locale === 'ar' ? 'لم يتم العثور على عقارات' : 'No Properties Found'}
               </h3>
@@ -654,7 +654,7 @@ export default function RealEstatePage() {
                     onClick: () => console.log('Favorite clicked'),
                   },
                   {
-                    icon: Share2,
+                    icon: ShareNetwork,
                     label: locale === 'ar' ? 'مشاركة' : 'Share',
                     onClick: () => console.log('Share clicked'),
                   },
@@ -668,7 +668,7 @@ export default function RealEstatePage() {
                     label: locale === 'ar' ? 'غرف النوم' : 'Bedrooms',
                   },
                   {
-                    icon: Bath,
+                    icon: Bathtub,
                     value: property.bathrooms,
                     label: locale === 'ar' ? 'الحمامات' : 'Bathrooms',
                   },
@@ -699,7 +699,7 @@ export default function RealEstatePage() {
                       }
                       description={locale === 'ar' ? property.descriptionAr : property.description}
                       price={formatPrice(property.price, property.status)}
-                      placeholderIcon={Home}
+                      placeholderIcon={House}
                       badges={badges}
                       actions={actions}
                       stats={stats}

@@ -113,7 +113,7 @@ hijriDateComponent: {
       },
       installation: {
         copyComponent: 'انسخ والصق كود المكون في مشروعك:',
-        dependencies: 'التبعيات: يستخدم هذا المكون أيقونات Lucide التي يجب أن تكون مثبتة بالفعل في مشروعك.',
+        dependencies: 'التبعيات: يستخدم هذا المكون أيقونات Phosphor التي يجب أن تكون مثبتة بالفعل في مشروعك.',
       },
       examples: {
         default: 'افتراضي',
@@ -190,7 +190,7 @@ prayerTimesComponent: {
       },
       installation: {
         copyComponent: 'انسخ والصق كود المكون في مشروعك:',
-        dependencies: 'التبعيات: يستخدم هذا المكون Card و Badge وأيقونات Lucide التي يجب أن تكون مثبتة بالفعل في مشروعك.',
+        dependencies: 'التبعيات: يستخدم هذا المكون Card و Badge وأيقونات Phosphor التي يجب أن تكون مثبتة بالفعل في مشروعك.',
       },
       examples: {
         default: 'افتراضي',

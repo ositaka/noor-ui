@@ -456,7 +456,7 @@ Always include accessibility features as a checklist:
 Use Alert component with Info icon:
 
 ```typescript
-import { Info } from 'lucide-react'
+import { Info } from '@phosphor-icons/react'
 
 <Alert>
   <Info className="h-4 w-4" />

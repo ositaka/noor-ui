@@ -7,7 +7,7 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { ComponentShowcase } from '@/components/docs/component-showcase'
 import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
-import { Terminal, AlertCircle, CheckCircle2, AlertTriangle } from 'lucide-react'
+import { Terminal, WarningCircle, CheckCircle, Warning } from '@phosphor-icons/react'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 
@@ -24,7 +24,7 @@ const getAlertProps = (t: typeof content.en | typeof content.ar): PropDefinition
 const installCode = `npm install noorui-rtl`
 
 const basicUsageCode = `import { Alert, AlertDescription, AlertTitle } from 'noorui-rtl'
-import { Terminal } from 'lucide-react'
+import { Terminal } from '@phosphor-icons/react'
 
 <Alert>
   <Terminal className="h-4 w-4" />
@@ -35,7 +35,7 @@ import { Terminal } from 'lucide-react'
 </Alert>`
 
 const destructiveCode = `<Alert variant="destructive">
-  <AlertCircle className="h-4 w-4" />
+  <WarningCircle className="h-4 w-4" />
   <AlertTitle>Error</AlertTitle>
   <AlertDescription>
     Your session has expired. Please log in again.
@@ -43,7 +43,7 @@ const destructiveCode = `<Alert variant="destructive">
 </Alert>`
 
 const successCode = `<Alert variant="success">
-  <CheckCircle2 className="h-4 w-4" />
+  <CheckCircle className="h-4 w-4" />
   <AlertTitle>Success</AlertTitle>
   <AlertDescription>
     Your changes have been saved successfully.
@@ -51,7 +51,7 @@ const successCode = `<Alert variant="success">
 </Alert>`
 
 const warningCode = `<Alert variant="warning">
-  <AlertTriangle className="h-4 w-4" />
+  <Warning className="h-4 w-4" />
   <AlertTitle>Warning</AlertTitle>
   <AlertDescription>
     Your free trial will expire in 3 days.
@@ -159,7 +159,7 @@ export default function AlertPage() {
               <Card>
                 <CardContent className="p-6">
                   <Alert variant="destructive">
-                    <AlertCircle className="h-4 w-4" />
+                    <WarningCircle className="h-4 w-4" />
                     <AlertTitle>{t.alertComponent.demo.error}</AlertTitle>
                     <AlertDescription>
                       {t.alertComponent.demo.errorDesc}
@@ -178,7 +178,7 @@ export default function AlertPage() {
               <Card>
                 <CardContent className="p-6">
                   <Alert variant="success">
-                    <CheckCircle2 className="h-4 w-4" />
+                    <CheckCircle className="h-4 w-4" />
                     <AlertTitle>{t.alertComponent.demo.success}</AlertTitle>
                     <AlertDescription>
                       {t.alertComponent.demo.successDesc}
@@ -197,7 +197,7 @@ export default function AlertPage() {
               <Card>
                 <CardContent className="p-6">
                   <Alert variant="warning">
-                    <AlertTriangle className="h-4 w-4" />
+                    <Warning className="h-4 w-4" />
                     <AlertTitle>{t.alertComponent.demo.warning}</AlertTitle>
                     <AlertDescription>
                       {t.alertComponent.demo.warningDesc}

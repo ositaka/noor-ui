@@ -11,18 +11,18 @@ import {Tabs, TabsContent, TabsList, TabsTrigger} from '@/components/ui/tabs'
 import {ArabicNumber} from '@/components/ui/arabic-number'
 import {formatSAR} from '@/lib/arabic-numbers'
 import {
-  CheckCircle2,
+  CheckCircle,
   CreditCard,
   Heart,
-  Home,
+  House,
   MapPin,
   Package,
-  Share2,
+  ShareNetwork,
   ShieldCheck,
   ShoppingCart,
   Star,
   Truck,
-} from 'lucide-react'
+} from '@phosphor-icons/react'
 import {useDirection} from '@/components/providers/direction-provider'
 import {DirectionToggle} from '@/components/docs/direction-toggle'
 import {content} from '@/lib/i18n'
@@ -227,7 +227,7 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
           <div className="flex items-center gap-6">
             <Link href="/" className="flex items-center gap-2">
               <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center">
-                <Home className="h-5 w-5 text-primary-foreground" />
+                <House className="h-5 w-5 text-primary-foreground" />
               </div>
               <span className="font-bold text-xl hidden sm:inline">
                 {t.marketplace.header.title}
@@ -390,7 +390,7 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
                         {isRTL ? product.vendor.nameAr : product.vendor.name}
                       </Link>
                       {product.vendor.verified && (
-                        <CheckCircle2 className="h-4 w-4 text-primary shrink-0" />
+                        <CheckCircle className="h-4 w-4 text-primary shrink-0" />
                       )}
                     </div>
                     <div className="flex items-center gap-1 mb-2">
@@ -446,7 +446,7 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
                   {t.marketplaceProduct.actions.wishlist}
                 </Button>
                 <Button variant="outline" size="lg">
-                  <Share2 className={cn('h-5 w-5', isRTL ? 'ms-2' : 'me-2')} />
+                  <ShareNetwork className={cn('h-5 w-5', isRTL ? 'ms-2' : 'me-2')} />
                   {t.marketplaceProduct.actions.share}
                 </Button>
               </div>
@@ -506,7 +506,7 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
                     <ul className="space-y-2">
                       {(isRTL ? product.featuresAr : product.features).map((feature, index) => (
                         <li key={index} className="flex items-start gap-2">
-                          <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                          <CheckCircle className="h-5 w-5 text-primary shrink-0 mt-0.5" />
                           <span className="text-muted-foreground">{feature}</span>
                         </li>
                       ))}

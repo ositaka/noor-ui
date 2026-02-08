@@ -5,18 +5,18 @@ import { type NodeProps, type Node } from '@xyflow/react'
 import { WorkflowNode, type WorkflowNodeData } from './workflow-node'
 import {
   Play,
-  Zap,
+  Lightning,
   Clock,
   Globe,
   Brain,
   Code,
-  Filter,
-  Send,
-  Save,
+  Funnel,
+  PaperPlaneTilt,
+  FloppyDisk,
   Bell,
   Database,
-  Sparkles,
-} from 'lucide-react'
+  Sparkle,
+} from '@phosphor-icons/react'
 
 // Trigger Node - Starting points for workflows
 export function TriggerNode(props: NodeProps<Node<WorkflowNodeData>>) {
@@ -58,7 +58,7 @@ export function ScheduleTriggerNode(props: NodeProps<Node<WorkflowNodeData>>) {
 export function ActionNode(props: NodeProps<Node<WorkflowNodeData>>) {
   const data = {
     ...props.data,
-    icon: props.data.icon || Zap,
+    icon: props.data.icon || Lightning,
     type: props.data.type || 'Action',
     typeAr: props.data.typeAr || 'إجراء',
   }
@@ -82,7 +82,7 @@ export function CodeActionNode(props: NodeProps<Node<WorkflowNodeData>>) {
 export function FilterNode(props: NodeProps<Node<WorkflowNodeData>>) {
   const data = {
     ...props.data,
-    icon: Filter,
+    icon: Funnel,
     type: 'Filter',
     typeAr: 'تصفية',
   }
@@ -106,7 +106,7 @@ export function AINode(props: NodeProps<Node<WorkflowNodeData>>) {
 export function LLMNode(props: NodeProps<Node<WorkflowNodeData>>) {
   const data = {
     ...props.data,
-    icon: Sparkles,
+    icon: Sparkle,
     type: 'LLM',
     typeAr: 'نموذج لغوي',
   }
@@ -130,7 +130,7 @@ export function EmbeddingNode(props: NodeProps<Node<WorkflowNodeData>>) {
 export function OutputNode(props: NodeProps<Node<WorkflowNodeData>>) {
   const data = {
     ...props.data,
-    icon: props.data.icon || Send,
+    icon: props.data.icon || PaperPlaneTilt,
     type: props.data.type || 'Output',
     typeAr: props.data.typeAr || 'إخراج',
   }
@@ -142,7 +142,7 @@ export function OutputNode(props: NodeProps<Node<WorkflowNodeData>>) {
 export function SaveNode(props: NodeProps<Node<WorkflowNodeData>>) {
   const data = {
     ...props.data,
-    icon: Save,
+    icon: FloppyDisk,
     type: 'Save',
     typeAr: 'حفظ',
   }

@@ -10,7 +10,7 @@ import { Separator } from '@/components/ui/separator'
 import { ComponentShowcase } from '@/components/docs/component-showcase'
 import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
-import { Zap, Cpu, FileOutput, Mail, AlertCircle } from 'lucide-react'
+import { Lightning, Cpu, FileArrowUp, Envelope, WarningCircle } from '@phosphor-icons/react'
 import { type Node, type Edge } from '@xyflow/react'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
@@ -54,7 +54,7 @@ const getWorkflowNodeProps = (componentT: any): PropDefinition[] => [
   },
   {
     name: 'icon',
-    type: 'LucideIcon',
+    type: 'IconComponent',
     required: false,
     description: componentT.props.icon,
   },
@@ -79,11 +79,11 @@ const getWorkflowNodeProps = (componentT: any): PropDefinition[] => [
   },
 ]
 
-const installCode = `npm install noorui-rtl @xyflow/react lucide-react`
+const installCode = `npm install noorui-rtl @xyflow/react @phosphor-icons/react`
 
 const basicUsageCode = `import { WorkflowNode } from 'noorui-rtl'
 import { WorkflowCanvas } from 'noorui-rtl'
-import { Zap } from 'lucide-react'
+import { Lightning } from '@phosphor-icons/react'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 
@@ -96,7 +96,7 @@ const nodes = [
       label: 'Email Trigger',
       description: 'When email received',
       type: 'trigger',
-      icon: Zap
+      icon: Lightning
     }
   }
 ]
@@ -119,7 +119,7 @@ const differentTypesCode = `const nodes = [
       label: 'Email Trigger',
       description: 'When email received',
       type: 'trigger',
-      icon: Zap
+      icon: Lightning
     }
   },
   {
@@ -141,7 +141,7 @@ const differentTypesCode = `const nodes = [
       label: 'Send Output',
       description: 'Forward to Slack',
       type: 'action',
-      icon: FileOutput
+      icon: FileArrowUp
     }
   }
 ]`
@@ -155,7 +155,7 @@ const withStatusCode = `const nodes = [
       label: 'Active Task',
       description: 'Currently running',
       status: 'active',
-      icon: Zap
+      icon: Lightning
     }
   },
   {
@@ -177,7 +177,7 @@ const withStatusCode = `const nodes = [
       label: 'Failed Task',
       description: 'Error occurred',
       status: 'error',
-      icon: FileOutput
+      icon: FileArrowUp
     }
   }
 ]`
@@ -191,7 +191,7 @@ const withChildrenCode = `const nodes = [
       label: 'Email Filter',
       description: 'Filter incoming emails',
       type: 'filter',
-      icon: Mail,
+      icon: Envelope,
       children: (
         <div className="text-xs space-y-1">
           <div className="font-medium">Conditions:</div>
@@ -217,7 +217,7 @@ const rtlCode = `const nodes = [
       descriptionAr: 'عند استلام البريد',
       type: 'trigger',
       typeAr: 'محفز',
-      icon: Zap,
+      icon: Lightning,
       isRTL: true
     }
   }
@@ -243,7 +243,7 @@ const previewNodes: Node[] = [
       label: 'Trigger',
       description: 'When email received',
       type: 'trigger',
-      icon: Zap,
+      icon: Lightning,
       status: 'active',
     },
   },
@@ -267,7 +267,7 @@ const previewNodes: Node[] = [
       label: 'Output',
       description: 'Send to Slack',
       type: 'action',
-      icon: FileOutput,
+      icon: FileArrowUp,
     },
   },
 ]
@@ -286,7 +286,7 @@ const statusNodes: Node[] = [
       label: 'Active',
       description: 'Currently running',
       status: 'active',
-      icon: Zap,
+      icon: Lightning,
     },
   },
   {
@@ -308,7 +308,7 @@ const statusNodes: Node[] = [
       label: 'Error',
       description: 'Failed',
       status: 'error',
-      icon: FileOutput,
+      icon: FileArrowUp,
     },
   },
   {
@@ -319,7 +319,7 @@ const statusNodes: Node[] = [
       label: 'Inactive',
       description: 'Not running',
       status: 'inactive',
-      icon: Mail,
+      icon: Envelope,
     },
   },
 ]
@@ -333,7 +333,7 @@ const childrenNode: Node[] = [
       label: 'Email Filter',
       description: 'Filter incoming emails',
       type: 'filter',
-      icon: Mail,
+      icon: Envelope,
       children: (
         <div className="text-xs space-y-1">
           <div className="font-medium">Conditions:</div>
@@ -381,7 +381,7 @@ export default function WorkflowNodePage() {
           <div className="flex items-center gap-3 mb-4">
             <h1 className="text-4xl font-bold tracking-tight">Workflow Node</h1>
             <Badge variant="secondary" className="flex items-center gap-1.5">
-              <AlertCircle className="h-3 w-3" />
+              <WarningCircle className="h-3 w-3" />
               Work in Progress
             </Badge>
           </div>
@@ -390,7 +390,7 @@ export default function WorkflowNodePage() {
             {workflowNodeT.description}
           </p>
             <div className="flex items-start gap-2 p-3 bg-yellow-50 dark:bg-yellow-950/20 border border-yellow-200 dark:border-yellow-800 rounded-lg max-w-3xl">
-              <AlertCircle className="h-4 w-4 text-yellow-600 dark:text-yellow-500 mt-0.5 flex-shrink-0" />
+              <WarningCircle className="h-4 w-4 text-yellow-600 dark:text-yellow-500 mt-0.5 flex-shrink-0" />
               <p className="text-sm text-yellow-800 dark:text-yellow-200">
                 <strong>Note:</strong> This component is currently under development. Some features may not work as expected. We&apos;re actively working on improvements and will update the documentation once stable.
               </p>
@@ -564,7 +564,7 @@ export default function WorkflowNodePage() {
                             label: 'Email Trigger',
                             description: 'When email received',
                             type: 'trigger',
-                            icon: Zap,
+                            icon: Lightning,
                             status: 'active',
                           },
                         },
@@ -603,7 +603,7 @@ export default function WorkflowNodePage() {
                             descriptionAr: 'عند استلام البريد',
                             type: 'trigger',
                             typeAr: 'محفز',
-                            icon: Zap,
+                            icon: Lightning,
                             status: 'active',
                             isRTL: true,
                           },

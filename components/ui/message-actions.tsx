@@ -3,14 +3,14 @@ import { cn } from '../../lib/utils'
 import { Button } from './button'
 import {
   Copy,
-  RotateCw,
-  Edit,
-  Share2,
+  ArrowClockwise,
+  PencilSimple,
+  ShareNetwork,
   Flag,
   ThumbsUp,
   ThumbsDown,
   Check,
-} from 'lucide-react'
+} from '@phosphor-icons/react'
 import { useDirection } from '../providers/direction-provider'
 import { content } from '../../lib/i18n'
 
@@ -150,7 +150,7 @@ const MessageActions = React.forwardRef<HTMLDivElement, MessageActionsProps>(
             onClick={onRegenerate}
             className={cn('h-7', !compact && 'text-xs')}
           >
-            <RotateCw className={cn('h-3 w-3', !compact && (isRTL ? 'ms-1' : 'me-1'))} />
+            <ArrowClockwise className={cn('h-3 w-3', !compact && (isRTL ? 'ms-1' : 'me-1'))} />
             {!compact && t.ui.components.regenerate}
           </Button>
         )}
@@ -162,7 +162,7 @@ const MessageActions = React.forwardRef<HTMLDivElement, MessageActionsProps>(
             onClick={onEdit}
             className={cn('h-7', !compact && 'text-xs')}
           >
-            <Edit className={cn('h-3 w-3', !compact && (isRTL ? 'ms-1' : 'me-1'))} />
+            <PencilSimple className={cn('h-3 w-3', !compact && (isRTL ? 'ms-1' : 'me-1'))} />
             {!compact && t.ui.components.edit}
           </Button>
         )}
@@ -174,7 +174,7 @@ const MessageActions = React.forwardRef<HTMLDivElement, MessageActionsProps>(
             onClick={onShare}
             className={cn('h-7', !compact && 'text-xs')}
           >
-            <Share2 className={cn('h-3 w-3', !compact && (isRTL ? 'ms-1' : 'me-1'))} />
+            <ShareNetwork className={cn('h-3 w-3', !compact && (isRTL ? 'ms-1' : 'me-1'))} />
             {!compact && t.ui.components.share}
           </Button>
         )}

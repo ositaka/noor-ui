@@ -4,7 +4,7 @@ import * as React from 'react'
 import Link from 'next/link'
 import { Card, CardContent } from '@/components/ui/card'
 import { CodeBlock } from '@/components/docs/code-block'
-import { Zap, Rocket, Code2 } from 'lucide-react'
+import { Lightning, Rocket, CodeBlock as CodeBlockIcon } from '@phosphor-icons/react'
 import { Button } from '@/components/ui/button'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
@@ -159,7 +159,7 @@ export default function QuickStartPage() {
         {/* Page Header */}
         <div className="max-w-3xl mb-12">
           <div className="flex items-center gap-3 mb-4">
-            <Zap className="h-10 w-10 text-primary" />
+            <Lightning className="h-10 w-10 text-primary" />
             <h1 className="text-4xl font-bold tracking-tight">{t.title}</h1>
           </div>
           <p className="text-xl text-muted-foreground">
@@ -214,7 +214,7 @@ export default function QuickStartPage() {
           <Card className="mt-6 border-blue-500/50 bg-blue-50 dark:bg-blue-950/20">
             <CardContent className="p-6">
               <h3 className="font-semibold mb-2 flex items-center gap-2">
-                <Code2 className="h-5 w-5 text-blue-600 dark:text-blue-400" />
+                <CodeBlockIcon className="h-5 w-5 text-blue-600 dark:text-blue-400" />
                 Note
               </h3>
               <p className="text-sm text-muted-foreground">

@@ -4,7 +4,7 @@ import * as React from 'react'
 import Link from 'next/link'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { CodeBlock } from '@/components/docs/code-block'
-import { Code, Layout, FormInput } from 'lucide-react'
+import { Code, Layout, Textbox } from '@phosphor-icons/react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -107,7 +107,7 @@ export default function ExamplesPage() {
 
         <section className="mb-16">
           <h2 className="text-2xl font-bold tracking-tight mb-6 flex items-center gap-3">
-            <FormInput className="h-7 w-7" />
+            <Textbox className="h-7 w-7" />
             {t.loginForm}
           </h2>
           <p className="text-muted-foreground mb-4">

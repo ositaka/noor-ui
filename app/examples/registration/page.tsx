@@ -25,13 +25,13 @@ import { Progress } from '@/components/ui/progress'
 import { DirectionToggle } from '@/components/docs/direction-toggle'
 import { ThemeToggle } from '@/components/docs/theme-toggle'
 import {
-  Sunrise,
+  SunHorizon,
   User,
   MapPin,
   FileText,
-  CheckCircle2,
-  Loader2,
-} from 'lucide-react'
+  CheckCircle,
+  SpinnerGap,
+} from '@phosphor-icons/react'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 
@@ -125,7 +125,7 @@ export default function RegistrationPage() {
       <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container flex h-16 items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
-            <Sunrise className="h-6 w-6 text-primary" />
+            <SunHorizon className="h-6 w-6 text-primary" />
             <span className="text-xl font-bold">Noor UI</span>
           </Link>
           <div className="flex items-center gap-2">
@@ -207,7 +207,7 @@ export default function RegistrationPage() {
                       }`}
                     >
                       {index < currentStepIndex ? (
-                        <CheckCircle2 className="h-5 w-5" />
+                        <CheckCircle className="h-5 w-5" />
                       ) : (
                         index + 1
                       )}
@@ -228,7 +228,7 @@ export default function RegistrationPage() {
             <Card>
               <CardContent className="p-12 text-center space-y-6">
                 <div className="mx-auto w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center">
-                  <CheckCircle2 className="h-10 w-10 text-primary" />
+                  <CheckCircle className="h-10 w-10 text-primary" />
                 </div>
                 <div className="space-y-2">
                   <h2 className="text-2xl font-bold">
@@ -259,7 +259,7 @@ export default function RegistrationPage() {
                   {currentStep === 'personal' && <User className="h-6 w-6 text-primary" />}
                   {currentStep === 'address' && <MapPin className="h-6 w-6 text-primary" />}
                   {currentStep === 'preferences' && <FileText className="h-6 w-6 text-primary" />}
-                  {currentStep === 'review' && <CheckCircle2 className="h-6 w-6 text-primary" />}
+                  {currentStep === 'review' && <CheckCircle className="h-6 w-6 text-primary" />}
                   <div>
                     <CardTitle>
                       {isRTL ? STEP_LABELS[currentStep].ar : STEP_LABELS[currentStep].en}
@@ -732,13 +732,13 @@ function ReviewStep({ data, onSubmit, onBack, isRTL }: StepProps & { data: Recor
           <Button type="submit" disabled={isSubmitting}>
             {isSubmitting ? (
               <>
-                <Loader2 className="me-2 h-4 w-4 animate-spin" />
+                <SpinnerGap className="me-2 h-4 w-4 animate-spin" />
                 {t.buttons.submitting}
               </>
             ) : (
               <>
                 {t.buttons.submit}
-                <CheckCircle2 className="ms-2 h-4 w-4" />
+                <CheckCircle className="ms-2 h-4 w-4" />
               </>
             )}
           </Button>

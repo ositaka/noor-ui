@@ -3,7 +3,7 @@
 import * as React from 'react'
 import { cn } from '../../lib/utils'
 import { Button } from './button'
-import { Upload, X, File, Image as ImageIcon, FileText, Film, Music } from 'lucide-react'
+import { Upload, X, File, Image as ImageIcon, FileText, FilmSlate, MusicNote } from '@phosphor-icons/react'
 import { Card } from './card'
 import { useDirection } from '../providers/direction-provider'
 
@@ -36,8 +36,8 @@ const formatFileSize = (bytes: number, locale: 'en' | 'ar' = 'en'): string => {
 const getFileIcon = (file: File) => {
   const type = file.type
   if (type.startsWith('image/')) return <ImageIcon className="h-8 w-8" />
-  if (type.startsWith('video/')) return <Film className="h-8 w-8" />
-  if (type.startsWith('audio/')) return <Music className="h-8 w-8" />
+  if (type.startsWith('video/')) return <FilmSlate className="h-8 w-8" />
+  if (type.startsWith('audio/')) return <MusicNote className="h-8 w-8" />
   if (type.includes('pdf') || type.includes('document')) return <FileText className="h-8 w-8" />
   return <File className="h-8 w-8" />
 }

@@ -4,7 +4,7 @@ import * as React from 'react'
 import Link from 'next/link'
 import { Card, CardContent } from '@/components/ui/card'
 import { CodeBlock } from '@/components/docs/code-block'
-import { Package, Terminal, CheckCircle2, AlertCircle } from 'lucide-react'
+import { Package, Terminal, CheckCircle, WarningCircle } from '@phosphor-icons/react'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 
@@ -86,28 +86,28 @@ export default function InstallationPage() {
             <CardContent className="p-6">
               <ul className="space-y-3">
                 <li className="flex items-start gap-3">
-                  <CheckCircle2 className="h-5 w-5 text-green-600 mt-0.5 shrink-0" />
+                  <CheckCircle className="h-5 w-5 text-green-600 mt-0.5 shrink-0" />
                   <div>
                     <strong className="text-foreground">{t.nextjs}</strong>
                     <p className="text-sm text-muted-foreground">{t.nextjsDesc}</p>
                   </div>
                 </li>
                 <li className="flex items-start gap-3">
-                  <CheckCircle2 className="h-5 w-5 text-green-600 mt-0.5 shrink-0" />
+                  <CheckCircle className="h-5 w-5 text-green-600 mt-0.5 shrink-0" />
                   <div>
                     <strong className="text-foreground">{t.react}</strong>
                     <p className="text-sm text-muted-foreground">{t.reactDesc}</p>
                   </div>
                 </li>
                 <li className="flex items-start gap-3">
-                  <CheckCircle2 className="h-5 w-5 text-green-600 mt-0.5 shrink-0" />
+                  <CheckCircle className="h-5 w-5 text-green-600 mt-0.5 shrink-0" />
                   <div>
                     <strong className="text-foreground">{t.tailwind}</strong>
                     <p className="text-sm text-muted-foreground">{t.tailwindDesc}</p>
                   </div>
                 </li>
                 <li className="flex items-start gap-3">
-                  <CheckCircle2 className="h-5 w-5 text-green-600 mt-0.5 shrink-0" />
+                  <CheckCircle className="h-5 w-5 text-green-600 mt-0.5 shrink-0" />
                   <div>
                     <strong className="text-foreground">{t.typescript}</strong>
                     <p className="text-sm text-muted-foreground">{t.typescriptDesc}</p>
@@ -171,7 +171,7 @@ export default function InstallationPage() {
           <Card className="mt-6 border-green-500/50 bg-green-50 dark:bg-green-950/20">
             <CardContent className="p-6">
               <h3 className="font-semibold mb-2 flex items-center gap-2">
-                <CheckCircle2 className="h-5 w-5 text-green-600 dark:text-green-400" />
+                <CheckCircle className="h-5 w-5 text-green-600 dark:text-green-400" />
                 {t.noTailwindSetup}
               </h3>
               <p className="text-sm text-muted-foreground">
@@ -192,7 +192,7 @@ export default function InstallationPage() {
           <Card className="mt-6 border-blue-500/50 bg-blue-50 dark:bg-blue-950/20">
             <CardContent className="p-6">
               <h3 className="font-semibold mb-2 flex items-center gap-2">
-                <AlertCircle className="h-5 w-5 text-blue-600 dark:text-blue-400" />
+                <WarningCircle className="h-5 w-5 text-blue-600 dark:text-blue-400" />
                 {t.note}
               </h3>
               <p className="text-sm text-muted-foreground">

@@ -4,7 +4,7 @@ import * as React from 'react'
 import { cn } from '@/lib/utils'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { ArrowLeftRight, Moon, Sun, Code2, Copy, Check } from 'lucide-react'
+import { ArrowsLeftRight, Moon, Sun, CodeBlock as CodeBlockIcon, Copy, Check } from '@phosphor-icons/react'
 import { copyToClipboard } from '@/lib/utils'
 import { CodeBlock } from './code-block'
 
@@ -73,7 +73,7 @@ function ComponentShowcase({ children, className, title, description, code }: Co
               onClick={() => setShowCode(!showCode)}
               className="gap-2"
             >
-              <Code2 className="h-4 w-4" />
+              <CodeBlockIcon className="h-4 w-4" />
               {showCode ? 'Hide' : 'Show'} Code
             </Button>
             {showCode && (
@@ -140,7 +140,7 @@ function ComponentShowcaseControls({
           onClick={handleDirectionToggle}
           aria-label={`Switch to ${direction === 'ltr' ? 'RTL' : 'LTR'}`}
         >
-          <ArrowLeftRight className="h-4 w-4 me-2" />
+          <ArrowsLeftRight className="h-4 w-4 me-2" />
           {direction === 'ltr' ? 'LTR' : 'RTL'}
         </Button>
       )}

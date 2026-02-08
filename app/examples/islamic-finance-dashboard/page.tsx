@@ -41,8 +41,8 @@ const DataTable = dynamic(
   }
 )
 import {
-  TrendingUp,
-  TrendingDown,
+  TrendUp,
+  TrendDown,
   Wallet,
   PiggyBank,
   CreditCard,
@@ -50,8 +50,8 @@ import {
   ArrowDownRight,
   Calendar as CalendarIcon,
   Bell,
-  DollarSign,
-} from 'lucide-react'
+  CurrencyDollar,
+} from '@phosphor-icons/react'
 import { cn } from '@/lib/utils'
 
 // ============================================================================
@@ -578,7 +578,7 @@ export default function IslamicFinanceDashboardPage() {
                 <ArabicNumber value={totalBalance} format="currency" />
               </div>
               <div className="flex items-center gap-1 text-xs text-green-600 dark:text-green-400">
-                <TrendingUp className="h-3 w-3" />
+                <TrendUp className="h-3 w-3" />
                 <span>{t.islamicFinancePage.stats.percentageChange}</span>
               </div>
             </CardContent>
@@ -623,7 +623,7 @@ export default function IslamicFinanceDashboardPage() {
                 <ArabicNumber value={totalInvestments} format="currency" />
               </div>
               <div className="flex items-center gap-1 text-xs text-green-600 dark:text-green-400">
-                <TrendingUp className="h-3 w-3" />
+                <TrendUp className="h-3 w-3" />
                 <span>
                   {t.islamicFinancePage.stats.returns}
                   <ArabicNumber value={investmentReturns} format="currency" />
@@ -638,7 +638,7 @@ export default function IslamicFinanceDashboardPage() {
               <CardTitle className="text-sm font-medium">
                 {t.islamicFinancePage.stats.zakatPaid}
               </CardTitle>
-              <DollarSign className="h-4 w-4 text-muted-foreground" />
+              <CurrencyDollar className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">

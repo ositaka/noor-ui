@@ -21,13 +21,13 @@ import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
 import {
   Copy,
-  Share,
+  ShareNetwork,
   Download,
-  Trash2,
-  Edit,
+  Trash,
+  PencilSimple,
   Star,
   Archive,
-} from 'lucide-react'
+} from '@phosphor-icons/react'
 
 const getContextMenuProps = (t: typeof content.en | typeof content.ar): PropDefinition[] => [
   {
@@ -69,7 +69,7 @@ const withIconsCode = `<ContextMenu>
   </ContextMenuTrigger>
   <ContextMenuContent className="w-56">
     <ContextMenuItem>
-      <Edit className="me-2 h-4 w-4" />
+      <PencilSimple className="me-2 h-4 w-4" />
       <span>Edit</span>
       <ContextMenuShortcut>⌘E</ContextMenuShortcut>
     </ContextMenuItem>
@@ -79,12 +79,12 @@ const withIconsCode = `<ContextMenu>
       <ContextMenuShortcut>⌘C</ContextMenuShortcut>
     </ContextMenuItem>
     <ContextMenuItem>
-      <Share className="me-2 h-4 w-4" />
+      <ShareNetwork className="me-2 h-4 w-4" />
       <span>Share</span>
     </ContextMenuItem>
     <ContextMenuSeparator />
     <ContextMenuItem>
-      <Trash2 className="me-2 h-4 w-4" />
+      <Trash className="me-2 h-4 w-4" />
       <span>Delete</span>
       <ContextMenuShortcut>⌘D</ContextMenuShortcut>
     </ContextMenuItem>
@@ -171,7 +171,7 @@ export default function ContextMenuPage() {
                 </ContextMenuTrigger>
                 <ContextMenuContent className="w-56">
                   <ContextMenuItem>
-                    <Edit className="me-2 h-4 w-4" />
+                    <PencilSimple className="me-2 h-4 w-4" />
                     <span>{t.contextMenuComponent.demo.edit}</span>
                     <ContextMenuShortcut>⌘E</ContextMenuShortcut>
                   </ContextMenuItem>
@@ -181,7 +181,7 @@ export default function ContextMenuPage() {
                     <ContextMenuShortcut>⌘C</ContextMenuShortcut>
                   </ContextMenuItem>
                   <ContextMenuItem>
-                    <Share className="me-2 h-4 w-4" />
+                    <ShareNetwork className="me-2 h-4 w-4" />
                     <span>{t.contextMenuComponent.demo.share}</span>
                   </ContextMenuItem>
                   <ContextMenuSeparator />
@@ -191,7 +191,7 @@ export default function ContextMenuPage() {
                   </ContextMenuItem>
                   <ContextMenuSeparator />
                   <ContextMenuItem className="text-destructive">
-                    <Trash2 className="me-2 h-4 w-4" />
+                    <Trash className="me-2 h-4 w-4" />
                     <span>{t.contextMenuComponent.demo.delete}</span>
                     <ContextMenuShortcut>⌘D</ContextMenuShortcut>
                   </ContextMenuItem>
@@ -231,7 +231,7 @@ export default function ContextMenuPage() {
                     </ContextMenuTrigger>
                     <ContextMenuContent className="w-56">
                       <ContextMenuItem>
-                        <Edit className="me-2 h-4 w-4" />
+                        <PencilSimple className="me-2 h-4 w-4" />
                         <span>{t.contextMenuComponent.demo.edit}</span>
                         <ContextMenuShortcut>⌘E</ContextMenuShortcut>
                       </ContextMenuItem>
@@ -241,12 +241,12 @@ export default function ContextMenuPage() {
                         <ContextMenuShortcut>⌘C</ContextMenuShortcut>
                       </ContextMenuItem>
                       <ContextMenuItem>
-                        <Share className="me-2 h-4 w-4" />
+                        <ShareNetwork className="me-2 h-4 w-4" />
                         <span>{t.contextMenuComponent.demo.share}</span>
                       </ContextMenuItem>
                       <ContextMenuSeparator />
                       <ContextMenuItem className="text-destructive">
-                        <Trash2 className="me-2 h-4 w-4" />
+                        <Trash className="me-2 h-4 w-4" />
                         <span>{t.contextMenuComponent.demo.delete}</span>
                         <ContextMenuShortcut>⌘D</ContextMenuShortcut>
                       </ContextMenuItem>
@@ -326,7 +326,7 @@ export default function ContextMenuPage() {
                             <span>{t.contextMenuComponent.demo.archive}</span>
                           </ContextMenuItem>
                           <ContextMenuItem className="text-destructive">
-                            <Trash2 className="me-2 h-4 w-4" />
+                            <Trash className="me-2 h-4 w-4" />
                             <span>{t.contextMenuComponent.demo.delete}</span>
                           </ContextMenuItem>
                         </ContextMenuContent>

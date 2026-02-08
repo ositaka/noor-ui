@@ -11,7 +11,7 @@ import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { cn } from '@/lib/utils'
-import { Play, RotateCcw, AlertCircle } from 'lucide-react'
+import { Play, ArrowCounterClockwise, WarningCircle } from '@phosphor-icons/react'
 import type { Node, Edge } from '@xyflow/react'
 
 const initialNodes: Node[] = [
@@ -165,7 +165,7 @@ export default function BasicWorkflowPage() {
                   {t.workflowBasicPage.title}
                 </h1>
                 <Badge variant="secondary" className="flex items-center gap-1.5">
-                  <AlertCircle className="h-3 w-3" />
+                  <WarningCircle className="h-3 w-3" />
                   {t.workflowBasicPage.workInProgress}
                 </Badge>
               </div>
@@ -173,7 +173,7 @@ export default function BasicWorkflowPage() {
                 {t.workflowBasicPage.description}
               </p>
               <div className="flex items-start gap-2 p-3 bg-yellow-50 dark:bg-yellow-950/20 border border-yellow-200 dark:border-yellow-800 rounded-lg max-w-3xl">
-                <AlertCircle className="h-4 w-4 text-yellow-600 dark:text-yellow-500 mt-0.5 flex-shrink-0" />
+                <WarningCircle className="h-4 w-4 text-yellow-600 dark:text-yellow-500 mt-0.5 flex-shrink-0" />
                 <p className="text-sm text-yellow-800 dark:text-yellow-200">
                   <strong>{t.workflowBasicPage.note}</strong> {t.workflowBasicPage.noteText}
                 </p>
@@ -188,7 +188,7 @@ export default function BasicWorkflowPage() {
                 {t.workflowBasicPage.run}
               </Button>
               <Button onClick={handleReset} variant="outline">
-                <RotateCcw className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
+                <ArrowCounterClockwise className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
                 {t.workflowBasicPage.reset}
               </Button>
             </div>

@@ -9,7 +9,7 @@ import { Separator } from '@/components/ui/separator'
 import { ComponentShowcase } from '@/components/docs/component-showcase'
 import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
-import { AlertCircle } from 'lucide-react'
+import { WarningCircle } from '@phosphor-icons/react'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 
@@ -182,7 +182,7 @@ export default function PromptInputPage() {
           <div className="flex items-center gap-3 mb-4">
             <h1 className="text-4xl font-bold tracking-tight">{promptInputT.title}</h1>
             <Badge variant="secondary" className="flex items-center gap-1.5">
-              <AlertCircle className="h-3 w-3" />
+              <WarningCircle className="h-3 w-3" />
               {t.componentPage.workInProgress}
             </Badge>
           </div>
@@ -191,7 +191,7 @@ export default function PromptInputPage() {
               {promptInputT.description}
             </p>
             <div className="flex items-start gap-2 p-3 bg-yellow-50 dark:bg-yellow-950/20 border border-yellow-200 dark:border-yellow-800 rounded-lg max-w-3xl">
-              <AlertCircle className="h-4 w-4 text-yellow-600 dark:text-yellow-500 mt-0.5 flex-shrink-0" />
+              <WarningCircle className="h-4 w-4 text-yellow-600 dark:text-yellow-500 mt-0.5 flex-shrink-0" />
               <p className="text-sm text-yellow-800 dark:text-yellow-200">
                 <strong>{t.componentPage.wipNote}</strong> {t.componentPage.wipNoteText}
               </p>

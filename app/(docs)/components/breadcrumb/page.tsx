@@ -7,7 +7,7 @@ import { Separator } from '@/components/ui/separator'
 import { ComponentShowcase } from '@/components/docs/component-showcase'
 import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
-import { Home, Folder, File } from 'lucide-react'
+import { House, Folder, File } from '@phosphor-icons/react'
 import {
   Breadcrumb,
   BreadcrumbList,
@@ -56,7 +56,7 @@ const basicUsageCode = `import {
   </BreadcrumbList>
 </Breadcrumb>`
 
-const customSeparatorCode = `import { Slash } from 'lucide-react'
+const customSeparatorCode = `import { LineSegment } from '@phosphor-icons/react'
 
 <Breadcrumb>
   <BreadcrumbList>
@@ -64,13 +64,13 @@ const customSeparatorCode = `import { Slash } from 'lucide-react'
       <BreadcrumbLink href="/">Home</BreadcrumbLink>
     </BreadcrumbItem>
     <BreadcrumbSeparator>
-      <Slash />
+      <LineSegment />
     </BreadcrumbSeparator>
     <BreadcrumbItem>
       <BreadcrumbLink href="/documentation">Documentation</BreadcrumbLink>
     </BreadcrumbItem>
     <BreadcrumbSeparator>
-      <Slash />
+      <LineSegment />
     </BreadcrumbSeparator>
     <BreadcrumbItem>
       <BreadcrumbPage>Breadcrumb</BreadcrumbPage>
@@ -78,13 +78,13 @@ const customSeparatorCode = `import { Slash } from 'lucide-react'
   </BreadcrumbList>
 </Breadcrumb>`
 
-const withIconsCode = `import { Home, Folder, File } from 'lucide-react'
+const withIconsCode = `import { House, Folder, File } from '@phosphor-icons/react'
 
 <Breadcrumb>
   <BreadcrumbList>
     <BreadcrumbItem>
       <BreadcrumbLink href="/" className="flex items-center gap-2">
-        <Home className="h-4 w-4" />
+        <House className="h-4 w-4" />
         Home
       </BreadcrumbLink>
     </BreadcrumbItem>
@@ -215,7 +215,7 @@ export default function BreadcrumbComponentPage() {
                   <BreadcrumbList>
                     <BreadcrumbItem>
                       <BreadcrumbLink href="/" className="flex items-center gap-2">
-                        <Home className="h-4 w-4" />
+                        <House className="h-4 w-4" />
                         {t.breadcrumbComponent.demo.home}
                       </BreadcrumbLink>
                     </BreadcrumbItem>

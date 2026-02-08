@@ -2,12 +2,12 @@ import * as React from 'react'
 import Link from 'next/link'
 import { Card, CardContent, CardHeader, CardTitle } from './card'
 import { cn } from '../../lib/utils'
-import type { LucideIcon } from 'lucide-react'
+import type { IconComponent } from '@/lib/types'
 
 export interface FeatureCardProps {
   title: string
   description: string
-  icon: LucideIcon
+  icon: IconComponent
   href?: string
   className?: string
 }

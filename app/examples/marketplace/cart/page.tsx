@@ -15,13 +15,13 @@ import { formatSAR } from '@/lib/arabic-numbers'
 import { cn } from '@/lib/utils'
 import {
   ShoppingCart,
-  Trash2,
+  Trash,
   Plus,
   Minus,
   ShoppingBag,
   Tag,
   Truck,
-} from 'lucide-react'
+} from '@phosphor-icons/react'
 
 interface CartItem {
   id: string
@@ -207,7 +207,7 @@ export default function CartPage() {
                             onClick={() => removeItem(item.id)}
                             className="shrink-0"
                           >
-                            <Trash2 className="h-4 w-4" />
+                            <Trash className="h-4 w-4" />
                           </Button>
                         </div>
 

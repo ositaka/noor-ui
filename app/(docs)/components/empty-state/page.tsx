@@ -10,7 +10,7 @@ import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
-import { FileText, Inbox, Search, Users, Plus } from 'lucide-react'
+import { FileText, Tray, MagnifyingGlass, Users, Plus } from '@phosphor-icons/react'
 
 export default function EmptyStatePage() {
   const { direction, locale } = useDirection()
@@ -19,7 +19,7 @@ export default function EmptyStatePage() {
 
   const basicUsage = `import { EmptyState } from '@/components/ui/empty-state'
 import { Button } from '@/components/ui/button'
-import { FileText } from 'lucide-react'
+import { FileText } from '@phosphor-icons/react'
 
 export function Example() {
   return (
@@ -37,13 +37,13 @@ export function Example() {
 }`
 
   const withoutAction = `<EmptyState
-  icon={<Inbox />}
+  icon={<Tray />}
   title="Inbox is empty"
   description="You're all caught up! No new messages."
 />`
 
   const searchResults = `<EmptyState
-  icon={<Search />}
+  icon={<MagnifyingGlass />}
   title="No results found"
   description="Try adjusting your search or filter to find what you're looking for."
   action={
@@ -114,7 +114,7 @@ export function Example() {
       >
         <Card className="p-8">
           <EmptyState
-            icon={<Inbox />}
+            icon={<Tray />}
             title={emptyStateT.examples.inboxEmpty}
             description={emptyStateT.examples.allCaughtUp}
           />
@@ -130,7 +130,7 @@ export function Example() {
       >
         <Card className="p-8">
           <EmptyState
-            icon={<Search />}
+            icon={<MagnifyingGlass />}
             title={emptyStateT.examples.noResultsFound}
             description={emptyStateT.examples.tryAdjustingSearch}
             action={

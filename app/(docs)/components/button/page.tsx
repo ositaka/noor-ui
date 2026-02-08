@@ -9,7 +9,7 @@ import { Separator } from '@/components/ui/separator'
 import { ComponentShowcase } from '@/components/docs/component-showcase'
 import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
-import { Download, Heart, Trash2 } from 'lucide-react'
+import { Download, Heart, Trash } from '@phosphor-icons/react'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 const getButtonProps = (t: typeof content.en | typeof content.ar): PropDefinition[] => [
@@ -70,7 +70,7 @@ const sizesCode = `<Button size="sm">Small</Button>
 <Button size="lg">Large</Button>
 <Button size="xl">Extra Large</Button>`
 
-const withIconsCode = `import { Download, Heart } from 'lucide-react'
+const withIconsCode = `import { Download, Heart } from '@phosphor-icons/react'
 
 <Button>
   <Download className="me-2 h-4 w-4" />
@@ -217,7 +217,7 @@ export default function ButtonPage() {
                       {t.buttonComponent.like}
                     </Button>
                     <Button variant="destructive">
-                      <Trash2 className="me-2 h-4 w-4" />
+                      <Trash className="me-2 h-4 w-4" />
                       {t.buttonComponent.delete}
                     </Button>
                   </div>

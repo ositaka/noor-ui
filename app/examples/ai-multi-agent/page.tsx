@@ -16,14 +16,14 @@ import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { cn } from '@/lib/utils'
 import {
   Users,
-  Sparkles,
-  Code2,
+  Sparkle,
+  CodeBlock,
   Pencil,
-  BarChart3,
-  Trash2,
-  Bot,
-  MessageSquare,
-} from 'lucide-react'
+  ChartBar,
+  Trash,
+  Robot,
+  ChatCentered,
+} from '@phosphor-icons/react'
 
 interface Agent {
   id: string
@@ -158,15 +158,15 @@ export default function MultiAgentChatPage() {
   const getAgentIcon = (iconType: string) => {
     switch (iconType) {
       case 'code':
-        return <Code2 className="h-4 w-4" />
+        return <CodeBlock className="h-4 w-4" />
       case 'pencil':
         return <Pencil className="h-4 w-4" />
       case 'chart':
-        return <BarChart3 className="h-4 w-4" />
+        return <ChartBar className="h-4 w-4" />
       case 'sparkles':
-        return <Sparkles className="h-4 w-4" />
+        return <Sparkle className="h-4 w-4" />
       default:
-        return <Bot className="h-4 w-4" />
+        return <Robot className="h-4 w-4" />
     }
   }
 
@@ -339,7 +339,7 @@ export default function MultiAgentChatPage() {
               </div>
               <div className="flex items-center gap-2">
                 <Button variant="outline" size="sm" onClick={handleClearChat}>
-                  <Trash2 className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
+                  <Trash className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
                   {t.aiMultiAgent.actions.clear}
                 </Button>
                 <Button variant="outline" size="sm" asChild>
@@ -447,7 +447,7 @@ export default function MultiAgentChatPage() {
                     </div>
                     <div className="flex items-center gap-3 p-4">
                       <div className="h-10 w-10 rounded-full bg-muted flex items-center justify-center">
-                        <MessageSquare className="h-5 w-5 text-muted-foreground" />
+                        <ChatCentered className="h-5 w-5 text-muted-foreground" />
                       </div>
                       <ThinkingIndicator variant="typing" />
                     </div>

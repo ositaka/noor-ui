@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { Card, CardContent } from '@/components/ui/card'
 import { ComponentShowcase } from '@/components/docs/component-showcase'
 import { CodeBlock } from '@/components/docs/code-block'
-import { Search, FileText, Settings, User } from 'lucide-react'
+import { MagnifyingGlass, FileText, Gear, User } from '@phosphor-icons/react'
 import {
   Command,
   CommandDialog,
@@ -121,11 +121,11 @@ export default function CommandPage() {
                       <span>{cmd.demo.suggestions.calendar}</span>
                     </CommandItem>
                     <CommandItem>
-                      <Search className="me-2 h-4 w-4" />
+                      <MagnifyingGlass className="me-2 h-4 w-4" />
                       <span>{cmd.demo.suggestions.searchEmoji}</span>
                     </CommandItem>
                     <CommandItem>
-                      <Settings className="me-2 h-4 w-4" />
+                      <Gear className="me-2 h-4 w-4" />
                       <span>{cmd.demo.suggestions.calculator}</span>
                     </CommandItem>
                   </CommandGroup>
@@ -136,7 +136,7 @@ export default function CommandPage() {
                       <span>{cmd.demo.settings.profile}</span>
                     </CommandItem>
                     <CommandItem>
-                      <Settings className="me-2 h-4 w-4" />
+                      <Gear className="me-2 h-4 w-4" />
                       <span>{cmd.demo.settings.settings}</span>
                     </CommandItem>
                   </CommandGroup>
@@ -160,7 +160,7 @@ export default function CommandPage() {
               onClick={() => setOpen(true)}
               className="inline-flex items-center gap-2 rounded-md border border-input bg-background px-4 py-2 text-sm hover:bg-accent hover:text-accent-foreground"
             >
-              <Search className="h-4 w-4" />
+              <MagnifyingGlass className="h-4 w-4" />
               {cmd.sections.openCommandMenu}
               <kbd className="pointer-events-none ms-auto inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium rtl:flex-row-reverse">
                 <span className="text-xs">⌘</span>K
@@ -177,7 +177,7 @@ export default function CommandPage() {
                     {cmd.demo.actions.newFile}
                   </CommandItem>
                   <CommandItem>
-                    <Search className="me-2 h-4 w-4" />
+                    <MagnifyingGlass className="me-2 h-4 w-4" />
                     {cmd.demo.actions.searchFiles}
                   </CommandItem>
                 </CommandGroup>

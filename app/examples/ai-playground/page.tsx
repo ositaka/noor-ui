@@ -23,12 +23,12 @@ import { Card } from '@/components/ui/card'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { cn } from '@/lib/utils'
 import {
-  Settings,
-  Sparkles,
-  Menu,
+  Gear,
+  Sparkle,
+  List,
   X,
-  MessageSquare,
-} from 'lucide-react'
+  ChatCentered,
+} from '@phosphor-icons/react'
 
 interface Message {
   id: string
@@ -252,10 +252,10 @@ export default function AdvancedPlaygroundPage() {
                 onClick={() => setShowHistory(!showHistory)}
                 className="lg:hidden"
               >
-                <Menu className="h-5 w-5" />
+                <List className="h-5 w-5" />
               </Button>
               <div className="p-2 bg-primary/10 rounded-lg">
-                <Sparkles className="h-5 w-5 text-primary" />
+                <Sparkle className="h-5 w-5 text-primary" />
               </div>
               <div>
                 <h1 className="font-semibold text-lg">
@@ -272,7 +272,7 @@ export default function AdvancedPlaygroundPage() {
                 size="sm"
                 onClick={() => setShowSettings(!showSettings)}
               >
-                <Settings className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
+                <Gear className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
                 {t.aiPlaygroundPage.settings}
               </Button>
               <Button variant="outline" size="sm" asChild>
@@ -316,7 +316,7 @@ export default function AdvancedPlaygroundPage() {
               {isThinking && (
                 <div className="flex items-center gap-3 p-4">
                   <div className="h-10 w-10 rounded-full bg-muted flex items-center justify-center">
-                    <Sparkles className="h-5 w-5 text-muted-foreground" />
+                    <Sparkle className="h-5 w-5 text-muted-foreground" />
                   </div>
                   <ThinkingIndicator variant="typing" />
                 </div>

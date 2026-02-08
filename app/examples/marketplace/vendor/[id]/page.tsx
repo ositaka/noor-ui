@@ -10,21 +10,21 @@ import { Separator } from '@/components/ui/separator'
 import { ArabicNumber } from '@/components/ui/arabic-number'
 import { formatSAR } from '@/lib/arabic-numbers'
 import {
-  Home,
-  Store,
+  House,
+  Storefront,
   Star,
   MapPin,
   Calendar,
-  CheckCircle2,
+  CheckCircle,
   Package,
   Clock,
-  Award,
-  TrendingUp,
-  MessageCircle,
-  Mail,
+  Trophy,
+  TrendUp,
+  ChatCircle,
+  EnvelopeSimple,
   Phone,
   Truck,
-} from 'lucide-react'
+} from '@phosphor-icons/react'
 import { useDirection } from '@/components/providers/direction-provider'
 import { DirectionToggle } from '@/components/docs/direction-toggle'
 import { content } from '@/lib/i18n'
@@ -201,12 +201,12 @@ export default function VendorDetailPage({ params }: { params: { id: string } })
     {
       label: t.marketplaceVendor.stats.completedOrders,
       value: vendor.completedOrders,
-      icon: CheckCircle2,
+      icon: CheckCircle,
     },
     {
       label: t.marketplaceVendor.stats.returnRate,
       value: `${vendor.returnRate}%`,
-      icon: TrendingUp,
+      icon: TrendUp,
     },
     {
       label: t.marketplaceVendor.stats.responseTime,
@@ -223,7 +223,7 @@ export default function VendorDetailPage({ params }: { params: { id: string } })
           <div className="flex items-center gap-6">
             <Link href="/" className="flex items-center gap-2">
               <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center">
-                <Home className="h-5 w-5 text-primary-foreground" />
+                <House className="h-5 w-5 text-primary-foreground" />
               </div>
               <span className="font-bold text-xl hidden sm:inline">
                 {t.marketplace.header.title}
@@ -300,7 +300,7 @@ export default function VendorDetailPage({ params }: { params: { id: string } })
                     {isRTL ? vendor.nameAr : vendor.name}
                   </h1>
                   {vendor.verified && (
-                    <CheckCircle2 className="h-6 w-6 text-primary" />
+                    <CheckCircle className="h-6 w-6 text-primary" />
                   )}
                 </div>
 
@@ -440,11 +440,11 @@ export default function VendorDetailPage({ params }: { params: { id: string } })
               </CardHeader>
               <CardContent className="space-y-3">
                 <Button className="w-full">
-                  <MessageCircle className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
+                  <ChatCircle className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
                   {t.marketplaceVendor.sendMessage}
                 </Button>
                 <Button variant="outline" className="w-full">
-                  <Mail className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
+                  <EnvelopeSimple className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
                   {t.marketplaceVendor.email}
                 </Button>
                 <Button variant="outline" className="w-full">
@@ -493,7 +493,7 @@ export default function VendorDetailPage({ params }: { params: { id: string } })
                 <Separator />
 
                 <div className="flex items-start gap-3">
-                  <Award className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                  <Trophy className="h-5 w-5 text-primary shrink-0 mt-0.5" />
                   <div>
                     <p className="font-medium text-sm">
                       {t.marketplaceVendor.warranty}
@@ -515,15 +515,15 @@ export default function VendorDetailPage({ params }: { params: { id: string } })
               </CardHeader>
               <CardContent className="space-y-3">
                 <div className="flex items-center gap-2">
-                  <Award className="h-5 w-5 text-primary" />
+                  <Trophy className="h-5 w-5 text-primary" />
                   <span className="text-sm">{t.marketplaceVendor.verifiedSeller}</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <CheckCircle2 className="h-5 w-5 text-primary" />
+                  <CheckCircle className="h-5 w-5 text-primary" />
                   <span className="text-sm">{t.marketplaceVendor.topRated}</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <TrendingUp className="h-5 w-5 text-primary" />
+                  <TrendUp className="h-5 w-5 text-primary" />
                   <span className="text-sm">{t.marketplaceVendor.excellentSales}</span>
                 </div>
               </CardContent>

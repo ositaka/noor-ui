@@ -10,7 +10,7 @@ import { Separator } from '@/components/ui/separator'
 import { ComponentShowcase } from '@/components/docs/component-showcase'
 import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
-import { Mail, Lock, Search } from 'lucide-react'
+import { Envelope, Lock, MagnifyingGlass } from '@phosphor-icons/react'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 
@@ -98,10 +98,10 @@ import { Label } from 'noorui-rtl'
   <Input id="username" placeholder="Enter your username" />
 </div>`
 
-const withIconCode = `import { Mail } from 'lucide-react'
+const withIconCode = `import { Envelope } from '@phosphor-icons/react'
 
 <div className="relative">
-  <Mail className="absolute start-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+  <Envelope className="absolute start-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
   <Input className="ps-9" placeholder="Email" />
 </div>`
 
@@ -307,7 +307,7 @@ export default function InputPage() {
                   <div className="space-y-2">
                     <Label>{t.inputComponent.labels.emailWithIcon}</Label>
                     <div className="relative">
-                      <Mail className="absolute start-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                      <Envelope className="absolute start-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                       <Input className="ps-9" placeholder={t.inputComponent.placeholders.emailPlaceholder} />
                     </div>
                   </div>
@@ -321,7 +321,7 @@ export default function InputPage() {
                   <div className="space-y-2">
                     <Label>{t.inputComponent.labels.searchWithIcon}</Label>
                     <div className="relative">
-                      <Search className="absolute start-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                      <MagnifyingGlass className="absolute start-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                       <Input type="search" className="ps-9" placeholder={t.inputComponent.placeholders.searchDots} />
                     </div>
                   </div>

@@ -10,7 +10,7 @@ import { Separator } from '@/components/ui/separator'
 import { Badge } from '@/components/ui/badge'
 import { CodeBlock } from '@/components/docs/code-block'
 import { useDesignSystem } from '@/components/providers/design-system-provider'
-import { Check, Sparkles, ChevronDown, Lightbulb } from 'lucide-react'
+import { Check, Sparkle, CaretDown, Lightbulb } from '@phosphor-icons/react'
 import { Collapsible, CollapsibleTrigger, CollapsibleContent } from '@/components/ui/collapsible'
 import { type BuiltInTheme, themeConfig } from '@/lib/tokens'
 import { cn } from '@/lib/utils'
@@ -163,7 +163,7 @@ export default function ThemesPage() {
             {t.themesPage.subtitle}
           </p>
           <div className="flex items-center gap-2 p-4 bg-primary/10 rounded-lg border border-primary/20">
-            <Sparkles className="h-5 w-5 text-primary flex-shrink-0" />
+            <Sparkle className="h-5 w-5 text-primary flex-shrink-0" />
             <p className="text-sm">
               {t.themesPage.switcherNotice}
             </p>
@@ -599,7 +599,7 @@ function MyComponent() {
                         <CardTitle>{t.themesPage.customThemes.variablesTitle}</CardTitle>
                         <CardDescription>{t.themesPage.customThemes.variablesDescription}</CardDescription>
                       </div>
-                      <ChevronDown className="h-5 w-5 text-muted-foreground transition-transform" />
+                      <CaretDown className="h-5 w-5 text-muted-foreground transition-transform" />
                     </div>
                   </CardHeader>
                 </CollapsibleTrigger>

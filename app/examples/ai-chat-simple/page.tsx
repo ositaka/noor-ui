@@ -12,7 +12,7 @@ import { StreamingText } from '@/components/ui/streaming-text'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { cn } from '@/lib/utils'
-import { Trash2, Sparkles } from 'lucide-react'
+import { Trash, Sparkle } from '@phosphor-icons/react'
 
 interface Message {
   id: string
@@ -162,7 +162,7 @@ export default function SimpleChatPage() {
           <div className="container flex h-16 items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="p-2 bg-primary/10 rounded-lg">
-                <Sparkles className="h-5 w-5 text-primary" />
+                <Sparkle className="h-5 w-5 text-primary" />
               </div>
               <div>
                 <h1 className="font-semibold text-lg">
@@ -175,7 +175,7 @@ export default function SimpleChatPage() {
             </div>
             <div className="flex items-center gap-2">
               <Button variant="outline" size="sm" onClick={handleClearChat}>
-                <Trash2 className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
+                <Trash className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
                 {t.aiChatSimple.actions.clear}
               </Button>
               <Button variant="outline" size="sm" asChild>
@@ -239,7 +239,7 @@ export default function SimpleChatPage() {
               {isThinking && (
                 <div className="flex items-center gap-3 p-4">
                   <div className="h-10 w-10 rounded-full bg-muted flex items-center justify-center">
-                    <Sparkles className="h-5 w-5 text-muted-foreground" />
+                    <Sparkle className="h-5 w-5 text-muted-foreground" />
                   </div>
                   <ThinkingIndicator variant="typing" />
                 </div>

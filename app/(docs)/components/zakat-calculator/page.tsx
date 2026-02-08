@@ -7,7 +7,7 @@ import { PropsTable } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
 import { ZakatCalculator } from '@/components/ui/zakat-calculator'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
-import { Copy, Download, Printer, Share2 } from 'lucide-react'
+import { Copy, Download, Printer, ShareNetwork } from '@phosphor-icons/react'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 
@@ -487,7 +487,7 @@ export function SmartZakatCalculator() {
             <Card>
               <CardHeader>
                 <CardTitle className="text-lg flex items-center gap-2">
-                  <Share2 className="h-5 w-5" />
+                  <ShareNetwork className="h-5 w-5" />
                   {t.exportShare.exportAsJson}
                 </CardTitle>
               </CardHeader>

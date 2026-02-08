@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import * as DropdownMenuPrimitive from "@radix-ui/react-dropdown-menu"
-import { Check, ChevronRight, ChevronLeft, Circle } from "lucide-react"
+import { Check, CaretRight, CaretLeft, Circle } from "@phosphor-icons/react"
 
 import { cn } from "../../lib/utils"
 
@@ -62,7 +62,7 @@ const DropdownMenuSubTrigger = React.forwardRef<
     return () => observer.disconnect()
   }, [])
 
-  const ChevronIcon = isRTL ? ChevronLeft : ChevronRight
+  const ChevronIcon = isRTL ? CaretLeft : CaretRight
 
   return (
     <DropdownMenuPrimitive.SubTrigger

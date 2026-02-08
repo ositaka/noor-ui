@@ -16,13 +16,13 @@ import { ScrollArea } from '@/components/ui/scroll-area'
 import { cn } from '@/lib/utils'
 import {
   FileText,
-  Sparkles,
+  Sparkle,
   Upload,
-  Trash2,
+  Trash,
   BookOpen,
-  Search,
-  CheckCircle2,
-} from 'lucide-react'
+  MagnifyingGlass,
+  CheckCircle,
+} from '@phosphor-icons/react'
 
 interface Message {
   id: string
@@ -284,7 +284,7 @@ export default function DocumentQAPage() {
                           {isRTL ? (doc.nameAr || doc.name) : doc.name}
                         </h3>
                         {doc.isActive && (
-                          <CheckCircle2 className="h-4 w-4 text-primary shrink-0" />
+                          <CheckCircle className="h-4 w-4 text-primary shrink-0" />
                         )}
                       </div>
                       <div className="flex items-center gap-2 text-xs text-muted-foreground">
@@ -351,7 +351,7 @@ export default function DocumentQAPage() {
               </div>
               <div className="flex items-center gap-2">
                 <Button variant="outline" size="sm" onClick={handleClearChat}>
-                  <Trash2 className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
+                  <Trash className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
                   {t.aiDocumentQa.actions.clear}
                 </Button>
                 <Button variant="outline" size="sm" asChild>
@@ -407,7 +407,7 @@ export default function DocumentQAPage() {
                     {message.sources && message.sources.length > 0 && (
                       <Card className="p-4 bg-muted/50">
                         <div className="flex items-center gap-2 mb-3">
-                          <Search className="h-4 w-4 text-muted-foreground" />
+                          <MagnifyingGlass className="h-4 w-4 text-muted-foreground" />
                           <span className="text-sm font-medium">
                             {t.aiDocumentQa.messages.sources}
                           </span>

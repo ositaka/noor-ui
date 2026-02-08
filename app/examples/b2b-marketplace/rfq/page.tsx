@@ -14,15 +14,15 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Badge } from '@/components/ui/badge'
 import { cn } from '@/lib/utils'
 import {
-  MessageSquare,
+  ChatCentered,
   Plus,
-  Trash2,
-  CheckCircle2,
+  Trash,
+  CheckCircle,
   Upload,
   FileText,
   Clock,
-  TrendingDown,
-} from 'lucide-react'
+  TrendDown,
+} from '@phosphor-icons/react'
 
 interface RFQItem {
   id: string
@@ -91,7 +91,7 @@ export default function RFQPage() {
             <CardContent className="p-12">
               <div className="flex flex-col items-center text-center space-y-6">
                 <div className="p-4 bg-green-100 rounded-full">
-                  <CheckCircle2 className="h-16 w-16 text-green-600" />
+                  <CheckCircle className="h-16 w-16 text-green-600" />
                 </div>
                 <div className="space-y-2">
                   <h1 className="text-3xl font-bold">
@@ -196,7 +196,7 @@ export default function RFQPage() {
             <CardContent className="p-4">
               <div className="flex items-start gap-3">
                 <div className="p-2 bg-primary/10 rounded-lg">
-                  <TrendingDown className="h-5 w-5 text-primary" />
+                  <TrendDown className="h-5 w-5 text-primary" />
                 </div>
                 <div>
                   <h3 className="font-semibold mb-1">
@@ -365,7 +365,7 @@ export default function RFQPage() {
                               size="icon"
                               onClick={() => removeItem(item.id)}
                             >
-                              <Trash2 className="h-4 w-4" />
+                              <Trash className="h-4 w-4" />
                             </Button>
                           )}
                         </div>
@@ -549,26 +549,26 @@ export default function RFQPage() {
                     </h4>
                     <ul className="space-y-1 text-sm text-muted-foreground">
                       <li className="flex items-start gap-2">
-                        <CheckCircle2 className="h-4 w-4 text-green-600 shrink-0 mt-0.5" />
+                        <CheckCircle className="h-4 w-4 text-green-600 shrink-0 mt-0.5" />
                         {t.b2bMarketplaceRfq.summary.responseWithin24}
                       </li>
                       <li className="flex items-start gap-2">
-                        <CheckCircle2 className="h-4 w-4 text-green-600 shrink-0 mt-0.5" />
+                        <CheckCircle className="h-4 w-4 text-green-600 shrink-0 mt-0.5" />
                         {t.b2bMarketplaceRfq.summary.competitivePricing}
                       </li>
                       <li className="flex items-start gap-2">
-                        <CheckCircle2 className="h-4 w-4 text-green-600 shrink-0 mt-0.5" />
+                        <CheckCircle className="h-4 w-4 text-green-600 shrink-0 mt-0.5" />
                         {t.b2bMarketplaceRfq.summary.flexiblePayment}
                       </li>
                       <li className="flex items-start gap-2">
-                        <CheckCircle2 className="h-4 w-4 text-green-600 shrink-0 mt-0.5" />
+                        <CheckCircle className="h-4 w-4 text-green-600 shrink-0 mt-0.5" />
                         {t.b2bMarketplaceRfq.summary.dedicatedSupport}
                       </li>
                     </ul>
                   </div>
 
                   <Button type="submit" className="w-full" size="lg">
-                    <MessageSquare className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
+                    <ChatCentered className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
                     {t.b2bMarketplaceRfq.summary.submitRequest}
                   </Button>
 

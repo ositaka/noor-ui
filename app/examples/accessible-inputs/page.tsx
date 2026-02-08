@@ -10,19 +10,19 @@ import { ButtonArrow } from '@/components/ui/button-arrow'
 import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
 import {
-  Mail,
+  EnvelopeSimple,
   Phone,
   Globe,
   CreditCard,
   User,
   Lock,
   Calendar,
-  Search,
+  MagnifyingGlass,
   Hash,
-  DollarSign,
-  CheckCircle2,
+  CurrencyDollar,
+  CheckCircle,
   XCircle,
-} from 'lucide-react'
+} from '@phosphor-icons/react'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 
@@ -53,7 +53,7 @@ const inputFields: InputFieldProps[] = [
     placeholder: 'your.email@example.com',
     placeholderAr: 'your.email@example.com',
     inputMode: 'email',
-    icon: <Mail className="h-4 w-4" />,
+    icon: <EnvelopeSimple className="h-4 w-4" />,
     helperText: 'We\'ll never share your email with anyone else',
     helperTextAr: 'لن نشارك بريدك الإلكتروني مع أي شخص آخر',
     example: 'ahmed@company.sa',
@@ -121,7 +121,7 @@ const inputFields: InputFieldProps[] = [
     placeholder: 'Search products...',
     placeholderAr: 'ابحث عن المنتجات...',
     inputMode: 'search',
-    icon: <Search className="h-4 w-4" />,
+    icon: <MagnifyingGlass className="h-4 w-4" />,
     helperText: 'Press Enter to search',
     helperTextAr: 'اضغط Enter للبحث',
   },
@@ -149,7 +149,7 @@ const inputFields: InputFieldProps[] = [
     placeholderAr: '١٬٠٠٠٫٠٠',
     inputMode: 'decimal',
     pattern: '[0-9,.]+',
-    icon: <DollarSign className="h-4 w-4" />,
+    icon: <CurrencyDollar className="h-4 w-4" />,
     helperText: 'Enter amount in Saudi Riyals',
     helperTextAr: 'أدخل المبلغ بالريال السعودي',
     example: '2500.50',
@@ -223,7 +223,7 @@ export default function AccessibleInputsPage() {
       <Card className="mb-8 border-primary/20 bg-primary/5">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <CheckCircle2 className="h-5 w-5 text-primary" />
+            <CheckCircle className="h-5 w-5 text-primary" />
             {t.accessibleInputsPage.accessibilityFeatures}
           </CardTitle>
         </CardHeader>
@@ -314,7 +314,7 @@ export default function AccessibleInputsPage() {
                     {showValidation && (
                       <div className="absolute inset-y-0 end-3 flex items-center pointer-events-none">
                         {status === 'valid' ? (
-                          <CheckCircle2 className="h-4 w-4 text-green-500" />
+                          <CheckCircle className="h-4 w-4 text-green-500" />
                         ) : (
                           <XCircle className="h-4 w-4 text-red-500" />
                         )}

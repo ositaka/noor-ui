@@ -40,7 +40,7 @@ import { Suspense } from 'react'
 ```js
 // next.config.js
 experimental: {
-  optimizePackageImports: ['lucide-react', '@radix-ui/react-icons'],
+  optimizePackageImports: ['@phosphor-icons/react', '@radix-ui/react-icons'],
 }
 ```
 

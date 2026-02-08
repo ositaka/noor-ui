@@ -8,7 +8,7 @@ import { Separator } from '@/components/ui/separator'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
-import { Clock, Hash, Type, ArrowLeftRight } from 'lucide-react'
+import { Clock, Hash, TextT, ArrowsLeftRight } from '@phosphor-icons/react'
 
 export default function UtilitiesPage() {
   const { locale } = useDirection()
@@ -53,7 +53,7 @@ export default function UtilitiesPage() {
     {
       name: 'getTextDirection',
       description: 'Auto-detect text direction from content',
-      icon: ArrowLeftRight,
+      icon: ArrowsLeftRight,
       href: '#get-text-direction',
       category: 'Text & Direction',
       status: 'coming-soon',
@@ -61,7 +61,7 @@ export default function UtilitiesPage() {
     {
       name: 'isRTL',
       description: 'Check if a locale is RTL',
-      icon: Type,
+      icon: TextT,
       href: '#is-rtl',
       category: 'Text & Direction',
       status: 'coming-soon',

@@ -404,7 +404,7 @@ Fonts automatically switch based on direction:
   - `tailwind-merge` and `clsx` for class merging
   - `next-themes` for theme management
   - `react-syntax-highlighter` for code blocks
-- **Icons**: Lucide React
+- **Icons**: Phosphor Icons (Duotone)
 - **Fonts**: Inter, IBM Plex Sans Arabic, JetBrains Mono
 
 ## 📝 Adding Components
@@ -506,7 +506,7 @@ Tokens are converted to CSS custom properties in `styles/globals.css` and consum
 
 ### UI Components
 - `@radix-ui/react-*` (Multiple Radix UI primitives)
-- `lucide-react@^0.344.0`
+- `@phosphor-icons/react@^2.1.10`
 
 ### Features
 - `next-themes@^0.2.1`

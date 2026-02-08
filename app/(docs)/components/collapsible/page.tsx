@@ -9,7 +9,7 @@ import { Separator } from '@/components/ui/separator'
 import { ComponentShowcase } from '@/components/docs/component-showcase'
 import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
-import { ChevronDown, ChevronRight, ChevronsUpDown } from 'lucide-react'
+import { CaretDown, CaretRight, CaretUpDown } from '@phosphor-icons/react'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 
@@ -65,7 +65,7 @@ const controlledCode = `const [isOpen, setIsOpen] = useState(false)
   <CollapsibleTrigger asChild>
     <Button variant="outline" className="w-full justify-between">
       {isOpen ? 'Hide' : 'Show'} Details
-      <ChevronDown className={cn(
+      <CaretDown className={cn(
         "h-4 w-4 transition-transform",
         isOpen && "rotate-180"
       )} />
@@ -84,7 +84,7 @@ const sidebarCode = `const [isOpen, setIsOpen] = useState(true)
       <h4 className="text-sm font-semibold">Starred Repositories</h4>
       <CollapsibleTrigger asChild>
         <Button variant="ghost" size="sm">
-          <ChevronsUpDown className="h-4 w-4" />
+          <CaretUpDown className="h-4 w-4" />
         </Button>
       </CollapsibleTrigger>
     </div>
@@ -151,7 +151,7 @@ export default function CollapsiblePage() {
                   <CollapsibleTrigger asChild>
                     <Button variant="outline" className="w-full justify-between">
                       <span>{collapsibleT.examples.previewQuestion}</span>
-                      <ChevronDown
+                      <CaretDown
                         className={`h-4 w-4 transition-transform ${
                           isOpen1 ? 'rotate-180' : ''
                         }`}
@@ -228,7 +228,7 @@ export default function CollapsiblePage() {
                       <CollapsibleTrigger asChild>
                         <Button variant="outline" className="w-full justify-between">
                           <span>{isOpen2 ? collapsibleT.examples.hide : collapsibleT.examples.show} {collapsibleT.examples.details}</span>
-                          <ChevronDown
+                          <CaretDown
                             className={`h-4 w-4 transition-transform duration-200 ${
                               isOpen2 ? 'rotate-180' : ''
                             }`}
@@ -261,7 +261,7 @@ export default function CollapsiblePage() {
                           <h4 className="text-sm font-semibold">{collapsibleT.examples.starredRepositories}</h4>
                           <CollapsibleTrigger asChild>
                             <Button variant="ghost" size="sm">
-                              <ChevronsUpDown className="h-4 w-4" />
+                              <CaretUpDown className="h-4 w-4" />
                               <span className="sr-only">{collapsibleT.examples.toggle}</span>
                             </Button>
                           </CollapsibleTrigger>
@@ -314,7 +314,7 @@ export default function CollapsiblePage() {
                             className="w-full justify-between p-4 h-auto font-normal"
                           >
                             <span className="text-start font-medium">{item.q}</span>
-                            <ChevronRight className="h-4 w-4 shrink-0 transition-transform duration-200 data-[state=open]:rotate-90" />
+                            <CaretRight className="h-4 w-4 shrink-0 transition-transform duration-200 data-[state=open]:rotate-90" />
                           </Button>
                         </CollapsibleTrigger>
                         <CollapsibleContent className="px-4 pb-4">

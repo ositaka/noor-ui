@@ -2,7 +2,7 @@
 
 import * as React from 'react'
 import { cn } from '../../lib/utils'
-import { Check } from 'lucide-react'
+import { Check } from '@phosphor-icons/react'
 import { useDirection } from '../providers/direction-provider'
 import { content } from '../../lib/i18n'
 

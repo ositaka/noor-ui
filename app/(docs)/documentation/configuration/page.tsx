@@ -4,7 +4,7 @@ import * as React from 'react'
 import Link from 'next/link'
 import { Card, CardContent } from '@/components/ui/card'
 import { CodeBlock } from '@/components/docs/code-block'
-import { Settings, CheckCircle2, AlertTriangle } from 'lucide-react'
+import { Gear, CheckCircle, Warning } from '@phosphor-icons/react'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 
@@ -155,7 +155,7 @@ export default function ConfigurationPage() {
 
         <div className="max-w-3xl mb-12">
           <div className="flex items-center gap-3 mb-4">
-            <Settings className="h-10 w-10 text-primary" />
+            <Gear className="h-10 w-10 text-primary" />
             <h1 className="text-4xl font-bold tracking-tight">{t.title}</h1>
           </div>
           <p className="text-xl text-muted-foreground">
@@ -173,7 +173,7 @@ export default function ConfigurationPage() {
           <Card className="mt-6">
             <CardContent className="p-6">
               <h3 className="font-semibold mb-3 flex items-center gap-2">
-                <CheckCircle2 className="h-5 w-5 text-green-600" />
+                <CheckCircle className="h-5 w-5 text-green-600" />
                 {t.keyPoints}
               </h3>
               <ul className="space-y-2 text-sm text-muted-foreground">
@@ -200,7 +200,7 @@ export default function ConfigurationPage() {
           <Card className="border-yellow-500/50 bg-yellow-50 dark:bg-yellow-950/20">
             <CardContent className="p-6">
               <h3 className="font-semibold mb-2 flex items-center gap-2">
-                <AlertTriangle className="h-5 w-5 text-yellow-600 dark:text-yellow-400" />
+                <Warning className="h-5 w-5 text-yellow-600 dark:text-yellow-400" />
                 {t.important}
               </h3>
               <p className="text-sm text-muted-foreground">

@@ -1,5 +1,6 @@
 import { cn } from '@/lib/utils'
-import { Info, AlertTriangle, AlertCircle, CheckCircle, LucideIcon } from 'lucide-react'
+import { Info, Warning, WarningCircle, CheckCircle } from '@phosphor-icons/react'
+import type { IconComponent } from '@/lib/types'
 
 export type CalloutType = 'info' | 'warning' | 'error' | 'success' | 'note'
 
@@ -10,7 +11,7 @@ export interface CalloutProps {
   /** Optional title */
   title?: string
   /** Custom icon to override the default */
-  icon?: LucideIcon
+  icon?: IconComponent
   /** Additional CSS classes */
   className?: string
 }
@@ -18,7 +19,7 @@ export interface CalloutProps {
 const calloutConfig: Record<
   CalloutType,
   {
-    icon: LucideIcon
+    icon: IconComponent
     borderColor: string
     bgColor: string
     iconColor: string
@@ -33,14 +34,14 @@ const calloutConfig: Record<
     titleColor: 'text-info-foreground',
   },
   warning: {
-    icon: AlertTriangle,
+    icon: Warning,
     borderColor: 'border-warning/50',
     bgColor: 'bg-warning/5',
     iconColor: 'text-warning',
     titleColor: 'text-warning-foreground',
   },
   error: {
-    icon: AlertCircle,
+    icon: WarningCircle,
     borderColor: 'border-destructive/50',
     bgColor: 'bg-destructive/5',
     iconColor: 'text-destructive',

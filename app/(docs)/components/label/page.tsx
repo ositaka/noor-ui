@@ -11,7 +11,7 @@ import { ComponentShowcase } from '@/components/docs/component-showcase'
 import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
 import { BestPractices } from '@/components/docs/best-practices'
-import { AlertCircle } from 'lucide-react'
+import { WarningCircle } from '@phosphor-icons/react'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 
@@ -176,7 +176,7 @@ export default function LabelPage() {
           <Card>
             <CardContent className="p-6 space-y-4">
               <div className="flex items-start gap-3 p-4 bg-primary/10 rounded-lg border border-primary/20">
-                <AlertCircle className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
+                <WarningCircle className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
                 <div className="space-y-2">
                   <p className="font-semibold">{t.labelComponent.accessibility.critical}</p>
                   <ul className="space-y-2 text-sm text-muted-foreground">

@@ -9,14 +9,14 @@ import { CodeBlock } from '@/components/docs/code-block'
 import { useDirection } from '@/components/providers/direction-provider'
 import {
   ShoppingCart,
-  Search,
+  MagnifyingGlass,
   CreditCard,
   Package,
   Star,
-  CheckCircle2,
-  ExternalLink,
+  CheckCircle,
+  ArrowSquareOut,
   ArrowRight
-} from 'lucide-react'
+} from '@phosphor-icons/react'
 
 export default function EcommercePage() {
   const { locale } = useDirection()
@@ -204,7 +204,7 @@ export default function EcommercePage() {
 
   const t = content[locale]
 
-  const featureIcons = [ShoppingCart, Search, Package, CreditCard, Star]
+  const featureIcons = [ShoppingCart, MagnifyingGlass, Package, CreditCard, Star]
 
   const usageCode = `'use client'
 
@@ -259,7 +259,7 @@ const {
             <Link href="/starters">
               <Package className="h-5 w-5 me-2" />
               {t.viewAllStarters}
-              <ExternalLink className="h-4 w-4 ms-2" />
+              <ArrowSquareOut className="h-4 w-4 ms-2" />
             </Link>
           </Button>
           <Button size="lg" variant="outline" asChild>
@@ -269,7 +269,7 @@ const {
               rel="noopener noreferrer"
             >
               {t.viewOnGitHub}
-              <ExternalLink className="h-4 w-4 ms-2" />
+              <ArrowSquareOut className="h-4 w-4 ms-2" />
             </a>
           </Button>
         </div>
@@ -292,7 +292,7 @@ const {
                   <ul className="space-y-2">
                     {feature.items.map((item, i) => (
                       <li key={i} className="flex items-start gap-2 text-sm">
-                        <CheckCircle2 className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
+                        <CheckCircle className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
                         <span>{item}</span>
                       </li>
                     ))}

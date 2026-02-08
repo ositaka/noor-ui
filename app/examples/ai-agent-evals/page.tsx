@@ -40,21 +40,21 @@ import {
   type IslamicEvalResult,
 } from '@/lib/mock-data/eval-islamic-services'
 import {
-  CheckCircle2,
+  CheckCircle,
   XCircle,
-  Zap,
-  DollarSign,
+  Lightning,
+  CurrencyDollar,
   Shield,
-  TrendingUp,
-  Search,
-  ChevronRight,
-  Activity,
+  TrendUp,
+  MagnifyingGlass,
+  CaretRight,
+  Pulse,
   Play,
-  Loader2,
+  SpinnerGap,
   Check,
   Download,
   Pause,
-} from 'lucide-react'
+} from '@phosphor-icons/react'
 import { cn } from '@/lib/utils'
 
 interface RunningTest {
@@ -549,7 +549,7 @@ export default function AIAgentEvalsPage() {
           label="Accuracy"
           value={currentStep === 1 && selectedAgent === selectedTab ? liveMetrics.accuracy : currentMetrics.accuracy}
           trend={currentStep === 1 ? undefined : (selectedTab === 'islamic' ? 5.7 : 2.4)}
-          icon={<CheckCircle2 />}
+          icon={<CheckCircle />}
           format="percentage"
           className={currentStep === 1 && selectedAgent === selectedTab ? 'ring-2 ring-primary ring-offset-2' : ''}
         />
@@ -558,7 +558,7 @@ export default function AIAgentEvalsPage() {
           value={currentStep === 1 && selectedAgent === selectedTab ? `${liveMetrics.avgLatency}ms` : `${currentMetrics.avgLatency}ms`}
           trend={currentStep === 1 ? undefined : (selectedTab === 'islamic' ? -12 : -5)}
           trendLabel={currentStep === 1 ? undefined : "vs last week"}
-          icon={<Zap />}
+          icon={<Lightning />}
           className={currentStep === 1 && selectedAgent === selectedTab ? 'ring-2 ring-primary ring-offset-2' : ''}
         />
         {selectedTab === 'islamic' && (
@@ -574,7 +574,7 @@ export default function AIAgentEvalsPage() {
           <StatsCard
             label="Pass Rate"
             value={currentStep === 1 && selectedAgent === 'ecommerce' ? liveMetrics.passRate : ((currentMetrics.passed / currentMetrics.totalTests) * 100).toFixed(1)}
-            icon={<Activity />}
+            icon={<Pulse />}
             format="percentage"
             className={currentStep === 1 && selectedAgent === 'ecommerce' ? 'ring-2 ring-primary ring-offset-2' : ''}
           />
@@ -582,7 +582,7 @@ export default function AIAgentEvalsPage() {
         <StatsCard
           label="Cost/1k Requests"
           value={`$${currentMetrics.costPer1k.toFixed(2)}`}
-          icon={<DollarSign />}
+          icon={<CurrencyDollar />}
         />
       </div>
 
@@ -656,7 +656,7 @@ export default function AIAgentEvalsPage() {
             <CardContent className="pt-6">
               <div className="flex flex-wrap gap-4">
                 <div className="relative flex-1 min-w-[200px]">
-                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                  <MagnifyingGlass className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                   <Input
                     placeholder="Search test cases..."
                     value={searchQuery}
@@ -776,7 +776,7 @@ export default function AIAgentEvalsPage() {
                               onClick={() => openDetails(result)}
                             >
                               View
-                              <ChevronRight className="w-4 h-4 ml-1" />
+                              <CaretRight className="w-4 h-4 ml-1" />
                             </Button>
                           </td>
                         </tr>
@@ -1122,10 +1122,10 @@ export default function AIAgentEvalsPage() {
                                 <div className="w-5 h-5 rounded-full border-2 border-muted" />
                               )}
                               {test.status === 'running' && (
-                                <Loader2 className="w-5 h-5 text-blue-600 animate-spin" />
+                                <SpinnerGap className="w-5 h-5 text-blue-600 animate-spin" />
                               )}
                               {test.status === 'complete' && (
-                                <CheckCircle2 className="w-5 h-5 text-green-600" />
+                                <CheckCircle className="w-5 h-5 text-green-600" />
                               )}
                               {test.status === 'failed' && (
                                 <XCircle className="w-5 h-5 text-red-600" />

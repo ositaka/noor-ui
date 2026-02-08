@@ -4,7 +4,7 @@ import * as React from 'react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { AlertCircle, Home, RefreshCcw, BookOpen } from 'lucide-react'
+import { WarningCircle, House, ArrowCounterClockwise, BookOpen } from '@phosphor-icons/react'
 import { content } from '@/lib/i18n'
 
 export default function DocsError({
@@ -40,7 +40,7 @@ export default function DocsError({
         <CardHeader>
           <div className="flex items-center gap-2 mb-2">
             <div className="rounded-full bg-destructive/10 p-2">
-              <AlertCircle className="h-6 w-6 text-destructive" />
+              <WarningCircle className="h-6 w-6 text-destructive" />
             </div>
             <CardTitle className="text-2xl">{t.docsErrorPage.title}</CardTitle>
           </div>
@@ -63,7 +63,7 @@ export default function DocsError({
           )}
           <div className="flex flex-wrap gap-2">
             <Button onClick={reset}>
-              <RefreshCcw className="me-2 h-4 w-4" />
+              <ArrowCounterClockwise className="me-2 h-4 w-4" />
               {t.docsErrorPage.tryAgain}
             </Button>
             <Button variant="outline" asChild>
@@ -74,7 +74,7 @@ export default function DocsError({
             </Button>
             <Button variant="outline" asChild>
               <Link href="/">
-                <Home className="me-2 h-4 w-4" />
+                <House className="me-2 h-4 w-4" />
                 {t.docsErrorPage.home}
               </Link>
             </Button>

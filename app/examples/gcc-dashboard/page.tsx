@@ -25,14 +25,14 @@ const ZakatCalculator = dynamic(
 )
 import {
   ArrowUpRight,
-  TrendingUp,
+  TrendUp,
   Users,
   Heart,
   BookOpen,
   Calendar,
-  Home,
-  DollarSign,
-} from 'lucide-react'
+  House,
+  CurrencyDollar,
+} from '@phosphor-icons/react'
 
 export default function GCCDashboardPage() {
   const { direction, locale } = useDirection()
@@ -69,7 +69,7 @@ export default function GCCDashboardPage() {
       value: 0.945,
       format: 'percentage' as const,
       change: 0.05,
-      icon: TrendingUp,
+      icon: TrendUp,
     },
     {
       title: t.gccDashboard.stats.activeProjects,
@@ -88,7 +88,7 @@ export default function GCCDashboardPage() {
           <div className="flex items-center gap-6">
             <Link href="/" className="flex items-center gap-2">
               <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center">
-                <Home className="h-5 w-5 text-primary-foreground" />
+                <House className="h-5 w-5 text-primary-foreground" />
               </div>
               <span className="font-bold text-xl hidden sm:inline">
                 {t.gccDashboard.title}
@@ -207,7 +207,7 @@ export default function GCCDashboardPage() {
             <Tabs defaultValue="zakat" className="space-y-4">
               <TabsList>
                 <TabsTrigger value="zakat">
-                  <DollarSign className="h-4 w-4 me-2" />
+                  <CurrencyDollar className="h-4 w-4 me-2" />
                   {t.gccDashboard.tabs.zakatCalculator}
                 </TabsTrigger>
                 <TabsTrigger value="events">
@@ -296,7 +296,7 @@ export default function GCCDashboardPage() {
               </TabsContent>
             </Tabs>
 
-            {/* Recent Activity */}
+            {/* Recent Pulse */}
             <Card>
               <CardHeader>
                 <CardTitle>{t.gccDashboard.activity.title}</CardTitle>

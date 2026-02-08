@@ -16,17 +16,17 @@ import { cn } from '@/lib/utils'
 import {
   Package,
   Truck,
-  CheckCircle2,
+  CheckCircle,
   Clock,
-  Search,
+  MagnifyingGlass,
   Eye,
   Download,
   MapPin,
   Calendar,
   CreditCard,
   XCircle,
-  RotateCcw,
-} from 'lucide-react'
+  ArrowCounterClockwise,
+} from '@phosphor-icons/react'
 
 interface Order {
   id: string
@@ -189,7 +189,7 @@ export default function OrdersPage() {
       case 'shipped':
         return Truck
       case 'delivered':
-        return CheckCircle2
+        return CheckCircle
       case 'cancelled':
         return XCircle
     }
@@ -373,7 +373,7 @@ export default function OrdersPage() {
                       <div className="flex gap-4">
                         <div className="flex flex-col items-center">
                           <div className="p-2 bg-green-100 rounded-full">
-                            <CheckCircle2 className="h-4 w-4 text-green-600" />
+                            <CheckCircle className="h-4 w-4 text-green-600" />
                           </div>
                           <div className="w-0.5 h-12 bg-green-200" />
                         </div>
@@ -499,7 +499,7 @@ export default function OrdersPage() {
                   </Button>
                   {selectedOrder.status === 'delivered' && (
                     <Button variant="outline" className="w-full">
-                      <RotateCcw className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
+                      <ArrowCounterClockwise className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
                       {t.marketplaceOrders.requestReturn}
                     </Button>
                   )}
@@ -558,7 +558,7 @@ export default function OrdersPage() {
         {/* Search */}
         <div className="mb-6">
           <div className="relative max-w-md">
-            <Search className={cn(
+            <MagnifyingGlass className={cn(
               'absolute top-3 h-4 w-4 text-muted-foreground',
               isRTL ? 'right-3' : 'left-3'
             )} />

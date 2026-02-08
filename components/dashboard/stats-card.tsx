@@ -4,7 +4,7 @@ import * as React from 'react'
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
 import { Skeleton } from '@/components/ui/skeleton'
 import { cn } from '@/lib/utils'
-import { TrendingUp, TrendingDown, Minus } from 'lucide-react'
+import { TrendUp, TrendDown, Minus } from '@phosphor-icons/react'
 import { ArabicNumber } from '@/components/ui/arabic-number'
 import { useDirection } from '@/components/providers/direction-provider'
 
@@ -104,8 +104,8 @@ export function StatsCard({
                   trendDirection === 'neutral' && 'text-muted-foreground'
                 )}
               >
-                {trendDirection === 'up' && <TrendingUp className="h-3 w-3" />}
-                {trendDirection === 'down' && <TrendingDown className="h-3 w-3" />}
+                {trendDirection === 'up' && <TrendUp className="h-3 w-3" />}
+                {trendDirection === 'down' && <TrendDown className="h-3 w-3" />}
                 {trendDirection === 'neutral' && <Minus className="h-3 w-3" />}
                 <ArabicNumber
                   value={Math.abs(trend)}

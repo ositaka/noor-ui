@@ -18,21 +18,21 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import {
-  Home,
+  House,
   Briefcase,
   Code,
   Palette,
-  Smartphone,
+  DeviceMobile,
   Globe,
-  Mail,
-  Github,
-  Linkedin,
-  Twitter,
-  ExternalLink,
+  EnvelopeSimple,
+  GithubLogo,
+  LinkedinLogo,
+  TwitterLogo,
+  ArrowSquareOut,
   Calendar,
-  Award,
+  Trophy,
   Users,
-} from 'lucide-react'
+} from '@phosphor-icons/react'
 import { useDirection } from '@/components/providers/direction-provider'
 import { DirectionToggle } from '@/components/docs/direction-toggle'
 import { content } from '@/lib/i18n'
@@ -207,7 +207,7 @@ export default function PortfolioPage() {
     { label: t.portfolioPage.stats.projectsCompleted, value: '50+', icon: Briefcase },
     { label: t.portfolioPage.stats.happyClients, value: '30+', icon: Users },
     { label: t.portfolioPage.stats.yearsExperience, value: '8+', icon: Calendar },
-    { label: t.portfolioPage.stats.awardsWon, value: '12', icon: Award },
+    { label: t.portfolioPage.stats.awardsWon, value: '12', icon: Trophy },
   ]
 
   const categories = [
@@ -226,7 +226,7 @@ export default function PortfolioPage() {
           <div className="flex items-center gap-6">
             <Link href="/" className="flex items-center gap-2">
               <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center">
-                <Home className="h-5 w-5 text-primary-foreground" />
+                <House className="h-5 w-5 text-primary-foreground" />
               </div>
               <span className="font-bold text-xl hidden sm:inline">
                 {t.portfolioPage.header.name}
@@ -299,17 +299,17 @@ export default function PortfolioPage() {
               <div className="flex items-center gap-4 mt-8">
                 <Button variant="ghost" size="icon" asChild>
                   <Link href="https://github.com" target="_blank">
-                    <Github className="h-5 w-5" />
+                    <GithubLogo className="h-5 w-5" />
                   </Link>
                 </Button>
                 <Button variant="ghost" size="icon" asChild>
                   <Link href="https://linkedin.com" target="_blank">
-                    <Linkedin className="h-5 w-5" />
+                    <LinkedinLogo className="h-5 w-5" />
                   </Link>
                 </Button>
                 <Button variant="ghost" size="icon" asChild>
                   <Link href="https://twitter.com" target="_blank">
-                    <Twitter className="h-5 w-5" />
+                    <TwitterLogo className="h-5 w-5" />
                   </Link>
                 </Button>
               </div>
@@ -375,7 +375,7 @@ export default function PortfolioPage() {
                       <CardTitle className="text-xl">
                         {isRTL ? project.titleAr : project.title}
                       </CardTitle>
-                      <ExternalLink className="h-5 w-5 text-muted-foreground" />
+                      <ArrowSquareOut className="h-5 w-5 text-muted-foreground" />
                     </div>
                     <CardDescription>
                       {isRTL ? project.descriptionAr : project.description}
@@ -533,7 +533,7 @@ export default function PortfolioPage() {
                 </div>
 
                 <Button type="submit" size="lg" className="w-full sm:w-auto">
-                  <Mail className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
+                  <EnvelopeSimple className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
                   {t.portfolioPage.contact.sendMessage}
                 </Button>
               </form>

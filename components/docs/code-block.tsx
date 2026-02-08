@@ -5,7 +5,7 @@ import dynamic from 'next/dynamic'
 import { cn, copyToClipboard } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
-import { Copy, Check, ChevronDown, ChevronUp } from 'lucide-react'
+import { Copy, Check, CaretDown, CaretUp } from '@phosphor-icons/react'
 import { Skeleton } from '@/components/ui/skeleton'
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism'
 import { useDirection } from '@/components/providers/direction-provider'
@@ -83,9 +83,9 @@ export function CodeBlock({
                 className="h-7 px-2"
               >
                 {collapsed ? (
-                  <ChevronDown className="h-4 w-4" />
+                  <CaretDown className="h-4 w-4" />
                 ) : (
-                  <ChevronUp className="h-4 w-4" />
+                  <CaretUp className="h-4 w-4" />
                 )}
               </Button>
             )}

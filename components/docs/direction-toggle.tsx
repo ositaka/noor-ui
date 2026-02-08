@@ -2,7 +2,7 @@
 
 import * as React from 'react'
 import { Button } from '@/components/ui/button'
-import { ArrowLeftRight } from 'lucide-react'
+import { ArrowsLeftRight } from '@phosphor-icons/react'
 import { useDirection } from '@/components/providers/direction-provider'
 
 export function DirectionToggle() {
@@ -20,7 +20,7 @@ export function DirectionToggle() {
       onClick={handleToggle}
       aria-label={`Switch to ${direction === 'ltr' ? 'Arabic (RTL)' : 'English (LTR)'}`}
     >
-      <ArrowLeftRight className="h-4 w-4 me-2" />
+      <ArrowsLeftRight className="h-4 w-4 me-2" />
       {direction === 'ltr' ? 'العربية' : 'English'}
     </Button>
   )

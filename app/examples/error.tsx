@@ -4,7 +4,7 @@ import * as React from 'react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { AlertCircle, Home, RefreshCcw, Sparkles } from 'lucide-react'
+import { WarningCircle, House, ArrowCounterClockwise, Sparkle } from '@phosphor-icons/react'
 import { content } from '@/lib/i18n'
 
 export default function ExamplesError({
@@ -40,7 +40,7 @@ export default function ExamplesError({
         <CardHeader>
           <div className="flex items-center gap-2 mb-2">
             <div className="rounded-full bg-destructive/10 p-2">
-              <AlertCircle className="h-6 w-6 text-destructive" />
+              <WarningCircle className="h-6 w-6 text-destructive" />
             </div>
             <CardTitle className="text-2xl">{t.examplesErrorPage.title}</CardTitle>
           </div>
@@ -58,19 +58,19 @@ export default function ExamplesError({
           )}
           <div className="flex flex-wrap gap-2">
             <Button onClick={reset} className="flex-1">
-              <RefreshCcw className="me-2 h-4 w-4" />
+              <ArrowCounterClockwise className="me-2 h-4 w-4" />
               {t.examplesErrorPage.tryAgain}
             </Button>
             <Button variant="outline" asChild className="flex-1">
               <Link href="/examples">
-                <Sparkles className="me-2 h-4 w-4" />
+                <Sparkle className="me-2 h-4 w-4" />
                 {t.examplesErrorPage.allExamples}
               </Link>
             </Button>
           </div>
           <Button variant="ghost" asChild className="w-full">
             <Link href="/">
-              <Home className="me-2 h-4 w-4" />
+              <House className="me-2 h-4 w-4" />
               {t.examplesErrorPage.goHome}
             </Link>
           </Button>
