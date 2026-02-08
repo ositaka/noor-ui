@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { expect, userEvent, within } from 'storybook/test';
 import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator } from '../../../components/ui/breadcrumb';
 import { Card, CardContent } from '../../../components/ui/card';
-import { Home, Folder, File } from 'lucide-react';
+import { House, Folder, File } from '@phosphor-icons/react';
 import * as React from 'react';
 
 /**
@@ -211,7 +211,7 @@ export const WithIcons: Story = {
       <BreadcrumbList>
         <BreadcrumbItem>
           <BreadcrumbLink href="/" className="flex items-center gap-2">
-            <Home className="h-4 w-4" />
+            <House className="h-4 w-4" />
             Home
           </BreadcrumbLink>
         </BreadcrumbItem>
@@ -329,7 +329,7 @@ export const InCard: Story = {
           <BreadcrumbList>
             <BreadcrumbItem>
               <BreadcrumbLink href="/" className="flex items-center gap-2">
-                <Home className="h-4 w-4" />
+                <House className="h-4 w-4" />
                 Home
               </BreadcrumbLink>
             </BreadcrumbItem>
@@ -467,7 +467,7 @@ export const RTLWithIcons: Story = {
       <BreadcrumbList>
         <BreadcrumbItem>
           <BreadcrumbLink href="/" className="flex items-center gap-2">
-            <Home className="h-4 w-4" />
+            <House className="h-4 w-4" />
             الرئيسية
           </BreadcrumbLink>
         </BreadcrumbItem>

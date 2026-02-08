@@ -9,7 +9,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from './tooltip'
-import { Info, AlertTriangle } from 'lucide-react'
+import { Info, Warning } from '@phosphor-icons/react'
 import { useDirection } from '../providers/direction-provider'
 import { content } from '../../lib/i18n'
 
@@ -177,7 +177,7 @@ const TokenCounter = React.forwardRef<HTMLDivElement, TokenCounterProps>(
 
           {status !== 'safe' && (
             <Badge variant={status === 'danger' ? 'destructive' : 'secondary'} className="text-xs">
-              <AlertTriangle className={cn('h-3 w-3', isRTL ? 'ms-1' : 'me-1')} />
+              <Warning className={cn('h-3 w-3', isRTL ? 'ms-1' : 'me-1')} />
               {status === 'danger' ? t.ui.components.nearLimit : t.ui.components.warning}
             </Badge>
           )}

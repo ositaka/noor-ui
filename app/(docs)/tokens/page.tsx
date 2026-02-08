@@ -3,7 +3,7 @@
 import * as React from 'react'
 import Link from 'next/link'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Copy, Check, Info } from 'lucide-react'
+import { Copy, Check, Info } from '@phosphor-icons/react'
 import { Button } from '@/components/ui/button'
 import { CodeBlock } from '@/components/docs/code-block'
 import { tokens, type Theme } from '@/lib/tokens'

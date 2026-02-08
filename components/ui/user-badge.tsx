@@ -2,7 +2,7 @@
 
 import * as React from 'react'
 import { Badge } from './badge'
-import { Check, Shield, User, Crown } from 'lucide-react'
+import { Check, Shield, User, Crown } from '@phosphor-icons/react'
 import { cn } from '@/lib/utils'
 
 export type UserBadgeVariant = 'author' | 'moderator' | 'verified' | 'admin' | 'custom'

@@ -2,7 +2,7 @@
 
 import * as React from 'react'
 import Link from 'next/link'
-import { Sunrise } from 'lucide-react'
+import { SunHorizon } from '@phosphor-icons/react'
 import { Separator } from '@/components/ui/separator'
 import { useDirection } from '@/components/providers/direction-provider'
 
@@ -72,7 +72,7 @@ export function SiteFooter() {
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
           <div>
             <div className="flex items-center gap-2 mb-4">
-              <Sunrise className="h-5 w-5 text-primary" />
+              <SunHorizon className="h-5 w-5 text-primary" />
               <span className="font-bold">Noor UI</span>
             </div>
             <p className="text-sm text-muted-foreground">{content.tagline}</p>

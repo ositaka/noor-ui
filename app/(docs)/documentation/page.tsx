@@ -3,12 +3,12 @@
 import * as React from 'react'
 import Link from 'next/link'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Book, Code2, Palette, Globe2, Accessibility, type LucideIcon } from 'lucide-react'
+import { Book, CodeBlock as CodeBlockIcon, Palette, GlobeHemisphereWest, Wheelchair, type Icon as PhosphorIcon } from '@phosphor-icons/react'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 
 interface DocumentationSection {
-  icon: LucideIcon
+  icon: PhosphorIcon
   id?: string
   titleKey: string
   descriptionKey: string
@@ -31,7 +31,7 @@ export default function DocumentationPage() {
       ],
     },
     {
-      icon: Code2,
+      icon: CodeBlockIcon,
       titleKey: 'components',
       descriptionKey: 'components',
       links: [
@@ -52,7 +52,7 @@ export default function DocumentationPage() {
       ],
     },
     {
-      icon: Globe2,
+      icon: GlobeHemisphereWest,
       titleKey: 'rtlSupport',
       descriptionKey: 'rtlSupport',
       links: [
@@ -62,7 +62,7 @@ export default function DocumentationPage() {
       ],
     },
     {
-      icon: Accessibility,
+      icon: Wheelchair,
       id: 'accessibility',
       titleKey: 'accessibilitySection',
       descriptionKey: 'accessibilitySection',

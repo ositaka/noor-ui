@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils'
-import { Quote } from 'lucide-react'
+import { Quotes } from '@phosphor-icons/react'
 
 export interface BlockquoteProps {
   children: React.ReactNode
@@ -49,7 +49,7 @@ export function Blockquote({
       >
         {/* Quote icon for accent variant */}
         {variant === 'accent' && (
-          <Quote className="absolute top-4 end-4 h-8 w-8 text-primary/20" />
+          <Quotes className="absolute top-4 end-4 h-8 w-8 text-primary/20" />
         )}
 
         <div className="relative text-lg italic text-foreground/90 leading-relaxed text-balance">

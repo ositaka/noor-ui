@@ -1,7 +1,7 @@
 'use client'
 
 import * as React from 'react'
-import { Calendar as CalendarIcon } from 'lucide-react'
+import { Calendar as CalendarIcon } from '@phosphor-icons/react'
 import { cn } from '../../lib/utils'
 import { Button } from './button'
 import { Calendar } from './calendar'

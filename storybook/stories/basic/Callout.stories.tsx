@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { expect, within } from 'storybook/test';
 import { Callout } from '../../../components/ui/callout';
-import { Lightbulb } from 'lucide-react';
+import { Lightbulb } from '@phosphor-icons/react';
 
 /**
  * Callout Component Stories
@@ -22,7 +22,7 @@ const meta = {
   argTypes: {
     icon: {
       control: false,
-      description: 'Custom icon component (LucideIcon) - not controllable via UI'
+      description: 'Custom icon component (IconComponent) - not controllable via UI'
     }
   }
 } satisfies Meta<typeof Callout>;
@@ -224,7 +224,7 @@ export const WithCustomIcon: Story = {
     controls: { disable: true },
     docs: {
       description: {
-        story: 'Callout with a custom icon. You can pass any Lucide icon via the icon prop.'
+        story: 'Callout with a custom icon. You can pass any Phosphor icon via the icon prop.'
       }
     }
   },

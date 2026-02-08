@@ -15,11 +15,11 @@ import {
   Copy,
   Share,
   Download,
-  Trash2,
+  Trash,
   Edit,
   Star,
   Archive
-} from 'lucide-react';
+} from '@phosphor-icons/react';
 import * as React from 'react';
 
 /**
@@ -87,7 +87,7 @@ export const Default: Story = {
         </ContextMenuItem>
         <ContextMenuSeparator />
         <ContextMenuItem className="text-destructive" onSelect={fn()}>
-          <Trash2 className="me-2 h-4 w-4" />
+          <Trash className="me-2 h-4 w-4" />
           <span>Delete</span>
           <ContextMenuShortcut>⌘D</ContextMenuShortcut>
         </ContextMenuItem>
@@ -172,7 +172,7 @@ export const BasicUsage: Story = {
         </ContextMenuItem>
         <ContextMenuSeparator />
         <ContextMenuItem className="text-destructive">
-          <Trash2 className="me-2 h-4 w-4" />
+          <Trash className="me-2 h-4 w-4" />
           <span>Delete</span>
           <ContextMenuShortcut>⌘D</ContextMenuShortcut>
         </ContextMenuItem>
@@ -241,7 +241,7 @@ export const WithIcons: Story = {
         </ContextMenuItem>
         <ContextMenuSeparator />
         <ContextMenuItem className="text-destructive">
-          <Trash2 className="me-2 h-4 w-4" />
+          <Trash className="me-2 h-4 w-4" />
           <span>Delete</span>
           <ContextMenuShortcut>⌘D</ContextMenuShortcut>
         </ContextMenuItem>
@@ -368,7 +368,7 @@ export const FileExplorer: Story = {
                 <span>Archive</span>
               </ContextMenuItem>
               <ContextMenuItem className="text-destructive">
-                <Trash2 className="me-2 h-4 w-4" />
+                <Trash className="me-2 h-4 w-4" />
                 <span>Delete</span>
               </ContextMenuItem>
             </ContextMenuContent>
@@ -508,7 +508,7 @@ export const RTLBasic: Story = {
         </ContextMenuItem>
         <ContextMenuSeparator />
         <ContextMenuItem className="text-destructive">
-          <Trash2 className="me-2 h-4 w-4" />
+          <Trash className="me-2 h-4 w-4" />
           <span>حذف</span>
           <ContextMenuShortcut>⌘D</ContextMenuShortcut>
         </ContextMenuItem>
@@ -577,7 +577,7 @@ export const RTLWithIcons: Story = {
         </ContextMenuItem>
         <ContextMenuSeparator />
         <ContextMenuItem className="text-destructive">
-          <Trash2 className="me-2 h-4 w-4" />
+          <Trash className="me-2 h-4 w-4" />
           <span>حذف</span>
           <ContextMenuShortcut>⌘D</ContextMenuShortcut>
         </ContextMenuItem>
@@ -669,7 +669,7 @@ export const RTLFileExplorer: Story = {
                 <span>أرشفة</span>
               </ContextMenuItem>
               <ContextMenuItem className="text-destructive">
-                <Trash2 className="me-2 h-4 w-4" />
+                <Trash className="me-2 h-4 w-4" />
                 <span>حذف</span>
               </ContextMenuItem>
             </ContextMenuContent>

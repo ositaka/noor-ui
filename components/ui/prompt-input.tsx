@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { cn } from '../../lib/utils'
 import { Button } from './button'
-import { Send, Paperclip, Mic, Loader2 } from 'lucide-react'
+import { PaperPlaneTilt, Paperclip, Microphone, SpinnerGap } from '@phosphor-icons/react'
 import { useDirection } from '../providers/direction-provider'
 import { content } from '../../lib/i18n'
 
@@ -176,7 +176,7 @@ const PromptInput = React.forwardRef<HTMLTextAreaElement, PromptInputProps>(
               onClick={onVoice}
               disabled={isLoading}
             >
-              <Mic className="h-4 w-4" />
+              <Microphone className="h-4 w-4" />
               <span className="sr-only">{t.ui.components.voiceInput}</span>
             </Button>
           )}
@@ -189,9 +189,9 @@ const PromptInput = React.forwardRef<HTMLTextAreaElement, PromptInputProps>(
             disabled={!displayValue.trim() || isLoading}
           >
             {isLoading ? (
-              <Loader2 className="h-4 w-4 animate-spin" />
+              <SpinnerGap className="h-4 w-4 animate-spin" />
             ) : (
-              <Send className="h-4 w-4" />
+              <PaperPlaneTilt className="h-4 w-4" />
             )}
             <span className="sr-only">{t.ui.components.send}</span>
           </Button>

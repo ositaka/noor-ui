@@ -10,7 +10,7 @@ import { Separator } from '@/components/ui/separator'
 import { ComponentShowcase } from '@/components/docs/component-showcase'
 import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
-import { Zap, Cpu, FileOutput, AlertCircle } from 'lucide-react'
+import { Lightning, Cpu, FileArrowUp, WarningCircle } from '@phosphor-icons/react'
 import { type Node, type Edge } from '@xyflow/react'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
@@ -152,7 +152,7 @@ const simpleWorkflowCode = `const nodes = [
       label: 'Trigger',
       description: 'When email received',
       type: 'trigger',
-      icon: Zap
+      icon: Lightning
     }
   },
   {
@@ -174,7 +174,7 @@ const simpleWorkflowCode = `const nodes = [
       label: 'Output',
       description: 'Send to Slack',
       type: 'action',
-      icon: FileOutput
+      icon: FileArrowUp
     }
   }
 ]
@@ -240,7 +240,7 @@ const previewNodes: Node[] = [
       label: 'Trigger',
       description: 'When email received',
       type: 'trigger',
-      icon: Zap,
+      icon: Lightning,
     },
   },
   {
@@ -262,7 +262,7 @@ const previewNodes: Node[] = [
       label: 'Output',
       description: 'Send to Slack',
       type: 'action',
-      icon: FileOutput,
+      icon: FileArrowUp,
     },
   },
 ]
@@ -310,7 +310,7 @@ export default function WorkflowCanvasPage() {
           <div className="flex items-center gap-3 mb-4">
             <h1 className="text-4xl font-bold tracking-tight">Workflow Canvas</h1>
             <Badge variant="secondary" className="flex items-center gap-1.5">
-              <AlertCircle className="h-3 w-3" />
+              <WarningCircle className="h-3 w-3" />
               {t.componentPage.workInProgress}
             </Badge>
           </div>
@@ -319,7 +319,7 @@ export default function WorkflowCanvasPage() {
             {workflowCanvasT.description}
           </p>
             <div className="flex items-start gap-2 p-3 bg-yellow-50 dark:bg-yellow-950/20 border border-yellow-200 dark:border-yellow-800 rounded-lg max-w-3xl">
-              <AlertCircle className="h-4 w-4 text-yellow-600 dark:text-yellow-500 mt-0.5 flex-shrink-0" />
+              <WarningCircle className="h-4 w-4 text-yellow-600 dark:text-yellow-500 mt-0.5 flex-shrink-0" />
               <p className="text-sm text-yellow-800 dark:text-yellow-200">
                 <strong>{t.componentPage.wipNote}</strong> {t.componentPage.wipNoteText}
               </p>
@@ -490,13 +490,13 @@ export default function WorkflowCanvasPage() {
                           id: '1',
                           type: 'workflowNode',
                           position: { x: 50, y: 100 },
-                          data: { label: 'Start', icon: Zap },
+                          data: { label: 'Start', icon: Lightning },
                         },
                         {
                           id: '2',
                           type: 'workflowNode',
                           position: { x: 300, y: 100 },
-                          data: { label: 'End', icon: FileOutput },
+                          data: { label: 'End', icon: FileArrowUp },
                         },
                       ]}
                       initialEdges={[{ id: 'e1-2', source: '1', target: '2' }]}
@@ -515,13 +515,13 @@ export default function WorkflowCanvasPage() {
                           id: '1',
                           type: 'workflowNode',
                           position: { x: 50, y: 100 },
-                          data: { label: 'بداية', labelAr: 'بداية', icon: Zap, isRTL: true },
+                          data: { label: 'بداية', labelAr: 'بداية', icon: Lightning, isRTL: true },
                         },
                         {
                           id: '2',
                           type: 'workflowNode',
                           position: { x: 300, y: 100 },
-                          data: { label: 'نهاية', labelAr: 'نهاية', icon: FileOutput, isRTL: true },
+                          data: { label: 'نهاية', labelAr: 'نهاية', icon: FileArrowUp, isRTL: true },
                         },
                       ]}
                       initialEdges={[{ id: 'e1-2', source: '1', target: '2' }]}

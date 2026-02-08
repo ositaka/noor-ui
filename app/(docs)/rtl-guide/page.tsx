@@ -8,7 +8,7 @@ import { CodeBlock } from '@/components/docs/code-block'
 import { ComponentShowcase } from '@/components/docs/component-showcase'
 import { BestPractices } from '@/components/docs/best-practices'
 import { ButtonArrow } from '@/components/ui/button-arrow'
-import { Sparkles, ArrowRight, Info, Lightbulb, Book, CheckCircle2 } from 'lucide-react'
+import { Sparkle, ArrowRight, Info, Lightbulb, Book, CheckCircle } from '@phosphor-icons/react'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 
@@ -78,7 +78,7 @@ const flexLayoutCode = `// ❌ BAD: Manual RTL handling
 </div>`
 
 const iconMirroringCode = `// Icons that should mirror in RTL
-import { ArrowRight, ChevronRight, ArrowLeft } from 'lucide-react'
+import { ArrowRight, CaretRight, ArrowLeft } from '@phosphor-icons/react'
 
 <Button>
   Next
@@ -86,16 +86,16 @@ import { ArrowRight, ChevronRight, ArrowLeft } from 'lucide-react'
 </Button>
 
 // Icons that should NOT mirror in RTL
-import { Settings, User, Search } from 'lucide-react'
+import { Gear, User, MagnifyingGlass } from '@phosphor-icons/react'
 
 <Button>
-  <Settings className="me-2" /> {/* Won't mirror */}
+  <Gear className="me-2" /> {/* Won't mirror */}
   Settings
 </Button>`
 
 const keyboardShortcutsCode = `// ✅ CORRECT: Shortcuts stay at physical end, text flows naturally
 <button className="flex items-center gap-2">
-  <Search className="h-4 w-4" />
+  <MagnifyingGlass className="h-4 w-4" />
   <span>بحث</span>
   {/* ms-auto pushes to end, rtl:flex-row-reverse keeps ⌘K order */}
   <kbd className="ms-auto inline-flex gap-1 rtl:flex-row-reverse">
@@ -319,19 +319,19 @@ export default function RTLGuidePage() {
                 <h3 className="font-semibold mb-2">{t.philosophy.corePrinciples}</h3>
                 <ul className="text-sm text-muted-foreground space-y-2">
                   <li className="flex items-start gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-green-600 mt-0.5 shrink-0" />
+                    <CheckCircle className="h-4 w-4 text-green-600 mt-0.5 shrink-0" />
                     <span>{t.philosophy.principle1}</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-green-600 mt-0.5 shrink-0" />
+                    <CheckCircle className="h-4 w-4 text-green-600 mt-0.5 shrink-0" />
                     <span>{t.philosophy.principle2}</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-green-600 mt-0.5 shrink-0" />
+                    <CheckCircle className="h-4 w-4 text-green-600 mt-0.5 shrink-0" />
                     <span>{t.philosophy.principle3}</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-green-600 mt-0.5 shrink-0" />
+                    <CheckCircle className="h-4 w-4 text-green-600 mt-0.5 shrink-0" />
                     <span>{t.philosophy.principle4}</span>
                   </li>
                 </ul>
@@ -459,7 +459,7 @@ export default function RTLGuidePage() {
 
               <div>
                 <h3 className="font-semibold mb-2 flex items-center gap-2">
-                  <Sparkles className="h-5 w-5 text-primary" />
+                  <Sparkle className="h-5 w-5 text-primary" />
                   {t.keyboardShortcuts.bestPractice}
                 </h3>
                 <p className="text-sm text-muted-foreground">
@@ -522,23 +522,23 @@ export default function RTLGuidePage() {
                   <h3 className="font-semibold mb-2">{t.testing.manualTestingChecklist}</h3>
                   <ul className="text-sm text-muted-foreground space-y-2">
                     <li className="flex items-start gap-2">
-                      <CheckCircle2 className="h-4 w-4 text-green-600 mt-0.5 shrink-0" />
+                      <CheckCircle className="h-4 w-4 text-green-600 mt-0.5 shrink-0" />
                       <span>{t.testing.checklist1}</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <CheckCircle2 className="h-4 w-4 text-green-600 mt-0.5 shrink-0" />
+                      <CheckCircle className="h-4 w-4 text-green-600 mt-0.5 shrink-0" />
                       <span>{t.testing.checklist2}</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <CheckCircle2 className="h-4 w-4 text-green-600 mt-0.5 shrink-0" />
+                      <CheckCircle className="h-4 w-4 text-green-600 mt-0.5 shrink-0" />
                       <span>{t.testing.checklist3}</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <CheckCircle2 className="h-4 w-4 text-green-600 mt-0.5 shrink-0" />
+                      <CheckCircle className="h-4 w-4 text-green-600 mt-0.5 shrink-0" />
                       <span>{t.testing.checklist4}</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <CheckCircle2 className="h-4 w-4 text-green-600 mt-0.5 shrink-0" />
+                      <CheckCircle className="h-4 w-4 text-green-600 mt-0.5 shrink-0" />
                       <span>{t.testing.checklist5}</span>
                     </li>
                   </ul>
@@ -776,7 +776,7 @@ export default function RTLGuidePage() {
               <Card className="hover:border-primary transition-colors h-full">
                 <CardContent className="p-6">
                   <h3 className="font-semibold mb-2 flex items-center gap-2">
-                    <Sparkles className="h-5 w-5 text-primary" />
+                    <Sparkle className="h-5 w-5 text-primary" />
                     {t.resources.componentLibrary}
                   </h3>
                   <p className="text-sm text-muted-foreground">

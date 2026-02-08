@@ -10,7 +10,7 @@ import { DataTable, type ColumnDef, type SortDirection } from '@/components/ui/d
 import { ComponentShowcase } from '@/components/docs/component-showcase'
 import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
-import { Sparkles } from 'lucide-react'
+import { Sparkle } from '@phosphor-icons/react'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 
@@ -640,7 +640,7 @@ const customCellCode = `const columns: ColumnDef<User>[] = [
           <div className="flex items-center gap-3 mb-4">
             <h1 className="text-4xl font-bold tracking-tight">{t.dataTableComponent.title}</h1>
             <Badge variant="outline" className="gap-1">
-              <Sparkles className="h-3 w-3" />
+              <Sparkle className="h-3 w-3" />
               {t.dataTableComponent.badge}
             </Badge>
           </div>

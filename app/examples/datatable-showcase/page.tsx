@@ -30,7 +30,7 @@ import {
 import { useDirection } from '@/components/providers/direction-provider'
 import { DirectionToggle } from '@/components/docs/direction-toggle'
 import { content } from '@/lib/i18n'
-import { Download, RefreshCw, Users } from 'lucide-react'
+import { Download, ArrowClockwise, Users } from '@phosphor-icons/react'
 
 // Sample user data
 interface User {
@@ -405,7 +405,7 @@ export default function DataTableShowcasePage() {
 
             <div className="flex items-center gap-2">
               <Button variant="outline" onClick={handleRefresh} disabled={isLoading}>
-                <RefreshCw className={`h-4 w-4 me-2 ${isLoading ? 'animate-spin' : ''}`} />
+                <ArrowClockwise className={`h-4 w-4 me-2 ${isLoading ? 'animate-spin' : ''}`} />
                 {t.datatableShowcasePage.buttons.refresh}
               </Button>
               <Button onClick={handleExportCSV}>

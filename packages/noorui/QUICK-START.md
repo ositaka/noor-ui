@@ -49,13 +49,13 @@ npm pack --dry-run
 npm pack
 
 # Install in test project
-npm install /path/to/noorui-rtl-0.7.1.tgz
+npm install /path/to/noorui-rtl-0.8.0.tgz
 ```
 
 ## 📝 Current Package Info
 
 - **Name**: noorui-rtl
-- **Version**: 0.7.1
+- **Version**: 0.8.0
 - **Size**: ~5.0 kB
 - **Files**: 9 (LICENSE, README, package.json, dist/*)
 - **License**: MIT

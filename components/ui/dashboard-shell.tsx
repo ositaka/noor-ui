@@ -12,7 +12,7 @@ import { UserMenu } from './user-menu'
 import { NotificationCenter, type Notification } from './notification-center'
 import { useDirection } from '../providers/direction-provider'
 import { content } from '../../lib/i18n'
-import { Menu, X } from 'lucide-react'
+import { List as Menu, X } from '@phosphor-icons/react'
 
 export interface NavItem {
   title: string

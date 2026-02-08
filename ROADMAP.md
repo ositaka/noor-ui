@@ -91,7 +91,7 @@ Build the **go-to design system for bilingual (LTR/RTL) web applications**, star
 - ✅ Version and release strategy established
 - ✅ Automated pre-publish checks (translations, links, types)
 
-**Current Version:** v0.7.1 (2026-02-07)
+**Current Version:** v0.8.0 (2026-02-07)
 
 **Latest Updates:**
 - ✅ Tailwind CSS v3 → v4.1 migration (CSS-first configuration)
@@ -168,7 +168,7 @@ Build the **go-to design system for bilingual (LTR/RTL) web applications**, star
 
 ## 🚧 Current Status: READY FOR PUBLIC LAUNCH! 🚀
 
-**Package Published:** [noorui-rtl v0.7.1 on npm](https://www.npmjs.com/package/noorui-rtl)
+**Package Published:** [noorui-rtl v0.8.0 on npm](https://www.npmjs.com/package/noorui-rtl)
 
 **Technical Pre-Launch:** ✅ **COMPLETE** (2025-12-02)
 - ✅ Repository public on GitHub
@@ -196,7 +196,7 @@ Build the **go-to design system for bilingual (LTR/RTL) web applications**, star
 - ✅ **Custom themes system** - Extensible DesignSystemProvider, consumers can create custom themes
 - ✅ **`--color-*` refactoring** - Theme classes use proper `--color-*` and `--radius-*` scoping
 - ✅ **i18n improvements** - ~50 hardcoded English strings replaced with EN/AR translations
-- ✅ **NPM package updated** (noorui-rtl v0.7.1)
+- ✅ **NPM package updated** (noorui-rtl v0.8.0)
 - ✅ **74+ production-ready components**
 - ✅ **Complete documentation site** (noorui.com)
 - ✅ **Kitab Blog Starter** live at kitab.noorui.com - production example with 4 languages

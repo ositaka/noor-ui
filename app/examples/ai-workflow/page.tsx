@@ -15,7 +15,7 @@ import { Card } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
 import { cn } from '@/lib/utils'
-import { Play, RotateCcw, Settings, Sparkles, AlertCircle } from 'lucide-react'
+import { Play, ArrowCounterClockwise, Gear, Sparkle, WarningCircle } from '@phosphor-icons/react'
 import type { Node, Edge, NodeProps } from '@xyflow/react'
 
 // Custom LLM Node with Model Selector
@@ -229,7 +229,7 @@ export default function AIWorkflowPage() {
                   {t.aiWorkflowPage.title}
                 </h1>
                 <Badge variant="secondary" className="flex items-center gap-1.5">
-                  <AlertCircle className="h-3 w-3" />
+                  <WarningCircle className="h-3 w-3" />
                   {t.aiWorkflowPage.workInProgress}
                 </Badge>
               </div>
@@ -237,7 +237,7 @@ export default function AIWorkflowPage() {
                 {t.aiWorkflowPage.subtitle}
               </p>
               <div className="flex items-start gap-2 p-3 bg-yellow-50 dark:bg-yellow-950/20 border border-yellow-200 dark:border-yellow-800 rounded-lg max-w-3xl">
-                <AlertCircle className="h-4 w-4 text-yellow-600 dark:text-yellow-500 mt-0.5 flex-shrink-0" />
+                <WarningCircle className="h-4 w-4 text-yellow-600 dark:text-yellow-500 mt-0.5 flex-shrink-0" />
                 <p className="text-sm text-yellow-800 dark:text-yellow-200">
                   <strong>{t.aiWorkflowPage.note}</strong> {t.aiWorkflowPage.noteText}
                 </p>
@@ -252,7 +252,7 @@ export default function AIWorkflowPage() {
                 {t.aiWorkflowPage.run}
               </Button>
               <Button onClick={handleReset} variant="outline">
-                <RotateCcw className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
+                <ArrowCounterClockwise className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
                 {t.aiWorkflowPage.reset}
               </Button>
             </div>
@@ -260,7 +260,7 @@ export default function AIWorkflowPage() {
 
           <div className="flex flex-wrap gap-2">
             <Badge variant="secondary">
-              <Sparkles className={cn('h-3 w-3', isRTL ? 'ms-1' : 'me-1')} />
+              <Sparkle className={cn('h-3 w-3', isRTL ? 'ms-1' : 'me-1')} />
               {t.aiWorkflowPage.badges.llmModels}
             </Badge>
             <Badge variant="secondary">
@@ -291,7 +291,7 @@ export default function AIWorkflowPage() {
             {/* Token Counter */}
             <Card className="p-4">
               <div className="flex items-center gap-2 mb-3">
-                <Settings className="h-4 w-4 text-primary" />
+                <Gear className="h-4 w-4 text-primary" />
                 <h3 className="font-semibold text-sm">
                   {t.aiWorkflowPage.sidebar.tokenUsage}
                 </h3>

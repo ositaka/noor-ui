@@ -6,16 +6,16 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
 import {
-  CheckCircle2,
+  CheckCircle,
   Circle,
   Clock,
-  Target,
-  TrendingUp,
+  Crosshair,
+  TrendUp,
   Users,
   Package,
-  Sparkles,
+  Sparkle,
   Calendar,
-} from 'lucide-react'
+} from '@phosphor-icons/react'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 
@@ -53,7 +53,7 @@ export default function RoadmapPage() {
             <CardHeader>
               <div className="flex items-center gap-3">
                 <div className="rounded-lg bg-primary/10 p-2">
-                  <Target className="h-6 w-6 text-primary" />
+                  <Crosshair className="h-6 w-6 text-primary" />
                 </div>
                 <div>
                   <CardTitle className="text-2xl">{t.vision.title}</CardTitle>
@@ -69,19 +69,19 @@ export default function RoadmapPage() {
               </p>
               <div className="grid gap-3 sm:grid-cols-2">
                 <div className="flex items-start gap-2">
-                  <CheckCircle2 className="h-5 w-5 text-green-600 mt-0.5 shrink-0" />
+                  <CheckCircle className="h-5 w-5 text-green-600 mt-0.5 shrink-0" />
                   <span className="text-sm">{t.vision.principles.rtlFirst}</span>
                 </div>
                 <div className="flex items-start gap-2">
-                  <CheckCircle2 className="h-5 w-5 text-green-600 mt-0.5 shrink-0" />
+                  <CheckCircle className="h-5 w-5 text-green-600 mt-0.5 shrink-0" />
                   <span className="text-sm">{t.vision.principles.realExamples}</span>
                 </div>
                 <div className="flex items-start gap-2">
-                  <CheckCircle2 className="h-5 w-5 text-green-600 mt-0.5 shrink-0" />
+                  <CheckCircle className="h-5 w-5 text-green-600 mt-0.5 shrink-0" />
                   <span className="text-sm">{t.vision.principles.quality}</span>
                 </div>
                 <div className="flex items-start gap-2">
-                  <CheckCircle2 className="h-5 w-5 text-green-600 mt-0.5 shrink-0" />
+                  <CheckCircle className="h-5 w-5 text-green-600 mt-0.5 shrink-0" />
                   <span className="text-sm">{t.vision.principles.production}</span>
                 </div>
               </div>
@@ -135,19 +135,19 @@ export default function RoadmapPage() {
             <CardContent>
               <ul className="space-y-2">
                 <li className="flex items-start gap-2">
-                  <CheckCircle2 className="h-5 w-5 text-green-600 mt-0.5 shrink-0" />
+                  <CheckCircle className="h-5 w-5 text-green-600 mt-0.5 shrink-0" />
                   <span className="text-sm">{t.currentStatus.recentWins.performance}</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <CheckCircle2 className="h-5 w-5 text-green-600 mt-0.5 shrink-0" />
+                  <CheckCircle className="h-5 w-5 text-green-600 mt-0.5 shrink-0" />
                   <span className="text-sm">{t.currentStatus.recentWins.skeletons}</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <CheckCircle2 className="h-5 w-5 text-green-600 mt-0.5 shrink-0" />
+                  <CheckCircle className="h-5 w-5 text-green-600 mt-0.5 shrink-0" />
                   <span className="text-sm">{t.currentStatus.recentWins.components}</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <CheckCircle2 className="h-5 w-5 text-green-600 mt-0.5 shrink-0" />
+                  <CheckCircle className="h-5 w-5 text-green-600 mt-0.5 shrink-0" />
                   <span className="text-sm">{t.currentStatus.recentWins.rebranding}</span>
                 </li>
               </ul>
@@ -237,7 +237,7 @@ export default function RoadmapPage() {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
                     <div className="rounded-lg bg-muted p-2">
-                      <TrendingUp className="h-6 w-6" />
+                      <TrendUp className="h-6 w-6" />
                     </div>
                     <div>
                       <CardTitle>{t.phasedApproach.phase2.title}</CardTitle>
@@ -311,7 +311,7 @@ export default function RoadmapPage() {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
                     <div className="rounded-lg bg-muted p-2">
-                      <Sparkles className="h-6 w-6" />
+                      <Sparkle className="h-6 w-6" />
                     </div>
                     <div>
                       <CardTitle>{t.phasedApproach.phase4.title}</CardTitle>

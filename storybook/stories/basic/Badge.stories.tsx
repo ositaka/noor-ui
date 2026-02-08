@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { expect, within } from 'storybook/test';
 import { Badge } from '../../../components/ui/badge';
 import { Button } from '../../../components/ui/button';
-import { Check, AlertCircle, Star, Clock, Zap, CheckCircle2, XCircle } from 'lucide-react';
+import { Check, WarningCircle, Star, Clock, Lightning, CheckCircle, XCircle } from '@phosphor-icons/react';
 
 /**
  * Badge Component Stories
@@ -82,7 +82,7 @@ export const StatusIndicator: Story = {
     role: 'status',
     children: (
       <>
-        <CheckCircle2 className="h-3 w-3 me-1" />
+        <CheckCircle className="h-3 w-3 me-1" />
         Active
       </>
     )
@@ -207,11 +207,11 @@ export const AllWithIcons: Story = {
         Featured
       </Badge>
       <Badge variant="destructive">
-        <AlertCircle className="h-3 w-3 me-1" />
+        <WarningCircle className="h-3 w-3 me-1" />
         Error
       </Badge>
       <Badge variant="outline">
-        <Zap className="h-3 w-3 me-1" />
+        <Lightning className="h-3 w-3 me-1" />
         Fast
       </Badge>
     </div>
@@ -226,7 +226,7 @@ export const AllStatusIndicators: Story = {
   render: () => (
     <div className="flex flex-wrap gap-2">
       <Badge variant="default" role="status">
-        <CheckCircle2 className="h-3 w-3 me-1" />
+        <CheckCircle className="h-3 w-3 me-1" />
         Active
       </Badge>
       <Badge variant="secondary" role="status">
@@ -238,7 +238,7 @@ export const AllStatusIndicators: Story = {
         Failed
       </Badge>
       <Badge variant="outline" role="status">
-        <AlertCircle className="h-3 w-3 me-1" />
+        <WarningCircle className="h-3 w-3 me-1" />
         Info
       </Badge>
     </div>

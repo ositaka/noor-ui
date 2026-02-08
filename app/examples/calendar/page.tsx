@@ -18,9 +18,9 @@ import {
   Calendar as CalendarIcon,
   Clock,
   ArrowRight,
-  CheckCircle2,
-  Home,
-} from 'lucide-react'
+  CheckCircle,
+  House,
+} from '@phosphor-icons/react'
 
 export default function CalendarExamplePage() {
   const { direction, locale } = useDirection()
@@ -74,7 +74,7 @@ export default function CalendarExamplePage() {
           <div className="flex items-center gap-6">
             <Link href="/" className="flex items-center gap-2">
               <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center">
-                <Home className="h-5 w-5 text-primary-foreground" />
+                <House className="h-5 w-5 text-primary-foreground" />
               </div>
               <span className="font-bold text-xl hidden sm:inline">
                 {t.ui.components.noorUI}
@@ -289,7 +289,7 @@ export default function CalendarExamplePage() {
               {appointmentDate && (
                 <div className="p-4 bg-muted rounded-lg">
                   <div className="flex items-start gap-3">
-                    <CheckCircle2 className="h-5 w-5 text-primary mt-0.5" />
+                    <CheckCircle className="h-5 w-5 text-primary mt-0.5" />
                     <div>
                       <p className="font-medium text-sm">
                         {t.calendarPage.labels.appointmentScheduled}
@@ -326,7 +326,7 @@ export default function CalendarExamplePage() {
               {vacationRange?.from && (
                 <div className="p-4 bg-muted rounded-lg">
                   <div className="flex items-start gap-3">
-                    <CheckCircle2 className="h-5 w-5 text-primary mt-0.5" />
+                    <CheckCircle className="h-5 w-5 text-primary mt-0.5" />
                     <div className="flex-1">
                       <p className="font-medium text-sm">
                         {t.calendarPage.labels.vacationScheduled}
@@ -394,15 +394,15 @@ export default function CalendarExamplePage() {
                     </h5>
                     <ul className="space-y-2 text-sm text-muted-foreground">
                       <li className="flex items-start gap-2">
-                        <CheckCircle2 className="h-4 w-4 text-primary mt-0.5 shrink-0" />
+                        <CheckCircle className="h-4 w-4 text-primary mt-0.5 shrink-0" />
                         <span>{t.calendarPage.appointments.disabledDates}</span>
                       </li>
                       <li className="flex items-start gap-2">
-                        <CheckCircle2 className="h-4 w-4 text-primary mt-0.5 shrink-0" />
+                        <CheckCircle className="h-4 w-4 text-primary mt-0.5 shrink-0" />
                         <span>{t.calendarPage.appointments.minMaxDates}</span>
                       </li>
                       <li className="flex items-start gap-2">
-                        <CheckCircle2 className="h-4 w-4 text-primary mt-0.5 shrink-0" />
+                        <CheckCircle className="h-4 w-4 text-primary mt-0.5 shrink-0" />
                         <span>{t.calendarPage.appointments.hijriIntegration}</span>
                       </li>
                     </ul>

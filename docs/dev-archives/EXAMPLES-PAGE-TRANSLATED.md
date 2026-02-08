@@ -40,7 +40,7 @@ exampleCards: [
 
 **Changes:**
 - Removed hardcoded `examples` array (168 lines removed)
-- Added `iconMap` to map hrefs to Lucide icons
+- Added `iconMap` to map hrefs to Phosphor icons
 - Changed to use `t.exampleCards` from i18n
 - Updated icon rendering to use dynamic icon lookup
 

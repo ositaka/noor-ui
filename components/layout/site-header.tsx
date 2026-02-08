@@ -2,7 +2,7 @@
 
 import * as React from 'react'
 import Link from 'next/link'
-import { Sunrise, Menu } from 'lucide-react'
+import { SunHorizon, List } from '@phosphor-icons/react'
 import { DirectionToggle } from '@/components/docs/direction-toggle'
 import { ThemeToggle } from '@/components/docs/theme-toggle'
 import { GlobalSearch } from '@/components/docs/global-search'
@@ -23,7 +23,7 @@ export function SiteHeader() {
       <div className="container flex h-16 items-center justify-between">
         <div className="flex items-center gap-3">
           <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
-            <Sunrise className="h-6 w-6 text-primary" />
+            <SunHorizon className="h-6 w-6 text-primary" />
             <span className="text-xl font-bold">Noor UI</span>
           </Link>
           <a
@@ -90,14 +90,14 @@ export function SiteHeader() {
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon" className="lg:hidden">
-                <Menu className="h-5 w-5" />
+                <List className="h-5 w-5" />
                 <span className="sr-only">Toggle menu</span>
               </Button>
             </SheetTrigger>
             <SheetContent side="end">
               <SheetHeader>
                 <SheetTitle className="flex items-center gap-2">
-                  <Sunrise className="h-5 w-5 text-primary" />
+                  <SunHorizon className="h-5 w-5 text-primary" />
                   <span>Noor UI</span>
                 </SheetTitle>
               </SheetHeader>

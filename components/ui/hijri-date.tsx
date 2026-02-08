@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { cva, type VariantProps } from 'class-variance-authority'
 import { cn } from '../../lib/utils'
-import { Calendar, Sparkles } from 'lucide-react'
+import { Calendar, Sparkle } from '@phosphor-icons/react'
 import { Badge } from './badge'
 import { useDirection } from '../providers/direction-provider'
 import { content } from '../../lib/i18n'
@@ -210,7 +210,7 @@ export const HijriDate = React.forwardRef<HTMLDivElement, HijriDateProps>(
             )}
             suppressHydrationWarning
           >
-            <Sparkles className={cn('h-3 w-3', variant === 'detailed' && 'h-3.5 w-3.5')} />
+            <Sparkle className={cn('h-3 w-3', variant === 'detailed' && 'h-3.5 w-3.5')} />
             <span suppressHydrationWarning>{holidayName}</span>
           </Badge>
         )}

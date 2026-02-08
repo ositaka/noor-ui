@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { ChevronLeft, ChevronRight, ArrowLeft, ArrowRight, ArrowUpRight } from 'lucide-react'
+import { CaretLeft, CaretRight, ArrowLeft, ArrowRight, ArrowUpRight } from '@phosphor-icons/react'
 import { cn } from '../../lib/utils'
 import { Button, buttonVariants, type ButtonProps } from './button'
 import { cva, type VariantProps } from 'class-variance-authority'
@@ -102,7 +102,7 @@ const ButtonArrow = React.forwardRef<HTMLButtonElement, ButtonArrowProps>(
         return ArrowUpRight
       }
       if (icon === 'chevron') {
-        return direction === 'forward' ? ChevronRight : ChevronLeft
+        return direction === 'forward' ? CaretRight : CaretLeft
       }
       return direction === 'forward' ? ArrowRight : ArrowLeft
     }, [direction, icon])

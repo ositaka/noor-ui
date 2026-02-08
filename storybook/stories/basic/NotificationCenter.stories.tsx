@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { NotificationCenter, type Notification } from '../../../components/ui/notification-center';
 import { Card, CardContent } from '../../../components/ui/card';
-import { MessageSquare, UserPlus, Heart, Star, Bell, AlertCircle } from 'lucide-react';
+import { ChatCentered, UserPlus, Heart, Star, Bell, WarningCircle } from '@phosphor-icons/react';
 import { useState } from 'react';
 import { fn } from 'storybook/test';
 
@@ -53,7 +53,7 @@ export const Default: Story = {
         description: 'Sarah commented: "Great article!"',
         time: new Date(Date.now() - 5 * 60000).toISOString(),
         read: false,
-        icon: <MessageSquare className="h-5 w-5" />
+        icon: <ChatCentered className="h-5 w-5" />
       },
       {
         id: '2',
@@ -122,7 +122,7 @@ export const BasicUsage: Story = {
         description: 'Sarah commented: "Great article!"',
         time: new Date(Date.now() - 5 * 60000).toISOString(),
         read: false,
-        icon: <MessageSquare className="h-5 w-5" />
+        icon: <ChatCentered className="h-5 w-5" />
       },
       {
         id: '2',
@@ -272,7 +272,7 @@ export const ManyNotifications: Story = {
         description: 'You have a new message from Sarah',
         time: new Date(Date.now() - 2 * 60000).toISOString(),
         read: false,
-        icon: <MessageSquare className="h-5 w-5" />
+        icon: <ChatCentered className="h-5 w-5" />
       },
       {
         id: '2',
@@ -312,7 +312,7 @@ export const ManyNotifications: Story = {
         description: 'Someone replied to your comment',
         time: new Date(Date.now() - 720 * 60000).toISOString(),
         read: true,
-        icon: <MessageSquare className="h-5 w-5" />
+        icon: <ChatCentered className="h-5 w-5" />
       },
     ]);
 
@@ -366,7 +366,7 @@ export const AllUnread: Story = {
         description: 'Sarah commented on your post',
         time: new Date(Date.now() - 5 * 60000).toISOString(),
         read: false,
-        icon: <MessageSquare className="h-5 w-5" />
+        icon: <ChatCentered className="h-5 w-5" />
       },
       {
         id: '2',
@@ -382,7 +382,7 @@ export const AllUnread: Story = {
         description: 'Important update available',
         time: new Date(Date.now() - 30 * 60000).toISOString(),
         read: false,
-        icon: <AlertCircle className="h-5 w-5" />
+        icon: <WarningCircle className="h-5 w-5" />
       },
     ]);
 
@@ -428,7 +428,7 @@ export const AllRead: Story = {
         description: 'Sarah commented on your post',
         time: new Date(Date.now() - 1440 * 60000).toISOString(),
         read: true,
-        icon: <MessageSquare className="h-5 w-5" />
+        icon: <ChatCentered className="h-5 w-5" />
       },
       {
         id: '2',
@@ -566,7 +566,7 @@ export const RTL: Story = {
         descriptionAr: 'سارة علقت: "مقال رائع!"',
         time: new Date(Date.now() - 5 * 60000).toISOString(),
         read: false,
-        icon: <MessageSquare className="h-5 w-5" />
+        icon: <ChatCentered className="h-5 w-5" />
       },
       {
         id: '2',

@@ -153,7 +153,7 @@ Creating `/components/ui/star-rating.tsx`:
 import * as React from 'react'
 import { cva, type VariantProps } from 'class-variance-authority'
 import { cn } from '@/lib/utils'
-import { Star } from 'lucide-react'
+import { Star } from '@phosphor-icons/react'
 
 const starRatingVariants = cva(
   'inline-flex items-center',

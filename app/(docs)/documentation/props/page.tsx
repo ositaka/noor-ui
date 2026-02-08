@@ -4,7 +4,7 @@ import * as React from 'react'
 import Link from 'next/link'
 import { Card, CardContent } from '@/components/ui/card'
 import { CodeBlock } from '@/components/docs/code-block'
-import { Code2, Check } from 'lucide-react'
+import { CodeBlock as CodeBlockIcon, Check } from '@phosphor-icons/react'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 
@@ -58,7 +58,7 @@ export default function PropsPage() {
 
         <div className="max-w-3xl mb-12">
           <div className="flex items-center gap-3 mb-4">
-            <Code2 className="h-10 w-10 text-primary" />
+            <CodeBlockIcon className="h-10 w-10 text-primary" />
             <h1 className="text-4xl font-bold tracking-tight">{t.title}</h1>
           </div>
           <p className="text-xl text-muted-foreground">

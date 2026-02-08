@@ -3,7 +3,7 @@
 import * as React from 'react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
-import { Palette, X } from 'lucide-react'
+import { Palette, X } from '@phosphor-icons/react'
 import { useDesignSystem } from '@/components/providers/design-system-provider'
 import { type BuiltInTheme, themeConfig } from '@/lib/tokens'
 import { cn } from '@/lib/utils'

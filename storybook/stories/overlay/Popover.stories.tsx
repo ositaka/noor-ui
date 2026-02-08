@@ -4,7 +4,7 @@ import { Popover, PopoverContent, PopoverTrigger } from '../../../components/ui/
 import { Button } from '../../../components/ui/button';
 import { Input } from '../../../components/ui/input';
 import { Label } from '../../../components/ui/label';
-import { Settings } from 'lucide-react';
+import { Gear } from '@phosphor-icons/react';
 import * as React from 'react';
 
 /**
@@ -373,8 +373,8 @@ export const WithForm: Story = {
     <Popover>
       <PopoverTrigger asChild>
         <Button variant="outline">
-          <Settings className="me-2 h-4 w-4" />
-          Settings
+          <Gear className="me-2 h-4 w-4" />
+          Gear
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-80">
@@ -556,7 +556,7 @@ export const RTLWithForm: Story = {
     <Popover>
       <PopoverTrigger asChild>
         <Button variant="outline">
-          <Settings className="me-2 h-4 w-4" />
+          <Gear className="me-2 h-4 w-4" />
           الإعدادات
         </Button>
       </PopoverTrigger>

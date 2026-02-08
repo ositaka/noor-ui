@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { Card, CardContent } from '@/components/ui/card'
 import { CodeBlock } from '@/components/docs/code-block'
 import { FeatureCard } from '@/components/ui/feature-card'
-import { Sparkles, Package, Settings, Zap, CheckCircle2, ArrowRight } from 'lucide-react'
+import { Sparkle, Package, Gear, Lightning, CheckCircle, ArrowRight } from '@phosphor-icons/react'
 import { ButtonArrow } from '@/components/ui/button-arrow'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
@@ -224,19 +224,19 @@ export default function GettingStartedPage() {
               href="#installation"
             />
             <FeatureCard
-              icon={Settings}
+              icon={Gear}
               title={t.gettingStarted.quickLinks.configuration}
               description={t.gettingStarted.quickLinks.configurationDesc}
               href="#configuration"
             />
             <FeatureCard
-              icon={Zap}
+              icon={Lightning}
               title={t.gettingStarted.quickLinks.quickStart}
               description={t.gettingStarted.quickLinks.quickStartDesc}
               href="#quick-start"
             />
             <FeatureCard
-              icon={CheckCircle2}
+              icon={CheckCircle}
               title={t.gettingStarted.quickLinks.bestPractices}
               description={t.gettingStarted.quickLinks.bestPracticesDesc}
               href="#rtl-usage"
@@ -311,19 +311,19 @@ export default function GettingStartedPage() {
                 <h3 className="font-semibold mb-2">{t.gettingStarted.providerResponsibilities}</h3>
                 <ul className="text-sm text-muted-foreground space-y-2">
                   <li className="flex items-start gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-green-600 mt-0.5 shrink-0" />
+                    <CheckCircle className="h-4 w-4 text-green-600 mt-0.5 shrink-0" />
                     <span><strong>DirectionProvider:</strong> {t.gettingStarted.directionProviderDesc}</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-green-600 mt-0.5 shrink-0" />
+                    <CheckCircle className="h-4 w-4 text-green-600 mt-0.5 shrink-0" />
                     <span><strong>DesignSystemProvider:</strong> {t.gettingStarted.designSystemProviderDesc}</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-green-600 mt-0.5 shrink-0" />
+                    <CheckCircle className="h-4 w-4 text-green-600 mt-0.5 shrink-0" />
                     <span><strong>TooltipProvider:</strong> {t.gettingStarted.tooltipProviderDesc}</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-green-600 mt-0.5 shrink-0" />
+                    <CheckCircle className="h-4 w-4 text-green-600 mt-0.5 shrink-0" />
                     <span><strong>Toaster:</strong> {t.gettingStarted.toasterDesc}</span>
                   </li>
                 </ul>
@@ -408,7 +408,7 @@ export default function GettingStartedPage() {
               <Card className="hover:border-primary transition-colors h-full">
                 <CardContent className="p-6">
                   <h3 className="font-semibold mb-2 flex items-center gap-2">
-                    <Sparkles className="h-5 w-5 text-primary" />
+                    <Sparkle className="h-5 w-5 text-primary" />
                     {t.gettingStarted.rtlDevGuide}
                   </h3>
                   <p className="text-sm text-muted-foreground mb-4">

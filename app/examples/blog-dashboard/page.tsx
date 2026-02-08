@@ -9,14 +9,14 @@ import {
   FileText,
   Lock,
   Upload,
-  Languages,
+  Translate,
   Database,
-  Edit3,
-  Search,
-  ExternalLink,
-  CheckCircle2,
+  PencilSimple,
+  MagnifyingGlass,
+  ArrowSquareOut,
+  CheckCircle,
   ArrowRight
-} from 'lucide-react'
+} from '@phosphor-icons/react'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 
@@ -36,7 +36,7 @@ export default function BlogDashboardPage() {
       items: ['Email/password signup & login', 'Protected routes', 'Auto profile creation', 'User menu with logout']
     },
     {
-      icon: Edit3,
+      icon: PencilSimple,
       title: 'Rich Content Editor',
       titleAr: 'محرر محتوى غني',
       description: 'TipTap editor with full formatting',
@@ -60,7 +60,7 @@ export default function BlogDashboardPage() {
       items: ['Drag & drop upload', 'Image preview', 'Cloud storage', 'CDN delivery']
     },
     {
-      icon: Search,
+      icon: MagnifyingGlass,
       title: 'Search & Filter',
       titleAr: 'البحث والتصفية',
       description: 'Find posts quickly',
@@ -68,7 +68,7 @@ export default function BlogDashboardPage() {
       items: ['Real-time search', 'Filter by status', 'Sort options', 'Responsive design']
     },
     {
-      icon: Languages,
+      icon: Translate,
       title: 'Bilingual Content',
       titleAr: 'محتوى ثنائي اللغة',
       description: 'Full English & Arabic support',
@@ -155,7 +155,7 @@ create policy "Users can manage own posts"
             <Link href="/starters">
               <FileText className="h-5 w-5 me-2" />
               View All Starters
-              <ExternalLink className="h-4 w-4 ms-2" />
+              <ArrowSquareOut className="h-4 w-4 ms-2" />
             </Link>
           </Button>
           <Button size="lg" variant="outline" asChild>
@@ -165,7 +165,7 @@ create policy "Users can manage own posts"
               rel="noopener noreferrer"
             >
               View on GitHub
-              <ExternalLink className="h-4 w-4 ms-2" />
+              <ArrowSquareOut className="h-4 w-4 ms-2" />
             </a>
           </Button>
         </div>
@@ -186,7 +186,7 @@ create policy "Users can manage own posts"
                 <ul className="space-y-2">
                   {feature.items.map((item, i) => (
                     <li key={i} className="flex items-start gap-2 text-sm">
-                      <CheckCircle2 className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
+                      <CheckCircle className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
                       <span>{item}</span>
                     </li>
                   ))}

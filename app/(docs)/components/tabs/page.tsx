@@ -8,7 +8,7 @@ import { Separator } from '@/components/ui/separator'
 import { ComponentShowcase } from '@/components/docs/component-showcase'
 import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
-import { User, Bell } from 'lucide-react'
+import { User, Bell } from '@phosphor-icons/react'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 
@@ -53,7 +53,7 @@ const basicUsageCode = `import { Tabs, TabsContent, TabsList, TabsTrigger } from
   </TabsContent>
 </Tabs>`
 
-const withIconsCode = `import { User, Settings } from 'lucide-react'
+const withIconsCode = `import { User, Gear } from '@phosphor-icons/react'
 
 <Tabs defaultValue="profile">
   <TabsList>
@@ -62,7 +62,7 @@ const withIconsCode = `import { User, Settings } from 'lucide-react'
       Profile
     </TabsTrigger>
     <TabsTrigger value="settings" className="gap-2">
-      <Settings className="h-4 w-4" />
+      <Gear className="h-4 w-4" />
       Settings
     </TabsTrigger>
   </TabsList>

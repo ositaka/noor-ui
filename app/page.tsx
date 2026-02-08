@@ -12,12 +12,12 @@ import { CodeBlock } from '@/components/docs/code-block'
 import {
   Palette,
   Globe,
-  Accessibility,
-  Zap,
-  Code2,
-  Sunrise,
-  CheckCircle2,
-} from 'lucide-react'
+  Wheelchair,
+  Lightning,
+  CodeBlock as CodeBlockIcon,
+  SunHorizon,
+  CheckCircle,
+} from '@phosphor-icons/react'
 import { content } from '@/lib/i18n'
 import { useDirection } from '@/components/providers/direction-provider'
 
@@ -78,7 +78,7 @@ export default function HomePage() {
                 </div>
                 <div className="flex gap-2">
                   <span className="inline-flex items-center rounded-md bg-primary/10 px-2 py-1 text-xs font-medium text-primary">
-                    v0.7.1
+                    v0.8.0
                   </span>
                   <span className="inline-flex items-center rounded-md bg-green-500/10 px-2 py-1 text-xs font-medium text-green-600 dark:text-green-400">
                     {t.home.quickStart.status}
@@ -138,7 +138,7 @@ export default function App() {
 
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {t.home.features.items.map((feature, index) => {
-                const icons = [Zap, Globe, Accessibility, Palette, Code2, Sunrise]
+                const icons = [Lightning, Globe, Wheelchair, Palette, CodeBlockIcon, SunHorizon]
                 const hrefs = ['/components', '/rtl-guide', '/documentation/wcag', '/themes', '/tokens', '/getting-started']
                 const Icon = icons[index]
                 const href = hrefs[index]
@@ -170,19 +170,19 @@ export default function App() {
 
               <div className="flex flex-wrap justify-center gap-4 mb-8 text-sm text-muted-foreground">
                 <div className="flex items-center gap-2">
-                  <CheckCircle2 className="h-4 w-4 text-green-600" />
+                  <CheckCircle className="h-4 w-4 text-green-600" />
                   <span>{t.storybook.features.interactive}</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <CheckCircle2 className="h-4 w-4 text-green-600" />
+                  <CheckCircle className="h-4 w-4 text-green-600" />
                   <span>{t.storybook.features.rtl}</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <CheckCircle2 className="h-4 w-4 text-green-600" />
+                  <CheckCircle className="h-4 w-4 text-green-600" />
                   <span>{t.storybook.features.themes}</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <CheckCircle2 className="h-4 w-4 text-green-600" />
+                  <CheckCircle className="h-4 w-4 text-green-600" />
                   <span>{t.storybook.features.accessibility}</span>
                 </div>
               </div>

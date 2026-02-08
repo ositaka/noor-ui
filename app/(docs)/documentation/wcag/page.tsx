@@ -4,7 +4,7 @@ import * as React from 'react'
 import Link from 'next/link'
 import { Card, CardContent } from '@/components/ui/card'
 import { CodeBlock } from '@/components/docs/code-block'
-import { Shield, CheckCircle2 } from 'lucide-react'
+import { Shield, CheckCircle } from '@phosphor-icons/react'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 
@@ -116,7 +116,7 @@ export default function WCAGPage() {
           <Card>
             <CardContent className="p-6">
               <div className="flex items-start gap-3 mb-4">
-                <CheckCircle2 className="h-6 w-6 text-green-600 mt-0.5 shrink-0" />
+                <CheckCircle className="h-6 w-6 text-green-600 mt-0.5 shrink-0" />
                 <div>
                   <h3 className="font-semibold text-lg mb-2">{t.levelAA}</h3>
                   <p className="text-muted-foreground">

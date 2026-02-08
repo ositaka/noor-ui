@@ -4,7 +4,7 @@ import * as React from 'react'
 import { cn } from '../../lib/utils'
 import { Button } from './button'
 import { Input } from './input'
-import { Minus, Plus } from 'lucide-react'
+import { Minus, Plus } from '@phosphor-icons/react'
 
 export interface NumberInputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type' | 'onChange'> {
   value?: number

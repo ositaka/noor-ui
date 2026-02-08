@@ -13,14 +13,14 @@ import {
 } from './dropdown-menu'
 import {
   Plus,
-  Search,
-  MessageSquare,
-  MoreVertical,
+  MagnifyingGlass,
+  ChatText,
+  DotsThreeVertical,
   Pencil,
-  Trash2,
-  Share2,
+  Trash,
+  ShareNetwork,
   Clock,
-} from 'lucide-react'
+} from '@phosphor-icons/react'
 import { useDirection } from '../providers/direction-provider'
 import { content } from '../../lib/i18n'
 
@@ -217,7 +217,7 @@ const ConversationHistory = React.forwardRef<HTMLDivElement, ConversationHistory
           {/* Search */}
           {showSearch && (
             <div className="relative">
-              <Search
+              <MagnifyingGlass
                 className={cn(
                   'absolute top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground',
                   isRTL ? 'right-3' : 'left-3'
@@ -240,7 +240,7 @@ const ConversationHistory = React.forwardRef<HTMLDivElement, ConversationHistory
           <div className="p-2 space-y-6">
             {conversationGroups.length === 0 ? (
               <div className="flex flex-col items-center justify-center py-12 px-4 text-center">
-                <MessageSquare className="h-12 w-12 text-muted-foreground/50 mb-3" />
+                <ChatText className="h-12 w-12 text-muted-foreground/50 mb-3" />
                 <p className="text-sm text-muted-foreground">
                   {searchQuery
                     ? t.ui.components.noConversationsFound
@@ -294,7 +294,7 @@ const ConversationHistory = React.forwardRef<HTMLDivElement, ConversationHistory
                           )}
                         >
                           <div className="flex items-start gap-2">
-                            <MessageSquare
+                            <ChatText
                               className={cn(
                                 'h-4 w-4 shrink-0 mt-0.5',
                                 isActive ? 'text-primary' : 'text-muted-foreground'
@@ -345,7 +345,7 @@ const ConversationHistory = React.forwardRef<HTMLDivElement, ConversationHistory
                                 size="icon"
                                 className="h-7 w-7"
                               >
-                                <MoreVertical className="h-4 w-4" />
+                                <DotsThreeVertical className="h-4 w-4" />
                                 <span className="sr-only">
                                   {t.ui.components.actions}
                                 </span>
@@ -368,7 +368,7 @@ const ConversationHistory = React.forwardRef<HTMLDivElement, ConversationHistory
                               )}
                               {onShare && (
                                 <DropdownMenuItem onClick={() => onShare(conversation.id)}>
-                                  <Share2 className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
+                                  <ShareNetwork className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
                                   {t.ui.components.share}
                                 </DropdownMenuItem>
                               )}
@@ -386,7 +386,7 @@ const ConversationHistory = React.forwardRef<HTMLDivElement, ConversationHistory
                                   }}
                                   className="text-destructive focus:text-destructive"
                                 >
-                                  <Trash2 className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
+                                  <Trash className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
                                   {t.ui.components.delete}
                                 </DropdownMenuItem>
                               )}

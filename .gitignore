@@ -51,3 +51,6 @@ storybook-static
 # Webstorm
 /.idea/
 **/.idea/
+
+# Screenshots
+/screenshots

@@ -7,7 +7,7 @@ import { Separator } from '@/components/ui/separator'
 import { ComponentShowcase } from '@/components/docs/component-showcase'
 import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
-import { Settings } from 'lucide-react'
+import { Gear } from '@phosphor-icons/react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -108,7 +108,7 @@ const positioningCode = `// Top
 const withFormCode = `<Popover>
   <PopoverTrigger asChild>
     <Button variant="outline">
-      <Settings className="me-2 h-4 w-4" />
+      <Gear className="me-2 h-4 w-4" />
       Settings
     </Button>
   </PopoverTrigger>
@@ -263,7 +263,7 @@ export default function PopoverPage() {
                   <Popover>
                     <PopoverTrigger asChild>
                       <Button variant="outline">
-                        <Settings className="me-2 h-4 w-4" />
+                        <Gear className="me-2 h-4 w-4" />
                         {t.popoverComponent.demo.settings}
                       </Button>
                     </PopoverTrigger>

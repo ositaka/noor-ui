@@ -2,7 +2,7 @@
 
 import * as React from 'react'
 import { Card, CardContent } from '@/components/ui/card'
-import { CheckCircle2, XCircle } from 'lucide-react'
+import { CheckCircle, XCircle } from '@phosphor-icons/react'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 
@@ -23,7 +23,7 @@ export function BestPractices({ dos, donts, className }: BestPracticesProps) {
         <Card className="border-green-500/50 bg-green-50 dark:bg-green-950/20">
           <CardContent className="p-6">
             <h3 className="font-semibold mb-2 flex items-center gap-2 text-green-700 dark:text-green-400">
-              <CheckCircle2 className="h-5 w-5" />
+              <CheckCircle className="h-5 w-5" />
               {t.componentPage.bestPractices.do}
             </h3>
             <ul className="text-sm space-y-2">

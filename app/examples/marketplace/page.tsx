@@ -22,13 +22,13 @@ import {
   TabsTrigger,
 } from '@/components/ui/tabs'
 import {
-  Home,
-  Store,
+  House,
+  Storefront,
   ShoppingCart,
   Star,
-  Search,
-  Filter,
-  TrendingUp,
+  MagnifyingGlass,
+  Funnel,
+  TrendUp,
   Package,
   Users,
   Heart,
@@ -36,10 +36,10 @@ import {
   Clock,
   Shield,
   Truck,
-  CheckCircle2,
-  Award,
+  CheckCircle,
+  Trophy,
   Tag,
-} from 'lucide-react'
+} from '@phosphor-icons/react'
 import { useDirection } from '@/components/providers/direction-provider'
 import { DirectionToggle } from '@/components/docs/direction-toggle'
 import { content } from '@/lib/i18n'
@@ -342,10 +342,10 @@ export default function MarketplacePage() {
   ]
 
   const stats = [
-    { label: t.marketplace.stats.activeVendors, value: '200+', icon: Store },
+    { label: t.marketplace.stats.activeVendors, value: '200+', icon: Storefront },
     { label: t.marketplace.stats.productsAvailable, value: '50K+', icon: Package },
     { label: t.marketplace.stats.happyCustomers, value: '100K+', icon: Users },
-    { label: t.marketplace.stats.monthlyOrders, value: '25K+', icon: TrendingUp },
+    { label: t.marketplace.stats.monthlyOrders, value: '25K+', icon: TrendUp },
   ]
 
   return (
@@ -356,7 +356,7 @@ export default function MarketplacePage() {
           <div className="flex items-center gap-6">
             <Link href="/" className="flex items-center gap-2">
               <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center">
-                <Home className="h-5 w-5 text-primary-foreground" />
+                <House className="h-5 w-5 text-primary-foreground" />
               </div>
               <span className="font-bold text-xl hidden sm:inline">
                 {t.marketplace.header.title}
@@ -415,7 +415,7 @@ export default function MarketplacePage() {
         <div className="mb-12">
           <div className="flex items-center gap-3 mb-4">
             <div className="p-3 bg-primary/10 rounded-lg">
-              <Store className="h-8 w-8 text-primary" />
+              <Storefront className="h-8 w-8 text-primary" />
             </div>
             <div>
               <h1 className="text-4xl font-bold tracking-tight">
@@ -493,7 +493,7 @@ export default function MarketplacePage() {
 
                 <div className="flex items-start gap-3">
                   <div className="p-2 bg-primary/10 rounded-lg">
-                    <CheckCircle2 className="h-5 w-5 text-primary" />
+                    <CheckCircle className="h-5 w-5 text-primary" />
                   </div>
                   <div>
                     <h3 className="font-semibold mb-1">
@@ -533,7 +533,7 @@ export default function MarketplacePage() {
                       <div className="flex items-center gap-1 mb-2">
                         <h3 className="font-semibold">{isRTL ? vendor.nameAr : vendor.name}</h3>
                         {vendor.verified && (
-                          <CheckCircle2 className="h-4 w-4 text-primary" />
+                          <CheckCircle className="h-4 w-4 text-primary" />
                         )}
                       </div>
                       <p className="text-sm text-muted-foreground mb-3">
@@ -713,7 +713,7 @@ export default function MarketplacePage() {
                     <div className="text-xs text-muted-foreground mb-1 flex items-center gap-1">
                       {isRTL ? product.vendor.nameAr : product.vendor.name}
                       {product.vendor.verified && (
-                        <CheckCircle2 className="h-3 w-3 text-primary" />
+                        <CheckCircle className="h-3 w-3 text-primary" />
                       )}
                     </div>
                     <CardTitle className="text-base line-clamp-2">

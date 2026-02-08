@@ -17,18 +17,18 @@ import { formatSAR } from '@/lib/arabic-numbers'
 import { cn } from '@/lib/utils'
 import {
   ShoppingCart,
-  MessageSquare,
+  ChatCentered,
   Star,
-  CheckCircle2,
+  CheckCircle,
   Package,
   Truck,
   Shield,
   FileText,
-  TrendingDown,
+  TrendDown,
   Calculator,
   Plus,
   Minus,
-} from 'lucide-react'
+} from '@phosphor-icons/react'
 
 interface ProductDetail {
   id: string
@@ -326,7 +326,7 @@ export default function B2BProductDetailPage() {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <TrendingDown className="h-5 w-5 text-green-600" />
+                  <TrendDown className="h-5 w-5 text-green-600" />
                   {t.b2bMarketplaceDetail.volumePricing.title}
                 </CardTitle>
                 <CardDescription>
@@ -387,7 +387,7 @@ export default function B2BProductDetailPage() {
                         {isRTL ? product.supplier.nameAr : product.supplier.name}
                       </h3>
                       {product.supplier.verified && (
-                        <CheckCircle2 className="h-5 w-5 text-green-600" />
+                        <CheckCircle className="h-5 w-5 text-green-600" />
                       )}
                     </div>
                     <div className="flex items-center gap-4 text-sm text-muted-foreground">
@@ -531,7 +531,7 @@ export default function B2BProductDetailPage() {
                   <div className="space-y-1">
                     {(isRTL ? product.paymentTermsAr : product.paymentTerms).map((term, index) => (
                       <div key={index} className="flex items-center gap-2 text-sm">
-                        <CheckCircle2 className="h-3 w-3 text-green-600" />
+                        <CheckCircle className="h-3 w-3 text-green-600" />
                         <span>{term}</span>
                       </div>
                     ))}
@@ -546,7 +546,7 @@ export default function B2BProductDetailPage() {
                   </Button>
                   <Button variant="outline" className="w-full" asChild>
                     <Link href="/examples/b2b-marketplace/rfq">
-                      <MessageSquare className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
+                      <ChatCentered className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
                       {t.b2bMarketplaceDetail.actions.requestQuote}
                     </Link>
                   </Button>

@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { expect, within } from 'storybook/test';
 import { FeatureCard } from '../../../components/ui/feature-card';
 import { Card, CardContent } from '../../../components/ui/card';
-import { Sparkles, Rocket, Zap, Shield, Package, Settings, Heart, Star, Globe, Lock } from 'lucide-react';
+import { Sparkle, Rocket, Lightning, Shield, Package, Gear, Heart, Star, Globe, Lock } from '@phosphor-icons/react';
 import * as React from 'react';
 
 /**
@@ -47,7 +47,7 @@ type Story = StoryObj<typeof meta>;
 // Default - Interactive playground with controls
 export const Default: Story = {
   args: {
-    icon: Sparkles,
+    icon: Sparkle,
     title: 'RTL-First Design',
     description: 'Built from the ground up to support both LTR and RTL layouts seamlessly',
     href: '/rtl-guide'
@@ -94,7 +94,7 @@ export const StaticCard: Story = {
   render: () => (
     <div className="max-w-sm">
       <FeatureCard
-        icon={Sparkles}
+        icon={Sparkle}
         title="Amazing Feature"
         description="This is a static card without a link. Great for non-interactive displays."
       />
@@ -181,7 +181,7 @@ export const GridLayout: Story = {
   render: () => (
     <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
       <FeatureCard
-        icon={Zap}
+        icon={Lightning}
         title="Lightning Fast"
         description="Optimized for performance"
         href="/components"
@@ -239,7 +239,7 @@ export const AllIcons: Story = {
   render: () => (
     <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
       <FeatureCard
-        icon={Sparkles}
+        icon={Sparkle}
         title="Amazing Feature"
         description="This feature will change your life"
       />
@@ -250,7 +250,7 @@ export const AllIcons: Story = {
         href="/getting-started"
       />
       <FeatureCard
-        icon={Zap}
+        icon={Lightning}
         title="Lightning Fast"
         description="Optimized for performance"
       />
@@ -265,7 +265,7 @@ export const AllIcons: Story = {
         description="Simple API, powerful results"
       />
       <FeatureCard
-        icon={Settings}
+        icon={Gear}
         title="Customizable"
         description="Tailor to your needs"
       />
@@ -313,7 +313,7 @@ export const InCardContainer: Story = {
         <h3 className="text-lg font-semibold mb-4">Key Features</h3>
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           <FeatureCard
-            icon={Zap}
+            icon={Lightning}
             title="Lightning Fast"
             description="Optimized for performance"
             href="/components"
@@ -372,7 +372,7 @@ export const RTLExample: Story = {
   render: () => (
     <div className="max-w-sm">
       <FeatureCard
-        icon={Sparkles}
+        icon={Sparkle}
         title="تصميم يدعم الكتابة من اليمين إلى اليسار"
         description="مبني من الأساس لدعم التخطيطات من اليسار إلى اليمين ومن اليمين إلى اليسار بسلاسة"
         href="/rtl-guide"
@@ -411,7 +411,7 @@ export const RTLStaticCard: Story = {
   render: () => (
     <div className="max-w-sm">
       <FeatureCard
-        icon={Sparkles}
+        icon={Sparkle}
         title="ميزة رائعة"
         description="هذه بطاقة ثابتة بدون رابط. رائعة للعروض غير التفاعلية."
       />
@@ -488,7 +488,7 @@ export const RTLGridLayout: Story = {
   render: () => (
     <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
       <FeatureCard
-        icon={Zap}
+        icon={Lightning}
         title="سريع كالبرق"
         description="محسّن للأداء"
         href="/components"
@@ -544,7 +544,7 @@ export const RTLInCardContainer: Story = {
         <h3 className="text-lg font-semibold mb-4">الميزات الرئيسية</h3>
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           <FeatureCard
-            icon={Zap}
+            icon={Lightning}
             title="سريع كالبرق"
             description="محسّن للأداء"
             href="/components"

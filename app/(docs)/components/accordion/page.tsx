@@ -7,7 +7,7 @@ import { Separator } from '@/components/ui/separator'
 import { ComponentShowcase } from '@/components/docs/component-showcase'
 import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
-import { Calendar, CreditCard, User } from 'lucide-react'
+import { Calendar, CreditCard, User } from '@phosphor-icons/react'
 import {
   Accordion,
   AccordionContent,
@@ -106,7 +106,7 @@ const multipleCode = `<Accordion type="multiple" defaultValue={['item-1', 'item-
   </AccordionItem>
 </Accordion>`
 
-const withIconsCode = `import { User, CreditCard, Calendar } from 'lucide-react'
+const withIconsCode = `import { User, CreditCard, Calendar } from '@phosphor-icons/react'
 
 <Accordion type="single" collapsible>
   <AccordionItem value="item-1">

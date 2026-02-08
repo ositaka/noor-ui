@@ -9,7 +9,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { NotificationCenter, type Notification } from '@/components/ui/notification-center'
 import { useToast } from '@/hooks/use-toast'
 import { content } from '@/lib/i18n'
-import { Heart, MessageSquare, Star, UserPlus } from 'lucide-react'
+import { Heart, ChatCentered, Star, UserPlus } from '@phosphor-icons/react'
 import Link from 'next/link'
 import * as React from 'react'
 
@@ -72,7 +72,7 @@ const withAvatarsCode = `'use client'
 
 import * as React from 'react'
 import { NotificationCenter } from '@/components/ui/notification-center'
-import { Star } from 'lucide-react'
+import { Star } from '@phosphor-icons/react'
 
 export default function Example() {
   const [notifications, setNotifications] = React.useState([
@@ -132,7 +132,7 @@ export default function NotificationCenterPage() {
       descriptionAr: content.ar.notificationCenterComponent.demoNotifications.sarahComment,
       time: new Date(Date.now() - 5 * 60000).toISOString(),
       read: false,
-      icon: <MessageSquare className="h-5 w-5" />,
+      icon: <ChatCentered className="h-5 w-5" />,
     },
     {
       id: '2',

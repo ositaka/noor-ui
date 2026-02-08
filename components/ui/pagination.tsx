@@ -1,7 +1,7 @@
 'use client'
 
 import * as React from 'react'
-import { ChevronLeft, ChevronRight, MoreHorizontal } from 'lucide-react'
+import { CaretLeft, CaretRight, DotsThree } from '@phosphor-icons/react'
 
 import { cn } from '../../lib/utils'
 import { ButtonProps, buttonVariants } from './button'
@@ -76,7 +76,7 @@ const PaginationPrevious = ({
     className={cn('gap-1 ps-2.5', className)}
     {...props}
   >
-    <ChevronLeft className="h-4 w-4 rtl:rotate-180" />
+    <CaretLeft className="h-4 w-4 rtl:rotate-180" />
     <span>{children}</span>
   </PaginationLink>
 )
@@ -94,7 +94,7 @@ const PaginationNext = ({
     {...props}
   >
     <span>{children}</span>
-    <ChevronRight className="h-4 w-4 rtl:rotate-180" />
+    <CaretRight className="h-4 w-4 rtl:rotate-180" />
   </PaginationLink>
 )
 PaginationNext.displayName = 'PaginationNext'
@@ -108,7 +108,7 @@ const PaginationEllipsis = ({
     className={cn('flex h-9 w-9 items-center justify-center', className)}
     {...props}
   >
-    <MoreHorizontal className="h-4 w-4" />
+    <DotsThree className="h-4 w-4" />
     <span className="sr-only">More pages</span>
   </span>
 )

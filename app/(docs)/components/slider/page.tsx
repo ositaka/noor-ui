@@ -10,7 +10,7 @@ import { Separator } from '@/components/ui/separator'
 import { ComponentShowcase } from '@/components/docs/component-showcase'
 import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
-import { Volume2, VolumeX } from 'lucide-react'
+import { SpeakerHigh, SpeakerSlash } from '@phosphor-icons/react'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 
@@ -145,9 +145,9 @@ return (
         onClick={() => setVolume(isMuted ? [80] : [0])}
       >
         {isMuted ? (
-          <VolumeX className="h-4 w-4" />
+          <SpeakerSlash className="h-4 w-4" />
         ) : (
-          <Volume2 className="h-4 w-4" />
+          <SpeakerHigh className="h-4 w-4" />
         )}
       </Button>
       <Slider
@@ -366,9 +366,9 @@ export default function SliderPage() {
                         onClick={() => setVolume(isMuted ? [80] : [0])}
                       >
                         {isMuted ? (
-                          <VolumeX className="h-4 w-4" />
+                          <SpeakerSlash className="h-4 w-4" />
                         ) : (
-                          <Volume2 className="h-4 w-4" />
+                          <SpeakerHigh className="h-4 w-4" />
                         )}
                       </Button>
                       <Slider

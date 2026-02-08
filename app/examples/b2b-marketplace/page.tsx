@@ -14,16 +14,16 @@ import { ArabicNumber } from '@/components/ui/arabic-number'
 import { formatSAR } from '@/lib/arabic-numbers'
 import { cn } from '@/lib/utils'
 import {
-  Search,
+  MagnifyingGlass,
   ShoppingCart,
   FileText,
   Package,
-  TrendingDown,
-  Building2,
-  MessageSquare,
+  TrendDown,
+  Buildings,
+  ChatCentered,
   Star,
-  CheckCircle2,
-} from 'lucide-react'
+  CheckCircle,
+} from '@phosphor-icons/react'
 
 interface Product {
   id: string
@@ -302,13 +302,13 @@ export default function B2BMarketplacePage() {
             <div className="flex gap-3">
               <Button variant="outline" asChild>
                 <Link href="/examples/b2b-marketplace/rfq">
-                  <MessageSquare className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
+                  <ChatCentered className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
                   {t.b2bMarketplaceListing.buttons.requestQuote}
                 </Link>
               </Button>
               <Button asChild>
                 <Link href="/examples/b2b-marketplace/dashboard">
-                  <Building2 className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
+                  <Buildings className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
                   {t.b2bMarketplaceListing.buttons.dashboard}
                 </Link>
               </Button>
@@ -339,7 +339,7 @@ export default function B2BMarketplacePage() {
               <CardContent className="p-4">
                 <div className="flex items-center gap-3">
                   <div className="p-2 bg-primary/10 rounded-lg">
-                    <Building2 className="h-5 w-5 text-primary" />
+                    <Buildings className="h-5 w-5 text-primary" />
                   </div>
                   <div>
                     <p className="text-2xl font-bold">
@@ -357,7 +357,7 @@ export default function B2BMarketplacePage() {
               <CardContent className="p-4">
                 <div className="flex items-center gap-3">
                   <div className="p-2 bg-green-100 rounded-lg">
-                    <TrendingDown className="h-5 w-5 text-green-600" />
+                    <TrendDown className="h-5 w-5 text-green-600" />
                   </div>
                   <div>
                     <p className="text-2xl font-bold">
@@ -394,7 +394,7 @@ export default function B2BMarketplacePage() {
         {/* Filters */}
         <div className="flex flex-col sm:flex-row gap-4 mb-8">
           <div className="relative flex-1">
-            <Search
+            <MagnifyingGlass
               className={cn(
                 'absolute top-3 h-4 w-4 text-muted-foreground',
                 isRTL ? 'right-3' : 'left-3'
@@ -453,7 +453,7 @@ export default function B2BMarketplacePage() {
                 <div className="flex items-center gap-2 pt-2">
                   <div className="flex items-center gap-1 text-sm text-muted-foreground">
                     {product.supplier.verified && (
-                      <CheckCircle2 className="h-3 w-3 text-green-600" />
+                      <CheckCircle className="h-3 w-3 text-green-600" />
                     )}
                     <span>{isRTL ? product.supplier.nameAr : product.supplier.name}</span>
                   </div>
@@ -561,7 +561,7 @@ export default function B2BMarketplacePage() {
                   </p>
                   <Button asChild size="lg">
                     <Link href="/examples/b2b-marketplace/rfq">
-                      <MessageSquare className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
+                      <ChatCentered className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
                       {t.b2bMarketplaceListing.cta.requestQuote}
                     </Link>
                   </Button>
@@ -575,7 +575,7 @@ export default function B2BMarketplacePage() {
                   </p>
                   <Button asChild variant="outline" size="lg">
                     <Link href="/examples/b2b-marketplace/dashboard">
-                      <Building2 className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
+                      <Buildings className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
                       {t.b2bMarketplaceListing.cta.dashboard}
                     </Link>
                   </Button>

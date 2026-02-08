@@ -4,7 +4,7 @@ import * as React from 'react'
 import Link from 'next/link'
 import { Card, CardContent } from '@/components/ui/card'
 import { CodeBlock } from '@/components/docs/code-block'
-import { Globe2, CheckCircle2, XCircle } from 'lucide-react'
+import { GlobeHemisphereWest, CheckCircle, XCircle } from '@phosphor-icons/react'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 
@@ -63,7 +63,7 @@ export default function RTLPage() {
 
         <div className="max-w-3xl mb-12">
           <div className="flex items-center gap-3 mb-4">
-            <Globe2 className="h-10 w-10 text-primary" />
+            <GlobeHemisphereWest className="h-10 w-10 text-primary" />
             <h1 className="text-4xl font-bold tracking-tight">{t.title}</h1>
           </div>
           <p className="text-xl text-muted-foreground">
@@ -77,28 +77,28 @@ export default function RTLPage() {
             <CardContent className="p-6">
               <ul className="space-y-4">
                 <li className="flex items-start gap-3">
-                  <CheckCircle2 className="h-5 w-5 text-green-600 mt-0.5 shrink-0" />
+                  <CheckCircle className="h-5 w-5 text-green-600 mt-0.5 shrink-0" />
                   <div>
                     <strong className="text-foreground">{t.useLogical}</strong>
                     <p className="text-sm text-muted-foreground">{t.useLogicalDesc}</p>
                   </div>
                 </li>
                 <li className="flex items-start gap-3">
-                  <CheckCircle2 className="h-5 w-5 text-green-600 mt-0.5 shrink-0" />
+                  <CheckCircle className="h-5 w-5 text-green-600 mt-0.5 shrink-0" />
                   <div>
                     <strong className="text-foreground">{t.testBoth}</strong>
                     <p className="text-sm text-muted-foreground">{t.testBothDesc}</p>
                   </div>
                 </li>
                 <li className="flex items-start gap-3">
-                  <CheckCircle2 className="h-5 w-5 text-green-600 mt-0.5 shrink-0" />
+                  <CheckCircle className="h-5 w-5 text-green-600 mt-0.5 shrink-0" />
                   <div>
                     <strong className="text-foreground">{t.mirrorIcons}</strong>
                     <p className="text-sm text-muted-foreground">{t.mirrorIconsDesc}</p>
                   </div>
                 </li>
                 <li className="flex items-start gap-3">
-                  <CheckCircle2 className="h-5 w-5 text-green-600 mt-0.5 shrink-0" />
+                  <CheckCircle className="h-5 w-5 text-green-600 mt-0.5 shrink-0" />
                   <div>
                     <strong className="text-foreground">{t.respectLang}</strong>
                     <p className="text-sm text-muted-foreground">{t.respectLangDesc}</p>
@@ -130,7 +130,7 @@ export default function RTLPage() {
             <Card className="border-green-500/50 bg-green-50 dark:bg-green-950/20">
               <CardContent className="p-6">
                 <h3 className="font-semibold mb-2 flex items-center gap-2">
-                  <CheckCircle2 className="h-5 w-5 text-green-600 dark:text-green-400" />
+                  <CheckCircle className="h-5 w-5 text-green-600 dark:text-green-400" />
                   {t.use}
                 </h3>
                 <code className="text-sm">ms-, me-, ps-, pe-, start-, end-</code>

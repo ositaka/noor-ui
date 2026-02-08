@@ -3,7 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './car
 import { Badge } from './badge'
 import { Button } from './button'
 import { cn } from '../../lib/utils'
-import { LucideIcon } from 'lucide-react'
+import type { IconComponent } from '@/lib/types'
 
 export interface ListingCardBadge {
   label: string
@@ -12,13 +12,13 @@ export interface ListingCardBadge {
 }
 
 export interface ListingCardStat {
-  icon: LucideIcon
+  icon: IconComponent
   value: string | number
   label?: string
 }
 
 export interface ListingCardAction {
-  icon: LucideIcon
+  icon: IconComponent
   label: string
   onClick?: () => void
 }
@@ -52,7 +52,7 @@ export interface ListingCardProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Icon to show as placeholder when no image provided
    */
-  placeholderIcon?: LucideIcon
+  placeholderIcon?: IconComponent
   /**
    * Badges to show on top left of image
    */

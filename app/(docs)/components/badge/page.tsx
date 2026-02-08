@@ -9,7 +9,7 @@ import { Separator } from '@/components/ui/separator'
 import { ComponentShowcase } from '@/components/docs/component-showcase'
 import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
-import { Check, AlertCircle, Star, Clock, Zap, CheckCircle2, XCircle } from 'lucide-react'
+import { Check, WarningCircle, Star, Clock, Lightning, CheckCircle, XCircle } from '@phosphor-icons/react'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 
@@ -41,7 +41,7 @@ const variantsCode = `<Badge variant="default">Default</Badge>
 <Badge variant="destructive">Destructive</Badge>
 <Badge variant="outline">Outline</Badge>`
 
-const withIconCode = `import { Check, AlertCircle, Star } from 'lucide-react'
+const withIconCode = `import { Check, WarningCircle, Star } from '@phosphor-icons/react'
 
 <Badge>
   <Check className="h-3 w-3 me-1" />
@@ -49,7 +49,7 @@ const withIconCode = `import { Check, AlertCircle, Star } from 'lucide-react'
 </Badge>
 
 <Badge variant="destructive">
-  <AlertCircle className="h-3 w-3 me-1" />
+  <WarningCircle className="h-3 w-3 me-1" />
   Error
 </Badge>
 
@@ -60,7 +60,7 @@ const withIconCode = `import { Check, AlertCircle, Star } from 'lucide-react'
 
 const statusCode = `// Success
 <Badge variant="default">
-  <CheckCircle2 className="h-3 w-3 me-1" />
+  <CheckCircle className="h-3 w-3 me-1" />
   Active
 </Badge>
 
@@ -78,7 +78,7 @@ const statusCode = `// Success
 
 // Info
 <Badge variant="outline">
-  <AlertCircle className="h-3 w-3 me-1" />
+  <WarningCircle className="h-3 w-3 me-1" />
   Info
 </Badge>`
 
@@ -237,11 +237,11 @@ export default function BadgePage() {
                       {t.badgeComponent.labels.featured}
                     </Badge>
                     <Badge variant="destructive">
-                      <AlertCircle className="h-3 w-3 me-1" />
+                      <WarningCircle className="h-3 w-3 me-1" />
                       {t.badgeComponent.labels.error}
                     </Badge>
                     <Badge variant="outline">
-                      <Zap className="h-3 w-3 me-1" />
+                      <Lightning className="h-3 w-3 me-1" />
                       {t.badgeComponent.labels.fast}
                     </Badge>
                   </div>
@@ -259,7 +259,7 @@ export default function BadgePage() {
                 <CardContent className="p-6">
                   <div className="flex flex-wrap gap-2">
                     <Badge variant="default">
-                      <CheckCircle2 className="h-3 w-3 me-1" />
+                      <CheckCircle className="h-3 w-3 me-1" />
                       {t.badgeComponent.labels.active}
                     </Badge>
                     <Badge variant="secondary">
@@ -271,7 +271,7 @@ export default function BadgePage() {
                       {t.badgeComponent.labels.failed}
                     </Badge>
                     <Badge variant="outline">
-                      <AlertCircle className="h-3 w-3 me-1" />
+                      <WarningCircle className="h-3 w-3 me-1" />
                       {t.badgeComponent.labels.info}
                     </Badge>
                   </div>

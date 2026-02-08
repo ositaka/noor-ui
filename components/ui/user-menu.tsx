@@ -13,7 +13,7 @@ import {
   DropdownMenuTrigger,
 } from './dropdown-menu'
 import { cn } from '../../lib/utils'
-import { User, Settings, LogOut, CreditCard, Users, HelpCircle } from 'lucide-react'
+import { User, Gear, SignOut, CreditCard, Users, Question } from '@phosphor-icons/react'
 
 export interface UserMenuProps {
   user?: {
@@ -132,7 +132,7 @@ export const UserMenu = React.forwardRef<HTMLButtonElement, UserMenuProps>(
 
             {onSettingsClick && (
               <DropdownMenuItem onClick={onSettingsClick}>
-                <Settings className="h-4 w-4 me-2" />
+                <Gear className="h-4 w-4 me-2" />
                 <span>{t.settings}</span>
               </DropdownMenuItem>
             )}
@@ -153,7 +153,7 @@ export const UserMenu = React.forwardRef<HTMLButtonElement, UserMenuProps>(
 
             {onSupportClick && (
               <DropdownMenuItem onClick={onSupportClick}>
-                <HelpCircle className="h-4 w-4 me-2" />
+                <Question className="h-4 w-4 me-2" />
                 <span>{t.support}</span>
               </DropdownMenuItem>
             )}
@@ -164,7 +164,7 @@ export const UserMenu = React.forwardRef<HTMLButtonElement, UserMenuProps>(
             <>
               <DropdownMenuSeparator />
               <DropdownMenuItem onClick={onLogout} className="text-destructive focus:text-destructive">
-                <LogOut className="h-4 w-4 me-2" />
+                <SignOut className="h-4 w-4 me-2" />
                 <span>{t.logout}</span>
               </DropdownMenuItem>
             </>

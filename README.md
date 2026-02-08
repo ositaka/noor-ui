@@ -449,7 +449,7 @@ MIT License - see [LICENSE](https://github.com/ositaka/noor-ui/blob/main/LICENSE
 Built with:
 - [Radix UI](https://www.radix-ui.com/) - Accessible component primitives
 - [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework
-- [Lucide React](https://lucide.dev/) - Beautiful icons
+- [Phosphor Icons](https://phosphoricons.com/) - Beautiful duotone icons
 - [Next.js](https://nextjs.org/) - React framework
 
 ## 💬 Support

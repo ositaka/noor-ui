@@ -47,7 +47,7 @@ export default defineConfig({
     'class-variance-authority',
     'clsx',
     'cmdk',
-    'lucide-react',
+    '@phosphor-icons/react',
     'next-themes',
     'react-syntax-highlighter',
     'tailwind-merge',

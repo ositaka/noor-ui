@@ -1,7 +1,7 @@
 'use client'
 
 import * as React from 'react'
-import { ChevronDown, ChevronUp, ChevronsUpDown, ChevronLeft, ChevronRight, Search, X } from 'lucide-react'
+import { CaretDown, CaretUp, CaretUpDown, CaretLeft, CaretRight, MagnifyingGlass, X } from '@phosphor-icons/react'
 import { cn } from '../../lib/utils'
 import {
   Table,
@@ -98,18 +98,18 @@ function SortIcon({
   direction: SortDirection
 }) {
   if (!active) {
-    return <ChevronsUpDown className="h-4 w-4 opacity-50" />
+    return <CaretUpDown className="h-4 w-4 opacity-50" />
   }
 
   if (direction === 'asc') {
-    return <ChevronUp className="h-4 w-4" />
+    return <CaretUp className="h-4 w-4" />
   }
 
   if (direction === 'desc') {
-    return <ChevronDown className="h-4 w-4" />
+    return <CaretDown className="h-4 w-4" />
   }
 
-  return <ChevronsUpDown className="h-4 w-4 opacity-50" />
+  return <CaretUpDown className="h-4 w-4 opacity-50" />
 }
 
 export function DataTable<T>({
@@ -239,7 +239,7 @@ export function DataTable<T>({
         {searchable && (
           <div className="mb-4 flex items-center gap-2">
             <div className="relative flex-1">
-              <Search className="absolute top-1/2 -translate-y-1/2 ms-3 h-4 w-4 text-muted-foreground" />
+              <MagnifyingGlass className="absolute top-1/2 -translate-y-1/2 ms-3 h-4 w-4 text-muted-foreground" />
               <Input
                 type="text"
                 placeholder={searchPlaceholder}
@@ -264,7 +264,7 @@ export function DataTable<T>({
           <CardContent className="p-12 text-center">
             <div className="mx-auto max-w-sm space-y-3">
               <div className="flex justify-center">
-                <Search className="h-12 w-12 text-muted-foreground/50" />
+                <MagnifyingGlass className="h-12 w-12 text-muted-foreground/50" />
               </div>
               <p className="text-lg font-medium text-muted-foreground">
                 {emptyMessage}
@@ -282,7 +282,7 @@ export function DataTable<T>({
       {searchable && (
         <div className="flex items-center gap-2">
           <div className="relative flex-1">
-            <Search className="absolute top-1/2 -translate-y-1/2 ms-3 h-4 w-4 text-muted-foreground" />
+            <MagnifyingGlass className="absolute top-1/2 -translate-y-1/2 ms-3 h-4 w-4 text-muted-foreground" />
             <Input
               type="text"
               placeholder={searchPlaceholder}
@@ -506,7 +506,7 @@ export function DataTable<T>({
             disabled={currentPage === 1}
             className="gap-1"
           >
-            <ChevronLeft className="h-4 w-4 rtl:rotate-180" />
+            <CaretLeft className="h-4 w-4 rtl:rotate-180" />
             <span>{previousLabel}</span>
           </Button>
 
@@ -522,7 +522,7 @@ export function DataTable<T>({
             className="gap-1"
           >
             <span>{nextLabel}</span>
-            <ChevronRight className="h-4 w-4 rtl:rotate-180" />
+            <CaretRight className="h-4 w-4 rtl:rotate-180" />
           </Button>
         </div>
       )}

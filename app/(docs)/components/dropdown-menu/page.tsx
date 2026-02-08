@@ -28,15 +28,15 @@ import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
 import {
   User,
-  Settings,
+  Gear,
   CreditCard,
-  LogOut,
+  SignOut,
   UserPlus,
-  Mail,
-  MessageSquare,
+  Envelope,
+  ChatCentered,
   PlusCircle,
-  MoreHorizontal
-} from 'lucide-react'
+  DotsThree
+} from '@phosphor-icons/react'
 
 const getDropdownMenuProps = (t: typeof content.en | typeof content.ar): PropDefinition[] => [
   {
@@ -94,12 +94,12 @@ const withIconsCode = `<DropdownMenu>
       <span>Profile</span>
     </DropdownMenuItem>
     <DropdownMenuItem>
-      <Settings className="me-2 h-4 w-4" />
+      <Gear className="me-2 h-4 w-4" />
       <span>Settings</span>
     </DropdownMenuItem>
     <DropdownMenuSeparator />
     <DropdownMenuItem>
-      <LogOut className="me-2 h-4 w-4" />
+      <SignOut className="me-2 h-4 w-4" />
       <span>Logout</span>
     </DropdownMenuItem>
   </DropdownMenuContent>
@@ -162,7 +162,7 @@ const rtlCode = `// RTL support is automatic!
       <span>الملف الشخصي</span>
     </DropdownMenuItem>
     <DropdownMenuItem>
-      <Settings className="me-2 h-4 w-4" />
+      <Gear className="me-2 h-4 w-4" />
       <span>الإعدادات</span>
     </DropdownMenuItem>
   </DropdownMenuContent>
@@ -234,13 +234,13 @@ export default function DropdownMenuPage() {
                     <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
                   </DropdownMenuItem>
                   <DropdownMenuItem>
-                    <Settings className="me-2 h-4 w-4" />
+                    <Gear className="me-2 h-4 w-4" />
                     <span>{t.dropdownMenuComponent.demo.settings}</span>
                     <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem>
-                    <LogOut className="me-2 h-4 w-4" />
+                    <SignOut className="me-2 h-4 w-4" />
                     <span>{t.dropdownMenuComponent.demo.logout}</span>
                     <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
                   </DropdownMenuItem>
@@ -288,13 +288,13 @@ export default function DropdownMenuPage() {
                         <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
                       </DropdownMenuItem>
                       <DropdownMenuItem>
-                        <Settings className="me-2 h-4 w-4" />
+                        <Gear className="me-2 h-4 w-4" />
                         <span>{t.dropdownMenuComponent.demo.settings}</span>
                         <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
                       </DropdownMenuItem>
                       <DropdownMenuSeparator />
                       <DropdownMenuItem>
-                        <LogOut className="me-2 h-4 w-4" />
+                        <SignOut className="me-2 h-4 w-4" />
                         <span>{t.dropdownMenuComponent.demo.logout}</span>
                       </DropdownMenuItem>
                     </DropdownMenuContent>
@@ -375,7 +375,7 @@ export default function DropdownMenuPage() {
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                       <Button variant="outline">
-                        <MoreHorizontal className="h-4 w-4" />
+                        <DotsThree className="h-4 w-4" />
                       </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent className="w-56">
@@ -393,11 +393,11 @@ export default function DropdownMenuPage() {
                           </DropdownMenuSubTrigger>
                           <DropdownMenuSubContent>
                             <DropdownMenuItem>
-                              <Mail className="me-2 h-4 w-4" />
+                              <Envelope className="me-2 h-4 w-4" />
                               <span>{t.dropdownMenuComponent.demo.email}</span>
                             </DropdownMenuItem>
                             <DropdownMenuItem>
-                              <MessageSquare className="me-2 h-4 w-4" />
+                              <ChatCentered className="me-2 h-4 w-4" />
                               <span>{t.dropdownMenuComponent.demo.message}</span>
                             </DropdownMenuItem>
                             <DropdownMenuSeparator />

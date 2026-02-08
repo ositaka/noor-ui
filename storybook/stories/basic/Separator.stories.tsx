@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Separator } from '../../../components/ui/separator';
 import { Button } from '../../../components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../../components/ui/card';
-import { Home, Settings, User, Bell } from 'lucide-react';
+import { House, Gear, User, Bell } from '@phosphor-icons/react';
 
 /**
  * Separator Component Stories
@@ -167,12 +167,12 @@ export const InList: Story = {
   render: () => (
     <ul className="space-y-3">
       <li className="flex items-center gap-3">
-        <Home className="h-4 w-4" />
+        <House className="h-4 w-4" />
         <span>Dashboard</span>
       </li>
       <Separator />
       <li className="flex items-center gap-3">
-        <Settings className="h-4 w-4" />
+        <Gear className="h-4 w-4" />
         <span>Settings</span>
       </li>
       <Separator />

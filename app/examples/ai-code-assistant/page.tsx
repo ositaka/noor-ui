@@ -15,7 +15,7 @@ import { Badge } from '@/components/ui/badge'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { CodeBlock } from '@/components/docs/code-block'
 import { cn } from '@/lib/utils'
-import { Code2, Sparkles, FileCode, Bug, Lightbulb, Trash2 } from 'lucide-react'
+import { CodeBlock as CodeBlockIcon, Sparkle, FileCode, Bug, Lightbulb, Trash } from '@phosphor-icons/react'
 
 interface Message {
   id: string
@@ -206,7 +206,7 @@ export default function CodeAssistantPage() {
             <div className="container flex h-16 items-center justify-between">
               <div className="flex items-center gap-3">
                 <div className="p-2 bg-primary/10 rounded-lg">
-                  <Code2 className="h-5 w-5 text-primary" />
+                  <CodeBlockIcon className="h-5 w-5 text-primary" />
                 </div>
                 <div>
                   <h1 className="font-semibold text-lg">
@@ -219,7 +219,7 @@ export default function CodeAssistantPage() {
               </div>
               <div className="flex items-center gap-2">
                 <Button variant="outline" size="sm" onClick={handleClearChat}>
-                  <Trash2 className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
+                  <Trash className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
                   {t.aiCodeAssistantPage.clear}
                 </Button>
                 <Button variant="outline" size="sm" asChild>
@@ -298,7 +298,7 @@ export default function CodeAssistantPage() {
                 {isThinking && (
                   <div className="flex items-center gap-3 p-4">
                     <div className="h-10 w-10 rounded-full bg-muted flex items-center justify-center">
-                      <Code2 className="h-5 w-5 text-muted-foreground" />
+                      <CodeBlockIcon className="h-5 w-5 text-muted-foreground" />
                     </div>
                     <ThinkingIndicator variant="typing" />
                   </div>
@@ -316,7 +316,7 @@ export default function CodeAssistantPage() {
               <Tabs value={activeTab} onValueChange={(v) => setActiveTab(v as any)} className="w-full">
                 <TabsList className="grid w-full grid-cols-4">
                   <TabsTrigger value="explain" className="text-xs">
-                    <Sparkles className={cn('h-3 w-3', isRTL ? 'ms-1' : 'me-1')} />
+                    <Sparkle className={cn('h-3 w-3', isRTL ? 'ms-1' : 'me-1')} />
                     {t.aiCodeAssistantPage.actions.explain}
                   </TabsTrigger>
                   <TabsTrigger value="improve" className="text-xs">
@@ -328,7 +328,7 @@ export default function CodeAssistantPage() {
                     {t.aiCodeAssistantPage.actions.fix}
                   </TabsTrigger>
                   <TabsTrigger value="generate" className="text-xs">
-                    <Code2 className={cn('h-3 w-3', isRTL ? 'ms-1' : 'me-1')} />
+                    <CodeBlockIcon className={cn('h-3 w-3', isRTL ? 'ms-1' : 'me-1')} />
                     {t.aiCodeAssistantPage.actions.generate}
                   </TabsTrigger>
                 </TabsList>
@@ -377,7 +377,7 @@ export default function CodeAssistantPage() {
                   onClick={() => handleLoadExample('react', 'explain')}
                   className="text-xs"
                 >
-                  <Sparkles className={cn('h-3 w-3', isRTL ? 'ms-1' : 'me-1')} />
+                  <Sparkle className={cn('h-3 w-3', isRTL ? 'ms-1' : 'me-1')} />
                   {t.aiCodeAssistantPage.actions.explain}
                 </Button>
                 <Button
@@ -415,7 +415,7 @@ export default function CodeAssistantPage() {
                   onClick={() => handleLoadExample('python', 'explain')}
                   className="text-xs"
                 >
-                  <Sparkles className={cn('h-3 w-3', isRTL ? 'ms-1' : 'me-1')} />
+                  <Sparkle className={cn('h-3 w-3', isRTL ? 'ms-1' : 'me-1')} />
                   {t.aiCodeAssistantPage.actions.explain}
                 </Button>
                 <Button
@@ -444,7 +444,7 @@ export default function CodeAssistantPage() {
                   onClick={() => handleLoadExample('typescript', 'explain')}
                   className="text-xs"
                 >
-                  <Sparkles className={cn('h-3 w-3', isRTL ? 'ms-1' : 'me-1')} />
+                  <Sparkle className={cn('h-3 w-3', isRTL ? 'ms-1' : 'me-1')} />
                   {t.aiCodeAssistantPage.actions.explain}
                 </Button>
                 <Button

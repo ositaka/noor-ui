@@ -10,20 +10,20 @@ import { CodeBlock } from '@/components/docs/code-block'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 import {
-  Home,
+  House,
   Heart,
-  Share2,
+  ShareNetwork,
   Bed,
-  Bath,
+  Bathtub,
   Square,
   ShoppingCart,
   Star,
   MapPin,
-  DollarSign,
+  CurrencyDollar,
   Briefcase,
   Clock,
   Package,
-} from 'lucide-react'
+} from '@phosphor-icons/react'
 
 const getListingCardProps = (t: typeof content.en | typeof content.ar): PropDefinition[] => [
   {
@@ -52,7 +52,7 @@ const getListingCardProps = (t: typeof content.en | typeof content.ar): PropDefi
   },
   {
     name: 'placeholderIcon',
-    type: 'LucideIcon',
+    type: 'IconComponent',
     required: false,
     description: t.listingCardComponent.props.placeholderIcon,
   },
@@ -122,18 +122,18 @@ export default function ListingCardPage() {
   const listingCardProps = getListingCardProps(t)
 
   const basicUsage = `import { ListingCard } from 'noorui-rtl'
-import { Home } from 'lucide-react'
+import { House } from '@phosphor-icons/react'
 
 <ListingCard
   title="Modern Apartment"
   subtitle="Downtown Dubai"
   description="Beautiful 2-bedroom apartment with stunning views"
   price="1,200,000 AED"
-  placeholderIcon={Home}
+  placeholderIcon={House}
 />`
 
   const realEstateCode = `import { ListingCard } from 'noorui-rtl'
-import { Home, Heart, Share2, Bed, Bath, Square, MapPin } from 'lucide-react'
+import { House, Heart, ShareNetwork, Bed, Bathtub, Square, MapPin } from '@phosphor-icons/react'
 
 <ListingCard
   title="Luxury Villa in Dubai Hills"
@@ -145,18 +145,18 @@ import { Home, Heart, Share2, Bed, Bath, Square, MapPin } from 'lucide-react'
   }
   description="Stunning 5-bedroom villa with private pool and garden"
   price="8,500,000 AED"
-  placeholderIcon={Home}
+  placeholderIcon={House}
   badges={[
     { label: 'For Sale', variant: 'default' },
     { label: 'Featured', variant: 'destructive' },
   ]}
   actions={[
     { icon: Heart, label: 'Favorite', onClick: () => {} },
-    { icon: Share2, label: 'Share', onClick: () => {} },
+    { icon: ShareNetwork, label: 'Share', onClick: () => {} },
   ]}
   stats={[
     { icon: Bed, value: 5, label: 'Bedrooms' },
-    { icon: Bath, value: 6, label: 'Bathrooms' },
+    { icon: Bathtub, value: 6, label: 'Bathrooms' },
     { icon: Square, value: '4,500 sqft', label: 'Area' },
   ]}
   tags={[
@@ -169,7 +169,7 @@ import { Home, Heart, Share2, Bed, Bath, Square, MapPin } from 'lucide-react'
 />`
 
   const ecommerceCode = `import { ListingCard } from 'noorui-rtl'
-import { Package, Heart, Star } from 'lucide-react'
+import { Package, Heart, Star } from '@phosphor-icons/react'
 
 <ListingCard
   title="Premium Wireless Headphones"
@@ -198,7 +198,7 @@ import { Package, Heart, Star } from 'lucide-react'
 />`
 
   const jobListingCode = `import { ListingCard } from 'noorui-rtl'
-import { Briefcase, Clock, MapPin, DollarSign } from 'lucide-react'
+import { Briefcase, Clock, MapPin, CurrencyDollar } from '@phosphor-icons/react'
 
 <ListingCard
   title="Senior Frontend Developer"
@@ -234,13 +234,13 @@ import { Briefcase, Clock, MapPin, DollarSign } from 'lucide-react'
 }
 
 interface ListingCardAction {
-  icon: LucideIcon
+  icon: IconComponent
   label: string
   onClick?: () => void
 }
 
 interface ListingCardStat {
-  icon: LucideIcon
+  icon: IconComponent
   value: string | number
   label?: string
 }
@@ -295,7 +295,7 @@ interface ListingCardTag {
                 subtitle={t.listingCardComponent.realEstate.downtownDubai}
                 description={t.listingCardComponent.realEstate.apartmentDesc}
                 price={t.listingCardComponentPage.prices.apartment1200k}
-                placeholderIcon={Home}
+                placeholderIcon={House}
               />
             </div>
           </ComponentShowcase.Demo>
@@ -320,18 +320,18 @@ interface ListingCardTag {
                 }
                 description={t.listingCardComponent.realEstate.villaDesc}
                 price={t.listingCardComponentPage.prices.villa8500k}
-                placeholderIcon={Home}
+                placeholderIcon={House}
                 badges={[
                   { label: t.listingCardComponent.realEstate.forSale, variant: 'default' },
                   { label: t.listingCardComponent.realEstate.featured, variant: 'destructive' },
                 ]}
                 actions={[
                   { icon: Heart, label: t.listingCardComponent.realEstate.favorite, onClick: () => {} },
-                  { icon: Share2, label: t.listingCardComponent.realEstate.share, onClick: () => {} },
+                  { icon: ShareNetwork, label: t.listingCardComponent.realEstate.share, onClick: () => {} },
                 ]}
                 stats={[
                   { icon: Bed, value: 5, label: t.listingCardComponent.realEstate.bedrooms },
-                  { icon: Bath, value: 6, label: t.listingCardComponent.realEstate.bathrooms },
+                  { icon: Bathtub, value: 6, label: t.listingCardComponent.realEstate.bathrooms },
                   { icon: Square, value: '4,500 sqft', label: t.listingCardComponent.realEstate.area },
                 ]}
                 tags={[

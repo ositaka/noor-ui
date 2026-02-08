@@ -20,14 +20,14 @@ import {
 import {
   ArrowUp,
   ArrowDown,
-  DollarSign,
+  CurrencyDollar,
   Users,
   ShoppingCart,
-  Activity,
+  Pulse,
   Download,
-  Filter,
+  Funnel,
   Calendar,
-} from 'lucide-react'
+} from '@phosphor-icons/react'
 import { useDirection } from '@/components/providers/direction-provider'
 import { DirectionToggle } from '@/components/docs/direction-toggle'
 import { content } from '@/lib/i18n'
@@ -45,7 +45,7 @@ export default function DashboardPage() {
       currency: 'ر.س',
       change: '+12.5%',
       trend: 'up' as const,
-      icon: DollarSign,
+      icon: CurrencyDollar,
     },
     {
       title: 'عدد العملاء',
@@ -69,7 +69,7 @@ export default function DashboardPage() {
       value: '3.24%',
       change: '-2.4%',
       trend: 'down' as const,
-      icon: Activity,
+      icon: Pulse,
     },
   ]
 
@@ -152,7 +152,7 @@ export default function DashboardPage() {
     },
   ]
 
-  const recentActivity = [
+  const recentPulse = [
     {
       user: 'أحمد محمد',
       userEn: 'Ahmed Mohammed',
@@ -266,7 +266,7 @@ export default function DashboardPage() {
                 {locale === 'ar' ? 'آخر 30 يوماً' : 'Last 30 days'}
               </Button>
               <Button variant="outline" size="sm">
-                <Filter className="h-4 w-4 me-2" />
+                <Funnel className="h-4 w-4 me-2" />
                 {locale === 'ar' ? 'تصفية' : 'Filter'}
               </Button>
               <Button size="sm">
@@ -523,11 +523,11 @@ export default function DashboardPage() {
               </CardContent>
             </Card>
 
-            {/* Recent Activity */}
+            {/* Recent Pulse */}
             <Card>
               <CardHeader>
                 <CardTitle>
-                  {locale === 'ar' ? 'النشاط الأخير' : 'Recent Activity'}
+                  {locale === 'ar' ? 'النشاط الأخير' : 'Recent Pulse'}
                 </CardTitle>
                 <CardDescription>
                   {locale === 'ar' ? 'آخر التحديثات في النظام' : 'Latest updates in the system'}
@@ -535,7 +535,7 @@ export default function DashboardPage() {
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
-                  {recentActivity.map((activity, index) => (
+                  {recentPulse.map((activity, index) => (
                     <div key={index} className="flex items-start gap-4">
                       <Avatar className="h-9 w-9">
                         <AvatarFallback>{activity.avatar}</AvatarFallback>

@@ -155,7 +155,7 @@ LinkedIn: https://linkedin.com/in/ositaka
 ```
 
 ### Avatar/Logo
-- Use the **Sunrise icon** (🌅) from Lucide as placeholder
+- Use the **SunHorizon icon** (🌅) from Phosphor as placeholder
 - Or create a simple logo with "نور" or "Noor UI"
 - Keep it consistent across all platforms
 - Recommended: 512x512px PNG with transparent background

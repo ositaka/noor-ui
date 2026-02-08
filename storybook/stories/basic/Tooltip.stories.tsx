@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { expect, userEvent, within } from 'storybook/test';
 import { Tooltip, TooltipContent, TooltipTrigger, TooltipProvider } from '../../../components/ui/tooltip';
 import { Button } from '../../../components/ui/button';
-import { Info, Plus, Settings, Trash2 } from 'lucide-react';
+import { Info, Plus, Gear, Trash } from '@phosphor-icons/react';
 
 /**
  * Tooltip Component Stories
@@ -174,7 +174,7 @@ export const WithIconButtons: Story = {
       <Tooltip>
         <TooltipTrigger asChild>
           <Button variant="ghost" size="icon" aria-label="Settings">
-            <Settings className="h-4 w-4" />
+            <Gear className="h-4 w-4" />
           </Button>
         </TooltipTrigger>
         <TooltipContent>
@@ -185,7 +185,7 @@ export const WithIconButtons: Story = {
       <Tooltip>
         <TooltipTrigger asChild>
           <Button variant="ghost" size="icon" aria-label="Delete">
-            <Trash2 className="h-4 w-4" />
+            <Trash className="h-4 w-4" />
           </Button>
         </TooltipTrigger>
         <TooltipContent>
@@ -241,8 +241,8 @@ export const WithTextButtons: Story = {
       <Tooltip>
         <TooltipTrigger asChild>
           <Button variant="outline">
-            <Settings className="me-2 h-4 w-4" />
-            Settings
+            <Gear className="me-2 h-4 w-4" />
+            Gear
           </Button>
         </TooltipTrigger>
         <TooltipContent>
@@ -407,7 +407,7 @@ export const RTLWithIconButtons: Story = {
       <Tooltip>
         <TooltipTrigger asChild>
           <Button variant="ghost" size="icon" aria-label="إعدادات">
-            <Settings className="h-4 w-4" />
+            <Gear className="h-4 w-4" />
           </Button>
         </TooltipTrigger>
         <TooltipContent>
@@ -418,7 +418,7 @@ export const RTLWithIconButtons: Story = {
       <Tooltip>
         <TooltipTrigger asChild>
           <Button variant="ghost" size="icon" aria-label="حذف">
-            <Trash2 className="h-4 w-4" />
+            <Trash className="h-4 w-4" />
           </Button>
         </TooltipTrigger>
         <TooltipContent>
@@ -476,7 +476,7 @@ export const RTLWithTextButtons: Story = {
       <Tooltip>
         <TooltipTrigger asChild>
           <Button variant="outline">
-            <Settings className="me-2 h-4 w-4" />
+            <Gear className="me-2 h-4 w-4" />
             إعدادات
           </Button>
         </TooltipTrigger>

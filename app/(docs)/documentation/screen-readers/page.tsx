@@ -4,7 +4,7 @@ import * as React from 'react'
 import Link from 'next/link'
 import { Card, CardContent } from '@/components/ui/card'
 import { CodeBlock } from '@/components/docs/code-block'
-import { Volume2, AlertCircle } from 'lucide-react'
+import { SpeakerHigh, WarningCircle } from '@phosphor-icons/react'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 
@@ -46,7 +46,7 @@ const landmarksCode = `// Use semantic landmarks
 
 const liveRegionsCode = `// Announce dynamic content changes
 <Alert role="alert" aria-live="assertive">
-  <AlertCircle className="h-4 w-4" />
+  <WarningCircle className="h-4 w-4" />
   <AlertDescription>
     Critical error: Please save your work
   </AlertDescription>
@@ -124,7 +124,7 @@ export default function ScreenReadersPage() {
 
         <div className="max-w-3xl mb-12">
           <div className="flex items-center gap-3 mb-4">
-            <Volume2 className="h-10 w-10 text-primary" />
+            <SpeakerHigh className="h-10 w-10 text-primary" />
             <h1 className="text-4xl font-bold tracking-tight">{t.title}</h1>
           </div>
           <p className="text-xl text-muted-foreground">
@@ -208,7 +208,7 @@ export default function ScreenReadersPage() {
           <Card className="mt-6 border-blue-500/50 bg-blue-50 dark:bg-blue-950/20">
             <CardContent className="p-6">
               <h3 className="font-semibold mb-2 flex items-center gap-2">
-                <AlertCircle className="h-5 w-5 text-blue-600 dark:text-blue-400" />
+                <WarningCircle className="h-5 w-5 text-blue-600 dark:text-blue-400" />
                 {t.politeness}
               </h3>
               <div className="text-sm text-muted-foreground space-y-2">

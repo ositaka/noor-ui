@@ -5,7 +5,17 @@ All notable changes to Noor UI will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [0.8.0] - 2026-02-08
+
+### Changed
+- **Icon library migration**: Replaced `lucide-react` with `@phosphor-icons/react` (Duotone weight)
+  - All ~130 icon imports across ~140 files migrated to Phosphor equivalents
+  - Global `IconContext.Provider` with `weight: 'duotone'` and `color: 'currentColor'` set in `DesignSystemProvider`
+  - New shared `IconComponent` type (`React.ComponentType<{ className?: string }>`) exported from `lib/types.ts`, replacing `LucideIcon`
+  - Storybook preview updated with its own `IconContext.Provider` (can't share `DesignSystemProvider` due to Next.js router dependency)
+  - RTL directional icon handling (`rtl:rotate-180`, `rtl:scale-x-[-1]`) works identically with Phosphor SVGs
+  - `tsup.config.ts` externals updated: `lucide-react` → `@phosphor-icons/react`
+  - `next.config.js` `optimizePackageImports` updated
 
 ### To Be Fixed
 - **Popover Component**: RTL positioning issues in portal-rendered components
@@ -85,7 +95,7 @@ This release improves the theme system's visual consistency and makes it easier 
 
 ### Added
 - **ButtonArrow Component**: Added 'external' direction variant for external links
-  - New diagonal arrow icon (↗) using ArrowUpRight from lucide-react
+  - New diagonal arrow icon (↗) using ArrowUpRight from @phosphor-icons/react
   - Automatic horizontal mirroring in RTL mode (↗ becomes ↖)
   - Proper RTL support using `scale-x-[-1]` transform
   - Works seamlessly with all button variants (primary, secondary, outline, ghost, link)

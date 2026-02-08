@@ -10,7 +10,7 @@ import {
   SelectValue,
 } from './select'
 import { Badge } from './badge'
-import { Zap, Brain, Sparkles, Bot, Star } from 'lucide-react'
+import { Lightning, Brain, Sparkle, Robot, Star } from '@phosphor-icons/react'
 import { useDirection } from '../providers/direction-provider'
 import { content } from '../../lib/i18n'
 
@@ -83,15 +83,15 @@ const ModelSelector = React.forwardRef<HTMLButtonElement, ModelSelectorProps>(
     const getIcon = (iconType?: string) => {
       switch (iconType) {
         case 'zap':
-          return <Zap className="h-4 w-4" />
+          return <Lightning className="h-4 w-4" />
         case 'brain':
           return <Brain className="h-4 w-4" />
         case 'sparkles':
-          return <Sparkles className="h-4 w-4" />
+          return <Sparkle className="h-4 w-4" />
         case 'bot':
-          return <Bot className="h-4 w-4" />
+          return <Robot className="h-4 w-4" />
         default:
-          return <Sparkles className="h-4 w-4" />
+          return <Sparkle className="h-4 w-4" />
       }
     }
 

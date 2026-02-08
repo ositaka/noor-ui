@@ -22,10 +22,10 @@ import {
   MapPin,
   CreditCard,
   Truck,
-  CheckCircle2,
+  CheckCircle,
   Package,
   ShieldCheck,
-} from 'lucide-react'
+} from '@phosphor-icons/react'
 
 interface OrderItem {
   id: string
@@ -98,7 +98,7 @@ export default function CheckoutPage() {
             <CardContent className="p-12">
               <div className="flex flex-col items-center text-center space-y-6">
                 <div className="p-4 bg-green-100 rounded-full">
-                  <CheckCircle2 className="h-16 w-16 text-green-600" />
+                  <CheckCircle className="h-16 w-16 text-green-600" />
                 </div>
                 <div className="space-y-2">
                   <h1 className="text-3xl font-bold">
@@ -566,7 +566,7 @@ export default function CheckoutPage() {
                         {isRTL ? 'السابق' : 'Previous'}
                       </ButtonArrow>
                       <Button onClick={handlePlaceOrder} size="lg">
-                        <CheckCircle2 className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
+                        <CheckCircle className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
                         {t.marketplaceCheckout.placeOrder}
                       </Button>
                     </div>

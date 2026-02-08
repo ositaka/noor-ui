@@ -7,7 +7,7 @@ import { ComponentShowcase } from '@/components/docs/component-showcase'
 import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
 import { BestPractices } from '@/components/docs/best-practices'
-import { Sparkles, Rocket, Zap, Shield, Package, Settings } from 'lucide-react'
+import { Sparkle, Rocket, Lightning, Shield, Package, Gear } from '@phosphor-icons/react'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 
@@ -26,9 +26,9 @@ const featureCardProps: PropDefinition[] = [
   },
   {
     name: 'icon',
-    type: 'LucideIcon',
+    type: 'Icon',
     required: true,
-    description: 'Lucide icon component to display',
+    description: 'Phosphor icon component to display',
   },
   {
     name: 'href',
@@ -47,16 +47,16 @@ const featureCardProps: PropDefinition[] = [
 const installCode = `npm install noorui-rtl`
 
 const basicUsageCode = `import { FeatureCard } from 'noorui-rtl'
-import { Sparkles } from 'lucide-react'
+import { Sparkle } from '@phosphor-icons/react'
 
 <FeatureCard
-  icon={Sparkles}
+  icon={Sparkle}
   title="Amazing Feature"
   description="This feature will change your life"
 />`
 
 const clickableCode = `import { FeatureCard } from 'noorui-rtl'
-import { Rocket } from 'lucide-react'
+import { Rocket } from '@phosphor-icons/react'
 
 // Card becomes clickable when href is provided
 <FeatureCard
@@ -67,13 +67,13 @@ import { Rocket } from 'lucide-react'
 />`
 
 const gridLayoutCode = `import { FeatureCard } from 'noorui-rtl'
-import { Zap, Shield, Package } from 'lucide-react'
+import { Lightning, Shield, Package } from '@phosphor-icons/react'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 
 <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
   <FeatureCard
-    icon={Zap}
+    icon={Lightning}
     title="Lightning Fast"
     description="Optimized for performance"
     href="/components"
@@ -96,7 +96,7 @@ const rtlCode = `// RTL support is automatic!
 // The icon and text layout adjusts based on direction
 
 <FeatureCard
-  icon={Sparkles}
+  icon={Sparkle}
   title="ميزة رائعة"
   description="هذه الميزة ستغير حياتك"
   href="/components"
@@ -145,7 +145,7 @@ export default function FeatureCardPage() {
             <ComponentShowcase.Demo>
               <div className="max-w-sm">
                 <FeatureCard
-                  icon={Sparkles}
+                  icon={Sparkle}
                   title={t.featureCardComponent.examples.rtlFirstDesign}
                   description={t.featureCardComponent.examples.rtlFirstDesc}
                   href="/rtl-guide"
@@ -179,7 +179,7 @@ export default function FeatureCardPage() {
                 <ComponentShowcase.Demo>
                   <div className="max-w-sm">
                     <FeatureCard
-                      icon={Sparkles}
+                      icon={Sparkle}
                       title={t.featureCardComponent.examples.amazingFeature}
                       description={t.featureCardComponent.examples.amazingFeatureDesc}
                     />
@@ -214,7 +214,7 @@ export default function FeatureCardPage() {
                 <ComponentShowcase.Demo>
                   <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                     <FeatureCard
-                      icon={Zap}
+                      icon={Lightning}
                       title={t.featureCardComponent.examples.lightningFast}
                       description={t.featureCardComponent.examples.lightningFastDesc}
                       href="/components"
@@ -274,7 +274,7 @@ export default function FeatureCardPage() {
               href="/components/card"
             />
             <FeatureCard
-              icon={Settings}
+              icon={Gear}
               title={t.componentNames['stats-card']}
               description={t.featureCardComponent.relatedComponents.statsCardDesc}
               href="/components/stats-card"

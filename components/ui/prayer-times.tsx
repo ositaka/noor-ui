@@ -4,7 +4,7 @@ import { cn } from '../../lib/utils'
 import { Card } from './card'
 import { Badge } from './badge'
 import { Button } from './button'
-import { Clock, MapPin, Bell, Volume2, X } from 'lucide-react'
+import { Clock, MapPin, Bell, SpeakerHigh, X } from '@phosphor-icons/react'
 import { useDirection } from '../providers/direction-provider'
 import { content } from '../../lib/i18n'
 
@@ -160,7 +160,7 @@ export const PrayerTimes = React.forwardRef<HTMLDivElement, PrayerTimesProps>(
                   className="flex-1"
                   onClick={onPlayAdhan}
                 >
-                  <Volume2 className="h-4 w-4 me-2" />
+                  <SpeakerHigh className="h-4 w-4 me-2" />
                   {t.ui.components.playAdhan}
                 </Button>
               )}

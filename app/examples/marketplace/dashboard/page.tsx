@@ -17,26 +17,26 @@ import { ArabicNumber } from '@/components/ui/arabic-number'
 import { formatSAR } from '@/lib/arabic-numbers'
 import { cn } from '@/lib/utils'
 import {
-  Store,
+  Storefront,
   User,
   Package,
   Image as ImageIcon,
   MapPin,
   Phone,
-  Mail,
+  EnvelopeSimple,
   Globe,
-  Edit,
-  Trash2,
+  PencilSimple,
+  Trash,
   Plus,
-  Save,
+  FloppyDisk,
   X,
   Upload,
   Eye,
-  TrendingUp,
+  TrendUp,
   ShoppingCart,
-  DollarSign,
+  CurrencyDollar,
   Star,
-} from 'lucide-react'
+} from '@phosphor-icons/react'
 
 interface Product {
   id: string
@@ -330,7 +330,7 @@ export default function VendorDashboardPage() {
           </div>
           <Button asChild>
             <Link href="/examples/marketplace">
-              <Store className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
+              <Storefront className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
               {t.viewStore}
             </Link>
           </Button>
@@ -360,7 +360,7 @@ export default function VendorDashboardPage() {
               <CardTitle className="text-sm font-medium">
                 {t.stats.revenue}
               </CardTitle>
-              <DollarSign className="h-4 w-4 text-muted-foreground" />
+              <CurrencyDollar className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">
@@ -434,7 +434,7 @@ export default function VendorDashboardPage() {
                   </div>
                   {!isEditingProfile && (
                     <Button onClick={() => setIsEditingProfile(true)} variant="outline">
-                      <Edit className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
+                      <PencilSimple className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
                       {t.profile.edit}
                     </Button>
                   )}
@@ -602,7 +602,7 @@ export default function VendorDashboardPage() {
                       {t.profile.email}
                     </Label>
                     <div className="relative">
-                      <Mail className={cn(
+                      <EnvelopeSimple className={cn(
                         'absolute top-3 h-4 w-4 text-muted-foreground',
                         isRTL ? 'right-3' : 'left-3'
                       )} />
@@ -644,7 +644,7 @@ export default function VendorDashboardPage() {
                       {t.profile.cancel}
                     </Button>
                     <Button onClick={handleSaveProfile}>
-                      <Save className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
+                      <FloppyDisk className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
                       {t.profile.saveChanges}
                     </Button>
                   </div>
@@ -808,7 +808,7 @@ export default function VendorDashboardPage() {
                       {t.profile.cancel}
                     </Button>
                     <Button onClick={handleSaveProduct}>
-                      <Save className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
+                      <FloppyDisk className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
                       {t.profile.saveChanges}
                     </Button>
                   </div>
@@ -902,7 +902,7 @@ export default function VendorDashboardPage() {
                             className="flex-1"
                             onClick={() => setEditingProduct(product)}
                           >
-                            <Edit className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
+                            <PencilSimple className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
                             {t.profile.edit}
                           </Button>
                           <Button

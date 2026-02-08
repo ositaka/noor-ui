@@ -11,12 +11,12 @@ import { BestPractices } from '@/components/docs/best-practices'
 import { CodeBlock } from '@/components/docs/code-block'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
-import { Users, TrendingUp, DollarSign, ShoppingCart } from 'lucide-react'
+import { Users, TrendUp, CurrencyDollar, ShoppingCart } from '@phosphor-icons/react'
 
 const installCode = `npm install noorui-rtl`
 
 const usageCode = `import { StatsCard } from 'noorui-rtl'
-import { Users } from 'lucide-react'
+import { Users } from '@phosphor-icons/react'
 
 <StatsCard
   icon={<Users className="h-4 w-4" />}
@@ -117,14 +117,14 @@ export default function StatsCardPage() {
               trendLabel={t.statsCardComponent.demoData.fromLastMonth}
             />
             <StatsCard
-              icon={<TrendingUp className="h-4 w-4" />}
+              icon={<TrendUp className="h-4 w-4" />}
               label={t.statsCardComponent.demoData.revenue}
               value="$45,231"
               trend={8}
               trendLabel={t.statsCardComponent.demoData.fromLastMonth}
             />
             <StatsCard
-              icon={<DollarSign className="h-4 w-4" />}
+              icon={<CurrencyDollar className="h-4 w-4" />}
               label={t.statsCardComponent.demoData.sales}
               value="$12,234"
               trend={-3}

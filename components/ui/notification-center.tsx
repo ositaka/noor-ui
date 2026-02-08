@@ -7,7 +7,7 @@ import { Popover, PopoverContent, PopoverTrigger } from './popover'
 import { ScrollArea } from './scroll-area'
 import { Separator } from './separator'
 import { Badge } from './badge'
-import { Bell, Check, Trash2, X } from 'lucide-react'
+import { Bell, Check, Trash, X } from '@phosphor-icons/react'
 import { useDirection } from '../providers/direction-provider'
 
 export interface Notification {
@@ -147,7 +147,7 @@ export const NotificationCenter = React.forwardRef<HTMLButtonElement, Notificati
                     className="h-8 px-2 text-xs text-destructive hover:text-destructive"
                     onClick={onClearAll}
                   >
-                    <Trash2 className="h-3 w-3 me-1" />
+                    <Trash className="h-3 w-3 me-1" />
                     {t.clearAll}
                   </Button>
                 )}

@@ -11,15 +11,15 @@ import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import {
-  Home,
+  House,
   FileText,
-  Settings,
+  Gear,
   Users,
-  BarChart3,
+  ChartBar,
   Info,
   Bell,
-  MessageSquare,
-} from 'lucide-react'
+  ChatCentered,
+} from '@phosphor-icons/react'
 import { useToast } from '@/hooks/use-toast'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
@@ -90,7 +90,7 @@ const getDashboardShellProps = (componentT: any) => [
 const basicUsageCode = `'use client'
 
 import { DashboardShell } from '@/components/ui/dashboard-shell'
-import { Home, FileText, Settings } from 'lucide-react'
+import { House, FileText, Gear } from '@phosphor-icons/react'
 
 export default function Dashboard() {
   const navItems = [
@@ -98,7 +98,7 @@ export default function Dashboard() {
       title: 'Dashboard',
       titleAr: 'لوحة التحكم',
       href: '/dashboard',
-      icon: <Home className="h-5 w-5" />,
+      icon: <House className="h-5 w-5" />,
     },
     {
       title: 'Posts',
@@ -111,7 +111,7 @@ export default function Dashboard() {
       title: 'Settings',
       titleAr: 'الإعدادات',
       href: '/dashboard/settings',
-      icon: <Settings className="h-5 w-5" />,
+      icon: <Gear className="h-5 w-5" />,
     },
   ]
 
@@ -135,7 +135,7 @@ const withNotificationsCode = `'use client'
 
 import * as React from 'react'
 import { DashboardShell } from '@/components/ui/dashboard-shell'
-import { Home, Bell } from 'lucide-react'
+import { House, Bell } from '@phosphor-icons/react'
 
 export default function Dashboard() {
   const [notifications, setNotifications] = React.useState([
@@ -171,7 +171,7 @@ const fullFeaturedCode = `'use client'
 
 import * as React from 'react'
 import { DashboardShell } from '@/components/ui/dashboard-shell'
-import { Home, FileText, Users, BarChart3, Settings } from 'lucide-react'
+import { House, FileText, Users, ChartBar, Gear } from '@phosphor-icons/react'
 import { useRouter } from 'next/navigation'
 
 export default function Dashboard() {
@@ -183,7 +183,7 @@ export default function Dashboard() {
       title: 'Dashboard',
       titleAr: 'لوحة التحكم',
       href: '/dashboard',
-      icon: <Home className="h-5 w-5" />,
+      icon: <House className="h-5 w-5" />,
     },
     {
       title: 'Posts',
@@ -202,13 +202,13 @@ export default function Dashboard() {
       title: 'Analytics',
       titleAr: 'التحليلات',
       href: '/dashboard/analytics',
-      icon: <BarChart3 className="h-5 w-5" />,
+      icon: <ChartBar className="h-5 w-5" />,
     },
     {
       title: 'Settings',
       titleAr: 'الإعدادات',
       href: '/dashboard/settings',
-      icon: <Settings className="h-5 w-5" />,
+      icon: <Gear className="h-5 w-5" />,
     },
   ]
 
@@ -262,7 +262,7 @@ export default function DashboardShellPage() {
       title: 'Dashboard',
       titleAr: 'لوحة التحكم',
       href: '#',
-      icon: <Home className="h-5 w-5" />,
+      icon: <House className="h-5 w-5" />,
     },
     {
       title: 'Posts',
@@ -281,13 +281,13 @@ export default function DashboardShellPage() {
       title: 'Analytics',
       titleAr: 'التحليلات',
       href: '#',
-      icon: <BarChart3 className="h-5 w-5" />,
+      icon: <ChartBar className="h-5 w-5" />,
     },
     {
       title: 'Settings',
       titleAr: 'الإعدادات',
       href: '#',
-      icon: <Settings className="h-5 w-5" />,
+      icon: <Gear className="h-5 w-5" />,
     },
   ]
 
@@ -298,7 +298,7 @@ export default function DashboardShellPage() {
       description: 'Sarah commented on your post',
       time: new Date(Date.now() - 1000 * 60 * 5).toISOString(),
       read: false,
-      icon: <MessageSquare className="h-5 w-5" />,
+      icon: <ChatCentered className="h-5 w-5" />,
     },
     {
       id: '2',

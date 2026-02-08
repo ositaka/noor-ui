@@ -10,7 +10,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from './tooltip'
-import { Info } from 'lucide-react'
+import { Info } from '@phosphor-icons/react'
 import { useDirection } from '../providers/direction-provider'
 import { content } from '../../lib/i18n'
 

@@ -5,7 +5,7 @@ import { Handle, Position, type NodeProps, type Node } from '@xyflow/react'
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from './card'
 import { Badge } from './badge'
 import { cn } from '../../lib/utils'
-import { LucideIcon } from 'lucide-react'
+import type { IconComponent } from '@/lib/types'
 
 export interface WorkflowNodeData extends Record<string, unknown> {
   /**
@@ -35,7 +35,7 @@ export interface WorkflowNodeData extends Record<string, unknown> {
   /**
    * Icon component
    */
-  icon?: LucideIcon
+  icon?: IconComponent
   /**
    * Badge status
    */

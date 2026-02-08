@@ -6,7 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Separator } from '@/components/ui/separator'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
-import { CheckCircle2, XCircle, ExternalLink, FileText, Shield } from 'lucide-react'
+import { CheckCircle, XCircle, ArrowSquareOut, FileText, Shield } from '@phosphor-icons/react'
 
 export default function LicensePage() {
   const { locale } = useDirection()
@@ -164,7 +164,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
           <div className="grid sm:grid-cols-2 gap-4 mt-6">
             <div className="p-4 bg-green-50 dark:bg-green-950/20 border border-green-200 dark:border-green-800 rounded-lg">
               <div className="flex items-center gap-2 mb-2">
-                <CheckCircle2 className="h-5 w-5 text-green-600 dark:text-green-500" />
+                <CheckCircle className="h-5 w-5 text-green-600 dark:text-green-500" />
                 <h3 className="font-semibold text-green-900 dark:text-green-100">
                   {t.mitLicense}
                 </h3>
@@ -193,7 +193,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
         <Card className="border-green-200 dark:border-green-800">
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-green-900 dark:text-green-100">
-              <CheckCircle2 className="h-5 w-5 text-green-600 dark:text-green-500" />
+              <CheckCircle className="h-5 w-5 text-green-600 dark:text-green-500" />
               {t.youCanDo}
             </CardTitle>
             <CardDescription>{t.codeDescription}</CardDescription>
@@ -202,7 +202,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
             <ul className="space-y-3">
               {t.permitted.map((item: string, index: number) => (
                 <li key={index} className="flex items-start gap-2">
-                  <CheckCircle2 className="h-5 w-5 text-green-600 dark:text-green-500 mt-0.5 flex-shrink-0" />
+                  <CheckCircle className="h-5 w-5 text-green-600 dark:text-green-500 mt-0.5 flex-shrink-0" />
                   <span className="text-sm">{item}</span>
                 </li>
               ))}
@@ -274,7 +274,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
               <div>
                 <h3 className="font-semibold flex items-center gap-2">
                   {t.github}
-                  <ExternalLink className="h-4 w-4" />
+                  <ArrowSquareOut className="h-4 w-4" />
                 </h3>
                 <p className="text-sm text-muted-foreground">{t.githubDescription}</p>
               </div>
@@ -297,7 +297,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
               <div>
                 <h3 className="font-semibold flex items-center gap-2">
                   {t.author}
-                  <ExternalLink className="h-4 w-4" />
+                  <ArrowSquareOut className="h-4 w-4" />
                 </h3>
                 <p className="text-sm text-muted-foreground">{t.authorDescription}</p>
               </div>
@@ -334,7 +334,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
               className="inline-flex items-center gap-2 text-primary hover:underline"
             >
               {t.email}
-              <ExternalLink className="h-4 w-4" />
+              <ArrowSquareOut className="h-4 w-4" />
             </a>
             <Separator />
             <a
@@ -345,7 +345,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
             >
               <FileText className="h-4 w-4" />
               {t.seeNotice}
-              <ExternalLink className="h-3 w-3" />
+              <ArrowSquareOut className="h-3 w-3" />
             </a>
           </div>
         </CardContent>

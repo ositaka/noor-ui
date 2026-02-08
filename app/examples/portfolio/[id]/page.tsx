@@ -9,21 +9,21 @@ import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import {
-  Home,
-  ExternalLink,
+  House,
+  ArrowSquareOut,
   Calendar,
   Users,
   Code,
   Palette,
-  CheckCircle2,
+  CheckCircle,
   Star,
   Globe,
-  Github,
-  Award,
-  TrendingUp,
-  Target,
-  Layers,
-} from 'lucide-react'
+  GithubLogo,
+  Trophy,
+  TrendUp,
+  Crosshair,
+  Stack,
+} from '@phosphor-icons/react'
 import { useDirection } from '@/components/providers/direction-provider'
 import { DirectionToggle } from '@/components/docs/direction-toggle'
 import { content } from '@/lib/i18n'
@@ -154,7 +154,7 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
           <div className="flex items-center gap-6">
             <Link href="/" className="flex items-center gap-2">
               <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center">
-                <Home className="h-5 w-5 text-primary-foreground" />
+                <House className="h-5 w-5 text-primary-foreground" />
               </div>
               <span className="font-bold text-xl hidden sm:inline">
                 {t.portfolioDetail.header.name}
@@ -235,7 +235,7 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
                 {project.githubUrl && (
                   <Button variant="ghost" size="sm" asChild>
                     <Link href={project.githubUrl} target="_blank">
-                      <Github className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
+                      <GithubLogo className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
                       {t.portfolioDetail.buttons.sourceCode}
                     </Link>
                   </Button>
@@ -255,7 +255,7 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
             {/* Overview */}
             <div>
               <h2 className="text-2xl font-bold tracking-tight mb-4 flex items-center gap-2">
-                <Layers className="h-6 w-6" />
+                <Stack className="h-6 w-6" />
                 {t.portfolioDetail.sections.overview}
               </h2>
               <p className="text-muted-foreground leading-relaxed">
@@ -267,11 +267,11 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
             <Tabs defaultValue="challenge" className="w-full">
               <TabsList className="grid w-full grid-cols-2">
                 <TabsTrigger value="challenge">
-                  <Target className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
+                  <Crosshair className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
                   {t.portfolioDetail.sections.challenge}
                 </TabsTrigger>
                 <TabsTrigger value="solution">
-                  <CheckCircle2 className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
+                  <CheckCircle className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
                   {t.portfolioDetail.sections.solution}
                 </TabsTrigger>
               </TabsList>
@@ -306,7 +306,7 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
             {/* Results */}
             <div>
               <h2 className="text-2xl font-bold tracking-tight mb-4 flex items-center gap-2">
-                <TrendingUp className="h-6 w-6" />
+                <TrendUp className="h-6 w-6" />
                 {t.portfolioDetail.sections.results}
               </h2>
               <Card>
@@ -314,7 +314,7 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
                   <ul className="space-y-3">
                     {(isRTL ? project.resultsAr : project.results).map((result, index) => (
                       <li key={index} className="flex items-start gap-3">
-                        <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                        <CheckCircle className="h-5 w-5 text-primary shrink-0 mt-0.5" />
                         <span className="text-muted-foreground">{result}</span>
                       </li>
                     ))}

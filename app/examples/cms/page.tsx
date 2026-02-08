@@ -21,18 +21,18 @@ import { content } from '@/lib/i18n'
 import {
   FileText,
   Eye,
-  MessageSquare,
-  TrendingUp,
+  ChatCentered,
+  TrendUp,
   Plus,
-  Search,
-  Edit,
-  Trash2,
-  MoreHorizontal,
+  MagnifyingGlass,
+  PencilSimple,
+  Trash,
+  DotsThree,
   Calendar,
   User,
   Tag,
   Globe,
-} from 'lucide-react'
+} from '@phosphor-icons/react'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -236,7 +236,7 @@ export default function CMSPage() {
       header: t.cmsPage.table.comments,
       cell: (row: typeof mockPosts[0]) => (
         <div className="flex items-center gap-1">
-          <MessageSquare className="h-4 w-4 text-muted-foreground" />
+          <ChatCentered className="h-4 w-4 text-muted-foreground" />
           <span>{row.comments}</span>
         </div>
       ),
@@ -249,7 +249,7 @@ export default function CMSPage() {
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" size="icon">
-              <MoreHorizontal className="h-4 w-4" />
+              <DotsThree className="h-4 w-4" />
               <span className="sr-only">{t.cmsPage.actions.openMenu}</span>
             </Button>
           </DropdownMenuTrigger>
@@ -258,7 +258,7 @@ export default function CMSPage() {
               setSelectedPost(row)
               window.location.hash = '#create'
             }}>
-              <Edit className="h-4 w-4 me-2" />
+              <PencilSimple className="h-4 w-4 me-2" />
               {t.cmsPage.actions.edit}
             </DropdownMenuItem>
             <DropdownMenuItem>
@@ -266,7 +266,7 @@ export default function CMSPage() {
               {t.cmsPage.actions.preview}
             </DropdownMenuItem>
             <DropdownMenuItem className="text-destructive">
-              <Trash2 className="h-4 w-4 me-2" />
+              <Trash className="h-4 w-4 me-2" />
               {t.cmsPage.actions.delete}
             </DropdownMenuItem>
           </DropdownMenuContent>
@@ -296,7 +296,7 @@ export default function CMSPage() {
       title: 'Analytics',
       titleAr: 'التحليلات',
       href: '#analytics',
-      icon: <TrendingUp className="h-5 w-5" />,
+      icon: <TrendUp className="h-5 w-5" />,
     },
     {
       title: 'Settings',
@@ -395,14 +395,14 @@ export default function CMSPage() {
                 trendLabel={t.cmsPage.stats.thisWeek}
               />
               <StatsCard
-                icon={<MessageSquare className="h-4 w-4" />}
+                icon={<ChatCentered className="h-4 w-4" />}
                 label={t.cmsPage.stats.comments}
                 value="342"
                 trend={5.1}
                 trendLabel={t.cmsPage.stats.today}
               />
               <StatsCard
-                icon={<TrendingUp className="h-4 w-4" />}
+                icon={<TrendUp className="h-4 w-4" />}
                 label={t.cmsPage.stats.engagementRate}
                 value="68%"
                 trend={2.3}
@@ -439,7 +439,7 @@ export default function CMSPage() {
                             <span>{post.views.toLocaleString()}</span>
                           </div>
                           <div className="flex items-center gap-1">
-                            <MessageSquare className="h-4 w-4" />
+                            <ChatCentered className="h-4 w-4" />
                             <span>{post.comments}</span>
                           </div>
                         </div>
@@ -463,7 +463,7 @@ export default function CMSPage() {
                       {t.cmsPage.filters.search}
                     </Label>
                     <div className="relative mt-2">
-                      <Search className="absolute start-3 top-3 h-4 w-4 text-muted-foreground" />
+                      <MagnifyingGlass className="absolute start-3 top-3 h-4 w-4 text-muted-foreground" />
                       <Input
                         id="search"
                         placeholder={t.cmsPage.filters.searchPosts}

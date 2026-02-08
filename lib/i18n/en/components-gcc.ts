@@ -113,7 +113,7 @@ hijriDateComponent: {
       },
       installation: {
         copyComponent: 'Copy and paste the component code into your project:',
-        dependencies: 'Dependencies: This component uses Lucide icons which should already be installed in your project.',
+        dependencies: 'Dependencies: This component uses Phosphor icons which should already be installed in your project.',
       },
       examples: {
         default: 'Default',
@@ -190,7 +190,7 @@ prayerTimesComponent: {
       },
       installation: {
         copyComponent: 'Copy and paste the component code into your project:',
-        dependencies: 'Dependencies: This component uses Card, Badge, and Lucide icons which should already be installed in your project.',
+        dependencies: 'Dependencies: This component uses Card, Badge, and Phosphor icons which should already be installed in your project.',
       },
       examples: {
         default: 'Default',

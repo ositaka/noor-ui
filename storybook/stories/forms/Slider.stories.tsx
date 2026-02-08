@@ -3,7 +3,7 @@ import { expect, fn, userEvent, within } from 'storybook/test';
 import { Slider } from '../../../components/ui/slider';
 import { Label } from '../../../components/ui/label';
 import { Button } from '../../../components/ui/button';
-import { Volume2, VolumeX } from 'lucide-react';
+import { SpeakerHigh, SpeakerSlash } from '@phosphor-icons/react';
 import * as React from 'react';
 
 /**
@@ -287,9 +287,9 @@ export const VolumeControl: Story = {
             aria-label={isMuted ? "Unmute" : "Mute"}
           >
             {isMuted ? (
-              <VolumeX className="h-4 w-4" />
+              <SpeakerSlash className="h-4 w-4" />
             ) : (
-              <Volume2 className="h-4 w-4" />
+              <SpeakerHigh className="h-4 w-4" />
             )}
           </Button>
           <Slider
@@ -327,7 +327,7 @@ export const VolumeControl: Story = {
       await expect(slider).toHaveAttribute('aria-valuenow', '80');
       await expect(canvas.getByText('80%')).toBeInTheDocument();
 
-      // Volume2 icon should be visible (not muted)
+      // SpeakerHigh icon should be visible (not muted)
       const button = canvas.getByRole('button');
       await expect(button).toBeInTheDocument();
     });
@@ -571,9 +571,9 @@ export const RTLVolumeControl: Story = {
             aria-label={isMuted ? "إلغاء الكتم" : "كتم الصوت"}
           >
             {isMuted ? (
-              <VolumeX className="h-4 w-4" />
+              <SpeakerSlash className="h-4 w-4" />
             ) : (
-              <Volume2 className="h-4 w-4" />
+              <SpeakerHigh className="h-4 w-4" />
             )}
           </Button>
           <Slider
