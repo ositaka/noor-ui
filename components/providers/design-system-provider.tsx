@@ -1,6 +1,7 @@
 'use client'
 
 import * as React from 'react'
+import { IconContext } from '@phosphor-icons/react'
 import { useSearchParams, usePathname, useRouter } from 'next/navigation'
 import { type Theme } from '../../lib/tokens'
 
@@ -60,7 +61,9 @@ function DesignSystemProviderInner({ children, defaultTheme = 'minimal' }: Desig
 
   return (
     <DesignSystemContext.Provider value={{ designTheme, setDesignTheme }}>
-      {children}
+      <IconContext.Provider value={{ weight: 'duotone', color: 'currentColor' }}>
+        {children}
+      </IconContext.Provider>
     </DesignSystemContext.Provider>
   )
 }

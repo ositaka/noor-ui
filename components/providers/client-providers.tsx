@@ -1,7 +1,6 @@
 'use client'
 
 import * as React from 'react'
-import { IconContext } from '@phosphor-icons/react'
 import { DirectionProvider } from './direction-provider'
 import { DesignSystemProvider } from './design-system-provider'
 import { GlobalThemeSwitcher } from '@/components/docs/global-theme-switcher'
@@ -10,16 +9,14 @@ import { TooltipProvider } from '../ui/tooltip'
 
 export function ClientProviders({ children }: { children: React.ReactNode }) {
   return (
-    <IconContext.Provider value={{ weight: 'duotone', color: 'currentColor' }}>
-      <DirectionProvider>
-        <DesignSystemProvider>
-          <TooltipProvider>
-            {children}
-            <GlobalThemeSwitcher />
-            <Toaster />
-          </TooltipProvider>
-        </DesignSystemProvider>
-      </DirectionProvider>
-    </IconContext.Provider>
+    <DirectionProvider>
+      <DesignSystemProvider>
+        <TooltipProvider>
+          {children}
+          <GlobalThemeSwitcher />
+          <Toaster />
+        </TooltipProvider>
+      </DesignSystemProvider>
+    </DirectionProvider>
   )
 }
