@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { expect, userEvent, within } from 'storybook/test';
 import { Input } from '../../../components/ui/input';
 import { Label } from '../../../components/ui/label';
-import { Search, Mail, Lock, User } from 'lucide-react';
+import { MagnifyingGlass, Envelope, Lock, User } from '@phosphor-icons/react';
 
 const meta = {
   title: 'Basic/Input',
@@ -196,7 +196,7 @@ export const WithLabel: Story = {
 export const WithIconInside: Story = {
   render: () => (
     <div className="relative w-full max-w-sm">
-      <Search className="absolute start-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+      <MagnifyingGlass className="absolute start-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
       <Input placeholder="Search..." className="ps-9" />
     </div>
   ),
@@ -226,7 +226,7 @@ export const LoginForm: Story = {
     <div className="grid w-full max-w-sm gap-4">
       <div className="grid gap-1.5">
         <Label htmlFor="email-login">
-          <Mail className="inline h-4 w-4 me-2" />
+          <Envelope className="inline h-4 w-4 me-2" />
           Email
         </Label>
         <Input type="email" id="email-login" placeholder="name@example.com" />
@@ -349,7 +349,7 @@ export const RTLWithLabel: Story = {
 export const RTLSearchWithIcon: Story = {
   render: () => (
     <div className="relative w-full max-w-sm">
-      <Search className="absolute start-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+      <MagnifyingGlass className="absolute start-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
       <Input placeholder="ابحث..." className="ps-9" />
     </div>
   ),
@@ -394,7 +394,7 @@ export const RegistrationForm: Story = {
       </div>
       <div className="grid gap-1.5">
         <Label htmlFor="email-reg">
-          <Mail className="inline h-4 w-4 me-2" />
+          <Envelope className="inline h-4 w-4 me-2" />
           Email
         </Label>
         <Input type="email" id="email-reg" placeholder="john@example.com" />

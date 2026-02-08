@@ -12,7 +12,7 @@ import {
   CommandShortcut
 } from '../../../components/ui/command';
 import { Button } from '../../../components/ui/button';
-import { Search, FileText, Settings, User, Calendar, Calculator } from 'lucide-react';
+import { MagnifyingGlass, FileText, Gear, User, Calendar, Calculator } from '@phosphor-icons/react';
 import * as React from 'react';
 
 /**
@@ -54,7 +54,7 @@ export const Default: Story = {
             <span>Calendar</span>
           </CommandItem>
           <CommandItem>
-            <Search className="me-2 h-4 w-4" />
+            <MagnifyingGlass className="me-2 h-4 w-4" />
             <span>Search Emoji</span>
           </CommandItem>
           <CommandItem>
@@ -69,7 +69,7 @@ export const Default: Story = {
             <span>Profile</span>
           </CommandItem>
           <CommandItem>
-            <Settings className="me-2 h-4 w-4" />
+            <Gear className="me-2 h-4 w-4" />
             <span>Settings</span>
           </CommandItem>
         </CommandGroup>
@@ -162,7 +162,7 @@ export const BasicCommand: Story = {
             <span>Calendar</span>
           </CommandItem>
           <CommandItem>
-            <Search className="me-2 h-4 w-4" />
+            <MagnifyingGlass className="me-2 h-4 w-4" />
             <span>Search Emoji</span>
           </CommandItem>
           <CommandItem>
@@ -177,7 +177,7 @@ export const BasicCommand: Story = {
             <span>Profile</span>
           </CommandItem>
           <CommandItem>
-            <Settings className="me-2 h-4 w-4" />
+            <Gear className="me-2 h-4 w-4" />
             <span>Settings</span>
           </CommandItem>
         </CommandGroup>
@@ -241,12 +241,12 @@ export const WithShortcuts: Story = {
             <CommandShortcut>⌘N</CommandShortcut>
           </CommandItem>
           <CommandItem>
-            <Search className="me-2 h-4 w-4" />
+            <MagnifyingGlass className="me-2 h-4 w-4" />
             <span>Search Files</span>
             <CommandShortcut>⌘F</CommandShortcut>
           </CommandItem>
           <CommandItem>
-            <Settings className="me-2 h-4 w-4" />
+            <Gear className="me-2 h-4 w-4" />
             <span>Settings</span>
             <CommandShortcut>⌘,</CommandShortcut>
           </CommandItem>
@@ -309,7 +309,7 @@ export const CommandDialogExample: Story = {
     return (
       <>
         <Button onClick={() => setOpen(true)} variant="outline">
-          <Search className="me-2 h-4 w-4" />
+          <MagnifyingGlass className="me-2 h-4 w-4" />
           Open Command Menu
           <kbd className="pointer-events-none ms-2 inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium">
             <span className="text-xs">⌘</span>K
@@ -326,7 +326,7 @@ export const CommandDialogExample: Story = {
                 New File
               </CommandItem>
               <CommandItem>
-                <Search className="me-2 h-4 w-4" />
+                <MagnifyingGlass className="me-2 h-4 w-4" />
                 Search Files
               </CommandItem>
             </CommandGroup>
@@ -413,18 +413,18 @@ export const MultipleGroups: Story = {
         <CommandSeparator />
         <CommandGroup heading="Search">
           <CommandItem>
-            <Search className="me-2 h-4 w-4" />
+            <MagnifyingGlass className="me-2 h-4 w-4" />
             <span>Search Files</span>
           </CommandItem>
           <CommandItem>
-            <Search className="me-2 h-4 w-4" />
+            <MagnifyingGlass className="me-2 h-4 w-4" />
             <span>Search Symbols</span>
           </CommandItem>
         </CommandGroup>
         <CommandSeparator />
         <CommandGroup heading="Settings">
           <CommandItem>
-            <Settings className="me-2 h-4 w-4" />
+            <Gear className="me-2 h-4 w-4" />
             <span>Preferences</span>
           </CommandItem>
           <CommandItem>
@@ -501,7 +501,7 @@ export const RTLBasic: Story = {
             <span>التقويم</span>
           </CommandItem>
           <CommandItem>
-            <Search className="me-2 h-4 w-4" />
+            <MagnifyingGlass className="me-2 h-4 w-4" />
             <span>بحث عن إيموجي</span>
           </CommandItem>
           <CommandItem>
@@ -516,7 +516,7 @@ export const RTLBasic: Story = {
             <span>الملف الشخصي</span>
           </CommandItem>
           <CommandItem>
-            <Settings className="me-2 h-4 w-4" />
+            <Gear className="me-2 h-4 w-4" />
             <span>الإعدادات</span>
           </CommandItem>
         </CommandGroup>
@@ -582,12 +582,12 @@ export const RTLWithShortcuts: Story = {
             <CommandShortcut>⌘N</CommandShortcut>
           </CommandItem>
           <CommandItem>
-            <Search className="me-2 h-4 w-4" />
+            <MagnifyingGlass className="me-2 h-4 w-4" />
             <span>بحث عن ملفات</span>
             <CommandShortcut>⌘F</CommandShortcut>
           </CommandItem>
           <CommandItem>
-            <Settings className="me-2 h-4 w-4" />
+            <Gear className="me-2 h-4 w-4" />
             <span>الإعدادات</span>
             <CommandShortcut>⌘,</CommandShortcut>
           </CommandItem>
@@ -629,7 +629,7 @@ export const RTLCommandDialog: Story = {
     return (
       <>
         <Button onClick={() => setOpen(true)} variant="outline">
-          <Search className="me-2 h-4 w-4" />
+          <MagnifyingGlass className="me-2 h-4 w-4" />
           فتح قائمة الأوامر
           <kbd className="pointer-events-none ms-2 inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium rtl:flex-row-reverse">
             <span className="text-xs">⌘</span>K
@@ -646,7 +646,7 @@ export const RTLCommandDialog: Story = {
                 ملف جديد
               </CommandItem>
               <CommandItem>
-                <Search className="me-2 h-4 w-4" />
+                <MagnifyingGlass className="me-2 h-4 w-4" />
                 بحث عن ملفات
               </CommandItem>
             </CommandGroup>
@@ -689,18 +689,18 @@ export const RTLMultipleGroups: Story = {
         <CommandSeparator />
         <CommandGroup heading="البحث">
           <CommandItem>
-            <Search className="me-2 h-4 w-4" />
+            <MagnifyingGlass className="me-2 h-4 w-4" />
             <span>بحث عن ملفات</span>
           </CommandItem>
           <CommandItem>
-            <Search className="me-2 h-4 w-4" />
+            <MagnifyingGlass className="me-2 h-4 w-4" />
             <span>بحث عن رموز</span>
           </CommandItem>
         </CommandGroup>
         <CommandSeparator />
         <CommandGroup heading="الإعدادات">
           <CommandItem>
-            <Settings className="me-2 h-4 w-4" />
+            <Gear className="me-2 h-4 w-4" />
             <span>التفضيلات</span>
           </CommandItem>
           <CommandItem>

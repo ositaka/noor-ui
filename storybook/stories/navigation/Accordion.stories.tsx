@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { expect, userEvent, within } from 'storybook/test';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '../../../components/ui/accordion';
 import { Card, CardContent } from '../../../components/ui/card';
-import { User, CreditCard, Calendar } from 'lucide-react';
+import { User, CreditCard, Calendar } from '@phosphor-icons/react';
 import * as React from 'react';
 
 /**

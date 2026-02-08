@@ -19,15 +19,15 @@ import {
 import { Button } from '../../../components/ui/button';
 import {
   User,
-  Settings,
+  Gear,
   CreditCard,
   LogOut,
   UserPlus,
-  Mail,
-  MessageSquare,
+  Envelope,
+  ChatCentered,
   PlusCircle,
   MoreHorizontal
-} from 'lucide-react';
+} from '@phosphor-icons/react';
 import * as React from 'react';
 
 /**
@@ -94,7 +94,7 @@ export const Default: Story = {
           <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
         </DropdownMenuItem>
         <DropdownMenuItem>
-          <Settings className="me-2 h-4 w-4" />
+          <Gear className="me-2 h-4 w-4" />
           <span>Settings</span>
           <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
         </DropdownMenuItem>
@@ -189,7 +189,7 @@ export const BasicUsage: Story = {
           <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
         </DropdownMenuItem>
         <DropdownMenuItem>
-          <Settings className="me-2 h-4 w-4" />
+          <Gear className="me-2 h-4 w-4" />
           <span>Settings</span>
           <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
         </DropdownMenuItem>
@@ -254,7 +254,7 @@ export const WithIcons: Story = {
           <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
         </DropdownMenuItem>
         <DropdownMenuItem>
-          <Settings className="me-2 h-4 w-4" />
+          <Gear className="me-2 h-4 w-4" />
           <span>Settings</span>
           <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
         </DropdownMenuItem>
@@ -458,11 +458,11 @@ export const WithSubMenus: Story = {
             </DropdownMenuSubTrigger>
             <DropdownMenuSubContent>
               <DropdownMenuItem>
-                <Mail className="me-2 h-4 w-4" />
+                <Envelope className="me-2 h-4 w-4" />
                 <span>Email</span>
               </DropdownMenuItem>
               <DropdownMenuItem>
-                <MessageSquare className="me-2 h-4 w-4" />
+                <ChatCentered className="me-2 h-4 w-4" />
                 <span>Message</span>
               </DropdownMenuItem>
               <DropdownMenuSeparator />
@@ -536,7 +536,7 @@ export const AllVariants: Story = {
               <span>Profile</span>
             </DropdownMenuItem>
             <DropdownMenuItem>
-              <Settings className="me-2 h-4 w-4" />
+              <Gear className="me-2 h-4 w-4" />
               <span>Settings</span>
             </DropdownMenuItem>
           </DropdownMenuContent>
@@ -611,7 +611,7 @@ export const RTLBasic: Story = {
           <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
         </DropdownMenuItem>
         <DropdownMenuItem>
-          <Settings className="me-2 h-4 w-4" />
+          <Gear className="me-2 h-4 w-4" />
           <span>الإعدادات</span>
           <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
         </DropdownMenuItem>
@@ -788,11 +788,11 @@ export const RTLWithSubMenus: Story = {
             </DropdownMenuSubTrigger>
             <DropdownMenuSubContent>
               <DropdownMenuItem>
-                <Mail className="me-2 h-4 w-4" />
+                <Envelope className="me-2 h-4 w-4" />
                 <span>البريد الإلكتروني</span>
               </DropdownMenuItem>
               <DropdownMenuItem>
-                <MessageSquare className="me-2 h-4 w-4" />
+                <ChatCentered className="me-2 h-4 w-4" />
                 <span>رسالة</span>
               </DropdownMenuItem>
               <DropdownMenuSeparator />

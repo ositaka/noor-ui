@@ -10,7 +10,7 @@ import {
 } from '../../../components/ui/card';
 import { Button } from '../../../components/ui/button';
 import { Badge } from '../../../components/ui/badge';
-import { Bell, Heart, Share2, Star, TrendingUp } from 'lucide-react';
+import { Bell, Heart, ShareNetwork, Star, TrendUp } from '@phosphor-icons/react';
 
 const meta = {
   title: 'Basic/Card',
@@ -150,7 +150,7 @@ export const StatsCard: Story = {
       </CardHeader>
       <CardContent>
         <div className="flex items-center text-sm text-green-600">
-          <TrendingUp className="h-4 w-4 me-1" />
+          <TrendUp className="h-4 w-4 me-1" />
           <span>+20.1% from last month</span>
         </div>
       </CardContent>
@@ -243,7 +243,7 @@ export const ArticleCard: Story = {
             245
           </Button>
           <Button variant="ghost" size="sm">
-            <Share2 className="h-4 w-4 me-1" />
+            <ShareNetwork className="h-4 w-4 me-1" />
             Share
           </Button>
         </div>
@@ -380,7 +380,7 @@ export const CardGrid: Story = {
           <CardTitle className="text-2xl">12,543</CardTitle>
         </CardHeader>
         <CardContent className="text-xs text-green-600">
-          <TrendingUp className="inline h-3 w-3 me-1" />
+          <TrendUp className="inline h-3 w-3 me-1" />
           +12.5%
         </CardContent>
       </Card>
@@ -390,7 +390,7 @@ export const CardGrid: Story = {
           <CardTitle className="text-2xl">$89,232</CardTitle>
         </CardHeader>
         <CardContent className="text-xs text-green-600">
-          <TrendingUp className="inline h-3 w-3 me-1" />
+          <TrendUp className="inline h-3 w-3 me-1" />
           +8.3%
         </CardContent>
       </Card>

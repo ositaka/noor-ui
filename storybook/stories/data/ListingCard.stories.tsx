@@ -2,20 +2,20 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { expect, fn, userEvent, within } from 'storybook/test';
 import { ListingCard } from '../../../components/ui/listing-card';
 import {
-  Home,
+  House,
   Heart,
-  Share2,
+  ShareNetwork,
   Bed,
   Bath,
   Square,
   ShoppingCart,
   Star,
   MapPin,
-  DollarSign,
+  CurrencyDollar,
   Briefcase,
   Clock,
   Package
-} from 'lucide-react';
+} from '@phosphor-icons/react';
 import * as React from 'react';
 
 /**
@@ -218,7 +218,7 @@ export const RealEstateListing: Story = {
         ]}
         actions={[
           { icon: Heart, label: 'Favorite', onClick: fn() },
-          { icon: Share2, label: 'Share', onClick: fn() },
+          { icon: ShareNetwork, label: 'Share', onClick: fn() },
         ]}
         stats={[
           { icon: Bed, value: 5, label: 'Bedrooms' },
@@ -481,7 +481,7 @@ export const WithAllFeatures: Story = {
         ]}
         actions={[
           { icon: Heart, label: 'Favorite', onClick: fn() },
-          { icon: Share2, label: 'Share', onClick: fn() },
+          { icon: ShareNetwork, label: 'Share', onClick: fn() },
         ]}
         stats={[
           { icon: Bed, value: 6, label: 'Bedrooms' },
@@ -654,7 +654,7 @@ export const RTLRealEstate: Story = {
         ]}
         actions={[
           { icon: Heart, label: 'مفضلة', onClick: fn() },
-          { icon: Share2, label: 'مشاركة', onClick: fn() },
+          { icon: ShareNetwork, label: 'مشاركة', onClick: fn() },
         ]}
         stats={[
           { icon: Bed, value: 5, label: 'غرف النوم' },

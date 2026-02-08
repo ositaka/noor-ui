@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { expect, within } from 'storybook/test';
 import { Alert, AlertDescription, AlertTitle } from '../../../components/ui/alert';
-import { Terminal, AlertCircle, CheckCircle2, AlertTriangle } from 'lucide-react';
+import { Terminal, WarningCircle, CheckCircle, Warning as WarningIcon } from '@phosphor-icons/react';
 
 /**
  * Alert Component Stories
@@ -69,7 +69,7 @@ export const Default: Story = {
 export const Destructive: Story = {
   render: () => (
     <Alert variant="destructive" className="w-full max-w-md">
-      <AlertCircle className="h-4 w-4" />
+      <WarningCircle className="h-4 w-4" />
       <AlertTitle>Error</AlertTitle>
       <AlertDescription>
         Your session has expired. Please log in again.
@@ -103,7 +103,7 @@ export const Destructive: Story = {
 export const Success: Story = {
   render: () => (
     <Alert variant="success" className="w-full max-w-md">
-      <CheckCircle2 className="h-4 w-4" />
+      <CheckCircle className="h-4 w-4" />
       <AlertTitle>Success</AlertTitle>
       <AlertDescription>
         Your changes have been saved successfully.
@@ -137,7 +137,7 @@ export const Success: Story = {
 export const Warning: Story = {
   render: () => (
     <Alert variant="warning" className="w-full max-w-md">
-      <AlertTriangle className="h-4 w-4" />
+      <WarningIcon className="h-4 w-4" />
       <AlertTitle>Warning</AlertTitle>
       <AlertDescription>
         Your free trial will expire in 3 days.
@@ -219,7 +219,7 @@ export const AllVariants: Story = {
       </Alert>
 
       <Alert variant="destructive">
-        <AlertCircle className="h-4 w-4" />
+        <WarningCircle className="h-4 w-4" />
         <AlertTitle>Destructive</AlertTitle>
         <AlertDescription>
           This is a destructive alert for errors.
@@ -227,7 +227,7 @@ export const AllVariants: Story = {
       </Alert>
 
       <Alert variant="success">
-        <CheckCircle2 className="h-4 w-4" />
+        <CheckCircle className="h-4 w-4" />
         <AlertTitle>Success</AlertTitle>
         <AlertDescription>
           This is a success alert for positive actions.
@@ -235,7 +235,7 @@ export const AllVariants: Story = {
       </Alert>
 
       <Alert variant="warning">
-        <AlertTriangle className="h-4 w-4" />
+        <WarningIcon className="h-4 w-4" />
         <AlertTitle>Warning</AlertTitle>
         <AlertDescription>
           This is a warning alert for caution.
@@ -295,7 +295,7 @@ export const RTLExample: Story = {
 export const RTLDestructive: Story = {
   render: () => (
     <Alert variant="destructive" className="w-full max-w-md">
-      <AlertCircle className="h-4 w-4" />
+      <WarningCircle className="h-4 w-4" />
       <AlertTitle>خطأ</AlertTitle>
       <AlertDescription>
         انتهت صلاحية جلستك. يرجى تسجيل الدخول مرة أخرى.
@@ -320,7 +320,7 @@ export const RTLDestructive: Story = {
 export const RTLSuccess: Story = {
   render: () => (
     <Alert variant="success" className="w-full max-w-md">
-      <CheckCircle2 className="h-4 w-4" />
+      <CheckCircle className="h-4 w-4" />
       <AlertTitle>نجاح</AlertTitle>
       <AlertDescription>
         تم حفظ تغييراتك بنجاح.
@@ -345,7 +345,7 @@ export const RTLSuccess: Story = {
 export const RTLWarning: Story = {
   render: () => (
     <Alert variant="warning" className="w-full max-w-md">
-      <AlertTriangle className="h-4 w-4" />
+      <WarningIcon className="h-4 w-4" />
       <AlertTitle>تحذير</AlertTitle>
       <AlertDescription>
         ستنتهي صلاحية فترتك التجريبية المجانية خلال ٣ أيام.
@@ -379,7 +379,7 @@ export const RTLAllVariants: Story = {
       </Alert>
 
       <Alert variant="destructive">
-        <AlertCircle className="h-4 w-4" />
+        <WarningCircle className="h-4 w-4" />
         <AlertTitle>خطأ</AlertTitle>
         <AlertDescription>
           انتهت صلاحية جلستك. يرجى تسجيل الدخول مرة أخرى.
@@ -387,7 +387,7 @@ export const RTLAllVariants: Story = {
       </Alert>
 
       <Alert variant="success">
-        <CheckCircle2 className="h-4 w-4" />
+        <CheckCircle className="h-4 w-4" />
         <AlertTitle>نجاح</AlertTitle>
         <AlertDescription>
           تم حفظ تغييراتك بنجاح.
@@ -395,7 +395,7 @@ export const RTLAllVariants: Story = {
       </Alert>
 
       <Alert variant="warning">
-        <AlertTriangle className="h-4 w-4" />
+        <WarningIcon className="h-4 w-4" />
         <AlertTitle>تحذير</AlertTitle>
         <AlertDescription>
           ستنتهي صلاحية فترتك التجريبية المجانية خلال ٣ أيام.

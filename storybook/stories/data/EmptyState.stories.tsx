@@ -6,15 +6,15 @@ import { Card } from '../../../components/ui/card';
 import {
   FileText,
   Inbox,
-  Search,
+  MagnifyingGlass,
   Users,
   Plus,
   ShoppingCart,
   FolderOpen,
   Database,
-  MessageSquare,
+  ChatCentered,
   Image
-} from 'lucide-react';
+} from '@phosphor-icons/react';
 import * as React from 'react';
 
 /**
@@ -213,7 +213,7 @@ export const SearchResults: Story = {
   render: () => (
     <Card className="p-8 w-[500px]">
       <EmptyState
-        icon={<Search />}
+        icon={<MagnifyingGlass />}
         title="No results found"
         description="Try adjusting your search or filter to find what you're looking for."
         action={<Button variant="outline">Clear Filters</Button>}
@@ -338,7 +338,7 @@ export const AllUseCases: Story = {
       </Card>
       <Card className="p-8">
         <EmptyState
-          icon={<MessageSquare />}
+          icon={<ChatCentered />}
           title="No comments yet"
           description="Be the first to share your thoughts"
           action={<Button variant="outline">Add Comment</Button>}
@@ -509,7 +509,7 @@ export const RTLSearchResults: Story = {
   render: () => (
     <Card className="p-8 w-[500px]">
       <EmptyState
-        icon={<Search />}
+        icon={<MagnifyingGlass />}
         title="لم يتم العثور على نتائج"
         description="حاول تعديل البحث أو الفلتر للعثور على ما تبحث عنه."
         action={<Button variant="outline">مسح الفلاتر</Button>}

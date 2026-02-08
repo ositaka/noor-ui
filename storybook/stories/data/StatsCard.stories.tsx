@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { expect, within } from 'storybook/test';
 import { StatsCard } from '../../../components/ui/stats-card';
 import { Card, CardContent } from '../../../components/ui/card';
-import { Users, TrendingUp, DollarSign, ShoppingCart, Activity, CreditCard, Download, Package } from 'lucide-react';
+import { Users, TrendUp, CurrencyDollar, ShoppingCart, Pulse, CreditCard, Download, Package } from '@phosphor-icons/react';
 import * as React from 'react';
 
 /**
@@ -106,14 +106,14 @@ export const DashboardGrid: Story = {
         trendLabel="from last month"
       />
       <StatsCard
-        icon={<TrendingUp className="h-4 w-4" />}
+        icon={<TrendUp className="h-4 w-4" />}
         label="Revenue"
         value="$45,231"
         trend={8}
         trendLabel="from last month"
       />
       <StatsCard
-        icon={<DollarSign className="h-4 w-4" />}
+        icon={<CurrencyDollar className="h-4 w-4" />}
         label="Sales"
         value="$12,234"
         trend={-3}
@@ -171,7 +171,7 @@ export const PositiveTrend: Story = {
   render: () => (
     <div className="w-80">
       <StatsCard
-        icon={<TrendingUp className="h-4 w-4" />}
+        icon={<TrendUp className="h-4 w-4" />}
         label="Revenue"
         value="$45,231"
         trend={8}
@@ -211,7 +211,7 @@ export const NegativeTrend: Story = {
   render: () => (
     <div className="w-80">
       <StatsCard
-        icon={<DollarSign className="h-4 w-4" />}
+        icon={<CurrencyDollar className="h-4 w-4" />}
         label="Sales"
         value="$12,234"
         trend={-3}
@@ -296,7 +296,7 @@ export const AllMetrics: Story = {
         trendLabel="vs last month"
       />
       <StatsCard
-        icon={<Activity className="h-4 w-4" />}
+        icon={<Pulse className="h-4 w-4" />}
         label="Active Sessions"
         value="1,324"
         trend={5}
@@ -359,7 +359,7 @@ export const InCardContainer: Story = {
             trendLabel="from last month"
           />
           <StatsCard
-            icon={<TrendingUp className="h-4 w-4" />}
+            icon={<TrendUp className="h-4 w-4" />}
             label="Revenue"
             value="$45,231"
             trend={8}
@@ -421,14 +421,14 @@ export const RTLExample: Story = {
         trendLabel="مقابل الشهر الماضي"
       />
       <StatsCard
-        icon={<TrendingUp className="h-4 w-4" />}
+        icon={<TrendUp className="h-4 w-4" />}
         label="الإيرادات"
         value="$45,231"
         trend={8}
         trendLabel="مقابل الشهر الماضي"
       />
       <StatsCard
-        icon={<DollarSign className="h-4 w-4" />}
+        icon={<CurrencyDollar className="h-4 w-4" />}
         label="المبيعات"
         value="$12,234"
         trend={-3}
@@ -475,7 +475,7 @@ export const RTLPositiveTrend: Story = {
   render: () => (
     <div className="w-80">
       <StatsCard
-        icon={<TrendingUp className="h-4 w-4" />}
+        icon={<TrendUp className="h-4 w-4" />}
         label="الإيرادات"
         value="$45,231"
         trend={8}
@@ -515,7 +515,7 @@ export const RTLNegativeTrend: Story = {
   render: () => (
     <div className="w-80">
       <StatsCard
-        icon={<DollarSign className="h-4 w-4" />}
+        icon={<CurrencyDollar className="h-4 w-4" />}
         label="المبيعات"
         value="$12,234"
         trend={-3}
@@ -565,7 +565,7 @@ export const RTLInCardContainer: Story = {
             trendLabel="مقابل الشهر الماضي"
           />
           <StatsCard
-            icon={<TrendingUp className="h-4 w-4" />}
+            icon={<TrendUp className="h-4 w-4" />}
             label="الإيرادات"
             value="$45,231"
             trend={8}

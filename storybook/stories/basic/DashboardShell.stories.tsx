@@ -3,14 +3,14 @@ import { fn } from 'storybook/test';
 import { DashboardShell } from '../../../components/ui/dashboard-shell';
 import { Card, CardContent } from '../../../components/ui/card';
 import {
-  Home,
+  House,
   FileText,
-  Settings,
+  Gear,
   Users,
-  BarChart3,
-  MessageSquare,
+  ChartBar,
+  ChatCentered,
   Bell
-} from 'lucide-react';
+} from '@phosphor-icons/react';
 
 /**
  * Dashboard Shell Component Stories
@@ -59,7 +59,7 @@ export const Default: Story = {
         title: 'Dashboard',
         titleAr: 'لوحة التحكم',
         href: '#',
-        icon: <Home className="h-5 w-5" />
+        icon: <House className="h-5 w-5" />
       },
       {
         title: 'Posts',
@@ -72,7 +72,7 @@ export const Default: Story = {
         title: 'Settings',
         titleAr: 'الإعدادات',
         href: '#',
-        icon: <Settings className="h-5 w-5" />
+        icon: <Gear className="h-5 w-5" />
       },
     ];
 
@@ -110,7 +110,7 @@ export const BasicUsage: Story = {
         title: 'Dashboard',
         titleAr: 'لوحة التحكم',
         href: '#',
-        icon: <Home className="h-5 w-5" />
+        icon: <House className="h-5 w-5" />
       },
       {
         title: 'Posts',
@@ -129,13 +129,13 @@ export const BasicUsage: Story = {
         title: 'Analytics',
         titleAr: 'التحليلات',
         href: '#',
-        icon: <BarChart3 className="h-5 w-5" />
+        icon: <ChartBar className="h-5 w-5" />
       },
       {
         title: 'Settings',
         titleAr: 'الإعدادات',
         href: '#',
-        icon: <Settings className="h-5 w-5" />
+        icon: <Gear className="h-5 w-5" />
       },
     ];
 
@@ -179,7 +179,7 @@ export const WithNotifications: Story = {
         description: 'Sarah commented on your post',
         time: new Date(Date.now() - 1000 * 60 * 5).toISOString(),
         read: false,
-        icon: <MessageSquare className="h-5 w-5" />
+        icon: <ChatCentered className="h-5 w-5" />
       },
       {
         id: '2',
@@ -196,7 +196,7 @@ export const WithNotifications: Story = {
         title: 'Dashboard',
         titleAr: 'لوحة التحكم',
         href: '#',
-        icon: <Home className="h-5 w-5" />
+        icon: <House className="h-5 w-5" />
       },
       {
         title: 'Posts',
@@ -252,7 +252,7 @@ export const FullFeatured: Story = {
         title: 'Dashboard',
         titleAr: 'لوحة التحكم',
         href: '#',
-        icon: <Home className="h-5 w-5" />
+        icon: <House className="h-5 w-5" />
       },
       {
         title: 'Posts',
@@ -271,13 +271,13 @@ export const FullFeatured: Story = {
         title: 'Analytics',
         titleAr: 'التحليلات',
         href: '#',
-        icon: <BarChart3 className="h-5 w-5" />
+        icon: <ChartBar className="h-5 w-5" />
       },
       {
         title: 'Settings',
         titleAr: 'الإعدادات',
         href: '#',
-        icon: <Settings className="h-5 w-5" />
+        icon: <Gear className="h-5 w-5" />
       },
     ];
 
@@ -288,7 +288,7 @@ export const FullFeatured: Story = {
         description: 'Sarah commented on your post',
         time: new Date(Date.now() - 1000 * 60 * 5).toISOString(),
         read: false,
-        icon: <MessageSquare className="h-5 w-5" />
+        icon: <ChatCentered className="h-5 w-5" />
       },
       {
         id: '2',
@@ -346,7 +346,7 @@ export const WithBadges: Story = {
         title: 'Dashboard',
         titleAr: 'لوحة التحكم',
         href: '#',
-        icon: <Home className="h-5 w-5" />
+        icon: <House className="h-5 w-5" />
       },
       {
         title: 'Posts',
@@ -366,7 +366,7 @@ export const WithBadges: Story = {
         title: 'Settings',
         titleAr: 'الإعدادات',
         href: '#',
-        icon: <Settings className="h-5 w-5" />
+        icon: <Gear className="h-5 w-5" />
       },
     ];
 
@@ -408,7 +408,7 @@ export const WithUserAvatar: Story = {
         title: 'Dashboard',
         titleAr: 'لوحة التحكم',
         href: '#',
-        icon: <Home className="h-5 w-5" />
+        icon: <House className="h-5 w-5" />
       },
       {
         title: 'Posts',
@@ -420,7 +420,7 @@ export const WithUserAvatar: Story = {
         title: 'Settings',
         titleAr: 'الإعدادات',
         href: '#',
-        icon: <Settings className="h-5 w-5" />
+        icon: <Gear className="h-5 w-5" />
       },
     ];
 
@@ -465,7 +465,7 @@ export const WithoutNotifications: Story = {
         title: 'Dashboard',
         titleAr: 'لوحة التحكم',
         href: '#',
-        icon: <Home className="h-5 w-5" />
+        icon: <House className="h-5 w-5" />
       },
       {
         title: 'Posts',
@@ -477,13 +477,13 @@ export const WithoutNotifications: Story = {
         title: 'Analytics',
         titleAr: 'التحليلات',
         href: '#',
-        icon: <BarChart3 className="h-5 w-5" />
+        icon: <ChartBar className="h-5 w-5" />
       },
       {
         title: 'Settings',
         titleAr: 'الإعدادات',
         href: '#',
-        icon: <Settings className="h-5 w-5" />
+        icon: <Gear className="h-5 w-5" />
       },
     ];
 
@@ -525,13 +525,13 @@ export const MinimalNavigation: Story = {
         title: 'Dashboard',
         titleAr: 'لوحة التحكم',
         href: '#',
-        icon: <Home className="h-5 w-5" />
+        icon: <House className="h-5 w-5" />
       },
       {
         title: 'Settings',
         titleAr: 'الإعدادات',
         href: '#',
-        icon: <Settings className="h-5 w-5" />
+        icon: <Gear className="h-5 w-5" />
       },
     ];
 
@@ -573,7 +573,7 @@ export const RTL: Story = {
         title: 'Dashboard',
         titleAr: 'لوحة التحكم',
         href: '#',
-        icon: <Home className="h-5 w-5" />
+        icon: <House className="h-5 w-5" />
       },
       {
         title: 'Posts',
@@ -592,13 +592,13 @@ export const RTL: Story = {
         title: 'Analytics',
         titleAr: 'التحليلات',
         href: '#',
-        icon: <BarChart3 className="h-5 w-5" />
+        icon: <ChartBar className="h-5 w-5" />
       },
       {
         title: 'Settings',
         titleAr: 'الإعدادات',
         href: '#',
-        icon: <Settings className="h-5 w-5" />
+        icon: <Gear className="h-5 w-5" />
       },
     ];
 
@@ -609,7 +609,7 @@ export const RTL: Story = {
         description: 'سارة علقت على منشورك',
         time: new Date(Date.now() - 1000 * 60 * 5).toISOString(),
         read: false,
-        icon: <MessageSquare className="h-5 w-5" />
+        icon: <ChatCentered className="h-5 w-5" />
       },
       {
         id: '2',

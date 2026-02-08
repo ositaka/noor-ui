@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { WorkflowNode } from '../../../components/ui/workflow-node';
 import { Card, CardContent } from '../../../components/ui/card';
-import { Zap, Cpu, FileOutput, AlertCircle } from 'lucide-react';
+import { Lightning, Cpu, FileArrowDown, WarningCircle } from '@phosphor-icons/react';
 
 /**
  * Workflow Node Component Stories
@@ -52,7 +52,7 @@ export const Default: Story = {
         label: 'Email Trigger',
         description: 'When email received',
         type: 'trigger',
-        icon: Zap
+        icon: Lightning
       }}
     />
   ),
@@ -72,7 +72,7 @@ export const TriggerType: Story = {
             label: 'Email Trigger',
             description: 'When email received',
             type: 'trigger',
-            icon: Zap
+            icon: Lightning
           }}
         />
       </CardContent>
@@ -122,7 +122,7 @@ export const ActionType: Story = {
             label: 'Send Output',
             description: 'Forward to Slack',
             type: 'action',
-            icon: FileOutput
+            icon: FileArrowDown
           }}
         />
       </CardContent>
@@ -147,7 +147,7 @@ export const ActiveStatus: Story = {
             label: 'Active Task',
             description: 'Currently running',
             status: 'active',
-            icon: Zap
+            icon: Lightning
           }}
         />
       </CardContent>
@@ -197,7 +197,7 @@ export const ErrorStatus: Story = {
             label: 'Failed Task',
             description: 'Error occurred',
             status: 'error',
-            icon: AlertCircle
+            icon: WarningCircle
           }}
         />
       </CardContent>
@@ -225,7 +225,7 @@ export const RTL: Story = {
             descriptionAr: 'عند استلام بريد إلكتروني',
             type: 'trigger',
             typeAr: 'مشغل',
-            icon: Zap,
+            icon: Lightning,
             isRTL: true
           }}
         />

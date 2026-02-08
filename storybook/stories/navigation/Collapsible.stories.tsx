@@ -3,7 +3,7 @@ import { expect, fn, userEvent, within } from 'storybook/test';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '../../../components/ui/collapsible';
 import { Button } from '../../../components/ui/button';
 import { Card, CardContent } from '../../../components/ui/card';
-import { ChevronDown, ChevronRight, ChevronsUpDown } from 'lucide-react';
+import { CaretDown, CaretRight, CaretUpDown } from '@phosphor-icons/react';
 import * as React from 'react';
 
 /**
@@ -64,7 +64,7 @@ export const Default: Story = {
           <CollapsibleTrigger asChild>
             <Button variant="outline" className="w-full justify-between">
               <span>Can I use this in my project?</span>
-              <ChevronDown
+              <CaretDown
                 className={`h-4 w-4 transition-transform ${isOpen ? 'rotate-180' : ''}`}
               />
             </Button>
@@ -142,7 +142,7 @@ export const BasicFAQ: Story = {
           <CollapsibleTrigger asChild>
             <Button variant="outline" className="w-full justify-between">
               <span>Can I use this in my project?</span>
-              <ChevronDown
+              <CaretDown
                 className={`h-4 w-4 transition-transform ${isOpen ? 'rotate-180' : ''}`}
               />
             </Button>
@@ -204,7 +204,7 @@ export const ControlledWithIcon: Story = {
               <CollapsibleTrigger asChild>
                 <Button variant="outline" className="w-full justify-between">
                   <span>{isOpen ? 'Hide' : 'Show'} Details</span>
-                  <ChevronDown
+                  <CaretDown
                     className={`h-4 w-4 transition-transform duration-200 ${
                       isOpen ? 'rotate-180' : ''
                     }`}
@@ -271,7 +271,7 @@ export const SidebarStyle: Story = {
             <h4 className="text-sm font-semibold">Starred Repositories</h4>
             <CollapsibleTrigger asChild>
               <Button variant="ghost" size="sm">
-                <ChevronsUpDown className="h-4 w-4" />
+                <CaretUpDown className="h-4 w-4" />
                 <span className="sr-only">Toggle</span>
               </Button>
             </CollapsibleTrigger>
@@ -318,7 +318,7 @@ export const SidebarStyle: Story = {
     controls: { disable: true },
     docs: {
       description: {
-        story: 'Sidebar-style collapsible with a list of items. Uses ChevronsUpDown icon for toggle button.'
+        story: 'Sidebar-style collapsible with a list of items. Uses CaretUpDown icon for toggle button.'
       }
     }
   }
@@ -350,7 +350,7 @@ export const FAQStyle: Story = {
                 className="w-full justify-between p-4 h-auto font-normal"
               >
                 <span className="text-start font-medium">{item.q}</span>
-                <ChevronRight className="h-4 w-4 shrink-0 transition-transform duration-200 data-[state=open]:rotate-90" />
+                <CaretRight className="h-4 w-4 shrink-0 transition-transform duration-200 data-[state=open]:rotate-90" />
               </Button>
             </CollapsibleTrigger>
             <CollapsibleContent className="px-4 pb-4">
@@ -393,7 +393,7 @@ export const FAQStyle: Story = {
     controls: { disable: true },
     docs: {
       description: {
-        story: 'FAQ-style layout with multiple collapsibles. ChevronRight rotates 90° when opened.'
+        story: 'FAQ-style layout with multiple collapsibles. CaretRight rotates 90° when opened.'
       }
     }
   }
@@ -464,7 +464,7 @@ export const RTLExample: Story = {
           <CollapsibleTrigger asChild>
             <Button variant="outline" className="w-full justify-between">
               <span>هل يمكنني استخدام هذا في مشروعي؟</span>
-              <ChevronDown
+              <CaretDown
                 className={`h-4 w-4 transition-transform ${isOpen ? 'rotate-180' : ''}`}
               />
             </Button>
@@ -526,7 +526,7 @@ export const RTLControlledWithIcon: Story = {
               <CollapsibleTrigger asChild>
                 <Button variant="outline" className="w-full justify-between">
                   <span>{isOpen ? 'إخفاء' : 'إظهار'} التفاصيل</span>
-                  <ChevronDown
+                  <CaretDown
                     className={`h-4 w-4 transition-transform duration-200 ${
                       isOpen ? 'rotate-180' : ''
                     }`}
@@ -570,7 +570,7 @@ export const RTLSidebarStyle: Story = {
             <h4 className="text-sm font-semibold">المستودعات المميزة</h4>
             <CollapsibleTrigger asChild>
               <Button variant="ghost" size="sm">
-                <ChevronsUpDown className="h-4 w-4" />
+                <CaretUpDown className="h-4 w-4" />
                 <span className="sr-only">تبديل</span>
               </Button>
             </CollapsibleTrigger>
@@ -630,7 +630,7 @@ export const RTLFAQStyle: Story = {
                 className="w-full justify-between p-4 h-auto font-normal"
               >
                 <span className="text-start font-medium">{item.q}</span>
-                <ChevronRight className="h-4 w-4 shrink-0 transition-transform duration-200 data-[state=open]:rotate-90" />
+                <CaretRight className="h-4 w-4 shrink-0 transition-transform duration-200 data-[state=open]:rotate-90" />
               </Button>
             </CollapsibleTrigger>
             <CollapsibleContent className="px-4 pb-4">

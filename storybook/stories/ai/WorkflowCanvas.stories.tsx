@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { expect, within } from 'storybook/test';
 import { WorkflowCanvas } from '../../../components/ui/workflow-canvas';
 import { WorkflowNode } from '../../../components/ui/workflow-node';
-import { Zap, Cpu, FileOutput, Mail, Database } from 'lucide-react';
+import { Lightning, Cpu, FileArrowDown, Envelope, Database } from '@phosphor-icons/react';
 
 /**
  * Workflow Canvas Component Stories
@@ -55,7 +55,7 @@ export const Default: Story = {
         id: '1',
         type: 'workflowNode',
         position: { x: 100, y: 100 },
-        data: { label: 'Start', icon: Zap }
+        data: { label: 'Start', icon: Lightning }
       },
     ];
 
@@ -93,7 +93,7 @@ export const SimpleWorkflow: Story = {
         id: '1',
         type: 'workflowNode',
         position: { x: 50, y: 100 },
-        data: { label: 'Email Received', description: 'Trigger', type: 'trigger', icon: Mail }
+        data: { label: 'Email Received', description: 'Trigger', type: 'trigger', icon: Envelope }
       },
       {
         id: '2',
@@ -105,7 +105,7 @@ export const SimpleWorkflow: Story = {
         id: '3',
         type: 'workflowNode',
         position: { x: 650, y: 100 },
-        data: { label: 'Send to Slack', description: 'Action', type: 'action', icon: FileOutput }
+        data: { label: 'Send to Slack', description: 'Action', type: 'action', icon: FileArrowDown }
       },
     ];
 
@@ -164,7 +164,7 @@ export const ComplexWorkflow: Story = {
         id: '1',
         type: 'workflowNode',
         position: { x: 50, y: 50 },
-        data: { label: 'Start', icon: Zap }
+        data: { label: 'Start', icon: Lightning }
       },
       {
         id: '2',
@@ -182,7 +182,7 @@ export const ComplexWorkflow: Story = {
         id: '4',
         type: 'workflowNode',
         position: { x: 350, y: 250 },
-        data: { label: 'Send Email', icon: Mail }
+        data: { label: 'Send Email', icon: Envelope }
       },
     ];
 
@@ -231,7 +231,7 @@ export const WithoutMinimap: Story = {
         id: '1',
         type: 'workflowNode',
         position: { x: 100, y: 100 },
-        data: { label: 'Start', icon: Zap }
+        data: { label: 'Start', icon: Lightning }
       },
       {
         id: '2',
@@ -289,7 +289,7 @@ export const ReadOnly: Story = {
         id: '1',
         type: 'workflowNode',
         position: { x: 100, y: 100 },
-        data: { label: 'Email Trigger', icon: Mail }
+        data: { label: 'Email Trigger', icon: Envelope }
       },
       {
         id: '2',
@@ -344,7 +344,7 @@ export const LinesBackground: Story = {
         id: '1',
         type: 'workflowNode',
         position: { x: 100, y: 100 },
-        data: { label: 'Start', icon: Zap }
+        data: { label: 'Start', icon: Lightning }
       },
       {
         id: '2',
@@ -442,7 +442,7 @@ export const RTL: Story = {
           labelAr: 'مشغل البريد',
           description: 'Trigger',
           descriptionAr: 'مشغل',
-          icon: Mail,
+          icon: Envelope,
           isRTL: true
         }
       },

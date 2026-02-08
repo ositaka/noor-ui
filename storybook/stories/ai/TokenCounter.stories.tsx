@@ -108,7 +108,7 @@ export const Default: Story = {
 
     await step('Info button shows tooltip on hover', async () => {
       const infoButtons = canvas.getAllByRole('button');
-      const infoButton = infoButtons.find(btn => btn.querySelector('.lucide-info'));
+      const infoButton = infoButtons.find(btn => btn.querySelector('svg'));
 
       if (infoButton) {
         await userEvent.hover(infoButton);

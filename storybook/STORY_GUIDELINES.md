@@ -243,7 +243,7 @@ Use this template for all component stories:
 ```typescript
 import type { Meta, StoryObj } from '@storybook/react';
 import { YourComponent } from '../../../components/ui/your-component';
-import { Plus, Heart, Save } from 'lucide-react'; // ✅ Non-directional icons only
+import { Plus, Heart, FloppyDisk } from '@phosphor-icons/react'; // ✅ Non-directional icons only
 
 const meta = {
   title: 'Category/YourComponent',

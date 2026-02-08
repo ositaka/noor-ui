@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { expect, fn, userEvent, within } from 'storybook/test';
 import { Button } from '../../../components/ui/button';
-import { Heart, Download, Plus, Save } from 'lucide-react';
+import { Heart, Download, Plus, FloppyDisk } from '@phosphor-icons/react';
 
 const meta = {
   title: 'Basic/Button',
@@ -350,7 +350,7 @@ export const WithIconRight: Story = {
     children: (
       <>
         Save Changes
-        <Save className="h-4 w-4" />
+        <FloppyDisk className="h-4 w-4" />
       </>
     ),
     onClick: fn()

@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { expect, userEvent, within } from 'storybook/test';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../../components/ui/tabs';
 import { Card, CardContent } from '../../../components/ui/card';
-import { User, Bell } from 'lucide-react';
+import { User, Bell } from '@phosphor-icons/react';
 import * as React from 'react';
 
 /**
