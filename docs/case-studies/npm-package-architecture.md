@@ -131,7 +131,7 @@ npm init -y
     "@radix-ui/react-tooltip": "^1.0.7",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
-    "lucide-react": "^0.344.0",
+    "@phosphor-icons/react": "^2.1.10",
     "tailwind-merge": "^2.2.1"
   },
   "devDependencies": {

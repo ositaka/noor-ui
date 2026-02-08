@@ -1,6 +1,6 @@
 {
   "name": "noorui-rtl",
-  "version": "0.7.1",
+  "version": "0.8.0",
   "description": "Beautiful RTL-first React components for bilingual applications. Built with Radix UI, Tailwind CSS, and full Arabic/English support.",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -80,7 +80,7 @@
     "@radix-ui/react-tooltip": "^1.0.7",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
-    "lucide-react": "^0.344.0",
+    "@phosphor-icons/react": "^2.1.10",
     "tailwind-merge": "^2.2.0"
   },
   "devDependencies": {

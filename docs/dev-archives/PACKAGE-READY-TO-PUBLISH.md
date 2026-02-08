@@ -96,7 +96,7 @@ All Radix UI primitives are included:
 - ... and all other Radix UI components
 - class-variance-authority
 - clsx
-- lucide-react
+- @phosphor-icons/react
 - tailwind-merge
 
 ## 🔍 Verification Checklist

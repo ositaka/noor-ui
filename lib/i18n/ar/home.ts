@@ -94,7 +94,7 @@ home: {
         },
         recentWins: {
           title: 'الإنجازات الأخيرة',
-          performance: 'تم نشر حزمة NPM (noorui-rtl v0.7.1)',
+          performance: 'تم نشر حزمة NPM (noorui-rtl v0.8.0)',
           skeletons: 'أكثر من 74 مكون جاهز للإنتاج مع توثيق كامل',
           components: 'أكثر من 10 مشاريع عرض كاملة (مدونة، سوق، سير عمل AI)',
           rebranding: 'دعم كامل لجميع اللغات RTL (العربية، العبرية، الأردية، الفارسية) + إمكانية الوصول WCAG AA',
