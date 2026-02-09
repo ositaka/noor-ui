@@ -21,12 +21,12 @@ import {
   User,
   Gear,
   CreditCard,
-  LogOut,
+  SignOut,
   UserPlus,
   Envelope,
   ChatCentered,
   PlusCircle,
-  MoreHorizontal
+  DotsThree
 } from '@phosphor-icons/react';
 import * as React from 'react';
 
@@ -100,7 +100,7 @@ export const Default: Story = {
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
-          <LogOut className="me-2 h-4 w-4" />
+          <SignOut className="me-2 h-4 w-4" />
           <span>Logout</span>
           <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
         </DropdownMenuItem>
@@ -195,7 +195,7 @@ export const BasicUsage: Story = {
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
-          <LogOut className="me-2 h-4 w-4" />
+          <SignOut className="me-2 h-4 w-4" />
           <span>Logout</span>
           <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
         </DropdownMenuItem>
@@ -260,7 +260,7 @@ export const WithIcons: Story = {
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
-          <LogOut className="me-2 h-4 w-4" />
+          <SignOut className="me-2 h-4 w-4" />
           <span>Logout</span>
         </DropdownMenuItem>
       </DropdownMenuContent>
@@ -440,7 +440,7 @@ export const WithSubMenus: Story = {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="outline">
-          <MoreHorizontal className="h-4 w-4" />
+          <DotsThree className="h-4 w-4" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56">
@@ -617,7 +617,7 @@ export const RTLBasic: Story = {
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
-          <LogOut className="me-2 h-4 w-4" />
+          <SignOut className="me-2 h-4 w-4" />
           <span>تسجيل الخروج</span>
           <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
         </DropdownMenuItem>
@@ -770,7 +770,7 @@ export const RTLWithSubMenus: Story = {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="outline">
-          <MoreHorizontal className="h-4 w-4" />
+          <DotsThree className="h-4 w-4" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56">

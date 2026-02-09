@@ -6,7 +6,7 @@ import {
   Heart,
   ShareNetwork,
   Bed,
-  Bath,
+  Bathtub,
   Square,
   ShoppingCart,
   Star,
@@ -222,7 +222,7 @@ export const RealEstateListing: Story = {
         ]}
         stats={[
           { icon: Bed, value: 5, label: 'Bedrooms' },
-          { icon: Bath, value: 6, label: 'Bathrooms' },
+          { icon: Bathtub, value: 6, label: 'Bathrooms' },
           { icon: Square, value: '4,500 sqft', label: 'Area' },
         ]}
         tags={[
@@ -485,7 +485,7 @@ export const WithAllFeatures: Story = {
         ]}
         stats={[
           { icon: Bed, value: 6, label: 'Bedrooms' },
-          { icon: Bath, value: 7, label: 'Bathrooms' },
+          { icon: Bathtub, value: 7, label: 'Bathrooms' },
           { icon: Square, value: '6,000 sqft', label: 'Area' },
         ]}
         tags={[
@@ -569,7 +569,7 @@ export const GridLayout: Story = {
         placeholderIcon={Home}
         stats={[
           { icon: Bed, value: 2, label: 'Bedrooms' },
-          { icon: Bath, value: 2, label: 'Bathrooms' },
+          { icon: Bathtub, value: 2, label: 'Bathrooms' },
         ]}
         ctaText="View"
         onCtaClick={() => {}}
@@ -583,7 +583,7 @@ export const GridLayout: Story = {
         badges={[{ label: 'Featured', variant: 'destructive' }]}
         stats={[
           { icon: Bed, value: 5, label: 'Bedrooms' },
-          { icon: Bath, value: 6, label: 'Bathrooms' },
+          { icon: Bathtub, value: 6, label: 'Bathrooms' },
         ]}
         featured={true}
         ctaText="View"
@@ -597,7 +597,7 @@ export const GridLayout: Story = {
         placeholderIcon={Home}
         stats={[
           { icon: Bed, value: 4, label: 'Bedrooms' },
-          { icon: Bath, value: 5, label: 'Bathrooms' },
+          { icon: Bathtub, value: 5, label: 'Bathrooms' },
         ]}
         ctaText="View"
         onCtaClick={() => {}}
@@ -658,7 +658,7 @@ export const RTLRealEstate: Story = {
         ]}
         stats={[
           { icon: Bed, value: 5, label: 'غرف النوم' },
-          { icon: Bath, value: 6, label: 'الحمامات' },
+          { icon: Bathtub, value: 6, label: 'الحمامات' },
           { icon: Square, value: '4,500 قدم', label: 'المساحة' },
         ]}
         tags={[
@@ -851,7 +851,7 @@ export const RTLGridLayout: Story = {
         placeholderIcon={Home}
         stats={[
           { icon: Bed, value: 2, label: 'غرف نوم' },
-          { icon: Bath, value: 2, label: 'حمامات' },
+          { icon: Bathtub, value: 2, label: 'حمامات' },
         ]}
         ctaText="عرض"
         onCtaClick={() => {}}
@@ -865,7 +865,7 @@ export const RTLGridLayout: Story = {
         badges={[{ label: 'مميز', variant: 'destructive' }]}
         stats={[
           { icon: Bed, value: 5, label: 'غرف نوم' },
-          { icon: Bath, value: 6, label: 'حمامات' },
+          { icon: Bathtub, value: 6, label: 'حمامات' },
         ]}
         featured={true}
         ctaText="عرض"
@@ -879,7 +879,7 @@ export const RTLGridLayout: Story = {
         placeholderIcon={Home}
         stats={[
           { icon: Bed, value: 4, label: 'غرف نوم' },
-          { icon: Bath, value: 5, label: 'حمامات' },
+          { icon: Bathtub, value: 5, label: 'حمامات' },
         ]}
         ctaText="عرض"
         onCtaClick={() => {}}
