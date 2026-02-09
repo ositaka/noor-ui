@@ -5,6 +5,23 @@ All notable changes to Noor UI will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.8.2] - 2026-02-09
+
+### Added
+- **Squircle corners**: Added `--corner-shape: squircle` CSS variable as a global design token, applied to all elements via `corner-shape: var(--corner-shape)`. Progressive enhancement (Chrome 138+), graceful fallback to standard `border-radius` in other browsers. Overridable per theme.
+
+## [0.8.1] - 2026-02-09
+
+### Fixed
+- **CSS layers**: Moved base styles (`border-border`, `bg-background`) into `@layer base` so utility hover classes like `hover:border-primary` work correctly in Tailwind v4
+- **Header button heights**: Aligned search trigger height (`h-8`) with theme and direction toggle buttons
+- **Anchor scroll offset**: Added `scroll-margin-top: 6rem` on `[id]` elements to clear the fixed header
+
+### Changed
+- **Header navigation**: Removed redundant "Home" link; added progressive collapse with "More" dropdown between `lg` and `xl` breakpoints
+- **Visual sitemap page**: Added 8 missing components, 11 missing examples, 2 missing resource links; replaced hardcoded English with i18n keys
+- **XML sitemap & search data**: Already updated in 0.8.0 but included here for completeness
+
 ## [0.8.0] - 2026-02-08
 
 ### Changed

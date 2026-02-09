@@ -164,6 +164,7 @@
   --font-body: 'Inter', system-ui, sans-serif;
   --font-heading: 'Inter', system-ui, sans-serif;
   --font-rtl: 'IBM Plex Sans Arabic', sans-serif;
+  --corner-shape: squircle; /* Progressive enhancement: Chrome 138+, graceful fallback to standard border-radius */
 }
 
 .dark {
@@ -425,6 +426,7 @@ h1, h2, h3, h4, h5, h6 {
 
 * {
   @apply border-border;
+  corner-shape: var(--corner-shape);
 }
 
 body {

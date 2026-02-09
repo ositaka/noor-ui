@@ -2,12 +2,13 @@
 
 import * as React from 'react'
 import Link from 'next/link'
-import { SunHorizon, List } from '@phosphor-icons/react'
+import { SunHorizon, List, CaretDown } from '@phosphor-icons/react'
 import { DirectionToggle } from '@/components/docs/direction-toggle'
 import { ThemeToggle } from '@/components/docs/theme-toggle'
 import { GlobalSearch } from '@/components/docs/global-search'
 import { useDirection } from '@/components/providers/direction-provider'
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
 import { Badge } from '@/components/ui/badge'
@@ -39,12 +40,6 @@ export function SiteHeader() {
         </div>
         <nav className="hidden lg:flex items-center gap-6" aria-label="Main navigation">
           <Link
-            href="/"
-            className="text-sm font-medium transition-colors hover:text-primary"
-          >
-            {t.nav.home}
-          </Link>
-          <Link
             href="/getting-started"
             className="text-sm font-medium transition-colors hover:text-primary"
           >
@@ -62,24 +57,47 @@ export function SiteHeader() {
           >
             {t.nav.examples}
           </Link>
+
+          {/* Secondary links — visible at xl+, collapsed into "More" at lg */}
           <Link
             href="/starters"
-            className="text-sm font-medium transition-colors hover:text-primary"
+            className="hidden xl:block text-sm font-medium transition-colors hover:text-primary"
           >
             {t.nav.starters}
           </Link>
           <Link
             href="/rtl-guide"
-            className="text-sm font-medium transition-colors hover:text-primary"
+            className="hidden xl:block text-sm font-medium transition-colors hover:text-primary"
           >
             {t.nav.rtlGuide}
           </Link>
           <Link
             href="/themes"
-            className="text-sm font-medium transition-colors hover:text-primary"
+            className="hidden xl:block text-sm font-medium transition-colors hover:text-primary"
           >
             {t.nav.themes}
           </Link>
+
+          {/* "More" dropdown — only visible between lg and xl */}
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" size="sm" className="xl:hidden gap-1 text-sm font-medium">
+                {t.nav.more}
+                <CaretDown className="h-3.5 w-3.5" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="start">
+              <DropdownMenuItem asChild>
+                <Link href="/starters">{t.nav.starters}</Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Link href="/rtl-guide">{t.nav.rtlGuide}</Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Link href="/themes">{t.nav.themes}</Link>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </nav>
         <div className="flex items-center gap-2">
           <GlobalSearch />

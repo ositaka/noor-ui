@@ -15,6 +15,7 @@ nav: {
       themes: 'Themes',
       documentation: 'Documentation',
       getStarted: 'Get Started',
+      more: 'More',
     },
 
     storybook: {

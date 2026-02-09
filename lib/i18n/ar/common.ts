@@ -15,6 +15,7 @@ nav: {
       themes: 'السمات',
       documentation: 'التوثيق',
       getStarted: 'ابدأ الآن',
+      more: 'المزيد',
     },
 
     storybook: {

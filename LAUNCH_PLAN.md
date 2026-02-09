@@ -208,7 +208,7 @@ A fully-featured multilingual blog with 4 languages (EN/AR/FR/UR), MDX content, 
 
 ⚠️ BEING DIRECT:
 
-This is v0.8.0 - I've built this as a solo developer over the last months. It's working in production, the architecture is solid, but I need help to make it exceptional.
+This is v0.8.2 - I've built this as a solo developer over the last months. It's working in production, the architecture is solid, but I need help to make it exceptional.
 
 ---
 
@@ -312,7 +312,7 @@ Noor UI is built RTL-first:
 
 Works with Arabic, Hebrew, Urdu, Farsi.
 
-v0.8.0 - actively maintained, growing with community.
+v0.8.2 - actively maintained, growing with community.
 ```
 
 ---
@@ -329,7 +329,7 @@ What you get:
 
 All documented: https://noorui.com
 
-v0.8.0 - Not perfect yet - that's why I need your help!
+v0.8.2 - Not perfect yet - that's why I need your help!
 ```
 
 ---
@@ -411,7 +411,7 @@ What I have so far:
 • 74+ components (TypeScript + Tailwind + Radix)
 • Production example running (Kitab blog starter)
 • Docs site with examples
-• v0.8.0 on npm
+• v0.8.2 on npm
 
 What I need:
 • Native Arabic speakers to validate UX
@@ -435,7 +435,7 @@ Would appreciate any feedback or suggestions!
 **Post 1: r/reactjs (12:00 PM)**
 
 ```
-Title: [Open Source] Noor UI - RTL-first React component library (v0.8.0, looking for feedback)
+Title: [Open Source] Noor UI - RTL-first React component library (v0.8.2, looking for feedback)
 
 I've spent the last several months building Noor UI - an open-source component library designed specifically for bilingual applications with proper RTL support.
 
@@ -450,7 +450,7 @@ If you've ever built for Arabic markets, you know the pain: flex-direction issue
 - Works with Arabic, Hebrew, Urdu, Farsi
 
 **Being Honest:**
-This is v0.8.0 - a solo developer project. The architecture is solid and I'm using it in production, but I need community help to make it bulletproof. Looking for:
+This is v0.8.2 - a solo developer project. The architecture is solid and I'm using it in production, but I need community help to make it bulletproof. Looking for:
 - Native Arabic speakers to validate UX
 - RTL experts to find edge cases
 - Feedback on what's missing
@@ -482,7 +482,7 @@ Instead of patching RTL support onto LTR components, everything is built with lo
 - Production example: https://kitab.noorui.com (multilingual blog with 4 languages)
 
 **Honest status:**
-It's v0.8.0 - I'm using it in production but this is a solo project. I need community help to stress-test and improve it.
+It's v0.8.2 - I'm using it in production but this is a solo project. I need community help to stress-test and improve it.
 
 **Why I'm sharing:**
 Looking for feedback from developers who build for international markets, especially MENA region. What's missing? What would make this useful for you?
@@ -516,7 +516,7 @@ Hey everyone! I've been building Noor UI - a component library for bilingual Ara
 • 74+ React components built with logical CSS (proper RTL support)
 • TypeScript + Tailwind + Radix UI
 • Includes GCC-specific components (Prayer Times, Hijri Calendar, etc.)
-• v0.8.0 - battle-tested in production but growing with community
+• v0.8.2 - battle-tested in production but growing with community
 
 **Why I built it:**
 Tired of fighting RTL bugs. Most libraries patch RTL on later - this is built RTL-first from day one.
@@ -642,7 +642,7 @@ is the only way to make it work reliably."
 
 **If someone says "not production ready":**
 ```
-"You're right that it's v0.8.0 and evolving. But I'm using it in production
+"You're right that it's v0.8.2 and evolving. But I'm using it in production
 (Kitab), and the core patterns are solid. What specific concerns do you have?
 I'd love to address them."
 ```
