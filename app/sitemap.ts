@@ -1,28 +1,51 @@
 import { MetadataRoute } from 'next'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://your-domain.com'
+  const baseUrl = 'https://noorui.com'
 
-  // Component pages
+  // Component pages (all directories under app/(docs)/components/)
   const components = [
-    'button', 'card', 'input', 'textarea', 'select', 'checkbox', 'radio', 'switch',
-    'slider', 'range-slider', 'tabs', 'accordion', 'dialog', 'popover', 'tooltip', 'dropdown-menu',
-    'context-menu', 'badge', 'avatar', 'separator', 'progress', 'toast', 'alert',
-    'form', 'calendar', 'command', 'collapsible', 'label', 'data-table',
-    'prayer-times', 'hijri-date', 'arabic-number', 'zakat-calculator'
+    // Basic Components
+    'accordion', 'alert', 'avatar', 'badge', 'blockquote', 'breadcrumb',
+    'button', 'button-arrow', 'card', 'checkbox', 'input', 'kbd', 'label',
+    'select', 'separator', 'slider', 'switch', 'textarea',
+    // Form Components
+    'calendar', 'date-picker', 'file-upload', 'form', 'number-input',
+    'radio-group', 'range-slider', 'rich-text-editor', 'time-picker',
+    // Data Display
+    'collapsible', 'data-table', 'empty-state', 'feature-card', 'listing-card',
+    'pagination', 'stats-card', 'table', 'tabs',
+    // Overlay & Popups
+    'command', 'context-menu', 'dialog', 'dropdown-menu', 'popover',
+    'sheet', 'toast', 'tooltip',
+    // Content
+    'callout', 'content-renderer', 'pull-quote',
+    // Advanced Components
+    'dashboard-shell', 'notification-center', 'progress', 'reaction-picker',
+    'skeleton', 'stepper', 'user-badge', 'user-menu',
+    // GCC-Specific
+    'arabic-number', 'hijri-date', 'prayer-times', 'zakat-calculator',
+    // Experimental (AI/LLM)
+    'chat-message', 'conversation-history', 'message-actions', 'model-selector',
+    'parameter-slider', 'prompt-input', 'thinking-indicator', 'token-counter',
+    'workflow-canvas', 'workflow-node',
   ]
 
-  // Documentation pages
+  // Documentation pages (all directories under app/(docs)/documentation/)
   const docs = [
-    'installation', 'quick-start', 'configuration', 'rtl', 'arabic',
-    'accessibility', 'keyboard-navigation', 'screen-readers', 'color-contrast',
-    'theming', 'customization'
+    'installation', 'quick-start', 'configuration', 'props', 'examples',
+    'rtl', 'bidi', 'arabic',
+    'wcag', 'keyboard', 'screen-readers',
   ]
 
-  // Example pages
+  // Example pages (all directories under app/examples/)
   const examples = [
-    'gcc-dashboard', 'islamic-finance-dashboard', 'datatable-showcase',
-    'registration', 'dashboard', 'ecommerce'
+    'gcc-dashboard', 'islamic-finance-dashboard', 'calendar', 'datatable-showcase',
+    'registration', 'dashboard', 'ecommerce', 'cms',
+    'marketplace', 'b2b-marketplace', 'portfolio', 'real-estate',
+    'blog-dashboard', 'workflow-basic', 'accessible-inputs',
+    'ai-chat-simple', 'ai-playground', 'ai-code-assistant', 'ai-document-qa',
+    'ai-multi-agent', 'ai-workflow', 'ai-agent-evals',
   ]
 
   return [
@@ -73,6 +96,36 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/getting-started`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/rtl-guide`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/roadmap`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.6,
+    },
+    {
+      url: `${baseUrl}/license`,
+      lastModified: new Date(),
+      changeFrequency: 'yearly',
+      priority: 0.4,
+    },
+    {
+      url: `${baseUrl}/utilities`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.6,
     },
     {
       url: `${baseUrl}/tokens`,

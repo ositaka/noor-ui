@@ -16,7 +16,7 @@ import {
   Share,
   Download,
   Trash,
-  Edit,
+  PencilSimple,
   Star,
   Archive
 } from '@phosphor-icons/react';
@@ -67,7 +67,7 @@ export const Default: Story = {
       </ContextMenuTrigger>
       <ContextMenuContent className="w-56">
         <ContextMenuItem onSelect={fn()}>
-          <Edit className="me-2 h-4 w-4" />
+          <PencilSimple className="me-2 h-4 w-4" />
           <span>Edit</span>
           <ContextMenuShortcut>⌘E</ContextMenuShortcut>
         </ContextMenuItem>
@@ -152,7 +152,7 @@ export const BasicUsage: Story = {
       </ContextMenuTrigger>
       <ContextMenuContent className="w-56">
         <ContextMenuItem>
-          <Edit className="me-2 h-4 w-4" />
+          <PencilSimple className="me-2 h-4 w-4" />
           <span>Edit</span>
           <ContextMenuShortcut>⌘E</ContextMenuShortcut>
         </ContextMenuItem>
@@ -226,7 +226,7 @@ export const WithIcons: Story = {
       </ContextMenuTrigger>
       <ContextMenuContent className="w-56">
         <ContextMenuItem>
-          <Edit className="me-2 h-4 w-4" />
+          <PencilSimple className="me-2 h-4 w-4" />
           <span>Edit</span>
           <ContextMenuShortcut>⌘E</ContextMenuShortcut>
         </ContextMenuItem>
@@ -435,7 +435,7 @@ export const AllVariants: Story = {
           </ContextMenuTrigger>
           <ContextMenuContent className="w-56">
             <ContextMenuItem>
-              <Edit className="me-2 h-4 w-4" />
+              <PencilSimple className="me-2 h-4 w-4" />
               <span>Edit</span>
             </ContextMenuItem>
             <ContextMenuItem>
@@ -488,7 +488,7 @@ export const RTLBasic: Story = {
       </ContextMenuTrigger>
       <ContextMenuContent className="w-56">
         <ContextMenuItem>
-          <Edit className="me-2 h-4 w-4" />
+          <PencilSimple className="me-2 h-4 w-4" />
           <span>تعديل</span>
           <ContextMenuShortcut>⌘E</ContextMenuShortcut>
         </ContextMenuItem>
@@ -562,7 +562,7 @@ export const RTLWithIcons: Story = {
       </ContextMenuTrigger>
       <ContextMenuContent className="w-56">
         <ContextMenuItem>
-          <Edit className="me-2 h-4 w-4" />
+          <PencilSimple className="me-2 h-4 w-4" />
           <span>تعديل</span>
           <ContextMenuShortcut>⌘E</ContextMenuShortcut>
         </ContextMenuItem>

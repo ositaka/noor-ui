@@ -1,4 +1,5 @@
-import type { Metadata } from 'next'
+'use client'
+
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { ButtonArrow } from '@/components/ui/button-arrow'
@@ -17,13 +18,6 @@ import {
   CheckCircle,
   ArrowRight
 } from '@phosphor-icons/react'
-import { useDirection } from '@/components/providers/direction-provider'
-import { content } from '@/lib/i18n'
-
-export const metadata: Metadata = {
-  title: 'Blog Dashboard Starter - Noor UI',
-  description: 'Full-featured bilingual blog platform with Supabase authentication, rich text editing, and complete CRUD operations',
-}
 
 export default function BlogDashboardPage() {
   const features = [

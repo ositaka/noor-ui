@@ -91,7 +91,7 @@ Build the **go-to design system for bilingual (LTR/RTL) web applications**, star
 - ✅ Version and release strategy established
 - ✅ Automated pre-publish checks (translations, links, types)
 
-**Current Version:** v0.8.0 (2026-02-07)
+**Current Version:** v0.8.2 (2026-02-09)
 
 **Latest Updates:**
 - ✅ Tailwind CSS v3 → v4.1 migration (CSS-first configuration)
@@ -100,6 +100,11 @@ Build the **go-to design system for bilingual (LTR/RTL) web applications**, star
 - ✅ ~50 hardcoded English strings replaced with i18n translations
 - ✅ New useThemeTokens hook for real-time CSS variable display
 - ✅ Added CSS Setup section showing exact theme code
+- ✅ Icon library migration: lucide-react → @phosphor-icons/react (Duotone)
+- ✅ Squircle corners via `--corner-shape` CSS variable (progressive enhancement)
+- ✅ CSS `@layer base` fix for hover utility overrides in Tailwind v4
+- ✅ Header nav progressive collapse with "More" dropdown
+- ✅ Sitemap page, XML sitemap, and Cmd+K search fully updated
 - ✅ 74+ components with complete RTL/LTR support
 
 **Deliverables:**
@@ -168,7 +173,7 @@ Build the **go-to design system for bilingual (LTR/RTL) web applications**, star
 
 ## 🚧 Current Status: READY FOR PUBLIC LAUNCH! 🚀
 
-**Package Published:** [noorui-rtl v0.8.0 on npm](https://www.npmjs.com/package/noorui-rtl)
+**Package Published:** [noorui-rtl v0.8.2 on npm](https://www.npmjs.com/package/noorui-rtl)
 
 **Technical Pre-Launch:** ✅ **COMPLETE** (2025-12-02)
 - ✅ Repository public on GitHub
@@ -191,12 +196,14 @@ Build the **go-to design system for bilingual (LTR/RTL) web applications**, star
 **Blockers:**
 - None! All technical AND marketing assets complete ✅
 
-**Recent Wins (Feb 7, 2026):**
-- ✅ **Tailwind v4.1 migration** - CSS-first configuration with `@theme` blocks replacing `tailwind.config.ts`
-- ✅ **Custom themes system** - Extensible DesignSystemProvider, consumers can create custom themes
-- ✅ **`--color-*` refactoring** - Theme classes use proper `--color-*` and `--radius-*` scoping
-- ✅ **i18n improvements** - ~50 hardcoded English strings replaced with EN/AR translations
-- ✅ **NPM package updated** (noorui-rtl v0.8.0)
+**Recent Wins (Feb 9, 2026):**
+- ✅ **Icon migration** - lucide-react → @phosphor-icons/react (Duotone) across ~140 files
+- ✅ **Squircle corners** - `--corner-shape: squircle` CSS variable, progressive enhancement (Chrome 138+)
+- ✅ **CSS layer fix** - Base styles moved to `@layer base` so hover utilities work in Tailwind v4
+- ✅ **Header UX** - Removed redundant "Home" link, progressive collapse with "More" dropdown (lg→xl)
+- ✅ **Sitemap & search** - Visual sitemap page, XML sitemap, and Cmd+K search fully synced with all 69 pages
+- ✅ **Scroll offset** - `scroll-margin-top: 6rem` on anchor targets to clear fixed header
+- ✅ **NPM package updated** (noorui-rtl v0.8.2)
 - ✅ **74+ production-ready components**
 - ✅ **Complete documentation site** (noorui.com)
 - ✅ **Kitab Blog Starter** live at kitab.noorui.com - production example with 4 languages
@@ -266,8 +273,8 @@ Phase 4: Month 5+    ░░░░░░░░░░░░░░░░░░░�
 
 ---
 
-*Last Updated: 2026-02-07*
-*Next Review: 2026-02-14*
+*Last Updated: 2026-02-09*
+*Next Review: 2026-02-16*
 
 ---
 
@@ -297,7 +304,7 @@ Phase 4: Month 5+    ░░░░░░░░░░░░░░░░░░░�
    - Monitor npm download stats
    - Gather user feedback
    - Fix any reported issues quickly
-   - Plan v0.8.0 features based on feedback
+   - Plan v0.9.0 features based on feedback
 
 ---
 
@@ -500,7 +507,7 @@ toast({
 **Priority:** Medium-High (common pattern users expect from a UI library)
 
 **Status:** Pending
-**Target:** v0.8.0
+**Target:** v0.9.0
 
 ---
 
@@ -553,4 +560,4 @@ toast({
 **Priority:** Medium (improves component completeness)
 
 **Status:** Pending
-**Target:** v0.8.0
+**Target:** v0.9.0

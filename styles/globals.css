@@ -159,6 +159,7 @@
   --font-body: 'Inter', system-ui, sans-serif;
   --font-heading: 'Inter', system-ui, sans-serif;
   --font-rtl: 'IBM Plex Sans Arabic', sans-serif;
+  --corner-shape: squircle; /* Progressive enhancement: Chrome 138+, graceful fallback to standard border-radius */
 }
 
 .dark {
@@ -418,13 +419,16 @@ h1, h2, h3, h4, h5, h6 {
 
 /* ─── Base Styles ─────────────────────────────────────────────────────────── */
 
-* {
-  @apply border-border;
-}
+@layer base {
+  * {
+    @apply border-border;
+    corner-shape: var(--corner-shape);
+  }
 
-body {
-  @apply bg-background text-foreground;
-  font-feature-settings: 'rlig' 1, 'calt' 1;
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: 'rlig' 1, 'calt' 1;
+  }
 }
 
 /* Accessibility: Respect motion preferences */
@@ -437,6 +441,11 @@ body {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* Anchor scroll offset (clears fixed header) */
+[id] {
+  scroll-margin-top: 6rem;
 }
 
 /* Focus visible styles */

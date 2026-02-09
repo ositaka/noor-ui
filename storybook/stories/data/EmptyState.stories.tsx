@@ -5,7 +5,7 @@ import { Button } from '../../../components/ui/button';
 import { Card } from '../../../components/ui/card';
 import {
   FileText,
-  Inbox,
+  Tray,
   MagnifyingGlass,
   Users,
   Plus,
@@ -166,8 +166,8 @@ export const WithoutAction: Story = {
   render: () => (
     <Card className="p-8 w-[500px]">
       <EmptyState
-        icon={<Inbox />}
-        title="Inbox is empty"
+        icon={<Tray />}
+        title="Tray is empty"
         description="You're all caught up! No new messages."
       />
     </Card>
@@ -194,7 +194,7 @@ export const WithoutAction: Story = {
     });
 
     await step('Displays title and description', async () => {
-      await expect(canvas.getByText('Inbox is empty')).toBeInTheDocument();
+      await expect(canvas.getByText('Tray is empty')).toBeInTheDocument();
       await expect(canvas.getByText("You're all caught up! No new messages.")).toBeInTheDocument();
     });
 
@@ -467,7 +467,7 @@ export const RTLWithoutAction: Story = {
   render: () => (
     <Card className="p-8 w-[500px]">
       <EmptyState
-        icon={<Inbox />}
+        icon={<Tray />}
         title="البريد الوارد فارغ"
         description="أنت على اطلاع! لا توجد رسائل جديدة."
       />

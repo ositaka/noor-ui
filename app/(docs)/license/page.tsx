@@ -5,7 +5,7 @@ import { Badge } from '@/components/ui/badge'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
 import { useDirection } from '@/components/providers/direction-provider'
-import { content } from '@/lib/i18n'
+import { content } from '@/lib/i18n' // TODO: migrate inline translations to i18n system
 import { CheckCircle, XCircle, ArrowSquareOut, FileText, Shield } from '@phosphor-icons/react'
 
 export default function LicensePage() {

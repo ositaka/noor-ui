@@ -50,7 +50,7 @@ This creates a `.tgz` file that you can install in a test project:
 
 ```bash
 # In your test project
-npm install /path/to/noorui-rtl-0.8.0.tgz
+npm install /path/to/noorui-rtl-0.8.2.tgz
 ```
 
 ### 3. Publish to npm
@@ -106,8 +106,8 @@ noorui-rtl/
 3. **Update documentation**: Update the main project README if needed
 4. **Tag the release**: Create a git tag for the version
    ```bash
-   git tag -a v0.8.0 -m "Release version 0.8.0"
-   git push origin v0.8.0
+   git tag -a v0.8.2 -m "Release version 0.8.2"
+   git push origin v0.8.2
    ```
 
 ## Common Issues

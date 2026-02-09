@@ -534,7 +534,7 @@ chore: Update search data with new components
 - ✅ Custom themes system with extensible DesignSystemProvider
 - ✅ `--color-*` variable refactoring for proper theme scoping
 - ✅ ~50 hardcoded English strings replaced with i18n translations (EN/AR)
-- ✅ Published noorui-rtl v0.8.0 to npm
+- ✅ Published noorui-rtl v0.8.2 to npm
 
 ---
 
