@@ -34,8 +34,10 @@ function findPageFiles(dir, fileList = []) {
     const filePath = path.join(dir, file);
     const stat = fs.statSync(filePath);
 
-    // Skip node_modules, .next, and other build directories
-    if (file === 'node_modules' || file === '.next' || file === '.git' || file === 'dist' || file === 'build') {
+    // Skip node_modules, .next, build directories, and directories where
+    // pages may not need i18n (e.g. example/starter pages with hardcoded content)
+    const skipDirs = ['node_modules', '.next', '.git', 'dist', 'build', 'examples', 'starters'];
+    if (skipDirs.includes(file)) {
       return;
     }
 

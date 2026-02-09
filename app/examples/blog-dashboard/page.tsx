@@ -1,7 +1,5 @@
 'use client'
 
-import { useDirection } from '@/components/providers/direction-provider'
-import { content } from '@/lib/i18n'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { ButtonArrow } from '@/components/ui/button-arrow'
