@@ -14,13 +14,13 @@ export default function SitemapPage() {
   // Component lists organized by category
   const componentsByCategory = {
     basic: [
-      'alert', 'avatar', 'badge', 'breadcrumb', 'button', 'button-arrow', 'card',
-      'checkbox', 'input', 'label', 'select', 'separator', 'slider',
+      'alert', 'avatar', 'badge', 'blockquote', 'breadcrumb', 'button', 'button-arrow',
+      'card', 'checkbox', 'input', 'kbd', 'label', 'select', 'separator', 'slider',
       'switch', 'textarea'
     ],
     forms: [
       'calendar', 'date-picker', 'file-upload', 'form', 'number-input',
-      'radio-group', 'rich-text-editor', 'time-picker'
+      'radio-group', 'range-slider', 'rich-text-editor', 'time-picker'
     ],
     data: [
       'accordion', 'collapsible', 'data-table', 'empty-state',
@@ -31,9 +31,12 @@ export default function SitemapPage() {
       'command', 'context-menu', 'dialog', 'dropdown-menu',
       'popover', 'sheet', 'toast', 'tooltip'
     ],
+    content: [
+      'callout', 'content-renderer', 'pull-quote'
+    ],
     advanced: [
       'dashboard-shell', 'notification-center', 'progress',
-      'skeleton', 'stepper', 'user-menu'
+      'reaction-picker', 'skeleton', 'stepper', 'user-badge', 'user-menu'
     ],
     gcc: [
       'arabic-number', 'hijri-date', 'prayer-times', 'zakat-calculator'
@@ -55,9 +58,20 @@ export default function SitemapPage() {
     { slug: 'workflow-basic', nameKey: 'workflowBasic' },
     { slug: 'ecommerce', nameKey: 'ecommerce' },
     { slug: 'marketplace', nameKey: 'marketplace' },
+    { slug: 'b2b-marketplace', nameKey: 'b2bMarketplace' },
     { slug: 'portfolio', nameKey: 'portfolio' },
     { slug: 'real-estate', nameKey: 'realEstate' },
     { slug: 'islamic-finance-dashboard', nameKey: 'islamicFinanceDashboard' },
+    { slug: 'gcc-dashboard', nameKey: 'gccDashboard' },
+    { slug: 'datatable-showcase', nameKey: 'datatableShowcase' },
+    { slug: 'accessible-inputs', nameKey: 'accessibleInputs' },
+    { slug: 'ai-chat-simple', nameKey: 'aiChatSimple' },
+    { slug: 'ai-playground', nameKey: 'aiPlayground' },
+    { slug: 'ai-code-assistant', nameKey: 'aiCodeAssistant' },
+    { slug: 'ai-document-qa', nameKey: 'aiDocumentQa' },
+    { slug: 'ai-multi-agent', nameKey: 'aiMultiAgent' },
+    { slug: 'ai-workflow', nameKey: 'aiWorkflow' },
+    { slug: 'ai-agent-evals', nameKey: 'aiAgentEvals' },
   ];
 
   const resources = [
@@ -65,7 +79,9 @@ export default function SitemapPage() {
     { href: '/documentation', nameKey: 'documentation' },
     { href: 'https://storybook.noorui.com', nameKey: 'storybook', external: true },
     { href: '/rtl-guide', nameKey: 'rtlGuide' },
+    { href: '/utilities', nameKey: 'utilities' },
     { href: '/roadmap', nameKey: 'roadmap' },
+    { href: '/license', nameKey: 'license' },
     { href: '/starters', nameKey: 'starters' },
   ];
 
@@ -221,8 +237,7 @@ export default function SitemapPage() {
           {t.sitemap.sections.components}
         </h2>
         <p className="text-muted-foreground mb-8">
-          All 65 components organized by category. Each component includes live examples,
-          full documentation, accessibility guidelines, and bilingual support.
+          {t.sitemap.componentsDescription}
         </p>
       </div>
 
@@ -301,6 +316,24 @@ export default function SitemapPage() {
           </div>
         </Card>
 
+        {/* Content */}
+        <Card className="p-6">
+          <h3 className="text-xl font-bold mb-4 text-primary">
+            {t.sitemap.componentCategories.content}
+          </h3>
+          <div className="grid grid-cols-2 gap-2">
+            {componentsByCategory.content.map((slug) => (
+              <Link
+                key={slug}
+                href={`/components/${slug}`}
+                className="text-sm text-primary hover:underline"
+              >
+                {getComponentName(slug)}
+              </Link>
+            ))}
+          </div>
+        </Card>
+
         {/* Advanced Components */}
         <Card className="p-6">
           <h3 className="text-xl font-bold mb-4 text-primary">
@@ -343,8 +376,7 @@ export default function SitemapPage() {
             {t.sitemap.componentCategories.experimental}
           </h3>
           <p className="text-sm text-muted-foreground mb-4">
-            10 experimental components designed for AI/LLM interfaces, chat applications,
-            and workflow builders.
+            {t.sitemap.experimentalDescription}
           </p>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
             {componentsByCategory.experimental.map((slug) => (
