@@ -18,4 +18,83 @@
   code, pre, kbd {
     font-family: 'JetBrains Mono', 'Courier New', monospace;
   }
+
+  /* ── MDX docs prose styles ──
+     Overrides Tailwind's @layer base preflight for native markdown elements.
+     These only affect elements not already styled by Tailwind utility classes. */
+
+  /* Inline code (both in MDX markdown and inside JSX components) */
+  :not(pre) > code {
+    background: hsl(var(--muted, 210 40% 96.1%));
+    color: hsl(var(--foreground, 222.2 84% 4.9%));
+    padding: 0.15em 0.4em;
+    border-radius: 0.25rem;
+    font-size: 0.875em;
+    border: 1px solid hsl(var(--border, 214.3 31.8% 91.4%));
+  }
+
+  /* Tables */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.25rem 0;
+    font-size: 0.875rem;
+    border: 1px solid hsl(var(--border, 214.3 31.8% 91.4%));
+    border-radius: 0.5rem;
+    overflow: hidden;
+  }
+
+  th, td {
+    border: 1px solid hsl(var(--border, 214.3 31.8% 91.4%));
+    padding: 0.5rem 0.75rem;
+    text-align: start;
+  }
+
+  th {
+    background: hsl(var(--muted, 210 40% 96.1%) / 0.5);
+    font-weight: 600;
+    color: hsl(var(--foreground, 222.2 84% 4.9%));
+  }
+
+  tbody tr:nth-child(even) {
+    background: hsl(var(--muted, 210 40% 96.1%) / 0.2);
+  }
+
+  /* Horizontal rules */
+  hr {
+    border: none;
+    border-top: 1px solid hsl(var(--border, 214.3 31.8% 91.4%));
+    margin: 2rem 0;
+  }
+
+  /* Blockquotes */
+  blockquote {
+    border-inline-start: 3px solid hsl(var(--border, 214.3 31.8% 91.4%));
+    padding-inline-start: 1rem;
+    margin: 1rem 0;
+    color: hsl(var(--muted-foreground, 215.4 16.3% 46.9%));
+  }
+
+  /* Task list checkbox items */
+  .sbdocs li input[type="checkbox"],
+  li > input[type="checkbox"] {
+    margin-inline-end: 0.5rem;
+    accent-color: hsl(var(--primary, 239 84% 67%));
+  }
+
+  /* Heading spacing — ensure breathing room above headings after content */
+  .sbdocs h2 {
+    margin-top: 2.5rem;
+  }
+
+  .sbdocs h3 {
+    margin-top: 2rem;
+  }
+
+  /* Remove Source's own wrapper styling when inside CodeBlock */
+  .my-4 > .docblock-source {
+    margin: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
 </style>

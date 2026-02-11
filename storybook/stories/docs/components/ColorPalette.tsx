@@ -38,7 +38,7 @@ function Swatch({ name, variable, value }: ColorSwatch) {
     <div className="group relative flex flex-col gap-1.5">
       <div
         className="h-16 w-full rounded-md border border-border shadow-sm"
-        style={{ backgroundColor: value.startsWith('hsl') ? value : `hsl(${value})` }}
+        style={{ backgroundColor: value }}
       />
       <CopyButton text={variable} />
       <div className="space-y-0.5">
@@ -50,34 +50,34 @@ function Swatch({ name, variable, value }: ColorSwatch) {
 }
 
 const SEMANTIC_COLORS = [
-  { name: 'Background', variable: '--background' },
-  { name: 'Foreground', variable: '--foreground' },
-  { name: 'Primary', variable: '--primary' },
-  { name: 'Primary FG', variable: '--primary-foreground' },
-  { name: 'Secondary', variable: '--secondary' },
-  { name: 'Secondary FG', variable: '--secondary-foreground' },
-  { name: 'Muted', variable: '--muted' },
-  { name: 'Muted FG', variable: '--muted-foreground' },
-  { name: 'Accent', variable: '--accent' },
-  { name: 'Accent FG', variable: '--accent-foreground' },
-  { name: 'Destructive', variable: '--destructive' },
-  { name: 'Destructive FG', variable: '--destructive-foreground' },
-  { name: 'Card', variable: '--card' },
-  { name: 'Card FG', variable: '--card-foreground' },
-  { name: 'Popover', variable: '--popover' },
-  { name: 'Popover FG', variable: '--popover-foreground' },
-  { name: 'Border', variable: '--border' },
-  { name: 'Input', variable: '--input' },
-  { name: 'Ring', variable: '--ring' },
+  { name: 'Background', variable: '--color-background' },
+  { name: 'Foreground', variable: '--color-foreground' },
+  { name: 'Primary', variable: '--color-primary' },
+  { name: 'Primary FG', variable: '--color-primary-foreground' },
+  { name: 'Secondary', variable: '--color-secondary' },
+  { name: 'Secondary FG', variable: '--color-secondary-foreground' },
+  { name: 'Muted', variable: '--color-muted' },
+  { name: 'Muted FG', variable: '--color-muted-foreground' },
+  { name: 'Accent', variable: '--color-accent' },
+  { name: 'Accent FG', variable: '--color-accent-foreground' },
+  { name: 'Destructive', variable: '--color-destructive' },
+  { name: 'Destructive FG', variable: '--color-destructive-foreground' },
+  { name: 'Card', variable: '--color-card' },
+  { name: 'Card FG', variable: '--color-card-foreground' },
+  { name: 'Popover', variable: '--color-popover' },
+  { name: 'Popover FG', variable: '--color-popover-foreground' },
+  { name: 'Border', variable: '--color-border' },
+  { name: 'Input', variable: '--color-input' },
+  { name: 'Ring', variable: '--color-ring' },
 ];
 
 const STATUS_COLORS = [
-  { name: 'Success', variable: '--success' },
-  { name: 'Success FG', variable: '--success-foreground' },
-  { name: 'Warning', variable: '--warning' },
-  { name: 'Warning FG', variable: '--warning-foreground' },
-  { name: 'Info', variable: '--info' },
-  { name: 'Info FG', variable: '--info-foreground' },
+  { name: 'Success', variable: '--color-success' },
+  { name: 'Success FG', variable: '--color-success-foreground' },
+  { name: 'Warning', variable: '--color-warning' },
+  { name: 'Warning FG', variable: '--color-warning-foreground' },
+  { name: 'Info', variable: '--color-info' },
+  { name: 'Info FG', variable: '--color-info-foreground' },
 ];
 
 export function ColorPalette() {
@@ -106,7 +106,7 @@ export function ColorPalette() {
     const observer = new MutationObserver(readColors);
     observer.observe(document.documentElement, {
       attributes: true,
-      attributeFilter: ['class', 'dir'],
+      attributeFilter: ['class', 'dir', 'style'],
     });
     return () => observer.disconnect();
   }, []);

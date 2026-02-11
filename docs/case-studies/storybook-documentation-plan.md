@@ -178,8 +178,18 @@ These React components render inside MDX pages to make documentation interactive
 
 ## Results
 
-- **27 MDX documentation pages** across 6 categories
+- **27 MDX documentation pages** initially created across 6 categories
 - **6 shared interactive React components** for documentation
-- **786 total Storybook entries** (27 doc pages + 749 component stories + 10 auto-generated)
 - Build compiles cleanly, TypeScript passes
 - All code examples use consumer-facing `from 'noorui-rtl'` imports
+
+### Consolidation (2026-02-11)
+
+Consolidated 27 pages down to **5 lean pages** under a single "Docs" sidebar category:
+- **Welcome** — Why this Storybook exists, key stats, one interactive demo
+- **Getting Started** — Install, CSS, providers, first component
+- **Colors** — Live interactive palette (uniquely valuable in Storybook)
+- **Theming** — 5 themes side-by-side + dark mode (Storybook's killer feature)
+- **RTL Development** — The 5 lessons + comprehensive checklist (NoorUI's USP)
+
+**Rationale:** noorui.com is the comprehensive documentation resource. Storybook should be lean -- just enough to orient someone, then let the 749 component stories do the talking. The 22 removed pages largely duplicated website content. Total entries: **764** (5 doc pages + 749 stories + 10 auto-generated).

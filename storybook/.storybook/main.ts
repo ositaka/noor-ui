@@ -2,6 +2,7 @@ import type { StorybookConfig } from '@storybook/nextjs-vite';
 import { createRequire } from 'module';
 import { dirname, join, resolve } from 'path';
 import { fileURLToPath } from 'url';
+import remarkGfm from 'remark-gfm';
 
 const require = createRequire(import.meta.url);
 
@@ -16,7 +17,16 @@ const config: StorybookConfig = {
   addons: [
     '@chromatic-com/storybook',
     '@storybook/addon-a11y',
-    '@storybook/addon-docs',
+    {
+      name: '@storybook/addon-docs',
+      options: {
+        mdxPluginOptions: {
+          mdxCompileOptions: {
+            remarkPlugins: [remarkGfm],
+          },
+        },
+      },
+    },
     '@storybook/addon-onboarding',
     '@storybook/addon-vitest'
   ],

@@ -16,7 +16,7 @@
 - **Phase 6**: Package Validation → ⏸️ Not Started
 - **Phase 7**: Deployment → ⏸️ Not Started
 - **Phase 8**: Advanced Features → ⏸️ Not Started
-- **Phase 9**: Documentation → ✅ **COMPLETED (27 MDX pages across 6 categories)**
+- **Phase 9**: Documentation → ✅ **COMPLETED (5 MDX pages under single Docs category)**
 
 ---
 
@@ -300,18 +300,17 @@ Each component should include 8-15 stories:
 
 ### Phase 9: Documentation ✅ **COMPLETED**
 
-27 MDX documentation pages across 6 categories, with 6 shared interactive React components:
+5 lean MDX documentation pages under a single "Docs" sidebar category (consolidated from 27 pages across 6 categories). noorui.com is the comprehensive resource; Storybook is the interactive playground.
 
-- [x] **Welcome** (3 pages) — Introduction, Why Design Systems, Design Principles
-- [x] **Getting Started** (3 pages) — Installation, Usage Guide, For Designers
-- [x] **Foundation** (7 pages) — Colors, Typography, Spacing & Layout, Shadows & Elevation, Border Radius, Motion & Animation, Icons
-- [x] **Theming** (4 pages) — Overview, Token Architecture, Dark Mode, Creating Custom Themes
-- [x] **Patterns** (5 pages) — RTL Development, Bidirectional Typography, Accessibility, Form Patterns, Composition
-- [x] **Architecture** (5 pages) — Technical Overview, Primitive-Agnostic Design, Internationalization, GCC-Specific Components, AI Components
+- [x] **Welcome** — Why this Storybook exists, key stats, one interactive demo
+- [x] **Getting Started** — Install, CSS, providers, first component
+- [x] **Colors** — Live interactive palette (reads CSS vars in real-time)
+- [x] **Theming** — 5 themes side-by-side comparison + dark mode
+- [x] **RTL Development** — The 5 lessons + comprehensive checklist
 
-Shared doc components: `ColorPalette`, `TokenTable`, `ThemeComparison`, `DirectionComparison`, `DesignDecision`, `CodeBlock`
+Shared doc components (6): `ColorPalette`, `TokenTable`, `ThemeComparison`, `DirectionComparison`, `DesignDecision`, `CodeBlock`
 
-All pages appear above component categories in the sidebar and use consumer-facing imports (`from 'noorui-rtl'`).
+All pages use `<Meta title="Docs/PageName" />` for a single sidebar category. Consumer-facing imports (`from 'noorui-rtl'`).
 
 **Completed:** 2026-02-11
 
@@ -396,8 +395,8 @@ Before marking a component story as "complete":
 
 **Last Updated**: 2026-02-11
 **Maintained By**: Development Team
-**Status**: ✅ **PHASE 9 COMPLETE** - Full documentation added!
-**Latest Change**: Added 27 MDX documentation pages across 6 categories (Welcome, Getting Started, Foundation, Theming, Patterns, Architecture) with 6 shared interactive components. Total: **786 Storybook entries** (74 components + 749 stories + 27 doc pages).
+**Status**: ✅ **PHASE 9 COMPLETE** - Lean documentation added!
+**Latest Change**: Consolidated 27 MDX pages into 5 lean pages under single "Docs" sidebar category (Welcome, Getting Started, Colors, Theming, RTL Development). Total: **764 Storybook entries** (74 components + 749 stories + 5 doc pages).
 
 ---
 
@@ -441,7 +440,7 @@ All component categories achieved 100% completion:
 
 ### ✅ Phase 9 Complete — Storybook Documentation (2026-02-11)
 
-Added 27 MDX documentation pages organized into 6 tiers (Welcome, Getting Started, Foundation, Theming, Patterns, Architecture) with 6 shared interactive React components. Documentation appears above component stories in the sidebar. Total Storybook entries: **786** (27 doc pages + 749 component stories + 10 auto-generated).
+Consolidated 27 MDX pages into 5 lean pages under a single "Docs" sidebar category (Welcome, Getting Started, Colors, Theming, RTL Development) with 6 shared interactive React components. noorui.com handles comprehensive docs; Storybook stays focused on interactive exploration. Total Storybook entries: **764** (5 doc pages + 749 component stories + 10 auto-generated).
 
 ### 📍 Quick Stats
 - **Storybook Version**: 10.1.10

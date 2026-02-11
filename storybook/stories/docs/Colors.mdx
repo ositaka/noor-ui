@@ -1,15 +1,14 @@
 import { Meta } from '@storybook/blocks';
-import { ColorPalette } from '../components/ColorPalette';
-import { TokenTable } from '../components/TokenTable';
-import { ThemeComparison } from '../components/ThemeComparison';
-import { DesignDecision } from '../components/DesignDecision';
-import { CodeBlock } from '../components/CodeBlock';
+import { ColorPalette } from './components/ColorPalette';
+import { TokenTable } from './components/TokenTable';
+import { DesignDecision } from './components/DesignDecision';
+import { CodeBlock } from './components/CodeBlock';
 
-<Meta title="Foundation/Colors" />
+<Meta title="Docs/Colors" />
 
 # Colors
 
-NoorUI's color system is built on CSS custom properties using raw HSL values. Every color in the palette is a semantic token that adapts automatically across five themes and two color modes (light and dark). Switch the theme and mode from the Storybook toolbar above to see the swatches update in real time.
+NoorUI's color system is built on CSS custom properties using raw HSL values. Every color in the palette is a semantic token that adapts automatically across four themes and two color modes (light and dark). Switch the theme and mode from the Storybook toolbar above to see the swatches update in real time.
 
 ---
 
@@ -65,25 +64,25 @@ The semantic palette defines the core visual language. Each token has a clear ro
 <TokenTable
   title="Core Semantic Tokens"
   tokens={[
-    { name: '--background', value: '220 13% 99%', description: 'Page background, base layer of the interface' },
-    { name: '--foreground', value: '222.2 84% 4.9%', description: 'Primary text color, highest contrast against background' },
-    { name: '--primary', value: '239 84% 67%', description: 'Brand color, primary actions and links' },
-    { name: '--primary-foreground', value: '210 40% 98%', description: 'Text on primary backgrounds' },
-    { name: '--secondary', value: '174 72% 56%', description: 'Secondary actions, complementary accent' },
-    { name: '--secondary-foreground', value: '174 100% 10%', description: 'Text on secondary backgrounds' },
-    { name: '--muted', value: '210 40% 96.1%', description: 'Subtle backgrounds, disabled states' },
-    { name: '--muted-foreground', value: '215.4 16.3% 46.9%', description: 'Secondary text, descriptions, captions' },
-    { name: '--accent', value: '210 40% 96.1%', description: 'Highlight backgrounds, hover states' },
-    { name: '--accent-foreground', value: '222.2 47.4% 11.2%', description: 'Text on accent backgrounds' },
-    { name: '--destructive', value: '0 84.2% 60.2%', description: 'Error states, delete actions, danger' },
-    { name: '--destructive-foreground', value: '210 40% 98%', description: 'Text on destructive backgrounds' },
-    { name: '--card', value: '0 0% 100%', description: 'Card surface, elevated content areas' },
-    { name: '--card-foreground', value: '222.2 84% 4.9%', description: 'Text on card surfaces' },
-    { name: '--popover', value: '0 0% 100%', description: 'Floating surfaces, dropdowns, tooltips' },
-    { name: '--popover-foreground', value: '222.2 84% 4.9%', description: 'Text on popover surfaces' },
-    { name: '--border', value: '214.3 31.8% 91.4%', description: 'Default border color for dividers and outlines' },
-    { name: '--input', value: '214.3 31.8% 91.4%', description: 'Input field borders' },
-    { name: '--ring', value: '239 84% 67%', description: 'Focus ring color, keyboard navigation indicator' },
+    { name: '--color-background', value: 'hsl(var(--background))', description: 'Page background, base layer of the interface' },
+    { name: '--color-foreground', value: 'hsl(var(--foreground))', description: 'Primary text color, highest contrast against background' },
+    { name: '--color-primary', value: 'hsl(var(--primary))', description: 'Brand color, primary actions and links' },
+    { name: '--color-primary-foreground', value: 'hsl(var(--primary-foreground))', description: 'Text on primary backgrounds' },
+    { name: '--color-secondary', value: 'hsl(var(--secondary))', description: 'Secondary actions, complementary accent' },
+    { name: '--color-secondary-foreground', value: 'hsl(var(--secondary-foreground))', description: 'Text on secondary backgrounds' },
+    { name: '--color-muted', value: 'hsl(var(--muted))', description: 'Subtle backgrounds, disabled states' },
+    { name: '--color-muted-foreground', value: 'hsl(var(--muted-foreground))', description: 'Secondary text, descriptions, captions' },
+    { name: '--color-accent', value: 'hsl(var(--accent))', description: 'Highlight backgrounds, hover states' },
+    { name: '--color-accent-foreground', value: 'hsl(var(--accent-foreground))', description: 'Text on accent backgrounds' },
+    { name: '--color-destructive', value: 'hsl(var(--destructive))', description: 'Error states, delete actions, danger' },
+    { name: '--color-destructive-foreground', value: 'hsl(var(--destructive-foreground))', description: 'Text on destructive backgrounds' },
+    { name: '--color-card', value: 'hsl(var(--card))', description: 'Card surface, elevated content areas' },
+    { name: '--color-card-foreground', value: 'hsl(var(--card-foreground))', description: 'Text on card surfaces' },
+    { name: '--color-popover', value: 'hsl(var(--popover))', description: 'Floating surfaces, dropdowns, tooltips' },
+    { name: '--color-popover-foreground', value: 'hsl(var(--popover-foreground))', description: 'Text on popover surfaces' },
+    { name: '--color-border', value: 'hsl(var(--border))', description: 'Default border color for dividers and outlines' },
+    { name: '--color-input', value: 'hsl(var(--input))', description: 'Input field borders' },
+    { name: '--color-ring', value: 'hsl(var(--ring))', description: 'Focus ring color, keyboard navigation indicator' },
   ]}
 />
 
@@ -96,12 +95,12 @@ Status colors communicate system states and feedback. Each includes a foreground
 <TokenTable
   title="Status Tokens"
   tokens={[
-    { name: '--success', value: '142 76% 36%', description: 'Positive outcomes, confirmations, completed actions' },
-    { name: '--success-foreground', value: '143 64% 24%', description: 'Text on or near success elements' },
-    { name: '--warning', value: '38 92% 50%', description: 'Caution states, non-critical alerts' },
-    { name: '--warning-foreground', value: '32 81% 29%', description: 'Text on or near warning elements' },
-    { name: '--info', value: '217 91% 60%', description: 'Informational messages, neutral notifications' },
-    { name: '--info-foreground', value: '224 76% 48%', description: 'Text on or near info elements' },
+    { name: '--color-success', value: 'hsl(var(--success))', description: 'Positive outcomes, confirmations, completed actions' },
+    { name: '--color-success-foreground', value: 'hsl(var(--success-foreground))', description: 'Text on or near success elements' },
+    { name: '--color-warning', value: 'hsl(var(--warning))', description: 'Caution states, non-critical alerts' },
+    { name: '--color-warning-foreground', value: 'hsl(var(--warning-foreground))', description: 'Text on or near warning elements' },
+    { name: '--color-info', value: 'hsl(var(--info))', description: 'Informational messages, neutral notifications' },
+    { name: '--color-info-foreground', value: 'hsl(var(--info-foreground))', description: 'Text on or near info elements' },
   ]}
 />
 
@@ -114,22 +113,20 @@ Each theme completely re-maps the color palette to create a distinct visual pers
 <TokenTable
   title="Primary Color per Theme"
   tokens={[
-    { name: 'Default', value: '239 84% 67%', description: 'Indigo blue -- clean and professional' },
-    { name: 'Minimal', value: '239 84% 67%', description: 'Same indigo, desaturated surroundings make it pop' },
-    { name: 'Futuristic', value: '270 80% 60%', description: 'Electric purple -- bold and sci-fi' },
-    { name: 'Cozy', value: '25 85% 55%', description: 'Warm orange -- inviting and friendly' },
-    { name: 'Artistic', value: '280 60% 50%', description: 'Deep purple -- creative and expressive' },
+    { name: 'Minimal', value: 'hsl(239 84% 67%)', description: 'Indigo blue -- clean and professional' },
+    { name: 'Futuristic', value: 'hsl(270 80% 60%)', description: 'Electric purple -- bold and sci-fi' },
+    { name: 'Cozy', value: 'hsl(25 85% 55%)', description: 'Warm orange -- inviting and friendly' },
+    { name: 'Artistic', value: 'hsl(280 60% 50%)', description: 'Deep purple -- creative and expressive' },
   ]}
 />
 
 <TokenTable
   title="Secondary Color per Theme"
   tokens={[
-    { name: 'Default', value: '174 72% 56%', description: 'Teal -- fresh and complementary' },
-    { name: 'Minimal', value: '0 0% 85%', description: 'Neutral gray -- ultra-understated' },
-    { name: 'Futuristic', value: '190 80% 50%', description: 'Bright cyan -- neon accent' },
-    { name: 'Cozy', value: '35 60% 60%', description: 'Golden amber -- warm harmony' },
-    { name: 'Artistic', value: '45 100% 50%', description: 'Vivid yellow -- high contrast pairing' },
+    { name: 'Minimal', value: 'hsl(0 0% 85%)', description: 'Neutral gray -- ultra-understated' },
+    { name: 'Futuristic', value: 'hsl(190 80% 50%)', description: 'Bright cyan -- neon accent' },
+    { name: 'Cozy', value: 'hsl(35 60% 60%)', description: 'Golden amber -- warm harmony' },
+    { name: 'Artistic', value: 'hsl(45 100% 50%)', description: 'Vivid yellow -- high contrast pairing' },
   ]}
 />
 
