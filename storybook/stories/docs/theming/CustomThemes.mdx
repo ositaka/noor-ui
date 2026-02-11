@@ -1,0 +1,348 @@
+import { Meta } from '@storybook/blocks';
+import { CodeBlock } from '../components/CodeBlock';
+import { DesignDecision } from '../components/DesignDecision';
+
+<Meta title="Theming/Creating Custom Themes" />
+
+# Creating Custom Themes
+
+NoorUI's theming system is designed to be extended. This guide walks through creating a 6th theme from scratch -- an "Ocean" theme with cool blue tones and a maritime feel. The same process applies to any custom theme you want to add.
+
+---
+
+## Step 1: Define Your CSS Variables
+
+Open `styles/globals.css` and add a new theme class. The easiest approach is to copy an existing theme block and modify its values. Each theme must override the `--color-*` properties that Tailwind's `@theme` block registered.
+
+<CodeBlock
+  filename="styles/globals.css"
+  language="css"
+  code={`/* ─── Ocean Theme ────────────────────────────────────────────────────────── */
+
+.theme-ocean {
+  /* Core surfaces */
+  --color-background: hsl(210 50% 98%);
+  --color-foreground: hsl(210 50% 10%);
+  --color-card: hsl(210 40% 100%);
+  --color-card-foreground: hsl(210 50% 10%);
+  --color-popover: hsl(210 40% 100%);
+  --color-popover-foreground: hsl(210 50% 10%);
+
+  /* Brand colors */
+  --color-primary: hsl(200 80% 50%);
+  --color-primary-foreground: hsl(0 0% 100%);
+  --color-secondary: hsl(180 60% 45%);
+  --color-secondary-foreground: hsl(0 0% 100%);
+
+  /* Neutral surfaces */
+  --color-muted: hsl(210 30% 94%);
+  --color-muted-foreground: hsl(210 15% 45%);
+  --color-accent: hsl(200 40% 92%);
+  --color-accent-foreground: hsl(210 50% 15%);
+
+  /* Feedback */
+  --color-destructive: hsl(0 70% 55%);
+  --color-destructive-foreground: hsl(0 0% 100%);
+
+  /* Chrome */
+  --color-border: hsl(210 30% 88%);
+  --color-input: hsl(210 30% 88%);
+  --color-ring: hsl(200 80% 50%);
+
+  /* Radius — medium rounding for a balanced feel */
+  --radius: 0.5rem;
+  --radius-lg: 0.5rem;
+  --radius-md: calc(0.5rem - 2px);
+  --radius-sm: calc(0.5rem - 4px);
+
+  /* Status colors */
+  --color-success: hsl(165 70% 35%);
+  --color-warning: hsl(35 85% 55%);
+  --color-info: hsl(200 80% 50%);
+
+  /* Typography */
+  --body-line-height: 1.6;
+  --body-letter-spacing: 0;
+  --heading-line-height: 1.3;
+  --heading-letter-spacing: -0.015em;
+  --heading-font-weight: 600;
+}`}
+/>
+
+Next, define the dark mode variant. Lighten backgrounds to dark blue-grays, lighten foregrounds, and adjust status colors for contrast on dark surfaces:
+
+<CodeBlock
+  filename="styles/globals.css — dark variant"
+  language="css"
+  code={`.theme-ocean.dark {
+  --color-background: hsl(210 40% 8%);
+  --color-foreground: hsl(210 20% 95%);
+  --color-card: hsl(210 35% 11%);
+  --color-card-foreground: hsl(210 20% 95%);
+  --color-popover: hsl(210 35% 11%);
+  --color-popover-foreground: hsl(210 20% 95%);
+
+  --color-primary: hsl(200 80% 55%);
+  --color-secondary: hsl(180 60% 50%);
+  --color-secondary-foreground: hsl(210 40% 8%);
+
+  --color-muted: hsl(210 25% 18%);
+  --color-muted-foreground: hsl(210 15% 65%);
+  --color-accent: hsl(200 30% 18%);
+  --color-accent-foreground: hsl(200 40% 90%);
+
+  --color-input: hsl(210 25% 22%);
+  --color-border: hsl(210 25% 22%);
+
+  --color-success: hsl(165 70% 50%);
+  --color-warning: hsl(35 85% 60%);
+  --color-info: hsl(200 80% 60%);
+}`}
+/>
+
+### What to Override
+
+At minimum, your theme class should override:
+
+- **All `--color-*` properties** registered in the `@theme` block (background, foreground, primary, secondary, muted, accent, destructive, card, popover, border, input, ring)
+- **Status colors** (success, warning, info) if your palette's hue changes
+- **`--radius`** and its variants (`--radius-lg`, `--radius-md`, `--radius-sm`)
+- **Typography variables** if you want a different typographic personality (`--heading-font-weight`, `--body-line-height`, `--heading-letter-spacing`, etc.)
+- Optionally **`--font-body`**, **`--font-heading`**, and **`--font-rtl`** if your theme uses different typefaces (like the Artistic theme uses Georgia)
+
+<DesignDecision title="Use hsl() in theme overrides, raw values in :root" type="warning">
+  <p>
+    {"Theme classes override --color-* properties directly (e.g., --color-primary: hsl(200 80% 50%)), not the raw Layer 1 variables (--primary). This is because the @theme block already registered --color-primary: hsl(var(--primary)) for the default theme. Named themes bypass this indirection by providing resolved hsl() values directly to the --color-* properties, giving them precedence. Always follow this pattern."}
+  </p>
+</DesignDecision>
+
+---
+
+## Step 2: Add to themeConfig
+
+Open `lib/tokens.ts` and add your theme's metadata to the `themeConfig` object. This metadata is used by theme pickers, documentation, and any bilingual UI:
+
+<CodeBlock
+  filename="lib/tokens.ts"
+  language="typescript"
+  code={`// Add 'ocean' to the BuiltInTheme union type
+export type BuiltInTheme = 'minimal' | 'futuristic' | 'cozy' | 'artistic' | 'ocean'
+
+// Add the ocean entry to themeConfig
+export const themeConfig: Record<BuiltInTheme, {
+  name: string
+  nameAr: string
+  description: string
+  descriptionAr: string
+  radius: string
+  features: string[]
+  featuresAr: string[]
+}> = {
+  // ... existing themes ...
+
+  ocean: {
+    name: 'Ocean',
+    nameAr: 'محيط',
+    description: 'Cool blues with a maritime feel',
+    descriptionAr: 'ألوان زرقاء باردة بطابع بحري',
+    radius: '0.5rem',
+    features: [
+      'Cool palette',
+      'Calm vibes',
+      'Professional',
+      'Nature-inspired'
+    ],
+    featuresAr: [
+      'لوحة باردة',
+      'أجواء هادئة',
+      'احترافي',
+      'مستوحى من الطبيعة'
+    ],
+  },
+}`}
+/>
+
+The `BuiltInTheme` type update ensures TypeScript consumers get autocomplete and type safety for your new theme. The bilingual metadata (`nameAr`, `descriptionAr`, `featuresAr`) is essential for NoorUI's RTL-first design -- theme pickers should display correctly in Arabic interfaces.
+
+---
+
+## Step 3: Register in Providers
+
+### Update the Storybook Toolbar
+
+Open `.storybook/preview.tsx` and add your theme to the toolbar items:
+
+<CodeBlock
+  filename=".storybook/preview.tsx — globalTypes.theme"
+  language="typescript"
+  code={`theme: {
+  description: 'Design theme',
+  defaultValue: 'minimal',
+  toolbar: {
+    title: 'Theme',
+    icon: 'paintbrush',
+    items: [
+      { value: 'minimal', title: 'Minimal' },
+      { value: 'futuristic', title: 'Futuristic' },
+      { value: 'cozy', title: 'Cozy' },
+      { value: 'artistic', title: 'Artistic' },
+      { value: 'ocean', title: 'Ocean' },       // <-- add this
+    ],
+    dynamicTitle: true,
+  },
+},`}
+/>
+
+### Update the Class Removal List
+
+In the same file, update the `applyThemeToDocument` function to include your new theme class in the removal list:
+
+<CodeBlock
+  filename=".storybook/preview.tsx — applyThemeToDocument"
+  language="typescript"
+  code={`function applyThemeToDocument(theme: string) {
+  if (typeof document === 'undefined') return;
+  const root = document.documentElement;
+  root.classList.remove(
+    'theme-minimal',
+    'theme-futuristic',
+    'theme-cozy',
+    'theme-artistic',
+    'theme-ocean'           // <-- add this
+  );
+  root.classList.add(\`theme-\${theme}\`);
+}`}
+/>
+
+### Update Any Application Theme Switcher
+
+If your application has its own theme switcher component (outside Storybook), add the new theme there as well. The `applyTheme()` function from `lib/tokens.ts` already handles arbitrary theme names, so it will work with `'ocean'` without modification -- it removes all `theme-*` classes dynamically:
+
+<CodeBlock
+  filename="lib/tokens.ts — applyTheme (no changes needed)"
+  language="typescript"
+  code={`export function applyTheme(theme: Theme, root: HTMLElement = document.documentElement) {
+  // This already handles any theme name dynamically
+  root.classList.forEach(cls => {
+    if (cls.startsWith('theme-')) root.classList.remove(cls)
+  })
+  root.classList.add(\`theme-\${theme}\`)
+}`}
+/>
+
+<DesignDecision title="Dynamic class removal is intentional" type="tip">
+  <p>
+    {"Notice that the applyTheme() function in lib/tokens.ts removes all theme-* classes dynamically using a prefix check, rather than maintaining a hardcoded list. This means adding a new theme to the application only requires the CSS and metadata -- the theme switching logic works automatically. The Storybook applyThemeToDocument uses a hardcoded list for clarity, but the production function is already future-proof."}
+  </p>
+</DesignDecision>
+
+---
+
+## Step 4: Test
+
+Testing a new theme is a multi-axis verification: you need to confirm it works across color modes (light/dark), text directions (LTR/RTL), and all component states. Here is a systematic approach:
+
+### 4a. Visual Smoke Test
+
+Start Storybook and select your new theme from the toolbar. Navigate through several component stories:
+
+- **Buttons** -- check all variants (primary, secondary, destructive, outline, ghost)
+- **Cards** -- verify card background/foreground contrast
+- **Forms** -- check input borders, focus rings, validation states
+- **Dialogs/Popovers** -- verify overlay backgrounds
+- **Badges and Alerts** -- check status color usage (success, warning, info)
+
+### 4b. Dark Mode
+
+Toggle to dark mode and repeat the smoke test. Pay special attention to:
+
+- **Contrast ratios** -- text should be clearly legible on all surfaces
+- **Border visibility** -- borders should be visible but not overpowering
+- **Status colors** -- success/warning/info should be lighter than their light-mode counterparts
+
+### 4c. RTL Layout
+
+Switch to RTL direction and verify:
+
+- **Font family** -- the RTL font (`--font-rtl`) renders correctly
+- **Letter spacing** -- Arabic text should have `letter-spacing: normal` (never the LTR tracking)
+- **Logical properties** -- padding, margin, and borders should flip correctly
+- **Icons** -- directional icons should mirror appropriately
+
+### 4d. WCAG Contrast
+
+Use the browser DevTools or an accessibility checker to verify WCAG AA compliance (4.5:1 for body text, 3:1 for large text) on these critical pairs:
+
+<CodeBlock
+  filename="Contrast pairs to verify"
+  language="text"
+  code={`background      ↔  foreground           (body text)
+card            ↔  card-foreground      (card content)
+primary         ↔  primary-foreground   (button labels)
+muted           ↔  muted-foreground     (secondary text)
+destructive     ↔  destructive-foreground (error buttons)
+
+Check both light and dark variants of each pair.`}
+/>
+
+---
+
+## Complete Checklist
+
+Here is a condensed checklist for adding a custom theme:
+
+1. **CSS variables** -- Add `.theme-yourname` and `.theme-yourname.dark` blocks in `globals.css`
+2. **TypeScript metadata** -- Add to `BuiltInTheme` union type and `themeConfig` in `lib/tokens.ts`
+3. **Storybook toolbar** -- Add to `globalTypes.theme.toolbar.items` in `preview.tsx`
+4. **Storybook class removal** -- Add to `applyThemeToDocument` removal list in `preview.tsx`
+5. **Application theme picker** -- Add to any production theme switcher UI
+6. **Visual testing** -- Verify all components in light/dark, LTR/RTL
+7. **Accessibility testing** -- Verify WCAG AA contrast ratios on all color pairs
+
+<DesignDecision title="Extensibility is an architectural feature, not an afterthought">
+  <p>
+    NoorUI's theming system was designed from the ground up to be extended. The CSS custom property
+    approach means adding a new theme is purely additive -- you add CSS and metadata, but you never
+    modify existing components. Every component already speaks the language of semantic tokens
+    (<code>bg-primary</code>, <code>text-foreground</code>, <code>border-border</code>). Your new
+    theme simply provides a different dictionary for those tokens. This is why you can add a theme
+    in under 30 minutes and have it work across all 74+ components, in both directions, in both
+    color modes, without touching a single component file.
+  </p>
+</DesignDecision>
+
+---
+
+## Advanced: Scoped Themes
+
+Themes can also be applied to individual sections of a page rather than the entire document. Because CSS custom properties inherit through the DOM tree, you can scope a theme to any container:
+
+<CodeBlock
+  filename="Scoped theme example"
+  language="tsx"
+  code={`// Apply a different theme to a specific section
+<div className="theme-cozy">
+  {/* Everything inside here uses Cozy theme tokens */}
+  <Card>
+    <CardHeader>
+      <CardTitle>Warm Section</CardTitle>
+    </CardHeader>
+    <CardContent>
+      This card uses Cozy's warm orange primary and rounded corners.
+    </CardContent>
+  </Card>
+</div>
+
+// The rest of the page uses whatever theme is on <html>
+<Card>
+  <CardContent>This card uses the global theme.</CardContent>
+</Card>`}
+/>
+
+This pattern is useful for marketing pages that embed product previews in different themes, or for dashboards where different panels might use different visual identities.
+
+<DesignDecision title="Scoped themes and the Tailwind @theme layer" type="warning">
+  <p>
+    {"Scoped themes work because named theme classes override --color-* properties directly with resolved hsl() values. However, non-color tokens like --radius and typography variables are inherited differently depending on how components reference them. For best results with scoped themes, ensure the scoped container also applies the bg-background text-foreground utilities to establish the correct surface colors within the scope."}
+  </p>
+</DesignDecision>

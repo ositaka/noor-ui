@@ -1,0 +1,354 @@
+import { Meta } from '@storybook/blocks';
+import { CodeBlock } from '../components/CodeBlock';
+import { DesignDecision } from '../components/DesignDecision';
+
+<Meta title="Patterns/Accessibility" />
+
+# Accessibility
+
+NoorUI targets **WCAG 2.1 AA** compliance across all components, themes, and direction modes. Accessibility is not a feature layer applied on top -- it is embedded in the component primitives, the color system, the animation model, and the focus management.
+
+---
+
+## Built on Radix UI Primitives
+
+Every interactive NoorUI component is built on [Radix UI](https://www.radix-ui.com/) headless primitives. Radix handles the complex, error-prone accessibility machinery that most teams get wrong when building from scratch:
+
+- **ARIA attributes**: `aria-expanded`, `aria-selected`, `aria-controls`, `aria-haspopup`, `aria-labelledby`, `role` -- all managed automatically based on component state
+- **Keyboard navigation**: Tab, Escape, Arrow keys, Enter, Space -- all wired up per WAI-ARIA Authoring Practices
+- **Focus management**: Focus moves into opened overlays, returns to the trigger on close, and traps within modals
+- **Screen reader announcements**: State changes are communicated to assistive technology without visual disruption
+
+NoorUI layers visual styling (via Tailwind and CVA) on top of these primitives without interfering with the accessibility behavior.
+
+<CodeBlock
+  language="tsx"
+  filename="Example: Dialog with built-in accessibility"
+  code={`import {
+  Dialog, DialogTrigger, DialogContent,
+  DialogHeader, DialogTitle, DialogDescription
+} from 'noorui-rtl';
+
+<Dialog>
+  {/* Trigger automatically gets aria-haspopup, aria-expanded */}
+  <DialogTrigger asChild>
+    <Button variant="outline">Edit Profile</Button>
+  </DialogTrigger>
+
+  {/* Content receives focus trap, Escape to close, aria-labelledby */}
+  <DialogContent>
+    <DialogHeader>
+      {/* DialogTitle is linked via aria-labelledby */}
+      <DialogTitle>Edit Profile</DialogTitle>
+      {/* DialogDescription is linked via aria-describedby */}
+      <DialogDescription>
+        Make changes to your profile here. Click save when you're done.
+      </DialogDescription>
+    </DialogHeader>
+    {/* ... form fields ... */}
+  </DialogContent>
+</Dialog>`}
+/>
+
+<DesignDecision title="Accessibility through primitives, not patches">
+  <p>
+    {"Building on Radix means accessibility is structural, not decorative. The ARIA roles, keyboard handlers, and focus management come from the primitive layer and cannot be accidentally removed by a styling change. This is fundamentally more reliable than adding aria-* attributes manually to styled <div> elements."}
+  </p>
+</DesignDecision>
+
+---
+
+## Focus-Visible Ring
+
+NoorUI uses a consistent focus indicator system across all interactive elements. The ring appears on **keyboard focus** (`focus-visible`) and is hidden on **mouse click**, following the principle that keyboard users need focus indicators while mouse users do not.
+
+<CodeBlock
+  language="css"
+  filename="styles/globals.css"
+  code={`/* Focus visible styles */
+*:focus-visible {
+  @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
+}
+
+/* Remove default focus outline */
+*:focus {
+  @apply outline-none;
+}`}
+/>
+
+This produces a 2px ring in the theme's `ring` color, with a 2px offset in the `background` color to ensure visibility against any background. The ring inherits the theme -- in the default theme it is indigo, in the cozy theme it is warm orange, in the futuristic theme it is purple.
+
+<DesignDecision title="The focus ring is a design token, not a hardcoded color">
+  <p>
+    The <code>--ring</code> CSS variable is defined per theme and per color mode (light/dark).
+    This ensures the focus indicator is always visible and on-brand. Never override the focus
+    ring with a fixed color -- use the <code>ring-ring</code> token so it adapts automatically.
+  </p>
+</DesignDecision>
+
+Individual components also have their own focus-visible styles that complement the global ring. Buttons include it in their CVA base class:
+
+<CodeBlock
+  language="tsx"
+  filename="Focus-visible in Button's CVA definition"
+  code={`const buttonVariants = cva(
+  'inline-flex items-center justify-center gap-2 whitespace-nowrap ' +
+  'rounded-md text-sm font-medium transition-colors ' +
+  'focus-visible:outline-none focus-visible:ring-2 ' +
+  'focus-visible:ring-ring focus-visible:ring-offset-2 ' +
+  'disabled:pointer-events-none disabled:opacity-50',
+  { /* variants... */ }
+)`}
+/>
+
+---
+
+## Color Contrast
+
+All NoorUI theme and mode combinations are designed to meet **WCAG AA** contrast requirements:
+
+- **Normal text** (below 18px or 14px bold): minimum 4.5:1 contrast ratio
+- **Large text** (18px+ or 14px+ bold): minimum 3:1 contrast ratio
+- **UI components and graphical objects**: minimum 3:1 contrast ratio
+
+This applies across all 5 themes (Default, Minimal, Futuristic, Cozy, Artistic) in both light and dark modes -- 10 total color schemes, each independently tested.
+
+The color system uses HSL-based semantic tokens, which means foreground/background pairs are always designed together:
+
+<CodeBlock
+  language="css"
+  filename="Paired foreground/background tokens"
+  code={`/* Every background color has a paired foreground */
+--primary: 239 84% 67%;
+--primary-foreground: 210 40% 98%;
+
+--destructive: 0 84.2% 60.2%;
+--destructive-foreground: 210 40% 98%;
+
+--muted: 210 40% 96.1%;
+--muted-foreground: 215.4 16.3% 46.9%;
+
+/* Status colors also have foreground pairs */
+--success: 142 76% 36%;
+--success-foreground: 143 64% 24%;`}
+/>
+
+<DesignDecision title="Semantic tokens guarantee contrast" type="tip">
+  <p>
+    Use semantic token pairs (<code>bg-primary text-primary-foreground</code>) rather than
+    mixing arbitrary colors. NoorUI's token pairs are pre-tested for AA contrast in every
+    theme and mode combination. If you use <code>bg-primary</code> with a color other than
+    <code>text-primary-foreground</code>, you are responsible for verifying contrast yourself.
+  </p>
+</DesignDecision>
+
+---
+
+## Reduced Motion Support
+
+NoorUI respects the `prefers-reduced-motion` media query globally. When a user has enabled reduced motion in their operating system, all animations and transitions are effectively disabled:
+
+<CodeBlock
+  language="css"
+  filename="styles/globals.css"
+  code={`@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}`}
+/>
+
+This approach uses `0.01ms` rather than `0ms` to ensure animation end-state callbacks still fire (some JavaScript animation libraries break when `animation-duration` is exactly zero). The `!important` declarations override any inline or component-level durations.
+
+What this affects:
+- **Accordion** open/close animations
+- **Dialog** fade-in/zoom-in entrance
+- **Sheet** slide-in from edge
+- **Dropdown** fade-in appearance
+- **Switch** thumb slide animation
+- **Loading spinners** (reduced to static state)
+- **Skeleton shimmer** effect
+- **Smooth scrolling** (reverts to instant jump)
+
+<DesignDecision title="Reduced motion is a global concern" type="warning">
+  <p>
+    Do not implement reduced motion on a per-component basis. The global rule in
+    <code>globals.css</code> covers everything universally. If you add a new animation,
+    it is automatically covered. This is the only reliable way to ensure no animation
+    slips through -- the wildcard selector catches everything, including third-party
+    components rendered within the NoorUI tree.
+  </p>
+</DesignDecision>
+
+---
+
+## Keyboard Patterns
+
+NoorUI follows WAI-ARIA Authoring Practices for keyboard interaction. All of these patterns come from Radix primitives and work identically in LTR and RTL.
+
+| Pattern | Keys | Components |
+|---|---|---|
+| **Activation** | `Enter`, `Space` | Button, Checkbox, Switch, Toggle, MenuItem |
+| **Dismissal** | `Escape` | Dialog, Sheet, Popover, DropdownMenu, CommandPalette |
+| **Navigation** | `Arrow Up/Down` | DropdownMenu, Select, CommandPalette, Accordion |
+| **Navigation** | `Arrow Left/Right` | Tabs, NavigationMenu, Menubar |
+| **Tab order** | `Tab`, `Shift+Tab` | All focusable elements |
+| **Type-ahead** | Character keys | Select, DropdownMenu (focus matching item) |
+| **Home/End** | `Home`, `End` | Select, Tabs (focus first/last item) |
+
+In RTL mode, the physical meaning of arrow keys adapts:
+- `Arrow Right` moves to the **previous** tab (toward the start, which is on the right)
+- `Arrow Left` moves to the **next** tab (toward the end, which is on the left)
+
+Radix handles this remapping automatically based on the `dir` attribute on the root element.
+
+---
+
+## Screen Reader Support
+
+Radix primitives provide comprehensive screen reader support through ARIA attributes that are managed automatically based on component state:
+
+<CodeBlock
+  language="tsx"
+  filename="ARIA attributes managed by Radix"
+  code={`{/* DropdownMenu: screen reader hears "Menu, Settings, expanded/collapsed" */}
+<DropdownMenu>
+  {/* Trigger gets: aria-haspopup="menu", aria-expanded={open} */}
+  <DropdownMenuTrigger>Settings</DropdownMenuTrigger>
+  {/* Content gets: role="menu" */}
+  <DropdownMenuContent>
+    {/* Items get: role="menuitem" */}
+    <DropdownMenuItem>Profile</DropdownMenuItem>
+    <DropdownMenuItem>Preferences</DropdownMenuItem>
+  </DropdownMenuContent>
+</DropdownMenu>
+
+{/* Select: screen reader hears "Country, combobox, Egypt selected" */}
+<Select>
+  {/* Trigger gets: role="combobox", aria-expanded, aria-controls */}
+  <SelectTrigger>
+    <SelectValue placeholder="Select country" />
+  </SelectTrigger>
+  {/* Content gets: role="listbox" */}
+  <SelectContent>
+    {/* Items get: role="option", aria-selected */}
+    <SelectItem value="eg">Egypt</SelectItem>
+    <SelectItem value="sa">Saudi Arabia</SelectItem>
+  </SelectContent>
+</Select>`}
+/>
+
+---
+
+## Focus Trap in Modals
+
+Dialog, Sheet, and the Command palette implement focus trapping: when the overlay is open, `Tab` and `Shift+Tab` cycle through focusable elements **within the overlay only**. Focus cannot escape to the page behind the overlay.
+
+This is critical for keyboard and screen reader users who would otherwise lose their place in the page when a modal opens. Radix implements this using:
+
+1. **Focus move**: When the overlay opens, focus moves to the first focusable element inside it
+2. **Focus trap**: Tab cycling is restricted to elements within the overlay
+3. **Focus restoration**: When the overlay closes, focus returns to the element that triggered it
+4. **Inert background**: The page content behind the overlay receives `aria-hidden="true"` so screen readers cannot navigate to it
+
+<CodeBlock
+  language="tsx"
+  filename="Focus behavior in Dialog"
+  code={`<Dialog>
+  <DialogTrigger asChild>
+    {/* 1. This button receives focus back when dialog closes */}
+    <Button>Open Settings</Button>
+  </DialogTrigger>
+
+  <DialogContent>
+    {/* 2. Focus moves here when dialog opens */}
+    <DialogHeader>
+      <DialogTitle>Settings</DialogTitle>
+    </DialogHeader>
+
+    {/* 3. Tab cycles through these elements only */}
+    <Input placeholder="Display name" />
+    <Input placeholder="Email" />
+
+    <div className="flex justify-end gap-2">
+      <Button variant="outline">Cancel</Button>
+      <Button>Save</Button>
+      {/* 4. Tab from here goes back to first focusable element */}
+    </div>
+  </DialogContent>
+</Dialog>`}
+/>
+
+---
+
+## The Accessibility Addon
+
+NoorUI's Storybook configuration includes the **@storybook/addon-a11y** addon, which runs [axe-core](https://github.com/dequelabs/axe-core) automated accessibility checks on every story. You can find the results in the **Accessibility** panel in the Addons tab at the bottom of any story page.
+
+The addon checks for:
+- Missing ARIA labels and roles
+- Color contrast violations
+- Missing form labels
+- Invalid heading hierarchy
+- Missing alt text on images
+- Duplicate IDs
+- Focus order issues
+
+These automated checks catch approximately 30-40% of accessibility issues. The remaining issues require manual testing with actual screen readers (VoiceOver on macOS, NVDA on Windows) and keyboard-only navigation.
+
+<DesignDecision title="Automated checks are necessary but not sufficient" type="tip">
+  <p>
+    The a11y addon is a first line of defense, not a complete audit. It cannot evaluate
+    the quality of ARIA labels, the logical flow of keyboard navigation, or whether the
+    component makes sense to a screen reader user in context. Use the addon to catch
+    regressions, but pair it with periodic manual testing using real assistive technology.
+  </p>
+</DesignDecision>
+
+---
+
+## RTL Accessibility
+
+Bidirectional interfaces add specific accessibility considerations beyond standard WCAG requirements:
+
+### Document Language
+
+The `lang` attribute must match the content language. NoorUI's `DirectionProvider` sets both `dir` and `lang` on the `<html>` element simultaneously:
+
+<CodeBlock
+  language="tsx"
+  filename="DirectionProvider sets lang + dir together"
+  code={`const setDirection = React.useCallback((newDirection: Direction) => {
+  setDirectionState(newDirection)
+  document.documentElement.dir = newDirection
+  const newLocale = newDirection === 'rtl' ? 'ar' : 'en'
+  setLocaleState(newLocale)
+  document.documentElement.lang = newLocale
+  localStorage.setItem(STORAGE_KEY, newLocale)
+}, [])`}
+/>
+
+This ensures screen readers use the correct pronunciation engine. Without the `lang` attribute, a screen reader might attempt to read Arabic text using English phonetic rules, producing gibberish.
+
+### Mixed-Language Content
+
+When a single page contains both Arabic and English, use the `lang` attribute on specific elements to help screen readers switch pronunciation:
+
+<CodeBlock
+  language="tsx"
+  filename="Language tagging for mixed content"
+  code={`<p dir="rtl" lang="ar">
+  هذا المكون مبني على
+  <span lang="en" dir="ltr">Radix UI</span>
+  لدعم إمكانية الوصول.
+</p>`}
+/>
+
+### Screen Reader Direction Announcement
+
+When the direction changes, screen readers should announce the new reading direction. NoorUI does not add explicit live region announcements for direction changes because the `dir` attribute change on `<html>` is sufficient -- screen readers detect this and adjust their reading order automatically.

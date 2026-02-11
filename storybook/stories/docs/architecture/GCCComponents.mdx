@@ -1,0 +1,196 @@
+import { Meta } from '@storybook/blocks';
+import { DesignDecision } from '../components/DesignDecision';
+import { CodeBlock } from '../components/CodeBlock';
+
+<Meta title="Architecture/GCC-Specific Components" />
+
+# GCC-Specific Components
+
+NoorUI includes a set of components designed specifically for Gulf Cooperation Council (GCC) markets. These go beyond text translation and RTL layout to address cultural practices, calendar systems, numeral systems, and religious obligations that are fundamental to daily life in the region.
+
+---
+
+## Why These Exist
+
+Most component libraries treat internationalization as a text problem: translate strings, flip the layout, done. But for GCC markets -- Saudi Arabia, UAE, Kuwait, Qatar, Bahrain, Oman -- true localization requires understanding how people interact with dates, numbers, time, and finance.
+
+A Saudi user expects to see Hijri calendar dates alongside Gregorian ones. An Emirati banking app needs Arabic-Indic numerals, not Western digits. A Kuwaiti user checking prayer times needs location-aware calculations, not a static schedule. These are not edge cases. They are baseline expectations.
+
+<DesignDecision title="Cultural awareness, not just RTL support">
+  <p>
+    NoorUI is not "shadcn with RTL". RTL layout is table stakes -- it is the minimum requirement for Arabic interfaces. NoorUI goes further by shipping culturally-aware components as first-class citizens. The GCC-specific components are not plugins or community add-ons. They are part of the core library, maintained to the same standard as Button and Dialog, with full bilingual support, theming, and accessibility.
+  </p>
+</DesignDecision>
+
+---
+
+## HijriDate
+
+Displays dates in the Hijri (Islamic) calendar, the primary calendar system used across the GCC for religious observances, government documents, and daily life.
+
+<CodeBlock
+  filename="HijriDate usage"
+  language="tsx"
+  code={`import { HijriDate } from 'noorui-rtl';
+
+// Basic Hijri date display
+<HijriDate />
+
+// With formatting options
+<HijriDate format="long" />
+
+// Dual calendar display (Hijri + Gregorian)
+<HijriDate showGregorian />
+
+// Custom date
+<HijriDate date={new Date('2024-03-11')} format="short" />`}
+/>
+
+**Key features:**
+- Locale-aware month names -- displays Arabic month names (محرم, صفر, ربيع الأول, ...) in RTL and English transliterations (Muharram, Safar, Rabi al-Awwal, ...) in LTR
+- Multiple format options: short (`1446/3/15`), medium (`15 Rabi al-Awwal 1446`), long (full written form)
+- Dual calendar mode shows both Hijri and Gregorian dates side by side, a common pattern in GCC applications
+- Accurate Hijri conversion using the Umm al-Qura calendar (the official calendar of Saudi Arabia)
+
+---
+
+## PrayerTimes
+
+Displays the five daily Islamic prayer times: Fajr, Dhuhr, Asr, Maghrib, and Isha. Prayer times are calculated based on geographic location and change daily throughout the year.
+
+<CodeBlock
+  filename="PrayerTimes usage"
+  language="tsx"
+  code={`import { PrayerTimes } from 'noorui-rtl';
+
+// Basic display with location
+<PrayerTimes
+  latitude={24.7136}
+  longitude={46.6753}
+  city="Riyadh"
+/>
+
+// With next-prayer highlight and countdown
+<PrayerTimes
+  latitude={25.2048}
+  longitude={55.2708}
+  city="Dubai"
+  showCountdown
+  highlightNext
+/>`}
+/>
+
+**Key features:**
+- Location-aware calculation using established astronomical algorithms
+- Highlights the next upcoming prayer with visual emphasis
+- Countdown timer showing time remaining until the next prayer
+- Fully bilingual prayer names (Fajr/الفجر, Dhuhr/الظهر, Asr/العصر, Maghrib/المغرب, Isha/العشاء)
+- Adapts to the active theme's color tokens and typography
+
+---
+
+## ArabicNumber
+
+Converts Western numerals (0-9) to Arabic-Indic numerals (٠-٩). This is not merely cosmetic -- Arabic-Indic numerals are the standard numeral system in many GCC countries and are expected in formal, financial, and government contexts.
+
+<CodeBlock
+  filename="ArabicNumber usage"
+  language="tsx"
+  code={`import { ArabicNumber } from 'noorui-rtl';
+
+// Basic numeral conversion
+<ArabicNumber value={1234} />
+// Renders: ١٢٣٤
+
+// Decimal support
+<ArabicNumber value={99.95} />
+// Renders: ٩٩٫٩٥ (note: Arabic decimal separator)
+
+// Percentage formatting
+<ArabicNumber value={85} format="percent" />
+// Renders: ٨٥٪
+
+// Currency formatting
+<ArabicNumber value={1500} format="currency" currency="SAR" />
+// Renders: ١٬٥٠٠ ر.س`}
+/>
+
+**Key features:**
+- Digit-by-digit conversion from Western (0123456789) to Arabic-Indic (٠١٢٣٤٥٦٧٨٩)
+- Handles decimal separators (Arabic uses ٫ instead of .)
+- Thousands separators with Arabic grouping (٬)
+- Percentage and currency formatting with proper Arabic suffixes
+- Falls back to Western numerals in LTR mode (configurable)
+
+---
+
+## ZakatCalculator
+
+An Islamic charitable giving calculator. Zakat is one of the Five Pillars of Islam -- an annual obligation to give 2.5% of qualifying wealth above the nisab (minimum threshold) to those in need.
+
+<CodeBlock
+  filename="ZakatCalculator usage"
+  language="tsx"
+  code={`import { ZakatCalculator } from 'noorui-rtl';
+
+// Full calculator with all asset types
+<ZakatCalculator />
+
+// With specific nisab standard
+<ZakatCalculator nisabStandard="gold" />
+
+// Pre-populated values
+<ZakatCalculator
+  initialValues={{
+    cash: 50000,
+    gold: 15000,
+    stocks: 25000,
+  }}
+/>`}
+/>
+
+**Key features:**
+- Calculates Zakat at 2.5% of qualifying wealth above the nisab threshold
+- Supports gold nisab (85g of gold) and silver nisab (595g of silver) standards
+- Multiple asset categories: cash and bank balances, gold and silver, stocks and investments, business inventory, rental income, debts owed to you
+- Deductions for debts and liabilities
+- Bilingual labels, descriptions, and results
+- Currency formatting with ArabicNumber integration
+- Educational tooltips explaining each field's Islamic jurisprudence basis
+
+---
+
+## Cultural Sensitivity
+
+These components demonstrate a broader principle: true internationalization is not a translation layer applied after the fact. It is a design philosophy that informs which components exist in the first place.
+
+Consider what a GCC-focused application needs that a typical Western component library does not provide:
+
+| Need | Western Default | GCC Requirement |
+|---|---|---|
+| **Calendar** | Gregorian only | Hijri primary, Gregorian secondary |
+| **Numerals** | Western (0-9) | Arabic-Indic (٠-٩) in formal contexts |
+| **Time** | 24h or 12h clock | Prayer times as a first-class concept |
+| **Finance** | Tax calculators | Zakat calculation with Islamic jurisprudence rules |
+| **Text direction** | LTR only | RTL primary, mixed-direction content |
+| **Typography** | Latin-optimized | Arabic script with proper kashida, tashkeel support |
+
+NoorUI addresses each of these at the component level, not through wrapper utilities or third-party plugins.
+
+---
+
+## Usage
+
+Each GCC-specific component is available in the **GCC-Specific** category in the Storybook sidebar. Browse their individual stories for:
+
+- Interactive examples with configurable props
+- LTR and RTL rendering side by side
+- Theme variations across all five themes
+- Accessibility annotations
+- Full prop documentation with TypeScript types
+
+<DesignDecision title="First-class, not afterthought" type="tip">
+  <p>
+    The GCC components are tested, themed, and documented to the same standard as every other NoorUI component. They participate in the same token system, respond to the same theme classes, and follow the same RTL-first development methodology. If your product serves GCC markets, these components save months of culturally-aware UI development.
+  </p>
+</DesignDecision>

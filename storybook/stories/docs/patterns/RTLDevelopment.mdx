@@ -1,0 +1,301 @@
+import { Meta } from '@storybook/blocks';
+import { CodeBlock } from '../components/CodeBlock';
+import { DesignDecision } from '../components/DesignDecision';
+import { DirectionComparison } from '../components/DirectionComparison';
+
+<Meta title="Patterns/RTL Development" />
+
+# RTL Development
+
+Five hard-won lessons from building NoorUI's bidirectional components, followed by a comprehensive checklist for auditing any component for RTL correctness.
+
+---
+
+## Lesson 1: Keyboard Shortcuts Don't Flip
+
+The Unicode Bidirectional (BiDi) algorithm examines each character in a text run and assigns it a directionality. Latin letters are strongly LTR; Arabic letters are strongly RTL. But symbols like `⌘`, `⇧`, and `K` are treated as neutral or weakly directional. When these characters appear inside an RTL context, the BiDi algorithm reorders them unpredictably.
+
+The result: a shortcut like `⌘K` can render as `K⌘` in RTL.
+
+<CodeBlock
+  language="tsx"
+  filename="Problem: BiDi reordering breaks shortcuts"
+  code={`{/* In an RTL context, this renders as "K⌘" */}
+<span>⌘K</span>`}
+/>
+
+The fix is to force a LTR directional context around the shortcut text. This tells the BiDi algorithm to treat the entire run as left-to-right, preserving the intended character order regardless of the surrounding direction.
+
+<CodeBlock
+  language="tsx"
+  filename="Solution: Force LTR on keyboard shortcuts"
+  code={`{/* Always renders as "⌘K", even in RTL */}
+<span dir="ltr">⌘K</span>`}
+/>
+
+NoorUI's `Kbd` component applies `dir="ltr"` directly on the `<kbd>` element:
+
+<CodeBlock
+  language="tsx"
+  filename="components/ui/kbd.tsx (excerpt)"
+  code={`export function Kbd({ keys = [], variant = 'default', size = 'sm', className, children, ...props }: KbdProps) {
+  // ...
+  return (
+    <kbd
+      dir="ltr"
+      className={cn(
+        'inline-flex items-center justify-center gap-1',
+        'font-medium font-mono',
+        'border rounded-md',
+        variantStyles[variant],
+        sizeStyles[size],
+        className
+      )}
+      {...props}
+    >
+      {displayKeys.map((key, index) => (
+        <span key={index} className="inline-flex items-center">
+          {getKeyDisplay(key)}
+        </span>
+      ))}
+    </kbd>
+  )
+}`}
+/>
+
+<DesignDecision title="BiDi-neutral characters need explicit direction">
+  <p>
+    Any text that contains symbols, punctuation, or a mix of scripts should be wrapped in an explicit directional
+    context. Keyboard shortcuts, math expressions, code snippets, and URLs all fall into this category.
+    Never rely on the BiDi algorithm to "figure it out" for non-prose content.
+  </p>
+</DesignDecision>
+
+---
+
+## Lesson 2: Positioning vs Direction Are Separate Concerns
+
+A keyboard shortcut in a dropdown menu needs two things simultaneously: end-aligned positioning (pushed to the trailing edge of the menu item) and LTR text order (symbols in the correct sequence). These are separate concerns that require separate solutions.
+
+<CodeBlock
+  language="tsx"
+  filename="The nested span technique"
+  code={`<div className="flex items-center">
+  <span>Search</span>
+  {/* Outer span: positioning via margin-inline-start auto */}
+  <span className="ms-auto text-muted-foreground">
+    {/* Inner span: text direction override */}
+    <span dir="ltr">⌘K</span>
+  </span>
+</div>`}
+/>
+
+The outer `<span>` uses `ms-auto` (margin-inline-start: auto) to push the shortcut to the end of the flex container. This is a layout concern and respects the document direction -- in LTR it pushes right, in RTL it pushes left. The inner `<span>` with `dir="ltr"` handles the text rendering order. Neither can do both jobs alone.
+
+<DesignDecision title="Separate layout from text direction" type="tip">
+  <p>
+    When a piece of text needs both directional positioning and a specific text order,
+    use nested elements. The outer element handles spatial placement with logical properties
+    (<code>ms-auto</code>, <code>ps-4</code>, <code>end-0</code>). The inner element handles
+    character ordering with <code>dir="ltr"</code> or <code>dir="rtl"</code>.
+  </p>
+</DesignDecision>
+
+---
+
+## Lesson 3: CSS Logical Properties Aren't Always Enough
+
+Setting `dir="ltr"` on an element creates a new directional context. Inside that context, CSS logical properties like `margin-inline-start` now resolve relative to LTR, not the page direction. This breaks the very thing logical properties are designed to do.
+
+<CodeBlock
+  language="tsx"
+  filename="The problem: dir='ltr' breaks logical properties"
+  code={`{/* This doesn't work as expected */}
+<span dir="ltr" className="ms-auto">
+  ⌘K
+</span>
+{/* ms-auto now resolves to margin-left: auto (LTR context),
+   which is wrong when the page is RTL -- it should be margin-right: auto */}`}
+/>
+
+There are two solutions. The first is the nested span technique from Lesson 2. The second is to use Tailwind's directional variants as a fallback:
+
+<CodeBlock
+  language="tsx"
+  filename="Fallback: Directional Tailwind variants"
+  code={`{/* Explicitly set physical margins based on document direction */}
+<span dir="ltr" className="ltr:ml-auto rtl:mr-auto">
+  ⌘K
+</span>`}
+/>
+
+<DesignDecision title="When logical properties fail, use directional variants" type="warning">
+  <p>
+    CSS logical properties are the preferred approach for bidirectional layouts. But the moment
+    you set <code>dir</code> on an element, you create a new directional context that overrides
+    logical property resolution. In these cases, fall back to Tailwind's <code>ltr:</code> and
+    <code>rtl:</code> variants, or restructure your markup to separate direction from positioning.
+  </p>
+</DesignDecision>
+
+---
+
+## Lesson 4: Transform Animations Need RTL Awareness
+
+CSS transforms operate in physical space, not logical space. `translateX(16px)` always moves an element 16 pixels to the right, regardless of the document direction. This means toggle switches, sliding panels, and any transform-based animation will move in the wrong direction in RTL unless explicitly handled.
+
+NoorUI's Switch component demonstrates the pattern:
+
+<CodeBlock
+  language="tsx"
+  filename="components/ui/switch.tsx"
+  code={`<SwitchPrimitives.Root
+  className={cn(
+    'peer inline-flex h-5 w-9 shrink-0 cursor-pointer items-center rounded-full',
+    'border-2 border-transparent shadow-sm transition-colors',
+    'data-[state=checked]:bg-primary data-[state=unchecked]:bg-input',
+    className
+  )}
+  {...props}
+  ref={ref}
+>
+  <SwitchPrimitives.Thumb
+    className={cn(
+      'pointer-events-none block h-4 w-4 rounded-full bg-background shadow-lg ring-0 transition-transform',
+      // LTR: checked moves right (+16px)
+      'data-[state=checked]:translate-x-4 data-[state=unchecked]:translate-x-0',
+      // RTL: checked moves left (-16px)
+      'rtl:data-[state=checked]:-translate-x-4 rtl:data-[state=unchecked]:translate-x-0'
+    )}
+  />
+</SwitchPrimitives.Root>`}
+/>
+
+The pattern is: for every `translate-x-{n}`, add `rtl:-translate-x-{n}`. This inverts the horizontal movement in RTL so the thumb slides toward the start of the track in both directions.
+
+<DesignDecision title="Every translateX needs an RTL counterpart">
+  <p>
+    {"Audit every CSS transform in your components. Any horizontal translation (translateX, translate-x-*) must be paired with an RTL-inverted version. Vertical translations (translateY) and scale transforms are direction-agnostic and do not need RTL handling."}
+  </p>
+</DesignDecision>
+
+---
+
+## Lesson 5: Icons Need Mirroring Rules
+
+Not all icons should flip in RTL. The rule is semantic: icons that indicate *direction* (arrows, chevrons, navigation cues) should mirror. Icons that represent *objects* or *concepts* (search, settings, heart) should not.
+
+NoorUI provides the `ButtonArrow` component for the most common case -- navigation arrows. It uses semantic directions (`forward`, `back`, `external`) rather than physical directions (`left`, `right`):
+
+<CodeBlock
+  language="tsx"
+  filename="ButtonArrow: Semantic directional arrows"
+  code={`// Forward button (right arrow in LTR, left arrow in RTL)
+<ButtonArrow direction="forward">Continue</ButtonArrow>
+
+// Back button (left arrow in LTR, right arrow in RTL)
+<ButtonArrow direction="back">Return to Blog</ButtonArrow>
+
+// External link (diagonal arrow, mirrored via scaleX in RTL)
+<ButtonArrow direction="external" asChild>
+  <a href="https://docs.example.com" target="_blank">
+    View Documentation
+  </a>
+</ButtonArrow>`}
+/>
+
+Internally, `ButtonArrow` applies `rtl:rotate-180` to directional icons and `rtl:scale-x-[-1]` to external link icons.
+
+For standalone directional icons outside of `ButtonArrow`, apply the mirroring manually:
+
+<CodeBlock
+  language="tsx"
+  filename="Manual icon mirroring"
+  code={`import { CaretRight, ArrowRight } from '@phosphor-icons/react';
+
+{/* Directional: mirror in RTL */}
+<CaretRight className="h-4 w-4 rtl:rotate-180" />
+<ArrowRight className="h-4 w-4 rtl:rotate-180" />
+
+{/* Non-directional: no mirroring needed */}
+<MagnifyingGlass className="h-4 w-4" />
+<Gear className="h-4 w-4" />
+<Heart className="h-4 w-4" />`}
+/>
+
+### Icon Mirroring Reference
+
+| Category | Examples | Mirror in RTL? |
+|---|---|---|
+| Navigation arrows | CaretRight, CaretLeft, ArrowRight, ArrowLeft | Yes -- `rtl:rotate-180` |
+| External links | ArrowUpRight | Yes -- `rtl:scale-x-[-1]` |
+| Text formatting | TextAlignLeft, TextAlignRight, TextIndent | Yes |
+| Undo / Redo | ArrowCounterClockwise, ArrowClockwise | Yes |
+| Media controls | Play, SkipForward, SkipBack | No (universal convention) |
+| Objects | MagnifyingGlass, Gear, Heart, Star, Bell | No |
+| Abstract symbols | Check, X, Plus, Minus | No |
+| Communication | Chat, Envelope, Phone | No |
+
+<DesignDecision title="Semantic direction, not physical direction" type="tip">
+  <p>
+    If you find yourself writing <code>isRTL ? ArrowLeft : ArrowRight</code>, you are solving the
+    problem at the wrong level. Use <code>ButtonArrow</code> or apply <code>rtl:rotate-180</code>
+    to a single icon component. The component always renders the same icon; CSS handles the mirroring.
+    This keeps your JSX direction-agnostic.
+  </p>
+</DesignDecision>
+
+---
+
+## RTL Component Checklist
+
+Use this checklist when building or auditing any component for bidirectional support.
+
+### Text and Content
+
+- [ ] All user-visible strings come from i18n, not hardcoded
+- [ ] Keyboard shortcuts wrapped in `dir="ltr"`
+- [ ] Code snippets and URLs wrapped in `dir="ltr"`
+- [ ] Number formatting uses `ArabicNumber` when in Arabic locale
+- [ ] `lang` attribute set on elements with language-specific content
+- [ ] Placeholder text supports both languages
+
+### Layout and Spacing
+
+- [ ] Uses logical properties: `ms-*`/`me-*` instead of `ml-*`/`mr-*`
+- [ ] Uses logical properties: `ps-*`/`pe-*` instead of `pl-*`/`pr-*`
+- [ ] Uses logical properties: `start-*`/`end-*` instead of `left-*`/`right-*`
+- [ ] Uses `text-start`/`text-end` instead of `text-left`/`text-right`
+- [ ] Uses `rounded-s-*`/`rounded-e-*` for directional border-radius
+- [ ] Uses `border-s-*`/`border-e-*` for directional borders
+- [ ] No hardcoded `left`/`right` in inline styles
+
+### Icons and Graphics
+
+- [ ] Directional icons use `rtl:rotate-180`
+- [ ] External link icons use `rtl:scale-x-[-1]`
+- [ ] Non-directional icons have no RTL transform
+- [ ] Navigation uses `ButtonArrow` with semantic direction
+- [ ] SVG paths with inherent directionality are mirrored
+
+### Interactions
+
+- [ ] Focus order follows visual order in both directions
+- [ ] Drag-and-drop respects direction (if applicable)
+- [ ] Swipe gestures reverse in RTL (if applicable)
+- [ ] Scroll indicators flip (horizontal scroll shadows)
+
+### Animations
+
+- [ ] `translateX` values have `rtl:-translate-x-*` counterpart
+- [ ] Slide-in/slide-out animations flip direction
+- [ ] Loading spinners are direction-agnostic (rotation is fine)
+- [ ] Progress bars fill from start to end (logical)
+
+### Special Cases
+
+- [ ] `dir="ltr"` elements don't break logical properties on ancestors
+- [ ] Nested directional contexts tested (LTR island in RTL page)
+- [ ] Third-party components (date pickers, maps) tested in RTL
+- [ ] Print styles respect direction
+- [ ] Responsive breakpoints tested in both directions

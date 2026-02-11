@@ -1,0 +1,503 @@
+import { Meta } from '@storybook/blocks';
+import { CodeBlock } from '../components/CodeBlock';
+import { DesignDecision } from '../components/DesignDecision';
+import { DirectionComparison } from '../components/DirectionComparison';
+
+<Meta title="Patterns/Form Patterns" />
+
+# Form Patterns
+
+Forms are where bidirectional complexity compounds: labels, inputs, validation messages, placeholders, and interactive controls all need to respond correctly to direction changes. This page covers the composition patterns for building forms with NoorUI.
+
+---
+
+## Basic Pattern: Label + Input + Error
+
+The fundamental form building block is a vertical stack of Label, Input, and an optional error message. NoorUI uses consistent `space-y-2` spacing between these elements.
+
+<CodeBlock
+  language="tsx"
+  filename="Basic form field composition"
+  code={`import { Label, Input } from 'noorui-rtl';
+
+<div className="space-y-2">
+  <Label htmlFor="email">Email address</Label>
+  <Input
+    id="email"
+    type="email"
+    placeholder="you@example.com"
+  />
+  {/* Error message, shown conditionally */}
+  <p className="text-sm text-destructive">
+    Please enter a valid email address.
+  </p>
+</div>`}
+/>
+
+This pattern works identically in LTR and RTL because:
+- `Label` uses `text-start` alignment (inherited from the `dir` attribute)
+- `Input` text-align follows the document direction automatically
+- The vertical stack (`space-y-2`) is direction-agnostic
+- The error message inherits `text-start` alignment
+
+<DirectionComparison>
+  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+    <label style={{ fontSize: '0.875rem', fontWeight: 500 }}>Email address</label>
+    <div style={{
+      height: '2.25rem',
+      width: '100%',
+      borderRadius: '0.375rem',
+      border: '1px solid var(--colors-border, #e5e7eb)',
+      padding: '0 0.75rem',
+      fontSize: '0.875rem',
+      display: 'flex',
+      alignItems: 'center',
+      color: 'var(--colors-muted-foreground, #6b7280)',
+      backgroundColor: 'transparent'
+    }}>
+      you@example.com
+    </div>
+    <p style={{ fontSize: '0.875rem', color: 'var(--colors-destructive, #ef4444)' }}>Please enter a valid email address.</p>
+  </div>
+</DirectionComparison>
+
+---
+
+## The Form Component
+
+NoorUI's `Form` component provides a lightweight form state management layer. It manages field values, validation, touch state, and submission in a way that composes cleanly with NoorUI form controls.
+
+<CodeBlock
+  language="tsx"
+  filename="Form component architecture"
+  code={`import {
+  Form, FormField, FormItem,
+  FormLabel, FormMessage, FormDescription,
+  validators, composeValidators,
+  Input
+} from 'noorui-rtl';
+
+<Form
+  initialValues={{ name: '', email: '', password: '' }}
+  validators={{
+    name: validators.required('Name is required'),
+    email: composeValidators(
+      validators.required('Email is required'),
+      validators.email('Please enter a valid email')
+    ),
+    password: composeValidators(
+      validators.required('Password is required'),
+      validators.minLength(8, 'Password must be at least 8 characters')
+    ),
+  }}
+  onSubmit={async (values) => {
+    await createAccount(values);
+  }}
+>
+  <FormField name="name">
+    {({ field, error, touched }) => (
+      <FormItem>
+        <FormLabel required>Full Name</FormLabel>
+        <Input
+          value={field.value}
+          onChange={(e) => field.onChange(e.target.value)}
+          onBlur={field.onBlur}
+        />
+        {touched && <FormMessage error={error} />}
+      </FormItem>
+    )}
+  </FormField>
+
+  <FormField name="email">
+    {({ field, error, touched }) => (
+      <FormItem>
+        <FormLabel required>Email</FormLabel>
+        <Input
+          type="email"
+          value={field.value}
+          onChange={(e) => field.onChange(e.target.value)}
+          onBlur={field.onBlur}
+        />
+        <FormDescription>We'll never share your email.</FormDescription>
+        {touched && <FormMessage error={error} />}
+      </FormItem>
+    )}
+  </FormField>
+
+  <FormField name="password">
+    {({ field, error, touched }) => (
+      <FormItem>
+        <FormLabel required>Password</FormLabel>
+        <Input
+          type="password"
+          value={field.value}
+          onChange={(e) => field.onChange(e.target.value)}
+          onBlur={field.onBlur}
+        />
+        {touched && <FormMessage error={error} />}
+      </FormItem>
+    )}
+  </FormField>
+
+  <Button type="submit">Create Account</Button>
+</Form>`}
+/>
+
+<DesignDecision title="Form architecture: render props over hooks">
+  <p>
+    NoorUI's <code>FormField</code> uses a render props pattern rather than a custom hook per field.
+    This keeps the form state centralized in the <code>Form</code> component's context while
+    giving each field full control over its rendering. The trade-off is slightly more verbose
+    JSX, but the benefit is that validation, touch tracking, and error display are all co-located
+    with the field that produces them.
+  </p>
+</DesignDecision>
+
+---
+
+## Validation Patterns
+
+NoorUI provides composable validator functions that can be chained together with `composeValidators`. Each validator returns `undefined` on success or an error message string on failure.
+
+<CodeBlock
+  language="tsx"
+  filename="Built-in validators"
+  code={`import { validators, composeValidators } from 'noorui-rtl';
+
+// Single validator
+validators.required('This field is required')
+
+// Email validation
+validators.email('Please enter a valid email address')
+
+// Length constraints
+validators.minLength(8, 'Must be at least 8 characters')
+validators.maxLength(100, 'Must be no more than 100 characters')
+
+// Pattern matching
+validators.pattern(/^[A-Za-z]+$/, 'Only letters allowed')
+
+// Compose multiple validators (first error wins)
+composeValidators(
+  validators.required('Email is required'),
+  validators.email('Invalid email format'),
+  validators.maxLength(255, 'Email is too long')
+)`}
+/>
+
+### Bilingual Validation Messages
+
+For bilingual forms, pass the error message based on the current locale:
+
+<CodeBlock
+  language="tsx"
+  filename="Direction-aware validation"
+  code={`import { useDirection } from 'noorui-rtl';
+
+function RegistrationForm() {
+  const { locale } = useDirection();
+
+  const messages = {
+    en: {
+      nameRequired: 'Name is required',
+      emailRequired: 'Email is required',
+      emailInvalid: 'Please enter a valid email',
+    },
+    ar: {
+      nameRequired: 'الاسم مطلوب',
+      emailRequired: 'البريد الإلكتروني مطلوب',
+      emailInvalid: 'يرجى إدخال بريد إلكتروني صالح',
+    },
+  };
+
+  const t = messages[locale];
+
+  return (
+    <Form
+      initialValues={{ name: '', email: '' }}
+      validators={{
+        name: validators.required(t.nameRequired),
+        email: composeValidators(
+          validators.required(t.emailRequired),
+          validators.email(t.emailInvalid)
+        ),
+      }}
+      onSubmit={handleSubmit}
+    >
+      {/* ... fields ... */}
+    </Form>
+  );
+}`}
+/>
+
+---
+
+## Number Input with Arabic Numerals
+
+For numeric fields in Arabic contexts, use `ArabicNumber` for display and standard `Input` with `type="text"` for editing. The `inputMode="numeric"` attribute brings up a numeric keyboard on mobile without restricting input to only digits (which can block Arabic numeral entry on some devices).
+
+<CodeBlock
+  language="tsx"
+  filename="Numeric input pattern"
+  code={`import { Input, ArabicNumber, useDirection } from 'noorui-rtl';
+
+function PriceInput({ value, onChange }: { value: number; onChange: (n: number) => void }) {
+  const { locale } = useDirection();
+  const [editing, setEditing] = React.useState(false);
+  const [inputValue, setInputValue] = React.useState(String(value));
+
+  if (editing) {
+    return (
+      <Input
+        type="text"
+        inputMode="numeric"
+        value={inputValue}
+        onChange={(e) => setInputValue(e.target.value)}
+        onBlur={() => {
+          const parsed = parseFloat(inputValue);
+          if (!isNaN(parsed)) onChange(parsed);
+          setEditing(false);
+        }}
+        autoFocus
+      />
+    );
+  }
+
+  return (
+    <button
+      onClick={() => setEditing(true)}
+      className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm text-start"
+    >
+      <ArabicNumber value={value} format="currency" locale={locale} />
+    </button>
+  );
+}`}
+/>
+
+---
+
+## Select and RadioGroup
+
+Select and RadioGroup components provide accessible option selection with full keyboard navigation. Both are built on Radix primitives.
+
+<CodeBlock
+  language="tsx"
+  filename="Select with bilingual options"
+  code={`import {
+  Select, SelectTrigger, SelectValue,
+  SelectContent, SelectItem,
+  useDirection
+} from 'noorui-rtl';
+
+function CountrySelect() {
+  const { locale } = useDirection();
+
+  const countries = [
+    { value: 'sa', en: 'Saudi Arabia', ar: 'المملكة العربية السعودية' },
+    { value: 'ae', en: 'United Arab Emirates', ar: 'الإمارات العربية المتحدة' },
+    { value: 'eg', en: 'Egypt', ar: 'مصر' },
+    { value: 'jo', en: 'Jordan', ar: 'الأردن' },
+  ];
+
+  return (
+    <Select>
+      <SelectTrigger>
+        <SelectValue
+          placeholder={locale === 'ar' ? 'اختر الدولة' : 'Select country'}
+        />
+      </SelectTrigger>
+      <SelectContent>
+        {countries.map((country) => (
+          <SelectItem key={country.value} value={country.value}>
+            {locale === 'ar' ? country.ar : country.en}
+          </SelectItem>
+        ))}
+      </SelectContent>
+    </Select>
+  );
+}`}
+/>
+
+Keyboard navigation in Select:
+- **Arrow Down/Up**: Navigate between options
+- **Enter/Space**: Select the focused option
+- **Escape**: Close the dropdown, return focus to trigger
+- **Type-ahead**: Typing characters focuses the matching option
+
+---
+
+## Checkbox and Switch
+
+Checkboxes and switches are toggle controls with different semantic meanings. Use Checkbox for opt-in/opt-out decisions (terms of service, newsletter signup) and Switch for instant-effect toggles (dark mode, notifications).
+
+<CodeBlock
+  language="tsx"
+  filename="Checkbox and Switch patterns"
+  code={`import { Checkbox, Switch, Label } from 'noorui-rtl';
+
+{/* Checkbox: opt-in pattern */}
+<div className="flex items-start gap-3">
+  <Checkbox id="terms" />
+  <Label htmlFor="terms" className="text-sm leading-relaxed">
+    I agree to the terms of service and privacy policy
+  </Label>
+</div>
+
+{/* Switch: instant toggle pattern */}
+<div className="flex items-center justify-between">
+  <div className="space-y-0.5">
+    <Label htmlFor="notifications">Notifications</Label>
+    <p className="text-sm text-muted-foreground">
+      Receive email notifications for new messages
+    </p>
+  </div>
+  <Switch id="notifications" />
+</div>`}
+/>
+
+Both components use `gap` for spacing between the control and its label, which is direction-agnostic. The Switch also handles RTL transform animation (see the RTL Development page for details on how the thumb translation is inverted).
+
+<DesignDecision title="Checkbox vs Switch: semantic distinction">
+  <p>
+    Use <strong>Checkbox</strong> when the user is making a decision that will take effect on form submission
+    (consent, preferences, multi-select). Use <strong>Switch</strong> when toggling produces an immediate effect
+    (enabling a feature, changing a mode). This distinction is important for screen reader users, who
+    hear different roles (<code>role="checkbox"</code> vs <code>role="switch"</code>) and have different
+    expectations about when the change takes effect.
+  </p>
+</DesignDecision>
+
+---
+
+## Form Layout
+
+NoorUI forms follow a consistent vertical stacking pattern with `space-y-4` between field groups and `space-y-6` for the overall form. This creates visual rhythm without requiring explicit margin calculations.
+
+<CodeBlock
+  language="tsx"
+  filename="Complete form layout"
+  code={`<Form
+  initialValues={{ name: '', email: '', role: '', bio: '' }}
+  validators={{ /* ... */ }}
+  onSubmit={handleSubmit}
+>
+  {/* Form-level spacing */}
+  <div className="space-y-4">
+    {/* Section with related fields */}
+    <div className="space-y-4">
+      <h3 className="text-lg font-semibold">Personal Information</h3>
+
+      <div className="grid gap-4 sm:grid-cols-2">
+        <FormField name="firstName">
+          {({ field, error, touched }) => (
+            <FormItem>
+              <FormLabel required>First Name</FormLabel>
+              <Input
+                value={field.value}
+                onChange={(e) => field.onChange(e.target.value)}
+                onBlur={field.onBlur}
+              />
+              {touched && <FormMessage error={error} />}
+            </FormItem>
+          )}
+        </FormField>
+
+        <FormField name="lastName">
+          {({ field, error, touched }) => (
+            <FormItem>
+              <FormLabel required>Last Name</FormLabel>
+              <Input
+                value={field.value}
+                onChange={(e) => field.onChange(e.target.value)}
+                onBlur={field.onBlur}
+              />
+              {touched && <FormMessage error={error} />}
+            </FormItem>
+          )}
+        </FormField>
+      </div>
+
+      <FormField name="email">
+        {({ field, error, touched }) => (
+          <FormItem>
+            <FormLabel required>Email</FormLabel>
+            <Input
+              type="email"
+              value={field.value}
+              onChange={(e) => field.onChange(e.target.value)}
+              onBlur={field.onBlur}
+            />
+            {touched && <FormMessage error={error} />}
+          </FormItem>
+        )}
+      </FormField>
+    </div>
+
+    {/* Form actions */}
+    <div className="flex justify-end gap-2 pt-4 border-t border-border">
+      <Button variant="outline" type="button">Cancel</Button>
+      <Button type="submit">Save Changes</Button>
+    </div>
+  </div>
+</Form>`}
+/>
+
+---
+
+## RTL Form Considerations
+
+NoorUI forms work in RTL without any special handling, but there are a few nuances to be aware of:
+
+### Text Alignment
+
+Input text-align follows the document direction automatically. An `<input>` inside a `dir="rtl"` container aligns text to the right by default. This is the correct behavior for Arabic text entry.
+
+### Placeholder Text
+
+Placeholder text must match the form's active language. Use the `useDirection` hook to provide locale-aware placeholders:
+
+<CodeBlock
+  language="tsx"
+  filename="Locale-aware placeholders"
+  code={`import { useDirection } from 'noorui-rtl';
+
+const { locale } = useDirection();
+
+<Input
+  placeholder={locale === 'ar' ? 'أدخل بريدك الإلكتروني' : 'Enter your email'}
+/>`}
+/>
+
+### Validation Message Alignment
+
+Validation messages use `text-start` alignment through the `FormMessage` component, which automatically aligns to the right in RTL and to the left in LTR. The `text-destructive` color is direction-agnostic.
+
+### Required Field Indicator
+
+NoorUI's `FormLabel` places the required asterisk using `ms-1` (margin-inline-start), which positions it after the label text in both LTR and RTL:
+
+<CodeBlock
+  language="tsx"
+  filename="components/ui/form.tsx (FormLabel excerpt)"
+  code={`export const FormLabel = React.forwardRef</* ... */>(
+  ({ className, children, required, ...props }, ref) => {
+    return (
+      <Label ref={ref} className={cn(className)} {...props}>
+        {children}
+        {required && <span className="text-destructive ms-1">*</span>}
+      </Label>
+    );
+  }
+);`}
+/>
+
+In LTR, this renders as "Email *". In RTL, this renders as "* البريد الإلكتروني" -- the asterisk always appears at the end of the label text, following the reading direction.
+
+<DesignDecision title="Forms should be direction-transparent" type="tip">
+  <p>
+    If you find yourself writing <code>isRTL</code> checks in form logic, something is wrong.
+    NoorUI's form components use logical properties and inherit direction from the document.
+    The only locale-aware decisions should be string content (labels, placeholders, validation messages)
+    and number formatting. Layout, alignment, and spacing should be entirely automatic.
+  </p>
+</DesignDecision>

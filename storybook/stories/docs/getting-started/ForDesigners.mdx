@@ -1,0 +1,212 @@
+import { Meta } from '@storybook/blocks';
+import { DesignDecision } from '../components/DesignDecision';
+
+<Meta title="Getting Started/For Designers" />
+
+# For Designers
+
+This guide is written for designers who want to use NoorUI's Storybook as a living design reference. No coding experience is needed -- everything here is about navigating, exploring, and extracting design information from the Storybook interface.
+
+---
+
+## Navigating Storybook
+
+The Storybook sidebar on the left organizes everything into categories:
+
+- **Welcome** -- Overview of NoorUI and what it offers.
+- **Getting Started** -- Installation and usage guides (including the page you are reading now).
+- **Foundation** -- Core design primitives: colors, typography, spacing, and icons.
+- **Architecture** -- How the system is structured technically.
+- **Theming** -- Deep dives into the four available themes and how they work.
+- **Patterns** -- Common UI patterns and how to combine components.
+- **Components** -- Every individual component with interactive examples.
+
+Each category can be expanded to reveal its pages. Click any page to view it in the main canvas area.
+
+<DesignDecision title="Start with Foundation" type="tip">
+  <p>If you are exploring NoorUI for the first time, begin with the Foundation section. It covers the color palette, type scale, and spacing system -- the building blocks that every component is built from.</p>
+</DesignDecision>
+
+---
+
+## Toolbar Controls
+
+The Storybook toolbar at the top of the canvas gives you powerful controls to preview components under different conditions.
+
+### Direction Toggle (LTR / RTL)
+
+Switches the entire preview between left-to-right (English) and right-to-left (Arabic) layout. Use this to verify that any component or pattern looks correct in both directions. Every NoorUI component is designed to adapt automatically.
+
+### Theme Picker
+
+Switches between the four NoorUI design themes:
+
+- **Minimal** -- Clean and spacious, with subtle borders and maximum readability. Small border radius.
+- **Futuristic** -- Dark-mode optimized with gradient accents and glassmorphism. Medium border radius.
+- **Cozy** -- Warm tones, rounded corners, and soft shadows. Large border radius. Feels personal and approachable.
+- **Artistic** -- Typography-focused with elegant serif accents. Nearly square corners. Great for editorial and poetry layouts.
+
+Each theme changes colors, border radii, shadows, and typographic details while keeping the component structure identical.
+
+### Mode (Light / Dark)
+
+Toggles between light and dark color mode. Every theme supports both modes, so you can preview all eight combinations (four themes times two modes).
+
+### Locale (English / Arabic)
+
+Switches the displayed content language. This affects text content inside component examples, showing how labels, placeholders, and headings look in both English and Arabic.
+
+<DesignDecision title="Combine controls to test real scenarios" type="tip">
+  <p>Try setting the direction to RTL, the locale to Arabic, the theme to Cozy, and the mode to Dark. This gives you a realistic preview of how the interface looks for an Arabic-speaking user who prefers dark mode with the Cozy theme.</p>
+</DesignDecision>
+
+---
+
+## Finding Components
+
+There are two ways to locate a specific component:
+
+### Browse the Sidebar
+
+Expand the **Components** category in the sidebar to see the full list. Components are organized alphabetically. Click on any component name to see its documentation and interactive examples.
+
+### Use the Search Shortcut
+
+Press **Ctrl+K** (Windows/Linux) or **Cmd+K** (Mac) to open the quick search. Start typing a component name -- such as "Button", "Card", or "Badge" -- and select it from the results to jump directly to its page.
+
+---
+
+## Reading the Controls Panel
+
+When viewing a component story, look for the **Controls** panel at the bottom of the page (or in a side panel). This is where you interact with the component's properties.
+
+Each control corresponds to a component prop:
+
+- **Dropdowns** let you pick from a set of options (e.g., `variant`: primary, secondary, outline, ghost, link, destructive).
+- **Toggles** switch boolean props on and off (e.g., `loading`: true/false, `disabled`: true/false).
+- **Text fields** let you change string values (e.g., the button label or placeholder text).
+- **Number fields** let you adjust numeric values (e.g., size, count).
+
+Change any control and the component preview updates in real time. This is the fastest way to understand what a component can do and how it responds to different configurations.
+
+<DesignDecision title="Controls show you the component API" type="decision">
+  <p>Every control in the panel maps to an actual prop that developers use in code. When you find a configuration you like, you can communicate it precisely -- for example, "Use the Button component with variant set to outline and size set to lg."</p>
+</DesignDecision>
+
+---
+
+## Understanding Token Names
+
+NoorUI uses a semantic token system, where each color and style value has a meaningful name. Knowing these names helps you communicate design intent clearly.
+
+### Color Tokens
+
+| Token Name | What It Means | Typical Use |
+|---|---|---|
+| `primary` | The main brand color | Buttons, links, active states |
+| `primary-foreground` | Text color on primary backgrounds | Button labels |
+| `secondary` | A complementary accent color | Secondary buttons, tags |
+| `muted` | A subtle, low-contrast background | Card backgrounds, disabled areas |
+| `muted-foreground` | Secondary text color | Descriptions, helper text, timestamps |
+| `accent` | Highlight color for hover and focus | Hover states, selected items |
+| `destructive` | Danger/error actions | Delete buttons, error messages |
+| `background` | Page background | Main canvas |
+| `foreground` | Primary text color | Headings, body text |
+| `border` | Default border color | Card borders, dividers |
+| `card` | Card surface background | Card components |
+| `card-foreground` | Text on card surfaces | Card content |
+
+### Status Tokens
+
+| Token Name | What It Means |
+|---|---|
+| `success` | Positive outcomes -- confirmations, completed actions |
+| `warning` | Caution states -- approaching limits, important notices |
+| `info` | Informational -- tips, neutral status updates |
+
+### How Tokens Change Across Themes
+
+Each theme redefines these tokens with different HSL values. The token *name* stays the same, but its *value* changes. For example, `primary` might be indigo in the Minimal theme but warm orange in the Cozy theme. This means you always refer to `primary` in your specs, and the theme determines the actual color.
+
+---
+
+## Communicating Design Specs
+
+When handing off designs to developers, use NoorUI vocabulary to keep specifications precise and unambiguous.
+
+### Good spec language
+
+- "Use the **Card** component with the default variant."
+- "The heading uses `text-foreground` and the subtext uses `text-muted-foreground`."
+- "Apply the **Cozy** theme. The button should be `variant=primary` at `size=lg`."
+- "The badge uses `variant=outline` with `text-success` color."
+- "The form fields should have a `gap-4` between them."
+- "This section has `bg-muted` background with `p-6` padding."
+
+### What to include in specs
+
+1. **Component name** -- Always specify which NoorUI component to use.
+2. **Variant and size** -- These are the most common configuration props.
+3. **Theme** -- If the design targets a specific theme, name it.
+4. **Direction** -- Note if there are any direction-specific considerations.
+5. **State** -- Describe hover, active, disabled, and loading states if they differ from defaults.
+
+<DesignDecision title="Use component names, not visual descriptions" type="decision">
+  <p>Instead of saying "a rounded box with a shadow," say "a Card component." Instead of "a small colored label," say "a Badge with variant=secondary." This eliminates ambiguity and maps directly to the code implementation.</p>
+</DesignDecision>
+
+---
+
+## Extracting Design Values
+
+Sometimes you need the exact color value, font size, or spacing used by a component. Here is how to find these values using browser DevTools.
+
+### Step 1: Open DevTools
+
+Right-click on any component in the Storybook canvas and select **Inspect** (or press F12).
+
+### Step 2: Find Computed Styles
+
+In the **Elements** panel, select the element you want to inspect. The **Styles** pane on the right shows all applied CSS, including NoorUI's custom properties.
+
+### Step 3: Read CSS Custom Properties
+
+Look for values like:
+
+- `color: hsl(var(--primary))` -- The primary color, defined as an HSL value.
+- `border-radius: var(--radius)` -- The current theme's border radius.
+- `font-family: var(--font-sans)` -- The active font stack.
+
+### Step 4: Find the Resolved Values
+
+In the **Computed** tab of DevTools, you can see the final, resolved values:
+
+- The actual hex or RGB color that `hsl(var(--primary))` resolves to.
+- The pixel value that `var(--radius)` becomes.
+- The full font-family string.
+
+<DesignDecision title="Token values change with theme and mode" type="warning">
+  <p>Make sure you have the correct theme and light/dark mode active before extracting values. The same token -- like `--primary` -- resolves to different colors depending on the active theme and whether dark mode is enabled.</p>
+</DesignDecision>
+
+---
+
+## Quick Reference: Keyboard Shortcuts
+
+| Action | Shortcut |
+|---|---|
+| Search components | Ctrl+K / Cmd+K |
+| Toggle sidebar | S |
+| Toggle addons panel | A |
+| Toggle full screen | F |
+| Go to next story | Alt+Right |
+| Go to previous story | Alt+Left |
+
+---
+
+## Next Steps
+
+- **Explore Foundation** to understand the complete color palette and type scale.
+- **Browse Components** to see every available component and its variants.
+- **Check Theming** to see detailed comparisons of how each theme affects the system.
+- **Review Patterns** for guidance on composing components into common page layouts.

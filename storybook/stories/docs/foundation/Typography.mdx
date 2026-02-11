@@ -1,0 +1,194 @@
+import { Meta } from '@storybook/blocks';
+import { TokenTable } from '../components/TokenTable';
+import { DirectionComparison } from '../components/DirectionComparison';
+import { ThemeComparison } from '../components/ThemeComparison';
+import { DesignDecision } from '../components/DesignDecision';
+import { CodeBlock } from '../components/CodeBlock';
+
+<Meta title="Foundation/Typography" />
+
+# Typography
+
+NoorUI's type system is designed from the ground up for bilingual interfaces. It handles the fundamental differences between Latin and Arabic scripts through direction-aware font switching, automatic letter-spacing rules, and per-theme typographic tuning -- all driven by CSS custom properties.
+
+---
+
+## Font Stacks
+
+NoorUI uses four font families, each selected for a specific purpose:
+
+<TokenTable
+  title="Font Families"
+  tokens={[
+    { name: '--font-sans', value: "'Inter', system-ui, sans-serif", description: 'LTR body and heading text (default, minimal, futuristic, cozy themes)' },
+    { name: '--font-arabic', value: "'IBM Plex Sans Arabic', sans-serif", description: 'RTL body and heading text -- designed specifically for Arabic script' },
+    { name: '--font-mono', value: "'JetBrains Mono', monospace", description: 'Code blocks, inline code, technical content' },
+    { name: '--font-body (Artistic)', value: "Georgia, 'Times New Roman', serif", description: 'Artistic theme uses serif fonts for body and headings' },
+  ]}
+/>
+
+The Artistic theme overrides both `--font-body` and `--font-heading` to Georgia, and switches the RTL font to `'Noto Naskh Arabic', Georgia, serif` for a calligraphic feel.
+
+---
+
+## Direction-Aware Font Switching
+
+Fonts switch automatically based on the `dir` attribute on the document or any parent element. No JavaScript, no conditional logic -- pure CSS:
+
+<CodeBlock
+  filename="styles/globals.css"
+  language="css"
+  code={`[dir='ltr'] {
+  font-family: var(--font-body);
+  letter-spacing: var(--body-letter-spacing);
+}
+
+[dir='rtl'] {
+  font-family: var(--font-rtl);
+  letter-spacing: normal;
+}
+
+[dir='ltr'] :is(h1, h2, h3, h4, h5, h6) {
+  letter-spacing: var(--heading-letter-spacing);
+}`}
+/>
+
+When the `dir` attribute changes from `ltr` to `rtl`, the entire page switches from Inter to IBM Plex Sans Arabic (or from Georgia to Noto Naskh Arabic in the Artistic theme). This happens at the CSS level with zero JavaScript runtime cost.
+
+---
+
+## Letter-Spacing: The Critical RTL Rule
+
+<DesignDecision title="Why Letter-Spacing Is Stripped for RTL">
+  <p>
+    Arabic is a <strong>connected script</strong> -- letters within a word physically join to form ligatures. Adding letter-spacing to Arabic text breaks these connections, making words appear as disconnected fragments. This is the typographic equivalent of placing a space between every letter in English: "H e l l o". It renders the text visually incorrect and harder to read.
+  </p>
+  <p>
+    NoorUI enforces <code>letter-spacing: normal</code> for all RTL content, regardless of what the theme's <code>--body-letter-spacing</code> or <code>--heading-letter-spacing</code> tokens specify. This rule is absolute and cannot be overridden by theme configuration. It is one of the most important bidirectional typography rules in the system.
+  </p>
+</DesignDecision>
+
+<DirectionComparison>
+  <div>
+    <h3 style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: '0.5rem', letterSpacing: '-0.01em' }}>
+      Project Dashboard
+    </h3>
+    <p style={{ fontSize: '0.875rem', lineHeight: 1.6, opacity: 0.7 }}>
+      Manage your team's tasks and track progress across all active projects with real-time updates and collaborative tools.
+    </p>
+  </div>
+</DirectionComparison>
+
+Notice how the English text uses subtle negative letter-spacing on the heading for a tighter, modern feel, while the Arabic text uses its natural spacing that preserves connected letterforms.
+
+---
+
+## Type Scale
+
+NoorUI uses Tailwind CSS v4's built-in type scale. Each step includes a matched line-height for vertical rhythm:
+
+<TokenTable
+  title="Type Scale"
+  tokens={[
+    { name: 'text-xs', value: '0.75rem (12px)', description: 'Captions, labels, metadata', preview: <span style={{ fontSize: '0.75rem' }}>The quick brown fox</span> },
+    { name: 'text-sm', value: '0.875rem (14px)', description: 'Secondary text, descriptions', preview: <span style={{ fontSize: '0.875rem' }}>The quick brown fox</span> },
+    { name: 'text-base', value: '1rem (16px)', description: 'Body text, default size', preview: <span style={{ fontSize: '1rem' }}>The quick brown fox</span> },
+    { name: 'text-lg', value: '1.125rem (18px)', description: 'Lead paragraphs, emphasis', preview: <span style={{ fontSize: '1.125rem' }}>The quick brown fox</span> },
+    { name: 'text-xl', value: '1.25rem (20px)', description: 'Section headings (h4)', preview: <span style={{ fontSize: '1.25rem' }}>The quick brown fox</span> },
+    { name: 'text-2xl', value: '1.5rem (24px)', description: 'Sub-headings (h3)', preview: <span style={{ fontSize: '1.5rem' }}>The quick brown fox</span> },
+    { name: 'text-3xl', value: '1.875rem (30px)', description: 'Page headings (h2)', preview: <span style={{ fontSize: '1.875rem' }}>The quick brown fox</span> },
+    { name: 'text-4xl', value: '2.25rem (36px)', description: 'Page titles (h1)', preview: <span style={{ fontSize: '2.25rem' }}>The quick brown fox</span> },
+    { name: 'text-5xl', value: '3rem (48px)', description: 'Hero sections', preview: <span style={{ fontSize: '3rem', lineHeight: 1 }}>The quick brown fox</span> },
+    { name: 'text-6xl', value: '3.75rem (60px)', description: 'Display text', preview: <span style={{ fontSize: '3.75rem', lineHeight: 1 }}>Hero</span> },
+    { name: 'text-7xl', value: '4.5rem (72px)', description: 'Large display', preview: <span style={{ fontSize: '4.5rem', lineHeight: 1 }}>Hero</span> },
+    { name: 'text-8xl', value: '6rem (96px)', description: 'Extra-large display', preview: <span style={{ fontSize: '6rem', lineHeight: 1 }}>XL</span> },
+    { name: 'text-9xl', value: '8rem (128px)', description: 'Maximum display', preview: <span style={{ fontSize: '8rem', lineHeight: 1 }}>9</span> },
+  ]}
+/>
+
+---
+
+## Per-Theme Typography Tokens
+
+Each theme tunes typography through CSS custom properties. These affect heading weight, body line-height, and letter-spacing (LTR only):
+
+<TokenTable
+  title="Typography Tokens by Theme"
+  tokens={[
+    { name: 'Default --heading-font-weight', value: '700', description: 'Bold headings, strong visual hierarchy' },
+    { name: 'Default --body-line-height', value: '1.6', description: 'Comfortable reading rhythm' },
+    { name: 'Default --heading-letter-spacing', value: '-0.01em', description: 'Subtle tightening for polish' },
+    { name: 'Default --body-letter-spacing', value: '0', description: 'No adjustment to body text' },
+    { name: 'Minimal --heading-font-weight', value: '600', description: 'Semibold, quieter hierarchy' },
+    { name: 'Minimal --heading-letter-spacing', value: '-0.02em', description: 'Tighter tracking for clean aesthetic' },
+    { name: 'Futuristic --body-line-height', value: '1.5', description: 'Compact, data-dense layouts' },
+    { name: 'Futuristic --body-letter-spacing', value: '-0.01em', description: 'Tight tracking for tech feel' },
+    { name: 'Futuristic --heading-letter-spacing', value: '-0.025em', description: 'Very tight heading tracking' },
+    { name: 'Cozy --body-line-height', value: '1.7', description: 'Spacious, relaxed reading' },
+    { name: 'Cozy --heading-letter-spacing', value: '0', description: 'No letter-spacing adjustment' },
+    { name: 'Cozy --body-letter-spacing', value: '0.015em', description: 'Slightly loose for warmth' },
+    { name: 'Artistic --heading-font-weight', value: '400', description: 'Regular weight -- the serif typeface carries the presence' },
+    { name: 'Artistic --body-line-height', value: '1.8', description: 'Very spacious, editorial feel' },
+    { name: 'Artistic --heading-letter-spacing', value: '0.02em', description: 'Wide tracking for display elegance' },
+    { name: 'Artistic --body-letter-spacing', value: '0.01em', description: 'Subtle looseness for readability' },
+  ]}
+/>
+
+---
+
+## Artistic Theme: Serif Typography
+
+The Artistic theme stands apart by using serif fonts instead of sans-serif. This creates an editorial, print-inspired feel:
+
+<CodeBlock
+  filename="styles/globals.css"
+  language="css"
+  code={`.theme-artistic {
+  --font-body: Georgia, 'Times New Roman', serif;
+  --font-heading: Georgia, 'Times New Roman', serif;
+  --font-rtl: 'Noto Naskh Arabic', Georgia, serif;
+  --heading-font-weight: 400;
+  --body-line-height: 1.8;
+}`}
+/>
+
+<ThemeComparison columns={2}>
+  <div>
+    <h3 style={{ fontSize: '1.25rem', fontWeight: 'var(--heading-font-weight, 700)', lineHeight: 'var(--heading-line-height, 1.3)', marginBottom: '0.5rem' }}>
+      The Art of Design
+    </h3>
+    <p style={{ fontSize: '0.875rem', lineHeight: 'var(--body-line-height, 1.6)', opacity: 0.7 }}>
+      Great design is not just what it looks like. Great design is how it works across every language, every direction, and every context.
+    </p>
+  </div>
+</ThemeComparison>
+
+---
+
+## Bilingual Text in Action
+
+Here is how heading and body text render in both directions. The LTR side uses Inter with letter-spacing tokens applied. The RTL side uses IBM Plex Sans Arabic with letter-spacing forced to `normal`:
+
+<DirectionComparison>
+  <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+    <div>
+      <h2 style={{ fontSize: '1.5rem', fontWeight: 700, lineHeight: 1.3, marginBottom: '0.25rem' }}>
+        Welcome to NoorUI
+      </h2>
+      <p style={{ fontSize: '0.875rem', lineHeight: 1.6, opacity: 0.7 }}>
+        Build beautiful, accessible interfaces that work seamlessly in every direction. NoorUI handles the complexity so you can focus on your product.
+      </p>
+    </div>
+    <div style={{ padding: '0.75rem', borderRadius: '0.375rem', border: '1px solid var(--colors-border, #e5e7eb)' }}>
+      <code style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '0.8125rem' }}>
+        npm install noorui
+      </code>
+    </div>
+  </div>
+</DirectionComparison>
+
+<DesignDecision title="Monospace Stays Consistent" type="tip">
+  <p>
+    JetBrains Mono is used for code in both LTR and RTL contexts. Code is always displayed LTR (using the <code>dir="ltr"</code> attribute on code blocks) regardless of the page direction, because programming languages are written left-to-right. The <code>CodeBlock</code> component handles this automatically.
+  </p>
+</DesignDecision>

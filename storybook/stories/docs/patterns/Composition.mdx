@@ -1,0 +1,480 @@
+import { Meta } from '@storybook/blocks';
+import { CodeBlock } from '../components/CodeBlock';
+import { DesignDecision } from '../components/DesignDecision';
+
+<Meta title="Patterns/Composition" />
+
+# Composition
+
+NoorUI provides a set of architectural patterns for combining, extending, and customizing components. These patterns are the building blocks for constructing complex interfaces from simple, focused primitives.
+
+---
+
+## The `asChild` Pattern (Radix Slot)
+
+Radix UI's `Slot` component enables polymorphic rendering without wrapper elements. When you pass `asChild` to a NoorUI component, it does not render its default element (e.g., `<button>`). Instead, it merges its props, styles, event handlers, and ref onto the child element you provide.
+
+<CodeBlock
+  language="tsx"
+  filename="Button rendered as an anchor tag"
+  code={`import { Button } from 'noorui-rtl';
+import Link from 'next/link';
+
+{/* Without asChild: renders <button> wrapping <a> (invalid HTML) */}
+<Button>
+  <Link href="/dashboard">Go to Dashboard</Link>
+</Button>
+
+{/* With asChild: renders a single <a> with Button's styles and behavior */}
+<Button asChild>
+  <Link href="/dashboard">Go to Dashboard</Link>
+</Button>
+{/* Output: <a href="/dashboard" class="inline-flex items-center ...">Go to Dashboard</a> */}`}
+/>
+
+Under the hood, `Slot` uses `React.cloneElement` to merge the parent's `className`, `style`, event handlers (`onClick`, `onKeyDown`, etc.), and `ref` onto the child. The child's own props take precedence for conflicts, except for `className` and `style` which are merged.
+
+<CodeBlock
+  language="tsx"
+  filename="components/ui/button.tsx (asChild implementation)"
+  code={`const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ className, variant, size, loading, disabled, asChild = false, children, ...props }, ref) => {
+    // When asChild is true (and not loading), use Slot instead of 'button'
+    const Comp = asChild && !loading ? Slot : 'button'
+    return (
+      <Comp
+        className={cn(buttonVariants({ variant, size, className }))}
+        ref={ref}
+        disabled={disabled || loading}
+        {...props}
+      >
+        {children}
+      </Comp>
+    )
+  }
+)`}
+/>
+
+<DesignDecision title="asChild eliminates the wrapper element problem">
+  <p>
+    Before <code>asChild</code>, polymorphic components used an <code>as</code> prop
+    (<code>&lt;Button as="a" href="/"&gt;</code>) which required complex TypeScript generics
+    and broke down with framework-specific components like Next.js <code>Link</code>. The <code>asChild</code>
+    pattern is simpler: the component always declares what it <em>does</em> (Button behavior),
+    and the child declares what it <em>is</em> (an anchor, a Link, a div). No generics, no
+    type gymnastics, and it works with any React element.
+  </p>
+</DesignDecision>
+
+Common `asChild` use cases:
+
+<CodeBlock
+  language="tsx"
+  filename="Common asChild patterns"
+  code={`{/* Button as Next.js Link */}
+<Button asChild variant="outline">
+  <Link href="/settings">Settings</Link>
+</Button>
+
+{/* ButtonArrow as external anchor */}
+<ButtonArrow direction="external" asChild>
+  <a href="https://docs.noorui.dev" target="_blank" rel="noopener noreferrer">
+    Documentation
+  </a>
+</ButtonArrow>
+
+{/* DialogTrigger as custom component */}
+<DialogTrigger asChild>
+  <Button variant="destructive">Delete Account</Button>
+</DialogTrigger>
+
+{/* DropdownMenuTrigger as icon button */}
+<DropdownMenuTrigger asChild>
+  <Button variant="ghost" size="icon">
+    <DotsThree className="h-4 w-4" />
+  </Button>
+</DropdownMenuTrigger>`}
+/>
+
+---
+
+## CVA (Class Variance Authority)
+
+Class Variance Authority (CVA) is the pattern NoorUI uses to define component variants in a type-safe, composable way. Every component with visual variants (Button, Badge, Alert, Input) uses CVA to declare its variant matrix.
+
+<CodeBlock
+  language="tsx"
+  filename="Button's CVA definition"
+  code={`import { cva, type VariantProps } from 'class-variance-authority';
+
+const buttonVariants = cva(
+  // Base classes: always applied
+  'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
+  {
+    variants: {
+      // Visual style variants
+      variant: {
+        primary:
+          'bg-primary text-primary-foreground shadow hover:bg-primary/90',
+        secondary:
+          'bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80',
+        destructive:
+          'bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90',
+        outline:
+          'border border-input bg-background text-foreground shadow-sm hover:bg-accent hover:text-accent-foreground',
+        ghost:
+          'hover:bg-accent hover:text-accent-foreground',
+        link:
+          'text-primary underline-offset-4 hover:underline',
+      },
+      // Size variants
+      size: {
+        sm: 'h-8 rounded-md px-3 text-xs',
+        md: 'h-9 px-4 py-2',
+        lg: 'h-10 rounded-md px-8',
+        xl: 'h-11 rounded-md px-8 text-base',
+        icon: 'h-9 w-9',
+      },
+    },
+    // Defaults when variant/size are not specified
+    defaultVariants: {
+      variant: 'primary',
+      size: 'md',
+    },
+  }
+);
+
+// Extract type from CVA for props
+export interface ButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+    VariantProps<typeof buttonVariants> {
+  asChild?: boolean
+  loading?: boolean
+}`}
+/>
+
+<DesignDecision title="CVA makes variants exhaustive and type-safe">
+  <p>
+    CVA generates a TypeScript type from the variant definition. If you pass
+    <code>variant="primary"</code> to a Button, TypeScript validates that "primary" is
+    a defined variant. If you add a new variant to the CVA definition, TypeScript will
+    flag any switch statements or conditional logic that need updating. This compile-time
+    exhaustiveness check prevents the "added a variant but forgot to style it" class of bugs.
+  </p>
+</DesignDecision>
+
+The exported `buttonVariants` function can also be used independently to apply Button styles to non-Button elements:
+
+<CodeBlock
+  language="tsx"
+  filename="Using buttonVariants outside Button"
+  code={`import { buttonVariants } from 'noorui-rtl';
+import Link from 'next/link';
+
+{/* Apply button styling to a Next.js Link directly */}
+<Link href="/signup" className={buttonVariants({ variant: 'primary', size: 'lg' })}>
+  Sign Up Free
+</Link>`}
+/>
+
+---
+
+## The `cn()` Utility
+
+The `cn()` function is the most-used utility in NoorUI. It combines two libraries into a single call:
+
+1. **clsx**: Handles conditional class assembly (arrays, objects, falsy values)
+2. **tailwind-merge**: Resolves conflicting Tailwind classes (last wins)
+
+<CodeBlock
+  language="tsx"
+  filename="lib/utils.ts"
+  code={`import { type ClassValue, clsx } from 'clsx';
+import { twMerge } from 'tailwind-merge';
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}`}
+/>
+
+### Why Both Libraries?
+
+**clsx** alone handles conditional logic but does not understand Tailwind class conflicts:
+
+<CodeBlock
+  language="tsx"
+  filename="The problem clsx alone cannot solve"
+  code={`// clsx output: 'px-4 py-2 px-8'
+// Both px-4 AND px-8 are in the class list -- browser applies px-8
+// because it appears later in the CSS file, but this is fragile
+clsx('px-4 py-2', 'px-8')
+
+// tailwind-merge output: 'py-2 px-8'
+// px-4 is removed because px-8 is a conflicting override
+twMerge('px-4 py-2', 'px-8')
+
+// cn() gives you both: conditional logic AND conflict resolution
+cn('px-4 py-2', isLarge && 'px-8', className)
+// If isLarge is true and className includes 'px-6':
+// Result: 'py-2 px-6' (className's px-6 wins over both)`}
+/>
+
+This is critical for NoorUI's component API. Every component accepts a `className` prop that consumers use to override styles. Without `tailwind-merge`, a consumer passing `className="px-8"` would have both `px-4` (from the component) and `px-8` (from the consumer) in the final class list, with the winner depending on CSS source order -- an unreliable outcome.
+
+<DesignDecision title="cn() makes className overrides predictable">
+  <p>
+    The <code>cn()</code> utility ensures that when a consumer passes <code>className</code> to a NoorUI component,
+    their classes always win over the component's internal classes. This is not just about convenience -- it is
+    a contract. Consumers expect <code>&lt;Button className="px-8"&gt;</code> to have <code>px-8</code>
+    padding, not the Button's default <code>px-4</code>. Without <code>tailwind-merge</code>, this
+    contract would be violated whenever Tailwind's CSS ordering changed.
+  </p>
+</DesignDecision>
+
+---
+
+## Building Compound Components
+
+Real interfaces combine multiple NoorUI primitives into higher-level components. Here are two patterns from the NoorUI ecosystem.
+
+### Pattern: Notification Center
+
+A compound component that composes Popover, ScrollArea, Badge, and Button:
+
+<CodeBlock
+  language="tsx"
+  filename="Notification center compound component"
+  code={`import { Popover, PopoverTrigger, PopoverContent, ScrollArea, Badge, Button } from 'noorui-rtl';
+import { Bell } from '@phosphor-icons/react';
+
+interface Notification {
+  id: string;
+  title: string;
+  message: string;
+  read: boolean;
+  time: string;
+}
+
+function NotificationCenter({ notifications }: { notifications: Notification[] }) {
+  const unreadCount = notifications.filter(n => !n.read).length;
+
+  return (
+    <Popover>
+      <PopoverTrigger asChild>
+        <Button variant="ghost" size="icon" className="relative">
+          <Bell className="h-5 w-5" />
+          {unreadCount > 0 && (
+            <Badge
+              variant="destructive"
+              className="absolute -top-1 -end-1 h-5 w-5 rounded-full p-0 flex items-center justify-center text-[10px]"
+            >
+              {unreadCount}
+            </Badge>
+          )}
+        </Button>
+      </PopoverTrigger>
+
+      <PopoverContent className="w-80 p-0" align="end">
+        <div className="p-4 border-b border-border">
+          <h4 className="font-semibold text-sm">Notifications</h4>
+        </div>
+
+        <ScrollArea className="h-72">
+          {notifications.map(notification => (
+            <div
+              key={notification.id}
+              className={cn(
+                'p-4 border-b border-border last:border-b-0',
+                !notification.read && 'bg-accent/50'
+              )}
+            >
+              <p className="text-sm font-medium">{notification.title}</p>
+              <p className="text-xs text-muted-foreground mt-1">
+                {notification.message}
+              </p>
+              <p className="text-[10px] text-muted-foreground mt-2">
+                {notification.time}
+              </p>
+            </div>
+          ))}
+        </ScrollArea>
+      </PopoverContent>
+    </Popover>
+  );
+}`}
+/>
+
+Notice that `Badge` uses `-end-1` (not `-right-1`) for positioning, so the notification count badge appears on the correct side in both LTR and RTL.
+
+### Pattern: Dashboard Shell
+
+A layout component that composes Sidebar, Header, and the main content area:
+
+<CodeBlock
+  language="tsx"
+  filename="Dashboard shell layout"
+  code={`function DashboardShell({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="flex min-h-screen">
+      {/* Sidebar: fixed width, full height */}
+      <aside className="w-64 border-e border-border bg-card shrink-0">
+        <div className="p-4 border-b border-border">
+          <h2 className="font-semibold">NoorUI Dashboard</h2>
+        </div>
+        <nav className="p-2 space-y-1">
+          <NavItem icon={<House />} label="Home" active />
+          <NavItem icon={<ChartBar />} label="Analytics" />
+          <NavItem icon={<Users />} label="Team" />
+          <NavItem icon={<Gear />} label="Settings" />
+        </nav>
+      </aside>
+
+      {/* Main area: fills remaining space */}
+      <div className="flex-1 flex flex-col">
+        <header className="h-14 border-b border-border flex items-center px-6 justify-between">
+          <h1 className="text-lg font-semibold">Dashboard</h1>
+          <div className="flex items-center gap-2">
+            <NotificationCenter notifications={[]} />
+            <UserMenu />
+          </div>
+        </header>
+
+        <main className="flex-1 p-6">
+          {children}
+        </main>
+      </div>
+    </div>
+  );
+}`}
+/>
+
+The sidebar uses `border-e` (border-inline-end), which places the divider on the right side in LTR and the left side in RTL. The entire layout flips automatically without any RTL-specific code.
+
+---
+
+## Extending NoorUI Components
+
+Build domain-specific components on top of NoorUI primitives. This approach gives you the accessibility and bidirectional support of NoorUI while adding your business logic and visual customizations.
+
+<CodeBlock
+  language="tsx"
+  filename="ProductCard: A domain-specific component"
+  code={`import {
+  Card, CardHeader, CardTitle,
+  CardDescription, CardContent, CardFooter,
+  Badge, Button, ArabicNumber, useDirection
+} from 'noorui-rtl';
+
+interface Product {
+  name: string;
+  nameAr: string;
+  description: string;
+  descriptionAr: string;
+  price: number;
+  inStock: boolean;
+  category: string;
+}
+
+function ProductCard({ product }: { product: Product }) {
+  const { locale } = useDirection();
+
+  return (
+    <Card>
+      <CardHeader>
+        <div className="flex items-start justify-between">
+          <CardTitle>
+            {locale === 'ar' ? product.nameAr : product.name}
+          </CardTitle>
+          <Badge variant={product.inStock ? 'default' : 'secondary'}>
+            {product.inStock
+              ? (locale === 'ar' ? 'متوفر' : 'In Stock')
+              : (locale === 'ar' ? 'غير متوفر' : 'Out of Stock')}
+          </Badge>
+        </div>
+        <CardDescription>
+          {locale === 'ar' ? product.descriptionAr : product.description}
+        </CardDescription>
+      </CardHeader>
+
+      <CardContent>
+        <div className="text-2xl font-bold">
+          <ArabicNumber
+            value={product.price}
+            format="currency"
+            locale={locale}
+          />
+        </div>
+      </CardContent>
+
+      <CardFooter className="gap-2">
+        <Button className="flex-1" disabled={!product.inStock}>
+          {locale === 'ar' ? 'أضف إلى السلة' : 'Add to Cart'}
+        </Button>
+        <Button variant="outline" size="icon">
+          <Heart className="h-4 w-4" />
+        </Button>
+      </CardFooter>
+    </Card>
+  );
+}`}
+/>
+
+---
+
+## The Provider Pattern
+
+NoorUI uses three nested providers that compose to create the global application context. The nesting order matters because inner providers may depend on values from outer providers.
+
+<CodeBlock
+  language="tsx"
+  filename="Provider nesting order"
+  code={`import { DirectionProvider } from 'noorui-rtl';
+import { ThemeProvider } from 'next-themes';
+import { IconContext } from '@phosphor-icons/react';
+
+function Providers({ children }: { children: React.ReactNode }) {
+  return (
+    // 1. Direction: outermost because theme and icon may need direction context
+    <DirectionProvider>
+      {/* 2. Theme: next-themes manages light/dark via class on <html> */}
+      <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+        {/* 3. Icons: innermost, sets defaults for all Phosphor icons */}
+        <IconContext.Provider value={{ weight: 'duotone', color: 'currentColor' }}>
+          {children}
+        </IconContext.Provider>
+      </ThemeProvider>
+    </DirectionProvider>
+  );
+}`}
+/>
+
+### What Each Provider Does
+
+**DirectionProvider** manages the `dir` and `lang` attributes on `<html>`, persists the user's locale choice to `localStorage`, and provides the `useDirection()` hook:
+
+<CodeBlock
+  language="tsx"
+  filename="useDirection() hook"
+  code={`const { direction, setDirection, locale, setLocale } = useDirection();
+
+// direction: 'ltr' | 'rtl'
+// locale: 'en' | 'ar'
+
+// Switch to Arabic/RTL
+setLocale('ar');   // Sets dir="rtl", lang="ar" on <html>
+setDirection('rtl'); // Also sets locale to 'ar' automatically`}
+/>
+
+**ThemeProvider** (from next-themes) handles light/dark mode. It adds a `.dark` class to `<html>` in dark mode, which activates the `.dark { }` CSS block in `globals.css`. It also detects and follows the user's system preference.
+
+**IconContext.Provider** (from @phosphor-icons/react) sets default icon properties globally. With `weight: 'duotone'` and `color: 'currentColor'`, every Phosphor icon in the tree inherits a two-tone style and takes its color from the parent text color -- no props needed on individual icons.
+
+<DesignDecision title="Three providers, three concerns">
+  <p>
+    Each provider owns exactly one concern: direction, color mode, and icon defaults.
+    They compose without coupling. You can swap <code>next-themes</code> for a different
+    theme library without touching direction or icon code. You can switch from Phosphor
+    to a different icon library by replacing only the <code>IconContext.Provider</code>.
+    The direction layer is NoorUI's own and is the only truly required provider.
+  </p>
+</DesignDecision>

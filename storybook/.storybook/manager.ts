@@ -9,10 +9,10 @@ addons.setConfig({
     fullscreen: { hidden: true },  // Hide the fullscreen button
     'storybook/background': { hidden: true }, // Hide the backgrounds addon tool
     'storybook/viewport': { hidden: true },   // Hide the viewport addon tool
-    // Hide our custom global toolbar items
-    direction: { hidden: true },   // Hide direction switcher
-    theme: { hidden: true },       // Hide theme switcher
-    mode: { hidden: true },        // Hide mode switcher
-    locale: { hidden: true },      // Hide locale switcher
+    // Custom global toolbar items — visible for doc readers
+    direction: { hidden: false },
+    theme: { hidden: false },
+    mode: { hidden: false },
+    locale: { hidden: false },
   },
 });

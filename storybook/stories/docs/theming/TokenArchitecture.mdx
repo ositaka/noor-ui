@@ -1,0 +1,358 @@
+import { Meta } from '@storybook/blocks';
+import { TokenTable } from '../components/TokenTable';
+import { DesignDecision } from '../components/DesignDecision';
+import { CodeBlock } from '../components/CodeBlock';
+
+<Meta title="Theming/Token Architecture" />
+
+# Token Architecture
+
+NoorUI's theming is powered by a **3-layer token system** that flows from raw CSS custom properties through Tailwind registration to theme overrides. Understanding these layers is essential to customizing or extending the design system.
+
+---
+
+## The Three Layers
+
+### Layer 1: Raw CSS Custom Properties
+
+The foundation layer defines all design tokens as CSS custom properties in the `:root` block (light mode) and the `.dark` block (dark mode). These values use **raw HSL components without an `hsl()` wrapper**:
+
+<CodeBlock
+  filename="styles/globals.css — :root"
+  language="css"
+  code={`:root {
+  /* Core palette — raw HSL values, no hsl() wrapper */
+  --background: 220 13% 99%;
+  --foreground: 222.2 84% 4.9%;
+  --primary: 239 84% 67%;
+  --primary-foreground: 210 40% 98%;
+  --secondary: 174 72% 56%;
+  --secondary-foreground: 174 100% 10%;
+  --muted: 210 40% 96.1%;
+  --muted-foreground: 215.4 16.3% 46.9%;
+  --accent: 210 40% 96.1%;
+  --accent-foreground: 222.2 47.4% 11.2%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 214.3 31.8% 91.4%;
+  --input: 214.3 31.8% 91.4%;
+  --ring: 239 84% 67%;
+  --radius: 0.5rem;
+
+  /* Semantic status colors */
+  --success: 142 76% 36%;
+  --success-foreground: 143 64% 24%;
+  --warning: 38 92% 50%;
+  --warning-foreground: 32 81% 29%;
+  --info: 217 91% 60%;
+  --info-foreground: 224 76% 48%;
+
+  /* Typography */
+  --body-line-height: 1.6;
+  --body-letter-spacing: 0;
+  --heading-line-height: 1.3;
+  --heading-letter-spacing: -0.01em;
+  --heading-font-weight: 700;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-heading: 'Inter', system-ui, sans-serif;
+  --font-rtl: 'IBM Plex Sans Arabic', sans-serif;
+}`}
+/>
+
+The `.dark` block overrides these same variables for dark mode:
+
+<CodeBlock
+  filename="styles/globals.css — .dark"
+  language="css"
+  code={`.dark {
+  --background: 222.2 84% 4.9%;
+  --foreground: 210 40% 98%;
+  --card: 222.2 84% 4.9%;
+  --card-foreground: 210 40% 98%;
+  --primary: 239 84% 67%;
+  --primary-foreground: 222.2 84% 4.9%;
+  --muted: 217.2 32.6% 17.5%;
+  --muted-foreground: 215 20.2% 65.1%;
+  --border: 217.2 32.6% 17.5%;
+  --input: 217.2 32.6% 17.5%;
+
+  /* Status colors shift for readability in dark mode */
+  --success: 142 70% 45%;
+  --success-foreground: 142 76% 73%;
+  --warning: 45 93% 47%;
+  --warning-foreground: 45 93% 72%;
+  --info: 217 91% 65%;
+  --info-foreground: 213 94% 73%;
+}`}
+/>
+
+<DesignDecision title="Why raw HSL values without the hsl() wrapper?">
+  <p>
+    Storing values as <code>239 84% 67%</code> rather than <code>hsl(239 84% 67%)</code> is intentional.
+    It enables Tailwind's opacity modifier syntax. When you write <code>bg-primary/50</code>, Tailwind
+    needs to inject the opacity value <em>inside</em> the color function:
+    <code>hsl(239 84% 67% / 0.5)</code>. If the variable already contained the <code>hsl()</code> wrapper,
+    this composition would be impossible. The raw format keeps the door open for alpha channel modifiers
+    throughout the entire utility layer.
+  </p>
+</DesignDecision>
+
+---
+
+### Layer 2: Tailwind Registration
+
+The `@theme` block in `globals.css` maps the raw CSS custom properties to Tailwind utility classes. This is where the `hsl()` wrapper gets applied:
+
+<CodeBlock
+  filename="styles/globals.css — @theme block"
+  language="css"
+  code={`@theme {
+  /* Colors — semantic tokens via CSS vars */
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+
+  /* Semantic status colors */
+  --color-success: hsl(var(--success));
+  --color-success-foreground: hsl(var(--success-foreground));
+  --color-warning: hsl(var(--warning));
+  --color-warning-foreground: hsl(var(--warning-foreground));
+  --color-info: hsl(var(--info));
+  --color-info-foreground: hsl(var(--info-foreground));
+
+  /* Border radius */
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+
+  /* Font families */
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-arabic: 'IBM Plex Sans Arabic', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Shadows, animations, keyframes... */
+}`}
+/>
+
+When Tailwind processes this block, it generates utilities like `bg-primary`, `text-foreground`, `border-border`, `rounded-lg`, etc. The `--color-*` prefix convention tells Tailwind v4 to create color utilities; `--radius-*` creates border-radius utilities; `--font-*` creates font-family utilities.
+
+---
+
+### Layer 3: Theme Overrides
+
+Each theme class overrides the `--color-*` properties directly with fully resolved `hsl()` values. Because these are more specific than the `@theme` block's `hsl(var(...))` references, the theme values take precedence:
+
+<CodeBlock
+  filename="styles/globals.css — .theme-cozy"
+  language="css"
+  code={`.theme-cozy {
+  --color-background: hsl(35 20% 96%);
+  --color-foreground: hsl(25 25% 15%);
+  --color-card: hsl(0 0% 100%);
+  --color-card-foreground: hsl(25 25% 15%);
+  --color-primary: hsl(25 85% 55%);
+  --color-primary-foreground: hsl(0 0% 100%);
+  --color-secondary: hsl(35 60% 60%);
+  --color-secondary-foreground: hsl(25 25% 15%);
+  --color-muted: hsl(35 20% 90%);
+  --color-muted-foreground: hsl(25 10% 40%);
+  --color-accent: hsl(35 60% 85%);
+  --color-accent-foreground: hsl(25 25% 15%);
+  --color-border: hsl(35 20% 85%);
+  --radius: 1.25rem;
+  --radius-lg: 1.25rem;
+  --radius-md: calc(1.25rem - 2px);
+  --radius-sm: calc(1.25rem - 4px);
+  --color-ring: hsl(25 85% 55%);
+
+  /* Semantic status colors */
+  --color-success: hsl(152 69% 31%);
+  --color-warning: hsl(27 96% 61%);
+  --color-info: hsl(201 65% 53%);
+
+  /* Typography overrides */
+  --body-line-height: 1.7;
+  --body-letter-spacing: 0.015em;
+  --heading-line-height: 1.4;
+  --heading-letter-spacing: 0;
+  --heading-font-weight: 700;
+}`}
+/>
+
+Dark variants are defined with compound selectors:
+
+<CodeBlock
+  filename="styles/globals.css — .theme-cozy.dark"
+  language="css"
+  code={`.theme-cozy.dark {
+  --color-background: hsl(25 15% 12%);
+  --color-foreground: hsl(35 20% 95%);
+  --color-card: hsl(25 15% 15%);
+  --color-card-foreground: hsl(35 20% 95%);
+  --color-secondary: hsl(35 45% 45%);
+  --color-secondary-foreground: hsl(35 20% 95%);
+  --color-muted: hsl(25 10% 20%);
+  --color-muted-foreground: hsl(35 10% 65%);
+  --color-accent: hsl(25 20% 20%);
+  --color-accent-foreground: hsl(35 20% 95%);
+  --color-input: hsl(25 10% 25%);
+  --color-border: hsl(25 10% 25%);
+
+  --color-success: hsl(152 69% 50%);
+  --color-warning: hsl(27 96% 65%);
+  --color-info: hsl(201 65% 60%);
+}`}
+/>
+
+---
+
+## The Cascade
+
+The full resolution order for any color value is:
+
+```
+:root vars (Layer 1 - raw HSL)
+  --> @theme registration (Layer 2 - hsl() wrapper for Tailwind)
+    --> .theme-* class override (Layer 3 - resolved hsl() values)
+      --> .theme-*.dark compound override (Layer 3 - dark mode within theme)
+        --> Component uses bg-primary, text-foreground, etc.
+```
+
+When a component uses `bg-primary`, the browser resolves the value by walking this cascade. If a `.theme-cozy` class is present, `--color-primary` resolves to `hsl(25 85% 55%)` (warm orange). If only the default `:root` is active, it resolves to `hsl(239 84% 67%)` via the `@theme` block's `hsl(var(--primary))` reference (indigo).
+
+<DesignDecision title="Why a 3-layer system instead of direct variable overrides?">
+  <p>
+    The 3-layer architecture serves distinct purposes. Layer 1 (raw HSL) enables Tailwind opacity
+    modifiers on the default theme. Layer 2 (@theme) generates the utility classes that components
+    actually reference. Layer 3 (theme overrides) provides direct <code>hsl()</code> values that
+    take precedence over the <code>hsl(var(...))</code> references in Layer 2. This separation
+    means the default theme gets maximum Tailwind flexibility (opacity modifiers work), while named
+    themes get maximum control (direct color values, no indirection). It also means you can use
+    Tailwind utilities like <code>bg-primary/50</code> in the default theme and they degrade
+    gracefully in named themes.
+  </p>
+</DesignDecision>
+
+---
+
+## Complete Token Reference
+
+### Color Tokens
+
+<TokenTable
+  title="Core Palette"
+  tokens={[
+    { name: '--background', value: '220 13% 99%', description: 'Page and layout background' },
+    { name: '--foreground', value: '222.2 84% 4.9%', description: 'Default text color' },
+    { name: '--card', value: '0 0% 100%', description: 'Card surface background' },
+    { name: '--card-foreground', value: '222.2 84% 4.9%', description: 'Card text color' },
+    { name: '--popover', value: '0 0% 100%', description: 'Popover/dropdown background' },
+    { name: '--popover-foreground', value: '222.2 84% 4.9%', description: 'Popover text color' },
+    { name: '--primary', value: '239 84% 67%', description: 'Primary brand color (buttons, links)' },
+    { name: '--primary-foreground', value: '210 40% 98%', description: 'Text on primary backgrounds' },
+    { name: '--secondary', value: '174 72% 56%', description: 'Secondary accent color' },
+    { name: '--secondary-foreground', value: '174 100% 10%', description: 'Text on secondary backgrounds' },
+    { name: '--muted', value: '210 40% 96.1%', description: 'Muted/subtle backgrounds' },
+    { name: '--muted-foreground', value: '215.4 16.3% 46.9%', description: 'De-emphasized text' },
+    { name: '--accent', value: '210 40% 96.1%', description: 'Accent/highlight background' },
+    { name: '--accent-foreground', value: '222.2 47.4% 11.2%', description: 'Text on accent backgrounds' },
+    { name: '--destructive', value: '0 84.2% 60.2%', description: 'Destructive/error actions' },
+    { name: '--destructive-foreground', value: '210 40% 98%', description: 'Text on destructive backgrounds' },
+    { name: '--border', value: '214.3 31.8% 91.4%', description: 'Default border color' },
+    { name: '--input', value: '214.3 31.8% 91.4%', description: 'Input field borders' },
+    { name: '--ring', value: '239 84% 67%', description: 'Focus ring color' },
+  ]}
+/>
+
+<TokenTable
+  title="Status Colors"
+  tokens={[
+    { name: '--success', value: '142 76% 36%', description: 'Success state color' },
+    { name: '--success-foreground', value: '143 64% 24%', description: 'Text on success backgrounds' },
+    { name: '--warning', value: '38 92% 50%', description: 'Warning state color' },
+    { name: '--warning-foreground', value: '32 81% 29%', description: 'Text on warning backgrounds' },
+    { name: '--info', value: '217 91% 60%', description: 'Informational state color' },
+    { name: '--info-foreground', value: '224 76% 48%', description: 'Text on info backgrounds' },
+  ]}
+/>
+
+### Typography Tokens
+
+<TokenTable
+  title="Typography"
+  tokens={[
+    { name: '--body-line-height', value: '1.6', description: 'Body text line height' },
+    { name: '--body-letter-spacing', value: '0', description: 'Body text letter spacing (LTR only)' },
+    { name: '--heading-line-height', value: '1.3', description: 'Heading line height' },
+    { name: '--heading-letter-spacing', value: '-0.01em', description: 'Heading letter spacing (LTR only)' },
+    { name: '--heading-font-weight', value: '700', description: 'Heading font weight' },
+    { name: '--font-body', value: "Inter, system-ui, sans-serif", description: 'Body font family (LTR)' },
+    { name: '--font-heading', value: "Inter, system-ui, sans-serif", description: 'Heading font family (LTR)' },
+    { name: '--font-rtl', value: "IBM Plex Sans Arabic, sans-serif", description: 'Font family for RTL text' },
+  ]}
+/>
+
+### Layout Tokens
+
+<TokenTable
+  title="Radius & Layout"
+  tokens={[
+    { name: '--radius', value: '0.5rem', description: 'Base border radius' },
+    { name: '--radius-lg', value: 'var(--radius)', description: 'Large radius (cards, dialogs)' },
+    { name: '--radius-md', value: 'calc(var(--radius) - 2px)', description: 'Medium radius (buttons, inputs)' },
+    { name: '--radius-sm', value: 'calc(var(--radius) - 4px)', description: 'Small radius (badges, tags)' },
+  ]}
+/>
+
+### Tailwind-Registered Tokens
+
+<TokenTable
+  title="Font Families (via @theme)"
+  tokens={[
+    { name: '--font-sans', value: "Inter, system-ui, sans-serif", description: 'Tailwind font-sans utility' },
+    { name: '--font-arabic', value: "IBM Plex Sans Arabic, sans-serif", description: 'Tailwind font-arabic utility' },
+    { name: '--font-mono', value: "JetBrains Mono, monospace", description: 'Tailwind font-mono utility' },
+  ]}
+/>
+
+---
+
+## How Tokens Flow into Components
+
+A component never references theme-specific values. It uses Tailwind utilities that resolve through the cascade:
+
+<CodeBlock
+  filename="Example component usage"
+  language="tsx"
+  code={`// This button works in every theme, every mode, every direction
+<button className="bg-primary text-primary-foreground rounded-md px-4 py-2">
+  Submit
+</button>
+
+// Opacity modifiers work on the default theme's raw HSL values
+<div className="bg-primary/10 text-primary border border-primary/20 rounded-lg p-4">
+  Highlighted section
+</div>
+
+// Status colors adapt per-theme automatically
+<span className="text-success">Payment complete</span>
+<span className="bg-warning/5 text-warning-foreground px-2 py-1 rounded">Pending</span>`}
+/>
+
+The key insight is that components are **theme-agnostic**. They reference semantic tokens (`primary`, `muted`, `success`) that resolve to different concrete values depending on which theme class is active. This is what makes the system extensible -- adding a new theme requires no changes to any component.

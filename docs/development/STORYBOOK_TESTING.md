@@ -105,11 +105,6 @@ npm run storybook
 # Click "Interactions" tab at bottom
 ```
 
-<<<<<<< Updated upstream
-### Via CLI (Headless)
-```bash
-# Requires Storybook running in another terminal
-=======
 ### Via CLI (Vitest + Playwright)
 
 Tests are configured to run via Vitest with browser-based Playwright execution:
@@ -138,40 +133,12 @@ The Vitest configuration in `vitest.config.ts` includes a `storybook` project th
 ### Legacy Test Runner
 ```bash
 # Alternative: Requires Storybook running in another terminal
->>>>>>> Stashed changes
 npm run storybook &
 npm run test-storybook
 ```
 
 ## Component Test Coverage
 
-<<<<<<< Updated upstream
-| Component | Unit Tests | RTL Tests | Keyboard Tests | Status |
-|-----------|------------|-----------|----------------|--------|
-| Button | ✅ | ✅ | ✅ | Complete |
-| ButtonArrow | ✅ | ✅ | ✅ | Complete |
-| Alert | ❌ | ❌ | ❌ | Pending |
-| Avatar | ❌ | ❌ | ❌ | Pending |
-| Badge | ❌ | ❌ | ❌ | Pending |
-| Blockquote | ❌ | ❌ | ❌ | Pending |
-| Callout | ❌ | ❌ | ❌ | Pending |
-| Card | ❌ | ❌ | ❌ | Pending |
-| Checkbox | ❌ | ❌ | ❌ | Pending |
-| Dialog | ❌ | ❌ | ❌ | Pending |
-| Dropdown Menu | ❌ | ❌ | ❌ | Pending |
-| Input | ❌ | ❌ | ❌ | Pending |
-| Label | ❌ | ❌ | ❌ | Pending |
-| Progress | ❌ | ❌ | ❌ | Pending |
-| Radio Group | ❌ | ❌ | ❌ | Pending |
-| Select | ❌ | ❌ | ❌ | Pending |
-| Separator | ❌ | ❌ | ❌ | Pending |
-| Slider | ❌ | ❌ | ❌ | Pending |
-| Switch | ❌ | ❌ | ❌ | Pending |
-| Tabs | ❌ | ❌ | ❌ | Pending |
-| Textarea | ❌ | ❌ | ❌ | Pending |
-| Toast | ❌ | ❌ | ❌ | Pending |
-| Tooltip | ❌ | ❌ | ❌ | Pending |
-=======
 ### Basic Components
 
 | Component | Unit Tests | RTL Tests | Status |
@@ -232,7 +199,6 @@ npm run test-storybook
 Some components are tagged with `!test` and skipped from Vitest:
 
 - **WorkflowCanvas/Node/Nodes** - Require ReactFlow's zustand provider context which isn't available outside ReactFlow wrapper
->>>>>>> Stashed changes
 
 ## Using the unit-test Agent
 
@@ -260,8 +226,4 @@ Or check via Storybook's Accessibility tab (uses axe-core).
 
 ---
 
-<<<<<<< Updated upstream
-*Last updated: January 2026*
-=======
 *Last updated: February 2026*
->>>>>>> Stashed changes

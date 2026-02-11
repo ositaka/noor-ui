@@ -118,6 +118,24 @@ How we document 65+ components consistently across two languages.
 
 ---
 
+### 7. [Storybook Documentation Plan](./storybook-documentation-plan.md)
+Complete planning and implementation of 27 MDX documentation pages for the Storybook instance.
+
+**Topics covered:**
+- Structuring design system documentation for multiple audiences
+- MDX documentation architecture in Storybook 10
+- Interactive documentation components (live color palettes, theme comparisons, direction comparisons)
+- Consumer-facing vs internal documentation patterns
+- Sidebar organization and information architecture
+
+**Potential blog posts:**
+- "Adding World-Class Documentation to a Design System Storybook"
+- "MDX Documentation Architecture for Component Libraries"
+- "Interactive Documentation: Live Theme and Direction Comparisons"
+- "Writing Design System Docs for Non-Technical Audiences"
+
+---
+
 ## 🎯 How to Use This Folder
 
 ### For Content Creators:

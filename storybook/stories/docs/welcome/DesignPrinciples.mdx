@@ -1,0 +1,355 @@
+import { Meta } from '@storybook/blocks';
+import { DesignDecision } from '../components/DesignDecision';
+import { CodeBlock } from '../components/CodeBlock';
+import { DirectionComparison } from '../components/DirectionComparison';
+
+<Meta title="Welcome/Design Principles" />
+
+# Design Principles
+
+<p style={{ fontSize: '1.125rem', color: 'var(--colors-muted-foreground, #6b7280)', maxWidth: '640px', marginBottom: '2rem' }}>
+  Six principles guide every decision in NoorUI -- from how we name tokens to how we structure components to how we think about the people who use them.
+</p>
+
+---
+
+## 1. RTL-First, Never Retrofitted
+
+NoorUI components are authored in RTL mode first, then verified in LTR. This is not a philosophical stance -- it is a practical methodology that produces better bidirectional components.
+
+The key mechanism is **CSS logical properties**. Instead of `padding-left` and `margin-right`, NoorUI uses `padding-inline-start` and `margin-inline-end` (via Tailwind utilities `ps-4`, `me-2`, `ms-auto`). These properties automatically adapt to the document direction without any JavaScript or conditional logic.
+
+<CodeBlock
+  filename="Button with icon -- RTL-first approach"
+  language="tsx"
+  code={`// NoorUI: uses logical properties (me = margin-inline-end)
+<Button>
+  <ArrowRight className="me-2 h-4 w-4" />
+  Get Started
+</Button>
+
+// Anti-pattern: physical properties require manual flipping
+<Button>
+  <ArrowRight className="mr-2 h-4 w-4" /> {/* breaks in RTL */}
+  Get Started
+</Button>`}
+/>
+
+The `me-2` class applies margin to the end side of the icon -- that is the right side in LTR and the left side in RTL. The layout adapts automatically. The physical `mr-2` class always applies margin to the right, which puts the spacing on the wrong side in RTL layouts.
+
+<DesignDecision title="Logical Properties Are Non-Negotiable">
+  <p>
+    Every NoorUI component uses logical properties exclusively. Physical direction properties
+    (`left`, `right`, `ml-`, `mr-`, `pl-`, `pr-`) are not used anywhere in the library. This is
+    enforced at the code review level. The only exceptions are properties that are genuinely
+    non-directional, such as `text-align: center` or absolute positioning for overlays.
+  </p>
+</DesignDecision>
+
+Here is what this looks like in practice. The same component, zero code changes, both directions:
+
+<DirectionComparison>
+  <button style={{
+    display: 'inline-flex',
+    alignItems: 'center',
+    gap: '0.5rem',
+    padding: '0.5rem 1rem',
+    fontSize: '0.875rem',
+    fontWeight: 500,
+    borderRadius: '0.375rem',
+    color: 'white',
+    backgroundColor: 'var(--colors-primary, #2563eb)',
+    border: 'none',
+    cursor: 'pointer'
+  }}>
+    Get Started →
+  </button>
+</DirectionComparison>
+
+---
+
+## 2. Semantic over Visual
+
+NoorUI never uses hardcoded color values. Every color in the system is a semantic token -- a named reference that carries meaning, not just a visual appearance.
+
+The token pipeline flows through three layers:
+
+<CodeBlock
+  filename="Token pipeline: CSS variable to utility class"
+  language="css"
+  code={`/* Layer 1: CSS custom property (HSL values without wrapper) */
+:root {
+  --primary: 222.2 47.4% 11.2%;
+  --primary-foreground: 210 40% 98%;
+  --success: 142 71% 45%;
+}
+
+/* Layer 2: @theme registers tokens for Tailwind */
+@theme {
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-success: hsl(var(--success));
+}
+
+/* Layer 3: Use as Tailwind utilities */
+/* bg-primary  text-primary-foreground  border-success */
+/* Opacity modifiers work: bg-primary/50  text-success/10 */`}
+/>
+
+This architecture enables several powerful capabilities:
+
+- **Theming** -- Themes override the CSS variables. The utility classes stay the same. A button using `bg-primary` renders as deep blue in the Default theme and as teal in the Futuristic theme, with zero component changes.
+- **Dark mode** -- The `.dark` class overrides the same variables with dark-appropriate values. Components are dark-mode-ready by default.
+- **Opacity modifiers** -- Because tokens are HSL values without the `hsl()` wrapper, Tailwind's opacity syntax works naturally: `bg-primary/50` renders the primary color at 50% opacity.
+
+<DesignDecision title="Why HSL Without the Wrapper?">
+  <p>
+    Storing colors as raw HSL channel values (`222.2 47.4% 11.2%`) instead of complete `hsl(...)` strings
+    enables Tailwind's opacity modifier syntax. Writing `bg-primary/50` would be impossible if the token
+    already contained the `hsl()` function call. This small architectural decision unlocks a large ergonomic
+    benefit -- developers can apply any opacity to any semantic color without defining additional tokens.
+  </p>
+</DesignDecision>
+
+<CodeBlock
+  filename="Semantic tokens in practice"
+  language="tsx"
+  code={`// Correct: semantic tokens
+<div className="bg-card text-card-foreground border-border">
+  <h2 className="text-foreground">Dashboard</h2>
+  <p className="text-muted-foreground">Welcome back</p>
+  <Badge className="bg-success/10 text-success">Active</Badge>
+</div>
+
+// Anti-pattern: hardcoded values
+<div className="bg-white text-gray-900 border-gray-200">
+  <h2 className="text-black">Dashboard</h2>
+  <p className="text-gray-500">Welcome back</p>
+  <Badge className="bg-green-50 text-green-600">Active</Badge>
+</div>`}
+/>
+
+The semantic version automatically adapts to themes, dark mode, and future design changes. The hardcoded version is frozen in place.
+
+---
+
+## 3. Composition over Configuration
+
+NoorUI favors small, composable pieces over monolithic, heavily-configured components. Instead of a single `<Card>` component with dozens of props for every possible layout, NoorUI provides `Card`, `CardHeader`, `CardTitle`, `CardDescription`, `CardContent`, and `CardFooter` -- each responsible for one thing, composable into any arrangement.
+
+<CodeBlock
+  filename="Composition: building a card from parts"
+  language="tsx"
+  code={`// NoorUI: composable pieces
+<Card>
+  <CardHeader>
+    <CardTitle>Team Members</CardTitle>
+    <CardDescription>Manage your team and permissions.</CardDescription>
+  </CardHeader>
+  <CardContent>
+    <UserList users={team} />
+  </CardContent>
+  <CardFooter>
+    <Button variant="outline">Cancel</Button>
+    <Button>Save Changes</Button>
+  </CardFooter>
+</Card>
+
+// Anti-pattern: mega-component
+<Card
+  title="Team Members"
+  description="Manage your team and permissions."
+  content={<UserList users={team} />}
+  footerActions={[
+    { label: "Cancel", variant: "outline" },
+    { label: "Save Changes", variant: "primary" },
+  ]}
+/>`}
+/>
+
+The composable approach is more flexible (need a card without a footer? just omit `CardFooter`), more readable (the JSX structure mirrors the visual structure), and more maintainable (each piece can be tested and documented independently).
+
+<DesignDecision title="Composition Scales, Configuration Does Not" type="tip">
+  <p>
+    A monolithic component with 20 props feels convenient at first. But every new use case requires a new
+    prop, and the prop interactions become combinatorially complex. Does `showFooter` work with `footerActions`?
+    What happens when `title` is provided but `showHeader` is false? Composition avoids this entirely.
+    Each piece does one thing. The developer assembles the pieces they need. No hidden interactions, no
+    surprising behavior.
+  </p>
+</DesignDecision>
+
+---
+
+## 4. Accessible by Default
+
+Every interactive NoorUI component is built on **Radix UI** primitives, which implement the WAI-ARIA specification. Accessibility is not an add-on or a separate "accessible mode" -- it is the default and only mode.
+
+What this means in practice:
+
+- **Dialog** automatically traps focus within the modal, returns focus to the trigger on close, and announces itself to screen readers.
+- **DropdownMenu** supports full keyboard navigation (arrow keys, Home, End, type-ahead search), manages focus correctly, and provides proper ARIA roles.
+- **Tabs** implement the tablist/tab/tabpanel pattern with arrow key navigation between tabs and correct `aria-selected` state.
+- **Switch** is announced as a toggle to screen readers and can be operated via Space key.
+
+<CodeBlock
+  filename="Dialog: accessibility is built in"
+  language="tsx"
+  code={`// All of this is automatic -- no extra code needed:
+// - Focus traps inside the dialog when open
+// - Escape key closes the dialog
+// - Focus returns to the trigger button on close
+// - Screen readers announce "dialog" role
+// - Background content is marked aria-hidden
+
+<Dialog>
+  <DialogTrigger asChild>
+    <Button>Edit Profile</Button>
+  </DialogTrigger>
+  <DialogContent>
+    <DialogHeader>
+      <DialogTitle>Edit Profile</DialogTitle>
+      <DialogDescription>
+        Update your display name and avatar.
+      </DialogDescription>
+    </DialogHeader>
+    <form>
+      <Input label="Display Name" />
+      <Button type="submit">Save</Button>
+    </form>
+  </DialogContent>
+</Dialog>`}
+/>
+
+The developer writes clean, declarative JSX. Radix handles the complex accessibility machinery underneath. NoorUI adds the visual styling layer on top, ensuring that focus rings, contrast ratios, and interactive states all meet WCAG AA standards.
+
+<DesignDecision title="WCAG AA Is the Floor, Not the Ceiling">
+  <p>
+    NoorUI targets WCAG AA compliance as the minimum standard for all components. This means
+    a minimum contrast ratio of 4.5:1 for normal text, 3:1 for large text, visible focus
+    indicators on every interactive element, and full keyboard operability. Where practical,
+    we exceed AA requirements. Accessibility is a spectrum, and we aim for the highest point
+    that is achievable without compromising the design.
+  </p>
+</DesignDecision>
+
+---
+
+## 5. Primitive-Agnostic
+
+NoorUI wraps Radix UI behind its own component API. This is a deliberate architectural choice that protects consumers from changes in the underlying primitive library.
+
+The abstraction works like this:
+
+<CodeBlock
+  filename="Abstraction layer: NoorUI API wraps Radix internals"
+  language="tsx"
+  code={`// Internal implementation (what NoorUI maintainers see)
+import * as DialogPrimitive from '@radix-ui/react-dialog';
+
+const DialogContent = React.forwardRef(({ className, children, ...props }, ref) => (
+  <DialogPrimitive.Portal>
+    <DialogPrimitive.Overlay className="fixed inset-0 z-50 bg-black/80 ..." />
+    <DialogPrimitive.Content
+      ref={ref}
+      className={cn("fixed ... border bg-background p-6 shadow-lg ...", className)}
+      {...props}
+    >
+      {children}
+      <DialogPrimitive.Close className="absolute end-4 top-4 ...">
+        <X className="h-4 w-4" />
+        <span className="sr-only">Close</span>
+      </DialogPrimitive.Close>
+    </DialogPrimitive.Content>
+  </DialogPrimitive.Portal>
+));
+
+// Consumer API (what product developers see)
+import { Dialog, DialogContent, DialogTrigger } from '@noorui/components';
+
+// Clean, stable API -- no knowledge of Radix required`}
+/>
+
+If NoorUI were to migrate from Radix UI to Ark UI, React Aria, or any other primitive library, the consumer API would remain unchanged. Product developers would not need to update a single line of code. The abstraction boundary absorbs the migration entirely.
+
+<DesignDecision title="Stable APIs Enable Confident Upgrades">
+  <p>
+    The JavaScript ecosystem moves fast. Primitive libraries evolve, get deprecated, or are superseded
+    by better alternatives. By wrapping the primitive behind a stable NoorUI API, we give ourselves the
+    freedom to evolve the internals without breaking consumer code. This is the same pattern used by
+    Material UI (wraps its own primitives), Chakra UI (migrated from Reach to Ark), and every other
+    design system that plans for the long term.
+  </p>
+</DesignDecision>
+
+---
+
+## 6. Culturally Aware
+
+NoorUI is not just an RTL-capable component library. It is a culturally aware design system that provides first-class components for the cultural contexts where Arabic-first interfaces are used.
+
+This goes beyond text direction:
+
+| Component | Purpose |
+|---|---|
+| **HijriDate** | Displays and converts Hijri (Islamic) calendar dates alongside Gregorian dates |
+| **PrayerTimes** | Shows the five daily prayer times based on geographic location and calculation method |
+| **ArabicNumber** | Renders numbers in Arabic-Indic numerals (٠١٢٣٤٥٦٧٨٩) with proper formatting |
+| **ZakatCalculator** | Calculates Zakat (Islamic charitable obligation) based on asset types and Nisab thresholds |
+
+These are not novelty components. They are essential building blocks for applications serving GCC markets -- banking apps that display Hijri dates, lifestyle apps with prayer time integration, and fintech products that calculate Zakat alongside conventional tax obligations.
+
+<CodeBlock
+  filename="Culturally aware components"
+  language="tsx"
+  code={`// Hijri date display with Gregorian equivalent
+<HijriDate
+  date={new Date()}
+  locale="ar-SA"
+  showGregorian
+/>
+// Renders: ١٧ رجب ١٤٤٦ هـ (21 January 2025)
+
+// Arabic-Indic numerals
+<ArabicNumber value={1234567.89} locale="ar-SA" />
+// Renders: ١٬٢٣٤٬٥٦٧٫٨٩
+
+// Prayer times for a location
+<PrayerTimes
+  latitude={24.7136}
+  longitude={46.6753}
+  method="umm-al-qura"
+/>`}
+/>
+
+Cultural awareness also extends to typography decisions. Arabic script uses connected letterforms -- applying `letter-spacing` to Arabic text breaks these connections and makes the text look incorrect. NoorUI applies letter-spacing only within `[dir='ltr']` contexts, leaving Arabic text with its natural spacing.
+
+<DesignDecision title="Culture Is Not a Locale String">
+  <p>
+    Many internationalization approaches reduce culture to a locale string -- swap `en-US` for `ar-SA`
+    and call it done. Real cultural awareness requires understanding that Arabic text should never
+    have letter-spacing, that Hijri dates are used alongside (not instead of) Gregorian dates in most
+    contexts, that number formatting varies between Arabic-speaking countries, and that certain UI
+    patterns (like left-aligned labels) feel foreign in RTL contexts. NoorUI encodes these
+    understandings into its components so that developers do not need to learn them independently.
+  </p>
+</DesignDecision>
+
+---
+
+## Principles in Practice
+
+These six principles are not abstract ideals. They are concrete, testable commitments that shape every pull request, every code review, and every design decision in NoorUI:
+
+| Principle | How We Test It |
+|---|---|
+| **RTL-First** | Every component is rendered in both directions in Storybook. Physical properties in code review are flagged and rejected. |
+| **Semantic over Visual** | Hardcoded color values in components trigger linting warnings. All colors must reference tokens. |
+| **Composition** | Components with more than 8 props are reviewed for decomposition opportunities. |
+| **Accessible** | Automated accessibility audits run on every component story. Keyboard navigation is tested manually. |
+| **Primitive-Agnostic** | Consumer-facing APIs never expose Radix-specific types or props. |
+| **Culturally Aware** | Cultural components are reviewed by native Arabic speakers for correctness and natural usage. |
+
+<div style={{ textAlign: 'center', padding: '2rem 0', color: 'var(--colors-muted-foreground, #6b7280)', fontSize: '0.875rem' }}>
+  <p>Principles without enforcement are just suggestions. NoorUI enforces these at every level of the development process.</p>
+</div>

@@ -1,0 +1,305 @@
+import { Meta } from '@storybook/blocks';
+import { CodeBlock } from '../components/CodeBlock';
+import { DesignDecision } from '../components/DesignDecision';
+import { DirectionComparison } from '../components/DirectionComparison';
+
+<Meta title="Patterns/Bidirectional Typography" />
+
+# Bidirectional Typography
+
+Typography in a bidirectional design system is not simply about "flipping text." Arabic is a fundamentally different writing system -- cursive, connected, right-to-left, with distinct typographic conventions. This page covers how NoorUI handles the intersection of Arabic and English text within a single interface.
+
+---
+
+## The Unicode BiDi Algorithm
+
+Every modern browser implements the Unicode Bidirectional Algorithm (UBA), defined in Unicode Technical Report #9. When the browser encounters a text node, it analyzes each character and assigns it a **directionality class**:
+
+- **Strong LTR**: Latin letters (A-Z, a-z), Greek, Cyrillic, CJK
+- **Strong RTL**: Arabic, Hebrew, Thaana, Syriac
+- **Weak**: Numbers (0-9), currency symbols, some punctuation
+- **Neutral**: Spaces, most punctuation, special characters
+
+The algorithm then groups characters into **directional runs** and reorders them within each paragraph according to the base direction set by the `dir` attribute. Strong characters establish their own direction. Weak and neutral characters inherit direction from surrounding strong characters.
+
+This means a paragraph with base direction RTL containing the sentence "استخدم React لبناء الواجهات" will:
+
+1. Render the Arabic words right-to-left
+2. Keep "React" as a left-to-right island within the RTL flow
+3. Position the entire paragraph starting from the right margin
+
+<DirectionComparison>
+  <p style={{ fontSize: '0.9375rem', lineHeight: 1.8 }}>
+    استخدم React لبناء واجهات المستخدم التفاعلية مع دعم كامل للغة العربية.
+  </p>
+</DirectionComparison>
+
+The algorithm handles most mixed-script text automatically. Problems arise with **weak and neutral characters** that appear at boundaries between directional runs -- punctuation, parentheses, and symbols can end up on the wrong side of a word.
+
+---
+
+## Mixed Content Challenges
+
+### LTR Islands in RTL Text
+
+When Arabic text contains English brand names, technical terms, code references, or URLs, the BiDi algorithm generally handles the reordering correctly. But longer LTR sequences -- especially those with punctuation or special characters -- can produce unexpected results.
+
+The safest pattern is to wrap LTR content explicitly:
+
+<CodeBlock
+  language="tsx"
+  filename="Explicit LTR islands"
+  code={`{/* URL in Arabic paragraph */}
+<p dir="rtl">
+  قم بزيارة الموقع <span dir="ltr">https://noorui.dev/docs</span> للمزيد من المعلومات.
+</p>
+
+{/* Code reference in Arabic paragraph */}
+<p dir="rtl">
+  استخدم الدالة <code dir="ltr">useState()</code> لإدارة حالة المكون.
+</p>
+
+{/* Version number with punctuation */}
+<p dir="rtl">
+  يتطلب الإصدار <span dir="ltr">v4.1.0</span> أو أحدث.
+</p>`}
+/>
+
+NoorUI's `CodeBlock` component sets `dir="ltr"` on its `<pre>` element automatically, so all code samples render correctly regardless of the page direction.
+
+<DesignDecision title="When to use explicit dir='ltr' islands">
+  <p>
+    Single English words in Arabic text (brand names, short terms) rarely need explicit direction.
+    The BiDi algorithm handles them. Apply <code>dir="ltr"</code> when the LTR content contains
+    punctuation, special characters, URLs, file paths, code, or version strings -- anything
+    where weak/neutral characters could be reordered incorrectly.
+  </p>
+</DesignDecision>
+
+---
+
+## Why Letter-Spacing Breaks Arabic
+
+Arabic is a **cursive script**. Letters within a word are connected to each other through joining forms -- each letter has up to four shapes (isolated, initial, medial, final) depending on its position. This is not a stylistic choice; it is how the script works. The connections between letters carry meaning and readability.
+
+CSS `letter-spacing` inserts space **between individual characters**. In Latin scripts this is a legitimate typographic tool for headings and labels. In Arabic, it physically breaks the connections between letters, producing text that looks fragmented and is difficult or impossible to read.
+
+<DirectionComparison>
+  <div>
+    <p style={{ fontSize: '0.8125rem', color: 'var(--colors-muted-foreground, #6b7280)', marginBottom: '0.5rem' }}>Normal (correct)</p>
+    <p style={{ fontSize: '1.125rem', letterSpacing: 'normal' }}>مرحبا بالعالم</p>
+    <p style={{ fontSize: '0.8125rem', color: 'var(--colors-muted-foreground, #6b7280)', marginTop: '1rem', marginBottom: '0.5rem' }}>With letter-spacing (broken)</p>
+    <p style={{ fontSize: '1.125rem', letterSpacing: '0.1em' }}>مرحبا بالعالم</p>
+  </div>
+</DirectionComparison>
+
+<DesignDecision title="Never apply letter-spacing to Arabic text" type="warning">
+  <p>
+    Arabic letterforms are designed to connect. Adding <code>letter-spacing</code> severs those connections,
+    producing text that is visually broken and significantly harder to read. This is not an aesthetic preference --
+    it is a fundamental property of the Arabic writing system. NoorUI enforces <code>letter-spacing: normal</code>
+    on all RTL content, even when a theme defines non-zero letter-spacing for headings.
+  </p>
+</DesignDecision>
+
+### NoorUI's Letter-Spacing Solution
+
+In `globals.css`, NoorUI applies letter-spacing only within LTR contexts and strips it unconditionally in RTL:
+
+<CodeBlock
+  language="css"
+  filename="styles/globals.css"
+  code={`[dir='ltr'] {
+  font-family: var(--font-body);
+  letter-spacing: var(--body-letter-spacing);
+}
+
+[dir='rtl'] {
+  font-family: var(--font-rtl);
+  letter-spacing: normal;
+}
+
+/* Headings: letter-spacing only in LTR */
+[dir='ltr'] :is(h1, h2, h3, h4, h5, h6) {
+  letter-spacing: var(--heading-letter-spacing);
+}
+
+/* No heading letter-spacing rule for RTL -- it inherits 'normal' */`}
+/>
+
+Each theme can define its own `--body-letter-spacing` and `--heading-letter-spacing` values (the Futuristic theme uses `-0.01em` body and `-0.025em` headings; the Cozy theme uses `0.015em` body). These values only take effect in LTR. Arabic text always renders with `letter-spacing: normal`.
+
+---
+
+## Font Selection Per Direction
+
+NoorUI uses direction-aware font assignment. The `[dir='ltr']` and `[dir='rtl']` selectors in `globals.css` set the font family based on the current document direction:
+
+<CodeBlock
+  language="css"
+  filename="styles/globals.css"
+  code={`:root {
+  /* Font family tokens */
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-heading: 'Inter', system-ui, sans-serif;
+  --font-rtl: 'IBM Plex Sans Arabic', sans-serif;
+}
+
+[dir='ltr'] {
+  font-family: var(--font-body);
+}
+
+[dir='rtl'] {
+  font-family: var(--font-rtl);
+}`}
+/>
+
+This means:
+- **LTR pages** render body text in Inter (or the theme's `--font-body`)
+- **RTL pages** render body text in IBM Plex Sans Arabic (or the theme's `--font-rtl`)
+- The font switch happens automatically when the `dir` attribute changes -- no JavaScript required
+
+### Per-Theme Font Variation
+
+Each theme can override the font tokens. The Artistic theme is the most distinctive example:
+
+<CodeBlock
+  language="css"
+  filename="styles/globals.css (Artistic theme)"
+  code={`.theme-artistic {
+  /* Artistic uses serif fonts for an editorial feel */
+  --font-body: Georgia, 'Times New Roman', serif;
+  --font-heading: Georgia, 'Times New Roman', serif;
+  --font-rtl: 'Noto Naskh Arabic', Georgia, serif;
+
+  /* Typography tuning for the serif stack */
+  --body-line-height: 1.8;
+  --body-letter-spacing: 0.01em;
+  --heading-line-height: 1.3;
+  --heading-letter-spacing: 0.02em;
+  --heading-font-weight: 400;
+}`}
+/>
+
+In the Artistic theme, LTR users see Georgia (a classic serif face), while RTL users see Noto Naskh Arabic (a traditional Naskh-style Arabic serif). Both fonts share a similar typographic character -- warm, bookish, editorial -- while being optimized for their respective scripts.
+
+<DesignDecision title="Match typographic personality across scripts">
+  <p>
+    When selecting font pairs for bidirectional interfaces, prioritize matching the <em>typographic personality</em>
+    rather than the exact metrics. Inter and IBM Plex Sans Arabic are both modern, neutral sans-serifs.
+    Georgia and Noto Naskh Arabic are both warm, traditional serifs. Users should feel the same brand
+    personality regardless of language.
+  </p>
+</DesignDecision>
+
+---
+
+## Heading Typography
+
+NoorUI's heading styles are driven by CSS custom properties that vary per theme. This allows each theme to express a distinct typographic voice while the direction-aware rules ensure Arabic headings never receive inappropriate letter-spacing.
+
+<CodeBlock
+  language="css"
+  filename="Typography CSS variables by theme"
+  code={`/* Default theme */
+:root {
+  --heading-line-height: 1.3;
+  --heading-letter-spacing: -0.01em;
+  --heading-font-weight: 700;
+}
+
+/* Minimal: tighter tracking, lighter weight */
+.theme-minimal {
+  --heading-font-weight: 600;
+  --heading-letter-spacing: -0.02em;
+}
+
+/* Futuristic: very tight tracking */
+.theme-futuristic {
+  --heading-letter-spacing: -0.025em;
+  --heading-font-weight: 600;
+}
+
+/* Cozy: no tracking, heavier weight */
+.theme-cozy {
+  --heading-line-height: 1.4;
+  --heading-letter-spacing: 0;
+  --heading-font-weight: 700;
+}
+
+/* Artistic: positive tracking, light weight */
+.theme-artistic {
+  --heading-line-height: 1.3;
+  --heading-letter-spacing: 0.02em;
+  --heading-font-weight: 400;
+}`}
+/>
+
+The heading styles are then applied direction-conditionally:
+
+<CodeBlock
+  language="css"
+  filename="Direction-aware heading rules"
+  code={`h1, h2, h3, h4, h5, h6 {
+  line-height: var(--heading-line-height);
+  font-weight: var(--heading-font-weight);
+}
+
+/* Letter-spacing only in LTR */
+[dir='ltr'] :is(h1, h2, h3, h4, h5, h6) {
+  letter-spacing: var(--heading-letter-spacing);
+}
+
+/* RTL headings inherit letter-spacing: normal from the [dir='rtl'] rule */`}
+/>
+
+Note that `line-height` and `font-weight` apply in both directions. These properties do not interfere with Arabic rendering. Only `letter-spacing` is direction-gated.
+
+---
+
+## Numbers in Arabic Context
+
+Arabic text can use two numeral systems:
+
+- **Western Arabic numerals**: 0 1 2 3 4 5 6 7 8 9 (used worldwide, including in many Arabic-speaking countries)
+- **Eastern Arabic-Indic numerals**: ٠ ١ ٢ ٣ ٤ ٥ ٦ ٧ ٨ ٩ (used in parts of the Middle East, particularly in Gulf countries)
+
+The choice between them depends on regional convention and context. NoorUI's `ArabicNumber` component handles this formatting automatically:
+
+<CodeBlock
+  language="tsx"
+  filename="ArabicNumber component usage"
+  code={`import { ArabicNumber } from 'noorui-rtl';
+
+{/* Basic number formatting */}
+<ArabicNumber value={1234567} />
+{/* English: 1,234,567 */}
+{/* Arabic:  ١٬٢٣٤٬٥٦٧ */}
+
+{/* Currency (SAR) */}
+<ArabicNumber value={299.99} format="currency" locale="ar" />
+{/* ٢٩٩٫٩٩ ر.س */}
+
+{/* Percentage */}
+<ArabicNumber value={85.5} format="percentage" locale="ar" />
+{/* ٨٥٫٥٪ */}
+
+{/* Compact notation */}
+<ArabicNumber value={1500000} format="compact" locale="ar" />
+{/* ١٫٥ مليون */}
+
+{/* Force Western numerals in Arabic context */}
+<ArabicNumber value={2024} locale="ar" useArabicNumerals={false} />
+{/* 2,024 (Western numerals, Arabic grouping) */}`}
+/>
+
+The component auto-detects: when `locale` is `ar`, it defaults to Eastern Arabic-Indic numerals. You can override this with `useArabicNumerals={false}` for contexts where Western numerals are preferred (phone numbers, international codes, etc.).
+
+<DesignDecision title="Let locale drive numeral choice" type="tip">
+  <p>
+    Do not make assumptions about which numeral system your users expect. NoorUI ties numeral formatting
+    to the active locale. When the interface is in Arabic, numbers render in Arabic-Indic numerals by
+    default. When the interface is in English, numbers render in Western numerals. This convention matches
+    what users in the region expect from well-localized software.
+  </p>
+</DesignDecision>
