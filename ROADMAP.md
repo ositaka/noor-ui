@@ -197,7 +197,7 @@ Build the **go-to design system for bilingual (LTR/RTL) web applications**, star
 - None! All technical AND marketing assets complete ✅
 
 **Recent Wins (Feb 11, 2026):**
-- ✅ **Storybook Documentation** - 5 lean MDX doc pages under single "Docs" sidebar category (Welcome, Getting Started, Colors, Theming, RTL Development) with 6 shared interactive components. Consolidated from 27 pages -- noorui.com is the comprehensive resource, Storybook is the interactive playground.
+- ✅ **Storybook Documentation** - 5 lean MDX doc pages under single "Docs" sidebar category (Welcome, Getting Started, Colors, Theming, RTL Development). Colors has a live interactive palette with 4 themes; Theming and RTL Development link out to noorui.com with preview images. Consolidated from 27 pages -- noorui.com is the comprehensive resource, Storybook is the interactive playground.
 
 **Recent Wins (Feb 9, 2026):**
 - ✅ **Icon migration** - lucide-react → @phosphor-icons/react (Duotone) across ~140 files

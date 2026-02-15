@@ -305,8 +305,8 @@ Each component should include 8-15 stories:
 - [x] **Welcome** — Why this Storybook exists, key stats, one interactive demo
 - [x] **Getting Started** — Install, CSS, providers, first component
 - [x] **Colors** — Live interactive palette (reads CSS vars in real-time)
-- [x] **Theming** — 5 themes side-by-side comparison + dark mode
-- [x] **RTL Development** — The 5 lessons + comprehensive checklist
+- [x] **Theming** — Brief intro + preview image + link to noorui.com/themes
+- [x] **RTL Development** — Brief intro + preview image + link to noorui.com/rtl-guide
 
 Shared doc components (6): `ColorPalette`, `TokenTable`, `ThemeComparison`, `DirectionComparison`, `DesignDecision`, `CodeBlock`
 

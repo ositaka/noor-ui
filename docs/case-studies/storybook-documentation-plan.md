@@ -47,7 +47,7 @@ FOUNDATION
   └── Icons                           ← Phosphor integration, RTL mirroring rules
 
 THEMING
-  ├── Overview                        ← 5 themes, how CSS class switching works
+  ├── Overview                        ← 4 themes, how CSS class switching works
   ├── Token Architecture              ← 3-layer system (CSS vars → @theme → overrides)
   ├── Dark Mode                       ← Class-based dark mode across all themes
   └── Creating Custom Themes          ← Step-by-step guide to build a new theme
@@ -89,7 +89,7 @@ These React components render inside MDX pages to make documentation interactive
 |-----------|---------|
 | `ColorPalette` | Reads CSS vars, renders swatch grid, updates live with theme changes |
 | `TokenTable` | Generic table for any token set with copy-to-clipboard |
-| `ThemeComparison` | Renders same component in all 5 themes side by side |
+| `ThemeComparison` | Renders same component in all 4 themes side by side |
 | `DirectionComparison` | Side-by-side LTR/RTL rendering |
 | `DesignDecision` | Styled callout block for architecture decisions |
 | `CodeBlock` | Syntax-highlighted code with copy button |
@@ -100,7 +100,7 @@ These React components render inside MDX pages to make documentation interactive
 
 ### Tier 1: Welcome (audience: everyone)
 
-**Introduction** -- The "hero" page. What NoorUI is, the meaning of "Noor" (light in Arabic), a live interactive demo of a component in both LTR/RTL, key stats (74 components, 5 themes, 2 languages, WCAG AA). Links to all sections.
+**Introduction** -- The "hero" page. What NoorUI is, the meaning of "Noor" (light in Arabic), a live interactive demo of a component in both LTR/RTL, key stats (74 components, 4 themes, 2 languages, WCAG AA). Links to all sections.
 
 **Why Design Systems** -- The business case. Why design systems save time and money, ensure consistency, and scale. Industry references (Brad Frost's Atomic Design, Sparkbox surveys). Why NoorUI exists: the gap in RTL-first tooling. Written for PMs and stakeholders, not just developers.
 
@@ -126,7 +126,7 @@ These React components render inside MDX pages to make documentation interactive
 
 ### Tier 4: Theming
 
-**Overview**, **Token Architecture**, **Dark Mode**, **Creating Custom Themes** -- Documenting NoorUI's 5-theme system, the 3-layer token architecture, and extensibility.
+**Overview**, **Token Architecture**, **Dark Mode**, **Creating Custom Themes** -- Documenting NoorUI's 4-theme system, the 3-layer token architecture, and extensibility.
 
 ### Tier 5: Patterns
 
@@ -189,7 +189,7 @@ Consolidated 27 pages down to **5 lean pages** under a single "Docs" sidebar cat
 - **Welcome** — Why this Storybook exists, key stats, one interactive demo
 - **Getting Started** — Install, CSS, providers, first component
 - **Colors** — Live interactive palette (uniquely valuable in Storybook)
-- **Theming** — 5 themes side-by-side + dark mode (Storybook's killer feature)
-- **RTL Development** — The 5 lessons + comprehensive checklist (NoorUI's USP)
+- **Theming** — Brief intro + preview image + link to noorui.com/themes
+- **RTL Development** — Brief intro + preview image + link to noorui.com/rtl-guide
 
 **Rationale:** noorui.com is the comprehensive documentation resource. Storybook should be lean -- just enough to orient someone, then let the 749 component stories do the talking. The 22 removed pages largely duplicated website content. Total entries: **764** (5 doc pages + 749 stories + 10 auto-generated).
