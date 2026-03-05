@@ -32,6 +32,14 @@ examples: {
 
   exampleCards: [
     {
+      title: 'Healthcare Clinic',
+      description: 'Multi-page clinic management system with patient directory, medical records, appointment calendar with Hijri dates, and prescription management.',
+      href: '/examples/healthcare',
+      tags: ['Healthcare', 'Multi-page', 'DataTable', 'Calendar', 'GCC', 'RTL'],
+      status: 'ready',
+      featured: true,
+    },
+    {
       title: 'GCC Community Dashboard',
       description: 'Complete GCC dashboard with Prayer Times, Hijri dates, Zakat calculator, and Arabic numbers. Perfect showcase of all GCC components.',
       href: '/examples/gcc-dashboard',

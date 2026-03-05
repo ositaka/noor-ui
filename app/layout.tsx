@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Script from 'next/script'
 import { Inter, IBM_Plex_Sans_Arabic, JetBrains_Mono } from 'next/font/google'
 import { ThemeProvider } from '@/components/providers/theme-provider'
 import { ClientProviders } from '@/components/providers/client-providers'
@@ -74,7 +75,10 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" dir="ltr" suppressHydrationWarning>
+    <html lang="en" dir="ltr" className="theme-cozy" suppressHydrationWarning>
+      <head>
+        <Script src="/scripts/theme-init.js" strategy="beforeInteractive" />
+      </head>
       <body className={`${inter.variable} ${ibmPlexSansArabic.variable} ${jetBrainsMono.variable} font-sans antialiased`}>
         <ThemeProvider
           attribute="class"

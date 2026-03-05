@@ -119,7 +119,13 @@
 
 /* ─── Theme CSS Variables ─────────────────────────────────────────────────── */
 
+html {
+  font-size: var(--root-font-size, 16px);
+}
+
 :root {
+  --root-font-size: 16px;
+
   /* Core palette */
   --background: 220 13% 99%;
   --foreground: 222.2 84% 4.9%;
@@ -283,6 +289,7 @@
 /* ─── Cozy Theme ──────────────────────────────────────────────────────────── */
 
 .theme-cozy {
+  --root-font-size: 18px;
   --color-background: hsl(35 20% 96%);
   --color-foreground: hsl(25 25% 15%);
   --color-card: hsl(0 0% 100%);
@@ -337,6 +344,7 @@
 /* ─── Artistic Theme ──────────────────────────────────────────────────────── */
 
 .theme-artistic {
+  --root-font-size: 18px;
   --color-background: hsl(40 30% 98%);
   --color-foreground: hsl(0 0% 10%);
   --color-card: hsl(0 0% 100%);

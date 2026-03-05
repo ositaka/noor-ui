@@ -60,12 +60,6 @@ export function SiteHeader() {
 
           {/* Secondary links — visible at xl+, collapsed into "More" at lg */}
           <Link
-            href="/starters"
-            className="hidden xl:block text-sm font-medium transition-colors hover:text-primary"
-          >
-            {t.nav.starters}
-          </Link>
-          <Link
             href="/rtl-guide"
             className="hidden xl:block text-sm font-medium transition-colors hover:text-primary"
           >
@@ -87,9 +81,6 @@ export function SiteHeader() {
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="start">
-              <DropdownMenuItem asChild>
-                <Link href="/starters">{t.nav.starters}</Link>
-              </DropdownMenuItem>
               <DropdownMenuItem asChild>
                 <Link href="/rtl-guide">{t.nav.rtlGuide}</Link>
               </DropdownMenuItem>
@@ -148,13 +139,6 @@ export function SiteHeader() {
                   onClick={() => setOpen(false)}
                 >
                   {t.nav.examples}
-                </Link>
-                <Link
-                  href="/starters"
-                  className="text-sm font-medium transition-colors hover:text-primary py-2"
-                  onClick={() => setOpen(false)}
-                >
-                  {t.nav.starters}
                 </Link>
                 <Link
                   href="/rtl-guide"
