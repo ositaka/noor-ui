@@ -50,6 +50,7 @@ import { content } from '@/lib/i18n'
 const hc = {
   en: {
     title: 'Al Noor Medical Center',
+    mainNavigation: 'Main navigation',
     dashboard: 'Dashboard',
     patients: 'Patients',
     appointments: 'Appointments',
@@ -89,6 +90,7 @@ const hc = {
   },
   ar: {
     title: 'مركز النور الطبي',
+    mainNavigation: 'التنقل الرئيسي',
     dashboard: 'لوحة التحكم',
     patients: 'المرضى',
     appointments: 'المواعيد',
@@ -251,7 +253,7 @@ export default function PatientsPage() {
           </div>
           <div>
             <p className="font-medium text-sm group-hover:text-primary transition-colors">{isRTL ? row.nameAr : row.name}</p>
-            <p className="text-xs text-muted-foreground">{isRTL ? row.name : row.nameAr}</p>
+            <p className="text-xs text-muted-foreground"><span lang={isRTL ? 'en' : 'ar'}>{isRTL ? row.name : row.nameAr}</span></p>
           </div>
         </Link>
       ),
@@ -308,7 +310,7 @@ export default function PatientsPage() {
               <span className="font-bold text-xl hidden sm:inline">{h.title}</span>
             </Link>
           </div>
-          <nav className="flex items-center gap-1">
+          <nav aria-label={h.mainNavigation} className="flex items-center gap-1">
             <Button variant="ghost" size="sm" asChild>
               <Link href="/examples/healthcare">{h.dashboard}</Link>
             </Button>
@@ -385,26 +387,26 @@ export default function PatientsPage() {
               <div className="grid gap-4 py-4">
                 <div className="grid gap-4 sm:grid-cols-2">
                   <div className="space-y-2">
-                    <Label>{h.firstName}</Label>
-                    <Input placeholder={h.firstName} />
+                    <Label htmlFor="patient-first-name">{h.firstName}</Label>
+                    <Input id="patient-first-name" placeholder={h.firstName} />
                   </div>
                   <div className="space-y-2">
-                    <Label>{h.lastName}</Label>
-                    <Input placeholder={h.lastName} />
+                    <Label htmlFor="patient-last-name">{h.lastName}</Label>
+                    <Input id="patient-last-name" placeholder={h.lastName} />
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <Label>{h.emiratesId}</Label>
-                  <Input placeholder="784-XXXX-XXXXXXX-X" />
+                  <Label htmlFor="patient-emirates-id">{h.emiratesId}</Label>
+                  <Input id="patient-emirates-id" placeholder="784-XXXX-XXXXXXX-X" />
                 </div>
                 <div className="grid gap-4 sm:grid-cols-2">
                   <div className="space-y-2">
-                    <Label>{h.email}</Label>
-                    <Input type="email" placeholder={h.email} />
+                    <Label htmlFor="patient-email">{h.email}</Label>
+                    <Input id="patient-email" type="email" placeholder={h.email} />
                   </div>
                   <div className="space-y-2">
-                    <Label>{h.phone}</Label>
-                    <Input placeholder="+971 5X XXX XXXX" />
+                    <Label htmlFor="patient-phone">{h.phone}</Label>
+                    <Input id="patient-phone" placeholder="+971 5X XXX XXXX" />
                   </div>
                 </div>
                 <div className="grid gap-4 sm:grid-cols-2">
@@ -460,6 +462,7 @@ export default function PatientsPage() {
                 <MagnifyingGlass className="absolute start-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                 <Input
                   placeholder={h.searchPatients}
+                  aria-label={h.searchPatients}
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="ps-9"

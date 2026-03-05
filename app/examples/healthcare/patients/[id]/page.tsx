@@ -105,6 +105,9 @@ const hc = {
     documentType: 'Type',
     documentDate: 'Date',
     documentSize: 'Size',
+    critical: 'Critical',
+    inactive: 'Inactive',
+    mainNavigation: 'Main navigation',
     download: 'Download',
     labReport: 'Lab Report',
     bloodTestResults: 'Blood Test Results - Complete Panel',
@@ -180,6 +183,9 @@ const hc = {
     documentType: 'النوع',
     documentDate: 'التاريخ',
     documentSize: 'الحجم',
+    critical: 'حرج',
+    inactive: 'غير نشط',
+    mainNavigation: 'التنقل الرئيسي',
     download: 'تحميل',
     labReport: 'تقرير مختبر',
     bloodTestResults: 'نتائج فحص الدم - الفحص الشامل',
@@ -318,7 +324,7 @@ export default function PatientDetailPage() {
               <span className="font-bold text-xl hidden sm:inline">{h.title}</span>
             </Link>
           </div>
-          <nav className="flex items-center gap-1">
+          <nav aria-label={h.mainNavigation} className="flex items-center gap-1">
             <Button variant="ghost" size="sm" asChild>
               <Link href="/examples/healthcare">{h.dashboard}</Link>
             </Button>
@@ -393,10 +399,10 @@ export default function PatientDetailPage() {
                 <div className="flex items-center gap-3 mb-1">
                   <h1 className="text-2xl font-bold">{isRTL ? patient.nameAr : patient.name}</h1>
                   <Badge variant={patient.status === 'critical' ? 'destructive' : patient.status === 'active' ? 'default' : 'secondary'}>
-                    {patient.status === 'active' ? h.active : patient.status === 'critical' ? h.allergies : h.overview}
+                    {patient.status === 'active' ? h.active : patient.status === 'critical' ? h.critical : h.inactive}
                   </Badge>
                 </div>
-                <p className="text-muted-foreground">{isRTL ? patient.name : patient.nameAr}</p>
+                <p className="text-muted-foreground"><span lang={isRTL ? 'en' : 'ar'}>{isRTL ? patient.name : patient.nameAr}</span></p>
                 <div className="flex flex-wrap gap-4 mt-3 text-sm text-muted-foreground">
                   <span className="flex items-center gap-1">
                     <Drop className="h-4 w-4" /> {patient.bloodType}
@@ -482,7 +488,7 @@ export default function PatientDetailPage() {
                       </span>
                       <span className="text-sm font-medium">120/80 {h.mmHg}</span>
                     </div>
-                    <Progress value={60} className="h-2" />
+                    <Progress value={60} className="h-2" aria-label={`${h.bloodPressure}: 120/80 ${h.mmHg}`} />
                   </div>
                   <div>
                     <div className="flex items-center justify-between mb-2">
@@ -490,9 +496,9 @@ export default function PatientDetailPage() {
                         <Heartbeat className="h-4 w-4 text-destructive" />
                         {h.heartRate}
                       </span>
-                      <span className="text-sm font-medium"><ArabicNumber value="72" /> {h.bpm}</span>
+                      <span className="text-sm font-medium"><ArabicNumber value={72} /> {h.bpm}</span>
                     </div>
-                    <Progress value={72} className="h-2" />
+                    <Progress value={72} className="h-2" aria-label={`${h.heartRate}: 72 ${h.bpm}`} />
                   </div>
                   <div>
                     <div className="flex items-center justify-between mb-2">
@@ -502,7 +508,7 @@ export default function PatientDetailPage() {
                       </span>
                       <span className="text-sm font-medium">36.8°C</span>
                     </div>
-                    <Progress value={50} className="h-2" />
+                    <Progress value={50} className="h-2" aria-label={`${h.temperature}: 36.8°C`} />
                   </div>
                   <div>
                     <div className="flex items-center justify-between mb-2">
@@ -510,9 +516,9 @@ export default function PatientDetailPage() {
                         <Eye className="h-4 w-4 text-info" />
                         {h.weight}
                       </span>
-                      <span className="text-sm font-medium"><ArabicNumber value="75" /> {h.kg}</span>
+                      <span className="text-sm font-medium"><ArabicNumber value={75} /> {h.kg}</span>
                     </div>
-                    <Progress value={65} className="h-2" />
+                    <Progress value={65} className="h-2" aria-label={`${h.weight}: 75 ${h.kg}`} />
                   </div>
                 </CardContent>
               </Card>
@@ -694,8 +700,8 @@ export default function PatientDetailPage() {
                       </div>
                       <div className="flex items-center gap-3">
                         <span className="text-xs text-muted-foreground hidden sm:inline">{h.uploaded}: {doc.date}</span>
-                        <Button variant="ghost" size="sm">
-                          <DownloadSimple className="h-4 w-4" />
+                        <Button variant="ghost" size="sm" aria-label={`${h.download}: ${doc.name}`}>
+                          <DownloadSimple className="h-4 w-4" aria-hidden="true" />
                         </Button>
                       </div>
                     </div>

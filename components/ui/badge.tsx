@@ -23,7 +23,7 @@ const badgeVariants = cva(
 )
 
 export interface BadgeProps
-  extends React.HTMLAttributes<HTMLDivElement>,
+  extends React.HTMLAttributes<HTMLSpanElement>,
     VariantProps<typeof badgeVariants> {
   /**
    * ARIA role for the badge. Use "status" for status indicators
@@ -34,7 +34,7 @@ export interface BadgeProps
 
 function Badge({ className, variant, role, ...props }: BadgeProps) {
   return (
-    <div
+    <span
       className={cn(badgeVariants({ variant }), className)}
       role={role}
       {...props}

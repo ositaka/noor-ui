@@ -44,6 +44,7 @@ const hc = {
   en: {
     title: 'Al Noor Medical Center',
     subtitle: 'Clinic Management Dashboard',
+    mainNavigation: 'Main navigation',
     dashboard: 'Dashboard',
     patients: 'Patients',
     appointments: 'Appointments',
@@ -76,10 +77,16 @@ const hc = {
     appointmentCalendarDesc: 'View and schedule patient appointments',
     prescriptionMgmt: 'Prescription Management',
     prescriptionMgmtDesc: 'Manage and create patient prescriptions',
+    confirmed: 'Confirmed',
+    checkedIn: 'Checked In',
+    inProgress: 'In Progress',
+    completed: 'Completed',
+    pending: 'Pending',
   },
   ar: {
     title: 'مركز النور الطبي',
     subtitle: 'لوحة إدارة العيادة',
+    mainNavigation: 'التنقل الرئيسي',
     dashboard: 'لوحة التحكم',
     patients: 'المرضى',
     appointments: 'المواعيد',
@@ -112,6 +119,11 @@ const hc = {
     appointmentCalendarDesc: 'عرض وجدولة مواعيد المرضى',
     prescriptionMgmt: 'إدارة الوصفات الطبية',
     prescriptionMgmtDesc: 'إدارة وإنشاء الوصفات الطبية للمرضى',
+    confirmed: 'مؤكد',
+    checkedIn: 'تم التسجيل',
+    inProgress: 'قيد التنفيذ',
+    completed: 'مكتمل',
+    pending: 'قيد الانتظار',
   },
 }
 
@@ -174,13 +186,13 @@ const todaysAppointments: Appointment[] = [
   },
 ]
 
-function getStatusBadge(status: Appointment['status'], isRTL: boolean) {
-  const labels: Record<Appointment['status'], { en: string; ar: string }> = {
-    confirmed: { en: 'Confirmed', ar: 'مؤكد' },
-    'checked-in': { en: 'Checked In', ar: 'تم التسجيل' },
-    'in-progress': { en: 'In Progress', ar: 'قيد التنفيذ' },
-    completed: { en: 'Completed', ar: 'مكتمل' },
-    pending: { en: 'Pending', ar: 'قيد الانتظار' },
+function getStatusBadge(status: Appointment['status'], labels: Record<string, string>) {
+  const statusLabels: Record<Appointment['status'], string> = {
+    confirmed: labels.confirmed,
+    'checked-in': labels.checkedIn,
+    'in-progress': labels.inProgress,
+    completed: labels.completed,
+    pending: labels.pending,
   }
   const variants: Record<Appointment['status'], 'default' | 'secondary' | 'destructive' | 'outline'> = {
     confirmed: 'default',
@@ -191,7 +203,7 @@ function getStatusBadge(status: Appointment['status'], isRTL: boolean) {
   }
   return (
     <Badge variant={variants[status]}>
-      {isRTL ? labels[status].ar : labels[status].en}
+      {statusLabels[status]}
     </Badge>
   )
 }
@@ -216,7 +228,7 @@ export default function HealthcareDashboard() {
               <span className="font-bold text-xl hidden sm:inline">{h.title}</span>
             </Link>
           </div>
-          <nav className="flex items-center gap-1">
+          <nav aria-label={h.mainNavigation} className="flex items-center gap-1">
             <Button variant="ghost" size="sm" className="font-medium" asChild>
               <Link href="/examples/healthcare">{h.dashboard}</Link>
             </Button>
@@ -317,7 +329,7 @@ export default function HealthcareDashboard() {
                   <div>
                     <CardTitle>{h.todaysSchedule}</CardTitle>
                     <CardDescription>
-                      <ArabicNumber value="6" /> {h.appointmentsToday}
+                      <ArabicNumber value={6} /> {h.appointmentsToday}
                     </CardDescription>
                   </div>
                   <Button variant="outline" size="sm" asChild>
@@ -353,7 +365,7 @@ export default function HealthcareDashboard() {
                           </p>
                         </div>
                       </div>
-                      {getStatusBadge(apt.status, isRTL)}
+                      {getStatusBadge(apt.status, h)}
                     </Link>
                   ))}
                 </div>

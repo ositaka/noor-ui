@@ -56,6 +56,7 @@ import { content } from '@/lib/i18n'
 const hc = {
   en: {
     title: 'Al Noor Medical Center',
+    mainNavigation: 'Main navigation',
     dashboard: 'Dashboard',
     patients: 'Patients',
     appointments: 'Appointments',
@@ -98,16 +99,17 @@ const hc = {
     cancel: 'Cancel',
     newPrescriptionTitle: 'Create New Prescription',
     newPrescriptionDesc: 'Fill in the details to create a new prescription.',
-    onceDailyEn: 'Once daily',
-    twiceDailyEn: 'Twice daily',
-    threeTimesEn: 'Three times daily',
-    asNeededEn: 'As needed',
+    onceDaily: 'Once daily',
+    twiceDaily: 'Twice daily',
+    threeTimesDaily: 'Three times daily',
+    asNeeded: 'As needed',
     prescriptionDetails: 'Prescription Details',
     refills: 'Refills',
     refillsRemaining: 'refills remaining',
   },
   ar: {
     title: 'مركز النور الطبي',
+    mainNavigation: 'التنقل الرئيسي',
     dashboard: 'لوحة التحكم',
     patients: 'المرضى',
     appointments: 'المواعيد',
@@ -136,8 +138,8 @@ const hc = {
     actions: 'الإجراءات',
     viewDetails: 'عرض',
     renewPrescription: 'تجديد',
-    selectPatient: 'اختر مريض',
-    selectDoctor: 'اختر طبيب',
+    selectPatient: 'اختر مريضاً',
+    selectDoctor: 'اختر طبيباً',
     medicationName: 'اسم الدواء',
     medicationPlaceholder: 'مثال: أملوديبين',
     dosagePlaceholder: 'مثال: ٥ ملغ',
@@ -150,10 +152,10 @@ const hc = {
     cancel: 'إلغاء',
     newPrescriptionTitle: 'إنشاء وصفة جديدة',
     newPrescriptionDesc: 'أدخل التفاصيل لإنشاء وصفة طبية جديدة.',
-    onceDailyEn: 'مرة يومياً',
-    twiceDailyEn: 'مرتين يومياً',
-    threeTimesEn: 'ثلاث مرات يومياً',
-    asNeededEn: 'عند الحاجة',
+    onceDaily: 'مرة يومياً',
+    twiceDaily: 'مرتين يومياً',
+    threeTimesDaily: 'ثلاث مرات يومياً',
+    asNeeded: 'عند الحاجة',
     prescriptionDetails: 'تفاصيل الوصفة',
     refills: 'إعادة تعبئة',
     refillsRemaining: 'إعادة تعبئة متبقية',
@@ -332,7 +334,7 @@ export default function PrescriptionsPage() {
       cell: (row: Prescription) => (
         <div className="text-sm">
           <p>{isRTL ? row.startDateAr : row.startDate}</p>
-          <p className="text-xs text-muted-foreground">→ {isRTL ? row.endDateAr : row.endDate}</p>
+          <p className="text-xs text-muted-foreground">— {isRTL ? row.endDateAr : row.endDate}</p>
         </div>
       ),
     },
@@ -365,11 +367,11 @@ export default function PrescriptionsPage() {
       accessorKey: 'id',
       cell: (row: Prescription) => (
         <div className="flex gap-1">
-          <Button variant="ghost" size="sm">
+          <Button variant="ghost" size="sm" aria-label={`${h.viewDetails}: ${isRTL ? row.medicationAr : row.medication}`}>
             {h.viewDetails}
           </Button>
           {row.status === 'active' && (
-            <Button variant="outline" size="sm">
+            <Button variant="outline" size="sm" aria-label={`${h.renewPrescription}: ${isRTL ? row.medicationAr : row.medication}`}>
               {h.renewPrescription}
             </Button>
           )}
@@ -394,7 +396,7 @@ export default function PrescriptionsPage() {
               <span className="font-bold text-xl hidden sm:inline">{h.title}</span>
             </Link>
           </div>
-          <nav className="flex items-center gap-1">
+          <nav aria-label={h.mainNavigation} className="flex items-center gap-1">
             <Button variant="ghost" size="sm" asChild>
               <Link href="/examples/healthcare">{h.dashboard}</Link>
             </Button>
@@ -476,10 +478,10 @@ export default function PrescriptionsPage() {
                       <SelectValue placeholder={h.selectPatient} />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="1">Ahmed Al Mansouri</SelectItem>
-                      <SelectItem value="2">Fatima Al Hashimi</SelectItem>
-                      <SelectItem value="3">Omar Bin Saeed</SelectItem>
-                      <SelectItem value="4">Sarah Johnson</SelectItem>
+                      <SelectItem value="1">{isRTL ? 'أحمد المنصوري' : 'Ahmed Al Mansouri'}</SelectItem>
+                      <SelectItem value="2">{isRTL ? 'فاطمة الهاشمي' : 'Fatima Al Hashimi'}</SelectItem>
+                      <SelectItem value="3">{isRTL ? 'عمر بن سعيد' : 'Omar Bin Saeed'}</SelectItem>
+                      <SelectItem value="4">{isRTL ? 'سارة جونسون' : 'Sarah Johnson'}</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -498,12 +500,12 @@ export default function PrescriptionsPage() {
                 </div>
                 <div className="grid gap-4 sm:grid-cols-2">
                   <div className="space-y-2">
-                    <Label>{h.medicationName}</Label>
-                    <Input placeholder={h.medicationPlaceholder} />
+                    <Label htmlFor="rx-medication">{h.medicationName}</Label>
+                    <Input id="rx-medication" placeholder={h.medicationPlaceholder} />
                   </div>
                   <div className="space-y-2">
-                    <Label>{h.dosage}</Label>
-                    <Input placeholder={h.dosagePlaceholder} />
+                    <Label htmlFor="rx-dosage">{h.dosage}</Label>
+                    <Input id="rx-dosage" placeholder={h.dosagePlaceholder} />
                   </div>
                 </div>
                 <div className="grid gap-4 sm:grid-cols-2">
@@ -514,21 +516,21 @@ export default function PrescriptionsPage() {
                         <SelectValue placeholder={h.frequency} />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="once">{h.onceDailyEn}</SelectItem>
-                        <SelectItem value="twice">{h.twiceDailyEn}</SelectItem>
-                        <SelectItem value="three">{h.threeTimesEn}</SelectItem>
-                        <SelectItem value="asneeded">{h.asNeededEn}</SelectItem>
+                        <SelectItem value="once">{h.onceDaily}</SelectItem>
+                        <SelectItem value="twice">{h.twiceDaily}</SelectItem>
+                        <SelectItem value="three">{h.threeTimesDaily}</SelectItem>
+                        <SelectItem value="asneeded">{h.asNeeded}</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
                   <div className="space-y-2">
-                    <Label>{h.duration}</Label>
-                    <Input placeholder={h.durationPlaceholder} />
+                    <Label htmlFor="rx-duration">{h.duration}</Label>
+                    <Input id="rx-duration" placeholder={h.durationPlaceholder} />
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <Label>{h.notes}</Label>
-                  <Textarea placeholder={h.notesPlaceholder} />
+                  <Label htmlFor="rx-notes">{h.notes}</Label>
+                  <Textarea id="rx-notes" placeholder={h.notesPlaceholder} />
                 </div>
               </div>
               <DialogFooter>
@@ -578,6 +580,7 @@ export default function PrescriptionsPage() {
               <MagnifyingGlass className="absolute start-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
               <Input
                 placeholder={h.searchPrescriptions}
+                aria-label={h.searchPrescriptions}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="ps-9"

@@ -28,6 +28,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { Input } from '@/components/ui/input'
+import { TimePicker } from '@/components/ui/time-picker'
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 import {
@@ -55,9 +56,11 @@ import { content } from '@/lib/i18n'
 const hc = {
   en: {
     title: 'Al Noor Medical Center',
+    mainNavigation: 'Main navigation',
     dashboard: 'Dashboard',
     patients: 'Patients',
     appointments: 'Appointments',
+    appointmentsCount: 'appointments',
     prescriptions: 'Prescriptions',
     appointmentCalendar: 'Appointment Calendar',
     appointmentCalendarDesc: 'View and schedule patient appointments',
@@ -100,9 +103,11 @@ const hc = {
   },
   ar: {
     title: 'مركز النور الطبي',
+    mainNavigation: 'التنقل الرئيسي',
     dashboard: 'لوحة التحكم',
     patients: 'المرضى',
     appointments: 'المواعيد',
+    appointmentsCount: 'موعد',
     prescriptions: 'الوصفات الطبية',
     appointmentCalendar: 'تقويم المواعيد',
     appointmentCalendarDesc: 'عرض وجدولة مواعيد المرضى',
@@ -126,8 +131,8 @@ const hc = {
     inProgress: 'قيد التنفيذ',
     pending: 'قيد الانتظار',
     noAppointments: 'لا توجد مواعيد لهذا التاريخ',
-    selectPatient: 'اختر مريض',
-    selectDoctor: 'اختر طبيب',
+    selectPatient: 'اختر مريضاً',
+    selectDoctor: 'اختر طبيباً',
     selectType: 'اختر النوع',
     date: 'التاريخ',
     notes: 'الملاحظات',
@@ -218,13 +223,13 @@ const allAppointments: AppointmentEntry[] = [
   },
 ]
 
-function getStatusBadge(status: AppointmentEntry['status'], isRTL: boolean) {
-  const labels: Record<AppointmentEntry['status'], { en: string; ar: string }> = {
-    confirmed: { en: 'Confirmed', ar: 'مؤكد' },
-    'checked-in': { en: 'Checked In', ar: 'تم التسجيل' },
-    'in-progress': { en: 'In Progress', ar: 'قيد التنفيذ' },
-    completed: { en: 'Completed', ar: 'مكتمل' },
-    pending: { en: 'Pending', ar: 'قيد الانتظار' },
+function getStatusBadge(status: AppointmentEntry['status'], labels: Record<string, string>) {
+  const statusLabels: Record<AppointmentEntry['status'], string> = {
+    confirmed: labels.confirmed,
+    'checked-in': labels.checkedIn,
+    'in-progress': labels.inProgress,
+    completed: labels.completed,
+    pending: labels.pending,
   }
   const variants: Record<AppointmentEntry['status'], 'default' | 'secondary' | 'destructive' | 'outline'> = {
     confirmed: 'default',
@@ -235,7 +240,7 @@ function getStatusBadge(status: AppointmentEntry['status'], isRTL: boolean) {
   }
   return (
     <Badge variant={variants[status]}>
-      {isRTL ? labels[status].ar : labels[status].en}
+      {statusLabels[status]}
     </Badge>
   )
 }
@@ -268,7 +273,7 @@ export default function AppointmentsPage() {
               <span className="font-bold text-xl hidden sm:inline">{h.title}</span>
             </Link>
           </div>
-          <nav className="flex items-center gap-1">
+          <nav aria-label={h.mainNavigation} className="flex items-center gap-1">
             <Button variant="ghost" size="sm" asChild>
               <Link href="/examples/healthcare">{h.dashboard}</Link>
             </Button>
@@ -350,10 +355,10 @@ export default function AppointmentsPage() {
                       <SelectValue placeholder={h.selectPatient} />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="1">Ahmed Al Mansouri</SelectItem>
-                      <SelectItem value="2">Fatima Al Hashimi</SelectItem>
-                      <SelectItem value="3">Omar Bin Saeed</SelectItem>
-                      <SelectItem value="4">Sarah Johnson</SelectItem>
+                      <SelectItem value="1">{isRTL ? 'أحمد المنصوري' : 'Ahmed Al Mansouri'}</SelectItem>
+                      <SelectItem value="2">{isRTL ? 'فاطمة الهاشمي' : 'Fatima Al Hashimi'}</SelectItem>
+                      <SelectItem value="3">{isRTL ? 'عمر بن سعيد' : 'Omar Bin Saeed'}</SelectItem>
+                      <SelectItem value="4">{isRTL ? 'سارة جونسون' : 'Sarah Johnson'}</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -388,12 +393,12 @@ export default function AppointmentsPage() {
                   </div>
                   <div className="space-y-2">
                     <Label>{h.time}</Label>
-                    <Input type="time" />
+                    <TimePicker placeholder={h.time} className="w-full" />
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <Label>{h.notes}</Label>
-                  <Textarea placeholder={h.notesPlaceholder} />
+                  <Label htmlFor="apt-notes">{h.notes}</Label>
+                  <Textarea id="apt-notes" placeholder={h.notesPlaceholder} />
                 </div>
               </div>
               <DialogFooter>
@@ -464,7 +469,7 @@ export default function AppointmentsPage() {
                   <div>
                     <CardTitle>{h.appointmentList}</CardTitle>
                     <CardDescription>
-                      <ArabicNumber value={allAppointments.length} /> {h.appointments.toLowerCase()}
+                      <ArabicNumber value={allAppointments.length} /> {h.appointmentsCount}
                     </CardDescription>
                   </div>
                   <Tabs defaultValue="today">
@@ -500,7 +505,7 @@ export default function AppointmentsPage() {
                       </div>
                       <div className="flex items-center gap-3">
                         <Badge variant="outline">{isRTL ? apt.typeAr : apt.type}</Badge>
-                        {getStatusBadge(apt.status, isRTL)}
+                        {getStatusBadge(apt.status, h)}
                       </div>
                     </Link>
                   ))}
