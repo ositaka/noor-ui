@@ -257,9 +257,9 @@ const {
         <div className="flex gap-4">
           <Button size="lg" asChild>
             <Link href="/starters">
-              <Package className="h-5 w-5 me-2" />
+              <Package className="h-5 w-5 me-2" aria-hidden="true" />
               {t.viewAllStarters}
-              <ArrowSquareOut className="h-4 w-4 ms-2" />
+              <ArrowSquareOut className="h-4 w-4 ms-2" aria-hidden="true" />
             </Link>
           </Button>
           <Button size="lg" variant="outline" asChild>
@@ -269,7 +269,7 @@ const {
               rel="noopener noreferrer"
             >
               {t.viewOnGitHub}
-              <ArrowSquareOut className="h-4 w-4 ms-2" />
+              <ArrowSquareOut className="h-4 w-4 ms-2" aria-hidden="true" />
             </a>
           </Button>
         </div>
@@ -284,7 +284,7 @@ const {
             return (
               <Card key={index}>
                 <CardHeader>
-                  <Icon className="h-8 w-8 mb-2 text-primary" />
+                  <Icon className="h-8 w-8 mb-2 text-primary" aria-hidden="true" />
                   <CardTitle className="text-lg">{feature.title}</CardTitle>
                   <CardDescription>{feature.description}</CardDescription>
                 </CardHeader>
@@ -292,7 +292,7 @@ const {
                   <ul className="space-y-2">
                     {feature.items.map((item, i) => (
                       <li key={i} className="flex items-start gap-2 text-sm">
-                        <CheckCircle className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
+                        <CheckCircle className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" aria-hidden="true" />
                         <span>{item}</span>
                       </li>
                     ))}
@@ -353,13 +353,13 @@ const {
             <div className="grid gap-6 md:grid-cols-2">
               <div>
                 <h3 className="font-semibold mb-3 flex items-center gap-2">
-                  <Package className="h-5 w-5 text-primary" />
+                  <Package className="h-5 w-5 text-primary" aria-hidden="true" />
                   {t.included.pagesFeatures}
                 </h3>
                 <ul className="space-y-2 text-sm">
                   {t.included.pages.map((item, index) => (
                     <li key={index} className="flex items-start gap-2">
-                      <ArrowRight className="h-4 w-4 text-primary mt-0.5 rtl:rotate-180" />
+                      <ArrowRight className="h-4 w-4 text-primary mt-0.5 rtl:rotate-180" aria-hidden="true" />
                       {item}
                     </li>
                   ))}
@@ -367,13 +367,13 @@ const {
               </div>
               <div>
                 <h3 className="font-semibold mb-3 flex items-center gap-2">
-                  <ShoppingCart className="h-5 w-5 text-primary" />
+                  <ShoppingCart className="h-5 w-5 text-primary" aria-hidden="true" />
                   {t.included.ecommerceFeatures}
                 </h3>
                 <ul className="space-y-2 text-sm">
                   {t.included.features.map((item, index) => (
                     <li key={index} className="flex items-start gap-2">
-                      <ArrowRight className="h-4 w-4 text-primary mt-0.5 rtl:rotate-180" />
+                      <ArrowRight className="h-4 w-4 text-primary mt-0.5 rtl:rotate-180" aria-hidden="true" />
                       {item}
                     </li>
                   ))}

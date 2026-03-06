@@ -81,14 +81,14 @@ export default function GCCDashboardPage() {
   ]
 
   return (
-    <div className="min-h-screen bg-muted/30">
+    <div className="min-h-screen bg-background">
       {/* Header */}
       <header className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50">
         <div className="container flex h-16 items-center justify-between">
           <div className="flex items-center gap-6">
             <Link href="/" className="flex items-center gap-2">
               <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center">
-                <House className="h-5 w-5 text-primary-foreground" />
+                <House className="h-5 w-5 text-primary-foreground" aria-hidden="true" />
               </div>
               <span className="font-bold text-xl hidden sm:inline">
                 {t.gccDashboard.title}
@@ -117,7 +117,7 @@ export default function GCCDashboardPage() {
       {/* Breadcrumb */}
       <div className="border-b bg-background">
         <div className="container py-3">
-          <nav aria-label="Breadcrumb">
+          <nav aria-label={isRTL ? 'مسار التنقل' : 'Breadcrumb'}>
             <div className="flex items-center justify-between gap-4">
               <ol className="flex items-center gap-2 text-sm text-muted-foreground">
                 <li>
@@ -125,14 +125,14 @@ export default function GCCDashboardPage() {
                     {t.common.home}
                   </Link>
                 </li>
-                <li>/</li>
+                <li aria-hidden="true">/</li>
                 <li>
                   <Link href="/examples" className="hover:text-foreground transition-colors">
                     {t.nav.examples}
                   </Link>
                 </li>
-                <li>/</li>
-                <li className="text-foreground font-medium">
+                <li aria-hidden="true">/</li>
+                <li className="text-foreground font-medium" aria-current="page">
                   {t.gccDashboard.subtitle}
                 </li>
               </ol>
@@ -169,7 +169,7 @@ export default function GCCDashboardPage() {
                       <CardDescription className="text-sm font-medium">
                         {stat.title}
                       </CardDescription>
-                      <Icon className="h-4 w-4 text-muted-foreground" />
+                      <Icon className="h-4 w-4 text-muted-foreground" aria-hidden="true" />
                     </CardHeader>
                     <CardContent>
                       <div className="space-y-2">
@@ -183,14 +183,15 @@ export default function GCCDashboardPage() {
                         />
                         <div className="flex items-center gap-1 text-sm">
                           <ArrowUpRight
-                            className={`h-4 w-4 ${isPositive ? 'text-green-600' : 'text-red-600'}`}
+                            className={`h-4 w-4 ${isPositive ? 'text-success' : 'text-destructive'}`}
+                            aria-hidden="true"
                           />
                           <ArabicNumber
                             value={Math.abs(stat.change)}
                             format="percentage"
                             locale={locale}
                             useArabicNumerals={isRTL}
-                            className={`text-xs font-medium ${isPositive ? 'text-green-600' : 'text-red-600'}`}
+                            className={`text-xs font-medium ${isPositive ? 'text-success' : 'text-destructive'}`}
                           />
                           <span className="text-muted-foreground text-xs">
                             {t.gccDashboard.fromLastMonth}
@@ -207,11 +208,11 @@ export default function GCCDashboardPage() {
             <Tabs defaultValue="zakat" className="space-y-4">
               <TabsList>
                 <TabsTrigger value="zakat">
-                  <CurrencyDollar className="h-4 w-4 me-2" />
+                  <CurrencyDollar className="h-4 w-4 me-2" aria-hidden="true" />
                   {t.gccDashboard.tabs.zakatCalculator}
                 </TabsTrigger>
                 <TabsTrigger value="events">
-                  <Calendar className="h-4 w-4 me-2" />
+                  <Calendar className="h-4 w-4 me-2" aria-hidden="true" />
                   {t.gccDashboard.tabs.events}
                 </TabsTrigger>
               </TabsList>
@@ -336,7 +337,7 @@ export default function GCCDashboardPage() {
                         format="currency"
                         locale={locale}
                         useArabicNumerals={isRTL}
-                        className="font-semibold text-green-600"
+                        className="font-semibold text-success"
                       />
                     </div>
                   ))}
@@ -367,15 +368,15 @@ export default function GCCDashboardPage() {
               </CardHeader>
               <CardContent className="space-y-2">
                 <Button className="w-full" size="sm">
-                  <Heart className="me-2 h-4 w-4" />
+                  <Heart className="me-2 h-4 w-4" aria-hidden="true" />
                   {t.gccDashboard.quickActions.donateNow}
                 </Button>
                 <Button className="w-full" variant="outline" size="sm">
-                  <Users className="me-2 h-4 w-4" />
+                  <Users className="me-2 h-4 w-4" aria-hidden="true" />
                   {t.gccDashboard.quickActions.joinEvent}
                 </Button>
                 <Button className="w-full" variant="outline" size="sm">
-                  <BookOpen className="me-2 h-4 w-4" />
+                  <BookOpen className="me-2 h-4 w-4" aria-hidden="true" />
                   {t.gccDashboard.quickActions.browseProjects}
                 </Button>
               </CardContent>

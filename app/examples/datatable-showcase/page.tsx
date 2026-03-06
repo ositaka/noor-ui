@@ -152,9 +152,9 @@ export default function DataTableShowcasePage() {
     // Search filter
     if (searchValue) {
       filtered = filtered.filter(user =>
-        user.name.toLowerCase().includes(searchValue.toLowerCase()) ||
-        user.email.toLowerCase().includes(searchValue.toLowerCase()) ||
-        user.department.toLowerCase().includes(searchValue.toLowerCase())
+        user.name.toLocaleLowerCase(locale).includes(searchValue.toLocaleLowerCase(locale)) ||
+        user.email.toLocaleLowerCase(locale).includes(searchValue.toLocaleLowerCase(locale)) ||
+        user.department.toLocaleLowerCase(locale).includes(searchValue.toLocaleLowerCase(locale))
       )
     }
 
@@ -356,7 +356,7 @@ export default function DataTableShowcasePage() {
       {/* Breadcrumb */}
       <div className="border-b bg-background">
         <div className="container py-3">
-          <nav aria-label="Breadcrumb">
+          <nav aria-label={isRTL ? 'مسار التنقل' : 'Breadcrumb'}>
             <div className="flex items-center justify-between gap-4">
               <ol className="flex items-center gap-2 text-sm text-muted-foreground">
                 <li>
@@ -364,14 +364,14 @@ export default function DataTableShowcasePage() {
                     {t.nav.home}
                   </Link>
                 </li>
-                <li>/</li>
+                <li aria-hidden="true">/</li>
                 <li>
                   <Link href="/examples" className="hover:text-foreground transition-colors">
                     {t.nav.examples}
                   </Link>
                 </li>
-                <li>/</li>
-                <li className="text-foreground font-medium">
+                <li aria-hidden="true">/</li>
+                <li className="text-foreground font-medium" aria-current="page">
                   {t.datatableShowcasePage.breadcrumb.datatable}
                 </li>
               </ol>
@@ -388,7 +388,7 @@ export default function DataTableShowcasePage() {
             <div className="space-y-2">
               <div className="flex items-center gap-3">
                 <div className="rounded-lg bg-primary/10 p-2">
-                  <Users className="h-6 w-6 text-primary" />
+                  <Users className="h-6 w-6 text-primary" aria-hidden="true" />
                 </div>
                 <div>
                   <h1 className="text-3xl font-bold">
@@ -405,11 +405,11 @@ export default function DataTableShowcasePage() {
 
             <div className="flex items-center gap-2">
               <Button variant="outline" onClick={handleRefresh} disabled={isLoading}>
-                <ArrowClockwise className={`h-4 w-4 me-2 ${isLoading ? 'animate-spin' : ''}`} />
+                <ArrowClockwise className={`h-4 w-4 me-2 ${isLoading ? 'animate-spin' : ''}`} aria-hidden="true" />
                 {t.datatableShowcasePage.buttons.refresh}
               </Button>
               <Button onClick={handleExportCSV}>
-                <Download className="h-4 w-4 me-2" />
+                <Download className="h-4 w-4 me-2" aria-hidden="true" />
                 {t.datatableShowcasePage.buttons.exportCSV}
               </Button>
             </div>

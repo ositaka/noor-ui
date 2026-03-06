@@ -45,7 +45,7 @@ function generateMockCartItems(): CartItem[] {
       name: 'Wireless Headphones',
       nameAr: 'سماعات لاسلكية',
       price: 299,
-      image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400',
+      image: '/examples/marketplace/headphones.jpg',
       vendorName: 'Tech Store',
       vendorNameAr: 'متجر التقنية',
       vendorId: 'tech-store',
@@ -58,7 +58,7 @@ function generateMockCartItems(): CartItem[] {
       name: 'Smart Watch',
       nameAr: 'ساعة ذكية',
       price: 499,
-      image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400',
+      image: '/examples/marketplace/watch.jpg',
       vendorName: 'Tech Store',
       vendorNameAr: 'متجر التقنية',
       vendorId: 'tech-store',
@@ -71,7 +71,7 @@ function generateMockCartItems(): CartItem[] {
       name: 'Mechanical Keyboard',
       nameAr: 'لوحة مفاتيح ميكانيكية',
       price: 199,
-      image: 'https://images.unsplash.com/photo-1511467687858-23d96c32e4ae?w=400',
+      image: '/examples/marketplace/keyboard.jpg',
       vendorName: 'Gaming Gear',
       vendorNameAr: 'معدات الألعاب',
       vendorId: 'gaming-gear',
@@ -111,7 +111,7 @@ export default function CartPage() {
     <div className="min-h-screen">
       <main id="main-content" className="container py-12">
         {/* Breadcrumb */}
-        <nav aria-label="Breadcrumb" className="mb-8">
+        <nav aria-label={isRTL ? 'مسار التنقل' : 'Breadcrumb'} className="mb-8">
           <div className="flex items-center justify-between gap-4">
             <ol className="flex items-center gap-2 text-sm text-muted-foreground">
               <li>
@@ -119,20 +119,20 @@ export default function CartPage() {
                   {t.nav.home}
                 </Link>
               </li>
-              <li>/</li>
+              <li aria-hidden="true">/</li>
               <li>
                 <Link href="/examples" className="hover:text-foreground transition-colors">
                   {t.nav.examples}
                 </Link>
               </li>
-              <li>/</li>
+              <li aria-hidden="true">/</li>
               <li>
                 <Link href="/examples/marketplace" className="hover:text-foreground transition-colors">
                   {t.marketplaceCart.breadcrumb.marketplace}
                 </Link>
               </li>
-              <li>/</li>
-              <li className="text-foreground font-medium">
+              <li aria-hidden="true">/</li>
+              <li className="text-foreground font-medium" aria-current="page">
                 {t.marketplaceCart.breadcrumb.shoppingCart}
               </li>
             </ol>
@@ -155,7 +155,7 @@ export default function CartPage() {
           <Card className="p-12">
             <div className="flex flex-col items-center justify-center text-center space-y-4">
               <div className="p-4 bg-muted rounded-full">
-                <ShoppingCart className="h-12 w-12 text-muted-foreground" />
+                <ShoppingCart className="h-12 w-12 text-muted-foreground" aria-hidden="true" />
               </div>
               <div className="space-y-2">
                 <h3 className="text-2xl font-semibold">
@@ -167,7 +167,7 @@ export default function CartPage() {
               </div>
               <Button asChild size="lg">
                 <Link href="/examples/marketplace">
-                  <ShoppingBag className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
+                  <ShoppingBag className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} aria-hidden="true" />
                   {t.marketplaceCart.emptyState.browseProducts}
                 </Link>
               </Button>
@@ -182,9 +182,10 @@ export default function CartPage() {
                   <CardContent className="p-6">
                     <div className="flex gap-4">
                       {/* Product Image */}
-                      <div
-                        className="h-24 w-24 rounded-lg bg-cover bg-center shrink-0"
-                        style={{ backgroundImage: `url(${item.image})` }}
+                      <img
+                        src={item.image}
+                        alt={isRTL ? item.nameAr : item.name}
+                        className="h-24 w-24 rounded-lg object-cover shrink-0"
                       />
 
                       {/* Product Details */}
@@ -204,10 +205,11 @@ export default function CartPage() {
                           <Button
                             variant="ghost"
                             size="icon"
+                            aria-label={isRTL ? 'إزالة المنتج' : 'Remove item'}
                             onClick={() => removeItem(item.id)}
                             className="shrink-0"
                           >
-                            <Trash className="h-4 w-4" />
+                            <Trash className="h-4 w-4" aria-hidden="true" />
                           </Button>
                         </div>
 
@@ -218,10 +220,11 @@ export default function CartPage() {
                               variant="ghost"
                               size="icon"
                               className="h-8 w-8"
+                              aria-label={isRTL ? 'تقليل الكمية' : 'Decrease quantity'}
                               onClick={() => updateQuantity(item.id, item.quantity - 1)}
                               disabled={item.quantity <= 1}
                             >
-                              <Minus className="h-4 w-4" />
+                              <Minus className="h-4 w-4" aria-hidden="true" />
                             </Button>
                             <div className="min-w-[2rem] text-center">
                               <span className="font-medium">
@@ -232,10 +235,11 @@ export default function CartPage() {
                               variant="ghost"
                               size="icon"
                               className="h-8 w-8"
+                              aria-label={isRTL ? 'زيادة الكمية' : 'Increase quantity'}
                               onClick={() => updateQuantity(item.id, item.quantity + 1)}
                               disabled={item.quantity >= item.maxStock}
                             >
-                              <Plus className="h-4 w-4" />
+                              <Plus className="h-4 w-4" aria-hidden="true" />
                             </Button>
                           </div>
 
@@ -305,7 +309,7 @@ export default function CartPage() {
                   {/* Shipping */}
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
-                      <Truck className="h-4 w-4 text-muted-foreground" />
+                      <Truck className="h-4 w-4 text-muted-foreground" aria-hidden="true" />
                       <span className="text-muted-foreground">
                         {t.marketplaceCart.summary.shipping}
                       </span>

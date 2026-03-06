@@ -90,8 +90,8 @@ export default function RFQPage() {
           <Card className="max-w-2xl mx-auto">
             <CardContent className="p-12">
               <div className="flex flex-col items-center text-center space-y-6">
-                <div className="p-4 bg-green-100 rounded-full">
-                  <CheckCircle className="h-16 w-16 text-green-600" />
+                <div className="p-4 bg-success/10 rounded-full">
+                  <CheckCircle className="h-16 w-16 text-success" aria-hidden="true" />
                 </div>
                 <div className="space-y-2">
                   <h1 className="text-3xl font-bold">
@@ -151,7 +151,7 @@ export default function RFQPage() {
     <div className="min-h-screen">
       <main id="main-content" className="container py-12">
         {/* Breadcrumb */}
-        <nav aria-label="Breadcrumb" className="mb-8">
+        <nav aria-label={isRTL ? 'مسار التنقل' : 'Breadcrumb'} className="mb-8">
           <div className="flex items-center justify-between gap-4">
             <ol className="flex items-center gap-2 text-sm text-muted-foreground">
               <li>
@@ -159,20 +159,20 @@ export default function RFQPage() {
                   {t.nav.home}
                 </Link>
               </li>
-              <li>/</li>
+              <li aria-hidden="true">/</li>
               <li>
                 <Link href="/examples" className="hover:text-foreground transition-colors">
                   {t.nav.examples}
                 </Link>
               </li>
-              <li>/</li>
+              <li aria-hidden="true">/</li>
               <li>
                 <Link href="/examples/b2b-marketplace" className="hover:text-foreground transition-colors">
                   {t.b2bMarketplaceRfq.breadcrumb.b2bMarketplace}
                 </Link>
               </li>
-              <li>/</li>
-              <li className="text-foreground font-medium">
+              <li aria-hidden="true">/</li>
+              <li className="text-foreground font-medium" aria-current="page">
                 {t.b2bMarketplaceRfq.breadcrumb.requestForQuote}
               </li>
             </ol>
@@ -196,7 +196,7 @@ export default function RFQPage() {
             <CardContent className="p-4">
               <div className="flex items-start gap-3">
                 <div className="p-2 bg-primary/10 rounded-lg">
-                  <TrendDown className="h-5 w-5 text-primary" />
+                  <TrendDown className="h-5 w-5 text-primary" aria-hidden="true" />
                 </div>
                 <div>
                   <h3 className="font-semibold mb-1">
@@ -214,7 +214,7 @@ export default function RFQPage() {
             <CardContent className="p-4">
               <div className="flex items-start gap-3">
                 <div className="p-2 bg-primary/10 rounded-lg">
-                  <Clock className="h-5 w-5 text-primary" />
+                  <Clock className="h-5 w-5 text-primary" aria-hidden="true" />
                 </div>
                 <div>
                   <h3 className="font-semibold mb-1">
@@ -232,7 +232,7 @@ export default function RFQPage() {
             <CardContent className="p-4">
               <div className="flex items-start gap-3">
                 <div className="p-2 bg-primary/10 rounded-lg">
-                  <FileText className="h-5 w-5 text-primary" />
+                  <FileText className="h-5 w-5 text-primary" aria-hidden="true" />
                 </div>
                 <div>
                   <h3 className="font-semibold mb-1">
@@ -345,7 +345,7 @@ export default function RFQPage() {
                       </CardDescription>
                     </div>
                     <Button type="button" variant="outline" size="sm" onClick={addItem}>
-                      <Plus className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
+                      <Plus className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} aria-hidden="true" />
                       {t.b2bMarketplaceRfq.products.addItem}
                     </Button>
                   </div>
@@ -363,9 +363,10 @@ export default function RFQPage() {
                               type="button"
                               variant="ghost"
                               size="icon"
+                              aria-label={isRTL ? 'إزالة العنصر' : 'Remove item'}
                               onClick={() => removeItem(item.id)}
                             >
-                              <Trash className="h-4 w-4" />
+                              <Trash className="h-4 w-4" aria-hidden="true" />
                             </Button>
                           )}
                         </div>
@@ -506,7 +507,7 @@ export default function RFQPage() {
                   <div className="space-y-2">
                     <Label>{t.b2bMarketplaceRfq.additionalRequirements.attachFiles}</Label>
                     <div className="border-2 border-dashed rounded-lg p-8 text-center">
-                      <Upload className="h-8 w-8 mx-auto text-muted-foreground mb-2" />
+                      <Upload className="h-8 w-8 mx-auto text-muted-foreground mb-2" aria-hidden="true" />
                       <p className="text-sm text-muted-foreground mb-2">
                         {t.b2bMarketplaceRfq.additionalRequirements.dragDropFiles}
                       </p>
@@ -549,26 +550,26 @@ export default function RFQPage() {
                     </h4>
                     <ul className="space-y-1 text-sm text-muted-foreground">
                       <li className="flex items-start gap-2">
-                        <CheckCircle className="h-4 w-4 text-green-600 shrink-0 mt-0.5" />
+                        <CheckCircle className="h-4 w-4 text-success shrink-0 mt-0.5" aria-hidden="true" />
                         {t.b2bMarketplaceRfq.summary.responseWithin24}
                       </li>
                       <li className="flex items-start gap-2">
-                        <CheckCircle className="h-4 w-4 text-green-600 shrink-0 mt-0.5" />
+                        <CheckCircle className="h-4 w-4 text-success shrink-0 mt-0.5" aria-hidden="true" />
                         {t.b2bMarketplaceRfq.summary.competitivePricing}
                       </li>
                       <li className="flex items-start gap-2">
-                        <CheckCircle className="h-4 w-4 text-green-600 shrink-0 mt-0.5" />
+                        <CheckCircle className="h-4 w-4 text-success shrink-0 mt-0.5" aria-hidden="true" />
                         {t.b2bMarketplaceRfq.summary.flexiblePayment}
                       </li>
                       <li className="flex items-start gap-2">
-                        <CheckCircle className="h-4 w-4 text-green-600 shrink-0 mt-0.5" />
+                        <CheckCircle className="h-4 w-4 text-success shrink-0 mt-0.5" aria-hidden="true" />
                         {t.b2bMarketplaceRfq.summary.dedicatedSupport}
                       </li>
                     </ul>
                   </div>
 
                   <Button type="submit" className="w-full" size="lg">
-                    <ChatCentered className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
+                    <ChatCentered className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} aria-hidden="true" />
                     {t.b2bMarketplaceRfq.summary.submitRequest}
                   </Button>
 

@@ -2,6 +2,7 @@
 
 import * as React from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
@@ -75,6 +76,13 @@ interface Property {
   furnished: boolean
   parking: number
   yearBuilt: number
+}
+
+const propertyImages: Record<Property['type'], string> = {
+  villa: '/examples/real-estate/villa.jpg',
+  apartment: '/examples/real-estate/apartment.jpg',
+  townhouse: '/examples/real-estate/townhouse.jpg',
+  penthouse: '/examples/real-estate/penthouse.jpg',
 }
 
 // Generate more realistic mock data
@@ -168,6 +176,118 @@ const generateProperties = (): Property[] => {
 
 export default function RealEstatePage() {
   const { locale } = useDirection()
+  const router = useRouter()
+  const isRTL = locale === 'ar'
+
+  const t = isRTL ? {
+    home: 'الرئيسية',
+    examples: 'الأمثلة',
+    dashboard: 'لوحة العقارات',
+    subtitle: 'تصفح أفضل العقارات في دبي والإمارات',
+    totalProperties: 'إجمالي العقارات',
+    averagePrice: 'متوسط السعر',
+    forSale: 'عقارات للبيع',
+    forRent: 'عقارات للإيجار',
+    fromLastMonth: 'عن الشهر الماضي',
+    searchPlaceholder: 'ابحث عن موقع أو مدينة...',
+    searchLabel: 'ابحث عن موقع أو مدينة',
+    cityLabel: 'المدينة',
+    allCities: 'جميع المدن',
+    dubai: 'دبي',
+    abuDhabi: 'أبوظبي',
+    sharjah: 'الشارقة',
+    typeLabel: 'نوع العقار',
+    allTypes: 'جميع الأنواع',
+    villa: 'فيلا',
+    apartment: 'شقة',
+    townhouse: 'تاون هاوس',
+    penthouse: 'بنتهاوس',
+    statusLabel: 'الحالة',
+    all: 'الكل',
+    sale: 'للبيع',
+    rent: 'للإيجار',
+    availableProperties: 'العقارات المتاحة',
+    propertiesCount: (n: number) => `${n} عقار متاح`,
+    clearFilters: 'مسح الفلاتر',
+    moreFilters: 'مزيد من الفلاتر',
+    advancedFilters: 'فلاتر متقدمة',
+    advancedFiltersDesc: 'قم بتخصيص بحثك للعثور على العقار المثالي',
+    bedrooms: 'عدد غرف النوم',
+    priceRange: 'نطاق السعر (د.إ)',
+    areaRange: 'المساحة (قدم مربع)',
+    furnishedOnly: 'مفروش فقط',
+    featuredOnly: 'عقارات مميزة فقط',
+    reset: 'إعادة تعيين',
+    applyFilters: 'تطبيق الفلاتر',
+    noProperties: 'لم يتم العثور على عقارات',
+    noPropertiesDesc: 'جرب تعديل الفلاتر أو البحث للعثور على المزيد من النتائج',
+    clearAllFilters: 'مسح جميع الفلاتر',
+    featured: 'مميز',
+    furnished: 'مفروش',
+    addToFavorites: 'إضافة للمفضلة',
+    share: 'مشاركة',
+    bedroomsLabel: 'غرف النوم',
+    bathroomsLabel: 'الحمامات',
+    areaLabel: 'المساحة',
+    sqft: 'قدم²',
+    currency: 'د.إ',
+    perYear: '/سنوياً',
+    million: 'م',
+  } : {
+    home: 'Home',
+    examples: 'Examples',
+    dashboard: 'Real Estate Dashboard',
+    subtitle: 'Browse premium properties in Dubai and UAE',
+    totalProperties: 'Total Properties',
+    averagePrice: 'Average Price',
+    forSale: 'For Sale',
+    forRent: 'For Rent',
+    fromLastMonth: 'from last month',
+    searchPlaceholder: 'Search location or city...',
+    searchLabel: 'Search location or city',
+    cityLabel: 'City',
+    allCities: 'All Cities',
+    dubai: 'Dubai',
+    abuDhabi: 'Abu Dhabi',
+    sharjah: 'Sharjah',
+    typeLabel: 'Property Type',
+    allTypes: 'All Types',
+    villa: 'Villa',
+    apartment: 'Apartment',
+    townhouse: 'Townhouse',
+    penthouse: 'Penthouse',
+    statusLabel: 'Status',
+    all: 'All',
+    sale: 'For Sale',
+    rent: 'For Rent',
+    availableProperties: 'Available Properties',
+    propertiesCount: (n: number) => `${n} properties available`,
+    clearFilters: 'Clear Filters',
+    moreFilters: 'More Filters',
+    advancedFilters: 'Advanced Filters',
+    advancedFiltersDesc: 'Customize your search to find the perfect property',
+    bedrooms: 'Bedrooms',
+    priceRange: 'Price Range (AED)',
+    areaRange: 'Area (sqft)',
+    furnishedOnly: 'Furnished Only',
+    featuredOnly: 'Featured Properties Only',
+    reset: 'Reset',
+    applyFilters: 'Apply Filters',
+    noProperties: 'No Properties Found',
+    noPropertiesDesc: 'Try adjusting your filters or search to find more results',
+    clearAllFilters: 'Clear All Filters',
+    featured: 'Featured',
+    furnished: 'Furnished',
+    addToFavorites: 'Add to favorites',
+    share: 'Share',
+    bedroomsLabel: 'Bedrooms',
+    bathroomsLabel: 'Bathrooms',
+    areaLabel: 'Area',
+    sqft: 'sqft',
+    currency: 'AED',
+    perYear: '/year',
+    million: 'M',
+  }
 
   // Data
   const [allProperties] = React.useState<Property[]>(generateProperties())
@@ -198,16 +318,17 @@ export default function RealEstatePage() {
   React.useEffect(() => {
     let filtered = [...allProperties]
 
-    // Search
+    // Search — locale-aware, includes Arabic city names
     if (searchQuery) {
-      const query = searchQuery.toLowerCase()
+      const query = searchQuery.toLocaleLowerCase(isRTL ? 'ar' : 'en')
       filtered = filtered.filter(
         (p) =>
-          p.title.toLowerCase().includes(query) ||
+          p.title.toLocaleLowerCase('en').includes(query) ||
           p.titleAr.includes(query) ||
-          p.location.toLowerCase().includes(query) ||
+          p.location.toLocaleLowerCase('en').includes(query) ||
           p.locationAr.includes(query) ||
-          p.city.toLowerCase().includes(query)
+          p.city.toLocaleLowerCase('en').includes(query) ||
+          p.cityAr.includes(query)
       )
     }
 
@@ -260,56 +381,49 @@ export default function RealEstatePage() {
   // Stats
   const stats = [
     {
-      label: 'إجمالي العقارات',
-      labelEn: 'Total Properties',
+      label: t.totalProperties,
       value: filteredProperties.length.toLocaleString(),
       icon: Buildings,
       trend: '+12%',
     },
     {
-      label: 'متوسط السعر',
-      labelEn: 'Average Price',
+      label: t.averagePrice,
       value:
         filteredProperties.length > 0
-          ? `${(filteredProperties.reduce((sum, p) => sum + p.price, 0) / filteredProperties.length / 1000000).toFixed(1)}M`
+          ? `${(filteredProperties.reduce((sum, p) => sum + p.price, 0) / filteredProperties.length / 1000000).toFixed(1)}${t.million}`
           : '0',
       icon: TrendUp,
       trend: '+8%',
     },
     {
-      label: 'عقارات للبيع',
-      labelEn: 'For Sale',
+      label: t.forSale,
       value: filteredProperties.filter((p) => p.status === 'sale').length.toLocaleString(),
       icon: House,
       trend: '+5%',
     },
     {
-      label: 'عقارات للإيجار',
-      labelEn: 'For Rent',
+      label: t.forRent,
       value: filteredProperties.filter((p) => p.status === 'rent').length.toLocaleString(),
       icon: House,
       trend: '+15%',
     },
   ]
 
-  const getPropertyTypeLabel = (type: string) => {
-    const types = {
-      villa: { en: 'Villa', ar: 'فيلا' },
-      apartment: { en: 'Apartment', ar: 'شقة' },
-      townhouse: { en: 'Townhouse', ar: 'تاون هاوس' },
-      penthouse: { en: 'Penthouse', ar: 'بنتهاوس' },
-    }
-    return locale === 'ar' ? types[type as keyof typeof types].ar : types[type as keyof typeof types].en
+  const typeLabels: Record<string, string> = {
+    villa: t.villa,
+    apartment: t.apartment,
+    townhouse: t.townhouse,
+    penthouse: t.penthouse,
   }
 
-  const getStatusLabel = (status: string) => {
-    return status === 'sale' ? (locale === 'ar' ? 'للبيع' : 'For Sale') : locale === 'ar' ? 'للإيجار' : 'For Rent'
-  }
+  const getPropertyTypeLabel = (type: string) => typeLabels[type] || type
+
+  const getStatusLabel = (status: string) => status === 'sale' ? t.sale : t.rent
 
   const formatPrice = (price: number, status: string) => {
     const formatted = new Intl.NumberFormat('en-US').format(price)
-    const suffix = status === 'rent' ? (locale === 'ar' ? '/سنوياً' : '/year') : ''
-    return `${formatted} ${locale === 'ar' ? 'د.إ' : 'AED'}${suffix}`
+    const suffix = status === 'rent' ? t.perYear : ''
+    return `${formatted} ${t.currency}${suffix}`
   }
 
   const clearAdvancedFilters = () => {
@@ -332,23 +446,23 @@ export default function RealEstatePage() {
       {/* Breadcrumb */}
       <div className="border-b bg-background">
         <div className="container py-3">
-          <nav aria-label="Breadcrumb">
+          <nav aria-label={isRTL ? 'مسار التنقل' : 'Breadcrumb'}>
             <div className="flex items-center justify-between gap-4">
               <ol className="flex items-center gap-2 text-sm text-muted-foreground">
                 <li>
                   <Link href="/" className="hover:text-foreground transition-colors">
-                    {locale === 'ar' ? 'الرئيسية' : 'Home'}
+                    {t.home}
                   </Link>
                 </li>
-                <li>/</li>
+                <li aria-hidden="true">/</li>
                 <li>
                   <Link href="/examples" className="hover:text-foreground transition-colors">
-                    {locale === 'ar' ? 'الأمثلة' : 'Examples'}
+                    {t.examples}
                   </Link>
                 </li>
-                <li>/</li>
-                <li className="text-foreground font-medium">
-                  {locale === 'ar' ? 'لوحة العقارات' : 'Real Estate Dashboard'}
+                <li aria-hidden="true">/</li>
+                <li aria-current="page" className="text-foreground font-medium">
+                  {t.dashboard}
                 </li>
               </ol>
               <DirectionToggle />
@@ -362,10 +476,10 @@ export default function RealEstatePage() {
         <div className="container py-6">
           <div>
             <h1 className="text-3xl font-bold tracking-tight mb-2">
-              {locale === 'ar' ? 'لوحة العقارات' : 'Real Estate Dashboard'}
+              {t.dashboard}
             </h1>
             <p className="text-muted-foreground">
-              {locale === 'ar' ? 'تصفح أفضل العقارات في دبي والإمارات' : 'Browse premium properties in Dubai and UAE'}
+              {t.subtitle}
             </p>
           </div>
         </div>
@@ -377,14 +491,14 @@ export default function RealEstatePage() {
           {stats.map((stat, index) => (
             <Card key={index}>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">{locale === 'ar' ? stat.label : stat.labelEn}</CardTitle>
-                <stat.icon className="h-4 w-4 text-muted-foreground" />
+                <CardTitle className="text-sm font-medium">{stat.label}</CardTitle>
+                <stat.icon className="h-4 w-4 text-muted-foreground" aria-hidden="true" />
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">{stat.value}</div>
                 <p className="text-xs text-muted-foreground">
-                  <span className="text-green-500">{stat.trend}</span>{' '}
-                  {locale === 'ar' ? 'عن الشهر الماضي' : 'from last month'}
+                  <span className="text-success">{stat.trend}</span>{' '}
+                  {t.fromLastMonth}
                 </p>
               </CardContent>
             </Card>
@@ -397,9 +511,10 @@ export default function RealEstatePage() {
             <div className="grid gap-4 md:grid-cols-5">
               <div className="md:col-span-2">
                 <div className="relative">
-                  <MagnifyingGlass className="absolute start-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                  <MagnifyingGlass className="absolute start-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" aria-hidden="true" />
                   <Input
-                    placeholder={locale === 'ar' ? 'ابحث عن موقع أو مدينة...' : 'Search location or city...'}
+                    aria-label={t.searchLabel}
+                    placeholder={t.searchPlaceholder}
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     className="ps-10"
@@ -407,36 +522,36 @@ export default function RealEstatePage() {
                 </div>
               </div>
               <Select value={selectedCity} onValueChange={setSelectedCity}>
-                <SelectTrigger>
-                  <SelectValue placeholder={locale === 'ar' ? 'المدينة' : 'City'} />
+                <SelectTrigger aria-label={t.cityLabel}>
+                  <SelectValue placeholder={t.cityLabel} />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="all">{locale === 'ar' ? 'جميع المدن' : 'All Cities'}</SelectItem>
-                  <SelectItem value="Dubai">{locale === 'ar' ? 'دبي' : 'Dubai'}</SelectItem>
-                  <SelectItem value="Abu Dhabi">{locale === 'ar' ? 'أبوظبي' : 'Abu Dhabi'}</SelectItem>
-                  <SelectItem value="Sharjah">{locale === 'ar' ? 'الشارقة' : 'Sharjah'}</SelectItem>
+                  <SelectItem value="all">{t.allCities}</SelectItem>
+                  <SelectItem value="Dubai">{t.dubai}</SelectItem>
+                  <SelectItem value="Abu Dhabi">{t.abuDhabi}</SelectItem>
+                  <SelectItem value="Sharjah">{t.sharjah}</SelectItem>
                 </SelectContent>
               </Select>
               <Select value={selectedType} onValueChange={setSelectedType}>
-                <SelectTrigger>
-                  <SelectValue placeholder={locale === 'ar' ? 'نوع العقار' : 'Property Type'} />
+                <SelectTrigger aria-label={t.typeLabel}>
+                  <SelectValue placeholder={t.typeLabel} />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="all">{locale === 'ar' ? 'جميع الأنواع' : 'All Types'}</SelectItem>
-                  <SelectItem value="villa">{locale === 'ar' ? 'فيلا' : 'Villa'}</SelectItem>
-                  <SelectItem value="apartment">{locale === 'ar' ? 'شقة' : 'Apartment'}</SelectItem>
-                  <SelectItem value="townhouse">{locale === 'ar' ? 'تاون هاوس' : 'Townhouse'}</SelectItem>
-                  <SelectItem value="penthouse">{locale === 'ar' ? 'بنتهاوس' : 'Penthouse'}</SelectItem>
+                  <SelectItem value="all">{t.allTypes}</SelectItem>
+                  <SelectItem value="villa">{t.villa}</SelectItem>
+                  <SelectItem value="apartment">{t.apartment}</SelectItem>
+                  <SelectItem value="townhouse">{t.townhouse}</SelectItem>
+                  <SelectItem value="penthouse">{t.penthouse}</SelectItem>
                 </SelectContent>
               </Select>
               <Select value={selectedStatus} onValueChange={setSelectedStatus}>
-                <SelectTrigger>
-                  <SelectValue placeholder={locale === 'ar' ? 'الحالة' : 'Status'} />
+                <SelectTrigger aria-label={t.statusLabel}>
+                  <SelectValue placeholder={t.statusLabel} />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="all">{locale === 'ar' ? 'الكل' : 'All'}</SelectItem>
-                  <SelectItem value="sale">{locale === 'ar' ? 'للبيع' : 'For Sale'}</SelectItem>
-                  <SelectItem value="rent">{locale === 'ar' ? 'للإيجار' : 'For Rent'}</SelectItem>
+                  <SelectItem value="all">{t.all}</SelectItem>
+                  <SelectItem value="sale">{t.sale}</SelectItem>
+                  <SelectItem value="rent">{t.rent}</SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -447,26 +562,24 @@ export default function RealEstatePage() {
         <div className="mb-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div>
             <h2 className="text-2xl font-bold tracking-tight">
-              {locale === 'ar' ? 'العقارات المتاحة' : 'Available Properties'}
+              {t.availableProperties}
             </h2>
-            <p className="text-sm text-muted-foreground">
-              {locale === 'ar'
-                ? `${filteredProperties.length} عقار متاح`
-                : `${filteredProperties.length} properties available`}
+            <p className="text-sm text-muted-foreground" role="status" aria-live="polite" aria-atomic="true">
+              {t.propertiesCount(filteredProperties.length)}
             </p>
           </div>
           <div className="flex gap-2">
             {activeFiltersCount > 0 && (
               <Button variant="outline" size="sm" onClick={clearAdvancedFilters}>
-                <X className="h-4 w-4 me-2" />
-                {locale === 'ar' ? 'مسح الفلاتر' : 'Clear Filters'} ({activeFiltersCount})
+                <X className="h-4 w-4 me-2" aria-hidden="true" />
+                {t.clearFilters} ({activeFiltersCount})
               </Button>
             )}
             <Dialog open={filterDialogOpen} onOpenChange={setFilterDialogOpen}>
               <DialogTrigger asChild>
                 <Button variant="outline" size="sm">
-                  <Sliders className="h-4 w-4 me-2" />
-                  {locale === 'ar' ? 'مزيد من الفلاتر' : 'More Filters'}
+                  <Sliders className="h-4 w-4 me-2" aria-hidden="true" />
+                  {t.moreFilters}
                   {activeFiltersCount > 0 && (
                     <Badge variant="secondary" className="ms-2">
                       {activeFiltersCount}
@@ -476,26 +589,25 @@ export default function RealEstatePage() {
               </DialogTrigger>
               <DialogContent className="sm:max-w-[600px]">
                 <DialogHeader>
-                  <DialogTitle>{locale === 'ar' ? 'فلاتر متقدمة' : 'Advanced Filters'}</DialogTitle>
+                  <DialogTitle>{t.advancedFilters}</DialogTitle>
                   <DialogDescription>
-                    {locale === 'ar'
-                      ? 'قم بتخصيص بحثك للعثور على العقار المثالي'
-                      : 'Customize your search to find the perfect property'}
+                    {t.advancedFiltersDesc}
                   </DialogDescription>
                 </DialogHeader>
 
                 <div className="space-y-6 py-4">
                   {/* Bedrooms */}
-                  <div className="space-y-3">
-                    <label className="text-sm font-medium">
-                      {locale === 'ar' ? 'عدد غرف النوم' : 'Bedrooms'}
-                    </label>
+                  <fieldset className="space-y-3">
+                    <legend className="text-sm font-medium">
+                      {t.bedrooms}
+                    </legend>
                     <div className="flex flex-wrap gap-2">
                       {['1', '2', '3', '4', '5', '6+'].map((bed) => (
                         <Button
                           key={bed}
                           variant={bedroomFilter.includes(bed) ? 'primary' : 'outline'}
                           size="sm"
+                          aria-pressed={bedroomFilter.includes(bed)}
                           onClick={() => {
                             if (bedroomFilter.includes(bed)) {
                               setBedroomFilter(bedroomFilter.filter((b) => b !== bed))
@@ -508,20 +620,21 @@ export default function RealEstatePage() {
                         </Button>
                       ))}
                     </div>
-                  </div>
+                  </fieldset>
 
                   {/* Price Range */}
                   <div className="space-y-3">
                     <div className="flex items-center justify-between">
-                      <label className="text-sm font-medium">
-                        {locale === 'ar' ? 'نطاق السعر (د.إ)' : 'Price Range (AED)'}
-                      </label>
+                      <span className="text-sm font-medium">
+                        {t.priceRange}
+                      </span>
                       <span className="text-sm text-muted-foreground">
                         {new Intl.NumberFormat('en-US').format(priceRange[0])} -{' '}
                         {new Intl.NumberFormat('en-US').format(priceRange[1])}
                       </span>
                     </div>
                     <Slider
+                      aria-label={t.priceRange}
                       value={priceRange}
                       onValueChange={setPriceRange}
                       min={0}
@@ -534,15 +647,16 @@ export default function RealEstatePage() {
                   {/* Area Range */}
                   <div className="space-y-3">
                     <div className="flex items-center justify-between">
-                      <label className="text-sm font-medium">
-                        {locale === 'ar' ? 'المساحة (قدم مربع)' : 'Area (sqft)'}
-                      </label>
+                      <span className="text-sm font-medium">
+                        {t.areaRange}
+                      </span>
                       <span className="text-sm text-muted-foreground">
                         {new Intl.NumberFormat('en-US').format(areaRange[0])} -{' '}
                         {new Intl.NumberFormat('en-US').format(areaRange[1])}
                       </span>
                     </div>
                     <Slider
+                      aria-label={t.areaRange}
                       value={areaRange}
                       onValueChange={setAreaRange}
                       min={0}
@@ -554,7 +668,7 @@ export default function RealEstatePage() {
 
                   {/* Checkboxes */}
                   <div className="space-y-3">
-                    <div className="flex items-center space-x-2 space-x-reverse">
+                    <div className="flex items-center gap-2">
                       <Checkbox
                         id="furnished"
                         checked={furnishedOnly}
@@ -564,10 +678,10 @@ export default function RealEstatePage() {
                         htmlFor="furnished"
                         className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                       >
-                        {locale === 'ar' ? 'مفروش فقط' : 'Furnished Only'}
+                        {t.furnishedOnly}
                       </label>
                     </div>
-                    <div className="flex items-center space-x-2 space-x-reverse">
+                    <div className="flex items-center gap-2">
                       <Checkbox
                         id="featured"
                         checked={featuredOnly}
@@ -577,7 +691,7 @@ export default function RealEstatePage() {
                         htmlFor="featured"
                         className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                       >
-                        {locale === 'ar' ? 'عقارات مميزة فقط' : 'Featured Properties Only'}
+                        {t.featuredOnly}
                       </label>
                     </div>
                   </div>
@@ -585,10 +699,10 @@ export default function RealEstatePage() {
 
                 <DialogFooter>
                   <Button variant="outline" onClick={clearAdvancedFilters}>
-                    {locale === 'ar' ? 'إعادة تعيين' : 'Reset'}
+                    {t.reset}
                   </Button>
                   <Button onClick={() => setFilterDialogOpen(false)}>
-                    {locale === 'ar' ? 'تطبيق الفلاتر' : 'Apply Filters'}
+                    {t.applyFilters}
                   </Button>
                 </DialogFooter>
               </DialogContent>
@@ -600,14 +714,12 @@ export default function RealEstatePage() {
         {paginatedProperties.length === 0 ? (
           <Card className="p-12">
             <div className="text-center">
-              <House className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
+              <House className="h-12 w-12 mx-auto text-muted-foreground mb-4" aria-hidden="true" />
               <h3 className="text-lg font-semibold mb-2">
-                {locale === 'ar' ? 'لم يتم العثور على عقارات' : 'No Properties Found'}
+                {t.noProperties}
               </h3>
               <p className="text-muted-foreground mb-4">
-                {locale === 'ar'
-                  ? 'جرب تعديل الفلاتر أو البحث للعثور على المزيد من النتائج'
-                  : 'Try adjusting your filters or search to find more results'}
+                {t.noPropertiesDesc}
               </p>
               <Button variant="outline" onClick={() => {
                 setSearchQuery('')
@@ -616,7 +728,7 @@ export default function RealEstatePage() {
                 setSelectedStatus('all')
                 clearAdvancedFilters()
               }}>
-                {locale === 'ar' ? 'مسح جميع الفلاتر' : 'Clear All Filters'}
+                {t.clearAllFilters}
               </Button>
             </div>
           </Card>
@@ -633,13 +745,13 @@ export default function RealEstatePage() {
                 ]
                 if (property.featured) {
                   badges.push({
-                    label: locale === 'ar' ? 'مميز' : 'Featured',
+                    label: t.featured,
                     variant: 'destructive',
                   })
                 }
                 if (property.furnished) {
                   badges.push({
-                    label: locale === 'ar' ? 'مفروش' : 'Furnished',
+                    label: t.furnished,
                     variant: 'outline',
                     className: 'bg-background/90',
                   })
@@ -649,37 +761,37 @@ export default function RealEstatePage() {
                 const actions: ListingCardAction[] = [
                   {
                     icon: Heart,
-                    label: locale === 'ar' ? 'إضافة للمفضلة' : 'Add to favorites',
+                    label: t.addToFavorites,
                     onClick: () => console.log('Favorite clicked'),
                   },
                   {
                     icon: ShareNetwork,
-                    label: locale === 'ar' ? 'مشاركة' : 'Share',
+                    label: t.share,
                     onClick: () => console.log('Share clicked'),
                   },
                 ]
 
                 // Prepare stats
-                const stats: ListingCardStat[] = [
+                const cardStats: ListingCardStat[] = [
                   {
                     icon: Bed,
                     value: property.bedrooms,
-                    label: locale === 'ar' ? 'غرف النوم' : 'Bedrooms',
+                    label: t.bedroomsLabel,
                   },
                   {
                     icon: Bathtub,
                     value: property.bathrooms,
-                    label: locale === 'ar' ? 'الحمامات' : 'Bathrooms',
+                    label: t.bathroomsLabel,
                   },
                   {
                     icon: Square,
-                    value: `${property.area.toLocaleString()} ${locale === 'ar' ? 'قدم²' : 'sqft'}`,
-                    label: locale === 'ar' ? 'المساحة' : 'Area',
+                    value: `${property.area.toLocaleString()} ${t.sqft}`,
+                    label: t.areaLabel,
                   },
                 ]
 
                 // Prepare tags
-                const tags: ListingCardTag[] = (locale === 'ar' ? property.amenitiesAr : property.amenities).map(
+                const tags: ListingCardTag[] = (isRTL ? property.amenitiesAr : property.amenities).map(
                   (amenity) => ({
                     label: amenity,
                     variant: 'secondary',
@@ -687,28 +799,29 @@ export default function RealEstatePage() {
                 )
 
                 return (
-                  <Link href={`/examples/real-estate/${property.id}`} key={property.id}>
-                    <ListingCard
-                      title={locale === 'ar' ? property.titleAr : property.title}
-                      subtitle={
-                        <>
-                          <MapPin className="h-3 w-3 inline me-1" />
-                          {locale === 'ar' ? property.locationAr : property.location}
-                        </>
-                      }
-                      description={locale === 'ar' ? property.descriptionAr : property.description}
-                      price={formatPrice(property.price, property.status)}
-                      placeholderIcon={House}
-                      badges={badges}
-                      actions={actions}
-                      stats={stats}
-                      tags={tags}
-                      maxTags={3}
-                      typeBadge={getPropertyTypeLabel(property.type)}
-                      featured={property.featured}
-                      imageAspect="wide"
-                    />
-                  </Link>
+                  <ListingCard
+                    key={property.id}
+                    title={isRTL ? property.titleAr : property.title}
+                    subtitle={
+                      <>
+                        <MapPin className="h-3 w-3 inline me-1" aria-hidden="true" />
+                        {isRTL ? property.locationAr : property.location}
+                      </>
+                    }
+                    description={isRTL ? property.descriptionAr : property.description}
+                    price={formatPrice(property.price, property.status)}
+                    image={propertyImages[property.type]}
+                    placeholderIcon={House}
+                    badges={badges}
+                    actions={actions}
+                    stats={cardStats}
+                    tags={tags}
+                    maxTags={3}
+                    typeBadge={getPropertyTypeLabel(property.type)}
+                    featured={property.featured}
+                    imageAspect="wide"
+                    onClick={() => router.push(`/examples/real-estate/${property.id}`)}
+                  />
                 )
               })}
             </div>
@@ -719,7 +832,9 @@ export default function RealEstatePage() {
                 <PaginationContent>
                   <PaginationItem>
                     <PaginationPrevious
-                      onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
+                      href="#"
+                      onClick={(e) => { e.preventDefault(); setCurrentPage(Math.max(1, currentPage - 1)) }}
+                      aria-disabled={currentPage === 1}
                       className={currentPage === 1 ? 'pointer-events-none opacity-50' : 'cursor-pointer'}
                     />
                   </PaginationItem>
@@ -754,7 +869,9 @@ export default function RealEstatePage() {
 
                   <PaginationItem>
                     <PaginationNext
-                      onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
+                      href="#"
+                      onClick={(e) => { e.preventDefault(); setCurrentPage(Math.min(totalPages, currentPage + 1)) }}
+                      aria-disabled={currentPage === totalPages}
                       className={currentPage === totalPages ? 'pointer-events-none opacity-50' : 'cursor-pointer'}
                     />
                   </PaginationItem>

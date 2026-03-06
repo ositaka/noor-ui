@@ -251,11 +251,12 @@ export default function AdvancedPlaygroundPage() {
                 size="icon"
                 onClick={() => setShowHistory(!showHistory)}
                 className="lg:hidden"
+                aria-label={isRTL ? 'سجل المحادثات' : 'Conversation history'}
               >
-                <List className="h-5 w-5" />
+                <List className="h-5 w-5" aria-hidden="true" />
               </Button>
               <div className="p-2 bg-primary/10 rounded-lg">
-                <Sparkle className="h-5 w-5 text-primary" />
+                <Sparkle className="h-5 w-5 text-primary" aria-hidden="true" />
               </div>
               <div>
                 <h1 className="font-semibold text-lg">
@@ -272,7 +273,7 @@ export default function AdvancedPlaygroundPage() {
                 size="sm"
                 onClick={() => setShowSettings(!showSettings)}
               >
-                <Gear className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
+                <Gear className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} aria-hidden="true" />
                 {t.aiPlaygroundPage.settings}
               </Button>
               <Button variant="outline" size="sm" asChild>
@@ -316,7 +317,7 @@ export default function AdvancedPlaygroundPage() {
               {isThinking && (
                 <div className="flex items-center gap-3 p-4">
                   <div className="h-10 w-10 rounded-full bg-muted flex items-center justify-center">
-                    <Sparkle className="h-5 w-5 text-muted-foreground" />
+                    <Sparkle className="h-5 w-5 text-muted-foreground" aria-hidden="true" />
                   </div>
                   <ThinkingIndicator variant="typing" />
                 </div>
@@ -357,8 +358,9 @@ export default function AdvancedPlaygroundPage() {
               variant="ghost"
               size="icon"
               onClick={() => setShowSettings(false)}
+              aria-label={isRTL ? 'إغلاق' : 'Close'}
             >
-              <X className="h-4 w-4" />
+              <X className="h-4 w-4" aria-hidden="true" />
             </Button>
           </div>
 

@@ -323,7 +323,7 @@ export default function MultiAgentChatPage() {
             <div className="container flex h-16 items-center justify-between">
               <div className="flex items-center gap-3">
                 <div className="p-2 bg-primary/10 rounded-lg">
-                  <Users className="h-5 w-5 text-primary" />
+                  <Users className="h-5 w-5 text-primary" aria-hidden="true" />
                 </div>
                 <div>
                   <h1 className="font-semibold text-lg">
@@ -339,7 +339,7 @@ export default function MultiAgentChatPage() {
               </div>
               <div className="flex items-center gap-2">
                 <Button variant="outline" size="sm" onClick={handleClearChat}>
-                  <Trash className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
+                  <Trash className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} aria-hidden="true" />
                   {t.aiMultiAgent.actions.clear}
                 </Button>
                 <Button variant="outline" size="sm" asChild>
@@ -352,7 +352,7 @@ export default function MultiAgentChatPage() {
           {/* Breadcrumb */}
           <div className="border-b bg-background">
             <div className="container py-3">
-              <nav aria-label="Breadcrumb">
+              <nav aria-label={isRTL ? 'مسار التنقل' : 'Breadcrumb'}>
                 <div className="flex items-center justify-between gap-4">
                   <ol className="flex items-center gap-2 text-sm text-muted-foreground">
                     <li>
@@ -360,14 +360,14 @@ export default function MultiAgentChatPage() {
                         {t.nav.home}
                       </Link>
                     </li>
-                    <li>/</li>
+                    <li aria-hidden="true">/</li>
                     <li>
                       <Link href="/examples" className="hover:text-foreground transition-colors">
                         {t.nav.examples}
                       </Link>
                     </li>
-                    <li>/</li>
-                    <li className="text-foreground font-medium">
+                    <li aria-hidden="true">/</li>
+                    <li className="text-foreground font-medium" aria-current="page">
                       {t.aiMultiAgent.breadcrumb.multiAgent}
                     </li>
                   </ol>
@@ -447,7 +447,7 @@ export default function MultiAgentChatPage() {
                     </div>
                     <div className="flex items-center gap-3 p-4">
                       <div className="h-10 w-10 rounded-full bg-muted flex items-center justify-center">
-                        <ChatCentered className="h-5 w-5 text-muted-foreground" />
+                        <ChatCentered className="h-5 w-5 text-muted-foreground" aria-hidden="true" />
                       </div>
                       <ThinkingIndicator variant="typing" />
                     </div>

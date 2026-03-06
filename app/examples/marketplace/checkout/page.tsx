@@ -44,7 +44,7 @@ function generateMockOrderItems(): OrderItem[] {
       nameAr: 'سماعات لاسلكية',
       price: 299,
       quantity: 2,
-      image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400',
+      image: '/examples/marketplace/headphones.jpg',
     },
     {
       id: '2',
@@ -52,7 +52,7 @@ function generateMockOrderItems(): OrderItem[] {
       nameAr: 'ساعة ذكية',
       price: 499,
       quantity: 1,
-      image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400',
+      image: '/examples/marketplace/watch.jpg',
     },
   ]
 }
@@ -97,8 +97,8 @@ export default function CheckoutPage() {
           <Card className="max-w-2xl mx-auto">
             <CardContent className="p-12">
               <div className="flex flex-col items-center text-center space-y-6">
-                <div className="p-4 bg-green-100 rounded-full">
-                  <CheckCircle className="h-16 w-16 text-green-600" />
+                <div className="p-4 bg-success/10 rounded-full">
+                  <CheckCircle className="h-16 w-16 text-success" aria-hidden="true" />
                 </div>
                 <div className="space-y-2">
                   <h1 className="text-3xl font-bold">
@@ -164,7 +164,7 @@ export default function CheckoutPage() {
     <div className="min-h-screen">
       <main id="main-content" className="container py-12">
         {/* Breadcrumb */}
-        <nav aria-label="Breadcrumb" className="mb-8">
+        <nav aria-label={isRTL ? 'مسار التنقل' : 'Breadcrumb'} className="mb-8">
           <div className="flex items-center justify-between gap-4">
             <ol className="flex items-center gap-2 text-sm text-muted-foreground">
               <li>
@@ -172,26 +172,26 @@ export default function CheckoutPage() {
                   {t.marketplaceCheckout.breadcrumb.home}
                 </Link>
               </li>
-              <li>/</li>
+              <li aria-hidden="true">/</li>
               <li>
                 <Link href="/examples" className="hover:text-foreground transition-colors">
                   {t.marketplaceCheckout.breadcrumb.examples}
                 </Link>
               </li>
-              <li>/</li>
+              <li aria-hidden="true">/</li>
               <li>
                 <Link href="/examples/marketplace" className="hover:text-foreground transition-colors">
                   {t.marketplaceCheckout.breadcrumb.marketplace}
                 </Link>
               </li>
-              <li>/</li>
+              <li aria-hidden="true">/</li>
               <li>
                 <Link href="/examples/marketplace/cart" className="hover:text-foreground transition-colors">
                   {t.marketplaceCheckout.breadcrumb.cart}
                 </Link>
               </li>
-              <li>/</li>
-              <li className="text-foreground font-medium">
+              <li aria-hidden="true">/</li>
+              <li className="text-foreground font-medium" aria-current="page">
                 {t.marketplaceCheckout.pageTitle}
               </li>
             </ol>
@@ -215,15 +215,15 @@ export default function CheckoutPage() {
             <Tabs value={currentTab} onValueChange={setCurrentTab}>
               <TabsList className="grid w-full grid-cols-3">
                 <TabsTrigger value="shipping">
-                  <MapPin className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
+                  <MapPin className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} aria-hidden="true" />
                   {t.marketplaceCheckout.steps.shipping}
                 </TabsTrigger>
                 <TabsTrigger value="payment">
-                  <CreditCard className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
+                  <CreditCard className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} aria-hidden="true" />
                   {t.marketplaceCheckout.steps.payment}
                 </TabsTrigger>
                 <TabsTrigger value="review">
-                  <Package className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
+                  <Package className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} aria-hidden="true" />
                   {t.marketplaceCheckout.steps.review}
                 </TabsTrigger>
               </TabsList>
@@ -385,7 +385,7 @@ export default function CheckoutPage() {
                           className="flex items-center gap-3 flex-1 cursor-pointer"
                         >
                           <div className="p-2 bg-primary/10 rounded">
-                            <CreditCard className="h-5 w-5 text-primary" />
+                            <CreditCard className="h-5 w-5 text-primary" aria-hidden="true" />
                           </div>
                           <div>
                             <div className="font-medium">
@@ -406,7 +406,7 @@ export default function CheckoutPage() {
                           className="flex items-center gap-3 flex-1 cursor-pointer"
                         >
                           <div className="p-2 bg-primary/10 rounded">
-                            <Truck className="h-5 w-5 text-primary" />
+                            <Truck className="h-5 w-5 text-primary" aria-hidden="true" />
                           </div>
                           <div>
                             <div className="font-medium">
@@ -427,7 +427,7 @@ export default function CheckoutPage() {
                           className="flex items-center gap-3 flex-1 cursor-pointer"
                         >
                           <div className="p-2 bg-primary/10 rounded">
-                            <ShieldCheck className="h-5 w-5 text-primary" />
+                            <ShieldCheck className="h-5 w-5 text-primary" aria-hidden="true" />
                           </div>
                           <div>
                             <div className="font-medium">
@@ -538,9 +538,10 @@ export default function CheckoutPage() {
                       <div className="space-y-3">
                         {items.map((item) => (
                           <div key={item.id} className="flex gap-3">
-                            <div
-                              className="h-16 w-16 rounded-lg bg-cover bg-center shrink-0"
-                              style={{ backgroundImage: `url(${item.image})` }}
+                            <img
+                              src={item.image}
+                              alt={isRTL ? item.nameAr : item.name}
+                              className="h-16 w-16 rounded-lg object-cover shrink-0"
                             />
                             <div className="flex-1 min-w-0">
                               <p className="font-medium">
@@ -566,7 +567,7 @@ export default function CheckoutPage() {
                         {isRTL ? 'السابق' : 'Previous'}
                       </ButtonArrow>
                       <Button onClick={handlePlaceOrder} size="lg">
-                        <CheckCircle className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
+                        <CheckCircle className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} aria-hidden="true" />
                         {t.marketplaceCheckout.placeOrder}
                       </Button>
                     </div>
@@ -587,9 +588,10 @@ export default function CheckoutPage() {
                 <div className="space-y-3">
                   {items.map((item) => (
                     <div key={item.id} className="flex gap-2 text-sm">
-                      <div
-                        className="h-12 w-12 rounded bg-cover bg-center shrink-0"
-                        style={{ backgroundImage: `url(${item.image})` }}
+                      <img
+                        src={item.image}
+                        alt={isRTL ? item.nameAr : item.name}
+                        className="h-12 w-12 rounded object-cover shrink-0"
                       />
                       <div className="flex-1 min-w-0">
                         <p className="font-medium text-xs line-clamp-1">

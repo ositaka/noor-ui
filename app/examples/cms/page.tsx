@@ -151,7 +151,7 @@ export default function CMSPage() {
         <div>
           <div className="font-medium">{isRTL ? row.titleAr : row.title}</div>
           <div className="flex items-center gap-2 mt-1">
-            <Globe className="h-3 w-3 text-muted-foreground" />
+            <Globe className="h-3 w-3 text-muted-foreground" aria-hidden="true" />
             <span className="text-xs text-muted-foreground">
               {row.language === 'both' ? t.cmsPage.table.bilingual : row.language}
             </span>
@@ -165,7 +165,7 @@ export default function CMSPage() {
       header: t.cmsPage.table.author,
       cell: (row: typeof mockPosts[0]) => (
         <div className="flex items-center gap-2">
-          <User className="h-4 w-4 text-muted-foreground" />
+          <User className="h-4 w-4 text-muted-foreground" aria-hidden="true" />
           <span>{row.author}</span>
         </div>
       ),
@@ -179,17 +179,17 @@ export default function CMSPage() {
           published: {
             label: t.cmsPage.status.published,
             variant: 'default' as const,
-            className: 'bg-green-500/10 text-green-700 dark:text-green-400 border-green-500/20'
+            className: 'bg-success/10 text-success border-success/20'
           },
           draft: {
             label: t.cmsPage.status.draft,
             variant: 'outline' as const,
-            className: 'bg-yellow-500/10 text-yellow-700 dark:text-yellow-400 border-yellow-500/20'
+            className: 'bg-warning/10 text-warning border-warning/20'
           },
           scheduled: {
             label: t.cmsPage.status.scheduled,
             variant: 'outline' as const,
-            className: 'bg-blue-500/10 text-blue-700 dark:text-blue-400 border-blue-500/20'
+            className: 'bg-info/10 text-info border-info/20'
           },
         }
         const config = statusConfig[row.status as keyof typeof statusConfig]
@@ -198,9 +198,9 @@ export default function CMSPage() {
             <span className="flex items-center gap-1.5">
               <span className={cn(
                 'h-1.5 w-1.5 rounded-full',
-                row.status === 'published' && 'bg-green-500',
-                row.status === 'draft' && 'bg-yellow-500',
-                row.status === 'scheduled' && 'bg-blue-500'
+                row.status === 'published' && 'bg-success',
+                row.status === 'draft' && 'bg-warning',
+                row.status === 'scheduled' && 'bg-info'
               )} />
               {config.label}
             </span>
@@ -214,7 +214,7 @@ export default function CMSPage() {
       header: t.cmsPage.table.category,
       cell: (row: typeof mockPosts[0]) => (
         <div className="flex items-center gap-1">
-          <Tag className="h-3 w-3 text-muted-foreground" />
+          <Tag className="h-3 w-3 text-muted-foreground" aria-hidden="true" />
           <span className="text-sm">{row.category}</span>
         </div>
       ),
@@ -225,7 +225,7 @@ export default function CMSPage() {
       header: t.cmsPage.table.views,
       cell: (row: typeof mockPosts[0]) => (
         <div className="flex items-center gap-1">
-          <Eye className="h-4 w-4 text-muted-foreground" />
+          <Eye className="h-4 w-4 text-muted-foreground" aria-hidden="true" />
           <span>{row.views.toLocaleString()}</span>
         </div>
       ),
@@ -236,7 +236,7 @@ export default function CMSPage() {
       header: t.cmsPage.table.comments,
       cell: (row: typeof mockPosts[0]) => (
         <div className="flex items-center gap-1">
-          <ChatCentered className="h-4 w-4 text-muted-foreground" />
+          <ChatCentered className="h-4 w-4 text-muted-foreground" aria-hidden="true" />
           <span>{row.comments}</span>
         </div>
       ),
@@ -258,15 +258,15 @@ export default function CMSPage() {
               setSelectedPost(row)
               window.location.hash = '#create'
             }}>
-              <PencilSimple className="h-4 w-4 me-2" />
+              <PencilSimple className="h-4 w-4 me-2" aria-hidden="true" />
               {t.cmsPage.actions.edit}
             </DropdownMenuItem>
             <DropdownMenuItem>
-              <Eye className="h-4 w-4 me-2" />
+              <Eye className="h-4 w-4 me-2" aria-hidden="true" />
               {t.cmsPage.actions.preview}
             </DropdownMenuItem>
             <DropdownMenuItem className="text-destructive">
-              <Trash className="h-4 w-4 me-2" />
+              <Trash className="h-4 w-4 me-2" aria-hidden="true" />
               {t.cmsPage.actions.delete}
             </DropdownMenuItem>
           </DropdownMenuContent>
@@ -284,25 +284,25 @@ export default function CMSPage() {
       title: 'Posts',
       titleAr: 'المنشورات',
       href: '#posts',
-      icon: <FileText className="h-5 w-5" />,
+      icon: <FileText className="h-5 w-5" aria-hidden="true" />,
     },
     {
       title: 'Create New',
       titleAr: 'إنشاء جديد',
       href: '#create',
-      icon: <Plus className="h-5 w-5" />,
+      icon: <Plus className="h-5 w-5" aria-hidden="true" />,
     },
     {
       title: 'Analytics',
       titleAr: 'التحليلات',
       href: '#analytics',
-      icon: <TrendUp className="h-5 w-5" />,
+      icon: <TrendUp className="h-5 w-5" aria-hidden="true" />,
     },
     {
       title: 'Settings',
       titleAr: 'الإعدادات',
       href: '#settings',
-      icon: <User className="h-5 w-5" />,
+      icon: <User className="h-5 w-5" aria-hidden="true" />,
     },
   ]
 
@@ -356,7 +356,7 @@ export default function CMSPage() {
             </div>
             {activeView === 'posts' && (
               <Button onClick={() => (window.location.hash = '#create')} size="lg" className="gap-2">
-                <Plus className="h-5 w-5" />
+                <Plus className="h-5 w-5" aria-hidden="true" />
                 {t.cmsPage.newPost}
               </Button>
             )}
@@ -435,11 +435,11 @@ export default function CMSPage() {
                         </div>
                         <div className="flex items-center gap-4 text-sm text-muted-foreground">
                           <div className="flex items-center gap-1">
-                            <Eye className="h-4 w-4" />
+                            <Eye className="h-4 w-4" aria-hidden="true" />
                             <span>{post.views.toLocaleString()}</span>
                           </div>
                           <div className="flex items-center gap-1">
-                            <ChatCentered className="h-4 w-4" />
+                            <ChatCentered className="h-4 w-4" aria-hidden="true" />
                             <span>{post.comments}</span>
                           </div>
                         </div>
@@ -463,7 +463,7 @@ export default function CMSPage() {
                       {t.cmsPage.filters.search}
                     </Label>
                     <div className="relative mt-2">
-                      <MagnifyingGlass className="absolute start-3 top-3 h-4 w-4 text-muted-foreground" />
+                      <MagnifyingGlass className="absolute start-3 top-3 h-4 w-4 text-muted-foreground" aria-hidden="true" />
                       <Input
                         id="search"
                         placeholder={t.cmsPage.filters.searchPosts}

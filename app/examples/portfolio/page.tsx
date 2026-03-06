@@ -36,6 +36,7 @@ import {
 import { useDirection } from '@/components/providers/direction-provider'
 import { DirectionToggle } from '@/components/docs/direction-toggle'
 import { content } from '@/lib/i18n'
+import { cn } from '@/lib/utils'
 
 interface Project {
   id: string
@@ -66,7 +67,7 @@ const generateProjects = (): Project[] => {
       year: 2024,
       client: 'RetailCo',
       clientAr: 'ريتيل كو',
-      imageUrl: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop',
+      imageUrl: '/examples/portfolio/ecommerce.jpg',
       tags: ['UI/UX', 'React', 'Next.js', 'E-Commerce'],
       tagsAr: ['واجهة المستخدم', 'ريأكت', 'نكست.جي إس', 'تجارة إلكترونية'],
       featured: true,
@@ -81,7 +82,7 @@ const generateProjects = (): Project[] => {
       year: 2024,
       client: 'FinTech Solutions',
       clientAr: 'حلول التكنولوجيا المالية',
-      imageUrl: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop',
+      imageUrl: '/examples/portfolio/finance.jpg',
       tags: ['Mobile', 'React Native', 'Finance', 'Analytics'],
       tagsAr: ['موبايل', 'ريأكت نيتيف', 'مالية', 'تحليلات'],
       featured: true,
@@ -96,7 +97,7 @@ const generateProjects = (): Project[] => {
       year: 2024,
       client: 'TechStart',
       clientAr: 'تيك ستارت',
-      imageUrl: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&h=600&fit=crop',
+      imageUrl: '/examples/portfolio/branding.jpg',
       tags: ['Branding', 'Logo Design', 'Design System'],
       tagsAr: ['العلامة التجارية', 'تصميم الشعار', 'نظام التصميم'],
       featured: false,
@@ -111,7 +112,7 @@ const generateProjects = (): Project[] => {
       year: 2023,
       client: 'HealthCare Plus',
       clientAr: 'هيلث كير بلس',
-      imageUrl: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&h=600&fit=crop',
+      imageUrl: '/examples/portfolio/healthcare.jpg',
       tags: ['Healthcare', 'Web App', 'Telemedicine'],
       tagsAr: ['رعاية صحية', 'تطبيق ويب', 'طب عن بعد'],
       featured: true,
@@ -126,7 +127,7 @@ const generateProjects = (): Project[] => {
       year: 2023,
       client: 'QuickBite',
       clientAr: 'كويك بايت',
-      imageUrl: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&h=600&fit=crop',
+      imageUrl: '/examples/portfolio/food-delivery.jpg',
       tags: ['Mobile', 'Food Tech', 'Real-time'],
       tagsAr: ['موبايل', 'تكنولوجيا الطعام', 'الوقت الفعلي'],
       featured: false,
@@ -141,7 +142,7 @@ const generateProjects = (): Project[] => {
       year: 2023,
       client: 'ProjectFlow',
       clientAr: 'بروجكت فلو',
-      imageUrl: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&h=600&fit=crop',
+      imageUrl: '/examples/portfolio/saas.jpg',
       tags: ['UI/UX', 'SaaS', 'B2B'],
       tagsAr: ['واجهة المستخدم', 'ساس', 'شركات'],
       featured: false,
@@ -156,7 +157,7 @@ const generateProjects = (): Project[] => {
       year: 2023,
       client: 'RealEstate Pro',
       clientAr: 'ريل استيت برو',
-      imageUrl: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&h=600&fit=crop',
+      imageUrl: '/examples/portfolio/real-estate.jpg',
       tags: ['Real Estate', '3D', 'Virtual Tour'],
       tagsAr: ['عقارات', 'ثلاثي الأبعاد', 'جولة افتراضية'],
       featured: true,
@@ -171,7 +172,7 @@ const generateProjects = (): Project[] => {
       year: 2023,
       client: 'FitLife',
       clientAr: 'فيت لايف',
-      imageUrl: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&h=600&fit=crop',
+      imageUrl: '/examples/portfolio/fitness.jpg',
       tags: ['Health', 'Fitness', 'Mobile'],
       tagsAr: ['صحة', 'لياقة', 'موبايل'],
       featured: false,
@@ -195,8 +196,9 @@ export default function PortfolioPage() {
       const matchesCategory = selectedCategory === 'all' || project.category === selectedCategory
       const matchesSearch =
         searchQuery === '' ||
-        project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        project.titleAr.includes(searchQuery)
+        project.title.toLocaleLowerCase(locale).includes(searchQuery.toLocaleLowerCase(locale)) ||
+        project.titleAr.includes(searchQuery) ||
+        project.descriptionAr.includes(searchQuery)
       return matchesCategory && matchesSearch
     })
   }, [projects, selectedCategory, searchQuery])
@@ -219,14 +221,14 @@ export default function PortfolioPage() {
   ]
 
   return (
-    <div className="min-h-screen bg-muted/30">
+    <div className="min-h-screen bg-background">
       {/* Header */}
       <header className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50">
         <div className="container flex h-16 items-center justify-between">
           <div className="flex items-center gap-6">
             <Link href="/" className="flex items-center gap-2">
               <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center">
-                <House className="h-5 w-5 text-primary-foreground" />
+                <House className="h-5 w-5 text-primary-foreground" aria-hidden="true" />
               </div>
               <span className="font-bold text-xl hidden sm:inline">
                 {t.portfolioPage.header.name}
@@ -245,7 +247,7 @@ export default function PortfolioPage() {
       {/* Breadcrumb */}
       <div className="border-b bg-background">
         <div className="container py-3">
-          <nav aria-label="Breadcrumb">
+          <nav aria-label={isRTL ? 'مسار التنقل' : 'Breadcrumb'}>
             <div className="flex items-center justify-between gap-4">
               <ol className="flex items-center gap-2 text-sm text-muted-foreground">
                 <li>
@@ -253,14 +255,14 @@ export default function PortfolioPage() {
                     {t.nav.home}
                   </Link>
                 </li>
-                <li>/</li>
+                <li aria-hidden="true">/</li>
                 <li>
                   <Link href="/examples" className="hover:text-foreground transition-colors">
                     {t.nav.examples}
                   </Link>
                 </li>
-                <li>/</li>
-                <li className="text-foreground font-medium">
+                <li aria-hidden="true">/</li>
+                <li className="text-foreground font-medium" aria-current="page">
                   {t.portfolioPage.breadcrumb.portfolio}
                 </li>
               </ol>
@@ -298,18 +300,18 @@ export default function PortfolioPage() {
 
               <div className="flex items-center gap-4 mt-8">
                 <Button variant="ghost" size="icon" asChild>
-                  <Link href="https://github.com" target="_blank">
-                    <GithubLogo className="h-5 w-5" />
+                  <Link href="https://github.com" target="_blank" aria-label="GitHub">
+                    <GithubLogo className="h-5 w-5" aria-hidden="true" />
                   </Link>
                 </Button>
                 <Button variant="ghost" size="icon" asChild>
-                  <Link href="https://linkedin.com" target="_blank">
-                    <LinkedinLogo className="h-5 w-5" />
+                  <Link href="https://linkedin.com" target="_blank" aria-label="LinkedIn">
+                    <LinkedinLogo className="h-5 w-5" aria-hidden="true" />
                   </Link>
                 </Button>
                 <Button variant="ghost" size="icon" asChild>
-                  <Link href="https://twitter.com" target="_blank">
-                    <TwitterLogo className="h-5 w-5" />
+                  <Link href="https://twitter.com" target="_blank" aria-label="Twitter">
+                    <TwitterLogo className="h-5 w-5" aria-hidden="true" />
                   </Link>
                 </Button>
               </div>
@@ -318,7 +320,7 @@ export default function PortfolioPage() {
             <div className="relative">
               <div className="aspect-square rounded-2xl bg-gradient-to-br from-primary/20 to-primary/5 p-8 flex items-center justify-center">
                 <div className="text-center">
-                  <Palette className="h-24 w-24 mx-auto mb-4 text-primary" />
+                  <Palette className="h-24 w-24 mx-auto mb-4 text-primary" aria-hidden="true" />
                   <p className="text-lg font-medium">
                     {t.portfolioPage.hero.designMeetsFunction}
                   </p>
@@ -335,7 +337,7 @@ export default function PortfolioPage() {
               <CardContent className="p-6">
                 <div className="flex items-center gap-4">
                   <div className="p-3 bg-primary/10 rounded-lg">
-                    <stat.icon className="h-6 w-6 text-primary" />
+                    <stat.icon className="h-6 w-6 text-primary" aria-hidden="true" />
                   </div>
                   <div>
                     <p className="text-3xl font-bold">{stat.value}</p>
@@ -362,11 +364,13 @@ export default function PortfolioPage() {
             {featuredProjects.map((project) => (
               <Link key={project.id} href={`/examples/portfolio/${project.id}`}>
                 <Card className="overflow-hidden hover:shadow-lg transition-shadow cursor-pointer h-full">
-                  <div
-                    className="h-64 bg-cover bg-center"
-                    style={{ backgroundImage: `url(${project.imageUrl})` }}
-                  >
-                    <div className="h-full bg-gradient-to-t from-black/60 to-transparent flex items-end p-6">
+                  <div className="relative h-64">
+                    <img
+                      src={project.imageUrl}
+                      alt={isRTL ? project.titleAr : project.title}
+                      className="h-full w-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-6">
                       <Badge variant="secondary">{project.year}</Badge>
                     </div>
                   </div>
@@ -375,7 +379,7 @@ export default function PortfolioPage() {
                       <CardTitle className="text-xl">
                         {isRTL ? project.titleAr : project.title}
                       </CardTitle>
-                      <ArrowSquareOut className="h-5 w-5 text-muted-foreground" />
+                      <ArrowSquareOut className="h-5 w-5 text-muted-foreground" aria-hidden="true" />
                     </div>
                     <CardDescription>
                       {isRTL ? project.descriptionAr : project.description}
@@ -413,13 +417,14 @@ export default function PortfolioPage() {
               <Input
                 type="search"
                 placeholder={t.portfolioPage.filters.searchPlaceholder}
+                aria-label={t.portfolioPage.filters.searchPlaceholder}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full"
               />
             </div>
             <Select value={selectedCategory} onValueChange={setSelectedCategory}>
-              <SelectTrigger className="w-full sm:w-[200px]">
+              <SelectTrigger className="w-full sm:w-[200px]" aria-label={t.portfolioPage.filters.selectCategory}>
                 <SelectValue placeholder={t.portfolioPage.filters.selectCategory} />
               </SelectTrigger>
               <SelectContent>
@@ -437,14 +442,15 @@ export default function PortfolioPage() {
             {filteredProjects.map((project) => (
               <Link key={project.id} href={`/examples/portfolio/${project.id}`}>
                 <Card className="overflow-hidden hover:shadow-lg transition-shadow cursor-pointer h-full">
-                  <div
-                    className="h-48 bg-cover bg-center"
-                    style={{ backgroundImage: `url(${project.imageUrl})` }}
+                  <img
+                    src={project.imageUrl}
+                    alt={isRTL ? project.titleAr : project.title}
+                    className="h-48 w-full object-cover"
                   />
                   <CardHeader>
                     <div className="flex items-center gap-2 mb-2">
                       <Badge variant="secondary" className="text-xs">
-                        {project.category}
+                        {categories.find((c) => c.value === project.category)?.label ?? project.category}
                       </Badge>
                       <span className="text-xs text-muted-foreground">{project.year}</span>
                     </div>
@@ -533,7 +539,7 @@ export default function PortfolioPage() {
                 </div>
 
                 <Button type="submit" size="lg" className="w-full sm:w-auto">
-                  <EnvelopeSimple className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
+                  <EnvelopeSimple className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} aria-hidden="true" />
                   {t.portfolioPage.contact.sendMessage}
                 </Button>
               </form>
@@ -543,8 +549,4 @@ export default function PortfolioPage() {
       </main>
     </div>
   )
-}
-
-function cn(...classes: (string | undefined | false)[]) {
-  return classes.filter(Boolean).join(' ')
 }
