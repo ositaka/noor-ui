@@ -496,6 +496,7 @@ export default function PatientsPage() {
           totalPages={Math.ceil(filteredPatients.length / 10)}
           pageSize={10}
           onPageChange={setCurrentPage}
+          className="bg-card"
         />
       </main>
     </div>

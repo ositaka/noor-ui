@@ -281,17 +281,33 @@ export default function CalendarPage() {
         <section className="mb-16">
           <h2 className="text-2xl font-bold tracking-tight mb-6">{t.calendarComponent.preview}</h2>
           <ComponentShowcase>
-            <ComponentShowcase.Demo>
-              <div className="max-w-md mx-auto">
-                <Calendar
-                  mode="single"
-                  selected={singleDate}
-                  onSelect={(date) => {
-                    if (date instanceof Date || date === undefined) {
-                      setSingleDate(date)
-                    }
-                  }}
-                />
+            <ComponentShowcase.Demo className="items-start">
+              <div className="grid w-full gap-10 md:grid-cols-2">
+                <div dir="ltr">
+                  <Calendar
+                    mode="single"
+                    selected={singleDate}
+                    onSelect={(date) => {
+                      if (date instanceof Date || date === undefined) {
+                        setSingleDate(date)
+                      }
+                    }}
+                    locale="en"
+                  />
+                </div>
+                <div dir="rtl" lang="ar">
+                  <Calendar
+                    mode="single"
+                    selected={singleDate}
+                    onSelect={(date) => {
+                      if (date instanceof Date || date === undefined) {
+                        setSingleDate(date)
+                      }
+                    }}
+                    locale="ar"
+                    showHijri
+                  />
+                </div>
               </div>
             </ComponentShowcase.Demo>
           </ComponentShowcase>
@@ -399,6 +415,7 @@ export default function CalendarPage() {
                           setRangeDate(undefined)
                         }
                       }}
+                      locale={locale}
                     />
                   </div>
                   {rangeDate?.from && (
@@ -433,6 +450,7 @@ export default function CalendarPage() {
                         }
                       }}
                       showHijri={true}
+                      locale={locale}
                     />
                   </div>
                 </CardContent>
@@ -464,6 +482,7 @@ export default function CalendarPage() {
                       }}
                       showHijri={true}
                       showIslamicHolidays={true}
+                      locale={locale}
                     />
                   </div>
                 </CardContent>
@@ -491,6 +510,7 @@ export default function CalendarPage() {
                         }
                       }}
                       events={sampleEvents}
+                      locale={locale}
                     />
                   </div>
                 </CardContent>
@@ -515,6 +535,7 @@ export default function CalendarPage() {
                         const day = date.getDay()
                         return day === 0 || day === 6 // Disable weekends
                       }}
+                      locale={locale}
                     />
                   </div>
                 </CardContent>

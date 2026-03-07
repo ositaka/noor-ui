@@ -600,6 +600,7 @@ export default function PrescriptionsPage() {
               totalPages={Math.ceil(filteredPrescriptions.length / 10)}
               pageSize={10}
               onPageChange={setCurrentPage}
+              className="bg-card"
             />
           </TabsContent>
           <TabsContent value="active" className="mt-0">
@@ -609,6 +610,7 @@ export default function PrescriptionsPage() {
               enableSorting
               hoverable
               striped
+              className="bg-card"
             />
           </TabsContent>
           <TabsContent value="expired" className="mt-0">
@@ -618,6 +620,7 @@ export default function PrescriptionsPage() {
               enableSorting
               hoverable
               striped
+              className="bg-card"
             />
           </TabsContent>
           <TabsContent value="cancelled" className="mt-0">
@@ -627,6 +630,7 @@ export default function PrescriptionsPage() {
               enableSorting
               hoverable
               striped
+              className="bg-card"
             />
           </TabsContent>
         </Tabs>
