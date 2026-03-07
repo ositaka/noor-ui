@@ -78,7 +78,7 @@ formComponent: {
       accessibility: {
         title: 'إمكانية الوصول',
         formLabels: 'تسميات النموذج',
-        formLabelsDesc: 'يجب أن يكون لجميع حقول النموذج تسميات مرتبطة. استخدم مكون FormLabel لإمكانية الوصول المناسبة.',
+        formLabelsDesc: 'يتم ربط مكون FormLabel ومكونات الإدخال (Input، Textarea، Select، Checkbox، Switch) تلقائيًا عند استخدامها داخل FormField — دون الحاجة إلى تعيين id أو htmlFor يدويًا.',
         errorMessages: 'رسائل الخطأ',
         errorMessagesDesc: 'يتم الإعلان عن رسائل الخطأ لقارئات الشاشة عبر FormMessage. يحدث التحقق عند blur وأحداث الإرسال.',
         keyboardNavigation: 'التنقل بلوحة المفاتيح',

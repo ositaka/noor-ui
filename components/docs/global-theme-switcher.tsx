@@ -7,6 +7,8 @@ import { Palette, X } from '@phosphor-icons/react'
 import { useDesignSystem } from '@/components/providers/design-system-provider'
 import { type BuiltInTheme, themeConfig } from '@/lib/tokens'
 import { cn } from '@/lib/utils'
+import { useDirection } from '@/components/providers/direction-provider'
+import { content } from '@/lib/i18n'
 
 export function GlobalThemeSwitcher() {
   const [isOpen, setIsOpen] = React.useState(false)
@@ -32,6 +34,8 @@ function GlobalThemeSwitcherContent({
   setIsOpen: (open: boolean) => void
 }) {
   const { designTheme, setDesignTheme } = useDesignSystem()
+  const { locale } = useDirection()
+  const t = content[locale]
   const themes: BuiltInTheme[] = ['minimal', 'futuristic', 'cozy', 'artistic']
 
   return (
@@ -42,7 +46,7 @@ function GlobalThemeSwitcherContent({
           onClick={() => setIsOpen(!isOpen)}
           size="icon"
           className="h-14 w-14 rounded-full shadow-lg hover:shadow-xl transition-all"
-          aria-label="Theme Switcher"
+          aria-label={t.themeSwitcher.ariaLabel}
         >
           {isOpen ? <X className="h-6 w-6" /> : <Palette className="h-6 w-6" />}
         </Button>
@@ -53,7 +57,7 @@ function GlobalThemeSwitcherContent({
         <div className="fixed bottom-24 end-6 ms-6 z-50 animate-in slide-in-from-bottom-2">
           <Card className="w-fit shadow-xl">
             <CardContent className="p-4">
-              <h3 className="font-semibold mb-3 text-sm">Design Theme</h3>
+              <h3 className="font-semibold mb-3 text-sm">{t.themeSwitcher.title}</h3>
               <div className="grid gap-2">
                 {themes.map((theme) => {
                   const config = themeConfig[theme]
@@ -83,9 +87,9 @@ function GlobalThemeSwitcherContent({
                         )}
                       />
                       <div className="flex-1 min-w-0">
-                        <div className="font-medium text-sm">{config.name}</div>
+                        <div className="font-medium text-sm">{locale === 'ar' ? config.nameAr : config.name}</div>
                         <div className="text-xs text-muted-foreground text-pretty">
-                          {config.description}
+                          {locale === 'ar' ? config.descriptionAr : config.description}
                         </div>
                       </div>
                       {isActive && (
@@ -97,7 +101,7 @@ function GlobalThemeSwitcherContent({
               </div>
               <div className="mt-3 pt-3 border-t">
                 <p className="text-xs text-muted-foreground">
-                  Theme persists across pages via URL parameter
+                  {t.themeSwitcher.persistsNote}
                 </p>
               </div>
             </CardContent>

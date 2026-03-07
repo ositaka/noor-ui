@@ -78,7 +78,7 @@ formComponent: {
       accessibility: {
         title: 'Accessibility',
         formLabels: 'Form Labels',
-        formLabelsDesc: 'All form fields must have associated labels. Use the FormLabel component for proper accessibility.',
+        formLabelsDesc: 'FormLabel and input components (Input, Textarea, Select, Checkbox, Switch) are automatically connected when used inside a FormField — no manual id or htmlFor needed.',
         errorMessages: 'Error Messages',
         errorMessagesDesc: 'Error messages are announced to screen readers via FormMessage. Validation happens on blur and submit events.',
         keyboardNavigation: 'Keyboard Navigation',

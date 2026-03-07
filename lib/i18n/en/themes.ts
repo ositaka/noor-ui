@@ -12,6 +12,12 @@ themes: {
       darkMode: 'Dark Mode',
     },
 
+themeSwitcher: {
+      title: 'Design Theme',
+      persistsNote: 'Theme persists across pages via URL parameter',
+      ariaLabel: 'Theme Switcher',
+    },
+
 themesPage: {
       title: 'Themes',
       subtitle: 'Four distinct visual themes, all powered by the same design tokens. Each theme has unique typography, spacing, and personality while maintaining accessibility and consistency.',
@@ -29,6 +35,7 @@ themesPage: {
         bestFor: 'Best For',
         bestForText: 'Enterprise applications, dashboards, data-heavy interfaces, professional tools',
         typographyDetails: [
+          'Base font-size: 16px',
           'Font: Inter (sans-serif)',
           'Line-height: 1.6',
           'Letter-spacing: -0.02em (headings)',
@@ -47,6 +54,7 @@ themesPage: {
         description: 'Dark, modern, and compact',
         bestForText: 'Tech products, developer tools, gaming interfaces, dark-mode-first applications',
         typographyDetails: [
+          'Base font-size: 16px',
           'Font: Inter (sans-serif)',
           'Line-height: 1.5 (compact)',
           'Letter-spacing: -0.025em',
@@ -65,6 +73,7 @@ themesPage: {
         description: 'Warm, spacious, and comfortable',
         bestForText: 'Personal blogs, community platforms, lifestyle apps, content-focused sites',
         typographyDetails: [
+          'Base font-size: 18px',
           'Font: Inter (sans-serif)',
           'Line-height: 1.7 (relaxed)',
           'Letter-spacing: 0.015em',
@@ -83,6 +92,7 @@ themesPage: {
         description: 'Elegant, typography-focused, serif fonts',
         bestForText: 'Poetry, literature, magazines, portfolios, creative writing platforms',
         typographyDetails: [
+          'Base font-size: 18px',
           'Font: Georgia (serif)',
           'Arabic: Noto Naskh Arabic (serif)',
           'Line-height: 1.8-1.9',

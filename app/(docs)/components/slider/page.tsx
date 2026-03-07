@@ -81,10 +81,10 @@ const basicUsageCode = `import { Slider } from 'noorui-rtl'
 
 const withLabelCode = `<div className="space-y-2">
   <div className="flex items-center justify-between">
-    <Label htmlFor="volume">Volume</Label>
+    <Label id="volume-label">Volume</Label>
     <span className="text-sm text-muted-foreground">50%</span>
   </div>
-  <Slider id="volume" defaultValue={[50]} max={100} step={1} />
+  <Slider aria-labelledby="volume-label" defaultValue={[50]} max={100} step={1} />
 </div>`
 
 const rangeCode = `const [value, setValue] = React.useState([50])
@@ -189,8 +189,8 @@ const rtlCode = `// RTL support is automatic!
 // Slider direction mirrors for RTL languages
 
 <div className="space-y-2">
-  <Label htmlFor="rtl-slider">مستوى الصوت</Label>
-  <Slider id="rtl-slider" defaultValue={[50]} max={100} step={1} />
+  <Label id="rtl-slider-label">مستوى الصوت</Label>
+  <Slider aria-labelledby="rtl-slider-label" defaultValue={[50]} max={100} step={1} />
 </div>`
 
 export default function SliderPage() {
@@ -270,10 +270,10 @@ export default function SliderPage() {
                 <CardContent className="p-6">
                   <div className="max-w-md space-y-2">
                     <div className="flex items-center justify-between">
-                      <Label htmlFor="volume">{t.sliderComponent.labels.volume}</Label>
+                      <Label id="volume-label">{t.sliderComponent.labels.volume}</Label>
                       <span className="text-sm text-muted-foreground">50%</span>
                     </div>
-                    <Slider id="volume" defaultValue={[50]} max={100} step={1} />
+                    <Slider aria-labelledby="volume-label" defaultValue={[50]} max={100} step={1} />
                   </div>
                 </CardContent>
               </Card>
@@ -464,8 +464,7 @@ export default function SliderPage() {
                 <h3 className="font-semibold mb-2">{t.sliderComponent.accessibility.labelsAndAria}</h3>
                 <p className="text-muted-foreground">
                   {t.sliderComponent.accessibility.labelsAndAriaDesc}{' '}
-                  <code className="bg-muted px-1 rounded">{t.sliderComponent.accessibility.htmlForAttr}</code> {t.sliderComponent.accessibility.andText}{' '}
-                  <code className="bg-muted px-1 rounded">{t.sliderComponent.accessibility.idAttr}</code> {t.sliderComponent.accessibility.attributesOr}{' '}
+                  <code className="bg-muted px-1 rounded">aria-labelledby</code> {t.sliderComponent.accessibility.attributesOr}{' '}
                   <code className="bg-muted px-1 rounded">{t.sliderComponent.accessibility.ariaLabelAttr}</code> {t.sliderComponent.accessibility.forSlidersWithout}
                 </p>
               </div>

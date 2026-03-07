@@ -361,7 +361,7 @@ export const Calendar = React.forwardRef<HTMLDivElement, CalendarProps>(
                   onClick={() => handleDateClick(gregorian)}
                   disabled={isDisabled}
                   className={cn(
-                    'relative h-14 rounded-md text-sm transition-colors',
+                    'relative h-14 rounded-md text-sm cursor-pointer transition-colors',
                     'hover:bg-muted focus:outline-none focus:ring-2 focus:ring-ring',
                     'disabled:opacity-50 disabled:cursor-not-allowed',
                     isOutsideMonth && 'text-muted-foreground opacity-50',

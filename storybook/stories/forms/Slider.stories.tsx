@@ -105,10 +105,10 @@ export const WithLabel: Story = {
   render: () => (
     <div className="w-80 space-y-2">
       <div className="flex items-center justify-between">
-        <Label htmlFor="volume">Volume</Label>
+        <Label id="volume-label">Volume</Label>
         <span className="text-sm text-muted-foreground">50%</span>
       </div>
-      <Slider id="volume" defaultValue={[50]} max={100} step={1} />
+      <Slider aria-labelledby="volume-label" defaultValue={[50]} max={100} step={1} />
     </div>
   ),
   globals: {
@@ -436,8 +436,8 @@ export const PriceRange: Story = {
 export const RTLExample: Story = {
   render: () => (
     <div className="w-80 space-y-2">
-      <Label htmlFor="rtl-volume">مستوى الصوت</Label>
-      <Slider id="rtl-volume" defaultValue={[50]} max={100} step={1} />
+      <Label id="rtl-volume-label">مستوى الصوت</Label>
+      <Slider aria-labelledby="rtl-volume-label" defaultValue={[50]} max={100} step={1} />
     </div>
   ),
   globals: {
@@ -487,10 +487,10 @@ export const RTLWithLabel: Story = {
   render: () => (
     <div className="w-80 space-y-2">
       <div className="flex items-center justify-between">
-        <Label htmlFor="volume-rtl">مستوى الصوت</Label>
+        <Label id="volume-rtl-label">مستوى الصوت</Label>
         <span className="text-sm text-muted-foreground">50%</span>
       </div>
-      <Slider id="volume-rtl" defaultValue={[50]} max={100} step={1} />
+      <Slider aria-labelledby="volume-rtl-label" defaultValue={[50]} max={100} step={1} />
     </div>
   ),
   globals: {

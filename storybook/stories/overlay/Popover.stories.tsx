@@ -415,7 +415,7 @@ export const WithForm: Story = {
     const body = within(document.body);
 
     await step('Opens popover with form', async () => {
-      const trigger = canvas.getByRole('button', { name: /settings/i });
+      const trigger = canvas.getByRole('button', { name: /gear/i });
       await userEvent.click(trigger);
 
       await expect(body.getByText('Dimensions')).toBeVisible();
