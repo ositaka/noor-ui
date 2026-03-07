@@ -133,7 +133,7 @@ export default function BasicWorkflowPage() {
     <div className="min-h-screen">
       <main id="main-content" className="container py-12">
         {/* Breadcrumb */}
-        <nav aria-label="Breadcrumb" className="mb-12">
+        <nav aria-label={isRTL ? 'مسار التنقل' : 'Breadcrumb'} className="mb-12">
           <div className="flex items-center justify-between gap-4">
             <ol className="flex items-center gap-2 text-sm text-muted-foreground">
               <li>
@@ -141,14 +141,14 @@ export default function BasicWorkflowPage() {
                   {t.nav.home}
                 </Link>
               </li>
-              <li>/</li>
+              <li aria-hidden="true">/</li>
               <li>
                 <Link href="/examples" className="hover:text-foreground transition-colors">
                   {t.nav.examples}
                 </Link>
               </li>
-              <li>/</li>
-              <li className="text-foreground font-medium">
+              <li aria-hidden="true">/</li>
+              <li className="text-foreground font-medium" aria-current="page">
                 {t.workflowBasicPage.breadcrumb.basicWorkflow}
               </li>
             </ol>
@@ -165,16 +165,16 @@ export default function BasicWorkflowPage() {
                   {t.workflowBasicPage.title}
                 </h1>
                 <Badge variant="secondary" className="flex items-center gap-1.5">
-                  <WarningCircle className="h-3 w-3" />
+                  <WarningCircle className="h-3 w-3" aria-hidden="true" />
                   {t.workflowBasicPage.workInProgress}
                 </Badge>
               </div>
               <p className="text-xl text-muted-foreground max-w-3xl">
                 {t.workflowBasicPage.description}
               </p>
-              <div className="flex items-start gap-2 p-3 bg-yellow-50 dark:bg-yellow-950/20 border border-yellow-200 dark:border-yellow-800 rounded-lg max-w-3xl">
-                <WarningCircle className="h-4 w-4 text-yellow-600 dark:text-yellow-500 mt-0.5 flex-shrink-0" />
-                <p className="text-sm text-yellow-800 dark:text-yellow-200">
+              <div className="flex items-start gap-2 p-3 bg-warning/10 border border-warning/20 rounded-lg max-w-3xl">
+                <WarningCircle className="h-4 w-4 text-warning mt-0.5 flex-shrink-0" aria-hidden="true" />
+                <p className="text-sm text-warning-foreground">
                   <strong>{t.workflowBasicPage.note}</strong> {t.workflowBasicPage.noteText}
                 </p>
               </div>
@@ -184,11 +184,11 @@ export default function BasicWorkflowPage() {
                 onClick={handleRun}
                 disabled={isRunning}
               >
-                <Play className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
+                <Play className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} aria-hidden="true" />
                 {t.workflowBasicPage.run}
               </Button>
               <Button onClick={handleReset} variant="outline">
-                <ArrowCounterClockwise className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
+                <ArrowCounterClockwise className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} aria-hidden="true" />
                 {t.workflowBasicPage.reset}
               </Button>
             </div>

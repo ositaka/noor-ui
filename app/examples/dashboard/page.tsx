@@ -30,42 +30,106 @@ import {
 } from '@phosphor-icons/react'
 import { useDirection } from '@/components/providers/direction-provider'
 import { DirectionToggle } from '@/components/docs/direction-toggle'
-import { content } from '@/lib/i18n'
+
 
 export default function DashboardPage() {
   const { locale } = useDirection()
-  const t = content[locale]
+  const isRTL = locale === 'ar'
+
+  const t = isRTL ? {
+    home: 'الرئيسية',
+    examples: 'الأمثلة',
+    dashboard: 'لوحة التحكم',
+    welcome: 'مرحباً بك، إليك ملخص أعمالك اليوم',
+    last30Days: 'آخر 30 يوماً',
+    filter: 'تصفية',
+    export: 'تصدير',
+    fromLastMonth: 'عن الشهر الماضي',
+    revenueOverview: 'نظرة عامة على الإيرادات',
+    revenueDesc: 'الإيرادات الشهرية لهذا العام',
+    week: 'أسبوع',
+    month: 'شهر',
+    year: 'سنة',
+    currency: 'ر.س',
+    recentTransactions: 'المعاملات الأخيرة',
+    transactionsDesc: 'آخر 5 معاملات في نظامك',
+    transactionId: 'رقم المعاملة',
+    customer: 'العميل',
+    amount: 'المبلغ',
+    status: 'الحالة',
+    date: 'التاريخ',
+    completed: 'مكتمل',
+    pending: 'قيد الانتظار',
+    failed: 'فشل',
+    topProducts: 'أفضل المنتجات',
+    topProductsDesc: 'الأكثر مبيعاً هذا الشهر',
+    units: 'قطعة',
+    ofTarget: 'من الهدف',
+    recentPulse: 'النشاط الأخير',
+    recentPulseDesc: 'آخر التحديثات في النظام',
+    months: ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو', 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'],
+    monthsShort: ['ي', 'ف', 'م', 'أ', 'م', 'ي', 'ي', 'أ', 'س', 'أ', 'ن', 'د'],
+  } : {
+    home: 'Home',
+    examples: 'Examples',
+    dashboard: 'Dashboard',
+    welcome: "Welcome back, here's your business summary for today",
+    last30Days: 'Last 30 days',
+    filter: 'Filter',
+    export: 'Export',
+    fromLastMonth: 'from last month',
+    revenueOverview: 'Revenue Overview',
+    revenueDesc: 'Monthly revenue for this year',
+    week: 'Week',
+    month: 'Month',
+    year: 'Year',
+    currency: 'SAR',
+    recentTransactions: 'Recent Transactions',
+    transactionsDesc: 'Last 5 transactions in your system',
+    transactionId: 'Transaction ID',
+    customer: 'Customer',
+    amount: 'Amount',
+    status: 'Status',
+    date: 'Date',
+    completed: 'Completed',
+    pending: 'Pending',
+    failed: 'Failed',
+    topProducts: 'Top Products',
+    topProductsDesc: 'Best sellers this month',
+    units: 'units',
+    ofTarget: 'of target',
+    recentPulse: 'Recent Pulse',
+    recentPulseDesc: 'Latest updates in the system',
+    months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+    monthsShort: ['J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'],
+  }
 
   // Simulated data
   const stats = [
     {
-      title: 'إجمالي الإيرادات',
-      titleEn: 'Total Revenue',
+      title: isRTL ? 'إجمالي الإيرادات' : 'Total Revenue',
       value: '452,300',
-      currency: 'ر.س',
+      currency: t.currency,
       change: '+12.5%',
       trend: 'up' as const,
       icon: CurrencyDollar,
     },
     {
-      title: 'عدد العملاء',
-      titleEn: 'Total Customers',
+      title: isRTL ? 'عدد العملاء' : 'Total Customers',
       value: '2,845',
       change: '+8.2%',
       trend: 'up' as const,
       icon: Users,
     },
     {
-      title: 'إجمالي الطلبات',
-      titleEn: 'Total Orders',
+      title: isRTL ? 'إجمالي الطلبات' : 'Total Orders',
       value: '1,234',
       change: '+23.1%',
       trend: 'up' as const,
       icon: ShoppingCart,
     },
     {
-      title: 'معدل التحويل',
-      titleEn: 'Conversion Rate',
+      title: isRTL ? 'معدل التحويل' : 'Conversion Rate',
       value: '3.24%',
       change: '-2.4%',
       trend: 'down' as const,
@@ -191,53 +255,44 @@ export default function DashboardPage() {
     },
   ]
 
-  const getStatusBadge = (status: string) => {
-    const variants = {
-      completed: 'default' as const,
-      pending: 'secondary' as const,
-      failed: 'destructive' as const,
-    }
-    const labels = {
-      ar: {
-        completed: 'مكتمل',
-        pending: 'قيد الانتظار',
-        failed: 'فشل',
-      },
-      en: {
-        completed: 'Completed',
-        pending: 'Pending',
-        failed: 'Failed',
-      },
-    }
-    return (
-      <Badge variant={variants[status as keyof typeof variants]}>
-        {labels[locale][status as keyof typeof labels.ar]}
-      </Badge>
-    )
+  const statusLabels: Record<string, string> = {
+    completed: t.completed,
+    pending: t.pending,
+    failed: t.failed,
   }
+  const statusVariants: Record<string, 'default' | 'secondary' | 'destructive'> = {
+    completed: 'default',
+    pending: 'secondary',
+    failed: 'destructive',
+  }
+  const getStatusBadge = (status: string) => (
+    <Badge variant={statusVariants[status]}>
+      {statusLabels[status]}
+    </Badge>
+  )
 
   return (
     <div className="min-h-screen bg-background">
       {/* Breadcrumb */}
       <div className="border-b bg-background">
         <div className="container py-3">
-          <nav aria-label="Breadcrumb">
+          <nav aria-label={isRTL ? 'مسار التنقل' : 'Breadcrumb'}>
             <div className="flex items-center justify-between gap-4">
               <ol className="flex items-center gap-2 text-sm text-muted-foreground">
                 <li>
                   <Link href="/" className="hover:text-foreground transition-colors">
-                    {locale === 'ar' ? 'الرئيسية' : 'Home'}
+                    {t.home}
                   </Link>
                 </li>
-                <li>/</li>
+                <li aria-hidden="true">/</li>
                 <li>
                   <Link href="/examples" className="hover:text-foreground transition-colors">
-                    {locale === 'ar' ? 'الأمثلة' : 'Examples'}
+                    {t.examples}
                   </Link>
                 </li>
-                <li>/</li>
-                <li className="text-foreground font-medium">
-                  {locale === 'ar' ? 'لوحة التحكم' : 'Dashboard'}
+                <li aria-hidden="true">/</li>
+                <li aria-current="page" className="text-foreground font-medium">
+                  {t.dashboard}
                 </li>
               </ol>
               <DirectionToggle />
@@ -252,26 +307,24 @@ export default function DashboardPage() {
           <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
             <div>
               <h1 className="text-3xl font-bold tracking-tight">
-                {locale === 'ar' ? 'لوحة التحكم' : 'Dashboard'}
+                {t.dashboard}
               </h1>
               <p className="text-muted-foreground">
-                {locale === 'ar'
-                  ? 'مرحباً بك، إليك ملخص أعمالك اليوم'
-                  : 'Welcome back, here\'s your business summary for today'}
+                {t.welcome}
               </p>
             </div>
             <div className="flex flex-wrap gap-2">
               <Button variant="outline" size="sm">
-                <Calendar className="h-4 w-4 me-2" />
-                {locale === 'ar' ? 'آخر 30 يوماً' : 'Last 30 days'}
+                <Calendar className="h-4 w-4 me-2" aria-hidden="true" />
+                {t.last30Days}
               </Button>
               <Button variant="outline" size="sm">
-                <Funnel className="h-4 w-4 me-2" />
-                {locale === 'ar' ? 'تصفية' : 'Filter'}
+                <Funnel className="h-4 w-4 me-2" aria-hidden="true" />
+                {t.filter}
               </Button>
               <Button size="sm">
-                <Download className="h-4 w-4 me-2" />
-                {locale === 'ar' ? 'تصدير' : 'Export'}
+                <Download className="h-4 w-4 me-2" aria-hidden="true" />
+                {t.export}
               </Button>
             </div>
           </div>
@@ -285,9 +338,9 @@ export default function DashboardPage() {
             <Card key={index}>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">
-                  {locale === 'ar' ? stat.title : stat.titleEn}
+                  {stat.title}
                 </CardTitle>
-                <stat.icon className="h-4 w-4 text-muted-foreground" />
+                <stat.icon className="h-4 w-4 text-muted-foreground" aria-hidden="true" />
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold">
@@ -295,17 +348,17 @@ export default function DashboardPage() {
                 </div>
                 <div className="flex items-center text-xs text-muted-foreground mt-1">
                   {stat.trend === 'up' ? (
-                    <ArrowUp className="h-3 w-3 text-green-500 me-1" />
+                    <ArrowUp className="h-3 w-3 text-success me-1" aria-hidden="true" />
                   ) : (
-                    <ArrowDown className="h-3 w-3 text-red-500 me-1" />
+                    <ArrowDown className="h-3 w-3 text-destructive me-1" aria-hidden="true" />
                   )}
                   <span
-                    className={stat.trend === 'up' ? 'text-green-500' : 'text-red-500'}
+                    className={stat.trend === 'up' ? 'text-success' : 'text-destructive'}
                   >
                     {stat.change}
                   </span>
                   <span className="ms-1">
-                    {locale === 'ar' ? 'عن الشهر الماضي' : 'from last month'}
+                    {t.fromLastMonth}
                   </span>
                 </div>
               </CardContent>
@@ -323,23 +376,17 @@ export default function DashboardPage() {
                 <div className="flex items-center justify-between">
                   <div>
                     <CardTitle>
-                      {locale === 'ar' ? 'نظرة عامة على الإيرادات' : 'Revenue Overview'}
+                      {t.revenueOverview}
                     </CardTitle>
                     <CardDescription>
-                      {locale === 'ar' ? 'الإيرادات الشهرية لهذا العام' : 'Monthly revenue for this year'}
+                      {t.revenueDesc}
                     </CardDescription>
                   </div>
                   <Tabs defaultValue="month">
                     <TabsList>
-                      <TabsTrigger value="week">
-                        {locale === 'ar' ? 'أسبوع' : 'Week'}
-                      </TabsTrigger>
-                      <TabsTrigger value="month">
-                        {locale === 'ar' ? 'شهر' : 'Month'}
-                      </TabsTrigger>
-                      <TabsTrigger value="year">
-                        {locale === 'ar' ? 'سنة' : 'Year'}
-                      </TabsTrigger>
+                      <TabsTrigger value="week">{t.week}</TabsTrigger>
+                      <TabsTrigger value="month">{t.month}</TabsTrigger>
+                      <TabsTrigger value="year">{t.year}</TabsTrigger>
                     </TabsList>
                   </Tabs>
                 </div>
@@ -355,43 +402,19 @@ export default function DashboardPage() {
                         style={{ height: `${height}%` }}
                       >
                         <div className="absolute -top-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-popover text-popover-foreground px-2 py-1 rounded text-xs whitespace-nowrap">
-                          {(height * 500).toFixed(0)} {locale === 'ar' ? 'ر.س' : 'SAR'}
+                          {(height * 500).toFixed(0)} {t.currency}
                         </div>
                       </div>
                     )
                   )}
                 </div>
-                <div className="flex justify-between mt-4 text-xs text-muted-foreground px-4">
-                  {locale === 'ar'
-                    ? ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو', 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'].map(
-                        (month, index) => (
-                          <span key={index} className="hidden md:block">
-                            {month}
-                          </span>
-                        )
-                      )
-                    : ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'].map(
-                        (month, index) => (
-                          <span key={index} className="hidden md:block">
-                            {month}
-                          </span>
-                        )
-                      )}
-                  {locale === 'ar'
-                    ? ['ي', 'ف', 'م', 'أ', 'م', 'ي', 'ي', 'أ', 'س', 'أ', 'ن', 'د'].map(
-                        (month, index) => (
-                          <span key={index} className="md:hidden">
-                            {month}
-                          </span>
-                        )
-                      )
-                    : ['J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'].map(
-                        (month, index) => (
-                          <span key={index} className="md:hidden">
-                            {month}
-                          </span>
-                        )
-                      )}
+                <div className="flex justify-between mt-4 text-xs text-muted-foreground px-4" aria-hidden="true">
+                  {t.months.map((month, index) => (
+                    <span key={index} className="hidden md:block">{month}</span>
+                  ))}
+                  {t.monthsShort.map((month, index) => (
+                    <span key={index} className="md:hidden">{month}</span>
+                  ))}
                 </div>
               </CardContent>
             </Card>
@@ -400,10 +423,10 @@ export default function DashboardPage() {
             <Card>
               <CardHeader>
                 <CardTitle>
-                  {locale === 'ar' ? 'المعاملات الأخيرة' : 'Recent Transactions'}
+                  {t.recentTransactions}
                 </CardTitle>
                 <CardDescription>
-                  {locale === 'ar' ? 'آخر 5 معاملات في نظامك' : 'Last 5 transactions in your system'}
+                  {t.transactionsDesc}
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -412,21 +435,11 @@ export default function DashboardPage() {
                   <Table>
                     <TableHeader>
                       <TableRow>
-                        <TableHead>
-                          {locale === 'ar' ? 'رقم المعاملة' : 'Transaction ID'}
-                        </TableHead>
-                        <TableHead>
-                          {locale === 'ar' ? 'العميل' : 'Customer'}
-                        </TableHead>
-                        <TableHead>
-                          {locale === 'ar' ? 'المبلغ' : 'Amount'}
-                        </TableHead>
-                        <TableHead>
-                          {locale === 'ar' ? 'الحالة' : 'Status'}
-                        </TableHead>
-                        <TableHead>
-                          {locale === 'ar' ? 'التاريخ' : 'Date'}
-                        </TableHead>
+                        <TableHead>{t.transactionId}</TableHead>
+                        <TableHead>{t.customer}</TableHead>
+                        <TableHead>{t.amount}</TableHead>
+                        <TableHead>{t.status}</TableHead>
+                        <TableHead>{t.date}</TableHead>
                       </TableRow>
                     </TableHeader>
                     <TableBody>
@@ -436,7 +449,7 @@ export default function DashboardPage() {
                           <TableCell>
                             <div>
                               <div className="font-medium">
-                                {locale === 'ar' ? transaction.customer : transaction.customerEn}
+                                {isRTL ? transaction.customer : transaction.customerEn}
                               </div>
                               <div className="text-xs text-muted-foreground">
                                 {transaction.email}
@@ -444,7 +457,7 @@ export default function DashboardPage() {
                             </div>
                           </TableCell>
                           <TableCell>
-                            {transaction.amount} {locale === 'ar' ? 'ر.س' : 'SAR'}
+                            {transaction.amount} {t.currency}
                           </TableCell>
                           <TableCell>{getStatusBadge(transaction.status)}</TableCell>
                           <TableCell className="text-muted-foreground">
@@ -459,21 +472,17 @@ export default function DashboardPage() {
                 {/* Mobile Responsive Table */}
                 <div className="md:hidden">
                   <ResponsiveTable
-                    headers={
-                      locale === 'ar'
-                        ? ['رقم المعاملة', 'العميل', 'المبلغ', 'الحالة', 'التاريخ']
-                        : ['Transaction ID', 'Customer', 'Amount', 'Status', 'Date']
-                    }
+                    headers={[t.transactionId, t.customer, t.amount, t.status, t.date]}
                   >
                     <TableBody>
                       {recentTransactions.map((transaction) => (
                         <TableRow key={transaction.id}>
                           <TableCell>{transaction.id}</TableCell>
                           <TableCell>
-                            {locale === 'ar' ? transaction.customer : transaction.customerEn}
+                            {isRTL ? transaction.customer : transaction.customerEn}
                           </TableCell>
                           <TableCell>
-                            {transaction.amount} {locale === 'ar' ? 'ر.س' : 'SAR'}
+                            {transaction.amount} {t.currency}
                           </TableCell>
                           <TableCell>{getStatusBadge(transaction.status)}</TableCell>
                           <TableCell>{transaction.date}</TableCell>
@@ -492,10 +501,10 @@ export default function DashboardPage() {
             <Card>
               <CardHeader>
                 <CardTitle>
-                  {locale === 'ar' ? 'أفضل المنتجات' : 'Top Products'}
+                  {t.topProducts}
                 </CardTitle>
                 <CardDescription>
-                  {locale === 'ar' ? 'الأكثر مبيعاً هذا الشهر' : 'Best sellers this month'}
+                  {t.topProductsDesc}
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
@@ -503,19 +512,19 @@ export default function DashboardPage() {
                   <div key={index} className="space-y-2">
                     <div className="flex items-center justify-between text-sm">
                       <span className="font-medium">
-                        {locale === 'ar' ? product.name : product.nameEn}
+                        {isRTL ? product.name : product.nameEn}
                       </span>
                       <span className="text-muted-foreground">
-                        {product.sales} {locale === 'ar' ? 'قطعة' : 'units'}
+                        {product.sales} {t.units}
                       </span>
                     </div>
-                    <Progress value={product.progress} className="h-2" />
+                    <Progress value={product.progress} className="h-2" aria-label={`${isRTL ? product.name : product.nameEn} — ${product.progress}%`} />
                     <div className="flex items-center justify-between text-xs text-muted-foreground">
                       <span>
-                        {product.progress}% {locale === 'ar' ? 'من الهدف' : 'of target'}
+                        {product.progress}% {t.ofTarget}
                       </span>
                       <span>
-                        {product.revenue} {locale === 'ar' ? 'ر.س' : 'SAR'}
+                        {product.revenue} {t.currency}
                       </span>
                     </div>
                   </div>
@@ -527,10 +536,10 @@ export default function DashboardPage() {
             <Card>
               <CardHeader>
                 <CardTitle>
-                  {locale === 'ar' ? 'النشاط الأخير' : 'Recent Pulse'}
+                  {t.recentPulse}
                 </CardTitle>
                 <CardDescription>
-                  {locale === 'ar' ? 'آخر التحديثات في النظام' : 'Latest updates in the system'}
+                  {t.recentPulseDesc}
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -542,13 +551,13 @@ export default function DashboardPage() {
                       </Avatar>
                       <div className="flex-1 space-y-1">
                         <p className="text-sm font-medium">
-                          {locale === 'ar' ? activity.user : activity.userEn}
+                          {isRTL ? activity.user : activity.userEn}
                         </p>
                         <p className="text-sm text-muted-foreground">
-                          {locale === 'ar' ? activity.action : activity.actionEn}
+                          {isRTL ? activity.action : activity.actionEn}
                         </p>
                         <p className="text-xs text-muted-foreground">
-                          {locale === 'ar' ? activity.time : activity.timeEn}
+                          {isRTL ? activity.time : activity.timeEn}
                         </p>
                       </div>
                     </div>

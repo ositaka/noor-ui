@@ -61,12 +61,20 @@ export interface CalendarProps extends Omit<React.HTMLAttributes<HTMLDivElement>
   /** Locale */
   locale?: 'en' | 'ar'
   /** Custom Hijri date provider */
-  getHijriDate?: (date: Date) => { hijri: string; hijriDay: string }
+  getHijriDate?: (date: Date) => { hijri: string; hijriDay: string; hijriMonthIndex?: number; hijriYear?: number }
 }
 
 // ============================================================================
 // Utilities
 // ============================================================================
+
+/** Format a number using locale-appropriate numerals (e.g. Eastern Arabic ٧ for 'ar') */
+function formatNumber(num: number, locale: string): string {
+  return new Intl.NumberFormat(locale, {
+    numberingSystem: locale === 'ar' ? 'arab' : undefined,
+    useGrouping: false,
+  }).format(num)
+}
 
 function isSameDay(date1: Date | undefined, date2: Date | undefined): boolean {
   if (!date1 || !date2) return false
@@ -93,7 +101,7 @@ function isRangeEnd(date: Date, range: DateRange | undefined): boolean {
 
 // Hijri conversion using Julian Day Number algorithm
 // Based on "Calendrical Calculations" by Reingold & Dershowitz
-function getApproximateHijri(date: Date): { hijri: string; hijriDay: string } {
+function getApproximateHijri(date: Date): { hijri: string; hijriDay: string; hijriMonthIndex: number; hijriYear: number } {
   // Convert Gregorian to Julian Day Number
   const year = date.getFullYear()
   const month = date.getMonth() + 1
@@ -123,12 +131,27 @@ function getApproximateHijri(date: Date): { hijri: string; hijriDay: string } {
   ]
 
   const monthName = months[hijriMonth - 1] || months[0]
+  const dayNum = Math.floor(hijriDay)
 
   return {
-    hijri: `${Math.floor(hijriDay)} ${monthName} ${hijriYear}`,
-    hijriDay: String(Math.floor(hijriDay))
+    hijri: `${dayNum} ${monthName} ${hijriYear}`,
+    hijriDay: String(dayNum),
+    hijriMonthIndex: hijriMonth - 1,
+    hijriYear,
   }
 }
+
+const HIJRI_MONTHS_AR = [
+  'محرم', 'صفر', 'ربيع الأول', 'ربيع الثاني',
+  'جمادى الأولى', 'جمادى الآخرة', 'رجب', 'شعبان',
+  'رمضان', 'شوال', 'ذو القعدة', 'ذو الحجة'
+]
+
+const HIJRI_MONTHS_EN = [
+  'Muharram', 'Safar', 'Rabi\' al-Awwal', 'Rabi\' al-Thani',
+  'Jumada al-Awwal', 'Jumada al-Thani', 'Rajab', 'Sha\'ban',
+  'Ramadan', 'Shawwal', 'Dhu al-Qi\'dah', 'Dhu al-Hijjah'
+]
 
 // ============================================================================
 // Component
@@ -154,9 +177,9 @@ export const Calendar = React.forwardRef<HTMLDivElement, CalendarProps>(
     },
     ref
   ) => {
-    const { direction, locale: currentLocale } = useDirection()
+    const { direction } = useDirection()
     const isRTL = direction === 'rtl'
-    const t = content[currentLocale]
+    const t = content[locale]
     const [currentMonth, setCurrentMonth] = React.useState(selected || new Date())
 
     // Generate calendar days
@@ -195,7 +218,7 @@ export const Calendar = React.forwardRef<HTMLDivElement, CalendarProps>(
           if (holiday) {
             holidayEvents.push({
               date: dayData.gregorian,
-              title: currentLocale === 'ar' ? holiday.nameAr : holiday.nameEn,
+              title: locale === 'ar' ? holiday.nameAr : holiday.nameEn,
               variant: 'primary',
             })
           }
@@ -203,7 +226,7 @@ export const Calendar = React.forwardRef<HTMLDivElement, CalendarProps>(
       })
 
       return holidayEvents
-    }, [showIslamicHolidays, showHijri, days, currentLocale])
+    }, [showIslamicHolidays, showHijri, days, locale])
 
     // Merge user events with Islamic holiday events
     const allEvents = React.useMemo(() => {
@@ -260,71 +283,105 @@ export const Calendar = React.forwardRef<HTMLDivElement, CalendarProps>(
       setCurrentMonth(new Date())
     }
 
-    // Month/Year display
-    const monthName = currentMonth.toLocaleDateString(locale === 'ar' ? 'ar-SA' : 'en-US', {
+    const headingId = React.useId()
+
+    // Month/Year display — force Eastern Arabic numerals for 'ar'
+    const monthName = new Intl.DateTimeFormat(locale, {
       month: 'long',
       year: 'numeric',
-    })
+      numberingSystem: locale === 'ar' ? 'arab' : undefined,
+    }).format(currentMonth)
 
     // Get Hijri month/year for header
     const hijriMonthYear = React.useMemo(() => {
       if (!showHijri) return null
-      const hijriData = getHijriDate(currentMonth)
-      // Extract month and year from hijri string (e.g., "6 Jumada al-Awwal 1447")
+      const hijriData = getHijriDate(currentMonth) as { hijri: string; hijriDay: string; hijriMonthIndex?: number; hijriYear?: number }
+      const monthNames = locale === 'ar' ? HIJRI_MONTHS_AR : HIJRI_MONTHS_EN
+      if (hijriData.hijriMonthIndex != null && hijriData.hijriYear != null) {
+        const monthStr = monthNames[hijriData.hijriMonthIndex] || monthNames[0]
+        const yearStr = formatNumber(hijriData.hijriYear, locale)
+        return `${monthStr} ${yearStr}`
+      }
+      // Fallback for custom getHijriDate without hijriMonthIndex
       const parts = hijriData.hijri.split(' ')
-      const month = parts.slice(1, -1).join(' ') // Get month name(s)
-      const year = parts[parts.length - 1] // Get year
+      const month = parts.slice(1, -1).join(' ')
+      const year = parts[parts.length - 1]
       return `${month} ${year}`
-    }, [showHijri, currentMonth, getHijriDate])
+    }, [showHijri, currentMonth, getHijriDate, locale])
+
+    // When Arabic + Hijri, Hijri is the primary calendar display
+    const hijriPrimary = locale === 'ar' && showHijri
 
     const weekDays = React.useMemo(() => {
       const days = []
       const baseDate = new Date(2024, 0, 7) // Sunday
+      const loc = locale
       for (let i = 0; i < 7; i++) {
         const date = new Date(baseDate)
         date.setDate(baseDate.getDate() + i)
-        days.push(
-          date.toLocaleDateString(locale === 'ar' ? 'ar-SA' : 'en-US', { weekday: 'short' })
-        )
+        days.push({
+          narrow: date.toLocaleDateString(loc, { weekday: 'narrow' }),
+          full: date.toLocaleDateString(loc, { weekday: 'long' }),
+        })
       }
       return days
     }, [locale])
 
     return (
-      <div ref={ref} className={cn('w-full p-4', className)} {...props}>
-        {/* Header */}
-        <div className="flex items-center justify-between mb-4 gap-4">
-          <div className="flex items-center gap-2">
-            <Button
-              type="button"
-              variant="outline"
-              size="icon"
-              onClick={isRTL ? goToNextMonth : goToPreviousMonth}
-              className="h-8 w-8"
-            >
-              <CaretLeft className="h-4 w-4" />
-            </Button>
-            <Button
-              type="button"
-              variant="outline"
-              size="icon"
-              onClick={isRTL ? goToPreviousMonth : goToNextMonth}
-              className="h-8 w-8"
-            >
-              <CaretRight className="h-4 w-4" />
-            </Button>
-          </div>
-
-          <div className="text-center">
-            <h2 className="text-lg font-semibold">{monthName}</h2>
-            {showHijri && hijriMonthYear && (
-              <p className="text-sm text-muted-foreground">{hijriMonthYear}</p>
+      <div ref={ref} className={cn('@container w-full p-4', className)} aria-labelledby={headingId} {...props}>
+        {/* Header — stacked at narrow, single row at ≥20rem */}
+        <div className="mb-4 space-y-2 @[20rem]:space-y-0">
+          <div className="text-center @[20rem]:hidden">
+            <h2 id={headingId} className="text-lg font-semibold">
+              {hijriPrimary ? hijriMonthYear : monthName}
+            </h2>
+            {showHijri && (
+              <p className="text-sm text-muted-foreground">
+                {hijriPrimary ? monthName : hijriMonthYear}
+              </p>
             )}
           </div>
 
-          <Button type="button" variant="outline" size="sm" onClick={goToToday}>
-            {t.ui.components.today}
-          </Button>
+          <div className="flex items-center justify-between gap-4">
+            <div className="flex items-center gap-2">
+              <Button
+                type="button"
+                variant="outline"
+                size="icon"
+                onClick={isRTL ? goToNextMonth : goToPreviousMonth}
+                aria-label={t.ui.components.previousMonth}
+                className="h-8 w-8"
+              >
+                <CaretLeft className="h-4 w-4" aria-hidden="true" />
+              </Button>
+              <Button
+                type="button"
+                variant="outline"
+                size="icon"
+                onClick={isRTL ? goToPreviousMonth : goToNextMonth}
+                aria-label={t.ui.components.nextMonth}
+                className="h-8 w-8"
+              >
+                <CaretRight className="h-4 w-4" aria-hidden="true" />
+              </Button>
+            </div>
+
+            {/* Inline heading for wide layout */}
+            <div className="hidden @[20rem]:block text-center flex-1" aria-hidden="true">
+              <div className="text-lg font-semibold">
+                {hijriPrimary ? hijriMonthYear : monthName}
+              </div>
+              {showHijri && (
+                <p className="text-sm text-muted-foreground">
+                  {hijriPrimary ? monthName : hijriMonthYear}
+                </p>
+              )}
+            </div>
+
+            <Button type="button" variant="outline" size="sm" onClick={goToToday}>
+              {t.ui.components.today}
+            </Button>
+          </div>
         </div>
 
         {/* Calendar Grid */}
@@ -335,8 +392,12 @@ export const Calendar = React.forwardRef<HTMLDivElement, CalendarProps>(
               <div
                 key={index}
                 className="text-center text-sm font-medium text-muted-foreground py-2"
+                role="columnheader"
+                aria-label={day.full}
               >
-                {day}
+                <abbr title={day.full} className="no-underline">
+                  {day.narrow}
+                </abbr>
               </div>
             ))}
           </div>
@@ -361,23 +422,27 @@ export const Calendar = React.forwardRef<HTMLDivElement, CalendarProps>(
                   onClick={() => handleDateClick(gregorian)}
                   disabled={isDisabled}
                   className={cn(
-                    'relative h-14 rounded-md text-sm transition-colors',
+                    'relative rounded-md text-sm p-2 cursor-pointer transition-colors',
+                    showHijri ? 'h-14' : 'h-9',
                     'hover:bg-muted focus:outline-none focus:ring-2 focus:ring-ring',
                     'disabled:opacity-50 disabled:cursor-not-allowed',
                     isOutsideMonth && 'text-muted-foreground opacity-50',
-                    isToday && 'font-bold ring-2 ring-primary',
-                    isSelected && 'bg-primary text-primary-foreground hover:bg-primary',
+                    isToday && !isSelected && 'font-bold ring-2',
+                    isToday && !isSelected && (selected || selectedRange?.from ? 'ring-muted-foreground/30' : 'ring-primary'),
+                    isSelected && 'bg-primary text-primary-foreground hover:bg-primary/90',
                     inRange && !isSelected && 'bg-primary/20',
                     (rangeStart || rangeEnd) && 'bg-primary text-primary-foreground',
                     isDisabled && 'hover:bg-transparent'
                   )}
                 >
                   <div className="flex flex-col items-center justify-center h-full">
-                    <span className={cn('text-sm', isToday && 'font-bold')}>
-                      {gregorian.getDate()}
+                    <span className={cn(locale === 'ar' ? 'text-base' : 'text-sm', isToday && (isSelected || (!selected && !selectedRange?.from)) && 'font-bold')}>
+                      {formatNumber(hijriPrimary && hijriDay ? Number(hijriDay) : gregorian.getDate(), locale)}
                     </span>
                     {showHijri && hijriDay && (
-                      <span className="text-[10px] text-muted-foreground">{hijriDay}</span>
+                      <span className={cn(locale === 'ar' ? 'text-[11px]' : 'text-[10px]', (isSelected || rangeStart || rangeEnd) ? 'text-primary-foreground/70' : 'text-muted-foreground')}>
+                        {formatNumber(hijriPrimary ? gregorian.getDate() : Number(hijriDay), locale)}
+                      </span>
                     )}
                   </div>
 
@@ -432,7 +497,7 @@ export const Calendar = React.forwardRef<HTMLDivElement, CalendarProps>(
                       )}
                     />
                     <span className="text-muted-foreground">
-                      {event.date.getDate()} - {event.title}
+                      {formatNumber(event.date.getDate(), locale)} - {event.title}
                     </span>
                   </div>
                 ))}

@@ -29,6 +29,13 @@ import {
 import { useDirection } from '@/components/providers/direction-provider'
 import { DirectionToggle } from '@/components/docs/direction-toggle'
 
+const propertyImages: Record<string, string> = {
+  villa: '/examples/real-estate/villa.jpg',
+  apartment: '/examples/real-estate/apartment.jpg',
+  townhouse: '/examples/real-estate/townhouse.jpg',
+  penthouse: '/examples/real-estate/penthouse.jpg',
+}
+
 interface Property {
   id: string
   title: string
@@ -169,7 +176,122 @@ const getAllProperties = (): Property[] => {
 
 export default function PropertyDetailPage({ params }: { params: { id: string } }) {
   const { locale } = useDirection()
+  const isRTL = locale === 'ar'
   const [property, setProperty] = React.useState<Property | null>(null)
+
+  const t = isRTL ? {
+    home: 'الرئيسية',
+    examples: 'الأمثلة',
+    realEstate: 'لوحة العقارات',
+    backToListings: 'العودة إلى القائمة',
+    propertyNotFound: 'العقار غير موجود',
+    propertyNotFoundDesc: 'العقار الذي تبحث عنه غير متاح',
+    villa: 'فيلا',
+    apartment: 'شقة',
+    townhouse: 'تاون هاوس',
+    penthouse: 'بنتهاوس',
+    sale: 'للبيع',
+    rent: 'للإيجار',
+    featured: 'مميز',
+    furnished: 'مفروش',
+    addToFavorites: 'إضافة للمفضلة',
+    share: 'مشاركة',
+    bedrooms: 'غرف النوم',
+    bathrooms: 'الحمامات',
+    area: 'المساحة',
+    sqft: 'قدم²',
+    parking: 'مواقف السيارات',
+    floors: 'الطوابق',
+    yearBuilt: 'سنة البناء',
+    currency: 'د.إ',
+    perYear: '/سنوياً',
+    description: 'الوصف',
+    amenities: 'المرافق',
+    propertyOverview: 'نظرة عامة على العقار',
+    amenitiesFeatures: 'المرافق والميزات',
+    location: 'الموقع',
+    interactiveMap: 'خريطة تفاعلية',
+    locationMap: 'خريطة الموقع',
+    contactAgent: 'تواصل مع الوكيل',
+    contactDesc: 'تواصل معنا للحصول على المزيد من المعلومات',
+    callNow: 'اتصل الآن',
+    whatsapp: 'واتساب',
+    email: 'إرسال بريد',
+    propertyDetails: 'تفاصيل العقار',
+    propertyId: 'رقم العقار',
+    type: 'النوع',
+    status: 'الحالة',
+    furnishedLabel: 'التأثيث',
+    yes: 'نعم',
+    no: 'لا',
+    similarProperties: 'عقارات مشابهة',
+    similarPropertiesDesc: 'عقارات مشابهة متاحة قريباً',
+    propertyPhoto: (name: string) => `صورة ${name}`,
+  } : {
+    home: 'Home',
+    examples: 'Examples',
+    realEstate: 'Real Estate',
+    backToListings: 'Back to Listings',
+    propertyNotFound: 'Property Not Found',
+    propertyNotFoundDesc: 'The property you are looking for is not available',
+    villa: 'Villa',
+    apartment: 'Apartment',
+    townhouse: 'Townhouse',
+    penthouse: 'Penthouse',
+    sale: 'For Sale',
+    rent: 'For Rent',
+    featured: 'Featured',
+    furnished: 'Furnished',
+    addToFavorites: 'Add to favorites',
+    share: 'Share',
+    bedrooms: 'Bedrooms',
+    bathrooms: 'Bathrooms',
+    area: 'Area',
+    sqft: 'sqft',
+    parking: 'Parking',
+    floors: 'Floors',
+    yearBuilt: 'Year Built',
+    currency: 'AED',
+    perYear: '/year',
+    description: 'Description',
+    amenities: 'Amenities',
+    propertyOverview: 'Property Overview',
+    amenitiesFeatures: 'Amenities & Features',
+    location: 'Location',
+    interactiveMap: 'Interactive Map',
+    locationMap: 'Property location map',
+    contactAgent: 'Contact Agent',
+    contactDesc: 'Get in touch for more information',
+    callNow: 'Call Now',
+    whatsapp: 'WhatsApp',
+    email: 'Email',
+    propertyDetails: 'Property Details',
+    propertyId: 'Property ID',
+    type: 'Type',
+    status: 'Status',
+    furnishedLabel: 'Furnished',
+    yes: 'Yes',
+    no: 'No',
+    similarProperties: 'Similar Properties',
+    similarPropertiesDesc: 'Similar properties available soon',
+    propertyPhoto: (name: string) => `Photo of ${name}`,
+  }
+
+  const typeLabels: Record<string, string> = {
+    villa: t.villa,
+    apartment: t.apartment,
+    townhouse: t.townhouse,
+    penthouse: t.penthouse,
+  }
+
+  const getPropertyTypeLabel = (type: string) => typeLabels[type] || type
+  const getStatusLabel = (status: string) => status === 'sale' ? t.sale : t.rent
+
+  const formatPrice = (price: number, status: string) => {
+    const formatted = new Intl.NumberFormat('en-US').format(price)
+    const suffix = status === 'rent' ? t.perYear : ''
+    return `${formatted} ${t.currency}${suffix}`
+  }
 
   React.useEffect(() => {
     const allProperties = getAllProperties()
@@ -181,18 +303,16 @@ export default function PropertyDetailPage({ params }: { params: { id: string } 
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center">
-          <House className="h-16 w-16 mx-auto text-muted-foreground mb-4" />
+          <House className="h-16 w-16 mx-auto text-muted-foreground mb-4" aria-hidden="true" />
           <h2 className="text-2xl font-bold mb-2">
-            {locale === 'ar' ? 'العقار غير موجود' : 'Property Not Found'}
+            {t.propertyNotFound}
           </h2>
           <p className="text-muted-foreground mb-4">
-            {locale === 'ar'
-              ? 'العقار الذي تبحث عنه غير متاح'
-              : 'The property you are looking for is not available'}
+            {t.propertyNotFoundDesc}
           </p>
           <ButtonArrow direction="back" icon="arrow" asChild>
             <Link href="/examples/real-estate">
-              {locale === 'ar' ? 'العودة إلى القائمة' : 'Back to Listings'}
+              {t.backToListings}
             </Link>
           </ButtonArrow>
         </div>
@@ -200,57 +320,13 @@ export default function PropertyDetailPage({ params }: { params: { id: string } 
     )
   }
 
-  const getPropertyTypeLabel = (type: string) => {
-    const types = {
-      villa: { en: 'Villa', ar: 'فيلا' },
-      apartment: { en: 'Apartment', ar: 'شقة' },
-      townhouse: { en: 'Townhouse', ar: 'تاون هاوس' },
-      penthouse: { en: 'Penthouse', ar: 'بنتهاوس' },
-    }
-    return locale === 'ar' ? types[type as keyof typeof types].ar : types[type as keyof typeof types].en
-  }
-
-  const getStatusLabel = (status: string) => {
-    return status === 'sale' ? (locale === 'ar' ? 'للبيع' : 'For Sale') : locale === 'ar' ? 'للإيجار' : 'For Rent'
-  }
-
-  const formatPrice = (price: number, status: string) => {
-    const formatted = new Intl.NumberFormat('en-US').format(price)
-    const suffix = status === 'rent' ? (locale === 'ar' ? '/سنوياً' : '/year') : ''
-    return `${formatted} ${locale === 'ar' ? 'د.إ' : 'AED'}${suffix}`
-  }
-
   const propertyFeatures = [
-    {
-      icon: Bed,
-      label: locale === 'ar' ? 'غرف النوم' : 'Bedrooms',
-      value: property.bedrooms,
-    },
-    {
-      icon: Bathtub,
-      label: locale === 'ar' ? 'الحمامات' : 'Bathrooms',
-      value: property.bathrooms,
-    },
-    {
-      icon: Square,
-      label: locale === 'ar' ? 'المساحة' : 'Area',
-      value: `${property.area.toLocaleString()} ${locale === 'ar' ? 'قدم²' : 'sqft'}`,
-    },
-    {
-      icon: Car,
-      label: locale === 'ar' ? 'مواقف السيارات' : 'Parking',
-      value: property.parking,
-    },
-    {
-      icon: Buildings,
-      label: locale === 'ar' ? 'الطوابق' : 'Floors',
-      value: property.floors,
-    },
-    {
-      icon: Calendar,
-      label: locale === 'ar' ? 'سنة البناء' : 'Year Built',
-      value: property.yearBuilt,
-    },
+    { icon: Bed, label: t.bedrooms, value: property.bedrooms },
+    { icon: Bathtub, label: t.bathrooms, value: property.bathrooms },
+    { icon: Square, label: t.area, value: `${property.area.toLocaleString()} ${t.sqft}` },
+    { icon: Car, label: t.parking, value: property.parking },
+    { icon: Buildings, label: t.floors, value: property.floors },
+    { icon: Calendar, label: t.yearBuilt, value: property.yearBuilt },
   ]
 
   return (
@@ -258,28 +334,28 @@ export default function PropertyDetailPage({ params }: { params: { id: string } 
       {/* Breadcrumb */}
       <div className="border-b bg-background">
         <div className="container py-3">
-          <nav aria-label="Breadcrumb">
+          <nav aria-label={isRTL ? 'مسار التنقل' : 'Breadcrumb'}>
             <div className="flex items-center justify-between gap-4">
               <ol className="flex items-center gap-2 text-sm text-muted-foreground">
                 <li>
                   <Link href="/" className="hover:text-foreground transition-colors">
-                    {locale === 'ar' ? 'الرئيسية' : 'Home'}
+                    {t.home}
                   </Link>
                 </li>
-                <li>/</li>
+                <li aria-hidden="true">/</li>
                 <li>
                   <Link href="/examples" className="hover:text-foreground transition-colors">
-                    {locale === 'ar' ? 'الأمثلة' : 'Examples'}
+                    {t.examples}
                   </Link>
                 </li>
-                <li>/</li>
+                <li aria-hidden="true">/</li>
                 <li>
                   <Link href="/examples/real-estate" className="hover:text-foreground transition-colors">
-                    {locale === 'ar' ? 'لوحة العقارات' : 'Real Estate'}
+                    {t.realEstate}
                   </Link>
                 </li>
-                <li>/</li>
-                <li className="text-foreground font-medium">{property.propertyId}</li>
+                <li aria-hidden="true">/</li>
+                <li aria-current="page" className="text-foreground font-medium">{property.propertyId}</li>
               </ol>
               <DirectionToggle />
             </div>
@@ -292,7 +368,7 @@ export default function PropertyDetailPage({ params }: { params: { id: string } 
         <div className="container py-4">
           <ButtonArrow variant="ghost" size="sm" direction="back" icon="arrow" asChild>
             <Link href="/examples/real-estate">
-              {locale === 'ar' ? 'العودة إلى القائمة' : 'Back to Listings'}
+              {t.backToListings}
             </Link>
           </ButtonArrow>
         </div>
@@ -305,30 +381,32 @@ export default function PropertyDetailPage({ params }: { params: { id: string } 
             {/* Property Images */}
             <Card className="overflow-hidden">
               <div className="relative h-[400px] bg-muted">
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <House className="h-32 w-32 text-muted-foreground/30" />
-                </div>
+                <img
+                  src={propertyImages[property.type]}
+                  alt={t.propertyPhoto(isRTL ? property.titleAr : property.title)}
+                  className="absolute inset-0 h-full w-full object-cover"
+                />
                 <div className="absolute top-4 start-4 flex gap-2">
                   <Badge variant={property.status === 'sale' ? 'default' : 'secondary'} className="text-sm">
                     {getStatusLabel(property.status)}
                   </Badge>
                   {property.featured && (
                     <Badge variant="destructive" className="text-sm">
-                      {locale === 'ar' ? 'مميز' : 'Featured'}
+                      {t.featured}
                     </Badge>
                   )}
                   {property.furnished && (
                     <Badge variant="outline" className="bg-background/90 text-sm">
-                      {locale === 'ar' ? 'مفروش' : 'Furnished'}
+                      {t.furnished}
                     </Badge>
                   )}
                 </div>
                 <div className="absolute top-4 end-4 flex gap-2">
-                  <Button size="icon" variant="secondary" className="rounded-full bg-white/90">
-                    <Heart className="h-5 w-5" />
+                  <Button size="icon" variant="secondary" className="rounded-full bg-white/90" aria-label={t.addToFavorites}>
+                    <Heart className="h-5 w-5" aria-hidden="true" />
                   </Button>
-                  <Button size="icon" variant="secondary" className="rounded-full bg-white/90">
-                    <ShareNetwork className="h-5 w-5" />
+                  <Button size="icon" variant="secondary" className="rounded-full bg-white/90" aria-label={t.share}>
+                    <ShareNetwork className="h-5 w-5" aria-hidden="true" />
                   </Button>
                 </div>
               </div>
@@ -342,17 +420,17 @@ export default function PropertyDetailPage({ params }: { params: { id: string } 
                     <div className="flex items-center gap-2 mb-2">
                       <Badge variant="outline">{getPropertyTypeLabel(property.type)}</Badge>
                       <Badge variant="secondary" className="text-xs">
-                        {locale === 'ar' ? `رقم العقار: ${property.propertyId}` : `ID: ${property.propertyId}`}
+                        {isRTL ? `رقم العقار: ${property.propertyId}` : `ID: ${property.propertyId}`}
                       </Badge>
                     </div>
-                    <CardTitle className="text-3xl">
-                      {locale === 'ar' ? property.titleAr : property.title}
+                    <CardTitle id="property-title" className="text-3xl">
+                      {isRTL ? property.titleAr : property.title}
                     </CardTitle>
                   </div>
                 </div>
                 <div className="flex items-center gap-2 text-muted-foreground">
-                  <MapPin className="h-4 w-4" />
-                  <span>{locale === 'ar' ? property.locationAr : property.location}</span>
+                  <MapPin className="h-4 w-4" aria-hidden="true" />
+                  <span>{isRTL ? property.locationAr : property.location}</span>
                 </div>
               </CardHeader>
               <CardContent>
@@ -365,7 +443,7 @@ export default function PropertyDetailPage({ params }: { params: { id: string } 
                   {propertyFeatures.map((feature, idx) => (
                     <div key={idx} className="flex items-center gap-3 p-4 rounded-lg bg-muted/50">
                       <div className="p-2 rounded-full bg-background">
-                        <feature.icon className="h-5 w-5 text-primary" />
+                        <feature.icon className="h-5 w-5 text-primary" aria-hidden="true" />
                       </div>
                       <div>
                         <div className="text-sm text-muted-foreground">{feature.label}</div>
@@ -381,31 +459,31 @@ export default function PropertyDetailPage({ params }: { params: { id: string } 
                 <Tabs defaultValue="description" className="w-full">
                   <TabsList className="grid w-full grid-cols-2">
                     <TabsTrigger value="description">
-                      {locale === 'ar' ? 'الوصف' : 'Description'}
+                      {t.description}
                     </TabsTrigger>
                     <TabsTrigger value="amenities">
-                      {locale === 'ar' ? 'المرافق' : 'Amenities'}
+                      {t.amenities}
                     </TabsTrigger>
                   </TabsList>
                   <TabsContent value="description" className="space-y-4">
                     <div>
                       <h3 className="font-semibold text-lg mb-3">
-                        {locale === 'ar' ? 'نظرة عامة على العقار' : 'Property Overview'}
+                        {t.propertyOverview}
                       </h3>
                       <p className="text-muted-foreground leading-relaxed">
-                        {locale === 'ar' ? property.fullDescriptionAr : property.fullDescription}
+                        {isRTL ? property.fullDescriptionAr : property.fullDescription}
                       </p>
                     </div>
                   </TabsContent>
                   <TabsContent value="amenities" className="space-y-4">
                     <div>
                       <h3 className="font-semibold text-lg mb-3">
-                        {locale === 'ar' ? 'المرافق والميزات' : 'Amenities & Features'}
+                        {t.amenitiesFeatures}
                       </h3>
                       <div className="grid grid-cols-2 gap-3">
-                        {(locale === 'ar' ? property.amenitiesAr : property.amenities).map((amenity, idx) => (
+                        {(isRTL ? property.amenitiesAr : property.amenities).map((amenity, idx) => (
                           <div key={idx} className="flex items-center gap-2">
-                            <CheckCircle className="h-4 w-4 text-green-500" />
+                            <CheckCircle className="h-4 w-4 text-success" aria-hidden="true" />
                             <span className="text-sm">{amenity}</span>
                           </div>
                         ))}
@@ -419,16 +497,20 @@ export default function PropertyDetailPage({ params }: { params: { id: string } 
             {/* Location */}
             <Card>
               <CardHeader>
-                <CardTitle>{locale === 'ar' ? 'الموقع' : 'Location'}</CardTitle>
+                <CardTitle>{t.location}</CardTitle>
                 <CardDescription>
-                  {locale === 'ar' ? property.locationAr : property.location}
+                  {isRTL ? property.locationAr : property.location}
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="h-[300px] bg-muted rounded-lg flex items-center justify-center">
-                  <div className="text-center text-muted-foreground">
+                <div
+                  role="region"
+                  aria-label={t.locationMap}
+                  className="h-[300px] bg-muted rounded-lg flex items-center justify-center"
+                >
+                  <div className="text-center text-muted-foreground" aria-hidden="true">
                     <MapPin className="h-12 w-12 mx-auto mb-2" />
-                    <p className="text-sm">{locale === 'ar' ? 'خريطة تفاعلية' : 'Interactive Map'}</p>
+                    <p className="text-sm">{t.interactiveMap}</p>
                   </div>
                 </div>
               </CardContent>
@@ -441,26 +523,24 @@ export default function PropertyDetailPage({ params }: { params: { id: string } 
             <Card>
               <CardHeader>
                 <CardTitle className="text-lg">
-                  {locale === 'ar' ? 'اتصل بنا' : 'Contact Agent'}
+                  {t.contactAgent}
                 </CardTitle>
                 <CardDescription>
-                  {locale === 'ar'
-                    ? 'تواصل معنا للحصول على المزيد من المعلومات'
-                    : 'Get in touch for more information'}
+                  {t.contactDesc}
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-3">
-                <Button className="w-full" size="lg">
-                  <Phone className="h-4 w-4 me-2" />
-                  {locale === 'ar' ? 'اتصل الآن' : 'Call Now'}
+                <Button className="w-full" size="lg" aria-describedby="property-title">
+                  <Phone className="h-4 w-4 me-2" aria-hidden="true" />
+                  {t.callNow}
                 </Button>
-                <Button variant="outline" className="w-full" size="lg">
-                  <ChatCircle className="h-4 w-4 me-2" />
-                  {locale === 'ar' ? 'واتساب' : 'WhatsApp'}
+                <Button variant="outline" className="w-full" size="lg" aria-describedby="property-title">
+                  <ChatCircle className="h-4 w-4 me-2" aria-hidden="true" />
+                  {t.whatsapp}
                 </Button>
-                <Button variant="outline" className="w-full" size="lg">
-                  <EnvelopeSimple className="h-4 w-4 me-2" />
-                  {locale === 'ar' ? 'إرسال بريد' : 'Email'}
+                <Button variant="outline" className="w-full" size="lg" aria-describedby="property-title">
+                  <EnvelopeSimple className="h-4 w-4 me-2" aria-hidden="true" />
+                  {t.email}
                 </Button>
               </CardContent>
             </Card>
@@ -469,44 +549,36 @@ export default function PropertyDetailPage({ params }: { params: { id: string } 
             <Card>
               <CardHeader>
                 <CardTitle className="text-lg">
-                  {locale === 'ar' ? 'تفاصيل العقار' : 'Property Details'}
+                  {t.propertyDetails}
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-3 text-sm">
                 <div className="flex justify-between">
-                  <span className="text-muted-foreground">
-                    {locale === 'ar' ? 'رقم العقار' : 'Property ID'}
-                  </span>
+                  <span className="text-muted-foreground">{t.propertyId}</span>
                   <span className="font-medium">{property.propertyId}</span>
                 </div>
                 <Separator />
                 <div className="flex justify-between">
-                  <span className="text-muted-foreground">{locale === 'ar' ? 'النوع' : 'Type'}</span>
+                  <span className="text-muted-foreground">{t.type}</span>
                   <span className="font-medium">{getPropertyTypeLabel(property.type)}</span>
                 </div>
                 <Separator />
                 <div className="flex justify-between">
-                  <span className="text-muted-foreground">{locale === 'ar' ? 'الحالة' : 'Status'}</span>
+                  <span className="text-muted-foreground">{t.status}</span>
                   <Badge variant={property.status === 'sale' ? 'default' : 'secondary'}>
                     {getStatusLabel(property.status)}
                   </Badge>
                 </div>
                 <Separator />
                 <div className="flex justify-between">
-                  <span className="text-muted-foreground">{locale === 'ar' ? 'المفروشات' : 'Furnished'}</span>
+                  <span className="text-muted-foreground">{t.furnishedLabel}</span>
                   <span className="font-medium">
-                    {property.furnished
-                      ? locale === 'ar'
-                        ? 'نعم'
-                        : 'Yes'
-                      : locale === 'ar'
-                        ? 'لا'
-                        : 'No'}
+                    {property.furnished ? t.yes : t.no}
                   </span>
                 </div>
                 <Separator />
                 <div className="flex justify-between">
-                  <span className="text-muted-foreground">{locale === 'ar' ? 'سنة البناء' : 'Year Built'}</span>
+                  <span className="text-muted-foreground">{t.yearBuilt}</span>
                   <span className="font-medium">{property.yearBuilt}</span>
                 </div>
               </CardContent>
@@ -516,14 +588,12 @@ export default function PropertyDetailPage({ params }: { params: { id: string } 
             <Card>
               <CardHeader>
                 <CardTitle className="text-lg">
-                  {locale === 'ar' ? 'عقارات مشابهة' : 'Similar Properties'}
+                  {t.similarProperties}
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="text-sm text-muted-foreground text-center py-8">
-                  {locale === 'ar'
-                    ? 'عقارات مشابهة متاحة قريباً'
-                    : 'Similar properties available soon'}
+                  {t.similarPropertiesDesc}
                 </div>
               </CardContent>
             </Card>

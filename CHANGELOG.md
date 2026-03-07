@@ -5,6 +5,33 @@ All notable changes to Noor UI will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.9.0] - 2026-03-07
+
+### Added
+- **Form auto-id pairing**: `FormField` generates a unique id via `React.useId()` and provides it through shared context. `FormLabel` auto-reads `htmlFor` and `Input`, `Textarea`, `SelectTrigger`, `Checkbox`, `Switch` auto-read `id` — no manual id/htmlFor needed inside FormField
+- **New file `lib/form-field-context.ts`**: Shared `FormFieldIdContext` consumed by form and input components
+- **Calendar Arabic numerals**: Eastern Arabic numerals (٧، ٨، ٩) for day numbers, Hijri dates, event legend, and header year when `locale="ar"`
+- **Calendar Hijri-primary mode**: When `locale="ar"` + `showHijri`, Hijri month/year becomes the primary heading with Arabic month names (رمضان، شعبان، etc.) and Gregorian as subtitle
+- **Calendar Arabic Hijri month names**: Full Arabic names for all 12 Hijri months
+- **Calendar weekday abbreviations**: Single-character weekday headers with `<abbr>` + `aria-label` for accessibility
+- **Calendar container query header**: Responsive layout using `@container` — stacks at narrow widths, inline at ≥20rem
+- **Calendar a11y**: `aria-labelledby` on root, `aria-label` on prev/next buttons, `role="columnheader"` on weekday headers
+
+### Changed
+- **Calendar today indicator**: Dims to subtle gray ring when another date is selected, preventing visual competition with the selection
+- **Calendar selected hover**: Uses `bg-primary/90` instead of `hover:bg-muted` for a cohesive hover state on selected dates
+- **Calendar Hijri selected color**: Hijri sub-number uses `text-primary-foreground/70` when the day is selected
+- **Calendar UI text**: Now follows the `locale` prop for button labels (Today, aria-labels) instead of the global direction provider locale
+- **Calendar day cell height**: `h-9` (non-Hijri) / `h-14` (Hijri) for better balance across widths
+- **Cursor UX overhaul**: Added `cursor-pointer` to all interactive elements (Button, Label, Accordion trigger, Tabs trigger, Calendar days, Command items, Context/Dropdown menu items, Dialog/Sheet close, Collapsible trigger, Toast actions, Radio group, Rich text editor toolbar, Slider thumb). Changed `disabled:pointer-events-none` to `disabled:cursor-not-allowed` so disabled elements show the correct cursor instead of swallowing clicks silently
+- **RadioGroup touch target**: Expanded hit area with `after:absolute after:-inset-[4px]` pseudo-element
+- **Slider thumb spacing**: Added `py-2` to Slider root for thumb breathing room
+- **Slider label a11y**: Changed from invalid `<label htmlFor>` to `aria-labelledby` pattern (Radix Slider renders `<span>`, not `<input>`)
+- **Collapsible trigger**: Wrapped in forwardRef with `cursor-pointer` and `disabled:cursor-not-allowed` support
+
+### Removed
+- **FormControl component**: No longer needed — input components are now form-aware via context
+
 ## [0.8.2] - 2026-02-09
 
 ### Added

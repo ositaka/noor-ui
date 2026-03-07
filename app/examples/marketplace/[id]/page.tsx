@@ -26,6 +26,7 @@ import {
 import {useDirection} from '@/components/providers/direction-provider'
 import {DirectionToggle} from '@/components/docs/direction-toggle'
 import {content} from '@/lib/i18n'
+import {cn} from '@/lib/utils'
 
 interface Vendor {
   id: string
@@ -107,7 +108,7 @@ const getAllProducts = (): Product[] => {
         id: 'vendor-1',
         name: 'Tech Hub Arabia',
         nameAr: 'مركز التقنية العربي',
-        logo: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=200&h=200&fit=crop',
+        logo: '/examples/marketplace/tech-workspace.jpg',
         rating: 4.8,
         reviewCount: 1250,
         verified: true,
@@ -116,11 +117,11 @@ const getAllProducts = (): Product[] => {
         responseTime: '2 hours',
         responseTimeAr: 'ساعتين',
       },
-      imageUrl: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=1200&h=800&fit=crop',
+      imageUrl: '/examples/marketplace/headphones.jpg',
       images: [
-        'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&h=600&fit=crop',
-        'https://images.unsplash.com/photo-1484704849700-f032a568e944?w=800&h=600&fit=crop',
-        'https://images.unsplash.com/photo-1545127398-14699f92334b?w=800&h=600&fit=crop',
+        '/examples/marketplace/headphones.jpg',
+        '/examples/marketplace/headphones-detail.jpg',
+        '/examples/marketplace/headphones-studio.jpg',
       ],
       rating: 4.7,
       reviewCount: 234,
@@ -220,14 +221,14 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
   }
 
   return (
-    <div className="min-h-screen bg-muted/30">
+    <div className="min-h-screen bg-background">
       {/* Header */}
       <header className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50">
         <div className="container flex h-16 items-center justify-between">
           <div className="flex items-center gap-6">
             <Link href="/" className="flex items-center gap-2">
               <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center">
-                <House className="h-5 w-5 text-primary-foreground" />
+                <House className="h-5 w-5 text-primary-foreground" aria-hidden="true" />
               </div>
               <span className="font-bold text-xl hidden sm:inline">
                 {t.marketplace.header.title}
@@ -248,7 +249,7 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
       {/* Breadcrumb */}
       <div className="border-b bg-background">
         <div className="container py-3">
-          <nav aria-label="Breadcrumb">
+          <nav aria-label={isRTL ? 'مسار التنقل' : 'Breadcrumb'}>
             <div className="flex items-center justify-between gap-4">
               <ol className="flex items-center gap-2 text-sm text-muted-foreground">
                 <li>
@@ -256,20 +257,20 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
                     {t.nav.home}
                   </Link>
                 </li>
-                <li>/</li>
+                <li aria-hidden="true">/</li>
                 <li>
                   <Link href="/examples" className="hover:text-foreground transition-colors">
                     {t.nav.examples}
                   </Link>
                 </li>
-                <li>/</li>
+                <li aria-hidden="true">/</li>
                 <li>
                   <Link href="/examples/marketplace" className="hover:text-foreground transition-colors">
                     {t.marketplaceProduct.breadcrumb.marketplace}
                   </Link>
                 </li>
-                <li>/</li>
-                <li className="text-foreground font-medium line-clamp-1">
+                <li aria-hidden="true">/</li>
+                <li className="text-foreground font-medium line-clamp-1" aria-current="page">
                   {isRTL ? product.nameAr : product.name}
                 </li>
               </ol>
@@ -284,9 +285,10 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
         <div className="grid gap-8 lg:grid-cols-3">
           {/* Product Images */}
           <div className="lg:col-span-2 space-y-4">
-            <div
-              className="w-full aspect-square rounded-2xl bg-cover bg-center"
-              style={{ backgroundImage: `url(${product.images[selectedImage]})` }}
+            <img
+              src={product.images[selectedImage]}
+              alt={isRTL ? product.nameAr : product.name}
+              className="w-full aspect-square rounded-2xl object-cover"
             />
 
             <div className="grid grid-cols-3 gap-4">
@@ -294,14 +296,16 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
                 <button
                   key={index}
                   onClick={() => setSelectedImage(index)}
+                  aria-label={`${isRTL ? 'صورة' : 'Image'} ${index + 1}`}
                   className={cn(
-                    'aspect-square rounded-lg bg-cover bg-center border-2 transition-all',
+                    'aspect-square rounded-lg border-2 transition-all overflow-hidden',
                     selectedImage === index
                       ? 'border-primary'
                       : 'border-transparent hover:border-muted-foreground/20'
                   )}
-                  style={{ backgroundImage: `url(${image})` }}
-                />
+                >
+                  <img src={image} alt="" className="h-full w-full object-cover" />
+                </button>
               ))}
             </div>
           </div>
@@ -313,7 +317,7 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
                 <Badge variant="outline">{isRTL ? product.categoryAr : product.category}</Badge>
                 {product.fastShipping && (
                   <Badge variant="secondary" className="flex items-center gap-1">
-                    <Truck className="h-3 w-3" />
+                    <Truck className="h-3 w-3" aria-hidden="true" />
                     {t.marketplaceProduct.category.fastShipping}
                   </Badge>
                 )}
@@ -325,7 +329,7 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
 
               <div className="flex items-center gap-3 mb-4">
                 <div className="flex items-center gap-1">
-                  <Star className="h-5 w-5 fill-yellow-400 text-yellow-400" />
+                  <Star className="h-5 w-5 fill-yellow-400 text-yellow-400" aria-hidden="true" />
                   <span className="font-medium">
                     <ArabicNumber value={product.rating} />
                   </span>
@@ -377,9 +381,10 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
             <Card>
               <CardContent className="pt-6">
                 <div className="flex items-start gap-3">
-                  <div
-                    className="h-12 w-12 rounded-full bg-cover bg-center shrink-0"
-                    style={{ backgroundImage: `url(${product.vendor.logo})` }}
+                  <img
+                    src={product.vendor.logo}
+                    alt={isRTL ? product.vendor.nameAr : product.vendor.name}
+                    className="h-12 w-12 rounded-full object-cover shrink-0"
                   />
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-1 mb-1">
@@ -390,11 +395,11 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
                         {isRTL ? product.vendor.nameAr : product.vendor.name}
                       </Link>
                       {product.vendor.verified && (
-                        <CheckCircle className="h-4 w-4 text-primary shrink-0" />
+                        <CheckCircle className="h-4 w-4 text-primary shrink-0" aria-hidden="true" />
                       )}
                     </div>
                     <div className="flex items-center gap-1 mb-2">
-                      <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                      <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" aria-hidden="true" />
                       <span className="text-sm">
                         <ArabicNumber value={product.vendor.rating} />
                       </span>
@@ -403,7 +408,7 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
                       </span>
                     </div>
                     <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                      <MapPin className="h-3 w-3" />
+                      <MapPin className="h-3 w-3" aria-hidden="true" />
                       <span>{isRTL ? product.vendor.locationAr : product.vendor.location}</span>
                     </div>
                   </div>
@@ -417,6 +422,7 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
                 <Button
                   variant="outline"
                   size="icon"
+                  aria-label={isRTL ? 'تقليل الكمية' : 'Decrease quantity'}
                   onClick={() => setQuantity(Math.max(1, quantity - 1))}
                 >
                   -
@@ -429,6 +435,7 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
                 <Button
                   variant="outline"
                   size="icon"
+                  aria-label={isRTL ? 'زيادة الكمية' : 'Increase quantity'}
                   onClick={() => setQuantity(Math.min(product.stockCount, quantity + 1))}
                 >
                   +
@@ -436,17 +443,17 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
               </div>
 
               <Button size="lg" className="w-full">
-                <ShoppingCart className={cn('h-5 w-5', isRTL ? 'ms-2' : 'me-2')} />
+                <ShoppingCart className={cn('h-5 w-5', isRTL ? 'ms-2' : 'me-2')} aria-hidden="true" />
                 {t.marketplaceProduct.actions.addToCart}
               </Button>
 
               <div className="grid grid-cols-2 gap-3">
                 <Button variant="outline" size="lg">
-                  <Heart className={cn('h-5 w-5', isRTL ? 'ms-2' : 'me-2')} />
+                  <Heart className={cn('h-5 w-5', isRTL ? 'ms-2' : 'me-2')} aria-hidden="true" />
                   {t.marketplaceProduct.actions.wishlist}
                 </Button>
                 <Button variant="outline" size="lg">
-                  <ShareNetwork className={cn('h-5 w-5', isRTL ? 'ms-2' : 'me-2')} />
+                  <ShareNetwork className={cn('h-5 w-5', isRTL ? 'ms-2' : 'me-2')} aria-hidden="true" />
                   {t.marketplaceProduct.actions.share}
                 </Button>
               </div>
@@ -455,19 +462,19 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
             {/* Trust Badges */}
             <div className="grid grid-cols-2 gap-3">
               <div className="flex items-center gap-2 text-sm">
-                <ShieldCheck className="h-5 w-5 text-primary" />
+                <ShieldCheck className="h-5 w-5 text-primary" aria-hidden="true" />
                 <span>{t.marketplaceProduct.badges.authenticity}</span>
               </div>
               <div className="flex items-center gap-2 text-sm">
-                <Package className="h-5 w-5 text-primary" />
+                <Package className="h-5 w-5 text-primary" aria-hidden="true" />
                 <span>{t.marketplaceProduct.badges.freeReturns}</span>
               </div>
               <div className="flex items-center gap-2 text-sm">
-                <Truck className="h-5 w-5 text-primary" />
+                <Truck className="h-5 w-5 text-primary" aria-hidden="true" />
                 <span>{t.marketplaceProduct.badges.freeShipping}</span>
               </div>
               <div className="flex items-center gap-2 text-sm">
-                <CreditCard className="h-5 w-5 text-primary" />
+                <CreditCard className="h-5 w-5 text-primary" aria-hidden="true" />
                 <span>{t.marketplaceProduct.badges.securePayment}</span>
               </div>
             </div>
@@ -506,7 +513,7 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
                     <ul className="space-y-2">
                       {(isRTL ? product.featuresAr : product.features).map((feature, index) => (
                         <li key={index} className="flex items-start gap-2">
-                          <CheckCircle className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                          <CheckCircle className="h-5 w-5 text-primary shrink-0 mt-0.5" aria-hidden="true" />
                           <span className="text-muted-foreground">{feature}</span>
                         </li>
                       ))}
@@ -652,8 +659,4 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
       </main>
     </div>
   )
-}
-
-function cn(...classes: (string | undefined | false)[]) {
-  return classes.filter(Boolean).join(' ')
 }

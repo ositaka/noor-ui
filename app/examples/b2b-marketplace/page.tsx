@@ -65,7 +65,7 @@ function generateMockProducts(): Product[] {
       descriptionAr: 'طابعة ملصقات حرارية صناعية عالية السرعة لعمليات المستودعات',
       category: 'Office Equipment',
       categoryAr: 'معدات مكتبية',
-      image: 'https://images.unsplash.com/photo-1612815154858-60aa4c59eaa6?w=400',
+      image: '/examples/b2b-marketplace/industrial-printer.jpg',
       basePrice: 2499,
       moq: 5,
       priceTiers: [
@@ -94,7 +94,7 @@ function generateMockProducts(): Product[] {
       descriptionAr: 'كرسي مكتب مريح فاخر مع دعم قطني ومساند ذراع قابلة للتعديل',
       category: 'Office Furniture',
       categoryAr: 'أثاث مكتبي',
-      image: 'https://images.unsplash.com/photo-1580480055273-228ff5388ef8?w=400',
+      image: '/examples/b2b-marketplace/office-chair.jpg',
       basePrice: 899,
       moq: 10,
       priceTiers: [
@@ -123,7 +123,7 @@ function generateMockProducts(): Product[] {
       descriptionAr: 'صندوق كابل إيثرنت Cat6 بطول ٣٠٥ متر لتركيبات الشبكات',
       category: 'Networking',
       categoryAr: 'شبكات',
-      image: 'https://images.unsplash.com/photo-1625948515291-69613efd103f?w=400',
+      image: '/examples/b2b-marketplace/network-cable.jpg',
       basePrice: 349,
       moq: 20,
       priceTiers: [
@@ -152,7 +152,7 @@ function generateMockProducts(): Product[] {
       descriptionAr: 'لوحات إضاءة LED موفرة للطاقة للمساحات التجارية',
       category: 'Lighting',
       categoryAr: 'إضاءة',
-      image: 'https://images.unsplash.com/photo-1565084888279-aca607ecce0c?w=400',
+      image: '/examples/b2b-marketplace/led-panel.jpg',
       basePrice: 149,
       moq: 50,
       priceTiers: [
@@ -181,7 +181,7 @@ function generateMockProducts(): Product[] {
       descriptionAr: 'ورق طباعة أبيض فاخر، ٨٠ جرام، ٥ رزم في الصندوق',
       category: 'Office Supplies',
       categoryAr: 'مستلزمات مكتبية',
-      image: 'https://images.unsplash.com/photo-1516409590654-e8d51fc2d25c?w=400',
+      image: '/examples/b2b-marketplace/copy-paper.jpg',
       basePrice: 89,
       moq: 30,
       priceTiers: [
@@ -210,7 +210,7 @@ function generateMockProducts(): Product[] {
       descriptionAr: 'نظام كاميرا مراقبة 4K بـ ٨ قنوات مع مسجل شبكي',
       category: 'Security',
       categoryAr: 'أمن وحماية',
-      image: 'https://images.unsplash.com/photo-1557597774-9d273605dfa9?w=400',
+      image: '/examples/b2b-marketplace/security-camera.jpg',
       basePrice: 3499,
       moq: 3,
       priceTiers: [
@@ -253,9 +253,9 @@ export default function B2BMarketplacePage() {
       const matchesCategory = selectedCategory === 'all' || product.category === selectedCategory
       const matchesSearch =
         searchQuery === '' ||
-        product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        product.name.toLocaleLowerCase(locale).includes(searchQuery.toLocaleLowerCase(locale)) ||
         product.nameAr.includes(searchQuery) ||
-        product.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        product.description.toLocaleLowerCase(locale).includes(searchQuery.toLocaleLowerCase(locale)) ||
         product.descriptionAr.includes(searchQuery)
       return matchesCategory && matchesSearch
     })
@@ -265,7 +265,7 @@ export default function B2BMarketplacePage() {
     <div className="min-h-screen">
       <main id="main-content" className="container py-12">
         {/* Breadcrumb */}
-        <nav aria-label="Breadcrumb" className="mb-8">
+        <nav aria-label={isRTL ? 'مسار التنقل' : 'Breadcrumb'} className="mb-8">
           <div className="flex items-center justify-between gap-4">
             <ol className="flex items-center gap-2 text-sm text-muted-foreground">
               <li>
@@ -273,14 +273,14 @@ export default function B2BMarketplacePage() {
                   {t.nav.home}
                 </Link>
               </li>
-              <li>/</li>
+              <li aria-hidden="true">/</li>
               <li>
                 <Link href="/examples" className="hover:text-foreground transition-colors">
                   {t.nav.examples}
                 </Link>
               </li>
-              <li>/</li>
-              <li className="text-foreground font-medium">
+              <li aria-hidden="true">/</li>
+              <li className="text-foreground font-medium" aria-current="page">
                 {t.b2bMarketplaceListing.breadcrumb.b2bMarketplace}
               </li>
             </ol>
@@ -302,13 +302,13 @@ export default function B2BMarketplacePage() {
             <div className="flex gap-3">
               <Button variant="outline" asChild>
                 <Link href="/examples/b2b-marketplace/rfq">
-                  <ChatCentered className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
+                  <ChatCentered className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} aria-hidden="true" />
                   {t.b2bMarketplaceListing.buttons.requestQuote}
                 </Link>
               </Button>
               <Button asChild>
                 <Link href="/examples/b2b-marketplace/dashboard">
-                  <Buildings className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
+                  <Buildings className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} aria-hidden="true" />
                   {t.b2bMarketplaceListing.buttons.dashboard}
                 </Link>
               </Button>
@@ -321,7 +321,7 @@ export default function B2BMarketplacePage() {
               <CardContent className="p-4">
                 <div className="flex items-center gap-3">
                   <div className="p-2 bg-primary/10 rounded-lg">
-                    <Package className="h-5 w-5 text-primary" />
+                    <Package className="h-5 w-5 text-primary" aria-hidden="true" />
                   </div>
                   <div>
                     <p className="text-2xl font-bold">
@@ -339,7 +339,7 @@ export default function B2BMarketplacePage() {
               <CardContent className="p-4">
                 <div className="flex items-center gap-3">
                   <div className="p-2 bg-primary/10 rounded-lg">
-                    <Buildings className="h-5 w-5 text-primary" />
+                    <Buildings className="h-5 w-5 text-primary" aria-hidden="true" />
                   </div>
                   <div>
                     <p className="text-2xl font-bold">
@@ -356,8 +356,8 @@ export default function B2BMarketplacePage() {
             <Card>
               <CardContent className="p-4">
                 <div className="flex items-center gap-3">
-                  <div className="p-2 bg-green-100 rounded-lg">
-                    <TrendDown className="h-5 w-5 text-green-600" />
+                  <div className="p-2 bg-success/10 rounded-lg">
+                    <TrendDown className="h-5 w-5 text-success" aria-hidden="true" />
                   </div>
                   <div>
                     <p className="text-2xl font-bold">
@@ -374,8 +374,8 @@ export default function B2BMarketplacePage() {
             <Card>
               <CardContent className="p-4">
                 <div className="flex items-center gap-3">
-                  <div className="p-2 bg-blue-100 rounded-lg">
-                    <FileText className="h-5 w-5 text-blue-600" />
+                  <div className="p-2 bg-info/10 rounded-lg">
+                    <FileText className="h-5 w-5 text-info" aria-hidden="true" />
                   </div>
                   <div>
                     <p className="text-2xl font-bold">
@@ -399,25 +399,29 @@ export default function B2BMarketplacePage() {
                 'absolute top-3 h-4 w-4 text-muted-foreground',
                 isRTL ? 'right-3' : 'left-3'
               )}
+              aria-hidden="true"
             />
             <Input
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder={t.b2bMarketplaceListing.filters.searchPlaceholder}
+              aria-label={t.b2bMarketplaceListing.filters.searchPlaceholder}
               className={isRTL ? 'pe-10' : 'ps-10'}
             />
           </div>
           <Select value={selectedCategory} onValueChange={setSelectedCategory}>
-            <SelectTrigger className="w-full sm:w-[200px]">
+            <SelectTrigger className="w-full sm:w-[200px]" aria-label={t.b2bMarketplaceListing.filters.allCategories}>
               <SelectValue placeholder={t.b2bMarketplaceListing.filters.allCategories} />
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="all">{t.b2bMarketplaceListing.filters.allCategories}</SelectItem>
-              {categories.map((category) => (
-                <SelectItem key={category} value={category}>
-                  {category}
-                </SelectItem>
-              ))}
+              {products
+                .filter((p, i, arr) => arr.findIndex((x) => x.category === p.category) === i)
+                .map((product) => (
+                  <SelectItem key={product.category} value={product.category}>
+                    {isRTL ? product.categoryAr : product.category}
+                  </SelectItem>
+                ))}
             </SelectContent>
           </Select>
         </div>
@@ -426,12 +430,14 @@ export default function B2BMarketplacePage() {
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {filteredProducts.map((product) => (
             <Card key={product.id} className="overflow-hidden hover:shadow-lg transition-shadow">
-              <div
-                className="h-48 bg-cover bg-center relative"
-                style={{ backgroundImage: `url(${product.image})` }}
-              >
+              <div className="h-48 relative">
+                <img
+                  src={product.image}
+                  alt={isRTL ? product.nameAr : product.name}
+                  className="h-full w-full object-cover"
+                />
                 <div className="absolute top-3 start-3">
-                  <Badge className="bg-red-600">
+                  <Badge className="bg-destructive text-destructive-foreground">
                     {t.b2bMarketplaceListing.productCard.upTo}
                     <ArabicNumber value={product.priceTiers[product.priceTiers.length - 1].discount} />%
                   </Badge>
@@ -453,12 +459,12 @@ export default function B2BMarketplacePage() {
                 <div className="flex items-center gap-2 pt-2">
                   <div className="flex items-center gap-1 text-sm text-muted-foreground">
                     {product.supplier.verified && (
-                      <CheckCircle className="h-3 w-3 text-green-600" />
+                      <CheckCircle className="h-3 w-3 text-success" aria-hidden="true" />
                     )}
                     <span>{isRTL ? product.supplier.nameAr : product.supplier.name}</span>
                   </div>
                   <div className="flex items-center gap-1 text-sm">
-                    <Star className="h-3 w-3 fill-yellow-400 text-yellow-400" />
+                    <Star className="h-3 w-3 fill-yellow-400 text-yellow-400" aria-hidden="true" />
                     <ArabicNumber value={product.supplier.rating} />
                   </div>
                 </div>
@@ -538,7 +544,7 @@ export default function B2BMarketplacePage() {
                     </Link>
                   </Button>
                   <Button className="flex-1">
-                    <ShoppingCart className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
+                    <ShoppingCart className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} aria-hidden="true" />
                     {t.b2bMarketplaceListing.productCard.order}
                   </Button>
                 </div>
@@ -561,7 +567,7 @@ export default function B2BMarketplacePage() {
                   </p>
                   <Button asChild size="lg">
                     <Link href="/examples/b2b-marketplace/rfq">
-                      <ChatCentered className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
+                      <ChatCentered className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} aria-hidden="true" />
                       {t.b2bMarketplaceListing.cta.requestQuote}
                     </Link>
                   </Button>
@@ -575,7 +581,7 @@ export default function B2BMarketplacePage() {
                   </p>
                   <Button asChild variant="outline" size="lg">
                     <Link href="/examples/b2b-marketplace/dashboard">
-                      <Buildings className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
+                      <Buildings className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} aria-hidden="true" />
                       {t.b2bMarketplaceListing.cta.dashboard}
                     </Link>
                   </Button>

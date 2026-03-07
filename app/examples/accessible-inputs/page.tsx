@@ -25,6 +25,7 @@ import {
 } from '@phosphor-icons/react'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
+import { cn } from '@/lib/utils'
 
 interface InputFieldProps {
   id: string
@@ -223,7 +224,7 @@ export default function AccessibleInputsPage() {
       <Card className="mb-8 border-primary/20 bg-primary/5">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <CheckCircle className="h-5 w-5 text-primary" />
+            <CheckCircle className="h-5 w-5 text-primary" aria-hidden="true" />
             {t.accessibleInputsPage.accessibilityFeatures}
           </CardTitle>
         </CardHeader>
@@ -307,16 +308,16 @@ export default function AccessibleInputsPage() {
                       className={cn(
                         showValidation &&
                           (status === 'valid'
-                            ? 'border-green-500 focus-visible:ring-green-500'
-                            : 'border-red-500 focus-visible:ring-red-500')
+                            ? 'border-success focus-visible:ring-success'
+                            : 'border-destructive focus-visible:ring-destructive')
                       )}
                     />
                     {showValidation && (
                       <div className="absolute inset-y-0 end-3 flex items-center pointer-events-none">
                         {status === 'valid' ? (
-                          <CheckCircle className="h-4 w-4 text-green-500" />
+                          <CheckCircle className="h-4 w-4 text-success" aria-hidden="true" />
                         ) : (
-                          <XCircle className="h-4 w-4 text-red-500" />
+                          <XCircle className="h-4 w-4 text-destructive" aria-hidden="true" />
                         )}
                       </div>
                     )}
@@ -327,7 +328,7 @@ export default function AccessibleInputsPage() {
                     id={`${field.id}-helper`}
                     className={cn(
                       'text-xs',
-                      status === 'invalid' ? 'text-red-500' : 'text-muted-foreground'
+                      status === 'invalid' ? 'text-destructive' : 'text-muted-foreground'
                     )}
                   >
                     {status === 'invalid'
@@ -398,8 +399,4 @@ export default function AccessibleInputsPage() {
       </div>
     </div>
   )
-}
-
-function cn(...classes: (string | undefined | null | false)[]) {
-  return classes.filter(Boolean).join(' ')
 }

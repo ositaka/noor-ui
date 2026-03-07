@@ -68,6 +68,7 @@ interface RunningTest {
 export default function AIAgentEvalsPage() {
   const { direction, locale } = useDirection()
   const t = content[locale]
+  const isRTL = direction === 'rtl'
 
   const [selectedTab, setSelectedTab] = React.useState('ecommerce')
   const [selectedTest, setSelectedTest] = React.useState<EvalResult | IslamicEvalResult | null>(null)
@@ -105,7 +106,7 @@ export default function AIAgentEvalsPage() {
 
   // Filter results
   const filteredResults = currentResults.filter((result) => {
-    if (searchQuery && !result.testCase.toLowerCase().includes(searchQuery.toLowerCase())) {
+    if (searchQuery && !result.testCase.toLocaleLowerCase(locale).includes(searchQuery.toLocaleLowerCase(locale))) {
       return false
     }
     if (languageFilter !== 'all' && result.language !== languageFilter) {
@@ -506,7 +507,7 @@ export default function AIAgentEvalsPage() {
   return (
     <div className="container mx-auto py-8 px-4 max-w-7xl">
       {/* Breadcrumb */}
-      <nav aria-label="Breadcrumb" className="mb-8">
+      <nav aria-label={isRTL ? 'مسار التنقل' : 'Breadcrumb'} className="mb-8">
         <div className="flex items-center justify-between gap-4">
           <ol className="flex items-center gap-2 text-sm text-muted-foreground">
             <li>
@@ -514,14 +515,14 @@ export default function AIAgentEvalsPage() {
                 {t.common.home}
               </Link>
             </li>
-            <li>/</li>
+            <li aria-hidden="true">/</li>
             <li>
               <Link href="/examples" className="hover:text-foreground transition-colors">
                 {t.nav.examples}
               </Link>
             </li>
-            <li>/</li>
-            <li className="text-foreground font-medium">
+            <li aria-hidden="true">/</li>
+            <li className="text-foreground font-medium" aria-current="page">
               AI Agent Evaluations
             </li>
           </ol>
@@ -538,7 +539,7 @@ export default function AIAgentEvalsPage() {
           </p>
         </div>
         <Button onClick={startEvaluation} size="lg" className="gap-2">
-          <Play className="w-4 h-4" />
+          <Play className="w-4 h-4" aria-hidden="true" />
           Run New Evaluation
         </Button>
       </div>
@@ -642,7 +643,7 @@ export default function AIAgentEvalsPage() {
                 <>
                   <Separator className="my-4" />
                   <div className="flex items-center gap-2 text-sm">
-                    <Shield className="w-4 h-4 text-green-600" />
+                    <Shield className="w-4 h-4 text-success" aria-hidden="true" />
                     <span className="text-muted-foreground">Reviewed by:</span>
                     <span className="font-medium">{islamicServicesAgentInfo.reviewedBy}</span>
                   </div>
@@ -656,12 +657,12 @@ export default function AIAgentEvalsPage() {
             <CardContent className="pt-6">
               <div className="flex flex-wrap gap-4">
                 <div className="relative flex-1 min-w-[200px]">
-                  <MagnifyingGlass className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                  <MagnifyingGlass className="absolute start-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" aria-hidden="true" />
                   <Input
                     placeholder="Search test cases..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="pl-9"
+                    className="ps-9"
                   />
                 </div>
 
@@ -802,7 +803,7 @@ export default function AIAgentEvalsPage() {
               <CardContent className="pt-6">
                 <div className="text-center">
                   <p className="text-sm text-muted-foreground mb-1">Passed</p>
-                  <p className="text-2xl font-bold text-green-600">{currentMetrics.passed}</p>
+                  <p className="text-2xl font-bold text-success">{currentMetrics.passed}</p>
                 </div>
               </CardContent>
             </Card>
@@ -810,7 +811,7 @@ export default function AIAgentEvalsPage() {
               <CardContent className="pt-6">
                 <div className="text-center">
                   <p className="text-sm text-muted-foreground mb-1">Failed</p>
-                  <p className="text-2xl font-bold text-red-600">{currentMetrics.failed}</p>
+                  <p className="text-2xl font-bold text-destructive">{currentMetrics.failed}</p>
                 </div>
               </CardContent>
             </Card>
@@ -1112,9 +1113,9 @@ export default function AIAgentEvalsPage() {
                             key={test.id}
                             className={cn(
                               "flex items-center gap-3 p-3 rounded-lg border transition-all duration-300 ease-in-out",
-                              test.status === 'complete' && "bg-green-50 border-green-200 dark:bg-green-950/20",
-                              test.status === 'failed' && "bg-red-50 border-red-200 dark:bg-red-950/20",
-                              test.status === 'running' && "bg-blue-50 border-blue-200 dark:bg-blue-950/20"
+                              test.status === 'complete' && "bg-success/5 border-success/20",
+                              test.status === 'failed' && "bg-destructive/5 border-destructive/20",
+                              test.status === 'running' && "bg-info/5 border-info/20"
                             )}
                           >
                             <div className="shrink-0">
@@ -1122,13 +1123,13 @@ export default function AIAgentEvalsPage() {
                                 <div className="w-5 h-5 rounded-full border-2 border-muted" />
                               )}
                               {test.status === 'running' && (
-                                <SpinnerGap className="w-5 h-5 text-blue-600 animate-spin" />
+                                <SpinnerGap className="w-5 h-5 text-info animate-spin" aria-hidden="true" />
                               )}
                               {test.status === 'complete' && (
-                                <CheckCircle className="w-5 h-5 text-green-600" />
+                                <CheckCircle className="w-5 h-5 text-success" aria-hidden="true" />
                               )}
                               {test.status === 'failed' && (
-                                <XCircle className="w-5 h-5 text-red-600" />
+                                <XCircle className="w-5 h-5 text-destructive" aria-hidden="true" />
                               )}
                             </div>
                             <div className="flex-1">
@@ -1154,7 +1155,7 @@ export default function AIAgentEvalsPage() {
 
                 <div className="flex justify-end gap-2">
                   <Button variant="destructive" onClick={cancelEvaluation} disabled={isPaused}>
-                    <XCircle className="w-4 h-4 mr-2" />
+                    <XCircle className="w-4 h-4 me-2" aria-hidden="true" />
                     Cancel Evaluation
                   </Button>
                 </div>
@@ -1164,11 +1165,11 @@ export default function AIAgentEvalsPage() {
             {/* Step 3: Complete */}
             {currentStep === 2 && (
               <div className="space-y-6">
-                <Card className="border-green-200 bg-green-50 dark:bg-green-950/20">
+                <Card className="border-success/20 bg-success/5">
                   <CardContent className="pt-6">
                     <div className="flex items-center gap-4">
-                      <div className="p-3 bg-green-600 rounded-full">
-                        <Check className="w-6 h-6 text-white" />
+                      <div className="p-3 bg-success rounded-full">
+                        <Check className="w-6 h-6 text-success-foreground" aria-hidden="true" />
                       </div>
                       <div>
                         <h3 className="font-semibold text-lg">Evaluation Complete!</h3>
@@ -1191,13 +1192,13 @@ export default function AIAgentEvalsPage() {
                         <div className="text-sm text-muted-foreground">Total Tests</div>
                       </div>
                       <div className="text-center">
-                        <div className="text-2xl font-bold text-green-600">
+                        <div className="text-2xl font-bold text-success">
                           {runningTests.filter(t => t.passed).length}
                         </div>
                         <div className="text-sm text-muted-foreground">Passed</div>
                       </div>
                       <div className="text-center">
-                        <div className="text-2xl font-bold text-red-600">
+                        <div className="text-2xl font-bold text-destructive">
                           {runningTests.filter(t => !t.passed).length}
                         </div>
                         <div className="text-sm text-muted-foreground">Failed</div>

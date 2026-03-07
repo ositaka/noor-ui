@@ -95,9 +95,9 @@ function generateMockProduct(id: string): ProductDetail {
     category: 'Office Equipment',
     categoryAr: 'معدات مكتبية',
     images: [
-      'https://images.unsplash.com/photo-1612815154858-60aa4c59eaa6?w=800',
-      'https://images.unsplash.com/photo-1612815154858-60aa4c59eaa6?w=800&sat=-50',
-      'https://images.unsplash.com/photo-1612815154858-60aa4c59eaa6?w=800&blur=5',
+      '/examples/b2b-marketplace/industrial-printer.jpg',
+      '/examples/b2b-marketplace/industrial-printer.jpg',
+      '/examples/b2b-marketplace/industrial-printer.jpg',
     ],
     basePrice: 2499,
     moq: 5,
@@ -185,7 +185,7 @@ export default function B2BProductDetailPage() {
     <div className="min-h-screen">
       <main id="main-content" className="container py-12">
         {/* Breadcrumb */}
-        <nav aria-label="Breadcrumb" className="mb-8">
+        <nav aria-label={isRTL ? 'مسار التنقل' : 'Breadcrumb'} className="mb-8">
           <div className="flex items-center justify-between gap-4">
             <ol className="flex items-center gap-2 text-sm text-muted-foreground">
               <li>
@@ -193,20 +193,20 @@ export default function B2BProductDetailPage() {
                   {t.nav.home}
                 </Link>
               </li>
-              <li>/</li>
+              <li aria-hidden="true">/</li>
               <li>
                 <Link href="/examples" className="hover:text-foreground transition-colors">
                   {t.nav.examples}
                 </Link>
               </li>
-              <li>/</li>
+              <li aria-hidden="true">/</li>
               <li>
                 <Link href="/examples/b2b-marketplace" className="hover:text-foreground transition-colors">
                   {t.b2bMarketplaceListing.breadcrumb.b2bMarketplace}
                 </Link>
               </li>
-              <li>/</li>
-              <li className="text-foreground font-medium">
+              <li aria-hidden="true">/</li>
+              <li className="text-foreground font-medium" aria-current="page">
                 {isRTL ? product.nameAr : product.name}
               </li>
             </ol>
@@ -220,23 +220,30 @@ export default function B2BProductDetailPage() {
             {/* Images */}
             <Card>
               <CardContent className="p-6">
-                <div
-                  className="aspect-video bg-cover bg-center rounded-lg mb-4"
-                  style={{ backgroundImage: `url(${product.images[selectedImage]})` }}
+                <img
+                  src={product.images[selectedImage]}
+                  alt={isRTL ? product.nameAr : product.name}
+                  className="aspect-video rounded-lg object-cover w-full mb-4"
                 />
                 <div className="grid grid-cols-3 gap-3">
                   {product.images.map((image, index) => (
                     <button
                       key={index}
                       onClick={() => setSelectedImage(index)}
+                      aria-label={`${isRTL ? 'صورة' : 'Image'} ${index + 1}`}
                       className={cn(
-                        'aspect-video bg-cover bg-center rounded-lg border-2 transition-all',
+                        'aspect-video rounded-lg border-2 transition-all overflow-hidden',
                         selectedImage === index
                           ? 'border-primary'
                           : 'border-transparent hover:border-muted-foreground/20'
                       )}
-                      style={{ backgroundImage: `url(${image})` }}
-                    />
+                    >
+                      <img
+                        src={image}
+                        alt=""
+                        className="h-full w-full object-cover"
+                      />
+                    </button>
                   ))}
                 </div>
               </CardContent>
@@ -304,7 +311,7 @@ export default function B2BProductDetailPage() {
                         className="flex items-center justify-between p-4 border rounded-lg"
                       >
                         <div className="flex items-center gap-3">
-                          <Truck className="h-5 w-5 text-muted-foreground" />
+                          <Truck className="h-5 w-5 text-muted-foreground" aria-hidden="true" />
                           <div>
                             <p className="font-medium">
                               {isRTL ? option.methodAr : option.method}
@@ -326,7 +333,7 @@ export default function B2BProductDetailPage() {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <TrendDown className="h-5 w-5 text-green-600" />
+                  <TrendDown className="h-5 w-5 text-success" aria-hidden="true" />
                   {t.b2bMarketplaceDetail.volumePricing.title}
                 </CardTitle>
                 <CardDescription>
@@ -363,7 +370,7 @@ export default function B2BProductDetailPage() {
                         </div>
                       </div>
                       {tier.discount > 0 && (
-                        <Badge className="bg-green-600">
+                        <Badge className="bg-success text-success-foreground">
                           {t.b2bMarketplaceDetail.volumePricing.save}
                           <ArabicNumber value={tier.discount} />%
                         </Badge>
@@ -387,12 +394,12 @@ export default function B2BProductDetailPage() {
                         {isRTL ? product.supplier.nameAr : product.supplier.name}
                       </h3>
                       {product.supplier.verified && (
-                        <CheckCircle className="h-5 w-5 text-green-600" />
+                        <CheckCircle className="h-5 w-5 text-success" aria-hidden="true" />
                       )}
                     </div>
                     <div className="flex items-center gap-4 text-sm text-muted-foreground">
                       <div className="flex items-center gap-1">
-                        <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                        <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" aria-hidden="true" />
                         <ArabicNumber value={product.supplier.rating} />
                         <span>
                           (<ArabicNumber value={product.supplier.reviewCount} />{' '}
@@ -409,19 +416,19 @@ export default function B2BProductDetailPage() {
 
                 <div className="grid gap-3 pt-4 border-t">
                   <div className="flex items-center gap-3">
-                    <Shield className="h-5 w-5 text-muted-foreground" />
+                    <Shield className="h-5 w-5 text-muted-foreground" aria-hidden="true" />
                     <span className="text-sm">
                       {t.b2bMarketplaceDetail.supplierInfo.verifiedSupplier}
                     </span>
                   </div>
                   <div className="flex items-center gap-3">
-                    <Package className="h-5 w-5 text-muted-foreground" />
+                    <Package className="h-5 w-5 text-muted-foreground" aria-hidden="true" />
                     <span className="text-sm">
                       {t.b2bMarketplaceDetail.supplierInfo.unitsAvailable.replace('{count}', product.stockQuantity.toString())}
                     </span>
                   </div>
                   <div className="flex items-center gap-3">
-                    <Truck className="h-5 w-5 text-muted-foreground" />
+                    <Truck className="h-5 w-5 text-muted-foreground" aria-hidden="true" />
                     <span className="text-sm">
                       {isRTL ? product.leadTimeAr : product.leadTime}
                     </span>
@@ -446,7 +453,7 @@ export default function B2BProductDetailPage() {
                 {/* Price Calculator */}
                 <div className="space-y-4">
                   <div className="flex items-center gap-2">
-                    <Calculator className="h-5 w-5 text-primary" />
+                    <Calculator className="h-5 w-5 text-primary" aria-hidden="true" />
                     <h3 className="font-semibold">
                       {t.b2bMarketplaceDetail.orderCalculator.title}
                     </h3>
@@ -460,9 +467,10 @@ export default function B2BProductDetailPage() {
                       <Button
                         variant="outline"
                         size="icon"
+                        aria-label={isRTL ? 'تقليل الكمية' : 'Decrease quantity'}
                         onClick={() => setQuantity(Math.max(product.moq, quantity - 1))}
                       >
-                        <Minus className="h-4 w-4" />
+                        <Minus className="h-4 w-4" aria-hidden="true" />
                       </Button>
                       <Input
                         id="quantity"
@@ -477,9 +485,10 @@ export default function B2BProductDetailPage() {
                       <Button
                         variant="outline"
                         size="icon"
+                        aria-label={isRTL ? 'زيادة الكمية' : 'Increase quantity'}
                         onClick={() => setQuantity(quantity + 1)}
                       >
-                        <Plus className="h-4 w-4" />
+                        <Plus className="h-4 w-4" aria-hidden="true" />
                       </Button>
                     </div>
                     <p className="text-xs text-muted-foreground">
@@ -513,7 +522,7 @@ export default function B2BProductDetailPage() {
                     </div>
                     {savings > 0 && (
                       <div className="text-center">
-                        <Badge className="bg-green-600">
+                        <Badge className="bg-success text-success-foreground">
                           {t.b2bMarketplaceDetail.orderCalculator.youSave}
                           {formatSAR(savings, { useArabicNumerals: isRTL, locale: isRTL ? 'ar' : 'en' })}
                         </Badge>
@@ -525,13 +534,13 @@ export default function B2BProductDetailPage() {
                 {/* Payment Terms */}
                 <div className="space-y-2">
                   <div className="flex items-center gap-2">
-                    <FileText className="h-5 w-5 text-primary" />
+                    <FileText className="h-5 w-5 text-primary" aria-hidden="true" />
                     <h3 className="font-semibold">{t.b2bMarketplaceDetail.paymentTerms.title}</h3>
                   </div>
                   <div className="space-y-1">
                     {(isRTL ? product.paymentTermsAr : product.paymentTerms).map((term, index) => (
                       <div key={index} className="flex items-center gap-2 text-sm">
-                        <CheckCircle className="h-3 w-3 text-green-600" />
+                        <CheckCircle className="h-3 w-3 text-success" aria-hidden="true" />
                         <span>{term}</span>
                       </div>
                     ))}
@@ -541,12 +550,12 @@ export default function B2BProductDetailPage() {
                 {/* Actions */}
                 <div className="space-y-3">
                   <Button className="w-full" size="lg">
-                    <ShoppingCart className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
+                    <ShoppingCart className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} aria-hidden="true" />
                     {t.b2bMarketplaceDetail.actions.addToCart}
                   </Button>
                   <Button variant="outline" className="w-full" asChild>
                     <Link href="/examples/b2b-marketplace/rfq">
-                      <ChatCentered className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
+                      <ChatCentered className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} aria-hidden="true" />
                       {t.b2bMarketplaceDetail.actions.requestQuote}
                     </Link>
                   </Button>

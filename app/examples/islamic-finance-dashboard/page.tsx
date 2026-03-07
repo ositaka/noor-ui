@@ -322,11 +322,11 @@ export default function IslamicFinanceDashboardPage() {
     if (searchValue) {
       filtered = filtered.filter(
         (t) =>
-          t.description.toLowerCase().includes(searchValue.toLowerCase()) ||
+          t.description.toLocaleLowerCase(locale).includes(searchValue.toLocaleLowerCase(locale)) ||
           t.descriptionAr.includes(searchValue) ||
-          t.category.toLowerCase().includes(searchValue.toLowerCase()) ||
+          t.category.toLocaleLowerCase(locale).includes(searchValue.toLocaleLowerCase(locale)) ||
           t.categoryAr.includes(searchValue) ||
-          t.id.toLowerCase().includes(searchValue.toLowerCase())
+          t.id.toLocaleLowerCase(locale).includes(searchValue.toLocaleLowerCase(locale))
       )
     }
 
@@ -453,7 +453,7 @@ export default function IslamicFinanceDashboardPage() {
         <div
           className={cn(
             'font-medium',
-            row.amount > 0 ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'
+            row.amount > 0 ? 'text-success' : 'text-destructive'
           )}
         >
           <ArabicNumber value={Math.abs(row.amount)} format="currency" />
@@ -497,7 +497,7 @@ export default function IslamicFinanceDashboardPage() {
     <div className="min-h-screen bg-background" dir={direction}>
       <div className="container mx-auto p-4 md:p-8 space-y-8">
         {/* Breadcrumb */}
-        <nav aria-label="Breadcrumb">
+        <nav aria-label={isRTL ? 'مسار التنقل' : 'Breadcrumb'}>
           <div className="flex items-center justify-between gap-4">
             <ol className="flex items-center gap-2 text-sm text-muted-foreground">
               <li>
@@ -505,14 +505,14 @@ export default function IslamicFinanceDashboardPage() {
                   {t.nav.home}
                 </Link>
               </li>
-              <li>/</li>
+              <li aria-hidden="true">/</li>
               <li>
                 <Link href="/examples" className="hover:text-foreground transition-colors">
                   {t.nav.examples}
                 </Link>
               </li>
-              <li>/</li>
-              <li className="text-foreground font-medium">
+              <li aria-hidden="true">/</li>
+              <li className="text-foreground font-medium" aria-current="page">
                 {t.islamicFinancePage.breadcrumb.islamicFinance}
               </li>
             </ol>
@@ -529,7 +529,7 @@ export default function IslamicFinanceDashboardPage() {
             {t.islamicFinancePage.description}
           </p>
           <div className="flex items-center gap-2 text-sm text-muted-foreground">
-            <CalendarIcon className="h-4 w-4" />
+            <CalendarIcon className="h-4 w-4" aria-hidden="true" />
             <HijriDate
               variant="compact"
               gregorianDate="November 7, 2025"
@@ -571,14 +571,14 @@ export default function IslamicFinanceDashboardPage() {
               <CardTitle className="text-sm font-medium">
                 {t.islamicFinancePage.stats.totalBalance}
               </CardTitle>
-              <Wallet className="h-4 w-4 text-muted-foreground" />
+              <Wallet className="h-4 w-4 text-muted-foreground" aria-hidden="true" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">
                 <ArabicNumber value={totalBalance} format="currency" />
               </div>
-              <div className="flex items-center gap-1 text-xs text-green-600 dark:text-green-400">
-                <TrendUp className="h-3 w-3" />
+              <div className="flex items-center gap-1 text-xs text-success">
+                <TrendUp className="h-3 w-3" aria-hidden="true" />
                 <span>{t.islamicFinancePage.stats.percentageChange}</span>
               </div>
             </CardContent>
@@ -590,7 +590,7 @@ export default function IslamicFinanceDashboardPage() {
               <CardTitle className="text-sm font-medium">
                 {t.islamicFinancePage.stats.monthlyIncome}
               </CardTitle>
-              <ArrowUpRight className="h-4 w-4 text-green-600" />
+              <ArrowUpRight className="h-4 w-4 text-success" aria-hidden="true" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">
@@ -616,14 +616,14 @@ export default function IslamicFinanceDashboardPage() {
               <CardTitle className="text-sm font-medium">
                 {t.islamicFinancePage.stats.investments}
               </CardTitle>
-              <PiggyBank className="h-4 w-4 text-muted-foreground" />
+              <PiggyBank className="h-4 w-4 text-muted-foreground" aria-hidden="true" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">
                 <ArabicNumber value={totalInvestments} format="currency" />
               </div>
-              <div className="flex items-center gap-1 text-xs text-green-600 dark:text-green-400">
-                <TrendUp className="h-3 w-3" />
+              <div className="flex items-center gap-1 text-xs text-success">
+                <TrendUp className="h-3 w-3" aria-hidden="true" />
                 <span>
                   {t.islamicFinancePage.stats.returns}
                   <ArabicNumber value={investmentReturns} format="currency" />
@@ -638,7 +638,7 @@ export default function IslamicFinanceDashboardPage() {
               <CardTitle className="text-sm font-medium">
                 {t.islamicFinancePage.stats.zakatPaid}
               </CardTitle>
-              <CurrencyDollar className="h-4 w-4 text-muted-foreground" />
+              <CurrencyDollar className="h-4 w-4 text-muted-foreground" aria-hidden="true" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">
@@ -699,7 +699,7 @@ export default function IslamicFinanceDashboardPage() {
                 <Card>
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2">
-                      <Bell className="h-5 w-5" />
+                      <Bell className="h-5 w-5" aria-hidden="true" />
                       {t.islamicFinancePage.prayerTimes.title}
                     </CardTitle>
                   </CardHeader>
@@ -793,7 +793,7 @@ export default function IslamicFinanceDashboardPage() {
                         </p>
                       </div>
                       {investment.shariahCompliant && (
-                        <Badge variant="default" className="bg-green-600">
+                        <Badge variant="default" className="bg-success text-success-foreground">
                           {t.islamicFinancePage.investments.halal}
                         </Badge>
                       )}
@@ -813,7 +813,7 @@ export default function IslamicFinanceDashboardPage() {
                         <span className="text-muted-foreground">
                           {t.islamicFinancePage.investments.returnRate}
                         </span>
-                        <span className="font-medium text-green-600 dark:text-green-400">
+                        <span className="font-medium text-success">
                           <ArabicNumber value={investment.returns} />%
                         </span>
                       </div>
@@ -821,7 +821,7 @@ export default function IslamicFinanceDashboardPage() {
                         <span className="text-muted-foreground">
                           {t.islamicFinancePage.investments.expectedReturns}
                         </span>
-                        <span className="font-medium text-green-600 dark:text-green-400">
+                        <span className="font-medium text-success">
                           <ArabicNumber
                             value={(investment.amount * investment.returns) / 100}
                             format="currency"
@@ -865,7 +865,7 @@ export default function IslamicFinanceDashboardPage() {
                     <p className="text-sm text-muted-foreground">
                       {t.islamicFinancePage.investments.totalReturns}
                     </p>
-                    <p className="text-2xl font-bold text-green-600 dark:text-green-400">
+                    <p className="text-2xl font-bold text-success">
                       <ArabicNumber value={investmentReturns} format="currency" />
                     </p>
                   </div>
@@ -873,7 +873,7 @@ export default function IslamicFinanceDashboardPage() {
                     <p className="text-sm text-muted-foreground">
                       {t.islamicFinancePage.investments.averageReturn}
                     </p>
-                    <p className="text-2xl font-bold text-green-600 dark:text-green-400">
+                    <p className="text-2xl font-bold text-success">
                       <ArabicNumber
                         value={
                           sampleInvestments.reduce((sum, inv) => sum + inv.returns, 0) /

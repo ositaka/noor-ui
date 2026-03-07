@@ -120,12 +120,12 @@ export default function RegistrationPage() {
   }
 
   return (
-    <div className="min-h-screen bg-muted/30">
+    <div className="min-h-screen bg-background">
       {/* Header */}
       <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container flex h-16 items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
-            <SunHorizon className="h-6 w-6 text-primary" />
+            <SunHorizon className="h-6 w-6 text-primary" aria-hidden="true" />
             <span className="text-xl font-bold">Noor UI</span>
           </Link>
           <div className="flex items-center gap-2">
@@ -145,14 +145,14 @@ export default function RegistrationPage() {
                   {tCommon.nav.home}
                 </Link>
               </li>
-              <li>/</li>
+              <li aria-hidden="true">/</li>
               <li>
                 <Link href="/examples" className="hover:text-foreground transition-colors">
                   {tCommon.nav.examples}
                 </Link>
               </li>
-              <li>/</li>
-              <li className="text-foreground font-medium">
+              <li aria-hidden="true">/</li>
+              <li aria-current="page" className="text-foreground font-medium">
                 {t.breadcrumb.registration}
               </li>
             </ol>
@@ -166,9 +166,7 @@ export default function RegistrationPage() {
             {t.title}
           </h1>
           <p className="text-xl text-muted-foreground">
-            {isRTL
-              ? 'مثال شامل على نموذج بخطوات متعددة مع التحقق من الصحة والدعم الكامل للغة العربية'
-              : 'A comprehensive example of a multi-step form with validation and full RTL support'}
+            {t.description}
           </p>
         </div>
 
@@ -181,7 +179,7 @@ export default function RegistrationPage() {
               </span>
               <span className="font-medium">{Math.round(progress)}%</span>
             </div>
-            <Progress value={progress} className="h-2" />
+            <Progress value={progress} className="h-2" aria-label={t.progress} />
           </div>
         </div>
 
@@ -207,7 +205,7 @@ export default function RegistrationPage() {
                       }`}
                     >
                       {index < currentStepIndex ? (
-                        <CheckCircle className="h-5 w-5" />
+                        <CheckCircle className="h-5 w-5" aria-hidden="true" />
                       ) : (
                         index + 1
                       )}
@@ -228,16 +226,14 @@ export default function RegistrationPage() {
             <Card>
               <CardContent className="p-12 text-center space-y-6">
                 <div className="mx-auto w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center">
-                  <CheckCircle className="h-10 w-10 text-primary" />
+                  <CheckCircle className="h-10 w-10 text-primary" aria-hidden="true" />
                 </div>
                 <div className="space-y-2">
                   <h2 className="text-2xl font-bold">
                     {t.success.title}
                   </h2>
                   <p className="text-muted-foreground">
-                    {isRTL
-                      ? 'تم إنشاء حسابك بنجاح. ستتلقى بريدًا إلكترونيًا للتأكيد قريبًا.'
-                      : 'Your account has been created successfully. You will receive a confirmation email shortly.'}
+                    {t.success.message}
                   </p>
                 </div>
                 <div className="flex flex-col sm:flex-row gap-3 justify-center">
@@ -256,25 +252,19 @@ export default function RegistrationPage() {
             <Card>
               <CardHeader>
                 <div className="flex items-center gap-3">
-                  {currentStep === 'personal' && <User className="h-6 w-6 text-primary" />}
-                  {currentStep === 'address' && <MapPin className="h-6 w-6 text-primary" />}
-                  {currentStep === 'preferences' && <FileText className="h-6 w-6 text-primary" />}
-                  {currentStep === 'review' && <CheckCircle className="h-6 w-6 text-primary" />}
+                  {currentStep === 'personal' && <User className="h-6 w-6 text-primary" aria-hidden="true" />}
+                  {currentStep === 'address' && <MapPin className="h-6 w-6 text-primary" aria-hidden="true" />}
+                  {currentStep === 'preferences' && <FileText className="h-6 w-6 text-primary" aria-hidden="true" />}
+                  {currentStep === 'review' && <CheckCircle className="h-6 w-6 text-primary" aria-hidden="true" />}
                   <div>
                     <CardTitle>
                       {isRTL ? STEP_LABELS[currentStep].ar : STEP_LABELS[currentStep].en}
                     </CardTitle>
                     <CardDescription>
-                      {currentStep === 'personal' &&
-                        (isRTL
-                          ? 'أدخل معلوماتك الشخصية الأساسية'
-                          : 'Enter your basic personal information')}
-                      {currentStep === 'address' &&
-                        (t.stepDescriptions.address)}
-                      {currentStep === 'preferences' &&
-                        (t.stepDescriptions.preferences)}
-                      {currentStep === 'review' &&
-                        (t.stepDescriptions.review)}
+                      {currentStep === 'personal' && t.stepDescriptions.personalInfo}
+                      {currentStep === 'address' && t.stepDescriptions.address}
+                      {currentStep === 'preferences' && t.stepDescriptions.preferences}
+                      {currentStep === 'review' && t.stepDescriptions.review}
                     </CardDescription>
                   </div>
                 </div>
@@ -598,9 +588,7 @@ function PreferencesStep({ initialValues, onSubmit, onBack, isRTL }: StepProps) 
                     {t.checkboxes.notifications}
                   </label>
                   <p className="text-sm text-muted-foreground">
-                    {isRTL
-                      ? 'احصل على إشعارات حول التحديثات والأخبار المهمة'
-                      : 'Get notified about updates and important news'}
+                    {t.checkboxes.notificationsDesc}
                   </p>
                 </div>
               </div>
@@ -623,9 +611,7 @@ function PreferencesStep({ initialValues, onSubmit, onBack, isRTL }: StepProps) 
                     {t.checkboxes.newsletter}
                   </label>
                   <p className="text-sm text-muted-foreground">
-                    {isRTL
-                      ? 'تلقى رسائل بريدية أسبوعية مع التحديثات'
-                      : 'Receive weekly emails with updates'}
+                    {t.checkboxes.newsletterDesc}
                   </p>
                 </div>
               </div>
@@ -671,7 +657,7 @@ function ReviewStep({ data, onSubmit, onBack, isRTL }: StepProps & { data: Recor
       <div className="space-y-6">
         <div>
           <h3 className="font-semibold mb-3 flex items-center gap-2">
-            <User className="h-4 w-4" />
+            <User className="h-4 w-4" aria-hidden="true" />
             {t.steps.personalInfo}
           </h3>
           <div className="divide-y">
@@ -685,7 +671,7 @@ function ReviewStep({ data, onSubmit, onBack, isRTL }: StepProps & { data: Recor
 
         <div>
           <h3 className="font-semibold mb-3 flex items-center gap-2">
-            <MapPin className="h-4 w-4" />
+            <MapPin className="h-4 w-4" aria-hidden="true" />
             {t.steps.address}
           </h3>
           <div className="divide-y">
@@ -701,7 +687,7 @@ function ReviewStep({ data, onSubmit, onBack, isRTL }: StepProps & { data: Recor
 
         <div>
           <h3 className="font-semibold mb-3 flex items-center gap-2">
-            <FileText className="h-4 w-4" />
+            <FileText className="h-4 w-4" aria-hidden="true" />
             {t.steps.preferences}
           </h3>
           <div className="divide-y">
@@ -732,13 +718,13 @@ function ReviewStep({ data, onSubmit, onBack, isRTL }: StepProps & { data: Recor
           <Button type="submit" disabled={isSubmitting}>
             {isSubmitting ? (
               <>
-                <SpinnerGap className="me-2 h-4 w-4 animate-spin" />
+                <SpinnerGap className="me-2 h-4 w-4 animate-spin" aria-hidden="true" />
                 {t.buttons.submitting}
               </>
             ) : (
               <>
                 {t.buttons.submit}
-                <CheckCircle className="ms-2 h-4 w-4" />
+                <CheckCircle className="ms-2 h-4 w-4" aria-hidden="true" />
               </>
             )}
           </Button>

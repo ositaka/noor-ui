@@ -84,7 +84,7 @@ export const Default: Story = {
     const canvas = within(canvasElement);
 
     await step('Renders form correctly', async () => {
-      // FormLabel doesn't auto-associate with input, use placeholder to find it
+      // FormLabel auto-associates with input via FormFieldIdContext
       const emailInput = canvas.getByPlaceholderText('your@email.com');
       await expect(emailInput).toBeInTheDocument();
       await expect(emailInput).toBeVisible();

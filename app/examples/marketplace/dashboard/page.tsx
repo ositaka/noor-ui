@@ -87,7 +87,7 @@ function generateMockProducts(): Product[] {
       price: 299,
       category: 'Electronics',
       categoryAr: 'إلكترونيات',
-      image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400',
+      image: '/examples/marketplace/headphones.jpg',
       stockCount: 45,
       status: 'in-stock',
       rating: 4.5,
@@ -103,7 +103,7 @@ function generateMockProducts(): Product[] {
       price: 499,
       category: 'Electronics',
       categoryAr: 'إلكترونيات',
-      image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400',
+      image: '/examples/marketplace/watch.jpg',
       stockCount: 8,
       status: 'low-stock',
       rating: 4.7,
@@ -119,7 +119,7 @@ function generateMockProducts(): Product[] {
       price: 89,
       category: 'Accessories',
       categoryAr: 'إكسسوارات',
-      image: 'https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=400',
+      image: '/examples/marketplace/laptop-stand.jpg',
       stockCount: 0,
       status: 'out-of-stock',
       rating: 4.3,
@@ -135,7 +135,7 @@ function generateMockProducts(): Product[] {
       price: 199,
       category: 'Electronics',
       categoryAr: 'إلكترونيات',
-      image: 'https://images.unsplash.com/photo-1511467687858-23d96c32e4ae?w=400',
+      image: '/examples/marketplace/keyboard.jpg',
       stockCount: 32,
       status: 'in-stock',
       rating: 4.6,
@@ -152,8 +152,8 @@ function generateMockVendorProfile(): VendorProfile {
     nameAr: 'متجر التقنية',
     description: 'Your trusted source for premium electronics and tech accessories. We offer the latest gadgets with warranty and excellent customer service.',
     descriptionAr: 'مصدرك الموثوق للإلكترونيات والإكسسوارات التقنية الممتازة. نقدم أحدث الأجهزة مع ضمان وخدمة عملاء ممتازة.',
-    logo: 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=200',
-    banner: 'https://images.unsplash.com/photo-1498049794561-7780e7231661?w=1200',
+    logo: '/examples/marketplace/store-logo.jpg',
+    banner: '/examples/marketplace/tech-banner.jpg',
     location: 'Riyadh, Saudi Arabia',
     locationAr: 'الرياض، المملكة العربية السعودية',
     phone: '+966 50 123 4567',
@@ -264,11 +264,11 @@ export default function VendorDashboardPage() {
   const getStatusColor = (status: Product['status']) => {
     switch (status) {
       case 'in-stock':
-        return 'text-green-600'
+        return 'text-success'
       case 'low-stock':
-        return 'text-yellow-600'
+        return 'text-warning'
       case 'out-of-stock':
-        return 'text-red-600'
+        return 'text-destructive'
       default:
         return 'text-muted-foreground'
     }
@@ -289,7 +289,7 @@ export default function VendorDashboardPage() {
     <div className="min-h-screen">
       <main id="main-content" className="container py-12">
         {/* Breadcrumb */}
-        <nav aria-label="Breadcrumb" className="mb-8">
+        <nav aria-label={isRTL ? 'مسار التنقل' : 'Breadcrumb'} className="mb-8">
           <div className="flex items-center justify-between gap-4">
             <ol className="flex items-center gap-2 text-sm text-muted-foreground">
               <li>
@@ -297,20 +297,20 @@ export default function VendorDashboardPage() {
                   {t.breadcrumb.home}
                 </Link>
               </li>
-              <li>/</li>
+              <li aria-hidden="true">/</li>
               <li>
                 <Link href="/examples" className="hover:text-foreground transition-colors">
                   {t.breadcrumb.examples}
                 </Link>
               </li>
-              <li>/</li>
+              <li aria-hidden="true">/</li>
               <li>
                 <Link href="/examples/marketplace" className="hover:text-foreground transition-colors">
                   {t.breadcrumb.marketplace}
                 </Link>
               </li>
-              <li>/</li>
-              <li className="text-foreground font-medium">
+              <li aria-hidden="true">/</li>
+              <li className="text-foreground font-medium" aria-current="page">
                 {t.breadcrumb.dashboard}
               </li>
             </ol>
@@ -330,7 +330,7 @@ export default function VendorDashboardPage() {
           </div>
           <Button asChild>
             <Link href="/examples/marketplace">
-              <Storefront className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
+              <Storefront className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} aria-hidden="true" />
               {t.viewStore}
             </Link>
           </Button>
@@ -343,7 +343,7 @@ export default function VendorDashboardPage() {
               <CardTitle className="text-sm font-medium">
                 {t.stats.totalSales}
               </CardTitle>
-              <ShoppingCart className="h-4 w-4 text-muted-foreground" />
+              <ShoppingCart className="h-4 w-4 text-muted-foreground" aria-hidden="true" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">
@@ -360,7 +360,7 @@ export default function VendorDashboardPage() {
               <CardTitle className="text-sm font-medium">
                 {t.stats.revenue}
               </CardTitle>
-              <CurrencyDollar className="h-4 w-4 text-muted-foreground" />
+              <CurrencyDollar className="h-4 w-4 text-muted-foreground" aria-hidden="true" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">
@@ -377,7 +377,7 @@ export default function VendorDashboardPage() {
               <CardTitle className="text-sm font-medium">
                 {t.stats.rating}
               </CardTitle>
-              <Star className="h-4 w-4 text-muted-foreground" />
+              <Star className="h-4 w-4 text-muted-foreground" aria-hidden="true" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">
@@ -395,7 +395,7 @@ export default function VendorDashboardPage() {
               <CardTitle className="text-sm font-medium">
                 {t.stats.products}
               </CardTitle>
-              <Package className="h-4 w-4 text-muted-foreground" />
+              <Package className="h-4 w-4 text-muted-foreground" aria-hidden="true" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">
@@ -412,11 +412,11 @@ export default function VendorDashboardPage() {
         <Tabs defaultValue="profile" className="space-y-6">
           <TabsList className="grid w-full grid-cols-2 max-w-md">
             <TabsTrigger value="profile">
-              <User className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
+              <User className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} aria-hidden="true" />
               {t.tabs.profile}
             </TabsTrigger>
             <TabsTrigger value="products">
-              <Package className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
+              <Package className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} aria-hidden="true" />
               {t.tabs.products}
             </TabsTrigger>
           </TabsList>
@@ -434,7 +434,7 @@ export default function VendorDashboardPage() {
                   </div>
                   {!isEditingProfile && (
                     <Button onClick={() => setIsEditingProfile(true)} variant="outline">
-                      <PencilSimple className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
+                      <PencilSimple className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} aria-hidden="true" />
                       {t.profile.edit}
                     </Button>
                   )}
@@ -445,14 +445,16 @@ export default function VendorDashboardPage() {
                 <div className="space-y-4">
                   <div>
                     <Label>{t.profile.bannerImage}</Label>
-                    <div
-                      className="mt-2 h-48 rounded-lg bg-cover bg-center relative group"
-                      style={{ backgroundImage: `url(${vendorProfile.banner})` }}
-                    >
+                    <div className="mt-2 h-48 rounded-lg relative group overflow-hidden">
+                      <img
+                        src={vendorProfile.banner}
+                        alt={isRTL ? 'صورة البانر' : 'Banner image'}
+                        className="h-full w-full object-cover"
+                      />
                       {isEditingProfile && (
                         <div className="absolute inset-0 bg-black/50 rounded-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
                           <Button variant="secondary" size="sm">
-                            <Upload className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
+                            <Upload className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} aria-hidden="true" />
                             {t.profile.uploadNewImage}
                           </Button>
                         </div>
@@ -463,13 +465,15 @@ export default function VendorDashboardPage() {
                   <div>
                     <Label>{t.profile.storeLogo}</Label>
                     <div className="mt-2 flex items-center gap-4">
-                      <div
-                        className="h-24 w-24 rounded-lg bg-cover bg-center relative group"
-                        style={{ backgroundImage: `url(${vendorProfile.logo})` }}
-                      >
+                      <div className="h-24 w-24 rounded-lg relative group overflow-hidden">
+                        <img
+                          src={vendorProfile.logo}
+                          alt={isRTL ? vendorProfile.nameAr : vendorProfile.name}
+                          className="h-full w-full object-cover"
+                        />
                         {isEditingProfile && (
                           <div className="absolute inset-0 bg-black/50 rounded-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                            <Upload className="h-6 w-6 text-white" />
+                            <Upload className="h-6 w-6 text-white" aria-hidden="true" />
                           </div>
                         )}
                       </div>
@@ -548,7 +552,7 @@ export default function VendorDashboardPage() {
                       <MapPin className={cn(
                         'absolute top-3 h-4 w-4 text-muted-foreground',
                         isRTL ? 'right-3' : 'left-3'
-                      )} />
+                      )} aria-hidden="true" />
                       <Input
                         id="location"
                         value={profileForm.location}
@@ -564,7 +568,7 @@ export default function VendorDashboardPage() {
                       {t.profile.locationAr}
                     </Label>
                     <div className="relative">
-                      <MapPin className="absolute top-3 right-3 h-4 w-4 text-muted-foreground" />
+                      <MapPin className="absolute top-3 right-3 h-4 w-4 text-muted-foreground" aria-hidden="true" />
                       <Input
                         id="location-ar"
                         value={profileForm.locationAr}
@@ -586,7 +590,7 @@ export default function VendorDashboardPage() {
                       <Phone className={cn(
                         'absolute top-3 h-4 w-4 text-muted-foreground',
                         isRTL ? 'right-3' : 'left-3'
-                      )} />
+                      )} aria-hidden="true" />
                       <Input
                         id="phone"
                         value={profileForm.phone}
@@ -605,7 +609,7 @@ export default function VendorDashboardPage() {
                       <EnvelopeSimple className={cn(
                         'absolute top-3 h-4 w-4 text-muted-foreground',
                         isRTL ? 'right-3' : 'left-3'
-                      )} />
+                      )} aria-hidden="true" />
                       <Input
                         id="email"
                         type="email"
@@ -625,7 +629,7 @@ export default function VendorDashboardPage() {
                       <Globe className={cn(
                         'absolute top-3 h-4 w-4 text-muted-foreground',
                         isRTL ? 'right-3' : 'left-3'
-                      )} />
+                      )} aria-hidden="true" />
                       <Input
                         id="website"
                         value={profileForm.website}
@@ -640,11 +644,11 @@ export default function VendorDashboardPage() {
                 {isEditingProfile && (
                   <div className="flex gap-3 justify-end pt-4 border-t">
                     <Button variant="outline" onClick={handleCancelProfile}>
-                      <X className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
+                      <X className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} aria-hidden="true" />
                       {t.profile.cancel}
                     </Button>
                     <Button onClick={handleSaveProfile}>
-                      <FloppyDisk className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
+                      <FloppyDisk className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} aria-hidden="true" />
                       {t.profile.saveChanges}
                     </Button>
                   </div>
@@ -668,8 +672,8 @@ export default function VendorDashboardPage() {
                         {t.products.editDescription}
                       </CardDescription>
                     </div>
-                    <Button variant="ghost" size="icon" onClick={handleCancelProduct}>
-                      <X className="h-4 w-4" />
+                    <Button variant="ghost" size="icon" onClick={handleCancelProduct} aria-label={isRTL ? 'إغلاق' : 'Close'}>
+                      <X className="h-4 w-4" aria-hidden="true" />
                     </Button>
                   </div>
                 </CardHeader>
@@ -678,17 +682,19 @@ export default function VendorDashboardPage() {
                   <div>
                     <Label>{t.products.productImage}</Label>
                     <div className="mt-2 flex items-center gap-4">
-                      <div
-                        className="h-32 w-32 rounded-lg bg-cover bg-center relative group"
-                        style={{ backgroundImage: `url(${editingProduct.image})` }}
-                      >
+                      <div className="h-32 w-32 rounded-lg relative group overflow-hidden">
+                        <img
+                          src={editingProduct.image}
+                          alt={isRTL ? editingProduct.nameAr : editingProduct.name}
+                          className="h-full w-full object-cover"
+                        />
                         <div className="absolute inset-0 bg-black/50 rounded-lg flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
                           <Upload className="h-6 w-6 text-white" />
                         </div>
                       </div>
                       <div className="flex-1">
                         <Button variant="outline" size="sm">
-                          <ImageIcon className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
+                          <ImageIcon className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} aria-hidden="true" />
                           {t.profile.uploadNewImage}
                         </Button>
                         <p className="text-sm text-muted-foreground mt-2">
@@ -804,11 +810,11 @@ export default function VendorDashboardPage() {
 
                   <div className="flex gap-3 justify-end pt-4 border-t">
                     <Button variant="outline" onClick={handleCancelProduct}>
-                      <X className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
+                      <X className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} aria-hidden="true" />
                       {t.profile.cancel}
                     </Button>
                     <Button onClick={handleSaveProduct}>
-                      <FloppyDisk className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
+                      <FloppyDisk className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} aria-hidden="true" />
                       {t.profile.saveChanges}
                     </Button>
                   </div>
@@ -827,7 +833,7 @@ export default function VendorDashboardPage() {
                     </p>
                   </div>
                   <Button>
-                    <Plus className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
+                    <Plus className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} aria-hidden="true" />
                     {t.products.addProduct}
                   </Button>
                 </div>
@@ -835,9 +841,10 @@ export default function VendorDashboardPage() {
                 <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                   {products.map((product) => (
                     <Card key={product.id} className="overflow-hidden">
-                      <div
-                        className="h-48 bg-cover bg-center"
-                        style={{ backgroundImage: `url(${product.image})` }}
+                      <img
+                        src={product.image}
+                        alt={isRTL ? product.nameAr : product.name}
+                        className="h-48 w-full object-cover"
                       />
                       <CardHeader>
                         <div className="flex items-start justify-between gap-2">
@@ -886,7 +893,7 @@ export default function VendorDashboardPage() {
                               {t.stats.rating}:
                             </span>
                             <div className="flex items-center gap-1">
-                              <Star className="h-3 w-3 fill-yellow-400 text-yellow-400" />
+                              <Star className="h-3 w-3 fill-yellow-400 text-yellow-400" aria-hidden="true" />
                               <ArabicNumber value={product.rating} />
                               <span className="text-muted-foreground">
                                 (<ArabicNumber value={product.reviewCount} />)
@@ -902,7 +909,7 @@ export default function VendorDashboardPage() {
                             className="flex-1"
                             onClick={() => setEditingProduct(product)}
                           >
-                            <PencilSimple className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
+                            <PencilSimple className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} aria-hidden="true" />
                             {t.profile.edit}
                           </Button>
                           <Button
@@ -912,7 +919,7 @@ export default function VendorDashboardPage() {
                             asChild
                           >
                             <Link href={`/examples/marketplace/${product.id}`}>
-                              <Eye className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
+                              <Eye className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} aria-hidden="true" />
                               {t.products.view}
                             </Link>
                           </Button>

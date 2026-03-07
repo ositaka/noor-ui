@@ -67,14 +67,14 @@ export default function CalendarExamplePage() {
   ]
 
   return (
-    <div className="min-h-screen bg-muted/30">
+    <div className="min-h-screen bg-background">
       {/* Header */}
       <header className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50">
         <div className="container flex h-16 items-center justify-between">
           <div className="flex items-center gap-6">
             <Link href="/" className="flex items-center gap-2">
               <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center">
-                <House className="h-5 w-5 text-primary-foreground" />
+                <House className="h-5 w-5 text-primary-foreground" aria-hidden="true" />
               </div>
               <span className="font-bold text-xl hidden sm:inline">
                 {t.ui.components.noorUI}
@@ -102,7 +102,7 @@ export default function CalendarExamplePage() {
       {/* Breadcrumb */}
       <div className="border-b bg-background">
         <div className="container py-3">
-          <nav aria-label="Breadcrumb">
+          <nav aria-label={isRTL ? 'مسار التنقل' : 'Breadcrumb'}>
             <div className="flex items-center justify-between gap-4">
               <ol className="flex items-center gap-2 text-sm text-muted-foreground">
                 <li>
@@ -110,14 +110,14 @@ export default function CalendarExamplePage() {
                     {t.nav.home}
                   </Link>
                 </li>
-                <li>/</li>
+                <li aria-hidden="true">/</li>
                 <li>
                   <Link href="/examples" className="hover:text-foreground transition-colors">
                     {t.nav.examples}
                   </Link>
                 </li>
-                <li>/</li>
-                <li className="text-foreground font-medium">
+                <li aria-hidden="true">/</li>
+                <li className="text-foreground font-medium" aria-current="page">
                   {t.calendarPage.title}
                 </li>
               </ol>
@@ -133,7 +133,7 @@ export default function CalendarExamplePage() {
         <div className="mb-12">
           <div className="flex items-center gap-3 mb-4">
             <div className="p-3 bg-primary/10 rounded-lg">
-              <CalendarIcon className="h-8 w-8 text-primary" />
+              <CalendarIcon className="h-8 w-8 text-primary" aria-hidden="true" />
             </div>
             <div>
               <h1 className="text-4xl font-bold tracking-tight">
@@ -156,13 +156,13 @@ export default function CalendarExamplePage() {
           <CardHeader>
             <div className="flex items-center justify-between">
               <div>
-                <CardTitle>Hijri Calendar with Islamic Holidays</CardTitle>
+                <CardTitle>{isRTL ? 'التقويم الهجري مع الأعياد الإسلامية' : 'Hijri Calendar with Islamic Holidays'}</CardTitle>
                 <CardDescription>
-                  Calendar displaying both Gregorian and Hijri dates with automatic Islamic holiday highlighting
+                  {isRTL ? 'تقويم يعرض التواريخ الهجرية والميلادية مع إبراز تلقائي للأعياد الإسلامية' : 'Calendar displaying both Gregorian and Hijri dates with automatic Islamic holiday highlighting'}
                 </CardDescription>
               </div>
               <Badge variant="default">
-                New Feature
+                {isRTL ? 'ميزة جديدة' : 'New Feature'}
               </Badge>
             </div>
           </CardHeader>
@@ -247,7 +247,7 @@ export default function CalendarExamplePage() {
                     className="flex items-start gap-3 p-3 rounded-lg border bg-muted/50"
                   >
                     <div className="p-2 bg-primary/10 rounded-md">
-                      <Clock className="h-4 w-4 text-primary" />
+                      <Clock className="h-4 w-4 text-primary" aria-hidden="true" />
                     </div>
                     <div className="flex-1 min-w-0">
                       <p className="font-medium text-sm">{event.title}</p>
@@ -289,7 +289,7 @@ export default function CalendarExamplePage() {
               {appointmentDate && (
                 <div className="p-4 bg-muted rounded-lg">
                   <div className="flex items-start gap-3">
-                    <CheckCircle className="h-5 w-5 text-primary mt-0.5" />
+                    <CheckCircle className="h-5 w-5 text-primary mt-0.5" aria-hidden="true" />
                     <div>
                       <p className="font-medium text-sm">
                         {t.calendarPage.labels.appointmentScheduled}
@@ -326,7 +326,7 @@ export default function CalendarExamplePage() {
               {vacationRange?.from && (
                 <div className="p-4 bg-muted rounded-lg">
                   <div className="flex items-start gap-3">
-                    <CheckCircle className="h-5 w-5 text-primary mt-0.5" />
+                    <CheckCircle className="h-5 w-5 text-primary mt-0.5" aria-hidden="true" />
                     <div className="flex-1">
                       <p className="font-medium text-sm">
                         {t.calendarPage.labels.vacationScheduled}
@@ -394,15 +394,15 @@ export default function CalendarExamplePage() {
                     </h5>
                     <ul className="space-y-2 text-sm text-muted-foreground">
                       <li className="flex items-start gap-2">
-                        <CheckCircle className="h-4 w-4 text-primary mt-0.5 shrink-0" />
+                        <CheckCircle className="h-4 w-4 text-primary mt-0.5 shrink-0" aria-hidden="true" />
                         <span>{t.calendarPage.appointments.disabledDates}</span>
                       </li>
                       <li className="flex items-start gap-2">
-                        <CheckCircle className="h-4 w-4 text-primary mt-0.5 shrink-0" />
+                        <CheckCircle className="h-4 w-4 text-primary mt-0.5 shrink-0" aria-hidden="true" />
                         <span>{t.calendarPage.appointments.minMaxDates}</span>
                       </li>
                       <li className="flex items-start gap-2">
-                        <CheckCircle className="h-4 w-4 text-primary mt-0.5 shrink-0" />
+                        <CheckCircle className="h-4 w-4 text-primary mt-0.5 shrink-0" aria-hidden="true" />
                         <span>{t.calendarPage.appointments.hijriIntegration}</span>
                       </li>
                     </ul>
@@ -431,15 +431,15 @@ export default function CalendarExamplePage() {
                     </h5>
                     <ul className="space-y-2 text-sm text-muted-foreground">
                       <li className="flex items-start gap-2">
-                        <ArrowRight className="h-4 w-4 text-primary mt-0.5 shrink-0 rtl:rotate-180" />
+                        <ArrowRight className="h-4 w-4 text-primary mt-0.5 shrink-0 rtl:rotate-180" aria-hidden="true" />
                         <span>{t.calendarPage.eventsTab.conferenceBookings}</span>
                       </li>
                       <li className="flex items-start gap-2">
-                        <ArrowRight className="h-4 w-4 text-primary mt-0.5 shrink-0 rtl:rotate-180" />
+                        <ArrowRight className="h-4 w-4 text-primary mt-0.5 shrink-0 rtl:rotate-180" aria-hidden="true" />
                         <span>{t.calendarPage.eventsTab.courseEnrollment}</span>
                       </li>
                       <li className="flex items-start gap-2">
-                        <ArrowRight className="h-4 w-4 text-primary mt-0.5 shrink-0 rtl:rotate-180" />
+                        <ArrowRight className="h-4 w-4 text-primary mt-0.5 shrink-0 rtl:rotate-180" aria-hidden="true" />
                         <span>{t.calendarPage.eventsTab.eventTicketing}</span>
                       </li>
                     </ul>
@@ -468,15 +468,15 @@ export default function CalendarExamplePage() {
                     </h5>
                     <ul className="space-y-2 text-sm text-muted-foreground">
                       <li className="flex items-start gap-2">
-                        <ArrowRight className="h-4 w-4 text-primary mt-0.5 shrink-0 rtl:rotate-180" />
+                        <ArrowRight className="h-4 w-4 text-primary mt-0.5 shrink-0 rtl:rotate-180" aria-hidden="true" />
                         <span>{t.calendarPage.bookings.hospitality}</span>
                       </li>
                       <li className="flex items-start gap-2">
-                        <ArrowRight className="h-4 w-4 text-primary mt-0.5 shrink-0 rtl:rotate-180" />
+                        <ArrowRight className="h-4 w-4 text-primary mt-0.5 shrink-0 rtl:rotate-180" aria-hidden="true" />
                         <span>{t.calendarPage.bookings.carRentals}</span>
                       </li>
                       <li className="flex items-start gap-2">
-                        <ArrowRight className="h-4 w-4 text-primary mt-0.5 shrink-0 rtl:rotate-180" />
+                        <ArrowRight className="h-4 w-4 text-primary mt-0.5 shrink-0 rtl:rotate-180" aria-hidden="true" />
                         <span>{t.calendarPage.bookings.propertyBookings}</span>
                       </li>
                     </ul>

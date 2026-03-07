@@ -51,14 +51,14 @@ export function SiteHeader() {
           >
             {t.nav.components}
           </Link>
+
+          {/* Secondary links — visible at xl+, collapsed into "More" at lg */}
           <Link
             href="/examples"
-            className="text-sm font-medium transition-colors hover:text-primary"
+            className="hidden xl:block text-sm font-medium transition-colors hover:text-primary"
           >
             {t.nav.examples}
           </Link>
-
-          {/* Secondary links — visible at xl+, collapsed into "More" at lg */}
           <Link
             href="/rtl-guide"
             className="hidden xl:block text-sm font-medium transition-colors hover:text-primary"
@@ -81,6 +81,9 @@ export function SiteHeader() {
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="start">
+              <DropdownMenuItem asChild>
+                <Link href="/examples">{t.nav.examples}</Link>
+              </DropdownMenuItem>
               <DropdownMenuItem asChild>
                 <Link href="/rtl-guide">{t.nav.rtlGuide}</Link>
               </DropdownMenuItem>

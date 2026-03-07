@@ -3,6 +3,7 @@
 import * as React from 'react'
 import { cn } from '../../lib/utils'
 import { Label } from './label'
+import { FormFieldIdProvider, useFormFieldId } from '../../lib/form-field-context'
 
 // Form Context
 interface FormContextValue {
@@ -148,6 +149,7 @@ export interface FormFieldProps {
 }
 
 export const FormField: React.FC<FormFieldProps> = ({ name, children }) => {
+  const id = React.useId()
   const { values, errors, touched, setFieldValue, setFieldTouched, validateField } =
     useFormContext()
 
@@ -161,7 +163,7 @@ export const FormField: React.FC<FormFieldProps> = ({ name, children }) => {
   }
 
   return (
-    <>
+    <FormFieldIdProvider value={id}>
       {children({
         field: {
           name,
@@ -172,7 +174,7 @@ export const FormField: React.FC<FormFieldProps> = ({ name, children }) => {
         error: errors[name],
         touched: touched[name],
       })}
-    </>
+    </FormFieldIdProvider>
   )
 }
 
@@ -184,15 +186,16 @@ export const FormItem = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HT
 )
 FormItem.displayName = 'FormItem'
 
-// FormLabel Component
+// FormLabel Component — auto-connects to input via FormField context
 export const FormLabel = React.forwardRef<
   React.ElementRef<typeof Label>,
   React.ComponentPropsWithoutRef<typeof Label> & {
     required?: boolean
   }
->(({ className, children, required, ...props }, ref) => {
+>(({ className, children, required, htmlFor, ...props }, ref) => {
+  const formFieldId = useFormFieldId()
   return (
-    <Label ref={ref} className={cn(className)} {...props}>
+    <Label ref={ref} htmlFor={htmlFor ?? formFieldId} className={cn(className)} {...props}>
       {children}
       {required && <span className="text-destructive ms-1">*</span>}
     </Label>

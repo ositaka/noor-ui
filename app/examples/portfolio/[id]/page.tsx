@@ -27,6 +27,7 @@ import {
 import { useDirection } from '@/components/providers/direction-provider'
 import { DirectionToggle } from '@/components/docs/direction-toggle'
 import { content } from '@/lib/i18n'
+import { cn } from '@/lib/utils'
 
 interface Project {
   id: string
@@ -111,11 +112,11 @@ const getAllProjects = (): Project[] => {
       clientAr: 'ريتيل كو',
       clientIndustry: 'E-Commerce / Retail',
       clientIndustryAr: 'التجارة الإلكترونية / التجزئة',
-      imageUrl: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&h=800&fit=crop',
+      imageUrl: '/examples/portfolio/ecommerce-hero.jpg',
       images: [
-        'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop',
-        'https://images.unsplash.com/photo-1557821552-17105176677c?w=800&h=600&fit=crop',
-        'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=600&fit=crop',
+        '/examples/portfolio/ecommerce.jpg',
+        '/examples/portfolio/gallery-1.jpg',
+        '/examples/portfolio/gallery-2.jpg',
       ],
       technologies: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'Stripe', 'PostgreSQL'],
       technologiesAr: ['ريأكت', 'نكست.جي إس', 'تايب سكريبت', 'تيل ويند CSS', 'سترايب', 'PostgreSQL'],
@@ -147,14 +148,14 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
   const relatedProjects = projects.filter((p) => p.id !== project.id).slice(0, 3)
 
   return (
-    <div className="min-h-screen bg-muted/30">
+    <div className="min-h-screen bg-background">
       {/* Header */}
       <header className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50">
         <div className="container flex h-16 items-center justify-between">
           <div className="flex items-center gap-6">
             <Link href="/" className="flex items-center gap-2">
               <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center">
-                <House className="h-5 w-5 text-primary-foreground" />
+                <House className="h-5 w-5 text-primary-foreground" aria-hidden="true" />
               </div>
               <span className="font-bold text-xl hidden sm:inline">
                 {t.portfolioDetail.header.name}
@@ -175,7 +176,7 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
       {/* Breadcrumb */}
       <div className="border-b bg-background">
         <div className="container py-3">
-          <nav aria-label="Breadcrumb">
+          <nav aria-label={isRTL ? 'مسار التنقل' : 'Breadcrumb'}>
             <div className="flex items-center justify-between gap-4">
               <ol className="flex items-center gap-2 text-sm text-muted-foreground">
                 <li>
@@ -183,20 +184,20 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
                     {t.nav.home}
                   </Link>
                 </li>
-                <li>/</li>
+                <li aria-hidden="true">/</li>
                 <li>
                   <Link href="/examples" className="hover:text-foreground transition-colors">
                     {t.nav.examples}
                   </Link>
                 </li>
-                <li>/</li>
+                <li aria-hidden="true">/</li>
                 <li>
                   <Link href="/examples/portfolio" className="hover:text-foreground transition-colors">
                     {t.portfolioDetail.breadcrumb.portfolio}
                   </Link>
                 </li>
-                <li>/</li>
-                <li className="text-foreground font-medium">
+                <li aria-hidden="true">/</li>
+                <li className="text-foreground font-medium" aria-current="page">
                   {isRTL ? project.titleAr : project.title}
                 </li>
               </ol>
@@ -210,9 +211,10 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
       <main className="container py-8">
         {/* Hero Image */}
         <div className="mb-8">
-          <div
-            className="w-full h-[400px] md:h-[600px] rounded-2xl bg-cover bg-center"
-            style={{ backgroundImage: `url(${project.imageUrl})` }}
+          <img
+            src={project.imageUrl}
+            alt={isRTL ? project.titleAr : project.title}
+            className="w-full h-[400px] md:h-[600px] rounded-2xl object-cover"
           />
         </div>
 
@@ -227,7 +229,7 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
                 {project.projectUrl && (
                   <Button variant="ghost" size="sm" asChild>
                     <Link href={project.projectUrl} target="_blank">
-                      <Globe className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
+                      <Globe className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} aria-hidden="true" />
                       {t.portfolioDetail.buttons.visitSite}
                     </Link>
                   </Button>
@@ -235,7 +237,7 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
                 {project.githubUrl && (
                   <Button variant="ghost" size="sm" asChild>
                     <Link href={project.githubUrl} target="_blank">
-                      <GithubLogo className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
+                      <GithubLogo className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} aria-hidden="true" />
                       {t.portfolioDetail.buttons.sourceCode}
                     </Link>
                   </Button>
@@ -255,7 +257,7 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
             {/* Overview */}
             <div>
               <h2 className="text-2xl font-bold tracking-tight mb-4 flex items-center gap-2">
-                <Stack className="h-6 w-6" />
+                <Stack className="h-6 w-6" aria-hidden="true" />
                 {t.portfolioDetail.sections.overview}
               </h2>
               <p className="text-muted-foreground leading-relaxed">
@@ -267,11 +269,11 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
             <Tabs defaultValue="challenge" className="w-full">
               <TabsList className="grid w-full grid-cols-2">
                 <TabsTrigger value="challenge">
-                  <Crosshair className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
+                  <Crosshair className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} aria-hidden="true" />
                   {t.portfolioDetail.sections.challenge}
                 </TabsTrigger>
                 <TabsTrigger value="solution">
-                  <CheckCircle className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
+                  <CheckCircle className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} aria-hidden="true" />
                   {t.portfolioDetail.sections.solution}
                 </TabsTrigger>
               </TabsList>
@@ -306,7 +308,7 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
             {/* Results */}
             <div>
               <h2 className="text-2xl font-bold tracking-tight mb-4 flex items-center gap-2">
-                <TrendUp className="h-6 w-6" />
+                <TrendUp className="h-6 w-6" aria-hidden="true" />
                 {t.portfolioDetail.sections.results}
               </h2>
               <Card>
@@ -314,7 +316,7 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
                   <ul className="space-y-3">
                     {(isRTL ? project.resultsAr : project.results).map((result, index) => (
                       <li key={index} className="flex items-start gap-3">
-                        <CheckCircle className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                        <CheckCircle className="h-5 w-5 text-primary shrink-0 mt-0.5" aria-hidden="true" />
                         <span className="text-muted-foreground">{result}</span>
                       </li>
                     ))}
@@ -331,10 +333,11 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
                 </h2>
                 <div className="grid gap-4 md:grid-cols-2">
                   {project.images.map((image, index) => (
-                    <div
+                    <img
                       key={index}
-                      className="aspect-video rounded-lg bg-cover bg-center"
-                      style={{ backgroundImage: `url(${image})` }}
+                      src={image}
+                      alt={`${isRTL ? project.titleAr : project.title} — ${index + 1}`}
+                      className="aspect-video rounded-lg object-cover w-full"
                     />
                   ))}
                 </div>
@@ -346,7 +349,7 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
               <Card className="bg-primary/5 border-primary/20">
                 <CardContent className="pt-6">
                   <div className="flex items-start gap-4">
-                    <Star className="h-8 w-8 text-primary shrink-0" />
+                    <Star className="h-8 w-8 text-primary shrink-0" aria-hidden="true" />
                     <div>
                       <p className="text-lg italic mb-4">
                         &quot;{isRTL ? project.testimonial.textAr : project.testimonial.text}&quot;
@@ -452,9 +455,10 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
               {relatedProjects.map((relatedProject) => (
                 <Link key={relatedProject.id} href={`/examples/portfolio/${relatedProject.id}`}>
                   <Card className="overflow-hidden hover:shadow-lg transition-shadow cursor-pointer h-full">
-                    <div
-                      className="h-48 bg-cover bg-center"
-                      style={{ backgroundImage: `url(${relatedProject.imageUrl})` }}
+                    <img
+                      src={relatedProject.imageUrl}
+                      alt={isRTL ? relatedProject.titleAr : relatedProject.title}
+                      className="h-48 w-full object-cover"
                     />
                     <CardHeader>
                       <CardTitle className="text-lg">
@@ -473,8 +477,4 @@ export default function ProjectDetailPage({ params }: { params: { id: string } }
       </main>
     </div>
   )
-}
-
-function cn(...classes: (string | undefined | false)[]) {
-  return classes.filter(Boolean).join(' ')
 }

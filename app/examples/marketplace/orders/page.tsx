@@ -67,7 +67,7 @@ function generateMockOrders(): Order[] {
           id: '1',
           name: 'Wireless Headphones',
           nameAr: 'سماعات لاسلكية',
-          image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400',
+          image: '/examples/marketplace/headphones.jpg',
           quantity: 2,
           price: 299,
         },
@@ -75,7 +75,7 @@ function generateMockOrders(): Order[] {
           id: '2',
           name: 'Smart Watch',
           nameAr: 'ساعة ذكية',
-          image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400',
+          image: '/examples/marketplace/watch.jpg',
           quantity: 1,
           price: 499,
         },
@@ -100,7 +100,7 @@ function generateMockOrders(): Order[] {
           id: '3',
           name: 'Mechanical Keyboard',
           nameAr: 'لوحة مفاتيح ميكانيكية',
-          image: 'https://images.unsplash.com/photo-1511467687858-23d96c32e4ae?w=400',
+          image: '/examples/marketplace/keyboard.jpg',
           quantity: 1,
           price: 199,
         },
@@ -108,7 +108,7 @@ function generateMockOrders(): Order[] {
           id: '4',
           name: 'Wireless Mouse',
           nameAr: 'ماوس لاسلكي',
-          image: 'https://images.unsplash.com/photo-1527814050087-3793815479db?w=400',
+          image: '/examples/marketplace/mouse.jpg',
           quantity: 2,
           price: 99,
         },
@@ -132,7 +132,7 @@ function generateMockOrders(): Order[] {
           id: '5',
           name: 'USB-C Hub',
           nameAr: 'موزع USB-C',
-          image: 'https://images.unsplash.com/photo-1625948515291-69613efd103f?w=400',
+          image: '/examples/marketplace/usb-hub.jpg',
           quantity: 1,
           price: 149,
         },
@@ -156,7 +156,7 @@ function generateMockOrders(): Order[] {
           id: '6',
           name: 'Laptop Stand',
           nameAr: 'حامل لابتوب',
-          image: 'https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=400',
+          image: '/examples/marketplace/laptop-stand.jpg',
           quantity: 1,
           price: 89,
         },
@@ -198,15 +198,15 @@ export default function OrdersPage() {
   const getStatusColor = (status: Order['status']) => {
     switch (status) {
       case 'pending':
-        return 'bg-yellow-100 text-yellow-800 border-yellow-200'
+        return 'bg-warning/10 text-warning border-warning/20'
       case 'processing':
-        return 'bg-blue-100 text-blue-800 border-blue-200'
+        return 'bg-info/10 text-info border-info/20'
       case 'shipped':
-        return 'bg-purple-100 text-purple-800 border-purple-200'
+        return 'bg-primary/10 text-primary border-primary/20'
       case 'delivered':
-        return 'bg-green-100 text-green-800 border-green-200'
+        return 'bg-success/10 text-success border-success/20'
       case 'cancelled':
-        return 'bg-red-100 text-red-800 border-red-200'
+        return 'bg-destructive/10 text-destructive border-destructive/20'
     }
   }
 
@@ -235,10 +235,10 @@ export default function OrdersPage() {
     if (searchQuery) {
       filtered = filtered.filter(
         (order) =>
-          order.orderNumber.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          order.orderNumber.toLocaleLowerCase(locale).includes(searchQuery.toLocaleLowerCase(locale)) ||
           order.items.some(
             (item) =>
-              item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+              item.name.toLocaleLowerCase(locale).includes(searchQuery.toLocaleLowerCase(locale)) ||
               item.nameAr.includes(searchQuery)
           )
       )
@@ -254,7 +254,7 @@ export default function OrdersPage() {
       <div className="min-h-screen">
         <main id="main-content" className="container py-12">
           {/* Breadcrumb */}
-          <nav aria-label="Breadcrumb" className="mb-8">
+          <nav aria-label={isRTL ? 'مسار التنقل' : 'Breadcrumb'} className="mb-8">
             <div className="flex items-center justify-between gap-4">
               <ol className="flex items-center gap-2 text-sm text-muted-foreground">
                 <li>
@@ -262,19 +262,19 @@ export default function OrdersPage() {
                     {t.marketplaceOrders.breadcrumb.home}
                   </Link>
                 </li>
-                <li>/</li>
+                <li aria-hidden="true">/</li>
                 <li>
                   <Link href="/examples" className="hover:text-foreground transition-colors">
                     {t.marketplaceOrders.breadcrumb.examples}
                   </Link>
                 </li>
-                <li>/</li>
+                <li aria-hidden="true">/</li>
                 <li>
                   <Link href="/examples/marketplace" className="hover:text-foreground transition-colors">
                     {t.marketplaceOrders.breadcrumb.marketplace}
                   </Link>
                 </li>
-                <li>/</li>
+                <li aria-hidden="true">/</li>
                 <li>
                   <button
                     onClick={() => setSelectedOrder(null)}
@@ -283,8 +283,8 @@ export default function OrdersPage() {
                     {t.marketplaceOrders.breadcrumb.orders}
                   </button>
                 </li>
-                <li>/</li>
-                <li className="text-foreground font-medium">{selectedOrder.orderNumber}</li>
+                <li aria-hidden="true">/</li>
+                <li className="text-foreground font-medium" aria-current="page">{selectedOrder.orderNumber}</li>
               </ol>
               <DirectionToggle />
             </div>
@@ -308,7 +308,7 @@ export default function OrdersPage() {
                         {selectedOrder.orderNumber}
                       </CardTitle>
                       <CardDescription>
-                        <Calendar className="inline h-4 w-4 me-1" />
+                        <Calendar className="inline h-4 w-4 me-1" aria-hidden="true" />
                         {isRTL ? selectedOrder.dateAr : selectedOrder.date}
                       </CardDescription>
                     </div>
@@ -328,9 +328,10 @@ export default function OrdersPage() {
                 <CardContent className="space-y-4">
                   {selectedOrder.items.map((item) => (
                     <div key={item.id} className="flex gap-4">
-                      <div
-                        className="h-20 w-20 rounded-lg bg-cover bg-center shrink-0"
-                        style={{ backgroundImage: `url(${item.image})` }}
+                      <img
+                        src={item.image}
+                        alt={isRTL ? item.nameAr : item.name}
+                        className="h-20 w-20 rounded-lg object-cover shrink-0"
                       />
                       <div className="flex-1">
                         <h4 className="font-semibold">
@@ -372,10 +373,10 @@ export default function OrdersPage() {
                     <div className="space-y-4 pt-4">
                       <div className="flex gap-4">
                         <div className="flex flex-col items-center">
-                          <div className="p-2 bg-green-100 rounded-full">
-                            <CheckCircle className="h-4 w-4 text-green-600" />
+                          <div className="p-2 bg-success/10 rounded-full">
+                            <CheckCircle className="h-4 w-4 text-success" aria-hidden="true" />
                           </div>
-                          <div className="w-0.5 h-12 bg-green-200" />
+                          <div className="w-0.5 h-12 bg-success/20" />
                         </div>
                         <div className="flex-1 pb-4">
                           <p className="font-medium">
@@ -389,8 +390,8 @@ export default function OrdersPage() {
 
                       <div className="flex gap-4">
                         <div className="flex flex-col items-center">
-                          <div className="p-2 bg-purple-100 rounded-full">
-                            <Truck className="h-4 w-4 text-purple-600" />
+                          <div className="p-2 bg-primary/10 rounded-full">
+                            <Truck className="h-4 w-4 text-primary" aria-hidden="true" />
                           </div>
                           <div className="w-0.5 h-12 bg-muted" />
                         </div>
@@ -406,8 +407,8 @@ export default function OrdersPage() {
 
                       <div className="flex gap-4">
                         <div className="flex flex-col items-center">
-                          <div className="p-2 bg-blue-100 rounded-full">
-                            <Package className="h-4 w-4 text-blue-600" />
+                          <div className="p-2 bg-info/10 rounded-full">
+                            <Package className="h-4 w-4 text-info" aria-hidden="true" />
                           </div>
                           <div className="w-0.5 h-12 bg-muted" />
                         </div>
@@ -423,8 +424,8 @@ export default function OrdersPage() {
 
                       <div className="flex gap-4">
                         <div className="flex flex-col items-center">
-                          <div className="p-2 bg-yellow-100 rounded-full">
-                            <Clock className="h-4 w-4 text-yellow-600" />
+                          <div className="p-2 bg-warning/10 rounded-full">
+                            <Clock className="h-4 w-4 text-warning" aria-hidden="true" />
                           </div>
                         </div>
                         <div className="flex-1">
@@ -494,12 +495,12 @@ export default function OrdersPage() {
               <Card>
                 <CardContent className="p-4 space-y-2">
                   <Button variant="outline" className="w-full">
-                    <Download className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
+                    <Download className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} aria-hidden="true" />
                     {t.marketplaceOrders.downloadInvoice}
                   </Button>
                   {selectedOrder.status === 'delivered' && (
                     <Button variant="outline" className="w-full">
-                      <ArrowCounterClockwise className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
+                      <ArrowCounterClockwise className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} aria-hidden="true" />
                       {t.marketplaceOrders.requestReturn}
                     </Button>
                   )}
@@ -516,7 +517,7 @@ export default function OrdersPage() {
     <div className="min-h-screen">
       <main id="main-content" className="container py-12">
         {/* Breadcrumb */}
-        <nav aria-label="Breadcrumb" className="mb-8">
+        <nav aria-label={isRTL ? 'مسار التنقل' : 'Breadcrumb'} className="mb-8">
           <div className="flex items-center justify-between gap-4">
             <ol className="flex items-center gap-2 text-sm text-muted-foreground">
               <li>
@@ -524,20 +525,20 @@ export default function OrdersPage() {
                   {t.marketplaceOrders.breadcrumb.home}
                 </Link>
               </li>
-              <li>/</li>
+              <li aria-hidden="true">/</li>
               <li>
                 <Link href="/examples" className="hover:text-foreground transition-colors">
                   {t.marketplaceOrders.breadcrumb.examples}
                 </Link>
               </li>
-              <li>/</li>
+              <li aria-hidden="true">/</li>
               <li>
                 <Link href="/examples/marketplace" className="hover:text-foreground transition-colors">
                   {t.marketplaceOrders.breadcrumb.marketplace}
                 </Link>
               </li>
-              <li>/</li>
-              <li className="text-foreground font-medium">
+              <li aria-hidden="true">/</li>
+              <li className="text-foreground font-medium" aria-current="page">
                 {t.marketplaceOrders.breadcrumb.myOrders}
               </li>
             </ol>
@@ -561,12 +562,13 @@ export default function OrdersPage() {
             <MagnifyingGlass className={cn(
               'absolute top-3 h-4 w-4 text-muted-foreground',
               isRTL ? 'right-3' : 'left-3'
-            )} />
+            )} aria-hidden="true" />
             <Input
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder={t.marketplaceOrders.search}
               className={isRTL ? 'pe-10' : 'ps-10'}
+              aria-label={isRTL ? 'البحث في الطلبات' : 'Search orders'}
             />
           </div>
         </div>
@@ -613,10 +615,11 @@ export default function OrdersPage() {
 
                       <div className="flex gap-3 mb-4 overflow-x-auto pb-2">
                         {order.items.map((item) => (
-                          <div
+                          <img
                             key={item.id}
-                            className="h-16 w-16 rounded-lg bg-cover bg-center shrink-0"
-                            style={{ backgroundImage: `url(${item.image})` }}
+                            src={item.image}
+                            alt={isRTL ? item.nameAr : item.name}
+                            className="h-16 w-16 rounded-lg object-cover shrink-0"
                           />
                         ))}
                       </div>
@@ -634,7 +637,7 @@ export default function OrdersPage() {
                           variant="outline"
                           onClick={() => setSelectedOrder(order)}
                         >
-                          <Eye className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
+                          <Eye className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} aria-hidden="true" />
                           {t.marketplaceOrders.viewDetails}
                         </Button>
                       </div>
@@ -677,7 +680,7 @@ export default function OrdersPage() {
                           variant="outline"
                           onClick={() => setSelectedOrder(order)}
                         >
-                          <Eye className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
+                          <Eye className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} aria-hidden="true" />
                           {t.marketplaceOrders.viewDetails}
                         </Button>
                       </div>
@@ -720,7 +723,7 @@ export default function OrdersPage() {
                           variant="outline"
                           onClick={() => setSelectedOrder(order)}
                         >
-                          <Eye className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
+                          <Eye className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} aria-hidden="true" />
                           {t.marketplaceOrders.viewDetails}
                         </Button>
                       </div>
@@ -763,7 +766,7 @@ export default function OrdersPage() {
                           variant="outline"
                           onClick={() => setSelectedOrder(order)}
                         >
-                          <Eye className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
+                          <Eye className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} aria-hidden="true" />
                           {t.marketplaceOrders.viewDetails}
                         </Button>
                       </div>
@@ -806,7 +809,7 @@ export default function OrdersPage() {
                           variant="outline"
                           onClick={() => setSelectedOrder(order)}
                         >
-                          <Eye className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
+                          <Eye className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} aria-hidden="true" />
                           {t.marketplaceOrders.viewDetails}
                         </Button>
                       </div>

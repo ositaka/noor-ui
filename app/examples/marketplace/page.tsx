@@ -43,6 +43,7 @@ import {
 import { useDirection } from '@/components/providers/direction-provider'
 import { DirectionToggle } from '@/components/docs/direction-toggle'
 import { content } from '@/lib/i18n'
+import { cn } from '@/lib/utils'
 
 interface Vendor {
   id: string
@@ -94,7 +95,7 @@ const generateVendors = (): Vendor[] => {
       nameAr: 'مركز التقنية العربي',
       description: 'Premium electronics and gadgets',
       descriptionAr: 'إلكترونيات وأجهزة متميزة',
-      logo: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=200&h=200&fit=crop',
+      logo: '/examples/marketplace/tech-workspace.jpg',
       rating: 4.8,
       reviewCount: 1250,
       productsCount: 156,
@@ -109,7 +110,7 @@ const generateVendors = (): Vendor[] => {
       nameAr: 'سوق الموضة',
       description: 'Modern & traditional fashion',
       descriptionAr: 'أزياء عصرية وتقليدية',
-      logo: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=200&h=200&fit=crop',
+      logo: '/examples/marketplace/fashion-store.jpg',
       rating: 4.6,
       reviewCount: 890,
       productsCount: 234,
@@ -124,7 +125,7 @@ const generateVendors = (): Vendor[] => {
       nameAr: 'المنزل والمعيشة',
       description: 'Furniture and home decor',
       descriptionAr: 'أثاث وديكور منزلي',
-      logo: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=200&h=200&fit=crop',
+      logo: '/examples/marketplace/sofa.jpg',
       rating: 4.7,
       reviewCount: 675,
       productsCount: 189,
@@ -139,7 +140,7 @@ const generateVendors = (): Vendor[] => {
       nameAr: 'ركن الجمال',
       description: 'Cosmetics and skincare',
       descriptionAr: 'مستحضرات التجميل والعناية بالبشرة',
-      logo: 'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=200&h=200&fit=crop',
+      logo: '/examples/marketplace/beauty-products.jpg',
       rating: 4.9,
       reviewCount: 1420,
       productsCount: 312,
@@ -166,7 +167,7 @@ const generateProducts = (vendors: Vendor[]): Product[] => {
       category: 'Electronics',
       categoryAr: 'إلكترونيات',
       vendor: vendors[0],
-      imageUrl: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&h=600&fit=crop',
+      imageUrl: '/examples/marketplace/headphones.jpg',
       rating: 4.7,
       reviewCount: 234,
       inStock: true,
@@ -185,7 +186,7 @@ const generateProducts = (vendors: Vendor[]): Product[] => {
       category: 'Electronics',
       categoryAr: 'إلكترونيات',
       vendor: vendors[0],
-      imageUrl: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&h=600&fit=crop',
+      imageUrl: '/examples/marketplace/watch.jpg',
       rating: 4.8,
       reviewCount: 456,
       inStock: true,
@@ -204,7 +205,7 @@ const generateProducts = (vendors: Vendor[]): Product[] => {
       category: 'Fashion',
       categoryAr: 'أزياء',
       vendor: vendors[1],
-      imageUrl: 'https://images.unsplash.com/photo-1638433429483-a188db3d3b53?w=800&h=600&fit=crop',
+      imageUrl: '/examples/marketplace/earbuds.jpg',
       rating: 4.9,
       reviewCount: 189,
       inStock: true,
@@ -222,7 +223,7 @@ const generateProducts = (vendors: Vendor[]): Product[] => {
       category: 'Fashion',
       categoryAr: 'أزياء',
       vendor: vendors[1],
-      imageUrl: 'https://images.unsplash.com/photo-1603252109303-2751441dd157?w=800&h=600&fit=crop',
+      imageUrl: '/examples/marketplace/speaker.jpg',
       rating: 4.6,
       reviewCount: 123,
       inStock: true,
@@ -240,7 +241,7 @@ const generateProducts = (vendors: Vendor[]): Product[] => {
       category: 'Furniture',
       categoryAr: 'أثاث',
       vendor: vendors[2],
-      imageUrl: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&h=600&fit=crop',
+      imageUrl: '/examples/marketplace/sofa.jpg',
       rating: 4.5,
       reviewCount: 87,
       inStock: true,
@@ -258,7 +259,7 @@ const generateProducts = (vendors: Vendor[]): Product[] => {
       category: 'Furniture',
       categoryAr: 'أثاث',
       vendor: vendors[2],
-      imageUrl: 'https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=800&h=600&fit=crop',
+      imageUrl: '/examples/marketplace/skincare.jpg',
       rating: 4.7,
       reviewCount: 65,
       inStock: true,
@@ -276,7 +277,7 @@ const generateProducts = (vendors: Vendor[]): Product[] => {
       category: 'Beauty',
       categoryAr: 'جمال',
       vendor: vendors[3],
-      imageUrl: 'https://images.unsplash.com/photo-1541643600914-78b084683601?w=800&h=600&fit=crop',
+      imageUrl: '/examples/marketplace/perfume.jpg',
       rating: 4.8,
       reviewCount: 312,
       inStock: true,
@@ -295,7 +296,7 @@ const generateProducts = (vendors: Vendor[]): Product[] => {
       category: 'Beauty',
       categoryAr: 'جمال',
       vendor: vendors[3],
-      imageUrl: 'https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=800&h=600&fit=crop',
+      imageUrl: '/examples/marketplace/cosmetics.jpg',
       rating: 4.9,
       reviewCount: 278,
       inStock: true,
@@ -321,10 +322,10 @@ export default function MarketplacePage() {
 
   const filteredProducts = React.useMemo(() => {
     return products.filter((product) => {
-      const matchesCategory = selectedCategory === 'all' || product.category.toLowerCase() === selectedCategory.toLowerCase()
+      const matchesCategory = selectedCategory === 'all' || product.category.toLocaleLowerCase(locale) === selectedCategory.toLocaleLowerCase(locale)
       const matchesSearch =
         searchQuery === '' ||
-        product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        product.name.toLocaleLowerCase(locale).includes(searchQuery.toLocaleLowerCase(locale)) ||
         product.nameAr.includes(searchQuery)
       const matchesVendor = selectedVendor === 'all' || product.vendor.id === selectedVendor
       return matchesCategory && matchesSearch && matchesVendor
@@ -349,14 +350,14 @@ export default function MarketplacePage() {
   ]
 
   return (
-    <div className="min-h-screen bg-muted/30">
+    <div className="min-h-screen bg-background">
       {/* Header */}
       <header className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50">
         <div className="container flex h-16 items-center justify-between">
           <div className="flex items-center gap-6">
             <Link href="/" className="flex items-center gap-2">
               <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center">
-                <House className="h-5 w-5 text-primary-foreground" />
+                <House className="h-5 w-5 text-primary-foreground" aria-hidden="true" />
               </div>
               <span className="font-bold text-xl hidden sm:inline">
                 {t.marketplace.header.title}
@@ -365,12 +366,12 @@ export default function MarketplacePage() {
           </div>
 
           <div className="flex items-center gap-4">
-            <Button variant="ghost" size="sm">
-              <Heart className="h-5 w-5" />
+            <Button variant="ghost" size="sm" aria-label={isRTL ? 'المفضلة' : 'Wishlist'}>
+              <Heart className="h-5 w-5" aria-hidden="true" />
             </Button>
             <Button variant="outline" size="sm" asChild>
-              <Link href="/examples/marketplace/cart">
-                <ShoppingCart className="h-5 w-5" />
+              <Link href="/examples/marketplace/cart" aria-label={isRTL ? 'سلة التسوق' : 'Shopping cart'}>
+                <ShoppingCart className="h-5 w-5" aria-hidden="true" />
                 <Badge variant="destructive" className="ms-2 -me-2">3</Badge>
               </Link>
             </Button>
@@ -384,7 +385,7 @@ export default function MarketplacePage() {
       {/* Breadcrumb */}
       <div className="border-b bg-background">
         <div className="container py-3">
-          <nav aria-label="Breadcrumb">
+          <nav aria-label={isRTL ? 'مسار التنقل' : 'Breadcrumb'}>
             <div className="flex items-center justify-between gap-4">
               <ol className="flex items-center gap-2 text-sm text-muted-foreground">
                 <li>
@@ -392,14 +393,14 @@ export default function MarketplacePage() {
                     {t.nav.home}
                   </Link>
                 </li>
-                <li>/</li>
+                <li aria-hidden="true">/</li>
                 <li>
                   <Link href="/examples" className="hover:text-foreground transition-colors">
                     {t.nav.examples}
                   </Link>
                 </li>
-                <li>/</li>
-                <li className="text-foreground font-medium">
+                <li aria-hidden="true">/</li>
+                <li className="text-foreground font-medium" aria-current="page">
                   {t.marketplace.breadcrumb.marketplace}
                 </li>
               </ol>
@@ -415,7 +416,7 @@ export default function MarketplacePage() {
         <div className="mb-12">
           <div className="flex items-center gap-3 mb-4">
             <div className="p-3 bg-primary/10 rounded-lg">
-              <Storefront className="h-8 w-8 text-primary" />
+              <Storefront className="h-8 w-8 text-primary" aria-hidden="true" />
             </div>
             <div>
               <h1 className="text-4xl font-bold tracking-tight">
@@ -440,7 +441,7 @@ export default function MarketplacePage() {
               <CardContent className="p-6">
                 <div className="flex items-center gap-4">
                   <div className="p-3 bg-primary/10 rounded-lg">
-                    <stat.icon className="h-6 w-6 text-primary" />
+                    <stat.icon className="h-6 w-6 text-primary" aria-hidden="true" />
                   </div>
                   <div>
                     <p className="text-3xl font-bold">{stat.value}</p>
@@ -465,7 +466,7 @@ export default function MarketplacePage() {
               <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                 <div className="flex items-start gap-3">
                   <div className="p-2 bg-primary/10 rounded-lg">
-                    <Shield className="h-5 w-5 text-primary" />
+                    <Shield className="h-5 w-5 text-primary" aria-hidden="true" />
                   </div>
                   <div>
                     <h3 className="font-semibold mb-1">
@@ -479,7 +480,7 @@ export default function MarketplacePage() {
 
                 <div className="flex items-start gap-3">
                   <div className="p-2 bg-primary/10 rounded-lg">
-                    <Truck className="h-5 w-5 text-primary" />
+                    <Truck className="h-5 w-5 text-primary" aria-hidden="true" />
                   </div>
                   <div>
                     <h3 className="font-semibold mb-1">
@@ -493,7 +494,7 @@ export default function MarketplacePage() {
 
                 <div className="flex items-start gap-3">
                   <div className="p-2 bg-primary/10 rounded-lg">
-                    <CheckCircle className="h-5 w-5 text-primary" />
+                    <CheckCircle className="h-5 w-5 text-primary" aria-hidden="true" />
                   </div>
                   <div>
                     <h3 className="font-semibold mb-1">
@@ -526,14 +527,15 @@ export default function MarketplacePage() {
                 <Card className="hover:shadow-lg transition-shadow cursor-pointer h-full">
                   <CardContent className="pt-6">
                     <div className="flex flex-col items-center text-center">
-                      <div
-                        className="h-20 w-20 rounded-full bg-cover bg-center mb-4"
-                        style={{ backgroundImage: `url(${vendor.logo})` }}
+                      <img
+                        src={vendor.logo}
+                        alt={isRTL ? vendor.nameAr : vendor.name}
+                        className="h-20 w-20 rounded-full object-cover mb-4"
                       />
                       <div className="flex items-center gap-1 mb-2">
                         <h3 className="font-semibold">{isRTL ? vendor.nameAr : vendor.name}</h3>
                         {vendor.verified && (
-                          <CheckCircle className="h-4 w-4 text-primary" />
+                          <CheckCircle className="h-4 w-4 text-primary" aria-hidden="true" />
                         )}
                       </div>
                       <p className="text-sm text-muted-foreground mb-3">
@@ -541,7 +543,7 @@ export default function MarketplacePage() {
                       </p>
 
                       <div className="flex items-center gap-1 mb-2">
-                        <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                        <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" aria-hidden="true" />
                         <span className="font-medium">
                           <ArabicNumber value={vendor.rating} />
                         </span>
@@ -551,7 +553,7 @@ export default function MarketplacePage() {
                       </div>
 
                       <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                        <Package className="h-3 w-3" />
+                        <Package className="h-3 w-3" aria-hidden="true" />
                         <span>
                           <ArabicNumber value={vendor.productsCount} />{' '}
                           {t.marketplace.vendors.products}
@@ -581,9 +583,10 @@ export default function MarketplacePage() {
               <Link key={product.id} href={`/examples/marketplace/${product.id}`}>
                 <Card className="overflow-hidden hover:shadow-lg transition-shadow cursor-pointer h-full">
                   <div className="relative">
-                    <div
-                      className="h-48 bg-cover bg-center"
-                      style={{ backgroundImage: `url(${product.imageUrl})` }}
+                    <img
+                      src={product.imageUrl}
+                      alt={isRTL ? product.nameAr : product.name}
+                      className="h-48 w-full object-cover"
                     />
                     {product.badge && (
                       <Badge
@@ -598,7 +601,7 @@ export default function MarketplacePage() {
                         variant="secondary"
                         className="absolute top-2 end-2 flex items-center gap-1"
                       >
-                        <Truck className="h-3 w-3" />
+                        <Truck className="h-3 w-3" aria-hidden="true" />
                         {t.marketplace.products.fast}
                       </Badge>
                     )}
@@ -615,7 +618,7 @@ export default function MarketplacePage() {
 
                   <CardContent>
                     <div className="flex items-center gap-1 mb-3">
-                      <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                      <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" aria-hidden="true" />
                       <span className="text-sm font-medium">
                         <ArabicNumber value={product.rating} />
                       </span>
@@ -658,13 +661,14 @@ export default function MarketplacePage() {
               <Input
                 type="search"
                 placeholder={t.marketplace.products.searchPlaceholder}
+                aria-label={t.marketplace.products.searchPlaceholder}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full"
               />
             </div>
             <Select value={selectedCategory} onValueChange={setSelectedCategory}>
-              <SelectTrigger className="w-full sm:w-[200px]">
+              <SelectTrigger className="w-full sm:w-[200px]" aria-label={t.marketplace.categories.all}>
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
@@ -676,7 +680,7 @@ export default function MarketplacePage() {
               </SelectContent>
             </Select>
             <Select value={selectedVendor} onValueChange={setSelectedVendor}>
-              <SelectTrigger className="w-full sm:w-[200px]">
+              <SelectTrigger className="w-full sm:w-[200px]" aria-label={t.marketplace.filters.allVendors}>
                 <SelectValue placeholder={t.marketplace.filters.allVendors} />
               </SelectTrigger>
               <SelectContent>
@@ -696,9 +700,10 @@ export default function MarketplacePage() {
               <Link key={product.id} href={`/examples/marketplace/${product.id}`}>
                 <Card className="overflow-hidden hover:shadow-lg transition-shadow cursor-pointer h-full">
                   <div className="relative">
-                    <div
-                      className="h-48 bg-cover bg-center"
-                      style={{ backgroundImage: `url(${product.imageUrl})` }}
+                    <img
+                      src={product.imageUrl}
+                      alt={isRTL ? product.nameAr : product.name}
+                      className="h-48 w-full object-cover"
                     />
                     {!product.inStock && (
                       <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
@@ -713,7 +718,7 @@ export default function MarketplacePage() {
                     <div className="text-xs text-muted-foreground mb-1 flex items-center gap-1">
                       {isRTL ? product.vendor.nameAr : product.vendor.name}
                       {product.vendor.verified && (
-                        <CheckCircle className="h-3 w-3 text-primary" />
+                        <CheckCircle className="h-3 w-3 text-primary" aria-hidden="true" />
                       )}
                     </div>
                     <CardTitle className="text-base line-clamp-2">
@@ -723,7 +728,7 @@ export default function MarketplacePage() {
 
                   <CardContent>
                     <div className="flex items-center gap-1 mb-3">
-                      <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                      <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" aria-hidden="true" />
                       <span className="text-sm font-medium">
                         <ArabicNumber value={product.rating} />
                       </span>

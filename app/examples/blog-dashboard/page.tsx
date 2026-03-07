@@ -147,9 +147,9 @@ create policy "Users can manage own posts"
         <div className="flex gap-4">
           <Button size="lg" asChild>
             <Link href="/starters">
-              <FileText className="h-5 w-5 me-2" />
+              <FileText className="h-5 w-5 me-2" aria-hidden="true" />
               View All Starters
-              <ArrowSquareOut className="h-4 w-4 ms-2" />
+              <ArrowSquareOut className="h-4 w-4 ms-2" aria-hidden="true" />
             </Link>
           </Button>
           <Button size="lg" variant="outline" asChild>
@@ -159,7 +159,7 @@ create policy "Users can manage own posts"
               rel="noopener noreferrer"
             >
               View on GitHub
-              <ArrowSquareOut className="h-4 w-4 ms-2" />
+              <ArrowSquareOut className="h-4 w-4 ms-2" aria-hidden="true" />
             </a>
           </Button>
         </div>
@@ -172,7 +172,7 @@ create policy "Users can manage own posts"
           {features.map((feature, index) => (
             <Card key={index}>
               <CardHeader>
-                <feature.icon className="h-8 w-8 mb-2 text-primary" />
+                <feature.icon className="h-8 w-8 mb-2 text-primary" aria-hidden="true" />
                 <CardTitle className="text-lg">{feature.title}</CardTitle>
                 <CardDescription>{feature.description}</CardDescription>
               </CardHeader>
@@ -180,7 +180,7 @@ create policy "Users can manage own posts"
                 <ul className="space-y-2">
                   {feature.items.map((item, i) => (
                     <li key={i} className="flex items-start gap-2 text-sm">
-                      <CheckCircle className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" />
+                      <CheckCircle className="h-4 w-4 text-primary mt-0.5 flex-shrink-0" aria-hidden="true" />
                       <span>{item}</span>
                     </li>
                   ))}
@@ -214,52 +214,52 @@ create policy "Users can manage own posts"
             <div className="grid gap-6 md:grid-cols-2">
               <div>
                 <h3 className="font-semibold mb-3 flex items-center gap-2">
-                  <Database className="h-5 w-5 text-primary" />
+                  <Database className="h-5 w-5 text-primary" aria-hidden="true" />
                   Backend & Database
                 </h3>
                 <ul className="space-y-2 text-sm">
                   <li className="flex items-start gap-2">
-                    <ArrowRight className="h-4 w-4 text-primary mt-0.5 rtl:rotate-180" />
+                    <ArrowRight className="h-4 w-4 text-primary mt-0.5 rtl:rotate-180" aria-hidden="true" />
                     Complete Supabase schema (posts, profiles)
                   </li>
                   <li className="flex items-start gap-2">
-                    <ArrowRight className="h-4 w-4 text-primary mt-0.5 rtl:rotate-180" />
+                    <ArrowRight className="h-4 w-4 text-primary mt-0.5 rtl:rotate-180" aria-hidden="true" />
                     Row Level Security policies
                   </li>
                   <li className="flex items-start gap-2">
-                    <ArrowRight className="h-4 w-4 text-primary mt-0.5 rtl:rotate-180" />
+                    <ArrowRight className="h-4 w-4 text-primary mt-0.5 rtl:rotate-180" aria-hidden="true" />
                     Storage bucket configuration
                   </li>
                   <li className="flex items-start gap-2">
-                    <ArrowRight className="h-4 w-4 text-primary mt-0.5 rtl:rotate-180" />
+                    <ArrowRight className="h-4 w-4 text-primary mt-0.5 rtl:rotate-180" aria-hidden="true" />
                     TypeScript types generation
                   </li>
                 </ul>
               </div>
               <div>
                 <h3 className="font-semibold mb-3 flex items-center gap-2">
-                  <FileText className="h-5 w-5 text-primary" />
+                  <FileText className="h-5 w-5 text-primary" aria-hidden="true" />
                   Pages & Components
                 </h3>
                 <ul className="space-y-2 text-sm">
                   <li className="flex items-start gap-2">
-                    <ArrowRight className="h-4 w-4 text-primary mt-0.5 rtl:rotate-180" />
+                    <ArrowRight className="h-4 w-4 text-primary mt-0.5 rtl:rotate-180" aria-hidden="true" />
                     Login & signup pages
                   </li>
                   <li className="flex items-start gap-2">
-                    <ArrowRight className="h-4 w-4 text-primary mt-0.5 rtl:rotate-180" />
+                    <ArrowRight className="h-4 w-4 text-primary mt-0.5 rtl:rotate-180" aria-hidden="true" />
                     Dashboard with statistics
                   </li>
                   <li className="flex items-start gap-2">
-                    <ArrowRight className="h-4 w-4 text-primary mt-0.5 rtl:rotate-180" />
+                    <ArrowRight className="h-4 w-4 text-primary mt-0.5 rtl:rotate-180" aria-hidden="true" />
                     Posts list with search/filter
                   </li>
                   <li className="flex items-start gap-2">
-                    <ArrowRight className="h-4 w-4 text-primary mt-0.5 rtl:rotate-180" />
+                    <ArrowRight className="h-4 w-4 text-primary mt-0.5 rtl:rotate-180" aria-hidden="true" />
                     Create & edit post pages
                   </li>
                   <li className="flex items-start gap-2">
-                    <ArrowRight className="h-4 w-4 text-primary mt-0.5 rtl:rotate-180" />
+                    <ArrowRight className="h-4 w-4 text-primary mt-0.5 rtl:rotate-180" aria-hidden="true" />
                     All using Noor UI components
                   </li>
                 </ul>

@@ -28,6 +28,7 @@ import {
 import { useDirection } from '@/components/providers/direction-provider'
 import { DirectionToggle } from '@/components/docs/direction-toggle'
 import { content } from '@/lib/i18n'
+import { cn } from '@/lib/utils'
 
 interface Vendor {
   id: string
@@ -78,8 +79,8 @@ const getAllVendors = (): Vendor[] => {
         'Tech Hub Arabia has been serving the GCC region since 2020, specializing in premium electronics and cutting-edge technology products. We are committed to providing authentic, high-quality products with excellent customer service. Our team of experts carefully curates each product to ensure it meets the highest standards. We offer competitive prices, fast shipping, and comprehensive after-sales support.',
       fullDescriptionAr:
         'يخدم مركز التقنية العربي منطقة دول مجلس التعاون الخليجي منذ عام 2020، متخصصاً في الإلكترونيات الفاخرة ومنتجات التكنولوجيا المتطورة. نحن ملتزمون بتقديم منتجات أصلية عالية الجودة مع خدمة عملاء ممتازة. يقوم فريق الخبراء لدينا بانتقاء كل منتج بعناية لضمان أنه يلبي أعلى المعايير. نقدم أسعاراً تنافسية وشحناً سريعاً ودعماً شاملاً لما بعد البيع.',
-      logo: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=200&h=200&fit=crop',
-      banner: 'https://images.unsplash.com/photo-1498049794561-7780e7231661?w=1200&h=400&fit=crop',
+      logo: '/examples/marketplace/store-logo.jpg',
+      banner: '/examples/marketplace/tech-banner.jpg',
       rating: 4.8,
       reviewCount: 1250,
       verified: true,
@@ -105,7 +106,7 @@ const getVendorProducts = (): Product[] => {
       nameAr: 'سماعات لاسلكية بخاصية إلغاء الضوضاء',
       price: 899,
       originalPrice: 1299,
-      imageUrl: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&h=400&fit=crop',
+      imageUrl: '/examples/marketplace/headphones.jpg',
       rating: 4.7,
       reviewCount: 234,
       inStock: true,
@@ -115,7 +116,7 @@ const getVendorProducts = (): Product[] => {
       name: 'Smart Watch Series 5',
       nameAr: 'ساعة ذكية السلسلة 5',
       price: 1499,
-      imageUrl: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=400&fit=crop',
+      imageUrl: '/examples/marketplace/watch.jpg',
       rating: 4.8,
       reviewCount: 456,
       inStock: true,
@@ -125,7 +126,7 @@ const getVendorProducts = (): Product[] => {
       name: 'Wireless Earbuds Pro',
       nameAr: 'سماعات أذن لاسلكية برو',
       price: 599,
-      imageUrl: 'https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=400&h=400&fit=crop',
+      imageUrl: '/examples/marketplace/earbuds.jpg',
       rating: 4.6,
       reviewCount: 189,
       inStock: true,
@@ -135,7 +136,7 @@ const getVendorProducts = (): Product[] => {
       name: 'Portable Bluetooth Speaker',
       nameAr: 'مكبر صوت بلوتوث محمول',
       price: 350,
-      imageUrl: 'https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=400&h=400&fit=crop',
+      imageUrl: '/examples/marketplace/speaker.jpg',
       rating: 4.5,
       reviewCount: 123,
       inStock: true,
@@ -145,7 +146,7 @@ const getVendorProducts = (): Product[] => {
       name: 'Gaming Mouse RGB',
       nameAr: 'ماوس ألعاب RGB',
       price: 199,
-      imageUrl: 'https://images.unsplash.com/photo-1527814050087-3793815479db?w=400&h=400&fit=crop',
+      imageUrl: '/examples/marketplace/mouse.jpg',
       rating: 4.7,
       reviewCount: 98,
       inStock: true,
@@ -155,7 +156,7 @@ const getVendorProducts = (): Product[] => {
       name: 'Mechanical Keyboard',
       nameAr: 'لوحة مفاتيح ميكانيكية',
       price: 450,
-      imageUrl: 'https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=400&h=400&fit=crop',
+      imageUrl: '/examples/marketplace/keyboard.jpg',
       rating: 4.9,
       reviewCount: 276,
       inStock: true,
@@ -165,7 +166,7 @@ const getVendorProducts = (): Product[] => {
       name: 'USB-C Hub Adapter',
       nameAr: 'محول USB-C',
       price: 120,
-      imageUrl: 'https://images.unsplash.com/photo-1625948515291-69613efd103f?w=400&h=400&fit=crop',
+      imageUrl: '/examples/marketplace/usb-hub.jpg',
       rating: 4.4,
       reviewCount: 67,
       inStock: true,
@@ -175,7 +176,7 @@ const getVendorProducts = (): Product[] => {
       name: 'Wireless Charger Stand',
       nameAr: 'حامل شاحن لاسلكي',
       price: 150,
-      imageUrl: 'https://images.unsplash.com/photo-1591290619618-904f6dd935e3?w=400&h=400&fit=crop',
+      imageUrl: '/examples/marketplace/wireless-charger.jpg',
       rating: 4.6,
       reviewCount: 145,
       inStock: true,
@@ -216,14 +217,14 @@ export default function VendorDetailPage({ params }: { params: { id: string } })
   ]
 
   return (
-    <div className="min-h-screen bg-muted/30">
+    <div className="min-h-screen bg-background">
       {/* Header */}
       <header className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50">
         <div className="container flex h-16 items-center justify-between">
           <div className="flex items-center gap-6">
             <Link href="/" className="flex items-center gap-2">
               <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center">
-                <House className="h-5 w-5 text-primary-foreground" />
+                <House className="h-5 w-5 text-primary-foreground" aria-hidden="true" />
               </div>
               <span className="font-bold text-xl hidden sm:inline">
                 {t.marketplace.header.title}
@@ -244,7 +245,7 @@ export default function VendorDetailPage({ params }: { params: { id: string } })
       {/* Breadcrumb */}
       <div className="border-b bg-background">
         <div className="container py-3">
-          <nav aria-label="Breadcrumb">
+          <nav aria-label={isRTL ? 'مسار التنقل' : 'Breadcrumb'}>
             <div className="flex items-center justify-between gap-4">
               <ol className="flex items-center gap-2 text-sm text-muted-foreground">
                 <li>
@@ -252,20 +253,20 @@ export default function VendorDetailPage({ params }: { params: { id: string } })
                     {t.nav.home}
                   </Link>
                 </li>
-                <li>/</li>
+                <li aria-hidden="true">/</li>
                 <li>
                   <Link href="/examples" className="hover:text-foreground transition-colors">
                     {t.nav.examples}
                   </Link>
                 </li>
-                <li>/</li>
+                <li aria-hidden="true">/</li>
                 <li>
                   <Link href="/examples/marketplace" className="hover:text-foreground transition-colors">
                     {t.marketplaceVendor.breadcrumb.marketplace}
                   </Link>
                 </li>
-                <li>/</li>
-                <li className="text-foreground font-medium">
+                <li aria-hidden="true">/</li>
+                <li className="text-foreground font-medium" aria-current="page">
                   {isRTL ? vendor.nameAr : vendor.name}
                 </li>
               </ol>
@@ -278,11 +279,13 @@ export default function VendorDetailPage({ params }: { params: { id: string } })
       {/* Main Content */}
       <main className="container py-8">
         {/* Vendor Banner */}
-        <div
-          className="w-full h-48 md:h-64 rounded-2xl bg-cover bg-center mb-8"
-          style={{ backgroundImage: `url(${vendor.banner})` }}
-        >
-          <div className="h-full bg-gradient-to-t from-black/60 to-transparent rounded-2xl" />
+        <div className="w-full h-48 md:h-64 rounded-2xl mb-8 relative overflow-hidden">
+          <img
+            src={vendor.banner}
+            alt={isRTL ? 'صورة البانر' : 'Store banner'}
+            className="h-full w-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent rounded-2xl" />
         </div>
 
         <div className="grid gap-8 lg:grid-cols-3">
@@ -290,17 +293,20 @@ export default function VendorDetailPage({ params }: { params: { id: string } })
           <div className="lg:col-span-2 space-y-8">
             {/* Vendor Header */}
             <div className="flex items-start gap-6">
-              <div
-                className="h-24 w-24 rounded-full bg-cover bg-center shrink-0 border-4 border-background"
-                style={{ backgroundImage: `url(${vendor.logo})` }}
-              />
+              <div className="h-24 w-24 rounded-full shrink-0 border-4 border-background overflow-hidden">
+                <img
+                  src={vendor.logo}
+                  alt={isRTL ? vendor.nameAr : vendor.name}
+                  className="h-full w-full object-cover"
+                />
+              </div>
               <div className="flex-1">
                 <div className="flex items-center gap-2 mb-2">
                   <h1 className="text-3xl font-bold tracking-tight">
                     {isRTL ? vendor.nameAr : vendor.name}
                   </h1>
                   {vendor.verified && (
-                    <CheckCircle className="h-6 w-6 text-primary" />
+                    <CheckCircle className="h-6 w-6 text-primary" aria-hidden="true" />
                   )}
                 </div>
 
@@ -310,7 +316,7 @@ export default function VendorDetailPage({ params }: { params: { id: string } })
 
                 <div className="flex flex-wrap items-center gap-4">
                   <div className="flex items-center gap-1">
-                    <Star className="h-5 w-5 fill-yellow-400 text-yellow-400" />
+                    <Star className="h-5 w-5 fill-yellow-400 text-yellow-400" aria-hidden="true" />
                     <span className="font-medium">
                       <ArabicNumber value={vendor.rating} />
                     </span>
@@ -322,14 +328,14 @@ export default function VendorDetailPage({ params }: { params: { id: string } })
                   <Separator orientation="vertical" className="h-4" />
 
                   <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <MapPin className="h-4 w-4" />
+                    <MapPin className="h-4 w-4" aria-hidden="true" />
                     <span>{isRTL ? vendor.locationAr : vendor.location}</span>
                   </div>
 
                   <Separator orientation="vertical" className="h-4" />
 
                   <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <Calendar className="h-4 w-4" />
+                    <Calendar className="h-4 w-4" aria-hidden="true" />
                     <span>
                       {t.marketplaceVendor.since} <ArabicNumber value={vendor.joinedYear} />
                     </span>
@@ -353,7 +359,7 @@ export default function VendorDetailPage({ params }: { params: { id: string } })
                   <CardContent className="pt-6">
                     <div className="flex items-center gap-3">
                       <div className="p-2 bg-primary/10 rounded-lg">
-                        <stat.icon className="h-5 w-5 text-primary" />
+                        <stat.icon className="h-5 w-5 text-primary" aria-hidden="true" />
                       </div>
                       <div>
                         <p className="text-2xl font-bold">
@@ -393,9 +399,10 @@ export default function VendorDetailPage({ params }: { params: { id: string } })
                 {products.map((product) => (
                   <Link key={product.id} href={`/examples/marketplace/${product.id}`}>
                     <Card className="overflow-hidden hover:shadow-lg transition-shadow cursor-pointer h-full">
-                      <div
-                        className="h-48 bg-cover bg-center"
-                        style={{ backgroundImage: `url(${product.imageUrl})` }}
+                      <img
+                        src={product.imageUrl}
+                        alt={isRTL ? product.nameAr : product.name}
+                        className="h-48 w-full object-cover"
                       />
                       <CardHeader>
                         <CardTitle className="text-base line-clamp-2">
@@ -404,7 +411,7 @@ export default function VendorDetailPage({ params }: { params: { id: string } })
                       </CardHeader>
                       <CardContent>
                         <div className="flex items-center gap-1 mb-3">
-                          <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                          <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" aria-hidden="true" />
                           <span className="text-sm font-medium">
                             <ArabicNumber value={product.rating} />
                           </span>
@@ -440,15 +447,15 @@ export default function VendorDetailPage({ params }: { params: { id: string } })
               </CardHeader>
               <CardContent className="space-y-3">
                 <Button className="w-full">
-                  <ChatCircle className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
+                  <ChatCircle className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} aria-hidden="true" />
                   {t.marketplaceVendor.sendMessage}
                 </Button>
                 <Button variant="outline" className="w-full">
-                  <EnvelopeSimple className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
+                  <EnvelopeSimple className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} aria-hidden="true" />
                   {t.marketplaceVendor.email}
                 </Button>
                 <Button variant="outline" className="w-full">
-                  <Phone className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} />
+                  <Phone className={cn('h-4 w-4', isRTL ? 'ms-2' : 'me-2')} aria-hidden="true" />
                   {t.marketplaceVendor.call}
                 </Button>
               </CardContent>
@@ -461,7 +468,7 @@ export default function VendorDetailPage({ params }: { params: { id: string } })
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="flex items-start gap-3">
-                  <Truck className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                  <Truck className="h-5 w-5 text-primary shrink-0 mt-0.5" aria-hidden="true" />
                   <div>
                     <p className="font-medium text-sm">
                       {t.marketplaceVendor.shipping}
@@ -477,7 +484,7 @@ export default function VendorDetailPage({ params }: { params: { id: string } })
                 <Separator />
 
                 <div className="flex items-start gap-3">
-                  <Package className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                  <Package className="h-5 w-5 text-primary shrink-0 mt-0.5" aria-hidden="true" />
                   <div>
                     <p className="font-medium text-sm">
                       {t.marketplaceVendor.returns}
@@ -493,7 +500,7 @@ export default function VendorDetailPage({ params }: { params: { id: string } })
                 <Separator />
 
                 <div className="flex items-start gap-3">
-                  <Trophy className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                  <Trophy className="h-5 w-5 text-primary shrink-0 mt-0.5" aria-hidden="true" />
                   <div>
                     <p className="font-medium text-sm">
                       {t.marketplaceVendor.warranty}
@@ -515,15 +522,15 @@ export default function VendorDetailPage({ params }: { params: { id: string } })
               </CardHeader>
               <CardContent className="space-y-3">
                 <div className="flex items-center gap-2">
-                  <Trophy className="h-5 w-5 text-primary" />
+                  <Trophy className="h-5 w-5 text-primary" aria-hidden="true" />
                   <span className="text-sm">{t.marketplaceVendor.verifiedSeller}</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <CheckCircle className="h-5 w-5 text-primary" />
+                  <CheckCircle className="h-5 w-5 text-primary" aria-hidden="true" />
                   <span className="text-sm">{t.marketplaceVendor.topRated}</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <TrendUp className="h-5 w-5 text-primary" />
+                  <TrendUp className="h-5 w-5 text-primary" aria-hidden="true" />
                   <span className="text-sm">{t.marketplaceVendor.excellentSales}</span>
                 </div>
               </CardContent>
@@ -535,6 +542,3 @@ export default function VendorDetailPage({ params }: { params: { id: string } })
   )
 }
 
-function cn(...classes: (string | undefined | false)[]) {
-  return classes.filter(Boolean).join(' ')
-}

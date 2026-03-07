@@ -259,7 +259,7 @@ export default function ComponentsPage() {
                 <p className="text-muted-foreground">{category.description}</p>
               </div>
 
-              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              <div className="grid gap-4 grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
                 {category.components.map((component) => {
                   const Icon = component.icon
 
