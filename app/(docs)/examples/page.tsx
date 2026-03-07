@@ -28,11 +28,13 @@ import {
   GitBranch,
   TreeStructure,
   Pulse,
+  FirstAid,
   type Icon as PhosphorIcon,
 } from '@phosphor-icons/react'
 
 // Icon mapping for example cards
 const iconMap: Record<string, PhosphorIcon> = {
+  '/examples/healthcare': FirstAid,
   '/examples/gcc-dashboard': Sparkle,
   '/examples/islamic-finance-dashboard': Bank,
   '/examples/datatable-showcase': Table,

@@ -17,35 +17,40 @@ interface DesignSystemProviderProps {
   defaultTheme?: Theme
 }
 
-function DesignSystemProviderInner({ children, defaultTheme = 'minimal' }: DesignSystemProviderProps) {
+function DesignSystemProviderInner({ children, defaultTheme = 'cozy' }: DesignSystemProviderProps) {
   const searchParams = useSearchParams()
   const pathname = usePathname()
   const router = useRouter()
 
-  const [designTheme, setDesignThemeState] = React.useState<Theme>(defaultTheme)
+  // Resolve initial theme: URL param > localStorage > default
+  // This avoids a flash caused by useState(default) triggering useEffect before localStorage is read
+  const [designTheme, setDesignThemeState] = React.useState<Theme>(() => {
+    if (typeof window === 'undefined') return defaultTheme
+    const themeParam = new URLSearchParams(window.location.search).get('theme') as Theme
+    if (themeParam) return themeParam
+    try {
+      const stored = localStorage.getItem('design-theme') as Theme
+      if (stored) return stored
+    } catch (e) { /* ignore */ }
+    return defaultTheme
+  })
 
-  // Initialize from URL param or localStorage
+  // Sync when URL search params change (e.g. navigating to ?theme=minimal)
   React.useEffect(() => {
     const themeParam = searchParams.get('theme') as Theme
-    if (themeParam) {
+    if (themeParam && themeParam !== designTheme) {
       setDesignThemeState(themeParam)
       applyThemeToDocument(themeParam)
-    } else {
-      // Try to load from localStorage
-      try {
-        const stored = localStorage.getItem('design-theme') as Theme
-        if (stored) {
-          setDesignThemeState(stored)
-          applyThemeToDocument(stored)
-        }
-      } catch (e) {
-        // Ignore
-      }
     }
-  }, [searchParams])
+  }, [searchParams]) // eslint-disable-line react-hooks/exhaustive-deps
 
-  // Apply theme to document
+  // Apply theme to document only when it actually changes (not on mount — theme-init.js handles that)
+  const mounted = React.useRef(false)
   React.useEffect(() => {
+    if (!mounted.current) {
+      mounted.current = true
+      return
+    }
     applyThemeToDocument(designTheme)
   }, [designTheme])
 
