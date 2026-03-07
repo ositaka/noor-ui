@@ -117,6 +117,8 @@ ui: {
         rename: 'Rename',
         delete: 'Delete',
         today: 'Today',
+        previousMonth: 'Previous month',
+        nextMonth: 'Next month',
         events: 'Events',
         hours: 'Hours',
         minutes: 'Minutes',

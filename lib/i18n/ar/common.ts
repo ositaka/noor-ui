@@ -117,6 +117,8 @@ ui: {
         rename: 'إعادة التسمية',
         delete: 'حذف',
         today: 'اليوم',
+        previousMonth: 'الشهر السابق',
+        nextMonth: 'الشهر التالي',
         events: 'الأحداث',
         hours: 'الساعات',
         minutes: 'الدقائق',
