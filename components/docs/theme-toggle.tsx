@@ -30,13 +30,13 @@ export function ThemeToggle() {
     >
       {theme === 'light' ? (
         <>
-          <Moon className="h-4 w-4 me-2" />
-          <span className="sr-only md:not-sr-only">Dark</span>
+          <Moon className="h-4 w-4 xl:me-2" />
+          <span className="sr-only xl:not-sr-only">Dark</span>
         </>
       ) : (
         <>
-          <Sun className="h-4 w-4 me-2" />
-          <span className="sr-only md:not-sr-only">Light</span>
+          <Sun className="h-4 w-4 xl:me-2" />
+          <span className="sr-only xl:not-sr-only">Light</span>
         </>
       )}
     </Button>

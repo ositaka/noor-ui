@@ -50,7 +50,7 @@ function GlobalThemeSwitcherContent({
 
       {/* Theme Picker Panel */}
       {isOpen && (
-        <div className="fixed bottom-24 end-6 z-50 animate-in slide-in-from-bottom-2">
+        <div className="fixed bottom-24 end-6 ms-6 z-50 animate-in slide-in-from-bottom-2">
           <Card className="w-fit shadow-xl">
             <CardContent className="p-4">
               <h3 className="font-semibold mb-3 text-sm">Design Theme</h3>
@@ -67,7 +67,7 @@ function GlobalThemeSwitcherContent({
                         setIsOpen(false)
                       }}
                       className={cn(
-                        'flex items-center gap-3 p-3 rounded-lg border-2 transition-all text-start',
+                        'flex items-center gap-3 p-3 rounded-lg border-2 transition-all text-start cursor-pointer',
                         isActive
                           ? 'border-primary bg-primary/10'
                           : 'border-transparent hover:border-muted-foreground/20 hover:bg-accent'
@@ -84,7 +84,7 @@ function GlobalThemeSwitcherContent({
                       />
                       <div className="flex-1 min-w-0">
                         <div className="font-medium text-sm">{config.name}</div>
-                        <div className="text-xs text-muted-foreground truncate">
+                        <div className="text-xs text-muted-foreground text-pretty">
                           {config.description}
                         </div>
                       </div>
