@@ -328,7 +328,7 @@ export const Calendar = React.forwardRef<HTMLDivElement, CalendarProps>(
     }, [locale])
 
     return (
-      <div ref={ref} className={cn('@container w-full p-4', className)} aria-labelledby={headingId} {...props}>
+      <div ref={ref} className={cn('@container w-full min-w-[17rem] p-4', className)} aria-labelledby={headingId} {...props}>
         {/* Header — stacked at narrow, single row at ≥20rem */}
         <div className="mb-4 space-y-2 @[20rem]:space-y-0">
           <div className="text-center @[20rem]:hidden">

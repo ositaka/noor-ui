@@ -450,6 +450,7 @@ export default function AppointmentsPage() {
               </CardHeader>
               <CardContent>
                 <Calendar
+                  className="p-0"
                   mode="single"
                   selected={selectedDate}
                   onSelect={(date) => setSelectedDate(date as Date | undefined)}
