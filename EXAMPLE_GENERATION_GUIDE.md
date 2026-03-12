@@ -396,9 +396,10 @@ Each example should feel like a real product — not a demo.
 4. **Navigation works** — Link between pages, breadcrumbs, back buttons
 5. **Follow the pattern exactly** — 'use client', useDirection(), content from i18n
 6. **Responsive** — mobile-first grid with breakpoints
-7. **Download images locally** — never link to external services (Unsplash, etc.). Store in `public/examples/<example-name>/` and reference via local paths
-8. **Use semantic CSS tokens** — `text-destructive`, `text-success`, `bg-warning/10`, etc. Never hardcoded colors like `text-red-500`
-9. **Use noorui-rtl components** over native HTML inputs — e.g. DatePicker instead of `<input type="date">`
+7. **DataTable i18n** — DataTable has no built-in translations. Pass localized strings for all UI text props: `header` (in column defs), `searchPlaceholder`, `emptyMessage`, `clearSearchLabel`, `nextLabel`, `previousLabel`, `pageLabel`. Never use `headerAr` or `*Ar` suffix props (removed).
+8. **Download images locally** — never link to external services (Unsplash, etc.). Store in `public/examples/<example-name>/` and reference via local paths
+9. **Use semantic CSS tokens** — `text-destructive`, `text-success`, `bg-warning/10`, etc. Never hardcoded colors like `text-red-500`
+10. **Use noorui-rtl components** over native HTML inputs — e.g. DatePicker instead of `<input type="date">`
 
 ## Page-by-Page Process
 
