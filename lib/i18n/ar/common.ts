@@ -934,6 +934,7 @@ common: {
       description: 'جدول بيانات كامل المزايا مع الفرز والبحث والترقيم والتحميل',
       searchPlaceholder: 'البحث عن المستخدمين...',
       noUsersFound: 'لم يتم العثور على مستخدمين',
+      clearSearch: 'مسح البحث',
       previous: 'السابق',
       next: 'التالي',
       name: 'الاسم',

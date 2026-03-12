@@ -102,7 +102,7 @@ export default function DataTablePage() {
   {
     name: 'searchPlaceholder',
     type: 'string',
-    default: "'Search...'",
+    default: 'undefined',
     required: false,
     description: t.dataTableComponent.propDescriptions.dataTable.searchPlaceholder,
   },
@@ -119,6 +119,13 @@ export default function DataTablePage() {
     default: 'undefined',
     required: false,
     description: t.dataTableComponent.propDescriptions.dataTable.onSearchChange,
+  },
+  {
+    name: 'clearSearchLabel',
+    type: 'string',
+    default: 'undefined',
+    required: false,
+    description: t.dataTableComponent.propDescriptions.dataTable.clearSearchLabel,
   },
   {
     name: 'pagination',
@@ -172,7 +179,7 @@ export default function DataTablePage() {
   {
     name: 'emptyMessage',
     type: 'string',
-    default: "'No results found'",
+    default: 'undefined',
     required: false,
     description: t.dataTableComponent.propDescriptions.dataTable.emptyMessage,
   },
@@ -213,13 +220,6 @@ const columnDefProps: PropDefinition[] = [
     default: '-',
     required: true,
     description: t.dataTableComponent.propDescriptions.columnDef.header,
-  },
-  {
-    name: 'headerAr',
-    type: 'string',
-    default: 'undefined',
-    required: false,
-    description: t.dataTableComponent.propDescriptions.columnDef.headerAr,
   },
   {
     name: 'accessorKey',
@@ -383,6 +383,7 @@ const filteredUsers = users.filter(user =>
   searchPlaceholder="Search users..."
   searchValue={searchValue}
   onSearchChange={setSearchValue}
+  clearSearchLabel="Clear search"
 />`
 
 const paginatedCode = `const [currentPage, setCurrentPage] = useState(1)
@@ -797,6 +798,7 @@ const customCellCode = `const columns: ColumnDef<User>[] = [
                     searchPlaceholder={t.dataTableComponent.placeholders.searchByNameEmailRole}
                     searchValue={searchValue}
                     onSearchChange={setSearchValue}
+                    clearSearchLabel={t.dataTableComponent.messages.clearSearch}
                     emptyMessage={t.dataTableComponent.messages.noUsersFound}
                   />
                 </CardContent>
@@ -898,6 +900,7 @@ useEffect(() => {
                     searchPlaceholder={t.dataTableComponent.placeholders.searchUsers}
                     searchValue={searchValue}
                     onSearchChange={setSearchValue}
+                    clearSearchLabel={t.dataTableComponent.messages.clearSearch}
                     sortBy={sortBy}
                     sortDirection={sortDirection}
                     onSort={handleSort}

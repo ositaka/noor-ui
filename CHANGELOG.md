@@ -5,6 +5,16 @@ All notable changes to Noor UI will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Changed
+- **DataTable i18n overhaul (BREAKING)**: Removed language-specific props (`headerAr`, `searchPlaceholderAr`, `emptyMessageAr`) in favor of a language-agnostic API. Consumers now pass a single localized string per prop (e.g., `header`, `searchPlaceholder`, `emptyMessage`) resolved from their own i18n system. This makes the component usable with any language, not just English and Arabic.
+- **DataTable removed English defaults**: `searchPlaceholder`, `emptyMessage`, `nextLabel`, `previousLabel`, `pageLabel` no longer fall back to hardcoded English strings. Pass explicit values for all UI text.
+
+### Added
+- **DataTable `clearSearchLabel` prop**: Accessible label for the clear search button (`<span className="sr-only">`). Required for screen reader accessibility when search is enabled.
+- **DataTable pagination a11y**: Added `aria-live="polite" aria-atomic="true"` to the pagination label so page changes are announced to screen readers.
+
 ## [0.9.0] - 2026-03-07
 
 ### Added

@@ -6,6 +6,20 @@ and refine each example until it looks polished.
 
 ---
 
+## Guiding Principle
+
+> **Every example should feel like a real product someone would use, not a component gallery.**
+>
+> Include: login/onboarding, personalized data, contextual notifications, realistic workflows,
+> today-aware content, and meaningful interactions between pages.
+>
+> Research the **GCC-specific domain** (education, healthcare, government, banking) to include
+> authentic local details — grading systems, ID formats, calendar specifics, cultural norms.
+>
+> The goal: someone looking at the example thinks "I could ship this."
+
+---
+
 ## Quick Start
 
 ```bash
@@ -133,67 +147,37 @@ Follow the exact same patterns as the marketplace example.
 
 ---
 
-#### 2. School / Education Portal
+#### 2. School / Education Portal ✅ COMPLETED
+
+**Status:** Implemented with 8 pages (login + 7 internal pages)
 
 **Why:** Parent-facing portal — great for showcasing progress bars, grades tables, schedules.
+Authentic Saudi educational experience with Noor System (نظام نور) branding.
 
-**Page map:**
+**Page map (implemented):**
 ```
 app/examples/education/
-├── page.tsx                 ← Student dashboard: GPA, attendance, upcoming
-├── grades/page.tsx          ← Full grades table by semester
-├── schedule/page.tsx        ← Weekly class schedule grid
-├── assignments/page.tsx     ← Assignments list with status/progress
-└── assignments/[id]/page.tsx ← Assignment detail with submission
+├── page.tsx                   ← Login page with school branding + credentials
+├── dashboard/page.tsx         ← Student dashboard ("home" after login)
+├── grades/page.tsx            ← Full gradebook with Saudi grading scale
+├── schedule/page.tsx          ← Weekly timetable (Sun–Thu, 7 periods)
+├── assignments/page.tsx       ← Assignments with progress tracking
+├── assignments/[id]/page.tsx  ← Assignment detail with submission + feedback
+├── attendance/page.tsx        ← Attendance calendar with color-coded days
+└── teachers/page.tsx          ← Teachers directory with messaging
 ```
+
+**Saudi/GCC Authenticity Details:**
+- Saudi 2-semester system (1447-1448 AH / 2025-2026 AD)
+- Saudi grading scale: ممتاز (90-100), جيد جداً (80-89), جيد (70-79), مقبول (60-69)
+- Sunday–Thursday school week, 7 periods/day, 6:45 AM assembly
+- 10 subjects including AI (SDAIA initiative) and Islamic Studies
+- SAR currency for fees, 10-digit National ID format
+- Bilingual throughout with authentic Saudi teacher/student names
 
 **Components used:** Card, StatsCard, DataTable, Progress, Badge, Tabs, Calendar,
-Avatar, Breadcrumb, FileUpload, EmptyState, Alert
-
-**Sample data context:**
-- School in Riyadh, bilingual subject names (Mathematics/الرياضيات)
-- Hijri + Gregorian academic calendar
-- Grading scale: A+ to F with GPA calculation
-- Currency in SAR for fee-related items
-
-**Prompt:**
-```
-Build a School/Education Portal example for noorui-rtl.
-
-This is a parent/student portal for a school in Riyadh.
-
-Page structure:
-1. /education — Student dashboard:
-   - Student profile card: avatar, name, Grade 10, Section B
-   - Stats: GPA (3.7/4.0), Attendance (94%), Assignments Due (3), Class Rank (5th)
-   - Upcoming assignments with due dates and progress bars
-   - Recent grades summary
-   - Announcements alert panel
-
-2. /education/grades — Full gradebook:
-   - Semester selector tabs (Semester 1 / Semester 2)
-   - DataTable: Subject (bilingual), Teacher, Midterm, Final, Grade, Status badge
-   - GPA summary card at top
-
-3. /education/schedule — Weekly timetable:
-   - Grid layout: days as columns, time slots as rows
-   - Color-coded by subject
-   - Current day highlighted
-   - Teacher name and room number in each cell
-
-4. /education/assignments — All assignments:
-   - Filter tabs: All, Pending, Submitted, Graded
-   - Cards with: subject badge, title, due date, progress bar, status
-   - Click through to detail page
-
-5. /education/assignments/[id] — Assignment detail:
-   - Assignment description with rich text
-   - Attached resources (PDF icons)
-   - FileUpload for submission
-   - Submission status and teacher feedback section
-
-Bilingual subject names throughout. Hijri dates alongside Gregorian.
-```
+Avatar, Breadcrumb, ButtonArrow, Callout, Alert, Dialog, FeatureCard, Input,
+Select, Textarea, Checkbox, Label, Separator
 
 ---
 
@@ -412,9 +396,10 @@ Each example should feel like a real product — not a demo.
 4. **Navigation works** — Link between pages, breadcrumbs, back buttons
 5. **Follow the pattern exactly** — 'use client', useDirection(), content from i18n
 6. **Responsive** — mobile-first grid with breakpoints
-7. **Download images locally** — never link to external services (Unsplash, etc.). Store in `public/examples/<example-name>/` and reference via local paths
-8. **Use semantic CSS tokens** — `text-destructive`, `text-success`, `bg-warning/10`, etc. Never hardcoded colors like `text-red-500`
-9. **Use noorui-rtl components** over native HTML inputs — e.g. DatePicker instead of `<input type="date">`
+7. **DataTable i18n** — DataTable has no built-in translations. Pass localized strings for all UI text props: `header` (in column defs), `searchPlaceholder`, `emptyMessage`, `clearSearchLabel`, `nextLabel`, `previousLabel`, `pageLabel`. Never use `headerAr` or `*Ar` suffix props (removed).
+8. **Download images locally** — never link to external services (Unsplash, etc.). Store in `public/examples/<example-name>/` and reference via local paths
+9. **Use semantic CSS tokens** — `text-destructive`, `text-success`, `bg-warning/10`, etc. Never hardcoded colors like `text-red-500`
+10. **Use noorui-rtl components** over native HTML inputs — e.g. DatePicker instead of `<input type="date">`
 
 ## Page-by-Page Process
 

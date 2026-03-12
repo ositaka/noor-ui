@@ -32,6 +32,14 @@ examples: {
 
   exampleCards: [
     {
+      title: 'Education Portal',
+      description: 'Multi-page school portal with student dashboard, Saudi grading system, weekly timetable (Sun-Thu), assignment tracking, attendance calendar, and teacher directory. Authentic Saudi education experience.',
+      href: '/examples/education',
+      tags: ['Education', 'Multi-page', 'DataTable', 'Calendar', 'Saudi', 'RTL'],
+      status: 'ready',
+      featured: true,
+    },
+    {
       title: 'Healthcare Clinic',
       description: 'Multi-page clinic management system with patient directory, medical records, appointment calendar with Hijri dates, and prescription management.',
       href: '/examples/healthcare',

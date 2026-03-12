@@ -29,11 +29,13 @@ import {
   TreeStructure,
   Pulse,
   FirstAid,
+  GraduationCap,
   type Icon as PhosphorIcon,
 } from '@phosphor-icons/react'
 
 // Icon mapping for example cards
 const iconMap: Record<string, PhosphorIcon> = {
+  '/examples/education': GraduationCap,
   '/examples/healthcare': FirstAid,
   '/examples/gcc-dashboard': Sparkle,
   '/examples/islamic-finance-dashboard': Bank,

@@ -515,8 +515,8 @@ export default function CMSPage() {
                   columns={columns}
                   searchable
                   searchPlaceholder={t.ui.form.search}
-                  emptyMessage="No posts found"
-                  emptyMessageAr="لا توجد منشورات"
+                  clearSearchLabel={isRTL ? 'مسح البحث' : 'Clear search'}
+                  emptyMessage={isRTL ? 'لا توجد منشورات' : 'No posts found'}
                 />
               </CardContent>
             </Card>

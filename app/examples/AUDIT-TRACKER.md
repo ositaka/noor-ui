@@ -29,7 +29,10 @@
 - [x] ai-code-assistant (1 page) — a11y: breadcrumb fixes (localized aria-label, aria-hidden on separators, aria-current), aria-hidden on decorative icons (CodeBlockIcon ×3, Trash, Sparkle ×4, Lightbulb ×3, Bug ×3)
 - [x] ai-document-qa (1 page) — a11y: breadcrumb fixes (localized aria-label, aria-hidden on separators, aria-current), aria-hidden on decorative icons (Upload, FileText ×3, CheckCircle, BookOpen ×2, Trash, MagnifyingGlass)
 
-## Batch 6 — Remaining
+## Batch 6 — Education Portal
+- [x] education (8 pages) — a11y: aria-labels on nav, breadcrumbs, search inputs, DataTable pagination aria-live; i18n: full bilingual translation objects per page, Eastern Arabic numerals via toArabicNumerals(), formatOrdinal() for ordinals, localized times/room names/dates; images: 11 local avatars (10 teachers + 1 student); DataTable: locale-resolved headers/pagination labels/empty messages/clearSearchLabel
+
+## Batch 7 — Remaining
 - [x] ai-chat-simple (1 page) — a11y: breadcrumb fixes (localized aria-label, aria-hidden on separators, aria-current), aria-hidden on decorative icons (Sparkle ×2, Trash)
 - [x] ai-multi-agent (1 page) — a11y: breadcrumb fixes (localized aria-label, aria-hidden on separators, aria-current), aria-hidden on decorative icons (Users, Trash, ChatCentered)
 - [x] ai-workflow (1 page) — a11y: breadcrumb fixes (localized aria-label, aria-hidden on separators, aria-current), aria-hidden on decorative icons (WarningCircle ×2, Play, ArrowCounterClockwise, Sparkle, Gear); semantic colors: yellow-50/yellow-200/yellow-600/yellow-800→warning/10+warning/20+warning+warning-foreground

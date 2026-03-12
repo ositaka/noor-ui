@@ -22,7 +22,6 @@ export type SortDirection = 'asc' | 'desc' | null
 export interface ColumnDef<T> {
   id: string
   header: string
-  headerAr?: string
   accessorKey: keyof T
   cell?: (row: T) => React.ReactNode
   sortable?: boolean
@@ -48,10 +47,11 @@ export interface DataTableProps<T> {
   // Filtering
   searchable?: boolean
   searchPlaceholder?: string
-  searchPlaceholderAr?: string
   searchValue?: string
   onSearchChange?: (value: string) => void
   filterBy?: (keyof T)[]
+  /** Accessible label for the clear search button (e.g., "Clear search" / "مسح البحث") */
+  clearSearchLabel?: string
   // Pagination
   pagination?: boolean
   currentPage?: number
@@ -61,14 +61,13 @@ export interface DataTableProps<T> {
   // Pagination i18n
   nextLabel?: string
   previousLabel?: string
-  pageLabel?: string // e.g., "Page {current} of {total}"
+  pageLabel?: string
   // Mobile
   mobileView?: 'table' | 'cards'
   /** Show sort buttons on mobile cards */
   mobileSorting?: boolean
   // Empty state
   emptyMessage?: string
-  emptyMessageAr?: string
   // Styling
   className?: string
   striped?: boolean
@@ -123,22 +122,21 @@ export function DataTable<T>({
   defaultSortBy,
   defaultSortDirection = 'asc',
   searchable = false,
-  searchPlaceholder = 'Search...',
-  searchPlaceholderAr = 'بحث...',
+  searchPlaceholder,
   searchValue = '',
   onSearchChange,
+  clearSearchLabel,
   pagination = false,
   currentPage = 1,
   totalPages = 1,
   pageSize = 10,
   onPageChange,
-  nextLabel = 'Next',
-  previousLabel = 'Previous',
+  nextLabel,
+  previousLabel,
   pageLabel,
   mobileView = 'cards',
   mobileSorting = true,
-  emptyMessage = 'No results found',
-  emptyMessageAr = 'لم يتم العثور على نتائج',
+  emptyMessage,
   className,
   striped = false,
   hoverable = true,
@@ -254,7 +252,8 @@ export function DataTable<T>({
                   className="absolute top-1/2 -translate-y-1/2 end-1 h-7 w-7"
                   onClick={handleClearSearch}
                 >
-                  <X className="h-4 w-4" />
+                  <X className="h-4 w-4" aria-hidden="true" />
+                  {clearSearchLabel && <span className="sr-only">{clearSearchLabel}</span>}
                 </Button>
               )}
             </div>
@@ -263,9 +262,11 @@ export function DataTable<T>({
         <Card>
           <CardContent className="p-12 text-center">
             <div className="mx-auto max-w-sm space-y-3">
-              <div className="flex justify-center">
-                <MagnifyingGlass className="h-12 w-12 text-muted-foreground/50" />
-              </div>
+              {emptyMessage && (
+                <div className="flex justify-center">
+                  <MagnifyingGlass className="h-12 w-12 text-muted-foreground/50" />
+                </div>
+              )}
               <p className="text-lg font-medium text-muted-foreground">
                 {emptyMessage}
               </p>
@@ -299,7 +300,8 @@ export function DataTable<T>({
                 onClick={handleClearSearch}
                 disabled={isLoading}
               >
-                <X className="h-4 w-4" />
+                <X className="h-4 w-4" aria-hidden="true" />
+                {clearSearchLabel && <span className="sr-only">{clearSearchLabel}</span>}
               </Button>
             )}
           </div>
@@ -324,6 +326,13 @@ export function DataTable<T>({
                     return (
                       <TableHead
                         key={column.id}
+                        aria-sort={
+                          isSortable
+                            ? isActive && sortDirection === 'asc' ? 'ascending'
+                            : isActive && sortDirection === 'desc' ? 'descending'
+                            : 'none'
+                            : undefined
+                        }
                         className={cn(
                           compact ? 'h-10 py-2' : 'h-12',
                           column.width && `w-[${column.width}]`,
@@ -510,8 +519,8 @@ export function DataTable<T>({
             <span>{previousLabel}</span>
           </Button>
 
-          <div className="text-sm text-muted-foreground">
-            {pageLabel || `Page ${currentPage} of ${totalPages}`}
+          <div className="text-sm text-muted-foreground" aria-live="polite" aria-atomic="true">
+            {pageLabel}
           </div>
 
           <Button

@@ -87,6 +87,8 @@ const hc = {
     activePatients: 'Active Patients',
     criticalPatients: 'Critical Patients',
     newThisMonth: 'New This Month',
+    next: 'Next',
+    previous: 'Previous',
   },
   ar: {
     title: 'مركز النور الطبي',
@@ -127,6 +129,8 @@ const hc = {
     activePatients: 'المرضى النشطون',
     criticalPatients: 'المرضى الحرجون',
     newThisMonth: 'الجدد هذا الشهر',
+    next: 'التالي',
+    previous: 'السابق',
   },
 }
 
@@ -496,6 +500,9 @@ export default function PatientsPage() {
           totalPages={Math.ceil(filteredPatients.length / 10)}
           pageSize={10}
           onPageChange={setCurrentPage}
+          nextLabel={h.next}
+          previousLabel={h.previous}
+          pageLabel={isRTL ? `صفحة ${currentPage} من ${Math.ceil(filteredPatients.length / 10)}` : `Page ${currentPage} of ${Math.ceil(filteredPatients.length / 10)}`}
           className="bg-card"
         />
       </main>

@@ -497,11 +497,15 @@ export default function DataTableShowcasePage() {
               }
               searchValue={searchValue}
               onSearchChange={setSearchValue}
+              clearSearchLabel={t.datatableShowcasePage.table.clearSearch}
               pagination
               currentPage={currentPage}
               totalPages={totalPages}
               pageSize={pageSize}
               onPageChange={setCurrentPage}
+              nextLabel={t.datatableShowcasePage.table.next}
+              previousLabel={t.datatableShowcasePage.table.previous}
+              pageLabel={isRTL ? `صفحة ${currentPage} من ${totalPages}` : `Page ${currentPage} of ${totalPages}`}
               emptyMessage={t.datatableShowcasePage.table.noUsersFound}
               striped
               hoverable
