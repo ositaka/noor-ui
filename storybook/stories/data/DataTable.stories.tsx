@@ -449,6 +449,7 @@ export const SearchableTable: Story = {
             searchValue={searchValue}
             onSearchChange={setSearchValue}
             emptyMessage="No users found"
+            clearSearchLabel="Clear search"
           />
         </CardContent>
       </Card>
@@ -909,6 +910,7 @@ export const CompleteExample: Story = {
             searchPlaceholder="Search users..."
             searchValue={searchValue}
             onSearchChange={setSearchValue}
+            clearSearchLabel="Clear search"
             sortBy={sortBy}
             sortDirection={sortDirection}
             onSort={handleSort}
@@ -1087,6 +1089,7 @@ export const RTLSearchable: Story = {
             searchValue={searchValue}
             onSearchChange={setSearchValue}
             emptyMessage="لم يتم العثور على مستخدمين"
+            clearSearchLabel="مسح البحث"
           />
         </CardContent>
       </Card>
@@ -1197,6 +1200,7 @@ export const RTLCompleteExample: Story = {
             searchPlaceholder="البحث عن المستخدمين..."
             searchValue={searchValue}
             onSearchChange={setSearchValue}
+            clearSearchLabel="مسح البحث"
             enableSorting
             defaultSortBy="name"
             pagination

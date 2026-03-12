@@ -184,6 +184,7 @@ dataTableComponent: {
       },
       messages: {
         noUsersFound: 'لم يتم العثور على مستخدمين مطابقين لبحثك',
+        clearSearch: 'مسح البحث',
       },
       pagination: {
         next: 'التالي',
@@ -210,9 +211,10 @@ dataTableComponent: {
           defaultSortBy: 'العمود الافتراضي للفرز (يتطلب enableSorting)',
           defaultSortDirection: 'اتجاه الفرز الافتراضي (يتطلب enableSorting)',
           searchable: 'تفعيل حقل البحث أعلى الجدول',
-          searchPlaceholder: 'نص العنصر النائب لحقل البحث (بالإنجليزية)',
+          searchPlaceholder: 'نص العنصر النائب لحقل البحث. مرر نصاً مترجماً من نظام الترجمة',
           searchValue: 'قيمة البحث المتحكم بها',
           onSearchChange: 'دالة رد الاتصال عند تغيير قيمة البحث',
+          clearSearchLabel: 'تسمية وصول لزر مسح البحث (مثال: "Clear search" / "مسح البحث")',
           pagination: 'تفعيل عناصر التحكم في الترقيم',
           currentPage: 'رقم الصفحة الحالية',
           totalPages: 'العدد الإجمالي للصفحات',
@@ -227,8 +229,7 @@ dataTableComponent: {
         },
         columnDef: {
           id: 'معرف العمود الفريد',
-          header: 'نص رأس العمود (بالإنجليزية)',
-          headerAr: 'نص رأس العمود (بالعربية)',
+          header: 'نص رأس العمود — مرر سلسلة مترجمة من نظام الترجمة الخاص بك',
           accessorKey: 'المفتاح في كائن البيانات للوصول إلى هذا العمود',
           cell: 'دالة عرض الخلية المخصصة',
           sortable: 'تفعيل الفرز لهذا العمود',

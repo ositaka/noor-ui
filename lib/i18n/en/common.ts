@@ -934,6 +934,7 @@ common: {
       description: 'Full-featured data table with sorting, search, pagination, and loading states',
       searchPlaceholder: 'Search users...',
       noUsersFound: 'No users found',
+      clearSearch: 'Clear search',
       previous: 'Previous',
       next: 'Next',
       name: 'Name',

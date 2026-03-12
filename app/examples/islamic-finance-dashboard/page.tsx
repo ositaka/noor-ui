@@ -368,16 +368,14 @@ export default function IslamicFinanceDashboardPage() {
   const columns = React.useMemo<ColumnDef<Transaction>[]>(() => [
     {
       id: 'id',
-      header: 'ID',
-      headerAr: 'الرقم',
+      header: isRTL ? 'الرقم' : 'ID',
       accessorKey: 'id',
       sortable: true,
       width: '100px',
     },
     {
       id: 'date',
-      header: 'Date',
-      headerAr: 'التاريخ',
+      header: isRTL ? 'التاريخ' : 'Date',
       accessorKey: 'date',
       cell: (row) => (
         <div className="text-sm">
@@ -393,8 +391,7 @@ export default function IslamicFinanceDashboardPage() {
     },
     {
       id: 'type',
-      header: 'Type',
-      headerAr: 'النوع',
+      header: isRTL ? 'النوع' : 'Type',
       accessorKey: 'type',
       cell: (row) => (
         <Badge
@@ -425,8 +422,7 @@ export default function IslamicFinanceDashboardPage() {
     },
     {
       id: 'category',
-      header: 'Category',
-      headerAr: 'الفئة',
+      header: isRTL ? 'الفئة' : 'Category',
       accessorKey: 'category',
       cell: (row) => (
         <div className="text-sm">{isRTL ? row.categoryAr : row.category}</div>
@@ -435,8 +431,7 @@ export default function IslamicFinanceDashboardPage() {
     },
     {
       id: 'description',
-      header: 'Description',
-      headerAr: 'الوصف',
+      header: isRTL ? 'الوصف' : 'Description',
       accessorKey: 'description',
       cell: (row) => (
         <div className="text-sm text-muted-foreground">
@@ -446,8 +441,7 @@ export default function IslamicFinanceDashboardPage() {
     },
     {
       id: 'amount',
-      header: 'Amount',
-      headerAr: 'المبلغ',
+      header: isRTL ? 'المبلغ' : 'Amount',
       accessorKey: 'amount',
       cell: (row) => (
         <div
@@ -465,8 +459,7 @@ export default function IslamicFinanceDashboardPage() {
     },
     {
       id: 'status',
-      header: 'Status',
-      headerAr: 'الحالة',
+      header: isRTL ? 'الحالة' : 'Status',
       accessorKey: 'status',
       cell: (row) => (
         <Badge
@@ -757,8 +750,7 @@ export default function IslamicFinanceDashboardPage() {
                   data={filteredTransactions}
                   columns={columns as any}
                   searchable={true}
-                  searchPlaceholder="Search transactions..."
-                  searchPlaceholderAr="بحث في المعاملات..."
+                  searchPlaceholder={isRTL ? 'بحث في المعاملات...' : 'Search transactions...'}
                   searchValue={searchValue}
                   onSearchChange={setSearchValue}
                   sortBy={sortBy}
@@ -768,10 +760,13 @@ export default function IslamicFinanceDashboardPage() {
                   currentPage={1}
                   totalPages={Math.ceil(filteredTransactions.length / 10)}
                   pageSize={10}
+                  nextLabel={isRTL ? 'التالي' : 'Next'}
+                  previousLabel={isRTL ? 'السابق' : 'Previous'}
+                  pageLabel={isRTL ? `صفحة ١ من ${Math.ceil(filteredTransactions.length / 10)}` : `Page 1 of ${Math.ceil(filteredTransactions.length / 10)}`}
                   striped={true}
                   hoverable={true}
-                  emptyMessage="No transactions found"
-                  emptyMessageAr="لم يتم العثور على معاملات"
+                  emptyMessage={isRTL ? 'لم يتم العثور على معاملات' : 'No transactions found'}
+                  clearSearchLabel={isRTL ? 'مسح البحث' : 'Clear search'}
                 />
               </CardContent>
             </Card>

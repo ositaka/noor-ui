@@ -106,6 +106,8 @@ const hc = {
     prescriptionDetails: 'Prescription Details',
     refills: 'Refills',
     refillsRemaining: 'refills remaining',
+    next: 'Next',
+    previous: 'Previous',
   },
   ar: {
     title: 'مركز النور الطبي',
@@ -159,6 +161,8 @@ const hc = {
     prescriptionDetails: 'تفاصيل الوصفة',
     refills: 'إعادة تعبئة',
     refillsRemaining: 'إعادة تعبئة متبقية',
+    next: 'التالي',
+    previous: 'السابق',
   },
 }
 
@@ -600,6 +604,9 @@ export default function PrescriptionsPage() {
               totalPages={Math.ceil(filteredPrescriptions.length / 10)}
               pageSize={10}
               onPageChange={setCurrentPage}
+              nextLabel={h.next}
+              previousLabel={h.previous}
+              pageLabel={isRTL ? `صفحة ${currentPage} من ${Math.ceil(filteredPrescriptions.length / 10)}` : `Page ${currentPage} of ${Math.ceil(filteredPrescriptions.length / 10)}`}
               className="bg-card"
             />
           </TabsContent>
