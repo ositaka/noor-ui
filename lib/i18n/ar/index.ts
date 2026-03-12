@@ -19,6 +19,7 @@ import { components_advanced } from './components-advanced'
 import { components_misc } from './components-misc'
 import { components_gcc } from './components-gcc'
 import { components_experimental } from './components-experimental'
+import { utilities_page } from './utilities'
 
 export const ar = {
   ...common,
@@ -37,4 +38,5 @@ export const ar = {
   ...components_misc,
   ...components_gcc,
   ...components_experimental,
+  ...utilities_page,
 }

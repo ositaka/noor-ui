@@ -106,6 +106,34 @@ export const searchData: SearchItem[] = [
     category: 'Documentation',
     keywords: ['roadmap', 'plans', 'future', 'phases', 'timeline'],
   },
+  {
+    title: 'Utilities & Hooks',
+    description: 'Helper functions and hooks for RTL-first development',
+    href: '/utilities',
+    category: 'Documentation',
+    keywords: ['utilities', 'hooks', 'helpers', 'rtl', 'swipe', 'animation', 'gesture'],
+  },
+  {
+    title: 'useSwipeDirection',
+    description: 'RTL-aware swipe directions and animation values for gesture interactions',
+    href: '/utilities#use-swipe-direction',
+    category: 'Documentation',
+    keywords: ['hook', 'swipe', 'direction', 'rtl', 'gesture', 'carousel', 'touch', 'mirror'],
+  },
+  {
+    title: 'useRTLAnimation',
+    description: 'Framer Motion animation variants that auto-adjust for RTL layouts',
+    href: '/utilities#use-rtl-animation',
+    category: 'Documentation',
+    keywords: ['hook', 'animation', 'framer motion', 'rtl', 'slide', 'fade', 'carousel', 'variants'],
+  },
+  {
+    title: 'useRelativeTime',
+    description: 'Format dates as relative time strings with auto-updates and multilingual support',
+    href: '/utilities#use-relative-time',
+    category: 'Documentation',
+    keywords: ['hook', 'time', 'date', 'relative', 'ago', 'locale', 'arabic', 'format'],
+  },
 
   // Components
   {

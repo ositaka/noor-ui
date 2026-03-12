@@ -184,159 +184,369 @@ Select, Textarea, Checkbox, Label, Separator
 #### 3. Government Services Portal
 
 **Why:** Multi-step forms, document tracking, status timelines — very relevant to GCC.
+Modeled after real UAE government portals (TAMM, ICP, MOHRE). Formal, institutional,
+trustworthy — shows NoorUI works for serious, high-stakes interfaces.
 
 **Page map:**
 ```
 app/examples/government/
-├── page.tsx                 ← Services catalog + active requests
-├── services/[id]/page.tsx   ← Service detail + application form
-├── applications/page.tsx    ← My applications tracker
-├── applications/[id]/page.tsx ← Application status with timeline
-└── documents/page.tsx       ← Document vault / uploads
+├── page.tsx                    ← Login with UAE PASS / national ID authentication
+├── dashboard/page.tsx          ← Services catalog + active requests + notifications
+├── services/[id]/page.tsx      ← Service detail + multi-step application form
+├── applications/page.tsx       ← My applications tracker (DataTable)
+├── applications/[id]/page.tsx  ← Application detail with status timeline
+└── documents/page.tsx          ← Document vault / uploads
 ```
 
-**Components used:** Card, Stepper/Progress, DataTable, Badge, Input, Select,
-FileUpload, Alert, Breadcrumb, Tabs, Dialog, EmptyState, Callout
+**UAE/GCC Authenticity Details:**
+- Inspired by Abu Dhabi's TAMM platform (تم) — the unified government services portal
+- Portal name: "بوابة الخدمات الحكومية" (Government Services Gateway)
+- UAE PASS authentication (الهوية الرقمية) — the real national digital identity system
+- Emirates ID format: 784-YYYY-NNNNNNN-C (784 = UAE country code)
+- Unified Number (الرقم الموحد) for residency tracking
+- Service categories match real UAE government: Visa & Residency (تأشيرات وإقامة),
+  Business Licensing (تراخيص تجارية), Civil Affairs (الأحوال المدنية),
+  Traffic & Vehicles (المرور والمركبات), Housing (الإسكان)
+- Fee payments in AED with 5% VAT
+- Hijri dates alongside Gregorian for official documents
+- SLA timelines: "3-5 business days" for standard, "24 hours" for urgent
+- Document types: Emirates ID copy, passport, tenancy contract (عقد إيجار),
+  salary certificate, NOC letter, photos (white background 4x6cm)
+- Application statuses: مقدم (Submitted), قيد المراجعة (Under Review),
+  مطلوب مستندات إضافية (Additional Documents Required),
+  معتمد (Approved), مرفوض (Rejected), مكتمل (Completed)
+- Bilingual throughout — Arabic as primary with English labels
+
+**Components used:** Card, FeatureCard, StatsCard, Stepper, Progress, DataTable, Badge,
+Input, Select, DatePicker, FileUpload, Alert, Breadcrumb, Tabs, Dialog, EmptyState,
+Callout, Button, ButtonArrow, Checkbox, Label, Separator, Tooltip
+
+**Image strategy:** Download UAE government-style imagery locally to
+`public/examples/government/`. Needs: UAE flag/emblem-inspired icon for branding,
+abstract geometric patterns for the login page background (Islamic geometry motif).
+No photos of real government buildings needed — keep it clean and institutional.
 
 **Prompt:**
 ```
 Build a Government Services Portal example for noorui-rtl.
-
-Citizens portal for an Abu Dhabi government entity.
+Follow EXAMPLE_GENERATION_GUIDE.md for the full spec.
 
 Page structure:
-1. /government — Home:
-   - Featured services grid: Visa & Residency, Business Licensing, Civil Affairs, Traffic
-   - Each service as a FeatureCard with icon, title, description
-   - Active requests summary: 2 pending, 1 approved
-   - Important announcements in Callout components
-   - Quick search input
+1. /government — Login page:
+   - Clean institutional header with portal name + UAE-inspired emblem icon
+   - "بوابة الخدمات الحكومية" / "Government Services Gateway"
+   - Subtitle: "Abu Dhabi Digital Government"
+   - Login form: Emirates ID input (784-XXXX-XXXXXXX-X format), password
+   - "Sign in with UAE PASS" primary button (orange)
+   - Demo Credentials callout (like Education example)
+   - Footer: "Abu Dhabi Government © 2026" with Hijri year
+   - Subtle geometric pattern background (CSS, not image)
 
-2. /government/services/[id] — Service application:
-   - Service description header
-   - Multi-step form (4 steps): Personal Info → Documents → Payment → Review
-   - Progress stepper at top
-   - Form fields: Input, Select, DatePicker, FileUpload
-   - Required documents checklist
+2. /government/dashboard — Home after login:
+   - Welcome: "مرحباً، أحمد" with user's name, Emirates ID, last login
+   - Stats row: Active Requests (3), Approved (12), Pending Documents (1), Completed (28)
+   - Featured services grid (6 services as FeatureCards):
+     * Visa & Residency — تأشيرات وإقامة
+     * Business Licensing — تراخيص تجارية
+     * Civil Affairs — الأحوال المدنية
+     * Traffic & Vehicles — المرور والمركبات
+     * Housing — الإسكان
+     * Employment — العمل والتوظيف
+   - Active requests summary cards (2-3 recent with status badges)
+   - Important announcements in Callout: "Ramadan working hours: 9 AM - 2 PM"
+   - Quick actions: New Application, Track Request, Upload Document
 
-3. /government/applications — My applications:
-   - DataTable: Request #, Service Type, Submitted Date, Status badge, Actions
-   - Filter by status: All, Pending, Approved, Rejected
-   - Each row clickable to detail
+3. /government/services/[id] — Service application:
+   - Service header: icon, title, description, estimated processing time, fee
+   - Required documents checklist before starting
+   - Multi-step form (4 steps) with Stepper component:
+     Step 1: Personal Info — Full name (AR+EN), Emirates ID, DOB, nationality, phone, email
+     Step 2: Documents — FileUpload for each required doc, document type Select
+     Step 3: Payment — Fee summary, payment method select (card/bank transfer)
+     Step 4: Review — Summary of all entered data, terms checkbox, submit
+   - Sidebar: "What you'll need" card with requirements list
 
-4. /government/applications/[id] — Application detail:
-   - Status timeline/stepper: Submitted → Under Review → Approved → Completed
+4. /government/applications — My applications:
+   - DataTable: Request # (GOV-2026-XXXXX), Service Type, Submitted Date (Hijri+Gregorian),
+     Status badge (color-coded), SLA remaining, Actions
+   - Filter tabs: All, Pending, Approved, Rejected, Completed
+   - Search by request number
+   - Export button
+
+5. /government/applications/[id] — Application detail:
+   - Status timeline/stepper (vertical): Submitted → Under Review → Approved → Completed
+     with dates and officer names at each step
    - Application summary card with all submitted data
-   - Attached documents list
-   - Officer notes section
-   - Actions: Cancel, Appeal, Download Certificate
+   - Attached documents list with download links
+   - Officer notes section: "Additional document required: updated salary certificate"
+   - Actions: Cancel Application, Submit Appeal, Download Certificate
+   - SLA indicator: "Estimated completion: 2 business days remaining"
 
-5. /government/documents — Document vault:
-   - Uploaded documents grid with file type icons
-   - Upload new document dialog with FileUpload
-   - Document categories: ID, Certificates, Photos, Financial
+6. /government/documents — Document vault:
+   - Grid of uploaded documents with file type icons (PDF, JPG, DOC)
+   - Each card: document name, type badge, upload date, file size, expiry date
+   - Categories tabs: All, ID Documents, Certificates, Financial, Photos
+   - Upload new document dialog with FileUpload + document type Select
+   - Expiry warnings: Alert for documents expiring within 30 days
 
-Formal tone. Arabic as primary language with English labels.
-Use official-looking styling (minimal, clean, trustworthy).
+Navigation: shared layout with sidebar nav (Dashboard, Services, Applications, Documents).
+Formal tone. Official-looking styling — clean, minimal, trustworthy.
+Arabic as primary language throughout.
 ```
 
 ---
 
 #### 4. Hotel Booking Platform
 
+**Why:** Visually rich — image galleries, date pickers, search/filter, pricing breakdowns.
+Universally relatable UX that any hiring manager instantly understands. Heavy use of
+DatePicker, RangeSlider, and Cards. Great complement to Real Estate.
+
 **Page map:**
 ```
 app/examples/hotel/
-├── page.tsx                 ← Search + hotel listings
-├── [id]/page.tsx            ← Hotel detail + room selection
-├── booking/page.tsx         ← Booking form + payment
-└── reservations/page.tsx    ← My reservations
+├── page.tsx                 ← Landing with search + featured hotels
+├── search/page.tsx          ← Search results with filters
+├── [id]/page.tsx            ← Hotel detail + room selection + reviews
+├── booking/page.tsx         ← Multi-step booking form
+└── reservations/page.tsx    ← My reservations (login-gated feel)
 ```
+
+**GCC/Hospitality Authenticity Details:**
+- Platform name: "نزل" (Nuzul — Arabic for "lodging/accommodation")
+- Tagline: "اكتشف أفضل الفنادق في الخليج" / "Discover the finest hotels in the Gulf"
+- Hotels in real GCC cities: Dubai, Abu Dhabi, Doha, Muscat, Riyadh, Jeddah, Bahrain
+- Hotel names with Arabic character:
+  * فندق اللؤلؤة الكبير / Pearl Grand Hotel — Dubai Marina (5★)
+  * منتجع النخيل / Al Nakheel Resort — Abu Dhabi Corniche (5★)
+  * فندق الديرة بوتيك / Al Deira Boutique Hotel — Doha (4★)
+  * فندق الواحة / Al Waha Hotel — Muscat (4★)
+  * أبراج الرياض / Riyadh Towers Hotel — Riyadh (5★)
+  * فندق البحر الأحمر / Red Sea Hotel — Jeddah (4★)
+- Room types: Standard (قياسية), Deluxe (ديلوكس), Suite (جناح), Royal Suite (الجناح الملكي)
+- Prices in AED (cross-GCC booking), with SAR/QAR/OMR noted for local hotels
+- 5% UAE tourism dirham fee + 10% service charge + 5% VAT (real UAE hotel tax structure)
+- Amenities use real GCC hotel features: prayer room (مصلى), Quran in room,
+  qibla direction sticker, halal dining, separate pool hours, spa
+- Check-in/out times: 3:00 PM / 12:00 PM (standard GCC)
+- Hijri date display alongside Gregorian for booking dates
+- Guest reviews with Arabic and English names, realistic ratings
+- Cancellation policy: free cancellation 48h before (standard GCC hotel policy)
+
+**Components used:** Card, ListingCard, DatePicker, RangeSlider, Select, Input,
+Badge, Tabs, Avatar, Breadcrumb, Button, ButtonArrow, Dialog, Checkbox,
+Separator, StatsCard, Pagination, EmptyState, Stepper
+
+**Image strategy:** Download hotel/hospitality images locally to
+`public/examples/hotel/`. Needs: 6 hotel exterior/lobby photos (one per hotel),
+3-4 room type photos (standard, deluxe, suite, royal), 1-2 amenity images,
+1 hero/landing image. Source from freely licensed photography.
 
 **Prompt:**
 ```
 Build a Hotel Booking Platform example for noorui-rtl.
+Follow EXAMPLE_GENERATION_GUIDE.md for the full spec.
 
 Page structure:
-1. /hotel — Search + results:
-   - Search bar: Destination input, DatePicker check-in/out, Guests select
-   - Filter sidebar: Price RangeSlider, Star rating checkboxes, Amenities
-   - Hotel listing cards: image placeholder, name, location, star rating, price/night, "View" button
-   - Sort dropdown: Price, Rating, Distance
+1. /hotel — Landing page:
+   - Hero section: large background image with overlay text
+     "اكتشف أفضل الفنادق في الخليج" / "Discover the finest hotels in the Gulf"
+   - Prominent search bar: Destination (Input with city suggestions),
+     Check-in/Check-out (DatePicker pair), Guests (Select: 1-6), "Search" button
+   - Stats row: 200+ Hotels, 50K+ Reviews, 15 Cities, 99% Satisfaction
+   - Featured hotels section: 3 top-rated hotels as large cards with photos,
+     star rating, location, starting price, "View Details" button
+   - Popular destinations: city cards (Dubai, Doha, Riyadh, Muscat) with
+     hotel count and starting prices
+   - "Why Book With Us" section: 3 FeatureCards — Best Price Guarantee,
+     Free Cancellation, 24/7 Arabic Support
 
-2. /hotel/[id] — Hotel detail:
-   - Image gallery placeholder (grid of colored rectangles)
-   - Hotel info: name, rating, location badge, description
-   - Tabs: Rooms, Amenities, Reviews, Location
-   - Room type cards: name, bed type, capacity, price, "Book" button
-   - Guest reviews with Avatar, rating stars, comment
+2. /hotel/search — Search results:
+   - Search bar (sticky top, pre-filled from landing)
+   - Left sidebar filters:
+     * Price range: RangeSlider (100-2000 AED/night)
+     * Star rating: Checkbox group (3★, 4★, 5★)
+     * Amenities: Checkboxes (Pool, Spa, Prayer Room, Free WiFi, Parking, Gym)
+     * Property type: Select (Hotel, Resort, Boutique, Apartment)
+   - Results count: "24 hotels found in Dubai"
+   - Sort dropdown: Recommended, Price (low-high), Price (high-low), Rating, Distance
+   - Hotel listing cards (6 results): photo, name (AR+EN), star rating, location,
+     key amenities icons, price/night, "View" button
+   - Pagination at bottom
 
-3. /hotel/booking — Booking flow:
-   - Booking summary sidebar (selected room, dates, price breakdown)
-   - Guest details form: name, email, phone, special requests
-   - Payment section (card inputs)
-   - Terms checkbox and "Confirm Booking" button
+3. /hotel/[id] — Hotel detail:
+   - Image gallery: hero image + 4 thumbnail grid
+   - Hotel header: name (AR+EN), star rating, location badge, "From X AED/night"
+   - Tabs: Rooms, Amenities, Reviews, Policies
+   - Rooms tab: room type cards with photo, bed type, max guests,
+     amenities list, price/night, "Book This Room" button
+   - Amenities tab: categorized grid (General, Wellness, Dining, Business)
+   - Reviews tab: overall score (4.6/5), rating breakdown bar chart,
+     guest reviews with Avatar, name, country flag, date, rating, comment
+   - Policies tab: check-in/out, cancellation, children policy, pet policy
 
-4. /hotel/reservations — My bookings:
-   - Reservation cards: hotel name, dates, room type, status badge, confirmation #
-   - Tabs: Upcoming, Past, Cancelled
+4. /hotel/booking — Booking flow:
+   - Sticky sidebar: booking summary (hotel name, room, dates, nights, price breakdown
+     including tourism fee, service charge, VAT, total in AED)
+   - Multi-step form with Stepper (3 steps):
+     Step 1: Guest Details — name, email, phone (+971), nationality select,
+             special requests textarea, arrival time select
+     Step 2: Payment — card number, expiry, CVV, cardholder name
+             OR "Pay at Hotel" option
+     Step 3: Review & Confirm — full summary, cancellation policy note,
+             terms checkbox, "Confirm Booking" button
+   - Confirmation state: success message with booking reference (NZL-2026-XXXXX),
+     "View My Reservations" link
 
-Prices in AED. GCC hotel names (Pearl Grand Hotel, Al Nakheel Resort).
-Use cities: Dubai, Abu Dhabi, Doha, Muscat, Riyadh.
+5. /hotel/reservations — My reservations:
+   - Tabs: Upcoming (2), Past (5), Cancelled (1)
+   - Reservation cards: hotel photo, hotel name, room type, check-in/out dates,
+     number of nights, total price, status badge, confirmation number
+   - Actions per card: View Details, Cancel (for upcoming), Rebook (for past)
+   - Empty state for cancelled tab if empty
+
+Navigation via breadcrumbs. Shared header with logo "نزل" + search + "My Reservations" link.
+Warm, inviting design — slightly more visual than the institutional government example.
 ```
 
 ---
 
 #### 5. Banking / Personal Finance
 
+**Why:** Card management, transaction tables, money transfers, bill payments — every hiring
+manager at a fintech instantly connects. Heavy use of DataTable, forms, ArabicNumber,
+and interactive controls (Switch, Slider). Shows NoorUI handles data-dense financial UIs.
+
 **Page map:**
 ```
 app/examples/banking/
-├── page.tsx                 ← Account overview + recent transactions
+├── page.tsx                 ← Login with bank branding + biometric prompt
+├── dashboard/page.tsx       ← Account overview + recent transactions
 ├── transactions/page.tsx    ← Full transaction history (DataTable)
 ├── transfer/page.tsx        ← Send money form
 ├── bills/page.tsx           ← Bill payments
 └── cards/page.tsx           ← Card management
 ```
 
+**UAE Banking Authenticity Details:**
+- Bank name: "بنك النور" (Noor Bank — real name, now merged with DIB, but recognizable)
+  OR use a fictional: "بنك الخليج الرقمي" / "Gulf Digital Bank" to avoid trademark issues
+- UAE IBAN format: AE07 0331 2345 6789 0123 456 (AE + 2 check + 3 bank + 16 account)
+- Emirates ID for login (784-YYYY-NNNNNNN-C)
+- Account types: Current Account (حساب جاري), Savings Account (حساب توفير),
+  Islamic Account (حساب إسلامي) — profit rate not interest rate
+- Card types: Visa Signature (بطاقة فيزا سيجنتشر), Mastercard World (ماستركارد وورلد)
+- Real UAE merchants for transactions:
+  * Carrefour (كارفور), Lulu Hypermarket (لولو), ADNOC (أدنوك), Noon (نون),
+  * Emirates Airlines, Deliveroo, Talabat, Namshi, DEWA, Etisalat, du
+- Real UAE billers: DEWA (كهرباء ومياه دبي), Etisalat (اتصالات), du (دو),
+  Salik (سالك — road tolls), ADDC (شركة أبوظبي للتوزيع), Municipality fees
+- Transfer purposes (required by UAE Central Bank):
+  Family Support (دعم عائلي), Rent (إيجار), Salary (راتب), Personal (شخصي),
+  Business (أعمال), Education (تعليم)
+- Currency: AED (د.إ) with proper Arabic number formatting
+- 5% VAT on banking fees
+- Spending categories: Groceries (بقالة), Dining (مطاعم), Transport (مواصلات),
+  Shopping (تسوق), Bills (فواتير), Entertainment (ترفيه), Healthcare (صحة)
+- Notifications: SMS OTP for transfers, biometric for login
+- Islamic banking terminology where relevant: profit (ربح) not interest (فائدة),
+  Murabaha (مرابحة) for financing
+
+**Components used:** Card, StatsCard, DataTable, Badge, Input, Select, Switch,
+Slider, RangeSlider, Button, ButtonArrow, Dialog, Tabs, Avatar, Breadcrumb,
+Alert, Callout, Separator, Progress, ArabicNumber, Tooltip, Label, Checkbox
+
+**Image strategy:** Minimal imagery needed — banking is data-driven.
+Download to `public/examples/banking/`. Needs: bank logo/icon,
+1-2 abstract fintech-style hero images for login page,
+card brand logos (Visa, Mastercard) as simple SVG-style badges.
+CSS-styled card designs (gradient backgrounds) rather than photos.
+
 **Prompt:**
 ```
 Build a Personal Banking Dashboard example for noorui-rtl.
+Follow EXAMPLE_GENERATION_GUIDE.md for the full spec.
 
 Page structure:
-1. /banking — Overview:
-   - Account cards: Current (AED 24,500), Savings (AED 156,000) — show IBAN, card last 4
-   - Quick actions row: Transfer, Pay Bills, Card Controls, Statements
-   - Recent transactions list (last 5): merchant, category icon, amount (+/- colored)
-   - Monthly spending chart placeholder
-   - Alerts: credit card payment due, suspicious activity
+1. /banking — Login page:
+   - Bank branding header: "بنك الخليج الرقمي" / "Gulf Digital Bank"
+   - Tagline: "مصرفك الرقمي الأول" / "Your Digital-First Bank"
+   - Login form: Emirates ID input (784-XXXX-XXXXXXX-X), password
+   - "Sign in with Face ID" secondary option (icon button)
+   - Remember this device checkbox
+   - Demo Credentials callout (like Education example)
+   - Footer: "Licensed by UAE Central Bank" + "Deposits insured up to AED 500,000"
+   - Clean, modern, fintech aesthetic — dark navy/white with accent color
 
-2. /banking/transactions — Full history:
-   - DataTable: Date, Description, Category badge, Reference, Amount
-   - Filter: date range, category select, amount range
+2. /banking/dashboard — Account overview:
+   - Welcome: "صباح الخير، أحمد" with last login timestamp
+   - Account cards (2 side-by-side, styled as bank cards with gradients):
+     * Current Account: AED 24,567.89 — IBAN: AE07 0331 XXXX (masked) — Visa ****4532
+     * Savings Account: AED 156,230.00 — IBAN: AE12 0331 XXXX — Profit rate: 3.5%
+   - Quick actions row: Transfer (تحويل), Pay Bills (دفع فواتير),
+     Card Controls (بطاقات), Statements (كشف حساب)
+   - Recent transactions (last 5): merchant icon, name (AR), category badge,
+     date, amount (+green / -red) with ArabicNumber formatting
+   - Monthly spending breakdown: category list with Progress bars
+     (Groceries 35%, Dining 20%, Transport 15%, Shopping 15%, Other 15%)
+   - Alerts section: credit card payment due in 3 days, new security feature available
+
+3. /banking/transactions — Full history:
+   - DataTable: Date, Description (merchant AR+EN), Category badge,
+     Reference #, Amount (colored +/-)
+   - Filter bar: DatePicker range, Category select, Amount RangeSlider
    - Search by merchant name
-   - Export button
+   - Export CSV button
+   - Summary cards at top: Total In (+12,450 AED), Total Out (-8,320 AED),
+     Net (+4,130 AED) for selected period
+   - Pagination
 
-3. /banking/transfer — Send money:
-   - Beneficiary select (saved beneficiaries as Avatar + name cards)
-   - OR new beneficiary form (name, IBAN, bank)
-   - Amount input with ArabicNumber formatting
-   - Purpose of transfer select
-   - Review and confirm dialog
+4. /banking/transfer — Send money:
+   - Tabs: Saved Beneficiaries | New Transfer
+   - Saved beneficiaries: cards with Avatar, name, bank name, last 4 of IBAN,
+     last transfer date, "Send" button
+   - New transfer form:
+     * Beneficiary name (AR+EN), IBAN input with format validation,
+       Bank select (Emirates NBD, ADCB, FAB, DIB, Mashreq)
+     * Amount input with live ArabicNumber preview
+     * Purpose of transfer select (required by Central Bank)
+     * Notes textarea (optional)
+   - Review dialog: full summary, OTP verification prompt, "Confirm Transfer"
+   - Success state: transfer reference, "View in Transactions" link
 
-4. /banking/bills — Bill payments:
-   - Registered billers grid: DEWA, Etisalat, Du, Salik, Municipality
-   - Each with: last paid, next due, amount, "Pay" button
-   - Payment history tab
-   - Add new biller dialog
+5. /banking/bills — Bill payments:
+   - Registered billers grid (6 cards):
+     * DEWA — كهرباء ومياه دبي — Due: AED 450 — Due date: Mar 25
+     * Etisalat — اتصالات — Due: AED 320 — Due date: Mar 20
+     * du — دو — Due: AED 199 — Due date: Mar 22
+     * Salik — سالك — Balance: AED 85 — Auto-recharge: ON
+     * ADDC — شركة أبوظبي للتوزيع — Due: AED 380 — Due date: Mar 28
+     * Municipality — البلدية — Due: AED 0 — Paid
+   - Each card: biller logo area, name, account #, amount due, due date,
+     last paid date, "Pay Now" button
+   - Tabs: Active Billers | Payment History
+   - "Add New Biller" dialog with biller type select, account number input
+   - Payment history: DataTable with date, biller, amount, reference, status
 
-5. /banking/cards — Card management:
-   - Card display (styled card with last 4 digits, expiry)
-   - Card controls: freeze toggle, spending limit slider, online payments switch
-   - Recent card transactions
-   - Request new card dialog
+6. /banking/cards — Card management:
+   - Card display: CSS-styled bank card with gradient background,
+     card number (masked ****4532), cardholder name, expiry (09/28),
+     Visa/Mastercard badge, contactless icon
+   - Card controls panel:
+     * Freeze card: Switch toggle (with confirmation dialog)
+     * Online purchases: Switch toggle
+     * International transactions: Switch toggle
+     * Contactless payments: Switch toggle
+     * Daily spending limit: Slider (500-50,000 AED)
+     * ATM withdrawal limit: Slider (1,000-10,000 AED)
+   - Recent card transactions (last 10): similar to main transactions
+   - "Request New Card" dialog: card type select, delivery address, reason
+   - Card details section: credit limit, available balance, statement date,
+     minimum payment due
 
-Use AED throughout. Arabic number formatting with ArabicNumber component.
+Navigation: shared layout with sidebar nav (Dashboard, Transactions, Transfer, Bills, Cards).
+Data-dense but clean. ArabicNumber component for ALL monetary values.
+Modern fintech aesthetic.
 ```
 
 ---

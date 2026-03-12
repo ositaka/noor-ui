@@ -3,7 +3,7 @@
 import * as React from 'react'
 import Link from 'next/link'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Book, CodeBlock as CodeBlockIcon, Palette, GlobeHemisphereWest, Wheelchair, type Icon as PhosphorIcon } from '@phosphor-icons/react'
+import { Book, CodeBlock as CodeBlockIcon, Palette, GlobeHemisphereWest, Wheelchair, Wrench, type Icon as PhosphorIcon } from '@phosphor-icons/react'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 
@@ -70,6 +70,17 @@ export default function DocumentationPage() {
         { titleKey: 'wcag', href: '/documentation/wcag' },
         { titleKey: 'keyboard', href: '/documentation/keyboard' },
         { titleKey: 'screenReaders', href: '/documentation/screen-readers' },
+      ],
+    },
+    {
+      icon: Wrench,
+      id: 'development',
+      titleKey: 'development',
+      descriptionKey: 'development',
+      links: [
+        { titleKey: 'utilities', href: '/utilities' },
+        { titleKey: 'rtlGuide', href: '/rtl-guide' },
+        { titleKey: 'tokens', href: '/tokens' },
       ],
     },
   ]
