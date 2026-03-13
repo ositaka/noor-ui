@@ -302,6 +302,67 @@ export function Chart(props: ChartProps) {
     )
   }, [effectiveLocale])
 
+  // External HTML tooltip for proper RTL support (must be before early returns)
+  const externalTooltip = React.useCallback(
+    (context: { chart: { canvas: HTMLCanvasElement }; tooltip: Record<string, unknown> }) => {
+      const { chart, tooltip } = context
+      const parent = chart.canvas.parentNode as HTMLElement
+      if (!parent) return
+
+      let el = parent.querySelector<HTMLDivElement>('[data-chart-tooltip]')
+      if (!el) {
+        el = document.createElement('div')
+        el.setAttribute('data-chart-tooltip', '')
+        el.style.cssText =
+          'position:absolute;pointer-events:none;transition:opacity .15s ease;z-index:50;'
+        parent.style.position = 'relative'
+        parent.appendChild(el)
+      }
+
+      const tp = tooltip as Record<string, unknown>
+
+      if (tp.opacity === 0) {
+        el.style.opacity = '0'
+        return
+      }
+
+      const title = (tp.title as string[])?.[0] ?? ''
+      const bodyItems = tp.body as { lines: string[] }[] | undefined
+      const labelColors = tp.labelColors as { backgroundColor: string }[] | undefined
+      const dataPoints = tp.dataPoints as { dataset: { label?: string }; parsed: { y: number }; chart: { data: { datasets: unknown[] } } }[] | undefined
+      const multiSeries = (dataPoints?.length ?? 0) > 1
+
+      let rows = ''
+      dataPoints?.forEach((dp, i) => {
+        const color = labelColors?.[i]?.backgroundColor ?? '#6366f1'
+        const value = numberFormatter.format(dp.parsed.y)
+        const label = multiSeries ? dp.dataset.label ?? '' : ''
+        const dot = `<span style="width:8px;height:8px;border-radius:50%;background:${color};flex-shrink:0;"></span>`
+        const text = label ? `${label}\u2003${value}` : value
+        rows += `<div style="display:flex;align-items:center;gap:6px;">${dot}<span>${text}</span></div>`
+      })
+
+      el.innerHTML = `<div style="
+        background:${popoverBg};color:${popoverFg};
+        border:1px solid ${borderColor};border-radius:8px;
+        padding:8px 12px;font-size:13px;line-height:1.5;
+        direction:${isRTL ? 'rtl' : 'ltr'};text-align:${isRTL ? 'right' : 'left'};
+        box-shadow:0 4px 12px rgba(0,0,0,.15);white-space:nowrap;
+      ">
+        ${title ? `<div style="font-weight:600;margin-bottom:4px;">${title}</div>` : ''}
+        ${rows}
+      </div>`
+
+      const x = tp.caretX as number
+      const y = tp.caretY as number
+      el.style.opacity = '1'
+      el.style.left = x + 'px'
+      el.style.top = y + 'px'
+      el.style.transform = 'translate(-50%, calc(-100% - 8px))'
+    },
+    [isRTL, popoverBg, popoverFg, borderColor, numberFormatter],
+  )
+
   // -------------------------------------------------------------------------
   // Donut chart
   // -------------------------------------------------------------------------
@@ -444,67 +505,6 @@ export function Chart(props: ChartProps) {
       },
     },
   }
-
-  // External HTML tooltip for proper RTL support
-  const externalTooltip = React.useCallback(
-    (context: { chart: { canvas: HTMLCanvasElement }; tooltip: Record<string, unknown> }) => {
-      const { chart, tooltip } = context
-      const parent = chart.canvas.parentNode as HTMLElement
-      if (!parent) return
-
-      let el = parent.querySelector<HTMLDivElement>('[data-chart-tooltip]')
-      if (!el) {
-        el = document.createElement('div')
-        el.setAttribute('data-chart-tooltip', '')
-        el.style.cssText =
-          'position:absolute;pointer-events:none;transition:opacity .15s ease;z-index:50;'
-        parent.style.position = 'relative'
-        parent.appendChild(el)
-      }
-
-      const tp = tooltip as Record<string, unknown>
-
-      if (tp.opacity === 0) {
-        el.style.opacity = '0'
-        return
-      }
-
-      const title = (tp.title as string[])?.[0] ?? ''
-      const bodyItems = tp.body as { lines: string[] }[] | undefined
-      const labelColors = tp.labelColors as { backgroundColor: string }[] | undefined
-      const dataPoints = tp.dataPoints as { dataset: { label?: string }; parsed: { y: number }; chart: { data: { datasets: unknown[] } } }[] | undefined
-      const multiSeries = (dataPoints?.length ?? 0) > 1
-
-      let rows = ''
-      dataPoints?.forEach((dp, i) => {
-        const color = labelColors?.[i]?.backgroundColor ?? '#6366f1'
-        const value = numberFormatter.format(dp.parsed.y)
-        const label = multiSeries ? dp.dataset.label ?? '' : ''
-        const dot = `<span style="width:8px;height:8px;border-radius:50%;background:${color};flex-shrink:0;"></span>`
-        const text = label ? `${label}\u2003${value}` : value
-        rows += `<div style="display:flex;align-items:center;gap:6px;">${dot}<span>${text}</span></div>`
-      })
-
-      el.innerHTML = `<div style="
-        background:${popoverBg};color:${popoverFg};
-        border:1px solid ${borderColor};border-radius:8px;
-        padding:8px 12px;font-size:13px;line-height:1.5;
-        direction:${isRTL ? 'rtl' : 'ltr'};text-align:${isRTL ? 'right' : 'left'};
-        box-shadow:0 4px 12px rgba(0,0,0,.15);white-space:nowrap;
-      ">
-        ${title ? `<div style="font-weight:600;margin-bottom:4px;">${title}</div>` : ''}
-        ${rows}
-      </div>`
-
-      const x = tp.caretX as number
-      const y = tp.caretY as number
-      el.style.opacity = '1'
-      el.style.left = x + 'px'
-      el.style.top = y + 'px'
-      el.style.transform = 'translate(-50%, calc(-100% - 8px))'
-    },
-    [isRTL, popoverBg, popoverFg, borderColor, numberFormatter],
-  )
 
   const plugins: Record<string, unknown> = {
     tooltip: {
