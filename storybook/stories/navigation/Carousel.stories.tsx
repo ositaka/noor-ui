@@ -38,25 +38,25 @@ const featureItems: FeatureItem[] = [
     icon: Rocket,
     title: 'Lightning Fast',
     description: 'Optimized for performance with zero layout shift and instant transitions.',
-    color: 'from-blue-500 to-indigo-600',
+    color: 'bg-primary/10 text-primary',
   },
   {
     icon: Shield,
     title: 'Secure by Default',
     description: 'End-to-end encryption and role-based access control built in from day one.',
-    color: 'from-emerald-500 to-teal-600',
+    color: 'bg-success/10 text-success',
   },
   {
     icon: Globe,
     title: 'Global Reach',
     description: 'Full RTL support, Arabic numerals, and Hijri calendar out of the box.',
-    color: 'from-violet-500 to-purple-600',
+    color: 'bg-warning/10 text-warning',
   },
   {
     icon: Sparkle,
     title: 'AI-Ready',
     description: 'Streaming text, thinking indicators, and prompt components pre-built.',
-    color: 'from-amber-500 to-orange-600',
+    color: 'bg-info/10 text-info',
   },
 ];
 
@@ -103,25 +103,25 @@ const arabicFeatureItems: ArabicFeatureItem[] = [
     icon: Rocket,
     title: 'سريع للغاية',
     description: 'محسّن للأداء مع انتقالات فورية ودون أي اهتزاز في التخطيط.',
-    color: 'from-blue-500 to-indigo-600',
+    color: 'bg-primary/10 text-primary',
   },
   {
     icon: Shield,
     title: 'آمن افتراضياً',
     description: 'تشفير شامل وتحكم في الوصول القائم على الأدوار مدمج منذ البداية.',
-    color: 'from-emerald-500 to-teal-600',
+    color: 'bg-success/10 text-success',
   },
   {
     icon: Globe,
     title: 'وصول عالمي',
     description: 'دعم كامل للغة العربية والأرقام الهندية والتقويم الهجري.',
-    color: 'from-violet-500 to-purple-600',
+    color: 'bg-warning/10 text-warning',
   },
   {
     icon: Sparkle,
     title: 'جاهز للذكاء الاصطناعي',
     description: 'مكونات البث والتفكير وإدخال الأوامر جاهزة مسبقاً.',
-    color: 'from-amber-500 to-orange-600',
+    color: 'bg-info/10 text-info',
   },
 ];
 
@@ -162,12 +162,12 @@ const arabicTestimonialItems: ArabicTestimonialItem[] = [
 function renderFeatureSlide(item: FeatureItem) {
   const Icon = item.icon;
   return (
-    <div className={`bg-gradient-to-br ${item.color} rounded-lg p-8 text-white min-h-[200px] flex flex-col justify-between`}>
-      <Icon className="h-10 w-10 opacity-90" weight="duotone" />
-      <div>
-        <h3 className="text-xl font-semibold mb-1">{item.title}</h3>
-        <p className="text-sm opacity-80 leading-relaxed">{item.description}</p>
+    <div className="flex flex-col items-center justify-center p-8 min-h-[200px]">
+      <div className={`p-4 rounded-xl mb-4 ${item.color}`} aria-hidden="true">
+        <Icon className="h-8 w-8" weight="duotone" />
       </div>
+      <h3 className="text-xl font-bold mb-2">{item.title}</h3>
+      <p className="text-muted-foreground text-center max-w-md">{item.description}</p>
     </div>
   );
 }
@@ -194,12 +194,12 @@ function renderTestimonialSlide(item: TestimonialItem | ArabicTestimonialItem) {
 function renderArabicFeatureSlide(item: ArabicFeatureItem) {
   const Icon = item.icon;
   return (
-    <div className={`bg-gradient-to-bl ${item.color} rounded-lg p-8 text-white min-h-[200px] flex flex-col justify-between`}>
-      <Icon className="h-10 w-10 opacity-90" weight="duotone" />
-      <div>
-        <h3 className="text-xl font-semibold mb-1">{item.title}</h3>
-        <p className="text-sm opacity-80 leading-relaxed">{item.description}</p>
+    <div className="flex flex-col items-center justify-center p-8 min-h-[200px]">
+      <div className={`p-4 rounded-xl mb-4 ${item.color}`} aria-hidden="true">
+        <Icon className="h-8 w-8" weight="duotone" />
       </div>
+      <h3 className="text-xl font-bold mb-2">{item.title}</h3>
+      <p className="text-muted-foreground text-center max-w-md">{item.description}</p>
     </div>
   );
 }
