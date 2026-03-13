@@ -333,6 +333,7 @@ common: {
         'skeleton': 'Skeleton (الهيكل التحميلي)',
         'stepper': 'Stepper (خطوات متعددة)',
         'timeline': 'Timeline (الجدول الزمني)',
+        'carousel': 'Carousel (العرض الدوّار)',
         'user-menu': 'User Menu (قائمة المستخدم)',
 
         // GCC-Specific Components - مكونات دول الخليج

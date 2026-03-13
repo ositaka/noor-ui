@@ -455,6 +455,14 @@ export const searchData: SearchItem[] = [
   },
 
   {
+    title: 'Carousel',
+    description: 'Direction-aware swipeable content carousel with touch/mouse gestures, Framer Motion animations, keyboard navigation, and auto-play. RTL-aware.',
+    href: '/components/carousel',
+    category: 'Component',
+    keywords: ['carousel', 'slider', 'swipe', 'gallery', 'slideshow', 'image', 'touch', 'gesture', 'rtl', 'autoplay', 'dots', 'arrows'],
+  },
+
+  {
     title: 'Blockquote',
     description: 'Styled quote component with accent, subtle variants and author attribution',
     href: '/components/blockquote',

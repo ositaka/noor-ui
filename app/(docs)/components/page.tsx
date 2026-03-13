@@ -58,6 +58,7 @@ import {
   Lightbulb,
   Shield,
   HourglassHigh,
+  Slideshow,
 } from '@phosphor-icons/react'
 
 const componentCategories = (t: typeof content.en | typeof content.ar) => [
@@ -181,6 +182,7 @@ const componentCategories = (t: typeof content.en | typeof content.ar) => [
       { name: 'Notification Center', icon: Bell, href: '/components/notification-center', status: 'ready' },
       { name: 'Stepper', icon: GitBranch, href: '/components/stepper', status: 'ready' },
       { name: 'Timeline', icon: HourglassHigh, href: '/components/timeline', status: 'ready' },
+      { name: 'Carousel', icon: Slideshow, href: '/components/carousel', status: 'ready' },
       { name: 'Reaction Picker', icon: ThumbsUp, href: '/components/reaction-picker', status: 'ready' },
       { name: 'Kbd', icon: Command, href: '/components/kbd', status: 'ready' },
     ],

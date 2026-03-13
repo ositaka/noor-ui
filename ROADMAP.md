@@ -91,7 +91,7 @@ Build the **go-to design system for bilingual (LTR/RTL) web applications**, star
 - ✅ Version and release strategy established
 - ✅ Automated pre-publish checks (translations, links, types)
 
-**Current Version:** v0.9.0 (2026-03-07)
+**Current Version:** v0.10.0 (2026-03-14)
 
 **Latest Updates:**
 - ✅ Tailwind CSS v3 → v4.1 migration (CSS-first configuration)
@@ -105,13 +105,13 @@ Build the **go-to design system for bilingual (LTR/RTL) web applications**, star
 - ✅ CSS `@layer base` fix for hover utility overrides in Tailwind v4
 - ✅ Header nav progressive collapse with "More" dropdown
 - ✅ Sitemap page, XML sitemap, and Cmd+K search fully updated
-- ✅ 76+ components with complete RTL/LTR support
+- ✅ 77+ components with complete RTL/LTR support
 
 **Deliverables:**
 - ✅ Published NPM package with proper exports
 - ✅ Comprehensive installation docs
 - ✅ Quick Start guide with code examples
-- ✅ All 76+ components properly exported and typed
+- ✅ All 77+ components properly exported and typed
 
 ---
 
@@ -173,7 +173,7 @@ Build the **go-to design system for bilingual (LTR/RTL) web applications**, star
 
 ## 🚧 Current Status: READY FOR PUBLIC LAUNCH! 🚀
 
-**Package Published:** [noorui-rtl v0.9.0 on npm](https://www.npmjs.com/package/noorui-rtl)
+**Package Published:** [noorui-rtl v0.10.0 on npm](https://www.npmjs.com/package/noorui-rtl)
 
 **Technical Pre-Launch:** ✅ **COMPLETE** (2025-12-02)
 - ✅ Repository public on GitHub
@@ -206,7 +206,7 @@ Build the **go-to design system for bilingual (LTR/RTL) web applications**, star
 - ✅ **Header UX** - Removed redundant "Home" link, progressive collapse with "More" dropdown (lg→xl)
 - ✅ **Sitemap & search** - Visual sitemap page, XML sitemap, and Cmd+K search fully synced with all 69 pages
 - ✅ **Scroll offset** - `scroll-margin-top: 6rem` on anchor targets to clear fixed header
-- ✅ **NPM package updated** (noorui-rtl v0.9.0)
+- ✅ **NPM package updated** (noorui-rtl v0.10.0)
 - ✅ **76+ production-ready components**
 - ✅ **Complete documentation site** (noorui.com)
 - ✅ **Kitab Blog Starter** live at kitab.noorui.com - production example with 4 languages
@@ -307,7 +307,7 @@ Phase 4: Month 5+    ░░░░░░░░░░░░░░░░░░░�
    - Monitor npm download stats
    - Gather user feedback
    - Fix any reported issues quickly
-   - Plan v0.9.0 features based on feedback
+   - Plan v0.11.0 features based on feedback
 
 ---
 
@@ -510,7 +510,7 @@ toast({
 **Priority:** Medium-High (common pattern users expect from a UI library)
 
 **Status:** Pending
-**Target:** v0.9.0
+**Target:** v0.11.0
 
 ---
 
@@ -563,4 +563,4 @@ toast({
 **Priority:** Medium (improves component completeness)
 
 **Status:** Pending
-**Target:** v0.9.0
+**Target:** v0.11.0

@@ -5,9 +5,10 @@ All notable changes to Noor UI will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [0.10.0] - 2026-03-14
 
 ### Added
+- **Carousel component**: Direction-aware swipeable content carousel using `react-swipeable` + `framer-motion`. Generic `<T>` typing with `renderItem` pattern for content-agnostic slides. Features: auto-play with pause on hover/focus, arrow and dot navigation, swipe gestures (touch + mouse), keyboard navigation (ArrowLeft/Right, Home, End — all RTL-aware), looping toggle, `dotSize` prop (`'sm'` | `'lg'`) for WCAG 2.5.8 touch target compliance. Accessible with `role="region"`, `aria-roledescription="carousel"`, `aria-live="polite"` announcements, `role="tab"` dot indicators, `prefers-reduced-motion` support, and Eastern Arabic numerals in RTL mode.
 - **Timeline component**: Vertical event timeline with connecting lines, status-based styling (complete/current/upcoming), custom icons, date labels, and alternating layout. Supports compact mode for sidebar use, card wrapping for changelogs, and full RTL support via CSS logical properties. Accessible with `role="list"`, unique `aria-label`, and sr-only status text.
 - **Chart component**: Unified charting component with line, bar, area, and donut variants. Built on Chart.js for proper canvas rendering. Fully RTL-aware with automatic axis flipping, Arabic-Indic numeral formatting, and theme-aware colors. Includes configurable `strokeWidth`, `fontSize`, `thickness` (donut), and `direction` override prop. Accessible with visually hidden data tables, `role="img"` figure wrappers, locale-aware sr-only summaries, multi-series dash patterns (WCAG 1.4.1), and `prefers-reduced-motion` support.
 

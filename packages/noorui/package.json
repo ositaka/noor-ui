@@ -1,6 +1,6 @@
 {
   "name": "noorui-rtl",
-  "version": "0.9.0",
+  "version": "0.10.0",
   "description": "Beautiful RTL-first React components for bilingual applications. Built with Radix UI, Tailwind CSS, and full Arabic/English support.",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",

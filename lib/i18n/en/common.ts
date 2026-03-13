@@ -333,6 +333,7 @@ common: {
         'skeleton': 'Skeleton',
         'stepper': 'Stepper',
         'timeline': 'Timeline',
+        'carousel': 'Carousel',
         'user-menu': 'User Menu',
 
         // GCC-Specific Components
