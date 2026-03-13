@@ -181,25 +181,25 @@ export default function LabelPage() {
                   <p className="font-semibold">{t.labelComponent.accessibility.critical}</p>
                   <ul className="space-y-2 text-sm text-muted-foreground">
                     <li className="flex items-start gap-2">
-                      <span className="text-primary mt-1">•</span>
+                      <span className="text-primary">•</span>
                       <span>
                         <strong>{t.labelComponent.accessibility.screenReaders}</strong> {t.labelComponent.accessibility.screenReadersDesc}
                       </span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <span className="text-primary mt-1">•</span>
+                      <span className="text-primary">•</span>
                       <span>
                         <strong>{t.labelComponent.accessibility.clickTarget}</strong> {t.labelComponent.accessibility.clickTargetDesc}
                       </span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <span className="text-primary mt-1">•</span>
+                      <span className="text-primary">•</span>
                       <span>
                         <strong>{t.labelComponent.accessibility.formValidation}</strong> {t.labelComponent.accessibility.formValidationDesc}
                       </span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <span className="text-primary mt-1">•</span>
+                      <span className="text-primary">•</span>
                       <span>
                         <strong>{t.labelComponent.accessibility.wcagCompliance}</strong> {t.labelComponent.accessibility.wcagComplianceDesc}
                       </span>

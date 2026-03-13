@@ -634,19 +634,19 @@ export default function ChartPage() {
                 <h3 className="font-semibold">{t.chartComponent.rtl.features}</h3>
                 <ul className="space-y-2 text-muted-foreground">
                   <li className="flex items-start gap-2">
-                    <span className="text-primary mt-1">•</span>
+                    <span className="text-primary">•</span>
                     <span>{t.chartComponent.rtl.xAxisReversed}</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <span className="text-primary mt-1">•</span>
+                    <span className="text-primary">•</span>
                     <span>{t.chartComponent.rtl.yAxisFlipped}</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <span className="text-primary mt-1">•</span>
+                    <span className="text-primary">•</span>
                     <span>{t.chartComponent.rtl.arabicNumerals}</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <span className="text-primary mt-1">•</span>
+                    <span className="text-primary">•</span>
                     <span>{t.chartComponent.rtl.tooltipLocalized}</span>
                   </li>
                 </ul>
@@ -662,19 +662,19 @@ export default function ChartPage() {
             <CardContent className="p-6">
               <ul className="space-y-3 text-muted-foreground">
                 <li className="flex items-start gap-2">
-                  <span className="text-primary mt-1">•</span>
+                  <span className="text-primary">•</span>
                   <span><strong>{t.chartComponent.useCases.dashboards}:</strong> {t.chartComponent.useCases.dashboardsDesc}</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-primary mt-1">•</span>
+                  <span className="text-primary">•</span>
                   <span><strong>{t.chartComponent.useCases.analytics}:</strong> {t.chartComponent.useCases.analyticsDesc}</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-primary mt-1">•</span>
+                  <span className="text-primary">•</span>
                   <span><strong>{t.chartComponent.useCases.reports}:</strong> {t.chartComponent.useCases.reportsDesc}</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-primary mt-1">•</span>
+                  <span className="text-primary">•</span>
                   <span><strong>{t.chartComponent.useCases.kpi}:</strong> {t.chartComponent.useCases.kpiDesc}</span>
                 </li>
               </ul>

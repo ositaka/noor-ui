@@ -311,6 +311,7 @@ common: {
         'feature-card': 'Feature Card (بطاقة الميزة)',
         'listing-card': 'Listing Card (بطاقة القائمة)',
         'pagination': 'Pagination (ترقيم الصفحات)',
+        'chart': 'Chart (الرسم البياني)',
         'stats-card': 'Stats Card (بطاقة الإحصائيات)',
         'table': 'Table (الجدول)',
         'tabs': 'Tabs (علامات التبويب)',
@@ -331,6 +332,7 @@ common: {
         'progress': 'Progress (شريط التقدم)',
         'skeleton': 'Skeleton (الهيكل التحميلي)',
         'stepper': 'Stepper (خطوات متعددة)',
+        'timeline': 'Timeline (الجدول الزمني)',
         'user-menu': 'User Menu (قائمة المستخدم)',
 
         // GCC-Specific Components - مكونات دول الخليج

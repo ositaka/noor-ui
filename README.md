@@ -15,7 +15,7 @@ Beautiful RTL-first React components for bilingual applications. Built with Radi
 ## ✨ Features
 
 - 🌍 **RTL-First**: Perfect Arabic/Persian support with logical properties
-- 🎨 **74+ Components**: Complete UI toolkit for modern applications
+- 🎨 **76+ Components**: Complete UI toolkit for modern applications
 - ♿ **Accessible**: WCAG AA compliant with full keyboard navigation
 - 🎯 **TypeScript**: Full type safety and IntelliSense support
 - 🎭 **Themeable**: Light/dark mode with customizable design tokens
@@ -247,7 +247,7 @@ export default function App() {
 
 ## 📚 Components
 
-### Core UI (69 components)
+### Core UI (71 components)
 
 **Forms**: Button, Input, Label, Textarea, Checkbox, Radio, Select, Switch, Slider, Form
 
@@ -259,9 +259,9 @@ export default function App() {
 
 **Overlays**: Dialog, Sheet, Popover, Tooltip, Dropdown Menu, Context Menu
 
-**Data**: Table, DataTable, Stats Card, Feature Card, Empty State, Listing Card
+**Data**: Table, DataTable, Chart, Stats Card, Feature Card, Empty State, Listing Card
 
-**Advanced**: File Upload, Rich Text Editor, Date Picker, Time Picker, Number Input, Dashboard Shell, User Menu, Notification Center, Stepper
+**Advanced**: File Upload, Rich Text Editor, Date Picker, Time Picker, Number Input, Dashboard Shell, User Menu, Notification Center, Stepper, Timeline
 
 ### GCC-Specific (5 components)
 

@@ -539,37 +539,37 @@ export default function BadgePage() {
             <CardContent className="p-6">
               <ul className="space-y-3 text-muted-foreground">
                 <li className="flex items-start gap-2">
-                  <span className="text-primary mt-1">•</span>
+                  <span className="text-primary">•</span>
                   <span>
                     <strong>{t.badgeComponent.useCases.statusIndicators}:</strong> {t.badgeComponent.useCases.statusDesc}
                   </span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-primary mt-1">•</span>
+                  <span className="text-primary">•</span>
                   <span>
                     <strong>{t.badgeComponent.useCases.categories}:</strong> {t.badgeComponent.useCases.categoriesDesc}
                   </span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-primary mt-1">•</span>
+                  <span className="text-primary">•</span>
                   <span>
                     <strong>{t.badgeComponent.useCases.notificationCounts}:</strong> {t.badgeComponent.useCases.notificationCountsDesc}
                   </span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-primary mt-1">•</span>
+                  <span className="text-primary">•</span>
                   <span>
                     <strong>{t.badgeComponent.useCases.featureHighlights}:</strong> {t.badgeComponent.useCases.featureHighlightsDesc}
                   </span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-primary mt-1">•</span>
+                  <span className="text-primary">•</span>
                   <span>
                     <strong>{t.badgeComponent.useCases.versionLabels}:</strong> {t.badgeComponent.useCases.versionLabelsDesc}
                   </span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-primary mt-1">•</span>
+                  <span className="text-primary">•</span>
                   <span>
                     <strong>{t.badgeComponent.useCases.roleIndicators}:</strong> {t.badgeComponent.useCases.roleIndicatorsDesc}
                   </span>

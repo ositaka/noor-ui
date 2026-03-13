@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- **Timeline component**: Vertical event timeline with connecting lines, status-based styling (complete/current/upcoming), custom icons, date labels, and alternating layout. Supports compact mode for sidebar use, card wrapping for changelogs, and full RTL support via CSS logical properties. Accessible with `role="list"`, unique `aria-label`, and sr-only status text.
 - **Chart component**: Unified charting component with line, bar, area, and donut variants. Built on Chart.js for proper canvas rendering. Fully RTL-aware with automatic axis flipping, Arabic-Indic numeral formatting, and theme-aware colors. Includes configurable `strokeWidth`, `fontSize`, `thickness` (donut), and `direction` override prop. Accessible with visually hidden data tables, `role="img"` figure wrappers, locale-aware sr-only summaries, multi-series dash patterns (WCAG 1.4.1), and `prefers-reduced-motion` support.
 
 ### Changed

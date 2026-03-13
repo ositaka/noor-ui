@@ -13,7 +13,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     'calendar', 'date-picker', 'file-upload', 'form', 'number-input',
     'radio-group', 'range-slider', 'rich-text-editor', 'time-picker',
     // Data Display
-    'collapsible', 'data-table', 'empty-state', 'feature-card', 'listing-card',
+    'chart', 'collapsible', 'data-table', 'empty-state', 'feature-card', 'listing-card',
     'pagination', 'stats-card', 'table', 'tabs',
     // Overlay & Popups
     'command', 'context-menu', 'dialog', 'dropdown-menu', 'popover',
@@ -22,7 +22,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     'callout', 'content-renderer', 'pull-quote',
     // Advanced Components
     'dashboard-shell', 'notification-center', 'progress', 'reaction-picker',
-    'skeleton', 'stepper', 'user-badge', 'user-menu',
+    'skeleton', 'stepper', 'timeline', 'user-badge', 'user-menu',
     // GCC-Specific
     'arabic-number', 'hijri-date', 'prayer-times', 'zakat-calculator',
     // Experimental (AI/LLM)
@@ -42,7 +42,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const examples = [
     'gcc-dashboard', 'islamic-finance-dashboard', 'calendar', 'datatable-showcase',
     'registration', 'dashboard', 'ecommerce', 'cms',
-    'marketplace', 'b2b-marketplace', 'portfolio', 'real-estate',
+    'marketplace', 'b2b-marketplace', 'portfolio', 'real-estate', 'healthcare', 'education',
     'blog-dashboard', 'workflow-basic', 'accessible-inputs',
     'ai-chat-simple', 'ai-playground', 'ai-code-assistant', 'ai-document-qa',
     'ai-multi-agent', 'ai-workflow', 'ai-agent-evals',

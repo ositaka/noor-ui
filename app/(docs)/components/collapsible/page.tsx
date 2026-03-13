@@ -191,19 +191,19 @@ export default function CollapsiblePage() {
               </p>
               <ul className="space-y-2 text-muted-foreground">
                 <li className="flex items-start gap-2">
-                  <span className="text-primary mt-1">•</span>
+                  <span className="text-primary">•</span>
                   <span>
                     <code className="bg-muted px-1 rounded">Collapsible</code> - {collapsibleT.composition.collapsible}
                   </span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-primary mt-1">•</span>
+                  <span className="text-primary">•</span>
                   <span>
                     <code className="bg-muted px-1 rounded">CollapsibleTrigger</code> - {collapsibleT.composition.trigger}
                   </span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-primary mt-1">•</span>
+                  <span className="text-primary">•</span>
                   <span>
                     <code className="bg-muted px-1 rounded">CollapsibleContent</code> - {collapsibleT.composition.content}
                   </span>

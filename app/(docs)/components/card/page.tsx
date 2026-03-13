@@ -272,37 +272,37 @@ export default function CardPage() {
               </p>
               <ul className="space-y-2 text-muted-foreground">
                 <li className="flex items-start gap-2">
-                  <span className="text-primary mt-1">•</span>
+                  <span className="text-primary">•</span>
                   <span>
                     <code className="bg-muted px-1 rounded">Card</code> - {t.cardComponent.composition.card}
                   </span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-primary mt-1">•</span>
+                  <span className="text-primary">•</span>
                   <span>
                     <code className="bg-muted px-1 rounded">CardHeader</code> - {t.cardComponent.composition.header}
                   </span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-primary mt-1">•</span>
+                  <span className="text-primary">•</span>
                   <span>
                     <code className="bg-muted px-1 rounded">CardTitle</code> - {t.cardComponent.composition.title}
                   </span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-primary mt-1">•</span>
+                  <span className="text-primary">•</span>
                   <span>
                     <code className="bg-muted px-1 rounded">CardDescription</code> - {t.cardComponent.composition.description}
                   </span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-primary mt-1">•</span>
+                  <span className="text-primary">•</span>
                   <span>
                     <code className="bg-muted px-1 rounded">CardContent</code> - {t.cardComponent.composition.content}
                   </span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-primary mt-1">•</span>
+                  <span className="text-primary">•</span>
                   <span>
                     <code className="bg-muted px-1 rounded">CardFooter</code> - {t.cardComponent.composition.footer}
                   </span>

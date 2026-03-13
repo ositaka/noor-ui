@@ -188,6 +188,8 @@ export {
 export { Tabs, TabsList, TabsTrigger, TabsContent } from './ui/tabs'
 export { Textarea } from './ui/textarea'
 export { ThinkingIndicator } from './ui/thinking-indicator'
+export { Timeline } from './ui/timeline'
+export type { TimelineProps, TimelineItem } from './ui/timeline'
 export { TimePicker } from './ui/time-picker'
 export {
   Toast,
