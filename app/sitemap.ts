@@ -22,7 +22,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     'callout', 'content-renderer', 'pull-quote',
     // Advanced Components
     'dashboard-shell', 'notification-center', 'progress', 'reaction-picker',
-    'skeleton', 'stepper', 'timeline', 'user-badge', 'user-menu',
+    'carousel', 'skeleton', 'stepper', 'timeline', 'user-badge', 'user-menu',
     // GCC-Specific
     'arabic-number', 'hijri-date', 'prayer-times', 'zakat-calculator',
     // Experimental (AI/LLM)

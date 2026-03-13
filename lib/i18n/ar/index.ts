@@ -22,6 +22,7 @@ import { components_experimental } from './components-experimental'
 import { utilities_page } from './utilities'
 import { components_chart } from './components-chart'
 import { components_timeline } from './components-timeline'
+import { components_carousel } from './components-carousel'
 
 export const ar = {
   ...common,
@@ -43,4 +44,5 @@ export const ar = {
   ...utilities_page,
   ...components_chart,
   ...components_timeline,
+  ...components_carousel,
 }

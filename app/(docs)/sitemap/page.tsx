@@ -35,8 +35,8 @@ export default function SitemapPage() {
       'callout', 'content-renderer', 'pull-quote'
     ],
     advanced: [
-      'dashboard-shell', 'notification-center', 'progress',
-      'reaction-picker', 'skeleton', 'stepper', 'user-badge', 'user-menu'
+      'carousel', 'dashboard-shell', 'notification-center', 'progress',
+      'reaction-picker', 'skeleton', 'stepper', 'timeline', 'user-badge', 'user-menu'
     ],
     gcc: [
       'arabic-number', 'hijri-date', 'prayer-times', 'zakat-calculator'
