@@ -9,14 +9,15 @@ import { Timeline, type TimelineItem } from '@/components/ui/timeline'
 import { ComponentShowcase } from '@/components/docs/component-showcase'
 import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
-import { Clock, CheckCircle, Seal, Package, Truck, MapPin, HourglassHigh, UserCircle, GearSix, ShieldCheck } from '@phosphor-icons/react'
+import { Clock, CheckCircle, Seal, Package, Truck, MapPin, HourglassHigh, UserCircle, GearSix, ShieldCheck, ChatCircle, Envelope, Star, Rocket, Flag, Bug, Code, GitBranch, Tag, Sparkle, Wrench } from '@phosphor-icons/react'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 
 // ---------------------------------------------------------------------------
-// Sample data
+// Sample data — each example shows a different real-world use case
 // ---------------------------------------------------------------------------
 
+// Preview & Basic: Application process tracking
 const applicationSteps: TimelineItem[] = [
   {
     icon: <CheckCircle className="h-5 w-5" weight="fill" />,
@@ -51,20 +52,165 @@ const applicationSteps: TimelineItem[] = [
   {
     icon: <Seal className="h-5 w-5" />,
     title: 'Approved',
-    titleAr: 'الموافقة',
+    titleAr: 'تمت الموافقة',
     description: 'Final approval pending',
     descriptionAr: 'في انتظار الموافقة النهائية',
     status: 'upcoming',
   },
 ]
 
+// Activity log: uses photo avatars + initials mix
+function PhotoAvatar({ src, alt }: { src: string; alt: string }) {
+  return (
+    <img src={src} alt={alt} className="h-full w-full rounded-full object-cover" />
+  )
+}
+
+function InitialsAvatar({ initials, color }: { initials: string; color: string }) {
+  return (
+    <span className={`flex h-full w-full items-center justify-center rounded-full text-xs font-bold text-white ${color}`}>
+      {initials}
+    </span>
+  )
+}
+
+const activityLog: TimelineItem[] = [
+  {
+    icon: <PhotoAvatar src="/examples/healthcare/avatars/sarah.jpg" alt="Sara" />,
+    title: 'Sara commented on your pull request',
+    titleAr: 'سارة علّقت على طلب الدمج الخاص بك',
+    description: '"Looks good! Just one question about the error handling..."',
+    descriptionAr: '"يبدو جيداً! لدي سؤال واحد فقط حول معالجة الأخطاء..."',
+    date: '2 min ago',
+    dateAr: 'منذ دقيقتين',
+    status: 'current',
+  },
+  {
+    icon: <PhotoAvatar src="/examples/healthcare/avatars/ahmed.jpg" alt="Ahmed" />,
+    title: 'Ahmed merged branch feature/auth',
+    titleAr: 'أحمد دمج فرع feature/auth',
+    description: 'Pull request #47 was merged into main',
+    descriptionAr: 'تم دمج طلب الدمج رقم #٤٧ في الفرع الرئيسي',
+    date: '1 hour ago',
+    dateAr: 'منذ ساعة',
+    status: 'complete',
+  },
+  {
+    icon: <InitialsAvatar initials="LM" color="bg-emerald-800" />,
+    title: 'Layla assigned you to issue #52',
+    titleAr: 'ليلى أسندت إليك المشكلة رقم #٥٢',
+    description: 'Fix pagination on the dashboard table',
+    descriptionAr: 'إصلاح ترقيم الصفحات في جدول لوحة التحكم',
+    date: '3 hours ago',
+    dateAr: 'منذ ٣ ساعات',
+    status: 'complete',
+  },
+  {
+    icon: <PhotoAvatar src="/examples/healthcare/avatars/omar.jpg" alt="Omar" />,
+    title: 'Omar deployed v2.4.1 to production',
+    titleAr: 'عمر نشر الإصدار v2.4.1 إلى الإنتاج',
+    date: 'Yesterday',
+    dateAr: 'أمس',
+    status: 'complete',
+  },
+]
+
+// Detailed: Support ticket history with rich content
+const supportTicket: TimelineItem[] = [
+  {
+    icon: <PhotoAvatar src="/examples/healthcare/avatars/fatima.jpg" alt="Fatima" />,
+    title: 'Ticket opened by Fatima Al-Hassan',
+    titleAr: 'تم فتح التذكرة بواسطة فاطمة الحسن',
+    description: 'Unable to export reports in PDF format. The download starts but fails at 90% with a timeout error. Affects all report types on the dashboard. Browser: Chrome 120, OS: macOS Sonoma.',
+    descriptionAr: 'غير قادرة على تصدير التقارير بصيغة PDF. يبدأ التنزيل لكنه يفشل عند ٩٠٪ بخطأ انتهاء المهلة. يؤثر على جميع أنواع التقارير في لوحة التحكم. المتصفح: Chrome 120، النظام: macOS Sonoma.',
+    date: 'Mar 10, 09:15 AM',
+    dateAr: '١٠ مارس، ٠٩:١٥ ص',
+    status: 'complete',
+  },
+  {
+    icon: <PhotoAvatar src="/examples/healthcare/avatars/khalid.jpg" alt="Khalid" />,
+    title: 'Assigned to Khalid — Priority: High',
+    titleAr: 'تم التعيين لخالد — الأولوية: عالية',
+    description: 'Investigating the PDF export service. Initial analysis shows the report generation exceeds the 30s timeout limit for large datasets. Checking server logs for the specific failure point.',
+    descriptionAr: 'جاري التحقيق في خدمة تصدير PDF. التحليل الأولي يُظهر أن إنشاء التقرير يتجاوز حد المهلة ٣٠ ثانية للبيانات الكبيرة. فحص سجلات الخادم لتحديد نقطة الفشل.',
+    date: 'Mar 10, 11:30 AM',
+    dateAr: '١٠ مارس، ١١:٣٠ ص',
+    status: 'complete',
+  },
+  {
+    icon: <InitialsAvatar initials="KR" color="bg-violet-800" />,
+    title: 'Fix deployed — PR #389 merged',
+    titleAr: 'تم نشر الإصلاح — طلب الدمج #٣٨٩',
+    description: 'Increased timeout to 120s and added chunked processing for reports with 10k+ rows. Also added a progress indicator so users can see export status in real-time.',
+    descriptionAr: 'تم زيادة المهلة إلى ١٢٠ ثانية وإضافة معالجة مجزأة للتقارير التي تتجاوز ١٠ آلاف صف. كذلك تمت إضافة مؤشر تقدم ليتمكن المستخدمون من متابعة حالة التصدير.',
+    date: 'Mar 11, 03:45 PM',
+    dateAr: '١١ مارس، ٠٣:٤٥ م',
+    status: 'complete',
+  },
+  {
+    icon: <PhotoAvatar src="/examples/healthcare/avatars/fatima.jpg" alt="Fatima" />,
+    title: 'Confirmed fixed by Fatima',
+    titleAr: 'تم تأكيد الإصلاح بواسطة فاطمة',
+    description: 'Tested with our largest report (15k rows) — exports in ~8 seconds now. The progress bar is a nice touch. Closing this ticket. Thank you!',
+    descriptionAr: 'تم الاختبار مع أكبر تقرير لدينا (١٥ ألف صف) — يتم التصدير في حوالي ٨ ثوانٍ الآن. شريط التقدم إضافة رائعة. إغلاق التذكرة. شكراً!',
+    date: 'Mar 12, 10:00 AM',
+    dateAr: '١٢ مارس، ١٠:٠٠ ص',
+    status: 'current',
+  },
+]
+
+// Project milestones: alternating layout with dates
+const projectMilestones: TimelineItem[] = [
+  {
+    icon: <Flag className="h-5 w-5" weight="fill" />,
+    title: 'Project Kickoff',
+    titleAr: 'انطلاق المشروع',
+    description: 'Requirements gathered, team assembled, and sprint planning completed',
+    descriptionAr: 'تم جمع المتطلبات وتشكيل الفريق واستكمال تخطيط السبرنت',
+    date: 'Jan 15, 2026',
+    dateAr: '١٥ يناير ٢٠٢٦',
+    status: 'complete',
+  },
+  {
+    icon: <Code className="h-5 w-5" weight="bold" />,
+    title: 'Alpha Release',
+    titleAr: 'إصدار ألفا',
+    description: 'Core features implemented and internal testing started',
+    descriptionAr: 'تم تنفيذ الميزات الأساسية وبدأ الاختبار الداخلي',
+    date: 'Feb 28, 2026',
+    dateAr: '٢٨ فبراير ٢٠٢٦',
+    status: 'complete',
+  },
+  {
+    icon: <Bug className="h-5 w-5" weight="fill" />,
+    title: 'Beta Testing',
+    titleAr: 'اختبار بيتا',
+    description: 'Public beta with 500 users, collecting feedback and fixing issues',
+    descriptionAr: 'بيتا عامة مع ٥٠٠ مستخدم، جمع الملاحظات وإصلاح المشكلات',
+    date: 'Mar 13, 2026',
+    dateAr: '١٣ مارس ٢٠٢٦',
+    status: 'current',
+  },
+  {
+    icon: <Rocket className="h-5 w-5" />,
+    title: 'Public Launch',
+    titleAr: 'الإطلاق العام',
+    description: 'Production release with marketing campaign',
+    descriptionAr: 'إصدار الإنتاج مع حملة تسويقية',
+    date: 'Apr 15, 2026',
+    dateAr: '١٥ أبريل ٢٠٢٦',
+    status: 'upcoming',
+  },
+]
+
+// Compact: Order tracking in sidebar
 const orderTracking: TimelineItem[] = [
   {
     icon: <Package className="h-3.5 w-3.5" weight="fill" />,
     title: 'Order Placed',
     titleAr: 'تم تأكيد الطلب',
-    description: 'Your order #1234 has been confirmed',
-    descriptionAr: 'تم تأكيد طلبك رقم #١٢٣٤',
+    description: 'Order #1234 confirmed',
+    descriptionAr: 'تم تأكيد الطلب رقم #١٢٣٤',
     status: 'complete',
   },
   {
@@ -90,32 +236,47 @@ const orderTracking: TimelineItem[] = [
   },
 ]
 
-const accountSetup: TimelineItem[] = [
+// Changelog: cards variant for release notes
+const changelog: TimelineItem[] = [
   {
-    icon: <UserCircle className="h-5 w-5" weight="fill" />,
-    title: 'Account Created',
-    titleAr: 'تم إنشاء الحساب',
-    description: 'Your account was successfully created',
-    descriptionAr: 'تم إنشاء حسابك بنجاح',
-    date: 'Mar 8, 2026',
-    dateAr: '٨ مارس ٢٠٢٦',
-    status: 'complete',
-  },
-  {
-    icon: <GearSix className="h-5 w-5" weight="fill" />,
-    title: 'Profile Setup',
-    titleAr: 'إعداد الملف الشخصي',
-    description: 'Complete your profile information',
-    descriptionAr: 'أكمل معلومات ملفك الشخصي',
+    icon: <Sparkle className="h-5 w-5" weight="fill" />,
+    title: 'v2.5.0 — Dashboard Redesign',
+    titleAr: 'v2.5.0 — إعادة تصميم لوحة التحكم',
+    description: 'New analytics dashboard with real-time charts, customizable widgets, and dark mode support. Performance improved by 40% with virtualized lists.',
+    descriptionAr: 'لوحة تحليلات جديدة مع رسوم بيانية فورية وعناصر قابلة للتخصيص ودعم الوضع الداكن. تحسين الأداء بنسبة ٤٠٪ مع القوائم الافتراضية.',
+    date: 'Mar 12, 2026',
+    dateAr: '١٢ مارس ٢٠٢٦',
     status: 'current',
   },
   {
-    icon: <ShieldCheck className="h-5 w-5" />,
-    title: 'Verification',
-    titleAr: 'التحقق',
-    description: 'Verify your identity',
-    descriptionAr: 'تحقق من هويتك',
-    status: 'upcoming',
+    icon: <Wrench className="h-5 w-5" weight="fill" />,
+    title: 'v2.4.2 — Bug Fixes',
+    titleAr: 'v2.4.2 — إصلاح الأخطاء',
+    description: 'Fixed PDF export timeout for large datasets. Resolved calendar date picker not respecting RTL layout in Safari.',
+    descriptionAr: 'إصلاح انتهاء مهلة تصدير PDF للبيانات الكبيرة. حل مشكلة منتقي التاريخ في التقويم الذي لا يحترم تخطيط RTL في Safari.',
+    date: 'Mar 5, 2026',
+    dateAr: '٥ مارس ٢٠٢٦',
+    status: 'complete',
+  },
+  {
+    icon: <Tag className="h-5 w-5" weight="fill" />,
+    title: 'v2.4.0 — Timeline Component',
+    titleAr: 'v2.4.0 — مكوّن الجدول الزمني',
+    description: 'Introduced the Timeline component with default and alternating layouts, compact mode, card wrapping, and full RTL support.',
+    descriptionAr: 'إضافة مكوّن الجدول الزمني مع تخطيط افتراضي ومتناوب ووضع مضغوط ودعم البطاقات ودعم كامل لـ RTL.',
+    date: 'Feb 20, 2026',
+    dateAr: '٢٠ فبراير ٢٠٢٦',
+    status: 'complete',
+  },
+  {
+    icon: <Rocket className="h-5 w-5" weight="fill" />,
+    title: 'v2.3.0 — Initial Release',
+    titleAr: 'v2.3.0 — الإصدار الأول',
+    description: 'First public release with 25 components, 5 themes, and bilingual support for English and Arabic.',
+    descriptionAr: 'أول إصدار عام مع ٢٥ مكوّناً و٥ سمات ودعم ثنائي اللغة للإنجليزية والعربية.',
+    date: 'Jan 10, 2026',
+    dateAr: '١٠ يناير ٢٠٢٦',
+    status: 'complete',
   },
 ]
 
@@ -144,7 +305,7 @@ const rtlApplicationSteps: TimelineItem[] = [
   },
   {
     icon: <Seal className="h-5 w-5" />,
-    title: 'الموافقة',
+    title: 'تمت الموافقة',
     description: 'في انتظار الموافقة النهائية',
     status: 'upcoming',
   },
@@ -172,6 +333,12 @@ const getTimelineProps = (t: typeof content.en | typeof content.ar): PropDefinit
     type: 'boolean',
     default: 'false',
     description: t.timelineComponent.props.compact,
+  },
+  {
+    name: 'cards',
+    type: 'boolean',
+    default: 'false',
+    description: t.timelineComponent.props.cards,
   },
   {
     name: 'className',
@@ -268,30 +435,79 @@ const compactCode = `<Timeline
   compact
 />`
 
-const customIconsCode = `import { UserCircle, GearSix, ShieldCheck } from '@phosphor-icons/react'
-
+const activityLogCode = `// The icon slot accepts any React node — photos or initials!
 const items = [
   {
-    icon: <UserCircle className="h-5 w-5" weight="fill" />,
-    title: "Account Created",
-    description: "Your account was successfully created",
-    status: "complete",
-  },
-  {
-    icon: <GearSix className="h-5 w-5" weight="fill" />,
-    title: "Profile Setup",
-    description: "Complete your profile information",
+    icon: <img src="/avatar.jpg" alt="Sara"
+      className="h-full w-full rounded-full object-cover" />,
+    title: "Sara commented on your pull request",
+    description: '"Looks good! Just one question about..."',
+    date: "2 min ago",
     status: "current",
   },
   {
-    icon: <ShieldCheck className="h-5 w-5" />,
-    title: "Verification",
-    description: "Verify your identity",
-    status: "upcoming",
+    icon: (
+      <span className="flex h-full w-full items-center justify-center
+        rounded-full text-xs font-bold text-white bg-emerald-600">
+        LM
+      </span>
+    ),
+    title: "Layla assigned you to issue #52",
+    date: "3 hours ago",
+    status: "complete",
   },
 ]
 
 <Timeline items={items} />`
+
+const detailedCode = `// Rich content in description — great for ticket histories
+const ticket = [
+  {
+    icon: <img src="/avatar.jpg" alt="Fatima"
+      className="h-full w-full rounded-full object-cover" />,
+    title: "Ticket opened by Fatima Al-Hassan",
+    description: "Unable to export reports in PDF format. The download "
+      + "starts but fails at 90% with a timeout error.",
+    date: "Mar 10, 09:15 AM",
+    status: "complete",
+  },
+  // ... more entries
+]
+
+<Timeline items={ticket} />`
+
+const milestonesCode = `import { Flag, Code, Bug, Rocket } from '@phosphor-icons/react'
+
+const milestones = [
+  {
+    icon: <Flag className="h-5 w-5" weight="fill" />,
+    title: "Project Kickoff",
+    description: "Requirements gathered, team assembled",
+    date: "Jan 15, 2026",
+    status: "complete",
+  },
+  {
+    icon: <Bug className="h-5 w-5" weight="fill" />,
+    title: "Beta Testing",
+    description: "Public beta with 500 users",
+    date: "Mar 13, 2026",
+    status: "current",
+  },
+  {
+    icon: <Rocket className="h-5 w-5" />,
+    title: "Public Launch",
+    date: "Apr 15, 2026",
+    status: "upcoming",
+  },
+]
+
+<Timeline items={milestones} variant="alternating" />`
+
+const cardsCode = `// Wrap content in card containers for a polished look
+<Timeline
+  items={changelog}
+  cards
+/>`
 
 const rtlCode = `// RTL support is automatic via logical properties!
 // Just provide titleAr, descriptionAr, dateAr for bilingual content.
@@ -326,11 +542,10 @@ const typeCode = `interface TimelineItem {
 // ---------------------------------------------------------------------------
 
 export default function TimelinePage() {
-  const { locale, direction } = useDirection()
+  const { locale } = useDirection()
   const t = content[locale]
   const timelineProps = getTimelineProps(t)
   const itemProps = getItemProps(t)
-  const isRTL = direction === 'rtl'
 
   return (
     <div className="min-h-screen">
@@ -378,7 +593,7 @@ export default function TimelinePage() {
           <ComponentShowcase>
             <ComponentShowcase.Demo className="block">
               <div className="w-full max-w-lg mx-auto">
-                <Timeline items={applicationSteps} />
+                <Timeline items={applicationSteps} aria-label={t.timelineComponent.ariaLabels.preview} />
               </div>
             </ComponentShowcase.Demo>
           </ComponentShowcase>
@@ -405,14 +620,14 @@ export default function TimelinePage() {
           <h2 className="text-2xl font-bold tracking-tight mb-6">{t.timelineComponent.examples.title}</h2>
 
           <div className="space-y-12">
-            {/* Basic Timeline */}
+            {/* Basic Timeline — application process */}
             <div>
               <h3 className="text-lg font-semibold mb-4">{t.timelineComponent.examples.basic}</h3>
               <p className="text-muted-foreground mb-4">{t.timelineComponent.examples.basicDesc}</p>
               <Card>
                 <CardContent className="p-6">
                   <div className="max-w-lg">
-                    <Timeline items={applicationSteps} />
+                    <Timeline items={applicationSteps} aria-label={t.timelineComponent.ariaLabels.basic} />
                   </div>
                 </CardContent>
               </Card>
@@ -421,28 +636,44 @@ export default function TimelinePage() {
               </div>
             </div>
 
-            {/* Alternating Layout */}
+            {/* Activity Log — avatars + relative timestamps */}
+            <div>
+              <h3 className="text-lg font-semibold mb-4">{t.timelineComponent.examples.activityLogTitle}</h3>
+              <p className="text-muted-foreground mb-4">{t.timelineComponent.examples.activityLogDesc}</p>
+              <Card>
+                <CardContent className="p-6">
+                  <div className="max-w-lg">
+                    <Timeline items={activityLog} aria-label={t.timelineComponent.ariaLabels.activityLog} />
+                  </div>
+                </CardContent>
+              </Card>
+              <div className="mt-4">
+                <CodeBlock code={activityLogCode} language="tsx" collapsible />
+              </div>
+            </div>
+
+            {/* Project Milestones — alternating layout */}
             <div>
               <h3 className="text-lg font-semibold mb-4">{t.timelineComponent.examples.alternating}</h3>
               <p className="text-muted-foreground mb-4">{t.timelineComponent.examples.alternatingDesc}</p>
               <Card>
                 <CardContent className="p-6">
-                  <Timeline items={applicationSteps} variant="alternating" />
+                  <Timeline items={projectMilestones} variant="alternating" aria-label={t.timelineComponent.ariaLabels.alternating} />
                 </CardContent>
               </Card>
               <div className="mt-4">
-                <CodeBlock code={alternatingCode} language="tsx" collapsible />
+                <CodeBlock code={milestonesCode} language="tsx" collapsible />
               </div>
             </div>
 
-            {/* Compact Mode */}
+            {/* Compact Mode — order tracking */}
             <div>
               <h3 className="text-lg font-semibold mb-4">{t.timelineComponent.examples.compact}</h3>
               <p className="text-muted-foreground mb-4">{t.timelineComponent.examples.compactDesc}</p>
               <Card>
                 <CardContent className="p-6">
                   <div className="max-w-sm">
-                    <Timeline items={orderTracking} compact />
+                    <Timeline items={orderTracking} compact aria-label={t.timelineComponent.ariaLabels.compact} />
                   </div>
                 </CardContent>
               </Card>
@@ -451,19 +682,35 @@ export default function TimelinePage() {
               </div>
             </div>
 
-            {/* Custom Icons */}
+            {/* Detailed — support ticket history */}
             <div>
-              <h3 className="text-lg font-semibold mb-4">{t.timelineComponent.examples.customIcons}</h3>
-              <p className="text-muted-foreground mb-4">{t.timelineComponent.examples.customIconsDesc}</p>
+              <h3 className="text-lg font-semibold mb-4">{t.timelineComponent.examples.supportTicket}</h3>
+              <p className="text-muted-foreground mb-4">{t.timelineComponent.examples.supportTicketDesc}</p>
               <Card>
                 <CardContent className="p-6">
-                  <div className="max-w-lg">
-                    <Timeline items={accountSetup} />
+                  <div className="max-w-2xl">
+                    <Timeline items={supportTicket} aria-label={t.timelineComponent.ariaLabels.supportTicket} />
                   </div>
                 </CardContent>
               </Card>
               <div className="mt-4">
-                <CodeBlock code={customIconsCode} language="tsx" collapsible />
+                <CodeBlock code={detailedCode} language="tsx" collapsible />
+              </div>
+            </div>
+
+            {/* Cards — changelog / release notes */}
+            <div>
+              <h3 className="text-lg font-semibold mb-4">{t.timelineComponent.examples.cardsTitle}</h3>
+              <p className="text-muted-foreground mb-4">{t.timelineComponent.examples.cardsDesc}</p>
+              <ComponentShowcase>
+                <ComponentShowcase.Demo className="block">
+                  <div className="max-w-xl mx-auto">
+                    <Timeline items={changelog} cards aria-label={t.timelineComponent.ariaLabels.changelog} />
+                  </div>
+                </ComponentShowcase.Demo>
+              </ComponentShowcase>
+              <div className="mt-4">
+                <CodeBlock code={cardsCode} language="tsx" collapsible />
               </div>
             </div>
           </div>
@@ -533,13 +780,14 @@ export default function TimelinePage() {
                         descriptionAr: undefined,
                         dateAr: undefined,
                       }))}
+                      aria-label={t.timelineComponent.ariaLabels.rtlLtr}
                     />
                   </div>
                 </div>
                 <div className="space-y-3">
                   <h3 className="font-semibold text-sm">{t.timelineComponent.rtl.rtlLabel}</h3>
                   <div dir="rtl" lang="ar" className="border rounded-lg p-4">
-                    <Timeline items={rtlApplicationSteps} />
+                    <Timeline items={rtlApplicationSteps} aria-label={t.timelineComponent.ariaLabels.rtlAr} />
                   </div>
                 </div>
               </div>

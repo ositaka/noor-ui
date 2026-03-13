@@ -311,6 +311,7 @@ common: {
         'feature-card': 'Feature Card',
         'listing-card': 'Listing Card',
         'pagination': 'Pagination',
+        'chart': 'Chart',
         'stats-card': 'Stats Card',
         'table': 'Table',
         'tabs': 'Tabs',
@@ -331,6 +332,7 @@ common: {
         'progress': 'Progress',
         'skeleton': 'Skeleton',
         'stepper': 'Stepper',
+        'timeline': 'Timeline',
         'user-menu': 'User Menu',
 
         // GCC-Specific Components

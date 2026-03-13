@@ -35,6 +35,8 @@ export interface TimelineProps {
   variant?: 'default' | 'alternating'
   /** Compact mode for inline use — smaller nodes and tighter spacing */
   compact?: boolean
+  /** Wrap each item's content in a card container */
+  cards?: boolean
   /** Accessible label for the timeline — useful when multiple timelines appear on a page */
   'aria-label'?: string
   /** Additional class name */
@@ -46,16 +48,16 @@ export interface TimelineProps {
 // ---------------------------------------------------------------------------
 
 function getStatusClasses(status: TimelineItem['status'], compact: boolean) {
-  const size = compact ? 'h-8 w-8' : 'h-11 w-11'
+  const size = compact ? 'h-8 w-8' : 'h-12 w-12'
   const iconSize = compact ? 'h-4 w-4' : 'h-5 w-5'
 
-  const base = `${size} shrink-0 flex items-center justify-center rounded-full transition-all`
+  const base = `${size} shrink-0 flex items-center justify-center rounded-full transition-all overflow-hidden`
 
   const variants: Record<TimelineItem['status'], string> = {
     complete:
       'border-2 border-success/40 bg-success/10 text-success',
     current:
-      'border-2 border-primary bg-primary text-primary-foreground shadow-lg ring-4 ring-primary/15',
+      'border-2 border-primary bg-primary text-primary-foreground shadow-md ring-2 ring-primary/20',
     upcoming:
       'border-2 border-border bg-muted text-muted-foreground',
   }
@@ -96,6 +98,7 @@ export function Timeline({
   items,
   variant = 'default',
   compact = false,
+  cards = false,
   'aria-label': ariaLabel,
   className,
 }: TimelineProps) {
@@ -110,39 +113,35 @@ export function Timeline({
         role="list"
         aria-label={ariaLabel ?? defaultLabel}
       >
-        {/* Center line */}
-        <div
-          className="absolute start-1/2 top-0 bottom-0 w-0.5 -translate-x-1/2 bg-border"
-          aria-hidden="true"
-        />
-
         {items.map((item, index) => {
           const isLeft = index % 2 === 0
           const { node, iconSize } = getStatusClasses(item.status, compact)
           const title = isRTL && item.titleAr ? item.titleAr : item.title
           const description = isRTL && item.descriptionAr ? item.descriptionAr : item.description
           const date = isRTL && item.dateAr ? item.dateAr : item.date
+          const isLast = index === items.length - 1
 
           return (
             <div
               key={index}
-              className={cn(
-                'relative flex items-start',
-                compact ? 'mb-6' : 'mb-10',
-                index === items.length - 1 && 'mb-0',
-              )}
+              className="flex"
               role="listitem"
             >
               <span className="sr-only">{getStatusLabel(item.status, isRTL)}</span>
-              {/* Left content */}
+              {/* Left content — stretches to full row height via default align-self */}
               <div
                 className={cn(
-                  'w-[calc(50%-1.5rem)] shrink-0',
-                  isLeft ? 'text-end pe-6' : '',
+                  'w-[calc(50%-1.75rem)] shrink-0 text-end pe-6',
+                  !isLast && (compact ? 'pb-6' : 'pb-10'),
                 )}
               >
                 {isLeft && (
-                  <div className={cn(compact ? 'pt-0.5' : 'pt-1')}>
+                  <div className={cn(
+                    'pt-1',
+                    cards ? 'ms-auto' : '',
+                    cards && 'rounded-lg border bg-card shadow-sm',
+                    cards && (compact ? 'p-3' : 'p-4'),
+                  )}>
                     <h3
                       className={cn(
                         'font-semibold',
@@ -160,30 +159,44 @@ export function Timeline({
                   </div>
                 )}
                 {!isLeft && date && (
-                  <div className={cn(compact ? 'pt-1.5' : 'pt-2.5')}>
-                    <p className={cn('text-muted-foreground', compact ? 'text-xs' : 'text-sm')}>
+                  <div className="pt-2">
+                    <span className="text-muted-foreground text-xs">
                       {date}
-                    </p>
+                    </span>
                   </div>
                 )}
               </div>
 
-              {/* Center node */}
-              <div className="relative z-10 mx-1 shrink-0">
+              {/* Center node + line — stretches full row height, line fills remaining space */}
+              <div className="flex flex-col items-center mx-1.5 shrink-0">
                 <div className={node} aria-hidden="true">
                   {item.icon || getDefaultIcon(item.status, iconSize)}
                 </div>
+                {!isLast && (
+                  <div
+                    className={cn(
+                      'w-0.5 flex-1 mt-2',
+                      compact ? 'min-h-[1.5rem]' : 'min-h-[2rem]',
+                      getLineColor(item.status),
+                    )}
+                    aria-hidden="true"
+                  />
+                )}
               </div>
 
-              {/* Right content */}
+              {/* Right content — stretches to full row height via default align-self */}
               <div
                 className={cn(
-                  'w-[calc(50%-1.5rem)] shrink-0',
-                  !isLeft ? 'ps-6' : '',
+                  'w-[calc(50%-1.75rem)] shrink-0 ps-6',
+                  !isLast && (compact ? 'pb-6' : 'pb-10'),
                 )}
               >
                 {!isLeft && (
-                  <div className={cn(compact ? 'pt-0.5' : 'pt-1')}>
+                  <div className={cn(
+                    'pt-1',
+                    cards && 'rounded-lg border bg-card shadow-sm',
+                    cards && (compact ? 'p-3' : 'p-4'),
+                  )}>
                     <h3
                       className={cn(
                         'font-semibold',
@@ -201,10 +214,10 @@ export function Timeline({
                   </div>
                 )}
                 {isLeft && date && (
-                  <div className={cn(compact ? 'pt-1.5' : 'pt-2.5')}>
-                    <p className={cn('text-muted-foreground', compact ? 'text-xs' : 'text-sm')}>
+                  <div className="pt-2">
+                    <span className="text-muted-foreground text-xs">
                       {date}
-                    </p>
+                    </span>
                   </div>
                 )}
               </div>
@@ -248,7 +261,7 @@ export function Timeline({
                 <div
                   className={cn(
                     'w-0.5 flex-1 mt-2',
-                    compact ? 'min-h-[1.5rem]' : 'min-h-[2rem]',
+                    compact ? 'min-h-[1.5rem]' : 'min-h-[2.5rem]',
                     getLineColor(item.status),
                   )}
                   aria-hidden="true"
@@ -257,8 +270,19 @@ export function Timeline({
             </div>
 
             {/* Content */}
-            <div className={cn('flex-1', compact ? 'pb-5' : 'pb-8', isLast && 'pb-0')}>
-              <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+            <div className={cn('flex-1', cards ? 'pt-0' : 'pt-1', compact ? 'pb-5' : 'pb-10', isLast && 'pb-0')}>
+              <div className={cn(
+                cards && 'rounded-lg border bg-card shadow-sm',
+                cards && (compact ? 'p-3' : 'p-4'),
+              )}>
+                {date && (
+                  <span className={cn(
+                    'block text-muted-foreground mb-0.5',
+                    compact ? 'text-xs' : 'text-xs',
+                  )}>
+                    {date}
+                  </span>
+                )}
                 <h3
                   className={cn(
                     'font-semibold',
@@ -268,22 +292,17 @@ export function Timeline({
                 >
                   {title}
                 </h3>
-                {date && (
-                  <span className={cn('text-muted-foreground', compact ? 'text-xs' : 'text-sm')}>
-                    {date}
-                  </span>
+                {description && (
+                  <p
+                    className={cn(
+                      'text-muted-foreground mt-1',
+                      compact ? 'text-xs' : 'text-sm',
+                    )}
+                  >
+                    {description}
+                  </p>
                 )}
               </div>
-              {description && (
-                <p
-                  className={cn(
-                    'text-muted-foreground mt-1',
-                    compact ? 'text-xs' : 'text-sm',
-                  )}
-                >
-                  {description}
-                </p>
-              )}
             </div>
           </div>
         )
