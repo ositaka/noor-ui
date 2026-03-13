@@ -438,6 +438,14 @@ export const searchData: SearchItem[] = [
     keywords: ['calendar', 'date', 'picker', 'hijri', 'islamic', 'gregorian', 'dual', 'range', 'events', 'gcc', 'month', 'selection'],
   },
 
+  {
+    title: 'Chart',
+    description: 'Unified charting component with line, bar, area, and donut variants. RTL-aware with Arabic numeral formatting.',
+    href: '/components/chart',
+    category: 'Component',
+    keywords: ['chart', 'graph', 'line', 'bar', 'area', 'donut', 'recharts', 'visualization', 'data', 'rtl', 'dashboard', 'analytics', 'kpi'],
+  },
+
   // Examples
   {
     title: 'GCC Community Dashboard',

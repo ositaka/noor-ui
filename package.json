@@ -112,6 +112,7 @@
     "@tiptap/react": "^3.10.5",
     "@tiptap/starter-kit": "^3.10.5",
     "@xyflow/react": "^12.9.2",
+    "chart.js": "^4.5.1",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
     "cmdk": "^1.1.1",
@@ -119,10 +120,10 @@
     "next": "^14.0.0",
     "next-themes": "^0.2.1",
     "react": "^18.0.0",
+    "react-chartjs-2": "^5.3.1",
     "react-dom": "^18.0.0",
     "react-swipeable": "^7.0.2",
     "react-syntax-highlighter": "^15.5.0",
-    "recharts": "^3.8.0",
     "tailwind-merge": "^2.2.0"
   },
   "devDependencies": {
