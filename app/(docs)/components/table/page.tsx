@@ -293,49 +293,49 @@ export default function TablePage() {
               </p>
               <ul className="space-y-2 text-muted-foreground">
                 <li className="flex items-start gap-2">
-                  <span className="text-primary mt-1">•</span>
+                  <span className="text-primary">•</span>
                   <span className="flex items-center gap-2">
                     <code className="bg-muted px-1 rounded">Table</code> - Main wrapper with overflow handling
                   </span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-primary mt-1">•</span>
+                  <span className="text-primary">•</span>
                   <span className="flex items-center gap-2">
                     <code className="bg-muted px-1 rounded">TableHeader</code> - thead element for column headers
                   </span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-primary mt-1">•</span>
+                  <span className="text-primary">•</span>
                   <span className="flex items-center gap-2">
                     <code className="bg-muted px-1 rounded">TableBody</code> - tbody element for data rows
                   </span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-primary mt-1">•</span>
+                  <span className="text-primary">•</span>
                   <span className="flex items-center gap-2">
                     <code className="bg-muted px-1 rounded">TableFooter</code> - tfoot element for summary rows
                   </span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-primary mt-1">•</span>
+                  <span className="text-primary">•</span>
                   <span className="flex items-center gap-2">
                     <code className="bg-muted px-1 rounded">TableRow</code> - tr element with hover effects
                   </span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-primary mt-1">•</span>
+                  <span className="text-primary">•</span>
                   <span className="flex items-center gap-2">
                     <code className="bg-muted px-1 rounded">TableHead</code> - th element with text-start for RTL
                   </span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-primary mt-1">•</span>
+                  <span className="text-primary">•</span>
                   <span className="flex items-center gap-2">
                     <code className="bg-muted px-1 rounded">TableCell</code> - td element for data cells
                   </span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-primary mt-1">•</span>
+                  <span className="text-primary">•</span>
                   <span className="flex items-center gap-2">
                     <code className="bg-muted px-1 rounded">TableCaption</code> - caption element for table description
                   </span>

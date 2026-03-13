@@ -431,13 +431,13 @@ export default function SeparatorPage() {
                 <CodeBlock code={semanticCode} language="tsx" />
                 <ul className="mt-2 space-y-2 text-sm text-muted-foreground">
                   <li className="flex items-start gap-2">
-                    <span className="text-primary mt-1">•</span>
+                    <span className="text-primary">•</span>
                     <span>
                       <strong>{t.separatorComponent.accessibility.decorativeTrue}</strong> {t.separatorComponent.accessibility.decorativeTrueDesc}
                     </span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <span className="text-primary mt-1">•</span>
+                    <span className="text-primary">•</span>
                     <span>
                       <strong>{t.separatorComponent.accessibility.decorativeFalse}</strong> {t.separatorComponent.accessibility.decorativeFalseDesc}
                     </span>

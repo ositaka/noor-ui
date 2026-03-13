@@ -446,6 +446,14 @@ export const searchData: SearchItem[] = [
     keywords: ['chart', 'graph', 'line', 'bar', 'area', 'donut', 'recharts', 'visualization', 'data', 'rtl', 'dashboard', 'analytics', 'kpi'],
   },
 
+  {
+    title: 'Timeline',
+    description: 'Vertical event timeline with connecting lines, status-based styling, custom icons, and alternating layout. RTL-aware via logical properties.',
+    href: '/components/timeline',
+    category: 'Component',
+    keywords: ['timeline', 'events', 'history', 'activity', 'log', 'status', 'progress', 'steps', 'chronological', 'vertical', 'alternating'],
+  },
+
   // Examples
   {
     title: 'GCC Community Dashboard',

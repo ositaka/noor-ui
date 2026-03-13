@@ -21,6 +21,7 @@ import { components_gcc } from './components-gcc'
 import { components_experimental } from './components-experimental'
 import { utilities_page } from './utilities'
 import { components_chart } from './components-chart'
+import { components_timeline } from './components-timeline'
 
 export const ar = {
   ...common,
@@ -41,4 +42,5 @@ export const ar = {
   ...components_experimental,
   ...utilities_page,
   ...components_chart,
+  ...components_timeline,
 }
