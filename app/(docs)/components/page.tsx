@@ -106,6 +106,7 @@ const componentCategories = (t: typeof content.en | typeof content.ar) => [
     components: [
       { name: 'Table', icon: Stack, href: '/components/table', status: 'ready' },
       { name: 'DataTable', icon: TableIcon, href: '/components/data-table', status: 'ready' },
+      { name: 'Chart', icon: ChartBar, href: '/components/chart', status: 'ready' },
       { name: 'Stats Card', icon: ChartBar, href: '/components/stats-card', status: 'ready' },
       { name: 'Listing Card', icon: GridFour, href: '/components/listing-card', status: 'ready' },
       { name: 'Command', icon: List, href: '/components/command', status: 'ready' },

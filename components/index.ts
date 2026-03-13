@@ -167,6 +167,8 @@ export {
 export { Skeleton } from './ui/skeleton'
 export { Slider } from './ui/slider'
 export { RangeSlider } from './ui/range-slider'
+export { Chart } from './ui/chart'
+export type { ChartProps } from './ui/chart'
 export { StatsCard } from './ui/stats-card'
 export type { StatsCardProps } from './ui/stats-card'
 export { Stepper } from './ui/stepper'

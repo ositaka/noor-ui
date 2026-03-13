@@ -74,6 +74,13 @@ documentationPages: {
           keyboard: 'Keyboard Navigation',
           screenReaders: 'Screen Readers',
         },
+        development: {
+          title: 'Development',
+          description: 'Hooks, utilities, and helpers for RTL-first development',
+          utilities: 'Utilities & Hooks',
+          rtlGuide: 'RTL Guide',
+          tokens: 'Design Tokens',
+        },
         quickLinks: {
           title: 'Quick Links',
           description: 'Jump directly to the most frequently accessed resources',

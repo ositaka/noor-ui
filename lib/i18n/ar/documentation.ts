@@ -74,6 +74,13 @@ documentationPages: {
           keyboard: 'التنقل بلوحة المفاتيح',
           screenReaders: 'قارئات الشاشة',
         },
+        development: {
+          title: 'التطوير',
+          description: 'خطافات وأدوات مساعدة للتطوير بأولوية RTL',
+          utilities: 'الأدوات والخطافات',
+          rtlGuide: 'دليل RTL',
+          tokens: 'رموز التصميم',
+        },
         quickLinks: {
           title: 'روابط سريعة',
           description: 'انتقل مباشرة إلى الموارد الأكثر استخداماً',

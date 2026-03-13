@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- **Chart component**: Unified charting component with line, bar, area, and donut variants. Built on Chart.js for proper canvas rendering. Fully RTL-aware with automatic axis flipping, Arabic-Indic numeral formatting, and theme-aware colors. Includes configurable `strokeWidth`, `fontSize`, `thickness` (donut), and `direction` override prop. Accessible with visually hidden data tables, `role="img"` figure wrappers, locale-aware sr-only summaries, multi-series dash patterns (WCAG 1.4.1), and `prefers-reduced-motion` support.
+
 ### Changed
 - **DataTable i18n overhaul (BREAKING)**: Removed language-specific props (`headerAr`, `searchPlaceholderAr`, `emptyMessageAr`) in favor of a language-agnostic API. Consumers now pass a single localized string per prop (e.g., `header`, `searchPlaceholder`, `emptyMessage`) resolved from their own i18n system. This makes the component usable with any language, not just English and Arabic.
 - **DataTable removed English defaults**: `searchPlaceholder`, `emptyMessage`, `nextLabel`, `previousLabel`, `pageLabel` no longer fall back to hardcoded English strings. Pass explicit values for all UI text.

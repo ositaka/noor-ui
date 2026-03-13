@@ -422,8 +422,8 @@ Full documentation, examples, and guides available at **[noorui.com](https://noo
 - [Components](https://noorui.com/components)
 - [Storybook](https://storybook.noorui.com) - **Interactive component playground with 749 stories**
 - [RTL Guide](https://noorui.com/rtl-guide)
+- [Utilities & Hooks](https://noorui.com/utilities)
 - [Examples](https://noorui.com/examples)
-- [Starters](https://noorui.com/starters)
 - [Design Tokens](https://noorui.com/tokens)
 
 ## 🤝 Contributing
