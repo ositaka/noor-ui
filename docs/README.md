@@ -70,7 +70,6 @@ Core project documentation in the root directory:
 - `CHANGELOG.md` - Version history and release notes
 - `ROADMAP.md` - Project roadmap and development phases
 - `CONTRIBUTING.md` - Contribution guidelines
-- `MIGRATION_GUIDE.md` - Migration guide for users
 
 ---
 
