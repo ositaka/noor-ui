@@ -11,15 +11,6 @@ import { Callout } from '@/components/ui/callout'
 import { Textarea } from '@/components/ui/textarea'
 import { ButtonArrow } from '@/components/ui/button-arrow'
 import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from '@/components/ui/breadcrumb'
-import {
-  GraduationCap,
   ClipboardText,
   Clock,
   CheckCircle,
@@ -32,8 +23,6 @@ import {
   User,
 } from '@phosphor-icons/react'
 import { useDirection } from '@/components/providers/direction-provider'
-import { DirectionToggle } from '@/components/docs/direction-toggle'
-import { content } from '@/lib/i18n'
 import { toArabicNumerals } from '@/lib/arabic-numbers'
 
 const ed = {
@@ -268,7 +257,6 @@ const categoryColors: Record<string, string> = {
 export default function AssignmentDetailPage() {
   const { direction, locale } = useDirection()
   const isRTL = direction === 'rtl'
-  const t = content[locale]
   const h = ed[locale]
   const params = useParams()
   const id = params.id as string
@@ -276,79 +264,7 @@ export default function AssignmentDetailPage() {
   const assignment = assignmentDetails[id] || assignmentDetails['1']
 
   return (
-    <div className="min-h-screen">
-      {/* Header */}
-      <header className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50">
-        <div className="container flex h-16 items-center justify-between">
-          <div className="flex items-center gap-6">
-            <Link href="/examples/education" className="flex items-center gap-2">
-              <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center">
-                <GraduationCap className="h-5 w-5 text-primary-foreground" />
-              </div>
-              <span className="font-bold text-xl hidden sm:inline">{h.schoolName}</span>
-            </Link>
-          </div>
-          <nav aria-label={h.mainNavigation} className="flex items-center gap-1">
-            <Button variant="ghost" size="sm" asChild>
-              <Link href="/examples/education/dashboard">{h.dashboard}</Link>
-            </Button>
-            <Button variant="ghost" size="sm" asChild>
-              <Link href="/examples/education/grades">{h.grades}</Link>
-            </Button>
-            <Button variant="ghost" size="sm" asChild>
-              <Link href="/examples/education/schedule">{h.schedule}</Link>
-            </Button>
-            <Button variant="ghost" size="sm" className="font-medium" asChild>
-              <Link href="/examples/education/assignments">{h.assignments}</Link>
-            </Button>
-            <Button variant="ghost" size="sm" asChild>
-              <Link href="/examples/education/attendance">{h.attendance}</Link>
-            </Button>
-            <Button variant="ghost" size="sm" asChild>
-              <Link href="/examples/education/teachers">{h.teachers}</Link>
-            </Button>
-            <Separator orientation="vertical" className="mx-2 h-4" />
-            <Button variant="outline" size="sm" asChild>
-              <Link href="/examples">{t.nav.examples}</Link>
-            </Button>
-          </nav>
-        </div>
-      </header>
-
-      {/* Breadcrumb */}
-      <div className="border-b bg-background">
-        <div className="container py-3">
-          <div className="flex items-center justify-between gap-4">
-            <Breadcrumb>
-              <BreadcrumbList>
-                <BreadcrumbItem>
-                  <BreadcrumbLink href="/">{t.nav.home}</BreadcrumbLink>
-                </BreadcrumbItem>
-                <BreadcrumbSeparator />
-                <BreadcrumbItem>
-                  <BreadcrumbLink href="/examples">{t.nav.examples}</BreadcrumbLink>
-                </BreadcrumbItem>
-                <BreadcrumbSeparator />
-                <BreadcrumbItem>
-                  <BreadcrumbLink href="/examples/education">{h.schoolName}</BreadcrumbLink>
-                </BreadcrumbItem>
-                <BreadcrumbSeparator />
-                <BreadcrumbItem>
-                  <BreadcrumbLink href="/examples/education/assignments">{h.assignments}</BreadcrumbLink>
-                </BreadcrumbItem>
-                <BreadcrumbSeparator />
-                <BreadcrumbItem>
-                  <BreadcrumbPage>{isRTL ? assignment.titleAr : assignment.title}</BreadcrumbPage>
-                </BreadcrumbItem>
-              </BreadcrumbList>
-            </Breadcrumb>
-            <DirectionToggle />
-          </div>
-        </div>
-      </div>
-
-      {/* Main Content */}
-      <main id="main-content" className="container py-8 scroll-mt-16">
+    <div className="container py-8">
         {/* Back button */}
         <div className="mb-6">
           <ButtonArrow direction="back" variant="ghost" size="sm" asChild>
@@ -573,7 +489,6 @@ export default function AssignmentDetailPage() {
             </Card>
           </div>
         </div>
-      </main>
     </div>
   )
 }

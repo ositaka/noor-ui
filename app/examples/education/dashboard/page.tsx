@@ -8,16 +8,9 @@ import { Badge } from '@/components/ui/badge'
 import { StatsCard } from '@/components/ui/stats-card'
 import { FeatureCard } from '@/components/ui/feature-card'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
+import { Chart } from '@/components/ui/chart'
 import { Separator } from '@/components/ui/separator'
 import { Progress } from '@/components/ui/progress'
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from '@/components/ui/breadcrumb'
 import {
   GraduationCap,
   ChartBar,
@@ -39,8 +32,6 @@ import {
   Warning,
 } from '@phosphor-icons/react'
 import { useDirection } from '@/components/providers/direction-provider'
-import { DirectionToggle } from '@/components/docs/direction-toggle'
-import { content } from '@/lib/i18n'
 import { toArabicNumerals, formatOrdinal } from '@/lib/arabic-numbers'
 
 const ed = {
@@ -97,6 +88,9 @@ const ed = {
     viewAssignmentsDesc: 'Track assignments and submissions',
     viewAttendance: 'View Attendance',
     viewAttendanceDesc: 'Check attendance records and calendar',
+    gradesDistribution: 'Grades Distribution',
+    gpaTrend: 'GPA Trend',
+    semester: 'Semester',
   },
   ar: {
     schoolName: 'مدرسة النور الدولية',
@@ -151,6 +145,9 @@ const ed = {
     viewAssignmentsDesc: 'تتبع الواجبات والتسليمات',
     viewAttendance: 'عرض الحضور',
     viewAttendanceDesc: 'تحقق من سجلات الحضور والتقويم',
+    gradesDistribution: 'توزيع الدرجات',
+    gpaTrend: 'اتجاه المعدل التراكمي',
+    semester: 'الفصل الدراسي',
   },
 }
 
@@ -222,80 +219,11 @@ const categoryColors: Record<string, string> = {
 export default function EducationDashboard() {
   const { direction, locale } = useDirection()
   const isRTL = direction === 'rtl'
-  const t = content[locale]
   const h = ed[locale]
   const Arrow = isRTL ? ArrowLeft : ArrowRight
 
   return (
-    <div className="min-h-screen">
-      {/* Header */}
-      <header className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50">
-        <div className="container flex h-16 items-center justify-between">
-          <div className="flex items-center gap-6">
-            <Link href="/examples/education" className="flex items-center gap-2">
-              <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center">
-                <GraduationCap className="h-5 w-5 text-primary-foreground" />
-              </div>
-              <span className="font-bold text-xl hidden sm:inline">{h.schoolName}</span>
-            </Link>
-          </div>
-          <nav aria-label={h.mainNavigation} className="flex items-center gap-1">
-            <Button variant="ghost" size="sm" className="font-medium" asChild>
-              <Link href="/examples/education/dashboard">{h.dashboard}</Link>
-            </Button>
-            <Button variant="ghost" size="sm" asChild>
-              <Link href="/examples/education/grades">{h.grades}</Link>
-            </Button>
-            <Button variant="ghost" size="sm" asChild>
-              <Link href="/examples/education/schedule">{h.schedule}</Link>
-            </Button>
-            <Button variant="ghost" size="sm" asChild>
-              <Link href="/examples/education/assignments">{h.assignments}</Link>
-            </Button>
-            <Button variant="ghost" size="sm" asChild>
-              <Link href="/examples/education/attendance">{h.attendance}</Link>
-            </Button>
-            <Button variant="ghost" size="sm" asChild>
-              <Link href="/examples/education/teachers">{h.teachers}</Link>
-            </Button>
-            <Separator orientation="vertical" className="mx-2 h-4" />
-            <Button variant="outline" size="sm" asChild>
-              <Link href="/examples">{t.nav.examples}</Link>
-            </Button>
-          </nav>
-        </div>
-      </header>
-
-      {/* Breadcrumb */}
-      <div className="border-b bg-background">
-        <div className="container py-3">
-          <div className="flex items-center justify-between gap-4">
-            <Breadcrumb>
-              <BreadcrumbList>
-                <BreadcrumbItem>
-                  <BreadcrumbLink href="/">{t.nav.home}</BreadcrumbLink>
-                </BreadcrumbItem>
-                <BreadcrumbSeparator />
-                <BreadcrumbItem>
-                  <BreadcrumbLink href="/examples">{t.nav.examples}</BreadcrumbLink>
-                </BreadcrumbItem>
-                <BreadcrumbSeparator />
-                <BreadcrumbItem>
-                  <BreadcrumbLink href="/examples/education">{h.schoolName}</BreadcrumbLink>
-                </BreadcrumbItem>
-                <BreadcrumbSeparator />
-                <BreadcrumbItem>
-                  <BreadcrumbPage>{h.dashboard}</BreadcrumbPage>
-                </BreadcrumbItem>
-              </BreadcrumbList>
-            </Breadcrumb>
-            <DirectionToggle />
-          </div>
-        </div>
-      </div>
-
-      {/* Main Content */}
-      <main id="main-content" className="container py-8 scroll-mt-16">
+    <div className="container py-8">
         {/* Welcome + Student Card */}
         <div className="mb-8">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
@@ -356,6 +284,54 @@ export default function EducationDashboard() {
             value={formatOrdinal(5, locale)}
             trendLabel={h.outOf30}
           />
+        </div>
+
+        {/* Charts */}
+        <div className="grid gap-6 lg:grid-cols-2 mb-8">
+          <Card>
+            <CardHeader>
+              <CardTitle>{h.gradesDistribution}</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <Chart
+                type="bar"
+                data={[
+                  { subject: isRTL ? 'الرياضيات' : 'Math', grade: 92 },
+                  { subject: isRTL ? 'الفيزياء' : 'Physics', grade: 85 },
+                  { subject: isRTL ? 'العربية' : 'Arabic', grade: 95 },
+                  { subject: isRTL ? 'الإسلامية' : 'Islamic', grade: 98 },
+                  { subject: isRTL ? 'الإنجليزية' : 'English', grade: 88 },
+                  { subject: isRTL ? 'الحاسب' : 'CS', grade: 91 },
+                ]}
+                categoryKey="subject"
+                valueKey="grade"
+                size="sm"
+                colors={['var(--color-primary)']}
+                aria-label={h.gradesDistribution}
+              />
+            </CardContent>
+          </Card>
+          <Card>
+            <CardHeader>
+              <CardTitle>{h.gpaTrend}</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <Chart
+                type="line"
+                data={[
+                  { semester: isRTL ? 'ف١ ٢٠٢٤' : 'S1 2024', gpa: 85 },
+                  { semester: isRTL ? 'ف٢ ٢٠٢٤' : 'S2 2024', gpa: 87 },
+                  { semester: isRTL ? 'ف١ ٢٠٢٥' : 'S1 2025', gpa: 89 },
+                  { semester: isRTL ? 'ف٢ ٢٠٢٥' : 'S2 2025', gpa: 92 },
+                ]}
+                categoryKey="semester"
+                valueKey="gpa"
+                size="sm"
+                colors={['var(--color-success)']}
+                aria-label={h.gpaTrend}
+              />
+            </CardContent>
+          </Card>
         </div>
 
         <div className="grid gap-6 lg:grid-cols-3">
@@ -537,7 +513,6 @@ export default function EducationDashboard() {
             </Card>
           </div>
         </div>
-      </main>
     </div>
   )
 }

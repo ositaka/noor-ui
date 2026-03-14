@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button'
 import { ButtonArrow } from '@/components/ui/button-arrow'
 import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
+import { Carousel } from '@/components/ui/carousel'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import {
   House,
@@ -378,30 +379,46 @@ export default function PropertyDetailPage({ params }: { params: { id: string } 
         <div className="grid gap-8 lg:grid-cols-3">
           {/* Main Content */}
           <div className="lg:col-span-2 space-y-8">
-            {/* Property Images */}
+            {/* Property Images Carousel */}
             <Card className="overflow-hidden">
-              <div className="relative h-[400px] bg-muted">
-                <img
-                  src={propertyImages[property.type]}
-                  alt={t.propertyPhoto(isRTL ? property.titleAr : property.title)}
-                  className="absolute inset-0 h-full w-full object-cover"
+              <div className="relative">
+                <Carousel
+                  items={[
+                    { src: propertyImages[property.type], alt: t.propertyPhoto(isRTL ? property.titleAr : property.title) },
+                    { src: '/examples/real-estate/interior-1.jpg', alt: isRTL ? 'الداخلية - غرفة المعيشة' : 'Interior - Living Room' },
+                    { src: '/examples/real-estate/interior-2.jpg', alt: isRTL ? 'الداخلية - المطبخ' : 'Interior - Kitchen' },
+                    { src: '/examples/real-estate/interior-3.jpg', alt: isRTL ? 'الداخلية - غرفة النوم' : 'Interior - Bedroom' },
+                  ]}
+                  renderItem={(item) => (
+                    <div className="relative h-[400px] bg-muted">
+                      <img
+                        src={item.src}
+                        alt={item.alt}
+                        className="absolute inset-0 h-full w-full object-cover"
+                      />
+                    </div>
+                  )}
+                  showArrows
+                  showDots
+                  dotSize="lg"
+                  aria-label={isRTL ? 'معرض صور العقار' : 'Property photo gallery'}
                 />
-                <div className="absolute top-4 start-4 flex gap-2">
-                  <Badge variant={property.status === 'sale' ? 'default' : 'secondary'} className="text-sm">
+                <div className="absolute top-4 start-4 flex gap-2 z-10 pointer-events-none">
+                  <Badge variant={property.status === 'sale' ? 'default' : 'secondary'} className="text-sm pointer-events-auto">
                     {getStatusLabel(property.status)}
                   </Badge>
                   {property.featured && (
-                    <Badge variant="destructive" className="text-sm">
+                    <Badge variant="destructive" className="text-sm pointer-events-auto">
                       {t.featured}
                     </Badge>
                   )}
                   {property.furnished && (
-                    <Badge variant="outline" className="bg-background/90 text-sm">
+                    <Badge variant="outline" className="bg-background/90 text-sm pointer-events-auto">
                       {t.furnished}
                     </Badge>
                   )}
                 </div>
-                <div className="absolute top-4 end-4 flex gap-2">
+                <div className="absolute top-4 end-4 flex gap-2 z-10">
                   <Button size="icon" variant="secondary" className="rounded-full bg-white/90" aria-label={t.addToFavorites}>
                     <Heart className="h-5 w-5" aria-hidden="true" />
                   </Button>

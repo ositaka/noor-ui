@@ -10,15 +10,7 @@ import { ArabicNumber } from '@/components/ui/arabic-number'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { FeatureCard } from '@/components/ui/feature-card'
-import { Separator } from '@/components/ui/separator'
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from '@/components/ui/breadcrumb'
+import { Chart } from '@/components/ui/chart'
 import {
   CalendarCheck,
   Users,
@@ -28,7 +20,6 @@ import {
   UserPlus,
   Stethoscope,
   Bell,
-  FirstAid,
   Pill,
   Warning,
   CheckCircle,
@@ -37,14 +28,11 @@ import {
   CalendarDots,
 } from '@phosphor-icons/react'
 import { useDirection } from '@/components/providers/direction-provider'
-import { DirectionToggle } from '@/components/docs/direction-toggle'
-import { content } from '@/lib/i18n'
 
 const hc = {
   en: {
     title: 'Al Noor Medical Center',
     subtitle: 'Clinic Management Dashboard',
-    mainNavigation: 'Main navigation',
     dashboard: 'Dashboard',
     patients: 'Patients',
     appointments: 'Appointments',
@@ -82,11 +70,17 @@ const hc = {
     inProgress: 'In Progress',
     completed: 'Completed',
     pending: 'Pending',
+    appointmentsByType: 'Appointments by Type',
+    generalCheckup: 'General Checkup',
+    followUp: 'Follow-up',
+    consultation: 'Consultation',
+    dental: 'Dental',
+    pediatrics: 'Pediatrics',
+    labReview: 'Lab Review',
   },
   ar: {
     title: 'مركز النور الطبي',
     subtitle: 'لوحة إدارة العيادة',
-    mainNavigation: 'التنقل الرئيسي',
     dashboard: 'لوحة التحكم',
     patients: 'المرضى',
     appointments: 'المواعيد',
@@ -124,6 +118,13 @@ const hc = {
     inProgress: 'قيد التنفيذ',
     completed: 'مكتمل',
     pending: 'قيد الانتظار',
+    appointmentsByType: 'المواعيد حسب النوع',
+    generalCheckup: 'فحص عام',
+    followUp: 'متابعة',
+    consultation: 'استشارة',
+    dental: 'أسنان',
+    pediatrics: 'أطفال',
+    labReview: 'مراجعة مختبر',
   },
 }
 
@@ -211,247 +212,224 @@ function getStatusBadge(status: Appointment['status'], labels: Record<string, st
 export default function HealthcareDashboard() {
   const { direction, locale } = useDirection()
   const isRTL = direction === 'rtl'
-  const t = content[locale]
   const h = hc[locale]
   const Arrow = isRTL ? ArrowLeft : ArrowRight
 
   return (
-    <div className="min-h-screen">
-      {/* Header */}
-      <header className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50">
-        <div className="container flex h-16 items-center justify-between">
-          <div className="flex items-center gap-6">
-            <Link href="/examples/healthcare" className="flex items-center gap-2">
-              <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center">
-                <FirstAid className="h-5 w-5 text-primary-foreground" />
-              </div>
-              <span className="font-bold text-xl hidden sm:inline">{h.title}</span>
-            </Link>
+    <div className="container py-8">
+      {/* Hero */}
+      <div className="mb-8">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="p-4 bg-primary/10 rounded-xl">
+            <Stethoscope className="h-10 w-10 text-primary" />
           </div>
-          <nav aria-label={h.mainNavigation} className="flex items-center gap-1">
-            <Button variant="ghost" size="sm" className="font-medium" asChild>
-              <Link href="/examples/healthcare">{h.dashboard}</Link>
-            </Button>
-            <Button variant="ghost" size="sm" asChild>
-              <Link href="/examples/healthcare/patients">{h.patients}</Link>
-            </Button>
-            <Button variant="ghost" size="sm" asChild>
-              <Link href="/examples/healthcare/appointments">{h.appointments}</Link>
-            </Button>
-            <Button variant="ghost" size="sm" asChild>
-              <Link href="/examples/healthcare/prescriptions">{h.prescriptions}</Link>
-            </Button>
-            <Separator orientation="vertical" className="mx-2 h-4" />
-            <Button variant="outline" size="sm" asChild>
-              <Link href="/examples">{t.nav.examples}</Link>
-            </Button>
-          </nav>
-        </div>
-      </header>
-
-      {/* Breadcrumb */}
-      <div className="border-b bg-background">
-        <div className="container py-3">
-          <div className="flex items-center justify-between gap-4">
-            <Breadcrumb>
-              <BreadcrumbList>
-                <BreadcrumbItem>
-                  <BreadcrumbLink href="/">{t.nav.home}</BreadcrumbLink>
-                </BreadcrumbItem>
-                <BreadcrumbSeparator />
-                <BreadcrumbItem>
-                  <BreadcrumbLink href="/examples">{t.nav.examples}</BreadcrumbLink>
-                </BreadcrumbItem>
-                <BreadcrumbSeparator />
-                <BreadcrumbItem>
-                  <BreadcrumbPage>{h.title}</BreadcrumbPage>
-                </BreadcrumbItem>
-              </BreadcrumbList>
-            </Breadcrumb>
-            <DirectionToggle />
+          <div>
+            <h1 className="text-3xl font-bold tracking-tight">{h.title}</h1>
+            <p className="text-muted-foreground">{h.subtitle}</p>
           </div>
         </div>
       </div>
 
-      {/* Main Content */}
-      <main className="container py-8">
-        {/* Hero */}
-        <div className="mb-8">
-          <div className="flex items-center gap-3 mb-4">
-            <div className="p-4 bg-primary/10 rounded-xl">
-              <Stethoscope className="h-10 w-10 text-primary" />
-            </div>
-            <div>
-              <h1 className="text-3xl font-bold tracking-tight">{h.title}</h1>
-              <p className="text-muted-foreground">{h.subtitle}</p>
-            </div>
-          </div>
-        </div>
+      {/* Stats - using StatsCard component */}
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 mb-8">
+        <StatsCard
+          icon={<CalendarCheck className="h-4 w-4" />}
+          label={h.todaysAppointments}
+          value={12}
+          trend={8}
+          trendLabel={h.fromLastMonth}
+        />
+        <StatsCard
+          icon={<Users className="h-4 w-4" />}
+          label={h.patientsSeen}
+          value={8}
+          trend={12}
+          trendLabel={h.fromLastMonth}
+        />
+        <StatsCard
+          icon={<CurrencyDollar className="h-4 w-4" />}
+          label={h.revenue}
+          value="4,200"
+          trend={5}
+          trendLabel={h.fromLastMonth}
+        />
+        <StatsCard
+          icon={<Clock className="h-4 w-4" />}
+          label={h.pendingReview}
+          value={3}
+          trend={-15}
+          trendLabel={h.fromLastMonth}
+        />
+      </div>
 
-        {/* Stats - using StatsCard component */}
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 mb-8">
-          <StatsCard
-            icon={<CalendarCheck className="h-4 w-4" />}
-            label={h.todaysAppointments}
-            value={12}
-            trend={8}
-            trendLabel={h.fromLastMonth}
-          />
-          <StatsCard
-            icon={<Users className="h-4 w-4" />}
-            label={h.patientsSeen}
-            value={8}
-            trend={12}
-            trendLabel={h.fromLastMonth}
-          />
-          <StatsCard
-            icon={<CurrencyDollar className="h-4 w-4" />}
-            label={h.revenue}
-            value="4,200"
-            trend={5}
-            trendLabel={h.fromLastMonth}
-          />
-          <StatsCard
-            icon={<Clock className="h-4 w-4" />}
-            label={h.pendingReview}
-            value={3}
-            trend={-15}
-            trendLabel={h.fromLastMonth}
-          />
-        </div>
-
-        <div className="grid gap-6 lg:grid-cols-3">
-          {/* Today's Schedule - 2/3 width */}
-          <div className="lg:col-span-2 space-y-6">
-            <Card>
-              <CardHeader>
-                <div className="flex items-center justify-between">
-                  <div>
-                    <CardTitle>{h.todaysSchedule}</CardTitle>
-                    <CardDescription>
-                      <ArabicNumber value={6} /> {h.appointmentsToday}
-                    </CardDescription>
-                  </div>
-                  <Button variant="outline" size="sm" asChild>
-                    <Link href="/examples/healthcare/appointments">
-                      {h.viewAppointments}
-                      <Arrow className="h-4 w-4 ms-2" />
-                    </Link>
-                  </Button>
+      <div className="grid gap-6 lg:grid-cols-3">
+        {/* Today's Schedule - 2/3 width */}
+        <div className="lg:col-span-2 space-y-6">
+          <Card>
+            <CardHeader>
+              <div className="flex items-center justify-between">
+                <div>
+                  <CardTitle>{h.todaysSchedule}</CardTitle>
+                  <CardDescription>
+                    <ArabicNumber value={6} /> {h.appointmentsToday}
+                  </CardDescription>
                 </div>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-3">
-                  {todaysAppointments.map((apt) => (
-                    <Link
-                      key={apt.id}
-                      href={`/examples/healthcare/patients/${apt.id}`}
-                      className="flex items-center justify-between p-3 rounded-lg border bg-card hover:bg-accent/50 transition-colors"
-                    >
-                      <div className="flex items-center gap-3">
-                        <div className="text-sm font-mono text-muted-foreground w-12">
-                          {apt.time}
-                        </div>
-                        <Avatar className="h-8 w-8">
-                          <AvatarImage src={apt.patientImage} alt={apt.patientName} />
-                          <AvatarFallback className="text-xs">{apt.patientInitials}</AvatarFallback>
-                        </Avatar>
-                        <div>
-                          <p className="font-medium text-sm">
-                            {isRTL ? apt.patientNameAr : apt.patientName}
-                          </p>
-                          <p className="text-xs text-muted-foreground">
-                            {isRTL ? apt.doctorAr : apt.doctor} · {isRTL ? apt.typeAr : apt.type}
-                          </p>
-                        </div>
-                      </div>
-                      {getStatusBadge(apt.status, h)}
-                    </Link>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Quick Actions using FeatureCard */}
-            <div className="grid gap-4 sm:grid-cols-3">
-              <FeatureCard
-                title={h.patientDirectory}
-                description={h.patientDirectoryDesc}
-                icon={Users}
-                href="/examples/healthcare/patients"
-              />
-              <FeatureCard
-                title={h.appointmentCalendar}
-                description={h.appointmentCalendarDesc}
-                icon={CalendarDots}
-                href="/examples/healthcare/appointments"
-              />
-              <FeatureCard
-                title={h.prescriptionMgmt}
-                description={h.prescriptionMgmtDesc}
-                icon={Pill}
-                href="/examples/healthcare/prescriptions"
-              />
-            </div>
-          </div>
-
-          {/* Right sidebar - Alerts & Quick Nav */}
-          <div className="space-y-6">
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Bell className="h-5 w-5" />
-                  {h.recentAlerts}
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <Alert>
-                  <CheckCircle className="h-4 w-4" />
-                  <AlertTitle>{h.labResultReady}</AlertTitle>
-                  <AlertDescription>{h.labResultDesc}</AlertDescription>
-                </Alert>
-                <Alert>
-                  <Clock className="h-4 w-4" />
-                  <AlertTitle>{h.appointmentReminder}</AlertTitle>
-                  <AlertDescription>{h.appointmentReminderDesc}</AlertDescription>
-                </Alert>
-                <Alert variant="destructive">
-                  <Warning className="h-4 w-4" />
-                  <AlertTitle>{h.lowStock}</AlertTitle>
-                  <AlertDescription>{h.lowStockDesc}</AlertDescription>
-                </Alert>
-              </CardContent>
-            </Card>
-
-            {/* Quick Actions */}
-            <Card>
-              <CardHeader>
-                <CardTitle>{h.quickActions}</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-2">
-                <Button className="w-full justify-start gap-2" asChild>
+                <Button variant="outline" size="sm" asChild>
                   <Link href="/examples/healthcare/appointments">
-                    <Plus className="h-4 w-4" />
-                    {h.newAppointment}
+                    {h.viewAppointments}
+                    <Arrow className="h-4 w-4 ms-2" />
                   </Link>
                 </Button>
-                <Button variant="outline" className="w-full justify-start gap-2" asChild>
-                  <Link href="/examples/healthcare/patients">
-                    <UserPlus className="h-4 w-4" />
-                    {h.addPatient}
+              </div>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-3">
+                {todaysAppointments.map((apt) => (
+                  <Link
+                    key={apt.id}
+                    href={`/examples/healthcare/patients/${apt.id}`}
+                    className="flex items-center justify-between p-3 rounded-lg border bg-card hover:bg-accent/50 transition-colors"
+                  >
+                    <div className="flex items-center gap-3">
+                      <div className="text-sm font-mono text-muted-foreground w-12">
+                        {apt.time}
+                      </div>
+                      <Avatar className="h-8 w-8">
+                        <AvatarImage src={apt.patientImage} alt={apt.patientName} />
+                        <AvatarFallback className="text-xs">{apt.patientInitials}</AvatarFallback>
+                      </Avatar>
+                      <div>
+                        <p className="font-medium text-sm">
+                          {isRTL ? apt.patientNameAr : apt.patientName}
+                        </p>
+                        <p className="text-xs text-muted-foreground">
+                          {isRTL ? apt.doctorAr : apt.doctor} · {isRTL ? apt.typeAr : apt.type}
+                        </p>
+                      </div>
+                    </div>
+                    {getStatusBadge(apt.status, h)}
                   </Link>
-                </Button>
-                <Button variant="outline" className="w-full justify-start gap-2" asChild>
-                  <Link href="/examples/healthcare/prescriptions">
-                    <Pill className="h-4 w-4" />
-                    {h.writePrescription}
-                  </Link>
-                </Button>
-              </CardContent>
-            </Card>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Quick Actions using FeatureCard */}
+          <div className="grid gap-4 sm:grid-cols-3">
+            <FeatureCard
+              title={h.patientDirectory}
+              description={h.patientDirectoryDesc}
+              icon={Users}
+              href="/examples/healthcare/patients"
+            />
+            <FeatureCard
+              title={h.appointmentCalendar}
+              description={h.appointmentCalendarDesc}
+              icon={CalendarDots}
+              href="/examples/healthcare/appointments"
+            />
+            <FeatureCard
+              title={h.prescriptionMgmt}
+              description={h.prescriptionMgmtDesc}
+              icon={Pill}
+              href="/examples/healthcare/prescriptions"
+            />
           </div>
         </div>
-      </main>
+
+        {/* Right sidebar - Alerts & Quick Nav */}
+        <div className="space-y-6">
+          <Card>
+            <CardHeader>
+              <CardTitle>{h.appointmentsByType}</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="flex justify-center mb-4">
+                <Chart
+                  type="donut"
+                  data={[]}
+                  value={35}
+                  innerLabel="35%"
+                  innerSubLabel={h.generalCheckup}
+                  size="sm"
+                  colors={['var(--color-primary)']}
+                  aria-label={h.appointmentsByType}
+                />
+              </div>
+              <div className="space-y-2">
+                {[
+                  { label: h.generalCheckup, value: '35%', color: 'bg-primary' },
+                  { label: h.followUp, value: '25%', color: 'bg-success' },
+                  { label: h.consultation, value: '20%', color: 'bg-info' },
+                  { label: h.dental, value: '10%', color: 'bg-warning' },
+                  { label: h.pediatrics, value: '10%', color: 'bg-destructive' },
+                ].map((item) => (
+                  <div key={item.label} className="flex items-center justify-between text-sm">
+                    <div className="flex items-center gap-2">
+                      <div className={`h-2.5 w-2.5 rounded-full ${item.color}`} />
+                      <span className="text-muted-foreground">{item.label}</span>
+                    </div>
+                    <span className="font-medium">{item.value}</span>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Bell className="h-5 w-5" />
+                {h.recentAlerts}
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <Alert>
+                <CheckCircle className="h-4 w-4" />
+                <AlertTitle>{h.labResultReady}</AlertTitle>
+                <AlertDescription>{h.labResultDesc}</AlertDescription>
+              </Alert>
+              <Alert>
+                <Clock className="h-4 w-4" />
+                <AlertTitle>{h.appointmentReminder}</AlertTitle>
+                <AlertDescription>{h.appointmentReminderDesc}</AlertDescription>
+              </Alert>
+              <Alert variant="destructive">
+                <Warning className="h-4 w-4" />
+                <AlertTitle>{h.lowStock}</AlertTitle>
+                <AlertDescription>{h.lowStockDesc}</AlertDescription>
+              </Alert>
+            </CardContent>
+          </Card>
+
+          {/* Quick Actions */}
+          <Card>
+            <CardHeader>
+              <CardTitle>{h.quickActions}</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-2">
+              <Button className="w-full justify-start gap-2" asChild>
+                <Link href="/examples/healthcare/appointments">
+                  <Plus className="h-4 w-4" />
+                  {h.newAppointment}
+                </Link>
+              </Button>
+              <Button variant="outline" className="w-full justify-start gap-2" asChild>
+                <Link href="/examples/healthcare/patients">
+                  <UserPlus className="h-4 w-4" />
+                  {h.addPatient}
+                </Link>
+              </Button>
+              <Button variant="outline" className="w-full justify-start gap-2" asChild>
+                <Link href="/examples/healthcare/prescriptions">
+                  <Pill className="h-4 w-4" />
+                  {h.writePrescription}
+                </Link>
+              </Button>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
     </div>
   )
 }

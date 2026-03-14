@@ -4,7 +4,6 @@ import * as React from 'react'
 import Link from 'next/link'
 import {Card, CardContent, CardHeader, CardTitle} from '@/components/ui/card'
 import {Button} from '@/components/ui/button'
-import {ButtonArrow} from '@/components/ui/button-arrow'
 import {Badge} from '@/components/ui/badge'
 import {Separator} from '@/components/ui/separator'
 import {Tabs, TabsContent, TabsList, TabsTrigger} from '@/components/ui/tabs'
@@ -14,7 +13,6 @@ import {
   CheckCircle,
   CreditCard,
   Heart,
-  House,
   MapPin,
   Package,
   ShareNetwork,
@@ -24,7 +22,6 @@ import {
   Truck,
 } from '@phosphor-icons/react'
 import {useDirection} from '@/components/providers/direction-provider'
-import {DirectionToggle} from '@/components/docs/direction-toggle'
 import {content} from '@/lib/i18n'
 import {cn} from '@/lib/utils'
 
@@ -221,67 +218,7 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
   }
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50">
-        <div className="container flex h-16 items-center justify-between">
-          <div className="flex items-center gap-6">
-            <Link href="/" className="flex items-center gap-2">
-              <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center">
-                <House className="h-5 w-5 text-primary-foreground" aria-hidden="true" />
-              </div>
-              <span className="font-bold text-xl hidden sm:inline">
-                {t.marketplace.header.title}
-              </span>
-            </Link>
-          </div>
-
-          <div className="flex items-center gap-4">
-            <ButtonArrow direction="back" icon="arrow" variant="outline" size="sm" asChild>
-              <Link href="/examples/marketplace">
-                {t.marketplaceProduct.backToMarketplace}
-              </Link>
-            </ButtonArrow>
-          </div>
-        </div>
-      </header>
-
-      {/* Breadcrumb */}
-      <div className="border-b bg-background">
-        <div className="container py-3">
-          <nav aria-label={isRTL ? 'مسار التنقل' : 'Breadcrumb'}>
-            <div className="flex items-center justify-between gap-4">
-              <ol className="flex items-center gap-2 text-sm text-muted-foreground">
-                <li>
-                  <Link href="/" className="hover:text-foreground transition-colors">
-                    {t.nav.home}
-                  </Link>
-                </li>
-                <li aria-hidden="true">/</li>
-                <li>
-                  <Link href="/examples" className="hover:text-foreground transition-colors">
-                    {t.nav.examples}
-                  </Link>
-                </li>
-                <li aria-hidden="true">/</li>
-                <li>
-                  <Link href="/examples/marketplace" className="hover:text-foreground transition-colors">
-                    {t.marketplaceProduct.breadcrumb.marketplace}
-                  </Link>
-                </li>
-                <li aria-hidden="true">/</li>
-                <li className="text-foreground font-medium line-clamp-1" aria-current="page">
-                  {isRTL ? product.nameAr : product.name}
-                </li>
-              </ol>
-              <DirectionToggle />
-            </div>
-          </nav>
-        </div>
-      </div>
-
-      {/* Main Content */}
-      <main className="container py-8">
+    <div className="container py-8">
         <div className="grid gap-8 lg:grid-cols-3">
           {/* Product Images */}
           <div className="lg:col-span-2 space-y-4">
@@ -656,7 +593,6 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
             </TabsContent>
           </Tabs>
         </div>
-      </main>
     </div>
   )
 }

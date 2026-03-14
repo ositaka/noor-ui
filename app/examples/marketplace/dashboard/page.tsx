@@ -3,9 +3,9 @@
 import * as React from 'react'
 import Link from 'next/link'
 import { useDirection } from '@/components/providers/direction-provider'
-import { DirectionToggle } from '@/components/docs/direction-toggle'
 import { content } from '@/lib/i18n'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Chart } from '@/components/ui/chart'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -286,38 +286,7 @@ export default function VendorDashboardPage() {
   }
 
   return (
-    <div className="min-h-screen">
-      <main id="main-content" className="container py-12">
-        {/* Breadcrumb */}
-        <nav aria-label={isRTL ? 'مسار التنقل' : 'Breadcrumb'} className="mb-8">
-          <div className="flex items-center justify-between gap-4">
-            <ol className="flex items-center gap-2 text-sm text-muted-foreground">
-              <li>
-                <Link href="/" className="hover:text-foreground transition-colors">
-                  {t.breadcrumb.home}
-                </Link>
-              </li>
-              <li aria-hidden="true">/</li>
-              <li>
-                <Link href="/examples" className="hover:text-foreground transition-colors">
-                  {t.breadcrumb.examples}
-                </Link>
-              </li>
-              <li aria-hidden="true">/</li>
-              <li>
-                <Link href="/examples/marketplace" className="hover:text-foreground transition-colors">
-                  {t.breadcrumb.marketplace}
-                </Link>
-              </li>
-              <li aria-hidden="true">/</li>
-              <li className="text-foreground font-medium" aria-current="page">
-                {t.breadcrumb.dashboard}
-              </li>
-            </ol>
-            <DirectionToggle />
-          </div>
-        </nav>
-
+    <div className="container py-8">
         {/* Page Header */}
         <div className="flex items-center justify-between mb-8">
           <div>
@@ -407,6 +376,32 @@ export default function VendorDashboardPage() {
             </CardContent>
           </Card>
         </div>
+
+        {/* Revenue Trend */}
+        <Card className="mb-8">
+          <CardHeader>
+            <CardTitle>{isRTL ? 'اتجاه الإيرادات' : 'Revenue Trend'}</CardTitle>
+            <CardDescription>{isRTL ? 'الإيرادات الشهرية بالريال السعودي' : 'Monthly revenue in SAR'}</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <Chart
+              type="line"
+              data={[
+                { month: isRTL ? 'أكتوبر' : 'Oct', revenue: 85000 },
+                { month: isRTL ? 'نوفمبر' : 'Nov', revenue: 92000 },
+                { month: isRTL ? 'ديسمبر' : 'Dec', revenue: 128000 },
+                { month: isRTL ? 'يناير' : 'Jan', revenue: 105000 },
+                { month: isRTL ? 'فبراير' : 'Feb', revenue: 118000 },
+                { month: isRTL ? 'مارس' : 'Mar', revenue: 134000 },
+              ]}
+              categoryKey="month"
+              valueKey="revenue"
+              size="md"
+              colors={['var(--color-primary)']}
+              aria-label={isRTL ? 'اتجاه الإيرادات' : 'Revenue Trend'}
+            />
+          </CardContent>
+        </Card>
 
         {/* Main Content Tabs */}
         <Tabs defaultValue="profile" className="space-y-6">
@@ -932,7 +927,6 @@ export default function VendorDashboardPage() {
             )}
           </TabsContent>
         </Tabs>
-      </main>
     </div>
   )
 }

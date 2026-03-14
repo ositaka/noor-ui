@@ -3,7 +3,6 @@
 import * as React from 'react'
 import Link from 'next/link'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Input } from '@/components/ui/input'
 import { ArabicNumber } from '@/components/ui/arabic-number'
@@ -22,26 +21,18 @@ import {
   TabsTrigger,
 } from '@/components/ui/tabs'
 import {
-  House,
   Storefront,
-  ShoppingCart,
   Star,
   MagnifyingGlass,
-  Funnel,
   TrendUp,
   Package,
   Users,
-  Heart,
-  MapPin,
-  Clock,
   Shield,
   Truck,
   CheckCircle,
-  Trophy,
   Tag,
 } from '@phosphor-icons/react'
 import { useDirection } from '@/components/providers/direction-provider'
-import { DirectionToggle } from '@/components/docs/direction-toggle'
 import { content } from '@/lib/i18n'
 import { cn } from '@/lib/utils'
 
@@ -350,68 +341,7 @@ export default function MarketplacePage() {
   ]
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50">
-        <div className="container flex h-16 items-center justify-between">
-          <div className="flex items-center gap-6">
-            <Link href="/" className="flex items-center gap-2">
-              <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center">
-                <House className="h-5 w-5 text-primary-foreground" aria-hidden="true" />
-              </div>
-              <span className="font-bold text-xl hidden sm:inline">
-                {t.marketplace.header.title}
-              </span>
-            </Link>
-          </div>
-
-          <div className="flex items-center gap-4">
-            <Button variant="ghost" size="sm" aria-label={isRTL ? 'المفضلة' : 'Wishlist'}>
-              <Heart className="h-5 w-5" aria-hidden="true" />
-            </Button>
-            <Button variant="outline" size="sm" asChild>
-              <Link href="/examples/marketplace/cart" aria-label={isRTL ? 'سلة التسوق' : 'Shopping cart'}>
-                <ShoppingCart className="h-5 w-5" aria-hidden="true" />
-                <Badge variant="destructive" className="ms-2 -me-2">3</Badge>
-              </Link>
-            </Button>
-            <Button variant="outline" size="sm" asChild>
-              <Link href="/examples">{t.nav.examples}</Link>
-            </Button>
-          </div>
-        </div>
-      </header>
-
-      {/* Breadcrumb */}
-      <div className="border-b bg-background">
-        <div className="container py-3">
-          <nav aria-label={isRTL ? 'مسار التنقل' : 'Breadcrumb'}>
-            <div className="flex items-center justify-between gap-4">
-              <ol className="flex items-center gap-2 text-sm text-muted-foreground">
-                <li>
-                  <Link href="/" className="hover:text-foreground transition-colors">
-                    {t.nav.home}
-                  </Link>
-                </li>
-                <li aria-hidden="true">/</li>
-                <li>
-                  <Link href="/examples" className="hover:text-foreground transition-colors">
-                    {t.nav.examples}
-                  </Link>
-                </li>
-                <li aria-hidden="true">/</li>
-                <li className="text-foreground font-medium" aria-current="page">
-                  {t.marketplace.breadcrumb.marketplace}
-                </li>
-              </ol>
-              <DirectionToggle />
-            </div>
-          </nav>
-        </div>
-      </div>
-
-      {/* Main Content */}
-      <main className="container py-8">
+    <div className="container py-8">
         {/* Hero Section */}
         <div className="mb-12">
           <div className="flex items-center gap-3 mb-4">
@@ -760,7 +690,6 @@ export default function MarketplacePage() {
             </div>
           )}
         </section>
-      </main>
     </div>
   )
 }

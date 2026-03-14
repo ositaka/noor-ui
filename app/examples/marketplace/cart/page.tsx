@@ -3,7 +3,6 @@
 import * as React from 'react'
 import Link from 'next/link'
 import { useDirection } from '@/components/providers/direction-provider'
-import { DirectionToggle } from '@/components/docs/direction-toggle'
 import { content } from '@/lib/i18n'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -108,38 +107,7 @@ export default function CartPage() {
   const total = subtotal + tax + shipping
 
   return (
-    <div className="min-h-screen">
-      <main id="main-content" className="container py-12">
-        {/* Breadcrumb */}
-        <nav aria-label={isRTL ? 'مسار التنقل' : 'Breadcrumb'} className="mb-8">
-          <div className="flex items-center justify-between gap-4">
-            <ol className="flex items-center gap-2 text-sm text-muted-foreground">
-              <li>
-                <Link href="/" className="hover:text-foreground transition-colors">
-                  {t.nav.home}
-                </Link>
-              </li>
-              <li aria-hidden="true">/</li>
-              <li>
-                <Link href="/examples" className="hover:text-foreground transition-colors">
-                  {t.nav.examples}
-                </Link>
-              </li>
-              <li aria-hidden="true">/</li>
-              <li>
-                <Link href="/examples/marketplace" className="hover:text-foreground transition-colors">
-                  {t.marketplaceCart.breadcrumb.marketplace}
-                </Link>
-              </li>
-              <li aria-hidden="true">/</li>
-              <li className="text-foreground font-medium" aria-current="page">
-                {t.marketplaceCart.breadcrumb.shoppingCart}
-              </li>
-            </ol>
-            <DirectionToggle />
-          </div>
-        </nav>
-
+    <div className="container py-8">
         {/* Page Header */}
         <div className="mb-8">
           <h1 className="text-4xl font-bold tracking-tight mb-2">
@@ -363,7 +331,6 @@ export default function CartPage() {
             </div>
           </div>
         )}
-      </main>
     </div>
   )
 }

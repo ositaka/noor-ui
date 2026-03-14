@@ -2,10 +2,9 @@
 
 import * as React from 'react'
 import dynamic from 'next/dynamic'
-import Link from 'next/link'
 import { useDirection } from '@/components/providers/direction-provider'
-import { DirectionToggle } from '@/components/docs/direction-toggle'
 import { content } from '@/lib/i18n'
+import { Chart } from '@/components/ui/chart'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
@@ -487,32 +486,7 @@ export default function IslamicFinanceDashboardPage() {
   ], [isRTL, locale])
 
   return (
-    <div className="min-h-screen bg-background" dir={direction}>
-      <div className="container mx-auto p-4 md:p-8 space-y-8">
-        {/* Breadcrumb */}
-        <nav aria-label={isRTL ? 'مسار التنقل' : 'Breadcrumb'}>
-          <div className="flex items-center justify-between gap-4">
-            <ol className="flex items-center gap-2 text-sm text-muted-foreground">
-              <li>
-                <Link href="/" className="hover:text-foreground transition-colors">
-                  {t.nav.home}
-                </Link>
-              </li>
-              <li aria-hidden="true">/</li>
-              <li>
-                <Link href="/examples" className="hover:text-foreground transition-colors">
-                  {t.nav.examples}
-                </Link>
-              </li>
-              <li aria-hidden="true">/</li>
-              <li className="text-foreground font-medium" aria-current="page">
-                {t.islamicFinancePage.breadcrumb.islamicFinance}
-              </li>
-            </ol>
-            <DirectionToggle />
-          </div>
-        </nav>
-
+    <div className="container py-8 space-y-8">
         {/* Header */}
         <div className="space-y-2">
           <h1 className="text-4xl font-bold tracking-tight">
@@ -687,8 +661,40 @@ export default function IslamicFinanceDashboardPage() {
                 </CardContent>
               </Card>
 
-              {/* Prayer Times Sidebar */}
+              {/* Sidebar */}
               <div className="space-y-4">
+                {/* Zakat Progress */}
+                <Card>
+                  <CardHeader>
+                    <CardTitle>{isRTL ? 'تقدم الزكاة' : 'Zakat Progress'}</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="flex justify-center mb-4">
+                      <Chart
+                        type="donut"
+                        data={[]}
+                        value={42}
+                        innerLabel={isRTL ? '٤٢٪' : '42%'}
+                        innerSubLabel={isRTL ? 'مكتمل' : 'Completed'}
+                        size="sm"
+                        colors={['var(--color-success)']}
+                        aria-label={isRTL ? 'تقدم الزكاة' : 'Zakat Progress'}
+                      />
+                    </div>
+                    <div className="space-y-2 text-sm">
+                      <div className="flex justify-between">
+                        <span className="text-muted-foreground">{isRTL ? 'المدفوع' : 'Paid'}</span>
+                        <span className="font-medium text-success"><ArabicNumber value={zakatPaid} format="currency" /></span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-muted-foreground">{isRTL ? 'المتبقي' : 'Remaining'}</span>
+                        <span className="font-medium"><ArabicNumber value={1500 - zakatPaid} format="currency" /></span>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* Prayer Times */}
                 <Card>
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2">
@@ -910,7 +916,6 @@ export default function IslamicFinanceDashboardPage() {
             </Card>
           </TabsContent>
         </Tabs>
-      </div>
     </div>
   )
 }

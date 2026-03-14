@@ -8,7 +8,6 @@ import { Badge } from '@/components/ui/badge'
 import { Input } from '@/components/ui/input'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { ArabicNumber } from '@/components/ui/arabic-number'
-import { Separator } from '@/components/ui/separator'
 import { DataTable, type ColumnDef } from '@/components/ui/data-table'
 import {
   Dialog,
@@ -29,23 +28,12 @@ import {
 import { Label } from '@/components/ui/label'
 import { DatePicker } from '@/components/ui/date-picker'
 import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from '@/components/ui/breadcrumb'
-import {
   Users,
-  FirstAid,
   UserPlus,
   MagnifyingGlass,
   Funnel,
 } from '@phosphor-icons/react'
 import { useDirection } from '@/components/providers/direction-provider'
-import { DirectionToggle } from '@/components/docs/direction-toggle'
-import { content } from '@/lib/i18n'
 
 const hc = {
   en: {
@@ -211,7 +199,6 @@ const patients: Patient[] = [
 export default function PatientsPage() {
   const { direction, locale } = useDirection()
   const isRTL = direction === 'rtl'
-  const t = content[locale]
   const h = hc[locale]
 
   const [searchQuery, setSearchQuery] = React.useState('')
@@ -302,69 +289,7 @@ export default function PatientsPage() {
   ]
 
   return (
-    <div className="min-h-screen">
-      {/* Header */}
-      <header className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50">
-        <div className="container flex h-16 items-center justify-between">
-          <div className="flex items-center gap-6">
-            <Link href="/examples/healthcare" className="flex items-center gap-2">
-              <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center">
-                <FirstAid className="h-5 w-5 text-primary-foreground" />
-              </div>
-              <span className="font-bold text-xl hidden sm:inline">{h.title}</span>
-            </Link>
-          </div>
-          <nav aria-label={h.mainNavigation} className="flex items-center gap-1">
-            <Button variant="ghost" size="sm" asChild>
-              <Link href="/examples/healthcare">{h.dashboard}</Link>
-            </Button>
-            <Button variant="ghost" size="sm" className="font-medium" asChild>
-              <Link href="/examples/healthcare/patients">{h.patients}</Link>
-            </Button>
-            <Button variant="ghost" size="sm" asChild>
-              <Link href="/examples/healthcare/appointments">{h.appointments}</Link>
-            </Button>
-            <Button variant="ghost" size="sm" asChild>
-              <Link href="/examples/healthcare/prescriptions">{h.prescriptions}</Link>
-            </Button>
-            <Separator orientation="vertical" className="mx-2 h-4" />
-            <Button variant="outline" size="sm" asChild>
-              <Link href="/examples">{t.nav.examples}</Link>
-            </Button>
-          </nav>
-        </div>
-      </header>
-
-      {/* Breadcrumb */}
-      <div className="border-b bg-background">
-        <div className="container py-3">
-          <div className="flex items-center justify-between gap-4">
-            <Breadcrumb>
-              <BreadcrumbList>
-                <BreadcrumbItem>
-                  <BreadcrumbLink href="/">{t.nav.home}</BreadcrumbLink>
-                </BreadcrumbItem>
-                <BreadcrumbSeparator />
-                <BreadcrumbItem>
-                  <BreadcrumbLink href="/examples">{t.nav.examples}</BreadcrumbLink>
-                </BreadcrumbItem>
-                <BreadcrumbSeparator />
-                <BreadcrumbItem>
-                  <BreadcrumbLink href="/examples/healthcare">{h.title}</BreadcrumbLink>
-                </BreadcrumbItem>
-                <BreadcrumbSeparator />
-                <BreadcrumbItem>
-                  <BreadcrumbPage>{h.patients}</BreadcrumbPage>
-                </BreadcrumbItem>
-              </BreadcrumbList>
-            </Breadcrumb>
-            <DirectionToggle />
-          </div>
-        </div>
-      </div>
-
-      {/* Main Content */}
-      <main className="container py-8">
+    <div className="container py-8">
         {/* Page Header */}
         <div className="flex items-center justify-between mb-8">
           <div className="flex items-center gap-3">
@@ -505,7 +430,6 @@ export default function PatientsPage() {
           pageLabel={isRTL ? `صفحة ${currentPage} من ${Math.ceil(filteredPatients.length / 10)}` : `Page ${currentPage} of ${Math.ceil(filteredPatients.length / 10)}`}
           className="bg-card"
         />
-      </main>
     </div>
   )
 }

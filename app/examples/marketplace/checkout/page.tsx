@@ -3,7 +3,6 @@
 import * as React from 'react'
 import Link from 'next/link'
 import { useDirection } from '@/components/providers/direction-provider'
-import { DirectionToggle } from '@/components/docs/direction-toggle'
 import { content } from '@/lib/i18n'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -92,8 +91,7 @@ export default function CheckoutPage() {
 
   if (orderPlaced) {
     return (
-      <div className="min-h-screen">
-        <main id="main-content" className="container py-12">
+      <div className="container py-8">
           <Card className="max-w-2xl mx-auto">
             <CardContent className="p-12">
               <div className="flex flex-col items-center text-center space-y-6">
@@ -155,50 +153,12 @@ export default function CheckoutPage() {
               </div>
             </CardContent>
           </Card>
-        </main>
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen">
-      <main id="main-content" className="container py-12">
-        {/* Breadcrumb */}
-        <nav aria-label={isRTL ? 'مسار التنقل' : 'Breadcrumb'} className="mb-8">
-          <div className="flex items-center justify-between gap-4">
-            <ol className="flex items-center gap-2 text-sm text-muted-foreground">
-              <li>
-                <Link href="/" className="hover:text-foreground transition-colors">
-                  {t.marketplaceCheckout.breadcrumb.home}
-                </Link>
-              </li>
-              <li aria-hidden="true">/</li>
-              <li>
-                <Link href="/examples" className="hover:text-foreground transition-colors">
-                  {t.marketplaceCheckout.breadcrumb.examples}
-                </Link>
-              </li>
-              <li aria-hidden="true">/</li>
-              <li>
-                <Link href="/examples/marketplace" className="hover:text-foreground transition-colors">
-                  {t.marketplaceCheckout.breadcrumb.marketplace}
-                </Link>
-              </li>
-              <li aria-hidden="true">/</li>
-              <li>
-                <Link href="/examples/marketplace/cart" className="hover:text-foreground transition-colors">
-                  {t.marketplaceCheckout.breadcrumb.cart}
-                </Link>
-              </li>
-              <li aria-hidden="true">/</li>
-              <li className="text-foreground font-medium" aria-current="page">
-                {t.marketplaceCheckout.pageTitle}
-              </li>
-            </ol>
-            <DirectionToggle />
-          </div>
-        </nav>
-
+    <div className="container py-8">
         {/* Page Header */}
         <div className="mb-8">
           <h1 className="text-4xl font-bold tracking-tight mb-2">
@@ -639,7 +599,6 @@ export default function CheckoutPage() {
             </Card>
           </div>
         </div>
-      </main>
     </div>
   )
 }
