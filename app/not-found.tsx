@@ -55,7 +55,7 @@ export default function NotFound() {
             <p className="text-sm text-muted-foreground mb-4">
               {t.notFound.tryLinks}
             </p>
-            <div className="flex flex-wrap gap-3 justify-center">
+            <div className="flex flex-wrap gap-3 justify-center items-center">
               <Link
                 href="/getting-started"
                 className="text-sm text-primary hover:underline"
@@ -69,10 +69,6 @@ export default function NotFound() {
               <span className="text-muted-foreground">•</span>
               <Link href="/documentation" className="text-sm text-primary hover:underline">
                 {t.nav.documentation}
-              </Link>
-              <span className="text-muted-foreground">•</span>
-              <Link href="/starters" className="text-sm text-primary hover:underline">
-                {t.notFound.starters}
               </Link>
               <span className="text-muted-foreground">•</span>
               <Link href="/sitemap" className="text-sm text-primary hover:underline">

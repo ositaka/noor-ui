@@ -40,12 +40,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   // Example pages (all directories under app/examples/)
   const examples = [
-    'gcc-dashboard', 'islamic-finance-dashboard', 'calendar', 'datatable-showcase',
-    'registration', 'dashboard', 'ecommerce', 'cms',
-    'marketplace', 'b2b-marketplace', 'portfolio', 'real-estate', 'healthcare', 'education',
-    'blog-dashboard', 'workflow-basic', 'accessible-inputs',
-    'ai-chat-simple', 'ai-playground', 'ai-code-assistant', 'ai-document-qa',
-    'ai-multi-agent', 'ai-workflow', 'ai-agent-evals',
+    'islamic-finance-dashboard', 'calendar', 'registration',
+    'marketplace', 'portfolio', 'real-estate', 'healthcare', 'education',
+    'ai-playground',
   ]
 
   return [
@@ -91,12 +88,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly' as const,
       priority: 0.7,
     })),
-    {
-      url: `${baseUrl}/starters`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.8,
-    },
     {
       url: `${baseUrl}/getting-started`,
       lastModified: new Date(),

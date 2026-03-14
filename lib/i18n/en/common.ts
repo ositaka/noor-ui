@@ -8,7 +8,6 @@ nav: {
       home: 'Home',
       components: 'Components',
       examples: 'Examples',
-      starters: 'Starters',
       storybook: 'Storybook',
       rtlGuide: 'RTL Guide',
       tokens: 'Design Tokens',

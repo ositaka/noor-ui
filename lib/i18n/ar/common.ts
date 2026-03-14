@@ -8,7 +8,6 @@ nav: {
       home: 'الرئيسية',
       components: 'المكونات',
       examples: 'الأمثلة',
-      starters: 'نماذج البداية',
       storybook: 'ستوريبوك',
       rtlGuide: 'دليل RTL',
       tokens: 'رموز التصميم',

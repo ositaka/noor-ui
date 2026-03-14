@@ -10,24 +10,12 @@ import {
   FileText,
   CheckSquare,
   SquaresFour,
-  ShoppingCart,
   Calendar,
   Sparkle,
-  Table,
   Bank,
-  PenNib,
   House,
   Storefront,
-  NotePencil,
-  TrendUp,
-  ChatCentered,
-  CodeBlock,
-  BookOpen,
-  Users,
   Robot,
-  GitBranch,
-  TreeStructure,
-  Pulse,
   FirstAid,
   GraduationCap,
   type Icon as PhosphorIcon,
@@ -37,26 +25,16 @@ import {
 const iconMap: Record<string, PhosphorIcon> = {
   '/examples/education': GraduationCap,
   '/examples/healthcare': FirstAid,
-  '/examples/gcc-dashboard': Sparkle,
   '/examples/islamic-finance-dashboard': Bank,
-  '/examples/datatable-showcase': Table,
   '/examples/registration': FileText,
-  '/examples/dashboard': SquaresFour,
   '/examples/calendar': Calendar,
   '/examples/real-estate': House,
   '/examples/portfolio': SquaresFour,
   '/examples/marketplace': Storefront,
-  '/examples/b2b-marketplace': ShoppingCart,
-  '/examples/cms': NotePencil,
-  '/examples/ai-chat-simple': ChatCentered,
   '/examples/ai-playground': Robot,
-  '/examples/ai-code-assistant': CodeBlock,
-  '/examples/ai-document-qa': BookOpen,
-  '/examples/ai-multi-agent': Users,
-  '/examples/workflow-basic': GitBranch,
-  '/examples/ai-workflow': TreeStructure,
-  '/examples/ai-agent-evals': Pulse,
-  '/examples/analytics': TrendUp,
+  '/examples/government': Sparkle,
+  '/examples/hotel': House,
+  '/examples/banking': Bank,
 }
 
 interface Example {
@@ -175,26 +153,8 @@ export default function ExamplesPage() {
           </Card>
         </div>
 
-        {/* Link to Starters */}
-        <div className="mt-12 max-w-3xl space-y-4">
-          <Card className="border-primary/50 bg-primary/5">
-            <CardContent className="p-6">
-              <div className="space-y-4">
-                <h3 className="font-semibold">
-                  {t.examples.lookingForApps}
-                </h3>
-                <p className="text-sm text-muted-foreground">
-                  {t.examples.lookingForAppsDesc}
-                </p>
-                <Link href="/starters">
-                  <Badge className="cursor-pointer hover:bg-primary/90">
-                    {t.examples.viewStarters}
-                  </Badge>
-                </Link>
-              </div>
-            </CardContent>
-          </Card>
-
+        {/* Link to Components */}
+        <div className="mt-12 max-w-3xl">
           <Card className="border-primary/50">
             <CardContent className="p-6">
               <div className="space-y-4">

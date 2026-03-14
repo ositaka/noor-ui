@@ -5,28 +5,15 @@
  * to improve initial bundle size and page load performance.
  *
  * Usage:
- * import { GCCDashboardLazy } from './dynamic-imports'
+ * import { IslamicFinanceDashboardLazy } from './dynamic-imports'
  *
  * <Suspense fallback={<LoadingSpinner />}>
- *   <GCCDashboardLazy />
+ *   <IslamicFinanceDashboardLazy />
  * </Suspense>
  */
 
 import dynamic from 'next/dynamic'
 import { LoadingSpinner } from '@/components/ui/loading-spinner'
-
-// GCC Dashboard - 410 lines
-export const GCCDashboardLazy = dynamic(
-  () => import('./gcc-dashboard/page').then(mod => ({ default: mod.default })),
-  {
-    loading: () => (
-      <div className="min-h-screen flex items-center justify-center">
-        <LoadingSpinner size="lg" text="Loading GCC Dashboard..." />
-      </div>
-    ),
-    ssr: false, // Disable SSR for heavy interactive components
-  }
-)
 
 // Islamic Finance Dashboard - 872 lines
 export const IslamicFinanceDashboardLazy = dynamic(
@@ -35,45 +22,6 @@ export const IslamicFinanceDashboardLazy = dynamic(
     loading: () => (
       <div className="min-h-screen flex items-center justify-center">
         <LoadingSpinner size="lg" text="Loading Islamic Finance Dashboard..." />
-      </div>
-    ),
-    ssr: false,
-  }
-)
-
-// DataTable Showcase - 645 lines
-export const DataTableShowcaseLazy = dynamic(
-  () => import('./datatable-showcase/page').then(mod => ({ default: mod.default })),
-  {
-    loading: () => (
-      <div className="min-h-screen flex items-center justify-center">
-        <LoadingSpinner size="lg" text="Loading DataTable Showcase..." />
-      </div>
-    ),
-    ssr: false,
-  }
-)
-
-// Dashboard - can also be lazy loaded
-export const DashboardLazy = dynamic(
-  () => import('./dashboard/page').then(mod => ({ default: mod.default })),
-  {
-    loading: () => (
-      <div className="min-h-screen flex items-center justify-center">
-        <LoadingSpinner size="lg" text="Loading Dashboard..." />
-      </div>
-    ),
-    ssr: false,
-  }
-)
-
-// E-commerce
-export const EcommerceLazy = dynamic(
-  () => import('@/app/examples/ecommerce/page').then(mod => ({ default: mod.default })),
-  {
-    loading: () => (
-      <div className="min-h-screen flex items-center justify-center">
-        <LoadingSpinner size="lg" text="Loading E-commerce Example..." />
       </div>
     ),
     ssr: false,
