@@ -50,28 +50,15 @@ export default function SitemapPage() {
   };
 
   const examples = [
-    { slug: 'registration', nameKey: 'registration' },
-    { slug: 'dashboard', nameKey: 'dashboard' },
-    { slug: 'cms', nameKey: 'cms' },
-    { slug: 'blog-dashboard', nameKey: 'blogDashboard' },
-    { slug: 'calendar', nameKey: 'calendar' },
-    { slug: 'workflow-basic', nameKey: 'workflowBasic' },
-    { slug: 'ecommerce', nameKey: 'ecommerce' },
-    { slug: 'marketplace', nameKey: 'marketplace' },
-    { slug: 'b2b-marketplace', nameKey: 'b2bMarketplace' },
-    { slug: 'portfolio', nameKey: 'portfolio' },
-    { slug: 'real-estate', nameKey: 'realEstate' },
+    { slug: 'education', nameKey: 'education' },
+    { slug: 'healthcare', nameKey: 'healthcare' },
     { slug: 'islamic-finance-dashboard', nameKey: 'islamicFinanceDashboard' },
-    { slug: 'gcc-dashboard', nameKey: 'gccDashboard' },
-    { slug: 'datatable-showcase', nameKey: 'datatableShowcase' },
-    { slug: 'accessible-inputs', nameKey: 'accessibleInputs' },
-    { slug: 'ai-chat-simple', nameKey: 'aiChatSimple' },
+    { slug: 'registration', nameKey: 'registration' },
+    { slug: 'calendar', nameKey: 'calendar' },
+    { slug: 'real-estate', nameKey: 'realEstate' },
+    { slug: 'portfolio', nameKey: 'portfolio' },
+    { slug: 'marketplace', nameKey: 'marketplace' },
     { slug: 'ai-playground', nameKey: 'aiPlayground' },
-    { slug: 'ai-code-assistant', nameKey: 'aiCodeAssistant' },
-    { slug: 'ai-document-qa', nameKey: 'aiDocumentQa' },
-    { slug: 'ai-multi-agent', nameKey: 'aiMultiAgent' },
-    { slug: 'ai-workflow', nameKey: 'aiWorkflow' },
-    { slug: 'ai-agent-evals', nameKey: 'aiAgentEvals' },
   ];
 
   const resources = [
@@ -82,7 +69,6 @@ export default function SitemapPage() {
     { href: '/utilities', nameKey: 'utilities' },
     { href: '/roadmap', nameKey: 'roadmap' },
     { href: '/license', nameKey: 'license' },
-    { href: '/starters', nameKey: 'starters' },
   ];
 
   const themesAndDesign = [
