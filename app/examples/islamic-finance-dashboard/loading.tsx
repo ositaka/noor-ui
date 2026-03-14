@@ -4,8 +4,7 @@ import { Separator } from '@/components/ui/separator'
 
 export default function IslamicFinanceDashboardLoading() {
   return (
-    <div className="min-h-screen bg-background">
-      <div className="container mx-auto p-4 md:p-8 space-y-8">
+    <div className="container py-8 space-y-8">
         {/* Header Skeleton */}
         <div className="space-y-2">
           <Skeleton className="h-10 w-96" />
@@ -112,7 +111,6 @@ export default function IslamicFinanceDashboardLoading() {
             </div>
           </CardContent>
         </Card>
-      </div>
     </div>
   )
 }

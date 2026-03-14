@@ -13,17 +13,9 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { HijriDate } from '@/components/ui/hijri-date'
 import { Progress } from '@/components/ui/progress'
 import { DataTable, type ColumnDef } from '@/components/ui/data-table'
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from '@/components/ui/breadcrumb'
+import { Timeline } from '@/components/ui/timeline'
 import { ButtonArrow } from '@/components/ui/button-arrow'
 import {
-  FirstAid,
   Heart,
   Heartbeat,
   Drop,
@@ -46,8 +38,6 @@ import {
   Eye,
 } from '@phosphor-icons/react'
 import { useDirection } from '@/components/providers/direction-provider'
-import { DirectionToggle } from '@/components/docs/direction-toggle'
-import { content } from '@/lib/i18n'
 
 const hc = {
   en: {
@@ -305,80 +295,13 @@ export default function PatientDetailPage() {
   const params = useParams()
   const { direction, locale } = useDirection()
   const isRTL = direction === 'rtl'
-  const t = content[locale]
   const h = hc[locale]
 
   const patientId = params.id as string
   const patient = patientsData[patientId] || patientsData['1']
 
   return (
-    <div className="min-h-screen">
-      {/* Header */}
-      <header className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50">
-        <div className="container flex h-16 items-center justify-between">
-          <div className="flex items-center gap-6">
-            <Link href="/examples/healthcare" className="flex items-center gap-2">
-              <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center">
-                <FirstAid className="h-5 w-5 text-primary-foreground" />
-              </div>
-              <span className="font-bold text-xl hidden sm:inline">{h.title}</span>
-            </Link>
-          </div>
-          <nav aria-label={h.mainNavigation} className="flex items-center gap-1">
-            <Button variant="ghost" size="sm" asChild>
-              <Link href="/examples/healthcare">{h.dashboard}</Link>
-            </Button>
-            <Button variant="ghost" size="sm" className="font-medium" asChild>
-              <Link href="/examples/healthcare/patients">{h.patients}</Link>
-            </Button>
-            <Button variant="ghost" size="sm" asChild>
-              <Link href="/examples/healthcare/appointments">{h.appointments}</Link>
-            </Button>
-            <Button variant="ghost" size="sm" asChild>
-              <Link href="/examples/healthcare/prescriptions">{h.prescriptions}</Link>
-            </Button>
-            <Separator orientation="vertical" className="mx-2 h-4" />
-            <Button variant="outline" size="sm" asChild>
-              <Link href="/examples">{t.nav.examples}</Link>
-            </Button>
-          </nav>
-        </div>
-      </header>
-
-      {/* Breadcrumb */}
-      <div className="border-b bg-background">
-        <div className="container py-3">
-          <div className="flex items-center justify-between gap-4">
-            <Breadcrumb>
-              <BreadcrumbList>
-                <BreadcrumbItem>
-                  <BreadcrumbLink href="/">{t.nav.home}</BreadcrumbLink>
-                </BreadcrumbItem>
-                <BreadcrumbSeparator />
-                <BreadcrumbItem>
-                  <BreadcrumbLink href="/examples">{t.nav.examples}</BreadcrumbLink>
-                </BreadcrumbItem>
-                <BreadcrumbSeparator />
-                <BreadcrumbItem>
-                  <BreadcrumbLink href="/examples/healthcare">{h.title}</BreadcrumbLink>
-                </BreadcrumbItem>
-                <BreadcrumbSeparator />
-                <BreadcrumbItem>
-                  <BreadcrumbLink href="/examples/healthcare/patients">{h.patients}</BreadcrumbLink>
-                </BreadcrumbItem>
-                <BreadcrumbSeparator />
-                <BreadcrumbItem>
-                  <BreadcrumbPage>{isRTL ? patient.nameAr : patient.name}</BreadcrumbPage>
-                </BreadcrumbItem>
-              </BreadcrumbList>
-            </Breadcrumb>
-            <DirectionToggle />
-          </div>
-        </div>
-      </div>
-
-      {/* Main Content */}
-      <main className="container py-8">
+    <div className="container py-8">
         {/* Back Button */}
         <div className="mb-6">
           <ButtonArrow direction="back" variant="ghost" size="sm" asChild>
@@ -553,38 +476,21 @@ export default function PatientDetailPage() {
                 <CardTitle>{h.visitHistory}</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="space-y-6">
-                  {visitHistory.map((visit, index) => (
-                    <div key={index} className="relative ps-8 pb-6 last:pb-0">
-                      {/* Timeline line */}
-                      {index < visitHistory.length - 1 && (
-                        <div className="absolute start-3 top-6 bottom-0 w-px bg-border" />
-                      )}
-                      {/* Timeline dot */}
-                      <div className={`absolute start-0 top-1 h-6 w-6 rounded-full flex items-center justify-center ${
-                        visit.status === 'resolved' ? 'bg-success/10 text-success' : 'bg-warning/10 text-warning'
-                      }`}>
-                        {visit.status === 'resolved' ? (
-                          <CheckCircle className="h-4 w-4" />
-                        ) : (
-                          <Clock className="h-4 w-4" />
-                        )}
-                      </div>
-                      <div>
-                        <div className="flex items-center gap-2 mb-1">
-                          <span className="font-medium">{isRTL ? visit.diagnosisAr : visit.diagnosis}</span>
-                          <Badge variant={visit.status === 'resolved' ? 'outline' : 'secondary'}>
-                            {visit.status === 'resolved' ? h.resolved : h.ongoing}
-                          </Badge>
-                        </div>
-                        <p className="text-sm text-muted-foreground mb-1">
-                          {isRTL ? visit.dateAr : visit.date} · {isRTL ? visit.doctorAr : visit.doctor}
-                        </p>
-                        <p className="text-sm">{isRTL ? visit.notesAr : visit.notes}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
+                <Timeline
+                  items={visitHistory.map((visit) => ({
+                    icon: visit.status === 'resolved'
+                      ? <CheckCircle className="h-5 w-5" weight="fill" />
+                      : <Clock className="h-5 w-5" weight="fill" />,
+                    title: isRTL ? visit.diagnosisAr : visit.diagnosis,
+                    titleAr: visit.diagnosisAr,
+                    description: isRTL ? visit.notesAr : visit.notes,
+                    descriptionAr: visit.notesAr,
+                    date: isRTL ? visit.dateAr : visit.date,
+                    dateAr: visit.dateAr,
+                    status: visit.status === 'resolved' ? 'complete' as const : 'current' as const,
+                  }))}
+                  cards
+                />
               </CardContent>
             </Card>
           </TabsContent>
@@ -711,7 +617,6 @@ export default function PatientDetailPage() {
             </Card>
           </TabsContent>
         </Tabs>
-      </main>
     </div>
   )
 }

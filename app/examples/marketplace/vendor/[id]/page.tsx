@@ -4,14 +4,11 @@ import * as React from 'react'
 import Link from 'next/link'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { ButtonArrow } from '@/components/ui/button-arrow'
 import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
 import { ArabicNumber } from '@/components/ui/arabic-number'
 import { formatSAR } from '@/lib/arabic-numbers'
 import {
-  House,
-  Storefront,
   Star,
   MapPin,
   Calendar,
@@ -26,7 +23,6 @@ import {
   Truck,
 } from '@phosphor-icons/react'
 import { useDirection } from '@/components/providers/direction-provider'
-import { DirectionToggle } from '@/components/docs/direction-toggle'
 import { content } from '@/lib/i18n'
 import { cn } from '@/lib/utils'
 
@@ -205,11 +201,6 @@ export default function VendorDetailPage({ params }: { params: { id: string } })
       icon: CheckCircle,
     },
     {
-      label: t.marketplaceVendor.stats.returnRate,
-      value: `${vendor.returnRate}%`,
-      icon: TrendUp,
-    },
-    {
       label: t.marketplaceVendor.stats.responseTime,
       value: isRTL ? vendor.responseTimeAr : vendor.responseTime,
       icon: Clock,
@@ -217,67 +208,7 @@ export default function VendorDetailPage({ params }: { params: { id: string } })
   ]
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-50">
-        <div className="container flex h-16 items-center justify-between">
-          <div className="flex items-center gap-6">
-            <Link href="/" className="flex items-center gap-2">
-              <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center">
-                <House className="h-5 w-5 text-primary-foreground" aria-hidden="true" />
-              </div>
-              <span className="font-bold text-xl hidden sm:inline">
-                {t.marketplace.header.title}
-              </span>
-            </Link>
-          </div>
-
-          <div className="flex items-center gap-4">
-            <ButtonArrow direction="back" icon="arrow" variant="outline" size="sm" asChild>
-              <Link href="/examples/marketplace">
-                {t.marketplaceVendor.backToMarketplace}
-              </Link>
-            </ButtonArrow>
-          </div>
-        </div>
-      </header>
-
-      {/* Breadcrumb */}
-      <div className="border-b bg-background">
-        <div className="container py-3">
-          <nav aria-label={isRTL ? 'مسار التنقل' : 'Breadcrumb'}>
-            <div className="flex items-center justify-between gap-4">
-              <ol className="flex items-center gap-2 text-sm text-muted-foreground">
-                <li>
-                  <Link href="/" className="hover:text-foreground transition-colors">
-                    {t.nav.home}
-                  </Link>
-                </li>
-                <li aria-hidden="true">/</li>
-                <li>
-                  <Link href="/examples" className="hover:text-foreground transition-colors">
-                    {t.nav.examples}
-                  </Link>
-                </li>
-                <li aria-hidden="true">/</li>
-                <li>
-                  <Link href="/examples/marketplace" className="hover:text-foreground transition-colors">
-                    {t.marketplaceVendor.breadcrumb.marketplace}
-                  </Link>
-                </li>
-                <li aria-hidden="true">/</li>
-                <li className="text-foreground font-medium" aria-current="page">
-                  {isRTL ? vendor.nameAr : vendor.name}
-                </li>
-              </ol>
-              <DirectionToggle />
-            </div>
-          </nav>
-        </div>
-      </div>
-
-      {/* Main Content */}
-      <main className="container py-8">
+    <div className="container py-8">
         {/* Vendor Banner */}
         <div className="w-full h-48 md:h-64 rounded-2xl mb-8 relative overflow-hidden">
           <img
@@ -353,23 +284,23 @@ export default function VendorDetailPage({ params }: { params: { id: string } })
             </div>
 
             {/* Stats */}
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="grid gap-4 grid-cols-3">
               {stats.map((stat, index) => (
                 <Card key={index}>
                   <CardContent className="pt-6">
                     <div className="flex items-center gap-3">
-                      <div className="p-2 bg-primary/10 rounded-lg">
-                        <stat.icon className="h-5 w-5 text-primary" aria-hidden="true" />
+                      <div className="p-2 bg-primary/10 rounded-lg shrink-0">
+                        <stat.icon className="h-4 w-4 text-primary" aria-hidden="true" />
                       </div>
-                      <div>
-                        <p className="text-2xl font-bold">
+                      <div className="min-w-0">
+                        <p className="text-xl font-bold truncate">
                           {typeof stat.value === 'number' ? (
                             <ArabicNumber value={stat.value} />
                           ) : (
                             stat.value
                           )}
                         </p>
-                        <p className="text-xs text-muted-foreground">{stat.label}</p>
+                        <p className="text-xs text-muted-foreground truncate">{stat.label}</p>
                       </div>
                     </div>
                   </CardContent>
@@ -395,7 +326,7 @@ export default function VendorDetailPage({ params }: { params: { id: string } })
                 {t.marketplaceVendor.storeProducts}
               </h2>
 
-              <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              <div className="grid gap-6 sm:grid-cols-2">
                 {products.map((product) => (
                   <Link key={product.id} href={`/examples/marketplace/${product.id}`}>
                     <Card className="overflow-hidden hover:shadow-lg transition-shadow cursor-pointer h-full">
@@ -537,7 +468,6 @@ export default function VendorDetailPage({ params }: { params: { id: string } })
             </Card>
           </div>
         </div>
-      </main>
     </div>
   )
 }

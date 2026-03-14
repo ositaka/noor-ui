@@ -3,7 +3,6 @@
 import * as React from 'react'
 import Link from 'next/link'
 import { useDirection } from '@/components/providers/direction-provider'
-import { DirectionToggle } from '@/components/docs/direction-toggle'
 import { content } from '@/lib/i18n'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -251,45 +250,7 @@ export default function OrdersPage() {
     const StatusIcon = getStatusIcon(selectedOrder.status)
 
     return (
-      <div className="min-h-screen">
-        <main id="main-content" className="container py-12">
-          {/* Breadcrumb */}
-          <nav aria-label={isRTL ? 'مسار التنقل' : 'Breadcrumb'} className="mb-8">
-            <div className="flex items-center justify-between gap-4">
-              <ol className="flex items-center gap-2 text-sm text-muted-foreground">
-                <li>
-                  <Link href="/" className="hover:text-foreground transition-colors">
-                    {t.marketplaceOrders.breadcrumb.home}
-                  </Link>
-                </li>
-                <li aria-hidden="true">/</li>
-                <li>
-                  <Link href="/examples" className="hover:text-foreground transition-colors">
-                    {t.marketplaceOrders.breadcrumb.examples}
-                  </Link>
-                </li>
-                <li aria-hidden="true">/</li>
-                <li>
-                  <Link href="/examples/marketplace" className="hover:text-foreground transition-colors">
-                    {t.marketplaceOrders.breadcrumb.marketplace}
-                  </Link>
-                </li>
-                <li aria-hidden="true">/</li>
-                <li>
-                  <button
-                    onClick={() => setSelectedOrder(null)}
-                    className="hover:text-foreground transition-colors"
-                  >
-                    {t.marketplaceOrders.breadcrumb.orders}
-                  </button>
-                </li>
-                <li aria-hidden="true">/</li>
-                <li className="text-foreground font-medium" aria-current="page">{selectedOrder.orderNumber}</li>
-              </ol>
-              <DirectionToggle />
-            </div>
-          </nav>
-
+      <div className="container py-8">
           <div className="mb-6">
             <Button variant="outline" onClick={() => setSelectedOrder(null)}>
               {t.marketplaceOrders.backToOrders}
@@ -508,44 +469,12 @@ export default function OrdersPage() {
               </Card>
             </div>
           </div>
-        </main>
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen">
-      <main id="main-content" className="container py-12">
-        {/* Breadcrumb */}
-        <nav aria-label={isRTL ? 'مسار التنقل' : 'Breadcrumb'} className="mb-8">
-          <div className="flex items-center justify-between gap-4">
-            <ol className="flex items-center gap-2 text-sm text-muted-foreground">
-              <li>
-                <Link href="/" className="hover:text-foreground transition-colors">
-                  {t.marketplaceOrders.breadcrumb.home}
-                </Link>
-              </li>
-              <li aria-hidden="true">/</li>
-              <li>
-                <Link href="/examples" className="hover:text-foreground transition-colors">
-                  {t.marketplaceOrders.breadcrumb.examples}
-                </Link>
-              </li>
-              <li aria-hidden="true">/</li>
-              <li>
-                <Link href="/examples/marketplace" className="hover:text-foreground transition-colors">
-                  {t.marketplaceOrders.breadcrumb.marketplace}
-                </Link>
-              </li>
-              <li aria-hidden="true">/</li>
-              <li className="text-foreground font-medium" aria-current="page">
-                {t.marketplaceOrders.breadcrumb.myOrders}
-              </li>
-            </ol>
-            <DirectionToggle />
-          </div>
-        </nav>
-
+    <div className="container py-8">
         {/* Page Header */}
         <div className="mb-8">
           <h1 className="text-4xl font-bold tracking-tight mb-2">
@@ -820,7 +749,6 @@ export default function OrdersPage() {
             </div>
           </TabsContent>
         </Tabs>
-      </main>
     </div>
   )
 }

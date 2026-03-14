@@ -181,7 +181,7 @@ export const PrayerTimes = React.forwardRef<HTMLDivElement, PrayerTimesProps>(
 
     // Standard variants (default, compact, detailed)
     return (
-      <Card ref={ref} className={cn('p-8', className)} {...props}>
+      <Card ref={ref} className={cn('p-6', className)} {...props}>
         <div className={cn(prayerTimesVariants({ variant }))}>
           {/* Header with location and date */}
           <div className="flex items-end justify-between border-b pb-5 mb-1 gap-6">
