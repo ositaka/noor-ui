@@ -85,7 +85,7 @@ export function formatSAR(amount: number, options: CurrencyFormatOptions = {}): 
     useArabicNumerals = false,
     showSymbol = true,
     locale = 'en',
-    decimals = 2,
+    decimals = 0,
   } = options
 
   // Format the number with proper thousands separators

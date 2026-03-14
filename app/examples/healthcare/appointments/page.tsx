@@ -39,6 +39,7 @@ import {
   CheckCircle,
 } from '@phosphor-icons/react'
 import { useDirection } from '@/components/providers/direction-provider'
+import { useToast } from '@/hooks/use-toast'
 
 const hc = {
   en: {
@@ -87,6 +88,8 @@ const hc = {
     dental: 'Dental',
     pediatrics: 'Pediatrics',
     labReview: 'Lab Review',
+    appointmentScheduled: 'Appointment Scheduled',
+    appointmentScheduledDesc: 'The appointment has been scheduled successfully.',
   },
   ar: {
     title: 'مركز النور الطبي',
@@ -134,6 +137,8 @@ const hc = {
     dental: 'أسنان',
     pediatrics: 'أطفال',
     labReview: 'مراجعة مختبر',
+    appointmentScheduled: 'تمت جدولة الموعد',
+    appointmentScheduledDesc: 'تمت جدولة الموعد بنجاح.',
   },
 }
 
@@ -239,6 +244,16 @@ export default function AppointmentsPage() {
 
   const [selectedDate, setSelectedDate] = React.useState<Date | undefined>(new Date())
   const [dialogOpen, setDialogOpen] = React.useState(false)
+  const { toast } = useToast()
+  const [isSubmitting, setIsSubmitting] = React.useState(false)
+
+  const handleScheduleAppointment = async () => {
+    setIsSubmitting(true)
+    await new Promise(r => setTimeout(r, 400))
+    setIsSubmitting(false)
+    setDialogOpen(false)
+    toast({ title: h.appointmentScheduled, description: h.appointmentScheduledDesc, variant: 'success' })
+  }
 
   const calendarEvents = React.useMemo(() => [
     { date: new Date(), title: isRTL ? '٨ مواعيد' : '8 appointments', variant: 'primary' as const },
@@ -327,7 +342,7 @@ export default function AppointmentsPage() {
               </div>
               <DialogFooter>
                 <Button variant="outline" onClick={() => setDialogOpen(false)}>{h.cancel}</Button>
-                <Button onClick={() => setDialogOpen(false)}>{h.schedule}</Button>
+                <Button onClick={handleScheduleAppointment} loading={isSubmitting}>{h.schedule}</Button>
               </DialogFooter>
             </DialogContent>
           </Dialog>

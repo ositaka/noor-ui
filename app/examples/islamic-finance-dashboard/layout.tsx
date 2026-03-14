@@ -12,6 +12,8 @@ import {
   CommandItem,
 } from '@/components/ui/command'
 import { Kbd } from '@/components/ui/kbd'
+import { Toaster } from '@/components/ui/toaster'
+import { toast } from '@/hooks/use-toast'
 import { DirectionToggle } from '@/components/docs/direction-toggle'
 import { useDirection } from '@/components/providers/direction-provider'
 import {
@@ -21,6 +23,8 @@ import {
   ChartLineUp,
   Calculator,
   MagnifyingGlass,
+  Gear,
+  User,
 } from '@phosphor-icons/react'
 
 const fi = {
@@ -37,6 +41,9 @@ const fi = {
     zakatDueDesc: 'Your annual Zakat payment is due this month.',
     profitShare: 'Profit Share',
     profitShareDesc: 'Mudarabah profit share of SAR 1,250 received.',
+    profile: 'Profile',
+    settings: 'Settings',
+    supportComingSoon: 'Support page coming soon',
   },
   ar: {
     appName: 'نور المالية',
@@ -51,11 +58,16 @@ const fi = {
     zakatDueDesc: 'دفع الزكاة السنوية مستحق هذا الشهر.',
     profitShare: 'حصة الأرباح',
     profitShareDesc: 'تم استلام حصة أرباح المضاربة ١,٢٥٠ ريال.',
+    profile: 'الملف الشخصي',
+    settings: 'الإعدادات',
+    supportComingSoon: 'صفحة الدعم قريباً',
   },
 }
 
 const navItems = [
   { title: 'Overview', titleAr: 'نظرة عامة', href: '/examples/islamic-finance-dashboard', icon: <House className="h-5 w-5" /> },
+  { title: 'Profile', titleAr: 'الملف الشخصي', href: '/examples/islamic-finance-dashboard/profile', icon: <User className="h-5 w-5" /> },
+  { title: 'Settings', titleAr: 'الإعدادات', href: '/examples/islamic-finance-dashboard/settings', icon: <Gear className="h-5 w-5" /> },
 ]
 
 export default function IslamicFinanceLayout({ children }: { children: React.ReactNode }) {
@@ -112,6 +124,10 @@ export default function IslamicFinanceLayout({ children }: { children: React.Rea
         initials: 'AS',
       }}
       notifications={notifications}
+      onNotificationClick={(n) => toast({ title: n.title, description: n.description })}
+      onProfileClick={() => router.push('/examples/islamic-finance-dashboard/profile')}
+      onSettingsClick={() => router.push('/examples/islamic-finance-dashboard/settings')}
+      onSupportClick={() => toast({ title: t.supportComingSoon })}
       onLogout={() => router.push('/examples')}
       headerActions={
         <>
@@ -149,6 +165,7 @@ export default function IslamicFinanceLayout({ children }: { children: React.Rea
           </CommandGroup>
         </CommandList>
       </CommandDialog>
+      <Toaster />
     </DashboardShell>
   )
 }

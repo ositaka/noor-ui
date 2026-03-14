@@ -12,6 +12,8 @@ import {
   CommandItem,
 } from '@/components/ui/command'
 import { Kbd } from '@/components/ui/kbd'
+import { Toaster } from '@/components/ui/toaster'
+import { toast } from '@/hooks/use-toast'
 import { DirectionToggle } from '@/components/docs/direction-toggle'
 import { useDirection } from '@/components/providers/direction-provider'
 import {
@@ -41,6 +43,9 @@ const ed = {
     newAssignmentDesc: 'Chapter 5 Exercises due in 2 days.',
     midtermNotice: 'Mid-term Exams',
     midtermNoticeDesc: 'Exams start Shawwal 15. Prepare revision schedule.',
+    profileComingSoon: 'Profile page coming soon',
+    settingsComingSoon: 'Settings page coming soon',
+    supportComingSoon: 'Support page coming soon',
   },
   ar: {
     schoolName: 'مدرسة النور',
@@ -57,6 +62,9 @@ const ed = {
     newAssignmentDesc: 'تمارين الفصل الخامس مستحقة خلال يومين.',
     midtermNotice: 'اختبارات منتصف الفصل',
     midtermNoticeDesc: 'تبدأ الاختبارات ١٥ شوال. أعد جدول المراجعة.',
+    profileComingSoon: 'صفحة الملف الشخصي قريباً',
+    settingsComingSoon: 'صفحة الإعدادات قريباً',
+    supportComingSoon: 'صفحة الدعم قريباً',
   },
 }
 
@@ -123,6 +131,10 @@ export default function EducationLayout({ children }: { children: React.ReactNod
         initials: 'YD',
       }}
       notifications={notifications}
+      onNotificationClick={(n) => toast({ title: n.title, description: n.description })}
+      onProfileClick={() => router.push('/examples/education/profile')}
+      onSettingsClick={() => router.push('/examples/education/settings')}
+      onSupportClick={() => toast({ title: t.supportComingSoon })}
       onLogout={() => router.push('/examples')}
       headerActions={
         <>
@@ -160,6 +172,7 @@ export default function EducationLayout({ children }: { children: React.ReactNod
           </CommandGroup>
         </CommandList>
       </CommandDialog>
+      <Toaster />
     </DashboardShell>
   )
 }

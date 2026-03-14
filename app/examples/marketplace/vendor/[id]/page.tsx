@@ -201,11 +201,6 @@ export default function VendorDetailPage({ params }: { params: { id: string } })
       icon: CheckCircle,
     },
     {
-      label: t.marketplaceVendor.stats.returnRate,
-      value: `${vendor.returnRate}%`,
-      icon: TrendUp,
-    },
-    {
       label: t.marketplaceVendor.stats.responseTime,
       value: isRTL ? vendor.responseTimeAr : vendor.responseTime,
       icon: Clock,
@@ -289,23 +284,23 @@ export default function VendorDetailPage({ params }: { params: { id: string } })
             </div>
 
             {/* Stats */}
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="grid gap-4 grid-cols-3">
               {stats.map((stat, index) => (
                 <Card key={index}>
                   <CardContent className="pt-6">
                     <div className="flex items-center gap-3">
-                      <div className="p-2 bg-primary/10 rounded-lg">
-                        <stat.icon className="h-5 w-5 text-primary" aria-hidden="true" />
+                      <div className="p-2 bg-primary/10 rounded-lg shrink-0">
+                        <stat.icon className="h-4 w-4 text-primary" aria-hidden="true" />
                       </div>
-                      <div>
-                        <p className="text-2xl font-bold">
+                      <div className="min-w-0">
+                        <p className="text-xl font-bold truncate">
                           {typeof stat.value === 'number' ? (
                             <ArabicNumber value={stat.value} />
                           ) : (
                             stat.value
                           )}
                         </p>
-                        <p className="text-xs text-muted-foreground">{stat.label}</p>
+                        <p className="text-xs text-muted-foreground truncate">{stat.label}</p>
                       </div>
                     </div>
                   </CardContent>
@@ -331,7 +326,7 @@ export default function VendorDetailPage({ params }: { params: { id: string } })
                 {t.marketplaceVendor.storeProducts}
               </h2>
 
-              <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              <div className="grid gap-6 sm:grid-cols-2">
                 {products.map((product) => (
                   <Link key={product.id} href={`/examples/marketplace/${product.id}`}>
                     <Card className="overflow-hidden hover:shadow-lg transition-shadow cursor-pointer h-full">

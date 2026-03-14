@@ -695,30 +695,20 @@ export default function IslamicFinanceDashboardPage() {
                 </Card>
 
                 {/* Prayer Times */}
-                <Card>
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
-                      <Bell className="h-5 w-5" aria-hidden="true" />
-                      {t.islamicFinancePage.prayerTimes.title}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <PrayerTimes
-                      variant="detailed"
-                      location="Riyadh, Saudi Arabia"
-                      locationAr="الرياض، المملكة العربية السعودية"
-                      nextPrayer="Dhuhr"
-                      prayers={[
-                        { name: 'Fajr', nameAr: 'الفجر', time: '05:15 AM' },
-                        { name: 'Sunrise', nameAr: 'الشروق', time: '06:35 AM' },
-                        { name: 'Dhuhr', nameAr: 'الظهر', time: '12:15 PM' },
-                        { name: 'Asr', nameAr: 'العصر', time: '03:30 PM' },
-                        { name: 'Maghrib', nameAr: 'المغرب', time: '06:05 PM' },
-                        { name: 'Isha', nameAr: 'العشاء', time: '07:35 PM' },
-                      ]}
-                    />
-                  </CardContent>
-                </Card>
+                <PrayerTimes
+                  variant="compact"
+                  location="Riyadh, Saudi Arabia"
+                  locationAr="الرياض، المملكة العربية السعودية"
+                  nextPrayer="Dhuhr"
+                  prayers={[
+                    { name: 'Fajr', nameAr: 'الفجر', time: '05:15 AM' },
+                    { name: 'Sunrise', nameAr: 'الشروق', time: '06:35 AM' },
+                    { name: 'Dhuhr', nameAr: 'الظهر', time: '12:15 PM' },
+                    { name: 'Asr', nameAr: 'العصر', time: '03:30 PM' },
+                    { name: 'Maghrib', nameAr: 'المغرب', time: '06:05 PM' },
+                    { name: 'Isha', nameAr: 'العشاء', time: '07:35 PM' },
+                  ]}
+                />
 
                 {/* Quick Actions */}
                 <Card>
@@ -794,7 +784,7 @@ export default function IslamicFinanceDashboardPage() {
                         </p>
                       </div>
                       {investment.shariahCompliant && (
-                        <Badge variant="default" className="bg-success text-success-foreground">
+                        <Badge variant="outline" className="border-success text-success">
                           {t.islamicFinancePage.investments.halal}
                         </Badge>
                       )}

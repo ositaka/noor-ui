@@ -12,6 +12,8 @@ import {
   CommandItem,
 } from '@/components/ui/command'
 import { Kbd } from '@/components/ui/kbd'
+import { Toaster } from '@/components/ui/toaster'
+import { toast } from '@/hooks/use-toast'
 import { DirectionToggle } from '@/components/docs/direction-toggle'
 import { useDirection } from '@/components/providers/direction-provider'
 import {
@@ -22,6 +24,7 @@ import {
   Receipt,
   ChartLineUp,
   MagnifyingGlass,
+  Gear,
 } from '@phosphor-icons/react'
 
 const mk = {
@@ -39,6 +42,9 @@ const mk = {
     newOrderDesc: 'You have a new order from Ahmed Al Mansouri.',
     lowStock: 'Low Stock Alert',
     lowStockDesc: 'Smart Watch has only 8 units remaining.',
+    settings: 'Settings',
+    profileComingSoon: 'Profile page coming soon',
+    supportComingSoon: 'Support page coming soon',
   },
   ar: {
     storeName: 'سوق نور',
@@ -54,6 +60,9 @@ const mk = {
     newOrderDesc: 'لديك طلب جديد من أحمد المنصوري.',
     lowStock: 'تنبيه مخزون منخفض',
     lowStockDesc: 'الساعة الذكية متبقي ٨ وحدات فقط.',
+    settings: 'الإعدادات',
+    profileComingSoon: 'صفحة الملف الشخصي قريباً',
+    supportComingSoon: 'صفحة الدعم قريباً',
   },
 }
 
@@ -62,6 +71,7 @@ const navItems = [
   { title: 'Cart', titleAr: 'السلة', href: '/examples/marketplace/cart', icon: <ShoppingCart className="h-5 w-5" />, badge: 3 },
   { title: 'Orders', titleAr: 'الطلبات', href: '/examples/marketplace/orders', icon: <Receipt className="h-5 w-5" /> },
   { title: 'Vendor Dashboard', titleAr: 'لوحة البائع', href: '/examples/marketplace/dashboard', icon: <ChartLineUp className="h-5 w-5" /> },
+  { title: 'Settings', titleAr: 'الإعدادات', href: '/examples/marketplace/settings', icon: <Gear className="h-5 w-5" /> },
 ]
 
 export default function MarketplaceLayout({ children }: { children: React.ReactNode }) {
@@ -118,6 +128,10 @@ export default function MarketplaceLayout({ children }: { children: React.ReactN
         initials: 'AM',
       }}
       notifications={notifications}
+      onNotificationClick={(n) => toast({ title: n.title, description: n.description })}
+      onProfileClick={() => router.push('/examples/marketplace/profile')}
+      onSettingsClick={() => router.push('/examples/marketplace/settings')}
+      onSupportClick={() => toast({ title: t.supportComingSoon })}
       onLogout={() => router.push('/examples')}
       headerActions={
         <>
@@ -155,6 +169,7 @@ export default function MarketplaceLayout({ children }: { children: React.ReactN
           </CommandGroup>
         </CommandList>
       </CommandDialog>
+      <Toaster />
     </DashboardShell>
   )
 }

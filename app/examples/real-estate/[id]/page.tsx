@@ -380,54 +380,53 @@ export default function PropertyDetailPage({ params }: { params: { id: string } 
           {/* Main Content */}
           <div className="lg:col-span-2 space-y-8">
             {/* Property Images Carousel */}
-            <Card className="overflow-hidden">
-              <div className="relative">
-                <Carousel
-                  items={[
-                    { src: propertyImages[property.type], alt: t.propertyPhoto(isRTL ? property.titleAr : property.title) },
-                    { src: '/examples/real-estate/interior-1.jpg', alt: isRTL ? 'الداخلية - غرفة المعيشة' : 'Interior - Living Room' },
-                    { src: '/examples/real-estate/interior-2.jpg', alt: isRTL ? 'الداخلية - المطبخ' : 'Interior - Kitchen' },
-                    { src: '/examples/real-estate/interior-3.jpg', alt: isRTL ? 'الداخلية - غرفة النوم' : 'Interior - Bedroom' },
-                  ]}
-                  renderItem={(item) => (
-                    <div className="relative h-[400px] bg-muted">
-                      <img
-                        src={item.src}
-                        alt={item.alt}
-                        className="absolute inset-0 h-full w-full object-cover"
-                      />
-                    </div>
-                  )}
-                  showArrows
-                  showDots
-                  dotSize="lg"
-                  aria-label={isRTL ? 'معرض صور العقار' : 'Property photo gallery'}
-                />
-                <div className="absolute top-4 start-4 flex gap-2 z-10 pointer-events-none">
-                  <Badge variant={property.status === 'sale' ? 'default' : 'secondary'} className="text-sm pointer-events-auto">
-                    {getStatusLabel(property.status)}
+            <div className="relative">
+              <Carousel
+                items={[
+                  { src: propertyImages[property.type], alt: t.propertyPhoto(isRTL ? property.titleAr : property.title) },
+                  { src: propertyImages.villa, alt: isRTL ? 'منظر خارجي' : 'Exterior View' },
+                  { src: propertyImages.apartment, alt: isRTL ? 'الداخلية - غرفة المعيشة' : 'Interior - Living Room' },
+                  { src: propertyImages.townhouse, alt: isRTL ? 'الداخلية - المطبخ' : 'Interior - Kitchen' },
+                  { src: propertyImages.penthouse, alt: isRTL ? 'الداخلية - غرفة النوم' : 'Interior - Bedroom' },
+                ]}
+                renderItem={(item) => (
+                  <div className="relative h-[400px] bg-muted rounded-xl overflow-hidden">
+                    <img
+                      src={item.src}
+                      alt={item.alt}
+                      className="absolute inset-0 h-full w-full object-cover"
+                    />
+                  </div>
+                )}
+                showArrows={false}
+                showDots
+                dotSize="lg"
+                aria-label={isRTL ? 'معرض صور العقار' : 'Property photo gallery'}
+              />
+              <div className="absolute top-4 start-4 flex gap-2 z-10 pointer-events-none">
+                <Badge variant={property.status === 'sale' ? 'default' : 'secondary'} className="text-sm pointer-events-auto">
+                  {getStatusLabel(property.status)}
+                </Badge>
+                {property.featured && (
+                  <Badge variant="destructive" className="text-sm pointer-events-auto">
+                    {t.featured}
                   </Badge>
-                  {property.featured && (
-                    <Badge variant="destructive" className="text-sm pointer-events-auto">
-                      {t.featured}
-                    </Badge>
-                  )}
-                  {property.furnished && (
-                    <Badge variant="outline" className="bg-background/90 text-sm pointer-events-auto">
-                      {t.furnished}
-                    </Badge>
-                  )}
-                </div>
-                <div className="absolute top-4 end-4 flex gap-2 z-10">
-                  <Button size="icon" variant="secondary" className="rounded-full bg-white/90" aria-label={t.addToFavorites}>
-                    <Heart className="h-5 w-5" aria-hidden="true" />
-                  </Button>
-                  <Button size="icon" variant="secondary" className="rounded-full bg-white/90" aria-label={t.share}>
-                    <ShareNetwork className="h-5 w-5" aria-hidden="true" />
-                  </Button>
-                </div>
+                )}
+                {property.furnished && (
+                  <Badge variant="outline" className="bg-background/90 text-sm pointer-events-auto">
+                    {t.furnished}
+                  </Badge>
+                )}
               </div>
-            </Card>
+              <div className="absolute top-4 end-4 flex gap-2 z-10">
+                <Button size="icon" variant="secondary" className="rounded-full bg-background/90" aria-label={t.addToFavorites}>
+                  <Heart className="h-5 w-5" aria-hidden="true" />
+                </Button>
+                <Button size="icon" variant="secondary" className="rounded-full bg-background/90" aria-label={t.share}>
+                  <ShareNetwork className="h-5 w-5" aria-hidden="true" />
+                </Button>
+              </div>
+            </div>
 
             {/* Property Info */}
             <Card>
@@ -449,11 +448,11 @@ export default function PropertyDetailPage({ params }: { params: { id: string } 
                   <MapPin className="h-4 w-4" aria-hidden="true" />
                   <span>{isRTL ? property.locationAr : property.location}</span>
                 </div>
-              </CardHeader>
-              <CardContent>
-                <div className="text-4xl font-bold text-primary mb-6">
+                <div className="text-3xl font-bold text-primary mt-3">
                   {formatPrice(property.price, property.status)}
                 </div>
+              </CardHeader>
+              <CardContent>
 
                 {/* Key Features Grid */}
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-6">
@@ -473,7 +472,7 @@ export default function PropertyDetailPage({ params }: { params: { id: string } 
                 <Separator className="my-6" />
 
                 {/* Description */}
-                <Tabs defaultValue="description" className="w-full">
+                <Tabs defaultValue="description" className="w-full mt-6">
                   <TabsList className="grid w-full grid-cols-2">
                     <TabsTrigger value="description">
                       {t.description}
@@ -608,10 +607,27 @@ export default function PropertyDetailPage({ params }: { params: { id: string } 
                   {t.similarProperties}
                 </CardTitle>
               </CardHeader>
-              <CardContent>
-                <div className="text-sm text-muted-foreground text-center py-8">
-                  {t.similarPropertiesDesc}
-                </div>
+              <CardContent className="space-y-3">
+                {[
+                  { id: 'prop-2', type: 'apartment' as const, title: 'Apartment 3BR', titleAr: 'شقة ٣ غرف', location: 'Arabian Ranches', locationAr: 'المرابع العربية', price: 2200000 },
+                  { id: 'prop-5', type: 'villa' as const, title: 'Villa 4BR', titleAr: 'فيلا ٤ غرف', location: 'Jumeirah', locationAr: 'جميرا', price: 5500000 },
+                  { id: 'prop-8', type: 'penthouse' as const, title: 'Penthouse 3BR', titleAr: 'بنتهاوس ٣ غرف', location: 'Dubai Marina', locationAr: 'دبي مارينا', price: 4200000 },
+                ].map((p) => (
+                  <Link
+                    key={p.id}
+                    href={`/examples/real-estate/${p.id}`}
+                    className="flex items-center gap-3 p-3 rounded-lg border hover:border-primary/50 transition-colors"
+                  >
+                    <div className="h-14 w-14 rounded-lg overflow-hidden shrink-0">
+                      <img src={propertyImages[p.type]} alt="" className="h-full w-full object-cover" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="font-medium text-sm truncate">{isRTL ? p.titleAr : p.title}</p>
+                      <p className="text-xs text-muted-foreground">{isRTL ? p.locationAr : p.location}</p>
+                      <p className="text-xs font-medium text-primary">{formatPrice(p.price, 'sale')}</p>
+                    </div>
+                  </Link>
+                ))}
               </CardContent>
             </Card>
           </div>

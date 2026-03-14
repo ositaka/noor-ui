@@ -36,6 +36,7 @@ import {
   Chalkboard,
 } from '@phosphor-icons/react'
 import { useDirection } from '@/components/providers/direction-provider'
+import { useToast } from '@/hooks/use-toast'
 import { toArabicNumerals } from '@/lib/arabic-numbers'
 
 const ed = {
@@ -83,6 +84,8 @@ const ed = {
     previous: 'Previous',
     clearSearch: 'Clear search',
     noTeachersFound: 'No teachers found',
+    messageSent: 'Message Sent',
+    messageSentDesc: 'Your message has been delivered successfully.',
   },
   ar: {
     schoolName: 'مدرسة النور الدولية',
@@ -128,6 +131,8 @@ const ed = {
     previous: 'السابق',
     clearSearch: 'مسح البحث',
     noTeachersFound: 'لم يتم العثور على معلمين',
+    messageSent: 'تم إرسال الرسالة',
+    messageSentDesc: 'تم تسليم رسالتك بنجاح.',
   },
 }
 
@@ -240,6 +245,16 @@ export default function TeachersPage() {
   const [currentPage, setCurrentPage] = React.useState(1)
   const [messageDialogOpen, setMessageDialogOpen] = React.useState(false)
   const [selectedTeacher, setSelectedTeacher] = React.useState<Teacher | null>(null)
+  const { toast } = useToast()
+  const [isSubmitting, setIsSubmitting] = React.useState(false)
+
+  const handleSendMessage = async () => {
+    setIsSubmitting(true)
+    await new Promise(r => setTimeout(r, 400))
+    setIsSubmitting(false)
+    setMessageDialogOpen(false)
+    toast({ title: h.messageSent, description: h.messageSentDesc, variant: 'success' })
+  }
 
   const filteredTeachers = React.useMemo(() => {
     return teachers.filter((teacher) => {
@@ -465,7 +480,7 @@ export default function TeachersPage() {
               <Button variant="outline" onClick={() => setMessageDialogOpen(false)}>
                 {h.cancel}
               </Button>
-              <Button onClick={() => setMessageDialogOpen(false)}>
+              <Button onClick={handleSendMessage} loading={isSubmitting}>
                 <PaperPlaneTilt className="h-4 w-4 me-2" />
                 {h.send}
               </Button>

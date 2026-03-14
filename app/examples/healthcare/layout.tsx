@@ -12,6 +12,8 @@ import {
   CommandItem,
 } from '@/components/ui/command'
 import { Kbd } from '@/components/ui/kbd'
+import { Toaster } from '@/components/ui/toaster'
+import { toast } from '@/hooks/use-toast'
 import { DirectionToggle } from '@/components/docs/direction-toggle'
 import { useDirection } from '@/components/providers/direction-provider'
 import {
@@ -39,6 +41,9 @@ const hc = {
     upcomingAptDesc: 'Dr. Ahmad has 3 appointments in the next hour.',
     lowStock: 'Low Medication Stock',
     lowStockDesc: 'Amoxicillin 500mg is running low.',
+    profileComingSoon: 'Profile page coming soon',
+    settingsComingSoon: 'Settings page coming soon',
+    supportComingSoon: 'Support page coming soon',
   },
   ar: {
     clinicName: 'النور',
@@ -55,6 +60,9 @@ const hc = {
     upcomingAptDesc: 'لدى د. أحمد ٣ مواعيد في الساعة القادمة.',
     lowStock: 'نقص في المخزون الدوائي',
     lowStockDesc: 'أموكسيسيلين ٥٠٠ ملغ ينفد.',
+    profileComingSoon: 'صفحة الملف الشخصي قريباً',
+    settingsComingSoon: 'صفحة الإعدادات قريباً',
+    supportComingSoon: 'صفحة الدعم قريباً',
   },
 }
 
@@ -127,6 +135,10 @@ export default function HealthcareLayout({ children }: { children: React.ReactNo
         initials: 'LH',
       }}
       notifications={notifications}
+      onNotificationClick={(n) => toast({ title: n.title, description: n.description })}
+      onProfileClick={() => router.push('/examples/healthcare/profile')}
+      onSettingsClick={() => router.push('/examples/healthcare/settings')}
+      onSupportClick={() => toast({ title: t.supportComingSoon })}
       onLogout={() => router.push('/examples')}
       headerActions={
         <>
@@ -164,6 +176,7 @@ export default function HealthcareLayout({ children }: { children: React.ReactNo
           </CommandGroup>
         </CommandList>
       </CommandDialog>
+      <Toaster />
     </DashboardShell>
   )
 }

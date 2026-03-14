@@ -34,6 +34,7 @@ import {
   Funnel,
 } from '@phosphor-icons/react'
 import { useDirection } from '@/components/providers/direction-provider'
+import { useToast } from '@/hooks/use-toast'
 
 const hc = {
   en: {
@@ -77,6 +78,8 @@ const hc = {
     newThisMonth: 'New This Month',
     next: 'Next',
     previous: 'Previous',
+    patientAdded: 'Patient Registered',
+    patientAddedDesc: 'New patient has been added successfully.',
   },
   ar: {
     title: 'مركز النور الطبي',
@@ -119,6 +122,8 @@ const hc = {
     newThisMonth: 'الجدد هذا الشهر',
     next: 'التالي',
     previous: 'السابق',
+    patientAdded: 'تم تسجيل المريض',
+    patientAddedDesc: 'تمت إضافة المريض الجديد بنجاح.',
   },
 }
 
@@ -205,6 +210,16 @@ export default function PatientsPage() {
   const [statusFilter, setStatusFilter] = React.useState('all')
   const [currentPage, setCurrentPage] = React.useState(1)
   const [dialogOpen, setDialogOpen] = React.useState(false)
+  const { toast } = useToast()
+  const [isSubmitting, setIsSubmitting] = React.useState(false)
+
+  const handleAddPatient = async () => {
+    setIsSubmitting(true)
+    await new Promise(r => setTimeout(r, 400))
+    setIsSubmitting(false)
+    setDialogOpen(false)
+    toast({ title: h.patientAdded, description: h.patientAddedDesc, variant: 'success' })
+  }
 
   const filteredPatients = React.useMemo(() => {
     return patients.filter((p) => {
@@ -377,7 +392,7 @@ export default function PatientsPage() {
               </div>
               <DialogFooter>
                 <Button variant="outline" onClick={() => setDialogOpen(false)}>{h.cancel}</Button>
-                <Button onClick={() => setDialogOpen(false)}>{h.save}</Button>
+                <Button onClick={handleAddPatient} loading={isSubmitting}>{h.save}</Button>
               </DialogFooter>
             </DialogContent>
           </Dialog>

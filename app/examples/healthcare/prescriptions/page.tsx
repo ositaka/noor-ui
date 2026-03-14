@@ -37,6 +37,7 @@ import {
   FileText,
 } from '@phosphor-icons/react'
 import { useDirection } from '@/components/providers/direction-provider'
+import { useToast } from '@/hooks/use-toast'
 
 const hc = {
   en: {
@@ -93,6 +94,8 @@ const hc = {
     refillsRemaining: 'refills remaining',
     next: 'Next',
     previous: 'Previous',
+    prescriptionCreated: 'Prescription Created',
+    prescriptionCreatedDesc: 'The prescription has been created successfully.',
   },
   ar: {
     title: 'مركز النور الطبي',
@@ -148,6 +151,8 @@ const hc = {
     refillsRemaining: 'إعادة تعبئة متبقية',
     next: 'التالي',
     previous: 'السابق',
+    prescriptionCreated: 'تم إنشاء الوصفة',
+    prescriptionCreatedDesc: 'تم إنشاء الوصفة الطبية بنجاح.',
   },
 }
 
@@ -254,6 +259,16 @@ export default function PrescriptionsPage() {
   const [statusFilter, setStatusFilter] = React.useState('all')
   const [currentPage, setCurrentPage] = React.useState(1)
   const [dialogOpen, setDialogOpen] = React.useState(false)
+  const { toast } = useToast()
+  const [isSubmitting, setIsSubmitting] = React.useState(false)
+
+  const handleCreatePrescription = async () => {
+    setIsSubmitting(true)
+    await new Promise(r => setTimeout(r, 400))
+    setIsSubmitting(false)
+    setDialogOpen(false)
+    toast({ title: h.prescriptionCreated, description: h.prescriptionCreatedDesc, variant: 'success' })
+  }
 
   const filteredPrescriptions = React.useMemo(() => {
     return prescriptions.filter((rx) => {
@@ -461,7 +476,7 @@ export default function PrescriptionsPage() {
               </div>
               <DialogFooter>
                 <Button variant="outline" onClick={() => setDialogOpen(false)}>{h.cancel}</Button>
-                <Button onClick={() => setDialogOpen(false)}>{h.save}</Button>
+                <Button onClick={handleCreatePrescription} loading={isSubmitting}>{h.save}</Button>
               </DialogFooter>
             </DialogContent>
           </Dialog>
