@@ -595,7 +595,6 @@ Each example should feel like a real product — not a demo.
 2. Read 1-2 existing multi-page examples for patterns:
    - app/examples/marketplace/ (6 pages, e-commerce flow)
    - app/examples/real-estate/ (listing + detail)
-   - app/examples/b2b-marketplace/ (listing + detail + RFQ)
 3. Read the components index to know what's available
 
 ## Building Rules
@@ -685,6 +684,5 @@ Yes — use separate Claude Code sessions or worktrees for each example.
 **Q: What if a component doesn't exist yet?**
 Either use the component-creator agent first, or substitute with the closest existing component.
 
-**Q: Should I build all 15 examples?**
-Start with 2-3 Tier 1 examples. They'll have the most impact on showcasing the library.
-Recommended first: Healthcare, Government Portal, Banking — they cover the most components.
+**Q: Which examples should I build next?**
+Focus on the 3 planned Tier 1 examples: Government Portal, Hotel Booking, Banking — they cover the most components and fill gaps in the current 9 examples.

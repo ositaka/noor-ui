@@ -18,8 +18,7 @@ Bringing light to multilingual interface design with accessibility, performance,
 - **Token-Based Design**: All design decisions flow from design tokens, enabling easy customization
 - **Modern Stack**: Built with Next.js 14, TypeScript, Tailwind CSS, and Radix UI
 - **Real Arabic Content**: Authentic GCC-focused content, not lorem ipsum
-- **Production-Ready Starters**: 2 complete applications (Blog Dashboard, E-commerce) you can copy and deploy immediately
-- **17+ Real-World Examples**: Dashboard, forms, data tables, GCC-specific apps, and experimental AI chat interfaces
+- **9 Real-World Examples**: Multi-page apps including Healthcare, Education, Marketplace, Real Estate, Islamic Finance, and AI Playground
 - **Light/Dark Mode**: Seamless theme switching with respect for user preferences
 - **Command Palette**: Quick navigation (Cmd+K) across all components and pages
 - **Clean Architecture**: Next.js route groups with shared layouts for maintainability
@@ -80,17 +79,15 @@ npm run lint
 │   │   └── examples/        # Examples listing page
 │   │
 │   └── examples/            # Standalone example pages (no header/footer)
-│       ├── dashboard/       # Analytics dashboard example
-│       ├── ecommerce/       # Product page example
-│       └── registration/    # Multi-step form example
-│
-├── starters/                # 🆕 Production-ready starter applications
-│   ├── blog-dashboard/     # Full-featured blog with Supabase
-│   │   ├── app/            # Auth, dashboard, and post management
-│   │   ├── lib/supabase/   # Database schema and client
-│   │   ├── hooks/          # Auth hooks
-│   │   └── README.md       # Complete setup guide
-│   └── README.md           # Starters overview
+│       ├── education/       # School portal (8 pages)
+│       ├── healthcare/      # Clinic management (5 pages)
+│       ├── marketplace/     # E-commerce marketplace (7 pages)
+│       ├── real-estate/     # Property listings (2 pages)
+│       ├── portfolio/       # Professional portfolio (2 pages)
+│       ├── islamic-finance-dashboard/  # Islamic finance
+│       ├── ai-playground/   # AI model playground
+│       ├── calendar/        # Hijri calendar
+│       └── registration/    # Multi-step form
 │
 ├── components/
 │   ├── ui/                  # Design system components (50+ components)
@@ -142,7 +139,7 @@ This design system uses **Next.js 14 App Router** with a **route group architect
   - Token and theme reference pages
 - **`examples/`**: Standalone demo pages without navigation chrome
   - Immersive full-screen experiences
-  - Dashboard, E-commerce, Registration form
+  - 9 examples: Education, Healthcare, Marketplace, Real Estate, Portfolio, Islamic Finance, AI Playground, Calendar, Registration
 
 ### Layout System
 - **Root Layout** (`app/layout.tsx`): Provides theme and direction context
@@ -267,57 +264,24 @@ This enables:
 - **SiteHeader**: Global navigation with bilingual content
 - **SiteFooter**: Global footer with links and bilingual content
 
-### Production-Ready Starters
-
-Complete, deployable applications built with Noor UI components. **[View all starters →](./starters/)**
-
-- **📝 Blog Dashboard**: Full-featured bilingual blog platform with Supabase
-  - User authentication (signup/login)
-  - Rich text editor for blog posts
-  - Image uploads to Supabase Storage
-  - Post management (create, edit, delete, publish/draft)
-  - Search and filtering
-  - Complete bilingual support (EN/AR)
-  - **[Setup Guide →](./starters/blog-dashboard/)**
-
-- **🛍️ E-commerce Starter**: Complete shop with cart and checkout
-  - Product catalog with filtering
-  - Shopping cart with localStorage persistence
-  - Checkout flow
-  - Order management
-  - Bilingual product content
-  - **[Setup Guide →](./starters/ecommerce/)**
-
-Coming soon: SaaS Starter, Landing Page, Analytics Dashboard
-
 ### Real-World Examples
 
-Production-ready examples showcasing component composition and real use cases:
+9 production-ready examples showcasing component composition and real use cases:
 
-**AI/LLM Examples:** 🧪 **Experimental**
-- **Simple AI Chat**: Clean conversational interface with message history and streaming responses
-- **Advanced AI Playground**: Full-featured AI interaction with parameter controls, model selector, and token counter
-- **AI Code Assistant**: Coding helper with syntax highlighting, code explanation, and improvement suggestions
-- **Document Q&A**: Upload documents and ask questions with citation references and bilingual document support
-- **Multi-Agent Chat**: Multiple AI personas collaborating in conversations with comparison and debate modes
-- **AI Workflow**: Visual workflow builder with LLM integration, token tracking, and cost estimation
+**Multi-page Apps:**
+- **Education Portal** (8 pages): School portal with Saudi grading system, weekly timetable, assignment tracking, attendance calendar, and teacher directory
+- **Healthcare Clinic** (5 pages): Clinic management with patient directory, medical records, appointment calendar with Hijri dates, and prescription management
+- **Marketplace** (7 pages): Multi-vendor marketplace with product listings, vendor dashboards, shopping cart, checkout flow, and order management
+- **Real Estate** (2 pages): Property listings platform with bilingual descriptions, search filters, and property cards
+- **Portfolio** (2 pages): Creative professional portfolio with project showcase and case studies
 
-> **Note:** AI examples use mock responses for demonstration. These showcase the UI/UX patterns - integrate with your preferred AI provider (OpenAI, Anthropic, etc.) for production use.
-
-**Business & E-commerce:**
-- **Marketplace**: Multi-vendor marketplace with product listings, vendor dashboards, shopping cart, checkout flow, and order management
-- **B2B Marketplace**: Business marketplace with bulk ordering, volume pricing tiers, RFQ (Request for Quote) system, and credit terms
-- **CMS/Blog Admin Dashboard**: Complete content management system with posts list (DataTable), rich text editor, file upload, analytics dashboard, and hash-based navigation
-- **E-commerce Product Page**: Image gallery, color/size selection, reviews with ratings, and related products grid
-
-**GCC-Specific:**
-- **GCC Community Dashboard**: Complete showcase of all GCC-specific components including Prayer Times, Hijri Date, Zakat Calculator, and Arabic Number formatting
-- **Islamic Finance Dashboard**: Comprehensive Islamic finance management featuring Zakat calculator with export, investment portfolio tracking, Hijri calendar with Islamic events, and prayer times integration
-
-**General:**
-- **DataTable Showcase**: Advanced data table demonstration with 50 sample users, live sorting/filtering, pagination, search, export to CSV, and mobile-responsive cards view
+**Single-page Apps:**
+- **Islamic Finance Dashboard**: Comprehensive Islamic finance management with Zakat calculator, investment tracking, Hijri calendar, and prayer times
+- **AI Playground**: Full-featured AI playground with model selection, parameter controls, token tracking, and conversation history
+- **Calendar & Date Picker**: Calendar interface with Hijri calendar support for GCC markets
 - **Multi-Step Registration Form**: 4-step registration with validation, progress indicators, and bilingual error messages
-- **Analytics Dashboard**: Stats cards, revenue charts, transaction tables (with responsive mobile layout), and activity feeds
+
+**Coming soon:** Government Services Portal, Hotel Booking Platform, Banking & Personal Finance
 
 All examples feature:
 - Full RTL support with real Arabic content
@@ -573,14 +537,8 @@ This project follows a deliberate phased approach. See our planning documents fo
 - [x] TokenCounter with progress and cost tracking
 - [x] ConversationHistory sidebar
 - [x] WorkflowCanvas with drag-and-drop nodes
-- [x] Simple AI Chat example
 - [x] Advanced AI Playground example
-- [x] Code Assistant example
-- [x] Document Q&A example
-- [x] Multi-Agent Chat example
-- [x] AI Workflow example
 - [ ] Real API integrations (OpenAI, Anthropic, etc.)
-- [ ] AI Chat Starter with Supabase backend
 - [ ] Production validation and API refinement
 
 **Status:** Components built and functional with mock data. Currently gathering feedback before marking as production-ready.
