@@ -10,6 +10,15 @@ import { ArabicNumber } from '@/components/ui/arabic-number'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { EmptyState } from '@/components/ui/empty-state'
 import { Separator } from '@/components/ui/separator'
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog'
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '@/components/ui/breadcrumb'
 import { useDirection } from '@/components/providers/direction-provider'
 import {
@@ -22,6 +31,7 @@ import {
   ArrowClockwise,
   CalendarX,
   Bed,
+  Warning,
 } from '@phosphor-icons/react'
 
 // ---------------------------------------------------------------------------
@@ -54,6 +64,10 @@ const t = {
     noCancelledDesc: 'You haven\'t cancelled any bookings.',
     browseHotels: 'Browse Hotels',
     total: 'Total',
+    cancelTitle: 'Cancel Reservation',
+    cancelDesc: 'Are you sure you want to cancel this reservation?',
+    cancelConfirm: 'Yes, Cancel',
+    cancelKeep: 'Keep Reservation',
   },
   ar: {
     title: 'حجوزاتي',
@@ -80,6 +94,10 @@ const t = {
     noCancelledDesc: 'لم تقم بإلغاء أي حجوزات.',
     browseHotels: 'تصفح الفنادق',
     total: 'الإجمالي',
+    cancelTitle: 'إلغاء الحجز',
+    cancelDesc: 'هل أنت متأكد من إلغاء هذا الحجز؟',
+    cancelConfirm: 'نعم، إلغاء',
+    cancelKeep: 'الاحتفاظ بالحجز',
   },
 }
 
@@ -331,16 +349,37 @@ export default function ReservationsPage() {
             <div className="flex gap-2">
               {res.status === 'confirmed' && (
                 <>
-                  <Link href={`/examples/hotel/${res.hotelName.toLowerCase().replace(/\s+/g, '-').replace('hotel', '').replace('resort', '').trim()}`}>
+                  <Link href={`/examples/hotel/reservations/${res.id}`}>
                     <Button variant="outline" size="sm" aria-label={`${h.viewDetails} — ${isRTL ? res.hotelNameAr : res.hotelName}`}>
                       <Eye className="h-3.5 w-3.5 me-1" aria-hidden="true" />
                       {h.viewDetails}
                     </Button>
                   </Link>
-                  <Button variant="outline" size="sm" className="text-destructive hover:text-destructive" aria-label={`${h.cancelBooking} — ${isRTL ? res.hotelNameAr : res.hotelName}`}>
-                    <XIcon className="h-3.5 w-3.5 me-1" aria-hidden="true" />
-                    {h.cancelBooking}
-                  </Button>
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <Button variant="outline" size="sm" className="text-destructive hover:text-destructive" aria-label={`${h.cancelBooking} — ${isRTL ? res.hotelNameAr : res.hotelName}`}>
+                        <XIcon className="h-3.5 w-3.5 me-1" aria-hidden="true" />
+                        {h.cancelBooking}
+                      </Button>
+                    </DialogTrigger>
+                    <DialogContent>
+                      <DialogHeader>
+                        <DialogTitle className="flex items-center gap-2">
+                          <Warning className="h-5 w-5 text-destructive" aria-hidden="true" />
+                          {h.cancelTitle}
+                        </DialogTitle>
+                        <DialogDescription>{h.cancelDesc}</DialogDescription>
+                      </DialogHeader>
+                      <div className="p-3 bg-muted/30 rounded-lg text-sm">
+                        <p className="font-medium">{isRTL ? res.hotelNameAr : res.hotelName}</p>
+                        <p className="text-muted-foreground font-mono text-xs" dir="ltr">{res.ref}</p>
+                      </div>
+                      <DialogFooter className="gap-2">
+                        <Button variant="outline">{h.cancelKeep}</Button>
+                        <Button variant="destructive">{h.cancelConfirm}</Button>
+                      </DialogFooter>
+                    </DialogContent>
+                  </Dialog>
                 </>
               )}
               {(res.status === 'checked-out' || res.status === 'cancelled') && (

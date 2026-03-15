@@ -217,6 +217,62 @@ const allHotels: Hotel[] = [
     amenities: ['pool', 'wifi', 'gym', 'parking', 'prayer'],
     type: 'hotel',
   },
+  {
+    id: 'gulf-palace',
+    name: 'Gulf Palace Hotel',
+    nameAr: 'فندق قصر الخليج',
+    location: 'Seef District, Bahrain',
+    locationAr: 'منطقة السيف، البحرين',
+    stars: 5,
+    price: 580,
+    image: '/examples/hotel/hotel-2.jpg',
+    rating: 4.6,
+    reviewCount: 1102,
+    amenities: ['pool', 'gym', 'wifi', 'spa', 'parking', 'prayer'],
+    type: 'hotel',
+  },
+  {
+    id: 'salam-resort',
+    name: 'Al Salam Beach Resort',
+    nameAr: 'منتجع السلام الشاطئي',
+    location: 'Salalah, Oman',
+    locationAr: 'صلالة، عُمان',
+    stars: 4,
+    price: 340,
+    image: '/examples/hotel/hotel-5.jpg',
+    rating: 4.3,
+    reviewCount: 534,
+    amenities: ['pool', 'wifi', 'parking', 'prayer', 'spa'],
+    type: 'resort',
+  },
+  {
+    id: 'burj-view',
+    name: 'Burj View Apartments',
+    nameAr: 'شقق إطلالة البرج',
+    location: 'Downtown, Dubai',
+    locationAr: 'وسط المدينة، دبي',
+    stars: 4,
+    price: 550,
+    image: '/examples/hotel/hotel-1.jpg',
+    rating: 4.5,
+    reviewCount: 768,
+    amenities: ['wifi', 'gym', 'parking', 'pool'],
+    type: 'apartment',
+  },
+  {
+    id: 'rawdah-inn',
+    name: 'Al Rawdah Boutique Inn',
+    nameAr: 'نزل الروضة بوتيك',
+    location: 'Kuwait City, Kuwait',
+    locationAr: 'مدينة الكويت، الكويت',
+    stars: 3,
+    price: 280,
+    image: '/examples/hotel/hotel-4.jpg',
+    rating: 4.2,
+    reviewCount: 423,
+    amenities: ['wifi', 'parking', 'prayer'],
+    type: 'boutique',
+  },
 ]
 
 // ---------------------------------------------------------------------------
@@ -281,6 +337,19 @@ export default function HotelSearchPage() {
     }
 
     return results
+  }, [searchQuery, priceRange, selectedStars, selectedAmenities, sortBy])
+
+  // Pagination
+  const ITEMS_PER_PAGE = 4
+  const totalPages = Math.ceil(filteredHotels.length / ITEMS_PER_PAGE)
+  const paginatedHotels = filteredHotels.slice(
+    (currentPage - 1) * ITEMS_PER_PAGE,
+    currentPage * ITEMS_PER_PAGE,
+  )
+
+  // Reset to page 1 when filters change
+  React.useEffect(() => {
+    setCurrentPage(1)
   }, [searchQuery, priceRange, selectedStars, selectedAmenities, sortBy])
 
   const clearFilters = () => {
@@ -469,7 +538,7 @@ export default function HotelSearchPage() {
 
         {/* Results */}
         <div className="flex-1 space-y-4">
-          {filteredHotels.map((hotel) => (
+          {paginatedHotels.map((hotel) => (
             <Link key={hotel.id} href={`/examples/hotel/${hotel.id}`}>
               <Card className="overflow-hidden hover:shadow-md transition-shadow group cursor-pointer mb-4">
                 <div className="flex flex-col sm:flex-row">
@@ -546,28 +615,44 @@ export default function HotelSearchPage() {
           ))}
 
           {/* Pagination */}
-          {filteredHotels.length > 0 && (
+          {totalPages > 1 && (
             <Pagination className="mt-8">
               <PaginationContent>
                 <PaginationItem>
-                  <PaginationPrevious href="#" onClick={(e) => e.preventDefault()} />
+                  <PaginationPrevious
+                    href="#"
+                    onClick={(e) => {
+                      e.preventDefault()
+                      if (currentPage > 1) setCurrentPage(currentPage - 1)
+                    }}
+                    aria-disabled={currentPage === 1}
+                    className={currentPage === 1 ? 'pointer-events-none opacity-50' : ''}
+                  />
                 </PaginationItem>
-                {[1, 2, 3].map((page) => (
-                  <PaginationItem key={page}>
+                {Array.from({ length: totalPages }).map((_, i) => (
+                  <PaginationItem key={i + 1}>
                     <PaginationLink
                       href="#"
-                      isActive={page === currentPage}
+                      isActive={i + 1 === currentPage}
                       onClick={(e) => {
                         e.preventDefault()
-                        setCurrentPage(page)
+                        setCurrentPage(i + 1)
                       }}
                     >
-                      <ArabicNumber value={page} />
+                      <ArabicNumber value={i + 1} />
                     </PaginationLink>
                   </PaginationItem>
                 ))}
                 <PaginationItem>
-                  <PaginationNext href="#" onClick={(e) => e.preventDefault()} />
+                  <PaginationNext
+                    href="#"
+                    onClick={(e) => {
+                      e.preventDefault()
+                      if (currentPage < totalPages) setCurrentPage(currentPage + 1)
+                    }}
+                    aria-disabled={currentPage === totalPages}
+                    className={currentPage === totalPages ? 'pointer-events-none opacity-50' : ''}
+                  />
                 </PaginationItem>
               </PaginationContent>
             </Pagination>

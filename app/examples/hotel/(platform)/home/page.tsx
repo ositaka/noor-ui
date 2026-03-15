@@ -3,7 +3,7 @@
 import * as React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Card, CardContent } from '@/components/ui/card'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { ButtonArrow } from '@/components/ui/button-arrow'
 import { Input } from '@/components/ui/input'
@@ -12,6 +12,9 @@ import { FeatureCard } from '@/components/ui/feature-card'
 import { Badge } from '@/components/ui/badge'
 import { ArabicNumber } from '@/components/ui/arabic-number'
 import { DatePicker } from '@/components/ui/date-picker'
+import { StatsCard } from '@/components/ui/stats-card'
+import { Callout } from '@/components/ui/callout'
+import { Chart } from '@/components/ui/chart'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { useDirection } from '@/components/providers/direction-provider'
 import {
@@ -25,6 +28,13 @@ import {
   Users,
   ChatCircle,
   MapTrifold,
+  CalendarCheck,
+  Trophy,
+  TrendUp,
+  Sparkle,
+  Bed,
+  ArrowRight,
+  ArrowLeft,
 } from '@phosphor-icons/react'
 
 // ---------------------------------------------------------------------------
@@ -48,7 +58,7 @@ const t = {
     featuredTitle: 'Featured Hotels',
     featuredSubtitle: 'Handpicked luxury stays across the Gulf',
     perNight: '/ night',
-    viewDetails: 'View Details',
+    viewAll: 'View All Hotels',
     popularTitle: 'Popular Destinations',
     popularSubtitle: 'Explore top destinations across the GCC',
     hotels: 'hotels',
@@ -64,6 +74,26 @@ const t = {
     guest: 'guest',
     guestsLabel: 'guests',
     aed: 'AED',
+    // Dashboard section
+    welcomeBack: 'Welcome back, Ahmed',
+    dashboardSubtitle: 'Here\'s your travel overview',
+    totalBookings: 'Total Bookings',
+    loyaltyPoints: 'Loyalty Points',
+    upcomingStays: 'Upcoming Stays',
+    savedThisYear: 'Saved This Year',
+    fromLastMonth: 'from last month',
+    bookingsByCity: 'Your Bookings by City',
+    ramadanPromo: 'Ramadan Special Offer',
+    ramadanPromoDesc: 'Enjoy 20% off all bookings during the holy month. Use code RAMADAN2026 at checkout. Valid until April 15, 2026.',
+    continueSearch: 'Continue Your Search',
+    continueSearchDesc: 'You were looking at hotels in Dubai. Pick up where you left off.',
+    continueBtn: 'Continue',
+    dubai: 'Dubai',
+    abuDhabi: 'Abu Dhabi',
+    doha: 'Doha',
+    riyadh: 'Riyadh',
+    muscat: 'Muscat',
+    jeddah: 'Jeddah',
   },
   ar: {
     heroTitle: 'اكتشف أفضل الفنادق في الخليج',
@@ -81,7 +111,7 @@ const t = {
     featuredTitle: 'فنادق مميزة',
     featuredSubtitle: 'إقامات فاخرة مختارة بعناية في الخليج',
     perNight: '/ ليلة',
-    viewDetails: 'عرض التفاصيل',
+    viewAll: 'عرض جميع الفنادق',
     popularTitle: 'وجهات شائعة',
     popularSubtitle: 'استكشف أفضل الوجهات في دول الخليج',
     hotels: 'فندق',
@@ -97,6 +127,26 @@ const t = {
     guest: 'ضيف',
     guestsLabel: 'ضيوف',
     aed: 'د.إ',
+    // Dashboard section
+    welcomeBack: 'أهلاً بعودتك، أحمد',
+    dashboardSubtitle: 'إليك نظرة عامة على رحلاتك',
+    totalBookings: 'إجمالي الحجوزات',
+    loyaltyPoints: 'نقاط الولاء',
+    upcomingStays: 'الإقامات القادمة',
+    savedThisYear: 'وفّرت هذا العام',
+    fromLastMonth: 'من الشهر الماضي',
+    bookingsByCity: 'حجوزاتك حسب المدينة',
+    ramadanPromo: 'عرض رمضان الخاص',
+    ramadanPromoDesc: 'استمتع بخصم ٢٠٪ على جميع الحجوزات خلال الشهر الكريم. استخدم الرمز RAMADAN2026 عند الدفع. صالح حتى ١٥ أبريل ٢٠٢٦.',
+    continueSearch: 'أكمل بحثك',
+    continueSearchDesc: 'كنت تبحث عن فنادق في دبي. أكمل من حيث توقفت.',
+    continueBtn: 'متابعة',
+    dubai: 'دبي',
+    abuDhabi: 'أبوظبي',
+    doha: 'الدوحة',
+    riyadh: 'الرياض',
+    muscat: 'مسقط',
+    jeddah: 'جدة',
   },
 }
 
@@ -183,11 +233,12 @@ export default function HotelLandingPage() {
   const h = t[locale]
   const [checkIn, setCheckIn] = React.useState<Date>()
   const [checkOut, setCheckOut] = React.useState<Date>()
+  const Arrow = isRTL ? ArrowLeft : ArrowRight
 
   return (
     <div>
       {/* Hero Section */}
-      <section className="relative overflow-hidden">
+      <section className="relative overflow-hidden" aria-label={h.heroTitle}>
         <div className="absolute inset-0">
           <Image
             src="/examples/hotel/hero.jpg"
@@ -199,7 +250,7 @@ export default function HotelLandingPage() {
           <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70" />
         </div>
 
-        <div className="relative container py-20 md:py-32 text-white">
+        <div className="relative container py-20 md:py-28 text-white">
           <div className="max-w-3xl mx-auto text-center space-y-6">
             <h1 className="text-3xl md:text-5xl font-bold leading-tight">
               {h.heroTitle}
@@ -214,10 +265,11 @@ export default function HotelLandingPage() {
             <CardContent className="p-4 md:p-6">
               <div className="grid grid-cols-1 md:grid-cols-5 gap-4 items-end">
                 <div className="md:col-span-1 space-y-2">
-                  <Label className="text-sm font-medium">{h.destination}</Label>
+                  <Label htmlFor="hero-dest" className="text-sm font-medium">{h.destination}</Label>
                   <div className="relative">
-                    <MagnifyingGlass className="absolute start-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                    <MagnifyingGlass className="absolute start-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" aria-hidden="true" />
                     <Input
+                      id="hero-dest"
                       placeholder={h.destinationPlaceholder}
                       className="ps-9"
                       defaultValue={isRTL ? 'دبي' : 'Dubai'}
@@ -261,7 +313,7 @@ export default function HotelLandingPage() {
                 </div>
                 <Link href="/examples/hotel/search">
                   <Button className="w-full" size="lg">
-                    <MagnifyingGlass className="h-4 w-4 me-2" />
+                    <MagnifyingGlass className="h-4 w-4 me-2" aria-hidden="true" />
                     {h.searchBtn}
                   </Button>
                 </Link>
@@ -278,7 +330,7 @@ export default function HotelLandingPage() {
               { value: '99%', label: h.statsSatisfaction, icon: Users },
             ].map((stat) => (
               <div key={stat.label} className="text-center">
-                <stat.icon className="h-6 w-6 mx-auto mb-1 text-white/70" />
+                <stat.icon className="h-6 w-6 mx-auto mb-1 text-white/70" aria-hidden="true" />
                 <div className="text-2xl md:text-3xl font-bold">{stat.value}</div>
                 <div className="text-xs text-white/60">{stat.label}</div>
               </div>
@@ -287,137 +339,258 @@ export default function HotelLandingPage() {
         </div>
       </section>
 
-      {/* Featured Hotels */}
-      <section className="container py-16">
-        <div className="text-center mb-10">
-          <h2 className="text-2xl md:text-3xl font-bold">{h.featuredTitle}</h2>
-          <p className="text-muted-foreground mt-2">{h.featuredSubtitle}</p>
+      {/* Your Dashboard — welcome back section */}
+      <section className="container py-10" aria-label={h.welcomeBack}>
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-2 mb-6">
+          <div>
+            <h2 className="text-2xl font-bold">{h.welcomeBack}</h2>
+            <p className="text-muted-foreground text-sm">{h.dashboardSubtitle}</p>
+          </div>
+          <Badge className="bg-warning text-warning-foreground self-start md:self-auto">
+            <Trophy className="h-3.5 w-3.5 me-1" weight="fill" aria-hidden="true" />
+            Gold
+          </Badge>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {featuredHotels.map((hotel) => (
-            <Link key={hotel.id} href={`/examples/hotel/${hotel.id}`}>
-              <Card className="overflow-hidden hover:shadow-lg transition-shadow group cursor-pointer h-full">
-                <div className="relative h-52 overflow-hidden">
-                  <Image
-                    src={hotel.image}
-                    alt={isRTL ? hotel.nameAr : hotel.name}
-                    fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                  <Badge className="absolute top-3 start-3 bg-background/90 text-foreground">
-                    {Array.from({ length: hotel.stars }).map((_, i) => (
-                      <Star key={i} className="h-3 w-3 text-warning fill-warning" weight="fill" />
-                    ))}
-                  </Badge>
+        {/* Stats Cards */}
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 mb-6">
+          <StatsCard
+            icon={<Bed className="h-4 w-4" />}
+            label={h.totalBookings}
+            value={12}
+            trend={25}
+            trendLabel={h.fromLastMonth}
+          />
+          <StatsCard
+            icon={<Sparkle className="h-4 w-4" />}
+            label={h.loyaltyPoints}
+            value="4,850"
+            trend={12}
+            trendLabel={h.fromLastMonth}
+          />
+          <StatsCard
+            icon={<CalendarCheck className="h-4 w-4" />}
+            label={h.upcomingStays}
+            value={2}
+          />
+          <StatsCard
+            icon={<TrendUp className="h-4 w-4" />}
+            label={h.savedThisYear}
+            value={`1,200 ${h.aed}`}
+          />
+        </div>
+
+        {/* Chart + Continue Search + Promo */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {/* Bookings by City Chart */}
+          <Card>
+            <CardHeader className="pb-2">
+              <CardTitle className="text-sm font-medium">{h.bookingsByCity}</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <Chart
+                type="donut"
+                data={[
+                  { name: h.dubai, value: 5 },
+                  { name: h.abuDhabi, value: 3 },
+                  { name: h.doha, value: 2 },
+                  { name: h.riyadh, value: 1 },
+                  { name: h.muscat, value: 1 },
+                ]}
+                size="sm"
+                aria-label={h.bookingsByCity}
+              />
+            </CardContent>
+          </Card>
+
+          {/* Continue Your Search */}
+          <Card className="border-primary/20 bg-primary/5">
+            <CardContent className="p-6 flex flex-col justify-between h-full">
+              <div>
+                <div className="flex items-center gap-2 mb-2">
+                  <MagnifyingGlass className="h-5 w-5 text-primary" aria-hidden="true" />
+                  <h3 className="font-semibold">{h.continueSearch}</h3>
                 </div>
-                <CardContent className="p-4 space-y-2">
-                  <h3 className="font-semibold text-lg">
-                    {isRTL ? hotel.nameAr : hotel.name}
-                  </h3>
-                  <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
-                    <MapPin className="h-3.5 w-3.5" />
-                    <span>{isRTL ? hotel.locationAr : hotel.location}</span>
+                <p className="text-sm text-muted-foreground mb-4">{h.continueSearchDesc}</p>
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="relative w-16 h-12 rounded-md overflow-hidden">
+                    <Image src="/examples/hotel/hotel-1.jpg" alt="" fill className="object-cover" />
                   </div>
-                  <div className="flex items-center justify-between pt-2">
-                    <div className="flex items-center gap-1.5">
-                      <Badge variant="secondary" className="font-semibold">
-                        <Star className="h-3 w-3 me-0.5 fill-warning text-warning" weight="fill" />
-                        {hotel.rating}
-                      </Badge>
-                      <span className="text-xs text-muted-foreground">
-                        (<ArabicNumber value={hotel.reviewCount} />)
-                      </span>
-                    </div>
-                    <div className="text-end">
-                      <span className="font-bold text-lg">
-                        <ArabicNumber value={hotel.price} />
-                      </span>
-                      <span className="text-xs text-muted-foreground ms-1">
-                        {h.aed} {h.perNight}
-                      </span>
-                    </div>
+                  <div>
+                    <p className="text-sm font-medium">{isRTL ? 'دبي مارينا' : 'Dubai Marina'}</p>
+                    <p className="text-xs text-muted-foreground">Mar 20 – Mar 23 · 2 {h.guestsLabel}</p>
                   </div>
-                </CardContent>
-              </Card>
-            </Link>
-          ))}
-        </div>
+                </div>
+              </div>
+              <Link href="/examples/hotel/search">
+                <Button className="w-full" size="sm">
+                  {h.continueBtn}
+                  <Arrow className="h-4 w-4 ms-1.5" />
+                </Button>
+              </Link>
+            </CardContent>
+          </Card>
 
-        <div className="text-center mt-8">
-          <Link href="/examples/hotel/search">
-            <ButtonArrow variant="outline" size="lg">
-              {h.viewDetails}
-            </ButtonArrow>
-          </Link>
+          {/* Seasonal Promo Callout */}
+          <div className="space-y-4">
+            <Callout type="info" title={h.ramadanPromo}>
+              <p className="text-sm">{h.ramadanPromoDesc}</p>
+            </Callout>
+
+            {/* Quick stats summary */}
+            <Card>
+              <CardContent className="p-4">
+                <div className="flex items-center justify-between text-sm">
+                  <span className="text-muted-foreground">{isRTL ? 'آخر حجز' : 'Last booking'}</span>
+                  <span className="font-medium" dir="ltr">Dec 24, 2025</span>
+                </div>
+                <div className="flex items-center justify-between text-sm mt-2">
+                  <span className="text-muted-foreground">{isRTL ? 'المدينة المفضلة' : 'Favorite city'}</span>
+                  <span className="font-medium">{h.dubai}</span>
+                </div>
+                <div className="flex items-center justify-between text-sm mt-2">
+                  <span className="text-muted-foreground">{isRTL ? 'إجمالي الليالي' : 'Total nights'}</span>
+                  <span className="font-medium"><ArabicNumber value={28} /></span>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
         </div>
       </section>
 
-      {/* Popular Destinations */}
-      <section className="bg-muted/30 py-16">
+      {/* Featured Hotels */}
+      <section className="bg-muted/20 py-16" aria-label={h.featuredTitle}>
         <div className="container">
           <div className="text-center mb-10">
-            <h2 className="text-2xl md:text-3xl font-bold">{h.popularTitle}</h2>
-            <p className="text-muted-foreground mt-2">{h.popularSubtitle}</p>
+            <h2 className="text-2xl md:text-3xl font-bold">{h.featuredTitle}</h2>
+            <p className="text-muted-foreground mt-2">{h.featuredSubtitle}</p>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {destinations.map((dest) => (
-              <Link key={dest.city} href="/examples/hotel/search">
-                <Card className="overflow-hidden hover:shadow-lg transition-shadow group cursor-pointer">
-                  <div className="relative h-36 overflow-hidden">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {featuredHotels.map((hotel) => (
+              <Link key={hotel.id} href={`/examples/hotel/${hotel.id}`}>
+                <Card className="overflow-hidden hover:shadow-lg transition-shadow group cursor-pointer h-full">
+                  <div className="relative h-52 overflow-hidden">
                     <Image
-                      src={dest.image}
-                      alt={isRTL ? dest.cityAr : dest.city}
+                      src={hotel.image}
+                      alt={isRTL ? hotel.nameAr : hotel.name}
                       fill
                       className="object-cover group-hover:scale-105 transition-transform duration-300"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                    <div className="absolute bottom-3 start-3 text-white">
-                      <h3 className="font-bold text-lg">{isRTL ? dest.cityAr : dest.city}</h3>
-                      <p className="text-xs text-white/80">{isRTL ? dest.countryAr : dest.country}</p>
-                    </div>
+                    <Badge className="absolute top-3 start-3 bg-background/90 text-foreground">
+                      {Array.from({ length: hotel.stars }).map((_, i) => (
+                        <Star key={i} className="h-3 w-3 text-warning fill-warning" weight="fill" aria-hidden="true" />
+                      ))}
+                    </Badge>
                   </div>
-                  <CardContent className="p-3">
-                    <div className="flex items-center justify-between text-sm">
-                      <span className="text-muted-foreground">
-                        <ArabicNumber value={dest.hotelCount} /> {h.hotels}
-                      </span>
-                      <span className="font-medium">
-                        {h.from} <ArabicNumber value={dest.startingPrice} /> {h.aed}
-                      </span>
+                  <CardContent className="p-4 space-y-2">
+                    <h3 className="font-semibold text-lg">
+                      {isRTL ? hotel.nameAr : hotel.name}
+                    </h3>
+                    <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
+                      <MapPin className="h-3.5 w-3.5" aria-hidden="true" />
+                      <span>{isRTL ? hotel.locationAr : hotel.location}</span>
+                    </div>
+                    <div className="flex items-center justify-between pt-2">
+                      <div className="flex items-center gap-1.5">
+                        <Badge variant="secondary" className="font-semibold">
+                          <Star className="h-3 w-3 me-0.5 fill-warning text-warning" weight="fill" aria-hidden="true" />
+                          {hotel.rating}
+                        </Badge>
+                        <span className="text-xs text-muted-foreground">
+                          (<ArabicNumber value={hotel.reviewCount} />)
+                        </span>
+                      </div>
+                      <div className="text-end">
+                        <span className="font-bold text-lg">
+                          <ArabicNumber value={hotel.price} />
+                        </span>
+                        <span className="text-xs text-muted-foreground ms-1">
+                          {h.aed} {h.perNight}
+                        </span>
+                      </div>
                     </div>
                   </CardContent>
                 </Card>
               </Link>
             ))}
           </div>
+
+          <div className="text-center mt-8">
+            <Link href="/examples/hotel/search">
+              <ButtonArrow variant="outline" size="lg">
+                {h.viewAll}
+              </ButtonArrow>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Popular Destinations */}
+      <section className="container py-16" aria-label={h.popularTitle}>
+        <div className="text-center mb-10">
+          <h2 className="text-2xl md:text-3xl font-bold">{h.popularTitle}</h2>
+          <p className="text-muted-foreground mt-2">{h.popularSubtitle}</p>
+        </div>
+
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {destinations.map((dest) => (
+            <Link key={dest.city} href="/examples/hotel/search">
+              <Card className="overflow-hidden hover:shadow-lg transition-shadow group cursor-pointer">
+                <div className="relative h-36 overflow-hidden">
+                  <Image
+                    src={dest.image}
+                    alt={isRTL ? dest.cityAr : dest.city}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                  <div className="absolute bottom-3 start-3 text-white">
+                    <h3 className="font-bold text-lg">{isRTL ? dest.cityAr : dest.city}</h3>
+                    <p className="text-xs text-white/80">{isRTL ? dest.countryAr : dest.country}</p>
+                  </div>
+                </div>
+                <CardContent className="p-3">
+                  <div className="flex items-center justify-between text-sm">
+                    <span className="text-muted-foreground">
+                      <ArabicNumber value={dest.hotelCount} /> {h.hotels}
+                    </span>
+                    <span className="font-medium">
+                      {h.from} <ArabicNumber value={dest.startingPrice} /> {h.aed}
+                    </span>
+                  </div>
+                </CardContent>
+              </Card>
+            </Link>
+          ))}
         </div>
       </section>
 
       {/* Why Book With Us */}
-      <section className="container py-16">
-        <div className="text-center mb-10">
-          <h2 className="text-2xl md:text-3xl font-bold">{h.whyTitle}</h2>
-          <p className="text-muted-foreground mt-2">{h.whySubtitle}</p>
-        </div>
+      <section className="bg-muted/20 py-16" aria-label={h.whyTitle}>
+        <div className="container">
+          <div className="text-center mb-10">
+            <h2 className="text-2xl md:text-3xl font-bold">{h.whyTitle}</h2>
+            <p className="text-muted-foreground mt-2">{h.whySubtitle}</p>
+          </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <FeatureCard
-            icon={ShieldCheck}
-            title={h.bestPrice}
-            description={h.bestPriceDesc}
-          />
-          <FeatureCard
-            icon={CurrencyDollar}
-            title={h.freeCancellation}
-            description={h.freeCancellationDesc}
-          />
-          <FeatureCard
-            icon={Headset}
-            title={h.support}
-            description={h.supportDesc}
-          />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <FeatureCard
+              icon={ShieldCheck}
+              title={h.bestPrice}
+              description={h.bestPriceDesc}
+            />
+            <FeatureCard
+              icon={CurrencyDollar}
+              title={h.freeCancellation}
+              description={h.freeCancellationDesc}
+            />
+            <FeatureCard
+              icon={Headset}
+              title={h.support}
+              description={h.supportDesc}
+            />
+          </div>
         </div>
       </section>
     </div>
