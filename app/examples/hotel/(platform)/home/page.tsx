@@ -14,7 +14,6 @@ import { ArabicNumber } from '@/components/ui/arabic-number'
 import { DatePicker } from '@/components/ui/date-picker'
 import { StatsCard } from '@/components/ui/stats-card'
 import { Callout } from '@/components/ui/callout'
-import { Chart } from '@/components/ui/chart'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { useDirection } from '@/components/providers/direction-provider'
 import {
@@ -75,7 +74,7 @@ const t = {
     guestsLabel: 'guests',
     aed: 'AED',
     // Dashboard section
-    welcomeBack: 'Welcome back, Ahmed',
+    welcomeBack: 'Welcome back, Faysa',
     dashboardSubtitle: 'Here\'s your travel overview',
     totalBookings: 'Total Bookings',
     loyaltyPoints: 'Loyalty Points',
@@ -128,7 +127,7 @@ const t = {
     guestsLabel: 'ضيوف',
     aed: 'د.إ',
     // Dashboard section
-    welcomeBack: 'أهلاً بعودتك، أحمد',
+    welcomeBack: 'أهلاً بعودتكِ، فايزة',
     dashboardSubtitle: 'إليك نظرة عامة على رحلاتك',
     totalBookings: 'إجمالي الحجوزات',
     loyaltyPoints: 'نقاط الولاء',
@@ -311,10 +310,10 @@ export default function HotelLandingPage() {
                     </SelectContent>
                   </Select>
                 </div>
-                <Link href="/examples/hotel/search">
+                <Link href="/examples/hotel/search" className="block">
                   <Button className="w-full" size="lg">
-                    <MagnifyingGlass className="h-4 w-4 me-2" aria-hidden="true" />
-                    {h.searchBtn}
+                    <MagnifyingGlass className="h-5 w-5 shrink-0" weight="bold" aria-hidden="true" />
+                    <span>{h.searchBtn}</span>
                   </Button>
                 </Link>
               </div>
@@ -322,7 +321,7 @@ export default function HotelLandingPage() {
           </Card>
 
           {/* Stats Row */}
-          <div className="mt-10 flex justify-center gap-8 md:gap-16 text-white/90">
+          <div className="mt-10 flex flex-wrap justify-center gap-4 sm:gap-8 md:gap-16 text-white/90">
             {[
               { value: '200+', label: h.statsHotels, icon: Buildings },
               { value: '50K+', label: h.statsReviews, icon: ChatCircle },
@@ -331,7 +330,7 @@ export default function HotelLandingPage() {
             ].map((stat) => (
               <div key={stat.label} className="text-center">
                 <stat.icon className="h-6 w-6 mx-auto mb-1 text-white/70" aria-hidden="true" />
-                <div className="text-2xl md:text-3xl font-bold">{stat.value}</div>
+                <div className="text-xl sm:text-2xl md:text-3xl font-bold">{stat.value}</div>
                 <div className="text-xs text-white/60">{stat.label}</div>
               </div>
             ))}
@@ -346,7 +345,7 @@ export default function HotelLandingPage() {
             <h2 className="text-2xl font-bold">{h.welcomeBack}</h2>
             <p className="text-muted-foreground text-sm">{h.dashboardSubtitle}</p>
           </div>
-          <Badge className="bg-warning text-warning-foreground self-start md:self-auto">
+          <Badge variant="outline" className="border-warning/50 text-warning self-start md:self-auto">
             <Trophy className="h-3.5 w-3.5 me-1" weight="fill" aria-hidden="true" />
             Gold
           </Badge>
@@ -380,81 +379,31 @@ export default function HotelLandingPage() {
           />
         </div>
 
-        {/* Chart + Continue Search + Promo */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* Bookings by City Chart */}
-          <Card>
-            <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium">{h.bookingsByCity}</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <Chart
-                type="donut"
-                data={[
-                  { name: h.dubai, value: 5 },
-                  { name: h.abuDhabi, value: 3 },
-                  { name: h.doha, value: 2 },
-                  { name: h.riyadh, value: 1 },
-                  { name: h.muscat, value: 1 },
-                ]}
-                size="sm"
-                aria-label={h.bookingsByCity}
-              />
-            </CardContent>
-          </Card>
-
+        {/* Continue Search + Promo */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Continue Your Search */}
           <Card className="border-primary/20 bg-primary/5">
-            <CardContent className="p-6 flex flex-col justify-between h-full">
-              <div>
-                <div className="flex items-center gap-2 mb-2">
-                  <MagnifyingGlass className="h-5 w-5 text-primary" aria-hidden="true" />
-                  <h3 className="font-semibold">{h.continueSearch}</h3>
-                </div>
-                <p className="text-sm text-muted-foreground mb-4">{h.continueSearchDesc}</p>
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="relative w-16 h-12 rounded-md overflow-hidden">
-                    <Image src="/examples/hotel/hotel-1.jpg" alt="" fill className="object-cover" />
-                  </div>
-                  <div>
-                    <p className="text-sm font-medium">{isRTL ? 'دبي مارينا' : 'Dubai Marina'}</p>
-                    <p className="text-xs text-muted-foreground">Mar 20 – Mar 23 · 2 {h.guestsLabel}</p>
-                  </div>
-                </div>
+            <CardContent className="p-5 flex items-center gap-4">
+              <div className="relative w-20 h-16 rounded-lg overflow-hidden shrink-0">
+                <Image src="/examples/hotel/hotel-1.jpg" alt="" fill className="object-cover" />
               </div>
-              <Link href="/examples/hotel/search">
-                <Button className="w-full" size="sm">
-                  {h.continueBtn}
-                  <Arrow className="h-4 w-4 ms-1.5" />
-                </Button>
-              </Link>
+              <div className="flex-1 min-w-0">
+                <h3 className="font-semibold text-sm">{h.continueSearch}</h3>
+                <p className="text-xs text-muted-foreground mt-0.5">{isRTL ? 'دبي مارينا' : 'Dubai Marina'} · Mar 20–23 · 2 {h.guestsLabel}</p>
+                <Link href="/examples/hotel/search">
+                  <Button size="sm" className="mt-2">
+                    {h.continueBtn}
+                    <Arrow className="h-3.5 w-3.5 ms-1" />
+                  </Button>
+                </Link>
+              </div>
             </CardContent>
           </Card>
 
-          {/* Seasonal Promo Callout */}
-          <div className="space-y-4">
-            <Callout type="info" title={h.ramadanPromo}>
-              <p className="text-sm">{h.ramadanPromoDesc}</p>
-            </Callout>
-
-            {/* Quick stats summary */}
-            <Card>
-              <CardContent className="p-4">
-                <div className="flex items-center justify-between text-sm">
-                  <span className="text-muted-foreground">{isRTL ? 'آخر حجز' : 'Last booking'}</span>
-                  <span className="font-medium" dir="ltr">Dec 24, 2025</span>
-                </div>
-                <div className="flex items-center justify-between text-sm mt-2">
-                  <span className="text-muted-foreground">{isRTL ? 'المدينة المفضلة' : 'Favorite city'}</span>
-                  <span className="font-medium">{h.dubai}</span>
-                </div>
-                <div className="flex items-center justify-between text-sm mt-2">
-                  <span className="text-muted-foreground">{isRTL ? 'إجمالي الليالي' : 'Total nights'}</span>
-                  <span className="font-medium"><ArabicNumber value={28} /></span>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
+          {/* Seasonal Promo */}
+          <Callout type="info" title={h.ramadanPromo} className="h-full my-auto">
+            <p className="text-sm">{h.ramadanPromoDesc}</p>
+          </Callout>
         </div>
       </section>
 

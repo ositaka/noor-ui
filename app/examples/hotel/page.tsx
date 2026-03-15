@@ -22,7 +22,7 @@ const t = {
     loginTitle: 'Welcome back',
     loginSubtitle: 'Sign in to manage your reservations',
     email: 'Email',
-    emailPlaceholder: 'ahmed@example.com',
+    emailPlaceholder: 'faysa@example.com',
     password: 'Password',
     passwordPlaceholder: 'Enter your password',
     rememberMe: 'Remember me',
@@ -35,7 +35,7 @@ const t = {
     demoDesc: 'Use these credentials to explore the platform:',
     demoEmailLabel: 'Email',
     demoPasswordLabel: 'Password',
-    demoEmail: 'ahmed@nuzul.demo',
+    demoEmail: 'faysa@nuzul.demo',
     demoPassword: 'demo2026',
     secureNote: 'Your data is encrypted and secure',
     copyright: 'Nuzul — Hotel Booking Platform Demo',
@@ -54,7 +54,7 @@ const t = {
     loginTitle: 'أهلاً بعودتك',
     loginSubtitle: 'سجّل الدخول لإدارة حجوزاتك',
     email: 'البريد الإلكتروني',
-    emailPlaceholder: 'ahmed@example.com',
+    emailPlaceholder: 'faysa@example.com',
     password: 'كلمة المرور',
     passwordPlaceholder: 'أدخل كلمة المرور',
     rememberMe: 'تذكرني',
@@ -67,7 +67,7 @@ const t = {
     demoDesc: 'استخدم هذه البيانات لاستكشاف المنصة:',
     demoEmailLabel: 'البريد',
     demoPasswordLabel: 'كلمة المرور',
-    demoEmail: 'ahmed@nuzul.demo',
+    demoEmail: 'faysa@nuzul.demo',
     demoPassword: 'demo2026',
     secureNote: 'بياناتك مشفرة وآمنة',
     copyright: 'نزل — عرض توضيحي لمنصة حجز فنادق',
@@ -183,7 +183,7 @@ export default function HotelLoginPage() {
                       type="email"
                       dir="ltr"
                       placeholder={h.emailPlaceholder}
-                      defaultValue="ahmed@nuzul.demo"
+                      defaultValue="faysa@nuzul.demo"
                       className="ps-9"
                     />
                   </div>

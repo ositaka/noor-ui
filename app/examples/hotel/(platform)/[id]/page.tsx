@@ -480,7 +480,7 @@ export default function HotelDetailPage({ params }: { params: { id: string } }) 
                         })}
                       </div>
                     </div>
-                    <div className="flex items-end justify-between mt-4 pt-3 border-t">
+                    <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 mt-4 pt-3 border-t">
                       <div>
                         <span className="text-2xl font-bold">
                           <ArabicNumber value={roomPrice} />
@@ -489,8 +489,8 @@ export default function HotelDetailPage({ params }: { params: { id: string } }) 
                           {h.aed} {h.perNight}
                         </span>
                       </div>
-                      <Link href="/examples/hotel/booking">
-                        <Button>
+                      <Link href="/examples/hotel/booking" className="shrink-0">
+                        <Button className="w-full sm:w-auto">
                           {h.bookRoom}
                           <Arrow className="h-4 w-4 ms-1.5" />
                         </Button>

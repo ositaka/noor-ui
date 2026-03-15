@@ -306,17 +306,17 @@ export default function BookingPage() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <Label htmlFor="firstName">{h.firstName}</Label>
-                    <Input id="firstName" defaultValue={isRTL ? 'أحمد' : 'Ahmed'} />
+                    <Input id="firstName" defaultValue={isRTL ? 'فايزة' : 'Faysa'} />
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="lastName">{h.lastName}</Label>
-                    <Input id="lastName" defaultValue={isRTL ? 'الفلاسي' : 'Al Falasi'} />
+                    <Input id="lastName" defaultValue={isRTL ? 'المنصوري' : 'Al Mansouri'} />
                   </div>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <Label htmlFor="email">{h.email}</Label>
-                    <Input id="email" type="email" dir="ltr" defaultValue="ahmed@nuzul.demo" />
+                    <Input id="email" type="email" dir="ltr" defaultValue="faysa@nuzul.demo" />
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="phone">{h.phone}</Label>
@@ -396,7 +396,7 @@ export default function BookingPage() {
                     aria-checked={paymentMethod === 'online'}
                     onClick={() => setPaymentMethod('online')}
                     className={cn(
-                      'p-4 rounded-lg border-2 text-start transition-colors',
+                      'p-4 rounded-lg border-2 text-start transition-colors cursor-pointer',
                       paymentMethod === 'online' ? 'border-primary bg-primary/5' : 'border-border hover:border-primary/50',
                     )}
                   >
@@ -412,7 +412,7 @@ export default function BookingPage() {
                     aria-checked={paymentMethod === 'hotel'}
                     onClick={() => setPaymentMethod('hotel')}
                     className={cn(
-                      'p-4 rounded-lg border-2 text-start transition-colors',
+                      'p-4 rounded-lg border-2 text-start transition-colors cursor-pointer',
                       paymentMethod === 'hotel' ? 'border-primary bg-primary/5' : 'border-border hover:border-primary/50',
                     )}
                   >
@@ -433,7 +433,7 @@ export default function BookingPage() {
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="cardHolder">{h.cardHolder}</Label>
-                      <Input id="cardHolder" dir="ltr" defaultValue="AHMED AL FALASI" />
+                      <Input id="cardHolder" dir="ltr" defaultValue="FAYSA AL MANSOURI" />
                     </div>
                     <div className="grid grid-cols-2 gap-4">
                       <div className="space-y-2">
@@ -484,11 +484,11 @@ export default function BookingPage() {
                   <h4 className="font-medium text-sm">{h.guestDetails}</h4>
                   <div className="grid grid-cols-2 gap-2 text-sm">
                     <span className="text-muted-foreground">{h.firstName}</span>
-                    <span>{isRTL ? 'أحمد' : 'Ahmed'}</span>
+                    <span>{isRTL ? 'فايزة' : 'Faysa'}</span>
                     <span className="text-muted-foreground">{h.lastName}</span>
-                    <span>{isRTL ? 'الفلاسي' : 'Al Falasi'}</span>
+                    <span>{isRTL ? 'المنصوري' : 'Al Mansouri'}</span>
                     <span className="text-muted-foreground">{h.email}</span>
-                    <span dir="ltr">ahmed@nuzul.demo</span>
+                    <span dir="ltr">faysa@nuzul.demo</span>
                     <span className="text-muted-foreground">{h.phone}</span>
                     <span dir="ltr">+971 50 123 4567</span>
                   </div>

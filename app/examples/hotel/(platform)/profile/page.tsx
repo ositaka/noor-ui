@@ -1,13 +1,14 @@
 'use client'
 
 import * as React from 'react'
+import Image from 'next/image'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Badge } from '@/components/ui/badge'
 import { ArabicNumber } from '@/components/ui/arabic-number'
-import { Avatar, AvatarFallback } from '@/components/ui/avatar'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Separator } from '@/components/ui/separator'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
@@ -157,14 +158,15 @@ export default function ProfilePage() {
         <div className="lg:w-72 shrink-0">
           <Card>
             <CardContent className="p-6 text-center">
-              <Avatar className="h-20 w-20 mx-auto mb-4">
-                <AvatarFallback className="text-2xl">AF</AvatarFallback>
+              <Avatar className="h-24 w-24 mx-auto mb-4">
+                <AvatarImage src="/examples/hotel/avatar.jpg" alt={isRTL ? 'فايزة المنصوري' : 'Faysa Al Mansouri'} />
+                <AvatarFallback className="text-2xl">FM</AvatarFallback>
               </Avatar>
               <h2 className="font-bold text-lg">
-                {isRTL ? 'أحمد الفلاسي' : 'Ahmed Al Falasi'}
+                {isRTL ? 'فايزة المنصوري' : 'Faysa Al Mansouri'}
               </h2>
-              <p className="text-sm text-muted-foreground" dir="ltr">ahmed@nuzul.demo</p>
-              <Badge className="mt-2 bg-warning text-warning-foreground">
+              <p className="text-sm text-muted-foreground" dir="ltr">faysa@nuzul.demo</p>
+              <Badge variant="outline" className="mt-2 border-warning/50 text-warning">
                 <Star className="h-3 w-3 me-1" weight="fill" />
                 {h.gold}
               </Badge>
@@ -218,17 +220,17 @@ export default function ProfilePage() {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <Label htmlFor="prof-firstName">{h.firstName}</Label>
-                      <Input id="prof-firstName" defaultValue={isRTL ? 'أحمد' : 'Ahmed'} />
+                      <Input id="prof-firstName" defaultValue={isRTL ? 'فايزة' : 'Faysa'} />
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="prof-lastName">{h.lastName}</Label>
-                      <Input id="prof-lastName" defaultValue={isRTL ? 'الفلاسي' : 'Al Falasi'} />
+                      <Input id="prof-lastName" defaultValue={isRTL ? 'المنصوري' : 'Al Mansouri'} />
                     </div>
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <Label htmlFor="prof-email">{h.email}</Label>
-                      <Input id="prof-email" type="email" dir="ltr" defaultValue="ahmed@nuzul.demo" />
+                      <Input id="prof-email" type="email" dir="ltr" defaultValue="faysa@nuzul.demo" />
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="prof-phone">{h.phone}</Label>
@@ -243,6 +245,13 @@ export default function ProfilePage() {
                       </SelectTrigger>
                       <SelectContent>
                         <SelectItem value="uae">{h.uae}</SelectItem>
+                        <SelectItem value="sa">{isRTL ? 'السعودية' : 'Saudi Arabia'}</SelectItem>
+                        <SelectItem value="qa">{isRTL ? 'قطر' : 'Qatar'}</SelectItem>
+                        <SelectItem value="om">{isRTL ? 'عُمان' : 'Oman'}</SelectItem>
+                        <SelectItem value="bh">{isRTL ? 'البحرين' : 'Bahrain'}</SelectItem>
+                        <SelectItem value="kw">{isRTL ? 'الكويت' : 'Kuwait'}</SelectItem>
+                        <SelectItem value="eg">{isRTL ? 'مصر' : 'Egypt'}</SelectItem>
+                        <SelectItem value="other">{isRTL ? 'أخرى' : 'Other'}</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>

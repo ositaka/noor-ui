@@ -27,7 +27,7 @@ const t = {
     profile: 'Profile',
     signOut: 'Sign Out',
     skipToContent: 'Skip to main content',
-    welcomeUser: 'Ahmed',
+    welcomeUser: 'Faysa',
     openMenu: 'Open menu',
     closeMenu: 'Close menu',
   },
@@ -39,7 +39,7 @@ const t = {
     profile: 'الملف الشخصي',
     signOut: 'تسجيل الخروج',
     skipToContent: 'انتقل إلى المحتوى الرئيسي',
-    welcomeUser: 'أحمد',
+    welcomeUser: 'فايزة',
     openMenu: 'فتح القائمة',
     closeMenu: 'إغلاق القائمة',
   },
@@ -93,7 +93,7 @@ export default function HotelPlatformLayout({ children }: { children: React.Reac
             {navLinks.map((link) => (
               <Button
                 key={link.href}
-                variant={isActive(link.href) ? 'primary' : 'ghost'}
+                variant={isActive(link.href) ? 'secondary' : 'ghost'}
                 size="sm"
                 onClick={() => router.push(link.href)}
               >

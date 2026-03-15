@@ -247,7 +247,7 @@ export default function ReservationDetailPage({ params }: { params: { id: string
           <h1 className="text-2xl font-bold">{h.reservationDetail}</h1>
           <p className="text-sm text-muted-foreground font-mono" dir="ltr">{reservation.ref}</p>
         </div>
-        <Badge className="bg-success text-success-foreground self-start sm:self-auto">
+        <Badge variant="outline" className="border-success text-success self-start sm:self-auto">
           <CheckCircle className="h-3.5 w-3.5 me-1" weight="fill" aria-hidden="true" />
           {h.confirmed}
         </Badge>
@@ -325,11 +325,11 @@ export default function ReservationDetailPage({ params }: { params: { id: string
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm">
                 <div>
                   <span className="text-xs text-muted-foreground block">{h.guestName}</span>
-                  <span className="font-medium">{isRTL ? 'أحمد الفلاسي' : 'Ahmed Al Falasi'}</span>
+                  <span className="font-medium">{isRTL ? 'فايزة المنصوري' : 'Faysa Al Mansouri'}</span>
                 </div>
                 <div>
                   <span className="text-xs text-muted-foreground block">{h.email}</span>
-                  <span className="font-medium" dir="ltr">ahmed@nuzul.demo</span>
+                  <span className="font-medium" dir="ltr">faysa@nuzul.demo</span>
                 </div>
                 <div>
                   <span className="text-xs text-muted-foreground block">{h.phone}</span>
@@ -422,7 +422,7 @@ export default function ReservationDetailPage({ params }: { params: { id: string
               <Separator />
               <Dialog>
                 <DialogTrigger asChild>
-                  <Button variant="outline" className="w-full justify-start text-destructive hover:text-destructive">
+                  <Button variant="destructive" className="w-full justify-start">
                     <XIcon className="h-4 w-4 me-2" aria-hidden="true" />
                     {h.cancelBooking}
                   </Button>

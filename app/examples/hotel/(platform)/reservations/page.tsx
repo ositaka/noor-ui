@@ -280,7 +280,7 @@ export default function ReservationsPage() {
   const statusBadge = (status: Reservation['status']) => {
     switch (status) {
       case 'confirmed':
-        return <Badge variant="default" className="bg-success text-success-foreground">{h.confirmed}</Badge>
+        return <Badge variant="outline" className="border-success text-success">{h.confirmed}</Badge>
       case 'checked-out':
         return <Badge variant="secondary">{h.checkedOut}</Badge>
       case 'cancelled':
@@ -342,11 +342,11 @@ export default function ReservationsPage() {
 
           <Separator className="my-3" />
 
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
             <span className="text-xs text-muted-foreground">
               {h.confirmation}: <span className="font-mono" dir="ltr">{res.ref}</span>
             </span>
-            <div className="flex gap-2">
+            <div className="flex gap-2 shrink-0">
               {res.status === 'confirmed' && (
                 <>
                   <Link href={`/examples/hotel/reservations/${res.id}`}>
@@ -357,7 +357,7 @@ export default function ReservationsPage() {
                   </Link>
                   <Dialog>
                     <DialogTrigger asChild>
-                      <Button variant="outline" size="sm" className="text-destructive hover:text-destructive" aria-label={`${h.cancelBooking} — ${isRTL ? res.hotelNameAr : res.hotelName}`}>
+                      <Button variant="destructive" size="sm" aria-label={`${h.cancelBooking} — ${isRTL ? res.hotelNameAr : res.hotelName}`}>
                         <XIcon className="h-3.5 w-3.5 me-1" aria-hidden="true" />
                         {h.cancelBooking}
                       </Button>

@@ -21,6 +21,7 @@ import {
   PaginationPrevious,
 } from '@/components/ui/pagination'
 import { Separator } from '@/components/ui/separator'
+import { EmptyState } from '@/components/ui/empty-state'
 import { useDirection } from '@/components/providers/direction-provider'
 import {
   MagnifyingGlass,
@@ -35,6 +36,7 @@ import {
   FunnelSimple,
   X,
   SortAscending,
+  Buildings,
 } from '@phosphor-icons/react'
 import { cn } from '@/lib/utils'
 
@@ -76,6 +78,8 @@ const t = {
     showFilters: 'Show Filters',
     hideFilters: 'Hide Filters',
     aed: 'AED',
+    noResults: 'No hotels match your filters',
+    noResultsDesc: 'Try adjusting your filters or search criteria to find more hotels.',
   },
   ar: {
     searchTitle: 'بحث الفنادق',
@@ -110,6 +114,8 @@ const t = {
     showFilters: 'إظهار التصفية',
     hideFilters: 'إخفاء التصفية',
     aed: 'د.إ',
+    noResults: 'لا توجد فنادق تطابق التصفية',
+    noResultsDesc: 'حاول تعديل التصفية أو معايير البحث للعثور على المزيد من الفنادق.',
   },
 }
 
@@ -489,8 +495,8 @@ export default function HotelSearchPage() {
             className="md:hidden"
             onClick={() => setShowMobileFilters(!showMobileFilters)}
           >
-            {showMobileFilters ? <X className="h-4 w-4 me-1.5" /> : <FunnelSimple className="h-4 w-4 me-1.5" />}
-            {showMobileFilters ? h.hideFilters : h.showFilters}
+            {showMobileFilters ? <X className="h-4 w-4 sm:me-1.5" /> : <FunnelSimple className="h-4 w-4 sm:me-1.5" />}
+            <span className="hidden sm:inline">{showMobileFilters ? h.hideFilters : h.showFilters}</span>
           </Button>
 
           {/* Sort */}
@@ -538,6 +544,14 @@ export default function HotelSearchPage() {
 
         {/* Results */}
         <div className="flex-1 space-y-4">
+          {filteredHotels.length === 0 && (
+            <EmptyState
+              icon={<Buildings className="h-12 w-12" />}
+              title={h.noResults}
+              description={h.noResultsDesc}
+              action={<Button onClick={clearFilters}>{h.clearFilters}</Button>}
+            />
+          )}
           {paginatedHotels.map((hotel) => (
             <Link key={hotel.id} href={`/examples/hotel/${hotel.id}`}>
               <Card className="overflow-hidden hover:shadow-md transition-shadow group cursor-pointer mb-4">
