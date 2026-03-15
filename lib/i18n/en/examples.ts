@@ -112,10 +112,11 @@ examples: {
     },
     {
       title: 'Hotel Booking Platform',
-      description: 'Full hotel booking experience with search, property galleries with Carousel, booking flow, and reservation management.',
+      description: 'Full hotel booking experience with login, search with filters, property galleries with Carousel, multi-step booking flow with Stepper, reservations management, and user profile.',
       href: '/examples/hotel',
-      tags: ['Hotel', 'Booking', 'Carousel', 'DatePicker', 'RTL'],
-      status: 'coming-soon',
+      tags: ['Hotel', 'Booking', 'Carousel', 'DatePicker', 'Stepper', 'RangeSlider', 'RTL'],
+      status: 'ready',
+      featured: true,
     },
     {
       title: 'Banking & Personal Finance',
