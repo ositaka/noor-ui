@@ -104,10 +104,11 @@ examples: {
     },
     {
       title: 'Government Services Portal',
-      description: 'Multi-page government services portal with UAE PASS login, service applications, document vault, and application tracking with Timeline.',
+      description: 'Multi-page government services portal with digital ID login, multi-step service applications, document vault, and application tracking with Timeline.',
       href: '/examples/government',
       tags: ['Government', 'Multi-page', 'Stepper', 'Timeline', 'GCC', 'RTL'],
-      status: 'coming-soon',
+      status: 'ready',
+      featured: true,
     },
     {
       title: 'Hotel Booking Platform',
