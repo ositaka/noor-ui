@@ -4,11 +4,14 @@ import * as React from 'react'
 import Link from 'next/link'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
+import { ButtonArrow } from '@/components/ui/button-arrow'
 import { Badge } from '@/components/ui/badge'
 import { StatsCard } from '@/components/ui/stats-card'
 import { FeatureCard } from '@/components/ui/feature-card'
 import { Callout } from '@/components/ui/callout'
 import { ArabicNumber } from '@/components/ui/arabic-number'
+import { Progress } from '@/components/ui/progress'
+import { Chart } from '@/components/ui/chart'
 import {
   Shield,
   ClipboardText,
@@ -27,6 +30,7 @@ import {
   ArrowRight,
   ArrowLeft,
   Megaphone,
+  Warning,
 } from '@phosphor-icons/react'
 import { useDirection } from '@/components/providers/direction-provider'
 
@@ -76,6 +80,25 @@ const t = {
     docsRequired: 'Docs Required',
     ref: 'Ref',
     viewDetails: 'View Details',
+    continueApplication: 'Continue Application',
+    continueDesc: 'You have an in-progress application',
+    step2of4: 'Step 2 of 4 — Documents Upload',
+    continueBtn: 'Continue',
+    applicationsByCategory: 'Applications by Category',
+    catVisa: 'Visa',
+    catLicensing: 'Licensing',
+    catCivil: 'Civil',
+    catTraffic: 'Traffic',
+    catHousing: 'Housing',
+    catEmployment: 'Employment',
+    upcomingDeadlines: 'Upcoming Deadlines',
+    salaryCertExpiry: 'Salary Certificate expires',
+    tradeLicenseExpiry: 'Trade License expires',
+    visaExpiry: 'Visa expires',
+    daysLeft: 'days left',
+    mar30: 'Mar 30, 2026',
+    apr15: 'Apr 15, 2026',
+    jun15: 'Jun 15, 2026',
   },
   ar: {
     welcome: 'مرحباً بعودتك، أحمد',
@@ -112,6 +135,25 @@ const t = {
     docsRequired: 'مستندات مطلوبة',
     ref: 'المرجع',
     viewDetails: 'عرض التفاصيل',
+    continueApplication: 'متابعة الطلب',
+    continueDesc: 'لديك طلب قيد التنفيذ',
+    step2of4: 'الخطوة ٢ من ٤ — رفع المستندات',
+    continueBtn: 'متابعة',
+    applicationsByCategory: 'الطلبات حسب الفئة',
+    catVisa: 'تأشيرات',
+    catLicensing: 'تراخيص',
+    catCivil: 'مدني',
+    catTraffic: 'مرور',
+    catHousing: 'إسكان',
+    catEmployment: 'توظيف',
+    upcomingDeadlines: 'مواعيد قادمة',
+    salaryCertExpiry: 'تنتهي صلاحية شهادة الراتب',
+    tradeLicenseExpiry: 'تنتهي صلاحية الرخصة التجارية',
+    visaExpiry: 'تنتهي صلاحية التأشيرة',
+    daysLeft: 'يوم متبقي',
+    mar30: '٣٠ مارس ٢٠٢٦',
+    apr15: '١٥ أبريل ٢٠٢٦',
+    jun15: '١٥ يونيو ٢٠٢٦',
   },
 }
 
@@ -220,6 +262,37 @@ export default function GovernmentDashboard() {
         />
       </div>
 
+      {/* Continue Application */}
+      <Card className="mb-6 border-info/30 bg-info/5">
+        <CardContent className="pt-6">
+          <div className="flex items-center justify-between mb-3">
+            <div className="flex items-center gap-3">
+              <div className="p-2 bg-info/10 rounded-lg">
+                <AirplaneTilt className="h-5 w-5 text-info" aria-hidden="true" />
+              </div>
+              <div>
+                <p className="font-medium text-sm">{h.continueApplication}</p>
+                <p className="text-xs text-muted-foreground">
+                  {isRTL ? 'تجديد التأشيرة' : 'Visa Renewal'} &middot; <span dir="ltr">GOV-2026-00198</span>
+                </p>
+              </div>
+            </div>
+            <ButtonArrow size="sm" asChild>
+              <Link href="/examples/government/services/visa-residency">
+                {h.continueBtn}
+              </Link>
+            </ButtonArrow>
+          </div>
+          <div className="space-y-1">
+            <div className="flex justify-between text-xs text-muted-foreground">
+              <span>{h.step2of4}</span>
+              <span>50%</span>
+            </div>
+            <Progress value={50} className="h-2" aria-label={h.step2of4} />
+          </div>
+        </CardContent>
+      </Card>
+
       <div className="grid gap-6 lg:grid-cols-3">
         {/* Main content - 2/3 width */}
         <div className="lg:col-span-2 space-y-6">
@@ -265,6 +338,30 @@ export default function GovernmentDashboard() {
               />
             </div>
           </div>
+
+          {/* Applications by Category Chart */}
+          <Card>
+            <CardHeader>
+              <CardTitle>{h.applicationsByCategory}</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <Chart
+                type="bar"
+                data={[
+                  { name: h.catVisa, value: 8 },
+                  { name: h.catLicensing, value: 5 },
+                  { name: h.catCivil, value: 3 },
+                  { name: h.catTraffic, value: 4 },
+                  { name: h.catHousing, value: 2 },
+                  { name: h.catEmployment, value: 6 },
+                ]}
+                size="sm"
+                showXAxis
+                showYAxis
+                aria-label={h.applicationsByCategory}
+              />
+            </CardContent>
+          </Card>
 
           {/* Recent Applications */}
           <Card>
@@ -334,6 +431,48 @@ export default function GovernmentDashboard() {
                   {h.uploadDocument}
                 </Link>
               </Button>
+            </CardContent>
+          </Card>
+
+          {/* Upcoming Deadlines */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Clock className="h-5 w-5" aria-hidden="true" />
+                {h.upcomingDeadlines}
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              <Link
+                href="/examples/government/documents"
+                className="flex items-center justify-between p-2 rounded-lg hover:bg-accent/50 transition-colors"
+              >
+                <div className="space-y-0.5">
+                  <p className="text-sm font-medium">{h.salaryCertExpiry}</p>
+                  <p className="text-xs text-muted-foreground">{h.mar30}</p>
+                </div>
+                <Badge variant="destructive" className="text-xs">15 {h.daysLeft}</Badge>
+              </Link>
+              <Link
+                href="/examples/government/documents"
+                className="flex items-center justify-between p-2 rounded-lg hover:bg-accent/50 transition-colors"
+              >
+                <div className="space-y-0.5">
+                  <p className="text-sm font-medium">{h.tradeLicenseExpiry}</p>
+                  <p className="text-xs text-muted-foreground">{h.apr15}</p>
+                </div>
+                <Badge variant="secondary" className="text-xs">31 {h.daysLeft}</Badge>
+              </Link>
+              <Link
+                href="/examples/government/documents"
+                className="flex items-center justify-between p-2 rounded-lg hover:bg-accent/50 transition-colors"
+              >
+                <div className="space-y-0.5">
+                  <p className="text-sm font-medium">{h.visaExpiry}</p>
+                  <p className="text-xs text-muted-foreground">{h.jun15}</p>
+                </div>
+                <Badge variant="outline" className="text-xs">92 {h.daysLeft}</Badge>
+              </Link>
             </CardContent>
           </Card>
         </div>

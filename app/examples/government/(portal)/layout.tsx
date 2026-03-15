@@ -23,6 +23,13 @@ import {
   ClipboardText,
   FolderOpen,
   MagnifyingGlass,
+  AirplaneTilt,
+  Briefcase,
+  IdentificationCard,
+  Car,
+  HouseSimple,
+  UsersThree,
+  FileText,
 } from '@phosphor-icons/react'
 
 const gt = {
@@ -44,6 +51,17 @@ const gt = {
     profileComingSoon: 'Profile page coming soon',
     settingsComingSoon: 'Settings page coming soon',
     supportComingSoon: 'Support page coming soon',
+    servicesGroup: 'Services',
+    recentAppsGroup: 'Recent Applications',
+    visaResidency: 'Visa & Residency',
+    businessLicensing: 'Business Licensing',
+    civilAffairs: 'Civil Affairs',
+    trafficVehicles: 'Traffic & Vehicles',
+    housing: 'Housing',
+    employment: 'Employment',
+    visaRenewal: 'Visa Renewal',
+    tradeLicenseAmendment: 'Trade License Amendment',
+    tradeLicenseRenewal: 'Trade License Renewal',
   },
   ar: {
     portalName: 'البوابة',
@@ -63,12 +81,23 @@ const gt = {
     profileComingSoon: 'صفحة الملف الشخصي قريباً',
     settingsComingSoon: 'صفحة الإعدادات قريباً',
     supportComingSoon: 'صفحة الدعم قريباً',
+    servicesGroup: 'الخدمات',
+    recentAppsGroup: 'الطلبات الأخيرة',
+    visaResidency: 'تأشيرات وإقامة',
+    businessLicensing: 'تراخيص تجارية',
+    civilAffairs: 'الأحوال المدنية',
+    trafficVehicles: 'المرور والمركبات',
+    housing: 'الإسكان',
+    employment: 'العمل والتوظيف',
+    visaRenewal: 'تجديد التأشيرة',
+    tradeLicenseAmendment: 'تعديل الرخصة التجارية',
+    tradeLicenseRenewal: 'تجديد الرخصة التجارية',
   },
 }
 
 const navItems = [
   { title: 'Dashboard', titleAr: 'لوحة التحكم', href: '/examples/government/dashboard', icon: <House className="h-5 w-5" /> },
-  { title: 'Services', titleAr: 'الخدمات', href: '/examples/government/services/visa-residency', icon: <GridFour className="h-5 w-5" /> },
+  { title: 'Services', titleAr: 'الخدمات', href: '/examples/government/services', icon: <GridFour className="h-5 w-5" /> },
   { title: 'My Applications', titleAr: 'طلباتي', href: '/examples/government/applications', icon: <ClipboardText className="h-5 w-5" />, badge: '3' },
   { title: 'Documents', titleAr: 'المستندات', href: '/examples/government/documents', icon: <FolderOpen className="h-5 w-5" /> },
 ]
@@ -171,6 +200,45 @@ export default function GovernmentPortalLayout({ children }: { children: React.R
               >
                 {item.icon}
                 <span className="ms-2">{locale === 'ar' ? item.titleAr : item.title}</span>
+              </CommandItem>
+            ))}
+          </CommandGroup>
+          <CommandGroup heading={t.servicesGroup}>
+            {[
+              { title: t.visaResidency, icon: <AirplaneTilt className="h-5 w-5" />, href: '/examples/government/services/visa-residency' },
+              { title: t.businessLicensing, icon: <Briefcase className="h-5 w-5" />, href: '/examples/government/services/business-licensing' },
+              { title: t.civilAffairs, icon: <IdentificationCard className="h-5 w-5" />, href: '/examples/government/services/civil-affairs' },
+              { title: t.trafficVehicles, icon: <Car className="h-5 w-5" />, href: '/examples/government/services/traffic-vehicles' },
+              { title: t.housing, icon: <HouseSimple className="h-5 w-5" />, href: '/examples/government/services/housing' },
+              { title: t.employment, icon: <UsersThree className="h-5 w-5" />, href: '/examples/government/services/employment' },
+            ].map((svc) => (
+              <CommandItem
+                key={svc.href}
+                onSelect={() => {
+                  router.push(svc.href)
+                  setCommandOpen(false)
+                }}
+              >
+                {svc.icon}
+                <span className="ms-2">{svc.title}</span>
+              </CommandItem>
+            ))}
+          </CommandGroup>
+          <CommandGroup heading={t.recentAppsGroup}>
+            {[
+              { title: `${t.visaRenewal} — GOV-2026-00198`, href: '/examples/government/applications/1' },
+              { title: `${t.tradeLicenseAmendment} — GOV-2026-00185`, href: '/examples/government/applications/2' },
+              { title: `${t.tradeLicenseRenewal} — GOV-2026-00142`, href: '/examples/government/applications/3' },
+            ].map((app) => (
+              <CommandItem
+                key={app.href}
+                onSelect={() => {
+                  router.push(app.href)
+                  setCommandOpen(false)
+                }}
+              >
+                <FileText className="h-5 w-5" />
+                <span className="ms-2">{app.title}</span>
               </CommandItem>
             ))}
           </CommandGroup>
