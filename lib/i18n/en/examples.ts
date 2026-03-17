@@ -120,10 +120,11 @@ examples: {
     },
     {
       title: 'Banking & Personal Finance',
-      description: 'Personal finance dashboard with Charts, transaction management, bill payments, and card management.',
+      description: 'Complete digital banking experience with account dashboard, Charts (donut, line, bar), transaction history with DataTable, money transfers with OTP verification, bill payments, and card management with Switch and Slider controls.',
       href: '/examples/banking',
-      tags: ['Banking', 'Finance', 'Charts', 'DataTable', 'RTL'],
-      status: 'coming-soon',
+      tags: ['Banking', 'Finance', 'Charts', 'DataTable', 'Switch', 'Slider', 'RTL'],
+      status: 'ready',
+      featured: true,
     },
   ],
 }
