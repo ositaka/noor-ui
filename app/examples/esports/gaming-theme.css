@@ -1,0 +1,42 @@
+/* ─── Gaming Theme (Esports Demo Only) ──────────────────────────────────── */
+/* Scoped to the esports example — NOT a built-in theme. */
+/* Imported by app/examples/esports/layout.tsx */
+
+.theme-gaming {
+  --color-background: hsl(240 20% 4%);
+  --color-foreground: hsl(0 0% 95%);
+  --color-card: hsl(240 15% 8%);
+  --color-card-foreground: hsl(0 0% 95%);
+  --color-primary: hsl(270 100% 60%);
+  --color-primary-foreground: hsl(0 0% 100%);
+  --color-secondary: hsl(180 100% 50%);
+  --color-secondary-foreground: hsl(240 20% 4%);
+  --color-muted: hsl(240 15% 12%);
+  --color-muted-foreground: hsl(0 0% 60%);
+  --color-accent: hsl(300 100% 55%);
+  --color-accent-foreground: hsl(0 0% 100%);
+  --color-border: hsl(240 15% 16%);
+  --color-input: hsl(240 15% 16%);
+  --color-popover: hsl(240 15% 8%);
+  --color-popover-foreground: hsl(0 0% 95%);
+  --color-ring: hsl(270 100% 60%);
+  --color-destructive: hsl(0 90% 55%);
+  --color-destructive-foreground: hsl(0 0% 100%);
+  --radius: 0.75rem;
+  --radius-lg: 0.75rem;
+  --radius-md: calc(0.75rem - 2px);
+  --radius-sm: calc(0.75rem - 4px);
+
+  /* Neon status colors — dark foregrounds on bright neon backgrounds for WCAG AA */
+  --color-success: hsl(120 100% 40%);
+  --color-success-foreground: hsl(240 20% 4%);
+  --color-warning: hsl(45 100% 50%);
+  --color-warning-foreground: hsl(240 20% 4%);
+  --color-info: hsl(180 100% 50%);
+  --color-info-foreground: hsl(240 20% 4%);
+
+  /* Typography */
+  --body-line-height: 1.5;
+  --heading-letter-spacing: -0.02em;
+  --heading-font-weight: 700;
+}
