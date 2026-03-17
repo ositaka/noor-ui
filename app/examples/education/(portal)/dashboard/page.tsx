@@ -91,6 +91,8 @@ const ed = {
     gradesDistribution: 'Grades Distribution',
     gpaTrend: 'GPA Trend',
     semester: 'Semester',
+    semester1: 'Semester 1',
+    semester2: 'Semester 2',
   },
   ar: {
     schoolName: 'مدرسة النور الدولية',
@@ -148,6 +150,8 @@ const ed = {
     gradesDistribution: 'توزيع الدرجات',
     gpaTrend: 'اتجاه المعدل التراكمي',
     semester: 'الفصل الدراسي',
+    semester1: 'الفصل الأول',
+    semester2: 'الفصل الثاني',
   },
 }
 
@@ -221,6 +225,7 @@ export default function EducationDashboard() {
   const isRTL = direction === 'rtl'
   const h = ed[locale]
   const Arrow = isRTL ? ArrowLeft : ArrowRight
+  const [gradeSemester, setGradeSemester] = React.useState<'s1' | 's2'>('s1')
 
   return (
     <div className="container py-8">
@@ -290,18 +295,43 @@ export default function EducationDashboard() {
         <div className="grid gap-6 lg:grid-cols-2 mb-8">
           <Card>
             <CardHeader>
-              <CardTitle>{h.gradesDistribution}</CardTitle>
+              <div className="flex items-center justify-between">
+                <CardTitle>{h.gradesDistribution}</CardTitle>
+                <div className="flex gap-1">
+                  <Button
+                    variant={gradeSemester === 's1' ? 'primary' : 'ghost'}
+                    size="sm"
+                    onClick={() => setGradeSemester('s1')}
+                  >
+                    {h.semester1}
+                  </Button>
+                  <Button
+                    variant={gradeSemester === 's2' ? 'primary' : 'ghost'}
+                    size="sm"
+                    onClick={() => setGradeSemester('s2')}
+                  >
+                    {h.semester2}
+                  </Button>
+                </div>
+              </div>
             </CardHeader>
             <CardContent>
               <Chart
                 type="bar"
-                data={[
+                data={gradeSemester === 's1' ? [
                   { subject: isRTL ? 'الرياضيات' : 'Math', grade: 92 },
                   { subject: isRTL ? 'الفيزياء' : 'Physics', grade: 85 },
                   { subject: isRTL ? 'العربية' : 'Arabic', grade: 95 },
                   { subject: isRTL ? 'الإسلامية' : 'Islamic', grade: 98 },
                   { subject: isRTL ? 'الإنجليزية' : 'English', grade: 88 },
                   { subject: isRTL ? 'الحاسب' : 'CS', grade: 91 },
+                ] : [
+                  { subject: isRTL ? 'الرياضيات' : 'Math', grade: 88 },
+                  { subject: isRTL ? 'الفيزياء' : 'Physics', grade: 82 },
+                  { subject: isRTL ? 'العربية' : 'Arabic', grade: 90 },
+                  { subject: isRTL ? 'الإسلامية' : 'Islamic', grade: 95 },
+                  { subject: isRTL ? 'الإنجليزية' : 'English', grade: 84 },
+                  { subject: isRTL ? 'الحاسب' : 'CS', grade: 87 },
                 ]}
                 categoryKey="subject"
                 valueKey="grade"

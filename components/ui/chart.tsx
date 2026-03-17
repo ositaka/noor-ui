@@ -173,6 +173,37 @@ function DonutDataSummary({
   )
 }
 
+function MultiDonutDataSummary({
+  data,
+  categoryKey,
+  valueKey,
+  numberFormatter,
+}: {
+  data: ChartDataItem[]
+  categoryKey: string
+  valueKey: string
+  numberFormatter: Intl.NumberFormat
+}) {
+  return (
+    <table className="sr-only">
+      <thead>
+        <tr>
+          <th scope="col">{categoryKey}</th>
+          <th scope="col">{valueKey}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {data.map((item, i) => (
+          <tr key={i}>
+            <th scope="row">{String(item[categoryKey])}</th>
+            <td>{numberFormatter.format(Number(item[valueKey]))}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  )
+}
+
 // ---------------------------------------------------------------------------
 // Shared types
 // ---------------------------------------------------------------------------
@@ -329,13 +360,14 @@ export function Chart(props: ChartProps) {
       const title = (tp.title as string[])?.[0] ?? ''
       const bodyItems = tp.body as { lines: string[] }[] | undefined
       const labelColors = tp.labelColors as { backgroundColor: string }[] | undefined
-      const dataPoints = tp.dataPoints as { dataset: { label?: string }; parsed: { y: number }; chart: { data: { datasets: unknown[] } } }[] | undefined
+      const dataPoints = tp.dataPoints as { dataset: { label?: string }; parsed: number | { y: number }; chart: { data: { datasets: unknown[] } } }[] | undefined
       const multiSeries = (dataPoints?.length ?? 0) > 1
 
       let rows = ''
       dataPoints?.forEach((dp, i) => {
         const color = labelColors?.[i]?.backgroundColor ?? '#6366f1'
-        const value = numberFormatter.format(dp.parsed.y)
+        const rawValue = typeof dp.parsed === 'number' ? dp.parsed : dp.parsed.y
+        const value = numberFormatter.format(rawValue)
         const label = multiSeries ? dp.dataset.label ?? '' : ''
         const dot = `<span style="width:8px;height:8px;border-radius:50%;background:${color};flex-shrink:0;"></span>`
         const text = label ? `${label}\u2003${value}` : value
@@ -369,6 +401,83 @@ export function Chart(props: ChartProps) {
 
   if (type === 'donut') {
     const donutProps = props as DonutChartProps
+    const thickness = donutProps.thickness ?? 'default'
+    const cutoutMap = { thin: '88%', default: '82%', thick: '72%' }
+    const donutSize = donutSizeMap[size ?? 'md']
+    const isMultiSegment = data.length > 1 && donutProps.value == null
+
+    // -----------------------------------------------------------------------
+    // Multi-segment donut (e.g., spending breakdown by category)
+    // -----------------------------------------------------------------------
+    if (isMultiSegment) {
+      const chartData = {
+        labels: data.map((d) => String(d[categoryKey])),
+        datasets: [
+          {
+            data: data.map((d) => Number(d[valueKeys[0]])),
+            backgroundColor: resolvedColors.slice(0, data.length),
+            borderWidth: 2,
+            borderColor: isDarkMode ? 'hsl(0 0% 10%)' : 'hsl(0 0% 100%)',
+            borderRadius: 4,
+          },
+        ],
+      }
+
+      const options = {
+        responsive: true,
+        maintainAspectRatio: false,
+        cutout: cutoutMap[thickness],
+        animation: { duration: 0 },
+        plugins: {
+          tooltip: {
+            enabled: false,
+            external: externalTooltip,
+          },
+          legend: { display: false },
+        },
+      }
+
+      return (
+        <>
+          <figure
+            role="img"
+            className={cn(donutSize, 'relative', className)}
+            aria-label={ariaLabel ?? fallbackLabel}
+          >
+            <div aria-hidden="true" className={cn('h-full', isRTL && '[&_canvas]:-scale-x-100')}>
+              <Doughnut data={chartData} options={options as never} />
+            </div>
+            {(donutProps.innerLabel || donutProps.innerSubLabel) && (
+              <div
+                className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none px-[25%]"
+                aria-hidden="true"
+              >
+                {donutProps.innerLabel && (
+                  <div className="text-xl font-bold text-foreground text-center truncate max-w-full">
+                    {donutProps.innerLabel}
+                  </div>
+                )}
+                {donutProps.innerSubLabel && (
+                  <div className="text-[10px] leading-tight text-muted-foreground text-center max-w-full line-clamp-2">
+                    {donutProps.innerSubLabel}
+                  </div>
+                )}
+              </div>
+            )}
+          </figure>
+          <MultiDonutDataSummary
+            data={data}
+            categoryKey={categoryKey}
+            valueKey={valueKeys[0]}
+            numberFormatter={numberFormatter}
+          />
+        </>
+      )
+    }
+
+    // -----------------------------------------------------------------------
+    // Single-value donut (percentage ring with track)
+    // -----------------------------------------------------------------------
     const displayValue =
       donutProps.value ?? (data[0]?.[valueKeys[0]] as number) ?? 0
     const cappedValue = Math.min(displayValue, 100)
@@ -385,9 +494,6 @@ export function Chart(props: ChartProps) {
         },
       ],
     }
-
-    const thickness = (props as DonutChartProps).thickness ?? 'default'
-    const cutoutMap = { thin: '88%', default: '82%', thick: '72%' }
 
     // Plugin: draw track ring behind the value arc
     const trackPlugin = {
@@ -419,8 +525,6 @@ export function Chart(props: ChartProps) {
       },
     }
 
-    const donutSize = donutSizeMap[size ?? 'md']
-
     return (
       <>
         <figure
@@ -433,16 +537,16 @@ export function Chart(props: ChartProps) {
           </div>
           {(donutProps.innerLabel || donutProps.innerSubLabel) && (
             <div
-              className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none"
+              className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none px-[25%]"
               aria-hidden="true"
             >
               {donutProps.innerLabel && (
-                <div className="text-3xl font-bold text-foreground">
+                <div className="text-3xl font-bold text-foreground text-center truncate max-w-full">
                   {donutProps.innerLabel}
                 </div>
               )}
               {donutProps.innerSubLabel && (
-                <div className="text-sm text-muted-foreground">
+                <div className="text-xs text-muted-foreground text-center max-w-full line-clamp-2">
                   {donutProps.innerSubLabel}
                 </div>
               )}
