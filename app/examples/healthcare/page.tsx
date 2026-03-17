@@ -77,6 +77,14 @@ const hc = {
     dental: 'Dental',
     pediatrics: 'Pediatrics',
     labReview: 'Lab Review',
+    today: 'Today',
+    thisWeek: 'This Week',
+    weekSummary: 'appointments this week',
+    mon: 'Mon',
+    tue: 'Tue',
+    wed: 'Wed',
+    thu: 'Thu',
+    sun: 'Sun',
   },
   ar: {
     title: 'مركز النور الطبي',
@@ -125,6 +133,14 @@ const hc = {
     dental: 'أسنان',
     pediatrics: 'أطفال',
     labReview: 'مراجعة مختبر',
+    today: 'اليوم',
+    thisWeek: 'هذا الأسبوع',
+    weekSummary: 'مواعيد هذا الأسبوع',
+    mon: 'الإثنين',
+    tue: 'الثلاثاء',
+    wed: 'الأربعاء',
+    thu: 'الخميس',
+    sun: 'الأحد',
   },
 }
 
@@ -214,6 +230,7 @@ export default function HealthcareDashboard() {
   const isRTL = direction === 'rtl'
   const h = hc[locale]
   const Arrow = isRTL ? ArrowLeft : ArrowRight
+  const [scheduleView, setScheduleView] = React.useState<'today' | 'week'>('today')
 
   return (
     <div className="container py-8">
@@ -271,46 +288,95 @@ export default function HealthcareDashboard() {
                 <div>
                   <CardTitle>{h.todaysSchedule}</CardTitle>
                   <CardDescription>
-                    <ArabicNumber value={6} /> {h.appointmentsToday}
+                    {scheduleView === 'today'
+                      ? <><ArabicNumber value={6} /> {h.appointmentsToday}</>
+                      : <><ArabicNumber value={28} /> {h.weekSummary}</>
+                    }
                   </CardDescription>
                 </div>
-                <Button variant="outline" size="sm" asChild>
-                  <Link href="/examples/healthcare/appointments">
-                    {h.viewAppointments}
-                    <Arrow className="h-4 w-4 ms-2" />
-                  </Link>
-                </Button>
+                <div className="flex items-center gap-2">
+                  <div className="flex gap-1">
+                    <Button
+                      variant={scheduleView === 'today' ? 'primary' : 'ghost'}
+                      size="sm"
+                      onClick={() => setScheduleView('today')}
+                    >
+                      {h.today}
+                    </Button>
+                    <Button
+                      variant={scheduleView === 'week' ? 'primary' : 'ghost'}
+                      size="sm"
+                      onClick={() => setScheduleView('week')}
+                    >
+                      {h.thisWeek}
+                    </Button>
+                  </div>
+                  <Button variant="outline" size="sm" asChild>
+                    <Link href="/examples/healthcare/appointments">
+                      {h.viewAppointments}
+                      <Arrow className="h-4 w-4 ms-2" />
+                    </Link>
+                  </Button>
+                </div>
               </div>
             </CardHeader>
             <CardContent>
-              <div className="space-y-3">
-                {todaysAppointments.map((apt) => (
-                  <Link
-                    key={apt.id}
-                    href={`/examples/healthcare/patients/${apt.id}`}
-                    className="flex items-center justify-between p-3 rounded-lg border bg-card hover:bg-accent/50 transition-colors"
-                  >
-                    <div className="flex items-center gap-3">
-                      <div className="text-sm font-mono text-muted-foreground w-12">
-                        {apt.time}
+              {scheduleView === 'today' ? (
+                <div className="space-y-3">
+                  {todaysAppointments.map((apt) => (
+                    <Link
+                      key={apt.id}
+                      href={`/examples/healthcare/patients/${apt.id}`}
+                      className="flex items-center justify-between p-3 rounded-lg border bg-card hover:bg-accent/50 transition-colors"
+                    >
+                      <div className="flex items-center gap-3">
+                        <div className="text-sm font-mono text-muted-foreground w-12">
+                          {apt.time}
+                        </div>
+                        <Avatar className="h-8 w-8">
+                          <AvatarImage src={apt.patientImage} alt={apt.patientName} />
+                          <AvatarFallback className="text-xs">{apt.patientInitials}</AvatarFallback>
+                        </Avatar>
+                        <div>
+                          <p className="font-medium text-sm">
+                            {isRTL ? apt.patientNameAr : apt.patientName}
+                          </p>
+                          <p className="text-xs text-muted-foreground">
+                            {isRTL ? apt.doctorAr : apt.doctor} · {isRTL ? apt.typeAr : apt.type}
+                          </p>
+                        </div>
                       </div>
-                      <Avatar className="h-8 w-8">
-                        <AvatarImage src={apt.patientImage} alt={apt.patientName} />
-                        <AvatarFallback className="text-xs">{apt.patientInitials}</AvatarFallback>
-                      </Avatar>
-                      <div>
-                        <p className="font-medium text-sm">
-                          {isRTL ? apt.patientNameAr : apt.patientName}
-                        </p>
-                        <p className="text-xs text-muted-foreground">
-                          {isRTL ? apt.doctorAr : apt.doctor} · {isRTL ? apt.typeAr : apt.type}
-                        </p>
+                      {getStatusBadge(apt.status, h)}
+                    </Link>
+                  ))}
+                </div>
+              ) : (
+                <div className="space-y-3">
+                  {[
+                    { day: h.sun, count: 8, completed: 8 },
+                    { day: h.mon, count: 6, completed: 6 },
+                    { day: h.tue, count: 5, completed: 5 },
+                    { day: h.wed, count: 3, completed: 1 },
+                    { day: h.thu, count: 6, completed: 0 },
+                  ].map((day) => (
+                    <div key={day.day} className="flex items-center justify-between p-3 rounded-lg border bg-card">
+                      <div className="flex items-center gap-3">
+                        <span className="text-sm font-medium w-20">{day.day}</span>
+                        <div className="flex-1 h-2 bg-muted rounded-full w-32">
+                          <div
+                            className="h-full bg-primary rounded-full transition-all"
+                            style={{ width: `${day.count > 0 ? (day.completed / day.count) * 100 : 0}%` }}
+                          />
+                        </div>
+                      </div>
+                      <div className="text-sm">
+                        <span className="font-medium"><ArabicNumber value={day.completed} /></span>
+                        <span className="text-muted-foreground">/<ArabicNumber value={day.count} /></span>
                       </div>
                     </div>
-                    {getStatusBadge(apt.status, h)}
-                  </Link>
-                ))}
-              </div>
+                  ))}
+                </div>
+              )}
             </CardContent>
           </Card>
 
@@ -347,12 +413,26 @@ export default function HealthcareDashboard() {
               <div className="flex justify-center mb-4">
                 <Chart
                   type="donut"
-                  data={[]}
-                  value={35}
-                  innerLabel="35%"
-                  innerSubLabel={h.generalCheckup}
+                  data={[
+                    { type: h.generalCheckup, count: 35 },
+                    { type: h.followUp, count: 25 },
+                    { type: h.consultation, count: 20 },
+                    { type: h.dental, count: 10 },
+                    { type: h.pediatrics, count: 10 },
+                  ]}
+                  categoryKey="type"
+                  valueKey="count"
+                  innerLabel="12"
+                  innerSubLabel={h.todaysAppointments}
                   size="sm"
-                  colors={['var(--color-primary)']}
+                  thickness="thick"
+                  colors={[
+                    'var(--color-primary)',
+                    'var(--color-success)',
+                    'var(--color-info)',
+                    'var(--color-warning)',
+                    'var(--color-destructive)',
+                  ]}
                   aria-label={h.appointmentsByType}
                 />
               </div>

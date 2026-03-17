@@ -192,22 +192,12 @@ export default function GovernmentLoginPage() {
             </div>
           </Callout>
 
-          {/* Security note */}
-          <p className="text-center text-xs text-muted-foreground flex items-center justify-center gap-1.5">
-            <Shield className="h-3.5 w-3.5" aria-hidden="true" />
-            {h.securePortal}
-          </p>
         </div>
       </main>
 
-      {/* Footer */}
-      <footer className="border-t bg-background py-6 relative z-[1]">
-        <div className="container text-center space-y-2">
-          <p className="text-sm text-muted-foreground">
-            &copy; {h.copyright}
-          </p>
-          <p className="text-xs text-muted-foreground">{h.hijriYear} &middot; {h.allRightsReserved}</p>
-        </div>
+      {/* Footer — single line */}
+      <footer className="py-4 relative z-[1]">
+        <p className="text-center text-xs text-muted-foreground">&copy; {h.copyright} &middot; {h.allRightsReserved}</p>
       </footer>
     </div>
   )

@@ -169,16 +169,11 @@ export default function EducationLoginPage() {
         </div>
       </main>
 
-      {/* Footer */}
-      <footer className="border-t bg-background py-6">
-        <div className="container text-center space-y-2">
-          <p className="text-sm text-muted-foreground">
-            {h.poweredBy}{' '}
-            <span className="font-medium text-foreground">{h.noorSystem}</span>
-          </p>
-          <p className="text-xs text-muted-foreground">{h.address}</p>
-          <p className="text-xs text-muted-foreground">{h.academicYear}</p>
-        </div>
+      {/* Footer — single line */}
+      <footer className="py-4">
+        <p className="text-center text-xs text-muted-foreground">
+          {h.poweredBy} {h.noorSystem} &middot; {h.academicYear}
+        </p>
       </footer>
     </div>
   )

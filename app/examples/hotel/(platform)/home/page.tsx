@@ -251,7 +251,7 @@ export default function HotelLandingPage() {
 
         <div className="relative container py-20 md:py-28 text-white">
           <div className="max-w-3xl mx-auto text-center space-y-6">
-            <h1 className="text-3xl md:text-5xl font-bold leading-tight">
+            <h1 className="text-3xl md:text-5xl font-bold leading-tight text-balance">
               {h.heroTitle}
             </h1>
             <p className="text-lg text-white/80">

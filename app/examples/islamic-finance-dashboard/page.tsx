@@ -50,6 +50,7 @@ import {
   Calendar as CalendarIcon,
   Bell,
   CurrencyDollar,
+  Scales,
 } from '@phosphor-icons/react'
 import { cn } from '@/lib/utils'
 
@@ -489,12 +490,19 @@ export default function IslamicFinanceDashboardPage() {
     <div className="container py-8 space-y-8">
         {/* Header */}
         <div className="space-y-2">
-          <h1 className="text-4xl font-bold tracking-tight">
-            {t.islamicFinancePage.title}
-          </h1>
-          <p className="text-lg text-muted-foreground">
-            {t.islamicFinancePage.description}
-          </p>
+          <div className="flex items-center gap-3 mb-2">
+            <div className="p-4 bg-primary/10 rounded-xl">
+              <Scales className="h-10 w-10 text-primary" weight="duotone" />
+            </div>
+            <div>
+              <h1 className="text-3xl font-bold ltr:tracking-tight">
+                {t.islamicFinancePage.title}
+              </h1>
+              <p className="text-muted-foreground">
+                {t.islamicFinancePage.description}
+              </p>
+            </div>
+          </div>
           <div className="flex items-center gap-2 text-sm text-muted-foreground">
             <CalendarIcon className="h-4 w-4" aria-hidden="true" />
             <HijriDate

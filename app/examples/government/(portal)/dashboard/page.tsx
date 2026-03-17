@@ -262,36 +262,37 @@ export default function GovernmentDashboard() {
         />
       </div>
 
-      {/* Continue Application */}
-      <Card className="mb-6 border-info/30 bg-info/5">
-        <CardContent className="pt-6">
-          <div className="flex items-center justify-between mb-3">
-            <div className="flex items-center gap-3">
-              <div className="p-2 bg-info/10 rounded-lg">
-                <AirplaneTilt className="h-5 w-5 text-info" aria-hidden="true" />
-              </div>
-              <div>
-                <p className="font-medium text-sm">{h.continueApplication}</p>
-                <p className="text-xs text-muted-foreground">
-                  {isRTL ? 'تجديد التأشيرة' : 'Visa Renewal'} &middot; <span dir="ltr">GOV-2026-00198</span>
-                </p>
-              </div>
+      {/* Continue Application — Gradient hero card */}
+      <div className="mb-6 rounded-2xl p-6 bg-gradient-to-br from-primary/90 to-primary text-primary-foreground shadow-lg relative overflow-hidden">
+        <div className="absolute top-0 end-0 w-40 h-40 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2 rtl:-translate-x-1/2" />
+        <div className="flex items-center justify-between mb-4 relative">
+          <div className="flex items-center gap-3">
+            <div className="p-2 bg-white/15 rounded-lg">
+              <AirplaneTilt className="h-5 w-5" aria-hidden="true" />
             </div>
-            <ButtonArrow size="sm" asChild>
-              <Link href="/examples/government/services/visa-residency">
-                {h.continueBtn}
-              </Link>
-            </ButtonArrow>
-          </div>
-          <div className="space-y-1">
-            <div className="flex justify-between text-xs text-muted-foreground">
-              <span>{h.step2of4}</span>
-              <span>50%</span>
+            <div>
+              <p className="font-semibold">{h.continueApplication}</p>
+              <p className="text-sm text-primary-foreground/70">
+                {isRTL ? 'تجديد التأشيرة' : 'Visa Renewal'} &middot; <span dir="ltr">GOV-2026-00198</span>
+              </p>
             </div>
-            <Progress value={50} className="h-2" aria-label={h.step2of4} />
           </div>
-        </CardContent>
-      </Card>
+          <ButtonArrow size="sm" variant="secondary" asChild>
+            <Link href="/examples/government/services/visa-residency">
+              {h.continueBtn}
+            </Link>
+          </ButtonArrow>
+        </div>
+        <div className="space-y-1.5 relative">
+          <div className="flex justify-between text-xs text-primary-foreground/70">
+            <span>{h.step2of4}</span>
+            <span>50%</span>
+          </div>
+          <div className="h-2 bg-white/20 rounded-full overflow-hidden">
+            <div className="h-full bg-white rounded-full" style={{ width: '50%' }} />
+          </div>
+        </div>
+      </div>
 
       <div className="grid gap-6 lg:grid-cols-3">
         {/* Main content - 2/3 width */}

@@ -243,7 +243,7 @@ export default function HotelLoginPage() {
           </Card>
 
           {/* Demo credentials */}
-          <Callout type="info" title={h.demoCredentials}>
+          <Callout type="info" title={h.demoCredentials} className="bg-background/95 backdrop-blur">
             <p>{h.demoDesc}</p>
             <div className="mt-2 space-y-1 font-mono text-xs">
               <p>{h.demoEmailLabel}: <span dir="ltr">{h.demoEmail}</span></p>
@@ -251,20 +251,12 @@ export default function HotelLoginPage() {
             </div>
           </Callout>
 
-          {/* Security note */}
-          <p className="text-center text-xs text-white/50 flex items-center justify-center gap-1.5">
-            <Bed className="h-3.5 w-3.5" aria-hidden="true" />
-            {h.secureNote}
-          </p>
         </div>
       </main>
 
-      {/* Footer */}
-      <footer className="border-t border-white/10 py-6 relative z-[1]">
-        <div className="container text-center space-y-2">
-          <p className="text-sm text-white/60">&copy; {h.copyright}</p>
-          <p className="text-xs text-white/60">{h.hijriYear} &middot; {h.disclaimer}</p>
-        </div>
+      {/* Footer — single line */}
+      <footer className="py-4 relative z-[1]">
+        <p className="text-center text-xs text-white/50">&copy; {h.copyright} &middot; {h.disclaimer}</p>
       </footer>
     </div>
   )
