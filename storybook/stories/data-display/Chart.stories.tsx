@@ -751,6 +751,346 @@ export const FontSizeVariants: Story = {
 };
 
 // ---------------------------------------------------------------------------
+// Sample data — multi-segment donut
+// ---------------------------------------------------------------------------
+
+const spendingBreakdown = [
+  { category: 'Housing', amount: 1850 },
+  { category: 'Food & Dining', amount: 620 },
+  { category: 'Transport', amount: 340 },
+  { category: 'Healthcare', amount: 210 },
+  { category: 'Entertainment', amount: 180 },
+];
+
+const spendingBreakdownAr = [
+  { category: 'السكن', amount: 1850 },
+  { category: 'الطعام والمطاعم', amount: 620 },
+  { category: 'المواصلات', amount: 340 },
+  { category: 'الرعاية الصحية', amount: 210 },
+  { category: 'الترفيه', amount: 180 },
+];
+
+const appointmentTypes = [
+  { type: 'General Checkup', count: 142 },
+  { type: 'Specialist', count: 89 },
+  { type: 'Dental', count: 56 },
+  { type: 'Emergency', count: 31 },
+];
+
+// ---------------------------------------------------------------------------
+// 15. MultiSegmentDonut — Spending breakdown (5 segments, thick, with labels)
+// ---------------------------------------------------------------------------
+
+export const MultiSegmentDonut: Story = {
+  render: () => (
+    <div className="space-y-3 p-4">
+      <h3 className="text-sm font-semibold text-foreground">Monthly Spending Breakdown</h3>
+      <div className="flex items-center gap-8">
+        <Chart
+          type="donut"
+          data={spendingBreakdown}
+          categoryKey="category"
+          valueKey="amount"
+          innerLabel="$3,200"
+          innerSubLabel="Total spending"
+          thickness="thick"
+          size="md"
+          aria-label="Monthly spending breakdown across 5 categories"
+        />
+        <div className="space-y-2">
+          {spendingBreakdown.map((item, i) => {
+            const colors = [
+              'var(--color-primary)',
+              'var(--color-secondary)',
+              'var(--color-success)',
+              'var(--color-warning)',
+              'var(--color-info)',
+            ];
+            return (
+              <div key={item.category} className="flex items-center gap-2 text-sm">
+                <span
+                  className="inline-block h-2.5 w-2.5 rounded-full flex-shrink-0"
+                  style={{ background: colors[i] }}
+                />
+                <span className="text-foreground">{item.category}</span>
+                <span className="text-muted-foreground ms-auto ps-4">${item.amount.toLocaleString()}</span>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  ),
+  globals: {
+    direction: 'ltr',
+    locale: 'en',
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Figure element has correct role and aria-label', async () => {
+      const figure = canvas.getByRole('img');
+      await expect(figure).toBeInTheDocument();
+      await expect(figure).toHaveAttribute('aria-label', 'Monthly spending breakdown across 5 categories');
+    });
+
+    await step('sr-only table exists for multi-segment data', async () => {
+      const table = canvasElement.querySelector('table.sr-only');
+      await expect(table).toBeInTheDocument();
+      const tableScope = within(table as HTMLElement);
+      await expect(tableScope.getByRole('columnheader', { name: 'category' })).toBeInTheDocument();
+      await expect(tableScope.getByRole('columnheader', { name: 'amount' })).toBeInTheDocument();
+    });
+
+    await step('All 5 spending categories appear in the data table', async () => {
+      const table = canvasElement.querySelector('table.sr-only');
+      const tableScope = within(table as HTMLElement);
+      await expect(tableScope.getByRole('rowheader', { name: 'Housing' })).toBeInTheDocument();
+      await expect(tableScope.getByRole('rowheader', { name: 'Food & Dining' })).toBeInTheDocument();
+      await expect(tableScope.getByRole('rowheader', { name: 'Transport' })).toBeInTheDocument();
+      await expect(tableScope.getByRole('rowheader', { name: 'Healthcare' })).toBeInTheDocument();
+      await expect(tableScope.getByRole('rowheader', { name: 'Entertainment' })).toBeInTheDocument();
+    });
+  },
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      description: {
+        story: 'Multi-segment donut chart showing monthly spending across 5 categories with thick arc, center labels, and a legend.',
+      },
+    },
+  },
+};
+
+// ---------------------------------------------------------------------------
+// 16. MultiSegmentDonutSmall — Same data at size="sm"
+// ---------------------------------------------------------------------------
+
+export const MultiSegmentDonutSmall: Story = {
+  render: () => (
+    <div className="space-y-3 p-4">
+      <h3 className="text-sm font-semibold text-foreground">Spending Breakdown (Small)</h3>
+      <div className="flex items-center gap-6">
+        <Chart
+          type="donut"
+          data={spendingBreakdown}
+          categoryKey="category"
+          valueKey="amount"
+          innerLabel="$3.2k"
+          innerSubLabel="Total"
+          thickness="thick"
+          size="sm"
+          aria-label="Monthly spending breakdown — small size variant"
+        />
+        <div className="space-y-1.5">
+          {spendingBreakdown.map((item, i) => {
+            const colorClasses = [
+              'bg-primary',
+              'bg-secondary',
+              'bg-success',
+              'bg-warning',
+              'bg-info',
+            ];
+            return (
+              <div key={item.category} className="flex items-center gap-2 text-xs">
+                <span className={`inline-block h-2 w-2 rounded-full flex-shrink-0 ${colorClasses[i]}`} />
+                <span className="text-foreground">{item.category}</span>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  ),
+  globals: {
+    direction: 'ltr',
+    locale: 'en',
+  },
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      description: {
+        story: 'Multi-segment donut at size="sm" — same spending data rendered compactly alongside a minimal legend.',
+      },
+    },
+  },
+};
+
+// ---------------------------------------------------------------------------
+// 17. MultiSegmentDonutWithCustomColors — 4 appointment types, custom colors
+// ---------------------------------------------------------------------------
+
+export const MultiSegmentDonutWithCustomColors: Story = {
+  render: () => (
+    <div className="space-y-3 p-4">
+      <h3 className="text-sm font-semibold text-foreground">Appointment Types — This Month</h3>
+      <div className="flex items-center gap-8">
+        <Chart
+          type="donut"
+          data={appointmentTypes}
+          categoryKey="type"
+          valueKey="count"
+          innerLabel="318"
+          innerSubLabel="Appointments"
+          colors={[
+            'var(--color-primary)',
+            'var(--color-info)',
+            'var(--color-success)',
+            'var(--color-destructive)',
+          ]}
+          size="md"
+          aria-label="Appointment type distribution for the current month"
+        />
+        <div className="space-y-2">
+          {appointmentTypes.map((item, i) => {
+            const colors = [
+              'var(--color-primary)',
+              'var(--color-info)',
+              'var(--color-success)',
+              'var(--color-destructive)',
+            ];
+            const pct = Math.round((item.count / 318) * 100);
+            return (
+              <div key={item.type} className="flex items-center gap-2 text-sm">
+                <span
+                  className="inline-block h-2.5 w-2.5 rounded-full flex-shrink-0"
+                  style={{ background: colors[i] }}
+                />
+                <span className="text-foreground">{item.type}</span>
+                <span className="text-muted-foreground ms-auto ps-4">{item.count} ({pct}%)</span>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  ),
+  globals: {
+    direction: 'ltr',
+    locale: 'en',
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Figure element exists with descriptive aria-label', async () => {
+      const figure = canvas.getByRole('img');
+      await expect(figure).toBeInTheDocument();
+      await expect(figure).toHaveAttribute('aria-label', 'Appointment type distribution for the current month');
+    });
+
+    await step('All 4 appointment types appear in the sr-only table', async () => {
+      const table = canvasElement.querySelector('table.sr-only');
+      await expect(table).toBeInTheDocument();
+      const tableScope = within(table as HTMLElement);
+      await expect(tableScope.getByRole('rowheader', { name: 'General Checkup' })).toBeInTheDocument();
+      await expect(tableScope.getByRole('rowheader', { name: 'Specialist' })).toBeInTheDocument();
+      await expect(tableScope.getByRole('rowheader', { name: 'Dental' })).toBeInTheDocument();
+      await expect(tableScope.getByRole('rowheader', { name: 'Emergency' })).toBeInTheDocument();
+    });
+  },
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      description: {
+        story: 'Multi-segment donut with 4 appointment type categories using explicit CSS variable color overrides (primary, info, success, destructive).',
+      },
+    },
+  },
+};
+
+// ---------------------------------------------------------------------------
+// 18. MultiSegmentDonutRTL — Arabic spending breakdown, RTL mirroring
+// ---------------------------------------------------------------------------
+
+export const MultiSegmentDonutRTL: Story = {
+  render: () => (
+    <div className="space-y-3 p-4" dir="rtl">
+      <h3 className="text-sm font-semibold text-foreground">توزيع الإنفاق الشهري</h3>
+      <div className="flex items-center gap-8">
+        <Chart
+          type="donut"
+          data={spendingBreakdownAr}
+          categoryKey="category"
+          valueKey="amount"
+          innerLabel="٣٬٢٠٠"
+          innerSubLabel="إجمالي الإنفاق"
+          thickness="thick"
+          size="md"
+          direction="rtl"
+          locale="ar"
+          aria-label="توزيع الإنفاق الشهري على خمس فئات"
+        />
+        <div className="space-y-2">
+          {spendingBreakdownAr.map((item, i) => {
+            const colors = [
+              'var(--color-primary)',
+              'var(--color-secondary)',
+              'var(--color-success)',
+              'var(--color-warning)',
+              'var(--color-info)',
+            ];
+            return (
+              <div key={item.category} className="flex items-center gap-2 text-sm">
+                <span
+                  className="inline-block h-2.5 w-2.5 rounded-full flex-shrink-0"
+                  style={{ background: colors[i] }}
+                />
+                <span className="text-foreground">{item.category}</span>
+                <span className="text-muted-foreground me-auto pe-4">
+                  {new Intl.NumberFormat('ar', { numberingSystem: 'arab' }).format(item.amount)} ر.س
+                </span>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  ),
+  globals: {
+    direction: 'rtl',
+    locale: 'ar',
+  },
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step('Figure element exists with Arabic aria-label', async () => {
+      const figure = canvas.getByRole('img');
+      await expect(figure).toBeInTheDocument();
+      await expect(figure).toHaveAttribute('aria-label', 'توزيع الإنفاق الشهري على خمس فئات');
+    });
+
+    await step('sr-only table contains Arabic category names', async () => {
+      const table = canvasElement.querySelector('table.sr-only');
+      await expect(table).toBeInTheDocument();
+      const tableScope = within(table as HTMLElement);
+      await expect(tableScope.getByRole('rowheader', { name: 'السكن' })).toBeInTheDocument();
+      await expect(tableScope.getByRole('rowheader', { name: 'الطعام والمطاعم' })).toBeInTheDocument();
+      await expect(tableScope.getByRole('rowheader', { name: 'المواصلات' })).toBeInTheDocument();
+      await expect(tableScope.getByRole('rowheader', { name: 'الرعاية الصحية' })).toBeInTheDocument();
+      await expect(tableScope.getByRole('rowheader', { name: 'الترفيه' })).toBeInTheDocument();
+    });
+
+    await step('Data values use Arabic-Indic numerals in the table', async () => {
+      const table = canvasElement.querySelector('table.sr-only');
+      await expect(table).toBeInTheDocument();
+      const cells = (table as HTMLElement).querySelectorAll('td');
+      const hasArabicNumerals = Array.from(cells).some((cell) =>
+        /[\u0660-\u0669]/.test(cell.textContent ?? '')
+      );
+      await expect(hasArabicNumerals).toBe(true);
+    });
+  },
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      description: {
+        story: 'Multi-segment donut in Arabic with RTL canvas mirroring, Eastern Arabic numerals in the center label, and an Arabic legend.',
+      },
+    },
+  },
+};
+
+// ---------------------------------------------------------------------------
 // 14. RealWorld_Dashboard — Multiple chart types together
 // ---------------------------------------------------------------------------
 
