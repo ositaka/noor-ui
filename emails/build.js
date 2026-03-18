@@ -365,9 +365,22 @@ function main() {
             errors.forEach(err => console.error(`    WARN: ${err.formattedMessage || err.message}`))
           }
 
-          // 7. Write output
+          // 7. Post-process: set dir/lang for RTL and bilingual variants
+          let finalHtml = html
+          if (variant === 'rtl') {
+            finalHtml = finalHtml.replace(/dir="auto"/g, 'dir="rtl"')
+            finalHtml = finalHtml.replace(/lang="und"/g, 'lang="ar"')
+          } else if (variant === 'bilingual') {
+            finalHtml = finalHtml.replace(/dir="auto"/g, 'dir="rtl"')
+            finalHtml = finalHtml.replace(/lang="und"/g, 'lang="ar"')
+          } else {
+            finalHtml = finalHtml.replace(/dir="auto"/g, 'dir="ltr"')
+            finalHtml = finalHtml.replace(/lang="und"/g, 'lang="en"')
+          }
+
+          // 8. Write output
           const outputFile = path.join(themeOutputDir, `${templateName}-${variant}.html`)
-          fs.writeFileSync(outputFile, html, 'utf8')
+          fs.writeFileSync(outputFile, finalHtml, 'utf8')
           successCount++
           process.stdout.write(`  ✓ ${templateName}-${variant}\n`)
         } catch (err) {

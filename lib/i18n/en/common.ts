@@ -15,6 +15,7 @@ nav: {
       documentation: 'Documentation',
       getStarted: 'Get Started',
       more: 'More',
+      emailTemplates: 'Email Templates',
     },
 
     storybook: {
@@ -506,6 +507,7 @@ common: {
           b2bMarketplace: 'B2B Marketplace',
           aiChatSimple: 'AI Chat',
           aiPlayground: 'AI Playground',
+          emailTemplates: 'Email Templates',
           aiCodeAssistant: 'AI Code Assistant',
           aiDocumentQa: 'AI Document Q&A',
           aiMultiAgent: 'AI Multi-Agent',

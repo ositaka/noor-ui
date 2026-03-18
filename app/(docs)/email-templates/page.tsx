@@ -6,6 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 import {
@@ -78,6 +79,16 @@ export default function EmailTemplatesPage() {
   const [theme, setTheme] = React.useState('cozy')
   const [copied, setCopied] = React.useState(false)
 
+  const previewHeadingRef = React.useRef<HTMLHeadingElement>(null)
+  const gridHeadingRef = React.useRef<HTMLHeadingElement>(null)
+
+  // Focus management on view transitions
+  React.useEffect(() => {
+    if (selectedTemplate) {
+      previewHeadingRef.current?.focus()
+    }
+  }, [selectedTemplate])
+
   const filteredTemplates = TEMPLATES.filter(t => {
     if (filter === 'all') return true
     return t.category === filter
@@ -115,6 +126,12 @@ export default function EmailTemplatesPage() {
     }
   }
 
+  const handleBack = () => {
+    setSelectedTemplate(null)
+    // Focus grid heading after React re-render
+    requestAnimationFrame(() => gridHeadingRef.current?.focus())
+  }
+
   const BackArrow = direction === 'rtl' ? ArrowRight : ArrowLeft
 
   // ─── Preview Mode ─────────────────────────────────────────────────────────
@@ -131,18 +148,18 @@ export default function EmailTemplatesPage() {
             <Button
               variant="ghost"
               size="sm"
-              onClick={() => setSelectedTemplate(null)}
+              onClick={handleBack}
               className="gap-2"
             >
-              <BackArrow className="h-4 w-4" />
+              <BackArrow className="h-4 w-4" aria-hidden="true" />
               {et.actions.back}
             </Button>
           </div>
 
           <div className="mb-8">
             <div className="flex items-center gap-3 mb-2">
-              {templateInfo && <templateInfo.icon className="h-6 w-6 text-primary" />}
-              <h1 className="text-2xl font-bold">{templateI18n?.name}</h1>
+              {templateInfo && <templateInfo.icon className="h-6 w-6 text-primary" aria-hidden="true" />}
+              <h1 ref={previewHeadingRef} tabIndex={-1} className="text-2xl font-bold outline-none">{templateI18n?.name}</h1>
               <Badge variant="secondary" className="text-xs capitalize">
                 {templateInfo?.category === 'demo' ? et.filters.demo : et.filters.standalone}
               </Badge>
@@ -154,7 +171,7 @@ export default function EmailTemplatesPage() {
           <div className="flex flex-wrap items-center gap-4 mb-6">
             {/* Variant toggle */}
             <Tabs value={variant} onValueChange={(v) => setVariant(v as Variant)}>
-              <TabsList>
+              <TabsList aria-label={locale === 'ar' ? 'متغير اللغة' : 'Language variant'}>
                 <TabsTrigger value="ltr">{et.variants.ltr}</TabsTrigger>
                 <TabsTrigger value="rtl">{et.variants.rtl}</TabsTrigger>
                 <TabsTrigger value="bilingual">{et.variants.bilingual}</TabsTrigger>
@@ -162,51 +179,60 @@ export default function EmailTemplatesPage() {
             </Tabs>
 
             {/* Device toggle */}
-            <div className="flex items-center gap-1 border rounded-lg p-1">
+            <div className="flex items-center gap-1 border rounded-lg p-1" role="group" aria-label={locale === 'ar' ? 'حجم المعاينة' : 'Preview size'}>
               <Button
                 variant={device === 'desktop' ? 'primary' : 'ghost'}
                 size="sm"
                 onClick={() => setDevice('desktop')}
                 className="gap-1.5 h-8"
+                aria-label={et.device.desktop}
+                aria-pressed={device === 'desktop'}
               >
-                <Desktop className="h-4 w-4" />
-                <span className="hidden sm:inline">{et.device.desktop}</span>
+                <Desktop className="h-4 w-4" aria-hidden="true" />
+                <span className="hidden sm:inline" aria-hidden="true">{et.device.desktop}</span>
               </Button>
               <Button
                 variant={device === 'mobile' ? 'primary' : 'ghost'}
                 size="sm"
                 onClick={() => setDevice('mobile')}
                 className="gap-1.5 h-8"
+                aria-label={et.device.mobile}
+                aria-pressed={device === 'mobile'}
               >
-                <DeviceMobile className="h-4 w-4" />
-                <span className="hidden sm:inline">{et.device.mobile}</span>
+                <DeviceMobile className="h-4 w-4" aria-hidden="true" />
+                <span className="hidden sm:inline" aria-hidden="true">{et.device.mobile}</span>
               </Button>
             </div>
 
             {/* Theme selector */}
             <div className="flex items-center gap-2">
               <span className="text-sm text-muted-foreground">{et.theme.label}:</span>
-              <select
-                value={theme}
-                onChange={(e) => setTheme(e.target.value)}
-                className="text-sm border rounded-md px-2 py-1.5 bg-background text-foreground"
-              >
-                {THEMES.map(t => (
-                  <option key={t} value={t} className="capitalize">{t.charAt(0).toUpperCase() + t.slice(1)}</option>
-                ))}
-              </select>
+              <Select value={theme} onValueChange={setTheme}>
+                <SelectTrigger className="w-[140px] h-8 text-sm" aria-label={et.theme.label}>
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  {THEMES.map(t => (
+                    <SelectItem key={t} value={t}>{t.charAt(0).toUpperCase() + t.slice(1)}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </div>
 
             {/* Action buttons */}
             <div className="flex items-center gap-2 ms-auto">
               <Button variant="outline" size="sm" onClick={handleCopyHtml} className="gap-1.5">
-                {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
+                {copied ? <Check className="h-4 w-4" aria-hidden="true" /> : <Copy className="h-4 w-4" aria-hidden="true" />}
                 {copied ? et.actions.copied : et.actions.copyHtml}
               </Button>
               <Button variant="outline" size="sm" onClick={handleDownloadHtml} className="gap-1.5">
-                <DownloadSimple className="h-4 w-4" />
+                <DownloadSimple className="h-4 w-4" aria-hidden="true" />
                 {et.actions.downloadHtml}
               </Button>
+              {/* Live region for copy state */}
+              <span role="status" aria-live="polite" className="sr-only">
+                {copied ? et.actions.copied : ''}
+              </span>
             </div>
           </div>
 
@@ -229,7 +255,9 @@ export default function EmailTemplatesPage() {
                   display: 'block',
                   margin: '0 auto',
                 }}
-                title={`${templateI18n?.name} - ${variant} preview`}
+                title={templateI18n?.name
+                  ? `${templateI18n.name} - ${variant} preview`
+                  : 'Email template preview'}
               />
             </div>
           </div>
@@ -262,10 +290,10 @@ export default function EmailTemplatesPage() {
         <div className="max-w-3xl mb-12">
           <div className="flex items-center gap-3 mb-4">
             <div className="p-4 bg-primary/10 rounded-xl">
-              <EnvelopeSimple className="h-10 w-10 text-primary" />
+              <EnvelopeSimple className="h-10 w-10 text-primary" aria-hidden="true" />
             </div>
           </div>
-          <h1 className="text-4xl font-bold tracking-tight mb-4">
+          <h1 ref={gridHeadingRef} tabIndex={-1} className="text-4xl font-bold tracking-tight mb-4 outline-none">
             {et.title}
           </h1>
           <p className="text-xl text-muted-foreground">
@@ -276,7 +304,7 @@ export default function EmailTemplatesPage() {
         {/* Filter tabs */}
         <div className="mb-8">
           <Tabs value={filter} onValueChange={(v) => setFilter(v as Filter)}>
-            <TabsList>
+            <TabsList aria-label={locale === 'ar' ? 'تصفية القوالب' : 'Filter templates'}>
               <TabsTrigger value="all">{et.filters.all}</TabsTrigger>
               <TabsTrigger value="demo">{et.filters.demo}</TabsTrigger>
               <TabsTrigger value="standalone">{et.filters.standalone}</TabsTrigger>
@@ -295,12 +323,13 @@ export default function EmailTemplatesPage() {
                 key={template.id}
                 onClick={() => setSelectedTemplate(template.id)}
                 className="text-start"
+                aria-label={`${et.actions.preview} ${templateI18n?.name}`}
               >
                 <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50 cursor-pointer">
                   <CardHeader>
                     <div className="flex items-start justify-between mb-2">
                       <div className="p-2 bg-primary/10 rounded-lg">
-                        <Icon className="h-6 w-6 text-primary" />
+                        <Icon className="h-6 w-6 text-primary" aria-hidden="true" />
                       </div>
                       <Badge className="text-xs capitalize">
                         {template.category === 'demo' ? et.filters.demo : et.filters.standalone}

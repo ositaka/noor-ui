@@ -192,6 +192,14 @@ export default function SitemapPage() {
                 </Link>
               </li>
             ))}
+            <li>
+              <Link
+                href="/email-templates"
+                className="text-primary hover:underline"
+              >
+                {t.sitemap.links.emailTemplates}
+              </Link>
+            </li>
           </ul>
         </Card>
 

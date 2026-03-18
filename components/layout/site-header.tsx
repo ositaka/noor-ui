@@ -90,6 +90,9 @@ export function SiteHeader() {
               <DropdownMenuItem asChild>
                 <Link href="/themes">{t.nav.themes}</Link>
               </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Link href="/email-templates">{t.nav.emailTemplates}</Link>
+              </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </nav>
@@ -156,6 +159,13 @@ export function SiteHeader() {
                   onClick={() => setOpen(false)}
                 >
                   {t.nav.themes}
+                </Link>
+                <Link
+                  href="/email-templates"
+                  className="text-sm font-medium transition-colors hover:text-primary py-2"
+                  onClick={() => setOpen(false)}
+                >
+                  {t.nav.emailTemplates}
                 </Link>
               </nav>
             </SheetContent>

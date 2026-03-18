@@ -5,6 +5,23 @@
       <mj-all font-family="Tahoma, Arial, sans-serif" />
       <mj-text font-size="14px" color="{{foreground}}" line-height="1.6" />
     </mj-attributes>
+    <mj-style>
+      @media only screen and (max-width: 480px) {
+        .stack-table td {
+          display: block !important;
+          width: 100% !important;
+          box-sizing: border-box !important;
+        }
+        .stack-table tr {
+          display: block !important;
+          margin-bottom: 12px !important;
+        }
+        .stack-table-rtl td {
+          text-align: right !important;
+          direction: rtl !important;
+        }
+      }
+    </mj-style>
   </mj-head>
   <mj-body background-color="{{background}}" width="600px">
 

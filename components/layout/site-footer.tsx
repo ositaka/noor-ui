@@ -19,6 +19,7 @@ export function SiteFooter() {
       themes: 'Themes',
       resources: 'Resources',
       examples: 'Examples',
+      emailTemplates: 'Email Templates',
       storybook: 'Storybook',
       accessibility: 'Accessibility',
       rtlGuide: 'RTL Guide',
@@ -45,6 +46,7 @@ export function SiteFooter() {
       themes: 'السمات',
       resources: 'الموارد',
       examples: 'الأمثلة',
+      emailTemplates: 'قوالب البريد',
       storybook: 'ستوريبوك',
       accessibility: 'إمكانية الوصول',
       rtlGuide: 'دليل RTL',
@@ -117,6 +119,14 @@ export function SiteFooter() {
                   className="hover:text-foreground transition-colors"
                 >
                   {content.examples}
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/email-templates"
+                  className="hover:text-foreground transition-colors"
+                >
+                  {content.emailTemplates}
                 </Link>
               </li>
               <li>

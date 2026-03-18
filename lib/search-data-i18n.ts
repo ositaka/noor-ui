@@ -724,5 +724,12 @@ export function getSearchData(locale: Locale): SearchItem[] {
       category: 'Example',
       keywords: isArabic ? ['ai', 'ساحة', 'متقدم'] : ['ai', 'playground', 'advanced'],
     },
+    {
+      title: isArabic ? 'قوالب البريد الإلكتروني' : 'Email Templates',
+      description: isArabic ? 'قوالب MJML جاهزة مع دعم RTL وثنائية اللغة' : 'Production-ready MJML email templates with RTL and bilingual support',
+      href: '/email-templates',
+      category: 'Example',
+      keywords: isArabic ? ['بريد', 'قالب', 'mjml', 'ثنائي اللغة'] : ['email', 'template', 'mjml', 'bilingual', 'rtl'],
+    },
   ]
 }

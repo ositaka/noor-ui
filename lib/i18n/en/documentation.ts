@@ -80,6 +80,7 @@ documentationPages: {
           utilities: 'Utilities & Hooks',
           rtlGuide: 'RTL Guide',
           tokens: 'Design Tokens',
+          emailTemplates: 'Email Templates',
         },
         quickLinks: {
           title: 'Quick Links',
