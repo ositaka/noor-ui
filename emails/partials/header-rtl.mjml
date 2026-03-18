@@ -1,0 +1,13 @@
+<!-- Header Partial: RTL (Arabic) -->
+<mj-section background-color="{{primary}}" padding="0">
+  <mj-column>
+    <mj-spacer height="4px" />
+  </mj-column>
+</mj-section>
+<mj-section background-color="{{card}}" padding="20px 25px" direction="rtl">
+  <mj-column>
+    <mj-text font-family="Tahoma, Arial, sans-serif" font-size="20px" font-weight="bold" color="{{foreground}}" align="right">
+      {{brandNameAr}}
+    </mj-text>
+  </mj-column>
+</mj-section>

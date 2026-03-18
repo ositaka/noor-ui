@@ -1,0 +1,259 @@
+<!-- @brand: Your Company | شركتك -->
+<mjml>
+  <mj-head>
+    <mj-attributes>
+      <mj-all font-family="Tahoma, Arial, sans-serif" />
+      <mj-text font-size="14px" color="{{foreground}}" line-height="1.6" />
+    </mj-attributes>
+    <mj-style>
+      @media only screen and (max-width: 480px) {
+        .stack-table td {
+          display: block !important;
+          width: 100% !important;
+          box-sizing: border-box !important;
+        }
+        .stack-table tr {
+          display: block !important;
+          margin-bottom: 12px !important;
+        }
+        .stack-table-rtl td {
+          text-align: right !important;
+          direction: rtl !important;
+        }
+      }
+    </mj-style>
+  </mj-head>
+  <mj-body background-color="{{background}}" width="600px">
+
+    <mj-include path="../../partials/header.mjml" />
+
+    <!-- @ar -->
+    <mj-section background-color="{{card}}" padding="30px 25px 10px" direction="rtl">
+      <mj-column>
+        <mj-text font-size="22px" font-weight="bold" align="right" color="{{foreground}}" padding-bottom="5px">
+          تأكيد الطلب ✓
+        </mj-text>
+        <mj-text align="right" color="{{mutedForeground}}" font-size="13px" padding-bottom="5px">
+          رقم الطلب: #ORD-2026-31742
+        </mj-text>
+        <mj-text align="right" color="{{success}}" font-size="13px" font-weight="bold">
+          تم تأكيد الطلب بنجاح
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Items -->
+    <mj-section background-color="{{card}}" padding="15px 25px" direction="rtl">
+      <mj-column>
+        <mj-text font-size="15px" font-weight="bold" align="right" color="{{foreground}}" padding-bottom="10px">
+          المنتجات المطلوبة
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <mj-section background-color="{{card}}" padding="0 25px 5px" direction="rtl">
+      <mj-column width="70px" vertical-align="top">
+        <mj-text padding="0" align="center">
+          <div style="width:60px;height:60px;border-radius:8px;background-color:{{background}};display:flex;align-items:center;justify-content:center;"><!--[if !mso]><!--><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="{{mutedForeground}}" viewBox="0 0 256 256"><path d="M128,129.09V232a8,8,0,0,1-3.84-1l-88-48.18a8,8,0,0,1-4.16-7V80.18a8,8,0,0,1,.7-3.25Z" opacity="0.2"></path><path d="M223.68,66.15,135.68,18a15.88,15.88,0,0,0-15.36,0l-88,48.17a16,16,0,0,0-8.32,14v95.64a16,16,0,0,0,8.32,14l88,48.17a15.88,15.88,0,0,0,15.36,0l88-48.17a16,16,0,0,0,8.32-14V80.18A16,16,0,0,0,223.68,66.15ZM128,32l80.34,44-29.77,16.3-80.35-44ZM128,120,47.66,76l33.9-18.56,80.34,44ZM40,90l80,43.78v85.79L40,175.82Zm176,85.78h0l-80,43.79V133.82l32-17.51V152a8,8,0,0,0,16,0V107.55L216,90v85.77Z"></path></svg><!--<![endif]--></div>
+        </mj-text>
+      </mj-column>
+      <mj-column vertical-align="top">
+        <mj-text align="right" color="{{foreground}}" font-weight="bold" font-size="13px" padding-bottom="2px">
+          سماعات لاسلكية بلوتوث
+        </mj-text>
+        <mj-text align="right" color="{{mutedForeground}}" font-size="12px" padding-bottom="2px">
+          اللون: أسود · الكمية: 1
+        </mj-text>
+        <mj-text align="right" color="{{primary}}" font-weight="bold" font-size="13px">
+          349 د.إ
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <mj-section background-color="{{card}}" padding="0 25px 5px" direction="rtl">
+      <mj-column width="70px" vertical-align="top">
+        <mj-text padding="0" align="center">
+          <div style="width:60px;height:60px;border-radius:8px;background-color:{{background}};display:flex;align-items:center;justify-content:center;"><!--[if !mso]><!--><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="{{mutedForeground}}" viewBox="0 0 256 256"><path d="M128,129.09V232a8,8,0,0,1-3.84-1l-88-48.18a8,8,0,0,1-4.16-7V80.18a8,8,0,0,1,.7-3.25Z" opacity="0.2"></path><path d="M223.68,66.15,135.68,18a15.88,15.88,0,0,0-15.36,0l-88,48.17a16,16,0,0,0-8.32,14v95.64a16,16,0,0,0,8.32,14l88,48.17a15.88,15.88,0,0,0,15.36,0l88-48.17a16,16,0,0,0,8.32-14V80.18A16,16,0,0,0,223.68,66.15ZM128,32l80.34,44-29.77,16.3-80.35-44ZM128,120,47.66,76l33.9-18.56,80.34,44ZM40,90l80,43.78v85.79L40,175.82Zm176,85.78h0l-80,43.79V133.82l32-17.51V152a8,8,0,0,0,16,0V107.55L216,90v85.77Z"></path></svg><!--<![endif]--></div>
+        </mj-text>
+      </mj-column>
+      <mj-column vertical-align="top">
+        <mj-text align="right" color="{{foreground}}" font-weight="bold" font-size="13px" padding-bottom="2px">
+          حافظة هاتف جلدية
+        </mj-text>
+        <mj-text align="right" color="{{mutedForeground}}" font-size="12px" padding-bottom="2px">
+          اللون: بني · الكمية: 2
+        </mj-text>
+        <mj-text align="right" color="{{primary}}" font-weight="bold" font-size="13px">
+          158 د.إ
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Totals -->
+    <mj-section background-color="{{card}}" padding="10px 25px" direction="rtl">
+      <mj-column>
+        <mj-divider border-color="{{border}}" border-width="1px" padding="0 0 10px 0" />
+        <mj-table font-size="13px" color="{{foreground}}" cellpadding="5">
+          <tr style="text-align: left;">
+            <td style="text-align: right;">المجموع الفرعي</td>
+            <td>507 د.إ</td>
+          </tr>
+          <tr style="text-align: left;">
+            <td style="text-align: right;">الشحن</td>
+            <td>مجاني</td>
+          </tr>
+          <tr style="text-align: left;">
+            <td style="text-align: right;">ضريبة القيمة المضافة (5%)</td>
+            <td>25.35 د.إ</td>
+          </tr>
+          <tr style="font-weight: bold; text-align: left; border-top: 2px solid {{border}};">
+            <td style="text-align: right; padding-top: 8px;">الإجمالي</td>
+            <td style="padding-top: 8px; color: {{primary}};">532.35 د.إ</td>
+          </tr>
+        </mj-table>
+      </mj-column>
+    </mj-section>
+
+    <!-- Shipping info -->
+    <mj-section background-color="{{card}}" padding="10px 25px" direction="rtl">
+      <mj-column background-color="{{background}}" border-radius="8px" padding="15px">
+        <mj-text align="right" color="{{mutedForeground}}" font-size="12px" font-weight="bold" padding-bottom="5px">
+          عنوان التوصيل
+        </mj-text>
+        <mj-text align="right" color="{{foreground}}" font-size="13px" line-height="1.8">
+          أحمد خالد المنصوري<br/>
+          شارع الشيخ زايد، برج المارينا، شقة 2104<br/>
+          دبي، الإمارات العربية المتحدة
+        </mj-text>
+        <mj-text align="right" color="{{success}}" font-size="13px" font-weight="bold" padding-top="8px">
+          <span style="display:inline-block;vertical-align:middle;margin-left:4px;"><!--[if !mso]><!--><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="{{primary}}" viewBox="0 0 256 256"><path d="M128,129.09V232a8,8,0,0,1-3.84-1l-88-48.18a8,8,0,0,1-4.16-7V80.18a8,8,0,0,1,.7-3.25Z" opacity="0.2"></path><path d="M223.68,66.15,135.68,18a15.88,15.88,0,0,0-15.36,0l-88,48.17a16,16,0,0,0-8.32,14v95.64a16,16,0,0,0,8.32,14l88,48.17a15.88,15.88,0,0,0,15.36,0l88-48.17a16,16,0,0,0,8.32-14V80.18A16,16,0,0,0,223.68,66.15ZM128,32l80.34,44-29.77,16.3-80.35-44ZM128,120,47.66,76l33.9-18.56,80.34,44ZM40,90l80,43.78v85.79L40,175.82Zm176,85.78h0l-80,43.79V133.82l32-17.51V152a8,8,0,0,0,16,0V107.55L216,90v85.77Z"></path></svg><!--<![endif]--></span> التوصيل المتوقع: 20-22 مارس 2026
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <mj-section background-color="{{card}}" padding="15px 25px 30px" direction="rtl">
+      <mj-column>
+        <mj-button background-color="{{primary}}" color="{{primaryForeground}}" font-family="Tahoma, Arial, sans-serif" font-size="14px" font-weight="bold" border-radius="8px" inner-padding="12px 30px" align="right" href="#">
+          تتبع الطلب
+        </mj-button>
+      </mj-column>
+    </mj-section>
+    <!-- /@ar -->
+
+    <!-- @en -->
+    <mj-section background-color="{{card}}" padding="30px 25px 10px">
+      <mj-column>
+        <mj-text font-size="22px" font-weight="bold" align="left" color="{{foreground}}" padding-bottom="5px">
+          Order Confirmed ✓
+        </mj-text>
+        <mj-text align="left" color="{{mutedForeground}}" font-size="13px" padding-bottom="5px">
+          Order Number: #ORD-2026-31742
+        </mj-text>
+        <mj-text align="left" color="{{success}}" font-size="13px" font-weight="bold">
+          Your order has been confirmed
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Items -->
+    <mj-section background-color="{{card}}" padding="15px 25px">
+      <mj-column>
+        <mj-text font-size="15px" font-weight="bold" align="left" color="{{foreground}}" padding-bottom="10px">
+          Order Items
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <mj-section background-color="{{card}}" padding="0 25px 5px">
+      <mj-column width="70px" vertical-align="top">
+        <mj-text padding="0" align="center">
+          <div style="width:60px;height:60px;border-radius:8px;background-color:{{background}};display:flex;align-items:center;justify-content:center;"><!--[if !mso]><!--><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="{{mutedForeground}}" viewBox="0 0 256 256"><path d="M128,129.09V232a8,8,0,0,1-3.84-1l-88-48.18a8,8,0,0,1-4.16-7V80.18a8,8,0,0,1,.7-3.25Z" opacity="0.2"></path><path d="M223.68,66.15,135.68,18a15.88,15.88,0,0,0-15.36,0l-88,48.17a16,16,0,0,0-8.32,14v95.64a16,16,0,0,0,8.32,14l88,48.17a15.88,15.88,0,0,0,15.36,0l88-48.17a16,16,0,0,0,8.32-14V80.18A16,16,0,0,0,223.68,66.15ZM128,32l80.34,44-29.77,16.3-80.35-44ZM128,120,47.66,76l33.9-18.56,80.34,44ZM40,90l80,43.78v85.79L40,175.82Zm176,85.78h0l-80,43.79V133.82l32-17.51V152a8,8,0,0,0,16,0V107.55L216,90v85.77Z"></path></svg><!--<![endif]--></div>
+        </mj-text>
+      </mj-column>
+      <mj-column vertical-align="top">
+        <mj-text align="left" color="{{foreground}}" font-weight="bold" font-size="13px" padding-bottom="2px">
+          Wireless Bluetooth Headphones
+        </mj-text>
+        <mj-text align="left" color="{{mutedForeground}}" font-size="12px" padding-bottom="2px">
+          Color: Black · Qty: 1
+        </mj-text>
+        <mj-text align="left" color="{{primary}}" font-weight="bold" font-size="13px">
+          AED 349
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <mj-section background-color="{{card}}" padding="0 25px 5px">
+      <mj-column width="70px" vertical-align="top">
+        <mj-text padding="0" align="center">
+          <div style="width:60px;height:60px;border-radius:8px;background-color:{{background}};display:flex;align-items:center;justify-content:center;"><!--[if !mso]><!--><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="{{mutedForeground}}" viewBox="0 0 256 256"><path d="M128,129.09V232a8,8,0,0,1-3.84-1l-88-48.18a8,8,0,0,1-4.16-7V80.18a8,8,0,0,1,.7-3.25Z" opacity="0.2"></path><path d="M223.68,66.15,135.68,18a15.88,15.88,0,0,0-15.36,0l-88,48.17a16,16,0,0,0-8.32,14v95.64a16,16,0,0,0,8.32,14l88,48.17a15.88,15.88,0,0,0,15.36,0l88-48.17a16,16,0,0,0,8.32-14V80.18A16,16,0,0,0,223.68,66.15ZM128,32l80.34,44-29.77,16.3-80.35-44ZM128,120,47.66,76l33.9-18.56,80.34,44ZM40,90l80,43.78v85.79L40,175.82Zm176,85.78h0l-80,43.79V133.82l32-17.51V152a8,8,0,0,0,16,0V107.55L216,90v85.77Z"></path></svg><!--<![endif]--></div>
+        </mj-text>
+      </mj-column>
+      <mj-column vertical-align="top">
+        <mj-text align="left" color="{{foreground}}" font-weight="bold" font-size="13px" padding-bottom="2px">
+          Leather Phone Case
+        </mj-text>
+        <mj-text align="left" color="{{mutedForeground}}" font-size="12px" padding-bottom="2px">
+          Color: Brown · Qty: 2
+        </mj-text>
+        <mj-text align="left" color="{{primary}}" font-weight="bold" font-size="13px">
+          AED 158
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Totals -->
+    <mj-section background-color="{{card}}" padding="10px 25px">
+      <mj-column>
+        <mj-divider border-color="{{border}}" border-width="1px" padding="0 0 10px 0" />
+        <mj-table font-size="13px" color="{{foreground}}" cellpadding="5">
+          <tr>
+            <td>Subtotal</td>
+            <td style="text-align: right;">AED 507</td>
+          </tr>
+          <tr>
+            <td>Shipping</td>
+            <td style="text-align: right;">Free</td>
+          </tr>
+          <tr>
+            <td>VAT (5%)</td>
+            <td style="text-align: right;">AED 25.35</td>
+          </tr>
+          <tr style="font-weight: bold; border-top: 2px solid {{border}};">
+            <td style="padding-top: 8px;">Total</td>
+            <td style="text-align: right; padding-top: 8px; color: {{primary}};">AED 532.35</td>
+          </tr>
+        </mj-table>
+      </mj-column>
+    </mj-section>
+
+    <!-- Shipping info -->
+    <mj-section background-color="{{card}}" padding="10px 25px">
+      <mj-column background-color="{{background}}" border-radius="8px" padding="15px">
+        <mj-text align="left" color="{{mutedForeground}}" font-size="12px" font-weight="bold" padding-bottom="5px">
+          DELIVERY ADDRESS
+        </mj-text>
+        <mj-text align="left" color="{{foreground}}" font-size="13px" line-height="1.8">
+          Ahmed Khaled Al Mansouri<br/>
+          Sheikh Zayed Road, Marina Tower, Apt 2104<br/>
+          Dubai, United Arab Emirates
+        </mj-text>
+        <mj-text align="left" color="{{success}}" font-size="13px" font-weight="bold" padding-top="8px">
+          <span style="display:inline-block;vertical-align:middle;margin-right:4px;"><!--[if !mso]><!--><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="{{primary}}" viewBox="0 0 256 256"><path d="M128,129.09V232a8,8,0,0,1-3.84-1l-88-48.18a8,8,0,0,1-4.16-7V80.18a8,8,0,0,1,.7-3.25Z" opacity="0.2"></path><path d="M223.68,66.15,135.68,18a15.88,15.88,0,0,0-15.36,0l-88,48.17a16,16,0,0,0-8.32,14v95.64a16,16,0,0,0,8.32,14l88,48.17a15.88,15.88,0,0,0,15.36,0l88-48.17a16,16,0,0,0,8.32-14V80.18A16,16,0,0,0,223.68,66.15ZM128,32l80.34,44-29.77,16.3-80.35-44ZM128,120,47.66,76l33.9-18.56,80.34,44ZM40,90l80,43.78v85.79L40,175.82Zm176,85.78h0l-80,43.79V133.82l32-17.51V152a8,8,0,0,0,16,0V107.55L216,90v85.77Z"></path></svg><!--<![endif]--></span> Estimated Delivery: March 20-22, 2026
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <mj-section background-color="{{card}}" padding="15px 25px 30px">
+      <mj-column>
+        <mj-button background-color="{{primary}}" color="{{primaryForeground}}" font-family="Tahoma, Arial, sans-serif" font-size="14px" font-weight="bold" border-radius="8px" inner-padding="12px 30px" align="left" href="#">
+          Track Order
+        </mj-button>
+      </mj-column>
+    </mj-section>
+    <!-- /@en -->
+
+    <mj-include path="../../partials/footer.mjml" />
+
+  </mj-body>
+</mjml>

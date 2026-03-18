@@ -1,0 +1,17 @@
+<!-- Footer Partial: Bilingual (Arabic + English) -->
+<mj-section padding="20px 25px">
+  <mj-column>
+    <mj-divider border-color="{{border}}" border-width="1px" padding="0 0 20px 0" />
+    <mj-text font-family="Tahoma, Arial, sans-serif" font-size="12px" color="{{mutedForeground}}" align="center" line-height="1.8" direction="rtl">
+      &copy; 2026 {{brandNameAr}}. جميع الحقوق محفوظة.
+    </mj-text>
+    <mj-text font-family="Tahoma, Arial, sans-serif" font-size="12px" color="{{mutedForeground}}" align="center" line-height="1.8">
+      &copy; 2026 {{brandName}}. All rights reserved.
+    </mj-text>
+    <mj-text font-family="Tahoma, Arial, sans-serif" font-size="11px" color="{{mutedForeground}}" align="center" line-height="1.6" padding-top="4px">
+      <a href="#" style="color: {{mutedForeground}}; text-decoration: underline;">إلغاء الاشتراك / Unsubscribe</a> &nbsp;|&nbsp;
+      <a href="#" style="color: {{mutedForeground}}; text-decoration: underline;">الخصوصية / Privacy</a> &nbsp;|&nbsp;
+      <a href="#" style="color: {{mutedForeground}}; text-decoration: underline;">الدعم / Support</a>
+    </mj-text>
+  </mj-column>
+</mj-section>

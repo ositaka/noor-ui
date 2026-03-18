@@ -39,6 +39,7 @@ components: {
       helpDescription: 'Check out our documentation or join our community',
       viewDocs: 'View Documentation',
       browseExamples: 'Browse Examples',
+      emailTemplates: 'Email Templates',
       ready: 'Ready',
       comingSoon: 'Coming Soon',
     },

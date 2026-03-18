@@ -80,6 +80,7 @@ documentationPages: {
           utilities: 'الأدوات والخطافات',
           rtlGuide: 'دليل RTL',
           tokens: 'رموز التصميم',
+          emailTemplates: 'قوالب البريد',
         },
         quickLinks: {
           title: 'روابط سريعة',

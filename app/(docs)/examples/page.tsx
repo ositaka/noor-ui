@@ -153,6 +153,25 @@ export default function ExamplesPage() {
           </Card>
         </div>
 
+        {/* Link to Email Templates */}
+        <div className="mt-12 max-w-3xl">
+          <Card className="border-primary/50">
+            <CardContent className="p-6">
+              <div className="space-y-4">
+                <h3 className="font-semibold">
+                  {t.examples.lookingForEmails}
+                </h3>
+                <p className="text-sm text-muted-foreground">
+                  {t.examples.lookingForEmailsDesc}
+                </p>
+                <Link href="/email-templates" className="inline-flex items-center rounded-md bg-primary px-3 py-1.5 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
+                  {t.examples.viewEmailTemplates}
+                </Link>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
         {/* Link to Components */}
         <div className="mt-12 max-w-3xl">
           <Card className="border-primary/50">

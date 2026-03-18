@@ -39,6 +39,7 @@ components: {
       helpDescription: 'تحقق من توثيقنا أو انضم إلى مجتمعنا',
       viewDocs: 'اطّلع على التوثيق',
       browseExamples: 'تصفح الأمثلة',
+      emailTemplates: 'قوالب البريد',
       ready: 'جاهز',
       comingSoon: 'قريباً',
     },

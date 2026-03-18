@@ -15,6 +15,7 @@ nav: {
       documentation: 'التوثيق',
       getStarted: 'ابدأ الآن',
       more: 'المزيد',
+      emailTemplates: 'قوالب البريد',
     },
 
     storybook: {
@@ -506,6 +507,7 @@ common: {
           b2bMarketplace: 'سوق الأعمال',
           aiChatSimple: 'محادثة الذكاء الاصطناعي',
           aiPlayground: 'منصة تجربة الذكاء الاصطناعي',
+          emailTemplates: 'قوالب البريد الإلكتروني',
           aiCodeAssistant: 'مساعد البرمجة الذكي',
           aiDocumentQa: 'أسئلة وأجوبة المستندات',
           aiMultiAgent: 'وكلاء الذكاء الاصطناعي المتعددة',

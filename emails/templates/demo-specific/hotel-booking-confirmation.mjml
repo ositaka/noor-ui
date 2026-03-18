@@ -1,0 +1,237 @@
+<!-- @brand: Nuzul | نزل -->
+<mjml>
+  <mj-head>
+    <mj-attributes>
+      <mj-all font-family="Tahoma, Arial, sans-serif" />
+      <mj-text font-size="14px" color="{{foreground}}" line-height="1.6" />
+    </mj-attributes>
+    <mj-style>
+      @media only screen and (max-width: 480px) {
+        .stack-table td {
+          display: block !important;
+          width: 100% !important;
+          box-sizing: border-box !important;
+        }
+        .stack-table tr {
+          display: block !important;
+          margin-bottom: 12px !important;
+        }
+        .stack-table-rtl td {
+          text-align: right !important;
+          direction: rtl !important;
+        }
+      }
+    </mj-style>
+  </mj-head>
+  <mj-body background-color="{{background}}" width="600px">
+
+    <mj-include path="../../partials/header.mjml" />
+
+    <!-- @ar -->
+    <mj-section background-color="{{card}}" padding="30px 25px 10px" direction="rtl">
+      <mj-column>
+        <mj-text font-size="22px" font-weight="bold" align="right" color="{{foreground}}" padding-bottom="5px">
+          تأكيد الحجز
+        </mj-text>
+        <mj-text align="right" color="{{mutedForeground}}" font-size="13px">
+          رقم الحجز: NZL-2026-04817
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Hotel image -->
+    <mj-section background-color="{{card}}" padding="15px 25px" direction="rtl">
+      <mj-column>
+        <mj-image width="550px" border-radius="8px" src="/examples/hotel/room-deluxe.jpg" alt="منتجع القصر الشاطئي" fluid-on-mobile="true" />
+      </mj-column>
+    </mj-section>
+
+    <mj-section background-color="{{card}}" padding="5px 25px 10px" direction="rtl">
+      <mj-column>
+        <mj-text font-size="18px" font-weight="bold" align="right" color="{{foreground}}" padding-bottom="3px">
+          منتجع القصر الشاطئي <span style="display:inline-block;vertical-align:middle;"><!--[if !mso]><!--><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="{{primary}}" viewBox="0 0 256 256"><path d="M234.29,114.85l-45,38.83L203,211.75a16.4,16.4,0,0,1-24.5,17.82L128,198.49,77.47,229.57A16.4,16.4,0,0,1,53,211.75l13.76-58.07-45-38.83A16.46,16.46,0,0,1,31.08,86l59-4.76,22.76-55.08a16.36,16.36,0,0,1,30.27,0l22.75,55.08,59,4.76a16.46,16.46,0,0,1,9.37,28.86Z"></path></svg><!--<![endif]--></span><span style="display:inline-block;vertical-align:middle;"><!--[if !mso]><!--><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="{{primary}}" viewBox="0 0 256 256"><path d="M234.29,114.85l-45,38.83L203,211.75a16.4,16.4,0,0,1-24.5,17.82L128,198.49,77.47,229.57A16.4,16.4,0,0,1,53,211.75l13.76-58.07-45-38.83A16.46,16.46,0,0,1,31.08,86l59-4.76,22.76-55.08a16.36,16.36,0,0,1,30.27,0l22.75,55.08,59,4.76a16.46,16.46,0,0,1,9.37,28.86Z"></path></svg><!--<![endif]--></span><span style="display:inline-block;vertical-align:middle;"><!--[if !mso]><!--><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="{{primary}}" viewBox="0 0 256 256"><path d="M234.29,114.85l-45,38.83L203,211.75a16.4,16.4,0,0,1-24.5,17.82L128,198.49,77.47,229.57A16.4,16.4,0,0,1,53,211.75l13.76-58.07-45-38.83A16.46,16.46,0,0,1,31.08,86l59-4.76,22.76-55.08a16.36,16.36,0,0,1,30.27,0l22.75,55.08,59,4.76a16.46,16.46,0,0,1,9.37,28.86Z"></path></svg><!--<![endif]--></span><span style="display:inline-block;vertical-align:middle;"><!--[if !mso]><!--><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="{{primary}}" viewBox="0 0 256 256"><path d="M234.29,114.85l-45,38.83L203,211.75a16.4,16.4,0,0,1-24.5,17.82L128,198.49,77.47,229.57A16.4,16.4,0,0,1,53,211.75l13.76-58.07-45-38.83A16.46,16.46,0,0,1,31.08,86l59-4.76,22.76-55.08a16.36,16.36,0,0,1,30.27,0l22.75,55.08,59,4.76a16.46,16.46,0,0,1,9.37,28.86Z"></path></svg><!--<![endif]--></span><span style="display:inline-block;vertical-align:middle;"><!--[if !mso]><!--><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="{{primary}}" viewBox="0 0 256 256"><path d="M234.29,114.85l-45,38.83L203,211.75a16.4,16.4,0,0,1-24.5,17.82L128,198.49,77.47,229.57A16.4,16.4,0,0,1,53,211.75l13.76-58.07-45-38.83A16.46,16.46,0,0,1,31.08,86l59-4.76,22.76-55.08a16.36,16.36,0,0,1,30.27,0l22.75,55.08,59,4.76a16.46,16.46,0,0,1,9.37,28.86Z"></path></svg><!--<![endif]--></span>
+        </mj-text>
+        <mj-text align="right" color="{{mutedForeground}}" font-size="13px">
+          شارع الكورنيش، أبوظبي، الإمارات العربية المتحدة
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Booking details -->
+    <mj-section background-color="{{card}}" padding="10px 25px" direction="rtl">
+      <mj-column background-color="{{background}}" border-radius="8px" padding="20px">
+        <mj-table font-size="13px" color="{{foreground}}" cellpadding="5" css-class="stack-table stack-table-rtl">
+          <tr>
+            <td style="text-align: right; font-weight: bold; padding: 8px; width: 120px;">تسجيل الوصول</td>
+            <td style="text-align: right; padding: 8px;">&#x200F;20 أبريل 2026 (3:00 م)</td>
+          </tr>
+          <tr style="border-top: 1px solid {{border}};">
+            <td style="text-align: right; font-weight: bold; padding: 8px;">تسجيل المغادرة</td>
+            <td style="text-align: right; padding: 8px;">&#x200F;24 أبريل 2026 (12:00 م)</td>
+          </tr>
+          <tr style="border-top: 1px solid {{border}};">
+            <td style="text-align: right; font-weight: bold; padding: 8px;">نوع الغرفة</td>
+            <td style="text-align: right; padding: 8px;">جناح ديلوكس بإطلالة بحرية</td>
+          </tr>
+          <tr style="border-top: 1px solid {{border}};">
+            <td style="text-align: right; font-weight: bold; padding: 8px;">النزلاء</td>
+            <td style="text-align: right; padding: 8px;">&#x200F;2 بالغين، 1 طفل</td>
+          </tr>
+        </mj-table>
+      </mj-column>
+    </mj-section>
+
+    <!-- Price breakdown -->
+    <mj-section background-color="{{card}}" padding="10px 25px" direction="rtl">
+      <mj-column>
+        <mj-text font-size="15px" font-weight="bold" align="right" color="{{foreground}}" padding-bottom="10px">
+          تفاصيل السعر
+        </mj-text>
+        <mj-table font-size="13px" color="{{foreground}}" cellpadding="5">
+          <tr style="text-align: left;">
+            <td style="text-align: right; padding: 6px 8px;">سعر الغرفة (4 ليالٍ × 850 د.إ)</td>
+            <td style="padding: 6px 8px;">3,400 د.إ</td>
+          </tr>
+          <tr style="text-align: left;">
+            <td style="text-align: right; padding: 6px 8px;">رسوم السياحة</td>
+            <td style="padding: 6px 8px;">60 د.إ</td>
+          </tr>
+          <tr style="text-align: left;">
+            <td style="text-align: right; padding: 6px 8px;">رسوم الخدمة (10%)</td>
+            <td style="padding: 6px 8px;">340 د.إ</td>
+          </tr>
+          <tr style="text-align: left;">
+            <td style="text-align: right; padding: 6px 8px;">ضريبة القيمة المضافة (5%)</td>
+            <td style="padding: 6px 8px;">190 د.إ</td>
+          </tr>
+          <tr style="font-weight: bold; text-align: left; border-top: 2px solid {{border}};">
+            <td style="text-align: right; padding: 8px;">الإجمالي</td>
+            <td style="padding: 8px; color: {{primary}};">3,990 د.إ</td>
+          </tr>
+        </mj-table>
+      </mj-column>
+    </mj-section>
+
+    <mj-section background-color="{{card}}" padding="10px 25px" direction="rtl">
+      <mj-column>
+        <mj-text align="right" color="{{mutedForeground}}" font-size="12px" font-style="italic">
+          سياسة الإلغاء: إلغاء مجاني حتى 48 ساعة قبل تسجيل الوصول.
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <mj-section background-color="{{card}}" padding="15px 25px 30px" direction="rtl">
+      <mj-column>
+        <mj-button background-color="{{primary}}" color="{{primaryForeground}}" font-family="Tahoma, Arial, sans-serif" font-size="14px" font-weight="bold" border-radius="8px" inner-padding="12px 30px" align="right" href="#">
+          عرض الحجز
+        </mj-button>
+      </mj-column>
+    </mj-section>
+    <!-- /@ar -->
+
+    <!-- @en -->
+    <mj-section background-color="{{card}}" padding="30px 25px 10px">
+      <mj-column>
+        <mj-text font-size="22px" font-weight="bold" align="left" color="{{foreground}}" padding-bottom="5px">
+          Booking Confirmation
+        </mj-text>
+        <mj-text align="left" color="{{mutedForeground}}" font-size="13px">
+          Booking Reference: NZL-2026-04817
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Hotel image -->
+    <mj-section background-color="{{card}}" padding="15px 25px">
+      <mj-column>
+        <mj-image width="550px" border-radius="8px" src="/examples/hotel/room-deluxe.jpg" alt="Al Qasr Beach Resort" fluid-on-mobile="true" />
+      </mj-column>
+    </mj-section>
+
+    <mj-section background-color="{{card}}" padding="5px 25px 10px">
+      <mj-column>
+        <mj-text font-size="18px" font-weight="bold" align="left" color="{{foreground}}" padding-bottom="3px">
+          Al Qasr Beach Resort <span style="display:inline-block;vertical-align:middle;"><!--[if !mso]><!--><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="{{primary}}" viewBox="0 0 256 256"><path d="M234.29,114.85l-45,38.83L203,211.75a16.4,16.4,0,0,1-24.5,17.82L128,198.49,77.47,229.57A16.4,16.4,0,0,1,53,211.75l13.76-58.07-45-38.83A16.46,16.46,0,0,1,31.08,86l59-4.76,22.76-55.08a16.36,16.36,0,0,1,30.27,0l22.75,55.08,59,4.76a16.46,16.46,0,0,1,9.37,28.86Z"></path></svg><!--<![endif]--></span><span style="display:inline-block;vertical-align:middle;"><!--[if !mso]><!--><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="{{primary}}" viewBox="0 0 256 256"><path d="M234.29,114.85l-45,38.83L203,211.75a16.4,16.4,0,0,1-24.5,17.82L128,198.49,77.47,229.57A16.4,16.4,0,0,1,53,211.75l13.76-58.07-45-38.83A16.46,16.46,0,0,1,31.08,86l59-4.76,22.76-55.08a16.36,16.36,0,0,1,30.27,0l22.75,55.08,59,4.76a16.46,16.46,0,0,1,9.37,28.86Z"></path></svg><!--<![endif]--></span><span style="display:inline-block;vertical-align:middle;"><!--[if !mso]><!--><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="{{primary}}" viewBox="0 0 256 256"><path d="M234.29,114.85l-45,38.83L203,211.75a16.4,16.4,0,0,1-24.5,17.82L128,198.49,77.47,229.57A16.4,16.4,0,0,1,53,211.75l13.76-58.07-45-38.83A16.46,16.46,0,0,1,31.08,86l59-4.76,22.76-55.08a16.36,16.36,0,0,1,30.27,0l22.75,55.08,59,4.76a16.46,16.46,0,0,1,9.37,28.86Z"></path></svg><!--<![endif]--></span><span style="display:inline-block;vertical-align:middle;"><!--[if !mso]><!--><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="{{primary}}" viewBox="0 0 256 256"><path d="M234.29,114.85l-45,38.83L203,211.75a16.4,16.4,0,0,1-24.5,17.82L128,198.49,77.47,229.57A16.4,16.4,0,0,1,53,211.75l13.76-58.07-45-38.83A16.46,16.46,0,0,1,31.08,86l59-4.76,22.76-55.08a16.36,16.36,0,0,1,30.27,0l22.75,55.08,59,4.76a16.46,16.46,0,0,1,9.37,28.86Z"></path></svg><!--<![endif]--></span><span style="display:inline-block;vertical-align:middle;"><!--[if !mso]><!--><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="{{primary}}" viewBox="0 0 256 256"><path d="M234.29,114.85l-45,38.83L203,211.75a16.4,16.4,0,0,1-24.5,17.82L128,198.49,77.47,229.57A16.4,16.4,0,0,1,53,211.75l13.76-58.07-45-38.83A16.46,16.46,0,0,1,31.08,86l59-4.76,22.76-55.08a16.36,16.36,0,0,1,30.27,0l22.75,55.08,59,4.76a16.46,16.46,0,0,1,9.37,28.86Z"></path></svg><!--<![endif]--></span>
+        </mj-text>
+        <mj-text align="left" color="{{mutedForeground}}" font-size="13px">
+          Corniche Road, Abu Dhabi, United Arab Emirates
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Booking details -->
+    <mj-section background-color="{{card}}" padding="10px 25px">
+      <mj-column background-color="{{background}}" border-radius="8px" padding="20px">
+        <mj-table font-size="13px" color="{{foreground}}" cellpadding="5" css-class="stack-table">
+          <tr>
+            <td style="font-weight: bold; padding: 8px; width: 120px;">Check-in</td>
+            <td style="padding: 8px;">April 20, 2026 (3:00 PM)</td>
+          </tr>
+          <tr style="border-top: 1px solid {{border}};">
+            <td style="font-weight: bold; padding: 8px;">Check-out</td>
+            <td style="padding: 8px;">April 24, 2026 (12:00 PM)</td>
+          </tr>
+          <tr style="border-top: 1px solid {{border}};">
+            <td style="font-weight: bold; padding: 8px;">Room Type</td>
+            <td style="padding: 8px;">Deluxe Sea View Suite</td>
+          </tr>
+          <tr style="border-top: 1px solid {{border}};">
+            <td style="font-weight: bold; padding: 8px;">Guests</td>
+            <td style="padding: 8px;">2 Adults, 1 Child</td>
+          </tr>
+        </mj-table>
+      </mj-column>
+    </mj-section>
+
+    <!-- Price breakdown -->
+    <mj-section background-color="{{card}}" padding="10px 25px">
+      <mj-column>
+        <mj-text font-size="15px" font-weight="bold" align="left" color="{{foreground}}" padding-bottom="10px">
+          Price Breakdown
+        </mj-text>
+        <mj-table font-size="13px" color="{{foreground}}" cellpadding="5">
+          <tr>
+            <td style="padding: 6px 8px;">Room Rate (4 nights × AED 850)</td>
+            <td style="text-align: right; padding: 6px 8px;">AED 3,400</td>
+          </tr>
+          <tr>
+            <td style="padding: 6px 8px;">Tourism Fee</td>
+            <td style="text-align: right; padding: 6px 8px;">AED 60</td>
+          </tr>
+          <tr>
+            <td style="padding: 6px 8px;">Service Charge (10%)</td>
+            <td style="text-align: right; padding: 6px 8px;">AED 340</td>
+          </tr>
+          <tr>
+            <td style="padding: 6px 8px;">VAT (5%)</td>
+            <td style="text-align: right; padding: 6px 8px;">AED 190</td>
+          </tr>
+          <tr style="font-weight: bold; border-top: 2px solid {{border}};">
+            <td style="padding: 8px;">Total</td>
+            <td style="text-align: right; padding: 8px; color: {{primary}};">AED 3,990</td>
+          </tr>
+        </mj-table>
+      </mj-column>
+    </mj-section>
+
+    <mj-section background-color="{{card}}" padding="10px 25px">
+      <mj-column>
+        <mj-text align="left" color="{{mutedForeground}}" font-size="12px" font-style="italic">
+          Cancellation Policy: Free cancellation up to 48 hours before check-in.
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <mj-section background-color="{{card}}" padding="15px 25px 30px">
+      <mj-column>
+        <mj-button background-color="{{primary}}" color="{{primaryForeground}}" font-family="Tahoma, Arial, sans-serif" font-size="14px" font-weight="bold" border-radius="8px" inner-padding="12px 30px" align="left" href="#">
+          View Reservation
+        </mj-button>
+      </mj-column>
+    </mj-section>
+    <!-- /@en -->
+
+    <mj-include path="../../partials/footer.mjml" />
+
+  </mj-body>
+</mjml>

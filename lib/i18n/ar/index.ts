@@ -23,6 +23,7 @@ import { utilities_page } from './utilities'
 import { components_chart } from './components-chart'
 import { components_timeline } from './components-timeline'
 import { components_carousel } from './components-carousel'
+import { email_templates } from './email-templates'
 
 export const ar = {
   ...common,
@@ -45,4 +46,5 @@ export const ar = {
   ...components_chart,
   ...components_timeline,
   ...components_carousel,
+  ...email_templates,
 }

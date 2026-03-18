@@ -314,6 +314,9 @@ export default function ComponentsPage() {
             <Button variant="outline" asChild>
               <Link href="/examples">{t.components.browseExamples}</Link>
             </Button>
+            <Button variant="outline" asChild>
+              <Link href="/email-templates">{t.components.emailTemplates}</Link>
+            </Button>
           </CardContent>
         </Card>
       </main>

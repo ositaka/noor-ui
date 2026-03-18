@@ -81,6 +81,7 @@ export default function DocumentationPage() {
         { titleKey: 'utilities', href: '/utilities' },
         { titleKey: 'rtlGuide', href: '/rtl-guide' },
         { titleKey: 'tokens', href: '/tokens' },
+        { titleKey: 'emailTemplates', href: '/email-templates' },
       ],
     },
   ]
