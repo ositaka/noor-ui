@@ -1,3 +1,3 @@
 # Mark generated email preview HTML as linguist-generated
 # so GitHub doesn't count them in language statistics
-public/emails/preview/** linguist-generated
+public/emails/preview/**/*.html linguist-generated
