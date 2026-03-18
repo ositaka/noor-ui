@@ -1,6 +1,7 @@
 'use client'
 
 import * as React from 'react'
+import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
@@ -31,6 +32,8 @@ import {
   Copy,
   Check,
   DownloadSimple,
+  Sun,
+  Moon,
   type Icon as PhosphorIcon,
 } from '@phosphor-icons/react'
 
@@ -60,7 +63,8 @@ const TEMPLATES: TemplateInfo[] = [
   { id: 'payment-reminder', category: 'standalone', icon: CreditCard },
 ]
 
-const THEMES = ['cozy', 'default', 'minimal', 'futuristic', 'artistic']
+const THEMES = ['cozy', 'minimal', 'futuristic', 'artistic']
+type ColorMode = 'light' | 'dark'
 type Variant = 'ltr' | 'rtl' | 'bilingual'
 type Device = 'desktop' | 'mobile'
 type Filter = 'all' | 'demo' | 'standalone'
@@ -72,15 +76,74 @@ export default function EmailTemplatesPage() {
   const t = content[locale]
   const et = t.emailTemplates
 
-  const [selectedTemplate, setSelectedTemplate] = React.useState<string | null>(null)
-  const [variant, setVariant] = React.useState<Variant>('ltr')
-  const [device, setDevice] = React.useState<Device>('desktop')
+  const searchParams = useSearchParams()
+
+  // Initialize state from URL params
+  const [selectedTemplate, setSelectedTemplate] = React.useState<string | null>(() => {
+    const t = searchParams.get('template')
+    return t && TEMPLATES.some(tmpl => tmpl.id === t) ? t : null
+  })
+  const [variant, setVariant] = React.useState<Variant>(() => {
+    const v = searchParams.get('variant') as Variant
+    return ['ltr', 'rtl', 'bilingual'].includes(v) ? v : 'ltr'
+  })
+  const [device, setDevice] = React.useState<Device>(() => {
+    const d = searchParams.get('device') as Device
+    return ['desktop', 'mobile'].includes(d) ? d : 'desktop'
+  })
   const [filter, setFilter] = React.useState<Filter>('all')
-  const [theme, setTheme] = React.useState('cozy')
+  const [theme, setTheme] = React.useState(() => {
+    const th = searchParams.get('theme')
+    return th && THEMES.includes(th) ? th : 'cozy'
+  })
+  const [colorMode, setColorMode] = React.useState<ColorMode>(() => {
+    const m = searchParams.get('mode') as ColorMode
+    return m === 'dark' ? 'dark' : 'light'
+  })
   const [copied, setCopied] = React.useState(false)
 
   const previewHeadingRef = React.useRef<HTMLHeadingElement>(null)
   const gridHeadingRef = React.useRef<HTMLHeadingElement>(null)
+  const isInitialMount = React.useRef(true)
+
+  // Sync state to URL params
+  React.useEffect(() => {
+    // Skip the initial mount to avoid pushing on page load
+    if (isInitialMount.current) {
+      isInitialMount.current = false
+      return
+    }
+    const params = new URLSearchParams()
+    if (selectedTemplate) {
+      params.set('template', selectedTemplate)
+      params.set('variant', variant)
+      params.set('theme', theme)
+      if (colorMode !== 'light') params.set('mode', colorMode)
+      if (device !== 'desktop') params.set('device', device)
+    }
+    const qs = params.toString()
+    const newUrl = qs ? `${window.location.pathname}?${qs}` : window.location.pathname
+    window.history.pushState(null, '', newUrl)
+  }, [selectedTemplate, variant, theme, colorMode, device])
+
+  // Handle browser back/forward
+  React.useEffect(() => {
+    const handlePopState = () => {
+      const params = new URLSearchParams(window.location.search)
+      const t = params.get('template')
+      setSelectedTemplate(t && TEMPLATES.some(tmpl => tmpl.id === t) ? t : null)
+      const v = params.get('variant') as Variant
+      setVariant(['ltr', 'rtl', 'bilingual'].includes(v) ? v : 'ltr')
+      const th = params.get('theme')
+      setTheme(th && THEMES.includes(th) ? th : 'cozy')
+      const d = params.get('device') as Device
+      setDevice(['desktop', 'mobile'].includes(d) ? d : 'desktop')
+      const m = params.get('mode') as ColorMode
+      setColorMode(m === 'dark' ? 'dark' : 'light')
+    }
+    window.addEventListener('popstate', handlePopState)
+    return () => window.removeEventListener('popstate', handlePopState)
+  }, [])
 
   // Focus management on view transitions
   React.useEffect(() => {
@@ -94,10 +157,13 @@ export default function EmailTemplatesPage() {
     return t.category === filter
   })
 
+  // Theme directory: "cozy" for light, "cozy-dark" for dark
+  const themeDir = colorMode === 'dark' ? `${theme}-dark` : theme
+
   const handleCopyHtml = async () => {
     if (!selectedTemplate) return
     try {
-      const res = await fetch(`/emails/preview/${theme}/${selectedTemplate}-${variant}.html`)
+      const res = await fetch(`/emails/preview/${themeDir}/${selectedTemplate}-${variant}.html`)
       const html = await res.text()
       await navigator.clipboard.writeText(html)
       setCopied(true)
@@ -110,13 +176,13 @@ export default function EmailTemplatesPage() {
   const handleDownloadHtml = async () => {
     if (!selectedTemplate) return
     try {
-      const res = await fetch(`/emails/preview/${theme}/${selectedTemplate}-${variant}.html`)
+      const res = await fetch(`/emails/preview/${themeDir}/${selectedTemplate}-${variant}.html`)
       const html = await res.text()
       const blob = new Blob([html], { type: 'text/html' })
       const url = URL.createObjectURL(blob)
       const a = document.createElement('a')
       a.href = url
-      a.download = `${selectedTemplate}-${variant}-${theme}.html`
+      a.download = `${selectedTemplate}-${variant}-${themeDir}.html`
       document.body.appendChild(a)
       a.click()
       document.body.removeChild(a)
@@ -128,6 +194,7 @@ export default function EmailTemplatesPage() {
 
   const handleBack = () => {
     setSelectedTemplate(null)
+    window.history.pushState(null, '', window.location.pathname)
     // Focus grid heading after React re-render
     requestAnimationFrame(() => gridHeadingRef.current?.focus())
   }
@@ -217,6 +284,18 @@ export default function EmailTemplatesPage() {
                   ))}
                 </SelectContent>
               </Select>
+              <Button
+                variant="ghost"
+                size="sm"
+                className="h-8 w-8 p-0"
+                onClick={() => setColorMode(colorMode === 'light' ? 'dark' : 'light')}
+                aria-label={colorMode === 'light' ? 'Dark' : 'Light'}
+                aria-pressed={colorMode === 'dark'}
+              >
+                {colorMode === 'light'
+                  ? <Moon className="h-4 w-4" aria-hidden="true" />
+                  : <Sun className="h-4 w-4" aria-hidden="true" />}
+              </Button>
             </div>
 
             {/* Action buttons */}
@@ -247,7 +326,7 @@ export default function EmailTemplatesPage() {
             >
               <iframe
                 key={`${selectedTemplate}-${variant}-${theme}-${device}`}
-                src={`/emails/preview/${theme}/${selectedTemplate}-${variant}.html`}
+                src={`/emails/preview/${themeDir}/${selectedTemplate}-${variant}.html`}
                 style={{
                   width: device === 'desktop' ? '600px' : '375px',
                   height: '800px',

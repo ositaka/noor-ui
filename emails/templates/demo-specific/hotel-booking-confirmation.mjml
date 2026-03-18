@@ -42,14 +42,14 @@
     <!-- Hotel image -->
     <mj-section background-color="{{card}}" padding="15px 25px" direction="rtl">
       <mj-column>
-        <mj-image width="550px" height="200px" border-radius="8px" src="https://placehold.co/1100x400/E8E2D9/706258?text=Hotel+Photo" alt="صورة الفندق" fluid-on-mobile="true" />
+        <mj-image width="550px" border-radius="8px" src="/examples/hotel/room-deluxe.jpg" alt="منتجع القصر الشاطئي" fluid-on-mobile="true" />
       </mj-column>
     </mj-section>
 
     <mj-section background-color="{{card}}" padding="5px 25px 10px" direction="rtl">
       <mj-column>
         <mj-text font-size="18px" font-weight="bold" align="right" color="{{foreground}}" padding-bottom="3px">
-          منتجع القصر الشاطئي ⭐⭐⭐⭐⭐
+          منتجع القصر الشاطئي <span style="display:inline-block;vertical-align:middle;"><!--[if !mso]><!--><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="{{primary}}" viewBox="0 0 256 256"><path d="M234.29,114.85l-45,38.83L203,211.75a16.4,16.4,0,0,1-24.5,17.82L128,198.49,77.47,229.57A16.4,16.4,0,0,1,53,211.75l13.76-58.07-45-38.83A16.46,16.46,0,0,1,31.08,86l59-4.76,22.76-55.08a16.36,16.36,0,0,1,30.27,0l22.75,55.08,59,4.76a16.46,16.46,0,0,1,9.37,28.86Z"></path></svg><!--<![endif]--></span><span style="display:inline-block;vertical-align:middle;"><!--[if !mso]><!--><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="{{primary}}" viewBox="0 0 256 256"><path d="M234.29,114.85l-45,38.83L203,211.75a16.4,16.4,0,0,1-24.5,17.82L128,198.49,77.47,229.57A16.4,16.4,0,0,1,53,211.75l13.76-58.07-45-38.83A16.46,16.46,0,0,1,31.08,86l59-4.76,22.76-55.08a16.36,16.36,0,0,1,30.27,0l22.75,55.08,59,4.76a16.46,16.46,0,0,1,9.37,28.86Z"></path></svg><!--<![endif]--></span><span style="display:inline-block;vertical-align:middle;"><!--[if !mso]><!--><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="{{primary}}" viewBox="0 0 256 256"><path d="M234.29,114.85l-45,38.83L203,211.75a16.4,16.4,0,0,1-24.5,17.82L128,198.49,77.47,229.57A16.4,16.4,0,0,1,53,211.75l13.76-58.07-45-38.83A16.46,16.46,0,0,1,31.08,86l59-4.76,22.76-55.08a16.36,16.36,0,0,1,30.27,0l22.75,55.08,59,4.76a16.46,16.46,0,0,1,9.37,28.86Z"></path></svg><!--<![endif]--></span><span style="display:inline-block;vertical-align:middle;"><!--[if !mso]><!--><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="{{primary}}" viewBox="0 0 256 256"><path d="M234.29,114.85l-45,38.83L203,211.75a16.4,16.4,0,0,1-24.5,17.82L128,198.49,77.47,229.57A16.4,16.4,0,0,1,53,211.75l13.76-58.07-45-38.83A16.46,16.46,0,0,1,31.08,86l59-4.76,22.76-55.08a16.36,16.36,0,0,1,30.27,0l22.75,55.08,59,4.76a16.46,16.46,0,0,1,9.37,28.86Z"></path></svg><!--<![endif]--></span><span style="display:inline-block;vertical-align:middle;"><!--[if !mso]><!--><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="{{primary}}" viewBox="0 0 256 256"><path d="M234.29,114.85l-45,38.83L203,211.75a16.4,16.4,0,0,1-24.5,17.82L128,198.49,77.47,229.57A16.4,16.4,0,0,1,53,211.75l13.76-58.07-45-38.83A16.46,16.46,0,0,1,31.08,86l59-4.76,22.76-55.08a16.36,16.36,0,0,1,30.27,0l22.75,55.08,59,4.76a16.46,16.46,0,0,1,9.37,28.86Z"></path></svg><!--<![endif]--></span>
         </mj-text>
         <mj-text align="right" color="{{mutedForeground}}" font-size="13px">
           شارع الكورنيش، أبوظبي، الإمارات العربية المتحدة
@@ -144,14 +144,14 @@
     <!-- Hotel image -->
     <mj-section background-color="{{card}}" padding="15px 25px">
       <mj-column>
-        <mj-image width="550px" height="200px" border-radius="8px" src="https://placehold.co/1100x400/E8E2D9/706258?text=Hotel+Photo" alt="Hotel photo" fluid-on-mobile="true" />
+        <mj-image width="550px" border-radius="8px" src="/examples/hotel/room-deluxe.jpg" alt="Al Qasr Beach Resort" fluid-on-mobile="true" />
       </mj-column>
     </mj-section>
 
     <mj-section background-color="{{card}}" padding="5px 25px 10px">
       <mj-column>
         <mj-text font-size="18px" font-weight="bold" align="left" color="{{foreground}}" padding-bottom="3px">
-          Al Qasr Beach Resort ⭐⭐⭐⭐⭐
+          Al Qasr Beach Resort <span style="display:inline-block;vertical-align:middle;"><!--[if !mso]><!--><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="{{primary}}" viewBox="0 0 256 256"><path d="M234.29,114.85l-45,38.83L203,211.75a16.4,16.4,0,0,1-24.5,17.82L128,198.49,77.47,229.57A16.4,16.4,0,0,1,53,211.75l13.76-58.07-45-38.83A16.46,16.46,0,0,1,31.08,86l59-4.76,22.76-55.08a16.36,16.36,0,0,1,30.27,0l22.75,55.08,59,4.76a16.46,16.46,0,0,1,9.37,28.86Z"></path></svg><!--<![endif]--></span><span style="display:inline-block;vertical-align:middle;"><!--[if !mso]><!--><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="{{primary}}" viewBox="0 0 256 256"><path d="M234.29,114.85l-45,38.83L203,211.75a16.4,16.4,0,0,1-24.5,17.82L128,198.49,77.47,229.57A16.4,16.4,0,0,1,53,211.75l13.76-58.07-45-38.83A16.46,16.46,0,0,1,31.08,86l59-4.76,22.76-55.08a16.36,16.36,0,0,1,30.27,0l22.75,55.08,59,4.76a16.46,16.46,0,0,1,9.37,28.86Z"></path></svg><!--<![endif]--></span><span style="display:inline-block;vertical-align:middle;"><!--[if !mso]><!--><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="{{primary}}" viewBox="0 0 256 256"><path d="M234.29,114.85l-45,38.83L203,211.75a16.4,16.4,0,0,1-24.5,17.82L128,198.49,77.47,229.57A16.4,16.4,0,0,1,53,211.75l13.76-58.07-45-38.83A16.46,16.46,0,0,1,31.08,86l59-4.76,22.76-55.08a16.36,16.36,0,0,1,30.27,0l22.75,55.08,59,4.76a16.46,16.46,0,0,1,9.37,28.86Z"></path></svg><!--<![endif]--></span><span style="display:inline-block;vertical-align:middle;"><!--[if !mso]><!--><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="{{primary}}" viewBox="0 0 256 256"><path d="M234.29,114.85l-45,38.83L203,211.75a16.4,16.4,0,0,1-24.5,17.82L128,198.49,77.47,229.57A16.4,16.4,0,0,1,53,211.75l13.76-58.07-45-38.83A16.46,16.46,0,0,1,31.08,86l59-4.76,22.76-55.08a16.36,16.36,0,0,1,30.27,0l22.75,55.08,59,4.76a16.46,16.46,0,0,1,9.37,28.86Z"></path></svg><!--<![endif]--></span><span style="display:inline-block;vertical-align:middle;"><!--[if !mso]><!--><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="{{primary}}" viewBox="0 0 256 256"><path d="M234.29,114.85l-45,38.83L203,211.75a16.4,16.4,0,0,1-24.5,17.82L128,198.49,77.47,229.57A16.4,16.4,0,0,1,53,211.75l13.76-58.07-45-38.83A16.46,16.46,0,0,1,31.08,86l59-4.76,22.76-55.08a16.36,16.36,0,0,1,30.27,0l22.75,55.08,59,4.76a16.46,16.46,0,0,1,9.37,28.86Z"></path></svg><!--<![endif]--></span>
         </mj-text>
         <mj-text align="left" color="{{mutedForeground}}" font-size="13px">
           Corniche Road, Abu Dhabi, United Arab Emirates

@@ -132,34 +132,51 @@ function parseCssBlock(blockContent, isRoot = false) {
 }
 
 /**
- * Parse styles/globals.css and extract all themes.
+ * Parse styles/globals.css and extract all themes (light + dark).
  * Returns Map<themeName, Map<tokenName, hexValue>>.
+ * Named themes include both "{theme}" (light) and "{theme}-dark" entries.
  */
 function parseThemesFromCss(cssPath) {
   const css = fs.readFileSync(cssPath, 'utf8')
   const themes = new Map()
 
-  // 1. Parse :root block for default theme
+  // 1. Parse :root block as base tokens (not a standalone theme)
   const rootMatch = css.match(/:root\s*\{([\s\S]*?)\n\}/)
-  const defaultTokens = rootMatch ? parseCssBlock(rootMatch[1], true) : {}
-  themes.set('default', { ...defaultTokens })
+  const baseLight = rootMatch ? parseCssBlock(rootMatch[1], true) : {}
 
-  // 2. Auto-discover .theme-X blocks (skip .dark variants)
-  const themeRegex = /\.theme-([\w-]+)\s*\{([\s\S]*?)\n\}/g
+  // 2. Parse .dark block as base dark overrides
+  const darkMatch = css.match(/\.dark\s*\{([\s\S]*?)\n\}/)
+  const baseDark = darkMatch ? parseCssBlock(darkMatch[1], true) : {}
+
+  // 3. Auto-discover .theme-X and .theme-X.dark blocks
+  const lightThemes = new Map()  // themeName → overrides
+  const darkThemes = new Map()   // themeName → dark overrides
+
+  const themeRegex = /\.theme-([\w-]+)(\.dark)?\s*\{([\s\S]*?)\n\}/g
   let themeMatch
   while ((themeMatch = themeRegex.exec(css)) !== null) {
     const themeName = themeMatch[1]
-    const blockContent = themeMatch[2]
+    const isDark = !!themeMatch[2]
+    const blockContent = themeMatch[3]
 
-    // Skip dark mode variants
-    if (css.substring(themeMatch.index - 10, themeMatch.index).includes('.dark')) continue
-    // Also check if the class itself contains .dark
-    const fullSelector = css.substring(themeMatch.index, themeMatch.index + themeMatch[0].indexOf('{'))
-    if (fullSelector.includes('.dark')) continue
+    const tokens = parseCssBlock(blockContent, false)
+    if (isDark) {
+      darkThemes.set(themeName, tokens)
+    } else {
+      lightThemes.set(themeName, tokens)
+    }
+  }
 
-    const themeTokens = parseCssBlock(blockContent, false)
-    // Merge with default (theme overrides only some tokens)
-    themes.set(themeName, { ...defaultTokens, ...themeTokens })
+  // 4. Build final theme maps: light and dark for each named theme
+  for (const [name, overrides] of lightThemes) {
+    // Light: base + theme overrides
+    themes.set(name, { ...baseLight, ...overrides })
+
+    // Dark: base + base dark + theme light overrides + theme dark overrides
+    // Theme overrides come LAST so they take precedence over base dark
+    // (e.g., cozy's orange primary is preserved even though base dark has indigo)
+    const darkOverrides = darkThemes.get(name) || {}
+    themes.set(`${name}-dark`, { ...baseLight, ...baseDark, ...overrides, ...darkOverrides })
   }
 
   return themes

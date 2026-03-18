@@ -24,8 +24,11 @@
 
     <mj-section background-color="{{card}}" padding="0 25px" direction="rtl">
       <mj-column background-color="{{background}}" border-radius="8px" padding="20px">
+        <mj-text align="right" padding-bottom="8px">
+          <!--[if !mso]><!--><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="{{primary}}" viewBox="0 0 256 256"><path d="M96,240l16-80L48,136,160,16,144,96l64,24Z" opacity="0.2"></path><path d="M215.79,118.17a8,8,0,0,0-5-5.66L153.18,90.9l14.66-73.33a8,8,0,0,0-13.69-7l-112,120a8,8,0,0,0,3,13l57.63,21.61L88.16,238.43a8,8,0,0,0,13.69,7l112-120A8,8,0,0,0,215.79,118.17ZM109.37,214l10.47-52.38a8,8,0,0,0-5-9.06L62,132.71l84.62-90.66L136.16,94.43a8,8,0,0,0,5,9.06l52.8,19.8Z"></path></svg><!--<![endif]-->
+        </mj-text>
         <mj-text font-size="18px" font-weight="bold" align="right" color="{{foreground}}" padding-bottom="8px">
-          ⚡ إعداد ملفك الشخصي
+          إعداد ملفك الشخصي
         </mj-text>
         <mj-text align="right" color="{{mutedForeground}}">
           أكمل ملفك الشخصي لتخصيص تجربتك والحصول على أفضل النتائج.
@@ -35,8 +38,11 @@
 
     <mj-section background-color="{{card}}" padding="10px 25px" direction="rtl">
       <mj-column background-color="{{background}}" border-radius="8px" padding="20px">
+        <mj-text align="right" padding-bottom="8px">
+          <!--[if !mso]><!--><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="{{primary}}" viewBox="0 0 256 256"><path d="M192,112a80,80,0,1,1-80-80A80,80,0,0,1,192,112Z" opacity="0.2"></path><path d="M229.66,218.34,179.6,168.28a88.21,88.21,0,1,0-11.32,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"></path></svg><!--<![endif]-->
+        </mj-text>
         <mj-text font-size="18px" font-weight="bold" align="right" color="{{foreground}}" padding-bottom="8px">
-          🔍 استكشاف الميزات
+          استكشاف الميزات
         </mj-text>
         <mj-text align="right" color="{{mutedForeground}}">
           تعرّف على جميع الأدوات والميزات المتاحة لك لتحقيق أقصى استفادة.
@@ -46,8 +52,11 @@
 
     <mj-section background-color="{{card}}" padding="10px 25px" direction="rtl">
       <mj-column background-color="{{background}}" border-radius="8px" padding="20px">
+        <mj-text align="right" padding-bottom="8px">
+          <!--[if !mso]><!--><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="{{primary}}" viewBox="0 0 256 256"><path d="M224,128A96,96,0,0,1,79.93,211.11h0L42.54,223.58a8,8,0,0,1-10.12-10.12l12.47-37.39h0A96,96,0,1,1,224,128Z" opacity="0.2"></path><path d="M128,24A104,104,0,0,0,36.18,176.88L24.83,210.93a16,16,0,0,0,20.24,20.24l34.05-11.35A104,104,0,1,0,128,24Zm0,192a87.87,87.87,0,0,1-44.06-11.81,8,8,0,0,0-6.54-.67L40,216,52.47,178.6a8,8,0,0,0-.66-6.54A88,88,0,1,1,128,216Z"></path></svg><!--<![endif]-->
+        </mj-text>
         <mj-text font-size="18px" font-weight="bold" align="right" color="{{foreground}}" padding-bottom="8px">
-          💬 انضم إلى المجتمع
+          انضم إلى المجتمع
         </mj-text>
         <mj-text align="right" color="{{mutedForeground}}">
           تواصل مع مستخدمين آخرين وشارك تجاربك واحصل على الدعم.
@@ -78,8 +87,11 @@
 
     <mj-section background-color="{{card}}" padding="0 25px">
       <mj-column background-color="{{background}}" border-radius="8px" padding="20px">
+        <mj-text align="left" padding-bottom="8px">
+          <!--[if !mso]><!--><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="{{primary}}" viewBox="0 0 256 256"><path d="M96,240l16-80L48,136,160,16,144,96l64,24Z" opacity="0.2"></path><path d="M215.79,118.17a8,8,0,0,0-5-5.66L153.18,90.9l14.66-73.33a8,8,0,0,0-13.69-7l-112,120a8,8,0,0,0,3,13l57.63,21.61L88.16,238.43a8,8,0,0,0,13.69,7l112-120A8,8,0,0,0,215.79,118.17ZM109.37,214l10.47-52.38a8,8,0,0,0-5-9.06L62,132.71l84.62-90.66L136.16,94.43a8,8,0,0,0,5,9.06l52.8,19.8Z"></path></svg><!--<![endif]-->
+        </mj-text>
         <mj-text font-size="18px" font-weight="bold" align="left" color="{{foreground}}" padding-bottom="8px">
-          ⚡ Set Up Your Profile
+          Set Up Your Profile
         </mj-text>
         <mj-text align="left" color="{{mutedForeground}}">
           Complete your profile to personalize your experience and get the best results.
@@ -89,8 +101,11 @@
 
     <mj-section background-color="{{card}}" padding="10px 25px">
       <mj-column background-color="{{background}}" border-radius="8px" padding="20px">
+        <mj-text align="left" padding-bottom="8px">
+          <!--[if !mso]><!--><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="{{primary}}" viewBox="0 0 256 256"><path d="M192,112a80,80,0,1,1-80-80A80,80,0,0,1,192,112Z" opacity="0.2"></path><path d="M229.66,218.34,179.6,168.28a88.21,88.21,0,1,0-11.32,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"></path></svg><!--<![endif]-->
+        </mj-text>
         <mj-text font-size="18px" font-weight="bold" align="left" color="{{foreground}}" padding-bottom="8px">
-          🔍 Explore Features
+          Explore Features
         </mj-text>
         <mj-text align="left" color="{{mutedForeground}}">
           Discover all the tools and features available to you to make the most of your experience.
@@ -100,8 +115,11 @@
 
     <mj-section background-color="{{card}}" padding="10px 25px">
       <mj-column background-color="{{background}}" border-radius="8px" padding="20px">
+        <mj-text align="left" padding-bottom="8px">
+          <!--[if !mso]><!--><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="{{primary}}" viewBox="0 0 256 256"><path d="M224,128A96,96,0,0,1,79.93,211.11h0L42.54,223.58a8,8,0,0,1-10.12-10.12l12.47-37.39h0A96,96,0,1,1,224,128Z" opacity="0.2"></path><path d="M128,24A104,104,0,0,0,36.18,176.88L24.83,210.93a16,16,0,0,0,20.24,20.24l34.05-11.35A104,104,0,1,0,128,24Zm0,192a87.87,87.87,0,0,1-44.06-11.81,8,8,0,0,0-6.54-.67L40,216,52.47,178.6a8,8,0,0,0-.66-6.54A88,88,0,1,1,128,216Z"></path></svg><!--<![endif]-->
+        </mj-text>
         <mj-text font-size="18px" font-weight="bold" align="left" color="{{foreground}}" padding-bottom="8px">
-          💬 Join the Community
+          Join the Community
         </mj-text>
         <mj-text align="left" color="{{mutedForeground}}">
           Connect with other users, share your experiences, and get support when you need it.

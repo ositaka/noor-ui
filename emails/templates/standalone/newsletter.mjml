@@ -25,7 +25,9 @@
     <!-- Hero -->
     <mj-section background-color="{{card}}" padding="15px 25px" direction="rtl">
       <mj-column>
-        <mj-image width="550px" height="220px" border-radius="8px" src="https://placehold.co/1100x440/E07B39/FFFFFF?text=Hero+Image" alt="صورة رئيسية" fluid-on-mobile="true" />
+        <mj-text padding="0">
+          <div style="width:100%;height:220px;border-radius:8px;background-color:{{primary}};display:flex;align-items:center;justify-content:center;"><!--[if !mso]><!--><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="{{primaryForeground}}" viewBox="0 0 256 256"><path d="M224,56V178.06l-39.72-39.72a8,8,0,0,0-11.31,0L147.31,164,97.66,114.34a8,8,0,0,0-11.32,0L32,168.69V56a8,8,0,0,1,8-8H216A8,8,0,0,1,224,56Z" opacity="0.2"></path><path d="M216,40H40A16,16,0,0,0,24,56V200a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A16,16,0,0,0,216,40Zm0,16V158.75l-26.07-26.06a16,16,0,0,0-22.63,0l-20,20-44-44a16,16,0,0,0-22.62,0L40,149.37V56ZM40,172l52-52,80,80H40Zm176,28H194.63l-36-36,20-20L216,181.38V200ZM144,100a12,12,0,1,1,12,12A12,12,0,0,1,144,100Z"></path></svg><!--<![endif]--></div>
+        </mj-text>
       </mj-column>
     </mj-section>
 
@@ -47,7 +49,9 @@
     <!-- 2-column articles -->
     <mj-section background-color="{{card}}" padding="15px 25px" direction="rtl">
       <mj-column background-color="{{background}}" border-radius="8px" padding="15px">
-        <mj-image width="240px" height="120px" border-radius="6px" src="https://placehold.co/480x240/E8E2D9/706258?text=Article+1" alt="مقال" fluid-on-mobile="true" />
+        <mj-text padding="0">
+          <div style="width:100%;height:120px;border-radius:6px;background-color:{{background}};display:flex;align-items:center;justify-content:center;"><!--[if !mso]><!--><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="{{mutedForeground}}" viewBox="0 0 256 256"><path d="M224,56V178.06l-39.72-39.72a8,8,0,0,0-11.31,0L147.31,164,97.66,114.34a8,8,0,0,0-11.32,0L32,168.69V56a8,8,0,0,1,8-8H216A8,8,0,0,1,224,56Z" opacity="0.2"></path><path d="M216,40H40A16,16,0,0,0,24,56V200a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A16,16,0,0,0,216,40Zm0,16V158.75l-26.07-26.06a16,16,0,0,0-22.63,0l-20,20-44-44a16,16,0,0,0-22.62,0L40,149.37V56ZM40,172l52-52,80,80H40Zm176,28H194.63l-36-36,20-20L216,181.38V200ZM144,100a12,12,0,1,1,12,12A12,12,0,0,1,144,100Z"></path></svg><!--<![endif]--></div>
+        </mj-text>
         <mj-text font-size="15px" font-weight="bold" align="right" color="{{foreground}}" padding-top="10px" padding-bottom="5px">
           أدوات التصميم للمطورين
         </mj-text>
@@ -56,7 +60,9 @@
         </mj-text>
       </mj-column>
       <mj-column background-color="{{background}}" border-radius="8px" padding="15px">
-        <mj-image width="240px" height="120px" border-radius="6px" src="https://placehold.co/480x240/E8E2D9/706258?text=Article+2" alt="مقال" fluid-on-mobile="true" />
+        <mj-text padding="0">
+          <div style="width:100%;height:120px;border-radius:6px;background-color:{{background}};display:flex;align-items:center;justify-content:center;"><!--[if !mso]><!--><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="{{mutedForeground}}" viewBox="0 0 256 256"><path d="M224,56V178.06l-39.72-39.72a8,8,0,0,0-11.31,0L147.31,164,97.66,114.34a8,8,0,0,0-11.32,0L32,168.69V56a8,8,0,0,1,8-8H216A8,8,0,0,1,224,56Z" opacity="0.2"></path><path d="M216,40H40A16,16,0,0,0,24,56V200a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A16,16,0,0,0,216,40Zm0,16V158.75l-26.07-26.06a16,16,0,0,0-22.63,0l-20,20-44-44a16,16,0,0,0-22.62,0L40,149.37V56ZM40,172l52-52,80,80H40Zm176,28H194.63l-36-36,20-20L216,181.38V200ZM144,100a12,12,0,1,1,12,12A12,12,0,0,1,144,100Z"></path></svg><!--<![endif]--></div>
+        </mj-text>
         <mj-text font-size="15px" font-weight="bold" align="right" color="{{foreground}}" padding-top="10px" padding-bottom="5px">
           نصائح لتحسين الأداء
         </mj-text>
@@ -90,7 +96,9 @@
     <!-- Hero -->
     <mj-section background-color="{{card}}" padding="15px 25px">
       <mj-column>
-        <mj-image width="550px" height="220px" border-radius="8px" src="https://placehold.co/1100x440/E07B39/FFFFFF?text=Hero+Image" alt="Hero image" fluid-on-mobile="true" />
+        <mj-text padding="0">
+          <div style="width:100%;height:220px;border-radius:8px;background-color:{{primary}};display:flex;align-items:center;justify-content:center;"><!--[if !mso]><!--><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="{{primaryForeground}}" viewBox="0 0 256 256"><path d="M224,56V178.06l-39.72-39.72a8,8,0,0,0-11.31,0L147.31,164,97.66,114.34a8,8,0,0,0-11.32,0L32,168.69V56a8,8,0,0,1,8-8H216A8,8,0,0,1,224,56Z" opacity="0.2"></path><path d="M216,40H40A16,16,0,0,0,24,56V200a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A16,16,0,0,0,216,40Zm0,16V158.75l-26.07-26.06a16,16,0,0,0-22.63,0l-20,20-44-44a16,16,0,0,0-22.62,0L40,149.37V56ZM40,172l52-52,80,80H40Zm176,28H194.63l-36-36,20-20L216,181.38V200ZM144,100a12,12,0,1,1,12,12A12,12,0,0,1,144,100Z"></path></svg><!--<![endif]--></div>
+        </mj-text>
       </mj-column>
     </mj-section>
 
@@ -112,7 +120,9 @@
     <!-- 2-column articles -->
     <mj-section background-color="{{card}}" padding="15px 25px">
       <mj-column background-color="{{background}}" border-radius="8px" padding="15px">
-        <mj-image width="240px" height="120px" border-radius="6px" src="https://placehold.co/480x240/E8E2D9/706258?text=Article+1" alt="Article" fluid-on-mobile="true" />
+        <mj-text padding="0">
+          <div style="width:100%;height:120px;border-radius:6px;background-color:{{background}};display:flex;align-items:center;justify-content:center;"><!--[if !mso]><!--><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="{{mutedForeground}}" viewBox="0 0 256 256"><path d="M224,56V178.06l-39.72-39.72a8,8,0,0,0-11.31,0L147.31,164,97.66,114.34a8,8,0,0,0-11.32,0L32,168.69V56a8,8,0,0,1,8-8H216A8,8,0,0,1,224,56Z" opacity="0.2"></path><path d="M216,40H40A16,16,0,0,0,24,56V200a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A16,16,0,0,0,216,40Zm0,16V158.75l-26.07-26.06a16,16,0,0,0-22.63,0l-20,20-44-44a16,16,0,0,0-22.62,0L40,149.37V56ZM40,172l52-52,80,80H40Zm176,28H194.63l-36-36,20-20L216,181.38V200ZM144,100a12,12,0,1,1,12,12A12,12,0,0,1,144,100Z"></path></svg><!--<![endif]--></div>
+        </mj-text>
         <mj-text font-size="15px" font-weight="bold" align="left" color="{{foreground}}" padding-top="10px" padding-bottom="5px">
           Design Tools for Developers
         </mj-text>
@@ -121,7 +131,9 @@
         </mj-text>
       </mj-column>
       <mj-column background-color="{{background}}" border-radius="8px" padding="15px">
-        <mj-image width="240px" height="120px" border-radius="6px" src="https://placehold.co/480x240/E8E2D9/706258?text=Article+2" alt="Article" fluid-on-mobile="true" />
+        <mj-text padding="0">
+          <div style="width:100%;height:120px;border-radius:6px;background-color:{{background}};display:flex;align-items:center;justify-content:center;"><!--[if !mso]><!--><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="{{mutedForeground}}" viewBox="0 0 256 256"><path d="M224,56V178.06l-39.72-39.72a8,8,0,0,0-11.31,0L147.31,164,97.66,114.34a8,8,0,0,0-11.32,0L32,168.69V56a8,8,0,0,1,8-8H216A8,8,0,0,1,224,56Z" opacity="0.2"></path><path d="M216,40H40A16,16,0,0,0,24,56V200a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A16,16,0,0,0,216,40Zm0,16V158.75l-26.07-26.06a16,16,0,0,0-22.63,0l-20,20-44-44a16,16,0,0,0-22.62,0L40,149.37V56ZM40,172l52-52,80,80H40Zm176,28H194.63l-36-36,20-20L216,181.38V200ZM144,100a12,12,0,1,1,12,12A12,12,0,0,1,144,100Z"></path></svg><!--<![endif]--></div>
+        </mj-text>
         <mj-text font-size="15px" font-weight="bold" align="left" color="{{foreground}}" padding-top="10px" padding-bottom="5px">
           Performance Optimization Tips
         </mj-text>
