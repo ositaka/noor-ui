@@ -1,0 +1,124 @@
+<!-- @brand: Your Company | شركتك -->
+<mjml>
+  <mj-head>
+    <mj-attributes>
+      <mj-all font-family="Tahoma, Arial, sans-serif" />
+      <mj-text font-size="14px" color="{{foreground}}" line-height="1.6" />
+    </mj-attributes>
+  </mj-head>
+  <mj-body background-color="{{background}}" width="600px">
+
+    <mj-include path="../../partials/header.mjml" />
+
+    <!-- @ar -->
+    <mj-section background-color="{{card}}" padding="30px 25px 10px" direction="rtl">
+      <mj-column>
+        <mj-text font-size="24px" font-weight="bold" align="right" color="{{foreground}}" padding-bottom="10px">
+          مرحبًا بك، أحمد! 👋
+        </mj-text>
+        <mj-text align="right" color="{{mutedForeground}}" padding-bottom="20px">
+          يسعدنا انضمامك إلينا. إليك بعض الخطوات لمساعدتك على البدء.
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <mj-section background-color="{{card}}" padding="0 25px" direction="rtl">
+      <mj-column background-color="{{background}}" border-radius="8px" padding="20px">
+        <mj-text font-size="18px" font-weight="bold" align="right" color="{{foreground}}" padding-bottom="8px">
+          ⚡ إعداد ملفك الشخصي
+        </mj-text>
+        <mj-text align="right" color="{{mutedForeground}}">
+          أكمل ملفك الشخصي لتخصيص تجربتك والحصول على أفضل النتائج.
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <mj-section background-color="{{card}}" padding="10px 25px" direction="rtl">
+      <mj-column background-color="{{background}}" border-radius="8px" padding="20px">
+        <mj-text font-size="18px" font-weight="bold" align="right" color="{{foreground}}" padding-bottom="8px">
+          🔍 استكشاف الميزات
+        </mj-text>
+        <mj-text align="right" color="{{mutedForeground}}">
+          تعرّف على جميع الأدوات والميزات المتاحة لك لتحقيق أقصى استفادة.
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <mj-section background-color="{{card}}" padding="10px 25px" direction="rtl">
+      <mj-column background-color="{{background}}" border-radius="8px" padding="20px">
+        <mj-text font-size="18px" font-weight="bold" align="right" color="{{foreground}}" padding-bottom="8px">
+          💬 انضم إلى المجتمع
+        </mj-text>
+        <mj-text align="right" color="{{mutedForeground}}">
+          تواصل مع مستخدمين آخرين وشارك تجاربك واحصل على الدعم.
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <mj-section background-color="{{card}}" padding="20px 25px 30px" direction="rtl">
+      <mj-column>
+        <mj-button background-color="{{primary}}" color="{{primaryForeground}}" font-family="Tahoma, Arial, sans-serif" font-size="16px" font-weight="bold" border-radius="8px" inner-padding="14px 30px" align="right" href="#">
+          ابدأ الآن
+        </mj-button>
+      </mj-column>
+    </mj-section>
+    <!-- /@ar -->
+
+    <!-- @en -->
+    <mj-section background-color="{{card}}" padding="30px 25px 10px">
+      <mj-column>
+        <mj-text font-size="24px" font-weight="bold" align="left" color="{{foreground}}" padding-bottom="10px">
+          Welcome, Ahmed! 👋
+        </mj-text>
+        <mj-text align="left" color="{{mutedForeground}}" padding-bottom="20px">
+          We're thrilled to have you on board. Here are a few steps to help you get started.
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <mj-section background-color="{{card}}" padding="0 25px">
+      <mj-column background-color="{{background}}" border-radius="8px" padding="20px">
+        <mj-text font-size="18px" font-weight="bold" align="left" color="{{foreground}}" padding-bottom="8px">
+          ⚡ Set Up Your Profile
+        </mj-text>
+        <mj-text align="left" color="{{mutedForeground}}">
+          Complete your profile to personalize your experience and get the best results.
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <mj-section background-color="{{card}}" padding="10px 25px">
+      <mj-column background-color="{{background}}" border-radius="8px" padding="20px">
+        <mj-text font-size="18px" font-weight="bold" align="left" color="{{foreground}}" padding-bottom="8px">
+          🔍 Explore Features
+        </mj-text>
+        <mj-text align="left" color="{{mutedForeground}}">
+          Discover all the tools and features available to you to make the most of your experience.
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <mj-section background-color="{{card}}" padding="10px 25px">
+      <mj-column background-color="{{background}}" border-radius="8px" padding="20px">
+        <mj-text font-size="18px" font-weight="bold" align="left" color="{{foreground}}" padding-bottom="8px">
+          💬 Join the Community
+        </mj-text>
+        <mj-text align="left" color="{{mutedForeground}}">
+          Connect with other users, share your experiences, and get support when you need it.
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <mj-section background-color="{{card}}" padding="20px 25px 30px">
+      <mj-column>
+        <mj-button background-color="{{primary}}" color="{{primaryForeground}}" font-family="Tahoma, Arial, sans-serif" font-size="16px" font-weight="bold" border-radius="8px" inner-padding="14px 30px" align="left" href="#">
+          Get Started
+        </mj-button>
+      </mj-column>
+    </mj-section>
+    <!-- /@en -->
+
+    <mj-include path="../../partials/footer.mjml" />
+
+  </mj-body>
+</mjml>

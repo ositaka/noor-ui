@@ -1,0 +1,146 @@
+<!-- @brand: Your Company | شركتك -->
+<mjml>
+  <mj-head>
+    <mj-attributes>
+      <mj-all font-family="Tahoma, Arial, sans-serif" />
+      <mj-text font-size="14px" color="{{foreground}}" line-height="1.6" />
+    </mj-attributes>
+  </mj-head>
+  <mj-body background-color="{{background}}" width="600px">
+
+    <mj-include path="../../partials/header.mjml" />
+
+    <!-- @ar -->
+    <mj-section background-color="{{card}}" padding="25px 25px 10px" direction="rtl">
+      <mj-column>
+        <mj-text align="right" color="{{mutedForeground}}" font-size="12px" font-weight="bold" padding-bottom="5px">
+          النشرة الإخبارية · العدد #24
+        </mj-text>
+        <mj-text font-size="22px" font-weight="bold" align="right" color="{{foreground}}">
+          أحدث الأخبار والتحديثات
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Hero -->
+    <mj-section background-color="{{card}}" padding="15px 25px" direction="rtl">
+      <mj-column>
+        <mj-image width="550px" height="220px" border-radius="8px" src="https://placehold.co/1100x440/E07B39/FFFFFF?text=Hero+Image" alt="صورة رئيسية" fluid-on-mobile="true" />
+      </mj-column>
+    </mj-section>
+
+    <!-- Featured article -->
+    <mj-section background-color="{{card}}" padding="10px 25px" direction="rtl">
+      <mj-column>
+        <mj-text font-size="18px" font-weight="bold" align="right" color="{{foreground}}" padding-bottom="8px">
+          كيف تبني تجربة مستخدم ثنائية اللغة احترافية
+        </mj-text>
+        <mj-text align="right" color="{{mutedForeground}}" padding-bottom="10px">
+          دليل شامل حول أفضل الممارسات لتصميم واجهات تدعم العربية والإنجليزية بسلاسة. تعلّم كيفية التعامل مع تحديات RTL والتخطيط ثنائي الاتجاه.
+        </mj-text>
+        <mj-text align="right">
+          <a href="#" style="color: {{primary}}; font-weight: bold; text-decoration: none;">اقرأ المزيد ←</a>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- 2-column articles -->
+    <mj-section background-color="{{card}}" padding="15px 25px" direction="rtl">
+      <mj-column background-color="{{background}}" border-radius="8px" padding="15px">
+        <mj-image width="240px" height="120px" border-radius="6px" src="https://placehold.co/480x240/E8E2D9/706258?text=Article+1" alt="مقال" fluid-on-mobile="true" />
+        <mj-text font-size="15px" font-weight="bold" align="right" color="{{foreground}}" padding-top="10px" padding-bottom="5px">
+          أدوات التصميم للمطورين
+        </mj-text>
+        <mj-text align="right" color="{{mutedForeground}}" font-size="13px">
+          أحدث الأدوات والإضافات التي تسهّل عملية التطوير وتحسّن الإنتاجية.
+        </mj-text>
+      </mj-column>
+      <mj-column background-color="{{background}}" border-radius="8px" padding="15px">
+        <mj-image width="240px" height="120px" border-radius="6px" src="https://placehold.co/480x240/E8E2D9/706258?text=Article+2" alt="مقال" fluid-on-mobile="true" />
+        <mj-text font-size="15px" font-weight="bold" align="right" color="{{foreground}}" padding-top="10px" padding-bottom="5px">
+          نصائح لتحسين الأداء
+        </mj-text>
+        <mj-text align="right" color="{{mutedForeground}}" font-size="13px">
+          استراتيجيات مجربة لتسريع تطبيقات الويب وتحسين تجربة المستخدم.
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <mj-section background-color="{{card}}" padding="15px 25px 30px" direction="rtl">
+      <mj-column>
+        <mj-button background-color="{{primary}}" color="{{primaryForeground}}" font-family="Tahoma, Arial, sans-serif" font-size="14px" font-weight="bold" border-radius="8px" inner-padding="12px 30px" align="center" href="#">
+          زيارة المدونة
+        </mj-button>
+      </mj-column>
+    </mj-section>
+    <!-- /@ar -->
+
+    <!-- @en -->
+    <mj-section background-color="{{card}}" padding="25px 25px 10px">
+      <mj-column>
+        <mj-text align="left" color="{{mutedForeground}}" font-size="12px" font-weight="bold" padding-bottom="5px">
+          NEWSLETTER · ISSUE #24
+        </mj-text>
+        <mj-text font-size="22px" font-weight="bold" align="left" color="{{foreground}}">
+          Latest News &amp; Updates
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Hero -->
+    <mj-section background-color="{{card}}" padding="15px 25px">
+      <mj-column>
+        <mj-image width="550px" height="220px" border-radius="8px" src="https://placehold.co/1100x440/E07B39/FFFFFF?text=Hero+Image" alt="Hero image" fluid-on-mobile="true" />
+      </mj-column>
+    </mj-section>
+
+    <!-- Featured article -->
+    <mj-section background-color="{{card}}" padding="10px 25px">
+      <mj-column>
+        <mj-text font-size="18px" font-weight="bold" align="left" color="{{foreground}}" padding-bottom="8px">
+          Building Professional Bilingual User Experiences
+        </mj-text>
+        <mj-text align="left" color="{{mutedForeground}}" padding-bottom="10px">
+          A comprehensive guide on best practices for designing interfaces that seamlessly support Arabic and English. Learn how to handle RTL challenges and bidirectional layouts.
+        </mj-text>
+        <mj-text align="left">
+          <a href="#" style="color: {{primary}}; font-weight: bold; text-decoration: none;">Read More &rarr;</a>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- 2-column articles -->
+    <mj-section background-color="{{card}}" padding="15px 25px">
+      <mj-column background-color="{{background}}" border-radius="8px" padding="15px">
+        <mj-image width="240px" height="120px" border-radius="6px" src="https://placehold.co/480x240/E8E2D9/706258?text=Article+1" alt="Article" fluid-on-mobile="true" />
+        <mj-text font-size="15px" font-weight="bold" align="left" color="{{foreground}}" padding-top="10px" padding-bottom="5px">
+          Design Tools for Developers
+        </mj-text>
+        <mj-text align="left" color="{{mutedForeground}}" font-size="13px">
+          The latest tools and plugins that streamline development and boost productivity.
+        </mj-text>
+      </mj-column>
+      <mj-column background-color="{{background}}" border-radius="8px" padding="15px">
+        <mj-image width="240px" height="120px" border-radius="6px" src="https://placehold.co/480x240/E8E2D9/706258?text=Article+2" alt="Article" fluid-on-mobile="true" />
+        <mj-text font-size="15px" font-weight="bold" align="left" color="{{foreground}}" padding-top="10px" padding-bottom="5px">
+          Performance Optimization Tips
+        </mj-text>
+        <mj-text align="left" color="{{mutedForeground}}" font-size="13px">
+          Proven strategies for speeding up web apps and improving user experience.
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <mj-section background-color="{{card}}" padding="15px 25px 30px">
+      <mj-column>
+        <mj-button background-color="{{primary}}" color="{{primaryForeground}}" font-family="Tahoma, Arial, sans-serif" font-size="14px" font-weight="bold" border-radius="8px" inner-padding="12px 30px" align="center" href="#">
+          Visit Our Blog
+        </mj-button>
+      </mj-column>
+    </mj-section>
+    <!-- /@en -->
+
+    <mj-include path="../../partials/footer.mjml" />
+
+  </mj-body>
+</mjml>

@@ -1,0 +1,164 @@
+<!-- @brand: Al Noor Medical Center | مركز النور الطبي -->
+<mjml>
+  <mj-head>
+    <mj-attributes>
+      <mj-all font-family="Tahoma, Arial, sans-serif" />
+      <mj-text font-size="14px" color="{{foreground}}" line-height="1.6" />
+    </mj-attributes>
+  </mj-head>
+  <mj-body background-color="{{background}}" width="600px">
+
+    <mj-include path="../../partials/header.mjml" />
+
+    <!-- @ar -->
+    <mj-section background-color="{{card}}" padding="30px 25px 10px" direction="rtl">
+      <mj-column>
+        <mj-text font-size="22px" font-weight="bold" align="right" color="{{foreground}}" padding-bottom="5px">
+          تذكير بالموعد
+        </mj-text>
+        <mj-text align="right" color="{{primary}}" font-size="15px" font-weight="bold">
+          موعدك غدًا
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Appointment details -->
+    <mj-section background-color="{{card}}" padding="15px 25px" direction="rtl">
+      <mj-column background-color="{{background}}" border-radius="8px" padding="20px">
+        <mj-table font-size="14px" color="{{foreground}}" cellpadding="5">
+          <tr>
+            <td style="text-align: right; font-weight: bold; padding: 8px; width: 100px; vertical-align: top;">📅 التاريخ</td>
+            <td style="text-align: right; padding: 8px;">19 مارس 2026 (الخميس)</td>
+          </tr>
+          <tr style="border-top: 1px solid {{border}};">
+            <td style="text-align: right; font-weight: bold; padding: 8px; vertical-align: top;">🕐 الوقت</td>
+            <td style="text-align: right; padding: 8px;">10:30 ص</td>
+          </tr>
+          <tr style="border-top: 1px solid {{border}};">
+            <td style="text-align: right; font-weight: bold; padding: 8px; vertical-align: top;">👨‍⚕️ الطبيب</td>
+            <td style="text-align: right; padding: 8px;">د. أحمد الراشدي<br/><span style="color: {{mutedForeground}}; font-size: 12px;">أخصائي الطب الباطني</span></td>
+          </tr>
+          <tr style="border-top: 1px solid {{border}};">
+            <td style="text-align: right; font-weight: bold; padding: 8px; vertical-align: top;">📍 الموقع</td>
+            <td style="text-align: right; padding: 8px;">مركز النور الطبي<br/><span style="color: {{mutedForeground}}; font-size: 12px;">الطابق 3، عيادة 312</span></td>
+          </tr>
+        </mj-table>
+      </mj-column>
+    </mj-section>
+
+    <!-- Preparation -->
+    <mj-section background-color="{{card}}" padding="10px 25px" direction="rtl">
+      <mj-column>
+        <mj-text font-size="15px" font-weight="bold" align="right" color="{{foreground}}" padding-bottom="8px">
+          تعليمات التحضير
+        </mj-text>
+        <mj-text align="right" color="{{mutedForeground}}" font-size="13px" line-height="1.8">
+          • الصيام لمدة 8 ساعات قبل الموعد (ماء فقط)<br/>
+          • إحضار بطاقة الهوية الإماراتية أو جواز السفر<br/>
+          • إحضار بطاقة التأمين الصحي<br/>
+          • إحضار نتائج الفحوصات السابقة (إن وجدت)<br/>
+          • الحضور قبل الموعد بـ 15 دقيقة
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <mj-section background-color="{{card}}" padding="15px 25px" direction="rtl">
+      <mj-column>
+        <mj-button background-color="{{primary}}" color="{{primaryForeground}}" font-family="Tahoma, Arial, sans-serif" font-size="14px" font-weight="bold" border-radius="8px" inner-padding="12px 30px" align="right" href="#">
+          تأكيد الموعد
+        </mj-button>
+      </mj-column>
+      <mj-column>
+        <mj-button background-color="transparent" color="{{primary}}" font-family="Tahoma, Arial, sans-serif" font-size="14px" border="2px solid {{primary}}" border-radius="8px" inner-padding="10px 24px" align="right" href="#">
+          إعادة الجدولة
+        </mj-button>
+      </mj-column>
+    </mj-section>
+
+    <mj-section background-color="{{card}}" padding="5px 25px 30px" direction="rtl">
+      <mj-column>
+        <mj-text align="center" color="{{mutedForeground}}" font-size="12px">
+          <a href="#" style="color: {{destructive}}; text-decoration: underline;">إلغاء الموعد</a>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <!-- /@ar -->
+
+    <!-- @en -->
+    <mj-section background-color="{{card}}" padding="30px 25px 10px">
+      <mj-column>
+        <mj-text font-size="22px" font-weight="bold" align="left" color="{{foreground}}" padding-bottom="5px">
+          Appointment Reminder
+        </mj-text>
+        <mj-text align="left" color="{{primary}}" font-size="15px" font-weight="bold">
+          Your appointment is tomorrow
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Appointment details -->
+    <mj-section background-color="{{card}}" padding="15px 25px">
+      <mj-column background-color="{{background}}" border-radius="8px" padding="20px">
+        <mj-table font-size="14px" color="{{foreground}}" cellpadding="5">
+          <tr>
+            <td style="font-weight: bold; padding: 8px; width: 100px; vertical-align: top;">📅 Date</td>
+            <td style="padding: 8px;">March 19, 2026 (Thursday)</td>
+          </tr>
+          <tr style="border-top: 1px solid {{border}};">
+            <td style="font-weight: bold; padding: 8px; vertical-align: top;">🕐 Time</td>
+            <td style="padding: 8px;">10:30 AM</td>
+          </tr>
+          <tr style="border-top: 1px solid {{border}};">
+            <td style="font-weight: bold; padding: 8px; vertical-align: top;">👨‍⚕️ Doctor</td>
+            <td style="padding: 8px;">Dr. Ahmed Al Rashedi<br/><span style="color: {{mutedForeground}}; font-size: 12px;">Internal Medicine Specialist</span></td>
+          </tr>
+          <tr style="border-top: 1px solid {{border}};">
+            <td style="font-weight: bold; padding: 8px; vertical-align: top;">📍 Location</td>
+            <td style="padding: 8px;">Al Noor Medical Center<br/><span style="color: {{mutedForeground}}; font-size: 12px;">Floor 3, Clinic 312</span></td>
+          </tr>
+        </mj-table>
+      </mj-column>
+    </mj-section>
+
+    <!-- Preparation -->
+    <mj-section background-color="{{card}}" padding="10px 25px">
+      <mj-column>
+        <mj-text font-size="15px" font-weight="bold" align="left" color="{{foreground}}" padding-bottom="8px">
+          Preparation Instructions
+        </mj-text>
+        <mj-text align="left" color="{{mutedForeground}}" font-size="13px" line-height="1.8">
+          • Fast for 8 hours before the appointment (water only)<br/>
+          • Bring your Emirates ID or passport<br/>
+          • Bring your health insurance card<br/>
+          • Bring previous test results (if any)<br/>
+          • Arrive 15 minutes before your appointment
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <mj-section background-color="{{card}}" padding="15px 25px">
+      <mj-column>
+        <mj-button background-color="{{primary}}" color="{{primaryForeground}}" font-family="Tahoma, Arial, sans-serif" font-size="14px" font-weight="bold" border-radius="8px" inner-padding="12px 30px" align="left" href="#">
+          Confirm Appointment
+        </mj-button>
+      </mj-column>
+      <mj-column>
+        <mj-button background-color="transparent" color="{{primary}}" font-family="Tahoma, Arial, sans-serif" font-size="14px" border="2px solid {{primary}}" border-radius="8px" inner-padding="10px 24px" align="left" href="#">
+          Reschedule
+        </mj-button>
+      </mj-column>
+    </mj-section>
+
+    <mj-section background-color="{{card}}" padding="5px 25px 30px">
+      <mj-column>
+        <mj-text align="center" color="{{mutedForeground}}" font-size="12px">
+          <a href="#" style="color: {{destructive}}; text-decoration: underline;">Cancel Appointment</a>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <!-- /@en -->
+
+    <mj-include path="../../partials/footer.mjml" />
+
+  </mj-body>
+</mjml>

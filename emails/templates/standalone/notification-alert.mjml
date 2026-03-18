@@ -1,0 +1,99 @@
+<!-- @brand: Your Company | شركتك -->
+<mjml>
+  <mj-head>
+    <mj-attributes>
+      <mj-all font-family="Tahoma, Arial, sans-serif" />
+      <mj-text font-size="14px" color="{{foreground}}" line-height="1.6" />
+    </mj-attributes>
+  </mj-head>
+  <mj-body background-color="{{background}}" width="600px">
+
+    <mj-include path="../../partials/header.mjml" />
+
+    <!-- Success color stripe -->
+    <mj-section background-color="{{success}}" padding="0">
+      <mj-column>
+        <mj-spacer height="6px" />
+      </mj-column>
+    </mj-section>
+
+    <!-- @ar -->
+    <mj-section background-color="{{card}}" padding="25px 25px 10px" direction="rtl">
+      <mj-column width="60px" vertical-align="top">
+        <mj-text font-size="28px" align="center" padding="0">
+          ✅
+        </mj-text>
+      </mj-column>
+      <mj-column vertical-align="top">
+        <mj-text font-size="18px" font-weight="bold" align="right" color="{{foreground}}" padding-bottom="8px">
+          تمت العملية بنجاح
+        </mj-text>
+        <mj-text align="right" color="{{mutedForeground}}">
+          تم تحديث إعدادات حسابك بنجاح. ستصبح التغييرات سارية المفعول فورًا.
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <mj-section background-color="{{card}}" padding="15px 25px" direction="rtl">
+      <mj-column>
+        <mj-button background-color="{{primary}}" color="{{primaryForeground}}" font-family="Tahoma, Arial, sans-serif" font-size="14px" font-weight="bold" border-radius="8px" inner-padding="12px 24px" align="right" href="#">
+          عرض التفاصيل
+        </mj-button>
+      </mj-column>
+    </mj-section>
+
+    <mj-section background-color="{{card}}" padding="0 25px 20px" direction="rtl">
+      <mj-column>
+        <mj-text align="right" color="{{mutedForeground}}" font-size="12px">
+          18 مارس 2026، 02:30 م (توقيت الخليج)
+        </mj-text>
+        <mj-divider border-color="{{border}}" border-width="1px" padding="15px 0 10px 0" />
+        <mj-text align="right" color="{{mutedForeground}}" font-size="12px">
+          <a href="#" style="color: {{mutedForeground}}; text-decoration: underline;">إدارة تفضيلات الإشعارات</a>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <!-- /@ar -->
+
+    <!-- @en -->
+    <mj-section background-color="{{card}}" padding="25px 25px 10px">
+      <mj-column width="60px" vertical-align="top">
+        <mj-text font-size="28px" align="center" padding="0">
+          ✅
+        </mj-text>
+      </mj-column>
+      <mj-column vertical-align="top">
+        <mj-text font-size="18px" font-weight="bold" align="left" color="{{foreground}}" padding-bottom="8px">
+          Action Completed Successfully
+        </mj-text>
+        <mj-text align="left" color="{{mutedForeground}}">
+          Your account settings have been updated successfully. The changes will take effect immediately.
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <mj-section background-color="{{card}}" padding="15px 25px">
+      <mj-column>
+        <mj-button background-color="{{primary}}" color="{{primaryForeground}}" font-family="Tahoma, Arial, sans-serif" font-size="14px" font-weight="bold" border-radius="8px" inner-padding="12px 24px" align="left" href="#">
+          View Details
+        </mj-button>
+      </mj-column>
+    </mj-section>
+
+    <mj-section background-color="{{card}}" padding="0 25px 20px">
+      <mj-column>
+        <mj-text align="left" color="{{mutedForeground}}" font-size="12px">
+          March 18, 2026, 2:30 PM (GST)
+        </mj-text>
+        <mj-divider border-color="{{border}}" border-width="1px" padding="15px 0 10px 0" />
+        <mj-text align="left" color="{{mutedForeground}}" font-size="12px">
+          <a href="#" style="color: {{mutedForeground}}; text-decoration: underline;">Manage notification preferences</a>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <!-- /@en -->
+
+    <mj-include path="../../partials/footer.mjml" />
+
+  </mj-body>
+</mjml>

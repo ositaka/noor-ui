@@ -1,0 +1,152 @@
+<!-- @brand: Al Noor International School | مدرسة النور الدولية -->
+<mjml>
+  <mj-head>
+    <mj-attributes>
+      <mj-all font-family="Tahoma, Arial, sans-serif" />
+      <mj-text font-size="14px" color="{{foreground}}" line-height="1.6" />
+    </mj-attributes>
+  </mj-head>
+  <mj-body background-color="{{background}}" width="600px">
+
+    <mj-include path="../../partials/header.mjml" />
+
+    <!-- @ar -->
+    <mj-section background-color="{{card}}" padding="30px 25px 10px" direction="rtl">
+      <mj-column>
+        <mj-text font-size="13px" font-weight="bold" align="right" color="{{primary}}" padding-bottom="5px">
+          واجب جديد
+        </mj-text>
+        <mj-text font-size="22px" font-weight="bold" align="right" color="{{foreground}}" padding-bottom="10px">
+          بحث عن الطاقة المتجددة
+        </mj-text>
+        <mj-text align="right" color="{{mutedForeground}}" font-size="13px">
+          مادة العلوم · الصف التاسع
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Assignment details -->
+    <mj-section background-color="{{card}}" padding="15px 25px" direction="rtl">
+      <mj-column background-color="{{background}}" border-radius="8px" padding="20px">
+        <mj-table font-size="14px" color="{{foreground}}" cellpadding="5">
+          <tr>
+            <td style="text-align: right; font-weight: bold; padding: 8px; width: 120px;">📅 تاريخ التسليم</td>
+            <td style="text-align: left; padding: 8px;">25 مارس 2026</td>
+          </tr>
+          <tr style="border-top: 1px solid {{border}};">
+            <td style="text-align: right; font-weight: bold; padding: 8px;">⏰ الوقت المتبقي</td>
+            <td style="text-align: left; padding: 8px; color: {{warning}}; font-weight: bold;">7 أيام</td>
+          </tr>
+          <tr style="border-top: 1px solid {{border}};">
+            <td style="text-align: right; font-weight: bold; padding: 8px;">👩‍🏫 المعلمة</td>
+            <td style="text-align: left; padding: 8px;">أ. فاطمة الكعبي</td>
+          </tr>
+        </mj-table>
+      </mj-column>
+    </mj-section>
+
+    <!-- Description -->
+    <mj-section background-color="{{card}}" padding="10px 25px" direction="rtl">
+      <mj-column>
+        <mj-text font-size="15px" font-weight="bold" align="right" color="{{foreground}}" padding-bottom="8px">
+          الوصف
+        </mj-text>
+        <mj-text align="right" color="{{mutedForeground}}" font-size="13px" line-height="1.8">
+          اكتب بحثًا من 500-700 كلمة عن مصادر الطاقة المتجددة وتأثيرها على البيئة في دول الخليج. يجب أن يتضمن البحث:<br/><br/>
+          1. مقدمة عن الطاقة المتجددة<br/>
+          2. أنواع الطاقة المتجددة المستخدمة في المنطقة<br/>
+          3. مشروع مصدر في أبوظبي كدراسة حالة<br/>
+          4. خاتمة ورأيك الشخصي
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <mj-section background-color="{{card}}" padding="15px 25px 20px" direction="rtl">
+      <mj-column>
+        <mj-button background-color="{{primary}}" color="{{primaryForeground}}" font-family="Tahoma, Arial, sans-serif" font-size="14px" font-weight="bold" border-radius="8px" inner-padding="12px 30px" align="right" href="#">
+          عرض الواجب
+        </mj-button>
+      </mj-column>
+    </mj-section>
+
+    <mj-section background-color="{{card}}" padding="0 25px 30px" direction="rtl">
+      <mj-column background-color="{{background}}" border-radius="8px" padding="12px 15px">
+        <mj-text align="right" color="{{mutedForeground}}" font-size="12px">
+          📋 تم إرسال نسخة من هذا الإشعار إلى ولي الأمر المسجل.
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <!-- /@ar -->
+
+    <!-- @en -->
+    <mj-section background-color="{{card}}" padding="30px 25px 10px">
+      <mj-column>
+        <mj-text font-size="13px" font-weight="bold" align="left" color="{{primary}}" padding-bottom="5px">
+          NEW ASSIGNMENT
+        </mj-text>
+        <mj-text font-size="22px" font-weight="bold" align="left" color="{{foreground}}" padding-bottom="10px">
+          Renewable Energy Research Paper
+        </mj-text>
+        <mj-text align="left" color="{{mutedForeground}}" font-size="13px">
+          Science · Grade 9
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Assignment details -->
+    <mj-section background-color="{{card}}" padding="15px 25px">
+      <mj-column background-color="{{background}}" border-radius="8px" padding="20px">
+        <mj-table font-size="14px" color="{{foreground}}" cellpadding="5">
+          <tr>
+            <td style="font-weight: bold; padding: 8px; width: 120px;">📅 Due Date</td>
+            <td style="padding: 8px;">March 25, 2026</td>
+          </tr>
+          <tr style="border-top: 1px solid {{border}};">
+            <td style="font-weight: bold; padding: 8px;">⏰ Time Left</td>
+            <td style="padding: 8px; color: {{warning}}; font-weight: bold;">7 days</td>
+          </tr>
+          <tr style="border-top: 1px solid {{border}};">
+            <td style="font-weight: bold; padding: 8px;">👩‍🏫 Teacher</td>
+            <td style="padding: 8px;">Ms. Fatima Al Kaabi</td>
+          </tr>
+        </mj-table>
+      </mj-column>
+    </mj-section>
+
+    <!-- Description -->
+    <mj-section background-color="{{card}}" padding="10px 25px">
+      <mj-column>
+        <mj-text font-size="15px" font-weight="bold" align="left" color="{{foreground}}" padding-bottom="8px">
+          Description
+        </mj-text>
+        <mj-text align="left" color="{{mutedForeground}}" font-size="13px" line-height="1.8">
+          Write a 500-700 word research paper about renewable energy sources and their environmental impact in the Gulf region. Your paper should include:<br/><br/>
+          1. Introduction to renewable energy<br/>
+          2. Types of renewable energy used in the region<br/>
+          3. Masdar City in Abu Dhabi as a case study<br/>
+          4. Conclusion and your personal opinion
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <mj-section background-color="{{card}}" padding="15px 25px 20px">
+      <mj-column>
+        <mj-button background-color="{{primary}}" color="{{primaryForeground}}" font-family="Tahoma, Arial, sans-serif" font-size="14px" font-weight="bold" border-radius="8px" inner-padding="12px 30px" align="left" href="#">
+          View Assignment
+        </mj-button>
+      </mj-column>
+    </mj-section>
+
+    <mj-section background-color="{{card}}" padding="0 25px 30px">
+      <mj-column background-color="{{background}}" border-radius="8px" padding="12px 15px">
+        <mj-text align="left" color="{{mutedForeground}}" font-size="12px">
+          📋 A copy of this notification has been sent to the registered parent/guardian.
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <!-- /@en -->
+
+    <mj-include path="../../partials/footer.mjml" />
+
+  </mj-body>
+</mjml>

@@ -1,0 +1,162 @@
+<!-- @brand: Gulf Digital Bank | بنك الخليج الرقمي -->
+<mjml>
+  <mj-head>
+    <mj-attributes>
+      <mj-all font-family="Tahoma, Arial, sans-serif" />
+      <mj-text font-size="14px" color="{{foreground}}" line-height="1.6" />
+    </mj-attributes>
+  </mj-head>
+  <mj-body background-color="{{background}}" width="600px">
+
+    <mj-include path="../../partials/header.mjml" />
+
+    <!-- @ar -->
+    <mj-section background-color="{{card}}" padding="30px 25px 10px" direction="rtl">
+      <mj-column>
+        <mj-text font-size="22px" font-weight="bold" align="right" color="{{foreground}}" padding-bottom="5px">
+          إيصال التحويل
+        </mj-text>
+        <mj-text align="right" color="{{mutedForeground}}" font-size="13px" padding-bottom="10px">
+          رقم المرجع: TRF-2026-48291
+        </mj-text>
+        <mj-text align="right" padding-bottom="5px">
+          <span style="background-color: {{success}}; color: #FFFFFF; padding: 4px 14px; border-radius: 12px; font-size: 12px; font-weight: bold;">
+            تم التحويل بنجاح ✓
+          </span>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Amount -->
+    <mj-section background-color="{{card}}" padding="10px 25px" direction="rtl">
+      <mj-column>
+        <mj-text align="center" color="{{mutedForeground}}" font-size="13px" padding-bottom="5px">
+          المبلغ المحوّل
+        </mj-text>
+        <mj-text align="center" color="{{primary}}" font-size="36px" font-weight="bold">
+          5,000.00 د.إ
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Transfer details -->
+    <mj-section background-color="{{card}}" padding="15px 25px" direction="rtl">
+      <mj-column background-color="{{background}}" border-radius="8px" padding="20px">
+        <mj-text align="right" color="{{mutedForeground}}" font-size="12px" font-weight="bold" padding-bottom="10px">
+          تفاصيل التحويل
+        </mj-text>
+        <mj-table font-size="13px" color="{{foreground}}" cellpadding="5">
+          <tr>
+            <td style="text-align: right; font-weight: bold; padding: 6px 8px; width: 120px;">من حساب</td>
+            <td style="text-align: left; padding: 6px 8px;">AE07 •••• •••• •••• 4821</td>
+          </tr>
+          <tr style="border-top: 1px solid {{border}};">
+            <td style="text-align: right; font-weight: bold; padding: 6px 8px;">إلى المستفيد</td>
+            <td style="text-align: left; padding: 6px 8px;">محمد سعيد العلي</td>
+          </tr>
+          <tr style="border-top: 1px solid {{border}};">
+            <td style="text-align: right; font-weight: bold; padding: 6px 8px;">بنك المستفيد</td>
+            <td style="text-align: left; padding: 6px 8px;">بنك أبوظبي الأول</td>
+          </tr>
+          <tr style="border-top: 1px solid {{border}};">
+            <td style="text-align: right; font-weight: bold; padding: 6px 8px;">آيبان المستفيد</td>
+            <td style="text-align: left; padding: 6px 8px;">AE12 •••• •••• •••• 7653</td>
+          </tr>
+          <tr style="border-top: 1px solid {{border}};">
+            <td style="text-align: right; font-weight: bold; padding: 6px 8px;">الغرض</td>
+            <td style="text-align: left; padding: 6px 8px;">إيجار شهري</td>
+          </tr>
+          <tr style="border-top: 1px solid {{border}};">
+            <td style="text-align: right; font-weight: bold; padding: 6px 8px;">التاريخ</td>
+            <td style="text-align: left; padding: 6px 8px;">18 مارس 2026، 10:23 ص</td>
+          </tr>
+        </mj-table>
+      </mj-column>
+    </mj-section>
+
+    <mj-section background-color="{{card}}" padding="15px 25px 30px" direction="rtl">
+      <mj-column>
+        <mj-button background-color="{{primary}}" color="{{primaryForeground}}" font-family="Tahoma, Arial, sans-serif" font-size="14px" font-weight="bold" border-radius="8px" inner-padding="12px 30px" align="right" href="#">
+          عرض في المعاملات
+        </mj-button>
+      </mj-column>
+    </mj-section>
+    <!-- /@ar -->
+
+    <!-- @en -->
+    <mj-section background-color="{{card}}" padding="30px 25px 10px">
+      <mj-column>
+        <mj-text font-size="22px" font-weight="bold" align="left" color="{{foreground}}" padding-bottom="5px">
+          Transfer Receipt
+        </mj-text>
+        <mj-text align="left" color="{{mutedForeground}}" font-size="13px" padding-bottom="10px">
+          Reference: TRF-2026-48291
+        </mj-text>
+        <mj-text align="left" padding-bottom="5px">
+          <span style="background-color: {{success}}; color: #FFFFFF; padding: 4px 14px; border-radius: 12px; font-size: 12px; font-weight: bold;">
+            Transfer Completed ✓
+          </span>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Amount -->
+    <mj-section background-color="{{card}}" padding="10px 25px">
+      <mj-column>
+        <mj-text align="center" color="{{mutedForeground}}" font-size="13px" padding-bottom="5px">
+          Amount Transferred
+        </mj-text>
+        <mj-text align="center" color="{{primary}}" font-size="36px" font-weight="bold">
+          AED 5,000.00
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Transfer details -->
+    <mj-section background-color="{{card}}" padding="15px 25px">
+      <mj-column background-color="{{background}}" border-radius="8px" padding="20px">
+        <mj-text align="left" color="{{mutedForeground}}" font-size="12px" font-weight="bold" padding-bottom="10px">
+          TRANSFER DETAILS
+        </mj-text>
+        <mj-table font-size="13px" color="{{foreground}}" cellpadding="5">
+          <tr>
+            <td style="font-weight: bold; padding: 6px 8px; width: 130px;">From Account</td>
+            <td style="padding: 6px 8px;">AE07 •••• •••• •••• 4821</td>
+          </tr>
+          <tr style="border-top: 1px solid {{border}};">
+            <td style="font-weight: bold; padding: 6px 8px;">To Beneficiary</td>
+            <td style="padding: 6px 8px;">Mohammed Saeed Al Ali</td>
+          </tr>
+          <tr style="border-top: 1px solid {{border}};">
+            <td style="font-weight: bold; padding: 6px 8px;">Beneficiary Bank</td>
+            <td style="padding: 6px 8px;">First Abu Dhabi Bank</td>
+          </tr>
+          <tr style="border-top: 1px solid {{border}};">
+            <td style="font-weight: bold; padding: 6px 8px;">Beneficiary IBAN</td>
+            <td style="padding: 6px 8px;">AE12 •••• •••• •••• 7653</td>
+          </tr>
+          <tr style="border-top: 1px solid {{border}};">
+            <td style="font-weight: bold; padding: 6px 8px;">Purpose</td>
+            <td style="padding: 6px 8px;">Monthly rent</td>
+          </tr>
+          <tr style="border-top: 1px solid {{border}};">
+            <td style="font-weight: bold; padding: 6px 8px;">Date &amp; Time</td>
+            <td style="padding: 6px 8px;">March 18, 2026, 10:23 AM</td>
+          </tr>
+        </mj-table>
+      </mj-column>
+    </mj-section>
+
+    <mj-section background-color="{{card}}" padding="15px 25px 30px">
+      <mj-column>
+        <mj-button background-color="{{primary}}" color="{{primaryForeground}}" font-family="Tahoma, Arial, sans-serif" font-size="14px" font-weight="bold" border-radius="8px" inner-padding="12px 30px" align="left" href="#">
+          View in Transactions
+        </mj-button>
+      </mj-column>
+    </mj-section>
+    <!-- /@en -->
+
+    <mj-include path="../../partials/footer.mjml" />
+
+  </mj-body>
+</mjml>

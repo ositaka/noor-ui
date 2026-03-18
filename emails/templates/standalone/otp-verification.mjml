@@ -1,0 +1,104 @@
+<!-- @brand: Your Company | شركتك -->
+<mjml>
+  <mj-head>
+    <mj-attributes>
+      <mj-all font-family="Tahoma, Arial, sans-serif" />
+      <mj-text font-size="14px" color="{{foreground}}" line-height="1.6" />
+    </mj-attributes>
+  </mj-head>
+  <mj-body background-color="{{background}}" width="600px">
+
+    <mj-include path="../../partials/header.mjml" />
+
+    <!-- @ar -->
+    <mj-section background-color="{{card}}" padding="30px 25px 10px" direction="rtl">
+      <mj-column>
+        <mj-text font-size="40px" align="center" padding-bottom="10px">
+          🔑
+        </mj-text>
+        <mj-text font-size="22px" font-weight="bold" align="center" color="{{foreground}}" padding-bottom="10px">
+          رمز التحقق
+        </mj-text>
+        <mj-text align="center" color="{{mutedForeground}}" padding-bottom="20px">
+          استخدم الرمز التالي لإكمال عملية التحقق. لا تشارك هذا الرمز مع أي شخص.
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <mj-section background-color="{{card}}" padding="0 25px 10px" direction="rtl">
+      <mj-column background-color="{{background}}" border-radius="8px" padding="25px">
+        <mj-text font-size="36px" font-weight="bold" align="center" color="{{primary}}" letter-spacing="8px">
+          4 8 2 7 1 5
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <mj-section background-color="{{card}}" padding="5px 25px 10px" direction="rtl">
+      <mj-column>
+        <mj-text align="center" color="{{mutedForeground}}" font-size="13px">
+          ⏱ ينتهي صلاحية هذا الرمز خلال 10 دقائق
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <mj-section background-color="{{card}}" padding="10px 25px 30px" direction="rtl">
+      <mj-column>
+        <mj-divider border-color="{{border}}" border-width="1px" padding="10px 0 15px 0" />
+        <mj-text align="right" color="{{mutedForeground}}" font-size="13px">
+          إذا لم تطلب هذا الرمز، يرجى تأمين حسابك فورًا عن طريق تغيير كلمة المرور.
+        </mj-text>
+        <mj-text align="right" color="{{mutedForeground}}" font-size="12px" padding-top="10px">
+          💡 <strong>نصيحة أمان:</strong> لن نطلب منك أبدًا مشاركة رمز التحقق عبر الهاتف أو البريد الإلكتروني.
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <!-- /@ar -->
+
+    <!-- @en -->
+    <mj-section background-color="{{card}}" padding="30px 25px 10px">
+      <mj-column>
+        <mj-text font-size="40px" align="center" padding-bottom="10px">
+          🔑
+        </mj-text>
+        <mj-text font-size="22px" font-weight="bold" align="center" color="{{foreground}}" padding-bottom="10px">
+          Verification Code
+        </mj-text>
+        <mj-text align="center" color="{{mutedForeground}}" padding-bottom="20px">
+          Use the following code to complete your verification. Do not share this code with anyone.
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <mj-section background-color="{{card}}" padding="0 25px 10px">
+      <mj-column background-color="{{background}}" border-radius="8px" padding="25px">
+        <mj-text font-size="36px" font-weight="bold" align="center" color="{{primary}}" letter-spacing="8px">
+          4 8 2 7 1 5
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <mj-section background-color="{{card}}" padding="5px 25px 10px">
+      <mj-column>
+        <mj-text align="center" color="{{mutedForeground}}" font-size="13px">
+          ⏱ This code expires in 10 minutes
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <mj-section background-color="{{card}}" padding="10px 25px 30px">
+      <mj-column>
+        <mj-divider border-color="{{border}}" border-width="1px" padding="10px 0 15px 0" />
+        <mj-text align="left" color="{{mutedForeground}}" font-size="13px">
+          If you didn't request this code, please secure your account immediately by changing your password.
+        </mj-text>
+        <mj-text align="left" color="{{mutedForeground}}" font-size="12px" padding-top="10px">
+          💡 <strong>Security tip:</strong> We will never ask you to share your verification code over phone or email.
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <!-- /@en -->
+
+    <mj-include path="../../partials/footer.mjml" />
+
+  </mj-body>
+</mjml>
