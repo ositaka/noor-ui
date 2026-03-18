@@ -227,7 +227,7 @@ export default function EmailTemplatesPage() {
             <div className="flex items-center gap-3 mb-2">
               {templateInfo && <templateInfo.icon className="h-6 w-6 text-primary" aria-hidden="true" />}
               <h1 ref={previewHeadingRef} tabIndex={-1} className="text-2xl font-bold outline-none">{templateI18n?.name}</h1>
-              <Badge variant="secondary" className="text-xs capitalize">
+              <Badge variant="outline" className="text-xs capitalize">
                 {templateInfo?.category === 'demo' ? et.filters.demo : et.filters.standalone}
               </Badge>
             </div>
