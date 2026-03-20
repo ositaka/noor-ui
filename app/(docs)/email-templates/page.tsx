@@ -113,7 +113,7 @@ export default function EmailTemplatesPage() {
   })
   const [filter, setFilter] = React.useState<Filter>('all')
   const [theme, setTheme] = React.useState(() => {
-    const th = searchParams.get('theme')
+    const th = searchParams.get('email_theme')
     return th && THEMES.includes(th) ? th : 'cozy'
   })
   const [colorMode, setColorMode] = React.useState<ColorMode>(() => {
@@ -137,7 +137,7 @@ export default function EmailTemplatesPage() {
     if (selectedTemplate) {
       params.set('template', selectedTemplate)
       params.set('variant', variant)
-      params.set('theme', theme)
+      params.set('email_theme', theme)
       if (colorMode !== 'light') params.set('mode', colorMode)
       if (device !== 'desktop') params.set('device', device)
     }
@@ -154,7 +154,7 @@ export default function EmailTemplatesPage() {
       setSelectedTemplate(t && TEMPLATES.some(tmpl => tmpl.id === t) ? t : null)
       const v = params.get('variant') as Variant
       setVariant(['ltr', 'rtl', 'bilingual'].includes(v) ? v : 'ltr')
-      const th = params.get('theme')
+      const th = params.get('email_theme')
       setTheme(th && THEMES.includes(th) ? th : 'cozy')
       const d = params.get('device') as Device
       setDevice(['desktop', 'mobile'].includes(d) ? d : 'desktop')
@@ -430,11 +430,14 @@ export default function EmailTemplatesPage() {
             const Icon = template.icon
 
             return (
-              <button
+              <Link
                 key={template.id}
-                onClick={() => setSelectedTemplate(template.id)}
-                className="text-start"
-                aria-label={`${et.actions.preview} ${templateI18n?.name}`}
+                href={`/email-templates?template=${template.id}&variant=ltr&email_theme=${theme}`}
+                onClick={(e) => {
+                  e.preventDefault()
+                  setSelectedTemplate(template.id)
+                }}
+                className="text-start block"
               >
                 <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50 cursor-pointer">
                   <CardHeader>
@@ -459,7 +462,7 @@ export default function EmailTemplatesPage() {
                     </div>
                   </CardContent>
                 </Card>
-              </button>
+              </Link>
             )
           })}
         </div>
