@@ -52,10 +52,8 @@
     </mj-section>
 
     <mj-section background-color="{{card}}" padding="0 25px 5px" direction="rtl">
-      <mj-column width="70px" vertical-align="top">
-        <mj-text padding="0" align="center">
-          <div style="width:60px;height:60px;border-radius:8px;background-color:{{background}};display:flex;align-items:center;justify-content:center;"><!--[if !mso]><!--><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="{{mutedForeground}}" viewBox="0 0 256 256"><path d="M128,129.09V232a8,8,0,0,1-3.84-1l-88-48.18a8,8,0,0,1-4.16-7V80.18a8,8,0,0,1,.7-3.25Z" opacity="0.2"></path><path d="M223.68,66.15,135.68,18a15.88,15.88,0,0,0-15.36,0l-88,48.17a16,16,0,0,0-8.32,14v95.64a16,16,0,0,0,8.32,14l88,48.17a15.88,15.88,0,0,0,15.36,0l88-48.17a16,16,0,0,0,8.32-14V80.18A16,16,0,0,0,223.68,66.15ZM128,32l80.34,44-29.77,16.3-80.35-44ZM128,120,47.66,76l33.9-18.56,80.34,44ZM40,90l80,43.78v85.79L40,175.82Zm176,85.78h0l-80,43.79V133.82l32-17.51V152a8,8,0,0,0,16,0V107.55L216,90v85.77Z"></path></svg><!--<![endif]--></div>
-        </mj-text>
+      <mj-column width="140px" vertical-align="top">
+        <mj-image width="120px" border-radius="8px" padding="0" src="/examples/marketplace/headphones.jpg" alt="سماعات" />
       </mj-column>
       <mj-column vertical-align="top">
         <mj-text align="right" color="{{foreground}}" font-weight="bold" font-size="13px" padding-bottom="2px">
@@ -71,17 +69,15 @@
     </mj-section>
 
     <mj-section background-color="{{card}}" padding="0 25px 5px" direction="rtl">
-      <mj-column width="70px" vertical-align="top">
-        <mj-text padding="0" align="center">
-          <div style="width:60px;height:60px;border-radius:8px;background-color:{{background}};display:flex;align-items:center;justify-content:center;"><!--[if !mso]><!--><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="{{mutedForeground}}" viewBox="0 0 256 256"><path d="M128,129.09V232a8,8,0,0,1-3.84-1l-88-48.18a8,8,0,0,1-4.16-7V80.18a8,8,0,0,1,.7-3.25Z" opacity="0.2"></path><path d="M223.68,66.15,135.68,18a15.88,15.88,0,0,0-15.36,0l-88,48.17a16,16,0,0,0-8.32,14v95.64a16,16,0,0,0,8.32,14l88,48.17a15.88,15.88,0,0,0,15.36,0l88-48.17a16,16,0,0,0,8.32-14V80.18A16,16,0,0,0,223.68,66.15ZM128,32l80.34,44-29.77,16.3-80.35-44ZM128,120,47.66,76l33.9-18.56,80.34,44ZM40,90l80,43.78v85.79L40,175.82Zm176,85.78h0l-80,43.79V133.82l32-17.51V152a8,8,0,0,0,16,0V107.55L216,90v85.77Z"></path></svg><!--<![endif]--></div>
-        </mj-text>
+      <mj-column width="140px" vertical-align="top">
+        <mj-image width="120px" border-radius="8px" padding="0" src="/examples/marketplace/smart-watch.jpg" alt="ساعة ذكية" />
       </mj-column>
       <mj-column vertical-align="top">
         <mj-text align="right" color="{{foreground}}" font-weight="bold" font-size="13px" padding-bottom="2px">
-          حافظة هاتف جلدية
+          ساعة ذكية رياضية
         </mj-text>
         <mj-text align="right" color="{{mutedForeground}}" font-size="12px" padding-bottom="2px">
-          اللون: بني · الكمية: 2
+          اللون: أسود · الكمية: 2
         </mj-text>
         <mj-text align="right" color="{{primary}}" font-weight="bold" font-size="13px">
           158 د.إ
@@ -93,22 +89,22 @@
     <mj-section background-color="{{card}}" padding="10px 25px" direction="rtl">
       <mj-column>
         <mj-divider border-color="{{border}}" border-width="1px" padding="0 0 10px 0" />
-        <mj-table font-size="13px" color="{{foreground}}" cellpadding="5">
-          <tr style="text-align: left;">
+        <mj-table font-size="13px" color="{{foreground}}" cellpadding="5" css-class="stack-table stack-table-rtl">
+          <tr>
             <td style="text-align: right;">المجموع الفرعي</td>
-            <td>507 د.إ</td>
+            <td style="text-align: right;">507 د.إ</td>
           </tr>
-          <tr style="text-align: left;">
+          <tr>
             <td style="text-align: right;">الشحن</td>
-            <td>مجاني</td>
+            <td style="text-align: right;">مجاني</td>
           </tr>
-          <tr style="text-align: left;">
+          <tr>
             <td style="text-align: right;">ضريبة القيمة المضافة (5%)</td>
-            <td>25.35 د.إ</td>
+            <td style="text-align: right;">25.35 د.إ</td>
           </tr>
-          <tr style="font-weight: bold; text-align: left; border-top: 2px solid {{border}};">
+          <tr style="font-weight: bold; border-top: 2px solid {{border}};">
             <td style="text-align: right; padding-top: 8px;">الإجمالي</td>
-            <td style="padding-top: 8px; color: {{primary}};">532.35 د.إ</td>
+            <td style="text-align: right; padding-top: 8px; color: {{primary}};">532.35 د.إ</td>
           </tr>
         </mj-table>
       </mj-column>
@@ -126,7 +122,7 @@
           دبي، الإمارات العربية المتحدة
         </mj-text>
         <mj-text align="right" color="{{success}}" font-size="13px" font-weight="bold" padding-top="8px">
-          <span style="display:inline-block;vertical-align:middle;margin-left:4px;"><!--[if !mso]><!--><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="{{primary}}" viewBox="0 0 256 256"><path d="M128,129.09V232a8,8,0,0,1-3.84-1l-88-48.18a8,8,0,0,1-4.16-7V80.18a8,8,0,0,1,.7-3.25Z" opacity="0.2"></path><path d="M223.68,66.15,135.68,18a15.88,15.88,0,0,0-15.36,0l-88,48.17a16,16,0,0,0-8.32,14v95.64a16,16,0,0,0,8.32,14l88,48.17a15.88,15.88,0,0,0,15.36,0l88-48.17a16,16,0,0,0,8.32-14V80.18A16,16,0,0,0,223.68,66.15ZM128,32l80.34,44-29.77,16.3-80.35-44ZM128,120,47.66,76l33.9-18.56,80.34,44ZM40,90l80,43.78v85.79L40,175.82Zm176,85.78h0l-80,43.79V133.82l32-17.51V152a8,8,0,0,0,16,0V107.55L216,90v85.77Z"></path></svg><!--<![endif]--></span> التوصيل المتوقع: 20-22 مارس 2026
+          التوصيل المتوقع: 20-22 مارس 2026 <span style="display:inline-block;vertical-align:middle;margin-right:4px;"><!--[if !mso]><!--><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="{{primary}}" viewBox="0 0 256 256"><path d="M128,129.09V232a8,8,0,0,1-3.84-1l-88-48.18a8,8,0,0,1-4.16-7V80.18a8,8,0,0,1,.7-3.25Z" opacity="0.2"></path><path d="M223.68,66.15,135.68,18a15.88,15.88,0,0,0-15.36,0l-88,48.17a16,16,0,0,0-8.32,14v95.64a16,16,0,0,0,8.32,14l88,48.17a15.88,15.88,0,0,0,15.36,0l88-48.17a16,16,0,0,0,8.32-14V80.18A16,16,0,0,0,223.68,66.15ZM128,32l80.34,44-29.77,16.3-80.35-44ZM128,120,47.66,76l33.9-18.56,80.34,44ZM40,90l80,43.78v85.79L40,175.82Zm176,85.78h0l-80,43.79V133.82l32-17.51V152a8,8,0,0,0,16,0V107.55L216,90v85.77Z"></path></svg><!--<![endif]--></span>
         </mj-text>
       </mj-column>
     </mj-section>
@@ -165,10 +161,8 @@
     </mj-section>
 
     <mj-section background-color="{{card}}" padding="0 25px 5px">
-      <mj-column width="70px" vertical-align="top">
-        <mj-text padding="0" align="center">
-          <div style="width:60px;height:60px;border-radius:8px;background-color:{{background}};display:flex;align-items:center;justify-content:center;"><!--[if !mso]><!--><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="{{mutedForeground}}" viewBox="0 0 256 256"><path d="M128,129.09V232a8,8,0,0,1-3.84-1l-88-48.18a8,8,0,0,1-4.16-7V80.18a8,8,0,0,1,.7-3.25Z" opacity="0.2"></path><path d="M223.68,66.15,135.68,18a15.88,15.88,0,0,0-15.36,0l-88,48.17a16,16,0,0,0-8.32,14v95.64a16,16,0,0,0,8.32,14l88,48.17a15.88,15.88,0,0,0,15.36,0l88-48.17a16,16,0,0,0,8.32-14V80.18A16,16,0,0,0,223.68,66.15ZM128,32l80.34,44-29.77,16.3-80.35-44ZM128,120,47.66,76l33.9-18.56,80.34,44ZM40,90l80,43.78v85.79L40,175.82Zm176,85.78h0l-80,43.79V133.82l32-17.51V152a8,8,0,0,0,16,0V107.55L216,90v85.77Z"></path></svg><!--<![endif]--></div>
-        </mj-text>
+      <mj-column width="140px" vertical-align="top">
+        <mj-image width="120px" border-radius="8px" padding="0" src="/examples/marketplace/headphones.jpg" alt="Headphones" />
       </mj-column>
       <mj-column vertical-align="top">
         <mj-text align="left" color="{{foreground}}" font-weight="bold" font-size="13px" padding-bottom="2px">
@@ -184,17 +178,15 @@
     </mj-section>
 
     <mj-section background-color="{{card}}" padding="0 25px 5px">
-      <mj-column width="70px" vertical-align="top">
-        <mj-text padding="0" align="center">
-          <div style="width:60px;height:60px;border-radius:8px;background-color:{{background}};display:flex;align-items:center;justify-content:center;"><!--[if !mso]><!--><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="{{mutedForeground}}" viewBox="0 0 256 256"><path d="M128,129.09V232a8,8,0,0,1-3.84-1l-88-48.18a8,8,0,0,1-4.16-7V80.18a8,8,0,0,1,.7-3.25Z" opacity="0.2"></path><path d="M223.68,66.15,135.68,18a15.88,15.88,0,0,0-15.36,0l-88,48.17a16,16,0,0,0-8.32,14v95.64a16,16,0,0,0,8.32,14l88,48.17a15.88,15.88,0,0,0,15.36,0l88-48.17a16,16,0,0,0,8.32-14V80.18A16,16,0,0,0,223.68,66.15ZM128,32l80.34,44-29.77,16.3-80.35-44ZM128,120,47.66,76l33.9-18.56,80.34,44ZM40,90l80,43.78v85.79L40,175.82Zm176,85.78h0l-80,43.79V133.82l32-17.51V152a8,8,0,0,0,16,0V107.55L216,90v85.77Z"></path></svg><!--<![endif]--></div>
-        </mj-text>
+      <mj-column width="140px" vertical-align="top">
+        <mj-image width="120px" border-radius="8px" padding="0" src="/examples/marketplace/smart-watch.jpg" alt="Smart Watch" />
       </mj-column>
       <mj-column vertical-align="top">
         <mj-text align="left" color="{{foreground}}" font-weight="bold" font-size="13px" padding-bottom="2px">
-          Leather Phone Case
+          Sport Smart Watch
         </mj-text>
         <mj-text align="left" color="{{mutedForeground}}" font-size="12px" padding-bottom="2px">
-          Color: Brown · Qty: 2
+          Color: Black · Qty: 2
         </mj-text>
         <mj-text align="left" color="{{primary}}" font-weight="bold" font-size="13px">
           AED 158
@@ -206,7 +198,7 @@
     <mj-section background-color="{{card}}" padding="10px 25px">
       <mj-column>
         <mj-divider border-color="{{border}}" border-width="1px" padding="0 0 10px 0" />
-        <mj-table font-size="13px" color="{{foreground}}" cellpadding="5">
+        <mj-table font-size="13px" color="{{foreground}}" cellpadding="5" css-class="stack-table">
           <tr>
             <td>Subtotal</td>
             <td style="text-align: right;">AED 507</td>

@@ -27,6 +27,7 @@ import {
   CreditCard,
   ArrowLeft,
   ArrowRight,
+  ArrowSquareOut,
   Desktop,
   DeviceMobile,
   Copy,
@@ -34,6 +35,14 @@ import {
   DownloadSimple,
   Sun,
   Moon,
+  House,
+  Storefront,
+  Buildings,
+  GameController,
+  HandCoins,
+  Truck,
+  ChatTeardropDots,
+  Headset,
   type Icon as PhosphorIcon,
 } from '@phosphor-icons/react'
 
@@ -41,33 +50,44 @@ import {
 
 interface TemplateInfo {
   id: string
-  category: 'demo' | 'standalone'
+  category: 'transactional' | 'auth' | 'notifications' | 'marketing' | 'industry'
   icon: PhosphorIcon
 }
 
 const TEMPLATES: TemplateInfo[] = [
-  // Demo-specific
-  { id: 'hotel-booking-confirmation', category: 'demo', icon: Bed },
-  { id: 'banking-transfer-receipt', category: 'demo', icon: Bank },
-  { id: 'healthcare-appointment-reminder', category: 'demo', icon: FirstAid },
-  { id: 'education-assignment-notification', category: 'demo', icon: GraduationCap },
-  // Standalone
-  { id: 'welcome-onboarding', category: 'standalone', icon: Handshake },
-  { id: 'invoice-receipt', category: 'standalone', icon: Receipt },
-  { id: 'notification-alert', category: 'standalone', icon: Bell },
-  { id: 'newsletter', category: 'standalone', icon: Newspaper },
-  { id: 'password-reset', category: 'standalone', icon: Key },
-  { id: 'otp-verification', category: 'standalone', icon: ShieldCheck },
-  { id: 'order-confirmation', category: 'standalone', icon: ShoppingCart },
-  { id: 'event-invitation', category: 'standalone', icon: CalendarCheck },
-  { id: 'payment-reminder', category: 'standalone', icon: CreditCard },
+  // Transactional
+  { id: 'order-confirmation', category: 'transactional', icon: ShoppingCart },
+  { id: 'shipping-update', category: 'transactional', icon: Truck },
+  { id: 'invoice-receipt', category: 'transactional', icon: Receipt },
+  { id: 'banking-transfer-receipt', category: 'transactional', icon: Bank },
+  { id: 'hotel-booking-confirmation', category: 'transactional', icon: Bed },
+  { id: 'payment-reminder', category: 'transactional', icon: CreditCard },
+  // Auth
+  { id: 'welcome-onboarding', category: 'auth', icon: Handshake },
+  { id: 'password-reset', category: 'auth', icon: Key },
+  { id: 'otp-verification', category: 'auth', icon: ShieldCheck },
+  // Notifications
+  { id: 'notification-alert', category: 'notifications', icon: Bell },
+  { id: 'healthcare-appointment-reminder', category: 'notifications', icon: FirstAid },
+  { id: 'education-assignment-notification', category: 'notifications', icon: GraduationCap },
+  { id: 'support-ticket', category: 'notifications', icon: Headset },
+  // Marketing
+  { id: 'newsletter', category: 'marketing', icon: Newspaper },
+  { id: 'event-invitation', category: 'marketing', icon: CalendarCheck },
+  { id: 'feedback-request', category: 'marketing', icon: ChatTeardropDots },
+  // Industry
+  { id: 'real-estate-viewing-confirmation', category: 'industry', icon: House },
+  { id: 'marketplace-order-notification', category: 'industry', icon: Storefront },
+  { id: 'government-service-confirmation', category: 'industry', icon: Buildings },
+  { id: 'esports-tournament-registration', category: 'industry', icon: GameController },
+  { id: 'islamic-finance-zakat-receipt', category: 'industry', icon: HandCoins },
 ]
 
 const THEMES = ['cozy', 'minimal', 'futuristic', 'artistic']
 type ColorMode = 'light' | 'dark'
 type Variant = 'ltr' | 'rtl' | 'bilingual'
 type Device = 'desktop' | 'mobile'
-type Filter = 'all' | 'demo' | 'standalone'
+type Filter = 'all' | 'transactional' | 'auth' | 'notifications' | 'marketing' | 'industry'
 
 // ─── Page Component ───────────────────────────────────────────────────────────
 
@@ -227,8 +247,8 @@ export default function EmailTemplatesPage() {
             <div className="flex items-center gap-3 mb-2">
               {templateInfo && <templateInfo.icon className="h-6 w-6 text-primary" aria-hidden="true" />}
               <h1 ref={previewHeadingRef} tabIndex={-1} className="text-2xl font-bold outline-none">{templateI18n?.name}</h1>
-              <Badge variant="secondary" className="text-xs capitalize">
-                {templateInfo?.category === 'demo' ? et.filters.demo : et.filters.standalone}
+              <Badge variant="outline" className="text-xs capitalize">
+                {et.filters[templateInfo?.category as keyof typeof et.filters] || templateInfo?.category}
               </Badge>
             </div>
             <p className="text-muted-foreground">{templateI18n?.description}</p>
@@ -375,9 +395,18 @@ export default function EmailTemplatesPage() {
           <h1 ref={gridHeadingRef} tabIndex={-1} className="text-4xl font-bold tracking-tight mb-4 outline-none">
             {et.title}
           </h1>
-          <p className="text-xl text-muted-foreground">
+          <p className="text-xl text-muted-foreground mb-3">
             {et.subtitle}
           </p>
+          <a
+            href="https://mjml.io"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors"
+          >
+            {locale === 'ar' ? 'مبنية بـ' : 'Built with'} <strong>MJML</strong>
+            <ArrowSquareOut className="h-3.5 w-3.5" aria-hidden="true" />
+          </a>
         </div>
 
         {/* Filter tabs */}
@@ -385,8 +414,11 @@ export default function EmailTemplatesPage() {
           <Tabs value={filter} onValueChange={(v) => setFilter(v as Filter)}>
             <TabsList aria-label={locale === 'ar' ? 'تصفية القوالب' : 'Filter templates'}>
               <TabsTrigger value="all">{et.filters.all}</TabsTrigger>
-              <TabsTrigger value="demo">{et.filters.demo}</TabsTrigger>
-              <TabsTrigger value="standalone">{et.filters.standalone}</TabsTrigger>
+              <TabsTrigger value="transactional">{et.filters.transactional}</TabsTrigger>
+              <TabsTrigger value="auth">{et.filters.auth}</TabsTrigger>
+              <TabsTrigger value="notifications">{et.filters.notifications}</TabsTrigger>
+              <TabsTrigger value="marketing">{et.filters.marketing}</TabsTrigger>
+              <TabsTrigger value="industry">{et.filters.industry}</TabsTrigger>
             </TabsList>
           </Tabs>
         </div>
@@ -411,7 +443,7 @@ export default function EmailTemplatesPage() {
                         <Icon className="h-6 w-6 text-primary" aria-hidden="true" />
                       </div>
                       <Badge className="text-xs capitalize">
-                        {template.category === 'demo' ? et.filters.demo : et.filters.standalone}
+                        {et.filters[template.category as keyof typeof et.filters] || template.category}
                       </Badge>
                     </div>
                     <CardTitle className="text-lg">{templateI18n?.name}</CardTitle>

@@ -1,0 +1,167 @@
+<!-- @brand: Gulf Stars Esports | نجوم الخليج للرياضات الإلكترونية -->
+<mjml>
+  <mj-head>
+    <mj-attributes>
+      <mj-all font-family="Tahoma, Arial, sans-serif" />
+      <mj-text font-size="14px" color="{{foreground}}" line-height="1.6" />
+    </mj-attributes>
+    <mj-style>
+      @media only screen and (max-width: 480px) {
+        .stack-table td {
+          display: block !important;
+          width: 100% !important;
+          box-sizing: border-box !important;
+        }
+        .stack-table tr {
+          display: block !important;
+          margin-bottom: 12px !important;
+        }
+        .stack-table-rtl td {
+          text-align: right !important;
+          direction: rtl !important;
+        }
+      }
+    </mj-style>
+  </mj-head>
+  <mj-body background-color="{{background}}" width="600px">
+
+    <mj-include path="../../partials/header.mjml" />
+
+    <!-- @ar -->
+    <mj-section background-color="{{card}}" padding="30px 25px 10px" direction="rtl">
+      <mj-column>
+        <mj-text align="center" padding-bottom="15px">
+          <!--[if !mso]><!--><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="{{primary}}" viewBox="0 0 256 256"><path d="M216.86,207.57a28,28,0,0,1-24.66-7.77L150.09,152H172a51.94,51.94,0,0,0,51.2-61h0l16.36,84.17A28,28,0,0,1,216.86,207.57Z" opacity="0.2"></path><path d="M176,112H152a8,8,0,0,1,0-16h24a8,8,0,0,1,0,16ZM104,96H96V88a8,8,0,0,0-16,0v8H72a8,8,0,0,0,0,16h8v8a8,8,0,0,0,16,0v-8h8a8,8,0,0,0,0-16ZM241.48,200.65a36,36,0,0,1-54.94,4.81c-.12-.12-.24-.24-.35-.37L146.48,160h-37L69.81,205.09l-.35.37A36.08,36.08,0,0,1,44,216,36,36,0,0,1,8.56,173.75a.68.68,0,0,1,0-.14L24.93,89.52A59.88,59.88,0,0,1,83.89,40H172a60.08,60.08,0,0,1,59,49.25c0,.06,0,.12,0,.18l16.37,84.17a.68.68,0,0,1,0,.14A35.74,35.74,0,0,1,241.48,200.65ZM172,144a44,44,0,0,0,0-88H83.89A43.9,43.9,0,0,0,40.68,92.37l0,.13L24.3,176.59A20,20,0,0,0,58,194.3l41.92-47.59a8,8,0,0,1,6-2.71Zm59.7,32.59-8.74-45A60,60,0,0,1,172,160h-4.2L198,194.31a20.09,20.09,0,0,0,17.46,5.39,20,20,0,0,0,16.23-23.11Z"></path></svg><!--<![endif]-->
+        </mj-text>
+        <mj-text font-size="22px" font-weight="bold" align="right" color="{{foreground}}" padding-bottom="5px">
+          تأكيد التسجيل
+        </mj-text>
+        <mj-text align="right" color="{{success}}" font-size="13px" font-weight="bold">
+          تم تسجيلك بنجاح في البطولة
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Tournament details -->
+    <mj-section background-color="{{card}}" padding="15px 25px" direction="rtl">
+      <mj-column background-color="{{background}}" border-radius="8px" padding="20px">
+        <mj-text align="right" color="{{mutedForeground}}" font-size="12px" font-weight="bold" padding-bottom="10px">
+          تفاصيل البطولة
+        </mj-text>
+        <mj-table font-size="13px" color="{{foreground}}" cellpadding="5" css-class="stack-table stack-table-rtl">
+          <tr>
+            <td style="text-align: right; font-weight: bold; padding: 8px; width: 120px;">البطولة</td>
+            <td style="text-align: right; padding: 8px;">سلسلة بطولة الخليج 2026</td>
+          </tr>
+          <tr style="border-top: 1px solid {{border}};">
+            <td style="text-align: right; font-weight: bold; padding: 8px;">اللعبة</td>
+            <td style="text-align: right; padding: 8px;">Valorant</td>
+          </tr>
+          <tr style="border-top: 1px solid {{border}};">
+            <td style="text-align: right; font-weight: bold; padding: 8px;">الفريق</td>
+            <td style="text-align: right; padding: 8px;">ذئاب الخليج (FalconX)</td>
+          </tr>
+          <tr style="border-top: 1px solid {{border}};">
+            <td style="text-align: right; font-weight: bold; padding: 8px;">تاريخ البدء</td>
+            <td style="text-align: right; padding: 8px;">&#x200F;15 أبريل 2026، 6:00 مساءً</td>
+          </tr>
+          <tr style="border-top: 1px solid {{border}};">
+            <td style="text-align: right; font-weight: bold; padding: 8px;">الجائزة</td>
+            <td style="text-align: right; padding: 8px; color: {{primary}}; font-weight: bold;">&#x200F;50,000 د.إ</td>
+          </tr>
+        </mj-table>
+      </mj-column>
+    </mj-section>
+
+    <!-- Check-in instructions -->
+    <mj-section background-color="{{card}}" padding="10px 25px" direction="rtl">
+      <mj-column>
+        <mj-text font-size="15px" font-weight="bold" align="right" color="{{foreground}}" padding-bottom="8px">
+          تعليمات تسجيل الدخول
+        </mj-text>
+        <mj-text align="right" color="{{mutedForeground}}" font-size="13px">
+          يبدأ تسجيل الدخول قبل 30 دقيقة من موعد البدء. تأكد من استقرار اتصالك بالإنترنت وجاهزية اللعبة قبل الموعد.
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <mj-section background-color="{{card}}" padding="15px 25px 30px" direction="rtl">
+      <mj-column>
+        <mj-button background-color="{{primary}}" color="{{primaryForeground}}" font-family="Tahoma, Arial, sans-serif" font-size="14px" font-weight="bold" border-radius="8px" inner-padding="12px 30px" align="right" href="#">
+          عرض البطولة
+        </mj-button>
+      </mj-column>
+    </mj-section>
+    <!-- /@ar -->
+
+    <!-- @en -->
+    <mj-section background-color="{{card}}" padding="30px 25px 10px">
+      <mj-column>
+        <mj-text align="center" padding-bottom="15px">
+          <!--[if !mso]><!--><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="{{primary}}" viewBox="0 0 256 256"><path d="M216.86,207.57a28,28,0,0,1-24.66-7.77L150.09,152H172a51.94,51.94,0,0,0,51.2-61h0l16.36,84.17A28,28,0,0,1,216.86,207.57Z" opacity="0.2"></path><path d="M176,112H152a8,8,0,0,1,0-16h24a8,8,0,0,1,0,16ZM104,96H96V88a8,8,0,0,0-16,0v8H72a8,8,0,0,0,0,16h8v8a8,8,0,0,0,16,0v-8h8a8,8,0,0,0,0-16ZM241.48,200.65a36,36,0,0,1-54.94,4.81c-.12-.12-.24-.24-.35-.37L146.48,160h-37L69.81,205.09l-.35.37A36.08,36.08,0,0,1,44,216,36,36,0,0,1,8.56,173.75a.68.68,0,0,1,0-.14L24.93,89.52A59.88,59.88,0,0,1,83.89,40H172a60.08,60.08,0,0,1,59,49.25c0,.06,0,.12,0,.18l16.37,84.17a.68.68,0,0,1,0,.14A35.74,35.74,0,0,1,241.48,200.65ZM172,144a44,44,0,0,0,0-88H83.89A43.9,43.9,0,0,0,40.68,92.37l0,.13L24.3,176.59A20,20,0,0,0,58,194.3l41.92-47.59a8,8,0,0,1,6-2.71Zm59.7,32.59-8.74-45A60,60,0,0,1,172,160h-4.2L198,194.31a20.09,20.09,0,0,0,17.46,5.39,20,20,0,0,0,16.23-23.11Z"></path></svg><!--<![endif]-->
+        </mj-text>
+        <mj-text font-size="22px" font-weight="bold" align="left" color="{{foreground}}" padding-bottom="5px">
+          Registration Confirmed
+        </mj-text>
+        <mj-text align="left" color="{{success}}" font-size="13px" font-weight="bold">
+          You have been successfully registered for the tournament
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Tournament details -->
+    <mj-section background-color="{{card}}" padding="15px 25px">
+      <mj-column background-color="{{background}}" border-radius="8px" padding="20px">
+        <mj-text align="left" color="{{mutedForeground}}" font-size="12px" font-weight="bold" padding-bottom="10px">
+          TOURNAMENT DETAILS
+        </mj-text>
+        <mj-table font-size="13px" color="{{foreground}}" cellpadding="5" css-class="stack-table">
+          <tr>
+            <td style="font-weight: bold; padding: 8px; width: 120px;">Tournament</td>
+            <td style="padding: 8px;">Gulf Championship Series 2026</td>
+          </tr>
+          <tr style="border-top: 1px solid {{border}};">
+            <td style="font-weight: bold; padding: 8px;">Game</td>
+            <td style="padding: 8px;">Valorant</td>
+          </tr>
+          <tr style="border-top: 1px solid {{border}};">
+            <td style="font-weight: bold; padding: 8px;">Team</td>
+            <td style="padding: 8px;">Gulf Wolves (FalconX)</td>
+          </tr>
+          <tr style="border-top: 1px solid {{border}};">
+            <td style="font-weight: bold; padding: 8px;">Start Date</td>
+            <td style="padding: 8px;">April 15, 2026, 6:00 PM</td>
+          </tr>
+          <tr style="border-top: 1px solid {{border}};">
+            <td style="font-weight: bold; padding: 8px;">Prize Pool</td>
+            <td style="padding: 8px; color: {{primary}}; font-weight: bold;">AED 50,000</td>
+          </tr>
+        </mj-table>
+      </mj-column>
+    </mj-section>
+
+    <!-- Check-in instructions -->
+    <mj-section background-color="{{card}}" padding="10px 25px">
+      <mj-column>
+        <mj-text font-size="15px" font-weight="bold" align="left" color="{{foreground}}" padding-bottom="8px">
+          Check-in Instructions
+        </mj-text>
+        <mj-text align="left" color="{{mutedForeground}}" font-size="13px">
+          Check-in opens 30 minutes before the start time. Make sure your internet connection is stable and the game is ready before the scheduled time.
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <mj-section background-color="{{card}}" padding="15px 25px 30px">
+      <mj-column>
+        <mj-button background-color="{{primary}}" color="{{primaryForeground}}" font-family="Tahoma, Arial, sans-serif" font-size="14px" font-weight="bold" border-radius="8px" inner-padding="12px 30px" align="left" href="#">
+          View Tournament
+        </mj-button>
+      </mj-column>
+    </mj-section>
+    <!-- /@en -->
+
+    <mj-include path="../../partials/footer.mjml" />
+
+  </mj-body>
+</mjml>

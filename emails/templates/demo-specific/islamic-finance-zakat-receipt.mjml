@@ -1,0 +1,199 @@
+<!-- @brand: Al Baraka Finance | البركة للتمويل -->
+<mjml>
+  <mj-head>
+    <mj-attributes>
+      <mj-all font-family="Tahoma, Arial, sans-serif" />
+      <mj-text font-size="14px" color="{{foreground}}" line-height="1.6" />
+    </mj-attributes>
+    <mj-style>
+      @media only screen and (max-width: 480px) {
+        .stack-table td {
+          display: block !important;
+          width: 100% !important;
+          box-sizing: border-box !important;
+        }
+        .stack-table tr {
+          display: block !important;
+          margin-bottom: 12px !important;
+        }
+        .stack-table-rtl td {
+          text-align: right !important;
+          direction: rtl !important;
+        }
+      }
+    </mj-style>
+  </mj-head>
+  <mj-body background-color="{{background}}" width="600px">
+
+    <mj-include path="../../partials/header.mjml" />
+
+    <!-- @ar -->
+    <mj-section background-color="{{card}}" padding="30px 25px 10px" direction="rtl">
+      <mj-column>
+        <mj-text align="center" padding-bottom="15px">
+          <!--[if !mso]><!--><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="{{primary}}" viewBox="0 0 256 256"><path d="M16,152H48v56H16a8,8,0,0,1-8-8V160A8,8,0,0,1,16,152ZM204,56a28,28,0,0,0-12,2.71h0A28,28,0,1,0,176,85.29h0A28,28,0,1,0,204,56Z" opacity="0.2"></path><path d="M230.33,141.06a24.43,24.43,0,0,0-21.24-4.23l-41.84,9.62A28,28,0,0,0,140,112H89.94a31.82,31.82,0,0,0-22.63,9.37L44.69,144H16A16,16,0,0,0,0,160v40a16,16,0,0,0,16,16H120a7.93,7.93,0,0,0,1.94-.24l64-16a6.94,6.94,0,0,0,1.19-.4L226,182.82l.44-.2a24.6,24.6,0,0,0,3.93-41.56ZM16,160H40v40H16Zm203.43,8.21-38,16.18L119,200H56V155.31l22.63-22.62A15.86,15.86,0,0,1,89.94,128H140a12,12,0,0,1,0,24H112a8,8,0,0,0,0,16h32a8.32,8.32,0,0,0,1.79-.2l67-15.41.31-.08a8.6,8.6,0,0,1,6.3,15.9ZM164,96a36,36,0,0,0,5.9-.48,36,36,0,1,0,28.22-47A36,36,0,1,0,164,96Zm60-12a20,20,0,1,1-20-20A20,20,0,0,1,224,84ZM164,40a20,20,0,0,1,19.25,14.61,36,36,0,0,0-15,24.93A20.42,20.42,0,0,1,164,80a20,20,0,0,1,0-40Z"></path></svg><!--<![endif]-->
+        </mj-text>
+        <mj-text font-size="22px" font-weight="bold" align="right" color="{{foreground}}" padding-bottom="5px">
+          إيصال دفع الزكاة
+        </mj-text>
+        <mj-text align="right" color="{{mutedForeground}}" font-size="13px">
+          رقم الإيصال: ZKT-2026-71435
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Zakat type -->
+    <mj-section background-color="{{card}}" padding="10px 25px" direction="rtl">
+      <mj-column>
+        <mj-text align="center" color="{{primary}}" font-size="18px" font-weight="bold" padding="10px 0">
+          زكاة المال
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Calculation details -->
+    <mj-section background-color="{{card}}" padding="10px 25px" direction="rtl">
+      <mj-column background-color="{{background}}" border-radius="8px" padding="20px">
+        <mj-text align="right" color="{{mutedForeground}}" font-size="12px" font-weight="bold" padding-bottom="10px">
+          تفاصيل الحساب
+        </mj-text>
+        <mj-table font-size="13px" color="{{foreground}}" cellpadding="5" css-class="stack-table stack-table-rtl">
+          <tr>
+            <td style="text-align: right; font-weight: bold; padding: 8px; width: 130px;">نصاب الزكاة</td>
+            <td style="text-align: right; padding: 8px;">&#x200F;23,000 د.إ</td>
+          </tr>
+          <tr style="border-top: 1px solid {{border}};">
+            <td style="text-align: right; font-weight: bold; padding: 8px;">إجمالي الأصول</td>
+            <td style="text-align: right; padding: 8px;">&#x200F;320,000 د.إ</td>
+          </tr>
+          <tr style="border-top: 1px solid {{border}};">
+            <td style="text-align: right; font-weight: bold; padding: 8px;">نسبة الزكاة</td>
+            <td style="text-align: right; padding: 8px;">&#x200F;2.5%</td>
+          </tr>
+          <tr style="border-top: 1px solid {{border}};">
+            <td style="text-align: right; font-weight: bold; padding: 8px;">تاريخ الدفع</td>
+            <td style="text-align: right; padding: 8px;">&#x200F;19 مارس 2026</td>
+          </tr>
+          <tr style="font-weight: bold; border-top: 2px solid {{border}};">
+            <td style="text-align: right; padding: 10px 8px;">مبلغ الزكاة المدفوع</td>
+            <td style="text-align: right; padding: 10px 8px; color: {{primary}}; font-size: 16px;">&#x200F;8,000 د.إ</td>
+          </tr>
+        </mj-table>
+      </mj-column>
+    </mj-section>
+
+    <!-- Distribution -->
+    <mj-section background-color="{{card}}" padding="10px 25px" direction="rtl">
+      <mj-column>
+        <mj-text align="right" color="{{success}}" font-size="13px" font-weight="bold" padding="8px 0">
+          ✓ تم تخصيص الزكاة للمستحقين وفق أحكام الشريعة الإسلامية.
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <mj-section background-color="{{card}}" padding="10px 25px 10px" direction="rtl">
+      <mj-column>
+        <mj-button background-color="{{primary}}" color="{{primaryForeground}}" font-family="Tahoma, Arial, sans-serif" font-size="14px" font-weight="bold" border-radius="8px" inner-padding="12px 30px" align="right" href="#">
+          عرض الشهادة
+        </mj-button>
+      </mj-column>
+    </mj-section>
+
+    <!-- Hadith -->
+    <mj-section background-color="{{card}}" padding="10px 25px 30px" direction="rtl">
+      <mj-column>
+        <mj-divider border-color="{{border}}" border-width="1px" padding="5px 0 15px 0" />
+        <mj-text align="center" color="{{mutedForeground}}" font-size="12px" font-style="italic" line-height="1.8">
+          قال رسول الله صلى الله عليه وسلم: «ما نقصت صدقةٌ من مال» رواه مسلم
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <!-- /@ar -->
+
+    <!-- @en -->
+    <mj-section background-color="{{card}}" padding="30px 25px 10px">
+      <mj-column>
+        <mj-text align="center" padding-bottom="15px">
+          <!--[if !mso]><!--><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="{{primary}}" viewBox="0 0 256 256"><path d="M16,152H48v56H16a8,8,0,0,1-8-8V160A8,8,0,0,1,16,152ZM204,56a28,28,0,0,0-12,2.71h0A28,28,0,1,0,176,85.29h0A28,28,0,1,0,204,56Z" opacity="0.2"></path><path d="M230.33,141.06a24.43,24.43,0,0,0-21.24-4.23l-41.84,9.62A28,28,0,0,0,140,112H89.94a31.82,31.82,0,0,0-22.63,9.37L44.69,144H16A16,16,0,0,0,0,160v40a16,16,0,0,0,16,16H120a7.93,7.93,0,0,0,1.94-.24l64-16a6.94,6.94,0,0,0,1.19-.4L226,182.82l.44-.2a24.6,24.6,0,0,0,3.93-41.56ZM16,160H40v40H16Zm203.43,8.21-38,16.18L119,200H56V155.31l22.63-22.62A15.86,15.86,0,0,1,89.94,128H140a12,12,0,0,1,0,24H112a8,8,0,0,0,0,16h32a8.32,8.32,0,0,0,1.79-.2l67-15.41.31-.08a8.6,8.6,0,0,1,6.3,15.9ZM164,96a36,36,0,0,0,5.9-.48,36,36,0,1,0,28.22-47A36,36,0,1,0,164,96Zm60-12a20,20,0,1,1-20-20A20,20,0,0,1,224,84ZM164,40a20,20,0,0,1,19.25,14.61,36,36,0,0,0-15,24.93A20.42,20.42,0,0,1,164,80a20,20,0,0,1,0-40Z"></path></svg><!--<![endif]-->
+        </mj-text>
+        <mj-text font-size="22px" font-weight="bold" align="left" color="{{foreground}}" padding-bottom="5px">
+          Zakat Payment Receipt
+        </mj-text>
+        <mj-text align="left" color="{{mutedForeground}}" font-size="13px">
+          Receipt Number: ZKT-2026-71435
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Zakat type -->
+    <mj-section background-color="{{card}}" padding="10px 25px">
+      <mj-column>
+        <mj-text align="center" color="{{primary}}" font-size="18px" font-weight="bold" padding="10px 0">
+          Zakat Al-Mal
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Calculation details -->
+    <mj-section background-color="{{card}}" padding="10px 25px">
+      <mj-column background-color="{{background}}" border-radius="8px" padding="20px">
+        <mj-text align="left" color="{{mutedForeground}}" font-size="12px" font-weight="bold" padding-bottom="10px">
+          CALCULATION DETAILS
+        </mj-text>
+        <mj-table font-size="13px" color="{{foreground}}" cellpadding="5" css-class="stack-table">
+          <tr>
+            <td style="font-weight: bold; padding: 8px; width: 140px;">Nisab Amount</td>
+            <td style="padding: 8px;">AED 23,000</td>
+          </tr>
+          <tr style="border-top: 1px solid {{border}};">
+            <td style="font-weight: bold; padding: 8px;">Total Assets</td>
+            <td style="padding: 8px;">AED 320,000</td>
+          </tr>
+          <tr style="border-top: 1px solid {{border}};">
+            <td style="font-weight: bold; padding: 8px;">Zakat Rate</td>
+            <td style="padding: 8px;">2.5%</td>
+          </tr>
+          <tr style="border-top: 1px solid {{border}};">
+            <td style="font-weight: bold; padding: 8px;">Payment Date</td>
+            <td style="padding: 8px;">March 19, 2026</td>
+          </tr>
+          <tr style="font-weight: bold; border-top: 2px solid {{border}};">
+            <td style="padding: 10px 8px;">Zakat Amount Paid</td>
+            <td style="padding: 10px 8px; color: {{primary}}; font-size: 16px;">AED 8,000</td>
+          </tr>
+        </mj-table>
+      </mj-column>
+    </mj-section>
+
+    <!-- Distribution -->
+    <mj-section background-color="{{card}}" padding="10px 25px">
+      <mj-column>
+        <mj-text align="left" color="{{success}}" font-size="13px" font-weight="bold" padding="8px 0">
+          ✓ Zakat has been allocated to eligible recipients in accordance with Islamic Shariah.
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <mj-section background-color="{{card}}" padding="10px 25px 10px">
+      <mj-column>
+        <mj-button background-color="{{primary}}" color="{{primaryForeground}}" font-family="Tahoma, Arial, sans-serif" font-size="14px" font-weight="bold" border-radius="8px" inner-padding="12px 30px" align="left" href="#">
+          View Certificate
+        </mj-button>
+      </mj-column>
+    </mj-section>
+
+    <!-- Hadith -->
+    <mj-section background-color="{{card}}" padding="10px 25px 30px">
+      <mj-column>
+        <mj-divider border-color="{{border}}" border-width="1px" padding="5px 0 15px 0" />
+        <mj-text align="center" color="{{mutedForeground}}" font-size="12px" font-style="italic" line-height="1.8">
+          The Prophet (peace be upon him) said: “Charity does not decrease wealth.” (Sahih Muslim)
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <!-- /@en -->
+
+    <mj-include path="../../partials/footer.mjml" />
+
+  </mj-body>
+</mjml>

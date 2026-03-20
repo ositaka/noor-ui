@@ -87,26 +87,26 @@
         <mj-text font-size="15px" font-weight="bold" align="right" color="{{foreground}}" padding-bottom="10px">
           تفاصيل السعر
         </mj-text>
-        <mj-table font-size="13px" color="{{foreground}}" cellpadding="5">
-          <tr style="text-align: left;">
+        <mj-table font-size="13px" color="{{foreground}}" cellpadding="5" css-class="stack-table stack-table-rtl">
+          <tr>
             <td style="text-align: right; padding: 6px 8px;">سعر الغرفة (4 ليالٍ × 850 د.إ)</td>
-            <td style="padding: 6px 8px;">3,400 د.إ</td>
+            <td style="text-align: right; padding: 6px 8px;">3,400 د.إ</td>
           </tr>
-          <tr style="text-align: left;">
+          <tr>
             <td style="text-align: right; padding: 6px 8px;">رسوم السياحة</td>
-            <td style="padding: 6px 8px;">60 د.إ</td>
+            <td style="text-align: right; padding: 6px 8px;">60 د.إ</td>
           </tr>
-          <tr style="text-align: left;">
+          <tr>
             <td style="text-align: right; padding: 6px 8px;">رسوم الخدمة (10%)</td>
-            <td style="padding: 6px 8px;">340 د.إ</td>
+            <td style="text-align: right; padding: 6px 8px;">340 د.إ</td>
           </tr>
-          <tr style="text-align: left;">
+          <tr>
             <td style="text-align: right; padding: 6px 8px;">ضريبة القيمة المضافة (5%)</td>
-            <td style="padding: 6px 8px;">190 د.إ</td>
+            <td style="text-align: right; padding: 6px 8px;">190 د.إ</td>
           </tr>
-          <tr style="font-weight: bold; text-align: left; border-top: 2px solid {{border}};">
+          <tr style="font-weight: bold; border-top: 2px solid {{border}};">
             <td style="text-align: right; padding: 8px;">الإجمالي</td>
-            <td style="padding: 8px; color: {{primary}};">3,990 د.إ</td>
+            <td style="text-align: right; padding: 8px; color: {{primary}};">3,990 د.إ</td>
           </tr>
         </mj-table>
       </mj-column>
@@ -189,7 +189,7 @@
         <mj-text font-size="15px" font-weight="bold" align="left" color="{{foreground}}" padding-bottom="10px">
           Price Breakdown
         </mj-text>
-        <mj-table font-size="13px" color="{{foreground}}" cellpadding="5">
+        <mj-table font-size="13px" color="{{foreground}}" cellpadding="5" css-class="stack-table">
           <tr>
             <td style="padding: 6px 8px;">Room Rate (4 nights × AED 850)</td>
             <td style="text-align: right; padding: 6px 8px;">AED 3,400</td>
