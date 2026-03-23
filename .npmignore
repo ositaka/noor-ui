@@ -4,6 +4,7 @@ public/
 scripts/
 projects/
 docs/
+emails/
 
 # Config files for docs site
 next.config.js

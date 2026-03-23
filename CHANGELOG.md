@@ -5,6 +5,26 @@ All notable changes to Noor UI will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.11.0] - 2026-03-23
+
+### Added
+- **MJML Email Template System**: 21 production-ready bilingual email templates with LTR, RTL, and bilingual variants. Auto-themed from `globals.css` with light/dark mode support. 504 compiled HTML files across 4 themes (cozy, minimal, futuristic, artistic).
+  - **Transactional**: Order Confirmation, Shipping Update, Invoice/Receipt, Bank Transfer Receipt, Hotel Booking Confirmation, Payment Reminder
+  - **Auth**: Welcome/Onboarding, Password Reset, OTP Verification
+  - **Notifications**: Notification Alert, Appointment Reminder, Assignment Notification, Support Ticket
+  - **Marketing**: Newsletter, Event Invitation, Feedback Request
+  - **Industry**: Real Estate (Dar Al Khaleej), Marketplace (Souq Al Noor), Government (Noor Gov Portal), Esports (Gulf Stars Esports), Islamic Finance (Al Baraka Finance)
+- **Email Templates Showcase Page** (`/email-templates`): Interactive preview with variant/device/theme/dark toggles, URL deep linking, copy/download HTML, and category filtering (Transactional, Auth, Notifications, Marketing, Industry)
+- **Build Script** (`emails/build.js`): Auto-extracts theme colors from `styles/globals.css` — no static JSON config files. Supports `--theme` flag and `--theme-file` for custom brands. Post-processes RTL HTML with `dir="rtl" lang="ar"`
+- **15 Phosphor Duotone Inline SVGs**: Theme-colored icons (Lock, Key, CheckCircle, Lightning, MagnifyingGlass, ChatCircle, CalendarBlank, Clock, Timer, Stethoscope, GraduationCap, MapPin, Microphone, Lightbulb, Package) with `fill="{{primary}}"` for automatic theming
+- **RTL Email Fixes**: Mobile table stacking with `.stack-table-rtl` CSS class, RLM marks (`&#x200F;`) on mixed bidi content, truck icon mirrored for Arabic (SVG transform), `direction: rtl !important` on stacked cells
+- **Site Navigation**: Email Templates added to header (More dropdown + mobile menu), footer (Resources), global search, sitemap, documentation hub, examples page cross-link, and components "Need Help?" card
+- **`pnpm build:emails`** script in package.json
+
+### Changed
+- Removed "default" theme (`:root` values now serve as base for named themes only). 4 themes: minimal, futuristic, cozy, artistic
+- `.gitattributes` marks `public/emails/preview/**/*.html` as `linguist-generated`
+
 ## [0.10.0] - 2026-03-14
 
 ### Added

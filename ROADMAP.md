@@ -91,20 +91,19 @@ Build the **go-to design system for bilingual (LTR/RTL) web applications**, star
 - ✅ Version and release strategy established
 - ✅ Automated pre-publish checks (translations, links, types)
 
-**Current Version:** v0.10.0 (2026-03-14)
+**Current Version:** v0.11.0 (2026-03-23)
 
 **Latest Updates:**
+- ✅ **MJML Email Templates**: 21 bilingual templates × 3 variants × 4 themes × 2 modes = 504 HTML files
+- ✅ Auto-theming from `globals.css` — zero config drift, new themes auto-discovered
+- ✅ 15 Phosphor duotone inline SVGs with `{{primary}}` fill for automatic theme coloring
+- ✅ Showcase page at `/email-templates` with iframe previews, URL deep linking, copy/download
+- ✅ RTL email fixes: bidi marks, direction-aware table stacking, truck icon mirroring
 - ✅ Tailwind CSS v3 → v4.1 migration (CSS-first configuration)
 - ✅ Custom themes system with extensible DesignSystemProvider
-- ✅ `--color-*` variable refactoring for proper theme scoping
-- ✅ ~50 hardcoded English strings replaced with i18n translations
-- ✅ New useThemeTokens hook for real-time CSS variable display
-- ✅ Added CSS Setup section showing exact theme code
 - ✅ Icon library migration: lucide-react → @phosphor-icons/react (Duotone)
 - ✅ Squircle corners via `--corner-shape` CSS variable (progressive enhancement)
-- ✅ CSS `@layer base` fix for hover utility overrides in Tailwind v4
 - ✅ Header nav progressive collapse with "More" dropdown
-- ✅ Sitemap page, XML sitemap, and Cmd+K search fully updated
 - ✅ 77+ components with complete RTL/LTR support
 
 **Deliverables:**
@@ -119,8 +118,10 @@ Build the **go-to design system for bilingual (LTR/RTL) web applications**, star
 
 **Goal:** Build remaining demo projects, expand to more languages, grow community.
 
-#### Months 1-2: Demo Projects 3-4
-- [ ] Build Marketplace or Bank demo
+#### Months 1-2: Demo Projects & Email Templates
+- ✅ Built Banking (Gulf Digital Bank), Hotel (Nuzul), Esports (Gulf Stars) demos
+- ✅ Built MJML email template system with 21 bilingual templates
+- ✅ 5 industry-specific email templates tied to demo apps
 - [ ] Add more complex features (payments, multi-vendor)
 - [ ] Document advanced patterns
 
