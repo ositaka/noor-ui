@@ -42,7 +42,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const examples = [
     'islamic-finance-dashboard', 'calendar', 'registration',
     'marketplace', 'portfolio', 'real-estate', 'healthcare', 'education',
-    'ai-playground',
+    'ai-playground', 'mymantras',
   ]
 
   return [

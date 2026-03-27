@@ -129,5 +129,13 @@ examples: {
       status: 'ready',
       featured: true,
     },
+    {
+      title: 'Quotes & Mantras Dashboard',
+      description: 'Spiritual wellness app with daily quotes, AI-powered mantra generation with StreamingText and ThinkingIndicator, Human Design profile form with auto-fill logic, quote collections with Carousel, and dashboard with Charts and StatsCards.',
+      href: '/examples/mymantras',
+      tags: ['Wellness', 'AI', 'StreamingText', 'Stepper', 'Carousel', 'Blockquote', 'RTL'],
+      status: 'ready',
+      featured: true,
+    },
   ],
 }

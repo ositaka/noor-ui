@@ -18,6 +18,7 @@ import {
   Robot,
   FirstAid,
   GraduationCap,
+  FlowerLotus,
   type Icon as PhosphorIcon,
 } from '@phosphor-icons/react'
 
@@ -35,6 +36,7 @@ const iconMap: Record<string, PhosphorIcon> = {
   '/examples/government': Sparkle,
   '/examples/hotel': House,
   '/examples/banking': Bank,
+  '/examples/mymantras': FlowerLotus,
 }
 
 interface Example {
