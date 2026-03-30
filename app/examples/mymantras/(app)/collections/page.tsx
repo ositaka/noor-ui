@@ -7,15 +7,15 @@ import { Button } from '@/components/ui/button'
 import { ArabicNumber } from '@/components/ui/arabic-number'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Carousel } from '@/components/ui/carousel'
-import { Blockquote } from '@/components/ui/blockquote'
 import { EmptyState } from '@/components/ui/empty-state'
 import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription,
-} from '@/components/ui/dialog'
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetDescription,
+} from '@/components/ui/sheet'
+import { QuoteHero } from '@/components/ui/quote-hero'
 import { useDirection } from '@/components/providers/direction-provider'
 import { Books, Quotes, Lock, Globe } from '@phosphor-icons/react'
 
@@ -204,7 +204,7 @@ export default function MyMantrasCollectionsPage() {
                 onClick={() => setSelectedCollection(col)}
                 className="text-start"
               >
-                <Card className="h-full hover:shadow-md transition-shadow cursor-pointer">
+                <Card className="h-full border-s-4 border-s-primary/15 hover:border-s-primary/40 hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 cursor-pointer">
                   <CardHeader className="pb-3">
                     <div className="flex items-start justify-between gap-2">
                       <CardTitle className="text-base">{isRTL ? col.nameAr : col.name}</CardTitle>
@@ -247,38 +247,38 @@ export default function MyMantrasCollectionsPage() {
         </TabsContent>
       </Tabs>
 
-      {/* Collection Detail Dialog */}
-      <Dialog open={!!selectedCollection} onOpenChange={(open) => !open && setSelectedCollection(null)}>
-        <DialogContent className="sm:max-w-2xl">
+      {/* Collection Detail Sheet — slides up from bottom */}
+      <Sheet open={!!selectedCollection} onOpenChange={(open) => !open && setSelectedCollection(null)}>
+        <SheetContent side="bottom" className="h-[70vh] overflow-y-auto">
           {selectedCollection && (
             <>
-              <DialogHeader>
-                <DialogTitle>{isRTL ? selectedCollection.nameAr : selectedCollection.name}</DialogTitle>
-                <DialogDescription>{isRTL ? selectedCollection.descriptionAr : selectedCollection.description}</DialogDescription>
-              </DialogHeader>
-              <div className="py-4">
+              <SheetHeader className="text-center pb-2">
+                <SheetTitle className="font-display">{isRTL ? selectedCollection.nameAr : selectedCollection.name}</SheetTitle>
+                <SheetDescription className="font-body-serif italic">{isRTL ? selectedCollection.descriptionAr : selectedCollection.description}</SheetDescription>
+              </SheetHeader>
+              <div className="py-4 max-w-3xl mx-auto">
                 <Carousel
                   items={selectedCollection.quotes}
                   renderItem={(quote) => (
-                    <div className="px-4 py-8">
-                      <Blockquote
+                    <div className="px-4">
+                      <QuoteHero
+                        text={isRTL ? quote.textAr : quote.text}
                         author={isRTL ? quote.authorAr : quote.author}
-                        variant="accent"
-                      >
-                        {isRTL ? quote.textAr : quote.text}
-                      </Blockquote>
+                        size="md"
+                      />
                     </div>
                   )}
                   showDots
                   showArrows
                   loop
                   aria-label={isRTL ? selectedCollection.nameAr : selectedCollection.name}
+                  dotSize="lg"
                 />
               </div>
             </>
           )}
-        </DialogContent>
-      </Dialog>
+        </SheetContent>
+      </Sheet>
     </div>
   )
 }

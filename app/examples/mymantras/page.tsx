@@ -88,12 +88,12 @@ export default function MyMantrasLoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-muted/30 relative">
-      {/* Geometric pattern background */}
+    <div className="min-h-screen flex flex-col bg-background bg-sanctuary relative">
+      {/* Sacred geometry — 8-pointed star arabesque pattern */}
       <div
-        className="absolute inset-0 opacity-[0.03]"
+        className="absolute inset-0 opacity-[0.04]"
         style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='1'%3E%3Ccircle cx='30' cy='30' r='4'/%3E%3Ccircle cx='30' cy='30' r='12' stroke='%23000' stroke-width='1' fill='none'/%3E%3Ccircle cx='30' cy='30' r='20' stroke='%23000' stroke-width='0.5' fill='none'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='currentColor' stroke-width='0.5' opacity='0.8'%3E%3Cpolygon points='40,8 47,20 60,13 53,27 67,27 53,33 60,47 47,40 40,53 33,40 20,47 27,33 13,33 27,27 20,13 33,20' transform='translate(0,0)'/%3E%3Ccircle cx='40' cy='40' r='18'/%3E%3Ccircle cx='40' cy='40' r='6'/%3E%3C/g%3E%3C/svg%3E")`,
         }}
       />
 
@@ -107,19 +107,19 @@ export default function MyMantrasLoginPage() {
         <div className="w-full max-w-sm space-y-6">
           {/* Branding */}
           <div className="text-center space-y-3">
-            <div className="inline-flex items-center justify-center p-3 bg-primary rounded-2xl">
-              <FlowerLotus className="h-10 w-10 text-primary-foreground" weight="duotone" />
+            <div className="inline-flex items-center justify-center p-4 bg-primary rounded-2xl glow-primary">
+              <FlowerLotus className="h-12 w-12 text-primary-foreground" weight="duotone" />
             </div>
             <div>
-              <h1 className="text-2xl font-bold">{h.brand}</h1>
-              <p className="text-sm text-muted-foreground">{h.tagline}</p>
+              <h1 className="text-3xl font-display font-bold">{h.brand}</h1>
+              <p className="text-sm text-muted-foreground font-body-serif italic">{h.tagline}</p>
             </div>
           </div>
 
-          {/* Login card */}
-          <Card>
+          {/* Login card — subtle glassmorphism */}
+          <Card className="backdrop-blur-sm bg-card/80 border-border/50">
             <CardHeader className="text-center pb-4">
-              <CardTitle className="text-lg">{h.loginTitle}</CardTitle>
+              <CardTitle className="text-lg font-body-serif">{h.loginTitle}</CardTitle>
             </CardHeader>
             <CardContent>
               <form onSubmit={handleSubmit} className="space-y-4" noValidate>
@@ -173,7 +173,7 @@ export default function MyMantrasLoginPage() {
                     <p id="pw-error" className="text-sm text-destructive">{errors.password}</p>
                   )}
                 </div>
-                <Button type="submit" className="w-full" size="lg" loading={isSubmitting}>
+                <Button type="submit" className="w-full glow-primary" size="lg" loading={isSubmitting}>
                   {h.signIn}
                 </Button>
               </form>

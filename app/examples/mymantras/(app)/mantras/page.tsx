@@ -2,14 +2,11 @@
 
 import * as React from 'react'
 import Link from 'next/link'
-import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
 import { Callout } from '@/components/ui/callout'
+import { Separator } from '@/components/ui/separator'
 import { Stepper, type Step } from '@/components/ui/stepper'
-import { ThinkingIndicator } from '@/components/ui/thinking-indicator'
 import { StreamingText } from '@/components/ui/streaming-text'
-import { Blockquote } from '@/components/ui/blockquote'
 import { useDirection } from '@/components/providers/direction-provider'
 import { useToast } from '@/hooks/use-toast'
 import {
@@ -301,9 +298,9 @@ export default function MyMantrasMantrasPage() {
                 <button
                   key={topic.id}
                   onClick={() => setSelectedTopic(topic.id)}
-                  className={`p-4 rounded-xl border-2 text-center transition-all hover:shadow-sm ${
+                  className={`p-4 rounded-xl border-2 text-center transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md ${
                     isSelected
-                      ? 'border-primary bg-primary/5 shadow-sm'
+                      ? 'border-primary bg-primary/[0.04] glow-primary'
                       : 'border-border hover:border-primary/30'
                   }`}
                 >
@@ -337,81 +334,92 @@ export default function MyMantrasMantrasPage() {
         </div>
       )}
 
-      {/* Phase 2: Generating */}
+      {/* Phase 2: Generating — meditative breathing */}
       {phase === 'generating' && (
-        <div className="flex flex-col items-center justify-center py-20 space-y-6">
-          <ThinkingIndicator variant="wave" size="lg" />
-          <p className="text-lg text-muted-foreground animate-pulse">
+        <div className="flex flex-col items-center justify-center py-20 space-y-8">
+          {/* Breathing golden circle */}
+          <div className="relative">
+            <div className="h-20 w-20 rounded-full bg-accent/20 animate-breathe" />
+            <div className="absolute inset-0 h-20 w-20 rounded-full glow-accent animate-shimmer-glow" />
+            <Sparkle
+              className="absolute top-1/2 start-1/2 -translate-x-1/2 -translate-y-1/2 h-8 w-8 text-accent"
+              weight="fill"
+            />
+          </div>
+          <p className="text-lg text-muted-foreground font-body-serif italic transition-opacity duration-500">
             {generatingMessages[generatingMsg]}
           </p>
         </div>
       )}
 
-      {/* Phase 3: Results */}
+      {/* Phase 3: Results — editorial layout */}
       {phase === 'results' && (
         <div className="space-y-6">
           {/* Results header */}
-          <div className="flex items-center gap-2 mb-4">
-            <Badge>{topicLabel}</Badge>
-            <h2 className="text-lg font-semibold">
-              {isRTL ? `٨ ${h.resultsTitle} ${topicLabel}` : `8 ${h.resultsTitle} ${topicLabel}`}
-            </h2>
+          <div className="text-center mb-8">
+            <p className="text-sm text-muted-foreground font-body-serif italic mb-1">
+              {isRTL ? `٨ ${h.resultsTitle}` : `8 ${h.resultsTitle}`}
+            </p>
+            <h2 className="text-2xl font-display font-semibold">{topicLabel}</h2>
           </div>
 
-          {/* Mantras */}
-          <div className="max-w-3xl mx-auto space-y-6">
+          {/* Mantras — no cards, editorial flow */}
+          <div className="max-w-3xl mx-auto">
             {mockMantras.map((m, i) => (
-              <Card key={i}>
-                <CardContent className="p-6">
-                  <div className="flex items-start gap-3">
-                    <Badge variant="outline" className="shrink-0 mt-1">
-                      {isRTL ? new Intl.NumberFormat('ar', { numberingSystem: 'arab' }).format(i + 1) : i + 1}
-                    </Badge>
-                    <div className="space-y-3 min-w-0">
-                      {/* Mantra text */}
-                      <div className="text-lg font-semibold italic">
-                        {i === 0 && firstMantraStreaming ? (
-                          <StreamingText
-                            text={`"${isRTL ? m.mantraAr : m.mantra}"`}
-                            speed={20}
-                            showCursor
-                            isStreaming
-                            onComplete={() => setFirstMantraStreaming(false)}
-                          />
-                        ) : (
-                          <span style={{ opacity: i === 0 || !firstMantraStreaming ? 1 : 0 }}>
-                            &ldquo;{isRTL ? m.mantraAr : m.mantra}&rdquo;
-                          </span>
-                        )}
-                      </div>
+              <div key={i}>
+                <div className="relative py-12">
+                  {/* Watermark number */}
+                  <span className="absolute top-6 start-0 text-7xl font-display font-bold text-primary/[0.06] pointer-events-none select-none leading-none">
+                    {isRTL
+                      ? new Intl.NumberFormat('ar', { numberingSystem: 'arab' }).format(i + 1)
+                      : i + 1}
+                  </span>
 
-                      {/* Explanation (only show after streaming completes or if not first) */}
-                      {(i === 0 ? !firstMantraStreaming : !firstMantraStreaming) && (
-                        <>
-                          <p className="text-sm text-muted-foreground leading-relaxed">
-                            {isRTL ? m.explanationAr : m.explanation}
-                          </p>
-                          <Badge variant="secondary" className="text-xs">
-                            {isRTL ? m.hdElementAr : m.hdElement}
-                          </Badge>
-                        </>
+                  <div className="relative z-[1] ps-2 md:ps-4">
+                    {/* Mantra text */}
+                    <div className="text-xl md:text-2xl font-display italic text-foreground leading-relaxed">
+                      {i === 0 && firstMantraStreaming ? (
+                        <StreamingText
+                          text={`\u201C${isRTL ? m.mantraAr : m.mantra}\u201D`}
+                          speed={20}
+                          showCursor
+                          isStreaming
+                          onComplete={() => setFirstMantraStreaming(false)}
+                        />
+                      ) : (
+                        <span style={{ opacity: i === 0 || !firstMantraStreaming ? 1 : 0 }}>
+                          &ldquo;{isRTL ? m.mantraAr : m.mantra}&rdquo;
+                        </span>
                       )}
                     </div>
+
+                    {/* Explanation (only show after streaming completes) */}
+                    {(i === 0 ? !firstMantraStreaming : !firstMantraStreaming) && (
+                      <div className="mt-4 space-y-2">
+                        <p className="text-base font-body-serif text-muted-foreground leading-relaxed">
+                          {isRTL ? m.explanationAr : m.explanation}
+                          <span className="text-primary/60 text-sm ms-2">
+                            {isRTL ? m.hdElementAr : m.hdElement}
+                          </span>
+                        </p>
+                      </div>
+                    )}
                   </div>
-                </CardContent>
-              </Card>
+                </div>
+                {i < mockMantras.length - 1 && <Separator className="opacity-30" />}
+              </div>
             ))}
           </div>
 
           {/* Action buttons */}
-          <div className="flex items-center justify-center gap-3 pt-4">
+          <div className="flex items-center justify-center gap-3 pt-8 pb-4">
             <Button variant="outline" onClick={handleGenerateAgain} className="gap-2">
               <ArrowLeft className="h-4 w-4 rtl:rotate-180" />
               {h.generateAgain}
             </Button>
             <Button
               onClick={() => toast({ title: h.saved, description: h.savedDesc, variant: 'success' })}
-              className="gap-2"
+              className="gap-2 glow-primary"
             >
               <BookmarkSimple className="h-4 w-4" />
               {h.saveToCollection}

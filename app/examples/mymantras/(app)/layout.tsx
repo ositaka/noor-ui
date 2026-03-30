@@ -144,7 +144,7 @@ export default function MyMantrasLayout({ children }: { children: React.ReactNod
           <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center">
             <FlowerLotus className="h-5 w-5 text-primary-foreground" />
           </div>
-          <span className="font-bold">{t.brand}</span>
+          <span className="font-bold font-display">{t.brand}</span>
         </div>
       }
       logoHref="/examples/mymantras/home"

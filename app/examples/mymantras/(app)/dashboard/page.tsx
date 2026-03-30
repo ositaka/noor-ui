@@ -4,83 +4,100 @@ import * as React from 'react'
 import Link from 'next/link'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { StatsCard } from '@/components/ui/stats-card'
+import { Separator } from '@/components/ui/separator'
 import { Callout } from '@/components/ui/callout'
 import { ArabicNumber } from '@/components/ui/arabic-number'
-import { Chart } from '@/components/ui/chart'
+import { Timeline, type TimelineItem } from '@/components/ui/timeline'
+import { QuoteHero } from '@/components/ui/quote-hero'
 import { useDirection } from '@/components/providers/direction-provider'
 import {
-  ChartPie,
-  Quotes,
-  Books,
-  Heart,
   Sparkle,
+  Heart,
   ArrowRight,
   ArrowLeft,
+  BookmarkSimple,
+  Books,
+  FlowerLotus,
+  Star,
+  UserCircle,
 } from '@phosphor-icons/react'
 
 const gt = {
   en: {
-    title: 'Dashboard',
-    subtitle: 'Your spiritual journey at a glance',
-    quotesSaved: 'Quotes Saved',
-    collections: 'Collections',
-    favorites: 'Favorites',
-    mantrasGenerated: 'Mantras Generated',
-    sets: 'sets',
-    fromLastMonth: 'from last month',
-    weeklyActivity: 'Weekly Activity',
-    quotesViewed: 'Quotes viewed per day',
-    recentQuotes: 'Recent Quotes',
+    title: 'Your Journey',
+    subtitle: 'A moment of reflection',
+    quotesSaved: 'quotes saved',
+    collections: 'collections',
+    favorites: 'favorites',
+    mantraSets: 'mantra sets',
+    lastSaved: 'Last saved',
+    yourPath: 'Your Path',
+    recentReflections: 'Recent Reflections',
     viewAll: 'View All',
-    topicsDistribution: 'Topics Distribution',
-    completeProfile: 'Complete your HD Profile',
-    completeProfileDesc: 'Add your Human Design chart data to unlock personalized mantras tailored to your unique design.',
+    yourCollections: 'Your Collections',
+    viewCollection: 'View',
+    quotes: 'quotes',
+    completeProfile: 'Deepen Your Practice',
+    completeProfileDesc: 'Add your Human Design chart to unlock mantras crafted uniquely for your design.',
     goToSettings: 'Go to Settings',
-    mon: 'Mon',
-    tue: 'Tue',
-    wed: 'Wed',
-    thu: 'Thu',
-    fri: 'Fri',
-    sat: 'Sat',
-    sun: 'Sun',
-    relationships: 'Relationships',
-    selfWorth: 'Self-Worth',
-    decisions: 'Decisions',
-    creativity: 'Creativity',
-    rest: 'Rest',
+    // Timeline events
+    tJoined: 'Joined MyMantras',
+    tJoinedDesc: 'Your journey of self-discovery began',
+    tJoinedDate: 'Mar 15',
+    tFirstFav: 'First Quote Saved',
+    tFirstFavDesc: '"The wound is the place where the Light enters you."',
+    tFirstFavDate: 'Mar 16',
+    tFirstMantras: 'First Mantras Generated',
+    tFirstMantrasDesc: '8 mantras on Self-Worth, crafted from your HD chart',
+    tFirstMantrasDate: 'Mar 20',
+    tCollection: 'Created "Morning Wisdom"',
+    tCollectionDesc: 'Your first collection — 5 quotes for daily inspiration',
+    tCollectionDate: 'Mar 23',
+    tMilestone: '23 Favorites Milestone',
+    tMilestoneDesc: 'Your library of wisdom is growing beautifully',
+    tMilestoneDate: 'Today',
   },
   ar: {
-    title: 'لوحة التحكم',
-    subtitle: 'رحلتك الروحية في لمحة',
+    title: 'رحلتك',
+    subtitle: 'لحظة تأمّل',
     quotesSaved: 'اقتباسات محفوظة',
-    collections: 'المجموعات',
-    favorites: 'المفضلة',
-    mantrasGenerated: 'تأملات مُنشأة',
-    sets: 'مجموعات',
-    fromLastMonth: 'عن الشهر الماضي',
-    weeklyActivity: 'النشاط الأسبوعي',
-    quotesViewed: 'الاقتباسات المعروضة يومياً',
-    recentQuotes: 'اقتباسات حديثة',
+    collections: 'مجموعات',
+    favorites: 'مفضلة',
+    mantraSets: 'مجموعات تأملات',
+    lastSaved: 'آخر حفظ',
+    yourPath: 'مسارك',
+    recentReflections: 'تأملات حديثة',
     viewAll: 'عرض الكل',
-    topicsDistribution: 'توزيع المواضيع',
-    completeProfile: 'أكمل ملف التصميم البشري',
-    completeProfileDesc: 'أضف بيانات مخطط التصميم البشري لفتح تأملات مخصصة لتصميمك الفريد.',
+    yourCollections: 'مجموعاتك',
+    viewCollection: 'عرض',
+    quotes: 'اقتباسات',
+    completeProfile: 'عمّق ممارستك',
+    completeProfileDesc: 'أضف مخطط تصميمك البشري لفتح تأملات مصممة خصيصاً لتصميمك.',
     goToSettings: 'الذهاب إلى الإعدادات',
-    mon: 'الإثنين',
-    tue: 'الثلاثاء',
-    wed: 'الأربعاء',
-    thu: 'الخميس',
-    fri: 'الجمعة',
-    sat: 'السبت',
-    sun: 'الأحد',
-    relationships: 'العلاقات',
-    selfWorth: 'تقدير الذات',
-    decisions: 'القرارات',
-    creativity: 'الإبداع',
-    rest: 'الراحة',
+    // Timeline events
+    tJoined: 'انضممت إلى تأملاتي',
+    tJoinedDesc: 'بدأت رحلتك في اكتشاف الذات',
+    tJoinedDate: '١٥ مارس',
+    tFirstFav: 'أول اقتباس محفوظ',
+    tFirstFavDesc: '"الجرح هو المكان الذي يدخل منه النور إليك."',
+    tFirstFavDate: '١٦ مارس',
+    tFirstMantras: 'أول تأملات مُنشأة',
+    tFirstMantrasDesc: '٨ تأملات عن تقدير الذات، مصممة من مخطط تصميمك البشري',
+    tFirstMantrasDate: '٢٠ مارس',
+    tCollection: 'إنشاء "حكمة الصباح"',
+    tCollectionDesc: 'مجموعتك الأولى — ٥ اقتباسات للإلهام اليومي',
+    tCollectionDate: '٢٣ مارس',
+    tMilestone: 'إنجاز ٢٣ مفضلة',
+    tMilestoneDesc: 'مكتبة حكمتك تنمو بشكل جميل',
+    tMilestoneDate: 'اليوم',
   },
+}
+
+const featuredQuote = {
+  text: 'The wound is the place where the Light enters you.',
+  textAr: 'الجرح هو المكان الذي يدخل منه النور إليك.',
+  author: 'Rumi',
+  authorAr: 'جلال الدين الرومي',
 }
 
 const recentQuotes = [
@@ -91,29 +108,53 @@ const recentQuotes = [
   { id: '5', text: 'The self is an ocean without a shore.', textAr: 'الذات بحر بلا شاطئ.', author: 'Ibn Arabi', authorAr: 'ابن عربي', date: 'Mar 23', dateAr: '٢٣ مارس', isFav: true },
 ]
 
+const collectionPreviews = [
+  { id: '1', name: 'Morning Wisdom', nameAr: 'حكمة الصباح', count: 5, desc: 'Quotes to start your day with clarity', descAr: 'اقتباسات لبدء يومك بوضوح' },
+  { id: '2', name: "Rumi's Pearls", nameAr: 'لآلئ الرومي', count: 6, desc: 'His most transformative verses', descAr: 'أكثر أبياته تأثيراً' },
+  { id: '3', name: 'Inner Peace', nameAr: 'السلام الداخلي', count: 5, desc: 'A sanctuary for turbulent days', descAr: 'ملاذ للأيام العاصفة' },
+]
+
 export default function MyMantrasDashboardPage() {
   const { locale, direction } = useDirection()
   const isRTL = direction === 'rtl'
   const h = gt[locale]
 
-  const fmt = new Intl.NumberFormat(isRTL ? 'ar' : 'en', { numberingSystem: isRTL ? 'arab' : 'latn' })
-
-  const weeklyData = [
-    { day: h.mon, views: 5 },
-    { day: h.tue, views: 8 },
-    { day: h.wed, views: 3 },
-    { day: h.thu, views: 12 },
-    { day: h.fri, views: 7 },
-    { day: h.sat, views: 15 },
-    { day: h.sun, views: 10 },
-  ]
-
-  const topicsData = [
-    { topic: h.relationships, count: 3 },
-    { topic: h.selfWorth, count: 2 },
-    { topic: h.decisions, count: 2 },
-    { topic: h.creativity, count: 1 },
-    { topic: h.rest, count: 1 },
+  const timelineItems: TimelineItem[] = [
+    {
+      icon: <FlowerLotus className="h-4 w-4" weight="fill" />,
+      title: h.tJoined, titleAr: h.tJoined,
+      description: h.tJoinedDesc, descriptionAr: h.tJoinedDesc,
+      date: h.tJoinedDate, dateAr: h.tJoinedDate,
+      status: 'complete',
+    },
+    {
+      icon: <Heart className="h-4 w-4" weight="fill" />,
+      title: h.tFirstFav, titleAr: h.tFirstFav,
+      description: h.tFirstFavDesc, descriptionAr: h.tFirstFavDesc,
+      date: h.tFirstFavDate, dateAr: h.tFirstFavDate,
+      status: 'complete',
+    },
+    {
+      icon: <Sparkle className="h-4 w-4" weight="fill" />,
+      title: h.tFirstMantras, titleAr: h.tFirstMantras,
+      description: h.tFirstMantrasDesc, descriptionAr: h.tFirstMantrasDesc,
+      date: h.tFirstMantrasDate, dateAr: h.tFirstMantrasDate,
+      status: 'complete',
+    },
+    {
+      icon: <BookmarkSimple className="h-4 w-4" weight="fill" />,
+      title: h.tCollection, titleAr: h.tCollection,
+      description: h.tCollectionDesc, descriptionAr: h.tCollectionDesc,
+      date: h.tCollectionDate, dateAr: h.tCollectionDate,
+      status: 'complete',
+    },
+    {
+      icon: <Star className="h-4 w-4" weight="fill" />,
+      title: h.tMilestone, titleAr: h.tMilestone,
+      description: h.tMilestoneDesc, descriptionAr: h.tMilestoneDesc,
+      date: h.tMilestoneDate, dateAr: h.tMilestoneDate,
+      status: 'current',
+    },
   ]
 
   return (
@@ -121,74 +162,83 @@ export default function MyMantrasDashboardPage() {
       {/* Page Header */}
       <div className="flex items-center gap-3 mb-8">
         <div className="p-4 bg-primary/10 rounded-xl">
-          <ChartPie className="h-10 w-10 text-primary" weight="duotone" />
+          <Sparkle className="h-10 w-10 text-primary" weight="duotone" />
         </div>
         <div>
-          <h1 className="text-2xl font-bold">{h.title}</h1>
-          <p className="text-muted-foreground">{h.subtitle}</p>
+          <h1 className="text-2xl font-display font-bold">{h.title}</h1>
+          <p className="text-muted-foreground font-body-serif italic">{h.subtitle}</p>
         </div>
       </div>
 
-      {/* Stats Cards */}
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 mb-8">
-        <StatsCard
-          icon={<Quotes className="h-4 w-4" />}
-          label={h.quotesSaved}
-          value={fmt.format(47)}
-          trend={12}
-          trendLabel={h.fromLastMonth}
+      {/* Featured Quote */}
+      <div className="mb-8">
+        <QuoteHero
+          text={isRTL ? featuredQuote.textAr : featuredQuote.text}
+          author={isRTL ? featuredQuote.authorAr : featuredQuote.author}
+          size="md"
+          showMarks={false}
+          className="bg-card rounded-xl border border-border/50"
         />
-        <StatsCard
-          icon={<Books className="h-4 w-4" />}
-          label={h.collections}
-          value={fmt.format(6)}
-          trend={2}
-          trendLabel={h.fromLastMonth}
-        />
-        <StatsCard
-          icon={<Heart className="h-4 w-4" />}
-          label={h.favorites}
-          value={fmt.format(23)}
-          trend={8}
-          trendLabel={h.fromLastMonth}
-        />
-        <StatsCard
-          icon={<Sparkle className="h-4 w-4" />}
-          label={h.mantrasGenerated}
-          value={`${fmt.format(4)} ${h.sets}`}
-        />
+        <p className="text-center text-xs text-muted-foreground mt-2 font-body-serif">
+          <Heart className="h-3 w-3 inline-block text-destructive me-1" weight="fill" />
+          {h.lastSaved} {isRTL ? '٢٧ مارس' : 'Mar 27'}
+        </p>
+      </div>
+
+      {/* Gentle inline stats */}
+      <div className="flex items-center justify-center gap-4 md:gap-8 text-center mb-10 py-4">
+        <div>
+          <p className="text-2xl font-display font-bold text-foreground">
+            <ArabicNumber value={47} />
+          </p>
+          <p className="text-xs text-muted-foreground font-body-serif">{h.quotesSaved}</p>
+        </div>
+        <Separator orientation="vertical" className="h-8" />
+        <div>
+          <p className="text-2xl font-display font-bold text-foreground">
+            <ArabicNumber value={6} />
+          </p>
+          <p className="text-xs text-muted-foreground font-body-serif">{h.collections}</p>
+        </div>
+        <Separator orientation="vertical" className="h-8" />
+        <div>
+          <p className="text-2xl font-display font-bold text-foreground">
+            <ArabicNumber value={23} />
+          </p>
+          <p className="text-xs text-muted-foreground font-body-serif">{h.favorites}</p>
+        </div>
+        <Separator orientation="vertical" className="h-8" />
+        <div>
+          <p className="text-2xl font-display font-bold text-foreground">
+            <ArabicNumber value={4} />
+          </p>
+          <p className="text-xs text-muted-foreground font-body-serif">{h.mantraSets}</p>
+        </div>
       </div>
 
       {/* Content Grid */}
       <div className="grid gap-6 lg:grid-cols-3">
         {/* Left column */}
         <div className="lg:col-span-2 space-y-6">
-          {/* Weekly Activity — Bar Chart */}
+          {/* Your Path — Timeline */}
           <Card>
             <CardHeader>
-              <CardTitle>{h.weeklyActivity}</CardTitle>
-              <p className="text-sm text-muted-foreground">{h.quotesViewed}</p>
+              <CardTitle className="font-display">{h.yourPath}</CardTitle>
             </CardHeader>
             <CardContent>
-              <Chart
-                type="bar"
-                data={weeklyData}
-                categoryKey="day"
-                valueKey="views"
-                colors={['var(--color-primary)']}
-                size="md"
-                showXAxis
-                showYAxis
-                aria-label={h.weeklyActivity}
+              <Timeline
+                items={timelineItems}
+                compact
+                aria-label={h.yourPath}
               />
             </CardContent>
           </Card>
 
-          {/* Recent Quotes */}
+          {/* Recent Reflections */}
           <Card>
             <CardHeader>
               <div className="flex items-center justify-between">
-                <CardTitle>{h.recentQuotes}</CardTitle>
+                <CardTitle className="font-display">{h.recentReflections}</CardTitle>
                 <Button variant="ghost" size="sm" asChild>
                   <Link href="/examples/mymantras/collections">
                     {h.viewAll}
@@ -197,19 +247,24 @@ export default function MyMantrasDashboardPage() {
                 </Button>
               </div>
             </CardHeader>
-            <CardContent className="space-y-3">
-              {recentQuotes.map((q) => (
-                <div key={q.id} className="flex items-start gap-3 p-3 rounded-lg hover:bg-muted/50 transition-colors">
-                  <Heart
-                    className={`h-4 w-4 mt-1 shrink-0 ${q.isFav ? 'text-destructive' : 'text-muted-foreground'}`}
-                    weight={q.isFav ? 'fill' : 'regular'}
-                  />
-                  <div className="min-w-0 flex-1">
-                    <p className="text-sm line-clamp-1">{isRTL ? q.textAr : q.text}</p>
-                    <p className="text-xs text-muted-foreground mt-0.5">
-                      {isRTL ? q.authorAr : q.author} · {isRTL ? q.dateAr : q.date}
-                    </p>
+            <CardContent className="space-y-1">
+              {recentQuotes.map((q, i) => (
+                <div key={q.id}>
+                  <div className="flex items-start gap-3 py-3">
+                    <Heart
+                      className={`h-4 w-4 mt-1.5 shrink-0 ${q.isFav ? 'text-destructive' : 'text-muted-foreground/30'}`}
+                      weight={q.isFav ? 'fill' : 'regular'}
+                    />
+                    <div className="min-w-0 flex-1">
+                      <p className="font-body-serif italic text-sm leading-relaxed">
+                        &ldquo;{isRTL ? q.textAr : q.text}&rdquo;
+                      </p>
+                      <p className="text-xs text-muted-foreground mt-1">
+                        — {isRTL ? q.authorAr : q.author} · {isRTL ? q.dateAr : q.date}
+                      </p>
+                    </div>
                   </div>
+                  {i < recentQuotes.length - 1 && <Separator className="opacity-30" />}
                 </div>
               ))}
             </CardContent>
@@ -218,33 +273,42 @@ export default function MyMantrasDashboardPage() {
 
         {/* Right column */}
         <div className="space-y-6">
-          {/* Topics Distribution — Donut Chart */}
+          {/* Collections Preview */}
           <Card>
             <CardHeader>
-              <CardTitle>{h.topicsDistribution}</CardTitle>
+              <div className="flex items-center justify-between">
+                <CardTitle className="font-display">{h.yourCollections}</CardTitle>
+                <Button variant="ghost" size="sm" asChild>
+                  <Link href="/examples/mymantras/collections">
+                    {h.viewAll}
+                    {isRTL ? <ArrowLeft className="h-3 w-3 ms-1" /> : <ArrowRight className="h-3 w-3 ms-1" />}
+                  </Link>
+                </Button>
+              </div>
             </CardHeader>
-            <CardContent>
-              <Chart
-                type="donut"
-                data={topicsData}
-                categoryKey="topic"
-                valueKey="count"
-                colors={[
-                  'var(--color-primary)',
-                  'var(--color-warning)',
-                  'var(--color-success)',
-                  'var(--color-info)',
-                  'var(--color-destructive)',
-                ]}
-                size="sm"
-                aria-label={h.topicsDistribution}
-              />
+            <CardContent className="space-y-3">
+              {collectionPreviews.map((col) => (
+                <Link
+                  key={col.id}
+                  href="/examples/mymantras/collections"
+                  className="block p-3 rounded-lg border border-border/50 hover:border-primary/30 hover:bg-primary/[0.02] transition-all"
+                >
+                  <div className="flex items-center justify-between mb-1">
+                    <p className="text-sm font-medium font-display">{isRTL ? col.nameAr : col.name}</p>
+                    <Books className="h-4 w-4 text-muted-foreground/50" />
+                  </div>
+                  <p className="text-xs text-muted-foreground font-body-serif italic">{isRTL ? col.descAr : col.desc}</p>
+                  <p className="text-xs text-muted-foreground mt-1">
+                    <ArabicNumber value={col.count} /> {h.quotes}
+                  </p>
+                </Link>
+              ))}
             </CardContent>
           </Card>
 
-          {/* Complete Profile Callout */}
+          {/* Complete Profile */}
           <Callout type="info" title={h.completeProfile}>
-            <p className="text-sm mb-3">{h.completeProfileDesc}</p>
+            <p className="text-sm mb-3 font-body-serif">{h.completeProfileDesc}</p>
             <Button size="sm" variant="outline" asChild>
               <Link href="/examples/mymantras/settings">{h.goToSettings}</Link>
             </Button>
