@@ -14,7 +14,7 @@ import {
  */
 
 const meta = {
-  title: 'Basic/Avatar',
+  title: 'Core/Avatar',
   component: Avatar,
   parameters: {
     layout: 'centered'

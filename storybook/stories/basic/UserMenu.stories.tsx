@@ -13,7 +13,7 @@ import { Card, CardContent } from '../../../components/ui/card';
  */
 
 const meta = {
-  title: 'Basic/User Menu',
+  title: 'User Interface/User Menu',
   component: UserMenu,
   parameters: {
     layout: 'centered'

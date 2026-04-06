@@ -12,7 +12,7 @@ import { Check, WarningCircle, Star, Clock, Lightning, CheckCircle, XCircle } fr
  */
 
 const meta = {
-  title: 'Basic/Badge',
+  title: 'Core/Badge',
   component: Badge,
   parameters: {
     layout: 'centered'

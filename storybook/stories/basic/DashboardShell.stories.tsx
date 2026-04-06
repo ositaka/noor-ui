@@ -22,7 +22,7 @@ import {
  */
 
 const meta = {
-  title: 'Basic/Dashboard Shell',
+  title: 'Layout & Shell/Dashboard Shell',
   component: DashboardShell,
   parameters: {
     layout: 'fullscreen'

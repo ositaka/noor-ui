@@ -14,7 +14,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../..
  */
 
 const meta = {
-  title: 'GCC/Arabic Number',
+  title: 'GCC-Specific/Arabic Number',
   component: ArabicNumber,
   parameters: {
     layout: 'centered'

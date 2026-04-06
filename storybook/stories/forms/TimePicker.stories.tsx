@@ -15,7 +15,7 @@ import * as React from 'react';
  */
 
 const meta = {
-  title: 'Forms/Time Picker',
+  title: 'Advanced Forms & Inputs/Time Picker',
   component: TimePicker,
   parameters: {
     layout: 'centered'

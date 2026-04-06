@@ -13,7 +13,7 @@ import { PrayerTimes, type Prayer } from '../../../components/ui/prayer-times';
  */
 
 const meta = {
-  title: 'GCC/Prayer Times',
+  title: 'GCC-Specific/Prayer Times',
   component: PrayerTimes,
   parameters: {
     layout: 'centered'

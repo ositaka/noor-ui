@@ -15,7 +15,7 @@ import { expect, fn, userEvent, within } from 'storybook/test';
  */
 
 const meta = {
-  title: 'Forms/File Upload',
+  title: 'Advanced Forms & Inputs/File Upload',
   component: FileUpload,
   parameters: {
     layout: 'centered'

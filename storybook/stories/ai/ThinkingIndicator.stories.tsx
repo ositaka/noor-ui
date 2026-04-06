@@ -15,7 +15,7 @@ import { Separator } from '../../../components/ui/separator';
  */
 
 const meta = {
-  title: 'AI/Thinking Indicator',
+  title: 'AI-LLM Shell/Thinking Indicator',
   component: ThinkingIndicator,
   parameters: {
     layout: 'centered'

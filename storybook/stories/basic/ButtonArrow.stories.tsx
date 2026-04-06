@@ -14,7 +14,7 @@ import { Card, CardContent } from '../../../components/ui/card';
  */
 
 const meta = {
-  title: 'Basic/Button Arrow',
+  title: 'Core/Button Arrow',
   component: ButtonArrow,
   parameters: {
     layout: 'centered'

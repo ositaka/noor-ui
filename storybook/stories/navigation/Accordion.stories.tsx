@@ -16,7 +16,7 @@ import * as React from 'react';
  */
 
 const meta = {
-  title: 'Navigation/Accordion',
+  title: 'Overlays & Layout/Accordion',
   component: Accordion,
   parameters: {
     layout: 'centered'

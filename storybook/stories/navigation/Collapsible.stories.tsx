@@ -17,7 +17,7 @@ import * as React from 'react';
  */
 
 const meta = {
-  title: 'Navigation/Collapsible',
+  title: 'Overlays & Layout/Collapsible',
   component: Collapsible,
   parameters: {
     layout: 'centered'

@@ -16,7 +16,7 @@ import * as React from 'react';
  */
 
 const meta = {
-  title: 'Forms/Number Input',
+  title: 'Advanced Forms & Inputs/Number Input',
   component: NumberInput,
   parameters: {
     layout: 'centered'

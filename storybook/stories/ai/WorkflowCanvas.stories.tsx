@@ -18,7 +18,7 @@ const nodeTypes = {
 };
 
 const meta = {
-  title: 'AI/Workflow Canvas',
+  title: 'Workflow & Automation/Workflow Canvas',
   component: WorkflowCanvas,
   parameters: {
     layout: 'fullscreen'

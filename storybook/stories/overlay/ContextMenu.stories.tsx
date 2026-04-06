@@ -33,7 +33,7 @@ import * as React from 'react';
  */
 
 const meta = {
-  title: 'Overlay/Context Menu',
+  title: 'Navigation/Context Menu',
   component: ContextMenu,
   parameters: {
     layout: 'centered'

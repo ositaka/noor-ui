@@ -13,7 +13,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../..
  */
 
 const meta = {
-  title: 'Basic/User Badge',
+  title: 'Data Display/User Badge',
   component: UserBadge,
   parameters: {
     layout: 'centered'

@@ -15,7 +15,7 @@ import * as React from 'react';
  */
 
 const meta = {
-  title: 'Forms/Calendar',
+  title: 'GCC-Specific/Calendar',
   component: Calendar,
   parameters: {
     layout: 'centered'

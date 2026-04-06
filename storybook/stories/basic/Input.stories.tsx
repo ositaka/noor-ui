@@ -5,7 +5,7 @@ import { Label } from '../../../components/ui/label';
 import { MagnifyingGlass, Envelope, Lock, User } from '@phosphor-icons/react';
 
 const meta = {
-  title: 'Basic/Input',
+  title: 'Core/Input',
   component: Input,
   parameters: {
     layout: 'centered'

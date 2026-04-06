@@ -15,7 +15,7 @@ import { expect, userEvent, within, fn } from 'storybook/test';
  */
 
 const meta = {
-  title: 'AI/Prompt Input',
+  title: 'AI-LLM Shell/Prompt Input',
   component: PromptInput,
   parameters: {
     layout: 'centered'

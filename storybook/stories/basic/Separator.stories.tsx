@@ -12,7 +12,7 @@ import { House, Gear, User, Bell } from '@phosphor-icons/react';
  */
 
 const meta = {
-  title: 'Basic/Separator',
+  title: 'Core/Separator',
   component: Separator,
   parameters: {
     layout: 'centered'

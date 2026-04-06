@@ -14,7 +14,7 @@ import { Info, Plus, Gear, Trash } from '@phosphor-icons/react';
  */
 
 const meta = {
-  title: 'Basic/Tooltip',
+  title: 'Feedback/Tooltip',
   component: Tooltip,
   decorators: [
     (Story) => (

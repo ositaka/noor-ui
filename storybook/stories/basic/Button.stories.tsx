@@ -4,7 +4,7 @@ import { Button } from '../../../components/ui/button';
 import { Heart, Download, Plus, FloppyDisk } from '@phosphor-icons/react';
 
 const meta = {
-  title: 'Basic/Button',
+  title: 'Core/Button',
   component: Button,
   parameters: {
     layout: 'centered'

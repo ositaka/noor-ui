@@ -28,7 +28,7 @@ import * as React from 'react';
  */
 
 const meta = {
-  title: 'Data Display/EmptyState',
+  title: 'Feedback/Empty State',
   component: EmptyState,
   parameters: {
     layout: 'centered'

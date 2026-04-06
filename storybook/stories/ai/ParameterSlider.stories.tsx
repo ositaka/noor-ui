@@ -15,7 +15,7 @@ import { useState } from 'react';
  */
 
 const meta = {
-  title: 'AI/Parameter Slider',
+  title: 'AI-LLM Shell/Parameter Slider',
   component: ParameterSlider,
   parameters: {
     layout: 'centered'

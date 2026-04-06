@@ -41,7 +41,7 @@ import * as React from 'react';
  */
 
 const meta = {
-  title: 'Overlay/Dropdown Menu',
+  title: 'Navigation/Dropdown Menu',
   component: DropdownMenu,
   parameters: {
     layout: 'centered'

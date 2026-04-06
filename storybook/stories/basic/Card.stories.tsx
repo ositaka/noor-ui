@@ -13,7 +13,7 @@ import { Badge } from '../../../components/ui/badge';
 import { Bell, Heart, ShareNetwork, Star, TrendUp } from '@phosphor-icons/react';
 
 const meta = {
-  title: 'Basic/Card',
+  title: 'Core/Card',
   component: Card,
   parameters: {
     layout: 'centered'

@@ -13,7 +13,7 @@ import { Lightbulb } from '@phosphor-icons/react';
  */
 
 const meta = {
-  title: 'Basic/Callout',
+  title: 'Feedback/Callout',
   component: Callout,
   parameters: {
     layout: 'centered'

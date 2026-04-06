@@ -14,7 +14,7 @@ import { expect, userEvent, within } from 'storybook/test';
  */
 
 const meta = {
-  title: 'Data Display/Reaction Picker',
+  title: 'User Interface/Reaction Picker',
   component: ReactionPicker,
   parameters: {
     layout: 'centered'

@@ -15,7 +15,7 @@ import { expect, fn, userEvent, within } from 'storybook/test';
  */
 
 const meta = {
-  title: 'Forms/Date Picker',
+  title: 'Advanced Forms & Inputs/Date Picker',
   component: DatePicker,
   parameters: {
     layout: 'centered'

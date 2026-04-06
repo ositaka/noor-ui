@@ -18,7 +18,7 @@ import * as React from 'react';
  */
 
 const meta = {
-  title: 'Overlay/Popover',
+  title: 'Overlays & Layout/Popover',
   component: Popover,
   parameters: {
     layout: 'centered'

@@ -14,7 +14,7 @@ import { Card, CardContent } from '../../../components/ui/card';
  */
 
 const meta = {
-  title: 'AI/Message Actions',
+  title: 'AI-LLM Shell/Message Actions',
   component: MessageActions,
   parameters: {
     layout: 'centered'

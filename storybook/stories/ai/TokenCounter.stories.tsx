@@ -14,7 +14,7 @@ import { Card, CardContent } from '../../../components/ui/card';
  */
 
 const meta = {
-  title: 'AI/Token Counter',
+  title: 'AI-LLM Shell/Token Counter',
   component: TokenCounter,
   parameters: {
     layout: 'centered'

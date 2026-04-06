@@ -15,7 +15,7 @@ import { useState } from 'react';
  */
 
 const meta = {
-  title: 'AI/Model Selector',
+  title: 'AI-LLM Shell/Model Selector',
   component: ModelSelector,
   parameters: {
     layout: 'centered'

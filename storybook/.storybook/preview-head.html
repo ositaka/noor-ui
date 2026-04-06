@@ -82,13 +82,25 @@
     accent-color: hsl(var(--primary, 239 84% 67%));
   }
 
-  /* Heading spacing — ensure breathing room above headings after content */
-  .sbdocs h2 {
+  /* Heading spacing — only for docs prose, NOT inside story canvases */
+  .sbdocs > h2,
+  .sbdocs > .sbdocs-wrapper h2:not(.docs-story h2) {
     margin-top: 2.5rem;
   }
 
-  .sbdocs h3 {
+  .sbdocs > h3,
+  .sbdocs > .sbdocs-wrapper h3:not(.docs-story h3) {
     margin-top: 2rem;
+  }
+
+  /* Reset Storybook docs styles inside story canvases */
+  .sbdocs .docs-story h1,
+  .sbdocs .docs-story h2,
+  .sbdocs .docs-story h3,
+  .sbdocs .docs-story h4,
+  .sbdocs .docs-story h5,
+  .sbdocs .docs-story h6 {
+    margin-top: 0;
   }
 
   /* Remove Source's own wrapper styling when inside CodeBlock */

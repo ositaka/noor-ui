@@ -13,7 +13,7 @@ import { ChatMessage } from '../../../components/ui/chat-message';
  */
 
 const meta = {
-  title: 'AI/Chat Message',
+  title: 'AI-LLM Shell/Chat Message',
   component: ChatMessage,
   parameters: {
     layout: 'centered'

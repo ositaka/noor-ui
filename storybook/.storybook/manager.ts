@@ -1,6 +1,14 @@
 import { addons } from 'storybook/manager-api';
 
 addons.setConfig({
+  sidebar: {
+    filters: {
+      // Only show Docs pages in sidebar — all stories accessible via Docs page
+      hideStories: (item: { type?: string }) => {
+        return item.type !== 'story';
+      },
+    },
+  },
   toolbar: {
     title: { hidden: true },       // Hide the story title/path
     zoom: { hidden: true },        // Hide the zoom tool

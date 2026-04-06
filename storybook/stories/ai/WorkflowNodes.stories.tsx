@@ -29,7 +29,7 @@ import '@xyflow/react/dist/style.css';
  */
 
 const meta = {
-  title: 'AI/Workflow Nodes',
+  title: 'Workflow & Automation/Workflow Nodes',
   component: TriggerNode,
   parameters: {
     layout: 'centered'

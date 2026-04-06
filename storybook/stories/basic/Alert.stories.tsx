@@ -11,7 +11,7 @@ import { Terminal, WarningCircle, CheckCircle, Warning as WarningIcon } from '@p
  */
 
 const meta = {
-  title: 'Basic/Alert',
+  title: 'Feedback/Alert',
   component: Alert,
   parameters: {
     layout: 'centered'

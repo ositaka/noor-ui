@@ -26,7 +26,7 @@ import * as React from 'react';
  */
 
 const meta = {
-  title: 'Overlay/Sheet',
+  title: 'Overlays & Layout/Sheet',
   component: Sheet,
   parameters: {
     layout: 'centered'

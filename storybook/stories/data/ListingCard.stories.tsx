@@ -107,7 +107,7 @@ export const Default: Story = {
     subtitle: 'Downtown Dubai',
     description: 'Beautiful 2-bedroom apartment with stunning views',
     price: '1,200,000 AED',
-    placeholderIcon: Home,
+    placeholderIcon: House,
     imageAspect: 'video',
     featured: false,
     hoverEffect: true,

@@ -13,7 +13,7 @@ import { useState } from 'react';
  */
 
 const meta = {
-  title: 'Basic/Rich Text Editor',
+  title: 'Advanced Forms & Inputs/Rich Text Editor',
   component: RichTextEditor,
   parameters: {
     layout: 'centered'

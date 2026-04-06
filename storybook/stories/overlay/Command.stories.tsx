@@ -26,7 +26,7 @@ import * as React from 'react';
  */
 
 const meta = {
-  title: 'Overlay/Command',
+  title: 'Data Display/Command',
   component: Command,
   parameters: {
     layout: 'centered'

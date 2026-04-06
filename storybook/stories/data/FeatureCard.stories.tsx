@@ -16,7 +16,7 @@ import * as React from 'react';
  */
 
 const meta = {
-  title: 'Data Display/FeatureCard',
+  title: 'Core/Feature Card',
   component: FeatureCard,
   parameters: {
     layout: 'centered'

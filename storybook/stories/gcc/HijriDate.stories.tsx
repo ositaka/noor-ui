@@ -13,7 +13,7 @@ import { HijriDate } from '../../../components/ui/hijri-date';
  */
 
 const meta = {
-  title: 'GCC/Hijri Date',
+  title: 'GCC-Specific/Hijri Date',
   component: HijriDate,
   parameters: {
     layout: 'centered'

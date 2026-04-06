@@ -18,7 +18,7 @@ import { Lightning, Cpu, FileArrowDown, WarningCircle } from '@phosphor-icons/re
  */
 
 const meta = {
-  title: 'AI/Workflow Node',
+  title: 'Workflow & Automation/Workflow Node',
   component: WorkflowNode,
   parameters: {
     layout: 'centered'

@@ -15,7 +15,7 @@ import { Separator } from '../../../components/ui/separator';
  */
 
 const meta = {
-  title: 'Basic/Kbd',
+  title: 'User Interface/Kbd',
   component: Kbd,
   parameters: {
     layout: 'centered'

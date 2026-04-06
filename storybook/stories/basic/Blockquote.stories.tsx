@@ -12,7 +12,7 @@ import { Blockquote } from '../../../components/ui/blockquote';
  */
 
 const meta = {
-  title: 'Basic/Blockquote',
+  title: 'Data Display/Blockquote',
   component: Blockquote,
   parameters: {
     layout: 'centered'

@@ -13,7 +13,7 @@ import { useState } from 'react';
  */
 
 const meta = {
-  title: 'Basic/Markdown Editor',
+  title: 'Advanced Forms & Inputs/Markdown Editor',
   component: MarkdownEditor,
   parameters: {
     layout: 'centered'

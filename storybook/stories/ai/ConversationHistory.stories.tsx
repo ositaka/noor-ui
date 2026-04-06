@@ -63,7 +63,7 @@ const sampleConversations: Conversation[] = [
 ];
 
 const meta = {
-  title: 'AI/Conversation History',
+  title: 'AI-LLM Shell/Conversation History',
   component: ConversationHistory,
   parameters: {
     layout: 'fullscreen'

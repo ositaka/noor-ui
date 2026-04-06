@@ -13,7 +13,7 @@ import * as React from 'react';
  */
 
 const meta = {
-  title: 'Basic/Textarea',
+  title: 'Forms/Textarea',
   component: Textarea,
   parameters: {
     layout: 'centered'

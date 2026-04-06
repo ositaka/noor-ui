@@ -12,7 +12,7 @@ import { Button } from '../../../components/ui/button';
  */
 
 const meta = {
-  title: 'Basic/Label',
+  title: 'Core/Label',
   component: Label,
   parameters: {
     layout: 'centered'

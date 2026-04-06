@@ -33,7 +33,7 @@ import {
  */
 
 const meta = {
-  title: 'Data Display/Timeline',
+  title: 'User Interface/Timeline',
   component: Timeline,
   parameters: {
     layout: 'centered',

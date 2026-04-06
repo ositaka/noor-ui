@@ -13,7 +13,7 @@ import { ZakatCalculator } from '../../../components/ui/zakat-calculator';
  */
 
 const meta = {
-  title: 'GCC/Zakat Calculator',
+  title: 'GCC-Specific/Zakat Calculator',
   component: ZakatCalculator,
   parameters: {
     layout: 'centered'

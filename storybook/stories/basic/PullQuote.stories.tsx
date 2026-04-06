@@ -13,7 +13,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '../../../components/ui
  */
 
 const meta = {
-  title: 'Basic/Pull Quote',
+  title: 'Data Display/Pull Quote',
   component: PullQuote,
   parameters: {
     layout: 'centered'

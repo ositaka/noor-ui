@@ -17,7 +17,7 @@ import * as React from 'react';
  */
 
 const meta = {
-  title: 'Navigation/Stepper',
+  title: 'User Interface/Stepper',
   component: Stepper,
   parameters: {
     layout: 'centered'

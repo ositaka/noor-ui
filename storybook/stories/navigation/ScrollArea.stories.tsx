@@ -13,7 +13,7 @@ import { Separator } from '../../../components/ui/separator';
  */
 
 const meta = {
-  title: 'Navigation & Layout/Scroll Area',
+  title: 'Overlays & Layout/Scroll Area',
   component: ScrollArea,
   parameters: {
     layout: 'centered'

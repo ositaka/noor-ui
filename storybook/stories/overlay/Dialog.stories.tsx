@@ -26,7 +26,7 @@ import * as React from 'react';
  */
 
 const meta = {
-  title: 'Overlay/Dialog',
+  title: 'Feedback/Dialog',
   component: Dialog,
   parameters: {
     layout: 'centered'

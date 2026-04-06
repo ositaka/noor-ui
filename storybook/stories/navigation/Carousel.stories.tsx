@@ -209,7 +209,7 @@ function renderArabicFeatureSlide(item: ArabicFeatureItem) {
 // ---------------------------------------------------------------------------
 
 const meta = {
-  title: 'Navigation/Carousel',
+  title: 'User Interface/Carousel',
   component: Carousel,
   parameters: {
     layout: 'centered',

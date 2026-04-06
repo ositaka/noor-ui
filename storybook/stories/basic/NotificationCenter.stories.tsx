@@ -15,7 +15,7 @@ import { fn } from 'storybook/test';
  */
 
 const meta = {
-  title: 'Basic/Notification Center',
+  title: 'User Interface/Notification Center',
   component: NotificationCenter,
   parameters: {
     layout: 'centered'

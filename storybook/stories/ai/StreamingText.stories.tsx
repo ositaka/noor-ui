@@ -13,7 +13,7 @@ import { useState } from 'react';
  */
 
 const meta = {
-  title: 'AI/Streaming Text',
+  title: 'AI-LLM Shell/Streaming Text',
   component: StreamingText,
   parameters: {
     layout: 'centered'
