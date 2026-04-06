@@ -20,7 +20,7 @@ const meta = {
   parameters: {
     layout: 'centered'
   },
-  tags: ['!autodocs']
+  tags: ['autodocs']
 } satisfies Meta<typeof Kbd>;
 
 export default meta;
@@ -32,10 +32,6 @@ export const Default: Story = {
     keys: ['mod', 'k'],
     variant: 'default',
     size: 'md'
-  },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
   },
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement);
@@ -72,10 +68,6 @@ export const SingleKeys: Story = {
       <Kbd keys={['delete']} />
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   },
@@ -110,10 +102,6 @@ export const KeyCombinations: Story = {
       <Kbd keys={['ctrl', 'alt', 'delete']} />
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   },
@@ -162,10 +150,6 @@ export const AllVariants: Story = {
       </div>
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   }
@@ -189,10 +173,6 @@ export const AllSizes: Story = {
       </div>
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   }
@@ -236,10 +216,6 @@ export const KeyboardShortcutsPanel: Story = {
       </Card>
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   },
@@ -284,10 +260,6 @@ export const InButtons: Story = {
       </Button>
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   },
@@ -324,10 +296,6 @@ export const ArrowKeys: Story = {
       <Kbd keys={['right']} />
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   },
@@ -350,124 +318,3 @@ export const ArrowKeys: Story = {
   }
 };
 
-// RTL Example (Arabic labels, but keys remain LTR)
-export const RTLExample: Story = {
-  render: () => (
-    <div className="w-full max-w-64">
-      <Card>
-        <CardHeader>
-          <CardTitle>اختصارات لوحة المفاتيح</CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-6">
-          <div className="space-y-3">
-            <div className="flex items-center justify-between">
-              <span className="text-sm">بحث</span>
-              <Kbd keys={['mod', 'k']} />
-            </div>
-            <div className="flex items-center justify-between">
-              <span className="text-sm">إرسال</span>
-              <Kbd keys={['mod', 'enter']} />
-            </div>
-            <div className="flex items-center justify-between">
-              <span className="text-sm">إغلاق</span>
-              <Kbd keys={['esc']} />
-            </div>
-            <div className="flex items-center justify-between">
-              <span className="text-sm">السابق</span>
-              <Kbd keys={['shift', 'k']} />
-            </div>
-          </div>
-          <Separator />
-          <div className="space-y-3">
-            <p className="text-sm font-medium">في الأزرار</p>
-            <Button variant="secondary">
-              بحث <Kbd keys={['mod', 'k']} size="sm" className="ms-2" />
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
-    </div>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Keyboard shortcuts panel with Arabic labels in RTL mode. Note that Kbd component always renders LTR (keyboard shortcuts don\'t change direction).'
-      }
-    }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders in RTL context with Arabic text', async () => {
-      await expect(canvas.getByText('اختصارات لوحة المفاتيح')).toBeInTheDocument();
-      const kbds = canvasElement.querySelectorAll('kbd');
-      await expect(kbds).toHaveLength(5);
-    });
-
-    await step('Kbd elements remain LTR despite RTL context', async () => {
-      const kbds = canvasElement.querySelectorAll('kbd');
-      // All kbd elements should have dir="ltr"
-      kbds.forEach(kbd => {
-        expect(kbd).toHaveAttribute('dir', 'ltr');
-      });
-    });
-
-    await step('Arabic labels are visible', async () => {
-      await expect(canvas.getAllByText('بحث')[0]).toBeVisible();
-      await expect(canvas.getByText('إرسال')).toBeVisible();
-      await expect(canvas.getByText('إغلاق')).toBeVisible();
-      await expect(canvas.getByText('السابق')).toBeVisible();
-    });
-  }
-};
-
-// RTL In Buttons
-export const RTLInButtons: Story = {
-  render: () => (
-    <div className="flex gap-2 flex-wrap">
-      <Button variant="secondary">
-        بحث <Kbd keys={['mod', 'k']} size="sm" className="ms-2" />
-      </Button>
-      <Button variant="secondary">
-        إرسال <Kbd keys={['mod', 'enter']} size="sm" className="ms-2" />
-      </Button>
-      <Button variant="outline">
-        إغلاق <Kbd keys={['esc']} size="sm" className="ms-2" />
-      </Button>
-    </div>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Buttons with Arabic text and keyboard shortcuts in RTL mode.'
-      }
-    }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders buttons with Arabic text in RTL context', async () => {
-      const buttons = canvas.getAllByRole('button');
-      await expect(buttons).toHaveLength(3);
-    });
-
-    await step('Kbd elements inside buttons remain LTR', async () => {
-      const kbds = canvasElement.querySelectorAll('kbd');
-      await expect(kbds).toHaveLength(3);
-
-      kbds.forEach(kbd => {
-        expect(kbd).toHaveAttribute('dir', 'ltr');
-      });
-    });
-  }
-};

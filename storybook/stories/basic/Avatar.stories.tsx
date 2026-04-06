@@ -19,7 +19,7 @@ const meta = {
   parameters: {
     layout: 'centered'
   },
-  tags: ['!autodocs']
+  tags: ['autodocs']
 } satisfies Meta<typeof Avatar>;
 
 export default meta;
@@ -34,10 +34,6 @@ export const Default: Story = {
         <AvatarFallback>CN</AvatarFallback>
       </>
     )
-  },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
   },
   render: (args) => <Avatar {...args} />,
   play: async ({ canvasElement, step }) => {
@@ -217,98 +213,6 @@ export const WithProfile: Story = {
       const img = canvasElement.querySelector('img');
       const fallback = canvas.queryByText('JD');
       await expect(img || fallback).toBeTruthy();
-    });
-  }
-};
-
-// RTL With Profile - from component page lines 251-260 with Arabic text
-export const RTLWithProfile: Story = {
-  render: () => (
-    <div className="flex items-center gap-4">
-      <Avatar>
-        <AvatarImage src="https://github.com/shadcn.png" />
-        <AvatarFallback>جد</AvatarFallback>
-      </Avatar>
-      <div className="space-y-1">
-        <p className="text-sm font-medium">جون دو</p>
-        <p className="text-sm text-muted-foreground">ositaka@example.com</p>
-      </div>
-    </div>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Avatar with profile text demonstrating RTL support. Automatically switches to RTL mode.'
-      }
-    }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders in RTL context', async () => {
-      const name = canvas.getByText('جون دو');
-      await expect(name).toBeInTheDocument();
-      await expect(name).toBeVisible();
-    });
-
-    await step('RTL profile has avatar', async () => {
-      // Check for avatar - either image loads or fallback shows
-      const img = canvasElement.querySelector('img');
-      const fallback = canvas.queryByText('جد');
-      await expect(img || fallback).toBeTruthy();
-    });
-  }
-};
-
-// RTL Avatar Group - from component page lines 261-276
-export const RTLAvatarGroup: Story = {
-  render: () => (
-    <div className="flex -space-x-4">
-      <Avatar className="border-2 border-background">
-        <AvatarImage src="https://github.com/shadcn.png" />
-        <AvatarFallback>CN</AvatarFallback>
-      </Avatar>
-      <Avatar className="border-2 border-background">
-        <AvatarImage src="https://github.com/vercel.png" />
-        <AvatarFallback>VC</AvatarFallback>
-      </Avatar>
-      <Avatar className="border-2 border-background">
-        <AvatarFallback>AB</AvatarFallback>
-      </Avatar>
-      <Avatar className="border-2 border-background">
-        <AvatarFallback>+5</AvatarFallback>
-      </Avatar>
-    </div>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Avatar group with proper RTL overlapping. Automatically switches to RTL mode.'
-      }
-    }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders RTL avatar group', async () => {
-      const counter = canvas.getByText('+5');
-      await expect(counter).toBeInTheDocument();
-      await expect(counter).toBeVisible();
-    });
-
-    await step('All avatars present in RTL', async () => {
-      const fallback = canvas.getByText('AB');
-      await expect(fallback).toBeInTheDocument();
     });
   }
 };

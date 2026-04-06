@@ -17,7 +17,7 @@ const meta = {
   parameters: {
     layout: 'centered'
   },
-  tags: ['!autodocs']
+  tags: ['autodocs']
 } satisfies Meta<typeof Separator>;
 
 export default meta;
@@ -28,10 +28,6 @@ export const Default: Story = {
   args: {
     orientation: 'horizontal',
     decorative: true
-  },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
   },
   render: (args) => (
     <div className="w-full max-w-md space-y-4">
@@ -66,10 +62,6 @@ export const HorizontalSections: Story = {
       </div>
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   }
@@ -88,10 +80,6 @@ export const VerticalInButtons: Story = {
       <Button variant="outline">Contact</Button>
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   }
@@ -123,10 +111,6 @@ export const InCard: Story = {
       </CardContent>
     </Card>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   }
@@ -153,10 +137,6 @@ export const InNavigation: Story = {
       </a>
     </nav>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   }
@@ -187,10 +167,6 @@ export const InList: Story = {
       </li>
     </ul>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   }
@@ -221,109 +197,7 @@ export const CustomStyling: Story = {
       </div>
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
-  }
-};
-
-// RTL Example - from component page lines 477-482
-export const RTLExample: Story = {
-  render: () => (
-    <div className="w-full max-w-md space-y-4 p-4 border rounded-lg">
-      <div>القسم الأول</div>
-      <Separator />
-      <div>القسم الثاني</div>
-    </div>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Separator with Arabic text demonstrating RTL support. Automatically switches to RTL mode.'
-      }
-    }
-  }
-};
-
-// RTL In Card
-export const RTLInCard: Story = {
-  render: () => (
-    <Card>
-      <CardHeader>
-        <CardTitle>ملف المستخدم</CardTitle>
-        <CardDescription>إدارة إعدادات ملفك الشخصي</CardDescription>
-      </CardHeader>
-      <CardContent className="space-y-4">
-        <div>
-          <h4 className="font-semibold mb-2">المعلومات الشخصية</h4>
-          <p className="text-sm text-muted-foreground">تحديث التفاصيل الشخصية الخاصة بك</p>
-        </div>
-        <Separator />
-        <div>
-          <h4 className="font-semibold mb-2">إعدادات الحساب</h4>
-          <p className="text-sm text-muted-foreground">إدارة تفضيلات حسابك</p>
-        </div>
-        <Separator />
-        <div>
-          <h4 className="font-semibold mb-2">الخصوصية والأمان</h4>
-          <p className="text-sm text-muted-foreground">التحكم في إعدادات الخصوصية الخاصة بك</p>
-        </div>
-      </CardContent>
-    </Card>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Card with Arabic content and separators in RTL mode.'
-      }
-    }
-  }
-};
-
-// RTL Navigation
-export const RTLNavigation: Story = {
-  render: () => (
-    <nav className="flex items-center gap-2 p-4 border rounded-lg">
-      <a href="#home" className="font-medium hover:text-primary">
-        الرئيسية
-      </a>
-      <Separator orientation="vertical" className="h-4" />
-      <a href="#about" className="font-medium hover:text-primary">
-        عن
-      </a>
-      <Separator orientation="vertical" className="h-4" />
-      <a href="#services" className="font-medium hover:text-primary">
-        الخدمات
-      </a>
-      <Separator orientation="vertical" className="h-4" />
-      <a href="#contact" className="font-medium hover:text-primary">
-        اتصل
-      </a>
-    </nav>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Navigation with vertical separators in RTL mode.'
-      }
-    }
   }
 };

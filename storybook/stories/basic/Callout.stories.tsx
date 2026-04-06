@@ -18,7 +18,7 @@ const meta = {
   parameters: {
     layout: 'centered'
   },
-  tags: ['!autodocs'],
+  tags: ['autodocs'],
   argTypes: {
     icon: {
       control: false,
@@ -37,9 +37,13 @@ export const Default: Story = {
     title: 'Information',
     children: 'This is an informational callout with helpful details.'
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
+  parameters: {
+    ar: {
+      args: {
+        title: 'معلومات',
+        children: 'هذا صندوق تنبيه معلوماتي يحتوي على تفاصيل مفيدة.'
+      }
+    }
   },
   render: (args) => (
     <div className="w-full max-w-2xl">
@@ -82,10 +86,6 @@ export const Info: Story = {
       </Callout>
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   },
@@ -109,10 +109,6 @@ export const Warning: Story = {
       </Callout>
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   },
@@ -136,10 +132,6 @@ export const Error: Story = {
       </Callout>
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   },
@@ -163,10 +155,6 @@ export const Success: Story = {
       </Callout>
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   },
@@ -190,10 +178,6 @@ export const Note: Story = {
       </Callout>
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   },
@@ -216,10 +200,6 @@ export const WithCustomIcon: Story = {
       </Callout>
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -270,177 +250,7 @@ export const AllTypes: Story = {
       </Callout>
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
-  }
-};
-
-// RTL Info
-export const RTLInfo: Story = {
-  render: () => (
-    <div className="w-full max-w-2xl">
-      <Callout type="info" title="معلومات">
-        هذا صندوق تنبيه معلوماتي يحتوي على تفاصيل مفيدة.
-      </Callout>
-    </div>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Info callout with Arabic text demonstrating RTL support. Border aligns to the start (right in RTL). Automatically switches to RTL mode.'
-      }
-    }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders in RTL context', async () => {
-      await expect(canvas.getByRole('note')).toBeInTheDocument();
-      await expect(canvas.getByText('معلومات')).toBeInTheDocument();
-    });
-
-    await step('RTL content displays correctly', async () => {
-      await expect(canvas.getByText(/هذا صندوق تنبيه معلوماتي/i)).toBeInTheDocument();
-    });
-  }
-};
-
-// RTL Warning
-export const RTLWarning: Story = {
-  render: () => (
-    <div className="w-full max-w-2xl">
-      <Callout type="warning" title="تحذير">
-        كن حذرًا! قد يكون لهذا الإجراء عواقب.
-      </Callout>
-    </div>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Warning callout with Arabic text in RTL mode.'
-      }
-    }
-  }
-};
-
-// RTL Error
-export const RTLError: Story = {
-  render: () => (
-    <div className="w-full max-w-2xl">
-      <Callout type="error" title="خطأ">
-        حدث خطأ ما. يرجى المحاولة مرة أخرى.
-      </Callout>
-    </div>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Error callout with Arabic text in RTL mode.'
-      }
-    }
-  }
-};
-
-// RTL Success
-export const RTLSuccess: Story = {
-  render: () => (
-    <div className="w-full max-w-2xl">
-      <Callout type="success" title="نجاح">
-        تم حفظ التغييرات بنجاح!
-      </Callout>
-    </div>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Success callout with Arabic text in RTL mode.'
-      }
-    }
-  }
-};
-
-// RTL Note
-export const RTLNote: Story = {
-  render: () => (
-    <div className="w-full max-w-2xl">
-      <Callout type="note">
-        ملاحظة سريعة بدون عنوان.
-      </Callout>
-    </div>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Note callout without title in RTL mode.'
-      }
-    }
-  }
-};
-
-// RTL All Types
-export const RTLAllTypes: Story = {
-  render: () => (
-    <div className="space-y-4 w-full max-w-2xl">
-      <Callout type="info" title="معلومات">
-        هذا صندوق تنبيه معلوماتي يحتوي على تفاصيل مفيدة.
-      </Callout>
-
-      <Callout type="warning" title="تحذير">
-        كن حذرًا! قد يكون لهذا الإجراء عواقب.
-      </Callout>
-
-      <Callout type="error" title="خطأ">
-        حدث خطأ ما. يرجى المحاولة مرة أخرى.
-      </Callout>
-
-      <Callout type="success" title="نجاح">
-        تم حفظ التغييرات بنجاح!
-      </Callout>
-
-      <Callout type="note">
-        ملاحظة سريعة بدون عنوان.
-      </Callout>
-    </div>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'All callout types with Arabic text demonstrating complete RTL support.'
-      }
-    }
   }
 };

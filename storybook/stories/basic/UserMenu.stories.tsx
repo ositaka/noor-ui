@@ -18,7 +18,7 @@ const meta = {
   parameters: {
     layout: 'centered'
   },
-  tags: ['!autodocs'],
+  tags: ['autodocs'],
   argTypes: {
     user: { control: false },
     onProfileClick: { control: false },
@@ -52,10 +52,6 @@ export const Default: Story = {
     onProfileClick: fn(),
     onSettingsClick: fn(),
     onLogout: fn()
-  },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
   }
 };
 
@@ -80,10 +76,6 @@ export const WithAvatar: Story = {
     onSettingsClick: fn(),
     onLogout: fn()
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   }
@@ -106,10 +98,6 @@ export const Minimal: Story = {
       email: 'ositaka@example.com'
     },
     onLogout: fn()
-  },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
   },
   parameters: {
     controls: { disable: true }
@@ -139,10 +127,6 @@ export const AllOptions: Story = {
       </CardContent>
     </Card>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   }
@@ -169,10 +153,6 @@ export const WithInitials: Story = {
     onSettingsClick: fn(),
     onLogout: fn()
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   }
@@ -197,10 +177,6 @@ export const WithoutImage: Story = {
     onProfileClick: fn(),
     onSettingsClick: fn(),
     onLogout: fn()
-  },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
@@ -237,10 +213,6 @@ export const InHeaderLayout: Story = {
     onSettingsClick: fn(),
     onLogout: fn()
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     layout: 'fullscreen',
     controls: { disable: true },
@@ -272,10 +244,6 @@ export const ProfileAndLogout: Story = {
     onProfileClick: fn(),
     onLogout: fn()
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -283,38 +251,5 @@ export const ProfileAndLogout: Story = {
         story: 'Simplified menu with only profile and logout options.'
       }
     }
-  }
-};
-
-// RTL
-export const RTL: Story = {
-  render: (args) => (
-    <Card>
-      <CardContent className="p-6">
-        <div className="flex justify-center">
-          <UserMenu {...args} />
-        </div>
-      </CardContent>
-    </Card>
-  ),
-  args: {
-    user: {
-      name: 'فاطمة الزهراء',
-      email: 'fatima@example.com',
-      image: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Fatima'
-    },
-    onProfileClick: fn(),
-    onSettingsClick: fn(),
-    onBillingClick: fn(),
-    onTeamClick: fn(),
-    onSupportClick: fn(),
-    onLogout: fn()
-  },
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true }
   }
 };

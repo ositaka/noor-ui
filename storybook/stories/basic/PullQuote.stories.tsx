@@ -18,7 +18,7 @@ const meta = {
   parameters: {
     layout: 'centered'
   },
-  tags: ['!autodocs'],
+  tags: ['autodocs'],
   argTypes: {
     align: {
       control: { type: 'select' },
@@ -37,9 +37,12 @@ export const Default: Story = {
     align: 'center',
     children: 'The pen is mightier than the sword.'
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
+  parameters: {
+    ar: {
+      args: {
+        children: 'القلم أقوى من السيف.'
+      }
+    }
   },
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement);
@@ -79,10 +82,6 @@ export const CenterAligned: Story = {
       </CardContent>
     </Card>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   },
@@ -116,10 +115,6 @@ export const LeftAligned: Story = {
       </CardContent>
     </Card>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   },
@@ -153,10 +148,6 @@ export const RightAligned: Story = {
       </CardContent>
     </Card>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   },
@@ -185,49 +176,7 @@ export const AllAlignments: Story = {
       <PullQuote align="right">Right-aligned quote</PullQuote>
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
-  }
-};
-
-// RTL
-export const RTL: Story = {
-  render: () => (
-    <div className="space-y-6 w-full max-w-2xl">
-      <PullQuote align="center">
-        القلم أقوى من السيف.
-      </PullQuote>
-      <PullQuote align="right">
-        المعرفة قوة.
-      </PullQuote>
-    </div>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders in RTL context', async () => {
-      const pullQuotes = canvas.getAllByRole('complementary');
-      await expect(pullQuotes).toHaveLength(2);
-      await expect(pullQuotes[0]).toBeInTheDocument();
-      await expect(pullQuotes[1]).toBeInTheDocument();
-    });
-
-    await step('Contains Arabic content', async () => {
-      const firstQuote = canvas.getByText(/القلم أقوى من السيف/);
-      const secondQuote = canvas.getByText(/المعرفة قوة/);
-      await expect(firstQuote).toBeInTheDocument();
-      await expect(secondQuote).toBeInTheDocument();
-    });
   }
 };

@@ -18,7 +18,7 @@ const meta = {
   parameters: {
     layout: 'centered'
   },
-  tags: ['!autodocs']
+  tags: ['autodocs']
 } satisfies Meta<typeof Card>;
 
 export default meta;
@@ -39,9 +39,22 @@ export const Default: Story = {
       </>
     )
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
+  parameters: {
+    ar: {
+      args: {
+        children: (
+          <>
+            <CardHeader>
+              <CardTitle>عنوان البطاقة</CardTitle>
+              <CardDescription>وصف البطاقة يظهر هنا</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p>منطقة محتوى البطاقة. يمكنك إضافة أي محتوى هنا.</p>
+            </CardContent>
+          </>
+        )
+      }
+    }
   },
   render: (args) => <Card {...args} className="w-[350px]" />,
   play: async ({ canvasElement, step }) => {
@@ -268,104 +281,6 @@ export const ArticleCard: Story = {
       await expect(canvas.getByRole('button', { name: /245/i })).toBeInTheDocument();
       await expect(canvas.getByRole('button', { name: /Share/i })).toBeInTheDocument();
       await expect(canvas.getByRole('button', { name: 'Read More' })).toBeInTheDocument();
-    });
-  }
-};
-
-// RTL Card
-export const RTLCard: Story = {
-  render: () => (
-    <Card className="w-[350px]">
-      <CardHeader>
-        <CardTitle>عنوان البطاقة</CardTitle>
-        <CardDescription>وصف البطاقة يظهر هنا</CardDescription>
-      </CardHeader>
-      <CardContent>
-        <p>محتوى البطاقة. يمكنك إضافة أي محتوى هنا.</p>
-      </CardContent>
-      <CardFooter className="flex justify-end gap-2">
-        <Button variant="outline">إلغاء</Button>
-        <Button>تأكيد</Button>
-      </CardFooter>
-    </Card>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Card with Arabic content demonstrating RTL support. Automatically switches to RTL mode.'
-      }
-    }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders in RTL context', async () => {
-      await expect(canvas.getByRole('heading', { name: 'عنوان البطاقة' })).toBeInTheDocument();
-      await expect(canvas.getByText('وصف البطاقة يظهر هنا')).toBeInTheDocument();
-    });
-
-    await step('RTL buttons work', async () => {
-      await expect(canvas.getByRole('button', { name: 'إلغاء' })).toBeInTheDocument();
-      await expect(canvas.getByRole('button', { name: 'تأكيد' })).toBeInTheDocument();
-    });
-  }
-};
-
-// RTL Product Card
-export const RTLProductCard: Story = {
-  render: () => (
-    <Card className="w-[300px] overflow-hidden">
-      <div className="h-48 bg-gradient-to-br from-blue-400 to-teal-400" />
-      <CardHeader>
-        <div className="flex items-start justify-between">
-          <div>
-            <CardTitle>منتج فاخر</CardTitle>
-            <CardDescription>عنصر عالي الجودة</CardDescription>
-          </div>
-          <Badge>٩٩ ريال</Badge>
-        </div>
-      </CardHeader>
-      <CardContent>
-        <p className="text-sm text-muted-foreground">
-          منتج رائع بجودة عالية ومميزات استثنائية. مناسب لجميع الأذواق.
-        </p>
-      </CardContent>
-      <CardFooter className="gap-2">
-        <Button className="flex-1">أضف للسلة</Button>
-        <Button variant="outline" size="icon" aria-label="أضف إلى المفضلة">
-          <Heart className="h-4 w-4" />
-        </Button>
-      </CardFooter>
-    </Card>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Product card with Arabic text showing proper RTL layout. Automatically switches to RTL mode.'
-      }
-    }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders RTL product card', async () => {
-      await expect(canvas.getByRole('heading', { name: 'منتج فاخر' })).toBeInTheDocument();
-      await expect(canvas.getByText('عنصر عالي الجودة')).toBeInTheDocument();
-      await expect(canvas.getByText('٩٩ ريال')).toBeInTheDocument();
-    });
-
-    await step('RTL product actions work', async () => {
-      await expect(canvas.getByRole('button', { name: 'أضف للسلة' })).toBeInTheDocument();
     });
   }
 };

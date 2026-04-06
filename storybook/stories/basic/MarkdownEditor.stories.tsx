@@ -18,7 +18,7 @@ const meta = {
   parameters: {
     layout: 'centered'
   },
-  tags: ['!autodocs'],
+  tags: ['autodocs'],
   argTypes: {
     content: { control: 'text' },
     onChange: { control: false },
@@ -51,10 +51,6 @@ export const Default: Story = {
       </div>
     );
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  }
 };
 
 // With Content
@@ -88,10 +84,6 @@ Try editing this content!`);
       </Card>
     );
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   }
@@ -124,10 +116,6 @@ Inline code: \`const x = 42\``);
       </Card>
     );
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   }
@@ -157,10 +145,6 @@ Use the toolbar to insert and edit tables.`);
       </Card>
     );
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   }
@@ -186,10 +170,6 @@ This content **cannot be edited**.
       </CardContent>
     </Card>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   }
@@ -216,10 +196,6 @@ export const CustomHeight: Story = {
         </CardContent>
       </Card>
     );
-  },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
   },
   parameters: {
     controls: { disable: true }
@@ -266,50 +242,6 @@ Thanks for reading!`);
         </CardContent>
       </Card>
     );
-  },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
-  parameters: {
-    controls: { disable: true }
-  }
-};
-
-// RTL
-export const RTL: Story = {
-  render: () => {
-    const [content, setContent] = useState(`# مرحباً بك في محرر Markdown
-
-هذا **محرر نصوص** يدعم اللغة العربية بشكل كامل.
-
-## المميزات
-
-- تحرير مباشر
-- دعم الأكواد
-- دعم الجداول
-
-جرب تحرير هذا المحتوى!`);
-
-    return (
-      <Card>
-        <CardHeader>
-          <CardTitle>محرر Markdown</CardTitle>
-          <CardDescription>تحرير ملفات markdown مع دعم RTL</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <MarkdownEditor
-            content={content}
-            onChange={setContent}
-            dir="rtl"
-          />
-        </CardContent>
-      </Card>
-    );
-  },
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
   },
   parameters: {
     controls: { disable: true }

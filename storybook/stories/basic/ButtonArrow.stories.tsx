@@ -19,7 +19,7 @@ const meta = {
   parameters: {
     layout: 'centered'
   },
-  tags: ['!autodocs'],
+  tags: ['autodocs'],
   argTypes: {
     direction: {
       control: { type: 'select' },
@@ -55,11 +55,12 @@ export const Default: Story = {
     children: 'Continue',
     onClick: fn()
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
+    ar: {
+      args: {
+        children: 'متابعة'
+      }
+    },
     docs: {
       story: {
         inline: false
@@ -104,10 +105,6 @@ export const Directions: Story = {
     </CardContent>
     </Card>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -163,10 +160,6 @@ export const IconStyles: Story = {
       </CardContent>
     </Card>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -212,10 +205,6 @@ export const WithVariants: Story = {
       </CardContent>
     </Card>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -255,10 +244,6 @@ export const ForwardOnly: Story = {
       <ButtonArrow direction="forward" icon="arrow" onClick={fn()}>Next</ButtonArrow>
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -310,10 +295,6 @@ export const ExternalLinks: Story = {
         </CardContent>
       </Card>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -354,10 +335,6 @@ export const BackOnly: Story = {
       <ButtonArrow direction="back" icon="arrow" onClick={fn()}>Previous</ButtonArrow>
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -384,163 +361,6 @@ export const BackOnly: Story = {
   }
 };
 
-// RTL Forward
-export const RTLForward: Story = {
-  render: () => (
-    <div className="flex gap-3">
-      <ButtonArrow direction="forward" onClick={fn()}>متابعة</ButtonArrow>
-      <ButtonArrow direction="forward" icon="arrow" onClick={fn()}>التالي</ButtonArrow>
-    </div>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Forward buttons in RTL - arrows auto-flip.'
-      }
-    }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('RTL forward buttons render', async () => {
-      await expect(canvas.getByRole('button', { name: /متابعة/i })).toBeInTheDocument();
-      await expect(canvas.getByRole('button', { name: /التالي/i })).toBeInTheDocument();
-    });
-
-    await step('Buttons contain arrow icons', async () => {
-      const icons = canvasElement.querySelectorAll('svg');
-      await expect(icons.length).toBeGreaterThanOrEqual(2);
-    });
-
-    await step('Arrow icons have RTL rotation class', async () => {
-      const icons = canvasElement.querySelectorAll('svg');
-      for (const icon of icons) {
-        await expect(icon).toHaveClass('rtl:rotate-180');
-      }
-    });
-
-    await step('Handles click interaction in RTL', async () => {
-      const button = canvas.getByRole('button', { name: /متابعة/i });
-      await userEvent.click(button);
-    });
-  }
-};
-
-// RTL Back
-export const RTLBack: Story = {
-  render: () => (
-    <div className="flex gap-3">
-      <ButtonArrow direction="back" onClick={fn()}>رجوع</ButtonArrow>
-      <ButtonArrow direction="back" icon="arrow" onClick={fn()}>السابق</ButtonArrow>
-    </div>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Back buttons in RTL - arrows auto-flip.'
-      }
-    }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('RTL back buttons render', async () => {
-      await expect(canvas.getByRole('button', { name: /رجوع/i })).toBeInTheDocument();
-      await expect(canvas.getByRole('button', { name: /السابق/i })).toBeInTheDocument();
-    });
-
-    await step('Buttons contain arrow icons', async () => {
-      const icons = canvasElement.querySelectorAll('svg');
-      await expect(icons.length).toBeGreaterThanOrEqual(2);
-    });
-
-    await step('Arrow icons have RTL rotation class', async () => {
-      const icons = canvasElement.querySelectorAll('svg');
-      for (const icon of icons) {
-        await expect(icon).toHaveClass('rtl:rotate-180');
-      }
-    });
-
-    await step('Handles click interaction in RTL', async () => {
-      const button = canvas.getByRole('button', { name: /رجوع/i });
-      await userEvent.click(button);
-    });
-  }
-};
-
-// RTL External Links
-export const RTLExternalLinks: Story = {
-  render: () => (
-      <Card>
-        <CardContent className="p-6">
-          <div className="flex flex-wrap gap-3">
-            <ButtonArrow direction="external" asChild>
-              <a href="https://storybook.noorui.com" target="_blank" rel="noopener noreferrer">
-                عرض ستوريبوك
-              </a>
-            </ButtonArrow>
-            <ButtonArrow variant="outline" direction="external" asChild>
-              <a href="https://github.com/ositaka/noor-ui" target="_blank" rel="noopener noreferrer">
-                جِت هَب
-              </a>
-            </ButtonArrow>
-            <ButtonArrow variant="link" direction="external" className="h-auto p-0" asChild>
-              <a href="https://noorui.com" target="_blank" rel="noopener noreferrer">
-                التوثيق
-              </a>
-            </ButtonArrow>
-          </div>
-        </CardContent>
-      </Card>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'External links in RTL - diagonal arrows auto-mirror (↗ becomes ↖).'
-      }
-    }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('RTL external links render', async () => {
-      await expect(canvas.getByRole('link', { name: /عرض ستوريبوك/i })).toBeInTheDocument();
-      await expect(canvas.getByRole('link', { name: /جِت هَب/i })).toBeInTheDocument();
-      await expect(canvas.getByRole('link', { name: /التوثيق/i })).toBeInTheDocument();
-    });
-
-    await step('External links have proper attributes in RTL', async () => {
-      const links = canvas.getAllByRole('link');
-      for (const link of links) {
-        await expect(link).toHaveAttribute('target', '_blank');
-        await expect(link).toHaveAttribute('rel', 'noopener noreferrer');
-      }
-    });
-
-    await step('Diagonal arrow icons have RTL scale-x class', async () => {
-      const icons = canvasElement.querySelectorAll('svg');
-      for (const icon of icons) {
-        await expect(icon).toHaveClass('rtl:scale-x-[-1]');
-      }
-    });
-  }
-};
-
 // Icon Position Tests
 export const IconPositionStart: Story = {
   args: {
@@ -548,6 +368,13 @@ export const IconPositionStart: Story = {
     iconPosition: 'start',
     children: 'Icon at Start',
     onClick: fn()
+  },
+  parameters: {
+    ar: {
+      args: {
+        children: 'الأيقونة في البداية'
+      }
+    }
   },
   play: async ({ canvasElement, step, args }) => {
     const canvas = within(canvasElement);
@@ -575,6 +402,13 @@ export const IconPositionEnd: Story = {
     iconPosition: 'end',
     children: 'Icon at End',
     onClick: fn()
+  },
+  parameters: {
+    ar: {
+      args: {
+        children: 'الأيقونة في النهاية'
+      }
+    }
   },
   play: async ({ canvasElement, step, args }) => {
     const canvas = within(canvasElement);
@@ -604,6 +438,13 @@ export const HiddenIcon: Story = {
     children: 'No Icon',
     onClick: fn()
   },
+  parameters: {
+    ar: {
+      args: {
+        children: 'بدون أيقونة'
+      }
+    }
+  },
   play: async ({ canvasElement, step, args }) => {
     const canvas = within(canvasElement);
     const button = canvas.getByRole('button', { name: /no icon/i });
@@ -630,6 +471,13 @@ export const KeyboardNavigation: Story = {
     direction: 'forward',
     children: 'Press Enter or Space',
     onClick: fn()
+  },
+  parameters: {
+    ar: {
+      args: {
+        children: 'اضغط Enter أو Space'
+      }
+    }
   },
   play: async ({ canvasElement, step, args }) => {
     const canvas = within(canvasElement);
@@ -659,6 +507,13 @@ export const DisabledState: Story = {
     children: 'Disabled Button',
     disabled: true,
     onClick: fn()
+  },
+  parameters: {
+    ar: {
+      args: {
+        children: 'زر معطّل'
+      }
+    }
   },
   play: async ({ canvasElement, step, args }) => {
     const canvas = within(canvasElement);

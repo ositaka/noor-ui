@@ -18,7 +18,7 @@ const meta = {
   parameters: {
     layout: 'centered'
   },
-  tags: ['!autodocs']
+  tags: ['autodocs']
 } satisfies Meta<typeof Textarea>;
 
 export default meta;
@@ -30,16 +30,19 @@ export const Default: Story = {
     placeholder: 'Enter your message',
     id: 'preview'
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   render: (args) => (
     <div className="w-full max-w-md space-y-2">
       <Label htmlFor="preview">Message</Label>
       <Textarea {...args} />
     </div>
   ),
+  parameters: {
+    ar: {
+      args: {
+        placeholder: 'أدخل رسالتك'
+      }
+    }
+  },
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement);
 
@@ -75,10 +78,6 @@ export const WithLabel: Story = {
       <Textarea id="bio" placeholder="Tell us about yourself" />
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   },
@@ -121,10 +120,6 @@ export const AllHeightOptions: Story = {
       </div>
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   }
@@ -151,10 +146,6 @@ export const CharacterCount: Story = {
         </p>
       </div>
     );
-  },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
   },
   parameters: {
     controls: { disable: true }
@@ -195,10 +186,6 @@ export const DisabledAndReadonly: Story = {
       </div>
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   },
@@ -254,10 +241,6 @@ export const WithValidation: Story = {
       </div>
     );
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   },
@@ -307,10 +290,6 @@ export const AutoExpand: Story = {
         </p>
       </div>
     );
-  },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
   },
   parameters: {
     controls: { disable: true }
@@ -362,10 +341,6 @@ export const InForm: Story = {
       <Button type="submit">Send Message</Button>
     </form>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   },
@@ -387,156 +362,6 @@ export const InForm: Story = {
 
       const submitButton = canvas.getByRole('button', { name: 'Send Message' });
       await expect(submitButton).toBeInTheDocument();
-    });
-  }
-};
-
-// RTL Example - from component page lines 571-591
-export const RTLExample: Story = {
-  render: () => (
-    <div className="w-full max-w-md space-y-2">
-      <Label htmlFor="rtl-message">الرسالة</Label>
-      <Textarea id="rtl-message" placeholder="اكتب رسالتك هنا" rows={3} />
-    </div>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Textarea with Arabic text demonstrating RTL support. Automatically switches to RTL mode.'
-      }
-    }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders in RTL context', async () => {
-      const textarea = canvas.getByLabelText('الرسالة');
-      await expect(textarea).toBeInTheDocument();
-    });
-
-    await step('Accepts Arabic text input', async () => {
-      const textarea = canvas.getByLabelText('الرسالة');
-      await userEvent.type(textarea, 'مرحبا');
-      await expect(textarea).toHaveValue('مرحبا');
-    });
-  }
-};
-
-// RTL With Validation
-export const RTLWithValidation: Story = {
-  render: () => {
-    const [value, setValue] = React.useState('');
-    const [error, setError] = React.useState('');
-
-    const validate = (text: string) => {
-      if (text && text.length < 10) {
-        setError('يجب أن تكون الرسالة 10 أحرف على الأقل');
-      } else {
-        setError('');
-      }
-    };
-
-    return (
-      <div className="max-w-md space-y-2">
-        <Label htmlFor="feedback-ar">التعليقات</Label>
-        <Textarea
-          id="feedback-ar"
-          value={value}
-          onChange={(e) => {
-            setValue(e.target.value);
-            validate(e.target.value);
-          }}
-          className={error ? 'border-destructive' : ''}
-          placeholder="أدخل تعليقك (الحد الأدنى 10 أحرف)"
-        />
-        {error && <p className="text-sm text-destructive">{error}</p>}
-        {value.length >= 10 && !error && (
-          <p className="text-sm text-green-600 dark:text-green-500">يبدو جيداً!</p>
-        )}
-      </div>
-    );
-  },
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Arabic textarea with validation demonstrating RTL support and error messages.'
-      }
-    }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('RTL validation works', async () => {
-      const textarea = canvas.getByLabelText('التعليقات');
-      await userEvent.type(textarea, 'نص طويل بما يكفي للتحقق');
-      await expect(canvas.getByText('يبدو جيداً!')).toBeInTheDocument();
-    });
-  }
-};
-
-// RTL Form
-export const RTLForm: Story = {
-  render: () => (
-    <form
-      className="max-w-md space-y-6"
-      onSubmit={(e) => {
-        e.preventDefault();
-        alert('تم إرسال النموذج!');
-      }}
-    >
-      <div className="space-y-2">
-        <Label htmlFor="subject-ar">الموضوع</Label>
-        <input
-          id="subject-ar"
-          required
-          className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm"
-        />
-      </div>
-
-      <div className="space-y-2">
-        <Label htmlFor="message-ar">الرسالة</Label>
-        <Textarea
-          id="message-ar"
-          required
-          rows={5}
-          placeholder="أدخل رسالتك"
-        />
-      </div>
-
-      <Button type="submit">إرسال الرسالة</Button>
-    </form>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Complete form with Arabic labels and textarea in RTL mode.'
-      }
-    }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('RTL form textarea works', async () => {
-      const textarea = canvas.getByLabelText('الرسالة');
-      await expect(textarea).toHaveAttribute('required');
-
-      await userEvent.type(textarea, 'رسالة الاختبار');
-      await expect(textarea).toHaveValue('رسالة الاختبار');
     });
   }
 };

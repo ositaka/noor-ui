@@ -54,7 +54,7 @@ const preview: Preview = {
       },
     },
     // Default to Docs view and configure sidebar
-    viewMode: 'docs',
+    viewMode: 'story',
     options: {
       storySort: {
         method: 'alphabetical',
@@ -138,19 +138,23 @@ const preview: Preview = {
       const mode = context.globals.mode || 'light';
       const locale = context.globals.locale || 'en';
 
-      // Update document attributes (direction, theme, mode, locale)
+      // Apply Arabic arg overrides when direction is RTL
+      const arOverrides = context.parameters?.ar?.args ?? context.parameters?.ar;
+      if (direction === 'rtl' && arOverrides) {
+        context.args = { ...context.args, ...arOverrides };
+      }
+
+      // Update document attributes (theme, mode) — NOT dir, which stays scoped to the story wrapper
       React.useEffect(() => {
-        document.documentElement.setAttribute('dir', direction);
-        document.documentElement.setAttribute('lang', locale);
         document.documentElement.classList.toggle('dark', mode === 'dark');
         applyThemeToDocument(theme);
-      }, [direction, locale, mode, theme]);
+      }, [mode, theme]);
 
       return (
-        <DirectionProvider>
+        <DirectionProvider controlledDirection={direction as 'ltr' | 'rtl'} controlledLocale={locale as 'en' | 'ar'}>
           <IconContext.Provider value={{ weight: 'duotone', color: 'currentColor' }}>
             <ThemeProvider attribute="class" defaultTheme={mode} forcedTheme={mode} enableSystem={false}>
-              <div dir={direction} style={{ minHeight: '100%' }}>
+              <div dir={direction} lang={locale} style={{ minHeight: '100%' }}>
                 <Story />
                 <Toaster />
               </div>

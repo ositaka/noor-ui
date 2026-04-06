@@ -17,7 +17,7 @@ const meta = {
   parameters: {
     layout: 'centered'
   },
-  tags: ['!autodocs']
+  tags: ['autodocs']
 } satisfies Meta<typeof Blockquote>;
 
 export default meta;
@@ -31,9 +31,14 @@ export const Default: Story = {
     source: 'On Science',
     variant: 'default'
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
+  parameters: {
+    ar: {
+      args: {
+        children: 'الشيء المهم هو عدم التوقف عن طرح الأسئلة. للفضول سببه الخاص للوجود.',
+        author: 'ألبرت أينشتاين',
+        source: 'عن العلم'
+      }
+    }
   },
   render: (args) => (
     <div className="w-full max-w-2xl">
@@ -77,10 +82,6 @@ export const AccentVariant: Story = {
       </Blockquote>
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   },
@@ -109,10 +110,6 @@ export const SubtleVariant: Story = {
       </Blockquote>
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   },
@@ -140,10 +137,6 @@ export const WithoutAttribution: Story = {
       </Blockquote>
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   },
@@ -177,10 +170,6 @@ export const WithCitationLink: Story = {
       </Blockquote>
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -229,147 +218,7 @@ export const AllVariants: Story = {
       </Blockquote>
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
-  }
-};
-
-// RTL Example (Default) - with Arabic quote
-export const RTLExample: Story = {
-  render: () => (
-    <div className="w-full max-w-2xl">
-      <Blockquote author="ألبرت أينشتاين" source="عن العلم">
-        الشيء المهم هو عدم التوقف عن طرح الأسئلة. للفضول سببه الخاص للوجود.
-      </Blockquote>
-    </div>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Blockquote with Arabic text demonstrating RTL support. Border aligns to the start (right in RTL). Automatically switches to RTL mode.'
-      }
-    }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders in RTL context', async () => {
-      const figure = canvas.getByRole('figure');
-      await expect(figure).toBeInTheDocument();
-      await expect(figure).toBeVisible();
-    });
-
-    await step('Displays Arabic content', async () => {
-      const blockquote = canvas.getByText(/الشيء المهم/i);
-      await expect(blockquote).toBeInTheDocument();
-    });
-  }
-};
-
-// RTL Accent
-export const RTLAccent: Story = {
-  render: () => (
-    <div className="w-full max-w-2xl">
-      <Blockquote variant="accent" author="ستيف جوبز">
-        الابتكار يميز بين القائد والتابع.
-      </Blockquote>
-    </div>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Accent variant with Arabic text in RTL mode. Quote icon aligns correctly to the end (left in RTL).'
-      }
-    }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders accent variant in RTL', async () => {
-      const blockquote = canvas.getByText(/الابتكار يميز/i);
-      await expect(blockquote).toBeInTheDocument();
-    });
-
-    await step('Quote icon present in RTL', async () => {
-      const figure = canvas.getByRole('figure');
-      const svg = figure.querySelector('svg');
-      await expect(svg).toBeInTheDocument();
-    });
-  }
-};
-
-// RTL Subtle
-export const RTLSubtle: Story = {
-  render: () => (
-    <div className="w-full max-w-2xl">
-      <Blockquote variant="subtle" author="مايا أنجيلو">
-        نحن نسعد بجمال الفراشة، لكننا نادراً ما نعترف بالتغييرات التي مرت بها لتحقيق هذا الجمال.
-      </Blockquote>
-    </div>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Subtle variant with Arabic text in RTL mode.'
-      }
-    }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders subtle variant in RTL', async () => {
-      const blockquote = canvas.getByText(/نحن نسعد بجمال الفراشة/i);
-      await expect(blockquote).toBeInTheDocument();
-    });
-  }
-};
-
-// RTL All Variants
-export const RTLAllVariants: Story = {
-  render: () => (
-    <div className="space-y-6 w-full max-w-2xl">
-      <Blockquote author="ألبرت أينشتاين" source="عن العلم">
-        الشيء المهم هو عدم التوقف عن طرح الأسئلة. للفضول سببه الخاص للوجود.
-      </Blockquote>
-
-      <Blockquote variant="accent" author="ستيف جوبز">
-        الابتكار يميز بين القائد والتابع.
-      </Blockquote>
-
-      <Blockquote variant="subtle" author="مايا أنجيلو">
-        نحن نسعد بجمال الفراشة، لكننا نادراً ما نعترف بالتغييرات التي مرت بها لتحقيق هذا الجمال.
-      </Blockquote>
-    </div>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'All blockquote variants with Arabic text demonstrating complete RTL support.'
-      }
-    }
   }
 };

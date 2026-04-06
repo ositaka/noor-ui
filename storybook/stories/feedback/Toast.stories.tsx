@@ -21,7 +21,7 @@ const meta = {
   parameters: {
     layout: 'centered'
   },
-  tags: ['!autodocs'],
+  tags: ['autodocs'],
   argTypes: {
     variant: {
       control: { type: 'select' },
@@ -39,10 +39,6 @@ type Story = StoryObj<typeof meta>;
 
 // Default - Interactive playground with controls
 export const Default: Story = {
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   render: () => {
     const { toast } = useToast();
     return (
@@ -133,10 +129,6 @@ export const Simple: Story = {
       </Button>
     );
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -184,10 +176,6 @@ export const WithTitle: Story = {
         Show Toast
       </Button>
     );
-  },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
@@ -242,10 +230,6 @@ export const Destructive: Story = {
       </Button>
     );
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -273,10 +257,6 @@ export const Success: Story = {
         Show Success Toast
       </Button>
     );
-  },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
@@ -332,162 +312,11 @@ export const AllVariants: Story = {
       </div>
     );
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
       description: {
         story: 'Showcase of all toast variants: default, destructive, and success.'
-      }
-    }
-  }
-};
-
-// RTL Simple
-export const RTLSimple: Story = {
-  render: () => {
-    const { toast } = useToast();
-    return (
-      <Button
-        onClick={() => {
-          toast({
-            description: 'تم إرسال رسالتك.'
-          });
-        }}
-      >
-        عرض توست بسيط
-      </Button>
-    );
-  },
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Simple toast in RTL with Arabic text.'
-      }
-    }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders in RTL context', async () => {
-      const button = canvas.getByRole('button', { name: /عرض توست بسيط/i });
-      await expect(button).toBeInTheDocument();
-    });
-
-    await step('Shows RTL toast with Arabic text', async () => {
-      const button = canvas.getByRole('button', { name: /عرض توست بسيط/i });
-      await userEvent.click(button);
-
-      // Wait for toast to appear
-      await new Promise(resolve => setTimeout(resolve, 100));
-
-      // Toast renders in a portal (document.body)
-      const bodyCanvas = within(document.body);
-      const description = bodyCanvas.getByText('تم إرسال رسالتك.');
-      await expect(description).toBeInTheDocument();
-    });
-  }
-};
-
-// RTL With Title
-export const RTLWithTitle: Story = {
-  render: () => {
-    const { toast } = useToast();
-    return (
-      <Button
-        onClick={() => {
-          toast({
-            title: 'مجدول: اللقاء',
-            description: 'الجمعة، 10 فبراير 2023 الساعة 5:57 مساءً'
-          });
-        }}
-      >
-        عرض التوست
-      </Button>
-    );
-  },
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Toast with title and description in RTL.'
-      }
-    }
-  }
-};
-
-// RTL Destructive
-export const RTLDestructive: Story = {
-  render: () => {
-    const { toast } = useToast();
-    return (
-      <Button
-        variant="destructive"
-        onClick={() => {
-          toast({
-            variant: 'destructive',
-            title: 'عذراً! حدث خطأ ما.',
-            description: 'كان هناك مشكلة في طلبك.'
-          });
-        }}
-      >
-        عرض توست خطأ
-      </Button>
-    );
-  },
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Destructive toast in RTL with Arabic error message.'
-      }
-    }
-  }
-};
-
-// RTL Success
-export const RTLSuccess: Story = {
-  render: () => {
-    const { toast } = useToast();
-    return (
-      <Button
-        onClick={() => {
-          toast({
-            variant: 'success',
-            title: 'نجح!',
-            description: 'تم حفظ تغييراتك.'
-          });
-        }}
-      >
-        عرض توست نجاح
-      </Button>
-    );
-  },
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Success toast in RTL with Arabic success message.'
       }
     }
   }

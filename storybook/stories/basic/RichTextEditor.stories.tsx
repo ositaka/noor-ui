@@ -18,7 +18,7 @@ const meta = {
   parameters: {
     layout: 'centered'
   },
-  tags: ['!autodocs'],
+  tags: ['autodocs'],
   argTypes: {
     content: { control: 'text' },
     onChange: { control: false },
@@ -46,10 +46,6 @@ export const Default: Story = {
         />
       </div>
     );
-  },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
   }
 };
 
@@ -70,10 +66,6 @@ export const WithContent: Story = {
         </CardContent>
       </Card>
     );
-  },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
   },
   parameters: {
     controls: { disable: true }
@@ -99,10 +91,6 @@ export const ArabicContent: Story = {
       </Card>
     );
   },
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
   parameters: {
     controls: { disable: true }
   }
@@ -120,10 +108,6 @@ export const ReadOnly: Story = {
       </CardContent>
     </Card>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   }
@@ -147,10 +131,6 @@ export const CustomHeight: Story = {
       </Card>
     );
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   }
@@ -172,10 +152,6 @@ export const EmptyState: Story = {
         </CardContent>
       </Card>
     );
-  },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
@@ -208,42 +184,6 @@ export const WithListsAndFormatting: Story = {
         </CardContent>
       </Card>
     );
-  },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
-  parameters: {
-    controls: { disable: true }
-  }
-};
-
-// RTL Full Example
-export const RTLFullExample: Story = {
-  render: () => {
-    const [content, setContent] = useState(
-      '<h2>مميزات المحرر</h2>' +
-      '<ul><li>تنسيق <strong>غامق</strong> و<em>مائل</em></li>' +
-      '<li>قوائم نقطية ومرقمة</li>' +
-      '<li>عناوين وفقرات</li></ul>' +
-      '<p>جرب تحرير هذا المحتوى!</p>'
-    );
-
-    return (
-      <Card>
-        <CardContent className="p-6">
-          <RichTextEditor
-            content={content}
-            onChange={setContent}
-            placeholder="ابدأ الكتابة هنا..."
-          />
-        </CardContent>
-      </Card>
-    );
-  },
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
   },
   parameters: {
     controls: { disable: true }

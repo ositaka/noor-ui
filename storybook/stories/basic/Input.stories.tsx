@@ -10,7 +10,7 @@ const meta = {
   parameters: {
     layout: 'centered'
   },
-  tags: ['!autodocs'],
+  tags: ['autodocs'],
   argTypes: {
     type: {
       control: 'select',
@@ -35,6 +35,13 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     placeholder: 'Enter text...'
+  },
+  parameters: {
+    ar: {
+      args: {
+        placeholder: 'أدخل النص...'
+      }
+    }
   }
 };
 
@@ -43,6 +50,13 @@ export const Email: Story = {
   args: {
     type: 'email',
     placeholder: 'Email address'
+  },
+  parameters: {
+    ar: {
+      args: {
+        placeholder: 'البريد الإلكتروني'
+      }
+    }
   },
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement);
@@ -65,6 +79,13 @@ export const Password: Story = {
   args: {
     type: 'password',
     placeholder: 'Password'
+  },
+  parameters: {
+    ar: {
+      args: {
+        placeholder: 'كلمة المرور'
+      }
+    }
   },
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement);
@@ -110,6 +131,13 @@ export const SearchInput: Story = {
     type: 'search',
     placeholder: 'Search...'
   },
+  parameters: {
+    ar: {
+      args: {
+        placeholder: 'ابحث...'
+      }
+    }
+  },
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement);
 
@@ -134,6 +162,14 @@ export const Disabled: Story = {
     disabled: true,
     value: 'Cannot edit this'
   },
+  parameters: {
+    ar: {
+      args: {
+        placeholder: 'حقل معطل',
+        value: 'لا يمكن التعديل'
+      }
+    }
+  },
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement);
 
@@ -148,6 +184,13 @@ export const Disabled: Story = {
 export const WithValue: Story = {
   args: {
     value: 'Filled input'
+  },
+  parameters: {
+    ar: {
+      args: {
+        value: 'حقل مملوء'
+      }
+    }
   },
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement);
@@ -275,108 +318,6 @@ export const LoginForm: Story = {
       await userEvent.clear(passwordInput);
       await userEvent.type(passwordInput, 'password123');
       await expect(passwordInput).toHaveValue('password123');
-    });
-  }
-};
-
-// RTL Examples
-export const RTLPlaceholder: Story = {
-  args: {
-    placeholder: 'أدخل النص هنا...'
-  },
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: 'Input with Arabic placeholder demonstrating RTL support. Automatically switches to RTL mode.'
-      }
-    }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders in RTL context', async () => {
-      const input = canvas.getByPlaceholderText('أدخل النص هنا...');
-      await expect(input).toBeInTheDocument();
-    });
-
-    await step('Accepts RTL text input', async () => {
-      const input = canvas.getByPlaceholderText('أدخل النص هنا...');
-      await userEvent.type(input, 'مرحبا');
-      await expect(input).toHaveValue('مرحبا');
-    });
-  }
-};
-
-export const RTLWithLabel: Story = {
-  render: () => (
-    <div className="grid w-full max-w-sm items-center gap-1.5">
-      <Label htmlFor="name">الاسم الكامل</Label>
-      <Input type="text" id="name" placeholder="أدخل اسمك" />
-    </div>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Input with Arabic label showing proper RTL layout. Automatically switches to RTL mode.'
-      }
-    }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders with RTL label', async () => {
-      const input = canvas.getByLabelText('الاسم الكامل');
-      await expect(input).toBeInTheDocument();
-    });
-
-    await step('Label association works in RTL', async () => {
-      const input = canvas.getByLabelText('الاسم الكامل');
-      await userEvent.type(input, 'محمد');
-      await expect(input).toHaveValue('محمد');
-    });
-  }
-};
-
-export const RTLSearchWithIcon: Story = {
-  render: () => (
-    <div className="relative w-full max-w-sm">
-      <MagnifyingGlass className="absolute start-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-      <Input placeholder="ابحث..." className="ps-9" />
-    </div>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Search input with icon properly positioned in RTL mode using logical properties (start/end).'
-      }
-    }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders RTL search with icon', async () => {
-      const input = canvas.getByPlaceholderText('ابحث...');
-      await expect(input).toBeInTheDocument();
-    });
-
-    await step('Search input works in RTL with icon', async () => {
-      const input = canvas.getByPlaceholderText('ابحث...');
-      await userEvent.type(input, 'بحث');
-      await expect(input).toHaveValue('بحث');
     });
   }
 };
