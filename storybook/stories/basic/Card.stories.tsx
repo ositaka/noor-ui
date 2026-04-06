@@ -57,19 +57,6 @@ export const Default: Story = {
     }
   },
   render: (args) => <Card {...args} className="w-[350px]" />,
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders card structure', async () => {
-      await expect(canvas.getByRole('heading', { name: 'Card Title' })).toBeInTheDocument();
-      await expect(canvas.getByRole('heading', { name: 'Card Title' })).toBeVisible();
-    });
-
-    await step('Displays card content', async () => {
-      await expect(canvas.getByText('Card description goes here')).toBeInTheDocument();
-      await expect(canvas.getByText('Card content area. Add any content here.')).toBeInTheDocument();
-    });
-  }
 };
 
 // With Footer

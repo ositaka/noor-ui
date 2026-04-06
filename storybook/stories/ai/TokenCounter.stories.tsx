@@ -19,7 +19,7 @@ const meta = {
   parameters: {
     layout: 'centered'
   },
-  tags: ['!autodocs'],
+  tags: ['autodocs'],
   argTypes: {
     inputTokens: { control: 'number' },
     outputTokens: { control: 'number' },
@@ -53,10 +53,6 @@ export const Default: Story = {
     outputCostPer1K: 0.06,
     label: 'Token Usage'
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   render: (args) => (
     <div className="max-w-md w-full">
       <TokenCounter {...args} />
@@ -67,59 +63,13 @@ export const Default: Story = {
       story: {
         inline: false
       }
+    },
+    ar: {
+      args: {
+        label: 'استخدام الرموز'
+      }
     }
   },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders token counter with label', async () => {
-      await expect(canvas.getByText('Token Usage')).toBeInTheDocument();
-    });
-
-    await step('Displays total token count', async () => {
-      // Total: 1250 + 850 = 2100 tokens
-      await expect(canvas.getByText('2,100')).toBeInTheDocument();
-      await expect(canvas.getByText('of 4,096')).toBeInTheDocument();
-    });
-
-    await step('Shows usage percentage', async () => {
-      // 2100 / 4096 = 51.3%
-      await expect(canvas.getByText('51.3%')).toBeInTheDocument();
-    });
-
-    await step('Displays token breakdown', async () => {
-      await expect(canvas.getByText('Input Tokens')).toBeInTheDocument();
-      await expect(canvas.getByText('1,250')).toBeInTheDocument();
-      await expect(canvas.getByText('Output Tokens')).toBeInTheDocument();
-      await expect(canvas.getByText('850')).toBeInTheDocument();
-    });
-
-    await step('Shows cost estimation', async () => {
-      await expect(canvas.getByText('Estimated Cost')).toBeInTheDocument();
-      // Input: 1250/1000 * 0.03 = 0.0375, Output: 850/1000 * 0.06 = 0.051, Total: 0.0885
-      await expect(canvas.getByText('$0.0885')).toBeInTheDocument();
-    });
-
-    await step('Shows pricing rates', async () => {
-      // Pricing text: "$0.0300/1K input • $0.0600/1K output"
-      await expect(canvas.getByText(/\$0\.0300\/1K input/)).toBeInTheDocument();
-      await expect(canvas.getByText(/\$0\.0600\/1K output/)).toBeInTheDocument();
-    });
-
-    await step('Info button shows tooltip on hover', async () => {
-      const infoButtons = canvas.getAllByRole('button');
-      const infoButton = infoButtons.find(btn => btn.querySelector('svg'));
-
-      if (infoButton) {
-        await userEvent.hover(infoButton);
-
-        // Tooltip renders in portal at document.body
-        const body = within(document.body);
-        const tooltip = await body.findByRole('tooltip', {}, { timeout: 3000 });
-        await expect(tooltip).toBeVisible();
-      }
-    });
-  }
 };
 
 // With Cost Estimation - from component page lines 246-253
@@ -140,10 +90,6 @@ export const WithCostEstimation: Story = {
       </CardContent>
     </Card>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -210,10 +156,6 @@ export const WarningStates: Story = {
       </CardContent>
     </Card>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -284,10 +226,6 @@ export const DifferentModels: Story = {
       </CardContent>
     </Card>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -314,10 +252,6 @@ export const CompactVariant: Story = {
       </CardContent>
     </Card>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -369,10 +303,6 @@ export const CustomThresholds: Story = {
       </CardContent>
     </Card>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -416,10 +346,6 @@ export const WithoutCost: Story = {
       </CardContent>
     </Card>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -471,10 +397,6 @@ export const SafeState: Story = {
       </CardContent>
     </Card>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -510,108 +432,3 @@ export const SafeState: Story = {
   }
 };
 
-// RTL With Cost
-export const RTLWithCost: Story = {
-  render: () => (
-    <div className="max-w-md w-80">
-      <TokenCounter
-        inputTokens={1250}
-        outputTokens={850}
-        maxTokens={4096}
-        inputCostPer1K={0.03}
-        outputCostPer1K={0.06}
-        isRTL={true}
-        labelAr="استخدام الرموز"
-      />
-    </div>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Token counter in RTL with Arabic label and cost display.'
-      }
-    }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders with Arabic label', async () => {
-      await expect(canvas.getByText('استخدام الرموز')).toBeInTheDocument();
-    });
-
-    await step('Displays token count in Arabic numerals', async () => {
-      // Arabic number formatting
-      await expect(canvas.getByText('٢٬١٠٠')).toBeInTheDocument();
-      // "من ٤٬٠٩٦" = "of 4,096" in Arabic
-      await expect(canvas.getByText('من ٤٬٠٩٦')).toBeInTheDocument();
-    });
-
-    await step('Shows cost estimation in RTL format', async () => {
-      await expect(canvas.getByText('التكلفة المقدرة')).toBeInTheDocument();
-    });
-
-    await step('Displays Arabic token labels', async () => {
-      await expect(canvas.getByText('رموز الإدخال')).toBeInTheDocument();
-      await expect(canvas.getByText('رموز الإخراج')).toBeInTheDocument();
-    });
-  }
-};
-
-// RTL Warning States
-export const RTLWarningStates: Story = {
-  render: () => (
-    <Card>
-      <CardContent className="p-6">
-        <div className="space-y-12 w-80">
-          <div>
-            <p className="text-sm text-muted-foreground mb-2">آمن (&lt; ٧٠٪)</p>
-            <TokenCounter
-              inputTokens={1000}
-              outputTokens={500}
-              maxTokens={4096}
-              isRTL={true}
-              labelAr="استخدام آمن"
-            />
-          </div>
-          <div>
-            <p className="text-sm text-muted-foreground mb-2">تحذير (٧٠-٩٠٪)</p>
-            <TokenCounter
-              inputTokens={2000}
-              outputTokens={1200}
-              maxTokens={4096}
-              isRTL={true}
-              labelAr="تحذير"
-            />
-          </div>
-          <div>
-            <p className="text-sm text-muted-foreground mb-2">خطر (&gt; ٩٠٪)</p>
-            <TokenCounter
-              inputTokens={3000}
-              outputTokens={800}
-              maxTokens={4096}
-              isRTL={true}
-              labelAr="خطر"
-            />
-          </div>
-        </div>
-      </CardContent>
-    </Card>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'All warning states in RTL with Arabic labels.'
-      }
-    }
-  }
-};

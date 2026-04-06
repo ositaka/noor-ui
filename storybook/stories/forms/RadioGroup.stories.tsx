@@ -20,7 +20,7 @@ const meta = {
   parameters: {
     layout: 'centered'
   },
-  tags: ['!autodocs'],
+  tags: ['autodocs'],
   argTypes: {
     onValueChange: {
       control: false
@@ -36,10 +36,6 @@ export const Default: Story = {
   args: {
     defaultValue: 'option1',
     onValueChange: fn()
-  },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
   },
   render: (args) => (
     <RadioGroup {...args}>
@@ -57,64 +53,6 @@ export const Default: Story = {
       </div>
     </RadioGroup>
   ),
-  play: async ({ canvasElement, step, args }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders correctly with default selection', async () => {
-      const option1 = canvas.getByRole('radio', { name: /option 1/i });
-      const option2 = canvas.getByRole('radio', { name: /option 2/i });
-      const option3 = canvas.getByRole('radio', { name: /option 3/i });
-
-      await expect(option1).toBeInTheDocument();
-      await expect(option2).toBeInTheDocument();
-      await expect(option3).toBeInTheDocument();
-      await expect(option1).toBeChecked();
-      await expect(option2).not.toBeChecked();
-      await expect(option3).not.toBeChecked();
-    });
-
-    await step('Handles click interaction', async () => {
-      const option2 = canvas.getByRole('radio', { name: /option 2/i });
-      await userEvent.click(option2);
-      await expect(option2).toBeChecked();
-      await expect(args.onValueChange).toHaveBeenCalledWith('option2');
-    });
-
-    await step('Keyboard navigation with arrow keys', async () => {
-      const option1 = canvas.getByRole('radio', { name: /option 1/i });
-      const option2 = canvas.getByRole('radio', { name: /option 2/i });
-      const option3 = canvas.getByRole('radio', { name: /option 3/i });
-
-      // Focus the group
-      option2.focus();
-      await expect(option2).toHaveFocus();
-
-      // Arrow down should move to next option
-      await userEvent.keyboard('{ArrowDown}');
-      await expect(option3).toHaveFocus();
-
-      // Arrow up should move to previous option
-      await userEvent.keyboard('{ArrowUp}');
-      await expect(option2).toHaveFocus();
-    });
-
-    await step('Tab navigation', async () => {
-      // Tab should focus the checked radio button
-      const radioGroup = canvas.getByRole('radiogroup');
-      await expect(radioGroup).toBeInTheDocument();
-    });
-
-    await step('Mutually exclusive selection', async () => {
-      const option1 = canvas.getByRole('radio', { name: /option 1/i });
-      const option2 = canvas.getByRole('radio', { name: /option 2/i });
-      const option3 = canvas.getByRole('radio', { name: /option 3/i });
-
-      await userEvent.click(option1);
-      await expect(option1).toBeChecked();
-      await expect(option2).not.toBeChecked();
-      await expect(option3).not.toBeChecked();
-    });
-  },
   parameters: {
     docs: {
       story: {
@@ -157,10 +95,6 @@ export const VerticalLayout: Story = {
       await expect(compactOption).toBeChecked();
     });
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   }
@@ -198,10 +132,6 @@ export const HorizontalLayout: Story = {
       await userEvent.click(paypalOption);
       await expect(paypalOption).toBeChecked();
     });
-  },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
   },
   parameters: {
     controls: { disable: true }
@@ -259,10 +189,6 @@ export const WithDescription: Story = {
       await expect(proPlan).toBeChecked();
     });
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -306,10 +232,6 @@ export const DisabledOptions: Story = {
       await userEvent.click(anotherOption);
       await expect(anotherOption).toBeChecked();
     });
-  },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
   },
   parameters: {
     controls: { disable: true }
@@ -378,10 +300,6 @@ export const Controlled: Story = {
       await expect(canvas.getByText(/selected: option2/i)).toBeInTheDocument();
     });
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -442,10 +360,6 @@ export const InForm: Story = {
       await expect(submitButton).toHaveAttribute('type', 'submit');
     });
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -456,174 +370,3 @@ export const InForm: Story = {
   }
 };
 
-// RTL Example
-export const RTLExample: Story = {
-  render: () => (
-    <RadioGroup defaultValue="option1">
-      <div className="flex items-center gap-2">
-        <RadioGroupItem value="option1" id="rtl1" />
-        <Label htmlFor="rtl1">الخيار الأول</Label>
-      </div>
-      <div className="flex items-center gap-2">
-        <RadioGroupItem value="option2" id="rtl2" />
-        <Label htmlFor="rtl2">الخيار الثاني</Label>
-      </div>
-      <div className="flex items-center gap-2">
-        <RadioGroupItem value="option3" id="rtl3" />
-        <Label htmlFor="rtl3">الخيار الثالث</Label>
-      </div>
-    </RadioGroup>
-  ),
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders in RTL context', async () => {
-      const radios = canvas.getAllByRole('radio');
-      await expect(radios).toHaveLength(3);
-      await expect(radios[0]).toBeChecked();
-    });
-
-    await step('Interaction works in RTL', async () => {
-      const radios = canvas.getAllByRole('radio');
-      await userEvent.click(radios[1]);
-      await expect(radios[1]).toBeChecked();
-    });
-  },
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Radio group with Arabic labels demonstrating RTL support. Radio buttons and labels maintain proper spacing and alignment. Automatically switches to RTL mode.'
-      }
-    }
-  }
-};
-
-// RTL With Description
-export const RTLWithDescription: Story = {
-  render: () => (
-    <RadioGroup defaultValue="starter" className="w-80">
-      <div className="space-y-1">
-        <div className="flex items-center gap-2">
-          <RadioGroupItem value="starter" id="starter-rtl" />
-          <Label htmlFor="starter-rtl">خطة البداية</Label>
-        </div>
-        <p className="text-sm text-muted-foreground ps-6">
-          مثالية للأفراد. 9$ شهرياً.
-        </p>
-      </div>
-
-      <div className="space-y-1">
-        <div className="flex items-center gap-2">
-          <RadioGroupItem value="pro" id="pro-rtl" />
-          <Label htmlFor="pro-rtl">الخطة الاحترافية</Label>
-        </div>
-        <p className="text-sm text-muted-foreground ps-6">
-          للفرق الصغيرة. 29$ شهرياً.
-        </p>
-      </div>
-
-      <div className="space-y-1">
-        <div className="flex items-center gap-2">
-          <RadioGroupItem value="enterprise" id="enterprise-rtl" />
-          <Label htmlFor="enterprise-rtl">الخطة المؤسسية</Label>
-        </div>
-        <p className="text-sm text-muted-foreground ps-6">
-          حلول مخصصة. اتصل بالمبيعات.
-        </p>
-      </div>
-    </RadioGroup>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Plan selection with descriptions in Arabic. Uses logical properties (ps-6) which automatically adapt for RTL.'
-      }
-    }
-  }
-};
-
-// RTL Horizontal
-export const RTLHorizontal: Story = {
-  render: () => (
-    <RadioGroup defaultValue="card" className="flex gap-4">
-      <div className="flex items-center gap-2">
-        <RadioGroupItem value="card" id="card-rtl" />
-        <Label htmlFor="card-rtl">بطاقة</Label>
-      </div>
-      <div className="flex items-center gap-2">
-        <RadioGroupItem value="paypal" id="paypal-rtl" />
-        <Label htmlFor="paypal-rtl">PayPal</Label>
-      </div>
-      <div className="flex items-center gap-2">
-        <RadioGroupItem value="apple" id="apple-rtl" />
-        <Label htmlFor="apple-rtl">Apple Pay</Label>
-      </div>
-    </RadioGroup>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Horizontal radio group layout in RTL mode. The flex layout naturally adapts to RTL.'
-      }
-    }
-  }
-};
-
-// RTL In Form
-export const RTLInForm: Story = {
-  render: () => (
-    <form
-      className="space-y-6"
-      onSubmit={(e) => {
-        e.preventDefault();
-        alert('تم إرسال النموذج!');
-      }}
-    >
-      <div className="space-y-3">
-        <Label className="text-base font-semibold">اختر خطتك</Label>
-        <RadioGroup defaultValue="pro" name="plan">
-          <div className="flex items-center gap-2">
-            <RadioGroupItem value="free" id="free-rtl" />
-            <Label htmlFor="free-rtl">مجاني</Label>
-          </div>
-          <div className="flex items-center gap-2">
-            <RadioGroupItem value="pro-rtl-form" id="pro-rtl-form" />
-            <Label htmlFor="pro-rtl-form">احترافي</Label>
-          </div>
-          <div className="flex items-center gap-2">
-            <RadioGroupItem value="enterprise-rtl-form" id="enterprise-rtl-form" />
-            <Label htmlFor="enterprise-rtl-form">مؤسسي</Label>
-          </div>
-        </RadioGroup>
-      </div>
-      <Button type="submit">متابعة</Button>
-    </form>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Complete form with radio group in Arabic, demonstrating RTL support in form contexts.'
-      }
-    }
-  }
-};

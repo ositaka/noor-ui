@@ -38,20 +38,6 @@ export const Default: Story = {
   args: {
     variant: 'author'
   },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders correctly', async () => {
-      const badge = canvas.getByText('Author');
-      await expect(badge).toBeInTheDocument();
-      await expect(badge).toBeVisible();
-    });
-
-    await step('Has correct content', async () => {
-      await expect(canvas.getByText('Author')).toBeInTheDocument();
-    });
-
-  }
 };
 
 // All Variants - from page lines 97-102

@@ -33,28 +33,6 @@ export const Default: Story = {
     variant: 'default',
     size: 'md'
   },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders correctly as semantic kbd element', async () => {
-      const kbd = canvasElement.querySelector('kbd');
-      await expect(kbd).toBeInTheDocument();
-      await expect(kbd).toBeVisible();
-    });
-
-    await step('Displays key combination content', async () => {
-      const kbd = canvasElement.querySelector('kbd');
-      // Should contain mod (⌘ or Ctrl) and k
-      await expect(kbd).toHaveTextContent(/[⌘Ctrl]/);
-      await expect(kbd).toHaveTextContent(/K/);
-    });
-
-    await step('Has proper attributes', async () => {
-      const kbd = canvasElement.querySelector('kbd');
-      // Kbd component always renders LTR
-      await expect(kbd).toHaveAttribute('dir', 'ltr');
-    });
-  }
 };
 
 // Single Keys

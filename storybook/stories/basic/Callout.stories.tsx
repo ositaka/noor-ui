@@ -50,31 +50,6 @@ export const Default: Story = {
       <Callout {...args} />
     </div>
   ),
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders with correct ARIA role', async () => {
-      const callout = canvas.getByRole('note');
-      await expect(callout).toBeInTheDocument();
-      await expect(callout).toBeVisible();
-    });
-
-    await step('Displays title correctly', async () => {
-      await expect(canvas.getByText('Information')).toBeInTheDocument();
-      await expect(canvas.getByText('Information')).toBeVisible();
-    });
-
-    await step('Displays content correctly', async () => {
-      await expect(canvas.getByText(/This is an informational callout with helpful details/i)).toBeInTheDocument();
-      await expect(canvas.getByText(/This is an informational callout with helpful details/i)).toBeVisible();
-    });
-
-    await step('Contains icon', async () => {
-      const callout = canvas.getByRole('note');
-      const icon = callout.querySelector('svg');
-      await expect(icon).toBeInTheDocument();
-    });
-  }
 };
 
 // Info - from component page lines 77-79

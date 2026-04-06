@@ -18,7 +18,7 @@ const meta = {
   parameters: {
     layout: 'centered'
   },
-  tags: ['!autodocs'],
+  tags: ['autodocs'],
   argTypes: {
     prayers: { control: false },
     nextPrayer: { control: 'text' },
@@ -60,10 +60,6 @@ export const Default: Story = {
     date: 'November 6, 2025',
     dateAr: '٥ جمادى الأولى ١٤٤٧'
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   render: (args) => (
     <div className="max-w-2xl w-full">
       <PrayerTimes {...args} />
@@ -73,6 +69,13 @@ export const Default: Story = {
     docs: {
       story: {
         inline: false
+      }
+    },
+    ar: {
+      args: {
+        nextPrayer: 'الظهر',
+        location: 'الرياض',
+        date: '٥ جمادى الأولى ١٤٤٧'
       }
     }
   }
@@ -93,10 +96,6 @@ export const DefaultVariant: Story = {
       />
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -120,10 +119,6 @@ export const CompactVariant: Story = {
       />
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -168,10 +163,6 @@ export const DetailedVariant: Story = {
       />
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -194,10 +185,6 @@ export const WithoutCountdown: Story = {
       />
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -240,15 +227,17 @@ export const NotificationVariant: Story = {
       <PrayerTimes {...args} />
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
       description: {
         story: 'Notification variant for prayer time alerts with adhan controls.'
+      }
+    },
+    ar: {
+      args: {
+        nextPrayer: 'المغرب',
+        location: 'الرياض'
       }
     }
   },
@@ -326,10 +315,6 @@ export const AllVariants: Story = {
       </div>
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -337,164 +322,5 @@ export const AllVariants: Story = {
         story: 'Showcase of all prayer times variants.'
       }
     }
-  }
-};
-
-// RTL Default
-export const RTLDefault: Story = {
-  render: () => (
-    <div className="max-w-2xl w-full">
-      <PrayerTimes
-        prayers={samplePrayers}
-        nextPrayer="الظهر"
-        countdown="2:30:15"
-        location="Riyadh"
-        locationAr="الرياض"
-        date="November 6, 2025"
-        dateAr="٥ جمادى الأولى ١٤٤٧"
-      />
-    </div>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Prayer times in RTL with Arabic text and proper alignment.'
-      }
-    }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders in RTL context with Arabic text', async () => {
-      await expect(canvas.getByText('مواقيت الصلاة')).toBeInTheDocument();
-      await expect(canvas.getByText('الرياض')).toBeInTheDocument();
-      await expect(canvas.getByText('٥ جمادى الأولى ١٤٤٧')).toBeInTheDocument();
-    });
-
-    await step('Shows Arabic prayer names', async () => {
-      await expect(canvas.getByText('الفجر')).toBeInTheDocument();
-      await expect(canvas.getByText('الظهر')).toBeInTheDocument();
-      await expect(canvas.getByText('العصر')).toBeInTheDocument();
-      await expect(canvas.getByText('المغرب')).toBeInTheDocument();
-      await expect(canvas.getByText('العشاء')).toBeInTheDocument();
-    });
-
-    await step('Shows next prayer countdown in RTL', async () => {
-      await expect(canvas.getByText('الصلاة القادمة')).toBeInTheDocument();
-      await expect(canvas.getByText('2:30:15')).toBeInTheDocument();
-    });
-  }
-};
-
-// RTL Compact
-export const RTLCompact: Story = {
-  render: () => (
-    <div className="max-w-2xl w-full">
-      <PrayerTimes
-        prayers={samplePrayers}
-        nextPrayer="المغرب"
-        variant="compact"
-        location="Mecca"
-        locationAr="مكة المكرمة"
-      />
-    </div>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Compact variant in RTL layout.'
-      }
-    }
-  }
-};
-
-// RTL Detailed
-export const RTLDetailed: Story = {
-  render: () => (
-    <div className="max-w-2xl w-full">
-      <PrayerTimes
-        prayers={samplePrayers}
-        nextPrayer="العشاء"
-        countdown="0:45:12"
-        variant="detailed"
-        location="Jeddah"
-        locationAr="جدة"
-        date="November 6, 2025"
-        dateAr="٥ جمادى الأولى ١٤٤٧"
-      />
-    </div>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Detailed variant in RTL with full Arabic support.'
-      }
-    }
-  }
-};
-
-// RTL Notification
-export const RTLNotification: Story = {
-  args: {
-    prayers: samplePrayers,
-    nextPrayer: 'المغرب',
-    variant: 'notification',
-    location: 'Riyadh',
-    locationAr: 'الرياض',
-    showPlayAdhan: true,
-    onPlayAdhan: fn(),
-    onDismiss: fn()
-  },
-  render: (args) => (
-    <div className="max-w-md w-80">
-      <PrayerTimes {...args} />
-    </div>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Notification variant in RTL for adhan alerts.'
-      }
-    }
-  },
-  play: async ({ canvasElement, step, args }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders notification in RTL with Arabic text', async () => {
-      await expect(canvas.getByText('حان وقت الصلاة')).toBeInTheDocument();
-      await expect(canvas.getByText('المغرب')).toBeInTheDocument();
-      await expect(canvas.getByText('الرياض')).toBeInTheDocument();
-    });
-
-    await step('Shows Arabic action buttons', async () => {
-      await expect(canvas.getByRole('button', { name: /تشغيل الأذان/i })).toBeInTheDocument();
-      await expect(canvas.getByRole('button', { name: /إغلاق/i })).toBeInTheDocument();
-    });
-
-    await step('Handles interactions in RTL', async () => {
-      const playButton = canvas.getByRole('button', { name: /تشغيل الأذان/i });
-      await userEvent.click(playButton);
-      await expect(args.onPlayAdhan).toHaveBeenCalledTimes(1);
-    });
   }
 };

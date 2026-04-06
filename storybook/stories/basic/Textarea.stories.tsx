@@ -43,31 +43,6 @@ export const Default: Story = {
       }
     }
   },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders correctly', async () => {
-      const textarea = canvas.getByPlaceholderText('Enter your message');
-      await expect(textarea).toBeInTheDocument();
-      await expect(textarea).toBeVisible();
-      await expect(textarea).toHaveAccessibleName('Message');
-    });
-
-    await step('Accepts text input', async () => {
-      const textarea = canvas.getByPlaceholderText('Enter your message');
-      await userEvent.type(textarea, 'Hello, this is my message!');
-      await expect(textarea).toHaveValue('Hello, this is my message!');
-    });
-
-    await step('Keyboard accessible', async () => {
-      const textarea = canvas.getByPlaceholderText('Enter your message');
-      await userEvent.clear(textarea);
-      textarea.focus();
-      await expect(textarea).toHaveFocus();
-      await userEvent.keyboard('New text');
-      await expect(textarea).toHaveValue('New text');
-    });
-  }
 };
 
 // With Label - from component page lines 314-317

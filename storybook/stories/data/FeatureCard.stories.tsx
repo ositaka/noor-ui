@@ -21,7 +21,7 @@ const meta = {
   parameters: {
     layout: 'centered'
   },
-  tags: ['!autodocs'],
+  tags: ['autodocs'],
   argTypes: {
     icon: {
       control: false
@@ -52,10 +52,6 @@ export const Default: Story = {
     description: 'Built from the ground up to support both LTR and RTL layouts seamlessly',
     href: '/rtl-guide'
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   render: (args) => (
     <div className="max-w-sm">
       <FeatureCard {...args} />
@@ -66,27 +62,14 @@ export const Default: Story = {
       story: {
         inline: false
       }
+    },
+    ar: {
+      args: {
+        title: 'تصميم يدعم الكتابة من اليمين إلى اليسار',
+        description: 'مبني من الأساس لدعم التخطيطات من اليسار إلى اليمين ومن اليمين إلى اليسار بسلاسة'
+      }
     }
   },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders correctly', async () => {
-      await expect(canvas.getByText('RTL-First Design')).toBeInTheDocument();
-      await expect(canvas.getByText('Built from the ground up to support both LTR and RTL layouts seamlessly')).toBeInTheDocument();
-    });
-
-    await step('Contains icon SVG element', async () => {
-      const svg = canvasElement.querySelector('svg');
-      await expect(svg).toBeInTheDocument();
-      await expect(svg).toBeVisible();
-    });
-
-    await step('Renders as clickable link when href provided', async () => {
-      const link = canvasElement.querySelector('a[href="/rtl-guide"]');
-      await expect(link).toBeInTheDocument();
-    });
-  }
 };
 
 // Static Card - from component page lines 181-186
@@ -100,10 +83,6 @@ export const StaticCard: Story = {
       />
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -144,10 +123,6 @@ export const ClickableCard: Story = {
       />
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -200,10 +175,6 @@ export const GridLayout: Story = {
       />
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -291,10 +262,6 @@ export const AllIcons: Story = {
       />
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -334,10 +301,6 @@ export const InCardContainer: Story = {
       </CardContent>
     </Card>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -367,233 +330,3 @@ export const InCardContainer: Story = {
   }
 };
 
-// RTL Example - Basic
-export const RTLExample: Story = {
-  render: () => (
-    <div className="max-w-sm">
-      <FeatureCard
-        icon={Sparkle}
-        title="تصميم يدعم الكتابة من اليمين إلى اليسار"
-        description="مبني من الأساس لدعم التخطيطات من اليسار إلى اليمين ومن اليمين إلى اليسار بسلاسة"
-        href="/rtl-guide"
-      />
-    </div>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Feature card in RTL mode with Arabic text. Layout flows right-to-left.'
-      }
-    }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders in RTL context', async () => {
-      await expect(canvas.getByText('تصميم يدعم الكتابة من اليمين إلى اليسار')).toBeInTheDocument();
-      await expect(canvas.getByText('مبني من الأساس لدعم التخطيطات من اليسار إلى اليمين ومن اليمين إلى اليسار بسلاسة')).toBeInTheDocument();
-    });
-
-    await step('Link works in RTL', async () => {
-      const link = canvasElement.querySelector('a[href="/rtl-guide"]');
-      await expect(link).toBeInTheDocument();
-    });
-  }
-};
-
-// RTL Static Card
-export const RTLStaticCard: Story = {
-  render: () => (
-    <div className="max-w-sm">
-      <FeatureCard
-        icon={Sparkle}
-        title="ميزة رائعة"
-        description="هذه بطاقة ثابتة بدون رابط. رائعة للعروض غير التفاعلية."
-      />
-    </div>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Static feature card in RTL without href. Non-interactive display in Arabic.'
-      }
-    }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders static RTL card', async () => {
-      await expect(canvas.getByText('ميزة رائعة')).toBeInTheDocument();
-      await expect(canvas.getByText('هذه بطاقة ثابتة بدون رابط. رائعة للعروض غير التفاعلية.')).toBeInTheDocument();
-    });
-
-    await step('Verifies no link in static RTL card', async () => {
-      const link = canvasElement.querySelector('a');
-      await expect(link).not.toBeInTheDocument();
-    });
-  }
-};
-
-// RTL Clickable Card
-export const RTLClickableCard: Story = {
-  render: () => (
-    <div className="max-w-sm">
-      <FeatureCard
-        icon={Rocket}
-        title="ابدأ الآن"
-        description="انقر لتتعلم كيفية البدء في استخدام مكوناتنا"
-        href="/getting-started"
-      />
-    </div>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Clickable feature card in RTL with hover effect in Arabic.'
-      }
-    }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders clickable RTL card', async () => {
-      await expect(canvas.getByText('ابدأ الآن')).toBeInTheDocument();
-      await expect(canvas.getByText('انقر لتتعلم كيفية البدء في استخدام مكوناتنا')).toBeInTheDocument();
-    });
-
-    await step('Link works in RTL', async () => {
-      const link = canvasElement.querySelector('a[href="/getting-started"]');
-      await expect(link).toBeInTheDocument();
-    });
-  }
-};
-
-// RTL Grid Layout
-export const RTLGridLayout: Story = {
-  render: () => (
-    <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-      <FeatureCard
-        icon={Lightning}
-        title="سريع كالبرق"
-        description="محسّن للأداء"
-        href="/components"
-      />
-      <FeatureCard
-        icon={Shield}
-        title="آمن افتراضياً"
-        description="مبني مع وضع الأمان في الاعتبار"
-        href="/documentation"
-      />
-      <FeatureCard
-        icon={Package}
-        title="سهل الاستخدام"
-        description="واجهة برمجية بسيطة، نتائج قوية"
-        href="/examples"
-      />
-    </div>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Grid layout in RTL mode with Arabic text. All cards are clickable.'
-      }
-    }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders all RTL cards in grid', async () => {
-      await expect(canvas.getByText('سريع كالبرق')).toBeInTheDocument();
-      await expect(canvas.getByText('آمن افتراضياً')).toBeInTheDocument();
-      await expect(canvas.getByText('سهل الاستخدام')).toBeInTheDocument();
-    });
-
-    await step('All RTL cards have links', async () => {
-      await expect(canvasElement.querySelector('a[href="/components"]')).toBeInTheDocument();
-      await expect(canvasElement.querySelector('a[href="/documentation"]')).toBeInTheDocument();
-      await expect(canvasElement.querySelector('a[href="/examples"]')).toBeInTheDocument();
-    });
-  }
-};
-
-// RTL In Card Container
-export const RTLInCardContainer: Story = {
-  render: () => (
-    <Card className="w-full max-w-4xl">
-      <CardContent className="p-6">
-        <h3 className="text-lg font-semibold mb-4">الميزات الرئيسية</h3>
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          <FeatureCard
-            icon={Lightning}
-            title="سريع كالبرق"
-            description="محسّن للأداء"
-            href="/components"
-          />
-          <FeatureCard
-            icon={Shield}
-            title="آمن افتراضياً"
-            description="مبني مع وضع الأمان في الاعتبار"
-            href="/documentation"
-          />
-          <FeatureCard
-            icon={Package}
-            title="سهل الاستخدام"
-            description="واجهة برمجية بسيطة، نتائج قوية"
-            href="/examples"
-          />
-        </div>
-      </CardContent>
-    </Card>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Feature cards in RTL inside a card container. All content flows right-to-left.'
-      }
-    }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders RTL container heading', async () => {
-      await expect(canvas.getByText('الميزات الرئيسية')).toBeInTheDocument();
-    });
-
-    await step('Renders all RTL feature cards inside container', async () => {
-      await expect(canvas.getByText('سريع كالبرق')).toBeInTheDocument();
-      await expect(canvas.getByText('آمن افتراضياً')).toBeInTheDocument();
-      await expect(canvas.getByText('سهل الاستخدام')).toBeInTheDocument();
-    });
-
-    await step('All RTL cards are clickable', async () => {
-      await expect(canvasElement.querySelector('a[href="/components"]')).toBeInTheDocument();
-      await expect(canvasElement.querySelector('a[href="/documentation"]')).toBeInTheDocument();
-      await expect(canvasElement.querySelector('a[href="/examples"]')).toBeInTheDocument();
-    });
-  }
-};

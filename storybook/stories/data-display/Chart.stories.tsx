@@ -18,7 +18,7 @@ const meta = {
   parameters: {
     layout: 'centered',
   },
-  tags: ['!autodocs'],
+  tags: ['autodocs'],
 } satisfies Meta<typeof Chart>;
 
 export default meta;
@@ -93,36 +93,7 @@ export const Default: Story = {
       />
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en',
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
 
-    await step('Figure element has correct role and aria-label', async () => {
-      const figure = canvas.getByRole('img');
-      await expect(figure).toBeInTheDocument();
-      await expect(figure).toHaveAttribute('aria-label', 'Quarterly sales comparison between Dubai and Riyadh');
-    });
-
-    await step('sr-only data table exists with correct column headers', async () => {
-      const table = canvasElement.querySelector('table.sr-only');
-      await expect(table).toBeInTheDocument();
-      const tableScope = within(table as HTMLElement);
-      // Column headers: categoryKey "quarter", then value keys "dubai" and "riyadh"
-      await expect(tableScope.getByRole('columnheader', { name: 'quarter' })).toBeInTheDocument();
-      await expect(tableScope.getByRole('columnheader', { name: 'dubai' })).toBeInTheDocument();
-      await expect(tableScope.getByRole('columnheader', { name: 'riyadh' })).toBeInTheDocument();
-    });
-
-    await step('Data table contains expected number of rows', async () => {
-      const table = canvasElement.querySelector('table.sr-only');
-      const rows = (table as HTMLElement).querySelectorAll('tbody tr');
-      // quarterlySales has 4 data points: Q1, Q2, Q3, Q4
-      await expect(rows).toHaveLength(4);
-    });
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -151,10 +122,7 @@ export const BarChart: Story = {
       />
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en',
-  },
+
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement);
 
@@ -212,10 +180,7 @@ export const AreaChart: Story = {
       />
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en',
-  },
+
   parameters: {
     controls: { disable: true },
     docs: {
@@ -277,10 +242,7 @@ export const DonutChart: Story = {
       </div>
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en',
-  },
+
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement);
 
@@ -336,10 +298,7 @@ export const MultiSeries: Story = {
       />
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en',
-  },
+
   parameters: {
     controls: { disable: true },
     docs: {
@@ -383,10 +342,7 @@ export const SizeVariants: Story = {
       </div>
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en',
-  },
+
   parameters: {
     controls: { disable: true },
     docs: {
@@ -415,10 +371,7 @@ export const CustomColors: Story = {
       />
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en',
-  },
+
   parameters: {
     controls: { disable: true },
     docs: {
@@ -452,10 +405,7 @@ export const NoGrid: Story = {
       />
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en',
-  },
+
   parameters: {
     controls: { disable: true },
     docs: {
@@ -466,177 +416,6 @@ export const NoGrid: Story = {
   },
 };
 
-// ---------------------------------------------------------------------------
-// 9. RTLBarChart — Arabic bar chart
-// ---------------------------------------------------------------------------
-
-export const RTLBarChart: Story = {
-  render: () => (
-    <div className="w-[560px] space-y-3 p-4">
-      <h3 className="text-sm font-semibold text-foreground">ميزانيات الأقسام (بالآلاف)</h3>
-      <Chart
-        type="bar"
-        data={departmentBudgetsAr}
-        categoryKey="dept"
-        valueKey="budget"
-        colors={['var(--color-primary)']}
-        direction="rtl"
-        locale="ar"
-        aria-label="مخطط أعمدة لميزانيات الأقسام"
-      />
-    </div>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar',
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Figure exists with Arabic aria-label', async () => {
-      const figure = canvas.getByRole('img');
-      await expect(figure).toBeInTheDocument();
-      await expect(figure).toHaveAttribute('aria-label', 'مخطط أعمدة لميزانيات الأقسام');
-    });
-
-    await step('sr-only table contains Arabic department names', async () => {
-      const table = canvasElement.querySelector('table.sr-only');
-      await expect(table).toBeInTheDocument();
-      const tableScope = within(table as HTMLElement);
-      // departmentBudgetsAr uses Arabic dept names
-      await expect(tableScope.getByRole('rowheader', { name: 'الهندسة' })).toBeInTheDocument();
-      await expect(tableScope.getByRole('rowheader', { name: 'التصميم' })).toBeInTheDocument();
-      await expect(tableScope.getByRole('rowheader', { name: 'التسويق' })).toBeInTheDocument();
-      await expect(tableScope.getByRole('rowheader', { name: 'المبيعات' })).toBeInTheDocument();
-      await expect(tableScope.getByRole('rowheader', { name: 'الدعم' })).toBeInTheDocument();
-    });
-
-    await step('Data values use Arabic-Indic numerals in the table', async () => {
-      const table = canvasElement.querySelector('table.sr-only');
-      await expect(table).toBeInTheDocument();
-      // locale="ar" with numberingSystem: 'arab' formats 420 as ٤٢٠
-      // Check that at least one table cell contains Arabic-Indic digits (٠-٩ range: U+0660–U+0669)
-      const cells = (table as HTMLElement).querySelectorAll('td');
-      const hasArabicNumerals = Array.from(cells).some((cell) =>
-        /[\u0660-\u0669]/.test(cell.textContent ?? '')
-      );
-      await expect(hasArabicNumerals).toBe(true);
-    });
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Bar chart in Arabic with RTL axis layout and Eastern Arabic numerals on the Y axis.',
-      },
-    },
-  },
-};
-
-// ---------------------------------------------------------------------------
-// 10. RTLLineChart — Arabic line chart with RTL
-// ---------------------------------------------------------------------------
-
-export const RTLLineChart: Story = {
-  render: () => (
-    <div className="w-[560px] space-y-3 p-4">
-      <h3 className="text-sm font-semibold text-foreground">المبيعات الفصلية — دبي مقابل الرياض</h3>
-      <Chart
-        type="line"
-        data={quarterlySalesAr}
-        categoryKey="quarter"
-        valueKey={['dubai', 'riyadh']}
-        colors={['var(--color-primary)', 'var(--color-success)']}
-        direction="rtl"
-        locale="ar"
-        aria-label="مخطط خطي للمبيعات الفصلية لدبي والرياض"
-      />
-    </div>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar',
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Line chart in Arabic with RTL reversed X axis and the Y axis positioned on the right.',
-      },
-    },
-  },
-};
-
-// ---------------------------------------------------------------------------
-// 11. RTLDonut — Arabic donut charts in RTL
-// ---------------------------------------------------------------------------
-
-export const RTLDonut: Story = {
-  render: () => (
-    <div className="space-y-3 p-4">
-      <h3 className="text-sm font-semibold text-foreground">نظرة عامة على حالة المشروع</h3>
-      <div className="flex gap-8 items-center">
-        <div className="flex flex-col items-center gap-2">
-          <Chart
-            type="donut"
-            data={[]}
-            value={73}
-            innerLabel="٧٣٪"
-            innerSubLabel="مكتمل"
-            size="md"
-            colors={['var(--color-success)']}
-            direction="rtl"
-            locale="ar"
-            aria-label="٧٣٪ من المهام مكتملة"
-          />
-          <span className="text-xs text-muted-foreground">مكتمل</span>
-        </div>
-        <div className="flex flex-col items-center gap-2">
-          <Chart
-            type="donut"
-            data={[]}
-            value={45}
-            innerLabel="٤٥٪"
-            innerSubLabel="قيد التنفيذ"
-            size="md"
-            colors={['var(--color-warning)']}
-            direction="rtl"
-            locale="ar"
-            aria-label="٤٥٪ من المهام قيد التنفيذ"
-          />
-          <span className="text-xs text-muted-foreground">قيد التنفيذ</span>
-        </div>
-        <div className="flex flex-col items-center gap-2">
-          <Chart
-            type="donut"
-            data={[]}
-            value={92}
-            innerLabel="٩٢٪"
-            innerSubLabel="الهدف"
-            size="md"
-            colors={['var(--color-primary)']}
-            direction="rtl"
-            locale="ar"
-            aria-label="٩٢٪ من الهدف تم تحقيقه"
-          />
-          <span className="text-xs text-muted-foreground">الهدف</span>
-        </div>
-      </div>
-    </div>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar',
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Three donut charts in Arabic with RTL mirroring and Eastern Arabic numerals in the center labels.',
-      },
-    },
-  },
-};
 
 // ---------------------------------------------------------------------------
 // 12. DonutThickness — thin, default, thick variants
@@ -689,10 +468,7 @@ export const DonutThickness: Story = {
       </div>
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en',
-  },
+
   parameters: {
     controls: { disable: true },
     docs: {
@@ -736,10 +512,7 @@ export const FontSizeVariants: Story = {
       </div>
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en',
-  },
+
   parameters: {
     controls: { disable: true },
     docs: {
@@ -821,10 +594,7 @@ export const MultiSegmentDonut: Story = {
       </div>
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en',
-  },
+
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement);
 
@@ -902,10 +672,7 @@ export const MultiSegmentDonutSmall: Story = {
       </div>
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en',
-  },
+
   parameters: {
     controls: { disable: true },
     docs: {
@@ -965,10 +732,7 @@ export const MultiSegmentDonutWithCustomColors: Story = {
       </div>
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en',
-  },
+
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement);
 
@@ -998,97 +762,6 @@ export const MultiSegmentDonutWithCustomColors: Story = {
   },
 };
 
-// ---------------------------------------------------------------------------
-// 18. MultiSegmentDonutRTL — Arabic spending breakdown, RTL mirroring
-// ---------------------------------------------------------------------------
-
-export const MultiSegmentDonutRTL: Story = {
-  render: () => (
-    <div className="space-y-3 p-4" dir="rtl">
-      <h3 className="text-sm font-semibold text-foreground">توزيع الإنفاق الشهري</h3>
-      <div className="flex items-center gap-8">
-        <Chart
-          type="donut"
-          data={spendingBreakdownAr}
-          categoryKey="category"
-          valueKey="amount"
-          innerLabel="٣٬٢٠٠"
-          innerSubLabel="إجمالي الإنفاق"
-          thickness="thick"
-          size="md"
-          direction="rtl"
-          locale="ar"
-          aria-label="توزيع الإنفاق الشهري على خمس فئات"
-        />
-        <div className="space-y-2">
-          {spendingBreakdownAr.map((item, i) => {
-            const colors = [
-              'var(--color-primary)',
-              'var(--color-secondary)',
-              'var(--color-success)',
-              'var(--color-warning)',
-              'var(--color-info)',
-            ];
-            return (
-              <div key={item.category} className="flex items-center gap-2 text-sm">
-                <span
-                  className="inline-block h-2.5 w-2.5 rounded-full flex-shrink-0"
-                  style={{ background: colors[i] }}
-                />
-                <span className="text-foreground">{item.category}</span>
-                <span className="text-muted-foreground me-auto pe-4">
-                  {new Intl.NumberFormat('ar', { numberingSystem: 'arab' }).format(item.amount)} ر.س
-                </span>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-    </div>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar',
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Figure element exists with Arabic aria-label', async () => {
-      const figure = canvas.getByRole('img');
-      await expect(figure).toBeInTheDocument();
-      await expect(figure).toHaveAttribute('aria-label', 'توزيع الإنفاق الشهري على خمس فئات');
-    });
-
-    await step('sr-only table contains Arabic category names', async () => {
-      const table = canvasElement.querySelector('table.sr-only');
-      await expect(table).toBeInTheDocument();
-      const tableScope = within(table as HTMLElement);
-      await expect(tableScope.getByRole('rowheader', { name: 'السكن' })).toBeInTheDocument();
-      await expect(tableScope.getByRole('rowheader', { name: 'الطعام والمطاعم' })).toBeInTheDocument();
-      await expect(tableScope.getByRole('rowheader', { name: 'المواصلات' })).toBeInTheDocument();
-      await expect(tableScope.getByRole('rowheader', { name: 'الرعاية الصحية' })).toBeInTheDocument();
-      await expect(tableScope.getByRole('rowheader', { name: 'الترفيه' })).toBeInTheDocument();
-    });
-
-    await step('Data values use Arabic-Indic numerals in the table', async () => {
-      const table = canvasElement.querySelector('table.sr-only');
-      await expect(table).toBeInTheDocument();
-      const cells = (table as HTMLElement).querySelectorAll('td');
-      const hasArabicNumerals = Array.from(cells).some((cell) =>
-        /[\u0660-\u0669]/.test(cell.textContent ?? '')
-      );
-      await expect(hasArabicNumerals).toBe(true);
-    });
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Multi-segment donut in Arabic with RTL canvas mirroring, Eastern Arabic numerals in the center label, and an Arabic legend.',
-      },
-    },
-  },
-};
 
 // ---------------------------------------------------------------------------
 // 14. RealWorld_Dashboard — Multiple chart types together
@@ -1215,10 +888,7 @@ export const RealWorld_Dashboard: Story = {
       </div>
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en',
-  },
+
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement);
 

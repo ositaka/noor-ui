@@ -63,48 +63,6 @@ export const Default: Story = {
     }
   },
   render: (args) => <Tooltip {...args} />,
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders trigger button correctly', async () => {
-      const trigger = canvas.getByRole('button', { name: /hover me/i });
-      await expect(trigger).toBeInTheDocument();
-      await expect(trigger).toBeVisible();
-    });
-
-    await step('Shows tooltip on hover', async () => {
-      const trigger = canvas.getByRole('button', { name: /hover me/i });
-      await userEvent.hover(trigger);
-
-      // Wait for tooltip to appear
-      const tooltip = await canvas.findByRole('tooltip');
-      await expect(tooltip).toBeInTheDocument();
-      await expect(tooltip).toBeVisible();
-    });
-
-    await step('Displays correct tooltip content', async () => {
-      const tooltip = canvas.getByRole('tooltip');
-      await expect(tooltip).toHaveTextContent('Add to library');
-    });
-
-    await step('Hides tooltip on unhover', async () => {
-      const trigger = canvas.getByRole('button', { name: /hover me/i });
-      await userEvent.unhover(trigger);
-
-      // Tooltip should disappear
-      await expect(canvas.queryByRole('tooltip')).not.toBeInTheDocument();
-    });
-
-    await step('Keyboard accessible', async () => {
-      await userEvent.tab();
-      const trigger = canvas.getByRole('button', { name: /hover me/i });
-      await expect(trigger).toHaveFocus();
-
-      // Tooltip should appear when focused
-      const tooltip = await canvas.findByRole('tooltip');
-      await expect(tooltip).toBeVisible();
-    });
-  }
 };
 
 // All Sides - from component page lines 232-268

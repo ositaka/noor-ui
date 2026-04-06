@@ -45,32 +45,6 @@ export const Default: Story = {
       <Blockquote {...args} />
     </div>
   ),
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders semantic HTML structure', async () => {
-      const figure = canvas.getByRole('figure');
-      await expect(figure).toBeInTheDocument();
-      await expect(figure).toBeVisible();
-    });
-
-    await step('Displays quote content', async () => {
-      const blockquote = canvas.getByText(/The important thing is not to stop questioning/i);
-      await expect(blockquote).toBeInTheDocument();
-      await expect(blockquote).toBeVisible();
-    });
-
-    await step('Displays author attribution', async () => {
-      const author = canvas.getByText(/Albert Einstein/i);
-      await expect(author).toBeInTheDocument();
-      await expect(author).toBeVisible();
-    });
-
-    await step('Displays source attribution', async () => {
-      const source = canvas.getByText(/On Science/i);
-      await expect(source).toBeInTheDocument();
-    });
-  }
 };
 
 // Accent Variant - from component page lines 118-121

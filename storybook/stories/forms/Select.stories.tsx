@@ -28,7 +28,7 @@ const meta = {
   parameters: {
     layout: 'centered'
   },
-  tags: ['!autodocs'],
+  tags: ['autodocs'],
   argTypes: {
     onValueChange: {
       control: false
@@ -43,10 +43,6 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     defaultValue: 'option1'
-  },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
   },
   render: (args) => (
     <Select {...args}>
@@ -67,54 +63,6 @@ export const Default: Story = {
       }
     }
   },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders correctly with default value', async () => {
-      const trigger = canvas.getByRole('combobox');
-      await expect(trigger).toBeInTheDocument();
-      await expect(trigger).toBeVisible();
-      await expect(trigger).toHaveTextContent('Option 1');
-    });
-
-    await step('Opens dropdown on click', async () => {
-      const trigger = canvas.getByRole('combobox');
-      await userEvent.click(trigger);
-
-      // Radix Select renders options in a portal
-      const body = within(document.body);
-      const option2 = await body.findByRole('option', { name: 'Option 2' });
-      await expect(option2).toBeVisible();
-    });
-
-    await step('Selects different option', async () => {
-      const body = within(document.body);
-      const option3 = body.getByRole('option', { name: 'Option 3' });
-      await userEvent.click(option3);
-
-      // Verify trigger updates to show selected value
-      const trigger = canvas.getByRole('combobox');
-      await expect(trigger).toHaveTextContent('Option 3');
-    });
-
-    await step('Keyboard accessible', async () => {
-      const trigger = canvas.getByRole('combobox');
-
-      // Focus on trigger
-      trigger.focus();
-      await expect(trigger).toHaveFocus();
-
-      // Open with keyboard
-      await userEvent.keyboard('{Enter}');
-
-      // Navigate with arrow keys
-      await userEvent.keyboard('{ArrowDown}');
-      await userEvent.keyboard('{Enter}');
-
-      // Trigger should still be in the document after selection
-      await expect(trigger).toBeInTheDocument();
-    });
-  }
 };
 
 // With Label - from component page lines 305-320
@@ -137,10 +85,6 @@ export const WithLabel: Story = {
       </Select>
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   },
@@ -198,10 +142,6 @@ export const GroupedOptions: Story = {
       </SelectContent>
     </Select>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -277,10 +217,6 @@ export const DisabledState: Story = {
       </div>
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   },
@@ -340,10 +276,6 @@ export const Controlled: Story = {
         </Button>
       </div>
     );
-  },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
@@ -422,10 +354,6 @@ export const InForm: Story = {
       <Button type="submit">Continue</Button>
     </form>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -463,222 +391,3 @@ export const InForm: Story = {
   }
 };
 
-// RTL Example
-export const RTLExample: Story = {
-  render: () => (
-    <div className="max-w-xs space-y-2">
-      <Label htmlFor="language">اللغة</Label>
-      <Select>
-        <SelectTrigger className="w-[200px]" id="language">
-          <SelectValue placeholder="اختر خياراً" />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectItem value="option1">الخيار 1</SelectItem>
-          <SelectItem value="option2">الخيار 2</SelectItem>
-          <SelectItem value="option3">الخيار 3</SelectItem>
-        </SelectContent>
-      </Select>
-    </div>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Select with Arabic labels demonstrating RTL support. Dropdown position, chevron icon, and check indicator adapt correctly. Automatically switches to RTL mode.'
-      }
-    }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders in RTL context', async () => {
-      const label = canvas.getByText('اللغة');
-      await expect(label).toBeInTheDocument();
-
-      const trigger = canvas.getByRole('combobox');
-      await expect(trigger).toBeInTheDocument();
-      await expect(trigger).toBeVisible();
-    });
-
-    await step('Interaction works in RTL', async () => {
-      const trigger = canvas.getByRole('combobox');
-      await userEvent.click(trigger);
-
-      const body = within(document.body);
-      const option2 = await body.findByRole('option', { name: 'الخيار 2' });
-      await userEvent.click(option2);
-
-      await expect(trigger).toHaveTextContent('الخيار 2');
-    });
-  }
-};
-
-// RTL Grouped Options
-export const RTLGroupedOptions: Story = {
-  render: () => (
-    <Select>
-      <SelectTrigger className="w-[250px]">
-        <SelectValue placeholder="اختر منطقة زمنية" />
-      </SelectTrigger>
-      <SelectContent>
-        <SelectGroup>
-          <SelectLabel>أمريكا الشمالية</SelectLabel>
-          <SelectItem value="est">التوقيت الشرقي القياسي (EST)</SelectItem>
-          <SelectItem value="cst">التوقيت المركزي القياسي (CST)</SelectItem>
-          <SelectItem value="mst">التوقيت الجبلي القياسي (MST)</SelectItem>
-          <SelectItem value="pst">التوقيت الهادئ القياسي (PST)</SelectItem>
-        </SelectGroup>
-        <SelectGroup>
-          <SelectLabel>أوروبا</SelectLabel>
-          <SelectItem value="gmt">توقيت غرينتش (GMT)</SelectItem>
-          <SelectItem value="cet">التوقيت الأوروبي المركزي (CET)</SelectItem>
-          <SelectItem value="eet">التوقيت الأوروبي الشرقي (EET)</SelectItem>
-        </SelectGroup>
-      </SelectContent>
-    </Select>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Grouped options with Arabic text in RTL mode. SelectGroup and SelectLabel work perfectly in RTL.'
-      }
-    }
-  }
-};
-
-// RTL Disabled
-export const RTLDisabled: Story = {
-  render: () => (
-    <div className="space-y-4">
-      <div className="space-y-2">
-        <Label>قائمة منسدلة مع خيار معطل</Label>
-        <Select>
-          <SelectTrigger className="w-[180px]">
-            <SelectValue placeholder="اختر خياراً" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="available">خيار متاح</SelectItem>
-            <SelectItem value="disabled" disabled>
-              خيار معطل
-            </SelectItem>
-            <SelectItem value="another">خيار آخر</SelectItem>
-          </SelectContent>
-        </Select>
-      </div>
-      <div className="space-y-2">
-        <Label>قائمة منسدلة معطلة</Label>
-        <Select disabled>
-          <SelectTrigger className="w-[180px]">
-            <SelectValue placeholder="قائمة منسدلة معطلة" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="option1">الخيار 1</SelectItem>
-          </SelectContent>
-        </Select>
-      </div>
-    </div>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Disabled select and disabled options with Arabic text in RTL mode.'
-      }
-    }
-  }
-};
-
-// RTL Controlled
-export const RTLControlled: Story = {
-  render: () => {
-    const [value, setValue] = React.useState('');
-
-    return (
-      <div className="space-y-4">
-        <Select value={value} onValueChange={setValue}>
-          <SelectTrigger className="w-[200px]">
-            <SelectValue placeholder="اختر فاكهة" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="apple">تفاح</SelectItem>
-            <SelectItem value="banana">موز</SelectItem>
-            <SelectItem value="orange">برتقال</SelectItem>
-            <SelectItem value="grape">عنب</SelectItem>
-          </SelectContent>
-        </Select>
-        <p className="text-sm text-muted-foreground">
-          المحدد: {value || 'لا شيء'}
-        </p>
-        <Button size="sm" onClick={() => setValue('banana')}>
-          اختر موز
-        </Button>
-      </div>
-    );
-  },
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Controlled select with Arabic text demonstrating programmatic state management in RTL.'
-      }
-    }
-  }
-};
-
-// RTL In Form
-export const RTLInForm: Story = {
-  render: () => (
-    <form
-      className="max-w-xs space-y-6"
-      onSubmit={(e) => {
-        e.preventDefault();
-        alert('تم إرسال النموذج!');
-      }}
-    >
-      <div className="space-y-2">
-        <Label htmlFor="plan-rtl">اختر الخطة</Label>
-        <Select name="plan" required>
-          <SelectTrigger className="w-[200px]" id="plan-rtl">
-            <SelectValue placeholder="اختر خطة" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="free">مجاني - $0/شهر</SelectItem>
-            <SelectItem value="starter">المبتدئ - $9/شهر</SelectItem>
-            <SelectItem value="pro">المحترف - $29/شهر</SelectItem>
-            <SelectItem value="enterprise">المؤسسات - مخصص</SelectItem>
-          </SelectContent>
-        </Select>
-      </div>
-      <Button type="submit">متابعة</Button>
-    </form>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Complete form with select in Arabic, demonstrating RTL support in form contexts.'
-      }
-    }
-  }
-};

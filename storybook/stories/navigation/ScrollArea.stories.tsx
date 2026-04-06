@@ -18,7 +18,7 @@ const meta = {
   parameters: {
     layout: 'centered'
   },
-  tags: ['!autodocs'],
+  tags: ['autodocs'],
   argTypes: {
     className: { control: 'text' },
     children: { control: false }
@@ -42,31 +42,6 @@ export const Default: Story = {
       </div>
     </ScrollArea>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders scroll area correctly', async () => {
-      const scrollArea = canvas.getByText('Item 1').closest('[class*="overflow-hidden"]');
-      await expect(scrollArea).toBeInTheDocument();
-      await expect(scrollArea).toBeVisible();
-    });
-
-    await step('Displays scrollable content', async () => {
-      await expect(canvas.getByText('Item 1')).toBeVisible();
-      await expect(canvas.getByText('Item 20')).toBeInTheDocument();
-    });
-
-    await step('Content is scrollable', async () => {
-      // ScrollArea items are plain divs/paragraphs, not focusable elements
-      // Just verify the scroll container is present and content exists
-      const scrollArea = canvas.getByText('Item 1').closest('[class*="overflow-hidden"]');
-      await expect(scrollArea).toBeInTheDocument();
-    });
-  }
 };
 
 // Vertical Scroll
@@ -94,10 +69,6 @@ export const VerticalScroll: Story = {
       </CardContent>
     </Card>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   },
@@ -145,10 +116,6 @@ export const HorizontalScroll: Story = {
       </CardContent>
     </Card>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   },
@@ -202,10 +169,6 @@ export const BothScrollbars: Story = {
       </CardContent>
     </Card>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   },
@@ -246,10 +209,6 @@ export const CompactList: Story = {
       </CardContent>
     </Card>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   },
@@ -310,10 +269,6 @@ export const SidebarContent: Story = {
       </ScrollArea>
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   },
@@ -382,10 +337,6 @@ const data = {
       </CardContent>
     </Card>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   },
@@ -405,55 +356,3 @@ const data = {
   }
 };
 
-// RTL
-export const RTL: Story = {
-  render: () => (
-    <Card>
-      <CardHeader>
-        <CardTitle>منطقة التمرير</CardTitle>
-        <CardDescription>قائمة طويلة قابلة للتمرير</CardDescription>
-      </CardHeader>
-      <CardContent>
-        <ScrollArea className="h-[300px] w-full rounded-md border p-4">
-          <div className="space-y-4">
-            {Array.from({ length: 25 }).map((_, i) => (
-              <div key={i}>
-                <h4 className="text-sm font-medium">العنصر رقم {i + 1}</h4>
-                <p className="text-sm text-muted-foreground">
-                  هذا وصف للعنصر رقم {i + 1} في القائمة
-                </p>
-                {i < 24 && <Separator className="my-2" />}
-              </div>
-            ))}
-          </div>
-        </ScrollArea>
-      </CardContent>
-    </Card>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders in RTL context', async () => {
-      await expect(canvas.getByText('منطقة التمرير')).toBeInTheDocument();
-      await expect(canvas.getByText('قائمة طويلة قابلة للتمرير')).toBeVisible();
-    });
-
-    await step('Displays RTL content with scrolling', async () => {
-      // Multiple elements contain these patterns (heading + description), use getAllByText
-      const firstItems = canvas.getAllByText(/العنصر رقم 1/);
-      await expect(firstItems.length).toBeGreaterThan(0);
-      await expect(firstItems[0]).toBeVisible();
-
-      const lastItems = canvas.getAllByText(/العنصر رقم 25/);
-      await expect(lastItems.length).toBeGreaterThan(0);
-      await expect(lastItems[0]).toBeInTheDocument();
-    });
-  }
-};

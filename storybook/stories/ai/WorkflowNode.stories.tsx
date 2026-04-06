@@ -23,7 +23,7 @@ const meta = {
   parameters: {
     layout: 'centered'
   },
-  tags: ['!autodocs', '!test'], // Skip vitest - requires ReactFlow context
+  tags: ['autodocs', '!test'], // Skip vitest - requires ReactFlow context
   argTypes: {
     label: { control: 'text' },
     labelAr: { control: 'text' },
@@ -55,11 +55,7 @@ export const Default: Story = {
         icon: Lightning
       }}
     />
-  ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  }
+  )
 };
 
 // Trigger Type - from code lines 118-123
@@ -78,10 +74,6 @@ export const TriggerType: Story = {
       </CardContent>
     </Card>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   }
@@ -103,10 +95,6 @@ export const AIType: Story = {
       </CardContent>
     </Card>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   }
@@ -128,10 +116,6 @@ export const ActionType: Story = {
       </CardContent>
     </Card>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   }
@@ -153,10 +137,6 @@ export const ActiveStatus: Story = {
       </CardContent>
     </Card>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   }
@@ -178,10 +158,6 @@ export const SuccessStatus: Story = {
       </CardContent>
     </Card>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   }
@@ -203,39 +179,6 @@ export const ErrorStatus: Story = {
       </CardContent>
     </Card>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
-  parameters: {
-    controls: { disable: true }
-  }
-};
-
-// RTL
-export const RTL: Story = {
-  render: () => (
-    <Card>
-      <CardContent className="p-6">
-        <WorkflowNode
-          data={{
-            label: 'Email Trigger',
-            labelAr: 'مشغل البريد',
-            description: 'When email received',
-            descriptionAr: 'عند استلام بريد إلكتروني',
-            type: 'trigger',
-            typeAr: 'مشغل',
-            icon: Lightning,
-            isRTL: true
-          }}
-        />
-      </CardContent>
-    </Card>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
   parameters: {
     controls: { disable: true }
   }

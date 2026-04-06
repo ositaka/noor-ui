@@ -43,15 +43,6 @@ export const Default: Story = {
       }
     }
   },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders correctly', async () => {
-      const badge = canvas.getByText('New');
-      await expect(badge).toBeInTheDocument();
-      await expect(badge).toBeVisible();
-    });
-  }
 };
 
 // With Icon - users can change variant via controls

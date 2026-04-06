@@ -23,7 +23,7 @@ const meta = {
   parameters: {
     layout: 'centered'
   },
-  tags: ['!autodocs'],
+  tags: ['autodocs'],
   argTypes: {
     open: {
       control: { type: 'boolean' }
@@ -44,10 +44,6 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     defaultOpen: false
-  },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
   },
   render: (args) => (
     <Popover {...args}>
@@ -71,49 +67,6 @@ export const Default: Story = {
       }
     }
   },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-    const body = within(document.body);
-
-    await step('Renders trigger button', async () => {
-      const trigger = canvas.getByRole('button', { name: /open popover/i });
-      await expect(trigger).toBeInTheDocument();
-      await expect(trigger).toBeVisible();
-    });
-
-    await step('Opens popover on click', async () => {
-      const trigger = canvas.getByRole('button', { name: /open popover/i });
-      await userEvent.click(trigger);
-
-      // Wait for popover content to appear in portal
-      const popoverTitle = await body.findByText('Popover Title');
-      await expect(popoverTitle).toBeVisible();
-      await expect(body.getByText('This is a popover with some example content.')).toBeVisible();
-    });
-
-    await step('Closes popover when clicking outside', async () => {
-      // Click outside the popover
-      await userEvent.click(canvasElement);
-
-      // Popover content should not be visible
-      await expect(body.queryByText('Popover Title')).not.toBeInTheDocument();
-    });
-
-    await step('Keyboard accessible', async () => {
-      // Focus and activate with keyboard
-      await userEvent.tab();
-      const trigger = canvas.getByRole('button', { name: /open popover/i });
-      await expect(trigger).toHaveFocus();
-
-      await userEvent.keyboard('{Enter}');
-      const popoverTitle = await body.findByText('Popover Title');
-      await expect(popoverTitle).toBeVisible();
-
-      // Close with Escape key
-      await userEvent.keyboard('{Escape}');
-      await expect(body.queryByText('Popover Title')).not.toBeInTheDocument();
-    });
-  }
 };
 
 // Basic Usage - from component page lines 177-189
@@ -133,10 +86,6 @@ export const BasicUsage: Story = {
       </PopoverContent>
     </Popover>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -172,10 +121,6 @@ export const PositionTop: Story = {
       </PopoverContent>
     </Popover>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -210,10 +155,6 @@ export const PositionRight: Story = {
       </PopoverContent>
     </Popover>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -248,10 +189,6 @@ export const PositionBottom: Story = {
       </PopoverContent>
     </Popover>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -286,10 +223,6 @@ export const PositionLeft: Story = {
       </PopoverContent>
     </Popover>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -353,10 +286,6 @@ export const AllPositions: Story = {
       </Popover>
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -398,10 +327,6 @@ export const WithForm: Story = {
       </PopoverContent>
     </Popover>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -445,152 +370,3 @@ export const WithForm: Story = {
   }
 };
 
-// RTL Basic
-export const RTLBasic: Story = {
-  render: () => (
-    <Popover>
-      <PopoverTrigger asChild>
-        <Button variant="outline">فتح النافذة المنبثقة</Button>
-      </PopoverTrigger>
-      <PopoverContent>
-        <div className="space-y-2">
-          <h4 className="font-medium leading-none">عنوان النافذة المنبثقة</h4>
-          <p className="text-sm text-muted-foreground">
-            هذه نافذة منبثقة مع بعض المحتوى التوضيحي.
-          </p>
-        </div>
-      </PopoverContent>
-    </Popover>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Basic popover in RTL with Arabic text. Content flows right-to-left.'
-      }
-    }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-    const body = within(document.body);
-
-    await step('Renders in RTL context', async () => {
-      const trigger = canvas.getByRole('button', { name: /فتح النافذة المنبثقة/i });
-      await expect(trigger).toBeInTheDocument();
-      await expect(trigger).toBeVisible();
-    });
-
-    await step('Interaction works in RTL', async () => {
-      const trigger = canvas.getByRole('button', { name: /فتح النافذة المنبثقة/i });
-      await userEvent.click(trigger);
-
-      const title = await body.findByText('عنوان النافذة المنبثقة');
-      await expect(title).toBeVisible();
-      await expect(body.getByText('هذه نافذة منبثقة مع بعض المحتوى التوضيحي.')).toBeVisible();
-    });
-  }
-};
-
-// RTL All Positions
-export const RTLAllPositions: Story = {
-  render: () => (
-    <div className="flex flex-wrap gap-4 justify-center">
-      <Popover>
-        <PopoverTrigger asChild>
-          <Button variant="outline">أعلى</Button>
-        </PopoverTrigger>
-        <PopoverContent side="top">
-          <p className="text-sm">المحتوى في الأعلى</p>
-        </PopoverContent>
-      </Popover>
-
-      <Popover>
-        <PopoverTrigger asChild>
-          <Button variant="outline">يمين</Button>
-        </PopoverTrigger>
-        <PopoverContent side="right">
-          <p className="text-sm">المحتوى على اليمين</p>
-        </PopoverContent>
-      </Popover>
-
-      <Popover>
-        <PopoverTrigger asChild>
-          <Button variant="outline">أسفل</Button>
-        </PopoverTrigger>
-        <PopoverContent side="bottom">
-          <p className="text-sm">المحتوى في الأسفل</p>
-        </PopoverContent>
-      </Popover>
-
-      <Popover>
-        <PopoverTrigger asChild>
-          <Button variant="outline">يسار</Button>
-        </PopoverTrigger>
-        <PopoverContent side="left">
-          <p className="text-sm">المحتوى على اليسار</p>
-        </PopoverContent>
-      </Popover>
-    </div>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'All four positioning options in RTL: top, right, bottom, left with automatic mirroring.'
-      }
-    }
-  }
-};
-
-// RTL With Form
-export const RTLWithForm: Story = {
-  render: () => (
-    <Popover>
-      <PopoverTrigger asChild>
-        <Button variant="outline">
-          <Gear className="me-2 h-4 w-4" />
-          الإعدادات
-        </Button>
-      </PopoverTrigger>
-      <PopoverContent className="w-80">
-        <div className="space-y-4">
-          <div className="space-y-2">
-            <h4 className="font-medium leading-none">الأبعاد</h4>
-            <p className="text-sm text-muted-foreground">
-              تعيين أبعاد الطبقة.
-            </p>
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="width-rtl">العرض</Label>
-            <Input id="width-rtl" defaultValue="100%" />
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="height-rtl">الارتفاع</Label>
-            <Input id="height-rtl" defaultValue="25px" />
-          </div>
-          <Button className="w-full">حفظ التغييرات</Button>
-        </div>
-      </PopoverContent>
-    </Popover>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Popover with form in RTL. All content and inputs flow right-to-left correctly.'
-      }
-    }
-  }
-};

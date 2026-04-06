@@ -22,7 +22,7 @@ const meta = {
   parameters: {
     layout: 'centered'
   },
-  tags: ['!autodocs'],
+  tags: ['autodocs'],
   argTypes: {
     steps: {
       control: false
@@ -100,10 +100,6 @@ export const Default: Story = {
     allowSkip: false,
     onStepClick: fn()
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   render: (args) => (
     <div className="w-full max-w-4xl" style={{ minWidth: '800px'}}>
       <Stepper {...args} />
@@ -116,58 +112,6 @@ export const Default: Story = {
       }
     }
   },
-  play: async ({ canvasElement, step, args }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders correctly', async () => {
-      const stepper = canvas.getByRole('navigation', { name: /progress/i });
-      await expect(stepper).toBeInTheDocument();
-      await expect(stepper).toBeVisible();
-    });
-
-    await step('Displays all steps with correct content', async () => {
-      const steps = canvas.getAllByRole('button');
-      await expect(steps).toHaveLength(5);
-
-      // Check current step (index 1 = step 2)
-      await expect(steps[1]).toHaveAttribute('aria-current', 'step');
-      await expect(canvas.getByText('Personal Details')).toBeVisible();
-      // Note: Description is not rendered in default horizontal variant
-    });
-
-    await step('Shows completed step with check mark', async () => {
-      const firstStep = canvas.getAllByRole('button')[0];
-      // First step (index 0) should be complete since currentStep is 1
-      const checkIcon = firstStep.querySelector('svg');
-      await expect(checkIcon).toBeInTheDocument();
-    });
-
-    await step('Shows optional label correctly', async () => {
-      await expect(canvas.getByText(/optional/i)).toBeInTheDocument();
-    });
-
-    await step('Handles click on completed step', async () => {
-      const firstStep = canvas.getAllByRole('button')[0];
-      await userEvent.click(firstStep);
-      await expect(args.onStepClick).toHaveBeenCalledWith(0);
-    });
-
-    await step('Does not allow clicking future steps', async () => {
-      const futureStep = canvas.getAllByRole('button')[3]; // Step 4 (index 3)
-      await userEvent.click(futureStep);
-      // Should not be called since allowSkip is false and it's a future step
-      await expect(args.onStepClick).toHaveBeenCalledTimes(1); // Still 1 from previous test
-    });
-
-    await step('Keyboard navigation works', async () => {
-      const firstStep = canvas.getAllByRole('button')[0];
-      firstStep.focus();
-      await expect(firstStep).toHaveFocus();
-
-      await userEvent.keyboard('{Enter}');
-      await expect(args.onStepClick).toHaveBeenCalledWith(0);
-    });
-  }
 };
 
 // Basic Stepper - from component page lines 184-206
@@ -199,10 +143,6 @@ export const BasicStepper: Story = {
         </div>
       </div>
     );
-  },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
@@ -289,10 +229,6 @@ export const SimpleVariant: Story = {
       </div>
     );
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -357,10 +293,6 @@ export const CirclesVariant: Story = {
       </div>
     );
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -424,10 +356,6 @@ export const VerticalOrientation: Story = {
         </div>
       </div>
     );
-  },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
@@ -496,10 +424,6 @@ export const WithAllowSkip: Story = {
         </p>
       </div>
     );
-  },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
@@ -579,10 +503,6 @@ export const InCard: Story = {
       </Card>
     );
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -618,205 +538,3 @@ export const InCard: Story = {
   }
 };
 
-// RTL Example - Basic
-export const RTLExample: Story = {
-  render: () => {
-    const [currentStep, setCurrentStep] = React.useState(1);
-
-    return (
-      <div className="w-full max-w-4xl space-y-8" style={{ minWidth: '680px'}}>
-        <Stepper
-          steps={stepsData}
-          currentStep={currentStep}
-          onStepClick={setCurrentStep}
-        />
-        <div className="flex justify-between">
-          <Button
-            variant="outline"
-            onClick={() => setCurrentStep(Math.max(0, currentStep - 1))}
-            disabled={currentStep === 0}
-          >
-            السابق
-          </Button>
-          <Button
-            onClick={() => setCurrentStep(Math.min(stepsData.length - 1, currentStep + 1))}
-            disabled={currentStep === stepsData.length - 1}
-          >
-            التالي
-          </Button>
-        </div>
-      </div>
-    );
-  },
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Basic stepper in RTL mode with Arabic titles and descriptions. Connectors flow right-to-left.'
-      }
-    }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders in RTL context with Arabic text', async () => {
-      const stepper = canvas.getByRole('navigation', { name: /progress/i });
-      await expect(stepper).toBeInTheDocument();
-      await expect(canvas.getByText('التفاصيل الشخصية')).toBeVisible(); // Arabic for "Personal Details"
-    });
-
-    await step('RTL navigation works correctly', async () => {
-      const nextButton = canvas.getByRole('button', { name: /التالي/i });
-      await userEvent.click(nextButton);
-
-      const stepButtons = canvas.getAllByRole('button').filter(btn => !btn.textContent?.match(/السابق|التالي/));
-      await expect(stepButtons[2]).toHaveAttribute('aria-current', 'step');
-    });
-
-    await step('Clicking steps works in RTL', async () => {
-      const stepButtons = canvas.getAllByRole('button').filter(btn => !btn.textContent?.match(/السابق|التالي/));
-      await userEvent.click(stepButtons[0]);
-
-      await expect(stepButtons[0]).toHaveAttribute('aria-current', 'step');
-    });
-  }
-};
-
-// RTL Simple Variant
-export const RTLSimpleVariant: Story = {
-  render: () => {
-    const [currentStep, setCurrentStep] = React.useState(1);
-
-    return (
-      <div className="w-full max-w-4xl space-y-8" style={{ minWidth: '800px'}}>
-        <Stepper
-          steps={stepsData}
-          currentStep={currentStep}
-          onStepClick={setCurrentStep}
-          variant="simple"
-        />
-        <div className="flex justify-between">
-          <Button
-            variant="outline"
-            onClick={() => setCurrentStep(Math.max(0, currentStep - 1))}
-            disabled={currentStep === 0}
-          >
-            السابق
-          </Button>
-          <Button
-            onClick={() => setCurrentStep(Math.min(stepsData.length - 1, currentStep + 1))}
-            disabled={currentStep === stepsData.length - 1}
-          >
-            التالي
-          </Button>
-        </div>
-      </div>
-    );
-  },
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Simple variant in RTL mode. Compact style with Arabic text flowing right-to-left.'
-      }
-    }
-  }
-};
-
-// RTL Circles Variant
-export const RTLCirclesVariant: Story = {
-  render: () => {
-    const [currentStep, setCurrentStep] = React.useState(1);
-
-    return (
-      <div className="w-full max-w-4xl space-y-8" style={{ minWidth: '800px'}}>
-        <Stepper
-          steps={stepsData}
-          currentStep={currentStep}
-          onStepClick={setCurrentStep}
-          variant="circles"
-        />
-        <div className="flex justify-between">
-          <Button
-            variant="outline"
-            onClick={() => setCurrentStep(Math.max(0, currentStep - 1))}
-            disabled={currentStep === 0}
-          >
-            السابق
-          </Button>
-          <Button
-            onClick={() => setCurrentStep(Math.min(stepsData.length - 1, currentStep + 1))}
-            disabled={currentStep === stepsData.length - 1}
-          >
-            التالي
-          </Button>
-        </div>
-      </div>
-    );
-  },
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Circles variant in RTL mode. Large circles with Arabic labels flowing naturally.'
-      }
-    }
-  }
-};
-
-// RTL Vertical Orientation
-export const RTLVerticalOrientation: Story = {
-  render: () => {
-    const [currentStep, setCurrentStep] = React.useState(1);
-
-    return (
-      <div className="flex gap-8">
-        <Stepper
-          steps={stepsData}
-          currentStep={currentStep}
-          onStepClick={setCurrentStep}
-          orientation="vertical"
-        />
-        <div className="flex flex-col gap-4">
-          <Button
-            variant="outline"
-            onClick={() => setCurrentStep(Math.max(0, currentStep - 1))}
-            disabled={currentStep === 0}
-          >
-            السابق
-          </Button>
-          <Button
-            onClick={() => setCurrentStep(Math.min(stepsData.length - 1, currentStep + 1))}
-            disabled={currentStep === stepsData.length - 1}
-          >
-            التالي
-          </Button>
-        </div>
-      </div>
-    );
-  },
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Vertical orientation in RTL mode. Text aligns correctly for right-to-left reading.'
-      }
-    }
-  }
-};

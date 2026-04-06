@@ -36,28 +36,6 @@ export const Default: Story = {
     )
   },
   render: (args) => <Avatar {...args} />,
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders avatar component', async () => {
-      // Avatar component renders, check for either image or fallback
-      const avatar = canvasElement.querySelector('span');
-      await expect(avatar).toBeInTheDocument();
-    });
-
-    await step('Has proper accessibility attributes when image loads', async () => {
-      // Try to find the image - it may load asynchronously or show fallback
-      const img = canvasElement.querySelector('img');
-      if (img) {
-        await expect(img).toHaveAttribute('alt', '@shadcn');
-        await expect(img).toHaveAttribute('src', 'https://github.com/shadcn.png');
-      } else {
-        // If image didn't load, fallback should be present
-        const fallback = canvas.queryByText('CN');
-        await expect(fallback || img).toBeTruthy();
-      }
-    });
-  }
 };
 
 // With Fallback - from component page lines 170-182

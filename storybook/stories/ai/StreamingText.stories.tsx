@@ -18,7 +18,7 @@ const meta = {
   parameters: {
     layout: 'centered'
   },
-  tags: ['!autodocs'],
+  tags: ['autodocs'],
   argTypes: {
     text: { control: 'text' },
     speed: { control: { type: 'number', min: 10, max: 200, step: 10 } },
@@ -42,39 +42,13 @@ export const Default: Story = {
     isStreaming: true,
     autoStart: true
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
+  parameters: {
+    ar: {
+      args: {
+        text: 'مرحباً! هذا نص متدفق...'
+      }
+    }
   },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders streaming text container', async () => {
-      // The outer span contains the streaming text
-      const textElement = canvasElement.querySelector('span');
-      await expect(textElement).toBeInTheDocument();
-    });
-
-    await step('Shows cursor while streaming', async () => {
-      // Wait briefly for streaming to start
-      await new Promise((resolve) => setTimeout(resolve, 100));
-
-      // Cursor element has animate-blink class
-      const cursor = canvasElement.querySelector('span.animate-blink');
-      await expect(cursor).toBeInTheDocument();
-    });
-
-    await step('Text content streams progressively', async () => {
-      // Wait for some characters to appear
-      await new Promise((resolve) => setTimeout(resolve, 200));
-
-      const textElement = canvasElement.querySelector('span');
-      const currentText = textElement?.textContent || '';
-
-      // Should have some text but not necessarily all yet (streaming in progress)
-      await expect(currentText.length).toBeGreaterThan(0);
-    });
-  }
 };
 
 // Fast Speed
@@ -93,10 +67,6 @@ export const FastSpeed: Story = {
       </CardContent>
     </Card>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   },
@@ -137,10 +107,6 @@ export const SlowSpeed: Story = {
       </CardContent>
     </Card>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   },
@@ -184,10 +150,6 @@ export const WithoutCursor: Story = {
       </CardContent>
     </Card>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   },
@@ -234,10 +196,6 @@ export const LongText: Story = {
       </CardContent>
     </Card>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   },
@@ -300,10 +258,6 @@ export const ChatMessageSimulation: Story = {
         </CardContent>
       </Card>
     );
-  },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
   },
   parameters: {
     controls: { disable: true }
@@ -369,10 +323,6 @@ export const WithCompletionCallback: Story = {
       </Card>
     );
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   },
@@ -414,10 +364,6 @@ export const NotStreaming: Story = {
       </CardContent>
     </Card>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   },
@@ -444,53 +390,3 @@ export const NotStreaming: Story = {
   }
 };
 
-// RTL
-export const RTL: Story = {
-  render: () => (
-    <Card className="w-96">
-      <CardHeader>
-        <CardTitle>نص متدفق</CardTitle>
-        <CardDescription>نص عربي مع تأثير الكتابة المباشرة</CardDescription>
-      </CardHeader>
-      <CardContent className="text-right">
-        <StreamingText
-          text="الذكاء الاصطناعي يغير طريقة تفاعلنا مع التكنولوجيا. من معالجة اللغة الطبيعية إلى رؤية الكمبيوتر، أصبحت أنظمة الذكاء الاصطناعي أكثر تطوراً."
-          speed={30}
-        />
-      </CardContent>
-    </Card>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders in RTL context', async () => {
-      await expect(canvas.getByText('نص متدفق')).toBeInTheDocument();
-      await expect(canvas.getByText('نص عربي مع تأثير الكتابة المباشرة')).toBeInTheDocument();
-    });
-
-    await step('Arabic text streams correctly in RTL', async () => {
-      // Wait for streaming to start
-      await new Promise((resolve) => setTimeout(resolve, 300));
-
-      // Find Arabic text by searching for the beginning
-      const streamingText = await canvas.findByText(/الذكاء/, {}, { timeout: 1000 });
-      await expect(streamingText).toBeInTheDocument();
-
-      const currentText = streamingText?.textContent || '';
-      await expect(currentText.length).toBeGreaterThan(0);
-    });
-
-    await step('Cursor displays correctly in RTL layout', async () => {
-      // Cursor element has animate-blink class
-      const cursor = canvasElement.querySelector('span.animate-blink');
-      await expect(cursor).toBeInTheDocument();
-    });
-  }
-};

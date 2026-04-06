@@ -34,7 +34,7 @@ const meta = {
   parameters: {
     layout: 'centered'
   },
-  tags: ['!autodocs', '!test'] // Skip vitest - ReactFlow components have rendering issues in test environment
+  tags: ['autodocs', '!test'] // Skip vitest - ReactFlow components have rendering issues in test environment
 } satisfies Meta<typeof TriggerNode>;
 
 export default meta;
@@ -79,10 +79,6 @@ export const TriggerNodes: Story = {
         </CardContent>
       </Card>
     );
-  },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
   },
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement);
@@ -145,10 +141,6 @@ export const ActionNodes: Story = {
         </CardContent>
       </Card>
     );
-  },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
   },
   parameters: {
     controls: { disable: true }
@@ -215,10 +207,6 @@ export const AINodes: Story = {
       </Card>
     );
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   },
@@ -283,10 +271,6 @@ export const OutputNodes: Story = {
         </CardContent>
       </Card>
     );
-  },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
   },
   parameters: {
     controls: { disable: true }
@@ -366,10 +350,6 @@ export const AllNodeTypes: Story = {
       </Card>
     );
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   }
@@ -415,10 +395,6 @@ export const WithStatus: Story = {
         </CardContent>
       </Card>
     );
-  },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
   },
   parameters: {
     controls: { disable: true }
@@ -499,10 +475,6 @@ export const WorkflowExample: Story = {
       </Card>
     );
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   },
@@ -531,80 +503,6 @@ export const WorkflowExample: Story = {
       await expect(canvas.getByText('LLM')).toBeInTheDocument();
       await expect(canvas.getByText('Save')).toBeInTheDocument();
       await expect(canvas.getByText('Notify')).toBeInTheDocument();
-    });
-  }
-};
-
-// RTL
-export const RTL: Story = {
-  render: () => {
-    const nodes = [
-      { id: '1', type: 'webhook', position: { x: 0, y: 0 }, data: { label: 'Webhook Trigger', labelAr: 'مشغل ويب هوك', description: 'HTTP endpoint', descriptionAr: 'نقطة نهاية HTTP', isRTL: true } },
-      { id: '2', type: 'llm', position: { x: 260, y: 0 }, data: { label: 'LLM Call', labelAr: 'استدعاء نموذج لغوي', description: 'GPT-4', descriptionAr: 'GPT-4', isRTL: true } },
-      { id: '3', type: 'save', position: { x: 520, y: 0 }, data: { label: 'Save Data', labelAr: 'حفظ البيانات', description: 'Database', descriptionAr: 'قاعدة البيانات', isRTL: true } }
-    ];
-
-    return (
-      <Card>
-        <CardHeader>
-          <CardTitle>عقد سير العمل</CardTitle>
-          <CardDescription>أنواع مختلفة من عقد سير العمل</CardDescription>
-        </CardHeader>
-        <CardContent className="p-6">
-          <ReactFlowProvider>
-            <div style={{ height: '200px', width: '100%' }}>
-              <ReactFlow
-                nodes={nodes}
-                nodeTypes={workflowNodeTypes}
-                fitView
-                minZoom={1}
-                maxZoom={1}
-                nodesDraggable={false}
-                nodesConnectable={false}
-                elementsSelectable={false}
-                panOnDrag={false}
-                zoomOnScroll={false}
-                zoomOnPinch={false}
-                preventScrolling={false}
-              >
-                <Background />
-              </ReactFlow>
-            </div>
-          </ReactFlowProvider>
-        </CardContent>
-      </Card>
-    );
-  },
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders in RTL context', async () => {
-      await expect(canvas.getByText('عقد سير العمل')).toBeInTheDocument();
-      await expect(canvas.getByText('أنواع مختلفة من عقد سير العمل')).toBeInTheDocument();
-    });
-
-    await step('Displays Arabic node labels', async () => {
-      await expect(canvas.getByText('مشغل ويب هوك')).toBeInTheDocument();
-      await expect(canvas.getByText('استدعاء نموذج لغوي')).toBeInTheDocument();
-      await expect(canvas.getByText('حفظ البيانات')).toBeInTheDocument();
-    });
-
-    await step('Shows Arabic descriptions', async () => {
-      await expect(canvas.getByText('نقطة نهاية HTTP')).toBeInTheDocument();
-      await expect(canvas.getByText('قاعدة البيانات')).toBeInTheDocument();
-    });
-
-    await step('Displays Arabic type badges', async () => {
-      await expect(canvas.getByText('ويب هوك')).toBeInTheDocument();
-      await expect(canvas.getByText('نموذج لغوي')).toBeInTheDocument();
-      await expect(canvas.getByText('حفظ')).toBeInTheDocument();
     });
   }
 };

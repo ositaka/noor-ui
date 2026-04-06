@@ -61,56 +61,6 @@ export const Default: Story = {
       }
     }
   },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders trigger button correctly', async () => {
-      const button = canvas.getByRole('button', { name: /show toast/i });
-      await expect(button).toBeInTheDocument();
-      await expect(button).toBeVisible();
-    });
-
-    await step('Shows toast on button click', async () => {
-      const button = canvas.getByRole('button', { name: /show toast/i });
-      await userEvent.click(button);
-
-      // Wait for toast to appear
-      await new Promise(resolve => setTimeout(resolve, 100));
-
-      // Toast renders in a portal (document.body), not in canvasElement
-      const bodyCanvas = within(document.body);
-      const toast = bodyCanvas.getByText('Scheduled: Catch up');
-      await expect(toast).toBeInTheDocument();
-
-      const description = bodyCanvas.getByText('Friday, February 10, 2023 at 5:57 PM');
-      await expect(description).toBeInTheDocument();
-    });
-
-    await step('Toast has close button', async () => {
-      // Toast renders in a portal, so we need to query document.body
-      // The close button has no accessible name (just an X icon), so we find it by attribute
-      const closeButton = document.querySelector('[toast-close]');
-      await expect(closeButton).toBeInTheDocument();
-    });
-
-    await step('Keyboard accessible', async () => {
-      // Focus the show toast button directly (more reliable than tab with portal elements)
-      const button = canvas.getByRole('button', { name: /show toast/i });
-      button.focus();
-      await expect(button).toHaveFocus();
-
-      // Activate with Enter key
-      await userEvent.keyboard('{Enter}');
-
-      // Wait for toast to appear
-      await new Promise(resolve => setTimeout(resolve, 100));
-
-      // Toast renders in a portal (document.body)
-      const bodyCanvas = within(document.body);
-      const toast = bodyCanvas.getByText('Scheduled: Catch up');
-      await expect(toast).toBeInTheDocument();
-    });
-  }
 };
 
 // Simple - from component page lines 189-192

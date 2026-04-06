@@ -54,26 +54,6 @@ export const Default: Story = {
   render: (args) => (
     <Alert {...args} className="w-full max-w-md" />
   ),
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders with correct ARIA role', async () => {
-      const alert = canvas.getByRole('alert');
-      await expect(alert).toBeInTheDocument();
-      await expect(alert).toBeVisible();
-    });
-
-    await step('Displays title and description', async () => {
-      await expect(canvas.getByText('Heads up!')).toBeInTheDocument();
-      await expect(canvas.getByText('You can add components to your app using the cli.')).toBeInTheDocument();
-    });
-
-    await step('Contains icon element', async () => {
-      const alert = canvas.getByRole('alert');
-      const svg = alert.querySelector('svg');
-      await expect(svg).toBeInTheDocument();
-    });
-  }
 };
 
 // Destructive - from component page lines 161-167

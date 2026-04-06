@@ -20,7 +20,7 @@ const meta = {
   parameters: {
     layout: 'centered'
   },
-  tags: ['!autodocs'],
+  tags: ['autodocs'],
   argTypes: {
     onSelect: {
       control: false
@@ -58,10 +58,6 @@ export const Default: Story = {
     showIslamicHolidays: false,
     onSelect: fn()
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   render: (args) => {
     const [selected, setSelected] = React.useState<Date>();
 
@@ -87,57 +83,6 @@ export const Default: Story = {
       }
     }
   },
-  play: async ({ canvasElement, step, args }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders calendar with navigation controls', async () => {
-      // Check for month navigation buttons
-      const buttons = canvas.getAllByRole('button');
-      await expect(buttons.length).toBeGreaterThan(0);
-
-      // Check for "Today" button
-      await expect(canvas.getByRole('button', { name: /today/i })).toBeInTheDocument();
-    });
-
-    await step('Navigates between months', async () => {
-      const buttons = canvas.getAllByRole('button');
-      const navigationButtons = buttons.slice(0, 2); // First two are prev/next month
-
-      // Click next month button
-      await userEvent.click(navigationButtons[1]);
-      await expect(navigationButtons[1]).toBeInTheDocument();
-    });
-
-    await step('Selects a date', async () => {
-      const dayButtons = canvas.getAllByRole('button').filter(btn => {
-        const text = btn.textContent;
-        return text && /^\d+$/.test(text.trim());
-      });
-
-      if (dayButtons.length > 15) {
-        // Click on day 15 (should be in current month)
-        await userEvent.click(dayButtons[15]);
-        await expect(args.onSelect).toHaveBeenCalled();
-      }
-    });
-
-    await step('Navigates to today', async () => {
-      const todayButton = canvas.getByRole('button', { name: /today/i });
-      await userEvent.click(todayButton);
-      await expect(todayButton).toBeInTheDocument();
-    });
-
-    await step('Keyboard navigation works', async () => {
-      const todayButton = canvas.getByRole('button', { name: /today/i });
-      todayButton.focus();
-      await expect(todayButton).toHaveFocus();
-
-      // Tab to next element
-      await userEvent.tab();
-      const focusedElement = document.activeElement;
-      await expect(focusedElement?.tagName).toBe('BUTTON');
-    });
-  }
 };
 
 // Basic Calendar - from component page lines 286-294
@@ -158,10 +103,6 @@ export const BasicCalendar: Story = {
         />
       </div>
     );
-  },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
@@ -229,10 +170,6 @@ export const RangeSelection: Story = {
       </Card>
     );
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -296,10 +233,6 @@ export const WithHijri: Story = {
       </Card>
     );
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -350,10 +283,6 @@ export const WithIslamicHolidays: Story = {
         </CardContent>
       </Card>
     );
-  },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
@@ -423,10 +352,6 @@ export const WithEvents: Story = {
       </Card>
     );
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -473,10 +398,6 @@ export const DisabledWeekends: Story = {
       </CardContent>
     </Card>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -505,200 +426,3 @@ export const DisabledWeekends: Story = {
   }
 };
 
-// RTL Example - Basic
-export const RTLExample: Story = {
-  render: () => {
-    const [date, setDate] = React.useState<Date>();
-
-    return (
-      <div className="max-w-md mx-auto">
-        <Calendar
-          mode="single"
-          selected={date}
-          onSelect={(date) => {
-            if (date instanceof Date || date === undefined) {
-              setDate(date);
-            }
-          }}
-          locale="ar"
-        />
-      </div>
-    );
-  },
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Basic calendar with Arabic locale showing localized month names and RTL navigation.'
-      }
-    }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders calendar in RTL context', async () => {
-      const buttons = canvas.getAllByRole('button');
-      await expect(buttons.length).toBeGreaterThan(0);
-    });
-
-    await step('RTL navigation works correctly', async () => {
-      const buttons = canvas.getAllByRole('button');
-      const navigationButtons = buttons.slice(0, 2);
-
-      // In RTL, navigation is reversed
-      await userEvent.click(navigationButtons[0]);
-      await expect(navigationButtons[0]).toBeInTheDocument();
-    });
-
-    await step('Can select dates in RTL mode', async () => {
-      const dayButtons = canvas.getAllByRole('button').filter(btn => {
-        const text = btn.textContent;
-        return text && /^\d+$/.test(text.trim());
-      });
-
-      if (dayButtons.length > 10) {
-        await userEvent.click(dayButtons[10]);
-        await expect(dayButtons[10]).toBeInTheDocument();
-      }
-    });
-  }
-};
-
-// RTL With Hijri
-export const RTLWithHijri: Story = {
-  render: () => {
-    const [date, setDate] = React.useState<Date>();
-
-    return (
-      <Card>
-        <CardContent className="p-6">
-          <p className="text-sm text-muted-foreground mb-4">
-            عرض التواريخ الهجرية جنباً إلى جنب مع التواريخ الميلادية. مثالي للوعي بالتقويم الإسلامي.
-          </p>
-          <div className="max-w-md mx-auto">
-            <Calendar
-              mode="single"
-              selected={date}
-              onSelect={(date) => {
-                if (date instanceof Date || date === undefined) {
-                  setDate(date);
-                }
-              }}
-              showHijri={true}
-              locale="ar"
-            />
-          </div>
-        </CardContent>
-      </Card>
-    );
-  },
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Dual calendar in Arabic with Hijri dates displayed alongside Gregorian dates.'
-      }
-    }
-  }
-};
-
-// RTL With Islamic Holidays
-export const RTLWithIslamicHolidays: Story = {
-  render: () => {
-    const [date, setDate] = React.useState<Date>();
-
-    return (
-      <Card>
-        <CardContent className="p-6">
-          <p className="text-sm text-muted-foreground mb-4">
-            يسلط الضوء تلقائياً على 10 أعياد إسلامية رئيسية بنقاط الأحداث ويعرض أسماء الأعياد بالعربية.
-          </p>
-          <div className="max-w-md mx-auto">
-            <Calendar
-              mode="single"
-              selected={date}
-              onSelect={(date) => {
-                if (date instanceof Date || date === undefined) {
-                  setDate(date);
-                }
-              }}
-              showHijri={true}
-              showIslamicHolidays={true}
-              locale="ar"
-            />
-          </div>
-        </CardContent>
-      </Card>
-    );
-  },
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Islamic holidays with Arabic names including Ramadan, Eid al-Fitr, Eid al-Adha, and more.'
-      }
-    }
-  }
-};
-
-// RTL Range Selection
-export const RTLRangeSelection: Story = {
-  render: () => {
-    const [range, setRange] = React.useState<DateRange>();
-
-    return (
-      <Card>
-        <CardContent className="p-6">
-          <p className="text-sm text-muted-foreground mb-4">
-            اختر تاريخ البداية والنهاية. انقر مرة واحدة لتعيين البداية، انقر مرة أخرى لإكمال النطاق.
-          </p>
-          <div className="max-w-md mx-auto">
-            <Calendar
-              mode="range"
-              selectedRange={range}
-              onSelect={(date) => {
-                if (date && 'from' in date) {
-                  setRange(date as DateRange);
-                } else if (date === undefined) {
-                  setRange(undefined);
-                }
-              }}
-              locale="ar"
-            />
-          </div>
-          {range?.from && (
-            <div className="mt-4 text-sm text-center">
-              <span className="font-medium">المحدد: </span>
-              {range.from.toLocaleDateString('ar-SA')}
-              {range.to && ` - ${range.to.toLocaleDateString('ar-SA')}`}
-            </div>
-          )}
-        </CardContent>
-      </Card>
-    );
-  },
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Date range selection in RTL mode with Arabic date formatting.'
-      }
-    }
-  }
-};

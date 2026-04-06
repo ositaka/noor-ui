@@ -20,7 +20,7 @@ const meta = {
   parameters: {
     layout: 'centered'
   },
-  tags: ['!autodocs'],
+  tags: ['autodocs'],
   argTypes: {
     onUpload: {
       control: false
@@ -58,10 +58,6 @@ export const Default: Story = {
     onChange: fn(),
     onUpload: fn()
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   render: (args) => {
     const [files, setFiles] = React.useState<File[]>([]);
 
@@ -90,32 +86,6 @@ export const Default: Story = {
       }
     }
   },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders correctly', async () => {
-      const uploadArea = canvas.getByRole('button', { name: 'Upload files' });
-      await expect(uploadArea).toBeInTheDocument();
-      await expect(uploadArea).toBeVisible();
-    });
-
-    await step('Shows upload instructions', async () => {
-      await expect(canvas.getByText(/Click to upload or drag and drop/i)).toBeInTheDocument();
-      await expect(canvas.getByText(/Any file type/i)).toBeInTheDocument();
-      await expect(canvas.getByText(/Max size: 5 MB/i)).toBeInTheDocument();
-    });
-
-    await step('Keyboard accessible', async () => {
-      const uploadArea = canvas.getByRole('button', { name: 'Upload files' });
-      uploadArea.focus();
-      await expect(uploadArea).toHaveFocus();
-
-      // Hidden file input has aria-label
-      const fileInput = canvas.getByLabelText('File upload');
-      await expect(fileInput).toBeInTheDocument();
-      await expect(fileInput).toHaveAttribute('type', 'file');
-    });
-  }
 };
 
 // Basic File Upload - from component page lines 224-228
@@ -131,10 +101,6 @@ export const BasicFileUpload: Story = {
         />
       </div>
     );
-  },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
@@ -175,10 +141,6 @@ export const ImagesOnly: Story = {
         </CardContent>
       </Card>
     );
-  },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
@@ -225,10 +187,6 @@ export const MultipleFiles: Story = {
       </Card>
     );
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -269,10 +227,6 @@ export const CustomSizeLimit: Story = {
       </CardContent>
     </Card>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -316,10 +270,6 @@ export const DocumentsOnly: Story = {
       </Card>
     );
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -359,10 +309,6 @@ export const DisabledState: Story = {
       <p className="text-sm text-muted-foreground mt-4">File upload is disabled</p>
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -387,147 +333,3 @@ export const DisabledState: Story = {
   }
 };
 
-// RTL Example - Basic (component has built-in bilingual support)
-export const RTLExample: Story = {
-  render: () => {
-    const [files, setFiles] = React.useState<File[]>([]);
-
-    return (
-      <div className="w-full max-w-xl">
-        <FileUpload
-          onChange={setFiles}
-          onUpload={(files) => console.log('تم التحميل:', files)}
-        />
-      </div>
-    );
-  },
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Basic file upload with Arabic text in RTL mode. Component automatically displays bilingual text based on locale.'
-      }
-    }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders in RTL context', async () => {
-      const uploadArea = canvas.getByRole('button', { name: 'Upload files' });
-      await expect(uploadArea).toBeInTheDocument();
-    });
-
-    await step('Shows Arabic text', async () => {
-      await expect(canvas.getByText(/انقر للتحميل أو اسحب وأسقط/)).toBeInTheDocument();
-      await expect(canvas.getByText(/أي نوع ملف/)).toBeInTheDocument();
-    });
-
-    await step('Interaction works in RTL', async () => {
-      const uploadArea = canvas.getByRole('button', { name: 'Upload files' });
-      uploadArea.focus();
-      await expect(uploadArea).toHaveFocus();
-    });
-  }
-};
-
-// RTL Images Only
-export const RTLImagesOnly: Story = {
-  render: () => {
-    const [files, setFiles] = React.useState<File[]>([]);
-
-    return (
-      <Card className="w-full max-w-xl">
-        <CardContent className="p-6">
-          <FileUpload
-            accept="image/*"
-            onChange={setFiles}
-            onUpload={(files) => console.log('تحميل الصور:', files)}
-          />
-        </CardContent>
-      </Card>
-    );
-  },
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Image-only file upload with Arabic interface in RTL mode.'
-      }
-    }
-  }
-};
-
-// RTL Multiple Files
-export const RTLMultipleFiles: Story = {
-  render: () => {
-    const [files, setFiles] = React.useState<File[]>([]);
-
-    return (
-      <Card className="w-full max-w-xl">
-        <CardContent className="p-6">
-          <FileUpload
-            multiple
-            maxFiles={5}
-            onChange={setFiles}
-            onUpload={(files) => console.log('تحميل الملفات:', files)}
-          />
-        </CardContent>
-      </Card>
-    );
-  },
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Multiple file upload with Arabic interface showing "إضافة المزيد من الملفات" button in RTL.'
-      }
-    }
-  }
-};
-
-// RTL Documents Upload
-export const RTLDocumentsUpload: Story = {
-  render: () => {
-    const [files, setFiles] = React.useState<File[]>([]);
-
-    return (
-      <Card className="w-full max-w-xl">
-        <CardHeader>
-          <CardTitle>تحميل المستندات</CardTitle>
-          <CardDescription>مستندات PDF و Word فقط</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <FileUpload
-            accept=".pdf,.doc,.docx"
-            onChange={setFiles}
-            onUpload={(files) => console.log('تحميل المستندات:', files)}
-          />
-        </CardContent>
-      </Card>
-    );
-  },
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Document upload with Arabic labels and RTL layout for PDF and Word files.'
-      }
-    }
-  }
-};

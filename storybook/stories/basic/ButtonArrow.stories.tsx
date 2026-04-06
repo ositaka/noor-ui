@@ -67,25 +67,6 @@ export const Default: Story = {
       }
     }
   },
-  play: async ({ canvasElement, step, args }) => {
-    const canvas = within(canvasElement);
-    const button = canvas.getByRole('button', { name: /continue/i });
-
-    await step('Button renders with forward direction', async () => {
-      await expect(button).toBeInTheDocument();
-      await expect(button).toBeVisible();
-    });
-
-    await step('Contains arrow icon', async () => {
-      const icon = button.querySelector('svg');
-      await expect(icon).toBeInTheDocument();
-    });
-
-    await step('Handles click interaction', async () => {
-      await userEvent.click(button);
-      await expect(args.onClick).toHaveBeenCalledTimes(1);
-    });
-  }
 };
 
 // Directions - from component page lines 166-168

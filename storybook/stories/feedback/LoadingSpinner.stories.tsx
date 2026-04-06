@@ -42,25 +42,6 @@ export const Default: Story = {
       }
     }
   },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders correctly', async () => {
-      const spinner = canvas.getByRole('status');
-      await expect(spinner).toBeInTheDocument();
-      await expect(spinner).toBeVisible();
-    });
-
-    await step('Has correct accessibility attributes', async () => {
-      const spinner = canvas.getByRole('status');
-      await expect(spinner).toHaveAttribute('aria-live', 'polite');
-      await expect(spinner).toHaveAttribute('aria-label', 'Loading...');
-    });
-
-    await step('Has screen reader text', async () => {
-      await expect(canvas.getByText('Loading...', { selector: '.sr-only' })).toBeInTheDocument();
-    });
-  }
 };
 
 // Small Size

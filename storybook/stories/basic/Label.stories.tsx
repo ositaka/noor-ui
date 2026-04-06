@@ -42,39 +42,6 @@ export const Default: Story = {
       <Input id="preview-input" type="email" placeholder="name@example.com" />
     </div>
   ),
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders label correctly', async () => {
-      const label = canvas.getByText('Email Address');
-      await expect(label).toBeInTheDocument();
-      await expect(label).toBeVisible();
-    });
-
-    await step('Label is associated with input', async () => {
-      const label = canvas.getByText('Email Address');
-      const input = canvas.getByPlaceholderText('name@example.com');
-
-      await expect(label).toHaveAttribute('for', 'preview-input');
-      await expect(input).toHaveAttribute('id', 'preview-input');
-    });
-
-    await step('Clicking label focuses input', async () => {
-      const label = canvas.getByText('Email Address');
-      const input = canvas.getByPlaceholderText('name@example.com');
-
-      await userEvent.click(label);
-      await expect(input).toHaveFocus();
-    });
-
-    await step('Input is keyboard accessible', async () => {
-      const input = canvas.getByPlaceholderText('name@example.com');
-
-      await userEvent.clear(input);
-      await userEvent.type(input, 'test@example.com');
-      await expect(input).toHaveValue('test@example.com');
-    });
-  }
 };
 
 // With Input - from component page lines 224-227

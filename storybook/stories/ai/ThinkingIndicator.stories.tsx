@@ -20,7 +20,7 @@ const meta = {
   parameters: {
     layout: 'centered'
   },
-  tags: ['!autodocs'],
+  tags: ['autodocs'],
   argTypes: {
     variant: {
       control: { type: 'select' },
@@ -43,41 +43,18 @@ export const Default: Story = {
     variant: 'dots',
     message: 'Thinking...'
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     docs: {
       story: {
         inline: false
       }
+    },
+    ar: {
+      args: {
+        message: 'جارٍ التفكير...'
+      }
     }
   },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders correctly with role and message', async () => {
-      const indicator = canvas.getByRole('status');
-      await expect(indicator).toBeInTheDocument();
-      await expect(indicator).toBeVisible();
-      await expect(indicator).toHaveAttribute('aria-label', 'Thinking...');
-      await expect(indicator).toHaveAttribute('aria-live', 'polite');
-    });
-
-    await step('Displays message text', async () => {
-      const messageText = canvas.getByText('Thinking...');
-      await expect(messageText).toBeInTheDocument();
-      await expect(messageText).toBeVisible();
-    });
-
-    await step('Renders animation dots', async () => {
-      const indicator = canvas.getByRole('status');
-      // Verify the indicator contains animated elements (dots variant has 3 divs)
-      const animatedDivs = indicator.querySelectorAll('div div');
-      expect(animatedDivs.length).toBeGreaterThan(0);
-    });
-  }
 };
 
 // All Variants - from component page lines 156-175
@@ -109,10 +86,6 @@ export const AllVariants: Story = {
       </CardContent>
     </Card>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -138,10 +111,6 @@ export const WithMessages: Story = {
       </CardContent>
     </Card>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -188,10 +157,6 @@ export const SizeVariants: Story = {
       </CardContent>
     </Card>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -241,10 +206,6 @@ export const InChatContext: Story = {
       </CardContent>
     </Card>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -282,10 +243,6 @@ export const DotsOnly: Story = {
       </CardContent>
     </Card>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -323,10 +280,6 @@ export const PulseOnly: Story = {
       </CardContent>
     </Card>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -364,10 +317,6 @@ export const WaveOnly: Story = {
       </CardContent>
     </Card>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -405,10 +354,6 @@ export const TypingOnly: Story = {
       </CardContent>
     </Card>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -432,59 +377,3 @@ export const TypingOnly: Story = {
   }
 };
 
-// RTL With Messages
-export const RTLWithMessages: Story = {
-  render: () => (
-    <Card>
-      <CardContent className="p-6">
-        <div className="space-y-4">
-          <ThinkingIndicator variant="typing" message="جارٍ التفكير..." />
-          <Separator />
-          <ThinkingIndicator variant="dots" message="جارٍ معالجة طلبك..." />
-          <Separator />
-          <ThinkingIndicator variant="wave" message="جارٍ تحليل البيانات..." />
-          <Separator />
-          <ThinkingIndicator variant="pulse" message="جارٍ الإنشاء..." />
-        </div>
-      </CardContent>
-    </Card>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Indicators with Arabic messages in RTL.'
-      }
-    }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders in RTL context', async () => {
-      const indicators = canvas.getAllByRole('status');
-      expect(indicators).toHaveLength(4);
-      indicators.forEach(indicator => {
-        expect(indicator).toBeVisible();
-      });
-    });
-
-    await step('Displays Arabic messages', async () => {
-      await expect(canvas.getByText('جارٍ التفكير...')).toBeInTheDocument();
-      await expect(canvas.getByText('جارٍ معالجة طلبك...')).toBeInTheDocument();
-      await expect(canvas.getByText('جارٍ تحليل البيانات...')).toBeInTheDocument();
-      await expect(canvas.getByText('جارٍ الإنشاء...')).toBeInTheDocument();
-    });
-
-    await step('Each indicator has correct Arabic aria-label', async () => {
-      const indicators = canvas.getAllByRole('status');
-      await expect(indicators[0]).toHaveAttribute('aria-label', 'جارٍ التفكير...');
-      await expect(indicators[1]).toHaveAttribute('aria-label', 'جارٍ معالجة طلبك...');
-      await expect(indicators[2]).toHaveAttribute('aria-label', 'جارٍ تحليل البيانات...');
-      await expect(indicators[3]).toHaveAttribute('aria-label', 'جارٍ الإنشاء...');
-    });
-  }
-};

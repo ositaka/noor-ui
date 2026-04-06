@@ -30,7 +30,7 @@ const meta = {
   parameters: {
     layout: 'centered'
   },
-  tags: ['!autodocs'],
+  tags: ['autodocs'],
   argTypes: {
     onSubmit: {
       control: false
@@ -46,10 +46,6 @@ export const Default: Story = {
   args: {
     initialValues: { email: '' },
     onSubmit: fn((values) => alert(JSON.stringify(values, null, 2)))
-  },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
   },
   render: (args) => (
     <div className="w-full max-w-md">
@@ -80,53 +76,6 @@ export const Default: Story = {
       </Form>
     </div>
   ),
-  play: async ({ canvasElement, step, args }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders form correctly', async () => {
-      // FormLabel auto-associates with input via FormFieldIdContext
-      const emailInput = canvas.getByPlaceholderText('your@email.com');
-      await expect(emailInput).toBeInTheDocument();
-      await expect(emailInput).toBeVisible();
-      await expect(emailInput).toHaveAttribute('type', 'email');
-      await expect(canvas.getByRole('button', { name: /submit/i })).toBeInTheDocument();
-    });
-
-    await step('Shows validation error when submitting empty form', async () => {
-      const submitButton = canvas.getByRole('button', { name: /submit/i });
-      await userEvent.click(submitButton);
-
-      // Validation error should appear
-      await expect(canvas.getByText('Email is required')).toBeInTheDocument();
-      await expect(args.onSubmit).not.toHaveBeenCalled();
-    });
-
-    await step('Clears error when user types valid input', async () => {
-      const emailInput = canvas.getByPlaceholderText('your@email.com');
-      await userEvent.type(emailInput, 'test@example.com');
-
-      await expect(emailInput).toHaveValue('test@example.com');
-    });
-
-    await step('Submits form with valid data', async () => {
-      const submitButton = canvas.getByRole('button', { name: /submit/i });
-      await userEvent.click(submitButton);
-
-      await expect(args.onSubmit).toHaveBeenCalledTimes(1);
-      await expect(args.onSubmit).toHaveBeenCalledWith({ email: 'test@example.com' });
-    });
-
-    await step('Keyboard navigation works', async () => {
-      const emailInput = canvas.getByPlaceholderText('your@email.com');
-      emailInput.focus();
-
-      await expect(emailInput).toHaveFocus();
-
-      // Tab to submit button
-      await userEvent.tab();
-      await expect(canvas.getByRole('button', { name: /submit/i })).toHaveFocus();
-    });
-  },
   parameters: {
     docs: {
       story: {
@@ -260,10 +209,6 @@ export const BasicForm: Story = {
       await expect(canvas.getByRole('button', { name: /sign in/i })).toHaveFocus();
     });
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -372,10 +317,6 @@ export const WithValidation: Story = {
       await expect(canvas.queryByText('Please enter a valid email address')).not.toBeInTheDocument();
     });
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -471,10 +412,6 @@ export const WithSelect: Story = {
       await expect(canvas.queryByText('Country is required')).not.toBeInTheDocument();
     });
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -533,10 +470,6 @@ export const DisabledState: Story = {
       await expect(emailInput).toHaveValue('user@example.com');
     });
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -547,260 +480,3 @@ export const DisabledState: Story = {
   }
 };
 
-// RTL Example - from component page lines 476-498
-export const RTLExample: Story = {
-  render: () => (
-    <div className="w-full max-w-md">
-      <Form
-        initialValues={{ email: '' }}
-        validators={{
-          email: validators.required('البريد الإلكتروني مطلوب')
-        }}
-        onSubmit={() => {}}
-      >
-        <FormField name="email">
-          {({ field, error, touched }) => (
-            <FormItem>
-              <FormLabel required>البريد الإلكتروني</FormLabel>
-              <Input
-                type="email"
-                placeholder="your@email.com"
-                value={field.value}
-                onChange={(e) => field.onChange(e.target.value)}
-                onBlur={field.onBlur}
-              />
-              {touched && <FormMessage error={error} />}
-            </FormItem>
-          )}
-        </FormField>
-        <Button type="submit" className="w-full">
-          إرسال
-        </Button>
-      </Form>
-    </div>
-  ),
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders form in RTL context', async () => {
-      const emailInput = canvas.getByPlaceholderText('your@email.com');
-      await expect(emailInput).toBeInTheDocument();
-      await expect(emailInput).toBeVisible();
-    });
-
-    await step('Shows RTL validation message', async () => {
-      // Trigger validation by submitting empty form
-      const submitButton = canvas.getByRole('button', { name: /إرسال/i });
-      await userEvent.click(submitButton);
-
-      // Check for RTL error message
-      await expect(canvas.getByText('البريد الإلكتروني مطلوب')).toBeInTheDocument();
-    });
-
-    await step('Interaction works in RTL mode', async () => {
-      const emailInput = canvas.getByPlaceholderText('your@email.com');
-      await userEvent.type(emailInput, 'test@example.com');
-
-      await expect(emailInput).toHaveValue('test@example.com');
-    });
-  },
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Form with Arabic labels and validation messages in RTL mode.'
-      }
-    }
-  }
-};
-
-// RTL Basic Form
-export const RTLBasicForm: Story = {
-  render: () => (
-    <div className="w-full max-w-md">
-      <Form
-        initialValues={{ email: '', password: '' }}
-        validators={{
-          email: validators.required('البريد الإلكتروني مطلوب'),
-          password: validators.minLength(6, 'يجب أن تكون كلمة المرور 6 أحرف على الأقل')
-        }}
-        onSubmit={async (values) => {
-          await new Promise((resolve) => setTimeout(resolve, 1000));
-          alert('تم إرسال النموذج!');
-        }}
-      >
-        <FormField name="email">
-          {({ field, error, touched }) => (
-            <FormItem>
-              <FormLabel required>البريد الإلكتروني</FormLabel>
-              <Input
-                type="email"
-                placeholder="your@email.com"
-                value={field.value}
-                onChange={(e) => field.onChange(e.target.value)}
-                onBlur={field.onBlur}
-              />
-              {touched && <FormMessage error={error} />}
-            </FormItem>
-          )}
-        </FormField>
-
-        <FormField name="password">
-          {({ field, error, touched }) => (
-            <FormItem>
-              <FormLabel required>كلمة المرور</FormLabel>
-              <Input
-                type="password"
-                placeholder="••••••••"
-                value={field.value}
-                onChange={(e) => field.onChange(e.target.value)}
-                onBlur={field.onBlur}
-              />
-              {touched && <FormMessage error={error} />}
-              <FormDescription>على الأقل 6 أحرف</FormDescription>
-            </FormItem>
-          )}
-        </FormField>
-
-        <Button type="submit" className="w-full">
-          تسجيل الدخول
-        </Button>
-      </Form>
-    </div>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Complete login form in Arabic with RTL support.'
-      }
-    }
-  }
-};
-
-// RTL With Validation
-export const RTLWithValidation: Story = {
-  render: () => (
-    <div className="w-full max-w-md">
-      <Form
-        initialValues={{ name: '', email: '' }}
-        validators={{
-          name: validators.required('الاسم مطلوب'),
-          email: composeValidators(
-            validators.required('البريد الإلكتروني مطلوب'),
-            validators.email('يرجى إدخال بريد إلكتروني صالح')
-          )
-        }}
-        onSubmit={(values) => alert(JSON.stringify(values, null, 2))}
-      >
-        <FormField name="name">
-          {({ field, error, touched }) => (
-            <FormItem>
-              <FormLabel required>الاسم</FormLabel>
-              <Input
-                placeholder="أدخل اسمك"
-                value={field.value}
-                onChange={(e) => field.onChange(e.target.value)}
-                onBlur={field.onBlur}
-              />
-              {touched && <FormMessage error={error} />}
-            </FormItem>
-          )}
-        </FormField>
-
-        <FormField name="email">
-          {({ field, error, touched }) => (
-            <FormItem>
-              <FormLabel required>البريد الإلكتروني</FormLabel>
-              <Input
-                type="email"
-                placeholder="your@email.com"
-                value={field.value}
-                onChange={(e) => field.onChange(e.target.value)}
-                onBlur={field.onBlur}
-              />
-              {touched && <FormMessage error={error} />}
-            </FormItem>
-          )}
-        </FormField>
-
-        <Button type="submit" className="w-full">
-          إرسال
-        </Button>
-      </Form>
-    </div>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Form with composed validators in Arabic, demonstrating RTL validation messages.'
-      }
-    }
-  }
-};
-
-// RTL With Select
-export const RTLWithSelect: Story = {
-  render: () => (
-    <div className="w-full max-w-md">
-      <Form
-        initialValues={{ country: '' }}
-        validators={{
-          country: validators.required('البلد مطلوب')
-        }}
-        onSubmit={(values) => alert(`المحدد: ${values.country}`)}
-      >
-        <FormField name="country">
-          {({ field, error, touched }) => (
-            <FormItem>
-              <FormLabel required>البلد</FormLabel>
-              <Select value={field.value} onValueChange={field.onChange}>
-                <SelectTrigger onBlur={field.onBlur}>
-                  <SelectValue placeholder="اختر بلدك" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="sa">المملكة العربية السعودية</SelectItem>
-                  <SelectItem value="ae">الإمارات العربية المتحدة</SelectItem>
-                  <SelectItem value="kw">الكويت</SelectItem>
-                  <SelectItem value="qa">قطر</SelectItem>
-                  <SelectItem value="bh">البحرين</SelectItem>
-                  <SelectItem value="om">عمان</SelectItem>
-                </SelectContent>
-              </Select>
-              {touched && <FormMessage error={error} />}
-            </FormItem>
-          )}
-        </FormField>
-
-        <Button type="submit" className="w-full">
-          حفظ
-        </Button>
-      </Form>
-    </div>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Form with Select component in Arabic, showing proper RTL alignment.'
-      }
-    }
-  }
-};

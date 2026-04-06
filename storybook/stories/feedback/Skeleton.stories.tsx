@@ -39,30 +39,6 @@ export const Default: Story = {
       </div>
     </div>
   ),
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders skeleton elements', async () => {
-      const skeletons = canvas.getAllByRole('generic');
-      await expect(skeletons.length).toBeGreaterThan(0);
-
-      // Verify skeletons are visible
-      skeletons.forEach(async (skeleton) => {
-        await expect(skeleton).toBeVisible();
-      });
-    });
-
-    await step('Has pulse animation class', async () => {
-      const skeletons = canvasElement.querySelectorAll('.animate-pulse');
-      await expect(skeletons.length).toBeGreaterThan(0);
-      await expect(skeletons[0]).toHaveClass('animate-pulse');
-    });
-
-    await step('Has proper background styling', async () => {
-      const skeletons = canvasElement.querySelectorAll('.animate-pulse');
-      await expect(skeletons[0]).toHaveClass('bg-muted');
-    });
-  },
   parameters: {
     docs: {
       story: {

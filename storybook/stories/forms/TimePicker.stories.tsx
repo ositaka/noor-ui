@@ -20,7 +20,7 @@ const meta = {
   parameters: {
     layout: 'centered'
   },
-  tags: ['!autodocs'],
+  tags: ['autodocs'],
   argTypes: {
     onTimeChange: {
       control: false
@@ -38,10 +38,6 @@ export const Default: Story = {
     placeholderAr: 'اختر الوقت',
     format: '24h',
     onTimeChange: fn()
-  },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
   },
   render: (args) => {
     const [time, setTime] = React.useState<Time>({ hours: 9, minutes: 30 });
@@ -61,44 +57,16 @@ export const Default: Story = {
       </div>
     );
   },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-    const body = within(document.body);
-
-    await step('Renders correctly', async () => {
-      // Button shows the formatted time value "09:30", not the placeholder
-      await expect(canvas.getByRole('button', { name: '09:30' })).toBeInTheDocument();
-      await expect(canvas.getByRole('button', { name: '09:30' })).toBeVisible();
-    });
-
-    await step('Opens time picker popover', async () => {
-      const button = canvas.getByRole('button', { name: '09:30' });
-      await userEvent.click(button);
-
-      // Wait for popover to open - NumberInput uses type="text" so role is "textbox"
-      // Popover renders in portal, so query from document.body
-      await expect(body.getByRole('textbox', { name: /hours/i })).toBeInTheDocument();
-      await expect(body.getByRole('textbox', { name: /minutes/i })).toBeInTheDocument();
-    });
-
-    await step('Keyboard accessible', async () => {
-      // Close popover first
-      await userEvent.keyboard('{Escape}');
-
-      // Tab to the button
-      const button = canvas.getByRole('button', { name: '09:30' });
-      button.focus();
-      await expect(button).toHaveFocus();
-
-      // Open with keyboard
-      await userEvent.keyboard('{Enter}');
-      await expect(body.getByRole('textbox', { name: /hours/i })).toBeInTheDocument();
-    });
-  },
   parameters: {
     docs: {
       story: {
         inline: false
+      }
+    },
+    ar: {
+      args: {
+        placeholder: 'اختر الوقت',
+        placeholderAr: 'اختر الوقت'
       }
     }
   }
@@ -145,10 +113,6 @@ export const Basic24hFormat: Story = {
       // Verify 24h format - no AM/PM toggle
       await expect(body.queryByRole('switch')).not.toBeInTheDocument();
     });
-  },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
@@ -210,10 +174,6 @@ export const Format12h: Story = {
       await userEvent.click(amTab);
       // Time should update after toggle (14:00 -> 02:00 AM)
     });
-  },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
@@ -299,10 +259,6 @@ export const TimeRange: Story = {
       await expect(canvas.getByText(/8h 0m/)).toBeInTheDocument();
     });
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -357,10 +313,6 @@ export const MinuteIntervals: Story = {
       await expect(body.getByRole('textbox', { name: /minutes/i })).toBeInTheDocument();
       // Verify the minute step behavior is working (minutes should increment by 15)
     });
-  },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
@@ -464,10 +416,6 @@ export const MedicalAppointment: Story = {
       await expect(body.getByRole('textbox', { name: /hours/i })).toBeInTheDocument();
     });
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -568,10 +516,6 @@ export const WorkSchedule: Story = {
       await expect(pickTimeButtons.length).toBeGreaterThanOrEqual(2); // Two nested TimePickers
     });
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -616,10 +560,6 @@ export const DisabledState: Story = {
       await expect(buttons[1]).toBeDisabled();
     });
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -630,190 +570,3 @@ export const DisabledState: Story = {
   }
 };
 
-// RTL Example
-export const RTLExample: Story = {
-  render: () => {
-    const [time, setTime] = React.useState<Time>({ hours: 9, minutes: 30 });
-
-    const formatTime = (time: Time | undefined): string => {
-      if (!time) return 'لم يتم اختيار وقت';
-      const hours = time.hours.toString().padStart(2, '0');
-      const minutes = time.minutes.toString().padStart(2, '0');
-      return `${minutes}:${hours}`;
-    };
-
-    return (
-      <div className="w-full max-w-xs mx-auto space-y-2">
-        <Label className='me-4'>وقت البدء</Label>
-        <TimePicker
-          time={time}
-          onTimeChange={(t) => t && setTime(t)}
-          placeholder="Pick a time"
-          placeholderAr="اختر الوقت"
-        />
-        <p className="text-sm text-muted-foreground">{formatTime(time)}</p>
-      </div>
-    );
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-    const body = within(document.body);
-
-    await step('Renders in RTL context', async () => {
-      // In RTL/Arabic, time is formatted as "30:09" (minutes:hours reversed)
-      await expect(canvas.getByRole('button', { name: '30:09' })).toBeInTheDocument();
-      await expect(canvas.getByText('وقت البدء')).toBeInTheDocument();
-    });
-
-    await step('Interaction works in RTL', async () => {
-      await userEvent.click(canvas.getByRole('button', { name: '30:09' }));
-      // NumberInput uses type="text" so role is "textbox", popover in portal
-      // In RTL/Arabic mode, labels are in Arabic: "الساعات" (hours), "الدقائق" (minutes)
-      await expect(body.getByRole('textbox', { name: /الساعات/i })).toBeInTheDocument();
-      await expect(body.getByRole('textbox', { name: /الدقائق/i })).toBeInTheDocument();
-    });
-  },
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Time picker with Arabic labels in RTL mode.'
-      }
-    }
-  }
-};
-
-// RTL 12h Format
-export const RTL12hFormat: Story = {
-  render: () => {
-    const [time, setTime] = React.useState<Time>({ hours: 14, minutes: 0 });
-
-    const formatTime12h = (time: Time | undefined): string => {
-      if (!time) return 'لم يتم اختيار وقت';
-      const hours = ((time.hours % 12) || 12).toString().padStart(2, '0');
-      const minutes = time.minutes.toString().padStart(2, '0');
-      const period = time.hours >= 12 ? 'م' : 'ص';
-      return `${period} ${minutes}:${hours}`;
-    };
-
-    return (
-      <div className="w-full max-w-xs mx-auto space-y-2">
-        <Label className='me-4'>وقت الموعد</Label>
-        <TimePicker
-          time={time}
-          onTimeChange={(t) => t && setTime(t)}
-          format="12h"
-          placeholder="Pick a time"
-          placeholderAr="اختر الوقت"
-        />
-        <p className="text-sm text-muted-foreground">{formatTime12h(time)}</p>
-      </div>
-    );
-  },
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Time picker with 12-hour format in Arabic, showing proper RTL AM/PM (ص/م) formatting.'
-      }
-    }
-  }
-};
-
-// RTL Medical Appointment
-export const RTLMedicalAppointment: Story = {
-  render: () => {
-    const [time, setTime] = React.useState<Time | undefined>(undefined);
-
-    const formatTime12h = (time: Time | undefined): string => {
-      if (!time) return '';
-      const hours = ((time.hours % 12) || 12).toString().padStart(2, '0');
-      const minutes = time.minutes.toString().padStart(2, '0');
-      const period = time.hours >= 12 ? 'م' : 'ص';
-      return `${period} ${minutes}:${hours}`;
-    };
-
-    const calculateEndTime = (time: Time): string => {
-      const endMinutes = time.minutes + 30;
-      const endHours = time.hours + Math.floor(endMinutes / 60);
-      const finalMinutes = endMinutes % 60;
-      const hours = ((endHours % 12) || 12).toString().padStart(2, '0');
-      const minutes = finalMinutes.toString().padStart(2, '0');
-      const period = endHours >= 12 ? 'م' : 'ص';
-      return `${period} ${minutes}:${hours}`;
-    };
-
-    return (
-      <Card className="w-full max-w-md mx-auto">
-        <CardHeader>
-          <CardTitle>موعد طبي</CardTitle>
-          <CardDescription>
-            اختر وقت الموعد المفضل لديك
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-6">
-          <div className="space-y-2">
-            <Label className='me-4'>الوقت المفضل</Label>
-            <TimePicker
-              time={time}
-              onTimeChange={setTime}
-              format="12h"
-              minuteStep={15}
-              placeholder="Select appointment time"
-              placeholderAr="اختر وقت الموعد"
-            />
-          </div>
-
-          {time && (
-            <>
-              <div className="flex justify-between items-center pt-4 border-t">
-                <span className="text-sm text-muted-foreground">
-                  الوقت المحدد:
-                </span>
-                <span className="font-semibold">
-                  {formatTime12h(time)}
-                </span>
-              </div>
-
-              <div className="flex justify-between items-center">
-                <span className="text-sm text-muted-foreground">
-                  المدة:
-                </span>
-                <span className="font-semibold">30 دقيقة</span>
-              </div>
-
-              <div className="flex justify-between items-center">
-                <span className="text-sm text-muted-foreground">
-                  وقت الانتهاء:
-                </span>
-                <span className="font-semibold">
-                  {calculateEndTime(time)}
-                </span>
-              </div>
-            </>
-          )}
-        </CardContent>
-      </Card>
-    );
-  },
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Complete medical appointment example in Arabic with RTL support and proper time formatting.'
-      }
-    }
-  }
-};

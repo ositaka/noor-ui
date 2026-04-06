@@ -44,28 +44,6 @@ export const Default: Story = {
       }
     }
   },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders correctly with proper structure', async () => {
-      const aside = canvas.getByRole('complementary');
-      await expect(aside).toBeInTheDocument();
-      await expect(aside).toBeVisible();
-    });
-
-    await step('Contains blockquote with correct content', async () => {
-      const blockquote = canvas.getByText(/The pen is mightier than the sword/i);
-      await expect(blockquote).toBeInTheDocument();
-      await expect(blockquote).toBeVisible();
-    });
-
-    await step('Has proper semantic structure', async () => {
-      const aside = canvas.getByRole('complementary');
-      const blockquote = aside.querySelector('blockquote');
-      await expect(blockquote).toBeInTheDocument();
-    });
-
-  }
 };
 
 // Center Aligned

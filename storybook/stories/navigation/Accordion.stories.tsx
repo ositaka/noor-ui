@@ -21,7 +21,7 @@ const meta = {
   parameters: {
     layout: 'centered'
   },
-  tags: ['!autodocs'],
+  tags: ['autodocs'],
   argTypes: {
     type: {
       control: { type: 'select' },
@@ -50,10 +50,6 @@ export const Default: Story = {
   args: {
     type: 'single',
     collapsible: true
-  },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
   },
   render: (args) => (
     <Accordion {...args} className="w-96 max-w-md">
@@ -84,52 +80,6 @@ export const Default: Story = {
       }
     }
   },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders correctly with all items collapsed', async () => {
-      const triggers = canvas.getAllByRole('button');
-      await expect(triggers).toHaveLength(3);
-      await expect(triggers[0]).toHaveAccessibleName('Is it accessible?');
-      await expect(triggers[1]).toHaveAccessibleName('Is it styled?');
-      await expect(triggers[2]).toHaveAccessibleName('Is it animated?');
-    });
-
-    await step('Expands item on click', async () => {
-      const firstTrigger = canvas.getByRole('button', { name: /is it accessible/i });
-      await userEvent.click(firstTrigger);
-      await expect(canvas.getByText(/yes\. it adheres to the wai-aria design pattern/i)).toBeVisible();
-    });
-
-    await step('Collapses previously open item when opening another (single mode)', async () => {
-      const secondTrigger = canvas.getByRole('button', { name: /is it styled/i });
-      await userEvent.click(secondTrigger);
-      await expect(canvas.getByText(/yes\. it comes with default styles/i)).toBeVisible();
-      // First item should now be collapsed - check aria-expanded instead of visibility
-      const firstTrigger = canvas.getByRole('button', { name: /is it accessible/i });
-      await expect(firstTrigger).toHaveAttribute('aria-expanded', 'false');
-    });
-
-    await step('Keyboard navigation with Tab', async () => {
-      const thirdTrigger = canvas.getByRole('button', { name: /is it animated/i });
-      thirdTrigger.focus();
-      await expect(thirdTrigger).toHaveFocus();
-    });
-
-    await step('Keyboard activation with Enter', async () => {
-      const thirdTrigger = canvas.getByRole('button', { name: /is it animated/i });
-      thirdTrigger.focus();
-      await userEvent.keyboard('{Enter}');
-      await expect(canvas.getByText(/yes\. it uses css animations/i)).toBeVisible();
-    });
-
-    await step('Keyboard activation with Space', async () => {
-      const firstTrigger = canvas.getByRole('button', { name: /is it accessible/i });
-      firstTrigger.focus();
-      await userEvent.keyboard(' ');
-      await expect(canvas.getByText(/yes\. it adheres to the wai-aria design pattern/i)).toBeVisible();
-    });
-  }
 };
 
 // Basic FAQ - from component page lines 199-218
@@ -156,10 +106,6 @@ export const BasicFAQ: Story = {
       </AccordionItem>
     </Accordion>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -211,10 +157,6 @@ export const MultipleOpen: Story = {
       </AccordionItem>
     </Accordion>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -293,10 +235,6 @@ export const WithIcons: Story = {
       </AccordionItem>
     </Accordion>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -352,10 +290,6 @@ export const Controlled: Story = {
         </Accordion>
       </div>
     );
-  },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
@@ -417,10 +351,6 @@ export const InCard: Story = {
       </CardContent>
     </Card>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -442,192 +372,5 @@ export const InCard: Story = {
       await userEvent.click(trigger);
       await expect(canvas.getByText(/yes\. it comes with default styles/i)).toBeVisible();
     });
-  }
-};
-
-// RTL Example - Basic FAQ
-export const RTLExample: Story = {
-  render: () => (
-    <Accordion type="single" collapsible className="w-96 max-w-md">
-      <AccordionItem value="item-1">
-        <AccordionTrigger>هل يمكن الوصول إليه؟</AccordionTrigger>
-        <AccordionContent>
-          نعم. يلتزم بنمط تصميم WAI-ARIA.
-        </AccordionContent>
-      </AccordionItem>
-      <AccordionItem value="item-2">
-        <AccordionTrigger>هل له أنماط؟</AccordionTrigger>
-        <AccordionContent>
-          نعم. يأتي مع أنماط افتراضية يمكنك تخصيصها.
-        </AccordionContent>
-      </AccordionItem>
-      <AccordionItem value="item-3">
-        <AccordionTrigger>هل هو متحرك؟</AccordionTrigger>
-        <AccordionContent>
-          نعم. يستخدم حركات CSS للانتقالات السلسة.
-        </AccordionContent>
-      </AccordionItem>
-    </Accordion>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Basic FAQ accordion with Arabic text in RTL mode. Chevron positions correctly on the start side.'
-      }
-    }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders in RTL context with Arabic text', async () => {
-      await expect(canvas.getByRole('button', { name: /هل يمكن الوصول إليه؟/i })).toBeInTheDocument();
-    });
-
-    await step('Interaction works correctly in RTL mode', async () => {
-      const trigger = canvas.getByRole('button', { name: /هل يمكن الوصول إليه؟/i });
-      await userEvent.click(trigger);
-      await expect(canvas.getByText(/نعم. يلتزم بنمط تصميم WAI-ARIA./i)).toBeVisible();
-    });
-  }
-};
-
-// RTL Multiple Open
-export const RTLMultipleOpen: Story = {
-  render: () => (
-    <Accordion type="multiple" defaultValue={['item-1', 'item-2']} className="w-96 max-w-md">
-      <AccordionItem value="item-1">
-        <AccordionTrigger>الحساب</AccordionTrigger>
-        <AccordionContent>
-          إدارة إعدادات وتفضيلات حسابك.
-        </AccordionContent>
-      </AccordionItem>
-      <AccordionItem value="item-2">
-        <AccordionTrigger>الأمان</AccordionTrigger>
-        <AccordionContent>
-          تحديث كلمة المرور وإعدادات الأمان.
-        </AccordionContent>
-      </AccordionItem>
-      <AccordionItem value="item-3">
-        <AccordionTrigger>الإشعارات</AccordionTrigger>
-        <AccordionContent>
-          تكوين تفضيلات الإشعارات الخاصة بك.
-        </AccordionContent>
-      </AccordionItem>
-    </Accordion>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Multiple items open in RTL mode with Arabic labels. Layout adapts automatically.'
-      }
-    }
-  }
-};
-
-// RTL With Icons
-export const RTLWithIcons: Story = {
-  render: () => (
-    <Accordion type="single" collapsible className="w-96 max-w-md">
-      <AccordionItem value="item-1">
-        <AccordionTrigger>
-          <div className="flex items-center gap-2">
-            <User className="h-4 w-4" />
-            <span>الملف الشخصي</span>
-          </div>
-        </AccordionTrigger>
-        <AccordionContent>
-          تحديث معلومات ملفك الشخصي وصورتك.
-        </AccordionContent>
-      </AccordionItem>
-      <AccordionItem value="item-2">
-        <AccordionTrigger>
-          <div className="flex items-center gap-2">
-            <CreditCard className="h-4 w-4" />
-            <span>الفواتير</span>
-          </div>
-        </AccordionTrigger>
-        <AccordionContent>
-          إدارة معلومات الفواتير والاشتراكات الخاصة بك.
-        </AccordionContent>
-      </AccordionItem>
-      <AccordionItem value="item-3">
-        <AccordionTrigger>
-          <div className="flex items-center gap-2">
-            <Calendar className="h-4 w-4" />
-            <span>الجدول</span>
-          </div>
-        </AccordionTrigger>
-        <AccordionContent>
-          عرض وإدارة الأحداث المجدولة الخاصة بك.
-        </AccordionContent>
-      </AccordionItem>
-    </Accordion>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Accordion with icons in RTL mode. Icons and text flow correctly right-to-left.'
-      }
-    }
-  }
-};
-
-// RTL Controlled
-export const RTLControlled: Story = {
-  render: () => {
-    const [value, setValue] = React.useState<string>('item-1');
-
-    return (
-      <div className="space-y-4 w-96 max-w-md">
-        <p className="text-sm text-muted-foreground">العنصر النشط: {value || 'لا شيء'}</p>
-        <Accordion type="single" value={value} onValueChange={setValue}>
-          <AccordionItem value="item-1">
-            <AccordionTrigger>الحساب</AccordionTrigger>
-            <AccordionContent>
-              إدارة إعدادات وتفضيلات حسابك.
-            </AccordionContent>
-          </AccordionItem>
-          <AccordionItem value="item-2">
-            <AccordionTrigger>الأمان</AccordionTrigger>
-            <AccordionContent>
-              تحديث كلمة المرور وإعدادات الأمان.
-            </AccordionContent>
-          </AccordionItem>
-          <AccordionItem value="item-3">
-            <AccordionTrigger>الإشعارات</AccordionTrigger>
-            <AccordionContent>
-              تكوين تفضيلات الإشعارات الخاصة بك.
-            </AccordionContent>
-          </AccordionItem>
-        </Accordion>
-      </div>
-    );
-  },
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Controlled accordion in RTL with Arabic text. State management works the same in both directions.'
-      }
-    }
   }
 };

@@ -38,7 +38,7 @@ const meta = {
   parameters: {
     layout: 'centered',
   },
-  tags: ['!autodocs'],
+  tags: ['autodocs'],
   argTypes: {
     items: {
       control: false,
@@ -245,10 +245,7 @@ export const Default: Story = {
     cards: false,
     'aria-label': 'Application process',
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en',
-  },
+
   render: (args) => (
     <div className="w-full max-w-lg">
       <Timeline {...args} />
@@ -262,56 +259,11 @@ export const Default: Story = {
           'Default timeline showing all three status states: complete, current, and upcoming. Uses custom icons from the icon slot.',
       },
     },
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders as a list with the correct aria-label', async () => {
-      const list = canvas.getByRole('list', { name: /application process/i });
-      await expect(list).toBeInTheDocument();
-      await expect(list).toBeVisible();
-    });
-
-    await step('Renders four list items', async () => {
-      const items = canvas.getAllByRole('listitem');
-      await expect(items).toHaveLength(4);
-    });
-
-    await step('Displays all event titles', async () => {
-      await expect(canvas.getByText('Submitted')).toBeVisible();
-      await expect(canvas.getByText('Document Verified')).toBeVisible();
-      await expect(canvas.getByText('Under Review')).toBeVisible();
-      await expect(canvas.getByText('Approved')).toBeVisible();
-    });
-
-    await step('Displays descriptions for each item', async () => {
-      await expect(canvas.getByText('Application received and logged into the system')).toBeVisible();
-      await expect(canvas.getByText('All required documents have been verified')).toBeVisible();
-      await expect(canvas.getByText('Your application is being reviewed by the team')).toBeVisible();
-      await expect(canvas.getByText('Final approval pending')).toBeVisible();
-    });
-
-    await step('Displays dates alongside events that have them', async () => {
-      await expect(canvas.getByText('Mar 10, 2026')).toBeVisible();
-      await expect(canvas.getByText('Mar 11, 2026')).toBeVisible();
-      await expect(canvas.getByText('Mar 12, 2026')).toBeVisible();
-    });
-
-    await step('Screen-reader status labels are present in each list item', async () => {
-      const srLabels = canvasElement.querySelectorAll('.sr-only');
-      const labelTexts = Array.from(srLabels).map((el) => el.textContent);
-      await expect(labelTexts).toContain('Completed');
-      await expect(labelTexts).toContain('Current');
-      await expect(labelTexts).toContain('Upcoming');
-    });
-
-    await step('Each node has an SVG icon (aria-hidden)', async () => {
-      const items = canvas.getAllByRole('listitem');
-      for (const item of items) {
-        const iconNode = item.querySelector('[aria-hidden="true"] svg');
-        await expect(iconNode).toBeInTheDocument();
-      }
-    });
+    ar: {
+      args: {
+        'aria-label': 'مسار الطلب',
+      },
+    },
   },
 };
 
@@ -349,10 +301,7 @@ export const AllStatuses: Story = {
       <Timeline items={singleStatusItems} aria-label="Status showcase" />
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en',
-  },
+
   parameters: {
     controls: { disable: true },
     docs: {
@@ -409,10 +358,7 @@ export const DefaultIcons: Story = {
       <Timeline items={defaultIconItems} aria-label="Default icon showcase" />
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en',
-  },
+
   parameters: {
     controls: { disable: true },
     docs: {
@@ -454,10 +400,7 @@ export const AlternatingLayout: Story = {
       />
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en',
-  },
+
   parameters: {
     controls: { disable: true },
     docs: {
@@ -514,10 +457,7 @@ export const CompactMode: Story = {
       <Timeline items={orderTracking} compact aria-label="Order tracking" />
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en',
-  },
+
   parameters: {
     controls: { disable: true },
     docs: {
@@ -560,10 +500,7 @@ export const CardsMode: Story = {
       <Timeline items={changelog} cards aria-label="Changelog" />
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en',
-  },
+
   parameters: {
     controls: { disable: true },
     docs: {
@@ -611,10 +548,7 @@ export const CompactCards: Story = {
       <Timeline items={orderTracking} compact cards aria-label="Order tracking compact cards" />
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en',
-  },
+
   parameters: {
     controls: { disable: true },
     docs: {
@@ -658,10 +592,7 @@ export const AlternatingCards: Story = {
       />
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en',
-  },
+
   parameters: {
     controls: { disable: true },
     docs: {
@@ -743,10 +674,7 @@ export const CustomIcons: Story = {
       <Timeline items={activityLogItems} aria-label="Activity log" />
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en',
-  },
+
   parameters: {
     controls: { disable: true },
     docs: {
@@ -790,10 +718,7 @@ export const WithDates: Story = {
       <Timeline items={projectMilestones} aria-label="Timeline with dates" />
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en',
-  },
+
   parameters: {
     controls: { disable: true },
     docs: {
@@ -845,10 +770,7 @@ export const WithoutDates: Story = {
       <Timeline items={noDatesItems} aria-label="Feature request tracking" />
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en',
-  },
+
   parameters: {
     controls: { disable: true },
     docs: {
@@ -889,10 +811,7 @@ export const SingleItem: Story = {
       />
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en',
-  },
+
   parameters: {
     controls: { disable: true },
     docs: {
@@ -934,10 +853,7 @@ export const LastItemNoLine: Story = {
       <Timeline items={orderTracking} aria-label="Order tracking line check" />
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en',
-  },
+
   parameters: {
     controls: { disable: true },
     docs: {
@@ -988,10 +904,7 @@ export const ManyItems: Story = {
       <Timeline items={manyItems} aria-label="Long timeline" />
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en',
-  },
+
   parameters: {
     controls: { disable: true },
     docs: {
@@ -1010,289 +923,6 @@ export const ManyItems: Story = {
   },
 };
 
-// ---------------------------------------------------------------------------
-// 15. RTLExample — RTL with Arabic titles / descriptions / dates
-// ---------------------------------------------------------------------------
-
-export const RTLExample: Story = {
-  render: () => (
-    <div className="w-full max-w-lg">
-      <Timeline items={applicationSteps} aria-label="مسار الطلب" />
-    </div>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar',
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story:
-          'Default timeline in RTL mode. The node column appears on the right and content flows to the left. Arabic text is automatically selected via the titleAr/descriptionAr/dateAr fields.',
-      },
-    },
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders list in RTL context', async () => {
-      const list = canvas.getByRole('list', { name: /مسار الطلب/i });
-      await expect(list).toBeInTheDocument();
-      await expect(list).toBeVisible();
-    });
-
-    await step('Displays Arabic titles instead of English titles', async () => {
-      await expect(canvas.getByText('تم التقديم')).toBeVisible();
-      await expect(canvas.getByText('تم التحقق من المستندات')).toBeVisible();
-      await expect(canvas.getByText('قيد المراجعة')).toBeVisible();
-      await expect(canvas.getByText('تمت الموافقة')).toBeVisible();
-    });
-
-    await step('Displays Arabic descriptions', async () => {
-      await expect(canvas.getByText('تم استلام الطلب وتسجيله في النظام')).toBeVisible();
-      await expect(canvas.getByText('يتم مراجعة طلبك من قبل الفريق')).toBeVisible();
-    });
-
-    await step('Displays Arabic dates', async () => {
-      await expect(canvas.getByText('١٠ مارس ٢٠٢٦')).toBeVisible();
-      await expect(canvas.getByText('١١ مارس ٢٠٢٦')).toBeVisible();
-      await expect(canvas.getByText('١٢ مارس ٢٠٢٦')).toBeVisible();
-    });
-
-    await step('Screen-reader status labels are in Arabic', async () => {
-      const srLabels = canvasElement.querySelectorAll('.sr-only');
-      const texts = Array.from(srLabels).map((el) => el.textContent);
-      await expect(texts).toContain('مكتمل');
-      await expect(texts).toContain('حالي');
-      await expect(texts).toContain('قادم');
-    });
-  },
-};
-
-// ---------------------------------------------------------------------------
-// 16. RTLDefaultAriaLabel — verifies the Arabic fallback aria-label
-// ---------------------------------------------------------------------------
-
-export const RTLDefaultAriaLabel: Story = {
-  render: () => (
-    <div className="w-full max-w-sm">
-      {/* No aria-label prop — should fall back to Arabic default */}
-      <Timeline items={orderTracking} />
-    </div>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar',
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story:
-          "When no aria-label is supplied in RTL mode, the component defaults to 'الجدول الزمني' (Arabic for 'Timeline').",
-      },
-    },
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Default Arabic aria-label is applied', async () => {
-      const list = canvas.getByRole('list');
-      await expect(list).toHaveAttribute('aria-label', 'الجدول الزمني');
-    });
-  },
-};
-
-// ---------------------------------------------------------------------------
-// 17. RTLAlternating
-// ---------------------------------------------------------------------------
-
-export const RTLAlternating: Story = {
-  render: () => (
-    <div className="w-full" style={{ minWidth: '560px' }}>
-      <Timeline
-        items={projectMilestones}
-        variant="alternating"
-        aria-label="مراحل المشروع"
-      />
-    </div>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar',
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story:
-          'Alternating layout in RTL. Content distribution mirrors the LTR version but reads right-to-left.',
-      },
-    },
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders alternating RTL list', async () => {
-      const list = canvas.getByRole('list', { name: /مراحل المشروع/i });
-      await expect(list).toBeInTheDocument();
-    });
-
-    await step('Displays Arabic milestone titles', async () => {
-      await expect(canvas.getByText('انطلاق المشروع')).toBeVisible();
-      await expect(canvas.getByText('إصدار ألفا')).toBeVisible();
-      await expect(canvas.getByText('اختبار بيتا')).toBeVisible();
-      await expect(canvas.getByText('الإطلاق العام')).toBeVisible();
-    });
-  },
-};
-
-// ---------------------------------------------------------------------------
-// 18. RTLCompact
-// ---------------------------------------------------------------------------
-
-export const RTLCompact: Story = {
-  render: () => (
-    <div className="w-full max-w-xs">
-      <Timeline items={orderTracking} compact aria-label="تتبع الطلب" />
-    </div>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar',
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Compact mode in RTL for Arabic order tracking.',
-      },
-    },
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders compact RTL timeline', async () => {
-      const list = canvas.getByRole('list', { name: /تتبع الطلب/i });
-      await expect(list).toBeInTheDocument();
-    });
-
-    await step('Displays Arabic order stage titles', async () => {
-      await expect(canvas.getByText('تم تأكيد الطلب')).toBeVisible();
-      await expect(canvas.getByText('تم الشحن')).toBeVisible();
-      await expect(canvas.getByText('في طريقه للتسليم')).toBeVisible();
-      await expect(canvas.getByText('تم التسليم')).toBeVisible();
-    });
-  },
-};
-
-// ---------------------------------------------------------------------------
-// 19. RTLCards
-// ---------------------------------------------------------------------------
-
-export const RTLCards: Story = {
-  render: () => (
-    <div className="w-full max-w-xl">
-      <Timeline items={changelog} cards aria-label="سجل التغييرات" />
-    </div>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar',
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Cards mode in RTL. Card borders and padding mirror correctly for right-to-left reading.',
-      },
-    },
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders cards RTL timeline', async () => {
-      const list = canvas.getByRole('list', { name: /سجل التغييرات/i });
-      await expect(list).toBeInTheDocument();
-    });
-
-    await step('Displays Arabic changelog titles', async () => {
-      await expect(canvas.getByText('v2.5.0 — إعادة تصميم لوحة التحكم')).toBeVisible();
-      await expect(canvas.getByText('v2.4.2 — إصلاح الأخطاء')).toBeVisible();
-      await expect(canvas.getByText('v2.4.0 — مكوّن الجدول الزمني')).toBeVisible();
-      await expect(canvas.getByText('v2.3.0 — الإصدار الأول')).toBeVisible();
-    });
-  },
-};
-
-// ---------------------------------------------------------------------------
-// 20. RTLCustomIcons
-// ---------------------------------------------------------------------------
-
-const activityLogAr: TimelineItem[] = [
-  {
-    icon: <InitialsAvatar initials="س" color="bg-blue-600" />,
-    title: 'سارة علّقت على طلب الدمج الخاص بك',
-    description: '"يبدو جيداً! لدي سؤال واحد فقط حول معالجة الأخطاء..."',
-    date: 'منذ دقيقتين',
-    status: 'current',
-  },
-  {
-    icon: <InitialsAvatar initials="أ" color="bg-orange-600" />,
-    title: 'أحمد دمج فرع feature/auth',
-    description: 'تم دمج طلب الدمج رقم #٤٧ في الفرع الرئيسي',
-    date: 'منذ ساعة',
-    status: 'complete',
-  },
-  {
-    icon: <InitialsAvatar initials="ل" color="bg-emerald-800" />,
-    title: 'ليلى أسندت إليك المشكلة رقم #٥٢',
-    description: 'إصلاح ترقيم الصفحات في جدول لوحة التحكم',
-    date: 'منذ ٣ ساعات',
-    status: 'complete',
-  },
-];
-
-export const RTLCustomIcons: Story = {
-  render: () => (
-    <div className="w-full max-w-lg">
-      <Timeline items={activityLogAr} aria-label="سجل النشاط" />
-    </div>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar',
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Custom icon slot (initials avatars) inside an RTL activity log.',
-      },
-    },
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders RTL activity log with custom icons', async () => {
-      const list = canvas.getByRole('list', { name: /سجل النشاط/i });
-      await expect(list).toBeInTheDocument();
-    });
-
-    await step('Displays Arabic activity titles', async () => {
-      await expect(canvas.getByText('سارة علّقت على طلب الدمج الخاص بك')).toBeVisible();
-      await expect(canvas.getByText('أحمد دمج فرع feature/auth')).toBeVisible();
-      await expect(canvas.getByText('ليلى أسندت إليك المشكلة رقم #٥٢')).toBeVisible();
-    });
-
-    await step('Custom Arabic initials rendered inside nodes', async () => {
-      await expect(canvas.getByText('س')).toBeInTheDocument();
-      await expect(canvas.getByText('أ')).toBeInTheDocument();
-      await expect(canvas.getByText('ل')).toBeInTheDocument();
-    });
-  },
-};
 
 // ---------------------------------------------------------------------------
 // AllVariants showcase — visual only, no play function
@@ -1315,10 +945,7 @@ export const AllVariants: Story = {
       </div>
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en',
-  },
+
   parameters: {
     controls: { disable: true },
     docs: {

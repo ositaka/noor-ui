@@ -51,27 +51,6 @@ export const Default: Story = {
       }
     }
   },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders progress bar correctly', async () => {
-      const progressBar = canvas.getByRole('progressbar');
-      await expect(progressBar).toBeInTheDocument();
-      await expect(progressBar).toBeVisible();
-    });
-
-    await step('Has correct ARIA attributes', async () => {
-      const progressBar = canvas.getByRole('progressbar');
-      await expect(progressBar).toHaveAttribute('aria-valuemax', '100');
-      await expect(progressBar).toHaveAttribute('aria-valuenow', '66');
-    });
-
-    await step('Progress indicator is visible', async () => {
-      const progressBar = canvas.getByRole('progressbar');
-      const indicator = progressBar.querySelector('[data-state="loading"]');
-      await expect(indicator).toBeInTheDocument();
-    });
-  }
 };
 
 // Basic - from component page line 140

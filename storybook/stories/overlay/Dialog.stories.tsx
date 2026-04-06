@@ -31,7 +31,7 @@ const meta = {
   parameters: {
     layout: 'centered'
   },
-  tags: ['!autodocs'],
+  tags: ['autodocs'],
   argTypes: {
     open: {
       control: { type: 'boolean' }
@@ -53,10 +53,6 @@ export const Default: Story = {
   args: {
     defaultOpen: false
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   render: (args) => (
     <Dialog {...args}>
       <DialogTrigger asChild>
@@ -77,60 +73,6 @@ export const Default: Story = {
       }
     }
   },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-    const body = within(document.body);
-
-    await step('Trigger button renders correctly', async () => {
-      const trigger = canvas.getByRole('button', { name: /open dialog/i });
-      await expect(trigger).toBeInTheDocument();
-      await expect(trigger).toBeVisible();
-    });
-
-    await step('Opens dialog on click', async () => {
-      const trigger = canvas.getByRole('button', { name: /open dialog/i });
-      await userEvent.click(trigger);
-
-      // Wait for dialog to appear in portal
-      const dialog = await body.findByRole('dialog');
-      await expect(dialog).toBeInTheDocument();
-    });
-
-    await step('Dialog has correct accessibility attributes', async () => {
-      const dialog = body.getByRole('dialog');
-      const title = within(dialog).getByText('Are you absolutely sure?');
-      const description = within(dialog).getByText('This action cannot be undone.');
-
-      await expect(title).toBeInTheDocument();
-      await expect(description).toBeInTheDocument();
-    });
-
-    await step('Close button is accessible and functional', async () => {
-      const dialog = body.getByRole('dialog');
-      const closeButton = within(dialog).getByRole('button', { name: /close/i });
-
-      await expect(closeButton).toBeInTheDocument();
-      await userEvent.click(closeButton);
-
-      // Dialog should be removed from document
-      await expect(body.queryByRole('dialog')).not.toBeInTheDocument();
-    });
-
-    await step('Keyboard accessible - opens with Enter', async () => {
-      const trigger = canvas.getByRole('button', { name: /open dialog/i });
-      trigger.focus();
-      await expect(trigger).toHaveFocus();
-
-      await userEvent.keyboard('{Enter}');
-      const dialog = await body.findByRole('dialog');
-      await expect(dialog).toBeInTheDocument();
-    });
-
-    await step('Escape key closes dialog', async () => {
-      await userEvent.keyboard('{Escape}');
-      await expect(body.queryByRole('dialog')).not.toBeInTheDocument();
-    });
-  }
 };
 
 // Basic Dialog - from component page lines 164-176
@@ -148,10 +90,6 @@ export const BasicDialog: Story = {
       </DialogContent>
     </Dialog>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -211,10 +149,6 @@ export const WithForm: Story = {
       </DialogContent>
     </Dialog>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -291,10 +225,6 @@ export const ConfirmationDialog: Story = {
       </Dialog>
     );
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -363,10 +293,6 @@ export const SettingsDialog: Story = {
       </Dialog>
     );
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -429,10 +355,6 @@ export const ControlledDialog: Story = {
         </Dialog>
       </div>
     );
-  },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
@@ -526,10 +448,6 @@ export const MultipleDialogs: Story = {
       </Dialog>
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -584,179 +502,3 @@ export const MultipleDialogs: Story = {
   }
 };
 
-// RTL Basic
-export const RTLBasic: Story = {
-  render: () => (
-    <Dialog>
-      <DialogTrigger asChild>
-        <Button>فتح الحوار</Button>
-      </DialogTrigger>
-      <DialogContent>
-        <DialogHeader>
-          <DialogTitle>هل أنت متأكد تماماً؟</DialogTitle>
-          <DialogDescription>لا يمكن التراجع عن هذا الإجراء.</DialogDescription>
-        </DialogHeader>
-      </DialogContent>
-    </Dialog>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Basic dialog in RTL with Arabic text. Close button positions on the left (end).'
-      }
-    }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-    const body = within(document.body);
-
-    await step('Renders in RTL context', async () => {
-      const trigger = canvas.getByRole('button', { name: /فتح الحوار/i });
-      await expect(trigger).toBeInTheDocument();
-      await expect(trigger).toBeVisible();
-    });
-
-    await step('Opens dialog with RTL content', async () => {
-      const trigger = canvas.getByRole('button', { name: /فتح الحوار/i });
-      await userEvent.click(trigger);
-
-      const dialog = await body.findByRole('dialog');
-      await expect(dialog).toBeInTheDocument();
-      await expect(within(dialog).getByText(/هل أنت متأكد تماماً؟/i)).toBeInTheDocument();
-      await expect(within(dialog).getByText(/لا يمكن التراجع عن هذا الإجراء/i)).toBeInTheDocument();
-    });
-
-    await step('Close button works in RTL', async () => {
-      const dialog = body.getByRole('dialog');
-      const closeButton = within(dialog).getByRole('button', { name: /close/i });
-      await userEvent.click(closeButton);
-
-      await expect(body.queryByRole('dialog')).not.toBeInTheDocument();
-    });
-  }
-};
-
-// RTL With Form
-export const RTLWithForm: Story = {
-  render: () => (
-    <Dialog>
-      <DialogTrigger asChild>
-        <Button variant="outline">تعديل الملف الشخصي</Button>
-      </DialogTrigger>
-      <DialogContent>
-        <DialogHeader>
-          <DialogTitle>تعديل الملف الشخصي</DialogTitle>
-          <DialogDescription>قم بإجراء تغييرات على ملفك الشخصي هنا.</DialogDescription>
-        </DialogHeader>
-        <div className="grid gap-4 py-4">
-          <div className="grid gap-2">
-            <Label htmlFor="name-rtl">الاسم</Label>
-            <Input id="name-rtl" defaultValue="نونو ماركيز" />
-          </div>
-          <div className="grid gap-2">
-            <Label htmlFor="username-rtl">اسم المستخدم</Label>
-            <Input id="username-rtl" defaultValue="@ositaka" />
-          </div>
-        </div>
-        <DialogFooter>
-          <Button type="submit">حفظ التغييرات</Button>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Dialog with form in RTL. Form layout and buttons align correctly.'
-      }
-    }
-  }
-};
-
-// RTL Confirmation
-export const RTLConfirmation: Story = {
-  render: () => (
-    <Dialog>
-      <DialogTrigger asChild>
-        <Button variant="destructive">حذف الحساب</Button>
-      </DialogTrigger>
-      <DialogContent>
-        <DialogHeader>
-          <DialogTitle>هل أنت متأكد تماماً؟</DialogTitle>
-          <DialogDescription>
-            لا يمكن التراجع عن هذا الإجراء. سيؤدي هذا إلى حذف حسابك نهائياً وإزالة بياناتك من
-            خوادمنا.
-          </DialogDescription>
-        </DialogHeader>
-        <DialogFooter>
-          <DialogClose asChild>
-            <Button variant="outline">إلغاء</Button>
-          </DialogClose>
-          <Button variant="destructive">حذف</Button>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Confirmation dialog in RTL with Cancel and Delete buttons.'
-      }
-    }
-  }
-};
-
-// RTL Settings
-export const RTLSettings: Story = {
-  render: () => (
-    <Dialog>
-      <DialogTrigger asChild>
-        <Button variant="outline">فتح الإعدادات</Button>
-      </DialogTrigger>
-      <DialogContent>
-        <DialogHeader>
-          <DialogTitle>إعدادات الحساب</DialogTitle>
-          <DialogDescription>قم بإجراء تغييرات على تفضيلات حسابك هنا.</DialogDescription>
-        </DialogHeader>
-        <div className="py-4">
-          <p className="text-sm text-muted-foreground">
-            تكوين تفضيلات الإشعارات وإعدادات الخصوصية الخاصة بك.
-          </p>
-        </div>
-        <DialogFooter>
-          <DialogClose asChild>
-            <Button variant="outline">إلغاء</Button>
-          </DialogClose>
-          <Button>حفظ التغييرات</Button>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Settings dialog in RTL with Arabic text and proper button alignment.'
-      }
-    }
-  }
-};

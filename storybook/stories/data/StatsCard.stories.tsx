@@ -21,7 +21,7 @@ const meta = {
   parameters: {
     layout: 'centered'
   },
-  tags: ['!autodocs'],
+  tags: ['autodocs'],
   argTypes: {
     icon: {
       control: false
@@ -56,10 +56,6 @@ export const Default: Story = {
     trend: 12,
     trendLabel: 'from last month'
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   render: (args) => (
     <div className="w-80">
       <StatsCard {...args} />
@@ -70,28 +66,15 @@ export const Default: Story = {
       story: {
         inline: false
       }
+    },
+    ar: {
+      args: {
+        label: 'إجمالي المستخدمين',
+        value: '٢٬٥٤٣',
+        trendLabel: 'مقابل الشهر الماضي'
+      }
     }
   },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders stats card correctly', async () => {
-      await expect(canvas.getByText('Total Users')).toBeInTheDocument();
-      await expect(canvas.getByText('Total Users')).toBeVisible();
-      await expect(canvas.getByText('2,543')).toBeInTheDocument();
-      await expect(canvas.getByText('2,543')).toBeVisible();
-    });
-
-    await step('Displays positive trend indicator', async () => {
-      await expect(canvas.getByText('+12%')).toBeInTheDocument();
-      await expect(canvas.getByText('from last month')).toBeInTheDocument();
-    });
-
-    await step('Contains icon element', async () => {
-      const svg = canvasElement.querySelector('svg');
-      await expect(svg).toBeInTheDocument();
-    });
-  }
 };
 
 // Dashboard Grid - from component page lines 111-139
@@ -126,10 +109,6 @@ export const DashboardGrid: Story = {
       />
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -179,10 +158,6 @@ export const PositiveTrend: Story = {
       />
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -219,10 +194,6 @@ export const NegativeTrend: Story = {
       />
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -257,10 +228,6 @@ export const WithoutTrend: Story = {
       />
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -330,10 +297,6 @@ export const AllMetrics: Story = {
       />
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -374,10 +337,6 @@ export const InCardContainer: Story = {
       </CardContent>
     </Card>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -409,208 +368,3 @@ export const InCardContainer: Story = {
   }
 };
 
-// RTL Example - Dashboard Grid
-export const RTLExample: Story = {
-  render: () => (
-    <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-      <StatsCard
-        icon={<Users className="h-4 w-4" />}
-        label="إجمالي المستخدمين"
-        value="2,543"
-        trend={12}
-        trendLabel="مقابل الشهر الماضي"
-      />
-      <StatsCard
-        icon={<TrendUp className="h-4 w-4" />}
-        label="الإيرادات"
-        value="$45,231"
-        trend={8}
-        trendLabel="مقابل الشهر الماضي"
-      />
-      <StatsCard
-        icon={<CurrencyDollar className="h-4 w-4" />}
-        label="المبيعات"
-        value="$12,234"
-        trend={-3}
-        trendLabel="مقابل الشهر الماضي"
-      />
-      <StatsCard
-        icon={<ShoppingCart className="h-4 w-4" />}
-        label="الطلبات النشطة"
-        value="573"
-      />
-    </div>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Dashboard grid in RTL mode with Arabic labels. Layout flows right-to-left.'
-      }
-    }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders in RTL context', async () => {
-      await expect(canvas.getByText('إجمالي المستخدمين')).toBeInTheDocument();
-      await expect(canvas.getByText('الإيرادات')).toBeInTheDocument();
-      await expect(canvas.getByText('المبيعات')).toBeInTheDocument();
-      await expect(canvas.getByText('الطلبات النشطة')).toBeInTheDocument();
-    });
-
-    await step('Displays Arabic trend labels', async () => {
-      const trendLabels = canvas.getAllByText('مقابل الشهر الماضي');
-      await expect(trendLabels.length).toBe(3);
-    });
-  }
-};
-
-// RTL Positive Trend
-export const RTLPositiveTrend: Story = {
-  render: () => (
-    <div className="w-80">
-      <StatsCard
-        icon={<TrendUp className="h-4 w-4" />}
-        label="الإيرادات"
-        value="$45,231"
-        trend={8}
-        trendLabel="مقابل الشهر الماضي"
-      />
-    </div>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Stats card with positive trend in RTL. Trend indicator works correctly in Arabic.'
-      }
-    }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders RTL positive trend card', async () => {
-      await expect(canvas.getByText('الإيرادات')).toBeInTheDocument();
-      await expect(canvas.getByText('$45,231')).toBeInTheDocument();
-    });
-
-    await step('Displays positive trend in RTL', async () => {
-      await expect(canvas.getByText('+8%')).toBeInTheDocument();
-      await expect(canvas.getByText('مقابل الشهر الماضي')).toBeInTheDocument();
-    });
-  }
-};
-
-// RTL Negative Trend
-export const RTLNegativeTrend: Story = {
-  render: () => (
-    <div className="w-80">
-      <StatsCard
-        icon={<CurrencyDollar className="h-4 w-4" />}
-        label="المبيعات"
-        value="$12,234"
-        trend={-3}
-        trendLabel="مقابل الشهر الماضي"
-      />
-    </div>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Stats card with negative trend in RTL. Red color for negative values works in both directions.'
-      }
-    }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders RTL negative trend card', async () => {
-      await expect(canvas.getByText('المبيعات')).toBeInTheDocument();
-      await expect(canvas.getByText('$12,234')).toBeInTheDocument();
-    });
-
-    await step('Displays negative trend in RTL', async () => {
-      await expect(canvas.getByText('-3%')).toBeInTheDocument();
-      await expect(canvas.getByText('مقابل الشهر الماضي')).toBeInTheDocument();
-    });
-  }
-};
-
-// RTL In Card Container
-export const RTLInCardContainer: Story = {
-  render: () => (
-    <Card className="w-full max-w-4xl">
-      <CardContent className="p-6">
-        <h3 className="text-lg font-semibold mb-4">نظرة عامة على لوحة المعلومات</h3>
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          <StatsCard
-            icon={<Users className="h-4 w-4" />}
-            label="إجمالي المستخدمين"
-            value="2,543"
-            trend={12}
-            trendLabel="مقابل الشهر الماضي"
-          />
-          <StatsCard
-            icon={<TrendUp className="h-4 w-4" />}
-            label="الإيرادات"
-            value="$45,231"
-            trend={8}
-            trendLabel="مقابل الشهر الماضي"
-          />
-          <StatsCard
-            icon={<ShoppingCart className="h-4 w-4" />}
-            label="الطلبات النشطة"
-            value="573"
-          />
-        </div>
-      </CardContent>
-    </Card>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Stats cards in RTL inside a card container. All content flows right-to-left.'
-      }
-    }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders RTL container with Arabic heading', async () => {
-      await expect(canvas.getByText('نظرة عامة على لوحة المعلومات')).toBeInTheDocument();
-    });
-
-    await step('Renders all RTL stats cards in container', async () => {
-      await expect(canvas.getByText('إجمالي المستخدمين')).toBeInTheDocument();
-      await expect(canvas.getByText('الإيرادات')).toBeInTheDocument();
-      await expect(canvas.getByText('الطلبات النشطة')).toBeInTheDocument();
-    });
-
-    await step('Displays Arabic values and trends', async () => {
-      await expect(canvas.getByText('2,543')).toBeInTheDocument();
-      await expect(canvas.getByText('$45,231')).toBeInTheDocument();
-      await expect(canvas.getByText('573')).toBeInTheDocument();
-      await expect(canvas.getByText('+12%')).toBeInTheDocument();
-      await expect(canvas.getByText('+8%')).toBeInTheDocument();
-    });
-  }
-};

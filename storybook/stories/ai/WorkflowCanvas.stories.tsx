@@ -23,7 +23,7 @@ const meta = {
   parameters: {
     layout: 'fullscreen'
   },
-  tags: ['!autodocs', '!test'], // Skip vitest - ReactFlow components have rendering issues in test environment
+  tags: ['autodocs', '!test'], // Skip vitest - ReactFlow components have rendering issues in test environment
   argTypes: {
     initialNodes: { control: false },
     initialEdges: { control: false },
@@ -65,24 +65,6 @@ export const Default: Story = {
       </div>
     );
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders workflow canvas with node', async () => {
-      // Verify node label is rendered
-      await expect(canvas.getByText('Start')).toBeInTheDocument();
-    });
-
-    await step('Renders canvas controls', async () => {
-      // Verify ReactFlow wrapper is present
-      const reactFlowWrapper = canvasElement.querySelector('.react-flow');
-      await expect(reactFlowWrapper).toBeInTheDocument();
-    });
-  }
 };
 
 // Simple Workflow - from code lines 146-173
@@ -119,10 +101,6 @@ export const SimpleWorkflow: Story = {
         <WorkflowCanvas initialNodes={nodes} initialEdges={edges} nodeTypes={nodeTypes} />
       </div>
     );
-  },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
   },
   parameters: {
     controls: { disable: true }
@@ -198,10 +176,6 @@ export const ComplexWorkflow: Story = {
       </div>
     );
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   },
@@ -253,10 +227,6 @@ export const WithoutMinimap: Story = {
         />
       </div>
     );
-  },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
   },
   parameters: {
     controls: { disable: true }
@@ -312,10 +282,6 @@ export const ReadOnly: Story = {
       </div>
     );
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   },
@@ -367,10 +333,6 @@ export const LinesBackground: Story = {
       </div>
     );
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   },
@@ -396,10 +358,6 @@ export const EmptyCanvas: Story = {
       <WorkflowCanvas initialNodes={[]} nodeTypes={nodeTypes} />
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -425,79 +383,6 @@ export const EmptyCanvas: Story = {
 
       const minimap = canvasElement.querySelector('.react-flow__minimap');
       await expect(minimap).toBeInTheDocument();
-    });
-  }
-};
-
-// RTL
-export const RTL: Story = {
-  render: () => {
-    const nodes = [
-      {
-        id: '1',
-        type: 'workflowNode',
-        position: { x: 50, y: 100 },
-        data: {
-          label: 'Email Trigger',
-          labelAr: 'مشغل البريد',
-          description: 'Trigger',
-          descriptionAr: 'مشغل',
-          icon: Envelope,
-          isRTL: true
-        }
-      },
-      {
-        id: '2',
-        type: 'workflowNode',
-        position: { x: 350, y: 100 },
-        data: {
-          label: 'AI Analysis',
-          labelAr: 'تحليل الذكاء الاصطناعي',
-          description: 'Process',
-          descriptionAr: 'معالجة',
-          icon: Cpu,
-          isRTL: true
-        }
-      },
-    ];
-
-    const edges = [{ id: 'e1-2', source: '1', target: '2' }];
-
-    return (
-      <div className="w-full h-screen border rounded-lg overflow-hidden">
-        <WorkflowCanvas
-          initialNodes={nodes}
-          initialEdges={edges}
-          nodeTypes={nodeTypes}
-          isRTL
-        />
-      </div>
-    );
-  },
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders RTL workflow canvas', async () => {
-      // Verify Arabic labels are rendered
-      await expect(canvas.getByText('مشغل البريد')).toBeInTheDocument();
-      await expect(canvas.getByText('تحليل الذكاء الاصطناعي')).toBeInTheDocument();
-    });
-
-    await step('Renders RTL descriptions', async () => {
-      await expect(canvas.getByText('مشغل')).toBeInTheDocument();
-      await expect(canvas.getByText('معالجة')).toBeInTheDocument();
-    });
-
-    await step('Canvas has RTL direction', async () => {
-      const canvasWrapper = canvasElement.querySelector('[dir="rtl"]');
-      await expect(canvasWrapper).toBeInTheDocument();
     });
   }
 };

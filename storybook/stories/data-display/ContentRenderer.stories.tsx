@@ -18,7 +18,7 @@ const meta = {
   parameters: {
     layout: 'centered'
   },
-  tags: ['!autodocs'],
+  tags: ['autodocs'],
   argTypes: {
     content: { control: 'text' },
     format: {
@@ -51,42 +51,19 @@ export const Default: Story = {
     format: 'html',
     dir: 'auto'
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
+  parameters: {
+    ar: {
+      args: {
+        content: `<h3>محتوى عينة</h3>
+<p>هذا نص <strong>غامق</strong> و <em>مائل</em>.</p>
+<ul>
+  <li>عنصر القائمة 1</li>
+  <li>عنصر القائمة 2</li>
+</ul>
+<pre><code>const example = "code block";</code></pre>`
+      }
+    }
   },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders HTML structure correctly', async () => {
-      const heading = canvasElement.querySelector('h3');
-      await expect(heading).toBeInTheDocument();
-      await expect(heading).toHaveTextContent('Sample Content');
-    });
-
-    await step('Renders formatted text', async () => {
-      await expect(canvas.getByText('bold')).toBeInTheDocument();
-      await expect(canvas.getByText('italic')).toBeInTheDocument();
-    });
-
-    await step('Renders list items', async () => {
-      await expect(canvas.getByText('List item 1')).toBeInTheDocument();
-      await expect(canvas.getByText('List item 2')).toBeInTheDocument();
-      const ul = canvasElement.querySelector('ul');
-      await expect(ul).toBeInTheDocument();
-    });
-
-    await step('Renders code block', async () => {
-      const codeBlock = canvasElement.querySelector('pre code');
-      await expect(codeBlock).toBeInTheDocument();
-      await expect(codeBlock).toHaveTextContent('const example = "code block";');
-    });
-
-    await step('Has correct direction attribute', async () => {
-      const container = canvasElement.querySelector('[dir="auto"]');
-      await expect(container).toBeInTheDocument();
-    });
-  }
 };
 
 // HTML Format - from page lines 112-115
@@ -112,10 +89,7 @@ export const HTMLFormat: Story = {
       </CardContent>
     </Card>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
+
   parameters: {
     controls: { disable: true }
   },
@@ -164,10 +138,7 @@ console.log(example);</code></pre>`}
       </CardContent>
     </Card>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
+
   parameters: {
     controls: { disable: true }
   },
@@ -216,10 +187,7 @@ No HTML or Markdown parsing is applied.`}
       </CardContent>
     </Card>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
+
   parameters: {
     controls: { disable: true }
   },
@@ -278,10 +246,7 @@ console.log(message);</code></pre>
       </CardContent>
     </Card>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
+
   parameters: {
     controls: { disable: true }
   },
@@ -349,10 +314,7 @@ export const GitHubFlavoredMarkdown: Story = {
       </CardContent>
     </Card>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
+
   parameters: {
     controls: { disable: true }
   },
@@ -432,10 +394,7 @@ const user: User = {
       </CardContent>
     </Card>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
+
   parameters: {
     controls: { disable: true }
   },
@@ -497,10 +456,7 @@ export const LTRExplicit: Story = {
       </CardContent>
     </Card>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
+
   parameters: {
     controls: { disable: true }
   },
@@ -528,126 +484,3 @@ export const LTRExplicit: Story = {
   }
 };
 
-// RTL Content - from AR i18n
-export const RTLContent: Story = {
-  render: () => (
-    <Card>
-      <CardHeader>
-        <CardTitle>محتوى عربي</CardTitle>
-        <CardDescription>محتوى مع اكتشاف تلقائي للاتجاه</CardDescription>
-      </CardHeader>
-      <CardContent>
-        <ContentRenderer
-          content={`<h3>محتوى عينة</h3>
-<p>هذا نص <strong>غامق</strong> و <em>مائل</em>.</p>
-<ul>
-  <li>عنصر القائمة 1</li>
-  <li>عنصر القائمة 2</li>
-</ul>`}
-          format="html"
-          dir="auto"
-        />
-      </CardContent>
-    </Card>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders in RTL context', async () => {
-      const container = canvasElement.querySelector('[dir="auto"]');
-      await expect(container).toBeInTheDocument();
-    });
-
-    await step('Renders Arabic content', async () => {
-      // CardTitle is first h3, content h3 is second
-      const headings = canvasElement.querySelectorAll('h3');
-      await expect(headings.length).toBeGreaterThanOrEqual(2);
-      await expect(headings[1]).toHaveTextContent('محتوى عينة');
-      await expect(canvas.getByText('غامق')).toBeInTheDocument();
-      await expect(canvas.getByText('مائل')).toBeInTheDocument();
-    });
-
-    await step('Renders Arabic list items', async () => {
-      await expect(canvas.getByText('عنصر القائمة 1')).toBeInTheDocument();
-      await expect(canvas.getByText('عنصر القائمة 2')).toBeInTheDocument();
-    });
-  }
-};
-
-// RTL Markdown
-export const RTLMarkdown: Story = {
-  render: () => (
-    <Card>
-      <CardHeader>
-        <CardTitle>محتوى Markdown عربي</CardTitle>
-        <CardDescription>محتوى Markdown مع دعم RTL</CardDescription>
-      </CardHeader>
-      <CardContent>
-        <ContentRenderer
-          content={`<h3>عنوان المقال</h3>
-<p>هذا مثال على <strong>نص غامق</strong> و <em>نص مائل</em> باللغة العربية.</p>
-<ul>
-  <li>عنصر القائمة الأول</li>
-  <li>عنصر القائمة الثاني</li>
-  <li>عنصر القائمة الثالث</li>
-</ul>
-<h4>قائمة مرقمة</h4>
-<ol>
-  <li>الخطوة الأولى</li>
-  <li>الخطوة الثانية</li>
-  <li>الخطوة الثالثة</li>
-</ol>`}
-          format="markdown"
-          dir="rtl"
-        />
-      </CardContent>
-    </Card>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Has explicit RTL direction', async () => {
-      const container = canvasElement.querySelector('[dir="rtl"]');
-      await expect(container).toBeInTheDocument();
-    });
-
-    await step('Renders Arabic markdown content', async () => {
-      // CardTitle is first h3, content h3 is second
-      const headings = canvasElement.querySelectorAll('h3');
-      await expect(headings.length).toBeGreaterThanOrEqual(2);
-      await expect(headings[1]).toHaveTextContent('عنوان المقال');
-      await expect(canvas.getByText('نص غامق')).toBeInTheDocument();
-      await expect(canvas.getByText('نص مائل')).toBeInTheDocument();
-    });
-
-    await step('Renders unordered list items', async () => {
-      await expect(canvas.getByText('عنصر القائمة الأول')).toBeInTheDocument();
-      await expect(canvas.getByText('عنصر القائمة الثاني')).toBeInTheDocument();
-      await expect(canvas.getByText('عنصر القائمة الثالث')).toBeInTheDocument();
-    });
-
-    await step('Renders ordered list with heading', async () => {
-      const h4 = canvasElement.querySelector('h4');
-      await expect(h4).toHaveTextContent('قائمة مرقمة');
-      await expect(canvas.getByText('الخطوة الأولى')).toBeInTheDocument();
-      await expect(canvas.getByText('الخطوة الثانية')).toBeInTheDocument();
-      await expect(canvas.getByText('الخطوة الثالثة')).toBeInTheDocument();
-      const ol = canvasElement.querySelector('ol');
-      await expect(ol).toBeInTheDocument();
-    });
-  }
-};

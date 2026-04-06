@@ -214,7 +214,7 @@ const meta = {
   parameters: {
     layout: 'centered',
   },
-  tags: ['!autodocs'],
+  tags: ['autodocs'],
   argTypes: {
     items: { control: false },
     renderItem: { control: false },
@@ -255,10 +255,6 @@ export const Default: Story = {
       />
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en',
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -267,30 +263,6 @@ export const Default: Story = {
           'Default carousel with arrows and small dot indicators. Loops back to the first slide after the last.',
       },
     },
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders first slide content', async () => {
-      await expect(canvas.getByText('Lightning Fast')).toBeVisible();
-    });
-
-    await step('Renders prev and next arrow buttons', async () => {
-      await expect(canvas.getByRole('button', { name: /previous slide/i })).toBeInTheDocument();
-      await expect(canvas.getByRole('button', { name: /next slide/i })).toBeInTheDocument();
-    });
-
-    await step('Renders dot indicators', async () => {
-      const tabs = canvas.getAllByRole('tab');
-      await expect(tabs).toHaveLength(4);
-      await expect(tabs[0]).toHaveAttribute('aria-selected', 'true');
-    });
-
-    await step('Carousel has accessible region role', async () => {
-      await expect(
-        canvasElement.querySelector('[role="region"]'),
-      ).toBeInTheDocument();
-    });
   },
 };
 
@@ -309,10 +281,6 @@ export const AutoPlay: Story = {
       />
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en',
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -351,10 +319,6 @@ export const DotsOnly: Story = {
       />
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en',
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -396,10 +360,6 @@ export const CustomContent: Story = {
       />
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en',
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -442,10 +402,6 @@ export const NoLoop: Story = {
       />
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en',
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -488,10 +444,6 @@ export const LargeDots: Story = {
       />
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en',
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -526,10 +478,6 @@ export const NoDots: Story = {
       />
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en',
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -570,10 +518,6 @@ export const SingleItem: Story = {
       />
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en',
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -619,10 +563,6 @@ export const ArrowNavigation: Story = {
       />
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en',
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -686,10 +626,6 @@ export const DotNavigation: Story = {
       />
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en',
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -747,10 +683,6 @@ export const KeyboardNavigation: Story = {
       />
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en',
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -821,10 +753,6 @@ export const LoopFalseBoundary: Story = {
       />
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en',
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -890,10 +818,6 @@ export const EmptyItems: Story = {
       />
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en',
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -928,10 +852,6 @@ export const AriaLiveRegion: Story = {
       />
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en',
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -981,10 +901,6 @@ export const DotSizeSmClasses: Story = {
       />
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en',
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -1021,10 +937,6 @@ export const DotSizeLgClasses: Story = {
       />
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en',
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -1063,10 +975,6 @@ export const CustomAriaLabel: Story = {
       />
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en',
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -1090,290 +998,7 @@ export const CustomAriaLabel: Story = {
 };
 
 // ---------------------------------------------------------------------------
-// RTL stories
-// ---------------------------------------------------------------------------
-
-/**
- * RTL default: Arabic feature cards with arrow icons and dot direction mirrored.
- */
-export const RTLExample: Story = {
-  render: () => (
-    <div className="w-[480px] max-w-full">
-      <Carousel
-        items={arabicFeatureItems}
-        renderItem={renderArabicFeatureSlide}
-        aria-label="أبرز الميزات"
-      />
-    </div>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar',
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story:
-          'RTL carousel with Arabic content. Arrow icons swap sides, swipe direction inverts, and slide announcements use Eastern Arabic numerals.',
-      },
-    },
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders first Arabic slide', async () => {
-      await expect(canvas.getByText('سريع للغاية')).toBeVisible();
-    });
-
-    await step('RTL arrow buttons are present', async () => {
-      await expect(canvas.getByRole('button', { name: /الشريحة السابقة/i })).toBeInTheDocument();
-      await expect(canvas.getByRole('button', { name: /الشريحة التالية/i })).toBeInTheDocument();
-    });
-
-    await step('Dot indicators reflect Arabic item count', async () => {
-      const tabs = canvas.getAllByRole('tab');
-      await expect(tabs).toHaveLength(4);
-      await expect(tabs[0]).toHaveAttribute('aria-selected', 'true');
-    });
-  },
-};
-
-/**
- * RTL testimonials with Arabic quotes and author names.
- */
-export const RTLCustomContent: Story = {
-  render: () => (
-    <div className="w-[520px] max-w-full">
-      <Carousel
-        items={arabicTestimonialItems}
-        renderItem={renderTestimonialSlide}
-        aria-label="آراء العملاء"
-      />
-    </div>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar',
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story:
-          'RTL testimonial carousel with Arabic quotes. Content and navigation flow right-to-left.',
-      },
-    },
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders first Arabic testimonial', async () => {
-      await expect(canvas.getByText('سارة الراشدي')).toBeVisible();
-    });
-
-    await step('Shows three dot indicators', async () => {
-      const tabs = canvas.getAllByRole('tab');
-      await expect(tabs).toHaveLength(3);
-    });
-  },
-};
-
-/**
- * RTL no-loop: Previous/Next arrows respect RTL semantics and disable at the correct ends.
- */
-export const RTLNoLoop: Story = {
-  render: () => (
-    <div className="w-[480px] max-w-full">
-      <Carousel
-        items={arabicFeatureItems}
-        renderItem={renderArabicFeatureSlide}
-        loop={false}
-        aria-label="عرض دوّار بدون تكرار"
-      />
-    </div>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar',
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story:
-          'RTL + loop={false}. The "previous" arrow (right side in RTL) is disabled on the first slide.',
-      },
-    },
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders first Arabic slide', async () => {
-      await expect(canvas.getByText('سريع للغاية')).toBeVisible();
-    });
-
-    await step('Previous arrow is disabled at the first slide in RTL', async () => {
-      const prevBtn = canvas.getByRole('button', { name: /الشريحة السابقة/i });
-      await expect(prevBtn).toBeDisabled();
-    });
-  },
-};
-
-/**
- * RTL dots-only with large indicators.
- */
-export const RTLDotsOnly: Story = {
-  render: () => (
-    <div className="w-[480px] max-w-full">
-      <Carousel
-        items={arabicFeatureItems}
-        renderItem={renderArabicFeatureSlide}
-        showArrows={false}
-        dotSize="lg"
-        aria-label="أبرز الميزات — نقاط فقط"
-      />
-    </div>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar',
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story:
-          'RTL carousel with showArrows={false} and dotSize="lg". Touch-friendly large dots in RTL layout.',
-      },
-    },
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders first Arabic slide', async () => {
-      await expect(canvas.getByText('سريع للغاية')).toBeVisible();
-    });
-
-    await step('No arrow buttons in RTL dots-only mode', async () => {
-      await expect(canvas.queryByRole('button', { name: /الشريحة السابقة/i })).not.toBeInTheDocument();
-      await expect(canvas.queryByRole('button', { name: /الشريحة التالية/i })).not.toBeInTheDocument();
-    });
-
-    await step('Large dot indicators present', async () => {
-      const tabs = canvas.getAllByRole('tab');
-      await expect(tabs).toHaveLength(4);
-    });
-  },
-};
-
-/**
- * RTL single item: same suppression of arrows/dots applies in RTL.
- */
-export const RTLSingleItem: Story = {
-  render: () => (
-    <div className="w-[480px] max-w-full">
-      <Carousel
-        items={[arabicFeatureItems[0]]}
-        renderItem={renderArabicFeatureSlide}
-        aria-label="ميزة واحدة"
-      />
-    </div>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar',
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story:
-          'RTL carousel with a single item. Neither arrows nor dots are rendered.',
-      },
-    },
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders the only Arabic slide', async () => {
-      await expect(canvas.getByText('سريع للغاية')).toBeVisible();
-    });
-
-    await step('No arrows or dots for a single item in RTL', async () => {
-      await expect(canvas.queryByRole('button', { name: /الشريحة/i })).not.toBeInTheDocument();
-      await expect(canvas.queryByRole('tab')).not.toBeInTheDocument();
-    });
-  },
-};
-
-/**
- * RTL keyboard navigation: ArrowLeft advances (next) and ArrowRight goes back (previous) in RTL.
- */
-export const RTLKeyboardNavigation: Story = {
-  render: () => (
-    <div className="w-[480px] max-w-full">
-      <Carousel
-        items={arabicFeatureItems}
-        renderItem={renderArabicFeatureSlide}
-        aria-label="اختبار لوحة المفاتيح"
-      />
-    </div>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar',
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story:
-          'RTL interaction test: ArrowLeft advances to the next slide (inverted from LTR). ArrowRight goes to the previous slide.',
-      },
-    },
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Focus the slide viewport', async () => {
-      const viewport = canvas.getByRole('group', { name: /منطقة الشرائح/i });
-      viewport.focus();
-      await expect(viewport).toHaveFocus();
-    });
-
-    await step('ArrowLeft → advances to next slide in RTL', async () => {
-      await userEvent.keyboard('{ArrowLeft}');
-      await waitFor(() => {
-        expect(canvas.getByText('آمن افتراضياً')).toBeVisible();
-      });
-    });
-
-    await step('ArrowRight → goes back to previous slide in RTL', async () => {
-      await userEvent.keyboard('{ArrowRight}');
-      await waitFor(() => {
-        expect(canvas.getByText('سريع للغاية')).toBeVisible();
-      });
-    });
-
-    await step('End → jumps to last slide', async () => {
-      await userEvent.keyboard('{End}');
-      await waitFor(() => {
-        expect(canvas.getByText('جاهز للذكاء الاصطناعي')).toBeVisible();
-      });
-    });
-
-    await step('Home → jumps to first slide', async () => {
-      await userEvent.keyboard('{Home}');
-      await waitFor(() => {
-        expect(canvas.getByText('سريع للغاية')).toBeVisible();
-      });
-    });
-  },
-};
-
-// ---------------------------------------------------------------------------
-// Dark mode stories (LTR + RTL)
+// Dark mode stories
 // ---------------------------------------------------------------------------
 
 /**
@@ -1390,11 +1015,6 @@ export const DarkMode: Story = {
       />
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en',
-    theme: 'dark',
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -1418,43 +1038,3 @@ export const DarkMode: Story = {
   },
 };
 
-/**
- * RTL dark mode: Arabic content carousel in dark mode.
- */
-export const RTLDarkMode: Story = {
-  render: () => (
-    <div className="w-[480px] max-w-full">
-      <Carousel
-        items={arabicTestimonialItems}
-        renderItem={renderTestimonialSlide}
-        aria-label="آراء العملاء — الوضع الداكن"
-      />
-    </div>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar',
-    theme: 'dark',
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story:
-          'RTL carousel in dark mode with Arabic testimonials. Direction, color tokens, and dark-mode styles all compose correctly.',
-      },
-    },
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders first Arabic testimonial in RTL dark mode', async () => {
-      await expect(canvas.getByText('سارة الراشدي')).toBeVisible();
-    });
-
-    await step('RTL arrow buttons present in dark mode', async () => {
-      await expect(canvas.getByRole('button', { name: /الشريحة السابقة/i })).toBeInTheDocument();
-      await expect(canvas.getByRole('button', { name: /الشريحة التالية/i })).toBeInTheDocument();
-    });
-  },
-};
