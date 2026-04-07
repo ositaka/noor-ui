@@ -42,13 +42,6 @@ export const Default: Story = {
       <ZakatCalculator {...args} />
     </div>
   ),
-  parameters: {
-    docs: {
-      story: {
-        inline: false
-      }
-    }
-  },
 };
 
 // With Default Values - from component page lines 124-131

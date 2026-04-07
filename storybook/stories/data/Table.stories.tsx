@@ -82,13 +82,6 @@ export const Default: Story = {
       </TableBody>
     </Table>
   ),
-  parameters: {
-    docs: {
-      story: {
-        inline: false
-      }
-    }
-  },
 };
 
 // Basic Table - from component page lines 242-271

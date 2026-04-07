@@ -74,13 +74,6 @@ export const Default: Story = {
       </div>
     );
   },
-  parameters: {
-    docs: {
-      story: {
-        inline: false
-      }
-    }
-  }
 };
 
 // Basic FAQ - from component page lines 150-167

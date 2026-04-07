@@ -79,13 +79,6 @@ export const Default: Story = {
       </div>
     );
   },
-  parameters: {
-    docs: {
-      story: {
-        inline: false
-      }
-    }
-  },
 };
 
 // Basic File Upload - from component page lines 224-228

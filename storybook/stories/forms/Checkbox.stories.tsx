@@ -44,13 +44,6 @@ export const Default: Story = {
       <Label htmlFor="default">Accept terms and conditions</Label>
     </div>
   ),
-  parameters: {
-    docs: {
-      story: {
-        inline: false
-      }
-    }
-  },
 };
 
 // With Label - from component page lines 292-303

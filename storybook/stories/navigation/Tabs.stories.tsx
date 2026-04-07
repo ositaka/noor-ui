@@ -79,13 +79,6 @@ export const Default: Story = {
       </TabsContent>
     </Tabs>
   ),
-  parameters: {
-    docs: {
-      story: {
-        inline: false
-      }
-    }
-  },
 };
 
 // Basic Tabs - from component page lines 128-161

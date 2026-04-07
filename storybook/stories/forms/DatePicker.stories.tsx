@@ -55,11 +55,6 @@ export const Default: Story = {
     );
   },
   parameters: {
-    docs: {
-      story: {
-        inline: false
-      }
-    },
     ar: {
       args: {
         placeholder: 'اختر تاريخ',

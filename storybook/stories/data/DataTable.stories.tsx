@@ -121,13 +121,6 @@ export const Default: Story = {
       <DataTable {...args} />
     </div>
   ),
-  parameters: {
-    docs: {
-      story: {
-        inline: false
-      }
-    }
-  },
 };
 
 // Basic DataTable - from component page lines 656-663

@@ -75,11 +75,6 @@ export const Default: Story = {
     </Card>
   ),
   parameters: {
-    docs: {
-      story: {
-        inline: false
-      }
-    },
     ar: {
       args: {
         title: 'لم يتم العثور على مقالات',

@@ -48,7 +48,7 @@ const preview: Preview = {
     },
     // Enable docs for all stories
     docs: {
-      codePanel: true, // Enable Code panel in Canvas view
+      codePanel: true,
       source: {
         type: 'dynamic',
       },
@@ -94,7 +94,7 @@ const preview: Preview = {
     },
     theme: {
       description: 'Design theme',
-      defaultValue: 'minimal',
+      defaultValue: 'cozy',
       toolbar: {
         title: 'Theme',
         icon: 'paintbrush',

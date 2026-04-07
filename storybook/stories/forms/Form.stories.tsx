@@ -76,13 +76,6 @@ export const Default: Story = {
       </Form>
     </div>
   ),
-  parameters: {
-    docs: {
-      story: {
-        inline: false
-      }
-    }
-  }
 };
 
 // Basic Form - from component page lines 164-211
@@ -295,7 +288,7 @@ export const WithValidation: Story = {
       const nameInput = canvas.getByPlaceholderText('Enter your name');
       const emailInput = canvas.getByPlaceholderText('your@email.com');
 
-      await userEvent.type(nameInput, 'John Doe');
+      await userEvent.type(nameInput, 'Nuno Marques');
       await userEvent.type(emailInput, 'invalid-email');
 
       const submitButton = canvas.getByRole('button', { name: /submit/i });

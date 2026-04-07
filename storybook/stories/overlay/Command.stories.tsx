@@ -72,13 +72,6 @@ export const Default: Story = {
       </CommandList>
     </Command>
   ),
-  parameters: {
-    docs: {
-      story: {
-        inline: false
-      }
-    }
-  },
 };
 
 // Basic Command - from component page lines 114-144

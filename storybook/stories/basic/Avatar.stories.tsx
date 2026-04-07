@@ -163,7 +163,7 @@ export const WithProfile: Story = {
         <AvatarFallback>JD</AvatarFallback>
       </Avatar>
       <div className="space-y-1">
-        <p className="text-sm font-medium">John Doe</p>
+        <p className="text-sm font-medium">Nuno Marques</p>
         <p className="text-sm text-muted-foreground">ositaka@example.com</p>
       </div>
     </div>
@@ -175,7 +175,7 @@ export const WithProfile: Story = {
     const canvas = within(canvasElement);
 
     await step('Avatar renders with profile info', async () => {
-      const name = canvas.getByText('John Doe');
+      const name = canvas.getByText('Nuno Marques');
       await expect(name).toBeInTheDocument();
       await expect(name).toBeVisible();
     });

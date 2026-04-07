@@ -382,7 +382,7 @@ export const LongContent: Story = {
 
 const user: User = {
   id: 1,
-  name: 'John Doe',
+  name: 'Nuno Marques',
   email: 'john@example.com'
 };</code></pre>
 <h3>Conclusion</h3>
@@ -427,7 +427,7 @@ const user: User = {
       const codeBlock = canvasElement.querySelector('pre code');
       await expect(codeBlock).toBeInTheDocument();
       await expect(codeBlock).toHaveTextContent('interface User');
-      await expect(codeBlock).toHaveTextContent("name: 'John Doe'");
+      await expect(codeBlock).toHaveTextContent("name: 'Nuno Marques'");
     });
   }
 };

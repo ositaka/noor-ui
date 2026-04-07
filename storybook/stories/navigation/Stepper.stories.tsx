@@ -105,13 +105,6 @@ export const Default: Story = {
       <Stepper {...args} />
     </div>
   ),
-  parameters: {
-    docs: {
-      story: {
-        inline: false
-      }
-    }
-  },
 };
 
 // Basic Stepper - from component page lines 184-206

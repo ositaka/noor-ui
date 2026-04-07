@@ -56,13 +56,6 @@ export const Default: Story = {
       </SelectContent>
     </Select>
   ),
-  parameters: {
-    docs: {
-      story: {
-        inline: false
-      }
-    }
-  },
 };
 
 // With Label - from component page lines 305-320

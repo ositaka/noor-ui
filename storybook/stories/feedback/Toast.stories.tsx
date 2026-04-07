@@ -54,13 +54,6 @@ export const Default: Story = {
       </Button>
     );
   },
-  parameters: {
-    docs: {
-      story: {
-        inline: false
-      }
-    }
-  },
 };
 
 // Simple - from component page lines 189-192

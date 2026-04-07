@@ -66,13 +66,6 @@ export const Default: Story = {
       </DialogContent>
     </Dialog>
   ),
-  parameters: {
-    docs: {
-      story: {
-        inline: false
-      }
-    }
-  },
 };
 
 // Basic Dialog - from component page lines 164-176

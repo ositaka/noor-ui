@@ -61,11 +61,6 @@ export const Default: Story = {
     );
   },
   parameters: {
-    docs: {
-      story: {
-        inline: false
-      }
-    },
     ar: {
       args: {
         label: 'درجة الحرارة',

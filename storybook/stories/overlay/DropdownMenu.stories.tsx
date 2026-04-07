@@ -103,13 +103,6 @@ export const Default: Story = {
       </DropdownMenuContent>
     </DropdownMenu>
   ),
-  parameters: {
-    docs: {
-      story: {
-        inline: false
-      }
-    }
-  }
 };
 
 // Basic Usage - from component page lines 216-248

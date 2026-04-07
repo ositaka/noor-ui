@@ -45,13 +45,6 @@ export const Default: Story = {
       <Slider {...args} />
     </div>
   ),
-  parameters: {
-    docs: {
-      story: {
-        inline: false
-      }
-    }
-  },
 };
 
 // With Label - from component page lines 268-283

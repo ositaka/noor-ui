@@ -253,7 +253,6 @@ export const Default: Story = {
   ),
   parameters: {
     docs: {
-      story: { inline: false },
       description: {
         story:
           'Default timeline showing all three status states: complete, current, and upcoming. Uses custom icons from the icon slot.',

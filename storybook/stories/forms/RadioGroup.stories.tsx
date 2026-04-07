@@ -53,13 +53,6 @@ export const Default: Story = {
       </div>
     </RadioGroup>
   ),
-  parameters: {
-    docs: {
-      story: {
-        inline: false
-      }
-    }
-  }
 };
 
 // Vertical Layout - from component page lines 329-342

@@ -54,13 +54,6 @@ export const Default: Story = {
       </PaginationContent>
     </Pagination>
   ),
-  parameters: {
-    docs: {
-      story: {
-        inline: false
-      }
-    }
-  },
 };
 
 // Basic Pagination - from component page lines 196-216

@@ -49,13 +49,6 @@ export const Default: Story = {
       </BreadcrumbList>
     </Breadcrumb>
   ),
-  parameters: {
-    docs: {
-      story: {
-        inline: false
-      }
-    }
-  }
 };
 
 // Basic Breadcrumb - from component page lines 149-163

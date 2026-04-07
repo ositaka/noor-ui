@@ -74,13 +74,6 @@ export const Default: Story = {
       </SheetContent>
     </Sheet>
   ),
-  parameters: {
-    docs: {
-      story: {
-        inline: false
-      }
-    }
-  },
 };
 
 // From End (Default) - from component page lines 182-199
@@ -412,8 +405,8 @@ export const WithForm: Story = {
 
       // Test input interaction
       await userEvent.clear(nameInput);
-      await userEvent.type(nameInput, 'John Doe');
-      await expect(nameInput).toHaveValue('John Doe');
+      await userEvent.type(nameInput, 'Nuno Marques');
+      await expect(nameInput).toHaveValue('Nuno Marques');
     });
 
     await step('Save button closes the sheet', async () => {

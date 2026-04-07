@@ -44,11 +44,6 @@ export const Default: Story = {
     message: 'Thinking...'
   },
   parameters: {
-    docs: {
-      story: {
-        inline: false
-      }
-    },
     ar: {
       args: {
         message: 'جارٍ التفكير...'

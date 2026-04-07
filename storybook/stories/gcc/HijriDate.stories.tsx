@@ -46,11 +46,6 @@ export const Default: Story = {
     showIcon: true
   },
   parameters: {
-    docs: {
-      story: {
-        inline: false
-      }
-    },
     ar: {
       args: {
         gregorianDate: '٦ نوفمبر ٢٠٢٥',

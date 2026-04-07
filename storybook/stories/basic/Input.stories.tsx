@@ -331,7 +331,7 @@ export const RegistrationForm: Story = {
           <User className="inline h-4 w-4 me-2" />
           Full Name
         </Label>
-        <Input type="text" id="fullname" placeholder="John Doe" />
+        <Input type="text" id="fullname" placeholder="Nuno Marques" />
       </div>
       <div className="grid gap-1.5">
         <Label htmlFor="email-reg">
@@ -386,8 +386,8 @@ export const RegistrationForm: Story = {
       const passwordInput = canvas.getByLabelText(/Password/i);
 
       await userEvent.clear(nameInput);
-      await userEvent.type(nameInput, 'John Doe');
-      await expect(nameInput).toHaveValue('John Doe');
+      await userEvent.type(nameInput, 'Nuno Marques');
+      await expect(nameInput).toHaveValue('Nuno Marques');
 
       await userEvent.clear(emailInput);
       await userEvent.type(emailInput, 'john@example.com');

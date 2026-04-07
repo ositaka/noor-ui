@@ -145,7 +145,7 @@ export const WithInitials: Story = {
   ),
   args: {
     user: {
-      name: 'John Doe',
+      name: 'Nuno Marques',
       email: 'john@example.com',
       initials: 'JD'
     },

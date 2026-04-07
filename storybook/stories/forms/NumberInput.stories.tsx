@@ -87,13 +87,6 @@ export const Default: Story = {
       </div>
     );
   },
-  parameters: {
-    docs: {
-      story: {
-        inline: false
-      }
-    }
-  },
 };
 
 // Basic Number Input - from component page lines 228-234

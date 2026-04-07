@@ -73,13 +73,6 @@ export const Default: Story = {
       </AccordionItem>
     </Accordion>
   ),
-  parameters: {
-    docs: {
-      story: {
-        inline: false
-      }
-    }
-  },
 };
 
 // Basic FAQ - from component page lines 199-218

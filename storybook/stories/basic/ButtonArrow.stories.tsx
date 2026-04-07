@@ -60,11 +60,6 @@ export const Default: Story = {
       args: {
         children: 'متابعة'
       }
-    },
-    docs: {
-      story: {
-        inline: false
-      }
     }
   },
 };

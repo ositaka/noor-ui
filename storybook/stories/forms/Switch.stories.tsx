@@ -44,13 +44,6 @@ export const Default: Story = {
       <Label htmlFor="default">Airplane Mode</Label>
     </div>
   ),
-  parameters: {
-    docs: {
-      story: {
-        inline: false
-      }
-    }
-  },
 };
 
 // With Label - from component page lines 250-269

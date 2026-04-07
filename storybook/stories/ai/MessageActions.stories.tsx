@@ -60,13 +60,6 @@ export const Default: Story = {
     onThumbsDown: fn(),
     onFlag: fn()
   },
-  parameters: {
-    docs: {
-      story: {
-        inline: false
-      }
-    }
-  },
 };
 
 // Full Featured - from component page lines 262-276

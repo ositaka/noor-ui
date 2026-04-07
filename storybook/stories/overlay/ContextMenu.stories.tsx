@@ -90,13 +90,6 @@ export const Default: Story = {
       </ContextMenuContent>
     </ContextMenu>
   ),
-  parameters: {
-    docs: {
-      story: {
-        inline: false
-      }
-    }
-  }
 };
 
 // Basic Usage - from component page lines 166-199

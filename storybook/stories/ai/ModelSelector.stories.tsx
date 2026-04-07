@@ -60,13 +60,6 @@ export const Default: Story = {
       </div>
     );
   },
-  parameters: {
-    docs: {
-      story: {
-        inline: false
-      }
-    }
-  },
 };
 
 // With Default Models - from component page lines 214-219

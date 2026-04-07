@@ -6,6 +6,11 @@
 />
 
 <style>
+  /* Story viewport background — makes cards pop against the page bg */
+  .docs-story, .sb-show-main {
+    background-color: color-mix(in srgb, var(--color-background) 85%, transparent) !important;
+  }
+
   /* Ensure fonts are applied correctly */
   :root[dir="ltr"] {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -91,6 +96,11 @@
   .sbdocs > h3,
   .sbdocs > .sbdocs-wrapper h3:not(.docs-story h3) {
     margin-top: 2rem;
+  }
+
+  /* Hide duplicate Default story from STORIES section in autodocs (keep the primary canvas) */
+  .sbdocs .sb-anchor[id$="--default"]:not([id*="--primary--"]) {
+    display: none;
   }
 
   /* Reset Storybook docs styles inside story canvases */

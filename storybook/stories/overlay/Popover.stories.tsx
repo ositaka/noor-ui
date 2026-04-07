@@ -60,13 +60,6 @@ export const Default: Story = {
       </PopoverContent>
     </Popover>
   ),
-  parameters: {
-    docs: {
-      story: {
-        inline: false
-      }
-    }
-  },
 };
 
 // Basic Usage - from component page lines 177-189

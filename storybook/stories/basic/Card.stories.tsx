@@ -228,7 +228,7 @@ export const ArticleCard: Story = {
         <CardTitle className="mt-2">
           The Future of Web Development
         </CardTitle>
-        <CardDescription>By John Doe • 5 min read</CardDescription>
+        <CardDescription>By Nuno Marques • 5 min read</CardDescription>
       </CardHeader>
       <CardContent>
         <p className="text-sm text-muted-foreground">
@@ -260,7 +260,7 @@ export const ArticleCard: Story = {
     await step('Renders article content', async () => {
       await expect(canvas.getByText('Technology')).toBeInTheDocument();
       await expect(canvas.getByRole('heading', { name: 'The Future of Web Development' })).toBeInTheDocument();
-      await expect(canvas.getByText(/By John Doe • 5 min read/i)).toBeInTheDocument();
+      await expect(canvas.getByText(/By Nuno Marques • 5 min read/i)).toBeInTheDocument();
       await expect(canvas.getByText(/Explore the latest trends and technologies/i)).toBeInTheDocument();
     });
 

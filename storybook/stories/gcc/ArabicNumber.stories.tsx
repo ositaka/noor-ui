@@ -45,13 +45,6 @@ export const Default: Story = {
     value: 1234567.89,
     decimals: 2
   },
-  parameters: {
-    docs: {
-      story: {
-        inline: false
-      }
-    }
-  },
 };
 
 // Western Numerals - from component page lines 60-80

@@ -63,11 +63,6 @@ export const Default: Story = {
     );
   },
   parameters: {
-    docs: {
-      story: {
-        inline: false
-      }
-    },
     ar: {
       args: {
         placeholder: 'اكتب رسالتك... (Shift+Enter لسطر جديد)'

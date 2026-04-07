@@ -119,11 +119,6 @@ export const Default: Story = {
     </div>
   ),
   parameters: {
-    docs: {
-      story: {
-        inline: false
-      }
-    },
     ar: {
       args: {
         title: 'شقة عصرية',

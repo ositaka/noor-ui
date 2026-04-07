@@ -39,13 +39,6 @@ export const Default: Story = {
       </div>
     </div>
   ),
-  parameters: {
-    docs: {
-      story: {
-        inline: false
-      }
-    }
-  }
 };
 
 // Card Skeleton - from component page lines 150-156

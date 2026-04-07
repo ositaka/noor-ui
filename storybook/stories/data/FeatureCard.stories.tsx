@@ -58,11 +58,6 @@ export const Default: Story = {
     </div>
   ),
   parameters: {
-    docs: {
-      story: {
-        inline: false
-      }
-    },
     ar: {
       args: {
         title: 'تصميم يدعم الكتابة من اليمين إلى اليسار',
