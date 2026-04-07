@@ -32,8 +32,6 @@ components: {
         userInterfaceDesc: 'User-facing interactive components for common UX patterns',
         ai: 'AI/LLM Shell',
         aiDesc: 'Components for building AI chat interfaces and LLM-powered applications',
-        workflow: 'Workflow & Automation',
-        workflowDesc: 'Node-based workflow builders for creating automation pipelines',
       },
       needHelp: 'Need Help?',
       helpDescription: 'Check out our documentation or join our community',

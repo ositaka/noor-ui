@@ -44,8 +44,7 @@ export default function SitemapPage() {
     experimental: [
       'chat-message', 'conversation-history', 'message-actions',
       'model-selector', 'parameter-slider', 'prompt-input',
-      'thinking-indicator', 'token-counter', 'workflow-canvas',
-      'workflow-node'
+      'thinking-indicator', 'token-counter',
     ],
   };
 

@@ -615,20 +615,6 @@ export function getSearchData(locale: Locale): SearchItem[] {
       category: 'Component',
       keywords: isArabic ? ['رموز', 'عداد', 'ai'] : ['token', 'counter', 'ai', 'usage'],
     },
-    {
-      title: t.componentNames['workflow-canvas'],
-      description: isArabic ? 'لوحة سير العمل مع العقد' : 'Workflow canvas with nodes',
-      href: '/components/workflow-canvas',
-      category: 'Component',
-      keywords: isArabic ? ['سير عمل', 'لوحة', 'عقد'] : ['workflow', 'canvas', 'nodes', 'flow'],
-    },
-    {
-      title: t.componentNames['workflow-node'],
-      description: isArabic ? 'عقدة سير العمل' : 'Workflow node component',
-      href: '/components/workflow-node',
-      category: 'Component',
-      keywords: isArabic ? ['عقدة', 'سير عمل'] : ['workflow', 'node', 'step'],
-    },
 
     // ─── Design Tokens & Themes ─────────────────────────────────────────
     {

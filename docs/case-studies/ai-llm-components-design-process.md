@@ -2,7 +2,7 @@
 
 **Created:** November 2024
 **Status:** Historical planning document - Components implemented and live in Noor UI v0.3.x
-**Related Components:** Chat Message, Thinking Indicator, Prompt Input, Model Selector, Token Counter, Message Actions, Parameter Slider, Conversation History, Workflow Canvas
+**Related Components:** Chat Message, Thinking Indicator, Prompt Input, Model Selector, Token Counter, Message Actions, Parameter Slider, Conversation History
 
 > This is the actual planning document used to design and build Noor UI's AI/LLM component suite. We're sharing it publicly to help others building similar interfaces learn from our process.
 

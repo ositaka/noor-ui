@@ -630,20 +630,6 @@ export const searchData: SearchItem[] = [
     category: 'Component',
     keywords: ['user', 'badge', 'role', 'status', 'author', 'moderator', 'admin', 'verified'],
   },
-  {
-    title: 'Workflow Canvas',
-    description: 'Visual workflow editor canvas with nodes and connections',
-    href: '/components/workflow-canvas',
-    category: 'Component',
-    keywords: ['workflow', 'canvas', 'node', 'editor', 'flow', 'diagram', 'visual'],
-  },
-  {
-    title: 'Workflow Node',
-    description: 'Individual node component for workflow diagrams',
-    href: '/components/workflow-node',
-    category: 'Component',
-    keywords: ['workflow', 'node', 'block', 'step', 'action', 'trigger'],
-  },
 
   // Examples
   {

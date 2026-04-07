@@ -213,9 +213,6 @@ export {
 export { UserBadge } from './ui/user-badge'
 export type { UserBadgeProps, UserBadgeVariant } from './ui/user-badge'
 export { UserMenu } from './ui/user-menu'
-export { WorkflowCanvas } from './ui/workflow-canvas'
-export { WorkflowNode } from './ui/workflow-node'
-export { workflowNodeTypes } from './ui/workflow-nodes'
 export { ZakatCalculator } from './ui/zakat-calculator'
 
 // Hooks

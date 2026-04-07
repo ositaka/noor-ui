@@ -72,7 +72,6 @@ const preview: Preview = {
           'Layout & Shell',
           'User Interface',
           'AI-LLM Shell',
-          'Workflow & Automation',
         ],
       },
     },
