@@ -26,7 +26,7 @@ examples: {
         lookingForAppsDesc: 'Browse production-ready starters - complete applications with authentication, database, and everything you need to get started.',
         viewStarters: 'View Production Starters →',
         lookingForEmails: 'Looking for Email Templates?',
-        lookingForEmailsDesc: 'Browse 13 production-ready MJML email templates with LTR, RTL, and bilingual variants — themed with NoorUI colors.',
+        lookingForEmailsDesc: 'Browse 13 production-ready MJML email templates with LTR, RTL, and bilingual variants — themed with Noor UI colors.',
         viewEmailTemplates: 'View Email Templates →',
         lookingForComponents: 'Looking for Individual Components?',
         lookingForComponentsDesc: 'Browse our complete component library with 74 fully documented components with live examples and accessibility guidelines.',

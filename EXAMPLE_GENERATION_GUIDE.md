@@ -185,7 +185,7 @@ Select, Textarea, Checkbox, Label, Separator
 
 **Why:** Multi-step forms, document tracking, status timelines — very relevant to GCC.
 Modeled after real UAE government portals (TAMM, ICP, MOHRE). Formal, institutional,
-trustworthy — shows NoorUI works for serious, high-stakes interfaces.
+trustworthy — shows Noor UI works for serious, high-stakes interfaces.
 
 **Page map:**
 ```
@@ -415,7 +415,7 @@ Warm, inviting design — slightly more visual than the institutional government
 
 **Why:** Card management, transaction tables, money transfers, bill payments — every hiring
 manager at a fintech instantly connects. Heavy use of DataTable, forms, ArabicNumber,
-and interactive controls (Switch, Slider). Shows NoorUI handles data-dense financial UIs.
+and interactive controls (Switch, Slider). Shows Noor UI handles data-dense financial UIs.
 
 **Page map:**
 ```

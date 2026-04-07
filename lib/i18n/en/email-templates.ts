@@ -6,7 +6,7 @@ export const email_templates = {
   emailTemplates: {
     title: 'Email Templates',
     subtitle: 'Production-ready MJML email templates with full RTL, LTR, and bilingual support.',
-    description: 'Copy-paste ready HTML for transactional emails, newsletters, and notifications. Themed with NoorUI colors, customizable via CLI.',
+    description: 'Copy-paste ready HTML for transactional emails, newsletters, and notifications. Themed with Noor UI colors, customizable via CLI.',
     filters: {
       all: 'All Templates',
       transactional: 'Transactional',

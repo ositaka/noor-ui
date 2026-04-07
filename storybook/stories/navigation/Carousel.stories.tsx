@@ -70,7 +70,7 @@ type TestimonialItem = {
 const testimonialItems: TestimonialItem[] = [
   {
     quote:
-      'NoorUI cut our RTL implementation time in half. The components just work in both directions without any hacks.',
+      'Noor UI cut our RTL implementation time in half. The components just work in both directions without any hacks.',
     author: 'Sarah Al-Rashidi',
     role: 'Senior Frontend Engineer',
     initials: 'SR',
@@ -135,7 +135,7 @@ type ArabicTestimonialItem = {
 const arabicTestimonialItems: ArabicTestimonialItem[] = [
   {
     quote:
-      'قلّص NoorUI وقت تطبيق RTL لدينا إلى النصف. المكونات تعمل في كلا الاتجاهين دون أي حلول مؤقتة.',
+      'قلّص Noor UI وقت تطبيق RTL لدينا إلى النصف. المكونات تعمل في كلا الاتجاهين دون أي حلول مؤقتة.',
     author: 'سارة الراشدي',
     role: 'مهندسة واجهات أمامية أولى',
     initials: 'ار',

@@ -2,18 +2,18 @@
 
 **Created:** 2026-02-11
 **Status:** Planning document used to build 27 MDX documentation pages for Storybook
-**Related Components:** All 74 NoorUI components (documentation covers the entire system)
+**Related Components:** All 74 Noor UI components (documentation covers the entire system)
 
-> This is the actual planning document used to add comprehensive documentation to NoorUI's Storybook instance. We're sharing it to help others facing the challenge of documenting a design system beyond just component showcases.
+> This is the actual planning document used to add comprehensive documentation to Noor UI's Storybook instance. We're sharing it to help others facing the challenge of documenting a design system beyond just component showcases.
 
 ---
 
 ## Context
 
-NoorUI currently has 74 components with 749 stories in Storybook, but **zero documentation pages**. The Storybook is a component showcase only -- it lacks the educational, foundational, and architectural documentation that defines world-class design systems like Carbon, Material, Chakra, and Polaris.
+Noor UI currently has 74 components with 749 stories in Storybook, but **zero documentation pages**. The Storybook is a component showcase only -- it lacks the educational, foundational, and architectural documentation that defines world-class design systems like Carbon, Material, Chakra, and Polaris.
 
 The goal is to add MDX documentation pages that:
-- Make NoorUI accessible to non-technical people (designers, PMs, stakeholders)
+- Make Noor UI accessible to non-technical people (designers, PMs, stakeholders)
 - Showcase the architect's expertise in design system thinking
 - Document the unique RTL-first, primitive-agnostic, multi-theme architecture
 - Follow the structure and principles of Carbon Design System and other industry leaders
@@ -30,7 +30,7 @@ Documentation categories appear **above** component categories. Each entry below
 WELCOME
   ├── Introduction                    ← Hero landing page
   ├── Why Design Systems              ← Business case (for non-technical audiences)
-  └── Design Principles               ← NoorUI's 6 core principles
+  └── Design Principles               ← Noor UI's 6 core principles
 
 GETTING STARTED
   ├── Installation                    ← Copy-paste setup in 60 seconds
@@ -57,7 +57,7 @@ PATTERNS
   ├── Bidirectional Typography         ← Arabic/English text interaction, BiDi algorithm
   ├── Accessibility                   ← WCAG AA, Radix primitives, keyboard nav
   ├── Form Patterns                   ← Composing form components, validation
-  └── Composition                     ← asChild, CVA, cn(), building on NoorUI
+  └── Composition                     ← asChild, CVA, cn(), building on Noor UI
 
 ARCHITECTURE
   ├── Technical Overview              ← Stack, provider hierarchy, build pipeline
@@ -100,11 +100,11 @@ These React components render inside MDX pages to make documentation interactive
 
 ### Tier 1: Welcome (audience: everyone)
 
-**Introduction** -- The "hero" page. What NoorUI is, the meaning of "Noor" (light in Arabic), a live interactive demo of a component in both LTR/RTL, key stats (74 components, 4 themes, 2 languages, WCAG AA). Links to all sections.
+**Introduction** -- The "hero" page. What Noor UI is, the meaning of "Noor" (light in Arabic), a live interactive demo of a component in both LTR/RTL, key stats (74 components, 4 themes, 2 languages, WCAG AA). Links to all sections.
 
-**Why Design Systems** -- The business case. Why design systems save time and money, ensure consistency, and scale. Industry references (Brad Frost's Atomic Design, Sparkbox surveys). Why NoorUI exists: the gap in RTL-first tooling. Written for PMs and stakeholders, not just developers.
+**Why Design Systems** -- The business case. Why design systems save time and money, ensure consistency, and scale. Industry references (Brad Frost's Atomic Design, Sparkbox surveys). Why Noor UI exists: the gap in RTL-first tooling. Written for PMs and stakeholders, not just developers.
 
-**Design Principles** -- NoorUI's 6 guiding principles with concrete code examples:
+**Design Principles** -- Noor UI's 6 guiding principles with concrete code examples:
 1. RTL-First, Never Retrofitted
 2. Semantic over Visual (tokens, not hex codes)
 3. Composition over Configuration (small composable pieces)
@@ -126,7 +126,7 @@ These React components render inside MDX pages to make documentation interactive
 
 ### Tier 4: Theming
 
-**Overview**, **Token Architecture**, **Dark Mode**, **Creating Custom Themes** -- Documenting NoorUI's 4-theme system, the 3-layer token architecture, and extensibility.
+**Overview**, **Token Architecture**, **Dark Mode**, **Creating Custom Themes** -- Documenting Noor UI's 4-theme system, the 3-layer token architecture, and extensibility.
 
 ### Tier 5: Patterns
 
