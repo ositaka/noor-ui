@@ -60,7 +60,7 @@ const preview: Preview = {
         method: 'alphabetical',
         order: [
           'Docs',
-          ['Welcome', 'Getting Started', 'Colors', 'Theming', 'RTL Development'],
+          ['Getting Started'],
           'GCC-Specific',
           'Core',
           'Forms',
