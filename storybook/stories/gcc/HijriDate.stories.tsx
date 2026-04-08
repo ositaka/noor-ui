@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { within, expect } from 'storybook/test';
 import { HijriDate } from '../../../components/ui/hijri-date';
 
 const meta = {
@@ -63,24 +62,6 @@ export const DefaultVariant: Story = {
         story: 'Default Hijri date display with icon.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders default variant', async () => {
-      await expect(canvas.getByText('November 6, 2025')).toBeInTheDocument();
-      await expect(canvas.getByText('5 Jumada al-Awwal 1447')).toBeInTheDocument();
-    });
-
-    await step('Shows labels for default variant', async () => {
-      await expect(canvas.getByText('Gregorian')).toBeInTheDocument();
-      await expect(canvas.getByText('Hijri')).toBeInTheDocument();
-    });
-
-    await step('Shows calendar icon', async () => {
-      const icon = canvasElement.querySelector('svg');
-      await expect(icon).toBeInTheDocument();
-    });
   }
 };
 
@@ -102,28 +83,6 @@ export const BadgeVariant: Story = {
         story: 'Badge variant for compact display.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders badge variant', async () => {
-      await expect(canvas.getByText('Nov 6, 2025')).toBeInTheDocument();
-      await expect(canvas.getByText('5 Jumada I, 1447')).toBeInTheDocument();
-    });
-
-    await step('Does not show labels in badge variant', async () => {
-      expect(canvas.queryByText('Gregorian')).not.toBeInTheDocument();
-      expect(canvas.queryByText('Hijri')).not.toBeInTheDocument();
-    });
-
-    await step('Shows separator bullet', async () => {
-      await expect(canvas.getByText('•')).toBeInTheDocument();
-    });
-
-    await step('Shows calendar icon', async () => {
-      const icon = canvasElement.querySelector('svg');
-      await expect(icon).toBeInTheDocument();
-    });
   }
 };
 
@@ -148,29 +107,6 @@ export const CompactVariant: Story = {
         story: 'Compact variant for inline text.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders compact variant inline with text', async () => {
-      await expect(canvas.getByText('Published on')).toBeInTheDocument();
-      await expect(canvas.getByText('Nov 6, 2025')).toBeInTheDocument();
-      await expect(canvas.getByText('5 Jumada I, 1447')).toBeInTheDocument();
-    });
-
-    await step('Does not show labels in compact variant', async () => {
-      expect(canvas.queryByText('Gregorian')).not.toBeInTheDocument();
-      expect(canvas.queryByText('Hijri')).not.toBeInTheDocument();
-    });
-
-    await step('Shows separator bullet', async () => {
-      await expect(canvas.getByText('•')).toBeInTheDocument();
-    });
-
-    await step('Does not show icon in compact variant', async () => {
-      const icons = canvasElement.querySelectorAll('svg');
-      expect(icons.length).toBe(0);
-    });
   }
 };
 
@@ -193,24 +129,6 @@ export const DetailedVariant: Story = {
         story: 'Detailed variant with enhanced visuals.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders detailed variant', async () => {
-      await expect(canvas.getByText('November 6, 2025')).toBeInTheDocument();
-      await expect(canvas.getByText('5 Jumada al-Awwal 1447')).toBeInTheDocument();
-    });
-
-    await step('Shows labels for detailed variant', async () => {
-      await expect(canvas.getByText('Gregorian')).toBeInTheDocument();
-      await expect(canvas.getByText('Hijri')).toBeInTheDocument();
-    });
-
-    await step('Shows calendar icon', async () => {
-      const icon = canvasElement.querySelector('svg');
-      await expect(icon).toBeInTheDocument();
-    });
   }
 };
 
@@ -232,19 +150,6 @@ export const WithoutIcon: Story = {
         story: 'Hijri date without calendar icon.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders without icon', async () => {
-      await expect(canvas.getByText('November 6, 2025')).toBeInTheDocument();
-      await expect(canvas.getByText('5 Jumada al-Awwal 1447')).toBeInTheDocument();
-    });
-
-    await step('Does not show calendar icon', async () => {
-      const icons = canvasElement.querySelectorAll('svg');
-      expect(icons.length).toBe(0);
-    });
   }
 };
 

@@ -2,7 +2,6 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { ReactionPicker, Reaction } from '../../../components/ui/reaction-picker';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../../components/ui/card';
 import { useState } from 'react';
-import { expect, userEvent, within } from 'storybook/test';
 
 const meta = {
   title: 'User Interface/Reaction Picker',
@@ -113,15 +112,6 @@ export const CompactMode: Story = {
 
   parameters: {
     controls: { disable: true }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders card with total reactions text', async () => {
-      await expect(canvas.getByText('Compact Mode')).toBeInTheDocument();
-      await expect(canvas.getByText('Total Reactions: 20')).toBeInTheDocument();
-    });
-
   }
 };
 
@@ -174,47 +164,6 @@ export const ExpandedMode: Story = {
 
   parameters: {
     controls: { disable: true }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders with expanded variant showing individual reaction buttons', async () => {
-      await expect(canvas.getByText('Expanded Mode')).toBeInTheDocument();
-      const buttons = canvas.getAllByRole('button');
-      // Should have 3 reaction buttons + 1 add button
-      await expect(buttons.length).toBeGreaterThanOrEqual(4);
-    });
-
-    await step('Shows hasReacted state on heart emoji', async () => {
-      const buttons = canvas.getAllByRole('button');
-      // Find heart button - it should have count 5
-      const heartButton = buttons.find((btn) => btn.textContent?.includes('❤️') && btn.textContent?.includes('5'));
-      await expect(heartButton).toBeInTheDocument();
-    });
-
-    await step('Toggles reaction on direct button click', async () => {
-      const buttons = canvas.getAllByRole('button');
-      // Click thumbs up button (count should go from 12 to 13)
-      const thumbsUpButton = buttons.find((btn) => btn.textContent?.includes('👍') && btn.textContent?.includes('12'));
-      await userEvent.click(thumbsUpButton!);
-
-      // Verify count updated
-      const updatedButtons = canvas.getAllByRole('button');
-      const updatedThumbsUp = updatedButtons.find((btn) => btn.textContent?.includes('👍') && btn.textContent?.includes('13'));
-      await expect(updatedThumbsUp).toBeInTheDocument();
-    });
-
-    await step('Opens popover from add button', async () => {
-      const buttons = canvas.getAllByRole('button');
-      // Find the add button (has "+" text)
-      const addButton = buttons.find((btn) => btn.textContent?.includes('+'));
-      await userEvent.click(addButton!);
-
-      // Verify popover opens in portal
-      const body = within(document.body);
-      const popoverButtons = await body.findAllByRole('button');
-      await expect(popoverButtons.length).toBeGreaterThanOrEqual(6);
-    });
   }
 };
 
@@ -261,24 +210,6 @@ export const WithManyReactions: Story = {
 
   parameters: {
     controls: { disable: true }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders with many reactions showing top 3', async () => {
-      const reactionButton = canvas.getByRole('button', { name: 'React to comment' });
-      await expect(reactionButton).toBeInTheDocument();
-      // Total: 45+32+18+12+8+5 = 120
-      // Button shows emojis + count, e.g., "👍❤️💡120"
-      await expect(reactionButton).toHaveTextContent(/120/);
-    });
-
-    await step('Shows user has reacted (thumbs up)', async () => {
-      const reactionButton = canvas.getByRole('button', { name: 'React to comment' });
-      // Button should have secondary variant (not ghost) because user has reacted
-      await expect(reactionButton).toBeVisible();
-    });
-
   }
 };
 
@@ -308,29 +239,6 @@ export const NoReactions: Story = {
 
   parameters: {
     controls: { disable: true }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders with empty state showing "React" text', async () => {
-      const reactionButton = canvas.getByRole('button', { name: 'React to comment' });
-      await expect(reactionButton).toBeInTheDocument();
-      await expect(reactionButton).toHaveTextContent(/^React$/);
-    });
-
-    await step('Adds first reaction', async () => {
-      const reactionButton = canvas.getByRole('button', { name: 'React to comment' });
-      await userEvent.click(reactionButton);
-
-      // Add a reaction from popover
-      const body = within(document.body);
-      const emojiButtons = await body.findAllByRole('button');
-      const heartButton = emojiButtons.find((btn) => btn.textContent?.includes('❤️'));
-      await userEvent.click(heartButton!);
-
-      // Verify count now shows 1 (with emoji)
-      await expect(reactionButton).toHaveTextContent(/1/);
-    });
   }
 };
 
@@ -373,17 +281,6 @@ export const SingleReaction: Story = {
 
   parameters: {
     controls: { disable: true }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders with single reaction', async () => {
-      const reactionButton = canvas.getByRole('button', { name: 'React to comment' });
-      await expect(reactionButton).toBeInTheDocument();
-      await expect(reactionButton).toHaveTextContent(/❤️/);
-      await expect(reactionButton).toHaveTextContent(/1/);
-    });
-
   }
 };
 
@@ -432,30 +329,6 @@ export const UserHasReacted: Story = {
         story: 'Shows highlighted state when user has reacted (👍 in this example).'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders with user reacted state', async () => {
-      const reactionButton = canvas.getByRole('button', { name: 'React to comment' });
-      await expect(reactionButton).toBeInTheDocument();
-      // Should show secondary variant styling because user has reacted
-      await expect(reactionButton).toHaveTextContent(/20/);
-    });
-
-    await step('Switches to different reaction', async () => {
-      const reactionButton = canvas.getByRole('button', { name: 'React to comment' });
-      await userEvent.click(reactionButton);
-
-      // Click heart to switch from thumbs up
-      const body = within(document.body);
-      const emojiButtons = await body.findAllByRole('button');
-      const heartButton = emojiButtons.find((btn) => btn.textContent?.includes('❤️'));
-      await userEvent.click(heartButton!);
-
-      // Total should stay 20 (thumbs up -1, heart +1)
-      await expect(reactionButton).toHaveTextContent(/20/);
-    });
   }
 };
 

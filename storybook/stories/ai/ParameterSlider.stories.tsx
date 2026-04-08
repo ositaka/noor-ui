@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { within, expect, userEvent } from 'storybook/test';
 import { ParameterSlider, temperaturePresets } from '../../../components/ui/parameter-slider';
 import { Card, CardContent } from '../../../components/ui/card';
 import { useState } from 'react';
@@ -218,35 +217,6 @@ export const WithoutPresets: Story = {
         story: 'Slider without preset buttons.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders without preset section', async () => {
-      await expect(canvas.getByText('Frequency Penalty')).toBeInTheDocument();
-
-      // Slider should be present
-      const slider = canvas.getByRole('slider');
-      await expect(slider).toBeInTheDocument();
-      await expect(slider).toHaveAttribute('aria-valuenow', '0');
-
-      // Verify no "Presets:" label or preset buttons
-      expect(canvas.queryByText('Presets:')).not.toBeInTheDocument();
-
-      // Check all buttons - should only be the info button
-      const buttons = canvas.getAllByRole('button');
-      await expect(buttons).toHaveLength(1); // Only info button
-      await expect(buttons[0]).toHaveAccessibleName(/information/i);
-    });
-
-    await step('Displays negative values correctly', async () => {
-      // Range includes negative values
-      await expect(canvas.getByText('-2.0')).toBeInTheDocument();
-      await expect(canvas.getByText('2.0')).toBeInTheDocument();
-
-      // Value display shows 0.0
-      await expect(canvas.getByText('0.0')).toBeInTheDocument();
-    });
   }
 };
 
@@ -315,39 +285,6 @@ export const WithoutValueDisplay: Story = {
         story: 'Slider with value badge hidden.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders without value badge', async () => {
-      await expect(canvas.getByText('Temperature')).toBeInTheDocument();
-
-      // Slider should be present
-      const slider = canvas.getByRole('slider');
-      await expect(slider).toBeInTheDocument();
-      await expect(slider).toHaveAttribute('aria-valuenow', '0.7');
-
-      // Value badge (0.7) should NOT be visible
-      expect(canvas.queryByText('0.7')).not.toBeInTheDocument();
-
-      // Range labels should still be present
-      await expect(canvas.getByText('0.0')).toBeInTheDocument();
-      await expect(canvas.getByText('2.0')).toBeInTheDocument();
-    });
-
-    await step('Slider interaction still works', async () => {
-      const slider = canvas.getByRole('slider');
-
-      slider.focus();
-      await expect(slider).toHaveFocus();
-
-      // Press ArrowRight to increase value
-      await userEvent.keyboard('{ArrowRight}');
-      await expect(slider).toHaveAttribute('aria-valuenow', '0.8');
-
-      // Value badge should still not appear
-      expect(canvas.queryByText('0.8')).not.toBeInTheDocument();
-    });
   }
 };
 

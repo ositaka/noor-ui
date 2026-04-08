@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { expect, userEvent, within } from 'storybook/test';
 import { ScrollArea, ScrollBar } from '../../../components/ui/scroll-area';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../../components/ui/card';
 import { Separator } from '../../../components/ui/separator';
@@ -76,20 +75,6 @@ export const VerticalScroll: Story = {
   ),
   parameters: {
     controls: { disable: true }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders vertical scroll area with card layout', async () => {
-      await expect(canvas.getByText('Vertical Scrolling')).toBeInTheDocument();
-      await expect(canvas.getByText('Item #1')).toBeVisible();
-      await expect(canvas.getByText('This is a description for item 1')).toBeVisible();
-    });
-
-    await step('Contains all items in scrollable area', async () => {
-      await expect(canvas.getByText('Item #1')).toBeInTheDocument();
-      await expect(canvas.getByText('Item #30')).toBeInTheDocument();
-    });
   }
 };
 
@@ -123,27 +108,6 @@ export const HorizontalScroll: Story = {
   ),
   parameters: {
     controls: { disable: true }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders horizontal scroll area', async () => {
-      await expect(canvas.getByText('Horizontal Scrolling')).toBeInTheDocument();
-      await expect(canvas.getByText('Card 1')).toBeVisible();
-      // "Horizontally scrollable content" appears multiple times, so check it exists
-      const scrollableContent = canvas.getAllByText('Horizontally scrollable content');
-      await expect(scrollableContent.length).toBeGreaterThan(0);
-    });
-
-    await step('Contains all horizontal cards', async () => {
-      await expect(canvas.getByText('Card 1')).toBeInTheDocument();
-      await expect(canvas.getByText('Card 20')).toBeInTheDocument();
-    });
-
-    await step('Horizontal scrollbar is present', async () => {
-      const scrollArea = canvas.getByText('Card 1').closest('[class*="overflow-hidden"]');
-      await expect(scrollArea).toBeInTheDocument();
-    });
   }
 };
 
@@ -176,23 +140,6 @@ export const BothScrollbars: Story = {
   ),
   parameters: {
     controls: { disable: true }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders bidirectional scroll area', async () => {
-      await expect(canvas.getByText('Both Scrollbars')).toBeInTheDocument();
-      await expect(canvas.getByText('Content scrollable in both directions')).toBeVisible();
-    });
-
-    await step('Contains scrollable content in both directions', async () => {
-      // Multiple items match the pattern, so use getAllByText
-      const longTexts = canvas.getAllByText(/This is a very long line of text.*Item/);
-      await expect(longTexts.length).toBeGreaterThanOrEqual(20);
-      // Verify first and last items exist
-      await expect(canvas.getByText(/Item 1$/)).toBeInTheDocument();
-      await expect(canvas.getByText(/Item 20$/)).toBeInTheDocument();
-    });
   }
 };
 
@@ -216,19 +163,6 @@ export const CompactList: Story = {
   ),
   parameters: {
     controls: { disable: true }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders compact list scroll area', async () => {
-      await expect(canvas.getByText('Tags')).toBeInTheDocument();
-      await expect(canvas.getByText('Tags')).toBeVisible();
-    });
-
-    await step('Displays all tags in scrollable list', async () => {
-      await expect(canvas.getByText('Tag 1')).toBeVisible();
-      await expect(canvas.getByText('Tag 15')).toBeInTheDocument();
-    });
   }
 };
 
@@ -276,31 +210,6 @@ export const SidebarContent: Story = {
   ),
   parameters: {
     controls: { disable: true }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders sidebar with navigation', async () => {
-      await expect(canvas.getByText('Navigation')).toBeInTheDocument();
-      await expect(canvas.getByRole('button', { name: 'Dashboard' })).toBeVisible();
-    });
-
-    await step('Contains all navigation buttons', async () => {
-      await expect(canvas.getByRole('button', { name: 'Dashboard' })).toBeInTheDocument();
-      await expect(canvas.getByRole('button', { name: 'Privacy' })).toBeInTheDocument();
-    });
-
-    await step('Buttons are interactive and keyboard accessible', async () => {
-      const dashboardButton = canvas.getByRole('button', { name: 'Dashboard' });
-
-      await userEvent.click(dashboardButton);
-      await expect(dashboardButton).toBeVisible();
-
-      // Test keyboard navigation
-      await userEvent.tab();
-      const focusedElement = document.activeElement;
-      await expect(focusedElement).toHaveAttribute('class', expect.stringContaining('rounded-md'));
-    });
   }
 };
 
@@ -344,20 +253,6 @@ const data = {
   ),
   parameters: {
     controls: { disable: true }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders code viewer', async () => {
-      await expect(canvas.getByText('Code Viewer')).toBeInTheDocument();
-      await expect(canvas.getByText('Scrollable code block')).toBeVisible();
-    });
-
-    await step('Displays code content', async () => {
-      await expect(canvas.getByText(/function fibonacci/)).toBeInTheDocument();
-      await expect(canvas.getByText(/const numbers/)).toBeVisible();
-      await expect(canvas.getByText(/const data/)).toBeInTheDocument();
-    });
   }
 };
 

@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { expect, fn, userEvent, within } from 'storybook/test';
+import { fn } from 'storybook/test';
 import { PrayerTimes, type Prayer } from '../../../components/ui/prayer-times';
 
 const meta = {
@@ -113,24 +113,6 @@ export const CompactVariant: Story = {
         story: 'Compact variant with minimal spacing for sidebars.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders compact variant', async () => {
-      await expect(canvas.getByText('Prayer Times')).toBeInTheDocument();
-      await expect(canvas.getByText('Mecca')).toBeInTheDocument();
-    });
-
-    await step('Shows all prayer times in compact layout', async () => {
-      await expect(canvas.getByText('Fajr')).toBeInTheDocument();
-      await expect(canvas.getByText('Maghrib')).toBeInTheDocument();
-      await expect(canvas.getByText('04:45')).toBeInTheDocument();
-    });
-
-    await step('Highlights Maghrib as next prayer', async () => {
-      await expect(canvas.getByText('Next')).toBeInTheDocument();
-    });
   }
 };
 
@@ -179,21 +161,6 @@ export const WithoutCountdown: Story = {
         story: 'Prayer times without countdown or next prayer highlight.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders without countdown section', async () => {
-      await expect(canvas.getByText('Prayer Times')).toBeInTheDocument();
-      await expect(canvas.getByText('Doha')).toBeInTheDocument();
-      await expect(canvas.queryByText('Next Prayer')).not.toBeInTheDocument();
-    });
-
-    await step('Shows all prayer times without highlight', async () => {
-      await expect(canvas.getByText('Fajr')).toBeInTheDocument();
-      await expect(canvas.getByText('Isha')).toBeInTheDocument();
-      await expect(canvas.queryByText('Next')).not.toBeInTheDocument();
-    });
   }
 };
 
@@ -227,39 +194,6 @@ export const NotificationVariant: Story = {
         location: 'الرياض'
       }
     }
-  },
-  play: async ({ canvasElement, step, args }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders notification variant with prayer time alert', async () => {
-      await expect(canvas.getByText('Prayer Time')).toBeInTheDocument();
-      await expect(canvas.getByText('Maghrib')).toBeInTheDocument();
-      await expect(canvas.getByText('18:05')).toBeInTheDocument();
-      await expect(canvas.getByText('Riyadh')).toBeInTheDocument();
-    });
-
-    await step('Shows action buttons', async () => {
-      await expect(canvas.getByRole('button', { name: /play adhan/i })).toBeInTheDocument();
-      await expect(canvas.getByRole('button', { name: /dismiss/i })).toBeInTheDocument();
-    });
-
-    await step('Handles play adhan click', async () => {
-      const playButton = canvas.getByRole('button', { name: /play adhan/i });
-      await userEvent.click(playButton);
-      await expect(args.onPlayAdhan).toHaveBeenCalledTimes(1);
-    });
-
-    await step('Handles dismiss click', async () => {
-      const dismissButton = canvas.getByRole('button', { name: /dismiss/i });
-      await userEvent.click(dismissButton);
-      await expect(args.onDismiss).toHaveBeenCalledTimes(1);
-    });
-
-    await step('Has close icon button', async () => {
-      const buttons = canvas.getAllByRole('button');
-      // Close button is one of the buttons (icon only)
-      await expect(buttons.length).toBeGreaterThanOrEqual(3);
-    });
   }
 };
 

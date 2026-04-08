@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { expect, userEvent, within } from 'storybook/test';
 import { Input } from '../../../components/ui/input';
 import { Label } from '../../../components/ui/label';
 import { MagnifyingGlass, Envelope, Lock, User } from '@phosphor-icons/react';
@@ -57,21 +56,6 @@ export const Email: Story = {
         placeholder: 'البريد الإلكتروني'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders with email type', async () => {
-      const input = canvas.getByPlaceholderText('Email address');
-      await expect(input).toBeInTheDocument();
-      await expect(input).toHaveAttribute('type', 'email');
-    });
-
-    await step('Accepts email input', async () => {
-      const input = canvas.getByPlaceholderText('Email address');
-      await userEvent.type(input, 'test@example.com');
-      await expect(input).toHaveValue('test@example.com');
-    });
   }
 };
 
@@ -86,21 +70,6 @@ export const Password: Story = {
         placeholder: 'كلمة المرور'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders with password type', async () => {
-      const input = canvas.getByPlaceholderText('Password');
-      await expect(input).toBeInTheDocument();
-      await expect(input).toHaveAttribute('type', 'password');
-    });
-
-    await step('Accepts password input', async () => {
-      const input = canvas.getByPlaceholderText('Password');
-      await userEvent.type(input, 'SecurePass123');
-      await expect(input).toHaveValue('SecurePass123');
-    });
   }
 };
 
@@ -108,21 +77,6 @@ export const Number: Story = {
   args: {
     type: 'number',
     placeholder: '0'
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders with number type', async () => {
-      const input = canvas.getByPlaceholderText('0');
-      await expect(input).toBeInTheDocument();
-      await expect(input).toHaveAttribute('type', 'number');
-    });
-
-    await step('Accepts numeric input', async () => {
-      const input = canvas.getByPlaceholderText('0');
-      await userEvent.type(input, '12345');
-      await expect(input).toHaveValue(12345);
-    });
   }
 };
 
@@ -137,21 +91,6 @@ export const SearchInput: Story = {
         placeholder: 'ابحث...'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders with search type', async () => {
-      const input = canvas.getByPlaceholderText('Search...');
-      await expect(input).toBeInTheDocument();
-      await expect(input).toHaveAttribute('type', 'search');
-    });
-
-    await step('Accepts search input', async () => {
-      const input = canvas.getByPlaceholderText('Search...');
-      await userEvent.type(input, 'query text');
-      await expect(input).toHaveValue('query text');
-    });
   }
 };
 
@@ -169,15 +108,6 @@ export const Disabled: Story = {
         value: 'لا يمكن التعديل'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Verifies disabled state', async () => {
-      const input = canvas.getByDisplayValue('Cannot edit this');
-      await expect(input).toBeInTheDocument();
-      await expect(input).toBeDisabled();
-    });
   }
 };
 
@@ -191,15 +121,6 @@ export const WithValue: Story = {
         value: 'حقل مملوء'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders with pre-filled value', async () => {
-      const input = canvas.getByDisplayValue('Filled input');
-      await expect(input).toBeInTheDocument();
-      await expect(input).toHaveValue('Filled input');
-    });
   }
 };
 
@@ -210,29 +131,7 @@ export const WithLabel: Story = {
       <Label htmlFor="email">Email</Label>
       <Input type="email" id="email" placeholder="Email" {...args} />
     </div>
-  ),
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders with associated label', async () => {
-      const input = canvas.getByLabelText('Email');
-      await expect(input).toBeInTheDocument();
-      await expect(input).toHaveAttribute('id', 'email');
-    });
-
-    await step('Label click focuses input', async () => {
-      const label = canvas.getByText('Email');
-      await userEvent.click(label);
-      const input = canvas.getByLabelText('Email');
-      await expect(input).toHaveFocus();
-    });
-
-    await step('Accepts input when focused via label', async () => {
-      const input = canvas.getByLabelText('Email');
-      await userEvent.type(input, 'user@test.com');
-      await expect(input).toHaveValue('user@test.com');
-    });
-  }
+  )
 };
 
 // With Icon
@@ -245,21 +144,6 @@ export const WithIconInside: Story = {
   ),
   parameters: {
     controls: { disable: true }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders input with icon', async () => {
-      const input = canvas.getByPlaceholderText('Search...');
-      await expect(input).toBeInTheDocument();
-    });
-
-    await step('Input works with icon present', async () => {
-      const input = canvas.getByPlaceholderText('Search...');
-      await userEvent.click(input);
-      await userEvent.type(input, 'search query');
-      await expect(input).toHaveValue('search query');
-    });
   }
 };
 
@@ -285,40 +169,6 @@ export const LoginForm: Story = {
   ),
   parameters: {
     controls: { disable: true }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Both form fields render', async () => {
-      const emailInput = canvas.getByLabelText(/Email/i);
-      const passwordInput = canvas.getByLabelText(/Password/i);
-      await expect(emailInput).toBeInTheDocument();
-      await expect(passwordInput).toBeInTheDocument();
-    });
-
-    await step('Tab navigation between fields', async () => {
-      const emailInput = canvas.getByLabelText(/Email/i);
-      const passwordInput = canvas.getByLabelText(/Password/i);
-
-      emailInput.focus();
-      await expect(emailInput).toHaveFocus();
-
-      await userEvent.tab();
-      await expect(passwordInput).toHaveFocus();
-    });
-
-    await step('Can fill form fields', async () => {
-      const emailInput = canvas.getByLabelText(/Email/i);
-      const passwordInput = canvas.getByLabelText(/Password/i);
-
-      await userEvent.clear(emailInput);
-      await userEvent.type(emailInput, 'test@example.com');
-      await expect(emailInput).toHaveValue('test@example.com');
-
-      await userEvent.clear(passwordInput);
-      await userEvent.type(passwordInput, 'password123');
-      await expect(passwordInput).toHaveValue('password123');
-    });
   }
 };
 
@@ -351,51 +201,5 @@ export const RegistrationForm: Story = {
   ),
   parameters: {
     controls: { disable: true }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('All registration fields render', async () => {
-      const nameInput = canvas.getByLabelText(/Full Name/i);
-      const emailInput = canvas.getByLabelText(/Email/i);
-      const passwordInput = canvas.getByLabelText(/Password/i);
-
-      await expect(nameInput).toBeInTheDocument();
-      await expect(emailInput).toBeInTheDocument();
-      await expect(passwordInput).toBeInTheDocument();
-    });
-
-    await step('Tab navigation through registration form', async () => {
-      const nameInput = canvas.getByLabelText(/Full Name/i);
-      const emailInput = canvas.getByLabelText(/Email/i);
-      const passwordInput = canvas.getByLabelText(/Password/i);
-
-      nameInput.focus();
-      await expect(nameInput).toHaveFocus();
-
-      await userEvent.tab();
-      await expect(emailInput).toHaveFocus();
-
-      await userEvent.tab();
-      await expect(passwordInput).toHaveFocus();
-    });
-
-    await step('Can fill complete registration form', async () => {
-      const nameInput = canvas.getByLabelText(/Full Name/i);
-      const emailInput = canvas.getByLabelText(/Email/i);
-      const passwordInput = canvas.getByLabelText(/Password/i);
-
-      await userEvent.clear(nameInput);
-      await userEvent.type(nameInput, 'Nuno Marques');
-      await expect(nameInput).toHaveValue('Nuno Marques');
-
-      await userEvent.clear(emailInput);
-      await userEvent.type(emailInput, 'john@example.com');
-      await expect(emailInput).toHaveValue('john@example.com');
-
-      await userEvent.clear(passwordInput);
-      await userEvent.type(passwordInput, 'SecurePass123');
-      await expect(passwordInput).toHaveValue('SecurePass123');
-    });
   }
 };

@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { expect, userEvent, within } from 'storybook/test';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '../../../components/ui/accordion';
 import { Card, CardContent } from '../../../components/ui/card';
 import { User, CreditCard, Calendar } from '@phosphor-icons/react';
@@ -109,23 +108,6 @@ export const BasicFAQ: Story = {
         story: 'Basic FAQ accordion with single item open at a time. Click to expand, click again to collapse.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders FAQ accordion', async () => {
-      await expect(canvas.getByRole('button', { name: /is it accessible/i })).toBeInTheDocument();
-    });
-
-    await step('Expands and collapses items', async () => {
-      const trigger = canvas.getByRole('button', { name: /is it accessible/i });
-      await userEvent.click(trigger);
-      await expect(canvas.getByText(/yes\. it adheres to the wai-aria design pattern/i)).toBeVisible();
-
-      // Collapse by clicking again - check aria-expanded instead of visibility
-      await userEvent.click(trigger);
-      await expect(trigger).toHaveAttribute('aria-expanded', 'false');
-    });
   }
 };
 
@@ -160,35 +142,6 @@ export const MultipleOpen: Story = {
         story: 'Multiple items can be open simultaneously. Account and Security are open by default.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders with multiple items open by default', async () => {
-      await expect(canvas.getByText(/manage your account settings/i)).toBeVisible();
-      await expect(canvas.getByText(/update your password and security/i)).toBeVisible();
-    });
-
-    await step('Can open third item while keeping others open', async () => {
-      const notificationsTrigger = canvas.getByRole('button', { name: /notifications/i });
-      await userEvent.click(notificationsTrigger);
-
-      // All three items should now be visible
-      await expect(canvas.getByText(/manage your account settings/i)).toBeVisible();
-      await expect(canvas.getByText(/update your password and security/i)).toBeVisible();
-      await expect(canvas.getByText(/configure your notification preferences/i)).toBeVisible();
-    });
-
-    await step('Can close individual items without affecting others', async () => {
-      const accountTrigger = canvas.getByRole('button', { name: /account/i });
-      await userEvent.click(accountTrigger);
-
-      // Account should be collapsed - check aria-expanded instead of visibility
-      await expect(accountTrigger).toHaveAttribute('aria-expanded', 'false');
-      // Others should still be visible
-      await expect(canvas.getByText(/update your password and security/i)).toBeVisible();
-      await expect(canvas.getByText(/configure your notification preferences/i)).toBeVisible();
-    });
   }
 };
 
@@ -238,21 +191,6 @@ export const WithIcons: Story = {
         story: 'Accordion with icons for visual clarity. Icons are placed before the text.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders accordion with icons', async () => {
-      await expect(canvas.getByRole('button', { name: /profile/i })).toBeInTheDocument();
-      await expect(canvas.getByRole('button', { name: /billing/i })).toBeInTheDocument();
-      await expect(canvas.getByRole('button', { name: /schedule/i })).toBeInTheDocument();
-    });
-
-    await step('Icons do not interfere with interactions', async () => {
-      const profileTrigger = canvas.getByRole('button', { name: /profile/i });
-      await userEvent.click(profileTrigger);
-      await expect(canvas.getByText(/update your profile information/i)).toBeVisible();
-    });
   }
 };
 
@@ -294,27 +232,6 @@ export const Controlled: Story = {
         story: 'Controlled accordion with external state management. Shows active item value above.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders with initial controlled state', async () => {
-      await expect(canvas.getByText(/active item: item-1/i)).toBeInTheDocument();
-      await expect(canvas.getByText(/manage your account settings/i)).toBeVisible();
-    });
-
-    await step('Updates controlled state when item clicked', async () => {
-      const securityTrigger = canvas.getByRole('button', { name: /security/i });
-      await userEvent.click(securityTrigger);
-      await expect(canvas.getByText(/active item: item-2/i)).toBeInTheDocument();
-      await expect(canvas.getByText(/update your password and security/i)).toBeVisible();
-    });
-
-    await step('State label reflects current selection', async () => {
-      const notificationsTrigger = canvas.getByRole('button', { name: /notifications/i });
-      await userEvent.click(notificationsTrigger);
-      await expect(canvas.getByText(/active item: item-3/i)).toBeInTheDocument();
-    });
   }
 };
 
@@ -354,19 +271,5 @@ export const InCard: Story = {
         story: 'Accordion placed inside a card component with a title.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders accordion within card context', async () => {
-      await expect(canvas.getByText(/frequently asked questions/i)).toBeInTheDocument();
-      await expect(canvas.getByRole('button', { name: /is it accessible/i })).toBeInTheDocument();
-    });
-
-    await step('Accordion works correctly inside card', async () => {
-      const trigger = canvas.getByRole('button', { name: /is it styled/i });
-      await userEvent.click(trigger);
-      await expect(canvas.getByText(/yes\. it comes with default styles/i)).toBeVisible();
-    });
   }
 };

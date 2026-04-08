@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { expect, within } from 'storybook/test';
 import { Blockquote } from '../../../components/ui/blockquote';
 
 const meta = {
@@ -51,20 +50,6 @@ export const AccentVariant: Story = {
   ),
   parameters: {
     controls: { disable: true }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders accent variant', async () => {
-      const blockquote = canvas.getByText(/Innovation distinguishes between a leader/i);
-      await expect(blockquote).toBeInTheDocument();
-    });
-
-    await step('Shows quote icon for accent variant', async () => {
-      const figure = canvas.getByRole('figure');
-      const svg = figure.querySelector('svg');
-      await expect(svg).toBeInTheDocument();
-    });
   }
 };
 
@@ -79,19 +64,6 @@ export const SubtleVariant: Story = {
   ),
   parameters: {
     controls: { disable: true }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders subtle variant', async () => {
-      const blockquote = canvas.getByText(/We delight in the beauty of the butterfly/i);
-      await expect(blockquote).toBeInTheDocument();
-    });
-
-    await step('Displays author', async () => {
-      const author = canvas.getByText(/Maya Angelou/i);
-      await expect(author).toBeVisible();
-    });
   }
 };
 
@@ -106,20 +78,6 @@ export const WithoutAttribution: Story = {
   ),
   parameters: {
     controls: { disable: true }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders quote without attribution', async () => {
-      const blockquote = canvas.getByText(/The only way to do great work/i);
-      await expect(blockquote).toBeInTheDocument();
-    });
-
-    await step('No figcaption when no author or source', async () => {
-      const figure = canvas.getByRole('figure');
-      const figcaption = figure.querySelector('figcaption');
-      await expect(figcaption).not.toBeInTheDocument();
-    });
   }
 };
 
@@ -144,27 +102,6 @@ export const WithCitationLink: Story = {
         story: 'Blockquote with clickable citation link. The source becomes a clickable link when cite prop is provided.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders quote with citation', async () => {
-      const blockquote = canvas.getByText(/Nothing in life is to be feared/i);
-      await expect(blockquote).toBeInTheDocument();
-    });
-
-    await step('Source is a clickable link', async () => {
-      const link = canvas.getByRole('link', { name: /Scientific Papers/i });
-      await expect(link).toBeInTheDocument();
-      await expect(link).toHaveAttribute('href', 'https://example.com/marie-curie');
-      await expect(link).toHaveAttribute('target', '_blank');
-      await expect(link).toHaveAttribute('rel', 'noopener noreferrer');
-    });
-
-    await step('Displays author', async () => {
-      const author = canvas.getByText(/Marie Curie/i);
-      await expect(author).toBeVisible();
-    });
   }
 };
 

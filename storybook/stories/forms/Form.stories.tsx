@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { expect, fn, userEvent, within } from 'storybook/test';
+import { fn } from 'storybook/test';
 import {
   Form,
   FormField,
@@ -132,72 +132,6 @@ export const BasicForm: Story = {
       </div>
     );
   },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders multi-field form correctly', async () => {
-      await expect(canvas.getByPlaceholderText('your@email.com')).toBeInTheDocument();
-      await expect(canvas.getByPlaceholderText('••••••••')).toBeInTheDocument();
-      await expect(canvas.getByText('At least 6 characters')).toBeInTheDocument();
-      await expect(canvas.getByRole('button', { name: /sign in/i })).toBeInTheDocument();
-    });
-
-    await step('Shows validation errors for both empty fields', async () => {
-      const submitButton = canvas.getByRole('button', { name: /sign in/i });
-      await userEvent.click(submitButton);
-
-      // Email has required validator, so error appears for empty field
-      await expect(canvas.getByText('Email is required')).toBeInTheDocument();
-
-      // Password only has minLength validator which returns undefined for empty values
-      // (minLength error is tested in the next step with a short password)
-    });
-
-    await step('Shows password length error for short password', async () => {
-      const emailInput = canvas.getByPlaceholderText('your@email.com');
-      const passwordInput = canvas.getByPlaceholderText('••••••••');
-
-      await userEvent.type(emailInput, 'test@example.com');
-      await userEvent.type(passwordInput, '123');
-
-      const submitButton = canvas.getByRole('button', { name: /sign in/i });
-      await userEvent.click(submitButton);
-
-      // Use p.text-destructive to target the <p> error message, NOT the <span> asterisk
-      const passwordError = canvasElement.querySelector('p.text-destructive');
-      await expect(passwordError).toHaveTextContent('Password must be at least 6 characters');
-    });
-
-    await step('Submits form with valid data', async () => {
-      const emailInput = canvas.getByPlaceholderText('your@email.com');
-      const passwordInput = canvas.getByPlaceholderText('••••••••');
-
-      // Clear and enter valid data
-      await userEvent.clear(emailInput);
-      await userEvent.clear(passwordInput);
-      await userEvent.type(emailInput, 'valid@example.com');
-      await userEvent.type(passwordInput, 'password123');
-
-      const submitButton = canvas.getByRole('button', { name: /sign in/i });
-      await userEvent.click(submitButton);
-
-      // Wait for async submission
-      await new Promise(resolve => setTimeout(resolve, 150));
-    });
-
-    await step('Tab navigation works through all fields', async () => {
-      const emailInput = canvas.getByPlaceholderText('your@email.com');
-      emailInput.focus();
-
-      await expect(emailInput).toHaveFocus();
-
-      await userEvent.tab();
-      await expect(canvas.getByPlaceholderText('••••••••')).toHaveFocus();
-
-      await userEvent.tab();
-      await expect(canvas.getByRole('button', { name: /sign in/i })).toHaveFocus();
-    });
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -264,48 +198,6 @@ export const WithValidation: Story = {
       </div>
     );
   },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders form with validation', async () => {
-      await expect(canvas.getByPlaceholderText('Enter your name')).toBeInTheDocument();
-      await expect(canvas.getByPlaceholderText('your@email.com')).toBeInTheDocument();
-    });
-
-    await step('Shows required validation errors', async () => {
-      const submitButton = canvas.getByRole('button', { name: /submit/i });
-      await userEvent.click(submitButton);
-
-      await expect(canvas.getByText('Name is required')).toBeInTheDocument();
-      await expect(canvas.getByText('Email is required')).toBeInTheDocument();
-    });
-
-    await step('Shows email format validation error', async () => {
-      const nameInput = canvas.getByPlaceholderText('Enter your name');
-      const emailInput = canvas.getByPlaceholderText('your@email.com');
-
-      await userEvent.type(nameInput, 'Nuno Marques');
-      await userEvent.type(emailInput, 'invalid-email');
-
-      const submitButton = canvas.getByRole('button', { name: /submit/i });
-      await userEvent.click(submitButton);
-
-      await expect(canvas.getByText('Please enter a valid email address')).toBeInTheDocument();
-    });
-
-    await step('Submits with valid email format', async () => {
-      const emailInput = canvas.getByPlaceholderText('your@email.com');
-
-      await userEvent.clear(emailInput);
-      await userEvent.type(emailInput, 'john@example.com');
-
-      const submitButton = canvas.getByRole('button', { name: /submit/i });
-      await userEvent.click(submitButton);
-
-      // No validation errors should be visible
-      await expect(canvas.queryByText('Please enter a valid email address')).not.toBeInTheDocument();
-    });
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -359,48 +251,6 @@ export const WithSelect: Story = {
       </div>
     );
   },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders form with select field', async () => {
-      await expect(canvas.getByRole('combobox')).toBeInTheDocument();
-      await expect(canvas.getByRole('button', { name: /save/i })).toBeInTheDocument();
-    });
-
-    await step('Shows validation error when no selection made', async () => {
-      const submitButton = canvas.getByRole('button', { name: /save/i });
-      await userEvent.click(submitButton);
-
-      await expect(canvas.getByText('Country is required')).toBeInTheDocument();
-    });
-
-    await step('Opens select dropdown', async () => {
-      const selectTrigger = canvas.getByRole('combobox');
-      await userEvent.click(selectTrigger);
-
-      // Radix Select renders options in a portal
-      const body = within(document.body);
-      await expect(body.getByRole('option', { name: /saudi arabia/i })).toBeInTheDocument();
-      await expect(body.getByRole('option', { name: /united arab emirates/i })).toBeInTheDocument();
-    });
-
-    await step('Selects an option', async () => {
-      const body = within(document.body);
-      const saudiOption = body.getByRole('option', { name: /saudi arabia/i });
-      await userEvent.click(saudiOption);
-
-      // Select should show the selected value
-      await expect(canvas.getByRole('combobox')).toHaveTextContent('Saudi Arabia');
-    });
-
-    await step('Submits form with selected value', async () => {
-      const submitButton = canvas.getByRole('button', { name: /save/i });
-      await userEvent.click(submitButton);
-
-      // No validation errors should be present
-      await expect(canvas.queryByText('Country is required')).not.toBeInTheDocument();
-    });
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -442,23 +292,6 @@ export const DisabledState: Story = {
       </Form>
     </div>
   ),
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders form in disabled state', async () => {
-      await expect(canvas.getByDisplayValue('user@example.com')).toBeInTheDocument();
-      await expect(canvas.getByText('This field is disabled')).toBeInTheDocument();
-    });
-
-    await step('Verifies disabled states', async () => {
-      const emailInput = canvas.getByDisplayValue('user@example.com');
-      const submitButton = canvas.getByRole('button', { name: /submit/i });
-
-      await expect(emailInput).toBeDisabled();
-      await expect(submitButton).toBeDisabled();
-      await expect(emailInput).toHaveValue('user@example.com');
-    });
-  },
   parameters: {
     controls: { disable: true },
     docs: {

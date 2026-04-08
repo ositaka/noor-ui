@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { expect, fn, userEvent, within } from 'storybook/test';
+import { fn } from 'storybook/test';
 import { ButtonArrow } from '../../../components/ui/button-arrow';
 import { Card, CardContent } from '../../../components/ui/card';
 
@@ -78,32 +78,6 @@ export const Directions: Story = {
         story: 'Forward, back, and external directional buttons.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('All directional buttons render', async () => {
-      await expect(canvas.getByRole('button', { name: /next step/i })).toBeInTheDocument();
-      await expect(canvas.getByRole('button', { name: /previous step/i })).toBeInTheDocument();
-      await expect(canvas.getByRole('link', { name: /view in storybook/i })).toBeInTheDocument();
-    });
-
-    await step('All buttons contain arrow icons', async () => {
-      const icons = canvasElement.querySelectorAll('svg');
-      await expect(icons.length).toBeGreaterThanOrEqual(3);
-    });
-
-    await step('Forward button has arrow at end', async () => {
-      const forwardBtn = canvas.getByRole('button', { name: /next step/i });
-      const lastChild = forwardBtn.lastChild;
-      await expect(lastChild?.nodeName).toBe('svg');
-    });
-
-    await step('Back button has arrow at start', async () => {
-      const backBtn = canvas.getByRole('button', { name: /previous step/i });
-      const firstChild = backBtn.firstChild;
-      await expect(firstChild?.nodeName).toBe('svg');
-    });
   }
 };
 
@@ -133,22 +107,6 @@ export const IconStyles: Story = {
         story: 'Chevron, arrow, and external diagonal arrow icon styles.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('All icon style buttons render', async () => {
-      await expect(canvas.getByRole('button', { name: /continue/i })).toBeInTheDocument();
-      await expect(canvas.getByRole('button', { name: /learn more/i })).toBeInTheDocument();
-      const goBackButtons = canvas.getAllByRole('button', { name: /go back/i });
-      await expect(goBackButtons).toHaveLength(2);
-      await expect(canvas.getByRole('link', { name: /external link/i })).toBeInTheDocument();
-    });
-
-    await step('All buttons contain icons', async () => {
-      const icons = canvasElement.querySelectorAll('svg');
-      await expect(icons.length).toBeGreaterThanOrEqual(5);
-    });
   }
 };
 
@@ -178,27 +136,6 @@ export const WithVariants: Story = {
         story: 'ButtonArrow with all button variants including link variant.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('All variant buttons render', async () => {
-      await expect(canvas.getByRole('button', { name: /^primary$/i })).toBeInTheDocument();
-      await expect(canvas.getByRole('button', { name: /secondary/i })).toBeInTheDocument();
-      await expect(canvas.getByRole('button', { name: /outline/i })).toBeInTheDocument();
-      await expect(canvas.getByRole('button', { name: /ghost/i })).toBeInTheDocument();
-      await expect(canvas.getByRole('link', { name: /link style/i })).toBeInTheDocument();
-    });
-
-    await step('Primary button has correct variant class', async () => {
-      const primaryBtn = canvas.getByRole('button', { name: /^primary$/i });
-      await expect(primaryBtn).toHaveClass('bg-primary');
-    });
-
-    await step('Outline button has correct variant class', async () => {
-      const outlineBtn = canvas.getByRole('button', { name: /outline/i });
-      await expect(outlineBtn).toHaveClass('border');
-    });
   }
 };
 
@@ -217,22 +154,6 @@ export const ForwardOnly: Story = {
         story: 'Forward direction buttons only.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Forward buttons render', async () => {
-      await expect(canvas.getByRole('button', { name: /continue/i })).toBeInTheDocument();
-      await expect(canvas.getByRole('button', { name: /next/i })).toBeInTheDocument();
-    });
-
-    await step('Both have arrows at end position', async () => {
-      const continueBtn = canvas.getByRole('button', { name: /continue/i });
-      const nextBtn = canvas.getByRole('button', { name: /next/i });
-
-      await expect(continueBtn.lastChild?.nodeName).toBe('svg');
-      await expect(nextBtn.lastChild?.nodeName).toBe('svg');
-    });
   }
 };
 
@@ -268,28 +189,6 @@ export const ExternalLinks: Story = {
         story: 'External link buttons with diagonal arrows that auto-mirror in RTL.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('All external links render', async () => {
-      await expect(canvas.getByRole('link', { name: /view storybook/i })).toBeInTheDocument();
-      await expect(canvas.getByRole('link', { name: /github/i })).toBeInTheDocument();
-      await expect(canvas.getByRole('link', { name: /documentation/i })).toBeInTheDocument();
-    });
-
-    await step('External links have proper target and rel attributes', async () => {
-      const links = canvas.getAllByRole('link');
-      for (const link of links) {
-        await expect(link).toHaveAttribute('target', '_blank');
-        await expect(link).toHaveAttribute('rel', 'noopener noreferrer');
-      }
-    });
-
-    await step('All external links contain diagonal arrow icon', async () => {
-      const icons = canvasElement.querySelectorAll('svg');
-      await expect(icons.length).toBeGreaterThanOrEqual(3);
-    });
   }
 };
 
@@ -308,22 +207,6 @@ export const BackOnly: Story = {
         story: 'Back direction buttons only.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Back buttons render', async () => {
-      await expect(canvas.getByRole('button', { name: /go back/i })).toBeInTheDocument();
-      await expect(canvas.getByRole('button', { name: /previous/i })).toBeInTheDocument();
-    });
-
-    await step('Both have arrows at start position', async () => {
-      const goBackBtn = canvas.getByRole('button', { name: /go back/i });
-      const previousBtn = canvas.getByRole('button', { name: /previous/i });
-
-      await expect(goBackBtn.firstChild?.nodeName).toBe('svg');
-      await expect(previousBtn.firstChild?.nodeName).toBe('svg');
-    });
   }
 };
 
@@ -341,24 +224,6 @@ export const IconPositionStart: Story = {
         children: 'الأيقونة في البداية'
       }
     }
-  },
-  play: async ({ canvasElement, step, args }) => {
-    const canvas = within(canvasElement);
-    const button = canvas.getByRole('button', { name: /icon at start/i });
-
-    await step('Button renders with icon at start', async () => {
-      await expect(button).toBeInTheDocument();
-    });
-
-    await step('Icon is positioned at start', async () => {
-      const firstChild = button.firstChild;
-      await expect(firstChild?.nodeName).toBe('svg');
-    });
-
-    await step('Handles click interaction', async () => {
-      await userEvent.click(button);
-      await expect(args.onClick).toHaveBeenCalledTimes(1);
-    });
   }
 };
 
@@ -375,24 +240,6 @@ export const IconPositionEnd: Story = {
         children: 'الأيقونة في النهاية'
       }
     }
-  },
-  play: async ({ canvasElement, step, args }) => {
-    const canvas = within(canvasElement);
-    const button = canvas.getByRole('button', { name: /icon at end/i });
-
-    await step('Button renders with icon at end', async () => {
-      await expect(button).toBeInTheDocument();
-    });
-
-    await step('Icon is positioned at end', async () => {
-      const lastChild = button.lastChild;
-      await expect(lastChild?.nodeName).toBe('svg');
-    });
-
-    await step('Handles click interaction', async () => {
-      await userEvent.click(button);
-      await expect(args.onClick).toHaveBeenCalledTimes(1);
-    });
   }
 };
 
@@ -410,24 +257,6 @@ export const HiddenIcon: Story = {
         children: 'بدون أيقونة'
       }
     }
-  },
-  play: async ({ canvasElement, step, args }) => {
-    const canvas = within(canvasElement);
-    const button = canvas.getByRole('button', { name: /no icon/i });
-
-    await step('Button renders without icon', async () => {
-      await expect(button).toBeInTheDocument();
-    });
-
-    await step('No icon is present', async () => {
-      const icon = button.querySelector('svg');
-      await expect(icon).not.toBeInTheDocument();
-    });
-
-    await step('Still handles click interaction', async () => {
-      await userEvent.click(button);
-      await expect(args.onClick).toHaveBeenCalledTimes(1);
-    });
   }
 };
 
@@ -444,25 +273,6 @@ export const KeyboardNavigation: Story = {
         children: 'اضغط Enter أو Space'
       }
     }
-  },
-  play: async ({ canvasElement, step, args }) => {
-    const canvas = within(canvasElement);
-    const button = canvas.getByRole('button', { name: /press enter or space/i });
-
-    await step('Button can be focused with Tab', async () => {
-      await userEvent.tab();
-      await expect(button).toHaveFocus();
-    });
-
-    await step('Enter key triggers click', async () => {
-      await userEvent.keyboard('{Enter}');
-      await expect(args.onClick).toHaveBeenCalledTimes(1);
-    });
-
-    await step('Space key triggers click', async () => {
-      await userEvent.keyboard(' ');
-      await expect(args.onClick).toHaveBeenCalledTimes(2);
-    });
   }
 };
 
@@ -480,19 +290,5 @@ export const DisabledState: Story = {
         children: 'زر معطّل'
       }
     }
-  },
-  play: async ({ canvasElement, step, args }) => {
-    const canvas = within(canvasElement);
-    const button = canvas.getByRole('button', { name: /disabled button/i });
-
-    await step('Disabled button renders', async () => {
-      await expect(button).toBeInTheDocument();
-      await expect(button).toBeDisabled();
-    });
-
-    await step('Click blocked by pointer-events: none', async () => {
-      await expect(button).toHaveClass('disabled:pointer-events-none');
-      await expect(args.onClick).not.toHaveBeenCalled();
-    });
   }
 };

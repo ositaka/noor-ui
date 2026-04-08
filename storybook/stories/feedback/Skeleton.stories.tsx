@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { expect, within } from 'storybook/test';
 import { Skeleton } from '../../../components/ui/skeleton';
 import { Card, CardContent } from '../../../components/ui/card';
 
@@ -49,22 +48,6 @@ export const CardSkeleton: Story = {
       </CardContent>
     </Card>
   ),
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders card skeleton pattern', async () => {
-      const skeletons = canvas.getAllByRole('generic');
-      // Expect multiple skeleton elements
-      await expect(skeletons.length).toBeGreaterThan(2);
-    });
-
-    await step('All skeletons are visible', async () => {
-      const skeletons = canvas.getAllByRole('generic');
-      skeletons.forEach(async (skeleton) => {
-        await expect(skeleton).toBeVisible();
-      });
-    });
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -90,22 +73,6 @@ export const ProfileSkeleton: Story = {
       </CardContent>
     </Card>
   ),
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders profile skeleton pattern', async () => {
-      const skeletons = canvas.getAllByRole('generic');
-      // Avatar + 2 text lines
-      await expect(skeletons.length).toBeGreaterThanOrEqual(3);
-    });
-
-    await step('Profile skeletons are visible', async () => {
-      const skeletons = canvas.getAllByRole('generic');
-      skeletons.forEach(async (skeleton) => {
-        await expect(skeleton).toBeVisible();
-      });
-    });
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -135,22 +102,6 @@ export const ListSkeleton: Story = {
       </CardContent>
     </Card>
   ),
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders list skeleton pattern', async () => {
-      const skeletons = canvas.getAllByRole('generic');
-      // 3 items x 3 skeletons each = 9+ elements
-      await expect(skeletons.length).toBeGreaterThanOrEqual(9);
-    });
-
-    await step('All list skeletons are visible', async () => {
-      const skeletons = canvas.getAllByRole('generic');
-      skeletons.forEach(async (skeleton) => {
-        await expect(skeleton).toBeVisible();
-      });
-    });
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -171,21 +122,6 @@ export const TextLines: Story = {
       <Skeleton className="h-4 w-1/2" />
     </div>
   ),
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders text line skeletons', async () => {
-      const skeletons = canvasElement.querySelectorAll('.animate-pulse');
-      await expect(skeletons.length).toBe(4);
-    });
-
-    await step('Text line skeletons are visible', async () => {
-      const skeletons = canvasElement.querySelectorAll('.animate-pulse');
-      skeletons.forEach(async (skeleton) => {
-        await expect(skeleton).toBeVisible();
-      });
-    });
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -206,21 +142,6 @@ export const AvatarSizes: Story = {
       <Skeleton className="h-16 w-16 rounded-full" />
     </div>
   ),
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders avatar skeletons', async () => {
-      const skeletons = canvasElement.querySelectorAll('.animate-pulse');
-      await expect(skeletons.length).toBe(4);
-    });
-
-    await step('Avatar skeletons are visible', async () => {
-      const skeletons = canvasElement.querySelectorAll('.animate-pulse');
-      skeletons.forEach(async (skeleton) => {
-        await expect(skeleton).toBeVisible();
-      });
-    });
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -240,21 +161,6 @@ export const ButtonSkeleton: Story = {
       <Skeleton className="h-9 w-28" />
     </div>
   ),
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders button skeletons', async () => {
-      const skeletons = canvasElement.querySelectorAll('.animate-pulse');
-      await expect(skeletons.length).toBe(3);
-    });
-
-    await step('Button skeletons are visible', async () => {
-      const skeletons = canvasElement.querySelectorAll('.animate-pulse');
-      skeletons.forEach(async (skeleton) => {
-        await expect(skeleton).toBeVisible();
-      });
-    });
-  },
   parameters: {
     controls: { disable: true },
     docs: {

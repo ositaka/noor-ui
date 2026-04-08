@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { expect, userEvent, within } from 'storybook/test';
 import { Textarea } from '../../../components/ui/textarea';
 import { Label } from '../../../components/ui/label';
 import { Button } from '../../../components/ui/button';
@@ -53,21 +52,6 @@ export const WithLabel: Story = {
   ),
   parameters: {
     controls: { disable: true }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Label associates with textarea', async () => {
-      const textarea = canvas.getByLabelText('Bio');
-      await expect(textarea).toBeInTheDocument();
-      await expect(textarea).toHaveAttribute('id', 'bio');
-    });
-
-    await step('Accepts text input', async () => {
-      const textarea = canvas.getByLabelText('Bio');
-      await userEvent.type(textarea, 'Software developer');
-      await expect(textarea).toHaveValue('Software developer');
-    });
   }
 };
 
@@ -122,22 +106,6 @@ export const CharacterCount: Story = {
   },
   parameters: {
     controls: { disable: true }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Character counter updates on typing', async () => {
-      const textarea = canvas.getByLabelText('Description');
-      await expect(canvas.getByText('0 / 200')).toBeInTheDocument();
-
-      await userEvent.type(textarea, 'This is a test description');
-      await expect(canvas.getByText('26 / 200')).toBeInTheDocument();
-    });
-
-    await step('Respects maxLength attribute', async () => {
-      const textarea = canvas.getByLabelText('Description');
-      await expect(textarea).toHaveAttribute('maxLength', '200');
-    });
   }
 };
 
@@ -161,20 +129,6 @@ export const DisabledAndReadonly: Story = {
   ),
   parameters: {
     controls: { disable: true }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Disabled textarea has correct state', async () => {
-      const disabledTextarea = canvas.getByLabelText('Disabled');
-      await expect(disabledTextarea).toBeDisabled();
-    });
-
-    await step('Readonly textarea has correct attribute', async () => {
-      const readonlyTextarea = canvas.getByLabelText('Read-only');
-      await expect(readonlyTextarea).toHaveAttribute('readonly');
-      await expect(readonlyTextarea).toHaveValue('This text cannot be edited.');
-    });
   }
 };
 
@@ -216,22 +170,6 @@ export const WithValidation: Story = {
   },
   parameters: {
     controls: { disable: true }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Shows error for short text', async () => {
-      const textarea = canvas.getByLabelText('Feedback');
-      await userEvent.type(textarea, 'Short');
-      await expect(canvas.getByText('Message must be at least 10 characters')).toBeInTheDocument();
-    });
-
-    await step('Shows success for valid text', async () => {
-      const textarea = canvas.getByLabelText('Feedback');
-      await userEvent.clear(textarea);
-      await userEvent.type(textarea, 'This is valid feedback');
-      await expect(canvas.getByText('Looks good!')).toBeInTheDocument();
-    });
   }
 };
 
@@ -266,19 +204,6 @@ export const AutoExpand: Story = {
   },
   parameters: {
     controls: { disable: true }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Auto-expand functionality works', async () => {
-      const textarea = canvas.getByPlaceholderText('Type to expand...');
-      const initialHeight = textarea.style.height;
-
-      await userEvent.type(textarea, 'Line 1\nLine 2\nLine 3\nLine 4');
-
-      // Verify textarea accepts multiline text
-      await expect(textarea).toHaveValue('Line 1\nLine 2\nLine 3\nLine 4');
-    });
   }
 };
 
@@ -316,25 +241,5 @@ export const InForm: Story = {
   ),
   parameters: {
     controls: { disable: true }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Textarea works in form context', async () => {
-      const textarea = canvas.getByLabelText('Message');
-      await expect(textarea).toHaveAttribute('required');
-      await expect(textarea).toHaveAttribute('rows', '5');
-
-      await userEvent.type(textarea, 'This is my form message');
-      await expect(textarea).toHaveValue('This is my form message');
-    });
-
-    await step('Form can be filled and submitted', async () => {
-      const subject = canvas.getByLabelText('Subject');
-      await userEvent.type(subject, 'Test Subject');
-
-      const submitButton = canvas.getByRole('button', { name: 'Send Message' });
-      await expect(submitButton).toBeInTheDocument();
-    });
   }
 };

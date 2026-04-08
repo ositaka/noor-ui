@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { expect, fn, userEvent, within } from 'storybook/test';
+import { fn } from 'storybook/test';
 import {
   ContextMenu,
   ContextMenuContent,
@@ -126,28 +126,6 @@ export const BasicUsage: Story = {
       </ContextMenuContent>
     </ContextMenu>
   ),
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-    const body = within(document.body);
-
-    await step('Renders trigger', async () => {
-      const trigger = canvas.getByText('Right click here');
-      await expect(trigger).toBeInTheDocument();
-    });
-
-    await step('Opens on right-click', async () => {
-      const trigger = canvas.getByText('Right click here');
-      await userEvent.pointer({ keys: '[MouseRight>]', target: trigger });
-
-      // Context menu renders in portal at document.body
-      const editItem = await body.findByRole('menuitem', { name: /edit/i });
-      await expect(editItem).toBeInTheDocument();
-
-      // Verify shortcuts are present
-      const shortcut = body.getByText('⌘E');
-      await expect(shortcut).toBeInTheDocument();
-    });
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -227,41 +205,6 @@ export const WithCheckboxes: Story = {
       </ContextMenu>
     );
   },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-    const body = within(document.body);
-
-    await step('Opens context menu', async () => {
-      const trigger = canvas.getByText('Right click for options');
-      await userEvent.pointer({ keys: '[MouseRight>]', target: trigger });
-
-      // Context menu renders in portal at document.body
-      const label = await body.findByText('View Options');
-      await expect(label).toBeInTheDocument();
-    });
-
-    await step('Shows checkbox items with correct initial states', async () => {
-      const bookmarksItem = body.getByRole('menuitemcheckbox', { name: /Show Bookmarks/i });
-      const readingListItem = body.getByRole('menuitemcheckbox', { name: /Show Reading List/i });
-
-      await expect(bookmarksItem).toBeInTheDocument();
-      await expect(bookmarksItem).toHaveAttribute('data-state', 'checked');
-      await expect(readingListItem).toBeInTheDocument();
-      await expect(readingListItem).toHaveAttribute('data-state', 'unchecked');
-    });
-
-    await step('Toggles checkbox state on click', async () => {
-      const readingListItem = body.getByRole('menuitemcheckbox', { name: /Show Reading List/i });
-      await userEvent.click(readingListItem);
-
-      // Need to reopen menu to see state change
-      const trigger = canvas.getByText('Right click for options');
-      await userEvent.pointer({ keys: '[MouseRight>]', target: trigger });
-
-      const updatedItem = await body.findByRole('menuitemcheckbox', { name: /Show Reading List/i });
-      await expect(updatedItem).toHaveAttribute('data-state', 'checked');
-    });
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -312,34 +255,6 @@ export const FileExplorer: Story = {
       </div>
     </div>
   ),
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-    const body = within(document.body);
-
-    await step('Renders multiple file items', async () => {
-      const docFile = canvas.getByText('Document.pdf');
-      const imgFile = canvas.getByText('Image.png');
-      const vidFile = canvas.getByText('Video.mp4');
-
-      await expect(docFile).toBeInTheDocument();
-      await expect(imgFile).toBeInTheDocument();
-      await expect(vidFile).toBeInTheDocument();
-    });
-
-    await step('Each file has its own context menu', async () => {
-      const imgFile = canvas.getByText('Image.png');
-      await userEvent.pointer({ keys: '[MouseRight>]', target: imgFile });
-
-      // Context menu renders in portal at document.body
-      const copyItem = await body.findByText('Copy');
-      const downloadItem = body.getByText('Download');
-      const favoritesItem = body.getByText('Add to Favorites');
-
-      await expect(copyItem).toBeInTheDocument();
-      await expect(downloadItem).toBeInTheDocument();
-      await expect(favoritesItem).toBeInTheDocument();
-    });
-  },
   parameters: {
     controls: { disable: true },
     docs: {

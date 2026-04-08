@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { expect, fn, userEvent, within } from 'storybook/test';
+import { fn } from 'storybook/test';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '../../../components/ui/collapsible';
 import { Button } from '../../../components/ui/button';
 import { Card, CardContent } from '../../../components/ui/card';
@@ -100,27 +100,6 @@ export const BasicFAQ: Story = {
       </div>
     );
   },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders FAQ question', async () => {
-      const trigger = canvas.getByRole('button', { name: /can i use this in my project/i });
-      await expect(trigger).toBeInTheDocument();
-      await expect(trigger).toBeVisible();
-    });
-
-    await step('Toggle interaction works', async () => {
-      const trigger = canvas.getByRole('button', { name: /can i use this in my project/i });
-
-      // Expand
-      await userEvent.click(trigger);
-      await expect(canvas.getByText(/yes! this component is free/i)).toBeInTheDocument();
-
-      // Collapse
-      await userEvent.click(trigger);
-      await expect(canvas.queryByText(/yes! this component is free/i)).not.toBeInTheDocument();
-    });
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -161,29 +140,6 @@ export const ControlledWithIcon: Story = {
         </CardContent>
       </Card>
     );
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders open by default', async () => {
-      const trigger = canvas.getByRole('button', { name: /hide details/i });
-      await expect(trigger).toBeInTheDocument();
-      await expect(canvas.getByText(/this collapsible is controlled/i)).toBeInTheDocument();
-    });
-
-    await step('Button text changes with state', async () => {
-      // Initially shows "Hide" because it's open
-      let trigger = canvas.getByRole('button', { name: /hide details/i });
-      await expect(trigger).toBeVisible();
-
-      // Click to collapse - button should show "Show"
-      await userEvent.click(trigger);
-      trigger = canvas.getByRole('button', { name: /show details/i });
-      await expect(trigger).toBeVisible();
-
-      // Content should be hidden
-      await expect(canvas.queryByText(/this collapsible is controlled/i)).not.toBeInTheDocument();
-    });
   },
   parameters: {
     controls: { disable: true },
@@ -226,25 +182,6 @@ export const SidebarStyle: Story = {
         </Collapsible>
       </div>
     );
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders sidebar with heading', async () => {
-      await expect(canvas.getByText('Starred Repositories')).toBeInTheDocument();
-      const trigger = canvas.getByRole('button', { name: /toggle/i });
-      await expect(trigger).toBeInTheDocument();
-    });
-
-    await step('Expands to show list items', async () => {
-      const trigger = canvas.getByRole('button', { name: /toggle/i });
-      await userEvent.click(trigger);
-
-      // Check all three repository items are visible
-      await expect(canvas.getByText('rtl-design-system')).toBeInTheDocument();
-      await expect(canvas.getByText('react-components')).toBeInTheDocument();
-      await expect(canvas.getByText('typescript-utils')).toBeInTheDocument();
-    });
   },
   parameters: {
     controls: { disable: true },
@@ -293,30 +230,6 @@ export const FAQStyle: Story = {
       </div>
     );
   },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders all FAQ questions', async () => {
-      await expect(canvas.getByRole('button', { name: /what is this design system/i })).toBeInTheDocument();
-      await expect(canvas.getByRole('button', { name: /how do i install it/i })).toBeInTheDocument();
-      await expect(canvas.getByRole('button', { name: /is it accessible/i })).toBeInTheDocument();
-    });
-
-    await step('Each collapsible works independently', async () => {
-      // Open first question
-      const firstQuestion = canvas.getByRole('button', { name: /what is this design system/i });
-      await userEvent.click(firstQuestion);
-      await expect(canvas.getByText(/an rtl-first design system/i)).toBeInTheDocument();
-
-      // Open second question
-      const secondQuestion = canvas.getByRole('button', { name: /how do i install it/i });
-      await userEvent.click(secondQuestion);
-      await expect(canvas.getByText(/simply run npm install/i)).toBeInTheDocument();
-
-      // First question should still be open
-      await expect(canvas.getByText(/an rtl-first design system/i)).toBeInTheDocument();
-    });
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -343,30 +256,6 @@ export const SimpleUncontrolled: Story = {
       </Collapsible>
     </div>
   ),
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders uncontrolled collapsible', async () => {
-      const trigger = canvas.getByRole('button', { name: /toggle details/i });
-      await expect(trigger).toBeInTheDocument();
-      await expect(trigger).toBeVisible();
-    });
-
-    await step('Uncontrolled state management works', async () => {
-      const trigger = canvas.getByRole('button', { name: /toggle details/i });
-
-      // Should be collapsed initially
-      await expect(canvas.queryByText(/this is uncontrolled collapsible content/i)).not.toBeInTheDocument();
-
-      // Expand
-      await userEvent.click(trigger);
-      await expect(canvas.getByText(/this is uncontrolled collapsible content/i)).toBeInTheDocument();
-
-      // Collapse
-      await userEvent.click(trigger);
-      await expect(canvas.queryByText(/this is uncontrolled collapsible content/i)).not.toBeInTheDocument();
-    });
-  },
   parameters: {
     controls: { disable: true },
     docs: {

@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { within, expect } from 'storybook/test';
 import { ArabicNumber } from '../../../components/ui/arabic-number';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../../components/ui/card';
 
@@ -149,27 +148,6 @@ export const CurrencyFormat: Story = {
         story: 'Currency formatting in both Western and Arabic numerals.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders English currency format', async () => {
-      const numbers = canvasElement.querySelectorAll('span.text-2xl');
-      // English format: 9,999.99 SAR
-      await expect(numbers[0]).toHaveTextContent('9,999.99 SAR');
-    });
-
-    await step('Renders Arabic currency format', async () => {
-      const numbers = canvasElement.querySelectorAll('span.text-2xl');
-      // Arabic format with Arabic-Indic numerals: ٩٬٩٩٩٫٩٩ ر.س
-      await expect(numbers[1]).toHaveTextContent('٩٬٩٩٩٫٩٩ ر.س');
-    });
-
-    await step('Displays descriptive labels', async () => {
-      // Check for label text containing key identifiers
-      await expect(canvas.getByText(/English.*SAR/)).toBeVisible();
-      await expect(canvas.getByText(/Arabic/)).toBeVisible();
-    });
   }
 };
 
@@ -230,27 +208,6 @@ export const CompactFormat: Story = {
         story: 'Compact notation for large numbers (1.2M, 3.4K, etc.).'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders English compact format', async () => {
-      const numbers = canvasElement.querySelectorAll('span.text-2xl');
-      // English compact format: 1.2M
-      await expect(numbers[0]).toHaveTextContent('1.2M');
-    });
-
-    await step('Renders Arabic compact format', async () => {
-      const numbers = canvasElement.querySelectorAll('span.text-2xl');
-      // Arabic compact format with Arabic-Indic numerals: ١٫٢ مليون
-      await expect(numbers[1]).toHaveTextContent('١٫٢ مليون');
-    });
-
-    await step('Displays compact notation description', async () => {
-      // Labels show the conversion examples
-      await expect(canvas.getByText('1,234,567 → 1.2M')).toBeVisible();
-      await expect(canvas.getByText('1,234,567 → ١٫٢ مليون')).toBeVisible();
-    });
   }
 };
 

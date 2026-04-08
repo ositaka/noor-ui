@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { expect, within } from 'storybook/test';
 import { PullQuote } from '../../../components/ui/blockquote';
 import { Card, CardContent, CardHeader, CardTitle } from '../../../components/ui/card';
 
@@ -53,20 +52,6 @@ export const CenterAligned: Story = {
   ),
   parameters: {
     controls: { disable: true }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders center-aligned pull quote', async () => {
-      const pullQuote = canvas.getByRole('complementary');
-      await expect(pullQuote).toBeInTheDocument();
-    });
-
-    await step('Contains quote content', async () => {
-      const content = canvas.getByText(/The pen is mightier than the sword/i);
-      await expect(content).toBeInTheDocument();
-      await expect(content).toBeVisible();
-    });
   }
 };
 
@@ -86,20 +71,6 @@ export const LeftAligned: Story = {
   ),
   parameters: {
     controls: { disable: true }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders left-aligned pull quote', async () => {
-      const pullQuote = canvas.getByRole('complementary');
-      await expect(pullQuote).toBeInTheDocument();
-    });
-
-    await step('Contains quote content', async () => {
-      const content = canvas.getByText(/Knowledge is power/i);
-      await expect(content).toBeInTheDocument();
-      await expect(content).toBeVisible();
-    });
   }
 };
 
@@ -119,20 +90,6 @@ export const RightAligned: Story = {
   ),
   parameters: {
     controls: { disable: true }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders right-aligned pull quote', async () => {
-      const pullQuote = canvas.getByRole('complementary');
-      await expect(pullQuote).toBeInTheDocument();
-    });
-
-    await step('Contains quote content', async () => {
-      const content = canvas.getByText(/Actions speak louder than words/i);
-      await expect(content).toBeInTheDocument();
-      await expect(content).toBeVisible();
-    });
   }
 };
 

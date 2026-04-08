@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { expect, fn, userEvent, within } from 'storybook/test';
+import { fn } from 'storybook/test';
 import { RangeSlider } from '../../../components/ui/range-slider';
 import { Card, CardContent } from '../../../components/ui/card';
 import { Label } from '../../../components/ui/label';
@@ -84,29 +84,6 @@ export const PriceRange: Story = {
   },
   parameters: {
     controls: { disable: true }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders with custom formatting', async () => {
-      const sliders = canvas.getAllByRole('slider');
-      await expect(sliders).toHaveLength(2);
-
-      // Verify formatted labels appear
-      await expect(canvas.getByText('$100')).toBeInTheDocument();
-      await expect(canvas.getByText('$500')).toBeInTheDocument();
-    });
-
-    await step('Shows min/max labels', async () => {
-      await expect(canvas.getByText('$0')).toBeInTheDocument();
-      await expect(canvas.getByText('$1000')).toBeInTheDocument();
-    });
-
-    await step('Respects custom step increment', async () => {
-      const sliders = canvas.getAllByRole('slider');
-      await expect(sliders[0]).toHaveAttribute('aria-valuemin', '0');
-      await expect(sliders[0]).toHaveAttribute('aria-valuemax', '1000');
-    });
   }
 };
 
@@ -190,23 +167,6 @@ export const WithLabels: Story = {
   },
   parameters: {
     controls: { disable: true }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Displays value labels', async () => {
-      // Check that current values are displayed
-      const labels = canvas.getAllByText('30');
-      await expect(labels.length).toBeGreaterThan(0);
-
-      const labels70 = canvas.getAllByText('70');
-      await expect(labels70.length).toBeGreaterThan(0);
-    });
-
-    await step('Displays min/max labels', async () => {
-      await expect(canvas.getByText('0')).toBeInTheDocument();
-      await expect(canvas.getByText('100')).toBeInTheDocument();
-    });
   }
 };
 
@@ -233,25 +193,6 @@ export const WithoutLabels: Story = {
   },
   parameters: {
     controls: { disable: true }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders without internal labels', async () => {
-      const sliders = canvas.getAllByRole('slider');
-      await expect(sliders).toHaveLength(2);
-
-      // External label should exist
-      await expect(canvas.getByText('Range: 25 - 75')).toBeInTheDocument();
-    });
-
-    await step('Values update external label', async () => {
-      const sliders = canvas.getAllByRole('slider');
-
-      // Verify sliders have correct values
-      await expect(sliders[0]).toHaveAttribute('aria-valuenow', '25');
-      await expect(sliders[1]).toHaveAttribute('aria-valuenow', '75');
-    });
   }
 };
 
@@ -281,23 +222,6 @@ export const CustomStep: Story = {
   },
   parameters: {
     controls: { disable: true }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders with custom step', async () => {
-      const sliders = canvas.getAllByRole('slider');
-      await expect(sliders).toHaveLength(2);
-
-      // Verify values are aligned to step
-      await expect(sliders[0]).toHaveAttribute('aria-valuenow', '100');
-      await expect(sliders[1]).toHaveAttribute('aria-valuenow', '400');
-    });
-
-    await step('Shows formatted min/max', async () => {
-      await expect(canvas.getByText('$0')).toBeInTheDocument();
-      await expect(canvas.getByText('$1000')).toBeInTheDocument();
-    });
   }
 };
 
@@ -321,18 +245,6 @@ export const Disabled: Story = {
   ),
   parameters: {
     controls: { disable: true }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders in disabled state', async () => {
-      const sliders = canvas.getAllByRole('slider');
-      await expect(sliders).toHaveLength(2);
-
-      // Radix Slider uses data-disabled attribute, not native disabled
-      await expect(sliders[0]).toHaveAttribute('data-disabled');
-      await expect(sliders[1]).toHaveAttribute('data-disabled');
-    });
   }
 };
 

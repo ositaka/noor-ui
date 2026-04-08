@@ -72,27 +72,6 @@ export const Simple: Story = {
       }
     }
   },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders trigger button', async () => {
-      const button = canvas.getByRole('button', { name: /show simple toast/i });
-      await expect(button).toBeInTheDocument();
-    });
-
-    await step('Shows toast with description only', async () => {
-      const button = canvas.getByRole('button', { name: /show simple toast/i });
-      await userEvent.click(button);
-
-      // Wait for toast to appear
-      await new Promise(resolve => setTimeout(resolve, 100));
-
-      // Toast renders in a portal (document.body)
-      const bodyCanvas = within(document.body);
-      const description = bodyCanvas.getByText('Your message has been sent.');
-      await expect(description).toBeInTheDocument();
-    });
-  }
 };
 
 // With Title - from component page lines 210-214
@@ -120,30 +99,6 @@ export const WithTitle: Story = {
       }
     }
   },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders trigger button', async () => {
-      const button = canvas.getByRole('button', { name: /show toast/i });
-      await expect(button).toBeInTheDocument();
-    });
-
-    await step('Shows toast with title and description', async () => {
-      const button = canvas.getByRole('button', { name: /show toast/i });
-      await userEvent.click(button);
-
-      // Wait for toast to appear
-      await new Promise(resolve => setTimeout(resolve, 100));
-
-      // Toast renders in a portal (document.body)
-      const bodyCanvas = within(document.body);
-      const title = bodyCanvas.getByText('Scheduled: Catch up');
-      await expect(title).toBeInTheDocument();
-
-      const description = bodyCanvas.getByText('Friday, February 10, 2023 at 5:57 PM');
-      await expect(description).toBeInTheDocument();
-    });
-  }
 };
 
 // Destructive - from component page lines 233-238

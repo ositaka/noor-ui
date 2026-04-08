@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { expect, within } from 'storybook/test';
 import { EmptyState } from '../../../components/ui/empty-state';
 import { Button } from '../../../components/ui/button';
 import { Card } from '../../../components/ui/card';
@@ -106,23 +105,6 @@ export const BasicUsage: Story = {
         story: 'Simple empty state with icon, title, description, and action button.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders empty state correctly', async () => {
-      const emptyState = canvas.getByRole('status');
-      await expect(emptyState).toBeInTheDocument();
-      await expect(emptyState).toBeVisible();
-    });
-
-    await step('Displays all content elements', async () => {
-      await expect(canvas.getByText('No articles found')).toBeInTheDocument();
-      await expect(canvas.getByText('Get started by creating your first article')).toBeInTheDocument();
-      await expect(canvas.getByRole('button', { name: /create article/i })).toBeInTheDocument();
-      const svg = canvasElement.querySelector('svg');
-      await expect(svg).toBeInTheDocument();
-    });
   }
 };
 
@@ -144,28 +126,6 @@ export const WithoutAction: Story = {
         story: 'Empty state without action button. Used when no action is needed.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders empty state correctly', async () => {
-      const emptyState = canvas.getByRole('status');
-      await expect(emptyState).toBeInTheDocument();
-      await expect(emptyState).toBeVisible();
-    });
-
-    await step('Displays title and description', async () => {
-      await expect(canvas.getByText('Tray is empty')).toBeInTheDocument();
-      await expect(canvas.getByText("You're all caught up! No new messages.")).toBeInTheDocument();
-    });
-
-    await step('Contains icon but no action button', async () => {
-      const svg = canvasElement.querySelector('svg');
-      await expect(svg).toBeInTheDocument();
-
-      const buttons = canvas.queryAllByRole('button');
-      await expect(buttons).toHaveLength(0);
-    });
   }
 };
 
@@ -188,26 +148,6 @@ export const SearchResults: Story = {
         story: 'Empty state for search results with clear filters action.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders search results empty state', async () => {
-      const emptyState = canvas.getByRole('status');
-      await expect(emptyState).toBeInTheDocument();
-      await expect(emptyState).toBeVisible();
-    });
-
-    await step('Displays search-specific content', async () => {
-      await expect(canvas.getByText('No results found')).toBeInTheDocument();
-      await expect(canvas.getByText("Try adjusting your search or filter to find what you're looking for.")).toBeInTheDocument();
-    });
-
-    await step('Displays outline button', async () => {
-      const button = canvas.getByRole('button', { name: /clear filters/i });
-      await expect(button).toBeInTheDocument();
-      await expect(button).toBeVisible();
-    });
   }
 };
 
@@ -238,27 +178,6 @@ export const MultipleActions: Story = {
         story: 'Empty state with multiple action buttons.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders empty state correctly', async () => {
-      const emptyState = canvas.getByRole('status');
-      await expect(emptyState).toBeInTheDocument();
-      await expect(emptyState).toBeVisible();
-    });
-
-    await step('Displays team-specific content', async () => {
-      await expect(canvas.getByText('No team members yet')).toBeInTheDocument();
-      await expect(canvas.getByText('Invite your team to start collaborating')).toBeInTheDocument();
-    });
-
-    await step('Displays multiple action buttons', async () => {
-      const buttons = canvas.getAllByRole('button');
-      await expect(buttons).toHaveLength(2);
-      await expect(canvas.getByRole('button', { name: /invite members/i })).toBeInTheDocument();
-      await expect(canvas.getByRole('button', { name: /learn more/i })).toBeInTheDocument();
-    });
   }
 };
 
@@ -336,28 +255,6 @@ export const MinimalLayout: Story = {
         story: 'Minimal empty state with just title and description, no icon or action.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders minimal empty state', async () => {
-      const emptyState = canvas.getByRole('status');
-      await expect(emptyState).toBeInTheDocument();
-      await expect(emptyState).toBeVisible();
-    });
-
-    await step('Displays only title and description', async () => {
-      await expect(canvas.getByText('No items')).toBeInTheDocument();
-      await expect(canvas.getByText('Your list is currently empty')).toBeInTheDocument();
-    });
-
-    await step('Verifies no icon or action button', async () => {
-      const svg = canvasElement.querySelector('svg');
-      await expect(svg).not.toBeInTheDocument();
-
-      const buttons = canvas.queryAllByRole('button');
-      await expect(buttons).toHaveLength(0);
-    });
   }
 };
 

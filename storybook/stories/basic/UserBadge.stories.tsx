@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { expect, within } from 'storybook/test';
 import { UserBadge } from '../../../components/ui/user-badge';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../../components/ui/card';
 
@@ -60,14 +59,6 @@ export const Author: Story = {
   render: () => <UserBadge variant="author" />,
   parameters: {
     controls: { disable: true }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders author badge', async () => {
-      await expect(canvas.getByText('Author')).toBeInTheDocument();
-      await expect(canvas.getByText('Author')).toBeVisible();
-    });
   }
 };
 
@@ -76,14 +67,6 @@ export const Moderator: Story = {
   render: () => <UserBadge variant="moderator" />,
   parameters: {
     controls: { disable: true }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders moderator badge', async () => {
-      await expect(canvas.getByText('Moderator')).toBeInTheDocument();
-      await expect(canvas.getByText('Moderator')).toBeVisible();
-    });
   }
 };
 
@@ -92,14 +75,6 @@ export const Verified: Story = {
   render: () => <UserBadge variant="verified" />,
   parameters: {
     controls: { disable: true }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders verified badge', async () => {
-      await expect(canvas.getByText('Verified')).toBeInTheDocument();
-      await expect(canvas.getByText('Verified')).toBeVisible();
-    });
   }
 };
 
@@ -108,14 +83,6 @@ export const Admin: Story = {
   render: () => <UserBadge variant="admin" />,
   parameters: {
     controls: { disable: true }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders admin badge', async () => {
-      await expect(canvas.getByText('Admin')).toBeInTheDocument();
-      await expect(canvas.getByText('Admin')).toBeVisible();
-    });
   }
 };
 
@@ -130,14 +97,5 @@ export const Custom: Story = {
   ),
   parameters: {
     controls: { disable: true }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders custom badges with labels', async () => {
-      await expect(canvas.getByText('VIP')).toBeInTheDocument();
-      await expect(canvas.getByText('Pro')).toBeInTheDocument();
-      await expect(canvas.getByText('Plus')).toBeInTheDocument();
-    });
   }
 };

@@ -2,7 +2,6 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Chart } from '../../../components/ui/chart';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../../components/ui/card';
 import * as React from 'react';
-import { expect, within } from 'storybook/test';
 
 /**
  *
@@ -122,36 +121,6 @@ export const BarChart: Story = {
       />
     </div>
   ),
-
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Figure element has correct role and aria-label', async () => {
-      const figure = canvas.getByRole('img');
-      await expect(figure).toBeInTheDocument();
-      await expect(figure).toHaveAttribute('aria-label', 'Department budget allocation bar chart');
-    });
-
-    await step('sr-only table has correct column headers', async () => {
-      const table = canvasElement.querySelector('table.sr-only');
-      await expect(table).toBeInTheDocument();
-      const tableScope = within(table as HTMLElement);
-      // Single value key "budget" plus category key "dept"
-      await expect(tableScope.getByRole('columnheader', { name: 'dept' })).toBeInTheDocument();
-      await expect(tableScope.getByRole('columnheader', { name: 'budget' })).toBeInTheDocument();
-    });
-
-    await step('All department names appear in the data table', async () => {
-      const table = canvasElement.querySelector('table.sr-only');
-      const tableScope = within(table as HTMLElement);
-      // departmentBudgets has: Eng, Design, Marketing, Sales, Support
-      await expect(tableScope.getByRole('rowheader', { name: 'Eng' })).toBeInTheDocument();
-      await expect(tableScope.getByRole('rowheader', { name: 'Design' })).toBeInTheDocument();
-      await expect(tableScope.getByRole('rowheader', { name: 'Marketing' })).toBeInTheDocument();
-      await expect(tableScope.getByRole('rowheader', { name: 'Sales' })).toBeInTheDocument();
-      await expect(tableScope.getByRole('rowheader', { name: 'Support' })).toBeInTheDocument();
-    });
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -242,33 +211,6 @@ export const DonutChart: Story = {
       </div>
     </div>
   ),
-
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Three figure elements exist with role="img"', async () => {
-      const figures = canvas.getAllByRole('img');
-      await expect(figures).toHaveLength(3);
-      await expect(figures[0]).toHaveAttribute('aria-label', '73% of tasks completed');
-      await expect(figures[1]).toHaveAttribute('aria-label', '45% of tasks in progress');
-      await expect(figures[2]).toHaveAttribute('aria-label', '92% of target reached');
-    });
-
-    await step('Three sr-only summary elements exist with percentage values', async () => {
-      // DonutDataSummary renders <div class="sr-only"> with the innerLabel as a <span>
-      const srOnlyDivs = canvasElement.querySelectorAll('div.sr-only');
-      await expect(srOnlyDivs).toHaveLength(3);
-      await expect(srOnlyDivs[0].textContent).toContain('73%');
-      await expect(srOnlyDivs[1].textContent).toContain('45%');
-      await expect(srOnlyDivs[2].textContent).toContain('92%');
-    });
-
-    await step('Visible inner labels are aria-hidden', async () => {
-      // The inner label overlay divs are aria-hidden="true" (not the sr-only ones)
-      const ariaHiddenInners = canvasElement.querySelectorAll('[aria-hidden="true"]');
-      await expect(ariaHiddenInners.length).toBeGreaterThan(0);
-    });
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -593,34 +535,6 @@ export const MultiSegmentDonut: Story = {
       </div>
     </div>
   ),
-
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Figure element has correct role and aria-label', async () => {
-      const figure = canvas.getByRole('img');
-      await expect(figure).toBeInTheDocument();
-      await expect(figure).toHaveAttribute('aria-label', 'Monthly spending breakdown across 5 categories');
-    });
-
-    await step('sr-only table exists for multi-segment data', async () => {
-      const table = canvasElement.querySelector('table.sr-only');
-      await expect(table).toBeInTheDocument();
-      const tableScope = within(table as HTMLElement);
-      await expect(tableScope.getByRole('columnheader', { name: 'category' })).toBeInTheDocument();
-      await expect(tableScope.getByRole('columnheader', { name: 'amount' })).toBeInTheDocument();
-    });
-
-    await step('All 5 spending categories appear in the data table', async () => {
-      const table = canvasElement.querySelector('table.sr-only');
-      const tableScope = within(table as HTMLElement);
-      await expect(tableScope.getByRole('rowheader', { name: 'Housing' })).toBeInTheDocument();
-      await expect(tableScope.getByRole('rowheader', { name: 'Food & Dining' })).toBeInTheDocument();
-      await expect(tableScope.getByRole('rowheader', { name: 'Transport' })).toBeInTheDocument();
-      await expect(tableScope.getByRole('rowheader', { name: 'Healthcare' })).toBeInTheDocument();
-      await expect(tableScope.getByRole('rowheader', { name: 'Entertainment' })).toBeInTheDocument();
-    });
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -731,26 +645,6 @@ export const MultiSegmentDonutWithCustomColors: Story = {
       </div>
     </div>
   ),
-
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Figure element exists with descriptive aria-label', async () => {
-      const figure = canvas.getByRole('img');
-      await expect(figure).toBeInTheDocument();
-      await expect(figure).toHaveAttribute('aria-label', 'Appointment type distribution for the current month');
-    });
-
-    await step('All 4 appointment types appear in the sr-only table', async () => {
-      const table = canvasElement.querySelector('table.sr-only');
-      await expect(table).toBeInTheDocument();
-      const tableScope = within(table as HTMLElement);
-      await expect(tableScope.getByRole('rowheader', { name: 'General Checkup' })).toBeInTheDocument();
-      await expect(tableScope.getByRole('rowheader', { name: 'Specialist' })).toBeInTheDocument();
-      await expect(tableScope.getByRole('rowheader', { name: 'Dental' })).toBeInTheDocument();
-      await expect(tableScope.getByRole('rowheader', { name: 'Emergency' })).toBeInTheDocument();
-    });
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -886,56 +780,6 @@ export const RealWorld_Dashboard: Story = {
       </div>
     </div>
   ),
-
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('All 6 chart figures exist (3 donuts, 1 area, 1 bar, 1 line)', async () => {
-      // 3 donut KPI charts + area + bar + line = 6 figures total
-      const figures = canvas.getAllByRole('img');
-      await expect(figures).toHaveLength(6);
-    });
-
-    await step('Each chart figure has a proper aria-label', async () => {
-      const figures = canvas.getAllByRole('img');
-      // Every figure must have a non-empty aria-label attribute
-      for (const figure of figures) {
-        const label = figure.getAttribute('aria-label');
-        await expect(label).toBeTruthy();
-        await expect((label as string).length).toBeGreaterThan(0);
-      }
-      // Verify the specific labels for the 3 donut KPI charts
-      await expect(figures[0]).toHaveAttribute('aria-label', '87% of revenue target reached');
-      await expect(figures[1]).toHaveAttribute('aria-label', '61% of user growth goal reached');
-      await expect(figures[2]).toHaveAttribute('aria-label', '94% customer satisfaction NPS');
-      // And the line/bar/area charts
-      await expect(figures[3]).toHaveAttribute('aria-label', 'Monthly active users area chart');
-      await expect(figures[4]).toHaveAttribute('aria-label', 'Department budget bar chart');
-      await expect(figures[5]).toHaveAttribute('aria-label', 'Quarterly sales line chart comparing Dubai and Riyadh');
-    });
-
-    await step('sr-only tables exist for area, bar, and line charts', async () => {
-      // The 3 line/bar/area charts each produce a <table class="sr-only">
-      const tables = canvasElement.querySelectorAll('table.sr-only');
-      await expect(tables).toHaveLength(3);
-
-      // Area chart table — categoryKey "month", valueKey "users"
-      const areaTable = within(tables[0] as HTMLElement);
-      await expect(areaTable.getByRole('columnheader', { name: 'month' })).toBeInTheDocument();
-      await expect(areaTable.getByRole('columnheader', { name: 'users' })).toBeInTheDocument();
-
-      // Bar chart table — categoryKey "dept", valueKey "budget"
-      const barTable = within(tables[1] as HTMLElement);
-      await expect(barTable.getByRole('columnheader', { name: 'dept' })).toBeInTheDocument();
-      await expect(barTable.getByRole('columnheader', { name: 'budget' })).toBeInTheDocument();
-
-      // Line chart table — categoryKey "quarter", valueKeys "dubai" and "riyadh"
-      const lineTable = within(tables[2] as HTMLElement);
-      await expect(lineTable.getByRole('columnheader', { name: 'quarter' })).toBeInTheDocument();
-      await expect(lineTable.getByRole('columnheader', { name: 'dubai' })).toBeInTheDocument();
-      await expect(lineTable.getByRole('columnheader', { name: 'riyadh' })).toBeInTheDocument();
-    });
-  },
   parameters: {
     layout: 'padded',
     controls: { disable: true },

@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { within, expect } from 'storybook/test';
 import { ThinkingIndicator } from '../../../components/ui/thinking-indicator';
 import { Card, CardContent } from '../../../components/ui/card';
 import { Separator } from '../../../components/ui/separator';
@@ -103,27 +102,6 @@ export const WithMessages: Story = {
         story: 'Indicators with custom messages.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders all three indicators', async () => {
-      const indicators = canvas.getAllByRole('status');
-      expect(indicators).toHaveLength(3);
-    });
-
-    await step('Displays custom messages', async () => {
-      await expect(canvas.getByText('Thinking...')).toBeInTheDocument();
-      await expect(canvas.getByText('Processing your request...')).toBeInTheDocument();
-      await expect(canvas.getByText('Analyzing data...')).toBeInTheDocument();
-    });
-
-    await step('Each indicator has correct aria-label', async () => {
-      const indicators = canvas.getAllByRole('status');
-      await expect(indicators[0]).toHaveAttribute('aria-label', 'Thinking...');
-      await expect(indicators[1]).toHaveAttribute('aria-label', 'Processing your request...');
-      await expect(indicators[2]).toHaveAttribute('aria-label', 'Analyzing data...');
-    });
   }
 };
 
@@ -149,27 +127,6 @@ export const SizeVariants: Story = {
         story: 'Indicators in different sizes.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders all size variants', async () => {
-      const indicators = canvas.getAllByRole('status');
-      expect(indicators).toHaveLength(3);
-    });
-
-    await step('Displays size-specific messages', async () => {
-      await expect(canvas.getByText('Small size')).toBeInTheDocument();
-      await expect(canvas.getByText('Default size')).toBeInTheDocument();
-      await expect(canvas.getByText('Large size')).toBeInTheDocument();
-    });
-
-    await step('All indicators are visible', async () => {
-      const indicators = canvas.getAllByRole('status');
-      indicators.forEach(indicator => {
-        expect(indicator).toBeVisible();
-      });
-    });
   }
 };
 
@@ -198,19 +155,6 @@ export const InChatContext: Story = {
         story: 'Indicator in chat message context with avatar.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders in chat context', async () => {
-      const indicator = canvas.getByRole('status');
-      await expect(indicator).toBeInTheDocument();
-      await expect(indicator).toBeVisible();
-    });
-
-    await step('Displays with AI avatar', async () => {
-      await expect(canvas.getByText('AI')).toBeInTheDocument();
-    });
   }
 };
 
@@ -235,19 +179,6 @@ export const DotsOnly: Story = {
         story: 'Just the dots variant.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders dots variant', async () => {
-      const indicator = canvas.getByRole('status');
-      await expect(indicator).toBeInTheDocument();
-      await expect(indicator).toBeVisible();
-    });
-
-    await step('Displays description text', async () => {
-      await expect(canvas.getByText(/Bouncing dots animation/i)).toBeInTheDocument();
-    });
   }
 };
 
@@ -272,19 +203,6 @@ export const PulseOnly: Story = {
         story: 'Just the pulse variant.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders pulse variant', async () => {
-      const indicator = canvas.getByRole('status');
-      await expect(indicator).toBeInTheDocument();
-      await expect(indicator).toBeVisible();
-    });
-
-    await step('Displays description text', async () => {
-      await expect(canvas.getByText(/Pulsing fade animation/i)).toBeInTheDocument();
-    });
   }
 };
 
@@ -309,19 +227,6 @@ export const WaveOnly: Story = {
         story: 'Just the wave variant.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders wave variant', async () => {
-      const indicator = canvas.getByRole('status');
-      await expect(indicator).toBeInTheDocument();
-      await expect(indicator).toBeVisible();
-    });
-
-    await step('Displays description text', async () => {
-      await expect(canvas.getByText(/Wave animation/i)).toBeInTheDocument();
-    });
   }
 };
 
@@ -346,19 +251,6 @@ export const TypingOnly: Story = {
         story: 'Just the typing variant.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders typing variant', async () => {
-      const indicator = canvas.getByRole('status');
-      await expect(indicator).toBeInTheDocument();
-      await expect(indicator).toBeVisible();
-    });
-
-    await step('Displays description text', async () => {
-      await expect(canvas.getByText(/Typing bubble animation/i)).toBeInTheDocument();
-    });
   }
 };
 

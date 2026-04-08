@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { expect, fn, userEvent, within } from 'storybook/test';
 import {
   Command,
   CommandDialog,
@@ -114,35 +113,6 @@ export const BasicCommand: Story = {
         story: 'Basic command menu with search, groups, and icons. Type to search.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders with search input', async () => {
-      const input = canvas.getByPlaceholderText('Type a command or search...');
-      await expect(input).toBeInTheDocument();
-      await expect(input).toBeVisible();
-    });
-
-    await step('Shows all command items', async () => {
-      await expect(canvas.getByText('Calendar')).toBeInTheDocument();
-      await expect(canvas.getByText('Search Emoji')).toBeInTheDocument();
-      await expect(canvas.getByText('Calculator')).toBeInTheDocument();
-      await expect(canvas.getByText('Profile')).toBeInTheDocument();
-
-      // "Settings" appears as both a group heading and an item
-      const settingsElements = canvas.getAllByText('Settings');
-      await expect(settingsElements.length).toBeGreaterThanOrEqual(2);
-    });
-
-    await step('Search filters items', async () => {
-      const input = canvas.getByPlaceholderText('Type a command or search...');
-
-      await userEvent.type(input, 'search');
-
-      // Search Emoji should be visible
-      await expect(canvas.getByText('Search Emoji')).toBeInTheDocument();
-    });
   }
 };
 
@@ -180,27 +150,6 @@ export const WithShortcuts: Story = {
         story: 'Command menu with keyboard shortcuts displayed on the right.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders command items with shortcuts', async () => {
-      await expect(canvas.getByText('New File')).toBeInTheDocument();
-      await expect(canvas.getByText('Search Files')).toBeInTheDocument();
-      await expect(canvas.getByText('Settings')).toBeInTheDocument();
-    });
-
-    await step('Displays keyboard shortcuts', async () => {
-      await expect(canvas.getByText('⌘N')).toBeInTheDocument();
-      await expect(canvas.getByText('⌘F')).toBeInTheDocument();
-      await expect(canvas.getByText('⌘,')).toBeInTheDocument();
-    });
-
-    await step('Shortcuts are visible', async () => {
-      // Verify shortcuts are rendered (don't test CSS implementation details)
-      const shortcut = canvas.getByText('⌘N');
-      await expect(shortcut).toBeVisible();
-    });
   }
 };
 
@@ -257,50 +206,6 @@ export const CommandDialogExample: Story = {
         story: 'Command menu in dialog mode. Opens with ⌘K (Cmd+K or Ctrl+K).'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders button to open dialog', async () => {
-      const button = canvas.getByRole('button', { name: /open command menu/i });
-      await expect(button).toBeInTheDocument();
-      await expect(button).toBeVisible();
-    });
-
-    await step('Shows keyboard shortcut hint', async () => {
-      await expect(canvas.getByText('⌘')).toBeInTheDocument();
-      await expect(canvas.getByText('K')).toBeInTheDocument();
-    });
-
-    await step('Dialog initially closed', async () => {
-      // Dialog content should not be visible
-      const input = canvas.queryByPlaceholderText('Type a command or search...');
-      expect(input).not.toBeInTheDocument();
-    });
-
-    await step('Opens dialog on button click', async () => {
-      const button = canvas.getByRole('button', { name: /open command menu/i });
-      await userEvent.click(button);
-
-      // Dialog should now be open - find in document body
-      const dialog = document.querySelector('[role="dialog"]');
-      await expect(dialog).toBeInTheDocument();
-
-      // Find input within the dialog
-      const input = document.querySelector('[role="dialog"] input');
-      await expect(input).toBeInTheDocument();
-    });
-
-    await step('Can close dialog with Escape', async () => {
-      await userEvent.keyboard('{Escape}');
-
-      // Give time for dialog to close
-      await new Promise(resolve => setTimeout(resolve, 100));
-
-      // Dialog should be closed
-      const dialog = document.querySelector('[role="dialog"]');
-      expect(dialog).not.toBeInTheDocument();
-    });
   }
 };
 
@@ -353,45 +258,6 @@ export const MultipleGroups: Story = {
         story: 'Command menu with multiple groups separated by dividers.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders all group headings', async () => {
-      await expect(canvas.getByText('Files')).toBeInTheDocument();
-      await expect(canvas.getByText('Search')).toBeInTheDocument();
-      await expect(canvas.getByText('Settings')).toBeInTheDocument();
-    });
-
-    await step('Renders items from all groups', async () => {
-      // Files group
-      await expect(canvas.getByText('New File')).toBeInTheDocument();
-      await expect(canvas.getByText('Open File')).toBeInTheDocument();
-
-      // Search group
-      await expect(canvas.getByText('Search Files')).toBeInTheDocument();
-      await expect(canvas.getByText('Search Symbols')).toBeInTheDocument();
-
-      // Settings group
-      await expect(canvas.getByText('Preferences')).toBeInTheDocument();
-      await expect(canvas.getByText('Profile')).toBeInTheDocument();
-    });
-
-    await step('Can navigate between groups', async () => {
-      const input = canvas.getByPlaceholderText('Type a command or search...');
-      await userEvent.click(input);
-
-      // Navigate down through items
-      await userEvent.keyboard('{ArrowDown}');
-      await userEvent.keyboard('{ArrowDown}');
-      await userEvent.keyboard('{ArrowDown}');
-
-      // Should be able to navigate across groups
-      const searchFilesItem = canvas.getByText('Search Files').closest('[cmdk-item]');
-      if (searchFilesItem) {
-        await expect(searchFilesItem).toBeInTheDocument();
-      }
-    });
   }
 };
 

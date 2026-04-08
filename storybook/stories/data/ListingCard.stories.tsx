@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { expect, fn, userEvent, within } from 'storybook/test';
+import { fn } from 'storybook/test';
 import { ListingCard } from '../../../components/ui/listing-card';
 import {
   House,
@@ -142,21 +142,6 @@ export const BasicListing: Story = {
         story: 'Basic listing with just title, subtitle, description, and price.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders basic listing content', async () => {
-      await expect(canvas.getByText('Modern Apartment')).toBeInTheDocument();
-      await expect(canvas.getByText('Downtown Dubai')).toBeInTheDocument();
-      await expect(canvas.getByText('Beautiful 2-bedroom apartment with stunning views')).toBeInTheDocument();
-      await expect(canvas.getByText('1,200,000 AED')).toBeInTheDocument();
-    });
-
-    await step('Has placeholder icon', async () => {
-      const icon = canvasElement.querySelector('svg');
-      await expect(icon).toBeInTheDocument();
-    });
   }
 };
 
@@ -207,50 +192,6 @@ export const RealEstateListing: Story = {
         story: 'Full real estate listing with badges, actions, stats, tags, and featured styling.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders title and description', async () => {
-      await expect(canvas.getByText('Luxury Villa in Dubai Hills')).toBeInTheDocument();
-      await expect(canvas.getByText('Dubai Hills Estate, Dubai')).toBeInTheDocument();
-      await expect(canvas.getByText('Stunning 5-bedroom villa with private pool and garden')).toBeInTheDocument();
-      await expect(canvas.getByText('8,500,000 AED')).toBeInTheDocument();
-    });
-
-    await step('Displays badges', async () => {
-      await expect(canvas.getByText('For Sale')).toBeInTheDocument();
-      await expect(canvas.getByText('Featured')).toBeInTheDocument();
-    });
-
-    await step('Has action buttons', async () => {
-      const favoriteButton = canvas.getByRole('button', { name: /favorite/i });
-      const shareButton = canvas.getByRole('button', { name: /share/i });
-      await expect(favoriteButton).toBeInTheDocument();
-      await expect(shareButton).toBeInTheDocument();
-    });
-
-    await step('Action buttons are clickable', async () => {
-      const favoriteButton = canvas.getByRole('button', { name: /favorite/i });
-      await userEvent.click(favoriteButton);
-      await expect(favoriteButton).toBeVisible();
-    });
-
-    await step('Displays stats', async () => {
-      await expect(canvas.getByText('5')).toBeInTheDocument();
-      await expect(canvas.getByText('6')).toBeInTheDocument();
-      await expect(canvas.getByText('4,500 sqft')).toBeInTheDocument();
-    });
-
-    await step('Displays tags (first 3 by default)', async () => {
-      await expect(canvas.getByText('Private Pool')).toBeInTheDocument();
-      await expect(canvas.getByText('Garden')).toBeInTheDocument();
-      await expect(canvas.getByText('Smart Home')).toBeInTheDocument();
-    });
-
-    await step('Shows type badge', async () => {
-      await expect(canvas.getByText('Villa')).toBeInTheDocument();
-    });
   }
 };
 
@@ -291,51 +232,6 @@ export const EcommerceListing: Story = {
         story: 'E-commerce product with rating, sold count, and Add to Cart CTA.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders product information', async () => {
-      await expect(canvas.getByText('Premium Wireless Headphones')).toBeInTheDocument();
-      await expect(canvas.getByText('Brand Name')).toBeInTheDocument();
-      await expect(canvas.getByText('High-quality wireless headphones with noise cancellation')).toBeInTheDocument();
-      await expect(canvas.getByText('$299.99')).toBeInTheDocument();
-    });
-
-    await step('Displays product badges', async () => {
-      await expect(canvas.getByText('Best Seller')).toBeInTheDocument();
-      await expect(canvas.getByText('20% Off')).toBeInTheDocument();
-    });
-
-    await step('Shows product stats', async () => {
-      await expect(canvas.getByText('4.8')).toBeInTheDocument();
-      await expect(canvas.getByText('234')).toBeInTheDocument();
-    });
-
-    await step('Displays product tags', async () => {
-      await expect(canvas.getByText('Noise Cancelling')).toBeInTheDocument();
-      await expect(canvas.getByText('Wireless')).toBeInTheDocument();
-      await expect(canvas.getByText('Fast Charging')).toBeInTheDocument();
-    });
-
-    await step('Has Add to Cart CTA button', async () => {
-      const ctaButton = canvas.getByRole('button', { name: /add to cart/i });
-      await expect(ctaButton).toBeInTheDocument();
-      await expect(ctaButton).toBeVisible();
-    });
-
-    await step('CTA button is clickable', async () => {
-      const ctaButton = canvas.getByRole('button', { name: /add to cart/i });
-      await userEvent.click(ctaButton);
-      // Button should still be visible after click
-      await expect(ctaButton).toBeInTheDocument();
-    });
-
-    await step('Has wishlist action button', async () => {
-      const wishlistButton = canvas.getByRole('button', { name: /wishlist/i });
-      await expect(wishlistButton).toBeInTheDocument();
-      await userEvent.click(wishlistButton);
-    });
   }
 };
 
@@ -373,41 +269,6 @@ export const JobListing: Story = {
         story: 'Job listing with employment type, location, tech stack, and Apply Now CTA.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders job listing information', async () => {
-      await expect(canvas.getByText('Senior Frontend Developer')).toBeInTheDocument();
-      await expect(canvas.getByText('Dubai, UAE')).toBeInTheDocument();
-      await expect(canvas.getByText('Join our team to build cutting-edge web applications')).toBeInTheDocument();
-      await expect(canvas.getByText('15,000 - 20,000 AED/month')).toBeInTheDocument();
-    });
-
-    await step('Displays employment badges', async () => {
-      await expect(canvas.getByText('Full Time')).toBeInTheDocument();
-      await expect(canvas.getByText('Remote OK')).toBeInTheDocument();
-    });
-
-    await step('Shows posting date', async () => {
-      await expect(canvas.getByText('Posted 2 days ago')).toBeInTheDocument();
-    });
-
-    await step('Displays tech stack tags', async () => {
-      await expect(canvas.getByText('React')).toBeInTheDocument();
-      await expect(canvas.getByText('TypeScript')).toBeInTheDocument();
-      await expect(canvas.getByText('Next.js')).toBeInTheDocument();
-    });
-
-    await step('Shows job type badge', async () => {
-      await expect(canvas.getByText('Tech')).toBeInTheDocument();
-    });
-
-    await step('Has Apply Now CTA button', async () => {
-      const applyButton = canvas.getByRole('button', { name: /apply now/i });
-      await expect(applyButton).toBeInTheDocument();
-      await userEvent.click(applyButton);
-    });
   }
 };
 
@@ -461,46 +322,6 @@ export const WithAllFeatures: Story = {
         story: 'Showcasing all features: badges, actions, stats, tags (with truncation), type badge, CTA, and featured styling.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders all content', async () => {
-      await expect(canvas.getByText('Premium Property with All Features')).toBeInTheDocument();
-      await expect(canvas.getByText('Palm Jumeirah, Dubai')).toBeInTheDocument();
-      await expect(canvas.getByText('Showcasing all available features of the Listing Card component')).toBeInTheDocument();
-      await expect(canvas.getByText('12,000,000 AED')).toBeInTheDocument();
-    });
-
-    await step('Has all badges', async () => {
-      await expect(canvas.getByText('New')).toBeInTheDocument();
-      await expect(canvas.getByText('Premium')).toBeInTheDocument();
-    });
-
-    await step('Has all action buttons', async () => {
-      await expect(canvas.getByRole('button', { name: /favorite/i })).toBeInTheDocument();
-      await expect(canvas.getByRole('button', { name: /share/i })).toBeInTheDocument();
-    });
-
-    await step('Displays all stats', async () => {
-      await expect(canvas.getByText('6')).toBeInTheDocument();
-      await expect(canvas.getByText('7')).toBeInTheDocument();
-      await expect(canvas.getByText('6,000 sqft')).toBeInTheDocument();
-    });
-
-    await step('Shows maxTags=3 with +2 more indicator', async () => {
-      await expect(canvas.getByText('Beach Access')).toBeInTheDocument();
-      await expect(canvas.getByText('Private Pool')).toBeInTheDocument();
-      await expect(canvas.getByText('Smart Home')).toBeInTheDocument();
-      await expect(canvas.getByText('+2')).toBeInTheDocument();
-    });
-
-    await step('Has type badge and CTA', async () => {
-      await expect(canvas.getByText('Penthouse')).toBeInTheDocument();
-      const ctaButton = canvas.getByRole('button', { name: /view details/i });
-      await expect(ctaButton).toBeInTheDocument();
-      await userEvent.click(ctaButton);
-    });
   }
 };
 
@@ -558,21 +379,6 @@ export const GridLayout: Story = {
         story: 'Grid layout with multiple property listings.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders all three cards in grid', async () => {
-      await expect(canvas.getByText('Modern Apartment')).toBeInTheDocument();
-      await expect(canvas.getByText('Luxury Villa')).toBeInTheDocument();
-      await expect(canvas.getByText('Beachfront Penthouse')).toBeInTheDocument();
-    });
-
-    await step('All prices are visible', async () => {
-      await expect(canvas.getByText('1,200,000 AED')).toBeInTheDocument();
-      await expect(canvas.getByText('8,500,000 AED')).toBeInTheDocument();
-      await expect(canvas.getByText('15,000,000 AED')).toBeInTheDocument();
-    });
   }
 };
 

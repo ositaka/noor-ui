@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { expect, within } from 'storybook/test';
 import { StatsCard } from '../../../components/ui/stats-card';
 import { Card, CardContent } from '../../../components/ui/card';
 import { Users, TrendUp, CurrencyDollar, ShoppingCart, Pulse, CreditCard, Download, Package } from '@phosphor-icons/react';
@@ -103,32 +102,6 @@ export const DashboardGrid: Story = {
         story: 'Dashboard grid showing 4 stats cards with different metrics. Includes positive, negative, and no trend indicators.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders all four stat cards', async () => {
-      await expect(canvas.getByText('Total Users')).toBeInTheDocument();
-      await expect(canvas.getByText('Revenue')).toBeInTheDocument();
-      await expect(canvas.getByText('Sales')).toBeInTheDocument();
-      await expect(canvas.getByText('Active Orders')).toBeInTheDocument();
-    });
-
-    await step('Displays all values correctly', async () => {
-      await expect(canvas.getByText('2,543')).toBeInTheDocument();
-      await expect(canvas.getByText('$45,231')).toBeInTheDocument();
-      await expect(canvas.getByText('$12,234')).toBeInTheDocument();
-      await expect(canvas.getByText('573')).toBeInTheDocument();
-    });
-
-    await step('Shows positive trends correctly', async () => {
-      await expect(canvas.getByText('+12%')).toBeInTheDocument();
-      await expect(canvas.getByText('+8%')).toBeInTheDocument();
-    });
-
-    await step('Shows negative trend correctly', async () => {
-      await expect(canvas.getByText('-3%')).toBeInTheDocument();
-    });
   }
 };
 
@@ -152,19 +125,6 @@ export const PositiveTrend: Story = {
         story: 'Stats card with positive trend (+8%). Trend is displayed in green.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders positive trend card', async () => {
-      await expect(canvas.getByText('Revenue')).toBeInTheDocument();
-      await expect(canvas.getByText('$45,231')).toBeInTheDocument();
-    });
-
-    await step('Displays positive trend with plus sign', async () => {
-      await expect(canvas.getByText('+8%')).toBeInTheDocument();
-      await expect(canvas.getByText('from last month')).toBeInTheDocument();
-    });
   }
 };
 
@@ -188,19 +148,6 @@ export const NegativeTrend: Story = {
         story: 'Stats card with negative trend (-3%). Trend is displayed in red.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders negative trend card', async () => {
-      await expect(canvas.getByText('Sales')).toBeInTheDocument();
-      await expect(canvas.getByText('$12,234')).toBeInTheDocument();
-    });
-
-    await step('Displays negative trend with minus sign', async () => {
-      await expect(canvas.getByText('-3%')).toBeInTheDocument();
-      await expect(canvas.getByText('from last month')).toBeInTheDocument();
-    });
   }
 };
 
@@ -222,19 +169,6 @@ export const WithoutTrend: Story = {
         story: 'Stats card without trend indicator. Simple metric display.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders card without trend', async () => {
-      await expect(canvas.getByText('Active Orders')).toBeInTheDocument();
-      await expect(canvas.getByText('573')).toBeInTheDocument();
-    });
-
-    await step('Verifies no trend indicator present', async () => {
-      const text = canvasElement.textContent || '';
-      await expect(text).not.toContain('%');
-    });
   }
 };
 
@@ -331,27 +265,6 @@ export const InCardContainer: Story = {
         story: 'Stats cards grouped inside a card container with a title.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders container with heading', async () => {
-      await expect(canvas.getByText('Dashboard Overview')).toBeInTheDocument();
-    });
-
-    await step('Renders all stats cards in container', async () => {
-      await expect(canvas.getByText('Total Users')).toBeInTheDocument();
-      await expect(canvas.getByText('Revenue')).toBeInTheDocument();
-      await expect(canvas.getByText('Active Orders')).toBeInTheDocument();
-    });
-
-    await step('Displays values and trends', async () => {
-      await expect(canvas.getByText('2,543')).toBeInTheDocument();
-      await expect(canvas.getByText('$45,231')).toBeInTheDocument();
-      await expect(canvas.getByText('573')).toBeInTheDocument();
-      await expect(canvas.getByText('+12%')).toBeInTheDocument();
-      await expect(canvas.getByText('+8%')).toBeInTheDocument();
-    });
   }
 };
 

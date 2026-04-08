@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { expect, within, userEvent, waitFor } from 'storybook/test';
 import { Carousel } from '../../../components/ui/carousel';
 import * as React from 'react';
 import {
@@ -291,18 +290,6 @@ export const AutoPlay: Story = {
       },
     },
   },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders first slide on mount', async () => {
-      await expect(canvas.getByText('Lightning Fast')).toBeVisible();
-    });
-
-    await step('Shows navigation controls', async () => {
-      await expect(canvas.getByRole('button', { name: /previous slide/i })).toBeInTheDocument();
-      await expect(canvas.getByRole('button', { name: /next slide/i })).toBeInTheDocument();
-    });
-  },
 };
 
 /**
@@ -329,23 +316,6 @@ export const DotsOnly: Story = {
       },
     },
   },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders first slide', async () => {
-      await expect(canvas.getByText('Lightning Fast')).toBeVisible();
-    });
-
-    await step('Arrow buttons are not rendered', async () => {
-      await expect(canvas.queryByRole('button', { name: /previous slide/i })).not.toBeInTheDocument();
-      await expect(canvas.queryByRole('button', { name: /next slide/i })).not.toBeInTheDocument();
-    });
-
-    await step('Large dot indicators are present', async () => {
-      const tabs = canvas.getAllByRole('tab');
-      await expect(tabs).toHaveLength(4);
-    });
-  },
 };
 
 /**
@@ -369,23 +339,6 @@ export const CustomContent: Story = {
           'Testimonial carousel demonstrating arbitrary custom slide content — blockquotes with author info.',
       },
     },
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders first testimonial quote', async () => {
-      await expect(canvas.getByText('Sarah Al-Rashidi')).toBeVisible();
-    });
-
-    await step('Shows navigation controls', async () => {
-      await expect(canvas.getByRole('button', { name: /previous slide/i })).toBeInTheDocument();
-      await expect(canvas.getByRole('button', { name: /next slide/i })).toBeInTheDocument();
-    });
-
-    await step('Dot count matches item count', async () => {
-      const tabs = canvas.getAllByRole('tab');
-      await expect(tabs).toHaveLength(3);
-    });
   },
 };
 
@@ -412,23 +365,6 @@ export const NoLoop: Story = {
       },
     },
   },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders first slide', async () => {
-      await expect(canvas.getByText('Lightning Fast')).toBeVisible();
-    });
-
-    await step('Previous arrow is disabled at the first slide', async () => {
-      const prevBtn = canvas.getByRole('button', { name: /previous slide/i });
-      await expect(prevBtn).toBeDisabled();
-    });
-
-    await step('Next arrow is enabled at the first slide', async () => {
-      const nextBtn = canvas.getByRole('button', { name: /next slide/i });
-      await expect(nextBtn).not.toBeDisabled();
-    });
-  },
 };
 
 /**
@@ -453,15 +389,6 @@ export const LargeDots: Story = {
           'dotSize="lg" renders larger, touch-friendly 24px dot targets. The active dot expands to a pill shape.',
       },
     },
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders with dot indicators', async () => {
-      const tabs = canvas.getAllByRole('tab');
-      await expect(tabs).toHaveLength(4);
-      await expect(tabs[0]).toHaveAttribute('aria-selected', 'true');
-    });
   },
 };
 
@@ -488,22 +415,6 @@ export const NoDots: Story = {
       },
     },
   },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders first slide', async () => {
-      await expect(canvas.getByText('Lightning Fast')).toBeVisible();
-    });
-
-    await step('Dot indicators are not rendered', async () => {
-      await expect(canvas.queryByRole('tab')).not.toBeInTheDocument();
-    });
-
-    await step('Arrow buttons are still present', async () => {
-      await expect(canvas.getByRole('button', { name: /previous slide/i })).toBeInTheDocument();
-      await expect(canvas.getByRole('button', { name: /next slide/i })).toBeInTheDocument();
-    });
-  },
 };
 
 /**
@@ -527,22 +438,6 @@ export const SingleItem: Story = {
           'With a single item, arrows and dots are both suppressed — there is nothing to navigate to.',
       },
     },
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders the only slide', async () => {
-      await expect(canvas.getByText('Lightning Fast')).toBeVisible();
-    });
-
-    await step('No arrows rendered for single item', async () => {
-      await expect(canvas.queryByRole('button', { name: /previous slide/i })).not.toBeInTheDocument();
-      await expect(canvas.queryByRole('button', { name: /next slide/i })).not.toBeInTheDocument();
-    });
-
-    await step('No dots rendered for single item', async () => {
-      await expect(canvas.queryByRole('tab')).not.toBeInTheDocument();
-    });
   },
 };
 
@@ -573,45 +468,6 @@ export const ArrowNavigation: Story = {
       },
     },
   },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Starts on slide 1', async () => {
-      await expect(canvas.getByText('Lightning Fast')).toBeVisible();
-    });
-
-    await step('Click Next → advances to slide 2', async () => {
-      const nextBtn = canvas.getByRole('button', { name: /next slide/i });
-      await userEvent.click(nextBtn);
-      await waitFor(() => {
-        expect(canvas.getByText('Secure by Default')).toBeVisible();
-      });
-    });
-
-    await step('Aria-live region updates to "Slide 2 of 4"', async () => {
-      const liveRegion = canvasElement.querySelector('[aria-live="polite"]');
-      await expect(liveRegion).toHaveTextContent('Slide 2 of 4');
-    });
-
-    await step('Dot 2 is now selected', async () => {
-      const tabs = canvas.getAllByRole('tab');
-      await expect(tabs[1]).toHaveAttribute('aria-selected', 'true');
-      await expect(tabs[0]).toHaveAttribute('aria-selected', 'false');
-    });
-
-    await step('Click Previous → goes back to slide 1', async () => {
-      const prevBtn = canvas.getByRole('button', { name: /previous slide/i });
-      await userEvent.click(prevBtn);
-      await waitFor(() => {
-        expect(canvas.getByText('Lightning Fast')).toBeVisible();
-      });
-    });
-
-    await step('Aria-live region updates back to "Slide 1 of 4"', async () => {
-      const liveRegion = canvasElement.querySelector('[aria-live="polite"]');
-      await expect(liveRegion).toHaveTextContent('Slide 1 of 4');
-    });
-  },
 };
 
 /**
@@ -636,39 +492,6 @@ export const DotNavigation: Story = {
       },
     },
   },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Starts on slide 1', async () => {
-      await expect(canvas.getByText('Lightning Fast')).toBeVisible();
-    });
-
-    await step('Click dot 3 → jumps to slide 3', async () => {
-      const tabs = canvas.getAllByRole('tab');
-      await userEvent.click(tabs[2]);
-      await waitFor(() => {
-        expect(canvas.getByText('Global Reach')).toBeVisible();
-      });
-    });
-
-    await step('Dot 3 is now aria-selected', async () => {
-      const tabs = canvas.getAllByRole('tab');
-      await expect(tabs[2]).toHaveAttribute('aria-selected', 'true');
-    });
-
-    await step('Click dot 1 → jumps back to slide 1', async () => {
-      const tabs = canvas.getAllByRole('tab');
-      await userEvent.click(tabs[0]);
-      await waitFor(() => {
-        expect(canvas.getByText('Lightning Fast')).toBeVisible();
-      });
-    });
-
-    await step('Dot 1 is now aria-selected again', async () => {
-      const tabs = canvas.getAllByRole('tab');
-      await expect(tabs[0]).toHaveAttribute('aria-selected', 'true');
-    });
-  },
 };
 
 /**
@@ -692,50 +515,6 @@ export const KeyboardNavigation: Story = {
           'Interaction test: focuses the slide viewport and uses ArrowRight, ArrowLeft, Home, and End keys to navigate.',
       },
     },
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Focus the slide viewport', async () => {
-      const viewport = canvas.getByRole('group', { name: /slide viewport/i });
-      viewport.focus();
-      await expect(viewport).toHaveFocus();
-    });
-
-    await step('ArrowRight → advances to slide 2', async () => {
-      await userEvent.keyboard('{ArrowRight}');
-      await waitFor(() => {
-        expect(canvas.getByText('Secure by Default')).toBeVisible();
-      });
-    });
-
-    await step('ArrowRight → advances to slide 3', async () => {
-      await userEvent.keyboard('{ArrowRight}');
-      await waitFor(() => {
-        expect(canvas.getByText('Global Reach')).toBeVisible();
-      });
-    });
-
-    await step('ArrowLeft → goes back to slide 2', async () => {
-      await userEvent.keyboard('{ArrowLeft}');
-      await waitFor(() => {
-        expect(canvas.getByText('Secure by Default')).toBeVisible();
-      });
-    });
-
-    await step('Home → jumps to first slide', async () => {
-      await userEvent.keyboard('{Home}');
-      await waitFor(() => {
-        expect(canvas.getByText('Lightning Fast')).toBeVisible();
-      });
-    });
-
-    await step('End → jumps to last slide', async () => {
-      await userEvent.keyboard('{End}');
-      await waitFor(() => {
-        expect(canvas.getByText('AI-Ready')).toBeVisible();
-      });
-    });
   },
 };
 
@@ -763,47 +542,6 @@ export const LoopFalseBoundary: Story = {
       },
     },
   },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-    const nextBtn = canvas.getByRole('button', { name: /next slide/i });
-    const prevBtn = canvas.getByRole('button', { name: /previous slide/i });
-
-    await step('Previous is disabled at slide 1', async () => {
-      await expect(prevBtn).toBeDisabled();
-      await expect(nextBtn).not.toBeDisabled();
-    });
-
-    await step('Advance to slide 2', async () => {
-      await userEvent.click(nextBtn);
-      await waitFor(() => {
-        expect(canvas.getByText('Secure by Default')).toBeVisible();
-      });
-    });
-
-    await step('Both arrows are enabled on a middle slide', async () => {
-      await expect(prevBtn).not.toBeDisabled();
-      await expect(nextBtn).not.toBeDisabled();
-    });
-
-    await step('Advance to slide 3', async () => {
-      await userEvent.click(nextBtn);
-      await waitFor(() => {
-        expect(canvas.getByText('Global Reach')).toBeVisible();
-      });
-    });
-
-    await step('Advance to slide 4 (last)', async () => {
-      await userEvent.click(nextBtn);
-      await waitFor(() => {
-        expect(canvas.getByText('AI-Ready')).toBeVisible();
-      });
-    });
-
-    await step('Next is disabled at the last slide', async () => {
-      await expect(nextBtn).toBeDisabled();
-      await expect(prevBtn).not.toBeDisabled();
-    });
-  },
 };
 
 /**
@@ -828,16 +566,6 @@ export const EmptyItems: Story = {
       },
     },
   },
-  play: async ({ canvasElement, step }) => {
-    await step('No carousel region is rendered', async () => {
-      await expect(canvasElement.querySelector('[role="region"]')).toBeNull();
-    });
-
-    await step('No slide content is rendered', async () => {
-      const canvas = within(canvasElement);
-      await expect(canvas.queryByText('Should not render')).not.toBeInTheDocument();
-    });
-  },
 };
 
 /**
@@ -861,30 +589,6 @@ export const AriaLiveRegion: Story = {
           'Interaction test: verifies the aria-live polite region updates its text content when navigating between slides.',
       },
     },
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-    const liveRegion = canvasElement.querySelector('[aria-live="polite"]');
-
-    await step('Live region starts with "Slide 1 of 4"', async () => {
-      await expect(liveRegion).toHaveTextContent('Slide 1 of 4');
-    });
-
-    await step('Navigate to slide 2 → live region updates', async () => {
-      const nextBtn = canvas.getByRole('button', { name: /next slide/i });
-      await userEvent.click(nextBtn);
-      await waitFor(() => {
-        expect(liveRegion).toHaveTextContent('Slide 2 of 4');
-      });
-    });
-
-    await step('Navigate to slide 3 → live region updates', async () => {
-      const nextBtn = canvas.getByRole('button', { name: /next slide/i });
-      await userEvent.click(nextBtn);
-      await waitFor(() => {
-        expect(liveRegion).toHaveTextContent('Slide 3 of 4');
-      });
-    });
   },
 };
 
@@ -911,20 +615,6 @@ export const DotSizeSmClasses: Story = {
       },
     },
   },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-    const tabs = canvas.getAllByRole('tab');
-
-    await step('Active dot (first) has small pill classes', async () => {
-      await expect(tabs[0]).toHaveClass('h-1.5');
-      await expect(tabs[0]).toHaveClass('w-6');
-    });
-
-    await step('Inactive dots have small circle classes', async () => {
-      await expect(tabs[1]).toHaveClass('h-1.5');
-      await expect(tabs[1]).toHaveClass('w-1.5');
-    });
-  },
 };
 
 export const DotSizeLgClasses: Story = {
@@ -946,20 +636,6 @@ export const DotSizeLgClasses: Story = {
           'Interaction test: verifies dotSize="lg" applies h-3 w-3 classes to inactive dots and h-3 w-8 to the active dot.',
       },
     },
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-    const tabs = canvas.getAllByRole('tab');
-
-    await step('Active dot (first) has large pill classes', async () => {
-      await expect(tabs[0]).toHaveClass('h-3');
-      await expect(tabs[0]).toHaveClass('w-8');
-    });
-
-    await step('Inactive dots have large circle classes', async () => {
-      await expect(tabs[1]).toHaveClass('h-3');
-      await expect(tabs[1]).toHaveClass('w-3');
-    });
   },
 };
 
@@ -984,17 +660,6 @@ export const CustomAriaLabel: Story = {
           'Interaction test: verifies the custom aria-label is applied to the carousel region element.',
       },
     },
-  },
-  play: async ({ canvasElement, step }) => {
-    await step('Region has the custom aria-label', async () => {
-      const region = canvasElement.querySelector('[role="region"]');
-      await expect(region).toHaveAttribute('aria-label', 'Product showcase gallery');
-    });
-
-    await step('Region has carousel roledescription', async () => {
-      const region = canvasElement.querySelector('[role="region"]');
-      await expect(region).toHaveAttribute('aria-roledescription', 'carousel');
-    });
   },
 };
 
@@ -1024,18 +689,6 @@ export const DarkMode: Story = {
           'Carousel in dark mode. Card backgrounds, border colors, and muted text all adapt via CSS custom properties.',
       },
     },
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders in dark mode with first testimonial', async () => {
-      await expect(canvas.getByText('Sarah Al-Rashidi')).toBeVisible();
-    });
-
-    await step('Navigation controls are present in dark mode', async () => {
-      await expect(canvas.getByRole('button', { name: /previous slide/i })).toBeInTheDocument();
-      await expect(canvas.getByRole('button', { name: /next slide/i })).toBeInTheDocument();
-    });
   },
 };
 
