@@ -34,7 +34,7 @@ export function DocsLink({ title }: { title: string }) {
         border: '1px solid color-mix(in srgb, var(--sb-color-primary, #1ea7fd) 30%, transparent)',
         backgroundColor: 'color-mix(in srgb, var(--sb-color-primary, #1ea7fd) 6%, transparent)',
         textDecoration: 'none',
-        marginBottom: '16px',
+        flexShrink: 0,
         transition: 'background-color 0.15s ease',
       }}
       onMouseEnter={(e) => {

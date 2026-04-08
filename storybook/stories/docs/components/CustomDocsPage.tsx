@@ -16,8 +16,10 @@ export function CustomDocsPage() {
 
   return (
     <>
-      <Title />
-      {title && <DocsLink title={title} />}
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '8px', marginBottom: '1rem' }}>
+        <Title style={{ margin: 0 }} />
+        {title && <DocsLink title={title} />}
+      </div>
       <Primary />
       <Controls />
       <Stories />
