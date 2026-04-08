@@ -7,10 +7,12 @@ import {
 
 const meta = {
   title: 'Core/Avatar',
+  title: 'Core/Avatar',
   component: Avatar,
   parameters: {
     layout: 'centered'
   },
+  tags: ['autodocs']
   tags: ['autodocs']
 } satisfies Meta<typeof Avatar>;
 
@@ -116,6 +118,7 @@ export const WithProfile: Story = {
         <AvatarFallback>JD</AvatarFallback>
       </Avatar>
       <div className="space-y-1">
+        <p className="text-sm font-medium">Nuno Marques</p>
         <p className="text-sm font-medium">Nuno Marques</p>
         <p className="text-sm text-muted-foreground">ositaka@example.com</p>
       </div>
