@@ -7,12 +7,10 @@ import {
 
 const meta = {
   title: 'Core/Avatar',
-  title: 'Core/Avatar',
   component: Avatar,
   parameters: {
     layout: 'centered'
   },
-  tags: ['autodocs']
   tags: ['autodocs']
 } satisfies Meta<typeof Avatar>;
 

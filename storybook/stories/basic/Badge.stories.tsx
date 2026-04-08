@@ -5,12 +5,10 @@ import { Check, WarningCircle, Star, Clock, Lightning, CheckCircle, XCircle } fr
 
 const meta = {
   title: 'Core/Badge',
-  title: 'Core/Badge',
   component: Badge,
   parameters: {
     layout: 'centered'
   },
-  tags: ['autodocs'],
   tags: ['autodocs'],
   argTypes: {
     variant: {
@@ -29,13 +27,6 @@ export const Default: Story = {
   args: {
     children: 'New',
     variant: 'default'
-  },
-  parameters: {
-    ar: {
-      args: {
-        children: 'جديد'
-      }
-    }
   },
   parameters: {
     ar: {
@@ -67,16 +58,6 @@ export const WithIcon: Story = {
         )
       }
     },
-    ar: {
-      args: {
-        children: (
-          <>
-            <Check className="h-3 w-3 me-1" />
-            موثّق
-          </>
-        )
-      }
-    },
     docs: {
       description: {
         story: 'Badge with icon. Use the Controls panel to try different variants.'
@@ -98,16 +79,6 @@ export const StatusIndicator: Story = {
     )
   },
   parameters: {
-    ar: {
-      args: {
-        children: (
-          <>
-            <CheckCircle className="h-3 w-3 me-1" />
-            نشط
-          </>
-        )
-      }
-    },
     ar: {
       args: {
         children: (
