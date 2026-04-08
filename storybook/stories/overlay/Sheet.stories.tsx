@@ -15,16 +15,6 @@ import { Input } from '../../../components/ui/input';
 import { Label } from '../../../components/ui/label';
 import * as React from 'react';
 
-/**
- * Sheet Component Stories
- *
- * All examples are taken from /app/(docs)/components/sheet/page.tsx
- * Uses exact same text and data as the component documentation.
- *
- * Note: Sheet displays content that slides in from the edge of the screen.
- * Features: Four sides (top, bottom, start, end), RTL-aware positioning, accessibility.
- */
-
 const meta = {
   title: 'Overlays & Layout/Sheet',
   component: Sheet,

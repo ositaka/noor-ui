@@ -4,15 +4,6 @@ import { Tooltip, TooltipContent, TooltipTrigger, TooltipProvider } from '../../
 import { Button } from '../../../components/ui/button';
 import { Info, Plus, Gear, Trash } from '@phosphor-icons/react';
 
-/**
- * Tooltip Component Stories
- *
- * All examples are taken from /app/(docs)/components/tooltip/page.tsx
- * Uses exact same text and data as the component documentation.
- *
- * Note: All stories are wrapped with TooltipProvider decorator.
- */
-
 const meta = {
   title: 'Feedback/Tooltip',
   component: Tooltip,

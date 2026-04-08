@@ -5,16 +5,6 @@ import { Button } from '../../../components/ui/button';
 import * as React from 'react';
 import { expect, userEvent, within, fn } from 'storybook/test';
 
-/**
- * Toast Component Stories
- *
- * All examples are taken from /app/(docs)/components/toast/page.tsx
- * Uses exact same text and data as the component documentation.
- *
- * Note: Toast provides temporary notification messages.
- * Features: 3 variants (default, destructive, success), auto-dismiss, RTL support.
- */
-
 const meta = {
   title: 'Feedback/Toast',
   component: Toast,
@@ -39,18 +29,20 @@ type Story = StoryObj<typeof meta>;
 
 // Default - Interactive playground with controls
 export const Default: Story = {
-  render: () => {
+  render: (_args, { globals }) => {
+    const isRTL = globals?.direction === 'rtl';
+    const t = (en: string, ar: string) => isRTL ? ar : en;
     const { toast } = useToast();
     return (
       <Button
         onClick={() => {
           toast({
-            title: 'Scheduled: Catch up',
-            description: 'Friday, February 10, 2023 at 5:57 PM'
+            title: t('Scheduled: Catch up', 'موعد: اجتماع متابعة'),
+            description: t('Friday, February 10, 2023 at 5:57 PM', 'الجمعة، ١٠ فبراير ٢٠٢٣ الساعة ٥:٥٧ م')
           });
         }}
       >
-        Show Toast
+        {t('Show Toast', 'إظهار الإشعار')}
       </Button>
     );
   },

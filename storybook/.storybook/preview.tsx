@@ -4,6 +4,7 @@ import { ThemeProvider } from 'next-themes';
 import { IconContext } from '@phosphor-icons/react';
 import { DirectionProvider } from '../../components/providers/direction-provider';
 import { Toaster } from '../../components/ui/toaster';
+import { CustomDocsPage } from '../stories/docs/components/CustomDocsPage';
 import '../../styles/globals.css';
 
 // Apply theme to document
@@ -52,6 +53,7 @@ const preview: Preview = {
       source: {
         type: 'dynamic',
       },
+      page: CustomDocsPage,
     },
     // Default to Docs view and configure sidebar
     viewMode: 'story',
@@ -75,6 +77,15 @@ const preview: Preview = {
         ],
       },
     },
+  },
+
+  // Hide non-interactive props from controls table globally
+  argTypes: {
+    children: { table: { disable: true } },
+    asChild: { table: { disable: true } },
+    className: { table: { disable: true } },
+    ref: { table: { disable: true } },
+    style: { table: { disable: true } },
   },
 
   globalTypes: {

@@ -30,16 +30,6 @@ import {
 } from '@phosphor-icons/react';
 import * as React from 'react';
 
-/**
- * Dropdown Menu Component Stories
- *
- * All examples are taken from /app/(docs)/components/dropdown-menu/page.tsx
- * Uses exact same text and data as the component documentation.
- *
- * Note: Dropdown Menu displays a list of actions or options when triggered.
- * Features: Items, groups, checkboxes, radio groups, sub-menus, shortcuts, RTL support.
- */
-
 const meta = {
   title: 'Navigation/Dropdown Menu',
   component: DropdownMenu,

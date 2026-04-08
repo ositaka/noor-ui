@@ -3,13 +3,6 @@ import { expect, within } from 'storybook/test';
 import { LoadingSpinner } from '../../../components/ui/loading-spinner';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../../components/ui/card';
 
-/**
- * Loading Spinner Component Stories
- *
- * Note: LoadingSpinner provides a visual loading indicator.
- * Features: Three sizes (sm, md, lg), optional text label, accessible with ARIA attributes.
- */
-
 const meta = {
   title: 'Feedback/Loading Spinner',
   component: LoadingSpinner,

@@ -5,10 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../..
 import { Separator } from '../../../components/ui/separator';
 
 /**
- * Scroll Area Component Stories
  *
- * Note: ScrollArea provides a customizable scrollable container with styled scrollbars.
- * Features: Vertical and horizontal scrolling, custom scrollbar styling, RTL support.
  * Built with Radix UI primitives.
  */
 
@@ -30,18 +27,26 @@ type Story = StoryObj<typeof meta>;
 
 // Default - Vertical Scroll
 export const Default: Story = {
-  render: () => (
+  parameters: {
+    controls: { disable: true }
+  },
+  render: (_args, { globals }) => {
+    const isRTL = globals?.direction === 'rtl';
+    const t = (en: string, ar: string) => isRTL ? ar : en;
+
+    return (
     <ScrollArea className="h-80 w-48 rounded-md border p-4">
       <div className="space-y-4">
         {Array.from({ length: 20 }).map((_, i) => (
           <div key={i}>
-            <p className="text-sm">Item {i + 1}</p>
+            <p className="text-sm">{t(`Item ${i + 1}`, `عنصر ${i + 1}`)}</p>
             {i < 19 && <Separator className="my-2" />}
           </div>
         ))}
       </div>
     </ScrollArea>
-  ),
+    );
+  },
 };
 
 // Vertical Scroll

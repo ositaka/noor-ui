@@ -5,16 +5,6 @@ import { Card, CardContent } from '../../../components/ui/card';
 import { Users, TrendUp, CurrencyDollar, ShoppingCart, Pulse, CreditCard, Download, Package } from '@phosphor-icons/react';
 import * as React from 'react';
 
-/**
- * StatsCard Component Stories
- *
- * All examples are taken from /app/(docs)/components/stats-card/page.tsx
- * Uses exact same text and data as the component documentation.
- *
- * Note: StatsCard displays dashboard metrics with optional trend indicators.
- * Features: Icon display, value formatting, positive/negative trends with colors.
- */
-
 const meta = {
   title: 'Data Display/StatsCard',
   component: StatsCard,

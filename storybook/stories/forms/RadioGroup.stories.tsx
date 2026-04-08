@@ -5,15 +5,6 @@ import { Label } from '../../../components/ui/label';
 import { Button } from '../../../components/ui/button';
 import * as React from 'react';
 
-/**
- * Radio Group Component Stories
- *
- * All examples are taken from /app/(docs)/components/radio-group/page.tsx
- * Uses exact same text and data as the component documentation.
- *
- * Note: Radio Group allows selecting one option from a group of mutually exclusive options
- */
-
 const meta = {
   title: 'Forms/RadioGroup',
   component: RadioGroup,

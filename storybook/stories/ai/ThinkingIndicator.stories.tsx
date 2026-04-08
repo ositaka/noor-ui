@@ -4,16 +4,6 @@ import { ThinkingIndicator } from '../../../components/ui/thinking-indicator';
 import { Card, CardContent } from '../../../components/ui/card';
 import { Separator } from '../../../components/ui/separator';
 
-/**
- * Thinking Indicator Component Stories
- *
- * All examples are taken from /app/(docs)/components/thinking-indicator/page.tsx
- * Uses exact same text and data as the component documentation.
- *
- * Note: Thinking Indicator shows AI processing state.
- * Features: 4 variants (dots, pulse, wave, typing), 3 sizes, optional message, RTL-ready.
- */
-
 const meta = {
   title: 'AI-LLM Shell/Thinking Indicator',
   component: ThinkingIndicator,

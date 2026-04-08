@@ -15,16 +15,6 @@ import { Button } from '../../../components/ui/button';
 import { MagnifyingGlass, FileText, Gear, User, Calendar, Calculator } from '@phosphor-icons/react';
 import * as React from 'react';
 
-/**
- * Command Component Stories
- *
- * All examples are taken from /app/(docs)/components/command/page.tsx
- * Uses exact same text and data as the component documentation.
- *
- * Note: Command provides a fast command menu with search and keyboard navigation.
- * Features: Search input, groups, keyboard shortcuts, dialog mode, RTL support.
- */
-
 const meta = {
   title: 'Data Display/Command',
   component: Command,
@@ -39,39 +29,47 @@ type Story = StoryObj<typeof meta>;
 
 // Default - Interactive playground with controls
 export const Default: Story = {
-  render: () => (
+  parameters: {
+    controls: { disable: true }
+  },
+  render: (_args, { globals }) => {
+    const isRTL = globals?.direction === 'rtl';
+    const t = (en: string, ar: string) => isRTL ? ar : en;
+
+    return (
     <Command className="rounded-lg border shadow-md max-w-md w-full">
-      <CommandInput placeholder="Type a command or search..." />
+      <CommandInput placeholder={t('Type a command or search...', 'اكتب أمراً أو ابحث...')} />
       <CommandList>
-        <CommandEmpty>No results found.</CommandEmpty>
-        <CommandGroup heading="Suggestions">
+        <CommandEmpty>{t('No results found.', 'لم يتم العثور على نتائج.')}</CommandEmpty>
+        <CommandGroup heading={t('Suggestions', 'اقتراحات')}>
           <CommandItem>
             <FileText className="me-2 h-4 w-4" />
-            <span>Calendar</span>
+            <span>{t('Calendar', 'التقويم')}</span>
           </CommandItem>
           <CommandItem>
             <MagnifyingGlass className="me-2 h-4 w-4" />
-            <span>Search Emoji</span>
+            <span>{t('Search Emoji', 'بحث عن رموز')}</span>
           </CommandItem>
           <CommandItem>
             <Calculator className="me-2 h-4 w-4" />
-            <span>Calculator</span>
+            <span>{t('Calculator', 'الآلة الحاسبة')}</span>
           </CommandItem>
         </CommandGroup>
         <CommandSeparator />
-        <CommandGroup heading="Settings">
+        <CommandGroup heading={t('Settings', 'الإعدادات')}>
           <CommandItem>
             <User className="me-2 h-4 w-4" />
-            <span>Profile</span>
+            <span>{t('Profile', 'الملف الشخصي')}</span>
           </CommandItem>
           <CommandItem>
             <Gear className="me-2 h-4 w-4" />
-            <span>Settings</span>
+            <span>{t('Settings', 'الإعدادات')}</span>
           </CommandItem>
         </CommandGroup>
       </CommandList>
     </Command>
-  ),
+    );
+  },
 };
 
 // Basic Command - from component page lines 114-144

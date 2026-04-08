@@ -5,15 +5,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../..
 import * as React from 'react';
 import { expect, fn, userEvent, within } from 'storybook/test';
 
-/**
- * Date Picker Component Stories
- *
- * All examples are taken from /app/(docs)/components/date-picker/page.tsx
- * Uses exact same text and data as the component documentation.
- *
- * Note: DatePicker supports single date and range selection with RTL support
- */
-
 const meta = {
   title: 'Advanced Forms & Inputs/Date Picker',
   component: DatePicker,

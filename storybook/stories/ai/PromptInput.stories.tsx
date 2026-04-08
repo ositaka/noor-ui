@@ -4,16 +4,6 @@ import { Card, CardContent } from '../../../components/ui/card';
 import { useState } from 'react';
 import { expect, userEvent, within, fn } from 'storybook/test';
 
-/**
- * Prompt Input Component Stories
- *
- * All examples are taken from /app/(docs)/components/prompt-input/page.tsx
- * Uses exact same text and data as the component documentation.
- *
- * Note: Prompt Input is a textarea for AI chat with send button.
- * Features: Auto-resize, attachment/voice buttons, character counter, loading state, RTL support.
- */
-
 const meta = {
   title: 'AI-LLM Shell/Prompt Input',
   component: PromptInput,

@@ -3,15 +3,6 @@ import { expect, within } from 'storybook/test';
 import { PullQuote } from '../../../components/ui/blockquote';
 import { Card, CardContent, CardHeader, CardTitle } from '../../../components/ui/card';
 
-/**
- * Pull Quote Component Stories
- *
- * All examples are taken from /app/(docs)/components/pull-quote/page.tsx
- *
- * Note: PullQuote highlights important quotes in content.
- * Features: Center/left/right alignment, with attribution, RTL-ready.
- */
-
 const meta = {
   title: 'Data Display/Pull Quote',
   component: PullQuote,

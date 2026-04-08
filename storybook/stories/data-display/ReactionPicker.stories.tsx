@@ -4,15 +4,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../..
 import { useState } from 'react';
 import { expect, userEvent, within } from 'storybook/test';
 
-/**
- * Reaction Picker Component Stories
- *
- * All examples are taken from /app/(docs)/components/reaction-picker/page.tsx
- *
- * Note: ReactionPicker allows users to react with emojis.
- * Features: Compact/expanded variants, multiple reactions, count display, RTL-ready.
- */
-
 const meta = {
   title: 'User Interface/Reaction Picker',
   component: ReactionPicker,

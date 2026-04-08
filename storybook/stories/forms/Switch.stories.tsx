@@ -6,15 +6,6 @@ import { Button } from '../../../components/ui/button';
 import { Separator } from '../../../components/ui/separator';
 import * as React from 'react';
 
-/**
- * Switch Component Stories
- *
- * All examples are taken from /app/(docs)/components/switch/page.tsx
- * Uses exact same text and data as the component documentation.
- *
- * Note: Switch is a toggle control for binary states, perfect for settings and preferences
- */
-
 const meta = {
   title: 'Forms/Switch',
   component: Switch,

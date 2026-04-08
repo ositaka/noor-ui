@@ -3,16 +3,6 @@ import { expect, within } from 'storybook/test';
 import { Skeleton } from '../../../components/ui/skeleton';
 import { Card, CardContent } from '../../../components/ui/card';
 
-/**
- * Skeleton Component Stories
- *
- * All examples are taken from /app/(docs)/components/skeleton/page.tsx
- * Uses exact same text and data as the component documentation.
- *
- * Note: Skeleton provides animated loading placeholders.
- * Features: Pulse animation, customizable dimensions, RTL support.
- */
-
 const meta = {
   title: 'Feedback/Skeleton',
   component: Skeleton,
@@ -30,6 +20,9 @@ type Story = StoryObj<typeof meta>;
 
 // Default - Interactive playground
 export const Default: Story = {
+  parameters: {
+    controls: { disable: true }
+  },
   render: () => (
     <div className="flex items-center gap-4 space-x-reverse">
       <Skeleton className="h-12 w-12 rounded-full" />

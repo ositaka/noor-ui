@@ -3,16 +3,6 @@ import { expect, fn, userEvent, within } from 'storybook/test';
 import { ButtonArrow } from '../../../components/ui/button-arrow';
 import { Card, CardContent } from '../../../components/ui/card';
 
-/**
- * Button Arrow Component Stories
- *
- * All examples are taken from /app/(docs)/components/button-arrow/page.tsx
- * Uses exact same text and data as the component documentation.
- *
- * Note: ButtonArrow is a button with directional arrow that auto-flips in RTL.
- * Features: Forward/back directions, chevron/arrow icons, all button variants, auto RTL.
- */
-
 const meta = {
   title: 'Core/Button Arrow',
   component: ButtonArrow,

@@ -5,16 +5,6 @@ import { Card, CardContent } from '../../../components/ui/card';
 import { Sparkle, Rocket, Lightning, Shield, Package, Gear, Heart, Star, Globe, Lock } from '@phosphor-icons/react';
 import * as React from 'react';
 
-/**
- * FeatureCard Component Stories
- *
- * All examples are taken from /app/(docs)/components/feature-card/page.tsx
- * Uses exact same text and data as the component documentation.
- *
- * Note: FeatureCard displays features with icon, title, and description.
- * Features: Optional href for clickable cards, icon display, RTL support.
- */
-
 const meta = {
   title: 'Core/Feature Card',
   component: FeatureCard,

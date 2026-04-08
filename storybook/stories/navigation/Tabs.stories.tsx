@@ -6,13 +6,10 @@ import { User, Bell } from '@phosphor-icons/react';
 import * as React from 'react';
 
 /**
- * Tabs Component Stories
  *
- * All examples are taken from /app/(docs)/components/tabs/page.tsx
- * Uses exact same text and data as the component documentation.
  *
- * Note: Tabs organize content into separate views with smooth animations,
  * keyboard navigation, and full RTL support. Built on Radix UI.
+ *
  */
 
 const meta = {

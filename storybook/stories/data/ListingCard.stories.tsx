@@ -18,16 +18,6 @@ import {
 } from '@phosphor-icons/react';
 import * as React from 'react';
 
-/**
- * ListingCard Component Stories
- *
- * All examples are taken from /app/(docs)/components/listing-card/page.tsx
- * Uses exact same text and data as the component documentation.
- *
- * Note: ListingCard is a flexible component for displaying listings, products, properties, jobs, etc.
- * Features: Images/placeholders, badges, action buttons, stats, tags, price, CTA.
- */
-
 const meta = {
   title: 'Data Display/ListingCard',
   component: ListingCard,

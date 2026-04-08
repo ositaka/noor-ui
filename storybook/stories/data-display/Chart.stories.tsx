@@ -5,11 +5,11 @@ import * as React from 'react';
 import { expect, within } from 'storybook/test';
 
 /**
- * Chart Component Stories
  *
  * Covers all four chart types: line, bar, area, donut.
  * Includes LTR (English) and RTL (Arabic) variants, size/thickness/color
  * overrides, sparkline style (no grid/axes), and a realistic dashboard.
+ *
  */
 
 const meta = {
@@ -416,7 +416,6 @@ export const NoGrid: Story = {
   },
 };
 
-
 // ---------------------------------------------------------------------------
 // 12. DonutThickness — thin, default, thick variants
 // ---------------------------------------------------------------------------
@@ -761,7 +760,6 @@ export const MultiSegmentDonutWithCustomColors: Story = {
     },
   },
 };
-
 
 // ---------------------------------------------------------------------------
 // 14. RealWorld_Dashboard — Multiple chart types together

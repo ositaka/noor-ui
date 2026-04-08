@@ -5,13 +5,6 @@ import { Label } from '../../../components/ui/label';
 import { Button } from '../../../components/ui/button';
 import * as React from 'react';
 
-/**
- * Textarea Component Stories
- *
- * All examples are taken from /app/(docs)/components/textarea/page.tsx
- * Uses exact same text and data as the component documentation.
- */
-
 const meta = {
   title: 'Forms/Textarea',
   component: Textarea,

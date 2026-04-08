@@ -3,16 +3,6 @@ import { within, expect, userEvent } from 'storybook/test';
 import { TokenCounter } from '../../../components/ui/token-counter';
 import { Card, CardContent } from '../../../components/ui/card';
 
-/**
- * Token Counter Component Stories
- *
- * All examples are taken from /app/(docs)/components/token-counter/page.tsx
- * Uses exact same text and data as the component documentation.
- *
- * Note: Token Counter displays AI usage statistics.
- * Features: Input/output tokens, cost estimation, usage percentage, warning states, RTL support.
- */
-
 const meta = {
   title: 'AI-LLM Shell/Token Counter',
   component: TokenCounter,

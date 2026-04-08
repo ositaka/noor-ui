@@ -3,15 +3,6 @@ import { fn } from 'storybook/test';
 import { UserMenu } from '../../../components/ui/user-menu';
 import { Card, CardContent } from '../../../components/ui/card';
 
-/**
- * User Menu Component Stories
- *
- * All examples are taken from /app/(docs)/components/user-menu/page.tsx
- *
- * Note: UserMenu displays a user dropdown with profile actions.
- * Features: Avatar/initials display, user info, flexible actions, RTL support, keyboard navigation.
- */
-
 const meta = {
   title: 'User Interface/User Menu',
   component: UserMenu,

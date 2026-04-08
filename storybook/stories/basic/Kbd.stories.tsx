@@ -5,15 +5,6 @@ import { Button } from '../../../components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '../../../components/ui/card';
 import { Separator } from '../../../components/ui/separator';
 
-/**
- * Kbd Component Stories
- *
- * All examples are taken from /app/(docs)/components/kbd/page.tsx
- * Uses exact same text and data as the component documentation.
- *
- * Note: Kbd component always renders LTR (keyboard shortcuts don't change direction)
- */
-
 const meta = {
   title: 'User Interface/Kbd',
   component: Kbd,

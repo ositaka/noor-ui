@@ -15,15 +15,6 @@ import { Button } from '../../../components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../../../components/ui/select';
 import * as React from 'react';
 
-/**
- * Form Component Stories
- *
- * All examples are taken from /app/(docs)/components/form/page.tsx
- * Uses exact same text and data as the component documentation.
- *
- * Note: Form provides validation, state management, and accessibility features
- */
-
 const meta = {
   title: 'Forms/Form',
   component: Form,

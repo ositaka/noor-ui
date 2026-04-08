@@ -5,15 +5,6 @@ import { Label } from '../../../components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../../components/ui/card';
 import * as React from 'react';
 
-/**
- * Time Picker Component Stories
- *
- * All examples are taken from /app/(docs)/components/time-picker/page.tsx
- * Uses exact same text and data as the component documentation.
- *
- * Note: TimePicker supports 12h/24h formats and time ranges with RTL support
- */
-
 const meta = {
   title: 'Advanced Forms & Inputs/Time Picker',
   component: TimePicker,

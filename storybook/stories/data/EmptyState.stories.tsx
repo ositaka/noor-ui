@@ -17,16 +17,6 @@ import {
 } from '@phosphor-icons/react';
 import * as React from 'react';
 
-/**
- * EmptyState Component Stories
- *
- * All examples are taken from /app/(docs)/components/empty-state/page.tsx
- * Uses exact same text and data as the component documentation.
- *
- * Note: EmptyState displays helpful messages when there is no content.
- * Features: Icon, title, description, action button(s), RTL support.
- */
-
 const meta = {
   title: 'Feedback/Empty State',
   component: EmptyState,

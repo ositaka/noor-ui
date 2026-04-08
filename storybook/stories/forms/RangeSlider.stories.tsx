@@ -5,15 +5,6 @@ import { Card, CardContent } from '../../../components/ui/card';
 import { Label } from '../../../components/ui/label';
 import { useState } from 'react';
 
-/**
- * Range Slider Component Stories
- *
- * All examples are taken from /app/(docs)/components/range-slider/page.tsx
- *
- * Note: RangeSlider allows selecting a range between two values.
- * Features: RTL support, custom formatting, flexible labels, keyboard accessible.
- */
-
 const meta = {
   title: 'Forms/Range Slider',
   component: RangeSlider,

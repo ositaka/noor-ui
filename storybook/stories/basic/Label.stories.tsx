@@ -4,13 +4,6 @@ import { Label } from '../../../components/ui/label';
 import { Input } from '../../../components/ui/input';
 import { Button } from '../../../components/ui/button';
 
-/**
- * Label Component Stories
- *
- * All examples are taken from /app/(docs)/components/label/page.tsx
- * Uses exact same text and data as the component documentation.
- */
-
 const meta = {
   title: 'Core/Label',
   component: Label,

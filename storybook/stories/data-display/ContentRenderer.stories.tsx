@@ -3,15 +3,6 @@ import { expect, within } from 'storybook/test';
 import { ContentRenderer } from '../../../components/ui/content-renderer';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../../components/ui/card';
 
-/**
- * Content Renderer Component Stories
- *
- * All examples are taken from /app/(docs)/components/content-renderer/page.tsx
- *
- * Note: ContentRenderer displays content in multiple formats.
- * Features: Markdown/HTML/text rendering, automatic RTL/LTR detection, code highlighting, GFM support.
- */
-
 const meta = {
   title: 'Data Display/Content Renderer',
   component: ContentRenderer,

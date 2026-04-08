@@ -2,16 +2,6 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { within, expect } from 'storybook/test';
 import { HijriDate } from '../../../components/ui/hijri-date';
 
-/**
- * Hijri Date Component Stories
- *
- * All examples are taken from /app/(docs)/components/hijri-date/page.tsx
- * Uses exact same text and data as the component documentation.
- *
- * Note: Hijri Date displays Gregorian and Islamic calendar dates.
- * Features: 4 variants (default, badge, compact, detailed), bilingual support, RTL-ready.
- */
-
 const meta = {
   title: 'GCC-Specific/Hijri Date',
   component: HijriDate,

@@ -6,13 +6,10 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../..
 import * as React from 'react';
 
 /**
- * Number Input Component Stories
  *
- * All examples are taken from /app/(docs)/components/number-input/page.tsx
- * Uses exact same text and data as the component documentation.
  *
- * Note: Number Input provides formatted number input with increment/decrement controls,
  * validation, decimal precision, and currency formatting support
+ *
  */
 
 const meta = {

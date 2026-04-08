@@ -4,16 +4,6 @@ import { ModelSelector, defaultModels, type AIModel } from '../../../components/
 import { Card, CardContent } from '../../../components/ui/card';
 import { useState } from 'react';
 
-/**
- * Model Selector Component Stories
- *
- * All examples are taken from /app/(docs)/components/model-selector/page.tsx
- * Uses exact same text and data as the component documentation.
- *
- * Note: Model Selector is a dropdown for selecting AI models.
- * Features: Model specs display (speed, context, pricing), provider grouping, recommended badge, custom icons, RTL support.
- */
-
 const meta = {
   title: 'AI-LLM Shell/Model Selector',
   component: ModelSelector,

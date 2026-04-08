@@ -4,13 +4,6 @@ import { Badge } from '../../../components/ui/badge';
 import { Button } from '../../../components/ui/button';
 import { Check, WarningCircle, Star, Clock, Lightning, CheckCircle, XCircle } from '@phosphor-icons/react';
 
-/**
- * Badge Component Stories
- *
- * All examples are taken from /app/(docs)/components/badge/page.tsx
- * Uses exact same text and data as the component documentation.
- */
-
 const meta = {
   title: 'Core/Badge',
   component: Badge,

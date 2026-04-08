@@ -6,13 +6,10 @@ import { User, CreditCard, Calendar } from '@phosphor-icons/react';
 import * as React from 'react';
 
 /**
- * Accordion Component Stories
  *
- * All examples are taken from /app/(docs)/components/accordion/page.tsx
- * Uses exact same text and data as the component documentation.
  *
- * Note: Accordion is a vertically stacked set of interactive headings
  * that each reveal a section of content. Built on Radix UI with full RTL support.
+ *
  */
 
 const meta = {

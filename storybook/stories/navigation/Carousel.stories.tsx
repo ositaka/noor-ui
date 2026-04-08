@@ -12,13 +12,10 @@ import {
 } from '@phosphor-icons/react';
 
 /**
- * Carousel Component Stories
  *
- * Covers all visual states of the Carousel component:
  * default, autoplay, dots-only, custom content (testimonials),
  * no-loop, large dots, no dots, single item, RTL, and dark mode.
  *
- * Features: animated slide transitions (framer-motion), swipe gestures,
  * keyboard navigation, auto-play with pause-on-hover, and full RTL support.
  */
 
@@ -246,15 +243,19 @@ type Story = StoryObj<typeof meta>;
  * Arrows and small dots are visible; looping is enabled.
  */
 export const Default: Story = {
-  render: () => (
+  render: (_args, { globals }) => {
+    const isRTL = globals?.direction === 'rtl';
+
+    return (
     <div className="w-[480px] max-w-full">
       <Carousel
-        items={featureItems}
-        renderItem={renderFeatureSlide}
-        aria-label="Feature highlights"
+        items={isRTL ? arabicFeatureItems : featureItems}
+        renderItem={isRTL ? renderArabicFeatureSlide : renderFeatureSlide}
+        aria-label={isRTL ? 'أبرز المميزات' : 'Feature highlights'}
       />
     </div>
-  ),
+    );
+  },
   parameters: {
     controls: { disable: true },
     docs: {

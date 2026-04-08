@@ -3,13 +3,6 @@ import { expect, within } from 'storybook/test';
 import { Alert, AlertDescription, AlertTitle } from '../../../components/ui/alert';
 import { Terminal, WarningCircle, CheckCircle, Warning as WarningIcon } from '@phosphor-icons/react';
 
-/**
- * Alert Component Stories
- *
- * All examples are taken from /app/(docs)/components/alert/page.tsx
- * Uses exact same text and data as the component documentation.
- */
-
 const meta = {
   title: 'Feedback/Alert',
   component: Alert,

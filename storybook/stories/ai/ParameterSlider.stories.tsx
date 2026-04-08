@@ -4,16 +4,6 @@ import { ParameterSlider, temperaturePresets } from '../../../components/ui/para
 import { Card, CardContent } from '../../../components/ui/card';
 import { useState } from 'react';
 
-/**
- * Parameter Slider Component Stories
- *
- * All examples are taken from /app/(docs)/components/parameter-slider/page.tsx
- * Uses exact same text and data as the component documentation.
- *
- * Note: Parameter Slider is for adjusting AI model parameters.
- * Features: Labeled slider with value display, preset buttons, info tooltips, RTL support.
- */
-
 const meta = {
   title: 'AI-LLM Shell/Parameter Slider',
   component: ParameterSlider,

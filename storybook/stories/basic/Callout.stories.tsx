@@ -3,15 +3,6 @@ import { expect, within } from 'storybook/test';
 import { Callout } from '../../../components/ui/callout';
 import { Lightbulb } from '@phosphor-icons/react';
 
-/**
- * Callout Component Stories
- *
- * All examples are taken from /app/(docs)/components/callout/page.tsx
- * Uses exact same text and data as the component documentation.
- *
- * Note: Callout supports 5 types: info, warning, error, success, note
- */
-
 const meta = {
   title: 'Feedback/Callout',
   component: Callout,

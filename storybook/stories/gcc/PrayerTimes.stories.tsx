@@ -2,16 +2,6 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { expect, fn, userEvent, within } from 'storybook/test';
 import { PrayerTimes, type Prayer } from '../../../components/ui/prayer-times';
 
-/**
- * Prayer Times Component Stories
- *
- * All examples are taken from /app/(docs)/components/prayer-times/page.tsx
- * Uses exact same text and data as the component documentation.
- *
- * Note: Prayer Times displays Islamic prayer times with countdown and location.
- * Features: 4 variants (default, compact, detailed, notification), bilingual support, RTL-ready.
- */
-
 const meta = {
   title: 'GCC-Specific/Prayer Times',
   component: PrayerTimes,

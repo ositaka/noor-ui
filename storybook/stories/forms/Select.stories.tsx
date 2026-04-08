@@ -13,15 +13,6 @@ import { Button } from '../../../components/ui/button';
 import * as React from 'react';
 import { expect, userEvent, within } from 'storybook/test';
 
-/**
- * Select Component Stories
- *
- * All examples are taken from /app/(docs)/components/select/page.tsx
- * Uses exact same text and data as the component documentation.
- *
- * Note: Select supports dropdown selection from a list of options with grouped options and keyboard navigation
- */
-
 const meta = {
   title: 'Forms/Select',
   component: Select,

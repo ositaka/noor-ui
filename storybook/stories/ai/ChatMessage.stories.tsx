@@ -2,16 +2,6 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { within, expect, userEvent, fn } from 'storybook/test';
 import { ChatMessage } from '../../../components/ui/chat-message';
 
-/**
- * Chat Message Component Stories
- *
- * All examples are taken from /app/(docs)/components/chat-message/page.tsx
- * Uses exact same text and data as the component documentation.
- *
- * Note: Chat Message displays AI chat messages with different roles.
- * Features: User/assistant/system roles, copy/regenerate actions, streaming state, RTL support.
- */
-
 const meta = {
   title: 'AI-LLM Shell/Chat Message',
   component: ChatMessage,

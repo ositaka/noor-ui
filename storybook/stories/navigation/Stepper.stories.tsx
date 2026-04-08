@@ -6,14 +6,11 @@ import { expect, userEvent, within, fn } from 'storybook/test';
 import * as React from 'react';
 
 /**
- * Stepper Component Stories
  *
- * All examples are taken from /app/(docs)/components/stepper/page.tsx
- * Uses exact same text and data as the component documentation.
  *
- * Note: Stepper provides a multi-step progress indicator for forms and wizards.
  * Three variants (default, simple, circles) and two orientations (horizontal, vertical).
  * Full RTL support with bilingual titles and descriptions.
+ *
  */
 
 const meta = {

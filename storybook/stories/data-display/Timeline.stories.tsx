@@ -22,16 +22,6 @@ import {
   GearSix,
 } from '@phosphor-icons/react';
 
-/**
- * Timeline Component Stories
- *
- * All examples are taken from /app/(docs)/components/timeline/page.tsx
- * Uses exact same text and data as the component documentation.
- *
- * Note: Timeline displays a sequence of events with status indicators.
- * Features: default and alternating layouts, compact mode, card wrapping, custom icons, full RTL support.
- */
-
 const meta = {
   title: 'User Interface/Timeline',
   component: Timeline,
@@ -923,7 +913,6 @@ export const ManyItems: Story = {
     });
   },
 };
-
 
 // ---------------------------------------------------------------------------
 // AllVariants showcase — visual only, no play function

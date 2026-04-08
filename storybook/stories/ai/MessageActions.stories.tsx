@@ -3,16 +3,6 @@ import { within, expect, userEvent, fn } from 'storybook/test';
 import { MessageActions } from '../../../components/ui/message-actions';
 import { Card, CardContent } from '../../../components/ui/card';
 
-/**
- * Message Actions Component Stories
- *
- * All examples are taken from /app/(docs)/components/message-actions/page.tsx
- * Uses exact same text and data as the component documentation.
- *
- * Note: Message Actions provides action buttons for chat messages.
- * Features: Copy, regenerate, edit, share, feedback (thumbs up/down), flag, compact mode, RTL support.
- */
-
 const meta = {
   title: 'AI-LLM Shell/Message Actions',
   component: MessageActions,

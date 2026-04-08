@@ -7,13 +7,10 @@ import { Card, CardContent } from '../../../components/ui/card';
 import * as React from 'react';
 
 /**
- * DataTable Component Stories
  *
- * All examples are taken from /app/(docs)/components/data-table/page.tsx
- * Uses exact same text and data as the component documentation.
  *
- * Note: DataTable is a powerful component with sorting, filtering, pagination, and mobile responsiveness.
  * Features include: internal/external sorting, search, pagination, loading states, custom cells, and full RTL support.
+ *
  */
 
 const meta = {
@@ -101,6 +98,12 @@ const basicColumns: ColumnDef<User>[] = [
   { id: 'role', header: 'Role', accessorKey: 'role' },
 ];
 
+const basicColumnsAR: ColumnDef<User>[] = [
+  { id: 'name', header: 'الاسم', accessorKey: 'name' },
+  { id: 'email', header: 'البريد الإلكتروني', accessorKey: 'email' },
+  { id: 'role', header: 'الدور', accessorKey: 'role' },
+];
+
 // Sortable columns - from component page lines 493-498
 const sortableColumns: ColumnDef<User>[] = [
   { id: 'name', header: 'Name', accessorKey: 'name', sortable: true },
@@ -121,7 +124,7 @@ export const Default: Story = {
 
     return (
     <div className="w-full">
-      <DataTable {...args} data={isRTL ? usersAR : usersEN} />
+      <DataTable {...args} data={isRTL ? usersAR : usersEN} columns={isRTL ? basicColumnsAR : basicColumns} />
     </div>
     );
   },

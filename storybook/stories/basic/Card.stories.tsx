@@ -40,6 +40,7 @@ export const Default: Story = {
     )
   },
   parameters: {
+    controls: { disable: true },
     ar: {
       args: {
         children: (

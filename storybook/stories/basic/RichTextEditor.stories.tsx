@@ -3,15 +3,6 @@ import { RichTextEditor } from '../../../components/ui/rich-text-editor';
 import { Card, CardContent } from '../../../components/ui/card';
 import { useState } from 'react';
 
-/**
- * Rich Text Editor Component Stories
- *
- * All examples are taken from /app/(docs)/components/rich-text-editor/page.tsx
- *
- * Note: RichTextEditor provides WYSIWYG editing capabilities.
- * Features: Bold, italic, lists, headings, links, RTL support, read-only mode.
- */
-
 const meta = {
   title: 'Advanced Forms & Inputs/Rich Text Editor',
   component: RichTextEditor,

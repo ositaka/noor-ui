@@ -5,13 +5,10 @@ import { Card, CardContent } from '../../../components/ui/card';
 import * as React from 'react';
 
 /**
- * Pagination Component Stories
  *
- * All examples are taken from /app/(docs)/components/pagination/page.tsx
- * Uses exact same text and data as the component documentation.
  *
- * Note: Pagination provides navigation through pages of content.
  * Fully responsive with automatic RTL support for navigation arrows.
+ *
  */
 
 const meta = {
@@ -31,11 +28,18 @@ type Story = StoryObj<typeof meta>;
 
 // Default - Interactive playground (hidden from stories list to avoid ID conflicts)
 export const Default: Story = {
-  render: () => (
+  parameters: {
+    controls: { disable: true }
+  },
+  render: (_args, { globals }) => {
+    const isRTL = globals?.direction === 'rtl';
+    const t = (en: string, ar: string) => isRTL ? ar : en;
+
+    return (
     <Pagination>
       <PaginationContent>
         <PaginationItem>
-          <PaginationPrevious href="#">Previous</PaginationPrevious>
+          <PaginationPrevious href="#">{t('Previous', 'السابق')}</PaginationPrevious>
         </PaginationItem>
         <PaginationItem>
           <PaginationLink href="#">1</PaginationLink>
@@ -49,11 +53,12 @@ export const Default: Story = {
           <PaginationLink href="#">3</PaginationLink>
         </PaginationItem>
         <PaginationItem>
-          <PaginationNext href="#">Next</PaginationNext>
+          <PaginationNext href="#">{t('Next', 'التالي')}</PaginationNext>
         </PaginationItem>
       </PaginationContent>
     </Pagination>
-  ),
+    );
+  },
 };
 
 // Basic Pagination - from component page lines 196-216

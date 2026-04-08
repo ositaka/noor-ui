@@ -6,13 +6,6 @@ import {
   AvatarImage
 } from '../../../components/ui/avatar';
 
-/**
- * Avatar Component Stories
- *
- * All examples are taken from /app/(docs)/components/avatar/page.tsx
- * Uses exact same text and data as the component documentation.
- */
-
 const meta = {
   title: 'Core/Avatar',
   component: Avatar,
@@ -34,6 +27,9 @@ export const Default: Story = {
         <AvatarFallback>CN</AvatarFallback>
       </>
     )
+  },
+  parameters: {
+    controls: { disable: true }
   },
   render: (args, { globals }) => <Avatar {...args} />,
 };

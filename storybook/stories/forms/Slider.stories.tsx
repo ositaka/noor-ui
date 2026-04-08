@@ -6,15 +6,6 @@ import { Button } from '../../../components/ui/button';
 import { SpeakerHigh, SpeakerSlash } from '@phosphor-icons/react';
 import * as React from 'react';
 
-/**
- * Slider Component Stories
- *
- * All examples are taken from /app/(docs)/components/slider/page.tsx
- * Uses exact same text and data as the component documentation.
- *
- * Note: Slider allows selecting a numeric value from a range with RTL support
- */
-
 const meta = {
   title: 'Forms/Slider',
   component: Slider,

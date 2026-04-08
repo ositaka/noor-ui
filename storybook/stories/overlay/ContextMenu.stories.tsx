@@ -22,16 +22,6 @@ import {
 } from '@phosphor-icons/react';
 import * as React from 'react';
 
-/**
- * Context Menu Component Stories
- *
- * All examples are taken from /app/(docs)/components/context-menu/page.tsx
- * Uses exact same text and data as the component documentation.
- *
- * Note: Context Menu appears on right-click (or long press on touch devices).
- * Features: Items, checkboxes, shortcuts, icons, RTL support, accessibility.
- */
-
 const meta = {
   title: 'Navigation/Context Menu',
   component: ContextMenu,

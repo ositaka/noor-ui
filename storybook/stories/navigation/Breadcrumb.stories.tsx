@@ -6,13 +6,10 @@ import { House, Folder, File } from '@phosphor-icons/react';
 import * as React from 'react';
 
 /**
- * Breadcrumb Component Stories
  *
- * All examples are taken from /app/(docs)/components/breadcrumb/page.tsx
- * Uses exact same text and data as the component documentation.
  *
- * Note: Breadcrumb is a navigation component showing the current page location.
  * Automatically adapts to RTL layouts with proper separator positioning.
+ *
  */
 
 const meta = {
@@ -32,23 +29,31 @@ type Story = StoryObj<typeof meta>;
 
 // Default - Interactive playground (hidden from stories list to avoid ID conflicts)
 export const Default: Story = {
-  render: () => (
+  parameters: {
+    controls: { disable: true }
+  },
+  render: (_args, { globals }) => {
+    const isRTL = globals?.direction === 'rtl';
+    const t = (en: string, ar: string) => isRTL ? ar : en;
+
+    return (
     <Breadcrumb>
       <BreadcrumbList>
         <BreadcrumbItem>
-          <BreadcrumbLink href="/">Home</BreadcrumbLink>
+          <BreadcrumbLink href="/">{t('Home', 'الرئيسية')}</BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparator />
         <BreadcrumbItem>
-          <BreadcrumbLink href="/components">Components</BreadcrumbLink>
+          <BreadcrumbLink href="/components">{t('Components', 'المكونات')}</BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparator />
         <BreadcrumbItem>
-          <BreadcrumbPage>Breadcrumb</BreadcrumbPage>
+          <BreadcrumbPage>{t('Breadcrumb', 'مسار التنقل')}</BreadcrumbPage>
         </BreadcrumbItem>
       </BreadcrumbList>
     </Breadcrumb>
-  ),
+    );
+  },
 };
 
 // Basic Breadcrumb - from component page lines 149-163

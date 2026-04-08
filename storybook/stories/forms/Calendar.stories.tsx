@@ -5,13 +5,10 @@ import { Card, CardContent } from '../../../components/ui/card';
 import * as React from 'react';
 
 /**
- * Calendar Component Stories
  *
- * All examples are taken from /app/(docs)/components/calendar/page.tsx
- * Uses exact same text and data as the component documentation.
  *
- * Note: Calendar provides dual calendar support (Gregorian + Hijri),
  * Islamic holidays highlighting, event markers, range selection, and full RTL support
+ *
  */
 
 const meta = {

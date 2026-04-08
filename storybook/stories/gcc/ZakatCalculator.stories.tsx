@@ -2,16 +2,6 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { within, expect, userEvent } from 'storybook/test';
 import { ZakatCalculator } from '../../../components/ui/zakat-calculator';
 
-/**
- * Zakat Calculator Component Stories
- *
- * All examples are taken from /app/(docs)/components/zakat-calculator/page.tsx
- * Uses exact same text and data as the component documentation.
- *
- * Note: Zakat Calculator helps calculate Islamic wealth tax (Zakat).
- * Features: Multi-asset input, nisab calculation, bilingual support, RTL-ready.
- */
-
 const meta = {
   title: 'GCC-Specific/Zakat Calculator',
   component: ZakatCalculator,

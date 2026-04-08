@@ -4,15 +4,6 @@ import { Card, CardContent } from '../../../components/ui/card';
 import { useState } from 'react';
 import { expect, userEvent, within, fn } from 'storybook/test';
 
-/**
- * Conversation History Component Stories
- *
- * All examples are taken from /app/(docs)/components/conversation-history/page.tsx
- *
- * Note: ConversationHistory displays a list of chat conversations.
- * Features: Search, rename, delete, share, time-based grouping, different sizes, floating variant, RTL support.
- */
-
 // Sample conversations from page lines 174-220
 const sampleConversations: Conversation[] = [
   {

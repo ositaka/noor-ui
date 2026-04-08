@@ -7,16 +7,6 @@ import { Label } from '../../../components/ui/label';
 import { Gear } from '@phosphor-icons/react';
 import * as React from 'react';
 
-/**
- * Popover Component Stories
- *
- * All examples are taken from /app/(docs)/components/popover/page.tsx
- * Uses exact same text and data as the component documentation.
- *
- * Note: Popover displays rich content in a portal with flexible positioning.
- * Features: Four sides (top, right, bottom, left), alignment, RTL support, accessibility.
- */
-
 const meta = {
   title: 'Overlays & Layout/Popover',
   component: Popover,

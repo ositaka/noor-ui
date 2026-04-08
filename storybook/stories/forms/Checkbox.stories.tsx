@@ -6,15 +6,6 @@ import { Separator } from '../../../components/ui/separator';
 import * as React from 'react';
 import { expect, fn, userEvent, within } from 'storybook/test';
 
-/**
- * Checkbox Component Stories
- *
- * All examples are taken from /app/(docs)/components/checkbox/page.tsx
- * Uses exact same text and data as the component documentation.
- *
- * Note: Checkbox supports checked, unchecked, and indeterminate states
- */
-
 const meta = {
   title: 'Forms/Checkbox',
   component: Checkbox,

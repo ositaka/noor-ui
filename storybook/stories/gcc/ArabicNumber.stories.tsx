@@ -3,16 +3,6 @@ import { within, expect } from 'storybook/test';
 import { ArabicNumber } from '../../../components/ui/arabic-number';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../../components/ui/card';
 
-/**
- * Arabic Number Component Stories
- *
- * All examples are taken from /app/(docs)/components/arabic-number/page.tsx
- * Uses exact same text and data as the component documentation.
- *
- * Note: Arabic Number formats numbers with proper locale support and Arabic-Indic numerals.
- * Features: Currency, percentage, compact formatting, Arabic numerals (٠-٩), RTL-ready.
- */
-
 const meta = {
   title: 'GCC-Specific/Arabic Number',
   component: ArabicNumber,

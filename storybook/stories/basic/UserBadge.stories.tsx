@@ -3,15 +3,6 @@ import { expect, within } from 'storybook/test';
 import { UserBadge } from '../../../components/ui/user-badge';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../../components/ui/card';
 
-/**
- * User Badge Component Stories
- *
- * All examples are taken from /app/(docs)/components/user-badge/page.tsx
- *
- * Note: UserBadge displays user roles and statuses.
- * Features: Author, moderator, verified, admin variants, custom badges, RTL-ready.
- */
-
 const meta = {
   title: 'Data Display/User Badge',
   component: UserBadge,

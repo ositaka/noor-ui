@@ -2,15 +2,6 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { expect, within } from 'storybook/test';
 import { Blockquote } from '../../../components/ui/blockquote';
 
-/**
- * Blockquote Component Stories
- *
- * All examples are taken from /app/(docs)/components/blockquote/page.tsx
- * Uses exact same text and data as the component documentation.
- *
- * Note: Blockquote supports 3 variants: default, accent, and subtle
- */
-
 const meta = {
   title: 'Data Display/Blockquote',
   component: Blockquote,

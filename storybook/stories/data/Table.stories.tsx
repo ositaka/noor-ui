@@ -7,14 +7,11 @@ import * as React from 'react';
 import { expect, userEvent, within } from 'storybook/test';
 
 /**
- * Table Component Stories
  *
- * All examples are taken from /app/(docs)/components/table/page.tsx
- * Uses exact same text and data as the component documentation.
  *
- * Note: Table is a responsive component for displaying structured data.
  * Uses semantic HTML with proper text alignment for RTL/LTR support.
  * Includes TableHeader, TableBody, TableRow, TableHead, TableCell, and TableCaption sub-components.
+ *
  */
 
 const meta = {
@@ -54,6 +51,9 @@ const usersAR = [
 export const Default: Story = {
   args: {
     className: ''
+  },
+  parameters: {
+    controls: { disable: true }
   },
   render: (args, { globals }) => {
     const isRTL = globals?.direction === 'rtl';

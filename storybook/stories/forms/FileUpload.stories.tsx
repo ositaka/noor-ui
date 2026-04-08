@@ -5,13 +5,10 @@ import * as React from 'react';
 import { expect, fn, userEvent, within } from 'storybook/test';
 
 /**
- * File Upload Component Stories
  *
- * All examples are taken from /app/(docs)/components/file-upload/page.tsx
- * Uses exact same text and data as the component documentation.
  *
- * Note: File Upload provides drag-and-drop file upload with validation,
  * image previews, and full accessibility support. Has built-in bilingual support.
+ *
  */
 
 const meta = {

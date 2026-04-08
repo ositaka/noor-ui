@@ -4,16 +4,6 @@ import { Progress } from '../../../components/ui/progress';
 import { Button } from '../../../components/ui/button';
 import * as React from 'react';
 
-/**
- * Progress Component Stories
- *
- * All examples are taken from /app/(docs)/components/progress/page.tsx
- * Uses exact same text and data as the component documentation.
- *
- * Note: Progress displays completion progress with animated shimmer effect.
- * Features: Gradient background, RTL support, customizable sizes and colors.
- */
-
 const meta = {
   title: 'Feedback/Progress',
   component: Progress,

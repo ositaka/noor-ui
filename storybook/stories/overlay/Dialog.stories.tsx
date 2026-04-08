@@ -15,16 +15,6 @@ import { Input } from '../../../components/ui/input';
 import { Label } from '../../../components/ui/label';
 import * as React from 'react';
 
-/**
- * Dialog Component Stories
- *
- * All examples are taken from /app/(docs)/components/dialog/page.tsx
- * Uses exact same text and data as the component documentation.
- *
- * Note: Dialog displays modal content overlaid on the page.
- * Features: Controlled/uncontrolled, accessibility, RTL support, focus management.
- */
-
 const meta = {
   title: 'Feedback/Dialog',
   component: Dialog,

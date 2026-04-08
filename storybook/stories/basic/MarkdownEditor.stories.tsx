@@ -4,10 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../..
 import { useState } from 'react';
 
 /**
- * Markdown Editor Component Stories
  *
- * Note: MarkdownEditor provides a WYSIWYG markdown editing experience.
- * Features: Native markdown output (unlike RichTextEditor which outputs HTML), syntax highlighting,
  * tables, lists, links, blockquotes, code blocks, RTL support, keyboard shortcuts.
  * Built with MDXEditor.
  */

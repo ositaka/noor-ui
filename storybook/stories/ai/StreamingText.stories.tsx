@@ -5,10 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../..
 import { useState } from 'react';
 
 /**
- * Streaming Text Component Stories
  *
- * Note: StreamingText provides a typewriter/streaming text effect.
- * Features: Configurable speed, optional cursor, auto-start, completion callback, RTL support.
  * Commonly used in AI chat interfaces to simulate real-time generation.
  */
 
