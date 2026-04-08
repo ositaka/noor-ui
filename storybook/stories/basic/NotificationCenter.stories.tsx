@@ -45,28 +45,30 @@ export const Default: Story = {
     onClearAll: fn(),
     onRemove: fn(),
   },
-  render: (args) => {
+  render: (args, { globals }) => {
+    const isRTL = globals?.direction === 'rtl';
+    const t = (en: string, ar: string) => isRTL ? ar : en;
     const [notifications, setNotifications] = useState<Notification[]>([
       {
         id: '1',
-        title: 'New comment on your post',
-        description: 'Sarah commented: "Great article!"',
+        title: t('New comment on your post', 'تعليق جديد على منشورك'),
+        description: t('Sarah commented: "Great article!"', 'علّقت سارة: "مقال رائع!"'),
         time: new Date(Date.now() - 5 * 60000).toISOString(),
         read: false,
         icon: <ChatCentered className="h-5 w-5" />
       },
       {
         id: '2',
-        title: 'New follower',
-        description: 'Ahmed is now following you',
+        title: t('New follower', 'متابع جديد'),
+        description: t('Ahmed is now following you', 'أحمد يتابعك الآن'),
         time: new Date(Date.now() - 120 * 60000).toISOString(),
         read: false,
         icon: <UserPlus className="h-5 w-5" />
       },
       {
         id: '3',
-        title: 'Someone liked your post',
-        description: '3 people liked "Getting Started with React"',
+        title: t('Someone liked your post', 'أحدهم أعجبه منشورك'),
+        description: t('3 people liked "Getting Started with React"', '٣ أشخاص أعجبهم "البدء مع React"'),
         time: new Date(Date.now() - 1440 * 60000).toISOString(),
         read: true,
         icon: <Heart className="h-5 w-5" />

@@ -51,28 +51,34 @@ export const Default: Story = {
     type: 'single',
     collapsible: true
   },
-  render: (args) => (
-    <Accordion {...args} className="w-96 max-w-md">
+  render: (args, { globals }) => {
+    const isRTL = globals?.direction === 'rtl';
+    const t = (en: string, ar: string) => isRTL ? ar : en;
+    const dir = isRTL ? 'rtl' as const : 'ltr' as const;
+
+    return (
+    <Accordion {...args} dir={dir} className="w-96 max-w-md">
       <AccordionItem value="item-1">
-        <AccordionTrigger>Is it accessible?</AccordionTrigger>
+        <AccordionTrigger>{t('Is it accessible?', 'هل هو سهل الوصول؟')}</AccordionTrigger>
         <AccordionContent>
-          Yes. It adheres to the WAI-ARIA design pattern.
+          {t('Yes. It adheres to the WAI-ARIA design pattern.', 'نعم. يتبع نمط تصميم WAI-ARIA.')}
         </AccordionContent>
       </AccordionItem>
       <AccordionItem value="item-2">
-        <AccordionTrigger>Is it styled?</AccordionTrigger>
+        <AccordionTrigger>{t('Is it styled?', 'هل يحتوي على تنسيق؟')}</AccordionTrigger>
         <AccordionContent>
-          Yes. It comes with default styles that you can customize.
+          {t('Yes. It comes with default styles that you can customize.', 'نعم. يأتي بتنسيقات افتراضية يمكنك تخصيصها.')}
         </AccordionContent>
       </AccordionItem>
       <AccordionItem value="item-3">
-        <AccordionTrigger>Is it animated?</AccordionTrigger>
+        <AccordionTrigger>{t('Is it animated?', 'هل يحتوي على رسوم متحركة؟')}</AccordionTrigger>
         <AccordionContent>
-          Yes. It uses CSS animations for smooth transitions.
+          {t('Yes. It uses CSS animations for smooth transitions.', 'نعم. يستخدم رسوم CSS المتحركة لانتقالات سلسة.')}
         </AccordionContent>
       </AccordionItem>
     </Accordion>
-  ),
+    );
+  },
 };
 
 // Basic FAQ - from component page lines 199-218

@@ -47,18 +47,22 @@ export const Default: Story = {
     initialValues: { email: '' },
     onSubmit: fn((values) => alert(JSON.stringify(values, null, 2)))
   },
-  render: (args) => (
+  render: (args, { globals }) => {
+    const isRTL = globals?.direction === 'rtl';
+    const t = (en: string, ar: string) => isRTL ? ar : en;
+
+    return (
     <div className="w-full max-w-md">
       <Form
         {...args}
         validators={{
-          email: validators.required('Email is required')
+          email: validators.required(t('Email is required', 'البريد الإلكتروني مطلوب'))
         }}
       >
         <FormField name="email">
           {({ field, error, touched }) => (
             <FormItem>
-              <FormLabel required>Email</FormLabel>
+              <FormLabel required>{t('Email', 'البريد الإلكتروني')}</FormLabel>
               <Input
                 type="email"
                 placeholder="your@email.com"
@@ -71,11 +75,12 @@ export const Default: Story = {
           )}
         </FormField>
         <Button type="submit" className="w-full">
-          Submit
+          {t('Submit', 'إرسال')}
         </Button>
       </Form>
     </div>
-  ),
+    );
+  },
 };
 
 // Basic Form - from component page lines 164-211

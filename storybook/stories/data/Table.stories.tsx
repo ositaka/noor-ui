@@ -55,24 +55,29 @@ export const Default: Story = {
   args: {
     className: ''
   },
-  render: (args) => (
+  render: (args, { globals }) => {
+    const isRTL = globals?.direction === 'rtl';
+    const t = (en: string, ar: string) => isRTL ? ar : en;
+    const users = isRTL ? usersAR : usersEN;
+
+    return (
     <Table {...args}>
-      <TableCaption>A list of recent users</TableCaption>
+      <TableCaption>{t('A list of recent users', 'قائمة المستخدمين الأخيرين')}</TableCaption>
       <TableHeader>
         <TableRow>
-          <TableHead>Name</TableHead>
-          <TableHead>Email</TableHead>
-          <TableHead>Status</TableHead>
-          <TableHead>Role</TableHead>
+          <TableHead>{t('Name', 'الاسم')}</TableHead>
+          <TableHead>{t('Email', 'البريد الإلكتروني')}</TableHead>
+          <TableHead>{t('Status', 'الحالة')}</TableHead>
+          <TableHead>{t('Role', 'الدور')}</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
-        {usersEN.map((user) => (
+        {users.map((user) => (
           <TableRow key={user.id}>
             <TableCell className="font-medium">{user.name}</TableCell>
             <TableCell>{user.email}</TableCell>
             <TableCell>
-              <Badge variant={user.status === 'Active' ? 'default' : 'secondary'}>
+              <Badge variant={user.status === 'Active' || user.status === 'نشط' ? 'default' : 'secondary'}>
                 {user.status}
               </Badge>
             </TableCell>
@@ -81,7 +86,8 @@ export const Default: Story = {
         ))}
       </TableBody>
     </Table>
-  ),
+    );
+  },
 };
 
 // Basic Table - from component page lines 242-271

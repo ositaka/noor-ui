@@ -69,11 +69,13 @@ export const Default: Story = {
       </Button>
     )
   },
-  render: (args) => (
+  render: (args, { globals }) => {
+    return (
     <Card className="p-8 w-[500px]">
       <EmptyState {...args} />
     </Card>
-  ),
+    );
+  },
   parameters: {
     ar: {
       args: {

@@ -76,14 +76,16 @@ export const Default: Story = {
     step: 1,
     showControls: true
   },
-  render: (args) => {
+  render: (args, { globals }) => {
+    const isRTL = globals?.direction === 'rtl';
+    const t = (en: string, ar: string) => isRTL ? ar : en;
     const [value, setValue] = React.useState<number | undefined>(42);
 
     return (
       <div className="w-full max-w-xs space-y-2">
-        <Label>Quantity</Label>
+        <Label>{t('Quantity', 'الكمية')}</Label>
         <NumberInput {...args} value={value} onChange={setValue} />
-        <p className="text-sm text-muted-foreground">Current value: {value}</p>
+        <p className="text-sm text-muted-foreground">{t('Current value:', 'القيمة الحالية:')} {value}</p>
       </div>
     );
   },

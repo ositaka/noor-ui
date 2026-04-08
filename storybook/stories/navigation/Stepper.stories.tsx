@@ -100,11 +100,16 @@ export const Default: Story = {
     allowSkip: false,
     onStepClick: fn()
   },
-  render: (args) => (
+  render: (args, { globals }) => {
+    const isRTL = globals?.direction === 'rtl';
+    const t = (en: string, ar: string) => isRTL ? ar : en;
+
+    return (
     <div className="w-full max-w-4xl" style={{ minWidth: '800px'}}>
       <Stepper {...args} />
     </div>
-  ),
+    );
+  },
 };
 
 // Basic Stepper - from component page lines 184-206

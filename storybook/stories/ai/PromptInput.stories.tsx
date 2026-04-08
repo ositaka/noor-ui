@@ -46,7 +46,7 @@ export const Default: Story = {
   args: {
     placeholder: 'Type your message... (Shift+Enter for new line)'
   },
-  render: (args) => {
+  render: (args, { globals }) => {
     const [value, setValue] = useState('');
     return (
       <div className="max-w-2xl w-96">

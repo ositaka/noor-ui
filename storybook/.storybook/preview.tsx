@@ -79,14 +79,14 @@ const preview: Preview = {
 
   globalTypes: {
     direction: {
-      description: 'Text direction',
+      description: 'Text direction and language',
       defaultValue: 'ltr',
       toolbar: {
         title: 'Direction',
         icon: 'transfer',
         items: [
-          { value: 'ltr', title: 'LTR', icon: 'arrowleft' },
-          { value: 'rtl', title: 'RTL', icon: 'arrowright' },
+          { value: 'ltr', title: 'English (LTR)', icon: 'transfer' },
+          { value: 'rtl', title: 'العربية (RTL)', icon: 'transfer' },
         ],
         dynamicTitle: true,
       },
@@ -120,17 +120,8 @@ const preview: Preview = {
       },
     },
     locale: {
-      description: 'Locale',
+      description: 'Locale (derived from direction)',
       defaultValue: 'en',
-      toolbar: {
-        title: 'Locale',
-        icon: 'globe',
-        items: [
-          { value: 'en', title: 'English', icon: 'globe' },
-          { value: 'ar', title: 'العربية', icon: 'globe' },
-        ],
-        dynamicTitle: true,
-      },
     },
   },
 
@@ -139,7 +130,7 @@ const preview: Preview = {
       const direction = context.globals.direction || 'ltr';
       const theme = context.globals.theme || 'minimal';
       const mode = context.globals.mode || 'light';
-      const locale = context.globals.locale || 'en';
+      const locale = direction === 'rtl' ? 'ar' : 'en';
 
       // Apply Arabic arg overrides when direction is RTL
       const arOverrides = context.parameters?.ar?.args ?? context.parameters?.ar;
@@ -152,6 +143,21 @@ const preview: Preview = {
         document.documentElement.classList.toggle('dark', mode === 'dark');
         applyThemeToDocument(theme);
       }, [mode, theme]);
+
+      // Auto-set dir on Radix portaled components (they render outside the story wrapper)
+      React.useEffect(() => {
+        const setDirOnPortals = () => {
+          document.querySelectorAll('[data-radix-popper-content-wrapper], [data-radix-portal], [role="dialog"]').forEach(el => {
+            if (el.getAttribute('dir') !== direction) {
+              el.setAttribute('dir', direction);
+            }
+          });
+        };
+        setDirOnPortals();
+        const observer = new MutationObserver(setDirOnPortals);
+        observer.observe(document.body, { childList: true, subtree: true });
+        return () => observer.disconnect();
+      }, [direction]);
 
       return (
         <DirectionProvider controlledDirection={direction as 'ltr' | 'rtl'} controlledLocale={locale as 'en' | 'ar'}>

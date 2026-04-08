@@ -38,12 +38,17 @@ export const Default: Story = {
     id: 'default',
     onCheckedChange: fn()
   },
-  render: (args) => (
+  render: (args, { globals }) => {
+    const isRTL = globals?.direction === 'rtl';
+    const t = (en: string, ar: string) => isRTL ? ar : en;
+
+    return (
     <div className="flex items-center gap-2">
       <Switch {...args} />
-      <Label htmlFor="default">Airplane Mode</Label>
+      <Label htmlFor="default">{t('Airplane Mode', 'وضع الطيران')}</Label>
     </div>
-  ),
+    );
+  },
 };
 
 // With Label - from component page lines 250-269

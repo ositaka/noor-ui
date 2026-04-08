@@ -54,42 +54,48 @@ export const Default: Story = {
   args: {
     onOpenChange: fn()
   },
-  render: (args) => (
-    <ContextMenu onOpenChange={args.onOpenChange}>
+  render: (args, { globals }) => {
+    const isRTL = globals?.direction === 'rtl';
+    const t = (en: string, ar: string) => isRTL ? ar : en;
+    const dir = isRTL ? 'rtl' as const : 'ltr' as const;
+
+    return (
+    <ContextMenu onOpenChange={args.onOpenChange} dir={dir}>
       <ContextMenuTrigger>
         <Card className="w-full max-w-md h-32 px-4 flex items-center justify-center border-dashed border-2 cursor-context-menu">
-          <p className="text-muted-foreground">Right click here</p>
+          <p className="text-muted-foreground">{t('Right click here', 'انقر بالزر الأيمن هنا')}</p>
         </Card>
       </ContextMenuTrigger>
       <ContextMenuContent className="w-56">
         <ContextMenuItem onSelect={fn()}>
           <PencilSimple className="me-2 h-4 w-4" />
-          <span>Edit</span>
+          <span>{t('Edit', 'تعديل')}</span>
           <ContextMenuShortcut>⌘E</ContextMenuShortcut>
         </ContextMenuItem>
         <ContextMenuItem onSelect={fn()}>
           <Copy className="me-2 h-4 w-4" />
-          <span>Copy</span>
+          <span>{t('Copy', 'نسخ')}</span>
           <ContextMenuShortcut>⌘C</ContextMenuShortcut>
         </ContextMenuItem>
         <ContextMenuItem onSelect={fn()}>
           <Share className="me-2 h-4 w-4" />
-          <span>Share</span>
+          <span>{t('Share', 'مشاركة')}</span>
         </ContextMenuItem>
         <ContextMenuSeparator />
         <ContextMenuItem onSelect={fn()}>
           <Download className="me-2 h-4 w-4" />
-          <span>Download</span>
+          <span>{t('Download', 'تنزيل')}</span>
         </ContextMenuItem>
         <ContextMenuSeparator />
         <ContextMenuItem className="text-destructive" onSelect={fn()}>
           <Trash className="me-2 h-4 w-4" />
-          <span>Delete</span>
+          <span>{t('Delete', 'حذف')}</span>
           <ContextMenuShortcut>⌘D</ContextMenuShortcut>
         </ContextMenuItem>
       </ContextMenuContent>
     </ContextMenu>
-  ),
+    );
+  },
 };
 
 // Basic Usage - from component page lines 166-199

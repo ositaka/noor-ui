@@ -56,7 +56,7 @@ export const Default: Story = {
       }
     }
   },
-  render: (args) => <Card {...args} className="w-[350px]" />,
+  render: (args, { globals }) => <Card {...args} className="w-[350px]" />,
 };
 
 // With Footer

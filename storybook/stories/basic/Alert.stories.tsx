@@ -51,9 +51,11 @@ export const Default: Story = {
       }
     }
   },
-  render: (args) => (
+  render: (args, { globals }) => {
+    return (
     <Alert {...args} className="w-full max-w-md" />
-  ),
+    );
+  },
 };
 
 // Destructive - from component page lines 161-167

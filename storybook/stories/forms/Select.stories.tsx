@@ -44,18 +44,24 @@ export const Default: Story = {
   args: {
     defaultValue: 'option1'
   },
-  render: (args) => (
-    <Select {...args}>
+  render: (args, { globals }) => {
+    const isRTL = globals?.direction === 'rtl';
+    const t = (en: string, ar: string) => isRTL ? ar : en;
+    const dir = isRTL ? 'rtl' as const : 'ltr' as const;
+
+    return (
+    <Select {...args} dir={dir}>
       <SelectTrigger className="w-[180px]">
-        <SelectValue placeholder="Select option" />
+        <SelectValue placeholder={t('Select option', 'اختر خياراً')} />
       </SelectTrigger>
       <SelectContent>
-        <SelectItem value="option1">Option 1</SelectItem>
-        <SelectItem value="option2">Option 2</SelectItem>
-        <SelectItem value="option3">Option 3</SelectItem>
+        <SelectItem value="option1">{t('Option 1', 'الخيار الأول')}</SelectItem>
+        <SelectItem value="option2">{t('Option 2', 'الخيار الثاني')}</SelectItem>
+        <SelectItem value="option3">{t('Option 3', 'الخيار الثالث')}</SelectItem>
       </SelectContent>
     </Select>
-  ),
+    );
+  },
 };
 
 // With Label - from component page lines 305-320

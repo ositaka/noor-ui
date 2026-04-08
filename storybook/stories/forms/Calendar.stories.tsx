@@ -58,7 +58,7 @@ export const Default: Story = {
     showIslamicHolidays: false,
     onSelect: fn()
   },
-  render: (args) => {
+  render: (args, { globals }) => {
     const [selected, setSelected] = React.useState<Date>();
 
     return (

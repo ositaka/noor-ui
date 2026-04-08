@@ -38,12 +38,17 @@ export const Default: Story = {
     id: 'default',
     onCheckedChange: fn()
   },
-  render: (args) => (
+  render: (args, { globals }) => {
+    const isRTL = globals?.direction === 'rtl';
+    const t = (en: string, ar: string) => isRTL ? ar : en;
+
+    return (
     <div className="flex items-center gap-2">
       <Checkbox {...args} />
-      <Label htmlFor="default">Accept terms and conditions</Label>
+      <Label htmlFor="default">{t('Accept terms and conditions', 'أوافق على الشروط والأحكام')}</Label>
     </div>
-  ),
+    );
+  },
 };
 
 // With Label - from component page lines 292-303

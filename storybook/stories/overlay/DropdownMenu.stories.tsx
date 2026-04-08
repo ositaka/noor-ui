@@ -68,41 +68,48 @@ export const Default: Story = {
   args: {
     defaultOpen: false
   },
-  render: (args) => (
-    <DropdownMenu {...args}>
+  render: (args, { globals }) => {
+    const isRTL = globals?.direction === 'rtl';
+    const t = (en: string, ar: string) => isRTL ? ar : en;
+
+    const dir = isRTL ? 'rtl' as const : 'ltr' as const;
+
+    return (
+    <DropdownMenu {...args} dir={dir}>
       <DropdownMenuTrigger asChild>
         <Button variant="outline">
           <User className="me-2 h-4 w-4" />
-          My Account
+          {t('My Account', 'حسابي')}
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56">
-        <DropdownMenuLabel>My Account</DropdownMenuLabel>
+        <DropdownMenuLabel>{t('My Account', 'حسابي')}</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
           <User className="me-2 h-4 w-4" />
-          <span>Profile</span>
+          <span>{t('Profile', 'الملف الشخصي')}</span>
           <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
         </DropdownMenuItem>
         <DropdownMenuItem>
           <CreditCard className="me-2 h-4 w-4" />
-          <span>Billing</span>
+          <span>{t('Billing', 'الفواتير')}</span>
           <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
         </DropdownMenuItem>
         <DropdownMenuItem>
           <Gear className="me-2 h-4 w-4" />
-          <span>Settings</span>
+          <span>{t('Settings', 'الإعدادات')}</span>
           <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
           <SignOut className="me-2 h-4 w-4" />
-          <span>Logout</span>
+          <span>{t('Logout', 'تسجيل الخروج')}</span>
           <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
-  ),
+    );
+  },
 };
 
 // Basic Usage - from component page lines 216-248

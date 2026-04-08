@@ -43,18 +43,23 @@ export const Default: Story = {
   args: {
     defaultValue: 'account'
   },
-  render: (args) => (
-    <Tabs {...args} className="w-96 max-w-md">
+  render: (args, { globals }) => {
+    const isRTL = globals?.direction === 'rtl';
+    const t = (en: string, ar: string) => isRTL ? ar : en;
+    const dir = isRTL ? 'rtl' as const : 'ltr' as const;
+
+    return (
+    <Tabs {...args} dir={dir} className="w-96 max-w-md">
       <TabsList className="grid w-full grid-cols-3">
-        <TabsTrigger value="account">Account</TabsTrigger>
-        <TabsTrigger value="password">Password</TabsTrigger>
-        <TabsTrigger value="settings">Settings</TabsTrigger>
+        <TabsTrigger value="account">{t('Account', 'الحساب')}</TabsTrigger>
+        <TabsTrigger value="password">{t('Password', 'كلمة المرور')}</TabsTrigger>
+        <TabsTrigger value="settings">{t('Settings', 'الإعدادات')}</TabsTrigger>
       </TabsList>
       <TabsContent value="account" className="mt-4">
         <Card>
           <CardContent className="p-6">
             <p className="text-sm text-muted-foreground">
-              Make changes to your account here. Click save when you're done.
+              {t("Make changes to your account here. Click save when you're done.", 'قم بتعديل معلومات حسابك هنا. انقر حفظ عند الانتهاء.')}
             </p>
           </CardContent>
         </Card>
@@ -63,7 +68,7 @@ export const Default: Story = {
         <Card>
           <CardContent className="p-6">
             <p className="text-sm text-muted-foreground">
-              Change your password here. After saving, you'll be logged out.
+              {t("Change your password here. After saving, you'll be logged out.", 'قم بتغيير كلمة المرور هنا. بعد الحفظ، سيتم تسجيل خروجك.')}
             </p>
           </CardContent>
         </Card>
@@ -72,13 +77,14 @@ export const Default: Story = {
         <Card>
           <CardContent className="p-6">
             <p className="text-sm text-muted-foreground">
-              Manage your account settings and preferences.
+              {t('Manage your account settings and preferences.', 'إدارة إعدادات حسابك وتفضيلاتك.')}
             </p>
           </CardContent>
         </Card>
       </TabsContent>
     </Tabs>
-  ),
+    );
+  },
 };
 
 // Basic Tabs - from component page lines 128-161

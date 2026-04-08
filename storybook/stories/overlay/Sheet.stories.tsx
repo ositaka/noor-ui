@@ -54,26 +54,32 @@ export const Default: Story = {
     defaultOpen: false
   },
 
-  render: (args) => (
-    <Sheet {...args}>
+  render: (args, { globals }) => {
+    const isRTL = globals?.direction === 'rtl';
+    const t = (en: string, ar: string) => isRTL ? ar : en;
+    const dir = isRTL ? 'rtl' as const : 'ltr' as const;
+
+    return (
+    <Sheet {...args} dir={dir}>
       <SheetTrigger asChild>
-        <Button variant="outline">Open Sheet</Button>
+        <Button variant="outline">{t('Open Sheet', 'فتح اللوحة')}</Button>
       </SheetTrigger>
       <SheetContent>
         <SheetHeader>
-          <SheetTitle>Sheet Title</SheetTitle>
+          <SheetTitle>{t('Sheet Title', 'عنوان اللوحة')}</SheetTitle>
           <SheetDescription>
-            This is a sheet component that slides in from the side.
+            {t('This is a sheet component that slides in from the side.', 'هذا مكون لوحة ينزلق من الجانب.')}
           </SheetDescription>
         </SheetHeader>
         <div className="py-4">
           <p className="text-sm text-muted-foreground">
-            Sheet content goes here. You can add forms, lists, or any other content.
+            {t('Sheet content goes here. You can add forms, lists, or any other content.', 'يظهر محتوى اللوحة هنا. يمكنك إضافة نماذج أو قوائم أو أي محتوى آخر.')}
           </p>
         </div>
       </SheetContent>
     </Sheet>
-  ),
+    );
+  },
 };
 
 // From End (Default) - from component page lines 182-199

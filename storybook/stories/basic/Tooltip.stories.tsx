@@ -62,7 +62,7 @@ export const Default: Story = {
       }
     }
   },
-  render: (args) => <Tooltip {...args} />,
+  render: (args, { globals }) => <Tooltip {...args} />,
 };
 
 // All Sides - from component page lines 232-268

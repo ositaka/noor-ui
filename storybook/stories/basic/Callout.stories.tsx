@@ -45,11 +45,13 @@ export const Default: Story = {
       }
     }
   },
-  render: (args) => (
+  render: (args, { globals }) => {
+    return (
     <div className="w-full max-w-2xl">
       <Callout {...args} />
     </div>
-  ),
+    );
+  },
 };
 
 // Info - from component page lines 77-79

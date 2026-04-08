@@ -52,11 +52,16 @@ export const Default: Story = {
     description: 'Built from the ground up to support both LTR and RTL layouts seamlessly',
     href: '/rtl-guide'
   },
-  render: (args) => (
+  render: (args, { globals }) => {
+    const isRTL = globals?.direction === 'rtl';
+    const t = (en: string, ar: string) => isRTL ? ar : en;
+
+    return (
     <div className="max-w-sm">
-      <FeatureCard {...args} />
+      <FeatureCard {...args} title={t(args.title as string, 'تصميم يدعم الاتجاهين')} description={t(args.description as string, 'مبني من الأساس لدعم تخطيطات LTR و RTL بسلاسة')} />
     </div>
-  ),
+    );
+  },
   parameters: {
     ar: {
       args: {

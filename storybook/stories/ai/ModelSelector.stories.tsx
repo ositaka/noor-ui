@@ -42,7 +42,9 @@ export const Default: Story = {
     value: 'gpt-4',
     onValueChange: fn()
   },
-  render: (args) => {
+  render: (args, { globals }) => {
+    const isRTL = globals?.direction === 'rtl';
+    const t = (en: string, ar: string) => isRTL ? ar : en;
     const [value, setValue] = useState(args.value || 'gpt-4');
     return (
       <div className="w-full max-w-md space-y-3">
@@ -55,7 +57,7 @@ export const Default: Story = {
           }}
         />
         <p className="text-sm text-muted-foreground">
-          Selected: {value}
+          {t('Selected:', 'المحدد:')} {value}
         </p>
       </div>
     );

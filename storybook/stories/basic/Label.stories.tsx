@@ -36,12 +36,14 @@ export const Default: Story = {
       }
     }
   },
-  render: (args) => (
+  render: (args, { globals }) => {
+    return (
     <div className="w-full max-w-sm space-y-2">
       <Label {...args} />
       <Input id="preview-input" type="email" placeholder="name@example.com" />
     </div>
-  ),
+    );
+  },
 };
 
 // With Input - from component page lines 224-227

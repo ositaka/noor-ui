@@ -116,11 +116,15 @@ export const Default: Story = {
     columns: basicColumns,
     hoverable: true
   },
-  render: (args) => (
+  render: (args, { globals }) => {
+    const isRTL = globals?.direction === 'rtl';
+
+    return (
     <div className="w-full">
-      <DataTable {...args} />
+      <DataTable {...args} data={isRTL ? usersAR : usersEN} />
     </div>
-  ),
+    );
+  },
 };
 
 // Basic DataTable - from component page lines 656-663

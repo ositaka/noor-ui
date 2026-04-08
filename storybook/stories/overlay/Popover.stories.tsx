@@ -45,21 +45,27 @@ export const Default: Story = {
   args: {
     defaultOpen: false
   },
-  render: (args) => (
-    <Popover {...args}>
+  render: (args, { globals }) => {
+    const isRTL = globals?.direction === 'rtl';
+    const t = (en: string, ar: string) => isRTL ? ar : en;
+    const dir = isRTL ? 'rtl' as const : 'ltr' as const;
+
+    return (
+    <Popover {...args} dir={dir}>
       <PopoverTrigger asChild>
-        <Button variant="outline">Open Popover</Button>
+        <Button variant="outline">{t('Open Popover', 'فتح النافذة المنبثقة')}</Button>
       </PopoverTrigger>
       <PopoverContent>
         <div className="space-y-2">
-          <h4 className="font-medium leading-none">Popover Title</h4>
+          <h4 className="font-medium leading-none">{t('Popover Title', 'عنوان النافذة المنبثقة')}</h4>
           <p className="text-sm text-muted-foreground">
-            This is a popover with some example content.
+            {t('This is a popover with some example content.', 'هذه نافذة منبثقة تحتوي على محتوى توضيحي.')}
           </p>
         </div>
       </PopoverContent>
     </Popover>
-  ),
+    );
+  },
 };
 
 // Basic Usage - from component page lines 177-189

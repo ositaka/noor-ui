@@ -47,7 +47,7 @@ export const Default: Story = {
   args: {
     onValueChange: fn(),
   },
-  render: (args) => {
+  render: (args, { globals }) => {
     const [value, setValue] = useState<[number, number]>([25, 75]);
 
     const handleChange = (newValue: [number, number]) => {

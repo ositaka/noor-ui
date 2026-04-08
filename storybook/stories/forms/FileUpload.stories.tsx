@@ -58,7 +58,9 @@ export const Default: Story = {
     onChange: fn(),
     onUpload: fn()
   },
-  render: (args) => {
+  render: (args, { globals }) => {
+    const isRTL = globals?.direction === 'rtl';
+    const t = (en: string, ar: string) => isRTL ? ar : en;
     const [files, setFiles] = React.useState<File[]>([]);
 
     return (
@@ -73,7 +75,7 @@ export const Default: Story = {
         />
         {files.length > 0 && (
           <p className="text-sm text-muted-foreground mt-4">
-            {files.length} file(s) selected
+            {isRTL ? `${files.length} ملف/ملفات محددة` : `${files.length} file(s) selected`}
           </p>
         )}
       </div>

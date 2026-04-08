@@ -43,7 +43,7 @@ export const Default: Story = {
   args: {
     value: 66
   },
-  render: (args) => <Progress {...args} className="w-80 max-w-md" />,
+  render: (args, { globals }) => <Progress {...args} className="w-80 max-w-md" />,
 };
 
 // Basic - from component page line 140

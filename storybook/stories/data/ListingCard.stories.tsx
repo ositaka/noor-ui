@@ -113,11 +113,13 @@ export const Default: Story = {
     hoverEffect: true,
     onClick: fn()
   },
-  render: (args) => (
+  render: (args, { globals }) => {
+    return (
     <div className="max-w-sm">
       <ListingCard {...args} />
     </div>
-  ),
+    );
+  },
   parameters: {
     ar: {
       args: {

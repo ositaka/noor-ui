@@ -39,11 +39,13 @@ export const Default: Story = {
     format: '24h',
     onTimeChange: fn()
   },
-  render: (args) => {
+  render: (args, { globals }) => {
+    const isRTL = globals?.direction === 'rtl';
+    const t = (en: string, ar: string) => isRTL ? ar : en;
     const [time, setTime] = React.useState<Time>({ hours: 9, minutes: 30 });
 
     const formatTime = (time: Time | undefined): string => {
-      if (!time) return 'No time selected';
+      if (!time) return t('No time selected', 'لم يتم اختيار وقت');
       const hours = time.hours.toString().padStart(2, '0');
       const minutes = time.minutes.toString().padStart(2, '0');
       return `${hours}:${minutes}`;
@@ -51,8 +53,8 @@ export const Default: Story = {
 
     return (
       <div className="w-full max-w-xs space-y-2">
-        <Label className='me-4'>Start Time</Label>
-        <TimePicker {...args} time={time} onTimeChange={(t) => { if (t) setTime(t); args.onTimeChange?.(t); }} />
+        <Label className='me-4'>{t('Start Time', 'وقت البدء')}</Label>
+        <TimePicker {...args} time={time} onTimeChange={(tp) => { if (tp) setTime(tp); args.onTimeChange?.(tp); }} />
         <p className="text-sm text-muted-foreground">{formatTime(time)}</p>
       </div>
     );

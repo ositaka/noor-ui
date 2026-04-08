@@ -29,17 +29,22 @@ export const Default: Story = {
     orientation: 'horizontal',
     decorative: true
   },
-  render: (args) => (
+  render: (args, { globals }) => {
+    const isRTL = globals?.direction === 'rtl';
+    const t = (en: string, ar: string) => isRTL ? ar : en;
+
+    return (
     <div className="w-full max-w-md space-y-4">
       <div>
-        <p className="text-sm">Content above separator</p>
+        <p className="text-sm">{t('Content above separator', 'المحتوى فوق الفاصل')}</p>
       </div>
       <Separator {...args} />
       <div>
-        <p className="text-sm">Content below separator</p>
+        <p className="text-sm">{t('Content below separator', 'المحتوى أسفل الفاصل')}</p>
       </div>
     </div>
-  )
+    );
+  }
 };
 
 // Horizontal Sections - from component page lines 229-244

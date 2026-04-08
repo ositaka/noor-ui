@@ -54,11 +54,13 @@ export const Default: Story = {
     content: 'Hello! How can I help you today?',
     timestamp: '2:30 PM'
   },
-  render: (args) => (
+  render: (args, { globals }) => {
+    return (
     <div className="w-full max-w-2xl">
       <ChatMessage {...args} />
     </div>
-  ),
+    );
+  },
   parameters: {
     ar: {
       args: {

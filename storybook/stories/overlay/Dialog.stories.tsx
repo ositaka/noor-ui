@@ -53,19 +53,25 @@ export const Default: Story = {
   args: {
     defaultOpen: false
   },
-  render: (args) => (
-    <Dialog {...args}>
+  render: (args, { globals }) => {
+    const isRTL = globals?.direction === 'rtl';
+    const t = (en: string, ar: string) => isRTL ? ar : en;
+    const dir = isRTL ? 'rtl' as const : 'ltr' as const;
+
+    return (
+    <Dialog {...args} dir={dir}>
       <DialogTrigger asChild>
-        <Button>Open Dialog</Button>
+        <Button>{t('Open Dialog', 'فتح النافذة')}</Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Are you absolutely sure?</DialogTitle>
-          <DialogDescription>This action cannot be undone.</DialogDescription>
+          <DialogTitle>{t('Are you absolutely sure?', 'هل أنت متأكد تماماً؟')}</DialogTitle>
+          <DialogDescription>{t('This action cannot be undone.', 'لا يمكن التراجع عن هذا الإجراء.')}</DialogDescription>
         </DialogHeader>
       </DialogContent>
     </Dialog>
-  ),
+    );
+  },
 };
 
 // Basic Dialog - from component page lines 164-176

@@ -246,11 +246,13 @@ export const Default: Story = {
     'aria-label': 'Application process',
   },
 
-  render: (args) => (
+  render: (args, { globals }) => {
+    return (
     <div className="w-full max-w-lg">
       <Timeline {...args} />
     </div>
-  ),
+    );
+  },
   parameters: {
     docs: {
       description: {

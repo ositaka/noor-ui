@@ -35,7 +35,7 @@ export const Default: Story = {
       </>
     )
   },
-  render: (args) => <Avatar {...args} />,
+  render: (args, { globals }) => <Avatar {...args} />,
 };
 
 // With Fallback - from component page lines 170-182

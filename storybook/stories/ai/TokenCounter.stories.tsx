@@ -53,11 +53,13 @@ export const Default: Story = {
     outputCostPer1K: 0.06,
     label: 'Token Usage'
   },
-  render: (args) => (
+  render: (args, { globals }) => {
+    return (
     <div className="max-w-md w-full">
       <TokenCounter {...args} />
     </div>
-  ),
+    );
+  },
   parameters: {
     ar: {
       args: {

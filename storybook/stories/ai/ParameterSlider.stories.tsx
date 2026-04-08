@@ -52,7 +52,7 @@ export const Default: Story = {
     step: 0.1,
     value: 0.7
   },
-  render: (args) => {
+  render: (args, { globals }) => {
     const [value, setValue] = useState(args.value);
     return (
       <div className="max-w-md w-full">

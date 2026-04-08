@@ -38,18 +38,20 @@ export const Default: Story = {
     placeholderAr: 'اختر تاريخ',
     onDateChange: fn()
   },
-  render: (args) => {
+  render: (args, { globals }) => {
+    const isRTL = globals?.direction === 'rtl';
+    const t = (en: string, ar: string) => isRTL ? ar : en;
     const [date, setDate] = React.useState<Date | undefined>(new Date());
     return (
       <div className="w-full max-w-xs space-y-2">
-        <Label className='me-4'>Date of Birth</Label>
+        <Label className='me-4'>{t('Date of Birth', 'تاريخ الميلاد')}</Label>
         <DatePicker {...args} date={date} onDateChange={setDate} />
         <p className="text-sm text-muted-foreground">
-          {date ? new Intl.DateTimeFormat('en-US', {
+          {date ? new Intl.DateTimeFormat(isRTL ? 'ar' : 'en-US', {
             year: 'numeric',
             month: 'long',
             day: 'numeric'
-          }).format(date) : 'No date selected'}
+          }).format(date) : t('No date selected', 'لم يتم اختيار تاريخ')}
         </p>
       </div>
     );

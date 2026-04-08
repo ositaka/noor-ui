@@ -40,11 +40,13 @@ export const Default: Story = {
       }
     }
   },
-  render: (args) => (
+  render: (args, { globals }) => {
+    return (
     <div className="w-full max-w-2xl">
       <Blockquote {...args} />
     </div>
-  ),
+    );
+  },
 };
 
 // Accent Variant - from component page lines 118-121

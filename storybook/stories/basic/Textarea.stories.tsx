@@ -30,12 +30,17 @@ export const Default: Story = {
     placeholder: 'Enter your message',
     id: 'preview'
   },
-  render: (args) => (
+  render: (args, { globals }) => {
+    const isRTL = globals?.direction === 'rtl';
+    const t = (en: string, ar: string) => isRTL ? ar : en;
+
+    return (
     <div className="w-full max-w-md space-y-2">
-      <Label htmlFor="preview">Message</Label>
+      <Label htmlFor="preview">{t('Message', 'الرسالة')}</Label>
       <Textarea {...args} />
     </div>
-  ),
+    );
+  },
   parameters: {
     ar: {
       args: {

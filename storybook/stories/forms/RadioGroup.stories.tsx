@@ -37,22 +37,27 @@ export const Default: Story = {
     defaultValue: 'option1',
     onValueChange: fn()
   },
-  render: (args) => (
+  render: (args, { globals }) => {
+    const isRTL = globals?.direction === 'rtl';
+    const t = (en: string, ar: string) => isRTL ? ar : en;
+
+    return (
     <RadioGroup {...args}>
       <div className="flex items-center gap-2">
         <RadioGroupItem value="option1" id="default-option1" />
-        <Label htmlFor="default-option1">Option 1</Label>
+        <Label htmlFor="default-option1">{t('Option 1', 'الخيار الأول')}</Label>
       </div>
       <div className="flex items-center gap-2">
         <RadioGroupItem value="option2" id="default-option2" />
-        <Label htmlFor="default-option2">Option 2</Label>
+        <Label htmlFor="default-option2">{t('Option 2', 'الخيار الثاني')}</Label>
       </div>
       <div className="flex items-center gap-2">
         <RadioGroupItem value="option3" id="default-option3" />
-        <Label htmlFor="default-option3">Option 3</Label>
+        <Label htmlFor="default-option3">{t('Option 3', 'الخيار الثالث')}</Label>
       </div>
     </RadioGroup>
-  ),
+    );
+  },
 };
 
 // Vertical Layout - from component page lines 329-342

@@ -37,11 +37,13 @@ export const Default: Story = {
     goldPricePerGram: 250,
     silverPricePerGram: 3
   },
-  render: (args) => (
+  render: (args, { globals }) => {
+    return (
     <div className="max-w-2xl w-full">
       <ZakatCalculator {...args} />
     </div>
-  ),
+    );
+  },
 };
 
 // With Default Values - from component page lines 124-131

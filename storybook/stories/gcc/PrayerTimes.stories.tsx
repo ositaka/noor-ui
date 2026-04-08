@@ -60,11 +60,13 @@ export const Default: Story = {
     date: 'November 6, 2025',
     dateAr: '٥ جمادى الأولى ١٤٤٧'
   },
-  render: (args) => (
+  render: (args, { globals }) => {
+    return (
     <div className="max-w-2xl w-full">
       <PrayerTimes {...args} />
     </div>
-  ),
+    );
+  },
   parameters: {
     ar: {
       args: {

@@ -40,11 +40,13 @@ export const Default: Story = {
     step: 1,
     onValueChange: fn()
   },
-  render: (args) => (
+  render: (args, { globals }) => {
+    return (
     <div className="w-80">
       <Slider {...args} />
     </div>
-  ),
+    );
+  },
 };
 
 // With Label - from component page lines 268-283

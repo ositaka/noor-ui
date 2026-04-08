@@ -56,11 +56,13 @@ export const Default: Story = {
     trend: 12,
     trendLabel: 'from last month'
   },
-  render: (args) => (
+  render: (args, { globals }) => {
+    return (
     <div className="w-80">
       <StatsCard {...args} />
     </div>
-  ),
+    );
+  },
   parameters: {
     ar: {
       args: {

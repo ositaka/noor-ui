@@ -48,7 +48,9 @@ export const Default: Story = {
     defaultOpen: false,
     onOpenChange: fn()
   },
-  render: (args) => {
+  render: (args, { globals }) => {
+    const isRTL = globals?.direction === 'rtl';
+    const t = (en: string, ar: string) => isRTL ? ar : en;
     const [isOpen, setIsOpen] = React.useState(args.defaultOpen || false);
 
     return (
@@ -59,7 +61,7 @@ export const Default: Story = {
         }}>
           <CollapsibleTrigger asChild>
             <Button variant="outline" className="w-full justify-between">
-              <span>Can I use this in my project?</span>
+              <span>{t('Can I use this in my project?', 'هل يمكنني استخدامه في مشروعي؟')}</span>
               <CaretDown
                 className={`h-4 w-4 transition-transform ${isOpen ? 'rotate-180' : ''}`}
               />
@@ -67,7 +69,7 @@ export const Default: Story = {
           </CollapsibleTrigger>
           <CollapsibleContent className="mt-2 p-4 border rounded">
             <p className="text-sm text-muted-foreground">
-              Yes! This component is free and open source. You can use it in any project, commercial or personal.
+              {t('Yes! This component is free and open source. You can use it in any project, commercial or personal.', 'نعم! هذا المكون مجاني ومفتوح المصدر. يمكنك استخدامه في أي مشروع، تجاري أو شخصي.')}
             </p>
           </CollapsibleContent>
         </Collapsible>

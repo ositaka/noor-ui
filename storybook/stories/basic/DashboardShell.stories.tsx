@@ -53,7 +53,9 @@ export const Default: Story = {
     onProfileClick: fn(),
     onSettingsClick: fn()
   },
-  render: (args) => {
+  render: (args, { globals }) => {
+    const isRTL = globals?.direction === 'rtl';
+    const t = (en: string, ar: string) => isRTL ? ar : en;
     const navItems = [
       {
         title: 'Dashboard',
@@ -82,14 +84,14 @@ export const Default: Story = {
           {...args}
           navItems={navItems}
           user={{
-            name: 'Ahmed Al-Rashid',
+            name: t('Ahmed Al-Rashid', 'أحمد الرشيد'),
             email: 'ahmed@example.com'
           }}
         >
           <div className="container py-6">
-            <h1 className="text-2xl font-bold mb-4">Dashboard Content</h1>
+            <h1 className="text-2xl font-bold mb-4">{t('Dashboard Content', 'محتوى لوحة التحكم')}</h1>
             <p className="text-muted-foreground">
-              Your main content goes here.
+              {t('Your main content goes here.', 'يظهر المحتوى الرئيسي هنا.')}
             </p>
           </div>
         </DashboardShell>
