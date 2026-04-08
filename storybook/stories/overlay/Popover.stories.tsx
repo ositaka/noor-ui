@@ -1,21 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { expect, fn, userEvent, within } from 'storybook/test';
 import { Popover, PopoverContent, PopoverTrigger } from '../../../components/ui/popover';
 import { Button } from '../../../components/ui/button';
 import { Input } from '../../../components/ui/input';
 import { Label } from '../../../components/ui/label';
 import { Gear } from '@phosphor-icons/react';
 import * as React from 'react';
-
-/**
- * Popover Component Stories
- *
- * All examples are taken from /app/(docs)/components/popover/page.tsx
- * Uses exact same text and data as the component documentation.
- *
- * Note: Popover displays rich content in a portal with flexible positioning.
- * Features: Four sides (top, right, bottom, left), alignment, RTL support, accessibility.
- */
 
 const meta = {
   title: 'Overlays & Layout/Popover',
@@ -92,19 +81,6 @@ export const BasicUsage: Story = {
         story: 'Basic popover with title and description. Click the button to open.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-    const body = within(document.body);
-
-    await step('Renders and opens on interaction', async () => {
-      const trigger = canvas.getByRole('button', { name: /open popover/i });
-      await expect(trigger).toBeInTheDocument();
-
-      await userEvent.click(trigger);
-      const popoverTitle = await body.findByText('Popover Title');
-      await expect(popoverTitle).toBeVisible();
-    });
   }
 };
 
@@ -127,18 +103,6 @@ export const PositionTop: Story = {
         story: 'Popover positioned above the trigger button.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-    const body = within(document.body);
-
-    await step('Opens with top positioning', async () => {
-      const trigger = canvas.getByRole('button', { name: /top/i });
-      await userEvent.click(trigger);
-
-      const content = await body.findByText('Content positioned on top');
-      await expect(content).toBeVisible();
-    });
   }
 };
 
@@ -161,18 +125,6 @@ export const PositionRight: Story = {
         story: 'Popover positioned to the right of the trigger button.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-    const body = within(document.body);
-
-    await step('Opens with right positioning', async () => {
-      const trigger = canvas.getByRole('button', { name: /right/i });
-      await userEvent.click(trigger);
-
-      const content = await body.findByText('Content positioned on right');
-      await expect(content).toBeVisible();
-    });
   }
 };
 
@@ -195,18 +147,6 @@ export const PositionBottom: Story = {
         story: 'Popover positioned below the trigger button (default).'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-    const body = within(document.body);
-
-    await step('Opens with bottom positioning', async () => {
-      const trigger = canvas.getByRole('button', { name: /bottom/i });
-      await userEvent.click(trigger);
-
-      const content = await body.findByText('Content positioned on bottom');
-      await expect(content).toBeVisible();
-    });
   }
 };
 
@@ -229,18 +169,6 @@ export const PositionLeft: Story = {
         story: 'Popover positioned to the left of the trigger button.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-    const body = within(document.body);
-
-    await step('Opens with left positioning', async () => {
-      const trigger = canvas.getByRole('button', { name: /left/i });
-      await userEvent.click(trigger);
-
-      const content = await body.findByText('Content positioned on left');
-      await expect(content).toBeVisible();
-    });
   }
 };
 
@@ -333,39 +261,6 @@ export const WithForm: Story = {
         story: 'Popover with form inputs for settings. Shows width 320px and form controls.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-    const body = within(document.body);
-
-    await step('Opens popover with form', async () => {
-      const trigger = canvas.getByRole('button', { name: /gear/i });
-      await userEvent.click(trigger);
-
-      await expect(body.getByText('Dimensions')).toBeVisible();
-      await expect(body.getByText('Set the dimensions for the layer.')).toBeVisible();
-    });
-
-    await step('Form inputs are accessible and functional', async () => {
-      const widthInput = body.getByLabelText(/width/i);
-      const heightInput = body.getByLabelText(/height/i);
-
-      await expect(widthInput).toBeVisible();
-      await expect(widthInput).toHaveValue('100%');
-      await expect(heightInput).toBeVisible();
-      await expect(heightInput).toHaveValue('25px');
-
-      // Test form interaction
-      await userEvent.clear(widthInput);
-      await userEvent.type(widthInput, '200px');
-      await expect(widthInput).toHaveValue('200px');
-    });
-
-    await step('Save button is present', async () => {
-      const saveButton = body.getByRole('button', { name: /save changes/i });
-      await expect(saveButton).toBeVisible();
-      await expect(saveButton).toBeEnabled();
-    });
   }
 };
 

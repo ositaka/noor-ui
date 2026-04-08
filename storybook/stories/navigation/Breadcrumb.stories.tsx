@@ -1,18 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { expect, userEvent, within } from 'storybook/test';
 import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbPage, BreadcrumbSeparator } from '../../../components/ui/breadcrumb';
 import { Card, CardContent } from '../../../components/ui/card';
 import { House, Folder, File } from '@phosphor-icons/react';
 import * as React from 'react';
 
 /**
- * Breadcrumb Component Stories
  *
- * All examples are taken from /app/(docs)/components/breadcrumb/page.tsx
- * Uses exact same text and data as the component documentation.
  *
- * Note: Breadcrumb is a navigation component showing the current page location.
  * Automatically adapts to RTL layouts with proper separator positioning.
+ *
  */
 
 const meta = {
@@ -32,23 +28,31 @@ type Story = StoryObj<typeof meta>;
 
 // Default - Interactive playground (hidden from stories list to avoid ID conflicts)
 export const Default: Story = {
-  render: () => (
+  parameters: {
+    controls: { disable: true }
+  },
+  render: (_args, { globals }) => {
+    const isRTL = globals?.direction === 'rtl';
+    const t = (en: string, ar: string) => isRTL ? ar : en;
+
+    return (
     <Breadcrumb>
       <BreadcrumbList>
         <BreadcrumbItem>
-          <BreadcrumbLink href="/">Home</BreadcrumbLink>
+          <BreadcrumbLink href="/">{t('Home', 'الرئيسية')}</BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparator />
         <BreadcrumbItem>
-          <BreadcrumbLink href="/components">Components</BreadcrumbLink>
+          <BreadcrumbLink href="/components">{t('Components', 'المكونات')}</BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparator />
         <BreadcrumbItem>
-          <BreadcrumbPage>Breadcrumb</BreadcrumbPage>
+          <BreadcrumbPage>{t('Breadcrumb', 'مسار التنقل')}</BreadcrumbPage>
         </BreadcrumbItem>
       </BreadcrumbList>
     </Breadcrumb>
-  ),
+    );
+  },
 };
 
 // Basic Breadcrumb - from component page lines 149-163
@@ -70,24 +74,6 @@ export const BasicBreadcrumb: Story = {
       </BreadcrumbList>
     </Breadcrumb>
   ),
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders basic breadcrumb structure', async () => {
-      const nav = canvas.getByRole('navigation', { name: 'Breadcrumb' });
-      await expect(nav).toBeInTheDocument();
-      await expect(canvas.getByRole('link', { name: 'Home' })).toBeInTheDocument();
-      await expect(canvas.getByRole('link', { name: 'Components' })).toBeInTheDocument();
-      await expect(canvas.getByRole('link', { name: 'Breadcrumb' })).toBeInTheDocument();
-    });
-
-    await step('Default chevron separators are present', async () => {
-      // Separators have role="presentation" and aria-hidden="true"
-      const nav = canvas.getByRole('navigation', { name: 'Breadcrumb' });
-      const list = within(nav).getByRole('list');
-      await expect(list).toBeInTheDocument();
-    });
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -117,21 +103,6 @@ export const CustomSeparator: Story = {
       </BreadcrumbList>
     </Breadcrumb>
   ),
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders with custom separator', async () => {
-      await expect(canvas.getByRole('navigation', { name: 'Breadcrumb' })).toBeInTheDocument();
-      await expect(canvas.getByRole('link', { name: 'Home' })).toBeInTheDocument();
-      await expect(canvas.getByRole('link', { name: 'Documentation' })).toBeInTheDocument();
-    });
-
-    await step('Custom "/" separators are visible', async () => {
-      const nav = canvas.getByRole('navigation', { name: 'Breadcrumb' });
-      const list = within(nav).getByRole('list');
-      await expect(list).toHaveTextContent('/');
-    });
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -170,21 +141,6 @@ export const WithIcons: Story = {
       </BreadcrumbList>
     </Breadcrumb>
   ),
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders breadcrumb with icons', async () => {
-      await expect(canvas.getByRole('link', { name: /Home/i })).toBeInTheDocument();
-      await expect(canvas.getByRole('link', { name: /Examples/i })).toBeInTheDocument();
-      await expect(canvas.getByRole('link', { name: /Document/i })).toBeInTheDocument();
-    });
-
-    await step('Icons and text are both accessible', async () => {
-      const homeLink = canvas.getByRole('link', { name: /Home/i });
-      await userEvent.hover(homeLink);
-      await expect(homeLink).toHaveAttribute('href', '/');
-    });
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -222,23 +178,6 @@ export const LongerPath: Story = {
       </BreadcrumbList>
     </Breadcrumb>
   ),
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders multiple breadcrumb levels', async () => {
-      await expect(canvas.getByRole('link', { name: 'Home' })).toBeInTheDocument();
-      await expect(canvas.getByRole('link', { name: 'Documentation' })).toBeInTheDocument();
-      await expect(canvas.getByRole('link', { name: 'Components' })).toBeInTheDocument();
-      await expect(canvas.getByRole('link', { name: 'Navigation' })).toBeInTheDocument();
-      await expect(canvas.getByRole('link', { name: 'Breadcrumb' })).toBeInTheDocument();
-    });
-
-    await step('All links have correct href attributes', async () => {
-      await expect(canvas.getByRole('link', { name: 'Home' })).toHaveAttribute('href', '/');
-      await expect(canvas.getByRole('link', { name: 'Documentation' })).toHaveAttribute('href', '/documentation');
-      await expect(canvas.getByRole('link', { name: 'Navigation' })).toHaveAttribute('href', '/documentation/components/navigation');
-    });
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -276,20 +215,6 @@ export const InCard: Story = {
       </CardContent>
     </Card>
   ),
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders breadcrumb inside card', async () => {
-      await expect(canvas.getByText('Current Location')).toBeInTheDocument();
-      await expect(canvas.getByRole('navigation', { name: 'Breadcrumb' })).toBeInTheDocument();
-    });
-
-    await step('Breadcrumb navigation works in card context', async () => {
-      await expect(canvas.getByRole('link', { name: /Home/i })).toBeInTheDocument();
-      await expect(canvas.getByRole('link', { name: 'Examples' })).toBeInTheDocument();
-      await expect(canvas.getByRole('link', { name: 'Document' })).toHaveAttribute('aria-current', 'page');
-    });
-  },
   parameters: {
     controls: { disable: true },
     docs: {

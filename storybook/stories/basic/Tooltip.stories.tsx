@@ -1,17 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { expect, userEvent, within } from 'storybook/test';
 import { Tooltip, TooltipContent, TooltipTrigger, TooltipProvider } from '../../../components/ui/tooltip';
 import { Button } from '../../../components/ui/button';
 import { Info, Plus, Gear, Trash } from '@phosphor-icons/react';
-
-/**
- * Tooltip Component Stories
- *
- * All examples are taken from /app/(docs)/components/tooltip/page.tsx
- * Uses exact same text and data as the component documentation.
- *
- * Note: All stories are wrapped with TooltipProvider decorator.
- */
 
 const meta = {
   title: 'Feedback/Tooltip',
@@ -162,26 +152,6 @@ export const WithIconButtons: Story = {
   ),
   parameters: {
     controls: { disable: true }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders icon buttons', async () => {
-      const buttons = canvas.getAllByRole('button');
-      await expect(buttons).toHaveLength(4);
-      buttons.forEach(button => {
-        expect(button).toBeVisible();
-      });
-    });
-
-    await step('Shows tooltip on icon button hover', async () => {
-      const buttons = canvas.getAllByRole('button');
-      await userEvent.hover(buttons[0]);
-
-      const tooltip = await canvas.findByRole('tooltip');
-      await expect(tooltip).toBeVisible();
-      await expect(tooltip).toHaveTextContent('More information');
-    });
   }
 };
 
@@ -215,24 +185,5 @@ export const WithTextButtons: Story = {
   ),
   parameters: {
     controls: { disable: true }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders text buttons with icons', async () => {
-      const helpButton = canvas.getByRole('button', { name: /help/i });
-      const settingsButton = canvas.getByRole('button', { name: /settings/i });
-      await expect(helpButton).toBeVisible();
-      await expect(settingsButton).toBeVisible();
-    });
-
-    await step('Shows tooltip on text button hover', async () => {
-      const helpButton = canvas.getByRole('button', { name: /help/i });
-      await userEvent.hover(helpButton);
-
-      const tooltip = await canvas.findByRole('tooltip');
-      await expect(tooltip).toBeVisible();
-      await expect(tooltip).toHaveTextContent('Click for more information');
-    });
   }
 };

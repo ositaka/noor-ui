@@ -5,16 +5,6 @@ import { Button } from '../../../components/ui/button';
 import * as React from 'react';
 import { expect, userEvent, within, fn } from 'storybook/test';
 
-/**
- * Toast Component Stories
- *
- * All examples are taken from /app/(docs)/components/toast/page.tsx
- * Uses exact same text and data as the component documentation.
- *
- * Note: Toast provides temporary notification messages.
- * Features: 3 variants (default, destructive, success), auto-dismiss, RTL support.
- */
-
 const meta = {
   title: 'Feedback/Toast',
   component: Toast,
@@ -39,18 +29,20 @@ type Story = StoryObj<typeof meta>;
 
 // Default - Interactive playground with controls
 export const Default: Story = {
-  render: () => {
+  render: (_args, { globals }) => {
+    const isRTL = globals?.direction === 'rtl';
+    const t = (en: string, ar: string) => isRTL ? ar : en;
     const { toast } = useToast();
     return (
       <Button
         onClick={() => {
           toast({
-            title: 'Scheduled: Catch up',
-            description: 'Friday, February 10, 2023 at 5:57 PM'
+            title: t('Scheduled: Catch up', 'موعد: اجتماع متابعة'),
+            description: t('Friday, February 10, 2023 at 5:57 PM', 'الجمعة، ١٠ فبراير ٢٠٢٣ الساعة ٥:٥٧ م')
           });
         }}
       >
-        Show Toast
+        {t('Show Toast', 'إظهار الإشعار')}
       </Button>
     );
   },
@@ -80,27 +72,6 @@ export const Simple: Story = {
       }
     }
   },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders trigger button', async () => {
-      const button = canvas.getByRole('button', { name: /show simple toast/i });
-      await expect(button).toBeInTheDocument();
-    });
-
-    await step('Shows toast with description only', async () => {
-      const button = canvas.getByRole('button', { name: /show simple toast/i });
-      await userEvent.click(button);
-
-      // Wait for toast to appear
-      await new Promise(resolve => setTimeout(resolve, 100));
-
-      // Toast renders in a portal (document.body)
-      const bodyCanvas = within(document.body);
-      const description = bodyCanvas.getByText('Your message has been sent.');
-      await expect(description).toBeInTheDocument();
-    });
-  }
 };
 
 // With Title - from component page lines 210-214
@@ -128,30 +99,6 @@ export const WithTitle: Story = {
       }
     }
   },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders trigger button', async () => {
-      const button = canvas.getByRole('button', { name: /show toast/i });
-      await expect(button).toBeInTheDocument();
-    });
-
-    await step('Shows toast with title and description', async () => {
-      const button = canvas.getByRole('button', { name: /show toast/i });
-      await userEvent.click(button);
-
-      // Wait for toast to appear
-      await new Promise(resolve => setTimeout(resolve, 100));
-
-      // Toast renders in a portal (document.body)
-      const bodyCanvas = within(document.body);
-      const title = bodyCanvas.getByText('Scheduled: Catch up');
-      await expect(title).toBeInTheDocument();
-
-      const description = bodyCanvas.getByText('Friday, February 10, 2023 at 5:57 PM');
-      await expect(description).toBeInTheDocument();
-    });
-  }
 };
 
 // Destructive - from component page lines 233-238

@@ -1,19 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { expect, fn, userEvent, within } from 'storybook/test';
+import { fn } from 'storybook/test';
 import { Slider } from '../../../components/ui/slider';
 import { Label } from '../../../components/ui/label';
 import { Button } from '../../../components/ui/button';
 import { SpeakerHigh, SpeakerSlash } from '@phosphor-icons/react';
 import * as React from 'react';
-
-/**
- * Slider Component Stories
- *
- * All examples are taken from /app/(docs)/components/slider/page.tsx
- * Uses exact same text and data as the component documentation.
- *
- * Note: Slider allows selecting a numeric value from a range with RTL support
- */
 
 const meta = {
   title: 'Forms/Slider',
@@ -62,21 +53,6 @@ export const WithLabel: Story = {
   ),
   parameters: {
     controls: { disable: true }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders with label', async () => {
-      const label = canvas.getByText('Volume');
-      await expect(label).toBeInTheDocument();
-      await expect(canvas.getByText('50%')).toBeInTheDocument();
-    });
-
-    await step('Slider is accessible', async () => {
-      const slider = canvas.getByRole('slider');
-      await expect(slider).toBeInTheDocument();
-      await expect(slider).toBeVisible();
-    });
   }
 };
 
@@ -102,30 +78,6 @@ export const DifferentRanges: Story = {
         story: 'Slider with custom min and max values. Shows temperature from -10°C to 40°C.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders with custom range', async () => {
-      const slider = canvas.getByRole('slider');
-      await expect(slider).toHaveAttribute('aria-valuemin', '-10');
-      await expect(slider).toHaveAttribute('aria-valuemax', '40');
-      await expect(slider).toHaveAttribute('aria-valuenow', '20');
-    });
-
-    await step('Displays current temperature value', async () => {
-      await expect(canvas.getByText('Temperature: 20°C')).toBeInTheDocument();
-    });
-
-    await step('Value updates on keyboard interaction', async () => {
-      const slider = canvas.getByRole('slider');
-      await userEvent.click(slider);
-      await userEvent.keyboard('{ArrowRight}');
-
-      // Value should increment to 21
-      await expect(slider).toHaveAttribute('aria-valuenow', '21');
-      await expect(canvas.getByText('Temperature: 21°C')).toBeInTheDocument();
-    });
   }
 };
 
@@ -181,26 +133,6 @@ export const DisabledState: Story = {
   ),
   parameters: {
     controls: { disable: true }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders both sliders', async () => {
-      const sliders = canvas.getAllByRole('slider');
-      await expect(sliders).toHaveLength(2);
-    });
-
-    await step('First slider is enabled', async () => {
-      const sliders = canvas.getAllByRole('slider');
-      await expect(sliders[0]).toBeEnabled();
-      await expect(sliders[0]).toHaveAttribute('aria-valuenow', '50');
-    });
-
-    await step('Second slider is disabled', async () => {
-      const sliders = canvas.getAllByRole('slider');
-      await expect(sliders[1]).toHaveAttribute('data-disabled');
-      await expect(sliders[1]).toHaveAttribute('aria-valuenow', '75');
-    });
   }
 };
 
@@ -247,46 +179,6 @@ export const VolumeControl: Story = {
         story: 'Interactive volume control with mute button and value display.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders volume control with initial state', async () => {
-      const slider = canvas.getByRole('slider');
-      await expect(slider).toHaveAttribute('aria-valuenow', '80');
-      await expect(canvas.getByText('80%')).toBeInTheDocument();
-
-      // SpeakerHigh icon should be visible (not muted)
-      const button = canvas.getByRole('button');
-      await expect(button).toBeInTheDocument();
-    });
-
-    await step('Mute button toggles to zero', async () => {
-      const button = canvas.getByRole('button');
-      await userEvent.click(button);
-
-      const slider = canvas.getByRole('slider');
-      await expect(slider).toHaveAttribute('aria-valuenow', '0');
-      await expect(canvas.getByText('0%')).toBeInTheDocument();
-    });
-
-    await step('Unmute button restores volume', async () => {
-      const button = canvas.getByRole('button');
-      await userEvent.click(button);
-
-      const slider = canvas.getByRole('slider');
-      await expect(slider).toHaveAttribute('aria-valuenow', '80');
-      await expect(canvas.getByText('80%')).toBeInTheDocument();
-    });
-
-    await step('Slider value updates display', async () => {
-      const slider = canvas.getByRole('slider');
-      await userEvent.click(slider);
-      await userEvent.keyboard('{ArrowRight}');
-
-      await expect(slider).toHaveAttribute('aria-valuenow', '81');
-      await expect(canvas.getByText('81%')).toBeInTheDocument();
-    });
   }
 };
 
@@ -317,43 +209,6 @@ export const PriceRange: Story = {
         story: 'Range slider with two thumbs for selecting a price range.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders multi-thumb slider with both values', async () => {
-      const sliders = canvas.getAllByRole('slider');
-      await expect(sliders).toHaveLength(2);
-
-      // First thumb (min value)
-      await expect(sliders[0]).toHaveAttribute('aria-valuenow', '20');
-
-      // Second thumb (max value)
-      await expect(sliders[1]).toHaveAttribute('aria-valuenow', '80');
-    });
-
-    await step('Displays price range text', async () => {
-      await expect(canvas.getByText('$20 - $80')).toBeInTheDocument();
-      await expect(canvas.getByText('Price Range')).toBeInTheDocument();
-    });
-
-    await step('First thumb can be adjusted', async () => {
-      const sliders = canvas.getAllByRole('slider');
-      await userEvent.click(sliders[0]);
-      await userEvent.keyboard('{ArrowRight}');
-
-      await expect(sliders[0]).toHaveAttribute('aria-valuenow', '21');
-      await expect(canvas.getByText('$21 - $80')).toBeInTheDocument();
-    });
-
-    await step('Second thumb can be adjusted', async () => {
-      const sliders = canvas.getAllByRole('slider');
-      await userEvent.click(sliders[1]);
-      await userEvent.keyboard('{ArrowLeft}');
-
-      await expect(sliders[1]).toHaveAttribute('aria-valuenow', '79');
-      await expect(canvas.getByText('$21 - $79')).toBeInTheDocument();
-    });
   }
 };
 

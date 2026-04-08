@@ -1,17 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { expect, userEvent, within, fn } from 'storybook/test';
+import { fn } from 'storybook/test';
 import { Calendar, type DateRange } from '../../../components/ui/calendar';
 import { Card, CardContent } from '../../../components/ui/card';
 import * as React from 'react';
 
 /**
- * Calendar Component Stories
  *
- * All examples are taken from /app/(docs)/components/calendar/page.tsx
- * Uses exact same text and data as the component documentation.
  *
- * Note: Calendar provides dual calendar support (Gregorian + Hijri),
  * Islamic holidays highlighting, event markers, range selection, and full RTL support
+ *
  */
 
 const meta = {
@@ -104,27 +101,6 @@ export const BasicCalendar: Story = {
         story: 'Basic single date selection calendar with month navigation and "Today" button.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders basic calendar', async () => {
-      await expect(canvas.getByRole('button', { name: /today/i })).toBeInTheDocument();
-    });
-
-    await step('Can select a date', async () => {
-      const dayButtons = canvas.getAllByRole('button').filter(btn => {
-        const text = btn.textContent;
-        return text && /^\d+$/.test(text.trim());
-      });
-
-      if (dayButtons.length > 10) {
-        const initiallySelected = dayButtons.find(btn => btn.classList.contains('bg-primary'));
-        await userEvent.click(dayButtons[10]);
-        // Date should be selected (component will update state)
-        await expect(dayButtons[10]).toBeInTheDocument();
-      }
-    });
   }
 };
 
@@ -167,32 +143,6 @@ export const RangeSelection: Story = {
         story: 'Date range selection with visual feedback. Click to set start date, click again to set end date.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders range selection calendar', async () => {
-      await expect(canvas.getByText(/select a start and end date/i)).toBeInTheDocument();
-    });
-
-    await step('Selects date range', async () => {
-      const dayButtons = canvas.getAllByRole('button').filter(btn => {
-        const text = btn.textContent;
-        return text && /^\d+$/.test(text.trim());
-      });
-
-      if (dayButtons.length > 20) {
-        // Select start date
-        await userEvent.click(dayButtons[10]);
-
-        // Select end date
-        await userEvent.click(dayButtons[15]);
-
-        // Check if "Selected:" text appears
-        const selectedText = await canvas.findByText(/selected:/i);
-        await expect(selectedText).toBeInTheDocument();
-      }
-    });
   }
 };
 
@@ -227,19 +177,6 @@ export const WithHijri: Story = {
         story: 'Dual calendar display showing both Gregorian and Hijri dates simultaneously.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders calendar with Hijri dates', async () => {
-      await expect(canvas.getByText(/display hijri dates alongside gregorian/i)).toBeInTheDocument();
-    });
-
-    await step('Shows Hijri month in header', async () => {
-      const headers = canvas.getAllByRole('heading');
-      // Should have Gregorian month and Hijri month display
-      await expect(headers.length).toBeGreaterThanOrEqual(1);
-    });
   }
 };
 

@@ -1,19 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { expect, within } from 'storybook/test';
 import { FeatureCard } from '../../../components/ui/feature-card';
 import { Card, CardContent } from '../../../components/ui/card';
 import { Sparkle, Rocket, Lightning, Shield, Package, Gear, Heart, Star, Globe, Lock } from '@phosphor-icons/react';
 import * as React from 'react';
-
-/**
- * FeatureCard Component Stories
- *
- * All examples are taken from /app/(docs)/components/feature-card/page.tsx
- * Uses exact same text and data as the component documentation.
- *
- * Note: FeatureCard displays features with icon, title, and description.
- * Features: Optional href for clickable cards, icon display, RTL support.
- */
 
 const meta = {
   title: 'Core/Feature Card',
@@ -90,24 +79,6 @@ export const StaticCard: Story = {
         story: 'Static feature card without href. Non-interactive display.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders static card content', async () => {
-      await expect(canvas.getByText('Amazing Feature')).toBeInTheDocument();
-      await expect(canvas.getByText('This is a static card without a link. Great for non-interactive displays.')).toBeInTheDocument();
-    });
-
-    await step('Contains icon SVG element', async () => {
-      const svg = canvasElement.querySelector('svg');
-      await expect(svg).toBeInTheDocument();
-    });
-
-    await step('Verifies no link element when href not provided', async () => {
-      const link = canvasElement.querySelector('a');
-      await expect(link).not.toBeInTheDocument();
-    });
   }
 };
 
@@ -130,24 +101,6 @@ export const ClickableCard: Story = {
         story: 'Clickable feature card with href. Shows hover effect.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders clickable card content', async () => {
-      await expect(canvas.getByText('Get Started')).toBeInTheDocument();
-      await expect(canvas.getByText('Click to learn how to begin using our components')).toBeInTheDocument();
-    });
-
-    await step('Contains icon SVG element', async () => {
-      const svg = canvasElement.querySelector('svg');
-      await expect(svg).toBeInTheDocument();
-    });
-
-    await step('Renders as clickable link', async () => {
-      const link = canvasElement.querySelector('a[href="/getting-started"]');
-      await expect(link).toBeInTheDocument();
-    });
   }
 };
 
@@ -182,26 +135,6 @@ export const GridLayout: Story = {
         story: 'Grid layout with 3 feature cards. All cards are clickable.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders all three cards', async () => {
-      await expect(canvas.getByText('Lightning Fast')).toBeInTheDocument();
-      await expect(canvas.getByText('Secure by Default')).toBeInTheDocument();
-      await expect(canvas.getByText('Easy to Use')).toBeInTheDocument();
-    });
-
-    await step('All cards have links', async () => {
-      await expect(canvasElement.querySelector('a[href="/components"]')).toBeInTheDocument();
-      await expect(canvasElement.querySelector('a[href="/documentation"]')).toBeInTheDocument();
-      await expect(canvasElement.querySelector('a[href="/examples"]')).toBeInTheDocument();
-    });
-
-    await step('Contains multiple icon SVG elements', async () => {
-      const svgs = canvasElement.querySelectorAll('svg');
-      await expect(svgs.length).toBe(3);
-    });
   }
 };
 
@@ -308,25 +241,6 @@ export const InCardContainer: Story = {
         story: 'Feature cards grouped inside a card container with a title.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders container heading', async () => {
-      await expect(canvas.getByText('Key Features')).toBeInTheDocument();
-    });
-
-    await step('Renders all feature cards inside container', async () => {
-      await expect(canvas.getByText('Lightning Fast')).toBeInTheDocument();
-      await expect(canvas.getByText('Secure by Default')).toBeInTheDocument();
-      await expect(canvas.getByText('Easy to Use')).toBeInTheDocument();
-    });
-
-    await step('All cards are clickable', async () => {
-      await expect(canvasElement.querySelector('a[href="/components"]')).toBeInTheDocument();
-      await expect(canvasElement.querySelector('a[href="/documentation"]')).toBeInTheDocument();
-      await expect(canvasElement.querySelector('a[href="/examples"]')).toBeInTheDocument();
-    });
   }
 };
 

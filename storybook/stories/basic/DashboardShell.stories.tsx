@@ -12,15 +12,6 @@ import {
   Bell
 } from '@phosphor-icons/react';
 
-/**
- * Dashboard Shell Component Stories
- *
- * All examples are taken from /app/(docs)/components/dashboard-shell/page.tsx
- *
- * Note: DashboardShell provides a complete dashboard layout.
- * Features: Sidebar navigation with bilingual titles, user menu, notifications, badges, RTL-ready.
- */
-
 const meta = {
   title: 'Layout & Shell/Dashboard Shell',
   component: DashboardShell,

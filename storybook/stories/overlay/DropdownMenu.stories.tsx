@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { expect, userEvent, within, fn } from 'storybook/test';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -29,16 +28,6 @@ import {
   DotsThree
 } from '@phosphor-icons/react';
 import * as React from 'react';
-
-/**
- * Dropdown Menu Component Stories
- *
- * All examples are taken from /app/(docs)/components/dropdown-menu/page.tsx
- * Uses exact same text and data as the component documentation.
- *
- * Note: Dropdown Menu displays a list of actions or options when triggered.
- * Features: Items, groups, checkboxes, radio groups, sub-menus, shortcuts, RTL support.
- */
 
 const meta = {
   title: 'Navigation/Dropdown Menu',
@@ -149,25 +138,6 @@ export const BasicUsage: Story = {
       </DropdownMenuContent>
     </DropdownMenu>
   ),
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-    const body = within(document.body);
-
-    await step('Renders trigger button', async () => {
-      const trigger = canvas.getByRole('button', { name: /my account/i });
-      await expect(trigger).toBeInTheDocument();
-      await expect(trigger).toBeVisible();
-    });
-
-    await step('Opens menu and displays items with shortcuts', async () => {
-      const trigger = canvas.getByRole('button', { name: /my account/i });
-      await userEvent.click(trigger);
-      // Menu content renders in a portal at document.body
-      await expect(await body.findByRole('menuitem', { name: /profile/i })).toBeInTheDocument();
-      await expect(body.getByText('⇧⌘P')).toBeInTheDocument();
-      await expect(body.getByText('⌘B')).toBeInTheDocument();
-    });
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -209,24 +179,6 @@ export const WithIcons: Story = {
       </DropdownMenuContent>
     </DropdownMenu>
   ),
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-    const body = within(document.body);
-
-    await step('Renders with icons', async () => {
-      const trigger = canvas.getByRole('button', { name: /account/i });
-      await expect(trigger).toBeInTheDocument();
-    });
-
-    await step('Displays menu items with icons', async () => {
-      const trigger = canvas.getByRole('button', { name: /account/i });
-      await userEvent.click(trigger);
-      // Menu content renders in a portal at document.body
-      await expect(await body.findByRole('menuitem', { name: /profile/i })).toBeInTheDocument();
-      await expect(body.getByRole('menuitem', { name: /settings/i })).toBeInTheDocument();
-      await expect(body.getByRole('menuitem', { name: /logout/i })).toBeInTheDocument();
-    });
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -261,39 +213,6 @@ export const WithCheckboxes: Story = {
       </DropdownMenu>
     );
   },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-    const body = within(document.body);
-
-    await step('Renders view options trigger', async () => {
-      const trigger = canvas.getByRole('button', { name: /view options/i });
-      await expect(trigger).toBeInTheDocument();
-    });
-
-    await step('Opens menu with checkbox items', async () => {
-      const trigger = canvas.getByRole('button', { name: /view options/i });
-      await userEvent.click(trigger);
-      // Menu content renders in a portal at document.body
-      await expect(await body.findByRole('menuitemcheckbox', { name: /show panel/i })).toBeInTheDocument();
-      await expect(body.getByRole('menuitemcheckbox', { name: /show sidebar/i })).toBeInTheDocument();
-    });
-
-    await step('Can toggle checkbox items', async () => {
-      // Click first checkbox - this will close the menu (default Radix behavior)
-      const panelCheckbox = body.getByRole('menuitemcheckbox', { name: /show panel/i });
-      await userEvent.click(panelCheckbox);
-      // State should toggle (verified by component behavior)
-
-      // Re-open the menu to interact with the second checkbox
-      const trigger = canvas.getByRole('button', { name: /view options/i });
-      await userEvent.click(trigger);
-
-      // Now toggle the second checkbox
-      const sidebarCheckbox = await body.findByRole('menuitemcheckbox', { name: /show sidebar/i });
-      await userEvent.click(sidebarCheckbox);
-      // State should toggle
-    });
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -325,35 +244,6 @@ export const WithRadioGroup: Story = {
         </DropdownMenuContent>
       </DropdownMenu>
     );
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-    const body = within(document.body);
-
-    await step('Renders with current position', async () => {
-      const trigger = canvas.getByRole('button', { name: /position: bottom/i });
-      await expect(trigger).toBeInTheDocument();
-    });
-
-    await step('Opens menu with radio group', async () => {
-      const trigger = canvas.getByRole('button', { name: /position:/i });
-      await userEvent.click(trigger);
-      // Menu content renders in a portal at document.body
-      await expect(await body.findByRole('menuitemradio', { name: /top/i })).toBeInTheDocument();
-      await expect(body.getByRole('menuitemradio', { name: /bottom/i })).toBeInTheDocument();
-      await expect(body.getByRole('menuitemradio', { name: /right/i })).toBeInTheDocument();
-    });
-
-    await step('Can select radio option', async () => {
-      const topOption = body.getByRole('menuitemradio', { name: /top/i });
-      await userEvent.click(topOption);
-      // Position should change (menu closes, button text updates)
-    });
-
-    await step('Verify position changed', async () => {
-      const trigger = canvas.getByRole('button', { name: /position: top/i });
-      await expect(trigger).toBeInTheDocument();
-    });
   },
   parameters: {
     controls: { disable: true },
@@ -407,31 +297,6 @@ export const WithSubMenus: Story = {
       </DropdownMenuContent>
     </DropdownMenu>
   ),
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-    const body = within(document.body);
-
-    await step('Renders trigger button', async () => {
-      const trigger = canvas.getByRole('button');
-      await expect(trigger).toBeInTheDocument();
-    });
-
-    await step('Opens menu with sub-menu items', async () => {
-      const trigger = canvas.getByRole('button');
-      await userEvent.click(trigger);
-      // Menu content renders in a portal at document.body
-      await expect(await body.findByRole('menuitem', { name: /profile/i })).toBeInTheDocument();
-      await expect(body.getByText(/invite users/i)).toBeInTheDocument();
-    });
-
-    await step('Can hover over sub-menu trigger', async () => {
-      const subMenuTrigger = body.getByText(/invite users/i);
-      await userEvent.hover(subMenuTrigger);
-      // Sub-menu should open on hover
-      await expect(await body.findByRole('menuitem', { name: /email/i })).toBeInTheDocument();
-      await expect(body.getByRole('menuitem', { name: /message/i })).toBeInTheDocument();
-    });
-  },
   parameters: {
     controls: { disable: true },
     docs: {

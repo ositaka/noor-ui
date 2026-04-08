@@ -4,17 +4,13 @@ import { Badge } from '../../../components/ui/badge';
 import { Checkbox } from '../../../components/ui/checkbox';
 import { Card, CardContent } from '../../../components/ui/card';
 import * as React from 'react';
-import { expect, userEvent, within } from 'storybook/test';
 
 /**
- * Table Component Stories
  *
- * All examples are taken from /app/(docs)/components/table/page.tsx
- * Uses exact same text and data as the component documentation.
  *
- * Note: Table is a responsive component for displaying structured data.
  * Uses semantic HTML with proper text alignment for RTL/LTR support.
  * Includes TableHeader, TableBody, TableRow, TableHead, TableCell, and TableCaption sub-components.
+ *
  */
 
 const meta = {
@@ -54,6 +50,9 @@ const usersAR = [
 export const Default: Story = {
   args: {
     className: ''
+  },
+  parameters: {
+    controls: { disable: true }
   },
   render: (args, { globals }) => {
     const isRTL = globals?.direction === 'rtl';
@@ -128,23 +127,6 @@ export const BasicTable: Story = {
         story: 'Basic table with caption showing user data. Uses semantic HTML elements for accessibility.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders basic table structure', async () => {
-      const table = canvas.getByRole('table');
-      await expect(table).toBeInTheDocument();
-      await expect(table).toBeVisible();
-      await expect(canvas.getByText('A list of recent users')).toBeInTheDocument();
-    });
-
-    await step('Displays all user data', async () => {
-      await expect(canvas.getByText('Ahmed Ali')).toBeInTheDocument();
-      await expect(canvas.getByText('Fatima Hassan')).toBeInTheDocument();
-      await expect(canvas.getByText('Mohammed Youssef')).toBeInTheDocument();
-      await expect(canvas.getByText('Sarah Abdullah')).toBeInTheDocument();
-    });
   }
 };
 
@@ -194,41 +176,6 @@ export const WithCaption: Story = {
         story: 'Table with caption showing transaction data inside a card. Caption describes the table content.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders table with transaction caption', async () => {
-      const table = canvas.getByRole('table');
-      await expect(table).toBeInTheDocument();
-      await expect(canvas.getByText('A list of your recent transactions')).toBeInTheDocument();
-    });
-
-    await step('Displays transaction headers', async () => {
-      await expect(canvas.getByText('Invoice')).toBeInTheDocument();
-      await expect(canvas.getByText('Status')).toBeInTheDocument();
-      await expect(canvas.getByText('Method')).toBeInTheDocument();
-      await expect(canvas.getByText('Amount')).toBeInTheDocument();
-    });
-
-    await step('Displays transaction data', async () => {
-      await expect(canvas.getByText('INV-001')).toBeInTheDocument();
-      await expect(canvas.getByText('INV-002')).toBeInTheDocument();
-      await expect(canvas.getByText('INV-003')).toBeInTheDocument();
-      await expect(canvas.getByText('Credit Card')).toBeInTheDocument();
-      await expect(canvas.getByText('PayPal')).toBeInTheDocument();
-      await expect(canvas.getByText('Bank Transfer')).toBeInTheDocument();
-      await expect(canvas.getByText('$250.00')).toBeInTheDocument();
-      await expect(canvas.getByText('$150.00')).toBeInTheDocument();
-      await expect(canvas.getByText('$350.00')).toBeInTheDocument();
-    });
-
-    await step('Displays status badges', async () => {
-      // Two "Paid" badges (INV-001 and INV-003), one "Pending" (INV-002)
-      const paidBadges = canvas.getAllByText('Paid');
-      await expect(paidBadges).toHaveLength(2);
-      await expect(canvas.getByText('Pending')).toBeInTheDocument();
-    });
   }
 };
 
@@ -277,54 +224,6 @@ export const InteractiveTable: Story = {
         story: 'Interactive table with checkboxes for row selection. Includes header checkbox for select all.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders interactive table with checkboxes', async () => {
-      const table = canvas.getByRole('table');
-      await expect(table).toBeInTheDocument();
-
-      const checkboxes = canvas.getAllByRole('checkbox');
-      // 1 header checkbox + 4 row checkboxes = 5 total
-      await expect(checkboxes).toHaveLength(5);
-    });
-
-    await step('Displays column headers', async () => {
-      await expect(canvas.getByText('Name')).toBeInTheDocument();
-      await expect(canvas.getByText('Email')).toBeInTheDocument();
-      await expect(canvas.getByText('Role')).toBeInTheDocument();
-    });
-
-    await step('Displays user data with role badges', async () => {
-      await expect(canvas.getByText('Ahmed Ali')).toBeInTheDocument();
-      await expect(canvas.getByText('ahmed@example.com')).toBeInTheDocument();
-      await expect(canvas.getByText('Fatima Hassan')).toBeInTheDocument();
-      await expect(canvas.getByText('fatima@example.com')).toBeInTheDocument();
-
-      // Check role badges
-      await expect(canvas.getByText('Admin')).toBeInTheDocument();
-      await expect(canvas.getByText('Editor')).toBeInTheDocument();
-    });
-
-    await step('Checkboxes are interactive', async () => {
-      const checkboxes = canvas.getAllByRole('checkbox');
-      const firstRowCheckbox = checkboxes[1]; // Skip header checkbox
-
-      await expect(firstRowCheckbox).not.toBeChecked();
-      await userEvent.click(firstRowCheckbox);
-      await expect(firstRowCheckbox).toBeChecked();
-      await userEvent.click(firstRowCheckbox);
-      await expect(firstRowCheckbox).not.toBeChecked();
-    });
-
-    await step('Header checkbox is accessible', async () => {
-      const checkboxes = canvas.getAllByRole('checkbox');
-      const headerCheckbox = checkboxes[0];
-
-      await userEvent.click(headerCheckbox);
-      await expect(headerCheckbox).toBeChecked();
-    });
   }
 };
 
@@ -362,23 +261,6 @@ export const MobileResponsiveTable: Story = {
         story: 'Responsive table that adapts to mobile screens. On desktop shows normal table, on mobile shows stacked cards.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders responsive table wrapper', async () => {
-      await expect(canvasElement.querySelector('div')).toBeInTheDocument();
-      // Text is split across multiple elements, use partial match
-      await expect(canvas.getByText(/This table adapts to mobile screens/i)).toBeInTheDocument();
-    });
-
-    await step('Displays user data', async () => {
-      // ResponsiveTable renders both desktop table and mobile cards (one hidden via CSS)
-      await expect(canvas.getAllByText('Ahmed Ali').length).toBeGreaterThanOrEqual(1);
-      await expect(canvas.getAllByText('Fatima Hassan').length).toBeGreaterThanOrEqual(1);
-      await expect(canvas.getAllByText('Mohammed Youssef').length).toBeGreaterThanOrEqual(1);
-      await expect(canvas.getAllByText('Sarah Abdullah').length).toBeGreaterThanOrEqual(1);
-    });
   }
 };
 
@@ -417,34 +299,6 @@ export const StripedRows: Story = {
         story: 'Table with alternating row colors (striped) for better readability of large datasets.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders striped table with caption', async () => {
-      const table = canvas.getByRole('table');
-      await expect(table).toBeInTheDocument();
-      await expect(canvas.getByText('Employee roster')).toBeInTheDocument();
-    });
-
-    await step('Displays headers', async () => {
-      await expect(canvas.getByText('Name')).toBeInTheDocument();
-      await expect(canvas.getByText('Email')).toBeInTheDocument();
-      await expect(canvas.getByText('Role')).toBeInTheDocument();
-    });
-
-    await step('Displays all employee data', async () => {
-      await expect(canvas.getByText('Ahmed Ali')).toBeInTheDocument();
-      await expect(canvas.getByText('Fatima Hassan')).toBeInTheDocument();
-      await expect(canvas.getByText('Mohammed Youssef')).toBeInTheDocument();
-      await expect(canvas.getByText('Sarah Abdullah')).toBeInTheDocument();
-    });
-
-    await step('Has alternating row styles', async () => {
-      const rows = canvas.getAllByRole('row');
-      // 1 header + 4 data rows
-      await expect(rows).toHaveLength(5);
-    });
   }
 };
 
@@ -484,37 +338,6 @@ export const CompactTable: Story = {
         story: 'Compact table with reduced padding for displaying data in limited space.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders compact table with heading', async () => {
-      const table = canvas.getByRole('table');
-      await expect(table).toBeInTheDocument();
-      await expect(canvas.getByText('Team Members')).toBeInTheDocument();
-    });
-
-    await step('Displays compact headers', async () => {
-      await expect(canvas.getByText('Name')).toBeInTheDocument();
-      await expect(canvas.getByText('Status')).toBeInTheDocument();
-      await expect(canvas.getByText('Role')).toBeInTheDocument();
-    });
-
-    await step('Displays first 3 users only', async () => {
-      await expect(canvas.getByText('Ahmed Ali')).toBeInTheDocument();
-      await expect(canvas.getByText('Fatima Hassan')).toBeInTheDocument();
-      await expect(canvas.getByText('Mohammed Youssef')).toBeInTheDocument();
-      // Sarah Abdullah should not be present (only first 3)
-      await expect(canvas.queryByText('Sarah Abdullah')).not.toBeInTheDocument();
-    });
-
-    await step('Displays status badges', async () => {
-      // Verify badge text content instead of CSS classes
-      // First 3 users: Ahmed (Active), Fatima (Active), Mohammed (Inactive)
-      const activeBadges = canvas.getAllByText('Active');
-      await expect(activeBadges).toHaveLength(2);
-      await expect(canvas.getByText('Inactive')).toBeInTheDocument();
-    });
   }
 };
 

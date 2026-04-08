@@ -4,13 +4,6 @@ import { Button } from '../../../components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../../components/ui/card';
 import { House, Gear, User, Bell } from '@phosphor-icons/react';
 
-/**
- * Separator Component Stories
- *
- * All examples are taken from /app/(docs)/components/separator/page.tsx
- * Uses exact same text and data as the component documentation.
- */
-
 const meta = {
   title: 'Core/Separator',
   component: Separator,

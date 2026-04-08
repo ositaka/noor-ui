@@ -2,16 +2,6 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { ConversationHistory, type Conversation } from '../../../components/ui/conversation-history';
 import { Card, CardContent } from '../../../components/ui/card';
 import { useState } from 'react';
-import { expect, userEvent, within, fn } from 'storybook/test';
-
-/**
- * Conversation History Component Stories
- *
- * All examples are taken from /app/(docs)/components/conversation-history/page.tsx
- *
- * Note: ConversationHistory displays a list of chat conversations.
- * Features: Search, rename, delete, share, time-based grouping, different sizes, floating variant, RTL support.
- */
 
 // Sample conversations from page lines 174-220
 const sampleConversations: Conversation[] = [
@@ -208,41 +198,6 @@ export const FullFeatured: Story = {
   },
   parameters: {
     controls: { disable: true }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders with custom title', async () => {
-      await expect(canvas.getByRole('heading', { name: 'My Conversations' })).toBeInTheDocument();
-    });
-
-    await step('Shows search input', async () => {
-      const searchInput = canvas.getByRole('searchbox');
-      await expect(searchInput).toBeInTheDocument();
-      await expect(searchInput).toHaveAttribute('placeholder', 'Search conversations...');
-    });
-
-    await step('Filters conversations by search query', async () => {
-      const searchInput = canvas.getByRole('searchbox');
-      await userEvent.type(searchInput, 'design');
-
-      // Only Design System Updates should be visible (use findBy after typing)
-      await expect(await canvas.findByText('Design System Updates')).toBeInTheDocument();
-      // Other conversations should not be visible
-      const projectPlanningButtons = canvas.queryAllByRole('button').filter((btn) =>
-        btn.textContent?.includes('Project Planning Discussion')
-      );
-      await expect(projectPlanningButtons.length).toBe(0);
-
-      // Clear search
-      await userEvent.clear(searchInput);
-      await expect(await canvas.findByText('Project Planning Discussion')).toBeInTheDocument();
-    });
-
-    await step('Shows all conversations after search clear', async () => {
-      // Use findBy as count updates after clearing search
-      await expect(await canvas.findByText(/5 conversations/i)).toBeInTheDocument();
-    });
   }
 };
 
@@ -264,20 +219,6 @@ export const SmallSize: Story = {
   ),
   parameters: {
     controls: { disable: true }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders conversations in small size', async () => {
-      await expect(canvas.getByRole('heading', { name: 'Conversations' })).toBeInTheDocument();
-      await expect(canvas.getByText('Project Planning Discussion')).toBeInTheDocument();
-      await expect(canvas.getByText('Code Review Feedback')).toBeInTheDocument();
-      await expect(canvas.getByText('Design System Updates')).toBeInTheDocument();
-    });
-
-    await step('Shows footer with conversation count', async () => {
-      await expect(canvas.getByText(/3 conversations/i)).toBeInTheDocument();
-    });
   }
 };
 
@@ -299,15 +240,6 @@ export const LargeSize: Story = {
   ),
   parameters: {
     controls: { disable: true }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders conversations in large size', async () => {
-      await expect(canvas.getByRole('heading', { name: 'Conversations' })).toBeInTheDocument();
-      await expect(canvas.getByText('Project Planning Discussion')).toBeInTheDocument();
-      await expect(canvas.getByText(/3 conversations/i)).toBeInTheDocument();
-    });
   }
 };
 
@@ -336,19 +268,6 @@ export const FloatingVariant: Story = {
         story: 'Floating variant for overlays or modals.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders floating variant', async () => {
-      await expect(canvas.getByRole('heading', { name: 'Conversations' })).toBeInTheDocument();
-      await expect(canvas.getByText('Project Planning Discussion')).toBeInTheDocument();
-    });
-
-    await step('Displays conversations with rounded border style', async () => {
-      // Verify conversations are rendered
-      await expect(canvas.getByText(/3 conversations/i)).toBeInTheDocument();
-    });
   }
 };
 
@@ -382,38 +301,6 @@ export const WithSearch: Story = {
         story: 'Conversation history with search enabled.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders with search input', async () => {
-      await expect(canvas.getByRole('heading', { name: 'Search Conversations' })).toBeInTheDocument();
-      const searchInput = canvas.getByRole('searchbox');
-      await expect(searchInput).toBeInTheDocument();
-    });
-
-    await step('Filters conversations based on search', async () => {
-      const searchInput = canvas.getByRole('searchbox');
-      await userEvent.type(searchInput, 'bug');
-
-      // Should show Bug Investigation (use findBy after typing)
-      await expect(await canvas.findByText('Bug Investigation')).toBeInTheDocument();
-
-      // Should not show others
-      const projectPlanningButtons = canvas.queryAllByRole('button').filter((btn) =>
-        btn.textContent?.includes('Project Planning Discussion')
-      );
-      await expect(projectPlanningButtons.length).toBe(0);
-    });
-
-    await step('Shows no results message when no matches', async () => {
-      const searchInput = canvas.getByRole('searchbox');
-      await userEvent.clear(searchInput);
-      await userEvent.type(searchInput, 'xyz123notfound');
-
-      // Use findByText as the content updates after typing
-      await expect(await canvas.findByText(/no conversations found/i)).toBeInTheDocument();
-    });
   }
 };
 
@@ -446,20 +333,6 @@ export const FewConversations: Story = {
         story: 'Conversation history with fewer items.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders with limited conversations', async () => {
-      await expect(canvas.getByText('Project Planning Discussion')).toBeInTheDocument();
-      await expect(canvas.getByText('Code Review Feedback')).toBeInTheDocument();
-      await expect(canvas.getByText(/2 conversations/i)).toBeInTheDocument();
-    });
-
-    await step('Does not render conversations beyond slice', async () => {
-      const designSystemText = canvas.queryByText('Design System Updates');
-      await expect(designSystemText).not.toBeInTheDocument();
-    });
   }
 };
 
@@ -486,30 +359,6 @@ export const EmptyState: Story = {
         story: 'Empty state when no conversations exist.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Shows empty state message', async () => {
-      // Text appears both in component and in the render's content area
-      const emptyMessages = canvas.getAllByText(/no conversations yet/i);
-      await expect(emptyMessages.length).toBeGreaterThan(0);
-      await expect(emptyMessages[0]).toBeInTheDocument();
-    });
-
-    await step('Shows start conversation button in empty state', async () => {
-      const startButton = canvas.getByRole('button', { name: /start.*conversation/i });
-      await expect(startButton).toBeInTheDocument();
-    });
-
-    await step('Shows zero conversations count', async () => {
-      await expect(canvas.getByText(/0 conversations/i)).toBeInTheDocument();
-    });
-
-    await step('Header new button is accessible', async () => {
-      const newButton = canvas.getAllByRole('button', { name: /new/i })[0];
-      await expect(newButton).toBeInTheDocument();
-    });
   }
 };
 

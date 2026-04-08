@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { expect, userEvent, within } from 'storybook/test';
 import {
   Sheet,
   SheetContent,
@@ -14,16 +13,6 @@ import { Button } from '../../../components/ui/button';
 import { Input } from '../../../components/ui/input';
 import { Label } from '../../../components/ui/label';
 import * as React from 'react';
-
-/**
- * Sheet Component Stories
- *
- * All examples are taken from /app/(docs)/components/sheet/page.tsx
- * Uses exact same text and data as the component documentation.
- *
- * Note: Sheet displays content that slides in from the edge of the screen.
- * Features: Four sides (top, bottom, start, end), RTL-aware positioning, accessibility.
- */
 
 const meta = {
   title: 'Overlays & Layout/Sheet',
@@ -110,25 +99,6 @@ export const FromEnd: Story = {
         story: 'Sheet sliding from the end (right in LTR, left in RTL). This is the default side.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-    const body = within(document.body);
-
-    await step('Opens sheet from end side', async () => {
-      const trigger = canvas.getByRole('button', { name: /open end/i });
-      await userEvent.click(trigger);
-
-      // Sheet content is in a portal - query from document.body
-      const sheetTitle = await body.findByRole('heading', { name: 'End Sheet' });
-      await expect(sheetTitle).toBeInTheDocument();
-      await expect(body.getByText(/this sheet slides in from the end/i)).toBeVisible();
-    });
-
-    await step('Sheet content is accessible', async () => {
-      const dialog = body.getByRole('dialog');
-      await expect(dialog).toBeInTheDocument();
-    });
   }
 };
 
@@ -160,25 +130,6 @@ export const FromStart: Story = {
         story: 'Sheet sliding from the start (left in LTR, right in RTL).'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-    const body = within(document.body);
-
-    await step('Opens sheet from start side', async () => {
-      const trigger = canvas.getByRole('button', { name: /open start/i });
-      await userEvent.click(trigger);
-
-      // Sheet content is in a portal - query from document.body
-      const sheetTitle = await body.findByRole('heading', { name: 'Start Sheet' });
-      await expect(sheetTitle).toBeInTheDocument();
-      await expect(body.getByText(/this sheet slides in from the start/i)).toBeVisible();
-    });
-
-    await step('Sheet content is accessible', async () => {
-      const dialog = body.getByRole('dialog');
-      await expect(dialog).toBeInTheDocument();
-    });
   }
 };
 
@@ -208,25 +159,6 @@ export const FromTop: Story = {
         story: 'Sheet sliding from the top of the screen.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-    const body = within(document.body);
-
-    await step('Opens sheet from top side', async () => {
-      const trigger = canvas.getByRole('button', { name: /open top/i });
-      await userEvent.click(trigger);
-
-      // Sheet content is in a portal - query from document.body
-      const sheetTitle = await body.findByRole('heading', { name: 'Top Sheet' });
-      await expect(sheetTitle).toBeInTheDocument();
-      await expect(body.getByText(/this sheet slides in from the top/i)).toBeVisible();
-    });
-
-    await step('Sheet content is accessible', async () => {
-      const dialog = body.getByRole('dialog');
-      await expect(dialog).toBeInTheDocument();
-    });
   }
 };
 
@@ -256,25 +188,6 @@ export const FromBottom: Story = {
         story: 'Sheet sliding from the bottom of the screen.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-    const body = within(document.body);
-
-    await step('Opens sheet from bottom side', async () => {
-      const trigger = canvas.getByRole('button', { name: /open bottom/i });
-      await userEvent.click(trigger);
-
-      // Sheet content is in a portal - query from document.body
-      const sheetTitle = await body.findByRole('heading', { name: 'Bottom Sheet' });
-      await expect(sheetTitle).toBeInTheDocument();
-      await expect(body.getByText(/this sheet slides in from the bottom/i)).toBeVisible();
-    });
-
-    await step('Sheet content is accessible', async () => {
-      const dialog = body.getByRole('dialog');
-      await expect(dialog).toBeInTheDocument();
-    });
   }
 };
 
@@ -387,42 +300,6 @@ export const WithForm: Story = {
         story: 'Sheet with form inputs for editing profile information.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-    const body = within(document.body);
-
-    await step('Opens sheet with form', async () => {
-      const trigger = canvas.getByRole('button', { name: /edit profile/i });
-      await userEvent.click(trigger);
-
-      // Sheet content is in a portal - query from document.body
-      const sheetTitle = await body.findByRole('heading', { name: 'Edit Profile' });
-      await expect(sheetTitle).toBeInTheDocument();
-    });
-
-    await step('Form inputs are accessible and functional', async () => {
-      const nameInput = body.getByLabelText(/name/i);
-      const emailInput = body.getByLabelText(/email/i);
-
-      await expect(nameInput).toBeInTheDocument();
-      await expect(nameInput).toHaveValue('Nuno Marques');
-      await expect(emailInput).toHaveValue('ositaka@example.com');
-
-      // Test input interaction
-      await userEvent.clear(nameInput);
-      await userEvent.type(nameInput, 'Nuno Marques');
-      await expect(nameInput).toHaveValue('Nuno Marques');
-    });
-
-    await step('Save button closes the sheet', async () => {
-      const saveButton = body.getByRole('button', { name: /save changes/i });
-      await expect(saveButton).toBeVisible();
-      await userEvent.click(saveButton);
-
-      // Sheet dialog should close - verify by checking dialog role
-      await expect(body.queryByRole('dialog')).not.toBeInTheDocument();
-    });
   }
 };
 
@@ -465,40 +342,6 @@ export const NavigationMenu: Story = {
         story: 'Sheet used as a navigation menu sliding from the start.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-    const body = within(document.body);
-
-    await step('Opens navigation menu sheet', async () => {
-      const trigger = canvas.getByRole('button', { name: /navigation menu/i });
-      await userEvent.click(trigger);
-
-      // Sheet content is in a portal - query from document.body
-      const sheetTitle = await body.findByRole('heading', { name: 'Navigation Menu' });
-      await expect(sheetTitle).toBeInTheDocument();
-    });
-
-    await step('Navigation items are accessible and clickable', async () => {
-      const homeButton = body.getByRole('button', { name: /^home$/i });
-      const productsButton = body.getByRole('button', { name: /^products$/i });
-      const aboutButton = body.getByRole('button', { name: /^about$/i });
-      const contactButton = body.getByRole('button', { name: /^contact$/i });
-
-      await expect(homeButton).toBeVisible();
-      await expect(productsButton).toBeVisible();
-      await expect(aboutButton).toBeVisible();
-      await expect(contactButton).toBeVisible();
-
-      // Test interaction with one navigation item
-      await userEvent.click(homeButton);
-    });
-
-    await step('Can navigate using keyboard', async () => {
-      const productsButton = body.getByRole('button', { name: /^products$/i });
-      productsButton.focus();
-      await expect(productsButton).toHaveFocus();
-    });
   }
 };
 

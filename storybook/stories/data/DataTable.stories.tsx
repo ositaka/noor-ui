@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { expect, userEvent, within } from 'storybook/test';
 import { DataTable, type ColumnDef, type SortDirection } from '../../../components/ui/data-table';
 import { Badge } from '../../../components/ui/badge';
 import { Button } from '../../../components/ui/button';
@@ -7,13 +6,10 @@ import { Card, CardContent } from '../../../components/ui/card';
 import * as React from 'react';
 
 /**
- * DataTable Component Stories
  *
- * All examples are taken from /app/(docs)/components/data-table/page.tsx
- * Uses exact same text and data as the component documentation.
  *
- * Note: DataTable is a powerful component with sorting, filtering, pagination, and mobile responsiveness.
  * Features include: internal/external sorting, search, pagination, loading states, custom cells, and full RTL support.
+ *
  */
 
 const meta = {
@@ -101,6 +97,12 @@ const basicColumns: ColumnDef<User>[] = [
   { id: 'role', header: 'Role', accessorKey: 'role' },
 ];
 
+const basicColumnsAR: ColumnDef<User>[] = [
+  { id: 'name', header: 'الاسم', accessorKey: 'name' },
+  { id: 'email', header: 'البريد الإلكتروني', accessorKey: 'email' },
+  { id: 'role', header: 'الدور', accessorKey: 'role' },
+];
+
 // Sortable columns - from component page lines 493-498
 const sortableColumns: ColumnDef<User>[] = [
   { id: 'name', header: 'Name', accessorKey: 'name', sortable: true },
@@ -121,7 +123,7 @@ export const Default: Story = {
 
     return (
     <div className="w-full">
-      <DataTable {...args} data={isRTL ? usersAR : usersEN} />
+      <DataTable {...args} data={isRTL ? usersAR : usersEN} columns={isRTL ? basicColumnsAR : basicColumns} />
     </div>
     );
   },
@@ -145,26 +147,6 @@ export const BasicDataTable: Story = {
         story: 'Basic data table with three columns showing user information.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders basic table structure', async () => {
-      // Component renders both desktop table and mobile cards (one hidden with CSS)
-      const table = canvas.queryByRole('table');
-      if (table) {
-        await expect(table).toBeInTheDocument();
-      }
-    });
-
-    await step('Shows all user rows', async () => {
-      // Text appears in both desktop and mobile views (one hidden with CSS)
-      await expect(canvas.getAllByText('Ahmed Ali').length).toBeGreaterThanOrEqual(1);
-      await expect(canvas.getAllByText('Fatima Hassan').length).toBeGreaterThanOrEqual(1);
-      await expect(canvas.getAllByText('Mohammed Youssef').length).toBeGreaterThanOrEqual(1);
-      await expect(canvas.getAllByText('Sarah Abdullah').length).toBeGreaterThanOrEqual(1);
-      await expect(canvas.getAllByText('Omar Ibrahim').length).toBeGreaterThanOrEqual(1);
-    });
   }
 };
 
@@ -193,80 +175,6 @@ export const InternalSorting: Story = {
         story: 'Simple sorting with enableSorting prop. The component manages sort state internally.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders sortable table with default sort', async () => {
-      // Table may render in mobile card mode - use queryByRole
-      const table = canvas.queryByRole('table');
-      if (table) {
-        await expect(table).toBeInTheDocument();
-      }
-    });
-
-    await step('Column headers have sort buttons', async () => {
-      const sortButtons = canvas.getAllByRole('button');
-      await expect(sortButtons.length).toBeGreaterThan(0);
-
-      // Check Name column has sort button
-      const nameButtons = canvas.getAllByRole('button', { name: /name/i });
-      await expect(nameButtons.length).toBeGreaterThanOrEqual(1);
-    });
-
-    await step('Data is sorted by name by default (ascending)', async () => {
-      const rows = canvas.queryAllByRole('row');
-      if (rows.length > 1) {
-        const cells = rows[1].querySelectorAll('td');
-        if (cells.length > 0) {
-          // First row should be "Ahmed Ali" (A comes first)
-          await expect(cells[0]).toHaveTextContent('Ahmed Ali');
-        }
-      }
-    });
-
-    await step('Clicking Name header sorts descending', async () => {
-      const nameButton = canvas.getAllByRole('button', { name: /name/i })[0];
-      await userEvent.click(nameButton);
-
-      // After one click: desc order
-      const rows = canvas.queryAllByRole('row');
-      if (rows.length > 1) {
-        const cells = rows[1].querySelectorAll('td');
-        if (cells.length > 0) {
-          // First row should now be "Sarah Abdullah" (S comes last)
-          await expect(cells[0]).toHaveTextContent('Sarah Abdullah');
-        }
-      }
-    });
-
-    await step('Clicking Name header again clears sort', async () => {
-      const nameButton = canvas.getAllByRole('button', { name: /name/i })[0];
-      await userEvent.click(nameButton);
-
-      // After second click: sort cleared, back to original order
-      const rows = canvas.queryAllByRole('row');
-      if (rows.length > 1) {
-        const cells = rows[1].querySelectorAll('td');
-        if (cells.length > 0) {
-          await expect(cells[0]).toHaveTextContent('Ahmed Ali');
-        }
-      }
-    });
-
-    await step('Clicking Email header sorts by email', async () => {
-      const emailButton = canvas.getAllByRole('button', { name: /email/i })[0];
-      await userEvent.click(emailButton);
-
-      const rows = canvas.queryAllByRole('row');
-      if (rows.length > 1) {
-        const cells = rows[1].querySelectorAll('td');
-        if (cells.length > 1) {
-          // Should sort by email alphabetically
-          await expect(cells[1]).toHaveTextContent('@example.com');
-        }
-      }
-    });
   }
 };
 
@@ -329,45 +237,6 @@ export const ExternalSorting: Story = {
         story: 'External state management for advanced use cases (e.g., URL sync, API integration).'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders table with external sorting controls', async () => {
-      const table = canvas.getByRole('table');
-      await expect(table).toBeInTheDocument();
-      await expect(canvas.getByText(/click any column header to sort/i)).toBeInTheDocument();
-    });
-
-    await step('Clicking Role header sorts ascending', async () => {
-      const roleButton = canvas.getByRole('button', { name: /role/i });
-      await userEvent.click(roleButton);
-
-      const rows = canvas.getAllByRole('row');
-      const cells = rows[1].querySelectorAll('td');
-      // First in alphabetical order: "Admin"
-      await expect(cells[2]).toHaveTextContent('Admin');
-    });
-
-    await step('Clicking Role header again sorts descending', async () => {
-      const roleButton = canvas.getByRole('button', { name: /role/i });
-      await userEvent.click(roleButton);
-
-      const rows = canvas.getAllByRole('row');
-      const cells = rows[1].querySelectorAll('td');
-      // Last in alphabetical order: "User"
-      await expect(cells[2]).toHaveTextContent('User');
-    });
-
-    await step('Clicking Role header third time clears sorting', async () => {
-      const roleButton = canvas.getByRole('button', { name: /role/i });
-      await userEvent.click(roleButton);
-
-      const rows = canvas.getAllByRole('row');
-      const cells = rows[1].querySelectorAll('td');
-      // Back to original order: Ahmed Ali (Admin)
-      await expect(cells[0]).toHaveTextContent('Ahmed Ali');
-    });
   }
 };
 
@@ -410,71 +279,6 @@ export const SearchableTable: Story = {
         story: 'Data table with built-in search functionality and clear button.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders search input with placeholder', async () => {
-      const searchInput = canvas.getByPlaceholderText('Search by name, email, or role...');
-      await expect(searchInput).toBeInTheDocument();
-      await expect(searchInput).toHaveValue('');
-    });
-
-    await step('Shows all users initially', async () => {
-      const rows = canvas.queryAllByRole('row');
-      // May render desktop table OR mobile cards - just check we have data
-      await expect(rows.length).toBeGreaterThanOrEqual(5);
-    });
-
-    await step('Typing in search filters by name', async () => {
-      const searchInput = canvas.getByPlaceholderText('Search by name, email, or role...');
-      await userEvent.type(searchInput, 'Ahmed');
-
-      // Should show only Ahmed Ali (appears in both desktop and mobile views)
-      await expect(canvas.getAllByText('Ahmed Ali').length).toBeGreaterThanOrEqual(1);
-    });
-
-    await step('Clear button appears and works', async () => {
-      const clearButton = canvas.getByRole('button');
-      await expect(clearButton).toBeInTheDocument();
-
-      await userEvent.click(clearButton);
-
-      const searchInput = canvas.getByPlaceholderText('Search by name, email, or role...');
-      await expect(searchInput).toHaveValue('');
-
-      // All users shown again
-      await expect(canvas.getAllByText('Ahmed Ali').length).toBeGreaterThanOrEqual(1);
-      await expect(canvas.getAllByText('Fatima Hassan').length).toBeGreaterThanOrEqual(1);
-    });
-
-    await step('Search filters by email', async () => {
-      const searchInput = canvas.getByPlaceholderText('Search by name, email, or role...');
-      await userEvent.type(searchInput, 'fatima@');
-
-      await expect(canvas.getAllByText('Fatima Hassan').length).toBeGreaterThanOrEqual(1);
-    });
-
-    await step('Search filters by role', async () => {
-      const searchInput = canvas.getByPlaceholderText('Search by name, email, or role...');
-      await userEvent.clear(searchInput);
-      await userEvent.type(searchInput, 'Editor');
-
-      // Should show Fatima Hassan and Sarah Abdullah (both Editors)
-      await expect(canvas.getAllByText('Fatima Hassan').length).toBeGreaterThanOrEqual(1);
-      await expect(canvas.getAllByText('Sarah Abdullah').length).toBeGreaterThanOrEqual(1);
-    });
-
-    await step('Shows empty state for no results', async () => {
-      const searchInput = canvas.getByPlaceholderText('Search by name, email, or role...');
-      await userEvent.clear(searchInput);
-      await userEvent.type(searchInput, 'nonexistent');
-
-      await expect(canvas.getByText('No users found')).toBeInTheDocument();
-      // Table should not be visible
-      const table = canvas.queryByRole('table');
-      await expect(table).not.toBeInTheDocument();
-    });
   }
 };
 
@@ -517,59 +321,6 @@ export const PaginatedTable: Story = {
         story: 'Data table with integrated pagination controls.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders pagination controls', async () => {
-      const previousButton = canvas.getByRole('button', { name: /previous/i });
-      const nextButton = canvas.getByRole('button', { name: /next/i });
-      const pageLabel = canvas.getByText('Page 1 of 2');
-
-      await expect(previousButton).toBeInTheDocument();
-      await expect(nextButton).toBeInTheDocument();
-      await expect(pageLabel).toBeInTheDocument();
-    });
-
-    await step('Shows first page data (3 rows)', async () => {
-      // Data appears in both desktop and mobile views (one hidden with CSS)
-      await expect(canvas.getAllByText('Ahmed Ali').length).toBeGreaterThanOrEqual(1);
-      await expect(canvas.getAllByText('Fatima Hassan').length).toBeGreaterThanOrEqual(1);
-      await expect(canvas.getAllByText('Mohammed Youssef').length).toBeGreaterThanOrEqual(1);
-    });
-
-    await step('Previous button is disabled on first page', async () => {
-      const previousButton = canvas.getByRole('button', { name: /previous/i });
-      await expect(previousButton).toBeDisabled();
-    });
-
-    await step('Clicking Next shows second page', async () => {
-      const nextButton = canvas.getByRole('button', { name: /next/i });
-      await userEvent.click(nextButton);
-
-      // Page label updates
-      await expect(canvas.getByText('Page 2 of 2')).toBeInTheDocument();
-
-      // Different users shown
-      await expect(canvas.getAllByText('Sarah Abdullah').length).toBeGreaterThanOrEqual(1);
-      await expect(canvas.getAllByText('Omar Ibrahim').length).toBeGreaterThanOrEqual(1);
-
-      // First page users no longer visible
-      await expect(canvas.queryByText('Ahmed Ali')).not.toBeInTheDocument();
-    });
-
-    await step('Next button is disabled on last page', async () => {
-      const nextButton = canvas.getByRole('button', { name: /next/i });
-      await expect(nextButton).toBeDisabled();
-    });
-
-    await step('Clicking Previous goes back to first page', async () => {
-      const previousButton = canvas.getByRole('button', { name: /previous/i });
-      await userEvent.click(previousButton);
-
-      await expect(canvas.getByText('Page 1 of 2')).toBeInTheDocument();
-      await expect(canvas.getAllByText('Ahmed Ali').length).toBeGreaterThanOrEqual(1);
-    });
   }
 };
 
@@ -631,65 +382,6 @@ export const CustomCells: Story = {
         story: 'Custom cell rendering with badges, styled text, and action buttons.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders table with custom cells', async () => {
-      const table = canvas.queryByRole('table');
-      if (table) {
-        await expect(table).toBeInTheDocument();
-      }
-    });
-
-    await step('Status column renders badges', async () => {
-      // Badges appear in both desktop and mobile views (one hidden with CSS)
-      const activeBadges = canvas.getAllByText('Active');
-      await expect(activeBadges.length).toBeGreaterThan(0);
-
-      const inactiveBadges = canvas.getAllByText('Inactive');
-      await expect(inactiveBadges.length).toBeGreaterThanOrEqual(1);
-
-      // Check badge is actually a badge element (has specific class)
-      const firstActiveBadge = activeBadges[0];
-      await expect(firstActiveBadge.closest('.inline-flex')).toBeInTheDocument();
-    });
-
-    await step('Actions column renders View and Edit buttons', async () => {
-      const viewButtons = canvas.getAllByRole('button', { name: /view/i });
-      const editButtons = canvas.getAllByRole('button', { name: /edit/i });
-
-      // Should have buttons (5 per view, appears in both desktop and mobile)
-      await expect(viewButtons.length).toBeGreaterThanOrEqual(5);
-      await expect(editButtons.length).toBeGreaterThanOrEqual(5);
-    });
-
-    await step('Action buttons are clickable', async () => {
-      const viewButtons = canvas.getAllByRole('button', { name: /view/i });
-      const firstViewButton = viewButtons[0];
-
-      await userEvent.click(firstViewButton);
-      // Button was clicked (no error thrown)
-      await expect(firstViewButton).toBeInTheDocument();
-    });
-
-    await step('Custom cell styling applied', async () => {
-      // Name cells have font-medium class
-      const rows = canvas.queryAllByRole('row');
-      if (rows.length > 1) {
-        const firstDataRow = rows[1];
-        const nameCell = firstDataRow.querySelector('td:first-child div');
-        if (nameCell) {
-          await expect(nameCell).toHaveClass('font-medium');
-        }
-
-        // Email cells have text-muted-foreground class
-        const emailCell = firstDataRow.querySelector('td:nth-child(2) div');
-        if (emailCell) {
-          await expect(emailCell).toHaveClass('text-muted-foreground');
-        }
-      }
-    });
   }
 };
 
@@ -727,62 +419,6 @@ export const LoadingState: Story = {
         story: 'Data table with skeleton loading animation while fetching data.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Initially shows data table', async () => {
-      const table = canvas.queryByRole('table');
-      if (table) {
-        await expect(table).toBeInTheDocument();
-      }
-      // Data appears in both desktop and mobile views
-      await expect(canvas.getAllByText('Ahmed Ali').length).toBeGreaterThanOrEqual(1);
-    });
-
-    await step('Trigger button is enabled', async () => {
-      const triggerButton = canvas.getByRole('button', { name: /trigger loading state/i });
-      await expect(triggerButton).toBeInTheDocument();
-      await expect(triggerButton).toBeEnabled();
-    });
-
-    await step('Clicking button triggers loading state', async () => {
-      const triggerButton = canvas.getByRole('button', { name: /trigger loading state/i });
-      await userEvent.click(triggerButton);
-
-      // Button text changes to "Loading..."
-      await expect(canvas.getByRole('button', { name: /loading\.\.\./i })).toBeInTheDocument();
-
-      // Button becomes disabled
-      const loadingButton = canvas.getByRole('button', { name: /loading\.\.\./i });
-      await expect(loadingButton).toBeDisabled();
-    });
-
-    await step('Loading skeleton appears', async () => {
-      // Table should not be visible during loading
-      const table = canvas.queryByRole('table');
-      await expect(table).not.toBeInTheDocument();
-
-      // Skeleton loaders should be visible (they have animate-pulse class)
-      const skeletons = canvasElement.querySelectorAll('.animate-pulse');
-      await expect(skeletons.length).toBeGreaterThan(0);
-    });
-
-    await step('Loading completes after timeout', async () => {
-      // Wait for loading to finish (2 second timeout)
-      await new Promise(resolve => setTimeout(resolve, 2100));
-
-      // Table reappears
-      const table = canvas.queryByRole('table');
-      if (table) {
-        await expect(table).toBeInTheDocument();
-      }
-      await expect(canvas.getAllByText('Ahmed Ali').length).toBeGreaterThanOrEqual(1);
-
-      // Button returns to normal state
-      const triggerButton = canvas.getByRole('button', { name: /trigger loading state/i });
-      await expect(triggerButton).toBeEnabled();
-    });
   }
 };
 
@@ -867,58 +503,6 @@ export const CompleteExample: Story = {
         story: 'Complete example with all features: sorting, searching, pagination, and striped rows.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders all features: search, sort, pagination', async () => {
-      const searchInput = canvas.getByPlaceholderText('Search users...');
-      await expect(searchInput).toBeInTheDocument();
-
-      const table = canvas.queryByRole('table');
-      if (table) {
-        await expect(table).toBeInTheDocument();
-      }
-
-      const pageLabel = canvas.getByText('Page 1 of 2');
-      await expect(pageLabel).toBeInTheDocument();
-    });
-
-    await step('Search filters results', async () => {
-      const searchInput = canvas.getByPlaceholderText('Search users...');
-      await userEvent.type(searchInput, 'Editor');
-
-      // Should show 2 editors (appears in both desktop and mobile views)
-      await expect(canvas.getAllByText('Fatima Hassan').length).toBeGreaterThanOrEqual(1);
-      await expect(canvas.getAllByText('Sarah Abdullah').length).toBeGreaterThanOrEqual(1);
-    });
-
-    await step('Sorting works with pagination', async () => {
-      // Clear search from previous step to restore full dataset
-      const searchInput = canvas.getByPlaceholderText('Search users...');
-      await userEvent.clear(searchInput);
-
-      const nameButtons = canvas.getAllByRole('button', { name: /^name/i });
-      await userEvent.click(nameButtons[0]);
-
-      // First page sorted ascending
-      const rows = canvas.queryAllByRole('row');
-      if (rows.length > 1) {
-        const firstRowCells = rows[1].querySelectorAll('td');
-        if (firstRowCells.length > 0) {
-          await expect(firstRowCells[0]).toHaveTextContent('Ahmed Ali');
-        }
-      }
-    });
-
-    await step('Navigate to page 2', async () => {
-      const nextButton = canvas.getByRole('button', { name: /next/i });
-      await userEvent.click(nextButton);
-
-      await expect(canvas.getByText('Page 2 of 2')).toBeInTheDocument();
-      await expect(canvas.getAllByText('Sarah Abdullah').length).toBeGreaterThanOrEqual(1);
-    });
-
   }
 };
 

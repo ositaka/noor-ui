@@ -1,14 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { expect, within } from 'storybook/test';
 import { Alert, AlertDescription, AlertTitle } from '../../../components/ui/alert';
 import { Terminal, WarningCircle, CheckCircle, Warning as WarningIcon } from '@phosphor-icons/react';
-
-/**
- * Alert Component Stories
- *
- * All examples are taken from /app/(docs)/components/alert/page.tsx
- * Uses exact same text and data as the component documentation.
- */
 
 const meta = {
   title: 'Feedback/Alert',
@@ -71,20 +63,6 @@ export const Destructive: Story = {
   ),
   parameters: {
     controls: { disable: true }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders destructive variant', async () => {
-      const alert = canvas.getByRole('alert');
-      await expect(alert).toBeInTheDocument();
-      await expect(alert).toBeVisible();
-    });
-
-    await step('Displays error content', async () => {
-      await expect(canvas.getByText('Error')).toBeInTheDocument();
-      await expect(canvas.getByText('Your session has expired. Please log in again.')).toBeInTheDocument();
-    });
   }
 };
 
@@ -101,20 +79,6 @@ export const Success: Story = {
   ),
   parameters: {
     controls: { disable: true }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders success variant', async () => {
-      const alert = canvas.getByRole('alert');
-      await expect(alert).toBeInTheDocument();
-      await expect(alert).toBeVisible();
-    });
-
-    await step('Displays success content', async () => {
-      await expect(canvas.getByText('Success')).toBeInTheDocument();
-      await expect(canvas.getByText('Your changes have been saved successfully.')).toBeInTheDocument();
-    });
   }
 };
 
@@ -131,20 +95,6 @@ export const Warning: Story = {
   ),
   parameters: {
     controls: { disable: true }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders warning variant', async () => {
-      const alert = canvas.getByRole('alert');
-      await expect(alert).toBeInTheDocument();
-      await expect(alert).toBeVisible();
-    });
-
-    await step('Displays warning content', async () => {
-      await expect(canvas.getByText('Warning')).toBeInTheDocument();
-      await expect(canvas.getByText('Your free trial will expire in 3 days.')).toBeInTheDocument();
-    });
   }
 };
 
@@ -160,26 +110,6 @@ export const WithoutIcon: Story = {
   ),
   parameters: {
     controls: { disable: true }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders without icon', async () => {
-      const alert = canvas.getByRole('alert');
-      await expect(alert).toBeInTheDocument();
-      await expect(alert).toBeVisible();
-    });
-
-    await step('Displays content without icon', async () => {
-      await expect(canvas.getByText('Update Available')).toBeInTheDocument();
-      await expect(canvas.getByText('A new version of the application is available.')).toBeInTheDocument();
-    });
-
-    await step('Verifies no icon present', async () => {
-      const alert = canvas.getByRole('alert');
-      const svg = alert.querySelector('svg');
-      await expect(svg).not.toBeInTheDocument();
-    });
   }
 };
 

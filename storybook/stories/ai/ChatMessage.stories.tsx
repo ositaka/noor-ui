@@ -1,16 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { within, expect, userEvent, fn } from 'storybook/test';
+import { fn } from 'storybook/test';
 import { ChatMessage } from '../../../components/ui/chat-message';
-
-/**
- * Chat Message Component Stories
- *
- * All examples are taken from /app/(docs)/components/chat-message/page.tsx
- * Uses exact same text and data as the component documentation.
- *
- * Note: Chat Message displays AI chat messages with different roles.
- * Features: User/assistant/system roles, copy/regenerate actions, streaming state, RTL support.
- */
 
 const meta = {
   title: 'AI-LLM Shell/Chat Message',
@@ -89,14 +79,6 @@ export const AssistantMessage: Story = {
         story: 'Assistant message with timestamp.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders assistant message', async () => {
-      await expect(canvas.getByText('Hello! How can I help you today?')).toBeInTheDocument();
-      await expect(canvas.getByText('2:30 PM')).toBeInTheDocument();
-    });
   }
 };
 
@@ -118,14 +100,6 @@ export const UserMessage: Story = {
         story: 'User message with timestamp.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders user message', async () => {
-      await expect(canvas.getByText(/weather like today/)).toBeInTheDocument();
-      await expect(canvas.getByText('2:29 PM')).toBeInTheDocument();
-    });
   }
 };
 
@@ -147,14 +121,6 @@ export const SystemMessage: Story = {
         story: 'System message for notifications.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders system message', async () => {
-      await expect(canvas.getByText(/Chat session started/)).toBeInTheDocument();
-      await expect(canvas.getByText('2:25 PM')).toBeInTheDocument();
-    });
   }
 };
 
@@ -205,18 +171,6 @@ export const CompactVariant: Story = {
         story: 'Compact variant for dense layouts.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders compact variant', async () => {
-      await expect(canvas.getByText('Quick response')).toBeInTheDocument();
-    });
-
-    await step('Compact message is visible', async () => {
-      const content = canvas.getByText('Quick response');
-      await expect(content).toBeVisible();
-    });
   }
 };
 

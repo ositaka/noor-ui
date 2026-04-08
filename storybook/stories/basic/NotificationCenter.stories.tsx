@@ -5,15 +5,6 @@ import { ChatCentered, UserPlus, Heart, Star, Bell, WarningCircle } from '@phosp
 import { useState } from 'react';
 import { fn } from 'storybook/test';
 
-/**
- * Notification Center Component Stories
- *
- * All examples are taken from /app/(docs)/components/notification-center/page.tsx
- *
- * Note: NotificationCenter displays a list of notifications with actions.
- * Features: Unread badge, relative time, icons/avatars, mark as read, remove notifications, bilingual support.
- */
-
 const meta = {
   title: 'User Interface/Notification Center',
   component: NotificationCenter,

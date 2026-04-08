@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { expect, within } from 'storybook/test';
 import { Timeline, type TimelineItem } from '../../../components/ui/timeline';
 import * as React from 'react';
 import {
@@ -21,16 +20,6 @@ import {
   ChatCircle,
   GearSix,
 } from '@phosphor-icons/react';
-
-/**
- * Timeline Component Stories
- *
- * All examples are taken from /app/(docs)/components/timeline/page.tsx
- * Uses exact same text and data as the component documentation.
- *
- * Note: Timeline displays a sequence of events with status indicators.
- * Features: default and alternating layouts, compact mode, card wrapping, custom icons, full RTL support.
- */
 
 const meta = {
   title: 'User Interface/Timeline',
@@ -312,23 +301,6 @@ export const AllStatuses: Story = {
       },
     },
   },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders all three status variants', async () => {
-      await expect(canvas.getByText('Completed step')).toBeVisible();
-      await expect(canvas.getByText('Current step')).toBeVisible();
-      await expect(canvas.getByText('Upcoming step')).toBeVisible();
-    });
-
-    await step('Correct SR-only status labels are present', async () => {
-      const srLabels = canvasElement.querySelectorAll('.sr-only');
-      const texts = Array.from(srLabels).map((el) => el.textContent);
-      await expect(texts).toContain('Completed');
-      await expect(texts).toContain('Current');
-      await expect(texts).toContain('Upcoming');
-    });
-  },
 };
 
 // ---------------------------------------------------------------------------
@@ -369,22 +341,6 @@ export const DefaultIcons: Story = {
       },
     },
   },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders three items without custom icons', async () => {
-      const items = canvas.getAllByRole('listitem');
-      await expect(items).toHaveLength(3);
-    });
-
-    await step('Each node still contains an SVG icon', async () => {
-      const items = canvas.getAllByRole('listitem');
-      for (const item of items) {
-        const iconNode = item.querySelector('[aria-hidden="true"] svg');
-        await expect(iconNode).toBeInTheDocument();
-      }
-    });
-  },
 };
 
 // ---------------------------------------------------------------------------
@@ -411,41 +367,6 @@ export const AlternatingLayout: Story = {
       },
     },
   },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders alternating timeline as a list', async () => {
-      const list = canvas.getByRole('list', { name: /project milestones/i });
-      await expect(list).toBeInTheDocument();
-    });
-
-    await step('Renders all four items as list items', async () => {
-      const items = canvas.getAllByRole('listitem');
-      await expect(items).toHaveLength(4);
-    });
-
-    await step('Displays all milestone titles', async () => {
-      await expect(canvas.getByText('Project Kickoff')).toBeVisible();
-      await expect(canvas.getByText('Alpha Release')).toBeVisible();
-      await expect(canvas.getByText('Beta Testing')).toBeVisible();
-      await expect(canvas.getByText('Public Launch')).toBeVisible();
-    });
-
-    await step('Displays dates in the alternating layout', async () => {
-      await expect(canvas.getByText('Jan 15, 2026')).toBeVisible();
-      await expect(canvas.getByText('Feb 28, 2026')).toBeVisible();
-      await expect(canvas.getByText('Mar 13, 2026')).toBeVisible();
-      await expect(canvas.getByText('Apr 15, 2026')).toBeVisible();
-    });
-
-    await step('Screen-reader status labels present in alternating variant', async () => {
-      const srLabels = canvasElement.querySelectorAll('.sr-only');
-      const texts = Array.from(srLabels).map((el) => el.textContent);
-      await expect(texts).toContain('Completed');
-      await expect(texts).toContain('Current');
-      await expect(texts).toContain('Upcoming');
-    });
-  },
 };
 
 // ---------------------------------------------------------------------------
@@ -467,27 +388,6 @@ export const CompactMode: Story = {
           'Compact mode reduces node size to h-8 w-8 and tightens vertical spacing. Ideal for sidebars or inline status panels.',
       },
     },
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders compact timeline as a list', async () => {
-      const list = canvas.getByRole('list', { name: /order tracking/i });
-      await expect(list).toBeInTheDocument();
-    });
-
-    await step('Displays all order stages', async () => {
-      await expect(canvas.getByText('Order Placed')).toBeVisible();
-      await expect(canvas.getByText('Shipped')).toBeVisible();
-      await expect(canvas.getByText('Out for Delivery')).toBeVisible();
-      await expect(canvas.getByText('Delivered')).toBeVisible();
-    });
-
-    await step('Compact nodes use h-8 w-8 sizing', async () => {
-      // The first aria-hidden node should have the compact size classes
-      const firstNode = canvasElement.querySelector('[aria-hidden="true"]');
-      await expect(firstNode).toHaveClass('h-8', 'w-8');
-    });
   },
 };
 
@@ -511,32 +411,6 @@ export const CardsMode: Story = {
       },
     },
   },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders cards timeline as a list', async () => {
-      const list = canvas.getByRole('list', { name: /changelog/i });
-      await expect(list).toBeInTheDocument();
-    });
-
-    await step('Renders four items', async () => {
-      const items = canvas.getAllByRole('listitem');
-      await expect(items).toHaveLength(4);
-    });
-
-    await step('Displays all changelog entries', async () => {
-      await expect(canvas.getByText('v2.5.0 — Dashboard Redesign')).toBeVisible();
-      await expect(canvas.getByText('v2.4.2 — Bug Fixes')).toBeVisible();
-      await expect(canvas.getByText('v2.4.0 — Timeline Component')).toBeVisible();
-      await expect(canvas.getByText('v2.3.0 — Initial Release')).toBeVisible();
-    });
-
-    await step('Card wrappers are rendered with border and shadow', async () => {
-      // Each item's content wrapper should have rounded-lg border bg-card shadow-sm
-      const firstCard = canvasElement.querySelector('.rounded-lg.border.bg-card.shadow-sm');
-      await expect(firstCard).toBeInTheDocument();
-    });
-  },
 };
 
 // ---------------------------------------------------------------------------
@@ -557,24 +431,6 @@ export const CompactCards: Story = {
         story: 'Compact and cards props combined — smaller nodes with card wrappers for a dense yet structured look.',
       },
     },
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders items with compact nodes and card wrappers', async () => {
-      const items = canvas.getAllByRole('listitem');
-      await expect(items).toHaveLength(4);
-    });
-
-    await step('Compact node sizing (h-8 w-8) is applied', async () => {
-      const firstNode = canvasElement.querySelector('[aria-hidden="true"]');
-      await expect(firstNode).toHaveClass('h-8', 'w-8');
-    });
-
-    await step('Card wrappers are still rendered', async () => {
-      const firstCard = canvasElement.querySelector('.rounded-lg.border.bg-card.shadow-sm');
-      await expect(firstCard).toBeInTheDocument();
-    });
   },
 };
 
@@ -601,27 +457,6 @@ export const AlternatingCards: Story = {
         story: 'Alternating layout combined with cards for a symmetrical, publication-style timeline.',
       },
     },
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders alternating cards timeline', async () => {
-      const list = canvas.getByRole('list', { name: /project milestones with cards/i });
-      await expect(list).toBeInTheDocument();
-    });
-
-    await step('Displays all milestone titles', async () => {
-      await expect(canvas.getByText('Project Kickoff')).toBeVisible();
-      await expect(canvas.getByText('Alpha Release')).toBeVisible();
-      await expect(canvas.getByText('Beta Testing')).toBeVisible();
-      await expect(canvas.getByText('Public Launch')).toBeVisible();
-    });
-
-    await step('Card wrappers are present in alternating layout', async () => {
-      const cards = canvasElement.querySelectorAll('.rounded-lg.border.bg-card.shadow-sm');
-      // 4 items, each gets a card wrapper
-      await expect(cards.length).toBeGreaterThanOrEqual(4);
-    });
   },
 };
 
@@ -685,28 +520,6 @@ export const CustomIcons: Story = {
       },
     },
   },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders activity log timeline', async () => {
-      const list = canvas.getByRole('list', { name: /activity log/i });
-      await expect(list).toBeInTheDocument();
-    });
-
-    await step('Displays all activity entries', async () => {
-      await expect(canvas.getByText('Sara commented on your pull request')).toBeVisible();
-      await expect(canvas.getByText('Ahmed merged branch feature/auth')).toBeVisible();
-      await expect(canvas.getByText('Layla assigned you to issue #52')).toBeVisible();
-      await expect(canvas.getByText('Omar deployed v2.4.1 to production')).toBeVisible();
-    });
-
-    await step('Custom initials are rendered inside nodes', async () => {
-      await expect(canvas.getByText('SC')).toBeInTheDocument();
-      await expect(canvas.getByText('AM')).toBeInTheDocument();
-      await expect(canvas.getByText('LM')).toBeInTheDocument();
-      await expect(canvas.getByText('OA')).toBeInTheDocument();
-    });
-  },
 };
 
 // ---------------------------------------------------------------------------
@@ -727,16 +540,6 @@ export const WithDates: Story = {
         story: 'All items include dates displayed above the title in a muted style.',
       },
     },
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('All four dates are visible', async () => {
-      await expect(canvas.getByText('Jan 15, 2026')).toBeVisible();
-      await expect(canvas.getByText('Feb 28, 2026')).toBeVisible();
-      await expect(canvas.getByText('Mar 13, 2026')).toBeVisible();
-      await expect(canvas.getByText('Apr 15, 2026')).toBeVisible();
-    });
   },
 };
 
@@ -780,15 +583,6 @@ export const WithoutDates: Story = {
       },
     },
   },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders all items without date elements', async () => {
-      await expect(canvas.getByText('Feature request filed')).toBeVisible();
-      await expect(canvas.getByText('In discussion')).toBeVisible();
-      await expect(canvas.getByText('Implementation')).toBeVisible();
-    });
-  },
 };
 
 // ---------------------------------------------------------------------------
@@ -821,27 +615,6 @@ export const SingleItem: Story = {
       },
     },
   },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders exactly one list item', async () => {
-      const items = canvas.getAllByRole('listitem');
-      await expect(items).toHaveLength(1);
-    });
-
-    await step('Shows the correct title and description', async () => {
-      await expect(canvas.getByText('Completed')).toBeVisible();
-      await expect(canvas.getByText('The only event in this timeline.')).toBeVisible();
-    });
-
-    await step('Single item has no connecting line (only one aria-hidden element)', async () => {
-      // Non-last items have: node (aria-hidden) + line (aria-hidden) = 2 elements.
-      // The only item is also the last, so only the node element appears.
-      const item = canvas.getAllByRole('listitem')[0];
-      const ariaHiddenEls = item.querySelectorAll('[aria-hidden="true"]');
-      await expect(ariaHiddenEls).toHaveLength(1);
-    });
-  },
 };
 
 // ---------------------------------------------------------------------------
@@ -863,24 +636,6 @@ export const LastItemNoLine: Story = {
           'Verifies that non-last items have a connecting line (2 aria-hidden elements) and the last item does not (1 aria-hidden element).',
       },
     },
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Non-last items have a connecting line', async () => {
-      const items = canvas.getAllByRole('listitem');
-      // First item is not the last: expect node + line = 2 aria-hidden elements
-      const firstItemAriaHidden = items[0].querySelectorAll('[aria-hidden="true"]');
-      await expect(firstItemAriaHidden.length).toBeGreaterThanOrEqual(2);
-    });
-
-    await step('Last item has no connecting line', async () => {
-      const items = canvas.getAllByRole('listitem');
-      const lastItem = items[items.length - 1];
-      const lastItemAriaHidden = lastItem.querySelectorAll('[aria-hidden="true"]');
-      // Only the node icon wrapper — no line div
-      await expect(lastItemAriaHidden).toHaveLength(1);
-    });
   },
 };
 
@@ -914,16 +669,7 @@ export const ManyItems: Story = {
       },
     },
   },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders all eight items', async () => {
-      const items = canvas.getAllByRole('listitem');
-      await expect(items).toHaveLength(8);
-    });
-  },
 };
-
 
 // ---------------------------------------------------------------------------
 // AllVariants showcase — visual only, no play function

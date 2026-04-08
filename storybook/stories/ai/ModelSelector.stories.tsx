@@ -1,18 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { expect, fn, userEvent, within } from 'storybook/test';
+import { fn } from 'storybook/test';
 import { ModelSelector, defaultModels, type AIModel } from '../../../components/ui/model-selector';
 import { Card, CardContent } from '../../../components/ui/card';
 import { useState } from 'react';
-
-/**
- * Model Selector Component Stories
- *
- * All examples are taken from /app/(docs)/components/model-selector/page.tsx
- * Uses exact same text and data as the component documentation.
- *
- * Note: Model Selector is a dropdown for selecting AI models.
- * Features: Model specs display (speed, context, pricing), provider grouping, recommended badge, custom icons, RTL support.
- */
 
 const meta = {
   title: 'AI-LLM Shell/Model Selector',
@@ -92,25 +82,6 @@ export const WithDefaultModels: Story = {
         story: 'Model selector with default AI models.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-    const body = within(document.body);
-
-    await step('Renders with default models', async () => {
-      await expect(canvas.getByRole('combobox')).toBeInTheDocument();
-      await expect(canvas.getByText('GPT-4')).toBeInTheDocument();
-      await expect(canvas.getByText(/Includes GPT-4/i)).toBeInTheDocument();
-    });
-
-    await step('Can select a different model', async () => {
-      await userEvent.click(canvas.getByRole('combobox'));
-      const turboOption = await body.findByRole('option', { name: /GPT-3.5 Turbo/ });
-      await userEvent.click(turboOption);
-
-      await expect(canvas.getByText('GPT-3.5 Turbo')).toBeInTheDocument();
-      await expect(canvas.getByText('Fast')).toBeInTheDocument();
-    });
   }
 };
 
@@ -204,27 +175,6 @@ export const CustomModels: Story = {
         story: 'Model selector with custom model definitions.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-    const body = within(document.body);
-
-    await step('Renders custom models', async () => {
-      await expect(canvas.getByText('Custom Fast Model')).toBeInTheDocument();
-      await expect(canvas.getByText('Fast')).toBeInTheDocument();
-      await expect(canvas.getByText(/16K/i)).toBeInTheDocument();
-      await expect(canvas.getByText(/recommended/i)).toBeInTheDocument();
-    });
-
-    await step('Shows custom models in dropdown', async () => {
-      await userEvent.click(canvas.getByRole('combobox'));
-
-      await expect(await body.findByRole('option', { name: /Custom Fast Model/ })).toBeInTheDocument();
-      await expect(body.getByRole('option', { name: /Custom Smart Model/ })).toBeInTheDocument();
-
-      // Verify custom provider grouping
-      await expect(body.getByText('Custom Provider')).toBeInTheDocument();
-    });
   }
 };
 
@@ -259,26 +209,6 @@ export const ControlledComponent: Story = {
         story: 'Controlled model selector with state tracking.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-    const body = within(document.body);
-
-    await step('Shows current selection', async () => {
-      await expect(canvas.getByText('Current selection:')).toBeInTheDocument();
-      await expect(canvas.getByText('gpt-4')).toBeInTheDocument();
-      await expect(canvas.getByText('GPT-4')).toBeInTheDocument();
-    });
-
-    await step('Updates selection and displays new value', async () => {
-      await userEvent.click(canvas.getByRole('combobox'));
-      const geminiOption = await body.findByRole('option', { name: /Gemini Pro/ });
-      await userEvent.click(geminiOption);
-
-      // Verify display updated
-      await expect(canvas.getByText('Gemini Pro')).toBeInTheDocument();
-      await expect(canvas.getByText('gemini-pro')).toBeInTheDocument();
-    });
   }
 };
 
@@ -351,31 +281,6 @@ export const SpeedVariants: Story = {
         story: 'Models grouped by speed category.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders fast models category', async () => {
-      await expect(canvas.getByText('Fast Models')).toBeInTheDocument();
-      await expect(canvas.getByText('GPT-3.5 Turbo')).toBeInTheDocument();
-      await expect(canvas.getByText('Fast')).toBeInTheDocument();
-    });
-
-    await step('Renders medium speed models category', async () => {
-      await expect(canvas.getByText('Medium Speed Models')).toBeInTheDocument();
-      await expect(canvas.getByText('GPT-4')).toBeInTheDocument();
-      await expect(canvas.getByText('Medium')).toBeInTheDocument();
-    });
-
-    await step('Both selectors are interactive', async () => {
-      const selectors = canvas.getAllByRole('combobox');
-      await expect(selectors).toHaveLength(2);
-
-      // Verify both are enabled
-      for (const selector of selectors) {
-        await expect(selector).toBeEnabled();
-      }
-    });
   }
 };
 

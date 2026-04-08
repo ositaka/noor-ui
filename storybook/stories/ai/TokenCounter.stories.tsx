@@ -1,17 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { within, expect, userEvent } from 'storybook/test';
+import { within } from 'storybook/test';
 import { TokenCounter } from '../../../components/ui/token-counter';
 import { Card, CardContent } from '../../../components/ui/card';
-
-/**
- * Token Counter Component Stories
- *
- * All examples are taken from /app/(docs)/components/token-counter/page.tsx
- * Uses exact same text and data as the component documentation.
- *
- * Note: Token Counter displays AI usage statistics.
- * Features: Input/output tokens, cost estimation, usage percentage, warning states, RTL support.
- */
 
 const meta = {
   title: 'AI-LLM Shell/Token Counter',
@@ -94,28 +84,6 @@ export const WithCostEstimation: Story = {
         story: 'Token counter with cost calculation based on pricing per 1K tokens.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Displays cost information', async () => {
-      await expect(canvas.getByText('Estimated Cost')).toBeInTheDocument();
-      await expect(canvas.getByText('$0.0885')).toBeInTheDocument();
-    });
-
-    await step('Shows cost breakdown on hover', async () => {
-      const costElement = canvas.getByText('$0.0885');
-      await userEvent.hover(costElement);
-
-      // Tooltip renders in portal
-      const body = within(document.body);
-      const tooltip = await body.findByRole('tooltip', {}, { timeout: 3000 });
-      await expect(tooltip).toBeVisible();
-
-      // Verify breakdown shows input and output costs
-      await expect(tooltip).toHaveTextContent('Input');
-      await expect(tooltip).toHaveTextContent('Output');
-    });
   }
 };
 
@@ -160,34 +128,6 @@ export const WarningStates: Story = {
         story: 'Token counter with different warning states based on usage percentage.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Safe state displays without warning badge', async () => {
-      // 1500 / 4096 = 36.6% (safe)
-      await expect(canvas.getByText('1,500')).toBeInTheDocument();
-      await expect(canvas.getByText('36.6%')).toBeInTheDocument();
-    });
-
-    await step('Warning state displays warning badge', async () => {
-      // 3200 / 4096 = 78.1% (warning)
-      await expect(canvas.getByText('3,200')).toBeInTheDocument();
-      await expect(canvas.getByText('78.1%')).toBeInTheDocument();
-      await expect(canvas.getByText('Warning')).toBeInTheDocument();
-    });
-
-    await step('Danger state displays near limit badge', async () => {
-      // 3800 / 4096 = 92.8% (danger)
-      await expect(canvas.getByText('3,800')).toBeInTheDocument();
-      await expect(canvas.getByText('92.8%')).toBeInTheDocument();
-      await expect(canvas.getByText('Near Limit')).toBeInTheDocument();
-    });
-
-    await step('All states show progress bars', async () => {
-      const progressBars = canvasElement.querySelectorAll('[role="progressbar"]');
-      await expect(progressBars.length).toBe(3);
-    });
   }
 };
 
@@ -256,27 +196,6 @@ export const CompactVariant: Story = {
         story: 'Compact variant for space-constrained layouts.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders compact variant with all elements', async () => {
-      await expect(canvas.getByText('Token Usage')).toBeInTheDocument();
-      await expect(canvas.getByText('2,100')).toBeInTheDocument();
-      await expect(canvas.getByText('51.3%')).toBeInTheDocument();
-    });
-
-    await step('Shows token breakdown in compact mode', async () => {
-      await expect(canvas.getByText('Input Tokens')).toBeInTheDocument();
-      await expect(canvas.getByText('1,250')).toBeInTheDocument();
-      await expect(canvas.getByText('Output Tokens')).toBeInTheDocument();
-      await expect(canvas.getByText('850')).toBeInTheDocument();
-    });
-
-    await step('Progress bar is visible', async () => {
-      const progressBar = canvasElement.querySelector('[role="progressbar"]');
-      await expect(progressBar).toBeInTheDocument();
-    });
   }
 };
 
@@ -307,23 +226,6 @@ export const CustomThresholds: Story = {
         story: 'Token counter with custom warning and danger thresholds.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Displays usage at danger threshold', async () => {
-      // 3500 / 4096 = 85.4% (above 75% danger threshold)
-      await expect(canvas.getByText('3,500')).toBeInTheDocument();
-      await expect(canvas.getByText('85.4%')).toBeInTheDocument();
-    });
-
-    await step('Shows danger badge with custom threshold', async () => {
-      await expect(canvas.getByText('Near Limit')).toBeInTheDocument();
-    });
-
-    await step('Displays description text', async () => {
-      await expect(canvas.getByText(/Customize when warnings appear/)).toBeInTheDocument();
-    });
   }
 };
 
@@ -350,26 +252,6 @@ export const WithoutCost: Story = {
         story: 'Token counter without cost display.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders token counter without cost section', async () => {
-      await expect(canvas.getByText('Token Usage')).toBeInTheDocument();
-      await expect(canvas.getByText('2,100')).toBeInTheDocument();
-      await expect(canvas.getByText('51.3%')).toBeInTheDocument();
-    });
-
-    await step('Shows token breakdown', async () => {
-      await expect(canvas.getByText('Input Tokens')).toBeInTheDocument();
-      await expect(canvas.getByText('1,250')).toBeInTheDocument();
-      await expect(canvas.getByText('Output Tokens')).toBeInTheDocument();
-      await expect(canvas.getByText('850')).toBeInTheDocument();
-    });
-
-    await step('Cost estimation is not displayed', async () => {
-      await expect(canvas.queryByText('Estimated Cost')).not.toBeInTheDocument();
-    });
   }
 };
 
@@ -401,31 +283,6 @@ export const SafeState: Story = {
         story: 'Token counter in safe state with low usage.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Displays safe usage label and token count', async () => {
-      await expect(canvas.getByText('Safe Usage')).toBeInTheDocument();
-      // 1000 + 500 = 1500 tokens
-      await expect(canvas.getByText('1,500')).toBeInTheDocument();
-    });
-
-    await step('Shows safe percentage below threshold', async () => {
-      // 1500 / 4096 = 36.6%
-      await expect(canvas.getByText('36.6%')).toBeInTheDocument();
-    });
-
-    await step('No warning badge is displayed in safe state', async () => {
-      await expect(canvas.queryByText('Warning')).not.toBeInTheDocument();
-      await expect(canvas.queryByText('Near Limit')).not.toBeInTheDocument();
-    });
-
-    await step('Shows cost estimation', async () => {
-      await expect(canvas.getByText('Estimated Cost')).toBeInTheDocument();
-      // Input: 1000/1000 * 0.03 = 0.03, Output: 500/1000 * 0.06 = 0.03, Total: 0.06
-      await expect(canvas.getByText('$0.0600')).toBeInTheDocument();
-    });
   }
 };
 

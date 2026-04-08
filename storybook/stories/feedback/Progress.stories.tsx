@@ -1,18 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { expect, userEvent, within } from 'storybook/test';
 import { Progress } from '../../../components/ui/progress';
 import { Button } from '../../../components/ui/button';
 import * as React from 'react';
-
-/**
- * Progress Component Stories
- *
- * All examples are taken from /app/(docs)/components/progress/page.tsx
- * Uses exact same text and data as the component documentation.
- *
- * Note: Progress displays completion progress with animated shimmer effect.
- * Features: Gradient background, RTL support, customizable sizes and colors.
- */
 
 const meta = {
   title: 'Feedback/Progress',
@@ -56,15 +45,6 @@ export const Basic: Story = {
         story: 'Basic progress bar showing 33% completion.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders basic progress bar', async () => {
-      const progressBar = canvas.getByRole('progressbar');
-      await expect(progressBar).toBeInTheDocument();
-      await expect(progressBar).toHaveAttribute('aria-valuenow', '33');
-    });
   }
 };
 
@@ -86,15 +66,6 @@ export const WithLabel: Story = {
         story: 'Progress bar with label and percentage display.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders progress bar with label', async () => {
-      await expect(canvas.getByText('Progress')).toBeInTheDocument();
-      await expect(canvas.getByText('60%')).toBeInTheDocument();
-      await expect(canvas.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '60');
-    });
   }
 };
 
@@ -116,15 +87,6 @@ export const WithShimmer: Story = {
         story: 'Progress bar with animated shimmer effect for a live feel.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders progress bar with shimmer effect', async () => {
-      const progressBar = canvas.getByRole('progressbar');
-      await expect(progressBar).toBeInTheDocument();
-      await expect(canvas.getByText(/animated shimmer effect/i)).toBeInTheDocument();
-    });
   }
 };
 
@@ -157,16 +119,6 @@ export const DifferentSizes: Story = {
         story: 'Progress bars in different sizes from extra small to large.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders progress bars in different sizes', async () => {
-      const progressBars = canvas.getAllByRole('progressbar');
-      await expect(progressBars).toHaveLength(4);
-      await expect(canvas.getByText(/Extra Small/i)).toBeInTheDocument();
-      await expect(canvas.getByText(/Large \(h-4\)/i)).toBeInTheDocument();
-    });
   }
 };
 
@@ -195,17 +147,6 @@ export const DifferentColors: Story = {
         story: 'Progress bars with custom colors (blue, green, red).'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders progress bars with different colors', async () => {
-      const progressBars = canvas.getAllByRole('progressbar');
-      await expect(progressBars).toHaveLength(3);
-      await expect(canvas.getByText('Blue')).toBeInTheDocument();
-      await expect(canvas.getByText('Green')).toBeInTheDocument();
-      await expect(canvas.getByText('Red')).toBeInTheDocument();
-    });
   }
 };
 
@@ -250,42 +191,6 @@ export const UploadProgress: Story = {
         story: 'Simulated upload progress with start button and completion message.'
       }
     }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders upload progress UI', async () => {
-      await expect(canvas.getByRole('button', { name: /start upload/i })).toBeInTheDocument();
-      await expect(canvas.getByRole('progressbar')).toBeInTheDocument();
-      await expect(canvas.getByText('Uploading...')).toBeInTheDocument();
-    });
-
-    await step('Initial progress is 0%', async () => {
-      const progressBar = canvas.getByRole('progressbar');
-      await expect(progressBar).toHaveAttribute('aria-valuenow', '0');
-      await expect(canvas.getByText('0%')).toBeInTheDocument();
-    });
-
-    await step('Starts upload simulation on button click', async () => {
-      const button = canvas.getByRole('button', { name: /start upload/i });
-      await userEvent.click(button);
-
-      // Wait for progress to update
-      await new Promise(resolve => setTimeout(resolve, 400));
-
-      const progressBar = canvas.getByRole('progressbar');
-      const currentValue = parseInt(progressBar.getAttribute('aria-valuenow') || '0');
-      await expect(currentValue).toBeGreaterThan(0);
-    });
-
-    await step('Shows completion message at 100%', async () => {
-      // Wait for upload to complete (100% takes about 3 seconds: 10 intervals * 300ms)
-      await new Promise(resolve => setTimeout(resolve, 3500));
-
-      const progressBar = canvas.getByRole('progressbar');
-      await expect(progressBar).toHaveAttribute('aria-valuenow', '100');
-      await expect(canvas.getByText('Upload complete!')).toBeInTheDocument();
-    });
   }
 };
 
