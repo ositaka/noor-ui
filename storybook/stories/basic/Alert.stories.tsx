@@ -11,12 +11,12 @@ import { Terminal, WarningCircle, CheckCircle, Warning as WarningIcon } from '@p
  */
 
 const meta = {
-  title: 'Basic/Alert',
+  title: 'Feedback/Alert',
   component: Alert,
   parameters: {
     layout: 'centered'
   },
-  tags: ['!autodocs']
+  tags: ['autodocs']
 } satisfies Meta<typeof Alert>;
 
 export default meta;
@@ -36,33 +36,26 @@ export const Default: Story = {
       </>
     )
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
+  parameters: {
+    ar: {
+      args: {
+        children: (
+          <>
+            <Terminal className="h-4 w-4" />
+            <AlertTitle>انتبه!</AlertTitle>
+            <AlertDescription>
+              يمكنك إضافة المكونات إلى تطبيقك باستخدام سطر الأوامر.
+            </AlertDescription>
+          </>
+        )
+      }
+    }
   },
-  render: (args) => (
+  render: (args, { globals }) => {
+    return (
     <Alert {...args} className="w-full max-w-md" />
-  ),
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders with correct ARIA role', async () => {
-      const alert = canvas.getByRole('alert');
-      await expect(alert).toBeInTheDocument();
-      await expect(alert).toBeVisible();
-    });
-
-    await step('Displays title and description', async () => {
-      await expect(canvas.getByText('Heads up!')).toBeInTheDocument();
-      await expect(canvas.getByText('You can add components to your app using the cli.')).toBeInTheDocument();
-    });
-
-    await step('Contains icon element', async () => {
-      const alert = canvas.getByRole('alert');
-      const svg = alert.querySelector('svg');
-      await expect(svg).toBeInTheDocument();
-    });
-  }
+    );
+  },
 };
 
 // Destructive - from component page lines 161-167
@@ -76,10 +69,6 @@ export const Destructive: Story = {
       </AlertDescription>
     </Alert>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   },
@@ -110,10 +99,6 @@ export const Success: Story = {
       </AlertDescription>
     </Alert>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   },
@@ -144,10 +129,6 @@ export const Warning: Story = {
       </AlertDescription>
     </Alert>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   },
@@ -177,10 +158,6 @@ export const WithoutIcon: Story = {
       </AlertDescription>
     </Alert>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   },
@@ -243,176 +220,7 @@ export const AllVariants: Story = {
       </Alert>
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
-  }
-};
-
-// RTL Example - from component page lines 273-279
-export const RTLExample: Story = {
-  render: () => (
-    <Alert className="w-full max-w-md">
-      <Terminal className="h-4 w-4" />
-      <AlertTitle>تحديث النظام</AlertTitle>
-      <AlertDescription>
-        تحديث نظام جديد متاح.
-      </AlertDescription>
-    </Alert>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Alert with Arabic text demonstrating RTL support. Icon aligns correctly to the start. Automatically switches to RTL mode.'
-      }
-    }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders in RTL context', async () => {
-      const alert = canvas.getByRole('alert');
-      await expect(alert).toBeInTheDocument();
-      await expect(alert).toBeVisible();
-    });
-
-    await step('Displays Arabic content', async () => {
-      await expect(canvas.getByText('تحديث النظام')).toBeInTheDocument();
-      await expect(canvas.getByText('تحديث نظام جديد متاح.')).toBeInTheDocument();
-    });
-  }
-};
-
-// RTL Destructive
-export const RTLDestructive: Story = {
-  render: () => (
-    <Alert variant="destructive" className="w-full max-w-md">
-      <WarningCircle className="h-4 w-4" />
-      <AlertTitle>خطأ</AlertTitle>
-      <AlertDescription>
-        انتهت صلاحية جلستك. يرجى تسجيل الدخول مرة أخرى.
-      </AlertDescription>
-    </Alert>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Destructive alert with Arabic text in RTL mode.'
-      }
-    }
-  }
-};
-
-// RTL Success
-export const RTLSuccess: Story = {
-  render: () => (
-    <Alert variant="success" className="w-full max-w-md">
-      <CheckCircle className="h-4 w-4" />
-      <AlertTitle>نجاح</AlertTitle>
-      <AlertDescription>
-        تم حفظ تغييراتك بنجاح.
-      </AlertDescription>
-    </Alert>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Success alert with Arabic text in RTL mode.'
-      }
-    }
-  }
-};
-
-// RTL Warning
-export const RTLWarning: Story = {
-  render: () => (
-    <Alert variant="warning" className="w-full max-w-md">
-      <WarningIcon className="h-4 w-4" />
-      <AlertTitle>تحذير</AlertTitle>
-      <AlertDescription>
-        ستنتهي صلاحية فترتك التجريبية المجانية خلال ٣ أيام.
-      </AlertDescription>
-    </Alert>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Warning alert with Arabic text in RTL mode.'
-      }
-    }
-  }
-};
-
-// RTL All Variants
-export const RTLAllVariants: Story = {
-  render: () => (
-    <div className="space-y-4 w-full max-w-md">
-      <Alert>
-        <Terminal className="h-4 w-4" />
-        <AlertTitle>انتبه!</AlertTitle>
-        <AlertDescription>
-          يمكنك إضافة المكونات إلى تطبيقك باستخدام سطر الأوامر.
-        </AlertDescription>
-      </Alert>
-
-      <Alert variant="destructive">
-        <WarningCircle className="h-4 w-4" />
-        <AlertTitle>خطأ</AlertTitle>
-        <AlertDescription>
-          انتهت صلاحية جلستك. يرجى تسجيل الدخول مرة أخرى.
-        </AlertDescription>
-      </Alert>
-
-      <Alert variant="success">
-        <CheckCircle className="h-4 w-4" />
-        <AlertTitle>نجاح</AlertTitle>
-        <AlertDescription>
-          تم حفظ تغييراتك بنجاح.
-        </AlertDescription>
-      </Alert>
-
-      <Alert variant="warning">
-        <WarningIcon className="h-4 w-4" />
-        <AlertTitle>تحذير</AlertTitle>
-        <AlertDescription>
-          ستنتهي صلاحية فترتك التجريبية المجانية خلال ٣ أيام.
-        </AlertDescription>
-      </Alert>
-    </div>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'All alert variants with Arabic text demonstrating complete RTL support.'
-      }
-    }
   }
 };

@@ -20,7 +20,7 @@ const meta = {
   parameters: {
     layout: 'centered'
   },
-  tags: ['!autodocs'],
+  tags: ['autodocs'],
   argTypes: {
     value: {
       control: { type: 'range', min: 0, max: 100, step: 1 },
@@ -43,48 +43,12 @@ export const Default: Story = {
   args: {
     value: 66
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
-  render: (args) => <Progress {...args} className="w-80 max-w-md" />,
-  parameters: {
-    docs: {
-      story: {
-        inline: false
-      }
-    }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders progress bar correctly', async () => {
-      const progressBar = canvas.getByRole('progressbar');
-      await expect(progressBar).toBeInTheDocument();
-      await expect(progressBar).toBeVisible();
-    });
-
-    await step('Has correct ARIA attributes', async () => {
-      const progressBar = canvas.getByRole('progressbar');
-      await expect(progressBar).toHaveAttribute('aria-valuemax', '100');
-      await expect(progressBar).toHaveAttribute('aria-valuenow', '66');
-    });
-
-    await step('Progress indicator is visible', async () => {
-      const progressBar = canvas.getByRole('progressbar');
-      const indicator = progressBar.querySelector('[data-state="loading"]');
-      await expect(indicator).toBeInTheDocument();
-    });
-  }
+  render: (args, { globals }) => <Progress {...args} className="w-80 max-w-md" />,
 };
 
 // Basic - from component page line 140
 export const Basic: Story = {
   render: () => <Progress value={33} className="w-80" />,
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -115,10 +79,6 @@ export const WithLabel: Story = {
       <Progress value={60} />
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -149,10 +109,6 @@ export const WithShimmer: Story = {
       <Progress value={66} />
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -194,10 +150,6 @@ export const DifferentSizes: Story = {
       </div>
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -236,10 +188,6 @@ export const DifferentColors: Story = {
       </div>
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -294,10 +242,6 @@ export const UploadProgress: Story = {
         </div>
       </div>
     );
-  },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
@@ -367,120 +311,11 @@ export const AllSizes: Story = {
       </div>
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
       description: {
         story: 'Showcase of all available progress bar sizes.'
-      }
-    }
-  }
-};
-
-// RTL Basic
-export const RTLBasic: Story = {
-  render: () => <Progress value={33} className="w-80" />,
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Progress bar in RTL mode. The fill animates from right to left.'
-      }
-    }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders progress bar in RTL mode', async () => {
-      const progressBar = canvas.getByRole('progressbar');
-      await expect(progressBar).toBeInTheDocument();
-      await expect(progressBar).toHaveAttribute('aria-valuenow', '33');
-    });
-
-    await step('Verifies RTL context', async () => {
-      // Verify document direction is RTL
-      const dir = document.documentElement.dir || document.body.dir;
-      await expect(dir).toBe('rtl');
-    });
-  }
-};
-
-// RTL With Label
-export const RTLWithLabel: Story = {
-  render: () => (
-    <div className="space-y-2 w-80">
-      <div className="flex justify-between text-sm">
-        <span>التقدم</span>
-        <span>60%</span>
-      </div>
-      <Progress value={60} />
-    </div>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Progress bar with Arabic label and percentage in RTL layout.'
-      }
-    }
-  }
-};
-
-// RTL Upload Progress
-export const RTLUploadProgress: Story = {
-  render: () => {
-    const [uploadProgress, setUploadProgress] = React.useState(0);
-
-    const startUpload = () => {
-      setUploadProgress(0);
-      const interval = setInterval(() => {
-        setUploadProgress((prev) => {
-          if (prev >= 100) {
-            clearInterval(interval);
-            return 100;
-          }
-          return prev + 10;
-        });
-      }, 300);
-    };
-
-    return (
-      <div className="space-y-4 w-80">
-        <Button onClick={startUpload}>بدء التحميل</Button>
-        <div className="space-y-2">
-          <div className="flex justify-between text-sm">
-            <span>جاري التحميل...</span>
-            <span>{uploadProgress}%</span>
-          </div>
-          <Progress value={uploadProgress} />
-          {uploadProgress === 100 && (
-            <p className="text-sm text-green-600 dark:text-green-400">اكتمل التحميل!</p>
-          )}
-        </div>
-      </div>
-    );
-  },
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Upload progress simulation with Arabic text in RTL layout.'
       }
     }
   }

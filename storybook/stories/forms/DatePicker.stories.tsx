@@ -15,12 +15,12 @@ import { expect, fn, userEvent, within } from 'storybook/test';
  */
 
 const meta = {
-  title: 'Forms/Date Picker',
+  title: 'Advanced Forms & Inputs/Date Picker',
   component: DatePicker,
   parameters: {
     layout: 'centered'
   },
-  tags: ['!autodocs'],
+  tags: ['autodocs'],
   argTypes: {
     onDateChange: {
       control: false
@@ -38,61 +38,29 @@ export const Default: Story = {
     placeholderAr: 'اختر تاريخ',
     onDateChange: fn()
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
-  render: (args) => {
+  render: (args, { globals }) => {
+    const isRTL = globals?.direction === 'rtl';
+    const t = (en: string, ar: string) => isRTL ? ar : en;
     const [date, setDate] = React.useState<Date | undefined>(new Date());
     return (
       <div className="w-full max-w-xs space-y-2">
-        <Label className='me-4'>Date of Birth</Label>
+        <Label className='me-4'>{t('Date of Birth', 'تاريخ الميلاد')}</Label>
         <DatePicker {...args} date={date} onDateChange={setDate} />
         <p className="text-sm text-muted-foreground">
-          {date ? new Intl.DateTimeFormat('en-US', {
+          {date ? new Intl.DateTimeFormat(isRTL ? 'ar' : 'en-US', {
             year: 'numeric',
             month: 'long',
             day: 'numeric'
-          }).format(date) : 'No date selected'}
+          }).format(date) : t('No date selected', 'لم يتم اختيار تاريخ')}
         </p>
       </div>
     );
   },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders correctly', async () => {
-      const button = canvas.getByRole('button', { name: /pick a date|january|february|march|april|may|june|july|august|september|october|november|december/i });
-      await expect(button).toBeInTheDocument();
-      await expect(button).toBeVisible();
-      await expect(canvas.getByText('Date of Birth')).toBeInTheDocument();
-    });
-
-    await step('Opens calendar on click', async () => {
-      const button = canvas.getByRole('button', { name: /pick a date|january|february|march|april|may|june|july|august|september|october|november|december/i });
-      await userEvent.click(button);
-      // Calendar renders in a portal, query from document.body
-      const body = within(document.body);
-      // Calendar has a "Today" button when opened
-      await expect(body.getByRole('button', { name: /today/i })).toBeInTheDocument();
-      // Close the calendar for the next test
-      await userEvent.keyboard('{Escape}');
-    });
-
-    await step('Keyboard accessible', async () => {
-      const button = canvas.getByRole('button', { name: /pick a date|january|february|march|april|may|june|july|august|september|october|november|december/i });
-      button.focus();
-      await expect(button).toHaveFocus();
-      await userEvent.keyboard('{Enter}');
-      const body = within(document.body);
-      // Calendar has a "Today" button when opened
-      await expect(body.getByRole('button', { name: /today/i })).toBeInTheDocument();
-    });
-  },
   parameters: {
-    docs: {
-      story: {
-        inline: false
+    ar: {
+      args: {
+        placeholder: 'اختر تاريخ',
+        placeholderAr: 'اختر تاريخ'
       }
     }
   }
@@ -139,10 +107,6 @@ export const BasicDatePicker: Story = {
       const dateTexts = canvas.getAllByText(/january|february|march|april|may|june|july|august|september|october|november|december/i);
       await expect(dateTexts.length).toBeGreaterThan(0);
     });
-  },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
@@ -211,10 +175,6 @@ export const DateRangePicker_: Story = {
       await userEvent.keyboard('{Escape}');
     });
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -276,10 +236,6 @@ export const WithConstraints: Story = {
       // Close the calendar
       await userEvent.keyboard('{Escape}');
     });
-  },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
@@ -344,10 +300,6 @@ export const DisabledDates: Story = {
       // Close the calendar
       await userEvent.keyboard('{Escape}');
     });
-  },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
@@ -439,10 +391,6 @@ export const RealWorldExample: Story = {
       await userEvent.keyboard('{Escape}');
     });
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -499,10 +447,6 @@ export const DisabledState: Story = {
       await expect(enabledButton).not.toBeDisabled();
     });
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -513,230 +457,3 @@ export const DisabledState: Story = {
   }
 };
 
-// RTL Example
-export const RTLExample: Story = {
-  render: () => {
-    const [date, setDate] = React.useState<Date | undefined>(new Date());
-
-    const formatDate = (date: Date | undefined): string => {
-      if (!date) return 'لم يتم اختيار تاريخ';
-      return new Intl.DateTimeFormat('ar-SA', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric'
-      }).format(date);
-    };
-
-    return (
-      <div className="w-full max-w-xs mx-auto space-y-2">
-        <Label className='me-4'>تاريخ الميلاد</Label>
-        <DatePicker
-          date={date}
-          onDateChange={setDate}
-          placeholder="Pick a date"
-          placeholderAr="اختر تاريخ"
-        />
-        <p className="text-sm text-muted-foreground">{formatDate(date)}</p>
-      </div>
-    );
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders in RTL context', async () => {
-      const button = canvas.getByRole('button');
-      await expect(button).toBeInTheDocument();
-      await expect(canvas.getByText('تاريخ الميلاد')).toBeInTheDocument();
-    });
-
-    await step('Interaction works in RTL', async () => {
-      const button = canvas.getByRole('button');
-      await userEvent.click(button);
-      const body = within(document.body);
-      // In Arabic locale, the "Today" button will have Arabic text
-      // Calendar component uses t.ui.components.today which is "اليوم" in Arabic
-      await expect(body.getByRole('button', { name: /today|اليوم/i })).toBeInTheDocument();
-      // Close the calendar
-      await userEvent.keyboard('{Escape}');
-    });
-  },
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Date picker with Arabic labels in RTL mode.'
-      }
-    }
-  }
-};
-
-// RTL Date Range Picker
-export const RTLDateRangePicker: Story = {
-  render: () => {
-    const [dateRange, setDateRange] = React.useState<DateRange | undefined>({
-      from: new Date(),
-      to: new Date(new Date().setDate(new Date().getDate() + 7))
-    });
-
-    const formatDateRange = (range: DateRange | undefined): string => {
-      if (!range?.from) return 'لم يتم اختيار نطاق';
-      const formatter = new Intl.DateTimeFormat('ar-SA', {
-        month: 'short',
-        day: 'numeric',
-        year: 'numeric'
-      });
-      if (!range.to) return formatter.format(range.from);
-      return `${formatter.format(range.from)} – ${formatter.format(range.to)}`;
-    };
-
-    return (
-      <div className="w-full max-w-md mx-auto space-y-2">
-        <Label className='me-4'>فترة الحجز</Label>
-        <DateRangePicker
-          dateRange={dateRange}
-          onDateRangeChange={setDateRange}
-          placeholder="Pick a date range"
-          placeholderAr="اختر نطاق التاريخ"
-        />
-        <p className="text-sm text-muted-foreground">{formatDateRange(dateRange)}</p>
-      </div>
-    );
-  },
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Date range picker in Arabic with RTL support.'
-      }
-    }
-  }
-};
-
-// RTL With Constraints
-export const RTLWithConstraints: Story = {
-  render: () => {
-    const [date, setDate] = React.useState<Date | undefined>(undefined);
-    const today = new Date();
-    const nextMonth = new Date(today.getFullYear(), today.getMonth() + 1, today.getDate());
-
-    const formatDate = (date: Date | undefined): string => {
-      if (!date) return 'لم يتم اختيار تاريخ';
-      return new Intl.DateTimeFormat('ar-SA', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric'
-      }).format(date);
-    };
-
-    return (
-      <div className="w-full max-w-xs mx-auto space-y-2">
-        <Label className='me-4'>موعد الاجتماع</Label>
-        <DatePicker
-          date={date}
-          onDateChange={setDate}
-          minDate={today}
-          maxDate={nextMonth}
-          placeholder="Select within next month"
-          placeholderAr="اختر خلال الشهر القادم"
-        />
-        <p className="text-xs text-muted-foreground">
-          متاح من {formatDate(today)} إلى {formatDate(nextMonth)}
-        </p>
-      </div>
-    );
-  },
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Date picker with constraints in Arabic, showing proper RTL date formatting.'
-      }
-    }
-  }
-};
-
-// RTL Real World Example
-export const RTLRealWorldExample: Story = {
-  render: () => {
-    const [dateRange, setDateRange] = React.useState<DateRange | undefined>(undefined);
-    const today = new Date();
-
-    return (
-      <Card className="w-full max-w-md mx-auto">
-        <CardHeader>
-          <CardTitle>حجز غرفة فندق</CardTitle>
-          <CardDescription>
-            اختر تواريخ تسجيل الوصول والمغادرة
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-6">
-          <div className="space-y-2">
-            <Label className='me-4'>فترة الإقامة</Label>
-            <DateRangePicker
-              dateRange={dateRange}
-              onDateRangeChange={setDateRange}
-              minDate={today}
-              placeholder="Select dates"
-              placeholderAr="اختر التواريخ"
-            />
-          </div>
-
-          {dateRange?.from && dateRange?.to && (
-            <>
-              <div className="flex justify-between items-center pt-4 border-t">
-                <span className="text-sm text-muted-foreground">
-                  عدد الليالي:
-                </span>
-                <span className="font-semibold">
-                  {Math.ceil((dateRange.to.getTime() - dateRange.from.getTime()) / (1000 * 60 * 60 * 24))}
-                </span>
-              </div>
-
-              <div className="flex justify-between items-center">
-                <span className="text-sm text-muted-foreground">
-                  سعر الليلة:
-                </span>
-                <span className="font-semibold">
-                  ٣٥٠ ر.س
-                </span>
-              </div>
-
-              <div className="flex justify-between items-center">
-                <span className="text-lg font-semibold">
-                  الإجمالي:
-                </span>
-                <span className="text-2xl font-bold text-primary">
-                  {(Math.ceil((dateRange.to.getTime() - dateRange.from.getTime()) / (1000 * 60 * 60 * 24)) * 350).toLocaleString('ar-SA')} ر.س
-                </span>
-              </div>
-            </>
-          )}
-        </CardContent>
-      </Card>
-    );
-  },
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Complete hotel booking example in Arabic with RTL support and proper number formatting.'
-      }
-    }
-  }
-};

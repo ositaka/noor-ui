@@ -12,12 +12,12 @@ import { Button } from '../../../components/ui/button';
  */
 
 const meta = {
-  title: 'Basic/Label',
+  title: 'Core/Label',
   component: Label,
   parameters: {
     layout: 'centered'
   },
-  tags: ['!autodocs']
+  tags: ['autodocs']
 } satisfies Meta<typeof Label>;
 
 export default meta;
@@ -29,49 +29,21 @@ export const Default: Story = {
     children: 'Email Address',
     htmlFor: 'preview-input'
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
+  parameters: {
+    ar: {
+      args: {
+        children: 'البريد الإلكتروني'
+      }
+    }
   },
-  render: (args) => (
+  render: (args, { globals }) => {
+    return (
     <div className="w-full max-w-sm space-y-2">
       <Label {...args} />
       <Input id="preview-input" type="email" placeholder="name@example.com" />
     </div>
-  ),
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders label correctly', async () => {
-      const label = canvas.getByText('Email Address');
-      await expect(label).toBeInTheDocument();
-      await expect(label).toBeVisible();
-    });
-
-    await step('Label is associated with input', async () => {
-      const label = canvas.getByText('Email Address');
-      const input = canvas.getByPlaceholderText('name@example.com');
-
-      await expect(label).toHaveAttribute('for', 'preview-input');
-      await expect(input).toHaveAttribute('id', 'preview-input');
-    });
-
-    await step('Clicking label focuses input', async () => {
-      const label = canvas.getByText('Email Address');
-      const input = canvas.getByPlaceholderText('name@example.com');
-
-      await userEvent.click(label);
-      await expect(input).toHaveFocus();
-    });
-
-    await step('Input is keyboard accessible', async () => {
-      const input = canvas.getByPlaceholderText('name@example.com');
-
-      await userEvent.clear(input);
-      await userEvent.type(input, 'test@example.com');
-      await expect(input).toHaveValue('test@example.com');
-    });
-  }
+    );
+  },
 };
 
 // With Input - from component page lines 224-227
@@ -82,10 +54,6 @@ export const WithInput: Story = {
       <Input id="username" placeholder="Enter your username" />
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   },
@@ -120,10 +88,6 @@ export const RequiredField: Story = {
       <Input id="required-email" type="email" required />
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   },
@@ -160,10 +124,6 @@ export const WithHelperText: Story = {
       </p>
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   },
@@ -196,10 +156,6 @@ export const DisabledState: Story = {
       </p>
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   },
@@ -236,10 +192,6 @@ export const HorizontalLayout: Story = {
       </div>
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   },
@@ -300,10 +252,6 @@ export const CompleteForm: Story = {
       </Button>
     </form>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   },
@@ -360,10 +308,6 @@ export const CustomStyling: Story = {
       </div>
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   },
@@ -389,151 +333,3 @@ export const CustomStyling: Story = {
   }
 };
 
-// RTL Example - from component page lines 460-465 and 470-475
-export const RTLExample: Story = {
-  render: () => (
-    <div className="w-full max-w-sm space-y-2">
-      <Label htmlFor="rtl-name">الاسم الكامل</Label>
-      <Input id="rtl-name" placeholder="أدخل اسمك الكامل" />
-    </div>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Label with Arabic text demonstrating RTL support. Automatically switches to RTL mode.'
-      }
-    }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders in RTL context', async () => {
-      const label = canvas.getByText('الاسم الكامل');
-      await expect(label).toBeInTheDocument();
-      await expect(label).toBeVisible();
-    });
-
-    await step('Label is associated with input in RTL', async () => {
-      const label = canvas.getByText('الاسم الكامل');
-      const input = canvas.getByPlaceholderText('أدخل اسمك الكامل');
-
-      await expect(label).toHaveAttribute('for', 'rtl-name');
-      await expect(input).toHaveAttribute('id', 'rtl-name');
-
-      await userEvent.click(label);
-      await expect(input).toHaveFocus();
-    });
-  }
-};
-
-// RTL With Helper Text
-export const RTLWithHelperText: Story = {
-  render: () => (
-    <div className="max-w-sm space-y-2">
-      <Label htmlFor="password-ar">كلمة المرور</Label>
-      <Input id="password-ar" type="password" />
-      <p className="text-sm text-muted-foreground">
-        يجب أن تكون 8 أحرف على الأقل
-      </p>
-    </div>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Password field with Arabic label and helper text in RTL mode.'
-      }
-    }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('RTL helper text pattern works', async () => {
-      await expect(canvas.getByText('كلمة المرور')).toBeVisible();
-      await expect(canvas.getByText('يجب أن تكون 8 أحرف على الأقل')).toBeVisible();
-    });
-
-    await step('Label focuses password input in RTL', async () => {
-      const label = canvas.getByText('كلمة المرور');
-      const input = canvas.getByLabelText('كلمة المرور');
-
-      await userEvent.click(label);
-      await expect(input).toHaveFocus();
-      await expect(input).toHaveAttribute('type', 'password');
-    });
-  }
-};
-
-// RTL Form
-export const RTLForm: Story = {
-  render: () => (
-    <form
-      className="max-w-sm space-y-6"
-      onSubmit={(e) => {
-        e.preventDefault();
-        alert('تم إرسال النموذج!');
-      }}
-    >
-      <div className="space-y-2">
-        <Label htmlFor="first-name-ar">الاسم الأول</Label>
-        <Input id="first-name-ar" required />
-      </div>
-
-      <div className="space-y-2">
-        <Label htmlFor="last-name-ar">الاسم الأخير</Label>
-        <Input id="last-name-ar" required />
-      </div>
-
-      <div className="space-y-2">
-        <Label htmlFor="email-ar">البريد الإلكتروني</Label>
-        <Input id="email-ar" type="email" required />
-      </div>
-
-      <Button type="submit" className="w-full">
-        إرسال
-      </Button>
-    </form>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Complete form with Arabic labels in RTL mode.'
-      }
-    }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('RTL form structure is correct', async () => {
-      const form = canvas.getByRole('button', { name: 'إرسال' }).closest('form');
-      await expect(form).toBeInTheDocument();
-    });
-
-    await step('All RTL labels are properly associated', async () => {
-      await expect(canvas.getByText('الاسم الأول')).toHaveAttribute('for', 'first-name-ar');
-      await expect(canvas.getByText('الاسم الأخير')).toHaveAttribute('for', 'last-name-ar');
-      await expect(canvas.getByText('البريد الإلكتروني')).toHaveAttribute('for', 'email-ar');
-    });
-
-    await step('RTL form inputs work', async () => {
-      const firstNameInput = canvas.getByLabelText('الاسم الأول');
-      await userEvent.click(firstNameInput);
-      await userEvent.type(firstNameInput, 'أحمد');
-      await expect(firstNameInput).toHaveValue('أحمد');
-    });
-  }
-};

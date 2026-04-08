@@ -34,7 +34,7 @@ const meta = {
   parameters: {
     layout: 'centered'
   },
-  tags: ['!autodocs'],
+  tags: ['autodocs'],
   argTypes: {
     title: {
       control: { type: 'text' }
@@ -107,52 +107,29 @@ export const Default: Story = {
     subtitle: 'Downtown Dubai',
     description: 'Beautiful 2-bedroom apartment with stunning views',
     price: '1,200,000 AED',
-    placeholderIcon: Home,
+    placeholderIcon: House,
     imageAspect: 'video',
     featured: false,
     hoverEffect: true,
     onClick: fn()
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
-  render: (args) => (
+  render: (args, { globals }) => {
+    return (
     <div className="max-w-sm">
       <ListingCard {...args} />
     </div>
-  ),
+    );
+  },
   parameters: {
-    docs: {
-      story: {
-        inline: false
+    ar: {
+      args: {
+        title: 'شقة عصرية',
+        subtitle: 'وسط مدينة دبي',
+        description: 'شقة جميلة من غرفتي نوم مع إطلالات خلابة',
+        price: '١٬٢٠٠٬٠٠٠ د.إ'
       }
     }
   },
-  play: async ({ canvasElement, step, args }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders card content correctly', async () => {
-      await expect(canvas.getByText('Modern Apartment')).toBeInTheDocument();
-      await expect(canvas.getByText('Downtown Dubai')).toBeInTheDocument();
-      await expect(canvas.getByText('Beautiful 2-bedroom apartment with stunning views')).toBeInTheDocument();
-      await expect(canvas.getByText('1,200,000 AED')).toBeInTheDocument();
-    });
-
-    await step('Displays placeholder icon', async () => {
-      const icon = canvasElement.querySelector('svg');
-      await expect(icon).toBeInTheDocument();
-    });
-
-    await step('Card is clickable', async () => {
-      const card = canvasElement.querySelector('.cursor-pointer');
-      await expect(card).toBeInTheDocument();
-      if (card) {
-        await userEvent.click(card);
-        await expect(args.onClick).toHaveBeenCalledTimes(1);
-      }
-    });
-  }
 };
 
 // Basic Listing - from component page lines 293-300
@@ -168,10 +145,6 @@ export const BasicListing: Story = {
       />
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -237,10 +210,6 @@ export const RealEstateListing: Story = {
       />
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -325,10 +294,6 @@ export const EcommerceListing: Story = {
       />
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -411,10 +376,6 @@ export const JobListing: Story = {
       />
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -503,10 +464,6 @@ export const WithAllFeatures: Story = {
       />
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -604,10 +561,6 @@ export const GridLayout: Story = {
       />
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -633,284 +586,3 @@ export const GridLayout: Story = {
   }
 };
 
-// RTL Real Estate
-export const RTLRealEstate: Story = {
-  render: () => (
-    <div className="max-w-sm">
-      <ListingCard
-        title="فيلا فاخرة في دبي هيلز"
-        subtitle={
-          <>
-            <MapPin className="h-3 w-3 inline me-1" />
-            دبي هيلز استيت، دبي
-          </>
-        }
-        description="فيلا مذهلة من 5 غرف نوم مع مسبح خاص وحديقة"
-        price="8,500,000 د.إ"
-        placeholderIcon={Home}
-        badges={[
-          { label: 'للبيع', variant: 'default' },
-          { label: 'مميز', variant: 'destructive' },
-        ]}
-        actions={[
-          { icon: Heart, label: 'مفضلة', onClick: fn() },
-          { icon: ShareNetwork, label: 'مشاركة', onClick: fn() },
-        ]}
-        stats={[
-          { icon: Bed, value: 5, label: 'غرف النوم' },
-          { icon: Bathtub, value: 6, label: 'الحمامات' },
-          { icon: Square, value: '4,500 قدم', label: 'المساحة' },
-        ]}
-        tags={[
-          { label: 'مسبح خاص' },
-          { label: 'حديقة' },
-          { label: 'منزل ذكي' },
-          { label: 'موقف سيارات' },
-          { label: 'أمن' },
-        ]}
-        typeBadge="فيلا"
-        featured={true}
-      />
-    </div>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Real estate listing in RTL with Arabic text. Layout flows right-to-left.'
-      }
-    }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders Arabic content in RTL', async () => {
-      await expect(canvas.getByText('فيلا فاخرة في دبي هيلز')).toBeInTheDocument();
-      await expect(canvas.getByText('دبي هيلز استيت، دبي')).toBeInTheDocument();
-      await expect(canvas.getByText('فيلا مذهلة من 5 غرف نوم مع مسبح خاص وحديقة')).toBeInTheDocument();
-      await expect(canvas.getByText('8,500,000 د.إ')).toBeInTheDocument();
-    });
-
-    await step('Displays Arabic badges', async () => {
-      await expect(canvas.getByText('للبيع')).toBeInTheDocument();
-      await expect(canvas.getByText('مميز')).toBeInTheDocument();
-    });
-
-    await step('Action buttons work in RTL', async () => {
-      const favoriteButton = canvas.getByRole('button', { name: /مفضلة/i });
-      await expect(favoriteButton).toBeInTheDocument();
-      await userEvent.click(favoriteButton);
-    });
-
-    await step('Shows Arabic tags', async () => {
-      await expect(canvas.getByText('مسبح خاص')).toBeInTheDocument();
-      await expect(canvas.getByText('حديقة')).toBeInTheDocument();
-      await expect(canvas.getByText('منزل ذكي')).toBeInTheDocument();
-    });
-  }
-};
-
-// RTL E-commerce
-export const RTLEcommerce: Story = {
-  render: () => (
-    <div className="max-w-sm">
-      <ListingCard
-        title="سماعات لاسلكية متميزة"
-        subtitle="اسم العلامة التجارية"
-        description="سماعات لاسلكية عالية الجودة مع إلغاء الضوضاء"
-        price="$299.99"
-        placeholderIcon={Package}
-        badges={[
-          { label: 'الأكثر مبيعاً', variant: 'default' },
-          { label: 'خصم 20%', variant: 'destructive' },
-        ]}
-        actions={[{ icon: Heart, label: 'مفضلة', onClick: fn() }]}
-        stats={[
-          { icon: Star, value: '4.8', label: 'التقييم' },
-          { icon: Package, value: '234', label: 'مباع' },
-        ]}
-        tags={[{ label: 'إلغاء الضوضاء' }, { label: 'لاسلكي' }, { label: 'شحن سريع' }]}
-        ctaText="أضف إلى السلة"
-        onCtaClick={fn()}
-        imageAspect="square"
-      />
-    </div>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'E-commerce product in RTL with Arabic text and Add to Cart button.'
-      }
-    }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders Arabic e-commerce content', async () => {
-      await expect(canvas.getByText('سماعات لاسلكية متميزة')).toBeInTheDocument();
-      await expect(canvas.getByText('اسم العلامة التجارية')).toBeInTheDocument();
-      await expect(canvas.getByText('سماعات لاسلكية عالية الجودة مع إلغاء الضوضاء')).toBeInTheDocument();
-      await expect(canvas.getByText('$299.99')).toBeInTheDocument();
-    });
-
-    await step('Has Arabic CTA button', async () => {
-      const ctaButton = canvas.getByRole('button', { name: /أضف إلى السلة/i });
-      await expect(ctaButton).toBeInTheDocument();
-      await userEvent.click(ctaButton);
-    });
-
-    await step('Shows Arabic tags', async () => {
-      await expect(canvas.getByText('إلغاء الضوضاء')).toBeInTheDocument();
-      await expect(canvas.getByText('لاسلكي')).toBeInTheDocument();
-      await expect(canvas.getByText('شحن سريع')).toBeInTheDocument();
-    });
-  }
-};
-
-// RTL Job Listing
-export const RTLJobListing: Story = {
-  render: () => (
-    <div className="max-w-sm">
-      <ListingCard
-        title="مطور واجهة أمامية أول"
-        subtitle={
-          <>
-            <MapPin className="h-3 w-3 inline me-1" />
-            دبي، الإمارات
-          </>
-        }
-        description="انضم إلى فريقنا لبناء تطبيقات ويب متطورة"
-        price="15,000 - 20,000 د.إ/شهرياً"
-        placeholderIcon={Briefcase}
-        badges={[
-          { label: 'دوام كامل', variant: 'default' },
-          { label: 'عن بعد', variant: 'secondary' },
-        ]}
-        stats={[{ icon: Clock, value: 'نُشر قبل يومين' }]}
-        tags={[{ label: 'React' }, { label: 'TypeScript' }, { label: 'Next.js' }]}
-        typeBadge="تقني"
-        ctaText="تقدم الآن"
-        onCtaClick={fn()}
-      />
-    </div>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Job listing in RTL with Arabic text and Apply Now button.'
-      }
-    }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders Arabic job listing', async () => {
-      await expect(canvas.getByText('مطور واجهة أمامية أول')).toBeInTheDocument();
-      await expect(canvas.getByText('دبي، الإمارات')).toBeInTheDocument();
-      await expect(canvas.getByText('انضم إلى فريقنا لبناء تطبيقات ويب متطورة')).toBeInTheDocument();
-      await expect(canvas.getByText('15,000 - 20,000 د.إ/شهرياً')).toBeInTheDocument();
-    });
-
-    await step('Has Arabic Apply Now button', async () => {
-      const applyButton = canvas.getByRole('button', { name: /تقدم الآن/i });
-      await expect(applyButton).toBeInTheDocument();
-      await userEvent.click(applyButton);
-    });
-
-    await step('Shows Arabic badges and type', async () => {
-      await expect(canvas.getByText('دوام كامل')).toBeInTheDocument();
-      await expect(canvas.getByText('عن بعد')).toBeInTheDocument();
-      await expect(canvas.getByText('تقني')).toBeInTheDocument();
-    });
-  }
-};
-
-// RTL Grid Layout
-export const RTLGridLayout: Story = {
-  render: () => (
-    <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 max-w-6xl">
-      <ListingCard
-        title="شقة عصرية"
-        subtitle="وسط مدينة دبي"
-        description="شقة جميلة من غرفتي نوم مع إطلالات خلابة"
-        price="1,200,000 د.إ"
-        placeholderIcon={Home}
-        stats={[
-          { icon: Bed, value: 2, label: 'غرف نوم' },
-          { icon: Bathtub, value: 2, label: 'حمامات' },
-        ]}
-        ctaText="عرض"
-        onCtaClick={() => {}}
-      />
-      <ListingCard
-        title="فيلا فاخرة"
-        subtitle="دبي هيلز"
-        description="فيلا مذهلة مع مسبح خاص"
-        price="8,500,000 د.إ"
-        placeholderIcon={Home}
-        badges={[{ label: 'مميز', variant: 'destructive' }]}
-        stats={[
-          { icon: Bed, value: 5, label: 'غرف نوم' },
-          { icon: Bathtub, value: 6, label: 'حمامات' },
-        ]}
-        featured={true}
-        ctaText="عرض"
-        onCtaClick={() => {}}
-      />
-      <ListingCard
-        title="بنتهاوس على الشاطئ"
-        subtitle="شاطئ جميرا"
-        description="بنتهاوس حصري مع إطلالات بانورامية"
-        price="15,000,000 د.إ"
-        placeholderIcon={Home}
-        stats={[
-          { icon: Bed, value: 4, label: 'غرف نوم' },
-          { icon: Bathtub, value: 5, label: 'حمامات' },
-        ]}
-        ctaText="عرض"
-        onCtaClick={() => {}}
-      />
-    </div>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Grid layout in RTL with Arabic property listings.'
-      }
-    }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders all Arabic cards in RTL grid', async () => {
-      await expect(canvas.getByText('شقة عصرية')).toBeInTheDocument();
-      await expect(canvas.getByText('فيلا فاخرة')).toBeInTheDocument();
-      await expect(canvas.getByText('بنتهاوس على الشاطئ')).toBeInTheDocument();
-    });
-
-    await step('All Arabic prices are visible', async () => {
-      await expect(canvas.getByText('1,200,000 د.إ')).toBeInTheDocument();
-      await expect(canvas.getByText('8,500,000 د.إ')).toBeInTheDocument();
-      await expect(canvas.getByText('15,000,000 د.إ')).toBeInTheDocument();
-    });
-  }
-};

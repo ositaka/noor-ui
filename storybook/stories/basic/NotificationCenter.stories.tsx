@@ -15,12 +15,12 @@ import { fn } from 'storybook/test';
  */
 
 const meta = {
-  title: 'Basic/Notification Center',
+  title: 'User Interface/Notification Center',
   component: NotificationCenter,
   parameters: {
     layout: 'centered'
   },
-  tags: ['!autodocs'],
+  tags: ['autodocs'],
   argTypes: {
     notifications: { control: false },
     onNotificationClick: { control: false },
@@ -45,28 +45,30 @@ export const Default: Story = {
     onClearAll: fn(),
     onRemove: fn(),
   },
-  render: (args) => {
+  render: (args, { globals }) => {
+    const isRTL = globals?.direction === 'rtl';
+    const t = (en: string, ar: string) => isRTL ? ar : en;
     const [notifications, setNotifications] = useState<Notification[]>([
       {
         id: '1',
-        title: 'New comment on your post',
-        description: 'Sarah commented: "Great article!"',
+        title: t('New comment on your post', 'تعليق جديد على منشورك'),
+        description: t('Sarah commented: "Great article!"', 'علّقت سارة: "مقال رائع!"'),
         time: new Date(Date.now() - 5 * 60000).toISOString(),
         read: false,
         icon: <ChatCentered className="h-5 w-5" />
       },
       {
         id: '2',
-        title: 'New follower',
-        description: 'Ahmed is now following you',
+        title: t('New follower', 'متابع جديد'),
+        description: t('Ahmed is now following you', 'أحمد يتابعك الآن'),
         time: new Date(Date.now() - 120 * 60000).toISOString(),
         read: false,
         icon: <UserPlus className="h-5 w-5" />
       },
       {
         id: '3',
-        title: 'Someone liked your post',
-        description: '3 people liked "Getting Started with React"',
+        title: t('Someone liked your post', 'أحدهم أعجبه منشورك'),
+        description: t('3 people liked "Getting Started with React"', '٣ أشخاص أعجبهم "البدء مع React"'),
         time: new Date(Date.now() - 1440 * 60000).toISOString(),
         read: true,
         icon: <Heart className="h-5 w-5" />
@@ -100,10 +102,6 @@ export const Default: Story = {
       />
     );
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  }
 };
 
 // Basic Usage - from page lines 126-157
@@ -172,10 +170,6 @@ export const BasicUsage: Story = {
       </Card>
     );
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   }
@@ -227,10 +221,6 @@ export const WithAvatars: Story = {
       </Card>
     );
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   }
@@ -247,10 +237,6 @@ export const EmptyState: Story = {
       </CardContent>
     </Card>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   }
@@ -347,10 +333,6 @@ export const ManyNotifications: Story = {
       </Card>
     );
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   }
@@ -409,10 +391,6 @@ export const AllUnread: Story = {
       </Card>
     );
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   }
@@ -465,10 +443,6 @@ export const AllRead: Story = {
         </CardContent>
       </Card>
     );
-  },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
   },
   parameters: {
     controls: { disable: true }
@@ -537,95 +511,6 @@ export const MixedAvatarsAndIcons: Story = {
         </CardContent>
       </Card>
     );
-  },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
-  parameters: {
-    controls: { disable: true }
-  }
-};
-
-// RTL
-export const RTL: Story = {
-  args: {
-    onNotificationClick: fn(),
-    onMarkAsRead: fn(),
-    onMarkAllAsRead: fn(),
-    onClearAll: fn(),
-    onRemove: fn(),
-  },
-  render: (args) => {
-    const [notifications, setNotifications] = useState<Notification[]>([
-      {
-        id: '1',
-        title: 'New comment on your post',
-        titleAr: 'تعليق جديد على منشورك',
-        description: 'Sarah commented: "Great article!"',
-        descriptionAr: 'سارة علقت: "مقال رائع!"',
-        time: new Date(Date.now() - 5 * 60000).toISOString(),
-        read: false,
-        icon: <ChatCentered className="h-5 w-5" />
-      },
-      {
-        id: '2',
-        title: 'New follower',
-        titleAr: 'متابع جديد',
-        description: 'Ahmed is now following you',
-        descriptionAr: 'أحمد يتابعك الآن',
-        time: new Date(Date.now() - 120 * 60000).toISOString(),
-        read: false,
-        icon: <UserPlus className="h-5 w-5" />
-      },
-      {
-        id: '3',
-        title: 'Someone liked your post',
-        titleAr: 'شخص ما أعجبه منشورك',
-        description: '3 people liked "Getting Started with React"',
-        descriptionAr: '3 أشخاص أعجبهم "البدء مع React"',
-        time: new Date(Date.now() - 1440 * 60000).toISOString(),
-        read: true,
-        icon: <Heart className="h-5 w-5" />
-      },
-    ]);
-
-    return (
-      <Card>
-        <CardContent className="p-6">
-          <div className="flex justify-center">
-            <NotificationCenter
-              notifications={notifications}
-              onNotificationClick={(notif) => {
-                args.onNotificationClick?.(notif);
-              }}
-              onMarkAsRead={(id) => {
-                setNotifications(prev =>
-                  prev.map(n => n.id === id ? { ...n, read: true } : n)
-                );
-                args.onMarkAsRead?.(id);
-              }}
-              onMarkAllAsRead={() => {
-                setNotifications(prev => prev.map(n => ({ ...n, read: true })));
-                args.onMarkAllAsRead?.();
-              }}
-              onClearAll={() => {
-                setNotifications([]);
-                args.onClearAll?.();
-              }}
-              onRemove={(id) => {
-                setNotifications(prev => prev.filter(n => n.id !== id));
-                args.onRemove?.(id);
-              }}
-            />
-          </div>
-        </CardContent>
-      </Card>
-    );
-  },
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
   },
   parameters: {
     controls: { disable: true }

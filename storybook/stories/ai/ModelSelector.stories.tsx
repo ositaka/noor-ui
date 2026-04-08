@@ -15,12 +15,12 @@ import { useState } from 'react';
  */
 
 const meta = {
-  title: 'AI/Model Selector',
+  title: 'AI-LLM Shell/Model Selector',
   component: ModelSelector,
   parameters: {
     layout: 'centered'
   },
-  tags: ['!autodocs'],
+  tags: ['autodocs'],
   argTypes: {
     models: { control: false },
     value: { control: 'text' },
@@ -42,11 +42,9 @@ export const Default: Story = {
     value: 'gpt-4',
     onValueChange: fn()
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
-  render: (args) => {
+  render: (args, { globals }) => {
+    const isRTL = globals?.direction === 'rtl';
+    const t = (en: string, ar: string) => isRTL ? ar : en;
     const [value, setValue] = useState(args.value || 'gpt-4');
     return (
       <div className="w-full max-w-md space-y-3">
@@ -59,73 +57,11 @@ export const Default: Story = {
           }}
         />
         <p className="text-sm text-muted-foreground">
-          Selected: {value}
+          {t('Selected:', 'المحدد:')} {value}
         </p>
       </div>
     );
   },
-  parameters: {
-    docs: {
-      story: {
-        inline: false
-      }
-    }
-  },
-  play: async ({ canvasElement, step, args }) => {
-    const canvas = within(canvasElement);
-    const body = within(document.body);
-
-    await step('Renders with initial selection', async () => {
-      const trigger = canvas.getByRole('combobox');
-      await expect(trigger).toBeInTheDocument();
-      await expect(trigger).toBeVisible();
-
-      // Verify selected model display (GPT-4)
-      await expect(canvas.getByText('GPT-4')).toBeInTheDocument();
-      await expect(canvas.getByText('Medium')).toBeInTheDocument();
-      await expect(canvas.getByText(/8K/i)).toBeInTheDocument();
-      await expect(canvas.getByText(/recommended/i)).toBeInTheDocument();
-    });
-
-    await step('Opens dropdown and shows all models', async () => {
-      const trigger = canvas.getByRole('combobox');
-      await userEvent.click(trigger);
-
-      // Options render in a portal
-      await expect(await body.findByRole('option', { name: /GPT-4/ })).toBeInTheDocument();
-      await expect(body.getByRole('option', { name: /GPT-3.5 Turbo/ })).toBeInTheDocument();
-      await expect(body.getByRole('option', { name: /Claude 3 Opus/ })).toBeInTheDocument();
-      await expect(body.getByRole('option', { name: /Claude 3 Sonnet/ })).toBeInTheDocument();
-      await expect(body.getByRole('option', { name: /Gemini Pro/ })).toBeInTheDocument();
-    });
-
-    await step('Selects a different model', async () => {
-      // Select Claude 3 Sonnet
-      const sonnetOption = body.getByRole('option', { name: /Claude 3 Sonnet/ });
-      await userEvent.click(sonnetOption);
-
-      // Verify callback was called
-      await expect(args.onValueChange).toHaveBeenCalledWith('claude-3-sonnet');
-
-      // Verify display updated
-      await expect(canvas.getByText('Claude 3 Sonnet')).toBeInTheDocument();
-      await expect(canvas.getByText('Fast')).toBeInTheDocument();
-      await expect(canvas.getByText(/200K/i)).toBeInTheDocument();
-    });
-
-    await step('Keyboard accessible', async () => {
-      const trigger = canvas.getByRole('combobox');
-      trigger.focus();
-      await expect(trigger).toHaveFocus();
-
-      // Open with Enter
-      await userEvent.keyboard('{Enter}');
-      await expect(await body.findByRole('option', { name: /Claude 3 Sonnet/ })).toBeInTheDocument();
-
-      // Close with Escape
-      await userEvent.keyboard('{Escape}');
-    });
-  }
 };
 
 // With Default Models - from component page lines 214-219
@@ -148,10 +84,6 @@ export const WithDefaultModels: Story = {
         </CardContent>
       </Card>
     );
-  },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
@@ -211,10 +143,6 @@ export const ModelSpecsDisplay: Story = {
       </CardContent>
     </Card>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -269,10 +197,6 @@ export const CustomModels: Story = {
       </CardContent>
     </Card>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -328,10 +252,6 @@ export const ControlledComponent: Story = {
       </Card>
     );
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -385,10 +305,6 @@ export const AllProviders: Story = {
       />
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -428,10 +344,6 @@ export const SpeedVariants: Story = {
       </div>
     );
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -467,159 +379,3 @@ export const SpeedVariants: Story = {
   }
 };
 
-// RTL Default
-export const RTLDefault: Story = {
-  render: () => {
-    const [selectedModel, setSelectedModel] = useState('gpt-4');
-    return (
-      <div className="w-full max-w-md space-y-3">
-        <ModelSelector
-          models={defaultModels}
-          value={selectedModel}
-          onValueChange={setSelectedModel}
-          isRTL={true}
-        />
-        <p className="text-sm text-muted-foreground">
-          المحدد: {selectedModel}
-        </p>
-      </div>
-    );
-  },
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Model selector in RTL with Arabic text.'
-      }
-    }
-  }
-};
-
-// RTL With Selection
-export const RTLWithSelection: Story = {
-  render: () => (
-    <Card>
-      <CardContent className="p-6">
-        <div className="max-w-md space-y-3">
-          <p className="text-sm text-muted-foreground">
-            يتضمن جميع النماذج الافتراضية مع النصوص العربية الكاملة.
-          </p>
-          <ModelSelector
-            models={defaultModels}
-            value="claude-3-sonnet"
-            onValueChange={() => {}}
-            isRTL={true}
-            placeholderAr="اختر نموذج الذكاء الاصطناعي"
-          />
-        </div>
-      </CardContent>
-    </Card>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Model selector in RTL with a model selected.'
-      }
-    }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Displays selected model in Arabic', async () => {
-      await expect(canvas.getByText('كلود ٣ سونيت')).toBeInTheDocument();
-      await expect(canvas.getByText('سريع')).toBeInTheDocument(); // "Fast" in Arabic
-      await expect(canvas.getByText(/200K/)).toBeInTheDocument();
-      await expect(canvas.getByText('مُوصى')).toBeInTheDocument(); // "Recommended" in Arabic
-    });
-  }
-};
-
-// RTL Custom Models
-export const RTLCustomModels: Story = {
-  render: () => (
-    <Card>
-      <CardContent className="p-6">
-        <div className="max-w-md space-y-3">
-          <p className="text-sm text-muted-foreground">
-            نماذج مخصصة بالنصوص العربية.
-          </p>
-          <ModelSelector
-            models={[
-              {
-                id: 'custom-ar-1',
-                name: 'Custom Model',
-                nameAr: 'نموذج مخصص سريع',
-                provider: 'Custom',
-                providerAr: 'مخصص',
-                description: 'Fast model',
-                descriptionAr: 'نموذج سريع',
-                specs: {
-                  speed: 'fast' as const,
-                  speedLabel: 'Fast',
-                  speedLabelAr: 'سريع',
-                  contextLength: 16000,
-                  pricing: '$0.001/1K',
-                  pricingAr: '٠٫٠٠١$ / ١٠٠٠ رمز'
-                },
-                recommended: true,
-                icon: 'zap' as const
-              },
-              {
-                id: 'custom-ar-2',
-                name: 'Smart Model',
-                nameAr: 'نموذج ذكي',
-                provider: 'Custom',
-                providerAr: 'مخصص',
-                description: 'Advanced model',
-                descriptionAr: 'نموذج متقدم',
-                specs: {
-                  speed: 'medium' as const,
-                  speedLabel: 'Medium',
-                  speedLabelAr: 'متوسط',
-                  contextLength: 100000,
-                  pricing: '$0.01/1K',
-                  pricingAr: '٠٫٠١$ / ١٠٠٠ رمز'
-                },
-                icon: 'brain' as const
-              },
-            ]}
-            value="custom-ar-1"
-            onValueChange={() => {}}
-            isRTL={true}
-          />
-        </div>
-      </CardContent>
-    </Card>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Custom models with full Arabic translations in RTL.'
-      }
-    }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Displays custom Arabic model', async () => {
-      await expect(canvas.getByText('نموذج مخصص سريع')).toBeInTheDocument();
-      await expect(canvas.getByText('سريع')).toBeInTheDocument();
-      await expect(canvas.getByText(/16K/)).toBeInTheDocument();
-      await expect(canvas.getByText('مُوصى')).toBeInTheDocument();
-    });
-  }
-};

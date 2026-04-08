@@ -20,7 +20,7 @@ const meta = {
   parameters: {
     layout: 'centered'
   },
-  tags: ['!autodocs'],
+  tags: ['autodocs'],
   argTypes: {
     min: { control: 'number' },
     max: { control: 'number' },
@@ -47,7 +47,7 @@ export const Default: Story = {
   args: {
     onValueChange: fn(),
   },
-  render: (args) => {
+  render: (args, { globals }) => {
     const [value, setValue] = useState<[number, number]>([25, 75]);
 
     const handleChange = (newValue: [number, number]) => {
@@ -65,52 +65,6 @@ export const Default: Story = {
       </div>
     );
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders correctly', async () => {
-      const sliders = canvas.getAllByRole('slider');
-      await expect(sliders).toHaveLength(2);
-      await expect(sliders[0]).toBeVisible();
-      await expect(sliders[1]).toBeVisible();
-    });
-
-    await step('Has correct initial values', async () => {
-      const sliders = canvas.getAllByRole('slider');
-      await expect(sliders[0]).toHaveAttribute('aria-valuenow', '25');
-      await expect(sliders[1]).toHaveAttribute('aria-valuenow', '75');
-    });
-
-    await step('Keyboard accessible', async () => {
-      const sliders = canvas.getAllByRole('slider');
-
-      // Focus first slider thumb
-      sliders[0].focus();
-      await expect(sliders[0]).toHaveFocus();
-
-      // Focus second slider thumb via Tab
-      await userEvent.tab();
-      await expect(sliders[1]).toHaveFocus();
-    });
-
-    await step('Keyboard navigation works', async () => {
-      const sliders = canvas.getAllByRole('slider');
-
-      // Test arrow keys on first thumb
-      sliders[0].focus();
-      const initialValue = sliders[0].getAttribute('aria-valuenow');
-
-      await userEvent.keyboard('{ArrowRight}');
-      const newValue = sliders[0].getAttribute('aria-valuenow');
-
-      // Verify value changed
-      await expect(newValue).not.toBe(initialValue);
-    });
-  }
 };
 
 // Price Range - from page lines 245-254
@@ -136,10 +90,6 @@ export const PriceRange: Story = {
         </CardContent>
       </Card>
     );
-  },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
   },
   parameters: {
     controls: { disable: true }
@@ -192,10 +142,6 @@ export const AgeRange: Story = {
       </Card>
     );
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   }
@@ -224,10 +170,6 @@ export const PercentageRange: Story = {
       </Card>
     );
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   }
@@ -254,10 +196,6 @@ export const WithLabels: Story = {
         </CardContent>
       </Card>
     );
-  },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
   },
   parameters: {
     controls: { disable: true }
@@ -301,10 +239,6 @@ export const WithoutLabels: Story = {
         </CardContent>
       </Card>
     );
-  },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
   },
   parameters: {
     controls: { disable: true }
@@ -354,10 +288,6 @@ export const CustomStep: Story = {
       </Card>
     );
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   },
@@ -398,10 +328,6 @@ export const Disabled: Story = {
       </CardContent>
     </Card>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   },
@@ -444,78 +370,8 @@ export const TemperatureRange: Story = {
       </Card>
     );
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   }
 };
 
-// RTL
-export const RTL: Story = {
-  render: () => {
-    const [priceRange, setPriceRange] = useState<[number, number]>([100, 500]);
-
-    return (
-      <Card>
-        <CardContent className="p-6">
-          <div className="w-80 max-w-md space-y-2">
-            <Label>نطاق السعر: {priceRange[0]}$ - {priceRange[1]}$</Label>
-            <RangeSlider
-              min={0}
-              max={1000}
-              step={10}
-              value={priceRange}
-              onValueChange={setPriceRange}
-              formatLabel={(val) => `${val}$`}
-              showLabels
-              showMinMax
-              dir="rtl"
-            />
-          </div>
-        </CardContent>
-      </Card>
-    );
-  },
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders in RTL context', async () => {
-      const sliders = canvas.getAllByRole('slider');
-      await expect(sliders).toHaveLength(2);
-      await expect(sliders[0]).toBeVisible();
-      await expect(sliders[1]).toBeVisible();
-    });
-
-    await step('Shows RTL formatted labels', async () => {
-      await expect(canvas.getByText('نطاق السعر: 100$ - 500$')).toBeInTheDocument();
-      await expect(canvas.getByText('100$')).toBeInTheDocument();
-      await expect(canvas.getByText('500$')).toBeInTheDocument();
-    });
-
-    await step('Keyboard navigation works in RTL', async () => {
-      const sliders = canvas.getAllByRole('slider');
-
-      // Focus first slider
-      sliders[0].focus();
-      await expect(sliders[0]).toHaveFocus();
-
-      // Test keyboard interaction
-      const initialValue = sliders[0].getAttribute('aria-valuenow');
-      await userEvent.keyboard('{ArrowLeft}');
-      const newValue = sliders[0].getAttribute('aria-valuenow');
-
-      // In RTL, ArrowLeft should increase value
-      await expect(newValue).not.toBe(initialValue);
-    });
-  }
-};

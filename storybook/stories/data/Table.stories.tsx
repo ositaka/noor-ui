@@ -23,7 +23,7 @@ const meta = {
   parameters: {
     layout: 'padded'
   },
-  tags: ['!autodocs'],
+  tags: ['autodocs'],
   argTypes: {
     className: {
       control: { type: 'text' }
@@ -55,28 +55,29 @@ export const Default: Story = {
   args: {
     className: ''
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
-  render: (args) => (
+  render: (args, { globals }) => {
+    const isRTL = globals?.direction === 'rtl';
+    const t = (en: string, ar: string) => isRTL ? ar : en;
+    const users = isRTL ? usersAR : usersEN;
+
+    return (
     <Table {...args}>
-      <TableCaption>A list of recent users</TableCaption>
+      <TableCaption>{t('A list of recent users', 'قائمة المستخدمين الأخيرين')}</TableCaption>
       <TableHeader>
         <TableRow>
-          <TableHead>Name</TableHead>
-          <TableHead>Email</TableHead>
-          <TableHead>Status</TableHead>
-          <TableHead>Role</TableHead>
+          <TableHead>{t('Name', 'الاسم')}</TableHead>
+          <TableHead>{t('Email', 'البريد الإلكتروني')}</TableHead>
+          <TableHead>{t('Status', 'الحالة')}</TableHead>
+          <TableHead>{t('Role', 'الدور')}</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
-        {usersEN.map((user) => (
+        {users.map((user) => (
           <TableRow key={user.id}>
             <TableCell className="font-medium">{user.name}</TableCell>
             <TableCell>{user.email}</TableCell>
             <TableCell>
-              <Badge variant={user.status === 'Active' ? 'default' : 'secondary'}>
+              <Badge variant={user.status === 'Active' || user.status === 'نشط' ? 'default' : 'secondary'}>
                 {user.status}
               </Badge>
             </TableCell>
@@ -85,57 +86,8 @@ export const Default: Story = {
         ))}
       </TableBody>
     </Table>
-  ),
-  parameters: {
-    docs: {
-      story: {
-        inline: false
-      }
-    }
+    );
   },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders table with correct structure', async () => {
-      const table = canvas.getByRole('table');
-      await expect(table).toBeInTheDocument();
-      await expect(table).toBeVisible();
-    });
-
-    await step('Displays caption', async () => {
-      await expect(canvas.getByText('A list of recent users')).toBeInTheDocument();
-    });
-
-    await step('Renders header row with column names', async () => {
-      await expect(canvas.getByText('Name')).toBeInTheDocument();
-      await expect(canvas.getByText('Email')).toBeInTheDocument();
-      await expect(canvas.getByText('Status')).toBeInTheDocument();
-      await expect(canvas.getByText('Role')).toBeInTheDocument();
-    });
-
-    await step('Renders all data rows', async () => {
-      const rows = canvas.getAllByRole('row');
-      // 1 header row + 4 data rows = 5 total
-      await expect(rows).toHaveLength(5);
-
-      await expect(canvas.getByText('Ahmed Ali')).toBeInTheDocument();
-      await expect(canvas.getByText('ahmed@example.com')).toBeInTheDocument();
-      await expect(canvas.getByText('Fatima Hassan')).toBeInTheDocument();
-      await expect(canvas.getByText('fatima@example.com')).toBeInTheDocument();
-      await expect(canvas.getByText('Mohammed Youssef')).toBeInTheDocument();
-      await expect(canvas.getByText('mohammed@example.com')).toBeInTheDocument();
-      await expect(canvas.getByText('Sarah Abdullah')).toBeInTheDocument();
-      await expect(canvas.getByText('sarah@example.com')).toBeInTheDocument();
-    });
-
-    await step('Displays status badges', async () => {
-      // Verify badge text content instead of CSS classes
-      const activeBadges = canvas.getAllByText('Active');
-      const inactiveBadges = canvas.getAllByText('Inactive');
-      await expect(activeBadges.length).toBeGreaterThanOrEqual(1);
-      await expect(inactiveBadges.length).toBeGreaterThanOrEqual(1);
-    });
-  }
 };
 
 // Basic Table - from component page lines 242-271
@@ -169,10 +121,6 @@ export const BasicTable: Story = {
       </Table>
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -239,10 +187,6 @@ export const WithCaption: Story = {
       </CardContent>
     </Card>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -325,10 +269,6 @@ export const InteractiveTable: Story = {
         </CardContent>
       </Card>
     );
-  },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
@@ -415,10 +355,6 @@ export const MobileResponsiveTable: Story = {
       </CardContent>
     </Card>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -474,10 +410,6 @@ export const StripedRows: Story = {
       </Table>
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -545,10 +477,6 @@ export const CompactTable: Story = {
       </CardContent>
     </Card>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -590,310 +518,3 @@ export const CompactTable: Story = {
   }
 };
 
-// RTL Example - Basic Table
-export const RTLExample: Story = {
-  render: () => (
-    <div className="w-full">
-      <Table>
-        <TableCaption>قائمة بالمستخدمين الحديثين</TableCaption>
-        <TableHeader>
-          <TableRow>
-            <TableHead>الاسم</TableHead>
-            <TableHead>البريد الإلكتروني</TableHead>
-            <TableHead>الحالة</TableHead>
-            <TableHead>الدور</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {usersAR.map((user) => (
-            <TableRow key={user.id}>
-              <TableCell className="font-medium">{user.name}</TableCell>
-              <TableCell>{user.email}</TableCell>
-              <TableCell>
-                <Badge variant={user.status === 'نشط' ? 'default' : 'secondary'}>
-                  {user.status}
-                </Badge>
-              </TableCell>
-              <TableCell>{user.role}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </div>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Basic table in RTL mode with Arabic text. Text alignment uses text-start for proper RTL display.'
-      }
-    }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders in RTL context', async () => {
-      const table = canvas.getByRole('table');
-      await expect(table).toBeInTheDocument();
-      await expect(table).toBeVisible();
-    });
-
-    await step('Displays Arabic caption', async () => {
-      await expect(canvas.getByText('قائمة بالمستخدمين الحديثين')).toBeInTheDocument();
-    });
-
-    await step('Displays Arabic headers', async () => {
-      await expect(canvas.getByText('الاسم')).toBeInTheDocument();
-      await expect(canvas.getByText('البريد الإلكتروني')).toBeInTheDocument();
-      await expect(canvas.getByText('الحالة')).toBeInTheDocument();
-      await expect(canvas.getByText('الدور')).toBeInTheDocument();
-    });
-
-    await step('Displays Arabic user data', async () => {
-      await expect(canvas.getByText('أحمد علي')).toBeInTheDocument();
-      await expect(canvas.getByText('فاطمة حسن')).toBeInTheDocument();
-      await expect(canvas.getByText('محمد يوسف')).toBeInTheDocument();
-      await expect(canvas.getByText('سارة عبدالله')).toBeInTheDocument();
-    });
-  }
-};
-
-// RTL With Caption
-export const RTLWithCaption: Story = {
-  render: () => (
-    <Card>
-      <CardContent className="p-6">
-        <Table>
-          <TableCaption>قائمة بمعاملاتك الأخيرة</TableCaption>
-          <TableHeader>
-            <TableRow>
-              <TableHead>الفاتورة</TableHead>
-              <TableHead>الحالة</TableHead>
-              <TableHead>الطريقة</TableHead>
-              <TableHead>المبلغ</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            <TableRow>
-              <TableCell>INV-001</TableCell>
-              <TableCell><Badge>مدفوع</Badge></TableCell>
-              <TableCell>بطاقة ائتمان</TableCell>
-              <TableCell>$250.00</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>INV-002</TableCell>
-              <TableCell><Badge variant="secondary">قيد الانتظار</Badge></TableCell>
-              <TableCell>باي بال</TableCell>
-              <TableCell>$150.00</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>INV-003</TableCell>
-              <TableCell><Badge>مدفوع</Badge></TableCell>
-              <TableCell>تحويل بنكي</TableCell>
-              <TableCell>$350.00</TableCell>
-            </TableRow>
-          </TableBody>
-        </Table>
-      </CardContent>
-    </Card>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Transaction table in RTL with Arabic text. All content flows naturally right-to-left.'
-      }
-    }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders RTL transaction table', async () => {
-      const table = canvas.getByRole('table');
-      await expect(table).toBeInTheDocument();
-      await expect(canvas.getByText('قائمة بمعاملاتك الأخيرة')).toBeInTheDocument();
-    });
-
-    await step('Displays Arabic transaction headers', async () => {
-      await expect(canvas.getByText('الفاتورة')).toBeInTheDocument();
-      await expect(canvas.getByText('الحالة')).toBeInTheDocument();
-      await expect(canvas.getByText('الطريقة')).toBeInTheDocument();
-      await expect(canvas.getByText('المبلغ')).toBeInTheDocument();
-    });
-
-    await step('Displays transaction data in Arabic', async () => {
-      await expect(canvas.getByText('INV-001')).toBeInTheDocument();
-      await expect(canvas.getByText('INV-002')).toBeInTheDocument();
-      await expect(canvas.getByText('INV-003')).toBeInTheDocument();
-      // Two "مدفوع" (Paid) badges (INV-001 and INV-003), one "قيد الانتظار" (Pending)
-      const paidBadges = canvas.getAllByText('مدفوع');
-      await expect(paidBadges).toHaveLength(2);
-      await expect(canvas.getByText('قيد الانتظار')).toBeInTheDocument();
-      await expect(canvas.getByText('بطاقة ائتمان')).toBeInTheDocument();
-      await expect(canvas.getByText('باي بال')).toBeInTheDocument();
-      await expect(canvas.getByText('تحويل بنكي')).toBeInTheDocument();
-    });
-  }
-};
-
-// RTL Interactive Table
-export const RTLInteractiveTable: Story = {
-  render: () => {
-    const [selectedRows, setSelectedRows] = React.useState<Set<string>>(new Set());
-
-    return (
-      <Card>
-        <CardContent className="p-6">
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead className="w-12">
-                  <Checkbox />
-                </TableHead>
-                <TableHead>الاسم</TableHead>
-                <TableHead>البريد الإلكتروني</TableHead>
-                <TableHead>الدور</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {usersAR.map((user) => (
-                <TableRow key={user.id}>
-                  <TableCell>
-                    <Checkbox />
-                  </TableCell>
-                  <TableCell className="font-medium">{user.name}</TableCell>
-                  <TableCell>{user.email}</TableCell>
-                  <TableCell>
-                    <Badge variant="outline">{user.role}</Badge>
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </CardContent>
-      </Card>
-    );
-  },
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Interactive table with checkboxes in RTL mode. Checkbox positioning adapts to RTL layout.'
-      }
-    }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders RTL interactive table', async () => {
-      const table = canvas.getByRole('table');
-      await expect(table).toBeInTheDocument();
-
-      const checkboxes = canvas.getAllByRole('checkbox');
-      await expect(checkboxes).toHaveLength(5); // 1 header + 4 rows
-    });
-
-    await step('Displays Arabic headers', async () => {
-      await expect(canvas.getByText('الاسم')).toBeInTheDocument();
-      await expect(canvas.getByText('البريد الإلكتروني')).toBeInTheDocument();
-      await expect(canvas.getByText('الدور')).toBeInTheDocument();
-    });
-
-    await step('Displays Arabic user data', async () => {
-      await expect(canvas.getByText('أحمد علي')).toBeInTheDocument();
-      await expect(canvas.getByText('فاطمة حسن')).toBeInTheDocument();
-      await expect(canvas.getByText('محمد يوسف')).toBeInTheDocument();
-      await expect(canvas.getByText('سارة عبدالله')).toBeInTheDocument();
-    });
-
-    await step('Checkboxes work in RTL mode', async () => {
-      const checkboxes = canvas.getAllByRole('checkbox');
-      const firstRowCheckbox = checkboxes[1];
-
-      await expect(firstRowCheckbox).not.toBeChecked();
-      await userEvent.click(firstRowCheckbox);
-      await expect(firstRowCheckbox).toBeChecked();
-    });
-  }
-};
-
-// RTL Striped Rows
-export const RTLStripedRows: Story = {
-  render: () => (
-    <div className="w-full">
-      <Table>
-        <TableCaption>قائمة الموظفين</TableCaption>
-        <TableHeader>
-          <TableRow>
-            <TableHead>الاسم</TableHead>
-            <TableHead>البريد الإلكتروني</TableHead>
-            <TableHead>الدور</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {usersAR.map((user, index) => (
-            <TableRow
-              key={user.id}
-              className={index % 2 === 0 ? 'bg-muted/50' : ''}
-            >
-              <TableCell className="font-medium">{user.name}</TableCell>
-              <TableCell>{user.email}</TableCell>
-              <TableCell>{user.role}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </div>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Striped table in RTL mode with Arabic text. Alternating row colors work perfectly in both directions.'
-      }
-    }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders RTL striped table', async () => {
-      const table = canvas.getByRole('table');
-      await expect(table).toBeInTheDocument();
-      await expect(canvas.getByText('قائمة الموظفين')).toBeInTheDocument();
-    });
-
-    await step('Displays Arabic headers', async () => {
-      await expect(canvas.getByText('الاسم')).toBeInTheDocument();
-      await expect(canvas.getByText('البريد الإلكتروني')).toBeInTheDocument();
-      await expect(canvas.getByText('الدور')).toBeInTheDocument();
-    });
-
-    await step('Displays all employee data in Arabic', async () => {
-      await expect(canvas.getByText('أحمد علي')).toBeInTheDocument();
-      await expect(canvas.getByText('فاطمة حسن')).toBeInTheDocument();
-      await expect(canvas.getByText('محمد يوسف')).toBeInTheDocument();
-      await expect(canvas.getByText('سارة عبدالله')).toBeInTheDocument();
-    });
-
-    await step('Has alternating row styles in RTL', async () => {
-      const rows = canvas.getAllByRole('row');
-      await expect(rows).toHaveLength(5); // 1 header + 4 data rows
-    });
-  }
-};

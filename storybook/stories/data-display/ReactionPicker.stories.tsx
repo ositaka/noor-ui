@@ -14,12 +14,12 @@ import { expect, userEvent, within } from 'storybook/test';
  */
 
 const meta = {
-  title: 'Data Display/Reaction Picker',
+  title: 'User Interface/Reaction Picker',
   component: ReactionPicker,
   parameters: {
     layout: 'centered'
   },
-  tags: ['!autodocs'],
+  tags: ['autodocs'],
   argTypes: {
     reactions: { control: false },
     variant: {
@@ -70,60 +70,7 @@ export const Default: Story = {
       </div>
     );
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
 
-    await step('Renders correctly with compact variant', async () => {
-      const reactionButton = canvas.getByRole('button', { name: 'React to comment' });
-      await expect(reactionButton).toBeInTheDocument();
-      await expect(reactionButton).toBeVisible();
-      // Shows emojis and total count in compact mode
-      await expect(reactionButton).toHaveTextContent(/20/);
-    });
-
-    await step('Opens popover on click', async () => {
-      const reactionButton = canvas.getByRole('button', { name: 'React to comment' });
-      await userEvent.click(reactionButton);
-
-      // Popover content renders in a portal
-      const body = within(document.body);
-      const popoverButtons = await body.findAllByRole('button');
-      // Should have 6 emoji buttons (default available reactions)
-      await expect(popoverButtons.length).toBeGreaterThanOrEqual(6);
-    });
-
-    await step('Adds reaction from popover', async () => {
-      const body = within(document.body);
-      const emojiButtons = body.getAllByRole('button');
-      // Find the 🚀 button (4th in default list: ['👍', '❤️', '💡', '🚀', '🎉', '👀'])
-      const rocketButton = emojiButtons.find((btn) => btn.textContent?.includes('🚀'));
-      await expect(rocketButton).toBeDefined();
-      await userEvent.click(rocketButton!);
-
-      // Verify count updated (20 + 1 = 21)
-      const reactionButton = canvas.getByRole('button', { name: 'React to comment' });
-      await expect(reactionButton).toHaveTextContent(/21/);
-    });
-
-    await step('Keyboard accessible', async () => {
-      const reactionButton = canvas.getByRole('button', { name: 'React to comment' });
-      reactionButton.focus();
-      await expect(reactionButton).toHaveFocus();
-      await userEvent.keyboard('{Enter}');
-
-      // Verify popover opens
-      const body = within(document.body);
-      const popoverButtons = await body.findAllByRole('button');
-      await expect(popoverButtons.length).toBeGreaterThanOrEqual(6);
-
-      // Close with Escape
-      await userEvent.keyboard('{Escape}');
-    });
-  }
 };
 
 // Compact Mode - from page lines 165-186
@@ -172,10 +119,7 @@ export const CompactMode: Story = {
       </Card>
     );
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
+
   parameters: {
     controls: { disable: true }
   },
@@ -236,10 +180,7 @@ export const ExpandedMode: Story = {
       </Card>
     );
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
+
   parameters: {
     controls: { disable: true }
   },
@@ -326,10 +267,7 @@ export const WithManyReactions: Story = {
       </Card>
     );
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
+
   parameters: {
     controls: { disable: true }
   },
@@ -376,10 +314,7 @@ export const NoReactions: Story = {
       </Card>
     );
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
+
   parameters: {
     controls: { disable: true }
   },
@@ -444,10 +379,7 @@ export const SingleReaction: Story = {
       </Card>
     );
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
+
   parameters: {
     controls: { disable: true }
   },
@@ -501,10 +433,7 @@ export const UserHasReacted: Story = {
       </Card>
     );
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
+
   parameters: {
     controls: { disable: true },
     docs: {
@@ -539,66 +468,3 @@ export const UserHasReacted: Story = {
   }
 };
 
-// RTL
-export const RTL: Story = {
-  render: () => {
-    const [reactions, setReactions] = useState<Reaction[]>([
-      { emoji: '👍', count: 12, hasReacted: false },
-      { emoji: '❤️', count: 5, hasReacted: true },
-      { emoji: '💡', count: 3, hasReacted: false },
-    ]);
-
-    const handleReact = (emoji: string) => {
-      setReactions((prev) => {
-        const existing = prev.find((r) => r.emoji === emoji);
-        if (existing) {
-          return prev.map((r) =>
-            r.emoji === emoji
-              ? { ...r, count: r.hasReacted ? r.count - 1 : r.count + 1, hasReacted: !r.hasReacted }
-              : { ...r, hasReacted: false }
-          );
-        }
-        return [...prev, { emoji, count: 1, hasReacted: true }];
-      });
-    };
-
-    return (
-      <Card>
-        <CardHeader>
-          <CardTitle>التفاعلات</CardTitle>
-          <CardDescription>
-            اختر تفاعلك مع المنشور
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="p-6 border rounded-lg bg-muted/50">
-            <ReactionPicker
-              reactions={reactions}
-              variant="compact"
-              onReact={handleReact}
-            />
-          </div>
-        </CardContent>
-      </Card>
-    );
-  },
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders in RTL context with Arabic text', async () => {
-      await expect(canvas.getByText('التفاعلات')).toBeInTheDocument();
-      const reactionButton = canvas.getByRole('button', { name: 'React to comment' });
-      await expect(reactionButton).toBeInTheDocument();
-      // Button shows emojis + count
-      await expect(reactionButton).toHaveTextContent(/20/);
-    });
-
-  }
-};

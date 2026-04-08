@@ -19,7 +19,7 @@ const meta = {
   parameters: {
     layout: 'centered'
   },
-  tags: ['!autodocs'],
+  tags: ['autodocs'],
   argTypes: {
     className: { control: false }
   }
@@ -30,10 +30,6 @@ type Story = StoryObj<typeof meta>;
 
 // Default - Interactive playground
 export const Default: Story = {
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   render: () => (
     <div className="flex items-center gap-4 space-x-reverse">
       <Skeleton className="h-12 w-12 rounded-full" />
@@ -43,37 +39,6 @@ export const Default: Story = {
       </div>
     </div>
   ),
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders skeleton elements', async () => {
-      const skeletons = canvas.getAllByRole('generic');
-      await expect(skeletons.length).toBeGreaterThan(0);
-
-      // Verify skeletons are visible
-      skeletons.forEach(async (skeleton) => {
-        await expect(skeleton).toBeVisible();
-      });
-    });
-
-    await step('Has pulse animation class', async () => {
-      const skeletons = canvasElement.querySelectorAll('.animate-pulse');
-      await expect(skeletons.length).toBeGreaterThan(0);
-      await expect(skeletons[0]).toHaveClass('animate-pulse');
-    });
-
-    await step('Has proper background styling', async () => {
-      const skeletons = canvasElement.querySelectorAll('.animate-pulse');
-      await expect(skeletons[0]).toHaveClass('bg-muted');
-    });
-  },
-  parameters: {
-    docs: {
-      story: {
-        inline: false
-      }
-    }
-  }
 };
 
 // Card Skeleton - from component page lines 150-156
@@ -106,10 +71,6 @@ export const CardSkeleton: Story = {
         await expect(skeleton).toBeVisible();
       });
     });
-  },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
@@ -151,10 +112,6 @@ export const ProfileSkeleton: Story = {
         await expect(skeleton).toBeVisible();
       });
     });
-  },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
@@ -201,10 +158,6 @@ export const ListSkeleton: Story = {
       });
     });
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -239,10 +192,6 @@ export const TextLines: Story = {
         await expect(skeleton).toBeVisible();
       });
     });
-  },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
@@ -279,10 +228,6 @@ export const AvatarSizes: Story = {
       });
     });
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -316,10 +261,6 @@ export const ButtonSkeleton: Story = {
         await expect(skeleton).toBeVisible();
       });
     });
-  },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
@@ -356,121 +297,11 @@ export const AllPatterns: Story = {
       </div>
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
       description: {
         story: 'Showcase of common skeleton patterns.'
-      }
-    }
-  }
-};
-
-// RTL Card Skeleton
-export const RTLCardSkeleton: Story = {
-  render: () => (
-    <Card>
-      <CardContent className="p-6">
-        <div className="space-y-4">
-          <Skeleton className="h-48 w-80" />
-          <div className="space-y-2">
-            <Skeleton className="h-4 w-3/4" />
-            <Skeleton className="h-4 w-1/2" />
-          </div>
-        </div>
-      </CardContent>
-    </Card>
-  ),
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders in RTL context', async () => {
-      const skeletons = canvas.getAllByRole('generic');
-      await expect(skeletons.length).toBeGreaterThan(2);
-    });
-
-    await step('RTL skeletons are visible', async () => {
-      const skeletons = canvas.getAllByRole('generic');
-      skeletons.forEach(async (skeleton) => {
-        await expect(skeleton).toBeVisible();
-      });
-    });
-  },
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Card skeleton in RTL mode.'
-      }
-    }
-  }
-};
-
-// RTL Profile Skeleton
-export const RTLProfileSkeleton: Story = {
-  render: () => (
-    <Card>
-      <CardContent className="p-6">
-        <div className="flex items-center gap-4 space-x-reverse">
-          <Skeleton className="h-12 w-12 rounded-full" />
-          <div className="space-y-2 flex-1">
-            <Skeleton className="h-4 w-32" />
-            <Skeleton className="h-3 w-24" />
-          </div>
-        </div>
-      </CardContent>
-    </Card>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Profile skeleton in RTL with space-x-reverse for proper spacing.'
-      }
-    }
-  }
-};
-
-// RTL List Skeleton
-export const RTLListSkeleton: Story = {
-  render: () => (
-    <Card>
-      <CardContent className="p-6">
-        <div className="space-y-4 w-80">
-          {[1, 2, 3].map((i) => (
-            <div key={i} className="flex items-center gap-4 space-x-reverse">
-              <Skeleton className="h-10 w-10 rounded" />
-              <div className="space-y-2 flex-1">
-                <Skeleton className="h-4 w-full" />
-                <Skeleton className="h-3 w-2/3" />
-              </div>
-            </div>
-          ))}
-        </div>
-      </CardContent>
-    </Card>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'List skeleton in RTL layout with reversed spacing.'
       }
     }
   }

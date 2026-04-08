@@ -22,12 +22,12 @@ import {
  */
 
 const meta = {
-  title: 'Basic/Dashboard Shell',
+  title: 'Layout & Shell/Dashboard Shell',
   component: DashboardShell,
   parameters: {
     layout: 'fullscreen'
   },
-  tags: ['!autodocs'],
+  tags: ['autodocs'],
   argTypes: {
     navItems: { control: false },
     user: { control: false },
@@ -53,7 +53,9 @@ export const Default: Story = {
     onProfileClick: fn(),
     onSettingsClick: fn()
   },
-  render: (args) => {
+  render: (args, { globals }) => {
+    const isRTL = globals?.direction === 'rtl';
+    const t = (en: string, ar: string) => isRTL ? ar : en;
     const navItems = [
       {
         title: 'Dashboard',
@@ -82,24 +84,20 @@ export const Default: Story = {
           {...args}
           navItems={navItems}
           user={{
-            name: 'Ahmed Al-Rashid',
+            name: t('Ahmed Al-Rashid', 'أحمد الرشيد'),
             email: 'ahmed@example.com'
           }}
         >
           <div className="container py-6">
-            <h1 className="text-2xl font-bold mb-4">Dashboard Content</h1>
+            <h1 className="text-2xl font-bold mb-4">{t('Dashboard Content', 'محتوى لوحة التحكم')}</h1>
             <p className="text-muted-foreground">
-              Your main content goes here.
+              {t('Your main content goes here.', 'يظهر المحتوى الرئيسي هنا.')}
             </p>
           </div>
         </DashboardShell>
       </div>
     );
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  }
 };
 
 // Basic Usage - from page lines 260-292
@@ -159,10 +157,6 @@ export const BasicUsage: Story = {
         </DashboardShell>
       </div>
     );
-  },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
   },
   parameters: {
     controls: { disable: true }
@@ -234,10 +228,6 @@ export const WithNotifications: Story = {
         </DashboardShell>
       </div>
     );
-  },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
   },
   parameters: {
     controls: { disable: true }
@@ -329,10 +319,6 @@ export const FullFeatured: Story = {
       </div>
     );
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   }
@@ -391,10 +377,6 @@ export const WithBadges: Story = {
       </div>
     );
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   }
@@ -447,10 +429,6 @@ export const WithUserAvatar: Story = {
         </DashboardShell>
       </div>
     );
-  },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
   },
   parameters: {
     controls: { disable: true }
@@ -508,10 +486,6 @@ export const WithoutNotifications: Story = {
       </div>
     );
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   }
@@ -555,103 +529,6 @@ export const MinimalNavigation: Story = {
         </DashboardShell>
       </div>
     );
-  },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
-  parameters: {
-    controls: { disable: true }
-  }
-};
-
-// RTL
-export const RTL: Story = {
-  render: () => {
-    const navItems = [
-      {
-        title: 'Dashboard',
-        titleAr: 'لوحة التحكم',
-        href: '#',
-        icon: <House className="h-5 w-5" />
-      },
-      {
-        title: 'Posts',
-        titleAr: 'المقالات',
-        href: '#',
-        icon: <FileText className="h-5 w-5" />,
-        badge: 5
-      },
-      {
-        title: 'Team',
-        titleAr: 'الفريق',
-        href: '#',
-        icon: <Users className="h-5 w-5" />
-      },
-      {
-        title: 'Analytics',
-        titleAr: 'التحليلات',
-        href: '#',
-        icon: <ChartBar className="h-5 w-5" />
-      },
-      {
-        title: 'Settings',
-        titleAr: 'الإعدادات',
-        href: '#',
-        icon: <Gear className="h-5 w-5" />
-      },
-    ];
-
-    const notifications = [
-      {
-        id: '1',
-        title: 'تعليق جديد',
-        description: 'سارة علقت على منشورك',
-        time: new Date(Date.now() - 1000 * 60 * 5).toISOString(),
-        read: false,
-        icon: <ChatCentered className="h-5 w-5" />
-      },
-      {
-        id: '2',
-        title: 'تم نشر المنشور',
-        description: 'منشورك "البداية" متاح الآن',
-        time: new Date(Date.now() - 1000 * 60 * 30).toISOString(),
-        read: true,
-        icon: <Bell className="h-5 w-5" />
-      },
-    ];
-
-    return (
-      <div className="h-[600px] overflow-hidden border rounded-lg">
-        <DashboardShell
-          relative
-          navItems={navItems}
-          user={{
-            name: 'فاطمة الزهراء',
-            email: 'fatima@example.com',
-            image: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Fatima'
-          }}
-          notifications={notifications}
-          onProfileClick={() => console.log('الملف الشخصي')}
-          onSettingsClick={() => console.log('الإعدادات')}
-          onLogout={() => console.log('تسجيل الخروج')}
-          onMarkAsRead={(id) => console.log('تحديد كمقروء:', id)}
-          onMarkAllAsRead={() => console.log('تحديد الكل كمقروء')}
-          onClearAll={() => console.log('مسح الكل')}
-        >
-          <div className="container py-6">
-            <h2 className="text-2xl font-bold mb-4">لوحة التحكم الكاملة</h2>
-            <p className="text-muted-foreground">
-              لوحة تحكم كاملة مع التنقل وقائمة المستخدم ومركز الإشعارات.
-            </p>
-          </div>
-        </DashboardShell>
-      </div>
-    );
-  },
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
   },
   parameters: {
     controls: { disable: true }

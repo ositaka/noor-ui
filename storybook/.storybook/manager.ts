@@ -1,6 +1,23 @@
 import { addons } from 'storybook/manager-api';
+import { create } from 'storybook/theming';
+
+const noorTheme = create({
+  base: 'dark',
+  brandTitle: 'Noor UI',
+  brandUrl: 'https://noorui.com',
+  brandImage: '/noorui-logo.svg',
+});
 
 addons.setConfig({
+  theme: noorTheme,
+  sidebar: {
+    filters: {
+      // Only show Docs pages in sidebar — all stories accessible via Docs page
+      hideStories: (item: { type?: string }) => {
+        return item.type !== 'story';
+      },
+    },
+  },
   toolbar: {
     title: { hidden: true },       // Hide the story title/path
     zoom: { hidden: true },        // Hide the zoom tool
@@ -9,6 +26,7 @@ addons.setConfig({
     fullscreen: { hidden: true },  // Hide the fullscreen button
     'storybook/background': { hidden: true }, // Hide the backgrounds addon tool
     'storybook/viewport': { hidden: true },   // Hide the viewport addon tool
+    'storybook/outline': { hidden: true },     // Hide the outline toggle
     // Custom global toolbar items — visible for doc readers
     direction: { hidden: false },
     theme: { hidden: false },

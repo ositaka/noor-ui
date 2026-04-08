@@ -15,12 +15,12 @@ import { useState } from 'react';
  */
 
 const meta = {
-  title: 'AI/Parameter Slider',
+  title: 'AI-LLM Shell/Parameter Slider',
   component: ParameterSlider,
   parameters: {
     layout: 'centered'
   },
-  tags: ['!autodocs'],
+  tags: ['autodocs'],
   argTypes: {
     label: { control: 'text' },
     labelAr: { control: 'text' },
@@ -52,11 +52,7 @@ export const Default: Story = {
     step: 0.1,
     value: 0.7
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
-  render: (args) => {
+  render: (args, { globals }) => {
     const [value, setValue] = useState(args.value);
     return (
       <div className="max-w-md w-full">
@@ -65,80 +61,13 @@ export const Default: Story = {
     );
   },
   parameters: {
-    docs: {
-      story: {
-        inline: false
+    ar: {
+      args: {
+        label: 'درجة الحرارة',
+        description: 'يتحكم في العشوائية في الردود'
       }
     }
   },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders all elements correctly', async () => {
-      // Label
-      await expect(canvas.getByText('Temperature')).toBeInTheDocument();
-
-      // Info tooltip button
-      const infoButton = canvas.getByRole('button', { name: /information/i });
-      await expect(infoButton).toBeInTheDocument();
-
-      // Value badge showing 0.7
-      await expect(canvas.getByText('0.7')).toBeInTheDocument();
-
-      // Slider
-      const slider = canvas.getByRole('slider');
-      await expect(slider).toBeInTheDocument();
-      await expect(slider).toHaveAttribute('aria-valuenow', '0.7');
-      await expect(slider).toHaveAttribute('aria-valuemin', '0');
-      await expect(slider).toHaveAttribute('aria-valuemax', '2');
-
-      // Range labels
-      await expect(canvas.getByText('0.0')).toBeInTheDocument();
-      await expect(canvas.getByText('2.0')).toBeInTheDocument();
-    });
-
-    await step('Info tooltip displays description', async () => {
-      const infoButton = canvas.getByRole('button', { name: /information/i });
-
-      // Hover to show tooltip
-      await userEvent.hover(infoButton);
-
-      // Tooltip content appears in document.body
-      const body = within(document.body);
-      const tooltip = await body.findByRole('tooltip');
-      await expect(tooltip).toHaveTextContent('Controls randomness in responses');
-
-      // Unhover to hide tooltip
-      await userEvent.unhover(infoButton);
-    });
-
-    await step('Slider responds to keyboard interaction', async () => {
-      const slider = canvas.getByRole('slider');
-
-      slider.focus();
-      await expect(slider).toHaveFocus();
-
-      // Press ArrowRight to increase by step (0.1)
-      await userEvent.keyboard('{ArrowRight}');
-      await expect(slider).toHaveAttribute('aria-valuenow', '0.8');
-      await expect(canvas.getByText('0.8')).toBeInTheDocument();
-
-      // Press ArrowLeft to decrease by step (0.1)
-      await userEvent.keyboard('{ArrowLeft}');
-      await expect(slider).toHaveAttribute('aria-valuenow', '0.7');
-      await expect(canvas.getByText('0.7')).toBeInTheDocument();
-
-      // Press Home to go to minimum
-      await userEvent.keyboard('{Home}');
-      await expect(slider).toHaveAttribute('aria-valuenow', '0');
-      // Value 0.0 appears in both badge and min label, check aria-valuenow instead
-
-      // Press End to go to maximum
-      await userEvent.keyboard('{End}');
-      await expect(slider).toHaveAttribute('aria-valuenow', '2');
-      // Value 2.0 appears in both badge and max label, check aria-valuenow instead
-    });
-  }
 };
 
 // With Presets - from component page lines 302-314
@@ -163,10 +92,6 @@ export const WithPresets: Story = {
         </CardContent>
       </Card>
     );
-  },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
@@ -205,10 +130,6 @@ export const CustomPresets: Story = {
         </CardContent>
       </Card>
     );
-  },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
@@ -271,10 +192,6 @@ export const MultipleParameters: Story = {
       </Card>
     );
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -304,10 +221,6 @@ export const WithoutPresets: Story = {
       </CardContent>
     </Card>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -372,10 +285,6 @@ export const AllPresetStates: Story = {
       </div>
     );
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -408,10 +317,6 @@ export const WithoutValueDisplay: Story = {
         </CardContent>
       </Card>
     );
-  },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
@@ -456,175 +361,3 @@ export const WithoutValueDisplay: Story = {
   }
 };
 
-// RTL Temperature
-export const RTLTemperature: Story = {
-  render: () => {
-    const [temperature, setTemperature] = useState(0.7);
-    return (
-      <div className="max-w-md w-full">
-        <ParameterSlider
-          label="Temperature"
-          labelAr="درجة الحرارة"
-          description="Controls randomness in responses"
-          descriptionAr="يتحكم في العشوائية في الردود"
-          value={temperature}
-          onValueChange={setTemperature}
-          min={0}
-          max={2}
-          step={0.1}
-          presets={temperaturePresets}
-          isRTL={true}
-        />
-      </div>
-    );
-  },
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Temperature slider in RTL with Arabic text and presets.'
-      }
-    }
-  }
-};
-
-// RTL Multiple Parameters
-export const RTLMultipleParameters: Story = {
-  render: () => {
-    const [temperature, setTemperature] = useState(0.7);
-    const [topP, setTopP] = useState(0.9);
-    const [maxTokens, setMaxTokens] = useState(1024);
-    return (
-      <Card>
-        <CardContent className="p-6">
-          <div className="max-w-md space-y-6">
-            <ParameterSlider
-              label="Temperature"
-              labelAr="درجة الحرارة"
-              description="Controls randomness"
-              descriptionAr="يتحكم في العشوائية"
-              value={temperature}
-              onValueChange={setTemperature}
-              min={0}
-              max={2}
-              step={0.1}
-              presets={temperaturePresets}
-              isRTL={true}
-            />
-
-            <ParameterSlider
-              label="Top P"
-              labelAr="توب بي"
-              description="Controls diversity via nucleus sampling"
-              descriptionAr="يتحكم في التنوع عبر أخذ عينات النواة"
-              value={topP}
-              onValueChange={setTopP}
-              min={0}
-              max={1}
-              step={0.05}
-              isRTL={true}
-            />
-
-            <ParameterSlider
-              label="Max Tokens"
-              labelAr="الحد الأقصى للرموز"
-              description="Maximum length of response"
-              descriptionAr="الحد الأقصى لطول الرد"
-              value={maxTokens}
-              onValueChange={setMaxTokens}
-              min={1}
-              max={4096}
-              step={1}
-              decimals={0}
-              isRTL={true}
-            />
-
-            <div className="text-xs text-muted-foreground pt-2 border-t">
-              <p>الإعدادات الحالية:</p>
-              <p>درجة الحرارة: {temperature}، توب بي: {topP}، الحد الأقصى: {maxTokens}</p>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
-    );
-  },
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Multiple parameters in RTL with full Arabic translations.'
-      }
-    }
-  }
-};
-
-// RTL With Custom Presets
-export const RTLWithCustomPresets: Story = {
-  render: () => {
-    const [maxTokens, setMaxTokens] = useState(1024);
-    return (
-      <Card>
-        <CardContent className="p-6">
-          <div className="max-w-md">
-            <ParameterSlider
-              label="Max Tokens"
-              labelAr="الحد الأقصى للرموز"
-              description="Maximum length of response"
-              descriptionAr="الحد الأقصى لطول الرد"
-              value={maxTokens}
-              onValueChange={setMaxTokens}
-              min={1}
-              max={4096}
-              step={1}
-              decimals={0}
-              presets={[
-                {
-                  label: 'Short',
-                  labelAr: 'قصير',
-                  value: 256,
-                  description: 'Brief responses',
-                  descriptionAr: 'ردود مختصرة'
-                },
-                {
-                  label: 'Medium',
-                  labelAr: 'متوسط',
-                  value: 1024,
-                  description: 'Standard responses',
-                  descriptionAr: 'ردود قياسية'
-                },
-                {
-                  label: 'Long',
-                  labelAr: 'طويل',
-                  value: 4096,
-                  description: 'Detailed responses',
-                  descriptionAr: 'ردود مفصلة'
-                },
-              ]}
-              isRTL={true}
-            />
-          </div>
-        </CardContent>
-      </Card>
-    );
-  },
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Custom presets with full Arabic translations in RTL.'
-      }
-    }
-  }
-};

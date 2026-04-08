@@ -3,15 +3,46 @@ import { CodeBlock } from './components/CodeBlock';
 
 <Meta title="Docs/Getting Started" />
 
-# Getting Started
-
-Get NoorUI up and running in your project in under five minutes. This guide covers package installation, CSS configuration, font loading, and provider setup.
+<div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+  <p style={{ fontSize: '3.5rem', marginBottom: '0.5rem', lineHeight: 1 }}>نور</p>
+  <h1 style={{ fontSize: '2rem', fontWeight: 800, marginBottom: '0.5rem' }}>Noor UI Storybook</h1>
+  <p style={{ fontSize: '1rem', color: 'var(--colors-muted-foreground, #6b7280)', maxWidth: '640px', margin: '0 auto' }}>
+    The interactive playground for Noor UI — the RTL-first, bidirectional React component library.
+  </p>
+</div>
 
 ---
 
-## 1. Install the Package
+## This Storybook vs. noorui.com
 
-Install NoorUI and its peer dependencies using your preferred package manager.
+Noor UI has two homes, each serving a different purpose:
+
+| | **[noorui.com](https://noorui.com)** | **This Storybook** |
+|---|---|---|
+| **Purpose** | Full documentation, guides, and polished examples | Interactive sandbox for exploring components |
+| **What you see** | All variants rendered in a live app context | Individual stories with Controls, Actions, and Accessibility panels |
+| **Interact** | Read and copy code | Toggle **Direction**, **Theme**, and **Mode** in real time via the toolbar above |
+| **Source of truth** | Yes — always up to date | Best effort — some RTL edge cases may differ from the live site |
+
+**Use this Storybook** to experiment with component props, test themes, and see how components behave when switching between LTR and RTL. **Use [noorui.com](https://noorui.com)** for production-ready documentation and guides.
+
+---
+
+## Using the Toolbar
+
+The toolbar at the top of every page lets you switch three global settings in real time:
+
+- **Direction** (LTR / RTL) — flips layout and switches text to Arabic
+- **Theme** (Minimal, Futuristic, Cozy, Artistic) — swaps the entire design personality
+- **Mode** (Light / Dark) — toggles color mode
+
+Every component in the sidebar responds to these controls instantly.
+
+---
+
+## Quick Start
+
+Install Noor UI and start building:
 
 <CodeBlock
   language="bash"
@@ -26,110 +57,13 @@ npm install noorui-rtl
 yarn add noorui-rtl`}
 />
 
-NoorUI requires React 18+ and is designed for use with Next.js 14+, though it works in any React project.
-
----
-
-## 2. CSS Setup
-
-You have two options for loading NoorUI styles, depending on whether you want quick setup or full Tailwind v4 integration.
-
-### Option A: Pre-compiled CSS (quickest)
-
-Import the pre-built stylesheet at the top of your application entry point. This includes all tokens, themes, and component styles.
+Import styles and set up providers:
 
 <CodeBlock
   language="tsx"
   filename="app/layout.tsx"
-  code={`import 'noorui-rtl/styles.css';`}
-/>
-
-This is the simplest approach and works well if you do not need to customize the design tokens or extend the Tailwind configuration.
-
-### Option B: Tailwind v4 Integration (recommended)
-
-For full control over tokens and theming, import the NoorUI package CSS alongside Tailwind in your global stylesheet. This approach uses Tailwind CSS v4's CSS-first configuration.
-
-<CodeBlock
-  language="css"
-  filename="styles/globals.css"
-  code={`@import "tailwindcss";
-
-/* Import NoorUI tokens, themes, and base styles */
-@import "noorui-rtl/styles.css";
-
-/* Your custom styles below */`}
-/>
-
-With this setup, all NoorUI design tokens are available as Tailwind utilities in your own components (e.g., `text-primary`, `bg-muted`, `border-border`).
-
----
-
-## 3. Font Setup
-
-NoorUI uses three font families: **Inter** for Latin text, **IBM Plex Sans Arabic** for Arabic text, and **JetBrains Mono** for code. Load them via Google Fonts.
-
-### Using CSS @import (any project)
-
-Add these imports at the top of your global CSS file, before any other imports:
-
-<CodeBlock
-  language="css"
-  filename="styles/globals.css"
-  code={`@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap');`}
-/>
-
-### Using Next.js Font Optimization
-
-If you are using Next.js, take advantage of built-in font optimization for better performance:
-
-<CodeBlock
-  language="tsx"
-  filename="app/layout.tsx"
-  code={`import { Inter, IBM_Plex_Sans_Arabic, JetBrains_Mono } from 'next/font/google';
-
-const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-inter',
-  display: 'swap',
-});
-
-const ibmPlexSansArabic = IBM_Plex_Sans_Arabic({
-  weight: ['400', '500', '600', '700'],
-  subsets: ['arabic'],
-  variable: '--font-arabic',
-  display: 'swap',
-});
-
-const jetBrainsMono = JetBrains_Mono({
-  subsets: ['latin'],
-  variable: '--font-mono',
-  display: 'swap',
-});`}
-/>
-
-Apply the font variables to your `<body>` element:
-
-<CodeBlock
-  language="tsx"
-  filename="app/layout.tsx (body tag)"
-  code={`<body className={\`\${inter.variable} \${ibmPlexSansArabic.variable} \${jetBrainsMono.variable} font-sans antialiased\`}>
-  {children}
-</body>`}
-/>
-
----
-
-## 4. Provider Setup
-
-NoorUI requires three nested providers. The order matters: **DirectionProvider** must wrap **ThemeProvider**, which wraps **IconContext.Provider**.
-
-<CodeBlock
-  language="tsx"
-  filename="app/layout.tsx"
-  code={`import { DirectionProvider } from 'noorui-rtl';
+  code={`import 'noorui-rtl/styles.css';
+import { DirectionProvider } from 'noorui-rtl';
 import { ThemeProvider } from 'next-themes';
 import { IconContext } from '@phosphor-icons/react';
 
@@ -138,14 +72,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" dir="ltr" suppressHydrationWarning>
       <body className="font-sans antialiased">
         <DirectionProvider>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-          >
-            <IconContext.Provider
-              value={{ weight: 'duotone', color: 'currentColor' }}
-            >
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+            <IconContext.Provider value={{ weight: 'duotone', color: 'currentColor' }}>
               {children}
             </IconContext.Provider>
           </ThemeProvider>
@@ -156,46 +84,31 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 }`}
 />
 
-**What each provider does:**
-
-- **DirectionProvider** -- Manages the `dir` attribute on `<html>`, tracks the current locale (`en` or `ar`), and provides the `useDirection()` hook to all child components.
-- **ThemeProvider** (next-themes) -- Handles light/dark mode switching with system preference detection. Uses class-based toggling (`.dark` class).
-- **IconContext.Provider** (@phosphor-icons/react) -- Sets default icon weight to `duotone` and color to `currentColor` so icons inherit text color automatically.
+For the full setup guide (fonts, Tailwind v4 integration, verification checklist), visit **[noorui.com/getting-started](https://noorui.com/getting-started)**.
 
 ---
 
-## 5. Your First Component
+## Documentation on noorui.com
 
-With everything configured, render a NoorUI Button to verify the setup:
+For in-depth guides and references, visit these pages on the main site:
 
-<CodeBlock
-  language="tsx"
-  filename="app/page.tsx"
-  code={`import { Button } from 'noorui-rtl';
-
-export default function Home() {
-  return (
-    <main className="flex min-h-screen items-center justify-center gap-4 p-8">
-      <Button variant="primary">Get Started</Button>
-      <Button variant="outline">Learn More</Button>
-      <Button variant="secondary">Settings</Button>
-    </main>
-  );
-}`}
-/>
-
-The buttons will automatically adapt their layout when the direction changes from LTR to RTL -- padding, icon placement, and text alignment all flip correctly.
+- **[Getting Started](https://noorui.com/getting-started)** — full installation, CSS setup, font loading, provider configuration
+- **[Components](https://noorui.com/components)** — all 77 components with usage examples and API docs
+- **[Themes](https://noorui.com/themes)** — 4 built-in themes, custom theme creation, dark mode
+- **[Design Tokens](https://noorui.com/tokens)** — colors, spacing, typography, and semantic tokens
+- **[RTL Guide](https://noorui.com/rtl-guide)** — RTL-first development principles, logical properties, bidirectional patterns
+- **[Accessibility](https://noorui.com/documentation/wcag)** — WCAG 2.2 AA compliance and keyboard navigation
+- **[Examples](https://noorui.com/examples)** — full-page app examples (Healthcare, Hotel, Banking, Esports, MyMantras)
 
 ---
 
-## 6. Verification Checklist
-
-Run through these checks to confirm everything is working:
-
-- **Fonts load correctly** -- Open your browser DevTools, go to the Network tab, and confirm that Inter, IBM Plex Sans Arabic, and JetBrains Mono font files are loaded.
-- **Theme switching works** -- If using next-themes, toggle between light and dark mode. The `.dark` class should appear on `<html>` and all component colors should update.
-- **Direction toggle works** -- Use the `useDirection()` hook or manually set `document.documentElement.dir = 'rtl'` in the console. All layout properties (`margin-inline-start`, `padding-inline-end`, etc.) should flip.
-- **Design theme applies** -- Add a `theme-cozy` class to `<html>` in DevTools and verify that border radii, colors, and spacing change.
-- **Icons render** -- Import any Phosphor icon (e.g., `import { Heart } from '@phosphor-icons/react'`) and confirm it renders in duotone style with `currentColor`.
-
-Once all checks pass, you are ready to build. Visit **[noorui.com](https://noorui.com)** for full component documentation and usage guides.
+<div style={{ textAlign: 'center', padding: '1.5rem 0', color: 'var(--colors-muted-foreground, #6b7280)', fontSize: '0.875rem' }}>
+  <p>Built for the interfaces the world actually uses.</p>
+  <p style={{ marginTop: '0.5rem' }}>
+    <a href="https://noorui.com" style={{ color: 'var(--colors-primary, #2563eb)' }}>noorui.com</a>
+    {' · '}
+    <a href="https://www.npmjs.com/package/noorui-rtl" style={{ color: 'var(--colors-primary, #2563eb)' }}>npm</a>
+    {' · '}
+    <a href="https://github.com/ositaka/noor-ui" style={{ color: 'var(--colors-primary, #2563eb)' }}>GitHub</a>
+  </p>
+</div>

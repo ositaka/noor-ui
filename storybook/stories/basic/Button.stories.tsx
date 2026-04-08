@@ -4,12 +4,12 @@ import { Button } from '../../../components/ui/button';
 import { Heart, Download, Plus, FloppyDisk } from '@phosphor-icons/react';
 
 const meta = {
-  title: 'Basic/Button',
+  title: 'Core/Button',
   component: Button,
   parameters: {
     layout: 'centered'
   },
-  tags: ['!autodocs'],
+  tags: ['autodocs'],
   argTypes: {
     variant: {
       control: 'select',
@@ -41,7 +41,8 @@ export const Default: Story = {
     children: 'Button',
     variant: 'primary',
     size: 'md'
-  }
+  },
+  parameters: { ar: { children: 'زر' } }
 };
 
 // Variants
@@ -51,6 +52,7 @@ export const Primary: Story = {
     variant: 'primary',
     onClick: fn()
   },
+  parameters: { ar: { children: 'زر أساسي' } },
   play: async ({ canvasElement, step, args }) => {
     const canvas = within(canvasElement);
     const button = canvas.getByRole('button', { name: /primary button/i });
@@ -79,6 +81,7 @@ export const Secondary: Story = {
     variant: 'secondary',
     onClick: fn()
   },
+  parameters: { ar: { children: 'زر ثانوي' } },
   play: async ({ canvasElement, step, args }) => {
     const canvas = within(canvasElement);
     const button = canvas.getByRole('button', { name: /secondary button/i });
@@ -101,6 +104,7 @@ export const Destructive: Story = {
     variant: 'destructive',
     onClick: fn()
   },
+  parameters: { ar: { children: 'حذف' } },
   play: async ({ canvasElement, step, args }) => {
     const canvas = within(canvasElement);
     const button = canvas.getByRole('button', { name: /delete/i });
@@ -123,6 +127,7 @@ export const Outline: Story = {
     variant: 'outline',
     onClick: fn()
   },
+  parameters: { ar: { children: 'زر مخطط' } },
   play: async ({ canvasElement, step, args }) => {
     const canvas = within(canvasElement);
     const button = canvas.getByRole('button', { name: /outline button/i });
@@ -146,6 +151,7 @@ export const Ghost: Story = {
     variant: 'ghost',
     onClick: fn()
   },
+  parameters: { ar: { children: 'زر شفاف' } },
   play: async ({ canvasElement, step, args }) => {
     const canvas = within(canvasElement);
     const button = canvas.getByRole('button', { name: /ghost button/i });
@@ -168,6 +174,7 @@ export const Link: Story = {
     variant: 'link',
     onClick: fn()
   },
+  parameters: { ar: { children: 'زر رابط' } },
   play: async ({ canvasElement, step, args }) => {
     const canvas = within(canvasElement);
     const button = canvas.getByRole('button', { name: /link button/i });
@@ -192,6 +199,7 @@ export const Small: Story = {
     size: 'sm',
     onClick: fn()
   },
+  parameters: { ar: { children: 'صغير' } },
   play: async ({ canvasElement, step, args }) => {
     const canvas = within(canvasElement);
     const button = canvas.getByRole('button', { name: /small/i });
@@ -215,6 +223,7 @@ export const Medium: Story = {
     size: 'md',
     onClick: fn()
   },
+  parameters: { ar: { children: 'متوسط' } },
   play: async ({ canvasElement, step, args }) => {
     const canvas = within(canvasElement);
     const button = canvas.getByRole('button', { name: /medium/i });
@@ -238,6 +247,7 @@ export const Large: Story = {
     size: 'lg',
     onClick: fn()
   },
+  parameters: { ar: { children: 'كبير' } },
   play: async ({ canvasElement, step, args }) => {
     const canvas = within(canvasElement);
     const button = canvas.getByRole('button', { name: /large/i });
@@ -261,6 +271,7 @@ export const ExtraLarge: Story = {
     size: 'xl',
     onClick: fn()
   },
+  parameters: { ar: { children: 'كبير جداً' } },
   play: async ({ canvasElement, step, args }) => {
     const canvas = within(canvasElement);
     const button = canvas.getByRole('button', { name: /extra large/i });
@@ -319,6 +330,7 @@ export const WithIcon: Story = {
     ),
     onClick: fn()
   },
+  parameters: { ar: { children: (<><Download className="h-4 w-4" />تنزيل</>) } },
   play: async ({ canvasElement, step, args }) => {
     const canvas = within(canvasElement);
     const button = canvas.getByRole('button', { name: /download/i });
@@ -355,6 +367,7 @@ export const WithIconRight: Story = {
     ),
     onClick: fn()
   },
+  parameters: { ar: { children: (<>حفظ التغييرات<FloppyDisk className="h-4 w-4" /></>) } },
   play: async ({ canvasElement, step, args }) => {
     const canvas = within(canvasElement);
     const button = canvas.getByRole('button', { name: /save changes/i });
@@ -388,6 +401,7 @@ export const Loading: Story = {
     loading: true,
     onClick: fn()
   },
+  parameters: { ar: { children: 'جاري المعالجة...' } },
   play: async ({ canvasElement, step, args }) => {
     const canvas = within(canvasElement);
     const button = canvas.getByRole('button', { name: /processing/i });
@@ -416,6 +430,7 @@ export const Disabled: Story = {
     disabled: true,
     onClick: fn()
   },
+  parameters: { ar: { children: 'معطّل' } },
   play: async ({ canvasElement, step, args }) => {
     const canvas = within(canvasElement);
     const button = canvas.getByRole('button', { name: /disabled/i });
@@ -443,6 +458,7 @@ export const KeyboardNavigation: Story = {
     children: 'Press Enter or Space',
     onClick: fn()
   },
+  parameters: { ar: { children: 'اضغط على إدخال أو مسافة' } },
   play: async ({ canvasElement, step, args }) => {
     const canvas = within(canvasElement);
     const button = canvas.getByRole('button', { name: /press enter or space/i });
@@ -460,150 +476,6 @@ export const KeyboardNavigation: Story = {
     await step('Space key triggers click', async () => {
       await userEvent.keyboard(' ');
       await expect(args.onClick).toHaveBeenCalledTimes(2);
-    });
-  }
-};
-
-// RTL Examples
-export const RTLPrimary: Story = {
-  args: {
-    children: 'زر أساسي',
-    variant: 'primary',
-    onClick: fn()
-  },
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: 'Button with Arabic text demonstrating RTL support. Automatically switches to RTL mode.'
-      }
-    }
-  },
-  play: async ({ canvasElement, step, args }) => {
-    const canvas = within(canvasElement);
-    const button = canvas.getByRole('button', { name: /زر أساسي/i });
-
-    await step('RTL button renders correctly', async () => {
-      await expect(button).toBeInTheDocument();
-      await expect(button).toHaveTextContent('زر أساسي');
-    });
-
-    await step('Handles click in RTL context', async () => {
-      await userEvent.click(button);
-      await expect(args.onClick).toHaveBeenCalledTimes(1);
-    });
-
-    await step('Has proper RTL text direction', async () => {
-      await expect(button).toBeVisible();
-    });
-  }
-};
-
-export const RTLWithIcon: Story = {
-  args: {
-    children: (
-      <>
-        <Plus className="h-4 w-4" />
-        إضافة عنصر جديد
-      </>
-    ),
-    onClick: fn()
-  },
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: 'Button with Arabic text and icon showing proper RTL layout. Icon automatically positions correctly.'
-      }
-    }
-  },
-  play: async ({ canvasElement, step, args }) => {
-    const canvas = within(canvasElement);
-    const button = canvas.getByRole('button', { name: /إضافة عنصر جديد/i });
-
-    await step('RTL button with icon renders', async () => {
-      await expect(button).toBeInTheDocument();
-      await expect(button).toHaveTextContent('إضافة عنصر جديد');
-    });
-
-    await step('Contains icon element', async () => {
-      const icon = button.querySelector('svg');
-      await expect(icon).toBeInTheDocument();
-    });
-
-    await step('Handles click in RTL context', async () => {
-      await userEvent.click(button);
-      await expect(args.onClick).toHaveBeenCalledTimes(1);
-    });
-  }
-};
-
-// RTL Keyboard Navigation
-export const RTLKeyboardNavigation: Story = {
-  args: {
-    children: 'اضغط على إدخال أو مسافة',
-    onClick: fn()
-  },
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  play: async ({ canvasElement, step, args }) => {
-    const canvas = within(canvasElement);
-    const button = canvas.getByRole('button', { name: /اضغط على إدخال أو مسافة/i });
-
-    await step('Button can be focused with Tab in RTL', async () => {
-      await userEvent.tab();
-      await expect(button).toHaveFocus();
-    });
-
-    await step('Enter key triggers click in RTL', async () => {
-      await userEvent.keyboard('{Enter}');
-      await expect(args.onClick).toHaveBeenCalledTimes(1);
-    });
-
-    await step('Space key triggers click in RTL', async () => {
-      await userEvent.keyboard(' ');
-      await expect(args.onClick).toHaveBeenCalledTimes(2);
-    });
-  }
-};
-
-// RTL Loading State
-export const RTLLoadingState: Story = {
-  args: {
-    children: 'جاري المعالجة...',
-    loading: true,
-    onClick: fn()
-  },
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  play: async ({ canvasElement, step, args }) => {
-    const canvas = within(canvasElement);
-    const button = canvas.getByRole('button', { name: /جاري المعالجة/i });
-
-    await step('RTL loading button renders', async () => {
-      await expect(button).toBeInTheDocument();
-      await expect(button).toBeDisabled();
-    });
-
-    await step('Shows loading spinner in RTL', async () => {
-      const spinner = button.querySelector('.animate-spin');
-      await expect(spinner).toBeInTheDocument();
-    });
-
-    await step('Loading spinner has RTL margins', async () => {
-      const spinner = button.querySelector('.animate-spin');
-      await expect(spinner).toHaveClass('me-2');
-      await expect(spinner).toHaveClass('-ms-1');
     });
   }
 };

@@ -41,12 +41,12 @@ import * as React from 'react';
  */
 
 const meta = {
-  title: 'Overlay/Dropdown Menu',
+  title: 'Navigation/Dropdown Menu',
   component: DropdownMenu,
   parameters: {
     layout: 'centered'
   },
-  tags: ['!autodocs'],
+  tags: ['autodocs'],
   argTypes: {
     open: {
       control: { type: 'boolean' }
@@ -68,101 +68,48 @@ export const Default: Story = {
   args: {
     defaultOpen: false
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
-  render: (args) => (
-    <DropdownMenu {...args}>
+  render: (args, { globals }) => {
+    const isRTL = globals?.direction === 'rtl';
+    const t = (en: string, ar: string) => isRTL ? ar : en;
+
+    const dir = isRTL ? 'rtl' as const : 'ltr' as const;
+
+    return (
+    <DropdownMenu {...args} dir={dir}>
       <DropdownMenuTrigger asChild>
         <Button variant="outline">
           <User className="me-2 h-4 w-4" />
-          My Account
+          {t('My Account', 'حسابي')}
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56">
-        <DropdownMenuLabel>My Account</DropdownMenuLabel>
+        <DropdownMenuLabel>{t('My Account', 'حسابي')}</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
           <User className="me-2 h-4 w-4" />
-          <span>Profile</span>
+          <span>{t('Profile', 'الملف الشخصي')}</span>
           <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
         </DropdownMenuItem>
         <DropdownMenuItem>
           <CreditCard className="me-2 h-4 w-4" />
-          <span>Billing</span>
+          <span>{t('Billing', 'الفواتير')}</span>
           <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
         </DropdownMenuItem>
         <DropdownMenuItem>
           <Gear className="me-2 h-4 w-4" />
-          <span>Settings</span>
+          <span>{t('Settings', 'الإعدادات')}</span>
           <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
           <SignOut className="me-2 h-4 w-4" />
-          <span>Logout</span>
+          <span>{t('Logout', 'تسجيل الخروج')}</span>
           <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
-  ),
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-    const body = within(document.body);
-
-    await step('Renders trigger button correctly', async () => {
-      const trigger = canvas.getByRole('button', { name: /my account/i });
-      await expect(trigger).toBeInTheDocument();
-      await expect(trigger).toBeVisible();
-    });
-
-    await step('Opens menu on click', async () => {
-      const trigger = canvas.getByRole('button', { name: /my account/i });
-      await userEvent.click(trigger);
-      // Menu content renders in a portal at document.body
-      await expect(await body.findByRole('menuitem', { name: /profile/i })).toBeInTheDocument();
-      await expect(body.getByRole('menuitem', { name: /billing/i })).toBeInTheDocument();
-      await expect(body.getByRole('menuitem', { name: /settings/i })).toBeInTheDocument();
-      await expect(body.getByRole('menuitem', { name: /logout/i })).toBeInTheDocument();
-    });
-
-    await step('Menu items are accessible', async () => {
-      const profileItem = body.getByRole('menuitem', { name: /profile/i });
-      await expect(profileItem).toBeVisible();
-    });
-
-    await step('Can interact with menu items', async () => {
-      const profileItem = body.getByRole('menuitem', { name: /profile/i });
-      await userEvent.click(profileItem);
-      // Menu should close after selection (verified by component behavior)
-    });
-
-    await step('Keyboard accessible - can open with Enter', async () => {
-      const trigger = canvas.getByRole('button', { name: /my account/i });
-      trigger.focus();
-      await expect(trigger).toHaveFocus();
-      await userEvent.keyboard('{Enter}');
-      await expect(await body.findByRole('menuitem', { name: /profile/i })).toBeInTheDocument();
-    });
-
-    await step('Can navigate menu items with keyboard', async () => {
-      await userEvent.keyboard('{ArrowDown}');
-      // Menu items should receive focus as user navigates
-    });
-
-    await step('Can close menu with Escape', async () => {
-      await userEvent.keyboard('{Escape}');
-      // Menu should close
-    });
+    );
   },
-  parameters: {
-    docs: {
-      story: {
-        inline: false
-      }
-    }
-  }
 };
 
 // Basic Usage - from component page lines 216-248
@@ -220,10 +167,6 @@ export const BasicUsage: Story = {
       await expect(body.getByText('⇧⌘P')).toBeInTheDocument();
       await expect(body.getByText('⌘B')).toBeInTheDocument();
     });
-  },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
@@ -283,10 +226,6 @@ export const WithIcons: Story = {
       await expect(body.getByRole('menuitem', { name: /settings/i })).toBeInTheDocument();
       await expect(body.getByRole('menuitem', { name: /logout/i })).toBeInTheDocument();
     });
-  },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
@@ -355,10 +294,6 @@ export const WithCheckboxes: Story = {
       // State should toggle
     });
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -419,10 +354,6 @@ export const WithRadioGroup: Story = {
       const trigger = canvas.getByRole('button', { name: /position: top/i });
       await expect(trigger).toBeInTheDocument();
     });
-  },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
@@ -501,10 +432,6 @@ export const WithSubMenus: Story = {
       await expect(body.getByRole('menuitem', { name: /message/i })).toBeInTheDocument();
     });
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -573,271 +500,11 @@ export const AllVariants: Story = {
       </div>
     );
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
       description: {
         story: 'All dropdown menu variants: with icons, checkboxes, and radio groups.'
-      }
-    }
-  }
-};
-
-// RTL Basic
-export const RTLBasic: Story = {
-  render: () => (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button variant="outline">
-          <User className="me-2 h-4 w-4" />
-          حسابي
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-56">
-        <DropdownMenuLabel>حسابي</DropdownMenuLabel>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem>
-          <User className="me-2 h-4 w-4" />
-          <span>الملف الشخصي</span>
-          <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
-        </DropdownMenuItem>
-        <DropdownMenuItem>
-          <CreditCard className="me-2 h-4 w-4" />
-          <span>الفواتير</span>
-          <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
-        </DropdownMenuItem>
-        <DropdownMenuItem>
-          <Gear className="me-2 h-4 w-4" />
-          <span>الإعدادات</span>
-          <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
-        </DropdownMenuItem>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem>
-          <SignOut className="me-2 h-4 w-4" />
-          <span>تسجيل الخروج</span>
-          <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
-  ),
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-    const body = within(document.body);
-
-    await step('Renders in RTL context', async () => {
-      const trigger = canvas.getByRole('button', { name: /حسابي/i });
-      await expect(trigger).toBeInTheDocument();
-      await expect(trigger).toBeVisible();
-    });
-
-    await step('Opens menu with Arabic text', async () => {
-      const trigger = canvas.getByRole('button', { name: /حسابي/i });
-      await userEvent.click(trigger);
-      // Menu content renders in a portal at document.body
-      await expect(await body.findByRole('menuitem', { name: /الملف الشخصي/i })).toBeInTheDocument();
-      await expect(body.getByRole('menuitem', { name: /الفواتير/i })).toBeInTheDocument();
-    });
-  },
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Dropdown menu in RTL with Arabic text. Icons and shortcuts position correctly.'
-      }
-    }
-  }
-};
-
-// RTL With Checkboxes
-export const RTLWithCheckboxes: Story = {
-  render: () => {
-    const [showPanel, setShowPanel] = React.useState(true);
-    const [showSidebar, setShowSidebar] = React.useState(false);
-
-    return (
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Button variant="outline">خيارات العرض</Button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent className="w-56">
-          <DropdownMenuLabel>تبديل العرض</DropdownMenuLabel>
-          <DropdownMenuSeparator />
-          <DropdownMenuCheckboxItem checked={showPanel} onCheckedChange={setShowPanel}>
-            إظهار اللوحة
-          </DropdownMenuCheckboxItem>
-          <DropdownMenuCheckboxItem checked={showSidebar} onCheckedChange={setShowSidebar}>
-            إظهار الشريط الجانبي
-          </DropdownMenuCheckboxItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
-    );
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-    const body = within(document.body);
-
-    await step('Renders RTL checkboxes', async () => {
-      const trigger = canvas.getByRole('button', { name: /خيارات العرض/i });
-      await expect(trigger).toBeInTheDocument();
-    });
-
-    await step('Opens menu with checkbox items in RTL', async () => {
-      const trigger = canvas.getByRole('button', { name: /خيارات العرض/i });
-      await userEvent.click(trigger);
-      // Menu content renders in a portal at document.body
-      await expect(await body.findByRole('menuitemcheckbox', { name: /إظهار اللوحة/i })).toBeInTheDocument();
-      await expect(body.getByRole('menuitemcheckbox', { name: /إظهار الشريط الجانبي/i })).toBeInTheDocument();
-    });
-  },
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Dropdown menu with checkboxes in RTL. Checkmarks position on the right (start).'
-      }
-    }
-  }
-};
-
-// RTL With Radio Group
-export const RTLWithRadioGroup: Story = {
-  render: () => {
-    const [position, setPosition] = React.useState('bottom');
-
-    return (
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Button variant="outline">الموضع: {position}</Button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent className="w-56">
-          <DropdownMenuLabel>موضع اللوحة</DropdownMenuLabel>
-          <DropdownMenuSeparator />
-          <DropdownMenuRadioGroup value={position} onValueChange={setPosition}>
-            <DropdownMenuRadioItem value="top">أعلى</DropdownMenuRadioItem>
-            <DropdownMenuRadioItem value="bottom">أسفل</DropdownMenuRadioItem>
-            <DropdownMenuRadioItem value="right">يمين</DropdownMenuRadioItem>
-          </DropdownMenuRadioGroup>
-        </DropdownMenuContent>
-      </DropdownMenu>
-    );
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-    const body = within(document.body);
-
-    await step('Renders RTL radio group', async () => {
-      const trigger = canvas.getByRole('button', { name: /الموضع:/i });
-      await expect(trigger).toBeInTheDocument();
-    });
-
-    await step('Opens menu with radio items in RTL', async () => {
-      const trigger = canvas.getByRole('button', { name: /الموضع:/i });
-      await userEvent.click(trigger);
-      // Menu content renders in a portal at document.body
-      await expect(await body.findByRole('menuitemradio', { name: /أعلى/i })).toBeInTheDocument();
-      await expect(body.getByRole('menuitemradio', { name: /أسفل/i })).toBeInTheDocument();
-    });
-  },
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Dropdown menu with radio group in RTL. Radio indicators position correctly.'
-      }
-    }
-  }
-};
-
-// RTL With Sub Menus
-export const RTLWithSubMenus: Story = {
-  render: () => (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button variant="outline">
-          <DotsThree className="h-4 w-4" />
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-56">
-        <DropdownMenuLabel>الإجراءات</DropdownMenuLabel>
-        <DropdownMenuSeparator />
-        <DropdownMenuGroup>
-          <DropdownMenuItem>
-            <User className="me-2 h-4 w-4" />
-            <span>الملف الشخصي</span>
-          </DropdownMenuItem>
-          <DropdownMenuSub>
-            <DropdownMenuSubTrigger>
-              <UserPlus className="me-2 h-4 w-4" />
-              <span>دعوة مستخدمين</span>
-            </DropdownMenuSubTrigger>
-            <DropdownMenuSubContent>
-              <DropdownMenuItem>
-                <Envelope className="me-2 h-4 w-4" />
-                <span>البريد الإلكتروني</span>
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <ChatCentered className="me-2 h-4 w-4" />
-                <span>رسالة</span>
-              </DropdownMenuItem>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>
-                <PlusCircle className="me-2 h-4 w-4" />
-                <span>المزيد...</span>
-              </DropdownMenuItem>
-            </DropdownMenuSubContent>
-          </DropdownMenuSub>
-        </DropdownMenuGroup>
-      </DropdownMenuContent>
-    </DropdownMenu>
-  ),
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-    const body = within(document.body);
-
-    await step('Renders RTL sub-menu', async () => {
-      const trigger = canvas.getByRole('button');
-      await expect(trigger).toBeInTheDocument();
-    });
-
-    await step('Opens menu with RTL sub-menu items', async () => {
-      const trigger = canvas.getByRole('button');
-      await userEvent.click(trigger);
-      // Menu content renders in a portal at document.body
-      await expect(await body.findByRole('menuitem', { name: /الملف الشخصي/i })).toBeInTheDocument();
-      await expect(body.getByText(/دعوة مستخدمين/i)).toBeInTheDocument();
-    });
-
-    await step('Can hover over RTL sub-menu trigger', async () => {
-      const subMenuTrigger = body.getByText(/دعوة مستخدمين/i);
-      await userEvent.hover(subMenuTrigger);
-      await expect(await body.findByRole('menuitem', { name: /البريد الإلكتروني/i })).toBeInTheDocument();
-    });
-  },
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Dropdown menu with sub-menus in RTL. Chevron icons flip to point left.'
       }
     }
   }

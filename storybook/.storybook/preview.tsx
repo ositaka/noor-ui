@@ -48,27 +48,30 @@ const preview: Preview = {
     },
     // Enable docs for all stories
     docs: {
-      codePanel: true, // Enable Code panel in Canvas view
+      codePanel: true,
       source: {
         type: 'dynamic',
       },
     },
     // Default to Docs view and configure sidebar
-    viewMode: 'docs',
+    viewMode: 'story',
     options: {
       storySort: {
         method: 'alphabetical',
         order: [
           'Docs',
-          ['Welcome', 'Getting Started', 'Colors', 'Theming', 'RTL Development'],
-          'Basic',
-          'Forms',
-          'Navigation & Layout',
-          'Data Display',
-          'Overlay',
-          'Feedback',
+          ['Getting Started'],
           'GCC-Specific',
-          'AI',
+          'Core',
+          'Forms',
+          'Advanced Forms & Inputs',
+          'Data Display',
+          'Feedback',
+          'Navigation',
+          'Overlays & Layout',
+          'Layout & Shell',
+          'User Interface',
+          'AI-LLM Shell',
         ],
       },
     },
@@ -76,21 +79,21 @@ const preview: Preview = {
 
   globalTypes: {
     direction: {
-      description: 'Text direction',
+      description: 'Text direction and language',
       defaultValue: 'ltr',
       toolbar: {
         title: 'Direction',
         icon: 'transfer',
         items: [
-          { value: 'ltr', title: 'LTR', icon: 'arrowleft' },
-          { value: 'rtl', title: 'RTL', icon: 'arrowright' },
+          { value: 'ltr', title: 'English (LTR)', icon: 'transfer' },
+          { value: 'rtl', title: 'العربية (RTL)', icon: 'transfer' },
         ],
         dynamicTitle: true,
       },
     },
     theme: {
       description: 'Design theme',
-      defaultValue: 'minimal',
+      defaultValue: 'cozy',
       toolbar: {
         title: 'Theme',
         icon: 'paintbrush',
@@ -117,17 +120,8 @@ const preview: Preview = {
       },
     },
     locale: {
-      description: 'Locale',
+      description: 'Locale (derived from direction)',
       defaultValue: 'en',
-      toolbar: {
-        title: 'Locale',
-        icon: 'globe',
-        items: [
-          { value: 'en', title: 'English', icon: 'globe' },
-          { value: 'ar', title: 'العربية', icon: 'globe' },
-        ],
-        dynamicTitle: true,
-      },
     },
   },
 
@@ -136,21 +130,40 @@ const preview: Preview = {
       const direction = context.globals.direction || 'ltr';
       const theme = context.globals.theme || 'minimal';
       const mode = context.globals.mode || 'light';
-      const locale = context.globals.locale || 'en';
+      const locale = direction === 'rtl' ? 'ar' : 'en';
 
-      // Update document attributes (direction, theme, mode, locale)
+      // Apply Arabic arg overrides when direction is RTL
+      const arOverrides = context.parameters?.ar?.args ?? context.parameters?.ar;
+      if (direction === 'rtl' && arOverrides) {
+        context.args = { ...context.args, ...arOverrides };
+      }
+
+      // Update document attributes (theme, mode) — NOT dir, which stays scoped to the story wrapper
       React.useEffect(() => {
-        document.documentElement.setAttribute('dir', direction);
-        document.documentElement.setAttribute('lang', locale);
         document.documentElement.classList.toggle('dark', mode === 'dark');
         applyThemeToDocument(theme);
-      }, [direction, locale, mode, theme]);
+      }, [mode, theme]);
+
+      // Auto-set dir on Radix portaled components (they render outside the story wrapper)
+      React.useEffect(() => {
+        const setDirOnPortals = () => {
+          document.querySelectorAll('[data-radix-popper-content-wrapper], [data-radix-portal], [role="dialog"]').forEach(el => {
+            if (el.getAttribute('dir') !== direction) {
+              el.setAttribute('dir', direction);
+            }
+          });
+        };
+        setDirOnPortals();
+        const observer = new MutationObserver(setDirOnPortals);
+        observer.observe(document.body, { childList: true, subtree: true });
+        return () => observer.disconnect();
+      }, [direction]);
 
       return (
-        <DirectionProvider>
+        <DirectionProvider controlledDirection={direction as 'ltr' | 'rtl'} controlledLocale={locale as 'en' | 'ar'}>
           <IconContext.Provider value={{ weight: 'duotone', color: 'currentColor' }}>
             <ThemeProvider attribute="class" defaultTheme={mode} forcedTheme={mode} enableSystem={false}>
-              <div dir={direction} style={{ minHeight: '100%' }}>
+              <div dir={direction} lang={locale} style={{ minHeight: '100%' }}>
                 <Story />
                 <Toaster />
               </div>

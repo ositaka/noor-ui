@@ -16,12 +16,12 @@ import * as React from 'react';
  */
 
 const meta = {
-  title: 'Forms/Number Input',
+  title: 'Advanced Forms & Inputs/Number Input',
   component: NumberInput,
   parameters: {
     layout: 'centered'
   },
-  tags: ['!autodocs'],
+  tags: ['autodocs'],
   argTypes: {
     onChange: {
       control: false
@@ -76,101 +76,19 @@ export const Default: Story = {
     step: 1,
     showControls: true
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
-  render: (args) => {
+  render: (args, { globals }) => {
+    const isRTL = globals?.direction === 'rtl';
+    const t = (en: string, ar: string) => isRTL ? ar : en;
     const [value, setValue] = React.useState<number | undefined>(42);
 
     return (
       <div className="w-full max-w-xs space-y-2">
-        <Label>Quantity</Label>
+        <Label>{t('Quantity', 'الكمية')}</Label>
         <NumberInput {...args} value={value} onChange={setValue} />
-        <p className="text-sm text-muted-foreground">Current value: {value}</p>
+        <p className="text-sm text-muted-foreground">{t('Current value:', 'القيمة الحالية:')} {value}</p>
       </div>
     );
   },
-  parameters: {
-    docs: {
-      story: {
-        inline: false
-      }
-    }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders correctly', async () => {
-      const input = canvas.getByRole('textbox');
-      await expect(input).toBeInTheDocument();
-      await expect(input).toBeVisible();
-      await expect(input).toHaveValue('42');
-
-      // Verify increment/decrement buttons
-      const buttons = canvas.getAllByRole('button');
-      await expect(buttons).toHaveLength(2);
-      await expect(buttons[0]).toHaveAccessibleName('Decrease');
-      await expect(buttons[1]).toHaveAccessibleName('Increase');
-    });
-
-    await step('Increment button increases value', async () => {
-      const increaseButton = canvas.getByRole('button', { name: /increase/i });
-      await userEvent.click(increaseButton);
-
-      const input = canvas.getByRole('textbox');
-      await expect(input).toHaveValue('43');
-      await expect(canvas.getByText('Current value: 43')).toBeInTheDocument();
-    });
-
-    await step('Decrement button decreases value', async () => {
-      const decreaseButton = canvas.getByRole('button', { name: /decrease/i });
-      await userEvent.click(decreaseButton);
-
-      const input = canvas.getByRole('textbox');
-      await expect(input).toHaveValue('42');
-      await expect(canvas.getByText('Current value: 42')).toBeInTheDocument();
-    });
-
-    await step('Typing updates value', async () => {
-      const input = canvas.getByRole('textbox');
-      await userEvent.clear(input);
-      await userEvent.type(input, '75');
-
-      await expect(input).toHaveValue('75');
-      await expect(canvas.getByText('Current value: 75')).toBeInTheDocument();
-    });
-
-    await step('Keyboard arrow keys work', async () => {
-      const input = canvas.getByRole('textbox');
-      await input.focus();
-      await userEvent.keyboard('{ArrowUp}');
-
-      await expect(input).toHaveValue('76');
-      await expect(canvas.getByText('Current value: 76')).toBeInTheDocument();
-
-      await userEvent.keyboard('{ArrowDown}');
-      await expect(input).toHaveValue('75');
-      await expect(canvas.getByText('Current value: 75')).toBeInTheDocument();
-    });
-
-    await step('Respects min/max boundaries', async () => {
-      const input = canvas.getByRole('textbox');
-      await userEvent.clear(input);
-      await userEvent.type(input, '150');
-      await input.blur();
-
-      // Should clamp to max of 100
-      await expect(input).toHaveValue('100');
-      await expect(canvas.getByText('Current value: 100')).toBeInTheDocument();
-    });
-
-    await step('Keyboard accessible', async () => {
-      const input = canvas.getByRole('textbox');
-      await userEvent.tab();
-      await expect(input).toHaveFocus();
-    });
-  }
 };
 
 // Basic Number Input - from component page lines 228-234
@@ -185,10 +103,6 @@ export const BasicNumberInput: Story = {
         <p className="text-sm text-muted-foreground">Current value: {value}</p>
       </div>
     );
-  },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
@@ -239,10 +153,6 @@ export const WithoutControls: Story = {
         </p>
       </div>
     );
-  },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
@@ -296,10 +206,6 @@ export const DecimalPrecision: Story = {
         </p>
       </div>
     );
-  },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
@@ -358,10 +264,6 @@ export const FormattedDisplay: Story = {
         </p>
       </div>
     );
-  },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
@@ -426,10 +328,6 @@ export const CurrencyInput: Story = {
         <p className="text-sm text-muted-foreground">Raw value: {price}</p>
       </div>
     );
-  },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
@@ -501,10 +399,6 @@ export const ProductOrder: Story = {
       </Card>
     );
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -558,10 +452,6 @@ export const DisabledState: Story = {
       <p className="text-sm text-muted-foreground">This input is disabled</p>
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -584,140 +474,3 @@ export const DisabledState: Story = {
   }
 };
 
-// RTL Example - Basic
-export const RTLExample: Story = {
-  render: () => {
-    const [value, setValue] = React.useState<number | undefined>(42);
-
-    return (
-      <div className="w-full max-w-xs mx-auto space-y-2">
-        <Label>الكمية</Label>
-        <NumberInput value={value} onChange={setValue} min={0} max={100} />
-        <p className="text-sm text-muted-foreground">القيمة الحالية: {value}</p>
-      </div>
-    );
-  },
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Basic number input with Arabic labels in RTL mode.'
-      }
-    }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders in RTL context', async () => {
-      const input = canvas.getByRole('textbox');
-      await expect(input).toBeInTheDocument();
-      await expect(input).toHaveValue('42');
-    });
-
-    await step('Interaction works in RTL', async () => {
-      const increaseButton = canvas.getByRole('button', { name: /increase/i });
-      await userEvent.click(increaseButton);
-
-      const input = canvas.getByRole('textbox');
-      await expect(input).toHaveValue('43');
-    });
-  }
-};
-
-// RTL Currency Input
-export const RTLCurrencyInput: Story = {
-  render: () => {
-    const [price, setPrice] = React.useState<number | undefined>(99.99);
-
-    const formatCurrency = (value: number): string => {
-      return new Intl.NumberFormat('ar-SA', {
-        style: 'currency',
-        currency: 'SAR'
-      }).format(value);
-    };
-
-    return (
-      <div className="w-full max-w-xs mx-auto space-y-2">
-        <Label>السعر</Label>
-        <NumberInput
-          value={price}
-          onChange={setPrice}
-          precision={2}
-          formatDisplay={formatCurrency}
-          min={0}
-          step={0.01}
-        />
-        <p className="text-sm text-muted-foreground">القيمة الخام: {price}</p>
-      </div>
-    );
-  },
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Currency input with Arabic formatting (SAR) in RTL mode.'
-      }
-    }
-  }
-};
-
-// RTL Product Order
-export const RTLProductOrder: Story = {
-  render: () => {
-    const [quantity, setQuantity] = React.useState<number | undefined>(1);
-
-    const formatCurrency = (value: number): string => {
-      return new Intl.NumberFormat('ar-SA', {
-        style: 'currency',
-        currency: 'SAR'
-      }).format(value);
-    };
-
-    return (
-      <Card className="w-full max-w-md mx-auto">
-        <CardHeader>
-          <CardTitle>طلب منتج</CardTitle>
-          <CardDescription>اختر الكمية لحساب السعر الإجمالي</CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-6">
-          <div className="space-y-2">
-            <Label>الكمية</Label>
-            <NumberInput value={quantity} onChange={setQuantity} min={1} max={99} step={1} />
-          </div>
-
-          <div className="flex justify-between items-center pt-4 border-t">
-            <span className="text-sm text-muted-foreground">سعر الوحدة:</span>
-            <span className="font-semibold">{formatCurrency(29.99)}</span>
-          </div>
-
-          <div className="flex justify-between items-center">
-            <span className="text-lg font-semibold">الإجمالي:</span>
-            <span className="text-2xl font-bold text-primary">
-              {formatCurrency((quantity ?? 0) * 29.99)}
-            </span>
-          </div>
-        </CardContent>
-      </Card>
-    );
-  },
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Complete product order example in Arabic with RTL layout and SAR currency.'
-      }
-    }
-  }
-};

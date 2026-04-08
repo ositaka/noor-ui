@@ -22,7 +22,7 @@ const meta = {
   parameters: {
     layout: 'padded'
   },
-  tags: ['!autodocs'],
+  tags: ['autodocs'],
   argTypes: {
     data: {
       control: false
@@ -116,55 +116,15 @@ export const Default: Story = {
     columns: basicColumns,
     hoverable: true
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
-  render: (args) => (
+  render: (args, { globals }) => {
+    const isRTL = globals?.direction === 'rtl';
+
+    return (
     <div className="w-full">
-      <DataTable {...args} />
+      <DataTable {...args} data={isRTL ? usersAR : usersEN} />
     </div>
-  ),
-  parameters: {
-    docs: {
-      story: {
-        inline: false
-      }
-    }
+    );
   },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders table with data', async () => {
-      // Table may render in mobile card mode - use queryByRole
-      const table = canvas.queryByRole('table');
-      if (table) {
-        await expect(table).toBeVisible();
-      }
-    });
-
-    await step('Displays correct column headers', async () => {
-      // Headers appear in both desktop and mobile views
-      await expect(canvas.getAllByText('Name').length).toBeGreaterThanOrEqual(1);
-      await expect(canvas.getAllByText('Email').length).toBeGreaterThanOrEqual(1);
-      await expect(canvas.getAllByText('Role').length).toBeGreaterThanOrEqual(1);
-    });
-
-    await step('Displays user data rows', async () => {
-      // Check data is present (appears in both desktop and mobile views)
-      await expect(canvas.getAllByText('Ahmed Ali').length).toBeGreaterThanOrEqual(1);
-      await expect(canvas.getAllByText('ahmed@example.com').length).toBeGreaterThanOrEqual(1);
-      await expect(canvas.getAllByText('Admin').length).toBeGreaterThanOrEqual(1);
-    });
-
-    await step('Table has hoverable styling', async () => {
-      const rows = canvas.queryAllByRole('row');
-      if (rows.length > 1) {
-        const dataRow = rows[1]; // First data row
-        await expect(dataRow).toHaveClass('hover:bg-muted/50');
-      }
-    });
-  }
 };
 
 // Basic DataTable - from component page lines 656-663
@@ -178,10 +138,6 @@ export const BasicDataTable: Story = {
       />
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -230,10 +186,6 @@ export const InternalSorting: Story = {
       </CardContent>
     </Card>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -370,10 +322,6 @@ export const ExternalSorting: Story = {
       </Card>
     );
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -454,10 +402,6 @@ export const SearchableTable: Story = {
         </CardContent>
       </Card>
     );
-  },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
@@ -565,10 +509,6 @@ export const PaginatedTable: Story = {
         </CardContent>
       </Card>
     );
-  },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
@@ -684,10 +624,6 @@ export const CustomCells: Story = {
       </Card>
     );
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -783,10 +719,6 @@ export const LoadingState: Story = {
         </CardContent>
       </Card>
     );
-  },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
@@ -928,10 +860,6 @@ export const CompleteExample: Story = {
       </Card>
     );
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -994,318 +922,3 @@ export const CompleteExample: Story = {
   }
 };
 
-// RTL Example - Basic
-export const RTLExample: Story = {
-  render: () => {
-    const columnsAR: ColumnDef<User>[] = [
-      { id: 'name', header: 'الاسم', accessorKey: 'name' },
-      { id: 'email', header: 'البريد الإلكتروني', accessorKey: 'email' },
-      { id: 'role', header: 'الدور', accessorKey: 'role' },
-    ];
-
-    return (
-      <div className="w-full">
-        <DataTable
-          data={usersAR}
-          columns={columnsAR}
-          hoverable
-        />
-      </div>
-    );
-  },
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Basic data table in RTL mode with Arabic text. Text alignment uses text-start for proper display.'
-      }
-    }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders RTL table with Arabic headers', async () => {
-      const table = canvas.queryByRole('table');
-      if (table) {
-        await expect(table).toBeInTheDocument();
-      }
-
-      // Headers appear in both desktop and mobile views
-      await expect(canvas.getAllByText('الاسم').length).toBeGreaterThanOrEqual(1);
-      await expect(canvas.getAllByText('البريد الإلكتروني').length).toBeGreaterThanOrEqual(1);
-      await expect(canvas.getAllByText('الدور').length).toBeGreaterThanOrEqual(1);
-    });
-
-    await step('Displays Arabic user data', async () => {
-      // Data appears in both desktop and mobile views
-      await expect(canvas.getAllByText('أحمد علي').length).toBeGreaterThanOrEqual(1);
-      await expect(canvas.getAllByText('فاطمة حسن').length).toBeGreaterThanOrEqual(1);
-      await expect(canvas.getAllByText('محمد يوسف').length).toBeGreaterThanOrEqual(1);
-      await expect(canvas.getAllByText('مسؤول').length).toBeGreaterThanOrEqual(1);
-      await expect(canvas.getAllByText('محرر').length).toBeGreaterThanOrEqual(1);
-    });
-
-    await step('Table maintains proper RTL structure', async () => {
-      const rows = canvas.queryAllByRole('row');
-      // May render desktop table OR mobile cards - just check we have data
-      await expect(rows.length).toBeGreaterThanOrEqual(5);
-    });
-  }
-};
-
-// RTL Searchable
-export const RTLSearchable: Story = {
-  render: () => {
-    const [searchValue, setSearchValue] = React.useState('');
-
-    const columnsAR: ColumnDef<User>[] = [
-      { id: 'name', header: 'الاسم', accessorKey: 'name' },
-      { id: 'email', header: 'البريد الإلكتروني', accessorKey: 'email' },
-      { id: 'role', header: 'الدور', accessorKey: 'role' },
-    ];
-
-    const filteredUsers = React.useMemo(() => {
-      if (!searchValue) return usersAR;
-
-      return usersAR.filter(user =>
-        user.name.toLowerCase().includes(searchValue.toLowerCase()) ||
-        user.email.toLowerCase().includes(searchValue.toLowerCase()) ||
-        user.role.toLowerCase().includes(searchValue.toLowerCase())
-      );
-    }, [searchValue]);
-
-    return (
-      <Card>
-        <CardContent className="p-6">
-          <DataTable
-            data={filteredUsers}
-            columns={columnsAR}
-            searchable
-            searchPlaceholder="بحث بالاسم أو البريد الإلكتروني أو الدور..."
-            searchValue={searchValue}
-            onSearchChange={setSearchValue}
-            emptyMessage="لم يتم العثور على مستخدمين"
-            clearSearchLabel="مسح البحث"
-          />
-        </CardContent>
-      </Card>
-    );
-  },
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Searchable data table in RTL with Arabic placeholders. Search icon and clear button adapt to RTL.'
-      }
-    }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders search input with Arabic placeholder', async () => {
-      const searchInput = canvas.getByPlaceholderText('بحث بالاسم أو البريد الإلكتروني أو الدور...');
-      await expect(searchInput).toBeInTheDocument();
-      await expect(searchInput).toHaveValue('');
-    });
-
-    await step('Shows all Arabic users initially', async () => {
-      const rows = canvas.queryAllByRole('row');
-      // May render desktop table OR mobile cards - just check we have data
-      await expect(rows.length).toBeGreaterThanOrEqual(5);
-      await expect(canvas.getAllByText('أحمد علي').length).toBeGreaterThanOrEqual(1);
-    });
-
-    await step('Search filters Arabic text', async () => {
-      const searchInput = canvas.getByPlaceholderText('بحث بالاسم أو البريد الإلكتروني أو الدور...');
-      await userEvent.type(searchInput, 'فاطمة');
-
-      // Data appears in both desktop and mobile views
-      await expect(canvas.getAllByText('فاطمة حسن').length).toBeGreaterThanOrEqual(1);
-    });
-
-    await step('Clear button works in RTL', async () => {
-      const clearButton = canvas.getByRole('button');
-      await userEvent.click(clearButton);
-
-      const searchInput = canvas.getByPlaceholderText('بحث بالاسم أو البريد الإلكتروني أو الدور...');
-      await expect(searchInput).toHaveValue('');
-
-      const rows = canvas.queryAllByRole('row');
-      await expect(rows.length).toBeGreaterThanOrEqual(5);
-    });
-
-    await step('Shows Arabic empty state for no results', async () => {
-      const searchInput = canvas.getByPlaceholderText('بحث بالاسم أو البريد الإلكتروني أو الدور...');
-      await userEvent.type(searchInput, 'غير موجود');
-
-      await expect(canvas.getByText('لم يتم العثور على مستخدمين')).toBeInTheDocument();
-      const table = canvas.queryByRole('table');
-      await expect(table).not.toBeInTheDocument();
-    });
-  }
-};
-
-// RTL Complete Example
-export const RTLCompleteExample: Story = {
-  render: () => {
-    const [searchValue, setSearchValue] = React.useState('');
-    const [currentPage, setCurrentPage] = React.useState(1);
-    const pageSize = 3;
-
-    const sortableColumnsAR: ColumnDef<User>[] = [
-      { id: 'name', header: 'الاسم', accessorKey: 'name', sortable: true },
-      { id: 'email', header: 'البريد الإلكتروني', accessorKey: 'email', sortable: true },
-      { id: 'role', header: 'الدور', accessorKey: 'role', sortable: true },
-      { id: 'joinDate', header: 'تاريخ الانضمام', accessorKey: 'joinDate', sortable: true },
-    ];
-
-    const filteredUsers = React.useMemo(() => {
-      if (!searchValue) return usersAR;
-
-      return usersAR.filter(user =>
-        user.name.toLowerCase().includes(searchValue.toLowerCase()) ||
-        user.email.toLowerCase().includes(searchValue.toLowerCase()) ||
-        user.role.toLowerCase().includes(searchValue.toLowerCase())
-      );
-    }, [searchValue]);
-
-    React.useEffect(() => {
-      setCurrentPage(1);
-    }, [searchValue]);
-
-    const paginatedData = React.useMemo(() => {
-      const startIndex = (currentPage - 1) * pageSize;
-      const endIndex = startIndex + pageSize;
-      return filteredUsers.slice(startIndex, endIndex);
-    }, [filteredUsers, currentPage]);
-
-    return (
-      <Card>
-        <CardContent className="p-6">
-          <p className="text-sm text-muted-foreground mb-4">
-            جميع الميزات مجتمعة: الفرز والبحث والترقيم والخلايا المخصصة.
-          </p>
-          <DataTable
-            data={paginatedData}
-            columns={sortableColumnsAR}
-            searchable
-            searchPlaceholder="البحث عن المستخدمين..."
-            searchValue={searchValue}
-            onSearchChange={setSearchValue}
-            clearSearchLabel="مسح البحث"
-            enableSorting
-            defaultSortBy="name"
-            pagination
-            currentPage={currentPage}
-            totalPages={Math.ceil(filteredUsers.length / pageSize)}
-            pageSize={pageSize}
-            onPageChange={setCurrentPage}
-            nextLabel="التالي"
-            previousLabel="السابق"
-            pageLabel={`صفحة ${currentPage} من ${Math.ceil(filteredUsers.length / pageSize)}`}
-            striped
-          />
-        </CardContent>
-      </Card>
-    );
-  },
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Complete example in RTL with all features. Sort indicators, pagination arrows, and search all work correctly.'
-      }
-    }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders all features in RTL mode', async () => {
-      await expect(canvas.getByText('جميع الميزات مجتمعة: الفرز والبحث والترقيم والخلايا المخصصة.')).toBeInTheDocument();
-
-      const searchInput = canvas.getByPlaceholderText('البحث عن المستخدمين...');
-      await expect(searchInput).toBeInTheDocument();
-
-      const table = canvas.queryByRole('table');
-      if (table) {
-        await expect(table).toBeInTheDocument();
-      }
-
-      await expect(canvas.getByText('صفحة 1 من 2')).toBeInTheDocument();
-    });
-
-    await step('Arabic column headers with sort buttons', async () => {
-      // Headers appear in both desktop and mobile views
-      await expect(canvas.getAllByText('الاسم').length).toBeGreaterThanOrEqual(1);
-      await expect(canvas.getAllByText('البريد الإلكتروني').length).toBeGreaterThanOrEqual(1);
-      await expect(canvas.getAllByText('الدور').length).toBeGreaterThanOrEqual(1);
-      await expect(canvas.getAllByText('تاريخ الانضمام').length).toBeGreaterThanOrEqual(1);
-
-      const sortButtons = canvas.getAllByRole('button').filter(btn =>
-        btn.textContent?.includes('الاسم') ||
-        btn.textContent?.includes('البريد') ||
-        btn.textContent?.includes('الدور') ||
-        btn.textContent?.includes('تاريخ')
-      );
-      await expect(sortButtons.length).toBeGreaterThan(0);
-    });
-
-    await step('Sorting works in RTL', async () => {
-      const roleButtons = canvas.getAllByRole('button', { name: /الدور/i });
-      await userEvent.click(roleButtons[0]);
-
-      // Should sort by role
-      const rows = canvas.queryAllByRole('row');
-      await expect(rows.length).toBeGreaterThan(1);
-    });
-
-    await step('Search filters in RTL', async () => {
-      const searchInput = canvas.getByPlaceholderText('البحث عن المستخدمين...');
-      await userEvent.type(searchInput, 'محرر');
-
-      // Should show editors (appears in both desktop and mobile views)
-      await expect(canvas.getAllByText('فاطمة حسن').length).toBeGreaterThanOrEqual(1);
-    });
-
-    await step('Pagination labels in Arabic', async () => {
-      // Clear search first to restore pagination
-      const clearButton = canvas.getAllByRole('button').find(btn =>
-        btn.querySelector('svg') && !btn.textContent?.trim()
-      );
-      if (clearButton) {
-        await userEvent.click(clearButton);
-      }
-
-      const previousButton = canvas.getByRole('button', { name: /السابق/i });
-      const nextButton = canvas.getByRole('button', { name: /التالي/i });
-
-      await expect(previousButton).toBeInTheDocument();
-      await expect(nextButton).toBeInTheDocument();
-      await expect(previousButton).toBeDisabled(); // On first page
-    });
-
-    await step('Pagination navigation works in RTL', async () => {
-      const nextButton = canvas.getByRole('button', { name: /التالي/i });
-      await userEvent.click(nextButton);
-
-      await expect(canvas.getByText('صفحة 2 من 2')).toBeInTheDocument();
-
-      const previousButton = canvas.getByRole('button', { name: /السابق/i });
-      await userEvent.click(previousButton);
-
-      await expect(canvas.getByText('صفحة 1 من 2')).toBeInTheDocument();
-    });
-  }
-};

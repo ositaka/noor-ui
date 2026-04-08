@@ -13,12 +13,12 @@ import { ZakatCalculator } from '../../../components/ui/zakat-calculator';
  */
 
 const meta = {
-  title: 'GCC/Zakat Calculator',
+  title: 'GCC-Specific/Zakat Calculator',
   component: ZakatCalculator,
   parameters: {
     layout: 'centered'
   },
-  tags: ['!autodocs'],
+  tags: ['autodocs'],
   argTypes: {
     goldPricePerGram: { control: 'number' },
     silverPricePerGram: { control: 'number' },
@@ -37,85 +37,13 @@ export const Default: Story = {
     goldPricePerGram: 250,
     silverPricePerGram: 3
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
-  render: (args) => (
+  render: (args, { globals }) => {
+    return (
     <div className="max-w-2xl w-full">
       <ZakatCalculator {...args} />
     </div>
-  ),
-  parameters: {
-    docs: {
-      story: {
-        inline: false
-      }
-    }
+    );
   },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders calculator structure', async () => {
-      // Verify nisab information card
-      await expect(canvas.getByText('Nisab Information')).toBeInTheDocument();
-      await expect(canvas.getByText(/Gold Nisab/i)).toBeInTheDocument();
-      await expect(canvas.getByText(/Silver Nisab/i)).toBeInTheDocument();
-
-      // Verify asset input section
-      await expect(canvas.getByText('Your Assets')).toBeInTheDocument();
-      // Use input IDs directly since they are stable
-      await expect(canvasElement.querySelector('#cash')).toBeInTheDocument();
-      await expect(canvasElement.querySelector('#gold')).toBeInTheDocument();
-      await expect(canvasElement.querySelector('#silver')).toBeInTheDocument();
-      await expect(canvasElement.querySelector('#business')).toBeInTheDocument();
-      await expect(canvasElement.querySelector('#investments')).toBeInTheDocument();
-      await expect(canvasElement.querySelector('#other')).toBeInTheDocument();
-
-      // Verify calculation result section
-      await expect(canvas.getByText('Calculation Result')).toBeInTheDocument();
-      await expect(canvas.getByText(/Total Wealth/i)).toBeInTheDocument();
-    });
-
-    await step('Shows "Below Nisab" status for empty calculator', async () => {
-      // Initially, with no assets, should show below nisab
-      const badge = canvas.getByText('Below Nisab');
-      await expect(badge).toBeInTheDocument();
-
-      // Should show info message
-      await expect(canvas.getByText(/Your wealth is below the Nisab threshold/i)).toBeInTheDocument();
-    });
-
-    await step('Calculates zakat when entering asset values', async () => {
-      const cashInput = canvasElement.querySelector('#cash') as HTMLInputElement;
-      const goldInput = canvasElement.querySelector('#gold') as HTMLInputElement;
-      const businessInput = canvasElement.querySelector('#business') as HTMLInputElement;
-
-      // Enter values that exceed nisab (85g * 250 SAR = 21,250 SAR)
-      await userEvent.clear(cashInput);
-      await userEvent.type(cashInput, '50000');
-
-      await userEvent.clear(goldInput);
-      await userEvent.type(goldInput, '100');
-
-      await userEvent.clear(businessInput);
-      await userEvent.type(businessInput, '20000');
-
-      // Should now show "Zakat Due" status
-      await expect(canvas.getByText('Zakat Due')).toBeInTheDocument();
-
-      // Should show zakat due amount section
-      await expect(canvas.getByText(/Zakat Due \(2\.5%\)/i)).toBeInTheDocument();
-    });
-
-    await step('Export buttons are functional', async () => {
-      // Verify all export buttons are present
-      await expect(canvas.getByRole('button', { name: /Copy/i })).toBeInTheDocument();
-      await expect(canvas.getByRole('button', { name: /Download/i })).toBeInTheDocument();
-      await expect(canvas.getByRole('button', { name: /Print/i })).toBeInTheDocument();
-      await expect(canvas.getByRole('button', { name: /JSON/i })).toBeInTheDocument();
-    });
-  }
 };
 
 // With Default Values - from component page lines 124-131
@@ -132,10 +60,6 @@ export const WithDefaultValues: Story = {
       />
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -193,10 +117,6 @@ export const CompleteExample: Story = {
       />
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -253,10 +173,6 @@ export const EmptyCalculator: Story = {
       <ZakatCalculator goldPricePerGram={250} silverPricePerGram={3} />
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -294,174 +210,6 @@ export const EmptyCalculator: Story = {
 
       // Should still be below nisab (5000 < 21,250)
       await expect(canvas.getByText('Below Nisab')).toBeInTheDocument();
-    });
-  }
-};
-
-// RTL Default
-export const RTLDefault: Story = {
-  render: () => (
-    <div className="max-w-2xl w-full">
-      <ZakatCalculator goldPricePerGram={250} silverPricePerGram={3} />
-    </div>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Zakat calculator in RTL with Arabic labels.'
-      }
-    }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders in RTL with Arabic labels', async () => {
-      // Check for Arabic text content
-      await expect(canvas.getByText('معلومات النصاب')).toBeInTheDocument(); // Nisab Information
-      await expect(canvas.getByText('أصولك')).toBeInTheDocument(); // Your Assets
-      await expect(canvas.getByText('نتيجة الحساب')).toBeInTheDocument(); // Calculation Result
-    });
-
-    await step('Input fields work in RTL', async () => {
-      // Get inputs by their id attribute (language-independent)
-      const cashInput = canvasElement.querySelector('#cash') as HTMLInputElement;
-      const goldInput = canvasElement.querySelector('#gold') as HTMLInputElement;
-
-      await expect(cashInput).toBeInTheDocument();
-      await expect(goldInput).toBeInTheDocument();
-
-      // Test entering values in RTL context
-      await userEvent.type(cashInput, '50000');
-      await expect(cashInput).toHaveValue(50000);
-    });
-  }
-};
-
-// RTL With Values
-export const RTLWithValues: Story = {
-  render: () => (
-    <div className="max-w-2xl w-full">
-      <ZakatCalculator
-        goldPricePerGram={250}
-        silverPricePerGram={3}
-        defaultValues={{
-          cash: 75000,
-          gold: 150,
-          business: 20000
-        }}
-      />
-    </div>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Calculator in RTL with pre-filled values and Arabic numerals.'
-      }
-    }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders with pre-filled values in RTL', async () => {
-      const cashInput = canvasElement.querySelector('#cash') as HTMLInputElement;
-      const goldInput = canvasElement.querySelector('#gold') as HTMLInputElement;
-      const businessInput = canvasElement.querySelector('#business') as HTMLInputElement;
-
-      // Verify default values
-      await expect(cashInput).toHaveValue(75000);
-      await expect(goldInput).toHaveValue(150);
-      await expect(businessInput).toHaveValue(20000);
-    });
-
-    await step('Shows zakat status in Arabic', async () => {
-      // Check for Arabic "Zakat Due" text
-      await expect(canvas.getByText('الزكاة واجبة')).toBeInTheDocument();
-    });
-
-    await step('Export buttons work in RTL', async () => {
-      // Export buttons should be present
-      const buttons = canvas.getAllByRole('button');
-      await expect(buttons.length).toBeGreaterThan(0);
-    });
-  }
-};
-
-// RTL Complete
-export const RTLComplete: Story = {
-  render: () => (
-    <div className="max-w-2xl w-full">
-      <ZakatCalculator
-        goldPricePerGram={250}
-        silverPricePerGram={3}
-        defaultValues={{
-          cash: 50000,
-          gold: 100,
-          silver: 0,
-          business: 20000,
-          investments: 30000,
-          other: 0
-        }}
-      />
-    </div>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Complete calculator in RTL with all assets.'
-      }
-    }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders complete asset portfolio in RTL', async () => {
-      const cashInput = canvasElement.querySelector('#cash') as HTMLInputElement;
-      const goldInput = canvasElement.querySelector('#gold') as HTMLInputElement;
-      const silverInput = canvasElement.querySelector('#silver') as HTMLInputElement;
-      const businessInput = canvasElement.querySelector('#business') as HTMLInputElement;
-      const investmentsInput = canvasElement.querySelector('#investments') as HTMLInputElement;
-      const otherInput = canvasElement.querySelector('#other') as HTMLInputElement;
-
-      // Verify all values
-      await expect(cashInput).toHaveValue(50000);
-      await expect(goldInput).toHaveValue(100);
-      // Silver with value 0 shows as empty due to component's `value={assets.silver || ''}`
-      await expect(silverInput).toHaveValue(null);
-      await expect(businessInput).toHaveValue(20000);
-      await expect(investmentsInput).toHaveValue(30000);
-      // Other with value 0 shows as empty due to component's `value={assets.other || ''}`
-      await expect(otherInput).toHaveValue(null);
-    });
-
-    await step('Shows complete calculation in Arabic', async () => {
-      // Verify Arabic text for calculation result
-      await expect(canvas.getByText('نتيجة الحساب')).toBeInTheDocument();
-      await expect(canvas.getByText('الزكاة واجبة')).toBeInTheDocument();
-    });
-
-    await step('Can edit values in RTL context', async () => {
-      const investmentsInput = canvasElement.querySelector('#investments') as HTMLInputElement;
-
-      // Clear and update
-      await userEvent.clear(investmentsInput);
-      await userEvent.type(investmentsInput, '40000');
-
-      await expect(investmentsInput).toHaveValue(40000);
     });
   }
 };

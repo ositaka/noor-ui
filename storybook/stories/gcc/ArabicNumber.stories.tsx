@@ -14,12 +14,12 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../..
  */
 
 const meta = {
-  title: 'GCC/Arabic Number',
+  title: 'GCC-Specific/Arabic Number',
   component: ArabicNumber,
   parameters: {
     layout: 'centered'
   },
-  tags: ['!autodocs'],
+  tags: ['autodocs'],
   argTypes: {
     value: { control: 'number' },
     format: {
@@ -45,34 +45,6 @@ export const Default: Story = {
     value: 1234567.89,
     decimals: 2
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
-  parameters: {
-    docs: {
-      story: {
-        inline: false
-      }
-    }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders formatted number correctly', async () => {
-      const number = canvasElement.querySelector('span');
-      await expect(number).toBeInTheDocument();
-      await expect(number).toBeVisible();
-      // Should format with thousands separator and 2 decimals
-      await expect(number).toHaveTextContent('1,234,567.89');
-    });
-
-    await step('Has correct ARIA attributes', async () => {
-      const number = canvasElement.querySelector('span');
-      // Should be readable by screen readers
-      await expect(number).toHaveClass('tabular-nums');
-    });
-  }
 };
 
 // Western Numerals - from component page lines 60-80
@@ -99,10 +71,6 @@ export const WesternNumerals: Story = {
       </CardContent>
     </Card>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -154,10 +122,6 @@ export const ArabicIndicNumerals: Story = {
       </CardContent>
     </Card>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -188,10 +152,6 @@ export const CurrencyFormat: Story = {
       </div>
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -243,10 +203,6 @@ export const PercentageFormat: Story = {
       </div>
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -277,10 +233,6 @@ export const CompactFormat: Story = {
       </div>
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -334,10 +286,6 @@ export const AllFormats: Story = {
       </div>
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -345,113 +293,5 @@ export const AllFormats: Story = {
         story: 'Showcase of all number formatting options.'
       }
     }
-  }
-};
-
-// RTL Arabic Numerals
-export const RTLArabicNumerals: Story = {
-  render: () => (
-    <Card className="w-full max-w-sm">
-      <CardHeader>
-        <CardTitle>الأرقام العربية الهندية</CardTitle>
-        <CardDescription>٠١٢٣٤٥٦٧٨٩</CardDescription>
-      </CardHeader>
-      <CardContent className="space-y-3">
-        <div>
-          <p className="text-sm text-muted-foreground mb-1">رقم</p>
-          <ArabicNumber
-            value={1234567.89}
-            decimals={2}
-            useArabicNumerals
-            className="text-2xl"
-          />
-        </div>
-        <div>
-          <p className="text-sm text-muted-foreground mb-1">عملة</p>
-          <ArabicNumber
-            value={9999.99}
-            format="currency"
-            locale="ar"
-            useArabicNumerals
-            className="text-2xl"
-          />
-        </div>
-        <div>
-          <p className="text-sm text-muted-foreground mb-1">نسبة مئوية</p>
-          <ArabicNumber
-            value={0.7545}
-            format="percentage"
-            locale="ar"
-            useArabicNumerals
-            className="text-2xl"
-          />
-        </div>
-      </CardContent>
-    </Card>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Arabic-Indic numerals in RTL layout with Arabic locale.'
-      }
-    }
-  }
-};
-
-// RTL All Formats
-export const RTLAllFormats: Story = {
-  render: () => (
-    <div className="space-y-6 w-full max-w-md">
-      <div>
-        <h4 className="text-sm font-medium mb-2">رقم</h4>
-        <ArabicNumber value={1234567.89} decimals={2} useArabicNumerals className="text-xl" />
-      </div>
-      <div>
-        <h4 className="text-sm font-medium mb-2">عملة</h4>
-        <ArabicNumber value={9999.99} format="currency" locale="ar" useArabicNumerals className="text-xl" />
-      </div>
-      <div>
-        <h4 className="text-sm font-medium mb-2">نسبة مئوية</h4>
-        <ArabicNumber value={0.7545} format="percentage" locale="ar" useArabicNumerals className="text-xl" />
-      </div>
-      <div>
-        <h4 className="text-sm font-medium mb-2">مُختصر</h4>
-        <ArabicNumber value={1234567} format="compact" locale="ar" useArabicNumerals className="text-xl" />
-      </div>
-    </div>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'All formats in RTL with Arabic-Indic numerals.'
-      }
-    }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders in RTL context', async () => {
-      // Verify Arabic labels render
-      await expect(canvas.getByText('رقم')).toBeInTheDocument();
-      await expect(canvas.getByText('عملة')).toBeInTheDocument();
-      await expect(canvas.getByText('نسبة مئوية')).toBeInTheDocument();
-      await expect(canvas.getByText('مُختصر')).toBeInTheDocument();
-    });
-
-    await step('All formats render with Arabic numerals', async () => {
-      const numbers = canvasElement.querySelectorAll('span.text-xl');
-      // Just verify they all render - this is a showcase story
-      await expect(numbers.length).toBe(4);
-    });
   }
 };

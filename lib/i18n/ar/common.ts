@@ -351,8 +351,6 @@ common: {
         'prompt-input': 'Prompt Input (إدخال الطلب)',
         'thinking-indicator': 'Thinking Indicator (مؤشر التفكير)',
         'token-counter': 'Token Counter (عداد الرموز)',
-        'workflow-canvas': 'Workflow Canvas (لوحة سير العمل)',
-        'workflow-node': 'Workflow Node (عقدة سير العمل)',
       },
 
   componentPage: {

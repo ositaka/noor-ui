@@ -204,10 +204,10 @@ vite@7.3.0
 - [x] **Token Counter** - ✅ Usage/cost tracking, warnings, limits, RTL (10 stories)
 - [x] **Message Actions** - ✅ Copy, regenerate, feedback, edit, RTL (10 stories)
 - [x] **Conversation History** - ✅ Search, rename, delete, share, grouping, sizes, RTL (9 stories)
-- [x] **Workflow Node** - ✅ Node types, statuses, icons, labels, RTL (8 stories)
-- [x] **Workflow Canvas** - ✅ Visual editor, drag-and-drop, connections, minimap, RTL (8 stories)
 - [x] **Streaming Text** - ✅ Typewriter effect, configurable speed, cursor, completion callback, RTL (9 stories)
-- [x] **Workflow Nodes** - ✅ Pre-configured node types (Trigger, Action, AI, Output), 12 variants, RTL (8 stories)
+- ~~[x] **Workflow Node** - ✅ Node types, statuses, icons, labels, RTL (8 stories)~~ *(removed)*
+- ~~[x] **Workflow Canvas** - ✅ Visual editor, drag-and-drop, connections, minimap, RTL (8 stories)~~ *(removed)*
+- ~~[x] **Workflow Nodes** - ✅ Pre-configured node types (Trigger, Action, AI, Output), 12 variants, RTL (8 stories)~~ *(removed)*
 
 ### Story Template
 Each component should include 8-15 stories:

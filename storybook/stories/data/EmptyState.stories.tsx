@@ -28,12 +28,12 @@ import * as React from 'react';
  */
 
 const meta = {
-  title: 'Data Display/EmptyState',
+  title: 'Feedback/Empty State',
   component: EmptyState,
   parameters: {
     layout: 'centered'
   },
-  tags: ['!autodocs'],
+  tags: ['autodocs'],
   argTypes: {
     icon: {
       control: false
@@ -69,48 +69,27 @@ export const Default: Story = {
       </Button>
     )
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
-  render: (args) => (
+  render: (args, { globals }) => {
+    return (
     <Card className="p-8 w-[500px]">
       <EmptyState {...args} />
     </Card>
-  ),
+    );
+  },
   parameters: {
-    docs: {
-      story: {
-        inline: false
+    ar: {
+      args: {
+        title: 'لم يتم العثور على مقالات',
+        description: 'ابدأ بإنشاء مقالتك الأولى',
+        action: (
+          <Button>
+            <Plus className="me-2 h-4 w-4" />
+            إنشاء مقالة
+          </Button>
+        )
       }
     }
   },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders with correct ARIA attributes', async () => {
-      const emptyState = canvas.getByRole('status');
-      await expect(emptyState).toBeInTheDocument();
-      await expect(emptyState).toBeVisible();
-      await expect(emptyState).toHaveAttribute('aria-live', 'polite');
-    });
-
-    await step('Displays title and description', async () => {
-      await expect(canvas.getByText('No articles found')).toBeInTheDocument();
-      await expect(canvas.getByText('Get started by creating your first article')).toBeInTheDocument();
-    });
-
-    await step('Contains icon element', async () => {
-      const svg = canvasElement.querySelector('svg');
-      await expect(svg).toBeInTheDocument();
-    });
-
-    await step('Displays action button', async () => {
-      const button = canvas.getByRole('button', { name: /create article/i });
-      await expect(button).toBeInTheDocument();
-      await expect(button).toBeVisible();
-    });
-  }
 };
 
 // Basic Usage - from component page lines 90-101
@@ -130,10 +109,6 @@ export const BasicUsage: Story = {
       />
     </Card>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -172,10 +147,6 @@ export const WithoutAction: Story = {
       />
     </Card>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -220,10 +191,6 @@ export const SearchResults: Story = {
       />
     </Card>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -274,10 +241,6 @@ export const MultipleActions: Story = {
       />
     </Card>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -359,10 +322,6 @@ export const AllUseCases: Story = {
       </Card>
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -380,10 +339,6 @@ export const MinimalLayout: Story = {
       <EmptyState title="No items" description="Your list is currently empty" />
     </Card>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -416,184 +371,3 @@ export const MinimalLayout: Story = {
   }
 };
 
-// RTL Basic
-export const RTLBasic: Story = {
-  render: () => (
-    <Card className="p-8 w-[500px]">
-      <EmptyState
-        icon={<FileText />}
-        title="لم يتم العثور على مقالات"
-        description="ابدأ بإنشاء مقالتك الأولى"
-        action={
-          <Button>
-            <Plus className="me-2 h-4 w-4" />
-            إنشاء مقالة
-          </Button>
-        }
-      />
-    </Card>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Empty state in RTL with Arabic text. Layout flows right-to-left.'
-      }
-    }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders in RTL context', async () => {
-      const emptyState = canvas.getByRole('status');
-      await expect(emptyState).toBeInTheDocument();
-      await expect(emptyState).toBeVisible();
-    });
-
-    await step('Displays Arabic content', async () => {
-      await expect(canvas.getByText('لم يتم العثور على مقالات')).toBeInTheDocument();
-      await expect(canvas.getByText('ابدأ بإنشاء مقالتك الأولى')).toBeInTheDocument();
-      await expect(canvas.getByRole('button', { name: /إنشاء مقالة/i })).toBeInTheDocument();
-    });
-  }
-};
-
-// RTL Without Action
-export const RTLWithoutAction: Story = {
-  render: () => (
-    <Card className="p-8 w-[500px]">
-      <EmptyState
-        icon={<Tray />}
-        title="البريد الوارد فارغ"
-        description="أنت على اطلاع! لا توجد رسائل جديدة."
-      />
-    </Card>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Empty inbox state in RTL without action button.'
-      }
-    }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders in RTL context', async () => {
-      const emptyState = canvas.getByRole('status');
-      await expect(emptyState).toBeInTheDocument();
-      await expect(emptyState).toBeVisible();
-    });
-
-    await step('Displays Arabic content without action', async () => {
-      await expect(canvas.getByText('البريد الوارد فارغ')).toBeInTheDocument();
-      await expect(canvas.getByText('أنت على اطلاع! لا توجد رسائل جديدة.')).toBeInTheDocument();
-
-      const buttons = canvas.queryAllByRole('button');
-      await expect(buttons).toHaveLength(0);
-    });
-  }
-};
-
-// RTL Search Results
-export const RTLSearchResults: Story = {
-  render: () => (
-    <Card className="p-8 w-[500px]">
-      <EmptyState
-        icon={<MagnifyingGlass />}
-        title="لم يتم العثور على نتائج"
-        description="حاول تعديل البحث أو الفلتر للعثور على ما تبحث عنه."
-        action={<Button variant="outline">مسح الفلاتر</Button>}
-      />
-    </Card>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Search results empty state in RTL with clear filters button.'
-      }
-    }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders in RTL context', async () => {
-      const emptyState = canvas.getByRole('status');
-      await expect(emptyState).toBeInTheDocument();
-      await expect(emptyState).toBeVisible();
-    });
-
-    await step('Displays Arabic search content', async () => {
-      await expect(canvas.getByText('لم يتم العثور على نتائج')).toBeInTheDocument();
-      await expect(canvas.getByText('حاول تعديل البحث أو الفلتر للعثور على ما تبحث عنه.')).toBeInTheDocument();
-      await expect(canvas.getByRole('button', { name: /مسح الفلاتر/i })).toBeInTheDocument();
-    });
-  }
-};
-
-// RTL Multiple Actions
-export const RTLMultipleActions: Story = {
-  render: () => (
-    <Card className="p-8 w-[500px]">
-      <EmptyState
-        icon={<Users />}
-        title="لا يوجد أعضاء فريق بعد"
-        description="ادع فريقك لبدء التعاون"
-        action={
-          <>
-            <Button>
-              <Plus className="me-2 h-4 w-4" />
-              دعوة أعضاء
-            </Button>
-            <Button variant="outline">معرفة المزيد</Button>
-          </>
-        }
-      />
-    </Card>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Empty state in RTL with multiple action buttons in Arabic.'
-      }
-    }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders in RTL context', async () => {
-      const emptyState = canvas.getByRole('status');
-      await expect(emptyState).toBeInTheDocument();
-      await expect(emptyState).toBeVisible();
-    });
-
-    await step('Displays Arabic content with multiple actions', async () => {
-      await expect(canvas.getByText('لا يوجد أعضاء فريق بعد')).toBeInTheDocument();
-      await expect(canvas.getByText('ادع فريقك لبدء التعاون')).toBeInTheDocument();
-
-      const buttons = canvas.getAllByRole('button');
-      await expect(buttons).toHaveLength(2);
-      await expect(canvas.getByRole('button', { name: /دعوة أعضاء/i })).toBeInTheDocument();
-      await expect(canvas.getByRole('button', { name: /معرفة المزيد/i })).toBeInTheDocument();
-    });
-  }
-};

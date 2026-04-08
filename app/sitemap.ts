@@ -28,7 +28,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // Experimental (AI/LLM)
     'chat-message', 'conversation-history', 'message-actions', 'model-selector',
     'parameter-slider', 'prompt-input', 'thinking-indicator', 'token-counter',
-    'workflow-canvas', 'workflow-node',
   ]
 
   // Documentation pages (all directories under app/(docs)/documentation/)

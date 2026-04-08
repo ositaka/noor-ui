@@ -117,10 +117,10 @@ Ran `npm pack --dry-run` to verify:
 - Zakat Calculator (with export/sharing)
 - Calendar (Gregorian/Hijri support)
 
-**AI/LLM Components (10)** 🧪 Experimental
+**AI/LLM Components (9)** 🧪 Experimental
 - Chat Message, Streaming Text, Prompt Input, Thinking Indicator
 - Message Actions, Model Selector, Parameter Slider, Token Counter
-- Conversation History, Workflow Canvas
+- Conversation History
 
 ### Utilities & Libs
 - `lib/utils.ts` - cn() utility and RTL helpers

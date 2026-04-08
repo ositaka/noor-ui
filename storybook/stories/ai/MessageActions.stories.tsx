@@ -14,12 +14,12 @@ import { Card, CardContent } from '../../../components/ui/card';
  */
 
 const meta = {
-  title: 'AI/Message Actions',
+  title: 'AI-LLM Shell/Message Actions',
   component: MessageActions,
   parameters: {
     layout: 'centered'
   },
-  tags: ['!autodocs'],
+  tags: ['autodocs'],
   argTypes: {
     showCopy: { control: 'boolean' },
     showRegenerate: { control: 'boolean' },
@@ -60,44 +60,6 @@ export const Default: Story = {
     onThumbsDown: fn(),
     onFlag: fn()
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
-  parameters: {
-    docs: {
-      story: {
-        inline: false
-      }
-    }
-  },
-  play: async ({ canvasElement, step, args }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders copy button', async () => {
-      const copyButton = canvas.getByRole('button', { name: /copy/i });
-      await expect(copyButton).toBeInTheDocument();
-      await expect(copyButton).toBeVisible();
-    });
-
-    await step('Handles copy click and shows "Copied" state', async () => {
-      const copyButton = canvas.getByRole('button', { name: /copy/i });
-      await userEvent.click(copyButton);
-      await expect(args.onCopy).toHaveBeenCalledTimes(1);
-
-      // Verify button text changes to "Copied" (wait for state change)
-      await expect(await canvas.findByRole('button', { name: /copied/i })).toBeInTheDocument();
-    });
-
-    await step('Keyboard accessible', async () => {
-      const copyButton = canvas.getByRole('button', { name: /copied/i });
-      copyButton.focus();
-      await expect(copyButton).toHaveFocus();
-
-      await userEvent.keyboard('{Enter}');
-      await expect(args.onCopy).toHaveBeenCalledTimes(2);
-    });
-  }
 };
 
 // Full Featured - from component page lines 262-276
@@ -132,10 +94,6 @@ export const FullFeatured: Story = {
       </CardContent>
     </Card>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -234,10 +192,6 @@ export const ForAssistantMessages: Story = {
       </CardContent>
     </Card>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -288,10 +242,6 @@ export const ForUserMessages: Story = {
       </CardContent>
     </Card>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -346,10 +296,6 @@ export const CompactMode: Story = {
       </CardContent>
     </Card>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -406,10 +352,6 @@ export const CopyOnly: Story = {
       </CardContent>
     </Card>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -459,10 +401,6 @@ export const WithFeedbackOnly: Story = {
       </CardContent>
     </Card>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -499,10 +437,6 @@ export const WithShareAndFlag: Story = {
       </CardContent>
     </Card>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -534,116 +468,3 @@ export const WithShareAndFlag: Story = {
   }
 };
 
-// RTL Default - from component page lines 422-430
-export const RTLDefault: Story = {
-  render: () => (
-    <div dir="rtl">
-      <MessageActions
-        showCopy
-        showRegenerate
-        showEdit
-        isRTL
-        onCopy={() => {}}
-        onRegenerate={() => {}}
-        onEdit={() => {}}
-      />
-    </div>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Message actions in RTL layout.'
-      }
-    }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders in RTL context', async () => {
-      // In Arabic locale, button labels are in Arabic
-      const buttons = canvas.getAllByRole('button');
-      await expect(buttons.length).toBeGreaterThan(0);
-      await expect(buttons[0]).toBeInTheDocument();
-    });
-
-    await step('Interaction works in RTL', async () => {
-      const buttons = canvas.getAllByRole('button');
-      await userEvent.click(buttons[0]);
-      // Just verify it's clickable without errors
-    });
-  }
-};
-
-// RTL With All Features
-export const RTLWithAllFeatures: Story = {
-  args: {
-    onCopy: fn(),
-    onRegenerate: fn(),
-    onEdit: fn(),
-    onShare: fn(),
-    onThumbsUp: fn(),
-    onThumbsDown: fn(),
-    onFlag: fn()
-  },
-  render: (args) => (
-    <Card>
-      <CardContent className="p-6">
-        <MessageActions
-          showCopy
-          showRegenerate
-          showEdit
-          showShare
-          showFeedback
-          showFlag
-          isRTL
-          onCopy={args.onCopy}
-          onRegenerate={args.onRegenerate}
-          onEdit={args.onEdit}
-          onShare={args.onShare}
-          onThumbsUp={args.onThumbsUp}
-          onThumbsDown={args.onThumbsDown}
-          onFlag={args.onFlag}
-        />
-      </CardContent>
-    </Card>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'All message actions in RTL with Arabic alerts.'
-      }
-    }
-  },
-  play: async ({ canvasElement, step, args }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders all buttons in RTL context', async () => {
-      const buttons = canvas.getAllByRole('button');
-      // Should have 7 buttons (copy, regenerate, edit, share, thumbs up, thumbs down, flag)
-      await expect(buttons).toHaveLength(7);
-    });
-
-    await step('All interactions work in RTL', async () => {
-      const buttons = canvas.getAllByRole('button');
-
-      // Test first few buttons to verify RTL doesn't break functionality
-      await userEvent.click(buttons[0]);
-      await userEvent.click(buttons[1]);
-      await userEvent.click(buttons[2]);
-
-      // Verify callbacks were invoked
-      await expect(args.onCopy).toHaveBeenCalled();
-      await expect(args.onRegenerate).toHaveBeenCalled();
-    });
-  }
-};

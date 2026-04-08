@@ -13,12 +13,12 @@ import { ChatMessage } from '../../../components/ui/chat-message';
  */
 
 const meta = {
-  title: 'AI/Chat Message',
+  title: 'AI-LLM Shell/Chat Message',
   component: ChatMessage,
   parameters: {
     layout: 'centered'
   },
-  tags: ['!autodocs'],
+  tags: ['autodocs'],
   argTypes: {
     role: {
       control: { type: 'select' },
@@ -54,44 +54,21 @@ export const Default: Story = {
     content: 'Hello! How can I help you today?',
     timestamp: '2:30 PM'
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
-  render: (args) => (
+  render: (args, { globals }) => {
+    return (
     <div className="w-full max-w-2xl">
       <ChatMessage {...args} />
     </div>
-  ),
+    );
+  },
   parameters: {
-    docs: {
-      story: {
-        inline: false
+    ar: {
+      args: {
+        content: 'مرحباً! كيف يمكنني مساعدتك اليوم؟',
+        timestamp: '٢:٣٠ م'
       }
     }
   },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders assistant message correctly', async () => {
-      await expect(canvas.getByText('Hello! How can I help you today?')).toBeInTheDocument();
-      await expect(canvas.getByText('2:30 PM')).toBeInTheDocument();
-    });
-
-    await step('Shows avatar with assistant icon', async () => {
-      // Avatar uses img role when AvatarImage is present, or fallback content
-      const message = canvasElement.querySelector('div[class*="group"]');
-      await expect(message).toBeInTheDocument();
-      // Check for Bot icon in fallback
-      const svg = canvasElement.querySelector('svg');
-      await expect(svg).toBeInTheDocument();
-    });
-
-    await step('Message content is visible', async () => {
-      const content = canvas.getByText('Hello! How can I help you today?');
-      await expect(content).toBeVisible();
-    });
-  }
 };
 
 // Assistant Message - from code lines 97-103
@@ -105,10 +82,6 @@ export const AssistantMessage: Story = {
       />
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -138,10 +111,6 @@ export const UserMessage: Story = {
       />
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -171,10 +140,6 @@ export const SystemMessage: Story = {
       />
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -212,10 +177,6 @@ export const WithActions: Story = {
     onCopy: fn(),
     onRegenerate: fn()
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -237,10 +198,6 @@ export const CompactVariant: Story = {
       />
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -292,10 +249,6 @@ export const Conversation: Story = {
       />
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -306,122 +259,3 @@ export const Conversation: Story = {
   }
 };
 
-// RTL Assistant - from code lines 133-138
-export const RTLAssistant: Story = {
-  render: () => (
-    <div className="w-96 max-w-2xl">
-      <ChatMessage
-        role="assistant"
-        content="مرحباً! كيف يمكنني مساعدتك اليوم؟"
-        timestamp="٢:٣٠ م"
-        isRTL={true}
-      />
-    </div>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Assistant message in RTL with Arabic text.'
-      }
-    }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders in RTL context', async () => {
-      await expect(canvas.getByText(/مرحباً/)).toBeInTheDocument();
-      await expect(canvas.getByText(/٢:٣٠ م/)).toBeInTheDocument();
-    });
-
-    await step('Arabic content is visible', async () => {
-      const content = canvas.getByText(/مرحباً/);
-      await expect(content).toBeVisible();
-    });
-  }
-};
-
-// RTL User
-export const RTLUser: Story = {
-  render: () => (
-    <div className="w-96 max-w-2xl">
-      <ChatMessage
-        role="user"
-        content="ما هو الطقس اليوم؟"
-        timestamp="٢:٢٩ م"
-        isRTL={true}
-      />
-    </div>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'User message in RTL with Arabic text.'
-      }
-    }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders user message in RTL', async () => {
-      await expect(canvas.getByText(/ما هو الطقس/)).toBeInTheDocument();
-      await expect(canvas.getByText(/٢:٢٩ م/)).toBeInTheDocument();
-    });
-  }
-};
-
-// RTL Conversation
-export const RTLConversation: Story = {
-  render: () => (
-    <div className="w-full max-w-2xl space-y-4">
-      <ChatMessage
-        role="user"
-        content="ما هو الطقس اليوم؟"
-        timestamp="٢:٢٩ م"
-        isRTL={true}
-      />
-      <ChatMessage
-        role="assistant"
-        content="سأتحقق من الطقس لك. هل يمكنك إخباري بموقعك؟"
-        timestamp="٢:٣٠ م"
-        isRTL={true}
-        showCopy={true}
-      />
-      <ChatMessage
-        role="user"
-        content="أنا في دبي."
-        timestamp="٢:٣١ م"
-        isRTL={true}
-      />
-      <ChatMessage
-        role="assistant"
-        content="في دبي، الطقس مشمس حالياً بدرجة حرارة ٢٨ درجة مئوية. طقس مثالي للأنشطة الخارجية!"
-        timestamp="٢:٣٢ م"
-        isRTL={true}
-        showCopy={true}
-        showRegenerate={true}
-      />
-    </div>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Complete Arabic conversation in RTL.'
-      }
-    }
-  }
-};

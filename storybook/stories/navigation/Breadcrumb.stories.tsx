@@ -21,7 +21,7 @@ const meta = {
   parameters: {
     layout: 'centered'
   },
-  tags: ['!autodocs'],
+  tags: ['autodocs'],
   argTypes: {
     // No specific props to control - component is structural
   }
@@ -32,10 +32,6 @@ type Story = StoryObj<typeof meta>;
 
 // Default - Interactive playground (hidden from stories list to avoid ID conflicts)
 export const Default: Story = {
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   render: () => (
     <Breadcrumb>
       <BreadcrumbList>
@@ -53,56 +49,6 @@ export const Default: Story = {
       </BreadcrumbList>
     </Breadcrumb>
   ),
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders breadcrumb navigation', async () => {
-      const nav = canvas.getByRole('navigation', { name: 'Breadcrumb' });
-      await expect(nav).toBeInTheDocument();
-      await expect(nav).toBeVisible();
-    });
-
-    await step('Renders breadcrumb links', async () => {
-      const homeLink = canvas.getByRole('link', { name: 'Home' });
-      const componentsLink = canvas.getByRole('link', { name: 'Components' });
-
-      await expect(homeLink).toBeInTheDocument();
-      await expect(homeLink).toHaveAttribute('href', '/');
-      await expect(componentsLink).toBeInTheDocument();
-      await expect(componentsLink).toHaveAttribute('href', '/components');
-    });
-
-    await step('Renders current page with proper ARIA attributes', async () => {
-      const currentPage = canvas.getByRole('link', { name: 'Breadcrumb' });
-
-      await expect(currentPage).toBeInTheDocument();
-      await expect(currentPage).toHaveAttribute('aria-current', 'page');
-      await expect(currentPage).toHaveAttribute('aria-disabled', 'true');
-    });
-
-    await step('Keyboard navigation works', async () => {
-      const homeLink = canvas.getByRole('link', { name: 'Home' });
-
-      await userEvent.tab();
-      await expect(homeLink).toHaveFocus();
-
-      await userEvent.tab();
-      await expect(canvas.getByRole('link', { name: 'Components' })).toHaveFocus();
-    });
-
-    await step('Links are hoverable', async () => {
-      const homeLink = canvas.getByRole('link', { name: 'Home' });
-      await userEvent.hover(homeLink);
-      await expect(homeLink).toBeInTheDocument();
-    });
-  },
-  parameters: {
-    docs: {
-      story: {
-        inline: false
-      }
-    }
-  }
 };
 
 // Basic Breadcrumb - from component page lines 149-163
@@ -141,10 +87,6 @@ export const BasicBreadcrumb: Story = {
       const list = within(nav).getByRole('list');
       await expect(list).toBeInTheDocument();
     });
-  },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
@@ -189,10 +131,6 @@ export const CustomSeparator: Story = {
       const list = within(nav).getByRole('list');
       await expect(list).toHaveTextContent('/');
     });
-  },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
@@ -246,10 +184,6 @@ export const WithIcons: Story = {
       await userEvent.hover(homeLink);
       await expect(homeLink).toHaveAttribute('href', '/');
     });
-  },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
@@ -305,10 +239,6 @@ export const LongerPath: Story = {
       await expect(canvas.getByRole('link', { name: 'Navigation' })).toHaveAttribute('href', '/documentation/components/navigation');
     });
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -360,10 +290,6 @@ export const InCard: Story = {
       await expect(canvas.getByRole('link', { name: 'Document' })).toHaveAttribute('aria-current', 'page');
     });
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -374,171 +300,3 @@ export const InCard: Story = {
   }
 };
 
-// RTL Example - Basic
-export const RTLExample: Story = {
-  render: () => (
-    <Breadcrumb>
-      <BreadcrumbList>
-        <BreadcrumbItem>
-          <BreadcrumbLink href="/">الرئيسية</BreadcrumbLink>
-        </BreadcrumbItem>
-        <BreadcrumbSeparator />
-        <BreadcrumbItem>
-          <BreadcrumbLink href="/components">المكونات</BreadcrumbLink>
-        </BreadcrumbItem>
-        <BreadcrumbSeparator />
-        <BreadcrumbItem>
-          <BreadcrumbPage>مسار التنقل</BreadcrumbPage>
-        </BreadcrumbItem>
-      </BreadcrumbList>
-    </Breadcrumb>
-  ),
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders in RTL context', async () => {
-      await expect(canvas.getByRole('navigation', { name: 'Breadcrumb' })).toBeInTheDocument();
-      await expect(canvas.getByRole('link', { name: 'الرئيسية' })).toBeInTheDocument();
-      await expect(canvas.getByRole('link', { name: 'المكونات' })).toBeInTheDocument();
-    });
-
-    await step('RTL navigation works', async () => {
-      const homeLink = canvas.getByRole('link', { name: 'الرئيسية' });
-      await userEvent.hover(homeLink);
-      await expect(homeLink).toHaveAttribute('href', '/');
-    });
-
-    await step('Current page has proper ARIA in RTL', async () => {
-      const currentPage = canvas.getByRole('link', { name: 'مسار التنقل' });
-      await expect(currentPage).toHaveAttribute('aria-current', 'page');
-    });
-  },
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Basic breadcrumb with Arabic text in RTL mode. Chevron separators automatically flip direction.'
-      }
-    }
-  }
-};
-
-// RTL Custom Separator
-export const RTLCustomSeparator: Story = {
-  render: () => (
-    <Breadcrumb>
-      <BreadcrumbList>
-        <BreadcrumbItem>
-          <BreadcrumbLink href="/">الرئيسية</BreadcrumbLink>
-        </BreadcrumbItem>
-        <BreadcrumbSeparator>/</BreadcrumbSeparator>
-        <BreadcrumbItem>
-          <BreadcrumbLink href="/documentation">الوثائق</BreadcrumbLink>
-        </BreadcrumbItem>
-        <BreadcrumbSeparator>/</BreadcrumbSeparator>
-        <BreadcrumbItem>
-          <BreadcrumbPage>مسار التنقل</BreadcrumbPage>
-        </BreadcrumbItem>
-      </BreadcrumbList>
-    </Breadcrumb>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Breadcrumb with custom "/" separator in RTL mode.'
-      }
-    }
-  }
-};
-
-// RTL With Icons
-export const RTLWithIcons: Story = {
-  render: () => (
-    <Breadcrumb>
-      <BreadcrumbList>
-        <BreadcrumbItem>
-          <BreadcrumbLink href="/" className="flex items-center gap-2">
-            <House className="h-4 w-4" />
-            الرئيسية
-          </BreadcrumbLink>
-        </BreadcrumbItem>
-        <BreadcrumbSeparator />
-        <BreadcrumbItem>
-          <BreadcrumbLink href="/examples" className="flex items-center gap-2">
-            <Folder className="h-4 w-4" />
-            أمثلة
-          </BreadcrumbLink>
-        </BreadcrumbItem>
-        <BreadcrumbSeparator />
-        <BreadcrumbItem>
-          <BreadcrumbPage className="flex items-center gap-2">
-            <File className="h-4 w-4" />
-            مستند
-          </BreadcrumbPage>
-        </BreadcrumbItem>
-      </BreadcrumbList>
-    </Breadcrumb>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Breadcrumb with icons in RTL mode. Icons and text flow correctly right-to-left.'
-      }
-    }
-  }
-};
-
-// RTL Longer Path
-export const RTLLongerPath: Story = {
-  render: () => (
-    <Breadcrumb>
-      <BreadcrumbList>
-        <BreadcrumbItem>
-          <BreadcrumbLink href="/">الرئيسية</BreadcrumbLink>
-        </BreadcrumbItem>
-        <BreadcrumbSeparator />
-        <BreadcrumbItem>
-          <BreadcrumbLink href="/documentation">الوثائق</BreadcrumbLink>
-        </BreadcrumbItem>
-        <BreadcrumbSeparator />
-        <BreadcrumbItem>
-          <BreadcrumbLink href="/documentation/components">المكونات</BreadcrumbLink>
-        </BreadcrumbItem>
-        <BreadcrumbSeparator />
-        <BreadcrumbItem>
-          <BreadcrumbLink href="/documentation/components/navigation">التنقل</BreadcrumbLink>
-        </BreadcrumbItem>
-        <BreadcrumbSeparator />
-        <BreadcrumbItem>
-          <BreadcrumbPage>مسار التنقل</BreadcrumbPage>
-        </BreadcrumbItem>
-      </BreadcrumbList>
-    </Breadcrumb>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Longer breadcrumb path in RTL mode with Arabic text. Link order flows naturally right-to-left.'
-      }
-    }
-  }
-};

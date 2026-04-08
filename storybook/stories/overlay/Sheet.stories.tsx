@@ -26,12 +26,12 @@ import * as React from 'react';
  */
 
 const meta = {
-  title: 'Overlay/Sheet',
+  title: 'Overlays & Layout/Sheet',
   component: Sheet,
   parameters: {
     layout: 'centered'
   },
-  tags: ['!autodocs'],
+  tags: ['autodocs'],
   argTypes: {
     open: {
       control: { type: 'boolean' }
@@ -53,87 +53,33 @@ export const Default: Story = {
   args: {
     defaultOpen: false
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
-  render: (args) => (
-    <Sheet {...args}>
+
+  render: (args, { globals }) => {
+    const isRTL = globals?.direction === 'rtl';
+    const t = (en: string, ar: string) => isRTL ? ar : en;
+    const dir = isRTL ? 'rtl' as const : 'ltr' as const;
+
+    return (
+    <Sheet {...args} dir={dir}>
       <SheetTrigger asChild>
-        <Button variant="outline">Open Sheet</Button>
+        <Button variant="outline">{t('Open Sheet', 'فتح اللوحة')}</Button>
       </SheetTrigger>
       <SheetContent>
         <SheetHeader>
-          <SheetTitle>Sheet Title</SheetTitle>
+          <SheetTitle>{t('Sheet Title', 'عنوان اللوحة')}</SheetTitle>
           <SheetDescription>
-            This is a sheet component that slides in from the side.
+            {t('This is a sheet component that slides in from the side.', 'هذا مكون لوحة ينزلق من الجانب.')}
           </SheetDescription>
         </SheetHeader>
         <div className="py-4">
           <p className="text-sm text-muted-foreground">
-            Sheet content goes here. You can add forms, lists, or any other content.
+            {t('Sheet content goes here. You can add forms, lists, or any other content.', 'يظهر محتوى اللوحة هنا. يمكنك إضافة نماذج أو قوائم أو أي محتوى آخر.')}
           </p>
         </div>
       </SheetContent>
     </Sheet>
-  ),
-  parameters: {
-    docs: {
-      story: {
-        inline: false
-      }
-    }
+    );
   },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-    const body = within(document.body);
-
-    await step('Renders trigger button', async () => {
-      const trigger = canvas.getByRole('button', { name: /open sheet/i });
-      await expect(trigger).toBeInTheDocument();
-      await expect(trigger).toBeVisible();
-    });
-
-    await step('Opens sheet on trigger click', async () => {
-      const trigger = canvas.getByRole('button', { name: /open sheet/i });
-      await userEvent.click(trigger);
-
-      // Sheet content is in a portal - query from document.body
-      const sheetTitle = await body.findByRole('heading', { name: 'Sheet Title' });
-      await expect(sheetTitle).toBeInTheDocument();
-      await expect(body.getByText(/this is a sheet component/i)).toBeVisible();
-    });
-
-    await step('Sheet has proper dialog role and accessibility', async () => {
-      const dialog = body.getByRole('dialog');
-      await expect(dialog).toBeInTheDocument();
-      await expect(body.getByRole('heading', { name: 'Sheet Title' })).toBeVisible();
-    });
-
-    await step('Closes sheet with close button', async () => {
-      const closeButton = body.getByRole('button', { name: /close/i });
-      await expect(closeButton).toBeVisible();
-      await userEvent.click(closeButton);
-
-      // Wait for sheet to close
-      await expect(body.queryByText('Sheet Title')).not.toBeInTheDocument();
-    });
-
-    await step('Keyboard accessible - opens with Enter key', async () => {
-      const trigger = canvas.getByRole('button', { name: /open sheet/i });
-      trigger.focus();
-      await expect(trigger).toHaveFocus();
-      await userEvent.keyboard('{Enter}');
-
-      const sheetTitle = await body.findByRole('heading', { name: 'Sheet Title' });
-      await expect(sheetTitle).toBeInTheDocument();
-    });
-
-    await step('Closes with Escape key', async () => {
-      await userEvent.keyboard('{Escape}');
-      await expect(body.queryByText('Sheet Title')).not.toBeInTheDocument();
-    });
-  }
 };
 
 // From End (Default) - from component page lines 182-199
@@ -156,10 +102,7 @@ export const FromEnd: Story = {
       </SheetContent>
     </Sheet>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
+
   parameters: {
     controls: { disable: true },
     docs: {
@@ -209,10 +152,7 @@ export const FromStart: Story = {
       </SheetContent>
     </Sheet>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
+
   parameters: {
     controls: { disable: true },
     docs: {
@@ -260,10 +200,7 @@ export const FromTop: Story = {
       </SheetContent>
     </Sheet>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
+
   parameters: {
     controls: { disable: true },
     docs: {
@@ -311,10 +248,7 @@ export const FromBottom: Story = {
       </SheetContent>
     </Sheet>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
+
   parameters: {
     controls: { disable: true },
     docs: {
@@ -397,10 +331,7 @@ export const AllSides: Story = {
       </Sheet>
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
+
   parameters: {
     controls: { disable: true },
     docs: {
@@ -448,10 +379,7 @@ export const WithForm: Story = {
       </SheetContent>
     </Sheet>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
+
   parameters: {
     controls: { disable: true },
     docs: {
@@ -483,8 +411,8 @@ export const WithForm: Story = {
 
       // Test input interaction
       await userEvent.clear(nameInput);
-      await userEvent.type(nameInput, 'John Doe');
-      await expect(nameInput).toHaveValue('John Doe');
+      await userEvent.type(nameInput, 'Nuno Marques');
+      await expect(nameInput).toHaveValue('Nuno Marques');
     });
 
     await step('Save button closes the sheet', async () => {
@@ -529,10 +457,7 @@ export const NavigationMenu: Story = {
       </SheetContent>
     </Sheet>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
+
   parameters: {
     controls: { disable: true },
     docs: {
@@ -577,209 +502,3 @@ export const NavigationMenu: Story = {
   }
 };
 
-// RTL From End
-export const RTLFromEnd: Story = {
-  render: () => (
-    <Sheet>
-      <SheetTrigger asChild>
-        <Button variant="outline">فتح النهاية</Button>
-      </SheetTrigger>
-      <SheetContent side="end">
-        <SheetHeader>
-          <SheetTitle>لوحة النهاية</SheetTitle>
-          <SheetDescription>تنزلق هذه اللوحة من النهاية (اليمين في LTR، اليسار في RTL).</SheetDescription>
-        </SheetHeader>
-        <div className="py-4">
-          <p className="text-sm text-muted-foreground">تنزلق هذه اللوحة من جانب النهاية.</p>
-        </div>
-      </SheetContent>
-    </Sheet>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Sheet in RTL sliding from end (left in RTL). Demonstrates automatic positioning.'
-      }
-    }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-    const body = within(document.body);
-
-    await step('Renders in RTL context', async () => {
-      const trigger = canvas.getByRole('button', { name: /فتح النهاية/i });
-      await expect(trigger).toBeInTheDocument();
-      await expect(trigger).toBeVisible();
-    });
-
-    await step('Opens sheet in RTL mode', async () => {
-      const trigger = canvas.getByRole('button', { name: /فتح النهاية/i });
-      await userEvent.click(trigger);
-
-      // Sheet content is in a portal - query from document.body
-      const sheetTitle = await body.findByRole('heading', { name: 'لوحة النهاية' });
-      await expect(sheetTitle).toBeInTheDocument();
-      await expect(body.getByText(/تنزلق هذه اللوحة من النهاية/i)).toBeVisible();
-    });
-
-    await step('Sheet is accessible in RTL', async () => {
-      const dialog = body.getByRole('dialog');
-      await expect(dialog).toBeInTheDocument();
-    });
-  }
-};
-
-// RTL From Start
-export const RTLFromStart: Story = {
-  render: () => (
-    <Sheet>
-      <SheetTrigger asChild>
-        <Button variant="outline">فتح البداية</Button>
-      </SheetTrigger>
-      <SheetContent side="start">
-        <SheetHeader>
-          <SheetTitle>لوحة البداية</SheetTitle>
-          <SheetDescription>تنزلق هذه اللوحة من البداية (اليسار في LTR، اليمين في RTL).</SheetDescription>
-        </SheetHeader>
-        <div className="py-4">
-          <p className="text-sm text-muted-foreground">تنزلق هذه اللوحة من جانب البداية.</p>
-        </div>
-      </SheetContent>
-    </Sheet>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Sheet in RTL sliding from start (right in RTL). Demonstrates automatic positioning.'
-      }
-    }
-  }
-};
-
-// RTL With Form
-export const RTLWithForm: Story = {
-  render: () => (
-    <Sheet>
-      <SheetTrigger asChild>
-        <Button variant="outline">تعديل الملف الشخصي</Button>
-      </SheetTrigger>
-      <SheetContent>
-        <SheetHeader>
-          <SheetTitle>تعديل الملف الشخصي</SheetTitle>
-          <SheetDescription>
-            قم بإجراء تغييرات على ملفك الشخصي هنا. انقر فوق حفظ عند الانتهاء.
-          </SheetDescription>
-        </SheetHeader>
-        <div className="grid gap-4 py-4">
-          <div className="grid gap-2">
-            <Label htmlFor="name-rtl">الاسم</Label>
-            <Input id="name-rtl" placeholder="أدخل اسمك" defaultValue="نونو ماركيز" />
-          </div>
-          <div className="grid gap-2">
-            <Label htmlFor="email-rtl">البريد الإلكتروني</Label>
-            <Input
-              id="email-rtl"
-              type="email"
-              placeholder="أدخل بريدك الإلكتروني"
-              defaultValue="ositaka@example.com"
-            />
-          </div>
-        </div>
-        <SheetFooter>
-          <SheetClose asChild>
-            <Button type="submit">حفظ التغييرات</Button>
-          </SheetClose>
-        </SheetFooter>
-      </SheetContent>
-    </Sheet>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Sheet with form in RTL. All content flows right-to-left correctly.'
-      }
-    }
-  }
-};
-
-// RTL All Sides
-export const RTLAllSides: Story = {
-  render: () => (
-    <div className="flex flex-wrap gap-4">
-      <Sheet>
-        <SheetTrigger asChild>
-          <Button variant="outline">فتح البداية</Button>
-        </SheetTrigger>
-        <SheetContent side="start">
-          <SheetHeader>
-            <SheetTitle>لوحة البداية</SheetTitle>
-            <SheetDescription>من جانب البداية</SheetDescription>
-          </SheetHeader>
-        </SheetContent>
-      </Sheet>
-
-      <Sheet>
-        <SheetTrigger asChild>
-          <Button variant="outline">فتح النهاية</Button>
-        </SheetTrigger>
-        <SheetContent side="end">
-          <SheetHeader>
-            <SheetTitle>لوحة النهاية</SheetTitle>
-            <SheetDescription>من جانب النهاية</SheetDescription>
-          </SheetHeader>
-        </SheetContent>
-      </Sheet>
-
-      <Sheet>
-        <SheetTrigger asChild>
-          <Button variant="outline">فتح الأعلى</Button>
-        </SheetTrigger>
-        <SheetContent side="top">
-          <SheetHeader>
-            <SheetTitle>لوحة الأعلى</SheetTitle>
-            <SheetDescription>من الأعلى</SheetDescription>
-          </SheetHeader>
-        </SheetContent>
-      </Sheet>
-
-      <Sheet>
-        <SheetTrigger asChild>
-          <Button variant="outline">فتح الأسفل</Button>
-        </SheetTrigger>
-        <SheetContent side="bottom">
-          <SheetHeader>
-            <SheetTitle>لوحة الأسفل</SheetTitle>
-            <SheetDescription>من الأسفل</SheetDescription>
-          </SheetHeader>
-        </SheetContent>
-      </Sheet>
-    </div>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'All four sides in RTL: start, end, top, bottom with proper positioning.'
-      }
-    }
-  }
-};

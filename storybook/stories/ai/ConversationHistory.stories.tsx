@@ -63,12 +63,12 @@ const sampleConversations: Conversation[] = [
 ];
 
 const meta = {
-  title: 'AI/Conversation History',
+  title: 'AI-LLM Shell/Conversation History',
   component: ConversationHistory,
   parameters: {
     layout: 'fullscreen'
   },
-  tags: ['!autodocs'],
+  tags: ['autodocs'],
   argTypes: {
     conversations: { control: false },
     activeId: { control: 'text' },
@@ -151,10 +151,6 @@ export const Default: Story = {
       </div>
     );
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  }
 };
 
 // Full Featured - from page lines 358-368
@@ -209,10 +205,6 @@ export const FullFeatured: Story = {
         </CardContent>
       </Card>
     );
-  },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
   },
   parameters: {
     controls: { disable: true }
@@ -270,10 +262,6 @@ export const SmallSize: Story = {
       </CardContent>
     </Card>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   },
@@ -309,10 +297,6 @@ export const LargeSize: Story = {
       </CardContent>
     </Card>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   },
@@ -345,10 +329,6 @@ export const FloatingVariant: Story = {
       </CardContent>
     </Card>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -394,10 +374,6 @@ export const WithSearch: Story = {
         </div>
       </div>
     );
-  },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
@@ -463,10 +439,6 @@ export const FewConversations: Story = {
       </div>
     );
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -507,10 +479,6 @@ export const EmptyState: Story = {
       </div>
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -545,68 +513,3 @@ export const EmptyState: Story = {
   }
 };
 
-// RTL
-export const RTL: Story = {
-  render: () => {
-    const [activeId, setActiveId] = useState('1');
-    const [conversations, setConversations] = useState(sampleConversations);
-
-    const handleCreate = () => {
-      const newConv: Conversation = {
-        id: String(conversations.length + 1),
-        title: 'New Conversation',
-        titleAr: 'محادثة جديدة',
-        preview: '',
-        previewAr: '',
-        timestamp: new Date(),
-        messageCount: 0
-      };
-      setConversations([newConv, ...conversations]);
-      setActiveId(newConv.id);
-    };
-
-    const handleDelete = (id: string) => {
-      setConversations(conversations.filter((c) => c.id !== id));
-    };
-
-    const handleRename = (id: string, newTitle: string) => {
-      setConversations(
-        conversations.map((c) => (c.id === id ? { ...c, titleAr: newTitle } : c))
-      );
-    };
-
-    return (
-      <div className="flex w-full h-[600px] border rounded-lg overflow-hidden">
-        <ConversationHistory
-          conversations={conversations}
-          activeId={activeId}
-          onSelect={setActiveId}
-          onCreate={handleCreate}
-          onRename={handleRename}
-          onDelete={handleDelete}
-          onShare={(id) => alert(`مشاركة المحادثة ${id}`)}
-          isRTL
-          title="Conversations"
-          titleAr="المحادثات"
-        />
-        <div className="flex-1 flex items-center justify-center bg-muted/10">
-          <div className="text-center space-y-2">
-            <p className="text-lg font-medium">
-              نشطة: {conversations.find((c) => c.id === activeId)?.titleAr}
-            </p>
-            <p className="text-sm text-muted-foreground">
-              محتوى الدردشة سيظهر هنا
-            </p>
-          </div>
-        </div>
-      </div>
-    );
-  },
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true }
-  }
-};

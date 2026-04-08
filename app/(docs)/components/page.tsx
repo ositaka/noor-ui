@@ -49,8 +49,6 @@ import {
   Gear,
   ClockCounterClockwise,
   Sliders,
-  TreeStructure,
-  Cube,
   Quotes,
   ThumbsUp,
   Command,
@@ -199,14 +197,6 @@ const componentCategories = (t: typeof content.en | typeof content.ar) => [
       { name: 'Parameter Slider', icon: Sliders, href: '/components/parameter-slider', status: 'ready' },
       { name: 'Token Counter', icon: Hash, href: '/components/token-counter', status: 'ready' },
       { name: 'Conversation History', icon: ClockCounterClockwise, href: '/components/conversation-history', status: 'ready' },
-    ],
-  },
-  {
-    name: t.components.categories.workflow,
-    description: t.components.categories.workflowDesc,
-    components: [
-      { name: 'Workflow Canvas', icon: TreeStructure, href: '/components/workflow-canvas', status: 'ready' },
-      { name: 'Workflow Node', icon: Cube, href: '/components/workflow-node', status: 'ready' },
     ],
   },
 ]

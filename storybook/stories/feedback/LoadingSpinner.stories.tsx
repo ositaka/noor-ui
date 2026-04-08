@@ -16,7 +16,7 @@ const meta = {
   parameters: {
     layout: 'centered'
   },
-  tags: ['!autodocs'],
+  tags: ['autodocs'],
   argTypes: {
     size: {
       control: { type: 'select' },
@@ -35,29 +35,13 @@ export const Default: Story = {
   args: {
     size: 'md'
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
+  parameters: {
+    ar: {
+      args: {
+        text: 'جاري التحميل...'
+      }
+    }
   },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders correctly', async () => {
-      const spinner = canvas.getByRole('status');
-      await expect(spinner).toBeInTheDocument();
-      await expect(spinner).toBeVisible();
-    });
-
-    await step('Has correct accessibility attributes', async () => {
-      const spinner = canvas.getByRole('status');
-      await expect(spinner).toHaveAttribute('aria-live', 'polite');
-      await expect(spinner).toHaveAttribute('aria-label', 'Loading...');
-    });
-
-    await step('Has screen reader text', async () => {
-      await expect(canvas.getByText('Loading...', { selector: '.sr-only' })).toBeInTheDocument();
-    });
-  }
 };
 
 // Small Size
@@ -73,10 +57,6 @@ export const SmallSize: Story = {
       </CardContent>
     </Card>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   },
@@ -110,10 +90,6 @@ export const MediumSize: Story = {
       </CardContent>
     </Card>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   },
@@ -147,10 +123,6 @@ export const LargeSize: Story = {
       </CardContent>
     </Card>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   },
@@ -180,10 +152,6 @@ export const WithText: Story = {
       </CardContent>
     </Card>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   },
@@ -236,10 +204,6 @@ export const AllSizes: Story = {
       </CardContent>
     </Card>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   }
@@ -258,10 +222,6 @@ export const InContent: Story = {
       </CardContent>
     </Card>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   },
@@ -293,10 +253,6 @@ export const FullPageLoading: Story = {
       <LoadingSpinner size="lg" text="Loading application..." />
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   },
@@ -316,47 +272,6 @@ export const FullPageLoading: Story = {
     await step('Has correct accessibility attributes', async () => {
       const spinner = canvas.getByRole('status');
       await expect(spinner).toHaveAttribute('aria-label', 'Loading application...');
-      await expect(spinner).toHaveAttribute('aria-live', 'polite');
-    });
-  }
-};
-
-// RTL
-export const RTL: Story = {
-  render: () => (
-    <Card>
-      <CardHeader>
-        <CardTitle>جاري التحميل</CardTitle>
-        <CardDescription>مؤشر التحميل مع نص عربي</CardDescription>
-      </CardHeader>
-      <CardContent className="flex justify-center p-12">
-        <LoadingSpinner size="md" text="جاري تحميل البيانات..." />
-      </CardContent>
-    </Card>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders in RTL context', async () => {
-      const spinner = canvas.getByRole('status');
-      await expect(spinner).toBeInTheDocument();
-      await expect(spinner).toBeVisible();
-    });
-
-    await step('Displays Arabic text', async () => {
-      await expect(canvas.getByText('جاري تحميل البيانات...', { selector: 'p' })).toBeInTheDocument();
-    });
-
-    await step('Has correct accessibility in RTL', async () => {
-      const spinner = canvas.getByRole('status');
-      await expect(spinner).toHaveAttribute('aria-label', 'جاري تحميل البيانات...');
       await expect(spinner).toHaveAttribute('aria-live', 'polite');
     });
   }

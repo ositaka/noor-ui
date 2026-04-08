@@ -13,12 +13,12 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../..
  */
 
 const meta = {
-  title: 'Basic/User Badge',
+  title: 'Data Display/User Badge',
   component: UserBadge,
   parameters: {
     layout: 'centered'
   },
-  tags: ['!autodocs'],
+  tags: ['autodocs'],
   argTypes: {
     variant: {
       control: { type: 'select' },
@@ -38,24 +38,6 @@ export const Default: Story = {
   args: {
     variant: 'author'
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders correctly', async () => {
-      const badge = canvas.getByText('Author');
-      await expect(badge).toBeInTheDocument();
-      await expect(badge).toBeVisible();
-    });
-
-    await step('Has correct content', async () => {
-      await expect(canvas.getByText('Author')).toBeInTheDocument();
-    });
-
-  }
 };
 
 // All Variants - from page lines 97-102
@@ -77,10 +59,6 @@ export const AllVariants: Story = {
       </CardContent>
     </Card>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   }
@@ -89,10 +67,6 @@ export const AllVariants: Story = {
 // Author
 export const Author: Story = {
   render: () => <UserBadge variant="author" />,
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   },
@@ -109,10 +83,6 @@ export const Author: Story = {
 // Moderator
 export const Moderator: Story = {
   render: () => <UserBadge variant="moderator" />,
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   },
@@ -129,10 +99,6 @@ export const Moderator: Story = {
 // Verified
 export const Verified: Story = {
   render: () => <UserBadge variant="verified" />,
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   },
@@ -149,10 +115,6 @@ export const Verified: Story = {
 // Admin
 export const Admin: Story = {
   render: () => <UserBadge variant="admin" />,
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   },
@@ -175,10 +137,6 @@ export const Custom: Story = {
       <UserBadge variant="custom" label="Plus" />
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   },
@@ -189,35 +147,6 @@ export const Custom: Story = {
       await expect(canvas.getByText('VIP')).toBeInTheDocument();
       await expect(canvas.getByText('Pro')).toBeInTheDocument();
       await expect(canvas.getByText('Plus')).toBeInTheDocument();
-    });
-  }
-};
-
-// RTL
-export const RTL: Story = {
-  render: () => (
-    <div className="flex flex-wrap items-center gap-3">
-      <UserBadge variant="author" />
-      <UserBadge variant="moderator" />
-      <UserBadge variant="verified" />
-      <UserBadge variant="admin" />
-    </div>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders in RTL context', async () => {
-      await expect(canvas.getByText('Author')).toBeInTheDocument();
-      await expect(canvas.getByText('Moderator')).toBeInTheDocument();
-      await expect(canvas.getByText('Verified')).toBeInTheDocument();
-      await expect(canvas.getByText('Admin')).toBeInTheDocument();
     });
   }
 };

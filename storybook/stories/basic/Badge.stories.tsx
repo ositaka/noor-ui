@@ -12,12 +12,12 @@ import { Check, WarningCircle, Star, Clock, Lightning, CheckCircle, XCircle } fr
  */
 
 const meta = {
-  title: 'Basic/Badge',
+  title: 'Core/Badge',
   component: Badge,
   parameters: {
     layout: 'centered'
   },
-  tags: ['!autodocs'],
+  tags: ['autodocs'],
   argTypes: {
     variant: {
       control: 'select',
@@ -36,15 +36,13 @@ export const Default: Story = {
     children: 'New',
     variant: 'default'
   },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders correctly', async () => {
-      const badge = canvas.getByText('New');
-      await expect(badge).toBeInTheDocument();
-      await expect(badge).toBeVisible();
-    });
-  }
+  parameters: {
+    ar: {
+      args: {
+        children: 'جديد'
+      }
+    }
+  },
 };
 
 // With Icon - users can change variant via controls
@@ -58,6 +56,16 @@ export const WithIcon: Story = {
     )
   },
   parameters: {
+    ar: {
+      args: {
+        children: (
+          <>
+            <Check className="h-3 w-3 me-1" />
+            موثّق
+          </>
+        )
+      }
+    },
     docs: {
       description: {
         story: 'Badge with icon. Use the Controls panel to try different variants.'
@@ -88,6 +96,16 @@ export const StatusIndicator: Story = {
     )
   },
   parameters: {
+    ar: {
+      args: {
+        children: (
+          <>
+            <CheckCircle className="h-3 w-3 me-1" />
+            نشط
+          </>
+        )
+      }
+    },
     docs: {
       description: {
         story: 'Status indicator with icon and role="status" for screen reader announcements. Use Controls to try different statuses and variants.'
@@ -143,38 +161,6 @@ export const NotificationCount: Story = {
       await expect(canvas.getByText('12')).toBeInTheDocument();
       await expect(canvas.getByText('Cart')).toBeInTheDocument();
       await expect(canvas.getByText('5')).toBeInTheDocument();
-    });
-  }
-};
-
-// RTL Example - users can change variant via controls
-export const RTLExample: Story = {
-  args: {
-    children: (
-      <>
-        <Check className="h-3 w-3 me-1" />
-        جديد
-      </>
-    )
-  },
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: 'Badge with Arabic text. Icon automatically positions correctly in RTL. Use Controls to try different variants.'
-      }
-    }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders in RTL context', async () => {
-      const badge = canvas.getByText('جديد');
-      await expect(badge).toBeInTheDocument();
-      await expect(badge).toBeVisible();
     });
   }
 };

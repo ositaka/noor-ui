@@ -351,8 +351,6 @@ common: {
         'prompt-input': 'Prompt Input',
         'thinking-indicator': 'Thinking Indicator',
         'token-counter': 'Token Counter',
-        'workflow-canvas': 'Workflow Canvas',
-        'workflow-node': 'Workflow Node',
       },
 
   componentPage: {

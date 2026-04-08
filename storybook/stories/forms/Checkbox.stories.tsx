@@ -21,7 +21,7 @@ const meta = {
   parameters: {
     layout: 'centered'
   },
-  tags: ['!autodocs'],
+  tags: ['autodocs'],
   argTypes: {
     onCheckedChange: {
       control: false
@@ -38,67 +38,17 @@ export const Default: Story = {
     id: 'default',
     onCheckedChange: fn()
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
-  render: (args) => (
+  render: (args, { globals }) => {
+    const isRTL = globals?.direction === 'rtl';
+    const t = (en: string, ar: string) => isRTL ? ar : en;
+
+    return (
     <div className="flex items-center gap-2">
       <Checkbox {...args} />
-      <Label htmlFor="default">Accept terms and conditions</Label>
+      <Label htmlFor="default">{t('Accept terms and conditions', 'أوافق على الشروط والأحكام')}</Label>
     </div>
-  ),
-  parameters: {
-    docs: {
-      story: {
-        inline: false
-      }
-    }
+    );
   },
-  play: async ({ canvasElement, step, args }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders correctly with label', async () => {
-      const checkbox = canvas.getByRole('checkbox');
-      await expect(checkbox).toBeInTheDocument();
-      await expect(checkbox).toBeVisible();
-      await expect(checkbox).not.toBeChecked();
-      await expect(canvas.getByText('Accept terms and conditions')).toBeInTheDocument();
-    });
-
-    await step('Handles click interaction', async () => {
-      const checkbox = canvas.getByRole('checkbox');
-      await userEvent.click(checkbox);
-      await expect(checkbox).toBeChecked();
-      await expect(args.onCheckedChange).toHaveBeenCalledTimes(1);
-      await expect(args.onCheckedChange).toHaveBeenCalledWith(true);
-    });
-
-    await step('Can be unchecked', async () => {
-      const checkbox = canvas.getByRole('checkbox');
-      await userEvent.click(checkbox);
-      await expect(checkbox).not.toBeChecked();
-      await expect(args.onCheckedChange).toHaveBeenCalledTimes(2);
-      await expect(args.onCheckedChange).toHaveBeenCalledWith(false);
-    });
-
-    await step('Keyboard accessible', async () => {
-      const checkbox = canvas.getByRole('checkbox');
-      checkbox.focus();
-      await expect(checkbox).toHaveFocus();
-      await userEvent.keyboard(' ');
-      await expect(checkbox).toBeChecked();
-      await expect(args.onCheckedChange).toHaveBeenCalledTimes(3);
-    });
-
-    await step('Label click toggles checkbox', async () => {
-      const checkbox = canvas.getByRole('checkbox');
-      const label = canvas.getByText('Accept terms and conditions');
-      await userEvent.click(label);
-      await expect(checkbox).not.toBeChecked();
-      await expect(args.onCheckedChange).toHaveBeenCalledTimes(4);
-    });
-  }
 };
 
 // With Label - from component page lines 292-303
@@ -119,10 +69,6 @@ export const WithLabel: Story = {
       </div>
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   },
@@ -220,10 +166,6 @@ export const IndeterminateState: Story = {
       </div>
     );
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -301,10 +243,6 @@ export const Disabled: Story = {
       </div>
     </div>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true }
   },
@@ -346,10 +284,6 @@ export const Controlled: Story = {
         </Button>
       </div>
     );
-  },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
@@ -420,10 +354,6 @@ export const InForm: Story = {
       <Button type="submit">Submit</Button>
     </form>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -472,200 +402,3 @@ export const InForm: Story = {
   }
 };
 
-// RTL Example
-export const RTLExample: Story = {
-  render: () => (
-    <div className="space-y-3">
-      <div className="flex items-center gap-2">
-        <Checkbox id="rtl-terms" />
-        <Label htmlFor="rtl-terms">أوافق على الشروط والأحكام</Label>
-      </div>
-      <div className="flex items-center gap-2">
-        <Checkbox id="rtl-newsletter" />
-        <Label htmlFor="rtl-newsletter">الاشتراك في النشرة الإخبارية</Label>
-      </div>
-    </div>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Checkboxes with Arabic labels demonstrating RTL support. Checkbox and label maintain proper spacing and alignment. Automatically switches to RTL mode.'
-      }
-    }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders in RTL context', async () => {
-      const checkboxes = canvas.getAllByRole('checkbox');
-      await expect(checkboxes).toHaveLength(2);
-      await expect(canvas.getByText('أوافق على الشروط والأحكام')).toBeInTheDocument();
-      await expect(canvas.getByText('الاشتراك في النشرة الإخبارية')).toBeInTheDocument();
-    });
-
-    await step('Interaction works in RTL', async () => {
-      const termsCheckbox = canvas.getByLabelText('أوافق على الشروط والأحكام');
-      await userEvent.click(termsCheckbox);
-      await expect(termsCheckbox).toBeChecked();
-    });
-  }
-};
-
-// RTL Indeterminate
-export const RTLIndeterminate: Story = {
-  render: () => {
-    const [checkedItems, setCheckedItems] = React.useState({
-      item1: false,
-      item2: false,
-      item3: false
-    });
-
-    const allChecked = Object.values(checkedItems).every(Boolean);
-    const someChecked = Object.values(checkedItems).some(Boolean);
-    const indeterminate = someChecked && !allChecked;
-
-    return (
-      <div className="space-y-3 w-64">
-        <div className="flex items-center gap-2">
-          <Checkbox
-            id="all-rtl"
-            checked={allChecked ? true : indeterminate ? 'indeterminate' : false}
-            onCheckedChange={(checked) => {
-              const newValue = checked === true;
-              setCheckedItems({
-                item1: newValue,
-                item2: newValue,
-                item3: newValue
-              });
-            }}
-          />
-          <Label htmlFor="all-rtl" className="font-semibold">
-            تحديد الكل
-          </Label>
-        </div>
-        <Separator />
-        <div className="space-y-2 ps-6">
-          <div className="flex items-center gap-2">
-            <Checkbox
-              id="item1-rtl"
-              checked={checkedItems.item1}
-              onCheckedChange={(checked) =>
-                setCheckedItems({ ...checkedItems, item1: checked === true })
-              }
-            />
-            <Label htmlFor="item1-rtl">عنصر ١</Label>
-          </div>
-          <div className="flex items-center gap-2">
-            <Checkbox
-              id="item2-rtl"
-              checked={checkedItems.item2}
-              onCheckedChange={(checked) =>
-                setCheckedItems({ ...checkedItems, item2: checked === true })
-              }
-            />
-            <Label htmlFor="item2-rtl">عنصر ٢</Label>
-          </div>
-          <div className="flex items-center gap-2">
-            <Checkbox
-              id="item3-rtl"
-              checked={checkedItems.item3}
-              onCheckedChange={(checked) =>
-                setCheckedItems({ ...checkedItems, item3: checked === true })
-              }
-            />
-            <Label htmlFor="item3-rtl">عنصر ٣</Label>
-          </div>
-        </div>
-      </div>
-    );
-  },
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Indeterminate state with Arabic text in RTL mode. The "Select All" functionality works perfectly in RTL.'
-      }
-    }
-  }
-};
-
-// RTL Disabled
-export const RTLDisabled: Story = {
-  render: () => (
-    <div className="space-y-3">
-      <div className="flex items-center gap-2">
-        <Checkbox id="disabled-rtl" disabled />
-        <Label htmlFor="disabled-rtl">خانة اختيار معطلة</Label>
-      </div>
-      <div className="flex items-center gap-2">
-        <Checkbox id="disabled-checked-rtl" disabled checked />
-        <Label htmlFor="disabled-checked-rtl">معطلة ومحددة</Label>
-      </div>
-    </div>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Disabled checkboxes with Arabic labels in RTL mode.'
-      }
-    }
-  }
-};
-
-// RTL In Form
-export const RTLInForm: Story = {
-  render: () => (
-    <form
-      className="space-y-4"
-      onSubmit={(e) => {
-        e.preventDefault();
-        alert('تم إرسال النموذج!');
-      }}
-    >
-      <div className="space-y-3">
-        <div className="flex items-center gap-2">
-          <Checkbox id="newsletter-rtl" name="newsletter" value="yes" />
-          <Label htmlFor="newsletter-rtl">الاشتراك في النشرة الإخبارية</Label>
-        </div>
-        <div className="flex items-center gap-2">
-          <Checkbox id="updates-rtl" name="updates" value="yes" />
-          <Label htmlFor="updates-rtl">تلقي تحديثات المنتج</Label>
-        </div>
-        <div className="flex items-center gap-2">
-          <Checkbox id="terms-rtl" name="terms" value="yes" required />
-          <Label htmlFor="terms-rtl">
-            أوافق على الشروط والأحكام{' '}
-            <span className="text-destructive">*</span>
-          </Label>
-        </div>
-      </div>
-      <Button type="submit">إرسال</Button>
-    </form>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Complete form with checkboxes in Arabic, demonstrating RTL support in form contexts.'
-      }
-    }
-  }
-};

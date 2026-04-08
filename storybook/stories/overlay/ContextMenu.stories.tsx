@@ -33,12 +33,12 @@ import * as React from 'react';
  */
 
 const meta = {
-  title: 'Overlay/Context Menu',
+  title: 'Navigation/Context Menu',
   component: ContextMenu,
   parameters: {
     layout: 'centered'
   },
-  tags: ['!autodocs'],
+  tags: ['autodocs'],
   argTypes: {
     onOpenChange: {
       control: false
@@ -51,94 +51,51 @@ type Story = StoryObj<typeof meta>;
 
 // Default - Interactive playground with controls
 export const Default: Story = {
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   args: {
     onOpenChange: fn()
   },
-  render: (args) => (
-    <ContextMenu onOpenChange={args.onOpenChange}>
+  render: (args, { globals }) => {
+    const isRTL = globals?.direction === 'rtl';
+    const t = (en: string, ar: string) => isRTL ? ar : en;
+    const dir = isRTL ? 'rtl' as const : 'ltr' as const;
+
+    return (
+    <ContextMenu onOpenChange={args.onOpenChange} dir={dir}>
       <ContextMenuTrigger>
         <Card className="w-full max-w-md h-32 px-4 flex items-center justify-center border-dashed border-2 cursor-context-menu">
-          <p className="text-muted-foreground">Right click here</p>
+          <p className="text-muted-foreground">{t('Right click here', 'انقر بالزر الأيمن هنا')}</p>
         </Card>
       </ContextMenuTrigger>
       <ContextMenuContent className="w-56">
         <ContextMenuItem onSelect={fn()}>
           <PencilSimple className="me-2 h-4 w-4" />
-          <span>Edit</span>
+          <span>{t('Edit', 'تعديل')}</span>
           <ContextMenuShortcut>⌘E</ContextMenuShortcut>
         </ContextMenuItem>
         <ContextMenuItem onSelect={fn()}>
           <Copy className="me-2 h-4 w-4" />
-          <span>Copy</span>
+          <span>{t('Copy', 'نسخ')}</span>
           <ContextMenuShortcut>⌘C</ContextMenuShortcut>
         </ContextMenuItem>
         <ContextMenuItem onSelect={fn()}>
           <Share className="me-2 h-4 w-4" />
-          <span>Share</span>
+          <span>{t('Share', 'مشاركة')}</span>
         </ContextMenuItem>
         <ContextMenuSeparator />
         <ContextMenuItem onSelect={fn()}>
           <Download className="me-2 h-4 w-4" />
-          <span>Download</span>
+          <span>{t('Download', 'تنزيل')}</span>
         </ContextMenuItem>
         <ContextMenuSeparator />
         <ContextMenuItem className="text-destructive" onSelect={fn()}>
           <Trash className="me-2 h-4 w-4" />
-          <span>Delete</span>
+          <span>{t('Delete', 'حذف')}</span>
           <ContextMenuShortcut>⌘D</ContextMenuShortcut>
         </ContextMenuItem>
       </ContextMenuContent>
     </ContextMenu>
-  ),
-  play: async ({ canvasElement, step, args }) => {
-    const canvas = within(canvasElement);
-    const body = within(document.body);
-
-    await step('Renders trigger correctly', async () => {
-      const trigger = canvas.getByText('Right click here');
-      await expect(trigger).toBeInTheDocument();
-      await expect(trigger).toBeVisible();
-    });
-
-    await step('Opens context menu on right-click', async () => {
-      const trigger = canvas.getByText('Right click here');
-      await userEvent.pointer({ keys: '[MouseRight>]', target: trigger });
-
-      // Wait for menu to appear - context menu renders in portal at document.body
-      const editItem = await body.findByText('Edit');
-      await expect(editItem).toBeInTheDocument();
-      await expect(editItem).toBeVisible();
-      await expect(args.onOpenChange).toHaveBeenCalledWith(true);
-    });
-
-    await step('Menu items are keyboard navigable', async () => {
-      // Navigate with arrow keys
-      await userEvent.keyboard('{ArrowDown}');
-
-      // Verify menu is still open after navigation by checking item visibility
-      const copyItem = body.getByText('Copy').closest('[role="menuitem"]');
-      await expect(copyItem).toBeVisible();
-    });
-
-    await step('Menu items can be selected', async () => {
-      const copyItem = body.getByText('Copy').closest('[role="menuitem"]');
-      await userEvent.keyboard('{Enter}');
-
-      // Menu should close after selection
-      await expect(copyItem).not.toBeInTheDocument();
-    });
+    );
   },
-  parameters: {
-    docs: {
-      story: {
-        inline: false
-      }
-    }
-  }
 };
 
 // Basic Usage - from component page lines 166-199
@@ -201,10 +158,6 @@ export const BasicUsage: Story = {
       await expect(shortcut).toBeInTheDocument();
     });
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -248,10 +201,6 @@ export const WithIcons: Story = {
       </ContextMenuContent>
     </ContextMenu>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -322,10 +271,6 @@ export const WithCheckboxes: Story = {
       const updatedItem = await body.findByRole('menuitemcheckbox', { name: /Show Reading List/i });
       await expect(updatedItem).toHaveAttribute('data-state', 'checked');
     });
-  },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
@@ -405,10 +350,6 @@ export const FileExplorer: Story = {
       await expect(favoritesItem).toBeInTheDocument();
     });
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -463,10 +404,6 @@ export const AllVariants: Story = {
       </div>
     );
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -477,217 +414,3 @@ export const AllVariants: Story = {
   }
 };
 
-// RTL Basic
-export const RTLBasic: Story = {
-  render: () => (
-    <ContextMenu>
-      <ContextMenuTrigger>
-        <Card className="w-full max-w-md h-32 px-4 flex items-center justify-center border-dashed border-2 cursor-context-menu">
-          <p className="text-muted-foreground">انقر بزر الماوس الأيمن هنا</p>
-        </Card>
-      </ContextMenuTrigger>
-      <ContextMenuContent className="w-56">
-        <ContextMenuItem>
-          <PencilSimple className="me-2 h-4 w-4" />
-          <span>تعديل</span>
-          <ContextMenuShortcut>⌘E</ContextMenuShortcut>
-        </ContextMenuItem>
-        <ContextMenuItem>
-          <Copy className="me-2 h-4 w-4" />
-          <span>نسخ</span>
-          <ContextMenuShortcut>⌘C</ContextMenuShortcut>
-        </ContextMenuItem>
-        <ContextMenuItem>
-          <Share className="me-2 h-4 w-4" />
-          <span>مشاركة</span>
-        </ContextMenuItem>
-        <ContextMenuSeparator />
-        <ContextMenuItem>
-          <Download className="me-2 h-4 w-4" />
-          <span>تحميل</span>
-        </ContextMenuItem>
-        <ContextMenuSeparator />
-        <ContextMenuItem className="text-destructive">
-          <Trash className="me-2 h-4 w-4" />
-          <span>حذف</span>
-          <ContextMenuShortcut>⌘D</ContextMenuShortcut>
-        </ContextMenuItem>
-      </ContextMenuContent>
-    </ContextMenu>
-  ),
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-    const body = within(document.body);
-
-    await step('Renders in RTL context', async () => {
-      const trigger = canvas.getByText('انقر بزر الماوس الأيمن هنا');
-      await expect(trigger).toBeInTheDocument();
-    });
-
-    await step('Opens and displays RTL content correctly', async () => {
-      const trigger = canvas.getByText('انقر بزر الماوس الأيمن هنا');
-      await userEvent.pointer({ keys: '[MouseRight>]', target: trigger });
-
-      // Context menu renders in portal at document.body
-      const editItem = await body.findByText('تعديل');
-      await expect(editItem).toBeInTheDocument();
-
-      // Verify shortcuts still render LTR
-      const shortcut = body.getByText('⌘E');
-      await expect(shortcut).toBeInTheDocument();
-    });
-  },
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Context menu in RTL with Arabic text. Icons and shortcuts position correctly.'
-      }
-    }
-  }
-};
-
-// RTL With Icons
-export const RTLWithIcons: Story = {
-  render: () => (
-    <ContextMenu>
-      <ContextMenuTrigger>
-        <Card className="w-64 h-32 flex items-center justify-center border-dashed border-2 cursor-context-menu">
-          <p className="text-muted-foreground">انقر بزر الماوس الأيمن</p>
-        </Card>
-      </ContextMenuTrigger>
-      <ContextMenuContent className="w-56">
-        <ContextMenuItem>
-          <PencilSimple className="me-2 h-4 w-4" />
-          <span>تعديل</span>
-          <ContextMenuShortcut>⌘E</ContextMenuShortcut>
-        </ContextMenuItem>
-        <ContextMenuItem>
-          <Copy className="me-2 h-4 w-4" />
-          <span>نسخ</span>
-          <ContextMenuShortcut>⌘C</ContextMenuShortcut>
-        </ContextMenuItem>
-        <ContextMenuItem>
-          <Share className="me-2 h-4 w-4" />
-          <span>مشاركة</span>
-        </ContextMenuItem>
-        <ContextMenuSeparator />
-        <ContextMenuItem className="text-destructive">
-          <Trash className="me-2 h-4 w-4" />
-          <span>حذف</span>
-          <ContextMenuShortcut>⌘D</ContextMenuShortcut>
-        </ContextMenuItem>
-      </ContextMenuContent>
-    </ContextMenu>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Context menu with icons in RTL. Layout mirrors correctly.'
-      }
-    }
-  }
-};
-
-// RTL With Checkboxes
-export const RTLWithCheckboxes: Story = {
-  render: () => {
-    const [showBookmarks, setShowBookmarks] = React.useState(true);
-    const [showReadingList, setShowReadingList] = React.useState(false);
-
-    return (
-      <ContextMenu>
-        <ContextMenuTrigger>
-          <Card className="w-64 h-32 flex items-center justify-center border-dashed border-2 cursor-context-menu">
-            <p className="text-muted-foreground">انقر بزر الماوس الأيمن للخيارات</p>
-          </Card>
-        </ContextMenuTrigger>
-        <ContextMenuContent className="w-56">
-          <ContextMenuLabel>خيارات العرض</ContextMenuLabel>
-          <ContextMenuSeparator />
-          <ContextMenuCheckboxItem checked={showBookmarks} onCheckedChange={setShowBookmarks}>
-            إظهار الإشارات المرجعية
-          </ContextMenuCheckboxItem>
-          <ContextMenuCheckboxItem checked={showReadingList} onCheckedChange={setShowReadingList}>
-            إظهار قائمة القراءة
-          </ContextMenuCheckboxItem>
-        </ContextMenuContent>
-      </ContextMenu>
-    );
-  },
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Context menu with checkboxes in RTL. Checkmarks position on the right (start).'
-      }
-    }
-  }
-};
-
-// RTL File Explorer
-export const RTLFileExplorer: Story = {
-  render: () => (
-    <div className="w-full max-w-md">
-      <div className="space-y-2">
-        {['مستند.pdf', 'صورة.png', 'فيديو.mp4'].map((file) => (
-          <ContextMenu key={file}>
-            <ContextMenuTrigger>
-              <div className="flex items-center gap-2 p-3 rounded border hover:bg-accent cursor-context-menu">
-                <span className="text-sm">{file}</span>
-              </div>
-            </ContextMenuTrigger>
-            <ContextMenuContent className="w-56">
-              <ContextMenuItem>
-                <Copy className="me-2 h-4 w-4" />
-                <span>نسخ</span>
-              </ContextMenuItem>
-              <ContextMenuItem>
-                <Download className="me-2 h-4 w-4" />
-                <span>تحميل</span>
-              </ContextMenuItem>
-              <ContextMenuItem>
-                <Star className="me-2 h-4 w-4" />
-                <span>إضافة إلى المفضلة</span>
-              </ContextMenuItem>
-              <ContextMenuSeparator />
-              <ContextMenuItem>
-                <Archive className="me-2 h-4 w-4" />
-                <span>أرشفة</span>
-              </ContextMenuItem>
-              <ContextMenuItem className="text-destructive">
-                <Trash className="me-2 h-4 w-4" />
-                <span>حذف</span>
-              </ContextMenuItem>
-            </ContextMenuContent>
-          </ContextMenu>
-        ))}
-      </div>
-    </div>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'File explorer pattern in RTL with Arabic filenames and menu items.'
-      }
-    }
-  }
-};

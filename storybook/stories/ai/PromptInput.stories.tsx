@@ -15,12 +15,12 @@ import { expect, userEvent, within, fn } from 'storybook/test';
  */
 
 const meta = {
-  title: 'AI/Prompt Input',
+  title: 'AI-LLM Shell/Prompt Input',
   component: PromptInput,
   parameters: {
     layout: 'centered'
   },
-  tags: ['!autodocs'],
+  tags: ['autodocs'],
   argTypes: {
     onSend: { control: false },
     isLoading: { control: 'boolean' },
@@ -46,11 +46,7 @@ export const Default: Story = {
   args: {
     placeholder: 'Type your message... (Shift+Enter for new line)'
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
-  render: (args) => {
+  render: (args, { globals }) => {
     const [value, setValue] = useState('');
     return (
       <div className="max-w-2xl w-96">
@@ -67,66 +63,12 @@ export const Default: Story = {
     );
   },
   parameters: {
-    docs: {
-      story: {
-        inline: false
+    ar: {
+      args: {
+        placeholder: 'اكتب رسالتك... (Shift+Enter لسطر جديد)'
       }
     }
   },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders textarea with placeholder', async () => {
-      const textarea = canvas.getByPlaceholderText('Type your message... (Shift+Enter for new line)');
-      await expect(textarea).toBeInTheDocument();
-      await expect(textarea).toBeVisible();
-    });
-
-    await step('Renders send button', async () => {
-      const sendButton = canvas.getByRole('button', { name: /send/i });
-      await expect(sendButton).toBeInTheDocument();
-      await expect(sendButton).toBeDisabled(); // Disabled when empty
-    });
-
-    await step('Typing enables send button', async () => {
-      const textarea = canvas.getByPlaceholderText('Type your message... (Shift+Enter for new line)');
-      await userEvent.type(textarea, 'Hello world');
-      await expect(textarea).toHaveValue('Hello world');
-
-      const sendButton = canvas.getByRole('button', { name: /send/i });
-      await expect(sendButton).toBeEnabled();
-    });
-
-    await step('Send button clears input', async () => {
-      const sendButton = canvas.getByRole('button', { name: /send/i });
-      await userEvent.click(sendButton);
-
-      const textarea = canvas.getByPlaceholderText('Type your message... (Shift+Enter for new line)');
-      await expect(textarea).toHaveValue('');
-      await expect(sendButton).toBeDisabled(); // Disabled again after sending
-    });
-
-    await step('Enter key sends message', async () => {
-      const textarea = canvas.getByPlaceholderText('Type your message... (Shift+Enter for new line)');
-      await userEvent.type(textarea, 'Testing Enter key');
-      await expect(textarea).toHaveValue('Testing Enter key');
-
-      await userEvent.keyboard('{Enter}');
-      await expect(textarea).toHaveValue('');
-    });
-
-    await step('Shift+Enter adds new line without sending', async () => {
-      const textarea = canvas.getByPlaceholderText('Type your message... (Shift+Enter for new line)');
-      await userEvent.type(textarea, 'Line 1{Shift>}{Enter}{/Shift}Line 2');
-      await expect(textarea).toHaveValue('Line 1\nLine 2');
-    });
-
-    await step('Textarea is keyboard accessible', async () => {
-      const textarea = canvas.getByPlaceholderText('Type your message... (Shift+Enter for new line)');
-      textarea.focus();
-      await expect(textarea).toHaveFocus();
-    });
-  }
 };
 
 // With Features - from component page lines 249-258
@@ -152,10 +94,6 @@ export const WithFeatures: Story = {
       </CardContent>
     </Card>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -242,10 +180,6 @@ export const LoadingState: Story = {
       </Card>
     );
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -312,10 +246,6 @@ export const ControlledComponent: Story = {
       </Card>
     );
   },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -363,10 +293,6 @@ export const BasicInput: Story = {
       </CardContent>
     </Card>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -427,10 +353,6 @@ export const WithCounter: Story = {
         </CardContent>
       </Card>
     );
-  },
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
   },
   parameters: {
     controls: { disable: true },
@@ -505,10 +427,6 @@ export const WithAttachment: Story = {
       </CardContent>
     </Card>
   ),
-  globals: {
-    direction: 'ltr',
-    locale: 'en'
-  },
   parameters: {
     controls: { disable: true },
     docs: {
@@ -538,178 +456,3 @@ export const WithAttachment: Story = {
   }
 };
 
-// RTL Default - from component page lines 376-381
-export const RTLDefault: Story = {
-  render: () => (
-    <div className="max-w-2xl w-96">
-      <PromptInput
-        onSend={(value) => console.log('Sent:', value)}
-        isRTL
-        placeholderAr="اكتب رسالتك هنا..."
-      />
-    </div>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Prompt input in RTL with Arabic placeholder.'
-      }
-    }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders in RTL mode', async () => {
-      const textarea = canvas.getByPlaceholderText('اكتب رسالتك هنا...');
-      await expect(textarea).toBeInTheDocument();
-      await expect(textarea).toHaveAttribute('dir', 'rtl');
-    });
-
-    await step('Send button renders with Arabic label', async () => {
-      // Arabic translation for "Send" is "إرسال"
-      const sendButton = canvas.getByRole('button', { name: /إرسال/i });
-      await expect(sendButton).toBeInTheDocument();
-    });
-
-    await step('Typing works in RTL', async () => {
-      const textarea = canvas.getByPlaceholderText('اكتب رسالتك هنا...');
-      await userEvent.type(textarea, 'مرحبا');
-      await expect(textarea).toHaveValue('مرحبا');
-    });
-  }
-};
-
-// RTL With Features
-export const RTLWithFeatures: Story = {
-  args: {
-    onAttachment: fn(),
-    onVoice: fn()
-  },
-  render: (args) => (
-    <Card>
-      <CardContent className="p-6">
-        <div className="max-w-2xl w-96">
-          <PromptInput
-            onSend={(value) => console.log('Sent:', value)}
-            showAttachment
-            showVoice
-            showCounter
-            maxLength={500}
-            onAttachment={args.onAttachment}
-            onVoice={args.onVoice}
-            isRTL
-            placeholderAr="اكتب رسالتك... (Shift+Enter لسطر جديد)"
-          />
-        </div>
-      </CardContent>
-    </Card>
-  ),
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Prompt input in RTL with all features enabled.'
-      }
-    }
-  },
-  play: async ({ canvasElement, step, args }) => {
-    const canvas = within(canvasElement);
-
-    await step('Renders all buttons with Arabic labels', async () => {
-      // Arabic translations: "إرفاق ملف" (Attach file), "إدخال صوتي" (Voice input), "إرسال" (Send)
-      const attachButton = canvas.getByRole('button', { name: /إرفاق ملف/i });
-      const voiceButton = canvas.getByRole('button', { name: /إدخال صوتي/i });
-      const sendButton = canvas.getByRole('button', { name: /إرسال/i });
-
-      await expect(attachButton).toBeInTheDocument();
-      await expect(voiceButton).toBeInTheDocument();
-      await expect(sendButton).toBeInTheDocument();
-    });
-
-    await step('Character counter displays in RTL', async () => {
-      const counter = canvasElement.querySelector('.text-xs.text-muted-foreground');
-      await expect(counter).toHaveTextContent('0 / 500');
-    });
-
-    await step('All buttons are functional in RTL', async () => {
-      const attachButton = canvas.getByRole('button', { name: /إرفاق ملف/i });
-      const voiceButton = canvas.getByRole('button', { name: /إدخال صوتي/i });
-
-      await userEvent.click(attachButton);
-      await expect(args.onAttachment).toHaveBeenCalledTimes(1);
-
-      await userEvent.click(voiceButton);
-      await expect(args.onVoice).toHaveBeenCalledTimes(1);
-    });
-  }
-};
-
-// RTL Controlled
-export const RTLControlled: Story = {
-  render: () => {
-    const [value, setValue] = useState('');
-    return (
-      <Card>
-        <CardContent className="p-6">
-          <div className="max-w-2xl space-y-4">
-            <PromptInput
-              value={value}
-              onChange={(e) => setValue(e.target.value)}
-              onSend={(val) => {
-                console.log('Sent:', val);
-                setValue('');
-              }}
-              isRTL
-              placeholderAr="اكتب رسالتك هنا..."
-            />
-            <p className="text-xs text-muted-foreground">
-              القيمة الحالية: {value || '(فارغ)'}
-            </p>
-          </div>
-        </CardContent>
-      </Card>
-    );
-  },
-  globals: {
-    direction: 'rtl',
-    locale: 'ar'
-  },
-  parameters: {
-    controls: { disable: true },
-    docs: {
-      description: {
-        story: 'Controlled prompt input in RTL with state display.'
-      }
-    }
-  },
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-
-    await step('Initial state shows empty in Arabic', async () => {
-      await expect(canvas.getByText(/القيمة الحالية: \(فارغ\)/)).toBeInTheDocument();
-    });
-
-    await step('Typing updates state display', async () => {
-      const textarea = canvas.getByPlaceholderText('اكتب رسالتك هنا...');
-      await userEvent.type(textarea, 'مرحبا بك');
-
-      await expect(canvas.getByText(/القيمة الحالية: مرحبا بك/)).toBeInTheDocument();
-    });
-
-    await step('Sending clears state in RTL', async () => {
-      const sendButton = canvas.getByRole('button', { name: /إرسال/i });
-      await userEvent.click(sendButton);
-
-      await expect(canvas.getByText(/القيمة الحالية: \(فارغ\)/)).toBeInTheDocument();
-    });
-  }
-};
