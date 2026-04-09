@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { HijriDate } from '../../../components/ui/hijri-date';
 
 const meta = {
-  title: 'GCC-Specific/Hijri Date',
+  title: 'Regional & Islamic/Hijri Date',
   component: HijriDate,
   parameters: {
     layout: 'centered'

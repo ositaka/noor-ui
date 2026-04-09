@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { ZakatCalculator } from '../../../components/ui/zakat-calculator';
 
 const meta = {
-  title: 'GCC-Specific/Zakat Calculator',
+  title: 'Regional & Islamic/Zakat Calculator',
   component: ZakatCalculator,
   parameters: {
     layout: 'centered'

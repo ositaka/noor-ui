@@ -14,7 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Accessibility: ARIA attributes, keyboard navigation (Tab/Arrow/Escape), focus management (trap + restore on Dialog/Sheet), aria-selected/aria-current
   - User interactions via userEvent (click, type, toggle, controlled/uncontrolled)
   - Edge cases: empty arrays, zero/negative values, disabled states, boundary values, missing optional props
-  - GCC components: Arabic numeral formatting, Hijri holiday detection, prayer time highlighting, Zakat calculation
+  - Regional components: Arabic numeral formatting, Hijri holiday detection, prayer time highlighting, Zakat calculation
   - AI/LLM components: streaming text with fake timers, token thresholds, conversation filtering
   - Composite components: carousel loop/keyboard/dots, stepper step state transitions, dashboard nav
 - **Test infrastructure**: ResizeObserver, pointer capture, and scrollIntoView mocks in `vitest.setup.ts` for Radix UI compatibility

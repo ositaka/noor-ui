@@ -114,7 +114,7 @@ When writing code using Noor UI components, follow these rules:
 - [LoadingSpinner](https://noorui.com/components/loading-spinner): Spinning loader with sm/md/lg sizes and accessible status role
 - [Kbd](https://noorui.com/components/kbd): Keyboard shortcut display, platform-aware (Cmd on Mac, Ctrl on Windows), always dir="ltr"
 
-## GCC-Specific Components
+## Regional & Islamic Components
 
 - [ArabicNumber](https://noorui.com/components/arabic-number): Number formatting with Eastern Arabic numerals, SAR currency, percentage, compact formats
 - [HijriDate](https://noorui.com/components/hijri-date): Dual Gregorian/Hijri date display with Islamic holiday detection (requires DirectionProvider)

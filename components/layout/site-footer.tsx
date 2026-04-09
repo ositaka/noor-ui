@@ -11,7 +11,7 @@ export function SiteFooter() {
 
   const footerContent = {
     en: {
-      tagline: 'Built for the GCC market with love.',
+      tagline: 'Beautiful components for bidirectional applications.',
       documentation: 'Documentation',
       gettingStarted: 'Getting Started',
       components: 'Components',
@@ -39,7 +39,7 @@ export function SiteFooter() {
       trademark: '"Noor UI" is a trademark of Nuno Marques. Code licensed under MIT.',
     },
     ar: {
-      tagline: 'مصمم لسوق الخليج بكل حب.',
+      tagline: 'مكونات جميلة للتطبيقات ثنائية الاتجاه.',
       documentation: 'التوثيق',
       gettingStarted: 'البداية',
       components: 'المكونات',

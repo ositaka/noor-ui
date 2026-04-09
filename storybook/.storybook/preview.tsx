@@ -63,7 +63,6 @@ const preview: Preview = {
         order: [
           'Docs',
           ['Getting Started'],
-          'GCC-Specific',
           'Core',
           'Forms',
           'Advanced Forms & Inputs',
@@ -73,6 +72,7 @@ const preview: Preview = {
           'Overlays & Layout',
           'Layout & Shell',
           'User Interface',
+          'Regional & Islamic',
           'AI-LLM Shell',
         ],
       },

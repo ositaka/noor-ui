@@ -6,7 +6,7 @@
 export const components_gcc = {
 arabicNumberComponent: {
       title: 'Arabic Number Utilities',
-      description: 'Comprehensive utilities for formatting numbers in Arabic contexts. Includes Arabic-Indic numeral conversion (٠-٩), SAR currency formatting, and locale-aware number display. Perfect for GCC applications.',
+      description: 'Comprehensive utilities for formatting numbers in Arabic contexts. Includes Arabic-Indic numeral conversion (٠-٩), SAR currency formatting, and locale-aware number display. Designed for Islamic and Arabic-speaking contexts.',
       breadcrumb: {
         home: 'Home',
         components: 'Components',
@@ -105,7 +105,7 @@ arabicNumberComponent: {
 
 hijriDateComponent: {
       title: 'Hijri Date',
-      description: 'A beautiful component to display both Gregorian and Hijri (Islamic calendar) dates together. Perfect for GCC applications with full bilingual support and multiple layout variants.',
+      description: 'A beautiful component to display both Gregorian and Hijri (Islamic calendar) dates together. Designed for Islamic and Arabic-speaking contexts with full bilingual support and multiple layout variants.',
       breadcrumb: {
         home: 'Home',
         components: 'Components',
@@ -182,7 +182,7 @@ hijriDateComponent: {
 
 prayerTimesComponent: {
       title: 'Prayer Times',
-      description: 'A beautiful, RTL-aware component to display Islamic prayer times. Perfect for GCC applications with full bilingual support and multiple layout variants.',
+      description: 'A beautiful, RTL-aware component to display Islamic prayer times. Designed for Islamic and Arabic-speaking contexts with full bilingual support and multiple layout variants.',
       breadcrumb: {
         home: 'Home',
         components: 'Components',
@@ -261,7 +261,7 @@ prayerTimesComponent: {
 
 zakatCalculatorComponent: {
       title: 'Zakat Calculator',
-      description: 'A comprehensive calculator for determining Zakat obligations. Supports multiple asset types, real-time calculations, Nisab threshold checking, and full bilingual support. Perfect for Islamic finance applications and GCC market needs.',
+      description: 'A comprehensive calculator for determining Zakat obligations. Supports multiple asset types, real-time calculations, Nisab threshold checking, and full bilingual support. Designed for Islamic finance applications and Arabic and Islamic application needs.',
       breadcrumb: {
         home: 'Home',
         components: 'Components',

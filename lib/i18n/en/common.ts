@@ -238,7 +238,7 @@ common: {
         resources: 'Resources',
         community: 'Community',
         tagline: 'Bringing light to multilingual interface design.',
-        copyright: '© 2025 Noor UI. Built with Next.js, TypeScript, and Tailwind CSS.',
+        copyright: '© 2026 Noor UI. Built with Next.js, TypeScript, and Tailwind CSS.',
         readyToGo: 'Ready to go!',
         autoRTL: 'Your components will automatically support RTL when the direction changes.',
       },
@@ -336,7 +336,7 @@ common: {
         'carousel': 'Carousel',
         'user-menu': 'User Menu',
 
-        // GCC-Specific Components
+        // Regional & Islamic Components
         'arabic-number': 'Arabic Number',
         'hijri-date': 'Hijri Date',
         'prayer-times': 'Prayer Times',
@@ -467,7 +467,7 @@ common: {
           overlay: 'Overlay & Popups',
           content: 'Content',
           advanced: 'Advanced Components',
-          gcc: 'GCC-Specific Components',
+          gcc: 'Regional & Islamic',
           experimental: 'Experimental (AI/LLM)',
           misc: 'Miscellaneous',
         },
@@ -842,10 +842,10 @@ common: {
       calendar: 'Calendar & Date Picker',
     },
     title: 'Calendar & Date Picker',
-    description: 'Comprehensive calendar interface with Hijri calendar support for GCC markets. Includes single date selection, date ranges, and integration with Hijri dates.',
+    description: 'Comprehensive calendar interface with Hijri calendar support for Arabic and Islamic contexts. Includes single date selection, date ranges, and integration with Hijri dates.',
     badges: {
       ready: 'Ready',
-      gcc: 'GCC',
+      gcc: 'Islamic',
       hijri: 'Hijri',
     },
     sections: {
