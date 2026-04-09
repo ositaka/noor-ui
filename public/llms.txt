@@ -1,0 +1,161 @@
+# Noor UI
+
+> Noor UI (`noorui-rtl`) is an RTL-first React component library for bilingual (Arabic/English) applications. 77+ accessible, themeable components built with Radix UI, Tailwind CSS v4, and TypeScript. Published on npm as `noorui-rtl`.
+
+Built with love by [Nuno Marques](https://ositaka.com).
+
+## How to use Noor UI
+
+Install:
+
+```
+npm install noorui-rtl
+```
+
+Import the pre-compiled CSS (includes all themes, RTL support, and design tokens):
+
+```tsx
+import 'noorui-rtl/dist/styles.css'
+```
+
+Import components:
+
+```tsx
+import { Button, Card, Input, DirectionProvider } from 'noorui-rtl'
+```
+
+Wrap your app with `DirectionProvider` for RTL support:
+
+```tsx
+<DirectionProvider controlledDirection="rtl" controlledLocale="ar">
+  <App />
+</DirectionProvider>
+```
+
+## Critical patterns for generating code with Noor UI
+
+When writing code using Noor UI components, follow these rules:
+
+1. **Always use logical CSS properties**, never physical. Use `ms-`, `me-`, `ps-`, `pe-`, `start`, `end` — never `ml-`, `mr-`, `pl-`, `pr-`, `left`, `right`. This ensures components work in both LTR and RTL.
+
+2. **Bilingual props**: Many components accept both English and Arabic props. Use `title` + `titleAr`, `description` + `descriptionAr`, `placeholder` + `placeholderAr`. The component automatically picks the right one based on the current direction.
+
+3. **DirectionProvider is required** for components that use `useDirection()`: RadioGroup, Select, Tabs, DatePicker, TimePicker, Calendar, FileUpload, Timeline, PrayerTimes, HijriDate, ZakatCalculator, ChatMessage, PromptInput, ModelSelector, TokenCounter, ThinkingIndicator, MessageActions, ConversationHistory, ParameterSlider, DashboardShell, Carousel, Stepper, NotificationCenter, UserMenu, Toast.
+
+4. **Arabic numerals**: Use `numberingSystem: 'arab'` with `Intl.NumberFormat('ar')` to get Eastern Arabic numerals. The `ArabicNumber` component handles this automatically.
+
+5. **Semantic color tokens**: Use `text-destructive`, `text-success`, `bg-warning/10`, `border-primary` — never hardcoded colors like `text-red-500`.
+
+6. **Four built-in themes**: `minimal`, `futuristic`, `cozy` (default), `artistic`. Applied via CSS class on `<html>` (e.g., `class="theme-cozy"`).
+
+7. **Import path**: Always import from `noorui-rtl`, not from internal paths.
+
+## Core Components
+
+- [Button](https://noorui.com/components/button): Primary action element with 6 variants (primary, secondary, destructive, outline, ghost, link), 5 sizes, loading state, and asChild polymorphism
+- [Input](https://noorui.com/components/input): Text input with form field context integration
+- [Textarea](https://noorui.com/components/textarea): Multi-line text input
+- [Card](https://noorui.com/components/card): Container with CardHeader, CardTitle, CardDescription, CardContent, CardFooter sub-components
+- [Badge](https://noorui.com/components/badge): Status indicator with default, secondary, destructive, outline variants
+- [Label](https://noorui.com/components/label): Form label with htmlFor association via Radix
+- [Separator](https://noorui.com/components/separator): Horizontal or vertical divider
+- [Avatar](https://noorui.com/components/avatar): User avatar with image and fallback text
+
+## Form Components
+
+- [Checkbox](https://noorui.com/components/checkbox): Checkable input with checked, unchecked, and indeterminate states
+- [RadioGroup](https://noorui.com/components/radio-group): Single-select option group (requires DirectionProvider)
+- [Select](https://noorui.com/components/select): Dropdown selection with search, groups, and portal rendering (requires DirectionProvider)
+- [Switch](https://noorui.com/components/switch): Toggle switch with RTL-aware thumb animation
+- [Slider](https://noorui.com/components/slider): Single or multi-thumb range input with RTL direction detection
+- [RangeSlider](https://noorui.com/components/range-slider): Dual-handle slider for ranges with labels and custom formatters
+- [NumberInput](https://noorui.com/components/number-input): Numeric input with increment/decrement buttons, min/max/step
+- [Form](https://noorui.com/components/form): Form context with validation, error messages, FormField, FormLabel, FormMessage
+- [DatePicker](https://noorui.com/components/date-picker): Date selection with calendar popover, Hijri support (requires DirectionProvider)
+- [TimePicker](https://noorui.com/components/time-picker): Time selection with 12h/24h format (requires DirectionProvider)
+- [FileUpload](https://noorui.com/components/file-upload): Drag-and-drop file upload with previews, validation, bilingual text (requires DirectionProvider)
+- [Calendar](https://noorui.com/components/calendar): Full calendar with single/range selection, Hijri dates, Islamic holidays (requires DirectionProvider)
+
+## Navigation & Overlay Components
+
+- [Tabs](https://noorui.com/components/tabs): Tab navigation with RTL-aware keyboard arrows (requires DirectionProvider)
+- [Accordion](https://noorui.com/components/accordion): Expandable content sections with single or multiple mode
+- [DropdownMenu](https://noorui.com/components/dropdown-menu): Context-aware dropdown with items, checkboxes, radio groups, shortcuts
+- [Dialog](https://noorui.com/components/dialog): Modal dialog with focus trap, escape close, portal rendering
+- [Sheet](https://noorui.com/components/sheet): Side panel with start/end/top/bottom positions using logical properties
+- [Popover](https://noorui.com/components/popover): Floating content panel anchored to a trigger
+- [ContextMenu](https://noorui.com/components/context-menu): Right-click menu with items, checkboxes, sub-menus
+- [Breadcrumb](https://noorui.com/components/breadcrumb): Navigation breadcrumbs with RTL-flipping separator icon
+- [Pagination](https://noorui.com/components/pagination): Page navigation with RTL-flipping arrow icons
+- [Collapsible](https://noorui.com/components/collapsible): Expandable/collapsible content region
+- [Command](https://noorui.com/components/command): Command palette with search, filtering, keyboard navigation (built on cmdk)
+- [ScrollArea](https://noorui.com/components/scroll-area): Custom scrollbar container
+
+## Data Display Components
+
+- [Table](https://noorui.com/components/table): Semantic table with all sub-components (Header, Body, Footer, Row, Head, Cell, Caption)
+- [DataTable](https://noorui.com/components/data-table): Full-featured data table with sorting, search, pagination, mobile card view
+- [StatsCard](https://noorui.com/components/stats-card): Dashboard statistics card with icon, value, trend indicator
+- [ListingCard](https://noorui.com/components/listing-card): Product/listing card with image, badges, stats, tags, CTA
+- [FeatureCard](https://noorui.com/components/feature-card): Feature showcase card with icon, title, description, optional link
+- [EmptyState](https://noorui.com/components/empty-state): Empty data placeholder with icon, title, description, action
+- [Blockquote](https://noorui.com/components/blockquote): Styled quote with author attribution and source link (default, accent, subtle variants)
+- [Timeline](https://noorui.com/components/timeline): Event timeline with complete/current/upcoming statuses, bilingual props, alternating layout (requires DirectionProvider)
+- [Chart](https://noorui.com/components/chart): Line, bar, and doughnut charts via Chart.js with theme-aware colors (requires DirectionProvider)
+
+## Feedback & Utility Components
+
+- [Alert](https://noorui.com/components/alert): Alert banner with default, destructive, success, warning variants
+- [Callout](https://noorui.com/components/callout): Highlighted content box for info, warning, error, success, note types
+- [Toast](https://noorui.com/components/toast): Toast notifications with variants, actions, RTL-aware positioning (requires DirectionProvider)
+- [Tooltip](https://noorui.com/components/tooltip): Hover tooltip with portal rendering
+- [Progress](https://noorui.com/components/progress): Progress bar with RTL-aware fill direction
+- [Skeleton](https://noorui.com/components/skeleton): Loading placeholder with pulse animation
+- [LoadingSpinner](https://noorui.com/components/loading-spinner): Spinning loader with sm/md/lg sizes and accessible status role
+- [Kbd](https://noorui.com/components/kbd): Keyboard shortcut display, platform-aware (Cmd on Mac, Ctrl on Windows), always dir="ltr"
+
+## GCC-Specific Components
+
+- [ArabicNumber](https://noorui.com/components/arabic-number): Number formatting with Eastern Arabic numerals, SAR currency, percentage, compact formats
+- [HijriDate](https://noorui.com/components/hijri-date): Dual Gregorian/Hijri date display with Islamic holiday detection (requires DirectionProvider)
+- [PrayerTimes](https://noorui.com/components/prayer-times): Islamic prayer times display with next-prayer highlighting, countdown, adhan notification variant (requires DirectionProvider)
+- [ZakatCalculator](https://noorui.com/components/zakat-calculator): Islamic Zakat calculator with nisab threshold, gold/silver prices, export/print (requires DirectionProvider)
+
+## AI/LLM Components
+
+- [ChatMessage](https://noorui.com/components/chat-message): Chat message bubble with user/assistant/system roles, copy, regenerate actions (requires DirectionProvider)
+- [PromptInput](https://noorui.com/components/prompt-input): Chat input with send-on-Enter, attachment, voice, character counter (requires DirectionProvider)
+- [ModelSelector](https://noorui.com/components/model-selector): AI model selection dropdown with speed, context length, pricing info (requires DirectionProvider)
+- [TokenCounter](https://noorui.com/components/token-counter): Token usage display with progress bar, warning/danger thresholds, cost estimation (requires DirectionProvider)
+- [StreamingText](https://noorui.com/components/streaming-text): Character-by-character text streaming animation with cursor
+- [ThinkingIndicator](https://noorui.com/components/thinking-indicator): AI thinking animation with dots, pulse, wave, typing variants (requires DirectionProvider)
+- [MessageActions](https://noorui.com/components/message-actions): Message action bar with copy, regenerate, edit, share, feedback buttons (requires DirectionProvider)
+- [ConversationHistory](https://noorui.com/components/conversation-history): Conversation list sidebar with search, time grouping, rename/delete actions (requires DirectionProvider)
+- [ParameterSlider](https://noorui.com/components/parameter-slider): AI parameter control with presets (temperature, top-p, etc.) (requires DirectionProvider)
+
+## Composite & Layout Components
+
+- [DashboardShell](https://noorui.com/components/dashboard-shell): Full dashboard layout with sidebar navigation, header, user menu, notification center (requires DirectionProvider)
+- [Carousel](https://noorui.com/components/carousel): Slide carousel with arrows, dots, autoplay, keyboard nav, swipe, RTL-aware direction (requires DirectionProvider)
+- [Stepper](https://noorui.com/components/stepper): Multi-step progress with horizontal/vertical orientation, default/simple/circles variants, bilingual titles (requires DirectionProvider)
+- [NotificationCenter](https://noorui.com/components/notification-center): Bell icon popover with notification list, unread badge, mark-read/clear actions (requires DirectionProvider)
+- [UserMenu](https://noorui.com/components/user-menu): Avatar dropdown with profile, settings, billing, team, support, logout actions (requires DirectionProvider)
+- [ReactionPicker](https://noorui.com/components/reaction-picker): Emoji reaction selector with compact (LinkedIn-style) and expanded (Discord-style) modes
+- [UserBadge](https://noorui.com/components/user-badge): User role badge (author, moderator, verified, admin, custom)
+
+## Documentation
+
+- [Getting Started](https://noorui.com/getting-started): Installation, CSS setup, and first component usage
+- [RTL Guide](https://noorui.com/rtl-guide): RTL implementation patterns, logical properties, bidirectional text handling
+- [Themes](https://noorui.com/themes): Theme system with 4 built-in themes, dark mode, custom design tokens
+- [Examples](https://noorui.com/examples): Full application examples (Healthcare, Hotel Booking, Banking, Esports, MyMantras)
+- [Email Templates](https://noorui.com/email-templates): Bilingual MJML email templates with auto-theming
+
+## Optional
+
+- [Changelog](https://github.com/ositaka/noor-ui/blob/main/CHANGELOG.md): Version history and release notes
+- [Contributing](https://github.com/ositaka/noor-ui/blob/main/CONTRIBUTING.md): Contribution guidelines
+- [Roadmap](https://github.com/ositaka/noor-ui/blob/main/ROADMAP.md): Project roadmap and planned features
+- [npm Package](https://www.npmjs.com/package/noorui-rtl): Published package on npm
+- [GitHub Repository](https://github.com/ositaka/noor-ui): Source code and issue tracker
+- [Discord Community](https://discord.gg/gvrqU2WG): Community support and discussions

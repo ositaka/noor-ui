@@ -67,6 +67,7 @@ export default function SitemapPage() {
     { href: '/rtl-guide', nameKey: 'rtlGuide' },
     { href: '/utilities', nameKey: 'utilities' },
     { href: '/roadmap', nameKey: 'roadmap' },
+    { href: '/llms.txt', nameKey: 'llmsTxt' },
     { href: '/license', nameKey: 'license' },
   ];
 

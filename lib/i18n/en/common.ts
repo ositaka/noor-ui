@@ -485,6 +485,7 @@ common: {
           storybook: 'Storybook',
           rtlGuide: 'RTL Development Guide',
           roadmap: 'Roadmap',
+          llmsTxt: 'llms.txt',
           themes: 'Themes',
           tokens: 'Design Tokens',
           allExamples: 'All Examples →',

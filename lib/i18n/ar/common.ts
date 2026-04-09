@@ -485,6 +485,7 @@ common: {
           storybook: 'ستوريبوك',
           rtlGuide: 'دليل تطوير RTL',
           roadmap: 'خارطة الطريق',
+          llmsTxt: 'llms.txt',
           themes: 'السمات',
           tokens: 'رموز التصميم',
           allExamples: 'جميع الأمثلة ←',

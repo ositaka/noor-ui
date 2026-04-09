@@ -24,6 +24,7 @@ export function SiteFooter() {
       accessibility: 'Accessibility',
       rtlGuide: 'RTL Guide',
       sitemap: 'Sitemap',
+      llmsTxt: 'llms.txt',
       license: 'License',
       community: 'Community',
       github: 'GitHub',
@@ -51,6 +52,7 @@ export function SiteFooter() {
       accessibility: 'إمكانية الوصول',
       rtlGuide: 'دليل RTL',
       sitemap: 'خريطة الموقع',
+      llmsTxt: 'llms.txt',
       license: 'الترخيص',
       community: 'المجتمع',
       github: 'GitHub',
@@ -162,6 +164,14 @@ export function SiteFooter() {
                 >
                   {content.sitemap}
                 </Link>
+              </li>
+              <li>
+                <a
+                  href="/llms.txt"
+                  className="hover:text-foreground transition-colors"
+                >
+                  {content.llmsTxt}
+                </a>
               </li>
               <li>
                 <Link
