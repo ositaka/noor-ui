@@ -77,6 +77,9 @@ function getValidPages() {
     validPages.add('/404')
     validPages.add('/500')
 
+    // Add static files served from public/
+    validPages.add('/llms.txt')
+
   } catch (error) {
     console.error(`${colors.red}Error finding pages:${colors.reset}`, error.message)
     process.exit(1)
@@ -95,7 +98,7 @@ function extractLinks() {
   try {
     // Find all TSX/JSX files
     const output = execSync(
-      'find app components -type f \\( -name "*.tsx" -o -name "*.jsx" \\)',
+      'find app components -type f \\( -name "*.tsx" -o -name "*.jsx" \\) -not -path "*/__tests__/*" -not -name "*.test.tsx" -not -name "*.spec.tsx"',
       { cwd: projectRoot, encoding: 'utf-8' }
     )
 

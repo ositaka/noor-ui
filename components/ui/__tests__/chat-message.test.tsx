@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/aria-role */
 import { render, screen } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
 import { ChatMessage } from '../chat-message';
