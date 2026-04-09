@@ -346,7 +346,7 @@ export default function SitemapPage() {
           </div>
         </Card>
 
-        {/* GCC-Specific Components */}
+        {/* Regional & Islamic Components */}
         <Card className="p-6 border-2 border-primary/20">
           <h3 className="text-xl font-bold mb-4 text-primary">
             {t.sitemap.componentCategories.gcc}

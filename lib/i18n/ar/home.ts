@@ -48,13 +48,40 @@ home: {
         title: 'شاهده عملياً',
         subtitle: 'مكونات تفاعلية تعمل بشكل مثالي في كلا الاتجاهين',
       },
+      examples: {
+        title: 'مبني بـ Noor UI',
+        subtitle: 'أمثلة تطبيقات حقيقية — ثنائية اللغة بالكامل، متجاوبة، كل صفحة تعمل بالاتجاهين.',
+        viewAll: 'عرض جميع الأمثلة',
+        viewDemo: 'عرض التجربة',
+        items: [
+          {
+            title: 'بوابة تعليمية',
+            description: 'لوحة تحكم الطالب مع نظام الدرجات السعودي والجدول الأسبوعي والواجبات والحضور.',
+            components: 'DashboardShell, DataTable, Chart, Tabs, Calendar',
+          },
+          {
+            title: 'عيادة طبية',
+            description: 'إدارة العيادة مع المواعيد ودليل المرضى ودعم التاريخ الهجري.',
+            components: 'DashboardShell, Calendar, Chart, Timeline, Tabs',
+          },
+          {
+            title: 'الخدمات المصرفية',
+            description: 'لوحة تحكم مالية مع المعاملات والتحويلات بـ OTP ودفع الفواتير وإدارة البطاقات.',
+            components: 'DashboardShell, Chart, DataTable, Switch, Slider',
+          },
+          {
+            title: 'حجز فنادق',
+            description: 'تجربة حجز كاملة مع البحث والمعارض والحجز متعدد الخطوات وإدارة الحجوزات.',
+            components: 'Carousel, Stepper, DatePicker, RangeSlider, Tabs',
+          },
+        ],
+      },
       quickStart: {
         title: 'البدء السريع',
         description: 'قم بالتثبيت عبر npm وابدأ البناء في دقائق',
         status: 'منشور',
         installationGuide: 'دليل التثبيت',
         viewOnNpm: 'عرض على npm',
-        comingSoon: 'عرض Storybook متحرك قريباً',
       },
     },
 

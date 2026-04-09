@@ -238,7 +238,7 @@ common: {
         resources: 'الموارد',
         community: 'المجتمع',
         tagline: 'نجلب النور لتصميم الواجهات متعددة اللغات.',
-        copyright: '© 2025 نور. مبني باستخدام Next.js و TypeScript و Tailwind CSS.',
+        copyright: '© 2026 نور. مبني باستخدام Next.js و TypeScript و Tailwind CSS.',
         readyToGo: 'جاهز للاستخدام!',
         autoRTL: 'سوف تدعم مكوناتك تلقائياً اتجاه النص من اليمين لليسار عند تغيير الاتجاه.',
       },
@@ -336,7 +336,7 @@ common: {
         'carousel': 'Carousel (العرض الدوّار)',
         'user-menu': 'User Menu (قائمة المستخدم)',
 
-        // GCC-Specific Components - مكونات دول الخليج
+        // Regional & Islamic Components - مكونات إقليمية وإسلامية
         'arabic-number': 'Arabic Number (الأرقام العربية)',
         'hijri-date': 'Hijri Date (التاريخ الهجري)',
         'prayer-times': 'Prayer Times (أوقات الصلاة)',
@@ -467,7 +467,7 @@ common: {
           overlay: 'النوافذ المنبثقة',
           content: 'المحتوى',
           advanced: 'المكونات المتقدمة',
-          gcc: 'مكونات دول الخليج',
+          gcc: 'إقليمية وإسلامية',
           experimental: 'تجريبية (الذكاء الاصطناعي)',
           misc: 'متنوعة',
         },
@@ -842,11 +842,11 @@ common: {
       calendar: 'التقويم ومنتقي التاريخ',
     },
     title: 'التقويم ومنتقي التاريخ',
-    description: 'واجهة تقويم شاملة مع دعم التقويم الهجري لأسواق مجلس التعاون الخليجي. تتضمن اختيار التاريخ الواحد، نطاقات التاريخ، والتكامل مع التواريخ الهجرية.',
+    description: 'واجهة تقويم شاملة مع دعم التقويم الهجري للسياقات العربية والإسلامية. تتضمن اختيار التاريخ الواحد، نطاقات التاريخ، والتكامل مع التواريخ الهجرية.',
     badges: {
       ready: 'جاهز',
-      gcc: 'GCC',
-      hijri: 'Hijri',
+      gcc: 'إسلامي',
+      hijri: 'هجري',
     },
     sections: {
       dateSelection: 'تحديد التاريخ',

@@ -2,7 +2,7 @@
 
 ## Vision
 
-Build the **go-to component library for bilingual (LTR/RTL) web applications**, starting with English and Arabic, with a focus on the GCC market and global multilingual products.
+Build the **go-to component library for bilingual (LTR/RTL) web applications**, starting with English and Arabic and global multilingual products.
 
 ### Core Principles
 - RTL-first, not RTL-as-afterthought
@@ -24,7 +24,7 @@ Build the **go-to component library for bilingual (LTR/RTL) web applications**, 
 - 4 built-in themes (minimal, futuristic, cozy, artistic)
 - Complete documentation site at [noorui.com](https://noorui.com)
 - Interactive Storybook at [storybook.noorui.com](https://storybook.noorui.com)
-- GCC-specific components (Prayer Times, Hijri Calendar, Arabic Numbers, Zakat Calculator)
+- Regional components (Prayer Times, Hijri Calendar, Arabic Numbers, Zakat Calculator)
 - AI/LLM component suite (Chat, Streaming, Model Selector, Token Counter)
 - [llms.txt](https://noorui.com/llms.txt) for AI coding assistant integration
 - Kitab Blog Starter at [kitab.noorui.com](https://kitab.noorui.com)

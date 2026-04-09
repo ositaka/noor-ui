@@ -3,7 +3,7 @@ import { ArabicNumber } from '../../../components/ui/arabic-number';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../../../components/ui/card';
 
 const meta = {
-  title: 'GCC-Specific/Arabic Number',
+  title: 'Regional & Islamic/Arabic Number',
   component: ArabicNumber,
   parameters: {
     layout: 'centered'

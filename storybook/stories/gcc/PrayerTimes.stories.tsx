@@ -3,7 +3,7 @@ import { fn } from 'storybook/test';
 import { PrayerTimes, type Prayer } from '../../../components/ui/prayer-times';
 
 const meta = {
-  title: 'GCC-Specific/Prayer Times',
+  title: 'Regional & Islamic/Prayer Times',
   component: PrayerTimes,
   parameters: {
     layout: 'centered'

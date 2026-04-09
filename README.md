@@ -21,7 +21,7 @@ Beautiful RTL-first React components for bilingual applications. Built with Radi
 - **Accessible** — WCAG AA compliant with full keyboard navigation
 - **TypeScript** — Full type safety and IntelliSense
 - **Themeable** — 4 built-in themes, light/dark mode, customizable design tokens
-- **GCC-Specific** — Prayer Times, Hijri Calendar, Arabic Numbers, Zakat Calculator
+- **Regional & Islamic** — Prayer Times, Hijri Calendar, Arabic Numbers, Zakat Calculator
 - **AI/LLM Components** — Chat, Streaming Text, Model Selector, Token Counter
 - **Tree-shakeable** — Only bundle what you use
 
@@ -65,7 +65,7 @@ For RTL support, Tailwind setup, theming, and provider configuration, see the **
 
 **Data** — Table, DataTable, Chart, StatsCard, ListingCard, FeatureCard, EmptyState, Timeline, Blockquote
 
-**GCC** — PrayerTimes, HijriDate, ArabicNumber, ZakatCalculator
+**Regional & Islamic** — PrayerTimes, HijriDate, ArabicNumber, ZakatCalculator
 
 **AI/LLM** — ChatMessage, PromptInput, StreamingText, ThinkingIndicator, ModelSelector, TokenCounter, ParameterSlider, ConversationHistory, MessageActions
 

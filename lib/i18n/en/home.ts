@@ -48,13 +48,40 @@ home: {
         title: 'See It In Action',
         subtitle: 'Interactive components that work perfectly in both directions',
       },
+      examples: {
+        title: 'Built With Noor UI',
+        subtitle: 'Real application examples — fully bilingual, fully responsive, every page works in both LTR and RTL.',
+        viewAll: 'View All Examples',
+        viewDemo: 'View Demo',
+        items: [
+          {
+            title: 'Education Portal',
+            description: 'Student dashboard with Saudi grading, weekly timetable, assignments, and attendance.',
+            components: 'DashboardShell, DataTable, Chart, Tabs, Calendar',
+          },
+          {
+            title: 'Healthcare Clinic',
+            description: 'Clinic management with appointments, patient directory, and Hijri date support.',
+            components: 'DashboardShell, Calendar, Chart, Timeline, Tabs',
+          },
+          {
+            title: 'Digital Banking',
+            description: 'Personal finance with transactions, OTP transfers, bill payments, and card management.',
+            components: 'DashboardShell, Chart, DataTable, Switch, Slider',
+          },
+          {
+            title: 'Hotel Booking',
+            description: 'Full booking flow with search, galleries, multi-step booking, and reservations.',
+            components: 'Carousel, Stepper, DatePicker, RangeSlider, Tabs',
+          },
+        ],
+      },
       quickStart: {
         title: 'Quick Start',
         description: 'Install via npm and start building in minutes',
         status: 'Published',
         installationGuide: 'Installation Guide',
         viewOnNpm: 'View on npm',
-        comingSoon: 'Animated Storybook demo coming soon',
       },
     },
 

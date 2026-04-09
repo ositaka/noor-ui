@@ -12,7 +12,7 @@ import * as React from 'react';
  */
 
 const meta = {
-  title: 'GCC-Specific/Calendar',
+  title: 'Regional & Islamic/Calendar',
   component: Calendar,
   parameters: {
     layout: 'centered'
