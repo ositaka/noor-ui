@@ -145,12 +145,38 @@ All components must:
 
 ### Testing
 
-Components should include:
+All components have comprehensive unit tests in `components/ui/__tests__/`. New components or changes must include tests.
 
-- Unit tests for core functionality
-- Accessibility tests (keyboard navigation, ARIA)
-- RTL/LTR rendering tests
-- Theme variation tests
+**Test files go in:** `components/ui/__tests__/{component-name}.test.tsx`
+
+**What to test:**
+- Renders without crashing with default props
+- All variants/sizes apply correct CSS classes
+- RTL behavior: bilingual props (titleAr, descriptionAr), logical properties, directional icons
+- Accessibility: ARIA attributes, keyboard navigation, focus management, label associations
+- User interactions: click, toggle, type, controlled/uncontrolled state
+- Edge cases: empty data, disabled state, boundary values, missing optional props
+
+**Run tests:**
+```bash
+pnpm test --run              # Run all 690+ tests
+pnpm test --run -- button    # Run tests matching "button"
+pnpm test:coverage           # Coverage report
+```
+
+**Pattern to follow:** See `components/ui/__tests__/button.test.tsx` for a complete example.
+
+Components using `useDirection()` need a `DirectionProvider` wrapper in tests:
+```tsx
+const renderWithDirection = (ui: React.ReactElement, direction: 'ltr' | 'rtl' = 'ltr') => {
+  const locale = direction === 'rtl' ? 'ar' : 'en';
+  return render(
+    <DirectionProvider controlledDirection={direction} controlledLocale={locale}>
+      {ui}
+    </DirectionProvider>
+  );
+};
+```
 
 ## RTL Guidelines
 
