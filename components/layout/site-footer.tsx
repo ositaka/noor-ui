@@ -35,7 +35,7 @@ export function SiteFooter() {
       createdBy: 'Created by',
       website: 'Website',
       blog: 'Blog',
-      copyright: '© 2025 Noor UI. Built with Next.js, TypeScript, and Tailwind CSS.',
+      copyright: '© 2026 Noor UI. Built with Next.js, TypeScript, and Tailwind CSS.',
       trademark: '"Noor UI" is a trademark of Nuno Marques. Code licensed under MIT.',
     },
     ar: {
@@ -63,7 +63,7 @@ export function SiteFooter() {
       createdBy: 'من تطوير',
       website: 'الموقع',
       blog: 'المدونة',
-      copyright: '© 2025 Noor UI. بُني باستخدام Next.js وTypeScript وTailwind CSS.',
+      copyright: '© 2026 Noor UI. بُني باستخدام Next.js وTypeScript وTailwind CSS.',
       trademark: '"Noor UI" علامة تجارية لـ Nuno Marques. الكود مرخص بموجب MIT.',
     },
   }
