@@ -18,7 +18,7 @@ export default defineConfig({
           setupFiles: ['./vitest.setup.ts'],
           css: true,
           include: ['**/*.test.{ts,tsx}', '**/*.spec.{ts,tsx}'],
-          exclude: ['node_modules/', 'storybook/'],
+          exclude: ['node_modules/', 'storybook/', '.claude/'],
         },
       },
       // Storybook play function tests (browser)

@@ -22,6 +22,26 @@ vi.mock('next/navigation', () => ({
   useSearchParams: () => new URLSearchParams(),
 }))
 
+// Mock ResizeObserver (used by Radix UI)
+class ResizeObserverMock {
+  observe() {}
+  unobserve() {}
+  disconnect() {}
+}
+globalThis.ResizeObserver = ResizeObserverMock as any
+
+// Mock pointer capture APIs (used by Radix Select/Slider)
+if (typeof Element !== 'undefined') {
+  Element.prototype.hasPointerCapture = Element.prototype.hasPointerCapture || (() => false)
+  Element.prototype.setPointerCapture = Element.prototype.setPointerCapture || (() => {})
+  Element.prototype.releasePointerCapture = Element.prototype.releasePointerCapture || (() => {})
+}
+
+// Mock scrollIntoView (used by Radix Select)
+if (typeof Element !== 'undefined') {
+  Element.prototype.scrollIntoView = Element.prototype.scrollIntoView || (() => {})
+}
+
 // Mock window.matchMedia
 Object.defineProperty(window, 'matchMedia', {
   writable: true,

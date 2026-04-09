@@ -111,6 +111,7 @@ Build the **go-to design system for bilingual (LTR/RTL) web applications**, star
 - ✅ Comprehensive installation docs
 - ✅ Quick Start guide with code examples
 - ✅ All 77+ components properly exported and typed
+- ✅ **690+ unit tests** covering all 69 components (props, variants, RTL, a11y, keyboard, bilingual)
 
 ---
 
@@ -174,7 +175,13 @@ Build the **go-to design system for bilingual (LTR/RTL) web applications**, star
 
 ## 🚧 Current Status: READY FOR PUBLIC LAUNCH! 🚀
 
-**Package Published:** [noorui-rtl v0.10.0 on npm](https://www.npmjs.com/package/noorui-rtl)
+**Package Published:** [noorui-rtl v0.11.0 on npm](https://www.npmjs.com/package/noorui-rtl)
+
+**Test Suite:** ✅ **690+ unit tests** across all 69 components (2026-04-08)
+- Vitest + React Testing Library + jsdom
+- Every component tested for: rendering, props/variants, RTL behavior, a11y, keyboard, edge cases
+- Bilingual props (titleAr, descriptionAr, etc.) validated in RTL mode
+- GCC components tested for Arabic numeral formatting, Hijri dates, prayer time highlighting
 
 **Technical Pre-Launch:** ✅ **COMPLETE** (2025-12-02)
 - ✅ Repository public on GitHub

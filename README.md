@@ -4,6 +4,7 @@
 
 [![npm version](https://badge.fury.io/js/noorui-rtl.svg)](https://www.npmjs.com/package/noorui-rtl)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![Tests](https://img.shields.io/badge/Tests-690%20passing-brightgreen)](https://github.com/ositaka/noor-ui)
 [![Storybook](https://img.shields.io/badge/Storybook-Interactive-FF4785?logo=storybook&logoColor=white)](https://storybook.noorui.com)
 
 ![Noor UI - Beautiful RTL-first React components for bilingual applications](https://raw.githubusercontent.com/ositaka/noor-ui/main/public/noorui--og-image--bilingual.png)
@@ -17,6 +18,7 @@ Beautiful RTL-first React components for bilingual applications. Built with Radi
 - 🌍 **RTL-First**: Perfect Arabic/Persian support with logical properties
 - 🎨 **77+ Components**: Complete UI toolkit for modern applications
 - ♿ **Accessible**: WCAG AA compliant with full keyboard navigation
+- 🧪 **Well-Tested**: 690+ unit tests covering all components (props, variants, RTL behavior, a11y, keyboard nav, bilingual text)
 - 🎯 **TypeScript**: Full type safety and IntelliSense support
 - 🎭 **Themeable**: Light/dark mode with customizable design tokens
 - 🕌 **GCC-Specific**: Prayer times, Hijri calendar, Arabic numbers, Zakat calculator
@@ -276,6 +278,32 @@ export default function App() {
 Chat Message, Streaming Text, Prompt Input, Thinking Indicator, Message Actions, Model Selector, Parameter Slider, Token Counter, Conversation History, Workflow Canvas
 
 > Note: AI/LLM components are functional but APIs may evolve based on feedback.
+
+## 🧪 Testing
+
+Every component is covered by unit tests using Vitest + React Testing Library. The test suite validates:
+
+- **Props & variants** -- correct CSS classes for every variant/size combination
+- **RTL behavior** -- directional CSS (logical properties, separator flipping, arrow rotation), bilingual props (titleAr, descriptionAr, etc.)
+- **Accessibility** -- ARIA attributes, keyboard navigation, focus management, screen reader announcements
+- **User interactions** -- click, toggle, type, keyboard shortcuts, controlled/uncontrolled state
+- **Edge cases** -- empty data, boundary values, disabled states, missing optional props
+
+```bash
+pnpm test --run          # Run all 690+ tests
+pnpm test:coverage       # Run with coverage report
+```
+
+| Category | Components | Tests |
+|----------|-----------|-------|
+| Core UI (Button, Input, Card, etc.) | 7 | 77 |
+| Forms (Checkbox, Select, Calendar, etc.) | 13 | 137 |
+| Navigation & Overlays (Tabs, Dialog, etc.) | 12 | 99 |
+| Data Display (Table, Timeline, Chart, etc.) | 9 | 86 |
+| Feedback & Utility (Alert, Progress, Kbd, etc.) | 8 | 63 |
+| GCC-Specific (ArabicNumber, PrayerTimes, etc.) | 4 | 53 |
+| AI/LLM (ChatMessage, StreamingText, etc.) | 9 | 85 |
+| Composite/Layout (Carousel, Stepper, etc.) | 7 | 90 |
 
 ## 🎨 RTL Support
 
