@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { ButtonArrow } from '@/components/ui/button-arrow'
 import { Card, CardContent } from '@/components/ui/card'
-import { House, MagnifyingGlass } from '@phosphor-icons/react'
+import { House } from '@phosphor-icons/react'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 
@@ -26,13 +26,6 @@ export default function NotFound() {
             <p className="text-lg text-muted-foreground max-w-md mx-auto">
               {t.notFound.description}
             </p>
-          </div>
-
-          {/* Illustration/Icon */}
-          <div className="flex justify-center">
-            <div className="relative">
-              <MagnifyingGlass className="h-32 w-32 text-muted-foreground/20" />
-            </div>
           </div>
 
           {/* Action Buttons */}
