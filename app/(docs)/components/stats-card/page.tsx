@@ -12,6 +12,7 @@ import { CodeBlock } from '@/components/docs/code-block'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 import { Users, TrendUp, CurrencyDollar, ShoppingCart } from '@phosphor-icons/react'
+import { StorybookLink } from '@/components/docs/storybook-link'
 
 const installCode = `npm install noorui-rtl`
 
@@ -104,6 +105,10 @@ export default function StatsCardPage() {
           <p className="text-xl text-muted-foreground mb-6">
             {t.statsCardComponent.description}
           </p>
+        
+        <div className="mt-4">
+          <StorybookLink />
+        </div>
         </div>
 
         <section className="mb-12">

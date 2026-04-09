@@ -12,6 +12,7 @@ import { CodeBlock } from '@/components/docs/code-block'
 import { Slideshow, Star, Quotes, Package, Truck, MapPin, ShoppingCart } from '@phosphor-icons/react'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
+import { StorybookLink } from '@/components/docs/storybook-link'
 
 // ---------------------------------------------------------------------------
 // Sample data
@@ -334,6 +335,10 @@ export default function CarouselPage() {
           <p className="text-xl text-muted-foreground max-w-3xl">
             {t.carouselComponent.description}
           </p>
+        
+        <div className="mt-4">
+          <StorybookLink />
+        </div>
         </div>
 
         {/* Preview */}

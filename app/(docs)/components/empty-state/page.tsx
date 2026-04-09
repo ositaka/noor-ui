@@ -11,6 +11,7 @@ import { Card } from '@/components/ui/card'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 import { FileText, Tray, MagnifyingGlass, Users, Plus } from '@phosphor-icons/react'
+import { StorybookLink } from '@/components/docs/storybook-link'
 
 export default function EmptyStatePage() {
   const { direction, locale } = useDirection()
@@ -79,6 +80,10 @@ export function Example() {
         <p className="text-lg text-muted-foreground">
           {emptyStateT.description}
         </p>
+      
+      <div className="mt-4">
+        <StorybookLink />
+      </div>
       </div>
 
       {/* Basic Example */}

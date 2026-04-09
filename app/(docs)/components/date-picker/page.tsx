@@ -10,6 +10,7 @@ import { CodeBlock } from '@/components/docs/code-block'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 import { Label } from '@/components/ui/label'
+import { StorybookLink } from '@/components/docs/storybook-link'
 
 const getDatePickerProps = (componentT: any): PropDefinition[] => [
   {
@@ -271,7 +272,10 @@ export default function DatePickerPage() {
 
         {/* Page Header */}
         <div className="mb-12">
-        <h1 className="text-4xl font-bold tracking-tight mb-4">{t.datePickerComponent.title}</h1>
+        <div className="flex flex-wrap items-start justify-between gap-4 mb-4">
+          <h1 className="text-4xl font-bold tracking-tight">{t.datePickerComponent.title}</h1>
+              <StorybookLink />
+            </div>
         <p className="text-xl text-muted-foreground max-w-3xl">
           {t.datePickerComponent.description}
         </p>

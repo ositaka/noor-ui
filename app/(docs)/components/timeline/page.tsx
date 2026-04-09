@@ -12,6 +12,7 @@ import { CodeBlock } from '@/components/docs/code-block'
 import { Clock, CheckCircle, Seal, Package, Truck, MapPin, HourglassHigh, UserCircle, GearSix, ShieldCheck, ChatCircle, Envelope, Star, Rocket, Flag, Bug, Code, GitBranch, Tag, Sparkle, Wrench } from '@phosphor-icons/react'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
+import { StorybookLink } from '@/components/docs/storybook-link'
 
 // ---------------------------------------------------------------------------
 // Sample data — each example shows a different real-world use case
@@ -585,6 +586,10 @@ export default function TimelinePage() {
           <p className="text-xl text-muted-foreground max-w-3xl">
             {t.timelineComponent.description}
           </p>
+        
+        <div className="mt-4">
+          <StorybookLink />
+        </div>
         </div>
 
         {/* Preview */}

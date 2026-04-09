@@ -21,6 +21,7 @@ import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
+import { StorybookLink } from '@/components/docs/storybook-link'
 
 const getDialogProps = (t: typeof content.en | typeof content.ar): PropDefinition[] => [
   {
@@ -150,7 +151,10 @@ export default function DialogPage() {
 
         {/* Page Header */}
         <div className="mb-12">
-          <h1 className="text-4xl font-bold tracking-tight mb-4">{t.dialogComponent.title}</h1>
+          <div className="flex flex-wrap items-start justify-between gap-4 mb-4">
+            <h1 className="text-4xl font-bold tracking-tight">{t.dialogComponent.title}</h1>
+              <StorybookLink />
+            </div>
           <p className="text-xl text-muted-foreground max-w-3xl">
             {t.dialogComponent.description}
           </p>

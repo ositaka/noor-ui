@@ -12,6 +12,7 @@ import { content } from '@/lib/i18n'
 import { Heart, ChatCentered, Star, UserPlus } from '@phosphor-icons/react'
 import Link from 'next/link'
 import * as React from 'react'
+import { StorybookLink } from '@/components/docs/storybook-link'
 
 const getProps = (componentT: any): PropDefinition[] => [
   {
@@ -224,6 +225,10 @@ export default function NotificationCenterPage() {
           <p className="text-xl text-muted-foreground max-w-3xl">
             {notificationCenterT.description}
           </p>
+        
+        <div className="mt-4">
+          <StorybookLink />
+        </div>
         </div>
 
         {/* Preview */}

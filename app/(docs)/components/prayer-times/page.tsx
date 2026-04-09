@@ -8,6 +8,7 @@ import { CodeBlock } from '@/components/docs/code-block'
 import { PrayerTimes, type Prayer } from '@/components/ui/prayer-times'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
+import { StorybookLink } from '@/components/docs/storybook-link'
 
 export default function PrayerTimesPage() {
   const { locale } = useDirection()
@@ -46,7 +47,10 @@ export default function PrayerTimesPage() {
 
         {/* Page Header */}
         <div className="mb-12">
-          <h1 className="text-4xl font-bold tracking-tight mb-4">{t.title}</h1>
+          <div className="flex flex-wrap items-start justify-between gap-4 mb-4">
+            <h1 className="text-4xl font-bold tracking-tight">{t.title}</h1>
+              <StorybookLink />
+            </div>
           <p className="text-xl text-muted-foreground max-w-3xl">
             {t.description}
           </p>

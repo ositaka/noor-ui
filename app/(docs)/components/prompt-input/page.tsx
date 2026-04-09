@@ -12,6 +12,7 @@ import { CodeBlock } from '@/components/docs/code-block'
 import { WarningCircle } from '@phosphor-icons/react'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
+import { StorybookLink } from '@/components/docs/storybook-link'
 
 const getPromptInputProps = (componentT: any): PropDefinition[] => [
   {
@@ -196,6 +197,9 @@ export default function PromptInputPage() {
                 <strong>{t.componentPage.wipNote}</strong> {t.componentPage.wipNoteText}
               </p>
             </div>
+          </div>
+          <div className="mt-4">
+            <StorybookLink />
           </div>
         </div>
 

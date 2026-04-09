@@ -26,6 +26,7 @@ import { Separator } from '@/components/ui/separator'
 import { ComponentShowcase } from '@/components/docs/component-showcase'
 import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
+import { StorybookLink } from '@/components/docs/storybook-link'
 import {
   User,
   Gear,
@@ -202,7 +203,10 @@ export default function DropdownMenuPage() {
 
         {/* Page Header */}
         <div className="mb-12">
-          <h1 className="text-4xl font-bold tracking-tight mb-4">{t.dropdownMenuComponent.title}</h1>
+          <div className="flex flex-wrap items-start justify-between gap-4 mb-4">
+            <h1 className="text-4xl font-bold tracking-tight">{t.dropdownMenuComponent.title}</h1>
+              <StorybookLink />
+            </div>
           <p className="text-xl text-muted-foreground max-w-3xl">
             {t.dropdownMenuComponent.description}
           </p>

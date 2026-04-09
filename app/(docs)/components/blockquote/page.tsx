@@ -11,6 +11,7 @@ import { BestPractices } from '@/components/docs/best-practices'
 import { CodeBlock } from '@/components/docs/code-block'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
+import { StorybookLink } from '@/components/docs/storybook-link'
 
 const installCode = `npm install noorui-rtl`
 
@@ -94,6 +95,10 @@ export default function BlockquotePage() {
           <p className="text-xl text-muted-foreground mb-6">
             {t.blockquoteComponent.description}
           </p>
+        
+        <div className="mt-4">
+          <StorybookLink />
+        </div>
         </div>
 
         <section className="mb-12">

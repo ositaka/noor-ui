@@ -23,6 +23,7 @@ import {
 import { useToast } from '@/hooks/use-toast'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
+import { StorybookLink } from '@/components/docs/storybook-link'
 
 const getDashboardShellProps = (componentT: any) => [
   {
@@ -341,6 +342,10 @@ export default function DashboardShellPage() {
           <p className="text-xl text-muted-foreground max-w-3xl">
             {t.dashboardShellComponent.description}
           </p>
+        
+        <div className="mt-4">
+          <StorybookLink />
+        </div>
         </div>
 
         {/* Preview */}

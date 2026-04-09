@@ -12,6 +12,7 @@ import { Badge } from '@/components/ui/badge'
 import { useToast } from '@/hooks/use-toast'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
+import { StorybookLink } from '@/components/docs/storybook-link'
 
 
 const withAvatarCode = `'use client'
@@ -172,6 +173,10 @@ export default function UserMenuPage() {
           <p className="text-xl text-muted-foreground max-w-3xl">
             {userMenuT.description}
           </p>
+        
+        <div className="mt-4">
+          <StorybookLink />
+        </div>
         </div>
 
         {/* Preview */}

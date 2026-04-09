@@ -12,6 +12,7 @@ import { CodeBlock } from '@/components/docs/code-block'
 import { ChartBar, ArrowsLeftRight } from '@phosphor-icons/react'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
+import { StorybookLink } from '@/components/docs/storybook-link'
 
 // ---------------------------------------------------------------------------
 // Sample data — quarterly sales by region (line/area/multi-series)
@@ -324,6 +325,10 @@ export default function ChartPage() {
           <p className="text-xl text-muted-foreground max-w-3xl">
             {t.chartComponent.description}
           </p>
+        
+        <div className="mt-4">
+          <StorybookLink />
+        </div>
         </div>
 
         {/* Preview */}

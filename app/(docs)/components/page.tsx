@@ -61,17 +61,6 @@ import {
 
 const componentCategories = (t: typeof content.en | typeof content.ar) => [
   {
-    name: t.components.categories.gcc,
-    description: t.components.categories.gccDesc,
-    components: [
-      { name: 'Prayer Times', icon: Clock, href: '/components/prayer-times', status: 'ready' },
-      { name: 'Hijri Date', icon: Clock, href: '/components/hijri-date', status: 'ready' },
-      { name: 'Arabic Number', icon: Hash, href: '/components/arabic-number', status: 'ready' },
-      { name: 'Zakat Calculator', icon: Calculator, href: '/components/zakat-calculator', status: 'ready' },
-      { name: 'Calendar', icon: CalendarIcon, href: '/components/calendar', status: 'ready' },
-    ],
-  },
-  {
     name: t.components.categories.core,
     description: t.components.categories.coreDesc,
     components: [
@@ -183,6 +172,17 @@ const componentCategories = (t: typeof content.en | typeof content.ar) => [
       { name: 'Carousel', icon: Slideshow, href: '/components/carousel', status: 'ready' },
       { name: 'Reaction Picker', icon: ThumbsUp, href: '/components/reaction-picker', status: 'ready' },
       { name: 'Kbd', icon: Command, href: '/components/kbd', status: 'ready' },
+    ],
+  },
+  {
+    name: t.components.categories.gcc,
+    description: t.components.categories.gccDesc,
+    components: [
+      { name: 'Prayer Times', icon: Clock, href: '/components/prayer-times', status: 'ready' },
+      { name: 'Hijri Date', icon: Clock, href: '/components/hijri-date', status: 'ready' },
+      { name: 'Arabic Number', icon: Hash, href: '/components/arabic-number', status: 'ready' },
+      { name: 'Zakat Calculator', icon: Calculator, href: '/components/zakat-calculator', status: 'ready' },
+      { name: 'Calendar', icon: CalendarIcon, href: '/components/calendar', status: 'ready' },
     ],
   },
   {

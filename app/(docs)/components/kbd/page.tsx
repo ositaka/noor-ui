@@ -13,6 +13,7 @@ import { BestPractices } from '@/components/docs/best-practices'
 import { CodeBlock } from '@/components/docs/code-block'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
+import { StorybookLink } from '@/components/docs/storybook-link'
 
 const getKbdProps = (t: typeof content.en | typeof content.ar): PropDefinition[] => [
   {
@@ -71,6 +72,10 @@ export default function KbdPage() {
           <p className="text-xl text-muted-foreground mb-6">
             {t.kbdComponent.description}
           </p>
+        
+        <div className="mt-4">
+          <StorybookLink />
+        </div>
         </div>
 
         <section className="mb-12">
