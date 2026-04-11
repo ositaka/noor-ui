@@ -13,6 +13,8 @@ import { BestPractices } from '@/components/docs/best-practices'
 import { CodeBlock } from '@/components/docs/code-block'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
+import { StorybookLink } from '@/components/docs/storybook-link'
+import { ComponentDocSections } from '@/components/docs/component-doc-sections'
 
 const getKbdProps = (t: typeof content.en | typeof content.ar): PropDefinition[] => [
   {
@@ -66,11 +68,14 @@ export default function KbdPage() {
         <div className="max-w-3xl mb-12">
           <div className="flex items-center gap-3 mb-4">
             <h1 className="text-4xl font-bold tracking-tight">{t.kbdComponent.title}</h1>
-            <Badge>v0.4.0</Badge>
           </div>
           <p className="text-xl text-muted-foreground mb-6">
             {t.kbdComponent.description}
           </p>
+        
+        <div className="mt-4">
+          <StorybookLink />
+        </div>
         </div>
 
         <section className="mb-12">
@@ -145,15 +150,10 @@ export default function KbdPage() {
           <h2 className="text-2xl font-bold mb-6">{t.kbdComponent.props.title}</h2>
           <PropsTable props={kbdProps} />
         </section>
+      
+        <ComponentDocSections />
 
-        <section className="mb-12">
-          <h2 className="text-2xl font-bold mb-6">{t.componentPage.sections.bestPractices}</h2>
-          <BestPractices
-            dos={t.kbdComponent.bestPractices.doList}
-            donts={t.kbdComponent.bestPractices.dontList}
-          />
-        </section>
-      </main>
+</main>
     </div>
   )
 }

@@ -12,6 +12,8 @@ import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
+import { StorybookLink } from '@/components/docs/storybook-link'
+import { ComponentDocSections } from '@/components/docs/component-doc-sections'
 
 const getSwitchProps = (t: typeof content.en | typeof content.ar): PropDefinition[] => [
   {
@@ -208,7 +210,10 @@ export default function SwitchPage() {
 
         {/* Page Header */}
         <div className="mb-12">
-          <h1 className="text-4xl font-bold tracking-tight mb-4">{t.switchComponent.title}</h1>
+          <div className="flex flex-wrap items-start justify-between gap-4 mb-4">
+            <h1 className="text-4xl font-bold tracking-tight">{t.switchComponent.title}</h1>
+              <StorybookLink />
+            </div>
           <p className="text-xl text-muted-foreground max-w-3xl">
             {t.switchComponent.description}
           </p>
@@ -464,42 +469,10 @@ export default function SwitchPage() {
             </CardContent>
           </Card>
         </section>
+      
+        <ComponentDocSections />
 
-        {/* Related Components */}
-        <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.switchComponent.related.title}</h2>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            <Link href="/components/checkbox">
-              <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
-                <CardContent className="p-6">
-                  <h3 className="font-semibold">{t.switchComponent.related.checkbox}</h3>
-                  <p className="text-sm text-muted-foreground mt-1">
-                    {t.switchComponent.related.checkboxDesc}
-                  </p>
-                </CardContent>
-              </Card>
-            </Link>
-            <Link href="/components/radio-group">
-              <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
-                <CardContent className="p-6">
-                  <h3 className="font-semibold">{t.switchComponent.related.radioGroup}</h3>
-                  <p className="text-sm text-muted-foreground mt-1">
-                    {t.switchComponent.related.radioGroupDesc}
-                  </p>
-                </CardContent>
-              </Card>
-            </Link>
-            <Link href="/components/label">
-              <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
-                <CardContent className="p-6">
-                  <h3 className="font-semibold">{t.switchComponent.related.label}</h3>
-                  <p className="text-sm text-muted-foreground mt-1">{t.switchComponent.related.labelDesc}</p>
-                </CardContent>
-              </Card>
-            </Link>
-          </div>
-        </section>
-      </main>
+</main>
     </div>
   )
 }

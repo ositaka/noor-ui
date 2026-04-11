@@ -10,6 +10,8 @@ import { CodeBlock } from '@/components/docs/code-block'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 import { Label } from '@/components/ui/label'
+import { StorybookLink } from '@/components/docs/storybook-link'
+import { ComponentDocSections } from '@/components/docs/component-doc-sections'
 
 const getNumberInputProps = (componentT: any): PropDefinition[] => [
   {
@@ -212,7 +214,10 @@ export default function NumberInputPage() {
 
         {/* Page Header */}
         <div className="mb-12">
-        <h1 className="text-4xl font-bold tracking-tight mb-4">{t.numberInputComponent.title}</h1>
+        <div className="flex flex-wrap items-start justify-between gap-4 mb-4">
+          <h1 className="text-4xl font-bold tracking-tight">{t.numberInputComponent.title}</h1>
+              <StorybookLink />
+            </div>
         <p className="text-xl text-muted-foreground max-w-3xl">
           {t.numberInputComponent.description}
         </p>
@@ -425,28 +430,6 @@ const formatCurrency = (value: number) =>
         </div>
       </section>
 
-      {/* Use Cases */}
-      <section className="mb-16">
-        <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.useCases}</h2>
-        <div className="grid gap-4 md:grid-cols-2">
-          {[
-            { title: t.numberInputComponent.useCases.pricingForms, icon: '💰' },
-            { title: t.numberInputComponent.useCases.quantityCalculators, icon: '🔢' },
-            { title: t.numberInputComponent.useCases.settingsControls, icon: '⚙️' },
-            { title: t.numberInputComponent.useCases.financialData, icon: '📊' },
-          ].map((useCase, idx) => (
-            <Card key={idx}>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <span className="text-2xl">{useCase.icon}</span>
-                  {useCase.title}
-                </CardTitle>
-              </CardHeader>
-            </Card>
-          ))}
-        </div>
-      </section>
-
       {/* API Reference */}
       <section className="mb-16">
         <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.propsApiReference}</h2>
@@ -469,7 +452,10 @@ const formatCurrency = (value: number) =>
           <li>{t.numberInputComponent.features.fullAccessibility}</li>
         </ul>
       </section>
-      </main>
+      
+        <ComponentDocSections />
+
+</main>
     </div>
   )
 }

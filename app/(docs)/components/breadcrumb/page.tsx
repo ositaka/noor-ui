@@ -18,6 +18,8 @@ import {
 } from '@/components/ui/breadcrumb'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
+import { StorybookLink } from '@/components/docs/storybook-link'
+import { ComponentDocSections } from '@/components/docs/component-doc-sections'
 
 const getBreadcrumbProps = (t: typeof content.en | typeof content.ar): PropDefinition[] => [
   {
@@ -135,7 +137,10 @@ export default function BreadcrumbComponentPage() {
 
         {/* Page Header */}
         <div className="mb-12">
-          <h1 className="text-4xl font-bold tracking-tight mb-4">{t.breadcrumbComponent.title}</h1>
+          <div className="flex flex-wrap items-start justify-between gap-4 mb-4">
+            <h1 className="text-4xl font-bold tracking-tight">{t.breadcrumbComponent.title}</h1>
+              <StorybookLink />
+            </div>
           <p className="text-xl text-muted-foreground max-w-3xl">
             {t.breadcrumbComponent.description}
           </p>
@@ -290,34 +295,10 @@ export default function BreadcrumbComponentPage() {
             </CardContent>
           </Card>
         </section>
+      
+        <ComponentDocSections />
 
-        {/* Related Components */}
-        <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-4">{t.breadcrumbComponent.related.title}</h2>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            <Link href="/components/pagination">
-              <Card className="hover:border-primary transition-colors">
-                <CardContent className="p-6">
-                  <h3 className="font-semibold mb-2">{t.breadcrumbComponent.related.pagination}</h3>
-                  <p className="text-sm text-muted-foreground">
-                    {t.breadcrumbComponent.related.paginationDesc}
-                  </p>
-                </CardContent>
-              </Card>
-            </Link>
-            <Link href="/components/tabs">
-              <Card className="hover:border-primary transition-colors">
-                <CardContent className="p-6">
-                  <h3 className="font-semibold mb-2">{t.breadcrumbComponent.related.tabs}</h3>
-                  <p className="text-sm text-muted-foreground">
-                    {t.breadcrumbComponent.related.tabsDesc}
-                  </p>
-                </CardContent>
-              </Card>
-            </Link>
-          </div>
-        </section>
-      </main>
+</main>
     </div>
   )
 }

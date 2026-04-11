@@ -17,6 +17,8 @@ import {
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
+import { StorybookLink } from '@/components/docs/storybook-link'
+import { ComponentDocSections } from '@/components/docs/component-doc-sections'
 
 export default function ArabicNumberPage() {
   const { locale } = useDirection()
@@ -46,7 +48,10 @@ export default function ArabicNumberPage() {
 
         {/* Page Header */}
         <div className="mb-12">
-          <h1 className="text-4xl font-bold tracking-tight mb-4">{t.title}</h1>
+          <div className="flex flex-wrap items-start justify-between gap-4 mb-4">
+            <h1 className="text-4xl font-bold tracking-tight">{t.title}</h1>
+              <StorybookLink />
+            </div>
           <p className="text-xl text-muted-foreground max-w-3xl">
             {t.description}
           </p>
@@ -532,79 +537,12 @@ formatCompactNumber(1234567, {
           />
         </section>
 
-        {/* Use Cases */}
-        <section className="mb-16">
-          <h2 className="text-3xl font-bold mb-6">{t.sections.commonUseCases}</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <Card>
-              <CardHeader>
-                <CardTitle>{t.useCases.ecommercePrices}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CodeBlock
-                  language="tsx"
-                  code={`<ArabicNumber
-  value={299.99}
-  format="currency"
-  locale={locale}
-  useArabicNumerals={locale === 'ar'}
-/>`}
-                />
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <CardTitle>{t.useCases.statisticsAnalytics}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CodeBlock
-                  language="tsx"
-                  code={`<ArabicNumber
-  value={1234567}
-  decimals={0}
-  useArabicNumerals={isRTL}
-/>`}
-                />
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <CardTitle>{t.useCases.discountPercentages}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CodeBlock
-                  language="tsx"
-                  code={`<ArabicNumber
-  value={0.25}
-  format="percentage"
-  decimals={0}
-  className="text-green-600"
-/>`}
-                />
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <CardTitle>{t.useCases.compactNumbers}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CodeBlock
-                  language="tsx"
-                  code={`formatCompactNumber(1500000)
-// Output: "1.5M"`}
-                />
-              </CardContent>
-            </Card>
-          </div>
-        </section>
-
         {/* Accessibility */}
         <section className="mb-16">
           <h2 className="text-3xl font-bold mb-6">{content[locale].componentDocs.accessibility}</h2>
-          <div className="space-y-4 text-muted-foreground">
+          <Card>
+            <CardContent className="pt-6">
+              <div className="space-y-4 text-muted-foreground">
             <p>{t.accessibility.description}</p>
             <ul className="list-disc list-inside space-y-2 ms-4">
               <li>
@@ -621,12 +559,16 @@ formatCompactNumber(1234567, {
               </li>
             </ul>
           </div>
+            </CardContent>
+          </Card>
         </section>
 
         {/* RTL Considerations */}
         <section className="mb-16">
           <h2 className="text-3xl font-bold mb-6">{content[locale].componentDocs.rtlConsiderations}</h2>
-          <div className="space-y-4 text-muted-foreground">
+          <Card>
+            <CardContent className="pt-6">
+              <div className="space-y-4 text-muted-foreground">
             <p>{t.rtl.description}</p>
             <ul className="list-disc list-inside space-y-2 ms-4">
               <li>
@@ -646,33 +588,13 @@ formatCompactNumber(1234567, {
               </li>
             </ul>
           </div>
+            </CardContent>
+          </Card>
         </section>
+      
+        <ComponentDocSections />
 
-        {/* Related Components */}
-        <section className="mb-16">
-          <h2 className="text-3xl font-bold mb-6">{t.relatedComponents.title}</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <Link
-              href="/components/hijri-date"
-              className="block p-4 border rounded-lg hover:border-primary transition-colors"
-            >
-              <h3 className="font-semibold mb-2">{t.relatedComponents.hijriDate}</h3>
-              <p className="text-sm text-muted-foreground">
-                {t.relatedComponents.hijriDateDesc}
-              </p>
-            </Link>
-            <Link
-              href="/components/badge"
-              className="block p-4 border rounded-lg hover:border-primary transition-colors"
-            >
-              <h3 className="font-semibold mb-2">{t.relatedComponents.badge}</h3>
-              <p className="text-sm text-muted-foreground">
-                {t.relatedComponents.badgeDesc}
-              </p>
-            </Link>
-          </div>
-        </section>
-      </main>
+</main>
     </div>
   )
 }

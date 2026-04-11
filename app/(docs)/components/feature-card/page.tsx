@@ -10,6 +10,8 @@ import { BestPractices } from '@/components/docs/best-practices'
 import { Sparkle, Rocket, Lightning, Shield, Package, Gear } from '@phosphor-icons/react'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
+import { StorybookLink } from '@/components/docs/storybook-link'
+import { ComponentDocSections } from '@/components/docs/component-doc-sections'
 
 const featureCardProps: PropDefinition[] = [
   {
@@ -132,7 +134,10 @@ export default function FeatureCardPage() {
 
         {/* Page Header */}
         <div className="mb-12">
-          <h1 className="text-4xl font-bold tracking-tight mb-4">{t.componentNames['feature-card']}</h1>
+          <div className="flex flex-wrap items-start justify-between gap-4 mb-4">
+            <h1 className="text-4xl font-bold tracking-tight">{t.componentNames['feature-card']}</h1>
+              <StorybookLink />
+            </div>
           <p className="text-xl text-muted-foreground max-w-3xl">
             {t.featureCardComponent.description}
           </p>
@@ -253,35 +258,10 @@ export default function FeatureCardPage() {
           <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.props}</h2>
           <PropsTable props={featureCardProps} />
         </section>
+      
+        <ComponentDocSections />
 
-        {/* Best Practices */}
-        <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.bestPractices}</h2>
-          <BestPractices
-            dos={t.featureCardComponent.bestPractices.doList}
-            donts={t.featureCardComponent.bestPractices.dontList}
-          />
-        </section>
-
-        {/* Related Components */}
-        <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.relatedComponents}</h2>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            <FeatureCard
-              icon={Package}
-              title={t.componentNames['card']}
-              description={t.featureCardComponent.relatedComponents.baseCard}
-              href="/components/card"
-            />
-            <FeatureCard
-              icon={Gear}
-              title={t.componentNames['stats-card']}
-              description={t.featureCardComponent.relatedComponents.statsCardDesc}
-              href="/components/stats-card"
-            />
-          </div>
-        </section>
-      </main>
+</main>
     </div>
   )
 }

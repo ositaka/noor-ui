@@ -12,6 +12,8 @@ import { CodeBlock } from '@/components/docs/code-block'
 import { Check, WarningCircle, Star, Clock, Lightning, CheckCircle, XCircle } from '@phosphor-icons/react'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
+import { StorybookLink } from '@/components/docs/storybook-link'
+import { ComponentDocSections } from '@/components/docs/component-doc-sections'
 
 const getBadgeProps = (t: typeof content.en | typeof content.ar): PropDefinition[] => [
   {
@@ -167,7 +169,10 @@ export default function BadgePage() {
 
         {/* Page Header */}
         <div className="mb-12">
-          <h1 className="text-4xl font-bold tracking-tight mb-4">{t.badgeComponent.title}</h1>
+          <div className="flex flex-wrap items-start justify-between gap-4 mb-4">
+            <h1 className="text-4xl font-bold tracking-tight">{t.badgeComponent.title}</h1>
+              <StorybookLink />
+            </div>
           <p className="text-xl text-muted-foreground max-w-3xl">
             {t.badgeComponent.description}
           </p>
@@ -531,91 +536,10 @@ export default function BadgePage() {
             </CardContent>
           </Card>
         </section>
+      
+        <ComponentDocSections />
 
-        {/* Use Cases */}
-        <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.badgeComponent.useCases.title}</h2>
-          <Card>
-            <CardContent className="p-6">
-              <ul className="space-y-3 text-muted-foreground">
-                <li className="flex items-start gap-2">
-                  <span className="text-primary">•</span>
-                  <span>
-                    <strong>{t.badgeComponent.useCases.statusIndicators}:</strong> {t.badgeComponent.useCases.statusDesc}
-                  </span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-primary">•</span>
-                  <span>
-                    <strong>{t.badgeComponent.useCases.categories}:</strong> {t.badgeComponent.useCases.categoriesDesc}
-                  </span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-primary">•</span>
-                  <span>
-                    <strong>{t.badgeComponent.useCases.notificationCounts}:</strong> {t.badgeComponent.useCases.notificationCountsDesc}
-                  </span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-primary">•</span>
-                  <span>
-                    <strong>{t.badgeComponent.useCases.featureHighlights}:</strong> {t.badgeComponent.useCases.featureHighlightsDesc}
-                  </span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-primary">•</span>
-                  <span>
-                    <strong>{t.badgeComponent.useCases.versionLabels}:</strong> {t.badgeComponent.useCases.versionLabelsDesc}
-                  </span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-primary">•</span>
-                  <span>
-                    <strong>{t.badgeComponent.useCases.roleIndicators}:</strong> {t.badgeComponent.useCases.roleIndicatorsDesc}
-                  </span>
-                </li>
-              </ul>
-            </CardContent>
-          </Card>
-        </section>
-
-        {/* Related Components */}
-        <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.badgeComponent.related.title}</h2>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            <Link href="/components/button">
-              <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
-                <CardContent className="p-6">
-                  <h3 className="font-semibold">{t.badgeComponent.related.button}</h3>
-                  <p className="text-sm text-muted-foreground mt-1">
-                    {t.badgeComponent.related.buttonDesc}
-                  </p>
-                </CardContent>
-              </Card>
-            </Link>
-            <Link href="/components/card">
-              <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
-                <CardContent className="p-6">
-                  <h3 className="font-semibold">{t.badgeComponent.related.card}</h3>
-                  <p className="text-sm text-muted-foreground mt-1">
-                    {t.badgeComponent.related.cardDesc}
-                  </p>
-                </CardContent>
-              </Card>
-            </Link>
-            <Link href="/components/alert">
-              <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
-                <CardContent className="p-6">
-                  <h3 className="font-semibold">{t.badgeComponent.related.alert}</h3>
-                  <p className="text-sm text-muted-foreground mt-1">
-                    {t.badgeComponent.related.alertDesc}
-                  </p>
-                </CardContent>
-              </Card>
-            </Link>
-          </div>
-        </section>
-      </main>
+</main>
     </div>
   )
 }

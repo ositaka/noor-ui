@@ -10,6 +10,8 @@ import { CodeBlock } from '@/components/docs/code-block'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 import { Label } from '@/components/ui/label'
+import { StorybookLink } from '@/components/docs/storybook-link'
+import { ComponentDocSections } from '@/components/docs/component-doc-sections'
 
 const getDatePickerProps = (componentT: any): PropDefinition[] => [
   {
@@ -271,7 +273,10 @@ export default function DatePickerPage() {
 
         {/* Page Header */}
         <div className="mb-12">
-        <h1 className="text-4xl font-bold tracking-tight mb-4">{t.datePickerComponent.title}</h1>
+        <div className="flex flex-wrap items-start justify-between gap-4 mb-4">
+          <h1 className="text-4xl font-bold tracking-tight">{t.datePickerComponent.title}</h1>
+              <StorybookLink />
+            </div>
         <p className="text-xl text-muted-foreground max-w-3xl">
           {t.datePickerComponent.description}
         </p>
@@ -473,28 +478,6 @@ const nights = dateRange?.from && dateRange?.to
         </div>
       </section>
 
-      {/* Use Cases */}
-      <section className="mb-16">
-        <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.useCases}</h2>
-        <div className="grid gap-4 md:grid-cols-2">
-          {[
-            { title: t.datePickerComponent.useCases.bookingForms, icon: '🏨' },
-            { title: t.datePickerComponent.useCases.appointments, icon: '📅' },
-            { title: t.datePickerComponent.useCases.dateFilters, icon: '🔍' },
-            { title: t.datePickerComponent.useCases.dateOfBirth, icon: '🎂' },
-          ].map((useCase, idx) => (
-            <Card key={idx}>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <span className="text-2xl">{useCase.icon}</span>
-                  {useCase.title}
-                </CardTitle>
-              </CardHeader>
-            </Card>
-          ))}
-        </div>
-      </section>
-
       {/* Type Definition */}
       <section className="mb-16">
         <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.typeDefinitions}</h2>
@@ -529,7 +512,10 @@ const nights = dateRange?.from && dateRange?.to
           <li>{t.datePickerComponent.features.quickSelection}</li>
         </ul>
       </section>
-      </main>
+      
+        <ComponentDocSections />
+
+</main>
     </div>
   )
 }

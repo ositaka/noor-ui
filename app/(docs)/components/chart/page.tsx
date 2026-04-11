@@ -12,6 +12,8 @@ import { CodeBlock } from '@/components/docs/code-block'
 import { ChartBar, ArrowsLeftRight } from '@phosphor-icons/react'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
+import { StorybookLink } from '@/components/docs/storybook-link'
+import { ComponentDocSections } from '@/components/docs/component-doc-sections'
 
 // ---------------------------------------------------------------------------
 // Sample data — quarterly sales by region (line/area/multi-series)
@@ -324,6 +326,10 @@ export default function ChartPage() {
           <p className="text-xl text-muted-foreground max-w-3xl">
             {t.chartComponent.description}
           </p>
+        
+        <div className="mt-4">
+          <StorybookLink />
+        </div>
         </div>
 
         {/* Preview */}
@@ -654,64 +660,7 @@ export default function ChartPage() {
             </CardContent>
           </Card>
         </section>
-
-        {/* Use Cases */}
-        <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.chartComponent.useCases.title}</h2>
-          <Card>
-            <CardContent className="p-6">
-              <ul className="space-y-3 text-muted-foreground">
-                <li className="flex items-start gap-2">
-                  <span className="text-primary">•</span>
-                  <span><strong>{t.chartComponent.useCases.dashboards}:</strong> {t.chartComponent.useCases.dashboardsDesc}</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-primary">•</span>
-                  <span><strong>{t.chartComponent.useCases.analytics}:</strong> {t.chartComponent.useCases.analyticsDesc}</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-primary">•</span>
-                  <span><strong>{t.chartComponent.useCases.reports}:</strong> {t.chartComponent.useCases.reportsDesc}</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-primary">•</span>
-                  <span><strong>{t.chartComponent.useCases.kpi}:</strong> {t.chartComponent.useCases.kpiDesc}</span>
-                </li>
-              </ul>
-            </CardContent>
-          </Card>
-        </section>
-
-        {/* Related Components */}
-        <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.chartComponent.related.title}</h2>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            <Link href="/components/stats-card">
-              <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
-                <CardContent className="p-6">
-                  <h3 className="font-semibold">{t.chartComponent.related.statsCard}</h3>
-                  <p className="text-sm text-muted-foreground mt-1">{t.chartComponent.related.statsCardDesc}</p>
-                </CardContent>
-              </Card>
-            </Link>
-            <Link href="/components/table">
-              <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
-                <CardContent className="p-6">
-                  <h3 className="font-semibold">{t.chartComponent.related.table}</h3>
-                  <p className="text-sm text-muted-foreground mt-1">{t.chartComponent.related.tableDesc}</p>
-                </CardContent>
-              </Card>
-            </Link>
-            <Link href="/components/card">
-              <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
-                <CardContent className="p-6">
-                  <h3 className="font-semibold">{t.chartComponent.related.card}</h3>
-                  <p className="text-sm text-muted-foreground mt-1">{t.chartComponent.related.cardDesc}</p>
-                </CardContent>
-              </Card>
-            </Link>
-          </div>
-        </section>
+        <ComponentDocSections />
       </div>
     </div>
   )

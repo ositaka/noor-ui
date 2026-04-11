@@ -12,6 +12,8 @@ import { BestPractices } from '@/components/docs/best-practices'
 import { CodeBlock } from '@/components/docs/code-block'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
+import { StorybookLink } from '@/components/docs/storybook-link'
+import { ComponentDocSections } from '@/components/docs/component-doc-sections'
 
 const getReactionPickerProps = (t: typeof content.en | typeof content.ar): PropDefinition[] => [
   {
@@ -141,7 +143,6 @@ export default function ReactionPickerPage() {
         <div className="max-w-3xl mb-12">
           <div className="flex items-center gap-3 mb-4">
             <h1 className="text-4xl font-bold tracking-tight">{t.reactionPickerComponent.title}</h1>
-            <Badge>v0.4.0</Badge>
           </div>
           <p className="text-xl text-muted-foreground mb-6">
             {t.reactionPickerComponent.description}
@@ -150,6 +151,9 @@ export default function ReactionPickerPage() {
             <Badge variant="secondary">Social</Badge>
             <Badge variant="secondary">Interactive</Badge>
             <Badge variant="secondary">RTL-ready</Badge>
+          </div>
+          <div className="mt-4">
+            <StorybookLink />
           </div>
         </div>
 
@@ -259,15 +263,6 @@ function CommentReactions() {
           <PropsTable props={reactionPickerProps} />
         </section>
 
-        {/* Best Practices */}
-        <section className="mb-12">
-          <h2 className="text-2xl font-bold mb-6">{t.componentPage.sections.bestPractices}</h2>
-          <BestPractices
-            dos={t.reactionPickerComponent.bestPractices.doList}
-            donts={t.reactionPickerComponent.bestPractices.dontList}
-          />
-        </section>
-
         {/* Features */}
         <section className="mb-12">
           <h2 className="text-2xl font-bold mb-6">{t.reactionPickerComponent.features.title}</h2>
@@ -325,24 +320,10 @@ function CommentReactions() {
             </Card>
           </div>
         </section>
+      
+        <ComponentDocSections />
 
-        {/* Use Cases */}
-        <section>
-          <h2 className="text-2xl font-bold mb-6">{t.reactionPickerComponent.useCases.title}</h2>
-          <Card>
-            <CardContent className="pt-6">
-              <ul className="space-y-3">
-                {t.reactionPickerComponent.useCases.items.map((item, index) => (
-                  <li key={index} className="flex items-start gap-2">
-                    <span className="text-primary">•</span>
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </CardContent>
-          </Card>
-        </section>
-      </main>
+</main>
     </div>
   )
 }

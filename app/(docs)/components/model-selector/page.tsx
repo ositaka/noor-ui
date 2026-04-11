@@ -10,6 +10,8 @@ import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
+import { StorybookLink } from '@/components/docs/storybook-link'
+import { ComponentDocSections } from '@/components/docs/component-doc-sections'
 
 
 const aiModelInterface = `interface AIModel {
@@ -160,7 +162,10 @@ export default function ModelSelectorPage() {
 
         {/* Page Header */}
         <div className="mb-12">
-          <h1 className="text-4xl font-bold tracking-tight mb-4">{modelSelectorT.title}</h1>
+          <div className="flex flex-wrap items-start justify-between gap-4 mb-4">
+            <h1 className="text-4xl font-bold tracking-tight">{modelSelectorT.title}</h1>
+              <StorybookLink />
+            </div>
           <p className="text-xl text-muted-foreground max-w-3xl">
             {modelSelectorT.description}
           </p>
@@ -365,44 +370,10 @@ export default function ModelSelectorPage() {
             </CardContent>
           </Card>
         </section>
+      
+        <ComponentDocSections />
 
-        {/* Related */}
-        <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">{modelSelectorT.sections.related}</h2>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            <Card>
-              <CardContent className="p-4">
-                <Link href="/components/parameter-slider" className="font-medium hover:underline">
-                  {modelSelectorT.related.parameterSlider}
-                </Link>
-                <p className="text-sm text-muted-foreground mt-1">
-                  {modelSelectorT.related.parameterSliderDesc}
-                </p>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardContent className="p-4">
-                <Link href="/components/token-counter" className="font-medium hover:underline">
-                  {modelSelectorT.related.tokenCounter}
-                </Link>
-                <p className="text-sm text-muted-foreground mt-1">
-                  {modelSelectorT.related.tokenCounterDesc}
-                </p>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardContent className="p-4">
-                <Link href="/components/chat-message" className="font-medium hover:underline">
-                  {modelSelectorT.related.chatMessage}
-                </Link>
-                <p className="text-sm text-muted-foreground mt-1">
-                  {modelSelectorT.related.chatMessageDesc}
-                </p>
-              </CardContent>
-            </Card>
-          </div>
-        </section>
-      </main>
+</main>
     </div>
   )
 }

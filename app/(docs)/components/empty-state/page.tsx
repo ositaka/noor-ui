@@ -7,10 +7,12 @@ import { PropsTable } from '@/components/docs/props-table'
 import { BestPractices } from '@/components/docs/best-practices'
 import { EmptyState } from '@/components/ui/empty-state'
 import { Button } from '@/components/ui/button'
-import { Card } from '@/components/ui/card'
+import { Card, CardContent } from '@/components/ui/card'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 import { FileText, Tray, MagnifyingGlass, Users, Plus } from '@phosphor-icons/react'
+import { StorybookLink } from '@/components/docs/storybook-link'
+import { ComponentDocSections } from '@/components/docs/component-doc-sections'
 
 export default function EmptyStatePage() {
   const { direction, locale } = useDirection()
@@ -79,6 +81,10 @@ export function Example() {
         <p className="text-lg text-muted-foreground">
           {emptyStateT.description}
         </p>
+      
+      <div className="mt-4">
+        <StorybookLink />
+      </div>
       </div>
 
       {/* Basic Example */}
@@ -213,35 +219,24 @@ export function Example() {
       </div>
 
       {/* Usage Guidelines */}
-      <div className="space-y-4">
-        <h2 className="text-2xl font-bold">
+      <section className="mb-16">
+        <h2 className="text-2xl font-bold tracking-tight mb-6">
           {emptyStateT.sections.usageGuidelines}
         </h2>
-
-        <div className="space-y-3 text-sm">
-          <div>
-            <h3 className="font-semibold mb-1">
+        <Card>
+          <CardContent className="pt-6">
+            <h3 className="font-semibold mb-2">
               {emptyStateT.sections.whenToUse}
             </h3>
-            <ul className="list-disc ps-5 space-y-1 text-muted-foreground">
+            <ul className="list-disc ps-5 space-y-1 text-sm text-muted-foreground">
               <li>{emptyStateT.usageGuidelines.whenNoContentToDisplay}</li>
               <li>{emptyStateT.usageGuidelines.toGuideUsersNextAction}</li>
               <li>{emptyStateT.usageGuidelines.toProvideExplanation}</li>
             </ul>
-          </div>
-        </div>
-      </div>
-
-      {/* Best Practices */}
-      <section className="mb-8">
-        <h2 className="text-2xl font-bold tracking-tight mb-6">
-          {emptyStateT.sections.bestPractices}
-        </h2>
-        <BestPractices
-          dos={emptyStateT.bestPractices.doList}
-          donts={emptyStateT.bestPractices.dontList}
-        />
+          </CardContent>
+        </Card>
       </section>
+        <ComponentDocSections />
     </div>
   )
 }

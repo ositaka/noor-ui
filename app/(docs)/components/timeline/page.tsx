@@ -12,6 +12,8 @@ import { CodeBlock } from '@/components/docs/code-block'
 import { Clock, CheckCircle, Seal, Package, Truck, MapPin, HourglassHigh, UserCircle, GearSix, ShieldCheck, ChatCircle, Envelope, Star, Rocket, Flag, Bug, Code, GitBranch, Tag, Sparkle, Wrench } from '@phosphor-icons/react'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
+import { StorybookLink } from '@/components/docs/storybook-link'
+import { ComponentDocSections } from '@/components/docs/component-doc-sections'
 
 // ---------------------------------------------------------------------------
 // Sample data — each example shows a different real-world use case
@@ -585,6 +587,10 @@ export default function TimelinePage() {
           <p className="text-xl text-muted-foreground max-w-3xl">
             {t.timelineComponent.description}
           </p>
+        
+        <div className="mt-4">
+          <StorybookLink />
+        </div>
         </div>
 
         {/* Preview */}
@@ -816,64 +822,7 @@ export default function TimelinePage() {
             </CardContent>
           </Card>
         </section>
-
-        {/* Use Cases */}
-        <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.timelineComponent.useCases.title}</h2>
-          <Card>
-            <CardContent className="p-6">
-              <ul className="space-y-3 text-muted-foreground">
-                <li className="flex items-start gap-2">
-                  <span className="text-primary">•</span>
-                  <span><strong>{t.timelineComponent.useCases.processTracking}:</strong> {t.timelineComponent.useCases.processTrackingDesc}</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-primary">•</span>
-                  <span><strong>{t.timelineComponent.useCases.activityLog}:</strong> {t.timelineComponent.useCases.activityLogDesc}</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-primary">•</span>
-                  <span><strong>{t.timelineComponent.useCases.projectMilestones}:</strong> {t.timelineComponent.useCases.projectMilestonesDesc}</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-primary">•</span>
-                  <span><strong>{t.timelineComponent.useCases.patientHistory}:</strong> {t.timelineComponent.useCases.patientHistoryDesc}</span>
-                </li>
-              </ul>
-            </CardContent>
-          </Card>
-        </section>
-
-        {/* Related Components */}
-        <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.timelineComponent.related.title}</h2>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            <Link href="/components/stepper">
-              <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
-                <CardContent className="p-6">
-                  <h3 className="font-semibold">{t.timelineComponent.related.stepper}</h3>
-                  <p className="text-sm text-muted-foreground mt-1">{t.timelineComponent.related.stepperDesc}</p>
-                </CardContent>
-              </Card>
-            </Link>
-            <Link href="/components/progress">
-              <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
-                <CardContent className="p-6">
-                  <h3 className="font-semibold">{t.timelineComponent.related.progress}</h3>
-                  <p className="text-sm text-muted-foreground mt-1">{t.timelineComponent.related.progressDesc}</p>
-                </CardContent>
-              </Card>
-            </Link>
-            <Link href="/components/card">
-              <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
-                <CardContent className="p-6">
-                  <h3 className="font-semibold">{t.timelineComponent.related.card}</h3>
-                  <p className="text-sm text-muted-foreground mt-1">{t.timelineComponent.related.cardDesc}</p>
-                </CardContent>
-              </Card>
-            </Link>
-          </div>
-        </section>
+        <ComponentDocSections />
       </div>
     </div>
   )

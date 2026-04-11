@@ -10,6 +10,8 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 import { Copy, Download, Printer, ShareNetwork } from '@phosphor-icons/react'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
+import { StorybookLink } from '@/components/docs/storybook-link'
+import { ComponentDocSections } from '@/components/docs/component-doc-sections'
 
 export default function ZakatCalculatorPage() {
   const { locale } = useDirection()
@@ -39,7 +41,10 @@ export default function ZakatCalculatorPage() {
 
         {/* Page Header */}
         <div className="mb-12">
-          <h1 className="text-4xl font-bold tracking-tight mb-4">{t.title}</h1>
+          <div className="flex flex-wrap items-start justify-between gap-4 mb-4">
+            <h1 className="text-4xl font-bold tracking-tight">{t.title}</h1>
+              <StorybookLink />
+            </div>
           <p className="text-xl text-muted-foreground max-w-3xl">
             {t.description}
           </p>
@@ -529,7 +534,9 @@ Calculation Result:
         {/* Accessibility */}
         <section className="mb-16">
           <h2 className="text-3xl font-bold mb-6">{content[locale].componentDocs.accessibility}</h2>
-          <div className="space-y-4 text-muted-foreground">
+          <Card>
+            <CardContent className="pt-6">
+              <div className="space-y-4 text-muted-foreground">
             <p>{t.accessibility.description}</p>
             <ul className="list-disc list-inside space-y-2 ms-4">
               <li>
@@ -552,12 +559,16 @@ Calculation Result:
               </li>
             </ul>
           </div>
+            </CardContent>
+          </Card>
         </section>
 
         {/* RTL Considerations */}
         <section className="mb-16">
           <h2 className="text-3xl font-bold mb-6">{content[locale].componentDocs.rtl}</h2>
-          <div className="space-y-4 text-muted-foreground">
+          <Card>
+            <CardContent className="pt-6">
+              <div className="space-y-4 text-muted-foreground">
             <p>{t.rtl.description}</p>
             <ul className="list-disc list-inside space-y-2 ms-4">
               <li>
@@ -580,51 +591,13 @@ Calculation Result:
               </li>
             </ul>
           </div>
+            </CardContent>
+          </Card>
         </section>
+      
+        <ComponentDocSections />
 
-        {/* Related Components */}
-        <section className="mb-16">
-          <h2 className="text-3xl font-bold mb-6">{t.relatedComponents.title}</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <Link
-              href="/components/arabic-number"
-              className="block p-4 border rounded-lg hover:border-primary transition-colors"
-            >
-              <h3 className="font-semibold mb-2">{t.relatedComponents.arabicNumber}</h3>
-              <p className="text-sm text-muted-foreground">
-                {t.relatedComponents.arabicNumberDesc}
-              </p>
-            </Link>
-            <Link
-              href="/components/form"
-              className="block p-4 border rounded-lg hover:border-primary transition-colors"
-            >
-              <h3 className="font-semibold mb-2">{t.relatedComponents.form}</h3>
-              <p className="text-sm text-muted-foreground">
-                {t.relatedComponents.formDesc}
-              </p>
-            </Link>
-            <Link
-              href="/components/input"
-              className="block p-4 border rounded-lg hover:border-primary transition-colors"
-            >
-              <h3 className="font-semibold mb-2">{t.relatedComponents.input}</h3>
-              <p className="text-sm text-muted-foreground">
-                {t.relatedComponents.inputDesc}
-              </p>
-            </Link>
-            <Link
-              href="/components/card"
-              className="block p-4 border rounded-lg hover:border-primary transition-colors"
-            >
-              <h3 className="font-semibold mb-2">{t.relatedComponents.card}</h3>
-              <p className="text-sm text-muted-foreground">
-                {t.relatedComponents.cardDesc}
-              </p>
-            </Link>
-          </div>
-        </section>
-      </main>
+</main>
     </div>
   )
 }

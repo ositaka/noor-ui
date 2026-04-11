@@ -10,6 +10,8 @@ import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
+import { StorybookLink } from '@/components/docs/storybook-link'
+import { ComponentDocSections } from '@/components/docs/component-doc-sections'
 
 const getTokenCounterProps = (componentT: any): PropDefinition[] => [
   {
@@ -195,7 +197,10 @@ export default function TokenCounterPage() {
 
         {/* Page Header */}
         <div className="mb-12">
-          <h1 className="text-4xl font-bold tracking-tight mb-4">{tokenCounterT.title}</h1>
+          <div className="flex flex-wrap items-start justify-between gap-4 mb-4">
+            <h1 className="text-4xl font-bold tracking-tight">{tokenCounterT.title}</h1>
+              <StorybookLink />
+            </div>
           <p className="text-xl text-muted-foreground max-w-3xl">
             {tokenCounterT.description}
           </p>
@@ -427,44 +432,10 @@ export default function TokenCounterPage() {
             </CardContent>
           </Card>
         </section>
+      
+        <ComponentDocSections />
 
-        {/* Related */}
-        <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">{tokenCounterT.related.title}</h2>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            <Card>
-              <CardContent className="p-4">
-                <Link href="/components/model-selector" className="font-medium hover:underline">
-                  {content[locale]?.modelSelectorComponent?.title || content.en.modelSelectorComponent.title}
-                </Link>
-                <p className="text-sm text-muted-foreground mt-1">
-                  {tokenCounterT.related.modelSelector}
-                </p>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardContent className="p-4">
-                <Link href="/components/parameter-slider" className="font-medium hover:underline">
-                  {content[locale]?.parameterSliderComponent?.title || content.en.parameterSliderComponent.title}
-                </Link>
-                <p className="text-sm text-muted-foreground mt-1">
-                  {tokenCounterT.related.parameterSlider}
-                </p>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardContent className="p-4">
-                <Link href="/components/chat-message" className="font-medium hover:underline">
-                  {content[locale]?.chatMessageComponent?.title || content.en.chatMessageComponent.title}
-                </Link>
-                <p className="text-sm text-muted-foreground mt-1">
-                  {tokenCounterT.related.chatMessage}
-                </p>
-              </CardContent>
-            </Card>
-          </div>
-        </section>
-      </main>
+</main>
     </div>
   )
 }

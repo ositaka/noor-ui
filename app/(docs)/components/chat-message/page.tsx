@@ -11,6 +11,8 @@ import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
+import { StorybookLink } from '@/components/docs/storybook-link'
+import { ComponentDocSections } from '@/components/docs/component-doc-sections'
 
 const getChatMessageProps = (componentT: any): PropDefinition[] => [
   {
@@ -169,7 +171,10 @@ export default function ChatMessagePage() {
 
         {/* Page Header */}
         <div className="mb-12">
-          <h1 className="text-4xl font-bold tracking-tight mb-4">{chatMessageT.title}</h1>
+          <div className="flex flex-wrap items-start justify-between gap-4 mb-4">
+            <h1 className="text-4xl font-bold tracking-tight">{chatMessageT.title}</h1>
+              <StorybookLink />
+            </div>
           <p className="text-xl text-muted-foreground max-w-3xl">
             {chatMessageT.description}
           </p>
@@ -355,44 +360,10 @@ export default function ChatMessagePage() {
             </CardContent>
           </Card>
         </section>
+      
+        <ComponentDocSections />
 
-        {/* Related */}
-        <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">{chatMessageT.related.title}</h2>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            <Card>
-              <CardContent className="p-4">
-                <Link href="/components/prompt-input" className="font-medium hover:underline">
-                  {t.promptInputComponent?.title || 'Prompt Input'}
-                </Link>
-                <p className="text-sm text-muted-foreground mt-1">
-                  {chatMessageT.related.promptInput}
-                </p>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardContent className="p-4">
-                <Link href="/components/message-actions" className="font-medium hover:underline">
-                  {t.messageActionsComponent?.title || 'Message Actions'}
-                </Link>
-                <p className="text-sm text-muted-foreground mt-1">
-                  {chatMessageT.related.messageActions}
-                </p>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardContent className="p-4">
-                <Link href="/components/thinking-indicator" className="font-medium hover:underline">
-                  {t.thinkingIndicatorComponent?.title || 'Thinking Indicator'}
-                </Link>
-                <p className="text-sm text-muted-foreground mt-1">
-                  {chatMessageT.related.thinkingIndicator}
-                </p>
-              </CardContent>
-            </Card>
-          </div>
-        </section>
-      </main>
+</main>
     </div>
   )
 }

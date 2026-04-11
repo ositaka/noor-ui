@@ -12,6 +12,8 @@ import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
+import { StorybookLink } from '@/components/docs/storybook-link'
+import { ComponentDocSections } from '@/components/docs/component-doc-sections'
 
 const getCheckboxProps = (t: typeof content.en | typeof content.ar): PropDefinition[] => [
   {
@@ -248,7 +250,10 @@ export default function CheckboxPage() {
 
         {/* Page Header */}
         <div className="mb-12">
-          <h1 className="text-4xl font-bold tracking-tight mb-4">{t.checkboxComponent.title}</h1>
+          <div className="flex flex-wrap items-start justify-between gap-4 mb-4">
+            <h1 className="text-4xl font-bold tracking-tight">{t.checkboxComponent.title}</h1>
+              <StorybookLink />
+            </div>
           <p className="text-xl text-muted-foreground max-w-3xl">
             {t.checkboxComponent.description}
           </p>
@@ -551,38 +556,10 @@ export default function CheckboxPage() {
             </CardContent>
           </Card>
         </section>
+      
+        <ComponentDocSections />
 
-        {/* Related Components */}
-        <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.checkboxComponent.related.title}</h2>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            <Link href="/components/radio-group">
-              <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
-                <CardContent className="p-6">
-                  <h3 className="font-semibold">{t.checkboxComponent.related.radioGroup}</h3>
-                  <p className="text-sm text-muted-foreground mt-1">{t.checkboxComponent.related.radioGroupDesc}</p>
-                </CardContent>
-              </Card>
-            </Link>
-            <Link href="/components/label">
-              <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
-                <CardContent className="p-6">
-                  <h3 className="font-semibold">{t.checkboxComponent.related.label}</h3>
-                  <p className="text-sm text-muted-foreground mt-1">{t.checkboxComponent.related.labelDesc}</p>
-                </CardContent>
-              </Card>
-            </Link>
-            <Link href="/components/switch">
-              <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
-                <CardContent className="p-6">
-                  <h3 className="font-semibold">{t.checkboxComponent.related.switch}</h3>
-                  <p className="text-sm text-muted-foreground mt-1">{t.checkboxComponent.related.switchDesc}</p>
-                </CardContent>
-              </Card>
-            </Link>
-          </div>
-        </section>
-      </main>
+</main>
     </div>
   )
 }

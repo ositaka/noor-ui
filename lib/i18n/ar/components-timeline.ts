@@ -77,7 +77,7 @@ export const components_timeline = {
       itemProps: 'خصائص عنصر الجدول الزمني',
     },
     accessibility: {
-      title: 'سهولة الوصول',
+      title: 'إمكانية الوصول',
       semanticList: 'هيكل قائمة دلالي',
       semanticListDesc: 'يُصيَّر الجدول الزمني كقائمة مع role="list" وكل عنصر كـ role="listitem"، مما يوفر هيكلًا تنقليًا واضحًا لقارئات الشاشة.',
       ariaLabel: 'تسميات Aria',

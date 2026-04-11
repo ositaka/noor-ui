@@ -9,6 +9,8 @@ import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
+import { StorybookLink } from '@/components/docs/storybook-link'
+import { ComponentDocSections } from '@/components/docs/component-doc-sections'
 import {
   House,
   Heart,
@@ -274,9 +276,12 @@ interface ListingCardTag {
 
         {/* Page Header */}
         <div className="mb-12">
-          <h1 className="text-4xl font-bold tracking-tight mb-4">
+          <div className="flex flex-wrap items-start justify-between gap-4 mb-4">
+            <h1 className="text-4xl font-bold tracking-tight">
             {t.listingCardComponent.title}
           </h1>
+              <StorybookLink />
+            </div>
           <p className="text-xl text-muted-foreground max-w-3xl">
             {t.listingCardComponent.description}
           </p>
@@ -424,26 +429,6 @@ interface ListingCardTag {
         </ComponentShowcase>
       </section>
 
-      {/* Use Cases */}
-      <section className="mb-16">
-        <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.useCases}</h2>
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {[
-            { icon: '🏠', label: t.listingCardComponent.useCases.realEstate },
-            { icon: '🛍️', label: t.listingCardComponent.useCases.ecommerce },
-            { icon: '💼', label: t.listingCardComponent.useCases.jobBoards },
-            { icon: '📝', label: t.listingCardComponent.useCases.blog },
-            { icon: '🏪', label: t.listingCardComponent.useCases.marketplace },
-            { icon: '🎨', label: t.listingCardComponent.useCases.portfolio },
-          ].map((useCase, idx) => (
-            <Card key={idx} className="p-4">
-              <div className="text-2xl mb-2">{useCase.icon}</div>
-              <p className="font-medium">{useCase.label}</p>
-            </Card>
-          ))}
-        </div>
-      </section>
-
       {/* Type Definitions */}
       <section className="mb-16">
         <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.typeDefinitions}</h2>
@@ -455,7 +440,10 @@ interface ListingCardTag {
         <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.propsApiReference}</h2>
         <PropsTable props={listingCardProps} />
       </section>
-      </main>
+      
+        <ComponentDocSections />
+
+</main>
     </div>
   )
 }

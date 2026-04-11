@@ -10,6 +10,8 @@ import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
+import { StorybookLink } from '@/components/docs/storybook-link'
+import { ComponentDocSections } from '@/components/docs/component-doc-sections'
 
 const getThinkingIndicatorProps = (componentT: any): PropDefinition[] => [
   {
@@ -94,7 +96,10 @@ export default function ThinkingIndicatorPage() {
 
         {/* Page Header */}
         <div className="mb-12">
-          <h1 className="text-4xl font-bold tracking-tight mb-4">{thinkingIndicatorT.title}</h1>
+          <div className="flex flex-wrap items-start justify-between gap-4 mb-4">
+            <h1 className="text-4xl font-bold tracking-tight">{thinkingIndicatorT.title}</h1>
+              <StorybookLink />
+            </div>
           <p className="text-xl text-muted-foreground max-w-3xl">
             {thinkingIndicatorT.description}
           </p>
@@ -298,34 +303,10 @@ export default function ThinkingIndicatorPage() {
             </CardContent>
           </Card>
         </section>
+      
+        <ComponentDocSections />
 
-        {/* Related */}
-        <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">{thinkingIndicatorT.related.title}</h2>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            <Card>
-              <CardContent className="p-4">
-                <Link href="/components/chat-message" className="font-medium hover:underline">
-                  {content[locale]?.chatMessageComponent?.title || content.en.chatMessageComponent.title}
-                </Link>
-                <p className="text-sm text-muted-foreground mt-1">
-                  {thinkingIndicatorT.related.chatMessage}
-                </p>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardContent className="p-4">
-                <Link href="/components/prompt-input" className="font-medium hover:underline">
-                  {content[locale]?.promptInputComponent?.title || content.en.promptInputComponent.title}
-                </Link>
-                <p className="text-sm text-muted-foreground mt-1">
-                  {thinkingIndicatorT.related.promptInput}
-                </p>
-              </CardContent>
-            </Card>
-          </div>
-        </section>
-      </main>
+</main>
     </div>
   )
 }

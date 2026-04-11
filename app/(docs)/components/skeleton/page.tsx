@@ -10,6 +10,8 @@ import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
+import { StorybookLink } from '@/components/docs/storybook-link'
+import { ComponentDocSections } from '@/components/docs/component-doc-sections'
 
 const skeletonProps: PropDefinition[] = [
   {
@@ -103,7 +105,10 @@ export default function SkeletonPage() {
 
         {/* Page Header */}
         <div className="mb-12">
-          <h1 className="text-4xl font-bold tracking-tight mb-4">{sk.title}</h1>
+          <div className="flex flex-wrap items-start justify-between gap-4 mb-4">
+            <h1 className="text-4xl font-bold tracking-tight">{sk.title}</h1>
+              <StorybookLink />
+            </div>
           <p className="text-xl text-muted-foreground max-w-3xl">
             {sk.description}
           </p>
@@ -214,44 +219,6 @@ export default function SkeletonPage() {
           </p>
         </section>
 
-        {/* Best Practices */}
-        <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">{sk.bestPractices.title}</h2>
-          <Card>
-            <CardContent className="p-6 space-y-4">
-              <div>
-                <h3 className="font-semibold mb-2">{sk.bestPractices.whenToUse}</h3>
-                <ul className="list-disc list-inside text-muted-foreground space-y-1 text-sm">
-                  <li>{sk.bestPractices.whenToUseItems.initialContent}</li>
-                  <li>{sk.bestPractices.whenToUseItems.fetchingData}</li>
-                  <li>{sk.bestPractices.whenToUseItems.loadingMedia}</li>
-                  <li>{sk.bestPractices.whenToUseItems.processingActions}</li>
-                </ul>
-              </div>
-              <Separator />
-              <div>
-                <h3 className="font-semibold mb-2">{sk.bestPractices.designTips}</h3>
-                <ul className="list-disc list-inside text-muted-foreground space-y-1 text-sm">
-                  <li>{sk.bestPractices.designTipsItems.matchShapes}</li>
-                  <li>{sk.bestPractices.designTipsItems.multipleSkeletons}</li>
-                  <li>{sk.bestPractices.designTipsItems.simplePatterns}</li>
-                  <li>{sk.bestPractices.designTipsItems.combineWithCards}</li>
-                </ul>
-              </div>
-              <Separator />
-              <div>
-                <h3 className="font-semibold mb-2">{sk.bestPractices.commonDimensions}</h3>
-                <ul className="list-disc list-inside text-muted-foreground space-y-1 text-sm">
-                  <li><code className="bg-muted px-1 rounded text-xs">h-4</code> - {sk.bestPractices.commonDimensionsItems.textLine}</li>
-                  <li><code className="bg-muted px-1 rounded text-xs">h-8</code> - {sk.bestPractices.commonDimensionsItems.buttonInput}</li>
-                  <li><code className="bg-muted px-1 rounded text-xs">h-12</code> - {sk.bestPractices.commonDimensionsItems.avatar}</li>
-                  <li><code className="bg-muted px-1 rounded text-xs">h-48</code> - {sk.bestPractices.commonDimensionsItems.imageCard}</li>
-                </ul>
-              </div>
-            </CardContent>
-          </Card>
-        </section>
-
         {/* Accessibility */}
         <section className="mb-16">
           <h2 className="text-2xl font-bold tracking-tight mb-6">{sk.accessibility.title}</h2>
@@ -321,44 +288,10 @@ export default function SkeletonPage() {
             </CardContent>
           </Card>
         </section>
+      
+        <ComponentDocSections />
 
-        {/* Related Components */}
-        <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">{sk.related.title}</h2>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            <Link href="/components/card">
-              <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
-                <CardContent className="p-6">
-                  <h3 className="font-semibold">{sk.related.card}</h3>
-                  <p className="text-sm text-muted-foreground mt-1">
-                    {sk.related.cardDesc}
-                  </p>
-                </CardContent>
-              </Card>
-            </Link>
-            <Link href="/components/progress">
-              <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
-                <CardContent className="p-6">
-                  <h3 className="font-semibold">{sk.related.progress}</h3>
-                  <p className="text-sm text-muted-foreground mt-1">
-                    {sk.related.progressDesc}
-                  </p>
-                </CardContent>
-              </Card>
-            </Link>
-            <Link href="/components/avatar">
-              <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
-                <CardContent className="p-6">
-                  <h3 className="font-semibold">{sk.related.avatar}</h3>
-                  <p className="text-sm text-muted-foreground mt-1">
-                    {sk.related.avatarDesc}
-                  </p>
-                </CardContent>
-              </Card>
-            </Link>
-          </div>
-        </section>
-      </main>
+</main>
     </div>
   )
 }

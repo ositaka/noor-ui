@@ -12,6 +12,8 @@ import { CodeBlock } from '@/components/docs/code-block'
 import { WarningCircle } from '@phosphor-icons/react'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
+import { StorybookLink } from '@/components/docs/storybook-link'
+import { ComponentDocSections } from '@/components/docs/component-doc-sections'
 
 const getConversationHistoryProps = (componentT: any): PropDefinition[] => [
   {
@@ -298,6 +300,9 @@ export default function ConversationHistoryPage() {
               </p>
             </div>
           </div>
+          <div className="mt-4">
+            <StorybookLink />
+          </div>
         </div>
 
         {/* Preview */}
@@ -447,7 +452,7 @@ export default function ConversationHistoryPage() {
                         <ConversationHistory
                           conversations={conversations.slice(0, 3)}
                           variant="floating"
-                          size="sm"
+                          size="default"
                           activeId="1"
                         />
                       </div>
@@ -545,44 +550,10 @@ export default function ConversationHistoryPage() {
             </CardContent>
           </Card>
         </section>
+      
+        <ComponentDocSections />
 
-        {/* Related */}
-        <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">{conversationHistoryT.related.title}</h2>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            <Card>
-              <CardContent className="p-4">
-                <Link href="/components/chat-message" className="font-medium hover:underline">
-                  {content[locale]?.chatMessageComponent?.title || content.en.chatMessageComponent.title}
-                </Link>
-                <p className="text-sm text-muted-foreground mt-1">
-                  {conversationHistoryT.related.chatMessage}
-                </p>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardContent className="p-4">
-                <Link href="/components/prompt-input" className="font-medium hover:underline">
-                  {content[locale]?.promptInputComponent?.title || content.en.promptInputComponent.title}
-                </Link>
-                <p className="text-sm text-muted-foreground mt-1">
-                  {conversationHistoryT.related.promptInput}
-                </p>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardContent className="p-4">
-                <Link href="/components/model-selector" className="font-medium hover:underline">
-                  {content[locale]?.modelSelectorComponent?.title || content.en.modelSelectorComponent.title}
-                </Link>
-                <p className="text-sm text-muted-foreground mt-1">
-                  {conversationHistoryT.related.modelSelector}
-                </p>
-              </CardContent>
-            </Card>
-          </div>
-        </section>
-      </main>
+</main>
     </div>
   )
 }
