@@ -42,6 +42,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'button-arrow', name: 'Button Arrow', description: 'Directional button with automatic RTL arrow flipping' },
         { slug: 'badge', name: 'Badge', description: 'Status indicators that pair well with action buttons' },
+        { slug: 'form', name: 'Form', description: 'Form wrapper for button submit actions' },
       ],
     },
     'button-arrow': {
@@ -65,6 +66,8 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       },
       related: [
         { slug: 'button', name: 'Button', description: 'Standard action button without directional arrows' },
+        { slug: 'breadcrumb', name: 'Breadcrumb', description: 'Hierarchical navigation path' },
+        { slug: 'pagination', name: 'Pagination', description: 'Navigation using directional buttons' },
       ],
     },
     'card': {
@@ -140,6 +143,8 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       ],
       related: [
         { slug: 'card', name: 'Card', description: 'Common container with separators' },
+        { slug: 'breadcrumb', name: 'Breadcrumb', description: 'Often uses separators between items' },
+        { slug: 'accordion', name: 'Accordion', description: 'Content sections with dividers' },
       ],
     },
     'avatar': {
@@ -164,6 +169,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'badge', name: 'Badge', description: 'Status indicators alongside avatars' },
         { slug: 'user-badge', name: 'User Badge', description: 'User role and status display' },
+        { slug: 'user-menu', name: 'User Menu', description: 'Profile menu triggered by avatar' },
       ],
     },
     'badge': {
@@ -197,6 +203,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'card', name: 'Card', description: 'Base card component' },
         { slug: 'listing-card', name: 'Listing Card', description: 'Product listing display' },
+        { slug: 'stats-card', name: 'Stats Card', description: 'Metric display card variant' },
       ],
     },
 
@@ -274,6 +281,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'checkbox', name: 'Checkbox', description: 'Form-based boolean control' },
         { slug: 'radio-group', name: 'Radio Group', description: 'Multiple option selection' },
+        { slug: 'label', name: 'Label', description: 'Accessible toggle labeling' },
       ],
     },
     'radio-group': {
@@ -298,6 +306,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'checkbox', name: 'Checkbox', description: 'Multi-select alternative' },
         { slug: 'select', name: 'Select', description: 'Dropdown for many options' },
+        { slug: 'label', name: 'Label', description: 'Accessible option labeling' },
       ],
     },
     'select': {
@@ -322,6 +331,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'radio-group', name: 'Radio Group', description: 'Visible option selection' },
         { slug: 'command', name: 'Command', description: 'Searchable command palette' },
+        { slug: 'dropdown-menu', name: 'Dropdown Menu', description: 'Action menu alternative' },
       ],
     },
     'slider': {
@@ -346,6 +356,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'range-slider', name: 'Range Slider', description: 'Dual-handle range selection' },
         { slug: 'number-input', name: 'Number Input', description: 'Precise numeric entry' },
+        { slug: 'label', name: 'Label', description: 'Accessible slider labeling' },
       ],
     },
     'range-slider': {
@@ -370,6 +381,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'slider', name: 'Slider', description: 'Single-value slider for simple adjustments' },
         { slug: 'number-input', name: 'Number Input', description: 'Precise numeric entry with stepper buttons' },
+        { slug: 'form', name: 'Form', description: 'Form validation for ranges' },
       ],
     },
     'textarea': {
@@ -394,6 +406,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'input', name: 'Input', description: 'Single-line text entry' },
         { slug: 'rich-text-editor', name: 'Rich Text Editor', description: 'Formatted text editing' },
+        { slug: 'form', name: 'Form', description: 'Form validation wrapper' },
       ],
     },
 
@@ -421,6 +434,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'sheet', name: 'Sheet', description: 'Slide-in panel alternative' },
         { slug: 'alert', name: 'Alert', description: 'Inline alert messages' },
+        { slug: 'popover', name: 'Popover', description: 'Lightweight floating alternative' },
       ],
     },
     'sheet': {
@@ -443,6 +457,8 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
         ],
       },
       related: [
+        { slug: 'dialog', name: 'Dialog', description: 'Centered modal alternative' },
+        { slug: 'popover', name: 'Popover', description: 'Smaller floating alternative' },
         { slug: 'dialog', name: 'Dialog', description: 'Centered modal alternative' },
       ],
     },
@@ -468,6 +484,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'tooltip', name: 'Tooltip', description: 'Simple text hints' },
         { slug: 'dropdown-menu', name: 'Dropdown Menu', description: 'Action menu' },
+        { slug: 'sheet', name: 'Sheet', description: 'Larger panel for complex content' },
       ],
     },
     'tooltip': {
@@ -492,6 +509,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'popover', name: 'Popover', description: 'Interactive floating content' },
         { slug: 'kbd', name: 'Kbd', description: 'Keyboard shortcut display' },
+        { slug: 'badge', name: 'Badge', description: 'Status info alongside tooltips' },
       ],
     },
     'dropdown-menu': {
@@ -516,6 +534,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'context-menu', name: 'Context Menu', description: 'Right-click triggered menu' },
         { slug: 'select', name: 'Select', description: 'Form selection control' },
+        { slug: 'command', name: 'Command', description: 'Searchable command palette' },
       ],
     },
     'context-menu': {
@@ -540,6 +559,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'dropdown-menu', name: 'Dropdown Menu', description: 'Trigger-based action menu' },
         { slug: 'popover', name: 'Popover', description: 'Floating interactive content' },
+        { slug: 'kbd', name: 'Kbd', description: 'Keyboard shortcut indicators' },
       ],
     },
     'toast': {
@@ -564,6 +584,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'alert', name: 'Alert', description: 'Persistent inline notifications' },
         { slug: 'dialog', name: 'Dialog', description: 'Modal confirmation dialogs' },
+        { slug: 'callout', name: 'Callout', description: 'Persistent inline notifications' },
       ],
     },
 
@@ -590,6 +611,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'data-table', name: 'Data Table', description: 'Advanced table with sorting/filtering' },
         { slug: 'pagination', name: 'Pagination', description: 'Table page navigation' },
+        { slug: 'badge', name: 'Badge', description: 'Status badges in table cells' },
       ],
     },
     'data-table': {
@@ -615,6 +637,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'table', name: 'Table', description: 'Simple table without features' },
         { slug: 'pagination', name: 'Pagination', description: 'Page navigation for tables' },
+        { slug: 'command', name: 'Command', description: 'Searchable filtering interface' },
       ],
     },
     'pagination': {
@@ -639,6 +662,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'table', name: 'Table', description: 'Table data navigation' },
         { slug: 'data-table', name: 'Data Table', description: 'Feature-rich table' },
+        { slug: 'breadcrumb', name: 'Breadcrumb', description: 'Hierarchical navigation' },
       ],
     },
     'tabs': {
@@ -662,6 +686,8 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       },
       related: [
         { slug: 'accordion', name: 'Accordion', description: 'Collapsible content sections' },
+        { slug: 'card', name: 'Card', description: 'Container for tab panels' },
+        { slug: 'stepper', name: 'Stepper', description: 'Sequential alternative to tabs' },
       ],
     },
     'accordion': {
@@ -686,6 +712,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'collapsible', name: 'Collapsible', description: 'Simple expand/collapse for single sections' },
         { slug: 'tabs', name: 'Tabs', description: 'Switch between content panels' },
+        { slug: 'card', name: 'Card', description: 'Content container for accordion panels' },
       ],
     },
     'collapsible': {
@@ -710,6 +737,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'accordion', name: 'Accordion', description: 'Multi-section expand/collapse' },
         { slug: 'tabs', name: 'Tabs', description: 'Alternative content organization' },
+        { slug: 'card', name: 'Card', description: 'Container for collapsible content' },
       ],
     },
     'breadcrumb': {
@@ -734,6 +762,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'pagination', name: 'Pagination', description: 'Sequential page navigation' },
         { slug: 'tabs', name: 'Tabs', description: 'Alternative content navigation' },
+        { slug: 'button-arrow', name: 'Button Arrow', description: 'Directional navigation links' },
       ],
     },
     'command': {
@@ -758,6 +787,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'select', name: 'Select', description: 'Simple dropdown selection without search' },
         { slug: 'dropdown-menu', name: 'Dropdown Menu', description: 'Action menu without search functionality' },
+        { slug: 'kbd', name: 'Kbd', description: 'Keyboard shortcut display' },
       ],
     },
 
@@ -779,6 +809,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'calendar', name: 'Calendar', description: 'Standalone calendar grid for date browsing' },
         { slug: 'time-picker', name: 'Time Picker', description: 'Time selection companion for date pickers' },
+        { slug: 'number-input', name: 'Number Input', description: 'Numeric entry for year/day fields' },
       ],
     },
     'time-picker': {
@@ -796,6 +827,8 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       },
       related: [
         { slug: 'date-picker', name: 'Date Picker', description: 'Date selection companion for time pickers' },
+        { slug: 'number-input', name: 'Number Input', description: 'Numeric hour/minute entry' },
+        { slug: 'calendar', name: 'Calendar', description: 'Date companion for time selection' },
       ],
     },
     'file-upload': {
@@ -808,6 +841,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'input', name: 'Input', description: 'Text input for manual file path entry' },
         { slug: 'form', name: 'Form', description: 'Form wrapper for file upload validation' },
+        { slug: 'progress', name: 'Progress', description: 'Upload progress indicator' },
       ],
     },
     'number-input': {
@@ -826,6 +860,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'slider', name: 'Slider', description: 'Visual range control for approximate values' },
         { slug: 'input', name: 'Input', description: 'General text input for free-form values' },
+        { slug: 'form', name: 'Form', description: 'Form validation wrapper' },
       ],
     },
     'rich-text-editor': {
@@ -850,6 +885,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'textarea', name: 'Textarea', description: 'Plain text area without formatting' },
         { slug: 'form', name: 'Form', description: 'Form integration for editor content validation' },
+        { slug: 'file-upload', name: 'File Upload', description: 'Media attachment in editors' },
       ],
     },
     'calendar': {
@@ -874,6 +910,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'date-picker', name: 'Date Picker', description: 'Date selection with input field' },
         { slug: 'hijri-date', name: 'Hijri Date', description: 'Islamic calendar date display' },
+        { slug: 'prayer-times', name: 'Prayer Times', description: 'Islamic prayer schedules' },
       ],
     },
     'progress': {
@@ -897,6 +934,8 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       },
       related: [
         { slug: 'skeleton', name: 'Skeleton', description: 'Content placeholder loading' },
+        { slug: 'badge', name: 'Badge', description: 'Status indicator companion' },
+        { slug: 'stepper', name: 'Stepper', description: 'Multi-step progress tracking' },
       ],
     },
     'skeleton': {
@@ -920,6 +959,8 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       },
       related: [
         { slug: 'progress', name: 'Progress', description: 'Determinate loading indicator' },
+        { slug: 'card', name: 'Card', description: 'Common skeleton target shape' },
+        { slug: 'avatar', name: 'Avatar', description: 'Common skeleton loading shape' },
       ],
     },
     'notification-center': {
@@ -932,6 +973,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'toast', name: 'Toast', description: 'Transient notifications that auto-dismiss' },
         { slug: 'alert', name: 'Alert', description: 'Persistent inline alerts for important messages' },
+        { slug: 'badge', name: 'Badge', description: 'Unread count indicators' },
       ],
     },
 
@@ -958,6 +1000,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'toast', name: 'Toast', description: 'Transient notifications that auto-dismiss' },
         { slug: 'dialog', name: 'Dialog', description: 'Modal dialogs for critical actions' },
+        { slug: 'callout', name: 'Callout', description: 'Informational highlight blocks' },
       ],
     },
     'callout': {
@@ -970,6 +1013,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'alert', name: 'Alert', description: 'System-level status messages with variants' },
         { slug: 'blockquote', name: 'Blockquote', description: 'Quoted content with attribution' },
+        { slug: 'card', name: 'Card', description: 'General content container' },
       ],
     },
     'stepper': {
@@ -988,11 +1032,14 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'timeline', name: 'Timeline', description: 'Chronological event display' },
         { slug: 'progress', name: 'Progress', description: 'Linear progress indicator' },
+        { slug: 'form', name: 'Form', description: 'Multi-step form wrapper' },
       ],
     },
     'reaction-picker': {
       related: [
         { slug: 'popover', name: 'Popover', description: 'Floating overlay container for the picker' },
+        { slug: 'chat-message', name: 'Chat Message', description: 'Message display for reactions' },
+        { slug: 'badge', name: 'Badge', description: 'Count indicators for reactions' },
       ],
     },
     'user-badge': {
@@ -1011,6 +1058,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'badge', name: 'Badge', description: 'Simple status and count indicators' },
         { slug: 'avatar', name: 'Avatar', description: 'User profile image display' },
+        { slug: 'card', name: 'Card', description: 'Container for user badge display' },
       ],
     },
     'content-renderer': {
@@ -1035,6 +1083,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'blockquote', name: 'Blockquote', description: 'Styled quotation blocks' },
         { slug: 'callout', name: 'Callout', description: 'Highlighted information blocks' },
+        { slug: 'card', name: 'Card', description: 'Container for rendered content' },
       ],
     },
     'kbd': {
@@ -1046,6 +1095,8 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       ],
       related: [
         { slug: 'tooltip', name: 'Tooltip', description: 'Contextual hints that can include keyboard shortcuts' },
+        { slug: 'command', name: 'Command', description: 'Command palette with shortcuts' },
+        { slug: 'dropdown-menu', name: 'Dropdown Menu', description: 'Menus with keyboard shortcuts' },
       ],
     },
     'blockquote': {
@@ -1058,6 +1109,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'pull-quote', name: 'Pull Quote', description: 'Highlighted excerpt for emphasis' },
         { slug: 'callout', name: 'Callout', description: 'Informational callout blocks' },
+        { slug: 'card', name: 'Card', description: 'Container for quoted content' },
       ],
     },
     'pull-quote': {
@@ -1082,6 +1134,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'blockquote', name: 'Blockquote', description: 'Quoted content with attribution' },
         { slug: 'callout', name: 'Callout', description: 'Informational highlight blocks' },
+        { slug: 'card', name: 'Card', description: 'Content container for quotes' },
       ],
     },
     'empty-state': {
@@ -1094,6 +1147,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'button', name: 'Button', description: 'Action trigger for empty state CTAs' },
         { slug: 'card', name: 'Card', description: 'Container for empty state content' },
+        { slug: 'alert', name: 'Alert', description: 'Status messages for error states' },
       ],
     },
     'dashboard-shell': {
@@ -1106,6 +1160,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'stats-card', name: 'Stats Card', description: 'Metric display cards for dashboard content' },
         { slug: 'notification-center', name: 'Notification Center', description: 'Notification hub for the dashboard header' },
+        { slug: 'dashboard-shell', name: 'Sidebar', description: 'Navigation sidebar for dashboards' },
       ],
     },
     'user-menu': {
@@ -1118,6 +1173,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'avatar', name: 'Avatar', description: 'User avatar that triggers the menu' },
         { slug: 'dropdown-menu', name: 'Dropdown Menu', description: 'Base menu component for custom menus' },
+        { slug: 'notification-center', name: 'Notification Center', description: 'Header companion widget' },
       ],
     },
     'stats-card': {
@@ -1130,6 +1186,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'card', name: 'Card', description: 'Base card component for custom layouts' },
         { slug: 'chart', name: 'Chart', description: 'Visual data representation for trends' },
+        { slug: 'progress', name: 'Progress', description: 'Trend visualization companion' },
       ],
     },
     'listing-card': {
@@ -1148,6 +1205,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'card', name: 'Card', description: 'Base card for general content containers' },
         { slug: 'badge', name: 'Badge', description: 'Status and label badges for card metadata' },
+        { slug: 'empty-state', name: 'Empty State', description: 'Placeholder when no listings exist' },
       ],
     },
 
@@ -1174,6 +1232,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'message-actions', name: 'Message Actions', description: 'Actions toolbar for messages' },
         { slug: 'thinking-indicator', name: 'Thinking Indicator', description: 'Loading state for AI responses' },
+        { slug: 'prompt-input', name: 'Prompt Input', description: 'Chat input companion' },
       ],
     },
     'prompt-input': {
@@ -1198,6 +1257,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'textarea', name: 'Textarea', description: 'Multi-line text input' },
         { slug: 'token-counter', name: 'Token Counter', description: 'Input length monitor' },
+        { slug: 'chat-message', name: 'Chat Message', description: 'Message display companion' },
       ],
     },
     'thinking-indicator': {
@@ -1221,6 +1281,8 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       },
       related: [
         { slug: 'chat-message', name: 'Chat Message', description: 'Message display' },
+        { slug: 'prompt-input', name: 'Prompt Input', description: 'Input that triggers thinking' },
+        { slug: 'conversation-history', name: 'Conversation History', description: 'Chat context for thinking state' },
       ],
     },
     'message-actions': {
@@ -1244,6 +1306,8 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       },
       related: [
         { slug: 'chat-message', name: 'Chat Message', description: 'Message display component' },
+        { slug: 'thinking-indicator', name: 'Thinking Indicator', description: 'Loading state between actions' },
+        { slug: 'conversation-history', name: 'Conversation History', description: 'Chat session management' },
       ],
     },
     'model-selector': {
@@ -1268,6 +1332,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'parameter-slider', name: 'Parameter Slider', description: 'Model parameter controls (temperature, etc.)' },
         { slug: 'select', name: 'Select', description: 'Base select component for simpler model pickers' },
+        { slug: 'command', name: 'Command', description: 'Searchable selection interface' },
       ],
     },
     'parameter-slider': {
@@ -1292,6 +1357,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'slider', name: 'Slider', description: 'General-purpose slider' },
         { slug: 'model-selector', name: 'Model Selector', description: 'AI model picker' },
+        { slug: 'number-input', name: 'Number Input', description: 'Precise parameter entry' },
       ],
     },
     'token-counter': {
@@ -1315,6 +1381,8 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       },
       related: [
         { slug: 'prompt-input', name: 'Prompt Input', description: 'Chat input companion' },
+        { slug: 'chat-message', name: 'Chat Message', description: 'Context for token counting' },
+        { slug: 'model-selector', name: 'Model Selector', description: 'Model with token limits' },
       ],
     },
     'conversation-history': {
@@ -1339,6 +1407,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'chat-message', name: 'Chat Message', description: 'Individual message display' },
         { slug: 'prompt-input', name: 'Prompt Input', description: 'Chat input companion' },
+        { slug: 'model-selector', name: 'Model Selector', description: 'AI model picker for conversations' },
       ],
     },
 
@@ -1358,6 +1427,8 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       },
       related: [
         { slug: 'hijri-date', name: 'Hijri Date', description: 'Islamic date with Arabic numerals' },
+        { slug: 'prayer-times', name: 'Prayer Times', description: 'Prayer schedule using Arabic numerals' },
+        { slug: 'zakat-calculator', name: 'Zakat Calculator', description: 'Calculator using Arabic numerals' },
       ],
     },
     'hijri-date': {
@@ -1382,6 +1453,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'calendar', name: 'Calendar', description: 'Calendar grid component' },
         { slug: 'arabic-number', name: 'Arabic Number', description: 'Eastern Arabic numeral display' },
+        { slug: 'prayer-times', name: 'Prayer Times', description: 'Islamic prayer schedules' },
       ],
     },
     'prayer-times': {
@@ -1406,6 +1478,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'hijri-date', name: 'Hijri Date', description: 'Islamic date display' },
         { slug: 'card', name: 'Card', description: 'Container for prayer widgets' },
+        { slug: 'arabic-number', name: 'Arabic Number', description: 'Arabic-Indic numeral display' },
       ],
     },
     'zakat-calculator': {
@@ -1430,6 +1503,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'number-input', name: 'Number Input', description: 'Numeric entry for amounts' },
         { slug: 'card', name: 'Card', description: 'Container for calculator sections' },
+        { slug: 'prayer-times', name: 'Prayer Times', description: 'Companion Islamic component' },
       ],
     },
     'chart': {
@@ -1448,6 +1522,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'stats-card', name: 'Stats Card', description: 'Companion KPI display' },
         { slug: 'data-table', name: 'Data Table', description: 'Tabular data alongside charts' },
+        { slug: 'card', name: 'Card', description: 'Container for chart widgets' },
       ],
     },
     'timeline': {
@@ -1466,6 +1541,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'stepper', name: 'Stepper', description: 'Sequential step process' },
         { slug: 'progress', name: 'Progress', description: 'Linear progress indicator' },
+        { slug: 'card', name: 'Card', description: 'Container for timeline events' },
       ],
     },
     'carousel': {
@@ -1484,6 +1560,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'tabs', name: 'Tabs', description: 'Alternative panel navigation' },
         { slug: 'pagination', name: 'Pagination', description: 'Page-level navigation' },
+        { slug: 'card', name: 'Card', description: 'Slide content containers' },
       ],
     },
   },
@@ -1517,6 +1594,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'button-arrow', name: 'زر السهم', description: 'زر اتجاهي مع انعكاس تلقائي للسهم في RTL' },
         { slug: 'badge', name: 'الشارة', description: 'مؤشرات الحالة التي تتناسب مع أزرار الإجراءات' },
+        { slug: 'form', name: 'النموذج', description: 'غلاف النموذج لإجراءات الإرسال' },
       ],
     },
     'button-arrow': {
@@ -1540,6 +1618,8 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       },
       related: [
         { slug: 'button', name: 'الزر', description: 'زر الإجراء القياسي بدون أسهم اتجاهية' },
+        { slug: 'breadcrumb', name: 'المسار التنقّلي', description: 'مسار التنقّل الهرمي' },
+        { slug: 'pagination', name: 'التصفّح', description: 'التنقّل باستخدام أزرار اتجاهية' },
       ],
     },
     'card': {
@@ -1615,6 +1695,8 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       ],
       related: [
         { slug: 'card', name: 'البطاقة', description: 'حاوية شائعة مع الفواصل' },
+        { slug: 'breadcrumb', name: 'المسار التنقّلي', description: 'غالباً ما يستخدم فواصل بين العناصر' },
+        { slug: 'accordion', name: 'الأكورديون', description: 'أقسام محتوى مع فواصل' },
       ],
     },
     'avatar': {
@@ -1639,6 +1721,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'badge', name: 'الشارة', description: 'مؤشرات الحالة بجوار الصور الرمزية' },
         { slug: 'user-badge', name: 'شارة المستخدم', description: 'عرض دور المستخدم وحالته' },
+        { slug: 'user-menu', name: 'قائمة المستخدم', description: 'قائمة الملف الشخصي بالصورة الرمزية' },
       ],
     },
     'badge': {
@@ -1672,6 +1755,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'card', name: 'البطاقة', description: 'مكوّن البطاقة الأساسي' },
         { slug: 'listing-card', name: 'بطاقة القائمة', description: 'عرض قوائم المنتجات' },
+        { slug: 'stats-card', name: 'بطاقة الإحصائيات', description: 'بطاقة عرض المقاييس' },
       ],
     },
 
@@ -1749,6 +1833,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'checkbox', name: 'مربع الاختيار', description: 'عنصر تحكم ثنائي في النموذج' },
         { slug: 'radio-group', name: 'مجموعة الراديو', description: 'اختيار خيارات متعددة' },
+        { slug: 'label', name: 'التسمية', description: 'تسمية المفتاح لإمكانية الوصول' },
       ],
     },
     'radio-group': {
@@ -1773,6 +1858,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'checkbox', name: 'مربع الاختيار', description: 'بديل الاختيار المتعدد' },
         { slug: 'select', name: 'القائمة المنسدلة', description: 'قائمة منسدلة للخيارات الكثيرة' },
+        { slug: 'label', name: 'التسمية', description: 'تسمية الخيارات لإمكانية الوصول' },
       ],
     },
     'select': {
@@ -1797,6 +1883,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'radio-group', name: 'مجموعة الراديو', description: 'اختيار خيارات مرئية' },
         { slug: 'command', name: 'لوحة الأوامر', description: 'لوحة أوامر قابلة للبحث' },
+        { slug: 'dropdown-menu', name: 'القائمة المنسدلة', description: 'بديل قائمة الإجراءات' },
       ],
     },
     'slider': {
@@ -1821,6 +1908,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'range-slider', name: 'شريط النطاق', description: 'اختيار نطاق بمقبضين' },
         { slug: 'number-input', name: 'إدخال رقمي', description: 'إدخال رقمي دقيق' },
+        { slug: 'label', name: 'التسمية', description: 'تسمية شريط التمرير لإمكانية الوصول' },
       ],
     },
     'range-slider': {
@@ -1845,6 +1933,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'slider', name: 'شريط التمرير', description: 'شريط تمرير أحادي القيمة للتعديلات البسيطة' },
         { slug: 'number-input', name: 'إدخال رقمي', description: 'إدخال رقمي دقيق مع أزرار الخطوات' },
+        { slug: 'form', name: 'النموذج', description: 'التحقق من النموذج للنطاقات' },
       ],
     },
     'textarea': {
@@ -1869,6 +1958,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'input', name: 'حقل الإدخال', description: 'إدخال نص أحادي السطر' },
         { slug: 'rich-text-editor', name: 'محرر النص الغني', description: 'تحرير نص منسّق' },
+        { slug: 'form', name: 'النموذج', description: 'غلاف التحقق من النموذج' },
       ],
     },
 
@@ -1896,6 +1986,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'sheet', name: 'الشريط', description: 'بديل اللوحة المنزلقة' },
         { slug: 'alert', name: 'التنبيه', description: 'رسائل التنبيه المضمّنة' },
+        { slug: 'popover', name: 'العنصر المنبثق', description: 'بديل عائم خفيف' },
       ],
     },
     'sheet': {
@@ -1918,6 +2009,8 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
         ],
       },
       related: [
+        { slug: 'dialog', name: 'الحوار', description: 'بديل الحوار المركزي' },
+        { slug: 'popover', name: 'العنصر المنبثق', description: 'بديل عائم أصغر' },
         { slug: 'dialog', name: 'الحوار', description: 'بديل الحوار المركزي' },
       ],
     },
@@ -1943,6 +2036,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'tooltip', name: 'التلميح', description: 'تلميحات نصية بسيطة' },
         { slug: 'dropdown-menu', name: 'القائمة المنسدلة', description: 'قائمة الإجراءات' },
+        { slug: 'sheet', name: 'الشريط', description: 'لوحة أكبر للمحتوى المعقد' },
       ],
     },
     'tooltip': {
@@ -1967,6 +2061,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'popover', name: 'العنصر المنبثق', description: 'محتوى تفاعلي عائم' },
         { slug: 'kbd', name: 'المفتاح', description: 'عرض اختصارات لوحة المفاتيح' },
+        { slug: 'badge', name: 'الشارة', description: 'معلومات الحالة بجوار التلميحات' },
       ],
     },
     'dropdown-menu': {
@@ -1991,6 +2086,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'context-menu', name: 'قائمة السياق', description: 'قائمة تُشغّل بالنقر الأيمن' },
         { slug: 'select', name: 'القائمة المنسدلة', description: 'عنصر تحكم اختيار النموذج' },
+        { slug: 'command', name: 'لوحة الأوامر', description: 'لوحة أوامر قابلة للبحث' },
       ],
     },
     'context-menu': {
@@ -2015,6 +2111,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'dropdown-menu', name: 'القائمة المنسدلة', description: 'قائمة إجراءات بمحفّز' },
         { slug: 'popover', name: 'العنصر المنبثق', description: 'محتوى تفاعلي عائم' },
+        { slug: 'kbd', name: 'المفتاح', description: 'مؤشرات اختصارات لوحة المفاتيح' },
       ],
     },
     'toast': {
@@ -2039,6 +2136,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'alert', name: 'التنبيه', description: 'إشعارات مضمنة دائمة' },
         { slug: 'dialog', name: 'الحوار', description: 'حوارات تأكيد مشروطة' },
+        { slug: 'callout', name: 'التنويه', description: 'إشعارات مضمنة دائمة' },
       ],
     },
 
@@ -2065,6 +2163,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'data-table', name: 'جدول البيانات', description: 'جدول متقدم مع ترتيب/تصفية' },
         { slug: 'pagination', name: 'التصفّح', description: 'التنقّل بين صفحات الجدول' },
+        { slug: 'badge', name: 'الشارة', description: 'شارات الحالة في خلايا الجدول' },
       ],
     },
     'data-table': {
@@ -2090,6 +2189,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'table', name: 'الجدول', description: 'جدول بسيط بدون ميزات متقدمة' },
         { slug: 'pagination', name: 'التصفّح', description: 'التنقّل بين صفحات الجداول' },
+        { slug: 'command', name: 'لوحة الأوامر', description: 'واجهة تصفية قابلة للبحث' },
       ],
     },
     'pagination': {
@@ -2114,6 +2214,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'table', name: 'الجدول', description: 'التنقّل في بيانات الجدول' },
         { slug: 'data-table', name: 'جدول البيانات', description: 'جدول بميزات متقدمة' },
+        { slug: 'breadcrumb', name: 'المسار التنقّلي', description: 'التنقّل الهرمي' },
       ],
     },
     'tabs': {
@@ -2137,6 +2238,8 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       },
       related: [
         { slug: 'accordion', name: 'الأكورديون', description: 'أقسام محتوى قابلة للطي' },
+        { slug: 'card', name: 'البطاقة', description: 'حاوية لوحات التبويب' },
+        { slug: 'stepper', name: 'مؤشر الخطوات', description: 'بديل تسلسلي للتبويبات' },
       ],
     },
     'accordion': {
@@ -2161,6 +2264,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'collapsible', name: 'قابل للطي', description: 'توسيع/طي بسيط للأقسام المفردة' },
         { slug: 'tabs', name: 'التبويبات', description: 'التبديل بين لوحات المحتوى' },
+        { slug: 'card', name: 'البطاقة', description: 'حاوية محتوى لوحات الأكورديون' },
       ],
     },
     'collapsible': {
@@ -2185,6 +2289,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'accordion', name: 'الأكورديون', description: 'توسيع/طي متعدد الأقسام' },
         { slug: 'tabs', name: 'التبويبات', description: 'تنظيم محتوى بديل' },
+        { slug: 'card', name: 'البطاقة', description: 'حاوية للمحتوى القابل للطي' },
       ],
     },
     'breadcrumb': {
@@ -2209,6 +2314,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'pagination', name: 'التصفّح', description: 'التنقّل التسلسلي بين الصفحات' },
         { slug: 'tabs', name: 'التبويبات', description: 'تنقّل بديل في المحتوى' },
+        { slug: 'button-arrow', name: 'زر السهم', description: 'روابط تنقّل اتجاهية' },
       ],
     },
     'command': {
@@ -2233,6 +2339,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'select', name: 'القائمة المنسدلة', description: 'اختيار بسيط بدون بحث' },
         { slug: 'dropdown-menu', name: 'قائمة منسدلة', description: 'قائمة إجراءات بدون وظيفة بحث' },
+        { slug: 'kbd', name: 'المفتاح', description: 'عرض اختصارات لوحة المفاتيح' },
       ],
     },
 
@@ -2254,6 +2361,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'calendar', name: 'التقويم', description: 'شبكة تقويم مستقلة لتصفّح التواريخ' },
         { slug: 'time-picker', name: 'منتقي الوقت', description: 'مكمّل اختيار الوقت لمنتقي التاريخ' },
+        { slug: 'number-input', name: 'إدخال رقمي', description: 'إدخال رقمي لحقول السنة/اليوم' },
       ],
     },
     'time-picker': {
@@ -2271,6 +2379,8 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       },
       related: [
         { slug: 'date-picker', name: 'منتقي التاريخ', description: 'مكمّل اختيار التاريخ لمنتقي الوقت' },
+        { slug: 'number-input', name: 'إدخال رقمي', description: 'إدخال رقمي للساعة/الدقيقة' },
+        { slug: 'calendar', name: 'التقويم', description: 'مرافق التاريخ لاختيار الوقت' },
       ],
     },
     'file-upload': {
@@ -2283,6 +2393,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'input', name: 'حقل الإدخال', description: 'إدخال نصي لمسار الملف يدوياً' },
         { slug: 'form', name: 'النموذج', description: 'غلاف النموذج للتحقق من رفع الملفات' },
+        { slug: 'progress', name: 'شريط التقدّم', description: 'مؤشر تقدّم الرفع' },
       ],
     },
     'number-input': {
@@ -2301,6 +2412,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'slider', name: 'شريط التمرير', description: 'التحكم البصري في النطاق للقيم التقريبية' },
         { slug: 'input', name: 'حقل الإدخال', description: 'إدخال نصي عام للقيم الحرة' },
+        { slug: 'form', name: 'النموذج', description: 'غلاف التحقق من النموذج' },
       ],
     },
     'rich-text-editor': {
@@ -2325,6 +2437,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'textarea', name: 'منطقة النص', description: 'منطقة نص بسيطة بدون تنسيق' },
         { slug: 'form', name: 'النموذج', description: 'تكامل النموذج للتحقق من محتوى المحرر' },
+        { slug: 'file-upload', name: 'رفع الملفات', description: 'إرفاق الوسائط في المحررات' },
       ],
     },
     'calendar': {
@@ -2349,6 +2462,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'date-picker', name: 'منتقي التاريخ', description: 'اختيار التاريخ مع حقل إدخال' },
         { slug: 'hijri-date', name: 'التاريخ الهجري', description: 'عرض تاريخ التقويم الهجري' },
+        { slug: 'prayer-times', name: 'مواقيت الصلاة', description: 'جداول الصلاة الإسلامية' },
       ],
     },
     'progress': {
@@ -2372,6 +2486,8 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       },
       related: [
         { slug: 'skeleton', name: 'الهيكل', description: 'عنصر نائب للمحتوى أثناء التحميل' },
+        { slug: 'badge', name: 'الشارة', description: 'مؤشر حالة مرافق' },
+        { slug: 'stepper', name: 'مؤشر الخطوات', description: 'تتبّع التقدّم متعدد الخطوات' },
       ],
     },
     'skeleton': {
@@ -2395,6 +2511,8 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       },
       related: [
         { slug: 'progress', name: 'شريط التقدّم', description: 'مؤشر تحميل محدد' },
+        { slug: 'card', name: 'البطاقة', description: 'شكل هدف هيكل شائع' },
+        { slug: 'avatar', name: 'الصورة الرمزية', description: 'شكل تحميل هيكلي شائع' },
       ],
     },
     'notification-center': {
@@ -2407,6 +2525,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'toast', name: 'الإشعار المنبثق', description: 'إشعارات مؤقتة تُغلق تلقائياً' },
         { slug: 'alert', name: 'التنبيه', description: 'تنبيهات مضمنة دائمة للرسائل المهمة' },
+        { slug: 'badge', name: 'الشارة', description: 'مؤشرات عدد غير المقروء' },
       ],
     },
 
@@ -2433,6 +2552,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'toast', name: 'الإشعار المنبثق', description: 'إشعارات مؤقتة تُغلق تلقائياً' },
         { slug: 'dialog', name: 'الحوار', description: 'حوارات مشروطة للإجراءات الحرجة' },
+        { slug: 'callout', name: 'التنويه', description: 'كتل إبراز معلوماتية' },
       ],
     },
     'callout': {
@@ -2445,6 +2565,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'alert', name: 'التنبيه', description: 'رسائل حالة النظام مع أنماط متعددة' },
         { slug: 'blockquote', name: 'الاقتباس', description: 'محتوى مقتبس مع إسناد' },
+        { slug: 'card', name: 'البطاقة', description: 'حاوية محتوى عامة' },
       ],
     },
     'stepper': {
@@ -2463,11 +2584,14 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'timeline', name: 'الخط الزمني', description: 'عرض أحداث زمنية متسلسلة' },
         { slug: 'progress', name: 'شريط التقدّم', description: 'مؤشر تقدّم خطي' },
+        { slug: 'form', name: 'النموذج', description: 'غلاف النموذج متعدد الخطوات' },
       ],
     },
     'reaction-picker': {
       related: [
         { slug: 'popover', name: 'العنصر المنبثق', description: 'حاوية عائمة لمنتقي التفاعلات' },
+        { slug: 'chat-message', name: 'رسالة المحادثة', description: 'عرض الرسائل للتفاعلات' },
+        { slug: 'badge', name: 'الشارة', description: 'مؤشرات العدّ للتفاعلات' },
       ],
     },
     'user-badge': {
@@ -2486,6 +2610,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'badge', name: 'الشارة', description: 'مؤشرات حالة وعدّ بسيطة' },
         { slug: 'avatar', name: 'الصورة الرمزية', description: 'عرض صورة الملف الشخصي' },
+        { slug: 'card', name: 'البطاقة', description: 'حاوية لعرض شارة المستخدم' },
       ],
     },
     'content-renderer': {
@@ -2510,6 +2635,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'blockquote', name: 'الاقتباس', description: 'كتل اقتباس مُنسّقة' },
         { slug: 'callout', name: 'التنويه', description: 'كتل معلومات مُبرزة' },
+        { slug: 'card', name: 'البطاقة', description: 'حاوية للمحتوى المعروض' },
       ],
     },
     'kbd': {
@@ -2521,6 +2647,8 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       ],
       related: [
         { slug: 'tooltip', name: 'التلميح', description: 'تلميحات سياقية يمكن أن تتضمن اختصارات لوحة المفاتيح' },
+        { slug: 'command', name: 'لوحة الأوامر', description: 'لوحة أوامر مع اختصارات' },
+        { slug: 'dropdown-menu', name: 'القائمة المنسدلة', description: 'قوائم مع اختصارات لوحة المفاتيح' },
       ],
     },
     'blockquote': {
@@ -2533,6 +2661,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'pull-quote', name: 'الاقتباس البارز', description: 'مقتطف مُبرز للتأكيد' },
         { slug: 'callout', name: 'التنويه', description: 'كتل تنويه معلوماتية' },
+        { slug: 'card', name: 'البطاقة', description: 'حاوية للمحتوى المقتبس' },
       ],
     },
     'pull-quote': {
@@ -2557,6 +2686,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'blockquote', name: 'الاقتباس', description: 'محتوى مقتبس مع إسناد' },
         { slug: 'callout', name: 'التنويه', description: 'كتل إبراز معلوماتية' },
+        { slug: 'card', name: 'البطاقة', description: 'حاوية محتوى للاقتباسات' },
       ],
     },
     'empty-state': {
@@ -2569,6 +2699,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'button', name: 'الزر', description: 'محفّز إجراء لدعوات الحالة الفارغة' },
         { slug: 'card', name: 'البطاقة', description: 'حاوية لمحتوى الحالة الفارغة' },
+        { slug: 'alert', name: 'التنبيه', description: 'رسائل الحالة لحالات الخطأ' },
       ],
     },
     'dashboard-shell': {
@@ -2581,6 +2712,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'stats-card', name: 'بطاقة الإحصائيات', description: 'بطاقات عرض المقاييس لمحتوى لوحة المعلومات' },
         { slug: 'notification-center', name: 'مركز الإشعارات', description: 'مركز الإشعارات لرأس لوحة المعلومات' },
+        { slug: 'dashboard-shell', name: 'الشريط الجانبي', description: 'شريط التنقّل الجانبي للوحات المعلومات' },
       ],
     },
     'user-menu': {
@@ -2593,6 +2725,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'avatar', name: 'الصورة الرمزية', description: 'الصورة الرمزية التي تُشغّل القائمة' },
         { slug: 'dropdown-menu', name: 'القائمة المنسدلة', description: 'مكوّن القائمة الأساسي للقوائم المخصصة' },
+        { slug: 'notification-center', name: 'مركز الإشعارات', description: 'عنصر مرافق في الرأس' },
       ],
     },
     'stats-card': {
@@ -2605,6 +2738,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'card', name: 'البطاقة', description: 'مكوّن البطاقة الأساسي للتخطيطات المخصصة' },
         { slug: 'chart', name: 'الرسم البياني', description: 'تمثيل بصري للبيانات والاتجاهات' },
+        { slug: 'progress', name: 'شريط التقدّم', description: 'مرافق تمثيل الاتجاهات' },
       ],
     },
     'listing-card': {
@@ -2623,6 +2757,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'card', name: 'البطاقة', description: 'بطاقة أساسية لحاويات المحتوى العامة' },
         { slug: 'badge', name: 'الشارة', description: 'شارات الحالة والتسمية لبيانات البطاقة الوصفية' },
+        { slug: 'empty-state', name: 'الحالة الفارغة', description: 'عنصر نائب عند عدم وجود قوائم' },
       ],
     },
 
@@ -2649,6 +2784,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'message-actions', name: 'إجراءات الرسالة', description: 'شريط أدوات الإجراءات للرسائل' },
         { slug: 'thinking-indicator', name: 'مؤشر التفكير', description: 'حالة التحميل لردود AI' },
+        { slug: 'prompt-input', name: 'حقل الإدخال', description: 'حقل إدخال المحادثة المرافق' },
       ],
     },
     'prompt-input': {
@@ -2673,6 +2809,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'textarea', name: 'منطقة النص', description: 'إدخال نص متعدد الأسطر' },
         { slug: 'token-counter', name: 'عدّاد الرموز', description: 'مراقب طول الإدخال' },
+        { slug: 'chat-message', name: 'رسالة المحادثة', description: 'مكوّن عرض الرسالة المرافق' },
       ],
     },
     'thinking-indicator': {
@@ -2696,6 +2833,8 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       },
       related: [
         { slug: 'chat-message', name: 'رسالة المحادثة', description: 'عرض الرسالة' },
+        { slug: 'prompt-input', name: 'حقل الإدخال', description: 'حقل الإدخال الذي يُشغّل التفكير' },
+        { slug: 'conversation-history', name: 'سجل المحادثات', description: 'سياق المحادثة لحالة التفكير' },
       ],
     },
     'message-actions': {
@@ -2719,6 +2858,8 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       },
       related: [
         { slug: 'chat-message', name: 'رسالة المحادثة', description: 'مكوّن عرض الرسالة' },
+        { slug: 'thinking-indicator', name: 'مؤشر التفكير', description: 'حالة التحميل بين الإجراءات' },
+        { slug: 'conversation-history', name: 'سجل المحادثات', description: 'إدارة جلسات المحادثة' },
       ],
     },
     'model-selector': {
@@ -2743,6 +2884,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'parameter-slider', name: 'شريط المعلمات', description: 'عناصر تحكم معلمات النموذج (الحرارة، إلخ)' },
         { slug: 'select', name: 'القائمة المنسدلة', description: 'مكوّن اختيار أساسي لمنتقيات نماذج أبسط' },
+        { slug: 'command', name: 'لوحة الأوامر', description: 'واجهة اختيار قابلة للبحث' },
       ],
     },
     'parameter-slider': {
@@ -2767,6 +2909,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'slider', name: 'شريط التمرير', description: 'شريط تمرير عام' },
         { slug: 'model-selector', name: 'منتقي النموذج', description: 'منتقي نموذج AI' },
+        { slug: 'number-input', name: 'إدخال رقمي', description: 'إدخال معاملات دقيق' },
       ],
     },
     'token-counter': {
@@ -2790,6 +2933,8 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       },
       related: [
         { slug: 'prompt-input', name: 'حقل الإدخال', description: 'حقل إدخال المحادثة المرافق' },
+        { slug: 'chat-message', name: 'رسالة المحادثة', description: 'سياق عدّ الرموز' },
+        { slug: 'model-selector', name: 'منتقي النموذج', description: 'نموذج مع حدود الرموز' },
       ],
     },
     'conversation-history': {
@@ -2814,6 +2959,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'chat-message', name: 'رسالة المحادثة', description: 'عرض الرسالة الفردية' },
         { slug: 'prompt-input', name: 'حقل الإدخال', description: 'حقل إدخال المحادثة المرافق' },
+        { slug: 'model-selector', name: 'منتقي النموذج', description: 'منتقي نموذج AI للمحادثات' },
       ],
     },
 
@@ -2833,6 +2979,8 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       },
       related: [
         { slug: 'hijri-date', name: 'التاريخ الهجري', description: 'تاريخ إسلامي بأرقام عربية' },
+        { slug: 'prayer-times', name: 'مواقيت الصلاة', description: 'جدول الصلاة باستخدام الأرقام العربية' },
+        { slug: 'zakat-calculator', name: 'حاسبة الزكاة', description: 'حاسبة تستخدم الأرقام العربية' },
       ],
     },
     'hijri-date': {
@@ -2857,6 +3005,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'calendar', name: 'التقويم', description: 'مكوّن شبكة التقويم' },
         { slug: 'arabic-number', name: 'الرقم العربي', description: 'عرض الأرقام العربية الشرقية' },
+        { slug: 'prayer-times', name: 'مواقيت الصلاة', description: 'جداول الصلاة الإسلامية' },
       ],
     },
     'prayer-times': {
@@ -2881,6 +3030,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'hijri-date', name: 'التاريخ الهجري', description: 'عرض التاريخ الإسلامي' },
         { slug: 'card', name: 'البطاقة', description: 'حاوية لعناصر الصلاة' },
+        { slug: 'arabic-number', name: 'الرقم العربي', description: 'عرض الأرقام العربية الشرقية' },
       ],
     },
     'zakat-calculator': {
@@ -2905,6 +3055,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'number-input', name: 'إدخال رقمي', description: 'إدخال رقمي للمبالغ' },
         { slug: 'card', name: 'البطاقة', description: 'حاوية لأقسام الحاسبة' },
+        { slug: 'prayer-times', name: 'مواقيت الصلاة', description: 'مكوّن إسلامي مرافق' },
       ],
     },
     'chart': {
@@ -2923,6 +3074,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'stats-card', name: 'بطاقة الإحصائيات', description: 'عرض مؤشرات الأداء المرافقة' },
         { slug: 'data-table', name: 'جدول البيانات', description: 'بيانات جدولية بجوار الرسوم البيانية' },
+        { slug: 'card', name: 'البطاقة', description: 'حاوية لعناصر الرسوم البيانية' },
       ],
     },
     'timeline': {
@@ -2941,6 +3093,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'stepper', name: 'مؤشر الخطوات', description: 'عملية خطوات متسلسلة' },
         { slug: 'progress', name: 'شريط التقدّم', description: 'مؤشر تقدّم خطي' },
+        { slug: 'card', name: 'البطاقة', description: 'حاوية أحداث الخط الزمني' },
       ],
     },
     'carousel': {
@@ -2959,6 +3112,7 @@ export const componentDocContent: Record<'en' | 'ar', Record<string, ComponentDo
       related: [
         { slug: 'tabs', name: 'التبويبات', description: 'تنقّل بديل بين اللوحات' },
         { slug: 'pagination', name: 'التصفّح', description: 'التنقّل على مستوى الصفحة' },
+        { slug: 'card', name: 'البطاقة', description: 'حاويات محتوى الشرائح' },
       ],
     },
   },
