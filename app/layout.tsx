@@ -28,17 +28,20 @@ const jetBrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL('https://noorui.com'),
   title: 'Noor UI - نور',
-  description: 'Beautiful RTL-first React components for bilingual applications. 74+ components, 4 themes, full Arabic support.',
+  description: 'Beautiful RTL-first React components for bilingual applications. 77+ components, 4 themes, full Arabic support.',
   keywords: ['design system', 'RTL', 'Arabic', 'components', 'accessibility', 'React', 'Next.js', 'Noor UI', 'bilingual', 'MENA', 'React components', 'UI library'],
   authors: [{ name: 'Nuno Marques', url: 'https://ositaka.com' }],
   creator: 'Nuno Marques',
+  alternates: {
+    canonical: 'https://noorui.com',
+  },
   openGraph: {
     type: 'website',
     locale: 'en_US',
     alternateLocale: ['ar_SA'],
     url: 'https://noorui.com',
     title: 'Noor UI - Beautiful RTL-first React Components',
-    description: 'Beautiful RTL-first React components for bilingual applications. 74+ components, 4 themes, full Arabic support.',
+    description: 'Beautiful RTL-first React components for bilingual applications. 77+ components, 4 themes, full Arabic support.',
     siteName: 'Noor UI',
     images: [
       {
@@ -52,7 +55,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Noor UI - Beautiful RTL-first React Components',
-    description: 'Beautiful RTL-first React components for bilingual applications. 74+ components, 4 themes, full Arabic support.',
+    description: 'Beautiful RTL-first React components for bilingual applications. 77+ components, 4 themes, full Arabic support.',
     images: ['/noorui--og-image--bilingual.png'],
     creator: '@ositaka',
   },
@@ -78,6 +81,7 @@ export default function RootLayout({
     <html lang="en" dir="ltr" className="theme-cozy" suppressHydrationWarning>
       <head>
         <Script src="/scripts/theme-init.js" strategy="beforeInteractive" />
+        <Script defer src="https://analytics.ositaka.com/script.js" data-website-id="c6107d2e-e950-483e-be43-0d644286f8ff" strategy="afterInteractive" />
       </head>
       <body className={`${inter.variable} ${ibmPlexSansArabic.variable} ${jetBrainsMono.variable} font-sans antialiased`}>
         <ThemeProvider

@@ -3,101 +3,121 @@ import { MetadataRoute } from 'next'
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://noorui.com'
 
-  // Component pages (all directories under app/(docs)/components/)
+  // Component pages — all 70 components
   const components = [
-    // Basic Components
+    // Core
     'accordion', 'alert', 'avatar', 'badge', 'blockquote', 'breadcrumb',
     'button', 'button-arrow', 'card', 'checkbox', 'input', 'kbd', 'label',
     'select', 'separator', 'slider', 'switch', 'textarea',
-    // Form Components
+    // Forms
     'calendar', 'date-picker', 'file-upload', 'form', 'number-input',
     'radio-group', 'range-slider', 'rich-text-editor', 'time-picker',
     // Data Display
-    'chart', 'collapsible', 'data-table', 'empty-state', 'feature-card', 'listing-card',
-    'pagination', 'stats-card', 'table', 'tabs',
-    // Overlay & Popups
-    'command', 'context-menu', 'dialog', 'dropdown-menu', 'popover',
-    'sheet', 'toast', 'tooltip',
-    // Content
-    'callout', 'content-renderer', 'pull-quote',
-    // Advanced Components
-    'dashboard-shell', 'notification-center', 'progress', 'reaction-picker',
-    'carousel', 'skeleton', 'stepper', 'timeline', 'user-badge', 'user-menu',
+    'chart', 'collapsible', 'command', 'content-renderer', 'data-table',
+    'empty-state', 'feature-card', 'listing-card', 'pagination', 'pull-quote',
+    'stats-card', 'table', 'tabs',
+    // Overlays & Feedback
+    'callout', 'context-menu', 'dialog', 'dropdown-menu', 'popover',
+    'progress', 'sheet', 'skeleton', 'toast', 'tooltip',
+    // User Interface
+    'carousel', 'dashboard-shell', 'notification-center', 'reaction-picker',
+    'stepper', 'timeline', 'user-badge', 'user-menu',
     // Regional & Islamic
     'arabic-number', 'hijri-date', 'prayer-times', 'zakat-calculator',
-    // Experimental (AI/LLM)
+    // AI/LLM
     'chat-message', 'conversation-history', 'message-actions', 'model-selector',
     'parameter-slider', 'prompt-input', 'thinking-indicator', 'token-counter',
   ]
 
-  // Documentation pages (all directories under app/(docs)/documentation/)
-  const docs = [
-    'installation', 'quick-start', 'configuration', 'props', 'examples',
-    'rtl', 'bidi', 'arabic',
-    'wcag', 'keyboard', 'screen-readers',
-  ]
-
-  // Example pages (all directories under app/examples/)
+  // Example app pages
   const examples = [
+    'healthcare', 'hotel', 'banking', 'education',
     'islamic-finance-dashboard', 'calendar', 'registration',
-    'marketplace', 'portfolio', 'real-estate', 'healthcare', 'education',
+    'marketplace', 'portfolio', 'real-estate', 'government',
     'ai-playground',
   ]
 
   return [
+    // Homepage
     {
       url: baseUrl,
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 1,
     },
-    {
-      url: `${baseUrl}/components`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    ...components.map((component) => ({
-      url: `${baseUrl}/components/${component}`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly' as const,
-      priority: 0.8,
-    })),
-    {
-      url: `${baseUrl}/documentation`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    ...docs.map((doc) => ({
-      url: `${baseUrl}/documentation/${doc}`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly' as const,
-      priority: 0.7,
-    })),
-    {
-      url: `${baseUrl}/examples`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.8,
-    },
-    ...examples.map((example) => ({
-      url: `${baseUrl}/examples/${example}`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly' as const,
-      priority: 0.7,
-    })),
+    // Getting Started
     {
       url: `${baseUrl}/getting-started`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.9,
     },
+    // Components index
+    {
+      url: `${baseUrl}/components`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.9,
+    },
+    // All component pages
+    ...components.map((component) => ({
+      url: `${baseUrl}/components/${component}`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly' as const,
+      priority: 0.8,
+    })),
+    // Documentation hub
+    {
+      url: `${baseUrl}/documentation`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.9,
+    },
+    // Examples index
+    {
+      url: `${baseUrl}/examples`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    },
+    // All example pages
+    ...examples.map((example) => ({
+      url: `${baseUrl}/examples/${example}`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+    })),
+    // Email Templates
+    {
+      url: `${baseUrl}/email-templates`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    // Guides & Reference
     {
       url: `${baseUrl}/rtl-guide`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/themes`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/tokens`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/utilities`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.6,
     },
     {
       url: `${baseUrl}/roadmap`,
@@ -110,24 +130,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(),
       changeFrequency: 'yearly',
       priority: 0.4,
-    },
-    {
-      url: `${baseUrl}/utilities`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.6,
-    },
-    {
-      url: `${baseUrl}/tokens`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/themes`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.7,
     },
   ]
 }
