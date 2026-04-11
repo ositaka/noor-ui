@@ -12,6 +12,7 @@ import { Badge } from '@/components/ui/badge'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 import { StorybookLink } from '@/components/docs/storybook-link'
+import { ComponentDocSections } from '@/components/docs/component-doc-sections'
 
 const getFileUploadProps = (t: typeof content.en | typeof content.ar) => [
   {
@@ -434,15 +435,6 @@ export default function Example() {
           <PropsTable props={propDefinitions} />
         </section>
 
-        {/* Best Practices */}
-        <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.fileUploadComponent.bestPractices.title}</h2>
-          <BestPractices
-            dos={t.fileUploadComponent.bestPractices.doList}
-            donts={t.fileUploadComponent.bestPractices.dontList}
-          />
-        </section>
-
         {/* Accessibility */}
         <section className="mb-16">
           <h2 className="text-2xl font-bold tracking-tight mb-6">{t.fileUploadComponent.accessibility.title}</h2>
@@ -473,7 +465,10 @@ export default function Example() {
             </CardContent>
           </Card>
         </section>
-      </main>
+      
+        <ComponentDocSections />
+
+</main>
     </div>
   )
 }

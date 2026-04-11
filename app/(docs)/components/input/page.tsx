@@ -14,6 +14,7 @@ import { Envelope, Lock, MagnifyingGlass } from '@phosphor-icons/react'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 import { StorybookLink } from '@/components/docs/storybook-link'
+import { ComponentDocSections } from '@/components/docs/component-doc-sections'
 
 const getInputProps = (t: typeof content.en | typeof content.ar): PropDefinition[] => [
   {
@@ -527,40 +528,10 @@ export default function InputPage() {
             </CardContent>
           </Card>
         </section>
+      
+        <ComponentDocSections />
 
-        {/* Related Components */}
-        <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.inputComponent.relatedTitle}</h2>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            <Link href="/components/label">
-              <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
-                <CardContent className="p-6">
-                  <h3 className="font-semibold">{t.inputComponent.related.label}</h3>
-                  <p className="text-sm text-muted-foreground mt-1">
-                    {t.inputComponent.related.labelDesc}
-                  </p>
-                </CardContent>
-              </Card>
-            </Link>
-            <Link href="/components/button">
-              <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
-                <CardContent className="p-6">
-                  <h3 className="font-semibold">{t.inputComponent.related.button}</h3>
-                  <p className="text-sm text-muted-foreground mt-1">{t.inputComponent.related.buttonDesc}</p>
-                </CardContent>
-              </Card>
-            </Link>
-            <Link href="/components/textarea">
-              <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
-                <CardContent className="p-6">
-                  <h3 className="font-semibold">{t.inputComponent.related.textarea}</h3>
-                  <p className="text-sm text-muted-foreground mt-1">{t.inputComponent.related.textareaDesc}</p>
-                </CardContent>
-              </Card>
-            </Link>
-          </div>
-        </section>
-      </main>
+</main>
     </div>
   )
 }

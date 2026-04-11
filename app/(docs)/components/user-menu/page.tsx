@@ -13,6 +13,7 @@ import { useToast } from '@/hooks/use-toast'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 import { StorybookLink } from '@/components/docs/storybook-link'
+import { ComponentDocSections } from '@/components/docs/component-doc-sections'
 
 
 const withAvatarCode = `'use client'
@@ -408,15 +409,6 @@ export function Header() {
           <PropsTable props={propDefinitions} />
         </section>
 
-        {/* Best Practices */}
-        <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.bestPractices}</h2>
-          <BestPractices
-            dos={userMenuT.bestPractices.doList}
-            donts={userMenuT.bestPractices.dontList}
-          />
-        </section>
-
         {/* Accessibility */}
         <section className="mb-16">
           <h2 className="text-2xl font-bold tracking-tight mb-6">{userMenuT.sections.accessibility}</h2>
@@ -447,7 +439,10 @@ export function Header() {
             </CardContent>
           </Card>
         </section>
-      </main>
+      
+        <ComponentDocSections />
+
+</main>
     </div>
   )
 }

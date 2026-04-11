@@ -17,6 +17,7 @@ import {
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 import { StorybookLink } from '@/components/docs/storybook-link'
+import { ComponentDocSections } from '@/components/docs/component-doc-sections'
 
 const accordionProps: PropDefinition[] = [
   {
@@ -411,34 +412,10 @@ export default function AccordionPage() {
             </CardContent>
           </Card>
         </section>
+      
+        <ComponentDocSections />
 
-        {/* Related Components */}
-        <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-4">{t.componentPage.sections.relatedComponents}</h2>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            <Link href="/components/tabs">
-              <Card className="hover:border-primary transition-colors">
-                <CardContent className="p-6">
-                  <h3 className="font-semibold mb-2">{t.componentNames['tabs']}</h3>
-                  <p className="text-sm text-muted-foreground">
-                    {accordionT.relatedComponents.tabsDesc}
-                  </p>
-                </CardContent>
-              </Card>
-            </Link>
-            <Link href="/components/collapsible">
-              <Card className="hover:border-primary transition-colors">
-                <CardContent className="p-6">
-                  <h3 className="font-semibold mb-2">{t.componentNames['collapsible']}</h3>
-                  <p className="text-sm text-muted-foreground">
-                    {accordionT.relatedComponents.collapsibleDesc}
-                  </p>
-                </CardContent>
-              </Card>
-            </Link>
-          </div>
-        </section>
-      </main>
+</main>
     </div>
   )
 }

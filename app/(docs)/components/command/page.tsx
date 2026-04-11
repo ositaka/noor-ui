@@ -19,6 +19,7 @@ import {
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 import { StorybookLink } from '@/components/docs/storybook-link'
+import { ComponentDocSections } from '@/components/docs/component-doc-sections'
 
 const basicCommandCode = `import {
   Command,
@@ -213,7 +214,10 @@ export default function CommandPage() {
             </CardContent>
           </Card>
         </section>
-      </main>
+      
+        <ComponentDocSections />
+
+</main>
     </div>
   )
 }

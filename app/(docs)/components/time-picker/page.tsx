@@ -11,6 +11,7 @@ import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 import { Label } from '@/components/ui/label'
 import { StorybookLink } from '@/components/docs/storybook-link'
+import { ComponentDocSections } from '@/components/docs/component-doc-sections'
 
 const getTimePickerProps = (componentT: any): PropDefinition[] => [
   {
@@ -534,28 +535,6 @@ export default function TimePickerPage() {
         </div>
       </section>
 
-      {/* Use Cases */}
-      <section className="mb-16">
-        <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.useCases}</h2>
-        <div className="grid gap-4 md:grid-cols-2">
-          {[
-            { title: t.timePickerComponent.useCases.appointmentBooking, icon: '📅' },
-            { title: t.timePickerComponent.useCases.workSchedules, icon: '⏰' },
-            { title: t.timePickerComponent.useCases.eventTimers, icon: '⏱️' },
-            { title: t.timePickerComponent.useCases.timeFilters, icon: '🔍' },
-          ].map((useCase, idx) => (
-            <Card key={idx}>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <span className="text-2xl">{useCase.icon}</span>
-                  {useCase.title}
-                </CardTitle>
-              </CardHeader>
-            </Card>
-          ))}
-        </div>
-      </section>
-
       {/* Type Definition */}
       <section className="mb-16">
         <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.typeDefinitions}</h2>
@@ -590,7 +569,10 @@ export default function TimePickerPage() {
           <li>{t.timePickerComponent.features.fullAccessibility}</li>
         </ul>
       </section>
-      </main>
+      
+        <ComponentDocSections />
+
+</main>
     </div>
   )
 }

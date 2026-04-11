@@ -13,6 +13,7 @@ import { CaretDown, CaretRight, CaretUpDown } from '@phosphor-icons/react'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 import { StorybookLink } from '@/components/docs/storybook-link'
+import { ComponentDocSections } from '@/components/docs/component-doc-sections'
 
 const getCollapsibleProps = (componentT: any): PropDefinition[] => [
   {
@@ -395,44 +396,10 @@ export default function CollapsiblePage() {
             </CardContent>
           </Card>
         </section>
+      
+        <ComponentDocSections />
 
-        {/* Related Components */}
-        <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.collapsibleComponent.related.title}</h2>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            <Link href="/components/accordion">
-              <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
-                <CardContent className="p-6">
-                  <h3 className="font-semibold">{t.componentNames?.accordion || 'Accordion'}</h3>
-                  <p className="text-sm text-muted-foreground mt-1">
-                    {collapsibleT.related.accordion}
-                  </p>
-                </CardContent>
-              </Card>
-            </Link>
-            <Link href="/components/tabs">
-              <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
-                <CardContent className="p-6">
-                  <h3 className="font-semibold">{t.componentNames?.tabs || 'Tabs'}</h3>
-                  <p className="text-sm text-muted-foreground mt-1">
-                    {collapsibleT.related.tabs}
-                  </p>
-                </CardContent>
-              </Card>
-            </Link>
-            <Link href="/components/dialog">
-              <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
-                <CardContent className="p-6">
-                  <h3 className="font-semibold">{t.componentNames?.dialog || 'Dialog'}</h3>
-                  <p className="text-sm text-muted-foreground mt-1">
-                    {collapsibleT.related.dialog}
-                  </p>
-                </CardContent>
-              </Card>
-            </Link>
-          </div>
-        </section>
-      </main>
+</main>
     </div>
   )
 }

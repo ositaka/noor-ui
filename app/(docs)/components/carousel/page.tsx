@@ -13,6 +13,7 @@ import { Slideshow, Star, Quotes, Package, Truck, MapPin, ShoppingCart } from '@
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 import { StorybookLink } from '@/components/docs/storybook-link'
+import { ComponentDocSections } from '@/components/docs/component-doc-sections'
 
 // ---------------------------------------------------------------------------
 // Sample data
@@ -577,64 +578,7 @@ export default function CarouselPage() {
             </CardContent>
           </Card>
         </section>
-
-        {/* Use Cases */}
-        <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.carouselComponent.useCases.title}</h2>
-          <Card>
-            <CardContent className="p-6">
-              <ul className="space-y-3 text-muted-foreground">
-                <li className="flex items-start gap-2">
-                  <span className="text-primary">•</span>
-                  <span><strong>{t.carouselComponent.useCases.imageGallery}:</strong> {t.carouselComponent.useCases.imageGalleryDesc}</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-primary">•</span>
-                  <span><strong>{t.carouselComponent.useCases.testimonials}:</strong> {t.carouselComponent.useCases.testimonialsDesc}</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-primary">•</span>
-                  <span><strong>{t.carouselComponent.useCases.onboarding}:</strong> {t.carouselComponent.useCases.onboardingDesc}</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-primary">•</span>
-                  <span><strong>{t.carouselComponent.useCases.categories}:</strong> {t.carouselComponent.useCases.categoriesDesc}</span>
-                </li>
-              </ul>
-            </CardContent>
-          </Card>
-        </section>
-
-        {/* Related Components */}
-        <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.carouselComponent.related.title}</h2>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            <Link href="/components/tabs">
-              <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
-                <CardContent className="p-6">
-                  <h3 className="font-semibold">{t.carouselComponent.related.tabs}</h3>
-                  <p className="text-sm text-muted-foreground mt-1">{t.carouselComponent.related.tabsDesc}</p>
-                </CardContent>
-              </Card>
-            </Link>
-            <Link href="/components/card">
-              <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
-                <CardContent className="p-6">
-                  <h3 className="font-semibold">{t.carouselComponent.related.card}</h3>
-                  <p className="text-sm text-muted-foreground mt-1">{t.carouselComponent.related.cardDesc}</p>
-                </CardContent>
-              </Card>
-            </Link>
-            <Link href="/components/pagination">
-              <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
-                <CardContent className="p-6">
-                  <h3 className="font-semibold">{t.carouselComponent.related.pagination}</h3>
-                  <p className="text-sm text-muted-foreground mt-1">{t.carouselComponent.related.paginationDesc}</p>
-                </CardContent>
-              </Card>
-            </Link>
-          </div>
-        </section>
+        <ComponentDocSections />
       </div>
     </div>
   )

@@ -20,6 +20,7 @@ import { ComponentShowcase } from '@/components/docs/component-showcase'
 import { PropsTable, type PropDefinition } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
 import { StorybookLink } from '@/components/docs/storybook-link'
+import { ComponentDocSections } from '@/components/docs/component-doc-sections'
 import {
   Copy,
   ShareNetwork,
@@ -169,7 +170,7 @@ export default function ContextMenuPage() {
             <ComponentShowcase.Demo>
               <ContextMenu>
                 <ContextMenuTrigger>
-                  <Card className="w-full max-w-md h-32 flex items-center justify-center border-dashed border-2 cursor-context-menu">
+                  <Card className="w-full max-w-md h-32 px-8 flex items-center justify-center border-dashed border-2 cursor-context-menu">
                     <p className="text-muted-foreground">{t.contextMenuComponent.demo.rightClick}</p>
                   </Card>
                 </ContextMenuTrigger>
@@ -417,44 +418,10 @@ export default function ContextMenuPage() {
             </CardContent>
           </Card>
         </section>
+      
+        <ComponentDocSections />
 
-        {/* Related Components */}
-        <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.contextMenuComponent.related.title}</h2>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            <Link href="/components/dropdown-menu">
-              <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
-                <CardContent className="p-6">
-                  <h3 className="font-semibold">{t.contextMenuComponent.related.dropdownMenu}</h3>
-                  <p className="text-sm text-muted-foreground mt-1">
-                    {t.contextMenuComponent.related.dropdownMenuDesc}
-                  </p>
-                </CardContent>
-              </Card>
-            </Link>
-            <Link href="/components/popover">
-              <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
-                <CardContent className="p-6">
-                  <h3 className="font-semibold">{t.contextMenuComponent.related.popover}</h3>
-                  <p className="text-sm text-muted-foreground mt-1">
-                    {t.contextMenuComponent.related.popoverDesc}
-                  </p>
-                </CardContent>
-              </Card>
-            </Link>
-            <Link href="/components/dialog">
-              <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
-                <CardContent className="p-6">
-                  <h3 className="font-semibold">{t.contextMenuComponent.related.dialog}</h3>
-                  <p className="text-sm text-muted-foreground mt-1">
-                    {t.contextMenuComponent.related.dialogDesc}
-                  </p>
-                </CardContent>
-              </Card>
-            </Link>
-          </div>
-        </section>
-      </main>
+</main>
     </div>
   )
 }

@@ -13,6 +13,7 @@ import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 import { Users, TrendUp, CurrencyDollar, ShoppingCart } from '@phosphor-icons/react'
 import { StorybookLink } from '@/components/docs/storybook-link'
+import { ComponentDocSections } from '@/components/docs/component-doc-sections'
 
 const installCode = `npm install noorui-rtl`
 
@@ -100,7 +101,6 @@ export default function StatsCardPage() {
         <div className="max-w-3xl mb-12">
           <div className="flex items-center gap-3 mb-4">
             <h1 className="text-4xl font-bold tracking-tight">{t.statsCardComponent.title}</h1>
-            <Badge>v0.4.0</Badge>
           </div>
           <p className="text-xl text-muted-foreground mb-6">
             {t.statsCardComponent.description}
@@ -161,15 +161,10 @@ export default function StatsCardPage() {
           <h2 className="text-2xl font-bold mb-6">{t.statsCardComponent.props.title}</h2>
           <PropsTable props={statsCardProps} />
         </section>
+      
+        <ComponentDocSections />
 
-        <section className="mb-12">
-          <h2 className="text-2xl font-bold mb-6">{t.componentPage.sections.bestPractices}</h2>
-          <BestPractices
-            dos={t.statsCardComponent.bestPractices.doList}
-            donts={t.statsCardComponent.bestPractices.dontList}
-          />
-        </section>
-      </main>
+</main>
     </div>
   )
 }

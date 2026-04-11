@@ -13,6 +13,7 @@ import { Download, Heart, Trash } from '@phosphor-icons/react'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 import { StorybookLink } from '@/components/docs/storybook-link'
+import { ComponentDocSections } from '@/components/docs/component-doc-sections'
 const getButtonProps = (t: typeof content.en | typeof content.ar): PropDefinition[] => [
   {
     name: 'variant',
@@ -366,7 +367,10 @@ export default function ButtonPage() {
           </Card>
         </section>
 
-      </main>
+      
+        <ComponentDocSections />
+
+</main>
     </div>
   )
 }

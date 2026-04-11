@@ -25,7 +25,7 @@ avatarComponent: {
       labels: {
         rtlSupportExample: 'مثال على دعم RTL',
         rtlDescription: 'يتكيف مكون الصورة الرمزية تلقائياً مع تخطيطات RTL. تحترم مجموعات الصور الرمزية اتجاه القراءة ويتبع ترتيب التداخل اتجاه النص.',
-        johnDoe: 'جون دو',
+        johnDoe: 'نونو ماركيز',
         emailExample: 'ositaka@example.com',
       },
       props: {
@@ -131,7 +131,7 @@ alertComponent: {
 
 stepperComponent: {
       title: 'مؤشر الخطوات',
-      description: 'مؤشر تقدم متعدد الخطوات للنماذج والأسواق',
+      description: 'مؤشر تقدم متعدد الخطوات للنماذج والمعالجات',
       actions: {
         previous: 'السابق',
         next: 'التالي',

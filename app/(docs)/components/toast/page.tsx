@@ -11,6 +11,7 @@ import { useToast } from '@/hooks/use-toast'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 import { StorybookLink } from '@/components/docs/storybook-link'
+import { ComponentDocSections } from '@/components/docs/component-doc-sections'
 
 const getToastProps = (locale: 'en' | 'ar'): PropDefinition[] => [
   {
@@ -327,34 +328,10 @@ export default function ToastPage() {
             </CardContent>
           </Card>
         </section>
+      
+        <ComponentDocSections />
 
-        {/* Related */}
-        <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">{tc.related.title}</h2>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            <Link href="/components/alert">
-              <Card className="hover:border-primary transition-colors">
-                <CardContent className="p-6">
-                  <h3 className="font-semibold mb-2">{tc.related.alert}</h3>
-                  <p className="text-sm text-muted-foreground">
-                    {tc.related.alertDesc}
-                  </p>
-                </CardContent>
-              </Card>
-            </Link>
-            <Link href="/components/dialog">
-              <Card className="hover:border-primary transition-colors">
-                <CardContent className="p-6">
-                  <h3 className="font-semibold mb-2">{tc.related.dialog}</h3>
-                  <p className="text-sm text-muted-foreground">
-                    {tc.related.dialogDesc}
-                  </p>
-                </CardContent>
-              </Card>
-            </Link>
-          </div>
-        </section>
-      </main>
+</main>
     </div>
   )
 }

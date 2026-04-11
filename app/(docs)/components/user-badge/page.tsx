@@ -11,6 +11,7 @@ import { CodeBlock } from '@/components/docs/code-block'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 import { StorybookLink } from '@/components/docs/storybook-link'
+import { ComponentDocSections } from '@/components/docs/component-doc-sections'
 
 const installCode = `npm install noorui-rtl`
 
@@ -79,7 +80,6 @@ export default function UserBadgePage() {
         <div className="max-w-3xl mb-12">
           <div className="flex items-center gap-3 mb-4">
             <h1 className="text-4xl font-bold tracking-tight">{t.userBadgeComponent.title}</h1>
-            <Badge>v0.4.0</Badge>
           </div>
           <p className="text-xl text-muted-foreground mb-6">
             {t.userBadgeComponent.description}
@@ -135,24 +135,10 @@ export default function UserBadgePage() {
           <h2 className="text-2xl font-bold mb-6">{t.userBadgeComponent.props.title}</h2>
           <PropsTable props={userBadgeProps} />
         </section>
+      
+        <ComponentDocSections />
 
-        {/* Use Cases */}
-        <section>
-          <h2 className="text-2xl font-bold mb-6">{t.userBadgeComponent.useCases.title}</h2>
-          <Card>
-            <CardContent className="pt-6">
-              <ul className="space-y-3">
-                {t.userBadgeComponent.useCases.items.map((item, index) => (
-                  <li key={index} className="flex items-start gap-2">
-                    <span className="text-primary">•</span>
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </CardContent>
-          </Card>
-        </section>
-      </main>
+</main>
     </div>
   )
 }

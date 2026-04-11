@@ -13,6 +13,7 @@ import { Sparkle } from '@phosphor-icons/react'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 import { StorybookLink } from '@/components/docs/storybook-link'
+import { ComponentDocSections } from '@/components/docs/component-doc-sections'
 
 const getCalendarProps = (t: typeof content.en | typeof content.ar): PropDefinition[] => [
   {
@@ -701,44 +702,10 @@ const getAccurateHijri = (date: Date) => {
             </CardContent>
           </Card>
         </section>
+      
+        <ComponentDocSections />
 
-        {/* Related Components */}
-        <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.calendarComponent.related.title}</h2>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            <Link href="/components/hijri-date">
-              <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
-                <CardContent className="p-6">
-                  <h3 className="font-semibold">{t.calendarComponent.related.hijriDate}</h3>
-                  <p className="text-sm text-muted-foreground mt-1">
-                    {t.calendarComponent.related.hijriDateDesc}
-                  </p>
-                </CardContent>
-              </Card>
-            </Link>
-            <Link href="/components/button">
-              <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
-                <CardContent className="p-6">
-                  <h3 className="font-semibold">{t.calendarComponent.related.button}</h3>
-                  <p className="text-sm text-muted-foreground mt-1">
-                    {t.calendarComponent.related.buttonDesc}
-                  </p>
-                </CardContent>
-              </Card>
-            </Link>
-            <Link href="/components/badge">
-              <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
-                <CardContent className="p-6">
-                  <h3 className="font-semibold">{t.calendarComponent.related.badge}</h3>
-                  <p className="text-sm text-muted-foreground mt-1">
-                    {t.calendarComponent.related.badgeDesc}
-                  </p>
-                </CardContent>
-              </Card>
-            </Link>
-          </div>
-        </section>
-      </main>
+</main>
     </div>
   )
 }

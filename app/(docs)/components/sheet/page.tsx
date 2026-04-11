@@ -23,6 +23,7 @@ import {
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 import { StorybookLink } from '@/components/docs/storybook-link'
+import { ComponentDocSections } from '@/components/docs/component-doc-sections'
 
 const getSheetContentProps = (t: typeof content.en | typeof content.ar): PropDefinition[] => [
   {
@@ -384,34 +385,10 @@ export default function SheetPage() {
             </CardContent>
           </Card>
         </section>
+      
+        <ComponentDocSections />
 
-        {/* Related Components */}
-        <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-4">{t.sheetComponent.related.title}</h2>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            <Link href="/components/dialog">
-              <Card className="hover:border-primary transition-colors">
-                <CardContent className="p-6">
-                  <h3 className="font-semibold mb-2">{t.sheetComponent.related.dialog}</h3>
-                  <p className="text-sm text-muted-foreground">
-                    {t.sheetComponent.related.dialogDesc}
-                  </p>
-                </CardContent>
-              </Card>
-            </Link>
-            <Link href="/components/popover">
-              <Card className="hover:border-primary transition-colors">
-                <CardContent className="p-6">
-                  <h3 className="font-semibold mb-2">{t.sheetComponent.related.popover}</h3>
-                  <p className="text-sm text-muted-foreground">
-                    {t.sheetComponent.related.popoverDesc}
-                  </p>
-                </CardContent>
-              </Card>
-            </Link>
-          </div>
-        </section>
-      </main>
+</main>
     </div>
   )
 }

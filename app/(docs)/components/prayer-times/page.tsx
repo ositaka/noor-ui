@@ -5,10 +5,12 @@ import Link from 'next/link'
 import { ComponentShowcase } from '@/components/docs/component-showcase'
 import { PropsTable } from '@/components/docs/props-table'
 import { CodeBlock } from '@/components/docs/code-block'
+import { Card, CardContent } from '@/components/ui/card'
 import { PrayerTimes, type Prayer } from '@/components/ui/prayer-times'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 import { StorybookLink } from '@/components/docs/storybook-link'
+import { ComponentDocSections } from '@/components/docs/component-doc-sections'
 
 export default function PrayerTimesPage() {
   const { locale } = useDirection()
@@ -463,7 +465,9 @@ export function SmartPrayerTimes({ latitude, longitude }: { latitude: number; lo
         {/* Accessibility */}
         <section className="mb-16">
           <h2 className="text-3xl font-bold mb-6">{content[locale].componentDocs.accessibility}</h2>
-          <div className="space-y-4 text-muted-foreground">
+          <Card>
+            <CardContent className="pt-6">
+              <div className="space-y-4 text-muted-foreground">
             <p>{t.accessibility.description}</p>
             <ul className="list-disc list-inside space-y-2 ms-4">
               <li>
@@ -483,12 +487,16 @@ export function SmartPrayerTimes({ latitude, longitude }: { latitude: number; lo
               </li>
             </ul>
           </div>
+            </CardContent>
+          </Card>
         </section>
 
         {/* RTL Considerations */}
         <section className="mb-16">
           <h2 className="text-3xl font-bold mb-6">{content[locale].componentDocs.rtlConsiderations}</h2>
-          <div className="space-y-4 text-muted-foreground">
+          <Card>
+            <CardContent className="pt-6">
+              <div className="space-y-4 text-muted-foreground">
             <p>
               {t.rtl.description}
             </p>
@@ -510,33 +518,13 @@ export function SmartPrayerTimes({ latitude, longitude }: { latitude: number; lo
               </li>
             </ul>
           </div>
+            </CardContent>
+          </Card>
         </section>
+      
+        <ComponentDocSections />
 
-        {/* Related Components */}
-        <section className="mb-16">
-          <h2 className="text-3xl font-bold mb-6">{t.relatedComponents.title}</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <Link
-              href="/components/card"
-              className="block p-4 border rounded-lg hover:border-primary transition-colors"
-            >
-              <h3 className="font-semibold mb-2">{t.relatedComponents.card}</h3>
-              <p className="text-sm text-muted-foreground">
-                {t.relatedComponents.cardDesc}
-              </p>
-            </Link>
-            <Link
-              href="/components/badge"
-              className="block p-4 border rounded-lg hover:border-primary transition-colors"
-            >
-              <h3 className="font-semibold mb-2">{t.relatedComponents.badge}</h3>
-              <p className="text-sm text-muted-foreground">
-                {t.relatedComponents.badgeDesc}
-              </p>
-            </Link>
-          </div>
-        </section>
-      </main>
+</main>
     </div>
   )
 }

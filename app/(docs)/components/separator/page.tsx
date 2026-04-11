@@ -13,6 +13,7 @@ import { House, Gear, User, Bell } from '@phosphor-icons/react'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 import { StorybookLink } from '@/components/docs/storybook-link'
+import { ComponentDocSections } from '@/components/docs/component-doc-sections'
 
 const getSeparatorProps = (t: typeof content.en | typeof content.ar): PropDefinition[] => [
   {
@@ -500,33 +501,10 @@ export default function SeparatorPage() {
             </CardContent>
           </Card>
         </section>
+      
+        <ComponentDocSections />
 
-        {/* Best Practices */}
-        <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.bestPractices}</h2>
-          <BestPractices
-            dos={t.separatorComponent.bestPractices.doList}
-            donts={t.separatorComponent.bestPractices.dontList}
-          />
-        </section>
-
-        {/* Related Components */}
-        <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.separatorComponent.related.title}</h2>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            <Link href="/components/card">
-              <Card className="h-full transition-all hover:shadow-lg hover:border-primary/50">
-                <CardContent className="p-6">
-                  <h3 className="font-semibold">{t.separatorComponent.related.card}</h3>
-                  <p className="text-sm text-muted-foreground mt-1">
-                    {t.separatorComponent.related.cardDesc}
-                  </p>
-                </CardContent>
-              </Card>
-            </Link>
-          </div>
-        </section>
-      </main>
+</main>
     </div>
   )
 }

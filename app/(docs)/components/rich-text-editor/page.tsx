@@ -11,6 +11,7 @@ import { Badge } from '@/components/ui/badge'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 import { StorybookLink } from '@/components/docs/storybook-link'
+import { ComponentDocSections } from '@/components/docs/component-doc-sections'
 
 const getRichTextEditorProps = (t: typeof content.en | typeof content.ar) => [
   {
@@ -444,7 +445,10 @@ export default function RichTextEditorPage() {
             </CardContent>
           </Card>
         </section>
-      </main>
+      
+        <ComponentDocSections />
+
+</main>
     </div>
   )
 }

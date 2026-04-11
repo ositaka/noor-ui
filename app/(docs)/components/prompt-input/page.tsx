@@ -13,6 +13,7 @@ import { WarningCircle } from '@phosphor-icons/react'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 import { StorybookLink } from '@/components/docs/storybook-link'
+import { ComponentDocSections } from '@/components/docs/component-doc-sections'
 
 const getPromptInputProps = (componentT: any): PropDefinition[] => [
   {
@@ -388,44 +389,10 @@ export default function PromptInputPage() {
             </CardContent>
           </Card>
         </section>
+      
+        <ComponentDocSections />
 
-        {/* Related */}
-        <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">{promptInputT.related.title}</h2>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            <Card>
-              <CardContent className="p-4">
-                <Link href="/components/chat-message" className="font-medium hover:underline">
-                  {t.chatMessageComponent?.title || 'Chat Message'}
-                </Link>
-                <p className="text-sm text-muted-foreground mt-1">
-                  {promptInputT.related.chatMessage}
-                </p>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardContent className="p-4">
-                <Link href="/components/thinking-indicator" className="font-medium hover:underline">
-                  {t.thinkingIndicatorComponent?.title || 'Thinking Indicator'}
-                </Link>
-                <p className="text-sm text-muted-foreground mt-1">
-                  {promptInputT.related.thinkingIndicator}
-                </p>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardContent className="p-4">
-                <Link href="/components/message-actions" className="font-medium hover:underline">
-                  {t.messageActionsComponent?.title || 'Message Actions'}
-                </Link>
-                <p className="text-sm text-muted-foreground mt-1">
-                  {promptInputT.related.messageActions}
-                </p>
-              </CardContent>
-            </Card>
-          </div>
-        </section>
-      </main>
+</main>
     </div>
   )
 }

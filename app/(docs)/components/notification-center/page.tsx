@@ -13,6 +13,7 @@ import { Heart, ChatCentered, Star, UserPlus } from '@phosphor-icons/react'
 import Link from 'next/link'
 import * as React from 'react'
 import { StorybookLink } from '@/components/docs/storybook-link'
+import { ComponentDocSections } from '@/components/docs/component-doc-sections'
 
 const getProps = (componentT: any): PropDefinition[] => [
   {
@@ -398,15 +399,6 @@ export default function Example() {
           <PropsTable props={propDefinitions} />
         </section>
 
-        {/* Best Practices */}
-        <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.bestPractices}</h2>
-          <BestPractices
-            dos={notificationCenterT.bestPractices.doList}
-            donts={notificationCenterT.bestPractices.dontList}
-          />
-        </section>
-
         {/* Accessibility */}
         <section className="mb-16">
           <h2 className="text-2xl font-bold tracking-tight mb-6">{t.componentPage.sections.accessibility}</h2>
@@ -437,7 +429,10 @@ export default function Example() {
             </CardContent>
           </Card>
         </section>
-      </main>
+      
+        <ComponentDocSections />
+
+</main>
     </div>
   )
 }

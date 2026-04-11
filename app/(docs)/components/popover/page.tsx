@@ -19,6 +19,7 @@ import {
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 import { StorybookLink } from '@/components/docs/storybook-link'
+import { ComponentDocSections } from '@/components/docs/component-doc-sections'
 
 const getPopoverContentProps = (t: typeof content.en | typeof content.ar): PropDefinition[] => [
   {
@@ -348,44 +349,10 @@ export default function PopoverPage() {
             </CardContent>
           </Card>
         </section>
+      
+        <ComponentDocSections />
 
-        {/* Related Components */}
-        <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-4">{t.popoverComponent.related.title}</h2>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            <Link href="/components/tooltip">
-              <Card className="hover:border-primary transition-colors">
-                <CardContent className="p-6">
-                  <h3 className="font-semibold mb-2">{t.popoverComponent.related.tooltip}</h3>
-                  <p className="text-sm text-muted-foreground">
-                    {t.popoverComponent.related.tooltipDesc}
-                  </p>
-                </CardContent>
-              </Card>
-            </Link>
-            <Link href="/components/dialog">
-              <Card className="hover:border-primary transition-colors">
-                <CardContent className="p-6">
-                  <h3 className="font-semibold mb-2">{t.popoverComponent.related.dialog}</h3>
-                  <p className="text-sm text-muted-foreground">
-                    {t.popoverComponent.related.dialogDesc}
-                  </p>
-                </CardContent>
-              </Card>
-            </Link>
-            <Link href="/components/sheet">
-              <Card className="hover:border-primary transition-colors">
-                <CardContent className="p-6">
-                  <h3 className="font-semibold mb-2">{t.popoverComponent.related.sheet}</h3>
-                  <p className="text-sm text-muted-foreground">
-                    {t.popoverComponent.related.sheetDesc}
-                  </p>
-                </CardContent>
-              </Card>
-            </Link>
-          </div>
-        </section>
-      </main>
+</main>
     </div>
   )
 }

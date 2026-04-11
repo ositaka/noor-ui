@@ -11,6 +11,7 @@ import { CodeBlock } from '@/components/docs/code-block'
 import { useDirection } from '@/components/providers/direction-provider'
 import { content } from '@/lib/i18n'
 import { StorybookLink } from '@/components/docs/storybook-link'
+import { ComponentDocSections } from '@/components/docs/component-doc-sections'
 
 const getParameterSliderProps = (componentT: any): PropDefinition[] => [
   {
@@ -474,44 +475,10 @@ export default function ParameterSliderPage() {
             </CardContent>
           </Card>
         </section>
+      
+        <ComponentDocSections />
 
-        {/* Related */}
-        <section className="mb-16">
-          <h2 className="text-2xl font-bold tracking-tight mb-6">{parameterSliderT.related.title}</h2>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            <Card>
-              <CardContent className="p-4">
-                <Link href="/components/model-selector" className="font-medium hover:underline">
-                  {content[locale]?.modelSelectorComponent?.title || content.en.modelSelectorComponent.title}
-                </Link>
-                <p className="text-sm text-muted-foreground mt-1">
-                  {parameterSliderT.related.modelSelector}
-                </p>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardContent className="p-4">
-                <Link href="/components/token-counter" className="font-medium hover:underline">
-                  {content[locale]?.tokenCounterComponent?.title || content.en.tokenCounterComponent.title}
-                </Link>
-                <p className="text-sm text-muted-foreground mt-1">
-                  {parameterSliderT.related.tokenCounter}
-                </p>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardContent className="p-4">
-                <Link href="/components/chat-message" className="font-medium hover:underline">
-                  {content[locale]?.chatMessageComponent?.title || content.en.chatMessageComponent.title}
-                </Link>
-                <p className="text-sm text-muted-foreground mt-1">
-                  {parameterSliderT.related.chatMessage}
-                </p>
-              </CardContent>
-            </Card>
-          </div>
-        </section>
-      </main>
+</main>
     </div>
   )
 }
