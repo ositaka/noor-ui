@@ -129,5 +129,13 @@ examples: {
       status: 'ready',
       featured: true,
     },
+    {
+      title: 'Esports Tournament Platform',
+      description: 'Dark neon gaming experience with tournament brackets, live match tracking with CountdownTimer and LiveIndicator, global leaderboards with DataTable, player profiles with Charts, and 8-team single elimination bracket visualization.',
+      href: '/examples/esports',
+      tags: ['Esports', 'Gaming', 'CountdownTimer', 'LiveIndicator', 'DataTable', 'Charts', 'RTL'],
+      status: 'ready',
+      featured: true,
+    },
   ],
 }
