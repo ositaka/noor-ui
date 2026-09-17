@@ -42,13 +42,10 @@ export default defineConfig({
     '@tiptap/extension-underline',
     '@tiptap/react',
     '@tiptap/starter-kit',
-    '@mdxeditor/editor',
     'class-variance-authority',
     'clsx',
     'cmdk',
     '@phosphor-icons/react',
-    'next-themes',
-    'react-syntax-highlighter',
     'tailwind-merge',
   ],
 })
