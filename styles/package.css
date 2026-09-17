@@ -426,8 +426,17 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: var(--heading-font-weight);
 }
 
-[dir='ltr'] :is(h1, h2, h3, h4, h5, h6) {
+/* :dir() resolves the nearest direction (and dir="auto"), so a heading inside
+   a nested RTL block no longer matches through an LTR ancestor. */
+:is(h1, h2, h3, h4, h5, h6):dir(ltr):not(:lang(ar)) {
   letter-spacing: var(--heading-letter-spacing);
+}
+
+/* Arabic script is connected: letter-spacing breaks the joins. Reset it for
+   RTL and Arabic content wherever it appears, including inline lang="ar"
+   inside LTR text and under tracking-* utilities. */
+:where(:dir(rtl), :lang(ar)) {
+  letter-spacing: normal;
 }
 
 /* ─── Base Styles ─────────────────────────────────────────────────────────── */
